@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Version.props" />
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <Deterministic>false</Deterministic>
+    <LangVersion>latest</LangVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>$(DefineConstants);IPATCH</DefineConstants>
+    <PathMap>$(MSBuildProjectDirectory)/=$(ProjectName)/</PathMap>
+    <ManagedDLLPath>../dependencies</ManagedDLLPath>
+    <SteamPath>~/Library/Application Support/Steam/</SteamPath>
+    <SteamPath Condition="! Exists ('$(SteamPath)')">$(ProgramFiles)/Steam</SteamPath>
+    <SteamPath Condition="! Exists ('$(SteamPath)')">$(Registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)</SteamPath>
+    <CSPath>$(SteamPath)/steamapps/common/Cities_Skylines</CSPath>
+    <ContentPath>$(SteamPath)/steamapps/workshop/content/255710/$(ContentID)</ContentPath>
+    <ManagedDLLPath Condition="!  Exists ('$(ManagedDLLPath)')">$(CSPath)/Cities_Data/Managed</ManagedDLLPath>
+    <AssemblySearchPaths>
+      $(AssemblySearchPaths);
+      $(ManagedDLLPath);
+      $(CitiesSkylinesBinaries);
+      ../libs/
+    </AssemblySearchPaths>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="GitInfo" Version="2.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Mono.Cecil" Version="0.10.3" />
+    <PackageReference Include="Mono.Unofficial.pdb2mdb" Version="4.2.3.4" />
+    <PackageReference Include="TaskParallelLibrary" Version="1.0.2856">
+      <PrivateAssets>System.Threading.dll</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoadOrderInjections\LoadOrderInjections.csproj">
+      <Aliases>Injections</Aliases>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ColossalManaged" />
+    <Reference Include="ICities" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="UnityEngine" />
+    <Reference Include="UnityEngine.UI" />
+    <Reference Include="Patch.API" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Settings\**" />
+    <EmbeddedResource Remove="Settings\**" />
+    <None Remove="Settings\**" />
+    <Compile Include="..\LoadOrderModTwo\Shared\LoadOrderConfig.cs" Link="Shared\LoadOrderConfig.cs" />
+    <Compile Include="..\LoadOrderModTwo\Shared\SharedUtil.cs" Link="Shared\SharedUtil.cs" />
+  </ItemGroup>
+  
+  <Target Name="DeployToModDirectory" AfterTargets="Build">
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="Targets" />
+    </GetAssemblyIdentity>
+    <ItemGroup>
+      <AuxiliaryFiles Include="$(TargetDir)Mono.Cecil.dll;$(TargetDir)System.Threading.dll" />
+      <VersionNumber Include="@(Targets->'%(Version)')" />
+    </ItemGroup>
+    <PropertyGroup>
+      <DeployDir Condition="'$(DeployDir)'==''">$(LOCALAPPDATA)/Colossal Order/Cities_Skylines/Addons/Mods/$(SolutionName)/</DeployDir>
+      <DeployTargetPath>$(DeployDir)$(SolutionName).ipatch</DeployTargetPath>
+      <Now>$([System.DateTime]::Now.ToString("HH:mm:ss"))</Now>
+      <pdb2mdb>$(PkgMono_Unofficial_pdb2mdb)/tools/pdb2mdb.exe</pdb2mdb>
+    </PropertyGroup>
+
+    <Delete Files="$(TargetPath).mdb" />
+    <Exec Command="&quot;$(pdb2mdb)&quot; &quot;$(TargetPath)&quot;" />
+    <Copy SourceFiles="$(TargetPath).mdb" DestinationFiles="$(DeployTargetPath).mdb" />
+
+    <Copy SourceFiles="@(AuxiliaryFiles)" DestinationFolder="$(DeployDir)" />
+    <Delete Files="$(DeployTargetPath)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(DeployTargetPath)" />
+    <Message Importance="high" Text="AssemblyVersion=@(VersionNumber) time=$(Now)" />
+  </Target>
+</Project>
+
+

@@ -1,0 +1,111 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>2.0.0.*</AssemblyVersion>
+    <LangVersion>latest</LangVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Configurations>Debug;Release;Workshop</Configurations>
+
+    <PathMap>$(MSBuildProjectDirectory)/=$(ProjectName)/</PathMap>
+    <ManagedDLLPath>../dependencies</ManagedDLLPath>
+    <SteamPath>~/Library/Application Support/Steam/</SteamPath>
+    <SteamPath Condition="! Exists ('$(SteamPath)')">$(ProgramFiles)/Steam</SteamPath>
+    <SteamPath Condition="! Exists ('$(SteamPath)')">$(Registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)</SteamPath>
+    <CSPath>$(SteamPath)/steamapps/common/Cities_Skylines</CSPath>
+    <ContentPath>$(SteamPath)/steamapps/workshop/content/255710/$(ContentID)</ContentPath>
+    <ManagedDLLPath Condition="!  Exists ('$(ManagedDLLPath)')">$(CSPath)/Cities_Data/Managed</ManagedDLLPath>
+    <AssemblySearchPaths>
+      $(AssemblySearchPaths);
+      $(ManagedDLLPath);
+      $(CitiesSkylinesBinaries);
+      ../libs/
+    </AssemblySearchPaths>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Workshop|AnyCPU' ">
+    <ContentID>0</ContentID>
+    <ContentPath>$(SteamPath)/steamapps/workshop/content/255710/$(ContentID)</ContentPath>
+    <DefineConstants />
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Reference>
+      <Private>False</Private>
+    </Reference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Compile Remove="StockCode\**" />
+    <EmbeddedResource Remove="StockCode\**" />
+    <None Remove="StockCode\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CitiesHarmony.API" Version="2.0.0" />
+    <PackageReference Include="Mono.Unofficial.pdb2mdb" Version="4.2.3.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Portable.System.ValueTuple" Version="1.0.1" />
+    <PackageReference Include="GitInfo" Version="2.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp" />
+    <Reference Include="ColossalManaged" />
+    <Reference Include="ICities" />
+    <Reference Include="UnityEngine" />
+    <Reference Include="UnityEngine.UI" />
+    <Reference Include="CSUtil.Commons" />
+  </ItemGroup>
+  <Target Name="DeployToModDirectory" AfterTargets="Build">
+    <Message Importance="high" Text="DeployToModDirectory ..." />
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="Targets" />
+    </GetAssemblyIdentity>
+    <ItemGroup>
+      <AuxiliaryFiles Include="$(TargetDir)**/*.*;$(TargetDir)Portable.System.ValueTuple.dll" Exclude="$(TargetPath);$(TargetDir)*.pdb;$(TargetDir)*.mdb" />
+      <VersionNumber Include="@(Targets->'%(Version)')" />
+    </ItemGroup>
+    <PropertyGroup>
+      <DeployDir Condition="'$(DeployDir)'==''">$(LOCALAPPDATA)/Colossal Order/Cities_Skylines/Addons/Mods/$(SolutionName)/</DeployDir>
+      <Now>$([System.DateTime]::Now.ToString("HH:mm:ss"))</Now>
+      <pdb2mdb>$(PkgMono_Unofficial_pdb2mdb)/tools/pdb2mdb.exe</pdb2mdb>
+      <ZipFileName>$(SolutionName)-V@(VersionNumber)-$(GitCommit)-$(Configuration).zip</ZipFileName>
+      <ZipFile>$(DeployDir)/../$(ZipFileName)</ZipFile>
+    </PropertyGroup>
+    <ItemGroup>
+      <OldZipFiles Include="$(DeployDir)/../$(SolutionName)-*-$(Configuration).zip" />
+    </ItemGroup>
+
+    <Delete Files="$(TargetPath).mdb" />
+    <Exec Command="&quot;$(pdb2mdb)&quot; &quot;$(TargetPath)&quot;" />
+    <Copy SourceFiles="$(TargetPath).mdb" DestinationFolder="$(DeployDir)" />
+    <Copy SourceFiles="@(AuxiliaryFiles)" DestinationFolder="$(DeployDir)" />
+    <Delete Files="$(DeployDir)$(TargetFileName)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
+    <Message Importance="high" Text="AssemblyVersion=@(VersionNumber) time=$(Now)" />
+    <Delete Files="@(OldZipFiles)" />
+    <ZipDirectory SourceDirectory="$(DeployDir)" DestinationFile="$(ZipFile)" />
+  </Target>
+  <Target Name="DeployToWorkshop" AfterTargets="DeployToModDirectory" Condition="'$(ContentID)'!=''">
+    <ItemGroup>
+      <FilesToDelete Include="$(ContentPath)/*.*" Exclude="$(ContentPath)/PreviewImage.png" />
+      <FilesToCopy Include="$(DeployDir)/*.*" />
+    </ItemGroup>
+    <Delete Files="@(FilesToDelete)" />
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(ContentPath)" />
+    <RemoveDir Directories="$(DeployDir)" />
+    <Message Importance="high" Text="Moved to $(ContentPath)" />
+  </Target>
+  <Target Name="CustomClean" BeforeTargets="CoreClean">
+    <RemoveDir Directories="$(TargetDir)" />
+    <PropertyGroup>
+      <DeployDir>$(LOCALAPPDATA)/Colossal Order/Cities_Skylines/Addons/Mods/$(SolutionName)/</DeployDir>
+    </PropertyGroup>
+    <Message Text="removing deploy directory" Importance="high" />
+    <RemoveDir Directories="$(DeployDir)" />
+  </Target>
+</Project>

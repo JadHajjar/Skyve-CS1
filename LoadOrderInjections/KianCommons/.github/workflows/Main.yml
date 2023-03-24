@@ -1,0 +1,83 @@
+name: Create Release
+
+on:
+  push:
+    tags: ['*']
+
+jobs:
+  build:
+    name: Build and Upload Release Asset
+
+    runs-on: windows-latest
+
+    env:
+        ModName: ExperimentMod
+        Solution_File: ExperimentMod.sln
+        DeployDir: Deploy/Debug/bin
+        
+    steps:
+      - name: Get Sources
+        uses: actions/checkout@v2
+        with:
+            submodules: true
+
+      - name: Setup Build Environment
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Get Referenced Binaries
+        uses: actions/checkout@v2
+        with:
+          repository: kianzarrin/CSBinaries
+          ref: refs/heads/master
+          path: dependencies
+          token: ${{ secrets.CSBINARIES_REPO_PAT }}
+
+      - name: Build Solution
+        id: build_solution
+        run: | 
+            msbuild "${{ env.Solution_File }}" /m /verbosity:normal /restore /p:Configuration=Debug /p:DeployDir="$env:GITHUB_WORKSPACE/$env:DeployDir"
+            echo ::set-output name=ZIP_FILE::${$env:GITHUB_WORKSPACE/$env:DeployDir/../*.zip}
+
+      - name: Test vars
+        run: |
+            echo zip file is ${{ steps.build_solution.outputs.ZIP_FILE }}
+            echo asset name is ${{ env.ModName }}-${{ steps.get_version_number.outputs.VERSION }}.zip
+
+
+      - name: Get Version Number
+        id: get_version_number
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        shell: bash
+      
+      - name: Pack Assets
+        id: pack_assets
+        run: |
+          $ErrorView = 'NormalView'
+          $env:ASSET_FILE_NAME = "${{ env.ModName }}-${{ steps.get_version_number.outputs.VERSION }}.zip"
+          $env:ASSET_FILE = "$env:GITHUB_WORKSPACE/$env:DeployDir/$env:ASSET_FILE_NAME"
+          echo "zipping $env:GITHUB_WORKSPACE/$env:DeployDir/ to $env:ASSET_FILE ..."
+          Compress-Archive -Path $env:GITHUB_WORKSPACE/$env:DeployDir/** -DestinationPath $env:ASSET_FILE -CompressionLevel Optimal
+          echo "::set-output name=ASSET_FILE::$env:ASSET_FILE"
+          echo "::set-output name=ASSET_FILE_NAME::$env:ASSET_FILE_NAME"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.get_version_number.outputs.VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:          
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.pack_assets.outputs.ASSET_FILE }}
+          asset_name: ${{ steps.pack_assets.outputs.ASSET_FILE_NAME }}
+          asset_content_type: application/zip

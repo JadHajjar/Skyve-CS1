@@ -1,0 +1,31 @@
+SubscribePresetStatusPanel
+    time out is 5sec. it should depend on number of remaining assets.
+    recovery from failed is performed only once: it should be done in a loop proportional to log2(asset-count)
+    wait loop should be more clever than simply to wait idly by forever.
+        maybe it should be part of different levels of recovery based on ItemStatus
+        maybe it should recount installed items.
+        list missing assets.
+        check if item was download properly (up to date/right size/...)
+        public enum ItemStatus
+        {
+	        DetailsPending,
+	        DetailsReceived,
+	        Installed
+        }
+
+
+no assets mode
+
+Quick enable disable:
+    only call OnSettings UI for the mod that has been enabled
+    some other mods need to be patched to respond to change in assemblies/plugin state like
+        DAS/AutoRepair
+        MoveIT also checks for other mods.
+
+Quick hot reload:
+    investigate why hot reload is slow? is it only because of OnSettingsUI?
+    
+    
+
+
+

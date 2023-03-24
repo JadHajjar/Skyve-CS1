@@ -1,0 +1,2 @@
+﻿subscription events are regeistered even if sman is not set.
+once steam controler is installed, EnsureIncludedOrExcluded is called

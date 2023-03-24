@@ -1,0 +1,139 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+  <Import Project="../Version.props" />
+  <PropertyGroup>
+    <Company>T. D. W.</Company>
+    <Copyright>@2023 MIT license</Copyright>
+    <Product>Load Order Tool</Product>
+    <LangVersion>latest</LangVersion>
+    <Description>Helps to manage your mods and assets</Description>
+    <Configurations>Debug;Release</Configurations>
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <Nullable>enable</Nullable>
+    <DefineConstants>$(DefineConstants);TOOL2</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Deterministic>false</Deterministic>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net4.7.2</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
+    <StartupObject>LoadOrderToolTwo.Program</StartupObject>
+    <ApplicationIcon>Resources\LOT2.ico</ApplicationIcon>
+    <FileVersion>2.0</FileVersion>
+    <SignAssembly>True</SignAssembly>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Title>Load Order Mod</Title>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ColossalOrder\GameSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Properties\Locale.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Locale.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Mono.Cecil" Version="0.11.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+    <ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserInterface\PackageDescriptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\PackageStatusDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_Assets.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_Packages.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_ModUtilities.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\NewProfileOptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\LanguageDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\SortingDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\StatusBubbles\CompatibilityReportBubble.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\DoubleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\LoadOrderModTwo\Shared\LoadOrderConfig.cs" Link="Shared\LoadOrderConfig.cs" />
+		<Compile Include="..\LoadOrderModTwo\Shared\CSCache.cs" Link="Shared\CSCache.cs" />
+		<Compile Include="..\LoadOrderModTwo\Shared\SharedUtil.cs" Link="Shared\SharedUtil.cs" />
+		<Compile Include="..\LoadOrderModTwo\Shared\UGCListTransfer.cs" Link="Shared\UGCListTransfer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\LOT2.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Domain\CompatibilityReport\" />
+	  <Folder Include="Domain\Steam\Markdown\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="ColossalOrder\GameSettings.cs" />
+	</ItemGroup>
+
+  <Target Name="DeployToModDirectory" AfterTargets="Build">
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="Targets" />
+    </GetAssemblyIdentity>
+    <Message Importance="high" Text="$(SolutionName)" />
+    <PropertyGroup>
+      <DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\LoadOrder\Tool\</DeployDir>
+    </PropertyGroup>
+	  <RemoveDir Directories="$(DeployDir)" />
+	  <Copy SourceFiles="$(OutDir)\LoadOrderToolTwo.exe" DestinationFiles="$(DeployDir)\LoadOrderToolTwo.exe" />
+	  <Copy SourceFiles="$(OutDir)\LoadOrderToolTwo.exe.config" DestinationFiles="$(DeployDir)\LoadOrderToolTwo.exe.config" />
+  </Target>
+
+</Project>
