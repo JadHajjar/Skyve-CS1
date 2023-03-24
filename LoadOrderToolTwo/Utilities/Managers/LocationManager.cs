@@ -71,7 +71,7 @@ internal class LocationManager
 		{
 			if (Platform == Platform.MacOSX)
 			{
-				return Path.Combine(Path.Combine(GamePath, "Resources"), "Files");
+				return Path.Combine(Path.Combine(Path.Combine(Path.Combine(GamePath, "Cities.app"), "Contents"), "Resources"), "Files");
 			}
 
 			return Path.Combine(GamePath, "Files");
