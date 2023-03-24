@@ -1,6 +1,0 @@
-[submodule "AlgernonCommons"]
-	path = AlgernonCommons
-	url = https://github.com/algernon-A/AlgernonCommons.git
-[submodule "ModsCommon"]
-	path = ModsCommon
-	url = https://github.com/MacSergey/ModsCommon.git
