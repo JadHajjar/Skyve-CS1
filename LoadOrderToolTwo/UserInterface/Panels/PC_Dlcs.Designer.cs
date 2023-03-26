@@ -1,4 +1,6 @@
-﻿using LoadOrderToolTwo.Utilities;
+﻿using LoadOrderToolTwo.UserInterface.Generic;
+using LoadOrderToolTwo.UserInterface.Lists;
+using LoadOrderToolTwo.Utilities;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 
@@ -32,14 +34,14 @@ partial class PC_DLCs
 	private void InitializeComponent()
 	{
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
-			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.DoubleButton();
+			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Duplicates = new System.Windows.Forms.Label();
 			this.L_Counts = new System.Windows.Forms.Label();
-			this.LC_DLCs = new LoadOrderToolTwo.UserInterface.DlcList();
+			this.LC_DLCs = new LoadOrderToolTwo.UserInterface.Lists.DlcListControl();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.SuspendLayout();
@@ -129,6 +131,7 @@ partial class PC_DLCs
 			this.TB_Search.Size = new System.Drawing.Size(149, 47);
 			this.TB_Search.TabIndex = 0;
 			this.TB_Search.TextChanged += new System.EventHandler(this.TB_Search_TextChanged);
+			this.TB_Search.IconClicked += new System.EventHandler(this.TB_Search_IconClicked);
 			// 
 			// tableLayoutPanel3
 			// 
@@ -214,5 +217,5 @@ partial class PC_DLCs
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 	private System.Windows.Forms.Label L_Duplicates;
 	private System.Windows.Forms.Label L_Counts;
-	private DlcList LC_DLCs;
+	private DlcListControl LC_DLCs;
 }

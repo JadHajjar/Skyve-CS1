@@ -1,5 +1,6 @@
 ﻿using LoadOrderToolTwo.Utilities;
 
+using System.Collections.Generic;
 using System.IO;
 
 using IoPath = System.IO.Path;
@@ -8,6 +9,7 @@ namespace LoadOrderToolTwo.Domain.Utilities;
 internal class PackageWatcher : FileSystemWatcher
 {
 	private readonly DelayedAction<string> _delayedUpdate = new(1500);
+	private static readonly List<PackageWatcher> _watchers=new();
 
 	private PackageWatcher(string folder, bool builtIn, bool workshop)
 	{
@@ -79,7 +81,23 @@ internal class PackageWatcher : FileSystemWatcher
 	{
 		if (Directory.Exists(folder))
 		{
-			new PackageWatcher(folder, builtIn, workshop);
+			_watchers.Add(new PackageWatcher(folder, builtIn, workshop));
+		}
+	}
+
+	public static void Pause()
+	{
+		foreach (var item in _watchers)
+		{
+			item.EnableRaisingEvents = false;
+		}
+	}
+
+	public static void Resume()
+	{
+		foreach (var item in _watchers)
+		{
+			item.EnableRaisingEvents = true;
 		}
 	}
 }

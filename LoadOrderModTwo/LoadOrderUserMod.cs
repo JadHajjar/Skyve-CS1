@@ -35,8 +35,8 @@ public class LoadOrderUserMod : IUserMod
 	public static Version ModVersion => typeof(LoadOrderUserMod).Assembly.GetName().Version;
 	public static string VersionString => ModVersion.ToString(2);
 	public string Name => "Load Order Mod " + VersionString;
-	public string Description => "use LoadOrderTool.exe to manage the order in which mods are loaded.";
-	public static string HARMONY_ID = "CS.Kian.LoadOrder";
+	public string Description => "Manage your custom content easily, from one place.";
+	public static string HARMONY_ID = "CS.TDW.LoadOrder";
 
 	//static LoadOrderMod() => Log.Debug("Static Ctor "   + Environment.StackTrace);
 	//public LoadOrderMod() => Log.Debug("Instance Ctor " + Environment.StackTrace);

@@ -78,6 +78,14 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
+	private void CompatibilityReportBubble_MouseClick(object sender, MouseEventArgs e)
+	{
+		if (e.Button == MouseButtons.Left)
+		{
+			Form.PushPanel<PC_CompatibilityReport>((Form as MainForm)?.PI_Compatibility);
+		}
+	}
+
 	private void B_StartStop_Click(object sender, System.EventArgs e)
 	{
 		if (CitiesManager.IsRunning())

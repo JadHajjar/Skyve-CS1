@@ -27,22 +27,7 @@ namespace LoadOrderInjections.Util {
             }
         }
 
-        internal static bool HasLoadOrder(this PluginInfo p) {
-            var mod = p.GetModConfig();
-            if (mod == null)
-                return false;
-            return mod.LoadOrder != LoadOrderConfig.DefaultLoadOrder;
-        }
-
-        internal static int GetLoadOrder(this PluginInfo p) {
-            var mod = p.GetModConfig();
-            if (mod == null)
-                return LoadOrderConfig.DefaultLoadOrder;
-            return mod.LoadOrder;
-        }
-
-        internal static LoadOrderShared.ModInfo GetModConfig(this PluginInfo p) =>
-            Config?.Mods?.FirstOrDefault(_mod => _mod.Path == p.modPath);
+        internal static int GetLoadOrder(this PluginInfo p) => 1000;
 
         public static bool HasArg(string arg) =>
             Environment.GetCommandLineArgs().Any(_arg => _arg == arg);

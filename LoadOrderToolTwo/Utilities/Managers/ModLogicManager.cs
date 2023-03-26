@@ -1,7 +1,11 @@
-﻿using LoadOrderToolTwo.Domain;
+﻿using Extensions;
+
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
 
+using System;
 using System.IO;
+using System.Linq;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
 internal class ModLogicManager
@@ -28,6 +32,12 @@ internal class ModLogicManager
 			case LOM_ASSEMBLY:
 				_modCollection.AddMod(mod);
 				break;
+		}
+
+		if (IsForbidden(mod))
+		{
+			mod.IsIncluded = false;
+			mod.IsEnabled = false;
 		}
 	}
 
@@ -63,5 +73,17 @@ internal class ModLogicManager
 	internal static void ModRemoved(Mod mod)
 	{
 		_modCollection.RemoveMod(mod);
+	}
+
+	internal static void ApplyRequiredStates()
+	{
+		foreach (var item in _modCollection.Collections)
+		{
+			if (item.Any(x => x.IsIncluded && x.IsEnabled))
+				continue;
+
+			item[0].IsIncluded = true;
+			item[0].IsEnabled = true;
+		}
 	}
 }

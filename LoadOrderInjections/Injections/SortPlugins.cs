@@ -49,7 +49,7 @@ namespace LoadOrderInjections.Injections {
         }
 
 
-        static bool IsOrderlessHarmony(PluginInfo p) => !p.HasLoadOrder() && p.IsHarmonyMod();
+        static bool IsOrderlessHarmony(PluginInfo p) => p.IsHarmonyMod();
 
         public static int HarmonyComparison(PluginInfo p1, PluginInfo p2) {
             int ret;

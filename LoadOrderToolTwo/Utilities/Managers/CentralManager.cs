@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 
@@ -13,7 +14,6 @@ using System.Threading.Tasks;
 namespace LoadOrderToolTwo.Utilities.Managers;
 internal static class CentralManager
 {
-
 	private static List<Package>? packages;
 
 	public static event Action? ContentLoaded;
@@ -206,6 +206,8 @@ internal static class CentralManager
 				ModLogicManager.Analyze(package.Mod);
 			}
 		}
+
+		ModLogicManager.ApplyRequiredStates();
 	}
 
 	private static void HandleNewPackage(Package package)

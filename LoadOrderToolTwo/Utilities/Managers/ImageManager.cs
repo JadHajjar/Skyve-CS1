@@ -84,9 +84,9 @@ public static class ImageManager
 
 		var filePath = File(url, fileName);
 
-		lock (LockObj(url))
+		if (filePath.Exists)
 		{
-			if (filePath.Exists)
+			lock (LockObj(url))
 			{
 				try
 				{

@@ -1,5 +1,5 @@
 ﻿using Extensions;
-
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
@@ -72,7 +72,10 @@ public class Mod : IPackage
 
 	public static bool operator ==(Mod? left, Mod? right)
 	{
-		return EqualityComparer<Mod>.Default.Equals(left, right);
+		return
+			left is null ? right is null :
+			right is null ? left is null :
+			EqualityComparer<Mod>.Default.Equals(left, right);
 	}
 
 	public static bool operator !=(Mod? left, Mod? right)

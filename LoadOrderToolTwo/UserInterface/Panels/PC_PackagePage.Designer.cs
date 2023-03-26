@@ -1,4 +1,6 @@
-﻿namespace LoadOrderToolTwo.UserInterface.Panels;
+﻿using LoadOrderToolTwo.UserInterface.Content;
+
+namespace LoadOrderToolTwo.UserInterface.Panels;
 
 partial class PC_PackagePage
 {
@@ -35,10 +37,10 @@ partial class PC_PackagePage
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new LoadOrderToolTwo.UserInterface.PackageIcon();
+			this.PB_Icon = new LoadOrderToolTwo.UserInterface.Content.PackageIcon();
 			this.L_Title = new System.Windows.Forms.Label();
 			this.P_Back = new System.Windows.Forms.Panel();
-			this.P_Info = new LoadOrderToolTwo.UserInterface.PackageDescriptionControl();
+			this.P_Info = new LoadOrderToolTwo.UserInterface.Content.PackageDescriptionControl();
 			this.B_Folder = new SlickControls.SlickButton();
 			this.B_SteamPage = new SlickControls.SlickButton();
 			this.B_Redownload = new SlickControls.SlickButton();
@@ -85,7 +87,7 @@ partial class PC_PackagePage
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
 			this.T_Info.Selected = true;
-			this.T_Info.Size = new System.Drawing.Size(261, 48);
+			this.T_Info.Size = new System.Drawing.Size(261, 25);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
 			this.T_Info.Text = "tab1";
@@ -100,7 +102,7 @@ partial class PC_PackagePage
 			this.T_CR.Location = new System.Drawing.Point(261, 5);
 			this.T_CR.Name = "T_CR";
 			this.T_CR.Selected = false;
-			this.T_CR.Size = new System.Drawing.Size(261, 48);
+			this.T_CR.Size = new System.Drawing.Size(261, 25);
 			this.T_CR.TabIndex = 0;
 			this.T_CR.TabStop = false;
 			this.T_CR.Text = "tab2";
@@ -115,7 +117,7 @@ partial class PC_PackagePage
 			this.T_Profiles.Location = new System.Drawing.Point(522, 5);
 			this.T_Profiles.Name = "T_Profiles";
 			this.T_Profiles.Selected = false;
-			this.T_Profiles.Size = new System.Drawing.Size(261, 48);
+			this.T_Profiles.Size = new System.Drawing.Size(261, 25);
 			this.T_Profiles.TabIndex = 0;
 			this.T_Profiles.TabStop = false;
 			this.T_Profiles.Text = "tab3";
@@ -181,6 +183,7 @@ partial class PC_PackagePage
 			this.L_Title.Size = new System.Drawing.Size(55, 23);
 			this.L_Title.TabIndex = 1;
 			this.L_Title.Text = "label1";
+			this.L_Title.UseMnemonic = false;
 			// 
 			// P_Back
 			// 

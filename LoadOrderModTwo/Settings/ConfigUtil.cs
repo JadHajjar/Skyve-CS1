@@ -114,23 +114,6 @@ namespace LoadOrderMod.Settings {
             }
         }
 
-        internal static bool HasLoadOrder(this PluginInfo p) {
-            var mod = p.GetModConfig();
-            if (mod == null)
-                return false;
-            return mod.LoadOrder != LoadOrderConfig.DefaultLoadOrder;
-        }
-
-        internal static int GetLoadOrder(this PluginInfo p) {
-            var mod = p.GetModConfig();
-            if (mod == null)
-                return LoadOrderConfig.DefaultLoadOrder;
-            return mod.LoadOrder;
-        }
-
-        internal static ModInfo GetModConfig(this PluginInfo p) =>
-            Config?.Mods?.FirstOrDefault(item => item.Path == p.modPath);
-
         internal static AssetInfo GetAssetConfig(this Package.Asset a) =>
             assetsTable_[a.GetPath()] as AssetInfo;
         

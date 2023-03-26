@@ -2,6 +2,8 @@
 
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.UserInterface.CompatibilityReport;
+using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -25,7 +27,7 @@ public partial class PC_PackagePage : PanelContent
 		T_Info.Text = Locale.ContentAndInfo;
 		T_CR.Text = Locale.CompatibilityReport;
 		T_Profiles.Text = Locale.OtherProfiles;
-		L_Title.Text = package.ToString().RemoveVersionText().Replace("&", "&&");
+		L_Title.Text = package.ToString().RemoveVersionText();
 		PB_Icon.Package = package;
 		PB_Icon.LoadImage(package.IconUrl, ImageManager.GetImage);
 

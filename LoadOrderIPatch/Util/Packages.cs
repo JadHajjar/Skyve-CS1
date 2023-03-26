@@ -10,8 +10,7 @@ namespace LoadOrderIPatch {
             var excluded = new List<string>(assets?.Length ?? 0);
             if (assets != null) {
                 foreach (var item in assets) {
-                    if (item.Excluded)
-                        excluded.Add(item.Path.ToLower());
+                    excluded.Add(item.Path.ToLower());
                 }
             }
             var ret = excludedPathsLowerCase_ = new HashSet<string>(excluded);

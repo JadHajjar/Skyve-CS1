@@ -1,4 +1,6 @@
-﻿using LoadOrderToolTwo.Utilities.Managers;
+﻿using LoadOrderToolTwo.UserInterface.Dropdowns;
+using LoadOrderToolTwo.UserInterface.Generic;
+using LoadOrderToolTwo.Utilities.Managers;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 
@@ -37,12 +39,12 @@ partial class PC_ContentList<T>
 			this.P_ActionsContainer = new System.Windows.Forms.Panel();
 			this.P_Actions = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.B_DisEnable = new LoadOrderToolTwo.UserInterface.DoubleButton();
-			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.DoubleButton();
+			this.B_DisEnable = new DoubleButton();
+			this.B_ExInclude = new DoubleButton();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
-			this.DD_Sorting = new LoadOrderToolTwo.UserInterface.SortingDropDown();
+			this.DD_Sorting = new SortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Duplicates = new System.Windows.Forms.Label();
 			this.L_Counts = new System.Windows.Forms.Label();
@@ -52,9 +54,9 @@ partial class PC_ContentList<T>
 			this.I_ClearFilters = new SlickControls.SlickIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-			this.OT_Workshop = new LoadOrderToolTwo.UserInterface.ThreeOptionToggle();
-			this.OT_Included = new LoadOrderToolTwo.UserInterface.ThreeOptionToggle();
-			this.OT_Enabled = new LoadOrderToolTwo.UserInterface.ThreeOptionToggle();
+			this.OT_Workshop = new ThreeOptionToggle();
+			this.OT_Included = new ThreeOptionToggle();
+			this.OT_Enabled = new ThreeOptionToggle();
 			this.TLP_Dates = new System.Windows.Forms.TableLayoutPanel();
 			this.L_From1 = new System.Windows.Forms.Label();
 			this.L_To1 = new System.Windows.Forms.Label();
@@ -67,12 +69,12 @@ partial class PC_ContentList<T>
 			this.DT_SubTo = new SlickControls.SlickDateTime();
 			this.DT_UpdateFrom = new SlickControls.SlickDateTime();
 			this.DT_UpdateTo = new SlickControls.SlickDateTime();
-			this.DD_PackageStatus = new LoadOrderToolTwo.UserInterface.PackageStatusDropDown();
-			this.DD_ReportSeverity = new LoadOrderToolTwo.UserInterface.ReportSeverityDropDown();
-			this.DD_Tags = new LoadOrderToolTwo.UserInterface.TagsDropDown();
+			this.DD_PackageStatus = new PackageStatusDropDown();
+			this.DD_ReportSeverity = new ReportSeverityDropDown();
+			this.DD_Tags = new TagsDropDown();
 			this.B_Filters = new SlickControls.SlickButton();
 			this.B_Actions = new SlickControls.SlickButton();
-			this.DD_Profile = new LoadOrderToolTwo.UserInterface.ProfilesDropDown();
+			this.DD_Profile = new ProfilesDropDown();
 			this.TLP_Main.SuspendLayout();
 			this.P_ActionsContainer.SuspendLayout();
 			this.P_Actions.SuspendLayout();

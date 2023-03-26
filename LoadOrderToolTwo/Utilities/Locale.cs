@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using System;
+
 namespace LoadOrderToolTwo.Utilities;
 internal class Locale : LocaleHelper
 {
@@ -212,4 +214,8 @@ internal class Locale : LocaleHelper
 	public static string ExcludeAllItemsInThisPackage => _instance.GetText(nameof(ExcludeAllItemsInThisPackage));
 	public static string Unfiltered => _instance.GetText(nameof(Unfiltered));
 	public static string AnyTags => _instance.GetText(nameof(AnyTags));
+	public static string MovePackageToLocalFolder => _instance.GetText(nameof(MovePackageToLocalFolder));
+	public static string TotalItems => _instance.GetText(nameof(TotalItems));
+	public static string OutOf => _instance.GetText(nameof(OutOf));
+	public static string MissingItemsRemain => _instance.GetText(nameof(MissingItemsRemain));
 }

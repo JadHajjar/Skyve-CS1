@@ -168,11 +168,6 @@ public static class CitiesManager
 		return args.ToArray();
 	}
 
-	public static async Task<bool> Subscribe(IEnumerable<PublishedFileId> ids, bool unsub = false)
-	{
-		return await Subscribe(ids.Select(id => id.AsUInt64), unsub);
-	}
-
 	public static async Task<bool> Subscribe(IEnumerable<string> ids, bool unsub = false)
 	{
 		return await Subscribe(UGCListTransfer.ToNumber(ids), unsub);
@@ -185,15 +180,20 @@ public static class CitiesManager
 			return false;
 		}
 
+		if (unsub)
+		{
+			ContentUtil.DeleteAll(ids);
+		}
+
 		UGCListTransfer.SendList(ids, false);
 
 		var command = unsub ?
 			$"-applaunch 255710 -unsubscribe" :
 			$"-applaunch 255710 -subscribe";
 
-		IOUtil.Execute(LocationManager.SteamPath, LocationManager.SteamExe, command);
-
 		Program.MainForm!.TryInvoke(() => Program.MainForm!.TopMost = true);
+
+		IOUtil.Execute(LocationManager.SteamPath, LocationManager.SteamExe, command);
 
 		var stopwatch = Stopwatch.StartNew();
 
@@ -209,11 +209,7 @@ public static class CitiesManager
 
 		await Task.Delay(1000);
 
-		if (unsub)
-		{
-			ContentUtil.DeleteAll(ids);
-		}
-		else
+		if (!unsub)
 		{
 			SteamUtil.ReDownload(ids.ToArray());
 		}

@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Utilities.Managers;
+
 using SlickControls;
 
 using System;
@@ -19,5 +21,10 @@ public partial class PC_HelpAndLogs : PanelContent
 	private void slickButton1_Click(object sender, EventArgs e)
 	{
 		Process.Start(Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), ISave.AppName, "Logs"));
+	}
+
+	private void slickButton2_Click(object sender, EventArgs e)
+	{
+		Process.Start(Path.Combine(LocationManager.GamePath, "Cities_Data"));
 	}
 }

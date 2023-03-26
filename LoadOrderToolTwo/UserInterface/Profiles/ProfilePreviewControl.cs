@@ -10,7 +10,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LoadOrderToolTwo.UserInterface;
+namespace LoadOrderToolTwo.UserInterface.Profiles;
 internal class ProfilePreviewControl : SlickControl
 {
 	private Rectangle LoadRect;
@@ -144,8 +144,8 @@ internal class ProfilePreviewControl : SlickControl
 		using var backBrush = ClientRectangle.Gradient(Color.FromArgb(220, back), 0.5F);
 		e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(1), Padding.Left);
 
-		var titleHeight = Math.Max(24, (int)e.Graphics.Measure(Profile.Name, UI.Font(9.75F, FontStyle.Bold), Width - (24 + (2 * Padding.Horizontal) + (int)(32 * UI.FontScale))).Height);
-		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - 24) / 2), 24, 24);
+		var titleHeight = Math.Max(24, (int)e.Graphics.Measure(Profile.Name, UI.Font(9.75F, FontStyle.Bold), Width - (24 + 2 * Padding.Horizontal + (int)(32 * UI.FontScale))).Height);
+		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + (titleHeight - 24) / 2, 24, 24);
 
 		if (Loading)
 		{
@@ -158,7 +158,7 @@ internal class ProfilePreviewControl : SlickControl
 			e.Graphics.DrawImage(image.Color(FormDesign.Design.IconColor), iconRectangle);
 		}
 
-		e.Graphics.DrawString(Profile.Name, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(FormDesign.Design.ForeColor), new Rectangle(0, 0, Width, titleHeight).Pad(24 + (Padding.Left * 2), Padding.Top, Padding.Horizontal + (int)(32 * UI.FontScale), 0), new StringFormat { LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(Profile.Name, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(FormDesign.Design.ForeColor), new Rectangle(0, 0, Width, titleHeight).Pad(24 + Padding.Left * 2, Padding.Top, Padding.Horizontal + (int)(32 * UI.FontScale), 0), new StringFormat { LineAlignment = StringAlignment.Center });
 
 		var y = titleHeight + Padding.Vertical;
 

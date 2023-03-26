@@ -41,4 +41,6 @@ internal class ModCollection
 
 		return null;
 	}
+
+	internal IEnumerable<List<Mod>> Collections => _modList.Values;
 }

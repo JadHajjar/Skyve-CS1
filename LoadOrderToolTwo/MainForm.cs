@@ -24,7 +24,7 @@ public partial class MainForm : BasePanelForm
 #if DEBUG
 		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(4);
 #else
-		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(3) + " Beta";
+		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(3) + " Alpha";
 #endif
 		try
 		{ FormDesign.Initialize(this, DesignChanged); }
@@ -197,11 +197,17 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_Troubleshoot_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_HelpAndLogs>(PI_Troubleshoot);
+		SetPanel<PC_CompatibilityReport>(PI_Troubleshoot);
+		//SetPanel<PC_HelpAndLogs>(PI_Troubleshoot);
 	}
 
 	private void PI_DLCs_OnClick(object sender, MouseEventArgs e)
 	{
 		SetPanel<PC_DLCs>(PI_DLCs);
+	}
+
+	private void PI_Compatibility_OnClick(object sender, MouseEventArgs e)
+	{
+		SetPanel<PC_CompatibilityReport>(PI_Compatibility);
 	}
 }

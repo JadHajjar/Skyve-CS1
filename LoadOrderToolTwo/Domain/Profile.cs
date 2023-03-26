@@ -1,5 +1,8 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain.Enums;
+using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -7,6 +10,7 @@ using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace LoadOrderToolTwo.Domain;
 public class Profile
@@ -30,6 +34,7 @@ public class Profile
 		LsmSettings = new();
 		Assets = new();
 		Mods = new();
+		ExcludedDLCs = new();
 		AutoSave = true;
 	}
 
@@ -42,19 +47,27 @@ public class Profile
 
 	[CloneIgnore] public List<Asset> Assets { get; set; }
 	[CloneIgnore] public List<Mod> Mods { get; set; }
+	[CloneIgnore] public List<uint> ExcludedDLCs { get; set; }
 	public LaunchSettings LaunchSettings { get; set; }
-	public LsmSettings LsmSettings { get; internal set; }
+	public LsmSettings LsmSettings { get; set; }
 	public string? LsmSkipFile { get; set; }
 	public bool AutoSave { get; set; }
 	public bool ForAssetEditor { get; set; }
 	public bool ForGameplay { get; set; }
 	public bool IsFavorite { get; set; }
 
-	public class Asset
+	public class Asset : IGenericPackage
 	{
 		public string? Name { get; set; }
 		public string? RelativePath { get; set; }
 		public ulong SteamId { get; set; }
+
+		[JsonIgnore, CloneIgnore] public bool IsMod { get; protected set; }
+		[JsonIgnore, CloneIgnore] public SteamWorkshopItem? WorkshopInfo { get; set; }
+		[JsonIgnore, CloneIgnore] public string[]? Tags => WorkshopInfo?.Tags;
+		[JsonIgnore, CloneIgnore] public Bitmap? Thumbnail => WorkshopInfo?.Thumbnail;
+		[JsonIgnore, CloneIgnore] public string? ThumbnailUrl => WorkshopInfo?.ThumbnailUrl;
+		[JsonIgnore, CloneIgnore] public SteamUser? Author => WorkshopInfo?.Author;
 
 		public Asset(Domain.Asset asset)
 		{
@@ -75,6 +88,7 @@ public class Profile
 
 		public Mod(Domain.Mod mod)
 		{
+			IsMod = true;
 			SteamId = mod.SteamId;
 			Name = mod.Name;
 			Enabled = mod.IsEnabled;
@@ -83,7 +97,7 @@ public class Profile
 
 		public Mod()
 		{
-
+			IsMod = true;
 		}
 	}
 }

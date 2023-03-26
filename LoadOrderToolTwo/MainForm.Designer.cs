@@ -122,6 +122,7 @@
 			this.PI_Compatibility.Highlighted = false;
 			this.PI_Compatibility.Selected = false;
 			this.PI_Compatibility.Text = "CompatibilityReport";
+			this.PI_Compatibility.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Compatibility_OnClick);
 			// 
 			// PI_ModUtilities
 			// 

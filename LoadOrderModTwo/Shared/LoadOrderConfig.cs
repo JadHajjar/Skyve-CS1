@@ -8,12 +8,12 @@ public class ItemInfo
 
 public class ModInfo : ItemInfo
 {
-	public int LoadOrder = 1000;
+	//public int LoadOrder = 1000;
 }
 
 public class AssetInfo : ItemInfo
 {
-	public bool Excluded;
+	//public bool Excluded;
 }
 
 public class LoadOrderConfig
@@ -39,7 +39,7 @@ public class LoadOrderConfig
 	public float StatusX = 1000;
 	public float StatusY = 10;
 
-	public ModInfo[] Mods = new ModInfo[0];
+	//public ModInfo[] Mods = new ModInfo[0];
 	public AssetInfo[] Assets = new AssetInfo[0];
 	public uint[] RemovedDLCs = new uint[0];
 

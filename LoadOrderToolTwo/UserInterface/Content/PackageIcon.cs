@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LoadOrderToolTwo.UserInterface;
+namespace LoadOrderToolTwo.UserInterface.Content;
 internal class PackageIcon : SlickImageControl
 {
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

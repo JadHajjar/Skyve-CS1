@@ -541,7 +541,6 @@ namespace LoadOrderInjections {
         public static void RegisterEvents() {
             if (Initialized) return;
             Initialized = true; // used to check if patch loader is effective.
-            Log.Debug(Environment.StackTrace);
 			PlatformService.eventSteamControllerInit += SteamUtilities.OnInitSteamController;
 			PlatformService.eventGameOverlayActivated += SteamUtilities.OnGameOverlayActivated;
 			PlatformService.workshop.eventSubmitItemUpdate += SteamUtilities.OnSubmitItemUpdate;

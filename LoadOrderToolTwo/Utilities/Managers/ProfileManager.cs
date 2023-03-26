@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using LoadOrderShared;
+
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
 
@@ -439,6 +441,7 @@ public static class ProfileManager
 
 		profile.Assets = CentralManager.Assets.Where(x => x.IsIncluded).Select(x => new Profile.Asset(x)).ToList();
 		profile.Mods = CentralManager.Mods.Where(x => x.IsIncluded).Select(x => new Profile.Mod(x)).ToList();
+		profile.ExcludedDLCs = LoadOrderConfig.Deserialize()?.RemovedDLCs.ToList() ?? new();
 	}
 
 	public static bool Save(Profile? profile)

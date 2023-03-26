@@ -1,5 +1,5 @@
 ﻿using Extensions;
-
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
@@ -120,7 +120,10 @@ public class Package : IPackage
 
 	public static bool operator ==(Package? left, Package? right)
 	{
-		return EqualityComparer<Package>.Default.Equals(left, right);
+		return
+			left is null ? right is null :
+			right is null ? left is null :
+			EqualityComparer<Package>.Default.Equals(left, right);
 	}
 
 	public static bool operator !=(Package? left, Package? right)

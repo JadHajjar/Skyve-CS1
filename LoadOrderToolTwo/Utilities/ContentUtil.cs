@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -239,11 +241,80 @@ internal class ContentUtil
 
 	internal static void DeleteAll(IEnumerable<ulong> ids)
 	{
-		throw new NotImplementedException();
+		foreach (var id in ids)
+		{
+			DeleteAll(Path.Combine(LocationManager.WorkshopContentPath, id.ToString()));
+		}
 	}
 
-	internal static void Delete(string folder)
+	internal static void DeleteAll(string folder)
 	{
-		throw new NotImplementedException();
+		var package = CentralManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(folder));
+
+		if (package != null)
+		{
+			CentralManager.RemovePackage(package);
+		}
+
+		PackageWatcher.Pause();
+		Directory.Delete(folder, true);
+		PackageWatcher.Resume();
+	}
+
+	internal static void MoveToLocalFolder<T>(T item) where T : IPackage
+	{
+		if (item is Asset asset)
+		{
+			File.Copy(asset.FileName, Path.Combine(LocationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
+			return;
+		}
+
+		if (item.Package.Assets?.Any() ?? false)
+		{
+			var target = new DirectoryInfo(Path.Combine(LocationManager.AssetsPath, Path.GetFileName(item.Folder)));
+
+			new DirectoryInfo(item.Folder).CopyAll(target, x => Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
+
+			target.RemoveEmptyFolders();
+		}
+
+		if (item.Package.Mod is not null)
+		{
+			var target = new DirectoryInfo(Path.Combine(LocationManager.ModsPath, Path.GetFileName(item.Folder)));
+
+			new DirectoryInfo(item.Folder).CopyAll(target, x => !Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
+
+			target.RemoveEmptyFolders();
+		}
+	}
+
+	internal static GenericPackageState GetGenericPackageState(IGenericPackage item) => GetGenericPackageState(item, out _);
+
+	internal static GenericPackageState GetGenericPackageState(IGenericPackage item, out Package? package)
+	{
+		if (item.SteamId == 0)
+		{
+			package = null;
+			return GenericPackageState.Local;
+		}
+
+		package = CentralManager.Packages.FirstOrDefault(x => x.SteamId == item.SteamId);
+
+		if (package == null)
+		{
+			return GenericPackageState.Unsubscribed;
+		}
+
+		if (!package.IsIncluded)
+		{
+			return GenericPackageState.Excluded;
+		}
+
+		if (package.Mod is null || package.Mod.IsEnabled)
+		{
+			return GenericPackageState.Enabled;
+		}
+
+		return GenericPackageState.Disabled;
 	}
 }

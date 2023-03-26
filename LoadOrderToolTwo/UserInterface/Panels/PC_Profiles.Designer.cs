@@ -1,4 +1,6 @@
-﻿using LoadOrderToolTwo.Utilities.Managers;
+﻿using LoadOrderToolTwo.UserInterface.Generic;
+using LoadOrderToolTwo.UserInterface.Profiles;
+using LoadOrderToolTwo.Utilities.Managers;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 
@@ -48,7 +50,7 @@ partial class PC_Profiles
 			this.TLP_GeneralSettings = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.L_ProfileUsage = new System.Windows.Forms.Label();
 			this.CB_AutoSave = new SlickControls.SlickCheckbox();
-			this.T_ProfileUsage = new LoadOrderToolTwo.UserInterface.ThreeOptionToggle();
+			this.T_ProfileUsage = new Generic.ThreeOptionToggle();
 			this.TLP_LaunchSettings = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_LoadSave = new SlickControls.SlickCheckbox();
 			this.CB_LHT = new SlickControls.SlickCheckbox();
@@ -70,8 +72,8 @@ partial class PC_Profiles
 			this.L_Info = new System.Windows.Forms.Label();
 			this.B_TempProfile = new SlickControls.SlickButton();
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
-			this.newProfileOptionControl1 = new LoadOrderToolTwo.UserInterface.NewProfileOptionControl();
-			this.newProfileOptionControl2 = new LoadOrderToolTwo.UserInterface.NewProfileOptionControl();
+			this.newProfileOptionControl1 = new Profiles.NewProfileOptionControl();
+			this.newProfileOptionControl2 = new Profiles.NewProfileOptionControl();
 			this.B_Cancel = new SlickControls.SlickButton();
 			this.TLP_ProfileName.SuspendLayout();
 			this.TLP_Main.SuspendLayout();

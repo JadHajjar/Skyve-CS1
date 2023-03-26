@@ -145,7 +145,10 @@ public class LoadOrderProfile
 
 	internal Profile ToLot2Profile(string name)
 	{
-		var profile = new Profile(name);
+		var profile = new Profile(name)
+		{
+			AutoSave = false
+		};
 
 		foreach (var asset in Assets)
 		{
@@ -173,6 +176,8 @@ public class LoadOrderProfile
 				});
 			}
 		}
+
+		profile.ExcludedDLCs = ExcludedDLCs.Select(x => (uint)x).ToList();
 
 		profile.LsmSettings.LoadEnabled = LoadEnabled;
 		profile.LsmSettings.LoadUsed = LoadUsed;

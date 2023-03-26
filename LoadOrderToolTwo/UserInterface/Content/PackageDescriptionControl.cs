@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -11,7 +12,7 @@ using System.Windows.Forms;
 
 using static CompatibilityReport.CatalogData.Enums;
 
-namespace LoadOrderToolTwo.UserInterface;
+namespace LoadOrderToolTwo.UserInterface.Content;
 internal class PackageDescriptionControl : SlickImageControl
 {
 	public Package? Package { get; private set; }
@@ -110,7 +111,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		using var foreBrush = new SolidBrush(color.GetTextColor());
 
 		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(8.25F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 3, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(text, UI.Font(8.25F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + Padding.Left * 2 - 3, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		if (icon is not null)
 		{

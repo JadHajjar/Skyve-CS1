@@ -25,7 +25,7 @@ internal class AssetsUtil
 		var cache = CSCache.Deserialize()?.Assets.ToDictionary(x => x.IncludedPath, x => x, StringComparer.InvariantCultureIgnoreCase);
 
 		AssetInfoCache = cache ?? new();
-		ExcludedHashSet = new HashSet<string>(_config.Assets.Where(x => x.Excluded).Select(x => x.Path?.ToLower() ?? string.Empty));
+		ExcludedHashSet = new HashSet<string>(_config.Assets.Select(x => x.Path?.ToLower() ?? string.Empty));
 	}
 
 	public static IEnumerable<Asset> GetAssets(Package package)
@@ -99,7 +99,7 @@ internal class AssetsUtil
 		}
 
 		_config.Assets = ExcludedHashSet
-				.Select(x => new AssetInfo { Excluded = true, Path = x })
+				.Select(x => new AssetInfo { Path = x })
 				.ToArray();
 
 		_config.Serialize();
@@ -149,6 +149,7 @@ internal class AssetsUtil
 
 		_config.RemovedDLCs = list.ToArray();
 
+		ProfileManager.TriggerAutoSave();
 		SaveChanges();
 	}
 }

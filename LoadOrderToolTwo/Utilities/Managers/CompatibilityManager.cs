@@ -3,7 +3,7 @@
 using Extensions;
 
 using LoadOrderToolTwo.ColossalOrder;
-
+using LoadOrderToolTwo.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -132,8 +132,6 @@ internal static class CompatibilityManager
 
 		reportInfo.Messages.AddIfNotNull(Stability(subscribedMod));
 		reportInfo.Messages.AddIfNotNull(RequiredDlc(subscribedMod));
-		reportInfo.Messages.AddIfNotNull(UnneededDependencyMod(subscribedMod));
-		reportInfo.Messages.AddIfNotNull(Disabled(subscribedMod));
 		reportInfo.Messages.AddIfNotNull(Successors(subscribedMod));
 		reportInfo.Messages.AddIfNotNull(Alternatives(subscribedMod));
 		reportInfo.Messages.AddIfNotNull(ModNote(subscribedMod));
@@ -246,7 +244,7 @@ internal static class CompatibilityManager
 				, Locale.CR_Obsolete);
 		}
 
-		if (subscribedMod.Statuses.Contains(Status.RemovedFromWorkshop) || package?.Status == Domain.DownloadStatus.Removed)
+		if (subscribedMod.Statuses.Contains(Status.RemovedFromWorkshop) || package?.Status == DownloadStatus.Removed)
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.MajorIssues
@@ -701,11 +699,6 @@ internal static class CompatibilityManager
 			ReportSeverity.Remarks or (ReportSeverity)(-1) => FormDesign.Design.ForeColor,
 			_ => FormDesign.Design.GreenColor
 		};
-	}
-
-	internal static object GetCompatibilityReport(string id)
-	{
-		throw new NotImplementedException();
 	}
 
 	internal class ModInfo

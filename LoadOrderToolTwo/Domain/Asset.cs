@@ -1,5 +1,5 @@
 ﻿using Extensions;
-
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
@@ -81,7 +81,10 @@ public class Asset : IPackage
 
 	public static bool operator ==(Asset? left, Asset? right)
 	{
-		return EqualityComparer<Asset>.Default.Equals(left, right);
+		return 
+			left is null ? right is null :
+			right is null ? left is null :
+			EqualityComparer<Asset>.Default.Equals(left, right);
 	}
 
 	public static bool operator !=(Asset? left, Asset? right)

@@ -28,7 +28,6 @@ namespace LoadOrderMod.Util {
             Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.ScriptOnly);
             Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.ScriptOnly);
             Debug.Log("************************** Removed logging stacktrace bloat **************************");
-            Debug.Log(Environment.StackTrace);
         }
 
         public static void TurnOffSteamPanels() {

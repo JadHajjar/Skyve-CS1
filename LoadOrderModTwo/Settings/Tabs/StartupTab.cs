@@ -56,10 +56,7 @@ namespace LoadOrderMod.Settings.Tabs {
 
         static void OnResetLoadOrdersClicked() {
             Log.Debug("Reset Load Orders pressed");
-            foreach (var mod in Config.Mods)
-                mod.LoadOrder = LoadOrderConfig.DefaultLoadOrder;
             ConfigUtil.SaveConfig();
-
         }
     }
 }

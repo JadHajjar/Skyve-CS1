@@ -7,7 +7,7 @@ using SlickControls;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LoadOrderToolTwo.UserInterface;
+namespace LoadOrderToolTwo.UserInterface.Profiles;
 internal class NewProfileOptionControl : SlickImageControl
 {
 	public NewProfileOptionControl()

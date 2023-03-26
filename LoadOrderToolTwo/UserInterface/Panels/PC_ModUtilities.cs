@@ -1,4 +1,4 @@
-﻿using LoadOrderToolTwo.Domain;
+﻿using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -15,6 +15,8 @@ public partial class PC_ModUtilities : PanelContent
 	public PC_ModUtilities()
 	{
 		InitializeComponent();
+
+		B_LoadCollection.Height = 0;
 	}
 
 	protected override void LocaleChanged()
@@ -27,8 +29,9 @@ public partial class PC_ModUtilities : PanelContent
 		base.UIChanged();
 
 		B_ReDownload.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ReDownload));
+		P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Steam));
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Filters.Margin = roundedGroupPanel1.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		P_Filters.Margin = B_ReDownload.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 	}
 
@@ -56,5 +59,15 @@ public partial class PC_ModUtilities : PanelContent
 	private void B_ReDownload_Click(object sender, EventArgs e)
 	{
 		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).Select(x => x.SteamId).ToArray());
+	}
+
+	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+	{
+		if (e.KeyData == Keys.Enter)
+		{
+			B_LoadCollection_Click(this, EventArgs.Empty);
+
+			e.IsInputKey = false;
+		}
 	}
 }

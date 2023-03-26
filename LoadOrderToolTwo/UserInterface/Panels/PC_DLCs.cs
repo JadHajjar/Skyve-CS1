@@ -66,6 +66,7 @@ public partial class PC_DLCs : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
+		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
 		LC_DLCs.FilterOrSortingChanged();
 		RefreshCounts();
 	}
@@ -120,5 +121,10 @@ public partial class PC_DLCs : PanelContent
 		}
 
 		LC_DLCs.Invalidate();
+	}
+
+	private void TB_Search_IconClicked(object sender, EventArgs e)
+	{
+		TB_Search.Text = string.Empty;
 	}
 }

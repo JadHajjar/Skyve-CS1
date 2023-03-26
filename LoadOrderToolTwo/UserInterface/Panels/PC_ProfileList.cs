@@ -1,6 +1,9 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
+using LoadOrderToolTwo.UserInterface.Generic;
+using LoadOrderToolTwo.UserInterface.Profiles;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 

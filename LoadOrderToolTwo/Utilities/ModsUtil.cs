@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -285,5 +286,15 @@ internal static class ModsUtil
 	{
 		return Regex.Replace(name, @"v?\d+\.\d+(\.\d+)*(-[\d\w]+)*", x => string.Empty, RegexOptions.IgnoreCase)
 			.RemoveDoubleSpaces();
+	}
+
+	internal static string GetVersionText(this string name)
+	{
+		var match = Regex.Match(name, @"v?(\d+\.\d+(\.\d+)*(-[\d\w]+)*)", RegexOptions.IgnoreCase);
+
+		if (match.Success)
+			return "v" + match.Groups[1].Value;
+
+		return string.Empty;
 	}
 }

@@ -1,4 +1,5 @@
-﻿using LoadOrderToolTwo.Domain.Steam;
+﻿using LoadOrderToolTwo.Domain.Enums;
+using LoadOrderToolTwo.Domain.Steam;
 
 using System;
 using System.Drawing;

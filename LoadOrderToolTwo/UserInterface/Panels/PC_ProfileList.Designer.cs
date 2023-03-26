@@ -1,4 +1,6 @@
-﻿using LoadOrderToolTwo.Utilities.Managers;
+﻿using LoadOrderToolTwo.UserInterface.Dropdowns;
+using LoadOrderToolTwo.UserInterface.Generic;
+using LoadOrderToolTwo.Utilities.Managers;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 
@@ -33,11 +35,11 @@ partial class PC_ProfileList
 	{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC_ProfileList));
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
-			this.T_ProfileUsage = new LoadOrderToolTwo.UserInterface.ThreeOptionToggle();
+			this.T_ProfileUsage = new Generic.ThreeOptionToggle();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
-			this.DD_Sorting = new LoadOrderToolTwo.UserInterface.ProfileSortingDropDown();
+			this.DD_Sorting = new Dropdowns.ProfileSortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();

@@ -1,8 +1,11 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
+using LoadOrderToolTwo.UserInterface.Generic;
+using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -222,8 +225,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		if (!clearingFilters)
 		{
-			LC_Items.FilterOrSortingChanged();
-			RefreshCounts();
+			TB_Search.Loading = true;
+			_delayedSearch.Run();
 		}
 	}
 
@@ -368,7 +371,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
 		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
-		TB_Search.Loading = true;
-		_delayedSearch.Run();
+		FilterChanged(sender, e);
 	}
 }

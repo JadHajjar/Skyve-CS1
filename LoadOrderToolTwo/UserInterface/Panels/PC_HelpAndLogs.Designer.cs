@@ -29,6 +29,7 @@ partial class PC_HelpAndLogs
 	private void InitializeComponent()
 	{
 			this.slickButton1 = new SlickControls.SlickButton();
+			this.slickButton2 = new SlickControls.SlickButton();
 			this.SuspendLayout();
 			// 
 			// slickButton1
@@ -40,16 +41,30 @@ partial class PC_HelpAndLogs
 			this.slickButton1.Size = new System.Drawing.Size(184, 38);
 			this.slickButton1.SpaceTriggersClick = true;
 			this.slickButton1.TabIndex = 13;
-			this.slickButton1.Text = "Open Log Folder";
+			this.slickButton1.Text = "Open LOT Log Folder";
 			this.slickButton1.Click += new System.EventHandler(this.slickButton1_Click);
+			// 
+			// slickButton2
+			// 
+			this.slickButton2.ColorShade = null;
+			this.slickButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.slickButton2.Location = new System.Drawing.Point(236, 51);
+			this.slickButton2.Name = "slickButton2";
+			this.slickButton2.Size = new System.Drawing.Size(184, 38);
+			this.slickButton2.SpaceTriggersClick = true;
+			this.slickButton2.TabIndex = 13;
+			this.slickButton2.Text = "Open Log Folder";
+			this.slickButton2.Click += new System.EventHandler(this.slickButton2_Click);
 			// 
 			// PC_HelpAndLogs
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.Controls.Add(this.slickButton2);
 			this.Controls.Add(this.slickButton1);
 			this.Name = "PC_HelpAndLogs";
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.slickButton1, 0);
+			this.Controls.SetChildIndex(this.slickButton2, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -58,4 +73,5 @@ partial class PC_HelpAndLogs
 	#endregion
 
 	private SlickControls.SlickButton slickButton1;
+	private SlickControls.SlickButton slickButton2;
 }

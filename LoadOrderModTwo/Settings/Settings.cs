@@ -16,7 +16,6 @@ namespace LoadOrderMod.Settings {
 
         public static void OnSettingsUI(UIHelper helper) {
             try {
-                Log.Debug(Environment.StackTrace);
                 if (!Helpers.InStartupMenu) {
                     helper.AddLabel("Only available in startup menu");
                 }
