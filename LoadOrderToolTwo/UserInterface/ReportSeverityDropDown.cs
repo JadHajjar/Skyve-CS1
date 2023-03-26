@@ -7,11 +7,8 @@ using SlickControls;
 using SlickControls.Controls.Form;
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using static CompatibilityReport.CatalogData.Enums;
@@ -46,20 +43,20 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<ReportSeverityFil
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ReportSeverityFilter item)
 	{
 		var text = item == ReportSeverityFilter.Any ? Locale.AnyReportStatus : LocaleHelper.GetGlobalText($"CR_{item}");
-		var color = (item switch
+		var color = item switch
 		{
 			ReportSeverityFilter.MinorIssues => FormDesign.Design.YellowColor,
 			ReportSeverityFilter.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
 			ReportSeverityFilter.Unsubscribe => FormDesign.Design.RedColor,
 			ReportSeverityFilter.Remarks or ReportSeverityFilter.Any => FormDesign.Design.ForeColor,
 			_ => FormDesign.Design.GreenColor
-		});
+		};
 
 		using var icon = item == ReportSeverityFilter.Any ? ImageManager.GetIcon("I_Slash") : ((ReportSeverity)((int)item - 1)).GetSeverityIcon(true);
 
 		e.Graphics.DrawImage(icon.Color(color), rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height)/2,0,Font.Height);
+		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - Font.Height) / 2), 0, Font.Height);
 
 		textRect.Width = rectangle.Width - textRect.X;
 

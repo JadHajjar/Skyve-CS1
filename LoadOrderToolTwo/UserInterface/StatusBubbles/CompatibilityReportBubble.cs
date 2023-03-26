@@ -3,8 +3,6 @@
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
-using SlickControls;
-
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -81,7 +79,7 @@ internal class CompatibilityReportBubble : StatusBubbleBase
 
 		DrawValue(e, ref targetHeight, groups.Sum(x => !(x.Key > ReportSeverity.Remarks) ? x.Count() : 0).ToString(), Locale.ModsNoIssues);
 
-		foreach ( var group in groups.OrderBy(x => x.Key))
+		foreach (var group in groups.OrderBy(x => x.Key))
 		{
 			if (!(group.Key > ReportSeverity.Remarks))
 			{

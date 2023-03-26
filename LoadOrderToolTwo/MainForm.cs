@@ -72,6 +72,7 @@ public partial class MainForm : BasePanelForm
 		PI_ModUtilities.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Wrench));
 		PI_Troubleshoot.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_AskHelp));
 		PI_Packages.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Package));
+		PI_DLCs.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Dlc));
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -192,5 +193,15 @@ public partial class MainForm : BasePanelForm
 	private void PI_Options_OnClick(object sender, MouseEventArgs e)
 	{
 		SetPanel<PC_Options>(PI_Options);
+	}
+
+	private void PI_Troubleshoot_OnClick(object sender, MouseEventArgs e)
+	{
+		SetPanel<PC_HelpAndLogs>(PI_Troubleshoot);
+	}
+
+	private void PI_DLCs_OnClick(object sender, MouseEventArgs e)
+	{
+		SetPanel<PC_DLCs>(PI_DLCs);
 	}
 }

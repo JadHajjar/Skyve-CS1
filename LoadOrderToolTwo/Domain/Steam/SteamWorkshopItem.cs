@@ -47,8 +47,8 @@ public class SteamWorkshopItem
 		}
 	}
 
-    public SteamWorkshopItem()
-    {
-        
-    }
+	public SteamWorkshopItem()
+	{
+
+	}
 }

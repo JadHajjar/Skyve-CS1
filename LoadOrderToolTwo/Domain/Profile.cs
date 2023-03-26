@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -17,6 +16,8 @@ public class Profile
 	[JsonIgnore, CloneIgnore] public bool Temporary { get; private set; }
 	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
 	[CloneIgnore] public string? Name { get; set; }
+	[JsonIgnore] public DateTime LastEditDate { get; set; }
+	[JsonIgnore] public DateTime DateCreated { get; set; }
 
 	public Profile(string name) : this()
 	{
@@ -35,7 +36,7 @@ public class Profile
 	public bool Save()
 	{
 		ProfileManager.GatherInformation(this);
-		
+
 		return ProfileManager.Save(this);
 	}
 
@@ -45,34 +46,34 @@ public class Profile
 	public LsmSettings LsmSettings { get; internal set; }
 	public string? LsmSkipFile { get; set; }
 	public bool AutoSave { get; set; }
-	public DateTime LastEditDate { get; set; }
 	public bool ForAssetEditor { get; set; }
 	public bool ForGameplay { get; set; }
+	public bool IsFavorite { get; set; }
 
 	public class Asset
 	{
 		public string? Name { get; set; }
 		public string? RelativePath { get; set; }
-        public ulong SteamId { get; set; }
+		public ulong SteamId { get; set; }
 
-        public Asset(Domain.Asset asset)
-        {
+		public Asset(Domain.Asset asset)
+		{
 			SteamId = asset.SteamId;
 			Name = asset.Name;
 			RelativePath = ProfileManager.ToRelativePath(asset.FileName);
 		}
 
-        public Asset()
-        {
-            
-        }
-    }
+		public Asset()
+		{
+
+		}
+	}
 
 	public class Mod : Asset
 	{
 		public bool Enabled { get; set; }
 
-        public Mod(Domain.Mod mod)
+		public Mod(Domain.Mod mod)
 		{
 			SteamId = mod.SteamId;
 			Name = mod.Name;
@@ -80,9 +81,9 @@ public class Profile
 			RelativePath = ProfileManager.ToRelativePath(mod.Folder);
 		}
 
-        public Mod()
-        {
-            
-        }
-    }
+		public Mod()
+		{
+
+		}
+	}
 }

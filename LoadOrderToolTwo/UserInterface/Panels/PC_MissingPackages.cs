@@ -5,22 +5,14 @@ using LoadOrderToolTwo.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Management.Instrumentation;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_MissingPackages : PanelContent
 {
-	private Dictionary<ulong, PackageViewControl> _workshopPackages = new();
+	private readonly Dictionary<ulong, PackageViewControl> _workshopPackages = new();
 
 	public PC_MissingPackages(List<Profile.Mod> missingMods, List<Profile.Asset> missingAssets)
 	{
@@ -70,7 +62,9 @@ public partial class PC_MissingPackages : PanelContent
 		foreach (var item in info)
 		{
 			if (_workshopPackages.ContainsKey(item.Key))
+			{
 				_workshopPackages[item.Key].SetWorkshopItem(item.Value);
+			}
 		}
 
 		return base.LoadData();

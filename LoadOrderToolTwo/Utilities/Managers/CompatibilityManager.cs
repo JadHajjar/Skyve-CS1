@@ -20,7 +20,7 @@ namespace LoadOrderToolTwo.Utilities.Managers;
 #pragma warning disable IDE1006 // Naming Styles
 internal static class CompatibilityManager
 {
-	internal static Catalog? Catalog { get; private set; }
+	internal static Catalog Catalog { get; private set; }
 	internal static bool CatalogAvailable { get; private set; }
 
 	internal static void LoadCompatibilityReport(Domain.Package compatibilityReport)
@@ -46,7 +46,7 @@ internal static class CompatibilityManager
 		catch { }
 	}
 
-	private static Catalog? ReadGzFile(string filePath)
+	private static Catalog ReadGzFile(string filePath)
 	{
 		using var fileStream = new FileStream(filePath, FileMode.Open);
 		using var gzipStream = new GZipStream(fileStream, CompressionMode.Decompress);
@@ -57,7 +57,7 @@ internal static class CompatibilityManager
 		return ser.Deserialize(reader) as Catalog;
 	}
 
-	internal static ReportInfo? GetCompatibilityReport(Domain.Package package)
+	internal static ReportInfo GetCompatibilityReport(Domain.Package package)
 	{
 		if (Catalog is null)
 		{
@@ -113,7 +113,7 @@ internal static class CompatibilityManager
 		return reportInfo;
 	}
 
-	internal static ReportInfo? GetCompatibilityReport(ulong packageId)
+	internal static ReportInfo GetCompatibilityReport(ulong packageId)
 	{
 		if (Catalog is null || packageId is 0)
 		{

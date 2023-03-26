@@ -55,7 +55,10 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	{
 		base.OnSizeChanged(e);
 
-		Height = (int)(28 * UI.UIScale);
+		if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
+		{
+			Height = (int)(28 * UI.UIScale);
+		}
 	}
 
 	protected override void OnMouseClick(MouseEventArgs e)

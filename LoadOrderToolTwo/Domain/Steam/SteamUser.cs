@@ -9,12 +9,12 @@ public class SteamUser
 		AvatarUrl = entry.avatarmedium;
 	}
 
-    public SteamUser()
-    {
-        
-    }
+	public SteamUser()
+	{
 
-    public string SteamId { get; set; }
+	}
+
+	public string SteamId { get; set; }
 	public string Name { get; set; }
 	public string ProfileUrl { get; set; }
 	public string AvatarUrl { get; set; }

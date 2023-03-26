@@ -1,7 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Utilities.Managers;
-
 using SlickControls;
 
 using System;
@@ -63,11 +61,15 @@ public static class Log
 				return;
 			}
 
-			LogFilePath = Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), LogFileName);
+			var folder = Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), ISave.AppName, "Logs");
+			LogFilePath = Path.Combine(folder, LogFileName);
+
 			if (File.Exists(LogFilePath))
 			{
 				File.Delete(LogFilePath);
 			}
+
+			Directory.CreateDirectory(folder);
 
 			if (ShowTimestamp)
 			{

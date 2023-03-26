@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Domain;
 internal class KnownPackage
@@ -13,11 +9,11 @@ internal class KnownPackage
 		UpdateTime = x.ServerTime;
 	}
 
-    public KnownPackage()
-    {
-        
-    }
+	public KnownPackage()
+	{
 
-    public string? Folder { get; set; }
-    public DateTime UpdateTime { get; set; }
+	}
+
+	public string? Folder { get; set; }
+	public DateTime UpdateTime { get; set; }
 }

@@ -1,8 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Utilities;
-using LoadOrderToolTwo.Utilities.Managers;
-
 using SlickControls;
 using SlickControls.Controls.Form;
 
@@ -11,11 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static CompatibilityReport.CatalogData.Enums;
 
 namespace LoadOrderToolTwo.UserInterface;
 internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
@@ -42,7 +35,9 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, CultureInfo item)
 	{
 		if (item == null)
+		{
 			return;
+		}
 
 		var text = $"{item.EnglishName} / {item.NativeName.ToCapital()}";
 		using var icon = (Bitmap)Properties.Resources.ResourceManager.GetObject("Lang_" + item.IetfLanguageTag.ToUpper(), Properties.Resources.Culture);
@@ -51,7 +46,7 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 		{
 			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-			var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height) / 2, 0, Font.Height);
+			var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - Font.Height) / 2), 0, Font.Height);
 
 			textRect.Width = rectangle.Width - textRect.X;
 

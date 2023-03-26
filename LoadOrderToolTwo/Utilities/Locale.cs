@@ -1,7 +1,5 @@
 ﻿using Extensions;
 
-using System;
-
 namespace LoadOrderToolTwo.Utilities;
 internal class Locale : LocaleHelper
 {
@@ -191,12 +189,27 @@ internal class Locale : LocaleHelper
 	public static string PackageStatus => _instance.GetText(nameof(PackageStatus));
 	public static string MultiplePackagesIncluded => _instance.GetText(nameof(MultiplePackagesIncluded));
 	public static string CopyWorkshopLink => _instance.GetText(nameof(CopyWorkshopLink));
-
 	public static string DeletePackage => _instance.GetText(nameof(DeletePackage));
 	public static string UnsubscribePackage => _instance.GetText(nameof(UnsubscribePackage));
 	public static string CopyWorkshopId => _instance.GetText(nameof(CopyWorkshopId));
 	public static string CopyAuthorLink => _instance.GetText(nameof(CopyAuthorLink));
 	public static string CopyAuthorId => _instance.GetText(nameof(CopyAuthorId));
 	public static string Copy => _instance.GetText(nameof(Copy));
-	public static string Showing => _instance.GetText(nameof(Showing));	
+	public static string Showing => _instance.GetText(nameof(Showing));
+	public static string YourProfiles => _instance.GetText(nameof(YourProfiles));
+	public static string Profile => _instance.GetText(nameof(Profile));
+	public static string Favorite => _instance.GetText(nameof(Favorite));
+	public static string UnFavoriteThisProfile => _instance.GetText(nameof(UnFavoriteThisProfile));
+	public static string FavoriteThisProfile => _instance.GetText(nameof(FavoriteThisProfile));
+	public static string ProfileCreationFailed => _instance.GetText(nameof(ProfileCreationFailed));
+	public static string Tags => _instance.GetText(nameof(Tags));
+	public static string DLCs => _instance.GetText(nameof(DLCs));
+	public static string NoDlcsNoInternet => _instance.GetText(nameof(NoDlcsNoInternet));
+	public static string NoDlcsOpenGame => _instance.GetText(nameof(NoDlcsOpenGame));
+	public static string DlcUpdateNotice => _instance.GetText(nameof(DlcUpdateNotice));
+	public static string DlcCount => _instance.GetText(nameof(DlcCount));
+	public static string IncludeAllItemsInThisPackage => _instance.GetText(nameof(IncludeAllItemsInThisPackage));
+	public static string ExcludeAllItemsInThisPackage => _instance.GetText(nameof(ExcludeAllItemsInThisPackage));
+	public static string Unfiltered => _instance.GetText(nameof(Unfiltered));
+	public static string AnyTags => _instance.GetText(nameof(AnyTags));
 }

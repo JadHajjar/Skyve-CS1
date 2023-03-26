@@ -53,12 +53,16 @@ public class DoubleButton : SlickControl
 		base.OnMouseClick(e);
 
 		if (e.Button == MouseButtons.Left)
-		if (e.Location.X < Width / 2)
 		{
-			LeftClicked?.Invoke(this, e);	
-		}
-		else
+			if (e.Location.X < Width / 2)
+			{
+				LeftClicked?.Invoke(this, e);
+			}
+			else
+			{
 				RightClicked?.Invoke(this, e);
+			}
+		}
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -70,15 +74,15 @@ public class DoubleButton : SlickControl
 		var iconOnly = Width < 200 * UI.FontScale;
 		var iconSize = UI.FontScale >= 1.25 ? 24 : 16;
 		var cursorLocation = PointToClient(Cursor.Position);
-		var rectangle1 = new Rectangle(0, 0, (Width) / 2, Height - 1);
-		var rectangle2 = new Rectangle((Width) / 2, 0, (Width) / 2, Height - 1);
+		var rectangle1 = new Rectangle(0, 0, Width / 2, Height - 1);
+		var rectangle2 = new Rectangle(Width / 2, 0, Width / 2, Height - 1);
 		var option1Hovered = rectangle1.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
 		var option2Hovered = rectangle2.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
 		var textColor1 = (option1Hovered && HoverState.HasFlag(HoverState.Pressed)) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
 		var textColor2 = (option2Hovered && HoverState.HasFlag(HoverState.Pressed)) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
 
 		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(FormDesign.Design.ButtonColor, 0.5F), ClientRectangle.Pad(1, 1, 2, 2), Padding.Left);
-		
+
 		// Option 1
 		if (option1Hovered)
 		{

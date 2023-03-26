@@ -5,6 +5,7 @@ internal enum PackageSorting
 	Name,
 	FileSize,
 	UpdateTime,
+	SubscribeTime,
 	Author,
 	Status,
 	CompatibilityReport,

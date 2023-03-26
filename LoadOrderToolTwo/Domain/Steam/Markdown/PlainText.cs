@@ -1,6 +1,5 @@
-﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown
+﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+
+internal class PlainText : Component
 {
-	internal class PlainText : Component
-	{
-	}
 }

@@ -47,13 +47,23 @@ internal class CompatibilityMessageControl : SlickControl
 	{
 		base.Dispose(disposing);
 
+		if (LinkedMods is not null)
+		{
+			foreach (var item in LinkedMods)
+			{
+				item.Icon?.Dispose();
+			}
+		}
+
 		CentralManager.ContentLoaded -= CentralManager_ContentLoaded;
 	}
 
 	private void CentralManager_ContentLoaded()
 	{
 		if (LinkedMods is null)
+		{
 			return;
+		}
 
 		foreach (var package in LinkedMods)
 		{
@@ -194,7 +204,7 @@ internal class CompatibilityMessageControl : SlickControl
 				e.Graphics.DrawRoundedImage(item.Icon ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(50, 50), UI.FontScale), ContentAlignment.TopLeft), pad, fore);
 
 				e.Graphics.DrawString(item.Name, UI.Font(9F, FontStyle.Bold), new SolidBrush(fore), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0));
-				
+
 				if (item.Package is not null)
 				{
 					e.Graphics.DrawString(Locale.ModOwned, UI.Font(7.5F, FontStyle.Italic), new SolidBrush(Color.FromArgb(150, fore)), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Far });
@@ -289,7 +299,7 @@ internal class CompatibilityMessageControl : SlickControl
 					Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={item.SteamId}");
 				}
 			}
-			catch { } 
+			catch { }
 
 			return;
 		}

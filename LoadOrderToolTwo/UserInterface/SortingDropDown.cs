@@ -31,19 +31,12 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
 	}
 
-	protected override void OnSizeChanged(EventArgs e)
-	{
-		base.OnSizeChanged(e);
-
-		//Height = (int)(42 * UI.UIScale);
-	}
-
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageSorting item)
 	{
 		var text = LocaleHelper.GetGlobalText($"Sorting_{item}");
 		var color = FormDesign.Design.ForeColor;
 
-		using var icon = ImageManager.GetIcon(GetIcon(item)).Color(foreColor);
+		using var icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Sort)).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
@@ -52,10 +45,5 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		textRect.Width = rectangle.Width - textRect.X;
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), textRect, new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
-	}
-
-	private string GetIcon(PackageSorting item)
-	{
-		return nameof(Properties.Resources.I_Sort);
 	}
 }

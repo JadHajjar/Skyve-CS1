@@ -4,7 +4,6 @@ using LoadOrderToolTwo.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,9 +15,9 @@ internal class NewProfileOptionControl : SlickImageControl
 		Cursor = Cursors.Hand;
 	}
 
-    public bool FromScratch { get; set; }
+	public bool FromScratch { get; set; }
 
-    protected override void UIChanged()
+	protected override void UIChanged()
 	{
 		Font = UI.Font(12.75F, FontStyle.Bold);
 		Margin = UI.Scale(new Padding(FromScratch ? 0 : 100, 20, FromScratch ? 100 : 0, 20), UI.FontScale);

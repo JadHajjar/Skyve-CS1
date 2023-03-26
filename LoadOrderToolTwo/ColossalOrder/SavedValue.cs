@@ -29,8 +29,7 @@ public abstract class SavedValue
 
 	public SettingsFile settingsFile
 	{
-		get
-		{
+		get =>
 			//if (m_SettingsFile == null && !m_Synced)
 			//{
 			//	m_SettingsFile = new SettingsFile() { fileName = m_FileName };
@@ -38,9 +37,8 @@ public abstract class SavedValue
 			//	///m_SettingsFile = GameSettings.FindSettingsFileByName(m_FileName);
 			//}
 
-			return m_SettingsFile!;
-		}
-		set { m_SettingsFile = value; }
+			m_SettingsFile!;
+		set => m_SettingsFile = value;
 	}
 
 	protected void Sync()

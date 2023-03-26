@@ -43,7 +43,7 @@ public partial class PC_ModUtilities : PanelContent
 
 			if (contents?.Any() ?? false)
 			{
-				var collection= contents[ulong.Parse(collectionId)];
+				var collection = contents[ulong.Parse(collectionId)];
 				contents.Remove(ulong.Parse(collectionId));
 				Form.PushPanel(null, new PC_ImportCollection(collection, contents));
 				TB_CollectionLink.Text = string.Empty;

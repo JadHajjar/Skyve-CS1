@@ -69,7 +69,7 @@ partial class PC_Options
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 544);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 785);
 			this.tableLayoutPanel1.TabIndex = 13;
 			// 
 			// TLP_Folders
@@ -95,7 +95,7 @@ partial class PC_Options
 			this.TLP_Folders.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Folders.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Folders.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Folders.Size = new System.Drawing.Size(767, 138);
+			this.TLP_Folders.Size = new System.Drawing.Size(767, 275);
 			this.TLP_Folders.TabIndex = 19;
 			// 
 			// TB_VirtualAppDataPath
@@ -420,7 +420,7 @@ partial class PC_Options
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_Options";
-			this.Size = new System.Drawing.Size(783, 579);
+			this.Size = new System.Drawing.Size(783, 820);
 			this.Text = "Language";
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);

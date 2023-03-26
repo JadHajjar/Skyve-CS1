@@ -71,7 +71,7 @@ internal class LocationManager
 		{
 			if (Platform == Platform.MacOSX)
 			{
-				return Path.Combine(Path.Combine(Path.Combine(Path.Combine(GamePath, "Cities.app"), "Contents"), "Resources"), "Files");
+				return Path.Combine(GamePath, "Cities.app", "Contents", "Resources", "Files");
 			}
 
 			return Path.Combine(GamePath, "Files");
@@ -80,18 +80,16 @@ internal class LocationManager
 
 	public static string CitiesExe => Platform switch
 	{
-		Platform.Windows => "Cities.exe",
 		Platform.MacOSX => "Cities",
 		Platform.Linux => "Cities.x64",
-		_ => "Cities",
+		Platform.Windows or _ => "Cities.exe",
 	};
 
 	public static string SteamExe => Platform switch
 	{
-		Platform.Windows => "Steam.exe",
 		Platform.MacOSX => "Steam",
 		Platform.Linux => "Steam",
-		_ => "Steam",
+		Platform.Windows or _ => "Steam.exe",
 	};
 
 	static LocationManager()

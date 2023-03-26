@@ -2,15 +2,15 @@ using LoadOrderToolTwo.ColossalOrder;
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Utilities.Managers;
 
+using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
 namespace LoadOrderTool.Legacy;
-#nullable disable
 public interface IProfileItem
 {
-	string GetIncludedPath();
-	string GetDisplayText();
+	string? GetIncludedPath();
+	string? GetDisplayText();
 	string GetCategoryName(); // mod or asset
 
 }
@@ -51,16 +51,16 @@ public class LoadOrderProfile
 		public bool IsEnabled;
 		public bool IsIncluded;
 		public int LoadOrder;
-		public string DisplayText;
+		public string? DisplayText;
 
 		public Mod() { }
 
-		public string GetIncludedPath()
+		public string? GetIncludedPath()
 		{
 			return IncludedPathFinal;
 		}
 
-		public string GetDisplayText()
+		public string? GetDisplayText()
 		{
 			return DisplayText;
 		}
@@ -74,28 +74,28 @@ public class LoadOrderProfile
 	public class Asset : IProfileItem
 	{
 		[XmlIgnore]
-		public string IncludedPathFinal;
+		public string? IncludedPathFinal;
 
 		/// <summary>
 		/// only for storage. use the final path instead
 		/// </summary>
-		public string IncludedPath
+		public string? IncludedPath
 		{
 			get => FromFinalPath(IncludedPathFinal);
 			set => IncludedPathFinal = ToFinalPath(value);
 		}
 
 		public bool IsIncluded;
-		public string DisplayText;
+		public string? DisplayText;
 
 		public Asset() { }
 
-		public string GetIncludedPath()
+		public string? GetIncludedPath()
 		{
 			return IncludedPathFinal;
 		}
 
-		public string GetDisplayText()
+		public string? GetDisplayText()
 		{
 			return DisplayText;
 		}
@@ -111,8 +111,8 @@ public class LoadOrderProfile
 	public DLC[] ExcludedDLCs = new DLC[0];
 
 	[XmlIgnore]
-	public string SkipFilePathFinal;
-	public string SkipFilePath
+	public string? SkipFilePathFinal;
+	public string? SkipFilePath
 	{
 		get => FromFinalPath(SkipFilePathFinal);
 		set => SkipFilePathFinal = ToFinalPath(value);
@@ -131,7 +131,7 @@ public class LoadOrderProfile
 		return Assets.FirstOrDefault(m => m.IncludedPathFinal == includedPath);
 	}
 
-	public static LoadOrderProfile Deserialize(string path)
+	public static LoadOrderProfile? Deserialize(string path)
 	{
 		try
 		{
@@ -177,8 +177,8 @@ public class LoadOrderProfile
 		profile.LsmSettings.LoadEnabled = LoadEnabled;
 		profile.LsmSettings.LoadUsed = LoadUsed;
 		profile.LsmSettings.SkipFile = SkipFilePathFinal;
+		profile.LsmSettings.UseSkipFile = File.Exists(SkipFilePathFinal);
 
 		return profile;
 	}
 }
-#nullable enable

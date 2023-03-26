@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -9,7 +8,6 @@ using SlickControls;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;

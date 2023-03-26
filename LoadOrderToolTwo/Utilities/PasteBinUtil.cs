@@ -58,15 +58,13 @@ internal class PasteBinUtil
 		{
 			throw new Exception("Response stream is null.");
 		}
-		using (var reader = new StreamReader(responseStream))
+		using var reader = new StreamReader(responseStream);
+		var responseText = reader.ReadToEnd();
+		if (responseText.StartsWith("Bad API request"))
 		{
-			var responseText = reader.ReadToEnd();
-			if (responseText.StartsWith("Bad API request"))
-			{
-				throw new Exception($"Error creating paste: {responseText}");
-			}
-			return responseText.Trim();
+			throw new Exception($"Error creating paste: {responseText}");
 		}
+		return responseText.Trim();
 	}
 
 	public string ReadPaste(string pasteKey)
@@ -92,10 +90,8 @@ internal class PasteBinUtil
 			throw new Exception("Response stream is null.");
 		}
 
-		using (var reader = new StreamReader(responseStream))
-		{
-			var responseText = reader.ReadToEnd();
-			return responseText.Trim();
-		}
+		using var reader = new StreamReader(responseStream);
+		var responseText = reader.ReadToEnd();
+		return responseText.Trim();
 	}
 }

@@ -2,7 +2,6 @@
 
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
-using LoadOrderToolTwo.Domain.Steam.Markdown;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -58,6 +57,9 @@ public partial class PC_PackagePage : PanelContent
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
 		L_Title.Font = UI.Font(15F, FontStyle.Bold);
 		L_Title.Margin = UI.Scale(new Padding(7), UI.FontScale);
+		T_CR.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_CompatibilityReport));
+		T_Info.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Content));
+		T_Profiles.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_ProfileSettings));
 	}
 
 	protected override void DesignChanged(FormDesign design)

@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace CompatibilityReport.CatalogData
+namespace CompatibilityReport.CatalogData;
+
+[Serializable]
+public class LocalizedNote
 {
-    [Serializable]
-    public class LocalizedNote
-    {
-        [XmlAttribute("localeId")]
-        public string LocaleId { get; private set; }
-        
-        [XmlText]
-        public string Value { get; private set; }
+	[XmlAttribute("localeId")]
+	public string LocaleId { get; private set; }
 
-        public LocalizedNote() {
-            LocaleId = string.Empty;
-            Value = string.Empty;
-        }
+	[XmlText]
+	public string Value { get; private set; }
 
-        public LocalizedNote(string note, string localeId) {
-            Value = note;
-            LocaleId = localeId;
-        }
+	public LocalizedNote()
+	{
+		LocaleId = string.Empty;
+		Value = string.Empty;
+	}
 
-        public void UpdateNote(string note, string localeId) {
-            Value = note;
-            LocaleId = localeId;
-        }
-    }
+	public LocalizedNote(string note, string localeId)
+	{
+		Value = note;
+		LocaleId = localeId;
+	}
+
+	public void UpdateNote(string note, string localeId)
+	{
+		Value = note;
+		LocaleId = localeId;
+	}
 }

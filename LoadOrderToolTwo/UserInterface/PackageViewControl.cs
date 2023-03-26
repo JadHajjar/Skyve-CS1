@@ -123,7 +123,7 @@ internal class PackageViewControl : SlickImageControl
 		var iconRect = new Rectangle(Padding.Left, Padding.Top, Height - Padding.Vertical, Height - Padding.Vertical);
 
 		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(Padding), Padding.Left);
-		e.Graphics.DrawRoundedRectangle(new Pen(iconRect.Contains(PointToClient(CursorLocation))? FormDesign.Design.ActiveColor: FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale)), ClientRectangle.Pad(Padding), Padding.Left);
+		e.Graphics.DrawRoundedRectangle(new Pen(iconRect.Contains(PointToClient(CursorLocation)) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor, (float)(1.5 * UI.FontScale)), ClientRectangle.Pad(Padding), Padding.Left);
 
 		if (HoverState.HasFlag(HoverState.Hovered))
 		{

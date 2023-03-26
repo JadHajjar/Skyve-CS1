@@ -58,17 +58,16 @@ partial class PC_PackagePage
 			this.P_Content.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.P_Content.Location = new System.Drawing.Point(0, 130);
 			this.P_Content.Name = "P_Content";
-			this.P_Content.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
 			this.P_Content.Size = new System.Drawing.Size(783, 308);
 			this.P_Content.TabIndex = 13;
 			// 
 			// slickTabControl1
 			// 
 			this.slickTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.slickTabControl1.Location = new System.Drawing.Point(0, 15);
+			this.slickTabControl1.Location = new System.Drawing.Point(0, 0);
 			this.slickTabControl1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickTabControl1.Name = "slickTabControl1";
-			this.slickTabControl1.Size = new System.Drawing.Size(783, 293);
+			this.slickTabControl1.Size = new System.Drawing.Size(783, 308);
 			this.slickTabControl1.TabIndex = 0;
 			this.slickTabControl1.Tabs = new SlickControls.SlickTabControl.Tab[] {
         this.T_Info,
@@ -85,8 +84,8 @@ partial class PC_PackagePage
 			this.T_Info.LinkedControl = null;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
-			this.T_Info.Selected = false;
-			this.T_Info.Size = new System.Drawing.Size(187, 25);
+			this.T_Info.Selected = true;
+			this.T_Info.Size = new System.Drawing.Size(261, 48);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
 			this.T_Info.Text = "tab1";
@@ -97,10 +96,11 @@ partial class PC_PackagePage
 			this.T_CR.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_CR.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.T_CR.Icon = global::LoadOrderToolTwo.Properties.Resources.I_CompatibilityReport_16;
-			this.T_CR.Location = new System.Drawing.Point(187, 5);
+			this.T_CR.LinkedControl = null;
+			this.T_CR.Location = new System.Drawing.Point(261, 5);
 			this.T_CR.Name = "T_CR";
-			this.T_CR.Selected = true;
-			this.T_CR.Size = new System.Drawing.Size(187, 25);
+			this.T_CR.Selected = false;
+			this.T_CR.Size = new System.Drawing.Size(261, 48);
 			this.T_CR.TabIndex = 0;
 			this.T_CR.TabStop = false;
 			this.T_CR.Text = "tab2";
@@ -112,10 +112,10 @@ partial class PC_PackagePage
 			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.T_Profiles.Icon = global::LoadOrderToolTwo.Properties.Resources.I_ProfileSettings_16;
 			this.T_Profiles.LinkedControl = this.TLP_Profiles;
-			this.T_Profiles.Location = new System.Drawing.Point(374, 5);
+			this.T_Profiles.Location = new System.Drawing.Point(522, 5);
 			this.T_Profiles.Name = "T_Profiles";
 			this.T_Profiles.Selected = false;
-			this.T_Profiles.Size = new System.Drawing.Size(187, 25);
+			this.T_Profiles.Size = new System.Drawing.Size(261, 48);
 			this.T_Profiles.TabIndex = 0;
 			this.T_Profiles.TabStop = false;
 			this.T_Profiles.Text = "tab3";
@@ -167,7 +167,6 @@ partial class PC_PackagePage
 			this.PB_Icon.Location = new System.Drawing.Point(32, 0);
 			this.PB_Icon.Margin = new System.Windows.Forms.Padding(0);
 			this.PB_Icon.Name = "PB_Icon";
-			this.PB_Icon.Package = null;
 			this.TLP_Top.SetRowSpan(this.PB_Icon, 2);
 			this.PB_Icon.Size = new System.Drawing.Size(100, 100);
 			this.PB_Icon.TabIndex = 0;
@@ -177,9 +176,9 @@ partial class PC_PackagePage
 			// 
 			this.L_Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.L_Title.AutoSize = true;
-			this.L_Title.Location = new System.Drawing.Point(135, 31);
+			this.L_Title.Location = new System.Drawing.Point(135, 27);
 			this.L_Title.Name = "L_Title";
-			this.L_Title.Size = new System.Drawing.Size(45, 19);
+			this.L_Title.Size = new System.Drawing.Size(55, 23);
 			this.L_Title.TabIndex = 1;
 			this.L_Title.Text = "label1";
 			// 
@@ -249,7 +248,7 @@ partial class PC_PackagePage
 			this.Controls.Add(this.P_Content);
 			this.Controls.Add(this.TLP_Top);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
-			
+			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_PackagePage";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Text = "Back";

@@ -9,10 +9,10 @@ using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,8 +21,13 @@ namespace LoadOrderToolTwo.Utilities;
 
 public static class SteamUtil
 {
-	private static string STEAM_CACHE_FILE = "SteamModsCache.json";
+	private static readonly string STEAM_CACHE_FILE = "SteamModsCache.json";
+	private static readonly string DLC_CACHE_FILE = "SteamDlcsCache.json";
 	private static readonly CSCache _csCache = CSCache.Deserialize();
+
+	public static List<SteamDlc> Dlcs { get; private set; } = new();
+
+	public static event Action? DLCsLoaded;
 
 	private static void SaveCache(Dictionary<ulong, SteamWorkshopItem> list)
 	{
@@ -123,14 +128,14 @@ public static class SteamUtil
 
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoAsync(ulong[] ids)
 	{
-		var results = await ConvertInChunks(ids, 1000, GetWorkshopInfoAImplementationAsync);
+		var results = await ConvertInChunks(ids, 1000, GetWorkshopInfoImplementationAsync);
 
 		SaveCache(results);
 
 		return results;
 	}
 
-	private static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoAImplementationAsync(List<ulong> ids)
+	private static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoImplementationAsync(List<ulong> ids)
 	{
 		var url = @"https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/";
 
@@ -210,7 +215,9 @@ public static class SteamUtil
 					.ToList() ?? new();
 
 				if (data.Count == 0)
+				{
 					return new();
+				}
 
 				data.Insert(0, ulong.Parse(collectionId));
 
@@ -222,6 +229,23 @@ public static class SteamUtil
 		catch (Exception ex)
 		{
 			Log.Exception(ex, "Failed to get steam collection information");
+		}
+
+		return new();
+	}
+
+	public static async Task<Dictionary<string, SteamAppInfo>> GetSteamAppInfoAsync(uint steamId)
+	{
+		var url = $"https://store.steampowered.com/api/appdetails?appids={steamId}";
+
+		using var httpClient = new HttpClient();
+		var httpResponse = await httpClient.GetAsync(url);
+
+		if (httpResponse.IsSuccessStatusCode)
+		{
+			var response = await httpResponse.Content.ReadAsStringAsync();
+
+			return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
 		}
 
 		return new();
@@ -283,5 +307,53 @@ public static class SteamUtil
 
 			CentralManager.InformationUpdate(package);
 		}
+	}
+
+	internal static void LoadDlcs()
+	{
+		new BackgroundAction("Loading DLCs", async () =>
+		{
+			ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
+
+			Dlcs = cache ?? new();
+
+			var dlcs = await GetSteamAppInfoAsync(255710);
+
+			if (!dlcs.ContainsKey("255710"))
+			{
+				return;
+			}
+
+			var newDlcs = new List<SteamDlc>(Dlcs);
+
+			foreach (var dlc in dlcs["255710"].data.dlc.Where(x => !Dlcs.Any(y => y.Id == x)))
+			{
+				var data = await GetSteamAppInfoAsync(dlc);
+
+				if (data.ContainsKey(dlc.ToString()))
+				{
+					var info = data[dlc.ToString()].data;
+
+					newDlcs.Add(new SteamDlc
+					{
+						Id = dlc,
+						Name = info.name,
+						Description = info.short_description,
+						ReleaseDate = DateTime.TryParseExact(info.release_date?.date, "dd MMM, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : DateTime.MinValue
+					});
+				}
+			}
+
+			ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
+
+			DLCsLoaded?.Invoke();
+
+			foreach (var dlc in Dlcs)
+			{
+				ImageManager.Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
+
+				DLCsLoaded?.Invoke();
+			}
+		}).Run();
 	}
 }

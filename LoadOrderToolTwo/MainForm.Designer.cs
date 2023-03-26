@@ -41,6 +41,7 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Text = new System.Windows.Forms.Label();
 			this.L_Version = new System.Windows.Forms.Label();
+			this.PI_DLCs = new SlickControls.PanelItem();
 			this.base_P_SideControls.SuspendLayout();
 			this.base_P_Container.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -56,8 +57,8 @@
 			this.base_P_SideControls.Controls.Add(this.tableLayoutPanel1);
 			this.base_P_SideControls.Font = new System.Drawing.Font("Nirmala UI", 6.75F);
 			this.base_P_SideControls.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(129)))), ((int)(((byte)(150)))));
-			this.base_P_SideControls.Location = new System.Drawing.Point(5, 531);
-			this.base_P_SideControls.Size = new System.Drawing.Size(150, 16);
+			this.base_P_SideControls.Location = new System.Drawing.Point(7, 525);
+			this.base_P_SideControls.Size = new System.Drawing.Size(218, 16);
 			// 
 			// base_P_Container
 			// 
@@ -65,6 +66,7 @@
 			// 
 			// PI_Dashboard
 			// 
+			this.PI_Dashboard.Data = null;
 			this.PI_Dashboard.ForceReopen = false;
 			this.PI_Dashboard.Group = "";
 			this.PI_Dashboard.Highlighted = false;
@@ -74,6 +76,7 @@
 			// 
 			// PI_Mods
 			// 
+			this.PI_Mods.Data = null;
 			this.PI_Mods.ForceReopen = false;
 			this.PI_Mods.Group = "Content";
 			this.PI_Mods.Highlighted = false;
@@ -83,6 +86,7 @@
 			// 
 			// PI_Assets
 			// 
+			this.PI_Assets.Data = null;
 			this.PI_Assets.ForceReopen = false;
 			this.PI_Assets.Group = "Content";
 			this.PI_Assets.Highlighted = false;
@@ -92,6 +96,7 @@
 			// 
 			// PI_Profiles
 			// 
+			this.PI_Profiles.Data = null;
 			this.PI_Profiles.ForceReopen = false;
 			this.PI_Profiles.Group = "";
 			this.PI_Profiles.Highlighted = false;
@@ -101,6 +106,7 @@
 			// 
 			// PI_Options
 			// 
+			this.PI_Options.Data = null;
 			this.PI_Options.ForceReopen = false;
 			this.PI_Options.Group = "Other";
 			this.PI_Options.Highlighted = false;
@@ -110,6 +116,7 @@
 			// 
 			// PI_Compatibility
 			// 
+			this.PI_Compatibility.Data = null;
 			this.PI_Compatibility.ForceReopen = false;
 			this.PI_Compatibility.Group = "Maintenance";
 			this.PI_Compatibility.Highlighted = false;
@@ -118,6 +125,7 @@
 			// 
 			// PI_ModUtilities
 			// 
+			this.PI_ModUtilities.Data = null;
 			this.PI_ModUtilities.ForceReopen = false;
 			this.PI_ModUtilities.Group = "Maintenance";
 			this.PI_ModUtilities.Highlighted = false;
@@ -127,14 +135,17 @@
 			// 
 			// PI_Troubleshoot
 			// 
+			this.PI_Troubleshoot.Data = null;
 			this.PI_Troubleshoot.ForceReopen = false;
 			this.PI_Troubleshoot.Group = "Maintenance";
 			this.PI_Troubleshoot.Highlighted = false;
 			this.PI_Troubleshoot.Selected = false;
 			this.PI_Troubleshoot.Text = "HelpLogs";
+			this.PI_Troubleshoot.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Troubleshoot_OnClick);
 			// 
 			// PI_Packages
 			// 
+			this.PI_Packages.Data = null;
 			this.PI_Packages.ForceReopen = false;
 			this.PI_Packages.Group = "Content";
 			this.PI_Packages.Highlighted = false;
@@ -156,7 +167,7 @@
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(150, 16);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(218, 16);
 			this.tableLayoutPanel1.TabIndex = 34;
 			// 
 			// L_Text
@@ -175,13 +186,23 @@
 			// 
 			this.L_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Version.AutoSize = true;
-			this.L_Version.Location = new System.Drawing.Point(112, 0);
+			this.L_Version.Location = new System.Drawing.Point(180, 0);
 			this.L_Version.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Version.Name = "L_Version";
 			this.L_Version.Padding = new System.Windows.Forms.Padding(2);
 			this.L_Version.Size = new System.Drawing.Size(38, 16);
 			this.L_Version.TabIndex = 30;
 			this.L_Version.Text = "Version";
+			// 
+			// PI_DLCs
+			// 
+			this.PI_DLCs.Data = null;
+			this.PI_DLCs.ForceReopen = false;
+			this.PI_DLCs.Group = "Content";
+			this.PI_DLCs.Highlighted = false;
+			this.PI_DLCs.Selected = false;
+			this.PI_DLCs.Text = "DLCs";
+			this.PI_DLCs.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_DLCs_OnClick);
 			// 
 			// MainForm
 			// 
@@ -190,7 +211,7 @@
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.FormIcon = ((System.Drawing.Image)(resources.GetObject("$this.FormIcon")));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.IconBounds = new System.Drawing.Rectangle(68, 14, 14, 42);
+			this.IconBounds = new System.Drawing.Rectangle(102, 29, 14, 42);
 			this.MaximizeBox = true;
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 1920, 1032);
 			this.MinimizeBox = true;
@@ -201,6 +222,7 @@
         this.PI_Packages,
         this.PI_Mods,
         this.PI_Assets,
+        this.PI_DLCs,
         this.PI_ModUtilities,
         this.PI_Compatibility,
         this.PI_Troubleshoot,
@@ -228,5 +250,6 @@
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 		private System.Windows.Forms.Label L_Text;
 		private System.Windows.Forms.Label L_Version;
+		internal SlickControls.PanelItem PI_DLCs;
 	}
 }

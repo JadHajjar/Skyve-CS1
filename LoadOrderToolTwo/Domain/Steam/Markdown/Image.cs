@@ -1,10 +1,9 @@
-﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown
+﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+
+internal class Image : Component
 {
-	internal class Image : Component
+	public string GetURL()
 	{
-		public string GetURL()
-		{
-			return this.value;
-		}
+		return this.value;
 	}
 }

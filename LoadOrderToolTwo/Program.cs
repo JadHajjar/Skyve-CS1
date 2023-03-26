@@ -2,13 +2,13 @@ using Extensions;
 
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
+
 using SlickControls;
 
 using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 using static System.Environment;
@@ -28,17 +28,15 @@ internal static class Program
 	{
 		try
 		{
-			if (args.Contains("-stub"))
+			if (CommandUtil.Parse(args))
 			{
-				Process.Start(Application.ExecutablePath);
-
 				return;
 			}
 
 			try
 			{
 				var toolPath = Application.ExecutablePath;
-				var openTools = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
+				var openTools = !CommandUtil.NoWindow && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
 
 				if (openTools)
 				{
@@ -51,29 +49,31 @@ internal static class Program
 
 			IsRunning = true;
 
-			SlickCursors.Initialize();
-			ConnectionHandler.Start();
 			ISave.CustomSaveDirectory = GetFolderPath(SpecialFolder.LocalApplicationData);
-			BackgroundAction.BackgroundTaskError += (b, e) => Log.Exception(e, $"The background action ({b}) failed", false);
-
-			if (OSVersion.Version.Major == 6)
-			{
-				SetProcessDPIAware();
-			}
-
-			//AppDomain.CurrentDomain.TypeResolve += AssemblyUtil.CurrentDomain_AssemblyResolve;
-			//AppDomain.CurrentDomain.AssemblyResolve += AssemblyUtil.CurrentDomain_AssemblyResolve;
-			//AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += AssemblyUtil.ReflectionResolveInterface;
-			//AppDomain.CurrentDomain.AssemblyResolve += AssemblyUtil.ResolveInterface;
-
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
+			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
 			if (!CentralManager.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
 			{
 				MessagePrompt.Show("Please enable the mod inside Cities: Skylines first before using the tool", "Set-up Incomplete", PromptButtons.OK, PromptIcons.Hand);
 				return;
 			}
+
+			if (CommandUtil.NoWindow)
+			{
+				CentralManager.Start();
+				return;
+			}
+
+			SlickCursors.Initialize();
+			ConnectionHandler.Start();
+
+			if (OSVersion.Version.Major == 6)
+			{
+				SetProcessDPIAware();
+			}
+
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
 
 			Application.Run(MainForm = new MainForm());
 		}
@@ -82,6 +82,11 @@ internal static class Program
 			MessagePrompt.GetError(ex, "App failed to start", out var message, out var details);
 			MessageBox.Show(details, message);
 		}
+	}
+
+	private static void BackgroundAction_BackgroundTaskError(BackgroundAction b, Exception e)
+	{
+		Log.Exception(e, $"The background action ({b}) failed", false);
 	}
 
 	[System.Runtime.InteropServices.DllImport("user32.dll")]

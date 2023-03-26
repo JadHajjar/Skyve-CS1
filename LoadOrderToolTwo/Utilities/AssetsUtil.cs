@@ -3,8 +3,6 @@
 using LoadOrderShared;
 
 using LoadOrderToolTwo.Domain;
-using LoadOrderToolTwo.Domain.Utilities;
-using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
@@ -27,7 +25,7 @@ internal class AssetsUtil
 		var cache = CSCache.Deserialize()?.Assets.ToDictionary(x => x.IncludedPath, x => x, StringComparer.InvariantCultureIgnoreCase);
 
 		AssetInfoCache = cache ?? new();
-		ExcludedHashSet = new HashSet<string>(_config.Assets.Where(x => x.Excluded).Select(x => x.Path.ToLower()));
+		ExcludedHashSet = new HashSet<string>(_config.Assets.Where(x => x.Excluded).Select(x => x.Path?.ToLower() ?? string.Empty));
 	}
 
 	public static IEnumerable<Asset> GetAssets(Package package)
@@ -118,7 +116,7 @@ internal class AssetsUtil
 
 		if (asset.SteamId > 0)
 		{
-			fileName=Path.Combine(fileName, asset.SteamId.ToString());
+			fileName = Path.Combine(fileName, asset.SteamId.ToString());
 		}
 
 		fileName = Path.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
@@ -129,5 +127,28 @@ internal class AssetsUtil
 		}
 
 		return null;
+	}
+
+	internal static bool IsDlcExcluded(uint dlc)
+	{
+		return _config.RemovedDLCs.Contains(dlc);
+	}
+
+	internal static void SetDlcExcluded(uint dlc, bool excluded)
+	{
+		var list = new List<uint>(_config.RemovedDLCs);
+
+		if (excluded)
+		{
+			list.Add(dlc);
+		}
+		else
+		{
+			list.Remove(dlc);
+		}
+
+		_config.RemovedDLCs = list.ToArray();
+
+		SaveChanges();
 	}
 }

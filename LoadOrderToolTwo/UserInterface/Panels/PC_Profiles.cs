@@ -25,27 +25,16 @@ public partial class PC_Profiles : PanelContent
 		TB_SavePath.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Saves");
 		TB_SkipFile.StartingFolder = LocationManager.AppDataPath;
 
-		foreach (var profile in ProfileManager.Profiles)
-		{
-			AddProfile(profile);
-		}
+		CB_UseCitiesExe.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
+		CB_UnityProfiler.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
+		CB_DebugMono.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
 
-		ProfileManager.ProfileChanged += (p) => this.TryInvoke(() => LoadProfile(p));
+		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
 
-	private ProfilePreviewControl AddProfile(Profile profile)
+	private void ProfileManager_ProfileChanged(Profile p)
 	{
-		var ctrl = new ProfilePreviewControl(profile);
-
-		FLP_Profiles.Controls.Add(ctrl);
-		FLP_Profiles.SetFlowBreak(ctrl, true);
-
-		ctrl.LoadProfile += Ctrl_LoadProfile;
-		ctrl.MergeProfile += Ctrl_MergeProfile;
-		ctrl.ExcludeProfile += Ctrl_ExcludeProfile;
-		ctrl.DisposeProfile += Ctrl_DisposeProfile;
-
-		return ctrl;
+		this.TryInvoke(() => LoadProfile(p));
 	}
 
 	protected override void LocaleChanged()
@@ -74,7 +63,7 @@ public partial class PC_Profiles : PanelContent
 		P_Options.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_TempProfile.Font = UI.Font(10.5F);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
-		B_ViewProfiles.Font = B_NewProfile.Font = B_Cancel.Font = UI.Font(9.75F);
+		B_ViewProfiles.Font = B_NewProfile.Font = B_TempProfile.Font = B_Cancel.Font = UI.Font(9.75F);
 		TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = UI.Scale(new Padding(10), UI.UIScale);
 		T_ProfileUsage.Width = (int)(300 * UI.FontScale);
 	}
@@ -85,8 +74,6 @@ public partial class PC_Profiles : PanelContent
 
 		L_ProfileUsage.ForeColor = design.LabelColor;
 		TLP_LaunchSettings.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
-		P_Profiles.BackColor = FormState.NormalFocused.Color();
-		P_Profiles2.BackColor = design.BackColor;
 		TLP_ProfileName.BackColor = design.ButtonColor;
 		L_TempProfile.ForeColor = design.YellowColor;
 		P_Options.BackColor = design.AccentBackColor;
@@ -97,39 +84,12 @@ public partial class PC_Profiles : PanelContent
 		return !TB_Name.Visible;
 	}
 
-	private void Ctrl_DisposeProfile(Profile obj)
-	{
-		if (CentralManager.CurrentProfile == obj)
-		{
-			Ctrl_LoadProfile(Profile.TemporaryProfile);
-		}
-
-		ProfileManager.DeleteProfile(obj, Form);
-	}
-
-	private void Ctrl_ExcludeProfile(Profile obj)
-	{
-		I_ProfileIcon.Loading = true;
-		FLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
-		ProfileManager.ExcludeProfile(obj);
-		AnimationHandler.Animate(P_Profiles, Size.Empty, 2, AnimationOption.IgnoreHeight);
-	}
-
-	private void Ctrl_MergeProfile(Profile obj)
-	{
-		I_ProfileIcon.Loading = true;
-		FLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
-		ProfileManager.MergeProfile(obj, Form);
-		AnimationHandler.Animate(P_Profiles, Size.Empty, 2, AnimationOption.IgnoreHeight);
-	}
-
-	private void Ctrl_LoadProfile(Profile obj)
+	internal void Ctrl_LoadProfile(Profile obj)
 	{
 		I_ProfileIcon.Loading = true;
 		L_CurrentProfile.Text = obj.Name;
 		FLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
 		ProfileManager.SetProfile(obj, Form);
-		AnimationHandler.Animate(P_Profiles, Size.Empty, 2, AnimationOption.IgnoreHeight);
 	}
 
 	private void LoadProfile(Profile profile)
@@ -138,6 +98,7 @@ public partial class PC_Profiles : PanelContent
 
 		I_ProfileIcon.Image = profile.GetIcon();
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
+		B_TempProfile.Visible = !profile.Temporary;
 		FLP_Options.Enabled = !profile.Temporary;
 
 		B_EditName.Visible = B_Save.Visible = !profile.Temporary && !TB_Name.Visible;
@@ -145,13 +106,20 @@ public partial class PC_Profiles : PanelContent
 		I_ProfileIcon.Loading = false;
 		L_CurrentProfile.Text = profile.Name;
 		CB_AutoSave.Checked = profile.AutoSave;
+
 		CB_NoWorkshop.Checked = profile.LaunchSettings.NoWorkshop;
 		CB_NoAssets.Checked = profile.LaunchSettings.NoAssets;
 		CB_NoMods.Checked = profile.LaunchSettings.NoMods;
 		CB_LHT.Checked = profile.LaunchSettings.LHT;
+		CB_UseCitiesExe.Checked = profile.LaunchSettings.UseCitiesExe;
+		CB_UnityProfiler.Checked = profile.LaunchSettings.UnityProfiler;
+		CB_DebugMono.Checked = profile.LaunchSettings.DebugMono;
+		CB_LoadSave.Checked = profile.LaunchSettings.LoadSaveGame;
 		TB_SavePath.Text = profile.LaunchSettings.SaveToLoad;
+
 		CB_LoadUsed.Checked = profile.LsmSettings.LoadUsed;
 		CB_LoadEnabled.Checked = profile.LsmSettings.LoadEnabled;
+		CB_SkipFile.Checked = profile.LsmSettings.UseSkipFile;
 		TB_SkipFile.Text = profile.LsmSettings.SkipFile;
 
 		if (profile.ForAssetEditor)
@@ -180,14 +148,21 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.AutoSave = CB_AutoSave.Checked;
 		CentralManager.CurrentProfile.ForGameplay = T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option1;
 		CentralManager.CurrentProfile.ForAssetEditor = T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option2;
+
 		CentralManager.CurrentProfile.LaunchSettings.NoWorkshop = CB_NoWorkshop.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.NoAssets = CB_NoAssets.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.NoMods = CB_NoMods.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.LHT = CB_LHT.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = TB_SavePath.Text;
+		CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.DebugMono = CB_DebugMono.Checked;
+
 		CentralManager.CurrentProfile.LsmSettings.SkipFile = TB_SkipFile.Text;
 		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
 		CentralManager.CurrentProfile.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
+		CentralManager.CurrentProfile.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
 
 		ProfileManager.Save(CentralManager.CurrentProfile);
 	}
@@ -196,27 +171,8 @@ public partial class PC_Profiles : PanelContent
 	{
 		if (!I_ProfileIcon.Loading)
 		{
-			AnimationHandler.Animate(P_Profiles, UI.Scale(new Size(P_Profiles.Width == 0 ? 320 : 0, 1), UI.FontScale), 2, AnimationOption.IgnoreHeight);
+			Form.PushPanel<PC_ProfileList>(null);
 		}
-	}
-
-	public override void GlobalMouseMove(Point p)
-	{
-		if (P_Profiles.Width == 0)
-		{
-			return;
-		}
-
-		var animationOpening = AnimationHandler.GetAnimation(P_Profiles, AnimationOption.IgnoreHeight | AnimationOption.IgnoreY | AnimationOption.IgnoreX);
-
-		if (animationOpening != null && animationOpening.Animating && animationOpening.NewBounds.Width != 0)
-		{
-			return;
-		}
-
-		var shouldClose = !new Rectangle(P_Profiles.PointToScreen(Point.Empty), P_Profiles.Size).Pad(-100).Contains(p);
-
-		AnimationHandler.Animate(P_Profiles, UI.Scale(new Size(shouldClose ? 0 : 320, 1), UI.FontScale), 2, AnimationOption.IgnoreHeight);
 	}
 
 	private void B_NewProfile_Click(object sender, EventArgs e)
@@ -245,11 +201,10 @@ public partial class PC_Profiles : PanelContent
 
 		if (!ProfileManager.Save(newProfile))
 		{
-			ShowPrompt("Could not create a new profile, make sure your folder settings are set up correctly in the options panel", icon: PromptIcons.Error);
+			ShowPrompt(Locale.ProfileCreationFailed, icon: PromptIcons.Error);
 			return;
 		}
 
-		FLP_Profiles.Controls.SetChildIndex(AddProfile(newProfile), 1);
 		ProfileManager.AddProfile(newProfile);
 
 		ProfileManager.SetProfile(newProfile, Form);
@@ -260,7 +215,6 @@ public partial class PC_Profiles : PanelContent
 		TLP_Main.Visible = true;
 		TLP_New.Visible = false;
 		B_EditName_Click(sender, e);
-		AnimationHandler.Animate(P_Profiles, Size.Empty, 2, AnimationOption.IgnoreHeight);
 	}
 
 	private void CopyProfile_Click(object sender, EventArgs e)
@@ -275,7 +229,6 @@ public partial class PC_Profiles : PanelContent
 			return;
 		}
 
-		FLP_Profiles.Controls.SetChildIndex(AddProfile(newProfile), 1);
 		ProfileManager.AddProfile(newProfile);
 
 		ProfileManager.SetProfile(newProfile, Form);
@@ -286,7 +239,6 @@ public partial class PC_Profiles : PanelContent
 		TLP_Main.Visible = true;
 		TLP_New.Visible = false;
 		B_EditName_Click(sender, e);
-		AnimationHandler.Animate(P_Profiles, Size.Empty, 2, AnimationOption.IgnoreHeight);
 	}
 
 	private void B_Cancel_Click(object sender, EventArgs e)
@@ -411,5 +363,10 @@ public partial class PC_Profiles : PanelContent
 		{
 			ShowPrompt(Locale.CouldNotCreateProfile, icon: PromptIcons.Error);
 		}
+	}
+
+	private void B_TempProfile_Click(object sender, EventArgs e)
+	{
+		ProfileManager.SetProfile(Profile.TemporaryProfile, Form);
 	}
 }

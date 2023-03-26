@@ -27,7 +27,7 @@ public static class ProfileManager
 		{
 			yield return Profile.TemporaryProfile;
 
-			foreach (var profile in _profiles.OrderByDescending(x => x.LastEditDate))
+			foreach (var profile in _profiles)
 			{
 				yield return profile;
 			}
@@ -66,17 +66,20 @@ public static class ProfileManager
 
 		CurrentProfile ??= Profile.TemporaryProfile;
 
-		new BackgroundAction(LoadAllProfiles).Run();
+		if (!CommandUtil.NoWindow)
+		{
+			new BackgroundAction(LoadAllProfiles).Run();
+		}
 	}
 
 	private static Profile? LoadCurrentProfile()
 	{
-		if (CentralManager.SessionSettings.CurrentProfile is null or "")
+		if (CentralManager.SessionSettings.CurrentProfile is null or "" && CommandUtil.PreSelectedProfile is null or "")
 		{
 			return null;
 		}
 
-		var profile = Path.Combine(LocationManager.LotProfilesAppDataPath, CentralManager.SessionSettings.CurrentProfile + ".json");
+		var profile = Path.Combine(LocationManager.LotProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? CentralManager.SessionSettings.CurrentProfile) + ".json");
 
 		if (!File.Exists(profile))
 		{
@@ -89,6 +92,7 @@ public static class ProfileManager
 		{
 			newProfile.Name = Path.GetFileNameWithoutExtension(profile);
 			newProfile.LastEditDate = File.GetLastWriteTime(profile);
+			newProfile.DateCreated = File.GetCreationTime(profile);
 
 			return newProfile;
 		}
@@ -121,7 +125,7 @@ public static class ProfileManager
 				}
 
 				var legacyProfile = LoadOrderTool.Legacy.LoadOrderProfile.Deserialize(profile);
-				var newProfile = legacyProfile.ToLot2Profile(Path.GetFileNameWithoutExtension(profile));
+				var newProfile = legacyProfile?.ToLot2Profile(Path.GetFileNameWithoutExtension(profile));
 
 				if (newProfile != null)
 				{
@@ -274,7 +278,7 @@ public static class ProfileManager
 		}
 	}
 
-	internal static void SetProfile(Profile profile, BasePanelForm form)
+	internal static void SetProfile(Profile profile, BasePanelForm? form)
 	{
 		CurrentProfile = profile;
 
@@ -288,7 +292,14 @@ public static class ProfileManager
 			return;
 		}
 
-		new BackgroundAction("Applying profile", apply).Run();
+		if (form is null)
+		{
+			apply();
+		}
+		else
+		{
+			new BackgroundAction("Applying profile", apply).Run();
+		}
 
 		void apply()
 		{
@@ -343,7 +354,7 @@ public static class ProfileManager
 				asset.IsIncluded = false;
 			}
 
-			if (missingMods.Count > 0 || missingAssets.Count > 0)
+			if ((missingMods.Count > 0 || missingAssets.Count > 0) && form is not null)
 			{
 				UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(form, missingMods, missingAssets);
 			}
@@ -356,12 +367,15 @@ public static class ProfileManager
 
 			ProfileChanged?.Invoke(profile);
 
-			CentralManager.SessionSettings.CurrentProfile = profile.Name;
-			CentralManager.SessionSettings.Save();
-
 			try
 			{ SaveLsmSettings(profile); }
 			catch (Exception ex) { Log.Exception(ex, "Failed to apply the LSM settings for profile " + profile.Name); }
+
+			if (!CommandUtil.NoWindow)
+			{
+				CentralManager.SessionSettings.CurrentProfile = profile.Name;
+				CentralManager.SessionSettings.Save();
+			}
 
 			disableAutoSave = false;
 		}
@@ -394,6 +408,7 @@ public static class ProfileManager
 				{
 					newProfile.Name = Path.GetFileNameWithoutExtension(profile);
 					newProfile.LastEditDate = File.GetLastWriteTime(profile);
+					newProfile.DateCreated = File.GetCreationTime(profile);
 
 					profiles.Add(newProfile);
 				}
@@ -594,7 +609,7 @@ public static class ProfileManager
 		current.loadEnabled = profile.LsmSettings.LoadEnabled;
 		current.loadUsed = profile.LsmSettings.LoadUsed;
 		current.skipFile = profile.LsmSettings.SkipFile;
-		current.skipPrefabs = File.Exists(profile.LsmSettings.SkipFile);
+		current.skipPrefabs = profile.LsmSettings.UseSkipFile;
 
 		current.SyncAndSerialize();
 	}

@@ -1,10 +1,6 @@
-﻿using Extensions;
-
-using LoadOrderToolTwo.Utilities;
-using LoadOrderToolTwo.Utilities.Managers;
+﻿using LoadOrderToolTwo.Utilities;
 
 using System.IO;
-using System.Linq;
 
 using IoPath = System.IO.Path;
 

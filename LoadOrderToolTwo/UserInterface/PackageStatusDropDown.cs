@@ -8,11 +8,8 @@ using SlickControls;
 using SlickControls.Controls.Form;
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface;
@@ -49,8 +46,8 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 		using (icon.Color(hoverState.HasFlag(HoverState.Pressed) ? foreColor : color))
 		{
 			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
-			
-			var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height) / 2, 0, Font.Height);
+
+			var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - Font.Height) / 2), 0, Font.Height);
 
 			textRect.Width = rectangle.Width - textRect.X;
 

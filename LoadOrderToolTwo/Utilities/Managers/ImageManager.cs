@@ -16,12 +16,19 @@ public static class ImageManager
 {
 	private static readonly Dictionary<string, object> _lockObjects = new();
 	private static readonly HashSet<string> _badURLs;
+	private static readonly System.Timers.Timer _cacheClearTimer;
+	private static readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = new Dictionary<string, (Bitmap, DateTime)>();
+	private static readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(1);
 
 	static ImageManager()
 	{
 		ISave.Load(out string[] badURLs, "BadSteamURLs.json");
 
 		_badURLs = new(badURLs ?? new string[0]);
+
+		_cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
+		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
+		_cacheClearTimer.Start();
 	}
 
 	private static object LockObj(string path)
@@ -42,23 +49,40 @@ public static class ImageManager
 		return (Bitmap)Properties.Resources.ResourceManager.GetObject(UI.FontScale >= 1.25 ? name : $"{name}_16", Properties.Resources.Culture);
 	}
 
-	public static FileInfo File(string url)
+	public static FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = Path.Combine(ISave.DocsFolder, "Thumbs", Path.GetFileNameWithoutExtension(url.TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png"));
+		var filePath = Path.Combine(ISave.DocsFolder, "Thumbs", fileName ?? (Path.GetFileNameWithoutExtension(url.TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png")));
 
 		return new FileInfo(filePath);
 	}
 
-	public static Bitmap? GetImage(string? url) => GetImage(url, false);
-
-	public static Bitmap? GetImage(string? url, bool localOnly)
+	public static Bitmap? GetImage(string? url)
 	{
-		if (url is null || !Ensure(url, localOnly))
+		var image = GetImage(url, false);
+
+		if (image is not null)
+		{
+			return new(image);
+		}
+
+		return null;
+	}
+
+	public static Bitmap? GetImage(string? url, bool localOnly, string? fileName = null)
+	{
+		if (url is null || !Ensure(url, localOnly, fileName))
 		{
 			return null;
 		}
 
-		var filePath = File(url);
+		var cache = GetCache(url);
+
+		if (cache != null)
+		{
+			return cache;
+		}
+
+		var filePath = File(url, fileName);
 
 		lock (LockObj(url))
 		{
@@ -66,7 +90,7 @@ public static class ImageManager
 			{
 				try
 				{
-					return (Bitmap)Image.FromFile(filePath.FullName);
+					return AddCache(url, (Bitmap)Image.FromFile(filePath.FullName));
 				}
 				catch { }
 			}
@@ -75,14 +99,14 @@ public static class ImageManager
 		return null;
 	}
 
-	public static bool Ensure(string? url, bool localOnly = false)
+	public static bool Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true)
 	{
 		if (url is null or "" || _badURLs.Contains(url!))
 		{
 			return false;
 		}
 
-		var filePath = File(url);
+		var filePath = File(url, fileName);
 
 		lock (LockObj(url))
 		{
@@ -97,7 +121,7 @@ public static class ImageManager
 			}
 
 			var tries = 1;
-		start:
+			start:
 
 			if (!ConnectionHandler.IsConnected)
 			{
@@ -114,12 +138,14 @@ public static class ImageManager
 
 				var squareSize = img.Width <= 64 ? img.Width : 256;
 				var size = img.Size.GetProportionalDownscaledSize(squareSize);
-				using var image = new Bitmap(squareSize, squareSize);
+				using var image = square ? new Bitmap(squareSize, squareSize) : new Bitmap(size.Width, size.Height);
 
 				using (var imageGraphics = Graphics.FromImage(image))
 				{
 					imageGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-					imageGraphics.DrawImage(img, new Rectangle((squareSize - size.Width) / 2, (squareSize - size.Height) / 2, size.Width, size.Height));
+					imageGraphics.DrawImage(img, square
+						? new Rectangle((squareSize - size.Width) / 2, (squareSize - size.Height) / 2, size.Width, size.Height)
+						: new Rectangle(Point.Empty, size));
 				}
 
 				Directory.GetParent(filePath.FullName).Create();
@@ -161,6 +187,60 @@ public static class ImageManager
 					catch (Exception ex2) { Log.Exception(ex2, "Too many images are failing to load"); }
 
 					return false;
+				}
+			}
+		}
+	}
+
+	private static Bitmap AddCache(string key, Bitmap image)
+	{
+		if (key is null or "")
+		{
+			return image;
+		}
+
+		if (_cache.ContainsKey(key))
+		{
+			_cache[key] = (image, DateTime.Now);
+		}
+		else
+		{
+			_cache.Add(key, (image, DateTime.Now));
+		}
+
+		return image;
+	}
+
+	public static Bitmap? GetCache(string key)
+	{
+		if (_cache.TryGetValue(key, out var value))
+		{
+			if (DateTime.Now - value.lastAccessed > _expirationTime)
+			{
+				value.image.Dispose();
+				_cache.Remove(key);
+				return null;
+			}
+
+			value.lastAccessed = DateTime.Now;
+			return value.image;
+		}
+
+		return null;
+	}
+
+	private static void CacheClearTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+	{
+		var keys = _cache.Keys.ToList();
+
+		foreach (var key in keys)
+		{
+			if (_cache.TryGetValue(key, out var value))
+			{
+				if (DateTime.Now - value.lastAccessed > _expirationTime)
+				{
+					value.image.Dispose();
+					_cache.Remove(key);
 				}
 			}
 		}

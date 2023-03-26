@@ -1,6 +1,4 @@
-using System;
 using System.IO;
-using System.Xml.Serialization;
 
 namespace LoadOrderShared;
 public class ItemInfo
@@ -42,8 +40,8 @@ public class LoadOrderConfig
 	public float StatusY = 10;
 
 	public ModInfo[] Mods = new ModInfo[0];
-	public AssetInfo[] Assets { get; set; } = new AssetInfo[0];
-	public string[] ExcludedDLCs = new string[0];
+	public AssetInfo[] Assets = new AssetInfo[0];
+	public uint[] RemovedDLCs = new uint[0];
 
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
 

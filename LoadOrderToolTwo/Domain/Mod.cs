@@ -1,10 +1,8 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.ColossalOrder;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
-using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
@@ -40,10 +38,10 @@ public class Mod : IPackage
 	public bool Workshop => ((IPackage)Package).Workshop;
 	public SteamUser? Author { get => ((IPackage)Package).Author; set => ((IPackage)Package).Author = value; }
 	public string? Class { get => ((IPackage)Package).Class; set => ((IPackage)Package).Class = value; }
-	public Bitmap? IconImage { get => ((IPackage)Package).IconImage; }
+	public Bitmap? IconImage => ((IPackage)Package).IconImage;
 	public string? IconUrl { get => ((IPackage)Package).IconUrl; set => ((IPackage)Package).IconUrl = value; }
-	public long LocalSize { get => ((IPackage)Package).LocalSize; }
-	public DateTime LocalTime { get => ((IPackage)Package).LocalTime; }
+	public long LocalSize => ((IPackage)Package).LocalSize;
+	public DateTime LocalTime => ((IPackage)Package).LocalTime;
 	public bool RemovedFromSteam { get => ((IPackage)Package).RemovedFromSteam; set => ((IPackage)Package).RemovedFromSteam = value; }
 	public long ServerSize { get => ((IPackage)Package).ServerSize; set => ((IPackage)Package).ServerSize = value; }
 	public DateTime ServerTime { get => ((IPackage)Package).ServerTime; set => ((IPackage)Package).ServerTime = value; }
@@ -52,7 +50,7 @@ public class Mod : IPackage
 	public bool SteamInfoLoaded { get => ((IPackage)Package).SteamInfoLoaded; set => ((IPackage)Package).SteamInfoLoaded = value; }
 	public string[]? Tags { get => ((IPackage)Package).Tags; set => ((IPackage)Package).Tags = value; }
 	public string? SteamDescription { get => ((IPackage)Package).SteamDescription; set => ((IPackage)Package).SteamDescription = value; }
-	public Bitmap? AuthorIconImage { get => ((IPackage)Package).AuthorIconImage; }
+	public Bitmap? AuthorIconImage => ((IPackage)Package).AuthorIconImage;
 
 	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
 
@@ -67,7 +65,10 @@ public class Mod : IPackage
 		return 901043656 + EqualityComparer<string>.Default.GetHashCode(FileName);
 	}
 
-	public override string ToString() => Name;
+	public override string ToString()
+	{
+		return Name;
+	}
 
 	public static bool operator ==(Mod? left, Mod? right)
 	{

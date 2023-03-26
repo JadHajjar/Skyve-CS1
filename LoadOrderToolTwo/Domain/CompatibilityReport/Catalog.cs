@@ -86,10 +86,10 @@ public class Catalog
 
 		foreach (var item in CentralManager.Mods)
 		{
-			subscriptionCompatibilityIndex[item.SteamId]=new List<Compatibility>();
+			subscriptionCompatibilityIndex[item.SteamId] = new List<Compatibility>();
 		}
 
-		foreach (Compatibility catalogCompatibility in Compatibilities)
+		foreach (var catalogCompatibility in Compatibilities)
 		{
 			if (subscriptionIDIndex.Contains(catalogCompatibility.FirstModID) && subscriptionIDIndex.Contains(catalogCompatibility.SecondModID))
 			{
@@ -106,7 +106,7 @@ public class Catalog
 
 	public Author? GetAuthor(ulong authorID, string authorUrl)
 	{
-        return authorIDIndex.ContainsKey(authorID) ? authorIDIndex[authorID] : authorUrlIndex.ContainsKey(authorUrl ?? "") ? authorUrlIndex[authorUrl ?? ""] : null;
+		return authorIDIndex.ContainsKey(authorID) ? authorIDIndex[authorID] : authorUrlIndex.ContainsKey(authorUrl ?? "") ? authorUrlIndex[authorUrl ?? ""] : null;
 	}
 	public bool IsGroupMember(ulong steamID)
 	{
@@ -115,9 +115,9 @@ public class Catalog
 
 	public bool IsValidID(ulong steamID, bool allowBuiltin = true, bool shouldExist = true)
 	{
-		bool valid = (steamID > 999999);
+		var valid = steamID > 999999;
 
-		bool exists = modIndex.ContainsKey(steamID);
+		var exists = modIndex.ContainsKey(steamID);
 
 		return valid && (shouldExist ? exists : !exists);
 	}
@@ -132,7 +132,7 @@ public class Catalog
 		return CentralManager.Packages.Any(x => x.SteamId == steamID && (x.Mod?.IsIncluded ?? true) && (x.Mod?.IsEnabled ?? true)) && modIndex.ContainsKey(steamID) ? modIndex[steamID] : null;
 	}
 
-    public List<Compatibility> GetSubscriptionCompatibilities(ulong steamID)
+	public List<Compatibility> GetSubscriptionCompatibilities(ulong steamID)
 	{
 		return GetSubscription(steamID) == null || !subscriptionCompatibilityIndex.ContainsKey(steamID) ? new List<Compatibility>() : subscriptionCompatibilityIndex[steamID];
 	}

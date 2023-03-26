@@ -73,17 +73,9 @@ internal static class CentralManager
 	{
 		if (!SessionSettings.FirstTimeSetupCompleted)
 		{
-			LocationManager.RunFirstTimeSetup();
-
-			if (LocationManager.Platform is Platform.Windows)
-			{
-				ContentUtil.CreateShortcut();
-			}
-
-			SessionSettings.FirstTimeSetupCompleted = true;
-			SessionSettings.Save();
-
-			File.WriteAllText(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Load Order Tool from the main menu after deleting this file.");
+			try
+			{ RunFirstTimeSetup(); }
+			catch (Exception ex) { Log.Exception(ex, "Failed to complete the First Time Setup", true); }
 		}
 
 		var content = ContentUtil.LoadContents();
@@ -95,6 +87,21 @@ internal static class CentralManager
 		IsContentLoaded = true;
 
 		ContentLoaded?.Invoke();
+
+		if (CommandUtil.PreSelectedProfile == CurrentProfile.Name)
+		{
+			ProfileManager.SetProfile(CurrentProfile, null);
+		}
+
+		if (CommandUtil.LaunchOnLoad)
+		{
+			CitiesManager.Launch();
+		}
+
+		if (CommandUtil.NoWindow)
+		{
+			return;
+		}
 
 		ContentUtil.StartListeners();
 
@@ -123,6 +130,8 @@ internal static class CentralManager
 
 		ConnectionHandler.WhenConnected(async () =>
 		{
+			SteamUtil.LoadDlcs();
+
 			var result = await SteamUtil.GetWorkshopInfoAsync(Packages.Where(x => x.Workshop).Select(x => x.SteamId).ToArray());
 
 			foreach (var package in Packages)
@@ -156,6 +165,21 @@ internal static class CentralManager
 
 			_delayedWorkshopInfoUpdated.Run();
 		});
+	}
+
+	private static void RunFirstTimeSetup()
+	{
+		LocationManager.RunFirstTimeSetup();
+
+		if (LocationManager.Platform is Platform.Windows)
+		{
+			ContentUtil.CreateShortcut();
+		}
+
+		SessionSettings.FirstTimeSetupCompleted = true;
+		SessionSettings.Save();
+
+		File.WriteAllText(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Load Order Tool from the main menu after deleting this file.");
 	}
 
 	private static void AnalyzePackages(List<Package> content)
@@ -231,7 +255,7 @@ internal static class CentralManager
 		}
 		else if (iPackage is Mod mod)
 		{
-			_delayedModInformationUpdated.Run(	);
+			_delayedModInformationUpdated.Run();
 			_delayedPackageInformationUpdated.Run();
 		}
 		else if (iPackage is Asset asset)

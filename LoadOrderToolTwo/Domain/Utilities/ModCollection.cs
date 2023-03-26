@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Domain.Utilities;
 internal class ModCollection
 {
-	private readonly Dictionary<string, List<Mod>> _modList=new();
+	private readonly Dictionary<string, List<Mod>> _modList = new();
 
 	public void AddMod(Mod mod)
 	{

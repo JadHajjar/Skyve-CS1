@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Domain.Utilities;
 internal class CachedSaveLibrary<TItem, TKey, TValue> where TItem : CachedSaveItem<TKey, TValue>
@@ -21,12 +18,16 @@ internal class CachedSaveLibrary<TItem, TKey, TValue> where TItem : CachedSaveIt
 		if (entry.IsStateValid())
 		{
 			lock (_dictionary)
+			{
 				_dictionary[key] = entry;
+			}
 		}
 		else
 		{
 			lock (_dictionary)
+			{
 				_dictionary.Remove(key);
+			}
 		}
 	}
 

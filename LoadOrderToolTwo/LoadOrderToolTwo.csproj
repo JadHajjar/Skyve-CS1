@@ -70,12 +70,14 @@
     <Compile Update="UserInterface\PackageStatusDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Panels\PC_Assets.cs">
+    <Compile Update="UserInterface\Panels\PC_Assets.cs" />
+    <Compile Update="UserInterface\Panels\PC_ContentList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Panels\PC_Packages.cs">
+    <Compile Update="UserInterface\Panels\PC_ProfileList.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Panels\PC_Packages.cs" />
     <Compile Update="UserInterface\Panels\PC_ModUtilities.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -83,6 +85,15 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\LanguageDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\ProfileSortingDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\ProfilesDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\TagsDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\SortingDropDown.cs">
@@ -129,7 +140,7 @@
     </GetAssemblyIdentity>
     <Message Importance="high" Text="$(SolutionName)" />
     <PropertyGroup>
-      <DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\LoadOrder\Tool\</DeployDir>
+      <DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\Tool\</DeployDir>
     </PropertyGroup>
 	  <RemoveDir Directories="$(DeployDir)" />
 	  <Copy SourceFiles="$(OutDir)\LoadOrderToolTwo.exe" DestinationFiles="$(DeployDir)\LoadOrderToolTwo.exe" />

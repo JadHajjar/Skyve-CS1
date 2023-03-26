@@ -13,7 +13,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -96,7 +95,7 @@ public static class CitiesManager
 				}
 			}
 
-			if (CentralManager.CurrentProfile.LaunchSettings.ProfilerCities)
+			if (CentralManager.CurrentProfile.LaunchSettings.UnityProfiler)
 			{
 				success = CitiesFile.Instance.UseDebug();
 			}
@@ -110,7 +109,7 @@ public static class CitiesManager
 				if (CitiesFile.Instance.ReleaseIsUsed() is bool bReleaseCities)
 				{
 					Log.Warning("reverting CentralManager.CurrentProfile.LaunchSettings.ReleaseMono to " + bReleaseCities);
-					CentralManager.CurrentProfile.LaunchSettings.ProfilerCities = !bReleaseCities;
+					CentralManager.CurrentProfile.LaunchSettings.UnityProfiler = !bReleaseCities;
 				}
 			}
 		}
