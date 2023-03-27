@@ -313,6 +313,7 @@ public static class SteamUtil
 	{
 		new BackgroundAction("Loading DLCs", async () =>
 		{
+			Log.Info($"Loading DLCs..");
 			ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
 
 			Dlcs = cache ?? new();
@@ -321,6 +322,7 @@ public static class SteamUtil
 
 			if (!dlcs.ContainsKey("255710"))
 			{
+				Log.Info($"Failed to load DLCs, steam info returned invalid content..");
 				return;
 			}
 
@@ -343,6 +345,8 @@ public static class SteamUtil
 					});
 				}
 			}
+
+			Log.Info($"DLCs ({newDlcs.Count}) loaded..");
 
 			ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 

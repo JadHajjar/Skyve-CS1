@@ -49,7 +49,6 @@ internal static class Program
 
 			IsRunning = true;
 
-			ISave.CustomSaveDirectory = GetFolderPath(SpecialFolder.LocalApplicationData);
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
 			if (!CentralManager.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]) && !Debugger.IsAttached)

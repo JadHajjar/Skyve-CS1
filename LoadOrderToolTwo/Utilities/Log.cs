@@ -61,7 +61,7 @@ public static class Log
 				return;
 			}
 
-			var folder = Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), ISave.AppName, "Logs");
+			var folder = Path.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
 			LogFilePath = Path.Combine(folder, LogFileName);
 
 			if (File.Exists(LogFilePath))

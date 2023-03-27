@@ -9,7 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using static System.Environment;
+using static System.Windows.Forms.AxHost;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
 internal static class CentralManager
@@ -22,14 +27,14 @@ internal static class CentralManager
 	public static event Action? ModInformationUpdated;
 	public static event Action? AssetInformationUpdated;
 
-	private static readonly DelayedAction _delayedWorkshopInfoUpdated = new(300, () => WorkshopInfoUpdated?.Invoke());
-	private static readonly DelayedAction _delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
-	private static readonly DelayedAction _delayedModInformationUpdated = new(300, () => ModInformationUpdated?.Invoke());
-	private static readonly DelayedAction _delayedAssetInformationUpdated = new(300, () => AssetInformationUpdated?.Invoke());
+	private static readonly DelayedAction _delayedWorkshopInfoUpdated;
+	private static readonly DelayedAction _delayedPackageInformationUpdated;
+	private static readonly DelayedAction _delayedModInformationUpdated;
+	private static readonly DelayedAction _delayedAssetInformationUpdated;
 
 	public static Profile CurrentProfile => ProfileManager.CurrentProfile;
 	public static bool IsContentLoaded { get; private set; }
-	public static SessionSettings SessionSettings { get; } = ISave.Load<SessionSettings>(nameof(SessionSettings) + ".json");
+	public static SessionSettings SessionSettings { get; }
 	public static IEnumerable<Package> Packages => packages ?? new();
 
 	public static IEnumerable<Mod> Mods
@@ -69,6 +74,31 @@ internal static class CentralManager
 		}
 	}
 
+	static CentralManager()
+	{
+		ISave.CustomSaveDirectory = Directory.GetParent(Application.ExecutablePath).FullName;
+
+		try
+		{
+			var folder = GetFolderPath(SpecialFolder.LocalApplicationData);
+
+			Directory.CreateDirectory(Path.Combine(folder, ISave.AppName));
+
+			if (Directory.Exists(Path.Combine(folder, ISave.AppName)))
+			{
+				ISave.CustomSaveDirectory = folder;
+			}
+		}
+		catch { }
+
+		SessionSettings = ISave.Load<SessionSettings>(nameof(SessionSettings) + ".json");
+
+		_delayedWorkshopInfoUpdated = new(300, () => WorkshopInfoUpdated?.Invoke());
+		_delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
+		_delayedModInformationUpdated = new(300, () => ModInformationUpdated?.Invoke());
+		_delayedAssetInformationUpdated = new(300, () => AssetInformationUpdated?.Invoke());
+	}
+
 	public static void Start()
 	{
 		if (!SessionSettings.FirstTimeSetupCompleted)
@@ -78,9 +108,16 @@ internal static class CentralManager
 			catch (Exception ex) { Log.Exception(ex, "Failed to complete the First Time Setup", true); }
 		}
 
+		Log.Info("Loading packages..");
+
 		var content = ContentUtil.LoadContents();
 
+		Log.Info($"Loaded {content.Count} packages");
+		Log.Info($"Analyzing packages..");
+
 		AnalyzePackages(content);
+
+		Log.Info($"Finished analyzing packages..");
 
 		packages = content;
 
@@ -90,25 +127,34 @@ internal static class CentralManager
 
 		if (CommandUtil.PreSelectedProfile == CurrentProfile.Name)
 		{
+			Log.Info($"[Command] Applying Profile ({CurrentProfile.Name})..");
 			ProfileManager.SetProfile(CurrentProfile, null);
 		}
 
 		if (CommandUtil.LaunchOnLoad)
 		{
+			Log.Info($"[Command] Launching Cities..");
 			CitiesManager.Launch();
 		}
 
 		if (CommandUtil.NoWindow)
 		{
+			Log.Info($"[Command] Closing App..");
 			return;
 		}
 
+		Log.Info($"Starting Listeners..");
+
 		ContentUtil.StartListeners();
+
+		Log.Info($"Listeners Started");
+		Log.Info($"Loading Steam Cache..");
 
 		var cachedSteamInfo = SteamUtil.GetCachedInfo();
 
 		if (cachedSteamInfo != null)
 		{
+			Log.Info($"Applying Steam Cache..");
 			foreach (var package in Packages)
 			{
 				if (cachedSteamInfo.ContainsKey(package.SteamId))
@@ -127,13 +173,17 @@ internal static class CentralManager
 				InformationUpdate(package);
 			});
 		}
+		else
+			Log.Info($"No Steam Cache");
 
-		ConnectionHandler.WhenConnected(async () =>
+		if (!ConnectionHandler.WhenConnected(async () =>
 		{
 			SteamUtil.LoadDlcs();
 
+			Log.Info($"Loading Steam info from the web..");
 			var result = await SteamUtil.GetWorkshopInfoAsync(Packages.Where(x => x.Workshop).Select(x => x.SteamId).ToArray());
 
+			Log.Info($"Applying updated steam info..");
 			foreach (var package in Packages)
 			{
 				if (result.ContainsKey(package.SteamId))
@@ -144,6 +194,7 @@ internal static class CentralManager
 
 			_delayedWorkshopInfoUpdated.Run();
 
+			Log.Info($"Loading thumbnails..");
 			Parallel.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name), (package, state) =>
 			{
 				if (!string.IsNullOrWhiteSpace(package.IconUrl))
@@ -163,13 +214,23 @@ internal static class CentralManager
 				}
 			});
 
+			Log.Info($"Load Complete");
 			_delayedWorkshopInfoUpdated.Run();
-		});
+		}))
+		{
+			_delayedWorkshopInfoUpdated.Run();
+
+			Log.Warning("Not connected to the internet");
+		}
 	}
 
 	private static void RunFirstTimeSetup()
 	{
+		Log.Info("Running First Time Setup");
+
 		LocationManager.RunFirstTimeSetup();
+
+		Log.Info("First Time Setup Completed");
 
 		if (LocationManager.Platform is Platform.Windows)
 		{
@@ -178,6 +239,8 @@ internal static class CentralManager
 
 		SessionSettings.FirstTimeSetupCompleted = true;
 		SessionSettings.Save();
+
+		Log.Info("Saved Session Settings");
 
 		File.WriteAllText(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Load Order Tool from the main menu after deleting this file.");
 	}
@@ -206,6 +269,8 @@ internal static class CentralManager
 				ModLogicManager.Analyze(package.Mod);
 			}
 		}
+
+		Log.Info($"Applying analysis results..");
 
 		ModLogicManager.ApplyRequiredStates();
 	}
