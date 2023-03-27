@@ -157,7 +157,7 @@ public static class CitiesManager
 			args.Add("-LHT");
 		}
 
-		if (File.Exists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
+		if (CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame && File.Exists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
 		{
 			args.Add("--loadSave=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
 		}

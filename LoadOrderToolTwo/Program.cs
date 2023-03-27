@@ -52,7 +52,7 @@ internal static class Program
 			ISave.CustomSaveDirectory = GetFolderPath(SpecialFolder.LocalApplicationData);
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
-			if (!CentralManager.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
+			if (!CentralManager.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]) && !Debugger.IsAttached)
 			{
 				MessagePrompt.Show("Please enable the mod inside Cities: Skylines first before using the tool", "Set-up Incomplete", PromptButtons.OK, PromptIcons.Hand);
 				return;

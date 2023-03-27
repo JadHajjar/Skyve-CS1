@@ -80,14 +80,14 @@ internal class LocationManager
 
 	public static string CitiesExe => Platform switch
 	{
-		Platform.MacOSX => "Cities",
+		Platform.MacOSX => "Cities_Loader.sh",
 		Platform.Linux => "Cities.x64",
 		Platform.Windows or _ => "Cities.exe",
 	};
 
 	public static string SteamExe => Platform switch
 	{
-		Platform.MacOSX => "Steam",
+		Platform.MacOSX => Path.Combine(Path.Combine("Steam.app", "Contents"), "steam_osx"),
 		Platform.Linux => "Steam",
 		Platform.Windows or _ => "Steam.exe",
 	};
@@ -217,7 +217,10 @@ internal class LocationManager
 
 			externalConfig.Save();
 
-			File.Copy(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Path.Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
+			if (File.Exists(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")))
+			{
+				File.Copy(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Path.Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
+			}
 		}
 	}
 
