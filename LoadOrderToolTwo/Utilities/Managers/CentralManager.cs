@@ -128,7 +128,7 @@ internal static class CentralManager
 		if (CommandUtil.PreSelectedProfile == CurrentProfile.Name)
 		{
 			Log.Info($"[Command] Applying Profile ({CurrentProfile.Name})..");
-			ProfileManager.SetProfile(CurrentProfile, null);
+			ProfileManager.SetProfile(CurrentProfile);
 		}
 
 		if (CommandUtil.LaunchOnLoad)
@@ -165,7 +165,7 @@ internal static class CentralManager
 
 			_delayedWorkshopInfoUpdated.Run();
 
-			Parallel.ForEach(Packages.OrderBy(x => x.Mod == null), (package, state) =>
+			Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null), (package) =>
 			{
 				package.Status = ModsUtil.GetStatus(package, out var reason);
 				package.StatusReason = reason;
@@ -195,11 +195,11 @@ internal static class CentralManager
 			_delayedWorkshopInfoUpdated.Run();
 
 			Log.Info($"Loading thumbnails..");
-			Parallel.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name), (package, state) =>
+			Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name), async (package) =>
 			{
 				if (!string.IsNullOrWhiteSpace(package.IconUrl))
 				{
-					if (ImageManager.Ensure(package.IconUrl))
+					if (await ImageManager.Ensure(package.IconUrl))
 					{
 						InformationUpdate(package);
 					}
@@ -207,7 +207,7 @@ internal static class CentralManager
 
 				if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
 				{
-					if (ImageManager.Ensure(package.Author?.AvatarUrl))
+					if (await ImageManager.Ensure(package.Author?.AvatarUrl))
 					{
 						InformationUpdate(package);
 					}
@@ -381,7 +381,7 @@ internal static class CentralManager
 
 			if (!string.IsNullOrWhiteSpace(package.IconUrl))
 			{
-				if (ImageManager.Ensure(package.IconUrl))
+				if (await ImageManager.Ensure(package.IconUrl))
 				{
 					InformationUpdate(package);
 				}
@@ -389,7 +389,7 @@ internal static class CentralManager
 
 			if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
 			{
-				if (ImageManager.Ensure(package.Author?.AvatarUrl))
+				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
 				{
 					InformationUpdate(package);
 				}

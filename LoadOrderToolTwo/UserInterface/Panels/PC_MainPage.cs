@@ -95,7 +95,7 @@ public partial class PC_MainPage : PanelContent
 		}
 		else
 		{
-			B_StartStop.Loading = true;
+			B_StartStop.Loading = LocationManager.Platform is Platform.Windows;
 			new BackgroundAction("Starting Cities: Skylines", CitiesManager.Launch).Run();
 		}
 	}

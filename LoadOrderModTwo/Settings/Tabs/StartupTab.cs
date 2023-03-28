@@ -18,8 +18,6 @@ namespace LoadOrderMod.Settings.Tabs {
             panelHelper.AddLabel("restart required to take effect.", textColor: Color.yellow);
             panelHelper.AddSpace(10);
 
-            panelHelper.AddButton("Reset load orders", OnResetLoadOrdersClicked);
-
             panelHelper.AddCheckbox(
                 "remove ad panels",
                 ConfigUtil.Config.TurnOffSteamPanels,

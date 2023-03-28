@@ -26,7 +26,20 @@ internal class PC_Packages : PC_ContentList<Package>
 	{
 		if (CentralManager.SessionSettings.FilterOutPackagesWithOneAsset || CentralManager.SessionSettings.FilterOutPackagesWithMods)
 		{
-			return CentralManager.Packages.Where(x => !(x.Mod is not null && CentralManager.SessionSettings.FilterOutPackagesWithMods) && !(CentralManager.SessionSettings.FilterOutPackagesWithOneAsset && x.Assets?.Count() > 1));
+			return CentralManager.Packages.Where(x =>
+			{
+				if (CentralManager.SessionSettings.FilterOutPackagesWithOneAsset && (x.Assets?.Count() ?? 0) == 1)
+				{
+					return false;
+				}
+
+				if (CentralManager.SessionSettings.FilterOutPackagesWithMods && x.Mod is not null)
+				{
+					return false;
+				}
+
+				return true;
+			});
 		}
 
 		return CentralManager.Packages;

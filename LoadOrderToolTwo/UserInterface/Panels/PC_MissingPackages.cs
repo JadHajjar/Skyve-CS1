@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
@@ -120,7 +121,7 @@ public partial class PC_MissingPackages : PanelContent
 		return true;
 	}
 
-	protected override bool LoadData()
+	protected override async Task<bool> LoadDataAsync()
 	{
 		var steamIds = _workshopPackages.Keys.Distinct().ToArray();
 
@@ -138,12 +139,12 @@ public partial class PC_MissingPackages : PanelContent
 
 		foreach (var item in info.Values)
 		{
-			ImageManager.Ensure(item.ThumbnailUrl);
+			await ImageManager.Ensure(item.ThumbnailUrl);
 
 			LC_Items.Invalidate();
 		}
 
-		return base.LoadData();
+		return true;
 	}
 
 	internal static void PromptMissingPackages(BasePanelForm form, List<Profile.Mod> missingMods, List<Profile.Asset> missingAssets)

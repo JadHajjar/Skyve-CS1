@@ -8,7 +8,9 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
 
@@ -19,6 +21,7 @@ public static class ImageManager
 	private static readonly System.Timers.Timer _cacheClearTimer;
 	private static readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = new Dictionary<string, (Bitmap, DateTime)>();
 	private static readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(1);
+	private static readonly HttpClient _httpClient = new();
 
 	static ImageManager()
 	{
@@ -56,9 +59,9 @@ public static class ImageManager
 		return new FileInfo(filePath);
 	}
 
-	public static Bitmap? GetImage(string? url)
+	public static async Task<Bitmap?> GetImage(string? url)
 	{
-		var image = GetImage(url, false);
+		var image = await GetImage(url, false);
 
 		if (image is not null)
 		{
@@ -68,9 +71,9 @@ public static class ImageManager
 		return null;
 	}
 
-	public static Bitmap? GetImage(string? url, bool localOnly, string? fileName = null)
+	public static async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null)
 	{
-		if (url is null || !Ensure(url, localOnly, fileName))
+		if (url is null || !await Ensure(url, localOnly, fileName))
 		{
 			return null;
 		}
@@ -99,7 +102,7 @@ public static class ImageManager
 		return null;
 	}
 
-	public static bool Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true)
+	public static async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true)
 	{
 		if (url is null or "" || _badURLs.Contains(url!))
 		{
@@ -119,37 +122,37 @@ public static class ImageManager
 			{
 				return false;
 			}
+		}
 
-			var tries = 1;
-			start:
+		var tries = 1;
+		start:
 
-			if (!ConnectionHandler.IsConnected)
+		if (!ConnectionHandler.IsConnected)
+		{
+			return false;
+		}
+
+		try
+		{
+			using var ms = await _httpClient.GetStreamAsync(url);
+			using var img = Image.FromStream(ms);
+
+			var squareSize = img.Width <= 64 ? img.Width : 256;
+			var size = img.Size.GetProportionalDownscaledSize(squareSize);
+			using var image = square ? new Bitmap(squareSize, squareSize) : new Bitmap(size.Width, size.Height);
+
+			using (var imageGraphics = Graphics.FromImage(image))
 			{
-				return false;
+				imageGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+				imageGraphics.DrawImage(img, square
+					? new Rectangle((squareSize - size.Width) / 2, (squareSize - size.Height) / 2, size.Width, size.Height)
+					: new Rectangle(Point.Empty, size));
 			}
 
-			try
+			Directory.GetParent(filePath.FullName).Create();
+
+			lock (LockObj(url))
 			{
-				using var webClient = new WebClient();
-				var imageData = webClient.DownloadData(url);
-
-				using var ms = new MemoryStream(imageData);
-				using var img = Image.FromStream(ms);
-
-				var squareSize = img.Width <= 64 ? img.Width : 256;
-				var size = img.Size.GetProportionalDownscaledSize(squareSize);
-				using var image = square ? new Bitmap(squareSize, squareSize) : new Bitmap(size.Width, size.Height);
-
-				using (var imageGraphics = Graphics.FromImage(image))
-				{
-					imageGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-					imageGraphics.DrawImage(img, square
-						? new Rectangle((squareSize - size.Width) / 2, (squareSize - size.Height) / 2, size.Width, size.Height)
-						: new Rectangle(Point.Empty, size));
-				}
-
-				Directory.GetParent(filePath.FullName).Create();
-
 				if (filePath.FullName.EndsWith(".jpg", StringComparison.InvariantCultureIgnoreCase) || filePath.FullName.EndsWith(".jpeg", StringComparison.InvariantCultureIgnoreCase))
 				{
 					image.Save(filePath.FullName, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -158,37 +161,37 @@ public static class ImageManager
 				{
 					image.Save(filePath.FullName);
 				}
-
-				return true;
 			}
-			catch (Exception ex)
+
+			return true;
+		}
+		catch (Exception ex)
+		{
+			if (ex is WebException we && we.Response is HttpWebResponse hwr && hwr.StatusCode == HttpStatusCode.BadGateway)
 			{
-				if (ex is WebException we && we.Response is HttpWebResponse hwr && hwr.StatusCode == HttpStatusCode.BadGateway)
-				{
-					Thread.Sleep(1000);
-					goto start;
-				}
-				else if (tries < 2)
-				{
-					tries++;
-					goto start;
-				}
-				else
-				{
-					try
-					{
-						if (ConnectionHandler.IsConnected)
-						{
-							_badURLs.Add(url);
-
-							ISave.Save(_badURLs.ToList(), "BadSteamURLs.json");
-						}
-					}
-					catch (Exception ex2) { Log.Exception(ex2, "Too many images are failing to load"); }
-
-					return false;
-				}
+				Thread.Sleep(1000);
+				goto start;
 			}
+			else if (tries < 2)
+			{
+				tries++;
+				goto start;
+			}
+			else if (ex is not TaskCanceledException)
+			{
+				try
+				{
+					if (ConnectionHandler.IsConnected)
+					{
+						_badURLs.Add(url);
+
+						ISave.Save(_badURLs.ToList(), "BadSteamURLs.json");
+					}
+				}
+				catch (Exception ex2) { Log.Exception(ex2, "Too many images are failing to load"); }
+			}
+
+			return false;
 		}
 	}
 

@@ -113,6 +113,7 @@ internal class LocationManager
 		SteamPath = _folderSettings.SteamPath.TrimEnd('/', '\\');
 		VirtualGamePath = _folderSettings.VirtualGamePath.TrimEnd('/', '\\');
 		VirtualAppDataPath = _folderSettings.VirtualAppDataPath.TrimEnd('/', '\\');
+		ISave.CurrentPlatform = Platform = _folderSettings.Platform;
 	}
 
 	internal static void RunFirstTimeSetup()
@@ -204,7 +205,7 @@ internal class LocationManager
 			SteamPath = settings.SteamPath.TrimEnd('/', '\\');
 			VirtualGamePath = settings.VirtualGamePath.TrimEnd('/', '\\');
 			VirtualAppDataPath = settings.VirtualAppDataPath.TrimEnd('/', '\\');
-			Platform = settings.Platform;
+			ISave.CurrentPlatform = Platform = settings.Platform;
 
 			var externalConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 			var appSettings = externalConfig.AppSettings;
@@ -217,7 +218,7 @@ internal class LocationManager
 
 			externalConfig.Save();
 
-			if (File.Exists(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")))
+			if (File.Exists(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(Path.Combine(LotAppDataPath, "LoadOrderConfig.xml")))
 			{
 				File.Copy(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Path.Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
 			}

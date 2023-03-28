@@ -21,6 +21,7 @@ public interface IPackage
 	DateTime LocalTime { get; }
 	string Name { get; set; }
 	bool RemovedFromSteam { get; set; }
+	bool Private { get; set; }
 	long ServerSize { get; set; }
 	DateTime ServerTime { get; set; }
 	DownloadStatus Status { get; set; }

@@ -34,11 +34,11 @@ public partial class PC_ImportCollection : PanelContent
 
 		RefreshCounts();
 
-		new BackgroundAction(() =>
+		new BackgroundAction(async () =>
 		{
 			foreach (var item in LC_Items.Items)
 			{
-				ImageManager.Ensure(item.ThumbnailUrl);
+				await ImageManager.Ensure(item.ThumbnailUrl);
 			}
 		}).Run();
 	}

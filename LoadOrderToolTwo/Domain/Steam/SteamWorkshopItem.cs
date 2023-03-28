@@ -24,16 +24,18 @@ public class SteamWorkshopItem : IGenericPackage
 	public string[]? Tags { get; set; }
 	public string? Class { get; set; }
 	public bool Removed { get; set; }
+	public bool Private { get; set; }
 
 	[JsonIgnore] public string? Name => Title;
 	[JsonIgnore] public bool IsMod => Tags?.Contains("Mod") ?? false;
 	[JsonIgnore] public ulong SteamId => ulong.TryParse(PublishedFileID, out var id) ? id : 0;
-	[JsonIgnore] public Bitmap? Thumbnail => ImageManager.GetImage(PreviewURL, true);
+	[JsonIgnore] public Bitmap? Thumbnail => ImageManager.GetImage(PreviewURL, true).Result;
 	[JsonIgnore] public string? ThumbnailUrl => PreviewURL;
 
 	public SteamWorkshopItem(SteamWorkshopItemEntry entry)
 	{
-		Removed = entry.result != 1;
+		Removed = entry.result is not 1 and not 9;
+		Private = entry.result is 9;
 		Title = entry.title ?? string.Empty;
 		PublishedFileID = entry.publishedfileid;
 		Size = entry.file_size;

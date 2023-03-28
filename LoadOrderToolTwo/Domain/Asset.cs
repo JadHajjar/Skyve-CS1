@@ -51,6 +51,7 @@ public class Asset : IPackage
 	public long LocalSize => ((IPackage)Package).LocalSize;
 	public DateTime LocalTime => ((IPackage)Package).LocalTime;
 	public bool RemovedFromSteam { get => ((IPackage)Package).RemovedFromSteam; set => ((IPackage)Package).RemovedFromSteam = value; }
+	public bool Private { get => ((IPackage)Package).Private; set => ((IPackage)Package).Private = value; }
 	public long ServerSize { get => ((IPackage)Package).ServerSize; set => ((IPackage)Package).ServerSize = value; }
 	public DateTime ServerTime { get => ((IPackage)Package).ServerTime; set => ((IPackage)Package).ServerTime = value; }
 	public DownloadStatus Status { get => ((IPackage)Package).Status; set => ((IPackage)Package).Status = value; }

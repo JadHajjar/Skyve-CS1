@@ -82,7 +82,7 @@ public partial class PC_Profiles : PanelContent
 
 	public override bool CanExit(bool toBeDisposed)
 	{
-		return !TB_Name.Visible;
+		return !TB_Name.Visible && !I_ProfileIcon.Loading;
 	}
 
 	internal void Ctrl_LoadProfile(Profile obj)
@@ -90,7 +90,7 @@ public partial class PC_Profiles : PanelContent
 		I_ProfileIcon.Loading = true;
 		L_CurrentProfile.Text = obj.Name;
 		FLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
-		ProfileManager.SetProfile(obj, Form);
+		ProfileManager.SetProfile(obj);
 	}
 
 	private void LoadProfile(Profile profile)
@@ -208,7 +208,7 @@ public partial class PC_Profiles : PanelContent
 
 		ProfileManager.AddProfile(newProfile);
 
-		ProfileManager.SetProfile(newProfile, Form);
+		ProfileManager.SetProfile(newProfile);
 
 		L_CurrentProfile.Text = newProfile.Name;
 		I_ProfileIcon.Loading = true;
@@ -232,7 +232,7 @@ public partial class PC_Profiles : PanelContent
 
 		ProfileManager.AddProfile(newProfile);
 
-		ProfileManager.SetProfile(newProfile, Form);
+		ProfileManager.SetProfile(newProfile);
 
 		L_CurrentProfile.Text = newProfile.Name;
 		I_ProfileIcon.Loading = true;
@@ -368,6 +368,6 @@ public partial class PC_Profiles : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		ProfileManager.SetProfile(Profile.TemporaryProfile, Form);
+		ProfileManager.SetProfile(Profile.TemporaryProfile);
 	}
 }

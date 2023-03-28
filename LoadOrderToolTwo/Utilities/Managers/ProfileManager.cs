@@ -131,7 +131,7 @@ public static class ProfileManager
 
 				if (newProfile != null)
 				{
-					Save(newProfile);
+					Save(newProfile, true);
 
 					Directory.CreateDirectory(Path.Combine(legacyProfilePath, "Legacy"));
 
@@ -157,68 +157,80 @@ public static class ProfileManager
 		}).Run();
 	}
 
-	internal static void MergeProfile(Profile profile, BasePanelForm form)
+	internal static void MergeProfile(Profile profile)
 	{
 		new BackgroundAction("Applying profile", apply).Run();
 
 		void apply()
 		{
-			var unprocessedMods = CentralManager.Mods.ToList();
-			var unprocessedAssets = CentralManager.Assets.ToList();
-			var missingMods = new List<Profile.Mod>();
-			var missingAssets = new List<Profile.Asset>();
-
-			ApplyingProfile = true;
-
-			foreach (var mod in profile.Mods)
+			try
 			{
-				var localMod = GetMod(mod);
+				var unprocessedMods = CentralManager.Mods.ToList();
+				var unprocessedAssets = CentralManager.Assets.ToList();
+				var missingMods = new List<Profile.Mod>();
+				var missingAssets = new List<Profile.Asset>();
 
-				if (localMod != null)
-				{
-					localMod.IsIncluded = true;
-					localMod.IsEnabled |= mod.Enabled;
+				ApplyingProfile = true;
 
-					unprocessedMods.Remove(localMod);
-				}
-				else
+				foreach (var mod in profile.Mods)
 				{
-					missingMods.Add(mod);
+					var localMod = GetMod(mod);
+
+					if (localMod != null)
+					{
+						localMod.IsIncluded = true;
+						localMod.IsEnabled |= mod.Enabled;
+
+						unprocessedMods.Remove(localMod);
+					}
+					else
+					{
+						missingMods.Add(mod);
+					}
 				}
+
+				foreach (var asset in profile.Assets)
+				{
+					var localAsset = GetAsset(asset);
+
+					if (localAsset != null)
+					{
+						localAsset.IsIncluded = true;
+
+						unprocessedAssets.Remove(localAsset);
+					}
+					else
+					{
+						missingAssets.Add(asset);
+					}
+				}
+
+				if ((missingMods.Count > 0 || missingAssets.Count > 0) && Program.MainForm is not null)
+				{
+					UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
+				}
+
+				ApplyingProfile = false;
+				disableAutoSave = true;
+
+				ModsUtil.SavePendingValues();
+				AssetsUtil.SaveChanges();
+
+				disableAutoSave = false;
+
+				ProfileChanged?.Invoke(CurrentProfile);
+
+				TriggerAutoSave();
 			}
-
-			foreach (var asset in profile.Assets)
+			catch (Exception ex)
 			{
-				var localAsset = GetAsset(asset);
-
-				if (localAsset != null)
-				{
-					localAsset.IsIncluded = true;
-
-					unprocessedAssets.Remove(localAsset);
-				}
-				else
-				{
-					missingAssets.Add(asset);
-				}
+				MessagePrompt.Show(ex, "Failed to merge your profiles", form: Program.MainForm);
 			}
-
-			if (missingMods.Count > 0 || missingAssets.Count > 0)
+			finally
 			{
-				UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(form, missingMods, missingAssets);
+				ApplyingProfile = false;
+				disableAutoSave = false;
 			}
-
-			ApplyingProfile = false;
-			disableAutoSave = true;
-
-			ModsUtil.SavePendingValues();
-			AssetsUtil.SaveChanges();
-
-			disableAutoSave = false;
-
-			ProfileChanged?.Invoke(CurrentProfile);
-
-			TriggerAutoSave();
 		}
 	}
 
@@ -228,59 +240,71 @@ public static class ProfileManager
 
 		void apply()
 		{
-			var unprocessedMods = CentralManager.Mods.ToList();
-			var unprocessedAssets = CentralManager.Assets.ToList();
-			var missingMods = new List<Profile.Mod>();
-			var missingAssets = new List<Profile.Asset>();
-
-			ApplyingProfile = true;
-
-			foreach (var mod in profile.Mods)
+			try
 			{
-				var localMod = GetMod(mod);
+				var unprocessedMods = CentralManager.Mods.ToList();
+				var unprocessedAssets = CentralManager.Assets.ToList();
+				var missingMods = new List<Profile.Mod>();
+				var missingAssets = new List<Profile.Asset>();
 
-				if (localMod != null)
+				ApplyingProfile = true;
+
+				foreach (var mod in profile.Mods)
 				{
-					localMod.IsIncluded = false;
-					localMod.IsEnabled = false;
-				}
-			}
+					var localMod = GetMod(mod);
 
-			foreach (var asset in profile.Assets)
+					if (localMod != null)
+					{
+						localMod.IsIncluded = false;
+						localMod.IsEnabled = false;
+					}
+				}
+
+				foreach (var asset in profile.Assets)
+				{
+					var localAsset = GetAsset(asset);
+
+					if (localAsset != null)
+					{
+						localAsset.IsIncluded = false;
+					}
+				}
+
+				ApplyingProfile = false;
+				disableAutoSave = true;
+
+				ModsUtil.SavePendingValues();
+				AssetsUtil.SaveChanges();
+
+				disableAutoSave = false;
+
+				ProfileChanged?.Invoke(CurrentProfile);
+
+				TriggerAutoSave();
+			}
+			catch (Exception ex)
 			{
-				var localAsset = GetAsset(asset);
-
-				if (localAsset != null)
-				{
-					localAsset.IsIncluded = false;
-				}
+				MessagePrompt.Show(ex, "Failed to merge your profiles", form: Program.MainForm);
 			}
-
-			ApplyingProfile = false;
-			disableAutoSave = true;
-
-			ModsUtil.SavePendingValues();
-			AssetsUtil.SaveChanges();
-
-			disableAutoSave = false;
-
-			ProfileChanged?.Invoke(CurrentProfile);
-
-			TriggerAutoSave();
+			finally
+			{
+				ApplyingProfile = false;
+				disableAutoSave = false;
+			}
 		}
 	}
 
-	internal static void DeleteProfile(Profile profile, BasePanelForm form)
+	internal static void DeleteProfile(Profile profile)
 	{
 		File.Delete(Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
 
 		if (profile == CurrentProfile)
 		{
-			SetProfile(Profile.TemporaryProfile, form);
+			SetProfile(Profile.TemporaryProfile);
 		}
 	}
 
-	internal static void SetProfile(Profile profile, BasePanelForm? form)
+	internal static void SetProfile(Profile profile)
 	{
 		CurrentProfile = profile;
 
@@ -294,7 +318,7 @@ public static class ProfileManager
 			return;
 		}
 
-		if (form is null)
+		if (Program.MainForm is null)
 		{
 			apply();
 		}
@@ -305,87 +329,99 @@ public static class ProfileManager
 
 		void apply()
 		{
-			var unprocessedMods = CentralManager.Mods.ToList();
-			var unprocessedAssets = CentralManager.Assets.ToList();
-			var missingMods = new List<Profile.Mod>();
-			var missingAssets = new List<Profile.Asset>();
-
-			ApplyingProfile = true;
-
-			foreach (var mod in profile.Mods)
-			{
-				var localMod = GetMod(mod);
-
-				if (localMod != null)
-				{
-					localMod.IsIncluded = true;
-					localMod.IsEnabled = mod.Enabled;
-
-					unprocessedMods.Remove(localMod);
-				}
-				else
-				{
-					missingMods.Add(mod);
-				}
-			}
-
-			foreach (var asset in profile.Assets)
-			{
-				var localAsset = GetAsset(asset);
-
-				if (localAsset != null)
-				{
-					localAsset.IsIncluded = true;
-
-					unprocessedAssets.Remove(localAsset);
-				}
-				else
-				{
-					missingAssets.Add(asset);
-				}
-			}
-
-			foreach (var mod in unprocessedMods)
-			{
-				mod.IsIncluded = false;
-				mod.IsEnabled = false;
-			}
-
-			foreach (var asset in unprocessedAssets)
-			{
-				asset.IsIncluded = false;
-			}
-
-			if ((missingMods.Count > 0 || missingAssets.Count > 0) && form is not null)
-			{
-				UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(form, missingMods, missingAssets);
-			}
-
-			ApplyingProfile = false;
-			disableAutoSave = true;
-
-			ModsUtil.SavePendingValues();
-			AssetsUtil.SaveChanges();
-
-			ProfileChanged?.Invoke(profile);
-
 			try
-			{ SaveLsmSettings(profile); }
-			catch (Exception ex) { Log.Exception(ex, "Failed to apply the LSM settings for profile " + profile.Name); }
-
-			if (!CommandUtil.NoWindow)
 			{
-				CentralManager.SessionSettings.CurrentProfile = profile.Name;
-				CentralManager.SessionSettings.Save();
-			}
+				var unprocessedMods = CentralManager.Mods.ToList();
+				var unprocessedAssets = CentralManager.Assets.ToList();
+				var missingMods = new List<Profile.Mod>();
+				var missingAssets = new List<Profile.Asset>();
 
-			disableAutoSave = false;
+				ApplyingProfile = true;
+
+				foreach (var mod in profile.Mods)
+				{
+					var localMod = GetMod(mod);
+
+					if (localMod != null)
+					{
+						localMod.IsIncluded = true;
+						localMod.IsEnabled = mod.Enabled;
+
+						unprocessedMods.Remove(localMod);
+					}
+					else
+					{
+						missingMods.Add(mod);
+					}
+				}
+
+				foreach (var asset in profile.Assets)
+				{
+					var localAsset = GetAsset(asset);
+
+					if (localAsset != null)
+					{
+						localAsset.IsIncluded = true;
+
+						unprocessedAssets.Remove(localAsset);
+					}
+					else
+					{
+						missingAssets.Add(asset);
+					}
+				}
+
+				foreach (var mod in unprocessedMods)
+				{
+					mod.IsIncluded = false;
+					mod.IsEnabled = false;
+				}
+
+				foreach (var asset in unprocessedAssets)
+				{
+					asset.IsIncluded = false;
+				}
+
+				if ((missingMods.Count > 0 || missingAssets.Count > 0) && Program.MainForm is not null)
+				{
+					UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
+				}
+
+				ApplyingProfile = false;
+				disableAutoSave = true;
+
+				ModsUtil.SavePendingValues();
+				AssetsUtil.SaveChanges();
+
+				ProfileChanged?.Invoke(profile);
+
+				try
+				{ SaveLsmSettings(profile); }
+				catch (Exception ex) { Log.Exception(ex, "Failed to apply the LSM settings for profile " + profile.Name); }
+
+				if (!CommandUtil.NoWindow)
+				{
+					CentralManager.SessionSettings.CurrentProfile = profile.Name;
+					CentralManager.SessionSettings.Save();
+				}
+
+				disableAutoSave = false;
+			}
+			catch (Exception ex)
+			{
+				MessagePrompt.Show(ex, "Failed to merge your profiles", form: Program.MainForm);
+			}
+			finally
+			{
+				ApplyingProfile = false;
+				disableAutoSave = false;
+			}
 		}
 	}
 
 	internal static void TriggerAutoSave()
 	{
-		if (CurrentProfile.AutoSave && !disableAutoSave && !ApplyingProfile)
+		if (CurrentProfile.AutoSave && !disableAutoSave && !ApplyingProfile && !CentralManager.IsContentLoaded)
 		{
 			CurrentProfile.Save();
 		}
@@ -434,7 +470,7 @@ public static class ProfileManager
 
 	public static void GatherInformation(Profile? profile)
 	{
-		if (profile == null || profile.Temporary)
+		if (profile == null || profile.Temporary || !CentralManager.IsContentLoaded)
 		{
 			return;
 		}
@@ -444,9 +480,9 @@ public static class ProfileManager
 		profile.ExcludedDLCs = LoadOrderConfig.Deserialize()?.RemovedDLCs.ToList() ?? new();
 	}
 
-	public static bool Save(Profile? profile)
+	public static bool Save(Profile? profile, bool forced = false)
 	{
-		if (profile == null || profile.Temporary)
+		if (!forced && (profile == null || profile.Temporary || !CentralManager.IsContentLoaded))
 		{
 			return false;
 		}

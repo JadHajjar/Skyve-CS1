@@ -64,7 +64,7 @@ public partial class PC_ProfileList : PanelContent
 
 	private void Ctrl_DisposeProfile(Profile obj)
 	{
-		ProfileManager.DeleteProfile(obj, Form);
+		ProfileManager.DeleteProfile(obj);
 	}
 
 	private void Ctrl_ExcludeProfile(Profile obj)
@@ -76,7 +76,7 @@ public partial class PC_ProfileList : PanelContent
 	private void Ctrl_MergeProfile(Profile obj)
 	{
 		FLP_Profiles.Enabled = false;
-		ProfileManager.MergeProfile(obj, Form);
+		ProfileManager.MergeProfile(obj);
 	}
 
 	private void Ctrl_LoadProfile(Profile obj)

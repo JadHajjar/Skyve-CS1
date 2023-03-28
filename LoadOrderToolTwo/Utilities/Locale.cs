@@ -218,4 +218,6 @@ internal class Locale : LocaleHelper
 	public static string TotalItems => _instance.GetText(nameof(TotalItems));
 	public static string OutOf => _instance.GetText(nameof(OutOf));
 	public static string MissingItemsRemain => _instance.GetText(nameof(MissingItemsRemain));
+
+	public static string ModIsPrivate { get; internal set; }
 }

@@ -59,11 +59,12 @@ public class Package : IPackage
 	public string? SteamPage { get; set; }
 	public SteamUser? Author { get; set; }
 	public string? Class { get; set; }
-	public Bitmap? IconImage => ImageManager.GetImage(IconUrl, true);
-	public Bitmap? AuthorIconImage => ImageManager.GetImage(Author?.AvatarUrl, true);
+	public Bitmap? IconImage => ImageManager.GetImage(IconUrl, true).Result;
+	public Bitmap? AuthorIconImage => ImageManager.GetImage(Author?.AvatarUrl, true).Result;
 	public string? IconUrl { get; set; }
 	public string Name { get; set; }
 	public bool RemovedFromSteam { get; set; }
+	public bool Private { get; set; }
 	public long ServerSize { get; set; }
 	public DateTime ServerTime { get; set; }
 	public DownloadStatus Status { get; set; }

@@ -39,12 +39,13 @@ partial class PC_ContentList<T>
 			this.P_ActionsContainer = new System.Windows.Forms.Panel();
 			this.P_Actions = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.B_DisEnable = new DoubleButton();
-			this.B_ExInclude = new DoubleButton();
+			this.B_DisEnable = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
+			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
+			this.B_Refresh = new SlickControls.SlickButton();
 			this.TB_Search = new SlickControls.SlickTextBox();
-			this.DD_Sorting = new SortingDropDown();
+			this.DD_Sorting = new LoadOrderToolTwo.UserInterface.Dropdowns.SortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Duplicates = new System.Windows.Forms.Label();
 			this.L_Counts = new System.Windows.Forms.Label();
@@ -54,9 +55,9 @@ partial class PC_ContentList<T>
 			this.I_ClearFilters = new SlickControls.SlickIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-			this.OT_Workshop = new ThreeOptionToggle();
-			this.OT_Included = new ThreeOptionToggle();
-			this.OT_Enabled = new ThreeOptionToggle();
+			this.OT_Workshop = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
+			this.OT_Included = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
+			this.OT_Enabled = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.TLP_Dates = new System.Windows.Forms.TableLayoutPanel();
 			this.L_From1 = new System.Windows.Forms.Label();
 			this.L_To1 = new System.Windows.Forms.Label();
@@ -69,12 +70,12 @@ partial class PC_ContentList<T>
 			this.DT_SubTo = new SlickControls.SlickDateTime();
 			this.DT_UpdateFrom = new SlickControls.SlickDateTime();
 			this.DT_UpdateTo = new SlickControls.SlickDateTime();
-			this.DD_PackageStatus = new PackageStatusDropDown();
-			this.DD_ReportSeverity = new ReportSeverityDropDown();
-			this.DD_Tags = new TagsDropDown();
+			this.DD_PackageStatus = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageStatusDropDown();
+			this.DD_ReportSeverity = new LoadOrderToolTwo.UserInterface.Dropdowns.ReportSeverityDropDown();
+			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
+			this.DD_Profile = new LoadOrderToolTwo.UserInterface.Dropdowns.ProfilesDropDown();
 			this.B_Filters = new SlickControls.SlickButton();
 			this.B_Actions = new SlickControls.SlickButton();
-			this.DD_Profile = new ProfilesDropDown();
 			this.TLP_Main.SuspendLayout();
 			this.P_ActionsContainer.SuspendLayout();
 			this.P_Actions.SuspendLayout();
@@ -96,21 +97,22 @@ partial class PC_ContentList<T>
 			// 
 			// TLP_Main
 			// 
-			this.TLP_Main.ColumnCount = 4;
+			this.TLP_Main.ColumnCount = 5;
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Main.Controls.Add(this.P_ActionsContainer, 0, 2);
 			this.TLP_Main.Controls.Add(this.slickSpacer2, 0, 3);
 			this.TLP_Main.Controls.Add(this.slickSpacer1, 0, 5);
+			this.TLP_Main.Controls.Add(this.B_Refresh, 1, 0);
 			this.TLP_Main.Controls.Add(this.TB_Search, 0, 0);
-			this.TLP_Main.Controls.Add(this.DD_Sorting, 3, 0);
+			this.TLP_Main.Controls.Add(this.DD_Sorting, 4, 0);
 			this.TLP_Main.Controls.Add(this.tableLayoutPanel3, 0, 4);
 			this.TLP_Main.Controls.Add(this.P_FiltersContainer, 0, 1);
-			this.TLP_Main.Controls.Add(this.B_Filters, 1, 0);
-			this.TLP_Main.Controls.Add(this.B_Actions, 2, 0);
+			this.TLP_Main.Controls.Add(this.B_Filters, 2, 0);
+			this.TLP_Main.Controls.Add(this.B_Actions, 3, 0);
 			this.TLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TLP_Main.Location = new System.Drawing.Point(0, 30);
 			this.TLP_Main.Name = "TLP_Main";
@@ -127,7 +129,7 @@ partial class PC_ContentList<T>
 			// 
 			// P_ActionsContainer
 			// 
-			this.TLP_Main.SetColumnSpan(this.P_ActionsContainer, 4);
+			this.TLP_Main.SetColumnSpan(this.P_ActionsContainer, 5);
 			this.P_ActionsContainer.Controls.Add(this.P_Actions);
 			this.P_ActionsContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.P_ActionsContainer.Location = new System.Drawing.Point(0, 280);
@@ -204,7 +206,7 @@ partial class PC_ContentList<T>
 			// 
 			// slickSpacer2
 			// 
-			this.TLP_Main.SetColumnSpan(this.slickSpacer2, 4);
+			this.TLP_Main.SetColumnSpan(this.slickSpacer2, 5);
 			this.slickSpacer2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.slickSpacer2.Location = new System.Drawing.Point(0, 407);
 			this.slickSpacer2.Margin = new System.Windows.Forms.Padding(0);
@@ -216,7 +218,7 @@ partial class PC_ContentList<T>
 			// 
 			// slickSpacer1
 			// 
-			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 4);
+			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 5);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.slickSpacer1.Location = new System.Drawing.Point(0, 455);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
@@ -225,6 +227,18 @@ partial class PC_ContentList<T>
 			this.slickSpacer1.TabIndex = 7;
 			this.slickSpacer1.TabStop = false;
 			this.slickSpacer1.Text = "slickSpacer1";
+			// 
+			// B_Refresh
+			// 
+			this.B_Refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.B_Refresh.ColorShade = null;
+			this.B_Refresh.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_Refresh.Location = new System.Drawing.Point(282, 3);
+			this.B_Refresh.Name = "B_Refresh";
+			this.B_Refresh.Size = new System.Drawing.Size(100, 47);
+			this.B_Refresh.SpaceTriggersClick = true;
+			this.B_Refresh.TabIndex = 1;
+			this.B_Refresh.Click += new System.EventHandler(this.FilterChanged);
 			// 
 			// TB_Search
 			// 
@@ -262,9 +276,10 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel3.AutoSize = true;
 			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tableLayoutPanel3.ColumnCount = 2;
-			this.TLP_Main.SetColumnSpan(this.tableLayoutPanel3, 4);
+			this.TLP_Main.SetColumnSpan(this.tableLayoutPanel3, 5);
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tableLayoutPanel3.Controls.Add(this.L_Duplicates, 0, 0);
 			this.tableLayoutPanel3.Controls.Add(this.L_Counts, 1, 0);
 			this.tableLayoutPanel3.Controls.Add(this.L_FilterCount, 0, 1);
@@ -309,7 +324,7 @@ partial class PC_ContentList<T>
 			// 
 			// P_FiltersContainer
 			// 
-			this.TLP_Main.SetColumnSpan(this.P_FiltersContainer, 4);
+			this.TLP_Main.SetColumnSpan(this.P_FiltersContainer, 5);
 			this.P_FiltersContainer.Controls.Add(this.P_Filters);
 			this.P_FiltersContainer.Dock = System.Windows.Forms.DockStyle.Top;
 			this.P_FiltersContainer.Location = new System.Drawing.Point(0, 53);
@@ -649,34 +664,6 @@ partial class PC_ContentList<T>
 			this.DD_Tags.TabIndex = 2;
 			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
-			// B_Filters
-			// 
-			this.B_Filters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-			this.B_Filters.ColorShade = null;
-			this.B_Filters.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_Filters.Image = global::LoadOrderToolTwo.Properties.Resources.I_Filter;
-			this.B_Filters.Location = new System.Drawing.Point(388, 3);
-			this.B_Filters.Name = "B_Filters";
-			this.B_Filters.Size = new System.Drawing.Size(100, 47);
-			this.B_Filters.SpaceTriggersClick = true;
-			this.B_Filters.TabIndex = 1;
-			this.B_Filters.Text = "ShowFilters";
-			this.B_Filters.Click += new System.EventHandler(this.B_Filters_Click);
-			// 
-			// B_Actions
-			// 
-			this.B_Actions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-			this.B_Actions.ColorShade = null;
-			this.B_Actions.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_Actions.Image = global::LoadOrderToolTwo.Properties.Resources.I_Filter;
-			this.B_Actions.Location = new System.Drawing.Point(494, 3);
-			this.B_Actions.Name = "B_Actions";
-			this.B_Actions.Size = new System.Drawing.Size(100, 47);
-			this.B_Actions.SpaceTriggersClick = true;
-			this.B_Actions.TabIndex = 2;
-			this.B_Actions.Text = "ShowActions";
-			this.B_Actions.Click += new System.EventHandler(this.B_Actions_Click);
-			// 
 			// DD_Profile
 			// 
 			this.DD_Profile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -690,6 +677,32 @@ partial class PC_ContentList<T>
 			this.DD_Profile.Size = new System.Drawing.Size(207, 60);
 			this.DD_Profile.TabIndex = 2;
 			this.DD_Profile.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// B_Filters
+			// 
+			this.B_Filters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.B_Filters.ColorShade = null;
+			this.B_Filters.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_Filters.Location = new System.Drawing.Point(388, 3);
+			this.B_Filters.Name = "B_Filters";
+			this.B_Filters.Size = new System.Drawing.Size(100, 47);
+			this.B_Filters.SpaceTriggersClick = true;
+			this.B_Filters.TabIndex = 1;
+			this.B_Filters.Text = "ShowFilters";
+			this.B_Filters.Click += new System.EventHandler(this.B_Filters_Click);
+			// 
+			// B_Actions
+			// 
+			this.B_Actions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.B_Actions.ColorShade = null;
+			this.B_Actions.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_Actions.Location = new System.Drawing.Point(494, 3);
+			this.B_Actions.Name = "B_Actions";
+			this.B_Actions.Size = new System.Drawing.Size(100, 47);
+			this.B_Actions.SpaceTriggersClick = true;
+			this.B_Actions.TabIndex = 2;
+			this.B_Actions.Text = "ShowActions";
+			this.B_Actions.Click += new System.EventHandler(this.B_Actions_Click);
 			// 
 			// PC_ContentList
 			// 
@@ -769,4 +782,5 @@ partial class PC_ContentList<T>
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
 	private TagsDropDown DD_Tags;
 	private ProfilesDropDown DD_Profile;
+	private SlickControls.SlickButton B_Refresh;
 }

@@ -135,7 +135,7 @@ internal class ContentUtil
 
 		var subscribedItems = GetSubscribedItemPaths().ToList();
 
-		Parallel.ForEach(subscribedItems, (folder, state) =>
+		Parallelism.ForEach(subscribedItems, (folder) =>
 		{
 			getPackage(folder, false, true);
 		});

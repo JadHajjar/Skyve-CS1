@@ -37,7 +37,7 @@ public partial class MainForm : BasePanelForm
 
 		new BackgroundAction("Loading content", CentralManager.Start).Run();
 
-		if (LocationManager.Platform is Domain.Utilities.Platform.Windows)
+		if (LocationManager.Platform is Platform.Windows)
 		{
 			var timer = new System.Timers.Timer(1000);
 

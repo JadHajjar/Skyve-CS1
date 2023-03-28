@@ -166,13 +166,13 @@ public static class SteamUtil
 					.Select(x => new SteamWorkshopItem(x))
 					.ToList() ?? new();
 
-				var users = await ConvertInChunks(data.Select(x => x.AuthorID).Distinct(), 100, GetSteamUsers);
+				var users = await ConvertInChunks(data.Select(x => x.AuthorID ?? string.Empty).Distinct(), 100, GetSteamUsers);
 
 				foreach (var item in data)
 				{
-					if (!string.IsNullOrEmpty(item.AuthorID) && users.ContainsKey(item.AuthorID))
+					if (!string.IsNullOrEmpty(item.AuthorID) && users.ContainsKey(item.AuthorID!))
 					{
-						item.Author = new(users[item.AuthorID]);
+						item.Author = new(users[item.AuthorID!]);
 					}
 				}
 
@@ -238,15 +238,19 @@ public static class SteamUtil
 	{
 		var url = $"https://store.steampowered.com/api/appdetails?appids={steamId}";
 
-		using var httpClient = new HttpClient();
-		var httpResponse = await httpClient.GetAsync(url);
-
-		if (httpResponse.IsSuccessStatusCode)
+		try
 		{
-			var response = await httpResponse.Content.ReadAsStringAsync();
+			using var httpClient = new HttpClient();
+			var httpResponse = await httpClient.GetAsync(url);
 
-			return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
+			if (httpResponse.IsSuccessStatusCode)
+			{
+				var response = await httpResponse.Content.ReadAsStringAsync();
+
+				return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
+			}
 		}
+		catch (Exception ex) { Log.Exception(ex, "Failed to get the steam information for appid " + steamId); }
 
 		return new();
 	}
@@ -280,14 +284,18 @@ public static class SteamUtil
 
 	public static void SetSteamInformation(this IPackage package, SteamWorkshopItem steamWorkshopItem, bool cache)
 	{
-		if (steamWorkshopItem.Removed)
+		if (package.Private = steamWorkshopItem.Private)
 		{
-			package.RemovedFromSteam = true;
+			return;
+		}
+
+		if (package.RemovedFromSteam = steamWorkshopItem.Removed)
+		{
 			return;
 		}
 
 		package.SteamInfoLoaded = true;
-		package.Name = package.SteamId == 2040656402ul ? "Harmony" : steamWorkshopItem.Title;
+		package.Name = package.SteamId == 2040656402ul ? "Harmony" : steamWorkshopItem.Title ?? package.Name;
 		package.Author = steamWorkshopItem.Author;
 		package.ServerTime = steamWorkshopItem.UpdatedUTC;
 		package.Tags = steamWorkshopItem.Tags;
@@ -354,7 +362,7 @@ public static class SteamUtil
 
 			foreach (var dlc in Dlcs)
 			{
-				ImageManager.Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
+				await ImageManager.Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
 
 				DLCsLoaded?.Invoke();
 			}

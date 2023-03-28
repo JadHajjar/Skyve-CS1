@@ -47,6 +47,9 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 
     protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, Profile item)
     {
+        if (item is null )
+        { return; }
+
         var text = item.Name;
 
         if (item.Temporary)

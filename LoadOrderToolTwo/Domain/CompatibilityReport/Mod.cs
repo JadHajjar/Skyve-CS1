@@ -53,7 +53,7 @@ public class Mod
 	[XmlArrayItem("ChangeNote")] public List<string> ChangeNotes { get; set; } = new List<string>();
 
 	// Properties used by the Reporter for subscribed mods.
-	[CloneIgnore, XmlIgnore] public bool IsDisabled => !(ModsUtil.FindMod(SteamID)?.IsEnabled ?? false);
+	[CloneIgnore, XmlIgnore] public bool IsDisabled => IsIncluded && !(ModsUtil.FindMod(SteamID)?.IsEnabled ?? false);
 	[CloneIgnore, XmlIgnore] public bool IsIncluded => ModsUtil.FindMod(SteamID)?.IsIncluded ?? false;
 	[CloneIgnore, XmlIgnore] public bool IsCameraScript { get; set; }
 	[CloneIgnore, XmlIgnore] public string ModPath { get; set; }

@@ -35,7 +35,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		B_Filters.Height = B_Actions.Height = DD_Sorting.Height = TB_Search.Height = 0;
 
 		TLP_Main.Controls.Add(LC_Items, 0, 6);
-		TLP_Main.SetColumnSpan(LC_Items, 4);
+		TLP_Main.SetColumnSpan(LC_Items, 5);
 
 		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
 
@@ -145,10 +145,13 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		base.UIChanged();
 
-		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin = L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
-			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin = B_Actions.Margin = TLP_Dates.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin 
+			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
+			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin 
+			= B_Actions.Margin = TLP_Dates.Margin = B_Refresh.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_Filters.Image = P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Filter));
 		B_Actions.Image = P_Actions.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Actions));
+		B_Refresh.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Refresh));
 		I_ClearFilters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ClearFilter));
 		I_ClearFilters.Size = UI.FontScale >= 1.25 ? new(32, 32) : new(24, 24);
 		I_ClearFilters.Location = new(P_Filters.Width - P_Filters.Padding.Right - I_ClearFilters.Width, P_Filters.Padding.Bottom);
@@ -331,7 +334,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		if (!doNotDraw && !string.IsNullOrWhiteSpace(TB_Search.Text))
 		{
 			doNotDraw = !(
-				TB_Search.Text.SearchCheck(item.Name) ||
+				TB_Search.Text.SearchCheck(item.ToString()) ||
 				TB_Search.Text.SearchCheck(item.Author?.Name) ||
 				TB_Search.Text.SearchCheck(item.SteamId.ToString()));
 		}
