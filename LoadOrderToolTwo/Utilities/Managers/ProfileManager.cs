@@ -2,6 +2,7 @@
 
 using LoadOrderShared;
 
+using LoadOrderToolTwo.ColossalOrder;
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
 
@@ -20,6 +21,7 @@ public static class ProfileManager
 	private const string WS_CONTENT_PATH = "%WORKSHOP%";
 	private static List<Profile> _profiles;
 	private static bool disableAutoSave;
+	private static readonly FileSystemWatcher _watcher;
 
 	public static bool ApplyingProfile { get; private set; }
 	public static Profile CurrentProfile { get; private set; }
@@ -67,6 +69,13 @@ public static class ProfileManager
 		_profiles ??= new();
 
 		CurrentProfile ??= Profile.TemporaryProfile;
+
+		_watcher = new FileSystemWatcher
+		{
+			Path = LocationManager.AppDataPath,
+			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
+			Filter = "*.json"
+		};
 
 		if (!CommandUtil.NoWindow)
 		{
@@ -466,6 +475,50 @@ public static class ProfileManager
 		}
 
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+
+		_watcher.Changed += new FileSystemEventHandler(FileChanged);
+		_watcher.Created += new FileSystemEventHandler(FileChanged);
+		_watcher.Deleted += new FileSystemEventHandler(FileChanged);
+
+		_watcher.EnableRaisingEvents = true;
+	}
+
+	private static void FileChanged(object sender, FileSystemEventArgs e)
+	{
+		try
+		{
+			if (!File.Exists(e.FullPath))
+			{
+				var profile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+
+				if (profile != null)
+				{
+					_profiles.Remove(profile);
+				}
+
+				return;
+			}
+
+			var newProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<Profile>(File.ReadAllText(e.FullPath));
+
+			if (newProfile != null)
+			{
+				newProfile.Name = Path.GetFileNameWithoutExtension(e.FullPath);
+				newProfile.LastEditDate = File.GetLastWriteTime(e.FullPath);
+				newProfile.DateCreated = File.GetCreationTime(e.FullPath);
+
+				var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+
+				_profiles.Remove(currentProfile);
+
+				_profiles.Add(newProfile);
+			}
+			else
+			{
+				Log.Error($"Could not load the profile: '{e.FullPath}'");
+			}
+		}
+		catch (Exception ex) { Log.Exception(ex, "Failed to refresh changes to profiles"); }
 	}
 
 	public static void GatherInformation(Profile? profile)
@@ -482,13 +535,15 @@ public static class ProfileManager
 
 	public static bool Save(Profile? profile, bool forced = false)
 	{
-		if (!forced && (profile == null || profile.Temporary || !CentralManager.IsContentLoaded))
+		if (profile == null || (!forced && (profile.Temporary || !CentralManager.IsContentLoaded)))
 		{
 			return false;
 		}
 
 		try
 		{
+			_watcher.EnableRaisingEvents = false;
+
 			Directory.CreateDirectory(LocationManager.LotProfilesAppDataPath);
 
 			File.WriteAllText(
@@ -498,7 +553,13 @@ public static class ProfileManager
 			return true;
 		}
 		catch (Exception ex)
-		{ Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}"); }
+		{
+			Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}"); 
+		}
+		finally
+		{
+			_watcher.EnableRaisingEvents = true;
+		}
 
 		return false;
 	}
