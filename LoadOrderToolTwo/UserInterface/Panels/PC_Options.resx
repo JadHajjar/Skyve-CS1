@@ -118,6 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TB_VirtualAppDataPath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wAAADsABataJCQAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
+        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
+        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
+        dH39AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="TB_VirtualGamePath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wAAADsABataJCQAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
+        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
+        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
+        dH39AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="TB_SteamPath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wAAADsABataJCQAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
+        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
+        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
+        dH39AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="TB_AppDataPath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wAAADsABataJCQAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
+        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
+        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
+        dH39AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="TB_GamePath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wAAADsABataJCQAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
+        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
+        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
+        dH39AAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="TLP_Folders.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAd9JREFUSEvl
@@ -144,51 +189,6 @@
         iuIR0XDYsgprGhE1+n4qj4hE1ZcM8xqVqHXdL5mCqj9TuEr+0lyp+2eqHdAk/NDEdDrdqastJSj2MJbq
         H5rADcodFbew0lGhXG1HxQvYwecdduVQ63H9LtDsY/9w3oIRDMFNmmrmt1pLc/pLIwieAVg+trX4sLHW
         AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="TB_VirtualAppDataPath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
-        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
-        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
-        dH39AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="TB_VirtualGamePath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
-        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
-        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
-        dH39AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="TB_SteamPath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
-        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
-        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
-        dH39AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="TB_AppDataPath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
-        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
-        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
-        dH39AAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="TB_GamePath.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAKFJREFUOE/FkUsOAVEQAGeJOA62VlzInnAVR+AI2LP0u4ADiBVV6bGaeU9IZCqp
-        9GfSeZ2e4t90cI4XfOC5rNv4EYd3uMY+dstovUW/Z1ngKtIK9meRprliL9IKbnKKNM0dXbsO+94kywF9
-        qQ77x0jTTDB3g2mkacb4RK8+QNc2Wm8w+yuHeMMRuskevYmH8/otTPIeNn5Nc8OyxJ+Hm6IoXqOvIF53
-        dH39AAAAAElFTkSuQmCC
 </value>
   </data>
 </root>

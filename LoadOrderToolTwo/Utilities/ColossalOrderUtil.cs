@@ -5,6 +5,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 
@@ -52,6 +53,17 @@ internal class ColossalOrderUtil
 	{
 		if (CentralManager.SessionSettings.OverrideGameChanges)
 		{
+			var currentState = _settingsDictionary.ToDictionary(x => x.Key, x => x.Value.value);
+
+			_settingsFile = new SettingsFile() { fileName = GAME_SETTINGS_FILE_NAME };
+			_settingsFile.Load();
+			_settingsDictionary.Clear();
+
+			foreach (var kvp in currentState)
+			{
+				SetEnabled(kvp.Key, kvp.Value);
+			}
+
 			SaveSettings();
 		}
 		else

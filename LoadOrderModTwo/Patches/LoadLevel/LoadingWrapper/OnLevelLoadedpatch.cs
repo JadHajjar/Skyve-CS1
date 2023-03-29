@@ -36,8 +36,8 @@ namespace LoadOrderMod.Patches._LoadingWrapper {
             sw.Stop();
             var ms = sw.ElapsedMilliseconds;
             Log.Info($"OnLevelLoaded() successful. duration = {ms:#,0}ms", copyToGameLog: true);
-          
-            new Thread(new ThreadStart(SpriteDumper.Dump)) { IsBackground = true }.Start();
+
+			//new Thread(new ThreadStart(SpriteDumper.Dump)) { IsBackground = true }.Start();
 		}
 
 		static MethodInfo mBeforeOnLevelLoaded_ =

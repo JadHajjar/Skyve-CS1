@@ -39,6 +39,17 @@ internal class ModLogicManager
 			mod.IsIncluded = false;
 			mod.IsEnabled = false;
 		}
+
+		if (IsPseudoMod(mod))
+		{
+			mod.IsPseudoMod = true;
+
+			if (CentralManager.SessionSettings.HidePseudoMods)
+			{
+				mod.IsIncluded = true;
+				mod.IsEnabled = true;
+			}
+		}
 	}
 
 	internal static bool IsRequired(Mod mod)
@@ -85,5 +96,13 @@ internal class ModLogicManager
 			item[0].IsIncluded = true;
 			item[0].IsEnabled = true;
 		}
+	}
+
+	internal static bool IsPseudoMod(Mod mod)
+	{
+		if (File.Exists(Path.Combine(mod.Folder, "ThemeMix.xml")))
+			return true;
+
+		return false;
 	}
 }

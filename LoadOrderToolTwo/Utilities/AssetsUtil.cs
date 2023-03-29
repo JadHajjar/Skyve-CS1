@@ -3,6 +3,7 @@
 using LoadOrderShared;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
@@ -15,6 +16,7 @@ namespace LoadOrderToolTwo.Utilities;
 internal class AssetsUtil
 {
 	private static readonly LoadOrderConfig _config;
+	private static CustomTagsLibrary _findItTags;
 
 	public static HashSet<string> ExcludedHashSet { get; }
 	public static Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
@@ -24,8 +26,11 @@ internal class AssetsUtil
 		_config = LoadOrderConfig.Deserialize() ?? new();
 		var cache = CSCache.Deserialize()?.Assets.ToDictionary(x => x.IncludedPath, x => x, StringComparer.InvariantCultureIgnoreCase);
 
+		_findItTags = new();
 		AssetInfoCache = cache ?? new();
 		ExcludedHashSet = new HashSet<string>(_config.Assets.Select(x => x.Path?.ToLower() ?? string.Empty));
+
+		_findItTags.Deserialize();
 	}
 
 	public static IEnumerable<Asset> GetAssets(Package package)
@@ -112,19 +117,19 @@ internal class AssetsUtil
 
 	internal static Bitmap? GetIcon(Asset asset)
 	{
-		var fileName = Path.Combine(LocationManager.LotAppDataPath, "AssetPictures");
+		//var fileName = Path.Combine(LocationManager.LotAppDataPath, "AssetPictures");
 
-		if (asset.SteamId > 0)
-		{
-			fileName = Path.Combine(fileName, asset.SteamId.ToString());
-		}
+		//if (asset.SteamId > 0)
+		//{
+		//	fileName = Path.Combine(fileName, asset.SteamId.ToString());
+		//}
 
-		fileName = Path.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
+		//fileName = Path.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
 
-		if (File.Exists(fileName))
-		{
-			return (Bitmap)Image.FromFile(fileName);
-		}
+		//if (File.Exists(fileName))
+		//{
+		//	return (Bitmap)Image.FromFile(fileName);
+		//}
 
 		return null;
 	}
@@ -151,5 +156,75 @@ internal class AssetsUtil
 
 		ProfileManager.TriggerAutoSave();
 		SaveChanges();
+	}
+
+	internal static IEnumerable<string> GetFindItTags(Asset asset)
+	{
+		var assetName = (asset.SteamId == 0?"":$"{asset.SteamId}.")+ Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_');
+
+		foreach (var item in _findItTags.assetTags)
+		{
+			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(assetName, StringComparison.CurrentCultureIgnoreCase))
+			{
+				return item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+			}
+		}
+
+		return new string[0];
+	}
+
+	internal static void AddFindItTag(Asset asset, string tag)
+	{
+		var newTags = new CustomTagsLibrary();
+
+		newTags.Deserialize();
+
+		var assetName = (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_');
+		var found = false;
+
+		foreach (var item in newTags.assetTags)
+		{
+			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(assetName, StringComparison.CurrentCultureIgnoreCase))
+			{
+				newTags.assetTags[item.Key] = item.Value + " " + tag.Trim();
+
+				found = true;
+				break;
+			}
+		}
+
+		if (!found)
+		{
+			assetName = (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName);
+
+			newTags.assetTags[assetName] = tag.Trim();
+		}
+
+		newTags.Serialize();
+
+		_findItTags = newTags;
+	}
+
+	internal static void RemoveFindItTag(Asset asset, string tag)
+	{
+		var newTags = new CustomTagsLibrary();
+
+		newTags.Deserialize();
+
+		var assetName = (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_');
+
+		foreach (var item in newTags.assetTags)
+		{
+			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(assetName, StringComparison.CurrentCultureIgnoreCase))
+			{
+				newTags.assetTags[item.Key] = item.Value.Remove(tag).RemoveDoubleSpaces();
+
+				break;
+			}
+		}
+
+		newTags.Serialize();
+
+		_findItTags = newTags;
 	}
 }

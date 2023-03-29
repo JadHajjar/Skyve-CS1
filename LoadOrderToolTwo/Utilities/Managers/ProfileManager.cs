@@ -72,7 +72,7 @@ public static class ProfileManager
 
 		_watcher = new FileSystemWatcher
 		{
-			Path = LocationManager.AppDataPath,
+			Path = LocationManager.LotProfilesAppDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = "*.json"
 		};
@@ -487,6 +487,11 @@ public static class ProfileManager
 	{
 		try
 		{
+			if (!Path.GetExtension(e.FullPath).Equals(".json", StringComparison.CurrentCultureIgnoreCase))
+			{
+				return;
+			}
+
 			if (!File.Exists(e.FullPath))
 			{
 				var profile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);

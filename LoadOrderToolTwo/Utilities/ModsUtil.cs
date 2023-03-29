@@ -290,7 +290,7 @@ internal static class ModsUtil
 
 	internal static string RemoveVersionText(this string name)
 	{
-		return Regex.Replace(name, @"v?\d+\.\d+(\.\d+)*(-[\d\w]+)*", x => string.Empty, RegexOptions.IgnoreCase)
+		return Regex.Replace(name, @"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*", x => string.Empty, RegexOptions.IgnoreCase)
 			.RemoveDoubleSpaces();
 	}
 

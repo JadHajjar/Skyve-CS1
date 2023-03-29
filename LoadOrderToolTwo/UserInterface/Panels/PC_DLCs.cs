@@ -47,7 +47,7 @@ public partial class PC_DLCs : PanelContent
 
 	private void LC_DLCs_CanDrawItem(object sender, CanDrawItemEventArgs<Domain.Steam.SteamDlc> e)
 	{
-		if (!SteamUtil.IsDlcInstalledLocally(e.Item.Id))
+		if (T_YourDlcs.Selected && !SteamUtil.IsDlcInstalledLocally(e.Item.Id))
 		{
 			e.DoNotDraw = true;
 		}
@@ -77,7 +77,7 @@ public partial class PC_DLCs : PanelContent
 
 		tableLayoutPanel3.BackColor = design.AccentBackColor;
 		L_Counts.ForeColor = design.InfoColor;
-		L_Duplicates.ForeColor = design.YellowColor;
+		L_Duplicates.ForeColor = design.YellowColor.MergeColor(design.ForeColor, 90);
 	}
 
 	protected override void UIChanged()
@@ -88,6 +88,8 @@ public partial class PC_DLCs : PanelContent
 		L_Duplicates.Font = L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
 		TB_Search.Width = (int)(400 * UI.FontScale);
 		B_ExInclude.Width = (int)(400 * UI.FontScale);
+		T_YourDlcs.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_User));
+		T_AllDlcs.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Discover));
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)
@@ -126,5 +128,11 @@ public partial class PC_DLCs : PanelContent
 	private void TB_Search_IconClicked(object sender, EventArgs e)
 	{
 		TB_Search.Text = string.Empty;
+	}
+
+	private void T_YourDlcs_TabSelected(object sender, EventArgs e)
+	{
+		LC_DLCs.FilterOrSortingChanged();
+		RefreshCounts();
 	}
 }

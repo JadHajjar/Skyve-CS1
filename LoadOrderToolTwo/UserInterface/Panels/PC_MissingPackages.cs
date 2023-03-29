@@ -19,6 +19,7 @@ namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_MissingPackages : PanelContent
 {
 	private readonly Dictionary<ulong, Profile.Asset> _workshopPackages = new();
+	private bool allowExit;
 
 	public PC_MissingPackages(List<Profile.Mod> missingMods, List<Profile.Asset> missingAssets) : base(true)
 	{
@@ -113,9 +114,15 @@ public partial class PC_MissingPackages : PanelContent
 
 	public override bool CanExit(bool toBeDisposed)
 	{
-		if (toBeDisposed && LC_Items.ItemCount > 0)
+		if (toBeDisposed && !allowExit && LC_Items.ItemCount > 0)
 		{
-			return ShowPrompt(Locale.MissingItemsRemain, PromptButtons.OKCancel, PromptIcons.Hand) == DialogResult.OK;
+			if( ShowPrompt(Locale.MissingItemsRemain, PromptButtons.OKCancel, PromptIcons.Hand) == DialogResult.OK)
+			{
+				allowExit = true;
+				Form.PushBack();
+			}
+
+			return false;
 		}
 
 		return true;

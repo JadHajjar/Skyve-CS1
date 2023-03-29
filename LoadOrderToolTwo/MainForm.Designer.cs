@@ -210,7 +210,6 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(1000, 575);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
-			this.FormIcon = ((System.Drawing.Image)(resources.GetObject("$this.FormIcon")));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.IconBounds = new System.Drawing.Rectangle(102, 29, 14, 42);
 			this.MaximizeBox = true;

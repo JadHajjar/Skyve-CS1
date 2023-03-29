@@ -74,14 +74,17 @@ internal class SpriteDumper
 					continue;
 				}
 
-				var sprite = asset.m_Atlas.sprites.FirstOrDefault(x => x.name == asset.m_Thumbnail);
-
-				if (sprite?.texture != null)
+				foreach (var sprite in asset.m_Atlas.sprites)
 				{
-					var pngbytes = sprite.texture.EncodeToPNG();
+					if (sprite?.texture != null)
+					{
+						var pngbytes = sprite.texture.EncodeToPNG();
 
-					File.WriteAllBytes(fileName, pngbytes);
+						File.WriteAllBytes(fileName + sprite.name+".png", pngbytes);
+					}
 				}
+
+				
 			}
 			catch { }
 		}

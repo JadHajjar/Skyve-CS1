@@ -52,8 +52,8 @@ public class Mod : IPackage
 	public string[]? Tags { get => ((IPackage)Package).Tags; set => ((IPackage)Package).Tags = value; }
 	public string? SteamDescription { get => ((IPackage)Package).SteamDescription; set => ((IPackage)Package).SteamDescription = value; }
 	public Bitmap? AuthorIconImage => ((IPackage)Package).AuthorIconImage;
-
 	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
+	public bool IsPseudoMod { get => ((IPackage)Package).IsPseudoMod; set => ((IPackage)Package).IsPseudoMod = value; }
 
 	public override bool Equals(object? obj)
 	{

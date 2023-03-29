@@ -35,16 +35,37 @@ internal static class CentralManager
 	public static Profile CurrentProfile => ProfileManager.CurrentProfile;
 	public static bool IsContentLoaded { get; private set; }
 	public static SessionSettings SessionSettings { get; }
-	public static IEnumerable<Package> Packages => packages ?? new();
+	public static IEnumerable<Package> Packages
+	{
+		get
+		{
+			var currentPackages = packages is null ? new() : new List<Package>(packages);
+
+			foreach (var package in currentPackages)
+			{
+				if (package.IsPseudoMod && SessionSettings.HidePseudoMods)
+				{
+					continue;
+				}
+
+				yield return package;
+			}
+		}
+	}
 
 	public static IEnumerable<Mod> Mods
 	{
 		get
 		{
-			var currentPackages = packages ?? new();
+			var currentPackages = packages is null ? new() : new List<Package>(packages);
 
 			foreach (var package in currentPackages)
 			{
+				if (package.IsPseudoMod && SessionSettings.HidePseudoMods)
+				{
+					continue;
+				}
+
 				if (package.Mod != null)
 				{
 					yield return package.Mod;
@@ -57,10 +78,15 @@ internal static class CentralManager
 	{
 		get
 		{
-			var currentPackages = packages ?? new();
+			var currentPackages = packages is null ? new() : new List<Package>(packages);
 
 			foreach (var package in currentPackages)
 			{
+				if (package.IsPseudoMod && SessionSettings.HidePseudoMods)
+				{
+					continue;
+				}
+
 				if (package.Assets == null)
 				{
 					continue;
@@ -176,52 +202,61 @@ internal static class CentralManager
 		else
 			Log.Info($"No Steam Cache");
 
-		if (!ConnectionHandler.WhenConnected(async () =>
-		{
-			SteamUtil.LoadDlcs();
-
-			Log.Info($"Loading Steam info from the web..");
-			var result = await SteamUtil.GetWorkshopInfoAsync(Packages.Where(x => x.Workshop).Select(x => x.SteamId).ToArray());
-
-			Log.Info($"Applying updated steam info..");
-			foreach (var package in Packages)
-			{
-				if (result.ContainsKey(package.SteamId))
-				{
-					package.SetSteamInformation(result[package.SteamId], false);
-				}
-			}
-
-			_delayedWorkshopInfoUpdated.Run();
-
-			Log.Info($"Loading thumbnails..");
-			Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name), async (package) =>
-			{
-				if (!string.IsNullOrWhiteSpace(package.IconUrl))
-				{
-					if (await ImageManager.Ensure(package.IconUrl))
-					{
-						InformationUpdate(package);
-					}
-				}
-
-				if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
-				{
-					if (await ImageManager.Ensure(package.Author?.AvatarUrl))
-					{
-						InformationUpdate(package);
-					}
-				}
-			});
-
-			Log.Info($"Load Complete");
-			_delayedWorkshopInfoUpdated.Run();
-		}))
+		if (!ConnectionHandler.WhenConnected(UpdateSteamInformation))
 		{
 			_delayedWorkshopInfoUpdated.Run();
 
 			Log.Warning("Not connected to the internet");
 		}
+	}
+
+	private static async void UpdateSteamInformation()
+	{
+		if (!ConnectionHandler.IsConnected)
+		{
+			return;
+		}
+
+		SteamUtil.LoadDlcs();
+
+		Log.Info($"Loading Steam info from the web..");
+		var result = await SteamUtil.GetWorkshopInfoAsync(Packages.Where(x => x.Workshop).Select(x => x.SteamId).ToArray());
+
+		Log.Info($"Applying updated steam info..");
+		foreach (var package in Packages)
+		{
+			if (result.ContainsKey(package.SteamId))
+			{
+				package.SetSteamInformation(result[package.SteamId], false);
+			}
+		}
+
+		_delayedWorkshopInfoUpdated.Run();
+
+		Log.Info($"Loading thumbnails..");
+		Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name), async (package) =>
+		{
+			if (!string.IsNullOrWhiteSpace(package.IconUrl))
+			{
+				if (await ImageManager.Ensure(package.IconUrl))
+				{
+					InformationUpdate(package);
+				}
+			}
+
+			if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
+			{
+				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
+				{
+					InformationUpdate(package);
+				}
+			}
+		});
+
+		Log.Info($"Load Complete");
+		_delayedWorkshopInfoUpdated.Run();
+
+		new BackgroundAction(UpdateSteamInformation).RunIn((int)TimeSpan.FromHours(1).TotalMilliseconds);
 	}
 
 	private static void RunFirstTimeSetup()

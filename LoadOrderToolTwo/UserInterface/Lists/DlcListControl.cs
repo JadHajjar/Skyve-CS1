@@ -44,13 +44,15 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
     {
         var rects = GetActionRectangles(item.Bounds);
 
-        if (rects.IncludedRect.Contains(location))
+        if (rects.IncludedRect.Contains(location) && SteamUtil.IsDlcInstalledLocally(item.Item.Id))
         {
             setTip(Locale.ExcludeInclude);
+            return true;
         }
         else if (rects.SteamRect.Contains(location))
         {
             setTip(Locale.ViewOnSteam);
+            return true;
         }
         else
         {
@@ -59,7 +61,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
         void setTip(string? text) => SlickTip.SetTo(this, text, timeout: 20000);
 
-        return rects.Contain(location);
+        return false;
     }
 
     protected override void OnItemMouseClick(DrawableItem<SteamDlc> item, MouseEventArgs e)
@@ -68,7 +70,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
         var rects = GetActionRectangles(item.Bounds);
 
-        if (rects.IncludedRect.Contains(e.Location))
+		if (rects.IncludedRect.Contains(e.Location) && SteamUtil.IsDlcInstalledLocally(item.Item.Id))
         {
             item.Item.IsIncluded = !item.Item.IsIncluded;
         }
@@ -111,18 +113,22 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
         base.OnPaintItem(e);
 
-        var isIncluded = e.Item.IsIncluded;
+        var owned = SteamUtil.IsDlcInstalledLocally(e.Item.Id);
+        var isIncluded = owned && e.Item.IsIncluded;
 
-        if (isIncluded)
+        if (owned)
         {
-            e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(rects.IncludedRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.GreenColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
-        }
-        else if (rects.IncludedRect.Contains(CursorLocation))
-        {
-            e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
+            if (isIncluded)
+            {
+                e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(rects.IncludedRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.GreenColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
+            }
+            else if (rects.IncludedRect.Contains(CursorLocation))
+            {
+                e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
+            }
         }
 
-        e.Graphics.DrawImage((isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+        e.Graphics.DrawImage((!owned ? Properties.Resources.I_Slash : isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(owned && rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
 
         var iconRectangle = rects.IconRect;
         var textRect = rects.TextRect;

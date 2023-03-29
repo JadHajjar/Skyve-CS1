@@ -302,7 +302,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			doNotDraw = item.ServerTime < DT_UpdateFrom.Value || item.ServerTime > DT_UpdateTo.Value;
 		}
 
-		if (!doNotDraw && DD_Tags.SelectedItem is not null && DD_Tags.SelectedItem != "Any Tags")
+		if (!doNotDraw && DD_Tags.SelectedItem is not null && DD_Tags.SelectedItem != Locale.AnyTags)
 		{
 			if (item is Asset asset)
 			{

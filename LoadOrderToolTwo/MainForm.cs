@@ -6,6 +6,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -16,10 +17,15 @@ namespace LoadOrderToolTwo;
 public partial class MainForm : BasePanelForm
 {
 	private bool startBoundsSet;
+	private bool isAppRunning;
+	private bool? buttonStateRunning;
 
 	public MainForm()
 	{
 		InitializeComponent();
+
+		base_PB_Icon.UserDraw = true;
+		base_PB_Icon.Paint += Base_PB_Icon_Paint;
 
 #if DEBUG
 		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(4);
@@ -45,6 +51,46 @@ public partial class MainForm : BasePanelForm
 
 			timer.Start();
 		}
+
+		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
+
+		isAppRunning = CitiesManager.IsRunning();
+	}
+
+	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
+	{
+		isAppRunning = isRunning;
+
+		if (buttonStateRunning is null || buttonStateRunning == isRunning)
+		{
+			base_PB_Icon.Loading = isRunning;
+			buttonStateRunning = null;
+		}
+	}
+
+	private void Base_PB_Icon_Paint(object sender, PaintEventArgs e)
+	{
+		e.Graphics.Clear(base_PB_Icon.BackColor);
+
+		using var icon = base_PB_Icon.Width > 48 ? Properties.Resources.AppIcon_96 : Properties.Resources.AppIcon_48;
+
+		if (buttonStateRunning is not null && buttonStateRunning != isAppRunning)
+			icon.Color(FormDesign.Design.ActiveColor);
+		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Pressed))
+			icon.Color(FormDesign.Design.ActiveColor);
+		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Hovered))
+			icon.Color(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.MenuForeColor));
+		else
+			icon.Color(FormDesign.Design.MenuForeColor);
+
+		if (base_PB_Icon.Loading)
+		{
+			e.Graphics.TranslateTransform(base_PB_Icon.Width / 2f, base_PB_Icon.Height / 2f);
+			e.Graphics.RotateTransform((float)(base_PB_Icon.LoaderPercentage * -3.6));
+			e.Graphics.TranslateTransform(-base_PB_Icon.Width / 2f, -base_PB_Icon.Height / 2f);
+		}
+
+		e.Graphics.DrawImage(icon, new Rectangle(Point.Empty, base_PB_Icon.Size));
 	}
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -79,19 +125,7 @@ public partial class MainForm : BasePanelForm
 	{
 		if (keyData == (Keys.Control | Keys.S) && CitiesManager.CitiesAvailable())
 		{
-			if (CurrentPanel is PC_MainPage mainPage)
-			{
-				mainPage.B_StartStop.Loading = true;
-			}
-
-			if (CitiesManager.IsRunning())
-			{
-				new BackgroundAction("Stopping Cities: Skylines", CitiesManager.Kill).Run();
-			}
-			else
-			{
-				new BackgroundAction("Starting Cities: Skylines", CitiesManager.Launch).Run();
-			}
+			LaunchStopCities();
 
 			return true;
 		}
@@ -99,11 +133,43 @@ public partial class MainForm : BasePanelForm
 		return base.ProcessCmdKey(ref msg, keyData);
 	}
 
+	protected override void OnAppIconClicked()
+	{
+		LaunchStopCities();
+	}
+
+	private void LaunchStopCities()
+	{
+		if (CitiesManager.CitiesAvailable())
+		{
+			if (LocationManager.Platform is Platform.Windows)
+			{
+				if (CurrentPanel is PC_MainPage mainPage)
+				{
+					mainPage.B_StartStop.Loading = true;
+				}
+
+				base_PB_Icon.Loading = true;
+			}
+
+			if (CitiesManager.IsRunning())
+			{
+				buttonStateRunning = false;
+				new BackgroundAction("Stopping Cities: Skylines", CitiesManager.Kill).Run();
+			}
+			else
+			{
+				buttonStateRunning = true;
+				new BackgroundAction("Starting Cities: Skylines", CitiesManager.Launch).Run();
+			}
+		}
+	}
+
 	protected override void OnDeactivate(EventArgs e)
 	{
 		if (TopMost)
 		{
-			Thread.Sleep(100);
+			Thread.Sleep(200);
 			TopMost = false;
 			this.ShowUp();
 			return;
@@ -127,6 +193,7 @@ public partial class MainForm : BasePanelForm
 
 			if (CentralManager.SessionSettings.WindowIsMaximized)
 			{
+				WindowState = FormWindowState.Minimized;
 				WindowState = FormWindowState.Maximized;
 			}
 
@@ -134,28 +201,19 @@ public partial class MainForm : BasePanelForm
 		}
 	}
 
-	protected override void OnResizeEnd(EventArgs e)
+	protected override void OnFormClosing(FormClosingEventArgs e)
 	{
-		base.OnResizeEnd(e);
+		base.OnFormClosing(e);
 
 		if (!TopMost && startBoundsSet)
 		{
-			if (!(CentralManager.SessionSettings.WindowIsMaximized = WindowState == FormWindowState.Maximized))
+			if ((CentralManager.SessionSettings.WindowIsMaximized = WindowState == FormWindowState.Maximized))
 			{
-				CentralManager.SessionSettings.WindowBounds = Bounds;
+				CentralManager.SessionSettings.WindowBounds = RestoreBounds;
 			}
+			else
+				CentralManager.SessionSettings.WindowBounds = Bounds;
 
-			CentralManager.SessionSettings.Save();
-		}
-	}
-
-	protected override void OnResize(EventArgs e)
-	{
-		base.OnResize(e);
-
-		if (!TopMost && startBoundsSet)
-		{
-			CentralManager.SessionSettings.WindowIsMaximized = WindowState == FormWindowState.Maximized;
 			CentralManager.SessionSettings.Save();
 		}
 	}

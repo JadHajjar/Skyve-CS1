@@ -14,12 +14,13 @@ internal class SessionSettings : ISave
 
 	public bool LinkModAssets { get; set; } = true;
 	public bool LargeItemOnHover { get; set; }
-	public bool ShowDatesRelatively { get; set; }
+	public bool ShowDatesRelatively { get; set; } = true;
 	public bool AdvancedIncludeEnable { get; set; }
 	public bool DisableNewModsByDefault { get; set; } = true;
 	public bool DisableNewAssetsByDefault { get; set; }
-	public bool OverrideGameChanges { get; set; } = true;
+	public bool OverrideGameChanges { get; set; }
 	public bool FilterOutPackagesWithOneAsset { get; set; }
 	public bool FilterOutPackagesWithMods { get; set; }
 	public bool AdvancedLaunchOptions { get; set; }
+	public bool HidePseudoMods { get; set; }
 }

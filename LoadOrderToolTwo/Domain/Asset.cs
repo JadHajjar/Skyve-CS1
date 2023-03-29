@@ -12,6 +12,8 @@ using System.IO;
 namespace LoadOrderToolTwo.Domain;
 public class Asset : IPackage
 {
+	private string[] _assetTags;
+
 	public Asset(Package package, string crpPath)
 	{
 		FileName = crpPath;
@@ -22,12 +24,12 @@ public class Asset : IPackage
 		{
 			Name = asset.Name;
 			Description = asset.Description;
-			AssetTags = asset.Tags;
+			_assetTags = asset.Tags;
 		}
 		else
 		{
 			Name = Path.GetFileNameWithoutExtension(crpPath).FormatWords();
-			AssetTags = new string[0];
+			_assetTags = new string[0];
 		}
 	}
 
@@ -36,7 +38,6 @@ public class Asset : IPackage
 	public long FileSize { get; }
 	public string Name { get; set; }
 	public string? Description { get; }
-	public string[] AssetTags { get; }
 	public bool IsIncluded { get => AssetsUtil.IsIncluded(this); set => AssetsUtil.SetIncluded(this, value); }
 
 	public string Folder => ((IPackage)Package).Folder;
@@ -61,8 +62,23 @@ public class Asset : IPackage
 	public string? SteamDescription { get => ((IPackage)Package).SteamDescription; set => ((IPackage)Package).SteamDescription = value; }
 	public string? VirtualFolder => ((IPackage)Package).VirtualFolder;
 	public Bitmap? AuthorIconImage => ((IPackage)Package).AuthorIconImage;
-
 	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
+	public bool IsPseudoMod { get => ((IPackage)Package).IsPseudoMod; set => ((IPackage)Package).IsPseudoMod = value; }
+	public IEnumerable<string> AssetTags 
+	{
+		get
+		{
+			foreach (var item in _assetTags)
+			{
+				yield return item;
+			}
+
+			foreach (var item in AssetsUtil.GetFindItTags(this))
+			{
+				yield return item.ToCapital(false);
+			}
+		}
+	}
 
 	public override bool Equals(object? obj)
 	{

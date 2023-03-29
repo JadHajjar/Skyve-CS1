@@ -34,5 +34,6 @@ public interface IPackage
 	bool Workshop { get; }
 	bool IsIncluded { get; set; }
 	long FileSize { get; }
+	bool IsPseudoMod { get; set; }
 	DateTime SubscribeTime { get; }
 }

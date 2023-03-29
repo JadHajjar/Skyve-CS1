@@ -34,15 +34,19 @@ partial class PC_DLCs
 	private void InitializeComponent()
 	{
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
-			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Duplicates = new System.Windows.Forms.Label();
 			this.L_Counts = new System.Windows.Forms.Label();
+			this.T_YourDlcs = new SlickControls.SlickTab();
+			this.T_AllDlcs = new SlickControls.SlickTab();
+			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
 			this.LC_DLCs = new LoadOrderToolTwo.UserInterface.Lists.DlcListControl();
 			this.TLP_Main.SuspendLayout();
+			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -55,12 +59,13 @@ partial class PC_DLCs
 			this.TLP_Main.ColumnCount = 2;
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_Main.Controls.Add(this.tableLayoutPanel1, 0, 1);
 			this.TLP_Main.Controls.Add(this.B_ExInclude, 1, 0);
-			this.TLP_Main.Controls.Add(this.slickSpacer2, 0, 1);
-			this.TLP_Main.Controls.Add(this.slickSpacer1, 0, 3);
+			this.TLP_Main.Controls.Add(this.slickSpacer2, 0, 2);
+			this.TLP_Main.Controls.Add(this.slickSpacer1, 0, 4);
 			this.TLP_Main.Controls.Add(this.TB_Search, 0, 0);
-			this.TLP_Main.Controls.Add(this.tableLayoutPanel3, 0, 2);
-			this.TLP_Main.Controls.Add(this.LC_DLCs, 0, 4);
+			this.TLP_Main.Controls.Add(this.tableLayoutPanel3, 0, 3);
+			this.TLP_Main.Controls.Add(this.LC_DLCs, 0, 5);
 			this.TLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TLP_Main.Location = new System.Drawing.Point(0, 30);
 			this.TLP_Main.Name = "TLP_Main";
@@ -69,34 +74,36 @@ partial class PC_DLCs
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Main.Size = new System.Drawing.Size(932, 683);
 			this.TLP_Main.TabIndex = 0;
 			// 
-			// B_ExInclude
+			// tableLayoutPanel1
 			// 
-			this.B_ExInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ExInclude.Image1 = "I_X";
-			this.B_ExInclude.Image2 = "I_Check";
-			this.B_ExInclude.Location = new System.Drawing.Point(556, 3);
-			this.B_ExInclude.Name = "B_ExInclude";
-			this.B_ExInclude.Option1 = "ExcludeAll";
-			this.B_ExInclude.Option2 = "IncludeAll";
-			this.B_ExInclude.Size = new System.Drawing.Size(373, 40);
-			this.B_ExInclude.TabIndex = 1;
-			this.B_ExInclude.TabStop = false;
-			this.B_ExInclude.LeftClicked += new System.EventHandler(this.B_ExInclude_LeftClicked);
-			this.B_ExInclude.RightClicked += new System.EventHandler(this.B_ExInclude_RightClicked);
+			this.tableLayoutPanel1.AutoSize = true;
+			this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.tableLayoutPanel1.ColumnCount = 3;
+			this.TLP_Main.SetColumnSpan(this.tableLayoutPanel1, 2);
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.Controls.Add(this.T_YourDlcs, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.T_AllDlcs, 1, 0);
+			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 53);
+			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(932, 32);
+			this.tableLayoutPanel1.TabIndex = 16;
 			// 
 			// slickSpacer2
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer2, 2);
 			this.slickSpacer2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer2.Location = new System.Drawing.Point(0, 53);
+			this.slickSpacer2.Location = new System.Drawing.Point(0, 85);
 			this.slickSpacer2.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer2.Name = "slickSpacer2";
 			this.slickSpacer2.Size = new System.Drawing.Size(932, 2);
@@ -108,7 +115,7 @@ partial class PC_DLCs
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 2);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 78);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 110);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(932, 2);
@@ -144,7 +151,7 @@ partial class PC_DLCs
 			this.tableLayoutPanel3.Controls.Add(this.L_Duplicates, 0, 0);
 			this.tableLayoutPanel3.Controls.Add(this.L_Counts, 1, 0);
 			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 55);
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 87);
 			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 2;
@@ -173,6 +180,52 @@ partial class PC_DLCs
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			// 
+			// T_YourDlcs
+			// 
+			this.T_YourDlcs.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.T_YourDlcs.Icon = null;
+			this.T_YourDlcs.LinkedControl = null;
+			this.T_YourDlcs.Location = new System.Drawing.Point(3, 3);
+			this.T_YourDlcs.Name = "T_YourDlcs";
+			this.T_YourDlcs.Selected = true;
+			this.T_YourDlcs.Size = new System.Drawing.Size(150, 26);
+			this.T_YourDlcs.TabIndex = 0;
+			this.T_YourDlcs.TabStop = false;
+			this.T_YourDlcs.Text = "YourDlcs";
+			this.T_YourDlcs.TabSelected += new System.EventHandler(this.T_YourDlcs_TabSelected);
+			// 
+			// T_AllDlcs
+			// 
+			this.T_AllDlcs.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.T_AllDlcs.Icon = null;
+			this.T_AllDlcs.LinkedControl = null;
+			this.T_AllDlcs.Location = new System.Drawing.Point(159, 3);
+			this.T_AllDlcs.Name = "T_AllDlcs";
+			this.T_AllDlcs.Selected = false;
+			this.T_AllDlcs.Size = new System.Drawing.Size(150, 26);
+			this.T_AllDlcs.TabIndex = 0;
+			this.T_AllDlcs.TabStop = false;
+			this.T_AllDlcs.Text = "AllDlcs";
+			this.T_AllDlcs.TabSelected += new System.EventHandler(this.T_YourDlcs_TabSelected);
+			// 
+			// B_ExInclude
+			// 
+			this.B_ExInclude.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ExInclude.Image1 = "I_X";
+			this.B_ExInclude.Image2 = "I_Check";
+			this.B_ExInclude.Location = new System.Drawing.Point(556, 3);
+			this.B_ExInclude.Name = "B_ExInclude";
+			this.B_ExInclude.Option1 = "ExcludeAll";
+			this.B_ExInclude.Option2 = "IncludeAll";
+			this.B_ExInclude.Size = new System.Drawing.Size(373, 47);
+			this.B_ExInclude.TabIndex = 1;
+			this.B_ExInclude.TabStop = false;
+			this.B_ExInclude.LeftClicked += new System.EventHandler(this.B_ExInclude_LeftClicked);
+			this.B_ExInclude.RightClicked += new System.EventHandler(this.B_ExInclude_RightClicked);
+			// 
 			// LC_DLCs
 			// 
 			this.LC_DLCs.AutoInvalidate = false;
@@ -181,11 +234,11 @@ partial class PC_DLCs
 			this.LC_DLCs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.LC_DLCs.HighlightOnHover = true;
 			this.LC_DLCs.Loading = true;
-			this.LC_DLCs.Location = new System.Drawing.Point(0, 80);
+			this.LC_DLCs.Location = new System.Drawing.Point(0, 112);
 			this.LC_DLCs.Margin = new System.Windows.Forms.Padding(0);
 			this.LC_DLCs.Name = "LC_DLCs";
 			this.LC_DLCs.SeparateWithLines = true;
-			this.LC_DLCs.Size = new System.Drawing.Size(932, 603);
+			this.LC_DLCs.Size = new System.Drawing.Size(932, 571);
 			this.LC_DLCs.TabIndex = 15;
 			// 
 			// PC_DLCs
@@ -200,6 +253,7 @@ partial class PC_DLCs
 			this.Controls.SetChildIndex(this.TLP_Main, 0);
 			this.TLP_Main.ResumeLayout(false);
 			this.TLP_Main.PerformLayout();
+			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel3.ResumeLayout(false);
 			this.tableLayoutPanel3.PerformLayout();
 			this.ResumeLayout(false);
@@ -218,4 +272,7 @@ partial class PC_DLCs
 	private System.Windows.Forms.Label L_Duplicates;
 	private System.Windows.Forms.Label L_Counts;
 	private DlcListControl LC_DLCs;
+	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+	private SlickControls.SlickTab T_YourDlcs;
+	private SlickControls.SlickTab T_AllDlcs;
 }

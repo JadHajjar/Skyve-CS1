@@ -72,6 +72,7 @@ public class Package : IPackage
 	public bool SteamInfoLoaded { get; set; }
 	public string[]? Tags { get; set; }
 	public string? SteamDescription { get; set; }
+	public bool IsPseudoMod { get; set; }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => SetIncluded(value); }
 
 	Package IPackage.Package => this;
