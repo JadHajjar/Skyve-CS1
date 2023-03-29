@@ -33,10 +33,13 @@ internal class CachedSaveLibrary<TItem, TKey, TValue> where TItem : CachedSaveIt
 
 	public bool GetValue(TKey key, out TValue? value)
 	{
-		if (_dictionary.ContainsKey(key) && _dictionary[key].IsStateValid())
+		lock (_dictionary)
 		{
-			value = _dictionary[key].ValueToSave;
-			return true;
+			if (_dictionary.ContainsKey(key) && _dictionary[key].IsStateValid())
+			{
+				value = _dictionary[key].ValueToSave;
+				return true;
+			}
 		}
 
 		value = default;
@@ -45,19 +48,26 @@ internal class CachedSaveLibrary<TItem, TKey, TValue> where TItem : CachedSaveIt
 
 	public void Save()
 	{
+		List<TItem> values;
+
 		lock (_dictionary)
 		{
-			foreach (var item in _dictionary.Values)
-			{
-				item.Save();
-			}
+			values = new(_dictionary.Values);
 
 			_dictionary.Clear();
+		}
+
+		foreach (var item in values)
+		{
+			item.Save();
 		}
 	}
 
 	public bool Any()
 	{
-		return _dictionary.Count > 0;
+		lock (_dictionary)
+		{
+			return _dictionary.Count > 0;
+		}
 	}
 }
