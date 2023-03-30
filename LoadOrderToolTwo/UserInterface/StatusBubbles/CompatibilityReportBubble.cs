@@ -49,18 +49,6 @@ internal class CompatibilityReportBubble : StatusBubbleBase
 		}
 	}
 
-	protected override void OnMouseClick(MouseEventArgs e)
-	{
-		base.OnMouseClick(e);
-
-		if (CentralManager.IsContentLoaded && !CompatibilityManager.CatalogAvailable)
-		{
-			try
-			{ Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=2881031511"); }
-			catch { }
-		}
-	}
-
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
 		if (!CentralManager.IsContentLoaded)

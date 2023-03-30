@@ -23,7 +23,11 @@ internal class TagsDropDown : SlickSelectionDropDown<string>
         {
             new BackgroundAction("Getting tag list", () =>
             {
-                Items = new[] { Locale.AnyTags }.Concat(AssetsUtil.AssetInfoCache.Values.SelectMany(x => x.Tags)).Concat(SteamUtil.GetCachedInfo()?.Values.SelectMany(x => x.Tags ?? new string[0]) ?? new string[0]).Distinct().ToArray();
+                Items = new[] { Locale.AnyTags }
+                .Concat(AssetsUtil.AssetInfoCache.Values.SelectMany(x => x.Tags))
+                .Concat(SteamUtil.GetCachedInfo()?.Values.SelectMany(x => x.Tags ?? new string[0]) ?? new string[0])
+                .Concat(AssetsUtil.GetAllFindItTags())
+                .Distinct().ToArray();
             }).Run();
         }
     }

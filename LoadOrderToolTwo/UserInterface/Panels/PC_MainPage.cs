@@ -5,6 +5,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -26,6 +27,8 @@ public partial class PC_MainPage : PanelContent
 		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
 
 		RefreshButtonState(CitiesManager.IsRunning(), true);
+
+		SlickTip.SetTo(B_StartStop, "LaunchTooltip");
 	}
 
 	private void SetButtonEnabledOnLoad()
@@ -36,8 +39,6 @@ public partial class PC_MainPage : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = Locale.Dashboard;
-
-		SlickTip.SetTo(B_StartStop, "Use [Ctrl + S] anywhere in the app to launch/stop");
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
@@ -82,6 +83,13 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (e.Button == MouseButtons.Left)
 		{
+			if (CentralManager.IsContentLoaded && !CompatibilityManager.CatalogAvailable)
+			{
+				try
+				{ Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=2881031511"); }
+				catch { }
+			}
+			else
 			Form.PushPanel<PC_CompatibilityReport>((Form as MainForm)?.PI_Compatibility);
 		}
 	}

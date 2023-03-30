@@ -1,4 +1,8 @@
-﻿using LoadOrderToolTwo.Domain.Enums;
+﻿using Extensions;
+
+using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
+using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -12,11 +16,35 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_ModUtilities : PanelContent
 {
+	private readonly ItemListControl<Mod> LC_Duplicates;
+
 	public PC_ModUtilities()
 	{
+		LC_Duplicates = new ItemListControl<Mod>() { Dock = DockStyle.Top };
 		InitializeComponent();
 
-		B_LoadCollection.Height = 0;
+		P_DuplicateMods.Controls.Add(LC_Duplicates);
+
+		RefreshModIssues();
+
+		CentralManager.ModInformationUpdated += RefreshModIssues;
+	}
+
+	private void RefreshModIssues()
+	{
+		var duplicates = ModsUtil.GetDuplicateMods();
+		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
+		//P_DuplicateMods.Visible = duplicates.Any();
+
+		var modsOutOfDate = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.OutOfDate);
+		var modsIncomplete = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
+
+		L_OutOfDate.Text = $"{modsOutOfDate} {(modsOutOfDate == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}";
+		L_Incomplete.Text = $"{modsIncomplete} {(modsIncomplete == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}";
+
+		L_OutOfDate.Visible = modsOutOfDate > 0;
+		L_Incomplete.Visible = modsIncomplete > 0;
+		//P_ModIssues.Visible = modsOutOfDate > 0 || modsIncomplete > 0;
 	}
 
 	protected override void LocaleChanged()
@@ -30,9 +58,12 @@ public partial class PC_ModUtilities : PanelContent
 
 		B_ReDownload.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ReDownload));
 		P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Steam));
+		P_ModIssues.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ModWarning));
+		P_DuplicateMods.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Broken));
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Filters.Margin = B_ReDownload.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		P_Filters.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		LC_Duplicates.Height = (int)(37 * 4 * UI.FontScale);
 	}
 
 	private async void B_LoadCollection_Click(object sender, EventArgs e)

@@ -17,7 +17,7 @@ namespace LoadOrderToolTwo;
 public partial class MainForm : BasePanelForm
 {
 	private bool startBoundsSet;
-	private bool isAppRunning;
+	private bool isGameRunning;
 	private bool? buttonStateRunning;
 
 	public MainForm()
@@ -26,6 +26,8 @@ public partial class MainForm : BasePanelForm
 
 		base_PB_Icon.UserDraw = true;
 		base_PB_Icon.Paint += Base_PB_Icon_Paint;
+
+		SlickTip.SetTo(base_PB_Icon, "LaunchTooltip");
 
 #if DEBUG
 		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(4);
@@ -54,12 +56,12 @@ public partial class MainForm : BasePanelForm
 
 		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
 
-		isAppRunning = CitiesManager.IsRunning();
+		isGameRunning = CitiesManager.IsRunning();
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
 	{
-		isAppRunning = isRunning;
+		isGameRunning = isRunning;
 
 		if (buttonStateRunning is null || buttonStateRunning == isRunning)
 		{
@@ -74,19 +76,27 @@ public partial class MainForm : BasePanelForm
 
 		using var icon = base_PB_Icon.Width > 48 ? Properties.Resources.AppIcon_96 : Properties.Resources.AppIcon_48;
 
-		if (buttonStateRunning is not null && buttonStateRunning != isAppRunning)
+		if (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
+		{
 			icon.Color(FormDesign.Design.ActiveColor);
+		}
 		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Pressed))
+		{
 			icon.Color(FormDesign.Design.ActiveColor);
+		}
 		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Hovered))
+		{
 			icon.Color(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.MenuForeColor));
+		}
 		else
+		{
 			icon.Color(FormDesign.Design.MenuForeColor);
+		}
 
 		if (base_PB_Icon.Loading)
 		{
 			e.Graphics.TranslateTransform(base_PB_Icon.Width / 2f, base_PB_Icon.Height / 2f);
-			e.Graphics.RotateTransform((float)(base_PB_Icon.LoaderPercentage * -3.6));
+			e.Graphics.RotateTransform((float)(base_PB_Icon.LoaderPercentage * 3.6));
 			e.Graphics.TranslateTransform(-base_PB_Icon.Width / 2f, -base_PB_Icon.Height / 2f);
 		}
 
@@ -95,14 +105,19 @@ public partial class MainForm : BasePanelForm
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		if (File.Exists(Path.Combine(LocationManager.CurrentDirectory, "Wake")))
+		if (!File.Exists(Path.Combine(LocationManager.CurrentDirectory, "Wake")))
+		{
+			return;
+		}
+
+		if (isGameRunning)
 		{
 			File.Delete(Path.Combine(LocationManager.CurrentDirectory, "Wake"));
 
 			SendKeys.SendWait("%{TAB}");
-
-			this.TryInvoke(this.ShowUp);
 		}
+
+		this.TryInvoke(this.ShowUp);
 	}
 
 	protected override void UIChanged()
@@ -123,12 +138,34 @@ public partial class MainForm : BasePanelForm
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 	{
-		if (keyData == (Keys.Control | Keys.S) && CitiesManager.CitiesAvailable())
+		switch (keyData)
 		{
-			LaunchStopCities();
+			case Keys.F1:
+				SetPanel<PC_MainPage>(PI_Dashboard);
+				return true;
 
-			return true;
+			case Keys.F2:
+				SetPanel<PC_Profiles>(PI_Profiles);
+				return true;
+
+			case Keys.F3:
+				SetPanel<PC_Mods>(PI_Mods);
+				return true;
+
+			case Keys.F4:
+				SetPanel<PC_Assets>(PI_Assets);
+				return true;
+
+			case Keys.F5:
+				if (CitiesManager.CitiesAvailable())
+				{
+					LaunchStopCities();
+
+					return true;
+				}
+				break;
 		}
+
 
 		return base.ProcessCmdKey(ref msg, keyData);
 	}
@@ -182,7 +219,7 @@ public partial class MainForm : BasePanelForm
 	{
 		base.OnCreateControl();
 
-		if (!startBoundsSet)
+		if (!startBoundsSet && Screen.AllScreens.Length == 1)
 		{
 			if (CentralManager.SessionSettings.WindowBounds != null)
 			{
@@ -212,7 +249,9 @@ public partial class MainForm : BasePanelForm
 				CentralManager.SessionSettings.WindowBounds = RestoreBounds;
 			}
 			else
+			{
 				CentralManager.SessionSettings.WindowBounds = Bounds;
+			}
 
 			CentralManager.SessionSettings.Save();
 		}

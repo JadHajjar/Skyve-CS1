@@ -139,7 +139,11 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
         {
             using var authorIcon = Properties.Resources.I_DlcIcon.Color(FormDesign.Design.IconColor);
 
-            e.Graphics.DrawRoundedImage(authorIcon, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), iconRectangle, (int)(4 * UI.FontScale));
+            e.Graphics.FillRectangle(new SolidBrush(BackColor), iconRectangle.CenterR(iconRectangle.Height - 4, iconRectangle.Height - 4));
+            e.Graphics.DrawImage(authorIcon, iconRectangle.CenterR(iconRectangle.Height - 2, iconRectangle.Height - 2));
         }
         else
         {

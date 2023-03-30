@@ -823,6 +823,26 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_ModWarning {
+            get {
+                object obj = ResourceManager.GetObject("I_ModWarning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ModWarning_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_ModWarning_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_New_48 {
             get {
                 object obj = ResourceManager.GetObject("I_New_48", resourceCulture);

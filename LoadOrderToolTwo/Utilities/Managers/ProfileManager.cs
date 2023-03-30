@@ -2,7 +2,6 @@
 
 using LoadOrderShared;
 
-using LoadOrderToolTwo.ColossalOrder;
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
 
@@ -21,7 +20,7 @@ public static class ProfileManager
 	private const string WS_CONTENT_PATH = "%WORKSHOP%";
 	private static List<Profile> _profiles;
 	private static bool disableAutoSave;
-	private static readonly FileSystemWatcher _watcher;
+	private static readonly FileSystemWatcher? _watcher;
 
 	public static bool ApplyingProfile { get; private set; }
 	public static Profile CurrentProfile { get; private set; }
@@ -70,12 +69,17 @@ public static class ProfileManager
 
 		CurrentProfile ??= Profile.TemporaryProfile;
 
-		_watcher = new FileSystemWatcher
+		if (Directory.Exists(LocationManager.LotAppDataPath))
 		{
-			Path = LocationManager.LotProfilesAppDataPath,
-			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
-			Filter = "*.json"
-		};
+			Directory.CreateDirectory(LocationManager.LotProfilesAppDataPath);
+
+			_watcher = new FileSystemWatcher
+			{
+				Path = LocationManager.LotProfilesAppDataPath,
+				NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
+				Filter = "*.json"
+			};
+		}
 
 		if (!CommandUtil.NoWindow)
 		{
@@ -476,11 +480,14 @@ public static class ProfileManager
 
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
 
-		_watcher.Changed += new FileSystemEventHandler(FileChanged);
-		_watcher.Created += new FileSystemEventHandler(FileChanged);
-		_watcher.Deleted += new FileSystemEventHandler(FileChanged);
+		if (_watcher is not null)
+		{
+			_watcher.Changed += new FileSystemEventHandler(FileChanged);
+			_watcher.Created += new FileSystemEventHandler(FileChanged);
+			_watcher.Deleted += new FileSystemEventHandler(FileChanged);
 
-		_watcher.EnableRaisingEvents = true;
+			_watcher.EnableRaisingEvents = true;
+		}
 	}
 
 	private static void FileChanged(object sender, FileSystemEventArgs e)
@@ -547,7 +554,10 @@ public static class ProfileManager
 
 		try
 		{
-			_watcher.EnableRaisingEvents = false;
+			if (_watcher is not null)
+			{
+				_watcher.EnableRaisingEvents = false;
+			}
 
 			Directory.CreateDirectory(LocationManager.LotProfilesAppDataPath);
 
@@ -559,11 +569,14 @@ public static class ProfileManager
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}"); 
+			Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}");
 		}
 		finally
 		{
-			_watcher.EnableRaisingEvents = true;
+			if (_watcher is not null)
+			{
+				_watcher.EnableRaisingEvents = true;
+			}
 		}
 
 		return false;

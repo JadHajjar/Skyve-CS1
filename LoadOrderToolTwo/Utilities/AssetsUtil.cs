@@ -158,9 +158,20 @@ internal class AssetsUtil
 		SaveChanges();
 	}
 
+	internal static IEnumerable<string> GetAllFindItTags()
+	{
+		foreach (var item in _findItTags.assetTags)
+		{
+			foreach (var tag in item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+			{
+				yield return tag;
+			}
+		}
+	}
+
 	internal static IEnumerable<string> GetFindItTags(Asset asset)
 	{
-		var assetName = (asset.SteamId == 0?"":$"{asset.SteamId}.")+ Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_');
+		var assetName = (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_');
 
 		foreach (var item in _findItTags.assetTags)
 		{
