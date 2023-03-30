@@ -78,7 +78,7 @@ public partial class MainForm : BasePanelForm
 
 		if (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 		{
-			icon.Color(FormDesign.Design.ActiveColor);
+			icon.Color(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.MenuForeColor, Math.Abs((int)base_PB_Icon.LoaderPercentage * 5 % 200 - 100)));
 		}
 		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Pressed))
 		{

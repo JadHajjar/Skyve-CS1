@@ -33,18 +33,24 @@ public partial class PC_ModUtilities : PanelContent
 	private void RefreshModIssues()
 	{
 		var duplicates = ModsUtil.GetDuplicateMods();
-		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
-		//P_DuplicateMods.Visible = duplicates.Any();
-
 		var modsOutOfDate = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.OutOfDate);
 		var modsIncomplete = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
 
-		L_OutOfDate.Text = $"{modsOutOfDate} {(modsOutOfDate == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}";
-		L_Incomplete.Text = $"{modsIncomplete} {(modsIncomplete == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}";
+		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
+		LC_Duplicates.SetSorting(PackageSorting.Mod);
 
-		L_OutOfDate.Visible = modsOutOfDate > 0;
-		L_Incomplete.Visible = modsIncomplete > 0;
-		//P_ModIssues.Visible = modsOutOfDate > 0 || modsIncomplete > 0;
+		this.TryInvoke(() =>
+		{
+			LC_Duplicates.Height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
+			P_DuplicateMods.Visible = duplicates.Any();
+
+			L_OutOfDate.Text = $"{modsOutOfDate} {(modsOutOfDate == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}";
+			L_Incomplete.Text = $"{modsIncomplete} {(modsIncomplete == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}";
+
+			L_OutOfDate.Visible = modsOutOfDate > 0;
+			L_Incomplete.Visible = modsIncomplete > 0;
+			P_ModIssues.Visible = modsOutOfDate > 0 || modsIncomplete > 0;
+		});
 	}
 
 	protected override void LocaleChanged()
@@ -56,14 +62,14 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		base.UIChanged();
 
-		B_ReDownload.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ReDownload));
+		B_ReDownload.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Tools));
 		P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Steam));
 		P_ModIssues.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ModWarning));
 		P_DuplicateMods.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Broken));
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		P_Filters.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		LC_Duplicates.Height = (int)(37 * 4 * UI.FontScale);
+		LC_Duplicates.Height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
 	}
 
 	private async void B_LoadCollection_Click(object sender, EventArgs e)
@@ -100,5 +106,12 @@ public partial class PC_ModUtilities : PanelContent
 
 			e.IsInputKey = false;
 		}
+	}
+
+	private void LSMDragDrop_FileSelected(string obj)
+	{
+		var assets = LsmUtil.LoadMissingAssets(obj);
+
+		Form.PushPanel(null, new PC_MissingPackages(new(), assets.ToList()));
 	}
 }

@@ -367,7 +367,7 @@ internal static class CompatibilityManager
 
 	private static ReportMessage UnneededDependencyMod(Mod subscribedMod)
 	{
-		if (!subscribedMod.Statuses.Contains(Status.DependencyMod))
+		if (!subscribedMod.Statuses.Contains(Status.DependencyMod) || !subscribedMod.IsIncluded)
 		{
 			return null;
 		}
@@ -466,7 +466,14 @@ internal static class CompatibilityManager
 
 	private static ReportMessage RequiredMods(Mod subscribedMod)
 	{
+		if (!subscribedMod.IsIncluded)
+		{
+			return null;
+		}
+
 		var mods = subscribedMod.RequiredMods.FindAll(x => !Catalog.IsValidID(x) || ModAndGroupItem(x) != null);
+
+		mods.RemoveAll(x => subscribedMod.ExclusionForRequiredMods?.Contains(x) ?? false);
 
 		if (!mods.Any())
 		{

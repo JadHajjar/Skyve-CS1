@@ -23,6 +23,7 @@ namespace LoadOrderToolTwo.UserInterface.Panels;
 internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 {
 	private bool clearingFilters = true;
+	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
 	protected readonly ItemListControl<T> LC_Items;
 
@@ -112,6 +113,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		base.OnCreateControl();
 
+		firstFilterPassed = true;
 		P_FiltersContainer.Height = P_ActionsContainer.Height = 0;
 		P_FiltersContainer.Visible = P_ActionsContainer.Visible = true;
 	}
@@ -243,103 +245,119 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private bool IsFilteredOut(T item)
 	{
-		var doNotDraw = false;
-
 		if (CentralManager.CurrentProfile.LaunchSettings.NoWorkshop)
 		{
-			doNotDraw = item.Workshop;
+			if (item.Workshop)
+				return true;
 		}
 
-		if (!doNotDraw && CentralManager.CurrentProfile.ForAssetEditor)
+		if (CentralManager.CurrentProfile.ForAssetEditor)
 		{
-			doNotDraw = item.Package.ForNormalGame == true;
+			if (item.Package.ForNormalGame == true)
+				return true;
 		}
 
-		if (!doNotDraw && CentralManager.CurrentProfile.ForGameplay)
+		if (CentralManager.CurrentProfile.ForGameplay)
 		{
-			doNotDraw = item.Package.ForAssetEditor == true;
+			if (item.Package.ForAssetEditor == true)
+				return true;
 		}
 
-		if (!doNotDraw && OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
+		if (!firstFilterPassed)
 		{
-			doNotDraw = OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Workshop;
+			return false;
 		}
 
-		if (!doNotDraw && OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
+		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			doNotDraw = OT_Included.SelectedValue == ThreeOptionToggle.Value.Option1 == item.IsIncluded;
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Workshop)
+				return true;
 		}
 
-		if (!doNotDraw && OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
+		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			doNotDraw = item.Package.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Package.Mod.IsEnabled;
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option1 == item.IsIncluded)
+				return true;
 		}
 
-		if (!doNotDraw && DD_PackageStatus.SelectedItem != DownloadStatusFilter.Any)
+		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
+		{
+			if (item.Package.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Package.Mod.IsEnabled)
+				return true;
+		}
+
+		if (DD_PackageStatus.SelectedItem != DownloadStatusFilter.Any)
 		{
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.None)
 			{
-				doNotDraw = item.Workshop;
+				if (item.Workshop)
+					return true;
 			}
 			else
 			{
-				doNotDraw = ((int)DD_PackageStatus.SelectedItem - 1) != (int)item.Status;
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)item.Status)
+					return true;
 			}
 		}
 
-		if (!doNotDraw && DD_ReportSeverity.SelectedItem != ReportSeverityFilter.Any)
+		if (DD_ReportSeverity.SelectedItem != ReportSeverityFilter.Any)
 		{
-			doNotDraw = ((int)DD_ReportSeverity.SelectedItem - 1) != (int)(item.Package.CompatibilityReport?.Severity ?? 0);
+			if (((int)DD_ReportSeverity.SelectedItem - 1) != (int)(item.Package.CompatibilityReport?.Severity ?? 0))
+				return true;
 		}
 
-		if (!doNotDraw && (DT_SubFrom.Value != DT_SubFrom.MinDate || DT_SubTo.Value != DT_SubTo.MaxDate))
+		if ((DT_SubFrom.Value != DT_SubFrom.MinDate || DT_SubTo.Value != DT_SubTo.MaxDate))
 		{
-			doNotDraw = item.LocalTime < DT_SubFrom.Value || item.LocalTime > DT_SubTo.Value;
+			if (item.LocalTime < DT_SubFrom.Value || item.LocalTime > DT_SubTo.Value)
+				return true;
 		}
 
-		if (!doNotDraw && (DT_UpdateFrom.Value != DT_UpdateFrom.MinDate || DT_UpdateTo.Value != DT_UpdateTo.MaxDate))
+		if ((DT_UpdateFrom.Value != DT_UpdateFrom.MinDate || DT_UpdateTo.Value != DT_UpdateTo.MaxDate))
 		{
-			doNotDraw = item.ServerTime < DT_UpdateFrom.Value || item.ServerTime > DT_UpdateTo.Value;
+			if (item.ServerTime < DT_UpdateFrom.Value || item.ServerTime > DT_UpdateTo.Value)
+				return true;
 		}
 
-		if (!doNotDraw && DD_Tags.SelectedItem is not null && DD_Tags.SelectedItem != Locale.AnyTags)
+		if (DD_Tags.SelectedItem is not null && DD_Tags.SelectedItem != Locale.AnyTags)
 		{
 			if (item is Asset asset)
 			{
-				doNotDraw = !(item.Tags?.Any(DD_Tags.SelectedItem) ?? false) && !asset.AssetTags.Any(DD_Tags.SelectedItem);
+				if (!(item.Tags?.Any(DD_Tags.SelectedItem) ?? false) && !asset.AssetTags.Any(DD_Tags.SelectedItem))
+					return true;
 			}
 			else
 			{
-				doNotDraw = !(item.Tags?.Any(DD_Tags.SelectedItem) ?? false);
+				if (!(item.Tags?.Any(DD_Tags.SelectedItem) ?? false))
+					return true;
 			}
 		}
 
-		if (!doNotDraw && DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
+		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
 			if (item is Asset asset)
 			{
-				doNotDraw = !DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FileName));
+				if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FileName)))
+					return true;
 			}
 			else if (item is Mod mod)
 			{
-				doNotDraw = !DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(mod.Folder));
+				if (!DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(mod.Folder)))
+					return true;
 			}
 			else
 			{
-				doNotDraw = !DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder))
-					&& !DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder));
+				if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)) && !DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)))
+					return true;
 			}
 		}
 
-		if (!doNotDraw && !string.IsNullOrWhiteSpace(TB_Search.Text))
+		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
 		{
-			doNotDraw = !(
-				TB_Search.Text.SearchCheck(item.ToString()) ||
-				TB_Search.Text.SearchCheck(item.Author?.Name) ||
-				TB_Search.Text.SearchCheck(item.SteamId.ToString()));
+			if (!(TB_Search.Text.SearchCheck(item.ToString()) || TB_Search.Text.SearchCheck(item.Author?.Name) || TB_Search.Text.SearchCheck(item.SteamId.ToString())))
+				return true;
 		}
 
-		return doNotDraw;
+		return false;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)

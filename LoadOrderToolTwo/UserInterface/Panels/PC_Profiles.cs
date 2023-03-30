@@ -100,6 +100,7 @@ public partial class PC_Profiles : PanelContent
 		I_ProfileIcon.Image = profile.GetIcon();
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
 		B_TempProfile.Visible = !profile.Temporary;
+		L_Info.Visible = I_Info.Visible = !profile.Temporary;
 
 		TLP_GeneralSettings.Visible = !profile.Temporary;
 

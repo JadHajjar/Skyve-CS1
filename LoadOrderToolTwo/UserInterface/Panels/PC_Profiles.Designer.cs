@@ -68,7 +68,7 @@ partial class PC_Profiles
 			this.CB_LoadUsed = new SlickControls.SlickCheckbox();
 			this.B_NewProfile = new SlickControls.SlickButton();
 			this.B_ViewProfiles = new SlickControls.SlickButton();
-			this.slickIcon1 = new SlickControls.SlickIcon();
+			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
 			this.B_TempProfile = new SlickControls.SlickButton();
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
@@ -193,7 +193,7 @@ partial class PC_Profiles
 			this.TLP_Main.Controls.Add(this.P_Options, 0, 3);
 			this.TLP_Main.Controls.Add(this.B_NewProfile, 3, 0);
 			this.TLP_Main.Controls.Add(this.B_ViewProfiles, 4, 0);
-			this.TLP_Main.Controls.Add(this.slickIcon1, 0, 2);
+			this.TLP_Main.Controls.Add(this.I_Info, 0, 2);
 			this.TLP_Main.Controls.Add(this.L_Info, 1, 2);
 			this.TLP_Main.Controls.Add(this.B_TempProfile, 2, 0);
 			this.TLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -684,19 +684,19 @@ partial class PC_Profiles
 			// 
 			// slickIcon1
 			// 
-			this.slickIcon1.ActiveColor = null;
-			this.slickIcon1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.slickIcon1.ColorStyle = Extensions.ColorStyle.Icon;
-			this.slickIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.slickIcon1.Enabled = false;
-			this.slickIcon1.Image = global::LoadOrderToolTwo.Properties.Resources.I_Info;
-			this.slickIcon1.Location = new System.Drawing.Point(18, 116);
-			this.slickIcon1.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
-			this.slickIcon1.Name = "slickIcon1";
-			this.slickIcon1.Selected = true;
-			this.slickIcon1.Size = new System.Drawing.Size(32, 32);
-			this.slickIcon1.TabIndex = 2;
-			this.slickIcon1.TabStop = false;
+			this.I_Info.ActiveColor = null;
+			this.I_Info.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.I_Info.ColorStyle = Extensions.ColorStyle.Icon;
+			this.I_Info.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.I_Info.Enabled = false;
+			this.I_Info.Image = global::LoadOrderToolTwo.Properties.Resources.I_Info;
+			this.I_Info.Location = new System.Drawing.Point(18, 116);
+			this.I_Info.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
+			this.I_Info.Name = "slickIcon1";
+			this.I_Info.Selected = true;
+			this.I_Info.Size = new System.Drawing.Size(32, 32);
+			this.I_Info.TabIndex = 2;
+			this.I_Info.TabStop = false;
 			// 
 			// L_Info
 			// 
@@ -854,7 +854,7 @@ partial class PC_Profiles
 	private SlickControls.SlickCheckbox CB_LoadEnabled;
 	private SlickControls.SlickCheckbox CB_LoadUsed;
 	private SlickControls.SlickIcon B_Save;
-	private SlickControls.SlickIcon slickIcon1;
+	private SlickControls.SlickIcon I_Info;
 	private System.Windows.Forms.Label L_Info;
 	private SlickControls.SlickButton B_TempProfile;
 	private SlickControls.SlickCheckbox CB_LoadSave;

@@ -9,4 +9,5 @@ internal enum PackageSorting
     Author,
     Status,
     CompatibilityReport,
+	Mod,
 }

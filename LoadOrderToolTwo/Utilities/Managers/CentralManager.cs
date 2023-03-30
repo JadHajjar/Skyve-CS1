@@ -191,7 +191,7 @@ internal static class CentralManager
 
 			_delayedWorkshopInfoUpdated.Run();
 
-			Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null), (package) =>
+			Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ToList(), (package) =>
 			{
 				package.Status = ModsUtil.GetStatus(package, out var reason);
 				package.StatusReason = reason;
@@ -234,7 +234,7 @@ internal static class CentralManager
 		_delayedWorkshopInfoUpdated.Run();
 
 		Log.Info($"Loading thumbnails..");
-		Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name), async (package) =>
+		Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name).ToList(), async (package) =>
 		{
 			if (!string.IsNullOrWhiteSpace(package.IconUrl))
 			{

@@ -144,104 +144,108 @@ internal class CompatibilityMessageControl : SlickControl
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        e.Graphics.Clear(BackColor);
-
-        e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-        e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-
-        var actionHovered = false;
-        var cursor = PointToClient(Cursor.Position);
-        var pad = (int)(4 * UI.FontScale);
-        var color = Message.Severity.GetSeverityColor().MergeColor(BackColor, 60);
-        var iconRect = new Rectangle(Point.Empty, UI.Scale(new Size(24, 24), UI.FontScale));
-        var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
-        var noteSize = e.Graphics.Measure(Message.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
-        var y = (int)(messageSize.Height + noteSize.Height + pad);
-        using var icon = Message.Severity.GetSeverityIcon(false);
-        using var brush = new SolidBrush(color);
-
-        e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
-        e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - 2 * pad, 0, 2 * pad, Height - pad), pad);
-
-        e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
-
-        e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && Message.LinkedPackages.Length == 0 ? StringAlignment.Center : StringAlignment.Near });
-
-        e.Graphics.DrawString(Message.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height, 0, 0));
-
-        if (Loading && LinkedMods is null)
+        try
         {
-            DrawLoader(e.Graphics, ClientRectangle.Pad(iconRect.Width + pad, y, 0, 0).CenterR(24, 24));
+            e.Graphics.Clear(BackColor);
 
-            y += 32;
-        }
-        else if (LinkedMods is not null)
-        {
-            var rect = ClientRectangle.Pad(iconRect.Width + pad, y, 0, 0);
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-            rect.Height = (int)(50 * UI.FontScale);
+            var actionHovered = false;
+            var cursor = PointToClient(Cursor.Position);
+            var pad = (int)(4 * UI.FontScale);
+            var color = Message.Severity.GetSeverityColor().MergeColor(BackColor, 60);
+            var iconRect = new Rectangle(Point.Empty, UI.Scale(new Size(24, 24), UI.FontScale));
+            var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
+            var noteSize = e.Graphics.Measure(Message.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
+            var y = (int)(messageSize.Height + noteSize.Height + pad);
+            using var icon = Message.Severity.GetSeverityIcon(false);
+            using var brush = new SolidBrush(color);
 
-            foreach (var item in LinkedMods)
+            e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
+            e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - 2 * pad, 0, 2 * pad, Height - pad), pad);
+
+            e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
+
+            e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && Message.LinkedPackages.Length == 0 ? StringAlignment.Center : StringAlignment.Near });
+
+            e.Graphics.DrawString(Message.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height, 0, 0));
+
+            if (Loading && LinkedMods is null)
             {
-                var fore = ForeColor;
+                DrawLoader(e.Graphics, ClientRectangle.Pad(iconRect.Width + pad, y, 0, 0).CenterR(24, 24));
 
-                actionHovered |= rect.Contains(cursor);
+                y += 32;
+            }
+            else if (LinkedMods is not null)
+            {
+                var rect = ClientRectangle.Pad(iconRect.Width + pad, y, 0, 0);
 
-                _modRects[item] = rect;
+                rect.Height = (int)(50 * UI.FontScale);
 
-                var buttonSize = Size.Empty;
-
-                if (rect.Contains(cursor) && (!_buttonRects.ContainsKey(item) || !_buttonRects[item].Contains(cursor)))
+                foreach (var item in LinkedMods)
                 {
-                    if (HoverState.HasFlag(HoverState.Pressed))
+                    var fore = ForeColor;
+
+                    actionHovered |= rect.Contains(cursor);
+
+                    _modRects[item] = rect;
+
+                    var buttonSize = Size.Empty;
+
+                    if (rect.Contains(cursor) && (!_buttonRects.ContainsKey(item) || !_buttonRects[item].Contains(cursor)))
                     {
-                        fore = FormDesign.Design.ActiveForeColor;
+                        if (HoverState.HasFlag(HoverState.Pressed))
+                        {
+                            fore = FormDesign.Design.ActiveForeColor;
+                        }
+
+                        e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 255 : 50, FormDesign.Design.ActiveColor)), rect.Pad(1), pad);
                     }
 
-                    e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 255 : 50, FormDesign.Design.ActiveColor)), rect.Pad(1), pad);
+                    e.Graphics.DrawRoundedImage(item.Icon ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(50, 50), UI.FontScale), ContentAlignment.TopLeft), pad, fore);
+
+                    e.Graphics.DrawString(item.Name, UI.Font(9F, FontStyle.Bold), new SolidBrush(fore), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0));
+
+                    if (item.Package is not null)
+                    {
+                        e.Graphics.DrawString(Locale.ModOwned, UI.Font(7.5F, FontStyle.Italic), new SolidBrush(Color.FromArgb(150, fore)), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Far });
+                    }
+
+                    if (_subscribingTo.Contains(item.SteamId))
+                    {
+                        _buttonRects[item] = Rectangle.Empty;
+                        DrawLoader(e.Graphics, rect.Align(new Size(24, 24), ContentAlignment.BottomRight));
+                    }
+                    else if (item.Package is null || !item.Package.IsIncluded || !item.Package.IsEnabled)
+                    {
+                        var buttonText =
+                            item.Package is null ? Locale.Subscribe :
+                            Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? Locale.Switch :
+                            Locale.Enable;
+
+                        var buttonIcon = ImageManager.GetIcon(
+                            item.Package is null ? "I_Add" :
+                            Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? "I_Switch" :
+                            "I_Ok");
+
+                        buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(8.25F));
+
+                        _buttonRects[item] = rect.Align(buttonSize, ContentAlignment.BottomRight);
+
+                        SlickButton.DrawButton(e, _buttonRects[item], buttonText, UI.Font(8.25F), buttonIcon, null, _buttonRects[item].Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Green);
+                    }
+
+                    rect.Y += rect.Height + pad;
                 }
 
-                e.Graphics.DrawRoundedImage(item.Icon ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(50, 50), UI.FontScale), ContentAlignment.TopLeft), pad, fore);
-
-                e.Graphics.DrawString(item.Name, UI.Font(9F, FontStyle.Bold), new SolidBrush(fore), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0));
-
-                if (item.Package is not null)
-                {
-                    e.Graphics.DrawString(Locale.ModOwned, UI.Font(7.5F, FontStyle.Italic), new SolidBrush(Color.FromArgb(150, fore)), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Far });
-                }
-
-                if (_subscribingTo.Contains(item.SteamId))
-                {
-                    _buttonRects[item] = Rectangle.Empty;
-                    DrawLoader(e.Graphics, rect.Align(new Size(24, 24), ContentAlignment.BottomRight));
-                }
-                else if (item.Package is null || !item.Package.IsIncluded || !item.Package.IsEnabled)
-                {
-                    var buttonText =
-                        item.Package is null ? Locale.Subscribe :
-                        Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? Locale.Switch :
-                        Locale.Enable;
-
-                    var buttonIcon = ImageManager.GetIcon(
-                        item.Package is null ? "I_Add" :
-                        Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? "I_Switch" :
-                        "I_Ok");
-
-                    buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(8.25F));
-
-                    _buttonRects[item] = rect.Align(buttonSize, ContentAlignment.BottomRight);
-
-                    SlickButton.DrawButton(e, _buttonRects[item], buttonText, UI.Font(8.25F), buttonIcon, null, _buttonRects[item].Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Green);
-                }
-
-                rect.Y += rect.Height + pad;
+                y = rect.Y;
             }
 
-            y = rect.Y;
+            Cursor = actionHovered ? Cursors.Hand : Cursors.Default;
+            Height = Math.Max(iconRect.Height, y);
         }
-
-        Cursor = actionHovered ? Cursors.Hand : Cursors.Default;
-        Height = Math.Max(iconRect.Height, y);
+        catch { }
     }
 
     protected override void OnMouseClick(MouseEventArgs e)

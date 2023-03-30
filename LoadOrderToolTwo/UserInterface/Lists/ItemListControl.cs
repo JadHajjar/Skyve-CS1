@@ -85,6 +85,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			PackageSorting.SubscribeTime => items
 				.OrderByDescending(x => x.Item.SubscribeTime),
 
+			PackageSorting.Mod => items
+				.OrderByDescending(x => System.IO.Path.GetFileName(x.Item.Package.Mod?.FileName ?? string.Empty)),
+
 			PackageSorting.CompatibilityReport => items
 				.OrderByDescending(x => x.Item.Package.CompatibilityReport?.Severity ?? default),
 
