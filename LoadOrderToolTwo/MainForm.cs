@@ -219,16 +219,16 @@ public partial class MainForm : BasePanelForm
 	{
 		base.OnCreateControl();
 
-		if (!startBoundsSet && Screen.AllScreens.Length == 1)
+		if (!startBoundsSet)
 		{
-			if (CentralManager.SessionSettings.WindowBounds != null)
+			if (CentralManager.SessionSettings.LastWindowsBounds != null)
 			{
-				Bounds = CentralManager.SessionSettings.WindowBounds.Value;
+				Bounds = CentralManager.SessionSettings.LastWindowsBounds.Value;
 
 				LastUiScale = UI.UIScale;
 			}
 
-			if (CentralManager.SessionSettings.WindowIsMaximized)
+			if (CentralManager.SessionSettings.WindowWasMaximized)
 			{
 				WindowState = FormWindowState.Minimized;
 				WindowState = FormWindowState.Maximized;
@@ -244,13 +244,13 @@ public partial class MainForm : BasePanelForm
 
 		if (!TopMost && startBoundsSet)
 		{
-			if ((CentralManager.SessionSettings.WindowIsMaximized = WindowState == FormWindowState.Maximized))
+			if ((CentralManager.SessionSettings.WindowWasMaximized = WindowState == FormWindowState.Maximized))
 			{
-				CentralManager.SessionSettings.WindowBounds = RestoreBounds;
+				CentralManager.SessionSettings.LastWindowsBounds = RestoreBounds;
 			}
 			else
 			{
-				CentralManager.SessionSettings.WindowBounds = Bounds;
+				CentralManager.SessionSettings.LastWindowsBounds = Bounds;
 			}
 
 			CentralManager.SessionSettings.Save();

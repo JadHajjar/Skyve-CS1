@@ -9,6 +9,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -66,6 +67,7 @@ public partial class PC_ModUtilities : PanelContent
 		P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Steam));
 		P_ModIssues.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ModWarning));
 		P_DuplicateMods.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Broken));
+		P_LsmReport.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_LSM));
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		P_Filters.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
@@ -112,6 +114,11 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		var assets = LsmUtil.LoadMissingAssets(obj);
 
-		Form.PushPanel(null, new PC_MissingPackages(new(), assets.ToList()));
+		Form.PushPanel(null, new PC_MissingLsmPackages(assets.ToList()));
+	}
+
+	private bool LSMDragDrop_ValidFile(string arg)
+	{
+		return LsmUtil.IsValidLsmReportFile(arg);
 	}
 }

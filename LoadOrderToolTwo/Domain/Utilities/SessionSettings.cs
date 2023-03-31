@@ -9,8 +9,8 @@ internal class SessionSettings : ISave
 
 	public bool FirstTimeSetupCompleted { get; set; }
 	public string? CurrentProfile { get; set; }
-	public Rectangle? WindowBounds { get; set; }
-	public bool WindowIsMaximized { get; set; }
+	public Rectangle? LastWindowsBounds { get; set; }
+	public bool WindowWasMaximized { get; set; }
 
 	public bool LinkModAssets { get; set; } = true;
 	public bool LargeItemOnHover { get; set; }

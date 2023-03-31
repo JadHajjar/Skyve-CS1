@@ -21,6 +21,7 @@ internal class DragAndDropControl : SlickControl
 	private bool isDragAvailable;
 
 	public event Action<string>? FileSelected;
+	public event Func<string, bool>? ValidFile;
 
 	[Browsable(true)]
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -31,9 +32,9 @@ internal class DragAndDropControl : SlickControl
 	[Category("Appearance")]
 	public string? RegexTest { get; set; }
 	[Category("Behavior")]
-	public string[] ValidExtensions { get; set; }
+	public string[]? ValidExtensions { get; set; }
 	[Category("Behavior")]
-	public string StartingFolder { get; set; }
+	public string? StartingFolder { get; set; }
 
 	public DragAndDropControl()
 	{
@@ -57,15 +58,21 @@ internal class DragAndDropControl : SlickControl
 	{
 		base.OnDragEnter(drgevent);
 
-			isDragActive = true;
-		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop) && Regex.IsMatch(((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault(), RegexTest, RegexOptions.IgnoreCase))
+		isDragActive = true;
+
+		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop) && (ValidFile?.Invoke(((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()) ?? false))
 		{
+				Log.Error($"Drop success for '{((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()}'");
 			drgevent.Effect = DragDropEffects.Copy;
 			isDragAvailable = true;
 			Invalidate();
 		}
 		else
 		{
+			if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
+				Log.Error($"Check failed for '{((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()}'");
+			else
+			Log.Error("Drop is not a file");
 			drgevent.Effect = DragDropEffects.None;
 			isDragAvailable = false;
 			Invalidate();
@@ -108,7 +115,7 @@ internal class DragAndDropControl : SlickControl
 
 			if (dialog.PromptFile(Program.MainForm, StartingFolder) == DialogResult.OK)
 			{
-				if (Regex.IsMatch(dialog.SelectedPath, RegexTest, RegexOptions.IgnoreCase))
+				if (ValidFile?.Invoke(dialog.SelectedPath) ?? false)
 				{
 					FileSelected?.Invoke(dialog.SelectedPath);
 				}
