@@ -18,6 +18,7 @@ partial class PC_MissingLsmPackages
 		if (disposing && (components != null))
 		{
 			CentralManager.ContentLoaded -= CentralManager_ContentLoaded;
+		CentralManager.AssetInformationUpdated -= CentralManager_ContentLoaded;
 			components.Dispose();
 		}
 		base.Dispose(disposing);
@@ -35,9 +36,10 @@ partial class PC_MissingLsmPackages
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.TB_Search = new SlickControls.SlickTextBox();
-			this.B_SteamPage = new SlickControls.SlickButton();
+			this.B_SubscribeAll = new SlickControls.SlickButton();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.OT_Workshop = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
+			this.B_IncludeAll = new SlickControls.SlickButton();
 			this.LC_Items = new LoadOrderToolTwo.UserInterface.Lists.GenericPackageListControl();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
@@ -50,7 +52,7 @@ partial class PC_MissingLsmPackages
 			// slickSpacer1
 			// 
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 140);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 149);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(783, 2);
@@ -69,20 +71,20 @@ partial class PC_MissingLsmPackages
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.Controls.Add(this.L_Counts, 3, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 121);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 126);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(783, 19);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(783, 23);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// L_Counts
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(735, 0);
+			this.L_Counts.Location = new System.Drawing.Point(725, 0);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(45, 19);
+			this.L_Counts.Size = new System.Drawing.Size(55, 23);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			this.L_Counts.UseMnemonic = false;
@@ -103,19 +105,19 @@ partial class PC_MissingLsmPackages
 			this.TB_Search.TextChanged += new System.EventHandler(this.TB_Search_TextChanged);
 			this.TB_Search.IconClicked += new System.EventHandler(this.TB_Search_IconClicked);
 			// 
-			// B_SteamPage
+			// B_SubscribeAll
 			// 
-			this.B_SteamPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.B_SteamPage.ColorShade = null;
-			this.B_SteamPage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_SteamPage.Location = new System.Drawing.Point(437, 3);
-			this.B_SteamPage.Name = "B_SteamPage";
-			this.B_SteamPage.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-			this.B_SteamPage.Size = new System.Drawing.Size(343, 30);
-			this.B_SteamPage.SpaceTriggersClick = true;
-			this.B_SteamPage.TabIndex = 2;
-			this.B_SteamPage.Text = "SubscribeAllButton";
-			this.B_SteamPage.Click += new System.EventHandler(this.B_SteamPage_Click);
+			this.B_SubscribeAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_SubscribeAll.ColorShade = null;
+			this.B_SubscribeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_SubscribeAll.Location = new System.Drawing.Point(425, 3);
+			this.B_SubscribeAll.Name = "B_SubscribeAll";
+			this.B_SubscribeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+			this.B_SubscribeAll.Size = new System.Drawing.Size(355, 30);
+			this.B_SubscribeAll.SpaceTriggersClick = true;
+			this.B_SubscribeAll.TabIndex = 2;
+			this.B_SubscribeAll.Text = "SubscribeAllButton";
+			this.B_SubscribeAll.Click += new System.EventHandler(this.B_SteamPage_Click);
 			// 
 			// tableLayoutPanel2
 			// 
@@ -126,14 +128,15 @@ partial class PC_MissingLsmPackages
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel2.Controls.Add(this.TB_Search, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.OT_Workshop, 0, 1);
-			this.tableLayoutPanel2.Controls.Add(this.B_SteamPage, 1, 0);
+			this.tableLayoutPanel2.Controls.Add(this.B_SubscribeAll, 1, 0);
+			this.tableLayoutPanel2.Controls.Add(this.B_IncludeAll, 1, 1);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 30);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 2;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 91);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 96);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
 			// OT_Workshop
@@ -147,9 +150,24 @@ partial class PC_MissingLsmPackages
 			this.OT_Workshop.Option2 = "Workshop";
 			this.OT_Workshop.OptionStyle1 = Extensions.ColorStyle.Active;
 			this.OT_Workshop.OptionStyle2 = Extensions.ColorStyle.Active;
-			this.OT_Workshop.Size = new System.Drawing.Size(374, 35);
+			this.OT_Workshop.Size = new System.Drawing.Size(374, 40);
 			this.OT_Workshop.TabIndex = 1;
+			this.OT_Workshop.Visible = false;
 			this.OT_Workshop.SelectedValueChanged += new System.EventHandler(this.OT_Workshop_SelectedValueChanged);
+			// 
+			// B_IncludeAll
+			// 
+			this.B_IncludeAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_IncludeAll.ColorShade = null;
+			this.B_IncludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_IncludeAll.Location = new System.Drawing.Point(437, 53);
+			this.B_IncludeAll.Name = "B_IncludeAll";
+			this.B_IncludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+			this.B_IncludeAll.Size = new System.Drawing.Size(343, 30);
+			this.B_IncludeAll.SpaceTriggersClick = true;
+			this.B_IncludeAll.TabIndex = 2;
+			this.B_IncludeAll.Text = "IncludeAllButton";
+			this.B_IncludeAll.Click += new System.EventHandler(this.B_IncludeAll_Click);
 			// 
 			// LC_Items
 			// 
@@ -157,10 +175,10 @@ partial class PC_MissingLsmPackages
 			this.LC_Items.AutoScroll = true;
 			this.LC_Items.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.LC_Items.HighlightOnHover = true;
-			this.LC_Items.Location = new System.Drawing.Point(0, 142);
+			this.LC_Items.Location = new System.Drawing.Point(0, 151);
 			this.LC_Items.Name = "LC_Items";
 			this.LC_Items.SeparateWithLines = true;
-			this.LC_Items.Size = new System.Drawing.Size(783, 296);
+			this.LC_Items.Size = new System.Drawing.Size(783, 287);
 			this.LC_Items.TabIndex = 18;
 			// 
 			// PC_MissingLsmPackages
@@ -193,7 +211,8 @@ partial class PC_MissingLsmPackages
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	private System.Windows.Forms.Label L_Counts;
 	private SlickControls.SlickTextBox TB_Search;
-	private SlickControls.SlickButton B_SteamPage;
+	private SlickControls.SlickButton B_SubscribeAll;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 	private Generic.ThreeOptionToggle OT_Workshop;
+	private SlickControls.SlickButton B_IncludeAll;
 }

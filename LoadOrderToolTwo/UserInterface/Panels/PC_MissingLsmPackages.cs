@@ -19,7 +19,6 @@ namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_MissingLsmPackages : PanelContent
 {
 	private readonly Dictionary<ulong, Profile.Asset> _workshopPackages = new();
-	private bool allowExit;
 
 	public PC_MissingLsmPackages(List<Profile.Asset> missingAssets) : base(true)
 	{
@@ -41,6 +40,7 @@ public partial class PC_MissingLsmPackages : PanelContent
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
 
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+		CentralManager.AssetInformationUpdated += CentralManager_ContentLoaded;
 
 		RefreshCounts();
 	}
@@ -62,9 +62,10 @@ public partial class PC_MissingLsmPackages : PanelContent
 		TB_Search.Width = (int)(400 * UI.FontScale);
 		OT_Workshop.Width = (int)(400 * UI.FontScale);
 
-		B_SteamPage.Margin = B_SteamPage.Padding = UI.Scale(new Padding(7), UI.FontScale);
+		B_SubscribeAll.Margin = B_IncludeAll.Margin = B_SubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		B_SteamPage.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Add));
+		B_SubscribeAll.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Add));
+		B_IncludeAll.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Check));
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -73,30 +74,14 @@ public partial class PC_MissingLsmPackages : PanelContent
 
 		foreach (var item in items)
 		{
-			if (item is Profile.Mod mod)
-			{
-				var localMod = ProfileManager.GetMod(mod);
-
-				if (localMod is null)
-				{
-					continue;
-				}
-
-				localMod.IsIncluded = true;
-				localMod.IsEnabled = mod.Enabled;
-
-				LC_Items.Remove(item);
-			}
-			else if (item is Profile.Asset asset)
+			if (item is Profile.Asset asset)
 			{
 				var localAsset = ProfileManager.GetAsset(asset);
 
-				if (localAsset is null)
+				if (localAsset is null || !localAsset.IsIncluded)
 				{
 					continue;
 				}
-
-				localAsset.IsIncluded = true;
 
 				LC_Items.Remove(item);
 			}
@@ -106,22 +91,6 @@ public partial class PC_MissingLsmPackages : PanelContent
 		{
 			this.TryInvoke(() => Form.PushBack());
 		}
-	}
-
-	public override bool CanExit(bool toBeDisposed)
-	{
-		if (toBeDisposed && !allowExit && LC_Items.ItemCount > 0)
-		{
-			if( ShowPrompt(Locale.MissingItemsRemain, PromptButtons.OKCancel, PromptIcons.Hand) == DialogResult.OK)
-			{
-				allowExit = true;
-				Form.PushBack();
-			}
-
-			return false;
-		}
-
-		return true;
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -229,5 +198,14 @@ public partial class PC_MissingLsmPackages : PanelContent
 	private void TB_Search_IconClicked(object sender, EventArgs e)
 	{
 		TB_Search.Text = string.Empty;
+	}
+
+	private void B_IncludeAll_Click(object sender, EventArgs e)
+	{
+		var items = LC_Items.FilteredItems.ToList();
+
+		var packages = items.Select(x => { ContentUtil.GetGenericPackageState(x, out var p); return p; }).Where(x => x != null).ToList();
+
+		AssetsUtil.SetIncluded(packages.SelectMany(x => x!.Assets), true);
 	}
 }

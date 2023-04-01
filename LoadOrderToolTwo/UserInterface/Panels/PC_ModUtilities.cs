@@ -29,6 +29,9 @@ public partial class PC_ModUtilities : PanelContent
 		RefreshModIssues();
 
 		CentralManager.ModInformationUpdated += RefreshModIssues;
+
+		dragAndDropControl1.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Report", "LoadingScreenMod");
+		dragAndDropControl1.ValidExtensions = new[] { ".htm", ".html" };
 	}
 
 	private void RefreshModIssues()
@@ -69,7 +72,7 @@ public partial class PC_ModUtilities : PanelContent
 		P_DuplicateMods.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Broken));
 		P_LsmReport.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_LSM));
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Filters.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		P_Filters.Margin = P_LsmReport.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		LC_Duplicates.Height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
 	}
