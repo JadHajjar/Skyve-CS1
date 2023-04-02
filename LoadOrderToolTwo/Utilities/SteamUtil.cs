@@ -23,11 +23,20 @@ public static class SteamUtil
 {
 	private static readonly string STEAM_CACHE_FILE = "SteamModsCache.json";
 	private static readonly string DLC_CACHE_FILE = "SteamDlcsCache.json";
-	private static readonly CSCache _csCache = CSCache.Deserialize();
+	private static readonly CSCache _csCache;
 
-	public static List<SteamDlc> Dlcs { get; private set; } = new();
+	public static List<SteamDlc> Dlcs { get; private set; }
 
 	public static event Action? DLCsLoaded;
+
+	static SteamUtil()
+	{
+		_csCache = CSCache.Deserialize();
+
+		ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
+
+		Dlcs = cache ?? new();
+	}
 
 	private static void SaveCache(Dictionary<ulong, SteamWorkshopItem> list)
 	{
@@ -299,7 +308,6 @@ public static class SteamUtil
 		package.Author = steamWorkshopItem.Author;
 		package.ServerTime = steamWorkshopItem.UpdatedUTC;
 		package.Tags = steamWorkshopItem.Tags;
-		package.Class = steamWorkshopItem.Class;
 		package.ServerSize = steamWorkshopItem.Size;
 		package.SteamDescription = steamWorkshopItem.Description;
 
@@ -322,9 +330,6 @@ public static class SteamUtil
 		new BackgroundAction("Loading DLCs", async () =>
 		{
 			Log.Info($"Loading DLCs..");
-			ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
-
-			Dlcs = cache ?? new();
 
 			var dlcs = await GetSteamAppInfoAsync(255710);
 
@@ -359,6 +364,8 @@ public static class SteamUtil
 			ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 
 			DLCsLoaded?.Invoke();
+
+			AssetsUtil.SetAvailableDlcs(Dlcs.Select(x => x.Id));
 
 			foreach (var dlc in Dlcs)
 			{

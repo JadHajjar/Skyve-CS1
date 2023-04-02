@@ -3,7 +3,6 @@ using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
-using SlickControls.Controls.Form;
 
 using System;
 using System.Drawing;
@@ -30,7 +29,12 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
         Padding = UI.Scale(new Padding(5), UI.FontScale);
     }
 
-    protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ProfileSorting item)
+	protected override bool SearchMatch(string searchText, ProfileSorting item)
+	{
+		return searchText.SearchCheck(LocaleHelper.GetGlobalText($"Sorting_{item}"));
+	}
+
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ProfileSorting item)
     {
         var text = LocaleHelper.GetGlobalText($"Sorting_{item}");
         var color = FormDesign.Design.ForeColor;
@@ -39,7 +43,8 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 
         e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-        var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height) / 2, 0, Font.Height);
+        var textSize = (int)e.Graphics.Measure(text, Font).Height;
+		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - textSize) / 2, 0, textSize);
 
         textRect.Width = rectangle.Width - textRect.X;
 

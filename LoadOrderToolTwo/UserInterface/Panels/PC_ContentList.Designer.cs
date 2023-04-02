@@ -55,21 +55,11 @@ partial class PC_ContentList<T>
 			this.I_ClearFilters = new SlickControls.SlickIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+			this.slickDateRange1 = new SlickControls.SlickDateRange();
 			this.OT_Workshop = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.OT_Included = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.OT_Enabled = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
-			this.TLP_Dates = new System.Windows.Forms.TableLayoutPanel();
-			this.L_From1 = new System.Windows.Forms.Label();
-			this.L_To1 = new System.Windows.Forms.Label();
-			this.L_From2 = new System.Windows.Forms.Label();
-			this.L_To2 = new System.Windows.Forms.Label();
-			this.L_DateUpdated = new System.Windows.Forms.Label();
-			this.L_DateSubscribed = new System.Windows.Forms.Label();
-			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-			this.DT_SubFrom = new SlickControls.SlickDateTime();
-			this.DT_SubTo = new SlickControls.SlickDateTime();
-			this.DT_UpdateFrom = new SlickControls.SlickDateTime();
-			this.DT_UpdateTo = new SlickControls.SlickDateTime();
+			this.slickDateRange2 = new SlickControls.SlickDateRange();
 			this.DD_PackageStatus = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageStatusDropDown();
 			this.DD_ReportSeverity = new LoadOrderToolTwo.UserInterface.Dropdowns.ReportSeverityDropDown();
 			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
@@ -85,8 +75,6 @@ partial class PC_ContentList<T>
 			this.P_Filters.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel4.SuspendLayout();
-			this.TLP_Dates.SuspendLayout();
-			this.tableLayoutPanel5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -296,11 +284,14 @@ partial class PC_ContentList<T>
 			// L_Duplicates
 			// 
 			this.L_Duplicates.AutoSize = true;
+			this.L_Duplicates.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.L_Duplicates.Location = new System.Drawing.Point(3, 0);
 			this.L_Duplicates.Name = "L_Duplicates";
 			this.L_Duplicates.Size = new System.Drawing.Size(55, 23);
 			this.L_Duplicates.TabIndex = 2;
+			this.L_Duplicates.Tag = "NoMouseDown";
 			this.L_Duplicates.Text = "label1";
+			this.L_Duplicates.Click += new System.EventHandler(this.L_Duplicates_Click);
 			// 
 			// L_Counts
 			// 
@@ -371,7 +362,6 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.TLP_Dates, 2, 0);
 			this.tableLayoutPanel1.Controls.Add(this.DD_PackageStatus, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.DD_ReportSeverity, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.DD_Tags, 2, 1);
@@ -382,19 +372,22 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(881, 243);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(881, 212);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// tableLayoutPanel4
 			// 
 			this.tableLayoutPanel4.AutoSize = true;
 			this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel4.ColumnCount = 1;
-			this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel4, 2);
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel4.ColumnCount = 2;
+			this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel4, 4);
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel4.Controls.Add(this.slickDateRange1, 1, 0);
 			this.tableLayoutPanel4.Controls.Add(this.OT_Workshop, 0, 2);
 			this.tableLayoutPanel4.Controls.Add(this.OT_Included, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.OT_Enabled, 0, 1);
+			this.tableLayoutPanel4.Controls.Add(this.slickDateRange2, 1, 2);
 			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -404,8 +397,20 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(440, 138);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(881, 138);
 			this.tableLayoutPanel4.TabIndex = 4;
+			// 
+			// slickDateRange1
+			// 
+			this.slickDateRange1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.slickDateRange1.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.slickDateRange1.Location = new System.Drawing.Point(443, 3);
+			this.slickDateRange1.Name = "slickDateRange1";
+			this.slickDateRange1.Size = new System.Drawing.Size(435, 40);
+			this.slickDateRange1.TabIndex = 14;
+			this.slickDateRange1.RangeChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// OT_Workshop
 			// 
@@ -454,173 +459,18 @@ partial class PC_ContentList<T>
 			this.OT_Enabled.TabIndex = 1;
 			this.OT_Enabled.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
 			// 
-			// TLP_Dates
+			// slickDateRange2
 			// 
-			this.TLP_Dates.AutoSize = true;
-			this.TLP_Dates.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TLP_Dates.ColumnCount = 6;
-			this.tableLayoutPanel1.SetColumnSpan(this.TLP_Dates, 2);
-			this.TLP_Dates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Dates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Dates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Dates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Dates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Dates.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Dates.Controls.Add(this.L_From1, 0, 0);
-			this.TLP_Dates.Controls.Add(this.L_To1, 2, 0);
-			this.TLP_Dates.Controls.Add(this.L_From2, 3, 0);
-			this.TLP_Dates.Controls.Add(this.L_To2, 5, 0);
-			this.TLP_Dates.Controls.Add(this.L_DateUpdated, 4, 0);
-			this.TLP_Dates.Controls.Add(this.L_DateSubscribed, 1, 0);
-			this.TLP_Dates.Controls.Add(this.tableLayoutPanel5, 0, 1);
-			this.TLP_Dates.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_Dates.Location = new System.Drawing.Point(440, 0);
-			this.TLP_Dates.Margin = new System.Windows.Forms.Padding(0);
-			this.TLP_Dates.Name = "TLP_Dates";
-			this.TLP_Dates.RowCount = 2;
-			this.TLP_Dates.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Dates.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Dates.Size = new System.Drawing.Size(441, 169);
-			this.TLP_Dates.TabIndex = 7;
-			// 
-			// L_From1
-			// 
-			this.L_From1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.L_From1.AutoSize = true;
-			this.L_From1.Location = new System.Drawing.Point(3, 0);
-			this.L_From1.Name = "L_From1";
-			this.L_From1.Size = new System.Drawing.Size(55, 23);
-			this.L_From1.TabIndex = 0;
-			this.L_From1.Text = "label1";
-			// 
-			// L_To1
-			// 
-			this.L_To1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.L_To1.AutoSize = true;
-			this.L_To1.Location = new System.Drawing.Point(162, 0);
-			this.L_To1.Name = "L_To1";
-			this.L_To1.Size = new System.Drawing.Size(55, 23);
-			this.L_To1.TabIndex = 0;
-			this.L_To1.Text = "label1";
-			// 
-			// L_From2
-			// 
-			this.L_From2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.L_From2.AutoSize = true;
-			this.L_From2.Location = new System.Drawing.Point(223, 0);
-			this.L_From2.Name = "L_From2";
-			this.L_From2.Size = new System.Drawing.Size(55, 23);
-			this.L_From2.TabIndex = 0;
-			this.L_From2.Text = "label1";
-			// 
-			// L_To2
-			// 
-			this.L_To2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.L_To2.AutoSize = true;
-			this.L_To2.Location = new System.Drawing.Point(383, 0);
-			this.L_To2.Name = "L_To2";
-			this.L_To2.Size = new System.Drawing.Size(55, 23);
-			this.L_To2.TabIndex = 0;
-			this.L_To2.Text = "label1";
-			// 
-			// L_DateUpdated
-			// 
-			this.L_DateUpdated.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.L_DateUpdated.AutoSize = true;
-			this.L_DateUpdated.Location = new System.Drawing.Point(302, 0);
-			this.L_DateUpdated.Name = "L_DateUpdated";
-			this.L_DateUpdated.Size = new System.Drawing.Size(55, 23);
-			this.L_DateUpdated.TabIndex = 0;
-			this.L_DateUpdated.Text = "label1";
-			// 
-			// L_DateSubscribed
-			// 
-			this.L_DateSubscribed.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.L_DateSubscribed.AutoSize = true;
-			this.L_DateSubscribed.Location = new System.Drawing.Point(82, 0);
-			this.L_DateSubscribed.Name = "L_DateSubscribed";
-			this.L_DateSubscribed.Size = new System.Drawing.Size(55, 23);
-			this.L_DateSubscribed.TabIndex = 0;
-			this.L_DateSubscribed.Text = "label1";
-			// 
-			// tableLayoutPanel5
-			// 
-			this.tableLayoutPanel5.AutoSize = true;
-			this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel5.ColumnCount = 4;
-			this.TLP_Dates.SetColumnSpan(this.tableLayoutPanel5, 6);
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel5.Controls.Add(this.DT_SubFrom, 0, 0);
-			this.tableLayoutPanel5.Controls.Add(this.DT_SubTo, 1, 0);
-			this.tableLayoutPanel5.Controls.Add(this.DT_UpdateFrom, 2, 0);
-			this.tableLayoutPanel5.Controls.Add(this.DT_UpdateTo, 3, 0);
-			this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 23);
-			this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
-			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-			this.tableLayoutPanel5.RowCount = 1;
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel5.Size = new System.Drawing.Size(441, 146);
-			this.tableLayoutPanel5.TabIndex = 0;
-			// 
-			// DT_SubFrom
-			// 
-			this.DT_SubFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.slickDateRange2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.DT_SubFrom.LabelText = "";
-			this.DT_SubFrom.Location = new System.Drawing.Point(3, 3);
-			this.DT_SubFrom.Name = "DT_SubFrom";
-			this.DT_SubFrom.Required = false;
-			this.DT_SubFrom.SelectedPart = SlickControls.SlickDateTime.DatePart.Day;
-			this.DT_SubFrom.Size = new System.Drawing.Size(104, 25);
-			this.DT_SubFrom.TabIndex = 0;
-			this.DT_SubFrom.Value = new System.DateTime(2023, 3, 22, 0, 0, 0, 0);
-			this.DT_SubFrom.ValueChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DT_SubTo
-			// 
-			this.DT_SubTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DT_SubTo.LabelText = "";
-			this.DT_SubTo.Location = new System.Drawing.Point(113, 3);
-			this.DT_SubTo.Name = "DT_SubTo";
-			this.DT_SubTo.Required = false;
-			this.DT_SubTo.SelectedPart = SlickControls.SlickDateTime.DatePart.Day;
-			this.DT_SubTo.Size = new System.Drawing.Size(104, 25);
-			this.DT_SubTo.TabIndex = 1;
-			this.DT_SubTo.Value = new System.DateTime(2023, 3, 22, 0, 0, 0, 0);
-			this.DT_SubTo.ValueChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DT_UpdateFrom
-			// 
-			this.DT_UpdateFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DT_UpdateFrom.LabelText = "";
-			this.DT_UpdateFrom.Location = new System.Drawing.Point(223, 3);
-			this.DT_UpdateFrom.Name = "DT_UpdateFrom";
-			this.DT_UpdateFrom.Required = false;
-			this.DT_UpdateFrom.SelectedPart = SlickControls.SlickDateTime.DatePart.Day;
-			this.DT_UpdateFrom.Size = new System.Drawing.Size(104, 25);
-			this.DT_UpdateFrom.TabIndex = 2;
-			this.DT_UpdateFrom.Value = new System.DateTime(2023, 3, 22, 0, 0, 0, 0);
-			this.DT_UpdateFrom.ValueChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DT_UpdateTo
-			// 
-			this.DT_UpdateTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DT_UpdateTo.LabelText = "";
-			this.DT_UpdateTo.Location = new System.Drawing.Point(333, 3);
-			this.DT_UpdateTo.Name = "DT_UpdateTo";
-			this.DT_UpdateTo.Required = false;
-			this.DT_UpdateTo.SelectedPart = SlickControls.SlickDateTime.DatePart.Day;
-			this.DT_UpdateTo.Size = new System.Drawing.Size(105, 25);
-			this.DT_UpdateTo.TabIndex = 3;
-			this.DT_UpdateTo.Value = new System.DateTime(2023, 3, 22, 0, 0, 0, 0);
-			this.DT_UpdateTo.ValueChanged += new System.EventHandler(this.FilterChanged);
+			this.slickDateRange2.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.slickDateRange2.Location = new System.Drawing.Point(443, 95);
+			this.slickDateRange2.Name = "slickDateRange2";
+			this.tableLayoutPanel4.SetRowSpan(this.slickDateRange2, 2);
+			this.slickDateRange2.Size = new System.Drawing.Size(435, 40);
+			this.slickDateRange2.TabIndex = 14;
+			this.slickDateRange2.RangeChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_PackageStatus
 			// 
@@ -628,7 +478,7 @@ partial class PC_ContentList<T>
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_PackageStatus.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_PackageStatus.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_PackageStatus.Location = new System.Drawing.Point(7, 176);
+			this.DD_PackageStatus.Location = new System.Drawing.Point(7, 145);
 			this.DD_PackageStatus.Margin = new System.Windows.Forms.Padding(7);
 			this.DD_PackageStatus.Name = "DD_PackageStatus";
 			this.DD_PackageStatus.Padding = new System.Windows.Forms.Padding(7);
@@ -642,7 +492,7 @@ partial class PC_ContentList<T>
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_ReportSeverity.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_ReportSeverity.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_ReportSeverity.Location = new System.Drawing.Point(227, 176);
+			this.DD_ReportSeverity.Location = new System.Drawing.Point(227, 145);
 			this.DD_ReportSeverity.Margin = new System.Windows.Forms.Padding(7);
 			this.DD_ReportSeverity.Name = "DD_ReportSeverity";
 			this.DD_ReportSeverity.Padding = new System.Windows.Forms.Padding(7);
@@ -656,7 +506,7 @@ partial class PC_ContentList<T>
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Tags.Location = new System.Drawing.Point(447, 176);
+			this.DD_Tags.Location = new System.Drawing.Point(447, 145);
 			this.DD_Tags.Margin = new System.Windows.Forms.Padding(7);
 			this.DD_Tags.Name = "DD_Tags";
 			this.DD_Tags.Padding = new System.Windows.Forms.Padding(7);
@@ -670,7 +520,7 @@ partial class PC_ContentList<T>
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_Profile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Profile.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Profile.Location = new System.Drawing.Point(667, 176);
+			this.DD_Profile.Location = new System.Drawing.Point(667, 145);
 			this.DD_Profile.Margin = new System.Windows.Forms.Padding(7);
 			this.DD_Profile.Name = "DD_Profile";
 			this.DD_Profile.Padding = new System.Windows.Forms.Padding(7);
@@ -732,9 +582,6 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.tableLayoutPanel4.ResumeLayout(false);
-			this.TLP_Dates.ResumeLayout(false);
-			this.TLP_Dates.PerformLayout();
-			this.tableLayoutPanel5.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -766,21 +613,11 @@ partial class PC_ContentList<T>
 	private SlickControls.RoundedGroupPanel P_Actions;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 	private SlickControls.SlickButton B_Actions;
-	private System.Windows.Forms.TableLayoutPanel TLP_Dates;
-	private System.Windows.Forms.Label L_From1;
-	private System.Windows.Forms.Label L_To1;
-	private System.Windows.Forms.Label L_From2;
-	private System.Windows.Forms.Label L_To2;
-	private System.Windows.Forms.Label L_DateUpdated;
-	private System.Windows.Forms.Label L_DateSubscribed;
-	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-	private SlickControls.SlickDateTime DT_SubFrom;
-	private SlickControls.SlickDateTime DT_SubTo;
-	private SlickControls.SlickDateTime DT_UpdateFrom;
-	private SlickControls.SlickDateTime DT_UpdateTo;
 	private System.Windows.Forms.Label L_FilterCount;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
 	private TagsDropDown DD_Tags;
 	private ProfilesDropDown DD_Profile;
 	private SlickControls.SlickButton B_Refresh;
+	private SlickControls.SlickDateRange slickDateRange1;
+	private SlickControls.SlickDateRange slickDateRange2;
 }

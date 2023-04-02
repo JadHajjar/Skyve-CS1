@@ -180,6 +180,12 @@ public static class CitiesManager
 			return false;
 		}
 
+		if (IsRunning())
+		{
+			MessagePrompt.Show(Locale.CloseCitiesToSub, PromptButtons.OK, PromptIcons.Hand, Program.MainForm);
+			return false;
+		}
+
 		if (unsub)
 		{
 			ContentUtil.DeleteAll(ids);

@@ -31,9 +31,11 @@ internal class ContentUtil
 	{
 		if (!Directory.Exists(LocationManager.WorkshopContentPath))
 		{
+			Log.Warning($"Folder not found: '{LocationManager.WorkshopContentPath}'");
 			yield break;
 		}
 
+		Log.Info($"Looking for packages in: '{LocationManager.WorkshopContentPath}'");
 		foreach (var path in Directory.EnumerateDirectories(LocationManager.WorkshopContentPath))
 		{
 			if (ulong.TryParse(Path.GetFileName(path), out _))
@@ -114,24 +116,31 @@ internal class ContentUtil
 
 		foreach (var folder in addonsAssetsPath)
 		{
+			Log.Info($"Looking for packages in: '{folder}'");
 			getPackage(folder, false, false);
 		}
 
 		if (Directory.Exists(gameModsPath))
 		{
+			Log.Info($"Looking for packages in: '{gameModsPath}'");
 			foreach (var folder in Directory.GetDirectories(gameModsPath))
 			{
 				getPackage(folder, true, false);
 			}
 		}
+		else
+			Log.Warning($"Folder not found: '{gameModsPath}'");
 
 		if (Directory.Exists(addonsModsPath))
 		{
+			Log.Info($"Looking for packages in: '{addonsModsPath}'");
 			foreach (var folder in Directory.GetDirectories(addonsModsPath))
 			{
 				getPackage(folder, false, false);
 			}
 		}
+		else
+			Log.Warning($"Folder not found: '{addonsModsPath}'");
 
 		var subscribedItems = GetSubscribedItemPaths().ToList();
 
@@ -146,6 +155,8 @@ internal class ContentUtil
 		{
 			if (!Directory.Exists(folder))
 			{
+				Log.Warning($"Package folder not found: '{folder}'");
+
 				return;
 			}
 
@@ -265,7 +276,7 @@ internal class ContentUtil
 	{
 		if (item is Asset asset)
 		{
-			File.Copy(asset.FileName, Path.Combine(LocationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
+			ExtensionClass.CopyFile(asset.FileName, Path.Combine(LocationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
 			return;
 		}
 

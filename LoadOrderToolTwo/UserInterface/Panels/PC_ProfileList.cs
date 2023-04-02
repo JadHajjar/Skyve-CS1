@@ -109,7 +109,7 @@ public partial class PC_ProfileList : PanelContent
 
 		if (L_FilterCount.Visible = total != filteredCount)
 		{
-			L_FilterCount.Text = $"{Locale.Showing} {filteredCount} {Locale.Mods.ToLower()}";
+			L_FilterCount.Text = string.Format(Locale.ShowingProfiles, filteredCount);
 		}
 	}
 

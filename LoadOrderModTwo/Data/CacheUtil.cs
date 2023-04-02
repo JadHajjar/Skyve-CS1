@@ -18,7 +18,7 @@ namespace LoadOrderMod.Data {
     using static ColossalFramework.Plugins.PluginManager;
     using static KianCommons.ReflectionHelpers;
     using System.Threading;
-	using LoadOrderToolTwo.ColossalOrder;
+	using LoadOrderToolTwo.Legacy;
 
 	public class CacheUtil {
         public CSCache Cache;
@@ -190,10 +190,10 @@ namespace LoadOrderMod.Data {
 		{
             var dic = new List<uint>();
 
-            foreach (DLC dlc in Enum.GetValues(typeof(DLC)))
+            foreach (var dlc in ConfigUtil.Config.AvailableDLCs)
             {
-                if( PlatformService.IsDlcInstalled((uint)dlc))
-                    dic.Add((uint)dlc);
+                if(PlatformService.IsAppOwned(dlc))
+                    dic.Add(dlc);
 			}
 
             Cache.Dlcs = dic.ToArray();

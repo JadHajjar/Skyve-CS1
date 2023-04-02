@@ -58,7 +58,6 @@ public class Package : IPackage
 	public bool Workshop { get; set; }
 	public string? SteamPage { get; set; }
 	public SteamUser? Author { get; set; }
-	public string? Class { get; set; }
 	public Bitmap? IconImage => ImageManager.GetImage(IconUrl, true).Result;
 	public Bitmap? AuthorIconImage => ImageManager.GetImage(Author?.AvatarUrl, true).Result;
 	public string? IconUrl { get; set; }

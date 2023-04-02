@@ -4,6 +4,7 @@ using LoadOrderShared;
 
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
@@ -17,6 +18,7 @@ internal class AssetsUtil
 {
 	private static readonly LoadOrderConfig _config;
 	private static CustomTagsLibrary _findItTags;
+	private static Dictionary<string, Asset> assetIndex=new();
 
 	public static HashSet<string> ExcludedHashSet { get; }
 	public static Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
@@ -28,9 +30,16 @@ internal class AssetsUtil
 
 		_findItTags = new();
 		AssetInfoCache = cache ?? new();
-		ExcludedHashSet = new HashSet<string>(_config.Assets.Select(x => x.Path?.ToLower() ?? string.Empty));
+		ExcludedHashSet = new HashSet<string>(_config.Assets.Select(x => IOUtil.ToRealPath(x.Path?.ToLower()) ?? string.Empty));
 
 		_findItTags.Deserialize();
+
+		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+	}
+
+	private static void CentralManager_ContentLoaded()
+	{
+		BuildAssetIndex();
 	}
 
 	public static IEnumerable<Asset> GetAssets(Package package)
@@ -104,7 +113,7 @@ internal class AssetsUtil
 		}
 
 		_config.Assets = ExcludedHashSet
-				.Select(x => new AssetInfo { Path = x })
+				.Select(x => new AssetInfo { Path = IOUtil.ToVirtualPath(x) })
 				.ToArray();
 
 		_config.Serialize();
@@ -112,7 +121,12 @@ internal class AssetsUtil
 
 	internal static Asset GetAsset(string? v)
 	{
-		return CentralManager.Assets.FirstOrDefault(x => x.FileName.Equals(v, StringComparison.InvariantCultureIgnoreCase));
+		return assetIndex.TryGet(v?.Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar).ToLower() ?? string.Empty);
+	}
+
+	private static void BuildAssetIndex()
+	{
+		assetIndex = CentralManager.Assets.ToDictionary(x => x.FileName.Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar).ToLower());
 	}
 
 	internal static Bitmap? GetIcon(Asset asset)
@@ -132,6 +146,12 @@ internal class AssetsUtil
 		//}
 
 		return null;
+	}
+
+	internal static void SetAvailableDlcs(IEnumerable<uint> dlcs)
+	{
+		_config.AvailableDLCs = dlcs.ToArray();
+		_config.Serialize();
 	}
 
 	internal static bool IsDlcExcluded(uint dlc)

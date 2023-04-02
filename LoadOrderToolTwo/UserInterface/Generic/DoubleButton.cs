@@ -36,8 +36,12 @@ public class DoubleButton : SlickControl
 
     protected override void UIChanged()
     {
-        Font = UI.Font(9.75F);
-        Margin = UI.Scale(new Padding(5), UI.FontScale);
+        if (Margin == new Padding(3))
+        {
+            Font = UI.Font(9.75F);
+            Margin = UI.Scale(new Padding(5), UI.FontScale);
+        }
+
         Padding = UI.Scale(new Padding(5), UI.FontScale);
     }
 
@@ -51,7 +55,14 @@ public class DoubleButton : SlickControl
 		}
 	}
 
-    protected override void OnMouseClick(MouseEventArgs e)
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		SlickTip.SetTo(this, LocaleHelper.GetGlobalText(Option1));
+	}
+
+	protected override void OnMouseClick(MouseEventArgs e)
     {
         base.OnMouseClick(e);
 
@@ -68,7 +79,21 @@ public class DoubleButton : SlickControl
         }
     }
 
-    protected override void OnPaint(PaintEventArgs e)
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		if (e.Location.X < Width / 2)
+		{
+            SlickTip.SetTo(this, LocaleHelper.GetGlobalText(Option1));
+		}
+		else
+		{
+            SlickTip.SetTo(this, LocaleHelper.GetGlobalText(Option2), offset: new Point(Width/2, 0));
+		}
+	}
+
+	protected override void OnPaint(PaintEventArgs e)
     {
         e.Graphics.Clear(BackColor);
         e.Graphics.SmoothingMode = SmoothingMode.HighQuality;

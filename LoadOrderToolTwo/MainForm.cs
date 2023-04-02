@@ -72,7 +72,7 @@ public partial class MainForm : BasePanelForm
 
 	private void Base_PB_Icon_Paint(object sender, PaintEventArgs e)
 	{
-		e.Graphics.Clear(base_PB_Icon.BackColor);
+		e.Graphics.SetUp(base_PB_Icon.BackColor);
 
 		using var icon = base_PB_Icon.Width > 48 ? Properties.Resources.AppIcon_96 : Properties.Resources.AppIcon_48;
 
@@ -101,6 +101,15 @@ public partial class MainForm : BasePanelForm
 		}
 
 		e.Graphics.DrawImage(icon, new Rectangle(Point.Empty, base_PB_Icon.Size));
+
+		if (!ConnectionHandler.IsConnected)
+		{
+			var rect = base_PB_Icon.ClientRectangle.Pad((int)(3*UI.UIScale)).Align(new Size(base_PB_Icon.Width / 3, base_PB_Icon.Width / 3), ContentAlignment.BottomRight);
+			using var noInt = ImageManager.GetIcon(nameof(Properties.Resources.I_NoInternet)).Color(FormDesign.Design.MenuForeColor);
+
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.RedColor), rect.Pad((int)(-2 * UI.UIScale)));
+			e.Graphics.DrawImage(noInt, rect.Pad(1,1,-1,-1));
+		}
 	}
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -112,7 +121,7 @@ public partial class MainForm : BasePanelForm
 
 		if (isGameRunning)
 		{
-			File.Delete(Path.Combine(LocationManager.CurrentDirectory, "Wake"));
+			ExtensionClass.DeleteFile(Path.Combine(LocationManager.CurrentDirectory, "Wake"));
 
 			SendKeys.SendWait("%{TAB}");
 		}
@@ -123,6 +132,8 @@ public partial class MainForm : BasePanelForm
 	protected override void UIChanged()
 	{
 		base.UIChanged();
+
+		MinimumSize = UI.Scale(new Size(650, 350), UI.FontScale);
 
 		PI_Dashboard.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Dashboard));
 		PI_Mods.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Mods));

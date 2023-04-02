@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using System;
+using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Utilities;
 internal class Locale : LocaleHelper
@@ -197,7 +198,6 @@ internal class Locale : LocaleHelper
 	public static string CopyAuthorLink => _instance.GetText(nameof(CopyAuthorLink));
 	public static string CopyAuthorId => _instance.GetText(nameof(CopyAuthorId));
 	public static string Copy => _instance.GetText(nameof(Copy));
-	public static string Showing => _instance.GetText(nameof(Showing));
 	public static string YourProfiles => _instance.GetText(nameof(YourProfiles));
 	public static string Profile => _instance.GetText(nameof(Profile));
 	public static string Favorite => _instance.GetText(nameof(Favorite));
@@ -216,9 +216,19 @@ internal class Locale : LocaleHelper
 	public static string AnyTags => _instance.GetText(nameof(AnyTags));
 	public static string MovePackageToLocalFolder => _instance.GetText(nameof(MovePackageToLocalFolder));
 	public static string TotalItems => _instance.GetText(nameof(TotalItems));
-	public static string OutOf => _instance.GetText(nameof(OutOf));
 	public static string MissingItemsRemain => _instance.GetText(nameof(MissingItemsRemain));
 	public static string ModIsPrivate => _instance.GetText(nameof(ModIsPrivate));
     public static string SelectedFileInvalid => _instance.GetText(nameof(SelectedFileInvalid));
 	public static string NoItemsToBeDisplayed => _instance.GetText(nameof(NoItemsToBeDisplayed));
+	public static string FirstSetupInfo => _instance.GetText(nameof(FirstSetupInfo));
+	public static string SetupIncomplete => _instance.GetText(nameof(SetupIncomplete));
+	public static string CopyAuthorSteamId => _instance.GetText(nameof(CopyAuthorSteamId));
+	public static string LoadProfile => _instance.GetText(nameof(LoadProfile));
+	public static string UnusedPackages => _instance.GetText(nameof(UnusedPackages));
+	public static string CloseCitiesToSub => _instance.GetText(nameof(CloseCitiesToSub));
+	public static string ShowingFilteredItems => _instance.GetText(nameof(ShowingFilteredItems));
+	public static string ShowingMods => _instance.GetText(nameof(ShowingMods));
+	public static string ShowingAssets => _instance.GetText(nameof(ShowingAssets));
+	public static string ShowingPackages => _instance.GetText(nameof(ShowingPackages));
+	public static string ShowingProfiles => _instance.GetText(nameof(ShowingProfiles));
 }

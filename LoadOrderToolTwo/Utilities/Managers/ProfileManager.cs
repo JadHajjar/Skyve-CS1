@@ -121,42 +121,45 @@ public static class ProfileManager
 
 	private static void ConvertLegacyProfiles()
 	{
-		try
-		{
-			var legacyProfilePath = Path.Combine(LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
+		Log.Info("Checking for Legacy profiles");
 
-			if (!Directory.Exists(legacyProfilePath))
+		var legacyProfilePath = Path.Combine(LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
+
+		if (!Directory.Exists(legacyProfilePath))
+		{
+			return;
+		}
+
+		Log.Info("Checking for Legacy profiles");
+
+		foreach (var profile in Directory.EnumerateFiles(legacyProfilePath, "*.xml"))
+		{
+			var newName = Path.Combine(LocationManager.LotProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
+
+			if (File.Exists(newName))
 			{
-				return;
+				Log.Info($"Profile '{newName}' already exists, skipping..");
+				continue;
 			}
 
-			foreach (var profile in Directory.EnumerateFiles(legacyProfilePath, "*.xml"))
+			Log.Info($"Converting profile '{newName}'..");
+
+			var legacyProfile = LoadOrderTool.Legacy.LoadOrderProfile.Deserialize(profile);
+			var newProfile = legacyProfile?.ToLot2Profile(Path.GetFileNameWithoutExtension(profile));
+
+			if (newProfile != null)
 			{
-				var newName = Path.Combine(LocationManager.LotProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
+				Save(newProfile, true);
 
-				if (File.Exists(newName))
-				{
-					continue;
-				}
+				Directory.CreateDirectory(Path.Combine(legacyProfilePath, "Legacy"));
 
-				var legacyProfile = LoadOrderTool.Legacy.LoadOrderProfile.Deserialize(profile);
-				var newProfile = legacyProfile?.ToLot2Profile(Path.GetFileNameWithoutExtension(profile));
-
-				if (newProfile != null)
-				{
-					Save(newProfile, true);
-
-					Directory.CreateDirectory(Path.Combine(legacyProfilePath, "Legacy"));
-
-					File.Move(profile, Path.Combine(legacyProfilePath, "Legacy", Path.GetFileName(profile)));
-				}
-				else
-				{
-					Log.Error($"Could not load the profile: '{profile}'");
-				}
+				File.Move(profile, Path.Combine(legacyProfilePath, "Legacy", Path.GetFileName(profile)));
+			}
+			else
+			{
+				Log.Error($"Could not load the profile: '{profile}'");
 			}
 		}
-		catch { }
 	}
 
 	private static void CentralManager_ContentLoaded()
@@ -309,7 +312,7 @@ public static class ProfileManager
 
 	internal static void DeleteProfile(Profile profile)
 	{
-		File.Delete(Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
+		ExtensionClass.DeleteFile(Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
 
 		if (profile == CurrentProfile)
 		{
@@ -594,18 +597,28 @@ public static class ProfileManager
 
 	internal static string? ToRelativePath(string? localPath)
 	{
-		return localPath?
+		if (string.IsNullOrEmpty(localPath))
+		{
+			return string.Empty;
+		}
+
+		return LocationManager.Format(localPath?
 			.Replace(LocationManager.AppDataPath, LOCAL_APP_DATA_PATH)
 			.Replace(LocationManager.GamePath, CITIES_PATH)
-			.Replace(LocationManager.WorkshopContentPath, WS_CONTENT_PATH);
+			.Replace(LocationManager.WorkshopContentPath, WS_CONTENT_PATH) ?? string.Empty, false);
 	}
 
 	internal static string? ToLocalPath(string? relativePath)
 	{
-		return relativePath?
+		if (string.IsNullOrEmpty(relativePath))
+		{
+			return string.Empty;
+		}
+
+		return LocationManager.Format(relativePath?
 			.Replace(LOCAL_APP_DATA_PATH, LocationManager.AppDataPath)
 			.Replace(CITIES_PATH, LocationManager.GamePath)
-			.Replace(WS_CONTENT_PATH, LocationManager.WorkshopContentPath);
+			.Replace(WS_CONTENT_PATH, LocationManager.WorkshopContentPath) ?? string.Empty, false);
 	}
 
 	internal static bool RenameProfile(Profile profile, string text)
@@ -735,5 +748,45 @@ public static class ProfileManager
 	internal static void AddProfile(Profile newProfile)
 	{
 		_profiles.Add(newProfile);
+	}
+
+	internal static Profile? ImportProfile(string obj)
+	{
+		if (_watcher is not null)
+		{
+			_watcher.EnableRaisingEvents = false;
+		}
+
+		var newPath = Path.Combine(LocationManager.LotProfilesAppDataPath, Path.GetFileName(obj));
+	
+		File.Move(obj, newPath);
+
+		if (_watcher is not null)
+		{
+			_watcher.EnableRaisingEvents = true;
+		}
+
+		var newProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<Profile>(File.ReadAllText(newPath));
+
+		if (newProfile != null)
+		{
+			newProfile.Name = Path.GetFileNameWithoutExtension(newPath);
+			newProfile.LastEditDate = File.GetLastWriteTime(newPath);
+			newProfile.DateCreated = File.GetCreationTime(newPath);
+
+			var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
+
+			_profiles.Remove(currentProfile);
+
+			_profiles.Add(newProfile);
+
+			return newProfile;
+		}
+		else
+		{
+			Log.Error($"Could not load the profile: '{obj}' / '{newPath}'");
+		}
+
+		return null;
 	}
 }

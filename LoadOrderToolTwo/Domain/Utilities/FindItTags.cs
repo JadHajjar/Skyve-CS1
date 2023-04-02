@@ -1,4 +1,6 @@
-﻿using LoadOrderToolTwo.Utilities;
+﻿using Extensions;
+
+using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
@@ -32,7 +34,7 @@ public class CustomTagsLibrary
 			{
 				if (File.Exists(path))
 				{
-					File.Delete(path);
+					ExtensionClass.DeleteFile(path);
 				}
 				return;
 			}

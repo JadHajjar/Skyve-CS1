@@ -25,13 +25,13 @@ public partial class PC_ModUtilities : PanelContent
 		InitializeComponent();
 
 		P_DuplicateMods.Controls.Add(LC_Duplicates);
-
+		LC_Duplicates.SizeChanged += LC_Duplicates_SizeChanged;
 		RefreshModIssues();
 
 		CentralManager.ModInformationUpdated += RefreshModIssues;
 
-		dragAndDropControl1.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Report", "LoadingScreenMod");
-		dragAndDropControl1.ValidExtensions = new[] { ".htm", ".html" };
+		dragAndDropControl1.StartingFolder  =dragAndDropControl2.StartingFolder  = Path.Combine(LocationManager.AppDataPath, "Report", "LoadingScreenMod");
+		dragAndDropControl1.ValidExtensions = dragAndDropControl2.ValidExtensions = new[] { ".htm", ".html" };
 	}
 
 	private void RefreshModIssues()
@@ -43,9 +43,10 @@ public partial class PC_ModUtilities : PanelContent
 		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
 		LC_Duplicates.SetSorting(PackageSorting.Mod);
 
+		B_ReDownload.Loading = false;
+
 		this.TryInvoke(() =>
 		{
-			LC_Duplicates.Height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
 			P_DuplicateMods.Visible = duplicates.Any();
 
 			L_OutOfDate.Text = $"{modsOutOfDate} {(modsOutOfDate == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}";
@@ -74,7 +75,23 @@ public partial class PC_ModUtilities : PanelContent
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		P_Filters.Margin = P_LsmReport.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		LC_Duplicates.Height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
+		L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9.75F);
+	}
+
+	protected override void DesignChanged(FormDesign design)
+	{
+		base.DesignChanged(design);
+
+		L_OutOfDate.ForeColor = design.YellowColor;
+		L_Incomplete.ForeColor = design.RedColor;
+	}
+
+	private void LC_Duplicates_SizeChanged(object sender, EventArgs e)
+	{
+		var height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
+
+		if (height != LC_Duplicates.Height)
+			LC_Duplicates.Height = height;
 	}
 
 	private async void B_LoadCollection_Click(object sender, EventArgs e)
@@ -100,6 +117,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void B_ReDownload_Click(object sender, EventArgs e)
 	{
+		B_ReDownload.Loading = true;
 		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).Select(x => x.SteamId).ToArray());
 	}
 
@@ -123,5 +141,12 @@ public partial class PC_ModUtilities : PanelContent
 	private bool LSMDragDrop_ValidFile(string arg)
 	{
 		return LsmUtil.IsValidLsmReportFile(arg);
+	}
+
+	private void LSM_UnusedDrop_FileSelected(string obj)
+	{
+		var assets = LsmUtil.LoadUnusedAssets(obj);
+
+		Form.PushPanel(null, new PC_UnusedLsmPackages(assets.ToList()));
 	}
 }

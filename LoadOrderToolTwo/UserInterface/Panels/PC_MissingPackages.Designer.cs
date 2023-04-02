@@ -40,8 +40,9 @@ partial class PC_MissingPackages
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.B_SteamPage = new SlickControls.SlickButton();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.LC_Items = new LoadOrderToolTwo.UserInterface.Lists.GenericPackageListControl();
 			this.OT_Workshop = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
+			this.LC_Items = new LoadOrderToolTwo.UserInterface.Lists.GenericPackageListControl();
+			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
@@ -53,7 +54,7 @@ partial class PC_MissingPackages
 			// slickSpacer1
 			// 
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 162);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 225);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(783, 2);
@@ -75,7 +76,7 @@ partial class PC_MissingPackages
 			this.tableLayoutPanel1.Controls.Add(this.T_Mods, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.T_Assets, 2, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 126);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 189);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -86,9 +87,9 @@ partial class PC_MissingPackages
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(725, 13);
+			this.L_Counts.Location = new System.Drawing.Point(728, 15);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(55, 23);
+			this.L_Counts.Size = new System.Drawing.Size(52, 21);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			this.L_Counts.UseMnemonic = false;
@@ -175,17 +176,34 @@ partial class PC_MissingPackages
 			this.tableLayoutPanel2.ColumnCount = 2;
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel2.Controls.Add(this.DD_Tags, 0, 1);
 			this.tableLayoutPanel2.Controls.Add(this.TB_Search, 0, 0);
-			this.tableLayoutPanel2.Controls.Add(this.OT_Workshop, 0, 1);
+			this.tableLayoutPanel2.Controls.Add(this.OT_Workshop, 0, 2);
 			this.tableLayoutPanel2.Controls.Add(this.B_SteamPage, 1, 0);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 30);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			this.tableLayoutPanel2.RowCount = 2;
+			this.tableLayoutPanel2.RowCount = 3;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 96);
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 159);
 			this.tableLayoutPanel2.TabIndex = 0;
+			// 
+			// OT_Workshop
+			// 
+			this.OT_Workshop.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.OT_Workshop.Image1 = "I_Local";
+			this.OT_Workshop.Image2 = "I_Steam";
+			this.OT_Workshop.Location = new System.Drawing.Point(3, 117);
+			this.OT_Workshop.Name = "OT_Workshop";
+			this.OT_Workshop.Option1 = "Local";
+			this.OT_Workshop.Option2 = "Workshop";
+			this.OT_Workshop.OptionStyle1 = Extensions.ColorStyle.Active;
+			this.OT_Workshop.OptionStyle2 = Extensions.ColorStyle.Active;
+			this.OT_Workshop.Size = new System.Drawing.Size(374, 39);
+			this.OT_Workshop.TabIndex = 1;
+			this.OT_Workshop.SelectedValueChanged += new System.EventHandler(this.OT_Workshop_SelectedValueChanged);
 			// 
 			// LC_Items
 			// 
@@ -193,26 +211,21 @@ partial class PC_MissingPackages
 			this.LC_Items.AutoScroll = true;
 			this.LC_Items.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.LC_Items.HighlightOnHover = true;
-			this.LC_Items.Location = new System.Drawing.Point(0, 164);
+			this.LC_Items.Location = new System.Drawing.Point(0, 227);
 			this.LC_Items.Name = "LC_Items";
 			this.LC_Items.SeparateWithLines = true;
-			this.LC_Items.Size = new System.Drawing.Size(783, 274);
+			this.LC_Items.Size = new System.Drawing.Size(783, 211);
 			this.LC_Items.TabIndex = 18;
 			// 
-			// OT_Workshop
+			// DD_Tags
 			// 
-			this.OT_Workshop.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Workshop.Image1 = "I_Local";
-			this.OT_Workshop.Image2 = "I_Steam";
-			this.OT_Workshop.Location = new System.Drawing.Point(3, 53);
-			this.OT_Workshop.Name = "OT_Workshop";
-			this.OT_Workshop.Option1 = "Local";
-			this.OT_Workshop.Option2 = "Workshop";
-			this.OT_Workshop.OptionStyle1 = Extensions.ColorStyle.Active;
-			this.OT_Workshop.OptionStyle2 = Extensions.ColorStyle.Active;
-			this.OT_Workshop.Size = new System.Drawing.Size(374, 40);
-			this.OT_Workshop.TabIndex = 1;
-			this.OT_Workshop.SelectedValueChanged += new System.EventHandler(this.OT_Workshop_SelectedValueChanged);
+			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Tags.Location = new System.Drawing.Point(3, 53);
+			this.DD_Tags.Name = "DD_Tags";
+			this.DD_Tags.Padding = new System.Windows.Forms.Padding(7);
+			this.DD_Tags.Size = new System.Drawing.Size(212, 58);
+			this.DD_Tags.TabIndex = 4;
 			// 
 			// PC_MissingPackages
 			// 
@@ -250,4 +263,5 @@ partial class PC_MissingPackages
 	private SlickControls.SlickButton B_SteamPage;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 	private Generic.ThreeOptionToggle OT_Workshop;
+	private Dropdowns.TagsDropDown DD_Tags;
 }

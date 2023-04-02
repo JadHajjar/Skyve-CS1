@@ -37,7 +37,6 @@ public class Mod : IPackage
 	public string? SteamPage => ((IPackage)Package).SteamPage;
 	public bool Workshop => ((IPackage)Package).Workshop;
 	public SteamUser? Author { get => ((IPackage)Package).Author; set => ((IPackage)Package).Author = value; }
-	public string? Class { get => ((IPackage)Package).Class; set => ((IPackage)Package).Class = value; }
 	public Bitmap? IconImage => ((IPackage)Package).IconImage;
 	public string? IconUrl { get => ((IPackage)Package).IconUrl; set => ((IPackage)Package).IconUrl = value; }
 	public long LocalSize => ((IPackage)Package).LocalSize;

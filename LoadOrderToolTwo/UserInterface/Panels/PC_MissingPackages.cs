@@ -25,8 +25,6 @@ public partial class PC_MissingPackages : PanelContent
 	{
 		InitializeComponent();
 
-		Text = $"{ProfileManager.CurrentProfile.Name} - {Locale.MissingPackages}";
-
 		foreach (var package in missingAssets.Concat(missingMods).GroupBy(x => x.SteamId))
 		{
 			if (package.Key != 0)
@@ -46,6 +44,12 @@ public partial class PC_MissingPackages : PanelContent
 		RefreshCounts();
 	}
 
+	protected override void LocaleChanged()
+	{
+		Text = $"{ProfileManager.CurrentProfile.Name} - {Locale.MissingPackages}";
+		DD_Tags.Text = Locale.Tags;
+	}
+
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
@@ -60,11 +64,12 @@ public partial class PC_MissingPackages : PanelContent
 
 		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
-		TB_Search.Width = (int)(400 * UI.FontScale);
+		TB_Search.Width = 
+		DD_Tags.Width =
 		OT_Workshop.Width = (int)(400 * UI.FontScale);
 
 		B_SteamPage.Margin = B_SteamPage.Padding = UI.Scale(new Padding(7), UI.FontScale);
-		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin =DD_Tags.Margin=OT_Workshop.Margin= L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		T_All.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Package));
 		T_Mods.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Mods));
 		T_Assets.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Assets));
@@ -141,6 +146,11 @@ public partial class PC_MissingPackages : PanelContent
 				_workshopPackages[item.Key].WorkshopInfo = item.Value;
 			}
 		}
+
+		DD_Tags.Items = info.SelectMany(x =>
+		{
+			return x.Value.Tags;
+		}).Distinct().ToArray();
 
 		LC_Items.Invalidate();
 
@@ -235,7 +245,7 @@ public partial class PC_MissingPackages : PanelContent
 		}
 		else
 		{
-			L_Counts.Text = $"{Locale.Showing} {totalFiltered} {Locale.OutOf.ToLower()} {total} {Locale.TotalItems.ToLower()}";
+			L_Counts.Text = string.Format(Locale.ShowingFilteredItems, totalFiltered, total);
 		}
 	}
 

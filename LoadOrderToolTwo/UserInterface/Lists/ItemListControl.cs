@@ -251,6 +251,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			, new SlickStripItem(Locale.CopyWorkshopId, () => Clipboard.SetText(item.SteamId.ToString()), null, item.Workshop, tab: 1)
 			, new SlickStripItem(Locale.CopyAuthorLink, () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
 			, new SlickStripItem(Locale.CopyAuthorId, () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
+			, new SlickStripItem(Locale.CopyAuthorSteamId, () => Clipboard.SetText(item.Author?.SteamId), null, !string.IsNullOrWhiteSpace(item.Author?.SteamId), tab: 1)
 			);
 	}
 
@@ -365,13 +366,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (iconImg is null)
 		{
-			using var authorIcon = (e.Item is Package ? Properties.Resources.I_CollectionIcon : e.Item is Asset ? Properties.Resources.I_AssetIcon : Properties.Resources.I_ModIcon).Color(FormDesign.Design.IconColor);
+			using var generic = (e.Item is Package ? Properties.Resources.I_CollectionIcon : e.Item is Asset ? Properties.Resources.I_AssetIcon : Properties.Resources.I_ModIcon).Color(FormDesign.Design.IconColor);
 
-			e.Graphics.DrawRoundedImage(authorIcon, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			e.Graphics.DrawRoundedImage(generic, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			try { e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor); }
+			catch { }
 		}
 
 		e.Graphics.DrawString(e.Item.ToString().RemoveVersionText(), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : rects.CenterRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });

@@ -1,9 +1,8 @@
 ﻿using CompatibilityReport.CatalogData;
 
 using Extensions;
-
-using LoadOrderToolTwo.ColossalOrder;
 using LoadOrderToolTwo.Domain.Enums;
+using LoadOrderToolTwo.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

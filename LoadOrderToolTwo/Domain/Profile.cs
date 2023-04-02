@@ -45,12 +45,16 @@ public class Profile
 		return ProfileManager.Save(this);
 	}
 
+	public override string ToString()
+	{
+		return Name ?? base.ToString();
+	}
+
 	[CloneIgnore] public List<Asset> Assets { get; set; }
 	[CloneIgnore] public List<Mod> Mods { get; set; }
 	[CloneIgnore] public List<uint> ExcludedDLCs { get; set; }
 	public LaunchSettings LaunchSettings { get; set; }
 	public LsmSettings LsmSettings { get; set; }
-	public string? LsmSkipFile { get; set; }
 	public bool AutoSave { get; set; }
 	public bool ForAssetEditor { get; set; }
 	public bool ForGameplay { get; set; }

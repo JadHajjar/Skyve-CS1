@@ -47,7 +47,7 @@
 		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="..\LoadOrderToolTwo\ColossalOrder\DLC.cs" Link="Shared\DLC.cs" />
+		<Compile Include="..\LoadOrderToolTwo\Legacy\DLC.cs" Link="Shared\DLC.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Remove="KianCommons\KianCommons\Backport\**" />

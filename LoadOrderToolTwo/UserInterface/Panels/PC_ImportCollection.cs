@@ -21,7 +21,6 @@ public partial class PC_ImportCollection : PanelContent
 	{
 		InitializeComponent();
 
-		Text = Locale.CollectionTitle;
 		_id = collection.PublishedFileID;
 		L_Title.Text = collection.Title;
 
@@ -36,11 +35,45 @@ public partial class PC_ImportCollection : PanelContent
 
 		new BackgroundAction(async () =>
 		{
-			foreach (var item in LC_Items.Items)
+			DD_Tags.Items = contents.SelectMany(x =>
+			{
+				return x.Value.Tags;
+			}).Distinct().ToArray();
+
+			var items = new List<IGenericPackage>(LC_Items.Items);
+
+			foreach (var item in items)
 			{
 				await ImageManager.Ensure(item.ThumbnailUrl);
 			}
 		}).Run();
+
+		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+		CentralManager.PackageInformationUpdated += CentralManager_ContentLoaded;
+	}
+
+	private void CentralManager_ContentLoaded()
+	{
+		LC_Items.Invalidate();
+	}
+
+	protected override void LocaleChanged()
+	{
+		DD_Tags.Text = Locale.Tags;
+		Text = Locale.CollectionTitle;
+	}
+
+	public override bool KeyPressed(ref Message msg, Keys keyData)
+	{
+		if (keyData is (Keys.Control | Keys.F))
+		{
+			TB_Search.Focus();
+			TB_Search.SelectAll();
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<IGenericPackage> e)
@@ -68,14 +101,18 @@ public partial class PC_ImportCollection : PanelContent
 	{
 		base.UIChanged();
 
-		B_ExInclude.Width = B_UnsubSub.Width = (int)(550 * UI.FontScale);
-		TB_Search.Width = (int)(290 * UI.FontScale);
+		B_ExInclude.Width = B_UnsubSub.Width = (int)(450 * UI.FontScale);
+		B_ExInclude.Font = B_UnsubSub.Font = UI.Font(8.25F);
+		B_ExInclude.Margin = UI.Scale(new Padding(5, 0, 5, 5), UI.FontScale);
+		B_UnsubSub.Margin = UI.Scale(new Padding(5, 5, 5, 0), UI.FontScale);
+		TB_Search.Width = DD_Tags.Width = (int)(290 * UI.FontScale);
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
 		TLP_Top.Height += 10;
 		L_Title.Font = UI.Font(14F, FontStyle.Bold);
 		L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
-		L_Title.Margin = B_SteamPage.Margin = B_SteamPage.Padding = UI.Scale(new Padding(7), UI.FontScale);
-		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		L_Title.Margin = UI.Scale(new Padding(7), UI.FontScale);
+		L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin = DD_Tags.Margin = UI.Scale(new Padding(5,5,5,0), UI.FontScale);
 		T_All.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Package));
 		T_Mods.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Mods));
 		T_Assets.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Assets));
@@ -86,13 +123,13 @@ public partial class PC_ImportCollection : PanelContent
 		base.DesignChanged(design);
 
 		L_Counts.ForeColor = design.LabelColor;
-		BackColor = design.AccentBackColor;
-		tableLayoutPanel1.BackColor = panel1.BackColor = panel2.BackColor = P_Back.BackColor = design.BackColor;
+		BackColor = GetTopBarColor();
+		LC_Items.BackColor = design.BackColor;
 	}
 
 	public override Color GetTopBarColor()
 	{
-		return FormDesign.Design.AccentBackColor;
+		return FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 1, -1));
 	}
 
 	private void RefreshCounts()
@@ -106,7 +143,7 @@ public partial class PC_ImportCollection : PanelContent
 		}
 		else
 		{
-			L_Counts.Text = $"{Locale.Showing} {totalFiltered} {Locale.OutOf.ToLower()} {total} {Locale.TotalItems.ToLower()}";
+			L_Counts.Text = string.Format(Locale.ShowingFilteredItems, totalFiltered, total);
 		}
 	}
 

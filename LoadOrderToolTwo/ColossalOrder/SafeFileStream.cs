@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Extensions;
+
+using System.IO;
 
 namespace LoadOrderToolTwo.ColossalOrder;
 
@@ -24,7 +26,7 @@ public class SafeFileStream : Stream
 		// If the file exists, create a backup copy
 		if (File.Exists(_mainFilePath))
 		{
-			File.Copy(_mainFilePath, _backupFilePath, true);
+			ExtensionClass.CopyFile(_mainFilePath, _backupFilePath, true);
 		}
 
 		// Open the temporary file stream
@@ -83,20 +85,20 @@ public class SafeFileStream : Stream
 				// Create a backup copy of the main file
 				if (File.Exists(_mainFilePath))
 				{
-					File.Copy(_mainFilePath, _backupFilePath, true);
+					ExtensionClass.CopyFile(_mainFilePath, _backupFilePath, true);
 				}
 
 				_mainStream?.Dispose();
 
 				// Replace the main file with the temporary file
-				File.Copy(_tempFilePath, _mainFilePath, true);
+				ExtensionClass.CopyFile(_tempFilePath, _mainFilePath, true);
 			}
 			finally
 			{
 				saved = true;
 
-				File.Delete(_backupFilePath);
-				File.Delete(_tempFilePath);
+				ExtensionClass.DeleteFile(_backupFilePath);
+				ExtensionClass.DeleteFile(_tempFilePath);
 			}
 		}
 

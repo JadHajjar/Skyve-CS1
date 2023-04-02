@@ -4,7 +4,6 @@ using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
-using SlickControls.Controls.Form;
 
 using System;
 using System.Drawing;
@@ -38,7 +37,14 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
         Height = (int)(42 * UI.UIScale);
     }
 
-    protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, DownloadStatusFilter item)
+	protected override bool SearchMatch(string searchText, DownloadStatusFilter item)
+	{
+        GetStatusDescriptors(item, out var text, out _, out _);
+
+		return searchText.SearchCheck(text);
+	}
+
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, DownloadStatusFilter item)
     {
         GetStatusDescriptors(item, out var text, out var icon, out var color);
 
@@ -46,7 +52,8 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
         {
             e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-            var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height) / 2, 0, Font.Height);
+        var textSize = (int)e.Graphics.Measure(text, Font).Height;
+            var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - textSize) / 2, 0, textSize);
 
             textRect.Width = rectangle.Width - textRect.X;
 

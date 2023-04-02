@@ -5,7 +5,6 @@ using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
-using SlickControls.Controls.Form;
 
 using System;
 using System.Collections.Generic;
@@ -61,7 +60,8 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 
         e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-        var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height) / 2, 0, Font.Height);
+        var textSize = (int)e.Graphics.Measure(text, Font).Height;
+        var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - textSize) / 2, 0, textSize);
 
         textRect.Width = rectangle.Width - textRect.X;
 

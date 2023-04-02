@@ -323,6 +323,26 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Cog {
+            get {
+                object obj = ResourceManager.GetObject("I_Cog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Cog_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Cog_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_CollectionIcon {
             get {
                 object obj = ResourceManager.GetObject("I_CollectionIcon", resourceCulture);
@@ -603,6 +623,26 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_File {
+            get {
+                object obj = ResourceManager.GetObject("I_File", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_File_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_File_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Filter {
             get {
                 object obj = ResourceManager.GetObject("I_Filter", resourceCulture);
@@ -646,6 +686,26 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_FolderSearch {
             get {
                 object obj = ResourceManager.GetObject("I_FolderSearch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Hazard {
+            get {
+                object obj = ResourceManager.GetObject("I_Hazard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Hazard_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Hazard_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -883,6 +943,26 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_NoInternet {
+            get {
+                object obj = ResourceManager.GetObject("I_NoInternet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_NoInternet_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_NoInternet_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Note {
             get {
                 object obj = ResourceManager.GetObject("I_Note", resourceCulture);
@@ -946,6 +1026,26 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_Package_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Package_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Preferences {
+            get {
+                object obj = ResourceManager.GetObject("I_Preferences", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Preferences_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Preferences_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1263,6 +1363,26 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Theme {
+            get {
+                object obj = ResourceManager.GetObject("I_Theme", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Theme_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Theme_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Tools {
             get {
                 object obj = ResourceManager.GetObject("I_Tools", resourceCulture);
@@ -1276,6 +1396,26 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_Tools_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Tools_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Translate {
+            get {
+                object obj = ResourceManager.GetObject("I_Translate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Translate_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Translate_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1326,6 +1466,26 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_User_16 {
             get {
                 object obj = ResourceManager.GetObject("I_User_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_UserInterface {
+            get {
+                object obj = ResourceManager.GetObject("I_UserInterface", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_UserInterface_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_UserInterface_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

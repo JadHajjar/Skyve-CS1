@@ -64,12 +64,16 @@ public static class Log
 			var folder = Path.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
 			LogFilePath = Path.Combine(folder, LogFileName);
 
-			if (File.Exists(LogFilePath))
-			{
-				File.Delete(LogFilePath);
-			}
-
 			Directory.CreateDirectory(folder);
+
+			try
+			{
+				if (File.Exists(LogFilePath))
+				{
+					ExtensionClass.DeleteFile(LogFilePath);
+				}
+			}
+			catch { }
 
 			if (ShowTimestamp)
 			{
@@ -82,7 +86,7 @@ public static class Log
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex);
+			Log.Exception(ex,"", true);
 		}
 	}
 

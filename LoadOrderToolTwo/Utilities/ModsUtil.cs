@@ -50,7 +50,12 @@ internal static class ModsUtil
 
 			if (files != null && files.Length > 0)
 			{
-				return AssemblyUtil.FindImplementation(files, "ICities.IUserMod", out dllPath, out version);
+				if (LocationManager.Platform is Platform.MacOSX)
+				{
+					return MacAssemblyUtil.FindImplementation(files, out dllPath, out version);
+				}
+
+				return AssemblyUtil.FindImplementation(files, out dllPath, out version);
 			}
 		}
 		catch { }
@@ -142,7 +147,7 @@ internal static class ModsUtil
 	{
 		if ((value || ModLogicManager.IsRequired(mod)) && !ModLogicManager.IsForbidden(mod))
 		{
-			File.Delete(Path.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+			ExtensionClass.DeleteFile(Path.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 		}
 		else
 		{
@@ -280,7 +285,7 @@ internal static class ModsUtil
 
 	internal static Mod FindMod(string? folder)
 	{
-		return CentralManager.Mods.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.InvariantCultureIgnoreCase));
+		return CentralManager.Mods.FirstOrDefault(x => x.Folder.PathEquals(folder));
 	}
 
 	internal static Mod FindMod(ulong steamID)

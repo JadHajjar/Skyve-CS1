@@ -11,7 +11,6 @@ public interface IPackage
 	Package Package { get; }
 	SteamUser? Author { get; set; }
 	bool BuiltIn { get; }
-	string? Class { get; set; }
 	string Folder { get; }
 	string? VirtualFolder { get; }
 	Bitmap? IconImage { get; }

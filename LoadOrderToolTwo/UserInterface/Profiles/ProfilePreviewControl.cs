@@ -164,7 +164,7 @@ internal class ProfilePreviewControl : SlickControl
 
 		var hovered = false;
 
-		hovered |= DrawButton(e, "LoadProfile", ImageManager.GetIcon("I_Import"), ClientRectangle, ContentAlignment.BottomRight, ColorStyle.Active, false, out var loadRect);
+		hovered |= DrawButton(e, Locale.LoadProfile, ImageManager.GetIcon("I_Import"), ClientRectangle, ContentAlignment.BottomRight, ColorStyle.Active, false, out var loadRect);
 
 		LoadRect = loadRect;
 

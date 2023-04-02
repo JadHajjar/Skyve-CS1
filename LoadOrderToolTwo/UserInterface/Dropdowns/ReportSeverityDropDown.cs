@@ -4,7 +4,6 @@ using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
-using SlickControls.Controls.Form;
 
 using System;
 using System.Drawing;
@@ -40,7 +39,14 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<ReportSeverityFil
         Height = (int)(42 * UI.UIScale);
     }
 
-    protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ReportSeverityFilter item)
+	protected override bool SearchMatch(string searchText, ReportSeverityFilter item)
+	{
+        var text = item == ReportSeverityFilter.Any ? Locale.AnyReportStatus : LocaleHelper.GetGlobalText($"CR_{item}");
+
+		return searchText.SearchCheck(text);
+	}
+
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ReportSeverityFilter item)
     {
         var text = item == ReportSeverityFilter.Any ? Locale.AnyReportStatus : LocaleHelper.GetGlobalText($"CR_{item}");
         var color = item switch
@@ -56,7 +62,8 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<ReportSeverityFil
 
         e.Graphics.DrawImage(icon.Color(color), rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-        var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height) / 2, 0, Font.Height);
+        var textSize = (int)e.Graphics.Measure(text, Font).Height;
+        var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - textSize) / 2, 0, textSize);
 
         textRect.Width = rectangle.Width - textRect.X;
 

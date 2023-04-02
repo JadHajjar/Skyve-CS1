@@ -45,7 +45,14 @@ internal class LocationManager
 				return string.Empty;
 			}
 
-			return Path.Combine(Directory.GetParent(GamePath).Parent.FullName, "workshop", "content", "255710");
+			var parent = Path.GetDirectoryName(Path.GetDirectoryName(GamePath));
+
+			if (string.IsNullOrEmpty(parent))
+			{
+				return string.Empty;
+			}
+
+			return Path.Combine(parent, "workshop", "content", "255710");
 		}
 	}
 
@@ -58,8 +65,12 @@ internal class LocationManager
 				return string.Empty;
 			}
 
-			var parent = VirtualGamePath.Substring(0, VirtualGamePath.LastIndexOfAny(new[] { '/', '\\' }));
-			parent = parent.Substring(0, parent.LastIndexOfAny(new[] { '/', '\\' }));
+			var parent = Path.GetDirectoryName(Path.GetDirectoryName(VirtualGamePath));
+
+			if (string.IsNullOrEmpty(parent))
+			{
+				return string.Empty;
+			}
 
 			return Path.Combine(parent, "workshop", "content", "255710");
 		}
@@ -87,7 +98,7 @@ internal class LocationManager
 
 	public static string SteamExe => Platform switch
 	{
-		Platform.MacOSX => Path.Combine(Path.Combine("Steam.app", "Contents"), "steam_osx"),
+		Platform.MacOSX => "steam_osx",
 		Platform.Linux => "Steam",
 		Platform.Windows or _ => "Steam.exe",
 	};
@@ -96,7 +107,7 @@ internal class LocationManager
 	{
 		_folderSettings = ISave.Load<FolderSettings>(nameof(FolderSettings) + ".json");
 
-		CurrentDirectory = Directory.GetParent(Application.ExecutablePath).FullName;
+		CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath);
 
 		if (_folderSettings.GamePath is null)
 		{
@@ -114,7 +125,20 @@ internal class LocationManager
 		VirtualGamePath = _folderSettings.VirtualGamePath.TrimEnd('/', '\\');
 		VirtualAppDataPath = _folderSettings.VirtualAppDataPath.TrimEnd('/', '\\');
 		ISave.CurrentPlatform = Platform = _folderSettings.Platform;
+
+		Log.Info("Folder Settings:\r\n" +
+			$"Platform: {Platform}\r\n" +
+			$"GamePath: {GamePath}\r\n" +
+			$"AppDataPath: {AppDataPath}\r\n" +
+			$"GameContentPath: {WorkshopContentPath}\r\n" +
+			$"SteamPath: {SteamPath}\r\n" +
+			$"WorkshopContentPath: {WorkshopContentPath}\r\n" +
+			$"VirtualGamePath: {VirtualGamePath}\r\n" +
+			$"VirtualAppDataPath: {VirtualAppDataPath}\r\n" +
+			$"VirtualWorkshopContentPath: {VirtualWorkshopContentPath}");
 	}
+
+	internal static string Format(string path, bool @out) => Platform is Platform.Windows || !@out ? path.Replace("/", "\\") : path.Replace("/", "\\");
 
 	internal static void RunFirstTimeSetup()
 	{
@@ -129,9 +153,17 @@ internal class LocationManager
 			Platform = Enum.TryParse(ConfigurationManager.AppSettings[nameof(Platform)], out Platform platform) ? platform : Platform.Windows
 		};
 
+		ISave.CurrentPlatform = settings.Platform;
+
+		Log.Info("FTS Folder Settings:\r\n" +
+			$"Platform: {settings.Platform}\r\n" +
+			$"GamePath: {settings.GamePath}\r\n" +
+			$"AppDataPath: {settings.AppDataPath}\r\n" +
+			$"SteamPath: {settings.SteamPath}");
+
 		try
 		{
-			if (Platform is Platform.Windows)
+			if (settings.Platform is Platform.Windows)
 			{
 				if (!Directory.Exists(settings.SteamPath))
 				{
@@ -150,6 +182,21 @@ internal class LocationManager
 				return;
 			}
 
+			if (settings.Platform is Platform.MacOSX)
+			{
+				Log.Info("Matching macOS Paths");
+
+				settings.SteamPath = "/Applications/Steam.app/Contents";
+				settings.GamePath = Path.GetDirectoryName(Path.GetDirectoryName(settings.GamePath));
+				settings.VirtualAppDataPath = settings.AppDataPath;
+				settings.VirtualGamePath = settings.GamePath;
+
+				if (Directory.Exists(settings.GamePath))
+				{
+					return;
+				}
+			}
+
 			Log.Info("Checking Virtual Paths");
 
 			if (settings.GamePath.StartsWith("/"))
@@ -164,9 +211,6 @@ internal class LocationManager
 						Log.Info($"GamePath Matched: {virtualPath}");
 						settings.VirtualGamePath = settings.GamePath;
 						settings.GamePath = virtualPath;
-
-						Log.Info($"Finding Steam in: {item.Name}");
-
 
 						break;
 					}
@@ -191,6 +235,25 @@ internal class LocationManager
 					}
 
 					Log.Info($"AppDataPath Try Failed for: {virtualPath}");
+				}
+			}
+
+			if (settings.SteamPath.StartsWith("/"))
+			{
+				Log.Info($"SteamPath: {settings.SteamPath}");
+
+				foreach (var item in DriveInfo.GetDrives().Reverse())
+				{
+					var virtualPath = item.Name + settings.SteamPath.Substring(1);
+
+					if (Directory.Exists(virtualPath))
+					{
+						Log.Info($"SteamPath Matched: {virtualPath}");
+						settings.SteamPath = virtualPath;
+						break;
+					}
+
+					Log.Info($"SteamPath Try Failed for: {virtualPath}");
 				}
 			}
 		}
@@ -220,7 +283,7 @@ internal class LocationManager
 
 			if (File.Exists(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(Path.Combine(LotAppDataPath, "LoadOrderConfig.xml")))
 			{
-				File.Copy(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Path.Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
+				ExtensionClass.CopyFile(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Path.Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
 			}
 		}
 	}

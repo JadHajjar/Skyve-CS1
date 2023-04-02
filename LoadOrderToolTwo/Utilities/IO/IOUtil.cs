@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Extensions;
+
+using LoadOrderToolTwo.Utilities.Managers;
+
+using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 
 namespace LoadOrderToolTwo.Utilities.IO;
-internal class IOUtil
+internal static class IOUtil
 {
-	public static Process? Execute(string dir, string exeFile, string args)
+	public static Process? Execute(string dir, string exeFile, string args, bool useShellExecute = true, bool createNoWindow = false)
 	{
 		try
 		{
@@ -17,16 +22,18 @@ internal class IOUtil
 			var startInfo = new ProcessStartInfo
 			{
 				WorkingDirectory = dir,
-				FileName = exeFile,
+				FileName =Path.Combine(dir, exeFile),
 				Arguments = args,
 				WindowStyle = ProcessWindowStyle.Normal,
-				UseShellExecute = true,
-				CreateNoWindow = false,
+				UseShellExecute = useShellExecute && LocationManager.Platform is not Platform.MacOSX,
+				CreateNoWindow = createNoWindow || LocationManager.Platform is not Platform.MacOSX,
 			};
 
 			var process = new Process { StartInfo = startInfo };
 
-			process.Start();
+			try
+			{ process.Start(); }
+			catch { if (LocationManager.Platform is not Platform.MacOSX) throw; }
 
 			return process;
 		}
@@ -35,5 +42,35 @@ internal class IOUtil
 			Log.Exception(ex);
 			return null;
 		}
+	}
+
+	public static string? ToRealPath(string? path)
+	{
+		if (path is null)
+			return null;
+
+		if (LocationManager.Platform is not Platform.Linux)
+			return path;
+
+		return path
+			.PathReplace(LocationManager.VirtualAppDataPath, LocationManager.AppDataPath)
+			.PathReplace(LocationManager.VirtualWorkshopContentPath, LocationManager.WorkshopContentPath)
+			.PathReplace(LocationManager.VirtualGamePath, LocationManager.GamePath)
+			.Replace("/", "\\");
+	}
+
+	public static string? ToVirtualPath(string? path)
+	{
+		if (path is null)
+			return null;
+
+		if (LocationManager.Platform is not Platform.Linux)
+			return path;
+
+		return path
+			.PathReplace(LocationManager.AppDataPath, LocationManager.VirtualAppDataPath)
+			.PathReplace(LocationManager.WorkshopContentPath, LocationManager.VirtualWorkshopContentPath)
+			.PathReplace(LocationManager.GamePath, LocationManager.VirtualGamePath)
+			.Replace('\\', '/');
 	}
 }

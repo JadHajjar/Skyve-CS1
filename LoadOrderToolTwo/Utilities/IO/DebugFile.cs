@@ -1,3 +1,5 @@
+using Extensions;
+
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
@@ -45,7 +47,7 @@ public abstract class DebugFile
 			return; // already the same
 		}
 
-		File.Delete(dest);
+		ExtensionClass.DeleteFile(dest);
 		File.Copy(sourceFileName: source, destFileName: dest);
 	}
 

@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -23,12 +24,14 @@ public partial class PC_Profiles : PanelContent
 
 		LoadProfile(CentralManager.CurrentProfile);
 
-		TB_SavePath.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Saves");
-		TB_SkipFile.StartingFolder = LocationManager.AppDataPath;
+		DD_SaveFile.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Saves");
+		DD_SkipFile.StartingFolder = LocationManager.AppDataPath;
 
 		CB_UseCitiesExe.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
 		CB_UnityProfiler.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
 		CB_DebugMono.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
+
+		DAD_NewProfile.StartingFolder = LocationManager.AppDataPath;
 
 		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
@@ -49,13 +52,6 @@ public partial class PC_Profiles : PanelContent
 		L_Info.Text = Locale.ProfileSaveInfo;
 	}
 
-	protected override void OnCreateControl()
-	{
-		base.OnCreateControl();
-
-		TB_SavePath.Image = TB_SkipFile.Image = Properties.Resources.I_FolderSearch;
-	}
-
 	protected override void UIChanged()
 	{
 		base.UIChanged();
@@ -65,8 +61,9 @@ public partial class PC_Profiles : PanelContent
 		L_TempProfile.Font = UI.Font(10.5F);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
 		B_ViewProfiles.Font = B_NewProfile.Font = B_TempProfile.Font = B_Cancel.Font = UI.Font(9.75F);
-		TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile .Margin= UI.Scale(new Padding(10), UI.UIScale);
 		T_ProfileUsage.Width = (int)(300 * UI.FontScale);
+		DD_SaveFile.Margin = DD_SkipFile.Margin = UI.Scale(new Padding(0, 5, 5, 5), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -101,8 +98,11 @@ public partial class PC_Profiles : PanelContent
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
 		B_TempProfile.Visible = !profile.Temporary;
 		L_Info.Visible = I_Info.Visible = !profile.Temporary;
-
+		FLP_Options.Enabled = true;
 		TLP_GeneralSettings.Visible = !profile.Temporary;
+
+		TLP_Main.SetColumn(B_TempProfile, profile.Temporary ? 2 : 3);
+		TLP_Main.SetColumn(B_NewProfile, profile.Temporary ? 3 : 2);
 
 		B_EditName.Visible = B_Save.Visible = !profile.Temporary && !TB_Name.Visible;
 
@@ -118,12 +118,15 @@ public partial class PC_Profiles : PanelContent
 		CB_UnityProfiler.Checked = profile.LaunchSettings.UnityProfiler;
 		CB_DebugMono.Checked = profile.LaunchSettings.DebugMono;
 		CB_LoadSave.Checked = profile.LaunchSettings.LoadSaveGame;
-		TB_SavePath.Text = profile.LaunchSettings.SaveToLoad;
+		DD_SaveFile.SelectedFile = IOUtil.ToRealPath(profile.LaunchSettings.SaveToLoad);
 
 		CB_LoadUsed.Checked = profile.LsmSettings.LoadUsed;
 		CB_LoadEnabled.Checked = profile.LsmSettings.LoadEnabled;
 		CB_SkipFile.Checked = profile.LsmSettings.UseSkipFile;
-		TB_SkipFile.Text = profile.LsmSettings.SkipFile;
+		DD_SkipFile.SelectedFile = IOUtil.ToRealPath(profile.LsmSettings.SkipFile);
+
+		DD_SaveFile.Enabled = CB_LoadSave.Checked;
+		DD_SkipFile.Enabled = CB_SkipFile.Checked;
 
 		if (profile.ForAssetEditor)
 		{
@@ -143,6 +146,9 @@ public partial class PC_Profiles : PanelContent
 
 	private void ValueChanged(object sender, EventArgs e)
 	{
+		DD_SaveFile.Enabled = CB_LoadSave.Checked;
+		DD_SkipFile.Enabled = CB_SkipFile.Checked;
+
 		if (loadingProfile)
 		{
 			return;
@@ -156,13 +162,13 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.NoAssets = CB_NoAssets.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.NoMods = CB_NoMods.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.LHT = CB_LHT.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = TB_SavePath.Text;
+		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = IOUtil.ToVirtualPath(DD_SaveFile.SelectedFile);
 		CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.DebugMono = CB_DebugMono.Checked;
 
-		CentralManager.CurrentProfile.LsmSettings.SkipFile = TB_SkipFile.Text;
+		CentralManager.CurrentProfile.LsmSettings.SkipFile = IOUtil.ToVirtualPath(DD_SkipFile.SelectedFile);
 		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
 		CentralManager.CurrentProfile.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
 		CentralManager.CurrentProfile.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
@@ -371,5 +377,50 @@ public partial class PC_Profiles : PanelContent
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
 		ProfileManager.SetProfile(Profile.TemporaryProfile);
+	}
+
+	private void DD_SaveFile_FileSelected(string obj)
+	{
+		DD_SaveFile.SelectedFile = obj;
+		ValueChanged(DD_SaveFile, EventArgs.Empty);
+	}
+
+	private void DD_SkipFile_FileSelected(string obj)
+	{
+		DD_SkipFile.SelectedFile = obj;
+		ValueChanged(DD_SkipFile, EventArgs.Empty);
+	}
+
+	private bool DD_SaveFile_ValidFile(string arg)
+	{
+		return arg.PathContains(DD_SaveFile.StartingFolder) && DD_SaveFile.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
+	}
+
+	private bool DD_SkipFile_ValidFile(string arg)
+	{
+		return arg.PathContains(DD_SkipFile.StartingFolder) && DD_SkipFile.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
+	}
+
+	private void DAD_NewProfile_FileSelected(string obj)
+	{
+		TLP_Main.Visible = true;
+		TLP_New.Visible = false;
+
+		var profile = ProfileManager.Profiles.FirstOrDefault(x => x.Name!.Equals( Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
+
+		if (profile is not null)
+		{
+			Ctrl_LoadProfile(profile);
+			return;
+		}
+
+		try
+		{ Ctrl_LoadProfile(ProfileManager.ImportProfile(obj)!); }
+		catch (Exception ex) { ShowPrompt(ex, "Failed to import your profile"); }
+	}
+
+	private bool DAD_NewProfile_ValidFile(string arg)
+	{
+		return Path.GetExtension(arg).Equals(".json", StringComparison.InvariantCultureIgnoreCase);
 	}
 }

@@ -36,6 +36,7 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.P_LsmReport = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+			this.dragAndDropControl2 = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.dragAndDropControl1 = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.P_DuplicateMods = new SlickControls.RoundedGroupPanel();
 			this.P_ModIssues = new SlickControls.RoundedGroupPanel();
@@ -45,6 +46,7 @@ partial class PC_ModUtilities
 			this.L_Incomplete = new System.Windows.Forms.Label();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.P_Container = new System.Windows.Forms.Panel();
+			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.P_Filters.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -53,6 +55,7 @@ partial class PC_ModUtilities
 			this.P_ModIssues.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.P_Container.SuspendLayout();
+			this.tableLayoutPanel5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -71,7 +74,7 @@ partial class PC_ModUtilities
 			this.TB_CollectionLink.SelectedText = "";
 			this.TB_CollectionLink.SelectionLength = 0;
 			this.TB_CollectionLink.SelectionStart = 0;
-			this.TB_CollectionLink.Size = new System.Drawing.Size(570, 49);
+			this.TB_CollectionLink.Size = new System.Drawing.Size(566, 49);
 			this.TB_CollectionLink.TabIndex = 13;
 			this.TB_CollectionLink.Validation = SlickControls.ValidationType.Regex;
 			this.TB_CollectionLink.ValidationRegex = "^(?:https:\\/\\/steamcommunity\\.com\\/(?:(?:sharedfiles)|(?:workshop))\\/filedetails\\" +
@@ -87,8 +90,8 @@ partial class PC_ModUtilities
 			this.P_Filters.Dock = System.Windows.Forms.DockStyle.Top;
 			this.P_Filters.Location = new System.Drawing.Point(3, 3);
 			this.P_Filters.Name = "P_Filters";
-			this.P_Filters.Padding = new System.Windows.Forms.Padding(6, 32, 6, 6);
-			this.P_Filters.Size = new System.Drawing.Size(694, 93);
+			this.P_Filters.Padding = new System.Windows.Forms.Padding(8, 42, 8, 8);
+			this.P_Filters.Size = new System.Drawing.Size(694, 105);
 			this.P_Filters.TabIndex = 15;
 			this.P_Filters.Text = "CollectionTitle";
 			// 
@@ -103,12 +106,12 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel1.Controls.Add(this.B_LoadCollection, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.TB_CollectionLink, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 32);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 42);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(682, 55);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(678, 55);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// B_LoadCollection
@@ -117,7 +120,7 @@ partial class PC_ModUtilities
 			this.B_LoadCollection.ColorShade = null;
 			this.B_LoadCollection.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_LoadCollection.Image = global::LoadOrderToolTwo.Properties.Resources.I_Import;
-			this.B_LoadCollection.Location = new System.Drawing.Point(579, 3);
+			this.B_LoadCollection.Location = new System.Drawing.Point(575, 3);
 			this.B_LoadCollection.Name = "B_LoadCollection";
 			this.B_LoadCollection.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
 			this.B_LoadCollection.Size = new System.Drawing.Size(100, 49);
@@ -145,7 +148,7 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(700, 443);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(700, 501);
 			this.tableLayoutPanel3.TabIndex = 17;
 			// 
 			// P_LsmReport
@@ -155,10 +158,10 @@ partial class PC_ModUtilities
 			this.P_LsmReport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_LsmReport.Controls.Add(this.tableLayoutPanel4);
 			this.P_LsmReport.Dock = System.Windows.Forms.DockStyle.Top;
-			this.P_LsmReport.Location = new System.Drawing.Point(3, 102);
+			this.P_LsmReport.Location = new System.Drawing.Point(3, 114);
 			this.P_LsmReport.Name = "P_LsmReport";
-			this.P_LsmReport.Padding = new System.Windows.Forms.Padding(6, 32, 6, 6);
-			this.P_LsmReport.Size = new System.Drawing.Size(694, 194);
+			this.P_LsmReport.Padding = new System.Windows.Forms.Padding(8, 42, 8, 8);
+			this.P_LsmReport.Size = new System.Drawing.Size(694, 206);
 			this.P_LsmReport.TabIndex = 18;
 			this.P_LsmReport.Text = "LsmImport";
 			// 
@@ -167,18 +170,30 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel4.AutoSize = true;
 			this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tableLayoutPanel4.ColumnCount = 2;
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel4.Controls.Add(this.dragAndDropControl2, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.dragAndDropControl1, 0, 0);
 			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 32);
+			this.tableLayoutPanel4.Location = new System.Drawing.Point(8, 42);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 1;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(682, 156);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(678, 156);
 			this.tableLayoutPanel4.TabIndex = 0;
+			// 
+			// dragAndDropControl2
+			// 
+			this.dragAndDropControl2.AllowDrop = true;
+			this.dragAndDropControl2.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.dragAndDropControl2.Dock = System.Windows.Forms.DockStyle.Top;
+			this.dragAndDropControl2.Location = new System.Drawing.Point(342, 3);
+			this.dragAndDropControl2.Name = "dragAndDropControl2";
+			this.dragAndDropControl2.Size = new System.Drawing.Size(333, 150);
+			this.dragAndDropControl2.TabIndex = 17;
+			this.dragAndDropControl2.Text = "LsmImportUnusedInfo";
+			this.dragAndDropControl2.FileSelected += new System.Action<string>(this.LSM_UnusedDrop_FileSelected);
+			this.dragAndDropControl2.ValidFile += new System.Func<string, bool>(this.LSMDragDrop_ValidFile);
 			// 
 			// dragAndDropControl1
 			// 
@@ -187,12 +202,9 @@ partial class PC_ModUtilities
 			this.dragAndDropControl1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.dragAndDropControl1.Location = new System.Drawing.Point(3, 3);
 			this.dragAndDropControl1.Name = "dragAndDropControl1";
-			this.dragAndDropControl1.RegexTest = "\\-.Assets.Report([_\\-]\\d+)+\\.htm$";
-			this.dragAndDropControl1.Size = new System.Drawing.Size(676, 150);
-			this.dragAndDropControl1.StartingFolder = null;
+			this.dragAndDropControl1.Size = new System.Drawing.Size(333, 150);
 			this.dragAndDropControl1.TabIndex = 16;
-			this.dragAndDropControl1.Text = "LsmImportInfo";
-			this.dragAndDropControl1.ValidExtensions = null;
+			this.dragAndDropControl1.Text = "LsmImportMissingInfo";
 			this.dragAndDropControl1.FileSelected += new System.Action<string>(this.LSMDragDrop_FileSelected);
 			this.dragAndDropControl1.ValidFile += new System.Func<string, bool>(this.LSMDragDrop_ValidFile);
 			// 
@@ -203,10 +215,10 @@ partial class PC_ModUtilities
 			this.P_DuplicateMods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_DuplicateMods.ColorStyle = Extensions.ColorStyle.Red;
 			this.P_DuplicateMods.Dock = System.Windows.Forms.DockStyle.Top;
-			this.P_DuplicateMods.Location = new System.Drawing.Point(3, 302);
+			this.P_DuplicateMods.Location = new System.Drawing.Point(3, 326);
 			this.P_DuplicateMods.Name = "P_DuplicateMods";
-			this.P_DuplicateMods.Padding = new System.Windows.Forms.Padding(6, 32, 6, 6);
-			this.P_DuplicateMods.Size = new System.Drawing.Size(694, 38);
+			this.P_DuplicateMods.Padding = new System.Windows.Forms.Padding(8, 42, 8, 8);
+			this.P_DuplicateMods.Size = new System.Drawing.Size(694, 50);
 			this.P_DuplicateMods.TabIndex = 17;
 			this.P_DuplicateMods.Text = "DuplicateMods";
 			// 
@@ -218,10 +230,10 @@ partial class PC_ModUtilities
 			this.P_ModIssues.ColorStyle = Extensions.ColorStyle.Yellow;
 			this.P_ModIssues.Controls.Add(this.tableLayoutPanel2);
 			this.P_ModIssues.Dock = System.Windows.Forms.DockStyle.Top;
-			this.P_ModIssues.Location = new System.Drawing.Point(3, 346);
+			this.P_ModIssues.Location = new System.Drawing.Point(3, 382);
 			this.P_ModIssues.Name = "P_ModIssues";
-			this.P_ModIssues.Padding = new System.Windows.Forms.Padding(6, 32, 6, 6);
-			this.P_ModIssues.Size = new System.Drawing.Size(694, 94);
+			this.P_ModIssues.Padding = new System.Windows.Forms.Padding(8, 42, 8, 8);
+			this.P_ModIssues.Size = new System.Drawing.Size(694, 116);
 			this.P_ModIssues.TabIndex = 16;
 			this.P_ModIssues.Text = "DetectedIssues";
 			// 
@@ -232,27 +244,25 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel2.ColumnCount = 2;
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.B_ReDownload, 1, 0);
-			this.tableLayoutPanel2.Controls.Add(this.L_OutOfDate, 0, 0);
-			this.tableLayoutPanel2.Controls.Add(this.L_Incomplete, 0, 1);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 32);
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(8, 42);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-			this.tableLayoutPanel2.RowCount = 2;
+			this.tableLayoutPanel2.RowCount = 1;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(682, 56);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(678, 66);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
 			// B_ReDownload
 			// 
+			this.B_ReDownload.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_ReDownload.ColorShade = null;
 			this.B_ReDownload.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_ReDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ReDownload.Location = new System.Drawing.Point(568, 13);
+			this.B_ReDownload.Location = new System.Drawing.Point(564, 18);
 			this.B_ReDownload.Name = "B_ReDownload";
-			this.tableLayoutPanel2.SetRowSpan(this.B_ReDownload, 2);
 			this.B_ReDownload.Size = new System.Drawing.Size(111, 40);
 			this.B_ReDownload.SpaceTriggersClick = true;
 			this.B_ReDownload.TabIndex = 14;
@@ -262,18 +272,18 @@ partial class PC_ModUtilities
 			// L_OutOfDate
 			// 
 			this.L_OutOfDate.AutoSize = true;
-			this.L_OutOfDate.Location = new System.Drawing.Point(3, 10);
+			this.L_OutOfDate.Location = new System.Drawing.Point(3, 0);
 			this.L_OutOfDate.Name = "L_OutOfDate";
-			this.L_OutOfDate.Size = new System.Drawing.Size(45, 19);
+			this.L_OutOfDate.Size = new System.Drawing.Size(59, 25);
 			this.L_OutOfDate.TabIndex = 15;
 			this.L_OutOfDate.Text = "label1";
 			// 
 			// L_Incomplete
 			// 
 			this.L_Incomplete.AutoSize = true;
-			this.L_Incomplete.Location = new System.Drawing.Point(3, 36);
+			this.L_Incomplete.Location = new System.Drawing.Point(3, 25);
 			this.L_Incomplete.Name = "L_Incomplete";
-			this.L_Incomplete.Size = new System.Drawing.Size(45, 19);
+			this.L_Incomplete.Size = new System.Drawing.Size(59, 25);
 			this.L_Incomplete.TabIndex = 15;
 			this.L_Incomplete.Text = "label1";
 			// 
@@ -281,9 +291,9 @@ partial class PC_ModUtilities
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.tableLayoutPanel3;
-			this.slickScroll1.Location = new System.Drawing.Point(776, 30);
+			this.slickScroll1.Location = new System.Drawing.Point(774, 30);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(7, 408);
+			this.slickScroll1.Size = new System.Drawing.Size(9, 559);
 			this.slickScroll1.SmallHandle = true;
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 18;
@@ -296,8 +306,25 @@ partial class PC_ModUtilities
 			this.P_Container.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.P_Container.Location = new System.Drawing.Point(0, 30);
 			this.P_Container.Name = "P_Container";
-			this.P_Container.Size = new System.Drawing.Size(776, 408);
+			this.P_Container.Size = new System.Drawing.Size(774, 559);
 			this.P_Container.TabIndex = 19;
+			// 
+			// tableLayoutPanel5
+			// 
+			this.tableLayoutPanel5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.tableLayoutPanel5.AutoSize = true;
+			this.tableLayoutPanel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.tableLayoutPanel5.ColumnCount = 1;
+			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel5.Controls.Add(this.L_OutOfDate, 0, 0);
+			this.tableLayoutPanel5.Controls.Add(this.L_Incomplete, 0, 1);
+			this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 13);
+			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+			this.tableLayoutPanel5.RowCount = 2;
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel5.Size = new System.Drawing.Size(65, 50);
+			this.tableLayoutPanel5.TabIndex = 18;
 			// 
 			// PC_ModUtilities
 			// 
@@ -308,6 +335,7 @@ partial class PC_ModUtilities
 			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_ModUtilities";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
+			this.Size = new System.Drawing.Size(783, 589);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.slickScroll1, 0);
 			this.Controls.SetChildIndex(this.P_Container, 0);
@@ -325,6 +353,8 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel2.PerformLayout();
 			this.P_Container.ResumeLayout(false);
 			this.P_Container.PerformLayout();
+			this.tableLayoutPanel5.ResumeLayout(false);
+			this.tableLayoutPanel5.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -348,4 +378,6 @@ partial class PC_ModUtilities
 	private SlickControls.RoundedGroupPanel P_LsmReport;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
 	private Generic.DragAndDropControl dragAndDropControl1;
+	private Generic.DragAndDropControl dragAndDropControl2;
+	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
 }

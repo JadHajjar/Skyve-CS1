@@ -22,6 +22,11 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override IEnumerable<Asset> GetItems()
 	{
+		if (CentralManager.SessionSettings.LinkModAssets)
+		{
+			return CentralManager.Assets.Where(x => x.Package.Mod is null);
+		}
+
 		return CentralManager.Assets;
 	}
 
@@ -36,7 +41,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override string GetFilteredCountText(int filteredCount)
 	{
-		return $"{Locale.Showing} {filteredCount} {Locale.Assets.ToLower()}";
+		return string.Format(Locale.ShowingAssets, filteredCount);
 	}
 
 	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)

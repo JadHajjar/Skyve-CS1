@@ -3,6 +3,8 @@
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
+using Microsoft.Win32;
+
 using SlickControls;
 
 using System.Diagnostics;

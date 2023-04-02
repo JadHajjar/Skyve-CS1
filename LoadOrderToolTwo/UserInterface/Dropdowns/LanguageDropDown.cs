@@ -1,7 +1,6 @@
 ﻿using Extensions;
 
 using SlickControls;
-using SlickControls.Controls.Form;
 
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
     protected override void UIChanged()
     {
         Font = UI.Font("Segoe UI", 9.75F);
-        Margin = UI.Scale(new Padding(5), UI.FontScale);
         Padding = UI.Scale(new Padding(5), UI.FontScale);
     }
 
@@ -32,7 +30,12 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
         return items.OrderByDescending(x => x.Item.IetfLanguageTag == "en").ThenBy(x => x.Item.EnglishName);
     }
 
-    protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, CultureInfo item)
+	protected override bool SearchMatch(string searchText, CultureInfo item)
+	{
+        return searchText.SearchCheck(item.EnglishName) || searchText.SearchCheck(item.NativeName);
+	}
+
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, CultureInfo item)
     {
         if (item == null)
         {
@@ -46,7 +49,8 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
         {
             e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-            var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - Font.Height) / 2, 0, Font.Height);
+        var textSize = (int)e.Graphics.Measure(text, Font).Height;
+            var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - textSize) / 2, 0, textSize);
 
             textRect.Width = rectangle.Width - textRect.X;
 

@@ -40,9 +40,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
 
-		DT_SubFrom.Value = DT_UpdateFrom.Value = DT_UpdateFrom.MinDate;
-		DT_SubTo.Value = DT_UpdateTo.Value = DT_UpdateTo.MaxDate;
-
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
 
 		_delayedSearch = new(350, DelayedSearch);
@@ -70,6 +67,30 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		CentralManager.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
+
+		new BackgroundAction("Getting tag list", () =>
+		{
+			var items = new List<T>(LC_Items.Items);
+
+			DD_Tags.Items = items.SelectMany(x =>
+			{
+				var tags = new List<string>(x.Tags ?? new string[0]);
+
+				if (x is Asset asset)
+				{
+					tags.AddRange(asset.AssetTags);
+				}
+				else if (x.Package.Assets is not null)
+				{
+					foreach (var item in x.Package.Assets)
+					{
+						tags.AddRange(item.AssetTags);
+					}
+				}
+
+				return tags;
+			}).Distinct().ToArray();
+		}).Run();
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)
@@ -103,10 +124,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_ReportSeverity.Text = Locale.ReportSeverity;
 		DD_Tags.Text = Locale.Tags;
 		DD_Profile.Text = Locale.Profiles;
-		L_From1.Text = L_From2.Text = Locale.From;
-		L_To1.Text = L_To2.Text = Locale.To;
-		L_DateSubscribed.Text = Locale.DateSubscribed;
-		L_DateUpdated.Text = Locale.DateUpdated;
+		slickDateRange1.Text = Locale.DateSubscribed;
+		slickDateRange2.Text = Locale.DateUpdated;
 	}
 
 	protected override void OnCreateControl()
@@ -147,10 +166,11 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		base.UIChanged();
 
-		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin 
+		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin
 			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
-			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin 
-			= B_Actions.Margin = TLP_Dates.Margin = B_Refresh.Margin = UI.Scale(new Padding(5), UI.FontScale);
+			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin
+			= B_Actions.Margin = slickDateRange1.Margin = slickDateRange2.Margin 
+			= B_Refresh.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_Filters.Image = P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Filter));
 		B_Actions.Image = P_Actions.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Actions));
 		B_Refresh.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Refresh));
@@ -158,7 +178,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_ClearFilters.Size = UI.FontScale >= 1.25 ? new(32, 32) : new(24, 24);
 		I_ClearFilters.Location = new(P_Filters.Width - P_Filters.Padding.Right - I_ClearFilters.Width, P_Filters.Padding.Bottom);
 		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
-		L_DateSubscribed.Font = L_DateUpdated.Font = UI.Font(8.25F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(180 * UI.FontScale);
 		TB_Search.Width = (int)(400 * UI.FontScale);
 	}
@@ -248,19 +267,25 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		if (CentralManager.CurrentProfile.LaunchSettings.NoWorkshop)
 		{
 			if (item.Workshop)
+			{
 				return true;
+			}
 		}
 
 		if (CentralManager.CurrentProfile.ForAssetEditor)
 		{
 			if (item.Package.ForNormalGame == true)
+			{
 				return true;
+			}
 		}
 
 		if (CentralManager.CurrentProfile.ForGameplay)
 		{
 			if (item.Package.ForAssetEditor == true)
+			{
 				return true;
+			}
 		}
 
 		if (!firstFilterPassed)
@@ -271,19 +296,25 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
 			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Workshop)
+			{
 				return true;
+			}
 		}
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
 			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option1 == item.IsIncluded)
+			{
 				return true;
+			}
 		}
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
 			if (item.Package.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Package.Mod.IsEnabled)
+			{
 				return true;
+			}
 		}
 
 		if (DD_PackageStatus.SelectedItem != DownloadStatusFilter.Any)
@@ -291,44 +322,55 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.None)
 			{
 				if (item.Workshop)
+				{
 					return true;
+				}
 			}
 			else
 			{
 				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)item.Status)
+				{
 					return true;
+				}
 			}
 		}
 
 		if (DD_ReportSeverity.SelectedItem != ReportSeverityFilter.Any)
 		{
 			if (((int)DD_ReportSeverity.SelectedItem - 1) != (int)(item.Package.CompatibilityReport?.Severity ?? 0))
-				return true;
-		}
-
-		if ((DT_SubFrom.Value != DT_SubFrom.MinDate || DT_SubTo.Value != DT_SubTo.MaxDate))
-		{
-			if (item.LocalTime < DT_SubFrom.Value || item.LocalTime > DT_SubTo.Value)
-				return true;
-		}
-
-		if ((DT_UpdateFrom.Value != DT_UpdateFrom.MinDate || DT_UpdateTo.Value != DT_UpdateTo.MaxDate))
-		{
-			if (item.ServerTime < DT_UpdateFrom.Value || item.ServerTime > DT_UpdateTo.Value)
-				return true;
-		}
-
-		if (DD_Tags.SelectedItem is not null && DD_Tags.SelectedItem != Locale.AnyTags)
-		{
-			if (item is Asset asset)
 			{
-				if (!(item.Tags?.Any(DD_Tags.SelectedItem) ?? false) && !asset.AssetTags.Any(DD_Tags.SelectedItem))
-					return true;
+				return true;
 			}
-			else
+		}
+
+		if (!slickDateRange1.Match(item.LocalTime))
+		{
+			return true;
+		}
+
+		if (!slickDateRange2.Match(item.ServerTime))
+		{
+			return true;
+		}
+
+		if (DD_Tags.SelectedItems.Any())
+		{
+			foreach (var tag in DD_Tags.SelectedItems)
 			{
-				if (!(item.Tags?.Any(DD_Tags.SelectedItem) ?? false))
-					return true;
+				if (item is Asset asset)
+				{
+					if (!(item.Tags?.Any(tag) ?? false) && !asset.AssetTags.Any(tag))
+					{
+						return true;
+					}
+				}
+				else
+				{
+					if (!(item.Tags?.Any(tag) ?? false) && !item.Package.Assets.Any(x => x.AssetTags.Any(tag)))
+					{
+						return true;
+					}
+				}
 			}
 		}
 
@@ -337,24 +379,32 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			if (item is Asset asset)
 			{
 				if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FileName)))
+				{
 					return true;
+				}
 			}
 			else if (item is Mod mod)
 			{
 				if (!DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(mod.Folder)))
+				{
 					return true;
+				}
 			}
 			else
 			{
 				if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)) && !DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)))
+				{
 					return true;
+				}
 			}
 		}
 
 		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
 		{
 			if (!(TB_Search.Text.SearchCheck(item.ToString()) || TB_Search.Text.SearchCheck(item.Author?.Name) || TB_Search.Text.SearchCheck(item.SteamId.ToString())))
+			{
 				return true;
+			}
 		}
 
 		return false;
@@ -393,5 +443,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
 		FilterChanged(sender, e);
+	}
+
+	private void L_Duplicates_Click(object sender, EventArgs e)
+	{
+		Form.PushPanel<PC_ModUtilities>(null);
 	}
 }

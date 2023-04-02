@@ -15,12 +15,19 @@ internal class PackageIcon : SlickImageControl
 	public Package? Package { get; set; }
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public bool Collection { get; set; }
+	[Category("Appearance"), DefaultValue(true)]
+	public bool HalfColor { get; set; } = true;
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		e.Graphics.Clear(FormDesign.Design.BackColor);
+		if (HalfColor)
+		{
+			e.Graphics.Clear(FormDesign.Design.BackColor);
 
-		e.Graphics.FillRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), new Rectangle(0, 0, Width, Height / 2));
+			e.Graphics.FillRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), new Rectangle(0, 0, Width, Height / 2));
+		}
+		else
+			e.Graphics.Clear(BackColor);
 
 		if (Loading)
 		{

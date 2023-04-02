@@ -49,32 +49,33 @@ partial class PC_Profiles
 			this.FLP_Options = new System.Windows.Forms.FlowLayoutPanel();
 			this.TLP_GeneralSettings = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.L_ProfileUsage = new System.Windows.Forms.Label();
+			this.T_ProfileUsage = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.CB_AutoSave = new SlickControls.SlickCheckbox();
-			this.T_ProfileUsage = new Generic.ThreeOptionToggle();
 			this.TLP_LaunchSettings = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_LoadSave = new SlickControls.SlickCheckbox();
 			this.CB_LHT = new SlickControls.SlickCheckbox();
-			this.TB_SavePath = new SlickControls.SlickPathTextBox();
 			this.CB_NoWorkshop = new SlickControls.SlickCheckbox();
 			this.CB_NoAssets = new SlickControls.SlickCheckbox();
 			this.CB_NoMods = new SlickControls.SlickCheckbox();
 			this.CB_DebugMono = new SlickControls.SlickCheckbox();
 			this.CB_UseCitiesExe = new SlickControls.SlickCheckbox();
 			this.CB_UnityProfiler = new SlickControls.SlickCheckbox();
+			this.DD_SaveFile = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.TLP_LSM = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_SkipFile = new SlickControls.SlickCheckbox();
-			this.TB_SkipFile = new SlickControls.SlickPathTextBox();
 			this.CB_LoadEnabled = new SlickControls.SlickCheckbox();
 			this.CB_LoadUsed = new SlickControls.SlickCheckbox();
-			this.B_NewProfile = new SlickControls.SlickButton();
+			this.DD_SkipFile = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.B_ViewProfiles = new SlickControls.SlickButton();
 			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
 			this.B_TempProfile = new SlickControls.SlickButton();
+			this.B_NewProfile = new SlickControls.SlickButton();
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
-			this.newProfileOptionControl1 = new Profiles.NewProfileOptionControl();
-			this.newProfileOptionControl2 = new Profiles.NewProfileOptionControl();
+			this.newProfileOptionControl1 = new LoadOrderToolTwo.UserInterface.Profiles.NewProfileOptionControl();
+			this.newProfileOptionControl2 = new LoadOrderToolTwo.UserInterface.Profiles.NewProfileOptionControl();
 			this.B_Cancel = new SlickControls.SlickButton();
+			this.DAD_NewProfile = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.TLP_ProfileName.SuspendLayout();
 			this.TLP_Main.SuspendLayout();
 			this.P_Options.SuspendLayout();
@@ -187,15 +188,16 @@ partial class PC_Profiles
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Main.Controls.Add(this.I_TempProfile, 0, 1);
 			this.TLP_Main.Controls.Add(this.L_TempProfile, 1, 1);
 			this.TLP_Main.Controls.Add(this.TLP_ProfileName, 0, 0);
 			this.TLP_Main.Controls.Add(this.P_Options, 0, 3);
-			this.TLP_Main.Controls.Add(this.B_NewProfile, 3, 0);
 			this.TLP_Main.Controls.Add(this.B_ViewProfiles, 4, 0);
 			this.TLP_Main.Controls.Add(this.I_Info, 0, 2);
 			this.TLP_Main.Controls.Add(this.L_Info, 1, 2);
-			this.TLP_Main.Controls.Add(this.B_TempProfile, 2, 0);
+			this.TLP_Main.Controls.Add(this.B_TempProfile, 3, 0);
+			this.TLP_Main.Controls.Add(this.B_NewProfile, 2, 0);
 			this.TLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TLP_Main.Location = new System.Drawing.Point(0, 30);
 			this.TLP_Main.Name = "TLP_Main";
@@ -261,9 +263,9 @@ partial class PC_Profiles
 			// 
 			this.slickScroll.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll.LinkedControl = this.FLP_Options;
-			this.slickScroll.Location = new System.Drawing.Point(1397, 0);
+			this.slickScroll.Location = new System.Drawing.Point(1396, 0);
 			this.slickScroll.Name = "slickScroll";
-			this.slickScroll.Size = new System.Drawing.Size(7, 387);
+			this.slickScroll.Size = new System.Drawing.Size(8, 387);
 			this.slickScroll.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll.TabIndex = 16;
 			this.slickScroll.TabStop = false;
@@ -278,7 +280,7 @@ partial class PC_Profiles
 			this.FLP_Options.Controls.Add(this.TLP_LSM);
 			this.FLP_Options.Location = new System.Drawing.Point(0, 0);
 			this.FLP_Options.Name = "FLP_Options";
-			this.FLP_Options.Size = new System.Drawing.Size(1346, 234);
+			this.FLP_Options.Size = new System.Drawing.Size(1336, 262);
 			this.FLP_Options.TabIndex = 18;
 			// 
 			// TLP_GeneralSettings
@@ -289,56 +291,36 @@ partial class PC_Profiles
 			this.TLP_GeneralSettings.ColumnCount = 2;
 			this.TLP_GeneralSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_GeneralSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_GeneralSettings.Controls.Add(this.L_ProfileUsage, 0, 0);
-			this.TLP_GeneralSettings.Controls.Add(this.CB_AutoSave, 0, 2);
-			this.TLP_GeneralSettings.Controls.Add(this.T_ProfileUsage, 0, 1);
+			this.TLP_GeneralSettings.Controls.Add(this.L_ProfileUsage, 1, 0);
+			this.TLP_GeneralSettings.Controls.Add(this.T_ProfileUsage, 1, 1);
+			this.TLP_GeneralSettings.Controls.Add(this.CB_AutoSave, 0, 1);
 			this.TLP_GeneralSettings.Image = ((System.Drawing.Image)(resources.GetObject("TLP_GeneralSettings.Image")));
 			this.TLP_GeneralSettings.Location = new System.Drawing.Point(3, 3);
 			this.TLP_GeneralSettings.Name = "TLP_GeneralSettings";
 			this.TLP_GeneralSettings.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
-			this.TLP_GeneralSettings.RowCount = 3;
+			this.TLP_GeneralSettings.RowCount = 2;
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_GeneralSettings.Size = new System.Drawing.Size(326, 167);
+			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_GeneralSettings.Size = new System.Drawing.Size(501, 114);
 			this.TLP_GeneralSettings.TabIndex = 17;
 			// 
 			// L_ProfileUsage
 			// 
 			this.L_ProfileUsage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
 			this.L_ProfileUsage.AutoSize = true;
-			this.L_ProfileUsage.Location = new System.Drawing.Point(135, 48);
-			this.L_ProfileUsage.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
+			this.L_ProfileUsage.Location = new System.Drawing.Point(310, 38);
 			this.L_ProfileUsage.Name = "L_ProfileUsage";
 			this.L_ProfileUsage.Size = new System.Drawing.Size(55, 23);
 			this.L_ProfileUsage.TabIndex = 21;
 			this.L_ProfileUsage.Text = "label1";
-			// 
-			// CB_AutoSave
-			// 
-			this.CB_AutoSave.AutoSize = true;
-			this.CB_AutoSave.Checked = false;
-			this.CB_AutoSave.CheckedText = null;
-			this.TLP_GeneralSettings.SetColumnSpan(this.CB_AutoSave, 2);
-			this.CB_AutoSave.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.CB_AutoSave.DefaultValue = false;
-			this.CB_AutoSave.EnterTriggersClick = false;
-			this.CB_AutoSave.Location = new System.Drawing.Point(10, 127);
-			this.CB_AutoSave.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-			this.CB_AutoSave.Name = "CB_AutoSave";
-			this.CB_AutoSave.Size = new System.Drawing.Size(152, 30);
-			this.CB_AutoSave.SpaceTriggersClick = true;
-			this.CB_AutoSave.TabIndex = 0;
-			this.CB_AutoSave.Text = "AutoSave";
-			this.CB_AutoSave.UncheckedText = null;
-			this.CB_AutoSave.CheckChanged += new System.EventHandler(this.ValueChanged);
 			// 
 			// T_ProfileUsage
 			// 
 			this.T_ProfileUsage.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_ProfileUsage.Image1 = "I_City";
 			this.T_ProfileUsage.Image2 = "I_Tools";
-			this.T_ProfileUsage.Location = new System.Drawing.Point(10, 74);
+			this.T_ProfileUsage.Location = new System.Drawing.Point(185, 64);
 			this.T_ProfileUsage.Name = "T_ProfileUsage";
 			this.T_ProfileUsage.Option1 = "GamePlay";
 			this.T_ProfileUsage.Option2 = "EditorPlay";
@@ -347,6 +329,25 @@ partial class PC_Profiles
 			this.T_ProfileUsage.Size = new System.Drawing.Size(306, 40);
 			this.T_ProfileUsage.TabIndex = 20;
 			this.T_ProfileUsage.SelectedValueChanged += new System.EventHandler(this.T_ProfileUsage_SelectedValueChanged);
+			// 
+			// CB_AutoSave
+			// 
+			this.CB_AutoSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.CB_AutoSave.AutoSize = true;
+			this.CB_AutoSave.Checked = false;
+			this.CB_AutoSave.CheckedText = null;
+			this.CB_AutoSave.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.CB_AutoSave.DefaultValue = false;
+			this.CB_AutoSave.EnterTriggersClick = false;
+			this.CB_AutoSave.Location = new System.Drawing.Point(10, 69);
+			this.CB_AutoSave.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
+			this.CB_AutoSave.Name = "CB_AutoSave";
+			this.CB_AutoSave.Size = new System.Drawing.Size(152, 30);
+			this.CB_AutoSave.SpaceTriggersClick = true;
+			this.CB_AutoSave.TabIndex = 0;
+			this.CB_AutoSave.Text = "AutoSave";
+			this.CB_AutoSave.UncheckedText = null;
+			this.CB_AutoSave.CheckChanged += new System.EventHandler(this.ValueChanged);
 			// 
 			// TLP_LaunchSettings
 			// 
@@ -359,15 +360,15 @@ partial class PC_Profiles
 			this.TLP_LaunchSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_LaunchSettings.Controls.Add(this.CB_LoadSave, 0, 5);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_LHT, 0, 0);
-			this.TLP_LaunchSettings.Controls.Add(this.TB_SavePath, 1, 5);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_NoWorkshop, 0, 1);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_NoAssets, 0, 2);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_NoMods, 0, 3);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_DebugMono, 2, 0);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_UseCitiesExe, 2, 1);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_UnityProfiler, 2, 2);
+			this.TLP_LaunchSettings.Controls.Add(this.DD_SaveFile, 1, 5);
 			this.TLP_LaunchSettings.Image = global::LoadOrderToolTwo.Properties.Resources.I_Launch;
-			this.TLP_LaunchSettings.Location = new System.Drawing.Point(335, 3);
+			this.TLP_LaunchSettings.Location = new System.Drawing.Point(510, 3);
 			this.TLP_LaunchSettings.Name = "TLP_LaunchSettings";
 			this.TLP_LaunchSettings.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
 			this.TLP_LaunchSettings.RowCount = 6;
@@ -380,7 +381,7 @@ partial class PC_Profiles
 			this.TLP_LaunchSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_LaunchSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_LaunchSettings.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_LaunchSettings.Size = new System.Drawing.Size(501, 228);
+			this.TLP_LaunchSettings.Size = new System.Drawing.Size(473, 256);
 			this.TLP_LaunchSettings.TabIndex = 1;
 			// 
 			// CB_LoadSave
@@ -392,7 +393,7 @@ partial class PC_Profiles
 			this.CB_LoadSave.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_LoadSave.DefaultValue = false;
 			this.CB_LoadSave.EnterTriggersClick = false;
-			this.CB_LoadSave.Location = new System.Drawing.Point(10, 188);
+			this.CB_LoadSave.Location = new System.Drawing.Point(10, 202);
 			this.CB_LoadSave.Name = "CB_LoadSave";
 			this.CB_LoadSave.Size = new System.Drawing.Size(25, 25);
 			this.CB_LoadSave.SpaceTriggersClick = true;
@@ -418,27 +419,6 @@ partial class PC_Profiles
 			this.CB_LHT.Text = "LHT";
 			this.CB_LHT.UncheckedText = null;
 			this.CB_LHT.CheckChanged += new System.EventHandler(this.ValueChanged);
-			// 
-			// TB_SavePath
-			// 
-			this.TB_SavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.TLP_LaunchSettings.SetColumnSpan(this.TB_SavePath, 2);
-			this.TB_SavePath.FileExtensions = new string[] {
-        ".crp"};
-			this.TB_SavePath.Folder = false;
-			this.TB_SavePath.Image = ((System.Drawing.Image)(resources.GetObject("TB_SavePath.Image")));
-			this.TB_SavePath.LabelText = "SaveFile";
-			this.TB_SavePath.Location = new System.Drawing.Point(41, 183);
-			this.TB_SavePath.MinimumSize = new System.Drawing.Size(50, 35);
-			this.TB_SavePath.Name = "TB_SavePath";
-			this.TB_SavePath.Placeholder = "PathToSaveFile";
-			this.TB_SavePath.SelectedText = "";
-			this.TB_SavePath.SelectionLength = 0;
-			this.TB_SavePath.SelectionStart = 0;
-			this.TB_SavePath.Size = new System.Drawing.Size(450, 35);
-			this.TB_SavePath.TabIndex = 3;
-			this.TB_SavePath.TextChanged += new System.EventHandler(this.ValueChanged);
 			// 
 			// CB_NoWorkshop
 			// 
@@ -505,10 +485,10 @@ partial class PC_Profiles
 			this.CB_DebugMono.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_DebugMono.DefaultValue = false;
 			this.CB_DebugMono.EnterTriggersClick = false;
-			this.CB_DebugMono.Location = new System.Drawing.Point(296, 48);
+			this.CB_DebugMono.Location = new System.Drawing.Point(232, 48);
 			this.CB_DebugMono.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_DebugMono.Name = "CB_DebugMono";
-			this.CB_DebugMono.Size = new System.Drawing.Size(159, 30);
+			this.CB_DebugMono.Size = new System.Drawing.Size(168, 30);
 			this.CB_DebugMono.SpaceTriggersClick = true;
 			this.CB_DebugMono.TabIndex = 6;
 			this.CB_DebugMono.Text = "UseDebugMono";
@@ -523,10 +503,10 @@ partial class PC_Profiles
 			this.CB_UseCitiesExe.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_UseCitiesExe.DefaultValue = false;
 			this.CB_UseCitiesExe.EnterTriggersClick = false;
-			this.CB_UseCitiesExe.Location = new System.Drawing.Point(296, 81);
+			this.CB_UseCitiesExe.Location = new System.Drawing.Point(232, 81);
 			this.CB_UseCitiesExe.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
 			this.CB_UseCitiesExe.Name = "CB_UseCitiesExe";
-			this.CB_UseCitiesExe.Size = new System.Drawing.Size(195, 30);
+			this.CB_UseCitiesExe.Size = new System.Drawing.Size(231, 30);
 			this.CB_UseCitiesExe.SpaceTriggersClick = true;
 			this.CB_UseCitiesExe.TabIndex = 6;
 			this.CB_UseCitiesExe.Text = "LaunchThroughCities";
@@ -541,15 +521,30 @@ partial class PC_Profiles
 			this.CB_UnityProfiler.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_UnityProfiler.DefaultValue = false;
 			this.CB_UnityProfiler.EnterTriggersClick = false;
-			this.CB_UnityProfiler.Location = new System.Drawing.Point(296, 114);
+			this.CB_UnityProfiler.Location = new System.Drawing.Point(232, 114);
 			this.CB_UnityProfiler.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
 			this.CB_UnityProfiler.Name = "CB_UnityProfiler";
-			this.CB_UnityProfiler.Size = new System.Drawing.Size(174, 30);
+			this.CB_UnityProfiler.Size = new System.Drawing.Size(166, 30);
 			this.CB_UnityProfiler.SpaceTriggersClick = true;
 			this.CB_UnityProfiler.TabIndex = 6;
 			this.CB_UnityProfiler.Text = "UnityProfilerMode";
 			this.CB_UnityProfiler.UncheckedText = null;
 			this.CB_UnityProfiler.CheckChanged += new System.EventHandler(this.ValueChanged);
+			// 
+			// DD_SaveFile
+			// 
+			this.DD_SaveFile.AllowDrop = true;
+			this.TLP_LaunchSettings.SetColumnSpan(this.DD_SaveFile, 2);
+			this.DD_SaveFile.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_SaveFile.Location = new System.Drawing.Point(41, 183);
+			this.DD_SaveFile.Name = "DD_SaveFile";
+			this.DD_SaveFile.Size = new System.Drawing.Size(293, 63);
+			this.DD_SaveFile.TabIndex = 8;
+			this.DD_SaveFile.Text = "SaveFileInfo";
+			this.DD_SaveFile.ValidExtensions = new string[] {
+        ".crp"};
+			this.DD_SaveFile.FileSelected += new System.Action<string>(this.DD_SaveFile_FileSelected);
+			this.DD_SaveFile.ValidFile += new System.Func<string, bool>(this.DD_SaveFile_ValidFile);
 			// 
 			// TLP_LSM
 			// 
@@ -560,18 +555,18 @@ partial class PC_Profiles
 			this.TLP_LSM.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_LSM.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_LSM.Controls.Add(this.CB_SkipFile, 0, 2);
-			this.TLP_LSM.Controls.Add(this.TB_SkipFile, 1, 2);
 			this.TLP_LSM.Controls.Add(this.CB_LoadEnabled, 0, 0);
 			this.TLP_LSM.Controls.Add(this.CB_LoadUsed, 0, 1);
+			this.TLP_LSM.Controls.Add(this.DD_SkipFile, 1, 2);
 			this.TLP_LSM.Image = global::LoadOrderToolTwo.Properties.Resources.I_LSM;
-			this.TLP_LSM.Location = new System.Drawing.Point(842, 3);
+			this.TLP_LSM.Location = new System.Drawing.Point(989, 3);
 			this.TLP_LSM.Name = "TLP_LSM";
 			this.TLP_LSM.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
 			this.TLP_LSM.RowCount = 3;
 			this.TLP_LSM.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LSM.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LSM.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_LSM.Size = new System.Drawing.Size(501, 178);
+			this.TLP_LSM.Size = new System.Drawing.Size(344, 190);
 			this.TLP_LSM.TabIndex = 18;
 			// 
 			// CB_SkipFile
@@ -583,33 +578,13 @@ partial class PC_Profiles
 			this.CB_SkipFile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_SkipFile.DefaultValue = false;
 			this.CB_SkipFile.EnterTriggersClick = false;
-			this.CB_SkipFile.Location = new System.Drawing.Point(10, 130);
+			this.CB_SkipFile.Location = new System.Drawing.Point(10, 136);
 			this.CB_SkipFile.Name = "CB_SkipFile";
 			this.CB_SkipFile.Size = new System.Drawing.Size(25, 25);
 			this.CB_SkipFile.SpaceTriggersClick = true;
 			this.CB_SkipFile.TabIndex = 8;
 			this.CB_SkipFile.UncheckedText = null;
 			this.CB_SkipFile.CheckChanged += new System.EventHandler(this.LsmSettingsChanged);
-			// 
-			// TB_SkipFile
-			// 
-			this.TB_SkipFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.TB_SkipFile.FileExtensions = new string[] {
-        ".txt"};
-			this.TB_SkipFile.Folder = false;
-			this.TB_SkipFile.Image = ((System.Drawing.Image)(resources.GetObject("TB_SkipFile.Image")));
-			this.TB_SkipFile.LabelText = "SkipFile";
-			this.TB_SkipFile.Location = new System.Drawing.Point(41, 117);
-			this.TB_SkipFile.MinimumSize = new System.Drawing.Size(50, 35);
-			this.TB_SkipFile.Name = "TB_SkipFile";
-			this.TB_SkipFile.Placeholder = "PathToSkipFile";
-			this.TB_SkipFile.SelectedText = "";
-			this.TB_SkipFile.SelectionLength = 0;
-			this.TB_SkipFile.SelectionStart = 0;
-			this.TB_SkipFile.Size = new System.Drawing.Size(450, 51);
-			this.TB_SkipFile.TabIndex = 3;
-			this.TB_SkipFile.TextChanged += new System.EventHandler(this.LsmSettingsChanged);
 			// 
 			// CB_LoadEnabled
 			// 
@@ -649,22 +624,19 @@ partial class PC_Profiles
 			this.CB_LoadUsed.UncheckedText = null;
 			this.CB_LoadUsed.CheckChanged += new System.EventHandler(this.LsmSettingsChanged);
 			// 
-			// B_NewProfile
+			// DD_SkipFile
 			// 
-			this.B_NewProfile.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.B_NewProfile.ColorShade = null;
-			this.B_NewProfile.ColorStyle = Extensions.ColorStyle.Green;
-			this.B_NewProfile.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_NewProfile.Image = global::LoadOrderToolTwo.Properties.Resources.I_Add;
-			this.B_NewProfile.Location = new System.Drawing.Point(1180, 19);
-			this.B_NewProfile.Margin = new System.Windows.Forms.Padding(10);
-			this.B_NewProfile.Name = "B_NewProfile";
-			this.B_NewProfile.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
-			this.B_NewProfile.Size = new System.Drawing.Size(100, 30);
-			this.B_NewProfile.SpaceTriggersClick = true;
-			this.B_NewProfile.TabIndex = 14;
-			this.B_NewProfile.Text = "AddProfile";
-			this.B_NewProfile.Click += new System.EventHandler(this.B_NewProfile_Click);
+			this.DD_SkipFile.AllowDrop = true;
+			this.DD_SkipFile.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_SkipFile.Location = new System.Drawing.Point(41, 117);
+			this.DD_SkipFile.Name = "DD_SkipFile";
+			this.DD_SkipFile.Size = new System.Drawing.Size(293, 63);
+			this.DD_SkipFile.TabIndex = 8;
+			this.DD_SkipFile.Text = "SkipFileInfo";
+			this.DD_SkipFile.ValidExtensions = new string[] {
+        ".txt"};
+			this.DD_SkipFile.FileSelected += new System.Action<string>(this.DD_SkipFile_FileSelected);
+			this.DD_SkipFile.ValidFile += new System.Func<string, bool>(this.DD_SkipFile_ValidFile);
 			// 
 			// B_ViewProfiles
 			// 
@@ -682,7 +654,7 @@ partial class PC_Profiles
 			this.B_ViewProfiles.Text = "ViewProfiles";
 			this.B_ViewProfiles.Click += new System.EventHandler(this.B_LoadProfiles_Click);
 			// 
-			// slickIcon1
+			// I_Info
 			// 
 			this.I_Info.ActiveColor = null;
 			this.I_Info.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -692,7 +664,7 @@ partial class PC_Profiles
 			this.I_Info.Image = global::LoadOrderToolTwo.Properties.Resources.I_Info;
 			this.I_Info.Location = new System.Drawing.Point(18, 116);
 			this.I_Info.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
-			this.I_Info.Name = "slickIcon1";
+			this.I_Info.Name = "I_Info";
 			this.I_Info.Selected = true;
 			this.I_Info.Size = new System.Drawing.Size(32, 32);
 			this.I_Info.TabIndex = 2;
@@ -718,7 +690,7 @@ partial class PC_Profiles
 			this.B_TempProfile.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_TempProfile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_TempProfile.Image = global::LoadOrderToolTwo.Properties.Resources.I_TempProfile;
-			this.B_TempProfile.Location = new System.Drawing.Point(1060, 19);
+			this.B_TempProfile.Location = new System.Drawing.Point(1180, 19);
 			this.B_TempProfile.Margin = new System.Windows.Forms.Padding(10);
 			this.B_TempProfile.Name = "B_TempProfile";
 			this.B_TempProfile.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
@@ -728,6 +700,23 @@ partial class PC_Profiles
 			this.B_TempProfile.Text = "TemporaryProfile";
 			this.B_TempProfile.Click += new System.EventHandler(this.B_TempProfile_Click);
 			// 
+			// B_NewProfile
+			// 
+			this.B_NewProfile.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_NewProfile.ColorShade = null;
+			this.B_NewProfile.ColorStyle = Extensions.ColorStyle.Green;
+			this.B_NewProfile.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_NewProfile.Image = global::LoadOrderToolTwo.Properties.Resources.I_Add;
+			this.B_NewProfile.Location = new System.Drawing.Point(1060, 19);
+			this.B_NewProfile.Margin = new System.Windows.Forms.Padding(10);
+			this.B_NewProfile.Name = "B_NewProfile";
+			this.B_NewProfile.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_NewProfile.Size = new System.Drawing.Size(100, 30);
+			this.B_NewProfile.SpaceTriggersClick = true;
+			this.B_NewProfile.TabIndex = 14;
+			this.B_NewProfile.Text = "AddProfile";
+			this.B_NewProfile.Click += new System.EventHandler(this.B_NewProfile_Click);
+			// 
 			// TLP_New
 			// 
 			this.TLP_New.ColumnCount = 3;
@@ -736,12 +725,14 @@ partial class PC_Profiles
 			this.TLP_New.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_New.Controls.Add(this.newProfileOptionControl1, 1, 1);
 			this.TLP_New.Controls.Add(this.newProfileOptionControl2, 1, 2);
-			this.TLP_New.Controls.Add(this.B_Cancel, 2, 3);
+			this.TLP_New.Controls.Add(this.B_Cancel, 2, 4);
+			this.TLP_New.Controls.Add(this.DAD_NewProfile, 0, 3);
 			this.TLP_New.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TLP_New.Location = new System.Drawing.Point(0, 30);
 			this.TLP_New.Name = "TLP_New";
-			this.TLP_New.RowCount = 4;
+			this.TLP_New.RowCount = 5;
 			this.TLP_New.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TLP_New.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_New.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_New.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_New.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -753,7 +744,7 @@ partial class PC_Profiles
 			// 
 			this.newProfileOptionControl1.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.newProfileOptionControl1.FromScratch = true;
-			this.newProfileOptionControl1.Location = new System.Drawing.Point(630, 140);
+			this.newProfileOptionControl1.Location = new System.Drawing.Point(630, 87);
 			this.newProfileOptionControl1.Name = "newProfileOptionControl1";
 			this.newProfileOptionControl1.Size = new System.Drawing.Size(150, 150);
 			this.newProfileOptionControl1.TabIndex = 0;
@@ -763,7 +754,7 @@ partial class PC_Profiles
 			// 
 			this.newProfileOptionControl2.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.newProfileOptionControl2.FromScratch = false;
-			this.newProfileOptionControl2.Location = new System.Drawing.Point(630, 296);
+			this.newProfileOptionControl2.Location = new System.Drawing.Point(630, 243);
 			this.newProfileOptionControl2.Name = "newProfileOptionControl2";
 			this.newProfileOptionControl2.Size = new System.Drawing.Size(150, 110);
 			this.newProfileOptionControl2.TabIndex = 0;
@@ -786,18 +777,34 @@ partial class PC_Profiles
 			this.B_Cancel.Text = "Cancel";
 			this.B_Cancel.Click += new System.EventHandler(this.B_Cancel_Click);
 			// 
+			// DAD_NewProfile
+			// 
+			this.DAD_NewProfile.AllowDrop = true;
+			this.DAD_NewProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.DAD_NewProfile.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DAD_NewProfile.Location = new System.Drawing.Point(3, 394);
+			this.DAD_NewProfile.Name = "DAD_NewProfile";
+			this.TLP_New.SetRowSpan(this.DAD_NewProfile, 2);
+			this.DAD_NewProfile.Size = new System.Drawing.Size(150, 150);
+			this.DAD_NewProfile.TabIndex = 15;
+			this.DAD_NewProfile.Text = "DropNewProfile";
+			this.DAD_NewProfile.ValidExtensions = new string[] {
+        ".json"};
+			this.DAD_NewProfile.FileSelected += new System.Action<string>(this.DAD_NewProfile_FileSelected);
+			this.DAD_NewProfile.ValidFile += new System.Func<string, bool>(this.DAD_NewProfile_ValidFile);
+			// 
 			// PC_Profiles
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.Controls.Add(this.TLP_Main);
 			this.Controls.Add(this.TLP_New);
+			this.Controls.Add(this.TLP_Main);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_Profiles";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1410, 577);
+			this.Controls.SetChildIndex(this.TLP_Main, 0);
 			this.Controls.SetChildIndex(this.TLP_New, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
-			this.Controls.SetChildIndex(this.TLP_Main, 0);
 			this.TLP_ProfileName.ResumeLayout(false);
 			this.TLP_ProfileName.PerformLayout();
 			this.TLP_Main.ResumeLayout(false);
@@ -832,7 +839,6 @@ partial class PC_Profiles
 	private SlickControls.RoundedPanel P_Options;
 	private SlickControls.SlickScroll slickScroll;
 	private SlickControls.RoundedGroupTableLayoutPanel TLP_LaunchSettings;
-	private SlickControls.SlickPathTextBox TB_SavePath;
 	private SlickControls.SlickCheckbox CB_LHT;
 	private SlickControls.SlickCheckbox CB_NoWorkshop;
 	private SlickControls.SlickCheckbox CB_NoAssets;
@@ -850,7 +856,6 @@ partial class PC_Profiles
 	private ThreeOptionToggle T_ProfileUsage;
 	private System.Windows.Forms.Label L_ProfileUsage;
 	private SlickControls.RoundedGroupTableLayoutPanel TLP_LSM;
-	private SlickControls.SlickPathTextBox TB_SkipFile;
 	private SlickControls.SlickCheckbox CB_LoadEnabled;
 	private SlickControls.SlickCheckbox CB_LoadUsed;
 	private SlickControls.SlickIcon B_Save;
@@ -862,4 +867,7 @@ partial class PC_Profiles
 	private SlickControls.SlickCheckbox CB_DebugMono;
 	private SlickControls.SlickCheckbox CB_UseCitiesExe;
 	private SlickControls.SlickCheckbox CB_UnityProfiler;
+	private DragAndDropControl DD_SaveFile;
+	private DragAndDropControl DD_SkipFile;
+	private DragAndDropControl DAD_NewProfile;
 }

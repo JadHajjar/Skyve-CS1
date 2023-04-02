@@ -24,8 +24,6 @@ public partial class PC_MissingLsmPackages : PanelContent
 	{
 		InitializeComponent();
 
-		Text = $"{ProfileManager.CurrentProfile.Name} - {Locale.MissingPackages}";
-
 		foreach (var package in missingAssets.GroupBy(x => x.SteamId))
 		{
 			if (package.Key != 0)
@@ -45,6 +43,12 @@ public partial class PC_MissingLsmPackages : PanelContent
 		RefreshCounts();
 	}
 
+	protected override void LocaleChanged()
+	{
+		DD_Tags.Text = Locale.Tags;
+		Text = Locale.MissingPackages;
+	}
+
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
@@ -57,10 +61,9 @@ public partial class PC_MissingLsmPackages : PanelContent
 	{
 		base.UIChanged();
 
-		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin = DD_Tags.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
-		TB_Search.Width = (int)(400 * UI.FontScale);
-		OT_Workshop.Width = (int)(400 * UI.FontScale);
+		TB_Search.Width =DD_Tags.Width= (int)(400 * UI.FontScale);
 
 		B_SubscribeAll.Margin = B_IncludeAll.Margin = B_SubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
@@ -91,6 +94,8 @@ public partial class PC_MissingLsmPackages : PanelContent
 		{
 			this.TryInvoke(() => Form.PushBack());
 		}
+
+		LC_Items.Invalidate();
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -107,6 +112,11 @@ public partial class PC_MissingLsmPackages : PanelContent
 			}
 		}
 
+		DD_Tags.Items = info.SelectMany(x =>
+		{
+			return x.Value.Tags;
+		}).Distinct().ToArray();
+
 		LC_Items.Invalidate();
 
 		foreach (var item in info.Values)
@@ -117,6 +127,19 @@ public partial class PC_MissingLsmPackages : PanelContent
 		}
 
 		return true;
+	}
+
+	public override bool KeyPressed(ref Message msg, Keys keyData)
+	{
+		if (keyData is (Keys.Control | Keys.F))
+		{
+			TB_Search.Focus();
+			TB_Search.SelectAll();
+
+			return true;
+		}
+
+		return false;
 	}
 
 	internal static void PromptMissingPackages(BasePanelForm form, List<Profile.Mod> missingMods, List<Profile.Asset> missingAssets)
@@ -165,9 +188,21 @@ public partial class PC_MissingLsmPackages : PanelContent
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<IGenericPackage> e)
 	{
-		if (!e.DoNotDraw && OT_Workshop.SelectedValue != Generic.ThreeOptionToggle.Value.None)
+		if (DD_Tags.SelectedItems.Any())
 		{
-			e.DoNotDraw = e.Item.SteamId == 0 != (OT_Workshop.SelectedValue == Generic.ThreeOptionToggle.Value.Option1);
+			foreach (var tag in DD_Tags.SelectedItems)
+			{
+				if (e.Item is Asset asset)
+				{
+					if (!(e.Item.Tags?.Any(tag) ?? false) && !asset.AssetTags.Any(tag))
+						e.DoNotDraw = true;
+				}
+				else
+				{
+					if (!(e.Item.Tags?.Any(tag) ?? false))
+						e.DoNotDraw = true;
+				}
+			}
 		}
 
 		if (!e.DoNotDraw && !string.IsNullOrWhiteSpace(TB_Search.Text))
@@ -191,7 +226,7 @@ public partial class PC_MissingLsmPackages : PanelContent
 		}
 		else
 		{
-			L_Counts.Text = $"{Locale.Showing} {totalFiltered} {Locale.OutOf.ToLower()} {total} {Locale.TotalItems.ToLower()}";
+			L_Counts.Text = string.Format(Locale.ShowingFilteredItems, totalFiltered, total);
 		}
 	}
 

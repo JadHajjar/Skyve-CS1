@@ -22,7 +22,6 @@ public class SteamWorkshopItem : IGenericPackage
 	public string? Description { get; set; }
 	public DateTime UpdatedUTC { get; set; }
 	public string[]? Tags { get; set; }
-	public string? Class { get; set; }
 	public bool Removed { get; set; }
 	public bool Private { get; set; }
 
@@ -47,19 +46,6 @@ public class SteamWorkshopItem : IGenericPackage
 			?.Select(item => item.tag)
 			?.Where(item => item.IndexOf("compatible", StringComparison.OrdinalIgnoreCase) < 0)
 			?.ToArray()) ?? new string[0];
-
-		if (Tags.Any(tag => tag.ToLower() == "mod"))
-		{
-			Class = "Mod";
-		}
-		else if (Tags.Any())
-		{
-			Class = "Asset";
-		}
-		else
-		{
-			Class = "subscribed item";
-		}
 	}
 
 	public SteamWorkshopItem()

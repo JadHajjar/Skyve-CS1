@@ -44,23 +44,38 @@ public partial class PC_Options : PanelContent
 		folderPathsChanged = false;
 
 		DD_Language.Items = LocaleHelper.GetAvailableLanguages().Select(lang => new CultureInfo(lang)).ToArray();
-		DD_Language.SelectedItem = DD_Language.Items.FirstOrDefault(x => x.IetfLanguageTag == Thread.CurrentThread.CurrentUICulture.IetfLanguageTag);
+		DD_Language.SelectedItem = DD_Language.Items.FirstOrDefault(x => x.IetfLanguageTag == LocaleHelper.CurrentCulture.IetfLanguageTag);
 		DD_Language.SelectedItemChanged += DD_Language_SelectedItemChanged;
 	}
 
 	protected override void LocaleChanged()
 	{
 		Text = Locale.Options;
-		TLP_GeneralSettings.Text = Locale.Preferences;
-		TLP_Folders.Text = Locale.FolderSettings;
 	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
+		TLP_UI.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_UserInterface));
+		TLP_Folders.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Folder));
+		TLP_Preferences.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Preferences));
+		TLP_Settings.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Cog));
+		TLP_HelpLogs.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_AskHelp));
+		TLP_Advanced.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Hazard));
 		DD_Language.Width = (int)(220 * UI.FontScale);
-		TLP_GeneralSettings.Margin = TLP_Folders.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
+		B_Theme.Margin = DD_Language.Margin = TLP_UI.Margin = TLP_Settings.Margin = TLP_Advanced.Margin = B_HelpTranslate.Margin = TLP_HelpLogs.Margin =
+		TLP_Preferences.Margin = TLP_Folders.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
+	}
+	
+	protected override void DesignChanged(FormDesign design)
+	{
+		base.DesignChanged(design);
+
+		TLP_UI.BackColor = TLP_Preferences.BackColor = TLP_Folders.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
 	}
 
 	public override bool CanExit(bool toBeDisposed)
@@ -94,13 +109,6 @@ public partial class PC_Options : PanelContent
 		}
 	}
 
-	protected override void DesignChanged(FormDesign design)
-	{
-		base.DesignChanged(design);
-
-		TLP_GeneralSettings.BackColor = TLP_Folders.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
-	}
-
 	private void CB_CheckChanged(object sender, EventArgs e)
 	{
 		var cb = (sender as SlickCheckbox)!;
@@ -120,5 +128,19 @@ public partial class PC_Options : PanelContent
 	private void DD_Language_SelectedItemChanged(object sender, EventArgs e)
 	{
 		LocaleHelper.SetLanguage(DD_Language.SelectedItem);
+	}
+
+	private void B_Theme_Click(object sender, EventArgs e)
+	{
+		Form.PushPanel<PC_ThemeChanger>(null);
+	}
+
+	private void B_HelpTranslate_Click(object sender, EventArgs e)
+	{
+		try
+		{
+			Process.Start("https://crowdin.com/project/load-order-mod-2");
+		}
+		catch { }
 	}
 }

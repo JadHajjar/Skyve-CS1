@@ -1,3 +1,5 @@
+using Extensions;
+
 using LoadOrderToolTwo.Utilities.Managers;
 
 using Mono.Cecil;
@@ -41,21 +43,15 @@ public static class AssemblyUtil
 		}
 	}
 
-	public static bool FindImplementation(string[] dllPaths, string fullInterfaceName, out string? dllPath, out Version? version)
+	public static bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
 	{
-		try
+		foreach (var path in dllPaths)
 		{
-			foreach (var path in dllPaths)
+			if (CheckDllImplementsInterface(path, "ICities.IUserMod", out version))
 			{
-				if (CheckDllImplementsInterface(path, fullInterfaceName, out version))
-				{
-					dllPath = path;
-					return true;
-				}
+				dllPath = path;
+				return true;
 			}
-		}
-		finally
-		{
 		}
 
 		dllPath = null;
@@ -91,6 +87,34 @@ public static class AssemblyUtil
 		return false;
 	}
 
+	private static bool MacOsResolve(string dllPath, out Version? version)
+	{
+		version = null;
+		var process = IOUtil.Execute(LocationManager.CurrentDirectory, "AssemblyResolver.exe", string.Join(" ", new string[]
+		{
+			dllPath,
+			LocationManager.ManagedDLL,
+			LocationManager.ModsPath,
+			LocationManager.WorkshopContentPath
+		}.Select(x => $"\"{x}\"")), false, true);
+
+		if (process is null)
+		{
+			return false;
+		}
+
+		process.WaitForExit();
+
+		var code = process.ExitCode;
+
+		if (code == 1)
+		{
+			version = AssemblyName.GetAssemblyName(dllPath).Version;
+			return true;
+		}
+
+		return false;
+	}
 
 	public static TypeDefinition GetExportedImplementation(this AssemblyDefinition asm, string fullInterfaceName)
 	{

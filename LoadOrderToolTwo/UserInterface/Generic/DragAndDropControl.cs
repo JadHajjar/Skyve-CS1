@@ -1,15 +1,17 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Generic;
@@ -19,6 +21,7 @@ internal class DragAndDropControl : SlickControl
 {
 	private bool isDragActive;
 	private bool isDragAvailable;
+	private string? _selectedFile;
 
 	public event Action<string>? FileSelected;
 	public event Func<string, bool>? ValidFile;
@@ -29,12 +32,14 @@ internal class DragAndDropControl : SlickControl
 	[Bindable(true)]
 	public override string Text { get => base.Text; set => base.Text = value; }
 
-	[Category("Appearance")]
-	public string? RegexTest { get; set; }
-	[Category("Behavior")]
+	[Category("Behavior"), DefaultValue(null)]
 	public string[]? ValidExtensions { get; set; }
-	[Category("Behavior")]
+
+	[Category("Behavior"), DefaultValue(null)]
 	public string? StartingFolder { get; set; }
+
+	[Category("Behavior"), DefaultValue(null)]
+	public string? SelectedFile { get => _selectedFile; set { _selectedFile = value; Invalidate(); } }
 
 	public DragAndDropControl()
 	{
@@ -48,9 +53,14 @@ internal class DragAndDropControl : SlickControl
 
 		if (Live)
 		{
-			Size = UI.Scale(new Size(500, 130), UI.FontScale);
-			Margin = Padding = UI.Scale(new Padding(10), UI.UIScale);
+			Size = UI.Scale(new Size(325, 100), UI.FontScale);
+			Padding = UI.Scale(new Padding(10), UI.UIScale);
 			Font = UI.Font(9.75F);
+
+			if (Margin == new Padding(3))
+			{
+				Margin = Padding;
+			}
 		}
 	}
 
@@ -60,19 +70,14 @@ internal class DragAndDropControl : SlickControl
 
 		isDragActive = true;
 
-		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop) && (ValidFile?.Invoke(((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()) ?? false))
+		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop) && (ValidFile?.Invoke(((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()) ?? true))
 		{
-				Log.Error($"Drop success for '{((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()}'");
 			drgevent.Effect = DragDropEffects.Copy;
 			isDragAvailable = true;
 			Invalidate();
 		}
 		else
 		{
-			if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
-				Log.Error($"Check failed for '{((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()}'");
-			else
-			Log.Error("Drop is not a file");
 			drgevent.Effect = DragDropEffects.None;
 			isDragAvailable = false;
 			Invalidate();
@@ -106,23 +111,56 @@ internal class DragAndDropControl : SlickControl
 	{
 		base.OnMouseClick(e);
 
-		if (e.Button == MouseButtons.Left)
+		if (e.Button == MouseButtons.Middle && !string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var dialog = new IOSelectionDialog
-			{
-				ValidExtensions = ValidExtensions
-			};
+			FileSelected?.Invoke(string.Empty);
+		}
 
-			if (dialog.PromptFile(Program.MainForm, StartingFolder) == DialogResult.OK)
+		if (e.Button != MouseButtons.Left)
+		{
+			return;
+		}
+
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : (Width - (int)(125 * UI.FontScale));
+
+		if (!string.IsNullOrWhiteSpace(SelectedFile))
+		{
+			using var removeIcon = ImageManager.GetIcon(nameof(Properties.Resources.I_X)).Color(FormDesign.Design.MenuForeColor);
+
+			var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
+			var removeRect = fileRect.Align(new Size(removeIcon.Width + Padding.Left, removeIcon.Height + Padding.Top), ContentAlignment.TopRight);
+
+			if (removeRect.Contains(e.Location))
 			{
-				if (ValidFile?.Invoke(dialog.SelectedPath) ?? false)
+				FileSelected?.Invoke(string.Empty);
+				return;
+			}
+			else if (fileRect.Contains(e.Location))
+			{
+				try
 				{
-					FileSelected?.Invoke(dialog.SelectedPath);
+					Process.Start("explorer.exe", $"/select, \"{SelectedFile}\"");
 				}
-				else
-				{
-					MessagePrompt.Show(Locale.SelectedFileInvalid, PromptButtons.OK, PromptIcons.Warning, Program.MainForm);
-				}
+				catch { }
+
+				return;
+			}
+		}
+
+		using var dialog = new IOSelectionDialog
+		{
+			ValidExtensions = ValidExtensions
+		};
+
+		if (dialog.PromptFile(Program.MainForm, StartingFolder) == DialogResult.OK)
+		{
+			if (ValidFile?.Invoke(dialog.SelectedPath) ?? true)
+			{
+				FileSelected?.Invoke(dialog.SelectedPath);
+			}
+			else
+			{
+				MessagePrompt.Show(Locale.SelectedFileInvalid, PromptButtons.OK, PromptIcons.Warning, Program.MainForm);
 			}
 		}
 	}
@@ -131,15 +169,42 @@ internal class DragAndDropControl : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
+		var fileHovered = false;
 		var border = (int)(4 * UI.FontScale);
-		var color = isDragActive ? FormDesign.Design.ActiveForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor) : FormDesign.Design.ForeColor;
+		var cursor = PointToClient(MousePosition);
+		var availableWidth = string.IsNullOrWhiteSpace(SelectedFile) ? Width : (Width - (int)(125 * UI.FontScale));
+
+		if (!string.IsNullOrWhiteSpace(SelectedFile))
+		{
+			using var fileIcon = (UI.FontScale >= 2 ? Properties.Resources.I_File_48 : Properties.Resources.I_File).Color(FormDesign.Design.MenuForeColor);
+			using var removeIcon = ImageManager.GetIcon(nameof(Properties.Resources.I_X)).Color(FormDesign.Design.MenuForeColor);
+
+			var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
+			var fileHeight = (int)textSize.Height + 3 + fileIcon.Height + Padding.Top;
+			var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
+			var fileContentRect = fileRect.CenterR(Math.Max((int)textSize.Width + 3, fileIcon.Width), fileHeight);
+			var removeRect = fileRect.Align(new Size(removeIcon.Width + Padding.Left, removeIcon.Height + Padding.Top), ContentAlignment.TopRight);
+
+			e.Graphics.FillRoundedRectangle(new SolidBrush((fileHovered = HoverState.HasFlag(HoverState.Hovered) && fileRect.Contains(cursor)) && !removeRect.Contains(cursor) ? FormDesign.Design.MenuColor.MergeColor(FormDesign.Design.ActiveColor) : FormDesign.Design.MenuColor), fileRect, border);
+			e.Graphics.DrawImage(fileIcon, fileContentRect.Align(fileIcon.Size, ContentAlignment.TopCenter));
+			e.Graphics.DrawString(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), new SolidBrush(FormDesign.Design.MenuForeColor), fileContentRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far });
+
+			if (HoverState.HasFlag(HoverState.Hovered) && removeRect.Contains(cursor))
+			{
+				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 255 : 100, FormDesign.Design.RedColor)), removeRect, border);
+			}
+
+			e.Graphics.DrawImage(removeIcon, removeRect.CenterR(removeIcon.Size));
+		}
+
+		var color = fileHovered ? FormDesign.Design.ForeColor : isDragActive ? FormDesign.Design.ActiveForeColor : HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveColor : HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ForeColor) : FormDesign.Design.ForeColor;
 
 		if (isDragActive)
 		{
 			using var brush = new SolidBrush(isDragAvailable ? FormDesign.Design.ActiveColor : FormDesign.Design.RedColor);
 			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
 		}
-		else if (HoverState.HasFlag(HoverState.Hovered))
+		else if (HoverState.HasFlag(HoverState.Hovered) && !fileHovered)
 		{
 			using var brush = new SolidBrush(Color.FromArgb(25, color));
 			e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
@@ -149,14 +214,19 @@ internal class DragAndDropControl : SlickControl
 		e.Graphics.DrawRoundedRectangle(pen, ClientRectangle.Pad((int)(1.5 * UI.FontScale)), border);
 
 		var text = LocaleHelper.GetGlobalText(Text);
-		var size = e.Graphics.Measure(text, Font, Width - Padding.Horizontal);
+		var size = e.Graphics.Measure(text, Font, availableWidth - Padding.Horizontal - (UI.FontScale >= 2 ? 48 : 24));
 		var width = (int)size.Width + 3 + Padding.Left + (UI.FontScale >= 2 ? 48 : 24);
-		var rect = ClientRectangle.CenterR(width, Math.Max(UI.FontScale >= 2 ? 48 : 24, (int)size.Height + 3));
+		var rect = new Rectangle(Width - availableWidth, 0, availableWidth, Height).CenterR(width, Math.Max(UI.FontScale >= 2 ? 48 : 24, (int)size.Height + 3));
 
 		using var icon = (UI.FontScale >= 2 ? Properties.Resources.I_DragDrop_48 : Properties.Resources.I_DragDrop).Color(color);
 
 		e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(color), rect.Align(size.ToSize(), ContentAlignment.MiddleRight).Pad(-2));
+
+		if (!Enabled)
+		{
+			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, BackColor)), ClientRectangle);
+		}
 	}
 }

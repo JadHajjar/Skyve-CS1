@@ -28,6 +28,8 @@ internal static class Program
 	{
 		try
 		{
+			IsRunning = true;
+
 			if (CommandUtil.Parse(args))
 			{
 				return;
@@ -47,13 +49,11 @@ internal static class Program
 			}
 			catch { }
 
-			IsRunning = true;
-
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
 			if (!CentralManager.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]) && !Debugger.IsAttached)
 			{
-				MessagePrompt.Show("Please enable the mod inside Cities: Skylines first before using the tool", "Set-up Incomplete", PromptButtons.OK, PromptIcons.Hand);
+				MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OK, PromptIcons.Hand);
 				return;
 			}
 
@@ -64,7 +64,6 @@ internal static class Program
 			}
 
 			SlickCursors.Initialize();
-			ConnectionHandler.Start();
 
 			if (OSVersion.Version.Major == 6)
 			{

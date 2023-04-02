@@ -70,11 +70,12 @@
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_UnusedLsmPackages.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Panels\PC_MissingLsmPackages.cs">
@@ -90,21 +91,11 @@
     <Compile Update="UserInterface\Profiles\NewProfileOptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Dropdowns\LanguageDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Dropdowns\ProfileSortingDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Dropdowns\ProfilesDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Dropdowns\TagsDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Dropdowns\SortingDropDown.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Dropdowns\LanguageDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\ProfileSortingDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\ProfilesDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\TagsDropDown.cs" />
+    <Compile Update="UserInterface\Dropdowns\SortingDropDown.cs" />
     <Compile Update="UserInterface\StatusBubbles\CompatibilityReportBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
