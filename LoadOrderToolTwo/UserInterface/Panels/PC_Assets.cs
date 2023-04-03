@@ -22,7 +22,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override IEnumerable<Asset> GetItems()
 	{
-		if (CentralManager.SessionSettings.LinkModAssets)
+		if (CentralManager.SessionSettings.UserSettings.LinkModAssets)
 		{
 			return CentralManager.Assets.Where(x => x.Package.Mod is null);
 		}

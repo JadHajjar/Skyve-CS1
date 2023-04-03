@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -22,16 +23,10 @@ public partial class PC_Options : PanelContent
 	public PC_Options()
 	{
 		InitializeComponent();
+		ApplyCurrentSettings();
 
-		foreach (var cb in this.GetControls<SlickCheckbox>())
-		{
-			if (!string.IsNullOrWhiteSpace(cb.Tag?.ToString()))
-			{
-				cb.Checked = (bool)typeof(SessionSettings)
-					.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-					.GetValue(CentralManager.SessionSettings);
-			}
-		}
+		foreach (var button in this.GetControls<SlickButton>())
+			SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
 
 		TB_VirtualAppDataPath.Visible = TB_VirtualGamePath.Visible = LocationManager.Platform is not Platform.Windows;
 
@@ -46,6 +41,21 @@ public partial class PC_Options : PanelContent
 		DD_Language.Items = LocaleHelper.GetAvailableLanguages().Select(lang => new CultureInfo(lang)).ToArray();
 		DD_Language.SelectedItem = DD_Language.Items.FirstOrDefault(x => x.IetfLanguageTag == LocaleHelper.CurrentCulture.IetfLanguageTag);
 		DD_Language.SelectedItemChanged += DD_Language_SelectedItemChanged;
+	}
+
+	private void ApplyCurrentSettings()
+	{
+		foreach (var cb in this.GetControls<SlickCheckbox>())
+		{
+			if (!string.IsNullOrWhiteSpace(cb.Tag?.ToString()))
+			{
+				cb.Checked = (bool)typeof(UserSettings)
+					.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
+					.GetValue(CentralManager.SessionSettings.UserSettings);
+
+				SlickTip.SetTo(cb, LocaleHelper.GetGlobalText($"{cb.Text}_Tip"));
+			}
+		}
 	}
 
 	protected override void LocaleChanged()
@@ -63,12 +73,17 @@ public partial class PC_Options : PanelContent
 		TLP_Settings.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Cog));
 		TLP_HelpLogs.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_AskHelp));
 		TLP_Advanced.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Hazard));
+
 		DD_Language.Width = (int)(220 * UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
-		B_Theme.Margin = DD_Language.Margin = TLP_UI.Margin = TLP_Settings.Margin = TLP_Advanced.Margin = B_HelpTranslate.Margin = TLP_HelpLogs.Margin =
-		TLP_Preferences.Margin = TLP_Folders.Margin = UI.Scale(new Padding(10), UI.UIScale);
-		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
-		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
+		B_Theme.Font = B_HelpTranslate.Font = B_ClearFolders.Font = B_Discord.Font = B_Guide.Font = B_Reset.Font = UI.Font(9.75F);
+		B_Theme.Padding = B_HelpTranslate.Padding = B_ClearFolders.Padding = B_Discord.Padding = B_Guide.Padding = B_Reset.Padding = UI.Scale(new Padding(7), UI.FontScale);
+		B_Theme.Margin =  TLP_UI.Margin = TLP_Settings.Margin = TLP_Advanced.Margin = B_HelpTranslate.Margin = TLP_HelpLogs.Margin =
+			B_ClearFolders.Margin = B_Discord.Margin = B_Guide.Margin =B_Reset.Margin=
+			TLP_Preferences.Margin = TLP_Folders.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		DD_Language.Margin = UI.Scale(new Padding(10, 7, 10, 5), UI.UIScale);
+		slickSpacer1.Height = slickSpacer2.Height = (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin = slickSpacer2.Margin = UI.Scale(new Padding(5), UI.UIScale);
 	}
 	
 	protected override void DesignChanged(FormDesign design)
@@ -111,11 +126,16 @@ public partial class PC_Options : PanelContent
 
 	private void CB_CheckChanged(object sender, EventArgs e)
 	{
+		TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
+
+		if (!IsHandleCreated)
+			return;
+
 		var cb = (sender as SlickCheckbox)!;
 
-		typeof(SessionSettings)
+		typeof(UserSettings)
 			.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-			.SetValue(CentralManager.SessionSettings, cb.Checked);
+			.SetValue(CentralManager.SessionSettings.UserSettings, cb.Checked);
 
 		CentralManager.SessionSettings.Save();
 	}
@@ -142,5 +162,39 @@ public partial class PC_Options : PanelContent
 			Process.Start("https://crowdin.com/project/load-order-mod-2");
 		}
 		catch { }
+	}
+
+	private void B_Discord_Click(object sender, EventArgs e)
+	{
+		try
+		{
+			Process.Start("https://discord.gg/E4k8ZEtRxd");
+		}
+		catch { }
+	}
+
+	private void B_Guide_Click(object sender, EventArgs e)
+	{
+		try
+		{
+			Process.Start("https://bit.ly/40x93vk");
+		}
+		catch { }
+	}
+
+	private void B_Reset_Click(object sender, EventArgs e)
+	{
+		CentralManager.SessionSettings.UserSettings = new();
+		CentralManager.SessionSettings.Save();
+
+		ApplyCurrentSettings();
+	}
+
+	private void B_ClearFolders_Click(object sender, EventArgs e)
+	{
+		if (ShowPrompt(Locale.ClearFoldersPrompt, Locale.ClearFoldersPromptTitle, PromptButtons.OKCancel, PromptIcons.Warning) != DialogResult.OK)
+			return;
+
+
 	}
 }

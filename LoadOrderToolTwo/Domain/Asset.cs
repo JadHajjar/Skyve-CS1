@@ -19,6 +19,7 @@ public class Asset : IPackage
 		FileName = crpPath;
 		Package = package;
 		FileSize = new FileInfo(crpPath).Length;
+		LocalTime = File.GetLastWriteTimeUtc(crpPath);
 
 		if (AssetsUtil.AssetInfoCache.TryGetValue(FileName, out var asset))
 		{
@@ -38,6 +39,7 @@ public class Asset : IPackage
 	public long FileSize { get; }
 	public string Name { get; set; }
 	public string? Description { get; }
+	public DateTime LocalTime { get; }
 	public bool IsIncluded { get => AssetsUtil.IsIncluded(this); set => AssetsUtil.SetIncluded(this, value); }
 
 	public string Folder => ((IPackage)Package).Folder;
@@ -49,7 +51,6 @@ public class Asset : IPackage
 	public Bitmap? IconImage => AssetsUtil.GetIcon(this) ?? ((IPackage)Package).IconImage;
 	public string? IconUrl { get => ((IPackage)Package).IconUrl; set => ((IPackage)Package).IconUrl = value; }
 	public long LocalSize => ((IPackage)Package).LocalSize;
-	public DateTime LocalTime => ((IPackage)Package).LocalTime;
 	public bool RemovedFromSteam { get => ((IPackage)Package).RemovedFromSteam; set => ((IPackage)Package).RemovedFromSteam = value; }
 	public bool Private { get => ((IPackage)Package).Private; set => ((IPackage)Package).Private = value; }
 	public long ServerSize { get => ((IPackage)Package).ServerSize; set => ((IPackage)Package).ServerSize = value; }

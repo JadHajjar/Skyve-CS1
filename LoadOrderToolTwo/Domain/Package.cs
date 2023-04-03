@@ -48,8 +48,8 @@ public class Package : IPackage
 	public Mod? Mod { get; set; }
 
 	public long LocalSize => ContentUtil.GetTotalSize(Folder);
-	public DateTime LocalTime => ContentUtil.GetLocalUpdatedTime(Folder).ToUniversalTime();
-	public DateTime SubscribeTime => ContentUtil.GetLocalSubscribeTime(Folder).ToUniversalTime();
+	public DateTime LocalTime => ContentUtil.GetLocalUpdatedTime(Folder);
+	public DateTime SubscribeTime => ContentUtil.GetLocalSubscribeTime(Folder);
 
 	public string? VirtualFolder { get; set; }
 	public string Folder { get; set; }

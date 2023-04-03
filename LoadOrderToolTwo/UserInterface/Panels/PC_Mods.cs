@@ -31,7 +31,7 @@ internal class PC_Mods : PC_ContentList<Mod>
 		var modsEnabled = CentralManager.Mods.Count(x => x.IsEnabled && x.IsIncluded);
 		var total = LC_Items.ItemCount;
 
-		if (!CentralManager.SessionSettings.AdvancedIncludeEnable)
+		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			return $"{modsIncluded} {(modsIncluded == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}, {total} {Locale.Total.ToLower()}";
 		}

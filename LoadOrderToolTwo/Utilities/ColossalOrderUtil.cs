@@ -51,7 +51,7 @@ internal class ColossalOrderUtil
 
 	private static void SettingsFileChanged()
 	{
-		if (CentralManager.SessionSettings.OverrideGameChanges)
+		if (CentralManager.SessionSettings.UserSettings.OverrideGameChanges)
 		{
 			var currentState = _settingsDictionary.ToDictionary(x => x.Key, x => x.Value.value);
 

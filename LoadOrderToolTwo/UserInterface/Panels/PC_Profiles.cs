@@ -27,9 +27,9 @@ public partial class PC_Profiles : PanelContent
 		DD_SaveFile.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Saves");
 		DD_SkipFile.StartingFolder = LocationManager.AppDataPath;
 
-		CB_UseCitiesExe.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
-		CB_UnityProfiler.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
-		CB_DebugMono.Visible = CentralManager.SessionSettings.AdvancedLaunchOptions;
+		CB_UseCitiesExe.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
+		CB_UnityProfiler.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
+		CB_DebugMono.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
 
 		DAD_NewProfile.StartingFolder = LocationManager.AppDataPath;
 

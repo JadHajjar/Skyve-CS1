@@ -44,7 +44,7 @@ internal class ModLogicManager
 		{
 			mod.IsPseudoMod = true;
 
-			if (CentralManager.SessionSettings.HidePseudoMods)
+			if (CentralManager.SessionSettings.UserSettings.HidePseudoMods)
 			{
 				mod.IsIncluded = true;
 				mod.IsEnabled = true;

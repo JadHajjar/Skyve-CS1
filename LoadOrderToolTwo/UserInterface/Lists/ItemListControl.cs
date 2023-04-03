@@ -26,7 +26,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	public ItemListControl()
 	{
-		DoubleSizeOnHover = CentralManager.SessionSettings.LargeItemOnHover;
+		DoubleSizeOnHover = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 
@@ -323,7 +323,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		bool isIncluded;
 
-		if (CentralManager.SessionSettings.AdvancedIncludeEnable && e.Item.Package.Mod is Mod mod)
+		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && e.Item.Package.Mod is Mod mod)
 		{
 			isIncluded = e.Item.IsIncluded;
 
@@ -382,7 +382,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		var versionText = e.Item.Package.Mod is Mod mod_ ? mod_.BuiltIn ? Locale.Vanilla : "v" + mod_.Version.GetString() : e.Item.FileSize.SizeString();
 		labelX = DrawLabel(e, versionText, null, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), new Rectangle(labelX, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
 
-		labelX = DrawLabel(e, CentralManager.SessionSettings.ShowDatesRelatively ? e.Item.ServerTime.If(DateTime.MinValue, e.Item.LocalTime).ToLocalTime().ToRelatedString(true, false) : e.Item.LocalTime.ToLocalTime().ToString("g"), Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
+		labelX = DrawLabel(e, CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ServerTime.If(DateTime.MinValue, e.Item.LocalTime).ToLocalTime().ToRelatedString(true, false) : e.Item.LocalTime.ToLocalTime().ToString("g"), Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
 
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
 		if (!string.IsNullOrEmpty(text))
@@ -557,14 +557,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	{
 		var rects = new Rectangles();
 
-		if (CentralManager.SessionSettings.AdvancedIncludeEnable && item.Package.Mod is not null)
+		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package.Mod is not null)
 		{
 			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size((int)(26 * UI.FontScale), rectangle.Height), ContentAlignment.MiddleLeft);
 			rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
 		}
 		else if (item is Package)
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.AdvancedIncludeEnable ? (int)(26 * UI.FontScale * 2) : rectangle.Height, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (int)(26 * UI.FontScale * 2) : rectangle.Height, rectangle.Height), ContentAlignment.MiddleLeft);
 		}
 		else
 		{

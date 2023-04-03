@@ -43,7 +43,7 @@ internal static class CentralManager
 
 			foreach (var package in currentPackages)
 			{
-				if (package.IsPseudoMod && SessionSettings.HidePseudoMods)
+				if (package.IsPseudoMod && SessionSettings.UserSettings.HidePseudoMods)
 				{
 					continue;
 				}
@@ -61,7 +61,7 @@ internal static class CentralManager
 
 			foreach (var package in currentPackages)
 			{
-				if (package.IsPseudoMod && SessionSettings.HidePseudoMods)
+				if (package.IsPseudoMod && SessionSettings.UserSettings.HidePseudoMods)
 				{
 					continue;
 				}
@@ -82,7 +82,7 @@ internal static class CentralManager
 
 			foreach (var package in currentPackages)
 			{
-				if (package.IsPseudoMod && SessionSettings.HidePseudoMods)
+				if (package.IsPseudoMod && SessionSettings.UserSettings.HidePseudoMods)
 				{
 					continue;
 				}
@@ -300,16 +300,16 @@ internal static class CentralManager
 				HandleNewPackage(package);
 			}
 
-			if (!SessionSettings.AdvancedIncludeEnable && package.Mod is not null)
-			{
-				if (package.Mod.IsIncluded && !package.Mod.IsEnabled)
-				{
-					package.Mod.IsEnabled = true;
-				}
-			}
-
 			if (package.Mod is not null)
 			{
+				if (!SessionSettings.UserSettings.AdvancedIncludeEnable)
+				{
+					if (package.Mod.IsIncluded && !package.Mod.IsEnabled)
+					{
+						package.Mod.IsIncluded = false;
+					}
+				}
+
 				ModLogicManager.Analyze(package.Mod);
 			}
 		}
@@ -328,11 +328,11 @@ internal static class CentralManager
 
 		if (package.Mod is not null)
 		{
-			package.Mod.IsIncluded = !SessionSettings.DisableNewModsByDefault;
+			package.Mod.IsIncluded = !SessionSettings.UserSettings.DisableNewModsByDefault;
 
-			if (SessionSettings.AdvancedIncludeEnable)
+			if (SessionSettings.UserSettings.AdvancedIncludeEnable)
 			{
-				package.Mod.IsEnabled = !SessionSettings.DisableNewModsByDefault;
+				package.Mod.IsEnabled = !SessionSettings.UserSettings.DisableNewModsByDefault;
 			}
 		}
 
@@ -340,7 +340,7 @@ internal static class CentralManager
 		{
 			foreach (var asset in package.Assets)
 			{
-				asset.IsIncluded = !SessionSettings.DisableNewAssetsByDefault;
+				asset.IsIncluded = !SessionSettings.UserSettings.DisableNewAssetsByDefault;
 			}
 		}
 	}

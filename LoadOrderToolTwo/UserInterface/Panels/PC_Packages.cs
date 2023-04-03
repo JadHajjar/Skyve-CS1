@@ -24,16 +24,16 @@ internal class PC_Packages : PC_ContentList<Package>
 
 	protected override IEnumerable<Package> GetItems()
 	{
-		if (CentralManager.SessionSettings.FilterOutPackagesWithOneAsset || CentralManager.SessionSettings.FilterOutPackagesWithMods)
+		if (CentralManager.SessionSettings.UserSettings.FilterOutPackagesWithOneAsset || CentralManager.SessionSettings.UserSettings.FilterOutPackagesWithMods)
 		{
 			return CentralManager.Packages.Where(x =>
 			{
-				if (CentralManager.SessionSettings.FilterOutPackagesWithOneAsset && (x.Assets?.Count() ?? 0) == 1)
+				if (CentralManager.SessionSettings.UserSettings.FilterOutPackagesWithOneAsset && (x.Assets?.Count() ?? 0) == 1)
 				{
 					return false;
 				}
 
-				if (CentralManager.SessionSettings.FilterOutPackagesWithMods && x.Mod is not null)
+				if (CentralManager.SessionSettings.UserSettings.FilterOutPackagesWithMods && x.Mod is not null)
 				{
 					return false;
 				}

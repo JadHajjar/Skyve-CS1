@@ -109,7 +109,7 @@ internal static class ModsUtil
 			SetLocallyIncluded(mod, value);
 		}
 
-		if (!CentralManager.SessionSettings.AdvancedIncludeEnable)
+		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			SetEnabled(mod, value);
 			return;
@@ -129,7 +129,7 @@ internal static class ModsUtil
 			CentralManager.InformationUpdate(list[i]);
 		}
 
-		if (!CentralManager.SessionSettings.AdvancedIncludeEnable)
+		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			SetEnabled(list, value);
 			return;
@@ -154,7 +154,7 @@ internal static class ModsUtil
 			File.WriteAllBytes(Path.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
 		}
 
-		if (CentralManager.SessionSettings.LinkModAssets && mod.Package.Assets != null)
+		if (CentralManager.SessionSettings.UserSettings.LinkModAssets && mod.Package.Assets != null)
 		{
 			foreach (var asset in mod.Package.Assets)
 			{

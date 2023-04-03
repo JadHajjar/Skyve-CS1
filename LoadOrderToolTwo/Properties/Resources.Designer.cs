@@ -303,6 +303,26 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_ClearFolders {
+            get {
+                object obj = ResourceManager.GetObject("I_ClearFolders", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ClearFolders_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_ClearFolders_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_ClearSearch {
             get {
                 object obj = ResourceManager.GetObject("I_ClearSearch", resourceCulture);
@@ -486,6 +506,26 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_Disabled_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Disabled_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Discord {
+            get {
+                object obj = ResourceManager.GetObject("I_Discord", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Discord_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Discord_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -686,6 +726,26 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_FolderSearch {
             get {
                 object obj = ResourceManager.GetObject("I_FolderSearch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Guide {
+            get {
+                object obj = ResourceManager.GetObject("I_Guide", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Guide_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Guide_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1426,6 +1486,26 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_Unchecked {
             get {
                 object obj = ResourceManager.GetObject("I_Unchecked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Undo {
+            get {
+                object obj = ResourceManager.GetObject("I_Undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Undo_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Undo_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
