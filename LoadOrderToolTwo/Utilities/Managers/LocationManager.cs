@@ -34,6 +34,7 @@ internal class LocationManager
 	public static string ModsPath => Path.Combine(AddonsPath, "Mods");
 	public static string AssetsPath => Path.Combine(AddonsPath, "Assets");
 	public static string MapThemesPath => Path.Combine(AddonsPath, "MapThemes");
+	public static string MapsPath => Path.Combine(AppDataPath, "Mapss");
 	public static string StylesPath => Path.Combine(AddonsPath, "Styles");
 
 	public static string WorkshopContentPath
@@ -175,7 +176,7 @@ internal class LocationManager
 
 					if (!string.IsNullOrWhiteSpace(path) && Directory.Exists(path))
 					{
-						settings.SteamPath = path!;
+						settings.SteamPath = path!.Replace('/', '\\');
 					}
 				}
 
@@ -187,7 +188,8 @@ internal class LocationManager
 				Log.Info("Matching macOS Paths");
 
 				settings.SteamPath = "/Applications/Steam.app/Contents";
-				settings.GamePath = Path.GetDirectoryName(Path.GetDirectoryName(settings.GamePath));
+				settings.GamePath = Path.GetDirectoryName(Path.GetDirectoryName(settings.GamePath)).Replace('\\', '/');
+				settings.AppDataPath = settings.AppDataPath.Replace('\\', '/');
 				settings.VirtualAppDataPath = settings.AppDataPath;
 				settings.VirtualGamePath = settings.GamePath;
 
@@ -209,7 +211,7 @@ internal class LocationManager
 					if (Directory.Exists(virtualPath))
 					{
 						Log.Info($"GamePath Matched: {virtualPath}");
-						settings.VirtualGamePath = settings.GamePath;
+						settings.VirtualGamePath = settings.GamePath.Replace('\\', '/');
 						settings.GamePath = virtualPath;
 
 						break;
@@ -229,7 +231,7 @@ internal class LocationManager
 					if (Directory.Exists(virtualPath))
 					{
 						Log.Info($"AppDataPath Matched: {virtualPath}");
-						settings.VirtualAppDataPath = settings.AppDataPath;
+						settings.VirtualAppDataPath = settings.AppDataPath.Replace('\\', '/');
 						settings.AppDataPath = virtualPath;
 						break;
 					}

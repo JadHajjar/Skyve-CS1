@@ -26,10 +26,9 @@ public partial class PC_Profiles : PanelContent
 
 		DD_SaveFile.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Saves");
 		DD_SkipFile.StartingFolder = LocationManager.AppDataPath;
+		DD_NewMap.StartingFolder = LocationManager.MapsPath;
 
-		CB_UseCitiesExe.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
-		CB_UnityProfiler.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
-		CB_DebugMono.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
+		TLP_AdvancedDev.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
 
 		DAD_NewProfile.StartingFolder = LocationManager.AppDataPath;
 
@@ -56,14 +55,15 @@ public partial class PC_Profiles : PanelContent
 	{
 		base.UIChanged();
 
+		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_ProfileUsage.Font = UI.Font(7.5F, FontStyle.Bold);
 		P_Options.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_TempProfile.Font = UI.Font(10.5F);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
 		B_ViewProfiles.Font = B_NewProfile.Font = B_TempProfile.Font = B_Cancel.Font = UI.Font(9.75F);
-		TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile .Margin= UI.Scale(new Padding(10), UI.UIScale);
+	TLP_AdvancedDev.Margin=	TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile .Margin= UI.Scale(new Padding(10), UI.UIScale);
 		T_ProfileUsage.Width = (int)(300 * UI.FontScale);
-		DD_SaveFile.Margin = DD_SkipFile.Margin = UI.Scale(new Padding(0, 5, 5, 5), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -71,7 +71,7 @@ public partial class PC_Profiles : PanelContent
 		base.DesignChanged(design);
 
 		L_ProfileUsage.ForeColor = design.LabelColor;
-		TLP_LaunchSettings.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+		TLP_LaunchSettings.BackColor = TLP_AdvancedDev.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
 		TLP_ProfileName.BackColor = design.ButtonColor;
 		L_TempProfile.ForeColor = design.YellowColor;
 		P_Options.BackColor = design.AccentBackColor;
@@ -104,6 +104,9 @@ public partial class PC_Profiles : PanelContent
 		TLP_Main.SetColumn(B_TempProfile, profile.Temporary ? 2 : 3);
 		TLP_Main.SetColumn(B_NewProfile, profile.Temporary ? 3 : 2);
 
+		FLP_Options.SetRow(TLP_GeneralSettings, profile.Temporary ? 2 : 0);
+		FLP_Options.SetRow(TLP_LSM, profile.Temporary ? 0 : 1);
+
 		B_EditName.Visible = B_Save.Visible = !profile.Temporary && !TB_Name.Visible;
 
 		I_ProfileIcon.Loading = false;
@@ -118,6 +121,10 @@ public partial class PC_Profiles : PanelContent
 		CB_UnityProfiler.Checked = profile.LaunchSettings.UnityProfiler;
 		CB_DebugMono.Checked = profile.LaunchSettings.DebugMono;
 		CB_LoadSave.Checked = profile.LaunchSettings.LoadSaveGame;
+		CB_StartNewGame.Checked = profile.LaunchSettings.StartNewGame;
+		CB_DevUI.Checked = profile.LaunchSettings.DevUi;
+		CB_RefreshWorkshop.Checked = profile.LaunchSettings.RefreshWorkshop;
+		DD_NewMap.SelectedFile = IOUtil.ToRealPath(profile.LaunchSettings.MapToLoad);
 		DD_SaveFile.SelectedFile = IOUtil.ToRealPath(profile.LaunchSettings.SaveToLoad);
 
 		CB_LoadUsed.Checked = profile.LsmSettings.LoadUsed;
@@ -127,6 +134,7 @@ public partial class PC_Profiles : PanelContent
 
 		DD_SaveFile.Enabled = CB_LoadSave.Checked;
 		DD_SkipFile.Enabled = CB_SkipFile.Checked;
+		DD_NewMap.Enabled = CB_StartNewGame.Checked;
 
 		if (profile.ForAssetEditor)
 		{
@@ -148,9 +156,21 @@ public partial class PC_Profiles : PanelContent
 	{
 		DD_SaveFile.Enabled = CB_LoadSave.Checked;
 		DD_SkipFile.Enabled = CB_SkipFile.Checked;
+		DD_NewMap.Enabled = CB_StartNewGame.Checked;
 
 		if (loadingProfile)
 		{
+			return;
+		}
+
+		if (sender == CB_StartNewGame && CB_StartNewGame.Checked && CB_LoadSave.Checked)
+		{
+			DD_SaveFile.Enabled = CB_LoadSave.Checked = false;
+			return;
+		}
+		else if (sender == CB_LoadSave && CB_StartNewGame.Checked && CB_LoadSave.Checked)
+		{
+			DD_NewMap.Enabled = CB_StartNewGame.Checked = false;
 			return;
 		}
 
@@ -162,11 +182,15 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.NoAssets = CB_NoAssets.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.NoMods = CB_NoMods.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.LHT = CB_LHT.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.StartNewGame = CB_StartNewGame.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.MapToLoad = IOUtil.ToVirtualPath(DD_NewMap.SelectedFile);
 		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = IOUtil.ToVirtualPath(DD_SaveFile.SelectedFile);
 		CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.DebugMono = CB_DebugMono.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.DevUi = CB_DevUI.Checked;
 
 		CentralManager.CurrentProfile.LsmSettings.SkipFile = IOUtil.ToVirtualPath(DD_SkipFile.SelectedFile);
 		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
@@ -389,6 +413,17 @@ public partial class PC_Profiles : PanelContent
 	{
 		DD_SkipFile.SelectedFile = obj;
 		ValueChanged(DD_SkipFile, EventArgs.Empty);
+	}
+
+	private void DD_NewMap_FileSelected(string obj)
+	{
+		DD_NewMap.SelectedFile = obj;
+		ValueChanged(DD_NewMap, EventArgs.Empty);
+	}
+
+	private bool DD_NewMap_ValidFile(string arg)
+	{
+		return arg.PathContains(DD_NewMap.StartingFolder) && DD_NewMap.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
 	}
 
 	private bool DD_SaveFile_ValidFile(string arg)

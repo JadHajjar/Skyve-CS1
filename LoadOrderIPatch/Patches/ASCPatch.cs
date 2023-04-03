@@ -86,7 +86,7 @@ namespace LoadOrderIPatch.Patches {
             /**********************************/
             {
                 var method = asm.MainModule.GetMethod(
-                    "LoadOrderInjections.SteamUtilities.RegisterEvents");
+                    "LoadOrderInjections.SteamUtilities.RegisterEvents", true);
                 var call2 = Instruction.Create(OpCodes.Call, module.ImportReference(method));
                 ilProcessor.Prefix(call2);
             }

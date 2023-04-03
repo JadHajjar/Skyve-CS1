@@ -33,12 +33,12 @@ partial class PC_MainPage
 	private void InitializeComponent()
 	{
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.B_StartStop = new SlickControls.SlickButton();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.profileBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ProfileBubble();
 			this.modsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ModsBubble();
 			this.assetsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.AssetsBubble();
 			this.compatibilityReportBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.CompatibilityReportBubble();
+			this.B_StartStop = new SlickControls.SlickButton();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -63,22 +63,6 @@ partial class PC_MainPage
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 403);
 			this.tableLayoutPanel1.TabIndex = 0;
-			// 
-			// B_StartStop
-			// 
-			this.B_StartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.B_StartStop.ColorShade = null;
-			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_StartStop.Enabled = false;
-			this.B_StartStop.Image = global::LoadOrderToolTwo.Properties.Resources.I_Launch;
-			this.B_StartStop.Location = new System.Drawing.Point(577, 355);
-			this.B_StartStop.Name = "B_StartStop";
-			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
-			this.B_StartStop.Size = new System.Drawing.Size(193, 45);
-			this.B_StartStop.SpaceTriggersClick = true;
-			this.B_StartStop.TabIndex = 0;
-			this.B_StartStop.Text = "Launch Cities: Skylines";
-			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
 			// 
 			// flowLayoutPanel1
 			// 
@@ -131,6 +115,22 @@ partial class PC_MainPage
 			this.compatibilityReportBubble.Size = new System.Drawing.Size(150, 48);
 			this.compatibilityReportBubble.TabIndex = 3;
 			this.compatibilityReportBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CompatibilityReportBubble_MouseClick);
+			// 
+			// B_StartStop
+			// 
+			this.B_StartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_StartStop.ColorShade = null;
+			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_StartStop.Enabled = false;
+			this.B_StartStop.Image = global::LoadOrderToolTwo.Properties.Resources.AppIcon_24;
+			this.B_StartStop.Location = new System.Drawing.Point(546, 368);
+			this.B_StartStop.Name = "B_StartStop";
+			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
+			this.B_StartStop.Size = new System.Drawing.Size(224, 32);
+			this.B_StartStop.SpaceTriggersClick = true;
+			this.B_StartStop.TabIndex = 0;
+			this.B_StartStop.Text = "Launch Cities: Skylines";
+			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
 			// 
 			// PC_MainPage
 			// 

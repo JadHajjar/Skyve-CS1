@@ -37,6 +37,7 @@ public class LoadOrderUserMod : IUserMod
 	public string Name => "Load Order Mod " + VersionString;
 	public string Description => "Manage your custom content easily, from one place.";
 	public static string HARMONY_ID = "CS.TDW.LoadOrder";
+	private UIButton lotButton;
 
 	//static LoadOrderMod() => Log.Debug("Static Ctor "   + Environment.StackTrace);
 	//public LoadOrderMod() => Log.Debug("Instance Ctor " + Environment.StackTrace);
@@ -85,7 +86,7 @@ public class LoadOrderUserMod : IUserMod
 #if DEBUG
 			Log.Buffered = true;
 #else
-            Log.Buffered = false;
+			Log.Buffered = false;
 #endif
 			var items = PlatformService.workshop.GetSubscribedItems();
 			Log.Info("Subscribed Items are: " + items.ToSTR());
@@ -135,7 +136,9 @@ public class LoadOrderUserMod : IUserMod
 			try
 			{
 				if (!File.Exists(Path.Combine(DataLocation.localApplicationData, Path.Combine("LoadOrderTwo", "SetupComplete.txt"))))
+				{
 					PrepareTool();
+				}
 			}
 			catch (Exception ex) { Debug.LogException(ex); }
 
@@ -205,13 +208,21 @@ public class LoadOrderUserMod : IUserMod
 	{
 		try
 		{
+			SceneManager.sceneLoaded -= MainMenuLoaded;
+
 			foreach (var item in GameObject.FindObjectsOfType<EntryStatusPanel>())
 			{
-				GameObject.DestroyImmediate(item?.gameObject);
+				if (item)
+				{
+					GameObject.Destroy(item.gameObject);
+				}
 			}
 			foreach (var item in GameObject.FindObjectsOfType<EntryActionPanel>())
 			{
-				GameObject.DestroyImmediate(item?.gameObject);
+				if (item)
+				{
+					GameObject.Destroy(item?.gameObject);
+				}
 			}
 
 			LoadingManager.instance.m_introLoaded -= CacheUtil.CacheData;
@@ -225,9 +236,16 @@ public class LoadOrderUserMod : IUserMod
 			CheckSubsUtil.RemoveEvents();
 			Log.Buffered = false;
 
-			SceneManager.sceneLoaded -= MainMenuLoaded;
+			try
+			{
+				if (lotButton != null && lotButton)
+				{
+					GameObject.Destroy(lotButton?.gameObject);
+				}
+			}
+			catch { }
 
-			MainMenuLoaded(default, (LoadSceneMode)(-1));
+			Debug.Log("Load Order Mod Disabled");
 		}
 		catch (Exception ex)
 		{
@@ -239,46 +257,33 @@ public class LoadOrderUserMod : IUserMod
 	{
 		var centerPanel = GameObject.Find("MenuContainer")?.GetComponent<UIPanel>().Find<UISlicedSprite>("CenterPart")?.Find<UIPanel>("MenuArea")?.Find<UIPanel>("Menu");
 
-		if ((int)arg1 == -1)
-		{
-			var lotButton = centerPanel?.Find<UIButton>("LOTBUTTON");
-
-			if (lotButton != null)
-			{
-				(GameObject.Find("MenuContainer")?.GetComponent<UIPanel>().Find<UISlicedSprite>("CenterPart")).height -= lotButton.height;
-
-				lotButton.OnDestroy();
-			}
-			return;
-		}
-		
 		var continueButton = centerPanel?.Find<UIButton>("Exit");
 
 		if (continueButton != null)
 		{
-			var newButton = centerPanel.AddUIComponent<UIButton>();
+			lotButton = centerPanel.AddUIComponent<UIButton>();
 
-			continueButton.ShalowClone(newButton, true);
-			newButton.text = "LOAD ORDER TOOL";
-			newButton.name = newButton.cachedName = "LOTBUTTON";
-			newButton.stringUserData = "";
-			newButton.atlas = continueButton.atlas;
-			newButton.font = continueButton.font;
-			newButton.disabledBgSprite = continueButton.disabledBgSprite;
-			newButton.disabledFgSprite = continueButton.disabledFgSprite;
-			newButton.focusedBgSprite = continueButton.focusedBgSprite;
-			newButton.focusedFgSprite = continueButton.focusedFgSprite;
-			newButton.hoveredBgSprite = continueButton.hoveredBgSprite;
-			newButton.hoveredFgSprite = continueButton.hoveredFgSprite;
-			newButton.normalBgSprite = continueButton.normalBgSprite;
-			newButton.normalFgSprite = continueButton.normalFgSprite;
-			newButton.pressedBgSprite = continueButton.pressedBgSprite;
-			newButton.pressedFgSprite = continueButton.pressedFgSprite;
-			newButton.zOrder -= 3;
+			continueButton.ShalowClone(lotButton, true);
+			lotButton.text = "LOAD ORDER TOOL";
+			lotButton.name = lotButton.cachedName = "LOTBUTTON";
+			lotButton.stringUserData = "";
+			lotButton.atlas = continueButton.atlas;
+			lotButton.font = continueButton.font;
+			lotButton.disabledBgSprite = continueButton.disabledBgSprite;
+			lotButton.disabledFgSprite = continueButton.disabledFgSprite;
+			lotButton.focusedBgSprite = continueButton.focusedBgSprite;
+			lotButton.focusedFgSprite = continueButton.focusedFgSprite;
+			lotButton.hoveredBgSprite = continueButton.hoveredBgSprite;
+			lotButton.hoveredFgSprite = continueButton.hoveredFgSprite;
+			lotButton.normalBgSprite = continueButton.normalBgSprite;
+			lotButton.normalFgSprite = continueButton.normalFgSprite;
+			lotButton.pressedBgSprite = continueButton.pressedBgSprite;
+			lotButton.pressedFgSprite = continueButton.pressedFgSprite;
+			lotButton.zOrder -= 3;
 
-			newButton.eventClick += LOT_eventClick;
+			lotButton.eventClick += LOT_eventClick;
 
-			(GameObject.Find("MenuContainer")?.GetComponent<UIPanel>().Find<UISlicedSprite>("CenterPart")).height += newButton.height;
+			(GameObject.Find("MenuContainer")?.GetComponent<UIPanel>().Find<UISlicedSprite>("CenterPart")).height += lotButton.height;
 		}
 	}
 

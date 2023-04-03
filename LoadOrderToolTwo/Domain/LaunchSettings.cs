@@ -11,4 +11,8 @@ public class LaunchSettings
 	public bool LHT { get; set; }
 	public string? SaveToLoad { get; set; }
 	public bool LoadSaveGame { get; set; }
+	public bool DevUi { get; internal set; }
+	public bool RefreshWorkshop { get; internal set; }
+	public string? MapToLoad { get; internal set; }
+	public bool StartNewGame { get; internal set; }
 }

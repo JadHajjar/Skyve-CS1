@@ -2,7 +2,6 @@
 
 using LoadOrderShared;
 
-using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
 
 using SlickControls;
@@ -157,9 +156,37 @@ public static class CitiesManager
 			args.Add("-LHT");
 		}
 
-		if (CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame && File.Exists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
+		if (CentralManager.CurrentProfile.LaunchSettings.DevUi)
 		{
-			args.Add("--loadSave=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
+			args.Add("-enable-dev-ui");
+		}
+
+		if (CentralManager.CurrentProfile.LaunchSettings.RefreshWorkshop)
+		{
+			args.Add("-refreshWorkshop");
+		}
+
+		if (CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame)
+		{
+			if (File.Exists(IOUtil.ToRealPath(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad)))
+			{
+				args.Add("--loadSave=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
+			}
+			else
+			{
+				args.Add("-continuelastsave");
+			}
+		}
+		else if (CentralManager.CurrentProfile.LaunchSettings.StartNewGame)
+		{
+			if (File.Exists(IOUtil.ToRealPath(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad)))
+			{
+				args.Add("--newGame=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
+			}
+			else
+			{
+				args.Add("-newGame");
+			}
 		}
 
 		//var extraArgs = textBoxExtraArgs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

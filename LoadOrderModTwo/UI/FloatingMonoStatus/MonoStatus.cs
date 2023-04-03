@@ -15,9 +15,12 @@ namespace LoadOrderMod.UI {
         public static void Ensure() => _ = Instance ?? Create();
         static MonoStatus Create() => UIView.GetAView()?.gameObject.AddComponent<MonoStatus>();
 
-        public static void Release() {
+        public static void Release()
+        {
             DecreaseRefCount(GetStatuslabel());
-            DestroyImmediate(Instance?.gameObject);
+
+            //if (Instance != null && Instance)
+            //    Destroy(Instance.gameObject);
         }
 
         public void Start() {
@@ -49,13 +52,14 @@ namespace LoadOrderMod.UI {
         }
 
         static void DecreaseRefCount(UILabel label) {
-            if (label == null)
+            if (label == null || !label)
                 return;
 
             label.objectUserData ??= 1; // recover from failure.
             label.objectUserData = (int)label.objectUserData - 1;
+
             if ((int)label.objectUserData <= 0)
-                DestroyImmediate(label.gameObject);
+                Destroy(label.gameObject);
         }
         #endregion 
 

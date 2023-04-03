@@ -10,6 +10,7 @@ using SlickControls;
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -74,9 +75,15 @@ public partial class PC_Options : PanelContent
 		TLP_HelpLogs.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_AskHelp));
 		TLP_Advanced.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Hazard));
 
+		B_Theme.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Theme));
+		B_HelpTranslate.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Translate));
+		B_ClearFolders.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ClearFolders));
+		B_Discord.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Discord));
+		B_Guide.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Guide));
+		B_Reset.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Undo));
+
 		DD_Language.Width = (int)(220 * UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
-		B_Theme.Font = B_HelpTranslate.Font = B_ClearFolders.Font = B_Discord.Font = B_Guide.Font = B_Reset.Font = UI.Font(9.75F);
 		B_Theme.Padding = B_HelpTranslate.Padding = B_ClearFolders.Padding = B_Discord.Padding = B_Guide.Padding = B_Reset.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		B_Theme.Margin =  TLP_UI.Margin = TLP_Settings.Margin = TLP_Advanced.Margin = B_HelpTranslate.Margin = TLP_HelpLogs.Margin =
 			B_ClearFolders.Margin = B_Discord.Margin = B_Guide.Margin =B_Reset.Margin=
@@ -192,9 +199,16 @@ public partial class PC_Options : PanelContent
 
 	private void B_ClearFolders_Click(object sender, EventArgs e)
 	{
-		if (ShowPrompt(Locale.ClearFoldersPrompt, Locale.ClearFoldersPromptTitle, PromptButtons.OKCancel, PromptIcons.Warning) != DialogResult.OK)
+		if (ShowPrompt(Locale.ClearFoldersPrompt + "\r\n\r\n" + Locale.AreYouSure, Locale.ClearFoldersPromptTitle, PromptButtons.OKCancel, PromptIcons.Warning) != DialogResult.OK)
 			return;
 
+		ExtensionClass.DeleteFile(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"));
 
+		CentralManager.SessionSettings.FirstTimeSetupCompleted = false;
+		CentralManager.SessionSettings.Save();
+
+		new FolderSettings().Save();
+
+		Application.Exit();
 	}
 }

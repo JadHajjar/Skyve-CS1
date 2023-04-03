@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.UserInterface.Panels;
+using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -16,7 +17,7 @@ namespace LoadOrderToolTwo;
 
 public partial class MainForm : BasePanelForm
 {
-	private bool startBoundsSet;
+	private readonly System.Timers.Timer _startTimeoutTimer = new(15000) { AutoReset = false };
 	private bool isGameRunning;
 	private bool? buttonStateRunning;
 
@@ -27,7 +28,7 @@ public partial class MainForm : BasePanelForm
 		base_PB_Icon.UserDraw = true;
 		base_PB_Icon.Paint += Base_PB_Icon_Paint;
 
-		SlickTip.SetTo(base_PB_Icon, "LaunchTooltip");
+		SlickTip.SetTo(base_PB_Icon, string.Format(Locale.LaunchTooltip, "[F5]"));
 
 #if DEBUG
 		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(4);
@@ -57,6 +58,19 @@ public partial class MainForm : BasePanelForm
 		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
 
 		isGameRunning = CitiesManager.IsRunning();
+
+		_startTimeoutTimer.Elapsed += StartTimeoutTimer_Elapsed;
+	}
+
+	private void StartTimeoutTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+	{
+		buttonStateRunning = null;
+		base_PB_Icon.Loading = false;
+
+		if (CurrentPanel is PC_MainPage mainPage)
+		{
+			mainPage.B_StartStop.Loading = false;
+		}
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
@@ -65,6 +79,7 @@ public partial class MainForm : BasePanelForm
 
 		if (buttonStateRunning is null || buttonStateRunning == isRunning)
 		{
+			_startTimeoutTimer.Stop();
 			base_PB_Icon.Loading = isRunning;
 			buttonStateRunning = null;
 		}
@@ -78,7 +93,7 @@ public partial class MainForm : BasePanelForm
 
 		if (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 		{
-			icon.Color(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.MenuForeColor, Math.Abs((int)base_PB_Icon.LoaderPercentage * 5 % 200 - 100)));
+			icon.Color(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.MenuForeColor, Math.Abs(((int)base_PB_Icon.LoaderPercentage * 5 % 200) - 100)));
 		}
 		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Pressed))
 		{
@@ -104,11 +119,11 @@ public partial class MainForm : BasePanelForm
 
 		if (!ConnectionHandler.IsConnected)
 		{
-			var rect = base_PB_Icon.ClientRectangle.Pad((int)(3*UI.UIScale)).Align(new Size(base_PB_Icon.Width / 3, base_PB_Icon.Width / 3), ContentAlignment.BottomRight);
+			var rect = base_PB_Icon.ClientRectangle.Pad((int)(3 * UI.UIScale)).Align(new Size(base_PB_Icon.Width / 3, base_PB_Icon.Width / 3), ContentAlignment.BottomRight);
 			using var noInt = ImageManager.GetIcon(nameof(Properties.Resources.I_NoInternet)).Color(FormDesign.Design.MenuForeColor);
 
 			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.RedColor), rect.Pad((int)(-2 * UI.UIScale)));
-			e.Graphics.DrawImage(noInt, rect.Pad(1,1,-1,-1));
+			e.Graphics.DrawImage(noInt, rect.Pad(1, 1, -1, -1));
 		}
 	}
 
@@ -186,7 +201,7 @@ public partial class MainForm : BasePanelForm
 		LaunchStopCities();
 	}
 
-	private void LaunchStopCities()
+	public void LaunchStopCities()
 	{
 		if (CitiesManager.CitiesAvailable())
 		{
@@ -210,6 +225,9 @@ public partial class MainForm : BasePanelForm
 				buttonStateRunning = true;
 				new BackgroundAction("Starting Cities: Skylines", CitiesManager.Launch).Run();
 			}
+
+			_startTimeoutTimer.Stop();
+			_startTimeoutTimer.Start();
 		}
 	}
 
@@ -230,22 +248,16 @@ public partial class MainForm : BasePanelForm
 	{
 		base.OnCreateControl();
 
-		if (!startBoundsSet)
+		if (CentralManager.SessionSettings.LastWindowsBounds != null)
 		{
-			if (CentralManager.SessionSettings.LastWindowsBounds != null)
-			{
-				Bounds = CentralManager.SessionSettings.LastWindowsBounds.Value;
+			Bounds = CentralManager.SessionSettings.LastWindowsBounds.Value;
 
-				LastUiScale = UI.UIScale;
-			}
+			LastUiScale = UI.UIScale;
+		}
 
-			if (CentralManager.SessionSettings.WindowWasMaximized)
-			{
-				WindowState = FormWindowState.Minimized;
-				WindowState = FormWindowState.Maximized;
-			}
-
-			startBoundsSet = true;
+		if (CentralManager.SessionSettings.WindowWasMaximized)
+		{
+			WindowState = FormWindowState.Maximized;
 		}
 	}
 
@@ -253,15 +265,21 @@ public partial class MainForm : BasePanelForm
 	{
 		base.OnFormClosing(e);
 
-		if (!TopMost && startBoundsSet)
+		if (!TopMost)
 		{
-			if ((CentralManager.SessionSettings.WindowWasMaximized = WindowState == FormWindowState.Maximized))
+			if (CentralManager.SessionSettings.WindowWasMaximized = WindowState == FormWindowState.Maximized)
 			{
-				CentralManager.SessionSettings.LastWindowsBounds = RestoreBounds;
+				if (SystemInformation.VirtualScreen.IntersectsWith(RestoreBounds))
+				{
+					CentralManager.SessionSettings.LastWindowsBounds = RestoreBounds;
+				}
 			}
 			else
 			{
-				CentralManager.SessionSettings.LastWindowsBounds = Bounds;
+				if (SystemInformation.VirtualScreen.IntersectsWith(Bounds))
+				{
+					CentralManager.SessionSettings.LastWindowsBounds = Bounds;
+				}
 			}
 
 			CentralManager.SessionSettings.Save();

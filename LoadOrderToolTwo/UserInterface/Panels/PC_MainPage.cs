@@ -30,7 +30,7 @@ public partial class PC_MainPage : PanelContent
 
 		RefreshButtonState(CitiesManager.IsRunning(), true);
 
-		SlickTip.SetTo(B_StartStop, "LaunchTooltip");
+		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
 	}
 
 	private void SetButtonEnabledOnLoad()
@@ -98,16 +98,7 @@ public partial class PC_MainPage : PanelContent
 
 	private void B_StartStop_Click(object sender, System.EventArgs e)
 	{
-		if (CitiesManager.IsRunning())
-		{
-			B_StartStop.Loading = true;
-			new BackgroundAction("Stopping Cities: Skylines", CitiesManager.Kill).Run();
-		}
-		else
-		{
-			B_StartStop.Loading = LocationManager.Platform is Platform.Windows;
-			new BackgroundAction("Starting Cities: Skylines", CitiesManager.Launch).Run();
-		}
+		Program.MainForm.LaunchStopCities();
 	}
 
 	private void RefreshButtonState(bool running, bool firstTime = false)
@@ -119,7 +110,7 @@ public partial class PC_MainPage : PanelContent
 				this.TryInvoke(() =>
 				{
 					B_StartStop.Text = Locale.StartCities;
-					B_StartStop.Image = Properties.Resources.I_Launch;
+					B_StartStop.Image = Properties.Resources.AppIcon_24;
 					buttonStateRunning = false;
 				});
 			}

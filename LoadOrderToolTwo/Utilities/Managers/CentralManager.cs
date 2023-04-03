@@ -280,6 +280,10 @@ internal static class CentralManager
 		{
 			ContentUtil.CreateShortcut();
 		}
+		else
+		{
+			SessionSettings.UserSettings.ShowFolderSettings = true;
+		}
 
 		SessionSettings.FirstTimeSetupCompleted = true;
 		SessionSettings.Save();

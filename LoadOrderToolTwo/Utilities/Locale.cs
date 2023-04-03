@@ -233,4 +233,6 @@ internal class Locale : LocaleHelper
 	public static string ShowingProfiles => _instance.GetText(nameof(ShowingProfiles));
 	public static string ClearFoldersPromptTitle => _instance.GetText(nameof(ShowingProfiles));
 	public static string ClearFoldersPrompt => _instance.GetText(nameof(ShowingProfiles));
+	public static string LaunchTooltip => _instance.GetText(nameof(LaunchTooltip));
+	public static string AreYouSure => _instance.GetText(nameof(AreYouSure));
 }

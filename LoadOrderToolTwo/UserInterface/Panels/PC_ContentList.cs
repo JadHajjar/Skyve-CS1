@@ -53,7 +53,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			LC_Items.SetItems(GetItems());
 		}
 
-		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
 		{
 			OT_Enabled.Hide();
 			B_DisEnable.Dispose();
