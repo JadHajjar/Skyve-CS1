@@ -119,8 +119,13 @@ public static class ProfileManager
 		return null;
 	}
 
-	private static void ConvertLegacyProfiles()
+	public static void ConvertLegacyProfiles()
 	{
+		if (!CentralManager.SessionSettings.FirstTimeSetupCompleted)
+		{
+			return;
+		}
+
 		Log.Info("Checking for Legacy profiles");
 
 		var legacyProfilePath = Path.Combine(LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
@@ -149,6 +154,11 @@ public static class ProfileManager
 
 			if (newProfile != null)
 			{
+				newProfile.LastEditDate = File.GetLastWriteTime(profile);
+				newProfile.DateCreated = File.GetCreationTime(profile);
+
+				_profiles.Add(newProfile);
+
 				Save(newProfile, true);
 
 				Directory.CreateDirectory(Path.Combine(legacyProfilePath, "Legacy"));

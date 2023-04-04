@@ -142,7 +142,7 @@ internal class Locale : LocaleHelper
 	public static string NoLocalPackagesFound => _instance.GetText(nameof(NoLocalPackagesFound));
 	public static string NoPackagesMatchFilters => _instance.GetText(nameof(NoPackagesMatchFilters));
 	public static string Actions => _instance.GetText(nameof(Actions));
-	public static string ModUtilities => _instance.GetText(nameof(ModUtilities));
+	public static string Utilities => _instance.GetText(nameof(Utilities));
 	public static string CollectionTitle => _instance.GetText(nameof(CollectionTitle));
 	public static string Packages => _instance.GetText(nameof(Packages));
 	public static string Options => _instance.GetText(nameof(Options));
@@ -238,5 +238,6 @@ internal class Locale : LocaleHelper
 	public static string AssetOutOfDate => _instance.GetText(nameof(AssetOutOfDate));
 	public static string AssetOutOfDatePlural => _instance.GetText(nameof(AssetOutOfDatePlural));
 	public static string CopyVersionNumber => _instance.GetText(nameof(CopyVersionNumber));
-	public static string? SubscribeToItem => _instance.GetText(nameof(SubscribeToItem));
+	public static string SubscribeToItem => _instance.GetText(nameof(SubscribeToItem));
+	public static string MultipleLOM => _instance.GetText(nameof(MultipleLOM));
 }

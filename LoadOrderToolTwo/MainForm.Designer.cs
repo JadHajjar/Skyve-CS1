@@ -131,7 +131,7 @@
 			this.PI_ModUtilities.Group = "Maintenance";
 			this.PI_ModUtilities.Highlighted = false;
 			this.PI_ModUtilities.Selected = false;
-			this.PI_ModUtilities.Text = "ModUtilities";
+			this.PI_ModUtilities.Text = "Utilities";
 			this.PI_ModUtilities.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ModReview_OnClick);
 			// 
 			// PI_Troubleshoot

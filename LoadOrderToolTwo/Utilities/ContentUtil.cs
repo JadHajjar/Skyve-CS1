@@ -19,14 +19,6 @@ internal class ContentUtil
 
 	private static readonly object _contentUpdateLock = new();
 
-	public static IEnumerable<ulong> GetSubscribedItems()
-	{
-		foreach (var path in GetSubscribedItemPaths())
-		{
-			yield return ulong.Parse(Path.GetFileName(path));
-		}
-	}
-
 	public static IEnumerable<string> GetSubscribedItemPaths()
 	{
 		if (!Directory.Exists(LocationManager.WorkshopContentPath))
@@ -38,10 +30,19 @@ internal class ContentUtil
 		Log.Info($"Looking for packages in: '{LocationManager.WorkshopContentPath}'");
 		foreach (var path in Directory.EnumerateDirectories(LocationManager.WorkshopContentPath))
 		{
-			if (ulong.TryParse(Path.GetFileName(path), out _))
+			if (!ulong.TryParse(Path.GetFileName(path), out _))
 			{
-				yield return path;
+				continue;
 			}
+
+			var files = Directory.GetFiles(path);
+			if (files.Length == 1 && files[0].EndsWith(EXCLUDED_FILE_NAME))
+			{
+				DeleteAll(path);
+				continue;
+			}
+
+			yield return path;
 		}
 	}
 

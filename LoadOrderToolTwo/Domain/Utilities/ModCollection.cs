@@ -34,6 +34,11 @@ internal class ModCollection
 	{
 		var key = Path.GetFileName(mod.FileName);
 
+		return GetCollection(key);
+	}
+
+	internal List<Mod>? GetCollection(string key)
+	{
 		if (_modList.ContainsKey(key))
 		{
 			return _modList[key];

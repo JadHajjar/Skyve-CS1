@@ -31,11 +31,18 @@ public partial class PC_MainPage : PanelContent
 		RefreshButtonState(CitiesManager.IsRunning(), true);
 
 		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
+
+		label1.Text = Locale.MultipleLOM;
 	}
 
 	private void SetButtonEnabledOnLoad()
 	{
-		this.TryInvoke(() => B_StartStop.Enabled = CitiesManager.CitiesAvailable());
+		this.TryInvoke(() =>
+		{
+			B_StartStop.Enabled = CitiesManager.CitiesAvailable();
+
+			label1.Visible = ModLogicManager.AreMultipleLOMsPresent();
+		});
 	}
 
 	protected override void LocaleChanged()
@@ -55,6 +62,15 @@ public partial class PC_MainPage : PanelContent
 		base.UIChanged();
 
 		B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
+		label1.Font = UI.Font(10.5F, FontStyle.Bold);
+		label1.Margin = UI.Scale(new Padding(10), UI.FontScale);
+	}
+
+	protected override void DesignChanged(FormDesign design)
+	{
+		base.DesignChanged(design);
+
+		label1.ForeColor = design.RedColor;
 	}
 
 	private void ProfileBubble_MouseClick(object sender, MouseEventArgs e)

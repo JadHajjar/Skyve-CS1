@@ -33,7 +33,7 @@ public partial class MainForm : BasePanelForm
 #if DEBUG
 		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(4);
 #else
-		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(3) + " Alpha";
+		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(3) + " Beta";
 #endif
 		try
 		{ FormDesign.Initialize(this, DesignChanged); }
@@ -79,8 +79,10 @@ public partial class MainForm : BasePanelForm
 
 		if (buttonStateRunning is null || buttonStateRunning == isRunning)
 		{
-			_startTimeoutTimer.Stop();
-			base_PB_Icon.Loading = isRunning;
+			if (_startTimeoutTimer.Enabled)
+				_startTimeoutTimer.Stop();
+			if (base_PB_Icon.Loading != isRunning)
+				base_PB_Icon.Loading = isRunning;
 			buttonStateRunning = null;
 		}
 	}

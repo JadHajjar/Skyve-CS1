@@ -405,7 +405,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				authorRect.Y += Padding.Top;
 				var avatarRect = authorRect.Pad(Padding).Align(new(size.Height, size.Height), ContentAlignment.MiddleLeft);
 
-				e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), authorRect, (int)(6 * UI.FontScale));
+				e.Graphics.FillRoundedRectangle(new SolidBrush(authorRect.Contains(CursorLocation) ? FormDesign.Design.ButtonColor : FormDesign.Design.BackColor), authorRect, (int)(6 * UI.FontScale));
 
 				e.Graphics.DrawString("by " + e.Item.Author.Name, UI.Font(9.75F), new SolidBrush(FormDesign.Design.ForeColor), authorRect.Pad(avatarRect.Width + Padding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 
@@ -426,11 +426,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 			else
 			{
+				rects.AuthorRect = Rectangle.Empty;
 				DrawLabel(e, e.Item.Author?.Name, Properties.Resources.I_Developer_16, rects.AuthorRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), rects.AuthorRect, ContentAlignment.TopLeft);
 			}
 
 			DrawLabel(e, e.Item.SteamId.ToString(), Properties.Resources.I_Steam_16, rects.SteamIdRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), rects.SteamIdRect, ContentAlignment.BottomLeft);
 		}
+		else
+			rects.AuthorRect = Rectangle.Empty;
 
 		var report = e.Item.Package.CompatibilityReport;
 		if (report is not null && report.Severity != ReportSeverity.NothingToReport)
@@ -640,6 +643,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				CenterRect.Contains(location) ||
 				SteamRect.Contains(location) ||
 				AuthorRect.Contains(location) ||
+				IconRect.Contains(location) ||
 				(VersionRect.Contains(location) && Item?.Package.Mod is not null) ||
 				SteamIdRect.Contains(location);
 		}

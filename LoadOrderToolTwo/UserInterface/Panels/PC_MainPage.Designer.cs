@@ -33,12 +33,13 @@ partial class PC_MainPage
 	private void InitializeComponent()
 	{
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.B_StartStop = new SlickControls.SlickButton();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.label1 = new System.Windows.Forms.Label();
 			this.profileBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ProfileBubble();
 			this.modsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ModsBubble();
 			this.assetsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.AssetsBubble();
 			this.compatibilityReportBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.CompatibilityReportBubble();
-			this.B_StartStop = new SlickControls.SlickButton();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -55,6 +56,7 @@ partial class PC_MainPage
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel1.Controls.Add(this.B_StartStop, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 30);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -63,6 +65,22 @@ partial class PC_MainPage
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 403);
 			this.tableLayoutPanel1.TabIndex = 0;
+			// 
+			// B_StartStop
+			// 
+			this.B_StartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_StartStop.ColorShade = null;
+			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_StartStop.Enabled = false;
+			this.B_StartStop.Image = global::LoadOrderToolTwo.Properties.Resources.AppIcon_24;
+			this.B_StartStop.Location = new System.Drawing.Point(546, 368);
+			this.B_StartStop.Name = "B_StartStop";
+			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
+			this.B_StartStop.Size = new System.Drawing.Size(224, 32);
+			this.B_StartStop.SpaceTriggersClick = true;
+			this.B_StartStop.TabIndex = 0;
+			this.B_StartStop.Text = "Launch Cities: Skylines";
+			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
 			// 
 			// flowLayoutPanel1
 			// 
@@ -79,6 +97,17 @@ partial class PC_MainPage
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(773, 146);
 			this.flowLayoutPanel1.TabIndex = 1;
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(3, 380);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(55, 23);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "label1";
+			this.label1.Visible = false;
 			// 
 			// profileBubble
 			// 
@@ -116,22 +145,6 @@ partial class PC_MainPage
 			this.compatibilityReportBubble.TabIndex = 3;
 			this.compatibilityReportBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CompatibilityReportBubble_MouseClick);
 			// 
-			// B_StartStop
-			// 
-			this.B_StartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.B_StartStop.ColorShade = null;
-			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_StartStop.Enabled = false;
-			this.B_StartStop.Image = global::LoadOrderToolTwo.Properties.Resources.AppIcon_24;
-			this.B_StartStop.Location = new System.Drawing.Point(546, 368);
-			this.B_StartStop.Name = "B_StartStop";
-			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
-			this.B_StartStop.Size = new System.Drawing.Size(224, 32);
-			this.B_StartStop.SpaceTriggersClick = true;
-			this.B_StartStop.TabIndex = 0;
-			this.B_StartStop.Text = "Launch Cities: Skylines";
-			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
-			// 
 			// PC_MainPage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -158,4 +171,5 @@ partial class PC_MainPage
 	private UserInterface.StatusBubbles.ModsBubble modsBubble;
 	private UserInterface.StatusBubbles.AssetsBubble assetsBubble;
 	private StatusBubbles.CompatibilityReportBubble compatibilityReportBubble;
+	private System.Windows.Forms.Label label1;
 }

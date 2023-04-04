@@ -291,6 +291,8 @@ internal static class CentralManager
 		Log.Info("Saved Session Settings");
 
 		File.WriteAllText(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Load Order Tool from the main menu after deleting this file.");
+
+		ProfileManager.ConvertLegacyProfiles();
 	}
 
 	private static void AnalyzePackages(List<Package> content)

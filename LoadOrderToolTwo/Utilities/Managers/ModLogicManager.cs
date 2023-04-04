@@ -105,4 +105,9 @@ internal class ModLogicManager
 
 		return false;
 	}
+
+	internal static bool AreMultipleLOMsPresent()
+	{
+		return (_modCollection.GetCollection(LOM1_ASSEMBLY)?.Count ?? 0) + (_modCollection.GetCollection(LOM_ASSEMBLY)?.Count ?? 0) > 1;
+	}
 }

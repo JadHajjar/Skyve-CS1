@@ -30,15 +30,20 @@ public partial class PC_ModUtilities : PanelContent
 
 		CentralManager.ModInformationUpdated += RefreshModIssues;
 
-		dragAndDropControl1.StartingFolder  =dragAndDropControl2.StartingFolder  = Path.Combine(LocationManager.AppDataPath, "Report", "LoadingScreenMod");
-		dragAndDropControl1.ValidExtensions = dragAndDropControl2.ValidExtensions = new[] { ".htm", ".html" };
+		DD_Missing.StartingFolder = DD_Unused.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Report", "LoadingScreenMod");
+		DD_Missing.ValidExtensions = DD_Unused.ValidExtensions = new[] { ".htm", ".html" };
+
+		SlickTip.SetTo(B_LoadCollection, "LoadCollectionTip");
+		SlickTip.SetTo(DD_Missing, "LsmMissingTip");
+		SlickTip.SetTo(DD_Unused, "LsmUnusedTip");
+		SlickTip.SetTo(B_ReDownload, "FixAllTip");
 	}
 
 	private void RefreshModIssues()
 	{
 		var duplicates = ModsUtil.GetDuplicateMods();
-		var modsOutOfDate = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
+		var modsOutOfDate = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Status == DownloadStatus.OutOfDate);
+		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
 
 		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
 		LC_Duplicates.SetSorting(PackageSorting.Mod);
@@ -49,18 +54,18 @@ public partial class PC_ModUtilities : PanelContent
 		{
 			P_DuplicateMods.Visible = duplicates.Any();
 
-			L_OutOfDate.Text = $"{modsOutOfDate} {(modsOutOfDate == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}";
-			L_Incomplete.Text = $"{modsIncomplete} {(modsIncomplete == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}";
+			L_OutOfDate.Text = $"{modsOutOfDate} {(modsOutOfDate.Count == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}:\r\n{modsOutOfDate.ListStrings(x => $"   • {x}", "\r\n")}";
+			L_Incomplete.Text = $"{modsIncomplete} {(modsIncomplete.Count == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}:\r\n{modsIncomplete.ListStrings(x => $"   • {x}", "\r\n")}";
 
-			L_OutOfDate.Visible = modsOutOfDate > 0;
-			L_Incomplete.Visible = modsIncomplete > 0;
-			P_ModIssues.Visible = modsOutOfDate > 0 || modsIncomplete > 0;
+			L_OutOfDate.Visible = modsOutOfDate.Count > 0;
+			L_Incomplete.Visible = modsIncomplete.Count > 0;
+			P_ModIssues.Visible = modsOutOfDate.Count > 0 || modsIncomplete.Count > 0;
 		});
 	}
 
 	protected override void LocaleChanged()
 	{
-		Text = Locale.ModUtilities;
+		Text = Locale.Utilities;
 	}
 
 	protected override void UIChanged()

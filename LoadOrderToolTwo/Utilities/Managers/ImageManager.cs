@@ -17,7 +17,6 @@ namespace LoadOrderToolTwo.Utilities.Managers;
 public static class ImageManager
 {
 	private static readonly Dictionary<string, object> _lockObjects = new();
-	private static readonly HashSet<string> _badURLs;
 	private static readonly System.Timers.Timer _cacheClearTimer;
 	private static readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = new Dictionary<string, (Bitmap, DateTime)>();
 	private static readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(1);
@@ -25,10 +24,6 @@ public static class ImageManager
 
 	static ImageManager()
 	{
-		ISave.Load(out string[] badURLs, "BadSteamURLs.json");
-
-		_badURLs = new(badURLs ?? new string[0]);
-
 		_cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
 		_cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
 		_cacheClearTimer.Start();
@@ -104,7 +99,7 @@ public static class ImageManager
 
 	public static async Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true)
 	{
-		if (url is null or "" || _badURLs.Contains(url!))
+		if (url is null or "")
 		{
 			return false;
 		}
@@ -169,26 +164,14 @@ public static class ImageManager
 		{
 			if (ex is WebException we && we.Response is HttpWebResponse hwr && hwr.StatusCode == HttpStatusCode.BadGateway)
 			{
-				Thread.Sleep(1000);
+				await Task.Delay(1000);
+
 				goto start;
 			}
 			else if (tries < 2)
 			{
 				tries++;
 				goto start;
-			}
-			else if (ex is not TaskCanceledException)
-			{
-				try
-				{
-					if (ConnectionHandler.IsConnected)
-					{
-						_badURLs.Add(url);
-
-						ISave.Save(_badURLs.ToList(), "BadSteamURLs.json");
-					}
-				}
-				catch (Exception ex2) { Log.Exception(ex2, "Too many images are failing to load"); }
 			}
 
 			return false;

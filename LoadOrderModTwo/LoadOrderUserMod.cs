@@ -20,7 +20,6 @@ using LoadOrderMod.Util;
 
 using System;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -75,7 +74,6 @@ public class LoadOrderUserMod : IUserMod
 		try
 		{
 			Log.Called();
-
 
 			Util.LoadOrderUtil.ApplyGameLoggingImprovements();
 			Log.Info("Cloud.enabled=" + (PlatformService.cloud?.enabled).ToSTR(), true);
@@ -168,7 +166,7 @@ public class LoadOrderUserMod : IUserMod
 			PrepareFirstTimeConfig(config);
 		}
 		else
-			Debug.Warning("Tool configuration was not found in: " + config);
+			Debug.LogWarning("Tool configuration was not found in: " + config);
 	}
 
 	private void PrepareFirstTimeConfig(string configFilePath)

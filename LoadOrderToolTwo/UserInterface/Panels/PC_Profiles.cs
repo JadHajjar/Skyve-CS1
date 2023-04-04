@@ -62,7 +62,7 @@ public partial class PC_Profiles : PanelContent
 		L_TempProfile.Font = UI.Font(10.5F);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
 		B_ViewProfiles.Font = B_NewProfile.Font = B_TempProfile.Font = B_Cancel.Font = UI.Font(9.75F);
-	TLP_AdvancedDev.Margin=	TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile .Margin= UI.Scale(new Padding(10), UI.UIScale);
+		TLP_AdvancedDev.Margin = TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile.Margin = UI.Scale(new Padding(10), UI.UIScale);
 		T_ProfileUsage.Width = (int)(300 * UI.FontScale);
 	}
 
@@ -441,7 +441,7 @@ public partial class PC_Profiles : PanelContent
 		TLP_Main.Visible = true;
 		TLP_New.Visible = false;
 
-		var profile = ProfileManager.Profiles.FirstOrDefault(x => x.Name!.Equals( Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
+		var profile = ProfileManager.Profiles.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
 
 		if (profile is not null)
 		{
