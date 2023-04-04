@@ -1,4 +1,5 @@
 ﻿using Extensions;
+
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
@@ -12,7 +13,7 @@ using System.IO;
 namespace LoadOrderToolTwo.Domain;
 public class Asset : IPackage
 {
-	private string[] _assetTags;
+	private readonly string[] _assetTags;
 
 	public Asset(Package package, string crpPath)
 	{
@@ -58,24 +59,32 @@ public class Asset : IPackage
 	public DownloadStatus Status { get => ((IPackage)Package).Status; set => ((IPackage)Package).Status = value; }
 	public string? StatusReason { get => ((IPackage)Package).StatusReason; set => ((IPackage)Package).StatusReason = value; }
 	public bool SteamInfoLoaded { get => ((IPackage)Package).SteamInfoLoaded; set => ((IPackage)Package).SteamInfoLoaded = value; }
-	public string[]? Tags { get => ((IPackage)Package).Tags; set => ((IPackage)Package).Tags = value; }
 	public string? SteamDescription { get => ((IPackage)Package).SteamDescription; set => ((IPackage)Package).SteamDescription = value; }
 	public string? VirtualFolder => ((IPackage)Package).VirtualFolder;
 	public Bitmap? AuthorIconImage => ((IPackage)Package).AuthorIconImage;
 	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
 	public bool IsPseudoMod { get => ((IPackage)Package).IsPseudoMod; set => ((IPackage)Package).IsPseudoMod = value; }
-	public IEnumerable<string> AssetTags 
+	public string[] WorkshopTags { set => ((IPackage)Package).WorkshopTags = value; }
+	public IEnumerable<TagItem> Tags
 	{
 		get
 		{
+			if (Package.WorkshopTags is not null)
+			{
+				foreach (var item in Package.WorkshopTags)
+				{
+					yield return new(TagSource.Workshop, item);
+				}
+			}
+
 			foreach (var item in _assetTags)
 			{
-				yield return item;
+				yield return new(TagSource.InGame, item);
 			}
 
 			foreach (var item in AssetsUtil.GetFindItTags(this))
 			{
-				yield return item.ToCapital(false);
+				yield return new(TagSource.FindIt, item.ToCapital(false));
 			}
 		}
 	}
@@ -98,7 +107,7 @@ public class Asset : IPackage
 
 	public static bool operator ==(Asset? left, Asset? right)
 	{
-		return 
+		return
 			left is null ? right is null :
 			right is null ? left is null :
 			EqualityComparer<Asset>.Default.Equals(left, right);

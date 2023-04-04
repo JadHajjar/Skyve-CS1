@@ -192,16 +192,8 @@ public partial class PC_MissingLsmPackages : PanelContent
 		{
 			foreach (var tag in DD_Tags.SelectedItems)
 			{
-				if (e.Item is Asset asset)
-				{
-					if (!(e.Item.Tags?.Any(tag) ?? false) && !asset.AssetTags.Any(tag))
-						e.DoNotDraw = true;
-				}
-				else
-				{
-					if (!(e.Item.Tags?.Any(tag) ?? false))
-						e.DoNotDraw = true;
-				}
+				if (!(e.Item.Tags?.Any(tag) ?? false))
+					e.DoNotDraw = true;
 			}
 		}
 

@@ -240,4 +240,6 @@ internal class Locale : LocaleHelper
 	public static string CopyVersionNumber => _instance.GetText(nameof(CopyVersionNumber));
 	public static string SubscribeToItem => _instance.GetText(nameof(SubscribeToItem));
 	public static string MultipleLOM => _instance.GetText(nameof(MultipleLOM));
+	public static string FilterByThisReportStatus => _instance.GetText(nameof(FilterByThisReportStatus));
+	public static string FilterByThisPackageStatus => _instance.GetText(nameof(FilterByThisPackageStatus));
 }

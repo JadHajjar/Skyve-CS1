@@ -2,6 +2,7 @@
 using LoadOrderToolTwo.Domain.Steam;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace LoadOrderToolTwo.Domain.Interfaces;
@@ -29,7 +30,8 @@ public interface IPackage
 	bool SteamInfoLoaded { get; set; }
 	string? SteamDescription { get; set; }
 	string? SteamPage { get; }
-	string[]? Tags { get; set; }
+	IEnumerable<TagItem> Tags { get; }
+	string[]? WorkshopTags { set; }
 	bool Workshop { get; }
 	bool IsIncluded { get; set; }
 	long FileSize { get; }

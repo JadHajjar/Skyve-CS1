@@ -41,6 +41,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
 
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
+		LC_Items.DownloadStatusSelected += LC_Items_DownloadStatusSelected;
+		LC_Items.CompatibilityReportSelected += LC_Items_CompatibilityReportSelected;
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -72,25 +74,18 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			var items = new List<T>(LC_Items.Items);
 
-			DD_Tags.Items = items.SelectMany(x =>
-			{
-				var tags = new List<string>(x.Tags ?? new string[0]);
-
-				if (x is Asset asset)
-				{
-					tags.AddRange(asset.AssetTags);
-				}
-				else if (x.Package.Assets is not null)
-				{
-					foreach (var item in x.Package.Assets)
-					{
-						tags.AddRange(item.AssetTags);
-					}
-				}
-
-				return tags;
-			}).Distinct().ToArray();
+			DD_Tags.Items = items.SelectMany(x => x.Tags.Select(x => x.Value)).Distinct().ToArray();
 		}).Run();
+	}
+
+	private void LC_Items_CompatibilityReportSelected(ReportSeverity obj)
+	{
+		DD_ReportSeverity.SelectedItem = (ReportSeverityFilter)(obj + 1);
+	}
+
+	private void LC_Items_DownloadStatusSelected(DownloadStatus obj)
+	{
+		DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 1);
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)
@@ -357,19 +352,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			foreach (var tag in DD_Tags.SelectedItems)
 			{
-				if (item is Asset asset)
+				if (!(item.Tags?.Any(x => x.Value == tag) ?? false))
 				{
-					if (!(item.Tags?.Any(tag) ?? false) && !asset.AssetTags.Any(tag))
-					{
-						return true;
-					}
-				}
-				else
-				{
-					if (!(item.Tags?.Any(tag) ?? false) && !item.Package.Assets.Any(x => x.AssetTags.Any(tag)))
-					{
-						return true;
-					}
+					return true;
 				}
 			}
 		}

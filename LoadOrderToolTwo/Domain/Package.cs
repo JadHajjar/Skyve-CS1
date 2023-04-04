@@ -69,10 +69,11 @@ public class Package : IPackage
 	public DownloadStatus Status { get; set; }
 	public string? StatusReason { get; set; }
 	public bool SteamInfoLoaded { get; set; }
-	public string[]? Tags { get; set; }
+	public string[]? WorkshopTags { get; set; }
 	public string? SteamDescription { get; set; }
 	public bool IsPseudoMod { get; set; }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => SetIncluded(value); }
+	public IEnumerable<TagItem> Tags => WorkshopTags?.Select(x => new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<TagItem>();
 
 	Package IPackage.Package => this;
 

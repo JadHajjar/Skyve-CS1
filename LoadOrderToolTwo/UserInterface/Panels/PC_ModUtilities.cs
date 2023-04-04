@@ -54,8 +54,8 @@ public partial class PC_ModUtilities : PanelContent
 		{
 			P_DuplicateMods.Visible = duplicates.Any();
 
-			L_OutOfDate.Text = $"{modsOutOfDate} {(modsOutOfDate.Count == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}:\r\n{modsOutOfDate.ListStrings(x => $"   • {x}", "\r\n")}";
-			L_Incomplete.Text = $"{modsIncomplete} {(modsIncomplete.Count == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}:\r\n{modsIncomplete.ListStrings(x => $"   • {x}", "\r\n")}";
+			L_OutOfDate.Text = $"{modsOutOfDate.Count} {(modsOutOfDate.Count == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}:\r\n{modsOutOfDate.ListStrings(x => $"    • {x}", "\r\n")}";
+			L_Incomplete.Text = $"{modsIncomplete.Count} {(modsIncomplete.Count == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}:\r\n{modsIncomplete.ListStrings(x => $"    • {x}", "\r\n")}";
 
 			L_OutOfDate.Visible = modsOutOfDate.Count > 0;
 			L_Incomplete.Visible = modsIncomplete.Count > 0;
