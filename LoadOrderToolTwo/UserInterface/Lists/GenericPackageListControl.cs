@@ -44,43 +44,55 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 	protected override bool IsItemActionHovered(DrawableItem<IGenericPackage> item, Point location)
 	{
 		var rects = GetActionRectangles(item.Bounds, item.Item);
+		var state = ContentUtil.GetGenericPackageState(item.Item, out var package);
 
 		if (rects.IncludedRect.Contains(location))
 		{
-			setTip(Locale.ExcludeInclude);
+			switch (state)
+			{
+				case GenericPackageState.Unsubscribed:
+					setTip(Locale.SubscribeToItem, rects.IncludedRect);
+					break;
+				case GenericPackageState.Disabled:
+					setTip(Locale.EnableDisable, rects.IncludedRect);
+					break;
+				case GenericPackageState.Enabled:
+				case GenericPackageState.Excluded:
+					setTip(Locale.ExcludeInclude, rects.IncludedRect);
+					break;
+			}
+		}
+		else if (rects.RemoveRect.Contains(location) && state > GenericPackageState.Unsubscribed)
+		{
+			setTip(Locale.UnsubscribePackage, rects.RemoveRect);
 		}
 		else if (item.Item.SteamId != 0)
 		{
 			if (rects.SteamRect.Contains(location))
 			{
-				setTip(Locale.ViewOnSteam);
-			}
-
-			else if (rects.RemoveRect.Contains(location))
-			{
-				setTip(Locale.UnsubscribePackage);
+				setTip(Locale.ViewOnSteam, rects.SteamRect);
 			}
 
 			else if (rects.SteamIdRect.Contains(location))
 			{
-				setTip(Locale.CopySteamId);
+				setTip(Locale.CopySteamId, rects.SteamIdRect);
 			}
 
 			else if (rects.AuthorRect.Contains(location))
 			{
-				setTip(Locale.OpenAuthorPage);
+				setTip(Locale.OpenAuthorPage, rects.AuthorRect);
 			}
 			else
 			{
-				setTip(item.Item.Name);
+				setTip(item.Item.Name, rects.TextRect);
 			}
 		}
 		else
 		{
-			setTip(item.Item.Name);
+			setTip(item.Item.Name, rects.TextRect);
 		}
 
-		void setTip(string? text) => SlickTip.SetTo(this, text, timeout: 20000);
+		void setTip(string? text, Rectangle rectangle) => SlickTip.SetTo(this, text, timeout: 20000, offset: new Point(rectangle.X, item.Bounds.Y));
 
 		return rects.Contain(location);
 	}

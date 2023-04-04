@@ -20,6 +20,7 @@ using LoadOrderMod.Util;
 
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -113,6 +114,18 @@ public class LoadOrderUserMod : IUserMod
 
 			LoadOrderUtil.TurnOffSteamPanels();
 
+			try
+			{
+				if (!File.Exists(Path.Combine(DataLocation.localApplicationData, Path.Combine("LoadOrderTwo", "SetupComplete.txt"))))
+				{
+					Debug.Log("Filling tool configuration");
+					PrepareTool();
+				}
+				else
+					Debug.Log("Skipping tool configuration, SetupComplete.txt was detected");
+			}
+			catch (Exception ex) { Debug.LogException(ex); }
+
 			var introLoaded = ContentManagerUtil.IsIntroLoaded;
 			if (introLoaded)
 			{
@@ -132,15 +145,6 @@ public class LoadOrderUserMod : IUserMod
 			{
 				CheckSubsUtil.RegisterEvents();
 			}
-
-			try
-			{
-				if (!File.Exists(Path.Combine(DataLocation.localApplicationData, Path.Combine("LoadOrderTwo", "SetupComplete.txt"))))
-				{
-					PrepareTool();
-				}
-			}
-			catch (Exception ex) { Debug.LogException(ex); }
 
 			SceneManager.sceneLoaded += MainMenuLoaded;
 
@@ -163,6 +167,8 @@ public class LoadOrderUserMod : IUserMod
 		{
 			PrepareFirstTimeConfig(config);
 		}
+		else
+			Debug.Warning("Tool configuration was not found in: " + config);
 	}
 
 	private void PrepareFirstTimeConfig(string configFilePath)

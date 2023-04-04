@@ -4,7 +4,6 @@ using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.StatusBubbles;
@@ -56,10 +55,30 @@ internal class AssetsBubble : StatusBubbleBase
 			return;
 		}
 
-		var assets = CentralManager.Assets.Count(x => x.IsIncluded);
-		var assetsSize = CentralManager.Assets.Where(x => x.IsIncluded).Sum(x => x.FileSize).SizeString();
+		var assets = 0;
+		var outOfDate = 0;
+		var assetsSize = 0L;
+
+		foreach (var item in CentralManager.Assets)
+		{
+			if (item.IsIncluded)
+			{
+				assets++;
+				assetsSize += item.FileSize;
+
+				if (item.Status == Domain.Enums.DownloadStatus.OutOfDate)
+				{
+					outOfDate++;
+				}
+			}
+		}
 
 		DrawValue(e, ref targetHeight, assets.ToString(), assets == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural);
-		DrawValue(e, ref targetHeight, assetsSize, Locale.TotalSize);
+		DrawValue(e, ref targetHeight, assetsSize.SizeString(), Locale.TotalSize);
+
+		if (outOfDate > 0)
+		{
+			DrawValue(e, ref targetHeight, outOfDate.ToString(), outOfDate == 1 ? Locale.AssetOutOfDate : Locale.AssetOutOfDatePlural, FormDesign.Design.YellowColor);
+		}
 	}
 }

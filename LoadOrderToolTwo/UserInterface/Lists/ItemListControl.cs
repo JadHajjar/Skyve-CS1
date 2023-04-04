@@ -22,7 +22,7 @@ namespace LoadOrderToolTwo.UserInterface.Lists;
 internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackage
 {
 	private PackageSorting sorting;
-	private Rectangle versionRect;
+	private readonly Dictionary<DrawableItem<T>, Rectangles> _itemRects=new ();
 
 	public ItemListControl()
 	{
@@ -100,7 +100,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	protected override bool IsItemActionHovered(DrawableItem<T> item, Point location)
 	{
-		var rects = GetActionRectangles(item.Bounds, item.Item, true);
+		var rects = _itemRects.TryGet(item);
 
 		if (item.Item.Package.Mod is not null)
 		{
@@ -113,6 +113,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				setTip(Locale.EnableDisable, rects.EnabledRect);
 			}
+
+			if (rects.VersionRect.Contains(location))
+			{
+				setTip(Locale.CopyVersionNumber, rects.VersionRect);
+			}
 		}
 		else
 		{
@@ -122,7 +127,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 		}
 
-		if (rects.CenterRect.Contains(location))
+		if (rects.CenterRect.Contains(location) || rects.IconRect.Contains(location))
 		{
 			setTip(Locale.OpenPackagePage, rects.CenterRect);
 		}
@@ -170,7 +175,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return;
 		}
 
-		var rects = GetActionRectangles(item.Bounds, item.Item, true);
+		var rects = _itemRects.TryGet(item);
 
 		if (item.Item.Package.Mod is Mod mod)
 		{
@@ -186,7 +191,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				return;
 			}
 
-			if (versionRect.Contains(e.Location))
+			if (rects.VersionRect.Contains(e.Location))
 			{
 				Clipboard.SetText(item.Item.Package.Mod.Version.GetString());
 			}
@@ -200,7 +205,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 		}
 
-		if (rects.CenterRect.Contains(e.Location))
+		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
 			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Item.Package));
 			ScrollTo(item.Item);
@@ -310,11 +315,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	protected override void OnPaintItem(ItemPaintEventArgs<T> e)
 	{
 		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
-		var rects = GetActionRectangles(e.ClipRectangle, e.Item, large);
+		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.ClipRectangle, e.Item, large);
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Vertical, 0, Padding.Vertical);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
-		if (isPressed && !rects.CenterRect.Contains(CursorLocation))
+		if (isPressed && !rects.CenterRect.Contains(CursorLocation) && !rects.IconRect.Contains(CursorLocation))
 		{
 			e.HoverState &= ~HoverState.Pressed;
 		}
@@ -376,11 +381,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			catch { }
 		}
 
-		e.Graphics.DrawString(e.Item.ToString().RemoveVersionText(), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : rects.CenterRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(e.Item.ToString().RemoveVersionText(), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation)||rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 		var labelX = textRect.X;
 		var versionText = e.Item.Package.Mod is Mod mod_ ? mod_.BuiltIn ? Locale.Vanilla : "v" + mod_.Version.GetString() : e.Item.FileSize.SizeString();
-		labelX = DrawLabel(e, versionText, null, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), new Rectangle(labelX, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
+		labelX = (rects.VersionRect = DrawLabel(e, versionText, null, FormDesign.Design.YellowColor, new Rectangle(labelX, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft, e.Item.Package.Mod is not null)).Right;
 
 		labelX = DrawLabel(e, CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ServerTime.If(DateTime.MinValue, e.Item.LocalTime).ToLocalTime().ToRelatedString(true, false) : e.Item.LocalTime.ToLocalTime().ToString("g"), Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
 
@@ -416,6 +421,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				{
 					e.Graphics.DrawRoundImage(authorImg, avatarRect);
 				}
+
+				rects.AuthorRect = authorRect;
 			}
 			else
 			{
@@ -470,7 +477,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<T> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+	private Rectangle DrawLabel(ItemPaintEventArgs<T> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment, bool action = false)
 	{
 		if (text == null)
 		{
@@ -488,6 +495,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		size.Width += Padding.Left;
 
 		rectangle = rectangle.Pad(Padding).Align(size, alignment);
+
+		if (action && !rectangle.Contains(CursorLocation))
+		{
+			color = color.MergeColor(FormDesign.Design.BackColor, 40);
+		}
 
 		using var backBrush = rectangle.Gradient(color);
 		using var foreBrush = new SolidBrush(color.GetTextColor());
@@ -555,20 +567,20 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	private Rectangles GetActionRectangles(Rectangle rectangle, T item, bool doubleSize)
 	{
-		var rects = new Rectangles();
+		var rects = new Rectangles() { Item = item };
 
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package.Mod is not null)
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size((int)(26 * UI.FontScale), rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(ItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
 			rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
 		}
 		else if (item is Package)
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (int)(26 * UI.FontScale * 2) : rectangle.Height, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (int)(26 * UI.FontScale * 2) : ItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
 		}
 		else
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(ItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
 		}
 
 		var buttonRectangle = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
@@ -594,18 +606,20 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
 			}
 
-			rects.CenterRect = new Rectangle(rects.IconRect.X, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height);
+			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 2);
 		}
 		else
 		{
-			rects.CenterRect = new Rectangle(rects.IconRect.X, rectangle.Y, buttonRectangle.X - rects.IconRect.X, rectangle.Height);
+			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, buttonRectangle.X - rects.IconRect.X, rectangle.Height / 2);
 		}
 
 		return rects;
 	}
 
-	struct Rectangles
+	class Rectangles
 	{
+		internal T? Item;
+
 		internal Rectangle IncludedRect;
 		internal Rectangle EnabledRect;
 		internal Rectangle FolderRect;
@@ -615,6 +629,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		internal Rectangle SteamIdRect;
 		internal Rectangle CenterRect;
 		internal Rectangle AuthorRect;
+		internal Rectangle VersionRect;
 
 		internal bool Contain(Point location)
 		{
@@ -625,6 +640,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				CenterRect.Contains(location) ||
 				SteamRect.Contains(location) ||
 				AuthorRect.Contains(location) ||
+				(VersionRect.Contains(location) && Item?.Package.Mod is not null) ||
 				SteamIdRect.Contains(location);
 		}
 	}

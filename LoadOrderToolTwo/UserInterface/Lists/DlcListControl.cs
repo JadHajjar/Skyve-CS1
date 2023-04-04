@@ -46,22 +46,22 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
         if (rects.IncludedRect.Contains(location) && SteamUtil.IsDlcInstalledLocally(item.Item.Id))
         {
-            setTip(Locale.ExcludeInclude);
+            setTip(Locale.ExcludeInclude, rects.IncludedRect);
             return true;
         }
         else if (rects.SteamRect.Contains(location))
         {
-            setTip(Locale.ViewOnSteam);
+            setTip(Locale.ViewOnSteam, rects.SteamRect);
             return true;
         }
         else
         {
-            setTip(System.Net.WebUtility.HtmlDecode(item.Item.Description));
+            setTip(System.Net.WebUtility.HtmlDecode(item.Item.Description), rects.TextRect);
         }
 
-        void setTip(string? text) => SlickTip.SetTo(this, text, timeout: 20000);
+		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, timeout: 20000, offset: new Point(rectangle.X, item.Bounds.Y));
 
-        return false;
+		return false;
     }
 
     protected override void OnItemMouseClick(DrawableItem<SteamDlc> item, MouseEventArgs e)

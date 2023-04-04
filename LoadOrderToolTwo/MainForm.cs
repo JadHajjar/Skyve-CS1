@@ -250,6 +250,11 @@ public partial class MainForm : BasePanelForm
 
 		if (CentralManager.SessionSettings.LastWindowsBounds != null)
 		{
+			if (!SystemInformation.VirtualScreen.IntersectsWith(CentralManager.SessionSettings.LastWindowsBounds.Value))
+			{
+				return;
+			}
+
 			Bounds = CentralManager.SessionSettings.LastWindowsBounds.Value;
 
 			LastUiScale = UI.UIScale;

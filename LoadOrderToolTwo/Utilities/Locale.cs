@@ -231,8 +231,12 @@ internal class Locale : LocaleHelper
 	public static string ShowingAssets => _instance.GetText(nameof(ShowingAssets));
 	public static string ShowingPackages => _instance.GetText(nameof(ShowingPackages));
 	public static string ShowingProfiles => _instance.GetText(nameof(ShowingProfiles));
-	public static string ClearFoldersPromptTitle => _instance.GetText(nameof(ShowingProfiles));
-	public static string ClearFoldersPrompt => _instance.GetText(nameof(ShowingProfiles));
+	public static string ClearFoldersPromptTitle => _instance.GetText(nameof(ClearFoldersPromptTitle));
+	public static string ClearFoldersPrompt => _instance.GetText(nameof(ClearFoldersPrompt));
 	public static string LaunchTooltip => _instance.GetText(nameof(LaunchTooltip));
 	public static string AreYouSure => _instance.GetText(nameof(AreYouSure));
+	public static string AssetOutOfDate => _instance.GetText(nameof(AssetOutOfDate));
+	public static string AssetOutOfDatePlural => _instance.GetText(nameof(AssetOutOfDatePlural));
+	public static string CopyVersionNumber => _instance.GetText(nameof(CopyVersionNumber));
+	public static string? SubscribeToItem => _instance.GetText(nameof(SubscribeToItem));
 }

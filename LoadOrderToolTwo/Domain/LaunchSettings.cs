@@ -1,4 +1,6 @@
-﻿namespace LoadOrderToolTwo.Domain;
+﻿using Newtonsoft.Json;
+
+namespace LoadOrderToolTwo.Domain;
 public class LaunchSettings
 {
 	public bool UseCitiesExe { get; set; }
@@ -11,8 +13,8 @@ public class LaunchSettings
 	public bool LHT { get; set; }
 	public string? SaveToLoad { get; set; }
 	public bool LoadSaveGame { get; set; }
-	public bool DevUi { get; internal set; }
-	public bool RefreshWorkshop { get; internal set; }
-	public string? MapToLoad { get; internal set; }
-	public bool StartNewGame { get; internal set; }
+	public bool DevUi { get; set; }
+	public string? MapToLoad { get; set; }
+	public bool StartNewGame { get; set; }
+	[JsonIgnore] public bool RefreshWorkshop { get; set; }
 }
