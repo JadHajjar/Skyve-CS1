@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LoadOrderToolTwo.Domain.Enums;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +9,8 @@ using System.Threading.Tasks;
 namespace LoadOrderToolTwo.Domain;
 internal class UserSettings
 {
-	public bool LinkModAssets { get; set; } = true;
+    public PackageSorting PackageSorting { get; set; }
+    public bool LinkModAssets { get; set; } = true;
 	public bool LargeItemOnHover { get; set; }
 	public bool ShowDatesRelatively { get; set; } = true;
 	public bool AdvancedIncludeEnable { get; set; }

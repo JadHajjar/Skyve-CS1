@@ -123,7 +123,7 @@ public partial class PC_ModUtilities : PanelContent
 	private void B_ReDownload_Click(object sender, EventArgs e)
 	{
 		B_ReDownload.Loading = true;
-		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).Select(x => x.SteamId).ToArray());
+		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).ToArray());
 	}
 
 	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

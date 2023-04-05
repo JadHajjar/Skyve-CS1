@@ -221,11 +221,11 @@ public partial class PC_Profiles : PanelContent
 		L_CurrentProfile.Visible = false;
 		TB_Name.Text = L_CurrentProfile.Text;
 
-		BeginInvoke(new Action(() =>
+		this.TryBeginInvoke(() =>
 		{
 			TB_Name.Focus();
 			TB_Name.SelectAll();
-		}));
+		});
 	}
 
 	private void NewProfile_Click(object sender, EventArgs e)

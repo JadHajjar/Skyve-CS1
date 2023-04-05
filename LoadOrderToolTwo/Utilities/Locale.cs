@@ -242,4 +242,9 @@ internal class Locale : LocaleHelper
 	public static string MultipleLOM => _instance.GetText(nameof(MultipleLOM));
 	public static string FilterByThisReportStatus => _instance.GetText(nameof(FilterByThisReportStatus));
 	public static string FilterByThisPackageStatus => _instance.GetText(nameof(FilterByThisPackageStatus));
+	public static string FilterSinceThisDate => _instance.GetText(nameof(FilterSinceThisDate));
+	public static string FilterByThisTag => _instance.GetText(nameof(FilterByThisTag));
+	public static string ItemsShouldNotBeSubscribedInfo => _instance.GetText(nameof(ItemsShouldNotBeSubscribedInfo));
+	public static string WouldYouLikeToSkipThose => _instance.GetText(nameof(WouldYouLikeToSkipThose));
+	public static string LOTWillRestart => _instance.GetText(nameof(LOTWillRestart));
 }

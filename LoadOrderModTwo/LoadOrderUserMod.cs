@@ -313,7 +313,7 @@ public class LoadOrderUserMod : IUserMod
 		{
 			if (openTools)
 			{
-				File.WriteAllText(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"), "It's time to wake up");
+				File.WriteAllBytes(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"), new byte[0]);
 			}
 			else if (File.Exists(toolPath))
 			{

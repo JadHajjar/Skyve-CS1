@@ -7,6 +7,8 @@ using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
+using SlickControls;
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,6 +18,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Utilities;
 
@@ -262,6 +265,19 @@ public static class SteamUtil
 		catch (Exception ex) { Log.Exception(ex, "Failed to get the steam information for appid " + steamId); }
 
 		return new();
+	}
+
+	public static void ReDownload(params IPackage[] packages)
+	{
+		if (packages.Any(x => x.Folder.PathEquals(Path.GetDirectoryName(LocationManager.CurrentDirectory))))
+		{
+			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, Program.MainForm) == DialogResult.Cancel)
+				return;
+
+			IOUtil.WaitForUpdate();
+		}
+
+		ReDownload(packages.Select(x => x.SteamId).ToArray());
 	}
 
 	public static void ReDownload(params ulong[] ids)

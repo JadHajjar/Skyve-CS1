@@ -26,6 +26,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	public event Action<ReportSeverity>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
+	public event Action<DateTime>? DateSelected;
+	public event Action<string>? TagSelected;
 
 	public ItemListControl()
 	{
@@ -150,6 +152,20 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			setTip(Locale.FilterByThisPackageStatus, rects.DownloadStatusRect);
 		}
 
+		if (rects.DateRect.Contains(location))
+		{
+			var date = item.Item.ServerTime.If(DateTime.MinValue, item.Item.LocalTime).ToLocalTime();
+			setTip(Locale.FilterSinceThisDate, rects.DateRect);
+		}
+
+		foreach (var tag in rects.TagRects)
+		{
+			if (tag.Value.Contains(location))
+			{
+				setTip(string.Format(Locale.FilterByThisTag, tag.Key), tag.Value);
+			}
+		}
+
 		if (item.Item.Workshop)
 		{
 			if (rects.SteamRect.Contains(location))
@@ -243,6 +259,22 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return;
 		}
 
+		if (rects.DateRect.Contains(e.Location))
+		{
+			var date = item.Item.ServerTime.If(DateTime.MinValue, item.Item.LocalTime).ToLocalTime();
+			DateSelected?.Invoke(date);
+			return;
+		}
+
+		foreach (var tag in rects.TagRects)
+		{
+			if (tag.Value.Contains(e.Location))
+			{
+				TagSelected?.Invoke(tag.Key);
+				return;
+			}
+		}
+
 		if (item.Item.Workshop)
 		{
 			if (rects.SteamRect.Contains(e.Location))
@@ -268,9 +300,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	private void ShowRightClickMenu(T item)
 	{
 		var isPackageIncluded = item.Package.IsIncluded;
-
-		SlickToolStrip.Show(Program.MainForm
-			, new SlickStripItem(Locale.IncludeAllItemsInThisPackage, () => { item.Package.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, !isPackageIncluded)
+		var items = new[]
+		{
+			  new SlickStripItem(Locale.IncludeAllItemsInThisPackage, () => { item.Package.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, !isPackageIncluded)
 			, new SlickStripItem(Locale.ExcludeAllItemsInThisPackage, () => { item.Package.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, isPackageIncluded)
 			, new SlickStripItem(Locale.ReDownloadPackage, () => Redownload(item), Properties.Resources.I_ReDownload_16)
 			, new SlickStripItem(Locale.MovePackageToLocalFolder, () => ContentUtil.MoveToLocalFolder(item), Properties.Resources.I_Local_16, item.Workshop)
@@ -282,12 +314,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			, new SlickStripItem(Locale.CopyAuthorLink, () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
 			, new SlickStripItem(Locale.CopyAuthorId, () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
 			, new SlickStripItem(Locale.CopyAuthorSteamId, () => Clipboard.SetText(item.Author?.SteamId), null, !string.IsNullOrWhiteSpace(item.Author?.SteamId), tab: 1)
-			);
+		};
+
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 	}
 
 	private void Redownload(T item)
 	{
-		SteamUtil.ReDownload(item.SteamId);
+		SteamUtil.ReDownload(item);
 	}
 
 	private void OpenSteamLink(string? url)
@@ -365,7 +399,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		var date = e.Item.ServerTime.If(DateTime.MinValue, e.Item.LocalTime).ToLocalTime();
 		var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-		labelRect.X += Padding.Left + DrawLabel(e, dateText, Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft).Width;
+		rects.DateRect = DrawLabel(e, dateText, Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft);
+		labelRect.X += Padding.Left + rects.DateRect.Width;
 
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
 		if (!string.IsNullOrEmpty(text))
@@ -406,7 +441,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			using var tagIcon = item.Source switch { TagSource.Workshop => Properties.Resources.I_Steam_16, TagSource.FindIt => Properties.Resources.I_Search_16, _ => null };
 
-			labelRect.X += Padding.Left + DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft).Width;
+			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft);
+
+			rects.TagRects[item.Value] = tagRect;
+
+			labelRect.X += Padding.Left + tagRect.Width;
 		}
 
 		DrawButtons(e, rects, isPressed);
@@ -668,10 +707,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		return rects;
 	}
 
-	class Rectangles
+	private class Rectangles
 	{
 		internal T? Item;
 
+		internal Dictionary<string, Rectangle> TagRects = new();
 		internal Rectangle IncludedRect;
 		internal Rectangle EnabledRect;
 		internal Rectangle FolderRect;
@@ -684,6 +724,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		internal Rectangle VersionRect;
 		internal Rectangle CompatibilityRect;
 		internal Rectangle DownloadStatusRect;
+		internal Rectangle DateRect;
 
 		internal bool Contain(Point location)
 		{
@@ -697,7 +738,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				IconRect.Contains(location) ||
 				DownloadStatusRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
+				DateRect.Contains(location) ||
 				(VersionRect.Contains(location) && Item?.Package.Mod is not null) ||
+				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}
 	}

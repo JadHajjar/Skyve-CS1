@@ -18,6 +18,12 @@ internal class ModLogicManager
 
 	private static readonly ModCollection _modCollection = new();
 
+	internal static readonly ulong[] BlackList = new ulong[]
+	{
+		2620852727,
+		2448824112,
+	};
+
 	internal static void Analyze(Mod mod)
 	{
 		if (mod.SteamId == CompatibilityReport_STEAM_ID)
@@ -109,5 +115,10 @@ internal class ModLogicManager
 	internal static bool AreMultipleLOMsPresent()
 	{
 		return (_modCollection.GetCollection(LOM1_ASSEMBLY)?.Count ?? 0) + (_modCollection.GetCollection(LOM_ASSEMBLY)?.Count ?? 0) > 1;
+	}
+
+	internal static bool IsBlackListed(ulong steamId)
+	{
+		return BlackList.Contains(steamId);
 	}
 }

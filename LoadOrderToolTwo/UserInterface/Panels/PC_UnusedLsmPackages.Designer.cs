@@ -38,8 +38,9 @@ partial class PC_UnusedLsmPackages
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
-			this.B_IncludeAll = new SlickControls.SlickButton();
+			this.B_ExcludeAll = new SlickControls.SlickButton();
 			this.LC_Items = new LoadOrderToolTwo.UserInterface.Lists.GenericPackageListControl();
+			this.B_IncludeAll = new SlickControls.SlickButton();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -50,7 +51,7 @@ partial class PC_UnusedLsmPackages
 			// slickSpacer1
 			// 
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 152);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 175);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(783, 2);
@@ -95,28 +96,31 @@ partial class PC_UnusedLsmPackages
 			this.tableLayoutPanel2.ColumnCount = 2;
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel2.Controls.Add(this.L_Counts, 1, 2);
+			this.tableLayoutPanel2.Controls.Add(this.B_IncludeAll, 0, 2);
+			this.tableLayoutPanel2.Controls.Add(this.L_Counts, 1, 3);
 			this.tableLayoutPanel2.Controls.Add(this.DD_Tags, 0, 1);
 			this.tableLayoutPanel2.Controls.Add(this.TB_Search, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.B_SubscribeAll, 1, 0);
-			this.tableLayoutPanel2.Controls.Add(this.B_IncludeAll, 1, 1);
+			this.tableLayoutPanel2.Controls.Add(this.B_ExcludeAll, 1, 1);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 30);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			this.tableLayoutPanel2.RowCount = 3;
+			this.tableLayoutPanel2.RowCount = 4;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 122);
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 145);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
 			// L_Counts
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(728, 101);
+			this.L_Counts.Location = new System.Drawing.Point(725, 122);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(52, 21);
+			this.L_Counts.Size = new System.Drawing.Size(55, 23);
 			this.L_Counts.TabIndex = 4;
 			this.L_Counts.Text = "label1";
 			this.L_Counts.UseMnemonic = false;
@@ -129,23 +133,23 @@ partial class PC_UnusedLsmPackages
 			this.DD_Tags.Margin = new System.Windows.Forms.Padding(7);
 			this.DD_Tags.Name = "DD_Tags";
 			this.DD_Tags.Padding = new System.Windows.Forms.Padding(7);
-			this.tableLayoutPanel2.SetRowSpan(this.DD_Tags, 2);
-			this.DD_Tags.Size = new System.Drawing.Size(212, 58);
+			this.tableLayoutPanel2.SetRowSpan(this.DD_Tags, 3);
+			this.DD_Tags.Size = new System.Drawing.Size(212, 60);
 			this.DD_Tags.TabIndex = 3;
 			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.OT_Workshop_SelectedValueChanged);
 			// 
-			// B_IncludeAll
+			// B_ExcludeAll
 			// 
-			this.B_IncludeAll.ColorShade = null;
-			this.B_IncludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_IncludeAll.Location = new System.Drawing.Point(425, 53);
-			this.B_IncludeAll.Name = "B_IncludeAll";
-			this.B_IncludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-			this.B_IncludeAll.Size = new System.Drawing.Size(343, 30);
-			this.B_IncludeAll.SpaceTriggersClick = true;
-			this.B_IncludeAll.TabIndex = 2;
-			this.B_IncludeAll.Text = "ExcludeAllButton";
-			this.B_IncludeAll.Click += new System.EventHandler(this.B_IncludeAll_Click);
+			this.B_ExcludeAll.ColorShade = null;
+			this.B_ExcludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ExcludeAll.Location = new System.Drawing.Point(425, 53);
+			this.B_ExcludeAll.Name = "B_ExcludeAll";
+			this.B_ExcludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+			this.B_ExcludeAll.Size = new System.Drawing.Size(343, 30);
+			this.B_ExcludeAll.SpaceTriggersClick = true;
+			this.B_ExcludeAll.TabIndex = 2;
+			this.B_ExcludeAll.Text = "ExcludeAllButton";
+			this.B_ExcludeAll.Click += new System.EventHandler(this.B_ExcludeAll_Click);
 			// 
 			// LC_Items
 			// 
@@ -153,11 +157,24 @@ partial class PC_UnusedLsmPackages
 			this.LC_Items.AutoScroll = true;
 			this.LC_Items.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.LC_Items.HighlightOnHover = true;
-			this.LC_Items.Location = new System.Drawing.Point(0, 154);
+			this.LC_Items.Location = new System.Drawing.Point(0, 177);
 			this.LC_Items.Name = "LC_Items";
 			this.LC_Items.SeparateWithLines = true;
-			this.LC_Items.Size = new System.Drawing.Size(783, 284);
+			this.LC_Items.Size = new System.Drawing.Size(783, 261);
 			this.LC_Items.TabIndex = 18;
+			// 
+			// B_IncludeAll
+			// 
+			this.B_IncludeAll.ColorShade = null;
+			this.B_IncludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_IncludeAll.Location = new System.Drawing.Point(425, 89);
+			this.B_IncludeAll.Name = "B_IncludeAll";
+			this.B_IncludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+			this.B_IncludeAll.Size = new System.Drawing.Size(343, 30);
+			this.B_IncludeAll.SpaceTriggersClick = true;
+			this.B_IncludeAll.TabIndex = 5;
+			this.B_IncludeAll.Text = "IncludeAllButton";
+			this.B_IncludeAll.Click += new System.EventHandler(this.B_IncludeAll_Click);
 			// 
 			// PC_UnusedLsmPackages
 			// 
@@ -186,7 +203,8 @@ partial class PC_UnusedLsmPackages
 	private SlickControls.SlickTextBox TB_Search;
 	private SlickControls.SlickButton B_SubscribeAll;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-	private SlickControls.SlickButton B_IncludeAll;
+	private SlickControls.SlickButton B_ExcludeAll;
 	private Dropdowns.TagsDropDown DD_Tags;
 	private System.Windows.Forms.Label L_Counts;
+	private SlickControls.SlickButton B_IncludeAll;
 }

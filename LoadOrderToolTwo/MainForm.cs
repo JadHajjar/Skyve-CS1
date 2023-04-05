@@ -60,6 +60,20 @@ public partial class MainForm : BasePanelForm
 		isGameRunning = CitiesManager.IsRunning();
 
 		_startTimeoutTimer.Elapsed += StartTimeoutTimer_Elapsed;
+
+		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
+
+		if (File.Exists(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "batch.bat")))
+		{
+			try
+			{ ExtensionClass.DeleteFile(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "batch.bat")); }
+			catch { }
+		}
+	}
+
+	private void ConnectionHandler_ConnectionChanged(ConnectionState newState)
+	{
+		base_PB_Icon.Invalidate();
 	}
 
 	private void StartTimeoutTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -136,10 +150,10 @@ public partial class MainForm : BasePanelForm
 			return;
 		}
 
+		ExtensionClass.DeleteFile(Path.Combine(LocationManager.CurrentDirectory, "Wake"));
+
 		if (isGameRunning)
 		{
-			ExtensionClass.DeleteFile(Path.Combine(LocationManager.CurrentDirectory, "Wake"));
-
 			SendKeys.SendWait("%{TAB}");
 		}
 
@@ -264,6 +278,7 @@ public partial class MainForm : BasePanelForm
 
 		if (CentralManager.SessionSettings.WindowWasMaximized)
 		{
+			WindowState = FormWindowState.Minimized;
 			WindowState = FormWindowState.Maximized;
 		}
 	}

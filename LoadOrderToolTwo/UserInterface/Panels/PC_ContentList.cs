@@ -43,6 +43,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
 		LC_Items.DownloadStatusSelected += LC_Items_DownloadStatusSelected;
 		LC_Items.CompatibilityReportSelected += LC_Items_CompatibilityReportSelected;
+		LC_Items.DateSelected += LC_Items_DateSelected;
+		LC_Items.TagSelected += LC_Items_TagSelected;
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -78,14 +80,36 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}).Run();
 	}
 
+	private void LC_Items_TagSelected(string obj)
+	{
+		DD_Tags.Select(obj);
+
+		if (P_FiltersContainer.Height == 0)
+			B_Filters_Click(this, EventArgs.Empty);
+	}
+
+	private void LC_Items_DateSelected(DateTime obj)
+	{
+		DR_ServerTime.SetValue(DateRangeType.After, obj);
+
+		if (P_FiltersContainer.Height == 0)
+			B_Filters_Click(this, EventArgs.Empty);
+	}
+
 	private void LC_Items_CompatibilityReportSelected(ReportSeverity obj)
 	{
 		DD_ReportSeverity.SelectedItem = (ReportSeverityFilter)(obj + 1);
+
+		if (P_FiltersContainer.Height == 0)
+			B_Filters_Click(this, EventArgs.Empty);
 	}
 
 	private void LC_Items_DownloadStatusSelected(DownloadStatus obj)
 	{
 		DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 1);
+
+		if (P_FiltersContainer.Height == 0)
+			B_Filters_Click(this, EventArgs.Empty);
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)
@@ -119,8 +143,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_ReportSeverity.Text = Locale.ReportSeverity;
 		DD_Tags.Text = Locale.Tags;
 		DD_Profile.Text = Locale.Profiles;
-		slickDateRange1.Text = Locale.DateSubscribed;
-		slickDateRange2.Text = Locale.DateUpdated;
+		DR_SubscribeTime.Text = Locale.DateSubscribed;
+		DR_ServerTime.Text = Locale.DateUpdated;
 	}
 
 	protected override void OnCreateControl()
@@ -164,7 +188,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin
 			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
 			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin
-			= B_Actions.Margin = slickDateRange1.Margin = slickDateRange2.Margin 
+			= B_Actions.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin 
 			= B_Refresh.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_Filters.Image = P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Filter));
 		B_Actions.Image = P_Actions.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Actions));
@@ -230,6 +254,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
+		CentralManager.SessionSettings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
+		CentralManager.SessionSettings.Save();
+
 		LC_Items.SetSorting(DD_Sorting.SelectedItem);
 	}
 
@@ -338,12 +365,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (!slickDateRange1.Match(item.LocalTime))
+		if (!DR_SubscribeTime.Match(item.SubscribeTime.ToLocalTime()))
 		{
 			return true;
 		}
 
-		if (!slickDateRange2.Match(item.ServerTime))
+		if (!DR_ServerTime.Match(item.ServerTime.ToLocalTime()))
 		{
 			return true;
 		}
@@ -386,7 +413,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
 		{
-			if (!(TB_Search.Text.SearchCheck(item.ToString()) || TB_Search.Text.SearchCheck(item.Author?.Name) || TB_Search.Text.SearchCheck(item.SteamId.ToString())))
+			if (!(TB_Search.Text.SearchCheck(item.ToString()) 
+				|| TB_Search.Text.SearchCheck(item.Author?.Name) 
+				|| item.SteamId.ToString().Contains(TB_Search.Text)))
 			{
 				return true;
 			}

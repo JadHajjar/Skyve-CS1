@@ -79,7 +79,7 @@ public partial class PC_PackagePage : PanelContent
 
 	private void B_Redownload_Click(object sender, EventArgs e)
 	{
-		SteamUtil.ReDownload(Package.SteamId);
+		SteamUtil.ReDownload(Package);
 	}
 
 	private void B_SteamPage_Click(object sender, EventArgs e)

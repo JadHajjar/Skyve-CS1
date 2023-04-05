@@ -19,7 +19,8 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
         if (Live)
         {
             Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => x != PackageSorting.Mod).ToArray();
-        }
+			selectedItem = CentralManager.SessionSettings.UserSettings.PackageSorting;
+		}
     }
 
     protected override void UIChanged()
@@ -32,6 +33,11 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 	protected override bool SearchMatch(string searchText, PackageSorting item)
 	{
 		return searchText.SearchCheck(LocaleHelper.GetGlobalText($"Sorting_{item}"));
+	}
+
+	public override void ResetValue()
+	{
+
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageSorting item)

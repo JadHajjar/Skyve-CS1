@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -28,6 +29,12 @@ public partial class PC_ImportCollection : PanelContent
 		PB_Icon.LoadImage(collection.PreviewURL, ImageManager.GetImage);
 
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
+
+		foreach (var item in ModLogicManager.BlackList)
+		{
+			if (contents.ContainsKey(item))
+				contents.Remove(item);
+		}
 
 		LC_Items.SetItems(contents.Values);
 

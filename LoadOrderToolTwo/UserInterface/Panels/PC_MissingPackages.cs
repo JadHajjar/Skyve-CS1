@@ -1,4 +1,6 @@
-﻿using Extensions;
+﻿using CompatibilityReport.CatalogData;
+
+using Extensions;
 
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
@@ -29,6 +31,11 @@ public partial class PC_MissingPackages : PanelContent
 		{
 			if (package.Key != 0)
 			{
+				if (ModLogicManager.IsBlackListed(package.Key))
+				{
+					continue;
+				}
+
 				LC_Items.Add(package.Last());
 				_workshopPackages[package.Key] = package.Last();
 			}
@@ -192,6 +199,31 @@ public partial class PC_MissingPackages : PanelContent
 
 	private async void B_SteamPage_Click(object sender, EventArgs e)
 	{
+		var removeBadPackages = false;
+		var steamIds = LC_Items.FilteredItems.ToList(x => x.SteamId);
+
+		steamIds.Remove(0);
+
+		foreach (var item in steamIds.ToList())
+		{
+			var report = CompatibilityManager.GetCompatibilityReport(item);
+
+			if (report?.Severity == Enums.ReportSeverity.Unsubscribe)
+			{
+				if (!removeBadPackages && ShowPrompt(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand) == DialogResult.No)
+				{
+					break;
+				}
+				else
+				{
+					removeBadPackages = true;
+				}
+
+				steamIds.Remove(item);
+				LC_Items.RemoveAll(x => x.SteamId == item);
+			}
+		}
+
 		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), false);
 	}
 

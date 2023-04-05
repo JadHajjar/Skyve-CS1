@@ -55,11 +55,11 @@ partial class PC_ContentList<T>
 			this.I_ClearFilters = new SlickControls.SlickIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-			this.slickDateRange1 = new SlickControls.SlickDateRange();
+			this.DR_SubscribeTime = new SlickControls.SlickDateRange();
 			this.OT_Workshop = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.OT_Included = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.OT_Enabled = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
-			this.slickDateRange2 = new SlickControls.SlickDateRange();
+			this.DR_ServerTime = new SlickControls.SlickDateRange();
 			this.DD_PackageStatus = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageStatusDropDown();
 			this.DD_ReportSeverity = new LoadOrderToolTwo.UserInterface.Dropdowns.ReportSeverityDropDown();
 			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
@@ -383,11 +383,11 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel4, 4);
 			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel4.Controls.Add(this.slickDateRange1, 1, 0);
+			this.tableLayoutPanel4.Controls.Add(this.DR_SubscribeTime, 1, 0);
 			this.tableLayoutPanel4.Controls.Add(this.OT_Workshop, 0, 2);
 			this.tableLayoutPanel4.Controls.Add(this.OT_Included, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.OT_Enabled, 0, 1);
-			this.tableLayoutPanel4.Controls.Add(this.slickDateRange2, 1, 2);
+			this.tableLayoutPanel4.Controls.Add(this.DR_ServerTime, 1, 2);
 			this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -402,15 +402,15 @@ partial class PC_ContentList<T>
 			// 
 			// slickDateRange1
 			// 
-			this.slickDateRange1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.DR_SubscribeTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.slickDateRange1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.slickDateRange1.Location = new System.Drawing.Point(443, 3);
-			this.slickDateRange1.Name = "slickDateRange1";
-			this.slickDateRange1.Size = new System.Drawing.Size(435, 40);
-			this.slickDateRange1.TabIndex = 14;
-			this.slickDateRange1.RangeChanged += new System.EventHandler(this.FilterChanged);
+			this.DR_SubscribeTime.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DR_SubscribeTime.Location = new System.Drawing.Point(443, 3);
+			this.DR_SubscribeTime.Name = "slickDateRange1";
+			this.DR_SubscribeTime.Size = new System.Drawing.Size(435, 40);
+			this.DR_SubscribeTime.TabIndex = 14;
+			this.DR_SubscribeTime.RangeChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// OT_Workshop
 			// 
@@ -461,16 +461,16 @@ partial class PC_ContentList<T>
 			// 
 			// slickDateRange2
 			// 
-			this.slickDateRange2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.DR_ServerTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.slickDateRange2.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.slickDateRange2.Location = new System.Drawing.Point(443, 95);
-			this.slickDateRange2.Name = "slickDateRange2";
-			this.tableLayoutPanel4.SetRowSpan(this.slickDateRange2, 2);
-			this.slickDateRange2.Size = new System.Drawing.Size(435, 40);
-			this.slickDateRange2.TabIndex = 14;
-			this.slickDateRange2.RangeChanged += new System.EventHandler(this.FilterChanged);
+			this.DR_ServerTime.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DR_ServerTime.Location = new System.Drawing.Point(443, 95);
+			this.DR_ServerTime.Name = "slickDateRange2";
+			this.tableLayoutPanel4.SetRowSpan(this.DR_ServerTime, 2);
+			this.DR_ServerTime.Size = new System.Drawing.Size(435, 40);
+			this.DR_ServerTime.TabIndex = 14;
+			this.DR_ServerTime.RangeChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// DD_PackageStatus
 			// 
@@ -618,6 +618,6 @@ partial class PC_ContentList<T>
 	private TagsDropDown DD_Tags;
 	private ProfilesDropDown DD_Profile;
 	private SlickControls.SlickButton B_Refresh;
-	private SlickControls.SlickDateRange slickDateRange1;
-	private SlickControls.SlickDateRange slickDateRange2;
+	private SlickControls.SlickDateRange DR_SubscribeTime;
+	private SlickControls.SlickDateRange DR_ServerTime;
 }
