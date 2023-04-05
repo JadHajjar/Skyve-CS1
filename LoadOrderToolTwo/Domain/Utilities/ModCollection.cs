@@ -1,12 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace LoadOrderToolTwo.Domain.Utilities;
 internal class ModCollection
 {
 	private readonly Dictionary<string, List<Mod>> _modList = new();
+	private readonly Dictionary<string, CollectionInfo> _collectionList;
 
-	public void AddMod(Mod mod)
+	public ModCollection(Dictionary<string, CollectionInfo> collectionList)
+	{
+		_collectionList = collectionList;
+	}
+
+    public void AddMod(Mod mod)
 	{
 		var key = Path.GetFileName(mod.FileName);
 
@@ -30,22 +37,41 @@ internal class ModCollection
 		}
 	}
 
-	internal List<Mod>? GetCollection(Mod mod)
+	internal List<Mod>? GetCollection(Mod mod, out CollectionInfo? collection)
 	{
 		var key = Path.GetFileName(mod.FileName);
 
-		return GetCollection(key);
+		return GetCollection(key, out collection);
 	}
 
-	internal List<Mod>? GetCollection(string key)
+	internal List<Mod>? GetCollection(string key, out CollectionInfo? collection)
 	{
 		if (_modList.ContainsKey(key))
 		{
+			collection = _collectionList[key];
+
 			return _modList[key];
 		}
 
+		collection = null;
 		return null;
 	}
 
+	internal void CheckAndAdd(Mod mod)
+	{
+		var fileName = Path.GetFileName(mod.FileName);
+
+		if (_collectionList.ContainsKey(fileName))
+		{
+			AddMod(mod);
+		}
+	}
+
 	internal IEnumerable<List<Mod>> Collections => _modList.Values;
+}
+
+internal class CollectionInfo
+{
+    public bool Required { get; set; }
+    public bool Forbidden { get; set; }
 }

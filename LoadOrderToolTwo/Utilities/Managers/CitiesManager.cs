@@ -213,6 +213,14 @@ public static class CitiesManager
 			return false;
 		}
 
+		if (!CentralManager.SessionSettings.SubscribeInfoShown)
+		{
+			MessagePrompt.Show(Locale.SubscribingRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
+			
+			CentralManager.SessionSettings.SubscribeInfoShown = true;
+			CentralManager.SessionSettings.Save();
+		}
+
 		if (unsub)
 		{
 			ContentUtil.DeleteAll(ids);
@@ -223,8 +231,6 @@ public static class CitiesManager
 		var command = unsub ?
 			$"-applaunch 255710 -unsubscribe" :
 			$"-applaunch 255710 -subscribe";
-
-		Program.MainForm!.TryInvoke(() => Program.MainForm!.TopMost = true);
 
 		IOUtil.Execute(LocationManager.SteamPath, LocationManager.SteamExe, command);
 
@@ -254,7 +260,7 @@ public static class CitiesManager
 	{
 		try
 		{
-			return Process.GetProcessesByName("Cities").Length > 0;
+			return LocationManager.Platform is Platform.Windows && Process.GetProcessesByName("Cities").Length > 0;
 		}
 		catch { return false; }
 	}

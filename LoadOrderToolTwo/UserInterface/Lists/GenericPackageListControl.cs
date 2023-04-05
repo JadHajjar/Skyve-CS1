@@ -23,6 +23,8 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 
 	public GenericPackageListControl()
 	{
+		DoubleSizeOnHover = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 	}
@@ -238,7 +240,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 			e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 
-		e.Graphics.DrawString(e.Item.Name?.RemoveVersionText(), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(e.Item.Name?.RemoveVersionText(out _), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 		var labelX = textRect.X;
 		var versionText = e.Item.IsMod ? e.Item.Name?.GetVersionText() : string.Empty;
@@ -278,7 +280,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 		{
 			foreach (var item in e.Item.Tags.OrderBy(x => x))
 			{
-				labelX = DrawLabel(e, item, null, FormDesign.Design.ButtonColor, new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
+				labelX = DrawLabel(e, item, Properties.Resources.I_Tag_16, FormDesign.Design.ButtonColor, new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
 			}
 		}
 
@@ -328,7 +330,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 		var iconSize = rectangle.Height - Padding.Vertical;
 		var rects = new Rectangles
 		{
-			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height, rectangle.Height), ContentAlignment.MiddleLeft),
+			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(ItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft),
 			SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 

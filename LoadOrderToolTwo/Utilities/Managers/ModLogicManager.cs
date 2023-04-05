@@ -4,6 +4,7 @@ using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -16,7 +17,18 @@ internal class ModLogicManager
 	private const string LOM_ASSEMBLY = "LoadOrderModTwo.dll";
 	private const string LOM1_ASSEMBLY = "LoadOrderMod.dll";
 
-	private static readonly ModCollection _modCollection = new();
+	private static readonly ModCollection _modCollection = new(GetGroupInfo());
+
+	private static Dictionary<string, CollectionInfo> GetGroupInfo()
+	{
+		return new()
+		{
+			[HARMONY_ASSEMBLY] = new() { Required = true },
+			[PATCH_ASSEMBLY] = new() { Required = true },
+			[LOM_ASSEMBLY] = new() { Required = true },
+			[LOM1_ASSEMBLY] = new() { Required = false },
+		};
+	}
 
 	internal static readonly ulong[] BlackList = new ulong[]
 	{
@@ -31,14 +43,7 @@ internal class ModLogicManager
 			CompatibilityManager.LoadCompatibilityReport(mod.Package);
 		}
 
-		switch (Path.GetFileName(mod.FileName))
-		{
-			case HARMONY_ASSEMBLY:
-			case PATCH_ASSEMBLY:
-			case LOM_ASSEMBLY:
-				_modCollection.AddMod(mod);
-				break;
-		}
+		_modCollection.CheckAndAdd(mod);
 
 		if (IsForbidden(mod))
 		{
@@ -60,9 +65,9 @@ internal class ModLogicManager
 
 	internal static bool IsRequired(Mod mod)
 	{
-		var list = _modCollection.GetCollection(mod);
+		var list = _modCollection.GetCollection(mod, out var collection);
 
-		if (list is null)
+		if (!(collection?.Required ?? false) || list is null)
 		{
 			return false;
 		}
@@ -80,11 +85,14 @@ internal class ModLogicManager
 
 	internal static bool IsForbidden(Mod mod)
 	{
-		return Path.GetFileName(mod.FileName) switch
+		var list = _modCollection.GetCollection(mod, out var collection);
+
+		if (!(collection?.Forbidden ?? false) || list is null)
 		{
-			LOM1_ASSEMBLY => true,
-			_ => false,
-		};
+			return false;
+		}
+
+		return true;
 	}
 
 	internal static void ModRemoved(Mod mod)
@@ -114,7 +122,7 @@ internal class ModLogicManager
 
 	internal static bool AreMultipleLOMsPresent()
 	{
-		return (_modCollection.GetCollection(LOM1_ASSEMBLY)?.Count ?? 0) + (_modCollection.GetCollection(LOM_ASSEMBLY)?.Count ?? 0) > 1;
+		return (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM_ASSEMBLY, out _)?.Count ?? 0) > 1;
 	}
 
 	internal static bool IsBlackListed(ulong steamId)

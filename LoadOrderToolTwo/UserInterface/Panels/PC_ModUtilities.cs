@@ -21,7 +21,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	public PC_ModUtilities()
 	{
-		LC_Duplicates = new ItemListControl<Mod>() { Dock = DockStyle.Top };
+		LC_Duplicates = new ItemListControl<Mod>() { Dock = DockStyle.Top, DoubleSizeOnHover = false };
 		InitializeComponent();
 
 		P_DuplicateMods.Controls.Add(LC_Duplicates);

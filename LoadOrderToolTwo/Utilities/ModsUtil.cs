@@ -293,10 +293,24 @@ internal static class ModsUtil
 		return CentralManager.Mods.FirstOrDefault(x => x.SteamId == steamID);
 	}
 
-	internal static string RemoveVersionText(this string name)
+	internal static string RemoveVersionText(this string name, out List<string> tags)
 	{
-		return Regex.Replace(name, @"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*", x => string.Empty, RegexOptions.IgnoreCase)
-			.RemoveDoubleSpaces();
+		var text = name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
+		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
+
+		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces();
+
+		tags = new();
+
+		foreach (Match match in tagMatches)
+		{
+			var tagText = match.Groups[1].Value.Trim();
+
+			if (!tags.Contains(tagText))
+				tags.Add(tagText);
+		}
+
+		return text;
 	}
 
 	internal static string GetVersionText(this string name)

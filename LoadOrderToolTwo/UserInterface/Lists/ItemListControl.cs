@@ -41,6 +41,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 			CentralManager.ContentLoaded += () => Loading = false;
 		}
+
+		sorting = CentralManager.SessionSettings.UserSettings.PackageSorting;
 	}
 
 	public IEnumerable<T> FilteredItems => SafeGetItems().Select(x => x.Item);
@@ -439,7 +441,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		foreach (var item in e.Item.Tags.Distinct(x => x.Value))
 		{
-			using var tagIcon = item.Source switch { TagSource.Workshop => Properties.Resources.I_Steam_16, TagSource.FindIt => Properties.Resources.I_Search_16, _ => null };
+			using var tagIcon = item.Source switch { TagSource.Workshop => Properties.Resources.I_Steam_16, TagSource.FindIt => Properties.Resources.I_Search_16, _ => Properties.Resources.I_Tag_16 };
 
 			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft);
 
@@ -530,7 +532,26 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			catch { }
 		}
 
-		e.Graphics.DrawString(e.Item.ToString().RemoveVersionText(), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		var text = e.Item.ToString().RemoveVersionText(out var tags);
+		var textSize = e.Graphics.Measure(text, UI.Font(large ? 11.25F : 9F, FontStyle.Bold));
+
+		e.Graphics.DrawString(text, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 1, (int)textSize.Height);
+
+		foreach (var item in tags)
+		{
+			var color = item.ToLower() switch
+			{
+				"stable" => Color.FromArgb(180, FormDesign.Design.GreenColor),
+				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
+				"beta" => Color.FromArgb(180, FormDesign.Design.YellowColor),
+				"deprecated" => Color.FromArgb(225, FormDesign.Design.RedColor),
+				_ => (Color?)null
+			};
+
+			tagRect.X += Padding.Left + DrawLabel(e, color is null ? item : item.ToUpper(), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleLeft).Width;
+		}
 	}
 
 	private void PaintIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded)

@@ -26,7 +26,7 @@ internal static class LsmUtil
 		{
 			var line = streamReader.ReadLine();
 			
-			if (Regex.IsMatch(line, "data-lomtag=\"(missingreq)|(unused)\".+?href=\"(.+?(\\d+))\">(.+?)</a>"))
+			if (Regex.IsMatch(line, "data-lomtag=\"(missing.*?)|(unused)\".+?href=\"(.+?(\\d+))\">(.+?)</a>"))
 			{
 				return true;
 			}
@@ -41,7 +41,7 @@ internal static class LsmUtil
 
 		for (var i = 0; i < lines.Length; i++)
 		{
-			var match = Regex.Match(lines[i], "data-lomtag=\"missingreq\".+?href=\"(.+?(\\d+))\">(.+?)</a>");
+			var match = Regex.Match(lines[i], "data-lomtag=\"missing.*?\".+?href=\"(.+?(\\d+))\">(.+?)</a>");
 
 			if (match.Success)
 			{

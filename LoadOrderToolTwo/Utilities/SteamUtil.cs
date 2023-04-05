@@ -275,6 +275,8 @@ public static class SteamUtil
 				return;
 
 			IOUtil.WaitForUpdate();
+
+			Application.Exit();
 		}
 
 		ReDownload(packages.Select(x => x.SteamId).ToArray());
@@ -291,7 +293,7 @@ public static class SteamUtil
 				steamArguments.AppendFormat(" +workshop_download_item 255710 {0}", ids[i]);
 			}
 
-			Program.MainForm!.TryInvoke(() => Program.MainForm!.TopMost = true);
+			Program.MainForm?.TryInvoke(() => Program.MainForm!.TopMost = true);
 
 			ExecuteSteam(steamArguments.ToString());
 

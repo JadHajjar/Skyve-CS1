@@ -27,7 +27,7 @@ public partial class PC_PackagePage : PanelContent
 		T_Info.Text = Locale.ContentAndInfo;
 		T_CR.Text = Locale.CompatibilityReport;
 		T_Profiles.Text = Locale.OtherProfiles;
-		L_Title.Text = package.ToString().RemoveVersionText();
+		L_Title.Text = package.ToString().RemoveVersionText(out _);
 		PB_Icon.Package = package;
 		PB_Icon.LoadImage(package.IconUrl, ImageManager.GetImage);
 

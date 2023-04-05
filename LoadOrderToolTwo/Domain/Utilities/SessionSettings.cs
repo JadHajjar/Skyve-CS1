@@ -12,4 +12,5 @@ internal class SessionSettings : ISave
 	public Rectangle? LastWindowsBounds { get; set; }
 	public bool WindowWasMaximized { get; set; }
 	public UserSettings UserSettings { get; set; } = new();
+    public bool SubscribeInfoShown { get; set; }
 }

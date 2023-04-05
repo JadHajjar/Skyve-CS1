@@ -247,4 +247,6 @@ internal class Locale : LocaleHelper
 	public static string ItemsShouldNotBeSubscribedInfo => _instance.GetText(nameof(ItemsShouldNotBeSubscribedInfo));
 	public static string WouldYouLikeToSkipThose => _instance.GetText(nameof(WouldYouLikeToSkipThose));
 	public static string LOTWillRestart => _instance.GetText(nameof(LOTWillRestart));
+	public static string UpdatingLot => _instance.GetText(nameof(UpdatingLot));
+	public static string SubscribingRequiresGameToOpen => _instance.GetText(nameof(SubscribingRequiresGameToOpen));
 }

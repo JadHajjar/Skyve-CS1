@@ -96,7 +96,7 @@
     <Compile Update="UserInterface\Dropdowns\ProfilesDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\TagsDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\SortingDropDown.cs" />
-    <Compile Update="UserInterface\StatusBubbles\CompatibilityReportBubble.cs">
+    <Compile Update="UserInterface\Bubbles\CompatibilityReportBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Generic\DoubleButton.cs">

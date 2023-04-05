@@ -83,7 +83,6 @@ public class CustomTagsLibrary
 
 			for (var i = 0; i < tagsEntries.Length; i++)
 			{
-				// Debugging.Message(tagsEntries[i].key + " " + tagsEntries[i].value);
 				assetTags[tagsEntries[i].key] = tagsEntries[i].value;
 			}
 		}

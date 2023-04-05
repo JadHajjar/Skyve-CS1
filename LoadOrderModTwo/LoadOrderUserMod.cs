@@ -333,7 +333,7 @@ public class LoadOrderUserMod : IUserMod
 		Log.Info("SteamUtilities.Initialized=" + SteamUtilities.Initialized);
 		if (!SteamUtilities.Initialized && PatchLoaderStatus.Instance.IsAvailbleAndEnabled)
 		{
-			Log.DisplayWarning($"Patch Loader Ineffective. Some LOM features might not work!\n\n" + PatchLoaderStatus.WindowsCriticalErrorSolutions);
+			Log.DisplayWarning($"Patch Loader Ineffective. Make sure you only have one Load Order Mod installed!\n\n" + PatchLoaderStatus.WindowsCriticalErrorSolutions);
 		}
 	}
 

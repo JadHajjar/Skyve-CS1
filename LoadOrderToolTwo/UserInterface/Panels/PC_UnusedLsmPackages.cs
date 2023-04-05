@@ -24,15 +24,10 @@ public partial class PC_UnusedLsmPackages : PanelContent
 	{
 		InitializeComponent();
 
-		foreach (var package in missingAssets.GroupBy(x => x.SteamId))
-		{
-			if (package.Key != 0)
-			{
-				LC_Items.Add(package.Last());
-				_workshopPackages[package.Key] = package.Last();
-			}
-		}
+		_workshopPackages = missingAssets.Distinct(x => x.SteamId).ToDictionary(x=>x.SteamId,x=>x);
+		_workshopPackages.Remove(0);
 
+		LC_Items.AddRange(_workshopPackages.Values);
 		LC_Items.AddRange(missingAssets.Where(x => x.SteamId == 0));
 
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;

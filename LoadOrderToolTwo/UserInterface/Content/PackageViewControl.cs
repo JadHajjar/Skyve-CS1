@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Management;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -141,7 +142,7 @@ internal class PackageViewControl : SlickImageControl
 			e.Graphics.DrawRoundedImage(Image ?? (_isMod ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor), iconRect, Padding.Left, Image is null ? null : FormDesign.Design.IconColor, topRight: false, botRight: false);
 		}
 
-		var text = (Item?.Title ?? Text).RemoveVersionText().IfEmpty(Text);
+		var text = (Item?.Title ?? Text).RemoveVersionText(out _).IfEmpty(Text);
 		var textRect = ClientRectangle.Pad(Padding.Horizontal + iconRect.Width, Padding.Vertical, 0, 0);
 		e.Graphics.DrawString(text, Font, new SolidBrush(ForeColor), textRect);
 

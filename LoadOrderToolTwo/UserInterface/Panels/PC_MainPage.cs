@@ -3,8 +3,6 @@
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
-using Microsoft.Win32;
-
 using SlickControls;
 
 using System.Diagnostics;
@@ -108,7 +106,13 @@ public partial class PC_MainPage : PanelContent
 				catch { }
 			}
 			else
-			Form.PushPanel<PC_CompatibilityReport>((Form as MainForm)?.PI_Compatibility);
+			{
+				var current = CentralManager.SessionSettings.UserSettings.PackageSorting;
+				CentralManager.SessionSettings.UserSettings.PackageSorting = Domain.Enums.PackageSorting.CompatibilityReport;
+				Form.PushPanel<PC_Packages>((Form as MainForm)?.PI_Packages);
+				CentralManager.SessionSettings.UserSettings.PackageSorting = current;
+				//Form.PushPanel<PC_CompatibilityReport>((Form as MainForm)?.PI_Compatibility);
+			}
 		}
 	}
 
