@@ -59,6 +59,7 @@ internal static class Program
 
 			if (CommandUtil.NoWindow)
 			{
+				Log.Info("[Console] Running without UI window");
 				CentralManager.Start();
 				return;
 			}

@@ -88,7 +88,7 @@ public class LoadOrderUserMod : IUserMod
 			Log.Buffered = false;
 #endif
 			var items = PlatformService.workshop.GetSubscribedItems();
-			Log.Info("Subscribed Items are: " + items.ToSTR());
+			Log.Debug("Subscribed Items are: " + items.ToSTR());
 
 			//Log.Debug("Testing StackTrace:\n" + new StackTrace(true).ToString(), copyToGameLog: true);
 			//KianCommons.UI.TextureUtil.EmbededResources = false;
@@ -161,12 +161,9 @@ public class LoadOrderUserMod : IUserMod
 		var currentToolFolder = Path.Combine(PluginManager.instance.FindPluginInfo(Assembly.GetExecutingAssembly())?.modPath, "Tool");
 		var config = Path.Combine(currentToolFolder, "LoadOrderToolTwo.exe.config");
 
-		if (File.Exists(config))
-		{
-			PrepareFirstTimeConfig(config);
-		}
-		else
-			Debug.LogWarning("Tool configuration was not found in: " + config);
+		try
+		{ PrepareFirstTimeConfig(config); }
+		catch { }
 	}
 
 	private void PrepareFirstTimeConfig(string configFilePath)

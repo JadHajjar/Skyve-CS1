@@ -131,17 +131,39 @@
 	  <None Include="ColossalOrder\GameSettings.cs" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Resources\mono-debug._dll">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+	
+	<PropertyGroup>
+		<DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\Tool\</DeployDir>
+		<WorkshopId>2953447919</WorkshopId>
+		<WorkshopDir>C:\Program Files (x86)\Steam\steamapps\workshop\content\255710\$(WorkshopId)</WorkshopDir>
+		<ZipFile>$(DeployDir)/../../LoadOrderModTwo.zip</ZipFile>
+	</PropertyGroup>
+
   <Target Name="DeployToModDirectory" AfterTargets="Build">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="Targets" />
     </GetAssemblyIdentity>
     <Message Importance="high" Text="$(SolutionName)" />
-    <PropertyGroup>
-      <DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\Tool\</DeployDir>
-    </PropertyGroup>
-	  <RemoveDir Directories="$(DeployDir)" />
+	  <Copy SourceFiles="..\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
 	  <Copy SourceFiles="$(OutDir)\LoadOrderToolTwo.exe" DestinationFiles="$(DeployDir)\LoadOrderToolTwo.exe" />
 	  <Copy SourceFiles="$(OutDir)\LoadOrderToolTwo.exe.config" DestinationFiles="$(DeployDir)\LoadOrderToolTwo.exe.config" />
+	  <Copy SourceFiles="$(OutDir)\Resources\mono-debug._dll" DestinationFiles="$(DeployDir)\mono-debug._dll" />
   </Target>
+
+	<Target Name="DeployToWorkshop" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' == 'Release'">
+		<Message Text="Deploy to workshop $(WorkshopDir)" Importance="high" />
+		<RemoveDir Directories="$(WorkshopDir)" />
+		<ItemGroup>
+			<FilesToCopy Include="$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\**\*.*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(FilesToCopy)" DestinationFiles="@(FilesToCopy->'$(WorkshopDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Delete Files="$(ZipFile)" />
+		<ZipDirectory SourceDirectory="$(WorkshopDir)" DestinationFile="$(ZipFile)" />
+	</Target>
 
 </Project>

@@ -166,6 +166,8 @@ internal static class CentralManager
 			ProfileManager.SetProfile(CurrentProfile);
 		}
 
+		ColossalOrderUtil.Start();
+
 		if (CommandUtil.LaunchOnLoad)
 		{
 			Log.Info($"[Command] Launching Cities..");

@@ -142,12 +142,7 @@
 			<DeployDir Condition="'$(DeployDir)'==''">$(LOCALAPPDATA)/Colossal Order/Cities_Skylines/Addons/Mods/$(SolutionName)/</DeployDir>
 			<Now>$([System.DateTime]::Now.ToString("HH:mm:ss"))</Now>
 			<pdb2mdb>$(PkgMono_Unofficial_pdb2mdb)/tools/pdb2mdb.exe</pdb2mdb>
-			<ZipFileName>$(SolutionName)-V@(VersionNumber)-$(GitCommit)-$(Configuration).zip</ZipFileName>
-			<ZipFile>$(DeployDir)/../$(ZipFileName)</ZipFile>
 		</PropertyGroup>
-		<ItemGroup>
-			<OldZipFiles Include="$(DeployDir)/../$(SolutionName)-*-$(Configuration).zip" />
-		</ItemGroup>
 
 		<Delete Files="$(TargetPath).mdb" />
 		<Exec Command="&quot;$(pdb2mdb)&quot; &quot;$(TargetPath)&quot;" />
@@ -159,8 +154,5 @@
 		<Delete Files="$(DeployDir)$(TargetFileName)" />
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
 		<Message Importance="high" Text="AssemblyVersion=@(VersionNumber) time=$(Now)" />
-
-		<Delete Files="@(OldZipFiles)" />
-		<ZipDirectory SourceDirectory="$(DeployDir)" DestinationFile="$(ZipFile)" />
 	</Target>
 </Project>

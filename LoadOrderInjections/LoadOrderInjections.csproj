@@ -71,7 +71,8 @@
       <pdb2mdb>$(PkgMono_Unofficial_pdb2mdb)/tools/pdb2mdb.exe</pdb2mdb>
     </PropertyGroup>
 
-    <Delete Files="$(TargetPath).mdb" />
+	  <RemoveDir Directories="$(DeployDir)" />
+	  <Delete Files="$(TargetPath).mdb" />
     <Exec Command="&quot;$(pdb2mdb)&quot; &quot;$(TargetPath)&quot;" />
     <Copy SourceFiles="$(TargetPath).mdb" DestinationFolder="$(DeployDir)" />
 

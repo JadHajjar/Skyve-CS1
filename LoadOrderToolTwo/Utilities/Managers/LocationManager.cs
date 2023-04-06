@@ -34,7 +34,7 @@ internal class LocationManager
 	public static string ModsPath => Path.Combine(AddonsPath, "Mods");
 	public static string AssetsPath => Path.Combine(AddonsPath, "Assets");
 	public static string MapThemesPath => Path.Combine(AddonsPath, "MapThemes");
-	public static string MapsPath => Path.Combine(AppDataPath, "Mapss");
+	public static string MapsPath => Path.Combine(AppDataPath, "Maps");
 	public static string StylesPath => Path.Combine(AddonsPath, "Styles");
 
 	public static string WorkshopContentPath
@@ -131,7 +131,7 @@ internal class LocationManager
 			$"Platform: {Platform}\r\n" +
 			$"GamePath: {GamePath}\r\n" +
 			$"AppDataPath: {AppDataPath}\r\n" +
-			$"GameContentPath: {WorkshopContentPath}\r\n" +
+			$"GameContentPath: {GameContentPath}\r\n" +
 			$"SteamPath: {SteamPath}\r\n" +
 			$"WorkshopContentPath: {WorkshopContentPath}\r\n" +
 			$"VirtualGamePath: {VirtualGamePath}\r\n" +

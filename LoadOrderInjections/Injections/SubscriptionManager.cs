@@ -567,8 +567,8 @@ namespace LoadOrderInjections {
             Log.Info("Subscribed Items are: " + items.ToSTR());
 
             EnsureIncludedOrExcludedAllFast();
-            if (Config.DeleteUnsubscribedItemsOnLoad)
-                DeleteUnsubbed();
+            //if (Config.DeleteUnsubscribedItemsOnLoad)
+            //    DeleteUnsubbed();
             SteamInitialized = true;
         }
 

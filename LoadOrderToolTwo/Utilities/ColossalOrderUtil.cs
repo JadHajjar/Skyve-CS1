@@ -10,10 +10,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 
 namespace LoadOrderToolTwo.Utilities;
-internal class ColossalOrderUtil
+internal static class ColossalOrderUtil
 {
 	private const string GAME_SETTINGS_FILE_NAME = "userGameState";
 	private static SettingsFile _settingsFile;
+	private static bool _initialized;
 	private static readonly Dictionary<Mod, SavedBool> _settingsDictionary = new();
 	private static readonly FileSystemWatcher _watcher;
 	private static readonly DelayedAction _delayedAction = new(500);
@@ -39,9 +40,13 @@ internal class ColossalOrderUtil
 		watcher.Created += new FileSystemEventHandler(FileChanged);
 		watcher.Deleted += new FileSystemEventHandler(FileChanged);
 
-		watcher.EnableRaisingEvents = true;
-
 		return watcher;
+	}
+
+	public static void Start()
+	{
+		_initialized = true;
+		SaveSettings();
 	}
 
 	private static void FileChanged(object sender, FileSystemEventArgs e)
@@ -101,9 +106,12 @@ internal class ColossalOrderUtil
 
 	public static void SaveSettings()
 	{
-		_watcher.EnableRaisingEvents = false;
-		_settingsFile.Save();
-		_watcher.EnableRaisingEvents = true;
+		if (_initialized)
+		{
+			_watcher.EnableRaisingEvents = false;
+			_settingsFile.Save();
+			_watcher.EnableRaisingEvents = true;
+		}
 	}
 
 	private static SavedBool GetEnabledSetting(Mod mod)

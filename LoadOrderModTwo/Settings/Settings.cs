@@ -21,7 +21,7 @@ namespace LoadOrderMod.Settings {
                 }
 
                 ExtUITabstrip tabStrip = ExtUITabstrip.Create(helper);
-                SubscriptionsTab.Make(tabStrip);
+                //SubscriptionsTab.Make(tabStrip);
                 StartupTab.Make(tabStrip);
                 LoggingTab.Make(tabStrip);
                 DebugTab.Make(tabStrip);

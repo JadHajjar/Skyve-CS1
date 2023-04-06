@@ -27,6 +27,7 @@ internal class UpdateManager
 			}
 		}
 
+		CentralManager.ContentLoaded += CentralManager_WorkshopInfoUpdated;
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 	}
 

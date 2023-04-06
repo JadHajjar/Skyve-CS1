@@ -42,16 +42,16 @@ namespace LoadOrderMod.Settings.Tabs {
             button.tooltip = "less steam can hide problems. if you use less steam please click 'Refresh workshop items' to get all broken downloads";
             button.isVisible = false; //hide for now.
 
-            checkBox = panelHelper.AddCheckbox(
-                "Delete unsubscribed items on startup",
-                Config.DeleteUnsubscribedItemsOnLoad,
-                val => {
-                    ConfigUtil.Config.DeleteUnsubscribedItemsOnLoad = val;
-                    ConfigUtil.SaveConfig();
-                }) as UICheckBox;
+            //checkBox = panelHelper.AddCheckbox(
+            //    "Delete unsubscribed items on startup",
+            //    Config.DeleteUnsubscribedItemsOnLoad,
+            //    val => {
+            //        ConfigUtil.Config.DeleteUnsubscribedItemsOnLoad = val;
+            //        ConfigUtil.SaveConfig();
+            //    }) as UICheckBox;
 
-            button = panelHelper.AddButton("Delete Now", () => CheckSubsUtil.Instance.DeleteUnsubbed()) as UIButton;
-            Settings.Pairup(checkBox, button);
+            //button = panelHelper.AddButton("Delete Now", () => CheckSubsUtil.Instance.DeleteUnsubbed()) as UIButton;
+            //Settings.Pairup(checkBox, button);
 
             {
                 var g = panelHelper.AddGroup("Broken downloads") as UIHelper;

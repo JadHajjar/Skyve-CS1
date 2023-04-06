@@ -413,6 +413,8 @@ public static class ProfileManager
 					UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
 				}
 
+				AssetsUtil.SetDlcsExcluded(profile.ExcludedDLCs.ToArray());
+
 				ApplyingProfile = false;
 				disableAutoSave = true;
 

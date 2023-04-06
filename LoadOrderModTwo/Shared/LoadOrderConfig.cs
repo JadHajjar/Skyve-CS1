@@ -28,7 +28,7 @@ public class LoadOrderConfig
 	public bool TurnOffSteamPanels = true;
 	public bool FastContentManager = true;
 	//public bool SoftDLLDependancy = false;
-	public bool DeleteUnsubscribedItemsOnLoad = false;
+	//public bool DeleteUnsubscribedItemsOnLoad = false;
 	public bool AddHarmonyResolver = true;
 	public bool LogAssetLoadingTimes = true;
 	public bool LogPerModAssetLoadingTimes = false;

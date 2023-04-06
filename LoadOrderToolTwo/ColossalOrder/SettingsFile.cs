@@ -351,7 +351,6 @@ public class SettingsFile
 		{
 			if (!dontSave && !string.IsNullOrEmpty(pathName))
 			{
-				Log.Info(message: "Saving " + m_PathName, false);
 				lock (m_Saving)
 				{
 					using var stream = CreateWriteStream();

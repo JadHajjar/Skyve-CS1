@@ -159,6 +159,14 @@ internal class AssetsUtil
 		return _config.RemovedDLCs.Contains(dlc);
 	}
 
+	internal static void SetDlcsExcluded(uint[] dlc)
+	{
+		_config.RemovedDLCs = dlc;
+
+		ProfileManager.TriggerAutoSave();
+		SaveChanges();
+	}
+
 	internal static void SetDlcExcluded(uint dlc, bool excluded)
 	{
 		var list = new List<uint>(_config.RemovedDLCs);
