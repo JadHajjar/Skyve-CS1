@@ -247,19 +247,6 @@ public partial class MainForm : BasePanelForm
 		}
 	}
 
-	protected override void OnDeactivate(EventArgs e)
-	{
-		if (TopMost)
-		{
-			Thread.Sleep(200);
-			TopMost = false;
-			this.ShowUp();
-			return;
-		}
-
-		base.OnDeactivate(e);
-	}
-
 	protected override void OnCreateControl()
 	{
 		base.OnCreateControl();

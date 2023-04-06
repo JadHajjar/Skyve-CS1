@@ -1,0 +1,38 @@
+[
+  {
+    "Version": "4.7.2",
+    "Date": "2020-12-8",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Improvements",
+        "Order": 1,
+        "Changes": [
+          "Optimized and refined Full Page content."
+        ]
+      }
+    ]
+  },
+  {
+    "VersionString": "4.7.1",
+    "Date": "2020-10-31",
+    "Tagline": "Introducing management options to help sort out your content.",
+    "ChangeGroups": [
+      {
+        "Name": "Manage Content",
+        "Order": 1,
+        "Changes": [
+          "Added the option to Love, Rate & Tag your content to help remember your experience from it or help find them on a later date."
+        ]
+      },
+      {
+        "Name": "Other Improvements",
+        "Order": 2,
+        "Changes": [
+          "Improved Full Page content and added scrolling.",
+          "Added keyboard control for the drop-down menu and an improved effect."
+        ]
+      }
+    ]
+  }
+]
