@@ -306,7 +306,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			  new SlickStripItem(Locale.IncludeAllItemsInThisPackage, () => { item.Package.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, !isPackageIncluded)
 			, new SlickStripItem(Locale.ExcludeAllItemsInThisPackage, () => { item.Package.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, isPackageIncluded)
-			, new SlickStripItem(Locale.ReDownloadPackage, () => Redownload(item), Properties.Resources.I_ReDownload_16)
+			, new SlickStripItem(Locale.ReDownloadPackage, () => Redownload(item), Properties.Resources.I_ReDownload_16, SteamUtil.IsSteamAvailable())
 			, new SlickStripItem(Locale.MovePackageToLocalFolder, () => ContentUtil.MoveToLocalFolder(item), Properties.Resources.I_Local_16, item.Workshop)
 			, new SlickStripItem(Locale.DeletePackage, () => ContentUtil.DeleteAll(item.Folder), Properties.Resources.I_Steam_16, !item.Workshop && !item.BuiltIn)
 			, new SlickStripItem(Locale.UnsubscribePackage, async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true), Properties.Resources.I_Steam_16, item.Workshop && !item.BuiltIn)
