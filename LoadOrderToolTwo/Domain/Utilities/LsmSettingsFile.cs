@@ -23,6 +23,7 @@ public class LsmSettingsFile
 	public bool loadUsed = true;
 	public bool skipPrefabs;
 	public string? skipFile = string.Empty;
+	public string? reportDir = string.Empty;
 
 	[XmlAnyElement]
 	public List<XElement> Elements { get; } = new List<XElement>();

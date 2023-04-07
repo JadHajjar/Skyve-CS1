@@ -9,8 +9,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
-using static System.Environment;
-
 namespace LoadOrderToolTwo.Utilities;
 /// <summary>
 /// A simple logging class.
@@ -45,7 +43,7 @@ public static class Log
 	/// <summary>
 	/// Stopwatch used if <see cref="ShowTimestamp"/> is <c>true</c>.
 	/// </summary>
-	private static readonly Stopwatch Timer;
+	private static readonly Stopwatch? Timer;
 
 	private static readonly object fileLock = new object();
 	/// <summary>
@@ -54,6 +52,8 @@ public static class Log
 	/// </summary>
 	static Log()
 	{
+		LogFilePath = LogFileName;
+
 		try
 		{
 			if (!Program.IsRunning)
@@ -86,7 +86,7 @@ public static class Log
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex,"", true);
+			Exception(ex, "", true);
 		}
 	}
 
@@ -129,7 +129,7 @@ public static class Log
 	}
 
 	[Conditional("DEBUG")]
-	public static void DebugWait(string message, object id = null, float seconds = 0.5f, bool copyToGameLog = true)
+	public static void DebugWait(string message, object? id = null, float seconds = 0.5f, bool copyToGameLog = true)
 	{
 		if (id == null)
 		{

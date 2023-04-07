@@ -3,6 +3,9 @@
 using Extensions;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Legacy;
+
+using Newtonsoft.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -683,7 +686,7 @@ internal static class CompatibilityManager
 		return new();
 	}
 
-	public static Bitmap GetSeverityIcon(this Enums.ReportSeverity severity, bool status)
+	public static Bitmap GetSeverityIcon(this ReportSeverity severity, bool status)
 	{
 		return severity switch
 		{
@@ -695,7 +698,7 @@ internal static class CompatibilityManager
 		};
 	}
 
-	public static Color GetSeverityColor(this Enums.ReportSeverity severity)
+	public static Color GetSeverityColor(this ReportSeverity severity)
 	{
 		return severity switch
 		{
@@ -715,7 +718,7 @@ internal static class CompatibilityManager
 		public string idString;
 		public bool isDisabled;
 		public bool isCameraScript;
-		public Enums.ReportSeverity reportSeverity;
+		public ReportSeverity reportSeverity;
 		public Message instability;
 		public MessageList requiredDlc;
 		public Message unneededDependencyMod;
@@ -796,13 +799,15 @@ internal static class CompatibilityManager
 
 	internal class ReportMessage
 	{
-		public Enums.ReportSeverity Severity { get; }
-		public Enums.ReportType Type { get; }
+		public string ReportType => Type.ToString().FormatWords();
+		[JsonProperty("Severity")] public string ReportSeverity => Severity.ToString().FormatWords();
+		[JsonIgnore] public ReportSeverity Severity { get; }
+		[JsonIgnore] public ReportType Type { get; }
 		public string Message { get; }
 		public string Note { get; }
 		public ulong[] LinkedPackages { get; }
 
-		public ReportMessage(Enums.ReportType type, Enums.ReportSeverity severity, string message, string note = "", params ulong[] packages)
+		public ReportMessage(ReportType type, ReportSeverity severity, string message, string note = "", params ulong[] packages)
 		{
 			Type = type;
 			Severity = severity;
@@ -814,9 +819,9 @@ internal static class CompatibilityManager
 
 	internal class ReportCompatibilityMessage : ReportMessage
 	{
-		public Enums.CompatibilityStatus Compatibility { get; }
+		[JsonIgnore] public CompatibilityStatus Compatibility { get; }
 
-		public ReportCompatibilityMessage(Enums.ReportType type, Enums.ReportSeverity severity, Enums.CompatibilityStatus compatibility, string message, params ulong[] packages) : base(type, severity, message, "", packages)
+		public ReportCompatibilityMessage(ReportType type, ReportSeverity severity, CompatibilityStatus compatibility, string message, params ulong[] packages) : base(type, severity, message, "", packages)
 		{
 			Compatibility = compatibility;
 		}
@@ -824,9 +829,13 @@ internal static class CompatibilityManager
 
 	internal class ReportInfo
 	{
-		public Domain.Package Package { get; }
+		public string PackageName => Package.ToString();
+		public string PackageLink => Package.SteamPage;
+		[JsonProperty("Severity")] public string _Severity => Severity.ToString().FormatWords();
+
+		[JsonIgnore] public Domain.Package Package { get; }
+		[JsonIgnore] public ReportSeverity Severity => Messages.Count == 0 ? ReportSeverity.NothingToReport : Messages.Max(x => x.Severity);
 		public List<ReportMessage> Messages { get; }
-		public Enums.ReportSeverity Severity => Messages.Count == 0 ? ReportSeverity.NothingToReport : Messages.Max(x => x.Severity);
 
 		public ReportInfo(Domain.Package package)
 		{

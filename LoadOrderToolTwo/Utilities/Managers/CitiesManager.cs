@@ -62,22 +62,26 @@ public static class CitiesManager
 			bool success;
 			if (CentralManager.CurrentProfile.LaunchSettings.DebugMono)
 			{
-				var fpsBooster = CentralManager.Mods
-					.FirstOrDefault(mod => Path.GetFileNameWithoutExtension(mod.FileName) == "FPS_Booster");
-				if (fpsBooster != null &&
-					fpsBooster.IsEnabled &&
-					fpsBooster.IsIncluded)
+				if (!CommandUtil.NoWindow && !CentralManager.SessionSettings.FpsBoosterLogWarning)
 				{
-					var result = MessagePrompt.Show(
-						"Disable FPS Booster to show logs?",
-						"Disable FPS Booster",
-						buttons: PromptButtons.YesNo);
+					var fpsBooster = CentralManager.Mods.FirstOrDefault(mod => Path.GetFileNameWithoutExtension(mod.FileName) == "FPS_Booster");
 
-					if (result == System.Windows.Forms.DialogResult.Yes)
+					if (fpsBooster != null && fpsBooster.IsEnabled && fpsBooster.IsIncluded)
 					{
-						fpsBooster.IsIncluded = false;
+						var result = MessagePrompt.Show(Locale.DisableFpsBoosterDebug, PromptButtons.YesNo);
+
+						if (result == System.Windows.Forms.DialogResult.Yes)
+						{
+							fpsBooster.IsIncluded = false;
+						}
+						else
+						{
+							CentralManager.SessionSettings.FpsBoosterLogWarning = true;
+							CentralManager.SessionSettings.Save();
+						}
 					}
 				}
+
 				success = MonoFile.Instance.UseDebug();
 			}
 			else

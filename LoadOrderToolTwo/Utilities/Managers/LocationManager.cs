@@ -261,6 +261,15 @@ internal class LocationManager
 		}
 		finally
 		{
+			if (settings.Platform is not Platform.Windows)
+			{
+				settings.GamePath = settings.GamePath.Replace('\\', '/');
+				settings.AppDataPath = settings.AppDataPath.Replace('\\', '/');
+				settings.SteamPath = settings.SteamPath.Replace('\\', '/');
+				settings.VirtualGamePath = settings.VirtualGamePath.Replace('\\', '/');
+				settings.VirtualAppDataPath = settings.VirtualAppDataPath.Replace('\\', '/');
+			}
+
 			_folderSettings = settings;
 
 			settings.Save();

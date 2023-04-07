@@ -17,11 +17,11 @@ public class Profile
 {
 	public static readonly Profile TemporaryProfile = new(Locale.TemporaryProfile) { Temporary = true, AutoSave = false };
 
-	[JsonIgnore, CloneIgnore] public bool Temporary { get; private set; }
-	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
 	[CloneIgnore] public string? Name { get; set; }
+	[CloneIgnore] public bool Temporary { get; set; }
 	[JsonIgnore] public DateTime LastEditDate { get; set; }
 	[JsonIgnore] public DateTime DateCreated { get; set; }
+	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
 
 	public Profile(string name) : this()
 	{

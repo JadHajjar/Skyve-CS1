@@ -65,10 +65,9 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
     {
         base.OnMouseClick(e);
 
-        var centerWidth = 50;
-        var option1Hovered = e.Location.X < (Width - centerWidth) / 2;
+		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var option1Hovered = e.Location.X < (Width - centerWidth) / 2;
         var option2Hovered = e.Location.X > (Width + centerWidth) / 2;
-        var noneHovered = e.Location.X.IsWithin(Width / 2 - centerWidth / 2 - 1, Width / 2 + centerWidth / 2 + 1);
 
         if (option1Hovered && SelectedValue != Value.Option1)
         {
@@ -86,14 +85,12 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        e.Graphics.Clear(BackColor);
-        e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-        e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+        e.Graphics.SetUp(BackColor);
 
         var iconOnly = Width < 200 * UI.FontScale;
         var iconSize = UI.FontScale >= 1.25 ? 24 : 16;
-        var centerWidth = (int)(40 * UI.FontScale);
-        var cursorLocation = PointToClient(Cursor.Position);
+		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var cursorLocation = PointToClient(Cursor.Position);
         var rectangle1 = new Rectangle(0, 0, (Width - centerWidth) / 2, Height - 1);
         var rectangle2 = new Rectangle((Width + centerWidth) / 2, 0, (Width - centerWidth) / 2, Height - 1);
         var rectangleNone = new Rectangle((Width - centerWidth) / 2, 0, centerWidth, Height - 1);

@@ -658,8 +658,6 @@ namespace LoadOrderInjections {
                         $"reason={reason}. " +
                         $"try reinstalling the item.",
                         true);
-                } else {
-                    Log.Debug($"{result.Class()} is good:{result.publishedFileId} {result.title}");
                 }
             });
         }

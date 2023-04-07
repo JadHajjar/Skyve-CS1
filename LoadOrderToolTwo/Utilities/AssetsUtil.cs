@@ -18,21 +18,29 @@ internal class AssetsUtil
 {
 	private static readonly LoadOrderConfig _config;
 	private static CustomTagsLibrary _findItTags;
-	private static Dictionary<string, Asset> assetIndex=new();
+	private static Dictionary<string, Asset> assetIndex = new();
 
 	public static HashSet<string> ExcludedHashSet { get; }
 	public static Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
 
 	static AssetsUtil()
 	{
-		_config = LoadOrderConfig.Deserialize() ?? new();
-		var cache = CSCache.Deserialize()?.Assets.ToDictionary(x => x.IncludedPath, x => x, StringComparer.InvariantCultureIgnoreCase);
+		AssetInfoCache = new(StringComparer.InvariantCultureIgnoreCase);
+
+		var assets = CSCache.Deserialize()?.Assets;
+
+		if (assets is not null)
+		{
+			for (var i = 0; i < assets.Length; i++)
+			{
+				AssetInfoCache[assets[i].IncludedPath] = assets[i];
+			}
+		}
 
 		_findItTags = new();
-		AssetInfoCache = cache ?? new();
-		ExcludedHashSet = new HashSet<string>(_config.Assets.Select(x => IOUtil.ToRealPath(x.Path?.ToLower()) ?? string.Empty));
-
 		_findItTags.Deserialize();
+		_config = LoadOrderConfig.Deserialize() ?? new();
+		ExcludedHashSet = new HashSet<string>(_config.Assets.Select(x => IOUtil.ToRealPath(x.Path?.ToLower()) ?? string.Empty));
 
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
 	}

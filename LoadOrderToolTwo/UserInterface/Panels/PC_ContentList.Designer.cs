@@ -400,14 +400,14 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel4.Size = new System.Drawing.Size(881, 138);
 			this.tableLayoutPanel4.TabIndex = 4;
 			// 
-			// slickDateRange1
+			// DR_SubscribeTime
 			// 
 			this.DR_SubscribeTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DR_SubscribeTime.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DR_SubscribeTime.Location = new System.Drawing.Point(443, 3);
-			this.DR_SubscribeTime.Name = "slickDateRange1";
+			this.DR_SubscribeTime.Name = "DR_SubscribeTime";
 			this.DR_SubscribeTime.Size = new System.Drawing.Size(435, 40);
 			this.DR_SubscribeTime.TabIndex = 14;
 			this.DR_SubscribeTime.RangeChanged += new System.EventHandler(this.FilterChanged);
@@ -434,8 +434,8 @@ partial class PC_ContentList<T>
 			this.OT_Included.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_Included.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Included.Image1 = "I_X";
-			this.OT_Included.Image2 = "I_Check";
+			this.OT_Included.Image1 = "I_Enabled";
+			this.OT_Included.Image2 = "I_Ok";
 			this.OT_Included.Location = new System.Drawing.Point(3, 3);
 			this.OT_Included.Name = "OT_Included";
 			this.OT_Included.Option1 = "Excluded";
@@ -449,8 +449,8 @@ partial class PC_ContentList<T>
 			this.OT_Enabled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.OT_Enabled.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Enabled.Image1 = "I_Disabled";
-			this.OT_Enabled.Image2 = "I_Enabled";
+			this.OT_Enabled.Image1 = "I_Unchecked";
+			this.OT_Enabled.Image2 = "I_Checked";
 			this.OT_Enabled.Location = new System.Drawing.Point(3, 49);
 			this.OT_Enabled.Name = "OT_Enabled";
 			this.OT_Enabled.Option1 = "Disabled";
@@ -459,14 +459,14 @@ partial class PC_ContentList<T>
 			this.OT_Enabled.TabIndex = 1;
 			this.OT_Enabled.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
 			// 
-			// slickDateRange2
+			// DR_ServerTime
 			// 
 			this.DR_ServerTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DR_ServerTime.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DR_ServerTime.Location = new System.Drawing.Point(443, 95);
-			this.DR_ServerTime.Name = "slickDateRange2";
+			this.DR_ServerTime.Name = "DR_ServerTime";
 			this.tableLayoutPanel4.SetRowSpan(this.DR_ServerTime, 2);
 			this.DR_ServerTime.Size = new System.Drawing.Size(435, 40);
 			this.DR_ServerTime.TabIndex = 14;

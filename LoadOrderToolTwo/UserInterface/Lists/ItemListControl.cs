@@ -401,13 +401,13 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		var date = e.Item.ServerTime.If(DateTime.MinValue, e.Item.LocalTime).ToLocalTime();
 		var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-		rects.DateRect = DrawLabel(e, dateText, Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft);
+		rects.DateRect = DrawLabel(e, dateText, Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true);
 		labelRect.X += Padding.Left + rects.DateRect.Width;
 
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
 		if (!string.IsNullOrEmpty(text))
 		{
-			rects.DownloadStatusRect = DrawLabel(e, text, icon, color.MergeColor(FormDesign.Design.BackColor, 65), labelRect, ContentAlignment.BottomLeft);
+			rects.DownloadStatusRect = DrawLabel(e, text, icon, color.MergeColor(FormDesign.Design.BackColor, 65), labelRect, ContentAlignment.BottomLeft, true);
 
 			labelRect.X += Padding.Left + rects.DownloadStatusRect.Width;
 		}
@@ -443,7 +443,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			using var tagIcon = item.Source switch { TagSource.Workshop => Properties.Resources.I_Steam_16, TagSource.FindIt => Properties.Resources.I_Search_16, _ => Properties.Resources.I_Tag_16 };
 
-			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft);
+			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft, true);
 
 			rects.TagRects[item.Value] = tagRect;
 
@@ -456,7 +456,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			var filledRect = e.ClipRectangle.Pad(0, -Padding.Top, 0, -Padding.Bottom);
 			e.Graphics.SetClip(filledRect);
-			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 30 : 85, BackColor)), filledRect);
+			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 25 : 75, BackColor)), filledRect);
 		}
 	}
 
@@ -532,10 +532,18 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			catch { }
 		}
 
-		var text = e.Item.ToString().RemoveVersionText(out var tags);
+		List<string>? tags = null;
+
+		var mod = e.Item.Package.Mod is not null;
+		var text = mod ? e.Item.ToString().RemoveVersionText(out tags) : e.Item.ToString();
 		var textSize = e.Graphics.Measure(text, UI.Font(large ? 11.25F : 9F, FontStyle.Bold));
 
 		e.Graphics.DrawString(text, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+		if (tags is null)
+		{
+			return;
+		}
 
 		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 1, (int)textSize.Height);
 
@@ -550,7 +558,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				_ => (Color?)null
 			};
 
-			tagRect.X += Padding.Left + DrawLabel(e, color is null ? item : item.ToUpper(), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleLeft).Width;
+			tagRect.X += Padding.Left + DrawLabel(e, color is null ? item : item.ToUpper(), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
 		}
 	}
 
@@ -589,7 +597,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<T> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment, bool action = false)
+	private Rectangle DrawLabel(ItemPaintEventArgs<T> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment, bool action = false, bool smaller = false)
 	{
 		if (text == null)
 		{
@@ -597,7 +605,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
-		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
+		using var font = UI.Font((large ? 9F : 7.5F) - (smaller ? 0.5F : 0F));
+		var size = e.Graphics.Measure(text, font).ToSize();
 
 		if (icon is not null)
 		{
@@ -606,7 +615,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		size.Width += Padding.Left;
 
-		rectangle = rectangle.Pad(Padding).Align(size, alignment);
+		rectangle = rectangle.Pad(smaller ? Padding.Left/2:Padding.Left).Align(size, alignment);
 
 		if (action && !rectangle.Contains(CursorLocation))
 		{
@@ -617,7 +626,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		using var foreBrush = new SolidBrush(color.GetTextColor());
 
 		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(text, font, foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		if (icon is not null)
 		{

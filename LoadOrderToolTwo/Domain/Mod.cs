@@ -50,7 +50,7 @@ public class Mod : IPackage
 	public bool SteamInfoLoaded { get => ((IPackage)Package).SteamInfoLoaded; set => ((IPackage)Package).SteamInfoLoaded = value; }
 	public string? SteamDescription { get => ((IPackage)Package).SteamDescription; set => ((IPackage)Package).SteamDescription = value; }
 	public IEnumerable<TagItem> Tags => ((IPackage)Package).Tags;
-	public string[] WorkshopTags { set => ((IPackage)Package).WorkshopTags = value; }
+	public string[]? WorkshopTags { set => ((IPackage)Package).WorkshopTags = value; }
 	public Bitmap? AuthorIconImage => ((IPackage)Package).AuthorIconImage;
 	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
 	public bool IsPseudoMod { get => ((IPackage)Package).IsPseudoMod; set => ((IPackage)Package).IsPseudoMod = value; }

@@ -332,8 +332,7 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_Troubleshoot_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_CompatibilityReport>(PI_Troubleshoot);
-		//SetPanel<PC_HelpAndLogs>(PI_Troubleshoot);
+		SetPanel<PC_HelpAndLogs>(PI_Troubleshoot);
 	}
 
 	private void PI_DLCs_OnClick(object sender, MouseEventArgs e)

@@ -39,7 +39,11 @@ partial class PC_ImportCollection
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.L_Title = new System.Windows.Forms.Label();
 			this.panel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
+			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
+			this.B_UnsubSub = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.PB_Icon = new LoadOrderToolTwo.UserInterface.Content.PackageIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,10 +52,6 @@ partial class PC_ImportCollection
 			this.T_Mods = new SlickControls.SlickTab();
 			this.T_Assets = new SlickControls.SlickTab();
 			this.LC_Items = new LoadOrderToolTwo.UserInterface.Lists.GenericPackageListControl();
-			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
-			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
-			this.B_UnsubSub = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
-			this.PB_Icon = new LoadOrderToolTwo.UserInterface.Content.PackageIcon();
 			this.TLP_Top.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -106,9 +106,9 @@ partial class PC_ImportCollection
 			// 
 			this.L_Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.L_Title.AutoSize = true;
-			this.L_Title.Location = new System.Drawing.Point(135, 24);
+			this.L_Title.Location = new System.Drawing.Point(135, 22);
 			this.L_Title.Name = "L_Title";
-			this.L_Title.Size = new System.Drawing.Size(52, 21);
+			this.L_Title.Size = new System.Drawing.Size(55, 23);
 			this.L_Title.TabIndex = 1;
 			this.L_Title.Text = "label1";
 			this.L_Title.UseMnemonic = false;
@@ -132,6 +132,49 @@ partial class PC_ImportCollection
 			this.panel2.Size = new System.Drawing.Size(651, 45);
 			this.panel2.TabIndex = 0;
 			// 
+			// B_ExInclude
+			// 
+			this.B_ExInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ExInclude.Image1 = "I_X";
+			this.B_ExInclude.Image2 = "I_Check";
+			this.B_ExInclude.Location = new System.Drawing.Point(3, 25);
+			this.B_ExInclude.Name = "B_ExInclude";
+			this.B_ExInclude.Option1 = "ExcludeAll";
+			this.B_ExInclude.Option2 = "IncludeAll";
+			this.B_ExInclude.Size = new System.Drawing.Size(319, 17);
+			this.B_ExInclude.TabIndex = 1;
+			this.B_ExInclude.LeftClicked += new System.EventHandler(this.B_ExInclude_LeftClicked);
+			this.B_ExInclude.RightClicked += new System.EventHandler(this.B_ExInclude_RightClicked);
+			// 
+			// DD_Tags
+			// 
+			this.DD_Tags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Tags.Location = new System.Drawing.Point(436, 3);
+			this.DD_Tags.Name = "DD_Tags";
+			this.panel2.SetRowSpan(this.DD_Tags, 2);
+			this.DD_Tags.Size = new System.Drawing.Size(212, 60);
+			this.DD_Tags.TabIndex = 19;
+			// 
+			// B_UnsubSub
+			// 
+			this.B_UnsubSub.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.B_UnsubSub.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_UnsubSub.Image1 = "I_RemoveSteam";
+			this.B_UnsubSub.Image2 = "I_Add";
+			this.B_UnsubSub.Location = new System.Drawing.Point(3, 3);
+			this.B_UnsubSub.Name = "B_UnsubSub";
+			this.B_UnsubSub.Option1 = "UnsubscribeAll";
+			this.B_UnsubSub.Option2 = "SubscribeAll";
+			this.B_UnsubSub.Size = new System.Drawing.Size(319, 16);
+			this.B_UnsubSub.TabIndex = 19;
+			this.B_UnsubSub.LeftClicked += new System.EventHandler(this.B_UnsubSub_LeftClicked);
+			this.B_UnsubSub.RightClicked += new System.EventHandler(this.B_UnsubSub_RightClicked);
+			// 
 			// panel1
 			// 
 			this.TLP_Top.SetColumnSpan(this.panel1, 4);
@@ -141,6 +184,20 @@ partial class PC_ImportCollection
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(783, 10);
 			this.panel1.TabIndex = 5;
+			// 
+			// PB_Icon
+			// 
+			this.PB_Icon.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
+			this.PB_Icon.HalfColor = false;
+			this.PB_Icon.Location = new System.Drawing.Point(32, 0);
+			this.PB_Icon.Margin = new System.Windows.Forms.Padding(0);
+			this.PB_Icon.Name = "PB_Icon";
+			this.TLP_Top.SetRowSpan(this.PB_Icon, 2);
+			this.PB_Icon.Size = new System.Drawing.Size(100, 90);
+			this.PB_Icon.TabIndex = 0;
+			this.PB_Icon.TabStop = false;
+			this.PB_Icon.Click += new System.EventHandler(this.B_SteamPage_Click);
 			// 
 			// P_Back
 			// 
@@ -187,9 +244,9 @@ partial class PC_ImportCollection
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(728, 15);
+			this.L_Counts.Location = new System.Drawing.Point(725, 13);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(52, 21);
+			this.L_Counts.Size = new System.Drawing.Size(55, 23);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			this.L_Counts.UseMnemonic = false;
@@ -250,63 +307,6 @@ partial class PC_ImportCollection
 			this.LC_Items.SeparateWithLines = true;
 			this.LC_Items.Size = new System.Drawing.Size(783, 270);
 			this.LC_Items.TabIndex = 14;
-			// 
-			// B_ExInclude
-			// 
-			this.B_ExInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ExInclude.Image1 = "I_X";
-			this.B_ExInclude.Image2 = "I_Check";
-			this.B_ExInclude.Location = new System.Drawing.Point(3, 25);
-			this.B_ExInclude.Name = "B_ExInclude";
-			this.B_ExInclude.Option1 = "ExcludeAll";
-			this.B_ExInclude.Option2 = "IncludeAll";
-			this.B_ExInclude.Size = new System.Drawing.Size(319, 17);
-			this.B_ExInclude.TabIndex = 1;
-			this.B_ExInclude.LeftClicked += new System.EventHandler(this.B_ExInclude_LeftClicked);
-			this.B_ExInclude.RightClicked += new System.EventHandler(this.B_ExInclude_RightClicked);
-			// 
-			// DD_Tags
-			// 
-			this.DD_Tags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Tags.Location = new System.Drawing.Point(436, 3);
-			this.DD_Tags.Name = "DD_Tags";
-			this.panel2.SetRowSpan(this.DD_Tags, 2);
-			this.DD_Tags.Size = new System.Drawing.Size(212, 58);
-			this.DD_Tags.TabIndex = 19;
-			// 
-			// B_UnsubSub
-			// 
-			this.B_UnsubSub.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.B_UnsubSub.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_UnsubSub.Image1 = "I_RemoveSteam";
-			this.B_UnsubSub.Image2 = "I_Add";
-			this.B_UnsubSub.Location = new System.Drawing.Point(3, 3);
-			this.B_UnsubSub.Name = "B_UnsubSub";
-			this.B_UnsubSub.Option1 = "SubscribeAll";
-			this.B_UnsubSub.Option2 = "UnsubscribeAll";
-			this.B_UnsubSub.Size = new System.Drawing.Size(319, 16);
-			this.B_UnsubSub.TabIndex = 19;
-			this.B_UnsubSub.LeftClicked += new System.EventHandler(this.B_UnsubSub_LeftClicked);
-			this.B_UnsubSub.RightClicked += new System.EventHandler(this.B_UnsubSub_RightClicked);
-			// 
-			// PB_Icon
-			// 
-			this.PB_Icon.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
-			this.PB_Icon.HalfColor = false;
-			this.PB_Icon.Location = new System.Drawing.Point(32, 0);
-			this.PB_Icon.Margin = new System.Windows.Forms.Padding(0);
-			this.PB_Icon.Name = "PB_Icon";
-			this.TLP_Top.SetRowSpan(this.PB_Icon, 2);
-			this.PB_Icon.Size = new System.Drawing.Size(100, 90);
-			this.PB_Icon.TabIndex = 0;
-			this.PB_Icon.TabStop = false;
-			this.PB_Icon.Click += new System.EventHandler(this.B_SteamPage_Click);
 			// 
 			// PC_ImportCollection
 			// 

@@ -13,4 +13,5 @@ internal class SessionSettings : ISave
 	public bool WindowWasMaximized { get; set; }
 	public UserSettings UserSettings { get; set; } = new();
     public bool SubscribeInfoShown { get; set; }
+	public bool FpsBoosterLogWarning { get; set; }
 }

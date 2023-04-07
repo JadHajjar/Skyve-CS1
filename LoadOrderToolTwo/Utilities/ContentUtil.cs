@@ -269,7 +269,8 @@ internal class ContentUtil
 		}
 
 		PackageWatcher.Pause();
-		Directory.Delete(folder, true);
+		try{ ExtensionClass.DeleteFolder(folder); }
+		catch (Exception ex){ Log.Exception(ex, $"Failed to delete the folder '{folder}'"); }
 		PackageWatcher.Resume();
 	}
 

@@ -15,11 +15,9 @@ namespace LoadOrderMod.Settings.Tabs {
 
         public static void Make(ExtUITabstrip tabStrip) {
             UIHelper panelHelper = tabStrip.AddTabPage("Startup");
-            panelHelper.AddLabel("restart required to take effect.", textColor: Color.yellow);
-            panelHelper.AddSpace(10);
 
             panelHelper.AddCheckbox(
-                "remove ad panels",
+                "Remove ad panels",
                 ConfigUtil.Config.TurnOffSteamPanels,
                 val => {
                     ConfigUtil.Config.TurnOffSteamPanels = val;
@@ -50,11 +48,9 @@ namespace LoadOrderMod.Settings.Tabs {
                     ConfigUtil.Config.IgnoranceIsBliss = val;
                     ConfigUtil.SaveConfig();
                 }) as UICheckBox;
-        }
 
-        static void OnResetLoadOrdersClicked() {
-            Log.Debug("Reset Load Orders pressed");
-            ConfigUtil.SaveConfig();
-        }
+			panelHelper.AddSpace(10);
+			panelHelper.AddLabel("Changing those settings requires a restart to take effect.", textColor: Color.yellow);
+		}
     }
 }

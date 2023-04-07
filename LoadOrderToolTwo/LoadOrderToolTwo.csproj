@@ -53,6 +53,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
@@ -157,13 +158,15 @@
 
 	<Target Name="DeployToWorkshop" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' == 'Release'">
 		<Message Text="Deploy to workshop $(WorkshopDir)" Importance="high" />
-		<RemoveDir Directories="$(WorkshopDir)" />
 		<ItemGroup>
+			<FilesToDelete Include="$(WorkshopDir)\**\*.*" />
 			<FilesToCopy Include="$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\**\*.*" />
 		</ItemGroup>
+		<Delete Files="$(FilesToDelete)" />
 		<Copy SourceFiles="@(FilesToCopy)" DestinationFiles="@(FilesToCopy->'$(WorkshopDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Delete Files="$(ZipFile)" />
 		<ZipDirectory SourceDirectory="$(WorkshopDir)" DestinationFile="$(ZipFile)" />
+		<RemoveDir Directories="$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)" />
 	</Target>
 
 </Project>

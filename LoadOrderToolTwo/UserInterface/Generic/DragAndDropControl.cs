@@ -218,9 +218,16 @@ internal class DragAndDropControl : SlickControl
 		var width = (int)size.Width + 3 + Padding.Left + (UI.FontScale >= 2 ? 48 : 24);
 		var rect = new Rectangle(Width - availableWidth, 0, availableWidth, Height).CenterR(width, Math.Max(UI.FontScale >= 2 ? 48 : 24, (int)size.Height + 3));
 
-		using var icon = (UI.FontScale >= 2 ? Properties.Resources.I_DragDrop_48 : Properties.Resources.I_DragDrop).Color(color);
+		if (Loading)
+		{
+			DrawLoader(e.Graphics, rect.Align(new Size(UI.FontScale >= 2 ? 48 : 24, UI.FontScale >= 2 ? 48 : 24), ContentAlignment.MiddleLeft));
+		}
+		else
+		{
+			using var icon = (UI.FontScale >= 2 ? Properties.Resources.I_DragDrop_48 : Properties.Resources.I_DragDrop).Color(color);
 
-		e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+			e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
+		}
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(color), rect.Align(size.ToSize(), ContentAlignment.MiddleRight).Pad(-2));
 

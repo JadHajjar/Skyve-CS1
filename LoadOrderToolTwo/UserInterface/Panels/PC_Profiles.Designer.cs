@@ -361,7 +361,7 @@ partial class PC_Profiles
 			this.CB_AutoSave.Location = new System.Drawing.Point(10, 110);
 			this.CB_AutoSave.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
 			this.CB_AutoSave.Name = "CB_AutoSave";
-			this.CB_AutoSave.Size = new System.Drawing.Size(152, 30);
+			this.CB_AutoSave.Size = new System.Drawing.Size(105, 30);
 			this.CB_AutoSave.SpaceTriggersClick = true;
 			this.CB_AutoSave.TabIndex = 1;
 			this.CB_AutoSave.Text = "AutoSave";
@@ -427,7 +427,7 @@ partial class PC_Profiles
 			this.CB_LHT.Location = new System.Drawing.Point(10, 48);
 			this.CB_LHT.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_LHT.Name = "CB_LHT";
-			this.CB_LHT.Size = new System.Drawing.Size(162, 30);
+			this.CB_LHT.Size = new System.Drawing.Size(62, 30);
 			this.CB_LHT.SpaceTriggersClick = true;
 			this.CB_LHT.TabIndex = 0;
 			this.CB_LHT.Text = "LHT";
@@ -461,7 +461,7 @@ partial class PC_Profiles
 			this.CB_NoWorkshop.Location = new System.Drawing.Point(294, 48);
 			this.CB_NoWorkshop.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_NoWorkshop.Name = "CB_NoWorkshop";
-			this.CB_NoWorkshop.Size = new System.Drawing.Size(246, 30);
+			this.CB_NoWorkshop.Size = new System.Drawing.Size(135, 30);
 			this.CB_NoWorkshop.SpaceTriggersClick = true;
 			this.CB_NoWorkshop.TabIndex = 1;
 			this.CB_NoWorkshop.Text = "NoWorkshop";
@@ -491,7 +491,7 @@ partial class PC_Profiles
 			this.CB_LoadSave.EnterTriggersClick = false;
 			this.CB_LoadSave.Location = new System.Drawing.Point(10, 218);
 			this.CB_LoadSave.Name = "CB_LoadSave";
-			this.CB_LoadSave.Size = new System.Drawing.Size(276, 30);
+			this.CB_LoadSave.Size = new System.Drawing.Size(151, 30);
 			this.CB_LoadSave.SpaceTriggersClick = true;
 			this.CB_LoadSave.TabIndex = 4;
 			this.CB_LoadSave.Text = "LoadSaveGame";
@@ -509,7 +509,7 @@ partial class PC_Profiles
 			this.CB_StartNewGame.EnterTriggersClick = false;
 			this.CB_StartNewGame.Location = new System.Drawing.Point(10, 113);
 			this.CB_StartNewGame.Name = "CB_StartNewGame";
-			this.CB_StartNewGame.Size = new System.Drawing.Size(208, 30);
+			this.CB_StartNewGame.Size = new System.Drawing.Size(112, 30);
 			this.CB_StartNewGame.SpaceTriggersClick = true;
 			this.CB_StartNewGame.TabIndex = 2;
 			this.CB_StartNewGame.Text = "NewGame";
@@ -552,7 +552,7 @@ partial class PC_Profiles
 			this.CB_LoadEnabled.Location = new System.Drawing.Point(10, 48);
 			this.CB_LoadEnabled.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_LoadEnabled.Name = "CB_LoadEnabled";
-			this.CB_LoadEnabled.Size = new System.Drawing.Size(136, 30);
+			this.CB_LoadEnabled.Size = new System.Drawing.Size(132, 30);
 			this.CB_LoadEnabled.SpaceTriggersClick = true;
 			this.CB_LoadEnabled.TabIndex = 0;
 			this.CB_LoadEnabled.Text = "LoadEnabled";
@@ -570,7 +570,7 @@ partial class PC_Profiles
 			this.CB_LoadUsed.Location = new System.Drawing.Point(10, 81);
 			this.CB_LoadUsed.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
 			this.CB_LoadUsed.Name = "CB_LoadUsed";
-			this.CB_LoadUsed.Size = new System.Drawing.Size(114, 30);
+			this.CB_LoadUsed.Size = new System.Drawing.Size(109, 30);
 			this.CB_LoadUsed.SpaceTriggersClick = true;
 			this.CB_LoadUsed.TabIndex = 1;
 			this.CB_LoadUsed.Text = "LoadUsed";
@@ -621,11 +621,11 @@ partial class PC_Profiles
 			this.TLP_AdvancedDev.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_AdvancedDev.Controls.Add(this.CB_NoMods, 0, 0);
 			this.TLP_AdvancedDev.Controls.Add(this.CB_NoAssets, 1, 0);
-			this.TLP_AdvancedDev.Controls.Add(this.CB_UnityProfiler, 1, 2);
 			this.TLP_AdvancedDev.Controls.Add(this.CB_UseCitiesExe, 0, 2);
 			this.TLP_AdvancedDev.Controls.Add(this.CB_DevUI, 0, 1);
-			this.TLP_AdvancedDev.Controls.Add(this.CB_DebugMono, 0, 3);
 			this.TLP_AdvancedDev.Controls.Add(this.CB_RefreshWorkshop, 1, 1);
+			this.TLP_AdvancedDev.Controls.Add(this.CB_UnityProfiler, 0, 3);
+			this.TLP_AdvancedDev.Controls.Add(this.CB_DebugMono, 1, 2);
 			this.TLP_AdvancedDev.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TLP_AdvancedDev.Image = global::LoadOrderToolTwo.Properties.Resources.I_Developer;
 			this.TLP_AdvancedDev.Location = new System.Drawing.Point(591, 336);
@@ -652,7 +652,7 @@ partial class PC_Profiles
 			this.CB_NoMods.Location = new System.Drawing.Point(10, 53);
 			this.CB_NoMods.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_NoMods.Name = "CB_NoMods";
-			this.CB_NoMods.Size = new System.Drawing.Size(162, 30);
+			this.CB_NoMods.Size = new System.Drawing.Size(99, 30);
 			this.CB_NoMods.SpaceTriggersClick = true;
 			this.CB_NoMods.TabIndex = 0;
 			this.CB_NoMods.Text = "NoMods";
@@ -671,7 +671,7 @@ partial class PC_Profiles
 			this.CB_NoAssets.Location = new System.Drawing.Point(294, 53);
 			this.CB_NoAssets.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_NoAssets.Name = "CB_NoAssets";
-			this.CB_NoAssets.Size = new System.Drawing.Size(167, 30);
+			this.CB_NoAssets.Size = new System.Drawing.Size(104, 30);
 			this.CB_NoAssets.SpaceTriggersClick = true;
 			this.CB_NoAssets.TabIndex = 1;
 			this.CB_NoAssets.Text = "NoAssets";
@@ -687,13 +687,14 @@ partial class PC_Profiles
 			this.CB_UnityProfiler.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_UnityProfiler.DefaultValue = false;
 			this.CB_UnityProfiler.EnterTriggersClick = false;
-			this.CB_UnityProfiler.Location = new System.Drawing.Point(294, 125);
+			this.CB_UnityProfiler.Location = new System.Drawing.Point(10, 161);
 			this.CB_UnityProfiler.Name = "CB_UnityProfiler";
-			this.CB_UnityProfiler.Size = new System.Drawing.Size(166, 30);
+			this.CB_UnityProfiler.Size = new System.Drawing.Size(174, 30);
 			this.CB_UnityProfiler.SpaceTriggersClick = true;
 			this.CB_UnityProfiler.TabIndex = 5;
 			this.CB_UnityProfiler.Text = "UnityProfilerMode";
 			this.CB_UnityProfiler.UncheckedText = null;
+			this.CB_UnityProfiler.Visible = false;
 			this.CB_UnityProfiler.CheckChanged += new System.EventHandler(this.ValueChanged);
 			// 
 			// CB_UseCitiesExe
@@ -707,7 +708,7 @@ partial class PC_Profiles
 			this.CB_UseCitiesExe.EnterTriggersClick = false;
 			this.CB_UseCitiesExe.Location = new System.Drawing.Point(10, 125);
 			this.CB_UseCitiesExe.Name = "CB_UseCitiesExe";
-			this.CB_UseCitiesExe.Size = new System.Drawing.Size(231, 30);
+			this.CB_UseCitiesExe.Size = new System.Drawing.Size(195, 30);
 			this.CB_UseCitiesExe.SpaceTriggersClick = true;
 			this.CB_UseCitiesExe.TabIndex = 4;
 			this.CB_UseCitiesExe.Text = "LaunchThroughCities";
@@ -726,7 +727,7 @@ partial class PC_Profiles
 			this.CB_DevUI.EnterTriggersClick = false;
 			this.CB_DevUI.Location = new System.Drawing.Point(10, 89);
 			this.CB_DevUI.Name = "CB_DevUI";
-			this.CB_DevUI.Size = new System.Drawing.Size(140, 30);
+			this.CB_DevUI.Size = new System.Drawing.Size(130, 30);
 			this.CB_DevUI.SpaceTriggersClick = true;
 			this.CB_DevUI.TabIndex = 2;
 			this.CB_DevUI.Text = "EnableDevUi";
@@ -742,9 +743,9 @@ partial class PC_Profiles
 			this.CB_DebugMono.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_DebugMono.DefaultValue = false;
 			this.CB_DebugMono.EnterTriggersClick = false;
-			this.CB_DebugMono.Location = new System.Drawing.Point(10, 161);
+			this.CB_DebugMono.Location = new System.Drawing.Point(294, 125);
 			this.CB_DebugMono.Name = "CB_DebugMono";
-			this.CB_DebugMono.Size = new System.Drawing.Size(168, 30);
+			this.CB_DebugMono.Size = new System.Drawing.Size(159, 30);
 			this.CB_DebugMono.SpaceTriggersClick = true;
 			this.CB_DebugMono.TabIndex = 6;
 			this.CB_DebugMono.Text = "UseDebugMono";
@@ -763,7 +764,7 @@ partial class PC_Profiles
 			this.CB_RefreshWorkshop.EnterTriggersClick = false;
 			this.CB_RefreshWorkshop.Location = new System.Drawing.Point(294, 89);
 			this.CB_RefreshWorkshop.Name = "CB_RefreshWorkshop";
-			this.CB_RefreshWorkshop.Size = new System.Drawing.Size(241, 30);
+			this.CB_RefreshWorkshop.Size = new System.Drawing.Size(169, 30);
 			this.CB_RefreshWorkshop.SpaceTriggersClick = true;
 			this.CB_RefreshWorkshop.TabIndex = 3;
 			this.CB_RefreshWorkshop.Text = "RefreshWorkshop";

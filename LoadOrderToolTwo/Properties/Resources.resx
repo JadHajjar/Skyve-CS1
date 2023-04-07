@@ -682,4 +682,28 @@
   <data name="I_Search_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Search_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Checked_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Checked_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_CopyFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_CopyFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_CopyFile_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_CopyFile_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Errors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Errors.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Errors_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Errors_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Log" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Log_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Log_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Unchecked_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Unchecked_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

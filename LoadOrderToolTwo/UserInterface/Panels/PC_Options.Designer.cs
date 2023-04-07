@@ -151,7 +151,6 @@ partial class PC_Options
 			this.B_Reset.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_Reset.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Reset.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_Reset.Image = global::LoadOrderToolTwo.Properties.Resources.I_Undo;
 			this.B_Reset.Location = new System.Drawing.Point(10, 142);
 			this.B_Reset.Name = "B_Reset";
 			this.B_Reset.Size = new System.Drawing.Size(249, 30);
@@ -166,7 +165,6 @@ partial class PC_Options
 			this.B_Discord.ColorShade = null;
 			this.B_Discord.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discord.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_Discord.Image = global::LoadOrderToolTwo.Properties.Resources.I_Discord;
 			this.B_Discord.Location = new System.Drawing.Point(10, 41);
 			this.B_Discord.Name = "B_Discord";
 			this.B_Discord.Size = new System.Drawing.Size(249, 30);
@@ -181,7 +179,6 @@ partial class PC_Options
 			this.B_Guide.ColorShade = null;
 			this.B_Guide.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Guide.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_Guide.Image = global::LoadOrderToolTwo.Properties.Resources.I_Guide;
 			this.B_Guide.Location = new System.Drawing.Point(10, 77);
 			this.B_Guide.Name = "B_Guide";
 			this.B_Guide.Size = new System.Drawing.Size(249, 30);
@@ -493,7 +490,6 @@ partial class PC_Options
 			this.B_ClearFolders.ColorShade = null;
 			this.B_ClearFolders.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_ClearFolders.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ClearFolders.Image = global::LoadOrderToolTwo.Properties.Resources.I_ClearFolders;
 			this.B_ClearFolders.Location = new System.Drawing.Point(935, 266);
 			this.B_ClearFolders.Name = "B_ClearFolders";
 			this.B_ClearFolders.Size = new System.Drawing.Size(149, 30);
@@ -682,7 +678,6 @@ partial class PC_Options
 			this.B_HelpTranslate.ColorShade = null;
 			this.B_HelpTranslate.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_HelpTranslate.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_HelpTranslate.Image = global::LoadOrderToolTwo.Properties.Resources.I_Translate;
 			this.B_HelpTranslate.Location = new System.Drawing.Point(10, 115);
 			this.B_HelpTranslate.Name = "B_HelpTranslate";
 			this.B_HelpTranslate.Size = new System.Drawing.Size(249, 30);
@@ -710,7 +705,6 @@ partial class PC_Options
 			this.B_Theme.ColorShade = null;
 			this.B_Theme.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Theme.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_Theme.Image = global::LoadOrderToolTwo.Properties.Resources.I_Theme;
 			this.B_Theme.Location = new System.Drawing.Point(10, 180);
 			this.B_Theme.Name = "B_Theme";
 			this.B_Theme.Size = new System.Drawing.Size(249, 30);

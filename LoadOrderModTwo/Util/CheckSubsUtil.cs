@@ -226,30 +226,6 @@ namespace LoadOrderMod.Util {
             Log.DisplayMesage($"Deleted {n} unsubscribed items.");
         }
 
-        public Coroutine Redownload(PublishedFileId id) => StartCoroutine(RedownloadCoroutine(id));
-        public IEnumerator RedownloadCoroutine(PublishedFileId id) {
-            Log.Called(id);
-            if (id != PublishedFileId.invalid) {
-                try {
-                    string path = SubscriptionsTab.SteamExePath;
-                    if (path.IsNullorEmpty()) {
-                        yield break;
-                    }
-
-                    ReDownload(new[] { id.AsUInt64 }, new FileInfo(path));
-                } catch (Exception ex) { ex.Log(); }
-
-                yield return new WaitForSeconds(10);
-
-                try {
-                    var method = typeof(PlatformService).GetMethod("TriggerWorkshopSubscriptionChanged", throwOnError: true);
-                    method.Invoke(null, new object[] { id, false});
-                    method.Invoke(null, new object[] { id, true });
-                } catch (Exception ex) { ex.Log(); }
-                yield return 0;
-            }
-        }
-
         //public Coroutine Resubscribe(PublishedFileId id) => StartCoroutine(ResubscribeCoroutine(id));
         //public IEnumerator ResubscribeCoroutine(PublishedFileId id) {
         //    Log.Called(id);

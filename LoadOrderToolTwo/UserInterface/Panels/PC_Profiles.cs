@@ -423,7 +423,11 @@ public partial class PC_Profiles : PanelContent
 
 	private bool DD_NewMap_ValidFile(string arg)
 	{
-		return arg.PathContains(DD_NewMap.StartingFolder) && DD_NewMap.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
+		var alternativePath = Path.Combine(LocationManager.GameContentPath, "Maps");
+		var alternativePath2 = Path.Combine(LocationManager.GameContentPath, "Scenarios");
+
+		return (arg.PathContains(DD_NewMap.StartingFolder) || arg.PathContains(alternativePath) || arg.PathContains(alternativePath2))
+			&& DD_NewMap.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
 	}
 
 	private bool DD_SaveFile_ValidFile(string arg)

@@ -65,19 +65,6 @@ namespace LoadOrderMod.UI.EntryStatus {
             if (status == DownloadStatus.CatalogOutOfDate) status = DownloadStatus.OutOfDate; // replace sprite
             disabledFgSprite = focusedFgSprite = normalFgSprite = hoveredFgSprite = pressedFgSprite = status.ToString();
             tooltip = result;
-            if (!Settings.Tabs.SubscriptionsTab.SteamExePath.IsNullorEmpty())
-                tooltip += "\nClick to redownload";
-        }
-
-        protected override void OnClick(UIMouseEventParameter p) {
-            p.Use();
-            try {
-                if (UGCDetails.publishedFileId.AsUInt64 != 0 && UGCDetails.publishedFileId != PublishedFileId.invalid) {
-                    CheckSubsUtil.Instance.Redownload(UGCDetails.publishedFileId);
-                }
-            } catch(Exception ex) { ex.Log(); }
-
-            base.OnClick(p);
         }
     }
 }

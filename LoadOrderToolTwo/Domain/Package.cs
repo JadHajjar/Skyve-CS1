@@ -25,7 +25,7 @@ public class Package : IPackage
 		if (workshop)
 		{
 			SteamId = ulong.Parse(Path.GetFileName(folder));
-			SteamPage = $"https://steamcommunity.com/workshop/filedetails/?id={SteamId}";
+			SteamPage = $"https://steamcommunity.com/workshop/filedetails?id={SteamId}";
 		}
 
 		if (!string.IsNullOrWhiteSpace(LocationManager.VirtualGamePath) && Folder.Contains(LocationManager.GamePath))
