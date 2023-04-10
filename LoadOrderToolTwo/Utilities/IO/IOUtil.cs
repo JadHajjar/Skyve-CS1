@@ -15,7 +15,7 @@ internal static class IOUtil
 	{
 		try
 		{
-			if (!File.Exists(Path.Combine(dir, exeFile)))
+			if (!File.Exists(string.Join(LocationManager.PathSeparator, dir, exeFile)))
 			{
 				return null;
 			}
@@ -23,7 +23,7 @@ internal static class IOUtil
 			var startInfo = new ProcessStartInfo
 			{
 				WorkingDirectory = dir,
-				FileName =Path.Combine(dir, exeFile),
+				FileName =string.Join(LocationManager.PathSeparator, dir, exeFile),
 				Arguments = args,
 				WindowStyle = ProcessWindowStyle.Normal,
 				UseShellExecute = useShellExecute && LocationManager.Platform is not Platform.MacOSX,
@@ -79,7 +79,7 @@ internal static class IOUtil
 	{
 		try
 		{
-			File.WriteAllText(Path.Combine(LocationManager.CurrentDirectory, "batch.bat"), command);
+			File.WriteAllText(string.Join(LocationManager.PathSeparator, LocationManager.CurrentDirectory, "batch.bat"), command);
 
 			Execute(LocationManager.CurrentDirectory, "batch.bat", "", true, true);
 		}

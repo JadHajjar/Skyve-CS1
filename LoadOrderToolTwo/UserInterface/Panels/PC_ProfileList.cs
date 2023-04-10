@@ -95,7 +95,7 @@ public partial class PC_ProfileList : PanelContent
 
 		if (favorites == 0)
 		{
-			text = string.Join(Locale.FavoriteTotal, total);
+			text = string.Format(Locale.FavoriteTotal, total);
 		}
 		else
 		{

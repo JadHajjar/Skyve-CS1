@@ -41,7 +41,7 @@ public static class CitiesManager
 		var fileExe = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe ? LocationManager.CitiesExe : LocationManager.SteamExe;
 		var dir = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe ? LocationManager.GamePath : LocationManager.SteamPath;
 
-		return File.Exists(Path.Combine(dir, fileExe));
+		return File.Exists(string.Join(LocationManager.PathSeparator, dir, fileExe));
 	}
 
 	public static void Launch()

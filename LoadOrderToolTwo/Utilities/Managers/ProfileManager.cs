@@ -18,7 +18,7 @@ public static class ProfileManager
 	private const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";
 	private const string CITIES_PATH = "%CITIES%";
 	private const string WS_CONTENT_PATH = "%WORKSHOP%";
-	private static List<Profile> _profiles = new();
+	private static readonly List<Profile> _profiles;
 	private static bool disableAutoSave;
 	private static readonly FileSystemWatcher? _watcher;
 
@@ -30,7 +30,14 @@ public static class ProfileManager
 		{
 			yield return Profile.TemporaryProfile;
 
-			foreach (var profile in _profiles)
+			List<Profile> profiles;
+
+			lock (_profiles)
+			{
+				profiles = new(_profiles);
+			}
+
+			foreach (var profile in profiles)
 			{
 				yield return profile;
 			}
@@ -41,15 +48,6 @@ public static class ProfileManager
 
 	static ProfileManager()
 	{
-		try
-		{
-			ConvertLegacyProfiles();
-		}
-		catch (Exception ex)
-		{
-			Log.Exception(ex, "Failed to port LOT1 profiles");
-		}
-
 		try
 		{
 			var current = LoadCurrentProfile();
@@ -83,6 +81,7 @@ public static class ProfileManager
 
 		if (!CommandUtil.NoWindow)
 		{
+			new BackgroundAction(ConvertLegacyProfiles).Run();
 			new BackgroundAction(LoadAllProfiles).Run();
 		}
 	}
@@ -94,7 +93,7 @@ public static class ProfileManager
 			return null;
 		}
 
-		var profile = Path.Combine(LocationManager.LotProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? CentralManager.SessionSettings.CurrentProfile) + ".json");
+		var profile = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? CentralManager.SessionSettings.CurrentProfile) + ".json");
 
 		if (!File.Exists(profile))
 		{
@@ -128,7 +127,7 @@ public static class ProfileManager
 
 		Log.Info("Checking for Legacy profiles");
 
-		var legacyProfilePath = Path.Combine(LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
+		var legacyProfilePath = string.Join(LocationManager.PathSeparator, LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
 
 		if (!Directory.Exists(legacyProfilePath))
 		{
@@ -139,7 +138,7 @@ public static class ProfileManager
 
 		foreach (var profile in Directory.EnumerateFiles(legacyProfilePath, "*.xml"))
 		{
-			var newName = Path.Combine(LocationManager.LotProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
+			var newName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
 
 			if (File.Exists(newName))
 			{
@@ -157,13 +156,16 @@ public static class ProfileManager
 				newProfile.LastEditDate = File.GetLastWriteTime(profile);
 				newProfile.DateCreated = File.GetCreationTime(profile);
 
-				_profiles.Add(newProfile);
+				lock (_profiles)
+				{
+					_profiles.Add(newProfile);
+				}
 
 				Save(newProfile, true);
 
-				Directory.CreateDirectory(Path.Combine(legacyProfilePath, "Legacy"));
+				Directory.CreateDirectory(string.Join(LocationManager.PathSeparator, legacyProfilePath, "Legacy"));
 
-				File.Move(profile, Path.Combine(legacyProfilePath, "Legacy", Path.GetFileName(profile)));
+				File.Move(profile, string.Join(LocationManager.PathSeparator, legacyProfilePath, "Legacy", Path.GetFileName(profile)));
 			}
 			else
 			{
@@ -176,7 +178,14 @@ public static class ProfileManager
 	{
 		new BackgroundAction(() =>
 		{
-			foreach (var profile in _profiles)
+			List<Profile> profiles;
+
+			lock (_profiles)
+			{
+				profiles = new(_profiles);
+			}
+
+			foreach (var profile in profiles)
 			{
 				profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
 			}
@@ -322,7 +331,7 @@ public static class ProfileManager
 
 	internal static void DeleteProfile(Profile profile)
 	{
-		ExtensionClass.DeleteFile(Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
+		ExtensionClass.DeleteFile(string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
 
 		if (profile == CurrentProfile)
 		{
@@ -457,8 +466,6 @@ public static class ProfileManager
 
 	private static void LoadAllProfiles()
 	{
-		var profiles = new List<Profile>(_profiles);
-
 		try
 		{
 			foreach (var profile in Directory.EnumerateFiles(LocationManager.LotProfilesAppDataPath, "*.json"))
@@ -476,7 +483,10 @@ public static class ProfileManager
 					newProfile.LastEditDate = File.GetLastWriteTime(profile);
 					newProfile.DateCreated = File.GetCreationTime(profile);
 
-					profiles.Add(newProfile);
+					lock (_profiles)
+					{
+						_profiles.Add(newProfile);
+					}
 				}
 				else
 				{
@@ -485,8 +495,6 @@ public static class ProfileManager
 			}
 		}
 		catch { }
-
-		_profiles = profiles;
 
 		if (CentralManager.IsContentLoaded)
 		{
@@ -516,11 +524,14 @@ public static class ProfileManager
 
 			if (!File.Exists(e.FullPath))
 			{
-				var profile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
-
-				if (profile != null)
+				lock (_profiles)
 				{
-					_profiles.Remove(profile);
+					var profile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+
+					if (profile != null)
+					{
+						_profiles.Remove(profile);
+					}
 				}
 
 				return;
@@ -534,11 +545,14 @@ public static class ProfileManager
 				newProfile.LastEditDate = File.GetLastWriteTime(e.FullPath);
 				newProfile.DateCreated = File.GetCreationTime(e.FullPath);
 
-				var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+				lock (_profiles)
+				{
+					var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
-				_profiles.Remove(currentProfile);
+					_profiles.Remove(currentProfile);
 
-				_profiles.Add(newProfile);
+					_profiles.Add(newProfile);
+				}
 			}
 			else
 			{
@@ -577,14 +591,14 @@ public static class ProfileManager
 			Directory.CreateDirectory(LocationManager.LotProfilesAppDataPath);
 
 			File.WriteAllText(
-				Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"),
+				string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"),
 				Newtonsoft.Json.JsonConvert.SerializeObject(profile, Newtonsoft.Json.Formatting.Indented));
 
 			return true;
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}");
+			Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}");
 		}
 		finally
 		{
@@ -642,8 +656,8 @@ public static class ProfileManager
 
 		text = text.EscapeFileName();
 
-		var newName = Path.Combine(LocationManager.LotProfilesAppDataPath, $"{text}.json");
-		var oldName = Path.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json");
+		var newName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{text}.json");
+		var oldName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json");
 
 		try
 		{
@@ -681,13 +695,13 @@ public static class ProfileManager
 
 	internal static string? GetNewProfileName()
 	{
-		var startName = Path.Combine(LocationManager.LotProfilesAppDataPath, "New Profile.json");
+		var startName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, "New Profile.json");
 
 		// Check if the file with the proposed name already exists
 		if (File.Exists(startName))
 		{
 			var extension = ".json";
-			var nameWithoutExtension = Path.Combine(LocationManager.LotProfilesAppDataPath, "New Profile");
+			var nameWithoutExtension = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, "New Profile");
 			var counter = 1;
 
 			// Loop until a valid file name is found
@@ -759,7 +773,10 @@ public static class ProfileManager
 
 	internal static void AddProfile(Profile newProfile)
 	{
-		_profiles.Add(newProfile);
+		lock (_profiles)
+		{
+			_profiles.Add(newProfile);
+		}
 	}
 
 	internal static Profile? ImportProfile(string obj)
@@ -769,8 +786,8 @@ public static class ProfileManager
 			_watcher.EnableRaisingEvents = false;
 		}
 
-		var newPath = Path.Combine(LocationManager.LotProfilesAppDataPath, Path.GetFileName(obj));
-	
+		var newPath = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, Path.GetFileName(obj));
+
 		File.Move(obj, newPath);
 
 		if (_watcher is not null)
@@ -786,11 +803,14 @@ public static class ProfileManager
 			newProfile.LastEditDate = File.GetLastWriteTime(newPath);
 			newProfile.DateCreated = File.GetCreationTime(newPath);
 
-			var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
+			lock (_profiles)
+			{
+				var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
-			_profiles.Remove(currentProfile);
+				_profiles.Remove(currentProfile);
 
-			_profiles.Add(newProfile);
+				_profiles.Add(newProfile);
+			}
 
 			return newProfile;
 		}

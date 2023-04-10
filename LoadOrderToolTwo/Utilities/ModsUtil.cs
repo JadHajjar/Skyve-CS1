@@ -90,7 +90,7 @@ internal static class ModsUtil
 
 	internal static bool IsLocallyIncluded(Mod mod)
 	{
-		return !File.Exists(Path.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+		return !File.Exists(string.Join(LocationManager.PathSeparator, mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 	}
 
 	internal static bool IsLocallyEnabled(Mod mod)
@@ -147,11 +147,11 @@ internal static class ModsUtil
 	{
 		if ((value || ModLogicManager.IsRequired(mod)) && !ModLogicManager.IsForbidden(mod))
 		{
-			ExtensionClass.DeleteFile(Path.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+			ExtensionClass.DeleteFile(string.Join(LocationManager.PathSeparator, mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 		}
 		else
 		{
-			File.WriteAllBytes(Path.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
+			File.WriteAllBytes(string.Join(LocationManager.PathSeparator, mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
 		}
 
 		if (CentralManager.SessionSettings.UserSettings.LinkModAssets && mod.Package.Assets != null)

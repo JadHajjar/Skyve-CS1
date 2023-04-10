@@ -25,17 +25,20 @@ internal class LocationManager
 	public static string CurrentDirectory { get; }
 	public static Platform Platform { get; private set; }
 
-	public static string DataPath => Path.Combine(GamePath, "Cities_Data");
-	public static string ManagedDLL => Path.Combine(DataPath, "Managed");
-	public static string MonoPath => Path.Combine(DataPath, "Mono");
-	public static string AddonsPath => Path.Combine(AppDataPath, "Addons");
-	public static string LotAppDataPath => Path.Combine(AppDataPath, "LoadOrderTwo");
-	public static string LotProfilesAppDataPath => Path.Combine(LotAppDataPath, "Profiles");
-	public static string ModsPath => Path.Combine(AddonsPath, "Mods");
-	public static string AssetsPath => Path.Combine(AddonsPath, "Assets");
-	public static string MapThemesPath => Path.Combine(AddonsPath, "MapThemes");
-	public static string MapsPath => Path.Combine(AppDataPath, "Maps");
-	public static string StylesPath => Path.Combine(AddonsPath, "Styles");
+	public static string DataPath => string.Join(PathSeparator, GamePath, "Cities_Data");
+	public static string ManagedDLL => string.Join(PathSeparator, DataPath, "Managed");
+	public static string MonoPath => string.Join(PathSeparator, DataPath, "Mono");
+	public static string AddonsPath => string.Join(PathSeparator, AppDataPath, "Addons");
+	public static string LotAppDataPath => string.Join(PathSeparator, AppDataPath, "LoadOrderTwo");
+	public static string LotProfilesAppDataPath => string.Join(PathSeparator, LotAppDataPath, "Profiles");
+	public static string ModsPath => string.Join(PathSeparator, AddonsPath, "Mods");
+	public static string AssetsPath => string.Join(PathSeparator, AddonsPath, "Assets");
+	public static string MapThemesPath => string.Join(PathSeparator, AddonsPath, "MapThemes");
+	public static string MapsPath => string.Join(PathSeparator, AppDataPath, "Maps");
+	public static string StylesPath => string.Join(PathSeparator, AddonsPath, "Styles");
+
+	public static string PathSeparator => Platform is Platform.Windows ? "\\" : "/";
+	public static string InvalidPathSeparator => Platform is not Platform.Windows ? "\\" : "/";
 
 	public static string WorkshopContentPath
 	{
@@ -53,7 +56,7 @@ internal class LocationManager
 				return string.Empty;
 			}
 
-			return Path.Combine(parent, "workshop", "content", "255710");
+			return string.Join(PathSeparator, parent.Replace(InvalidPathSeparator, PathSeparator), "workshop", "content", "255710");
 		}
 	}
 
@@ -73,7 +76,7 @@ internal class LocationManager
 				return string.Empty;
 			}
 
-			return Path.Combine(parent, "workshop", "content", "255710");
+			return string.Join(PathSeparator, parent.Replace(InvalidPathSeparator, PathSeparator), "workshop", "content", "255710");
 		}
 	}
 
@@ -83,10 +86,10 @@ internal class LocationManager
 		{
 			if (Platform == Platform.MacOSX)
 			{
-				return Path.Combine(GamePath, "Cities.app", "Contents", "Resources", "Files");
+				return string.Join(PathSeparator, GamePath, "Cities.app", "Contents", "Resources", "Files");
 			}
 
-			return Path.Combine(GamePath, "Files");
+			return string.Join(PathSeparator, GamePath, "Files");
 		}
 	}
 
@@ -120,12 +123,12 @@ internal class LocationManager
 			return;
 		}
 
-		GamePath = _folderSettings.GamePath.TrimEnd('/', '\\');
-		AppDataPath = _folderSettings.AppDataPath.TrimEnd('/', '\\');
-		SteamPath = _folderSettings.SteamPath.TrimEnd('/', '\\');
-		VirtualGamePath = _folderSettings.VirtualGamePath.TrimEnd('/', '\\');
-		VirtualAppDataPath = _folderSettings.VirtualAppDataPath.TrimEnd('/', '\\');
 		ISave.CurrentPlatform = Platform = _folderSettings.Platform;
+		GamePath = _folderSettings.GamePath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
+		AppDataPath = _folderSettings.AppDataPath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
+		SteamPath = _folderSettings.SteamPath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
+		VirtualGamePath = _folderSettings.VirtualGamePath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
+		VirtualAppDataPath = _folderSettings.VirtualAppDataPath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
 
 		Log.Info("Folder Settings:\r\n" +
 			$"Platform: {Platform}\r\n" +
@@ -292,9 +295,9 @@ internal class LocationManager
 
 			externalConfig.Save();
 
-			if (File.Exists(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(Path.Combine(LotAppDataPath, "LoadOrderConfig.xml")))
+			if (File.Exists(string.Join(PathSeparator, AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(string.Join(PathSeparator, LotAppDataPath, "LoadOrderConfig.xml")))
 			{
-				ExtensionClass.CopyFile(Path.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Path.Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
+				ExtensionClass.CopyFile(string.Join(PathSeparator, AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), string.Join(PathSeparator, LotAppDataPath, "LoadOrderConfig.xml"), true);
 			}
 		}
 	}

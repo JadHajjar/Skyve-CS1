@@ -44,7 +44,7 @@ public static class SteamUtil
 		Dlcs = cache ?? new();
 	}
 
-	public static bool IsSteamAvailable() => File.Exists(Path.Combine(LocationManager.SteamPath, LocationManager.SteamExe));
+	public static bool IsSteamAvailable() => File.Exists(string.Join(LocationManager.PathSeparator, LocationManager.SteamPath, LocationManager.SteamExe));
 
 	private static void SaveCache(Dictionary<ulong, SteamWorkshopItem> list)
 	{
