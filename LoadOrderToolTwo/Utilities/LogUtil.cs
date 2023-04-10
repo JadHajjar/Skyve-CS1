@@ -22,7 +22,11 @@ public static class LogUtil
 		_ => Path.Combine(LocationManager.GamePath, "Cities_Data", "output_log.txt")
 	};
 
-	public static string GameDataPath => Path.Combine(LocationManager.GamePath, "Cities_Data");
+	public static string GameDataPath => LocationManager.Platform switch
+	{
+		Platform.MacOSX => Path.Combine(LocationManager.GamePath, "Cities.app", "Contents"),
+		_ => Path.Combine(LocationManager.GamePath, "Cities_Data")
+	};
 
 	public static string CreateZipFileAndSetToClipboard(string? folder = null)
 	{

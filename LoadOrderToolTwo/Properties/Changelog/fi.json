@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Tervetuloa muutoslokin aikakauteen",
+        "ChangeGroups": [
+            {
+                "Name": "Uusi",
+                "Changes": [
+                    "Lisätty 'Peruuta kaikki' -painikkeen sisältösivujen toimintoihin.",
+                    "Lisätty apuohjelma osio tilata puuttuvia kohteita BOB config.",
+                    "Lisätty vaihtoehto, jossa suodattimet ja toiminnot ovat oletuksena auki.",
+                    "Lisätyt muutosloki-sivut, näet sen uusissa versioissa tai käyttämällä sen painiketta Ohje-osioissa."
+                ]
+            },
+            {
+                "Name": "Parannukset",
+                "Changes": [
+                    "Lisätty yhteensopivuusraportti rikkoutuneille omaisuuserille",
+                    "Listaamattomat paketit ovat nyt oikea nimi ja pikkukuva.",
+                    "Paikat kansioiden asetuksille heijastavat nyt käyttöjärjestelmäsi oikein.",
+                    "Ctrl + Klikkaa tekijän nimeä lisätäksesi ne suodattimeesi"
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Kiinteitä vanhoja profiileja ei muunneta ensimmäisen käynnistyksen jälkeen.",
+                    "Kiinteä paikallinen omaisuus ei päivity automaattisesti ulkoisten muutosten jälkeen.",
+                    "Kiinteä paikallisten resurssien poistaminen hiiren kakkospainikkeella valikosta poistaen kaikki paikalliset resurssit vain yhden sijasta",
+                    "Kiinteä muuntaminen LOT 1 -profiilit, jolloin varat on merkitty ”paikallisiksi”",
+                    "Kiinteät 'todelliset' kansiot vaihdetaan tallennettaessa Linux- ja Mac-käyttäjiä.",
+                    "Kiinteät Linux- ja Mac-käyttäjät eivät voi luoda loki-zip-koodia."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Lisätty ohje & lokit -osio",
+                "Changes": [
+                    "Käyttää lokejasi helposti.",
+                    "Nopeasti tarkastele virheitä viimeisimmässä / nykyisessä peliistunnossa.",
+                    "Yksinkertaista lokitiedostoa keskittyäksesi siihen, mitä todella tapahtuu.",
+                    "Jaa zip-tiedosto, joka sisältää kaikki tarvittavat lokit, jotta joku auttaa sinua."
+                ]
+            },
+            {
+                "Name": "Parannukset",
+                "Changes": [
+                    "Muutti suodattimien kuvakkeita niin, että ne heijastavat luettelossa käytettyjä oikeita kuvakkeita."
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Korjaa tuontikokoelman teksti tilauksen ja tilauksen peruuttamisen osalta.",
+                    "Korjattu kartan valinta uudelle pelille, joka ei anna käyttäjien valita vaniljakartta."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Korjattu vika, joka aiheutti äärettömän lataamisen joillekin käyttäjille."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Muutokset",
+                "Changes": [
+                    "Poistettu tilaus välilehti pelin sisäisistä modin asetuksista.",
+                    "Profiilia ladatessa ei oteta käyttöön kiinteitä DLC-koodeja.",
+                    "Korjattu kieli vaihtoehto on tyhjä joillekin ihmisille.",
+                    "Uudelleen lataaminen höyrystä ei enää pakota tarkennusta takaisin työkaluun.",
+                    "Muut käyttöliittymän muutokset."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Muutokset",
+                "Changes": [
+                    "Lisäämällä infop- ponnahdusikkuna, kun tilaat kohteita ensimmäistä kertaa.",
+                    "Lisätty varoitus teksti kojelautaan, kun sinulla on useita LOM instansseja asennettu.",
+                    "Lisätty pieniä tunnisteita pakettien otsikoiden vieressä.",
+                    "Lataa uudelleen lataustilaustyökalu käynnistää lataamisen ja sulkee sovelluksen samalla kun se päivitetään.",
+                    "Korjattu ja parannettu nopeutta Ladataan Screen Mod raportteja."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta Julkinen Julkaisu",
+        "ChangeGroups": []
+    }
+]

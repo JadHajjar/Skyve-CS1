@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Witamy w erze zmian",
+        "ChangeGroups": [
+            {
+                "Name": "Nowy",
+                "Changes": [
+                    "Dodano przycisk \"Wypisz wszystkie\" w działaniach na stronie treści.",
+                    "Dodano sekcję usług użyteczności publicznej, aby subskrybować brakujące elementy w konfiguracji BOB.",
+                    "Dodano opcję, aby filtry i sekcje akcji były domyślnie otwarte.",
+                    "Dodano strony dziennika zmian, zobaczysz je na nowych wersjach lub za pomocą przycisku w sekcjach pomocy."
+                ]
+            },
+            {
+                "Name": "Ulepszenia",
+                "Changes": [
+                    "Dodano raport zgodności dla uszkodzonych aktywów",
+                    "Niewymienione pakiety mają teraz poprawną nazwę i miniaturę.",
+                    "Umiejscowienia dla ustawień folderu teraz poprawnie odzwierciedlają system operacyjny.",
+                    "Ctrl+Kliknij na imię autora, aby dodać je do filtru"
+                ]
+            },
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawione dotychczasowe profile nie są konwertowane po pierwszym uruchomieniu.",
+                    "Środki trwałe nie odświeżają się automatycznie po zmianach zewnętrznych.",
+                    "Naprawiono usunięcie lokalnych zasobów z menu prawym przyciskiem myszy, usuwając wszystkie lokalne zasoby zamiast tylko jednego.",
+                    "Stała konwersja profili LOT 1 skutkująca oznaczeniem aktywów jako \"Lokalnych\"",
+                    "Naprawiono foldery 'Real' zamieniane na zapis dla użytkowników Linux i Mac.",
+                    "Naprawieni użytkownicy systemu Linux i Mac, którzy nie są w stanie wygenerować pliku zip."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Dodano sekcję Pomoc i Logi",
+                "Changes": [
+                    "Łatwy dostęp do swoich wpisów.",
+                    "Szybko wyświetl błędy w ostatniej lub bieżącej sesji gry.",
+                    "Uprość plik dziennika, aby skoncentrować się na tym, co faktycznie się dzieje.",
+                    "Udostępnij plik zip zawierający wszystkie logi potrzebne komuś aby Ci pomóc."
+                ]
+            },
+            {
+                "Name": "Ulepszenia",
+                "Changes": [
+                    "Zmieniono ikony filtrów w celu odzwierciedlenia poprawnych ikon używanych na liście."
+                ]
+            },
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawiono tekst w kolekcji importu dla subskrypcji i anulowania subskrypcji.",
+                    "Naprawiono wybór mapy dla nowej gry, nie pozwalając użytkownikom wybrać mapę wanilii."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawiono błąd, który spowodował nieskończone ładowanie dla niektórych użytkowników."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Zmiany",
+                "Changes": [
+                    "Usunięto zakładkę subskrypcji z opcji modyfikacji w grze.",
+                    "Ustalone DLC nie są stosowane podczas ładowania profilu.",
+                    "Naprawiono opcję języka jako pustą dla niektórych osób.",
+                    "Ponowne pobieranie z pary nie spowoduje już wymuszenia skoncentrowania się na narzędziu.",
+                    "Inne zmiany interfejsu użytkownika."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Zmiany",
+                "Changes": [
+                    "Dodawanie wyskakujących informacji podczas pierwszej subskrypcji elementów.",
+                    "Dodano tekst ostrzeżenia w kokpicie menedżerskim, gdy masz zainstalowane wiele instancji LOM.",
+                    "Dodano małe tagi obok tytułów pakietów.",
+                    "Ponowne pobieranie narzędzia do ładowania zamówień rozpocznie pobieranie i zamknie aplikację, gdy zostanie ona zaktualizowana.",
+                    "Naprawiono i poprawiono szybkość raportów o modyfikacji ekranu."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Publiczne wydanie Beta",
+        "ChangeGroups": []
+    }
+]

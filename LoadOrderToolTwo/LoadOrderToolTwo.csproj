@@ -31,10 +31,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Properties\Changelog.json" />
+    <None Remove="Properties\Changelog\*" />
     <None Remove="Properties\Locale.csv" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Changelog.json" />
+    <EmbeddedResource Include="Properties\Changelog\*" />
     <EmbeddedResource Include="Properties\Locale.csv" />
   </ItemGroup>
 

@@ -31,11 +31,8 @@ public partial class MainForm : BasePanelForm
 
 		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-#if DEBUG
-		L_Version.Text = "v" + currentVersion.ToString(4);
-#else
-		L_Version.Text = "v" + currentVersion.ToString(3) + " Beta";
-#endif
+		L_Version.Text = "v" + currentVersion.ToString() + " Beta";
+
 		try
 		{ FormDesign.Initialize(this, DesignChanged); }
 		catch { }
@@ -44,18 +41,16 @@ public partial class MainForm : BasePanelForm
 		{
 			SetPanel<PC_MainPage>(PI_Dashboard);
 
-			var smallVersion = new Version(currentVersion.ToString(3));
-			
-			if (smallVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification && CentralManager.SessionSettings.FirstTimeSetupCompleted)
+			if (currentVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification && CentralManager.SessionSettings.FirstTimeSetupCompleted)
 			{
 				PushPanel<PC_LotChangeLog>(null);
 
-				CentralManager.SessionSettings.LastVersionNotification = smallVersion.ToString();
+				CentralManager.SessionSettings.LastVersionNotification = currentVersion.ToString();
 				CentralManager.SessionSettings.Save();
 			}
 		}
 		catch (Exception ex)
-		{ MessagePrompt.Show(ex, "Failed to load the dashboard"); }
+		{ OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this)); }
 
 		new BackgroundAction("Loading content", CentralManager.Start).Run();
 

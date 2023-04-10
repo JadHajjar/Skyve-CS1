@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Välkommen till förändringsloggen era",
+        "ChangeGroups": [
+            {
+                "Name": "Ny",
+                "Changes": [
+                    "Lade till en \"Avsluta prenumeration\"-knapp i innehållssidor\"-åtgärder.",
+                    "Lade till en verktygssektion för att prenumerera på saknade objekt i en BOB-konfiguration.",
+                    "Lade till ett alternativ för att ha filter och åtgärdssektioner öppna som standard.",
+                    "Lade till ändringsloggsidor, du ser den på nya versioner eller använder dess knapp i hjälpsektionerna."
+                ]
+            },
+            {
+                "Name": "Förbättringar",
+                "Changes": [
+                    "Tillagd kompatibilitetsrapport för trasiga tillgångar",
+                    "Olistade paket har nu rätt namn och miniatyrbild.",
+                    "Platshållare för mappinställningar speglar nu korrekt ditt operativsystem.",
+                    "Ctrl+Klicka på en författares namn för att lägga till dem i ditt filter"
+                ]
+            },
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fasta äldre profiler som inte konverteras efter den första lanseringen.",
+                    "Fast lokala tillgångar uppdateras inte automatiskt efter externa ändringar.",
+                    "Fast ta bort lokala tillgångar från högerklicka menyn ta bort alla lokala tillgångar istället för bara en",
+                    "Fast konvertering av LOT 1-profiler vilket resulterar i att tillgångar markeras som \"lokala\"",
+                    "Fast \"Real\" mappar som byts ut mot spara för Linux & Mac-användare.",
+                    "Fasta Linux- och Mac-användare som inte kan generera en loggzip."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Lade till sektionen Hjälp & Loggar",
+                "Changes": [
+                    "Lätt att komma åt dina loggar.",
+                    "Visa fel snabbt i din senaste / nuvarande spelsession.",
+                    "Förenkla en loggfil för att fokusera på vad som faktiskt händer.",
+                    "Dela en zip-fil med alla loggar som behövs för att någon ska kunna hjälpa dig."
+                ]
+            },
+            {
+                "Name": "Förbättringar",
+                "Changes": [
+                    "Ändrade ikonerna i filter för att återspegla de rätta ikonerna som används i listan."
+                ]
+            },
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fast texten i importsamlingen för att prenumerera och avprenumerera vänds.",
+                    "Fast kartval för ett nytt spel som inte låter användare välja en vaniljkarta."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fixade en bugg som orsakade oändlig laddning för vissa användare."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Ändringar",
+                "Changes": [
+                    "Tog bort fliken prenumeration från mod alternativ i spelet.",
+                    "Fasta DLC:er används inte vid inläsning av en profil.",
+                    "Fast språkalternativet är tomt för vissa människor.",
+                    "Återhämtning från ånga kommer inte längre att tvinga fokus tillbaka till verktyget.",
+                    "Andra UI ändringar."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Ändringar",
+                "Changes": [
+                    "Lägga till en info popup när du prenumererar på objekt för första gången.",
+                    "Lade till en varningstext i instrumentpanelen när du har flera LOM-instanser installerade.",
+                    "Lade till små taggar bredvid paketets titlar.",
+                    "Ladda ner lastbeställningsverktyget igen kommer att initiera nedladdningen och stänga appen medan den uppdateras.",
+                    "Fast och förbättrade hastigheten på Loading Screen Mod rapporter."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta offentlig release",
+        "ChangeGroups": []
+    }
+]

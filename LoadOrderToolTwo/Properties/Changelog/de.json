@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Willkommen zur Changelog Ära",
+        "ChangeGroups": [
+            {
+                "Name": "Neu",
+                "Changes": [
+                    "\"Alle abmelden\"-Button in den Aktionen der Inhaltsseiten hinzugefügt.",
+                    "Fügte einen Utility Abschnitt hinzu, um fehlende Elemente in einer BOB Konfiguration zu abonnieren.",
+                    "Option hinzugefügt, um Filter & Aktionen standardmäßig öffnen zu lassen.",
+                    "Hinzugefügte Änderungsprotokoll-Seiten sehen Sie es auf neuen Versionen oder verwenden den Button in den Hilfe-Abschnitten."
+                ]
+            },
+            {
+                "Name": "Verbesserungen",
+                "Changes": [
+                    "Kompatibilitätsbericht für kaputte Assets hinzugefügt",
+                    "Nicht gelistete Pakete haben nun den korrekten Namen und das Vorschaubild.",
+                    "Platzhalter für Ordnereinstellungen spiegeln nun korrekt Ihr Betriebssystem wider.",
+                    "Strg+Klicken Sie auf den Namen eines Autors, um ihn Ihrem Filter hinzuzufügen"
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Feste alte Profile werden nach dem ersten Start nicht konvertiert.",
+                    "Feste lokale Assets werden nach externen Änderungen nicht automatisch aktualisiert.",
+                    "Lösche lokale Assets aus dem Rechtsklick-Menü und lösche alle lokalen Assets anstatt nur einen",
+                    "Feste Konvertierung von LOT 1 Profilen, wodurch Assets als 'Lokal' markiert wurden",
+                    "Beheben von 'Real' Ordnern, die beim Speichern für Linux- und Mac-Benutzer ausgetauscht wurden.",
+                    "Behobene Linux & Mac Benutzer konnten keine Log-zip-Datei erzeugen."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Hilfe & Protokolle hinzugefügt",
+                "Changes": [
+                    "Einfacher Zugriff auf Ihre Logs.",
+                    "Zeigen Sie schnell Fehler in Ihrer letzten / aktuellen Spielsitzung an.",
+                    "Vereinfachen Sie eine Protokolldatei, um sich darauf zu konzentrieren, was tatsächlich passiert.",
+                    "Teilen Sie eine Zip-Datei, die alle Protokolle enthält, die für jemanden benötigt werden, um Ihnen zu helfen."
+                ]
+            },
+            {
+                "Name": "Verbesserungen",
+                "Changes": [
+                    "Die Icons der Filter wurden geändert, um die in der Liste verwendeten Symbole wiederzugeben."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Den Text in der Import-Sammlung für das Abonnieren und Abbestellen wurde behoben.",
+                    "Es wurde die Kartenauswahl für ein neues Spiel behoben, bei dem die Benutzer keine Vanille-Karte auswählen konnten."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Es wurde ein Fehler behoben, der für einige Benutzer unendliches Laden verursachte."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Änderungen",
+                "Changes": [
+                    "Die Registerkarte für Abonnements wurde von den Mod-Optionen im Spiel entfernt.",
+                    "Behobene DLCs werden beim Laden eines Profils nicht angewendet.",
+                    "Es wurde die Sprachoption für einige Personen behoben, die leer ist.",
+                    "Das erneute Herunterladen von Dampf erzwingt den Fokus nicht mehr zurück zum Werkzeug.",
+                    "Andere UI Änderungen."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Änderungen",
+                "Changes": [
+                    "Hinzufügen eines Info-Popups, wenn Sie Artikel zum ersten Mal abonnieren.",
+                    "Ein Warntext im Dashboard wurde hinzugefügt, wenn mehrere LOM-Instanzen installiert sind.",
+                    "Kleine Tags neben Pakettiteln hinzugefügt.",
+                    "Ein erneutes Herunterladen des Ladenauftragswerkzeugs wird den Download starten und die App schließen, während sie aktualisiert wird.",
+                    "Behoben und verbessert die Geschwindigkeit der Lädung-Mod-Berichte."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Öffentliche Beta-Version",
+        "ChangeGroups": []
+    }
+]

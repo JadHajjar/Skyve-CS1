@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Welcome to the change-log era",
+        "ChangeGroups": [
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added an 'Unsubscribe All' button in content pages' actions.",
+                    "Added a Utility section to subscribe to missing items in a BOB config.",
+                    "Added an option to have Filters & Action sections open by default.",
+                    "Added change-log pages, you'll see it on new versions or using its button in the Help sections."
+                ]
+            },
+            {
+                "Name": "Improvements",
+                "Changes": [
+                    "Added Compatibility Report for broken Assets",
+                    "Unlisted packages now have the correct name and thumbnail.",
+                    "Placeholders for folder settings now correctly reflect your OS.",
+                    "Ctrl+Click on an author's name to add them to your filter"
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed legacy profiles not being converted after the first launch.",
+                    "Fixed local assets not automatically refreshing after external changes.",
+                    "Fixed deleting local assets from the right-click menu deleting all local assets instead of just one",
+                    "Fixed converting LOT 1 profiles resulting in assets being marked as 'Local'",
+                    "Fixed 'Real' folders being swapped on save for Linux & Mac users.",
+                    "Fixed Linux & Mac users not being able to generate a log zip."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Added the Help & Logs section",
+                "Changes": [
+                    "Easily access your logs.",
+                    "Quickly view errors in your most recent/current game session.",
+                    "Simplify a log file to focus on what's actually happening.",
+                    "Share a zip file containing all the logs needed for someone to help you out."
+                ]
+            },
+            {
+                "Name": "Improvements",
+                "Changes": [
+                    "Changed the icons of filters to reflect the correct icons used in the list."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
+                    "Fixed the map selection for a new game not letting users select a vanilla map."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed a bug that caused infinite loading for some users."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Removed the subscription tab from the in-game mod options.",
+                    "Fixed DLCs not being applied when loading a profile.",
+                    "Fixed the language option being empty for some people.",
+                    "Re-downloading from steam will no longer force the focus back to the tool.",
+                    "Other UI changes."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Adding an info popup when subscribing to items for the first time.",
+                    "Added a warning text in the dashboard when you have multiple LOM instances installed.",
+                    "Added small tags next to package titles.",
+                    "Re-downloading Load Order Tool will initiate the download and close the app while it gets updated.",
+                    "Fixed and improved the speed of Loading Screen Mod reports."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta Public Release",
+        "ChangeGroups": []
+    }
+]

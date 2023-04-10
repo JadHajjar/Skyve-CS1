@@ -4,6 +4,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
 namespace LoadOrderTool.Legacy;
@@ -154,9 +155,10 @@ public class LoadOrderProfile
 		{
 			if (asset.IsIncluded)
 			{
+				var rgx = Regex.Match(asset.IncludedPath, Regex.Escape(WS_CONTENT_PATH) + "[\\\\/](\\d{8,20})[\\\\/]?");
 				profile.Assets.Add(new Profile.Asset
 				{
-					SteamId = (asset.IncludedPath?.StartsWith(WS_CONTENT_PATH) ?? false) && ulong.TryParse(asset.IncludedPath?.Substring(WS_CONTENT_PATH.Length + 1) ?? "0", out var steamId1) ? steamId1 : 0,
+					SteamId = rgx.Success ? ulong.Parse(rgx.Groups[1].Value) : 0,
 					Name = asset.DisplayText,
 					RelativePath = asset.IncludedPath
 				});
@@ -167,10 +169,11 @@ public class LoadOrderProfile
 		{
 			if (mod.IsIncluded)
 			{
+				var rgx = Regex.Match(mod.IncludedPath, Regex.Escape(WS_CONTENT_PATH) + "[\\\\/](\\d{8,20})[\\\\/]?");
 				profile.Mods.Add(new Profile.Mod
 				{
 					Name = mod.DisplayText,
-					SteamId = (mod.IncludedPath?.StartsWith(WS_CONTENT_PATH) ?? false) && ulong.TryParse(mod.IncludedPath?.Substring(WS_CONTENT_PATH.Length + 1) ?? "0", out var steamId2) ? steamId2 : 0,
+					SteamId = rgx.Success ? ulong.Parse(rgx.Groups[1].Value) : 0,
 					RelativePath = mod.IncludedPath,
 					Enabled = mod.IsEnabled
 				});

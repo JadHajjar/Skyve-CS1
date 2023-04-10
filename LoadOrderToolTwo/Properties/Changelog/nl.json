@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Welkom bij de tijd van wijzigingen",
+        "ChangeGroups": [
+            {
+                "Name": "Nieuw",
+                "Changes": [
+                    "Een 'Uitschrijven Alle' knop in inhoudspagina's acties toegevoegd.",
+                    "Een gedeelte 'Hulpmiddelen' toegevoegd om te abonneren op ontbrekende items in een BOB configuratie.",
+                    "Optie toegevoegd om filters & actie secties standaard te openen.",
+                    "Aanpassingspagina's toegevoegd, u ziet het op nieuwe versies of met behulp van de knop in de Help secties."
+                ]
+            },
+            {
+                "Name": "Verbeteringen",
+                "Changes": [
+                    "Toegevoegde Compatibiliteitsrapport voor beschadigde Assets",
+                    "Niet-vermelde pakketten hebben nu de juiste naam en thumbnail.",
+                    "Placeholders voor mapinstellingen geven nu een juist beeld van uw besturingssysteem.",
+                    "Ctrl+Klik op de naam van een auteur om ze toe te voegen aan je filter"
+                ]
+            },
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "Oude profielen die niet worden geconverteerd na de eerste start, zijn opgelost.",
+                    "Vaste lokale assets worden niet automatisch vernieuwd na externe wijzigingen.",
+                    "Vaste verwijdering van lokale bestanden uit het menu met de rechtermuisknop om alle lokale bestanden te verwijderen in plaats van slechts één",
+                    "Vaste conversie van LOT 1 profielen wat resulteert in het gemarkeerd als 'Lokaal'",
+                    "'Real' mappen opgelost die werden verwisseld bij opslaan voor Linux en Mac-gebruikers.",
+                    "Vaste Linux & Mac gebruikers kunnen geen log-zip genereren."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "De Help & Logs sectie toegevoegd",
+                "Changes": [
+                    "Eenvoudige toegang tot je logs.",
+                    "Bekijk snel fouten in je meest recente/huidige spelsessie.",
+                    "Vereenvoudig een logboekbestand om zich te concentreren op wat er daadwerkelijk gebeurt.",
+                    "Deel een zip-bestand met alle logs die iemand nodig heeft om u te helpen."
+                ]
+            },
+            {
+                "Name": "Verbeteringen",
+                "Changes": [
+                    "De pictogrammen van filters zijn gewijzigd om de juiste pictogrammen in de lijst weer te geven."
+                ]
+            },
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "De tekst is opgelost in de importcollectie om te abonneren op en af te melden.",
+                    "De kaartselectie is opgelost voor een nieuw spel waarbij de gebruikers geen vanilla kaart kunnen selecteren."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "Bug opgelost die tot oneindig laden voor sommige gebruikers heeft geleid."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Veranderingen",
+                "Changes": [
+                    "Het tabblad abonnement is verwijderd van de in-game mod opties.",
+                    "Vaste DLC's die niet worden toegepast bij het laden van een profiel.",
+                    "Vaste de taaloptie die voor sommige mensen leeg was",
+                    "Herdownloaden van stoom zal de focus niet langer naar de tool drukken.",
+                    "Andere UI veranderingen."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Veranderingen",
+                "Changes": [
+                    "Een info popup toevoegen wanneer u zich voor het eerst abonnert op artikelen.",
+                    "Er is een waarschuwingstekst toegevoegd in het dashboard wanneer er meerdere LOM instanties geïnstalleerd zijn.",
+                    "Kleine tags toegevoegd naast pakket titels.",
+                    "Herdownloaden van Laad Order Tool zal de download starten en sluit de app terwijl het wordt bijgewerkt.",
+                    "Vaste en verbeterde de snelheid van het laden van scherm mod rapporten."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta openbare release",
+        "ChangeGroups": []
+    }
+]

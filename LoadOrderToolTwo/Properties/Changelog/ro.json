@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Bun venit în era de schimbare",
+        "ChangeGroups": [
+            {
+                "Name": "Nou",
+                "Changes": [
+                    "S-a adăugat un buton 'Dezabonare toți' în acțiunile conținutului.",
+                    "S-a adăugat o secțiune Utility pentru a se abona la elementele lipsă într-o configurație BOB.",
+                    "S-a adăugat o opțiune pentru a avea filtre și secțiuni de acțiune deschise în mod implicit.",
+                    "Adăugat pagini de jurnal schimbări, le veți vedea pe versiunile noi sau folosind butonul său în secțiunile Ajutor."
+                ]
+            },
+            {
+                "Name": "Îmbunătățiri",
+                "Changes": [
+                    "Raport de compatibilitate adăugat pentru active defecte",
+                    "Pachetele nelistate au acum numele corect și miniatura.",
+                    "Placeholders pentru setările de dosare acum reflectă corect sistemul dvs. de operare.",
+                    "Ctrl+Faceți clic pe numele unui autor pentru a le adăuga în filtru"
+                ]
+            },
+            {
+                "Name": "Rezolvări",
+                "Changes": [
+                    "S-au reparat profilurile moștenite care nu au fost convertite după prima lansare.",
+                    "Activele locale fixe nu se reîmprospătează automat după schimbări externe.",
+                    "S-a reparat ștergerea activelor locale din meniul clic-dreapta ștergerea tuturor activelor locale în loc de doar una",
+                    "Fixează conversia de profiluri LOT 1 care duce la marcarea activelor ca 'Local'",
+                    "Fixat folderele 'Real' fiind schimbate pe salvări pentru utilizatorii de Linux & Mac.",
+                    "Utilizatorii de Linux & Mac reparați nu pot genera un zip de loguri."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "S-a adăugat secțiunea Ajutor și Jurnale",
+                "Changes": [
+                    "Accesează cu ușurință jurnalele tale.",
+                    "Vizualizează rapid erorile în cea mai recentă sau curentă sesiune de joc.",
+                    "Simplificați un fișier jurnal pentru a se concentra pe ceea ce se întâmplă de fapt.",
+                    "Distribuie un fișier zip care conține toate jurnalele necesare pentru ca cineva să te ajute."
+                ]
+            },
+            {
+                "Name": "Îmbunătățiri",
+                "Changes": [
+                    "A modificat pictogramele filtrelor pentru a reflecta pictogramele corecte folosite în listă."
+                ]
+            },
+            {
+                "Name": "Rezolvări",
+                "Changes": [
+                    "A reparat textul din colecția de import pentru a se abona și dezabona fiind retușat.",
+                    "A fost remediată selecția hărții pentru un joc nou care nu permite utilizatorilor să selecteze o hartă cu vanilie."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Rezolvări",
+                "Changes": [
+                    "S-a remediat o eroare care a cauzat încărcare infinită pentru unii utilizatori."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Modificări",
+                "Changes": [
+                    "A eliminat fila de abonament din opțiunile de mod-uri.",
+                    "DLC-urile fixe nu sunt aplicate la încărcarea unui profil.",
+                    "A reparat opțiunea limbii ca fiind goală pentru unele persoane.",
+                    "Redescărcarea de la abur nu va mai forța concentrarea înapoi la unealtă.",
+                    "Alte modificări ale interfeței."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Modificări",
+                "Changes": [
+                    "Adăugarea unui pop-up informativ la abonarea la articole pentru prima dată.",
+                    "S-a adăugat un text de avertizare în tabloul de bord atunci când sunt instalate mai multe cazuri LOM.",
+                    "Adăugat mici etichete lângă titlurile pachetului.",
+                    "Redescărcarea Uneltei de încărcare a comenzii va iniția descărcarea și va închide aplicația în timp ce este actualizată.",
+                    "Raporturi fixe și îmbunătățite ale modului de încărcare a ecranului."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Lansare publică Beta",
+        "ChangeGroups": []
+    }
+]

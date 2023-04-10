@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Velkommen til endringslogg-tida",
+        "ChangeGroups": [
+            {
+                "Name": "Ny",
+                "Changes": [
+                    "Lagt til en \"Avslutte abonner\" knapp i innholdside\" handlinger.",
+                    "La til en verktøyverktøyverktøyskontor for å abonnere på manglende elementer i en BOB-konfigurasjon.",
+                    "Lagt til et alternativ for å ha Filtere & Handlingsseksjonene åpne som standard.",
+                    "Lagt til endringslogg-sider, du vil se den på nye versjoner eller bruke dens knapp i hjelp-avsnittene."
+                ]
+            },
+            {
+                "Name": "Forbedringer",
+                "Changes": [
+                    "Lagt til kompatibilitetsrapport for ødelagte ressurser",
+                    "Ulistede pakker har nå riktig navn og miniatyrbilde.",
+                    "Plassholdere for mappeinnstillinger reflekterer nå ditt OS.",
+                    "Ctrl+klikk på en skribents navn for å legge dem til i filteret"
+                ]
+            },
+            {
+                "Name": "Reparasjoner",
+                "Changes": [
+                    "Faste gamle profiler som ikke blir konvertert etter første oppstart.",
+                    "Fikserte lokale eiendeler oppdateres ikke automatisk etter eksterne endringer.",
+                    "Fikset sletting av lokale eiendeler fra høyreklikk-menyen ved å slette alle lokale eiendeler i stedet for bare en",
+                    "Fikset konvertering av LOT 1-profiler som resulterer i eiendeler som merkes som 'lokalt'",
+                    "Fikset 'Real'-mapper når du bytter over i Linux- og Mac-brukere.",
+                    "Fikset Linux & Mac-brukere vil ikke kunne generere en logg-zip-fil."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Lagt til seksjonen for hjelp og logger",
+                "Changes": [
+                    "Tilgang til dine logger enkelt.",
+                    "Se raskt feil i din nyeste spilløkt.",
+                    "Forenkle loggfil å få fokus på hva som faktisk skjer.",
+                    "Del en zip-fil med alle loggene som er nødvendige for at noen skal hjelpe deg ut."
+                ]
+            },
+            {
+                "Name": "Forbedringer",
+                "Changes": [
+                    "Endret ikonene for filtre for å gjenspeile riktige ikoner brukt i listen."
+                ]
+            },
+            {
+                "Name": "Reparasjoner",
+                "Changes": [
+                    "Fikset teksten i importsamlingen for abonnering og uttrekk som kan veksles.",
+                    "Fikset kartvalget for et nytt spill som ikke lar brukere velge et vanlig spillkart."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Reparasjoner",
+                "Changes": [
+                    "Fikset en bug som forårsaket uendelig lasting for noen brukere."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Endringer",
+                "Changes": [
+                    "Fjernet abonnementsfanen fra alternativer for integrert mod av spillet.",
+                    "Fast DLC brukes ikke når en profil lastes.",
+                    "Fikset det språkvalget som er tomt for noen personer.",
+                    "Ved å laste ned på nytt fra damp vil det ikke lenger tvinges fokus tilbake til verktøyet.",
+                    "Andre UI-endringer."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Endringer",
+                "Changes": [
+                    "Å legge til en informasjonsppopup når du abonnerer på elementer for første gang.",
+                    "Lagt til en advarselstekst i dashbordet når du har flere LOM instanser installert.",
+                    "La til små emneord ved siden av pakketitler.",
+                    "Laster ned lastingsordre-verktøyet på nytt initierer nedlastingen og lukk appen mens den blir oppdatert.",
+                    "Fikset og forbedret hastighet på lastingsskjerm Mod rapporter."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta offentlig utgivelse",
+        "ChangeGroups": []
+    }
+]

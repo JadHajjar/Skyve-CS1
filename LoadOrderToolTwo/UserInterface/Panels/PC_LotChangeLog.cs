@@ -1,21 +1,31 @@
-﻿using LoadOrderToolTwo.Utilities.Managers;
+﻿using Extensions;
 
 using SlickControls;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 internal class PC_LotChangeLog : PC_Changelog
 {
 	public PC_LotChangeLog() : base(
-		Assembly.GetExecutingAssembly(), 
-		nameof(LoadOrderToolTwo) + ".Properties.Changelog.json", 
-		new Version(Assembly.GetExecutingAssembly().GetName().Version.ToString(3)))
+		Assembly.GetExecutingAssembly(),
+		GetChangelogFile(),
+		Assembly.GetExecutingAssembly().GetName().Version)
 	{
+	}
+
+	private static string GetChangelogFile()
+	{
+		var assembly = Assembly.GetExecutingAssembly();
+		var name = $"{nameof(LoadOrderToolTwo)}.Properties.Changelog.{LocaleHelper.CurrentCulture.TwoLetterISOLanguageName.ToLower()}.json";
+		using var resource = assembly.GetManifestResourceStream(name);
+
+		if (resource is null)
+		{
+			return $"{nameof(LoadOrderToolTwo)}.Properties.Changelog.json";
+		}
+
+		return name;
 	}
 }

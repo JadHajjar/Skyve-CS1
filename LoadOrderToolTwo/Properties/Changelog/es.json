@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Bienvenido a la era de registro de cambios",
+        "ChangeGroups": [
+            {
+                "Name": "Nuevo",
+                "Changes": [
+                    "Se ha añadido un botón 'Cancelar suscripción' en las acciones de las páginas de contenido.",
+                    "Añadida una sección de utilidad para suscribirse a elementos faltantes en una configuración BOB.",
+                    "Añadida una opción para que las secciones Filtros & Acción se abran por defecto.",
+                    "Añadidas páginas de registro de cambios, la verás en nuevas versiones o usando su botón en las secciones de Ayuda."
+                ]
+            },
+            {
+                "Name": "Mejoras",
+                "Changes": [
+                    "Añadido Informe de compatibilidad para activos rotos",
+                    "Los paquetes no listados ahora tienen el nombre correcto y la miniatura.",
+                    "Los marcadores de posición para la configuración de carpetas ahora reflejan correctamente su sistema operativo.",
+                    "Ctrl+Haga clic en el nombre de un autor para añadirlo a su filtro"
+                ]
+            },
+            {
+                "Name": "Fijos",
+                "Changes": [
+                    "Se han corregido perfiles antiguos que no se están convirtiendo después del primer lanzamiento.",
+                    "Arreglados activos locales no se actualizan automáticamente después de los cambios externos.",
+                    "Se ha corregido la eliminación de activos locales desde el menú de clic derecho eliminando todos los activos locales en lugar de uno",
+                    "Conversión fija de perfiles LOT 1 resultando en activos marcados como 'Local'",
+                    "Se corrigieron las carpetas 'Real' que se intercambiaban al guardar para los usuarios de Linux y Mac.",
+                    "Los usuarios corregidos de Linux y Mac no pueden generar un zip de registro."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Añadida la sección Ayuda y Registros",
+                "Changes": [
+                    "Accede fácilmente a tus registros.",
+                    "Ve rápidamente los errores en tu sesión de juego más reciente/actual.",
+                    "Simplifique un archivo de registro para centrarse en lo que está sucediendo realmente.",
+                    "Comparte un archivo zip que contiene todos los registros necesarios para que alguien le ayude."
+                ]
+            },
+            {
+                "Name": "Mejoras",
+                "Changes": [
+                    "Cambiados los iconos de los filtros para reflejar los iconos correctos utilizados en la lista."
+                ]
+            },
+            {
+                "Name": "Fijos",
+                "Changes": [
+                    "Se ha corregido el texto de la colección de importación para suscribirse y darse de baja de la suscripción.",
+                    "Se ha corregido la selección de mapas para un nuevo juego que no permitía a los usuarios seleccionar un mapa de vainilla."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fijos",
+                "Changes": [
+                    "Se ha corregido un error que causaba una carga infinita para algunos usuarios."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios",
+                "Changes": [
+                    "Eliminada la pestaña de suscripción de las opciones de mods del juego.",
+                    "No se aplican DLC fijos al cargar un perfil.",
+                    "Se ha corregido que la opción de idioma estaba vacía para algunas personas.",
+                    "La redescarga de vapor ya no forzará el enfoque a la herramienta.",
+                    "Otros cambios en la interfaz de usuario."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios",
+                "Changes": [
+                    "Añadiendo una ventana emergente de información al suscribirse a elementos por primera vez.",
+                    "Se añadió un texto de advertencia en el panel de control cuando tienes varias instancias LOM instaladas.",
+                    "Etiquetas pequeñas añadidas junto a los títulos del paquete.",
+                    "Volver a descargar Load Order Tool iniciará la descarga y cerrará la aplicación mientras se actualiza.",
+                    "Fijada y mejorada la velocidad de los informes del Mod de Carga."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Versión pública beta",
+        "ChangeGroups": []
+    }
+]

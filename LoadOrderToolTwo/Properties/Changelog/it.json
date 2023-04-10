@@ -1,0 +1,116 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Benvenuto nell'era del change-log",
+        "ChangeGroups": [
+            {
+                "Name": "Nuovo",
+                "Changes": [
+                    "Aggiunto un pulsante 'Annulla iscrizione' nelle azioni delle pagine dei contenuti.",
+                    "Aggiunta una sezione Utility per iscriversi agli elementi mancanti in una configurazione BOB.",
+                    "Aggiunta un'opzione per avere le sezioni Filtri & Azione aperte di default.",
+                    "Aggiunte pagine del change-log, lo vedrai sulle nuove versioni o usando il suo pulsante nelle sezioni Aiuto."
+                ]
+            },
+            {
+                "Name": "Miglioramenti",
+                "Changes": [
+                    "Aggiunto Rapporto di Compatibilità per Attività Interrotte",
+                    "I pacchetti non elencati ora hanno il nome e la miniatura corretti.",
+                    "I segnaposto per le impostazioni della cartella ora riflettono correttamente il vostro sistema operativo.",
+                    "Ctrl+Fare clic sul nome di un autore per aggiungerli al filtro"
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "I profili legacy fissi non vengono convertiti dopo il primo lancio.",
+                    "Le attività locali fisse non si aggiornano automaticamente dopo le modifiche esterne.",
+                    "Risolto l'eliminazione delle risorse locali dal menu di scelta rapida che elimina tutte le risorse locali invece di una sola",
+                    "Conversione fissa dei profili LOT 1 con conseguente contrassegno di attività come 'Locale'",
+                    "Corretti cartelle 'Real' che vengono scambiate sul salvataggio per gli utenti Linux e Mac.",
+                    "Risolto gli utenti Linux e Mac non essendo in grado di generare una zip di registro."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Aggiunta la sezione Aiuto & Log",
+                "Changes": [
+                    "Accedi facilmente ai tuoi registri.",
+                    "Visualizza rapidamente gli errori nella sessione di gioco più recente/corrente.",
+                    "Semplificare un file di registro per concentrarsi su ciò che sta effettivamente accadendo.",
+                    "Condividere un file zip contenente tutti i log necessari a qualcuno per aiutarti."
+                ]
+            },
+            {
+                "Name": "Miglioramenti",
+                "Changes": [
+                    "Cambiato le icone dei filtri per riflettere le icone corrette usate nella lista."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il testo nella raccolta di importazione per la sottoscrizione e la cancellazione di essere capovolto.",
+                    "Risolto la selezione di mappe per un nuovo gioco che non permetteva agli utenti di selezionare una mappa vanigliata."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto un bug che ha causato il caricamento infinito per alcuni utenti."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Modifiche",
+                "Changes": [
+                    "Rimosso la scheda di sottoscrizione dalle opzioni in-game mod.",
+                    "I DLC fissi non vengono applicati durante il caricamento di un profilo.",
+                    "Risolto l'opzione di lingua essendo vuota per alcune persone.",
+                    "Il re-download dal vapore non costringerà più il focus allo strumento.",
+                    "Altre modifiche dell'interfaccia utente."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Modifiche",
+                "Changes": [
+                    "Aggiungere un popup di informazioni quando ci si iscrive per la prima volta agli elementi.",
+                    "Aggiunto un testo di avviso nella dashboard quando si hanno più istanze LOM installate.",
+                    "Aggiunti piccoli tag accanto ai titoli del pacchetto.",
+                    "Ri-download Load Order Tool avvierà il download e chiuderà l'app mentre viene aggiornato.",
+                    "Corretto e migliorato la velocità di caricamento dei rapporti della mod dello schermo."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Rilascio Pubblico Beta",
+        "ChangeGroups": []
+    }
+]

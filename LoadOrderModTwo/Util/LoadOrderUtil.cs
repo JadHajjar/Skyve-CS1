@@ -37,11 +37,9 @@ namespace LoadOrderMod.Util {
             var news = GameObject.FindObjectOfType<NewsFeedPanel>();
             var ad = GameObject.FindObjectOfType<WorkshopAdPanel>();
             var dlc = GameObject.FindObjectOfType<DLCPanelNew>();
-            var paradox = GameObject.FindObjectOfType<ParadoxAccountPanel>();
             GameObject.Destroy(news?.gameObject);
             GameObject.Destroy(ad?.gameObject);
             GameObject.Destroy(dlc?.gameObject);
-            GameObject.Destroy(paradox?.gameObject);
         }
 
         public static void ResetIsEnabledForAssets() {

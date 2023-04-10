@@ -18,7 +18,8 @@
         "Changes": [
           "Added Compatibility Report for broken Assets",
           "Unlisted packages now have the correct name and thumbnail.",
-          "Placeholders for folder settings now correctly reflect your OS."
+          "Placeholders for folder settings now correctly reflect your OS.",
+          "Ctrl+Click on an author's name to add them to your filter"
         ]
       },
       {
@@ -27,6 +28,7 @@
           "Fixed legacy profiles not being converted after the first launch.",
           "Fixed local assets not automatically refreshing after external changes.",
           "Fixed deleting local assets from the right-click menu deleting all local assets instead of just one",
+          "Fixed converting LOT 1 profiles resulting in assets being marked as 'Local'",
           "Fixed 'Real' folders being swapped on save for Linux & Mac users.",
           "Fixed Linux & Mac users not being able to generate a log zip."
         ]
