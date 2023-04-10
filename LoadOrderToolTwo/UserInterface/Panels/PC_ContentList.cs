@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using static CompatibilityReport.CatalogData.Enums;
@@ -26,6 +27,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
 	protected readonly ItemListControl<T> LC_Items;
+	private bool searchEmpty = true;
+	private string? searchText;
+	private string? searchAuthor;
 
 	public PC_ContentList()
 	{
@@ -45,6 +49,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		LC_Items.CompatibilityReportSelected += LC_Items_CompatibilityReportSelected;
 		LC_Items.DateSelected += LC_Items_DateSelected;
 		LC_Items.TagSelected += LC_Items_TagSelected;
+		LC_Items.AddToSearch += LC_Items_AddToSearch;
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -80,12 +85,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}).Run();
 	}
 
+	private void LC_Items_AddToSearch(string obj)
+	{
+		TB_Search.Text = (TB_Search.Text + " " + obj).Trim();
+	}
+
 	private void LC_Items_TagSelected(string obj)
 	{
 		DD_Tags.Select(obj);
 
 		if (P_FiltersContainer.Height == 0)
+		{
 			B_Filters_Click(this, EventArgs.Empty);
+		}
 	}
 
 	private void LC_Items_DateSelected(DateTime obj)
@@ -93,7 +105,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DR_ServerTime.SetValue(DateRangeType.After, obj);
 
 		if (P_FiltersContainer.Height == 0)
+		{
 			B_Filters_Click(this, EventArgs.Empty);
+		}
 	}
 
 	private void LC_Items_CompatibilityReportSelected(ReportSeverity obj)
@@ -101,7 +115,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_ReportSeverity.SelectedItem = (ReportSeverityFilter)(obj + 1);
 
 		if (P_FiltersContainer.Height == 0)
+		{
 			B_Filters_Click(this, EventArgs.Empty);
+		}
 	}
 
 	private void LC_Items_DownloadStatusSelected(DownloadStatus obj)
@@ -109,7 +125,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 1);
 
 		if (P_FiltersContainer.Height == 0)
+		{
 			B_Filters_Click(this, EventArgs.Empty);
+		}
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)
@@ -142,7 +160,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.ReportSeverity;
 		DD_Tags.Text = Locale.Tags;
-		DD_Profile.Text = Locale.Profiles;
+		DD_Profile.Text = Locale.ProfileFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
 	}
@@ -152,8 +170,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		base.OnCreateControl();
 
 		firstFilterPassed = true;
-		P_FiltersContainer.Height = P_ActionsContainer.Height = 0;
-		P_FiltersContainer.Visible = P_ActionsContainer.Visible = true;
+
+		if (CentralManager.SessionSettings.UserSettings.AlwaysOpenFiltersAndActions)
+		{
+			P_FiltersContainer.Visible = P_ActionsContainer.Visible = true;
+			P_FiltersContainer.AutoSize = P_ActionsContainer.AutoSize = true;
+			B_Filters.Text = "HideFilters";
+			B_Actions.Text = "HideActions";
+		}
+		else
+		{
+			P_FiltersContainer.Height = P_ActionsContainer.Height = 0;
+			P_FiltersContainer.Visible = P_ActionsContainer.Visible = true;
+		}
 	}
 
 	protected virtual IEnumerable<T> GetItems()
@@ -188,10 +217,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin
 			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
 			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin
-			= B_Actions.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin 
-			= B_Refresh.Margin = UI.Scale(new Padding(5), UI.FontScale);
+			= B_Actions.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
+			= B_Refresh.Margin = B_UnsubscribeAll.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		B_UnsubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		B_Filters.Image = P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Filter));
 		B_Actions.Image = P_Actions.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Actions));
+		B_UnsubscribeAll.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_RemoveSteam));
 		B_Refresh.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Refresh));
 		I_ClearFilters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ClearFilter));
 		I_ClearFilters.Size = UI.FontScale >= 1.25 ? new(32, 32) : new(24, 24);
@@ -205,6 +236,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		B_Actions.Text = P_ActionsContainer.Height == 0 ? "HideActions" : "ShowActions";
 		AnimationHandler.Animate(P_ActionsContainer, P_ActionsContainer.Height == 0 ? new Size(0, P_ActionsContainer.Padding.Vertical + P_Actions.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
+		P_ActionsContainer.AutoSize = false;
 	}
 
 	private void B_DisEnable_LeftClicked(object sender, EventArgs e)
@@ -231,6 +263,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		B_Filters.Text = P_FiltersContainer.Height == 0 ? "HideFilters" : "ShowFilters";
 		AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
+		P_FiltersContainer.AutoSize = false;
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -411,11 +444,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
+		if (!searchEmpty)
 		{
-			if (!(TB_Search.Text.SearchCheck(item.ToString()) 
-				|| TB_Search.Text.SearchCheck(item.Author?.Name) 
-				|| item.SteamId.ToString().Contains(TB_Search.Text)))
+			if (!(searchText.SearchCheck(item.ToString())
+				|| searchText.SearchCheck(item.Author?.Name)
+				|| item.SteamId.ToString().Contains(searchText)))
+			{
+				return true;
+			}
+		}
+
+		if (!string.IsNullOrEmpty(searchAuthor))
+		{
+			if (searchAuthor != item.Author?.Name)
 			{
 				return true;
 			}
@@ -456,11 +497,38 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
 		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
+
+		searchText = TB_Search.Text.RegexRemove(@"\[\w+:(.+)?\]").Trim();
+		searchEmpty = string.IsNullOrEmpty(searchText);
+		searchAuthor = null;
+
+		foreach (Match match in Regex.Matches(TB_Search.Text, @"\[(\w+):(.+)?\]"))
+		{
+			switch (match.Groups[1].Value.ToLower())
+			{
+				case "author":
+					searchAuthor = match.Groups[2].Value;
+					break;
+			}
+		}
+
 		FilterChanged(sender, e);
 	}
 
 	private void L_Duplicates_Click(object sender, EventArgs e)
 	{
 		Form.PushPanel<PC_ModUtilities>(null);
+	}
+
+	private async void B_UnsubscribeAll_Click(object sender, EventArgs e)
+	{
+		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		B_UnsubscribeAll.Loading = true;
+		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), true);
+		B_UnsubscribeAll.Loading = false;
 	}
 }

@@ -117,7 +117,6 @@ internal class Locale : LocaleHelper
 	public static string PartiallyDownloaded => _instance.GetText(nameof(PartiallyDownloaded));
 	public static string CompatibilityReport => _instance.GetText(nameof(CompatibilityReport));
 	public static string Back => _instance.GetText(nameof(Back));
-	public static string Profiles => _instance.GetText(nameof(Profiles));
 	public static string AutoProfileSaveOn => _instance.GetText(nameof(AutoProfileSaveOn));
 	public static string AutoProfileSaveOff => _instance.GetText(nameof(AutoProfileSaveOff));
 	public static string TemporaryProfileCanNotBeEdited => _instance.GetText(nameof(TemporaryProfileCanNotBeEdited));
@@ -174,7 +173,6 @@ internal class Locale : LocaleHelper
 	public static string ReDownloadPackage => _instance.GetText(nameof(ReDownloadPackage));
 	public static string CopySteamId => _instance.GetText(nameof(CopySteamId));
 	public static string OpenAuthorPage => _instance.GetText(nameof(OpenAuthorPage));
-	public static string Total => _instance.GetText(nameof(Total));
 	public static string Sorting => _instance.GetText(nameof(Sorting));
 	public static string FolderSettings => _instance.GetText(nameof(FolderSettings));
 	public static string ChangingFoldersRequiresRestart => _instance.GetText(nameof(ChangingFoldersRequiresRestart));
@@ -199,8 +197,6 @@ internal class Locale : LocaleHelper
 	public static string CopyAuthorId => _instance.GetText(nameof(CopyAuthorId));
 	public static string Copy => _instance.GetText(nameof(Copy));
 	public static string YourProfiles => _instance.GetText(nameof(YourProfiles));
-	public static string Profile => _instance.GetText(nameof(Profile));
-	public static string Favorite => _instance.GetText(nameof(Favorite));
 	public static string UnFavoriteThisProfile => _instance.GetText(nameof(UnFavoriteThisProfile));
 	public static string FavoriteThisProfile => _instance.GetText(nameof(FavoriteThisProfile));
 	public static string ProfileCreationFailed => _instance.GetText(nameof(ProfileCreationFailed));
@@ -252,4 +248,22 @@ internal class Locale : LocaleHelper
 	public static string HelpLogs => _instance.GetText(nameof(HelpLogs));
 	public static string DisableFpsBoosterDebug => _instance.GetText(nameof(DisableFpsBoosterDebug));
 	public static string DefaultLogViewInfo => _instance.GetText(nameof(DefaultLogViewInfo));
+	public static string ModIncludedTotal => _instance.GetText(nameof(ModIncludedTotal));
+	public static string ModIncludedEnabledTotal => _instance.GetText(nameof(ModIncludedEnabledTotal));
+	public static string ModIncludedAndEnabledTotal => _instance.GetText(nameof(ModIncludedAndEnabledTotal));
+	public static string PackageIncludedTotal => _instance.GetText(nameof(PackageIncludedTotal));
+	public static string PackageIncludedEnabledTotal => _instance.GetText(nameof(PackageIncludedEnabledTotal));
+	public static string PackageIncludedAndEnabledTotal => _instance.GetText(nameof(PackageIncludedAndEnabledTotal));
+	public static string AssetIncludedTotal => _instance.GetText(nameof(AssetIncludedTotal));
+	public static string ClickAuthorFilter => _instance.GetText(nameof(ClickAuthorFilter));
+	public static string ActionUnreversible => _instance.GetText(nameof(ActionUnreversible));
+	public static string CR_IncompatibleAsset => _instance.GetText(nameof(CR_IncompatibleAsset));
+	public static string FavoriteTotal => _instance.GetText(nameof(FavoriteTotal));
+	public static string FavoriteProfileTotal => _instance.GetText(nameof(FavoriteProfileTotal));
+	public static string ProfileFilter => _instance.GetText(nameof(ProfileFilter));
+	public static string CheckDocumentsFolder => _instance.GetText(nameof(CheckDocumentsFolder));
+	public static string FailedToSaveLanguage => _instance.GetText(nameof(FailedToSaveLanguage));
+	public static string FailedToOpenTC => _instance.GetText(nameof(FailedToOpenTC));
+	public static string FailedToDeleteItem => _instance.GetText(nameof(FailedToDeleteItem));
+	public static string DeleteAsset => _instance.GetText(nameof(DeleteAsset));
 }

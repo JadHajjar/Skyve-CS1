@@ -139,11 +139,6 @@ public class LoadOrderUserMod : IUserMod
 				LoadingManager.instance.m_introLoaded += CacheUtil.CacheData;
 			}
 
-			if (!Settings.ConfigUtil.Config.IgnoranceIsBliss)
-			{
-				CheckSubsUtil.RegisterEvents();
-			}
-
 			SceneManager.sceneLoaded += MainMenuLoaded;
 
 			MainMenuLoaded(default, default);
@@ -234,7 +229,6 @@ public class LoadOrderUserMod : IUserMod
 			LOMAssetDataExtension.Release();
 
 			Settings.ConfigUtil.Terminate();
-			CheckSubsUtil.RemoveEvents();
 			Log.Buffered = false;
 
 			try

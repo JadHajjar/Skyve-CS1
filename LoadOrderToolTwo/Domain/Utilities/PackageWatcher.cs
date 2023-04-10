@@ -11,7 +11,7 @@ internal class PackageWatcher : FileSystemWatcher
 	private readonly DelayedAction<string> _delayedUpdate = new(1500);
 	private static readonly List<PackageWatcher> _watchers=new();
 
-	private PackageWatcher(string folder, bool builtIn, bool workshop)
+	private PackageWatcher(string folder, bool allowSelf, bool workshop)
 	{
 		this.Path = folder;
 		NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
@@ -24,11 +24,11 @@ internal class PackageWatcher : FileSystemWatcher
 
 		EnableRaisingEvents = true;
 
-		BuiltIn = builtIn;
+		AllowSelf = allowSelf;
 		Workshop = workshop;
 	}
 
-	public bool BuiltIn { get; }
+	public bool AllowSelf { get; }
 	public bool Workshop { get; }
 
 	private void FileChanged(object sender, FileSystemEventArgs e)
@@ -40,7 +40,7 @@ internal class PackageWatcher : FileSystemWatcher
 
 		var path = GetFirstFolderOrFileName(e.FullPath, Path);
 
-		if (path != Path)
+		if (path != Path || AllowSelf)
 		{
 			_delayedUpdate.Run(path, TriggerUpdate);
 		}
@@ -48,7 +48,7 @@ internal class PackageWatcher : FileSystemWatcher
 
 	private void TriggerUpdate(string path)
 	{
-		ContentUtil.ContentUpdated(path, BuiltIn, Workshop);
+		ContentUtil.ContentUpdated(path, false, Workshop);
 	}
 
 	public string GetFirstFolderOrFileName(string filePath, string sourceFolder)
@@ -77,11 +77,11 @@ internal class PackageWatcher : FileSystemWatcher
 		return Path;
 	}
 
-	public static void Create(string folder, bool builtIn, bool workshop)
+	public static void Create(string folder, bool allowSelf, bool workshop)
 	{
 		if (Directory.Exists(folder))
 		{
-			_watchers.Add(new PackageWatcher(folder, builtIn, workshop));
+			_watchers.Add(new PackageWatcher(folder, allowSelf, workshop));
 		}
 	}
 

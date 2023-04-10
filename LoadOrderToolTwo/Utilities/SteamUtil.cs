@@ -7,6 +7,8 @@ using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
+using Newtonsoft.Json;
+
 using SlickControls;
 
 using System;
@@ -16,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -190,6 +193,17 @@ public static class SteamUtil
 					}
 				}
 
+				foreach (var item in data.Where(x => x.Private))
+				{
+					var info = await GetUnlistedWorkshopEntryAsync("https://steamcommunity.com/workshop/filedetails?id="+item.SteamId);
+
+					if (info.Item1 is not null)
+					{
+						item.Title = info.Item1;
+						item.PreviewURL = info.Item2;
+					}
+				}
+
 				return data.ToDictionary(x => ulong.Parse(x.PublishedFileID));
 			}
 
@@ -201,6 +215,23 @@ public static class SteamUtil
 		}
 
 		return new();
+	}
+
+	public static async Task<(string?, string?)> GetUnlistedWorkshopEntryAsync(string entryUrl)
+	{
+		using var client = new HttpClient();
+		var response = await client.GetAsync(entryUrl);
+		var entryHtml = await response.Content.ReadAsStringAsync();
+
+		// Extract the entry name from the HTML using a regular expression
+		var nameMatch = Regex.Match(entryHtml, "<div class=\"workshopItemTitle\">\\s*(.*?)\\s*</div>");
+		var entryName = nameMatch.Success ? nameMatch.Groups[1].Value : null;
+
+		// Extract the thumbnail URL from the HTML using a regular expression
+		var thumbnailMatch = Regex.Match(entryHtml, "<img .+? class=\"workshopItemPreviewImageMain\" src=\"(.*?)\"");
+		var thumbnailUrl = thumbnailMatch.Success ? Regex.Replace(thumbnailMatch.Groups[1].Value, @"imw=\d+&imh=\d+", "imw=5000&imh=5000").Replace("letterbox=true", "letterbox=false") : null;
+
+		return (entryName, thumbnailUrl);
 	}
 
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> GetCollectionContentsAsync(string collectionId)
@@ -313,6 +344,13 @@ public static class SteamUtil
 	{
 		if (package.Private = steamWorkshopItem.Private)
 		{
+			package.Name = steamWorkshopItem.Title ?? package.Name;
+
+			if (package.IconUrl != steamWorkshopItem.PreviewURL)
+			{
+				package.IconUrl = steamWorkshopItem.PreviewURL ?? package.IconUrl;
+			}
+
 			return;
 		}
 

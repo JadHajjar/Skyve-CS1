@@ -22,6 +22,18 @@ public partial class PC_Profiles : PanelContent
 	{
 		InitializeComponent();
 
+		SlickTip.SetTo(B_NewProfile, "NewProfile_Tip");
+		SlickTip.SetTo(B_TempProfile, "TempProfile_Tip");
+		SlickTip.SetTo(B_ViewProfiles, "ViewProfiles_Tip");
+
+		foreach (var item in this.GetControls<SlickCheckbox>())
+		{
+			if (item != CB_LHT && item != CB_NoWorkshop && item.Parent != TLP_AdvancedDev)
+			{
+				SlickTip.SetTo(item, item.Text + "_Tip");
+			}
+		}
+
 		LoadProfile(CentralManager.CurrentProfile);
 
 		DD_SaveFile.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Saves");

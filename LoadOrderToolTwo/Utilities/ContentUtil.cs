@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Utilities;
 internal class ContentUtil
@@ -130,7 +129,9 @@ internal class ContentUtil
 			}
 		}
 		else
+		{
 			Log.Warning($"Folder not found: '{gameModsPath}'");
+		}
 
 		if (Directory.Exists(addonsModsPath))
 		{
@@ -141,7 +142,9 @@ internal class ContentUtil
 			}
 		}
 		else
+		{
 			Log.Warning($"Folder not found: '{addonsModsPath}'");
+		}
 
 		var subscribedItems = GetSubscribedItemPaths().ToList();
 
@@ -180,6 +183,16 @@ internal class ContentUtil
 	{
 		lock (_contentUpdateLock)
 		{
+			if ((!workshop &&
+				!path.PathContains(LocationManager.AssetsPath) &&
+				!path.PathContains(LocationManager.StylesPath) &&
+				!path.PathContains(LocationManager.MapThemesPath) &&
+				!path.PathContains(LocationManager.ModsPath)) ||
+				path.PathEquals(LocationManager.ModsPath))
+			{
+				return;
+			}
+
 			var existingPackage = CentralManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(path));
 
 			if (existingPackage != null)
@@ -217,6 +230,12 @@ internal class ContentUtil
 		package.Assets = AssetsUtil.GetAssets(package).ToArray();
 		package.Mod = ModsUtil.GetMod(package);
 
+		if (!package.Workshop && package.Mod is null)
+		{
+			CentralManager.OnContentLoaded();
+		}
+
+		CentralManager.InformationUpdate(package);
 		CentralManager.RefreshSteamInfo(package);
 	}
 
@@ -231,7 +250,7 @@ internal class ContentUtil
 
 		foreach (var folder in addonsAssetsPath)
 		{
-			PackageWatcher.Create(folder, false, false);
+			PackageWatcher.Create(folder, true, false);
 		}
 
 		PackageWatcher.Create(LocationManager.ModsPath, false, false);
@@ -269,8 +288,9 @@ internal class ContentUtil
 		}
 
 		PackageWatcher.Pause();
-		try{ ExtensionClass.DeleteFolder(folder); }
-		catch (Exception ex){ Log.Exception(ex, $"Failed to delete the folder '{folder}'"); }
+		try
+		{ ExtensionClass.DeleteFolder(folder); }
+		catch (Exception ex) { Log.Exception(ex, $"Failed to delete the folder '{folder}'"); }
 		PackageWatcher.Resume();
 	}
 
@@ -301,7 +321,10 @@ internal class ContentUtil
 		}
 	}
 
-	internal static GenericPackageState GetGenericPackageState(IGenericPackage item) => GetGenericPackageState(item, out _);
+	internal static GenericPackageState GetGenericPackageState(IGenericPackage item)
+	{
+		return GetGenericPackageState(item, out _);
+	}
 
 	internal static GenericPackageState GetGenericPackageState(IGenericPackage item, out Package? package)
 	{

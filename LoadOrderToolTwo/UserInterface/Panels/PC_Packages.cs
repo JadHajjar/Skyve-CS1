@@ -47,11 +47,37 @@ internal class PC_Packages : PC_ContentList<Package>
 
 	protected override string GetCountText()
 	{
-		var packagesIncluded = CentralManager.Packages.Count(x => x.IsIncluded);
-		var total = LC_Items.ItemCount;
-		var text = string.Empty;
+		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
 
-		return $"{packagesIncluded} {(packagesIncluded == 1 ? Locale.PackageIncluded : Locale.PackageIncludedPlural)}, {total} {Locale.Total.ToLower()}";
+		foreach (var item in CentralManager.Packages)
+		{
+			if (item.IsIncluded)
+			{
+				packagesIncluded++;
+
+				if (item.Mod is not null)
+				{
+					modsIncluded++;
+
+					if (item.Mod.IsEnabled)
+						modsEnabled++;
+				}
+			}
+		}
+		
+		var total = LC_Items.ItemCount;
+
+		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		{
+			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
+		}
+
+		if (modsIncluded == modsEnabled)
+		{
+			return string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total);
+		}
+
+		return string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
 	}
 
 	protected override string GetFilteredCountText(int filteredCount)

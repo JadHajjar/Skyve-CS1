@@ -34,8 +34,5 @@ namespace LoadOrderMod.Settings.Tabs {
         static void OnUGCQueryCompleted(UGCDetails result, bool ioError) {
             Log.Debug($"OnUGCQueryCompleted(result:{result.result} {result.publishedFileId}, ioError:{ioError})");
         }
-        static void OnUGCRequestUGCDetailsCompleted(UGCDetails result, bool ioError) {
-            Log.Debug($"OnUGCRequestUGCDetailsCompleted(result:{result.result} {result.publishedFileId}, ioError:{ioError})");
-        }
     }
 }

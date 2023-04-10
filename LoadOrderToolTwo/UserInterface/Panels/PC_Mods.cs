@@ -33,15 +33,15 @@ internal class PC_Mods : PC_ContentList<Mod>
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
-			return $"{modsIncluded} {(modsIncluded == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}, {total} {Locale.Total.ToLower()}";
+			return string.Format(Locale.ModIncludedTotal, modsIncluded, total);
 		}
 
 		if (modsIncluded == modsEnabled)
 		{
-			return $"{modsIncluded} {(modsIncluded == 1 ? Locale.ModIncludedAndEnabled : Locale.ModIncludedAndEnabledPlural)}, {total} {Locale.Total.ToLower()}";
+			return string.Format(Locale.ModIncludedAndEnabledTotal, modsIncluded, total);
 		}
 
-		return $"{modsIncluded} {(modsIncluded == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)} && {modsEnabled} {(modsEnabled == 1 ? Locale.ModEnabled : Locale.ModEnabledPlural)}, {total} {Locale.Total.ToLower()}";
+		return string.Format(Locale.ModIncludedEnabledTotal, modsIncluded, modsEnabled, total);
 	}
 
 	protected override string GetFilteredCountText(int filteredCount)

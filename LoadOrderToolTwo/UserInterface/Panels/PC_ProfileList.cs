@@ -95,11 +95,11 @@ public partial class PC_ProfileList : PanelContent
 
 		if (favorites == 0)
 		{
-			text = $"{total} {(total == 1 ? Locale.Profile : Locale.Profiles)} {Locale.Total}".ToLower();
+			text = string.Join(Locale.FavoriteTotal, total);
 		}
 		else
 		{
-			text = $"{favorites} {Locale.Favorite} {(total == 1 ? Locale.Profile : Locale.Profiles)}, {total} {(total == 1 ? Locale.Profile : Locale.Profiles)} {Locale.Total}".ToLower();
+			text = string.Format(Locale.FavoriteProfileTotal, favorites, total);
 		}
 
 		if (L_Counts.Text != text)

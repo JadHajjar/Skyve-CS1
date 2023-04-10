@@ -36,7 +36,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 		var total = LC_Items.ItemCount;
 		var text = string.Empty;
 
-		return $"{assetsIncluded} {(assetsIncluded == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}, {total} {Locale.Total.ToLower()}";
+		return string.Format(Locale.AssetIncludedTotal, assetsIncluded, total);
 	}
 
 	protected override string GetFilteredCountText(int filteredCount)

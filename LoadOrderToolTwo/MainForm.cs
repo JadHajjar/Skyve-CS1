@@ -10,7 +10,6 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo;
@@ -30,17 +29,31 @@ public partial class MainForm : BasePanelForm
 
 		SlickTip.SetTo(base_PB_Icon, string.Format(Locale.LaunchTooltip, "[F5]"));
 
+		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
 #if DEBUG
-		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(4);
+		L_Version.Text = "v" + currentVersion.ToString(4);
 #else
-		L_Version.Text = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString(3) + " Beta";
+		L_Version.Text = "v" + currentVersion.ToString(3) + " Beta";
 #endif
 		try
 		{ FormDesign.Initialize(this, DesignChanged); }
 		catch { }
 
 		try
-		{ SetPanel<PC_MainPage>(PI_Dashboard); }
+		{
+			SetPanel<PC_MainPage>(PI_Dashboard);
+
+			var smallVersion = new Version(currentVersion.ToString(3));
+			
+			if (smallVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification && CentralManager.SessionSettings.FirstTimeSetupCompleted)
+			{
+				PushPanel<PC_LotChangeLog>(null);
+
+				CentralManager.SessionSettings.LastVersionNotification = smallVersion.ToString();
+				CentralManager.SessionSettings.Save();
+			}
+		}
 		catch (Exception ex)
 		{ MessagePrompt.Show(ex, "Failed to load the dashboard"); }
 
@@ -94,9 +107,15 @@ public partial class MainForm : BasePanelForm
 		if (buttonStateRunning is null || buttonStateRunning == isRunning)
 		{
 			if (_startTimeoutTimer.Enabled)
+			{
 				_startTimeoutTimer.Stop();
+			}
+
 			if (base_PB_Icon.Loading != isRunning)
+			{
 				base_PB_Icon.Loading = isRunning;
+			}
+
 			buttonStateRunning = null;
 		}
 	}

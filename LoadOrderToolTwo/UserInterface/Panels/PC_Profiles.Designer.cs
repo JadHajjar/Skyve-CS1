@@ -67,11 +67,11 @@ partial class PC_Profiles
 			this.TLP_AdvancedDev = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_NoMods = new SlickControls.SlickCheckbox();
 			this.CB_NoAssets = new SlickControls.SlickCheckbox();
-			this.CB_UnityProfiler = new SlickControls.SlickCheckbox();
 			this.CB_UseCitiesExe = new SlickControls.SlickCheckbox();
 			this.CB_DevUI = new SlickControls.SlickCheckbox();
-			this.CB_DebugMono = new SlickControls.SlickCheckbox();
 			this.CB_RefreshWorkshop = new SlickControls.SlickCheckbox();
+			this.CB_UnityProfiler = new SlickControls.SlickCheckbox();
+			this.CB_DebugMono = new SlickControls.SlickCheckbox();
 			this.B_ViewProfiles = new SlickControls.SlickButton();
 			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
@@ -678,25 +678,6 @@ partial class PC_Profiles
 			this.CB_NoAssets.UncheckedText = null;
 			this.CB_NoAssets.CheckChanged += new System.EventHandler(this.ValueChanged);
 			// 
-			// CB_UnityProfiler
-			// 
-			this.CB_UnityProfiler.AutoSize = true;
-			this.CB_UnityProfiler.Checked = false;
-			this.CB_UnityProfiler.CheckedText = null;
-			this.CB_UnityProfiler.ColorStyle = Extensions.ColorStyle.Red;
-			this.CB_UnityProfiler.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.CB_UnityProfiler.DefaultValue = false;
-			this.CB_UnityProfiler.EnterTriggersClick = false;
-			this.CB_UnityProfiler.Location = new System.Drawing.Point(10, 161);
-			this.CB_UnityProfiler.Name = "CB_UnityProfiler";
-			this.CB_UnityProfiler.Size = new System.Drawing.Size(174, 30);
-			this.CB_UnityProfiler.SpaceTriggersClick = true;
-			this.CB_UnityProfiler.TabIndex = 5;
-			this.CB_UnityProfiler.Text = "UnityProfilerMode";
-			this.CB_UnityProfiler.UncheckedText = null;
-			this.CB_UnityProfiler.Visible = false;
-			this.CB_UnityProfiler.CheckChanged += new System.EventHandler(this.ValueChanged);
-			// 
 			// CB_UseCitiesExe
 			// 
 			this.CB_UseCitiesExe.AutoSize = true;
@@ -734,24 +715,6 @@ partial class PC_Profiles
 			this.CB_DevUI.UncheckedText = null;
 			this.CB_DevUI.CheckChanged += new System.EventHandler(this.ValueChanged);
 			// 
-			// CB_DebugMono
-			// 
-			this.CB_DebugMono.AutoSize = true;
-			this.CB_DebugMono.Checked = false;
-			this.CB_DebugMono.CheckedText = null;
-			this.CB_DebugMono.ColorStyle = Extensions.ColorStyle.Red;
-			this.CB_DebugMono.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.CB_DebugMono.DefaultValue = false;
-			this.CB_DebugMono.EnterTriggersClick = false;
-			this.CB_DebugMono.Location = new System.Drawing.Point(294, 125);
-			this.CB_DebugMono.Name = "CB_DebugMono";
-			this.CB_DebugMono.Size = new System.Drawing.Size(159, 30);
-			this.CB_DebugMono.SpaceTriggersClick = true;
-			this.CB_DebugMono.TabIndex = 6;
-			this.CB_DebugMono.Text = "UseDebugMono";
-			this.CB_DebugMono.UncheckedText = null;
-			this.CB_DebugMono.CheckChanged += new System.EventHandler(this.ValueChanged);
-			// 
 			// CB_RefreshWorkshop
 			// 
 			this.CB_RefreshWorkshop.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -770,9 +733,47 @@ partial class PC_Profiles
 			this.CB_RefreshWorkshop.Text = "RefreshWorkshop";
 			this.CB_RefreshWorkshop.UncheckedText = null;
 			// 
+			// CB_UnityProfiler
+			// 
+			this.CB_UnityProfiler.AutoSize = true;
+			this.CB_UnityProfiler.Checked = false;
+			this.CB_UnityProfiler.CheckedText = null;
+			this.CB_UnityProfiler.ColorStyle = Extensions.ColorStyle.Red;
+			this.CB_UnityProfiler.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.CB_UnityProfiler.DefaultValue = false;
+			this.CB_UnityProfiler.EnterTriggersClick = false;
+			this.CB_UnityProfiler.Location = new System.Drawing.Point(10, 161);
+			this.CB_UnityProfiler.Name = "CB_UnityProfiler";
+			this.CB_UnityProfiler.Size = new System.Drawing.Size(174, 30);
+			this.CB_UnityProfiler.SpaceTriggersClick = true;
+			this.CB_UnityProfiler.TabIndex = 5;
+			this.CB_UnityProfiler.Text = "UnityProfilerMode";
+			this.CB_UnityProfiler.UncheckedText = null;
+			this.CB_UnityProfiler.Visible = false;
+			this.CB_UnityProfiler.CheckChanged += new System.EventHandler(this.ValueChanged);
+			// 
+			// CB_DebugMono
+			// 
+			this.CB_DebugMono.AutoSize = true;
+			this.CB_DebugMono.Checked = false;
+			this.CB_DebugMono.CheckedText = null;
+			this.CB_DebugMono.ColorStyle = Extensions.ColorStyle.Red;
+			this.CB_DebugMono.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.CB_DebugMono.DefaultValue = false;
+			this.CB_DebugMono.EnterTriggersClick = false;
+			this.CB_DebugMono.Location = new System.Drawing.Point(294, 125);
+			this.CB_DebugMono.Name = "CB_DebugMono";
+			this.CB_DebugMono.Size = new System.Drawing.Size(159, 30);
+			this.CB_DebugMono.SpaceTriggersClick = true;
+			this.CB_DebugMono.TabIndex = 6;
+			this.CB_DebugMono.Text = "UseDebugMono";
+			this.CB_DebugMono.UncheckedText = null;
+			this.CB_DebugMono.CheckChanged += new System.EventHandler(this.ValueChanged);
+			// 
 			// B_ViewProfiles
 			// 
 			this.B_ViewProfiles.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_ViewProfiles.AutoSize = true;
 			this.B_ViewProfiles.ColorShade = null;
 			this.B_ViewProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ViewProfiles.Image = global::LoadOrderToolTwo.Properties.Resources.I_Pages;
@@ -818,6 +819,7 @@ partial class PC_Profiles
 			// B_TempProfile
 			// 
 			this.B_TempProfile.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_TempProfile.AutoSize = true;
 			this.B_TempProfile.ColorShade = null;
 			this.B_TempProfile.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_TempProfile.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -835,6 +837,7 @@ partial class PC_Profiles
 			// B_NewProfile
 			// 
 			this.B_NewProfile.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_NewProfile.AutoSize = true;
 			this.B_NewProfile.ColorShade = null;
 			this.B_NewProfile.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_NewProfile.Cursor = System.Windows.Forms.Cursors.Hand;

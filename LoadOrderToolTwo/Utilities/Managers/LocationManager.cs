@@ -299,7 +299,7 @@ internal class LocationManager
 		}
 	}
 
-	internal static void SetPaths(string gamePath, string appDataPath, string steamPath, string virtualGamePath, string virtualAppDataPath)
+	internal static void SetPaths(string gamePath, string appDataPath, string steamPath, string virtualAppDataPath, string virtualGamePath)
 	{
 		_folderSettings.GamePath = gamePath;
 		_folderSettings.AppDataPath = appDataPath;

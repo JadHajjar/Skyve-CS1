@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using System;
 using System.Drawing;
 
 namespace LoadOrderToolTwo.Domain.Utilities;
@@ -11,7 +12,9 @@ internal class SessionSettings : ISave
 	public string? CurrentProfile { get; set; }
 	public Rectangle? LastWindowsBounds { get; set; }
 	public bool WindowWasMaximized { get; set; }
-	public UserSettings UserSettings { get; set; } = new();
     public bool SubscribeInfoShown { get; set; }
 	public bool FpsBoosterLogWarning { get; set; }
+	public string? LastVersionNotification { get; set; }
+
+	public UserSettings UserSettings { get; set; } = new();
 }

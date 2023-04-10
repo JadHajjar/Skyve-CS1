@@ -22,9 +22,9 @@ public static class LogUtil
 		_ => Path.Combine(LocationManager.GamePath, "Cities_Data", "output_log.txt")
 	};
 
-	public static string GameDataPath => Path.GetDirectoryName(GameLogFile);
+	public static string GameDataPath => Path.Combine(LocationManager.GamePath, "Cities_Data");
 
-	public static string CreateZipFileAndSetToClipboard(string folder = null)
+	public static string CreateZipFileAndSetToClipboard(string? folder = null)
 	{
 		var file = Path.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_hh-mm-tt}.zip");
 
@@ -146,17 +146,21 @@ public static class LogUtil
 			return string.Empty;
 		}
 
-		var mainGameDir = new DirectoryInfo(GameDataPath).Parent;
-		var directories = mainGameDir.GetDirectories($"*-*-*");
-		var latest = directories
-			.Where(s => DateTime.Now - s.LastWriteTime < TimeSpan.FromDays(1))
-			.OrderByDescending(s => s.CreationTime)
-			.FirstOrDefault();
-
-		if (latest != null)
+		try
 		{
-			return Path.Combine(latest.FullName, "error.log");
+			var mainGameDir = new DirectoryInfo(GameDataPath).Parent;
+			var directories = mainGameDir.GetDirectories($"*-*-*");
+			var latest = directories
+				.Where(s => DateTime.Now - s.LastWriteTime < TimeSpan.FromDays(1))
+				.OrderByDescending(s => s.CreationTime)
+				.FirstOrDefault();
+
+			if (latest != null)
+			{
+				return Path.Combine(latest.FullName, "error.log");
+			}
 		}
+		catch (Exception ex) { Log.Exception(ex, "Failed to load the previous crash dump log"); }
 
 		return string.Empty;
 	}
@@ -174,7 +178,7 @@ public static class LogUtil
 
 			var regex = Regex.Match(path, @"Colossal Order[\\/]Cities_Skylines[\\/]", RegexOptions.IgnoreCase);
 
-			if (regex.Success) // attempt to match the file to an OS or user
+			if (regex.Success) // attempt to match the file to any OS or user
 			{
 				path = Path.Combine(LocationManager.AppDataPath, path.Substring(regex.Index + regex.Length));
 			}
@@ -257,7 +261,7 @@ public static class LogUtil
 		{
 			var current = lines[i];
 
-			if (!current.StartsWith("Crash!!!") && !current.TrimStart().StartsWith("at ") && current.IndexOf("end of inner stack trace", StringComparison.OrdinalIgnoreCase) == -1)
+			if (!current.StartsWith("Crash!!!") && !current.TrimStart().StartsWith("at ") && !(current.TrimStart().StartsWith("--") && currentTrace is not null))
 			{
 				if (currentTrace is not null)
 				{

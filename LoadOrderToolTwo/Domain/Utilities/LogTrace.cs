@@ -22,7 +22,7 @@ public class LogTrace
 
 			if (timestampRegex.Success)
 			{
-				Timestamp = timestampRegex.Groups[1].Value;
+				Timestamp = "@" + timestampRegex.Groups[1].Value;
 				Title = lines[index - i].Trim().Substring(timestampRegex.Value.Length);
 
 				while (i > 1)
@@ -45,7 +45,7 @@ public class LogTrace
 
 	public void AddTrace(string trace)
 	{
-		Trace.Add(trace.Trim());
+		Trace.Add(trace.RegexRemove(@"\[0x00.+\>\:0").Trim());
 	}
 
 	public override string ToString()

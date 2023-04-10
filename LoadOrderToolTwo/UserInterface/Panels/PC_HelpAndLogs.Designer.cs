@@ -48,6 +48,7 @@ partial class PC_HelpAndLogs
 			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.B_ChangeLog = new SlickControls.SlickButton();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.TLP_HelpLogs.SuspendLayout();
@@ -89,7 +90,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Main.Size = new System.Drawing.Size(1100, 400);
+			this.TLP_Main.Size = new System.Drawing.Size(1100, 436);
 			this.TLP_Main.TabIndex = 13;
 			// 
 			// tableLayoutPanel1
@@ -108,7 +109,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Main.SetRowSpan(this.tableLayoutPanel1, 3);
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(351, 400);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(351, 436);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// TLP_HelpLogs
@@ -118,21 +119,25 @@ partial class PC_HelpAndLogs
 			this.TLP_HelpLogs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.TLP_HelpLogs.ColumnCount = 1;
 			this.TLP_HelpLogs.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_HelpLogs.Controls.Add(this.B_SaveZip, 0, 4);
-			this.TLP_HelpLogs.Controls.Add(this.B_CopyZip, 0, 3);
+			this.TLP_HelpLogs.Controls.Add(this.B_ChangeLog, 0, 2);
+			this.TLP_HelpLogs.Controls.Add(this.B_SaveZip, 0, 5);
+			this.TLP_HelpLogs.Controls.Add(this.B_CopyZip, 0, 4);
 			this.TLP_HelpLogs.Controls.Add(this.B_Discord, 0, 0);
 			this.TLP_HelpLogs.Controls.Add(this.B_Guide, 0, 1);
-			this.TLP_HelpLogs.Controls.Add(this.slickSpacer1, 0, 2);
+			this.TLP_HelpLogs.Controls.Add(this.slickSpacer1, 0, 3);
+			this.TLP_HelpLogs.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TLP_HelpLogs.Location = new System.Drawing.Point(3, 3);
 			this.TLP_HelpLogs.Name = "TLP_HelpLogs";
 			this.TLP_HelpLogs.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
-			this.TLP_HelpLogs.RowCount = 5;
+			this.TLP_HelpLogs.RowCount = 6;
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_HelpLogs.Size = new System.Drawing.Size(345, 186);
+			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_HelpLogs.Size = new System.Drawing.Size(345, 222);
 			this.TLP_HelpLogs.TabIndex = 0;
 			this.TLP_HelpLogs.Text = "HelpSupport";
 			// 
@@ -142,7 +147,7 @@ partial class PC_HelpAndLogs
 			this.B_SaveZip.ColorShade = null;
 			this.B_SaveZip.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_SaveZip.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_SaveZip.Location = new System.Drawing.Point(10, 162);
+			this.B_SaveZip.Location = new System.Drawing.Point(10, 198);
 			this.B_SaveZip.Name = "B_SaveZip";
 			this.B_SaveZip.Size = new System.Drawing.Size(325, 14);
 			this.B_SaveZip.SpaceTriggersClick = true;
@@ -156,7 +161,7 @@ partial class PC_HelpAndLogs
 			this.B_CopyZip.ColorShade = null;
 			this.B_CopyZip.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CopyZip.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_CopyZip.Location = new System.Drawing.Point(10, 142);
+			this.B_CopyZip.Location = new System.Drawing.Point(10, 178);
 			this.B_CopyZip.Name = "B_CopyZip";
 			this.B_CopyZip.Size = new System.Drawing.Size(325, 14);
 			this.B_CopyZip.SpaceTriggersClick = true;
@@ -195,7 +200,7 @@ partial class PC_HelpAndLogs
 			// slickSpacer1
 			// 
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(10, 113);
+			this.slickSpacer1.Location = new System.Drawing.Point(10, 149);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(325, 23);
 			this.slickSpacer1.TabIndex = 2;
@@ -214,7 +219,8 @@ partial class PC_HelpAndLogs
 			this.TLP_LogFolders.Controls.Add(this.slickSpacer2, 0, 2);
 			this.TLP_LogFolders.Controls.Add(this.B_OpenLogFolder, 0, 0);
 			this.TLP_LogFolders.Controls.Add(this.B_CopyLogFile, 0, 1);
-			this.TLP_LogFolders.Location = new System.Drawing.Point(3, 195);
+			this.TLP_LogFolders.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TLP_LogFolders.Location = new System.Drawing.Point(3, 231);
 			this.TLP_LogFolders.Name = "TLP_LogFolders";
 			this.TLP_LogFolders.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
 			this.TLP_LogFolders.RowCount = 5;
@@ -367,6 +373,20 @@ partial class PC_HelpAndLogs
 			this.panel1.Size = new System.Drawing.Size(1161, 702);
 			this.panel1.TabIndex = 16;
 			// 
+			// B_ChangeLog
+			// 
+			this.B_ChangeLog.AutoSize = true;
+			this.B_ChangeLog.ColorShade = null;
+			this.B_ChangeLog.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ChangeLog.Dock = System.Windows.Forms.DockStyle.Top;
+			this.B_ChangeLog.Location = new System.Drawing.Point(10, 113);
+			this.B_ChangeLog.Name = "B_ChangeLog";
+			this.B_ChangeLog.Size = new System.Drawing.Size(325, 30);
+			this.B_ChangeLog.SpaceTriggersClick = true;
+			this.B_ChangeLog.TabIndex = 20;
+			this.B_ChangeLog.Text = "OpenChangelog";
+			this.B_ChangeLog.Click += new System.EventHandler(this.B_ChangeLog_Click);
+			// 
 			// PC_HelpAndLogs
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -413,4 +433,5 @@ partial class PC_HelpAndLogs
 	private SlickControls.SlickButton B_OpenLogFolder;
 	private SlickControls.SlickButton B_CopyLogFile;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+	private SlickControls.SlickButton B_ChangeLog;
 }

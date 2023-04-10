@@ -364,20 +364,17 @@ internal static class CentralManager
 				_delayedModInformationUpdated.Run();
 			}
 
-			if (package.Assets != null)
+			if (package.Assets != null && package.Assets.Length > 0)
 			{
-				foreach (var asset in package.Assets)
-				{
-					_delayedAssetInformationUpdated.Run();
-				}
+				_delayedAssetInformationUpdated.Run();
 			}
 		}
-		else if (iPackage is Mod mod)
+		else if (iPackage is Mod)
 		{
 			_delayedModInformationUpdated.Run();
 			_delayedPackageInformationUpdated.Run();
 		}
-		else if (iPackage is Asset asset)
+		else if (iPackage is Asset)
 		{
 			_delayedAssetInformationUpdated.Run();
 			_delayedPackageInformationUpdated.Run();
@@ -463,5 +460,10 @@ internal static class CentralManager
 		package.Status = DownloadStatus.NotDownloaded;
 		ContentLoaded?.Invoke();
 		_delayedWorkshopInfoUpdated.Run();
+	}
+
+	internal static void OnContentLoaded()
+	{
+		ContentLoaded?.Invoke();
 	}
 }

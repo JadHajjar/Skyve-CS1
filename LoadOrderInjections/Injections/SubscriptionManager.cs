@@ -548,7 +548,6 @@ namespace LoadOrderInjections {
 			PlatformService.workshop.eventWorkshopSubscriptionChanged -= SteamUtilities.OnWorkshopSubscriptionChanged;
 			PlatformService.workshop.eventWorkshopSubscriptionChanged += SteamUtilities.OnWorkshopSubscriptionChanged;
 			PlatformService.workshop.eventUGCQueryCompleted += SteamUtilities.OnUGCQueryCompleted;
-			PlatformService.workshop.eventUGCRequestUGCDetailsCompleted += SteamUtilities.OnUGCRequestUGCDetailsCompleted;
 			AppDomain.CurrentDomain.UnhandledException += SteamUtilities.CurrentDomain_UnhandledException;
 		}
         public static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs args) {
@@ -647,19 +646,6 @@ namespace LoadOrderInjections {
                 return "Asset";
             else
                 return "subscribed item";
-        }
-
-
-        public static void OnUGCRequestUGCDetailsCompleted(UGCDetails result, bool ioError) {
-            ThreadPool.QueueUserWorkItem((_) => {
-               bool good = IsUGCUpToDate(result, out string reason) == DownloadStatus.DownloadOK;
-                if (!good && !IsExcludedMod(result.publishedFileId)) {
-                    Log.Warning($"{result.Class()} not installed properly:{result.publishedFileId} {result.title} " +
-                        $"reason={reason}. " +
-                        $"try reinstalling the item.",
-                        true);
-                }
-            });
         }
 
         public static string ToSTR(this ref UGCDetails result)

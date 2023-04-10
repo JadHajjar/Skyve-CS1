@@ -1,6 +1,8 @@
 ﻿using CompatibilityReport.CatalogData;
 
 using Extensions;
+
+using LoadOrderToolTwo.Domain.CompatibilityReport;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Legacy;
 
@@ -23,6 +25,7 @@ namespace LoadOrderToolTwo.Utilities.Managers;
 internal static class CompatibilityManager
 {
 	internal static Catalog Catalog { get; private set; }
+	internal static AssetCatalog AssetCatalog { get; private set; }
 	internal static bool CatalogAvailable { get; private set; }
 
 	internal static void LoadCompatibilityReport(Domain.Package compatibilityReport)
@@ -43,6 +46,17 @@ internal static class CompatibilityManager
 				Catalog.CreateIndexes();
 
 				CatalogAvailable = true;
+			}
+
+			var assetFile = Path.Combine(compatibilityReport.Folder, "CompatibilityReportAssetCatalog.xml");
+
+			if (File.Exists(assetFile))
+			{
+				using var reader = new FileStream(assetFile, FileMode.Open, FileAccess.Read);
+				var ser = new XmlSerializer(typeof(AssetCatalog));
+
+				AssetCatalog = ser.Deserialize(reader) as AssetCatalog;
+				AssetCatalog.CreateDictionary();
 			}
 		}
 		catch { }
@@ -74,6 +88,18 @@ internal static class CompatibilityManager
 		}
 
 		var subscribedMod = Catalog.GetMod(package.SteamId);
+
+		if (subscribedMod is null && AssetCatalog.AssetCatalogDictionary.ContainsKey(package.SteamId))
+		{
+			var assetEntry = AssetCatalog.AssetCatalogDictionary[package.SteamId];
+
+			reportInfo.Messages.Add(new ReportMessage(ReportType.Stability
+								, ReportSeverity.Unsubscribe
+								, assetEntry.Stability
+								, string.Format(Locale.CR_IncompatibleAsset, assetEntry.Name)));
+
+			return reportInfo;
+		}
 
 		if (subscribedMod is null && package.Mod is null)
 		{

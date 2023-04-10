@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
@@ -49,9 +48,15 @@ public static class ImageManager
 
 	public static FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = Path.Combine(ISave.DocsFolder, "Thumbs", fileName ?? (Path.GetFileNameWithoutExtension(url.TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png")));
+		var filePath = Path.Combine(ISave.DocsFolder, "Thumbs", fileName ?? (Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png")));
 
 		return new FileInfo(filePath);
+	}
+
+	public static string RemoveQueryParamsFromUrl(string url)
+	{
+		var index = url.IndexOf('?');
+		return index >= 0 ? url.Substring(0, index) : url;
 	}
 
 	public static async Task<Bitmap?> GetImage(string? url)
@@ -217,18 +222,22 @@ public static class ImageManager
 
 	private static void CacheClearTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		var keys = _cache.Keys.ToList();
-
-		foreach (var key in keys)
+		try
 		{
-			if (_cache.TryGetValue(key, out var value))
+			var keys = _cache.Keys.ToList();
+
+			foreach (var key in keys)
 			{
-				if (DateTime.Now - value.lastAccessed > _expirationTime)
+				if (_cache.TryGetValue(key, out var value))
 				{
-					value.image.Dispose();
-					_cache.Remove(key);
+					if (DateTime.Now - value.lastAccessed > _expirationTime)
+					{
+						value.image.Dispose();
+						_cache.Remove(key);
+					}
 				}
 			}
 		}
+		catch { }
 	}
 }

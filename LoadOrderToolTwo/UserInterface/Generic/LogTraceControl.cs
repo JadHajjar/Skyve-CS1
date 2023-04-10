@@ -1,26 +1,24 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Generic;
-internal class LogTraceControl : SlickControl
+internal class LogTraceControl : SlickListControl<LogTrace>
 {
-	public LogTrace Log { get; }
+	private LogTrace? itemHovered;
 
-	public LogTraceControl(LogTrace log)
+	public LogTraceControl(IEnumerable<LogTrace> logs)
 	{
 		Dock = DockStyle.Top;
-		Log = log;
+		CalculateItemSize += LogTraceControl_CalculateItemSize;
+		AddRange(logs);
 	}
 
 	protected override void UIChanged()
@@ -29,29 +27,96 @@ internal class LogTraceControl : SlickControl
 		Margin = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
-	protected override void OnPaint(PaintEventArgs e)
+	private void LogTraceControl_CalculateItemSize(object sender, SizeSourceEventArgs<LogTrace> e)
 	{
-		e.Graphics.SetUp(BackColor);
+		var rect = ClientRectangle.Pad(Padding);
+		var y = rect.Top;
 
-		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), ClientRectangle.Pad(3), (int)(4 * UI.FontScale));
+		using var smallFont = UI.Font(7.5F);
 
-		var y = Padding.Top;
+		var timeStampSize = e.Graphics.Measure(e.Item.Timestamp, smallFont);
 
-		e.Graphics.DrawString(Log.Title, UI.Font(9F, FontStyle.Bold), new SolidBrush(ForeColor), new Rectangle(Padding.Left, y, Width - Padding.Horizontal, Height));
+		timeStampSize.Width += Padding.Left;
+		timeStampSize.Height += Padding.Left;
 
-		y += Padding.Top + (int)e.Graphics.Measure(Log.Title, UI.Font(9F, FontStyle.Bold), Width - Padding.Horizontal).Height;
+		using var titleFont = UI.Font(8.25F, FontStyle.Bold);
 
-		foreach (var item in Log.Trace)
+		y += Padding.Top + (int)e.Graphics.Measure(e.Item.Title, e.Item.Trace.Count == 0 ? smallFont : titleFont, rect.Width - ((int)timeStampSize.Width * 2) - Padding.Right).Height;
+
+		foreach (var item in e.Item.Trace)
 		{
 			var trace = item.StartsWith("at");
-			e.Graphics.DrawString(item, UI.Font(8.25F), new SolidBrush(ForeColor), new Rectangle(Padding.Left + (trace?Padding.Horizontal:0), y, Width - (trace?2:1) * Padding.Horizontal, Height));
 
-			y += (int)e.Graphics.Measure(item, UI.Font(8.25F), Width - (trace ? 2 : 1)*Padding.Horizontal).Height;
+			y += (int)e.Graphics.Measure(item, smallFont, Width - ((trace ? 2 : 1) * Padding.Horizontal)).Height;
 		}
 
 		y += Padding.Bottom;
 
-		if (y != Height)
-			Height = y;
+		e.Size = y;
+		e.Handled = true;
+	}
+
+	protected override void OnItemMouseClick(DrawableItem<LogTrace> item, MouseEventArgs e)
+	{
+		if (e.Button == MouseButtons.Left && itemHovered == item.Item)
+		{
+			Clipboard.SetText($"{item.Item.Title}\r\n{item.Item.Trace.ListStrings("\r\n")}");
+		}
+	}
+
+	protected override void OnPaint(PaintEventArgs e)
+	{
+		itemHovered = null;
+		base.OnPaint(e);
+
+		Cursor = itemHovered is not null ? Cursors.Hand : Cursors.Default;
+	}
+
+	protected override void OnPaintItem(ItemPaintEventArgs<LogTrace> e)
+	{
+		var rect = e.ClipRectangle.Pad(Padding);
+		var y = rect.Top;
+
+		using var smallFont = UI.Font(7.5F);
+
+		var timeStampSize = e.Graphics.Measure(e.Item.Timestamp, smallFont);
+
+		timeStampSize.Width += Padding.Left;
+		timeStampSize.Height += Padding.Left;
+
+		var buttonRect = rect.Align(new Size((int)timeStampSize.Height, (int)timeStampSize.Height), ContentAlignment.TopRight);
+
+		if (buttonRect.Contains(CursorLocation))
+		{
+			itemHovered = e.Item;
+		}
+
+		SlickButton.DrawButton(e, buttonRect, null, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Copy)), null, buttonRect.Contains(CursorLocation) ? HoverState : HoverState.Normal);
+
+		using var yellowBrush = new SolidBrush(FormDesign.Design.MenuColor);
+		using var activeBrush = new SolidBrush(FormDesign.Design.MenuForeColor);
+		e.Graphics.FillRoundedRectangle(yellowBrush, rect.Pad(0, 0, (int)timeStampSize.Height + Padding.Right, 0).Align(timeStampSize.ToSize(), ContentAlignment.TopRight), Padding.Left);
+		e.Graphics.DrawString(e.Item.Timestamp, smallFont, activeBrush, rect.Pad(0, 0, (int)timeStampSize.Height + Padding.Right, 0).Align(timeStampSize.ToSize(), ContentAlignment.TopRight), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+
+		using var titleFont = UI.Font(8.25F, FontStyle.Bold);
+		using var titleBrush = new SolidBrush(ForeColor);
+		e.Graphics.DrawString(e.Item.Title, titleFont, titleBrush, rect.Pad(0, 0, ((int)timeStampSize.Width * 2) + Padding.Right, 0));
+
+		y += Padding.Top + (int)e.Graphics.Measure(e.Item.Title, e.Item.Trace.Count == 0 ? smallFont : titleFont, rect.Width - ((int)timeStampSize.Width * 2) - Padding.Right).Height;
+
+		using var textBrush = new SolidBrush(Color.FromArgb(215, ForeColor));
+		foreach (var item in e.Item.Trace)
+		{
+			var trace = item.StartsWith("at");
+
+			e.Graphics.DrawString(item, smallFont, trace ? textBrush : titleBrush, new Rectangle(Padding.Left + (trace ? Padding.Horizontal : 0), y, Width - ((trace ? 2 : 1) * Padding.Horizontal), Height));
+
+			y += (int)e.Graphics.Measure(item, smallFont, Width - ((trace ? 2 : 1) * Padding.Horizontal)).Height;
+		}
+
+		y += Padding.Bottom;
+
+		using var pen = new Pen(FormDesign.Design.AccentColor, (float)(2 * UI.FontScale));
+		e.Graphics.DrawLine(pen, rect.Left, y - pen.Width, rect.Right, y - pen.Width);
 	}
 }

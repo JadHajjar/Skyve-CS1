@@ -30,9 +30,11 @@
     <Compile Remove="ColossalOrder\GameSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Properties\Changelog.json" />
     <None Remove="Properties\Locale.csv" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Changelog.json" />
     <EmbeddedResource Include="Properties\Locale.csv" />
   </ItemGroup>
 
@@ -124,7 +126,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Domain\CompatibilityReport\" />
 	  <Folder Include="Domain\Steam\Markdown\" />
 	</ItemGroup>
 
@@ -163,6 +164,7 @@
 			<FilesToCopy Include="$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\**\*.*" />
 		</ItemGroup>
 		<Delete Files="$(FilesToDelete)" />
+		<RemoveDir Directories="$(WorkshopDir)\Tool" />
 		<Copy SourceFiles="@(FilesToCopy)" DestinationFiles="@(FilesToCopy->'$(WorkshopDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
 		<Delete Files="$(ZipFile)" />
 		<ZipDirectory SourceDirectory="$(WorkshopDir)" DestinationFile="$(ZipFile)" />

@@ -18,7 +18,7 @@ public static class ProfileManager
 	private const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";
 	private const string CITIES_PATH = "%CITIES%";
 	private const string WS_CONTENT_PATH = "%WORKSHOP%";
-	private static List<Profile> _profiles;
+	private static List<Profile> _profiles = new();
 	private static bool disableAutoSave;
 	private static readonly FileSystemWatcher? _watcher;
 

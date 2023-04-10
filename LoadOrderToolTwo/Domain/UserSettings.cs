@@ -22,4 +22,5 @@ internal class UserSettings
 	public bool AdvancedLaunchOptions { get; set; }
 	public bool HidePseudoMods { get; set; }
 	public bool ShowFolderSettings { get; set; }
+    public bool AlwaysOpenFiltersAndActions { get; set; }
 }

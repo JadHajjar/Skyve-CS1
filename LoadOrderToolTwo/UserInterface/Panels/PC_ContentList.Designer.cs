@@ -39,6 +39,7 @@ partial class PC_ContentList<T>
 			this.P_ActionsContainer = new System.Windows.Forms.Panel();
 			this.P_Actions = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.B_UnsubscribeAll = new SlickControls.SlickButton();
 			this.B_DisEnable = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
 			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
@@ -137,7 +138,7 @@ partial class PC_ContentList<T>
 			this.P_Actions.Location = new System.Drawing.Point(0, 0);
 			this.P_Actions.Name = "P_Actions";
 			this.P_Actions.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
-			this.P_Actions.Size = new System.Drawing.Size(895, 91);
+			this.P_Actions.Size = new System.Drawing.Size(895, 111);
 			this.P_Actions.TabIndex = 3;
 			this.P_Actions.Text = "Actions";
 			// 
@@ -148,7 +149,7 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel2.ColumnCount = 2;
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel2.Controls.Add(this.B_UnsubscribeAll, 0, 1);
 			this.tableLayoutPanel2.Controls.Add(this.B_DisEnable, 1, 0);
 			this.tableLayoutPanel2.Controls.Add(this.B_ExInclude, 0, 0);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -156,9 +157,24 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(881, 46);
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(881, 66);
 			this.tableLayoutPanel2.TabIndex = 0;
+			// 
+			// B_UnsubscribeAll
+			// 
+			this.B_UnsubscribeAll.AutoSize = true;
+			this.B_UnsubscribeAll.ColorShade = null;
+			this.B_UnsubscribeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_UnsubscribeAll.Dock = System.Windows.Forms.DockStyle.Top;
+			this.B_UnsubscribeAll.Location = new System.Drawing.Point(3, 49);
+			this.B_UnsubscribeAll.Name = "B_UnsubscribeAll";
+			this.B_UnsubscribeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+			this.B_UnsubscribeAll.Size = new System.Drawing.Size(434, 14);
+			this.B_UnsubscribeAll.SpaceTriggersClick = true;
+			this.B_UnsubscribeAll.TabIndex = 3;
+			this.B_UnsubscribeAll.Text = "UnsubscribeAllButton";
+			this.B_UnsubscribeAll.Click += new System.EventHandler(this.B_UnsubscribeAll_Click);
 			// 
 			// B_DisEnable
 			// 
@@ -291,6 +307,7 @@ partial class PC_ContentList<T>
 			this.L_Duplicates.TabIndex = 2;
 			this.L_Duplicates.Tag = "NoMouseDown";
 			this.L_Duplicates.Text = "label1";
+			this.L_Duplicates.UseMnemonic = false;
 			this.L_Duplicates.Click += new System.EventHandler(this.L_Duplicates_Click);
 			// 
 			// L_Counts
@@ -303,6 +320,7 @@ partial class PC_ContentList<T>
 			this.L_Counts.Size = new System.Drawing.Size(55, 23);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
+			this.L_Counts.UseMnemonic = false;
 			// 
 			// L_FilterCount
 			// 
@@ -312,6 +330,7 @@ partial class PC_ContentList<T>
 			this.L_FilterCount.Size = new System.Drawing.Size(55, 23);
 			this.L_FilterCount.TabIndex = 2;
 			this.L_FilterCount.Text = "label1";
+			this.L_FilterCount.UseMnemonic = false;
 			// 
 			// P_FiltersContainer
 			// 
@@ -573,6 +592,7 @@ partial class PC_ContentList<T>
 			this.P_Actions.ResumeLayout(false);
 			this.P_Actions.PerformLayout();
 			this.tableLayoutPanel2.ResumeLayout(false);
+			this.tableLayoutPanel2.PerformLayout();
 			this.tableLayoutPanel3.ResumeLayout(false);
 			this.tableLayoutPanel3.PerformLayout();
 			this.P_FiltersContainer.ResumeLayout(false);
@@ -620,4 +640,5 @@ partial class PC_ContentList<T>
 	private SlickControls.SlickButton B_Refresh;
 	private SlickControls.SlickDateRange DR_SubscribeTime;
 	private SlickControls.SlickDateRange DR_ServerTime;
+	private SlickControls.SlickButton B_UnsubscribeAll;
 }

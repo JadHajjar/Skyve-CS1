@@ -28,6 +28,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	public event Action<DownloadStatus>? DownloadStatusSelected;
 	public event Action<DateTime>? DateSelected;
 	public event Action<string>? TagSelected;
+	public event Action<string>? AddToSearch;
 
 	public ItemListControl()
 	{
@@ -182,7 +183,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 			if (rects.AuthorRect.Contains(location))
 			{
-				setTip(Locale.OpenAuthorPage, rects.AuthorRect);
+				setTip(Locale.OpenAuthorPage + "\r\n" + Locale.ClickAuthorFilter, rects.AuthorRect);
 			}
 		}
 
@@ -293,7 +294,15 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 			if (rects.AuthorRect.Contains(e.Location))
 			{
-				OpenSteamLink($"{item.Item.Author?.ProfileUrl}myworkshopfiles");
+				if (ModifierKeys.HasFlag(Keys.Control))
+				{
+					AddToSearch?.Invoke($"[author:{item.Item.Author?.Name}]");
+				}
+				else
+				{
+					OpenSteamLink($"{item.Item.Author?.ProfileUrl}myworkshopfiles");
+				}
+
 				return;
 			}
 		}
@@ -302,13 +311,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	private void ShowRightClickMenu(T item)
 	{
 		var isPackageIncluded = item.Package.IsIncluded;
+
 		var items = new[]
 		{
 			  new SlickStripItem(Locale.IncludeAllItemsInThisPackage, () => { item.Package.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, !isPackageIncluded)
 			, new SlickStripItem(Locale.ExcludeAllItemsInThisPackage, () => { item.Package.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, isPackageIncluded)
 			, new SlickStripItem(Locale.ReDownloadPackage, () => Redownload(item), Properties.Resources.I_ReDownload_16, SteamUtil.IsSteamAvailable())
 			, new SlickStripItem(Locale.MovePackageToLocalFolder, () => ContentUtil.MoveToLocalFolder(item), Properties.Resources.I_Local_16, item.Workshop)
-			, new SlickStripItem(Locale.DeletePackage, () => ContentUtil.DeleteAll(item.Folder), Properties.Resources.I_Steam_16, !item.Workshop && !item.BuiltIn)
+			, new SlickStripItem(item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, () => AskThenDelete(item), Properties.Resources.I_Disposable_16, !item.Workshop && !item.BuiltIn)
 			, new SlickStripItem(Locale.UnsubscribePackage, async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true), Properties.Resources.I_Steam_16, item.Workshop && !item.BuiltIn)
 			, new SlickStripItem(Locale.Copy, () => { }, Properties.Resources.I_Copy_16, item.Workshop, fade: true)
 			, new SlickStripItem(Locale.CopyWorkshopLink, () => Clipboard.SetText(item.SteamPage), null, item.Workshop, tab: 1)
@@ -319,6 +329,25 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
+	}
+
+	private void AskThenDelete(T item)
+	{
+		if (MessagePrompt.Show(Locale.AreYouSure + "\r\n\r\n" + Locale.ActionUnreversible, PromptButtons.YesNo, form: Program.MainForm) == DialogResult.Yes)
+		{
+			try
+			{
+				if (item is Asset asset && !item.Workshop)
+				{
+					ExtensionClass.DeleteFile(asset.FileName);
+				}
+				else
+				{
+					ContentUtil.DeleteAll(item.Folder);
+				}
+			}
+			catch (Exception ex) { MessagePrompt.Show(ex, Locale.FailedToDeleteItem); }
+		}
 	}
 
 	private void Redownload(T item)
@@ -439,6 +468,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			rects.CompatibilityRect = Rectangle.Empty;
 		}
 
+		DrawButtons(e, rects, isPressed);
+
 		foreach (var item in e.Item.Tags.Distinct(x => x.Value))
 		{
 			using var tagIcon = item.Source switch { TagSource.Workshop => Properties.Resources.I_Steam_16, TagSource.FindIt => Properties.Resources.I_Search_16, _ => Properties.Resources.I_Tag_16 };
@@ -450,13 +481,13 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			labelRect.X += Padding.Left + tagRect.Width;
 		}
 
-		DrawButtons(e, rects, isPressed);
-
 		if (!isIncluded) // fade excluded item
 		{
+			using var fadedBrush = new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 25 : 75, BackColor));
 			var filledRect = e.ClipRectangle.Pad(0, -Padding.Top, 0, -Padding.Bottom);
+
 			e.Graphics.SetClip(filledRect);
-			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 25 : 75, BackColor)), filledRect);
+			e.Graphics.FillRectangle(fadedBrush, filledRect);
 		}
 	}
 
@@ -480,15 +511,18 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (large && e.Item.Author is not null)
 		{
-			var size = e.Graphics.Measure("by " + e.Item.Author.Name, UI.Font(9.75F)).ToSize();
+			using var font = UI.Font(9.75F);
+			var size = e.Graphics.Measure("by " + e.Item.Author.Name, font).ToSize();
 			var authorRect = rects.AuthorRect.Align(new Size(size.Width + Padding.Horizontal + Padding.Right + size.Height, size.Height + (Padding.Vertical * 2)), ContentAlignment.MiddleRight);
 			authorRect.X -= Padding.Left;
 			authorRect.Y += Padding.Top;
 			var avatarRect = authorRect.Pad(Padding).Align(new(size.Height, size.Height), ContentAlignment.MiddleLeft);
 
-			e.Graphics.FillRoundedRectangle(new SolidBrush(authorRect.Contains(CursorLocation) ? FormDesign.Design.ButtonColor : FormDesign.Design.BackColor), authorRect, (int)(6 * UI.FontScale));
+			using var brush = new SolidBrush(authorRect.Contains(CursorLocation) ? FormDesign.Design.ButtonColor : FormDesign.Design.BackColor);
+			e.Graphics.FillRoundedRectangle(brush, authorRect, (int)(6 * UI.FontScale));
 
-			e.Graphics.DrawString("by " + e.Item.Author.Name, UI.Font(9.75F), new SolidBrush(FormDesign.Design.ForeColor), authorRect.Pad(avatarRect.Width + Padding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+			using var brush1 = new SolidBrush(FormDesign.Design.ForeColor);
+			e.Graphics.DrawString("by " + e.Item.Author.Name, font, brush1, authorRect.Pad(avatarRect.Width + Padding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 
 			var authorImg = e.Item.AuthorIconImage;
 
@@ -536,9 +570,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		var mod = e.Item.Package.Mod is not null;
 		var text = mod ? e.Item.ToString().RemoveVersionText(out tags) : e.Item.ToString();
-		var textSize = e.Graphics.Measure(text, UI.Font(large ? 11.25F : 9F, FontStyle.Bold));
+		using var font = UI.Font(large ? 11.25F : 9F, FontStyle.Bold);
+		var textSize = e.Graphics.Measure(text, font);
 
-		e.Graphics.DrawString(text, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : base.ForeColor);
+		e.Graphics.DrawString(text, font, brush, rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 		if (tags is null)
 		{
@@ -558,7 +594,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				_ => (Color?)null
 			};
 
-			tagRect.X += Padding.Left + DrawLabel(e, color is null ? item : item.ToUpper(), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
+			tagRect.X += Padding.Left + DrawLabel(e, color is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
 		}
 	}
 
@@ -568,32 +604,40 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (isIncluded)
 			{
-				e.Graphics.FillRoundedRectangle(inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F), inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (mod.IsEnabled)
 			{
-				e.Graphics.FillRoundedRectangle(inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.YellowColor), 1.5F), inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.YellowColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (inclEnableRect.Contains(CursorLocation))
 			{
-				e.Graphics.FillRoundedRectangle(inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			e.Graphics.DrawImage((isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
-			e.Graphics.DrawImage((mod.IsEnabled ? Properties.Resources.I_Checked : Properties.Resources.I_Unchecked).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor), rects.EnabledRect.CenterR(24, 24));
+			using var includedIcon = (isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = (mod.IsEnabled ? Properties.Resources.I_Checked : Properties.Resources.I_Unchecked).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(24, 24));
+			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(24, 24));
 		}
 		else
 		{
 			if (isIncluded)
 			{
-				e.Graphics.FillRoundedRectangle(inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.GreenColor), 1.5F), inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.GreenColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (inclEnableRect.Contains(CursorLocation))
 			{
-				e.Graphics.FillRoundedRectangle(inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			e.Graphics.DrawImage((isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(inclEnableRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), inclEnableRect.CenterR(24, 24));
+			using var icon = (isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(inclEnableRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(24, 24));
 		}
 	}
 
@@ -615,7 +659,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		size.Width += Padding.Left;
 
-		rectangle = rectangle.Pad(smaller ? Padding.Left/2:Padding.Left).Align(size, alignment);
+		rectangle = rectangle.Pad(smaller ? Padding.Left / 2 : Padding.Left).Align(size, alignment);
 
 		if (action && !rectangle.Contains(CursorLocation))
 		{

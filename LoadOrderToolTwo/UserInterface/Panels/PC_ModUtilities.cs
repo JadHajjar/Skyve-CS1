@@ -9,6 +9,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -28,8 +29,11 @@ public partial class PC_ModUtilities : PanelContent
 		LC_Duplicates.SizeChanged += LC_Duplicates_SizeChanged;
 		RefreshModIssues();
 
+		B_LoadCollection.Height = 0;
+
 		CentralManager.ModInformationUpdated += RefreshModIssues;
 
+		DD_BOB.StartingFolder = LocationManager.AppDataPath;
 		DD_Missing.StartingFolder = DD_Unused.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Report", "LoadingScreenMod");
 		DD_Missing.ValidExtensions = DD_Unused.ValidExtensions = new[] { ".htm", ".html" };
 
@@ -37,6 +41,7 @@ public partial class PC_ModUtilities : PanelContent
 		SlickTip.SetTo(DD_Missing, "LsmMissingTip");
 		SlickTip.SetTo(DD_Unused, "LsmUnusedTip");
 		SlickTip.SetTo(B_ReDownload, "FixAllTip");
+		SlickTip.SetTo(DD_BOB, "BOBTip");
 	}
 
 	private void RefreshModIssues()
@@ -72,15 +77,18 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		base.UIChanged();
 
+		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9.75F);
+
+		B_LoadCollection.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Import));
 		B_ReDownload.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Tools));
-		P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Steam));
+		P_Collecttions.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Steam));
 		P_ModIssues.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ModWarning));
 		P_DuplicateMods.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Broken));
 		P_LsmReport.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_LSM));
-		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Filters.Margin = P_LsmReport.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
-		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9.75F);
+		P_BOB.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_BOB));
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -96,7 +104,9 @@ public partial class PC_ModUtilities : PanelContent
 		var height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
 
 		if (height != LC_Duplicates.Height)
+		{
 			LC_Duplicates.Height = height;
+		}
 	}
 
 	private async void B_LoadCollection_Click(object sender, EventArgs e)
@@ -153,5 +163,30 @@ public partial class PC_ModUtilities : PanelContent
 		var assets = LsmUtil.LoadUnusedAssets(obj);
 
 		Form.PushPanel(null, new PC_UnusedLsmPackages(assets.ToList()));
+	}
+
+	private void DD_BOB_FileSelected(string obj)
+	{
+		var matches = Regex.Matches(File.ReadAllText(obj), "\"(\\d{8,20})\\.(.+?)\"");
+		var assets = new List<Profile.Asset>();
+
+		foreach (Match item in matches)
+		{
+			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.SteamId == id))
+			{
+				assets.Add(new()
+				{
+					Name = item.Groups[2].Value,
+					SteamId = id
+				});
+			}
+		}
+
+		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+	}
+
+	private bool DD_BOB_ValidFile(string arg)
+	{
+		return Path.GetExtension(arg).ToLower() == ".xml";
 	}
 }

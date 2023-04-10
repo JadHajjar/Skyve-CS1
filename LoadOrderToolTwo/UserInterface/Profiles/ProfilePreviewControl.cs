@@ -81,7 +81,7 @@ internal class ProfilePreviewControl : SlickControl
 			return;
 		}
 
-		else if (DisposeRect.Contains(e.Location) && MessagePrompt.Show($"{Locale.ConfirmDeleteProfile} '{Profile.Name}'?", PromptButtons.YesNo, PromptIcons.Hand, FindForm() as SlickForm) == DialogResult.Yes)
+		else if (DisposeRect.Contains(e.Location) && MessagePrompt.Show(string.Format(Locale.ConfirmDeleteProfile, Profile.Name), PromptButtons.YesNo, PromptIcons.Hand, Program.MainForm) == DialogResult.Yes)
 		{
 			DisposeProfile?.Invoke(Profile);
 

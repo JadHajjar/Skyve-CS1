@@ -20,11 +20,14 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		InitializeComponent();
 
-		DD_LogFile.StartingFolder=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+		DD_LogFile.StartingFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
 		{
-			SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
+			if (button != B_ChangeLog)
+			{
+				SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
+			}
 		}
 	}
 
@@ -44,6 +47,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		B_CopyZip.Image = B_CopyLogFile.Image = B_LotLogCopy.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_CopyFile));
 		B_SaveZip.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Log));
 		B_Discord.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Discord));
+		B_ChangeLog.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Versions));
 		B_Guide.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Guide));
 
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
@@ -117,16 +121,8 @@ public partial class PC_HelpAndLogs : PanelContent
 	private void SetTrace(List<LogTrace> logs)
 	{
 		TLP_Errors.Controls.Clear(true);
-		TLP_Errors.RowStyles.Clear();
+		TLP_Errors.Controls.Add(new LogTraceControl(logs));
 		TLP_Errors.Visible = logs.Count > 0;
-
-		foreach (var log in logs)
-		{
-			TLP_Errors.RowStyles.Add(new());
-			TLP_Errors.Controls.Add(new LogTraceControl(log), 0, TLP_Errors.RowStyles.Count - 1);
-		}
-
-		TLP_Errors.RowCount=logs.Count;
 	}
 
 	private bool DD_LogFile_ValidFile(string arg)
@@ -138,7 +134,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		try
 		{
-			Process.Start(LogUtil.GameDataPath);
+			Process.Start(Path.GetDirectoryName(LogUtil.GameLogFile));
 		}
 		catch { }
 	}
@@ -178,5 +174,10 @@ public partial class PC_HelpAndLogs : PanelContent
 			Process.Start("https://bit.ly/40x93vk");
 		}
 		catch { }
+	}
+
+	private void B_ChangeLog_Click(object sender, EventArgs e)
+	{
+		Form.PushPanel<PC_LotChangeLog>(null);
 	}
 }

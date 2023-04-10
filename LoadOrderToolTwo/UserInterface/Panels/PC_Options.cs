@@ -13,7 +13,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
@@ -27,7 +26,12 @@ public partial class PC_Options : PanelContent
 		ApplyCurrentSettings();
 
 		foreach (var button in this.GetControls<SlickButton>())
-			SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
+		{
+			if (button != B_ChangeLog)
+			{
+				SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
+			}
+		}
 
 		TB_VirtualAppDataPath.Visible = TB_VirtualGamePath.Visible = LocationManager.Platform is not Platform.Windows;
 
@@ -36,6 +40,22 @@ public partial class PC_Options : PanelContent
 		TB_SteamPath.Text = LocationManager.SteamPath;
 		TB_VirtualAppDataPath.Text = LocationManager.VirtualAppDataPath;
 		TB_VirtualGamePath.Text = LocationManager.VirtualGamePath;
+
+		if (LocationManager.Platform is Platform.Linux)
+		{
+			TB_GamePath.Placeholder = "Z:\\...\\Steam\\SteamLibrary\\steamapps\\common\\Cities_Skylines";
+			TB_AppDataPath.Placeholder = "Z:\\home\\USERNAME\\.local\\share\\Colossal Order\\Cities_Skylines";
+			TB_SteamPath.Placeholder = "/usr/bin/steam";
+			TB_VirtualAppDataPath.Placeholder = "/home/USERNAME/.local/share/Colossal Order/Cities_Skylines";
+			TB_VirtualGamePath.Placeholder = "/.../Steam/SteamLibrary/steamapps/common/Cities_Skylines";
+		}
+
+		if (LocationManager.Platform is Platform.MacOSX)
+		{
+			TB_VirtualGamePath.Placeholder = TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
+			TB_VirtualGamePath.Placeholder = TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
+			TB_SteamPath.Placeholder = "/Applications/Steam.app/Contents";
+		}
 
 		folderPathsChanged = false;
 
@@ -78,21 +98,22 @@ public partial class PC_Options : PanelContent
 		B_Theme.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Theme));
 		B_HelpTranslate.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Translate));
 		B_ClearFolders.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ClearFolders));
+		B_ChangeLog.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Versions));
 		B_Discord.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Discord));
 		B_Guide.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Guide));
 		B_Reset.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Undo));
 
 		DD_Language.Width = (int)(220 * UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
-		B_Theme.Padding = B_HelpTranslate.Padding = B_ClearFolders.Padding = B_Discord.Padding = B_Guide.Padding = B_Reset.Padding = UI.Scale(new Padding(7), UI.FontScale);
-		B_Theme.Margin =  TLP_UI.Margin = TLP_Settings.Margin = TLP_Advanced.Margin = B_HelpTranslate.Margin = TLP_HelpLogs.Margin =
-			B_ClearFolders.Margin = B_Discord.Margin = B_Guide.Margin =B_Reset.Margin=
+		B_Theme.Padding = B_HelpTranslate.Padding = B_ClearFolders.Padding = B_ChangeLog.Padding = B_Discord.Padding = B_Guide.Padding = B_Reset.Padding = UI.Scale(new Padding(7), UI.FontScale);
+		B_Theme.Margin = TLP_UI.Margin = TLP_Settings.Margin = TLP_Advanced.Margin = B_HelpTranslate.Margin = TLP_HelpLogs.Margin =
+			B_ClearFolders.Margin = B_Discord.Margin = B_Guide.Margin = B_Reset.Margin = B_ChangeLog.Margin =
 			TLP_Preferences.Margin = TLP_Folders.Margin = UI.Scale(new Padding(10), UI.UIScale);
 		DD_Language.Margin = UI.Scale(new Padding(10, 7, 10, 5), UI.UIScale);
 		slickSpacer1.Height = slickSpacer2.Height = (int)(1.5 * UI.FontScale);
 		slickSpacer1.Margin = slickSpacer2.Margin = UI.Scale(new Padding(5), UI.UIScale);
 	}
-	
+
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
@@ -136,7 +157,9 @@ public partial class PC_Options : PanelContent
 		TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
 
 		if (!IsHandleCreated)
+		{
 			return;
+		}
 
 		var cb = (sender as SlickCheckbox)!;
 
@@ -154,12 +177,26 @@ public partial class PC_Options : PanelContent
 
 	private void DD_Language_SelectedItemChanged(object sender, EventArgs e)
 	{
-		LocaleHelper.SetLanguage(DD_Language.SelectedItem);
+		try
+		{
+			LocaleHelper.SetLanguage(DD_Language.SelectedItem);
+		}
+		catch
+		{
+			ShowPrompt(Locale.CheckDocumentsFolder, Locale.FailedToSaveLanguage, PromptButtons.OK, PromptIcons.Error);
+		}
 	}
 
 	private void B_Theme_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_ThemeChanger>(null);
+		try
+		{
+			Form.PushPanel<PC_ThemeChanger>(null);
+		}
+		catch
+		{
+			ShowPrompt(Locale.CheckDocumentsFolder, Locale.FailedToOpenTC, PromptButtons.OK, PromptIcons.Error);
+		}
 	}
 
 	private void B_HelpTranslate_Click(object sender, EventArgs e)
@@ -200,7 +237,9 @@ public partial class PC_Options : PanelContent
 	private void B_ClearFolders_Click(object sender, EventArgs e)
 	{
 		if (ShowPrompt(Locale.ClearFoldersPrompt + "\r\n\r\n" + Locale.AreYouSure, Locale.ClearFoldersPromptTitle, PromptButtons.OKCancel, PromptIcons.Warning) != DialogResult.OK)
+		{
 			return;
+		}
 
 		ExtensionClass.DeleteFile(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"));
 
@@ -210,5 +249,10 @@ public partial class PC_Options : PanelContent
 		new FolderSettings().Save();
 
 		Application.Exit();
+	}
+
+	private void B_ChangeLog_Click(object sender, EventArgs e)
+	{
+		Form.PushPanel<PC_LotChangeLog>(null);
 	}
 }

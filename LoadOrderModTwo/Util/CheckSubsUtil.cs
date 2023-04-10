@@ -244,33 +244,6 @@ namespace LoadOrderMod.Util {
         //    }
         //}
 
-        public static void RemoveEvents() {
-            PlatformService.workshop.eventUGCRequestUGCDetailsCompleted -= OnUGCRequestUGCDetailsCompleted;
-            PlatformService.workshop.eventUGCRequestUGCDetailsCompleted -= SteamUtilities.OnUGCRequestUGCDetailsCompleted;
-        }
-        public static void RegisterEvents() {
-            RemoveEvents();
-            PlatformService.workshop.eventUGCRequestUGCDetailsCompleted += OnUGCRequestUGCDetailsCompleted;
-        }
-
-        private static void OnUGCRequestUGCDetailsCompleted(UGCDetails ugc, bool ioError) {
-            ThreadPool.QueueUserWorkItem((_) => {
-                try {
-                    if (SteamUtilities.IsExcludedMod(ugc.publishedFileId)) {
-                        // ignore excluded item
-                        return;
-                    }
-                    var status = SteamUtilities.IsUGCUpToDate(ugc, out string reason);
-                    if (status != DownloadStatus.DownloadOK) {
-                        string m =
-                            $"'{ugc.publishedFileId} {ugc.title}' is not installed properly. Please try reinstalling it!" +
-                            $"\n\t(reason={reason})";
-                        ThreadHelper.dispatcher.Dispatch(() => Log.DisplayWarning(m));
-                    }
-                } catch (Exception ex) { ex.Log("ugc.publishedFileId=" + ugc.publishedFileId); }
-            });
-        }
-
         public static bool IsWorkshop(string path) => path != null && path.Contains(ConfigUtil.Config.WorkShopContentPath);
 
         public static PublishedFileId GetID1(string dir) {
