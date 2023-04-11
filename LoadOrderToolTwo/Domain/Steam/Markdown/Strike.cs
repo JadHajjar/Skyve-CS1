@@ -1,5 +1,8 @@
-﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+﻿using System.Drawing;
 
-internal class Strike : Component
+namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+
+internal class Strike : PlainText
 {
+	protected override FontStyle FontStyle => FontStyle.Strikeout;
 }

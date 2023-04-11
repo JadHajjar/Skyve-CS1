@@ -80,7 +80,6 @@ partial class PC_PackagePage
 			// 
 			this.T_Info.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Info.Dock = System.Windows.Forms.DockStyle.Left;
-			this.T_Info.FillTab = true;
 			this.T_Info.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.T_Info.Icon = global::LoadOrderToolTwo.Properties.Resources.I_Content_16;
 			this.T_Info.LinkedControl = null;

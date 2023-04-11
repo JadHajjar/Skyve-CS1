@@ -1,5 +1,8 @@
-﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+﻿using System.Drawing;
 
-internal class Bold : Component
+namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+
+internal class Bold : PlainText
 {
+	protected override FontStyle FontStyle => FontStyle.Bold;
 }

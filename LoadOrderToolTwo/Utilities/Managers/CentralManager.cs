@@ -150,7 +150,9 @@ internal static class CentralManager
 		Log.Info($"Loaded {content.Count} packages");
 		Log.Info($"Analyzing packages..");
 
-		AnalyzePackages(content);
+		try
+		{ AnalyzePackages(content); }
+		catch (Exception ex) { Log.Exception(ex, "Failed to analyze packages"); }
 
 		Log.Info($"Finished analyzing packages..");
 
@@ -317,6 +319,14 @@ internal static class CentralManager
 					if (package.Mod.IsIncluded && !package.Mod.IsEnabled)
 					{
 						package.Mod.IsIncluded = false;
+					}
+				}
+
+				if (!SessionSettings.UserSettings.LinkModAssets && package.Assets is not null)
+				{
+					foreach (var asset in package.Assets)
+					{
+						asset.IsIncluded = package.Mod.IsIncluded;
 					}
 				}
 

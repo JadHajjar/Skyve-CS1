@@ -1,5 +1,8 @@
-﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+﻿using System.Drawing;
 
-internal class Underline : Component
+namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+
+internal class Underline : PlainText
 {
+	protected override FontStyle FontStyle => FontStyle.Underline;
 }

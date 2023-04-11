@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.CompatibilityReport;
+using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -33,19 +34,24 @@ public partial class PC_PackagePage : PanelContent
 
 		P_Info.SetPackage(package);
 
-		var c = new ItemListControl<IPackage>
-		{
-			Dock = DockStyle.Fill
-		};
+		//var c = new ItemListControl<IPackage>
+		//{
+		//	Dock = DockStyle.Fill
+		//};
 
-		c.AddRange(Package.Assets!);
+		//c.AddRange(Package.Assets!);
 
-		if (Package.Mod != null)
+		//if (Package.Mod != null)
+		//{
+		//	c.Add(Package.Mod);
+		//}
+
+		if (!string.IsNullOrWhiteSpace(package.SteamDescription))
 		{
-			c.Add(Package.Mod);
+			var c = new SteamDescriptionViewer(package.SteamDescription!);
+
+			T_Info.LinkedControl = c;
 		}
-
-		T_Info.LinkedControl = c;
 
 		T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
 	}

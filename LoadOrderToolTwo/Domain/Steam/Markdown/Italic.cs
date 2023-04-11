@@ -1,5 +1,8 @@
-﻿namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+﻿using System.Drawing;
 
-internal class Italic : Component
+namespace LoadOrderToolTwo.Domain.Steam.Markdown;
+
+internal class Italic : PlainText
 {
+	protected override FontStyle FontStyle => FontStyle.Italic;
 }
