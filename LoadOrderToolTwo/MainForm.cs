@@ -41,9 +41,12 @@ public partial class MainForm : BasePanelForm
 		{
 			SetPanel<PC_MainPage>(PI_Dashboard);
 
-			if (currentVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification && CentralManager.SessionSettings.FirstTimeSetupCompleted)
+			if (currentVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification)
 			{
-				PushPanel<PC_LotChangeLog>(null);
+				if (CentralManager.SessionSettings.FirstTimeSetupCompleted)
+				{
+					PushPanel<PC_LotChangeLog>(null);
+				}
 
 				CentralManager.SessionSettings.LastVersionNotification = currentVersion.ToString();
 				CentralManager.SessionSettings.Save();
@@ -54,14 +57,11 @@ public partial class MainForm : BasePanelForm
 
 		new BackgroundAction("Loading content", CentralManager.Start).Run();
 
-		if (LocationManager.Platform is Platform.Windows)
-		{
-			var timer = new System.Timers.Timer(1000);
+		var timer = new System.Timers.Timer(1000);
 
-			timer.Elapsed += Timer_Elapsed;
+		timer.Elapsed += Timer_Elapsed;
 
-			timer.Start();
-		}
+		timer.Start();
 
 		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
 

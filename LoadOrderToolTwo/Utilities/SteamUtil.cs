@@ -27,8 +27,8 @@ namespace LoadOrderToolTwo.Utilities;
 
 public static class SteamUtil
 {
-	private static readonly string STEAM_CACHE_FILE = "SteamModsCache.json";
-	private static readonly string DLC_CACHE_FILE = "SteamDlcsCache.json";
+	private const string STEAM_CACHE_FILE = "SteamModsCache.json";
+	private const string DLC_CACHE_FILE = "SteamDlcsCache.json";
 	private static readonly CSCache _csCache;
 
 	public static List<SteamDlc> Dlcs { get; private set; }
@@ -44,7 +44,7 @@ public static class SteamUtil
 		Dlcs = cache ?? new();
 	}
 
-	public static bool IsSteamAvailable() => File.Exists(string.Join(LocationManager.PathSeparator, LocationManager.SteamPath, LocationManager.SteamExe));
+	public static bool IsSteamAvailable() => File.Exists(LocationManager.SteamPathWithExe);
 
 	private static void SaveCache(Dictionary<ulong, SteamWorkshopItem> list)
 	{
@@ -113,7 +113,9 @@ public static class SteamUtil
 
 	public static void ExecuteSteam(string args)
 	{
-		IOUtil.Execute(LocationManager.SteamPath, LocationManager.SteamExe, args)?.WaitForExit();
+		var file = LocationManager.SteamPathWithExe;
+
+		IOUtil.Execute(Path.GetDirectoryName(file), Path.GetFileName(file), args)?.WaitForExit();
 	}
 
 	public static async Task<Dictionary<string, SteamUserEntry>> GetSteamUsers(List<string> steamId64s)
@@ -321,14 +323,24 @@ public static class SteamUtil
 		{
 			var steamArguments = new StringBuilder("steam://open/console");
 
+			if (LocationManager.Platform is not Platform.Windows)
+			{
+				steamArguments.Append(" \"");
+			}
+
 			for (var i = 0; i < ids.Length; i++)
 			{
 				steamArguments.AppendFormat(" +workshop_download_item 255710 {0}", ids[i]);
 			}
 
+			if (LocationManager.Platform is not Platform.Windows)
+			{
+				steamArguments.Append("\"");
+			}
+
 			ExecuteSteam(steamArguments.ToString());
 
-			Thread.Sleep(100);
+			Thread.Sleep(150);
 
 			ExecuteSteam("steam://open/downloads");
 		}

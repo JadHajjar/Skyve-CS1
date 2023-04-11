@@ -93,7 +93,7 @@ public static class ProfileManager
 			return null;
 		}
 
-		var profile = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? CentralManager.SessionSettings.CurrentProfile) + ".json");
+		var profile = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? CentralManager.SessionSettings.CurrentProfile) + ".json");
 
 		if (!File.Exists(profile))
 		{
@@ -127,7 +127,7 @@ public static class ProfileManager
 
 		Log.Info("Checking for Legacy profiles");
 
-		var legacyProfilePath = string.Join(LocationManager.PathSeparator, LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
+		var legacyProfilePath = LocationManager.Combine(LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
 
 		if (!Directory.Exists(legacyProfilePath))
 		{
@@ -138,7 +138,7 @@ public static class ProfileManager
 
 		foreach (var profile in Directory.EnumerateFiles(legacyProfilePath, "*.xml"))
 		{
-			var newName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
+			var newName = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
 
 			if (File.Exists(newName))
 			{
@@ -163,9 +163,9 @@ public static class ProfileManager
 
 				Save(newProfile, true);
 
-				Directory.CreateDirectory(string.Join(LocationManager.PathSeparator, legacyProfilePath, "Legacy"));
+				Directory.CreateDirectory(LocationManager.Combine(legacyProfilePath, "Legacy"));
 
-				File.Move(profile, string.Join(LocationManager.PathSeparator, legacyProfilePath, "Legacy", Path.GetFileName(profile)));
+				File.Move(profile, LocationManager.Combine(legacyProfilePath, "Legacy", Path.GetFileName(profile)));
 			}
 			else
 			{
@@ -331,7 +331,7 @@ public static class ProfileManager
 
 	internal static void DeleteProfile(Profile profile)
 	{
-		ExtensionClass.DeleteFile(string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
+		ExtensionClass.DeleteFile(LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
 
 		if (profile == CurrentProfile)
 		{
@@ -591,14 +591,14 @@ public static class ProfileManager
 			Directory.CreateDirectory(LocationManager.LotProfilesAppDataPath);
 
 			File.WriteAllText(
-				string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"),
+				LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"),
 				Newtonsoft.Json.JsonConvert.SerializeObject(profile, Newtonsoft.Json.Formatting.Indented));
 
 			return true;
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}");
+			Log.Exception(ex, $"Failed to save profile ({profile.Name}) to {LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json")}");
 		}
 		finally
 		{
@@ -628,10 +628,10 @@ public static class ProfileManager
 			return string.Empty;
 		}
 
-		return LocationManager.Format(localPath?
+		return LocationManager.FormatPath(localPath?
 			.Replace(LocationManager.AppDataPath, LOCAL_APP_DATA_PATH)
 			.Replace(LocationManager.GamePath, CITIES_PATH)
-			.Replace(LocationManager.WorkshopContentPath, WS_CONTENT_PATH) ?? string.Empty, false);
+			.Replace(LocationManager.WorkshopContentPath, WS_CONTENT_PATH) ?? string.Empty);
 	}
 
 	internal static string? ToLocalPath(string? relativePath)
@@ -641,10 +641,10 @@ public static class ProfileManager
 			return string.Empty;
 		}
 
-		return LocationManager.Format(relativePath?
+		return LocationManager.FormatPath(relativePath?
 			.Replace(LOCAL_APP_DATA_PATH, LocationManager.AppDataPath)
 			.Replace(CITIES_PATH, LocationManager.GamePath)
-			.Replace(WS_CONTENT_PATH, LocationManager.WorkshopContentPath) ?? string.Empty, false);
+			.Replace(WS_CONTENT_PATH, LocationManager.WorkshopContentPath) ?? string.Empty);
 	}
 
 	internal static bool RenameProfile(Profile profile, string text)
@@ -656,8 +656,8 @@ public static class ProfileManager
 
 		text = text.EscapeFileName();
 
-		var newName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{text}.json");
-		var oldName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json");
+		var newName = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{text}.json");
+		var oldName = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json");
 
 		try
 		{
@@ -695,13 +695,13 @@ public static class ProfileManager
 
 	internal static string? GetNewProfileName()
 	{
-		var startName = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, "New Profile.json");
+		var startName = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, "New Profile.json");
 
 		// Check if the file with the proposed name already exists
 		if (File.Exists(startName))
 		{
 			var extension = ".json";
-			var nameWithoutExtension = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, "New Profile");
+			var nameWithoutExtension = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, "New Profile");
 			var counter = 1;
 
 			// Loop until a valid file name is found
@@ -786,7 +786,7 @@ public static class ProfileManager
 			_watcher.EnableRaisingEvents = false;
 		}
 
-		var newPath = string.Join(LocationManager.PathSeparator, LocationManager.LotProfilesAppDataPath, Path.GetFileName(obj));
+		var newPath = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, Path.GetFileName(obj));
 
 		File.Move(obj, newPath);
 

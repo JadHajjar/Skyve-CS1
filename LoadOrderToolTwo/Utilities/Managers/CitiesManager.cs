@@ -38,10 +38,11 @@ public static class CitiesManager
 
 	public static bool CitiesAvailable()
 	{
-		var fileExe = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe ? LocationManager.CitiesExe : LocationManager.SteamExe;
-		var dir = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe ? LocationManager.GamePath : LocationManager.SteamPath;
+		var file = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe
+			? LocationManager.Combine(LocationManager.GamePath, LocationManager.CitiesExe)
+			: LocationManager.SteamPathWithExe;
 
-		return File.Exists(string.Join(LocationManager.PathSeparator, dir, fileExe));
+		return File.Exists(file);
 	}
 
 	public static void Launch()
@@ -49,10 +50,11 @@ public static class CitiesManager
 		UpdateFiles();
 
 		var args = GetCommandArgs();
-
-		var fileExe = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe ? LocationManager.CitiesExe : LocationManager.SteamExe;
-		var dir = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe ? LocationManager.GamePath : LocationManager.SteamPath;
-		IOUtil.Execute(dir, fileExe, string.Join(" ", args));
+		var file = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe
+			? LocationManager.Combine(LocationManager.GamePath, LocationManager.CitiesExe)
+			: LocationManager.SteamPathWithExe;
+		
+		IOUtil.Execute(Path.GetDirectoryName(file), Path.GetFileName(file), string.Join(" ", args));
 	}
 
 	private static void UpdateFiles()
@@ -236,7 +238,9 @@ public static class CitiesManager
 			$"-applaunch 255710 -unsubscribe" :
 			$"-applaunch 255710 -subscribe";
 
-		IOUtil.Execute(LocationManager.SteamPath, LocationManager.SteamExe, command);
+		var file = LocationManager.SteamPathWithExe;
+
+		IOUtil.Execute(Path.GetDirectoryName(file), Path.GetFileName(file), command);
 
 		var stopwatch = Stopwatch.StartNew();
 

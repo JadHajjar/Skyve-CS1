@@ -40,7 +40,16 @@ internal class AssetsUtil
 		_findItTags = new();
 		_findItTags.Deserialize();
 		_config = LoadOrderConfig.Deserialize() ?? new();
-		ExcludedHashSet = new HashSet<string>(_config.Assets.Select(x => IOUtil.ToRealPath(x.Path?.ToLower()) ?? string.Empty));
+
+		ExcludedHashSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+		foreach (var item in _config.Assets)
+		{
+			if (item.Path is not null)
+			{
+				ExcludedHashSet.Add(IOUtil.ToRealPath(item.Path)!);
+			}
+		}
 
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
 	}

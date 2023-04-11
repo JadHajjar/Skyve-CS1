@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Extensions;
+
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace LoadOrderToolTwo.Domain.Steam.Markdown;
@@ -10,13 +13,18 @@ public class BBCode
 		return GenerateComponent(new Component(), text);
 	}
 
+	internal static string EscapeImageUrl(string image)
+	{
+		return image.Replace('\\', '_').Replace('/', '_').Remove("https://").EscapeFileName();
+	}
+
 	private static Component GenerateComponent(Component component, string text)
 	{
 		var tags = Regex.Matches(text, @"\[(\w+)(=.+?)?\](.+?)\[\/\1]", RegexOptions.Singleline);
 		component.Children = new List<Component>();
 		var index = 0;
 
-		if (tags.Count == 0)
+		if (tags.Count == 0 || component is NoParse)
 		{
 			component.Text = text;
 			return component;

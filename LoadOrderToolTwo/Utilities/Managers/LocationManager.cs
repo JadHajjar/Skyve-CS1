@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 
 using Microsoft.Win32;
 
@@ -8,10 +9,11 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
-internal class LocationManager
+internal static class LocationManager
 {
 	private static FolderSettings _folderSettings;
 
@@ -25,17 +27,17 @@ internal class LocationManager
 	public static string CurrentDirectory { get; }
 	public static Platform Platform { get; private set; }
 
-	public static string DataPath => string.Join(PathSeparator, GamePath, "Cities_Data");
-	public static string ManagedDLL => string.Join(PathSeparator, DataPath, "Managed");
-	public static string MonoPath => string.Join(PathSeparator, DataPath, "Mono");
-	public static string AddonsPath => string.Join(PathSeparator, AppDataPath, "Addons");
-	public static string LotAppDataPath => string.Join(PathSeparator, AppDataPath, "LoadOrderTwo");
-	public static string LotProfilesAppDataPath => string.Join(PathSeparator, LotAppDataPath, "Profiles");
-	public static string ModsPath => string.Join(PathSeparator, AddonsPath, "Mods");
-	public static string AssetsPath => string.Join(PathSeparator, AddonsPath, "Assets");
-	public static string MapThemesPath => string.Join(PathSeparator, AddonsPath, "MapThemes");
-	public static string MapsPath => string.Join(PathSeparator, AppDataPath, "Maps");
-	public static string StylesPath => string.Join(PathSeparator, AddonsPath, "Styles");
+	public static string DataPath => Combine(GamePath, "Cities_Data");
+	public static string ManagedDLL => Combine(DataPath, "Managed");
+	public static string MonoPath => Combine(DataPath, "Mono");
+	public static string AddonsPath => Combine(AppDataPath, "Addons");
+	public static string LotAppDataPath => Combine(AppDataPath, "LoadOrderTwo");
+	public static string LotProfilesAppDataPath => Combine(LotAppDataPath, "Profiles");
+	public static string ModsPath => Combine(AddonsPath, "Mods");
+	public static string AssetsPath => Combine(AddonsPath, "Assets");
+	public static string MapThemesPath => Combine(AddonsPath, "MapThemes");
+	public static string MapsPath => Combine(AppDataPath, "Maps");
+	public static string StylesPath => Combine(AddonsPath, "Styles");
 
 	public static string PathSeparator => Platform is Platform.Windows ? "\\" : "/";
 	public static string InvalidPathSeparator => Platform is not Platform.Windows ? "\\" : "/";
@@ -56,7 +58,7 @@ internal class LocationManager
 				return string.Empty;
 			}
 
-			return string.Join(PathSeparator, parent.Replace(InvalidPathSeparator, PathSeparator), "workshop", "content", "255710");
+			return Combine(parent.FormatPath(), "workshop", "content", "255710");
 		}
 	}
 
@@ -76,7 +78,7 @@ internal class LocationManager
 				return string.Empty;
 			}
 
-			return string.Join(PathSeparator, parent.Replace(InvalidPathSeparator, PathSeparator), "workshop", "content", "255710");
+			return Combine(parent.FormatPath(), "workshop", "content", "255710");
 		}
 	}
 
@@ -86,12 +88,14 @@ internal class LocationManager
 		{
 			if (Platform == Platform.MacOSX)
 			{
-				return string.Join(PathSeparator, GamePath, "Cities.app", "Contents", "Resources", "Files");
+				return Combine(GamePath, "Cities.app", "Contents", "Resources", "Files");
 			}
 
-			return string.Join(PathSeparator, GamePath, "Files");
+			return Combine(GamePath, "Files");
 		}
 	}
+
+	public static string SteamPathWithExe => Combine(SteamPath, SteamExe);
 
 	public static string CitiesExe => Platform switch
 	{
@@ -124,11 +128,11 @@ internal class LocationManager
 		}
 
 		ISave.CurrentPlatform = Platform = _folderSettings.Platform;
-		GamePath = _folderSettings.GamePath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
-		AppDataPath = _folderSettings.AppDataPath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
-		SteamPath = _folderSettings.SteamPath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
-		VirtualGamePath = _folderSettings.VirtualGamePath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
-		VirtualAppDataPath = _folderSettings.VirtualAppDataPath.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
+		GamePath = _folderSettings.GamePath.FormatPath();
+		AppDataPath = _folderSettings.AppDataPath.FormatPath();
+		SteamPath = _folderSettings.SteamPath.FormatPath();
+		VirtualGamePath = _folderSettings.VirtualGamePath.FormatPath();
+		VirtualAppDataPath = _folderSettings.VirtualAppDataPath.FormatPath();
 
 		Log.Info("Folder Settings:\r\n" +
 			$"Platform: {Platform}\r\n" +
@@ -142,7 +146,29 @@ internal class LocationManager
 			$"VirtualWorkshopContentPath: {VirtualWorkshopContentPath}");
 	}
 
-	internal static string Format(string path, bool @out) => Platform is Platform.Windows || !@out ? path.Replace("/", "\\") : path.Replace("/", "\\");
+	internal static string FormatPath(this string path)
+	{
+		return path.TrimEnd('/', '\\').Replace(InvalidPathSeparator, PathSeparator);
+	}
+
+	internal static string Combine(params string[] paths)
+	{
+		if (paths.Length == 0)
+		{
+			return string.Empty;
+		}
+
+		var sb = new StringBuilder(paths[0].TrimEnd('/', '\\'));
+
+		for (var i = 1; i < paths.Length; i++)
+		{
+			sb.Append(PathSeparator);
+
+			sb.Append(paths[i].TrimEnd('/', '\\'));
+		}
+
+		return sb.ToString();
+	}
 
 	internal static void RunFirstTimeSetup()
 	{
@@ -157,7 +183,7 @@ internal class LocationManager
 			Platform = Enum.TryParse(ConfigurationManager.AppSettings[nameof(Platform)], out Platform platform) ? platform : Platform.Windows
 		};
 
-		ISave.CurrentPlatform = settings.Platform;
+		ISave.CurrentPlatform = Platform = settings.Platform;
 
 		Log.Info("FTS Folder Settings:\r\n" +
 			$"Platform: {settings.Platform}\r\n" +
@@ -169,20 +195,6 @@ internal class LocationManager
 		{
 			if (settings.Platform is Platform.Windows)
 			{
-				if (!Directory.Exists(settings.SteamPath))
-				{
-					const string steamPathSubKey_ = @"Software\Valve\Steam";
-					const string steamPathKey_ = "SteamPath";
-
-					using var key = Registry.CurrentUser.OpenSubKey(steamPathSubKey_);
-					var path = key?.GetValue(steamPathKey_) as string;
-
-					if (!string.IsNullOrWhiteSpace(path) && Directory.Exists(path))
-					{
-						settings.SteamPath = path!.Replace('/', '\\');
-					}
-				}
-
 				return;
 			}
 
@@ -190,7 +202,6 @@ internal class LocationManager
 			{
 				Log.Info("Matching macOS Paths");
 
-				settings.SteamPath = "/Applications/Steam.app/Contents";
 				settings.GamePath = Path.GetDirectoryName(Path.GetDirectoryName(settings.GamePath)).Replace('\\', '/');
 				settings.AppDataPath = settings.AppDataPath.Replace('\\', '/');
 				settings.VirtualAppDataPath = settings.AppDataPath;
@@ -207,6 +218,7 @@ internal class LocationManager
 			if (settings.GamePath.StartsWith("/"))
 			{
 				Log.Info($"GamePath: {settings.GamePath}");
+
 				foreach (var item in DriveInfo.GetDrives().Reverse())
 				{
 					var virtualPath = item.Name + settings.GamePath.Substring(1);
@@ -219,6 +231,7 @@ internal class LocationManager
 
 						break;
 					}
+
 					Log.Info($"GamePath Try Failed for: {virtualPath}");
 				}
 			}
@@ -242,28 +255,13 @@ internal class LocationManager
 					Log.Info($"AppDataPath Try Failed for: {virtualPath}");
 				}
 			}
-
-			if (settings.SteamPath.StartsWith("/"))
-			{
-				Log.Info($"SteamPath: {settings.SteamPath}");
-
-				foreach (var item in DriveInfo.GetDrives().Reverse())
-				{
-					var virtualPath = item.Name + settings.SteamPath.Substring(1);
-
-					if (Directory.Exists(virtualPath))
-					{
-						Log.Info($"SteamPath Matched: {virtualPath}");
-						settings.SteamPath = virtualPath;
-						break;
-					}
-
-					Log.Info($"SteamPath Try Failed for: {virtualPath}");
-				}
-			}
 		}
 		finally
 		{
+			try
+			{ settings.SteamPath = FindSteamPath(settings); }
+			catch (Exception ex) { Log.Exception(ex, "Failed to find steam's installation folder"); }
+
 			if (settings.Platform is not Platform.Windows)
 			{
 				settings.GamePath = settings.GamePath.Replace('\\', '/');
@@ -295,11 +293,59 @@ internal class LocationManager
 
 			externalConfig.Save();
 
-			if (File.Exists(string.Join(PathSeparator, AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(string.Join(PathSeparator, LotAppDataPath, "LoadOrderConfig.xml")))
+			if (File.Exists(Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(Combine(LotAppDataPath, "LoadOrderConfig.xml")))
 			{
-				ExtensionClass.CopyFile(string.Join(PathSeparator, AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), string.Join(PathSeparator, LotAppDataPath, "LoadOrderConfig.xml"), true);
+				ExtensionClass.CopyFile(Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
 			}
 		}
+	}
+
+	private static string FindSteamPath(FolderSettings settings)
+	{
+		if (settings.Platform is Platform.Windows)
+		{
+			const string steamPathSubKey_ = @"Software\Valve\Steam";
+			const string steamPathKey_ = "SteamPath";
+
+			using var key = Registry.CurrentUser.OpenSubKey(steamPathSubKey_);
+			var path = key?.GetValue(steamPathKey_) as string;
+
+			if (!string.IsNullOrWhiteSpace(path) && Directory.Exists(path))
+			{
+				return path![0].ToString().ToUpper() + path!.FormatPath().Substring(1);
+			}
+		}
+
+		if (settings.Platform is Platform.Linux)
+		{
+			var scriptPath = Combine(settings.AppDataPath, "which_steam.sh");
+			var scriptVirtualPath = Combine(settings.VirtualAppDataPath, "which_steam.sh");
+
+			File.WriteAllText(scriptPath, "#!/bin/bash\r\n# set -u\r\n\r\nchecklist=\"steamxxx Steam steam steam-runtime steamyyy steam cccccc\"\r\n\r\nfor app in $checklist\r\ndo\r\n    # echo \"checking $app -\"\r\n    steam_app=$(which $app  2>/dev/null)\r\n    if [ $? -eq 0 ]; then\r\n        echo \"$steam_app\"\r\n        exit 0\r\n    fi\r\ndone\r\n\r\necho \"not found in path\"\r\n\r\nexit 1");
+
+			try
+			{
+				settings.SteamPath = IOUtil.RunCommandAndGetOutput(scriptPath);
+			}
+			finally { File.Delete(scriptPath); }
+		}
+
+		if (settings.Platform is Platform.MacOSX)
+		{
+			var basePath = "/Applications/Steam.app";
+
+			if (Directory.Exists(basePath))
+			{
+				var file = Directory.GetFiles(basePath, "steam_osx", SearchOption.AllDirectories);
+
+				if (file.Length > 0)
+				{
+					return Path.GetDirectoryName(file[0]);
+				}
+			}
+		}
+
+		return string.Empty;
 	}
 
 	internal static void SetPaths(string gamePath, string appDataPath, string steamPath, string virtualAppDataPath, string virtualGamePath)

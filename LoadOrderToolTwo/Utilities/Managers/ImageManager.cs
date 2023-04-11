@@ -138,11 +138,13 @@ public static class ImageManager
 			using var img = Image.FromStream(ms);
 
 			var squareSize = img.Width <= 64 ? img.Width : 256;
-			var size = img.Size.GetProportionalDownscaledSize(squareSize);
-			using var image = square ? new Bitmap(squareSize, squareSize) : new Bitmap(size.Width, size.Height);
+			var size = string.IsNullOrEmpty(fileName) ? img.Size.GetProportionalDownscaledSize(squareSize) : img.Size;
+			using var image = string.IsNullOrEmpty(fileName) ? square ? new Bitmap(squareSize, squareSize) : new Bitmap(size.Width, size.Height) : img;
 
-			using (var imageGraphics = Graphics.FromImage(image))
+			if (string.IsNullOrEmpty(fileName))
 			{
+				using var imageGraphics = Graphics.FromImage(image);
+
 				imageGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 				imageGraphics.DrawImage(img, square
 					? new Rectangle((squareSize - size.Width) / 2, (squareSize - size.Height) / 2, size.Width, size.Height)

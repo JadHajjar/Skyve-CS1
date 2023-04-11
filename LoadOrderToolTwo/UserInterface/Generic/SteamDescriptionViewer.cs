@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Steam.Markdown;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
@@ -10,13 +11,14 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+using static System.Net.Mime.MediaTypeNames;
+
 using MdImage = LoadOrderToolTwo.Domain.Steam.Markdown.Image;
 
 namespace LoadOrderToolTwo.UserInterface.Generic;
 internal class SteamDescriptionViewer : SlickControl
 {
 	public Component Markdown { get; }
-	public List<string> Images { get; }
 
 	public SteamDescriptionViewer(string description)
 	{
@@ -24,14 +26,26 @@ internal class SteamDescriptionViewer : SlickControl
 		TabStop = false;
 		Height = GetHeight();
 
-		Images = GetAllImages(Markdown).ToList();
+		var images = GetAllImages(Markdown).ToList();
+
+		if (images.Count > 0)
+		{
+			new BackgroundAction(() =>
+			{
+				Parallelism.ForEach(images, async image =>
+				{
+					await ImageManager.Ensure(image, false, BBCode.EscapeImageUrl(image), false);
+				});
+			}).Run();
+		}
 	}
 
 	private IEnumerable<string> GetAllImages(Component component)
 	{
 		if (component is MdImage image)
 		{
-			yield return image.GetURL();
+			if (!string.IsNullOrEmpty(image.Text))
+				yield return image.Text!;
 		}
 
 		if (component.Children is not null)

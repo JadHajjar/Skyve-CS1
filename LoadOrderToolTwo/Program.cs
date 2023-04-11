@@ -1,6 +1,7 @@
 using Extensions;
 
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -46,6 +47,8 @@ internal static class Program
 
 					return;
 				}
+
+				ExtensionClass.DeleteFile(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"));
 			}
 			catch { }
 

@@ -47,7 +47,7 @@ internal class ContentUtil
 
 	public static string GetSubscribedItemPath(ulong id)
 	{
-		return string.Join(LocationManager.PathSeparator, LocationManager.WorkshopContentPath, id.ToString());
+		return LocationManager.Combine(LocationManager.WorkshopContentPath, id.ToString());
 	}
 
 	public static DateTime GetLocalUpdatedTime(string path)
@@ -105,7 +105,7 @@ internal class ContentUtil
 	internal static List<Package> LoadContents()
 	{
 		var packages = new List<Package>();
-		var gameModsPath = string.Join(LocationManager.PathSeparator, LocationManager.GameContentPath, "Mods");
+		var gameModsPath = LocationManager.Combine(LocationManager.GameContentPath, "Mods");
 		var addonsModsPath = LocationManager.ModsPath;
 		var addonsAssetsPath = new[]
 		{
@@ -262,7 +262,7 @@ internal class ContentUtil
 	{
 		try
 		{
-			ExtensionClass.CreateShortcut(string.Join(LocationManager.PathSeparator, Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LOT 2.lnk"), System.Windows.Forms.Application.ExecutablePath);
+			ExtensionClass.CreateShortcut(LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LOT 2.lnk"), System.Windows.Forms.Application.ExecutablePath);
 		}
 		catch (Exception ex)
 		{
@@ -274,7 +274,7 @@ internal class ContentUtil
 	{
 		foreach (var id in ids)
 		{
-			DeleteAll(string.Join(LocationManager.PathSeparator, LocationManager.WorkshopContentPath, id.ToString()));
+			DeleteAll(LocationManager.Combine(LocationManager.WorkshopContentPath, id.ToString()));
 		}
 	}
 
@@ -298,13 +298,13 @@ internal class ContentUtil
 	{
 		if (item is Asset asset)
 		{
-			ExtensionClass.CopyFile(asset.FileName, string.Join(LocationManager.PathSeparator, LocationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
+			ExtensionClass.CopyFile(asset.FileName, LocationManager.Combine(LocationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
 			return;
 		}
 
 		if (item.Package.Assets?.Any() ?? false)
 		{
-			var target = new DirectoryInfo(string.Join(LocationManager.PathSeparator, LocationManager.AssetsPath, Path.GetFileName(item.Folder)));
+			var target = new DirectoryInfo(LocationManager.Combine(LocationManager.AssetsPath, Path.GetFileName(item.Folder)));
 
 			new DirectoryInfo(item.Folder).CopyAll(target, x => Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
 
@@ -313,7 +313,7 @@ internal class ContentUtil
 
 		if (item.Package.Mod is not null)
 		{
-			var target = new DirectoryInfo(string.Join(LocationManager.PathSeparator, LocationManager.ModsPath, Path.GetFileName(item.Folder)));
+			var target = new DirectoryInfo(LocationManager.Combine(LocationManager.ModsPath, Path.GetFileName(item.Folder)));
 
 			new DirectoryInfo(item.Folder).CopyAll(target, x => !Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
 
