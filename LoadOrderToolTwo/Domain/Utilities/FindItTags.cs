@@ -28,7 +28,7 @@ public class CustomTagsLibrary
 	{
 		try
 		{
-			var path = Path.Combine(LocationManager.AppDataPath, filename);
+			var path = LocationManager.Combine(LocationManager.AppDataPath, filename);
 
 			if (assetTags.Count == 0)
 			{
@@ -66,7 +66,7 @@ public class CustomTagsLibrary
 		{
 			assetTags.Clear();
 
-			var path = Path.Combine(LocationManager.AppDataPath, filename);
+			var path = LocationManager.Combine(LocationManager.AppDataPath, filename);
 
 			if (!File.Exists(path))
 			{

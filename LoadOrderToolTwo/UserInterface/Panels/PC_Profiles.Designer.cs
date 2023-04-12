@@ -414,7 +414,7 @@ partial class PC_Profiles
 			this.DD_NewMap.ValidExtensions = new string[] {
         ".crp"};
 			this.DD_NewMap.FileSelected += new System.Action<string>(this.DD_NewMap_FileSelected);
-			this.DD_NewMap.ValidFile += new System.Func<string, bool>(this.DD_NewMap_ValidFile);
+			this.DD_NewMap.ValidFile += this.DD_ValidFile;
 			// 
 			// CB_LHT
 			// 
@@ -448,7 +448,7 @@ partial class PC_Profiles
 			this.DD_SaveFile.ValidExtensions = new string[] {
         ".crp"};
 			this.DD_SaveFile.FileSelected += new System.Action<string>(this.DD_SaveFile_FileSelected);
-			this.DD_SaveFile.ValidFile += new System.Func<string, bool>(this.DD_SaveFile_ValidFile);
+		this.DD_SaveFile.ValidFile += DD_ValidFile;
 			// 
 			// CB_NoWorkshop
 			// 
@@ -590,7 +590,7 @@ partial class PC_Profiles
 			this.DD_SkipFile.ValidExtensions = new string[] {
         ".txt"};
 			this.DD_SkipFile.FileSelected += new System.Action<string>(this.DD_SkipFile_FileSelected);
-			this.DD_SkipFile.ValidFile += new System.Func<string, bool>(this.DD_SkipFile_ValidFile);
+		this.DD_SkipFile.ValidFile += DD_ValidFile;
 			// 
 			// CB_SkipFile
 			// 
@@ -924,9 +924,9 @@ partial class PC_Profiles
 			this.DAD_NewProfile.TabIndex = 15;
 			this.DAD_NewProfile.Text = "DropNewProfile";
 			this.DAD_NewProfile.ValidExtensions = new string[] {
-        ".json"};
+        ".json",".xml"};
 			this.DAD_NewProfile.FileSelected += new System.Action<string>(this.DAD_NewProfile_FileSelected);
-			this.DAD_NewProfile.ValidFile += new System.Func<string, bool>(this.DAD_NewProfile_ValidFile);
+		this.DAD_NewProfile.ValidFile += DD_ValidFile;
 			// 
 			// PC_Profiles
 			// 

@@ -19,18 +19,18 @@ public static class LogUtil
 	{
 		Platform.MacOSX => $"/Users/{Environment.UserName}/Library/Logs/Unity/Player.log",
 		Platform.Linux => $"/.config/unity3d/Colossal Order/Cities: Skylines/Player.log",
-		_ => Path.Combine(LocationManager.GamePath, "Cities_Data", "output_log.txt")
+		_ => LocationManager.Combine(LocationManager.GamePath, "Cities_Data", "output_log.txt")
 	};
 
 	public static string GameDataPath => LocationManager.Platform switch
 	{
-		Platform.MacOSX => Path.Combine(LocationManager.GamePath, "Cities.app", "Contents"),
-		_ => Path.Combine(LocationManager.GamePath, "Cities_Data")
+		Platform.MacOSX => LocationManager.Combine(LocationManager.GamePath, "Cities.app", "Contents"),
+		_ => LocationManager.Combine(LocationManager.GamePath, "Cities_Data")
 	};
 
 	public static string CreateZipFileAndSetToClipboard(string? folder = null)
 	{
-		var file = Path.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_hh-mm-tt}.zip");
+		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_hh-mm-tt}.zip");
 
 		using (var fileStream = File.Create(file))
 		using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create, true))
@@ -55,9 +55,9 @@ public static class LogUtil
 	{
 		yield return GetLastCrashLog();
 		yield return GetLastLSMReport();
-		yield return Path.Combine(GameDataPath, "CompatibilityReport.html");
+		yield return LocationManager.Combine(GameDataPath, "CompatibilityReport.html");
 
-		foreach (var item in new DirectoryInfo(Path.Combine(GameDataPath, "Logs")).GetFiles("*.log"))
+		foreach (var item in new DirectoryInfo(LocationManager.Combine(GameDataPath, "Logs")).GetFiles("*.log"))
 		{
 			if (DateTime.Now - item.LastWriteTime < TimeSpan.FromDays(1))
 			{
@@ -161,7 +161,7 @@ public static class LogUtil
 
 			if (latest != null)
 			{
-				return Path.Combine(latest.FullName, "error.log");
+				return LocationManager.Combine(latest.FullName, "error.log");
 			}
 		}
 		catch (Exception ex) { Log.Exception(ex, "Failed to load the previous crash dump log"); }
@@ -173,19 +173,7 @@ public static class LogUtil
 	{
 		try
 		{
-			var path = LsmSettingsFile.Deserialize()?.reportDir;
-
-			if (path is null)
-			{
-				return string.Empty;
-			}
-
-			var regex = Regex.Match(path, @"Colossal Order[\\/]Cities_Skylines[\\/]", RegexOptions.IgnoreCase);
-
-			if (regex.Success) // attempt to match the file to any OS or user
-			{
-				path = Path.Combine(LocationManager.AppDataPath, path.Substring(regex.Index + regex.Length));
-			}
+			var path = LsmUtil.GetReportFolder();
 
 			var reports = Directory.GetFiles(path, "*Assets Report*.htm");
 

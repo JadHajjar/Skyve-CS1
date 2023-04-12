@@ -20,7 +20,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		InitializeComponent();
 
-		DD_LogFile.StartingFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+		DD_LogFile.StartingFolder = LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
 		{
@@ -87,7 +87,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_SaveZip_Click(object sender, EventArgs e)
 	{
-		var folder = Path.Combine(LocationManager.LotAppDataPath, "Support Logs");
+		var folder = LocationManager.Combine(LocationManager.LotAppDataPath, "Support Logs");
 
 		Directory.CreateDirectory(folder);
 
@@ -125,7 +125,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		TLP_Errors.Visible = logs.Count > 0;
 	}
 
-	private bool DD_LogFile_ValidFile(string arg)
+	private bool DD_LogFile_ValidFile(object sender, string arg)
 	{
 		return arg.ToLower().EndsWith(".log") || arg.ToLower().EndsWith(".txt");
 	}

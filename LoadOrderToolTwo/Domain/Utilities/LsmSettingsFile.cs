@@ -14,10 +14,10 @@ namespace LoadOrderToolTwo.Domain.Utilities;
 public class LsmSettingsFile
 {
 	const string FILE_NAME = "LoadingScreenModRevisited.xml";
-	static string FILE_PATH => Path.Combine(LocationManager.AppDataPath, FILE_NAME);
+	static string FILE_PATH => LocationManager.Combine(LocationManager.AppDataPath, FILE_NAME);
 
-	public static string DefaultSkipPath => Path.Combine(Path.Combine(LocationManager.AppDataPath, "Maps"), "SkippedPrefabs");
-	public static string DefaultSkipFile => Path.Combine(DefaultSkipPath, "skip.txt");
+	public static string DefaultSkipPath => LocationManager.Combine(LocationManager.Combine(LocationManager.AppDataPath, "Maps"), "SkippedPrefabs");
+	public static string DefaultSkipFile => LocationManager.Combine(DefaultSkipPath, "skip.txt");
 
 	public bool loadEnabled = true;
 	public bool loadUsed = true;

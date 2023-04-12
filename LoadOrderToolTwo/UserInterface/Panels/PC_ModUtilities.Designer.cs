@@ -198,7 +198,7 @@ partial class PC_ModUtilities
 			this.DD_BOB.ValidExtensions = new string[] {
         ".xml"};
 			this.DD_BOB.FileSelected += new System.Action<string>(this.DD_BOB_FileSelected);
-			this.DD_BOB.ValidFile += new System.Func<string, bool>(this.DD_BOB_ValidFile);
+			this.DD_BOB.ValidFile += new System.Func<object, string, bool>(this.DD_BOB_ValidFile);
 			// 
 			// P_LsmReport
 			// 
@@ -242,7 +242,7 @@ partial class PC_ModUtilities
 			this.DD_Unused.TabIndex = 17;
 			this.DD_Unused.Text = "LsmImportUnusedInfo";
 			this.DD_Unused.FileSelected += new System.Action<string>(this.LSM_UnusedDrop_FileSelected);
-			this.DD_Unused.ValidFile += new System.Func<string, bool>(this.LSMDragDrop_ValidFile);
+			this.DD_Unused.ValidFile += new System.Func<object, string, bool>(this.LSMDragDrop_ValidFile);
 			// 
 			// DD_Missing
 			// 
@@ -255,7 +255,7 @@ partial class PC_ModUtilities
 			this.DD_Missing.TabIndex = 16;
 			this.DD_Missing.Text = "LsmImportMissingInfo";
 			this.DD_Missing.FileSelected += new System.Action<string>(this.LSMDragDrop_FileSelected);
-			this.DD_Missing.ValidFile += new System.Func<string, bool>(this.LSMDragDrop_ValidFile);
+			this.DD_Missing.ValidFile += new System.Func<object, string, bool>(this.LSMDragDrop_ValidFile);
 			// 
 			// P_DuplicateMods
 			// 

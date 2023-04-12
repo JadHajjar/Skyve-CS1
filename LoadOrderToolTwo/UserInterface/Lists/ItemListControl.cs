@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -29,6 +30,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	public event Action<DateTime>? DateSelected;
 	public event Action<string>? TagSelected;
 	public event Action<string>? AddToSearch;
+	public event EventHandler? FilterRequested;
 
 	public ItemListControl()
 	{
@@ -57,6 +59,23 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		base.UIChanged();
 
 		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+	}
+
+	public override void FilterOrSortingChanged()
+	{
+		if (!IsHandleCreated)
+		{
+			base.FilterOrSortingChanged();
+		}
+		else
+		{
+			FilterRequested?.Invoke(this, EventArgs.Empty);
+		}
+	}
+
+	internal void DoFilterOrSortingChanged()
+	{
+		base.FilterOrSortingChanged();
 	}
 
 	public void SetSorting(PackageSorting packageSorting)
@@ -187,6 +206,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 		}
 
+		else if (rects.SteamIdRect.Contains(location))
+		{
+			setTip(Locale.CopyFolderName, rects.SteamIdRect);
+		}
+
 		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, timeout: 20000, offset: new Point(rectangle.X, item.Bounds.Y));
 
 		return rects.Contain(location);
@@ -306,29 +330,39 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				return;
 			}
 		}
+
+		if (rects.SteamIdRect.Contains(e.Location))
+		{
+			Clipboard.SetText(Path.GetFileName(item.Item.Folder));
+			return;
+		}
 	}
 
 	private void ShowRightClickMenu(T item)
 	{
 		var isPackageIncluded = item.Package.IsIncluded;
 
-		var items = new[]
+		var items = new SlickStripItem[]
 		{
-			  new SlickStripItem(Locale.IncludeAllItemsInThisPackage, () => { item.Package.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, !isPackageIncluded)
-			, new SlickStripItem(Locale.ExcludeAllItemsInThisPackage, () => { item.Package.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, isPackageIncluded)
-			, new SlickStripItem(Locale.ReDownloadPackage, () => Redownload(item), Properties.Resources.I_ReDownload_16, SteamUtil.IsSteamAvailable())
-			, new SlickStripItem(Locale.MovePackageToLocalFolder, () => ContentUtil.MoveToLocalFolder(item), Properties.Resources.I_Local_16, item.Workshop)
-			, new SlickStripItem(item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, () => AskThenDelete(item), Properties.Resources.I_Disposable_16, !item.Workshop && !item.BuiltIn)
-			, new SlickStripItem(Locale.UnsubscribePackage, async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true), Properties.Resources.I_Steam_16, item.Workshop && !item.BuiltIn)
-			, new SlickStripItem(Locale.OtherProfiles, () => { }, Properties.Resources.I_ProfileSettings_16, fade: true)
-			, new SlickStripItem(Locale.IncludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, tab: 1)
-			, new SlickStripItem(Locale.ExcludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, tab: 1)
-			, new SlickStripItem(Locale.Copy, () => { }, Properties.Resources.I_Copy_16, item.Workshop, fade: true)
-			, new SlickStripItem(Locale.CopyWorkshopLink, () => Clipboard.SetText(item.SteamPage), null, item.Workshop, tab: 1)
-			, new SlickStripItem(Locale.CopyWorkshopId, () => Clipboard.SetText(item.SteamId.ToString()), null, item.Workshop, tab: 1)
-			, new SlickStripItem(Locale.CopyAuthorLink, () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
-			, new SlickStripItem(Locale.CopyAuthorId, () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
-			, new SlickStripItem(Locale.CopyAuthorSteamId, () => Clipboard.SetText(item.Author?.SteamId), null, !string.IsNullOrWhiteSpace(item.Author?.SteamId), tab: 1)
+			  new (Locale.IncludeAllItemsInThisPackage, () => { item.Package.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, !isPackageIncluded)
+			, new (Locale.ExcludeAllItemsInThisPackage, () => { item.Package.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, isPackageIncluded)
+			, new (Locale.ReDownloadPackage, () => Redownload(item), Properties.Resources.I_ReDownload_16, SteamUtil.IsSteamAvailable())
+			, new (Locale.MovePackageToLocalFolder, () => ContentUtil.MoveToLocalFolder(item), Properties.Resources.I_Local_16, item.Workshop)
+			, new (item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, () => AskThenDelete(item), Properties.Resources.I_Disposable_16, !item.Workshop && !item.BuiltIn)
+			, new (Locale.UnsubscribePackage, async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true), Properties.Resources.I_Steam_16, item.Workshop && !item.BuiltIn)
+			, new (string.Empty)
+			, new (Locale.OtherProfiles, () => { }, Properties.Resources.I_ProfileSettings_16, fade: true)
+			, new (Locale.IncludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, tab: 1)
+			, new (Locale.ExcludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, tab: 1)
+			, new (Locale.Copy, () => { }, Properties.Resources.I_Copy_16, item.Workshop, fade: true)
+			, new (Locale.CopyPackageName, () => Clipboard.SetText(item.ToString()), item.Workshop ? null : Properties.Resources.I_Copy_16, tab: item.Workshop ? 1 : 0)
+			, new (Locale.CopyWorkshopLink, () => Clipboard.SetText(item.SteamPage), null, item.Workshop, tab: 1)
+			, new (Locale.CopyWorkshopId, () => Clipboard.SetText(item.SteamId.ToString()), null, item.Workshop, tab: 1)
+			, new (string.Empty, tab: 1)
+			, new (Locale.CopyAuthorName, () => Clipboard.SetText(item.Author?.Name), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
+			, new (Locale.CopyAuthorLink, () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
+			, new (Locale.CopyAuthorId, () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
+			, new (Locale.CopyAuthorSteamId, () => Clipboard.SetText(item.Author?.SteamId), null, !string.IsNullOrWhiteSpace(item.Author?.SteamId), tab: 1)
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
@@ -508,6 +542,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	{
 		if (!e.Item.Workshop)
 		{
+			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(e.Item.Folder), Properties.Resources.I_Folder_16, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomRight, true);
 			rects.AuthorRect = Rectangle.Empty;
 			return;
 		}
@@ -588,9 +623,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		foreach (var item in tags)
 		{
+			if (item.ToLower() == "stable")
+			{ continue; }
+
 			var color = item.ToLower() switch
 			{
-				"stable" => Color.FromArgb(180, FormDesign.Design.GreenColor),
 				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
 				"beta" => Color.FromArgb(180, FormDesign.Design.YellowColor),
 				"deprecated" => Color.FromArgb(225, FormDesign.Design.RedColor),
@@ -761,7 +798,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		if (item.Workshop)
 		{
 			buttonRectangle.X -= Padding.Left + buttonRectangle.Width;
-			rects.SteamRect = buttonRectangle;
+			rects.SteamRect = buttonRectangle; 
+		}
 
 			if (doubleSize && DoubleSizeOnHover)
 			{
@@ -775,11 +813,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 
 			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 2);
-		}
-		else
-		{
-			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, buttonRectangle.X - rects.IconRect.X, rectangle.Height / 2);
-		}
+		//}
+		//else
+		//{
+		//	rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, buttonRectangle.X - rects.IconRect.X, rectangle.Height / 2);
+		//}
 
 		return rects;
 	}

@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Utilities.Managers;
+
 using SlickControls;
 
 using System;
@@ -61,8 +63,8 @@ public static class Log
 				return;
 			}
 
-			var folder = Path.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
-			LogFilePath = Path.Combine(folder, LogFileName);
+			var folder = LocationManager.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
+			LogFilePath = LocationManager.Combine(folder, LogFileName);
 
 			Directory.CreateDirectory(folder);
 
@@ -246,7 +248,7 @@ public static class Log
 
 			if (Program.IsRunning)
 			{
-				if (level is LogLevel.Error or LogLevel.Exception)
+				if (level is LogLevel.Exception)
 				{
 					m += new StackTrace(true).ToString() + nl + nl;
 				}

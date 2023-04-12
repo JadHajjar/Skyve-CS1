@@ -38,8 +38,6 @@ public partial class PC_Options : PanelContent
 		TB_GamePath.Text = LocationManager.GamePath;
 		TB_AppDataPath.Text = LocationManager.AppDataPath;
 		TB_SteamPath.Text = LocationManager.SteamPath;
-		TB_VirtualAppDataPath.Text = LocationManager.VirtualAppDataPath;
-		TB_VirtualGamePath.Text = LocationManager.VirtualGamePath;
 
 		if (LocationManager.Platform is Platform.Linux)
 		{
@@ -127,7 +125,7 @@ public partial class PC_Options : PanelContent
 		{
 			if (ShowPrompt(Locale.ChangingFoldersRequiresRestart, PromptButtons.OKCancel, PromptIcons.Hand) == System.Windows.Forms.DialogResult.OK)
 			{
-				LocationManager.SetPaths(TB_GamePath.Text, TB_AppDataPath.Text, TB_SteamPath.Text, TB_VirtualAppDataPath.Text, TB_VirtualGamePath.Text);
+				LocationManager.SetPaths(TB_GamePath.Text, TB_AppDataPath.Text, TB_SteamPath.Text);
 
 				Process.Start(Application.ExecutablePath);
 
@@ -241,7 +239,7 @@ public partial class PC_Options : PanelContent
 			return;
 		}
 
-		ExtensionClass.DeleteFile(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"));
+		ExtensionClass.DeleteFile(LocationManager.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"));
 
 		CentralManager.SessionSettings.FirstTimeSetupCompleted = false;
 		CentralManager.SessionSettings.Save();

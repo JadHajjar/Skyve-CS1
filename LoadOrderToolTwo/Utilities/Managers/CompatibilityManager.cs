@@ -48,7 +48,7 @@ internal static class CompatibilityManager
 				CatalogAvailable = true;
 			}
 
-			var assetFile = Path.Combine(compatibilityReport.Folder, "CompatibilityReportAssetCatalog.xml");
+			var assetFile = LocationManager.Combine(compatibilityReport.Folder, "CompatibilityReportAssetCatalog.xml");
 
 			if (File.Exists(assetFile))
 			{

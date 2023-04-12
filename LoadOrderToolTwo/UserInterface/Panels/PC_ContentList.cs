@@ -14,6 +14,7 @@ using SlickControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -44,6 +45,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
 
+		LC_Items.FilterRequested += FilterChanged;
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
 		LC_Items.DownloadStatusSelected += LC_Items_DownloadStatusSelected;
 		LC_Items.CompatibilityReportSelected += LC_Items_CompatibilityReportSelected;
@@ -295,7 +297,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void DelayedSearch()
 	{
-		LC_Items.FilterOrSortingChanged();
+		LC_Items.DoFilterOrSortingChanged();
 		this.TryInvoke(RefreshCounts);
 		TB_Search.Loading = false;
 	}
@@ -398,12 +400,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (!DR_SubscribeTime.Match(item.SubscribeTime.ToLocalTime()))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.SubscribeTime.ToLocalTime()))
 		{
 			return true;
 		}
 
-		if (!DR_ServerTime.Match(item.ServerTime.ToLocalTime()))
+		if (DR_ServerTime.Set && !DR_ServerTime.Match(item.ServerTime.ToLocalTime()))
 		{
 			return true;
 		}
@@ -448,7 +450,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			if (!(searchText.SearchCheck(item.ToString())
 				|| searchText.SearchCheck(item.Author?.Name)
-				|| item.SteamId.ToString().Contains(searchText)))
+				|| Path.GetFileName(item.Folder).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1))
 			{
 				return true;
 			}

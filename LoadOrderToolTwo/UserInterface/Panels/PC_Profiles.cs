@@ -3,7 +3,6 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.Utilities;
-using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -36,7 +35,7 @@ public partial class PC_Profiles : PanelContent
 
 		LoadProfile(CentralManager.CurrentProfile);
 
-		DD_SaveFile.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Saves");
+		DD_SaveFile.StartingFolder = LocationManager.Combine(LocationManager.AppDataPath, "Saves");
 		DD_SkipFile.StartingFolder = LocationManager.AppDataPath;
 		DD_NewMap.StartingFolder = LocationManager.MapsPath;
 
@@ -136,13 +135,13 @@ public partial class PC_Profiles : PanelContent
 		CB_StartNewGame.Checked = profile.LaunchSettings.StartNewGame;
 		CB_DevUI.Checked = profile.LaunchSettings.DevUi;
 		CB_RefreshWorkshop.Checked = profile.LaunchSettings.RefreshWorkshop;
-		DD_NewMap.SelectedFile = IOUtil.ToRealPath(profile.LaunchSettings.MapToLoad);
-		DD_SaveFile.SelectedFile = IOUtil.ToRealPath(profile.LaunchSettings.SaveToLoad);
+		DD_NewMap.SelectedFile = profile.LaunchSettings.MapToLoad;
+		DD_SaveFile.SelectedFile = profile.LaunchSettings.SaveToLoad;
 
 		CB_LoadUsed.Checked = profile.LsmSettings.LoadUsed;
 		CB_LoadEnabled.Checked = profile.LsmSettings.LoadEnabled;
 		CB_SkipFile.Checked = profile.LsmSettings.UseSkipFile;
-		DD_SkipFile.SelectedFile = IOUtil.ToRealPath(profile.LsmSettings.SkipFile);
+		DD_SkipFile.SelectedFile = profile.LsmSettings.SkipFile;
 
 		DD_SaveFile.Enabled = CB_LoadSave.Checked;
 		DD_SkipFile.Enabled = CB_SkipFile.Checked;
@@ -195,8 +194,8 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.NoMods = CB_NoMods.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.LHT = CB_LHT.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.StartNewGame = CB_StartNewGame.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.MapToLoad = IOUtil.ToVirtualPath(DD_NewMap.SelectedFile);
-		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = IOUtil.ToVirtualPath(DD_SaveFile.SelectedFile);
+		CentralManager.CurrentProfile.LaunchSettings.MapToLoad = DD_NewMap.SelectedFile;
+		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = DD_SaveFile.SelectedFile;
 		CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
@@ -204,7 +203,7 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.DevUi = CB_DevUI.Checked;
 
-		CentralManager.CurrentProfile.LsmSettings.SkipFile = IOUtil.ToVirtualPath(DD_SkipFile.SelectedFile);
+		CentralManager.CurrentProfile.LsmSettings.SkipFile = DD_SkipFile.SelectedFile;
 		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
 		CentralManager.CurrentProfile.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
 		CentralManager.CurrentProfile.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
@@ -433,23 +432,9 @@ public partial class PC_Profiles : PanelContent
 		ValueChanged(DD_NewMap, EventArgs.Empty);
 	}
 
-	private bool DD_NewMap_ValidFile(string arg)
+	private bool DD_ValidFile(object sender, string arg)
 	{
-		var alternativePath = Path.Combine(LocationManager.GameContentPath, "Maps");
-		var alternativePath2 = Path.Combine(LocationManager.GameContentPath, "Scenarios");
-
-		return (arg.PathContains(DD_NewMap.StartingFolder) || arg.PathContains(alternativePath) || arg.PathContains(alternativePath2))
-			&& DD_NewMap.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
-	}
-
-	private bool DD_SaveFile_ValidFile(string arg)
-	{
-		return arg.PathContains(DD_SaveFile.StartingFolder) && DD_SaveFile.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
-	}
-
-	private bool DD_SkipFile_ValidFile(string arg)
-	{
-		return arg.PathContains(DD_SkipFile.StartingFolder) && DD_SkipFile.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
+		return (sender as DragAndDropControl)!.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
 	}
 
 	private void DAD_NewProfile_FileSelected(string obj)
@@ -459,19 +444,34 @@ public partial class PC_Profiles : PanelContent
 
 		var profile = ProfileManager.Profiles.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
 
-		if (profile is not null)
+		if (obj.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+		{
+			if (profile is not null)
+			{
+				ShowPrompt(Locale.ProfileNameUsed, icon: PromptIcons.Hand);
+				return;
+			}
+
+			profile = ProfileManager.ConvertLegacyProfile(obj, false);
+
+			if (profile is null)
+			{
+				ShowPrompt(Locale.FailedToImportLegacyProfile, icon: PromptIcons.Error);
+				return;
+			}
+		}
+		else if (profile is not null)
 		{
 			Ctrl_LoadProfile(profile);
 			return;
 		}
+		else
+		{
+			profile = ProfileManager.ImportProfile(obj);
+		}
 
 		try
-		{ Ctrl_LoadProfile(ProfileManager.ImportProfile(obj)!); }
+		{ Ctrl_LoadProfile(profile); }
 		catch (Exception ex) { ShowPrompt(ex, "Failed to import your profile"); }
-	}
-
-	private bool DAD_NewProfile_ValidFile(string arg)
-	{
-		return Path.GetExtension(arg).Equals(".json", StringComparison.InvariantCultureIgnoreCase);
 	}
 }

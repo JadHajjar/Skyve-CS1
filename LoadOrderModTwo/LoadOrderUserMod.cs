@@ -120,7 +120,9 @@ public class LoadOrderUserMod : IUserMod
 					PrepareTool();
 				}
 				else
+				{
 					Debug.Log("Skipping tool configuration, SetupComplete.txt was detected");
+				}
 			}
 			catch (Exception ex) { Debug.LogException(ex); }
 
@@ -192,6 +194,29 @@ public class LoadOrderUserMod : IUserMod
 					else if (Application.platform == RuntimePlatform.LinuxPlayer)
 					{
 						appSettings.Settings[key].Value = "Linux";
+					}
+					break;
+				case "SteamPath":
+					if (Application.platform == RuntimePlatform.LinuxPlayer)
+					{
+						var command = $"which steam";
+						var proc = new System.Diagnostics.Process();
+						proc.StartInfo.FileName = "/bin/bash";
+						proc.StartInfo.Arguments = "-c \" " + command + " \"";
+						proc.StartInfo.UseShellExecute = false;
+						proc.StartInfo.RedirectStandardOutput = true;
+						proc.Start();
+
+						var output = string.Empty;
+
+						while (!proc.StandardOutput.EndOfStream)
+						{
+							output = proc.StandardOutput.ReadLine();
+						}
+
+						proc.WaitForExit();
+
+						appSettings.Settings[key].Value = output.Trim();
 					}
 					break;
 			}

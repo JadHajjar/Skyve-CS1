@@ -115,7 +115,7 @@ public static class SteamUtil
 	{
 		var file = LocationManager.SteamPathWithExe;
 
-		IOUtil.Execute(Path.GetDirectoryName(file), Path.GetFileName(file), args)?.WaitForExit();
+		IOUtil.Execute(file, args)?.WaitForExit();
 	}
 
 	public static async Task<Dictionary<string, SteamUserEntry>> GetSteamUsers(List<string> steamId64s)

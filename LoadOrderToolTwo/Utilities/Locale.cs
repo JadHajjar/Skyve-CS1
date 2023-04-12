@@ -268,4 +268,9 @@ internal class Locale : LocaleHelper
 	public static string DeleteAsset => _instance.GetText(nameof(DeleteAsset));
 	public static string IncludeThisItemInAllProfiles => _instance.GetText(nameof(IncludeThisItemInAllProfiles));
 	public static string ExcludeThisItemInAllProfiles => _instance.GetText(nameof(ExcludeThisItemInAllProfiles));
+	public static string CopyPackageName => _instance.GetText(nameof(CopyPackageName));
+	public static string CopyAuthorName => _instance.GetText(nameof(CopyAuthorName));
+	public static string CopyFolderName => _instance.GetText(nameof(CopyFolderName));
+	public static string ProfileNameUsed => _instance.GetText(nameof(ProfileNameUsed));
+	public static string FailedToImportLegacyProfile => _instance.GetText(nameof(FailedToImportLegacyProfile));
 }

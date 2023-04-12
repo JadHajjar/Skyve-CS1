@@ -48,7 +48,7 @@ public static class ImageManager
 
 	public static FileInfo File(string url, string? fileName = null)
 	{
-		var filePath = Path.Combine(ISave.DocsFolder, "Thumbs", fileName ?? (Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png")));
+		var filePath = LocationManager.Combine(ISave.DocsFolder, "Thumbs", fileName ?? (Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png")));
 
 		return new FileInfo(filePath);
 	}

@@ -314,7 +314,7 @@ partial class PC_HelpAndLogs
         ".txt",
         ".log"};
 			this.DD_LogFile.FileSelected += new System.Action<string>(this.DD_LogFile_FileSelected);
-			this.DD_LogFile.ValidFile += new System.Func<string, bool>(this.DD_LogFile_ValidFile);
+			this.DD_LogFile.ValidFile += new System.Func<object, string, bool>(this.DD_LogFile_ValidFile);
 			// 
 			// TLP_Errors
 			// 

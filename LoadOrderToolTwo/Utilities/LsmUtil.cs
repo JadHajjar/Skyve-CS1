@@ -1,5 +1,7 @@
 ﻿using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.Domain.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,25 @@ internal static class LsmUtil
 		}
 
 		return false;
+	}
+
+	internal static string GetReportFolder()
+	{
+		var path = LsmSettingsFile.Deserialize()?.reportDir;
+
+		if (path is null)
+		{
+			return string.Empty;
+		}
+
+		var regex = Regex.Match(path, @"Colossal Order[\\/]Cities_Skylines[\\/]", RegexOptions.IgnoreCase);
+
+		if (regex.Success) // attempt to match the file to any OS or user
+		{
+			path = LocationManager.Combine(LocationManager.AppDataPath, path.Substring(regex.Index + regex.Length));
+		}
+
+		return path;
 	}
 
 	internal static IEnumerable<Profile.Asset> LoadMissingAssets(string obj)

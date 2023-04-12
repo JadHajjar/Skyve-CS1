@@ -1,7 +1,6 @@
 using Extensions;
 
 using LoadOrderToolTwo.Utilities;
-using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;

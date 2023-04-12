@@ -39,7 +39,7 @@ public static class CitiesManager
 	public static bool CitiesAvailable()
 	{
 		var file = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe
-			? LocationManager.Combine(LocationManager.GamePath, LocationManager.CitiesExe)
+			? LocationManager.CitiesPathWithExe
 			: LocationManager.SteamPathWithExe;
 
 		return File.Exists(file);
@@ -51,10 +51,10 @@ public static class CitiesManager
 
 		var args = GetCommandArgs();
 		var file = CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe
-			? LocationManager.Combine(LocationManager.GamePath, LocationManager.CitiesExe)
+			? LocationManager.CitiesPathWithExe
 			: LocationManager.SteamPathWithExe;
-		
-		IOUtil.Execute(Path.GetDirectoryName(file), Path.GetFileName(file), string.Join(" ", args));
+
+		IOUtil.Execute(file, string.Join(" ", args));
 	}
 
 	private static void UpdateFiles()
@@ -174,7 +174,7 @@ public static class CitiesManager
 
 		if (CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame)
 		{
-			if (File.Exists(IOUtil.ToRealPath(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad)))
+			if (File.Exists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
 			{
 				args.Add("--loadSave=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
 			}
@@ -185,7 +185,7 @@ public static class CitiesManager
 		}
 		else if (CentralManager.CurrentProfile.LaunchSettings.StartNewGame)
 		{
-			if (File.Exists(IOUtil.ToRealPath(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad)))
+			if (File.Exists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
 			{
 				args.Add("--newGame=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
 			}
@@ -222,7 +222,7 @@ public static class CitiesManager
 		if (!CentralManager.SessionSettings.SubscribeInfoShown)
 		{
 			MessagePrompt.Show(Locale.SubscribingRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
-			
+
 			CentralManager.SessionSettings.SubscribeInfoShown = true;
 			CentralManager.SessionSettings.Save();
 		}
@@ -240,7 +240,7 @@ public static class CitiesManager
 
 		var file = LocationManager.SteamPathWithExe;
 
-		IOUtil.Execute(Path.GetDirectoryName(file), Path.GetFileName(file), command);
+		IOUtil.Execute(file, command);
 
 		var stopwatch = Stopwatch.StartNew();
 
@@ -299,15 +299,19 @@ public static class CitiesManager
 	{
 		var childProcs = new List<Process>();
 
-		var mos = new ManagementObjectSearcher(
+		try
+		{
+			var mos = new ManagementObjectSearcher(
 			$"Select * From Win32_Process Where ParentProcessID={proc.Id}");
 
-		foreach (var mo in mos.Get().Cast<ManagementObject>())
-		{
-			var childPid = Convert.ToInt32(mo["ProcessID"]);
-			var childProc = Process.GetProcessById(childPid);
-			childProcs.Add(childProc);
+			foreach (var mo in mos.Get().Cast<ManagementObject>())
+			{
+				var childPid = Convert.ToInt32(mo["ProcessID"]);
+				var childProc = Process.GetProcessById(childPid);
+				childProcs.Add(childProc);
+			}
 		}
+		catch { }
 
 		return childProcs;
 	}

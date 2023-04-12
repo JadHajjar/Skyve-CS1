@@ -3,6 +3,7 @@ using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ public class Mod : IPackage
 	public Mod(Package package, string dllPath, Version version)
 	{
 		Package = package;
-		FileName = dllPath;
+		FileName = dllPath.FormatPath();
 		Version = version;
-		_dllName = Path.GetFileNameWithoutExtension(dllPath).FormatWords();
+		_dllName = Path.GetFileNameWithoutExtension(FileName).FormatWords();
 	}
 
 	public string FileName { get; }

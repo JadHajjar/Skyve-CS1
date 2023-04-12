@@ -18,7 +18,7 @@ public class Package : IPackage
 	public Package(string folder, bool builtIn, bool workshop)
 	{
 		Name = string.Empty;
-		Folder = folder;
+		Folder = folder.FormatPath();
 		BuiltIn = builtIn;
 		Workshop = workshop;
 
@@ -26,21 +26,6 @@ public class Package : IPackage
 		{
 			SteamId = ulong.Parse(Path.GetFileName(folder));
 			SteamPage = $"https://steamcommunity.com/workshop/filedetails?id={SteamId}";
-		}
-
-		if (!string.IsNullOrWhiteSpace(LocationManager.VirtualGamePath) && Folder.Contains(LocationManager.GamePath))
-		{
-			VirtualFolder = Folder.Replace(LocationManager.GamePath, LocationManager.VirtualGamePath).Replace("\\", "/");
-		}
-
-		if (!string.IsNullOrWhiteSpace(LocationManager.VirtualWorkshopContentPath) && Folder.Contains(LocationManager.WorkshopContentPath))
-		{
-			VirtualFolder = Folder.Replace(LocationManager.WorkshopContentPath, LocationManager.VirtualWorkshopContentPath).Replace("\\", "/");
-		}
-
-		if (!string.IsNullOrWhiteSpace(LocationManager.VirtualAppDataPath) && Folder.Contains(LocationManager.AppDataPath))
-		{
-			VirtualFolder = Folder.Replace(LocationManager.AppDataPath, LocationManager.VirtualAppDataPath).Replace("\\", "/");
 		}
 	}
 

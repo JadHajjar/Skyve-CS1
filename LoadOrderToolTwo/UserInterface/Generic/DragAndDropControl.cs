@@ -24,7 +24,7 @@ internal class DragAndDropControl : SlickControl
 	private string? _selectedFile;
 
 	public event Action<string>? FileSelected;
-	public event Func<string, bool>? ValidFile;
+	public event Func<object, string, bool>? ValidFile;
 
 	[Browsable(true)]
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
@@ -70,7 +70,7 @@ internal class DragAndDropControl : SlickControl
 
 		isDragActive = true;
 
-		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop) && (ValidFile?.Invoke(((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()) ?? true))
+		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop) && (ValidFile?.Invoke(this, ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault()) ?? true))
 		{
 			drgevent.Effect = DragDropEffects.Copy;
 			isDragAvailable = true;
@@ -154,7 +154,7 @@ internal class DragAndDropControl : SlickControl
 
 		if (dialog.PromptFile(Program.MainForm, StartingFolder) == DialogResult.OK)
 		{
-			if (ValidFile?.Invoke(dialog.SelectedPath) ?? true)
+			if (ValidFile?.Invoke(this, dialog.SelectedPath) ?? true)
 			{
 				FileSelected?.Invoke(dialog.SelectedPath);
 			}

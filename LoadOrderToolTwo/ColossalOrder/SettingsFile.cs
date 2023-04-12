@@ -49,7 +49,7 @@ public class SettingsFile
 	public string fileName
 	{
 		get => Path.GetFileNameWithoutExtension(m_PathName);
-		set => m_PathName = Path.Combine(LocationManager.AppDataPath, Path.ChangeExtension(value, extension));
+		set => m_PathName = LocationManager.Combine(LocationManager.AppDataPath, Path.ChangeExtension(value, extension));
 	}
 
 	public string systemFileName
@@ -57,7 +57,7 @@ public class SettingsFile
 		get => Path.GetFileNameWithoutExtension(m_PathName);
 		set
 		{
-			m_PathName = Path.Combine(LocationManager.GamePath, Path.ChangeExtension(value, extension));
+			m_PathName = LocationManager.Combine(LocationManager.GamePath, Path.ChangeExtension(value, extension));
 			isSystem = true;
 		}
 	}

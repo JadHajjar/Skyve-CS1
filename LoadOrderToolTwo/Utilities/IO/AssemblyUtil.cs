@@ -87,35 +87,6 @@ public static class AssemblyUtil
 		return false;
 	}
 
-	private static bool MacOsResolve(string dllPath, out Version? version)
-	{
-		version = null;
-		var process = IOUtil.Execute(LocationManager.CurrentDirectory, "AssemblyResolver.exe", string.Join(" ", new string[]
-		{
-			dllPath,
-			LocationManager.ManagedDLL,
-			LocationManager.ModsPath,
-			LocationManager.WorkshopContentPath
-		}.Select(x => $"\"{x}\"")), false, true);
-
-		if (process is null)
-		{
-			return false;
-		}
-
-		process.WaitForExit();
-
-		var code = process.ExitCode;
-
-		if (code == 1)
-		{
-			version = AssemblyName.GetAssemblyName(dllPath).Version;
-			return true;
-		}
-
-		return false;
-	}
-
 	public static TypeDefinition GetExportedImplementation(this AssemblyDefinition asm, string fullInterfaceName)
 	{
 		return asm.MainModule.Types.FirstOrDefault(t =>
@@ -171,7 +142,7 @@ public static class AssemblyUtil
 	internal static Assembly? ResolveInterface(object sender, ResolveEventArgs args)
 	{
 		var name = new AssemblyName(args.Name).Name + ".dll";
-		var managedPath = Path.Combine(LocationManager.ManagedDLL, name);
+		var managedPath = LocationManager.Combine(LocationManager.ManagedDLL, name);
 
 		if (File.Exists(managedPath))
 		{
@@ -184,8 +155,8 @@ public static class AssemblyUtil
 	internal static Assembly? ReflectionResolveInterface(object sender, ResolveEventArgs args)
 	{
 		var name = new AssemblyName(args.Name).Name + ".dll";
-		var path = Path.Combine(Directory.GetParent(args.RequestingAssembly.Location).FullName, name);
-		var managedPath = Path.Combine(LocationManager.ManagedDLL, name);
+		var path = LocationManager.Combine(Directory.GetParent(args.RequestingAssembly.Location).FullName, name);
+		var managedPath = LocationManager.Combine(LocationManager.ManagedDLL, name);
 
 		if (File.Exists(path))
 		{

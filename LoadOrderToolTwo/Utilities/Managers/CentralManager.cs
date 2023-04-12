@@ -284,10 +284,6 @@ internal static class CentralManager
 		{
 			ContentUtil.CreateShortcut();
 		}
-		else
-		{
-			SessionSettings.UserSettings.ShowFolderSettings = true;
-		}
 
 		SessionSettings.FirstTimeSetupCompleted = true;
 		SessionSettings.Save();
@@ -296,7 +292,7 @@ internal static class CentralManager
 
 		Directory.CreateDirectory(LocationManager.LotAppDataPath);
 
-		File.WriteAllText(Path.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Load Order Tool from the main menu after deleting this file.");
+		File.WriteAllText(LocationManager.Combine(LocationManager.LotAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Load Order Tool from the main menu after deleting this file.");
 
 		ProfileManager.ConvertLegacyProfiles();
 	}

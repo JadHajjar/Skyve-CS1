@@ -1,4 +1,5 @@
 ﻿using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using System.Collections.Generic;
 using System.IO;
@@ -80,7 +81,7 @@ internal class PackageWatcher : FileSystemWatcher
 		var parts = relativePath.Split(IoPath.DirectorySeparatorChar, IoPath.AltDirectorySeparatorChar);
 		if (parts.Length > 0 && string.IsNullOrEmpty(IoPath.GetExtension(parts[0])))
 		{
-			return IoPath.Combine(Path, parts[0]);
+			return LocationManager.Combine(Path, parts[0]);
 		}
 
 		return Path;

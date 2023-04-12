@@ -151,30 +151,41 @@ public static class ProfileManager
 
 			Log.Info($"Converting profile '{newName}'..");
 
-			var legacyProfile = LoadOrderTool.Legacy.LoadOrderProfile.Deserialize(profile);
-			var newProfile = legacyProfile?.ToLot2Profile(Path.GetFileNameWithoutExtension(profile));
+			ConvertLegacyProfile(profile);
+		}
+	}
 
-			if (newProfile != null)
+	internal static Profile? ConvertLegacyProfile(string profilePath, bool removeLegacyFile = true)
+	{
+		var legacyProfilePath = LocationManager.Combine(LocationManager.AppDataPath, "LoadOrder", "LOMProfiles");
+		var legacyProfile = LoadOrderTool.Legacy.LoadOrderProfile.Deserialize(profilePath);
+		var newProfile = legacyProfile?.ToLot2Profile(Path.GetFileNameWithoutExtension(profilePath));
+
+		if (newProfile != null)
+		{
+			newProfile.LastEditDate = File.GetLastWriteTime(profilePath);
+			newProfile.DateCreated = File.GetCreationTime(profilePath);
+
+			lock (_profiles)
 			{
-				newProfile.LastEditDate = File.GetLastWriteTime(profile);
-				newProfile.DateCreated = File.GetCreationTime(profile);
+				_profiles.Add(newProfile);
+			}
 
-				lock (_profiles)
-				{
-					_profiles.Add(newProfile);
-				}
+			Save(newProfile, true);
 
-				Save(newProfile, true);
-
+			if (removeLegacyFile)
+			{
 				Directory.CreateDirectory(LocationManager.Combine(legacyProfilePath, "Legacy"));
 
-				File.Move(profile, LocationManager.Combine(legacyProfilePath, "Legacy", Path.GetFileName(profile)));
-			}
-			else
-			{
-				Log.Error($"Could not load the profile: '{profile}'");
+				File.Move(profilePath, LocationManager.Combine(legacyProfilePath, "Legacy", Path.GetFileName(profilePath)));
 			}
 		}
+		else
+		{
+			Log.Error($"Could not load the profile: '{profilePath}'");
+		}
+
+		return newProfile;
 	}
 
 	private static void CentralManager_ContentLoaded()

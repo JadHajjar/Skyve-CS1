@@ -34,7 +34,7 @@ public partial class PC_ModUtilities : PanelContent
 		CentralManager.ModInformationUpdated += RefreshModIssues;
 
 		DD_BOB.StartingFolder = LocationManager.AppDataPath;
-		DD_Missing.StartingFolder = DD_Unused.StartingFolder = Path.Combine(LocationManager.AppDataPath, "Report", "LoadingScreenMod");
+		DD_Missing.StartingFolder = DD_Unused.StartingFolder = LsmUtil.GetReportFolder();
 		DD_Missing.ValidExtensions = DD_Unused.ValidExtensions = new[] { ".htm", ".html" };
 
 		SlickTip.SetTo(B_LoadCollection, "LoadCollectionTip");
@@ -153,7 +153,7 @@ public partial class PC_ModUtilities : PanelContent
 		Form.PushPanel(null, new PC_MissingLsmPackages(assets.ToList()));
 	}
 
-	private bool LSMDragDrop_ValidFile(string arg)
+	private bool LSMDragDrop_ValidFile(object sender, string arg)
 	{
 		return LsmUtil.IsValidLsmReportFile(arg);
 	}
@@ -185,7 +185,7 @@ public partial class PC_ModUtilities : PanelContent
 		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
 	}
 
-	private bool DD_BOB_ValidFile(string arg)
+	private bool DD_BOB_ValidFile(object sender, string arg)
 	{
 		return Path.GetExtension(arg).ToLower() == ".xml";
 	}

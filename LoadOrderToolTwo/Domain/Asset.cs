@@ -4,6 +4,7 @@ using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,10 @@ public class Asset : IPackage
 
 	public Asset(Package package, string crpPath)
 	{
-		FileName = crpPath;
+		FileName = crpPath.FormatPath();
 		Package = package;
-		FileSize = new FileInfo(crpPath).Length;
-		LocalTime = File.GetLastWriteTimeUtc(crpPath);
+		FileSize = new FileInfo(FileName).Length;
+		LocalTime = File.GetLastWriteTimeUtc(FileName);
 
 		if (AssetsUtil.AssetInfoCache.TryGetValue(FileName, out var asset))
 		{
@@ -30,7 +31,7 @@ public class Asset : IPackage
 		}
 		else
 		{
-			Name = Path.GetFileNameWithoutExtension(crpPath).FormatWords();
+			Name = Path.GetFileNameWithoutExtension(FileName).FormatWords();
 			_assetTags = new string[0];
 		}
 	}

@@ -47,7 +47,7 @@ internal class AssetsUtil
 		{
 			if (item.Path is not null)
 			{
-				ExcludedHashSet.Add(IOUtil.ToRealPath(item.Path)!);
+				ExcludedHashSet.Add(item.Path);
 			}
 		}
 
@@ -130,7 +130,7 @@ internal class AssetsUtil
 		}
 
 		_config.Assets = ExcludedHashSet
-				.Select(x => new AssetInfo { Path = IOUtil.ToVirtualPath(x) })
+				.Select(x => new AssetInfo { Path = x })
 				.ToArray();
 
 		_config.Serialize();
@@ -148,14 +148,14 @@ internal class AssetsUtil
 
 	internal static Bitmap? GetIcon(Asset asset)
 	{
-		//var fileName = Path.Combine(LocationManager.LotAppDataPath, "AssetPictures");
+		//var fileName = LocationManager.Combine(LocationManager.LotAppDataPath, "AssetPictures");
 
 		//if (asset.SteamId > 0)
 		//{
-		//	fileName = Path.Combine(fileName, asset.SteamId.ToString());
+		//	fileName = LocationManager.Combine(fileName, asset.SteamId.ToString());
 		//}
 
-		//fileName = Path.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
+		//fileName = LocationManager.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
 
 		//if (File.Exists(fileName))
 		//{
