@@ -320,6 +320,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			, new SlickStripItem(Locale.MovePackageToLocalFolder, () => ContentUtil.MoveToLocalFolder(item), Properties.Resources.I_Local_16, item.Workshop)
 			, new SlickStripItem(item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, () => AskThenDelete(item), Properties.Resources.I_Disposable_16, !item.Workshop && !item.BuiltIn)
 			, new SlickStripItem(Locale.UnsubscribePackage, async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true), Properties.Resources.I_Steam_16, item.Workshop && !item.BuiltIn)
+			, new SlickStripItem(Locale.OtherProfiles, () => { }, Properties.Resources.I_ProfileSettings_16, fade: true)
+			, new SlickStripItem(Locale.IncludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, tab: 1)
+			, new SlickStripItem(Locale.ExcludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, tab: 1)
 			, new SlickStripItem(Locale.Copy, () => { }, Properties.Resources.I_Copy_16, item.Workshop, fade: true)
 			, new SlickStripItem(Locale.CopyWorkshopLink, () => Clipboard.SetText(item.SteamPage), null, item.Workshop, tab: 1)
 			, new SlickStripItem(Locale.CopyWorkshopId, () => Clipboard.SetText(item.SteamId.ToString()), null, item.Workshop, tab: 1)
@@ -428,7 +431,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		rects.VersionRect = DrawLabel(e, versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.BottomLeft, isVersion);
 		labelRect.X += Padding.Left + rects.VersionRect.Width;
 
-		var date = e.Item.ServerTime.If(DateTime.MinValue, e.Item.LocalTime).ToLocalTime();
+		var date = (e.Item.ServerTime == DateTime.MinValue ? e.Item.LocalTime : e.Item.ServerTime).ToLocalTime();
 		var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
 		rects.DateRect = DrawLabel(e, dateText, Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true);
 		labelRect.X += Padding.Left + rects.DateRect.Width;

@@ -69,6 +69,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Lists\GenericPackageListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,10 +128,6 @@
 
 	<ItemGroup>
 	  <Content Include="Resources\LOT2.ico" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Domain\Steam\Markdown\" />
 	</ItemGroup>
 
 	<ItemGroup>

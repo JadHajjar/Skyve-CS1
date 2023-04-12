@@ -59,14 +59,14 @@ internal class AssetsUtil
 		BuildAssetIndex();
 	}
 
-	public static IEnumerable<Asset> GetAssets(Package package)
+	public static IEnumerable<Asset> GetAssets(Package package, bool withSubDirectories = true)
 	{
 		if (!Directory.Exists(package.Folder))
 		{
 			yield break;
 		}
 
-		var files = Directory.GetFiles(package.Folder, $"*.crp", SearchOption.AllDirectories);
+		var files = Directory.GetFiles(package.Folder, $"*.crp", withSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
 
 		foreach (var file in files)
 		{

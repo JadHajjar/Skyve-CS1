@@ -40,15 +40,24 @@ internal class PackageWatcher : FileSystemWatcher
 
 		var path = GetFirstFolderOrFileName(e.FullPath, Path);
 
-		if (path != Path || AllowSelf)
+		if (path != Path)
 		{
 			_delayedUpdate.Run(path, TriggerUpdate);
+		}
+		else if (AllowSelf)
+		{
+			_delayedUpdate.Run(path, TriggerSelfUpdate);
 		}
 	}
 
 	private void TriggerUpdate(string path)
 	{
-		ContentUtil.ContentUpdated(path, false, Workshop);
+		ContentUtil.ContentUpdated(path, false, Workshop, false);
+	}
+
+	private void TriggerSelfUpdate(string path)
+	{
+		ContentUtil.ContentUpdated(path, false, Workshop, true);
 	}
 
 	public string GetFirstFolderOrFileName(string filePath, string sourceFolder)

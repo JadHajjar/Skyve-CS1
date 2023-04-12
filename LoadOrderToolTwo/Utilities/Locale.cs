@@ -266,4 +266,6 @@ internal class Locale : LocaleHelper
 	public static string FailedToOpenTC => _instance.GetText(nameof(FailedToOpenTC));
 	public static string FailedToDeleteItem => _instance.GetText(nameof(FailedToDeleteItem));
 	public static string DeleteAsset => _instance.GetText(nameof(DeleteAsset));
+	public static string IncludeThisItemInAllProfiles => _instance.GetText(nameof(IncludeThisItemInAllProfiles));
+	public static string ExcludeThisItemInAllProfiles => _instance.GetText(nameof(ExcludeThisItemInAllProfiles));
 }

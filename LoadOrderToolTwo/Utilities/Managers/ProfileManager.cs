@@ -3,6 +3,7 @@
 using LoadOrderShared;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 
 using SlickControls;
@@ -11,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using static LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
 public static class ProfileManager
@@ -458,7 +461,7 @@ public static class ProfileManager
 
 	internal static void TriggerAutoSave()
 	{
-		if (CurrentProfile.AutoSave && !disableAutoSave && !ApplyingProfile && !CentralManager.IsContentLoaded)
+		if (CurrentProfile.AutoSave && !disableAutoSave && !ApplyingProfile && CentralManager.IsContentLoaded)
 		{
 			CurrentProfile.Save();
 		}
@@ -820,5 +823,164 @@ public static class ProfileManager
 		}
 
 		return null;
+	}
+
+	internal static void SetIncludedForAll<T>(T item, bool value) where T : IPackage
+	{
+		try
+		{
+			if (_watcher is not null)
+			{
+				_watcher.EnableRaisingEvents = false;
+			}
+
+			if (item is Mod mod)
+			{
+				var profileMod = new Profile.Mod(mod);
+
+				foreach (var profile in Profiles.Skip(1))
+				{
+					SetIncludedFor(value, profileMod, profile);
+				}
+			}
+			else if (item is Asset asset)
+			{
+				var profileAsset = new Profile.Asset(asset);
+
+				foreach (var profile in Profiles.Skip(1))
+				{
+					SetIncludedFor(value, profileAsset, profile);
+				}
+			}
+			else if (item is Package package)
+			{
+				var profileMod = package.Mod is null ? null : new Profile.Mod(package.Mod);
+				var assets = package.Assets?.Select(x => new Profile.Asset(x)).ToList() ?? new();
+
+				foreach (var profile in Profiles.Skip(1))
+				{
+					SetIncludedFor(value, profileMod, assets, profile);
+				}
+			}
+		}
+		catch (Exception ex) { Log.Exception(ex, $"Failed to apply included status '{value}' to package: '{item}'"); }
+		finally
+		{
+			if (_watcher is not null)
+			{
+				_watcher.EnableRaisingEvents = true;
+			}
+		}
+	}
+
+	private static void SetIncludedFor(bool value, Profile.Mod? profileMod, List<Profile.Asset> assets, Profile profile)
+	{
+		if (value)
+		{
+			if (profileMod is not null)
+			{
+				if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+				{
+					profile.Mods.Add(profileMod);
+				}
+			}
+
+			if (assets.Count > 0)
+			{
+				var assetsToAdd = new List<Profile.Asset>(assets);
+
+				foreach (var pa in profile.Assets)
+				{
+					foreach (var profileAsset in assetsToAdd)
+					{
+						if (pa.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)
+						{
+							assetsToAdd.Remove(profileAsset);
+							break;
+						}
+					}
+
+				}
+
+				profile.Assets.AddRange(assetsToAdd);
+			}
+		}
+		else
+		{
+			if (profileMod is not null)
+			{
+				profile.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+			}
+
+			if (assets.Count > 0)
+			{
+				profile.Assets.RemoveAll(x => assets.Any(profileAsset => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false));
+			}
+		}
+
+		Save(profile);
+	}
+
+	private static void SetIncludedFor(bool value, Profile.Asset profileAsset, Profile profile)
+	{
+		if (value)
+		{
+			if (!profile.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			{
+				profile.Assets.Add(profileAsset);
+			}
+		}
+		else
+		{
+			profile.Assets.RemoveAll(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+		}
+
+		Save(profile);
+	}
+
+	private static void SetIncludedFor(bool value, Profile.Mod profileMod, Profile profile)
+	{
+		if (value)
+		{
+			if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			{
+				profile.Mods.Add(profileMod);
+			}
+		}
+		else
+		{
+			profile.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+		}
+
+		Save(profile);
+	}
+
+	internal static bool IsPackageIncludedInProfile(Package package, Profile profile)
+	{
+		var profileMod = package.Mod is null ? null : new Profile.Mod(package.Mod);
+		var assets = package.Assets?.Select(x => new Profile.Asset(x)).ToList() ?? new();
+
+		if (profileMod is not null)
+		{
+			if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+				return false;
+		}
+
+		if (assets.Count > 0)
+		{
+			if (!assets.All(profileAsset => profile.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
+				return false;
+		}
+
+		return true;
+	}
+
+	internal static void SetIncludedFor(Package package, Profile profile, bool value)
+	{
+		var profileMod = package.Mod is null ? null : new Profile.Mod(package.Mod);
+		var assets = package.Assets?.Select(x => new Profile.Asset(x)).ToList() ?? new();
+
+		SetIncludedFor(value, profileMod, assets, profile);
+
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -20,7 +19,7 @@ public class BBCode
 
 	private static Component GenerateComponent(Component component, string text)
 	{
-		var tags = Regex.Matches(text, @"\[(\w+)(=.+?)?\](.+?)\[\/\1]", RegexOptions.Singleline);
+		var tags = Regex.Matches(text, @"\[(\w+)(=.+?)?\](.*?)\[\/\1]", RegexOptions.Singleline);
 		component.Children = new List<Component>();
 		var index = 0;
 
@@ -30,23 +29,33 @@ public class BBCode
 			return component;
 		}
 
-		for (var tag = 0; tag < tags.Count; tag++)
+		if (component is List)
 		{
-			var subText = text.Substring(index, tags[tag].Index - index);
-
-			if (subText.Length != 0)
+			foreach (var item in List.SplitChildren(text))
 			{
-				component.Children.Add(new PlainText { Text = subText });
+				component.Children.Add(GenerateComponent(new(), item));
+			}
+		}
+		else
+		{
+			for (var tag = 0; tag < tags.Count; tag++)
+			{
+				var subText = text.Substring(index, tags[tag].Index - index);
+
+				if (subText.Length != 0)
+				{
+					component.Children.Add(new PlainText { Text = subText });
+				}
+
+				component.Children.Add(GenerateComponent(GetComponent(tags[tag]), tags[tag].Groups[3].Value));
+
+				index = tags[tag].Index + tags[tag].Length;
 			}
 
-			component.Children.Add(GenerateComponent(GetComponent(tags[tag]), tags[tag].Groups[3].Value));
-
-			index = tags[tag].Index + tags[tag].Length;
-		}
-
-		if (index < text.Length)
-		{
-			component.Children.Add(new PlainText { Text = text.Substring(index) });
+			if (index < text.Length)
+			{
+				component.Children.Add(new PlainText { Text = text.Substring(index) });
+			}
 		}
 
 		return component;
@@ -54,7 +63,7 @@ public class BBCode
 
 	private static Component GetComponent(Match match)
 	{
-		Component component = match.Groups[1].Value switch
+		Component component = match.Groups[1].Value.ToLower() switch
 		{
 			"u" => new Underline(),
 			"i" => new Italic(),
@@ -68,9 +77,10 @@ public class BBCode
 			"noparse" => new NoParse(),
 			"code" => new Code(),
 			"quote" => new Quote(),
-			"olist" => new List(),
-			"list" => new List(),
+			"olist" => new List(true),
+			"list" => new List(false),
 			"img" => new Image(),
+			"hr" => new Line(),
 			_ => new PlainText(),
 		};
 

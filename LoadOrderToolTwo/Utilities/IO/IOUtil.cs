@@ -57,7 +57,7 @@ internal static class IOUtil
 			return null;
 		}
 
-		if (LocationManager.Platform is not Platform.Linux)
+		//if (LocationManager.Platform is not Platform.Linux)
 		{
 			return path;
 		}
@@ -76,7 +76,7 @@ internal static class IOUtil
 			return null;
 		}
 
-		if (LocationManager.Platform is not Platform.Linux)
+		//if (LocationManager.Platform is not Platform.Linux)
 		{
 			return path;
 		}
@@ -106,18 +106,22 @@ internal static class IOUtil
 
 	public static string RunCommandAndGetOutput(string scriptFilePath)
 	{
-		// Create a new process object
-		var process = new Process();
-		process.StartInfo.FileName = "wine";
-		process.StartInfo.Arguments = "bash " + scriptFilePath;
-		process.StartInfo.UseShellExecute = false;
+		Process process = new Process();
+		process.StartInfo.CreateNoWindow = true;
+		process.StartInfo.RedirectStandardError = true;
+		process.StartInfo.RedirectStandardInput = true;
 		process.StartInfo.RedirectStandardOutput = true;
+		process.StartInfo.UseShellExecute = false;
+		process.StartInfo.FileName = Environment.GetEnvironmentVariable("SHELL");
+		process.StartInfo.Arguments = "-s";
 
-		// Start the process
+		process.EnableRaisingEvents = true;
 		process.Start();
 
 		// Read the output from the script
 		var output = process.StandardOutput.ReadToEnd();
+
+		process.StandardInput.WriteLine(scriptFilePath);
 
 		// Wait for the process to exit
 		process.WaitForExit();

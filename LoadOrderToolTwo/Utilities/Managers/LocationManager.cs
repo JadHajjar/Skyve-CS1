@@ -9,6 +9,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -133,6 +134,9 @@ internal static class LocationManager
 		SteamPath = _folderSettings.SteamPath.FormatPath();
 		VirtualGamePath = _folderSettings.VirtualGamePath.FormatPath();
 		VirtualAppDataPath = _folderSettings.VirtualAppDataPath.FormatPath();
+
+		var field = typeof(Path).GetField(nameof(Path.DirectorySeparatorChar), BindingFlags.Static | BindingFlags.Public);
+		field.SetValue(null, PathSeparator[0]);
 
 		Log.Info("Folder Settings:\r\n" +
 			$"Platform: {Platform}\r\n" +
@@ -293,6 +297,9 @@ internal static class LocationManager
 
 			externalConfig.Save();
 
+			var field = typeof(Path).GetField(nameof(Path.DirectorySeparatorChar), BindingFlags.Static | BindingFlags.Public);
+			field.SetValue(null, PathSeparator[0]);
+
 			if (File.Exists(Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(Combine(LotAppDataPath, "LoadOrderConfig.xml")))
 			{
 				ExtensionClass.CopyFile(Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), Combine(LotAppDataPath, "LoadOrderConfig.xml"), true);
@@ -321,13 +328,13 @@ internal static class LocationManager
 			var scriptPath = Combine(settings.AppDataPath, "which_steam.sh");
 			var scriptVirtualPath = Combine(settings.VirtualAppDataPath, "which_steam.sh");
 
-			File.WriteAllText(scriptPath, "#!/bin/bash\r\n# set -u\r\n\r\nchecklist=\"steamxxx Steam steam steam-runtime steamyyy steam cccccc\"\r\n\r\nfor app in $checklist\r\ndo\r\n    # echo \"checking $app -\"\r\n    steam_app=$(which $app  2>/dev/null)\r\n    if [ $? -eq 0 ]; then\r\n        echo \"$steam_app\"\r\n        exit 0\r\n    fi\r\ndone\r\n\r\necho \"not found in path\"\r\n\r\nexit 1");
-
-			try
-			{
-				settings.SteamPath = IOUtil.RunCommandAndGetOutput(scriptPath);
-			}
-			finally { File.Delete(scriptPath); }
+			//File.WriteAllText(scriptPath, "#!/bin/bash\r\n# set -u\r\n\r\nchecklist=\"steamxxx Steam steam steam-runtime steamyyy steam cccccc\"\r\n\r\nfor app in $checklist\r\ndo\r\n    # echo \"checking $app -\"\r\n    steam_app=$(which $app  2>/dev/null)\r\n    if [ $? -eq 0 ]; then\r\n        echo \"$steam_app\"\r\n        exit 0\r\n    fi\r\ndone\r\n\r\necho \"not found in path\"\r\n\r\nexit 1");
+			
+			//try
+			//{
+				settings.SteamPath = IOUtil.RunCommandAndGetOutput("which steam");
+			//}
+			//finally { File.Delete(scriptPath); }
 		}
 
 		if (settings.Platform is Platform.MacOSX)

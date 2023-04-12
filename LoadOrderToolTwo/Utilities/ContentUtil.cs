@@ -117,7 +117,16 @@ internal class ContentUtil
 		foreach (var folder in addonsAssetsPath)
 		{
 			Log.Info($"Looking for packages in: '{folder}'");
-			getPackage(folder, false, false);
+
+			if (Directory.Exists(folder))
+			{
+				foreach (var subFolder in Directory.GetDirectories(folder))
+				{
+					getPackage(subFolder, false, false);
+				}
+			}
+
+			getPackage(folder, false, false, false);
 		}
 
 		if (Directory.Exists(gameModsPath))
@@ -155,7 +164,7 @@ internal class ContentUtil
 
 		return packages;
 
-		void getPackage(string folder, bool builtIn, bool workshop)
+		void getPackage(string folder, bool builtIn, bool workshop, bool withSubDirectories = true)
 		{
 			if (!Directory.Exists(folder))
 			{
@@ -166,7 +175,7 @@ internal class ContentUtil
 
 			var package = new Package(folder, builtIn, workshop);
 
-			package.Assets = AssetsUtil.GetAssets(package).ToArray();
+			package.Assets = AssetsUtil.GetAssets(package, withSubDirectories).ToArray();
 			package.Mod = ModsUtil.GetMod(package);
 
 			if (package.Assets.Length != 0 || package.Mod != null)
@@ -179,7 +188,7 @@ internal class ContentUtil
 		}
 	}
 
-	internal static void ContentUpdated(string path, bool builtIn, bool workshop)
+	internal static void ContentUpdated(string path, bool builtIn, bool workshop, bool self)
 	{
 		lock (_contentUpdateLock)
 		{
@@ -197,29 +206,29 @@ internal class ContentUtil
 
 			if (existingPackage != null)
 			{
-				RefreshPackage(existingPackage);
+				RefreshPackage(existingPackage, self);
 			}
 			else
 			{
-				AddNewPackage(path, builtIn, workshop);
+				AddNewPackage(path, builtIn, workshop, self);
 			}
 		}
 	}
 
-	private static void AddNewPackage(string path, bool builtIn, bool workshop)
+	private static void AddNewPackage(string path, bool builtIn, bool workshop, bool self)
 	{
 		if (workshop && !ulong.TryParse(Path.GetFileName(path), out _))
 		{ return; }
 
 		var package = new Package(path, builtIn, workshop);
 
-		package.Assets = AssetsUtil.GetAssets(package).ToArray();
+		package.Assets = AssetsUtil.GetAssets(package, !self).ToArray();
 		package.Mod = ModsUtil.GetMod(package);
 
 		CentralManager.AddPackage(package);
 	}
 
-	internal static void RefreshPackage(Package package)
+	internal static void RefreshPackage(Package package, bool self)
 	{
 		if (!Directory.Exists(package.Folder))
 		{
@@ -227,7 +236,7 @@ internal class ContentUtil
 			return;
 		}
 
-		package.Assets = AssetsUtil.GetAssets(package).ToArray();
+		package.Assets = AssetsUtil.GetAssets(package, !self).ToArray();
 		package.Mod = ModsUtil.GetMod(package);
 
 		if (!package.Workshop && package.Mod is null)

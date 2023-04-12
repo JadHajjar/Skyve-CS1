@@ -224,7 +224,7 @@ partial class PC_ContentList<T>
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 5);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 455);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 432);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(895, 2);
@@ -279,29 +279,28 @@ partial class PC_ContentList<T>
 			// 
 			this.tableLayoutPanel3.AutoSize = true;
 			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel3.ColumnCount = 2;
+			this.tableLayoutPanel3.ColumnCount = 3;
 			this.TLP_Main.SetColumnSpan(this.tableLayoutPanel3, 5);
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel3.Controls.Add(this.L_Duplicates, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.L_Counts, 1, 0);
-			this.tableLayoutPanel3.Controls.Add(this.L_FilterCount, 0, 1);
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel3.Controls.Add(this.L_Duplicates, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.L_Counts, 2, 0);
+			this.tableLayoutPanel3.Controls.Add(this.L_FilterCount, 0, 0);
 			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
 			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 409);
 			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 2;
+			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 46);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 23);
 			this.tableLayoutPanel3.TabIndex = 6;
 			// 
 			// L_Duplicates
 			// 
 			this.L_Duplicates.AutoSize = true;
 			this.L_Duplicates.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.L_Duplicates.Location = new System.Drawing.Point(3, 0);
+			this.L_Duplicates.Location = new System.Drawing.Point(64, 0);
 			this.L_Duplicates.Name = "L_Duplicates";
 			this.L_Duplicates.Size = new System.Drawing.Size(55, 23);
 			this.L_Duplicates.TabIndex = 2;
@@ -316,7 +315,6 @@ partial class PC_ContentList<T>
 			this.L_Counts.AutoSize = true;
 			this.L_Counts.Location = new System.Drawing.Point(837, 0);
 			this.L_Counts.Name = "L_Counts";
-			this.tableLayoutPanel3.SetRowSpan(this.L_Counts, 2);
 			this.L_Counts.Size = new System.Drawing.Size(55, 23);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
@@ -325,7 +323,7 @@ partial class PC_ContentList<T>
 			// L_FilterCount
 			// 
 			this.L_FilterCount.AutoSize = true;
-			this.L_FilterCount.Location = new System.Drawing.Point(3, 23);
+			this.L_FilterCount.Location = new System.Drawing.Point(3, 0);
 			this.L_FilterCount.Name = "L_FilterCount";
 			this.L_FilterCount.Size = new System.Drawing.Size(55, 23);
 			this.L_FilterCount.TabIndex = 2;

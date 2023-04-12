@@ -34,26 +34,37 @@ public partial class PC_PackagePage : PanelContent
 
 		P_Info.SetPackage(package);
 
-		//var c = new ItemListControl<IPackage>
-		//{
-		//	Dock = DockStyle.Fill
-		//};
-
-		//c.AddRange(Package.Assets!);
-
-		//if (Package.Mod != null)
-		//{
-		//	c.Add(Package.Mod);
-		//}
-
-		if (!string.IsNullOrWhiteSpace(package.SteamDescription))
+		var c = new ItemListControl<IPackage>
 		{
-			var c = new SteamDescriptionViewer(package.SteamDescription!);
+			Dock = DockStyle.Fill
+		};
 
-			T_Info.LinkedControl = c;
+		c.AddRange(Package.Assets!);
+
+		if (Package.Mod != null)
+		{
+			c.Add(Package.Mod);
 		}
 
+		T_Info.FillTab = true;
+		T_Info.LinkedControl = c;
+
+		//if (!string.IsNullOrWhiteSpace(package.SteamDescription))
+		//{
+		//	var c = new SteamDescriptionViewer(package.SteamDescription!);
+
+		//	T_Info.LinkedControl = c;
+		//}
+
 		T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
+
+		var pc = new OtherProfilePackage(package)
+		{
+			Dock = DockStyle.Fill
+		};
+
+		T_Profiles.FillTab = true;
+		T_Profiles.LinkedControl = pc;
 	}
 
 	public Package Package { get; }
