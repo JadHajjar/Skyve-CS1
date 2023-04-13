@@ -13,6 +13,7 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -44,7 +45,7 @@ public static class SteamUtil
 		Dlcs = cache ?? new();
 	}
 
-	public static bool IsSteamAvailable() => File.Exists(LocationManager.SteamPathWithExe);
+	public static bool IsSteamAvailable() => LocationManager.FileExists(LocationManager.SteamPathWithExe);
 
 	private static void SaveCache(Dictionary<ulong, SteamWorkshopItem> list)
 	{
@@ -115,7 +116,17 @@ public static class SteamUtil
 	{
 		var file = LocationManager.SteamPathWithExe;
 
-		IOUtil.Execute(file, args)?.WaitForExit();
+		if (LocationManager.Platform is Platform.Windows)
+		{
+			var process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(file));
+
+			if (process.Length == 0)
+			{
+				Notification.Create("", "",PromptIcons.Info, null).Show(Program.MainForm, 10);
+			}
+		}
+
+		IOUtil.Execute(file, args);
 	}
 
 	public static async Task<Dictionary<string, SteamUserEntry>> GetSteamUsers(List<string> steamId64s)

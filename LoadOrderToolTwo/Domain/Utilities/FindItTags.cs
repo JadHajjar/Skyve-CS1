@@ -32,7 +32,7 @@ public class CustomTagsLibrary
 
 			if (assetTags.Count == 0)
 			{
-				if (File.Exists(path))
+				if (LocationManager.FileExists(path))
 				{
 					ExtensionClass.DeleteFile(path);
 				}
@@ -68,7 +68,7 @@ public class CustomTagsLibrary
 
 			var path = LocationManager.Combine(LocationManager.AppDataPath, filename);
 
-			if (!File.Exists(path))
+			if (!LocationManager.FileExists(path))
 			{
 				return;
 			}

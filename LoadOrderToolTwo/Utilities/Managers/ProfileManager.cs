@@ -102,7 +102,7 @@ public static class ProfileManager
 
 		var profile = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? CentralManager.SessionSettings.CurrentProfile) + ".json");
 
-		if (!File.Exists(profile))
+		if (!LocationManager.FileExists(profile))
 		{
 			return null;
 		}
@@ -150,7 +150,7 @@ public static class ProfileManager
 		{
 			var newName = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
 
-			if (File.Exists(newName))
+			if (LocationManager.FileExists(newName))
 			{
 				Log.Info($"Profile '{newName}' already exists, skipping..");
 				continue;
@@ -441,6 +441,13 @@ public static class ProfileManager
 					asset.IsIncluded = false;
 				}
 
+#if DEBUG
+				Log.Debug($"unprocessedMods: {unprocessedMods.Count}\r\n" +
+					$"unprocessedAssets: {unprocessedAssets.Count}\r\n" +
+					$"missingMods: {missingMods.Count}\r\n" +
+					$"missingAssets: {missingAssets.Count}");
+#endif
+
 				if ((missingMods.Count > 0 || missingAssets.Count > 0) && Program.MainForm is not null)
 				{
 					UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
@@ -553,7 +560,7 @@ public static class ProfileManager
 				return;
 			}
 
-			if (!File.Exists(e.FullPath))
+			if (!LocationManager.FileExists(e.FullPath))
 			{
 				lock (_profiles)
 				{
@@ -706,12 +713,12 @@ public static class ProfileManager
 				return true;
 			}
 
-			if (File.Exists(newName))
+			if (LocationManager.FileExists(newName))
 			{
 				return false;
 			}
 
-			if (File.Exists(oldName))
+			if (LocationManager.FileExists(oldName))
 			{
 				File.Move(oldName, newName);
 
@@ -738,14 +745,14 @@ public static class ProfileManager
 		var startName = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, "New Profile.json");
 
 		// Check if the file with the proposed name already exists
-		if (File.Exists(startName))
+		if (LocationManager.FileExists(startName))
 		{
 			var extension = ".json";
 			var nameWithoutExtension = LocationManager.Combine(LocationManager.LotProfilesAppDataPath, "New Profile");
 			var counter = 1;
 
 			// Loop until a valid file name is found
-			while (File.Exists(startName))
+			while (LocationManager.FileExists(startName))
 			{
 				// Generate the new file name with the counter appended
 				startName = $"{nameWithoutExtension} ({counter}){extension}";

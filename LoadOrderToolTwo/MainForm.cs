@@ -159,7 +159,7 @@ public partial class MainForm : BasePanelForm
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		if (!File.Exists(LocationManager.Combine(LocationManager.CurrentDirectory, "Wake")))
+		if (!LocationManager.FileExists(LocationManager.Combine(LocationManager.CurrentDirectory, "Wake")))
 		{
 			return;
 		}

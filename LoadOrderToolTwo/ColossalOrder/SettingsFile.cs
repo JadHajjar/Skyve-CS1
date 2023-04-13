@@ -145,7 +145,7 @@ public class SettingsFile
 		}
 		//if (!this.m_UseCloud)
 		{
-			return File.Exists(pathName);
+			return LocationManager.FileExists(pathName);
 		}
 		//return PlatformService.cloud.Exists(this.pathName);
 	}
@@ -423,7 +423,9 @@ public class SettingsFile
 	{
 		if (!m_SettingsStringValues.TryGetValue(name, out var a) || a != val)
 		{
+#if DEBUG
 			Log.Debug("Setting " + name + " updated to " + val);
+#endif
 			m_SettingsStringValues[name] = val;
 			MarkDirty();
 		}
@@ -449,7 +451,9 @@ public class SettingsFile
 		{
 			if (!m_SettingsBoolValues.TryGetValue(name, out var flag) || flag != val)
 			{
+#if DEBUG
 				Log.Debug("Setting " + name + " updated to " + val);
+#endif
 				m_SettingsBoolValues[name] = val;
 				MarkDirty();
 			}
@@ -470,7 +474,9 @@ public class SettingsFile
 	{
 		if (!m_SettingsIntValues.TryGetValue(name, out var num) || num != val)
 		{
+#if DEBUG
 			Log.Debug("Setting " + name + " updated to " + val);
+#endif
 			m_SettingsIntValues[name] = val;
 			MarkDirty();
 		}
@@ -490,7 +496,9 @@ public class SettingsFile
 	{
 		if (!m_SettingsInputKeyValues.TryGetValue(name, out var value) || value != val)
 		{
+#if DEBUG
 			Log.Debug("Setting " + name + " updated to " + val);
+#endif
 			m_SettingsInputKeyValues[name] = val;
 			MarkDirty();
 		}
@@ -511,7 +519,9 @@ public class SettingsFile
 		if (!m_SettingsFloatValues.TryGetValue(name, out _) ||
 				Math.Abs(m_SettingsFloatValues[name] - val) > float.Epsilon)
 		{
+#if DEBUG
 			Log.Debug("Setting " + name + " updated to " + val);
+#endif
 			m_SettingsFloatValues[name] = val;
 			MarkDirty();
 		}

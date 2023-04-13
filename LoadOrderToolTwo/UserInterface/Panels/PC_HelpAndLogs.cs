@@ -133,11 +133,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenLogFolder_Click(object sender, EventArgs e)
 	{
-		try
-		{
-			PlatformUtil.OpenFolder(Path.GetDirectoryName(LogUtil.GameLogFile));
-		}
-		catch { }
+		PlatformUtil.OpenFolder(Path.GetDirectoryName(LogUtil.GameLogFile));
 	}
 
 	private void B_CopyLogFile_Click(object sender, EventArgs e)
@@ -147,11 +143,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_LotLog_Click(object sender, EventArgs e)
 	{
-		try
-		{
-			PlatformUtil.OpenFolder(Path.GetDirectoryName(Log.LogFilePath));
-		}
-		catch { }
+		PlatformUtil.OpenFolder(Path.GetDirectoryName(Log.LogFilePath));
 	}
 
 	private void B_LotLogCopy_Click(object sender, EventArgs e)
@@ -161,20 +153,12 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_Discord_Click(object sender, EventArgs e)
 	{
-		try
-		{
-			PlatformUtil.OpenUrl("https://discord.gg/E4k8ZEtRxd");
-		}
-		catch { }
+		PlatformUtil.OpenUrl("https://discord.gg/E4k8ZEtRxd");
 	}
 
 	private void B_Guide_Click(object sender, EventArgs e)
 	{
-		try
-		{
-			PlatformUtil.OpenUrl("https://bit.ly/40x93vk");
-		}
-		catch { }
+		PlatformUtil.OpenUrl("https://bit.ly/40x93vk");
 	}
 
 	private void B_ChangeLog_Click(object sender, EventArgs e)

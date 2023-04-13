@@ -1,16 +1,13 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Utilities;
-using LoadOrderToolTwo.Utilities.IO;
 
 using Microsoft.Win32;
 
 using System;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Security.AccessControl;
 using System.Text;
 using System.Windows.Forms;
 
@@ -58,7 +55,7 @@ internal static class LocationManager
 				return string.Empty;
 			}
 
-			return Combine(parent.FormatPath(), "workshop", "content", "255710");
+			return Combine(parent, "workshop", "content", "255710").FormatPath();
 		}
 	}
 
@@ -97,7 +94,7 @@ internal static class LocationManager
 	{
 		_folderSettings = ISave.Load<FolderSettings>(nameof(FolderSettings) + ".json");
 
-		CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+		CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath).FormatPath();
 
 		if (_folderSettings.GamePath is null)
 		{
@@ -148,6 +145,18 @@ internal static class LocationManager
 		}
 
 		return sb.ToString();
+	}
+
+	internal static bool FileExists(string? path)
+	{
+		if (Platform is not Platform.Windows)
+		{
+			try
+			{ return Directory.GetFiles(Path.GetDirectoryName(path).FormatPath(), Path.GetFileName(path)).Length != 0; }
+			catch { }
+		}
+
+		return File.Exists(path);
 	}
 
 	internal static void RunFirstTimeSetup()
@@ -257,12 +266,12 @@ internal static class LocationManager
 
 				if (file.Length > 0)
 				{
-					return Path.GetDirectoryName(file[0]);
+					return Path.GetDirectoryName(file[0]).FormatPath();
 				}
 			}
 		}
 
-		return settings.SteamPath;
+		return settings.SteamPath.FormatPath();
 	}
 
 	internal static void SetPaths(string gamePath, string appDataPath, string steamPath)

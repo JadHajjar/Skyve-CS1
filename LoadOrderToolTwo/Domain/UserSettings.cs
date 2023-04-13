@@ -23,4 +23,5 @@ internal class UserSettings
 	public bool HidePseudoMods { get; set; }
 	public bool ShowFolderSettings { get; set; }
     public bool AlwaysOpenFiltersAndActions { get; set; }
+	public bool OpenLinksInBrowser { get; set; }
 }

@@ -39,7 +39,7 @@ public static class LogUtil
 
 			foreach (var filePath in GetFilesForZip())
 			{
-				if (File.Exists(filePath))
+				if (LocationManager.FileExists(filePath))
 				{
 					zipArchive.CreateEntryFromFile(filePath, $"Other Files\\{Path.GetFileName(filePath)}");
 				}
@@ -76,7 +76,7 @@ public static class LogUtil
 
 	private static void AddMainFilesToZip(ZipArchive zipArchive)
 	{
-		if (!File.Exists(GameLogFile))
+		if (!LocationManager.FileExists(GameLogFile))
 		{
 			return;
 		}

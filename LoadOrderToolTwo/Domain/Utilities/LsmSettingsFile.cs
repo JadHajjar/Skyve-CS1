@@ -57,7 +57,7 @@ public class LsmSettingsFile
 	{
 		try
 		{
-			if (File.Exists(FILE_PATH))
+			if (LocationManager.FileExists(FILE_PATH))
 			{
 				return LoadOrderShared.SharedUtil.Deserialize<LsmSettingsFile>(FILE_PATH);
 			}

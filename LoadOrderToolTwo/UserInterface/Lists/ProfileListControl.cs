@@ -16,7 +16,13 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Lists;
 internal class ProfileListControl : SlickStackedListControl<Profile>
 {
+	private readonly Dictionary<DrawableItem<Profile>, Rectangles> _itemRects = new();
 	public IEnumerable<Profile> FilteredItems => SafeGetItems().Select(x => x.Item);
+
+	public event Action<Profile>? LoadProfile;
+	public event Action<Profile>? MergeProfile;
+	public event Action<Profile>? ExcludeProfile;
+	public event Action<Profile>? DisposeProfile;
 
 	public ProfileListControl()
 	{
@@ -69,33 +75,36 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 
 	protected override bool IsItemActionHovered(DrawableItem<Profile> item, Point location)
 	{
-		var rects = GetActionRectangles(item.Bounds);
+		var rects = _itemRects.TryGet(item);
 
 		if (rects.IncludedRect.Contains(location))
 		{
 			setTip(Locale.ExcludeInclude, rects.IncludedRect);
-			return true;
 		}
 		else if (rects.FolderRect.Contains(location))
 		{
 			setTip(Locale.ViewOnSteam, rects.FolderRect);
-			return true;
 		}
 
 		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, timeout: 20000, offset: new Point(rectangle.X, item.Bounds.Y));
 
-		return false;
+		return rects.Contain(location);
 	}
 
 	protected override void OnItemMouseClick(DrawableItem<Profile> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
-		var rects = GetActionRectangles(item.Bounds);
+		var rects = _itemRects.TryGet(item);
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
 			item.Item.IsFavorite = !item.Item.IsFavorite;
+		}
+
+		if (rects.LoadRect.Contains(e.Location))
+		{
+			LoadProfile?.Invoke(item.Item);
 		}
 
 		if (rects.FolderRect.Contains(e.Location))
@@ -127,7 +136,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 	protected override void OnPaintItem(ItemPaintEventArgs<Profile> e)
 	{
 		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
-		var rects = GetActionRectangles(e.ClipRectangle);
+		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.ClipRectangle);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
 		e.HoverState &= ~HoverState.Pressed;
@@ -176,6 +185,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 
 		SlickButton.DrawButton(e, rects.LoadRect, Locale.LoadProfile, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Import)), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 	}
+
 	private Rectangle DrawLabel(ItemPaintEventArgs<Profile> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
 	{
 		if (text == null)
@@ -224,7 +234,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		return rects;
 	}
 
-	struct Rectangles
+	private class Rectangles
 	{
 		internal Rectangle IncludedRect;
 		internal Rectangle IconRect;

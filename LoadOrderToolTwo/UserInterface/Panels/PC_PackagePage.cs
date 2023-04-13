@@ -107,6 +107,6 @@ public partial class PC_PackagePage : PanelContent
 
 	private void B_Folder_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenUrl(Package.Folder);
+		PlatformUtil.OpenFolder(Package.Folder);
 	}
 }

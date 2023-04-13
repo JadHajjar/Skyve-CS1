@@ -16,7 +16,7 @@ internal static class LsmUtil
 {
 	public static bool IsValidLsmReportFile(string filePath)
 	{
-		if (!File.Exists(filePath) || new FileInfo(filePath).Length > 50 * 1024 * 1024)
+		if (!LocationManager.FileExists(filePath) || new FileInfo(filePath).Length > 50 * 1024 * 1024)
 		{
 			return false;
 		}

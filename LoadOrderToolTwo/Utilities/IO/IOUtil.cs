@@ -16,18 +16,19 @@ internal static class IOUtil
 		{
 			exeFile = exeFile.FormatPath();
 
-			if (!File.Exists(exeFile))
+			if (!LocationManager.FileExists(exeFile))
 			{
 				Log.Error("Execute failed, could not find file: " + exeFile);
 
 				return null;
 			}
 
-			Log.Info("Executing: " + exeFile);
-
+#if DEBUG
+			Log.Debug($"Executing: {exeFile} {args}");
+#endif
 			var startInfo = new ProcessStartInfo
 			{
-				WorkingDirectory = Path.GetDirectoryName(exeFile),
+				WorkingDirectory = Path.GetDirectoryName(exeFile).FormatPath(),
 				FileName = exeFile,
 				Arguments = args,
 				WindowStyle = ProcessWindowStyle.Normal,

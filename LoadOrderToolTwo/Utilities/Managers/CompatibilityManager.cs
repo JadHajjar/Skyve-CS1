@@ -50,7 +50,7 @@ internal static class CompatibilityManager
 
 			var assetFile = LocationManager.Combine(compatibilityReport.Folder, "CompatibilityReportAssetCatalog.xml");
 
-			if (File.Exists(assetFile))
+			if (LocationManager.FileExists(assetFile))
 			{
 				using var reader = new FileStream(assetFile, FileMode.Open, FileAccess.Read);
 				var ser = new XmlSerializer(typeof(AssetCatalog));

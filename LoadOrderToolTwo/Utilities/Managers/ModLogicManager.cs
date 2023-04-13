@@ -114,7 +114,7 @@ internal class ModLogicManager
 
 	internal static bool IsPseudoMod(Mod mod)
 	{
-		if (File.Exists(LocationManager.Combine(mod.Folder, "ThemeMix.xml")))
+		if (LocationManager.FileExists(LocationManager.Combine(mod.Folder, "ThemeMix.xml")))
 			return true;
 
 		return false;

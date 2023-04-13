@@ -67,6 +67,11 @@ internal static class ModsUtil
 
 	internal static void SavePendingValues()
 	{
+#if DEBUG
+		Log.Debug("Saving pending mod values:\r\n" +
+			$"_includedLibrary {_includedLibrary._dictionary.Count}\r\n" +
+			$"_enabledLibrary {_enabledLibrary._dictionary.Count}");
+#endif
 		var saveSettings = _enabledLibrary.Any();
 
 		_includedLibrary.Save();
@@ -90,7 +95,7 @@ internal static class ModsUtil
 
 	internal static bool IsLocallyIncluded(Mod mod)
 	{
-		return !File.Exists(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+		return !LocationManager.FileExists(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 	}
 
 	internal static bool IsLocallyEnabled(Mod mod)
@@ -102,6 +107,9 @@ internal static class ModsUtil
 	{
 		if (ProfileManager.ApplyingProfile || CitiesManager.IsRunning())
 		{
+#if DEBUG
+			Log.Debug($"Delaying inclusion ({value}) for mod: {mod} (currently {IsLocallyIncluded(mod)}) ({mod.Folder})");
+#endif
 			_includedLibrary.SetValue(mod, value);
 		}
 		else
@@ -145,12 +153,21 @@ internal static class ModsUtil
 
 	internal static void SetLocallyIncluded(Mod mod, bool value)
 	{
+#if DEBUG
+		Log.Debug($"Applying Inclusion status ({value}) for mod: {mod} ({mod.Folder})");
+#endif
 		if ((value || ModLogicManager.IsRequired(mod)) && !ModLogicManager.IsForbidden(mod))
 		{
+#if DEBUG
+			Log.Debug($"Deleting the file ({LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
+#endif
 			ExtensionClass.DeleteFile(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 		}
 		else
 		{
+#if DEBUG
+			Log.Debug($"Creating the file ({LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
+#endif
 			File.WriteAllBytes(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
 		}
 

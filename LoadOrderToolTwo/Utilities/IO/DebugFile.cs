@@ -53,7 +53,7 @@ public abstract class DebugFile
 
 	public void EnsureDebugWritten()
 	{
-		if (!File.Exists(DebugFilePath))
+		if (!LocationManager.FileExists(DebugFilePath))
 		{
 			File.Copy(ResourceFilePath, DebugFilePath);
 		}
@@ -61,7 +61,7 @@ public abstract class DebugFile
 
 	public void EnsureBReleaseBackedup()
 	{
-		if (File.Exists(ReleaseFilePath))
+		if (LocationManager.FileExists(ReleaseFilePath))
 		{
 			return;
 		}
@@ -88,7 +88,7 @@ public abstract class DebugFile
 	{
 		try
 		{
-			if (File.Exists(ReleaseFilePath))
+			if (LocationManager.FileExists(ReleaseFilePath))
 			{
 				CopyFile(source: ReleaseFilePath, dest: FilePath);
 			}
@@ -109,7 +109,7 @@ public abstract class DebugFile
 	public bool? ReleaseIsUsed()
 	{
 		static bool Equal(string path1, string path2) =>
-			File.Exists(path1) && File.Exists(path2) && FilesEqual(path1, path2);
+			LocationManager.FileExists(path1) && LocationManager.FileExists(path2) && FilesEqual(path1, path2);
 		if (Equal(ReleaseFilePath, FilePath))
 		{
 			return true;
@@ -125,7 +125,7 @@ public abstract class DebugFile
 			return false;
 		}
 
-		if (!File.Exists(ReleaseFilePath))
+		if (!LocationManager.FileExists(ReleaseFilePath))
 		{
 			return true;
 		}

@@ -24,7 +24,12 @@ public partial class PC_ProfileList : PanelContent
 
 		DD_Sorting.Height = TB_Search.Height = 0;
 
-		panel1.Controls.Add(new ProfileListControl() { Dock = DockStyle.Fill});
+		var ctrl = new ProfileListControl() { Dock = DockStyle.Fill };
+		ctrl.LoadProfile += Ctrl_LoadProfile;
+		ctrl.MergeProfile += Ctrl_MergeProfile;
+		ctrl.ExcludeProfile += Ctrl_ExcludeProfile;
+		ctrl.DisposeProfile += Ctrl_DisposeProfile;
+		panel1.Controls.Add(ctrl);
 
 		//foreach (var profile in ProfileManager.Profiles)
 		//{

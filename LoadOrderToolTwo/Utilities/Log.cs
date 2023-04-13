@@ -70,7 +70,7 @@ public static class Log
 
 			try
 			{
-				if (File.Exists(LogFilePath))
+				if (LocationManager.FileExists(LogFilePath))
 				{
 					ExtensionClass.DeleteFile(LogFilePath);
 				}
@@ -108,6 +108,7 @@ public static class Log
 	public const int MAX_WAIT_ID = 1000;
 	private static readonly DateTime[] times_ = new DateTime[MAX_WAIT_ID];
 
+#if DEBUG
 	[Conditional("DEBUG")]
 	public static void DebugWait(string message, int id, float seconds = 0.5f, bool copyToGameLog = true)
 	{
@@ -152,6 +153,7 @@ public static class Log
 	{
 		LogImpl(message, LogLevel.Debug, copyToGameLog);
 	}
+#endif
 
 	/// <summary>
 	/// Logs info message.
@@ -309,7 +311,9 @@ internal static class LogExtensions
 	/// </summary>
 	internal static T LogRet<T>(this T a, string m)
 	{
+#if DEBUG
 		Utilities.Log.Debug(m + a);
+#endif
 		return a;
 	}
 

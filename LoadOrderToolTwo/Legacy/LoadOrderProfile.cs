@@ -185,7 +185,7 @@ public class LoadOrderProfile
 		profile.LsmSettings.LoadEnabled = LoadEnabled;
 		profile.LsmSettings.LoadUsed = LoadUsed;
 		profile.LsmSettings.SkipFile = SkipFilePathFinal;
-		profile.LsmSettings.UseSkipFile = File.Exists(SkipFilePathFinal);
+		profile.LsmSettings.UseSkipFile = LocationManager.FileExists(SkipFilePathFinal);
 
 		return profile;
 	}

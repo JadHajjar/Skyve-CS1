@@ -77,7 +77,7 @@ public class Mod : IPackage
 		return
 			left is null ? right is null :
 			right is null ? left is null :
-			EqualityComparer<Mod>.Default.Equals(left, right);
+			left.Equals(right);
 	}
 
 	public static bool operator !=(Mod? left, Mod? right)

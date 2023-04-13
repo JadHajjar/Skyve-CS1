@@ -19,9 +19,13 @@ public abstract class SingletonLite<T>
 					lock (lockObject)
 					{
 						sInstance = new T();
+#if DEBUG
 						Log.Debug("Created singleton of type " + typeof(T).Name + ". calling Awake() ...");
 						sInstance.Awake();
 						Log.Debug("Awake() finished for " + typeof(T).Name);
+#else
+						sInstance.Awake();
+#endif
 					}
 				}
 				return sInstance;

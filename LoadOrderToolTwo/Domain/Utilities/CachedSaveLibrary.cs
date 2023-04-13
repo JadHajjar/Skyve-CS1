@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace LoadOrderToolTwo.Domain.Utilities;
 internal class CachedSaveLibrary<TItem, TKey, TValue> where TItem : CachedSaveItem<TKey, TValue>
 {
-	private readonly Dictionary<TKey, TItem> _dictionary = new();
+	internal readonly Dictionary<TKey, TItem> _dictionary = new();
 
 	public CachedSaveLibrary()
 	{

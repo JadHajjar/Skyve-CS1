@@ -32,6 +32,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_HelpLogs = new SlickControls.RoundedGroupTableLayoutPanel();
+			this.B_ChangeLog = new SlickControls.SlickButton();
 			this.B_SaveZip = new SlickControls.SlickButton();
 			this.B_CopyZip = new SlickControls.SlickButton();
 			this.B_Discord = new SlickControls.SlickButton();
@@ -48,7 +49,6 @@ partial class PC_HelpAndLogs
 			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.B_ChangeLog = new SlickControls.SlickButton();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.TLP_HelpLogs.SuspendLayout();
@@ -141,6 +141,20 @@ partial class PC_HelpAndLogs
 			this.TLP_HelpLogs.TabIndex = 0;
 			this.TLP_HelpLogs.Text = "HelpSupport";
 			// 
+			// B_ChangeLog
+			// 
+			this.B_ChangeLog.AutoSize = true;
+			this.B_ChangeLog.ColorShade = null;
+			this.B_ChangeLog.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ChangeLog.Dock = System.Windows.Forms.DockStyle.Top;
+			this.B_ChangeLog.Location = new System.Drawing.Point(10, 113);
+			this.B_ChangeLog.Name = "B_ChangeLog";
+			this.B_ChangeLog.Size = new System.Drawing.Size(325, 30);
+			this.B_ChangeLog.SpaceTriggersClick = true;
+			this.B_ChangeLog.TabIndex = 2;
+			this.B_ChangeLog.Text = "OpenChangelog";
+			this.B_ChangeLog.Click += new System.EventHandler(this.B_ChangeLog_Click);
+			// 
 			// B_SaveZip
 			// 
 			this.B_SaveZip.AutoSize = true;
@@ -151,7 +165,7 @@ partial class PC_HelpAndLogs
 			this.B_SaveZip.Name = "B_SaveZip";
 			this.B_SaveZip.Size = new System.Drawing.Size(325, 14);
 			this.B_SaveZip.SpaceTriggersClick = true;
-			this.B_SaveZip.TabIndex = 3;
+			this.B_SaveZip.TabIndex = 4;
 			this.B_SaveZip.Text = "LogZipFile";
 			this.B_SaveZip.Click += new System.EventHandler(this.B_SaveZip_Click);
 			// 
@@ -165,7 +179,7 @@ partial class PC_HelpAndLogs
 			this.B_CopyZip.Name = "B_CopyZip";
 			this.B_CopyZip.Size = new System.Drawing.Size(325, 14);
 			this.B_CopyZip.SpaceTriggersClick = true;
-			this.B_CopyZip.TabIndex = 2;
+			this.B_CopyZip.TabIndex = 3;
 			this.B_CopyZip.Text = "LogZipCopy";
 			this.B_CopyZip.Click += new System.EventHandler(this.B_CopyZip_Click);
 			// 
@@ -372,20 +386,6 @@ partial class PC_HelpAndLogs
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(1161, 702);
 			this.panel1.TabIndex = 16;
-			// 
-			// B_ChangeLog
-			// 
-			this.B_ChangeLog.AutoSize = true;
-			this.B_ChangeLog.ColorShade = null;
-			this.B_ChangeLog.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ChangeLog.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_ChangeLog.Location = new System.Drawing.Point(10, 113);
-			this.B_ChangeLog.Name = "B_ChangeLog";
-			this.B_ChangeLog.Size = new System.Drawing.Size(325, 30);
-			this.B_ChangeLog.SpaceTriggersClick = true;
-			this.B_ChangeLog.TabIndex = 20;
-			this.B_ChangeLog.Text = "OpenChangelog";
-			this.B_ChangeLog.Click += new System.EventHandler(this.B_ChangeLog_Click);
 			// 
 			// PC_HelpAndLogs
 			// 

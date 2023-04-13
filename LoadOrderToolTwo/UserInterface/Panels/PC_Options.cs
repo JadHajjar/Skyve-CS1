@@ -61,6 +61,8 @@ public partial class PC_Options : PanelContent
 		DD_Language.Items = LocaleHelper.GetAvailableLanguages().Select(lang => new CultureInfo(lang)).ToArray();
 		DD_Language.SelectedItem = DD_Language.Items.FirstOrDefault(x => x.IetfLanguageTag == LocaleHelper.CurrentCulture.IetfLanguageTag) ?? DD_Language.Items[0];
 		DD_Language.SelectedItemChanged += DD_Language_SelectedItemChanged;
+
+		TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
 	}
 
 	private void ApplyCurrentSettings()
@@ -74,6 +76,11 @@ public partial class PC_Options : PanelContent
 					.GetValue(CentralManager.SessionSettings.UserSettings);
 
 				SlickTip.SetTo(cb, LocaleHelper.GetGlobalText($"{cb.Text}_Tip"));
+
+				if (!IsHandleCreated)
+				{
+					cb.CheckChanged += CB_CheckChanged;
+				}
 			}
 		}
 	}
@@ -167,9 +174,9 @@ public partial class PC_Options : PanelContent
 			.SetValue(CentralManager.SessionSettings.UserSettings, cb.Checked);
 
 		CentralManager.SessionSettings.Save();
-	}
+    }
 
-	private void TB_FolderPath_TextChanged(object sender, EventArgs e)
+    private void TB_FolderPath_TextChanged(object sender, EventArgs e)
 	{
 		folderPathsChanged = true;
 	}
