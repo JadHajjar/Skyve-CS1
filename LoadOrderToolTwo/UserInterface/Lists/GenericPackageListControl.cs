@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -134,9 +135,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 		{
 			if (rects.SteamRect.Contains(e.Location))
 			{
-				try
-				{ Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={item.Item.SteamId}"); }
-				catch { }
+				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.Item.SteamId}");
 			}
 
 			else if (rects.SteamIdRect.Contains(e.Location))
@@ -147,9 +146,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 
 			else if (rects.AuthorRect.Contains(e.Location))
 			{
-				try
-				{ Process.Start($"{item.Item.Author?.ProfileUrl}myworkshopfiles"); }
-				catch { }
+				PlatformUtil.OpenUrl($"{item.Item.Author?.ProfileUrl}myworkshopfiles");
 				return;
 			}
 		}

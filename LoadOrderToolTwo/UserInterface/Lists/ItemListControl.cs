@@ -5,6 +5,7 @@ using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -394,9 +395,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	private void OpenSteamLink(string? url)
 	{
-		try
-		{ Process.Start(url); }
-		catch { }
+		PlatformUtil.OpenUrl(url);
 	}
 
 	private void OpenFolder(T item)
@@ -405,11 +404,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (item is Asset asset)
 			{
-				Process.Start("explorer.exe", $"/select, \"{asset.FileName}\"");
+				PlatformUtil.OpenFolder(asset.FileName);
 			}
 			else
 			{
-				Process.Start(item.Folder);
+				PlatformUtil.OpenFolder(item.Folder);
 			}
 		}
 		catch { }

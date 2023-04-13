@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -156,9 +157,7 @@ public partial class PC_ImportCollection : PanelContent
 
 	private void B_SteamPage_Click(object sender, System.EventArgs e)
 	{
-		try
-		{ Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={_id}"); }
-		catch { }
+		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={_id}");
 	}
 
 	private void T_Assets_TabSelected(object sender, System.EventArgs e)

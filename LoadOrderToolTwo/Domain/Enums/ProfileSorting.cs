@@ -2,6 +2,7 @@
 
 internal enum ProfileSorting
 {
+    LastUsed,
     LastEdit,
     Name,
     DateCreated,

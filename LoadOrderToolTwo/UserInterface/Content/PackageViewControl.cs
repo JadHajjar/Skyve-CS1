@@ -4,6 +4,7 @@ using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -105,7 +106,7 @@ internal class PackageViewControl : SlickImageControl
 			else if (Item != null)
 			{
 				try
-				{ Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={Item.PublishedFileID}"); }
+				{ PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={Item.PublishedFileID}"); }
 				catch { }
 			}
 		}

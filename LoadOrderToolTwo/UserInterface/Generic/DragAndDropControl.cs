@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -137,11 +138,7 @@ internal class DragAndDropControl : SlickControl
 			}
 			else if (fileRect.Contains(e.Location))
 			{
-				try
-				{
-					Process.Start("explorer.exe", $"/select, \"{SelectedFile}\"");
-				}
-				catch { }
+				PlatformUtil.OpenFolder(SelectedFile);
 
 				return;
 			}

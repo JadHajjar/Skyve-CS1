@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Lists;
@@ -52,9 +53,9 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
             setTip(Locale.ExcludeInclude, rects.IncludedRect);
             return true;
         }
-        else if (rects.SteamRect.Contains(location))
+        else if (rects.LoadRect.Contains(location))
         {
-            setTip(Locale.ViewOnSteam, rects.SteamRect);
+            setTip(Locale.LoadProfile, rects.LoadRect);
             return true;
         }
 
@@ -75,12 +76,10 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
             ProfileManager.SetIncludedFor(Package, item.Item, !isIncluded);
         }
 
-        //if (rects.SteamRect.Contains(e.Location))
-        //{
-        //    try
-        //    { Process.Start($"https://store.steampowered.com/app/{item.Item.Id}"); }
-        //    catch { }
-        //}
+        if (rects.LoadRect.Contains(e.Location))
+        {
+			ProfileManager.SetProfile(item.Item);
+		}
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -128,32 +127,25 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 
 		e.Graphics.DrawImage(icon.Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
-        var iconRectangle = rects.IconRect;
-        var textRect = rects.TextRect;
+        var iconColor = FormDesign.Design.IconColor;
 
-   //     if (iconImg is null)
-   //     {
-   //         using var authorIcon = Properties.Resources.I_DlcIcon.Color(FormDesign.Design.IconColor);
+        if (e.Item.Color != null)
+        {
+            iconColor = e.Item.Color.Value.GetTextColor();
 
-			//e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+			e.Graphics.FillRoundedRectangle(rects.IconRect.Gradient(e.Item.Color.Value, 1.5F), rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
+		}
 
-			//e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), iconRectangle, (int)(4 * UI.FontScale));
-   //         e.Graphics.FillRectangle(new SolidBrush(BackColor), iconRectangle.CenterR(iconRectangle.Height - 4, iconRectangle.Height - 4));
-   //         e.Graphics.DrawImage(authorIcon, iconRectangle.CenterR(iconRectangle.Height - 2, iconRectangle.Height - 2));
-   //     }
-   //     else
-   //     {
-   //         e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
-   //     }
+        using var profileIcon = e.Item.GetIcon();
 
-        e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawImage(profileIcon.Color(iconColor), rects.IconRect.CenterR(profileIcon.Size));
 
-        //if (e.Item.ReleaseDate != DateTime.MinValue)
-        //{
-        //    DrawLabel(e, CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.TopRight);
-        //}
+        e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
-        SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Steam)), null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		var assetRect = DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", Properties.Resources.I_Assets_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
+		DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", Properties.Resources.I_Mods_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0,0,assetRect.Width+Padding.Left,0), ContentAlignment.MiddleRight);
+
+		SlickButton.DrawButton(e, rects.LoadRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Import)), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
         if (!isIncluded)
         {
@@ -163,7 +155,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
         }
     }
 
-    private Rectangle DrawLabel(ItemPaintEventArgs<SteamDlc> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+    private Rectangle DrawLabel(ItemPaintEventArgs<Profile> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
     {
         if (text == null)
         {
@@ -198,18 +190,15 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 
     private Rectangles GetActionRectangles(Rectangle rectangle)
     {
-        var iconSize = rectangle.Height - Padding.Vertical;
         var rects = new Rectangles
         {
             IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
-            SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
+            LoadRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
         };
 
-        rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + 2 * Padding.Left).Align(new Size(iconSize * 460 / 215, iconSize), ContentAlignment.MiddleLeft);
+        rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + 2 * Padding.Left).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
 
-        rects.CenterRect = new Rectangle(rects.IconRect.X, rectangle.Y, rects.SteamRect.X - rects.IconRect.X, rectangle.Height);
-
-        rects.TextRect = rectangle.Pad(rects.IconRect.X + rects.IconRect.Width + Padding.Left, 0, rectangle.Width - rects.CenterRect.Right, 0);
+        rects.TextRect = new Rectangle(rects.IconRect.Right + Padding.Left, rectangle.Y, rects.LoadRect.X - rects.IconRect.Right - 2 * Padding.Left, rectangle.Height);
 
         return rects;
     }
@@ -218,15 +207,14 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
     {
         internal Rectangle IncludedRect;
         internal Rectangle IconRect;
+        internal Rectangle LoadRect;
         internal Rectangle TextRect;
-        internal Rectangle SteamRect;
-        internal Rectangle CenterRect;
 
         internal bool Contain(Point location)
         {
             return
                 IncludedRect.Contains(location) ||
-                SteamRect.Contains(location);
+                LoadRect.Contains(location);
         }
     }
 }

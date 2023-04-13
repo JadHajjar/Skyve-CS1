@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -95,7 +96,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		try
 		{
-			Process.Start("explorer.exe", $"/select, \"{fileName}\"");
+			PlatformUtil.OpenFolder(fileName);
 		}
 		catch { }
 	}
@@ -134,7 +135,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		try
 		{
-			Process.Start(Path.GetDirectoryName(LogUtil.GameLogFile));
+			PlatformUtil.OpenFolder(Path.GetDirectoryName(LogUtil.GameLogFile));
 		}
 		catch { }
 	}
@@ -148,7 +149,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		try
 		{
-			Process.Start(Path.GetDirectoryName(Log.LogFilePath));
+			PlatformUtil.OpenFolder(Path.GetDirectoryName(Log.LogFilePath));
 		}
 		catch { }
 	}
@@ -162,7 +163,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		try
 		{
-			Process.Start("https://discord.gg/E4k8ZEtRxd");
+			PlatformUtil.OpenUrl("https://discord.gg/E4k8ZEtRxd");
 		}
 		catch { }
 	}
@@ -171,7 +172,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		try
 		{
-			Process.Start("https://bit.ly/40x93vk");
+			PlatformUtil.OpenUrl("https://bit.ly/40x93vk");
 		}
 		catch { }
 	}

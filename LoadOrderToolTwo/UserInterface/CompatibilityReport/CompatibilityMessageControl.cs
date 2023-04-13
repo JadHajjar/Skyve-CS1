@@ -4,6 +4,7 @@ using Extensions;
 
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -300,7 +301,7 @@ internal class CompatibilityMessageControl : SlickControl
                 }
                 else
                 {
-                    Process.Start($"https://steamcommunity.com/workshop/filedetails/?id={item.SteamId}");
+                    PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.SteamId}");
                 }
             }
             catch { }

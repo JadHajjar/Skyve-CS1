@@ -2,6 +2,7 @@
 
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -77,9 +78,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
         if (rects.SteamRect.Contains(e.Location))
         {
-            try
-            { Process.Start($"https://store.steampowered.com/app/{item.Item.Id}"); }
-            catch { }
+            PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Item.Id}");
         }
     }
 

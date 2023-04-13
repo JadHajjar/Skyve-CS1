@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -201,7 +202,7 @@ public partial class PC_Options : PanelContent
 	{
 		try
 		{
-			Process.Start("https://crowdin.com/project/load-order-mod-2");
+			PlatformUtil.OpenUrl("https://crowdin.com/project/load-order-mod-2");
 		}
 		catch { }
 	}
@@ -210,7 +211,7 @@ public partial class PC_Options : PanelContent
 	{
 		try
 		{
-			Process.Start("https://discord.gg/E4k8ZEtRxd");
+			PlatformUtil.OpenUrl("https://discord.gg/E4k8ZEtRxd");
 		}
 		catch { }
 	}
@@ -219,7 +220,7 @@ public partial class PC_Options : PanelContent
 	{
 		try
 		{
-			Process.Start("https://bit.ly/40x93vk");
+			PlatformUtil.OpenUrl("https://bit.ly/40x93vk");
 		}
 		catch { }
 	}

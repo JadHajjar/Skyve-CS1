@@ -47,7 +47,11 @@ public static class ProfileManager
 		}
 	}
 
+	public static bool ProfilesLoaded { get; private set; }
+
 	public static event Action<Profile>? ProfileChanged;
+
+	public static event Action? ProfileUpdated;
 
 	static ProfileManager()
 	{
@@ -111,6 +115,9 @@ public static class ProfileManager
 			newProfile.LastEditDate = File.GetLastWriteTime(profile);
 			newProfile.DateCreated = File.GetCreationTime(profile);
 
+			if (newProfile.LastUsed == DateTime.MinValue)
+				newProfile.LastUsed = newProfile.LastEditDate;
+
 			return newProfile;
 		}
 		else
@@ -165,6 +172,7 @@ public static class ProfileManager
 		{
 			newProfile.LastEditDate = File.GetLastWriteTime(profilePath);
 			newProfile.DateCreated = File.GetCreationTime(profilePath);
+			newProfile.LastUsed = newProfile.LastEditDate;
 
 			lock (_profiles)
 			{
@@ -203,6 +211,8 @@ public static class ProfileManager
 			{
 				profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
 			}
+
+			ProfileUpdated?.Invoke();
 		}).Run();
 	}
 
@@ -497,6 +507,9 @@ public static class ProfileManager
 					newProfile.LastEditDate = File.GetLastWriteTime(profile);
 					newProfile.DateCreated = File.GetCreationTime(profile);
 
+					if (newProfile.LastUsed == DateTime.MinValue)
+						newProfile.LastUsed = newProfile.LastEditDate;
+
 					lock (_profiles)
 					{
 						_profiles.Add(newProfile);
@@ -516,6 +529,10 @@ public static class ProfileManager
 		}
 
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+
+		ProfilesLoaded = true;
+
+		ProfileUpdated?.Invoke();
 
 		if (_watcher is not null)
 		{
@@ -548,6 +565,8 @@ public static class ProfileManager
 					}
 				}
 
+				ProfileUpdated?.Invoke();
+
 				return;
 			}
 
@@ -559,6 +578,9 @@ public static class ProfileManager
 				newProfile.LastEditDate = File.GetLastWriteTime(e.FullPath);
 				newProfile.DateCreated = File.GetCreationTime(e.FullPath);
 
+				if (newProfile.LastUsed == DateTime.MinValue)
+					newProfile.LastUsed = newProfile.LastEditDate;
+
 				lock (_profiles)
 				{
 					var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
@@ -567,6 +589,8 @@ public static class ProfileManager
 
 					_profiles.Add(newProfile);
 				}
+
+				ProfileUpdated?.Invoke();
 			}
 			else
 			{
@@ -607,6 +631,8 @@ public static class ProfileManager
 			File.WriteAllText(
 				LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"),
 				Newtonsoft.Json.JsonConvert.SerializeObject(profile, Newtonsoft.Json.Formatting.Indented));
+
+			profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
 
 			return true;
 		}
@@ -791,6 +817,8 @@ public static class ProfileManager
 		{
 			_profiles.Add(newProfile);
 		}
+
+		ProfileUpdated?.Invoke();
 	}
 
 	internal static Profile? ImportProfile(string obj)
@@ -817,6 +845,9 @@ public static class ProfileManager
 			newProfile.LastEditDate = File.GetLastWriteTime(newPath);
 			newProfile.DateCreated = File.GetCreationTime(newPath);
 
+			if (newProfile.LastUsed == DateTime.MinValue)
+				newProfile.LastUsed = newProfile.LastEditDate;
+
 			lock (_profiles)
 			{
 				var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
@@ -825,6 +856,8 @@ public static class ProfileManager
 
 				_profiles.Add(newProfile);
 			}
+
+			ProfileUpdated?.Invoke();
 
 			return newProfile;
 		}
@@ -993,5 +1026,10 @@ public static class ProfileManager
 
 		SetIncludedFor(value, profileMod, assets, profile);
 
+	}
+
+	internal static string GetFileName(Profile profile)
+	{
+		return LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json");
 	}
 }

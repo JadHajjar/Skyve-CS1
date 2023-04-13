@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.UserInterface.Generic;
+using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.UserInterface.Profiles;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -23,13 +24,15 @@ public partial class PC_ProfileList : PanelContent
 
 		DD_Sorting.Height = TB_Search.Height = 0;
 
-		foreach (var profile in ProfileManager.Profiles)
-		{
-			if (!profile.Temporary)
-			{
-				AddProfile(profile);
-			}
-		}
+		panel1.Controls.Add(new ProfileListControl() { Dock = DockStyle.Fill});
+
+		//foreach (var profile in ProfileManager.Profiles)
+		//{
+		//	if (!profile.Temporary)
+		//	{
+		//		AddProfile(profile);
+		//	}
+		//}
 
 		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
 

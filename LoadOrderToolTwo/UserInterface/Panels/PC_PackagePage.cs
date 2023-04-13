@@ -6,6 +6,7 @@ using LoadOrderToolTwo.UserInterface.CompatibilityReport;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -101,15 +102,11 @@ public partial class PC_PackagePage : PanelContent
 
 	private void B_SteamPage_Click(object sender, EventArgs e)
 	{
-		try
-		{ Process.Start(Package.SteamPage); }
-		catch { }
+		PlatformUtil.OpenUrl(Package.SteamPage);
 	}
 
 	private void B_Folder_Click(object sender, EventArgs e)
 	{
-		try
-		{ Process.Start(Package.Folder); }
-		catch { }
+		PlatformUtil.OpenUrl(Package.Folder);
 	}
 }

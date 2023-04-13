@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -101,9 +102,7 @@ public partial class PC_MainPage : PanelContent
 		{
 			if (CentralManager.IsContentLoaded && !CompatibilityManager.CatalogAvailable)
 			{
-				try
-				{ Process.Start("https://steamcommunity.com/sharedfiles/filedetails/?id=2881031511"); }
-				catch { }
+				PlatformUtil.OpenUrl("https://steamcommunity.com/sharedfiles/filedetails/?id=2881031511");
 			}
 			else
 			{
