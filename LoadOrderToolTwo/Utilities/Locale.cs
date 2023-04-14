@@ -273,4 +273,5 @@ internal class Locale : LocaleHelper
 	public static string CopyFolderName => _instance.GetText(nameof(CopyFolderName));
 	public static string ProfileNameUsed => _instance.GetText(nameof(ProfileNameUsed));
 	public static string FailedToImportLegacyProfile => _instance.GetText(nameof(FailedToImportLegacyProfile));
+	public static string CurrentProfile => _instance.GetText(nameof(CurrentProfile));
 }

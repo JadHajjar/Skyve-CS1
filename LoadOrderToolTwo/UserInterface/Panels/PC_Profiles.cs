@@ -90,7 +90,19 @@ public partial class PC_Profiles : PanelContent
 
 	public override bool CanExit(bool toBeDisposed)
 	{
-		return !TB_Name.Visible && !I_ProfileIcon.Loading;
+		if (I_ProfileIcon.Loading)
+		{
+			Notification.Create("", "", PromptIcons.Hand, null).Show(Form, 10);
+			return false;
+		}
+		
+		if (TB_Name.Visible)
+		{
+			Notification.Create("", "", PromptIcons.Hand, null).Show(Form, 10);
+			return false;
+		}
+
+		return true;
 	}
 
 	internal void Ctrl_LoadProfile(Profile obj)

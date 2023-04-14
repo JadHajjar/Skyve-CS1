@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -17,6 +18,8 @@ namespace LoadOrderToolTwo.UserInterface.Lists;
 internal class ProfileListControl : SlickStackedListControl<Profile>
 {
 	private readonly Dictionary<DrawableItem<Profile>, Rectangles> _itemRects = new();
+	private ProfileSorting sorting;
+
 	public IEnumerable<Profile> FilteredItems => SafeGetItems().Select(x => x.Item);
 
 	public event Action<Profile>? LoadProfile;
@@ -30,8 +33,11 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		SeparateWithLines = true;
 
 		Loading = !ProfileManager.ProfilesLoaded;
-		if(!Loading)
+		if (!Loading)
+		{
 			SetItems(ProfileManager.Profiles.Where(x => !x.Temporary));
+		}
+
 		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
 	}
 
@@ -70,7 +76,15 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 
 	protected override IEnumerable<DrawableItem<Profile>> OrderItems(IEnumerable<DrawableItem<Profile>> items)
 	{
-		return items;
+		return sorting switch
+		{
+			ProfileSorting.Color => items.OrderByDescending(x => x.Item.IsFavorite).ThenBy(x => x.Item.Color?.ToArgb() ?? int.MaxValue),
+			ProfileSorting.Name => items.OrderByDescending(x => x.Item.IsFavorite).ThenBy(x => x.Item.Name),
+			ProfileSorting.DateCreated => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.DateCreated),
+			ProfileSorting.Usage => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.ForGameplay).ThenByDescending(x => x.Item.ForAssetEditor).ThenBy(x => x.Item.LastEditDate),
+			ProfileSorting.LastEdit => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.LastEditDate),
+			ProfileSorting.LastUsed or _ => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.LastUsed),
+		};
 	}
 
 	protected override bool IsItemActionHovered(DrawableItem<Profile> item, Point location)
@@ -101,13 +115,23 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		{
 			item.Item.IsFavorite = !item.Item.IsFavorite;
 		}
-
-		if (rects.LoadRect.Contains(e.Location))
+		else if (rects.LoadRect.Contains(e.Location))
 		{
 			LoadProfile?.Invoke(item.Item);
 		}
+		else if (rects.IconRect.Contains(e.Location))
+		{
+			var colorDialog = new SlickColorPicker(item.Item.Color ?? Color.Red);
 
-		if (rects.FolderRect.Contains(e.Location))
+			if (colorDialog.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+
+			item.Item.Color = colorDialog.Color;
+			ProfileManager.Save(item.Item);
+		}
+		else if (rects.FolderRect.Contains(e.Location))
 		{
 			PlatformUtil.OpenFolder(ProfileManager.GetFileName(item.Item));
 		}
@@ -154,7 +178,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var icon =isIncluded ?Properties.Resources.I_StarFilled :Properties.Resources.I_Star;
+		using var icon = isIncluded ? Properties.Resources.I_StarFilled : Properties.Resources.I_Star;
 
 		e.Graphics.DrawImage(icon.Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
@@ -173,9 +197,17 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		if(e.Item.IsMissingItems)
-		rects.TextRect.X+= DrawLabel(e, Locale.IncludesItemsYouDoNotHave, Properties.Resources.I_MinorIssues_16, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width+Padding.Left;
-		rects.TextRect.X+= DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", Properties.Resources.I_Mods_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width+Padding.Left;
+		if (e.Item == ProfileManager.CurrentProfile)
+		{
+			rects.TextRect.X += DrawLabel(e, Locale.CurrentProfile, Properties.Resources.I_Ok_16, FormDesign.Design.ActiveColor, rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
+		}
+
+		if (e.Item.IsMissingItems)
+		{
+			rects.TextRect.X += DrawLabel(e, Locale.IncludesItemsYouDoNotHave, Properties.Resources.I_MinorIssues_16, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
+		}
+
+		rects.TextRect.X += DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", Properties.Resources.I_Mods_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
 		rects.TextRect.X += DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", Properties.Resources.I_Assets_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
 
 		SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Folder)), null, rects.FolderRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
@@ -232,6 +264,18 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		rects.TextRect = new Rectangle(rects.IconRect.Right + Padding.Left, rectangle.Y, rects.FolderRect.X - rects.IconRect.Right - 2 * Padding.Left, rectangle.Height);
 
 		return rects;
+	}
+
+	internal void SetSorting(ProfileSorting selectedItem)
+	{
+		if (sorting == selectedItem)
+		{
+			return;
+		}
+
+		sorting = selectedItem;
+
+		FilterOrSortingChanged();
 	}
 
 	private class Rectangles

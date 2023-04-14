@@ -461,6 +461,9 @@ public static class ProfileManager
 				ModsUtil.SavePendingValues();
 				AssetsUtil.SaveChanges();
 
+				profile.LastUsed = DateTime.Now;
+				Save(profile);
+
 				ProfileChanged?.Invoke(profile);
 
 				try
@@ -478,6 +481,8 @@ public static class ProfileManager
 			catch (Exception ex)
 			{
 				MessagePrompt.Show(ex, "Failed to merge your profiles", form: Program.MainForm);
+
+				ProfileChanged?.Invoke(profile);
 			}
 			finally
 			{

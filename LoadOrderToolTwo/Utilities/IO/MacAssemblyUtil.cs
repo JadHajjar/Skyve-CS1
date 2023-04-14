@@ -19,7 +19,9 @@ internal class MacAssemblyUtil
 		{
 			foreach (var path in dllPaths)
 			{
-				if (CheckDllImplementsInterface(path, out version))
+				var cache = ContentUtil.GetDllModCache(path, out version);
+
+				if (cache == true || (cache is null && CheckDllImplementsInterface(path, out version)))
 				{
 					dllPath = path;
 					return true;

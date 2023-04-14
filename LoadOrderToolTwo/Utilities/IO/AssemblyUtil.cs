@@ -47,11 +47,16 @@ public static class AssemblyUtil
 	{
 		foreach (var path in dllPaths)
 		{
-			if (CheckDllImplementsInterface(path, "ICities.IUserMod", out version))
+			var cache = ContentUtil.GetDllModCache(path, out version);
+
+			if (cache == true || (cache is null && CheckDllImplementsInterface(path, "ICities.IUserMod", out version)))
 			{
+				ContentUtil.SetDllModCache(path, true, version);
 				dllPath = path;
 				return true;
 			}
+
+			ContentUtil.SetDllModCache(path, false, null);
 		}
 
 		dllPath = null;

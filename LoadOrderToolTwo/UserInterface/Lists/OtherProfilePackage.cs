@@ -142,8 +142,13 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 
         e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
-		var assetRect = DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", Properties.Resources.I_Assets_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
-		DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", Properties.Resources.I_Mods_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0,0,assetRect.Width+Padding.Left,0), ContentAlignment.MiddleRight);
+		var rect = DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", Properties.Resources.I_Assets_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
+		rect  = DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", Properties.Resources.I_Mods_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0,0, rect.Width+Padding.Left,0), ContentAlignment.MiddleRight);
+
+		if (e.Item == ProfileManager.CurrentProfile)
+		{
+			rects.TextRect.X += DrawLabel(e, Locale.CurrentProfile, Properties.Resources.I_Ok_16, FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rect.Width + Padding.Left , 0), ContentAlignment.BottomLeft).Width + Padding.Left;
+		}
 
 		SlickButton.DrawButton(e, rects.LoadRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Import)), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 

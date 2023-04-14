@@ -18,6 +18,24 @@ internal class ContentUtil
 
 	private static readonly object _contentUpdateLock = new();
 
+	private static readonly Dictionary<string, ModDllCache> _dllCache = new(StringComparer.OrdinalIgnoreCase);
+
+	static ContentUtil()
+	{
+		ISave.Load(out List<ModDllCache> cache, "ModDllCache.json");
+
+		if (cache != null)
+		{
+			foreach (var dll in cache)
+			{
+				if (dll.Path is not null or "")
+				{
+					_dllCache[dll.Path] = dll;
+				}
+			}
+		}
+	}
+
 	public static IEnumerable<string> GetSubscribedItemPaths()
 	{
 		if (!Directory.Exists(LocationManager.WorkshopContentPath))
@@ -98,8 +116,7 @@ internal class ContentUtil
 
 	public static long GetTotalSize(string path)
 	{
-		var files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
-		return files.Sum(f => new FileInfo(f).Length);
+		return new DirectoryInfo(path).GetFiles("*", SearchOption.AllDirectories).Sum(f => f.Length);
 	}
 
 	internal static List<Package> LoadContents()
@@ -361,5 +378,43 @@ internal class ContentUtil
 		}
 
 		return GenericPackageState.Disabled;
+	}
+
+	internal static bool? GetDllModCache(string path, out Version? version)
+	{
+		if (_dllCache.TryGetValue(path, out var dll))
+		{
+			var currentLength = new FileInfo(path).Length;
+
+			if (currentLength == dll.Length)
+			{
+				version = dll.Version;
+
+				return dll.IsMod;
+			}
+		}
+
+		version = null;
+		return null;
+	}
+
+	internal static void SetDllModCache(string path, bool isMod, Version? version)
+	{
+		try
+		{
+			lock (_dllCache)
+			{
+				_dllCache[path] = new()
+				{
+					Path = path,
+					Length = new FileInfo(path).Length,
+					Version = version,
+					IsMod = isMod,
+				};
+
+				ISave.Save(_dllCache.Values, "ModDllCache.json");
+			}
+		}
+		catch (Exception ex) { Log.Exception(ex, "Failed to save DLL cache"); }
 	}
 }

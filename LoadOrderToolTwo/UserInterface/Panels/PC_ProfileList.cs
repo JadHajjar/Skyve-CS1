@@ -18,18 +18,21 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_ProfileList : PanelContent
 {
+	private readonly ProfileListControl LC_Items;
+
 	public PC_ProfileList()
 	{
 		InitializeComponent();
 
 		DD_Sorting.Height = TB_Search.Height = 0;
 
-		var ctrl = new ProfileListControl() { Dock = DockStyle.Fill };
-		ctrl.LoadProfile += Ctrl_LoadProfile;
-		ctrl.MergeProfile += Ctrl_MergeProfile;
-		ctrl.ExcludeProfile += Ctrl_ExcludeProfile;
-		ctrl.DisposeProfile += Ctrl_DisposeProfile;
-		panel1.Controls.Add(ctrl);
+		LC_Items= new ProfileListControl() { Dock = DockStyle.Fill };
+		LC_Items.CanDrawItem += Ctrl_CanDrawItem;
+		LC_Items.LoadProfile += Ctrl_LoadProfile;
+		LC_Items.MergeProfile += Ctrl_MergeProfile;
+		LC_Items.ExcludeProfile += Ctrl_ExcludeProfile;
+		LC_Items.DisposeProfile += Ctrl_DisposeProfile;
+		panel1.Controls.Add(LC_Items);
 
 		//foreach (var profile in ProfileManager.Profiles)
 		//{
@@ -44,6 +47,23 @@ public partial class PC_ProfileList : PanelContent
 		RefreshCounts();
 
 		DD_Sorting.SelectedItem = ProfileSorting.LastEdit;
+	}
+
+	private void Ctrl_CanDrawItem(object sender, CanDrawItemEventArgs<Profile> e)
+	{
+		var valid = true;
+
+		if (T_ProfileUsage.SelectedValue != ThreeOptionToggle.Value.None)
+		{
+			valid &= (T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option1 && e.Item.ForGameplay) || (T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option2 && e.Item.ForAssetEditor);
+		}
+
+		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
+		{
+			valid &= TB_Search.Text.SearchCheck(e.Item.Name);
+		}
+
+		e.DoNotDraw = !valid;
 	}
 
 	private void ProfileManager_ProfileChanged(Profile obj)
@@ -98,7 +118,7 @@ public partial class PC_ProfileList : PanelContent
 	{
 		var favorites = ProfileManager.Profiles.Count(x => x.IsFavorite);
 		var total = ProfileManager.Profiles.Count(x => !x.Temporary);
-		var filteredCount = FLP_Profiles.Controls.Cast<Control>().Count(x => x.Visible);
+		var filteredCount = LC_Items.FilteredItems.Count();
 		var text = string.Empty;
 
 		if (favorites == 0)
@@ -162,29 +182,13 @@ public partial class PC_ProfileList : PanelContent
 	{
 		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
 
-		FLP_Profiles.SuspendDrawing();
-		foreach (ProfilePreviewControl item in FLP_Profiles.Controls)
-		{
-			var valid = true;
-
-			if (T_ProfileUsage.SelectedValue != ThreeOptionToggle.Value.None)
-			{
-				valid &= (T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option1 && item.Profile.ForGameplay) || (T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option2 && item.Profile.ForAssetEditor);
-			}
-
-			if (!string.IsNullOrWhiteSpace(TB_Search.Text))
-			{
-				valid &= TB_Search.Text.SearchCheck(item.Profile.Name);
-			}
-
-			item.Visible = valid;
-		}
-		FLP_Profiles.ResumeDrawing();
+		LC_Items.FilterOrSortingChanged();
 		RefreshCounts();
 	}
 
 	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
+		LC_Items.SetSorting(DD_Sorting.SelectedItem);
 		var sorted = (DD_Sorting.SelectedItem switch
 		{
 			ProfileSorting.Name => ProfileManager.Profiles.OrderByDescending(x => x.IsFavorite).ThenBy(x => x.Name),
