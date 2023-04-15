@@ -24,7 +24,7 @@ public partial class PC_UnusedLsmPackages : PanelContent
 	{
 		InitializeComponent();
 
-		_workshopPackages = missingAssets.Distinct(x => x.SteamId).ToDictionary(x=>x.SteamId,x=>x);
+		_workshopPackages = missingAssets.Distinct(x => x.SteamId).ToDictionary(x => x.SteamId, x => x);
 		_workshopPackages.Remove(0);
 
 		LC_Items.AddRange(_workshopPackages.Values);
@@ -231,7 +231,7 @@ public partial class PC_UnusedLsmPackages : PanelContent
 
 		var packages = items.Select(x => { ContentUtil.GetGenericPackageState(x, out var p); return p; }).Where(x => x != null).ToList();
 
-		AssetsUtil.SetIncluded(packages.SelectMany(x => x!.Assets), false);
+		ContentUtil.SetBulkIncluded(packages.SelectMany(x => x!.Assets), false);
 	}
 
 	private void B_IncludeAll_Click(object sender, EventArgs e)
@@ -240,6 +240,6 @@ public partial class PC_UnusedLsmPackages : PanelContent
 
 		var packages = items.Select(x => { ContentUtil.GetGenericPackageState(x, out var p); return p; }).Where(x => x != null).ToList();
 
-		AssetsUtil.SetIncluded(packages.SelectMany(x => x!.Assets), true);
+		ContentUtil.SetBulkIncluded(packages.SelectMany(x => x!.Assets), true);
 	}
 }

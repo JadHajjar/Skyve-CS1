@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
@@ -59,10 +58,10 @@ public class Profile
 	public bool ForAssetEditor { get; set; }
 	public bool ForGameplay { get; set; }
 	public bool IsFavorite { get; set; }
-    public Color? Color { get; set; }
-    public DateTime LastUsed { get; set; }
+	public Color? Color { get; set; }
+	public DateTime LastUsed { get; set; }
 
-    public class Asset : IGenericPackage
+	public class Asset : IGenericPackage
 	{
 		public string? Name { get; set; }
 		public string? RelativePath { get; set; }

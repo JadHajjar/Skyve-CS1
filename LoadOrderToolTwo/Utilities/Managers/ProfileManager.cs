@@ -12,8 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-using static LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle;
+using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
 public static class ProfileManager
@@ -116,7 +115,9 @@ public static class ProfileManager
 			newProfile.DateCreated = File.GetCreationTime(profile);
 
 			if (newProfile.LastUsed == DateTime.MinValue)
+			{
 				newProfile.LastUsed = newProfile.LastEditDate;
+			}
 
 			return newProfile;
 		}
@@ -210,6 +211,14 @@ public static class ProfileManager
 			foreach (var profile in profiles)
 			{
 				profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
+#if DEBUG
+				if (profile.IsMissingItems)
+				{
+					Log.Debug($"Missing items in the profile: {profile}\r\n" +
+						profile.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
+						profile.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({ToLocalPath(x.RelativePath)})", "\r\n"));
+				}
+#endif
 			}
 
 			ProfileUpdated?.Invoke();
@@ -357,6 +366,11 @@ public static class ProfileManager
 	{
 		ExtensionClass.DeleteFile(LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json"));
 
+		lock (_profiles)
+		{
+			_profiles.Remove(profile);
+		}
+
 		if (profile == CurrentProfile)
 		{
 			SetProfile(Profile.TemporaryProfile);
@@ -494,7 +508,7 @@ public static class ProfileManager
 
 	internal static void TriggerAutoSave()
 	{
-		if (CurrentProfile.AutoSave && !disableAutoSave && !ApplyingProfile && CentralManager.IsContentLoaded)
+		if (CurrentProfile.AutoSave && !disableAutoSave && !ApplyingProfile && CentralManager.IsContentLoaded && !ContentUtil.BulkUpdating)
 		{
 			CurrentProfile.Save();
 		}
@@ -520,7 +534,9 @@ public static class ProfileManager
 					newProfile.DateCreated = File.GetCreationTime(profile);
 
 					if (newProfile.LastUsed == DateTime.MinValue)
+					{
 						newProfile.LastUsed = newProfile.LastEditDate;
+					}
 
 					lock (_profiles)
 					{
@@ -591,7 +607,9 @@ public static class ProfileManager
 				newProfile.DateCreated = File.GetCreationTime(e.FullPath);
 
 				if (newProfile.LastUsed == DateTime.MinValue)
+				{
 					newProfile.LastUsed = newProfile.LastEditDate;
+				}
 
 				lock (_profiles)
 				{
@@ -645,6 +663,14 @@ public static class ProfileManager
 				Newtonsoft.Json.JsonConvert.SerializeObject(profile, Newtonsoft.Json.Formatting.Indented));
 
 			profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
+#if DEBUG
+			if (profile.IsMissingItems)
+			{
+				Log.Debug($"Missing items in the profile: {profile}\r\n" +
+					profile.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
+					profile.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({ToLocalPath(x.RelativePath)})", "\r\n"));
+			}
+#endif
 
 			return true;
 		}
@@ -673,30 +699,32 @@ public static class ProfileManager
 		return AssetsUtil.GetAsset(ToLocalPath(asset.RelativePath));
 	}
 
-	internal static string? ToRelativePath(string? localPath)
+	internal static string ToRelativePath(string? localPath)
 	{
-		if (string.IsNullOrEmpty(localPath))
+		if (localPath is null or "")
 		{
 			return string.Empty;
 		}
 
-		return LocationManager.FormatPath(localPath?
+		return localPath
 			.Replace(LocationManager.AppDataPath, LOCAL_APP_DATA_PATH)
 			.Replace(LocationManager.GamePath, CITIES_PATH)
-			.Replace(LocationManager.WorkshopContentPath, WS_CONTENT_PATH) ?? string.Empty);
+			.Replace(LocationManager.WorkshopContentPath, WS_CONTENT_PATH)
+			.FormatPath();
 	}
 
-	internal static string? ToLocalPath(string? relativePath)
+	internal static string ToLocalPath(string? relativePath)
 	{
-		if (string.IsNullOrEmpty(relativePath))
+		if (relativePath is null or "")
 		{
 			return string.Empty;
 		}
 
-		return LocationManager.FormatPath(relativePath?
+		return relativePath
 			.Replace(LOCAL_APP_DATA_PATH, LocationManager.AppDataPath)
 			.Replace(CITIES_PATH, LocationManager.GamePath)
-			.Replace(WS_CONTENT_PATH, LocationManager.WorkshopContentPath) ?? string.Empty);
+			.Replace(WS_CONTENT_PATH, LocationManager.WorkshopContentPath)
+			.FormatPath();
 	}
 
 	internal static bool RenameProfile(Profile profile, string text)
@@ -771,22 +799,42 @@ public static class ProfileManager
 		return Path.GetFileNameWithoutExtension(startName);
 	}
 
-	internal static System.Drawing.Bitmap GetIcon(this Profile profile)
+	internal static System.Drawing.Bitmap GetIcon(this Profile profile, bool autoSize = false)
 	{
 		if (profile.Temporary)
 		{
+			if (autoSize)
+			{
+				return ImageManager.GetIcon(nameof(Properties.Resources.I_TempProfile));
+			}
+
 			return Properties.Resources.I_TempProfile;
 		}
 		else if (profile.ForAssetEditor)
 		{
+			if (autoSize)
+			{
+				return ImageManager.GetIcon(nameof(Properties.Resources.I_Tools));
+			}
+
 			return Properties.Resources.I_Tools;
 		}
 		else if (profile.ForGameplay)
 		{
+			if (autoSize)
+			{
+				return ImageManager.GetIcon(nameof(Properties.Resources.I_City));
+			}
+
 			return Properties.Resources.I_City;
 		}
 		else
 		{
+			if (autoSize)
+			{
+				return ImageManager.GetIcon(nameof(Properties.Resources.I_ProfileSettings));
+			}
+
 			return Properties.Resources.I_ProfileSettings;
 		}
 	}
@@ -858,7 +906,9 @@ public static class ProfileManager
 			newProfile.DateCreated = File.GetCreationTime(newPath);
 
 			if (newProfile.LastUsed == DateTime.MinValue)
+			{
 				newProfile.LastUsed = newProfile.LastEditDate;
+			}
 
 			lock (_profiles)
 			{
@@ -955,7 +1005,6 @@ public static class ProfileManager
 							break;
 						}
 					}
-
 				}
 
 				profile.Assets.AddRange(assetsToAdd);
@@ -1019,13 +1068,17 @@ public static class ProfileManager
 		if (profileMod is not null)
 		{
 			if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			{
 				return false;
+			}
 		}
 
 		if (assets.Count > 0)
 		{
 			if (!assets.All(profileAsset => profile.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
+			{
 				return false;
+			}
 		}
 
 		return true;
@@ -1043,5 +1096,21 @@ public static class ProfileManager
 	internal static string GetFileName(Profile profile)
 	{
 		return LocationManager.Combine(LocationManager.LotProfilesAppDataPath, $"{profile.Name}.json");
+	}
+
+	internal static void CreateShortcut(Profile item)
+	{
+		try
+		{
+			var launch = MessagePrompt.Show(Locale.AskToLaunchGameForShortcut, PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
+
+			ExtensionClass.CreateShortcut(LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), item.Name + ".lnk")
+				, Application.ExecutablePath
+				, (launch ? "-launch " : "") + $"-profile {item.Name}");
+		}
+		catch (Exception ex)
+		{
+			Log.Exception(ex, "Failed to create shortcut");
+		}
 	}
 }

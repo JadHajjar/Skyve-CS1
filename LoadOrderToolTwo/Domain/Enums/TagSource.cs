@@ -2,7 +2,7 @@
 
 public enum TagSource
 {
-    Workshop,
-    InGame,
-    FindIt
+	Workshop,
+	InGame,
+	FindIt
 }

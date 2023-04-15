@@ -10,8 +10,8 @@ using SlickControls;
 
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -63,6 +63,11 @@ public partial class PC_Options : PanelContent
 		DD_Language.SelectedItemChanged += DD_Language_SelectedItemChanged;
 
 		TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
+	}
+
+	public override Color GetTopBarColor()
+	{
+		return FormDesign.Design.AccentBackColor;
 	}
 
 	private void ApplyCurrentSettings()
@@ -124,7 +129,12 @@ public partial class PC_Options : PanelContent
 	{
 		base.DesignChanged(design);
 
-		TLP_UI.BackColor = TLP_Preferences.BackColor = TLP_Folders.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+		BackColor = design.AccentBackColor;
+
+		foreach (Control item in TLP_Main.Controls)
+		{
+			item.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+		}
 	}
 
 	public override bool CanExit(bool toBeDisposed)
@@ -174,9 +184,9 @@ public partial class PC_Options : PanelContent
 			.SetValue(CentralManager.SessionSettings.UserSettings, cb.Checked);
 
 		CentralManager.SessionSettings.Save();
-    }
+	}
 
-    private void TB_FolderPath_TextChanged(object sender, EventArgs e)
+	private void TB_FolderPath_TextChanged(object sender, EventArgs e)
 	{
 		folderPathsChanged = true;
 	}

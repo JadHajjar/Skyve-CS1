@@ -10,12 +10,9 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Management;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using static CompatibilityReport.CatalogData.Enums;
@@ -226,7 +223,7 @@ internal class PackageViewControl : SlickImageControl
 		using var foreBrush = new SolidBrush(color.GetTextColor());
 
 		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + Padding.Left * 2 - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(text, UI.Font(7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		if (icon is not null)
 		{

@@ -1,17 +1,12 @@
 ﻿using Extensions;
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Domain.Utilities;
 public class LogTrace
 {
-    public LogTrace(List<string> lines, int index, bool crash)
+	public LogTrace(List<string> lines, int index, bool crash)
 	{
 		Trace = new();
 		Crash = crash;

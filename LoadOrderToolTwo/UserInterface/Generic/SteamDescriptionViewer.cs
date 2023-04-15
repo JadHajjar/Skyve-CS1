@@ -11,8 +11,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-using static System.Net.Mime.MediaTypeNames;
-
 using MdImage = LoadOrderToolTwo.Domain.Steam.Markdown.Image;
 
 namespace LoadOrderToolTwo.UserInterface.Generic;
@@ -45,7 +43,9 @@ internal class SteamDescriptionViewer : SlickControl
 		if (component is MdImage image)
 		{
 			if (!string.IsNullOrEmpty(image.Text))
+			{
 				yield return image.Text!;
+			}
 		}
 
 		if (component.Children is not null)

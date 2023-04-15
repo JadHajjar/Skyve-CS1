@@ -1,13 +1,14 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.UserInterface.StatusBubbles;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
-using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
@@ -32,6 +33,29 @@ public partial class PC_MainPage : PanelContent
 		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
 
 		label1.Text = Locale.MultipleLOM;
+
+		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
+
+		if (ProfileManager.ProfilesLoaded)
+		{
+			ProfileManager_ProfileUpdated();
+		}
+	}
+
+	private void ProfileManager_ProfileUpdated()
+	{
+		this.TryInvoke(() =>
+		{
+			TLP_Profiles.Controls.Clear(true, x => x is FavoriteProfileBubble);
+			TLP_Profiles.RowStyles.Clear();
+			TLP_Profiles.RowStyles.Add(new());
+
+			foreach (var item in ProfileManager.Profiles.Where(x => x.IsFavorite))
+			{
+				TLP_Profiles.RowStyles.Add(new());
+				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item), 0, TLP_Profiles.RowStyles.Count - 1);
+			}
+		});
 	}
 
 	private void SetButtonEnabledOnLoad()

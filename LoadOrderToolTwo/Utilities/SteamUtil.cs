@@ -7,8 +7,6 @@ using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
-using Newtonsoft.Json;
-
 using SlickControls;
 
 using System;
@@ -45,7 +43,10 @@ public static class SteamUtil
 		Dlcs = cache ?? new();
 	}
 
-	public static bool IsSteamAvailable() => LocationManager.FileExists(LocationManager.SteamPathWithExe);
+	public static bool IsSteamAvailable()
+	{
+		return LocationManager.FileExists(LocationManager.SteamPathWithExe);
+	}
 
 	private static void SaveCache(Dictionary<ulong, SteamWorkshopItem> list)
 	{
@@ -122,7 +123,7 @@ public static class SteamUtil
 
 			if (process.Length == 0)
 			{
-				Notification.Create("", "",PromptIcons.Info, null).Show(Program.MainForm, 10);
+				Notification.Create(Locale.SteamNotOpenTo, null, PromptIcons.Info, null).Show(Program.MainForm, 10);
 			}
 		}
 
@@ -208,7 +209,7 @@ public static class SteamUtil
 
 				foreach (var item in data.Where(x => x.Private))
 				{
-					var info = await GetUnlistedWorkshopEntryAsync("https://steamcommunity.com/workshop/filedetails?id="+item.SteamId);
+					var info = await GetUnlistedWorkshopEntryAsync("https://steamcommunity.com/workshop/filedetails?id=" + item.SteamId);
 
 					if (info.Item1 is not null)
 					{
@@ -318,11 +319,18 @@ public static class SteamUtil
 		if (packages.Any(x => x.Folder.PathEquals(Path.GetDirectoryName(LocationManager.CurrentDirectory))))
 		{
 			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, Program.MainForm) == DialogResult.Cancel)
+			{
 				return;
+			}
 
 			IOUtil.WaitForUpdate();
 
 			Application.Exit();
+		}
+
+		if (LocationManager.Platform is Platform.MacOSX)
+		{
+			ReDownload(packages.Select(x => x.SteamId).ToArray());
 		}
 
 		ReDownload(packages.Select(x => x.SteamId).ToArray());

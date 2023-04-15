@@ -1,15 +1,10 @@
 ﻿using LoadOrderToolTwo.Domain;
-using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Utilities;
 internal static class LsmUtil
@@ -23,11 +18,11 @@ internal static class LsmUtil
 
 		using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 		using var streamReader = new StreamReader(fileStream);
-		
+
 		while (!streamReader.EndOfStream)
 		{
 			var line = streamReader.ReadLine();
-			
+
 			if (Regex.IsMatch(line, "data-lomtag=\"(missing.*?)|(unused)\".+?href=\"(.+?(\\d+))\">(.+?)</a>"))
 			{
 				return true;

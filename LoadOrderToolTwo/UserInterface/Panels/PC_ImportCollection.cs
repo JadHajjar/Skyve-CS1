@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -9,7 +8,6 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -34,7 +32,9 @@ public partial class PC_ImportCollection : PanelContent
 		foreach (var item in ModLogicManager.BlackList)
 		{
 			if (contents.ContainsKey(item))
+			{
 				contents.Remove(item);
+			}
 		}
 
 		LC_Items.SetItems(contents.Values);
@@ -120,7 +120,7 @@ public partial class PC_ImportCollection : PanelContent
 		L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
 		L_Title.Margin = UI.Scale(new Padding(7), UI.FontScale);
 		L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		TB_Search.Margin = DD_Tags.Margin = UI.Scale(new Padding(5,5,5,0), UI.FontScale);
+		TB_Search.Margin = DD_Tags.Margin = UI.Scale(new Padding(5, 5, 5, 0), UI.FontScale);
 		T_All.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Package));
 		T_Mods.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Mods));
 		T_Assets.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Assets));
@@ -186,18 +186,16 @@ public partial class PC_ImportCollection : PanelContent
 
 	private void B_ExInclude_LeftClicked(object sender, System.EventArgs e)
 	{
-		var filteredItems = LC_Items.FilteredItems.Select(x => CentralManager.Packages.FirstOrDefault(y => y.SteamId == x.SteamId)).ToList();
-		
-		ModsUtil.SetIncluded(filteredItems.Where(x => x?.Mod is not null).Select(x => x.Mod!), false);
-		AssetsUtil.SetIncluded(filteredItems.Where(x => x?.Assets is not null).SelectMany(x => x.Assets!), false);
+		var filteredItems = LC_Items.FilteredItems.Select(x => CentralManager.Packages.FirstOrDefault(y => y.SteamId == x.SteamId));
+
+		ContentUtil.SetBulkIncluded(filteredItems, false);
 	}
 
 	private void B_ExInclude_RightClicked(object sender, System.EventArgs e)
 	{
-		var filteredItems = LC_Items.FilteredItems.Select(x => CentralManager.Packages.FirstOrDefault(y => y.SteamId == x.SteamId)).ToList();
-		
-		ModsUtil.SetIncluded(filteredItems.Where(x => x?.Mod is not null).Select(x => x.Mod!), true);
-		AssetsUtil.SetIncluded(filteredItems.Where(x => x?.Assets is not null).SelectMany(x => x.Assets!), true);
+		var filteredItems = LC_Items.FilteredItems.Select(x => CentralManager.Packages.FirstOrDefault(y => y.SteamId == x.SteamId));
+
+		ContentUtil.SetBulkIncluded(filteredItems, true);
 	}
 
 	private void TB_Search_IconClicked(object sender, System.EventArgs e)

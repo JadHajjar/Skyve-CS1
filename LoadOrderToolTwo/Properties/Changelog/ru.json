@@ -2,33 +2,33 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Добро пожаловать в эру change-log",
+        "Tagline": "Добро пожаловать в список изменения",
         "ChangeGroups": [
             {
-                "Name": "Новый",
+                "Name": "Новое",
                 "Changes": [
-                    "В действиях страниц контента добавлена кнопка «Отписаться все».",
+                    "В действиях страниц контента добавлена кнопка «Отписаться от всего».",
                     "Добавлена секция утилиты, чтобы подписаться на недостающие элементы в конфигурации BOB.",
                     "Добавлена опция для открытия секций Фильтры и Действия по умолчанию.",
                     "Добавлены страницы журнала изменений, вы увидите их в новых версиях или на кнопках в разделах Помощь."
                 ]
             },
             {
-                "Name": "Улучшения",
+                "Name": "Улучшено",
                 "Changes": [
                     "Добавлен отчет о совместимости с поврежденными активами",
                     "Неперечисленные пакеты теперь имеют правильное имя и эскиз.",
                     "Пометки для настроек папок теперь корректно отражают вашу ОС.",
-                    "Ctrl+Кликните по имени автора, чтобы добавить его в ваш фильтр"
+                    "Ctrl+ЛКМ по имени автора, чтобы добавить его в ваш фильтр"
                 ]
             },
             {
-                "Name": "Исправления",
+                "Name": "Исправлено",
                 "Changes": [
-                    "Исправлено непреобразование старых профилей после первого запуска.",
+                    "Исправлена ошибка преобразования старых профилей после первого запуска.",
                     "Исправлены локальные активы, которые не обновляются автоматически после внешних изменений.",
                     "Исправлено удаление локальных активов из меню правой кнопкой мыши, удаляя все локальные активы вместо одного",
-                    "Исправлено преобразование профилей LOT 1, в результате чего активы помечены как 'Локальные'",
+                    "Исправлено преобразование профилей LOT 1, в результате чего активы помечены как \"Локальные\"",
                     "Исправлена замена папок «Real» на сохранение для пользователей Linux и Mac.",
                     "Исправлены проблемы с созданием лог архива для пользователей Linux и Mac."
                 ]
@@ -49,13 +49,13 @@
                 ]
             },
             {
-                "Name": "Улучшения",
+                "Name": "Улучшено",
                 "Changes": [
                     "Изменены значки фильтров, чтобы отразить правильные значки, используемые в списке."
                 ]
             },
             {
-                "Name": "Исправления",
+                "Name": "Исправлено",
                 "Changes": [
                     "Исправлен текст в подборке для подписки и отказа от подписки на рассылку.",
                     "Исправлен выбор карты для новой игры, не позволяющей пользователям выбирать ванильную карту."
@@ -68,7 +68,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Исправления",
+                "Name": "Исправлено",
                 "Changes": [
                     "Исправлена ошибка, приводящая к бесконечной загрузке некоторых пользователей."
                 ]
@@ -80,12 +80,12 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "Изменения",
+                "Name": "Изменено",
                 "Changes": [
                     "Вкладка подписки удалена из опций внутриигровых модификаций.",
                     "Исправлена ошибка DLC при загрузке профиля.",
                     "Исправлена ошибка выбора языка для некоторых пользователей.",
-                    "Перезагрузка из пара больше не заставляет фокуса вернуться к инструменту.",
+                    "Перезагрузка из Steam больше не заставляет фокус вернуться к инструменту.",
                     "Другие изменения в интерфейсе."
                 ]
             }
@@ -96,7 +96,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Изменения",
+                "Name": "Изменено",
                 "Changes": [
                     "Добавление всплывающего окна при подписке на элементы в первый раз.",
                     "Добавлен предупреждающий текст на приборной панели при установке нескольких LOM-экземпляров.",
@@ -112,5 +112,50 @@
         "Date": "2023-04-05",
         "Tagline": "Публичный релиз бета-версии",
         "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Presenting, the Profile Overhaul",
+        "ChangeGroups": [
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "Changed the design of your profile list.",
+                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
+                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
+                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
+                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
+                    "Added a button too view a Profile's file on your computer.",
+                    "You can now assign a color to your profiles.",
+                    "You can now create a desktop shortcut for your profiles.",
+                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                ]
+            },
+            {
+                "Name": "Improvements",
+                "Changes": [
+                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
+                    "Local assets are now correctly groupped based on the folders they're in.",
+                    "Your Paradox account panel will always be displayed from now on.",
+                    "The window buttons on the top right now have icons to explain their actions.",
+                    "Improved the responsiveness of the content list pages.",
+                    "Search in the content list pages is now much faster.",
+                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
+                    "You can now generate a zip file of your logs while the game is running."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed freezes happening in the content list pages.",
+                    "Fixed Profiles' Auto-Save not working correctly.",
+                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
+                    "Fixed custom maps not loading when selected in the profile settings.",
+                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
+                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                ]
+            }
+        ]
     }
 ]

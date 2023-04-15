@@ -10,6 +10,7 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -42,6 +43,11 @@ public partial class PC_ModUtilities : PanelContent
 		SlickTip.SetTo(DD_Unused, "LsmUnusedTip");
 		SlickTip.SetTo(B_ReDownload, "FixAllTip");
 		SlickTip.SetTo(DD_BOB, "BOBTip");
+	}
+
+	public override Color GetTopBarColor()
+	{
+		return FormDesign.Design.AccentBackColor;
 	}
 
 	private void RefreshModIssues()
@@ -95,8 +101,14 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		base.DesignChanged(design);
 
+		BackColor = design.AccentBackColor;
 		L_OutOfDate.ForeColor = design.YellowColor;
 		L_Incomplete.ForeColor = design.RedColor;
+
+		foreach (Control item in TLP_Main.Controls)
+		{
+			item.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+		}
 	}
 
 	private void LC_Duplicates_SizeChanged(object sender, EventArgs e)

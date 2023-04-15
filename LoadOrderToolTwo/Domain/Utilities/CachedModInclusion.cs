@@ -10,6 +10,6 @@ internal class CachedModInclusion : CachedSaveItem<Mod, bool>
 
 	protected override void OnSave()
 	{
-		ModsUtil.SetIncluded(Key, ValueToSave);
+		ModsUtil.SetLocallyIncluded(Key, ValueToSave);
 	}
 }

@@ -60,11 +60,13 @@ internal class PC_Packages : PC_ContentList<Package>
 					modsIncluded++;
 
 					if (item.Mod.IsEnabled)
+					{
 						modsEnabled++;
+					}
 				}
 			}
 		}
-		
+
 		var total = LC_Items.ItemCount;
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
@@ -87,12 +89,11 @@ internal class PC_Packages : PC_ContentList<Package>
 
 	protected override void SetIncluded(IEnumerable<Package> filteredItems, bool included)
 	{
-		ModsUtil.SetIncluded(filteredItems.Where(x => x.Mod is not null).Select(x => x.Mod!), included);
-		AssetsUtil.SetIncluded(filteredItems.Where(x => x.Assets is not null).SelectMany(x => x.Assets!), included);
+		ContentUtil.SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Package> filteredItems, bool enabled)
 	{
-		ModsUtil.SetEnabled(filteredItems.Where(x => x.Mod is not null).Select(x => x.Mod!), enabled);
+		ContentUtil.SetBulkIncluded(filteredItems.Where(x => x.Mod is not null).Select(x => x.Mod!), enabled);
 	}
 }

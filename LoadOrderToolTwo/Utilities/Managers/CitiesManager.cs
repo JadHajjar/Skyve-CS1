@@ -185,9 +185,9 @@ public static class CitiesManager
 		}
 		else if (CentralManager.CurrentProfile.LaunchSettings.StartNewGame)
 		{
-			if (LocationManager.FileExists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
+			if (LocationManager.FileExists(CentralManager.CurrentProfile.LaunchSettings.MapToLoad))
 			{
-				args.Add("--newGame=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
+				args.Add("--newGame=" + quote(CentralManager.CurrentProfile.LaunchSettings.MapToLoad!));
 			}
 			else
 			{
@@ -258,6 +258,11 @@ public static class CitiesManager
 
 		if (!unsub)
 		{
+			if (LocationManager.Platform is Platform.MacOSX)
+			{
+				SteamUtil.ReDownload(ids.ToArray());
+			}
+
 			SteamUtil.ReDownload(ids.ToArray());
 		}
 

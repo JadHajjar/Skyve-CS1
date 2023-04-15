@@ -27,7 +27,9 @@ internal class PackageIcon : SlickImageControl
 			e.Graphics.FillRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), new Rectangle(0, 0, Width, Height / 2));
 		}
 		else
+		{
 			e.Graphics.Clear(BackColor);
+		}
 
 		if (Loading)
 		{

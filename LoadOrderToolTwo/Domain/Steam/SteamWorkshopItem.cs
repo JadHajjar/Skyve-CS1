@@ -1,5 +1,4 @@
-﻿using LoadOrderToolTwo.Domain.Enums;
-using LoadOrderToolTwo.Domain.Interfaces;
+﻿using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using Newtonsoft.Json;

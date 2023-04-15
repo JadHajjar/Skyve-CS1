@@ -20,6 +20,8 @@ internal class ContentUtil
 
 	private static readonly Dictionary<string, ModDllCache> _dllCache = new(StringComparer.OrdinalIgnoreCase);
 
+	internal static bool BulkUpdating { get; set; }
+
 	static ContentUtil()
 	{
 		ISave.Load(out List<ModDllCache> cache, "ModDllCache.json");
@@ -34,6 +36,8 @@ internal class ContentUtil
 				}
 			}
 		}
+
+		CentralManager.ContentLoaded += SaveDllCache;
 	}
 
 	public static IEnumerable<string> GetSubscribedItemPaths()
@@ -411,10 +415,59 @@ internal class ContentUtil
 					Version = version,
 					IsMod = isMod,
 				};
-
-				ISave.Save(_dllCache.Values, "ModDllCache.json");
 			}
 		}
 		catch (Exception ex) { Log.Exception(ex, "Failed to save DLL cache"); }
+	}
+
+	internal static void SaveDllCache()
+	{
+		ISave.Save(_dllCache.Values, "ModDllCache.json");
+	}
+
+	internal static void SetBulkIncluded(IEnumerable<IPackage> packages, bool value)
+	{
+		var packageList = packages.ToList();
+
+		if (packageList.Count == 0)
+		{
+			return;
+		}
+
+		BulkUpdating = true;
+
+		foreach (var package in packageList)
+		{
+			package.IsIncluded = value;
+		}
+
+		BulkUpdating = false;
+
+		CentralManager.InformationUpdate(packageList[0]);
+		ModsUtil.SavePendingValues();
+		AssetsUtil.SaveChanges();
+		ProfileManager.TriggerAutoSave();
+	}
+
+	internal static void SetBulkEnabled(IEnumerable<Mod> mods, bool value)
+	{
+		BulkUpdating = true;
+
+		var modList = mods.ToList();
+
+		if (modList.Count == 0)
+		{
+			BulkUpdating = false;
+			return;
+		}
+
+		foreach (var package in modList.Skip(1))
+		{
+			package.IsEnabled = value;
+		}
+
+		BulkUpdating = false;
+
+		modList[0].IsEnabled = value;
 	}
 }

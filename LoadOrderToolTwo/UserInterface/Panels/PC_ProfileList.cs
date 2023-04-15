@@ -1,10 +1,8 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
-using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.UserInterface.Lists;
-using LoadOrderToolTwo.UserInterface.Profiles;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -26,7 +24,7 @@ public partial class PC_ProfileList : PanelContent
 
 		DD_Sorting.Height = TB_Search.Height = 0;
 
-		LC_Items= new ProfileListControl() { Dock = DockStyle.Fill };
+		LC_Items = new ProfileListControl() { Dock = DockStyle.Fill };
 		LC_Items.CanDrawItem += Ctrl_CanDrawItem;
 		LC_Items.LoadProfile += Ctrl_LoadProfile;
 		LC_Items.MergeProfile += Ctrl_MergeProfile;
@@ -34,19 +32,7 @@ public partial class PC_ProfileList : PanelContent
 		LC_Items.DisposeProfile += Ctrl_DisposeProfile;
 		panel1.Controls.Add(LC_Items);
 
-		//foreach (var profile in ProfileManager.Profiles)
-		//{
-		//	if (!profile.Temporary)
-		//	{
-		//		AddProfile(profile);
-		//	}
-		//}
-
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
-
 		RefreshCounts();
-
-		DD_Sorting.SelectedItem = ProfileSorting.LastEdit;
 	}
 
 	private void Ctrl_CanDrawItem(object sender, CanDrawItemEventArgs<Profile> e)
@@ -64,30 +50,6 @@ public partial class PC_ProfileList : PanelContent
 		}
 
 		e.DoNotDraw = !valid;
-	}
-
-	private void ProfileManager_ProfileChanged(Profile obj)
-	{
-		FLP_Profiles.Enabled = true;
-
-		foreach (ProfilePreviewControl item in FLP_Profiles.Controls)
-		{
-			item.Loading = false;
-		}
-	}
-
-	private ProfilePreviewControl AddProfile(Profile profile)
-	{
-		var ctrl = new ProfilePreviewControl(profile);
-
-		FLP_Profiles.Controls.Add(ctrl);
-
-		ctrl.LoadProfile += Ctrl_LoadProfile;
-		ctrl.MergeProfile += Ctrl_MergeProfile;
-		ctrl.ExcludeProfile += Ctrl_ExcludeProfile;
-		ctrl.DisposeProfile += Ctrl_DisposeProfile;
-
-		return ctrl;
 	}
 
 	private void Ctrl_DisposeProfile(Profile obj)
@@ -188,23 +150,10 @@ public partial class PC_ProfileList : PanelContent
 
 	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
-		LC_Items.SetSorting(DD_Sorting.SelectedItem);
-		var sorted = (DD_Sorting.SelectedItem switch
+		if (IsHandleCreated)
 		{
-			ProfileSorting.Name => ProfileManager.Profiles.OrderByDescending(x => x.IsFavorite).ThenBy(x => x.Name),
-			ProfileSorting.DateCreated => ProfileManager.Profiles.OrderByDescending(x => x.IsFavorite).ThenByDescending(x => x.DateCreated),
-			ProfileSorting.Usage => ProfileManager.Profiles.OrderByDescending(x => x.IsFavorite).ThenByDescending(x => x.ForGameplay).ThenByDescending(x => x.ForAssetEditor).ThenBy(x => x.LastEditDate),
-			ProfileSorting.LastEdit or _ => ProfileManager.Profiles.OrderByDescending(x => x.IsFavorite).ThenByDescending(x => x.LastEditDate)
-		}).ToList();
-
-		var lastFavorited = sorted.LastOrDefault(x => x.IsFavorite);
-		FLP_Profiles.SuspendDrawing();
-		foreach (ProfilePreviewControl profile in FLP_Profiles.Controls)
-		{
-			FLP_Profiles.SetFlowBreak(profile, lastFavorited == profile.Profile);
+			LC_Items.SetSorting(DD_Sorting.SelectedItem);
 		}
-		FLP_Profiles.OrderBy(x => sorted.IndexOf((x as ProfilePreviewControl)!.Profile), false);
-		FLP_Profiles.ResumeDrawing();
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)

@@ -2,7 +2,6 @@
 
 using SlickControls;
 
-using System;
 using System.Reflection;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;

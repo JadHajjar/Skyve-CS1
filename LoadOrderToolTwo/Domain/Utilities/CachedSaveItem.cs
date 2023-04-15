@@ -1,6 +1,4 @@
-﻿using LoadOrderToolTwo.Utilities;
-
-namespace LoadOrderToolTwo.Domain.Utilities;
+﻿namespace LoadOrderToolTwo.Domain.Utilities;
 internal abstract class CachedSaveItem<TKey, TValue>
 {
 	private readonly TValue _currentValue;

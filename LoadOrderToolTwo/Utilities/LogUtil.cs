@@ -2,6 +2,7 @@
 
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
@@ -9,12 +10,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Utilities;
 public static class LogUtil
 {
+	static LogUtil()
+	{
+		try
+		{
+			foreach (var item in Directory.GetFiles(LocationManager.Combine(LocationManager.LotAppDataPath, "Support Logs")))
+			{
+				if (DateTime.Now - File.GetLastWriteTime(item) > TimeSpan.FromDays(15))
+				{
+					ExtensionClass.DeleteFile(item);
+				}
+			}
+		}
+		catch { }
+	}
+
 	public static string GameLogFile => LocationManager.Platform switch
 	{
 		Platform.MacOSX => $"/Users/{Environment.UserName}/Library/Logs/Unity/Player.log",
@@ -46,7 +60,7 @@ public static class LogUtil
 			}
 		}
 
-		Clipboard.SetData(DataFormats.FileDrop, new[] { file });
+		PlatformUtil.SetFileInClipboard(file);
 
 		return file;
 	}
@@ -81,11 +95,17 @@ public static class LogUtil
 			return;
 		}
 
-		zipArchive.CreateEntryFromFile(GameLogFile, "log.txt");
+		var tempLogFile = Path.GetTempFileName();
+		var tempLotLogFile = Path.GetTempFileName();
 
-		zipArchive.CreateEntryFromFile(Log.LogFilePath, "Tool\\LOT2.log");
+		ExtensionClass.CopyFile(GameLogFile, tempLogFile, true);
+		ExtensionClass.CopyFile(Log.LogFilePath, tempLotLogFile, true);
 
-		var logTrace = SimplifyLog(GameLogFile, out var simpleLogText);
+		zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
+
+		zipArchive.CreateEntryFromFile(tempLotLogFile, "Tool\\LOT2.log");
+
+		var logTrace = SimplifyLog(tempLogFile, out var simpleLogText);
 
 		AddSimpleLog(zipArchive, simpleLogText);
 

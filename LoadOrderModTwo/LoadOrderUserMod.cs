@@ -216,7 +216,10 @@ public class LoadOrderUserMod : IUserMod
 
 						proc.WaitForExit();
 
-						appSettings.Settings[key].Value = output.Trim();
+						if (File.Exists(output.Trim()))
+						{
+							appSettings.Settings[key].Value = output.Trim();
+						}
 					}
 					break;
 			}

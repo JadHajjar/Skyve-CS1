@@ -21,6 +21,8 @@ internal abstract class StatusBubbleBase : SlickImageControl
 		Width = (int)(180 * UI.FontScale);
 	}
 
+	protected virtual Color? TintColor { get; }
+
 	protected override void OnMouseMove(MouseEventArgs e)
 	{ }
 
@@ -30,12 +32,26 @@ internal abstract class StatusBubbleBase : SlickImageControl
 
 		SlickButton.GetColors(out var fore, out var back, HoverState);
 
+		if (TintColor != null)
+		{
+			if (HoverState.HasFlag(HoverState.Pressed))
+			{
+				back = TintColor.Value;
+			}
+			else
+			{
+				back = back.MergeColor(TintColor.Value);
+			}
+
+			fore = back.GetTextColor().MergeColor(fore);
+		}
+
 		if (!HoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
 		{
 			back = back.Tint(Lum: 1.5F);
 		}
 
-		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle, Padding.Left);
+		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle.Pad(2), Padding.Left);
 
 		var titleHeight = Math.Max(24, (int)e.Graphics.Measure(Text, UI.Font(9.75F, FontStyle.Bold), Width - Padding.Horizontal).Height);
 		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - 24) / 2), 24, 24);
@@ -46,9 +62,13 @@ internal abstract class StatusBubbleBase : SlickImageControl
 		}
 		else if (Image != null)
 		{
-			using var icon = new Bitmap(Image);
+			try
+			{
+				using var icon = new Bitmap(Image);
 
-			e.Graphics.DrawImage(icon.Color(fore), iconRectangle);
+				e.Graphics.DrawImage(icon.Color(fore), iconRectangle);
+			}
+			catch { }
 		}
 
 		e.Graphics.DrawString(Text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle(24 + (Padding.Left * 2), Padding.Top, Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
@@ -67,11 +87,25 @@ internal abstract class StatusBubbleBase : SlickImageControl
 
 	protected void DrawValue(PaintEventArgs e, ref int targetHeight, string value, string descriptor, Color? foreColor = null, int x = 0)
 	{
-		SlickButton.GetColors(out var fore, out _, HoverState);
+		SlickButton.GetColors(out var fore, out var back, HoverState);
 
 		if (foreColor != null && !HoverState.HasFlag(HoverState.Pressed))
 		{
 			fore = fore.MergeColor(foreColor.Value, 10);
+		}
+
+		if (TintColor != null && foreColor == null)
+		{
+			if (HoverState.HasFlag(HoverState.Pressed))
+			{
+				back = TintColor.Value;
+			}
+			else
+			{
+				back = back.MergeColor(TintColor.Value);
+			}
+
+			fore = back.GetTextColor().MergeColor(fore);
 		}
 
 		var valueSize = e.Graphics.Measure(value, UI.Font(8.25F, FontStyle.Bold), Width - Padding.Horizontal).ToSize();
@@ -86,11 +120,25 @@ internal abstract class StatusBubbleBase : SlickImageControl
 
 	protected void DrawText(PaintEventArgs e, ref int targetHeight, string text, Color? foreColor = null)
 	{
-		SlickButton.GetColors(out var fore, out _, HoverState);
+		SlickButton.GetColors(out var fore, out var back, HoverState);
 
 		if (foreColor != null && !HoverState.HasFlag(HoverState.Pressed))
 		{
 			fore = fore.MergeColor(foreColor.Value, 10);
+		}
+
+		if (TintColor != null && foreColor == null)
+		{
+			if (HoverState.HasFlag(HoverState.Pressed))
+			{
+				back = TintColor.Value;
+			}
+			else
+			{
+				back = back.MergeColor(TintColor.Value);
+			}
+
+			fore = back.GetTextColor().MergeColor(fore);
 		}
 
 		var valueSize = e.Graphics.Measure(text, UI.Font(8.25F), Width - Padding.Horizontal).ToSize();

@@ -35,13 +35,15 @@ partial class PC_MainPage
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_StartStop = new SlickControls.SlickButton();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-			this.label1 = new System.Windows.Forms.Label();
 			this.profileBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ProfileBubble();
 			this.modsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ModsBubble();
 			this.assetsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.AssetsBubble();
 			this.compatibilityReportBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.CompatibilityReportBubble();
+			this.label1 = new System.Windows.Forms.Label();
+			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
+			this.TLP_Profiles.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -87,7 +89,7 @@ partial class PC_MainPage
 			this.flowLayoutPanel1.AutoSize = true;
 			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
-			this.flowLayoutPanel1.Controls.Add(this.profileBubble);
+			this.flowLayoutPanel1.Controls.Add(this.TLP_Profiles);
 			this.flowLayoutPanel1.Controls.Add(this.modsBubble);
 			this.flowLayoutPanel1.Controls.Add(this.assetsBubble);
 			this.flowLayoutPanel1.Controls.Add(this.compatibilityReportBubble);
@@ -97,17 +99,6 @@ partial class PC_MainPage
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(773, 146);
 			this.flowLayoutPanel1.TabIndex = 1;
-			// 
-			// label1
-			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 380);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(55, 23);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "label1";
-			this.label1.Visible = false;
 			// 
 			// profileBubble
 			// 
@@ -145,6 +136,33 @@ partial class PC_MainPage
 			this.compatibilityReportBubble.TabIndex = 3;
 			this.compatibilityReportBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CompatibilityReportBubble_MouseClick);
 			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(3, 380);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(55, 23);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "label1";
+			this.label1.Visible = false;
+			// 
+			// TLP_Profiles
+			// 
+			this.TLP_Profiles.AutoSize = true;
+			this.TLP_Profiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TLP_Profiles.ColumnCount = 1;
+			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.TLP_Profiles.Controls.Add(this.profileBubble, 0, 0);
+			this.TLP_Profiles.Location = new System.Drawing.Point(0, 0);
+			this.TLP_Profiles.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+			this.TLP_Profiles.Name = "TLP_Profiles";
+			this.TLP_Profiles.RowCount = 1;
+			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_Profiles.Size = new System.Drawing.Size(156, 146);
+			this.TLP_Profiles.TabIndex = 13;
+			// 
 			// PC_MainPage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -157,6 +175,8 @@ partial class PC_MainPage
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
+			this.TLP_Profiles.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -172,4 +192,5 @@ partial class PC_MainPage
 	private UserInterface.StatusBubbles.AssetsBubble assetsBubble;
 	private StatusBubbles.CompatibilityReportBubble compatibilityReportBubble;
 	private System.Windows.Forms.Label label1;
+	private System.Windows.Forms.TableLayoutPanel TLP_Profiles;
 }

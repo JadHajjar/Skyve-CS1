@@ -7,30 +7,30 @@
             {
                 "Name": "Nuevo",
                 "Changes": [
-                    "Se ha añadido un botón 'Cancelar suscripción' en las acciones de las páginas de contenido.",
-                    "Añadida una sección de utilidad para suscribirse a elementos faltantes en una configuración BOB.",
-                    "Añadida una opción para que las secciones Filtros & Acción se abran por defecto.",
-                    "Añadidas páginas de registro de cambios, la verás en nuevas versiones o usando su botón en las secciones de Ayuda."
+                    "Agregado el botón 'Anular suscripción' en las acciones de las páginas de contenido.",
+                    "Agregada una sección de utilidad para suscribirse a elementos faltantes en una configuración BOB.",
+                    "Agregada opción para que las secciones Filtros & Accines se abran de manerta predeterminada.",
+                    "Agregadas páginas de registro de cambios, la verás en nuevas versiones o usando el botón en las secciones de Ayuda."
                 ]
             },
             {
                 "Name": "Mejoras",
                 "Changes": [
-                    "Añadido Informe de compatibilidad para activos rotos",
-                    "Los paquetes no listados ahora tienen el nombre correcto y la miniatura.",
-                    "Los marcadores de posición para la configuración de carpetas ahora reflejan correctamente su sistema operativo.",
-                    "Ctrl+Haga clic en el nombre de un autor para añadirlo a su filtro"
+                    "Agregado Informe de compatibilidad para activos no existentes",
+                    "Los paquetes no listados ahora tienen el nombre y la miniatura correcta.",
+                    "La configuración de carpetas (parámetros temporales) ahora reflejan correctamente su sistema operativo.",
+                    "Ctrl+Clic en el nombre de un autor para añadirlo al filtro"
                 ]
             },
             {
-                "Name": "Fijos",
+                "Name": "Corregidos",
                 "Changes": [
-                    "Se han corregido perfiles antiguos que no se están convirtiendo después del primer lanzamiento.",
-                    "Arreglados activos locales no se actualizan automáticamente después de los cambios externos.",
-                    "Se ha corregido la eliminación de activos locales desde el menú de clic derecho eliminando todos los activos locales en lugar de uno",
-                    "Conversión fija de perfiles LOT 1 resultando en activos marcados como 'Local'",
-                    "Se corrigieron las carpetas 'Real' que se intercambiaban al guardar para los usuarios de Linux y Mac.",
-                    "Los usuarios corregidos de Linux y Mac no pueden generar un zip de registro."
+                    "Perfiles antiguos no se convertían después de ejecutar la herramienta por primera vez.",
+                    "Activos locales no se actualizan automáticamente después de los cambios externos.",
+                    "Eliminación de assets locales desde el menú de clic derecho, eliminando todos los assets locales en lugar de uno",
+                    "Assets marcados como 'Local' al convertir perfiles de LOT1",
+                    "Carpetas se intercambiaban al guardar para los usuarios de Linux y Mac.",
+                    "Usuarios de Linux y Mac no podían generar los archivos zip de registro."
                 ]
             }
         ]
@@ -40,25 +40,25 @@
         "Date": "2023-04-08",
         "ChangeGroups": [
             {
-                "Name": "Añadida la sección Ayuda y Registros",
+                "Name": "Sección de Ayuda y Registros",
                 "Changes": [
-                    "Accede fácilmente a tus registros.",
-                    "Ve rápidamente los errores en tu sesión de juego más reciente/actual.",
-                    "Simplifique un archivo de registro para centrarse en lo que está sucediendo realmente.",
-                    "Comparte un archivo zip que contiene todos los registros necesarios para que alguien le ayude."
+                    "Accesa tus registros de manera fácil.",
+                    "Ve rápidamente los errores de tu sesión de juego más reciente.",
+                    "Simplifica un archivo de registro para centrarse en los errores más importantes.",
+                    "Comparte un archivo zip que contiene todos los registros necesarios para que alguien te ayude."
                 ]
             },
             {
                 "Name": "Mejoras",
                 "Changes": [
-                    "Cambiados los iconos de los filtros para reflejar los iconos correctos utilizados en la lista."
+                    "Cambiados los iconos de los filtros para reflejar los iconos utilizados en la lista."
                 ]
             },
             {
-                "Name": "Fijos",
+                "Name": "Corregidos",
                 "Changes": [
-                    "Se ha corregido el texto de la colección de importación para suscribirse y darse de baja de la suscripción.",
-                    "Se ha corregido la selección de mapas para un nuevo juego que no permitía a los usuarios seleccionar un mapa de vainilla."
+                    "Se ha corregido el texto al importar colecciones de suscribirse y anular suscripción.",
+                    "Se ha corregido la selección de mapas para un nuevo juego que no permitía a los usuarios seleccionar un mapa Vanilla."
                 ]
             }
         ]
@@ -68,9 +68,9 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Fijos",
+                "Name": "Corregidos",
                 "Changes": [
-                    "Se ha corregido un error que causaba una carga infinita para algunos usuarios."
+                    "Error que causaba una carga infinita para algunos usuarios."
                 ]
             }
         ]
@@ -82,10 +82,10 @@
             {
                 "Name": "Cambios",
                 "Changes": [
-                    "Eliminada la pestaña de suscripción de las opciones de mods del juego.",
-                    "No se aplican DLC fijos al cargar un perfil.",
-                    "Se ha corregido que la opción de idioma estaba vacía para algunas personas.",
-                    "La redescarga de vapor ya no forzará el enfoque a la herramienta.",
+                    "Eliminada pestaña de suscripción de las opciones de mods del juego.",
+                    "No se incluían DLCs al cargar un perfil.",
+                    "Opción de idioma estaba vacía para algunos usuarios.",
+                    "La descarga de Steam ya no forzará el enfoque a la herramienta.",
                     "Otros cambios en la interfaz de usuario."
                 ]
             }
@@ -98,11 +98,11 @@
             {
                 "Name": "Cambios",
                 "Changes": [
-                    "Añadiendo una ventana emergente de información al suscribirse a elementos por primera vez.",
-                    "Se añadió un texto de advertencia en el panel de control cuando tienes varias instancias LOM instaladas.",
-                    "Etiquetas pequeñas añadidas junto a los títulos del paquete.",
+                    "Ventana emergente de información al suscribirse a elementos por primera vez.",
+                    "Texto de advertencia en el panel de control cuando tienes varias instancias de LOM instaladas.",
+                    "Etiquetas pequeñas junto a los títulos del paquete.",
                     "Volver a descargar Load Order Tool iniciará la descarga y cerrará la aplicación mientras se actualiza.",
-                    "Fijada y mejorada la velocidad de los informes del Mod de Carga."
+                    "Mejorada la velocidad de carga de los reportes de Loading Screen Mod."
                 ]
             }
         ]
@@ -112,5 +112,50 @@
         "Date": "2023-04-05",
         "Tagline": "Versión pública beta",
         "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Presentando, Mejoras en Perfiles",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios en Perfiles",
+                "Changes": [
+                    "Nuevo diseño en la lista de perfiles.",
+                    "Los perfiles favoritos ahora se muestran en la Consola para permitir un cambio fácil entre ellos.",
+                    "Sección de 'Otros Perfiles' en la página de paquetes para excluirlos fácilmente de otros perfiles",
+                    "Nuevas opciones para ordenar perfiles. La selección se recordará a lo largo de las sesiones.",
+                    "Acciones de clic derecho en la lista de contenido para excluir o incluir un artículo en todos los paquetes.",
+                    "Botón para ver el archivo de un perfil en tu computadora.",
+                    "Ahora puedes asignar un color a tus perfiles.",
+                    "Ahora puedes crear un acceso directo en el escritorio para tus perfiles.",
+                    "Ahora puede importar un perfil de LOT 1 en la sección 'Agregar perfil'."
+                ]
+            },
+            {
+                "Name": "Mejoras",
+                "Changes": [
+                    "Los enlaces de Steam ahora se abrirán dentro de la ventana de Steam. Esto se puede desactivar en las Opciones.",
+                    "Los assets locales ahora están correctamente agrupados según las carpetas en las que se encuentran.",
+                    "Panel de tu cuenta de Paradox.",
+                    "Botones en la parte superior de la ventana tienes iconos reflejando sus acciones.",
+                    "Mejorada la capacidad de respuesta de las páginas de contenido.",
+                    "La búsqueda en las páginas de la contenidos es mucho más rápida.",
+                    "Carga de mods están en caché; resultando en cargas más eficientes en Windows y Linux, así como cargas mucho más rápidas en macOS.",
+                    "Ahora puedes generar un archivo zip de tus registros mientras el juego se está ejecutando."
+                ]
+            },
+            {
+                "Name": "Corregidos",
+                "Changes": [
+                    "Bloqueos que ocurren en las páginas de la lista de contenidos.",
+                    "Guardado automático de Perfiles no funciona correctamente.",
+                    "No era posible el uso de mapas del Workshop y juegos guardados en la configuración del perfil",
+                    "Mapas personalizados no cargaban cuando estaban seleccionados en la configuración del peril.",
+                    "Carga de perfiles en macOS y Linux que no siempre se aplican correctamente.",
+                    "Ubicación personalizada para los archivos de reportes de LSMR ahora comenzará correctamente al seleccionar un archivo de reporte en la página Utilidades."
+                ]
+            }
+        ]
     }
 ]

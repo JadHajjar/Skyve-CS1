@@ -5,7 +5,6 @@ using LoadOrderToolTwo.Domain.Utilities;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
@@ -21,7 +20,7 @@ internal class ModLogicManager
 
 	private static Dictionary<string, CollectionInfo> GetGroupInfo()
 	{
-		return new()
+		return new(StringComparer.OrdinalIgnoreCase)
 		{
 			[HARMONY_ASSEMBLY] = new() { Required = true },
 			[PATCH_ASSEMBLY] = new() { Required = true },
@@ -105,7 +104,9 @@ internal class ModLogicManager
 		foreach (var item in _modCollection.Collections)
 		{
 			if (item.Any(x => x.IsIncluded && x.IsEnabled))
+			{
 				continue;
+			}
 
 			item[0].IsIncluded = true;
 			item[0].IsEnabled = true;
@@ -115,7 +116,9 @@ internal class ModLogicManager
 	internal static bool IsPseudoMod(Mod mod)
 	{
 		if (LocationManager.FileExists(LocationManager.Combine(mod.Folder, "ThemeMix.xml")))
+		{
 			return true;
+		}
 
 		return false;
 	}

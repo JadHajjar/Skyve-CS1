@@ -2,7 +2,6 @@ using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Legacy;
 using LoadOrderToolTwo.Utilities.Managers;
 
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;

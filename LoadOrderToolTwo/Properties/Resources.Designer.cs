@@ -923,6 +923,26 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Link {
+            get {
+                object obj = ResourceManager.GetObject("I_Link", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Link_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Link_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Local {
             get {
                 object obj = ResourceManager.GetObject("I_Local", resourceCulture);
@@ -1473,6 +1493,16 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Star_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Star_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_StarFilled {
             get {
                 object obj = ResourceManager.GetObject("I_StarFilled", resourceCulture);
@@ -1566,6 +1596,16 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_TempProfile {
             get {
                 object obj = ResourceManager.GetObject("I_TempProfile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_TempProfile_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_TempProfile_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

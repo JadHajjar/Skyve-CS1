@@ -5,7 +5,7 @@ using System.IO;
 namespace LoadOrderToolTwo.Domain.Utilities;
 internal class ModCollection
 {
-	private readonly Dictionary<string, List<Mod>> _modList = new();
+	private readonly Dictionary<string, List<Mod>> _modList = new(StringComparer.OrdinalIgnoreCase);
 	private readonly Dictionary<string, CollectionInfo> _collectionList;
 
 	public ModCollection(Dictionary<string, CollectionInfo> collectionList)
@@ -13,7 +13,7 @@ internal class ModCollection
 		_collectionList = collectionList;
 	}
 
-    public void AddMod(Mod mod)
+	public void AddMod(Mod mod)
 	{
 		var key = Path.GetFileName(mod.FileName);
 
@@ -72,6 +72,6 @@ internal class ModCollection
 
 internal class CollectionInfo
 {
-    public bool Required { get; set; }
-    public bool Forbidden { get; set; }
+	public bool Required { get; set; }
+	public bool Forbidden { get; set; }
 }

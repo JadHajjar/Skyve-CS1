@@ -46,7 +46,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)
 	{
-		AssetsUtil.SetIncluded(filteredItems, included);
+		ContentUtil.SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Asset> filteredItems, bool enabled)

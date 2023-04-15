@@ -69,6 +69,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,7 +99,7 @@
     <Compile Update="UserInterface\Panels\PC_ModUtilities.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Profiles\NewProfileOptionControl.cs">
+    <Compile Update="UserInterface\Generic\NewProfileOptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Dropdowns\LanguageDropDown.cs" />

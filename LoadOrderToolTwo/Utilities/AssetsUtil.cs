@@ -4,7 +4,6 @@ using LoadOrderShared;
 
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Utilities;
-using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
@@ -50,13 +49,6 @@ internal class AssetsUtil
 				ExcludedHashSet.Add(item.Path);
 			}
 		}
-
-		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
-	}
-
-	private static void CentralManager_ContentLoaded()
-	{
-		BuildAssetIndex();
 	}
 
 	public static IEnumerable<Asset> GetAssets(Package package, bool withSubDirectories = true)
@@ -96,35 +88,9 @@ internal class AssetsUtil
 		SaveChanges();
 	}
 
-	internal static void SetIncluded(IEnumerable<Asset> assets, bool value)
-	{
-		var list = assets.ToList();
-
-		for (var i = 0; i < list.Count; i++)
-		{
-			if (value)
-			{
-				ExcludedHashSet.Remove(list[i].FileName.ToLower());
-			}
-			else
-			{
-				ExcludedHashSet.Add(list[i].FileName.ToLower());
-			}
-
-			CentralManager.InformationUpdate(list[i]);
-		}
-
-		if (!ProfileManager.ApplyingProfile && !CitiesManager.IsRunning())
-		{
-			SaveChanges();
-		}
-
-		ProfileManager.TriggerAutoSave();
-	}
-
 	public static void SaveChanges()
 	{
-		if (ProfileManager.ApplyingProfile)
+		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating)
 		{
 			return;
 		}
@@ -136,14 +102,14 @@ internal class AssetsUtil
 		_config.Serialize();
 	}
 
-	internal static Asset GetAsset(string? v)
+	internal static Asset GetAsset(string v)
 	{
-		return assetIndex.TryGet(v?.Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar).ToLower() ?? string.Empty);
+		return assetIndex.TryGet(v);
 	}
 
-	private static void BuildAssetIndex()
+	internal static void BuildAssetIndex()
 	{
-		assetIndex = CentralManager.Assets.ToDictionary(x => x.FileName.Replace('/', Path.DirectorySeparatorChar).Replace('\\', Path.DirectorySeparatorChar).ToLower());
+		assetIndex = CentralManager.Assets.ToDictionary(x => x.FileName.FormatPath(), StringComparer.OrdinalIgnoreCase);
 	}
 
 	internal static Bitmap? GetIcon(Asset asset)

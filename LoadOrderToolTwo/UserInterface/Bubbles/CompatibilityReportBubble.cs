@@ -1,10 +1,10 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -35,6 +35,23 @@ internal class CompatibilityReportBubble : StatusBubbleBase
 
 			CentralManager.ContentLoaded += CentralManager_InfoUpdated;
 		}
+
+		CentralManager.AssetInformationUpdated += Invalidate;
+		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+	}
+
+	protected override void Dispose(bool disposing)
+	{
+		base.Dispose(disposing);
+
+		CentralManager.AssetInformationUpdated -= Invalidate;
+		CentralManager.ContentLoaded -= CentralManager_InfoUpdated;
+		ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+	}
+
+	private void ProfileManager_ProfileChanged(Profile obj)
+	{
+		Invalidate();
 	}
 
 	private void CentralManager_InfoUpdated()

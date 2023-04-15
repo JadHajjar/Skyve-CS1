@@ -8,7 +8,6 @@ using SlickControls;
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -101,6 +100,16 @@ internal class DragAndDropControl : SlickControl
 
 		if (file != null)
 		{
+			if (LocationManager.Platform is not Platform.Windows)
+			{
+				var realPath = IOUtil.ToRealPath(file);
+
+				if (LocationManager.FileExists(realPath))
+				{
+					file = realPath!;
+				}
+			}
+
 			FileSelected?.Invoke(file);
 		}
 

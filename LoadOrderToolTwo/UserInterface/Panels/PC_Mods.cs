@@ -51,11 +51,11 @@ internal class PC_Mods : PC_ContentList<Mod>
 
 	protected override void SetIncluded(IEnumerable<Mod> filteredItems, bool included)
 	{
-		ModsUtil.SetIncluded(filteredItems, included);
+		ContentUtil.SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Mod> filteredItems, bool enabled)
 	{
-		ModsUtil.SetEnabled(filteredItems, enabled);
+		ContentUtil.SetBulkEnabled(filteredItems, enabled);
 	}
 }

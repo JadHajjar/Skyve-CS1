@@ -10,7 +10,7 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -36,6 +36,11 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		Text = Locale.HelpLogs;
 		L_Info.Text = Locale.DefaultLogViewInfo;
+	}
+
+	public override Color GetTopBarColor()
+	{
+		return FormDesign.Design.AccentBackColor;
 	}
 
 	protected override void UIChanged()
@@ -69,6 +74,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		base.DesignChanged(design);
 
+		BackColor = design.AccentBackColor;
 		TLP_Errors.BackColor = TLP_LogFolders.BackColor = TLP_HelpLogs.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
 	}
 
@@ -138,7 +144,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_CopyLogFile_Click(object sender, EventArgs e)
 	{
-		Clipboard.SetData(DataFormats.FileDrop, new[] { LogUtil.GameLogFile });
+		PlatformUtil.SetFileInClipboard(LogUtil.GameLogFile);
 	}
 
 	private void B_LotLog_Click(object sender, EventArgs e)
@@ -148,7 +154,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_LotLogCopy_Click(object sender, EventArgs e)
 	{
-		Clipboard.SetData(DataFormats.FileDrop, new[] { Log.LogFilePath });
+		PlatformUtil.SetFileInClipboard(Log.LogFilePath);
 	}
 
 	private void B_Discord_Click(object sender, EventArgs e)

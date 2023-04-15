@@ -2,10 +2,10 @@
 
 internal enum ProfileSorting
 {
-    LastUsed,
-    Name,
-    LastEdit,
+	LastUsed,
+	Name,
+	LastEdit,
 	DateCreated,
-    Usage,
-    Color
+	Usage,
+	Color
 }

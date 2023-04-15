@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Utilities.IO;
 internal static class PlatformUtil
@@ -17,7 +18,7 @@ internal static class PlatformUtil
 		{
 			if (url is null or "")
 			{
-				return; 
+				return;
 			}
 
 			if (CentralManager.SessionSettings.UserSettings.OpenLinksInBrowser)
@@ -49,8 +50,8 @@ internal static class PlatformUtil
 		try
 		{
 			if (folder is null or "")
-			{ 
-				return; 
+			{
+				return;
 			}
 
 			folder = folder.FormatPath();
@@ -70,8 +71,8 @@ internal static class PlatformUtil
 			_ = (char.IsLetter(folder[0]) ? Platform.Windows : LocationManager.Platform) switch
 			{
 				Platform.MacOSX => Process.Start("/bin/zsh", $"-c \" open -R '{Directory.EnumerateFiles(folder).FirstOrDefault()?.FormatPath() ?? folder}' \""),
-				Platform.Linux => Process.Start("/usr/bin/bash", $"-c \" xdg-open '{folder!.Replace(" ", "\\ ")}' \""),
-				//Platform.Linux => Process.Start("/usr/bin/xdg-open", folder!.Replace(" ", "\\ ")),
+				Platform.Linux => Process.Start("/usr/bin/bash", $"-c \" xdg-open '{folder}' \""),
+				//Platform.Linux => Process.Start("/usr/bin/xdg-open", folder),
 				Platform.Windows or _ => Process.Start(folder),
 			};
 		}
@@ -91,5 +92,24 @@ internal static class PlatformUtil
 			};
 		}
 		catch (Exception ex) { Log.Exception(ex, $"Failed to open the file: '{file}'"); }
+	}
+
+	public static void SetFileInClipboard(string path)
+	{
+		if (LocationManager.Platform is not Platform.Windows)
+		{
+			if (path[0] is 'c' or 'C')
+			{
+				var file = LocationManager.Combine(LocationManager.LotAppDataPath, "Support Logs", Path.GetFileName(path));
+
+				ExtensionClass.CopyFile(path, file, true);
+
+				path = file;
+			}
+
+			path = $"file://{IOUtil.ToRealPath(path)}";
+		}
+
+		Clipboard.SetData(DataFormats.FileDrop, new[] { path });
 	}
 }

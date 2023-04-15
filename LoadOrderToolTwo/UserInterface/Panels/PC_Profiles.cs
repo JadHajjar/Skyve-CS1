@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -83,7 +84,6 @@ public partial class PC_Profiles : PanelContent
 
 		L_ProfileUsage.ForeColor = design.LabelColor;
 		TLP_LaunchSettings.BackColor = TLP_AdvancedDev.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
-		TLP_ProfileName.BackColor = design.ButtonColor;
 		L_TempProfile.ForeColor = design.YellowColor;
 		P_Options.BackColor = design.AccentBackColor;
 	}
@@ -92,13 +92,21 @@ public partial class PC_Profiles : PanelContent
 	{
 		if (I_ProfileIcon.Loading)
 		{
-			Notification.Create("", "", PromptIcons.Hand, null).Show(Form, 10);
+			if (toBeDisposed)
+			{
+				Notification.Create(Locale.ProfileStillLoading, null, PromptIcons.Hand, null).Show(Form, 10);
+			}
+
 			return false;
 		}
-		
+
 		if (TB_Name.Visible)
 		{
-			Notification.Create("", "", PromptIcons.Hand, null).Show(Form, 10);
+			if (toBeDisposed)
+			{
+				Notification.Create(Locale.ApplyProfileNameBeforeExit, null, PromptIcons.Hand, null).Show(Form, 10);
+			}
+
 			return false;
 		}
 
@@ -117,6 +125,9 @@ public partial class PC_Profiles : PanelContent
 	{
 		loadingProfile = true;
 
+		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
+		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
+		I_ProfileIcon.Enabled = !profile.Temporary;
 		I_ProfileIcon.Image = profile.GetIcon();
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
 		B_TempProfile.Visible = !profile.Temporary;
@@ -206,8 +217,8 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.NoMods = CB_NoMods.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.LHT = CB_LHT.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.StartNewGame = CB_StartNewGame.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.MapToLoad = DD_NewMap.SelectedFile;
-		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = DD_SaveFile.SelectedFile;
+		CentralManager.CurrentProfile.LaunchSettings.MapToLoad = IOUtil.ToRealPath(DD_NewMap.SelectedFile);
+		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = IOUtil.ToRealPath(DD_SaveFile.SelectedFile);
 		CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
@@ -215,7 +226,7 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.DevUi = CB_DevUI.Checked;
 
-		CentralManager.CurrentProfile.LsmSettings.SkipFile = DD_SkipFile.SelectedFile;
+		CentralManager.CurrentProfile.LsmSettings.SkipFile = IOUtil.ToRealPath(DD_SkipFile.SelectedFile);
 		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
 		CentralManager.CurrentProfile.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
 		CentralManager.CurrentProfile.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
@@ -485,5 +496,20 @@ public partial class PC_Profiles : PanelContent
 		try
 		{ Ctrl_LoadProfile(profile); }
 		catch (Exception ex) { ShowPrompt(ex, "Failed to import your profile"); }
+	}
+
+	private void I_ProfileIcon_Click(object sender, EventArgs e)
+	{
+		var colorDialog = new SlickColorPicker(ProfileManager.CurrentProfile.Color ?? Color.Red);
+
+		if (colorDialog.ShowDialog() != DialogResult.OK)
+		{
+			return;
+		}
+
+		TLP_ProfileName.BackColor = colorDialog.Color;
+		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
+		ProfileManager.CurrentProfile.Color = colorDialog.Color;
+		ProfileManager.Save(ProfileManager.CurrentProfile);
 	}
 }

@@ -13,7 +13,9 @@ internal class PlainText : Component
 	public override void Draw(Graphics g, bool draw, HoverState hoverState, Point mouse, int width, ref int height)
 	{
 		if (string.IsNullOrWhiteSpace(Text))
+		{
 			return;
+		}
 
 		using var font = UI.Font(8.25F, FontStyle);
 

@@ -3,33 +3,27 @@
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.Utilities.IO;
 internal class MacAssemblyUtil
 {
 	public static bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
 	{
-		try
+		foreach (var path in dllPaths)
 		{
-			foreach (var path in dllPaths)
-			{
-				var cache = ContentUtil.GetDllModCache(path, out version);
+			var cache = ContentUtil.GetDllModCache(path, out version);
 
-				if (cache == true || (cache is null && CheckDllImplementsInterface(path, out version)))
-				{
-					dllPath = path;
-					return true;
-				}
+			if (cache == true || (cache is null && CheckDllImplementsInterface(path, out version)))
+			{
+				ContentUtil.SetDllModCache(path, true, version);
+				dllPath = path;
+				return true;
 			}
-		}
-		finally
-		{
+
+			ContentUtil.SetDllModCache(path, false, null);
 		}
 
 		dllPath = null;
@@ -50,6 +44,7 @@ internal class MacAssemblyUtil
 				case "UnifiedUILib.dll":
 				case "MoveItIntegration.dll":
 				case "System.Xml.Linq.dll":
+				case "LoadOrderInjections.dll":
 					return false;
 			}
 

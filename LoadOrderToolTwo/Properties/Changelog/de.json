@@ -2,35 +2,35 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Willkommen zur Changelog Ära",
+        "Tagline": "Willkommen zur Aktualisierungshistorie",
         "ChangeGroups": [
             {
                 "Name": "Neu",
                 "Changes": [
                     "\"Alle abmelden\"-Button in den Aktionen der Inhaltsseiten hinzugefügt.",
-                    "Fügte einen Utility Abschnitt hinzu, um fehlende Elemente in einer BOB Konfiguration zu abonnieren.",
-                    "Option hinzugefügt, um Filter & Aktionen standardmäßig öffnen zu lassen.",
-                    "Hinzugefügte Änderungsprotokoll-Seiten sehen Sie es auf neuen Versionen oder verwenden den Button in den Hilfe-Abschnitten."
+                    "Funktion hinzugefügt, um fehlende Elemente aus einer BOB Konfiguration zu abonnieren.",
+                    "Option hinzugefügt, um Filter & Aktionen standardmäßig geöffnet zu lassen.",
+                    "Änderungsprotokoll-Seite hinzugefügt, die bei neuen Versionen automatisch angezeigt wird, oder durch den Button in der Hilfe."
                 ]
             },
             {
                 "Name": "Verbesserungen",
                 "Changes": [
-                    "Kompatibilitätsbericht für kaputte Assets hinzugefügt",
-                    "Nicht gelistete Pakete haben nun den korrekten Namen und das Vorschaubild.",
-                    "Platzhalter für Ordnereinstellungen spiegeln nun korrekt Ihr Betriebssystem wider.",
-                    "Strg+Klicken Sie auf den Namen eines Autors, um ihn Ihrem Filter hinzuzufügen"
+                    "Kompatibilitätsbericht für defekte Gegenstände hinzugefügt",
+                    "Nicht gelistete Pakete zeigen nun den korrekten Namen und das Vorschaubild.",
+                    "Platzhalter für die Ordnereinstellungen spiegeln nun korrekt das Betriebssystem wider.",
+                    "Strg+Klick auf den Namen eines Autors, um ihn dem Filter hinzuzufügen"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Feste alte Profile werden nach dem ersten Start nicht konvertiert.",
-                    "Feste lokale Assets werden nach externen Änderungen nicht automatisch aktualisiert.",
-                    "Lösche lokale Assets aus dem Rechtsklick-Menü und lösche alle lokalen Assets anstatt nur einen",
-                    "Feste Konvertierung von LOT 1 Profilen, wodurch Assets als 'Lokal' markiert wurden",
-                    "Beheben von 'Real' Ordnern, die beim Speichern für Linux- und Mac-Benutzer ausgetauscht wurden.",
-                    "Behobene Linux & Mac Benutzer konnten keine Log-zip-Datei erzeugen."
+                    "Behoben, dass nach dem ersten Start alte Profile nicht konvertiert wurden.",
+                    "Behoben, dass lokale Gegenstände nach externen Änderungen nicht automatisch aktualisiert wurden.",
+                    "Behoben, dass das Löschen von lokalen Gegenständen mit dem Rechtsklick-Menü alle Gegenstände löschte anstatt nur das Gewählte.",
+                    "Behoben, dass durch die Konvertierung von LOT 1 Profilen, Gegenstände als 'Lokal' markiert wurden",
+                    "Behoben, dass die 'tatsächlichen' Ordnern, beim Speichern für Linux- und Mac-Benutzer vertauscht wurden.",
+                    "Behoben, dass Linux & Mac Benutzer keine Protokoll-zip-Datei erzeugen konnten."
                 ]
             }
         ]
@@ -42,23 +42,23 @@
             {
                 "Name": "Hilfe & Protokolle hinzugefügt",
                 "Changes": [
-                    "Einfacher Zugriff auf Ihre Logs.",
-                    "Zeigen Sie schnell Fehler in Ihrer letzten / aktuellen Spielsitzung an.",
-                    "Vereinfachen Sie eine Protokolldatei, um sich darauf zu konzentrieren, was tatsächlich passiert.",
-                    "Teilen Sie eine Zip-Datei, die alle Protokolle enthält, die für jemanden benötigt werden, um Ihnen zu helfen."
+                    "Einfacher Zugriff auf die Protokolle.",
+                    "Einfach Fehler in der letzten / aktuellen Spielsitzung anzeigen.",
+                    "Vereinfacht eine Protokolldatei, um besser erkennen zu können, was tatsächlich die Probleme sind.",
+                    "Teile eine Zip-Datei, die alle Protokolle enthält, die jemanden benötigt, der bei Problemen mit dem Spiel helfen soll."
                 ]
             },
             {
                 "Name": "Verbesserungen",
                 "Changes": [
-                    "Die Icons der Filter wurden geändert, um die in der Liste verwendeten Symbole wiederzugeben."
+                    "Die Icons der Filter wurden geändert, um mit den in der Liste verwendeten Symbolen übereinzustimmen."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Den Text in der Import-Sammlung für das Abonnieren und Abbestellen wurde behoben.",
-                    "Es wurde die Kartenauswahl für ein neues Spiel behoben, bei dem die Benutzer keine Vanille-Karte auswählen konnten."
+                    "Behoben, dass der Text beim Import von Kollektionen für das Abonnieren und Abbestellen vertauscht war.",
+                    "Behoben, dass bei der Kartenauswahl für ein neues Spiel keine Vanille-Karten auswählt werden konnten."
                 ]
             }
         ]
@@ -68,9 +68,9 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Es wurde ein Fehler behoben, der für einige Benutzer unendliches Laden verursachte."
+                    "Es wurde ein Fehler behoben, der für einige Benutzer ein unendliches Laden verursachte."
                 ]
             }
         ]
@@ -82,11 +82,11 @@
             {
                 "Name": "Änderungen",
                 "Changes": [
-                    "Die Registerkarte für Abonnements wurde von den Mod-Optionen im Spiel entfernt.",
-                    "Behobene DLCs werden beim Laden eines Profils nicht angewendet.",
-                    "Es wurde die Sprachoption für einige Personen behoben, die leer ist.",
-                    "Das erneute Herunterladen von Dampf erzwingt den Fokus nicht mehr zurück zum Werkzeug.",
-                    "Andere UI Änderungen."
+                    "Die Abonnierungsmöglichgkeit für Vanilla-Mods wurde entfernt.",
+                    "Behoben, dass die DLC-Auswahl beim Laden eines Profils nicht angewendet wurde.",
+                    "Behoben, dass die Sprachoption für einige Personen leer war.",
+                    "Das erneute Herunterladen von Steam erzwingt den Fokus nicht mehr zurück zum Load Order Tool.",
+                    "Andere Oberflächen-Änderungen."
                 ]
             }
         ]
@@ -98,11 +98,11 @@
             {
                 "Name": "Änderungen",
                 "Changes": [
-                    "Hinzufügen eines Info-Popups, wenn Sie Artikel zum ersten Mal abonnieren.",
-                    "Ein Warntext im Dashboard wurde hinzugefügt, wenn mehrere LOM-Instanzen installiert sind.",
-                    "Kleine Tags neben Pakettiteln hinzugefügt.",
-                    "Ein erneutes Herunterladen des Ladenauftragswerkzeugs wird den Download starten und die App schließen, während sie aktualisiert wird.",
-                    "Behoben und verbessert die Geschwindigkeit der Lädung-Mod-Berichte."
+                    "Hinzufügen eines Info-Popups, wenn man einen Artikel zum ersten Mal abonniert.",
+                    "Ein Warntext wurde in der Übersicht hinzugefügt, wenn mehrere LOM-Instanzen installiert sind.",
+                    "Kleine Tags neben den Pakettiteln hinzugefügt.",
+                    "Ein erneutes Herunterladen des Load Order Tools wird den Download starten und die App schließen, während sie aktualisiert wird.",
+                    "Fehler behoben und die Geschwindigkeit beim Laden der Berichte des Loading Screen Mod Revisited verbessert."
                 ]
             }
         ]
@@ -112,5 +112,50 @@
         "Date": "2023-04-05",
         "Tagline": "Öffentliche Beta-Version",
         "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "15.04.2023",
+        "Tagline": "Präsentation der Neugestaltung der Profilseite",
+        "ChangeGroups": [
+            {
+                "Name": "Profiländerungen",
+                "Changes": [
+                    "Das Design der Profilliste wurde geändert.",
+                    "Favoriten-Profile werden nun auf der Übersichtsseite angezeigt, um einen einfachen Wechsel zwischen ihnen zu ermöglichen.",
+                    "Den Abschnitt 'Andere Profile' auf der Seite eines Pakets hinzugefügt, um diese einfach in anderen Profilen auszuschließen oder hinzuzufügen",
+                    "Neue Optionen für die Profil-Sortierung hinzugefügt. Die ausgewählte Sortierung wird nun für die nächste Sitzung gespeichert.",
+                    "Rechtsklick Aktionen in der Inhaltsliste hinzugefügt, um ein Element in allen Paketen auszuschließen oder hinzuzufügen.",
+                    "Schaltfläche hinzugefügt, um die Datei eines Profils auf dem Computer anzuzeigen.",
+                    "Du kannst deinen Profilen nun eine Farbe zuweisen.",
+                    "Du kannst nun eine Desktop-Verknüpfung für deine Profile erstellen.",
+                    "LOT 1 Profile können nun unter 'Profil hinzufügen' importiert werden."
+                ]
+            },
+            {
+                "Name": "Verbesserungen",
+                "Changes": [
+                    "Steam-Links werden nun innerhalb der Steam-App geöffnet. Dies kann in den Optionen ausgeschaltet werden.",
+                    "Lokale Gegenstände werden nun korrekt gruppiert, basierend auf den Ordnern, in denen sie sich befinden.",
+                    "Das Paradox-Login-Panel im Hauptmenü wird von nun an immer angezeigt.",
+                    "Die Fensterschaltflächen rechts oben haben jetzt Icons, um ihre Aktionen zu erklären.",
+                    "Verbesserte Reaktionsfähigkeit der Inhaltslisten.",
+                    "Die Suche in den Inhaltslisten ist jetzt viel schneller.",
+                    "Das Laden von Mod wird jetzt zwischengespeichert - das führt zu besseren Ladezeiten auf Windows & Linux, sowie wesentlich schnelleren Ladezeiten auf macOS.",
+                    "Man kann nun während des laufenden Spiels eine Zip-Datei der Logs generieren."
+                ]
+            },
+            {
+                "Name": "Fehlerbehebungen",
+                "Changes": [
+                    "Behoben, dass Inhaltslisten einfrieren.",
+                    "Behoben, dass die automatische Sicherung der Profile nicht korrekt funktionierte.",
+                    "Behoben, dass in den Profileinstellungen Workshop-Karten & Spielstände nicht verwendet werden konnten.",
+                    "Behoben, dass benutzerdefinierte Karten nicht geladen wurden, wenn sie in den Profileinstellungen ausgewählt wurden.",
+                    "Behoben, dass das Laden von Profilen unter macOS & Linux nicht immer korrekt funktionierte.",
+                    "Behoben, dass bei der Auswahl einer LSMR Berichtsdatei ein benutzerdefinierter Speicherort nicht korrekt verwendet wurde."
+                ]
+            }
+        ]
     }
 ]

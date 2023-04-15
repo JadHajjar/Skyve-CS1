@@ -3,7 +3,6 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.CompatibilityReport;
-using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -12,7 +11,6 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 

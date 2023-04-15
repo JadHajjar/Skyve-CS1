@@ -67,6 +67,11 @@ internal static class ModsUtil
 
 	internal static void SavePendingValues()
 	{
+		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating)
+		{
+			return;
+		}
+
 #if DEBUG
 		Log.Debug("Saving pending mod values:\r\n" +
 			$"_includedLibrary {_includedLibrary._dictionary.Count}\r\n" +
@@ -105,7 +110,7 @@ internal static class ModsUtil
 
 	internal static void SetIncluded(Mod mod, bool value)
 	{
-		if (ProfileManager.ApplyingProfile || CitiesManager.IsRunning())
+		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating || CitiesManager.IsRunning())
 		{
 #if DEBUG
 			Log.Debug($"Delaying inclusion ({value}) for mod: {mod} (currently {IsLocallyIncluded(mod)}) ({mod.Folder})");
@@ -117,6 +122,14 @@ internal static class ModsUtil
 			SetLocallyIncluded(mod, value);
 		}
 
+		if (CentralManager.SessionSettings.UserSettings.LinkModAssets && mod.Package.Assets != null)
+		{
+			foreach (var asset in mod.Package.Assets)
+			{
+				asset.IsIncluded = value;
+			}
+		}
+
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			SetEnabled(mod, value);
@@ -124,30 +137,6 @@ internal static class ModsUtil
 		}
 
 		CentralManager.InformationUpdate(mod.Package);
-		ProfileManager.TriggerAutoSave();
-	}
-
-	internal static void SetIncluded(IEnumerable<Mod> mods, bool value)
-	{
-		var list = mods.ToList();
-
-		for (var i = 0; i < list.Count; i++)
-		{
-			_includedLibrary.SetValue(list[i], value);
-			CentralManager.InformationUpdate(list[i]);
-		}
-
-		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
-		{
-			SetEnabled(list, value);
-			return;
-		}
-
-		if (!ProfileManager.ApplyingProfile && !CitiesManager.IsRunning())
-		{
-			SavePendingValues();
-		}
-
 		ProfileManager.TriggerAutoSave();
 	}
 
@@ -170,19 +159,11 @@ internal static class ModsUtil
 #endif
 			File.WriteAllBytes(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
 		}
-
-		if (CentralManager.SessionSettings.UserSettings.LinkModAssets && mod.Package.Assets != null)
-		{
-			foreach (var asset in mod.Package.Assets)
-			{
-				asset.IsIncluded = value;
-			}
-		}
 	}
 
 	internal static void SetEnabled(Mod mod, bool value, bool save = true)
 	{
-		if (ProfileManager.ApplyingProfile || CitiesManager.IsRunning())
+		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating || CitiesManager.IsRunning())
 		{
 			_enabledLibrary.SetValue(mod, value);
 		}
@@ -192,25 +173,6 @@ internal static class ModsUtil
 		}
 
 		CentralManager.InformationUpdate(mod.Package);
-		ProfileManager.TriggerAutoSave();
-	}
-
-	internal static void SetEnabled(IEnumerable<Mod> mods, bool value)
-	{
-		var list = mods.ToList();
-
-		for (var i = 0; i < list.Count; i++)
-		{
-			_enabledLibrary.SetValue(list[i], value);
-
-			CentralManager.InformationUpdate(list[i]);
-		}
-
-		if (!ProfileManager.ApplyingProfile && !CitiesManager.IsRunning())
-		{
-			SavePendingValues();
-		}
-
 		ProfileManager.TriggerAutoSave();
 	}
 
@@ -302,7 +264,7 @@ internal static class ModsUtil
 
 	internal static Mod FindMod(string? folder)
 	{
-		return CentralManager.Mods.FirstOrDefault(x => x.Folder.PathEquals(folder));
+		return CentralManager.Mods.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
 	}
 
 	internal static Mod FindMod(ulong steamID)
@@ -324,7 +286,9 @@ internal static class ModsUtil
 			var tagText = match.Groups[1].Value.Trim();
 
 			if (!tags.Contains(tagText))
+			{
 				tags.Add(tagText);
+			}
 		}
 
 		return text;
@@ -335,7 +299,9 @@ internal static class ModsUtil
 		var match = Regex.Match(name, @"v?(\d+\.\d+(\.\d+)*(-[\d\w]+)*)", RegexOptions.IgnoreCase);
 
 		if (match.Success)
+		{
 			return "v" + match.Groups[1].Value;
+		}
 
 		return string.Empty;
 	}

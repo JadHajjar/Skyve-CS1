@@ -1,8 +1,5 @@
 ﻿using Extensions;
 
-using System;
-using System.Windows.Forms;
-
 namespace LoadOrderToolTwo.Utilities;
 internal class Locale : LocaleHelper
 {
@@ -214,7 +211,7 @@ internal class Locale : LocaleHelper
 	public static string TotalItems => _instance.GetText(nameof(TotalItems));
 	public static string MissingItemsRemain => _instance.GetText(nameof(MissingItemsRemain));
 	public static string ModIsPrivate => _instance.GetText(nameof(ModIsPrivate));
-    public static string SelectedFileInvalid => _instance.GetText(nameof(SelectedFileInvalid));
+	public static string SelectedFileInvalid => _instance.GetText(nameof(SelectedFileInvalid));
 	public static string NoItemsToBeDisplayed => _instance.GetText(nameof(NoItemsToBeDisplayed));
 	public static string FirstSetupInfo => _instance.GetText(nameof(FirstSetupInfo));
 	public static string SetupIncomplete => _instance.GetText(nameof(SetupIncomplete));
@@ -274,4 +271,14 @@ internal class Locale : LocaleHelper
 	public static string ProfileNameUsed => _instance.GetText(nameof(ProfileNameUsed));
 	public static string FailedToImportLegacyProfile => _instance.GetText(nameof(FailedToImportLegacyProfile));
 	public static string CurrentProfile => _instance.GetText(nameof(CurrentProfile));
+	public static string ProfileStillLoading => _instance.GetText(nameof(ProfileStillLoading));
+	public static string ApplyProfileNameBeforeExit => _instance.GetText(nameof(ApplyProfileNameBeforeExit));
+	public static string SteamNotOpenTo => _instance.GetText(nameof(SteamNotOpenTo));
+	public static string OpenSteamToContinue => _instance.GetText(nameof(OpenSteamToContinue));
+	public static string IncludeExcludeOtherProfile => _instance.GetText(nameof(IncludeExcludeOtherProfile));
+	public static string ChangeProfileColor => _instance.GetText(nameof(ChangeProfileColor));
+	public static string OpenProfileFolder => _instance.GetText(nameof(OpenProfileFolder));
+	public static string CreateShortcutProfile => _instance.GetText(nameof(CreateShortcutProfile));
+	public static string AskToLaunchGameForShortcut => _instance.GetText(nameof(AskToLaunchGameForShortcut));
+	public static string ProfilesLoaded => _instance.GetText(nameof(ProfilesLoaded));
 }

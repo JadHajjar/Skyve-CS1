@@ -63,7 +63,7 @@ public partial class PC_MissingLsmPackages : PanelContent
 
 		TB_Search.Margin = DD_Tags.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
-		TB_Search.Width =DD_Tags.Width= (int)(400 * UI.FontScale);
+		TB_Search.Width = DD_Tags.Width = (int)(400 * UI.FontScale);
 
 		B_SubscribeAll.Margin = B_IncludeAll.Margin = B_SubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
@@ -193,7 +193,9 @@ public partial class PC_MissingLsmPackages : PanelContent
 			foreach (var tag in DD_Tags.SelectedItems)
 			{
 				if (!(e.Item.Tags?.Any(tag) ?? false))
+				{
 					e.DoNotDraw = true;
+				}
 			}
 		}
 
@@ -229,10 +231,8 @@ public partial class PC_MissingLsmPackages : PanelContent
 
 	private void B_IncludeAll_Click(object sender, EventArgs e)
 	{
-		var items = LC_Items.FilteredItems.ToList();
+		var packages = LC_Items.FilteredItems.Select(x => { ContentUtil.GetGenericPackageState(x, out var p); return p; }).Where(x => x != null);
 
-		var packages = items.Select(x => { ContentUtil.GetGenericPackageState(x, out var p); return p; }).Where(x => x != null).ToList();
-
-		AssetsUtil.SetIncluded(packages.SelectMany(x => x!.Assets), true);
+		ContentUtil.SetBulkIncluded(packages!, true);
 	}
 }

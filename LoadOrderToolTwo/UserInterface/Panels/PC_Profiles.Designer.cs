@@ -1,5 +1,4 @@
 ﻿using LoadOrderToolTwo.UserInterface.Generic;
-using LoadOrderToolTwo.UserInterface.Profiles;
 using LoadOrderToolTwo.Utilities.Managers;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
@@ -78,8 +77,8 @@ partial class PC_Profiles
 			this.B_TempProfile = new SlickControls.SlickButton();
 			this.B_NewProfile = new SlickControls.SlickButton();
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
-			this.newProfileOptionControl1 = new LoadOrderToolTwo.UserInterface.Profiles.NewProfileOptionControl();
-			this.newProfileOptionControl2 = new LoadOrderToolTwo.UserInterface.Profiles.NewProfileOptionControl();
+			this.newProfileOptionControl1 = new LoadOrderToolTwo.UserInterface.Generic.NewProfileOptionControl();
+			this.newProfileOptionControl2 = new LoadOrderToolTwo.UserInterface.Generic.NewProfileOptionControl();
 			this.B_Cancel = new SlickControls.SlickButton();
 			this.DAD_NewProfile = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.TLP_ProfileName.SuspendLayout();
@@ -124,13 +123,13 @@ partial class PC_Profiles
 			this.I_ProfileIcon.ActiveColor = null;
 			this.I_ProfileIcon.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.I_ProfileIcon.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.I_ProfileIcon.Enabled = false;
 			this.I_ProfileIcon.Image = global::LoadOrderToolTwo.Properties.Resources.I_ProfileSettings;
 			this.I_ProfileIcon.Location = new System.Drawing.Point(8, 8);
 			this.I_ProfileIcon.Name = "I_ProfileIcon";
 			this.I_ProfileIcon.Size = new System.Drawing.Size(32, 32);
 			this.I_ProfileIcon.TabIndex = 0;
 			this.I_ProfileIcon.TabStop = false;
+			this.I_ProfileIcon.Click += new System.EventHandler(this.I_ProfileIcon_Click);
 			// 
 			// L_CurrentProfile
 			// 
@@ -414,7 +413,6 @@ partial class PC_Profiles
 			this.DD_NewMap.ValidExtensions = new string[] {
         ".crp"};
 			this.DD_NewMap.FileSelected += new System.Action<string>(this.DD_NewMap_FileSelected);
-			this.DD_NewMap.ValidFile += this.DD_ValidFile;
 			// 
 			// CB_LHT
 			// 
@@ -448,7 +446,6 @@ partial class PC_Profiles
 			this.DD_SaveFile.ValidExtensions = new string[] {
         ".crp"};
 			this.DD_SaveFile.FileSelected += new System.Action<string>(this.DD_SaveFile_FileSelected);
-		this.DD_SaveFile.ValidFile += DD_ValidFile;
 			// 
 			// CB_NoWorkshop
 			// 
@@ -590,7 +587,6 @@ partial class PC_Profiles
 			this.DD_SkipFile.ValidExtensions = new string[] {
         ".txt"};
 			this.DD_SkipFile.FileSelected += new System.Action<string>(this.DD_SkipFile_FileSelected);
-		this.DD_SkipFile.ValidFile += DD_ValidFile;
 			// 
 			// CB_SkipFile
 			// 
@@ -924,9 +920,9 @@ partial class PC_Profiles
 			this.DAD_NewProfile.TabIndex = 15;
 			this.DAD_NewProfile.Text = "DropNewProfile";
 			this.DAD_NewProfile.ValidExtensions = new string[] {
-        ".json",".xml"};
+        ".json",
+        ".xml"};
 			this.DAD_NewProfile.FileSelected += new System.Action<string>(this.DAD_NewProfile_FileSelected);
-		this.DAD_NewProfile.ValidFile += DD_ValidFile;
 			// 
 			// PC_Profiles
 			// 

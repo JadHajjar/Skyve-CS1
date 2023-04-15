@@ -9,12 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using static System.Environment;
-using static System.Windows.Forms.AxHost;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
 internal static class CentralManager
@@ -160,7 +157,7 @@ internal static class CentralManager
 
 		IsContentLoaded = true;
 
-		ContentLoaded?.Invoke();
+		OnContentLoaded();
 
 		if (CommandUtil.PreSelectedProfile == CurrentProfile.Name)
 		{
@@ -213,7 +210,9 @@ internal static class CentralManager
 			});
 		}
 		else
+		{
 			Log.Info($"No Steam Cache");
+		}
 
 		if (!ConnectionHandler.WhenConnected(UpdateSteamInformation))
 		{
@@ -415,7 +414,7 @@ internal static class CentralManager
 		}
 
 		RefreshSteamInfo(package);
-		ContentLoaded?.Invoke();
+		OnContentLoaded();
 	}
 
 	internal static void RefreshSteamInfo(Package package)
@@ -466,12 +465,14 @@ internal static class CentralManager
 		}
 
 		package.Status = DownloadStatus.NotDownloaded;
-		ContentLoaded?.Invoke();
+		OnContentLoaded();
 		_delayedWorkshopInfoUpdated.Run();
 	}
 
 	internal static void OnContentLoaded()
 	{
+		AssetsUtil.BuildAssetIndex();
+
 		ContentLoaded?.Invoke();
 	}
 }

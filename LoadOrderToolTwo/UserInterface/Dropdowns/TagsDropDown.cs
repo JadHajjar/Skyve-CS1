@@ -50,7 +50,7 @@ internal class TagsDropDown : SlickMultiSelectionDropDown<string>
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
 		var textSize = (int)e.Graphics.Measure(text, Font).Height;
-		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - textSize) / 2, 0, textSize);
+		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - textSize) / 2), 0, textSize);
 
 		textRect.Width = rectangle.Width - textRect.X;
 
@@ -64,7 +64,7 @@ internal class TagsDropDown : SlickMultiSelectionDropDown<string>
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
 		var textSize = (int)e.Graphics.Measure(items.ListStrings(", ").IfEmpty(Locale.AnyTags), Font).Height;
-		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + (rectangle.Height - textSize) / 2, 0, textSize);
+		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - textSize) / 2), 0, textSize);
 
 		textRect.Width = rectangle.Width - textRect.X;
 

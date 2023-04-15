@@ -2,28 +2,28 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Welcome to the change-log era",
+        "Tagline": "변경사항의 시대에 오신 것을 환영합니다",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "신규",
                 "Changes": [
-                    "Added an 'Unsubscribe All' button in content pages' actions.",
-                    "Added a Utility section to subscribe to missing items in a BOB config.",
-                    "Added an option to have Filters & Action sections open by default.",
-                    "Added change-log pages, you'll see it on new versions or using its button in the Help sections."
+                    "콘텐츠 페이지의 작업에 '모두 구독 취소' 버튼 추가.",
+                    "BOB 구성에서 누락된 항목을 구독하는 유틸리티 섹션 추가.",
+                    "기본적으로 필터 & 작업 섹션이 열리는 옵션 추가.",
+                    "변경사항 페이지 추가. 도움말 섹션의 버튼을 사용하거나 새 버전일 때 볼 수 있습니다."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "개선",
                 "Changes": [
-                    "Added Compatibility Report for broken Assets",
-                    "Unlisted packages now have the correct name and thumbnail.",
-                    "Placeholders for folder settings now correctly reflect your OS.",
-                    "Ctrl+Click on an author's name to add them to your filter"
+                    "고장난 에셋에 대한 호환성 보고서 추가",
+                    "미등록인 패키지도 이제 정상적인 이름과 썸네일을 가집니다.",
+                    "이제 폴더 설정에 대한 자리표시자에 당신의 OS가 올바르게 반영됩니다.",
+                    "제작자의 이름을 Ctrl+클릭하여 필터에 추가하기"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "수정",
                 "Changes": [
                     "Fixed legacy profiles not being converted after the first launch.",
                     "Fixed local assets not automatically refreshing after external changes.",
@@ -112,5 +112,50 @@
         "Date": "2023-04-05",
         "Tagline": "Beta Public Release",
         "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Presenting, the Profile Overhaul",
+        "ChangeGroups": [
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "Changed the design of your profile list.",
+                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
+                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
+                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
+                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
+                    "Added a button too view a Profile's file on your computer.",
+                    "You can now assign a color to your profiles.",
+                    "You can now create a desktop shortcut for your profiles.",
+                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                ]
+            },
+            {
+                "Name": "Improvements",
+                "Changes": [
+                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
+                    "Local assets are now correctly groupped based on the folders they're in.",
+                    "Your Paradox account panel will always be displayed from now on.",
+                    "The window buttons on the top right now have icons to explain their actions.",
+                    "Improved the responsiveness of the content list pages.",
+                    "Search in the content list pages is now much faster.",
+                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
+                    "You can now generate a zip file of your logs while the game is running."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed freezes happening in the content list pages.",
+                    "Fixed Profiles' Auto-Save not working correctly.",
+                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
+                    "Fixed custom maps not loading when selected in the profile settings.",
+                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
+                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                ]
+            }
+        ]
     }
 ]

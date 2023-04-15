@@ -32,19 +32,44 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 
+		sorting = CentralManager.SessionSettings.UserSettings.ProfileSorting;
+
 		Loading = !ProfileManager.ProfilesLoaded;
+
 		if (!Loading)
 		{
-			SetItems(ProfileManager.Profiles.Where(x => !x.Temporary));
+			SetItems(ProfileManager.Profiles.Skip(1));
 		}
 
 		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
+		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+	}
+
+	private void ProfileManager_ProfileChanged(Profile obj)
+	{
+		Invalidate();
+	}
+
+	internal void SetSorting(ProfileSorting selectedItem)
+	{
+		if (sorting == selectedItem)
+		{
+			return;
+		}
+
+		sorting = selectedItem;
+		CentralManager.SessionSettings.UserSettings.ProfileSorting = selectedItem;
+		CentralManager.SessionSettings.Save();
+		ResetScroll();
+
+		FilterOrSortingChanged();
 	}
 
 	protected override void Dispose(bool disposing)
 	{
 		if (disposing)
 		{
+			ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 			ProfileManager.ProfileUpdated -= ProfileManager_ProfileUpdated;
 		}
 
@@ -78,7 +103,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 	{
 		return sorting switch
 		{
-			ProfileSorting.Color => items.OrderByDescending(x => x.Item.IsFavorite).ThenBy(x => x.Item.Color?.ToArgb() ?? int.MaxValue),
+			ProfileSorting.Color => items.OrderByDescending(x => x.Item.IsFavorite).ThenBy(x => x.Item.Color?.GetHue() ?? float.MaxValue).ThenBy(x => x.Item.Color?.GetBrightness() ?? float.MaxValue).ThenBy(x => x.Item.Color?.GetSaturation() ?? float.MaxValue),
 			ProfileSorting.Name => items.OrderByDescending(x => x.Item.IsFavorite).ThenBy(x => x.Item.Name),
 			ProfileSorting.DateCreated => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.DateCreated),
 			ProfileSorting.Usage => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.ForGameplay).ThenByDescending(x => x.Item.ForAssetEditor).ThenBy(x => x.Item.LastEditDate),
@@ -93,14 +118,22 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 
 		if (rects.IncludedRect.Contains(location))
 		{
-			setTip(Locale.ExcludeInclude, rects.IncludedRect);
+			setTip(item.Item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, rects.IncludedRect);
+		}
+		else if (rects.IconRect.Contains(location))
+		{
+			setTip(Locale.ChangeProfileColor, rects.IconRect);
+		}
+		else if (rects.LoadRect.Contains(location))
+		{
+			setTip(Locale.ProfileReplace, rects.LoadRect);
 		}
 		else if (rects.FolderRect.Contains(location))
 		{
-			setTip(Locale.ViewOnSteam, rects.FolderRect);
+			setTip(Locale.OpenProfileFolder, rects.FolderRect);
 		}
 
-		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, timeout: 20000, offset: new Point(rectangle.X, item.Bounds.Y));
+		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
 
 		return rects.Contain(location);
 	}
@@ -109,11 +142,23 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 	{
 		base.OnItemMouseClick(item, e);
 
+		if (e.Button == MouseButtons.Right)
+		{
+			ShowRightClickMenu(item.Item);
+			return;
+		}
+
+		if (e.Button != MouseButtons.Left)
+		{
+			return;
+		}
+
 		var rects = _itemRects.TryGet(item);
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
 			item.Item.IsFavorite = !item.Item.IsFavorite;
+			ProfileManager.Save(item.Item);
 		}
 		else if (rects.LoadRect.Contains(e.Location))
 		{
@@ -121,20 +166,44 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		}
 		else if (rects.IconRect.Contains(e.Location))
 		{
-			var colorDialog = new SlickColorPicker(item.Item.Color ?? Color.Red);
-
-			if (colorDialog.ShowDialog() != DialogResult.OK)
-			{
-				return;
-			}
-
-			item.Item.Color = colorDialog.Color;
-			ProfileManager.Save(item.Item);
+			ChangeColor(item.Item);
 		}
 		else if (rects.FolderRect.Contains(e.Location))
 		{
 			PlatformUtil.OpenFolder(ProfileManager.GetFileName(item.Item));
 		}
+	}
+
+	private void ChangeColor(Profile item)
+	{
+		var colorDialog = new SlickColorPicker(item.Color ?? Color.Red);
+
+		if (colorDialog.ShowDialog() != DialogResult.OK)
+		{
+			return;
+		}
+
+		item.Color = colorDialog.Color;
+		ProfileManager.Save(item);
+	}
+
+	private void ShowRightClickMenu(Profile item)
+	{
+		var items = new SlickStripItem[]
+		{
+			  new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, () => { item.IsFavorite = !item.IsFavorite; ProfileManager.Save(item); }, Properties.Resources.I_Star_16)
+			, new (Locale.ChangeProfileColor, () => this.TryBeginInvoke(() => ChangeColor(item)), Properties.Resources.I_Theme_16)
+			, new (Locale.CreateShortcutProfile, () => ProfileManager.CreateShortcut(item), Properties.Resources.I_Link_16, LocationManager.Platform is Platform.Windows)
+			, new (Locale.OpenProfileFolder, () => PlatformUtil.OpenFolder(ProfileManager.GetFileName(item)), Properties.Resources.I_Folder_16)
+			, new (string.Empty)
+			, new (Locale.ProfileReplace, () => LoadProfile?.Invoke(item), Properties.Resources.I_Import_16)
+			, new (Locale.ProfileMerge, () => MergeProfile?.Invoke(item), Properties.Resources.I_Merge_16)
+			, new (Locale.ProfileExclude, () => ExcludeProfile?.Invoke(item), Properties.Resources.I_Exclude_16)
+			, new (string.Empty)
+			, new (Locale.ProfileDelete, () => DisposeProfile?.Invoke(item), Properties.Resources.I_Disposable_16)
+		};
+
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -191,9 +260,14 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IconRect.Gradient(e.Item.Color.Value, 1.5F), rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
+		if (rects.IconRect.Contains(CursorLocation))
+		{
+			e.Graphics.FillRoundedRectangle(rects.IconRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
+		}
+
 		using var profileIcon = e.Item.GetIcon();
 
-		e.Graphics.DrawImage(profileIcon.Color(iconColor), rects.IconRect.CenterR(profileIcon.Size));
+		e.Graphics.DrawImage(profileIcon.Color(rects.IconRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : iconColor), rects.IconRect.CenterR(profileIcon.Size));
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
@@ -241,7 +315,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		using var foreBrush = new SolidBrush(color.GetTextColor());
 
 		e.Graphics.FillRoundedRectangle(backBrush, rectangle, (int)(3 * UI.FontScale));
-		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + Padding.Left * 2 - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(text, UI.Font(large ? 9F : 7.5F), foreBrush, icon is null ? rectangle : rectangle.Pad(icon.Width + (Padding.Left * 2) - 2, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
 		if (icon is not null)
 		{
@@ -259,23 +333,11 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			FolderRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 
-		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + 2 * Padding.Left).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
+		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
 
-		rects.TextRect = new Rectangle(rects.IconRect.Right + Padding.Left, rectangle.Y, rects.FolderRect.X - rects.IconRect.Right - 2 * Padding.Left, rectangle.Height);
+		rects.TextRect = new Rectangle(rects.IconRect.Right + Padding.Left, rectangle.Y, rects.FolderRect.X - rects.IconRect.Right - (2 * Padding.Left), rectangle.Height);
 
 		return rects;
-	}
-
-	internal void SetSorting(ProfileSorting selectedItem)
-	{
-		if (sorting == selectedItem)
-		{
-			return;
-		}
-
-		sorting = selectedItem;
-
-		FilterOrSortingChanged();
 	}
 
 	private class Rectangles

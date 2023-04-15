@@ -1,7 +1,6 @@
 ﻿using SlickControls;
 
 using System.Drawing;
-using System.Text.RegularExpressions;
 
 namespace LoadOrderToolTwo.Domain.Steam.Markdown;
 

@@ -77,6 +77,7 @@ public static class AssemblyUtil
 				case "UnifiedUILib.dll":
 				case "MoveItIntegration.dll":
 				case "System.Xml.Linq.dll":
+				case "LoadOrderInjections.dll":
 					return false;
 			}
 

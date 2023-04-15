@@ -2,23 +2,23 @@
 
 public enum DownloadStatus
 {
-    None,
-    OK,
-    Unknown,
-    OutOfDate,
-    NotDownloaded,
-    PartiallyDownloaded,
-    Removed,
+	None,
+	OK,
+	Unknown,
+	OutOfDate,
+	NotDownloaded,
+	PartiallyDownloaded,
+	Removed,
 }
 
 public enum DownloadStatusFilter
 {
-    Any,
-    None,
-    OK,
-    Unknown,
-    OutOfDate,
-    NotDownloaded,
-    PartiallyDownloaded,
-    Removed,
+	Any,
+	None,
+	OK,
+	Unknown,
+	OutOfDate,
+	NotDownloaded,
+	PartiallyDownloaded,
+	Removed,
 }

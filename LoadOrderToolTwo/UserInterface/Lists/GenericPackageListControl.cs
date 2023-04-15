@@ -9,7 +9,6 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -95,7 +94,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 			setTip(item.Item.Name, rects.TextRect);
 		}
 
-		void setTip(string? text, Rectangle rectangle) => SlickTip.SetTo(this, text, timeout: 20000, offset: new Point(rectangle.X, item.Bounds.Y));
+		void setTip(string? text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
 
 		return rects.Contain(location);
 	}

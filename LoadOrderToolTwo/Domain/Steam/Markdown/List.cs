@@ -1,6 +1,5 @@
 ﻿using SlickControls;
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -25,14 +24,18 @@ internal class List : Component
 			if (i + 7 < text.Length)
 			{
 				if (text.Substring(i, 6).ToLower() == "[list]")
+				{
 					currentNesting++;
+				}
 				else if (text.Substring(i, 7).ToLower() == "[/list]")
+				{
 					currentNesting--;
+				}
 			}
 
 			if (i + 2 < text.Length)
 			{
-				if (currentNesting == 0 && text[i] == '[' && text[i+1] == '*'&&text[i+2] == ']')
+				if (currentNesting == 0 && text[i] == '[' && text[i + 1] == '*' && text[i + 2] == ']')
 				{
 					if (currentItemIndex != -1)
 					{

@@ -1,4 +1,6 @@
 ﻿using Extensions;
+
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -35,6 +37,22 @@ internal class ModsBubble : StatusBubbleBase
 
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		CentralManager.ModInformationUpdated += Invalidate;
+		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+	}
+
+	protected override void Dispose(bool disposing)
+	{
+		base.Dispose(disposing);
+
+		CentralManager.ContentLoaded -= Invalidate;
+		CentralManager.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
+		CentralManager.ModInformationUpdated -= Invalidate;
+		ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+	}
+
+	private void ProfileManager_ProfileChanged(Profile obj)
+	{
+		Invalidate();
 	}
 
 	private void CentralManager_WorkshopInfoUpdated()
