@@ -628,7 +628,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			var color = item.ToLower() switch
 			{
 				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-				"beta" => Color.FromArgb(180, FormDesign.Design.YellowColor),
+				"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
 				"deprecated" => Color.FromArgb(225, FormDesign.Design.RedColor),
 				_ => (Color?)null
 			};

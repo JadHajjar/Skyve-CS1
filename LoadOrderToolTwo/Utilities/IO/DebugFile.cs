@@ -30,7 +30,7 @@ public class CitiesFile : DebugFile
 public abstract class DebugFile
 {
 	public abstract string ResourceFileName { get; }
-	public string ResourceFilePath => LocationManager.Combine(LocationManager.CurrentDirectory, ResourceFileName);
+	public string ResourceFilePath => LocationManager.Combine(Program.CurrentDirectory, ResourceFileName);
 
 	public abstract string ReleaseFilePath { get; }
 	public abstract string DebugFilePath { get; }

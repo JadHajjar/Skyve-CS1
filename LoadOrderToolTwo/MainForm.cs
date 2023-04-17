@@ -71,10 +71,10 @@ public partial class MainForm : BasePanelForm
 
 		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
 
-		if (File.Exists(LocationManager.Combine(Path.GetDirectoryName(Application.ExecutablePath), "batch.bat")))
+		if (File.Exists(LocationManager.Combine(Program.CurrentDirectory, "batch.bat")))
 		{
 			try
-			{ ExtensionClass.DeleteFile(LocationManager.Combine(Path.GetDirectoryName(Application.ExecutablePath), "batch.bat")); }
+			{ ExtensionClass.DeleteFile(LocationManager.Combine(Program.CurrentDirectory, "batch.bat")); }
 			catch { }
 		}
 	}
@@ -159,12 +159,12 @@ public partial class MainForm : BasePanelForm
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		if (!LocationManager.FileExists(LocationManager.Combine(LocationManager.CurrentDirectory, "Wake")))
+		if (!LocationManager.FileExists(LocationManager.Combine(Program.CurrentDirectory, "Wake")))
 		{
 			return;
 		}
 
-		ExtensionClass.DeleteFile(LocationManager.Combine(LocationManager.CurrentDirectory, "Wake"));
+		ExtensionClass.DeleteFile(LocationManager.Combine(Program.CurrentDirectory, "Wake"));
 
 		if (isGameRunning)
 		{

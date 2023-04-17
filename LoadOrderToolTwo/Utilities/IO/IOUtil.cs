@@ -22,9 +22,8 @@ internal static class IOUtil
 				return null;
 			}
 
-#if DEBUG
-			Log.Debug($"Executing: {exeFile} {args}");
-#endif
+			Log.Info($"Executing: {exeFile} {args}");
+
 			var startInfo = new ProcessStartInfo
 			{
 				WorkingDirectory = Path.GetDirectoryName(exeFile).FormatPath(),
@@ -60,9 +59,9 @@ internal static class IOUtil
 	{
 		try
 		{
-			File.WriteAllText(LocationManager.Combine(LocationManager.CurrentDirectory, "batch.bat"), command);
+			File.WriteAllText(LocationManager.Combine(Program.CurrentDirectory, "batch.bat"), command);
 
-			Execute(LocationManager.Combine(LocationManager.CurrentDirectory, "batch.bat"), "", true, true);
+			Execute(LocationManager.Combine(Program.CurrentDirectory, "batch.bat"), "", true, true);
 		}
 		catch (Exception ex) { Log.Exception(ex, "Failed to start batch to restart the tool after update"); }
 	}

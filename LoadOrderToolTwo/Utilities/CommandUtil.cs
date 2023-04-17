@@ -28,7 +28,7 @@ internal static class CommandUtil
 	{
 		if (isCommand("stub", out _))
 		{
-			Process.Start(Application.ExecutablePath);
+			Process.Start(Program.ExecutablePath);
 
 			return true;
 		}

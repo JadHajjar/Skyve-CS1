@@ -7,30 +7,44 @@ using System.IO;
 using IoPath = System.IO.Path;
 
 namespace LoadOrderToolTwo.Domain.Utilities;
-internal class PackageWatcher : FileSystemWatcher
+internal class PackageWatcher
 {
 	private readonly DelayedAction<string> _delayedUpdate = new(1500);
 	private static readonly List<PackageWatcher> _watchers = new();
 
+	private FileSystemWatcher? watcher;
+
 	private PackageWatcher(string folder, bool allowSelf, bool workshop)
 	{
-		this.Path = folder;
-		NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-		Filter = "*.*";
-		IncludeSubdirectories = true;
-
-		Changed += new FileSystemEventHandler(FileChanged);
-		Created += new FileSystemEventHandler(FileChanged);
-		Deleted += new FileSystemEventHandler(FileChanged);
-
-		EnableRaisingEvents = true;
-
+		Path = folder;
 		AllowSelf = allowSelf;
 		Workshop = workshop;
+
+		CreateWatcher();
+	}
+
+	private void CreateWatcher()
+	{
+		watcher?.Dispose();
+
+		watcher = new()
+		{
+			Path = Path,
+			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
+			Filter = "*.*",
+			IncludeSubdirectories = true
+		};
+
+		watcher.Changed += new FileSystemEventHandler(FileChanged);
+		watcher.Created += new FileSystemEventHandler(FileChanged);
+		watcher.Deleted += new FileSystemEventHandler(FileChanged);
+
+		watcher.EnableRaisingEvents = true;
 	}
 
 	public bool AllowSelf { get; }
 	public bool Workshop { get; }
+	public string Path { get; }
 
 	private void FileChanged(object sender, FileSystemEventArgs e)
 	{
@@ -99,7 +113,7 @@ internal class PackageWatcher : FileSystemWatcher
 	{
 		foreach (var item in _watchers)
 		{
-			item.EnableRaisingEvents = false;
+			item.watcher?.Dispose();
 		}
 	}
 
@@ -107,7 +121,7 @@ internal class PackageWatcher : FileSystemWatcher
 	{
 		foreach (var item in _watchers)
 		{
-			item.EnableRaisingEvents = true;
+			item.CreateWatcher();
 		}
 	}
 }

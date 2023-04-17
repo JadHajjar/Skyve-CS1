@@ -28,6 +28,7 @@ internal static class CentralManager
 	private static readonly DelayedAction _delayedPackageInformationUpdated;
 	private static readonly DelayedAction _delayedModInformationUpdated;
 	private static readonly DelayedAction _delayedAssetInformationUpdated;
+	private static readonly DelayedAction _delayedContentLoaded;
 
 	public static Profile CurrentProfile => ProfileManager.CurrentProfile;
 	public static bool IsContentLoaded { get; private set; }
@@ -99,7 +100,7 @@ internal static class CentralManager
 
 	static CentralManager()
 	{
-		ISave.CustomSaveDirectory = Directory.GetParent(Application.ExecutablePath).FullName;
+		ISave.CustomSaveDirectory = Program.CurrentDirectory;
 
 		try
 		{
@@ -116,6 +117,7 @@ internal static class CentralManager
 
 		SessionSettings = ISave.Load<SessionSettings>(nameof(SessionSettings) + ".json");
 
+		_delayedContentLoaded = new(300, () => ContentLoaded?.Invoke());
 		_delayedWorkshopInfoUpdated = new(300, () => WorkshopInfoUpdated?.Invoke());
 		_delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
 		_delayedModInformationUpdated = new(300, () => ModInformationUpdated?.Invoke());
@@ -473,6 +475,6 @@ internal static class CentralManager
 	{
 		AssetsUtil.BuildAssetIndex();
 
-		ContentLoaded?.Invoke();
+		_delayedContentLoaded.Run();
 	}
 }

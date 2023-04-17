@@ -82,7 +82,7 @@ partial class PC_ModUtilities
 			this.TB_CollectionLink.TabIndex = 13;
 			this.TB_CollectionLink.Validation = SlickControls.ValidationType.Regex;
 			this.TB_CollectionLink.ValidationRegex = "^(?:https:\\/\\/steamcommunity\\.com\\/(?:(?:sharedfiles)|(?:workshop))\\/filedetails\\" +
-    "/\\?id=)?(\\d{8,20})$";
+    "/\\?id=)?(\\d{8,20})";
 			this.TB_CollectionLink.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TB_CollectionLink_PreviewKeyDown);
 			// 
 			// P_Collecttions

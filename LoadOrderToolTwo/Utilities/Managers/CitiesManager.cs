@@ -242,27 +242,25 @@ public static class CitiesManager
 
 		IOUtil.Execute(file, command);
 
-		var stopwatch = Stopwatch.StartNew();
-
-		while (!IsRunning() && stopwatch.ElapsedMilliseconds < 60000)
+		if (!unsub && LocationManager.Platform is Platform.Windows)
 		{
-			await Task.Delay(100);
-		}
+			var stopwatch = Stopwatch.StartNew();
 
-		while (IsRunning() && stopwatch.ElapsedMilliseconds < 60000)
-		{
-			await Task.Delay(100);
-		}
+			while (!IsRunning() && stopwatch.ElapsedMilliseconds < 60000)
+			{
+				await Task.Delay(100);
+			}
 
-		await Task.Delay(1000);
+			while (IsRunning() && stopwatch.ElapsedMilliseconds < 60000)
+			{
+				await Task.Delay(100);
+			}
+
+			await Task.Delay(1000);
+		}
 
 		if (!unsub)
 		{
-			if (LocationManager.Platform is Platform.MacOSX)
-			{
-				SteamUtil.ReDownload(ids.ToArray());
-			}
-
 			SteamUtil.ReDownload(ids.ToArray());
 		}
 

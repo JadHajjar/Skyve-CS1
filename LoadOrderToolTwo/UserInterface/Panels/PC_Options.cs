@@ -145,7 +145,7 @@ public partial class PC_Options : PanelContent
 			{
 				LocationManager.SetPaths(TB_GamePath.Text, TB_AppDataPath.Text, TB_SteamPath.Text);
 
-				Process.Start(Application.ExecutablePath);
+				Process.Start(Program.ExecutablePath);
 
 				folderPathsChanged = false;
 

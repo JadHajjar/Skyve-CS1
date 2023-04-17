@@ -21,7 +21,6 @@ internal static class LocationManager
 	public static string AppDataPath { get; set; }
 	public static string SteamPath { get; set; }
 
-	public static string CurrentDirectory { get; }
 	public static Platform Platform { get; private set; }
 
 	public static string DataPath => Combine(GamePath, "Cities_Data");
@@ -93,8 +92,6 @@ internal static class LocationManager
 	static LocationManager()
 	{
 		_folderSettings = ISave.Load<FolderSettings>(nameof(FolderSettings) + ".json");
-
-		CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath).FormatPath();
 
 		if (_folderSettings.GamePath is null)
 		{

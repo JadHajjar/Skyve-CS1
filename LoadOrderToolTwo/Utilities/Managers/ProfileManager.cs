@@ -375,6 +375,8 @@ public static class ProfileManager
 		{
 			SetProfile(Profile.TemporaryProfile);
 		}
+
+		ProfileUpdated?.Invoke();
 	}
 
 	internal static void SetProfile(Profile profile)
@@ -1105,7 +1107,7 @@ public static class ProfileManager
 			var launch = MessagePrompt.Show(Locale.AskToLaunchGameForShortcut, PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
 
 			ExtensionClass.CreateShortcut(LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), item.Name + ".lnk")
-				, Application.ExecutablePath
+				, Program.ExecutablePath
 				, (launch ? "-launch " : "") + $"-profile {item.Name}");
 		}
 		catch (Exception ex)

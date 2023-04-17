@@ -17,8 +17,17 @@ namespace LoadOrderToolTwo;
 #nullable disable
 internal static class Program
 {
-	internal static bool IsRunning { get; private set; }
+	internal static bool IsRunning { get; }
+	internal static string CurrentDirectory { get; }
+	internal static string ExecutablePath { get; }
 	internal static MainForm MainForm { get; private set; }
+
+	static Program()
+	{
+		CurrentDirectory = Application.StartupPath;
+		ExecutablePath = Application.ExecutablePath;
+		IsRunning = true;
+	}
 
 	/// <summary>
 	///  The main entry point for the application.
@@ -28,8 +37,6 @@ internal static class Program
 	{
 		try
 		{
-			IsRunning = true;
-
 			if (CommandUtil.Parse(args))
 			{
 				return;
@@ -37,7 +44,7 @@ internal static class Program
 
 			try
 			{
-				var toolPath = Application.ExecutablePath;
+				var toolPath = ExecutablePath;
 				var openTools = !CommandUtil.NoWindow && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
 
 				if (openTools)

@@ -316,7 +316,9 @@ public static class SteamUtil
 
 	public static void ReDownload(params IPackage[] packages)
 	{
-		if (packages.Any(x => x.Folder.PathEquals(Path.GetDirectoryName(LocationManager.CurrentDirectory))))
+		var currentPath= IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
+
+		if (packages.Any(x => x.Folder.PathEquals(currentPath)))
 		{
 			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, Program.MainForm) == DialogResult.Cancel)
 			{
@@ -326,11 +328,6 @@ public static class SteamUtil
 			IOUtil.WaitForUpdate();
 
 			Application.Exit();
-		}
-
-		if (LocationManager.Platform is Platform.MacOSX)
-		{
-			ReDownload(packages.Select(x => x.SteamId).ToArray());
 		}
 
 		ReDownload(packages.Select(x => x.SteamId).ToArray());
