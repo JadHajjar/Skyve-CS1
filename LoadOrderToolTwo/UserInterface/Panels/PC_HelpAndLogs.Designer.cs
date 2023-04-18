@@ -349,6 +349,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Errors.Size = new System.Drawing.Size(743, 45);
 			this.TLP_Errors.TabIndex = 2;
 			this.TLP_Errors.Text = "ErrorsInLog";
+			this.TLP_Errors.Visible = false;
 			// 
 			// I_Info
 			// 

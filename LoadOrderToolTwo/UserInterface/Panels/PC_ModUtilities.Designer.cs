@@ -34,6 +34,10 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_LoadCollection = new SlickControls.SlickButton();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
+			this.P_Text = new SlickControls.RoundedGroupPanel();
+			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.DD_TextImport = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
+			this.B_ImportClipboard = new SlickControls.SlickButton();
 			this.P_BOB = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
 			this.DD_BOB = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
@@ -53,6 +57,8 @@ partial class PC_ModUtilities
 			this.P_Collecttions.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.TLP_Main.SuspendLayout();
+			this.P_Text.SuspendLayout();
+			this.tableLayoutPanel3.SuspendLayout();
 			this.P_BOB.SuspendLayout();
 			this.tableLayoutPanel6.SuspendLayout();
 			this.P_LsmReport.SuspendLayout();
@@ -120,8 +126,8 @@ partial class PC_ModUtilities
 			// 
 			// B_LoadCollection
 			// 
-			this.B_LoadCollection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_LoadCollection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_LoadCollection.AutoSize = true;
 			this.B_LoadCollection.ColorShade = null;
 			this.B_LoadCollection.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_LoadCollection.Location = new System.Drawing.Point(577, 3);
@@ -139,7 +145,8 @@ partial class PC_ModUtilities
 			this.TLP_Main.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.TLP_Main.ColumnCount = 1;
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_Main.Controls.Add(this.P_BOB, 0, 4);
+			this.TLP_Main.Controls.Add(this.P_Text, 0, 4);
+			this.TLP_Main.Controls.Add(this.P_BOB, 0, 5);
 			this.TLP_Main.Controls.Add(this.P_LsmReport, 0, 3);
 			this.TLP_Main.Controls.Add(this.P_DuplicateMods, 0, 0);
 			this.TLP_Main.Controls.Add(this.P_ModIssues, 0, 1);
@@ -147,14 +154,78 @@ partial class PC_ModUtilities
 			this.TLP_Main.Location = new System.Drawing.Point(0, 0);
 			this.TLP_Main.MinimumSize = new System.Drawing.Size(700, 0);
 			this.TLP_Main.Name = "TLP_Main";
-			this.TLP_Main.RowCount = 5;
+			this.TLP_Main.RowCount = 6;
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Main.Size = new System.Drawing.Size(700, 694);
+			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_Main.Size = new System.Drawing.Size(700, 855);
 			this.TLP_Main.TabIndex = 17;
+			// 
+			// P_Text
+			// 
+			this.P_Text.AddOutline = true;
+			this.P_Text.AutoSize = true;
+			this.P_Text.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.P_Text.Controls.Add(this.tableLayoutPanel3);
+			this.P_Text.Dock = System.Windows.Forms.DockStyle.Top;
+			this.P_Text.Location = new System.Drawing.Point(3, 490);
+			this.P_Text.Name = "P_Text";
+			this.P_Text.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
+			this.P_Text.Size = new System.Drawing.Size(694, 155);
+			this.P_Text.TabIndex = 20;
+			this.P_Text.Text = "ImportFromText";
+			// 
+			// tableLayoutPanel3
+			// 
+			this.tableLayoutPanel3.AutoSize = true;
+			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.tableLayoutPanel3.ColumnCount = 2;
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel3.Controls.Add(this.DD_TextImport, 0, 0);
+			this.tableLayoutPanel3.Controls.Add(this.B_ImportClipboard, 1, 0);
+			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(7, 38);
+			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			this.tableLayoutPanel3.RowCount = 1;
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(680, 110);
+			this.tableLayoutPanel3.TabIndex = 0;
+			// 
+			// DD_TextImport
+			// 
+			this.DD_TextImport.AllowDrop = true;
+			this.DD_TextImport.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_TextImport.Dock = System.Windows.Forms.DockStyle.Top;
+			this.DD_TextImport.Location = new System.Drawing.Point(3, 3);
+			this.DD_TextImport.Name = "DD_TextImport";
+			this.DD_TextImport.Size = new System.Drawing.Size(568, 104);
+			this.DD_TextImport.TabIndex = 17;
+			this.DD_TextImport.Text = "LsmImportMissingInfo";
+			this.DD_TextImport.ValidExtensions = new string[] {
+        ".txt"};
+			this.DD_TextImport.FileSelected += new System.Action<string>(this.DD_TextImport_FileSelected);
+			this.DD_TextImport.ValidFile += new System.Func<object, string, bool>(this.DD_TextImport_ValidFile);
+			// 
+			// B_ImportClipboard
+			// 
+			this.B_ImportClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_ImportClipboard.AutoSize = true;
+			this.B_ImportClipboard.ColorShade = null;
+			this.B_ImportClipboard.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ImportClipboard.Location = new System.Drawing.Point(577, 3);
+			this.B_ImportClipboard.Name = "B_ImportClipboard";
+			this.B_ImportClipboard.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_ImportClipboard.Size = new System.Drawing.Size(100, 54);
+			this.B_ImportClipboard.SpaceTriggersClick = true;
+			this.B_ImportClipboard.TabIndex = 15;
+			this.B_ImportClipboard.Text = "ImportFromClipboard";
+			this.B_ImportClipboard.Click += new System.EventHandler(this.B_ImportClipboard_Click);
 			// 
 			// P_BOB
 			// 
@@ -163,7 +234,7 @@ partial class PC_ModUtilities
 			this.P_BOB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_BOB.Controls.Add(this.tableLayoutPanel6);
 			this.P_BOB.Dock = System.Windows.Forms.DockStyle.Top;
-			this.P_BOB.Location = new System.Drawing.Point(3, 490);
+			this.P_BOB.Location = new System.Drawing.Point(3, 651);
 			this.P_BOB.Name = "P_BOB";
 			this.P_BOB.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
 			this.P_BOB.Size = new System.Drawing.Size(694, 201);
@@ -342,11 +413,12 @@ partial class PC_ModUtilities
 			// 
 			// B_ReDownload
 			// 
-			this.B_ReDownload.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_ReDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_ReDownload.AutoSize = true;
 			this.B_ReDownload.ColorShade = null;
 			this.B_ReDownload.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_ReDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ReDownload.Location = new System.Drawing.Point(566, 16);
+			this.B_ReDownload.Location = new System.Drawing.Point(566, 3);
 			this.B_ReDownload.Name = "B_ReDownload";
 			this.B_ReDownload.Size = new System.Drawing.Size(111, 40);
 			this.B_ReDownload.SpaceTriggersClick = true;
@@ -392,8 +464,13 @@ partial class PC_ModUtilities
 			this.P_Collecttions.ResumeLayout(false);
 			this.P_Collecttions.PerformLayout();
 			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.TLP_Main.ResumeLayout(false);
 			this.TLP_Main.PerformLayout();
+			this.P_Text.ResumeLayout(false);
+			this.P_Text.PerformLayout();
+			this.tableLayoutPanel3.ResumeLayout(false);
+			this.tableLayoutPanel3.PerformLayout();
 			this.P_BOB.ResumeLayout(false);
 			this.P_BOB.PerformLayout();
 			this.tableLayoutPanel6.ResumeLayout(false);
@@ -436,4 +513,8 @@ partial class PC_ModUtilities
 	private SlickControls.RoundedGroupPanel P_BOB;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
 	private Generic.DragAndDropControl DD_BOB;
+	private SlickControls.RoundedGroupPanel P_Text;
+	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+	private Generic.DragAndDropControl DD_TextImport;
+	private SlickControls.SlickButton B_ImportClipboard;
 }

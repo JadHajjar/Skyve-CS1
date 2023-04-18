@@ -84,8 +84,8 @@ public partial class PC_ModUtilities : PanelContent
 		base.UIChanged();
 
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
-		TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Text.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		B_ReDownload.Margin = B_ImportClipboard.Margin = TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9.75F);
 
 		B_LoadCollection.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Import));
@@ -95,6 +95,7 @@ public partial class PC_ModUtilities : PanelContent
 		P_DuplicateMods.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Broken));
 		P_LsmReport.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_LSM));
 		P_BOB.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_BOB));
+		P_Text.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_BOB));
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -179,7 +180,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void DD_BOB_FileSelected(string obj)
 	{
-		var matches = Regex.Matches(File.ReadAllText(obj), "\"(\\d{8,20})\\.(.+?)\"");
+		var matches = Regex.Matches(File.ReadAllText(obj), "[\\>\"](\\d{8,20})\\.(.+?)[\\<\"]");
 		var assets = new List<Profile.Asset>();
 
 		foreach (Match item in matches)
@@ -200,5 +201,53 @@ public partial class PC_ModUtilities : PanelContent
 	private bool DD_BOB_ValidFile(object sender, string arg)
 	{
 		return Path.GetExtension(arg).ToLower() == ".xml";
+	}
+
+	private bool DD_TextImport_ValidFile(object arg1, string arg2)
+	{
+		return true; 
+	}
+
+	private void DD_TextImport_FileSelected(string obj)
+	{
+		var matches = Regex.Matches(File.ReadAllText(obj), "(\\d{8,20})");
+		var assets = new List<Profile.Asset>();
+
+		foreach (Match item in matches)
+		{
+			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.SteamId == id))
+			{
+				assets.Add(new()
+				{
+					Name = item.Groups[1].Value,
+					SteamId = id
+				});
+			}
+		}
+
+		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+	}
+
+	private void B_ImportClipboard_Click(object sender, EventArgs e)
+	{
+		if (!Clipboard.ContainsText())
+			return;
+
+		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
+		var assets = new List<Profile.Asset>();
+
+		foreach (Match item in matches)
+		{
+			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.SteamId == id))
+			{
+				assets.Add(new()
+				{
+					Name = item.Groups[1].Value,
+					SteamId = id
+				});
+			}
+		}
+
+		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
 	}
 }

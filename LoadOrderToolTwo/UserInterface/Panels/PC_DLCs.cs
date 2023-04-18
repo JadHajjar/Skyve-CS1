@@ -42,7 +42,7 @@ public partial class PC_DLCs : PanelContent
 	{
 		var total = SteamUtil.Dlcs.Count(x => SteamUtil.IsDlcInstalledLocally(x.Id));
 
-		L_Counts.Text = $"{total} {Locale.DlcCount}";
+		L_Counts.Text = string.Format(Locale.DlcCount, total);
 	}
 
 	private void LC_DLCs_CanDrawItem(object sender, CanDrawItemEventArgs<Domain.Steam.SteamDlc> e)

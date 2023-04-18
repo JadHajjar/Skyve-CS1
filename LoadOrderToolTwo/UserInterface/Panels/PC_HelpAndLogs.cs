@@ -80,7 +80,11 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	protected override bool LoadData()
 	{
-		var logs = LogUtil.SimplifyLog(LogUtil.GameLogFile, out _);
+		var tempName = Path.GetTempFileName();
+
+		File.Copy(LogUtil.GameLogFile, tempName);
+
+		var logs = LogUtil.SimplifyLog(tempName, out _);
 
 		this.TryInvoke(() => SetTrace(logs));
 
