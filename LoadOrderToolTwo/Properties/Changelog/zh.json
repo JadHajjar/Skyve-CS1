@@ -25,7 +25,7 @@
             {
                 "Name": "修复",
                 "Changes": [
-                    "修复了旧配置文件（ LOT1 的配置文件）在首次启动 LOT2 后未自动转换的问题。",
+                    "修复了在首次启动 LOT2 之后，旧版 LOT1 的配置文件没有自动转换的问题。",
                     "修复了在外部更改本地资产后，列表不会自动刷新的问题。",
                     "修复了右键单击菜单中删除所有本地资产时，只会删除一个本地资产的问题。现在会删除所有本地资产。",
                     "修复了转换 LOT1 配置文件后，所有资产被标记为“本地资产”的问题。",
@@ -153,7 +153,28 @@
                     "修复了在配置文件设置中无法使用创意工坊的地图和存档的问题",
                     "修复了在配置文件设置中选择地图时，自定义地图无法显示的问题。",
                     "修复了 macOS 和 Linux 可能无法正确加载配置文件的问题。",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "修复了在“实用工具”页面里选择 Loading Screen Mod Revisited 资产报告文件时未正确打开对应文件夹的问题。"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "新的和改进的",
+                "Changes": [
+                    "从任何文本文件或从剪贴板中添加了一个导入。",
+                    "BOB 导入现在是一个通用的 XML 导入，通过替换包含软件包 ID 的 XML 格式。"
+                ]
+            },
+            {
+                "Name": "修复",
+                "Changes": [
+                    "修复加载收藏 URL 有时无法正确解析ID。",
+                    "修复了 Mac/Linux 软件包取消订阅时的 LOT 无法响应状态。"
                 ]
             }
         ]

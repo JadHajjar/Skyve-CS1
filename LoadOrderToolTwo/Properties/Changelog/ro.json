@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Prezentare, revizuirea profilului",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Modificări ale profilului",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "A schimbat design-ul listei tale de profile.",
+                    "Profilurile favorite sunt acum afișate pe tabloul de bord pentru a permite comutarea ușoară între ele.",
+                    "A adăugat secțiunea \"Alte Profiluri\" într-o pagină a pachetului pentru a le exclude cu ușurință sau pentru a le include din alte profiluri",
+                    "Adăugat noi opțiuni de sortare a profilurilor. Sortarea selectată va fi acum memorată de-a lungul sesiunilor.",
+                    "Acțiuni cu click-dreapta adăugate în lista de conținut pentru a exclude sau include un articol în toate pachetele tale.",
+                    "S-a adăugat un buton pentru a vizualiza fișierul unui Profil pe calculatorul tău.",
+                    "Acum poți atribui o culoare profilurilor tale.",
+                    "Acum poți crea o scurtătură pe desktop pentru profilele tale.",
+                    "Acum puteți importa un profil LOT 1 în secțiunea 'Adaugă profil'."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Îmbunătățiri",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Linkurile Steam se vor deschide acum în interiorul ferestrei Steam. Aceasta poate fi togled in optiuni.",
+                    "Bunurile locale sunt acum grupate corect pe baza dosarelor în care se află.",
+                    "Panoul contului Paradox va fi afișat întotdeauna de acum înainte.",
+                    "Butoanele ferestrei din partea de sus are acum pictograme pentru a explica acţiunile lor.",
+                    "S-a îmbunătățit responsivitatea paginilor din lista de conținut.",
+                    "Căutați în paginile listei de conținut este acum mult mai rapid.",
+                    "Încărcarea mod-ului este acum în cache și duce la sarcini mai eficiente pe Windows & Linux, precum și la sarcini mult mai rapide pe macOS.",
+                    "Acum poți genera un fișier zip al jurnalelor tale în timp ce jocul rulează."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Rezolvări",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Înghețări fixe au loc în paginile listei de conținut.",
+                    "Setarea automată a Profilurilor nu funcționează corect.",
+                    "S-a remediat faptul că nu se pot folosi hărți de lucru și jocuri salvate în setările profilului",
+                    "Hărțile personalizate nu se încarcă când sunt selectate în setările profilului.",
+                    "S-a reparat faptul că profilurile din macOS și Linux nu se aplică întotdeauna corect.",
+                    "Dacă ai o locație personalizată pentru fișierele de raportare LSMR va porni corect de acolo atunci când selectezi un fișier de raport în pagina de utilități."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nou și îmbunătățit",
+                "Changes": [
+                    "Adăugat în pagina de utilități un import din orice fișier text sau din clipboard.",
+                    "BOB import este acum un import XML generic prin suprimarea oricărui format XML care conține ID-uri de pachete."
+                ]
+            },
+            {
+                "Name": "Rezolvări",
+                "Changes": [
+                    "S-a remediat încărcarea unui URL de colectare uneori neprocesat corect ID-ul.",
+                    "Fixează LOT să nu răspundă pe Mac/Linux atunci când se dezabonează de la un pachet."
                 ]
             }
         ]

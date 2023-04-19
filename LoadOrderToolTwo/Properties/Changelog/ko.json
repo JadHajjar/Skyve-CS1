@@ -2,7 +2,7 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "변경사항의 시대에 오신 것을 환영합니다",
+        "Tagline": "로그 지옥에 오신 것을 환영합니다.",
         "ChangeGroups": [
             {
                 "Name": "신규",
@@ -14,7 +14,7 @@
                 ]
             },
             {
-                "Name": "개선",
+                "Name": "개선사항",
                 "Changes": [
                     "고장난 에셋에 대한 호환성 보고서 추가",
                     "미등록인 패키지도 이제 정상적인 이름과 썸네일을 가집니다.",
@@ -23,14 +23,14 @@
                 ]
             },
             {
-                "Name": "수정",
+                "Name": "수정사항",
                 "Changes": [
-                    "Fixed legacy profiles not being converted after the first launch.",
-                    "Fixed local assets not automatically refreshing after external changes.",
-                    "Fixed deleting local assets from the right-click menu deleting all local assets instead of just one",
-                    "Fixed converting LOT 1 profiles resulting in assets being marked as 'Local'",
-                    "Fixed 'Real' folders being swapped on save for Linux & Mac users.",
-                    "Fixed Linux & Mac users not being able to generate a log zip."
+                    "최초 실행시 오래된 프로필이 변환되지 않는 오류 수정.",
+                    "외부 변경사항 발생 이후 로컬 자산이 자동으로 새로고침되지 않는 오류 수정.",
+                    "우클릭 메뉴에서 로컬 자산을 삭제했을 때 모든 로컬 자산이 삭제되는 오류 수정.",
+                    "LOT 1 프로필을 변환했을 때 자산이 '로컬'로 표시되는 오류 수정.",
+                    "Linux와 macOS 사용자가 저장하는 경우 실제 폴더가 바뀌는 오류 수정.",
+                    "Linux와 macOS 사용자가 로그 압축 파일을 생성할 수 없는 오류 수정."
                 ]
             }
         ]
@@ -40,25 +40,25 @@
         "Date": "2023-04-08",
         "ChangeGroups": [
             {
-                "Name": "Added the Help & Logs section",
+                "Name": "도움말 및 로그 섹션 추가",
                 "Changes": [
-                    "Easily access your logs.",
-                    "Quickly view errors in your most recent/current game session.",
-                    "Simplify a log file to focus on what's actually happening.",
-                    "Share a zip file containing all the logs needed for someone to help you out."
+                    "더 쉬운 로그 파일 보기",
+                    "최신 또는 현재 게임 세션의 오류를 바로 볼 수 있습니다.",
+                    "실제로 발생하는 일에 집중하기 위해 로그 파일을 단순화했습니다.",
+                    "다른 사람의 도움을 받기 위해 모든 로그가 포함된 압축 파일을 공유할 수 있습니다."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "개선사항",
                 "Changes": [
-                    "Changed the icons of filters to reflect the correct icons used in the list."
+                    "목록에 사용된 필터 아이콘을 올바르게 변경했습니다."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "수정사항",
                 "Changes": [
-                    "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
-                    "Fixed the map selection for a new game not letting users select a vanilla map."
+                    "모음집 불러오기에서 구독과 구독 취소 문자가 반대인 문제를 수정했습니다.",
+                    "새 게임 지도를 선택할 때 바닐라 지도를 선택할 수 없도록 수정했습니다."
                 ]
             }
         ]
@@ -68,9 +68,9 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "수정사항",
                 "Changes": [
-                    "Fixed a bug that caused infinite loading for some users."
+                    "일부 유저에게서 보고된 무한 로딩 버그 수정."
                 ]
             }
         ]
@@ -80,13 +80,13 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "변경사항",
                 "Changes": [
-                    "Removed the subscription tab from the in-game mod options.",
-                    "Fixed DLCs not being applied when loading a profile.",
-                    "Fixed the language option being empty for some people.",
-                    "Re-downloading from steam will no longer force the focus back to the tool.",
-                    "Other UI changes."
+                    "게임 내 모드 설정에서 구독 탭 제거.",
+                    "프로필을 불러올 때 DLC가 적용되지 않은 오류 수정.",
+                    "일부 사용자 대상으로 언어 선택 항목이 비어있는 오류 수정.",
+                    "더 이상 Steam에서 항목을 다시 다운로드 했을 때 강제로 Loading Order Tool 도구로 전환되지 않습니다.",
+                    "기타 UI 수정."
                 ]
             }
         ]
@@ -96,13 +96,13 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "변경사항",
                 "Changes": [
-                    "Adding an info popup when subscribing to items for the first time.",
-                    "Added a warning text in the dashboard when you have multiple LOM instances installed.",
-                    "Added small tags next to package titles.",
-                    "Re-downloading Load Order Tool will initiate the download and close the app while it gets updated.",
-                    "Fixed and improved the speed of Loading Screen Mod reports."
+                    "항목을 처음으로 구독할 때 정보창을 띄웁니다.",
+                    "복수의 LOM 인스턴스가 설치된 경우 대시보드에 경고 문구를 송출합니다.",
+                    "패키지 이름 옆에 작은 태그를 추가했습니다.",
+                    "Load Order Tool을 다시 다운로드하면 업데이트가 진행되는 동안 앱을 종료합니다.",
+                    "Loading Screen Mod 보고서의 속도를 개선합니다."
                 ]
             }
         ]
@@ -110,50 +110,71 @@
     {
         "Version": "2.1.0",
         "Date": "2023-04-05",
-        "Tagline": "Beta Public Release",
+        "Tagline": "공개 베타 릴리즈",
         "ChangeGroups": []
     },
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "소개 및 프로필 변경",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "프로필 변경",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "프로필 목록 보기 변경",
+                    "이제 즐겨찾는 프로필이 대시보드에 표시되어 손쉽게 프로필을 전환할 수 있습니다.",
+                    "기타 프로필에 패키지를 쉽게 추가하거나 제거할 수 있도록 패키지 페이지에 '기타 프로필' 섹션을 추가했습니다.",
+                    "새로운 프로필 정렬 방식을 추가했습니다. 선택한 정렬 방식은 이제 다음 세션에서도 기억됩니다.",
+                    "모든 패키지에서 항목을 제외하거나 포함할 수 있는 우클릭 메뉴를 추가했습니다.",
+                    "내 컴퓨터에서 프로필 파일을 볼 수 있는 버튼을 추가했습니다.",
+                    "이제 프로필 색상을 지정할 수 있습니다.",
+                    "프로필의 데스크톱 바로가기 생성 가능",
+                    "이제 '프로필 추가' 섹션에서 LOT 1 프로필을 불러올 수 있습니다."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "개선사항",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Steam 링크가 이제 Steam 브라우저에서 열립니다. 설정에서 해제할 수 있습니다.",
+                    "이제 로컬 자산이 포함된 폴더를 포함하여 올바르게 그룹화됩니다.",
+                    "패러독스 계정 패널은 이제 항상 표시됩니다.",
+                    "이제 오른쪽 상단 창의 버튼에 수행하는 작업을 설명하는 아이콘이 있습니다.",
+                    "콘텐츠 목록 페이지의 응답 성능을 개선했습니다.",
+                    "콘텐츠 목록 페이지 검색 기능이 훨씬 빨라졌습니다.",
+                    "이제 모드 로딩 캐싱 기능을 지원합니다. 이는 Windows, Linux 그리고 macOS에서 훨씬 더 효율적이고 빠르게 로딩됩니다.",
+                    "이제 게임이 실행되는 동안에도 로그의 압축 파일을 생성할 수 있습니다."
+                ]
+            },
+            {
+                "Name": "수정사항",
+                "Changes": [
+                    "콘텐츠 목록 페이지 멈춤 현상 수정.",
+                    "프로필 자동저장 실패 오류 수정.",
+                    "프로필 설정에서 창작마당 지도와 저장된 게임을 사용할 수 없는 오류 수정.",
+                    "프로필 설정에서 선택한 지도를 불러올 수 없는 오류 수정.",
+                    "macOS와 Linux에서 프로필이 올바르게 불러오지 않는 오류 수정.",
+                    "이제 유틸리티 페이지에서 Loading Screen Mod 보고서 파일을 열 때 올바른 보고서 파일 위치를 사용합니다."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "New & Improved",
+                "Changes": [
+                    "Added in the Utilities page an import from any text file or from your clipboard.",
+                    "BOB import is now a generic XML import by suppoorting any XML format that contains package IDs."
                 ]
             },
             {
                 "Name": "Fixes",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Fixed loading a collection URL sometimes not parsing the ID correctly.",
+                    "Fixed LOT becoming unresponsive on Mac/Linux when unsubscribing from a package."
                 ]
             }
         ]

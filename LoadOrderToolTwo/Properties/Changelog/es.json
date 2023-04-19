@@ -157,5 +157,26 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nuevo y mejorado",
+                "Changes": [
+                    "Añadido en la página Utilities una importación desde cualquier archivo de texto o desde el portapapeles.",
+                    "La importación de BOB es ahora una importación XML genérica eliminando cualquier formato XML que contenga IDs de paquetes."
+                ]
+            },
+            {
+                "Name": "Fijos",
+                "Changes": [
+                    "Se corrigió cargar una URL de colección a veces no analizando el ID correctamente.",
+                    "Fijado LOT no responde en Mac al darse de baja de un paquete."
+                ]
+            }
+        ]
     }
 ]

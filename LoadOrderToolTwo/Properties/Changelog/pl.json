@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Prezentacja, przegląd profilu",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Zmiany profilu",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Zmieniono wygląd Twojej listy profilowej.",
+                    "Ulubione profile są teraz wyświetlane na Twoim pulpicie menedżerskim, aby umożliwić łatwe przełączanie się między nimi.",
+                    "Dodano sekcję \"Inne profile\" na stronie pakietu, aby łatwo wykluczyć lub uwzględnić je z innych profili",
+                    "Dodano nowe opcje sortowania profilu. Wybrane sortowanie będzie teraz zapamiętane podczas sesji.",
+                    "Dodano akcje prawym przyciskiem myszy na liście treści, aby wykluczyć lub włączyć element do wszystkich pakietów.",
+                    "Dodano przycisk, aby wyświetlić plik profilu na komputerze.",
+                    "Możesz teraz przypisać kolor do profili.",
+                    "Możesz teraz utworzyć skrót na pulpicie dla profili.",
+                    "Teraz możesz zaimportować profil LOT 1 w sekcji 'Dodaj profil'."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Ulepszenia",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Łącza Steam zostaną teraz otwarte wewnątrz okna Steam. Można je wyłączyć w Opcjach.",
+                    "Lokalne zasoby są teraz poprawnie pogrupowane na podstawie folderów, w których się znajdują.",
+                    "Panel Twojego konta Paradoksa będzie zawsze wyświetlany od teraz.",
+                    "Przyciski okna na górze mają teraz ikony, aby wyjaśnić ich akcje.",
+                    "Poprawiono zdolność reagowania stron z listą treści.",
+                    "Wyszukiwanie na stronach listy treści jest teraz znacznie szybsze.",
+                    "Ładowanie moda jest teraz w pamięci podręcznej, co prowadzi do bardziej wydajnych obciążeń na Windows i Linux, a także znacznie szybszych ładunków na macOS.",
+                    "Możesz teraz wygenerować plik zip z logów, gdy gra jest uruchomiona."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Naprawa",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Naprawiono zamrożenie na stronach listy treści.",
+                    "Naprawione automatyczne zapisywanie profili nie działa poprawnie.",
+                    "Naprawiono niemożność korzystania z map i gier w Warsztacie w ustawieniach profilu",
+                    "Naprawione niestandardowe mapy nie wczytywane po wybraniu ustawień profilu.",
+                    "Naprawiono wczytywanie profili na macOS i Linux nie zawsze poprawnie.",
+                    "Posiadanie niestandardowej lokalizacji dla plików raportu LSMR zacznie się od tego miejsca po wybraniu pliku raportu na stronie Narzędzia."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nowe i ulepszone",
+                "Changes": [
+                    "Dodano do strony Utilities import z dowolnego pliku tekstowego lub ze schowka.",
+                    "Import BOB jest teraz ogólnym importem XML, wspierając każdy format XML, który zawiera ID pakietu."
+                ]
+            },
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawiono ładowanie adresu URL kolekcji czasami nie analizuje poprawnie identyfikatora.",
+                    "Naprawione LOT staje się niereagujący na Mac/Linux podczas anulowania subskrypcji pakietu."
                 ]
             }
         ]

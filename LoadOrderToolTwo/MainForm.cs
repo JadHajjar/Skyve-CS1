@@ -267,7 +267,7 @@ public partial class MainForm : BasePanelForm
 
 		if (CentralManager.SessionSettings.LastWindowsBounds != null)
 		{
-			if (!SystemInformation.VirtualScreen.IntersectsWith(CentralManager.SessionSettings.LastWindowsBounds.Value))
+			if (!SystemInformation.VirtualScreen.Contains(CentralManager.SessionSettings.LastWindowsBounds.Value.Location))
 			{
 				return;
 			}

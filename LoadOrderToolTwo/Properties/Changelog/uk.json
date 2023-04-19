@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Зустрічайте: Перебудова Профілю",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Зміни профілю",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Змінено дизайн списку ваших профілів.",
+                    "Улюблені профілі тепер відображаються на панелі управління, щоб забезпечити легке перемикання профілів.",
+                    "Додано розділ \"Інші Профілі\" на сторінці пакунків для легкого виключення або включення їх з ваших інших профілів",
+                    "Додані нові опції сортування профілю. Обране сортування буде запамʼятовуватись протягом сесії.",
+                    "Додано дію правою кнопкою миші в списку елементів, щоб виключити або включити елемент у всі ваші пакети.",
+                    "Додана кнопка перегляду файлу профілю на вашому комп'ютері.",
+                    "Тепер ви можете встановити колір профілю.",
+                    "Тепер ви можете створити ярлик на робочому столі для профілів.",
+                    "Тепер ви можете імпортувати профілі LOT 1 в розділі \"Додати профіль\"."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Вдосконалення",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Тепер посилання Steam відкриється всередині вікна Steam. Це можна вимкнути в Параметрах.",
+                    "Місцеві ассети тепер правильно згруповані на основі їхніх тек.",
+                    "Відтепер ваша панель облікового запису Paradox завжди відображатиметься.",
+                    "Кнопки вікна зверху тепер мають значки, які пояснюють їх дії.",
+                    "Покращено відгук сторінок зі списком вмісту.",
+                    "Пошук у списку вмісту тепер набагато швидше.",
+                    "Завантаження модів тепер кешоване: більш ефективні завантаження на Windows і Linux, а також пришвидшено завантаження на macOS.",
+                    "Тепер ви можете генерувати zip-файл з логів навіть поки триває гра."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Виправлено",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Виправлено зависання на сторінках списку вмісту.",
+                    "Виправлене некоректне автоматичне збереження у профілях.",
+                    "Виправлено неможливість використовувати карти Майстерні та збереження в налаштуваннях профілю",
+                    "Виправлено помилку використання користувацьких карт при виборі в налаштуваннях профілю.",
+                    "Виправлено некоректне завантаження профілів на macOS та Linux.",
+                    "Наявність користувацького розташування для звіту LSMR буде тепер коректно запускатись при виборі звіту на сторінці Службових програм."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Нові та покращені",
+                "Changes": [
+                    "Додана на сторінці Utilities імпорт з будь-якого текстового файлу або з вашого буфера обміну.",
+                    "Імпорт БОБ є загальним XML шляхом скасування будь-якого XML-формату пакетів, що містить ідентифікатори пакетів."
+                ]
+            },
+            {
+                "Name": "Фікси",
+                "Changes": [
+                    "Виправлено завантаження URL колекції, іноді не розбір ID правильно.",
+                    "Виправлено опрацювання LOT не реагування на Mac/Linux під час відмови від підписки пакету."
                 ]
             }
         ]

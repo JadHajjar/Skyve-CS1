@@ -706,12 +706,6 @@
   <data name="I_Unchecked_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Unchecked_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="I_BOB" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_BOB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="I_BOB_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_BOB_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="I_Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -732,5 +726,17 @@
   </data>
   <data name="I_TempProfile_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_TempProfile_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Text" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Text_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Text_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_XML" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_XML.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_XML_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_XML_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

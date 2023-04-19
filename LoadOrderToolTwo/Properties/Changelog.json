@@ -157,5 +157,26 @@
         ]
       }
     ]
+  },
+  {
+    "Version": "2.2.2",
+    "Date": "2023-04-19",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "New & Improved",
+        "Changes": [
+          "Added in the Utilities page an import from any text file or from your clipboard.",
+          "BOB import is now a generic XML import by supporting any XML format that contains package IDs."
+        ]
+      },
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed loading a collection URL sometimes not parsing the ID correctly.",
+          "Fixed LOT becoming unresponsive on Mac/Linux when unsubscribing from a package."
+        ]
+      }
+    ]
   }
 ]

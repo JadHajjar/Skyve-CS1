@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Presentazione, la revisione del profilo",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Modifiche Del Profilo",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Cambiato il design della tua lista profili.",
+                    "I profili preferiti sono ora mostrati sul cruscotto per consentire una facile commutazione tra di loro.",
+                    "Aggiunta la sezione 'Altri Profili' nella pagina di un pacchetto per escluderli o includerli facilmente dagli altri profili",
+                    "Aggiunte nuove opzioni di ordinamento del profilo. L'ordinamento selezionato verrà ora ricordato durante le sessioni.",
+                    "Aggiunte azioni con il tasto destro del mouse nella lista dei contenuti per escludere o includere un elemento in tutti i pacchetti.",
+                    "Aggiunto un pulsante per visualizzare il file di un profilo sul computer.",
+                    "Ora puoi assegnare un colore ai tuoi profili.",
+                    "Ora puoi creare una scorciatoia desktop per i tuoi profili.",
+                    "Ora puoi importare un profilo LOT 1 nella sezione 'Aggiungi profilo'."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Miglioramenti",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "I collegamenti di vapore ora si apriranno all'interno della finestra di Steam. Questo può essere disabilitato nelle opzioni.",
+                    "Le risorse locali sono ora correttamente raggruppate in base alle cartelle in cui si trovano.",
+                    "Il pannello del tuo account Paradox sarà sempre visualizzato da ora in poi.",
+                    "I pulsanti finestra in alto a destra ora hanno icone per spiegare le loro azioni.",
+                    "Migliorata la reattività delle pagine dell'elenco contenuti.",
+                    "La ricerca nelle pagine dell'elenco dei contenuti è ora molto più veloce.",
+                    "Il caricamento della mod è ora nella caching; con conseguente carichi più efficienti su Windows & Linux, così come carichi molto più veloci su macOS.",
+                    "Ora puoi generare un file zip dei tuoi log mentre il gioco è in esecuzione."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correzioni",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Blocchi fissi che si verificano nelle pagine dell'elenco contenuti.",
+                    "Salvataggio automatico dei profili corretti non funziona correttamente.",
+                    "Risolto non essendo in grado di utilizzare mappe e salvataggio-giochi di workshop nelle impostazioni del profilo",
+                    "Mappe fisse personalizzate non caricate quando selezionate nelle impostazioni del profilo.",
+                    "Corretto il caricamento dei profili su macOS e Linux non sempre si applica correttamente.",
+                    "Avere una posizione personalizzata per i file di report LSMR ora inizierà correttamente da lì quando si seleziona un file di report nella pagina Utilities."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nuovo & Migliorato",
+                "Changes": [
+                    "Aggiunto nella pagina Utilities un'importazione da qualsiasi file di testo o dagli appunti.",
+                    "L'importazione BOB è ora un'importazione XML generica suppoortando qualsiasi formato XML che contiene ID pacchetto."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il caricamento di un URL di raccolta a volte non analizzare l'ID correttamente.",
+                    "Corretto LOT che diventa non reattivo su Mac/Linux quando si cancella la sottoscrizione da un pacchetto."
                 ]
             }
         ]

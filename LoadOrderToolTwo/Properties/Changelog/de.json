@@ -157,5 +157,26 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Neu & Verbessert",
+                "Changes": [
+                    "Auf der Utilities Seite wurde ein Import aus einer beliebigen Textdatei oder aus der Zwischenablage hinzugefügt.",
+                    "BOB-Import ist nun ein generischer XML-Import durch die Verdrängung eines beliebigen XML-Formats, das Paket-IDs enthält."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fehler beim Laden einer Sammlungs-URL, die die ID nicht korrekt analysiert.",
+                    "Es wurde behoben, dass LOT auf Mac/Linux nicht mehr reagierte, wenn man sich von einem Paket abmeldete."
+                ]
+            }
+        ]
     }
 ]

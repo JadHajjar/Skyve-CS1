@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Представляем, Обзор Профиля",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Изменения профиля",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Изменен дизайн списка ваших профилей.",
+                    "Избранные профили теперь отображаются на панели управления для упрощения переключения между ними.",
+                    "Добавлен раздел «Прочие профили» на странице пакета, чтобы легко исключить или включить их из других профилей",
+                    "Добавлены новые параметры сортировки профилей. Выбранная сортировка будет запоминаться в ходе сессий.",
+                    "Добавлены действия правой кнопкой мыши в списке содержимого, чтобы исключить или включить элемент во все ваши пакеты.",
+                    "Добавлена кнопка просмотра файла профиля на вашем компьютере.",
+                    "Теперь вы можете назначить цвет для ваших профилей.",
+                    "Теперь вы можете создать ярлык рабочего стола для ваших профилей.",
+                    "Теперь вы можете импортировать профиль LOT 1 в разделе 'Добавить профиль'."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Улучшено",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Ссылки Steam теперь открываются внутри окна Steam. Это может быть отключено в настройках.",
+                    "Локальные активы теперь правильно сгруппированы по папкам, в которых они находятся.",
+                    "Ваша панель аккаунта Paradox всегда будет отображаться на экране.",
+                    "Кнопки окон в правом верхнем углу теперь имеют значки, объясняющие свои действия.",
+                    "Улучшена отзывчивость страниц списка содержимого.",
+                    "Поиск в страницах списка контента теперь намного быстрее.",
+                    "Загрузка модов теперь кэшируется; в результате увеличивается нагрузка на Windows и Linux, а также увеличивается нагрузка на macOS.",
+                    "Теперь вы можете сгенерировать архив логов во время работы игры."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Исправлено",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Исправлены зависания на страницах списка содержимого.",
+                    "Исправлено некорректное автоматическое сохранение профилей.",
+                    "Исправлена ошибка использования карт Мастерской и Сохраненных игр в настройках профиля",
+                    "Исправлены пользовательские карты, которые не загружаются при выделении в настройках профиля.",
+                    "Исправлена загрузка профилей в macOS и Linux не всегда корректно применяется.",
+                    "Наличие пользовательского местоположения для файлов отчётов LSMR теперь корректно запустится при выборе файла отчёта на странице Утилиты."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Новое и улучшенное",
+                "Changes": [
+                    "Добавлен импорт на странице Утилиты из любого текстового файла или из буфера обмена.",
+                    "Импорт BOB теперь является общим XML-импортом путем уменьшения любого XML-формата, содержащего идентификаторы пакетов."
+                ]
+            },
+            {
+                "Name": "Исправления",
+                "Changes": [
+                    "Исправлена загрузка URL коллекции иногда не корректно анализируя ID.",
+                    "Исправлена ошибка во время отписки от пакета на Mac/Linux."
                 ]
             }
         ]

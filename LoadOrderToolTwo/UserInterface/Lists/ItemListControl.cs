@@ -61,6 +61,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 	}
 
+	protected override void Log(string t)
+	{
+		Utilities.Log.Debug(t);
+	}
+
 	public override void FilterOrSortingChanged()
 	{
 		if (!IsHandleCreated)

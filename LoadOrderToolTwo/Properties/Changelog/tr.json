@@ -126,7 +126,7 @@
                     "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
                     "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
                     "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
+                    "Added a button to view a Profile's file on your computer.",
                     "You can now assign a color to your profiles.",
                     "You can now create a desktop shortcut for your profiles.",
                     "You can now import a LOT 1 profile in the 'Add Profile' section."
@@ -154,6 +154,27 @@
                     "Fixed custom maps not loading when selected in the profile settings.",
                     "Fixed loading Profiles on macOS & Linux not always applying correctly.",
                     "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "New & Improved",
+                "Changes": [
+                    "Added in the Utilities page an import from any text file or from your clipboard.",
+                    "BOB import is now a generic XML import by suppoorting any XML format that contains package IDs."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed loading a collection URL sometimes not parsing the ID correctly.",
+                    "Fixed LOT becoming unresponsive on Mac/Linux when unsubscribing from a package."
                 ]
             }
         ]

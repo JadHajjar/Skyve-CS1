@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Présentation, refonte du profil",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Changements de profil",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Le design de votre liste de profils a été modifié.",
+                    "Les profils favoris sont maintenant affichés sur votre tableau de bord pour permettre un basculement facile entre eux.",
+                    "Ajout de la section « Autres profils » dans la page d'un paquet pour l'exclure facilement ou l'inclure de vos autres profils",
+                    "Ajout de nouvelles options de tri des profils. Le tri sélectionné sera maintenant mémorisé tout au long des sessions.",
+                    "Ajout d'actions de clic droit dans la liste de contenu pour exclure ou inclure un élément dans tous vos paquets.",
+                    "Ajout d'un bouton pour afficher le fichier d'un profil sur votre ordinateur.",
+                    "Vous pouvez maintenant assigner une couleur à vos profils.",
+                    "Vous pouvez maintenant créer un raccourci de bureau pour vos profils.",
+                    "Vous pouvez maintenant importer un profil LOT 1 dans la section 'Ajouter un profil'."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Améliorations",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Les liens Steam s'ouvrent maintenant dans la fenêtre de Steam. Cela peut être désactivé dans les Options.",
+                    "Les ressources locales sont maintenant correctement regroupées en fonction des dossiers dans lesquels elles se trouvent.",
+                    "Votre panneau de compte Paradox sera toujours affiché à partir de maintenant.",
+                    "Les boutons de fenêtre en haut à droite ont maintenant des icônes pour expliquer leurs actions.",
+                    "Amélioration de la réactivité des pages de la liste de contenu.",
+                    "La recherche dans les pages de la liste de contenu est maintenant beaucoup plus rapide.",
+                    "Le chargement des mods est maintenant mis en cache; ce qui donne lieu à des charges plus efficaces sur Windows et Linux, ainsi qu'à des chargements bien plus rapides sur macOS.",
+                    "Vous pouvez maintenant générer un fichier zip de vos logs pendant que le jeu est en cours d'exécution."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Correction du blocage dans les pages de la liste de contenu.",
+                    "La sauvegarde automatique des profils corrigée ne fonctionnait pas correctement.",
+                    "Correction de ne pas pouvoir utiliser les cartes Atelier et les sauvegardes dans les paramètres du profil",
+                    "Correction du chargement des cartes personnalisées lors de la sélection dans les paramètres du profil.",
+                    "Correction du chargement des profils sur macOS et Linux qui ne s'appliquaient pas toujours correctement.",
+                    "Avoir un emplacement personnalisé pour les fichiers de rapport LSMR va maintenant démarrer correctement à partir de là lors de la sélection d'un fichier de rapport dans la page Utilitaires."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nouveautés et améliorations",
+                "Changes": [
+                    "Ajouté à la page Utilitaires une importation depuis n'importe quel fichier texte ou depuis votre presse-papiers.",
+                    "L'importation BOB est maintenant une importation XML générique en supposant que tout format XML contient des identifiants de paquets."
+                ]
+            },
+            {
+                "Name": "Corrections",
+                "Changes": [
+                    "Correction du chargement d'une URL de collection qui n'analyserait pas correctement l'identifiant.",
+                    "Correction du LOT devenant peu réactif sur Mac/Linux lors de la désinscription d'un paquet."
                 ]
             }
         ]

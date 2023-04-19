@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "De profielwijziging wordt voorgesteld",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Profiel wijzigingen",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Het ontwerp van de profiellijst is gewijzigd.",
+                    "Favoriete profielen worden nu getoond op je dashboard om eenvoudig tussen deze profielen te kunnen wisselen.",
+                    "Toegevoegd de 'Andere Profielen' sectie in een pakket pagina om ze eenvoudig uit te sluiten of op te nemen in je andere profielen",
+                    "Nieuwe profiel sorteeropties toegevoegd. De geselecteerde sortering zal nu worden opgeslagen tijdens sessies.",
+                    "Rechtsklik acties toegevoegd in de inhoudslijst om een item in al je pakketten uit te sluiten of toe te voegen.",
+                    "Een knop toegevoegd om het profielbestand op je computer te bekijken.",
+                    "U kunt nu een kleur toewijzen aan uw profielen.",
+                    "U kunt nu een desktopsnelkoppeling aanmaken voor uw profielen.",
+                    "U kunt nu een LOT 1-profiel importeren in de sectie 'Profiel toevoegen'."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Verbeteringen",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Steam links zullen nu in Steam's venster worden geopend. Dit kan worden uitgeschakeld in de Opties.",
+                    "Lokale assets worden nu correct gegroepeerd op basis van de mappen waarin ze zich bevinden.",
+                    "Uw Paradox-accountpaneel wordt vanaf nu altijd weergegeven.",
+                    "De vensterknoppen op de bovenkant hebben nu pictogrammen om hun acties uit te leggen.",
+                    "Het reactievermogen van de inhoudslijst pagina's is verbeterd.",
+                    "Zoeken op inhoudslijst pagina's is nu veel sneller.",
+                    "Mod laden is nu gecached, wat resulteert in efficiëntere ladingen op Windows & Linux, en veel snellere ladingen in macOS.",
+                    "Je kunt nu een zip-bestand van je logs genereren terwijl het spel draait."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Oplossingen",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Problemen die zich voordoen op de inhoudslijst pagina's opgelost.",
+                    "Auto-Opslaan is opgelost.",
+                    "Vaste mogelijkheid om geen Workshop kaarten & save-games te gebruiken in de profielinstellingen",
+                    "Aangepaste kaarten die niet worden geladen wanneer geselecteerd in de profielinstellingen.",
+                    "Het laden van profielen op macOS & Linux is niet altijd correct uitgevoerd.",
+                    "Het hebben van een aangepaste locatie voor LSMR rapportbestanden start daar nu correct bij het selecteren van een rapportbestand in de pagina nutsvoorzieningen."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nieuw en verbeterd",
+                "Changes": [
+                    "Toegevoegd op de nutspagina een import uit een tekstbestand of vanaf je klembord.",
+                    "BOB-import is nu een algemene XML-import door elk XML-formaat dat pakket-ID's bevat uit te bannen."
+                ]
+            },
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "Het laden van een collectie-URL is opgelost die soms niet correct verwerkt wordt.",
+                    "LOT is opgelost dat LOT niet reageert op Mac/Linux wanneer u zich afmeldt van een pakket."
                 ]
             }
         ]

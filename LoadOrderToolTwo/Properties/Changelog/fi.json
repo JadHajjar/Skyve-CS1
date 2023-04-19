@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Esittelyssä profiilin peruskorjaus",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Profiilin Muutokset",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Muutti profiililistan muotoilua. @ info",
+                    "Suosikki profiilit näytetään nyt hallintapaneelillasi, jotta niiden välillä voi vaihtaa helposti.",
+                    "Lisätty ”Muut profiilit” -osio paketin sivulle, jotta ne voidaan helposti sulkea pois tai sisällyttää muihin profiileihin",
+                    "Lisää uusia Profiilin lajitteluvaihtoehtoja. Valittu lajittelu muistetaan nyt koko istunnon ajan.",
+                    "Lisätty hiiren kakkospainikkeella toiminnot sisältölistassa sulkemaan tai sisällyttämään kohteen kaikkiin paketteihisi.",
+                    "Lisätty painike, jolla voit tarkastella Profiilin tiedostoa tietokoneellasi.",
+                    "Voit nyt määrittää väriä profiileillesi ja profiileillesi.",
+                    "Voit nyt luoda työpöydän pikakuvakkeen profiileillesi.",
+                    "Voit nyt tuoda LOT 1 -profiilin 'Lisää profiili' -osiossa."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Parannukset",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Steam-linkit avautuvat nyt Steamin ikkunan sisälle. Tämä voidaan kytkeä pois päältä asetuksista.",
+                    "Paikalliset varat on nyt oikein ryhmitetty kansioihin, joissa ne ovat.",
+                    "Paradox-tilisi paneeli näytetään aina tästä lähtien.",
+                    "Yläreunassa olevilla ikkunanpainikkeilla on nyt kuvakkeet selittääkseen toimintojaan.",
+                    "Parantanut sisältöluettelon sivujen reagointikykyä.",
+                    "Haku sisältöluettelosta on nyt paljon nopeampi.",
+                    "Modin lataus välimuistissa; se lisää Windows & Linuxin kuormitusta ja nopeuttaa huomattavasti macOS:n kuormia.",
+                    "Voit nyt luoda zip-tiedoston lokeista, kun peli on käynnissä."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Korjaukset",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Sisältöluettelon sivuilla tapahtuu kiinteitä jäädytyksiä.",
+                    "Kiinteiden profiilien automaattinen tallennus ei toimi oikein.",
+                    "Korjattu ei voi käyttää Workshop karttoja ja tallennettuja pelejä profiiliasetuksissa",
+                    "Mukautettuja karttoja ei ladata, kun ne on valittu profiilin asetuksista.",
+                    "Kiinteä lataus profiileja macOS & Linux ei aina sovellu oikein.",
+                    "Ottaa mukautetun sijainnin LSMR raportti tiedostoja nyt oikein alkaa sieltä, kun valitset raportin tiedosto Utilities sivulla."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Uusi & Parannettu",
+                "Changes": [
+                    "Lisätty apuohjelmat sivulle tuonti mistä tahansa tekstitiedostosta tai leikepöydältä.",
+                    "BOB-tuonti on nyt yleinen XML-tuonti esittämällä minkä tahansa XML-muodon, joka sisältää pakettitunnuksia."
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Korjattu kokoelman URL-osoitteen lataaminen ei joskus osaa tunnusta oikein.",
+                    "Kiinteä LOT tulee reagoimattomaksi Mac/Linuxissa, kun tilaus paketista."
                 ]
             }
         ]

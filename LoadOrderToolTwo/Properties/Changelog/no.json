@@ -116,44 +116,65 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Presenterer, profilen overhaling",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Profil Endringer",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button too view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Endret utformingen av profillisten din.",
+                    "Favorittprofilfiler vises nå på dashbordet for å tillate enkel bytte mellom dem.",
+                    "Lagt til seksjonen 'Andre profiler' i en pakkeside for å lett utelukke eller inkludere dem fra dine andre profiler",
+                    "Lagt til ny profilsortering alternativer. Valgt sortering vil nå bli husket gjennom økter.",
+                    "Lagt til høyreklikk handlinger i innholdslisten for å utelukke eller inkludere en gjenstand i alle pakkene dine.",
+                    "La til en knapp for å se filen på profilen din datamaskin.",
+                    "Nå kan du tilordne en farge til profilene dine.",
+                    "Du kan nå opprette en skrivebordssnarvei for dine profiler.",
+                    "Du kan nå importere en LOT 1 profil i delen \"Legg til profil\"."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Forbedringer",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Steam-lenker åpnes nå i Steams vindu. Dette kan slås av i innstillingene.",
+                    "Lokale eiendeler er nå riktig tilsatt basert på mappene de er i.",
+                    "Panelet med Paradox vil alltid bli vist fra nå av.",
+                    "Vindusknappene på øverst til høyre har ikoner for å forklare handlingene.",
+                    "Forbedret respons på innholdslistene.",
+                    "Søk i innholdslistesider er nå mye raskere.",
+                    "Mod lasting lagres. Dette resulterer i mer effektive laster på Windows & Linux, samt mye raskere belastning på macOS.",
+                    "Du kan nå generere en zip-fil av dine logger mens spillet kjører."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Reparasjoner",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Faste fryser skjer i innholdslistedene.",
+                    "Fikset profilenes automatiske lagring fungerer ikke som den skal.",
+                    "Fikset ikke å kunne bruke Workshop-kart og lagre spill i profilinnstillingene",
+                    "Fikset egendefinerte kart lastes ikke når valgt i profilinnstillingene.",
+                    "Rettet lasting av profiler på macOS & Linux gjelder ikke alltid korrekt.",
+                    "Å ha en egendefinert plassering for LSMR rapportfiler vil nå starte riktig fra da du velger en rapportfil på Verktøy-siden."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Ny & forbedret",
+                "Changes": [
+                    "Lagt til på Verktøy-siden en import fra en tekstfil eller fra utklippstavlen.",
+                    "BOB import er nå en generisk XML-import ved å supposortere ethvert XML-format som inneholder pakke-ID-er."
+                ]
+            },
+            {
+                "Name": "Reparasjoner",
+                "Changes": [
+                    "Fikset at en samlings-URL av og til ikke sjekket ID-en riktig.",
+                    "Fikset LT for å slutte å svare på Mac/Linux når du slutter å abonnere fra en pakke."
                 ]
             }
         ]
