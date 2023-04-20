@@ -281,4 +281,6 @@ internal class Locale : LocaleHelper
 	public static string CreateShortcutProfile => _instance.GetText(nameof(CreateShortcutProfile));
 	public static string AskToLaunchGameForShortcut => _instance.GetText(nameof(AskToLaunchGameForShortcut));
 	public static string ProfilesLoaded => _instance.GetText(nameof(ProfilesLoaded));
+	public static string NoProfilesFound => _instance.GetText(nameof(NoProfilesFound));
+	public static string NoProfilesMatchFilters => _instance.GetText(nameof(NoProfilesMatchFilters));
 }
