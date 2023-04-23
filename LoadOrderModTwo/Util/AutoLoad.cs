@@ -49,7 +49,7 @@ namespace LoadOrderMod.Util {
                     else
                         LoadSavedGame(loadSave);
                 } else if (newGame != null) {
-                    LoadMap(newGame);
+                    LoadMap(newGame, lht);
                 } else if (loadAsset || newAsset) {
                     LoadAssetEditor(lht: lht, load: loadAsset, lsm:lsm);
                 }

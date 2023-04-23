@@ -26,7 +26,7 @@ internal class CompatibilityReportBubble : StatusBubbleBase
 			return;
 		}
 
-		Image = Properties.Resources.I_CompatibilityReport;
+		ImageName = "I_CompatibilityReport";
 		Text = Locale.CompatibilityReport;
 
 		if (!CentralManager.IsContentLoaded)

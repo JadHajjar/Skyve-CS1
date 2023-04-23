@@ -224,7 +224,7 @@ internal class CompatibilityMessageControl : SlickControl
 							Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? Locale.Switch :
 							Locale.Enable;
 
-						var buttonIcon = ImageManager.GetIcon(
+						var buttonIcon = IconManager.GetIcon(
 							item.Package is null ? "I_Add" :
 							Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? "I_Switch" :
 							"I_Ok");

@@ -30,6 +30,12 @@ partial class PC_PackagePage
 	/// </summary>
 	private void InitializeComponent()
 	{
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
 			this.P_Content = new System.Windows.Forms.Panel();
 			this.slickTabControl1 = new SlickControls.SlickTabControl();
 			this.T_Info = new SlickControls.SlickTabControl.Tab();
@@ -51,7 +57,6 @@ partial class PC_PackagePage
 			// base_Text
 			// 
 			this.base_Text.Location = new System.Drawing.Point(-2, 3);
-			this.base_Text.Size = new System.Drawing.Size(42, 26);
 			this.base_Text.Text = "Back";
 			// 
 			// P_Content
@@ -81,7 +86,8 @@ partial class PC_PackagePage
 			this.T_Info.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Info.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Info.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.T_Info.Icon = global::LoadOrderToolTwo.Properties.Resources.I_Content_16;
+			dynamicIcon1.Name = "I_Content";
+			this.T_Info.IconName = dynamicIcon1;
 			this.T_Info.LinkedControl = null;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
@@ -96,7 +102,8 @@ partial class PC_PackagePage
 			this.T_CR.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_CR.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_CR.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.T_CR.Icon = global::LoadOrderToolTwo.Properties.Resources.I_CompatibilityReport_16;
+			dynamicIcon2.Name = "I_CompatibilityReport";
+			this.T_CR.IconName = dynamicIcon2;
 			this.T_CR.LinkedControl = null;
 			this.T_CR.Location = new System.Drawing.Point(261, 5);
 			this.T_CR.Name = "T_CR";
@@ -111,7 +118,8 @@ partial class PC_PackagePage
 			this.T_Profiles.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.T_Profiles.Icon = global::LoadOrderToolTwo.Properties.Resources.I_ProfileSettings_16;
+			dynamicIcon3.Name = "I_ProfileSettings";
+			this.T_Profiles.IconName = dynamicIcon3;
 			this.T_Profiles.LinkedControl = this.TLP_Profiles;
 			this.T_Profiles.Location = new System.Drawing.Point(522, 5);
 			this.T_Profiles.Name = "T_Profiles";
@@ -127,13 +135,13 @@ partial class PC_PackagePage
 			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Profiles.Location = new System.Drawing.Point(0, 0);
-			this.TLP_Profiles.MaximumSize = new System.Drawing.Size(775, 2147483647);
-			this.TLP_Profiles.MinimumSize = new System.Drawing.Size(775, 0);
+			this.TLP_Profiles.MaximumSize = new System.Drawing.Size(769, 2147483647);
+			this.TLP_Profiles.MinimumSize = new System.Drawing.Size(769, 0);
 			this.TLP_Profiles.Name = "TLP_Profiles";
 			this.TLP_Profiles.RowCount = 2;
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Profiles.Size = new System.Drawing.Size(775, 208);
+			this.TLP_Profiles.Size = new System.Drawing.Size(769, 208);
 			this.TLP_Profiles.TabIndex = 16;
 			// 
 			// TLP_Top
@@ -177,9 +185,9 @@ partial class PC_PackagePage
 			// 
 			this.L_Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.L_Title.AutoSize = true;
-			this.L_Title.Location = new System.Drawing.Point(135, 27);
+			this.L_Title.Location = new System.Drawing.Point(135, 12);
 			this.L_Title.Name = "L_Title";
-			this.L_Title.Size = new System.Drawing.Size(55, 23);
+			this.L_Title.Size = new System.Drawing.Size(91, 38);
 			this.L_Title.TabIndex = 1;
 			this.L_Title.Text = "label1";
 			this.L_Title.UseMnemonic = false;
@@ -205,45 +213,39 @@ partial class PC_PackagePage
 			// 
 			// B_Folder
 			// 
-			this.B_Folder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.B_Folder.ColorShade = null;
 			this.B_Folder.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_Folder.Image = global::LoadOrderToolTwo.Properties.Resources.I_Folder;
-			this.B_Folder.Location = new System.Drawing.Point(739, 3);
+			dynamicIcon4.Name = "I_Folder";
+			this.B_Folder.ImageName = dynamicIcon4;
+			this.B_Folder.Location = new System.Drawing.Point(680, 3);
 			this.B_Folder.Name = "B_Folder";
-			this.B_Folder.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-			this.B_Folder.Size = new System.Drawing.Size(41, 44);
+			this.B_Folder.Size = new System.Drawing.Size(100, 30);
 			this.B_Folder.SpaceTriggersClick = true;
 			this.B_Folder.TabIndex = 4;
-			this.B_Folder.Click += new System.EventHandler(this.B_Folder_Click);
 			// 
 			// B_SteamPage
 			// 
-			this.B_SteamPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.B_SteamPage.ColorShade = null;
 			this.B_SteamPage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_SteamPage.Image = global::LoadOrderToolTwo.Properties.Resources.I_Steam;
-			this.B_SteamPage.Location = new System.Drawing.Point(702, 3);
+			dynamicIcon5.Name = "I_Steam";
+			this.B_SteamPage.ImageName = dynamicIcon5;
+			this.B_SteamPage.Location = new System.Drawing.Point(574, 3);
 			this.B_SteamPage.Name = "B_SteamPage";
-			this.B_SteamPage.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-			this.B_SteamPage.Size = new System.Drawing.Size(31, 44);
+			this.B_SteamPage.Size = new System.Drawing.Size(100, 30);
 			this.B_SteamPage.SpaceTriggersClick = true;
-			this.B_SteamPage.TabIndex = 4;
-			this.B_SteamPage.Click += new System.EventHandler(this.B_SteamPage_Click);
+			this.B_SteamPage.TabIndex = 5;
 			// 
 			// B_Redownload
 			// 
-			this.B_Redownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.B_Redownload.ColorShade = null;
 			this.B_Redownload.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_Redownload.Image = global::LoadOrderToolTwo.Properties.Resources.I_ReDownload;
-			this.B_Redownload.Location = new System.Drawing.Point(661, 3);
+			dynamicIcon6.Name = "I_ReDownload";
+			this.B_Redownload.ImageName = dynamicIcon6;
+			this.B_Redownload.Location = new System.Drawing.Point(468, 3);
 			this.B_Redownload.Name = "B_Redownload";
-			this.B_Redownload.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-			this.B_Redownload.Size = new System.Drawing.Size(35, 44);
+			this.B_Redownload.Size = new System.Drawing.Size(100, 30);
 			this.B_Redownload.SpaceTriggersClick = true;
-			this.B_Redownload.TabIndex = 4;
-			this.B_Redownload.Click += new System.EventHandler(this.B_Redownload_Click);
+			this.B_Redownload.TabIndex = 6;
 			// 
 			// PC_PackagePage
 			// 

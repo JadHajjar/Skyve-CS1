@@ -7,6 +7,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -22,6 +23,7 @@ internal class DragAndDropControl : SlickControl
 	private bool isDragActive;
 	private bool isDragAvailable;
 	private string? _selectedFile;
+	private readonly IOSelectionDialog _selectionDialog;
 
 	public event Action<string>? FileSelected;
 	public event Func<object, string, bool>? ValidFile;
@@ -33,18 +35,31 @@ internal class DragAndDropControl : SlickControl
 	public override string Text { get => base.Text; set => base.Text = value; }
 
 	[Category("Behavior"), DefaultValue(null)]
-	public string[]? ValidExtensions { get; set; }
+	public string[]? ValidExtensions { get => _selectionDialog.ValidExtensions; set => _selectionDialog.ValidExtensions = value; }
 
 	[Category("Behavior"), DefaultValue(null)]
-	public string? StartingFolder { get; set; }
+	public string? StartingFolder { get => _selectionDialog.StartingFolder; set => _selectionDialog.StartingFolder = value; }
 
 	[Category("Behavior"), DefaultValue(null)]
 	public string? SelectedFile { get => _selectedFile; set { _selectedFile = value; Invalidate(); } }
 
+	[Category("Behavior"), DefaultValue(null)]
+	public Dictionary<string, string>? PinnedFolders { get => _selectionDialog.PinnedFolders; set => _selectionDialog.PinnedFolders = value; }
+
+	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+	public List<IOSelectionDialog.CustomFile>? CustomFiles { get => _selectionDialog.CustomFiles; set => _selectionDialog.CustomFiles = value; }
+
 	public DragAndDropControl()
 	{
+		_selectionDialog = new();
+		_selectionDialog.Filter = DialogFilter;
 		AllowDrop = true;
 		Cursor = Cursors.Hand;
+	}
+
+	private bool DialogFilter(FileInfo arg)
+	{
+		return ValidFile?.Invoke(this, arg.FullName) ?? true;
 	}
 
 	protected override void UIChanged()
@@ -135,7 +150,7 @@ internal class DragAndDropControl : SlickControl
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var removeIcon = ImageManager.GetIcon(nameof(Properties.Resources.I_X)).Color(FormDesign.Design.MenuForeColor);
+			using var removeIcon = IconManager.GetIcon("I_X");
 
 			var fileRect = new Rectangle(0, 0, Width - availableWidth, Height).Pad(Padding.Left);
 			var removeRect = fileRect.Align(new Size(removeIcon.Width + Padding.Left, removeIcon.Height + Padding.Top), ContentAlignment.TopRight);
@@ -153,16 +168,11 @@ internal class DragAndDropControl : SlickControl
 			}
 		}
 
-		using var dialog = new IOSelectionDialog
+		if (_selectionDialog.PromptFile(Program.MainForm) == DialogResult.OK)
 		{
-			ValidExtensions = ValidExtensions
-		};
-
-		if (dialog.PromptFile(Program.MainForm, StartingFolder) == DialogResult.OK)
-		{
-			if (ValidFile?.Invoke(this, dialog.SelectedPath) ?? true)
+			if (ValidFile?.Invoke(this, _selectionDialog.SelectedPath) ?? true)
 			{
-				FileSelected?.Invoke(dialog.SelectedPath);
+				FileSelected?.Invoke(_selectionDialog.SelectedPath);
 			}
 			else
 			{
@@ -182,8 +192,8 @@ internal class DragAndDropControl : SlickControl
 
 		if (!string.IsNullOrWhiteSpace(SelectedFile))
 		{
-			using var fileIcon = (UI.FontScale >= 2 ? Properties.Resources.I_File_48 : Properties.Resources.I_File).Color(FormDesign.Design.MenuForeColor);
-			using var removeIcon = ImageManager.GetIcon(nameof(Properties.Resources.I_X)).Color(FormDesign.Design.MenuForeColor);
+			using var fileIcon = IconManager.GetLargeIcon("I_File").Color(FormDesign.Design.MenuForeColor);
+			using var removeIcon = IconManager.GetIcon("I_X").Color(FormDesign.Design.MenuForeColor);
 
 			var textSize = e.Graphics.Measure(Path.GetFileNameWithoutExtension(SelectedFile), new Font(Font, FontStyle.Bold), Width - availableWidth - Padding.Horizontal);
 			var fileHeight = (int)textSize.Height + 3 + fileIcon.Height + Padding.Top;
@@ -230,7 +240,7 @@ internal class DragAndDropControl : SlickControl
 		}
 		else
 		{
-			using var icon = (UI.FontScale >= 2 ? Properties.Resources.I_DragDrop_48 : Properties.Resources.I_DragDrop).Color(color);
+			using var icon = IconManager.GetLargeIcon("I_DragDrop").Color(color);
 
 			e.Graphics.DrawImage(icon, rect.Align(icon.Size, ContentAlignment.MiddleLeft));
 		}

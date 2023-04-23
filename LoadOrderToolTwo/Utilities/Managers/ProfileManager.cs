@@ -801,43 +801,23 @@ public static class ProfileManager
 		return Path.GetFileNameWithoutExtension(startName);
 	}
 
-	internal static System.Drawing.Bitmap GetIcon(this Profile profile, bool autoSize = false)
+	internal static DynamicIcon GetIcon(this Profile profile)
 	{
 		if (profile.Temporary)
 		{
-			if (autoSize)
-			{
-				return ImageManager.GetIcon(nameof(Properties.Resources.I_TempProfile));
-			}
-
-			return Properties.Resources.I_TempProfile;
+			return "I_TempProfile";
 		}
 		else if (profile.ForAssetEditor)
 		{
-			if (autoSize)
-			{
-				return ImageManager.GetIcon(nameof(Properties.Resources.I_Tools));
-			}
-
-			return Properties.Resources.I_Tools;
+			return "I_Tools";
 		}
 		else if (profile.ForGameplay)
 		{
-			if (autoSize)
-			{
-				return ImageManager.GetIcon(nameof(Properties.Resources.I_City));
-			}
-
-			return Properties.Resources.I_City;
+			return "I_City";
 		}
 		else
 		{
-			if (autoSize)
-			{
-				return ImageManager.GetIcon(nameof(Properties.Resources.I_ProfileSettings));
-			}
-
-			return Properties.Resources.I_ProfileSettings;
+			return "I_ProfileSettings";
 		}
 	}
 

@@ -58,7 +58,7 @@ public class Package : IPackage
 	public string[]? WorkshopTags { get; set; }
 	public string? SteamDescription { get; set; }
 	public bool IsPseudoMod { get; set; }
-	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => SetIncluded(value); }
+	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
 	public IEnumerable<TagItem> Tags => WorkshopTags?.Select(x => new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<TagItem>();
 
 	Package IPackage.Package => this;
@@ -68,20 +68,42 @@ public class Package : IPackage
 	internal bool? ForNormalGame => CompatibilityManager.IsForNormalGame(this);
 	public long FileSize => Mod?.FileSize ?? Assets?.Sum(x => x.FileSize) ?? 0;
 
-	private void SetIncluded(bool value)
+	public bool IsPartiallyIncluded()
 	{
+		var included = false;
+		var excluded = false;
+
 		if (Mod is not null)
 		{
-			Mod.IsIncluded = value;
-		}
-
-		if (Assets is not null)
-		{
-			foreach (var asset in Assets)
+			if (Mod.IsIncluded)
 			{
-				asset.IsIncluded = value;
+				included = true;
+			}
+			else
+			{
+				excluded = true;
 			}
 		}
+
+		if (Assets != null)
+		{
+			foreach (var item in Assets)
+			{
+				if (item.IsIncluded)
+				{
+					included = true;
+				}
+				else
+				{
+					excluded = true;
+				}
+
+				if (included && excluded)
+					return true;
+			}
+		}
+
+		return false;
 	}
 
 	public override string ToString()

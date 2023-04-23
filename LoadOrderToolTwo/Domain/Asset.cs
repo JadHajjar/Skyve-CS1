@@ -66,6 +66,7 @@ public class Asset : IPackage
 	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
 	public bool IsPseudoMod { get => ((IPackage)Package).IsPseudoMod; set => ((IPackage)Package).IsPseudoMod = value; }
 	public string[]? WorkshopTags { set => ((IPackage)Package).WorkshopTags = value; }
+	public string[] AssetTags => _assetTags;
 	public IEnumerable<TagItem> Tags
 	{
 		get

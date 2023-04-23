@@ -53,25 +53,25 @@ internal abstract class StatusBubbleBase : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle.Pad(2), Padding.Left);
 
-		var titleHeight = Math.Max(24, (int)e.Graphics.Measure(Text, UI.Font(9.75F, FontStyle.Bold), Width - Padding.Horizontal).Height);
-		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - 24) / 2), 24, 24);
+		using var icon = ImageName.Large;
+		var titleHeight = Math.Max(icon.Height, (int)e.Graphics.Measure(Text, UI.Font(9.75F, FontStyle.Bold), Width - Padding.Horizontal).Height);
+		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - icon.Height) / 2), icon.Width, icon.Height);
 
 		if (Loading)
 		{
 			DrawLoader(e.Graphics, iconRectangle);
 		}
-		else if (Image != null)
+		else
 		{
 			try
 			{
-				using var icon = new Bitmap(Image);
 
 				e.Graphics.DrawImage(icon.Color(fore), iconRectangle);
 			}
 			catch { }
 		}
 
-		e.Graphics.DrawString(Text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle(24 + (Padding.Left * 2), Padding.Top, Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(Text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle(icon.Height + (Padding.Left * 2), Padding.Top, Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
 
 		var targetHeight = titleHeight + Padding.Vertical;
 

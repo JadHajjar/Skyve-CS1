@@ -32,15 +32,19 @@ partial class PC_UnusedLsmPackages
 	/// </summary>
 	private void InitializeComponent()
 	{
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.B_SubscribeAll = new SlickControls.SlickButton();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.B_IncludeAll = new SlickControls.SlickButton();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
 			this.B_ExcludeAll = new SlickControls.SlickButton();
 			this.LC_Items = new LoadOrderToolTwo.UserInterface.Lists.GenericPackageListControl();
-			this.B_IncludeAll = new SlickControls.SlickButton();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -62,7 +66,8 @@ partial class PC_UnusedLsmPackages
 			// TB_Search
 			// 
 			this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.TB_Search.Image = global::LoadOrderToolTwo.Properties.Resources.I_Search;
+			dynamicIcon1.Name = "I_Search";
+			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
@@ -80,6 +85,8 @@ partial class PC_UnusedLsmPackages
 			this.B_SubscribeAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.B_SubscribeAll.ColorShade = null;
 			this.B_SubscribeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon2.Name = "I_RemoveSteam";
+			this.B_SubscribeAll.ImageName = dynamicIcon2;
 			this.B_SubscribeAll.Location = new System.Drawing.Point(425, 17);
 			this.B_SubscribeAll.Name = "B_SubscribeAll";
 			this.B_SubscribeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
@@ -114,6 +121,21 @@ partial class PC_UnusedLsmPackages
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 145);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
+			// B_IncludeAll
+			// 
+			this.B_IncludeAll.ColorShade = null;
+			this.B_IncludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon3.Name = "I_Check";
+			this.B_IncludeAll.ImageName = dynamicIcon3;
+			this.B_IncludeAll.Location = new System.Drawing.Point(425, 89);
+			this.B_IncludeAll.Name = "B_IncludeAll";
+			this.B_IncludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+			this.B_IncludeAll.Size = new System.Drawing.Size(343, 30);
+			this.B_IncludeAll.SpaceTriggersClick = true;
+			this.B_IncludeAll.TabIndex = 5;
+			this.B_IncludeAll.Text = "IncludeAllButton";
+			this.B_IncludeAll.Click += new System.EventHandler(this.B_IncludeAll_Click);
+			// 
 			// L_Counts
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -134,7 +156,7 @@ partial class PC_UnusedLsmPackages
 			this.DD_Tags.Name = "DD_Tags";
 			this.DD_Tags.Padding = new System.Windows.Forms.Padding(7);
 			this.tableLayoutPanel2.SetRowSpan(this.DD_Tags, 3);
-			this.DD_Tags.Size = new System.Drawing.Size(212, 60);
+			this.DD_Tags.Size = new System.Drawing.Size(212, 58);
 			this.DD_Tags.TabIndex = 3;
 			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.OT_Workshop_SelectedValueChanged);
 			// 
@@ -142,6 +164,8 @@ partial class PC_UnusedLsmPackages
 			// 
 			this.B_ExcludeAll.ColorShade = null;
 			this.B_ExcludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon4.Name = "I_X";
+			this.B_ExcludeAll.ImageName = dynamicIcon4;
 			this.B_ExcludeAll.Location = new System.Drawing.Point(425, 53);
 			this.B_ExcludeAll.Name = "B_ExcludeAll";
 			this.B_ExcludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
@@ -162,19 +186,6 @@ partial class PC_UnusedLsmPackages
 			this.LC_Items.SeparateWithLines = true;
 			this.LC_Items.Size = new System.Drawing.Size(783, 261);
 			this.LC_Items.TabIndex = 18;
-			// 
-			// B_IncludeAll
-			// 
-			this.B_IncludeAll.ColorShade = null;
-			this.B_IncludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_IncludeAll.Location = new System.Drawing.Point(425, 89);
-			this.B_IncludeAll.Name = "B_IncludeAll";
-			this.B_IncludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-			this.B_IncludeAll.Size = new System.Drawing.Size(343, 30);
-			this.B_IncludeAll.SpaceTriggersClick = true;
-			this.B_IncludeAll.TabIndex = 5;
-			this.B_IncludeAll.Text = "IncludeAllButton";
-			this.B_IncludeAll.Click += new System.EventHandler(this.B_IncludeAll_Click);
 			// 
 			// PC_UnusedLsmPackages
 			// 

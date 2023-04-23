@@ -12,6 +12,7 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -34,7 +35,6 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	public ItemListControl()
 	{
-		DoubleSizeOnHover = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 
@@ -54,23 +54,18 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	protected override void UIChanged()
 	{
-		ItemHeight = 36;
+		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36;
 
 		base.UIChanged();
 
 		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 	}
 
-	protected override void Log(string t)
-	{
-		Utilities.Log.Debug(t);
-	}
-
-	public override void FilterOrSortingChanged()
+	public override void FilterChanged()
 	{
 		if (!IsHandleCreated)
 		{
-			base.FilterOrSortingChanged();
+			base.FilterChanged();
 		}
 		else
 		{
@@ -78,9 +73,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	internal void DoFilterOrSortingChanged()
+	internal void DoFilterChanged()
 	{
-		base.FilterOrSortingChanged();
+		base.FilterChanged();
 	}
 
 	public void SetSorting(PackageSorting packageSorting)
@@ -91,9 +86,15 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		sorting = packageSorting;
-		ResetScroll();
 
-		FilterOrSortingChanged();
+		if (!IsHandleCreated)
+		{
+			SortingChanged();
+		}
+		else
+		{
+			new BackgroundAction(SortingChanged).Run();
+		}
 	}
 
 	protected override IEnumerable<DrawableItem<T>> OrderItems(IEnumerable<DrawableItem<T>> items)
@@ -270,6 +271,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
 			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Item.Package));
+
+			if(CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 			ScrollTo(item.Item);
 			return;
 		}
@@ -350,25 +353,26 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.IncludeAllItemsInThisPackage, () => { item.Package.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, !isPackageIncluded)
-			, new (Locale.ExcludeAllItemsInThisPackage, () => { item.Package.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, isPackageIncluded)
-			, new (Locale.ReDownloadPackage, () => Redownload(item), Properties.Resources.I_ReDownload_16, SteamUtil.IsSteamAvailable())
-			, new (Locale.MovePackageToLocalFolder, () => ContentUtil.MoveToLocalFolder(item), Properties.Resources.I_Local_16, item.Workshop)
-			, new (item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, () => AskThenDelete(item), Properties.Resources.I_Disposable_16, !item.Workshop && !item.BuiltIn)
-			, new (Locale.UnsubscribePackage, async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true), Properties.Resources.I_Steam_16, item.Workshop && !item.BuiltIn)
+			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded, action: () => { item.Package.IsIncluded = true; Invalidate(); })
+			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded, action: () => { item.Package.IsIncluded = false; Invalidate(); })
+			, new (Locale.ReDownloadPackage, "I_ReDownload", SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
+			, new (Locale.MovePackageToLocalFolder, "I_PC",item.Workshop, action: () => ContentUtil.MoveToLocalFolder(item))
 			, new (string.Empty)
-			, new (Locale.OtherProfiles, () => { }, Properties.Resources.I_ProfileSettings_16, fade: true)
-			, new (Locale.IncludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; Invalidate(); }, Properties.Resources.I_Ok_16, tab: 1)
-			, new (Locale.ExcludeThisItemInAllProfiles, () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; Invalidate(); }, Properties.Resources.I_Cancel_16, tab: 1)
-			, new (Locale.Copy, () => { }, Properties.Resources.I_Copy_16, item.Workshop, fade: true)
-			, new (Locale.CopyPackageName, () => Clipboard.SetText(item.ToString()), item.Workshop ? null : Properties.Resources.I_Copy_16, tab: item.Workshop ? 1 : 0)
-			, new (Locale.CopyWorkshopLink, () => Clipboard.SetText(item.SteamPage), null, item.Workshop, tab: 1)
-			, new (Locale.CopyWorkshopId, () => Clipboard.SetText(item.SteamId.ToString()), null, item.Workshop, tab: 1)
-			, new (string.Empty, tab: 1)
-			, new (Locale.CopyAuthorName, () => Clipboard.SetText(item.Author?.Name), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
-			, new (Locale.CopyAuthorLink, () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
-			, new (Locale.CopyAuthorId, () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()), null, !string.IsNullOrWhiteSpace(item.Author?.ProfileUrl), tab: 1)
-			, new (Locale.CopyAuthorSteamId, () => Clipboard.SetText(item.Author?.SteamId), null, !string.IsNullOrWhiteSpace(item.Author?.SteamId), tab: 1)
+			, new (!item.Workshop && item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, "I_Disposable", !item.BuiltIn, action: () => AskThenDelete(item))
+			, new (Locale.UnsubscribePackage, "I_Steam", item.Workshop && !item.BuiltIn, action: async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true))
+			, new (string.Empty)
+			, new (Locale.OtherProfiles, "I_ProfileSettings", fade: true)
+			, new (Locale.IncludeThisItemInAllProfiles, "I_Ok", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; Invalidate(); })
+			, new (Locale.ExcludeThisItemInAllProfiles, "I_Cancel", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; Invalidate(); })
+			, new (Locale.Copy, "I_Copy", item.Workshop, fade: true)
+			, new (Locale.CopyPackageName, item.Workshop ? null : "I_Copy", tab: item.Workshop ? 1 : 0, action: () => Clipboard.SetText(item.ToString()))
+			, new (Locale.CopyWorkshopLink, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.SteamPage))
+			, new (Locale.CopyWorkshopId, null, item.Workshop, tab: 1,  action: () => Clipboard.SetText(item.SteamId.ToString()))
+			, new (string.Empty, show: item.Workshop, tab: 1)
+			, new (Locale.CopyAuthorName, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.Name))
+			, new (Locale.CopyAuthorLink, null, item.Workshop, tab: 1, action: () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"))
+			, new (Locale.CopyAuthorId, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()))
+			, new (Locale.CopyAuthorSteamId, null, item.Workshop, tab: 1,  action: () => Clipboard.SetText(item.Author?.SteamId))
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
@@ -380,7 +384,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			try
 			{
-				if (item is Asset asset && !item.Workshop)
+				if (!item.Workshop && item is Asset asset)
 				{
 					ExtensionClass.DeleteFile(asset.FileName);
 				}
@@ -445,7 +449,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	protected override void OnPaintItem(ItemPaintEventArgs<T> e)
 	{
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.ClipRectangle, e.Item, large);
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Vertical, 0, Padding.Vertical);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
@@ -458,9 +462,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		base.OnPaintItem(e);
 
-		var isIncluded = e.Item.IsIncluded;
+		var partialIncluded = e.Item is Package package && package.IsPartiallyIncluded();
+		var isIncluded = partialIncluded || e.Item.IsIncluded;
 
-		PaintIncludedButton(e, rects, inclEnableRect, isIncluded);
+		PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded);
 
 		DrawThumbnailAndTitle(e, rects, large);
 
@@ -471,13 +476,16 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		var date = (e.Item.ServerTime == DateTime.MinValue ? e.Item.LocalTime : e.Item.ServerTime).ToLocalTime();
 		var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-		rects.DateRect = DrawLabel(e, dateText, Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true);
+		rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true);
 		labelRect.X += Padding.Left + rects.DateRect.Width;
 
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
 		if (!string.IsNullOrEmpty(text))
 		{
-			rects.DownloadStatusRect = DrawLabel(e, text, icon, color.MergeColor(FormDesign.Design.BackColor, 65), labelRect, ContentAlignment.BottomLeft, true);
+			using (icon)
+			{
+				rects.DownloadStatusRect = DrawLabel(e, text, icon, color.MergeColor(FormDesign.Design.BackColor, 65), labelRect, ContentAlignment.BottomLeft, true);
+			}
 
 			labelRect.X += Padding.Left + rects.DownloadStatusRect.Width;
 		}
@@ -500,7 +508,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				_ => FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.AccentColor, 20)
 			};
 
-			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Severity}"), Properties.Resources.I_CompatibilityReport_16, labelColor, labelRect, ContentAlignment.BottomLeft, true);
+			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Severity}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, ContentAlignment.BottomLeft, true);
 
 			labelRect.X += Padding.Left + rects.CompatibilityRect.Width;
 		}
@@ -513,7 +521,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		foreach (var item in e.Item.Tags.Distinct(x => x.Value))
 		{
-			using var tagIcon = item.Source switch { TagSource.Workshop => Properties.Resources.I_Steam_16, TagSource.FindIt => Properties.Resources.I_Search_16, _ => Properties.Resources.I_Tag_16 };
+			using var tagIcon = IconManager.GetSmallIcon(item.Source switch { TagSource.Workshop => "I_Steam", TagSource.FindIt => "I_Search", _ => "I_Tag" });
 
 			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft, true);
 
@@ -534,11 +542,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	private void DrawButtons(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool isPressed)
 	{
-		SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Folder)), null, rects.FolderRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, IconManager.GetIcon("I_Folder", (rects.FolderRect.Width - Padding.Horizontal) * 3 / 4), null, rects.FolderRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (e.Item.Workshop)
 		{
-			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Steam)), null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, IconManager.GetIcon("I_Steam", (rects.SteamRect.Width - Padding.Horizontal) * 3 / 4), null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 		}
 	}
 
@@ -546,7 +554,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	{
 		if (!e.Item.Workshop)
 		{
-			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(e.Item.Folder), Properties.Resources.I_Folder_16, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomRight, true);
+			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(e.Item.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomRight, true);
 			rects.AuthorRect = Rectangle.Empty;
 			return;
 		}
@@ -583,10 +591,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 		else
 		{
-			rects.AuthorRect = DrawLabel(e, e.Item.Author?.Name, Properties.Resources.I_Developer_16, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.TopLeft, true);
+			rects.AuthorRect = DrawLabel(e, e.Item.Author?.Name, IconManager.GetSmallIcon("I_Developer"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.TopLeft, true);
 		}
 
-		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), Properties.Resources.I_Steam_16, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomLeft, true);
+		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomLeft, true);
 	}
 
 	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool large)
@@ -642,13 +650,13 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private void PaintIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded)
+	private void PaintIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded)
 	{
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && e.Item.Package.Mod is Mod mod)
 		{
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (mod.IsEnabled)
@@ -662,16 +670,16 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var includedIcon = (isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = (mod.IsEnabled ? Properties.Resources.I_Checked : Properties.Resources.I_Unchecked).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
-			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(24, 24));
-			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(24, 24));
+			using var includedIcon = IconManager.GetIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled", (rects.IncludedRect.Width - Padding.Horizontal) * 3 / 4).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = IconManager.GetIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF", (rects.EnabledRect.Width - Padding.Horizontal) * 3 / 4).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
+			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
 		}
 		else
 		{
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.GreenColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (inclEnableRect.Contains(CursorLocation))
@@ -680,8 +688,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var icon = (isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(inclEnableRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(24, 24));
+			using var icon = IconManager.GetIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled", (inclEnableRect.Width - Padding.Horizontal) * 3 / 4).Color(inclEnableRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
 		}
 	}
 
@@ -692,7 +700,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return Rectangle.Empty;
 		}
 
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		using var font = UI.Font((large ? 9F : 7.5F) - (smaller ? 0.5F : 0F));
 		var size = e.Graphics.Measure(text, font).ToSize();
 
@@ -729,7 +737,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		if (!mod.Workshop)
 		{
 			text = Locale.Local;
-			icon = Properties.Resources.I_Local_16;
+			icon = IconManager.GetSmallIcon("I_PC");
 			color = FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor);
 			return;
 		}
@@ -744,27 +752,27 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			//return;
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
-				icon = Properties.Resources.I_Question_16;
+				icon = IconManager.GetSmallIcon("I_Question");
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = Properties.Resources.I_OutOfDate_16;
+				icon = IconManager.GetSmallIcon("I_OutOfDate");
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatus.NotDownloaded:
 				text = Locale.ModIsNotDownloaded;
-				icon = Properties.Resources.I_Question_16;
+				icon = IconManager.GetSmallIcon("I_Question");
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = Properties.Resources.I_Broken_16;
+				icon = IconManager.GetSmallIcon("I_Broken");
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatus.Removed:
 				text = Locale.ModIsRemoved;
-				icon = Properties.Resources.I_ContentRemoved_16;
+				icon = IconManager.GetSmallIcon("I_ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;
 		}
@@ -805,7 +813,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			rects.SteamRect = buttonRectangle;
 		}
 
-		if (doubleSize && DoubleSizeOnHover)
+		if (doubleSize && CentralManager.SessionSettings.UserSettings.LargeItemOnHover)
 		{
 			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y + Padding.Top, (int)(100 * UI.FontScale), rectangle.Height / 4);
 			rects.AuthorRect = new Rectangle(rectangle.X, rectangle.Y + (rectangle.Height / 2), rectangle.Width, rectangle.Height / 2);

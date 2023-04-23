@@ -53,7 +53,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 
 	protected override void UIChanged()
 	{
-		ItemHeight = 28;
+		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 48 : 28;
 
 		base.UIChanged();
 
@@ -125,7 +125,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 
 	protected override void OnPaintItem(ItemPaintEventArgs<Profile> e)
 	{
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = GetActionRectangles(e.ClipRectangle);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -144,7 +144,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var icon = ImageManager.GetIcon(isIncluded ? nameof(Properties.Resources.I_Ok) : nameof(Properties.Resources.I_Enabled));
+		using var icon = IconManager.GetIcon(isIncluded ? "I_Ok" : "I_Enabled");
 
 		e.Graphics.DrawImage(icon.Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
@@ -157,21 +157,21 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IconRect.Gradient(e.Item.Color.Value, 1.5F), rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var profileIcon = e.Item.GetIcon(true);
+		using var profileIcon = e.Item.GetIcon().Default;
 
 		e.Graphics.DrawImage(profileIcon.Color(iconColor), rects.IconRect.CenterR(profileIcon.Size));
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
-		var rect = DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", Properties.Resources.I_Assets_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
-		rect = DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", Properties.Resources.I_Mods_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
+		var rect = DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
+		rect = DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
 
 		if (e.Item == ProfileManager.CurrentProfile)
 		{
-			DrawLabel(e, Locale.CurrentProfile, Properties.Resources.I_Ok_16, FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rects.TextRect.Right - rect.X + Padding.Left, 0), ContentAlignment.MiddleRight);
+			DrawLabel(e, Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rects.TextRect.Right - rect.X + Padding.Left, 0), ContentAlignment.MiddleRight);
 		}
 
-		SlickButton.DrawButton(e, rects.LoadRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Import)), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		SlickButton.DrawButton(e, rects.LoadRect, string.Empty, Font, IconManager.GetIcon("I_Import"), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (!isIncluded)
 		{
@@ -188,7 +188,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 			return Rectangle.Empty;
 		}
 
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)

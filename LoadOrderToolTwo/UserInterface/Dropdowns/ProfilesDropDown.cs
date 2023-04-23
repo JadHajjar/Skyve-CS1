@@ -30,20 +30,6 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 		return items.OrderByDescending(x => x.Item.Temporary).ThenByDescending(x => x.Item.LastEditDate);
 	}
 
-	protected override void UIChanged()
-	{
-		Font = UI.Font(9.75F);
-		Margin = UI.Scale(new Padding(5), UI.FontScale);
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
-	}
-
-	protected override void OnSizeChanged(EventArgs e)
-	{
-		base.OnSizeChanged(e);
-
-		Height = (int)(42 * UI.UIScale);
-	}
-
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, Profile item)
 	{
 		if (item is null)
@@ -56,7 +42,7 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 			text = Locale.Unfiltered;
 		}
 
-		using var icon = ImageManager.GetIcon(item.Temporary ? nameof(Properties.Resources.I_Slash) : item.ForGameplay ? nameof(Properties.Resources.I_City) : item.ForAssetEditor ? nameof(Properties.Resources.I_Tools) : nameof(Properties.Resources.I_ProfileSettings)).Color(foreColor);
+		using var icon = IconManager.GetIcon(item.Temporary ? "I_Slash" : item.ForGameplay ? "I_City" : item.ForAssetEditor ? "I_Tools" : "I_ProfileSettings").Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

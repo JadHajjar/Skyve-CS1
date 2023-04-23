@@ -45,7 +45,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 	protected override void UIChanged()
 	{
-		Font = UI.Font(9.75F);
+		Font = UI.Font(9F);
 		Margin = UI.Scale(new Padding(5), UI.FontScale);
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
 	}
@@ -56,7 +56,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 		if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
 		{
-			Height = (int)(28 * UI.UIScale);
+			Height = (int)(24 * UI.UIScale);
 		}
 	}
 
@@ -87,7 +87,6 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		e.Graphics.SetUp(BackColor);
 
 		var iconOnly = Width < 200 * UI.FontScale;
-		var iconSize = UI.FontScale >= 1.25 ? 24 : 16;
 		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
 		var cursorLocation = PointToClient(Cursor.Position);
 		var rectangle1 = new Rectangle(0, 0, (Width - centerWidth) / 2, Height - 1);
@@ -110,17 +109,17 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 		if (Image1 != null)
 		{
-			using var img1 = ImageManager.GetIcon(Image1)?.Color(textColor1);
+			using var img1 = IconManager.GetIcon(Image1, Height - Padding.Vertical)?.Color(textColor1);
 
 			if (img1 != null)
 			{
-				e.Graphics.DrawImage(img1, new Rectangle(Padding.Left, (Height - iconSize) / 2, iconSize, iconSize));
-			}
-		}
+				e.Graphics.DrawImage(img1, new Rectangle(Padding.Left, (Height - img1.Width) / 2, img1.Width, img1.Height));
 
-		if (!iconOnly)
-		{
-			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), Font, new SolidBrush(textColor1), rectangle1.Pad(Padding).Pad(Image1 != null ? iconSize : 0, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+				if (!iconOnly)
+				{
+					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), Font, new SolidBrush(textColor1), rectangle1.Pad(Padding).Pad(Image1 != null ? img1.Width : 0, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+				}
+			}
 		}
 
 		// Option 2
@@ -131,17 +130,17 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 		if (Image2 != null)
 		{
-			using var img2 = ImageManager.GetIcon(Image2)?.Color(textColor2);
+			using var img2 = IconManager.GetIcon(Image2, Height - Padding.Vertical)?.Color(textColor2);
 
 			if (img2 != null)
 			{
-				e.Graphics.DrawImage(img2, new Rectangle(Width - iconSize - Padding.Right, (Height - iconSize) / 2, iconSize, iconSize));
-			}
-		}
+				e.Graphics.DrawImage(img2, new Rectangle(Width - img2.Width - Padding.Right, (Height - img2.Height) / 2, img2.Width, img2.Height));
 
-		if (!iconOnly)
-		{
-			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), Font, new SolidBrush(textColor2), rectangle2.Pad(Padding).Pad(0, 0, Image2 != null ? iconSize : 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+				if (!iconOnly)
+				{
+					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), Font, new SolidBrush(textColor2), rectangle2.Pad(Padding).Pad(0, 0, Image2 != null ? img2.Width : 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+				}
+			}
 		}
 
 		// Center
@@ -150,8 +149,8 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 			e.Graphics.FillRectangle(rectangleNone.Gradient(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) || SelectedValue == Value.None ? 255 : 100, FormDesign.Design.ActiveColor), 0.5F), rectangleNone);
 		}
 
-		using var slash = Properties.Resources.I_Slash.Color(textColorNone);
-		e.Graphics.DrawImage(slash, ClientRectangle.CenterR(iconSize, iconSize));
+		using var slash = IconManager.GetIcon("I_Slash", Height - Padding.Vertical).Color(textColorNone);
+		e.Graphics.DrawImage(slash, ClientRectangle.CenterR(slash.Size));
 
 		if (!Enabled)
 		{

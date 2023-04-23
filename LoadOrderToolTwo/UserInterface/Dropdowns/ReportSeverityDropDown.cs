@@ -25,20 +25,6 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<ReportSeverityFil
 		}
 	}
 
-	protected override void UIChanged()
-	{
-		Font = UI.Font(9.75F);
-		Margin = UI.Scale(new Padding(5), UI.FontScale);
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
-	}
-
-	protected override void OnSizeChanged(EventArgs e)
-	{
-		base.OnSizeChanged(e);
-
-		Height = (int)(42 * UI.UIScale);
-	}
-
 	protected override bool SearchMatch(string searchText, ReportSeverityFilter item)
 	{
 		var text = item == ReportSeverityFilter.Any ? Locale.AnyReportStatus : LocaleHelper.GetGlobalText($"CR_{item}");
@@ -58,7 +44,7 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<ReportSeverityFil
 			_ => FormDesign.Design.GreenColor
 		};
 
-		using var icon = item == ReportSeverityFilter.Any ? ImageManager.GetIcon("I_Slash") : ((ReportSeverity)((int)item - 1)).GetSeverityIcon(true);
+		using var icon = item == ReportSeverityFilter.Any ? IconManager.GetIcon("I_Slash") : ((ReportSeverity)((int)item - 1)).GetSeverityIcon(true);
 
 		e.Graphics.DrawImage(icon.Color(color), rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

@@ -28,7 +28,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
 	protected override void UIChanged()
 	{
-		ItemHeight = 42;
+		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover?72:42;
 
 		base.UIChanged();
 
@@ -103,7 +103,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
 	protected override void OnPaintItem(ItemPaintEventArgs<SteamDlc> e)
 	{
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = GetActionRectangles(e.ClipRectangle);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -126,7 +126,8 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 			}
 		}
 
-		e.Graphics.DrawImage((!owned ? Properties.Resources.I_Slash : isIncluded ? Properties.Resources.I_Ok : Properties.Resources.I_Enabled).Color(owned && rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+		using (var icon = IconManager.GetIcon(!owned ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled"))
+			e.Graphics.DrawImage(icon.Color(owned && rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
 		var iconRectangle = rects.IconRect;
 		var textRect = rects.TextRect;
@@ -153,10 +154,11 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
 		if (e.Item.ReleaseDate != DateTime.MinValue)
 		{
-			DrawLabel(e, CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.TopRight);
+			DrawLabel(e, CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.TopRight);
 		}
 
-		SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Steam)), null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		using (var steamIcon = IconManager.GetIcon("I_Steam"))
+			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, steamIcon, null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (!isIncluded)
 		{
@@ -165,6 +167,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 30 : 85, BackColor)), filledRect);
 		}
 	}
+
 	private Rectangle DrawLabel(ItemPaintEventArgs<SteamDlc> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
 	{
 		if (text == null)
@@ -172,7 +175,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 			return Rectangle.Empty;
 		}
 
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)

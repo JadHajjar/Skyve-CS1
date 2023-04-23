@@ -25,13 +25,6 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 		}
 	}
 
-	protected override void UIChanged()
-	{
-		Font = UI.Font(9.75F);
-		Margin = UI.Scale(new Padding(5), UI.FontScale);
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
-	}
-
 	protected override bool SearchMatch(string searchText, ProfileSorting item)
 	{
 		return searchText.SearchCheck(LocaleHelper.GetGlobalText($"Sorting_{item}"));
@@ -42,7 +35,7 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 		var text = LocaleHelper.GetGlobalText($"Sorting_{item}");
 		var color = FormDesign.Design.ForeColor;
 
-		using var icon = ImageManager.GetIcon(GetIcon(item)).Color(foreColor);
+		using var icon = IconManager.GetIcon("I_Sort").Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
@@ -52,10 +45,5 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 		textRect.Width = rectangle.Width - textRect.X;
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), textRect, new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
-	}
-
-	private string GetIcon(ProfileSorting item)
-	{
-		return nameof(Properties.Resources.I_Sort);
 	}
 }

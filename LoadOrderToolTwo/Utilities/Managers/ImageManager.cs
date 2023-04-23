@@ -41,11 +41,6 @@ public static class ImageManager
 		}
 	}
 
-	public static Bitmap GetIcon(string name)
-	{
-		return (Bitmap)Properties.Resources.ResourceManager.GetObject(UI.FontScale >= 1.25 ? name : $"{name}_16", Properties.Resources.Culture);
-	}
-
 	public static FileInfo File(string url, string? fileName = null)
 	{
 		var filePath = LocationManager.Combine(ISave.DocsFolder, "Thumbs", fileName ?? (Path.GetFileNameWithoutExtension(RemoveQueryParamsFromUrl(url).TrimEnd('/', '\\')) + Path.GetExtension(url).IfEmpty(".png")));

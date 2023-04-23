@@ -110,9 +110,7 @@
     <Compile Update="UserInterface\Bubbles\CompatibilityReportBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Generic\DoubleButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Generic\DoubleButton.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -160,6 +158,11 @@
 	  <Copy SourceFiles="$(OutDir)\LoadOrderToolTwo.exe.config" DestinationFiles="$(DeployDir)\LoadOrderToolTwo.exe.config" />
 	  <Copy SourceFiles="$(OutDir)\Resources\mono-debug._dll" DestinationFiles="$(DeployDir)\mono-debug._dll" />
   </Target>
+
+	<Target Name="ZipTool" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' == 'Debug'">
+		<Delete Files="$(ZipFile)" />
+		<ZipDirectory SourceDirectory="$(DeployDir)" DestinationFile="$(ZipFile)" />
+	</Target>
 
 	<Target Name="DeployToWorkshop" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' == 'Release'">
 		<Message Text="Deploy to workshop $(WorkshopDir)" Importance="high" />

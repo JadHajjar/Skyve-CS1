@@ -166,7 +166,7 @@ public partial class PC_MainPage : PanelContent
 			this.TryInvoke(() =>
 			{
 				B_StartStop.Text = Locale.StopCities;
-				B_StartStop.Image = Properties.Resources.I_Stop;
+				B_StartStop.Image = Properties.Resources.I_Stop_24;
 				buttonStateRunning = true;
 			});
 		}

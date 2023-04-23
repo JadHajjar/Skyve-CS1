@@ -328,7 +328,6 @@ public class SettingsFile
 		{
 			if (IsValid())
 			{
-				Log.Info("Loading " + m_PathName, false);
 				using var stream = CreateReadStream();
 
 				if (stream != null)

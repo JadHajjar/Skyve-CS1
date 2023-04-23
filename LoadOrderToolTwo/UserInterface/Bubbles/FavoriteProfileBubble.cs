@@ -31,7 +31,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		}
 
 		Text = Profile.Name;
-		Image = Profile.GetIcon();
+		ImageName = Profile.GetIcon();
 
 		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
@@ -68,7 +68,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 	{
 		Loading = false;
 		Text = Profile.Name;
-		Image = Profile.GetIcon();
+		ImageName = Profile.GetIcon();
 		Invalidate();
 	}
 

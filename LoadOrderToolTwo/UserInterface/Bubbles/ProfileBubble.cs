@@ -26,7 +26,7 @@ internal class ProfileBubble : StatusBubbleBase
 		}
 
 		Text = Locale.ProfileBubble;
-		Image = CentralManager.CurrentProfile.GetIcon();
+		ImageName = CentralManager.CurrentProfile.GetIcon();
 
 		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
@@ -40,17 +40,12 @@ internal class ProfileBubble : StatusBubbleBase
 
 	private void ProfileManager_ProfileChanged(Domain.Profile obj)
 	{
-		Image = CentralManager.CurrentProfile.GetIcon();
+		ImageName = CentralManager.CurrentProfile.GetIcon();
 	}
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
 		DrawText(e, ref targetHeight, CentralManager.CurrentProfile.Name ?? "");
-
-		if (ProfileManager.ProfilesLoaded)
-		{
-			DrawValue(e, ref targetHeight, (ProfileManager.Profiles.Count() - 1).ToString(), Locale.ProfilesLoaded);
-		}
 
 		if (CentralManager.CurrentProfile.Temporary)
 		{
@@ -59,6 +54,11 @@ internal class ProfileBubble : StatusBubbleBase
 		else
 		{
 			DrawText(e, ref targetHeight, CentralManager.CurrentProfile.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, CentralManager.CurrentProfile.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
+		}
+
+		if (ProfileManager.ProfilesLoaded)
+		{
+			DrawValue(e, ref targetHeight, (ProfileManager.Profiles.Count() - 1).ToString(), Locale.ProfilesLoaded);
 		}
 	}
 }

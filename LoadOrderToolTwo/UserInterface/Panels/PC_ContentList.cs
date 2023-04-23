@@ -29,7 +29,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly DelayedAction _delayedSearch;
 	protected readonly ItemListControl<T> LC_Items;
 	private bool searchEmpty = true;
-	private string? searchText;
+	private List<string> searchTermsOr = new();
+	private List<string> searchTermsAnd = new();
+	private List<string> searchTermsExclude = new();
 	private string? searchAuthor;
 
 	public PC_ContentList()
@@ -220,14 +222,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
 			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin
 			= B_Actions.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
-			= B_Refresh.Margin = B_UnsubscribeAll.Margin = UI.Scale(new Padding(5), UI.FontScale);
+			= DD_ReportSeverity.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin
+			= B_Refresh.Margin = B_UnsubscribeAll.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_UnsubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
-		B_Filters.Image = P_Filters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Filter));
-		B_Actions.Image = P_Actions.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Actions));
-		B_UnsubscribeAll.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_RemoveSteam));
-		B_Refresh.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Refresh));
-		I_ClearFilters.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ClearFilter));
-		I_ClearFilters.Size = UI.FontScale >= 1.25 ? new(32, 32) : new(24, 24);
+		I_ClearFilters.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		I_ClearFilters.Location = new(P_Filters.Width - P_Filters.Padding.Right - I_ClearFilters.Width, P_Filters.Padding.Bottom);
 		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(180 * UI.FontScale);
@@ -297,7 +295,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void DelayedSearch()
 	{
-		LC_Items.DoFilterOrSortingChanged();
+		LC_Items.DoFilterChanged();
 		this.TryInvoke(RefreshCounts);
 		TB_Search.Loading = false;
 	}
@@ -446,16 +444,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (!searchEmpty)
-		{
-			if (!(searchText.SearchCheck(item.ToString())
-				|| searchText.SearchCheck(item.Author?.Name)
-				|| Path.GetFileName(item.Folder).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1))
-			{
-				return true;
-			}
-		}
-
 		if (!string.IsNullOrEmpty(searchAuthor))
 		{
 			if (searchAuthor != item.Author?.Name)
@@ -464,7 +452,47 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
+		if (!searchEmpty)
+		{
+			for (var i = 0; i < searchTermsExclude.Count; i++)
+			{
+				if (Search(searchTermsExclude[i], item))
+					return true;
+			}
+
+			var orMatched = searchTermsOr.Count == 0;
+
+			for (var i = 0; i < searchTermsOr.Count; i++)
+			{
+				if (Search(searchTermsOr[i], item))
+				{
+					orMatched = true;
+					break;
+				}
+			}
+
+			if (!orMatched)
+				return true;
+
+			for (var i = 0; i < searchTermsAnd.Count; i++)
+			{
+				if (!Search(searchTermsAnd[i], item))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		return false;
+	}
+
+	private bool Search(string searchTerm, T item)
+	{
+		return searchTerm.SearchCheck(item.ToString())
+			|| searchTerm.SearchCheck(item.Author?.Name)
+			|| Path.GetFileName(item.Folder).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)
@@ -498,10 +526,35 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
 
-		searchText = TB_Search.Text.RegexRemove(@"\[\w+:(.+)?\]").Trim();
-		searchEmpty = string.IsNullOrEmpty(searchText);
+		var searchText = TB_Search.Text.RegexRemove(@"\[\w+:(.+)?\]").Trim();
+
+		searchTermsAnd.Clear();
+		searchTermsExclude.Clear();
+		searchTermsOr.Clear();
+
+		if (!(searchEmpty = string.IsNullOrWhiteSpace(searchText)))
+		{
+			foreach (var item in searchText.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+			{
+				switch (item.TrimStart()[0])
+				{
+					case '+':
+						if (item.Trim().Length > 2)
+							searchTermsAnd.Add(item.Trim().Substring(1));
+						break;
+					case '-':
+						if (item.Trim().Length > 2)
+							searchTermsExclude.Add(item.Trim().Substring(1));
+						break;
+					default:
+						searchTermsOr.Add(item.Trim());
+						break;
+				}
+			}
+		}
+
 		searchAuthor = null;
 
 		foreach (Match match in Regex.Matches(TB_Search.Text, @"\[(\w+):(.+)?\]"))

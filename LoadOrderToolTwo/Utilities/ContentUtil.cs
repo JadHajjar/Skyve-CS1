@@ -434,6 +434,11 @@ internal class ContentUtil
 			return;
 		}
 
+		if (packageList[0] is Package)
+		{
+			packageList = packageList.Cast<Package>().SelectMany(getPackageContents).ToList();
+		}
+
 		BulkUpdating = true;
 
 		foreach (var package in packageList)
@@ -447,6 +452,22 @@ internal class ContentUtil
 		ModsUtil.SavePendingValues();
 		AssetsUtil.SaveChanges();
 		ProfileManager.TriggerAutoSave();
+
+		static IEnumerable<IPackage> getPackageContents(Package package)
+		{
+			if (package.Mod is not null)
+			{
+				yield return package.Mod;
+			}
+
+			if (package.Assets is not null)
+			{
+				foreach (var asset in package.Assets)
+				{
+					yield return asset;
+				}
+			}
+		}
 	}
 
 	internal static void SetBulkEnabled(IEnumerable<Mod> mods, bool value)

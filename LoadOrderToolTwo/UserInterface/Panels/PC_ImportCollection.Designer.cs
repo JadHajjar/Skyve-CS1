@@ -35,6 +35,10 @@ partial class PC_ImportCollection
 	/// </summary>
 	private void InitializeComponent()
 	{
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.L_Title = new System.Windows.Forms.Label();
@@ -89,7 +93,8 @@ partial class PC_ImportCollection
 			// TB_Search
 			// 
 			this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.TB_Search.Image = global::LoadOrderToolTwo.Properties.Resources.I_Search;
+			dynamicIcon1.Name = "I_Search";
+			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(640, 4);
 			this.TB_Search.Name = "TB_Search";
@@ -156,7 +161,7 @@ partial class PC_ImportCollection
 			this.DD_Tags.Location = new System.Drawing.Point(436, 3);
 			this.DD_Tags.Name = "DD_Tags";
 			this.panel2.SetRowSpan(this.DD_Tags, 2);
-			this.DD_Tags.Size = new System.Drawing.Size(212, 60);
+			this.DD_Tags.Size = new System.Drawing.Size(212, 58);
 			this.DD_Tags.TabIndex = 19;
 			// 
 			// B_UnsubSub
@@ -255,7 +260,8 @@ partial class PC_ImportCollection
 			// 
 			this.T_All.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.T_All.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_All.Icon = null;
+			dynamicIcon2.Name = "I_Package";
+			this.T_All.IconName = dynamicIcon2;
 			this.T_All.LinkedControl = null;
 			this.T_All.Location = new System.Drawing.Point(3, 3);
 			this.T_All.Name = "T_All";
@@ -270,7 +276,8 @@ partial class PC_ImportCollection
 			// 
 			this.T_Mods.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.T_Mods.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_Mods.Icon = null;
+			dynamicIcon3.Name = "I_Mods";
+			this.T_Mods.IconName = dynamicIcon3;
 			this.T_Mods.LinkedControl = null;
 			this.T_Mods.Location = new System.Drawing.Point(215, 3);
 			this.T_Mods.Name = "T_Mods";
@@ -285,7 +292,8 @@ partial class PC_ImportCollection
 			// 
 			this.T_Assets.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.T_Assets.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_Assets.Icon = null;
+			dynamicIcon4.Name = "I_Assets";
+			this.T_Assets.IconName = dynamicIcon4;
 			this.T_Assets.LinkedControl = null;
 			this.T_Assets.Location = new System.Drawing.Point(427, 3);
 			this.T_Assets.Name = "T_Assets";

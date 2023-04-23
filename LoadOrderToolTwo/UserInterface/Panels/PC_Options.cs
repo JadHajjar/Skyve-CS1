@@ -99,21 +99,6 @@ public partial class PC_Options : PanelContent
 	{
 		base.UIChanged();
 
-		TLP_UI.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_UserInterface));
-		TLP_Folders.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Folder));
-		TLP_Preferences.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Preferences));
-		TLP_Settings.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Cog));
-		TLP_HelpLogs.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_AskHelp));
-		TLP_Advanced.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Hazard));
-
-		B_Theme.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Theme));
-		B_HelpTranslate.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Translate));
-		B_ClearFolders.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ClearFolders));
-		B_ChangeLog.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Versions));
-		B_Discord.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Discord));
-		B_Guide.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Guide));
-		B_Reset.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Undo));
-
 		DD_Language.Width = (int)(220 * UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
 		B_Theme.Padding = B_HelpTranslate.Padding = B_ClearFolders.Padding = B_ChangeLog.Padding = B_Discord.Padding = B_Guide.Padding = B_Reset.Padding = UI.Scale(new Padding(7), UI.FontScale);
@@ -156,16 +141,6 @@ public partial class PC_Options : PanelContent
 		}
 
 		return true;
-	}
-
-	protected override void OnCreateControl()
-	{
-		base.OnCreateControl();
-
-		foreach (var tb in TLP_Folders.GetControls<SlickPathTextBox>())
-		{
-			tb.Image = Properties.Resources.I_FolderSearch;
-		}
 	}
 
 	private void CB_CheckChanged(object sender, EventArgs e)

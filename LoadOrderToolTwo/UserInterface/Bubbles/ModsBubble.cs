@@ -25,7 +25,7 @@ internal class ModsBubble : StatusBubbleBase
 			return;
 		}
 
-		Image = Properties.Resources.I_Mods;
+		ImageName = "I_Mods";
 		Text = Locale.ModsBubble;
 
 		if (!CentralManager.IsContentLoaded)

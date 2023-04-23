@@ -119,7 +119,7 @@ public class DoubleButton : SlickControl
 
 		if (Image1 != null)
 		{
-			using var img1 = ImageManager.GetIcon(Image1)?.Color(textColor1);
+			using var img1 = IconManager.GetIcon(Image1)?.Color(textColor1);
 
 			if (img1 != null)
 			{
@@ -140,7 +140,7 @@ public class DoubleButton : SlickControl
 
 		if (Image2 != null)
 		{
-			using var img2 = ImageManager.GetIcon(Image2)?.Color(textColor2);
+			using var img2 = IconManager.GetIcon(Image2)?.Color(textColor2);
 
 			if (img2 != null)
 			{

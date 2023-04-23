@@ -62,9 +62,6 @@ public partial class PC_UnusedLsmPackages : PanelContent
 
 		B_SubscribeAll.Margin = B_ExcludeAll.Margin = B_IncludeAll.Margin = B_SubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		TB_Search.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		B_SubscribeAll.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_RemoveSteam));
-		B_ExcludeAll.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_X));
-		B_IncludeAll.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Check));
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -159,8 +156,8 @@ public partial class PC_UnusedLsmPackages : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
-		LC_Items.FilterOrSortingChanged();
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		LC_Items.FilterChanged();
 		RefreshCounts();
 	}
 
@@ -171,13 +168,13 @@ public partial class PC_UnusedLsmPackages : PanelContent
 
 	private void OT_Workshop_SelectedValueChanged(object sender, EventArgs e)
 	{
-		LC_Items.FilterOrSortingChanged();
+		LC_Items.FilterChanged();
 		RefreshCounts();
 	}
 
 	private void T_Assets_TabSelected(object sender, EventArgs e)
 	{
-		LC_Items.FilterOrSortingChanged();
+		LC_Items.FilterChanged();
 		LC_Items.ResetScroll();
 		RefreshCounts();
 	}

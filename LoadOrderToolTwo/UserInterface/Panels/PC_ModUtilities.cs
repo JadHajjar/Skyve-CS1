@@ -23,7 +23,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	public PC_ModUtilities()
 	{
-		LC_Duplicates = new ItemListControl<Mod>() { Dock = DockStyle.Top, DoubleSizeOnHover = false };
+		LC_Duplicates = new ItemListControl<Mod>() { Dock = DockStyle.Top };
 		InitializeComponent();
 
 		P_DuplicateMods.Controls.Add(LC_Duplicates);
@@ -42,7 +42,7 @@ public partial class PC_ModUtilities : PanelContent
 		SlickTip.SetTo(DD_Missing, "LsmMissingTip");
 		SlickTip.SetTo(DD_Unused, "LsmUnusedTip");
 		SlickTip.SetTo(B_ReDownload, "FixAllTip");
-		SlickTip.SetTo(DD_BOB, "BOBTip");
+		SlickTip.SetTo(DD_BOB, "XMLTip");
 	}
 
 	public override Color GetTopBarColor()
@@ -88,16 +88,6 @@ public partial class PC_ModUtilities : PanelContent
 		B_ReDownload.Margin = TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_ImportClipboard.Margin = UI.Scale(new Padding(10), UI.FontScale);
 		L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9.75F);
-
-		B_ImportClipboard.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Copy));
-		B_LoadCollection.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Import));
-		B_ReDownload.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Tools));
-		P_Collecttions.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Steam));
-		P_ModIssues.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_ModWarning));
-		P_DuplicateMods.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Broken));
-		P_LsmReport.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_LSM));
-		P_BOB.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_XML));
-		P_Text.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Text));
 	}
 
 	protected override void DesignChanged(FormDesign design)

@@ -8,6 +8,8 @@ using LoadOrderToolTwo.Legacy;
 
 using Newtonsoft.Json;
 
+using SlickControls;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -716,11 +718,11 @@ internal static class CompatibilityManager
 	{
 		return severity switch
 		{
-			ReportSeverity.Remarks => ImageManager.GetIcon(nameof(Properties.Resources.I_Remarks)),
-			ReportSeverity.MinorIssues => ImageManager.GetIcon(nameof(Properties.Resources.I_MinorIssues)),
-			ReportSeverity.MajorIssues => ImageManager.GetIcon(nameof(Properties.Resources.I_MajorIssues)),
-			ReportSeverity.Unsubscribe => ImageManager.GetIcon(nameof(Properties.Resources.I_Broken)),
-			ReportSeverity.NothingToReport or _ => ImageManager.GetIcon(status ? nameof(Properties.Resources.I_Ok) : nameof(Properties.Resources.I_Info)),
+			ReportSeverity.Remarks => IconManager.GetIcon("I_Remarks"),
+			ReportSeverity.MinorIssues => IconManager.GetIcon("I_MinorIssues"),
+			ReportSeverity.MajorIssues => IconManager.GetIcon("I_MajorIssues"),
+			ReportSeverity.Unsubscribe => IconManager.GetIcon("I_Broken"),
+			ReportSeverity.NothingToReport or _ => IconManager.GetIcon(status ? "I_Ok" : "I_Info"),
 		};
 	}
 

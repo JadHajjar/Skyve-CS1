@@ -28,6 +28,15 @@ partial class PC_HelpAndLogs
 	/// </summary>
 	private void InitializeComponent()
 	{
+			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -60,9 +69,9 @@ partial class PC_HelpAndLogs
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.TLP_Main;
-			this.slickScroll1.Location = new System.Drawing.Point(1158, 30);
+			this.slickScroll1.Location = new System.Drawing.Point(1156, 30);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(8, 702);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 702);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 17;
 			this.slickScroll1.TabStop = false;
@@ -90,7 +99,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Main.Size = new System.Drawing.Size(1100, 436);
+			this.TLP_Main.Size = new System.Drawing.Size(1100, 460);
 			this.TLP_Main.TabIndex = 13;
 			// 
 			// tableLayoutPanel1
@@ -109,7 +118,7 @@ partial class PC_HelpAndLogs
 			this.TLP_Main.SetRowSpan(this.tableLayoutPanel1, 3);
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(351, 436);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(351, 460);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// TLP_HelpLogs
@@ -126,9 +135,11 @@ partial class PC_HelpAndLogs
 			this.TLP_HelpLogs.Controls.Add(this.B_Guide, 0, 1);
 			this.TLP_HelpLogs.Controls.Add(this.slickSpacer1, 0, 3);
 			this.TLP_HelpLogs.Dock = System.Windows.Forms.DockStyle.Top;
+			dynamicIcon6.Name = "I_AskHelp";
+			this.TLP_HelpLogs.ImageName = dynamicIcon6;
 			this.TLP_HelpLogs.Location = new System.Drawing.Point(3, 3);
 			this.TLP_HelpLogs.Name = "TLP_HelpLogs";
-			this.TLP_HelpLogs.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
+			this.TLP_HelpLogs.Padding = new System.Windows.Forms.Padding(9, 48, 9, 9);
 			this.TLP_HelpLogs.RowCount = 6;
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -137,7 +148,7 @@ partial class PC_HelpAndLogs
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_HelpLogs.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_HelpLogs.Size = new System.Drawing.Size(345, 222);
+			this.TLP_HelpLogs.Size = new System.Drawing.Size(345, 234);
 			this.TLP_HelpLogs.TabIndex = 0;
 			this.TLP_HelpLogs.Text = "HelpSupport";
 			// 
@@ -147,9 +158,11 @@ partial class PC_HelpAndLogs
 			this.B_ChangeLog.ColorShade = null;
 			this.B_ChangeLog.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ChangeLog.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_ChangeLog.Location = new System.Drawing.Point(10, 113);
+			dynamicIcon1.Name = "I_Versions";
+			this.B_ChangeLog.ImageName = dynamicIcon1;
+			this.B_ChangeLog.Location = new System.Drawing.Point(12, 123);
 			this.B_ChangeLog.Name = "B_ChangeLog";
-			this.B_ChangeLog.Size = new System.Drawing.Size(325, 30);
+			this.B_ChangeLog.Size = new System.Drawing.Size(321, 30);
 			this.B_ChangeLog.SpaceTriggersClick = true;
 			this.B_ChangeLog.TabIndex = 2;
 			this.B_ChangeLog.Text = "OpenChangelog";
@@ -161,9 +174,11 @@ partial class PC_HelpAndLogs
 			this.B_SaveZip.ColorShade = null;
 			this.B_SaveZip.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_SaveZip.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_SaveZip.Location = new System.Drawing.Point(10, 198);
+			dynamicIcon2.Name = "I_Log";
+			this.B_SaveZip.ImageName = dynamicIcon2;
+			this.B_SaveZip.Location = new System.Drawing.Point(12, 208);
 			this.B_SaveZip.Name = "B_SaveZip";
-			this.B_SaveZip.Size = new System.Drawing.Size(325, 14);
+			this.B_SaveZip.Size = new System.Drawing.Size(321, 14);
 			this.B_SaveZip.SpaceTriggersClick = true;
 			this.B_SaveZip.TabIndex = 4;
 			this.B_SaveZip.Text = "LogZipFile";
@@ -175,9 +190,11 @@ partial class PC_HelpAndLogs
 			this.B_CopyZip.ColorShade = null;
 			this.B_CopyZip.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CopyZip.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_CopyZip.Location = new System.Drawing.Point(10, 178);
+			dynamicIcon3.Name = "I_CopyFile";
+			this.B_CopyZip.ImageName = dynamicIcon3;
+			this.B_CopyZip.Location = new System.Drawing.Point(12, 188);
 			this.B_CopyZip.Name = "B_CopyZip";
-			this.B_CopyZip.Size = new System.Drawing.Size(325, 14);
+			this.B_CopyZip.Size = new System.Drawing.Size(321, 14);
 			this.B_CopyZip.SpaceTriggersClick = true;
 			this.B_CopyZip.TabIndex = 3;
 			this.B_CopyZip.Text = "LogZipCopy";
@@ -189,9 +206,11 @@ partial class PC_HelpAndLogs
 			this.B_Discord.ColorShade = null;
 			this.B_Discord.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discord.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_Discord.Location = new System.Drawing.Point(10, 41);
+			dynamicIcon4.Name = "I_Discord";
+			this.B_Discord.ImageName = dynamicIcon4;
+			this.B_Discord.Location = new System.Drawing.Point(12, 51);
 			this.B_Discord.Name = "B_Discord";
-			this.B_Discord.Size = new System.Drawing.Size(325, 30);
+			this.B_Discord.Size = new System.Drawing.Size(321, 30);
 			this.B_Discord.SpaceTriggersClick = true;
 			this.B_Discord.TabIndex = 0;
 			this.B_Discord.Text = "JoinDiscord";
@@ -203,9 +222,11 @@ partial class PC_HelpAndLogs
 			this.B_Guide.ColorShade = null;
 			this.B_Guide.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Guide.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_Guide.Location = new System.Drawing.Point(10, 77);
+			dynamicIcon5.Name = "I_Guide";
+			this.B_Guide.ImageName = dynamicIcon5;
+			this.B_Guide.Location = new System.Drawing.Point(12, 87);
 			this.B_Guide.Name = "B_Guide";
-			this.B_Guide.Size = new System.Drawing.Size(325, 30);
+			this.B_Guide.Size = new System.Drawing.Size(321, 30);
 			this.B_Guide.SpaceTriggersClick = true;
 			this.B_Guide.TabIndex = 1;
 			this.B_Guide.Text = "OpenGuide";
@@ -214,9 +235,9 @@ partial class PC_HelpAndLogs
 			// slickSpacer1
 			// 
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(10, 149);
+			this.slickSpacer1.Location = new System.Drawing.Point(12, 159);
 			this.slickSpacer1.Name = "slickSpacer1";
-			this.slickSpacer1.Size = new System.Drawing.Size(325, 23);
+			this.slickSpacer1.Size = new System.Drawing.Size(321, 23);
 			this.slickSpacer1.TabIndex = 2;
 			this.slickSpacer1.TabStop = false;
 			this.slickSpacer1.Text = "slickSpacer1";
@@ -234,16 +255,17 @@ partial class PC_HelpAndLogs
 			this.TLP_LogFolders.Controls.Add(this.B_OpenLogFolder, 0, 0);
 			this.TLP_LogFolders.Controls.Add(this.B_CopyLogFile, 0, 1);
 			this.TLP_LogFolders.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_LogFolders.Location = new System.Drawing.Point(3, 231);
+			this.TLP_LogFolders.ImageName = dynamicIcon7;
+			this.TLP_LogFolders.Location = new System.Drawing.Point(3, 243);
 			this.TLP_LogFolders.Name = "TLP_LogFolders";
-			this.TLP_LogFolders.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
+			this.TLP_LogFolders.Padding = new System.Windows.Forms.Padding(9, 48, 9, 9);
 			this.TLP_LogFolders.RowCount = 5;
 			this.TLP_LogFolders.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LogFolders.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LogFolders.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LogFolders.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LogFolders.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_LogFolders.Size = new System.Drawing.Size(345, 202);
+			this.TLP_LogFolders.Size = new System.Drawing.Size(345, 214);
 			this.TLP_LogFolders.TabIndex = 1;
 			this.TLP_LogFolders.Text = "LogFolders";
 			// 
@@ -253,9 +275,10 @@ partial class PC_HelpAndLogs
 			this.B_LotLogCopy.ColorShade = null;
 			this.B_LotLogCopy.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_LotLogCopy.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_LotLogCopy.Location = new System.Drawing.Point(10, 178);
+			this.B_LotLogCopy.ImageName = dynamicIcon3;
+			this.B_LotLogCopy.Location = new System.Drawing.Point(12, 188);
 			this.B_LotLogCopy.Name = "B_LotLogCopy";
-			this.B_LotLogCopy.Size = new System.Drawing.Size(325, 14);
+			this.B_LotLogCopy.Size = new System.Drawing.Size(321, 14);
 			this.B_LotLogCopy.SpaceTriggersClick = true;
 			this.B_LotLogCopy.TabIndex = 3;
 			this.B_LotLogCopy.Text = "CopyLOTLogFile";
@@ -267,9 +290,11 @@ partial class PC_HelpAndLogs
 			this.B_LotLog.ColorShade = null;
 			this.B_LotLog.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_LotLog.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_LotLog.Location = new System.Drawing.Point(10, 158);
+			dynamicIcon7.Name = "I_Folder";
+			this.B_LotLog.ImageName = dynamicIcon7;
+			this.B_LotLog.Location = new System.Drawing.Point(12, 168);
 			this.B_LotLog.Name = "B_LotLog";
-			this.B_LotLog.Size = new System.Drawing.Size(325, 14);
+			this.B_LotLog.Size = new System.Drawing.Size(321, 14);
 			this.B_LotLog.SpaceTriggersClick = true;
 			this.B_LotLog.TabIndex = 2;
 			this.B_LotLog.Text = "OpenLOTLogFolder";
@@ -278,9 +303,9 @@ partial class PC_HelpAndLogs
 			// slickSpacer2
 			// 
 			this.slickSpacer2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer2.Location = new System.Drawing.Point(10, 129);
+			this.slickSpacer2.Location = new System.Drawing.Point(12, 139);
 			this.slickSpacer2.Name = "slickSpacer2";
-			this.slickSpacer2.Size = new System.Drawing.Size(325, 23);
+			this.slickSpacer2.Size = new System.Drawing.Size(321, 23);
 			this.slickSpacer2.TabIndex = 18;
 			this.slickSpacer2.TabStop = false;
 			this.slickSpacer2.Text = "slickSpacer2";
@@ -291,9 +316,10 @@ partial class PC_HelpAndLogs
 			this.B_OpenLogFolder.ColorShade = null;
 			this.B_OpenLogFolder.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_OpenLogFolder.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_OpenLogFolder.Location = new System.Drawing.Point(10, 41);
+			this.B_OpenLogFolder.ImageName = dynamicIcon7;
+			this.B_OpenLogFolder.Location = new System.Drawing.Point(12, 51);
 			this.B_OpenLogFolder.Name = "B_OpenLogFolder";
-			this.B_OpenLogFolder.Size = new System.Drawing.Size(325, 38);
+			this.B_OpenLogFolder.Size = new System.Drawing.Size(321, 38);
 			this.B_OpenLogFolder.SpaceTriggersClick = true;
 			this.B_OpenLogFolder.TabIndex = 0;
 			this.B_OpenLogFolder.Text = "OpenLogFolder";
@@ -305,9 +331,10 @@ partial class PC_HelpAndLogs
 			this.B_CopyLogFile.ColorShade = null;
 			this.B_CopyLogFile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_CopyLogFile.Dock = System.Windows.Forms.DockStyle.Top;
-			this.B_CopyLogFile.Location = new System.Drawing.Point(10, 85);
+			this.B_CopyLogFile.ImageName = dynamicIcon3;
+			this.B_CopyLogFile.Location = new System.Drawing.Point(12, 95);
 			this.B_CopyLogFile.Name = "B_CopyLogFile";
-			this.B_CopyLogFile.Size = new System.Drawing.Size(325, 38);
+			this.B_CopyLogFile.Size = new System.Drawing.Size(321, 38);
 			this.B_CopyLogFile.SpaceTriggersClick = true;
 			this.B_CopyLogFile.TabIndex = 1;
 			this.B_CopyLogFile.Text = "CopyLogFile";
@@ -340,13 +367,15 @@ partial class PC_HelpAndLogs
 			this.TLP_Errors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Errors.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Errors.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_Errors.Location = new System.Drawing.Point(354, 202);
+			dynamicIcon8.Name = "I_Errors";
+			this.TLP_Errors.ImageName = dynamicIcon8;
+			this.TLP_Errors.Location = new System.Drawing.Point(354, 209);
 			this.TLP_Errors.Name = "TLP_Errors";
-			this.TLP_Errors.Padding = new System.Windows.Forms.Padding(7, 38, 7, 7);
+			this.TLP_Errors.Padding = new System.Windows.Forms.Padding(9, 48, 9, 9);
 			this.TLP_Errors.RowCount = 1;
 			this.TLP_Errors.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Errors.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Errors.Size = new System.Drawing.Size(743, 45);
+			this.TLP_Errors.Size = new System.Drawing.Size(743, 57);
 			this.TLP_Errors.TabIndex = 2;
 			this.TLP_Errors.Text = "ErrorsInLog";
 			this.TLP_Errors.Visible = false;
@@ -358,8 +387,9 @@ partial class PC_HelpAndLogs
 			this.I_Info.ColorStyle = Extensions.ColorStyle.Icon;
 			this.I_Info.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Info.Enabled = false;
-			this.I_Info.Image = global::LoadOrderToolTwo.Properties.Resources.I_Info;
-			this.I_Info.Location = new System.Drawing.Point(361, 161);
+			dynamicIcon9.Name = "I_Info";
+			this.I_Info.ImageName = dynamicIcon9;
+			this.I_Info.Location = new System.Drawing.Point(361, 165);
 			this.I_Info.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
 			this.I_Info.Name = "I_Info";
 			this.I_Info.Selected = true;
@@ -374,7 +404,7 @@ partial class PC_HelpAndLogs
 			this.L_Info.Location = new System.Drawing.Point(399, 166);
 			this.L_Info.Margin = new System.Windows.Forms.Padding(3, 10, 10, 10);
 			this.L_Info.Name = "L_Info";
-			this.L_Info.Size = new System.Drawing.Size(55, 23);
+			this.L_Info.Size = new System.Drawing.Size(71, 30);
 			this.L_Info.TabIndex = 19;
 			this.L_Info.Text = "label1";
 			this.L_Info.UseMnemonic = false;

@@ -24,13 +24,6 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		}
 	}
 
-	protected override void UIChanged()
-	{
-		Font = UI.Font(9.75F);
-		Margin = UI.Scale(new Padding(5), UI.FontScale);
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
-	}
-
 	protected override bool SearchMatch(string searchText, PackageSorting item)
 	{
 		return searchText.SearchCheck(LocaleHelper.GetGlobalText($"Sorting_{item}"));
@@ -46,7 +39,7 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		var text = LocaleHelper.GetGlobalText($"Sorting_{item}");
 		var color = FormDesign.Design.ForeColor;
 
-		using var icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Sort)).Color(foreColor);
+		using var icon = IconManager.GetIcon("I_Sort").Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

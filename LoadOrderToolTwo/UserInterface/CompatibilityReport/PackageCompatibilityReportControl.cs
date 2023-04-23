@@ -53,7 +53,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 		if (Report == null)
 		{
-			GenerateSection(Locale.CompatibilityReport, Properties.Resources.I_CompatibilityReport, FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, Enums.ReportType.Note, new CompatibilityManager.ReportMessage(Enums.ReportType.Note, Enums.ReportSeverity.NothingToReport, Locale.CR_NoAvailableReport)));
+			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, Enums.ReportType.Note, new CompatibilityManager.ReportMessage(Enums.ReportType.Note, Enums.ReportSeverity.NothingToReport, Locale.CR_NoAvailableReport)));
 			return;
 		}
 
@@ -68,21 +68,21 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		return item.Max(x => x.Severity).GetSeverityColor().MergeColor(BackColor, 15);
 	}
 
-	private Bitmap GetTypeIcon(Enums.ReportType type)
+	private DynamicIcon GetTypeIcon(Enums.ReportType type)
 	{
 		return type switch
 		{
-			Enums.ReportType.Stability => Properties.Resources.I_Stability,
-			Enums.ReportType.DlcMissing or Enums.ReportType.RequiredMods => Properties.Resources.I_MissingMod,
-			Enums.ReportType.UnneededDependency => Properties.Resources.I_Disposable,
-			Enums.ReportType.WorksWhenDisabled => Properties.Resources.I_Malicious,
-			Enums.ReportType.Successors => Properties.Resources.I_Upgrade,
-			Enums.ReportType.Alternatives => Properties.Resources.I_Alternatives,
-			Enums.ReportType.Status => Properties.Resources.I_Statuses,
-			Enums.ReportType.Note => Properties.Resources.I_Note,
-			Enums.ReportType.Recommendations => Properties.Resources.I_Recommendations,
-			Enums.ReportType.Compatibility => Properties.Resources.I_Compatibilities,
-			_ => Properties.Resources.I_CompatibilityReport,
+			Enums.ReportType.Stability => "I_Stability",
+			Enums.ReportType.DlcMissing or Enums.ReportType.RequiredMods => "I_MissingMod",
+			Enums.ReportType.UnneededDependency => "I_Disposable",
+			Enums.ReportType.WorksWhenDisabled => "I_Malicious",
+			Enums.ReportType.Successors => "I_Upgrade",
+			Enums.ReportType.Alternatives => "I_Alternatives",
+			Enums.ReportType.Status => "I_Statuses",
+			Enums.ReportType.Note => "I_Note",
+			Enums.ReportType.Recommendations => "I_Recommendations",
+			Enums.ReportType.Compatibility => "I_Compatibilities",
+			_ => "I_CompatibilityReport",
 		};
 	}
 

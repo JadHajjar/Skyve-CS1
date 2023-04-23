@@ -47,15 +47,6 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		base.UIChanged();
 
-		TLP_Errors.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Errors));
-		TLP_LogFolders.Image = B_OpenLogFolder.Image = B_LotLog.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Folder));
-		TLP_HelpLogs.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_AskHelp));
-		B_CopyZip.Image = B_CopyLogFile.Image = B_LotLogCopy.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_CopyFile));
-		B_SaveZip.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Log));
-		B_Discord.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Discord));
-		B_ChangeLog.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Versions));
-		B_Guide.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Guide));
-
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
 		DD_LogFile.Margin = TLP_Errors.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10), UI.UIScale);
 

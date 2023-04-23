@@ -23,15 +23,13 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 
 	public GenericPackageListControl()
 	{
-		DoubleSizeOnHover = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
-
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 	}
 
 	protected override void UIChanged()
 	{
-		ItemHeight = 36;
+		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover?64:36;
 
 		base.UIChanged();
 
@@ -173,7 +171,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 
 	protected override void OnPaintItem(ItemPaintEventArgs<IGenericPackage> e)
 	{
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = GetActionRectangles(e.ClipRectangle, e.Item);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -190,7 +188,11 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 		switch (state)
 		{
 			case GenericPackageState.Local:
-				e.Graphics.DrawImage(Properties.Resources.I_Local.Color(ForeColor), rects.IncludedRect.CenterR(24, 24));
+				using (var img = IconManager.GetLargeIcon("I_PC").Color(ForeColor))
+				{
+					e.Graphics.DrawImage(img, rects.IncludedRect.CenterR(24, 24));
+				}
+
 				break;
 			case GenericPackageState.Unsubscribed:
 				if (includeHovered)
@@ -198,15 +200,27 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 					e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, FormDesign.Design.ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 				}
 
-				e.Graphics.DrawImage(Properties.Resources.I_Add.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+				using (var img = IconManager.GetLargeIcon("I_Add"))
+				{
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+				}
+
 				break;
 			case GenericPackageState.Disabled:
 				e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(includeHovered ? 150 : 255, FormDesign.Design.RedColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
-				e.Graphics.DrawImage(Properties.Resources.I_Cancel.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(24, 24));
+				using (var img = IconManager.GetLargeIcon("I_Cancel"))
+				{
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(24, 24));
+				}
+
 				break;
 			case GenericPackageState.Enabled:
 				e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(includeHovered ? 150 : 255, FormDesign.Design.GreenColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
-				e.Graphics.DrawImage(Properties.Resources.I_Ok.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(24, 24));
+				using (var img = IconManager.GetLargeIcon("I_Ok"))
+				{
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(24, 24));
+				}
+
 				break;
 			case GenericPackageState.Excluded:
 				if (includeHovered)
@@ -214,7 +228,11 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 					e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 				}
 
-				e.Graphics.DrawImage(Properties.Resources.I_Enabled.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+				using (var img = IconManager.GetLargeIcon("I_Enabled"))
+				{
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+				}
+
 				break;
 			default:
 				break;
@@ -248,13 +266,14 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 
 		if (e.Item.SteamId != 0)
 		{
-			DrawLabel(e, e.Item.Author?.Name, Properties.Resources.I_Developer_16, rects.AuthorRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), rects.AuthorRect, ContentAlignment.TopLeft);
-			DrawLabel(e, e.Item.SteamId.ToString(), Properties.Resources.I_Steam_16, rects.SteamIdRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), rects.SteamIdRect, ContentAlignment.BottomLeft);
+			DrawLabel(e, e.Item.Author?.Name, IconManager.GetSmallIcon("I_Developer"), rects.AuthorRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), rects.AuthorRect, ContentAlignment.TopLeft);
+			DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), rects.SteamIdRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), rects.SteamIdRect, ContentAlignment.BottomLeft);
 
 			var report = CompatibilityManager.GetCompatibilityReport(e.Item.SteamId);
 			if (report is not null && report.Severity != ReportSeverity.NothingToReport)
 			{
-				labelX = DrawLabel(e, LocaleHelper.GetGlobalText(report.Severity == ReportSeverity.Unsubscribe ? Locale.ShouldNotBeSubscribed : $"CR_{report.Severity}"), Properties.Resources.I_CompatibilityReport_16, (report.Severity switch
+			using var crIcon = IconManager.GetSmallIcon("I_CompatibilityReport");
+				labelX = DrawLabel(e, LocaleHelper.GetGlobalText(report.Severity == ReportSeverity.Unsubscribe ? Locale.ShouldNotBeSubscribed : $"CR_{report.Severity}"), crIcon, (report.Severity switch
 				{
 					ReportSeverity.MinorIssues => FormDesign.Design.YellowColor,
 					ReportSeverity.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
@@ -264,19 +283,22 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 				}).MergeColor(FormDesign.Design.BackColor, 65), new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
 			}
 
-			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_Steam)), null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+			using var steamIcon = IconManager.GetIcon("I_Steam");
+			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, steamIcon, null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 		}
 
 		if (state > GenericPackageState.Unsubscribed)
 		{
-			SlickButton.DrawButton(e, rects.RemoveRect, string.Empty, Font, ImageManager.GetIcon(nameof(Properties.Resources.I_RemoveSteam)), null, rects.RemoveRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, ColorStyle.Red);
+			using var steamIcon = IconManager.GetIcon("I_RemoveSteam");
+			SlickButton.DrawButton(e, rects.RemoveRect, string.Empty, Font, steamIcon, null, rects.RemoveRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, ColorStyle.Red);
 		}
 
 		if (e.Item.Tags is not null)
 		{
+			using var tagIcon = IconManager.GetSmallIcon("I_Tag");
 			foreach (var item in e.Item.Tags.OrderBy(x => x))
 			{
-				labelX = DrawLabel(e, item, Properties.Resources.I_Tag_16, FormDesign.Design.ButtonColor, new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
+				labelX = DrawLabel(e, item, tagIcon, FormDesign.Design.ButtonColor, new Rectangle(labelX + Padding.Left, e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.BottomLeft).Right;
 			}
 		}
 
@@ -295,7 +317,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 			return Rectangle.Empty;
 		}
 
-		var large = DoubleSizeOnHover && (e.HoverState.HasFlag(HoverState.Hovered) || e.HoverState.HasFlag(HoverState.Pressed));
+		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)

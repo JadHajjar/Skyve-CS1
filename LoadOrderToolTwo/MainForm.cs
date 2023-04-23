@@ -150,7 +150,7 @@ public partial class MainForm : BasePanelForm
 		if (!ConnectionHandler.IsConnected)
 		{
 			var rect = base_PB_Icon.ClientRectangle.Pad((int)(3 * UI.UIScale)).Align(new Size(base_PB_Icon.Width / 3, base_PB_Icon.Width / 3), ContentAlignment.BottomRight);
-			using var noInt = ImageManager.GetIcon(nameof(Properties.Resources.I_NoInternet)).Color(FormDesign.Design.MenuForeColor);
+			using var noInt = IconManager.GetSmallIcon("I_NoInternet").Color(FormDesign.Design.MenuForeColor);
 
 			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.RedColor), rect.Pad((int)(-2 * UI.UIScale)));
 			e.Graphics.DrawImage(noInt, rect.Pad(1, 1, -1, -1));
@@ -179,17 +179,6 @@ public partial class MainForm : BasePanelForm
 		base.UIChanged();
 
 		MinimumSize = UI.Scale(new Size(650, 350), UI.FontScale);
-
-		PI_Dashboard.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Dashboard));
-		PI_Mods.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Mods));
-		PI_Assets.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Assets));
-		PI_Profiles.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_ProfileSettings));
-		PI_Options.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_UserOptions));
-		PI_Compatibility.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_CompatibilityReport));
-		PI_ModUtilities.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Wrench));
-		PI_Troubleshoot.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_AskHelp));
-		PI_Packages.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Package));
-		PI_DLCs.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Dlc));
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

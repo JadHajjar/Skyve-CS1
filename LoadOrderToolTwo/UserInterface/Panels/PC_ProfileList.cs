@@ -142,9 +142,9 @@ public partial class PC_ProfileList : PanelContent
 
 	private void FilterChanged(object sender, EventArgs e)
 	{
-		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
 
-		LC_Items.FilterOrSortingChanged();
+		LC_Items.FilterChanged();
 		RefreshCounts();
 	}
 

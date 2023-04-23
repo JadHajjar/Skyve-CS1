@@ -37,8 +37,34 @@ public partial class PC_Profiles : PanelContent
 		LoadProfile(CentralManager.CurrentProfile);
 
 		DD_SaveFile.StartingFolder = LocationManager.Combine(LocationManager.AppDataPath, "Saves");
+		DD_SaveFile.PinnedFolders = new()
+		{
+			["Your Save-games"] = LocationManager.Combine(LocationManager.AppDataPath, "Saves"),
+			["Workshop Save-games"] = IOSelectionDialog.CustomDirectory,
+		};
+		DD_SaveFile.CustomFiles = CentralManager.Assets.Where(x => x.Workshop && (x.Package.WorkshopTags?.Contains("SaveGame") ?? false)).Select(x => new IOSelectionDialog.CustomFile
+		{
+			Name = x.Package.Name,
+			Icon = x.IconImage,
+			Path = x.FileName
+		}).ToList();
+
 		DD_SkipFile.StartingFolder = LocationManager.AppDataPath;
+		DD_SkipFile.PinnedFolders = new() { ["App Data"] = LocationManager.AppDataPath };
+		
 		DD_NewMap.StartingFolder = LocationManager.MapsPath;
+		DD_NewMap.PinnedFolders = new() 
+		{
+			["Custom Maps"] = LocationManager.MapsPath,
+			["Vanilla Maps"] = LocationManager.Combine(LocationManager.GameContentPath, "Maps"),
+			["Workshop Maps"] = IOSelectionDialog.CustomDirectory,
+		};
+		DD_NewMap.CustomFiles = CentralManager.Assets.Where(x => x.Workshop && (x.AssetTags.Contains("Map") || (x.Package.WorkshopTags?.Contains("Map") ?? false))).Select(x => new IOSelectionDialog.CustomFile
+		{
+			Name = x.Package.Name,
+			Icon = x.IconImage,
+			Path = x.FileName
+		}).ToList();
 
 		TLP_AdvancedDev.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
 
@@ -56,9 +82,6 @@ public partial class PC_Profiles : PanelContent
 	{
 		Text = Locale.ProfileBubble;
 		L_TempProfile.Text = Locale.TemporaryProfileCanNotBeEdited;
-		TLP_LaunchSettings.Text = Locale.LaunchSettings;
-		TLP_LSM.Text = Locale.LoadingScreenMod;
-		TLP_GeneralSettings.Text = Locale.Settings;
 		L_ProfileUsage.Text = Locale.ProfileUsage;
 		L_Info.Text = Locale.ProfileSaveInfo;
 	}
@@ -67,6 +90,7 @@ public partial class PC_Profiles : PanelContent
 	{
 		base.UIChanged();
 
+		B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
 		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_ProfileUsage.Font = UI.Font(7.5F, FontStyle.Bold);
@@ -128,7 +152,7 @@ public partial class PC_Profiles : PanelContent
 		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 		I_ProfileIcon.Enabled = !profile.Temporary;
-		I_ProfileIcon.Image = profile.GetIcon();
+		I_ProfileIcon.ImageName = profile.GetIcon();
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
 		B_TempProfile.Visible = !profile.Temporary;
 		L_Info.Visible = I_Info.Visible = !profile.Temporary;
@@ -419,11 +443,11 @@ public partial class PC_Profiles : PanelContent
 	{
 		if (ProfileManager.CurrentProfile.Save())
 		{
-			B_Save.Image = Properties.Resources.I_Check;
+			B_Save.ImageName = "I_Check";
 
 			new BackgroundAction(() =>
 			{
-				B_Save.Image = Properties.Resources.I_Save;
+				B_Save.ImageName = "I_Save";
 			}).RunIn(2000);
 		}
 		else
@@ -446,7 +470,7 @@ public partial class PC_Profiles : PanelContent
 	private void DD_SkipFile_FileSelected(string obj)
 	{
 		DD_SkipFile.SelectedFile = obj;
-		ValueChanged(DD_SkipFile, EventArgs.Empty);
+		LsmSettingsChanged(DD_SkipFile, EventArgs.Empty);
 	}
 
 	private void DD_NewMap_FileSelected(string obj)

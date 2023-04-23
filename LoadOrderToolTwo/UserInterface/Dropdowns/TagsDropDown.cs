@@ -19,25 +19,6 @@ internal class TagsDropDown : SlickMultiSelectionDropDown<string>
 		return items.OrderByDescending(x => SelectedItems.Contains(x.Item)).ThenBy(x => x.Item != Locale.AnyTags).ThenBy(x => x.Item);
 	}
 
-	protected override void UIChanged()
-	{
-		Font = UI.Font(9.75F);
-
-		if (Margin == new Padding(3))
-		{
-			Margin = UI.Scale(new Padding(5), UI.FontScale);
-		}
-
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
-	}
-
-	protected override void OnSizeChanged(EventArgs e)
-	{
-		base.OnSizeChanged(e);
-
-		Height = (int)(42 * UI.UIScale);
-	}
-
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, string text, bool selected)
 	{
 		if (selected && !hoverState.HasFlag(HoverState.Pressed))
@@ -45,7 +26,7 @@ internal class TagsDropDown : SlickMultiSelectionDropDown<string>
 			foreColor = FormDesign.Design.ActiveColor;
 		}
 
-		using var icon = ImageManager.GetIcon(text == Locale.AnyTags ? nameof(Properties.Resources.I_Slash) : nameof(Properties.Resources.I_Tag)).Color(foreColor);
+		using var icon = IconManager.GetIcon(text == Locale.AnyTags ? "I_Slash" : "I_Tag").Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
@@ -59,7 +40,7 @@ internal class TagsDropDown : SlickMultiSelectionDropDown<string>
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<string> items)
 	{
-		using var icon = ImageManager.GetIcon(!items.Any() ? nameof(Properties.Resources.I_Slash) : nameof(Properties.Resources.I_Tag)).Color(foreColor);
+		using var icon = IconManager.GetIcon(!items.Any() ? "I_Slash" : "I_Tag").Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

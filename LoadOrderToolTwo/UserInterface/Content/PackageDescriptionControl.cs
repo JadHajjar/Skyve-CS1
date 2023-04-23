@@ -43,21 +43,24 @@ internal class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
+		using var timeIcon = IconManager.GetSmallIcon("I_UpdateTime");
 		var versionRect = Package.Mod == null ? new Rectangle(-Padding.Left, 0, 0, 0) : DrawLabel(e, Package.BuiltIn ? Locale.Vanilla : "v" + Package.Mod?.Version.GetString(), null, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), new Rectangle(Padding.Left, Padding.Top, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.TopLeft);
-		var timeRect = DrawLabel(e, Package.LocalTime.ToLocalTime().ToString("g"), Properties.Resources.I_UpdateTime, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), new Rectangle(versionRect.Right + Padding.Left, Padding.Top, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.TopLeft);
+		var timeRect = DrawLabel(e, Package.LocalTime.ToLocalTime().ToString("g"), timeIcon, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), new Rectangle(versionRect.Right + Padding.Left, Padding.Top, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.TopLeft);
 
 		GetStatusDescriptors(Package, out var text, out var icon, out var color);
 		var statusRect = string.IsNullOrEmpty(text) ? timeRect : DrawLabel(e, text, icon, color.MergeColor(FormDesign.Design.BackColor, 60), new Rectangle(timeRect.Right + Padding.Left, Padding.Top, (int)(100 * UI.FontScale), e.ClipRectangle.Height), ContentAlignment.TopLeft);
 
 		if (Package.Workshop)
 		{
-			DrawLabel(e, Package.SteamId.ToString(), Properties.Resources.I_Steam_16, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), new Rectangle(0, Padding.Top, e.ClipRectangle.Width, e.ClipRectangle.Height), ContentAlignment.TopRight);
+			using var steamIcon = IconManager.GetSmallIcon("I_Steam");
+			DrawLabel(e, Package.SteamId.ToString(), steamIcon, FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.ActiveColor, 75).MergeColor(FormDesign.Design.BackColor, 40), new Rectangle(0, Padding.Top, e.ClipRectangle.Width, e.ClipRectangle.Height), ContentAlignment.TopRight);
 		}
 
 		var report = Package.CompatibilityReport;
 		if (report is not null)
 		{
-			DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Severity}"), Properties.Resources.I_CompatibilityReport_16, (report.Severity switch
+			using var crIcon = IconManager.GetSmallIcon("I_CompatibilityReport");
+			DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Severity}"), crIcon, (report.Severity switch
 			{
 				ReportSeverity.MinorIssues => FormDesign.Design.YellowColor,
 				ReportSeverity.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
@@ -121,46 +124,43 @@ internal class PackageDescriptionControl : SlickImageControl
 		return rectangle;
 	}
 
-	private void GetStatusDescriptors(Package package, out string text, out Bitmap? icon, out Color color)
+	private void GetStatusDescriptors(Package mod, out string text, out Bitmap? icon, out Color color)
 	{
-		if (!package.Workshop && !package.BuiltIn)
+		if (!mod.Workshop)
 		{
 			text = Locale.Local;
-			icon = Properties.Resources.I_Local_16;
-			color = FormDesign.Design.YellowColor;
+			icon = IconManager.GetSmallIcon("I_PC");
+			color = FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor);
 			return;
 		}
 
-		switch (package.Status)
+		switch (mod.Status)
 		{
 			case DownloadStatus.OK:
-				text = Locale.UpToDate;
-				icon = Properties.Resources.I_Ok_16;
-				color = FormDesign.Design.GreenColor;
-				return;
+				break;
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
-				icon = Properties.Resources.I_Question_16;
+				icon = IconManager.GetSmallIcon("I_Question");
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = Properties.Resources.I_OutOfDate_16;
+				icon = IconManager.GetSmallIcon("I_OutOfDate");
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatus.NotDownloaded:
 				text = Locale.ModIsNotDownloaded;
-				icon = Properties.Resources.I_Question_16;
+				icon = IconManager.GetSmallIcon("I_Question");
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = Properties.Resources.I_Broken_16;
+				icon = IconManager.GetSmallIcon("I_Broken");
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatus.Removed:
 				text = Locale.ModIsRemoved;
-				icon = Properties.Resources.I_ContentRemoved_16;
+				icon = IconManager.GetSmallIcon("I_ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;
 		}

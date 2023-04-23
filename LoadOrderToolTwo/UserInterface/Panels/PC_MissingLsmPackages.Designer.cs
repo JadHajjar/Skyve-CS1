@@ -32,14 +32,17 @@ partial class PC_MissingLsmPackages
 	/// </summary>
 	private void InitializeComponent()
 	{
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.B_SubscribeAll = new SlickControls.SlickButton();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.L_Counts = new System.Windows.Forms.Label();
+			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
 			this.B_IncludeAll = new SlickControls.SlickButton();
 			this.LC_Items = new LoadOrderToolTwo.UserInterface.Lists.GenericPackageListControl();
-			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
-			this.L_Counts = new System.Windows.Forms.Label();
 			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -50,7 +53,7 @@ partial class PC_MissingLsmPackages
 			// slickSpacer1
 			// 
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 185);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 152);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(783, 2);
@@ -61,7 +64,8 @@ partial class PC_MissingLsmPackages
 			// TB_Search
 			// 
 			this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.TB_Search.Image = global::LoadOrderToolTwo.Properties.Resources.I_Search;
+			dynamicIcon1.Name = "I_Search";
+			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
@@ -79,7 +83,9 @@ partial class PC_MissingLsmPackages
 			this.B_SubscribeAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.B_SubscribeAll.ColorShade = null;
 			this.B_SubscribeAll.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_SubscribeAll.Location = new System.Drawing.Point(425, 3);
+			dynamicIcon2.Name = "I_Add";
+			this.B_SubscribeAll.ImageName = dynamicIcon2;
+			this.B_SubscribeAll.Location = new System.Drawing.Point(425, 17);
 			this.B_SubscribeAll.Name = "B_SubscribeAll";
 			this.B_SubscribeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
 			this.B_SubscribeAll.Size = new System.Drawing.Size(355, 30);
@@ -107,13 +113,39 @@ partial class PC_MissingLsmPackages
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 157);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(783, 122);
 			this.tableLayoutPanel2.TabIndex = 0;
+			// 
+			// L_Counts
+			// 
+			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.L_Counts.AutoSize = true;
+			this.L_Counts.Location = new System.Drawing.Point(725, 99);
+			this.L_Counts.Name = "L_Counts";
+			this.L_Counts.Size = new System.Drawing.Size(55, 23);
+			this.L_Counts.TabIndex = 4;
+			this.L_Counts.Text = "label1";
+			this.L_Counts.UseMnemonic = false;
+			// 
+			// DD_Tags
+			// 
+			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Tags.Location = new System.Drawing.Point(7, 57);
+			this.DD_Tags.Margin = new System.Windows.Forms.Padding(7);
+			this.DD_Tags.Name = "DD_Tags";
+			this.DD_Tags.Padding = new System.Windows.Forms.Padding(7);
+			this.tableLayoutPanel2.SetRowSpan(this.DD_Tags, 2);
+			this.DD_Tags.Size = new System.Drawing.Size(212, 58);
+			this.DD_Tags.TabIndex = 3;
+			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.OT_Workshop_SelectedValueChanged);
 			// 
 			// B_IncludeAll
 			// 
 			this.B_IncludeAll.ColorShade = null;
 			this.B_IncludeAll.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon3.Name = "I_Check";
+			this.B_IncludeAll.ImageName = dynamicIcon3;
 			this.B_IncludeAll.Location = new System.Drawing.Point(425, 53);
 			this.B_IncludeAll.Name = "B_IncludeAll";
 			this.B_IncludeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
@@ -129,35 +161,11 @@ partial class PC_MissingLsmPackages
 			this.LC_Items.AutoScroll = true;
 			this.LC_Items.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.LC_Items.HighlightOnHover = true;
-			this.LC_Items.Location = new System.Drawing.Point(0, 187);
+			this.LC_Items.Location = new System.Drawing.Point(0, 154);
 			this.LC_Items.Name = "LC_Items";
 			this.LC_Items.SeparateWithLines = true;
-			this.LC_Items.Size = new System.Drawing.Size(783, 251);
+			this.LC_Items.Size = new System.Drawing.Size(783, 284);
 			this.LC_Items.TabIndex = 18;
-			// 
-			// DD_Tags
-			// 
-			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Tags.Location = new System.Drawing.Point(7, 57);
-			this.DD_Tags.Margin = new System.Windows.Forms.Padding(7);
-			this.DD_Tags.Name = "DD_Tags";
-			this.DD_Tags.Padding = new System.Windows.Forms.Padding(7);
-			this.tableLayoutPanel2.SetRowSpan(this.DD_Tags, 2);
-			this.DD_Tags.Size = new System.Drawing.Size(212, 66);
-			this.DD_Tags.TabIndex = 3;
-			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.OT_Workshop_SelectedValueChanged);
-			// 
-			// L_Counts
-			// 
-			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(362, 53);
-			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(59, 25);
-			this.L_Counts.TabIndex = 4;
-			this.L_Counts.Text = "label1";
-			this.L_Counts.UseMnemonic = false;
 			// 
 			// PC_MissingLsmPackages
 			// 

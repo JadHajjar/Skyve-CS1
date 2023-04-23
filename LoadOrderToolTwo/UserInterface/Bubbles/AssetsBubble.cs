@@ -23,7 +23,7 @@ internal class AssetsBubble : StatusBubbleBase
 			return;
 		}
 
-		Image = Properties.Resources.I_Assets;
+		ImageName = "I_Assets";
 		Text = Locale.AssetsBubble;
 
 		if (!CentralManager.IsContentLoaded)

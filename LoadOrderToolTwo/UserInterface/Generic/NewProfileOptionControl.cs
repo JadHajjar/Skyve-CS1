@@ -43,8 +43,10 @@ internal class NewProfileOptionControl : SlickImageControl
 
         e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle, Padding.Left);
 
-        e.Graphics.DrawImage((FromScratch ? Properties.Resources.I_New_48 : Properties.Resources.I_Copy_48).Color(fore), ClientRectangle.Pad(Padding).Align(new Size(48, 48), ContentAlignment.MiddleLeft));
+        using var icon = IconManager.GetIcon(FromScratch ? "I_New" : "I_CopySettings", 48);
 
-        e.Graphics.DrawString(FromScratch ? Locale.StartScratch : Locale.ContinueFromCurrent, Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + 48, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+        e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+
+        e.Graphics.DrawString(FromScratch ? Locale.StartScratch : Locale.ContinueFromCurrent, Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon.Width, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
     }
 }

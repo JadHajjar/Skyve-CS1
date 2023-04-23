@@ -32,7 +32,7 @@ partial class PC_ProfileList
 	/// </summary>
 	private void InitializeComponent()
 	{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC_ProfileList));
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.T_ProfileUsage = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
@@ -53,7 +53,6 @@ partial class PC_ProfileList
 			// base_Text
 			// 
 			this.base_Text.Location = new System.Drawing.Point(-2, 3);
-			this.base_Text.Size = new System.Drawing.Size(49, 26);
 			this.base_Text.Text = "Mods";
 			// 
 			// TLP_Main
@@ -128,7 +127,8 @@ partial class PC_ProfileList
 			// 
 			this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-			this.TB_Search.Image = ((System.Drawing.Image)(resources.GetObject("TB_Search.Image")));
+			dynamicIcon1.Name = "I_Search";
+			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";

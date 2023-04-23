@@ -124,7 +124,8 @@ internal static class ColossalOrderUtil
 	[ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 	public static unsafe int GetLegacyHashCode(string str)
 	{
-		fixed (char* ptr = str + (RuntimeHelpers.OffsetToStringData / 2))
+		//fixed (char* ptr = str + (RuntimeHelpers.OffsetToStringData / 2))
+		fixed (char* ptr = str + (12 / 2))
 		{
 			var ptr2 = ptr;
 			var ptr3 = ptr2 + str.Length - 1;

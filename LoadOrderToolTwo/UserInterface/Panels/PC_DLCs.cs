@@ -66,8 +66,8 @@ public partial class PC_DLCs : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
-		LC_DLCs.FilterOrSortingChanged();
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		LC_DLCs.FilterChanged();
 		RefreshCounts();
 	}
 
@@ -88,8 +88,6 @@ public partial class PC_DLCs : PanelContent
 		L_Duplicates.Font = L_Counts.Font = UI.Font(7.5F, FontStyle.Bold);
 		TB_Search.Width = (int)(400 * UI.FontScale);
 		B_ExInclude.Width = (int)(400 * UI.FontScale);
-		T_YourDlcs.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_User));
-		T_AllDlcs.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Discover));
 	}
 
 	public override bool KeyPressed(ref Message msg, Keys keyData)
@@ -132,7 +130,7 @@ public partial class PC_DLCs : PanelContent
 
 	private void T_YourDlcs_TabSelected(object sender, EventArgs e)
 	{
-		LC_DLCs.FilterOrSortingChanged();
+		LC_DLCs.FilterChanged();
 		RefreshCounts();
 	}
 }

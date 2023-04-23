@@ -77,10 +77,6 @@ public partial class PC_MissingPackages : PanelContent
 
 		B_SteamPage.Margin = B_SteamPage.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		TB_Search.Margin = DD_Tags.Margin = OT_Workshop.Margin = L_Counts.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		T_All.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Package));
-		T_Mods.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Mods));
-		T_Assets.Icon = ImageManager.GetIcon(nameof(Properties.Resources.I_Assets));
-		B_SteamPage.Image = ImageManager.GetIcon(nameof(Properties.Resources.I_Add));
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -192,8 +188,8 @@ public partial class PC_MissingPackages : PanelContent
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.Image = string.IsNullOrWhiteSpace(TB_Search.Text) ? Properties.Resources.I_Search : Properties.Resources.I_ClearSearch;
-		LC_Items.FilterOrSortingChanged();
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		LC_Items.FilterChanged();
 		RefreshCounts();
 	}
 
@@ -229,13 +225,13 @@ public partial class PC_MissingPackages : PanelContent
 
 	private void OT_Workshop_SelectedValueChanged(object sender, EventArgs e)
 	{
-		LC_Items.FilterOrSortingChanged();
+		LC_Items.FilterChanged();
 		RefreshCounts();
 	}
 
 	private void T_Assets_TabSelected(object sender, EventArgs e)
 	{
-		LC_Items.FilterOrSortingChanged();
+		LC_Items.FilterChanged();
 		LC_Items.ResetScroll();
 		RefreshCounts();
 	}
