@@ -71,6 +71,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			OT_Enabled.Hide();
 			B_DisEnable.Dispose();
 			TLP_Main.SetColumnSpan(B_ExInclude, 2);
+			P_Filters.SetRow(OT_Workshop, 2);
 		}
 
 		clearingFilters = false;
@@ -167,6 +168,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_Profile.Text = Locale.ProfileFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
+		DD_Author.Text = Locale.Author;
 	}
 
 	protected override void OnCreateControl()
@@ -225,8 +227,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			= DD_ReportSeverity.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin
 			= B_Refresh.Margin = B_UnsubscribeAll.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_UnsubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
-		I_ClearFilters.Size = UI.Scale(new Size(24, 24), UI.FontScale);
-		I_ClearFilters.Location = new(P_Filters.Width - P_Filters.Padding.Right - I_ClearFilters.Width, P_Filters.Padding.Bottom);
+		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
 		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(180 * UI.FontScale);
 		TB_Search.Width = (int)(400 * UI.FontScale);

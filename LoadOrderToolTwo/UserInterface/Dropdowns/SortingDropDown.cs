@@ -24,6 +24,13 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		}
 	}
 
+	protected override void UIChanged()
+	{
+		base.UIChanged();
+
+		Height = 0;
+	}
+
 	protected override bool SearchMatch(string searchText, PackageSorting item)
 	{
 		return searchText.SearchCheck(LocaleHelper.GetGlobalText($"Sorting_{item}"));

@@ -72,6 +72,9 @@
     <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>

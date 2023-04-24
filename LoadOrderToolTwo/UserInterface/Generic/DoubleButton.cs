@@ -36,22 +36,25 @@ public class DoubleButton : SlickControl
 
 	protected override void UIChanged()
 	{
-		if (Margin == new Padding(3))
+		if (Live)
 		{
-			Font = UI.Font(9.75F);
-			Margin = UI.Scale(new Padding(5), UI.FontScale);
-		}
+			if (Margin == new Padding(3))
+			{
+				Font = UI.Font(9F);
+				Margin = UI.Scale(new Padding(5), UI.FontScale);
+			}
 
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+			Padding = UI.Scale(new Padding(5), UI.FontScale);
+		}
 	}
 
 	protected override void OnSizeChanged(EventArgs e)
 	{
 		base.OnSizeChanged(e);
 
-		if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
+		if (Live&&!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
 		{
-			Height = (int)(28 * UI.UIScale);
+			Height = (int)(24 * UI.UIScale);
 		}
 	}
 

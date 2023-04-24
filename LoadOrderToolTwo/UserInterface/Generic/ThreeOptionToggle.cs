@@ -45,16 +45,19 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 	protected override void UIChanged()
 	{
-		Font = UI.Font(9F);
-		Margin = UI.Scale(new Padding(5), UI.FontScale);
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		if (Live)
+		{
+			Font = UI.Font(9F);
+			Margin = UI.Scale(new Padding(5), UI.FontScale);
+			Padding = UI.Scale(new Padding(5), UI.FontScale);
+		}
 	}
 
 	protected override void OnSizeChanged(EventArgs e)
 	{
 		base.OnSizeChanged(e);
 
-		if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
+		if (Live && !Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
 		{
 			Height = (int)(24 * UI.UIScale);
 		}
@@ -113,7 +116,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 			if (img1 != null)
 			{
-				e.Graphics.DrawImage(img1, new Rectangle(Padding.Left, (Height - img1.Width) / 2, img1.Width, img1.Height));
+				e.Graphics.DrawImage(img1, iconOnly ? rectangle1.CenterR(img1.Size) : new Rectangle(Padding.Left, (Height - img1.Width) / 2, img1.Width, img1.Height));
 
 				if (!iconOnly)
 				{
@@ -134,7 +137,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 			if (img2 != null)
 			{
-				e.Graphics.DrawImage(img2, new Rectangle(Width - img2.Width - Padding.Right, (Height - img2.Height) / 2, img2.Width, img2.Height));
+				e.Graphics.DrawImage(img2, iconOnly ? rectangle2.CenterR(img2.Size) : new Rectangle(Width - img2.Width - Padding.Right, (Height - img2.Height) / 2, img2.Width, img2.Height));
 
 				if (!iconOnly)
 				{
