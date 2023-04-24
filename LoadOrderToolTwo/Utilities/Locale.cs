@@ -284,4 +284,7 @@ internal class Locale : LocaleHelper
 	public static string NoProfilesFound => _instance.GetText(nameof(NoProfilesFound));
 	public static string NoProfilesMatchFilters => _instance.GetText(nameof(NoProfilesMatchFilters));
 	public static string Author => _instance.GetText(nameof(Author));
+	public static string AnyAuthor => _instance.GetText(nameof(AnyAuthor));
+	public static string ItemsCount => _instance.GetText(nameof(ItemsCount));
+	public static string AuthorsSelected => _instance.GetText(nameof(AuthorsSelected));
 }

@@ -38,12 +38,7 @@ public class DoubleButton : SlickControl
 	{
 		if (Live)
 		{
-			if (Margin == new Padding(3))
-			{
-				Font = UI.Font(9F);
-				Margin = UI.Scale(new Padding(5), UI.FontScale);
-			}
-
+			Font = UI.Font(8.25F);
 			Padding = UI.Scale(new Padding(5), UI.FontScale);
 		}
 	}
@@ -132,7 +127,7 @@ public class DoubleButton : SlickControl
 
 		if (!iconOnly)
 		{
-			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), Font, new SolidBrush(textColor1), rectangle1.Pad(Padding).Pad(Image1 != null ? iconSize : 0, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), Font, new SolidBrush(textColor1), rectangle1.Pad(Padding).Pad(Image1 != null ? iconSize : 0, 0, 0, 0).AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 		}
 
 		// Option 2
@@ -153,7 +148,7 @@ public class DoubleButton : SlickControl
 
 		if (!iconOnly)
 		{
-			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), Font, new SolidBrush(textColor2), rectangle2.Pad(Padding).Pad(0, 0, Image2 != null ? iconSize : 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+			e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), Font, new SolidBrush(textColor2), rectangle2.Pad(Padding).Pad(0, 0, Image2 != null ? iconSize : 0, 0).AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 		}
 
 		e.Graphics.DrawLine(new Pen(FormDesign.Design.AccentBackColor, 1.5F), Width / 2, -1, Width / 2, Height + 1);

@@ -46,24 +46,19 @@ partial class PC_ContentList<T>
 			this.P_Actions = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_UnsubscribeAll = new SlickControls.SlickButton();
+			this.B_DisEnable = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
+			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.B_Refresh = new SlickControls.SlickButton();
 			this.TB_Search = new SlickControls.SlickTextBox();
+			this.DD_Sorting = new LoadOrderToolTwo.UserInterface.Dropdowns.SortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Duplicates = new System.Windows.Forms.Label();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.L_FilterCount = new System.Windows.Forms.Label();
 			this.P_FiltersContainer = new System.Windows.Forms.Panel();
 			this.P_Filters = new SlickControls.RoundedGroupTableLayoutPanel();
-			this.I_ClearFilters = new SlickControls.SlickIcon();
-			this.DR_SubscribeTime = new SlickControls.SlickDateRange();
-			this.DR_ServerTime = new SlickControls.SlickDateRange();
-			this.B_Filters = new SlickControls.SlickButton();
-			this.B_Actions = new SlickControls.SlickButton();
-			this.B_DisEnable = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
-			this.B_ExInclude = new LoadOrderToolTwo.UserInterface.Generic.DoubleButton();
-			this.DD_Sorting = new LoadOrderToolTwo.UserInterface.Dropdowns.SortingDropDown();
 			this.DD_Author = new LoadOrderToolTwo.UserInterface.Dropdowns.AuthorDropDown();
 			this.OT_Workshop = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.DD_Profile = new LoadOrderToolTwo.UserInterface.Dropdowns.ProfilesDropDown();
@@ -72,6 +67,11 @@ partial class PC_ContentList<T>
 			this.DD_Tags = new LoadOrderToolTwo.UserInterface.Dropdowns.TagsDropDown();
 			this.DD_ReportSeverity = new LoadOrderToolTwo.UserInterface.Dropdowns.ReportSeverityDropDown();
 			this.DD_PackageStatus = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageStatusDropDown();
+			this.I_ClearFilters = new SlickControls.SlickIcon();
+			this.DR_SubscribeTime = new SlickControls.SlickDateRange();
+			this.DR_ServerTime = new SlickControls.SlickDateRange();
+			this.B_Filters = new SlickControls.SlickButton();
+			this.B_Actions = new SlickControls.SlickButton();
 			this.TLP_Main.SuspendLayout();
 			this.P_ActionsContainer.SuspendLayout();
 			this.P_Actions.SuspendLayout();
@@ -141,8 +141,8 @@ partial class PC_ContentList<T>
 			this.P_Actions.ImageName = dynamicIcon2;
 			this.P_Actions.Location = new System.Drawing.Point(0, 0);
 			this.P_Actions.Name = "P_Actions";
-			this.P_Actions.Padding = new System.Windows.Forms.Padding(8, 48, 8, 8);
-			this.P_Actions.Size = new System.Drawing.Size(895, 108);
+			this.P_Actions.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.P_Actions.Size = new System.Drawing.Size(895, 115);
 			this.P_Actions.TabIndex = 3;
 			this.P_Actions.Text = "Actions";
 			// 
@@ -157,12 +157,12 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel2.Controls.Add(this.B_DisEnable, 1, 0);
 			this.tableLayoutPanel2.Controls.Add(this.B_ExInclude, 0, 0);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(8, 48);
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(9, 54);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 1;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(879, 52);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(877, 52);
 			this.tableLayoutPanel2.TabIndex = 0;
 			// 
 			// B_UnsubscribeAll
@@ -176,11 +176,43 @@ partial class PC_ContentList<T>
 			this.B_UnsubscribeAll.Location = new System.Drawing.Point(3, 29);
 			this.B_UnsubscribeAll.Name = "B_UnsubscribeAll";
 			this.B_UnsubscribeAll.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-			this.B_UnsubscribeAll.Size = new System.Drawing.Size(433, 20);
+			this.B_UnsubscribeAll.Size = new System.Drawing.Size(432, 20);
 			this.B_UnsubscribeAll.SpaceTriggersClick = true;
 			this.B_UnsubscribeAll.TabIndex = 3;
 			this.B_UnsubscribeAll.Text = "UnsubscribeAllButton";
 			this.B_UnsubscribeAll.Click += new System.EventHandler(this.B_UnsubscribeAll_Click);
+			// 
+			// B_DisEnable
+			// 
+			this.B_DisEnable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_DisEnable.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_DisEnable.Image1 = "I_Disabled";
+			this.B_DisEnable.Image2 = "I_Enabled";
+			this.B_DisEnable.Location = new System.Drawing.Point(441, 3);
+			this.B_DisEnable.Name = "B_DisEnable";
+			this.B_DisEnable.Option1 = "DisableAll";
+			this.B_DisEnable.Option2 = "EnableAll";
+			this.B_DisEnable.Size = new System.Drawing.Size(433, 20);
+			this.B_DisEnable.TabIndex = 1;
+			this.B_DisEnable.LeftClicked += new System.EventHandler(this.B_DisEnable_LeftClicked);
+			this.B_DisEnable.RightClicked += new System.EventHandler(this.B_DisEnable_RightClicked);
+			// 
+			// B_ExInclude
+			// 
+			this.B_ExInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ExInclude.Image1 = "I_X";
+			this.B_ExInclude.Image2 = "I_Check";
+			this.B_ExInclude.Location = new System.Drawing.Point(3, 3);
+			this.B_ExInclude.Name = "B_ExInclude";
+			this.B_ExInclude.Option1 = "ExcludeAll";
+			this.B_ExInclude.Option2 = "IncludeAll";
+			this.B_ExInclude.Size = new System.Drawing.Size(432, 20);
+			this.B_ExInclude.TabIndex = 1;
+			this.B_ExInclude.LeftClicked += new System.EventHandler(this.B_ExInclude_LeftClicked);
+			this.B_ExInclude.RightClicked += new System.EventHandler(this.B_ExInclude_RightClicked);
 			// 
 			// slickSpacer2
 			// 
@@ -198,7 +230,7 @@ partial class PC_ContentList<T>
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 5);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 323);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 328);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(895, 2);
@@ -239,6 +271,17 @@ partial class PC_ContentList<T>
 			this.TB_Search.TextChanged += new System.EventHandler(this.TB_Search_TextChanged);
 			this.TB_Search.IconClicked += new System.EventHandler(this.TB_Search_IconClicked);
 			// 
+			// DD_Sorting
+			// 
+			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Sorting.Dock = System.Windows.Forms.DockStyle.Right;
+			this.DD_Sorting.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Sorting.Location = new System.Drawing.Point(822, 3);
+			this.DD_Sorting.Name = "DD_Sorting";
+			this.DD_Sorting.Size = new System.Drawing.Size(70, 25);
+			this.DD_Sorting.TabIndex = 3;
+			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
+			// 
 			// tableLayoutPanel3
 			// 
 			this.tableLayoutPanel3.AutoSize = true;
@@ -257,16 +300,16 @@ partial class PC_ContentList<T>
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 25);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 30);
 			this.tableLayoutPanel3.TabIndex = 6;
 			// 
 			// L_Duplicates
 			// 
 			this.L_Duplicates.AutoSize = true;
 			this.L_Duplicates.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.L_Duplicates.Location = new System.Drawing.Point(72, 0);
+			this.L_Duplicates.Location = new System.Drawing.Point(80, 0);
 			this.L_Duplicates.Name = "L_Duplicates";
-			this.L_Duplicates.Size = new System.Drawing.Size(63, 25);
+			this.L_Duplicates.Size = new System.Drawing.Size(71, 30);
 			this.L_Duplicates.TabIndex = 2;
 			this.L_Duplicates.Tag = "NoMouseDown";
 			this.L_Duplicates.Text = "label1";
@@ -277,9 +320,9 @@ partial class PC_ContentList<T>
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(829, 0);
+			this.L_Counts.Location = new System.Drawing.Point(821, 0);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(63, 25);
+			this.L_Counts.Size = new System.Drawing.Size(71, 30);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			this.L_Counts.UseMnemonic = false;
@@ -289,7 +332,7 @@ partial class PC_ContentList<T>
 			this.L_FilterCount.AutoSize = true;
 			this.L_FilterCount.Location = new System.Drawing.Point(3, 0);
 			this.L_FilterCount.Name = "L_FilterCount";
-			this.L_FilterCount.Size = new System.Drawing.Size(63, 25);
+			this.L_FilterCount.Size = new System.Drawing.Size(71, 30);
 			this.L_FilterCount.TabIndex = 2;
 			this.L_FilterCount.Text = "label1";
 			this.L_FilterCount.UseMnemonic = false;
@@ -316,32 +359,143 @@ partial class PC_ContentList<T>
 			this.P_Filters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.P_Filters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
 			this.P_Filters.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.P_Filters.Controls.Add(this.DD_Author, 2, 3);
 			this.P_Filters.Controls.Add(this.OT_Workshop, 0, 3);
-			this.P_Filters.Controls.Add(this.DD_Profile, 3, 2);
 			this.P_Filters.Controls.Add(this.OT_Enabled, 0, 2);
 			this.P_Filters.Controls.Add(this.OT_Included, 0, 1);
-			this.P_Filters.Controls.Add(this.DD_Tags, 2, 2);
-			this.P_Filters.Controls.Add(this.DD_ReportSeverity, 3, 1);
-			this.P_Filters.Controls.Add(this.DD_PackageStatus, 2, 1);
 			this.P_Filters.Controls.Add(this.I_ClearFilters, 3, 0);
 			this.P_Filters.Controls.Add(this.DR_SubscribeTime, 1, 1);
 			this.P_Filters.Controls.Add(this.DR_ServerTime, 1, 2);
+			this.P_Filters.Controls.Add(this.DD_PackageStatus, 2, 2);
+			this.P_Filters.Controls.Add(this.DD_Tags, 2, 1);
+			this.P_Filters.Controls.Add(this.DD_ReportSeverity, 3, 2);
+			this.P_Filters.Controls.Add(this.DD_Author, 3, 1);
+			this.P_Filters.Controls.Add(this.DD_Profile, 2, 3);
 			this.P_Filters.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon6.Name = "I_Filter";
 			this.P_Filters.ImageName = dynamicIcon6;
 			this.P_Filters.Location = new System.Drawing.Point(0, 0);
 			this.P_Filters.Name = "P_Filters";
-			this.P_Filters.Padding = new System.Windows.Forms.Padding(8);
+			this.P_Filters.Padding = new System.Windows.Forms.Padding(9);
 			this.P_Filters.RowCount = 4;
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_Filters.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.P_Filters.Size = new System.Drawing.Size(895, 121);
+			this.P_Filters.Size = new System.Drawing.Size(895, 123);
 			this.P_Filters.TabIndex = 3;
 			this.P_Filters.Text = "Filters";
 			this.P_Filters.UseFirstRowForPadding = true;
+			// 
+			// DD_Author
+			// 
+			this.DD_Author.AccentBackColor = true;
+			this.DD_Author.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_Author.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Author.Location = new System.Drawing.Point(669, 39);
+			this.DD_Author.Name = "DD_Author";
+			this.DD_Author.Size = new System.Drawing.Size(214, 20);
+			this.DD_Author.TabIndex = 13;
+			this.DD_Author.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// OT_Workshop
+			// 
+			this.OT_Workshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.OT_Workshop.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.OT_Workshop.Image1 = "I_PC";
+			this.OT_Workshop.Image2 = "I_Steam";
+			this.OT_Workshop.Location = new System.Drawing.Point(12, 91);
+			this.OT_Workshop.Name = "OT_Workshop";
+			this.OT_Workshop.Option1 = "Local";
+			this.OT_Workshop.Option2 = "Workshop";
+			this.OT_Workshop.OptionStyle1 = Extensions.ColorStyle.Active;
+			this.OT_Workshop.OptionStyle2 = Extensions.ColorStyle.Active;
+			this.OT_Workshop.Size = new System.Drawing.Size(213, 20);
+			this.OT_Workshop.TabIndex = 2;
+			this.OT_Workshop.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// DD_Profile
+			// 
+			this.DD_Profile.AccentBackColor = true;
+			this.DD_Profile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_Profile.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Profile.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Profile.Location = new System.Drawing.Point(450, 91);
+			this.DD_Profile.Name = "DD_Profile";
+			this.DD_Profile.Size = new System.Drawing.Size(213, 20);
+			this.DD_Profile.TabIndex = 2;
+			this.DD_Profile.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// OT_Enabled
+			// 
+			this.OT_Enabled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.OT_Enabled.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.OT_Enabled.Image1 = "I_Checked_OFF";
+			this.OT_Enabled.Image2 = "I_Checked";
+			this.OT_Enabled.Location = new System.Drawing.Point(12, 65);
+			this.OT_Enabled.Name = "OT_Enabled";
+			this.OT_Enabled.Option1 = "Disabled";
+			this.OT_Enabled.Option2 = "Enabled";
+			this.OT_Enabled.Size = new System.Drawing.Size(213, 20);
+			this.OT_Enabled.TabIndex = 1;
+			this.OT_Enabled.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// OT_Included
+			// 
+			this.OT_Included.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.OT_Included.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.OT_Included.Image1 = "I_Enabled";
+			this.OT_Included.Image2 = "I_Ok";
+			this.OT_Included.Location = new System.Drawing.Point(12, 39);
+			this.OT_Included.Name = "OT_Included";
+			this.OT_Included.Option1 = "Excluded";
+			this.OT_Included.Option2 = "Included";
+			this.OT_Included.Size = new System.Drawing.Size(213, 20);
+			this.OT_Included.TabIndex = 0;
+			this.OT_Included.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// DD_Tags
+			// 
+			this.DD_Tags.AccentBackColor = true;
+			this.DD_Tags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Tags.Location = new System.Drawing.Point(450, 39);
+			this.DD_Tags.Name = "DD_Tags";
+			this.DD_Tags.Size = new System.Drawing.Size(213, 20);
+			this.DD_Tags.TabIndex = 2;
+			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// DD_ReportSeverity
+			// 
+			this.DD_ReportSeverity.AccentBackColor = true;
+			this.DD_ReportSeverity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_ReportSeverity.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_ReportSeverity.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_ReportSeverity.Location = new System.Drawing.Point(669, 65);
+			this.DD_ReportSeverity.Name = "DD_ReportSeverity";
+			this.DD_ReportSeverity.Size = new System.Drawing.Size(214, 20);
+			this.DD_ReportSeverity.TabIndex = 1;
+			this.DD_ReportSeverity.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
+			// 
+			// DD_PackageStatus
+			// 
+			this.DD_PackageStatus.AccentBackColor = true;
+			this.DD_PackageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_PackageStatus.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_PackageStatus.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_PackageStatus.Location = new System.Drawing.Point(450, 65);
+			this.DD_PackageStatus.Name = "DD_PackageStatus";
+			this.DD_PackageStatus.Size = new System.Drawing.Size(213, 20);
+			this.DD_PackageStatus.TabIndex = 0;
+			this.DD_PackageStatus.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// I_ClearFilters
 			// 
@@ -351,7 +505,7 @@ partial class PC_ContentList<T>
 			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon5.Name = "I_ClearFilter";
 			this.I_ClearFilters.ImageName = dynamicIcon5;
-			this.I_ClearFilters.Location = new System.Drawing.Point(854, 11);
+			this.I_ClearFilters.Location = new System.Drawing.Point(853, 12);
 			this.I_ClearFilters.Name = "I_ClearFilters";
 			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
 			this.I_ClearFilters.TabIndex = 1;
@@ -362,7 +516,7 @@ partial class PC_ContentList<T>
 			this.DR_SubscribeTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DR_SubscribeTime.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DR_SubscribeTime.Location = new System.Drawing.Point(230, 38);
+			this.DR_SubscribeTime.Location = new System.Drawing.Point(231, 39);
 			this.DR_SubscribeTime.Name = "DR_SubscribeTime";
 			this.DR_SubscribeTime.Size = new System.Drawing.Size(213, 20);
 			this.DR_SubscribeTime.TabIndex = 14;
@@ -373,7 +527,7 @@ partial class PC_ContentList<T>
 			this.DR_ServerTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DR_ServerTime.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DR_ServerTime.Location = new System.Drawing.Point(230, 64);
+			this.DR_ServerTime.Location = new System.Drawing.Point(231, 65);
 			this.DR_ServerTime.Name = "DR_ServerTime";
 			this.DR_ServerTime.Size = new System.Drawing.Size(213, 20);
 			this.DR_ServerTime.TabIndex = 14;
@@ -408,154 +562,6 @@ partial class PC_ContentList<T>
 			this.B_Actions.TabIndex = 2;
 			this.B_Actions.Text = "ShowActions";
 			this.B_Actions.Click += new System.EventHandler(this.B_Actions_Click);
-			// 
-			// B_DisEnable
-			// 
-			this.B_DisEnable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.B_DisEnable.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_DisEnable.Image1 = "I_Disabled";
-			this.B_DisEnable.Image2 = "I_Enabled";
-			this.B_DisEnable.Location = new System.Drawing.Point(442, 3);
-			this.B_DisEnable.Name = "B_DisEnable";
-			this.B_DisEnable.Option1 = "DisableAll";
-			this.B_DisEnable.Option2 = "EnableAll";
-			this.B_DisEnable.Size = new System.Drawing.Size(434, 20);
-			this.B_DisEnable.TabIndex = 1;
-			this.B_DisEnable.LeftClicked += new System.EventHandler(this.B_DisEnable_LeftClicked);
-			this.B_DisEnable.RightClicked += new System.EventHandler(this.B_DisEnable_RightClicked);
-			// 
-			// B_ExInclude
-			// 
-			this.B_ExInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ExInclude.Image1 = "I_X";
-			this.B_ExInclude.Image2 = "I_Check";
-			this.B_ExInclude.Location = new System.Drawing.Point(3, 3);
-			this.B_ExInclude.Name = "B_ExInclude";
-			this.B_ExInclude.Option1 = "ExcludeAll";
-			this.B_ExInclude.Option2 = "IncludeAll";
-			this.B_ExInclude.Size = new System.Drawing.Size(433, 20);
-			this.B_ExInclude.TabIndex = 1;
-			this.B_ExInclude.LeftClicked += new System.EventHandler(this.B_ExInclude_LeftClicked);
-			this.B_ExInclude.RightClicked += new System.EventHandler(this.B_ExInclude_RightClicked);
-			// 
-			// DD_Sorting
-			// 
-			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Sorting.Dock = System.Windows.Forms.DockStyle.Right;
-			this.DD_Sorting.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Sorting.Location = new System.Drawing.Point(822, 3);
-			this.DD_Sorting.Name = "DD_Sorting";
-			this.DD_Sorting.Size = new System.Drawing.Size(70, 25);
-			this.DD_Sorting.TabIndex = 3;
-			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
-			// 
-			// DD_Author
-			// 
-			this.DD_Author.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Author.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Author.Location = new System.Drawing.Point(449, 90);
-			this.DD_Author.Name = "DD_Author";
-			this.DD_Author.Size = new System.Drawing.Size(213, 20);
-			this.DD_Author.TabIndex = 13;
-			// 
-			// OT_Workshop
-			// 
-			this.OT_Workshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.OT_Workshop.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Workshop.Image1 = "I_PC";
-			this.OT_Workshop.Image2 = "I_Steam";
-			this.OT_Workshop.Location = new System.Drawing.Point(11, 90);
-			this.OT_Workshop.Name = "OT_Workshop";
-			this.OT_Workshop.Option1 = "Local";
-			this.OT_Workshop.Option2 = "Workshop";
-			this.OT_Workshop.OptionStyle1 = Extensions.ColorStyle.Active;
-			this.OT_Workshop.OptionStyle2 = Extensions.ColorStyle.Active;
-			this.OT_Workshop.Size = new System.Drawing.Size(213, 20);
-			this.OT_Workshop.TabIndex = 2;
-			this.OT_Workshop.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DD_Profile
-			// 
-			this.DD_Profile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Profile.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Profile.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Profile.Location = new System.Drawing.Point(668, 64);
-			this.DD_Profile.Name = "DD_Profile";
-			this.DD_Profile.Size = new System.Drawing.Size(216, 20);
-			this.DD_Profile.TabIndex = 2;
-			this.DD_Profile.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// OT_Enabled
-			// 
-			this.OT_Enabled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.OT_Enabled.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Enabled.Image1 = "I_Checked_OFF";
-			this.OT_Enabled.Image2 = "I_Checked";
-			this.OT_Enabled.Location = new System.Drawing.Point(11, 64);
-			this.OT_Enabled.Name = "OT_Enabled";
-			this.OT_Enabled.Option1 = "Disabled";
-			this.OT_Enabled.Option2 = "Enabled";
-			this.OT_Enabled.Size = new System.Drawing.Size(213, 20);
-			this.OT_Enabled.TabIndex = 1;
-			this.OT_Enabled.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// OT_Included
-			// 
-			this.OT_Included.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.OT_Included.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.OT_Included.Image1 = "I_Enabled";
-			this.OT_Included.Image2 = "I_Ok";
-			this.OT_Included.Location = new System.Drawing.Point(11, 38);
-			this.OT_Included.Name = "OT_Included";
-			this.OT_Included.Option1 = "Excluded";
-			this.OT_Included.Option2 = "Included";
-			this.OT_Included.Size = new System.Drawing.Size(213, 20);
-			this.OT_Included.TabIndex = 0;
-			this.OT_Included.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DD_Tags
-			// 
-			this.DD_Tags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Tags.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Tags.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Tags.Location = new System.Drawing.Point(449, 64);
-			this.DD_Tags.Name = "DD_Tags";
-			this.DD_Tags.Size = new System.Drawing.Size(213, 20);
-			this.DD_Tags.TabIndex = 2;
-			this.DD_Tags.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DD_ReportSeverity
-			// 
-			this.DD_ReportSeverity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_ReportSeverity.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_ReportSeverity.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_ReportSeverity.Location = new System.Drawing.Point(668, 38);
-			this.DD_ReportSeverity.Name = "DD_ReportSeverity";
-			this.DD_ReportSeverity.Size = new System.Drawing.Size(216, 20);
-			this.DD_ReportSeverity.TabIndex = 1;
-			this.DD_ReportSeverity.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
-			// 
-			// DD_PackageStatus
-			// 
-			this.DD_PackageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_PackageStatus.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_PackageStatus.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_PackageStatus.Location = new System.Drawing.Point(449, 38);
-			this.DD_PackageStatus.Name = "DD_PackageStatus";
-			this.DD_PackageStatus.Size = new System.Drawing.Size(213, 20);
-			this.DD_PackageStatus.TabIndex = 0;
-			this.DD_PackageStatus.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// PC_ContentList
 			// 

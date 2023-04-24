@@ -166,15 +166,15 @@
             {
                 "Name": "Nieuw en verbeterd",
                 "Changes": [
-                    "Toegevoegd op de nutspagina een import uit een tekstbestand of vanaf je klembord.",
-                    "BOB-import is nu een algemene XML-import door elk XML-formaat dat pakket-ID's bevat uit te bannen."
+                    "Op de pagina Hulpprogramma's is een import van een tekstbestand of van het klembord toegevoegd.",
+                    "BOB-import is nu een algemene XML-import door het vervangen van elk XML-formaat dat pakket-ID's bevat."
                 ]
             },
             {
                 "Name": "Oplossingen",
                 "Changes": [
-                    "Het laden van een collectie-URL is opgelost die soms niet correct verwerkt wordt.",
-                    "LOT is opgelost dat LOT niet reageert op Mac/Linux wanneer u zich afmeldt van een pakket."
+                    "Fout opgelost bij het laden van een collectie-URL die de ID niet correct parseert.",
+                    "Probleem opgelost dat LOT op Mac/Linux niet reageert bij het uitschrijven van een pakket."
                 ]
             }
         ]

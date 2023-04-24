@@ -11,4 +11,9 @@ public struct TagItem
 		Source = source;
 		Value = value;
 	}
+
+	public override string ToString()
+	{
+		return Value;
+	}
 }

@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.UserInterface.Lists;
@@ -29,9 +30,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly DelayedAction _delayedSearch;
 	protected readonly ItemListControl<T> LC_Items;
 	private bool searchEmpty = true;
-	private List<string> searchTermsOr = new();
-	private List<string> searchTermsAnd = new();
-	private List<string> searchTermsExclude = new();
+	private readonly List<string> searchTermsOr = new();
+	private readonly List<string> searchTermsAnd = new();
+	private readonly List<string> searchTermsExclude = new();
 	private string? searchAuthor;
 
 	public PC_ContentList()
@@ -53,7 +54,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		LC_Items.CompatibilityReportSelected += LC_Items_CompatibilityReportSelected;
 		LC_Items.DateSelected += LC_Items_DateSelected;
 		LC_Items.TagSelected += LC_Items_TagSelected;
-		LC_Items.AddToSearch += LC_Items_AddToSearch;
+		LC_Items.AuthorSelected += LC_Items_AuthorSelected;
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -86,16 +87,22 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			var items = new List<T>(LC_Items.Items);
 
-			DD_Tags.Items = items.SelectMany(x => x.Tags.Select(x => x.Value)).Distinct().ToArray();
+			DD_Author.SetItems(items.Where(x => x.Author is not null));
+			DD_Tags.Items = items.SelectMany(x => x.Tags).Distinct(x => x.Value.ToLower()).ToArray();
 		}).Run();
 	}
 
-	private void LC_Items_AddToSearch(string obj)
+	private void LC_Items_AuthorSelected(SteamUser obj)
 	{
-		TB_Search.Text = (TB_Search.Text + " " + obj).Trim();
+		DD_Author.Select(obj);
+
+		if (P_FiltersContainer.Height == 0)
+		{
+			B_Filters_Click(this, EventArgs.Empty);
+		}
 	}
 
-	private void LC_Items_TagSelected(string obj)
+	private void LC_Items_TagSelected(TagItem obj)
 	{
 		DD_Tags.Select(obj);
 
@@ -153,7 +160,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		base.DesignChanged(design);
 
 		tableLayoutPanel3.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = P_Actions.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+		P_Filters.BackColor = P_Actions.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
 		LC_Items.BackColor = design.BackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
 		L_Duplicates.ForeColor = design.RedColor;
@@ -223,9 +230,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin
 			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
 			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin
-			= B_Actions.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
-			= DD_ReportSeverity.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin
-			= B_Refresh.Margin = B_UnsubscribeAll.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
+			= B_Actions.Margin = B_Refresh.Margin = B_UnsubscribeAll.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
+
+		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin
+			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
+			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
+
 		B_UnsubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
 		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
@@ -409,11 +419,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			return true;
 		}
 
+		if (DD_Author.SelectedItems.Any())
+		{
+			if (!DD_Author.SelectedItems.Any(x => item.Author?.Equals(x) ?? false))
+			{
+				return true;
+			}
+		}
+
 		if (DD_Tags.SelectedItems.Any())
 		{
 			foreach (var tag in DD_Tags.SelectedItems)
 			{
-				if (!(item.Tags?.Any(x => x.Value == tag) ?? false))
+				if (!(item.Tags?.Any(x => x.Value == tag.Value) ?? false))
 				{
 					return true;
 				}
@@ -458,7 +476,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			for (var i = 0; i < searchTermsExclude.Count; i++)
 			{
 				if (Search(searchTermsExclude[i], item))
+				{
 					return true;
+				}
 			}
 
 			var orMatched = searchTermsOr.Count == 0;
@@ -473,7 +493,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 
 			if (!orMatched)
+			{
 				return true;
+			}
 
 			for (var i = 0; i < searchTermsAnd.Count; i++)
 			{
@@ -543,11 +565,17 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 				{
 					case '+':
 						if (item.Trim().Length > 2)
+						{
 							searchTermsAnd.Add(item.Trim().Substring(1));
+						}
+
 						break;
 					case '-':
 						if (item.Trim().Length > 2)
+						{
 							searchTermsExclude.Add(item.Trim().Substring(1));
+						}
+
 						break;
 					default:
 						searchTermsOr.Add(item.Trim());

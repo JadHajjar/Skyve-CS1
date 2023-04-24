@@ -1,5 +1,8 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Enums;
+using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -11,44 +14,40 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
-internal class TagsDropDown : SlickMultiSelectionDropDown<string>
+internal class TagsDropDown : SlickMultiSelectionDropDown<TagItem>
 {
-	protected override IEnumerable<DrawableItem<string>> OrderItems(IEnumerable<DrawableItem<string>> items)
+	protected override IEnumerable<DrawableItem<TagItem>> OrderItems(IEnumerable<DrawableItem<TagItem>> items)
 	{
-		return items.OrderByDescending(x => SelectedItems.Contains(x.Item)).ThenBy(x => x.Item != Locale.AnyTags).ThenBy(x => x.Item);
+		return items.OrderByDescending(x => SelectedItems.Contains(x.Item)).ThenBy(x => x.Item.Value);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, string text, bool selected)
+	protected override bool SearchMatch(string searchText, TagItem item)
 	{
-		if (selected && !hoverState.HasFlag(HoverState.Pressed))
-		{
-			foreColor = FormDesign.Design.ActiveColor;
-		}
+		return searchText.SearchCheck(item.Value);
+	}
 
-		using var icon = IconManager.GetIcon(text == Locale.AnyTags ? "I_Slash" : "I_Tag").Color(foreColor);
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, TagItem item, bool selected)
+	{
+		var text = item.Value;
+
+		using var icon = IconManager.GetIcon(text == Locale.AnyTags ? "I_Slash" : item.Source switch { TagSource.Workshop => "I_Steam", TagSource.FindIt => "I_Search", _ => "I_Tag" }, rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		var textSize = (int)e.Graphics.Measure(text, Font).Height;
-		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - textSize) / 2), 0, textSize);
-
-		textRect.Width = rectangle.Width - textRect.X;
-
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), textRect, new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 	}
 
-	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<string> items)
+	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<TagItem> items)
 	{
-		using var icon = IconManager.GetIcon(!items.Any() ? "I_Slash" : "I_Tag").Color(foreColor);
+		var text = items.Count() switch { 0 => Locale.AnyTags, <= 2 => items.ListStrings(", "), _ => $"{items.Take(2).ListStrings(", ")} +{items.Count() - 2}" };
+
+		using var icon = IconManager.GetIcon(!items.Any() ? "I_Slash" : "I_Tag", rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		var textSize = (int)e.Graphics.Measure(items.ListStrings(", ").IfEmpty(Locale.AnyTags), Font).Height;
-		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - textSize) / 2), 0, textSize);
-
-		textRect.Width = rectangle.Width - textRect.X;
-
-		e.Graphics.DrawString(items.ListStrings(", ").IfEmpty(Locale.AnyTags), Font, new SolidBrush(foreColor), textRect, new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 	}
 }

@@ -1,7 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Utilities.Managers;
-
 using SlickControls;
 
 using System;
@@ -47,8 +45,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	{
 		if (Live)
 		{
-			Font = UI.Font(9F);
-			Margin = UI.Scale(new Padding(5), UI.FontScale);
+			Font = UI.Font(8.25F);
 			Padding = UI.Scale(new Padding(5), UI.FontScale);
 		}
 	}
@@ -102,7 +99,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		var textColor2 = SelectedValue == Value.Option2 || (option2Hovered && HoverState.HasFlag(HoverState.Pressed)) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
 		var textColorNone = SelectedValue == Value.None || (noneHovered && HoverState.HasFlag(HoverState.Pressed)) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
 
-		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(FormDesign.Design.ButtonColor, 0.5F), ClientRectangle, Padding.Left);
+		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 4, -4))), ClientRectangle, Padding.Left);
 
 		// Option 1
 		if (option1Hovered || SelectedValue == Value.Option1)
@@ -120,7 +117,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 				if (!iconOnly)
 				{
-					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), Font, new SolidBrush(textColor1), rectangle1.Pad(Padding).Pad(Image1 != null ? img1.Width : 0, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option1), Font, new SolidBrush(textColor1), rectangle1.Pad(Padding).Pad(Padding.Left + img1.Width, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Near });
 				}
 			}
 		}
@@ -141,7 +138,7 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 
 				if (!iconOnly)
 				{
-					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), Font, new SolidBrush(textColor2), rectangle2.Pad(Padding).Pad(0, 0, Image2 != null ? img2.Width : 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center });
+					e.Graphics.DrawString(LocaleHelper.GetGlobalText(Option2), Font, new SolidBrush(textColor2), rectangle2.Pad(Padding).Pad(0, 0, Padding.Right + img2.Width, 0).AlignToFontSize(Font, ContentAlignment.MiddleRight), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });
 				}
 			}
 		}

@@ -40,19 +40,14 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<ReportSeverityFil
 			ReportSeverityFilter.MinorIssues => FormDesign.Design.YellowColor,
 			ReportSeverityFilter.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
 			ReportSeverityFilter.Unsubscribe => FormDesign.Design.RedColor,
-			ReportSeverityFilter.Remarks or ReportSeverityFilter.Any => FormDesign.Design.ForeColor,
+			ReportSeverityFilter.Remarks or ReportSeverityFilter.Any => foreColor,
 			_ => FormDesign.Design.GreenColor
 		};
 
-		using var icon = item == ReportSeverityFilter.Any ? IconManager.GetIcon("I_Slash") : ((ReportSeverity)((int)item - 1)).GetSeverityIcon(true);
+		using var icon = (item == ReportSeverityFilter.Any ? new DynamicIcon("I_Slash") : ((ReportSeverity)((int)item - 1)).GetSeverityIcon(true)).Get(rectangle.Height - 2).Color(color);
 
-		e.Graphics.DrawImage(icon.Color(color), rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
+		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		var textSize = (int)e.Graphics.Measure(text, Font).Height;
-		var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - textSize) / 2), 0, textSize);
-
-		textRect.Width = rectangle.Width - textRect.X;
-
-		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), textRect, new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 	}
 }

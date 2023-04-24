@@ -60,12 +60,12 @@ partial class PC_MainPage
 			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 30);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 403);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(778, 403);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// B_StartStop
@@ -75,7 +75,7 @@ partial class PC_MainPage
 			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_StartStop.Enabled = false;
 			this.B_StartStop.Image = ((System.Drawing.Image)(resources.GetObject("B_StartStop.Image")));
-			this.B_StartStop.Location = new System.Drawing.Point(546, 368);
+			this.B_StartStop.Location = new System.Drawing.Point(551, 368);
 			this.B_StartStop.Name = "B_StartStop";
 			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
 			this.B_StartStop.Size = new System.Drawing.Size(224, 32);
@@ -97,7 +97,7 @@ partial class PC_MainPage
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(773, 164);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 164);
 			this.flowLayoutPanel1.TabIndex = 1;
 			// 
 			// TLP_Profiles
@@ -156,9 +156,9 @@ partial class PC_MainPage
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 380);
+			this.label1.Location = new System.Drawing.Point(3, 365);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(55, 23);
+			this.label1.Size = new System.Drawing.Size(91, 38);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "label1";
 			this.label1.Visible = false;
@@ -169,6 +169,7 @@ partial class PC_MainPage
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_MainPage";
+			this.Padding = new System.Windows.Forms.Padding(0, 30, 5, 5);
 			this.Text = "Dashboard";
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);

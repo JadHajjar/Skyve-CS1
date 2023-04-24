@@ -23,7 +23,7 @@
                 ]
             },
             {
-                "Name": "Corregidos",
+                "Name": "Corregido",
                 "Changes": [
                     "Perfiles antiguos no se convertían después de ejecutar la herramienta por primera vez.",
                     "Activos locales no se actualizan automáticamente después de los cambios externos.",
@@ -68,7 +68,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Corregidos",
+                "Name": "Corregido",
                 "Changes": [
                     "Error que causaba una carga infinita para algunos usuarios."
                 ]
@@ -166,15 +166,15 @@
             {
                 "Name": "Nuevo y mejorado",
                 "Changes": [
-                    "Añadido en la página Utilities una importación desde cualquier archivo de texto o desde el portapapeles.",
-                    "La importación de BOB es ahora una importación XML genérica eliminando cualquier formato XML que contenga IDs de paquetes."
+                    "Ahora puedes importar desde cualquier archivo de texto o desde el portapapeles en la sección de Utilidades.",
+                    "Soporte para archivos genéricos XML al importar configuraciones de BOB que contienen IDs de paquetes."
                 ]
             },
             {
-                "Name": "Fijos",
+                "Name": "Corregido",
                 "Changes": [
-                    "Se corrigió cargar una URL de colección a veces no analizando el ID correctamente.",
-                    "Fijado LOT no responde en Mac al darse de baja de un paquete."
+                    "ID se leen correctamente al importar una colección.",
+                    "LOT no respondía en Mac/Linux al anular la suscipción a un paquete."
                 ]
             }
         ]

@@ -35,12 +35,11 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 	{
 		GetStatusDescriptors(item, out var text, out var di, out var color);
 
-		using (var icon = di.Get(rectangle.Height - 2).Color(hoverState.HasFlag(HoverState.Pressed) ? foreColor : color))
-		{
-			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
+		using var icon = di.Get(rectangle.Height - 2).Color(hoverState.HasFlag(HoverState.Pressed) || item == DownloadStatusFilter.Any ? foreColor : color);
+		
+		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
-			e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-		}
+		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 	}
 
 	private void GetStatusDescriptors(DownloadStatusFilter status, out string text, out DynamicIcon icon, out Color color)
@@ -87,6 +86,6 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 
 		text = Locale.Local;
 		icon = new DynamicIcon("I_PC");
-		color = FormDesign.Design.YellowColor;
+		color = FormDesign.Design.ForeColor;
 	}
 }

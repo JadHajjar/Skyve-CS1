@@ -714,15 +714,15 @@ internal static class CompatibilityManager
 		return new();
 	}
 
-	public static Bitmap GetSeverityIcon(this ReportSeverity severity, bool status)
+	public static DynamicIcon GetSeverityIcon(this ReportSeverity severity, bool status)
 	{
 		return severity switch
 		{
-			ReportSeverity.Remarks => IconManager.GetIcon("I_Remarks"),
-			ReportSeverity.MinorIssues => IconManager.GetIcon("I_MinorIssues"),
-			ReportSeverity.MajorIssues => IconManager.GetIcon("I_MajorIssues"),
-			ReportSeverity.Unsubscribe => IconManager.GetIcon("I_Broken"),
-			ReportSeverity.NothingToReport or _ => IconManager.GetIcon(status ? "I_Ok" : "I_Info"),
+			ReportSeverity.Remarks => "I_Remarks",
+			ReportSeverity.MinorIssues => "I_MinorIssues",
+			ReportSeverity.MajorIssues => "I_MajorIssues",
+			ReportSeverity.Unsubscribe => "I_Broken",
+			ReportSeverity.NothingToReport or _ => status ? "I_Ok" : "I_Info",
 		};
 	}
 

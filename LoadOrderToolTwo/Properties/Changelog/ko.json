@@ -164,17 +164,17 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New & Improved",
+                "Name": "새로운 & 개선사항",
                 "Changes": [
-                    "Added in the Utilities page an import from any text file or from your clipboard.",
-                    "BOB import is now a generic XML import by suppoorting any XML format that contains package IDs."
+                    "유틸리티 페이지에 텍스트 파일이나 클립보드에서 가져오기를 추가했습니다.",
+                    "BOB 가져오기는 이제 패키지 ID를 포함하는 모든 XML 형식을 지원하는 범용 XML 가져오기입니다."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "수정사항",
                 "Changes": [
-                    "Fixed loading a collection URL sometimes not parsing the ID correctly.",
-                    "Fixed LOT becoming unresponsive on Mac/Linux when unsubscribing from a package."
+                    "때때로 올바르지 않은 모음집 URL을 불러오는 문제를 수정했습니다.",
+                    "macOS와 Linux에서 패키지 구독을 취소할 때 LOT가 멈추는 문제를 수정했습니다."
                 ]
             }
         ]

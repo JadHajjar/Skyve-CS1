@@ -2,35 +2,35 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Bem-vindo à era do log de alterações",
+        "Tagline": "Bem-vindo ao relatório de alterações",
         "ChangeGroups": [
             {
                 "Name": "Novidades",
                 "Changes": [
-                    "Adicionado um botão 'Cancelar inscrição' nas ações das páginas de conteúdo'.",
-                    "Adicionada uma seção Utilitário para inscrever itens que faltam nas configurações do BOB.",
-                    "Adicionada uma opção para que as seções de Filtros e Ação sejam abertas por padrão.",
-                    "As páginas de log de alterações foram adicionadas, você o verá em novas versões ou usando o botão dele nas seções de ajuda."
+                    "Adicionado um botão 'Cancelar Todas as Inscrições' nas ações possíveis nas páginas de conteúdo'.",
+                    "Adicionada uma sessão Utilitário para inscrever-se em itens que faltam nas configurações do BOB.",
+                    "Adicionada uma opção para que as sessões de Filtros e Ação abram por padrão.",
+                    "Adicionado Página com Relatório de alterações, você poderá ver nas novas versões, ou usando o botão na sessão de Ajuda."
                 ]
             },
             {
                 "Name": "Melhorias",
                 "Changes": [
-                    "Adicionado Relatório de Compatibilidade para Ativos Partidos",
-                    "Pacotes não listados agora têm o nome e a miniatura corretos.",
-                    "Posicionados para as configurações de pasta agora refletem corretamente seu SO.",
-                    "Ctrl+Clique no nome de um autor para adicioná-los ao seu filtro"
+                    "Adicionado Relatório de Compatibilidade para Recursos Quebrados",
+                    "Foi corrigido a miniatura e nome dos pacotes não listados.",
+                    "Os Espaços Reservados para configurações de pasta agora refletem corretamente o seu Sistema Operacional.",
+                    "Ctrl+Clique no nome do autor para adicionar ao seu filtro"
                 ]
             },
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Perfis de legado fixo não sendo convertidos após a primeira inicialização.",
+                    "Correção de perfis herdados não sendo convertidos depois da primeira inicialização.",
                     "Os recursos locais corrigidos não atualizam automaticamente após alterações externas.",
-                    "Corrigimos a exclusão de ativos locais no menu de clique com o botão direito do mouse excluindo todos os ativos locais ao invés de apenas um",
-                    "Corrigido convertendo perfis LOT 1 resultando em ativos sendo marcados como 'Locais'",
-                    "Pastas 'Real' corrigidas sendo trocadas no save para usuários de Linux e Mac.",
-                    "Os usuários de Linux e Mac corrigidos não são capazes de gerar um CEP de log."
+                    "Corrigido a função de excluir todos os recursos locais do menu com o botão direito, agora excluirá todos, invés de apenas um",
+                    "Corrigido a conversão de Perfis LOT 1 que resultava em recursos sendo marcados como 'Locais'",
+                    "Correção de pastas verdadeiras sendo trocadas no salvamento para usuários do Linux & Mac.",
+                    "Corrigido a criação de um relatório em Zip para usuários do Linux & Mac."
                 ]
             }
         ]
@@ -40,25 +40,25 @@
         "Date": "2023-04-08",
         "ChangeGroups": [
             {
-                "Name": "A seção de Ajuda & Logs foi adicionada",
+                "Name": "Adicionada sessão de Ajuda & Relatórios",
                 "Changes": [
-                    "Acesse facilmente seus registros.",
-                    "Veja rapidamente os erros em sua sessão mais recente/atual.",
-                    "Simplifique um arquivo de log para focar no que realmente está acontecendo.",
-                    "Compartilhe um arquivo zip contendo todos os logs necessários para que alguém o ajude."
+                    "Acesse os seus relatórios facilmente.",
+                    "Veja rapidamente os erros na sua sessão mais recente/atual.",
+                    "Simplifique um arquivo de relatório para focar no que realmente está acontecendo.",
+                    "Compartilhe um arquivo Zip contendo todos os relatórios necessários para que alguém o ajude."
                 ]
             },
             {
                 "Name": "Melhorias",
                 "Changes": [
-                    "Alterados os ícones de filtros para refletir os ícones corretos usados na lista."
+                    "Alteração nos ícones de filtros para refletir os ícones usados na lista."
                 ]
             },
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Corrigido o texto na coleção de importação para inscrição e cancelamento de inscrição sendo invertido.",
-                    "Corrigido a seleção de mapa para um novo jogo que não permitia que usuários selecionassem um mapa vanilla."
+                    "Corrigido o texto na coleção de importação para assinatura e cancelamento de assinatura que estavam invertidos.",
+                    "Corrigido a seleção de mapa para um novo jogo, que não permitia o usuário selecionar um mapa padrão."
                 ]
             }
         ]
@@ -70,7 +70,7 @@
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Corrigido um erro que causou carregamento infinito para alguns usuários."
+                    "Corrigido um erro que causava carregamento infinito para alguns usuários."
                 ]
             }
         ]
@@ -82,10 +82,10 @@
             {
                 "Name": "Mudanças",
                 "Changes": [
-                    "A guia de subscrição foi removida das opções de mod no jogo.",
-                    "DLCs corrigidos não são aplicados ao carregar um perfil.",
-                    "Corrigido a opção de idioma que estava vazia para algumas pessoas.",
-                    "O download novamente do Steam não irá mais forçar o foco de volta para a ferramenta.",
+                    "Botão de Inscrever-se removido da guia do mod com o jogo aberto.",
+                    "Correção que não aplicava as DLCs quando carrega um perfil.",
+                    "Corrigido a opção de idioma estar vazia para alguns usuários.",
+                    "Baixar novamente pela Steam não forçará o foco de volta para a ferramenta.",
                     "Outras alterações de UI."
                 ]
             }
@@ -98,11 +98,11 @@
             {
                 "Name": "Mudanças",
                 "Changes": [
-                    "Adicionando uma janela de informações quando se inscrever em itens pela primeira vez.",
-                    "Adicionamos um texto de aviso no painel quando você tem várias instâncias LOM instaladas.",
-                    "Adicionadas pequenas tags ao lado dos títulos do pacote.",
-                    "A ferramenta de baixar novamente a ordem de carga irá iniciar o download e fechar o aplicativo enquanto for atualizado.",
-                    "Corrigido e melhorava a velocidade de carregamento de relatórios de Screen Mod."
+                    "Uma janela com informações aparecerá quando se inscrever em um item pela primeira vez.",
+                    "Adicionado um aviso em texto no painel quando se tem múltiplas versões do LOM instaladas.",
+                    "Foi adicionado pequenos rótulos ao lado dos títulos de pacote.",
+                    "Ao pedir ao LOT para baixar novamente, o mesmo iniciará o carregamento e fechará o aplicativo enquanto está atualizando.",
+                    "A velocidade de criação de relatórios do LSM foi corrigida e melhorada."
                 ]
             }
         ]
@@ -110,71 +110,71 @@
     {
         "Version": "2.1.0",
         "Date": "2023-04-05",
-        "Tagline": "Versão Pública Beta",
+        "Tagline": "Versão Beta Pública",
         "ChangeGroups": []
     },
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Apresentando, a revisão de perfil",
+        "Tagline": "Apresentando, o Perfil de Revisão",
         "ChangeGroups": [
             {
-                "Name": "Alterações de perfil",
+                "Name": "Alterações de Perfil",
                 "Changes": [
                     "Alterou o design da sua lista de perfil.",
-                    "Agora os perfis favoritos são mostrados no seu painel para permitir a fácil troca entre eles.",
-                    "Adicionada a seção 'Outros Perfis' na página de um pacote para excluir ou incluir facilmente de seus outros perfis",
-                    "Adicionadas novas opções de classificação de perfil. A classificação selecionada agora será lembrada durante todas as sessões.",
-                    "Adicionadas ações de clique direito na lista de conteúdo para excluir ou incluir um item em todos os seus pacotes.",
-                    "Adicionado um botão para visualizar o arquivo de perfil em seu computador.",
-                    "Agora você pode atribuir uma cor para seus perfis.",
-                    "Agora você pode criar um atalho de área de trabalho para seus perfis.",
-                    "Agora você pode importar um perfil LOT 1 na seção 'Adicionar Perfil'."
+                    "Agora os Perfis Favoritos aparecem no Painel Principal para permitir a troca rápida entre eles.",
+                    "Sessão 'Outros Perfis' criada na página de pacotes, para facilitar a exclusão ou inclusão dos mesmo dos seus outros perfis",
+                    "Foram criadas opções para classificar Perfis. A ordem selecionada será relembrada durante as sessões.",
+                    "Agora pode clicar com o direito para incluir ou excluir itens da lista de conteúdo em todos os seus pacotes.",
+                    "Adicionado um botão para visualizar os arquivos de um perfil no seu computador.",
+                    "Agora poderá escolher uma cor para os seus perfis.",
+                    "Agora poderá criar um atalho na área de trabalho para os seus perfis.",
+                    "Agora poderá importar um perfil LOT 1 na sessão 'Adicionar Perfil'."
                 ]
             },
             {
                 "Name": "Melhorias",
                 "Changes": [
-                    "Links Steam agora serão abertos dentro da janela do Steam. Isto pode ser desativado nas Opções.",
-                    "Os ativos locais agora são corretamente agrupados com base nas pastas em que estão inseridos.",
-                    "Seu painel de conta Paradox será sempre exibido de agora em diante.",
-                    "Os botões de janela no canto superior direito agora têm ícones para explicar suas ações.",
-                    "Melhorada a resposta das páginas da lista de conteúdo.",
-                    "A pesquisa nas páginas da lista de conteúdo agora é muito mais rápida.",
-                    "O carregamento de mod agora está em cache; resultando em cargas mais eficientes no Windows e Linux, bem como cargas mais rápidas no macOS.",
-                    "Agora você pode gerar um arquivo zip de seus logs enquanto o jogo está em execução."
+                    "Links da Steam serão abertos na janela da Steam. Isto pode ser desativado nas Opções.",
+                    "Os recursos locais agora estão corretamente agrupados, com base nas pastas em que eles estão.",
+                    "Painel de conta Paradox sempre irá ser exibido de agora em diante.",
+                    "Os botões de janela no canto superior direito agora tem ícones que explicam as suas ações.",
+                    "Melhorada o tempo de reposta da página de lista de conteúdo.",
+                    "A pesquisa agora é mais rápida dentro da pagina de lista de conteúdos.",
+                    "O carregamento de mods encontra-se em cache; resultando em carregamentos mais eficientes em Linux & Windows, assim como carregamentos muito mais rápidos em macOS.",
+                    "Agora poderá gerar um arquivo zip de seus relatórios enquanto o jogo está em execução."
                 ]
             },
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Corrigido congelamentos acontecendo nas páginas da lista de conteúdo.",
-                    "O Auto-Salvamento de Perfis Fixos não funciona corretamente.",
-                    "Corrigido não ser capaz de usar mapas da Oficina e salvar jogos nas configurações do perfil",
-                    "Mapas personalizados corrigidos não carregando quando selecionados nas configurações do perfil.",
-                    "Perfis de carregamento corrigidos no macOS e Linux nem sempre aplicando corretamente.",
-                    "Ter um local personalizado para arquivos de relatório LSMR agora começará corretamente a partir de lá ao selecionar um arquivo de relatório na página Utilities."
+                    "Corrigido congelamentos nas páginas de listas de conteúdo.",
+                    "Corrigido o auto-salvamento de Perfis não funcionando corretamente.",
+                    "Corrigido o uso de Mapas da Oficina e Jogos Salvos nas configurações do seu Perfil",
+                    "Correção nos mapas customizados não carregarem quando selecionados nas configurações de perfil.",
+                    "Corrigido perfis às vezes não carregarem corretamente no Linux & macOS.",
+                    "Agora ter um local personalizado para salvar relatórios do LSMR abrirá o relatório corretamente na página de Utilitários."
                 ]
             }
         ]
     },
     {
         "Version": "2.2.2",
-        "Date": "2023-04-19",
+        "Date": "19/04/2023",
         "Tagline": "",
         "ChangeGroups": [
             {
                 "Name": "Novo e Melhorado",
                 "Changes": [
-                    "Adicionado na página de Utilities uma importação de qualquer arquivo de texto ou da sua área de transferência.",
-                    "Importação BOB agora é uma importação genérica de XML ao eliminar qualquer formato XML que contenha IDs de pacote."
+                    "Adicionado botão na página de Utilitários para Importar qualquer texto copiado da área de transferência.",
+                    "Agora a Importação com o BOB usa um XML padrão e suporta formatos XML que usam o mesmo ID do pacote."
                 ]
             },
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Correção de carregamento de um URL de coleção às vezes não analisando o ID corretamente.",
-                    "LOT corrigido ficando sem resposta no Mac/Linux ao cancelar a assinatura de um pacote."
+                    "Correção ao carregar uma coleção via link não repassando a ID correta.",
+                    "Correção do LOT travar ao cancelar assinatura de um pacote no Linux & Mac."
                 ]
             }
         ]

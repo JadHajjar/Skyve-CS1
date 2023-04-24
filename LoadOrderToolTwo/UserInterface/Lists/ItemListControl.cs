@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -29,8 +30,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	public event Action<ReportSeverity>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
 	public event Action<DateTime>? DateSelected;
-	public event Action<string>? TagSelected;
-	public event Action<string>? AddToSearch;
+	public event Action<TagItem>? TagSelected;
+	public event Action<SteamUser>? AuthorSelected;
 	public event EventHandler? FilterRequested;
 
 	public ItemListControl()
@@ -325,15 +326,15 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				return;
 			}
 
-			if (rects.AuthorRect.Contains(e.Location))
+			if (rects.AuthorRect.Contains(e.Location) && item.Item.Author is not null)
 			{
 				if (ModifierKeys.HasFlag(Keys.Control))
 				{
-					AddToSearch?.Invoke($"[author:{item.Item.Author?.Name}]");
+					AuthorSelected?.Invoke(item.Item.Author);
 				}
 				else
 				{
-					OpenSteamLink($"{item.Item.Author?.ProfileUrl}myworkshopfiles");
+					OpenSteamLink($"{item.Item.Author.ProfileUrl}myworkshopfiles");
 				}
 
 				return;
@@ -525,7 +526,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft, true);
 
-			rects.TagRects[item.Value] = tagRect;
+			rects.TagRects[item] = tagRect;
 
 			labelRect.X += Padding.Left + tagRect.Width;
 		}
@@ -838,7 +839,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	{
 		internal T? Item;
 
-		internal Dictionary<string, Rectangle> TagRects = new();
+		internal Dictionary<TagItem, Rectangle> TagRects = new();
 		internal Rectangle IncludedRect;
 		internal Rectangle EnabledRect;
 		internal Rectangle FolderRect;

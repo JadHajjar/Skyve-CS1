@@ -35,7 +35,15 @@ internal static class PlatformUtil
 			}
 			else if (domain.Contains("steam", StringComparison.OrdinalIgnoreCase))
 			{
-				SteamUtil.ExecuteSteam("steam://url/CommunityFilePage/" + Regex.Match(url, "\\d{8,20}").Value);
+				SteamUtil.ExecuteSteam("steam://openurl/" + url);
+				//if (url.Contains("myworkshopfiles", StringComparison.OrdinalIgnoreCase))
+				//{
+				//	SteamUtil.ExecuteSteam("steam://openurl/" + url);
+				//}
+				//else
+				//{
+				//	SteamUtil.ExecuteSteam("steam://url/CommunityFilePage/" + Regex.Match(url, "\\d{8,20}").Value);
+				//}
 			}
 			else
 			{
@@ -72,7 +80,6 @@ internal static class PlatformUtil
 			{
 				Platform.MacOSX => Process.Start("/bin/zsh", $"-c \" open -R '{Directory.EnumerateFiles(folder).FirstOrDefault()?.FormatPath() ?? folder}' \""),
 				Platform.Linux => Process.Start("/usr/bin/bash", $"-c \" xdg-open '{folder}' \""),
-				//Platform.Linux => Process.Start("/usr/bin/xdg-open", folder),
 				Platform.Windows or _ => Process.Start(folder),
 			};
 		}
@@ -87,7 +94,6 @@ internal static class PlatformUtil
 			{
 				Platform.MacOSX => Process.Start("/bin/zsh", $"-c \" open -R '{file}' \""),
 				Platform.Linux => Process.Start("/usr/bin/bash", $"-c \" xdg-open '{Path.GetDirectoryName(file).FormatPath()}' \""),
-				//Platform.Linux => Process.Start("/usr/bin/xdg-open", Path.GetDirectoryName(file).FormatPath()),
 				Platform.Windows or _ => Process.Start("explorer.exe", $"/select, \"{file}\""),
 			};
 		}

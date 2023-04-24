@@ -107,7 +107,7 @@ public partial class PC_UnusedLsmPackages : PanelContent
 
 		DD_Tags.Items = info.SelectMany(x =>
 		{
-			return x.Value.Tags;
+			return x.Value.Tags.Select(x => new TagItem(Domain.Enums.TagSource.Workshop, x));
 		}).Distinct().ToArray();
 
 		LC_Items.Invalidate();
@@ -185,7 +185,7 @@ public partial class PC_UnusedLsmPackages : PanelContent
 		{
 			foreach (var tag in DD_Tags.SelectedItems)
 			{
-				if (!(e.Item.Tags?.Any(tag) ?? false))
+				if (!(e.Item.Tags?.Any(tag.Value) ?? false))
 				{
 					e.DoNotDraw = true;
 				}

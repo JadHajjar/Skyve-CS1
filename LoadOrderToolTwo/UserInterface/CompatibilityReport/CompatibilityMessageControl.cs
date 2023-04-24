@@ -159,7 +159,7 @@ internal class CompatibilityMessageControl : SlickControl
 			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
 			var noteSize = e.Graphics.Measure(Message.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + pad);
-			using var icon = Message.Severity.GetSeverityIcon(false);
+			using var icon = Message.Severity.GetSeverityIcon(false).Default;
 			using var brush = new SolidBrush(color);
 
 			e.Graphics.FillRoundedRectangle(brush, iconRect, pad);

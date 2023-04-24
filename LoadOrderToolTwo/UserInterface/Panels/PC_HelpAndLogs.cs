@@ -47,6 +47,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		base.UIChanged();
 
+		I_Info.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
 		DD_LogFile.Margin = TLP_Errors.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10), UI.UIScale);
 

@@ -152,7 +152,7 @@ public partial class PC_MissingPackages : PanelContent
 
 		DD_Tags.Items = info.SelectMany(x =>
 		{
-			return x.Value.Tags;
+			return x.Value.Tags.Select(x => new TagItem(Domain.Enums.TagSource.Workshop, x));
 		}).Distinct().ToArray();
 
 		LC_Items.Invalidate();
@@ -250,6 +250,17 @@ public partial class PC_MissingPackages : PanelContent
 		if (!e.DoNotDraw && OT_Workshop.SelectedValue != Generic.ThreeOptionToggle.Value.None)
 		{
 			e.DoNotDraw = e.Item.SteamId == 0 != (OT_Workshop.SelectedValue == Generic.ThreeOptionToggle.Value.Option1);
+		}
+
+		if (DD_Tags.SelectedItems.Any())
+		{
+			foreach (var tag in DD_Tags.SelectedItems)
+			{
+				if (!(e.Item.Tags?.Any(tag.Value) ?? false))
+				{
+					e.DoNotDraw = true;
+				}
+			}
 		}
 
 		if (!e.DoNotDraw && !string.IsNullOrWhiteSpace(TB_Search.Text))

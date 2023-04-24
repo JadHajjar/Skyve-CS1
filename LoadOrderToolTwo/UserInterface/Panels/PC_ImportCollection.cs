@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -45,7 +46,7 @@ public partial class PC_ImportCollection : PanelContent
 		{
 			DD_Tags.Items = contents.SelectMany(x =>
 			{
-				return x.Value.Tags;
+				return x.Value.Tags.Select(x => new TagItem(Domain.Enums.TagSource.Workshop, x));
 			}).Distinct().ToArray();
 
 			var items = new List<IGenericPackage>(LC_Items.Items);
@@ -93,6 +94,17 @@ public partial class PC_ImportCollection : PanelContent
 		else if (T_Assets.Selected)
 		{
 			e.DoNotDraw = e.Item.IsMod;
+		}
+
+		if (DD_Tags.SelectedItems.Any())
+		{
+			foreach (var tag in DD_Tags.SelectedItems)
+			{
+				if (!(e.Item.Tags?.Any(tag.Value) ?? false))
+				{
+					e.DoNotDraw = true;
+				}
+			}
 		}
 
 		if (!e.DoNotDraw && !string.IsNullOrWhiteSpace(TB_Search.Text))

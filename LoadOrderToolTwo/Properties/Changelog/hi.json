@@ -167,7 +167,7 @@
                 "Name": "New & Improved",
                 "Changes": [
                     "Added in the Utilities page an import from any text file or from your clipboard.",
-                    "BOB import is now a generic XML import by suppoorting any XML format that contains package IDs."
+                    "BOB import is now a generic XML import by supporting any XML format that contains package IDs."
                 ]
             },
             {
