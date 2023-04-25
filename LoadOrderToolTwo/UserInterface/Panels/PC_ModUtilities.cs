@@ -57,7 +57,7 @@ public partial class PC_ModUtilities : PanelContent
 		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
 
 		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
-		LC_Duplicates.SetSorting(PackageSorting.Mod);
+		LC_Duplicates.SetSorting(PackageSorting.Mod, false);
 
 		B_ReDownload.Loading = false;
 

@@ -247,7 +247,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var icon = large ? IconManager.GetLargeIcon(isIncluded ? "I_StarFilled" : "I_Star") : IconManager.GetIcon(isIncluded ? "I_StarFilled" : "I_Star");
+		using var icon = large ? IconManager.GetIcon(isIncluded ? "I_StarFilled" : "I_Star", rects.IncludedRect.Height * 3 / 4) : IconManager.GetIcon(isIncluded ? "I_StarFilled" : "I_Star");
 
 		e.Graphics.DrawImage(icon.Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
@@ -265,21 +265,29 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IconRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var profileIcon = large ? e.Item.GetIcon().Large : e.Item.GetIcon().Default;
+		using var profileIcon = large ? e.Item.GetIcon().Get(rects.IncludedRect.Height * 3 / 4) : e.Item.GetIcon().Default;
 
 		e.Graphics.DrawImage(profileIcon.Color(rects.IconRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : iconColor), rects.IconRect.CenterR(profileIcon.Size));
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), large ? rects.TextRect.Pad(Padding) : rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
+		if(large)
+		rects.TextRect = rects.TextRect.Pad(0, (int)e.Graphics.Measure(" ", UI.Font(large ? 11.25F : 9F, FontStyle.Bold)).Height + Padding.Bottom, 0, 0);
+
+		var x = rects.TextRect.X;
+
 		if (e.Item == ProfileManager.CurrentProfile)
 		{
-			rects.TextRect.X += DrawLabel(e, Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
+			rects.TextRect.X += DrawLabel(e, Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (e.Item.IsMissingItems)
 		{
-			rects.TextRect.X += DrawLabel(e, Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
+			rects.TextRect.X += DrawLabel(e, Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
+
+		if (large)
+			rects.TextRect.X = x;
 
 		rects.TextRect.X += DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
 		rects.TextRect.X += DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;

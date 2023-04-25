@@ -183,24 +183,24 @@ public partial class PC_ImportCollection : PanelContent
 		RefreshCounts();
 	}
 
-	private async void B_UnsubSub_LeftClicked(object sender, System.EventArgs e)
+	private async void B_UnsubSub_RightClicked(object sender, System.EventArgs e)
 	{
 		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), true);
 	}
 
-	private async void B_UnsubSub_RightClicked(object sender, System.EventArgs e)
+	private async void B_UnsubSub_LeftClicked(object sender, System.EventArgs e)
 	{
 		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), false);
 	}
 
-	private void B_ExInclude_LeftClicked(object sender, System.EventArgs e)
+	private void B_ExInclude_RightClicked(object sender, System.EventArgs e)
 	{
 		var filteredItems = LC_Items.FilteredItems.Select(x => CentralManager.Packages.FirstOrDefault(y => y.SteamId == x.SteamId));
 
 		ContentUtil.SetBulkIncluded(filteredItems, false);
 	}
 
-	private void B_ExInclude_RightClicked(object sender, System.EventArgs e)
+	private void B_ExInclude_LeftClicked(object sender, System.EventArgs e)
 	{
 		var filteredItems = LC_Items.FilteredItems.Select(x => CentralManager.Packages.FirstOrDefault(y => y.SteamId == x.SteamId));
 

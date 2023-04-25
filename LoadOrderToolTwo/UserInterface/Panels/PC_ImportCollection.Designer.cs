@@ -142,12 +142,12 @@ partial class PC_ImportCollection
 			this.B_ExInclude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.B_ExInclude.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ExInclude.Image1 = "I_X";
-			this.B_ExInclude.Image2 = "I_Check";
+			this.B_ExInclude.Image2 = "I_X";
+			this.B_ExInclude.Image1 = "I_Check";
 			this.B_ExInclude.Location = new System.Drawing.Point(3, 25);
 			this.B_ExInclude.Name = "B_ExInclude";
-			this.B_ExInclude.Option1 = "ExcludeAll";
-			this.B_ExInclude.Option2 = "IncludeAll";
+			this.B_ExInclude.Option2 = "ExcludeAll";
+			this.B_ExInclude.Option1 = "IncludeAll";
 			this.B_ExInclude.Size = new System.Drawing.Size(319, 17);
 			this.B_ExInclude.TabIndex = 1;
 			this.B_ExInclude.LeftClicked += new System.EventHandler(this.B_ExInclude_LeftClicked);
@@ -169,12 +169,12 @@ partial class PC_ImportCollection
 			this.B_UnsubSub.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
 			this.B_UnsubSub.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_UnsubSub.Image1 = "I_RemoveSteam";
-			this.B_UnsubSub.Image2 = "I_Add";
+			this.B_UnsubSub.Image2 = "I_RemoveSteam";
+			this.B_UnsubSub.Image1 = "I_Add";
 			this.B_UnsubSub.Location = new System.Drawing.Point(3, 3);
 			this.B_UnsubSub.Name = "B_UnsubSub";
-			this.B_UnsubSub.Option1 = "UnsubscribeAll";
-			this.B_UnsubSub.Option2 = "SubscribeAll";
+			this.B_UnsubSub.Option2 = "UnsubscribeAll";
+			this.B_UnsubSub.Option1 = "SubscribeAll";
 			this.B_UnsubSub.Size = new System.Drawing.Size(319, 16);
 			this.B_UnsubSub.TabIndex = 19;
 			this.B_UnsubSub.LeftClicked += new System.EventHandler(this.B_UnsubSub_LeftClicked);

@@ -46,11 +46,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		sorting = CentralManager.SessionSettings.UserSettings.PackageSorting;
+		SortDesc = CentralManager.SessionSettings.UserSettings.PackageSortingDesc;
 	}
 
 	public IEnumerable<T> FilteredItems => SafeGetItems().Select(x => x.Item);
 
 	public int FilteredCount => SafeGetItems().Count;
+
+	public bool SortDesc { get; private set; }
 
 	protected override void UIChanged()
 	{
@@ -78,13 +81,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		base.FilterChanged();
 	}
 
-	public void SetSorting(PackageSorting packageSorting)
+	public void SetSorting(PackageSorting packageSorting, bool desc)
 	{
-		if (sorting == packageSorting)
+		if (sorting == packageSorting && SortDesc == desc)
 		{
 			return;
 		}
 
+		SortDesc = desc;
 		sorting = packageSorting;
 
 		if (!IsHandleCreated)
@@ -99,10 +103,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	protected override IEnumerable<DrawableItem<T>> OrderItems(IEnumerable<DrawableItem<T>> items)
 	{
-		return sorting switch
+		items = sorting switch
 		{
 			PackageSorting.FileSize => items
-				.OrderByDescending(x => x.Item.FileSize),
+				.OrderBy(x => x.Item.FileSize),
 
 			PackageSorting.Name => items
 				.OrderBy(x => x.Item.ToString()),
@@ -111,25 +115,32 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				.OrderBy(x => x.Item.Author?.Name ?? string.Empty),
 
 			PackageSorting.Status => items
-				.OrderByDescending(x => x.Item.Status),
+				.OrderBy(x => x.Item.Status),
 
 			PackageSorting.UpdateTime => items
-				.OrderByDescending(x => x.Item.ServerTime.If(DateTime.MinValue, x.Item.LocalTime)),
+				.OrderBy(x => x.Item.ServerTime.If(DateTime.MinValue, x.Item.LocalTime)),
 
 			PackageSorting.SubscribeTime => items
-				.OrderByDescending(x => x.Item.SubscribeTime),
+				.OrderBy(x => x.Item.SubscribeTime),
 
 			PackageSorting.Mod => items
-				.OrderByDescending(x => System.IO.Path.GetFileName(x.Item.Package.Mod?.FileName ?? string.Empty)),
+				.OrderBy(x => Path.GetFileName(x.Item.Package.Mod?.FileName ?? string.Empty)),
 
 			PackageSorting.CompatibilityReport => items
-				.OrderByDescending(x => x.Item.Package.CompatibilityReport?.Severity ?? default),
+				.OrderBy(x => x.Item.Package.CompatibilityReport?.Severity ?? default),
 
 			_ => items
 				.OrderByDescending(x => x.Item.IsIncluded)
 				.ThenByDescending(x => x.Item.Workshop)
 				.ThenBy(x => x.Item.ToString())
 		};
+
+		if (SortDesc)
+		{
+			return items.Reverse();
+		}
+
+		return items;
 	}
 
 	protected override bool IsItemActionHovered(DrawableItem<T> item, Point location)
@@ -488,7 +499,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (!large || e.Item.Workshop)
 		{
-			labelRect = DrawStatusDescriptor(e, large, rects, labelRect, ContentAlignment.TopLeft);
+			labelRect = DrawStatusDescriptor(e, rects, labelRect, ContentAlignment.TopLeft);
 		}
 
 		DrawAuthorAndSteamId(e, large, rects);
@@ -523,7 +534,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (large && !e.Item.Workshop)
 		{
-			labelRect = DrawStatusDescriptor(e, large, rects, labelRect, ContentAlignment.BottomLeft);
+			labelRect = DrawStatusDescriptor(e, rects, labelRect, ContentAlignment.BottomLeft);
 		}
 
 		foreach (var item in e.Item.Tags.Distinct(x => x.Value))
@@ -547,9 +558,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T> e, bool large, ItemListControl<T>.Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
+	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
+
 		if (!string.IsNullOrEmpty(text))
 		{
 			using (icon)

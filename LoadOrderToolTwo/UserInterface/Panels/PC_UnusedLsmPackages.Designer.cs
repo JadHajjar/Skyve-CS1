@@ -93,7 +93,7 @@ partial class PC_UnusedLsmPackages
 			this.B_SubscribeAll.Size = new System.Drawing.Size(355, 30);
 			this.B_SubscribeAll.SpaceTriggersClick = true;
 			this.B_SubscribeAll.TabIndex = 2;
-			this.B_SubscribeAll.Text = "UnsubscribeAllButton";
+			this.B_SubscribeAll.Text = "UnsubscribeAll";
 			this.B_SubscribeAll.Click += new System.EventHandler(this.B_SteamPage_Click);
 			// 
 			// tableLayoutPanel2
@@ -133,7 +133,7 @@ partial class PC_UnusedLsmPackages
 			this.B_IncludeAll.Size = new System.Drawing.Size(343, 30);
 			this.B_IncludeAll.SpaceTriggersClick = true;
 			this.B_IncludeAll.TabIndex = 5;
-			this.B_IncludeAll.Text = "IncludeAllButton";
+			this.B_IncludeAll.Text = "IncludeAll";
 			this.B_IncludeAll.Click += new System.EventHandler(this.B_IncludeAll_Click);
 			// 
 			// L_Counts
@@ -172,7 +172,6 @@ partial class PC_UnusedLsmPackages
 			this.B_ExcludeAll.Size = new System.Drawing.Size(343, 30);
 			this.B_ExcludeAll.SpaceTriggersClick = true;
 			this.B_ExcludeAll.TabIndex = 2;
-			this.B_ExcludeAll.Text = "ExcludeAllButton";
 			this.B_ExcludeAll.Click += new System.EventHandler(this.B_ExcludeAll_Click);
 			// 
 			// LC_Items

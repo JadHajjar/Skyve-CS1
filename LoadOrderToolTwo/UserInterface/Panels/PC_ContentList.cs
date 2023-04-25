@@ -33,7 +33,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly List<string> searchTermsOr = new();
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
-	private string? searchAuthor;
 
 	public PC_ContentList()
 	{
@@ -41,10 +40,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		InitializeComponent();
 
-		B_Filters.Height = B_Actions.Height = DD_Sorting.Height = TB_Search.Height = 0;
-
-		TLP_Main.Controls.Add(LC_Items, 0, 6);
-		TLP_Main.SetColumnSpan(LC_Items, 5);
+		TLP_Main.Controls.Add(LC_Items, 0, TLP_Main.RowCount - 1);
+		TLP_Main.SetColumnSpan(LC_Items, TLP_Main.ColumnCount);
 
 		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
 
@@ -70,8 +67,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
 		{
 			OT_Enabled.Hide();
-			B_DisEnable.Dispose();
-			TLP_Main.SetColumnSpan(B_ExInclude, 2);
 			P_Filters.SetRow(OT_Workshop, 2);
 		}
 
@@ -79,9 +74,13 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		RefreshCounts();
 
+		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
+
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		CentralManager.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
+
+		SlickTip.SetTo(I_Actions, Locale.Actions);
 
 		new BackgroundAction("Getting tag list", () =>
 		{
@@ -160,7 +159,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		base.DesignChanged(design);
 
 		tableLayoutPanel3.BackColor = design.AccentBackColor;
-		P_Filters.BackColor = P_Actions.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
+		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
 		LC_Items.BackColor = design.BackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
 		L_Duplicates.ForeColor = design.RedColor;
@@ -186,15 +185,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (CentralManager.SessionSettings.UserSettings.AlwaysOpenFiltersAndActions)
 		{
-			P_FiltersContainer.Visible = P_ActionsContainer.Visible = true;
-			P_FiltersContainer.AutoSize = P_ActionsContainer.AutoSize = true;
+			P_FiltersContainer.Visible = true;
+			P_FiltersContainer.AutoSize = true;
 			B_Filters.Text = "HideFilters";
-			B_Actions.Text = "HideActions";
 		}
 		else
 		{
-			P_FiltersContainer.Height = P_ActionsContainer.Height = 0;
-			P_FiltersContainer.Visible = P_ActionsContainer.Visible = true;
+			P_FiltersContainer.Height = 0;
+			P_FiltersContainer.Visible = true;
 		}
 	}
 
@@ -227,47 +225,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		base.UIChanged();
 
-		P_FiltersContainer.Padding = P_ActionsContainer.Padding = TB_Search.Margin
-			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin
-			= B_ExInclude.Margin = B_DisEnable.Margin = B_Filters.Margin
-			= B_Actions.Margin = B_Refresh.Margin = B_UnsubscribeAll.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding
+			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding
+			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
-		B_UnsubscribeAll.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
 		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
-		DD_Sorting.Width = (int)(180 * UI.FontScale);
-		TB_Search.Width = (int)(400 * UI.FontScale);
-	}
-
-	private void B_Actions_Click(object sender, EventArgs e)
-	{
-		B_Actions.Text = P_ActionsContainer.Height == 0 ? "HideActions" : "ShowActions";
-		AnimationHandler.Animate(P_ActionsContainer, P_ActionsContainer.Height == 0 ? new Size(0, P_ActionsContainer.Padding.Vertical + P_Actions.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
-		P_ActionsContainer.AutoSize = false;
-	}
-
-	private void B_DisEnable_LeftClicked(object sender, EventArgs e)
-	{
-		SetEnabled(LC_Items.FilteredItems, false);
-	}
-
-	private void B_DisEnable_RightClicked(object sender, EventArgs e)
-	{
-		SetEnabled(LC_Items.FilteredItems, true);
-	}
-
-	private void B_ExInclude_LeftClicked(object sender, EventArgs e)
-	{
-		SetIncluded(LC_Items.FilteredItems, false);
-	}
-
-	private void B_ExInclude_RightClicked(object sender, EventArgs e)
-	{
-		SetIncluded(LC_Items.FilteredItems, true);
+		DD_Sorting.Width = (int)(175 * UI.FontScale);
+		TLP_Main.ColumnStyles[0].Width = (int)(250 * UI.FontScale);
+		TLP_Main.RowStyles[0].Height = (int)(36 * UI.FontScale);
 	}
 
 	private void B_Filters_Click(object sender, EventArgs e)
@@ -301,7 +271,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		CentralManager.SessionSettings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
 		CentralManager.SessionSettings.Save();
 
-		LC_Items.SetSorting(DD_Sorting.SelectedItem);
+		LC_Items.SetSorting(DD_Sorting.SelectedItem, LC_Items.SortDesc);
 	}
 
 	private void DelayedSearch()
@@ -317,6 +287,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			TB_Search.Loading = true;
 			_delayedSearch.Run();
+
+			if (sender == I_Refresh)
+				LC_Items.SortingChanged();
 		}
 	}
 
@@ -477,14 +450,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (!string.IsNullOrEmpty(searchAuthor))
-		{
-			if (searchAuthor != item.Author?.Name)
-			{
-				return true;
-			}
-		}
-
 		if (!searchEmpty)
 		{
 			for (var i = 0; i < searchTermsExclude.Count; i++)
@@ -563,15 +528,15 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName =(searchEmpty= string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
 
-		var searchText = TB_Search.Text.RegexRemove(@"\[\w+:(.+)?\]").Trim();
+		var searchText = TB_Search.Text.Trim();
 
 		searchTermsAnd.Clear();
 		searchTermsExclude.Clear();
 		searchTermsOr.Clear();
 
-		if (!(searchEmpty = string.IsNullOrWhiteSpace(searchText)))
+		if (!searchEmpty)
 		{
 			foreach (var item in searchText.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
 			{
@@ -598,18 +563,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		searchAuthor = null;
-
-		foreach (Match match in Regex.Matches(TB_Search.Text, @"\[(\w+):(.+)?\]"))
-		{
-			switch (match.Groups[1].Value.ToLower())
-			{
-				case "author":
-					searchAuthor = match.Groups[2].Value;
-					break;
-			}
-		}
-
 		FilterChanged(sender, e);
 	}
 
@@ -618,15 +571,48 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		Form.PushPanel<PC_ModUtilities>(null);
 	}
 
-	private async void B_UnsubscribeAll_Click(object sender, EventArgs e)
+	private async void B_UnsubscribeAll_Click()
 	{
 		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
 		{
 			return;
 		}
 
-		B_UnsubscribeAll.Loading = true;
+		I_Actions.Loading = true;
 		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), true);
-		B_UnsubscribeAll.Loading = false;
+		I_Actions.Loading = false;
+	}
+
+	private void Icon_SizeChanged(object sender, EventArgs e)
+	{
+		(sender as Control)!.Width = (sender as Control)!.Height;
+	}
+
+	private void I_SortOrder_Click(object sender, EventArgs e)
+	{
+		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDesc);
+
+		CentralManager.SessionSettings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
+		CentralManager.SessionSettings.Save();
+
+		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
+	}
+
+	private void I_Actions_Click(object sender, EventArgs e)
+	{
+		var items = new SlickStripItem[]
+		{
+			  new (Locale.IncludeAll, "I_Check", action: () => SetIncluded(LC_Items.FilteredItems, true))
+			, new (Locale.ExcludeAll, "I_X", action: () => SetIncluded(LC_Items.FilteredItems, false))
+			, new (string.Empty)
+			, new (Locale.EnableAll, "I_Enabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => SetEnabled(LC_Items.FilteredItems, true))
+			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => SetEnabled(LC_Items.FilteredItems, false))
+			, new (string.Empty)
+			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: B_UnsubscribeAll_Click)
+			, new (string.Empty)
+			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
+		};
+
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
 	}
 }

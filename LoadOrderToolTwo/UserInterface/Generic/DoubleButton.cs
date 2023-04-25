@@ -17,17 +17,17 @@ public class DoubleButton : SlickControl
 	public event EventHandler? RightClicked;
 
 	[Category("Appearance"), DefaultValue("")]
-	public string Option1 { get; set; } = string.Empty;
-	[Category("Appearance"), DefaultValue("")]
 	public string Option2 { get; set; } = string.Empty;
+	[Category("Appearance"), DefaultValue("")]
+	public string Option1 { get; set; } = string.Empty;
 	[Category("Appearance"), DefaultValue(ColorStyle.Red)]
-	public ColorStyle OptionStyle1 { get; set; } = ColorStyle.Red;
+	public ColorStyle OptionStyle2 { get; set; } = ColorStyle.Red;
 	[Category("Appearance"), DefaultValue(ColorStyle.Green)]
-	public ColorStyle OptionStyle2 { get; set; } = ColorStyle.Green;
-	[Category("Appearance"), DefaultValue(null)]
-	public string? Image1 { get; set; }
+	public ColorStyle OptionStyle1 { get; set; } = ColorStyle.Green;
 	[Category("Appearance"), DefaultValue(null)]
 	public string? Image2 { get; set; }
+	[Category("Appearance"), DefaultValue(null)]
+	public string? Image1 { get; set; }
 
 	public DoubleButton()
 	{
@@ -47,7 +47,7 @@ public class DoubleButton : SlickControl
 	{
 		base.OnSizeChanged(e);
 
-		if (Live&&!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
+		if (Live && !Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
 		{
 			Height = (int)(24 * UI.UIScale);
 		}
@@ -104,8 +104,8 @@ public class DoubleButton : SlickControl
 		var rectangle2 = new Rectangle(Width / 2, 0, Width / 2, Height - 1);
 		var option1Hovered = rectangle1.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
 		var option2Hovered = rectangle2.Contains(cursorLocation) && HoverState.HasFlag(HoverState.Hovered);
-		var textColor1 = option1Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
-		var textColor2 = option2Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ForeColor;
+		var textColor1 = option1Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ButtonForeColor;
+		var textColor2 = option2Hovered && HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : FormDesign.Design.ButtonForeColor;
 
 		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(FormDesign.Design.ButtonColor, 0.5F), ClientRectangle.Pad(1, 1, 2, 2), Padding.Left);
 

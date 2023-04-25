@@ -103,7 +103,7 @@ public partial class PC_DLCs : PanelContent
 		return false;
 	}
 
-	private void B_ExInclude_LeftClicked(object sender, EventArgs e)
+	private void B_ExInclude_RightClicked(object sender, EventArgs e)
 	{
 		foreach (var item in LC_DLCs.FilteredItems)
 		{
@@ -113,7 +113,7 @@ public partial class PC_DLCs : PanelContent
 		LC_DLCs.Invalidate();
 	}
 
-	private void B_ExInclude_RightClicked(object sender, EventArgs e)
+	private void B_ExInclude_LeftClicked(object sender, EventArgs e)
 	{
 		foreach (var item in LC_DLCs.FilteredItems)
 		{

@@ -152,7 +152,7 @@ partial class PC_MissingLsmPackages
 			this.B_IncludeAll.Size = new System.Drawing.Size(343, 30);
 			this.B_IncludeAll.SpaceTriggersClick = true;
 			this.B_IncludeAll.TabIndex = 2;
-			this.B_IncludeAll.Text = "IncludeAllButton";
+			this.B_IncludeAll.Text = "IncludeAll";
 			this.B_IncludeAll.Click += new System.EventHandler(this.B_IncludeAll_Click);
 			// 
 			// LC_Items

@@ -54,7 +54,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		foreach (var button in this.GetControls<SlickButton>())
 		{
 			button.Padding = UI.Scale(new Padding(7), UI.FontScale);
-			button.Margin = UI.Scale(new Padding(10), UI.UIScale);
+			button.Margin = UI.Scale(new Padding(10, 5, 10, 5), UI.UIScale);
 		}
 
 		B_CopyLogFile.Margin = B_LotLogCopy.Margin = B_SaveZip.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.UIScale);
@@ -172,5 +172,10 @@ public partial class PC_HelpAndLogs : PanelContent
 	private void B_ChangeLog_Click(object sender, EventArgs e)
 	{
 		Form.PushPanel<PC_LotChangeLog>(null);
+	}
+
+	private void B_Donate_Click(object sender, EventArgs e)
+	{
+		PlatformUtil.OpenUrl("https://www.buymeacoffee.com/tdwsvillage");
 	}
 }

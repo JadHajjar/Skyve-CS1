@@ -151,11 +151,11 @@ public partial class PC_Profiles : PanelContent
 
 		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
-		I_ProfileIcon.Enabled = !profile.Temporary;
 		I_ProfileIcon.ImageName = profile.GetIcon();
+		I_Favorite.ImageName = profile.IsFavorite ? "I_StarFilled" : "I_Star";
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
 		B_TempProfile.Visible = !profile.Temporary;
-		L_Info.Visible = I_Info.Visible = !profile.Temporary;
+		I_Favorite.Visible = I_ProfileIcon.Enabled = L_Info.Visible = I_Info.Visible = !profile.Temporary;
 		FLP_Options.Enabled = true;
 		TLP_GeneralSettings.Visible = !profile.Temporary;
 
@@ -518,12 +518,15 @@ public partial class PC_Profiles : PanelContent
 		}
 
 		try
-		{ Ctrl_LoadProfile(profile); }
+		{ Ctrl_LoadProfile(profile!); }
 		catch (Exception ex) { ShowPrompt(ex, "Failed to import your profile"); }
 	}
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
 	{
+		if (ProfileManager.CurrentProfile.Temporary)
+			return;
+
 		var colorDialog = new SlickColorPicker(ProfileManager.CurrentProfile.Color ?? Color.Red);
 
 		if (colorDialog.ShowDialog() != DialogResult.OK)
@@ -535,5 +538,16 @@ public partial class PC_Profiles : PanelContent
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 		ProfileManager.CurrentProfile.Color = colorDialog.Color;
 		ProfileManager.Save(ProfileManager.CurrentProfile);
+	}
+
+	private void I_Favorite_Click(object sender, EventArgs e)
+	{
+		if (ProfileManager.CurrentProfile.Temporary)
+			return;
+
+		ProfileManager.CurrentProfile.IsFavorite = !ProfileManager.CurrentProfile.IsFavorite;
+		ProfileManager.Save(ProfileManager.CurrentProfile);
+
+		I_Favorite.ImageName = ProfileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
 	}
 }

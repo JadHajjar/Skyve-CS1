@@ -14,8 +14,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-using static System.Net.Mime.MediaTypeNames;
-
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
 internal class TagsDropDown : SlickMultiSelectionDropDown<TagItem>
 {

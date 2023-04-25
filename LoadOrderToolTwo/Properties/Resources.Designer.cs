@@ -123,16 +123,6 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap I_Add_16 {
-            get {
-                object obj = ResourceManager.GetObject("I_Add_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap I_Alternatives_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Alternatives_16", resourceCulture);
@@ -836,6 +826,36 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_DlcIcon {
             get {
                 object obj = ResourceManager.GetObject("I_DlcIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Donate_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Donate_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Donate_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Donate_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Donate_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Donate_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

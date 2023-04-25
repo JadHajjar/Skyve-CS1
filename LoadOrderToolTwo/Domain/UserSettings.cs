@@ -20,4 +20,5 @@ internal class UserSettings
 	public bool AlwaysOpenFiltersAndActions { get; set; }
 	public bool OpenLinksInBrowser { get; set; }
 	public bool ResetScrollOnPackageClick { get; set; }
+	public bool PackageSortingDesc { get; set; }
 }

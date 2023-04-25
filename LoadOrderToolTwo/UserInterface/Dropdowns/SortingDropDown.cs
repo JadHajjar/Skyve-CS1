@@ -45,10 +45,25 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 	{
 		var text = LocaleHelper.GetGlobalText($"Sorting_{item}");
 
-		using var icon = IconManager.GetIcon("I_Sort", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon(GetIcon(item), rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+	}
+
+	private static string GetIcon(PackageSorting item)
+	{
+		return item switch
+		{
+			PackageSorting.Name => "I_FileName",
+			PackageSorting.Author => "I_Developer",
+			PackageSorting.FileSize => "I_MicroSd",
+			PackageSorting.CompatibilityReport => "I_CompatibilityReport",
+			PackageSorting.UpdateTime => "I_UpdateTime",
+			PackageSorting.SubscribeTime => "I_Add",
+			PackageSorting.Status => "I_Broken",
+			_ => "I_Check",
+		};
 	}
 }
