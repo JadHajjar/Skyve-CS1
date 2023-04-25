@@ -392,9 +392,16 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 					return true;
 				}
 			}
+			else if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
+			{
+				if (!item.Workshop || item.Status <= DownloadStatus.OK)
+				{
+					return true;
+				}
+			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)item.Status)
+				if (((int)DD_PackageStatus.SelectedItem - 2) != (int)item.Status)
 				{
 					return true;
 				}
@@ -403,7 +410,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (DD_ReportSeverity.SelectedItem != ReportSeverityFilter.Any)
 		{
-			if (((int)DD_ReportSeverity.SelectedItem - 1) != (int)(item.Package.CompatibilityReport?.Severity ?? 0))
+			if (DD_ReportSeverity.SelectedItem == ReportSeverityFilter.AnyIssue)
+			{
+				if (!(item.Package.CompatibilityReport?.Severity > ReportSeverity.Remarks))
+				{
+					return true;
+				}
+			}
+			else if (((int)DD_ReportSeverity.SelectedItem - 2) != (int)(item.Package.CompatibilityReport?.Severity ?? 0))
 			{
 				return true;
 			}

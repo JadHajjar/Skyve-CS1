@@ -559,12 +559,6 @@
   <data name="I_Translate_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Translate_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="I_UserInterface_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_UserInterface.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="I_UserInterface_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_UserInterface_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="I_ClearFolders_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_ClearFolders.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -582,12 +576,6 @@
   </data>
   <data name="I_Guide_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Guide_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="I_Undo_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_Undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="I_Undo_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_Undo_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="I_Developer_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Developer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -892,9 +880,6 @@
   <data name="I_Translate_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Translate_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="I_Undo_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_Undo_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="I_UpdateTime_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_UpdateTime_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -903,9 +888,6 @@
   </data>
   <data name="I_Upgrade_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Upgrade_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="I_UserInterface_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\I_UserInterface_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="I_UserOptions_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_UserOptions_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

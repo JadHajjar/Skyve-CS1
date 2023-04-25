@@ -72,14 +72,14 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (Package.Author is not null)
 		{
-			var size = e.Graphics.Measure("by " + Package.Author.Name, UI.Font(9.75F)).ToSize();
+			var size = e.Graphics.Measure(Package.Author.Name, UI.Font(9.75F)).ToSize();
 			var authorRect = ClientRectangle.Pad(Padding).Align(new Size(size.Width + Padding.Horizontal + Padding.Right + size.Height, size.Height + Padding.Vertical), ContentAlignment.BottomLeft);
 			authorRect.X += Padding.Left;
 			var avatarRect = authorRect.Pad(Padding).Align(new(size.Height, size.Height), ContentAlignment.MiddleLeft);
 
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), authorRect, (int)(6 * UI.FontScale));
 
-			e.Graphics.DrawString("by " + Package.Author.Name, UI.Font(9.75F), new SolidBrush(FormDesign.Design.ForeColor), authorRect.Pad(avatarRect.Right - Padding.Left, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(Package.Author.Name, UI.Font(9.75F), new SolidBrush(FormDesign.Design.ForeColor), authorRect.Pad(avatarRect.Right - Padding.Left, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 
 			if (Loading)
 			{

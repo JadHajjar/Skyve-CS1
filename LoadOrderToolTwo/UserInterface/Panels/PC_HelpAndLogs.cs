@@ -105,6 +105,12 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void DD_LogFile_FileSelected(string obj)
 	{
+		if (!LocationManager.FileExists(obj))
+		{
+			DD_LogFile.SelectedFile = string.Empty;
+			return;
+		}
+
 		DD_LogFile.Loading = true;
 
 		new BackgroundAction("Simplifying Log", () =>

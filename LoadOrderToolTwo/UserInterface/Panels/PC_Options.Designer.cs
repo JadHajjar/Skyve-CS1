@@ -764,7 +764,7 @@ partial class PC_Options
 			this.TLP_UI.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_UI.Size = new System.Drawing.Size(269, 253);
 			this.TLP_UI.TabIndex = 1;
-			this.TLP_UI.Text = "UserInterface";
+			this.TLP_UI.Text = "User Interface";
 			// 
 			// B_HelpTranslate
 			// 

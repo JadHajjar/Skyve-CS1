@@ -52,6 +52,12 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 				color = FormDesign.Design.ForeColor;
 				return;
 
+			case DownloadStatusFilter.AnyIssue:
+				text = Locale.AnyIssues;
+				icon = new DynamicIcon("I_Warning");
+				color = FormDesign.Design.RedColor;
+				return;
+
 			case DownloadStatusFilter.OK:
 				text = Locale.UpToDate;
 				icon = new DynamicIcon("I_Ok");

@@ -13,7 +13,6 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -137,6 +136,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	{
 		var rects = _itemRects.TryGet(item);
 
+		if (rects is null)
+		{
+			return false;
+		}
+
 		if (item.Item.Package.Mod is not null)
 		{
 			if (rects.IncludedRect.Contains(location))
@@ -184,7 +188,6 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.DateRect.Contains(location))
 		{
-			var date = item.Item.ServerTime.If(DateTime.MinValue, item.Item.LocalTime).ToLocalTime();
 			setTip(Locale.FilterSinceThisDate, rects.DateRect);
 		}
 
@@ -273,8 +276,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Item.Package));
 
-			if(CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
-			ScrollTo(item.Item);
+			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
+			{
+				ScrollTo(item.Item);
+			}
+
 			return;
 		}
 
@@ -451,10 +457,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	protected override void OnPaintItem(ItemPaintEventArgs<T> e)
 	{
 		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
-		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.ClipRectangle, e.Item, large);
+		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.Graphics, e.ClipRectangle, e.Item, large);
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Vertical, 0, Padding.Vertical);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
-		var labelRect = new Rectangle(rects.TextRect.X, e.ClipRectangle.Y, 0, e.ClipRectangle.Height);
+		var labelRect = new Rectangle(rects.TextRect.X, rects.CenterRect.Bottom, 0, e.ClipRectangle.Bottom - rects.CenterRect.Bottom);
 
 		if (isPressed && !rects.CenterRect.Contains(CursorLocation) && !rects.IconRect.Contains(CursorLocation))
 		{
@@ -466,33 +472,23 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		var partialIncluded = e.Item is Package package && package.IsPartiallyIncluded();
 		var isIncluded = partialIncluded || e.Item.IsIncluded;
 
-		PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded);
+		PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large);
 
 		DrawThumbnailAndTitle(e, rects, large);
 
 		var isVersion = e.Item.Package.Mod is not null && !e.Item.Package.Mod.BuiltIn;
 		var versionText = isVersion ? "v" + e.Item.Package.Mod!.Version.GetString() : e.Item.Package.Mod?.BuiltIn ?? false ? Locale.Vanilla : e.Item.FileSize.SizeString();
-		rects.VersionRect = DrawLabel(e, versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.BottomLeft, isVersion);
+		rects.VersionRect = DrawLabel(e, versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, isVersion);
 		labelRect.X += Padding.Left + rects.VersionRect.Width;
 
 		var date = (e.Item.ServerTime == DateTime.MinValue ? e.Item.LocalTime : e.Item.ServerTime).ToLocalTime();
 		var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-		rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true);
+		rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
 		labelRect.X += Padding.Left + rects.DateRect.Width;
 
-		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
-		if (!string.IsNullOrEmpty(text))
+		if (!large || e.Item.Workshop)
 		{
-			using (icon)
-			{
-				rects.DownloadStatusRect = DrawLabel(e, text, icon, color.MergeColor(FormDesign.Design.BackColor, 65), labelRect, ContentAlignment.BottomLeft, true);
-			}
-
-			labelRect.X += Padding.Left + rects.DownloadStatusRect.Width;
-		}
-		else
-		{
-			rects.DownloadStatusRect = Rectangle.Empty;
+			labelRect = DrawStatusDescriptor(e, large, rects, labelRect, ContentAlignment.TopLeft);
 		}
 
 		DrawAuthorAndSteamId(e, large, rects);
@@ -509,7 +505,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				_ => FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.AccentColor, 20)
 			};
 
-			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Severity}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, ContentAlignment.BottomLeft, true);
+			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Severity}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
 
 			labelRect.X += Padding.Left + rects.CompatibilityRect.Width;
 		}
@@ -519,6 +515,16 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		DrawButtons(e, rects, isPressed);
+
+		if (large)
+		{
+			labelRect.X = rects.TextRect.X;
+		}
+
+		if (large && !e.Item.Workshop)
+		{
+			labelRect = DrawStatusDescriptor(e, large, rects, labelRect, ContentAlignment.BottomLeft);
+		}
 
 		foreach (var item in e.Item.Tags.Distinct(x => x.Value))
 		{
@@ -541,6 +547,26 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
+	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T> e, bool large, ItemListControl<T>.Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
+	{
+		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
+		if (!string.IsNullOrEmpty(text))
+		{
+			using (icon)
+			{
+				rects.DownloadStatusRect = DrawLabel(e, text, icon, color.MergeColor(FormDesign.Design.BackColor, 65), labelRect, contentAlignment, true);
+			}
+
+			labelRect.X += Padding.Left + rects.DownloadStatusRect.Width;
+		}
+		else
+		{
+			rects.DownloadStatusRect = Rectangle.Empty;
+		}
+
+		return labelRect;
+	}
+
 	private void DrawButtons(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool isPressed)
 	{
 		SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, IconManager.GetIcon("I_Folder", (rects.FolderRect.Width - Padding.Horizontal) * 3 / 4), null, rects.FolderRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
@@ -555,7 +581,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	{
 		if (!e.Item.Workshop)
 		{
-			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(e.Item.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomRight, true);
+			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(e.Item.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, true);
 			rects.AuthorRect = Rectangle.Empty;
 			return;
 		}
@@ -563,17 +589,17 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		if (large && e.Item.Author is not null)
 		{
 			using var font = UI.Font(9.75F);
-			var size = e.Graphics.Measure("by " + e.Item.Author.Name, font).ToSize();
+			var size = e.Graphics.Measure(e.Item.Author.Name, font).ToSize();
 			var authorRect = rects.AuthorRect.Align(new Size(size.Width + Padding.Horizontal + Padding.Right + size.Height, size.Height + (Padding.Vertical * 2)), ContentAlignment.MiddleRight);
 			authorRect.X -= Padding.Left;
 			authorRect.Y += Padding.Top;
 			var avatarRect = authorRect.Pad(Padding).Align(new(size.Height, size.Height), ContentAlignment.MiddleLeft);
 
-			using var brush = new SolidBrush(authorRect.Contains(CursorLocation) ? FormDesign.Design.ButtonColor : FormDesign.Design.BackColor);
-			e.Graphics.FillRoundedRectangle(brush, authorRect, (int)(6 * UI.FontScale));
+			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 4, -4)).MergeColor(FormDesign.Design.ActiveColor, authorRect.Contains(CursorLocation) ? 65 : 100));
+			e.Graphics.FillRoundedRectangle(brush, authorRect, (int)(4 * UI.FontScale));
 
 			using var brush1 = new SolidBrush(FormDesign.Design.ForeColor);
-			e.Graphics.DrawString("by " + e.Item.Author.Name, font, brush1, authorRect.Pad(avatarRect.Width + Padding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(e.Item.Author.Name, font, brush1, authorRect.Pad(avatarRect.Width + Padding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 
 			var authorImg = e.Item.AuthorIconImage;
 
@@ -595,7 +621,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			rects.AuthorRect = DrawLabel(e, e.Item.Author?.Name, IconManager.GetSmallIcon("I_Developer"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.TopLeft, true);
 		}
 
-		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomLeft, true);
+		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomLeft, true);
 	}
 
 	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool large)
@@ -651,10 +677,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private void PaintIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded)
+	private void PaintIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large)
 	{
+		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && e.Item.Package.Mod is Mod mod)
 		{
+			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
 			if (isIncluded)
 			{
 				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
@@ -671,8 +699,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var includedIcon = IconManager.GetIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled", (rects.IncludedRect.Width - Padding.Horizontal) * 3 / 4).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = IconManager.GetIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF", (rects.EnabledRect.Width - Padding.Horizontal) * 3 / 4).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			using var includedIcon = (large ? incl.Large : incl.Get((rects.IncludedRect.Height - Padding.Vertical) * 3 / 4)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = (large ? enabl.Large : enabl.Get((rects.IncludedRect.Height - Padding.Vertical) * 3 / 4)).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
 			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
 			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
 		}
@@ -689,7 +717,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var icon = IconManager.GetIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled", (inclEnableRect.Width - Padding.Horizontal) * 3 / 4).Color(inclEnableRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var icon = (large ? incl.Large : incl.Get((rects.IncludedRect.Height - Padding.Vertical) * 3 / 4)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
 			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
 		}
 	}
@@ -783,25 +811,26 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		color = Color.White;
 	}
 
-	private Rectangles GetActionRectangles(Rectangle rectangle, T item, bool doubleSize)
+	private Rectangles GetActionRectangles(Graphics g, Rectangle rectangle, T item, bool doubleSize)
 	{
 		var rects = new Rectangles() { Item = item };
+		var includeItemHeight = doubleSize ? (ItemHeight / 2) : ItemHeight;
 
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package.Mod is not null)
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(ItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
 			rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
 		}
 		else if (item is Package)
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (int)(26 * UI.FontScale * 2) : ItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (includeItemHeight * 2 * 9 / 10) : includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
 		}
 		else
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(ItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
 		}
 
-		var buttonRectangle = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
+		var buttonRectangle = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight / (doubleSize ? 2 : 1), ItemHeight / (doubleSize ? 2 : 1)), ContentAlignment.TopRight);
 		var iconSize = rectangle.Height - Padding.Vertical;
 
 		rects.FolderRect = buttonRectangle;
@@ -814,18 +843,19 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			rects.SteamRect = buttonRectangle;
 		}
 
-		if (doubleSize && CentralManager.SessionSettings.UserSettings.LargeItemOnHover)
+		if (doubleSize)
 		{
-			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y + Padding.Top, (int)(100 * UI.FontScale), rectangle.Height / 4);
+			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
 			rects.AuthorRect = new Rectangle(rectangle.X, rectangle.Y + (rectangle.Height / 2), rectangle.Width, rectangle.Height / 2);
+			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, (int)g.Measure(" ", UI.Font(11.25F, FontStyle.Bold)).Height + Padding.Bottom);
 		}
 		else
 		{
 			rects.AuthorRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y + (rectangle.Height / 2), (int)(100 * UI.FontScale), rectangle.Height / 2);
 			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
+			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 2);
 		}
 
-		rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 2);
 		//}
 		//else
 		//{

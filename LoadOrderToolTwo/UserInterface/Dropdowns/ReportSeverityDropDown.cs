@@ -34,17 +34,17 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<ReportSeverityFil
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, ReportSeverityFilter item)
 	{
-		var text = item == ReportSeverityFilter.Any ? Locale.AnyReportStatus : LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = item switch { ReportSeverityFilter.Any => Locale.AnyReportStatus, ReportSeverityFilter.AnyIssue => Locale.AnyIssues, _ => LocaleHelper.GetGlobalText($"CR_{item}") };
 		var color = item switch
 		{
 			ReportSeverityFilter.MinorIssues => FormDesign.Design.YellowColor,
 			ReportSeverityFilter.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
-			ReportSeverityFilter.Unsubscribe => FormDesign.Design.RedColor,
+			ReportSeverityFilter.Unsubscribe or ReportSeverityFilter.AnyIssue => FormDesign.Design.RedColor,
 			ReportSeverityFilter.Remarks or ReportSeverityFilter.Any => foreColor,
 			_ => FormDesign.Design.GreenColor
 		};
 
-		using var icon = (item == ReportSeverityFilter.Any ? new DynamicIcon("I_Slash") : ((ReportSeverity)((int)item - 1)).GetSeverityIcon(true)).Get(rectangle.Height - 2).Color(color);
+		using var icon = (item switch { ReportSeverityFilter.Any => new DynamicIcon("I_Slash"), ReportSeverityFilter.AnyIssue => new DynamicIcon("I_Warning"), _ => ((ReportSeverity)((int)item - 2)).GetSeverityIcon(true) }).Get(rectangle.Height - 2).Color(color);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

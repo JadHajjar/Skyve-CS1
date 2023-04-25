@@ -192,7 +192,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		var items = new SlickStripItem[]
 		{
 			  new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", action: () => { item.IsFavorite = !item.IsFavorite; ProfileManager.Save(item); })
-			, new (Locale.ChangeProfileColor, "I_Theme", action: () => this.TryBeginInvoke(() => ChangeColor(item)))
+			, new (Locale.ChangeProfileColor, "I_Paint", action: () => this.TryBeginInvoke(() => ChangeColor(item)))
 			, new (Locale.CreateShortcutProfile, "I_Link", LocationManager.Platform is Platform.Windows, action: () => ProfileManager.CreateShortcut(item))
 			, new (Locale.OpenProfileFolder, "I_Folder", action: () => PlatformUtil.OpenFolder(ProfileManager.GetFileName(item)))
 			, new (string.Empty)
@@ -247,7 +247,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var icon = IconManager.GetLargeIcon(isIncluded ? "I_StarFilled" : "I_Star");
+		using var icon = large ? IconManager.GetLargeIcon(isIncluded ? "I_StarFilled" : "I_Star") : IconManager.GetIcon(isIncluded ? "I_StarFilled" : "I_Star");
 
 		e.Graphics.DrawImage(icon.Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
@@ -265,11 +265,11 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IconRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IconRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var profileIcon = e.Item.GetIcon().Default;
+		using var profileIcon = large ? e.Item.GetIcon().Large : e.Item.GetIcon().Default;
 
 		e.Graphics.DrawImage(profileIcon.Color(rects.IconRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : iconColor), rects.IconRect.CenterR(profileIcon.Size));
 
-		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), large ? rects.TextRect.Pad(Padding) : rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 		if (e.Item == ProfileManager.CurrentProfile)
 		{
@@ -290,6 +290,12 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		rects.LoadRect = new Rectangle(rects.FolderRect.X - Padding.Left - loadSize.Width, rects.FolderRect.Y, loadSize.Width, rects.FolderRect.Height);
 
 		SlickButton.DrawButton(e, rects.LoadRect, Locale.LoadProfile, Font, IconManager.GetIcon("I_Import"), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+
+		if (large)
+		{
+			SlickButton.DrawButton(e, rects.MergeRect, string.Empty, Font, IconManager.GetIcon("I_Merge"), null, rects.MergeRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+			SlickButton.DrawButton(e, rects.ExcludeRect, string.Empty, Font, IconManager.GetIcon("I_Exclude"), null, rects.ExcludeRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		}
 	}
 
 	private Rectangle DrawLabel(ItemPaintEventArgs<Profile> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
@@ -330,8 +336,14 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		var rects = new Rectangles
 		{
 			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
-			FolderRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
+			FolderRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? new Size(ItemHeight / 2, ItemHeight / 2) : new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
+
+		if (CentralManager.SessionSettings.UserSettings.LargeItemOnHover)
+		{
+			rects.ExcludeRect = rects.MergeRect = rects.FolderRect.Pad(0, rects.FolderRect.Height, 0, -rects.FolderRect.Height);
+			rects.MergeRect.X -= rects.MergeRect.Width + Padding.Right;
+		}
 
 		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(rects.IncludedRect.Size, ContentAlignment.MiddleLeft);
 
@@ -347,6 +359,8 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		internal Rectangle FolderRect;
 		internal Rectangle TextRect;
 		internal Rectangle LoadRect;
+		internal Rectangle ExcludeRect;
+		internal Rectangle MergeRect;
 
 		internal bool Contain(Point location)
 		{
@@ -354,6 +368,8 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 				IncludedRect.Contains(location) ||
 				IconRect.Contains(location) ||
 				LoadRect.Contains(location) ||
+				MergeRect.Contains(location) ||
+				ExcludeRect.Contains(location) ||
 				FolderRect.Contains(location);
 		}
 	}

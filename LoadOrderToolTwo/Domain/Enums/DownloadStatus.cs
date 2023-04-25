@@ -14,6 +14,7 @@ public enum DownloadStatus
 public enum DownloadStatusFilter
 {
 	Any,
+	AnyIssue,
 	None,
 	OK,
 	Unknown,

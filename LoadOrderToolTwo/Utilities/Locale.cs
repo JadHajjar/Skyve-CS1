@@ -287,4 +287,5 @@ internal class Locale : LocaleHelper
 	public static string AnyAuthor => _instance.GetText(nameof(AnyAuthor));
 	public static string ItemsCount => _instance.GetText(nameof(ItemsCount));
 	public static string AuthorsSelected => _instance.GetText(nameof(AuthorsSelected));
+	public static string AnyIssues => _instance.GetText(nameof(AnyIssues));
 }

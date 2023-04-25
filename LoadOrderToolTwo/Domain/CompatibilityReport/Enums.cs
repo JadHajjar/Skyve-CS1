@@ -144,6 +144,7 @@ public static class Enums
 	public enum ReportSeverityFilter
 	{
 		Any,
+		AnyIssue,
 		NothingToReport,
 		Remarks,
 		MinorIssues,
