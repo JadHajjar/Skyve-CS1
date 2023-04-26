@@ -290,10 +290,10 @@ public static class CitiesManager
 
 	private static void KillProcessAndChildren(Process proc)
 	{
-		foreach (var childProc in GetChildProcesses(proc))
-		{
-			KillProcessAndChildren(childProc);
-		}
+		//foreach (var childProc in GetChildProcesses(proc))
+		//{
+		//	KillProcessAndChildren(childProc);
+		//}
 
 		proc.Kill();
 	}

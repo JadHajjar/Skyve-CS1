@@ -297,4 +297,11 @@ internal class Locale : LocaleHelper
 	public static string UnsubscribeAll => _instance.GetText(nameof(UnsubscribeAll));
 	public static string CopyAllIds => _instance.GetText(nameof(CopyAllIds));
 	public static string DeleteAll => _instance.GetText(nameof(DeleteAll));
+	public static string ControlClickTo => _instance.GetText(nameof(ControlClickTo));
+	public static string FilterByThisAuthor => _instance.GetText(nameof(FilterByThisAuthor));
+	public static string AddToSearch => _instance.GetText(nameof(AddToSearch));
+	public static string CopyToClipboard => _instance.GetText(nameof(CopyToClipboard));
+	public static string ViewPackageCR => _instance.GetText(nameof(ViewPackageCR));
+	public static string FilterByThisEnabledStatus => _instance.GetText(nameof(FilterByThisEnabledStatus));
+	public static string FilterByThisIncludedStatus => _instance.GetText(nameof(FilterByThisIncludedStatus));
 }

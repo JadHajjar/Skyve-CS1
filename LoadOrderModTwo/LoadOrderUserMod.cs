@@ -314,29 +314,37 @@ public class LoadOrderUserMod : IUserMod
 	{
 		var currentToolFolder = Path.Combine(PluginManager.instance.FindPluginInfo(Assembly.GetExecutingAssembly())?.modPath, "Tool");
 		var toolPath = Path.Combine(currentToolFolder, "LoadOrderToolTwo.exe");
-		var openTools = false;
 
-		if (Application.platform is RuntimePlatform.OSXEditor or RuntimePlatform.OSXPlayer or RuntimePlatform.LinuxPlayer)
+		Debug.Log("Filling tool configuration");
+		PrepareTool();
+
+		if (Application.platform is RuntimePlatform.OSXEditor or RuntimePlatform.OSXPlayer)
 		{
-			System.Diagnostics.Process.Start(Directory.GetParent(toolPath).FullName);
+			System.Diagnostics.Process.Start("/bin/zsh", $"-c \" open -R '{toolPath}' \"");
+			return;
+		}
+
+		if (Application.platform is RuntimePlatform.LinuxPlayer)
+		{
+			System.Diagnostics.Process.Start("/usr/bin/bash", $"-c \" xdg-open '{Directory.GetParent(toolPath).FullName}' \"");
 			return;
 		}
 
 		try
 		{
-			openTools = System.Diagnostics.Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 0;
-		}
-		catch { }
+			if (File.Exists(toolPath))
+			{
+				var startInfo = new System.Diagnostics.ProcessStartInfo
+				{
+					WorkingDirectory = Directory.GetParent(toolPath).FullName,
+					FileName = toolPath,
+					Arguments = "-stub",
+					WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal,
+					UseShellExecute = true,
+					CreateNoWindow = false,
+				};
 
-		try
-		{
-			if (openTools)
-			{
-				File.WriteAllBytes(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"), new byte[0]);
-			}
-			else if (File.Exists(toolPath))
-			{
-				System.Diagnostics.Process.Start(toolPath, "-stub");
+				System.Diagnostics.Process.Start(startInfo);
 			}
 			else
 			{

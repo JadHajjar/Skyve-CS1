@@ -158,7 +158,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void LC_Items_CompatibilityReportSelected(ReportSeverity obj)
 	{
-		DD_ReportSeverity.SelectedItem = (ReportSeverityFilter)(obj + 1);
+		if (DD_ReportSeverity.SelectedItem == (ReportSeverityFilter)(obj + 2))
+		{
+			DD_ReportSeverity.SelectedItem = ReportSeverityFilter.Any;
+		}
+		else
+		{
+			DD_ReportSeverity.SelectedItem = (ReportSeverityFilter)(obj + 2);
+		}
 
 		if (P_FiltersContainer.Height == 0)
 		{
@@ -168,7 +175,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void LC_Items_DownloadStatusSelected(DownloadStatus obj)
 	{
-		DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 1);
+		if (DD_PackageStatus.SelectedItem == (DownloadStatusFilter)(obj + 2))
+		{
+			DD_PackageStatus.SelectedItem = DownloadStatusFilter.Any;
+		}
+		else
+		{
+			DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 2);
+		}
 
 		if (P_FiltersContainer.Height == 0)
 		{

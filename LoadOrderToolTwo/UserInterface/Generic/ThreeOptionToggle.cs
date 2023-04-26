@@ -47,6 +47,8 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		{
 			Font = UI.Font(8.25F);
 			Padding = UI.Scale(new Padding(5), UI.FontScale);
+		if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
+			Height = (int)(24 * UI.UIScale);
 		}
 	}
 

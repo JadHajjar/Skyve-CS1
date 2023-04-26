@@ -159,12 +159,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				setTip(Locale.ExcludeInclude, rects.IncludedRect);
+				setTipFilter(Locale.ExcludeInclude, Locale.FilterByThisIncludedStatus, rects.IncludedRect);
 			}
 
 			if (rects.EnabledRect.Contains(location))
 			{
-				setTip(Locale.EnableDisable, rects.EnabledRect);
+				setTipFilter(Locale.EnableDisable, Locale.FilterByThisEnabledStatus, rects.EnabledRect);
 			}
 
 			if (rects.VersionRect.Contains(location))
@@ -176,7 +176,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				setTip(Locale.ExcludeInclude, rects.IncludedRect);
+				setTipFilter(Locale.ExcludeInclude, Locale.FilterByThisIncludedStatus, rects.IncludedRect);
 			}
 		}
 
@@ -192,24 +192,25 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.CompatibilityRect.Contains(location))
 		{
-			setTip(Locale.FilterByThisReportStatus, rects.CompatibilityRect);
+			setTipFilter(Locale.ViewPackageCR, Locale.FilterByThisReportStatus, rects.CompatibilityRect);
 		}
 
 		if (rects.DownloadStatusRect.Contains(location))
 		{
-			setTip(Locale.FilterByThisPackageStatus, rects.DownloadStatusRect);
+			setTipFilter(null, Locale.FilterByThisPackageStatus, rects.DownloadStatusRect);
 		}
 
 		if (rects.DateRect.Contains(location))
 		{
-			setTip(Locale.FilterSinceThisDate, rects.DateRect);
+			var date = item.Item.ServerTime.If(DateTime.MinValue, item.Item.LocalTime).ToLocalTime();
+			setTipFilter(string.Format(Locale.CopyToClipboard, date.ToString("g")), Locale.FilterSinceThisDate, rects.DateRect);
 		}
 
 		foreach (var tag in rects.TagRects)
 		{
 			if (tag.Value.Contains(location))
 			{
-				setTip(string.Format(Locale.FilterByThisTag, tag.Key), tag.Value);
+				setTipFilter(string.Format(Locale.CopyToClipboard, tag.Key), string.Format(Locale.FilterByThisTag, tag.Key), tag.Value);
 			}
 		}
 
@@ -222,12 +223,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 			if (rects.SteamIdRect.Contains(location))
 			{
-				setTip(Locale.CopySteamId, rects.SteamIdRect);
+				setTipFilter(string.Format(Locale.CopyToClipboard, item.Item.SteamId), string.Format(Locale.AddToSearch, item.Item.SteamId), rects.SteamIdRect);
 			}
 
 			if (rects.AuthorRect.Contains(location))
 			{
-				setTip(Locale.OpenAuthorPage + "\r\n" + Locale.ClickAuthorFilter, rects.AuthorRect);
+				setTipFilter(Locale.OpenAuthorPage, Locale.FilterByThisAuthor, rects.AuthorRect);
 			}
 		}
 
@@ -237,6 +238,26 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
+
+		void setTipFilter(string? text, string? alt, Rectangle rectangle)
+		{
+			var tip = string.Empty;
+
+			if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				ExtensionClass.Swap(ref text, ref alt);
+
+			if (text is not null)
+			{
+				tip += text + "\r\n\r\n";
+			}
+
+			if (alt is not null)
+			{
+				tip += string.Format(Locale.ControlClickTo, alt.ToLower());
+			}
+
+			SlickTip.SetTo(this, tip.Trim(), offset: new Point(rectangle.X, item.Bounds.Y));
+		}
 
 		return rects.Contain(location);
 	}
