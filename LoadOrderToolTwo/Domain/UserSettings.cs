@@ -21,4 +21,5 @@ internal class UserSettings
 	public bool OpenLinksInBrowser { get; set; }
 	public bool ResetScrollOnPackageClick { get; set; }
 	public bool PackageSortingDesc { get; set; }
+	public bool FlipItemCopyFilterAction { get; set; }
 }

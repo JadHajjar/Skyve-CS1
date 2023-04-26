@@ -183,34 +183,15 @@ public partial class MainForm : BasePanelForm
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 	{
-		switch (keyData)
+		if (keyData == Keys.F5)
 		{
-			case Keys.F1:
-				SetPanel<PC_MainPage>(PI_Dashboard);
+			if (CitiesManager.CitiesAvailable())
+			{
+				LaunchStopCities();
+
 				return true;
-
-			case Keys.F2:
-				SetPanel<PC_Profiles>(PI_Profiles);
-				return true;
-
-			case Keys.F3:
-				SetPanel<PC_Mods>(PI_Mods);
-				return true;
-
-			case Keys.F4:
-				SetPanel<PC_Assets>(PI_Assets);
-				return true;
-
-			case Keys.F5:
-				if (CitiesManager.CitiesAvailable())
-				{
-					LaunchStopCities();
-
-					return true;
-				}
-				break;
+			}
 		}
-
 
 		return base.ProcessCmdKey(ref msg, keyData);
 	}

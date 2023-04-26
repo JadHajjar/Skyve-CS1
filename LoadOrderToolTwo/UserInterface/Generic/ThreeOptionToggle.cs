@@ -28,9 +28,9 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 	[Category("Appearance"), DefaultValue("")]
 	public string Option2 { get; set; } = string.Empty;
 	[Category("Appearance"), DefaultValue(ColorStyle.Red)]
-	public ColorStyle OptionStyle1 { get; set; } = ColorStyle.Red;
+	public ColorStyle OptionStyle2 { get; set; } = ColorStyle.Red;
 	[Category("Appearance"), DefaultValue(ColorStyle.Green)]
-	public ColorStyle OptionStyle2 { get; set; } = ColorStyle.Green;
+	public ColorStyle OptionStyle1 { get; set; } = ColorStyle.Green;
 	[Category("Appearance"), DefaultValue(null)]
 	public string? Image1 { get; set; }
 	[Category("Appearance"), DefaultValue(null)]

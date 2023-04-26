@@ -296,4 +296,5 @@ internal class Locale : LocaleHelper
 	public static string DisableAll => _instance.GetText(nameof(DisableAll));
 	public static string UnsubscribeAll => _instance.GetText(nameof(UnsubscribeAll));
 	public static string CopyAllIds => _instance.GetText(nameof(CopyAllIds));
+	public static string DeleteAll => _instance.GetText(nameof(DeleteAll));
 }

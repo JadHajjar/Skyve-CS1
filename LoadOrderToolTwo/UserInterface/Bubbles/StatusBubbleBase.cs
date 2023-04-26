@@ -43,7 +43,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 				back = back.MergeColor(TintColor.Value);
 			}
 
-			fore = back.GetTextColor().MergeColor(fore);
+			fore = Color.FromArgb(220, back.GetTextColor());
 		}
 
 		if (!HoverState.HasFlag(HoverState.Pressed) && FormDesign.Design.Type == FormDesignType.Light)
@@ -105,7 +105,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 				back = back.MergeColor(TintColor.Value);
 			}
 
-			fore = back.GetTextColor().MergeColor(fore);
+			fore = Color.FromArgb(220, back.GetTextColor());
 		}
 
 		var valueSize = e.Graphics.Measure(value, UI.Font(8.25F, FontStyle.Bold), Width - Padding.Horizontal).ToSize();
@@ -138,7 +138,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 				back = back.MergeColor(TintColor.Value);
 			}
 
-			fore = back.GetTextColor().MergeColor(fore);
+			fore = Color.FromArgb(220, back.GetTextColor());
 		}
 
 		var valueSize = e.Graphics.Measure(text, UI.Font(8.25F), Width - Padding.Horizontal).ToSize();

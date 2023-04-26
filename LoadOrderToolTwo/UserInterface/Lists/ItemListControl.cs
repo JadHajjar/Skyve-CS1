@@ -31,6 +31,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	public event Action<DateTime>? DateSelected;
 	public event Action<TagItem>? TagSelected;
 	public event Action<SteamUser>? AuthorSelected;
+	public event Action<bool>? FilterByIncluded;
+	public event Action<bool>? FilterByEnabled;
+	public event Action<string>? AddToSearch;
 	public event EventHandler? FilterRequested;
 
 	public ItemListControl()
@@ -254,18 +257,35 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		var rects = _itemRects.TryGet(item);
+		var filter = ModifierKeys.HasFlag(Keys.Control) != CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction;
 
 		if (item.Item.Package.Mod is Mod mod)
 		{
 			if (rects.IncludedRect.Contains(e.Location))
 			{
-				mod.IsIncluded = !mod.IsIncluded;
+				if (filter)
+				{
+					FilterByIncluded?.Invoke(mod.IsIncluded);
+				}
+				else
+				{
+					mod.IsIncluded = !mod.IsIncluded;
+				}
+
 				return;
 			}
 
 			if (rects.EnabledRect.Contains(e.Location))
 			{
-				mod.IsEnabled = !mod.IsEnabled;
+				if (filter)
+				{
+					FilterByEnabled?.Invoke(mod.IsEnabled);
+				}
+				else
+				{
+					mod.IsEnabled = !mod.IsEnabled;
+				}
+
 				return;
 			}
 
@@ -278,7 +298,15 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(e.Location))
 			{
-				item.Item.IsIncluded = !item.Item.IsIncluded;
+				if (filter)
+				{
+					FilterByIncluded?.Invoke(item.Item.IsIncluded);
+				}
+				else
+				{
+					item.Item.IsIncluded = !item.Item.IsIncluded;
+				}
+
 				return;
 			}
 		}
@@ -303,20 +331,46 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.CompatibilityRect.Contains(e.Location))
 		{
-			CompatibilityReportSelected?.Invoke(item.Item.Package.CompatibilityReport?.Severity ?? ReportSeverity.NothingToReport);
+			if (filter)
+			{
+				CompatibilityReportSelected?.Invoke(item.Item.Package.CompatibilityReport?.Severity ?? ReportSeverity.NothingToReport);
+			}
+			else
+			{
+				var pc = new PC_PackagePage(item.Item.Package);
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+
+				pc.T_CR.Selected = true;
+
+				if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
+				{
+					ScrollTo(item.Item);
+				}
+			}
 			return;
 		}
 
 		if (rects.DownloadStatusRect.Contains(e.Location))
 		{
-			DownloadStatusSelected?.Invoke(item.Item.Status);
+			if (filter)
+			{
+				DownloadStatusSelected?.Invoke(item.Item.Status);
+			}
+
 			return;
 		}
 
 		if (rects.DateRect.Contains(e.Location))
 		{
 			var date = item.Item.ServerTime.If(DateTime.MinValue, item.Item.LocalTime).ToLocalTime();
-			DateSelected?.Invoke(date);
+			if (filter)
+			{
+				DateSelected?.Invoke(date);
+			}
+			else
+			{
+				Clipboard.SetText(date.ToString("g"));
+			}
 			return;
 		}
 
@@ -324,7 +378,15 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (tag.Value.Contains(e.Location))
 			{
-				TagSelected?.Invoke(tag.Key);
+				if (filter)
+				{
+					TagSelected?.Invoke(tag.Key);
+				}
+				else
+				{
+					Clipboard.SetText(tag.Key.Value);
+				}
+
 				return;
 			}
 		}
@@ -339,13 +401,21 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 			if (rects.SteamIdRect.Contains(e.Location))
 			{
-				Clipboard.SetText(item.Item.SteamId.ToString());
+				if (filter)
+				{
+					AddToSearch?.Invoke($",+{item.Item.SteamId}");
+				}
+				else
+				{
+					Clipboard.SetText(item.Item.SteamId.ToString());
+				}
+
 				return;
 			}
 
 			if (rects.AuthorRect.Contains(e.Location) && item.Item.Author is not null)
 			{
-				if (ModifierKeys.HasFlag(Keys.Control))
+				if (filter)
 				{
 					AuthorSelected?.Invoke(item.Item.Author);
 				}
@@ -360,7 +430,15 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.SteamIdRect.Contains(e.Location))
 		{
-			Clipboard.SetText(Path.GetFileName(item.Item.Folder));
+			if (filter)
+			{
+				AddToSearch?.Invoke(Path.GetFileName(item.Item.Folder));
+			}
+			else
+			{
+				Clipboard.SetText(Path.GetFileName(item.Item.Folder));
+			}
+
 			return;
 		}
 	}

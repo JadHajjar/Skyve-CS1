@@ -90,7 +90,7 @@ public partial class PC_Profiles : PanelContent
 	{
 		base.UIChanged();
 
-		B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = I_Info.Size = I_TempProfile.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = I_Info.Size = I_TempProfile.Size = I_Favorite .Size= UI.Scale(new Size(32, 32), UI.FontScale);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
 		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_ProfileUsage.Font = UI.Font(7.5F, FontStyle.Bold);

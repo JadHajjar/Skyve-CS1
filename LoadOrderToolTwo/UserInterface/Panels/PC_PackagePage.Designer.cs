@@ -279,7 +279,7 @@ partial class PC_PackagePage
 	private SlickControls.SlickButton B_SteamPage;
 	private SlickControls.SlickTabControl slickTabControl1;
 	private SlickControls.SlickTabControl.Tab T_Info;
-	private SlickControls.SlickTabControl.Tab T_CR;
+	internal SlickControls.SlickTabControl.Tab T_CR;
 	private SlickControls.SlickTabControl.Tab T_Profiles;
 	private System.Windows.Forms.TableLayoutPanel TLP_Profiles;
 }

@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using static CompatibilityReport.CatalogData.Enums;
@@ -52,6 +52,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		LC_Items.DateSelected += LC_Items_DateSelected;
 		LC_Items.TagSelected += LC_Items_TagSelected;
 		LC_Items.AuthorSelected += LC_Items_AuthorSelected;
+		LC_Items.FilterByEnabled += LC_Items_FilterByEnabled;
+		LC_Items.FilterByIncluded += LC_Items_FilterByIncluded;
+		LC_Items.AddToSearch += LC_Items_AddToSearch;
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -89,6 +92,38 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			DD_Author.SetItems(items.Where(x => x.Author is not null));
 			DD_Tags.Items = items.SelectMany(x => x.Tags).Distinct(x => x.Value.ToLower()).ToArray();
 		}).Run();
+	}
+
+	private void LC_Items_AddToSearch(string obj)
+	{
+		if (TB_Search.Text.Length == 0)
+		{
+			TB_Search.Text = obj;
+		}
+		else
+		{
+			TB_Search.Text += $",+{obj}";
+		}
+	}
+
+	private void LC_Items_FilterByIncluded(bool obj)
+	{
+		OT_Included.SelectedValue = obj ? ThreeOptionToggle.Value.Option1 : ThreeOptionToggle.Value.Option2;
+
+		if (P_FiltersContainer.Height == 0)
+		{
+			B_Filters_Click(this, EventArgs.Empty);
+		}
+	}
+
+	private void LC_Items_FilterByEnabled(bool obj)
+	{
+		OT_Enabled.SelectedValue = obj ? ThreeOptionToggle.Value.Option1 : ThreeOptionToggle.Value.Option2;
+
+		if (P_FiltersContainer.Height == 0)
+		{
+			B_Filters_Click(this, EventArgs.Empty);
+		}
 	}
 
 	private void LC_Items_AuthorSelected(SteamUser obj)
@@ -289,7 +324,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			_delayedSearch.Run();
 
 			if (sender == I_Refresh)
+			{
 				LC_Items.SortingChanged();
+			}
 		}
 	}
 
@@ -528,7 +565,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
-		TB_Search.ImageName =(searchEmpty= string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
+		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
 
 		var searchText = TB_Search.Text.Trim();
 
@@ -583,6 +620,32 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_Actions.Loading = false;
 	}
 
+	private async void B_DeleteAll_Click()
+	{
+		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		I_Actions.Loading = true;
+		await Task.Run(() =>
+		{
+			var items = LC_Items.FilteredItems.ToList();
+			foreach (var item in items)
+			{
+				if (!item.Workshop && item is Asset asset)
+				{
+					ExtensionClass.DeleteFile(asset.FileName);
+				}
+				else
+				{
+					ContentUtil.DeleteAll(item.Folder);
+				}
+			}
+		});
+		I_Actions.Loading = false;
+	}
+
 	private void Icon_SizeChanged(object sender, EventArgs e)
 	{
 		(sender as Control)!.Width = (sender as Control)!.Height;
@@ -608,9 +671,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			, new (Locale.EnableAll, "I_Enabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => SetEnabled(LC_Items.FilteredItems, true))
 			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => SetEnabled(LC_Items.FilteredItems, false))
 			, new (string.Empty)
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: B_UnsubscribeAll_Click)
-			, new (string.Empty)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
+			, new (string.Empty)
+			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: B_UnsubscribeAll_Click)
+			, new (Locale.DeleteAll, "I_Disposable", action: B_DeleteAll_Click)
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
