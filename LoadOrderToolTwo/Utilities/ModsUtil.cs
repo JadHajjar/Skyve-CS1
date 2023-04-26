@@ -142,22 +142,29 @@ internal static class ModsUtil
 
 	internal static void SetLocallyIncluded(Mod mod, bool value)
 	{
-#if DEBUG
-		Log.Debug($"Applying Inclusion status ({value}) for mod: {mod} ({mod.Folder})");
-#endif
-		if ((value || ModLogicManager.IsRequired(mod)) && !ModLogicManager.IsForbidden(mod))
+		try
 		{
 #if DEBUG
-			Log.Debug($"Deleting the file ({LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
+			Log.Debug($"Applying Inclusion status ({value}) for mod: {mod} ({mod.Folder})");
 #endif
-			ExtensionClass.DeleteFile(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+			if ((value || ModLogicManager.IsRequired(mod)) && !ModLogicManager.IsForbidden(mod))
+			{
+#if DEBUG
+				Log.Debug($"Deleting the file ({LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
+#endif
+				ExtensionClass.DeleteFile(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+			}
+			else
+			{
+#if DEBUG
+				Log.Debug($"Creating the file ({LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
+#endif
+				File.WriteAllBytes(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
+			}
 		}
-		else
+		catch (Exception ex)
 		{
-#if DEBUG
-			Log.Debug($"Creating the file ({LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
-#endif
-			File.WriteAllBytes(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
+			Log.Exception(ex, $"Failed to set 'Included' status ({value}) for {mod}");
 		}
 	}
 
@@ -178,20 +185,27 @@ internal static class ModsUtil
 
 	internal static void SetLocallyEnabled(Mod mod, bool value, bool save)
 	{
-		if (ModLogicManager.IsRequired(mod))
+		try
 		{
-			value = true;
-		}
-		else if (ModLogicManager.IsForbidden(mod))
-		{
-			value = false;
-		}
+			if (ModLogicManager.IsRequired(mod))
+			{
+				value = true;
+			}
+			else if (ModLogicManager.IsForbidden(mod))
+			{
+				value = false;
+			}
 
-		ColossalOrderUtil.SetEnabled(mod, value);
+			ColossalOrderUtil.SetEnabled(mod, value);
 
-		if (save)
+			if (save)
+			{
+				ColossalOrderUtil.SaveSettings();
+			}
+		}
+		catch (Exception ex)
 		{
-			ColossalOrderUtil.SaveSettings();
+			Log.Exception(ex, $"Failed to set 'Enabled' status ({value}) for {mod}");
 		}
 	}
 

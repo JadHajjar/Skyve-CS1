@@ -159,12 +159,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				setTipFilter(Locale.ExcludeInclude, Locale.FilterByThisIncludedStatus, rects.IncludedRect);
+				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
 			}
 
 			if (rects.EnabledRect.Contains(location))
 			{
-				setTipFilter(Locale.EnableDisable, Locale.FilterByThisEnabledStatus, rects.EnabledRect);
+				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToLower())}", rects.EnabledRect);
 			}
 
 			if (rects.VersionRect.Contains(location))
@@ -176,7 +176,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				setTipFilter(Locale.ExcludeInclude, Locale.FilterByThisIncludedStatus, rects.IncludedRect);
+				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
 			}
 		}
 
@@ -284,7 +284,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(e.Location))
 			{
-				if (filter)
+				if (ModifierKeys.HasFlag(Keys.Control))
 				{
 					FilterByIncluded?.Invoke(mod.IsIncluded);
 				}
@@ -298,7 +298,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 			if (rects.EnabledRect.Contains(e.Location))
 			{
-				if (filter)
+				if (ModifierKeys.HasFlag(Keys.Control))
 				{
 					FilterByEnabled?.Invoke(mod.IsEnabled);
 				}
@@ -319,7 +319,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(e.Location))
 			{
-				if (filter)
+				if (ModifierKeys.HasFlag(Keys.Control))
 				{
 					FilterByIncluded?.Invoke(item.Item.IsIncluded);
 				}

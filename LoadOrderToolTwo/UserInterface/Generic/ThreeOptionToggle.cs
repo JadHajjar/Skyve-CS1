@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Utilities;
+
 using SlickControls;
 
 using System;
@@ -47,8 +49,10 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		{
 			Font = UI.Font(8.25F);
 			Padding = UI.Scale(new Padding(5), UI.FontScale);
-		if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
-			Height = (int)(24 * UI.UIScale);
+			if (!Anchor.HasFlag(AnchorStyles.Top | AnchorStyles.Bottom))
+			{
+				Height = (int)(24 * UI.UIScale);
+			}
 		}
 	}
 
@@ -81,6 +85,28 @@ public class ThreeOptionToggle : SlickControl, ISupportsReset
 		else
 		{
 			SelectedValue = Value.None;
+		}
+	}
+
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		var centerWidth = Math.Max(Width / 5, (int)(40 * UI.FontScale));
+		var option1Hovered = e.Location.X < (Width - centerWidth) / 2;
+		var option2Hovered = e.Location.X > (Width + centerWidth) / 2;
+
+		if (option1Hovered)
+		{
+			SlickTip.SetTo(this, Option1);
+		}
+		else if (option2Hovered)
+		{
+			SlickTip.SetTo(this, Option2, offset: new Point((Width + centerWidth) / 2, 0));
+		}
+		else
+		{
+			SlickTip.SetTo(this, Locale.AnyStatus, offset: new Point((Width - centerWidth) / 2, 0));
 		}
 	}
 

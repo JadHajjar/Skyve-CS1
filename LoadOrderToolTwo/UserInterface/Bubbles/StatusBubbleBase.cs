@@ -40,7 +40,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 			}
 			else
 			{
-				back = back.MergeColor(TintColor.Value);
+				back = back.MergeColor(TintColor.Value, 25);
 			}
 
 			fore = Color.FromArgb(220, back.GetTextColor());
@@ -102,7 +102,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 			}
 			else
 			{
-				back = back.MergeColor(TintColor.Value);
+				back = back.MergeColor(TintColor.Value, 25);
 			}
 
 			fore = Color.FromArgb(220, back.GetTextColor());
@@ -135,7 +135,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 			}
 			else
 			{
-				back = back.MergeColor(TintColor.Value);
+				back = back.MergeColor(TintColor.Value, 25);
 			}
 
 			fore = Color.FromArgb(220, back.GetTextColor());

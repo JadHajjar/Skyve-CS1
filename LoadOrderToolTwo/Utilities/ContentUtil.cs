@@ -439,6 +439,11 @@ internal class ContentUtil
 			packageList = packageList.Cast<Package>().SelectMany(getPackageContents).ToList();
 		}
 
+		if (packageList.Count == 0)
+		{
+			return;
+		}
+
 		BulkUpdating = true;
 
 		foreach (var package in packageList)

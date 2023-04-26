@@ -393,7 +393,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option1 == item.IsIncluded)
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsIncluded)
 			{
 				return true;
 			}
@@ -401,7 +401,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (item.Package.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Package.Mod.IsEnabled)
+			if (item.Package.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option2 == item.Package.Mod.IsEnabled)
 			{
 				return true;
 			}
