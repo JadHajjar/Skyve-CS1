@@ -40,7 +40,7 @@
         "Date": "2023-04-08",
         "ChangeGroups": [
             {
-                "Name": "Ajout de la section Aide & Logs",
+                "Name": "Ajout de la section Aide et Logs",
                 "Changes": [
                     "Accédez facilement à vos logs.",
                     "Affichez rapidement les erreurs dans votre session de jeu la plus récente/en cours.",
@@ -85,7 +85,7 @@
                     "Suppression de l'onglet d'abonnement des options de mod en jeu.",
                     "Correction que les DLC ne sont pas appliqués lors du chargement d'un profil.",
                     "Correction de l'option de langue vide pour certaines personnes.",
-                    "Retélécharger à partir de Steam ne forcera plus la mise au point à l'outil.",
+                    "Re-télécharger à partir de Steam ne forcera plus la mise au point à l'outil.",
                     "Autres modifications de l'interface utilisateur."
                 ]
             }
@@ -116,7 +116,7 @@
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Présentation, refonte du profil",
+        "Tagline": "Présentation : la refonte du profil",
         "ChangeGroups": [
             {
                 "Name": "Changements de profil",
@@ -136,12 +136,12 @@
                 "Name": "Améliorations",
                 "Changes": [
                     "Les liens Steam s'ouvrent maintenant dans la fenêtre de Steam. Cela peut être désactivé dans les Options.",
-                    "Les ressources locales sont maintenant correctement regroupées en fonction des dossiers dans lesquels elles se trouvent.",
+                    "Les assets locaux sont maintenant correctement regroupés en fonction des dossiers dans lesquels ils se trouvent.",
                     "Votre panneau de compte Paradox sera toujours affiché à partir de maintenant.",
                     "Les boutons de fenêtre en haut à droite ont maintenant des icônes pour expliquer leurs actions.",
                     "Amélioration de la réactivité des pages de la liste de contenu.",
                     "La recherche dans les pages de la liste de contenu est maintenant beaucoup plus rapide.",
-                    "Le chargement des mods est maintenant mis en cache; ce qui donne lieu à des charges plus efficaces sur Windows et Linux, ainsi qu'à des chargements bien plus rapides sur macOS.",
+                    "Le chargement des mods est maintenant mis en cache ; ce qui donne lieu à des chargements plus efficaces sur Windows et Linux, ainsi qu'à des chargements bien plus rapides sur macOS.",
                     "Vous pouvez maintenant générer un fichier zip de vos logs pendant que le jeu est en cours d'exécution."
                 ]
             },
@@ -149,8 +149,8 @@
                 "Name": "Corrections",
                 "Changes": [
                     "Correction du blocage dans les pages de la liste de contenu.",
-                    "La sauvegarde automatique des profils corrigée ne fonctionnait pas correctement.",
-                    "Correction de ne pas pouvoir utiliser les cartes Atelier et les sauvegardes dans les paramètres du profil",
+                    "Correction de la sauvegarde automatique des profils qui ne fonctionnait pas.",
+                    "Correction de ne pas pouvoir utiliser les cartes ou les sauvegardes du Workshop dans les paramètres du profil",
                     "Correction du chargement des cartes personnalisées lors de la sélection dans les paramètres du profil.",
                     "Correction du chargement des profils sur macOS et Linux qui ne s'appliquaient pas toujours correctement.",
                     "Avoir un emplacement personnalisé pour les fichiers de rapport LSMR va maintenant démarrer correctement à partir de là lors de la sélection d'un fichier de rapport dans la page Utilitaires."
@@ -185,18 +185,18 @@
         "Tagline": "Mise à jour du nettoyage du printemps",
         "ChangeGroups": [
             {
-                "Name": "Filtrer et rechercher les modifications",
+                "Name": "Changements des actions filtrer et rechercher",
                 "Changes": [
                     "Ajout d'un nouveau filtre auteur dans la liste déroulante.",
                     "Ajout d'actions supplémentaires aux étiquettes dans les listes de contenu.",
                     "Ajout d'une nouvelle option \"N'importe quel problème\" pour les listes déroulantes \"Statut du paquet\" et \"Rapport de compatibilité\".",
-                    "Toutes les actions de filtre sont maintenant effectuées à l'aide de Ctrl+Click, a ajouté une option pour échanger cette fonctionnalité.",
+                    "Toutes les actions de filtre sont maintenant effectuées à l'aide de Ctrl+Clic, a ajouté une option pour échanger cette fonctionnalité.",
                     "Le nouveau filtrage en utilisant les raccourcis de la liste supprime maintenant l'élément de votre filtre.",
-                    "Séparer les termes par une virgule dans votre recherche divisera votre recherche pour correspondre à l'un des termes (OU)\r\n\t• Ajouter '+' au début de votre terme exigera que le terme soit mis en correspondance (AND)\r\n\t• Ajouter '-' au début de votre terme exclura les éléments qui correspondent à ce terme\r\n\r\nExemples de la nouvelle recherche :\r\n\t• voiture, camion (matchs 'voiture' OU 'camion')\r\n\t• bâtiment, appartement +européen (matchs 'european' ET ['bâtiment' OU 'appartement'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
+                    "Séparer les termes par une virgule dans votre recherche divisera votre recherche pour correspondre à l'un des termes (OU)\n\t• Ajouter '+' au début de votre terme exigera que le terme soit mis en correspondance (ET)\n\t• Ajouter '-' au début de votre terme exclura les éléments qui correspondent à ce terme\n\nExemples de la nouvelle recherche :\n\t• voiture, camion (se correspondennent à 'voiture' OU 'camion')\n\t• bâtiment, appartement +européen (se correspondennent à 'european' ET ['bâtiment' OU 'appartement'])\n\t• condo, house -rico +american (se correspondennent à 'american' ET ['condo' OU 'house'] ET PAS 'rico')"
                 ]
             },
             {
-                "Name": "Changements d'interface et d'interface utilisateur",
+                "Name": "Changements d'interface et de l'UX",
                 "Changes": [
                     "Implémenté un nouveau système d'icônes qui adapte toutes les icônes à l'échelle de votre IU.",
                     "Révisé le rendu des listes, améliorant considérablement la performance et la réactivité des pages de contenu.",
@@ -208,16 +208,16 @@
                     "Ajout d'un raccourci Ctrl+[0-9] pour basculer entre les onglets disponibles.",
                     "Permuté tous les double boutons et options des côtés.",
                     "Les animations sont maintenant désactivées par défaut sur macOS et Linux.",
-                    "Tant d'autres améliorations de l'interface utilisateur, des changements et des correctifs que j'ai perdu en compte."
+                    "Tant d'autres améliorations de l'interface utilisateur, des changements et des corrections que j'ai perdu en compte."
                 ]
             },
             {
-                "Name": "Revamp de sélection de fichier",
+                "Name": "Rénovation de sélection de fichier",
                 "Changes": [
                     "Mise à jour de l'interface utilisateur des écrans de sélection de fichiers.",
                     "Ajout de dossiers épinglés pour accéder facilement aux dossiers pertinents.",
-                    "Ajout d'une section Atelier pour sélectionner facilement les cartes et les sauvegardes des ateliers.",
-                    "Ajout d'un menu déroulant de tri et de tri",
+                    "Ajout d'une section Workshop pour sélectionner facilement les cartes et les sauvegardes du Workshop.",
+                    "Ajout d'un menu déroulant de tri et un bascule de l'ordre de tri",
                     "Ajout d'un bascule de vue Liste/Grille."
                 ]
             },
@@ -226,7 +226,7 @@
                 "Changes": [
                     "Correction du lancement de LOT après que le moniteur était précédemment éteint, ce qui faisait apparaître la fenêtre.",
                     "Correction de l'option DHT qui ne fonctionnait pas lors du lancement dans une nouvelle carte.",
-                    "Les pages de l'auteur ne s'ouvrent pas correctement dans Steam.",
+                    "Correction de l'ouverture des pages de l'auteur dans Steam.",
                     "Correction du blocage lors de la recherche alors que le tri \"Heure d'abonnement\" était sélectionné."
                 ]
             }
