@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Kevätpesun päivitys",
+        "ChangeGroups": [
+            {
+                "Name": "Suodata & Hae Muutokset",
+                "Changes": [
+                    "Lisätty uusi tekijä suodatin pudota alas.",
+                    "Lisätty lisää toimia sisältöluetteloissa oleviin tunnisteisiin.",
+                    "Lisätty uusi \"Kaikki ongelmat\" vaihtoehto \"Paketin tila\" ja \"Yhteensopivuus raportti\" pudotetaan.",
+                    "Kaikki suodatintoiminnot on nyt suoritettu Ctrl+Clickillä, lisäsi vaihtoehdon vaihtaaksesi tämän toiminnon.",
+                    "Uudelleen suodatus käyttäen pikanäppäimiä luettelossa nyt poistaa kohteen suodattimestasi.",
+                    "Termien erottaminen pilkulla hakussasi jakaa hakun, joka vastaa mitä tahansa termiä (OR)\r\n\t- • Jos lisäät termiä '+' termin alussa (AND)\r\n\t- • Lisätään '-' termin alussa sulkee pois kohteet, jotka vastaavat tuota termiä\r\n\r\nEsimerkkejä uudesta hausta\r\n\t: • auto, kuorma-auto (vastaa 'auto' TAI 'kuorma-auto')\r\n\t¶ • rakennus, huoneisto +european (vastaa 'eurooppa' JA ['rakennus' TAI 'huoneisto'])\r\n\t¶ • condo, house -rico +american (vastaa 'american' JA ['condo' TAI 'house'] JA EI 'rico')"
+                ]
+            },
+            {
+                "Name": "Käyttöliittymän & Ux- Muutokset",
+                "Changes": [
+                    "Toteutettu uusi kuvake järjestelmä, joka skaalautuu kaikki kuvakkeet sopivalla tavalla käyttöliittymän mittakaavassa.",
+                    "Listat on muotoiltu uudelleen, sisältösivujen suorituskykyä ja reagointikykyä on parannettu rajusti.",
+                    "Lisätty lajittelutilauksen vaihtaminen valitaksesi Ascending ja Descending lajittelun.",
+                    "Siirsi ”Toimet” -osion sisältösivuille ja lisäsi 2 uutta vaihtoehtoa.",
+                    "Osittain mukana tulleilla paketeilla on nyt eri käyttöliittymä listalla.",
+                    "Parannettu painikkeita ja suodata kontrollit sisältöluetteloissa, vähentää niiden kokoa ja lisätä enemmän visuaalisia vihjeitä.",
+                    "Muutti mahdollisuutta lisätä luetteloiden kohteiden kokoa leikkurilla kasvattaaksesi niiden kokoa, parannettu laajennetun luettelon kohteiden käyttöliittymä ja soveltanut tätä toimintoa muihin sovelluksessa oleviin luetteloihin.",
+                    "Lisäsi Ctrl+[0-9] -pikakuvakkeen vaihtaaksesi käytettävissä olevien välilehtien välillä.",
+                    "Vaihdeltiin kaikki kaksoispainikkeet ja valitsimen sivut.",
+                    "Animaatiot on nyt oletusarvoisesti poistettu käytöstä macOS & Linuxissa.",
+                    "Niin paljon lisää Käyttöliittymän parannuksia, muutoksia ja korjauksia menetin count."
+                ]
+            },
+            {
+                "Name": "Tiedoston Valinnan Vahvista",
+                "Changes": [
+                    "Updated the UI of the file selection screens.",
+                    "Lisätty Pinned kansiot helposti käyttää merkityksellisiä kansioita.",
+                    "Lisätty työpajan osio, jotta voit helposti valita työpajakartat ja säästöt.",
+                    "Lisätty lajittelu pudotus & lajittele tilauksen vaihtaminen",
+                    "Lisätty listan/ruudukon näkymän vaihtaminen."
+                ]
+            },
+            {
+                "Name": "Virheiden Korjaukset",
+                "Changes": [
+                    "Kiinteä käynnistys LOT sen jälkeen, kun monitori oli aiemmin päässyt pois päältä, jolloin ikkuna nyt näkyy.",
+                    "Kiinteä LHT vaihtoehto ei toimi käynnistettäessä uuteen karttaan.",
+                    "Kiinteä kirjailija sivuja ei auki oikein Steam.",
+                    "Korjattu jäädytys tapahtuu haettaessa samalla kun 'Subscribe Time' -lajittelu on valittu."
+                ]
+            }
+        ]
     }
 ]

@@ -8,9 +8,9 @@
                 "Name": "Novidades",
                 "Changes": [
                     "Adicionado um botão 'Cancelar Todas as Inscrições' nas ações possíveis nas páginas de conteúdo'.",
-                    "Adicionada uma sessão Utilitário para inscrever-se em itens que faltam nas configurações do BOB.",
+                    "Adicionada um Segmento de Utilitário para inscrever-se em itens que faltam nas configurações do BOB.",
                     "Adicionada uma opção para que as sessões de Filtros e Ação abram por padrão.",
-                    "Adicionado Página com Relatório de alterações, você poderá ver nas novas versões, ou usando o botão na sessão de Ajuda."
+                    "Adicionado Página com Relatório de alterações, poderá ver a partir das novas versões, ou usando o botão na Área de Ajuda."
                 ]
             },
             {
@@ -40,7 +40,7 @@
         "Date": "2023-04-08",
         "ChangeGroups": [
             {
-                "Name": "Adicionada sessão de Ajuda & Relatórios",
+                "Name": "Adicionada área de Ajuda & Relatórios",
                 "Changes": [
                     "Acesse os seus relatórios facilmente.",
                     "Veja rapidamente os erros na sua sessão mais recente/atual.",
@@ -123,13 +123,13 @@
                 "Changes": [
                     "Alterou o design da sua lista de perfil.",
                     "Agora os Perfis Favoritos aparecem no Painel Principal para permitir a troca rápida entre eles.",
-                    "Sessão 'Outros Perfis' criada na página de pacotes, para facilitar a exclusão ou inclusão dos mesmo dos seus outros perfis",
+                    "Área 'Outros Perfis' criada na página de pacotes, para facilitar a exclusão ou inclusão dos mesmo dos seus outros perfis",
                     "Foram criadas opções para classificar Perfis. A ordem selecionada será relembrada durante as sessões.",
                     "Agora pode clicar com o direito para incluir ou excluir itens da lista de conteúdo em todos os seus pacotes.",
                     "Adicionado um botão para visualizar os arquivos de um perfil no seu computador.",
                     "Agora poderá escolher uma cor para os seus perfis.",
                     "Agora poderá criar um atalho na área de trabalho para os seus perfis.",
-                    "Agora poderá importar um perfil LOT 1 na sessão 'Adicionar Perfil'."
+                    "Agora poderá importar um perfil LOT 1 na área de 'Adicionar Perfil'."
                 ]
             },
             {
@@ -175,6 +175,59 @@
                 "Changes": [
                     "Correção ao carregar uma coleção via link não repassando a ID correta.",
                     "Correção do LOT travar ao cancelar assinatura de um pacote no Linux & Mac."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Atualização de limpeza de Primavera",
+        "ChangeGroups": [
+            {
+                "Name": "Filtrar & Buscar Alterações",
+                "Changes": [
+                    "Adicionado um novo menu de filtro de autor.",
+                    "Adicionadas mais ações às etiquetas nas listas de conteúdo.",
+                    "Adicionada uma nova opção \"Qualquer Problema\" para os menus \"Status de pacote\" e \"Relatório de Compatibilidade\".",
+                    "Todas as ações de filtro agora são feitas usando Ctrl+Clique, adicionado uma opção para trocar essa funcionalidade.",
+                    "Re-filtrar usando os atalhos da lista agora remove o item de seu filtro.",
+                    "Separar os termos com uma vírgula na busca dividirá sua pesquisa para corresponder a qualquer um dos termos\r\n\t(R)• Adicionar '+' no início do seu termo exigirá que o termo seja compatível com (AND)\r\n\t• Adicionar '-' no início do seu termo excluirá itens que correspondam ao termo\r\n\r\nExemplos de nova pesquisa:\r\n\tcarro, caminhão (partidas 'carro' OU 'caminhão')\r\n\t(https://) • construção, apartamento +europeu(partidas 'europeus' e ['construção' OU 'apartamento'])\r\n\t➜ • condo, house -rico +americano (corresponde a 'americano' E ['condo' OU 'casa'] E não a 'rico')"
+                ]
+            },
+            {
+                "Name": "Alterações de Interface e UX",
+                "Changes": [
+                    "Implementado um novo sistema de ícones que redimensiona todos os ícones de forma apropriada para a escala da Interface.",
+                    "Renderização de listas refeitas, melhorando drasticamente o desempenho e a capacidade de resposta das páginas de conteúdo.",
+                    "Adicionado um botão de troca de ordem de classificação entre ordem crescente e decrescente.",
+                    "Sessão de Ações movida da página de conteúdo e 2 novas opções adicionadas.",
+                    "Pacotes incluídos parcialmente agora tem uma interface diferente na lista.",
+                    "Botões e filtros de controle na lista de conteúdo melhorados, reduzindo tamanho em geral e adicionado mais informações visuais.",
+                    "Altera a opção de aumentar o tamanho da lista ao passar o mouse, para sempre aumentar o tamanho, melhorada a interface da lista aumentada de itens, esta função foi aplicada ao resto das listas no aplicativo.",
+                    "Adicionado um atalho com Ctrl+[0-9] para alternar entre as abas disponíveis.",
+                    "Trocado todos os botões duplos por opções de botão de ativar/desativar.",
+                    "Animações agora estão desativadas por padrão no Linux & MacOS.",
+                    "Muito mais melhorias na Interface, mudanças, correções, que perdi a conta."
+                ]
+            },
+            {
+                "Name": "Seleção de Arquivos refeita",
+                "Changes": [
+                    "Interface atualizada para as telas de seleção de arquivo.",
+                    "Pastas fixadas adicionadas para um acesso melhor as pastas que interessam.",
+                    "Adicionada uma área da Oficina para selecionar melhor mapas e jogos salvos.",
+                    "Adicionada um botão de lista suspensa ou ordem de classificação",
+                    "Adicionado um botão para Vista em Lista/Grade."
+                ]
+            },
+            {
+                "Name": "Correções de Erros",
+                "Changes": [
+                    "Corrigido a abertura do LOT após o monitor em que estava aberto ser desligado, resultando agora em uma janela aparecendo.",
+                    "Corrigido a opção do LHT não funcionar quando aberta num novo mapa.",
+                    "Corrigido as paginas de Autores não abrindo corretamente na Steam.",
+                    "Congelamentos corrigidos ao buscar com o filtro 'Tempo Inscrito' ativo."
                 ]
             }
         ]

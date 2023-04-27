@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Aggiornamento pulizia primavera",
+        "ChangeGroups": [
+            {
+                "Name": "Filtro E Ricerca Modifiche",
+                "Changes": [
+                    "Aggiunto un nuovo filtro autore a discesa.",
+                    "Aggiunte altre azioni alle etichette negli elenchi dei contenuti.",
+                    "Aggiunta una nuova opzione \"Qualsiasi problema\" per \"Stato del pacchetto\" e \"Rapporto di compatibilità\".",
+                    "Tutte le azioni del filtro sono ora effettuate usando Ctrl+Click, ha aggiunto un'opzione per scambiare questa funzionalità.",
+                    "Il ri-filtraggio usando le scorciatoie nella lista ora rimuove l'elemento dal filtro.",
+                    "Separare i termini con una virgola nella ricerca significa dividere la ricerca per abbinare uno qualsiasi dei termini (OR)\r\n\t<unk> • Aggiungere '+' all'inizio del tuo termine richiederà che il termine sia abbinato (AND)\r\n\t<unk> • Aggiungere '-' all'inizio del tuo termine escluderà gli elementi che corrispondono a quel termine\r\n\r\nEsempi della nuova ricerca:\r\n\t<unk> • auto, camion (partite 'auto' O 'camion ')\r\n\t<unk> • edificio, appartamento +europeo (partite 'europeo' E ['edificio' O 'appartamento'])\r\n\t<unk> • condominio, house -rico +american (partite 'american' AND ['condo' OR 'house'] E NON 'rico')"
+                ]
+            },
+            {
+                "Name": "Modifiche UI & UX",
+                "Changes": [
+                    "Implementato un nuovo sistema di icone che scala tutte le icone in modo appropriato sulla tua scala UI.",
+                    "Ha rielaborato il rendering delle liste, migliorando drasticamente le prestazioni e la reattività delle pagine dei contenuti.",
+                    "Aggiunto un interruttore ordine di ordinamento per selezionare tra ordinamento crescente e discendente.",
+                    "Spostato la sezione 'Azioni' nelle pagine del contenuto e aggiunto 2 nuove opzioni.",
+                    "I pacchetti parzialmente inclusi ora hanno una interfaccia utente diversa nella lista.",
+                    "Migliorati i pulsanti e i controlli dei filtri negli elenchi dei contenuti, riducendone le dimensioni complessive e aggiungendo più spunti visivi.",
+                    "Cambiato l'opzione per aumentare la dimensione degli elementi di lista al passaggio per aumentare sempre la loro dimensione, ha migliorato l'interfaccia utente degli elementi ingranditi dell'elenco e ha applicato questa funzionalità al resto delle liste nell'app.",
+                    "Aggiunta una scorciatoia Ctrl+[0-9] per passare dalle schede disponibili.",
+                    "Cambia tutti i doppi pulsanti e l'opzione attiva i lati.",
+                    "Le animazioni sono ora disabilitate per impostazione predefinita su macOS e Linux.",
+                    "Così tanti altri miglioramenti, modifiche e correzioni dell'interfaccia utente ho perso il conteggio."
+                ]
+            },
+            {
+                "Name": "Revamp Selezione File",
+                "Changes": [
+                    "Aggiornato l'interfaccia utente delle schermate di selezione dei file.",
+                    "Aggiunte cartelle bloccate per accedere facilmente alle cartelle rilevanti.",
+                    "Aggiunta una sezione Workshop per selezionare facilmente le mappe e i salvataggi dell'officina.",
+                    "Aggiunta una selezione a discesa & ordina ordine",
+                    "Aggiunta una vista elenco/griglia."
+                ]
+            },
+            {
+                "Name": "Correzioni Di Bug",
+                "Changes": [
+                    "Lancio fisso LOT dopo che il monitor era precedentemente acceso si è spento con conseguente nella finestra ora in mostra.",
+                    "Risolto l'opzione LHT non funziona quando si avvia in una nuova mappa.",
+                    "Pagine dell'autore corrette che non si aprono correttamente in Steam.",
+                    "Corretto blocco durante la ricerca mentre l'ordinamento 'Abbonamento tempo' è stato selezionato."
+                ]
+            }
+        ]
     }
 ]

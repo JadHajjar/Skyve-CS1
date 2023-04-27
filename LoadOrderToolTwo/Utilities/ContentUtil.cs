@@ -388,9 +388,9 @@ internal class ContentUtil
 	{
 		if (_dllCache.TryGetValue(path, out var dll))
 		{
-			var currentLength = new FileInfo(path).Length;
+			var currentDate = File.GetLastWriteTimeUtc(path);
 
-			if (currentLength == dll.Length)
+			if (currentDate == dll.Date)
 			{
 				version = dll.Version;
 
@@ -411,7 +411,7 @@ internal class ContentUtil
 				_dllCache[path] = new()
 				{
 					Path = path,
-					Length = new FileInfo(path).Length,
+					Date = File.GetLastWriteTimeUtc(path),
 					Version = version,
 					IsMod = isMod,
 				};

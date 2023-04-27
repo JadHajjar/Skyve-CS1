@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Våren renhold",
+        "ChangeGroups": [
+            {
+                "Name": "Filtrer & søke endringer",
+                "Changes": [
+                    "Lagt til en ny forfatterfilterrullegardin.",
+                    "La til flere handlinger på etikettene i innholdslistene.",
+                    "Lagt til en ny \"Hva som helst problemer\" alternativ til \"Pakkestatus\" og \"Kompatibilitetsrapport\"-rullelister.",
+                    "Alle filterhandlinger gjøres nå ved å bruke Ctrl+klikk og legger til et alternativ for å bytte denne funksjonen.",
+                    "Re-filtrering ved å bruke snarveiene i listen fjerner nå elementet fra filteret.",
+                    "Du kan dele søkeordene dine med et komma i søket ditt med noen av vilkårene (eller)\r\n\t• Å legge til '+' på begynnelsen av begrepet ditt krever at begrepet matcher (AND)\r\n\tNivÃ¥ • Å skrive ''-' på begynnelsen av begrepet ekskluderer elementer som samsvarer med dette\r\n\r\nEksempler på det nye søket:\r\n\tMobil, Bil, lastebil (samsvarer med 'bil' ELLER 'truck')\r\n\tε• bygging, leilighet +europeisk (samsvarer med 'europeisk' og ['bygging' ELLER 'leilighet'])\r\n\t• bruke det, house -rico +american (samsvarer med 'american' and ['condo' OR 'house'] OG IKKE 'rico')"
+                ]
+            },
+            {
+                "Name": "UI & UX endringer",
+                "Changes": [
+                    "Implementert et nytt ikon system som skalerer alle ikonene riktig til UI skalaen.",
+                    "Har arbeidet med å gjengive lister, forbedre ytelsen og reaksjonen på innholdssidene drastiskt.",
+                    "La til sortering skifte til å velge mellom stigende og synkende sortering.",
+                    "Flyttet 'Handlinger' seksjonen i innholdssidene og legger til 2 nye alternativer.",
+                    "Delvis inkluderte pakker har nå et annet brukergrensesnitt i listen.",
+                    "Forbedret knapper, filtrering av knapper og filterkontroller i innholdslister, reduserer den totale størrelsen og legger til flere visuelle kuber.",
+                    "Endret alternativet for å øke elementenes størrelse på musepekeren for å alltid øke deres størrelse Forbedret brukergrensesnittet for utvidede lister, og bruk denne funksjonaliteten til resten av listene i appen.",
+                    "Lagt til en Ctrl+[0-9] snarvei for å bytte mellom tilgjengelige faner.",
+                    "Byttet alle dobbeltknapper og alternativ vekslingssidene.",
+                    "Animasjoner er nå deaktivert som standard på macOS & Linux.",
+                    "Så mange flere brukergrensesnittsforbedringer, endringer, og fikser jeg tapte teller."
+                ]
+            },
+            {
+                "Name": "Valg av filmerke",
+                "Changes": [
+                    "Oppdaterte brukergrensesnittet for filvalg.",
+                    "La til festede mapper lett få tilgang til relevante mapper.",
+                    "Lagt til en Verksted-seksjon for enkelt å velge verkstedkart og lagre.",
+                    "Lagt til sortering av rullegardinliste og sorteringsrekkefølge",
+                    "La til en liste-/rutenettvisning."
+                ]
+            },
+            {
+                "Name": "Bug-Fixes",
+                "Changes": [
+                    "Fikset LAV etter at skjermen den tidligere var slått av, noe som nå dukker opp.",
+                    "LHT-alternativet fungerer ikke når en starter inn i et nytt kart.",
+                    "Fikserte forfattersider åpner riktig på Steam.",
+                    "Fikset fryser som skjer mens du søker mens 'Abonner tid'-sortering ble valgt."
+                ]
+            }
+        ]
     }
 ]

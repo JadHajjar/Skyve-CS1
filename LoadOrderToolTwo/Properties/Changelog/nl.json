@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Lente schoonmaak update",
+        "ChangeGroups": [
+            {
+                "Name": "Filter & zoek wijzigingen",
+                "Changes": [
+                    "Nieuwe auteur filter dropdown toegevoegd.",
+                    "Meer acties aan labels in de inhoudslijst toegevoegd.",
+                    "Nieuwe \"Eventuele problemen\" optie voor \"Pakket Status\" & \"Compatibility Report\" dropdowns.",
+                    "Alle filteracties zijn nu gedaan met behulp van Ctrl+Click, een optie toegevoegd om deze functionaliteit te wisselen.",
+                    "Opnieuw filteren met behulp van de snelkoppelingen in de lijst verwijdert nu het item van uw filter.",
+                    "Het scheiden van termen met een komma in je zoekopdracht splitst je zoekopdracht om te voldoen aan een van de termen (OR)\r\n\t• Het toevoegen van '+' aan het begin van je term vereist dat de term wordt gematched (AND)\r\n\t½ • Het toevoegen '-' aan het begin van je term zal items die overeenkomen met die term\r\n\r\nVoorbeelden van de nieuwe zoekopdracht uitsluiten:\r\n\t• auto, Vrachtwagen (komt overeen met 'auto' OF 'vrachtwagen')\r\n\t• gebouwen, appartement +european (matcht 'european' EN ['gebouw' OF 'appartement'])\r\n\tvrees • condoe, house -rico +american (komt overeen met 'american' EN ['condo' OF 'huis'] EN NIET 'rico')"
+                ]
+            },
+            {
+                "Name": "UI & UX wijzigingen",
+                "Changes": [
+                    "Implementeer een nieuw pictogramsysteem dat alle pictogrammen naar behoren schaalde in je UI-schaal.",
+                    "Herwerkte het renderen van lijsten, het verbeteren van de prestaties en het reactievermogen van inhoudspagina's drastisch.",
+                    "Een sorteervolgorde schakelaar toegevoegd om te selecteren tussen oplopend en aflopend sorteren.",
+                    "De 'Acties' sectie is verplaatst naar de pagina inhoud en 2 nieuwe opties toegevoegd.",
+                    "Pakketten die nu zijn opgenomen hebben een andere UI in de lijst.",
+                    "Verbeterde knoppen en filteropties in de inhoudslijsten, hun totale grootte verkleinen en meer visuele aanwijzingen toevoegen.",
+                    "Veranderd de optie om de grootte van de lijst items bij zweven te verhogen om hun grootte altijd te vergroten, de UI van de uitgebreide lijstitems verbeterd en deze functionaliteit toegepast op de rest van de lijsten in de app.",
+                    "Een Ctrl+[0-9] snelkoppeling toegevoegd om te schakelen tussen beschikbare tabbladen.",
+                    "Wissel alle zijden van de dubbele knoppen en opties om te schakelen.",
+                    "Animaties zijn nu standaard uitgeschakeld op macOS & Linux.",
+                    "Zoveel verdere UI verbeteringen, veranderingen en oplossingen die ik verloren heb."
+                ]
+            },
+            {
+                "Name": "Bestands-selectie reamp",
+                "Changes": [
+                    "De UI van de bestandsselectieschermen is bijgewerkt.",
+                    "Vastgepinde mappen toegevoegd om gemakkelijk toegang te krijgen tot relevante mappen.",
+                    "Voeg een Workshop sectie toe om makkelijk de workshop kaarten & saves te selecteren.",
+                    "Een vervolgkeuzelijst en sorteer sorteervolgorde toegevoegd",
+                    "Een lijst/rasterweergave schakelaar toegevoegd."
+                ]
+            },
+            {
+                "Name": "Bug-fixes",
+                "Changes": [
+                    "Starten van LOT opgelost nadat het monitor eerder was uitgezet, wat resulteerde in het nu weergegeven venster.",
+                    "Vaste de LHT optie die niet werkt bij lanceren in een nieuwe kaart.",
+                    "Repareerde auteurspagina's die niet correct worden geopend in Steam.",
+                    "Vaste bevriezing tijdens zoeken tijdens het selecteren van de sortering 'Abonnement'."
+                ]
+            }
+        ]
     }
 ]

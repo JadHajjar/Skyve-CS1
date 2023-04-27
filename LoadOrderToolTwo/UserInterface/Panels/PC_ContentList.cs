@@ -284,7 +284,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
+		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(8.25F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TLP_Main.ColumnStyles[0].Width = (int)(250 * UI.FontScale);
 		TLP_Main.RowStyles[0].Height = (int)(36 * UI.FontScale);

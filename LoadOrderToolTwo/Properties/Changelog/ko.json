@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "봄 맞이 대규모 패치",
+        "ChangeGroups": [
+            {
+                "Name": "필터 및 검색 변경 사항",
+                "Changes": [
+                    "작성자로 필터링하는 새로운 드롭다운 추가",
+                    "콘텐츠 목록의 라벨에 더 많은 작업 추가",
+                    "Added a new \"Any Issues\" option for \"Package Status\" & \"Compatibility Report\" dropdowns.",
+                    "모든 필터 설정은 이제 Ctrl + 클릭을 통해 가능하며, 이 기능을 바꾸기 위한 옵션 추가",
+                    "Re-filtering using the shortcuts in the list now removes the item from your filter.",
+                    "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
+                ]
+            },
+            {
+                "Name": "UI와 UX 변경 사항",
+                "Changes": [
+                    "사용자 UI 크기에 맞추어 모든 아이콘이 상대적 크기에 따라 적절한 크기로 유지되도록 새로운 아이콘 시스템 구현",
+                    "목록 불러오기 방식을 재작업하여 콘텐츠 페이지 성능과 응답성을 대폭 개선함",
+                    "오름차순 또는 내림차순 정렬을 선택하기 위한 정렬 순서 스위치 추가",
+                    "Moved the 'Actions' section in the content pages and added 2 new options.",
+                    "Partially included packages now have a different UI in the list.",
+                    "Improved the buttons and filter controls in content lists, reducing their overall size, and adding more visual cues.",
+                    "Changed the option to increase list items' size on hover to always increase their size, improved the UI of enlarged list items, and applied this functionality to the rest of the lists in the app.",
+                    "Added a Ctrl+[0-9] shortcut to switch between available tabs.",
+                    "Swapped all double-buttons and option toggles' sides.",
+                    "Animations are now disabled by default on macOS & Linux.",
+                    "So many more UI improvements, changes, and fixes I lost count."
+                ]
+            },
+            {
+                "Name": "File Selection Revamp",
+                "Changes": [
+                    "Updated the UI of the file selection screens.",
+                    "Added Pinned folders to easily access relevant folders.",
+                    "Added a Workshop section to easily select workshop maps & saves.",
+                    "Added a Sorting dropdown & sort order toggle",
+                    "Added a List/Grid view toggle."
+                ]
+            },
+            {
+                "Name": "Bug-Fixes",
+                "Changes": [
+                    "Fixed launching LOT after the monitor it was previously on got turned off resulting in the window now showing up.",
+                    "Fixed the LHT option not working when launching into a new map.",
+                    "Fixed author pages not opening correctly in Steam.",
+                    "Fixed freezes happening while searching while the 'Subscribe Time' sorting was selected."
+                ]
+            }
+        ]
     }
 ]

@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Mise à jour du nettoyage du printemps",
+        "ChangeGroups": [
+            {
+                "Name": "Filtrer et rechercher les modifications",
+                "Changes": [
+                    "Ajout d'un nouveau filtre auteur dans la liste déroulante.",
+                    "Ajout d'actions supplémentaires aux étiquettes dans les listes de contenu.",
+                    "Ajout d'une nouvelle option \"N'importe quel problème\" pour les listes déroulantes \"Statut du paquet\" et \"Rapport de compatibilité\".",
+                    "Toutes les actions de filtre sont maintenant effectuées à l'aide de Ctrl+Click, a ajouté une option pour échanger cette fonctionnalité.",
+                    "Le nouveau filtrage en utilisant les raccourcis de la liste supprime maintenant l'élément de votre filtre.",
+                    "Séparer les termes par une virgule dans votre recherche divisera votre recherche pour correspondre à l'un des termes (OU)\r\n\t• Ajouter '+' au début de votre terme exigera que le terme soit mis en correspondance (AND)\r\n\t• Ajouter '-' au début de votre terme exclura les éléments qui correspondent à ce terme\r\n\r\nExemples de la nouvelle recherche :\r\n\t• voiture, camion (matchs 'voiture' OU 'camion')\r\n\t• bâtiment, appartement +européen (matchs 'european' ET ['bâtiment' OU 'appartement'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
+                ]
+            },
+            {
+                "Name": "Changements d'interface et d'interface utilisateur",
+                "Changes": [
+                    "Implémenté un nouveau système d'icônes qui adapte toutes les icônes à l'échelle de votre IU.",
+                    "Révisé le rendu des listes, améliorant considérablement la performance et la réactivité des pages de contenu.",
+                    "Ajout d'un commutateur d'ordre de tri à sélectionner entre le tri ascendant et le tri décroissant.",
+                    "Déplacement de la section 'Actions' dans les pages de contenu et ajout de 2 nouvelles options.",
+                    "Les paquets partiellement inclus ont maintenant une interface utilisateur différente dans la liste.",
+                    "Amélioration des boutons et des contrôles de filtres dans les listes de contenu, réduction de leur taille globale et ajout de plus de repères visuels.",
+                    "Modification de l'option pour augmenter la taille des éléments de la liste au survol pour toujours augmenter leur taille, a amélioré l'interface utilisateur des éléments de la liste agrandie et a appliqué cette fonctionnalité au reste des listes de l'application.",
+                    "Ajout d'un raccourci Ctrl+[0-9] pour basculer entre les onglets disponibles.",
+                    "Permuté tous les double boutons et options des côtés.",
+                    "Les animations sont maintenant désactivées par défaut sur macOS et Linux.",
+                    "Tant d'autres améliorations de l'interface utilisateur, des changements et des correctifs que j'ai perdu en compte."
+                ]
+            },
+            {
+                "Name": "Revamp de sélection de fichier",
+                "Changes": [
+                    "Mise à jour de l'interface utilisateur des écrans de sélection de fichiers.",
+                    "Ajout de dossiers épinglés pour accéder facilement aux dossiers pertinents.",
+                    "Ajout d'une section Atelier pour sélectionner facilement les cartes et les sauvegardes des ateliers.",
+                    "Ajout d'un menu déroulant de tri et de tri",
+                    "Ajout d'un bascule de vue Liste/Grille."
+                ]
+            },
+            {
+                "Name": "Corrections de bugs",
+                "Changes": [
+                    "Correction du lancement de LOT après que le moniteur était précédemment éteint, ce qui faisait apparaître la fenêtre.",
+                    "Correction de l'option DHT qui ne fonctionnait pas lors du lancement dans une nouvelle carte.",
+                    "Les pages de l'auteur ne s'ouvrent pas correctement dans Steam.",
+                    "Correction du blocage lors de la recherche alors que le tri \"Heure d'abonnement\" était sélectionné."
+                ]
+            }
+        ]
     }
 ]

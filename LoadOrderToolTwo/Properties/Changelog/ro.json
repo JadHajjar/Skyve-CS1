@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Actualizare curățare primăvară",
+        "ChangeGroups": [
+            {
+                "Name": "Filtru & Schimbări Căutare",
+                "Changes": [
+                    "Adăugat un nou autor filtru derulant.",
+                    "Mai multe acțiuni au fost adăugate la etichete în listele de conținut.",
+                    "A adăugat o nouă opțiune \"Orice probleme\" pentru \"Starea Pachetului\" și \"Raportul de compatibilitate\".",
+                    "Toate acțiunile de filtrare se fac acum folosind Ctrl+Click, a adăugat o opțiune pentru a schimba această funcționalitate.",
+                    "Re-filtrarea folosind comenzile rapide din listă elimină acum elementul din filtrul dvs.",
+                    "Separarea termenilor cu virgulă în căutarea dvs. vă va împărți căutarea pentru a corespunde oricăruia dintre termenii (SAU)\r\n\t• Adăugarea '+' la începutul termenului dvs. va necesita ca termenul să fie potrivit (AND)\r\n\t• Adăugarea '-' la începutul termenului dvs. va exclude elemente care se potrivesc cu acel termen\r\n\r\nExemple de nouă căutare:\r\n\t• mașină, camion (se potrivește cu „automobil” SAU „camionet”)\r\n\t• construcție, apartament + european (se potrivește cu „european” ȘI [„construire” SAU „apartament”)\r\n\t\r\n • conviețui; house -rico +american (se potrivește cu 'american' ȘI ['condo' SAU 'house'] și NU 'rico')"
+                ]
+            },
+            {
+                "Name": "Modificări UI și UX",
+                "Changes": [
+                    "A implementat un nou sistem de pictograme care scalează toate iconițele în mod corespunzător la scara UI.",
+                    "Reprocesează redarea listelor, îmbunătăţind drastic performanţa şi capacitatea de reacţie a paginilor de conţinut.",
+                    "S-a adăugat un comutator de ordine sortare pentru a selecta între sortare ascendentă și descendentă.",
+                    "A mutat secțiunea 'Acțiuni' în paginile de conținut și a adăugat 2 opțiuni noi.",
+                    "Pachetele incluse parțial au acum o interfață diferită în listă.",
+                    "Imbunatatit butoanele si controalele de filtrare in listele de continut, reducand dimensiunea lor totala si adaugand mai multe indicatii vizuale.",
+                    "A schimbat opțiunea de a crește dimensiunea elementelor din listă în plutire pentru a mări întotdeauna dimensiunea lor, a îmbunătățit interfața elementelor din listă mărite și a aplicat această funcționalitate la restul listelor din aplicație.",
+                    "S-a adăugat o scurtătură Ctrl+[0-9] pentru a comuta între filele disponibile.",
+                    "Se îngheaţă toate butoanele şi toglele de opţiuni.",
+                    "Animațiile sunt acum dezactivate implicit pe macOS & Linux.",
+                    "Deci mult mai multe imbunatatiri, schimbari si repara numarul, am pierdut numarul."
+                ]
+            },
+            {
+                "Name": "Selectare fișier Revamp",
+                "Changes": [
+                    "S-a actualizat interfața ecranelor de selecție a fișierelor.",
+                    "Dosare fixate adăugate pentru a accesa cu ușurință dosarele relevante.",
+                    "S-a adăugat o secțiune a Atelierului pentru a selecta cu ușurință hărțile și salvările atelierelor.",
+                    "S-a adăugat o listă verticală și comutator ordine sortare",
+                    "S-a adăugat un togglet listă/grilă."
+                ]
+            },
+            {
+                "Name": "Bug-Fixes",
+                "Changes": [
+                    "Reparat LOT de lansare după ce monitorul a fost oprit anterior pentru a fi afișat în fereastră.",
+                    "S-a remediat opțiunea LHT care nu funcționează la lansarea într-o nouă hartă.",
+                    "S-au reparat paginile de autor care nu se deschid corect în Steam.",
+                    "Se întâmplă blocaje fixe în timpul căutării în timp ce sortarea „ora abonării” a fost selectată."
+                ]
+            }
+        ]
     }
 ]

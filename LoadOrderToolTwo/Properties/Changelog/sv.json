@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Uppdatering för vårrensning",
+        "ChangeGroups": [
+            {
+                "Name": "Filtrera & sök ändringar",
+                "Changes": [
+                    "Lade till en ny författarfilter rullgardinsmeny.",
+                    "Lade till fler åtgärder till etiketter i innehållslistorna.",
+                    "Lade till ett nytt \"Eventuella problem\" alternativ för \"Paketstatus\" och \"Kompatibilitetsrapport\" nedrullningar.",
+                    "Alla filteråtgärder görs nu med hjälp av Ctrl + Klick, lagt till ett alternativ för att byta den här funktionen.",
+                    "Återfiltrering med genvägarna i listan tar nu bort objektet från ditt filter.",
+                    "Separera termer med kommatecken i din sökning kommer att dela upp din sökning för att matcha något av termerna (OR)\r\n\t<unk> • Lägga till '+' i början av din term kommer att kräva att termen matchas (AND)\r\n\t<unk> • Lägga till '-' i början av din termin kommer att utesluta objekt som matchar termen\r\n\r\nExempel på den nya sökningen:\r\n\t<unk> • bil, lastbil (matchar 'bil' ELLER 'truck')\r\n\t<unk> • byggnad, lägenhet +europeisk (matchar 'europeisk' OCH ['byggnad' ELLER 'lägenhet'])\r\n\t<unk> • condo, hus -rico +amerikanska (matchar 'american' och ['condo' eller 'hus'] OCH INTE 'rico')"
+                ]
+            },
+            {
+                "Name": "UI & UX ändringar",
+                "Changes": [
+                    "Genomfört ett nytt ikonsystem som skalar alla ikoner på lämpligt sätt till din UI-skala.",
+                    "Omarbetade rendering av listor, förbättra prestanda och lyhördhet för innehållssidor drastiskt.",
+                    "Lade till en sorteringsordning för att välja mellan stigande och fallande sortering.",
+                    "Flyttade avsnittet \"Åtgärder\" på innehållssidorna och lade till 2 nya alternativ.",
+                    "Delvis inkluderade paket har nu ett annat gränssnitt i listan.",
+                    "Förbättrade knappar och filterkontroller i innehållslistorna, minskade deras totala storlek och lägga till fler visuella ledtrådar.",
+                    "Ändrade alternativet att öka listobjektens storlek på hovrar för att alltid öka sin storlek, förbättrade UI för förstorade listobjekt och tillämpade denna funktionalitet på resten av listorna i appen.",
+                    "Lade till en genväg Ctrl+[0-9] för att växla mellan tillgängliga flikar.",
+                    "Bytte alla dubbelknappar och alternativ toggles' sidor.",
+                    "Animationer är nu inaktiverade som standard på macOS & Linux.",
+                    "Så många fler UI förbättringar, förändringar och korrigeringar jag förlorade räkningen."
+                ]
+            },
+            {
+                "Name": "Revamp för filval",
+                "Changes": [
+                    "Uppdaterade UI för filmarkeringsskärmarna.",
+                    "Lade till Pinned mappar för att enkelt komma åt relevanta mappar.",
+                    "Lade till en verkstadssektion för att enkelt välja verkstadskartor och sparar.",
+                    "Lade till en sorterings-rullgardinsmeny & sorteringsordning att växla",
+                    "Lade till en lista/rutnätsvy."
+                ]
+            },
+            {
+                "Name": "Bugg Fixar",
+                "Changes": [
+                    "Fast lansering LOT efter skärmen det var tidigare på fick avstängt vilket resulterade i att fönstret nu dyker upp.",
+                    "Fast LHT alternativet fungerar inte när du startar in i en ny karta.",
+                    "Fasta författarsidor som inte öppnas korrekt i Steam.",
+                    "Fast fryser händer när du söker medan \"Prenumerera tid\" sorteringen valdes."
+                ]
+            }
+        ]
     }
 ]

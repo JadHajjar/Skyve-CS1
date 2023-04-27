@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Aktualizace jarního čištění",
+        "ChangeGroups": [
+            {
+                "Name": "Filtrovat a hledat změny",
+                "Changes": [
+                    "Přidán nový autor filtr rozbalovacího seznamu.",
+                    "Přidáno více akcí do popisků v seznamech obsahu.",
+                    "Přidána nová možnost \"Jakékoliv problémy\" pro \"Stav balíčku\" a \"Zpráva o kompatibilitě\".",
+                    "Všechny akce filtru jsou nyní prováděny pomocí Ctrl+Click, přidány možnost výměny této funkce.",
+                    "Přefiltrování pomocí zkratek v seznamu nyní odstraňuje položku z vašeho filtru.",
+                    "Oddělením termínů čárkou ve vašem vyhledávání bude vaše hledání rozděleno tak, aby odpovídalo některé z termínů (OR)\r\n\t• Přidáním '+' na začátek vašeho termínu bude vyžadováno, aby termín odpovídal (AND)\r\n\t• Přidáním '-' na začátek vašeho termínu vyloučíte položky, které odpovídají tomuto termínu\r\n\r\nPříklady nového vyhledávání:\r\n\t• auto, nákladní auto (zápasy 'au' NEBO 'truck')\r\n\t• budova, byt +evropský (zápasy 'evropský' A ['budova' NEBO 'bytu'])\r\n\t• condo; dům -rico +american (odpovídá 'americký' A ['kondo' NEBO 'dům'] A NENÍ 'rico')"
+                ]
+            },
+            {
+                "Name": "UI & UX změny",
+                "Changes": [
+                    "Zavedl nový systém ikon, který vhodně rozšiřuje všechny ikony do měřítka vašeho uživatelského rozhraní.",
+                    "Přepracovalo vykreslování seznamů, drasticky zlepšovalo výkon a schopnost stránek s obsahem.",
+                    "Přidán přepínač pořadí pro výběr mezi vzestupným a sestupným řazením.",
+                    "Přesunuto do sekce 'Akce' na stránky s obsahem a přidáno 2 nové možnosti.",
+                    "Částečně zahrnuté balíky mají nyní v seznamu jiné uživatelské rozhraní.",
+                    "Vylepšené ovládání tlačítek a filtrů v seznamech obsahu, zmenšení jejich celkové velikosti a přidávání více vizuálních narážek.",
+                    "Změněna možnost zvětšit velikost položek v seznamu při přejetí pro vždy zvětšení jejich velikosti, vylepšeno uživatelské rozhraní položek rozšířeného seznamu a aplikováno na zbytek seznamů v aplikaci.",
+                    "Přidána zkratka Ctrl+[0-9] pro přepínání mezi dostupnými kartami.",
+                    "Prohodili všechna dvojitá tlačítka a volba přepíná strany.",
+                    "Animace jsou nyní ve výchozím nastavení zakázány na macOS a Linuxu.",
+                    "Tolik další vylepšení, změny a opravy uživatelského rozhraní, které jsem ztratil počet."
+                ]
+            },
+            {
+                "Name": "Revize výběru souboru",
+                "Changes": [
+                    "Aktualizováno uživatelské rozhraní obrazovky pro výběr souborů.",
+                    "Přidány připnuté složky pro snadný přístup k příslušným složkám.",
+                    "Přidána sekce Workshop pro snadný výběr map a uložení.",
+                    "Přepínač rozevírací nabídky a řazení řazení",
+                    "Přepínač seznamu nebo mřížky byl přidán."
+                ]
+            },
+            {
+                "Name": "Opravy chyb",
+                "Changes": [
+                    "Opraveno spuštění LOT poté, co byl displej dříve zapnut, což vedlo k tomu, že se okno nyní zobrazuje.",
+                    "Opravena možnost LHT nefunguje při spuštění nové mapy.",
+                    "Opravené stránky autora se ve Steamu neotevírají správně.",
+                    "Opravena zmražení při vyhledávání, zatímco bylo vybráno řazení 'Odebírat čas'."
+                ]
+            }
+        ]
     }
 ]

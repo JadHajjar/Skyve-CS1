@@ -28,7 +28,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
 	protected override void UIChanged()
 	{
-		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover?72:42;
+		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 76 : 46;
 
 		base.UIChanged();
 
@@ -127,7 +127,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		}
 
 		var dIcon = new DynamicIcon(!owned ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
-		using (var icon = large ? dIcon.Get(rects.IncludedRect.Height / 2) : dIcon.Large)
+		using (var icon = (large ? dIcon.Large : dIcon.Get(rects.IncludedRect.Height / 2)))
 			e.Graphics.DrawImage(icon.Color(owned && rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
 		var iconRectangle = rects.IconRect;
@@ -204,11 +204,12 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 
 	private Rectangles GetActionRectangles(Rectangle rectangle)
 	{
+		var includeItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
 		var iconSize = rectangle.Height - Padding.Vertical;
 		var rects = new Rectangles
 		{
-			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
-			SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
+			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
+			SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(includeItemHeight, ItemHeight), ContentAlignment.TopRight)
 		};
 
 		rects.IconRect = rectangle.Pad(rects.IncludedRect.Right + (2 * Padding.Left)).Align(new Size(iconSize * 460 / 215, iconSize), ContentAlignment.MiddleLeft);

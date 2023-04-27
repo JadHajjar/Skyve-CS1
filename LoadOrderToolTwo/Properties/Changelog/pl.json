@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Aktualizacja wiosennego czyszczenia",
+        "ChangeGroups": [
+            {
+                "Name": "Filtruj i wyszukaj zmiany",
+                "Changes": [
+                    "Dodano listę filtrów nowego autora.",
+                    "Dodano więcej akcji do etykiet na listach treści.",
+                    "Dodano nową opcję \"Wszelkie problemy\" dla listy rozwijanej \"Status pakietu\" i \"Raport zgodności\".",
+                    "Wszystkie akcje filtrowania są teraz wykonywane za pomocą Ctrl+Click, dodał opcję zamiany tej funkcji.",
+                    "Ponowne filtrowanie za pomocą skrótów na liście usuwa element z filtra.",
+                    "Oddzielenie wyrażeń przecinkiem w wyszukiwaniu podzieli Twoje wyszukiwanie, aby dopasować dowolne wyrazy (OR)\r\n\t• Dodanie '+' na początku Twojego wyrażenia będzie wymagało dopasowania wyrażeń (AND)\r\n\t• Dodanie '-' na początku Twojego wyrażenia wykluczy elementy, które pasują do tego terminu\r\n\r\nPrzykłady nowego wyszukiwania:\r\n\t• samochód, samochód ciężarowy (pasujący do „samochodu” LUB „ciężarówki”)\r\n\t• budowa, mieszkanie +europejskie (pasujące do „europejskiej” ORAZ [„budownictwo” LUB „mieszkanie”])\r\n\t• kondo, dom -rico + american (pasuje do 'amerykan' ORAZ ['condo' LUB 'dom'] ORAZ NIE 'rico')"
+                ]
+            },
+            {
+                "Name": "Zmiany interfejsu użytkownika i UX",
+                "Changes": [
+                    "Zaimplementowano nowy system ikon, który skaluje wszystkie ikony odpowiednio do Twojej skali UI.",
+                    "Nastąpiła radykalna rewizja wykazów, poprawiając wydajność i reagowanie stron treści.",
+                    "Dodano przełącznik kolejności sortowania, aby wybrać pomiędzy sortowaniem rosnąco i malejącym.",
+                    "Przenieś sekcję \"Akcje\" na stronach treści i dodano 2 nowe opcje.",
+                    "Częściowo zawarte pakiety mają teraz inny interfejs użytkownika na liście.",
+                    "Ulepszono przyciski i ustawienia filtrów na listach treści, zmniejszając ich ogólny rozmiar i dodając więcej optycznych.",
+                    "Zmieniono opcję, aby zwiększyć rozmiar elementów listy po najechaniu po najechaniu, aby zawsze zwiększyć ich rozmiar, ulepszył interfejs elementów rozszerzonej listy i zastosował tę funkcję do pozostałych list w aplikacji.",
+                    "Dodano skrót Ctrl+[0-9] do przełączania pomiędzy dostępnymi kartami.",
+                    "Zamień wszystkie podwójne przyciski i strony przełącznika.",
+                    "Animacje są teraz domyślnie wyłączone na macOS i Linux.",
+                    "Tak wiele ulepszeń, zmian i napraw, które przegrałem."
+                ]
+            },
+            {
+                "Name": "Odwołanie wyboru pliku",
+                "Changes": [
+                    "Zaktualizowano interfejs ekranu wyboru plików.",
+                    "Dodano przypięte foldery do łatwego dostępu do odpowiednich folderów.",
+                    "Dodano sekcję Warsztatu, aby łatwo wybrać mapy warsztatów i zapisy.",
+                    "Dodano menu sortowania i sortowania",
+                    "Dodano przełącznik widoku listy/siatki."
+                ]
+            },
+            {
+                "Name": "Poprawki błędów",
+                "Changes": [
+                    "Naprawiono uruchomienie LOT po wyłączeniu monitora, co spowodowało pojawienie się okna.",
+                    "Naprawiono opcję LHT nie działającą podczas uruchamiania do nowej mapy.",
+                    "Naprawione strony autora nie otwierają się poprawnie w Steam.",
+                    "Naprawiono zamrożenie podczas wyszukiwania podczas sortowania 'Subskrypcja'."
+                ]
+            }
+        ]
     }
 ]

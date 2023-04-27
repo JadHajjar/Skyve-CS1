@@ -178,5 +178,58 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Actualización de Primavera",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios en Filtros y Búsqueda",
+                "Changes": [
+                    "Ahora se puede filtrar por autor.",
+                    "Más acciones en las etiquetas en las listas de contenido.",
+                    "Se añadió una nueva opción \"Cualquier problema\" para \"Estado del paquete\" y \"Informes de compatibilidad\".",
+                    "Acciones en filtros se ejecutan con Ctrl+Clic. Agregada la opción para intercambiar la funcionalidad.",
+                    "El refiltrado utilizando los accesos directos de la lista ahora elimina el elemento de su filtro.",
+                    "Separar los términos con una coma en su búsqueda dividirá la búsqueda para que coincida con cualquiera de los términos (OR)\r\n\t• Añadir '+' al inicio de su término requerirá que el término sea emparejado (YD)\r\n\t• Añadir '-' al inicio de su término excluirá los artículos que coincidan con ese término\r\n\r\nEjemplos de la nueva búsqueda:\r\n\t• coche, camión (match 'car' or 'camion')\r\n\t• edificio, apartamento +europeo (coincide con 'europeo' AND ['edificio' O 'apartamento'])\r\n\t• condo, casa -rica + icana (coincide con 'americano' Y ['condo' O 'casa'] Y NO 'rico')"
+                ]
+            },
+            {
+                "Name": "Cambios de UI y UX",
+                "Changes": [
+                    "Nuevo sistema de iconos que escala todos los iconos apropiadamente a tu escala de interfaz de usuario.",
+                    "Mejorado drásticamente el rendimiento y la capacidad de respuesta de las páginas de contenido.",
+                    "Switch para seleccionar entre orden ascendente y descendente.",
+                    "La sección de 'Acciones' en las páginas de contenido tienen una nueva ubicación, se han añadido 2 nuevas opciones.",
+                    "Los paquetes parcialmente incluidos ahora tienen una interfaz de usuario diferente en la lista.",
+                    "Mejorados los botones y los controles de filtros en las listas de contenidos, reduciendo su tamaño total y añadiendo más señales visuales.",
+                    "Se ha cambiado la opción de aumentar el tamaño de los artículos en la lista al pasar el cursor para aumentar su tamaño. Mejoró la interfaz de usuario de los artículos de la lista y se aplicó esta funcionalidad al resto de las listas en la aplicación.",
+                    "Accesos directo Ctrl+[0-9] para cambiar entre las pestañas disponibles.",
+                    "Cambios en botones de selección.",
+                    "Las animaciones ahora están desactivadas por defecto en macOS y Linux.",
+                    "Muchas más mejoras en la interfaz de usuario, cambios y correcciones que he perdido cuenta."
+                ]
+            },
+            {
+                "Name": "Mejora en Selección de Archivos",
+                "Changes": [
+                    "Actualizada la interfaz de usuario de las pantallas de selección de archivos.",
+                    "Carpetas ancladas para acceder fácilmente a las carpetas relevantes.",
+                    "Sección de Workshop para seleccionar fácilmente mapas del Workshop y archivos guardados.",
+                    "Menú desplegable y opción para ordenar archivos",
+                    "Opción para lista / vista de cuadrícula."
+                ]
+            },
+            {
+                "Name": "Corregidos",
+                "Changes": [
+                    "Inicio de LOT después de apagar el monitor debido a que la ventana no se mostraba.",
+                    "Se ha corregido la opción LHT que no funcionaba al ejecutar el juego en un nuevo mapa.",
+                    "Páginas del autor no abrían correctamente en Steam.",
+                    "Bloqueo al buscar mientras se seleccionaba la opción de 'Tiempo de suscripción' al ordenar la lista."
+                ]
+            }
+        ]
     }
 ]
