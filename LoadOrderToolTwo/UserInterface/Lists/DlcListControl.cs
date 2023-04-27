@@ -127,7 +127,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		}
 
 		var dIcon = new DynamicIcon(!owned ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
-		using (var icon = large ? dIcon.Get(rects.IncludedRect.Height * 3 / 4) : dIcon.Default)
+		using (var icon = large ? dIcon.Get(rects.IncludedRect.Height / 2) : dIcon.Large)
 			e.Graphics.DrawImage(icon.Color(owned && rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 
 		var iconRectangle = rects.IconRect;
@@ -158,8 +158,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 			DrawLabel(e, CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.TopRight);
 		}
 
-		var dsIcon = new DynamicIcon("I_Steam");
-		using (var steamIcon = large ? dsIcon.Get(rects.SteamRect.Height * 3 / 4) : dsIcon.Default)
+		using (var steamIcon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height / 2))
 			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, steamIcon, null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (!isIncluded)

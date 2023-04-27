@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -589,26 +590,27 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (!searchEmpty)
 		{
-			foreach (var item in searchText.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+			var matches = Regex.Matches(searchText, @"(?:^|,)?\s*([+-]?)\s*([^,\-\+]+)");
+			foreach (Match item in matches)
 			{
-				switch (item.TrimStart()[0])
+				switch (item.Groups[1].Value)
 				{
-					case '+':
-						if (item.Trim().Length > 2)
+					case "+":
+						if (!string.IsNullOrWhiteSpace(item.Groups[2].Value))
 						{
-							searchTermsAnd.Add(item.Trim().Substring(1));
+							searchTermsAnd.Add(item.Groups[2].Value.Trim());
 						}
 
 						break;
-					case '-':
-						if (item.Trim().Length > 2)
+					case "-":
+						if (!string.IsNullOrWhiteSpace(item.Groups[2].Value))
 						{
-							searchTermsExclude.Add(item.Trim().Substring(1));
+							searchTermsExclude.Add(item.Groups[2].Value.Trim());
 						}
 
 						break;
 					default:
-						searchTermsOr.Add(item.Trim());
+						searchTermsOr.Add(item.Groups[2].Value.Trim());
 						break;
 				}
 			}

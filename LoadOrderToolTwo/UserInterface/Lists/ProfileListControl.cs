@@ -247,7 +247,8 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var icon = large ? IconManager.GetIcon(isIncluded ? "I_StarFilled" : "I_Star", rects.IncludedRect.Height * 3 / 4) : IconManager.GetIcon(isIncluded ? "I_StarFilled" : "I_Star");
+		var incl = new DynamicIcon(isIncluded ? "I_StarFilled" : "I_Star");
+		using var icon = large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2);
 
 		e.Graphics.DrawImage(icon.Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 

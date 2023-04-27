@@ -189,10 +189,10 @@
         "Changes": [
           "Added a new author filter dropdown.",
           "Added more actions to labels in the content lists.",
-          "Added new \"Any Issues\" option for \"Package Status\" & \"Compatibility Report\" dropdowns.",
+          "Added a new \"Any Issues\" option for \"Package Status\" & \"Compatibility Report\" dropdowns.",
           "All filter actions are now done using Ctrl+Click, added an option to swap this functionality.",
-          "Re-filtering using the shortcuts in the list now removes the item from your filter.\r\n",
-          "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n- Adding '+' at the start of your term will require the term to be matched (AND)\r\n- Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n- car, truck (matches 'car' OR 'truck')\r\n- building, apartment, +european (matches 'european' AND ['building' OR 'apartment'])\r\n- condo, house, -rico, +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
+          "Re-filtering using the shortcuts in the list now removes the item from your filter.",
+          "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
         ]
       },
       {

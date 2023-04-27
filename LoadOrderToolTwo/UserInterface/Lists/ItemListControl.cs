@@ -234,7 +234,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		else if (rects.SteamIdRect.Contains(location))
 		{
-			setTip(Locale.CopyFolderName, rects.SteamIdRect);
+			var folder = Path.GetFileName(item.Item.Folder);
+			setTipFilter(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder), rects.SteamIdRect);
 		}
 
 		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
@@ -244,7 +245,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			var tip = string.Empty;
 
 			if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+			{
 				ExtensionClass.Swap(ref text, ref alt);
+			}
 
 			if (text is not null)
 			{
@@ -424,7 +427,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				if (filter)
 				{
-					AddToSearch?.Invoke($",+{item.Item.SteamId}");
+					AddToSearch?.Invoke(item.Item.SteamId.ToString());
 				}
 				else
 				{
@@ -680,11 +683,17 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	private void DrawButtons(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool isPressed)
 	{
-		SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, IconManager.GetIcon("I_Folder", (rects.FolderRect.Width - Padding.Horizontal) * 3 / 4), null, rects.FolderRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		using (var icon = IconManager.GetIcon("I_Folder", rects.FolderRect.Height / 2))
+		{
+			SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, icon, null, rects.FolderRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		}
 
 		if (e.Item.Workshop)
 		{
-			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, IconManager.GetIcon("I_Steam", (rects.SteamRect.Width - Padding.Horizontal) * 3 / 4), null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+			using (var icon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height / 2))
+			{
+				SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, icon, null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+			}
 		}
 	}
 
@@ -810,8 +819,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var includedIcon = (large ? incl.Large : incl.Get((rects.IncludedRect.Height - Padding.Vertical) * 3 / 4)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = (large ? enabl.Large : enabl.Get((rects.IncludedRect.Height - Padding.Vertical) * 3 / 4)).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
 			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
 			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
 		}
@@ -828,7 +837,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var icon = (large ? incl.Large : incl.Get((rects.IncludedRect.Height - Padding.Vertical) * 3 / 4)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
 			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
 		}
 	}

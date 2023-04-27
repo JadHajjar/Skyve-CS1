@@ -144,7 +144,8 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 			e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 		}
 
-		using var icon = IconManager.GetIcon(isIncluded ? "I_Ok" : "I_Enabled");
+		var incl = new DynamicIcon(isIncluded ? "I_Ok" : "I_Enabled");
+		using var icon = large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2);
 
 		e.Graphics.DrawImage(icon.Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
 

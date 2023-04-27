@@ -190,7 +190,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 			case GenericPackageState.Local:
 				using (var img = IconManager.GetLargeIcon("I_PC").Color(ForeColor))
 				{
-					e.Graphics.DrawImage(img, rects.IncludedRect.CenterR(24, 24));
+					e.Graphics.DrawImage(img, rects.IncludedRect.CenterR(img.Size));
 				}
 
 				break;
@@ -202,7 +202,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 
 				using (var img = IconManager.GetLargeIcon("I_Add"))
 				{
-					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(img.Size));
 				}
 
 				break;
@@ -210,7 +210,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 				e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(includeHovered ? 150 : 255, FormDesign.Design.RedColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 				using (var img = IconManager.GetLargeIcon("I_Cancel"))
 				{
-					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(24, 24));
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(img.Size));
 				}
 
 				break;
@@ -218,7 +218,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 				e.Graphics.FillRoundedRectangle(rects.IncludedRect.Gradient(Color.FromArgb(includeHovered ? 150 : 255, FormDesign.Design.GreenColor), 1.5F), rects.IncludedRect.Pad(0, Padding.Vertical, 0, Padding.Vertical), 4);
 				using (var img = IconManager.GetLargeIcon("I_Ok"))
 				{
-					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(24, 24));
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : FormDesign.Design.ActiveForeColor), rects.IncludedRect.CenterR(img.Size));
 				}
 
 				break;
@@ -230,7 +230,7 @@ internal class GenericPackageListControl : SlickStackedListControl<IGenericPacka
 
 				using (var img = IconManager.GetLargeIcon("I_Enabled"))
 				{
-					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(24, 24));
+					e.Graphics.DrawImage(img.Color(includeHovered ? FormDesign.Design.ActiveColor : ForeColor), rects.IncludedRect.CenterR(img.Size));
 				}
 
 				break;
