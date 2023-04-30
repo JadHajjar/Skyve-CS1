@@ -182,10 +182,10 @@
     {
         "Version": "2.3.0",
         "Date": "2023-04-27",
-        "Tagline": "Aggiornamento pulizia primavera",
+        "Tagline": "Aggiornamento pulizie di primavera",
         "ChangeGroups": [
             {
-                "Name": "Filtro E Ricerca Modifiche",
+                "Name": "Filtra e Ricerca Modifiche",
                 "Changes": [
                     "Aggiunto un nuovo filtro autore a discesa.",
                     "Aggiunte altre azioni alle etichette negli elenchi dei contenuti.",
@@ -212,7 +212,7 @@
                 ]
             },
             {
-                "Name": "Revamp Selezione File",
+                "Name": "Selezione dei file migliorata",
                 "Changes": [
                     "Aggiornato l'interfaccia utente delle schermate di selezione dei file.",
                     "Aggiunte cartelle bloccate per accedere facilmente alle cartelle rilevanti.",
@@ -222,12 +222,28 @@
                 ]
             },
             {
-                "Name": "Correzioni Di Bug",
+                "Name": "Correzioni di bug",
                 "Changes": [
                     "Lancio fisso LOT dopo che il monitor era precedentemente acceso si è spento con conseguente nella finestra ora in mostra.",
                     "Risolto l'opzione LHT non funziona quando si avvia in una nuova mappa.",
                     "Pagine dell'autore corrette che non si aprono correttamente in Steam.",
                     "Corretto blocco durante la ricerca mentre l'ordinamento 'Abbonamento tempo' è stato selezionato."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Pulizia Pacchetti del Workshop",
+                "Changes": [
+                    "Aggiunte nuove funzioni per gestire facilmente le discrepanze tra Steam e i tuoi pacchetti scaricati.",
+                    "I pacchetti a cui non sei iscritto non vengono più caricati durante il gioco.",
+                    "Lanciando il gioco con LOT aperto cancellerà automaticamente tutti i pacchetti a cui non sei iscritto, ma che si trovano sul tuo computer.",
+                    "Aggiunto un pulsante nella scheda Utilità per eseguire manualmente questa pulizia e per forzare lo scaricamento dei pacchetti mancanti."
                 ]
             }
         ]

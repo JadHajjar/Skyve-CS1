@@ -225,9 +225,25 @@
                 "Name": "Corrections de bugs",
                 "Changes": [
                     "Correction du lancement de LOT après que le moniteur était précédemment éteint, ce qui faisait apparaître la fenêtre.",
-                    "Correction de l'option DHT qui ne fonctionnait pas lors du lancement dans une nouvelle carte.",
+                    "Correction de l'option de circulation à gauche qui ne fonctionnait pas lors du lancement dans une nouvelle carte.",
                     "Correction de l'ouverture des pages de l'auteur dans Steam.",
                     "Correction du blocage lors de la recherche alors que le tri \"Heure d'abonnement\" était sélectionné."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nettoyage des paquets du Workshop",
+                "Changes": [
+                    "Ajout des nouvelles fonctionnalités pour gérer facilement les différences entre Steam et vos paquets téléchargez.",
+                    "Les paquets auxquels vous n'êtes pas abonnés ne sont plus chargé en jeu.",
+                    "Lancer le jeu pendant que LOT est ouvert supprimera automatiquement tous les paquets auxquels vous n'êtes pas abonné, mais qui sont téléchargé sur votre ordinateur.",
+                    "Ajout d'un bouton dans l'onglet Utilitaires pour exécuter manuellement ce nettoyage et forcer le téléchargement des paquets manquants."
                 ]
             }
         ]

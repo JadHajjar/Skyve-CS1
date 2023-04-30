@@ -189,10 +189,10 @@
                 "Changes": [
                     "Adicionado um novo menu de filtro de autor.",
                     "Adicionadas mais ações às etiquetas nas listas de conteúdo.",
-                    "Adicionada uma nova opção \"Qualquer Problema\" para os menus \"Status de pacote\" e \"Relatório de Compatibilidade\".",
+                    "Adicionada uma nova opção \"Qualquer Problema\" para os menus suspensos de \"Estado de pacote\" e \"Relatório de Compatibilidade\".",
                     "Todas as ações de filtro agora são feitas usando Ctrl+Clique, adicionado uma opção para trocar essa funcionalidade.",
-                    "Re-filtrar usando os atalhos da lista agora remove o item de seu filtro.",
-                    "Separar os termos com uma vírgula na busca dividirá sua pesquisa para corresponder a qualquer um dos termos\r\n\t(R)• Adicionar '+' no início do seu termo exigirá que o termo seja compatível com (AND)\r\n\t• Adicionar '-' no início do seu termo excluirá itens que correspondam ao termo\r\n\r\nExemplos de nova pesquisa:\r\n\tcarro, caminhão (partidas 'carro' OU 'caminhão')\r\n\t(https://) • construção, apartamento +europeu(partidas 'europeus' e ['construção' OU 'apartamento'])\r\n\t➜ • condo, house -rico +americano (corresponde a 'americano' E ['condo' OU 'casa'] E não a 'rico')"
+                    "Filtrar novamente usando os atalhos da lista agora remove o item do filtro.",
+                    "\t• Separar os termos com vírgula ao pesquisar, corresponderá a qualquer um dos termos separados (OU)\n\t• Adicionar '+' no início da palavra exigirá que a palavra coporresponda na busca. (E)\n\t• Adicionar '-' no início da palavra excluirá itens que corresponda na busca. (NÃO)\nExemplos de nova pesquisa:\n\t• Carro, caminhão (pesquisa por carro OU caminhão)\n\t• Construção, apartamento +europeu (pesquisa por construção OU apartamento que seja europeu)\n\t• Condo, house -RICO +americano (pesquisa por Condo OU casa, E que seja americano, que NÃO seja RICO)"
                 ]
             },
             {
@@ -225,9 +225,25 @@
                 "Name": "Correções de Erros",
                 "Changes": [
                     "Corrigido a abertura do LOT após o monitor em que estava aberto ser desligado, resultando agora em uma janela aparecendo.",
-                    "Corrigido a opção do LHT não funcionar quando aberta num novo mapa.",
+                    "Corrigido a opção de tráfego à esquerda ñao funcionar quando aberta um novo mapa.",
                     "Corrigido as paginas de Autores não abrindo corretamente na Steam.",
                     "Congelamentos corrigidos ao buscar com o filtro 'Tempo Inscrito' ativo."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Limpeza de Pacotes da Oficina",
+                "Changes": [
+                    "Adicionada novas funcionalidades para resolver incompatibilidade da Steam e os seus pacotes baixados.",
+                    "Os pacotes que você não está mais inscrito não serão mais carregados no jogo.",
+                    "Abrir o jogo enquanto o LOT está aberto apagará automaticamente qualquer pacote que não está inscrito, mas está carregado no seu computador.",
+                    "Adicionado um botão na Aba Utilidades para a execução da limpeza automaticamente, e forçar o carregamento de pacotes que faltam."
                 ]
             }
         ]

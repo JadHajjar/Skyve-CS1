@@ -189,10 +189,10 @@
                 "Changes": [
                     "Ahora se puede filtrar por autor.",
                     "Más acciones en las etiquetas en las listas de contenido.",
-                    "Se añadió una nueva opción \"Cualquier problema\" para \"Estado del paquete\" y \"Informes de compatibilidad\".",
+                    "Nueva opción de \"Cualquier problema\" en el \"Estado de paquete\" y \"Reporte de Compatibilidad\".",
                     "Acciones en filtros se ejecutan con Ctrl+Clic. Agregada la opción para intercambiar la funcionalidad.",
                     "El refiltrado utilizando los accesos directos de la lista ahora elimina el elemento de su filtro.",
-                    "Separar los términos con una coma en su búsqueda dividirá la búsqueda para que coincida con cualquiera de los términos (OR)\r\n\t• Añadir '+' al inicio de su término requerirá que el término sea emparejado (YD)\r\n\t• Añadir '-' al inicio de su término excluirá los artículos que coincidan con ese término\r\n\r\nEjemplos de la nueva búsqueda:\r\n\t• coche, camión (match 'car' or 'camion')\r\n\t• edificio, apartamento +europeo (coincide con 'europeo' AND ['edificio' O 'apartamento'])\r\n\t• condo, casa -rica + icana (coincide con 'americano' Y ['condo' O 'casa'] Y NO 'rico')"
+                    "Separar los términos con una coma al buscar, dividirá tu búsqueda para que coincida con cualquiera de los términos (OR)\n- Añadir '+' al inicio de su término requerirá que el término sea agregado (AND)\n- Añadir '-' al inicio de su término excluirá los artículos que coincidan con ese término\n\nEjemplos de búsqueda:\n- car, truck (resulta en 'car' O 'camion')\n- building, apartment, +european (coincide con 'european' Y ['building' O 'apartment'])\n- condo, house, -rico, +american (coincide con 'american' Y ['condo' O 'house'] Y NO 'rico')"
                 ]
             },
             {
@@ -228,6 +228,22 @@
                     "Se ha corregido la opción LHT que no funcionaba al ejecutar el juego en un nuevo mapa.",
                     "Páginas del autor no abrían correctamente en Steam.",
                     "Bloqueo al buscar mientras se seleccionaba la opción de 'Tiempo de suscripción' al ordenar la lista."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Limpieza de paquetes del Workshop",
+                "Changes": [
+                    "Funcionalidades para manejar fácilmente el contenido entre Steam y los paquetes descargados.",
+                    "Los paquetes a los que no estás suscrito ya no se cargan en el juego.",
+                    "Al lanzar el juego mientras LOT está abierto eliminará automáticamente cualquier paquete al que no estés suscrito, pero descargado en tu computador.",
+                    "Botón en la pestaña Utilidades para ejecutar manualmente esta limpieza, así como forzar la descarga de paquetes faltantes."
                 ]
             }
         ]

@@ -100,7 +100,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 		else
 		{
-			new BackgroundAction(SortingChanged).Run();
+			new BackgroundAction(() => SortingChanged()).Run();
 		}
 	}
 

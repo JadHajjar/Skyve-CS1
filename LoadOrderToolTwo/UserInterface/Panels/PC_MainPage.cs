@@ -153,7 +153,7 @@ public partial class PC_MainPage : PanelContent
 				this.TryInvoke(() =>
 				{
 					B_StartStop.Text = Locale.StartCities;
-					B_StartStop.Image = Properties.Resources.AppIcon_24;
+					B_StartStop.Image = Properties.Resources.I_AppIcon_24;
 					buttonStateRunning = false;
 				});
 			}

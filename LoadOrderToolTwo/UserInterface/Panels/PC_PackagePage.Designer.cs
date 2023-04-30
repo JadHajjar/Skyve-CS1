@@ -185,9 +185,9 @@ partial class PC_PackagePage
 			// 
 			this.L_Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.L_Title.AutoSize = true;
-			this.L_Title.Location = new System.Drawing.Point(135, 12);
+			this.L_Title.Location = new System.Drawing.Point(135, 25);
 			this.L_Title.Name = "L_Title";
-			this.L_Title.Size = new System.Drawing.Size(91, 38);
+			this.L_Title.Size = new System.Drawing.Size(63, 25);
 			this.L_Title.TabIndex = 1;
 			this.L_Title.Text = "label1";
 			this.L_Title.UseMnemonic = false;
@@ -222,6 +222,7 @@ partial class PC_PackagePage
 			this.B_Folder.Size = new System.Drawing.Size(100, 30);
 			this.B_Folder.SpaceTriggersClick = true;
 			this.B_Folder.TabIndex = 4;
+			this.B_Folder.Click += new System.EventHandler(this.B_Folder_Click);
 			// 
 			// B_SteamPage
 			// 
@@ -234,6 +235,7 @@ partial class PC_PackagePage
 			this.B_SteamPage.Size = new System.Drawing.Size(100, 30);
 			this.B_SteamPage.SpaceTriggersClick = true;
 			this.B_SteamPage.TabIndex = 5;
+			this.B_SteamPage.Click += new System.EventHandler(this.B_SteamPage_Click);
 			// 
 			// B_Redownload
 			// 
@@ -246,6 +248,7 @@ partial class PC_PackagePage
 			this.B_Redownload.Size = new System.Drawing.Size(100, 30);
 			this.B_Redownload.SpaceTriggersClick = true;
 			this.B_Redownload.TabIndex = 6;
+			this.B_Redownload.Click += new System.EventHandler(this.B_Redownload_Click);
 			// 
 			// PC_PackagePage
 			// 

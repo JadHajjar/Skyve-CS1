@@ -33,7 +33,7 @@ namespace LoadOrderMod;
 public class LoadOrderUserMod : IUserMod
 {
 	public static Version ModVersion => typeof(LoadOrderUserMod).Assembly.GetName().Version;
-	public static string VersionString => ModVersion.ToString(2);
+	public static string VersionString => ModVersion.ToString(3);
 	public string Name => "Load Order Mod " + VersionString;
 	public string Description => "Manage your custom content easily, from one place.";
 	public static string HARMONY_ID = "CS.TDW.LoadOrder";

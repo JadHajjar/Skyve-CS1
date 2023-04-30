@@ -161,6 +161,8 @@ internal static class CentralManager
 
 		OnContentLoaded();
 
+		SubscriptionsUtil.Start();
+
 		if (CommandUtil.PreSelectedProfile == CurrentProfile.Name)
 		{
 			Log.Info($"[Command] Applying Profile ({CurrentProfile.Name})..");

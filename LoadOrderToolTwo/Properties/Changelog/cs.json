@@ -231,5 +231,21 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Workshop Packages Cleanup",
+                "Changes": [
+                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
+                    "Packages you are not subscribed to are no longer loaded in-game.",
+                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
+                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                ]
+            }
+        ]
     }
 ]
