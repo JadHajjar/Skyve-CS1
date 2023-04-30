@@ -119,7 +119,7 @@ public partial class MainForm : BasePanelForm
 	{
 		e.Graphics.SetUp(base_PB_Icon.BackColor);
 
-		using var icon = base_PB_Icon.Width > 48 ? Properties.Resources.AppIcon_96 : Properties.Resources.AppIcon_48;
+		using var icon = IconManager.GetIcon("I_AppIcon", base_PB_Icon.Width);
 
 		if (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 		{

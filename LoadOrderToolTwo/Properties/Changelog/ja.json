@@ -189,10 +189,10 @@
                 "Changes": [
                     "作者でフィルタするドロップダウンを新規で追加",
                     "コンテンツリストのラベルにアクションを更に追加",
-                    "「パッケージステータス」と「互換性レポート」のドロップダウンに新しい「任意の問題」オプションを追加しました。",
+                    "「パッケージステータス」と「互換性レポート」のドロップダウンに新しい「全ての問題」オプションを追加しました。",
                     "全てのフィルタ操作はCtrl+クリックで実行可能になって、この機能を入れ替えるオプションを追加",
-                    "リストのショートカットを使用して再フィルタリングすると、フィルタから項目が削除されるようになりました。",
-                    "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
+                    "リスト内のショートカットを使用して再びフィルタを行うと、アイテムをフィルタから除くように改善",
+                    "検索欄で単語をコンマ「,」で区切ると、いずれかの単語で一致するアイテムを全て表示 (OR動作)\n\t・単語の先頭に「+」を追加すると、単語と一致するアイテムを表示 (AND動作)\n\t・単語の先頭に「-」を追加すると、単語に一致するアイテムを除外 (NOT動作)\n\n新しい検索の例:\n\t・car, truck (「car」と「truck」は一致して全て表示)\n\t・building, apartment, +european (「european」と一致して、「building」か「apartment」を含む場合は表示)\n\t・condo, house, -rico, +american (「american」と一致して、「condo」か「house」を含む場合は表示して、「rico」は除外)"
                 ]
             },
             {
@@ -228,6 +228,22 @@
                     "新しいマップでの起動時にLHTのオプションが機能しない問題を修正",
                     "Steamで作者のページが正しく開けない問題を修正",
                     "「サブスクの時間」ソートを選択した状態で検索すると、フリーズする問題を修正"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "ワークショップのパッケージをクリーンアップ",
+                "Changes": [
+                    "SteamからDLしたパッケージの不一致を簡単に処理する新機能を追加",
+                    "サブスクしていないパッケージはゲーム内でロードしないように変更",
+                    "LOTを開いてゲームを起動すると、サブスクしていないパッケージがPCに存在する場合は自動的に削除",
+                    "「ユーティリティ」タブにクリーンアップ機能を追加して、不足したパッケージの強制DLを手動で実行するボタンを追加"
                 ]
             }
         ]

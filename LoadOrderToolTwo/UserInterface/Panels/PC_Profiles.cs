@@ -184,6 +184,7 @@ public partial class PC_Profiles : PanelContent
 		CB_RefreshWorkshop.Checked = profile.LaunchSettings.RefreshWorkshop;
 		DD_NewMap.SelectedFile = profile.LaunchSettings.MapToLoad;
 		DD_SaveFile.SelectedFile = profile.LaunchSettings.SaveToLoad;
+		TB_CustomArgs.Text = profile.LaunchSettings.CustomArgs;
 
 		CB_LoadUsed.Checked = profile.LsmSettings.LoadUsed;
 		CB_LoadEnabled.Checked = profile.LsmSettings.LoadEnabled;
@@ -249,6 +250,7 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.DebugMono = CB_DebugMono.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.DevUi = CB_DevUI.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.CustomArgs = TB_CustomArgs.Text;
 
 		CentralManager.CurrentProfile.LsmSettings.SkipFile = IOUtil.ToRealPath(DD_SkipFile.SelectedFile);
 		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;

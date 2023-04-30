@@ -132,6 +132,7 @@ public static class CitiesManager
 	private static string[] GetCommandArgs()
 	{
 		var args = new List<string>();
+
 		if (!CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe)
 		{
 			args.Add("-applaunch 255710");
@@ -195,10 +196,37 @@ public static class CitiesManager
 			}
 		}
 
-		//var extraArgs = textBoxExtraArgs.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-		//args.AddRange(extraArgs);
+		if (!string.IsNullOrWhiteSpace(CentralManager.CurrentProfile.LaunchSettings.CustomArgs))
+		{
+			args.Add(CentralManager.CurrentProfile.LaunchSettings.CustomArgs!);
+		}
 
 		return args.ToArray();
+	}
+
+	public static bool RunStub()
+	{
+		if (IsRunning())
+		{
+			MessagePrompt.Show(Locale.CloseCitiesToClean, PromptButtons.OK, PromptIcons.Hand, Program.MainForm);
+			return false;
+		}
+
+		if (!CentralManager.SessionSettings.SubscribeInfoShown)
+		{
+			MessagePrompt.Show(Locale.CleanupRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
+
+			CentralManager.SessionSettings.SubscribeInfoShown = true;
+			CentralManager.SessionSettings.Save();
+		}
+
+		var command = $"-applaunch 255710 -stub";
+
+		var file = LocationManager.SteamPathWithExe;
+
+		IOUtil.Execute(file, command);
+
+		return true;
 	}
 
 	public static async Task<bool> Subscribe(IEnumerable<string> ids, bool unsub = false)

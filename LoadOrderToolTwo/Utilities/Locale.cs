@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using System;
+using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Utilities;
 internal class Locale : LocaleHelper
@@ -304,4 +305,7 @@ internal class Locale : LocaleHelper
 	public static string ViewPackageCR => _instance.GetText(nameof(ViewPackageCR));
 	public static string FilterByThisEnabledStatus => _instance.GetText(nameof(FilterByThisEnabledStatus));
 	public static string FilterByThisIncludedStatus => _instance.GetText(nameof(FilterByThisIncludedStatus));
+	public static string CleanupInfo => _instance.GetText(nameof(CleanupInfo));
+	public static string CloseCitiesToClean => _instance.GetText(nameof(CloseCitiesToClean));
+	public static string CleanupRequiresGameToOpen => _instance.GetText(nameof(CleanupRequiresGameToOpen));
 }

@@ -60,6 +60,7 @@ public partial class PC_ModUtilities : PanelContent
 		LC_Duplicates.SetSorting(PackageSorting.Mod, false);
 
 		B_ReDownload.Loading = false;
+		B_Cleanup.Loading = false;
 
 		this.TryInvoke(() =>
 		{
@@ -77,6 +78,7 @@ public partial class PC_ModUtilities : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = Locale.Utilities;
+		L_CleanupInfo.Text = Locale.CleanupInfo;
 	}
 
 	protected override void UIChanged()
@@ -84,10 +86,11 @@ public partial class PC_ModUtilities : PanelContent
 		base.UIChanged();
 
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Text.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		P_Cleanup.Margin = P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Text.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		B_ReDownload.Margin = TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_ImportClipboard.Margin = UI.Scale(new Padding(10), UI.FontScale);
-		L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9.75F);
+		L_CleanupInfo.Font = L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9F);
+		L_CleanupInfo.Margin = L_OutOfDate.Margin = L_Incomplete.Margin = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -95,6 +98,7 @@ public partial class PC_ModUtilities : PanelContent
 		base.DesignChanged(design);
 
 		BackColor = design.AccentBackColor;
+		L_CleanupInfo.ForeColor = design.LabelColor;
 		L_OutOfDate.ForeColor = design.YellowColor;
 		L_Incomplete.ForeColor = design.RedColor;
 
@@ -197,7 +201,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	private bool DD_TextImport_ValidFile(object arg1, string arg2)
 	{
-		return true; 
+		return true;
 	}
 
 	private void DD_TextImport_FileSelected(string obj)
@@ -223,7 +227,9 @@ public partial class PC_ModUtilities : PanelContent
 	private void B_ImportClipboard_Click(object sender, EventArgs e)
 	{
 		if (!Clipboard.ContainsText())
+		{
 			return;
+		}
 
 		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
 		var assets = new List<Profile.Asset>();
@@ -241,5 +247,14 @@ public partial class PC_ModUtilities : PanelContent
 		}
 
 		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+	}
+
+	private void B_Cleanup_Click(object sender, EventArgs e)
+	{
+		if (CitiesManager.RunStub())
+		{
+			B_Cleanup.Loading = true;
+			SubscriptionsUtil.Redownload = true;
+		}
 	}
 }

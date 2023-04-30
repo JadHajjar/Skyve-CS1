@@ -182,8 +182,6 @@ namespace LoadOrderMod.Data {
                 Save();
                 AquireDlcs();
                 Save();
-
-				File.WriteAllLines(Path.Combine(SharedUtil.LocalLOMData, "SubscriptionList.txt"), PlatformService.workshop.GetSubscribedItems().Select(x => x.AsUInt64.ToString()).ToArray());
 			} catch (Exception ex) { Log.Exception(ex); }
             finally { Caching = false; }
         }
