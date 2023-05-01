@@ -54,7 +54,6 @@ public class Asset : IPackage
 	public string? IconUrl { get => ((IPackage)Package).IconUrl; set => ((IPackage)Package).IconUrl = value; }
 	public long LocalSize => ((IPackage)Package).LocalSize;
 	public bool RemovedFromSteam { get => ((IPackage)Package).RemovedFromSteam; set => ((IPackage)Package).RemovedFromSteam = value; }
-	public bool Private { get => ((IPackage)Package).Private; set => ((IPackage)Package).Private = value; }
 	public long ServerSize { get => ((IPackage)Package).ServerSize; set => ((IPackage)Package).ServerSize = value; }
 	public DateTime ServerTime { get => ((IPackage)Package).ServerTime; set => ((IPackage)Package).ServerTime = value; }
 	public DownloadStatus Status { get => ((IPackage)Package).Status; set => ((IPackage)Package).Status = value; }
@@ -66,6 +65,12 @@ public class Asset : IPackage
 	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
 	public bool IsPseudoMod { get => ((IPackage)Package).IsPseudoMod; set => ((IPackage)Package).IsPseudoMod = value; }
 	public string[]? WorkshopTags { set => ((IPackage)Package).WorkshopTags = value; }
+	public int Stars { get => ((IPackage)Package).Stars; set => ((IPackage)Package).Stars = value; }
+	public int PositiveVotes { get => ((IPackage)Package).PositiveVotes; set => ((IPackage)Package).PositiveVotes = value; }
+	public int NegativeVotes { get => ((IPackage)Package).NegativeVotes; set => ((IPackage)Package).NegativeVotes = value; }
+	public int Subscriptions { get => ((IPackage)Package).Subscriptions; set => ((IPackage)Package).Subscriptions = value; }
+	public ulong[] RequiredPackages { get => ((IPackage)Package).RequiredPackages; set => ((IPackage)Package).RequiredPackages = value; }
+	public SteamVisibility Visibility { get => ((IPackage)Package).Visibility; set => ((IPackage)Package).Visibility = value; }
 	public string[] AssetTags => _assetTags;
 	public IEnumerable<TagItem> Tags
 	{

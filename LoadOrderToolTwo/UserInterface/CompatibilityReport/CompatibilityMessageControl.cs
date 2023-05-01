@@ -47,14 +47,6 @@ internal class CompatibilityMessageControl : SlickControl
 	{
 		base.Dispose(disposing);
 
-		if (LinkedMods is not null)
-		{
-			foreach (var item in LinkedMods)
-			{
-				item.Icon?.Dispose();
-			}
-		}
-
 		CentralManager.ContentLoaded -= CentralManager_ContentLoaded;
 	}
 
@@ -231,12 +223,13 @@ internal class CompatibilityMessageControl : SlickControl
 
 						buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(8.25F));
 
-						_buttonRects[item] = rect.Align(buttonSize, ContentAlignment.BottomRight);
+						_modRects[item] = _modRects[item].Pad(0, 0, 0, -buttonSize.Height);
+						_buttonRects[item] = _modRects[item].Align(buttonSize, ContentAlignment.BottomRight);
 
 						SlickButton.DrawButton(e, _buttonRects[item], buttonText, UI.Font(8.25F), buttonIcon, null, _buttonRects[item].Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Green);
 					}
 
-					rect.Y += rect.Height + pad;
+					rect.Y += _modRects[item].Height + pad;
 				}
 
 				y = rect.Y;

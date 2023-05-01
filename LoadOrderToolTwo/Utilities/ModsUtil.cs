@@ -217,12 +217,6 @@ internal static class ModsUtil
 			return DownloadStatus.OK;
 		}
 
-		if (mod.Private)
-		{
-			reason = Locale.ModIsPrivate;
-			return DownloadStatus.Unknown;
-		}
-
 		if (mod.RemovedFromSteam)
 		{
 			reason = Locale.ModIsRemoved;

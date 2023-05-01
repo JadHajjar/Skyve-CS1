@@ -7,6 +7,8 @@ using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
+using Newtonsoft.Json;
+
 using SlickControls;
 
 using System;
@@ -17,7 +19,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -66,7 +67,7 @@ public static class SteamUtil
 		{
 			var path = ISave.GetPath(STEAM_CACHE_FILE);
 
-			if (DateTime.Now - File.GetLastWriteTime(path) > TimeSpan.FromDays(1.5) && ConnectionHandler.IsConnected)
+			if (DateTime.Now - File.GetLastWriteTime(path) > TimeSpan.FromDays(7) && ConnectionHandler.IsConnected)
 			{
 				return null;
 			}
@@ -159,7 +160,9 @@ public static class SteamUtil
 
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoAsync(ulong[] ids)
 	{
-		var results = await ConvertInChunks(ids, 1000, GetWorkshopInfoImplementationAsync);
+		await QueryFilesAsync(SteamQueryOrder.RankedByLastUpdatedDate, requiredTags: new[] { "Mod" });
+
+		var results = await ConvertInChunks(ids, 200, GetWorkshopInfoImplementationAsync);
 
 		SaveCache(results);
 
@@ -168,60 +171,21 @@ public static class SteamUtil
 
 	private static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoImplementationAsync(List<ulong> ids)
 	{
-		var url = @"https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/";
+		var url = "https://api.steampowered.com/IPublishedFileService/GetDetails/v1/?key=706303B24FA0E63B1FB25965E081C2E1&includetags=true&includechildren=true&includevotes=true";
 
 		ids.Remove(0);
 
-		var bodyDictionary = new Dictionary<string, string>
+		for (var i = 0; i < ids.Count; i++)
 		{
-			["itemcount"] = ids.Count.ToString()
-		};
-
-		for (var i = 0; i < ids.Count; ++i)
-		{
-			bodyDictionary[$"publishedfileids[{i}]"] = ids[i].ToString();
+			url += $"&publishedfileids[{i}]={ids[i]}";
 		}
 
 		try
 		{
 			using var httpClient = new HttpClient();
-			var body = new FormUrlEncodedContent(bodyDictionary);
-			var httpResponse = await httpClient.PostAsync(url, body);
+			var httpResponse = await httpClient.GetAsync(url);
 
-			if (httpResponse.IsSuccessStatusCode)
-			{
-				var response = await httpResponse.Content.ReadAsStringAsync();
-
-				var data = Newtonsoft.Json.JsonConvert.DeserializeObject<SteamWorkshopItemRootResponse>(response)?.response.publishedfiledetails
-					.Where(x => x.result is 1 or 17 or 86 or 9)
-					.Select(x => new SteamWorkshopItem(x))
-					.ToList() ?? new();
-
-				var users = await ConvertInChunks(data.Select(x => x.AuthorID ?? string.Empty).Distinct(), 100, GetSteamUsers);
-
-				foreach (var item in data)
-				{
-					if (!string.IsNullOrEmpty(item.AuthorID) && users.ContainsKey(item.AuthorID!))
-					{
-						item.Author = new(users[item.AuthorID!]);
-					}
-				}
-
-				foreach (var item in data.Where(x => x.Private))
-				{
-					var info = await GetUnlistedWorkshopEntryAsync("https://steamcommunity.com/workshop/filedetails?id=" + item.SteamId);
-
-					if (info.Item1 is not null)
-					{
-						item.Title = info.Item1;
-						item.PreviewURL = info.Item2;
-					}
-				}
-
-				return data.ToDictionary(x => ulong.Parse(x.PublishedFileID));
-			}
-
-			Log.Error("failed to get steam data: " + httpResponse.RequestMessage);
+			return await ConvertPublishedFileResponse(httpResponse);
 		}
 		catch (Exception ex)
 		{
@@ -231,21 +195,78 @@ public static class SteamUtil
 		return new();
 	}
 
-	public static async Task<(string?, string?)> GetUnlistedWorkshopEntryAsync(string entryUrl)
+	public static async Task<Dictionary<ulong, SteamWorkshopItem>> QueryFilesAsync(SteamQueryOrder order, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null)
 	{
-		using var client = new HttpClient();
-		var response = await client.GetAsync(entryUrl);
-		var entryHtml = await response.Content.ReadAsStringAsync();
+		var url = $"https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key=706303B24FA0E63B1FB25965E081C2E1&query_type={(int)order}&page=0&numperpage=100&creator_appid=255710&appid=255710&match_all_tags=true&return_tags=true&return_children=true&return_details=true";
 
-		// Extract the entry name from the HTML using a regular expression
-		var nameMatch = Regex.Match(entryHtml, "<div class=\"workshopItemTitle\">\\s*(.*?)\\s*</div>");
-		var entryName = nameMatch.Success ? nameMatch.Groups[1].Value : null;
+		if (!string.IsNullOrWhiteSpace(query))
+		{
+			url += $"&search_text={System.Net.WebUtility.UrlEncode(query)}";
+		}
 
-		// Extract the thumbnail URL from the HTML using a regular expression
-		var thumbnailMatch = Regex.Match(entryHtml, "<img .+? class=\"workshopItemPreviewImageMain\" src=\"(.*?)\"");
-		var thumbnailUrl = thumbnailMatch.Success ? Regex.Replace(thumbnailMatch.Groups[1].Value, @"imw=\d+&imh=\d+", "imw=5000&imh=5000").Replace("letterbox=true", "letterbox=false") : null;
+		if (requiredTags?.Any() ?? false)
+		{
+			for (var i = 0; i < requiredTags.Length; i++)
+			{
+				url += $"&requiredtags[{i}]={System.Net.WebUtility.UrlEncode(requiredTags[i])}";
+			}
+		}
 
-		return (entryName, thumbnailUrl);
+		if (excludedTags?.Any() ?? false)
+		{
+			for (var i = 0; i < excludedTags.Length; i++)
+			{
+				url += $"&excludedtags[{i}]={System.Net.WebUtility.UrlEncode(excludedTags[i])}";
+			}
+		}
+
+		if (dateRange is not null)
+		{
+			url += $"&date_range_updated[0]={dateRange?.Item1}&date_range_updated[1]={dateRange?.Item2}";
+		}
+
+		try
+		{
+			using var httpClient = new HttpClient();
+			var httpResponse = await httpClient.GetAsync(url);
+
+			return await ConvertPublishedFileResponse(httpResponse);
+		}
+		catch (Exception ex)
+		{
+			Log.Exception(ex, "Failed to get steam information");
+		}
+
+		return new();
+	}
+
+	private static async Task<Dictionary<ulong, SteamWorkshopItem>> ConvertPublishedFileResponse(HttpResponseMessage httpResponse)
+	{
+		if (httpResponse.IsSuccessStatusCode)
+		{
+			var response = await httpResponse.Content.ReadAsStringAsync();
+
+			var data = JsonConvert.DeserializeObject<SteamFileServiceInfo>(response)?.response.publishedfiledetails
+				.Where(x => x.result is 1 or 17 or 86 or 9)
+				.Select(x => new SteamWorkshopItem(x))
+				.ToList() ?? new();
+
+			var users = await ConvertInChunks(data.Select(x => x.AuthorID ?? string.Empty).Distinct(), 100, GetSteamUsers);
+
+			foreach (var item in data)
+			{
+				if (!string.IsNullOrEmpty(item.AuthorID) && users.ContainsKey(item.AuthorID!))
+				{
+					item.Author = new(users[item.AuthorID!]);
+				}
+			}
+
+			return data.ToDictionary(x => ulong.Parse(x.PublishedFileID));
+		}
+
+		Log.Error("failed to get steam data: " + httpResponse.RequestMessage);
+
+		return new();
 	}
 
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> GetCollectionContentsAsync(string collectionId)
@@ -316,7 +337,7 @@ public static class SteamUtil
 
 	public static void ReDownload(params IPackage[] packages)
 	{
-		var currentPath= IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
+		var currentPath = IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
 
 		if (packages.Any(x => x.Folder.PathEquals(currentPath)))
 		{
@@ -370,35 +391,25 @@ public static class SteamUtil
 
 	public static void SetSteamInformation(this IPackage package, SteamWorkshopItem steamWorkshopItem, bool cache)
 	{
-		if (package.Private = steamWorkshopItem.Private)
-		{
-			package.Name = steamWorkshopItem.Title ?? package.Name;
-
-			if (package.IconUrl != steamWorkshopItem.PreviewURL)
-			{
-				package.IconUrl = steamWorkshopItem.PreviewURL ?? package.IconUrl;
-			}
-
-			return;
-		}
-
 		if (package.RemovedFromSteam = steamWorkshopItem.Removed)
 		{
 			return;
 		}
 
 		package.SteamInfoLoaded = true;
-		package.Name = package.SteamId == 2040656402ul ? "Harmony" : steamWorkshopItem.Title ?? package.Name;
+		package.Name = steamWorkshopItem.Title ?? package.Name;
 		package.Author = steamWorkshopItem.Author;
 		package.ServerTime = steamWorkshopItem.UpdatedUTC;
 		package.WorkshopTags = steamWorkshopItem.Tags;
 		package.ServerSize = steamWorkshopItem.Size;
 		package.SteamDescription = steamWorkshopItem.Description;
-
-		if (package.IconUrl != steamWorkshopItem.PreviewURL)
-		{
-			package.IconUrl = steamWorkshopItem.PreviewURL;
-		}
+		package.Stars = WilsonScore(steamWorkshopItem.PositiveVotes, steamWorkshopItem.NegativeVotes + 25 * steamWorkshopItem.Reports);
+		package.RequiredPackages = steamWorkshopItem.Children ?? new ulong[0];
+		package.Visibility = steamWorkshopItem.Visibility;
+		package.IconUrl = steamWorkshopItem.PreviewURL;
+		package.Subscriptions = steamWorkshopItem.Subscriptions;
+		package.PositiveVotes = steamWorkshopItem.PositiveVotes;
+		package.NegativeVotes = steamWorkshopItem.NegativeVotes;
 
 		if (!cache)
 		{
@@ -458,5 +469,54 @@ public static class SteamUtil
 				DLCsLoaded?.Invoke();
 			}
 		}).Run();
+	}
+
+	//public static int WilsonScore(int upvotes, int downvotes)
+	//{
+	//	if (upvotes + downvotes < 5)
+	//		return -1;
+
+	//	var z = 1.96; // z-score for 95% confidence level
+	//	var n = 250D;
+	//	var p = (upvotes - downvotes) / n;
+
+	//	if (p > 1)
+	//		return 100;
+
+	//	var a = p + (z * z / (2 * n));
+	//	var b = z * Math.Sqrt(((p * (1 - p)) + (z * z / (4 * n))) / n);
+	//	var upperBound = (a + b) / (1 + (z * z / n));
+
+	//	return (int)(100 * upperBound).Between(0, 100);
+	//}
+	
+	public static int WilsonScore(int upvotes, int downvotes)
+	{
+		if (upvotes + downvotes < 15)
+			return -1;
+
+		// ignore downvotes when there's less than 5 downvotes per 100 upvotes
+		if (upvotes > 0 && (double)downvotes / upvotes < 0.05)
+			downvotes = 0;
+
+		var z = 1.96; // z-score for 95% confidence level
+		var n = upvotes + downvotes;
+		var p = (double)upvotes / n;
+		var a = p + (z * z / (2 * n));
+		var b = z * Math.Sqrt(((p * (1 - p)) + (z * z / (4 * n))) / n);
+		var lowerBound = (a - b) / (1 + (z * z / n));
+		var upperBound = (a + b) / (1 + (z * z / n));
+
+		if (n < 100)
+		{ 
+			p *= (100 - n) / 100D; 
+		}
+
+		// ^3 formula to make the difference between positive and negative values more pronounced
+		var averageBound = Math.Min(1.1, Math.Max(-0.1, p + 0.05 * Math.Pow((p * 2 - 1) / 2, 3)));
+
+		var percentage = (lowerBound + ((upperBound - lowerBound) * averageBound));
+
+		return (int)Math.Round(Math.Max(0, 200 * percentage - 100));
 	}
 }

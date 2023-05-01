@@ -308,4 +308,6 @@ internal class Locale : LocaleHelper
 	public static string CleanupInfo => _instance.GetText(nameof(CleanupInfo));
 	public static string CloseCitiesToClean => _instance.GetText(nameof(CloseCitiesToClean));
 	public static string CleanupRequiresGameToOpen => _instance.GetText(nameof(CleanupRequiresGameToOpen));
+	public static string SubscribersCount => _instance.GetText(nameof(SubscribersCount));
+	public static string RatingCount => _instance.GetText(nameof(RatingCount));
 }

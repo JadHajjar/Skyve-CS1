@@ -45,7 +45,7 @@ internal static class Program
 			try
 			{
 				var toolPath = ExecutablePath;
-				var openTools = !CommandUtil.NoWindow && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
+				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
 
 				if (openTools)
 				{

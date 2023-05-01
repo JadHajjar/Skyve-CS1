@@ -22,6 +22,7 @@ public class Package : IPackage
 		Folder = folder.FormatPath();
 		BuiltIn = builtIn;
 		Workshop = workshop;
+		RequiredPackages = new ulong[0];
 
 		if (workshop)
 		{
@@ -58,6 +59,12 @@ public class Package : IPackage
 	public string[]? WorkshopTags { get; set; }
 	public string? SteamDescription { get; set; }
 	public bool IsPseudoMod { get; set; }
+	public int Stars { get; set; }
+	public int Subscriptions { get; set; }
+	public int PositiveVotes { get; set; }
+	public int NegativeVotes { get; set; }
+	public ulong[] RequiredPackages { get; set; }
+	public SteamVisibility Visibility { get; set; }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
 	public IEnumerable<TagItem> Tags => WorkshopTags?.Select(x => new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<TagItem>();
 

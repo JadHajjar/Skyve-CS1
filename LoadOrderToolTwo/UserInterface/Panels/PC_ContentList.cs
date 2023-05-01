@@ -8,6 +8,7 @@ using LoadOrderToolTwo.Domain.Utilities;
 using LoadOrderToolTwo.UserInterface.Generic;
 using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -17,6 +18,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,6 +58,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		LC_Items.FilterByEnabled += LC_Items_FilterByEnabled;
 		LC_Items.FilterByIncluded += LC_Items_FilterByIncluded;
 		LC_Items.AddToSearch += LC_Items_AddToSearch;
+		LC_Items.OpenWorkshopSearch += LC_Items_OpenWorkshopSearch;
+		LC_Items.OpenWorkshopSearchInBrowser += LC_Items_OpenWorkshopSearchInBrowser;
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -93,6 +97,16 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			DD_Author.SetItems(items.Where(x => x.Author is not null));
 			DD_Tags.Items = items.SelectMany(x => x.Tags).Distinct(x => x.Value.ToLower()).ToArray();
 		}).Run();
+	}
+
+	private void LC_Items_OpenWorkshopSearch()
+	{
+		throw new NotImplementedException();
+	}
+
+	private void LC_Items_OpenWorkshopSearchInBrowser()
+	{
+		PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/browse/?appid=255710&searchtext={WebUtility.UrlEncode(TB_Search.Text)}&browsesort=trend&section=readytouseitems&actualsort=trend&p=1&days=365" + (this is PC_Mods ? "&requiredtags%5B0%5D=Mod" : ""));
 	}
 
 	private void LC_Items_AddToSearch(string obj)
@@ -328,14 +342,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		LC_Items.DoFilterChanged();
 		this.TryInvoke(RefreshCounts);
-		TB_Search.Loading = false;
+		I_Refresh.Loading = false;
 	}
 
 	private void FilterChanged(object sender, EventArgs e)
 	{
 		if (!clearingFilters)
 		{
-			TB_Search.Loading = true;
+			I_Refresh.Loading = true;
 			_delayedSearch.Run();
 
 			if (sender == I_Refresh)
@@ -587,6 +601,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		searchTermsAnd.Clear();
 		searchTermsExclude.Clear();
 		searchTermsOr.Clear();
+
+		LC_Items.TextSearchEmpty = searchEmpty;
 
 		if (!searchEmpty)
 		{

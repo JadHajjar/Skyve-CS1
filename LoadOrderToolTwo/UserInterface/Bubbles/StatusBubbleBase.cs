@@ -53,15 +53,15 @@ internal abstract class StatusBubbleBase : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle.Pad(2), Padding.Left);
 
-		using var icon = ImageName.Large;
-		var titleHeight = Math.Max(icon.Height, (int)e.Graphics.Measure(Text, UI.Font(9.75F, FontStyle.Bold), Width - Padding.Horizontal).Height);
-		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - icon.Height) / 2), icon.Width, icon.Height);
+		using var icon = ImageName?.Large;
+		var titleHeight = Math.Max(icon?.Height ?? 0, (int)e.Graphics.Measure(Text, UI.Font(9.75F, FontStyle.Bold), Width - Padding.Horizontal).Height);
+		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - icon?.Height ?? 0) / 2), icon?.Width ?? 0, icon?.Height ?? 0);
 
 		if (Loading)
 		{
 			DrawLoader(e.Graphics, iconRectangle);
 		}
-		else
+		else if (icon is not null)
 		{
 			try
 			{
@@ -71,7 +71,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 			catch { }
 		}
 
-		e.Graphics.DrawString(Text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle(icon.Height + (Padding.Left * 2), Padding.Top, Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(Text, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(fore), new Rectangle((icon?.Height ?? 0) + (Padding.Left * 2), Padding.Top, Width - Padding.Horizontal, titleHeight), new StringFormat { LineAlignment = StringAlignment.Center });
 
 		var targetHeight = titleHeight + Padding.Vertical;
 

@@ -21,7 +21,6 @@ public interface IPackage
 	DateTime LocalTime { get; }
 	string Name { get; set; }
 	bool RemovedFromSteam { get; set; }
-	bool Private { get; set; }
 	long ServerSize { get; set; }
 	DateTime ServerTime { get; set; }
 	DownloadStatus Status { get; set; }
@@ -37,4 +36,10 @@ public interface IPackage
 	long FileSize { get; }
 	bool IsPseudoMod { get; set; }
 	DateTime SubscribeTime { get; }
+	int Stars { get; set; }
+	ulong[] RequiredPackages { get; set; }
+	SteamVisibility Visibility { get; set; }
+	int Subscriptions { get; set; }
+	int PositiveVotes { get; set; }
+	int NegativeVotes { get; set; }
 }

@@ -32,16 +32,16 @@ partial class PC_MainPage
 	/// </summary>
 	private void InitializeComponent()
 	{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC_MainPage));
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_StartStop = new SlickControls.SlickButton();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
+			this.label1 = new System.Windows.Forms.Label();
 			this.profileBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ProfileBubble();
 			this.modsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ModsBubble();
 			this.assetsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.AssetsBubble();
 			this.compatibilityReportBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.CompatibilityReportBubble();
-			this.label1 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.TLP_Profiles.SuspendLayout();
@@ -74,7 +74,8 @@ partial class PC_MainPage
 			this.B_StartStop.ColorShade = null;
 			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_StartStop.Enabled = false;
-			this.B_StartStop.Image = ((System.Drawing.Image)(resources.GetObject("B_StartStop.Image")));
+			dynamicIcon1.Name = "I_AppIcon";
+			this.B_StartStop.ImageName = dynamicIcon1;
 			this.B_StartStop.Location = new System.Drawing.Point(551, 368);
 			this.B_StartStop.Name = "B_StartStop";
 			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
@@ -97,7 +98,7 @@ partial class PC_MainPage
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 164);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 365);
 			this.flowLayoutPanel1.TabIndex = 1;
 			// 
 			// TLP_Profiles
@@ -113,22 +114,33 @@ partial class PC_MainPage
 			this.TLP_Profiles.RowCount = 1;
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Profiles.Size = new System.Drawing.Size(156, 164);
+			this.TLP_Profiles.Size = new System.Drawing.Size(644, 510);
 			this.TLP_Profiles.TabIndex = 13;
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(3, 373);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(71, 30);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "label1";
+			this.label1.Visible = false;
 			// 
 			// profileBubble
 			// 
 			this.profileBubble.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.profileBubble.Location = new System.Drawing.Point(3, 3);
 			this.profileBubble.Name = "profileBubble";
-			this.profileBubble.Size = new System.Drawing.Size(150, 158);
+			this.profileBubble.Size = new System.Drawing.Size(638, 504);
 			this.profileBubble.TabIndex = 0;
 			this.profileBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ProfileBubble_MouseClick);
 			// 
 			// modsBubble
 			// 
 			this.modsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.modsBubble.Location = new System.Drawing.Point(159, 3);
+			this.modsBubble.Location = new System.Drawing.Point(3, 513);
 			this.modsBubble.Name = "modsBubble";
 			this.modsBubble.Size = new System.Drawing.Size(150, 47);
 			this.modsBubble.TabIndex = 1;
@@ -137,7 +149,7 @@ partial class PC_MainPage
 			// assetsBubble
 			// 
 			this.assetsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.assetsBubble.Location = new System.Drawing.Point(315, 3);
+			this.assetsBubble.Location = new System.Drawing.Point(159, 513);
 			this.assetsBubble.Name = "assetsBubble";
 			this.assetsBubble.Size = new System.Drawing.Size(150, 47);
 			this.assetsBubble.TabIndex = 2;
@@ -146,22 +158,11 @@ partial class PC_MainPage
 			// compatibilityReportBubble
 			// 
 			this.compatibilityReportBubble.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.compatibilityReportBubble.Location = new System.Drawing.Point(471, 3);
+			this.compatibilityReportBubble.Location = new System.Drawing.Point(315, 513);
 			this.compatibilityReportBubble.Name = "compatibilityReportBubble";
 			this.compatibilityReportBubble.Size = new System.Drawing.Size(150, 47);
 			this.compatibilityReportBubble.TabIndex = 3;
 			this.compatibilityReportBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CompatibilityReportBubble_MouseClick);
-			// 
-			// label1
-			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 365);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(91, 38);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "label1";
-			this.label1.Visible = false;
 			// 
 			// PC_MainPage
 			// 

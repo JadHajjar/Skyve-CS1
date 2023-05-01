@@ -17,6 +17,7 @@ partial class PC_PackagePage
 	{
 		if (disposing && (components != null))
 		{
+		    LoadOrderToolTwo.Utilities.Managers.CentralManager.PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
 			components.Dispose();
 		}
 		base.Dispose(disposing);
@@ -33,9 +34,6 @@ partial class PC_PackagePage
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
 			this.P_Content = new System.Windows.Forms.Panel();
 			this.slickTabControl1 = new SlickControls.SlickTabControl();
 			this.T_Info = new SlickControls.SlickTabControl.Tab();
@@ -43,20 +41,15 @@ partial class PC_PackagePage
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new LoadOrderToolTwo.UserInterface.Content.PackageIcon();
-			this.L_Title = new System.Windows.Forms.Label();
 			this.P_Back = new System.Windows.Forms.Panel();
+			this.PB_Icon = new LoadOrderToolTwo.UserInterface.Content.PackageIcon();
 			this.P_Info = new LoadOrderToolTwo.UserInterface.Content.PackageDescriptionControl();
-			this.B_Folder = new SlickControls.SlickButton();
-			this.B_SteamPage = new SlickControls.SlickButton();
-			this.B_Redownload = new SlickControls.SlickButton();
 			this.P_Content.SuspendLayout();
 			this.TLP_Top.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
 			// 
-			this.base_Text.Location = new System.Drawing.Point(-2, 3);
 			this.base_Text.Text = "Back";
 			// 
 			// P_Content
@@ -135,31 +128,24 @@ partial class PC_PackagePage
 			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Profiles.Location = new System.Drawing.Point(0, 0);
-			this.TLP_Profiles.MaximumSize = new System.Drawing.Size(769, 2147483647);
-			this.TLP_Profiles.MinimumSize = new System.Drawing.Size(769, 0);
+			this.TLP_Profiles.MaximumSize = new System.Drawing.Size(773, 2147483647);
+			this.TLP_Profiles.MinimumSize = new System.Drawing.Size(773, 0);
 			this.TLP_Profiles.Name = "TLP_Profiles";
 			this.TLP_Profiles.RowCount = 2;
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Profiles.Size = new System.Drawing.Size(769, 208);
+			this.TLP_Profiles.Size = new System.Drawing.Size(773, 208);
 			this.TLP_Profiles.TabIndex = 16;
 			// 
 			// TLP_Top
 			// 
-			this.TLP_Top.ColumnCount = 6;
+			this.TLP_Top.ColumnCount = 3;
 			this.TLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
 			this.TLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Top.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Top.Controls.Add(this.PB_Icon, 1, 0);
-			this.TLP_Top.Controls.Add(this.L_Title, 2, 0);
 			this.TLP_Top.Controls.Add(this.P_Back, 0, 1);
-			this.TLP_Top.Controls.Add(this.P_Info, 2, 1);
-			this.TLP_Top.Controls.Add(this.B_Folder, 5, 0);
-			this.TLP_Top.Controls.Add(this.B_SteamPage, 4, 0);
-			this.TLP_Top.Controls.Add(this.B_Redownload, 3, 0);
+			this.TLP_Top.Controls.Add(this.P_Info, 2, 0);
 			this.TLP_Top.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TLP_Top.Location = new System.Drawing.Point(0, 30);
 			this.TLP_Top.Margin = new System.Windows.Forms.Padding(0);
@@ -167,8 +153,18 @@ partial class PC_PackagePage
 			this.TLP_Top.RowCount = 2;
 			this.TLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Top.Size = new System.Drawing.Size(783, 100);
 			this.TLP_Top.TabIndex = 0;
+			// 
+			// P_Back
+			// 
+			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.P_Back.Location = new System.Drawing.Point(0, 50);
+			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
+			this.P_Back.Name = "P_Back";
+			this.P_Back.Size = new System.Drawing.Size(32, 50);
+			this.P_Back.TabIndex = 2;
 			// 
 			// PB_Icon
 			// 
@@ -181,81 +177,21 @@ partial class PC_PackagePage
 			this.PB_Icon.TabIndex = 0;
 			this.PB_Icon.TabStop = false;
 			// 
-			// L_Title
-			// 
-			this.L_Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.L_Title.AutoSize = true;
-			this.L_Title.Location = new System.Drawing.Point(135, 25);
-			this.L_Title.Name = "L_Title";
-			this.L_Title.Size = new System.Drawing.Size(63, 25);
-			this.L_Title.TabIndex = 1;
-			this.L_Title.Text = "label1";
-			this.L_Title.UseMnemonic = false;
-			// 
-			// P_Back
-			// 
-			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Back.Location = new System.Drawing.Point(0, 50);
-			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
-			this.P_Back.Name = "P_Back";
-			this.P_Back.Size = new System.Drawing.Size(32, 50);
-			this.P_Back.TabIndex = 2;
-			// 
 			// P_Info
 			// 
-			this.TLP_Top.SetColumnSpan(this.P_Info, 4);
 			this.P_Info.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Info.Location = new System.Drawing.Point(132, 50);
+			this.P_Info.Location = new System.Drawing.Point(132, 0);
 			this.P_Info.Margin = new System.Windows.Forms.Padding(0);
 			this.P_Info.Name = "P_Info";
-			this.P_Info.Size = new System.Drawing.Size(651, 50);
+			this.TLP_Top.SetRowSpan(this.P_Info, 2);
+			this.P_Info.Size = new System.Drawing.Size(651, 100);
 			this.P_Info.TabIndex = 3;
-			// 
-			// B_Folder
-			// 
-			this.B_Folder.ColorShade = null;
-			this.B_Folder.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_Folder";
-			this.B_Folder.ImageName = dynamicIcon4;
-			this.B_Folder.Location = new System.Drawing.Point(680, 3);
-			this.B_Folder.Name = "B_Folder";
-			this.B_Folder.Size = new System.Drawing.Size(100, 30);
-			this.B_Folder.SpaceTriggersClick = true;
-			this.B_Folder.TabIndex = 4;
-			this.B_Folder.Click += new System.EventHandler(this.B_Folder_Click);
-			// 
-			// B_SteamPage
-			// 
-			this.B_SteamPage.ColorShade = null;
-			this.B_SteamPage.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_Steam";
-			this.B_SteamPage.ImageName = dynamicIcon5;
-			this.B_SteamPage.Location = new System.Drawing.Point(574, 3);
-			this.B_SteamPage.Name = "B_SteamPage";
-			this.B_SteamPage.Size = new System.Drawing.Size(100, 30);
-			this.B_SteamPage.SpaceTriggersClick = true;
-			this.B_SteamPage.TabIndex = 5;
-			this.B_SteamPage.Click += new System.EventHandler(this.B_SteamPage_Click);
-			// 
-			// B_Redownload
-			// 
-			this.B_Redownload.ColorShade = null;
-			this.B_Redownload.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon6.Name = "I_ReDownload";
-			this.B_Redownload.ImageName = dynamicIcon6;
-			this.B_Redownload.Location = new System.Drawing.Point(468, 3);
-			this.B_Redownload.Name = "B_Redownload";
-			this.B_Redownload.Size = new System.Drawing.Size(100, 30);
-			this.B_Redownload.SpaceTriggersClick = true;
-			this.B_Redownload.TabIndex = 6;
-			this.B_Redownload.Click += new System.EventHandler(this.B_Redownload_Click);
 			// 
 			// PC_PackagePage
 			// 
 			this.Controls.Add(this.P_Content);
 			this.Controls.Add(this.TLP_Top);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
-			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_PackagePage";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Text = "Back";
@@ -264,7 +200,6 @@ partial class PC_PackagePage
 			this.Controls.SetChildIndex(this.P_Content, 0);
 			this.P_Content.ResumeLayout(false);
 			this.TLP_Top.ResumeLayout(false);
-			this.TLP_Top.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -273,13 +208,9 @@ partial class PC_PackagePage
 	#endregion
 	private System.Windows.Forms.TableLayoutPanel TLP_Top;
 	private PackageIcon PB_Icon;
-	private System.Windows.Forms.Label L_Title;
 	private System.Windows.Forms.Panel P_Content;
 	private System.Windows.Forms.Panel P_Back;
 	private PackageDescriptionControl P_Info;
-	private SlickControls.SlickButton B_Redownload;
-	private SlickControls.SlickButton B_Folder;
-	private SlickControls.SlickButton B_SteamPage;
 	private SlickControls.SlickTabControl slickTabControl1;
 	private SlickControls.SlickTabControl.Tab T_Info;
 	internal SlickControls.SlickTabControl.Tab T_CR;

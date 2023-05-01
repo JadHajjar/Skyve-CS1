@@ -24,6 +24,13 @@ public class CustomTagsLibrary
 		public string value;
 	}
 
+	public void AddAndSave()
+	{
+
+
+		Serialize();
+	}
+
 	public void Serialize()
 	{
 		try
