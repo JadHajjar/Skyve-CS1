@@ -78,9 +78,7 @@
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Lists\GenericPackageListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Lists\GenericPackageListControl.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

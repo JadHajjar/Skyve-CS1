@@ -178,7 +178,7 @@ public partial class MainForm : BasePanelForm
 	{
 		base.UIChanged();
 
-		MinimumSize = UI.Scale(new Size(650, 350), UI.FontScale);
+		MinimumSize = UI.Scale(new Size(600, 350), UI.FontScale);
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

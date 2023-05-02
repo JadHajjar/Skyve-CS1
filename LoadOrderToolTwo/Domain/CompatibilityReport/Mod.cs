@@ -57,7 +57,7 @@ public class Mod
 	[CloneIgnore, XmlIgnore] public bool IsIncluded => ModsUtil.FindMod(SteamID)?.IsIncluded ?? false;
 	[CloneIgnore, XmlIgnore] public bool IsCameraScript { get; set; }
 	[CloneIgnore, XmlIgnore] public string ModPath { get; set; }
-	[CloneIgnore, XmlIgnore] public DateTime DownloadedTime => ModsUtil.FindMod(SteamID)?.LocalTime ?? DateTime.MinValue;
+	[CloneIgnore, XmlIgnore] public DateTime DownloadedTime => ModsUtil.FindMod(SteamID)?.Package.LocalTime ?? DateTime.MinValue;
 	[CloneIgnore, XmlIgnore] public Enums.ReportSeverity ReportSeverity { get; set; }
 
 	// Used by the Updater, to see if this mod was added or updated this session.

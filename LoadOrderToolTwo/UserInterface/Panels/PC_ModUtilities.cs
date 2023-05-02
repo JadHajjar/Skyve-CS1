@@ -53,8 +53,8 @@ public partial class PC_ModUtilities : PanelContent
 	private void RefreshModIssues()
 	{
 		var duplicates = ModsUtil.GetDuplicateMods();
-		var modsOutOfDate = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
+		var modsOutOfDate = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.OutOfDate);
+		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.PartiallyDownloaded);
 
 		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
 		LC_Duplicates.SetSorting(PackageSorting.Mod, false);
@@ -142,7 +142,7 @@ public partial class PC_ModUtilities : PanelContent
 	private void B_ReDownload_Click(object sender, EventArgs e)
 	{
 		B_ReDownload.Loading = true;
-		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).ToArray());
+		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).ToArray());
 	}
 
 	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

@@ -217,13 +217,13 @@ internal static class ModsUtil
 			return DownloadStatus.OK;
 		}
 
-		if (mod.RemovedFromSteam)
+		if (mod.Package?.RemovedFromSteam ?? false)
 		{
 			reason = Locale.ModIsRemoved;
 			return DownloadStatus.Removed;
 		}
 
-		if (!mod.SteamInfoLoaded)
+		if (mod.Package?.WorkshopInfo is null)
 		{
 			reason = Locale.ModIsUnknown;
 			return DownloadStatus.Unknown;
@@ -236,7 +236,7 @@ internal static class ModsUtil
 		}
 
 		var updatedServer = mod.ServerTime;
-		var updatedLocal = mod.LocalTime;
+		var updatedLocal = mod.Package?.LocalTime ?? DateTime.MinValue;
 		var sizeServer = mod.ServerSize;
 		var localSize = ContentUtil.GetTotalSize(mod.Folder);
 

@@ -60,7 +60,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (Package.Workshop && rects.SteamRect.Contains(e.Location))
 		{
-			PlatformUtil.OpenUrl(Package.SteamPage);
+			PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails?id={Package.SteamId}");
 			return;
 		}
 
@@ -561,7 +561,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
-		switch (mod.Status)
+		switch (mod.Package?.Status)
 		{
 			case DownloadStatus.OK:
 				break;

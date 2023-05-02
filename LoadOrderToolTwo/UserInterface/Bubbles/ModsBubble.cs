@@ -77,8 +77,8 @@ internal class ModsBubble : StatusBubbleBase
 
 		var modsIncluded = CentralManager.Mods.Count(x => x.IsIncluded);
 		var modsEnabled = CentralManager.Mods.Count(x => x.IsEnabled && x.IsIncluded);
-		var modsOutOfDate = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = CentralManager.Mods.Count(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
+		var modsOutOfDate = CentralManager.Mods.Count(x => x.IsIncluded && x.Package.Status == DownloadStatus.OutOfDate);
+		var modsIncomplete = CentralManager.Mods.Count(x => x.IsIncluded && x.Package.Status == DownloadStatus.PartiallyDownloaded);
 		var multipleModsIncluded = ModsUtil.GetDuplicateMods().Any();
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)

@@ -133,14 +133,7 @@ internal static class CentralManager
 			catch (Exception ex) { Log.Exception(ex, "Failed to complete the First Time Setup", true); }
 		}
 
-		if (LocationManager.Platform is Platform.MacOSX)
-		{
-			ConnectionHandler.Start("steamcommunity.com", 60000);
-		}
-		else
-		{
-			ConnectionHandler.Start();
-		}
+		ConnectionHandler.Start();
 
 		Log.Info("Loading packages..");
 

@@ -24,13 +24,13 @@ namespace LoadOrderToolTwo.Utilities.Managers;
 #nullable disable
 #pragma warning disable CS0649 // Never Used
 #pragma warning disable IDE1006 // Naming Styles
-internal static class CompatibilityManager
+public static class CompatibilityManager
 {
-	internal static Catalog Catalog { get; private set; }
-	internal static AssetCatalog AssetCatalog { get; private set; }
-	internal static bool CatalogAvailable { get; private set; }
+	public static Catalog Catalog { get; private set; }
+	public static AssetCatalog AssetCatalog { get; private set; }
+	public static bool CatalogAvailable { get; private set; }
 
-	internal static void LoadCompatibilityReport(Domain.Package compatibilityReport)
+	public static void LoadCompatibilityReport(Domain.Package compatibilityReport)
 	{
 		try
 		{
@@ -75,7 +75,7 @@ internal static class CompatibilityManager
 		return ser.Deserialize(reader) as Catalog;
 	}
 
-	internal static ReportInfo GetCompatibilityReport(Domain.Package package)
+	public static ReportInfo GetCompatibilityReport(Domain.Package package)
 	{
 		if (Catalog is null)
 		{
@@ -143,7 +143,7 @@ internal static class CompatibilityManager
 		return reportInfo;
 	}
 
-	internal static ReportInfo GetCompatibilityReport(ulong packageId)
+	public static ReportInfo GetCompatibilityReport(ulong packageId)
 	{
 		if (Catalog is null || packageId is 0)
 		{
@@ -178,7 +178,7 @@ internal static class CompatibilityManager
 		return reportInfo;
 	}
 
-	internal static bool? IsForAssetEditor(Domain.Package package)
+	public static bool? IsForAssetEditor(Domain.Package package)
 	{
 		if (Catalog is null || !package.Workshop)
 		{
@@ -188,7 +188,7 @@ internal static class CompatibilityManager
 		return Catalog.GetMod(package.SteamId)?.Statuses.Any(x => x == Status.ModForModders);
 	}
 
-	internal static bool? IsForNormalGame(Domain.Package package)
+	public static bool? IsForNormalGame(Domain.Package package)
 	{
 		if (Catalog is null || !package.Workshop)
 		{
@@ -738,7 +738,7 @@ internal static class CompatibilityManager
 		};
 	}
 
-	internal class ModInfo
+	public class ModInfo
 	{
 		public bool isLocal;
 		public string authorName;
@@ -789,7 +789,7 @@ internal static class CompatibilityManager
 		}
 	}
 
-	internal class MessageList
+	public class MessageList
 	{
 		public string title;
 		public string titleLocaleId;
@@ -797,7 +797,7 @@ internal static class CompatibilityManager
 		public Dictionary<int, List<Message>> messageDictionary;
 	}
 
-	internal class CompatibilityList
+	public class CompatibilityList
 	{
 		public string message;
 		public string messageLocaleId;
@@ -805,7 +805,7 @@ internal static class CompatibilityManager
 		public List<Details> details;
 	}
 
-	internal class Message
+	public class Message
 	{
 		public string message;
 		public string messageLocaleId;
@@ -817,7 +817,7 @@ internal static class CompatibilityManager
 		public string detailsValue;
 	}
 
-	internal class Details
+	public class Details
 	{
 		public string details;
 		public string detailsLocaleId;
@@ -825,7 +825,7 @@ internal static class CompatibilityManager
 		public string detailsValue;
 	}
 
-	internal class ReportMessage
+	public class ReportMessage
 	{
 		public string ReportType => Type.ToString().FormatWords();
 		[JsonProperty("Severity")] public string ReportSeverity => Severity.ToString().FormatWords();
@@ -845,7 +845,7 @@ internal static class CompatibilityManager
 		}
 	}
 
-	internal class ReportCompatibilityMessage : ReportMessage
+	public class ReportCompatibilityMessage : ReportMessage
 	{
 		[JsonIgnore] public CompatibilityStatus Compatibility { get; }
 
@@ -855,10 +855,10 @@ internal static class CompatibilityManager
 		}
 	}
 
-	internal class ReportInfo
+	public class ReportInfo
 	{
 		public string PackageName => Package.ToString();
-		public string PackageLink => Package.SteamPage;
+		public string PackageLink => $"https://steamcommunity.com/workshop/filedetails?id={Package.SteamId}";
 		[JsonProperty("Severity")] public string _Severity => Severity.ToString().FormatWords();
 
 		[JsonIgnore] public Domain.Package Package { get; }

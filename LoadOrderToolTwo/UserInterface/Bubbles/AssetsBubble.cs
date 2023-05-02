@@ -83,7 +83,7 @@ internal class AssetsBubble : StatusBubbleBase
 				assets++;
 				assetsSize += item.FileSize;
 
-				if (item.Status == Domain.Enums.DownloadStatus.OutOfDate)
+				if (item.Package.Status == Domain.Enums.DownloadStatus.OutOfDate)
 				{
 					outOfDate++;
 				}

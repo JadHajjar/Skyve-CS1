@@ -102,9 +102,9 @@ internal class CompatibilityMessageControl : SlickControl
 					{
 						var image = await ImageManager.GetImage(item.Value.PreviewURL);
 
-						packages.Add(new SmallMod(item.Key, item.Value.Title, image));
+						packages.Add(new SmallMod(item.Key, item.Value.Title ?? string.Empty, image));
 					}
-					catch { packages.Add(new SmallMod(item.Key, item.Value.Title, null)); }
+					catch { packages.Add(new SmallMod(item.Key, item.Value.Title ?? string.Empty, null)); }
 				}
 			}
 			catch

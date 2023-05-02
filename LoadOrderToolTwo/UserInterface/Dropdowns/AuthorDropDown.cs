@@ -17,7 +17,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 {
 	private readonly Dictionary<SteamUser, int> _counts = new();
 
-	internal void SetItems<T>(IEnumerable<T> enumerable) where T : IPackage
+	internal void SetItems<T>(IEnumerable<T> enumerable) where T : IGenericPackage
 	{
 		foreach (var item in enumerable)
 		{

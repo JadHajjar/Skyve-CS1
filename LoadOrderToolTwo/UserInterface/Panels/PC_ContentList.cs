@@ -26,7 +26,7 @@ using System.Windows.Forms;
 using static CompatibilityReport.CatalogData.Enums;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
-internal partial class PC_ContentList<T> : PanelContent where T : IPackage
+internal partial class PC_ContentList<T> : PanelContent where T : IGenericPackage
 {
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
@@ -37,7 +37,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
 
-	public PC_ContentList()
+	public PC_ContentList() : this(false) { }
+
+	public PC_ContentList(bool load) : base(load)
 	{
 		LC_Items = new() { Dock = DockStyle.Fill, Margin = new() };
 
@@ -47,6 +49,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		TLP_Main.SetColumnSpan(LC_Items, TLP_Main.ColumnCount);
 
 		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
+		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		LC_Items.FilterRequested += FilterChanged;
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
@@ -63,19 +66,23 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		_delayedSearch = new(350, DelayedSearch);
 
-		if (!CentralManager.IsContentLoaded)
+		if (!load)
 		{
-			LC_Items.Loading = true;
-		}
-		else
-		{
-			LC_Items.SetItems(GetItems());
+			if (!CentralManager.IsContentLoaded)
+			{
+				LC_Items.Loading = true;
+			}
+			else
+			{
+				LC_Items.SetItems(GetItems());
+			}
 		}
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
 		{
 			OT_Enabled.Hide();
 			P_Filters.SetRow(OT_Workshop, 2);
+			P_Filters.SetRow(OT_ModAsset, 3);
 		}
 
 		clearingFilters = false;
@@ -84,19 +91,32 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
 
-		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+		if (!load)
+		{
+			CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+		}
+		else
+		{
+			CentralManager.ContentLoaded += CentralManager_WorkshopInfoUpdated;
+		}
+
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		CentralManager.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
 
 		SlickTip.SetTo(I_Actions, Locale.Actions);
 
-		new BackgroundAction("Getting tag list", () =>
+		if (!load)
 		{
-			var items = new List<T>(LC_Items.Items);
+			new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
+		}
+	}
 
-			DD_Author.SetItems(items.Where(x => x.Author is not null));
-			DD_Tags.Items = items.SelectMany(x => x.Tags).Distinct(x => x.Value.ToLower()).ToArray();
-		}).Run();
+	protected void RefreshAuthorAndTags()
+	{
+		var items = new List<T>(LC_Items.Items);
+
+		DD_Author.SetItems(items.Where(x => x.Author is not null));
+		DD_Tags.Items = items.SelectMany(x => x.Tags).Distinct(x => x.Value.ToLower()).ToArray();
 	}
 
 	private void LC_Items_OpenWorkshopSearch()
@@ -127,7 +147,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (P_FiltersContainer.Height == 0)
 		{
-			B_Filters_Click(this, EventArgs.Empty);
+			B_Filters_Click(this, null);
 		}
 	}
 
@@ -137,7 +157,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (P_FiltersContainer.Height == 0)
 		{
-			B_Filters_Click(this, EventArgs.Empty);
+			B_Filters_Click(this, null);
 		}
 	}
 
@@ -147,7 +167,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (P_FiltersContainer.Height == 0)
 		{
-			B_Filters_Click(this, EventArgs.Empty);
+			B_Filters_Click(this, null);
 		}
 	}
 
@@ -157,7 +177,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (P_FiltersContainer.Height == 0)
 		{
-			B_Filters_Click(this, EventArgs.Empty);
+			B_Filters_Click(this, null);
 		}
 	}
 
@@ -167,7 +187,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (P_FiltersContainer.Height == 0)
 		{
-			B_Filters_Click(this, EventArgs.Empty);
+			B_Filters_Click(this, null);
 		}
 	}
 
@@ -184,7 +204,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (P_FiltersContainer.Height == 0)
 		{
-			B_Filters_Click(this, EventArgs.Empty);
+			B_Filters_Click(this, null);
 		}
 	}
 
@@ -201,7 +221,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (P_FiltersContainer.Height == 0)
 		{
-			B_Filters_Click(this, EventArgs.Empty);
+			B_Filters_Click(this, null);
 		}
 	}
 
@@ -300,15 +320,26 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
 		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(8.25F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
-		TLP_Main.ColumnStyles[0].Width = (int)(250 * UI.FontScale);
-		TLP_Main.RowStyles[0].Height = (int)(36 * UI.FontScale);
+		TB_Search.Width = (int)(250 * UI.FontScale);
+
+		var size = (int)(30 * UI.FontScale) - 6;
+
+		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
+		TB_Search.MinimumSize = I_Refresh.MinimumSize = B_Filters.MinimumSize = I_SortOrder.MinimumSize = DD_Sorting.MinimumSize = new Size(0, size);
 	}
 
-	private void B_Filters_Click(object sender, EventArgs e)
+	private void B_Filters_Click(object sender, MouseEventArgs? e)
 	{
-		B_Filters.Text = P_FiltersContainer.Height == 0 ? "HideFilters" : "ShowFilters";
-		AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
-		P_FiltersContainer.AutoSize = false;
+		if (e is null || e.Button is MouseButtons.Left or MouseButtons.None)
+		{
+			B_Filters.Text = P_FiltersContainer.Height == 0 ? "HideFilters" : "ShowFilters";
+			AnimationHandler.Animate(P_FiltersContainer, P_FiltersContainer.Height == 0 ? new Size(0, P_FiltersContainer.Padding.Vertical + P_Filters.Height) : Size.Empty, 3, AnimationOption.IgnoreWidth);
+			P_FiltersContainer.AutoSize = false;
+		}
+		else if (e?.Button == MouseButtons.Middle)
+		{
+			I_ClearFilters_Click(sender, e);
+		}
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -379,7 +410,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (CentralManager.CurrentProfile.ForAssetEditor)
 		{
-			if (item.Package.ForNormalGame == true)
+			if (item.Package?.ForNormalGame == true)
 			{
 				return true;
 			}
@@ -387,7 +418,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (CentralManager.CurrentProfile.ForGameplay)
 		{
-			if (item.Package.ForAssetEditor == true)
+			if (item.Package?.ForAssetEditor == true)
 			{
 				return true;
 			}
@@ -416,7 +447,15 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (item.Package.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option2 == item.Package.Mod.IsEnabled)
+			if (item.Package?.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option2 == item.Package.Mod.IsEnabled)
+			{
+				return true;
+			}
+		}
+
+		if (OT_ModAsset.SelectedValue != ThreeOptionToggle.Value.None)
+		{
+			if (OT_ModAsset.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsMod)
 			{
 				return true;
 			}
@@ -433,14 +472,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 			else if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
-				if (!item.Workshop || item.Status <= DownloadStatus.OK)
+				if (!item.Workshop || item.Package?.Status <= DownloadStatus.OK)
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 2) != (int)item.Status)
+				if (((int)DD_PackageStatus.SelectedItem - 2) != (int)(item.Package?.Status ?? DownloadStatus.None))
 				{
 					return true;
 				}
@@ -451,18 +490,18 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			if (DD_ReportSeverity.SelectedItem == ReportSeverityFilter.AnyIssue)
 			{
-				if (!(item.Package.CompatibilityReport?.Severity > ReportSeverity.Remarks))
+				if (!(item.CompatibilityReport?.Severity > ReportSeverity.Remarks))
 				{
 					return true;
 				}
 			}
-			else if (((int)DD_ReportSeverity.SelectedItem - 2) != (int)(item.Package.CompatibilityReport?.Severity ?? 0))
+			else if (((int)DD_ReportSeverity.SelectedItem - 2) != (int)(item.CompatibilityReport?.Severity ?? 0))
 			{
 				return true;
 			}
 		}
 
-		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.SubscribeTime.ToLocalTime()))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.Package?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
 		{
 			return true;
 		}
@@ -568,7 +607,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		e.DoNotDraw = IsFilteredOut(e.Item);
 	}
 
-	private void RefreshCounts()
+	protected void RefreshCounts()
 	{
 		var countText = GetCountText();
 		var filteredText = GetFilteredCountText(LC_Items.FilteredCount);
@@ -652,6 +691,41 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_Actions.Loading = false;
 	}
 
+	private async void B_SubscribeAll_Click()
+	{
+		var removeBadPackages = false;
+		var steamIds = LC_Items.SafeGetItems().Where(x => x.Item.Package == null).ToList(x => x.Item.SteamId);
+
+		steamIds.Remove(0);
+
+		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		foreach (var item in steamIds.ToList())
+		{
+			var report = CompatibilityManager.GetCompatibilityReport(item);
+
+			if (report?.Severity == ReportSeverity.Unsubscribe)
+			{
+				if (!removeBadPackages && ShowPrompt(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand) == DialogResult.No)
+				{
+					break;
+				}
+				else
+				{
+					removeBadPackages = true;
+				}
+
+				steamIds.Remove(item);
+				LC_Items.RemoveAll(x => x.SteamId == item);
+			}
+		}
+
+		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), false);
+	}
+
 	private async void B_DeleteAll_Click()
 	{
 		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
@@ -697,14 +771,16 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.IncludeAll, "I_Check", action: () => SetIncluded(LC_Items.FilteredItems, true))
-			, new (Locale.ExcludeAll, "I_X", action: () => SetIncluded(LC_Items.FilteredItems, false))
+			  new (Locale.IncludeAll, "I_Check", action: () => { SetIncluded(LC_Items.FilteredItems, true); LC_Items.Invalidate(); })
+			, new (Locale.ExcludeAll, "I_X", action: () => { SetIncluded(LC_Items.FilteredItems, false); LC_Items.Invalidate(); })
 			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => SetEnabled(LC_Items.FilteredItems, true))
-			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => SetEnabled(LC_Items.FilteredItems, false))
+			, new (Locale.EnableAll, "I_Enabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => { SetEnabled(LC_Items.FilteredItems, true); LC_Items.Invalidate(); })
+			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => { SetEnabled(LC_Items.FilteredItems, false); LC_Items.Invalidate(); })
 			, new (string.Empty)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
 			, new (string.Empty)
+			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: B_SubscribeAll_Click)
+			, new (string.Empty, show: this is PC_GenericPackageList)
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: B_UnsubscribeAll_Click)
 			, new (Locale.DeleteAll, "I_Disposable", action: B_DeleteAll_Click)
 		};

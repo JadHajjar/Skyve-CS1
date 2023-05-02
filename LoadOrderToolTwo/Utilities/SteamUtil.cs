@@ -2,6 +2,7 @@ using Extensions;
 
 using LoadOrderShared;
 
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities.IO;
@@ -389,27 +390,9 @@ public static class SteamUtil
 		return _csCache?.Dlcs?.Contains(dlcId) ?? false;
 	}
 
-	public static void SetSteamInformation(this IPackage package, SteamWorkshopItem steamWorkshopItem, bool cache)
+	public static void SetSteamInformation(this Package package, SteamWorkshopItem steamWorkshopItem, bool cache)
 	{
-		if (package.RemovedFromSteam = steamWorkshopItem.Removed)
-		{
-			return;
-		}
-
-		package.SteamInfoLoaded = true;
-		package.Name = steamWorkshopItem.Title ?? package.Name;
-		package.Author = steamWorkshopItem.Author;
-		package.ServerTime = steamWorkshopItem.UpdatedUTC;
-		package.WorkshopTags = steamWorkshopItem.Tags;
-		package.ServerSize = steamWorkshopItem.Size;
-		package.SteamDescription = steamWorkshopItem.Description;
-		package.Stars = WilsonScore(steamWorkshopItem.PositiveVotes, steamWorkshopItem.NegativeVotes + 25 * steamWorkshopItem.Reports);
-		package.RequiredPackages = steamWorkshopItem.Children ?? new ulong[0];
-		package.Visibility = steamWorkshopItem.Visibility;
-		package.IconUrl = steamWorkshopItem.PreviewURL;
-		package.Subscriptions = steamWorkshopItem.Subscriptions;
-		package.PositiveVotes = steamWorkshopItem.PositiveVotes;
-		package.NegativeVotes = steamWorkshopItem.NegativeVotes;
+		package.WorkshopInfo = steamWorkshopItem;
 
 		if (!cache)
 		{
@@ -490,8 +473,11 @@ public static class SteamUtil
 	//	return (int)(100 * upperBound).Between(0, 100);
 	//}
 	
-	public static int WilsonScore(int upvotes, int downvotes)
+	public static int GetScore(IGenericPackage package)
 	{
+		var upvotes = package.PositiveVotes;
+		var downvotes = package.NegativeVotes + 25 * package.Reports;
+
 		if (upvotes + downvotes < 15)
 			return -1;
 

@@ -107,14 +107,14 @@ public partial class PC_UnusedLsmPackages : PanelContent
 
 		DD_Tags.Items = info.SelectMany(x =>
 		{
-			return x.Value.Tags.Select(x => new TagItem(Domain.Enums.TagSource.Workshop, x));
+			return x.Value.WorkshopTags.Select(x => new TagItem(Domain.Enums.TagSource.Workshop, x));
 		}).Distinct().ToArray();
 
 		LC_Items.Invalidate();
 
 		foreach (var item in info.Values)
 		{
-			await ImageManager.Ensure(item.ThumbnailUrl);
+			await ImageManager.Ensure(item.IconUrl);
 
 			LC_Items.Invalidate();
 		}
@@ -185,7 +185,7 @@ public partial class PC_UnusedLsmPackages : PanelContent
 		{
 			foreach (var tag in DD_Tags.SelectedItems)
 			{
-				if (!(e.Item.Tags?.Any(tag.Value) ?? false))
+				if (!(e.Item.Tags?.Any(tag) ?? false))
 				{
 					e.DoNotDraw = true;
 				}
@@ -198,7 +198,7 @@ public partial class PC_UnusedLsmPackages : PanelContent
 				TB_Search.Text.SearchCheck(e.Item.Name) ||
 				TB_Search.Text.SearchCheck(e.Item.Author?.Name) ||
 				TB_Search.Text.SearchCheck(e.Item.SteamId.ToString()) ||
-				(e.Item.Tags?.Any(x => TB_Search.Text.SearchCheck(x)) ?? false));
+				(e.Item.Tags?.Any(x => TB_Search.Text.SearchCheck(x.Value)) ?? false));
 		}
 	}
 

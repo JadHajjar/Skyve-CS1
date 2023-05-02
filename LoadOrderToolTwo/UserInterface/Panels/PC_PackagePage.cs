@@ -102,12 +102,12 @@ public partial class PC_PackagePage : PanelContent
 
 	internal static SlickStripItem[] GetRightClickMenuItems<T>(T item) where T : IPackage
 	{
-		var isPackageIncluded = item.Package.IsIncluded;
+		var isPackageIncluded = item.IsIncluded;
 
 		return new SlickStripItem[]
 		{
-			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded, action: () => { item.Package.IsIncluded = true; })
-			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded, action: () => { item.Package.IsIncluded = false; })
+			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded, action: () => { item.IsIncluded = true; })
+			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded, action: () => { item.IsIncluded = false; })
 			, new (Locale.ReDownloadPackage, "I_ReDownload", SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
 			, new (Locale.MovePackageToLocalFolder, "I_PC",item.Workshop, action: () => ContentUtil.MoveToLocalFolder(item))
 			, new (string.Empty)
@@ -119,7 +119,7 @@ public partial class PC_PackagePage : PanelContent
 			, new (Locale.ExcludeThisItemInAllProfiles, "I_Cancel", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; })
 			, new (Locale.Copy, "I_Copy", item.Workshop, fade: true)
 			, new (Locale.CopyPackageName, item.Workshop ? null : "I_Copy", tab: item.Workshop ? 1 : 0, action: () => Clipboard.SetText(item.ToString()))
-			, new (Locale.CopyWorkshopLink, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.SteamPage))
+			, new (Locale.CopyWorkshopLink, null, item.Workshop, tab: 1, action: () => Clipboard.SetText($"https://steamcommunity.com/workshop/filedetails?id={item.SteamId}"))
 			, new (Locale.CopyWorkshopId, null, item.Workshop, tab: 1,  action: () => Clipboard.SetText(item.SteamId.ToString()))
 			, new (string.Empty, show: item.Workshop, tab: 1)
 			, new (Locale.CopyAuthorName, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.Name))
