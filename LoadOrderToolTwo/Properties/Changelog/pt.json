@@ -1,33 +1,33 @@
 [
     {
         "Version": "2.2.0",
-        "Date": "2023-04-10",
-        "Tagline": "Welcome to the change-log era",
+        "Date": "10/04/2023",
+        "Tagline": "Bem-vindo à era do registro de alterações",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Novidades",
                 "Changes": [
-                    "Added an 'Unsubscribe All' button in content pages' actions.",
-                    "Added a Utility section to subscribe to missing items in a BOB config.",
-                    "Added an option to have Filters & Action sections open by default.",
-                    "Added change-log pages, you'll see it on new versions or using its button in the Help sections."
+                    "Adicionado um botão 'Cancelar inscrição em tudo' nas ações das páginas de conteúdo.",
+                    "Adicionada uma seção Utilitários para inscrever-se em itens ausentes nas configurações do BOB.",
+                    "Adicionada uma opção para que as seções Filtros e Ações sejam abertas por padrão.",
+                    "Adicionadas páginas de registro de alterações, você poderá vê-las em novas versões ou usando o botão correspondente na seção Ajuda."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Melhorias",
                 "Changes": [
-                    "Added Compatibility Report for broken Assets",
-                    "Unlisted packages now have the correct name and thumbnail.",
-                    "Placeholders for folder settings now correctly reflect your OS.",
-                    "Ctrl+Click on an author's name to add it to your filter"
+                    "Adicionado Relatório de Compatibilidade para recursos com problemas",
+                    "Agora os pacotes não listados possuem o nome e a miniatura corretos.",
+                    "Os espaços reservados para as configurações de pastas agora refletem corretamente seu sistema operacional.",
+                    "Ctrl + Clique no nome do autor para adicioná-lo ao filtro"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed legacy profiles not being converted after the first launch.",
-                    "Fixed local assets not automatically refreshing after external changes.",
-                    "Fixed deleting local assets from the right-click menu deleting all local assets instead of just one",
+                    "Corrigido o problema em que os perfis antigos não eram convertidos após o primeiro lançamento.",
+                    "Corrigido o problema em que os recursos locais não eram atualizados automaticamente após mudanças externas.",
+                    "Corrigido o problema de deletar recursos locais no menu de clique com o botão direito, que estava deletando todos os recursos locais em vez de apenas um",
                     "Fixed converting LOT 1 profiles resulting in assets being marked as 'Local'",
                     "Fixed 'Real' folders being swapped on save for Linux & Mac users.",
                     "Fixed Linux & Mac users not being able to generate a log zip."
@@ -57,99 +57,99 @@
             {
                 "Name": "Fixes",
                 "Changes": [
-                    "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
-                    "Fixed the map selection for a new game not letting users select a vanilla map."
+                    "Corrigido o texto na importação de coleções para assinar e cancelar a assinatura estando invertidos.",
+                    "Corrigido o problema na seleção de mapas para um novo jogo que não permitia aos usuários selecionar um mapa padrão."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.3",
-        "Date": "2023-04-05",
+        "Date": "05/04/2023",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed a bug that caused infinite loading for some users."
+                    "Corrigido um bug que causava carregamento infinito para alguns usuários."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.2",
-        "Date": "2023-04-06",
+        "Date": "06/04/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Mudanças",
                 "Changes": [
-                    "Removed the subscription tab from the in-game mod options.",
-                    "Fixed DLCs not being applied when loading a profile.",
-                    "Fixed the language option being empty for some people.",
-                    "Re-downloading from steam will no longer force the focus back to the tool.",
-                    "Other UI changes."
+                    "Removida a aba de inscrição das opções de mod do jogo.",
+                    "Corrigido o problema em que os DLCs não eram aplicados ao carregar um perfil.",
+                    "Corrigido o problema em que a opção de idioma estava vazia para algumas pessoas.",
+                    "Baixar novamente a partir da Steam não forçará mais o foco de volta para a ferramenta.",
+                    "Outras alterações na interface do usuário."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.1",
-        "Date": "2023-04-05",
+        "Date": "05/04/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Mudanças",
                 "Changes": [
-                    "Adding an info popup when subscribing to items for the first time.",
-                    "Added a warning text in the dashboard when you have multiple LOM instances installed.",
-                    "Added small tags next to package titles.",
-                    "Re-downloading Load Order Tool will initiate the download and close the app while it gets updated.",
-                    "Fixed and improved the speed of Loading Screen Mod reports."
+                    "Adicionado uma janela de informação ao inscrever-se em itens pela primeira vez.",
+                    "Adicionado um texto de aviso no painel quando há várias instâncias do LOM instaladas.",
+                    "Adicionadas pequenas etiquetas ao lado dos títulos de pacotes.",
+                    "Baixar novamente o Load Order Tool fará o download da atualização e fechará o aplicativo enquanto ele é atualizado.",
+                    "Corrigido e melhorada a velocidade dos relatórios do LSM."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.0",
-        "Date": "2023-04-05",
-        "Tagline": "Beta Public Release",
+        "Date": "05/04/2023",
+        "Tagline": "Versão Pública Beta",
         "ChangeGroups": []
     },
     {
         "Version": "2.2.1",
-        "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Date": "15/04/2023",
+        "Tagline": "Apresentando, a Renovação de Perfis",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Alterações de Perfil",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button to view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Alteramos o design da sua lista de perfis.",
+                    "Os Perfis Favoritos agora são exibidos no seu painel para permitir a troca fácil entre eles.",
+                    "Adicionada a seção \"Outros perfis\" na página dos pacotes para facilitar a exclusão ou inclusão em outros perfis",
+                    "Adicionadas novas opções de ordenação de perfis. A ordem selecionada agora será lembrada entre sessões.",
+                    "Adicionadas ações de clique com o botão direito na lista de conteúdo para excluir ou incluir um item em todos os seus pacotes.",
+                    "Adicionado um botão para visualizar o arquivo de um perfil no seu computador.",
+                    "Agora você pode atribuir uma cor aos seus perfis.",
+                    "Agora você pode criar um atalho na área de trabalho para seus perfis.",
+                    "Agora pode importar um perfil do LOT 1 na seção 'Adicionar perfil'."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Melhorias",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Os links da Steam agora serão abertos dentro da janela da Steam. Isso pode ser desativado nas Opções.",
+                    "Os recursos locais agora estão corretamente agrupados com base nas pastas em que estão.",
+                    "O painel da sua conta Paradox agora será sempre exibido.",
+                    "Os botões no canto superior direito da janela agora possuem ícones para explicar suas ações.",
+                    "Melhorada a responsividade das páginas da lista de conteúdos.",
+                    "Buscar nas páginas da lista de conteúdo agora é muito mais rápida.",
+                    "O carregamento de mods agora é armazenado em cache, resultando em carregamentos mais eficientes no Windows e no Linux, além de carregamentos muito mais rápidos no macOS.",
+                    "Você agora pode gerar um arquivo zip dos seus relatórios enquanto o jogo está em execução."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
+                    "Corrigido o congelamento que ocorria nas páginas da lista de conteúdo.",
+                    "Corrigido problema com o salvamento automático dos perfis que não estava funcionando corretamente.",
                     "Fixed not being able to use Workshop maps & save-games in the profile settings",
                     "Fixed custom maps not loading when selected in the profile settings.",
                     "Fixed loading Profiles on macOS & Linux not always applying correctly.",
@@ -182,52 +182,52 @@
     {
         "Version": "2.3.0",
         "Date": "2023-04-27",
-        "Tagline": "Spring cleaning update",
+        "Tagline": "Atualização de limpeza de Primavera",
         "ChangeGroups": [
             {
-                "Name": "Filter & Search Changes",
+                "Name": "Buscar e Filtrar por Mudanças",
                 "Changes": [
-                    "Added a new author filter dropdown.",
-                    "Added more actions to labels in the content lists.",
-                    "Added a new \"Any Issues\" option for \"Package Status\" & \"Compatibility Report\" dropdowns.",
-                    "All filter actions are now done using Ctrl+Click, added an option to swap this functionality.",
-                    "Re-filtering using the shortcuts in the list now removes the item from your filter.",
-                    "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
+                    "Adicionado novo menu suspenso no filtro de autor.",
+                    "Mais ações adicionadas às etiquetas na lista de conteúdos.",
+                    "Adicionada uma nova opção \"Algum Problema\" para os menus suspensos de \"Estado do pacote\" e \"Relatório de compatibilidade\".",
+                    "Todas as ações de filtros agora são feitas usando Ctrl+Click, adicionada uma opção para trocar esta funcionalidade.",
+                    "Re-filtrar usando os atalhos da lista agora remove o item do seu filtro.",
+                    "\t• Separar os termos com uma vírgula em sua pesquisa irá dividir sua busca para corresponder a qualquer um dos termos (OU)\n\t• Adicionar '+' no início do seu termo exigirá que os itens correspondam ao termo buscado (E)\n\t• Adicionar '-' no início do termo excluirá os itens que correspondem a esse termo buscado\nExemplos da nova busca:\n\t• Carro, Caminhão(Busca por carro ou caminhão)\n\t• Construção, apartamento +europeu(Busca por Construção ou apartamento que sejam europeus)\n\t• Condo, casa -rico +americano(Busca por condo ou casa que sejam americanos, mas que não sejam rico)"
                 ]
             },
             {
-                "Name": "UI & UX Changes",
+                "Name": "Alterações de Interface e Experiência de Usuário",
                 "Changes": [
-                    "Implemented a new icon system that scales all of the icons appropriately to your UI scale.",
-                    "Reworked the rendering of lists, improving the performance and responsiveness of content pages drastically.",
-                    "Added a sorting order switch to select between Ascending and Descending sorting.",
-                    "Moved the 'Actions' section in the content pages and added 2 new options.",
-                    "Partially included packages now have a different UI in the list.",
-                    "Improved the buttons and filter controls in content lists, reducing their overall size, and adding more visual cues.",
-                    "Changed the option to increase list items' size on hover to always increase their size, improved the UI of enlarged list items, and applied this functionality to the rest of the lists in the app.",
-                    "Added a Ctrl+[0-9] shortcut to switch between available tabs.",
-                    "Swapped all double-buttons and option toggles' sides.",
-                    "Animations are now disabled by default on macOS & Linux.",
-                    "So many more UI improvements, changes, and fixes I lost count."
+                    "Novo sistema de ícones implementado, agora os ícones escalam apropriadamente com a escala da interface de usuário.",
+                    "Lista de renderização refeita, performance foi melhorada drasticamente, assim como o tempo de resposta das páginas de conteúdo.",
+                    "Adicionado botão que permite a troca na ordem de classificação entre Crescente e Decrescente.",
+                    "Seção 'Ações' movida nas páginas de conteúdo e 2 novas opções adiciondas.",
+                    "Pacotes parcialmente incluídos agora tem uma Interface de Usuário diferente na lista.",
+                    "Botões e controles de filtros das listas de conteúdos foram melhorados, reduzindo o tamanho total e adicionado mais informação visual.",
+                    "Alteramos a opção de aumentar o tamanho dos itens da lista ao passar o mouse para sempre aumentar seu tamanho, melhoramos a interface dos itens de lista ampliados e aplicamos essa funcionalidade ao restante das listas no aplicativo.",
+                    "Adicionado um atalho com Ctrl+[0-9] para trocar entre as abas disponíveis.",
+                    "Trocamos de lado todos os botões duplos e opções de alternância.",
+                    "Animações agora são desativadas por padrão no Linux e macOS.",
+                    "Muito mais melhores de Interface, mudanças, e correções que perdi a conta."
                 ]
             },
             {
-                "Name": "File Selection Revamp",
+                "Name": "Seleção de Arquivos Reformulada",
                 "Changes": [
-                    "Updated the UI of the file selection screens.",
-                    "Added Pinned folders to easily access relevant folders.",
-                    "Added a Workshop section to easily select workshop maps & saves.",
-                    "Added a Sorting dropdown & sort order toggle",
-                    "Added a List/Grid view toggle."
+                    "Atualizamos a interface de usuário das telas de seleção de arquivos.",
+                    "Pastas fixadas foram adicionadas para facilitar o acesso a pastas relevantes.",
+                    "Adicionada uma seção Oficina para selecionar facilmente mapas e jogos salvos da Oficina.",
+                    "Adicionado menu suspenso de ordenação e botão de alternância de ordem de classificação",
+                    "Adicionada opção de exibição em lista ou grade."
                 ]
             },
             {
-                "Name": "Bug-Fixes",
+                "Name": "Correções de Erros",
                 "Changes": [
-                    "Fixed launching LOT after the monitor it was previously on got turned off resulting in the window now showing up.",
-                    "Fixed the LHT option not working when launching into a new map.",
-                    "Fixed author pages not opening correctly in Steam.",
-                    "Fixed freezes happening while searching while the 'Subscribe Time' sorting was selected."
+                    "Corrigido problema de abertura do LOT após desligamento do monitor em que estava anteriormente, resultando na janela não aparecer.",
+                    "Corrigido o problema da opção LHT não funcionar ao carregar um novo mapa.",
+                    "Corrigido o problema das páginas de autor não abrirem corretamente na Steam.",
+                    "Corrigido o problema de congelamento que ocorria durante a pesquisa com a opção 'Tempo de inscrição' selecionada."
                 ]
             }
         ]
@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Limpeza de Pacotes da Oficina",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Foram adicionadas novas funcionalidades para lidar facilmente com inconsistências entre a Steam e os pacotes baixados.",
+                    "Os pacotes em que não está inscrito não são mais carregados no jogo.",
+                    "Ao abrir o jogo enquanto o LOT está aberto, quaisquer pacotes que você não esteja inscrito, mas que foram baixados em seu computador, serão automaticamente excluídos.",
+                    "Adicionado um botão na aba de Utilitários para executar manualmente esta limpeza, bem como forçar o download de pacotes ausentes."
                 ]
             }
         ]

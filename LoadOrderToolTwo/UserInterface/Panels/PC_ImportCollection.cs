@@ -1,4 +1,5 @@
-﻿using LoadOrderToolTwo.UserInterface.Content;
+﻿using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.UserInterface.Content;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -7,6 +8,7 @@ using SlickControls;
 
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
@@ -14,7 +16,7 @@ internal class PC_ImportCollection : PC_GenericPackageList
 {
 	private readonly string? _id;
 
-	internal PC_ImportCollection(Domain.Steam.SteamWorkshopItem collection, Dictionary<ulong, Domain.Steam.SteamWorkshopItem> contents) : base(contents.Values)
+	internal PC_ImportCollection(Domain.Steam.SteamWorkshopItem collection) : base(collection.RequiredPackages.Select(x => new Profile.Asset { SteamId = x }))
 	{
 		_id = collection.PublishedFileID;
 

@@ -182,33 +182,33 @@
     {
         "Version": "2.3.0",
         "Date": "2023-04-27",
-        "Tagline": "Frühjahrsreinigung Update",
+        "Tagline": "Frühjahrsputz Update",
         "ChangeGroups": [
             {
-                "Name": "Änderungen filtern & suchen",
+                "Name": "Änderungen an Filtern & Suchen",
                 "Changes": [
-                    "Ein neues Autoren-FilterDropdown hinzugefügt.",
+                    "Ein neues Autoren-Filtermenü hinzugefügt.",
                     "Weitere Aktionen zu den Labels in den Inhaltslisten hinzugefügt.",
                     "Neue Option \"Alle Probleme\" für \"Paketstatus\" & \"Kompatibilitätsbericht\" hinzugefügt.",
-                    "Alle Filteraktionen werden nun mit Strg+Klick ausgeführt, um diese Funktion auszutauschen.",
+                    "Alle Filteraktionen werden nun mit Strg+Klick ausgeführt, Funktion hinzugefügt, um dieses Verhalten auszutauschen.",
                     "Das erneute Filtern mit den Verknüpfungen in der Liste entfernt nun das Element aus dem Filter.",
-                    "Wenn Sie Begriffe mit einem Komma in Ihrer Suche trennen, teilen Sie Ihre Suche auf einen der Begriffe (OR)\r\n\t• Das Hinzufügen von '+' zu Beginn Ihres Begriffs erfordert die Übereinstimmung des Begriffs (AND)\r\n\t• Das Hinzufügen von '-' zu Beginn Ihres Begriffs schließt Elemente aus, die diesem Begriff entsprechen\r\n\r\nBeispiele für die neue Suche aus:\r\n\t• Auto. LKW (trifft auf 'Auto' ODER 'LKW')\r\n\t• Gebäude, Wohnung +Europa (entspricht 'european' UND 'Gebäude' ODER 'Wohnung'])\r\n\t• condo, house -rico +american (trifft auf 'american' UND ['condo' ODER 'house'] UND NICHT 'rico')"
+                    "Begriffe mit einem Komma in der Suche trennen, teilt die Suche auf einen der Begriffe (ODER) auf\n\t• Das Hinzufügen von '+' zu Beginn des Begriffs erfordert die Übereinstimmung des Begriffs (UND)\n\t• Das Hinzufügen von '-' zu Beginn des Begriffs schließt Elemente aus, die diesem Begriff entsprechen\n\nBeispiele für die neue Suche:\n\t• car, truck (findet 'car' ODER 'truck')\n\t• building, apartment +european (findet 'european' UND ['building' ODER 'apartment'])\n\t• condo, house -rico +american (findet 'american' UND ['condo' ODER 'house'] UND NICHT 'rico')"
                 ]
             },
             {
                 "Name": "UI & UX-Änderungen",
                 "Changes": [
                     "Ein neues Symbolsystem implementiert, das alle Icons entsprechend Ihrer Benutzeroberfläche skaliert.",
-                    "Korrektur der Darstellung von Listen, Verbesserung der Leistung und Reaktionsfähigkeit von Content-Seiten drastisch.",
+                    "Korrektur der Darstellung von Listen, das die Leistung und Reaktionsfähigkeit von Content-Seiten drastisch verbessert.",
                     "Die Sortierreihenfolge wurde hinzugefügt, um zwischen aufsteigender und absteigender Sortierung zu wählen.",
-                    "Verschieben Sie den Abschnitt 'Aktionen' in den Inhaltsseiten und fügen Sie 2 neue Optionen hinzu.",
-                    "Teilweise enthaltene Pakete haben nun ein anderes UI in der Liste.",
+                    "Der Abschnitt 'Aktionen' in den Inhaltsseiten wurde verschoben und 2 neue Optionen wurden hinzugefügt.",
+                    "Teilweise enthaltene Pakete haben nun eine andere Benutzeroberfläche in der Liste.",
                     "Verbesserte die Schaltflächen und Filter-Steuerung in der Inhaltsliste, reduzierte deren Gesamtgröße und fügte mehr visuelle Hinweise hinzu.",
-                    "Die Option zur Vergrößerung der Listenelemente auf dem Hover wurde geändert, um deren Größe immer zu erhöhen hat die Benutzeroberfläche der erweiterten Listenelemente verbessert und diese Funktionalität auf die restlichen Listen der App angewendet.",
+                    "Die Option zur Vergrößerung der Listenelemente auf dem Hover wurde geändert, um deren Größe immer zu erhöhen. Die Benutzeroberfläche der erweiterten Listenelemente wurde verbessert und diese Funktionalität auf die restlichen Listen der App angewendet.",
                     "Strg+ +[0-9] Verknüpfung hinzugefügt, um zwischen verfügbaren Tabs zu wechseln.",
-                    "Tauschte alle Doppeltasten und Optionen auf die Seiten.",
+                    "Tauschte alle Doppeltasten und Options-Seiten.",
                     "Animationen sind nun standardmäßig unter macOS & Linux deaktiviert.",
-                    "So viele weitere UI-Verbesserungen, Änderungen und Korrekturen habe ich nicht gezählt."
+                    "So viele weitere UI-Verbesserungen, Änderungen und Korrekturen - ich habe sie nicht gezählt."
                 ]
             },
             {
@@ -217,17 +217,17 @@
                     "Aktualisiert die Benutzeroberfläche der Dateiauswahlbildschirme.",
                     "Pinned Ordner hinzugefügt, um einfach auf relevante Ordner zuzugreifen.",
                     "Eine Workshop-Sektion wurde hinzugefügt, um einfach Workshop-Karten zu wählen und zu speichern.",
-                    "Sortierungs Dropdown & Sortierreihenfolge hinzugefügt",
-                    "Listen/Raster Ansicht umschalten."
+                    "Sortierungs-Dropdown & Sortierreihenfolge hinzugefügt",
+                    "Listen/Raster Ansicht Umschaltung hinzugefügt."
                 ]
             },
             {
-                "Name": "Bug-Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
                     "Es wurde behoben, dass LOT gestartet wurde, nachdem der zuvor eingeschaltete Monitor ausgeschaltet war, was dazu führte, dass das Fenster jetzt angezeigt wird.",
-                    "Es wurde die LHT-Option behoben, die beim Start einer neuen Karte nicht funktionierte.",
-                    "Korrekte Autorenseiten öffnen nicht korrekt in Steam.",
-                    "Fehler beim Einfrieren während der Suche während der Sortierung der 'Zeit abonnieren' behoben."
+                    "Es wurde behoben, dass die LHT-Option beim Start einer neuen Karte nicht funktionierte.",
+                    "Behoben, dass Autorenseiten in Steam nicht korrekt geöffnet wurden.",
+                    "Fehler behoben, der zum Einfrieren während der Suche während der Sortierung der 'Zeit abonnieren' behoben."
                 ]
             }
         ]
@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Workshop-Pakete bereinigen",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Neue Funktionen hinzugefügt, um Missstände zwischen Steam und deinen heruntergeladenen Paketen einfach zu beheben.",
+                    "Pakete, die du nicht abonniert hast, werden nicht mehr im Spiel geladen.",
+                    "Das Starten des Spiels während LOT geöffnet ist, löscht automatisch alle Pakete, die nicht abonniert sind, aber auf den Computer heruntergeladen wurden.",
+                    "Fügte einen Button im Utilities Tab hinzu, um diese Bereinigung manuell durchzuführen sowie das Herunterladen fehlender Pakete zu erzwingen."
                 ]
             }
         ]

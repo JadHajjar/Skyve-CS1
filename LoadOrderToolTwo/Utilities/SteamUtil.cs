@@ -31,6 +31,7 @@ public static class SteamUtil
 	private const string STEAM_CACHE_FILE = "SteamModsCache.json";
 	private const string DLC_CACHE_FILE = "SteamDlcsCache.json";
 	private static readonly CSCache _csCache;
+	private static readonly Dictionary<string, SteamUserEntry> _usersCache = new();
 
 	public static List<SteamDlc> Dlcs { get; private set; }
 
@@ -146,7 +147,7 @@ public static class SteamUtil
 			{
 				var response = await httpResponse.Content.ReadAsStringAsync();
 
-				return Newtonsoft.Json.JsonConvert.DeserializeObject<SteamUserRootResponse>(response)?.response.players.ToDictionary(x => x.steamid) ?? new();
+				return JsonConvert.DeserializeObject<SteamUserRootResponse>(response)?.response.players.ToDictionary(x => x.steamid) ?? new();
 			}
 
 			Log.Error("failed to get steam author data: " + httpResponse.RequestMessage);
@@ -252,13 +253,18 @@ public static class SteamUtil
 				.Select(x => new SteamWorkshopItem(x))
 				.ToList() ?? new();
 
-			var users = await ConvertInChunks(data.Select(x => x.AuthorID ?? string.Empty).Distinct(), 100, GetSteamUsers);
+			var users = await ConvertInChunks(data.Select(x => x.AuthorID ?? string.Empty).Distinct().Where(x => !_usersCache.ContainsKey(x)), 100, GetSteamUsers);
+
+			foreach (var item in users)
+			{
+				_usersCache[item.Key] = item.Value;
+			}
 
 			foreach (var item in data)
 			{
-				if (!string.IsNullOrEmpty(item.AuthorID) && users.ContainsKey(item.AuthorID!))
+				if (!string.IsNullOrEmpty(item.AuthorID) && _usersCache.ContainsKey(item.AuthorID!))
 				{
-					item.Author = new(users[item.AuthorID!]);
+					item.Author = new(_usersCache[item.AuthorID!]);
 				}
 			}
 
@@ -266,51 +272,6 @@ public static class SteamUtil
 		}
 
 		Log.Error("failed to get steam data: " + httpResponse.RequestMessage);
-
-		return new();
-	}
-
-	public static async Task<Dictionary<ulong, SteamWorkshopItem>> GetCollectionContentsAsync(string collectionId)
-	{
-		var url = @"https://api.steampowered.com/ISteamRemoteStorage/GetCollectionDetails/v1/";
-
-		var bodyDictionary = new Dictionary<string, string>
-		{
-			["collectioncount"] = "1",
-			[$"publishedfileids[0]"] = collectionId
-		};
-
-		try
-		{
-			using var httpClient = new HttpClient();
-			var body = new FormUrlEncodedContent(bodyDictionary);
-			var httpResponse = await httpClient.PostAsync(url, body);
-
-			if (httpResponse.IsSuccessStatusCode)
-			{
-				var response = await httpResponse.Content.ReadAsStringAsync();
-
-				var data = Newtonsoft.Json.JsonConvert.DeserializeObject<SteamWorkshopCollectionRootResponse>(response)?.response.collectiondetails?.FirstOrDefault()?.children?
-					.Where(x => x.filetype == 0)
-					.Select(x => ulong.Parse(x.publishedfileid))
-					.ToList() ?? new();
-
-				if (data.Count == 0)
-				{
-					return new();
-				}
-
-				data.Insert(0, ulong.Parse(collectionId));
-
-				return await GetWorkshopInfoAsync(data.ToArray());
-			}
-
-			Log.Error("failed to get steam data: " + httpResponse.RequestMessage);
-		}
-		catch (Exception ex)
-		{
-			Log.Exception(ex, "Failed to get steam collection information");
-		}
 
 		return new();
 	}
@@ -328,7 +289,7 @@ public static class SteamUtil
 			{
 				var response = await httpResponse.Content.ReadAsStringAsync();
 
-				return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
+				return JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
 			}
 		}
 		catch (Exception ex) { Log.Exception(ex, "Failed to get the steam information for appid " + steamId); }
@@ -472,37 +433,23 @@ public static class SteamUtil
 
 	//	return (int)(100 * upperBound).Between(0, 100);
 	//}
-	
+
 	public static int GetScore(IPackage package)
 	{
 		var upvotes = package.PositiveVotes;
-		var downvotes = package.NegativeVotes + 25 * package.Reports;
+		var downvotes = (package.NegativeVotes + package.Reports) / 10;
 
-		if (upvotes + downvotes < 15)
+		if (upvotes + downvotes < 5)
+		{
 			return -1;
-
-		// ignore downvotes when there's less than 5 downvotes per 100 upvotes
-		if (upvotes > 0 && (double)downvotes / upvotes < 0.05)
-			downvotes = 0;
-
-		var z = 1.96; // z-score for 95% confidence level
-		var n = upvotes + downvotes;
-		var p = (double)upvotes / n;
-		var a = p + (z * z / (2 * n));
-		var b = z * Math.Sqrt(((p * (1 - p)) + (z * z / (4 * n))) / n);
-		var lowerBound = (a - b) / (1 + (z * z / n));
-		var upperBound = (a + b) / (1 + (z * z / n));
-
-		if (n < 100)
-		{ 
-			p *= (100 - n) / 100D; 
 		}
 
-		// ^3 formula to make the difference between positive and negative values more pronounced
-		var averageBound = Math.Min(1.1, Math.Max(-0.1, p + 0.05 * Math.Pow((p * 2 - 1) / 2, 3)));
+		var subscribersFactor = -Math.Min(100000, package.Subscriptions) / 2000 - 10;
+		var goal = 1.472 * (Math.Pow(subscribersFactor, 2) + Math.Pow(subscribersFactor, 3) / 100) - 120;
 
-		var percentage = (lowerBound + ((upperBound - lowerBound) * averageBound));
+		if (!package.IsMod)
+			goal /= 3.5;
 
-		return (int)Math.Round(Math.Max(0, 200 * percentage - 100));
+		return ((int)(100 * (upvotes - downvotes) / goal)).Between(0, 100);
 	}
 }

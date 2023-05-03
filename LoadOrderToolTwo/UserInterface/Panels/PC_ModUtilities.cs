@@ -125,14 +125,17 @@ public partial class PC_ModUtilities : PanelContent
 			B_LoadCollection.Loading = true;
 
 			var collectionId = Regex.Match(TB_CollectionLink.Text, TB_CollectionLink.ValidationRegex).Groups[1].Value;
-			var contents = await SteamUtil.GetCollectionContentsAsync(collectionId);
 
-			if (contents?.Any() ?? false)
+			if (ulong.TryParse(collectionId, out var steamId))
 			{
-				var collection = contents[ulong.Parse(collectionId)];
-				contents.Remove(ulong.Parse(collectionId));
-				Form.PushPanel(null, new PC_ImportCollection(collection, contents));
-				TB_CollectionLink.Text = string.Empty;
+				var contents = await SteamUtil.GetWorkshopInfoAsync(new[] { steamId });
+
+				if (contents.TryGet(steamId)?.RequiredPackages?.Any() ?? false)
+				{
+					Form.PushPanel(null, new PC_ImportCollection(contents[steamId]));
+
+					TB_CollectionLink.Text = string.Empty;
+				}
 			}
 
 			B_LoadCollection.Loading = false;

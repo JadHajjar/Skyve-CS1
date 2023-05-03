@@ -21,6 +21,8 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		TB_Search.Placeholder = "SearchGenericPackages";
 
+		var cachedSteamInfo = SteamUtil.GetCachedInfo() ?? new();
+
 		foreach (var package in items.GroupBy(x => x.SteamId))
 		{
 			if (package.Key != 0)
@@ -45,7 +47,14 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 					if (profileAsset.WorkshopInfo == null)
 					{
-						_workshopPackages[package.Key] = profileAsset;
+						if (cachedSteamInfo.ContainsKey(package.Key))
+						{
+							profileAsset.WorkshopInfo = cachedSteamInfo[package.Key];
+						}
+						else
+						{
+							_workshopPackages[package.Key] = profileAsset;
+						}
 					}
 				}
 			}
@@ -80,18 +89,18 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		LC_Items.Invalidate();
 
-		using var timer = new BackgroundAction(LC_Items.Invalidate).RunEvery(500);
-
 		Parallelism.ForEach(LC_Items.Items.ToList(), async package =>
 		{
 			if (!string.IsNullOrWhiteSpace(package.IconUrl))
 			{
-				await ImageManager.Ensure(package.IconUrl);
+				if (await ImageManager.Ensure(package.IconUrl))
+					LC_Items.Invalidate(package);
 			}
 
 			if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
 			{
-				await ImageManager.Ensure(package.Author?.AvatarUrl);
+				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
+					LC_Items.Invalidate(package);
 			}
 		});
 

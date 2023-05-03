@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -19,6 +20,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using static CompatibilityReport.CatalogData.Enums;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LoadOrderToolTwo.UserInterface.Content;
 internal class PackageDescriptionControl : SlickImageControl
@@ -279,6 +281,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		DrawButtons(e);
 
 		var labelRect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding);
+
 		var isVersion = Package.IsMod && !Package.BuiltIn;
 		var versionText = isVersion ? "v" + Package.Mod!.Version.GetString() : Package.BuiltIn ? Locale.Vanilla : Package.FileSize.SizeString();
 		rects.VersionRect = DrawLabel(e, versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.TopLeft, isVersion);
@@ -314,6 +317,8 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		labelRect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding);
 		labelRect.Y += rects.VersionRect.Height + Padding.Vertical;
+
+		labelRect.X += DrawScore(e, true, rects, labelRect);
 
 		foreach (var item in Package.Tags.Distinct(x => x.Value))
 		{
@@ -639,6 +644,49 @@ internal class PackageDescriptionControl : SlickImageControl
 		return rectangle;
 	}
 
+	private int DrawScore(PaintEventArgs e, bool large, Rectangles rects, Rectangle labelRect)
+	{
+		var score = SteamUtil.GetScore(Package!);
+
+		if (Package!.Workshop && score != -1)
+		{
+			var clip = e.Graphics.ClipBounds;
+			var labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
+			labelH -= labelH % 2;
+			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.TopLeft);
+			var backColor = score > 90 && Package.Subscriptions >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
+
+			e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);
+
+			using var scoreFilled = IconManager.GetSmallIcon("I_VoteFilled");
+
+			if (score < 75)
+			{
+				using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+
+				e.Graphics.DrawImage(scoreIcon.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
+
+				e.Graphics.SetClip(scoreRect.CenterR(scoreFilled.Size).Pad(0, scoreFilled.Height - (scoreFilled.Height * score / 105), 0, 0));
+				e.Graphics.DrawImage(scoreFilled.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
+				e.Graphics.SetClip(clip);
+			}
+			else
+			{
+				e.Graphics.DrawImage(scoreFilled.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
+			}
+
+			if (Package.Subscriptions < 50000 || score <= 90)
+			{
+				using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
+				e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * Package.Subscriptions / 15000) / 2), Math.Min(360, 360F * Package.Subscriptions / 15000));
+			}
+
+			return labelH + Padding.Left;
+		}
+
+		return 0;
+	}
+
 	private class Rectangles
 	{
 		internal IPackage? Item;
@@ -654,6 +702,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		internal Rectangle SteamIdRect;
 		internal Rectangle CenterRect;
 		internal Rectangle AuthorRect;
+		internal Rectangle ScoreRect;
 		internal Rectangle VersionRect;
 		internal Rectangle CompatibilityRect;
 		internal Rectangle DownloadStatusRect;
@@ -672,7 +721,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				IconRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
 				DateRect.Contains(location) ||
-				(VersionRect.Contains(location) && Item?.Package.Mod is not null) ||
+				(VersionRect.Contains(location) && Item?.Package?.Mod is not null) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}
