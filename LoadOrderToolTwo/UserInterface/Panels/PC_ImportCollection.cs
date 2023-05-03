@@ -18,6 +18,9 @@ internal class PC_ImportCollection : PC_GenericPackageList
 	{
 		_id = collection.PublishedFileID;
 
+		TLP_Main.SetColumn(P_FiltersContainer, 0);
+		TLP_Main.SetColumnSpan(P_FiltersContainer, TLP_Main.ColumnCount);
+
 		PB_Icon = new PackageIcon
 		{
 			Collection = true
@@ -25,7 +28,7 @@ internal class PC_ImportCollection : PC_GenericPackageList
 		PB_Icon.LoadImage(collection.PreviewURL, ImageManager.GetImage);
 
 		TLP_Main.Controls.Add(PB_Icon, 0, 0);
-		TLP_Main.SetRowSpan(PB_Icon, 4);
+		TLP_Main.SetRowSpan(PB_Icon, 3);
 
 		L_CollectionName = new Label
 		{

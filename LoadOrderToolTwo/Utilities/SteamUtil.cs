@@ -473,7 +473,7 @@ public static class SteamUtil
 	//	return (int)(100 * upperBound).Between(0, 100);
 	//}
 	
-	public static int GetScore(IGenericPackage package)
+	public static int GetScore(IPackage package)
 	{
 		var upvotes = package.PositiveVotes;
 		var downvotes = package.NegativeVotes + 25 * package.Reports;

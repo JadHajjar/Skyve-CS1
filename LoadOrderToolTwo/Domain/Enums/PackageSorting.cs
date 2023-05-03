@@ -7,6 +7,8 @@ internal enum PackageSorting
 	UpdateTime,
 	SubscribeTime,
 	Author,
+	Subscribers,
+	Votes,
 	Status,
 	CompatibilityReport,
 	Mod,

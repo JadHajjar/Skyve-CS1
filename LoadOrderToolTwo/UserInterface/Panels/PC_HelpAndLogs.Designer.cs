@@ -55,11 +55,12 @@ partial class PC_HelpAndLogs
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.B_OpenLogFolder = new SlickControls.SlickButton();
 			this.B_CopyLogFile = new SlickControls.SlickButton();
-			this.DD_LogFile = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.TLP_Errors = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.I_Info = new SlickControls.SlickIcon();
 			this.L_Info = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.slickSpacer3 = new SlickControls.SlickSpacer();
+			this.DD_LogFile = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.TLP_HelpLogs.SuspendLayout();
@@ -67,17 +68,22 @@ partial class PC_HelpAndLogs
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
+			// base_Text
+			// 
+			this.base_Text.Size = new System.Drawing.Size(150, 25);
+			// 
 			// slickScroll1
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.TLP_Main;
-			this.slickScroll1.Location = new System.Drawing.Point(1159, 30);
+			this.slickScroll1.Location = new System.Drawing.Point(1164, 31);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(7, 702);
+			this.slickScroll1.Size = new System.Drawing.Size(7, 706);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 17;
 			this.slickScroll1.TabStop = false;
 			this.slickScroll1.Text = "slickScroll1";
+			this.slickScroll1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.slickScroll1_Scroll);
 			// 
 			// TLP_Main
 			// 
@@ -360,23 +366,6 @@ partial class PC_HelpAndLogs
 			this.B_CopyLogFile.Text = "CopyLogFile";
 			this.B_CopyLogFile.Click += new System.EventHandler(this.B_CopyLogFile_Click);
 			// 
-			// DD_LogFile
-			// 
-			this.DD_LogFile.AllowDrop = true;
-			this.TLP_Main.SetColumnSpan(this.DD_LogFile, 2);
-			this.DD_LogFile.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_LogFile.Dock = System.Windows.Forms.DockStyle.Top;
-			this.DD_LogFile.Location = new System.Drawing.Point(354, 3);
-			this.DD_LogFile.Name = "DD_LogFile";
-			this.DD_LogFile.Size = new System.Drawing.Size(743, 150);
-			this.DD_LogFile.TabIndex = 1;
-			this.DD_LogFile.Text = "LogFileDrop";
-			this.DD_LogFile.ValidExtensions = new string[] {
-        ".txt",
-        ".log"};
-			this.DD_LogFile.FileSelected += new System.Action<string>(this.DD_LogFile_FileSelected);
-			this.DD_LogFile.ValidFile += new System.Func<object, string, bool>(this.DD_LogFile_ValidFile);
-			// 
 			// TLP_Errors
 			// 
 			this.TLP_Errors.AddOutline = true;
@@ -433,19 +422,49 @@ partial class PC_HelpAndLogs
 			// 
 			this.panel1.Controls.Add(this.TLP_Main);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(5, 30);
+			this.panel1.Location = new System.Drawing.Point(0, 31);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1161, 702);
+			this.panel1.Size = new System.Drawing.Size(1171, 706);
 			this.panel1.TabIndex = 16;
+			// 
+			// slickSpacer3
+			// 
+			this.slickSpacer3.Dock = System.Windows.Forms.DockStyle.Top;
+			this.slickSpacer3.Location = new System.Drawing.Point(0, 30);
+			this.slickSpacer3.Name = "slickSpacer3";
+			this.slickSpacer3.Size = new System.Drawing.Size(1171, 1);
+			this.slickSpacer3.TabIndex = 18;
+			this.slickSpacer3.TabStop = false;
+			this.slickSpacer3.Text = "slickSpacer3";
+			// 
+			// DD_LogFile
+			// 
+			this.DD_LogFile.AllowDrop = true;
+			this.TLP_Main.SetColumnSpan(this.DD_LogFile, 2);
+			this.DD_LogFile.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_LogFile.Dock = System.Windows.Forms.DockStyle.Top;
+			this.DD_LogFile.Location = new System.Drawing.Point(354, 3);
+			this.DD_LogFile.Name = "DD_LogFile";
+			this.DD_LogFile.Size = new System.Drawing.Size(743, 150);
+			this.DD_LogFile.TabIndex = 1;
+			this.DD_LogFile.Text = "LogFileDrop";
+			this.DD_LogFile.ValidExtensions = new string[] {
+        ".txt",
+        ".log"};
+			this.DD_LogFile.FileSelected += new System.Action<string>(this.DD_LogFile_FileSelected);
+			this.DD_LogFile.ValidFile += new System.Func<object, string, bool>(this.DD_LogFile_ValidFile);
 			// 
 			// PC_HelpAndLogs
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.slickScroll1);
 			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.slickSpacer3);
 			this.Name = "PC_HelpAndLogs";
+			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1171, 737);
 			this.Controls.SetChildIndex(this.base_Text, 0);
+			this.Controls.SetChildIndex(this.slickSpacer3, 0);
 			this.Controls.SetChildIndex(this.panel1, 0);
 			this.Controls.SetChildIndex(this.slickScroll1, 0);
 			this.TLP_Main.ResumeLayout(false);
@@ -486,4 +505,5 @@ partial class PC_HelpAndLogs
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	private SlickControls.SlickButton B_ChangeLog;
 	private SlickControls.SlickButton B_Donate;
+	private SlickControls.SlickSpacer slickSpacer3;
 }

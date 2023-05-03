@@ -279,8 +279,8 @@ internal class PackageDescriptionControl : SlickImageControl
 		DrawButtons(e);
 
 		var labelRect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding);
-		var isVersion = Package.Mod is not null && !Package.Mod.BuiltIn;
-		var versionText = isVersion ? "v" + Package.Mod!.Version.GetString() : Package.Mod?.BuiltIn ?? false ? Locale.Vanilla : Package.FileSize.SizeString();
+		var isVersion = Package.IsMod && !Package.BuiltIn;
+		var versionText = isVersion ? "v" + Package.Mod!.Version.GetString() : Package.BuiltIn ? Locale.Vanilla : Package.FileSize.SizeString();
 		rects.VersionRect = DrawLabel(e, versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.TopLeft, isVersion);
 		labelRect.X += Padding.Left + rects.VersionRect.Width;
 

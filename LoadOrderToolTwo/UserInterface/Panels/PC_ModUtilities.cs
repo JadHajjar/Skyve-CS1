@@ -159,7 +159,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		var assets = LsmUtil.LoadMissingAssets(obj);
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets.ToList()));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = Locale.MissingLSMReport });
 	}
 
 	private bool LSMDragDrop_ValidFile(object sender, string arg)
@@ -171,7 +171,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		var assets = LsmUtil.LoadUnusedAssets(obj);
 
-		Form.PushPanel(null, new PC_UnusedLsmPackages(assets.ToList()));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = Locale.UnusedLSMReport });
 	}
 
 	private void DD_BOB_FileSelected(string obj)
@@ -191,7 +191,7 @@ public partial class PC_ModUtilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(P_BOB.Text) });
 	}
 
 	private bool DD_BOB_ValidFile(object sender, string arg)
@@ -221,7 +221,7 @@ public partial class PC_ModUtilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(P_Text.Text) });
 	}
 
 	private void B_ImportClipboard_Click(object sender, EventArgs e)
@@ -246,7 +246,7 @@ public partial class PC_ModUtilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(B_ImportClipboard.Text) });
 	}
 
 	private void B_Cleanup_Click(object sender, EventArgs e)
@@ -256,5 +256,10 @@ public partial class PC_ModUtilities : PanelContent
 			B_Cleanup.Loading = true;
 			SubscriptionsUtil.Redownload = true;
 		}
+	}
+
+	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
+	{
+		slickSpacer1.Visible = slickScroll1.Percentage != 0;
 	}
 }

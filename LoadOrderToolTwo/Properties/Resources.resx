@@ -949,4 +949,22 @@
   <data name="I_More_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_More_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_People_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_People_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_People_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_People_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_People_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_People_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Vote_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Vote_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Vote_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Vote_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Vote_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Vote_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

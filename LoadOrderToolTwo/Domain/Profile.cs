@@ -63,7 +63,7 @@ public class Profile
 	public Color? Color { get; set; }
 	public DateTime LastUsed { get; set; }
 
-	public class Asset : IGenericPackage
+	public class Asset : IPackage
 	{
 		public string? Name { get; set; }
 		public string? RelativePath { get; set; }

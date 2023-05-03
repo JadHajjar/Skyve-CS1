@@ -10,13 +10,17 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
-internal class PC_GenericPackageList : PC_ContentList<IGenericPackage>
+internal class PC_GenericPackageList : PC_ContentList<IPackage>
 {
 	private readonly Dictionary<ulong, Profile.Asset> _workshopPackages = new();
-	private readonly List<IGenericPackage> _items = new();
+	private readonly List<IPackage> _items = new();
 
-	public PC_GenericPackageList(IEnumerable<IGenericPackage> items) : base(true)
+	public PC_GenericPackageList(IEnumerable<IPackage> items) : base(true)
 	{
+		LC_Items.IsGenericPage = true;
+
+		TB_Search.Placeholder = "SearchGenericPackages";
+
 		foreach (var package in items.GroupBy(x => x.SteamId))
 		{
 			if (package.Key != 0)
@@ -62,7 +66,7 @@ internal class PC_GenericPackageList : PC_ContentList<IGenericPackage>
 	{
 		var steamIds = _workshopPackages.Keys.Distinct().ToArray();
 
-		var info = SteamUtil.GetWorkshopInfoAsync(steamIds).Result;
+		var info = await SteamUtil.GetWorkshopInfoAsync(steamIds);
 
 		foreach (var item in info)
 		{
@@ -76,29 +80,25 @@ internal class PC_GenericPackageList : PC_ContentList<IGenericPackage>
 
 		LC_Items.Invalidate();
 
+		using var timer = new BackgroundAction(LC_Items.Invalidate).RunEvery(500);
+
 		Parallelism.ForEach(LC_Items.Items.ToList(), async package =>
 		{
 			if (!string.IsNullOrWhiteSpace(package.IconUrl))
 			{
-				if (await ImageManager.Ensure(package.IconUrl))
-				{
-					LC_Items.Invalidate();
-				}
+				await ImageManager.Ensure(package.IconUrl);
 			}
 
 			if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
 			{
-				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
-				{
-					LC_Items.Invalidate();
-				}
+				await ImageManager.Ensure(package.Author?.AvatarUrl);
 			}
 		});
 
 		return true;
 	}
 
-	protected override IEnumerable<IGenericPackage> GetItems()
+	protected override IEnumerable<IPackage> GetItems()
 	{
 		return _items;
 	}
@@ -152,12 +152,12 @@ internal class PC_GenericPackageList : PC_ContentList<IGenericPackage>
 		return string.Format(Locale.ShowingPackages, filteredCount);
 	}
 
-	protected override void SetIncluded(IEnumerable<IGenericPackage> filteredItems, bool included)
+	protected override void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
 	{
 		ContentUtil.SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
 	}
 
-	protected override void SetEnabled(IEnumerable<IGenericPackage> filteredItems, bool enabled)
+	protected override void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
 	{
 		ContentUtil.SetBulkIncluded(filteredItems.Where(x => x.Package?.Mod is not null).Select(x => x.Package!.Mod!), enabled);
 	}

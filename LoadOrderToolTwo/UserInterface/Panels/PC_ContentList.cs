@@ -26,7 +26,7 @@ using System.Windows.Forms;
 using static CompatibilityReport.CatalogData.Enums;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
-internal partial class PC_ContentList<T> : PanelContent where T : IGenericPackage
+internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 {
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
@@ -309,7 +309,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IGenericPackag
 	{
 		base.UIChanged();
 
-		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding
+		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
 			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 

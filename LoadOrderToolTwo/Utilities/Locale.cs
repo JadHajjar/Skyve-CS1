@@ -163,7 +163,6 @@ internal class Locale : LocaleHelper
 	public static string ProfileMerge => _instance.GetText(nameof(ProfileMerge));
 	public static string ProfileDelete => _instance.GetText(nameof(ProfileDelete));
 	public static string ShouldNotBeSubscribed => _instance.GetText(nameof(ShouldNotBeSubscribed));
-	public static string MissingPackages => _instance.GetText(nameof(MissingPackages));
 	public static string LoadingScreenMod => _instance.GetText(nameof(LoadingScreenMod));
 	public static string ExcludeInclude => _instance.GetText(nameof(ExcludeInclude));
 	public static string EnableDisable => _instance.GetText(nameof(EnableDisable));
@@ -220,7 +219,6 @@ internal class Locale : LocaleHelper
 	public static string SetupIncomplete => _instance.GetText(nameof(SetupIncomplete));
 	public static string CopyAuthorSteamId => _instance.GetText(nameof(CopyAuthorSteamId));
 	public static string LoadProfile => _instance.GetText(nameof(LoadProfile));
-	public static string UnusedPackages => _instance.GetText(nameof(UnusedPackages));
 	public static string CloseCitiesToSub => _instance.GetText(nameof(CloseCitiesToSub));
 	public static string ShowingFilteredItems => _instance.GetText(nameof(ShowingFilteredItems));
 	public static string ShowingMods => _instance.GetText(nameof(ShowingMods));
@@ -311,4 +309,7 @@ internal class Locale : LocaleHelper
 	public static string SubscribersCount => _instance.GetText(nameof(SubscribersCount));
 	public static string RatingCount => _instance.GetText(nameof(RatingCount));
 	public static string SubscribeAll => _instance.GetText(nameof(SubscribeAll));
+	public static string MissingLSMReport => _instance.GetText(nameof(MissingLSMReport));
+	public static string UnusedLSMReport => _instance.GetText(nameof(UnusedLSMReport));
+	public static string MissingPackagesProfile => _instance.GetText(nameof(MissingPackagesProfile));
 }

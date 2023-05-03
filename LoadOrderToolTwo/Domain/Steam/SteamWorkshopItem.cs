@@ -11,7 +11,7 @@ using System.Drawing;
 using System.Linq;
 
 namespace LoadOrderToolTwo.Domain.Steam;
-public class SteamWorkshopItem : IGenericPackage
+public class SteamWorkshopItem : IPackage
 {
 	private static readonly DateTime _epoch = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 

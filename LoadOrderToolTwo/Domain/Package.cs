@@ -76,7 +76,7 @@ public class Package : IPackage
 	public CompatibilityManager.ReportInfo? CompatibilityReport => CompatibilityManager.GetCompatibilityReport(this);
 	internal bool? ForAssetEditor => CompatibilityManager.IsForAssetEditor(this);
 	internal bool? ForNormalGame => CompatibilityManager.IsForNormalGame(this);
-	Package? IGenericPackage.Package => this;
+	Package? IPackage.Package => this;
 
 	public SteamWorkshopItem? WorkshopInfo { get; internal set; }
 	public ulong SteamId { get; }

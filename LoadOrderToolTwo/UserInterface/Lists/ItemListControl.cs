@@ -22,7 +22,7 @@ using System.Windows.Forms;
 using static CompatibilityReport.CatalogData.Enums;
 
 namespace LoadOrderToolTwo.UserInterface.Lists;
-internal class ItemListControl<T> : SlickStackedListControl<T> where T : IGenericPackage
+internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackage
 {
 	private PackageSorting sorting;
 	private Rectangle PopupSearchRect1;
@@ -64,6 +64,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IGeneri
 	public bool SortDesc { get; private set; }
 	public bool PackagePage { get; set; }
 	public bool TextSearchEmpty { get; set; }
+	public bool IsGenericPage { get; set; }
 
 	protected override void UIChanged()
 	{
@@ -140,6 +141,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IGeneri
 
 			PackageSorting.CompatibilityReport => items
 				.OrderBy(x => x.Item.CompatibilityReport?.Severity ?? default),
+
+			PackageSorting.Subscribers => items
+				.OrderBy(x => x.Item.Subscriptions),
+
+			PackageSorting.Votes => items
+				.OrderBy(x => x.Item.PositiveVotes - x.Item.NegativeVotes),
 
 			_ => items
 				.OrderByDescending(x => x.Item.IsIncluded)
@@ -678,8 +685,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IGeneri
 			labelRect.X += labelH + Padding.Left;
 		}
 
-		var isVersion = package?.Mod is not null && !package.Mod.BuiltIn;
-		var versionText = isVersion ? "v" + package!.Mod!.Version.GetString() : package?.Mod?.BuiltIn ?? false ? Locale.Vanilla : (e.Item.FileSize == 0 ? string.Empty : e.Item.FileSize.SizeString());
+		var isVersion = package?.Mod is not null && !package.BuiltIn;
+		var versionText = isVersion ? "v" + package!.Mod!.Version.GetString() : package?.BuiltIn ?? false ? Locale.Vanilla : (e.Item.FileSize == 0 ? string.Empty : e.Item.FileSize.SizeString());
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
@@ -760,7 +767,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IGeneri
 
 		DrawButtons(e, rects, isPressed, package);
 
-		if (!isIncluded) // fade excluded item
+		if (!isIncluded && !IsGenericPage) // fade excluded item
 		{
 			using var fadedBrush = new SolidBrush(Color.FromArgb(e.HoverState.HasFlag(HoverState.Hovered) ? 25 : 75, BackColor));
 			var filledRect = e.ClipRectangle.Pad(0, -Padding.Top, 0, -Padding.Bottom);
@@ -1053,7 +1060,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IGeneri
 			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
 			rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
 		}
-		else if (item is Package)
+		else if (item is not Asset)
 		{
 			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (includeItemHeight * 2 * 9 / 10) : includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
 		}

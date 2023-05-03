@@ -87,12 +87,6 @@
     <Compile Update="UserInterface\Panels\PC_ContentList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Panels\PC_UnusedLsmPackages.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Panels\PC_MissingLsmPackages.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="UserInterface\Panels\PC_ProfileList.cs">
       <SubType>UserControl</SubType>
     </Compile>

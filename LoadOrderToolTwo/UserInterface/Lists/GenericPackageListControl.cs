@@ -19,7 +19,7 @@ using System.Windows.Forms;
 using static CompatibilityReport.CatalogData.Enums;
 
 namespace LoadOrderToolTwo.UserInterface.Lists;
-internal class GenericPackageListControl : ItemListControl<IGenericPackage> { }
+internal class GenericPackageListControl : ItemListControl<IPackage> { }
 //{
 //	public IEnumerable<IGenericPackage> FilteredItems => SafeGetItems().Select(x => x.Item);
 //	public int FilteredCount => SafeGetItems().Count;
