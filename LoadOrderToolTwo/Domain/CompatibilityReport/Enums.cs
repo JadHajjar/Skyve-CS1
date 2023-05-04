@@ -44,9 +44,9 @@ public static class Enums
 		MusicCopyrighted,                   // This mod uses music with copyright and should not be used in videos and streaming.
 		MusicCopyrightUnknown,              // This mod uses music, but it's unclear whether that music has copyright on it or not. Not safe for videos or streaming.
 		WorksWhenDisabled,                  // This mod will still work when disabled. This suppresses any 'enable this' warnings.
-		ModNamesDiffer,                      // This mods in-game name differs so much from the Workshop name that it can be confusing.
+		ModNamesDiffer,                     // This mods in-game name differs so much from the Workshop name that it can be confusing.
 		SourceNotPublic,                    // No source code published. Without source code it is harder to ensure a mod not include malicious code.
-		MusicCopyright                     // As the included music might be copyright protected, it is better not to use Music Packs for streaming to avoid legal issues.
+		MusicCopyright                      // As the included music might be copyright protected, it is better not to use Music Packs for streaming to avoid legal issues.
 	}
 
 

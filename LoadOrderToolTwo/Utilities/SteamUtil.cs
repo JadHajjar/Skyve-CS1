@@ -136,7 +136,7 @@ public static class SteamUtil
 	public static async Task<Dictionary<string, SteamUserEntry>> GetSteamUsers(List<string> steamId64s)
 	{
 		var idString = string.Join(",", steamId64s);
-		var url = $"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=706303B24FA0E63B1FB25965E081C2E1&steamids={idString}";
+		var url = $"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={KEYS.STEAM_API_KEY}&steamids={idString}";
 
 		try
 		{
@@ -173,7 +173,7 @@ public static class SteamUtil
 
 	private static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoImplementationAsync(List<ulong> ids)
 	{
-		var url = "https://api.steampowered.com/IPublishedFileService/GetDetails/v1/?key=706303B24FA0E63B1FB25965E081C2E1&includetags=true&includechildren=true&includevotes=true";
+		var url = $"https://api.steampowered.com/IPublishedFileService/GetDetails/v1/?key={KEYS.STEAM_API_KEY}&includetags=true&includechildren=true&includevotes=true";
 
 		ids.Remove(0);
 
@@ -199,7 +199,7 @@ public static class SteamUtil
 
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> QueryFilesAsync(SteamQueryOrder order, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null)
 	{
-		var url = $"https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key=706303B24FA0E63B1FB25965E081C2E1&query_type={(int)order}&page=0&numperpage=100&creator_appid=255710&appid=255710&match_all_tags=true&return_tags=true&return_children=true&return_details=true";
+		var url = $"https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key={KEYS.STEAM_API_KEY}&query_type={(int)order}&page=0&numperpage=100&creator_appid=255710&appid=255710&match_all_tags=true&return_tags=true&return_children=true&return_details=true";
 
 		if (!string.IsNullOrWhiteSpace(query))
 		{
@@ -432,5 +432,16 @@ public static class SteamUtil
 			goal /= 3.5;
 
 		return ((int)(100 * (upvotes - downvotes) / goal)).Between(0, 100);
+	}
+
+	public static ulong GetLoggedInSteamId()
+	{
+		try
+		{
+			using var steam = new SteamBridge();
+
+			return steam.GetSteamId();
+		}
+		catch { return 0; }
 	}
 }

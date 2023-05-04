@@ -323,7 +323,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
 
-		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin
+		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin = OT_ModAsset.Margin
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 

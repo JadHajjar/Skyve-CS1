@@ -32,56 +32,21 @@ public class Package : IPackage
 	public Asset[] Assets { get; set; }
 	public Mod? Mod { get; set; }
 
+	public ulong SteamId { get; }
 	public bool BuiltIn { get; }
 	public bool Workshop { get; }
 	public string Folder { get; }
 	public bool IsPseudoMod { get; set; }
+	public SteamWorkshopItem? WorkshopInfo { get; set; }
 	public long FileSize => ContentUtil.GetTotalSize(Folder);
-
-	//public long LocalSize => ContentUtil.GetTotalSize(Folder);
 	public DateTime LocalTime => ContentUtil.GetLocalUpdatedTime(Folder);
-	//public DateTime SubscribeTime => ContentUtil.GetLocalSubscribeTime(Folder);
-
-	//public string? VirtualFolder { get; set; }
-	//public string Folder { get; set; }
-	//public ulong SteamId { get; set; }
-	//public bool BuiltIn { get; set; }
-	//public bool Workshop { get; set; }
-	//public string? SteamPage { get; set; }
-	//public SteamUser? Author { get; set; }
-	//public Bitmap? IconImage => ImageManager.GetImage(IconUrl, true).Result;
-	//public Bitmap? AuthorIconImage => ImageManager.GetImage(Author?.AvatarUrl, true).Result;
-	//public string? IconUrl { get; set; }
-	//public string Name { get; set; }
-	//public bool RemovedFromSteam { get; set; }
-	//public bool Private { get; set; }
-	//public long ServerSize { get; set; }
-	//public DateTime ServerTime { get; set; }
 	public DownloadStatus Status { get; set; }
 	public string? StatusReason { get; set; }
-	//public bool SteamInfoLoaded { get; set; }
-	//public string[]? WorkshopTags { get; set; }
-	//public string? SteamDescription { get; set; }
-	//public bool IsPseudoMod { get; set; }
-	//public int Stars { get; set; }
-	//public int Subscriptions { get; set; }
-	//public int PositiveVotes { get; set; }
-	//public int NegativeVotes { get; set; }
-	//public ulong[] RequiredPackages { get; set; }
-	//public SteamVisibility Visibility { get; set; }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
-	//public IEnumerable<TagItem> Tags => WorkshopTags?.Select(x => new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<TagItem>();
-
-	//Package IPackage.Package => this;
-
 	public CompatibilityManager.ReportInfo? CompatibilityReport => CompatibilityManager.GetCompatibilityReport(this);
 	internal bool? ForAssetEditor => CompatibilityManager.IsForAssetEditor(this);
 	internal bool? ForNormalGame => CompatibilityManager.IsForNormalGame(this);
 	Package? IPackage.Package => this;
-
-	public SteamWorkshopItem? WorkshopInfo { get; internal set; }
-	public ulong SteamId { get; }
-
 	public string? Name => WorkshopInfo?.Name;
 	public bool IsMod => Mod is not null || (WorkshopInfo?.IsMod ?? false);
 	public IEnumerable<TagItem> Tags => WorkshopTags?.Select(x => new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<TagItem>();
