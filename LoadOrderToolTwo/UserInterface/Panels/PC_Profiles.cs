@@ -18,9 +18,12 @@ namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_Profiles : PanelContent
 {
 	private bool loadingProfile;
+	private readonly SlickCheckbox[] _launchOptions;
 	public PC_Profiles()
 	{
 		InitializeComponent();
+
+		_launchOptions = new[] { CB_StartNewGame, CB_LoadSave, CB_NewAsset, CB_LoadAsset };
 
 		SlickTip.SetTo(B_NewProfile, "NewProfile_Tip");
 		SlickTip.SetTo(B_TempProfile, "TempProfile_Tip");
@@ -141,7 +144,7 @@ public partial class PC_Profiles : PanelContent
 	{
 		I_ProfileIcon.Loading = true;
 		L_CurrentProfile.Text = obj.Name;
-		FLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
+		TLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
 		ProfileManager.SetProfile(obj);
 	}
 
@@ -156,14 +159,14 @@ public partial class PC_Profiles : PanelContent
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
 		B_TempProfile.Visible = !profile.Temporary;
 		I_Favorite.Visible = I_ProfileIcon.Enabled = L_Info.Visible = I_Info.Visible = !profile.Temporary;
-		FLP_Options.Enabled = true;
+		TLP_Options.Enabled = true;
 		TLP_GeneralSettings.Visible = !profile.Temporary;
 
 		TLP_Main.SetColumn(B_TempProfile, profile.Temporary ? 2 : 3);
 		TLP_Main.SetColumn(B_NewProfile, profile.Temporary ? 3 : 2);
 
-		FLP_Options.SetRow(TLP_GeneralSettings, profile.Temporary ? 2 : 0);
-		FLP_Options.SetRow(TLP_LSM, profile.Temporary ? 0 : 1);
+		TLP_Options.SetRow(TLP_GeneralSettings, profile.Temporary ? 2 : 0);
+		TLP_Options.SetRow(TLP_LSM, profile.Temporary ? 0 : 1);
 
 		B_EditName.Visible = B_Save.Visible = !profile.Temporary && !TB_Name.Visible;
 
@@ -222,15 +225,15 @@ public partial class PC_Profiles : PanelContent
 			return;
 		}
 
-		if (sender == CB_StartNewGame && CB_StartNewGame.Checked && CB_LoadSave.Checked)
+		if (_launchOptions.Contains(sender) && (sender as SlickCheckbox)!.Checked)
 		{
-			DD_SaveFile.Enabled = CB_LoadSave.Checked = false;
-			return;
-		}
-		else if (sender == CB_LoadSave && CB_StartNewGame.Checked && CB_LoadSave.Checked)
-		{
-			DD_NewMap.Enabled = CB_StartNewGame.Checked = false;
-			return;
+			foreach (var item in _launchOptions)
+			{
+				if (item == sender)
+					continue;
+
+				item.Checked = false;
+			}
 		}
 
 		CentralManager.CurrentProfile.AutoSave = CB_AutoSave.Checked;
@@ -251,6 +254,8 @@ public partial class PC_Profiles : PanelContent
 		CentralManager.CurrentProfile.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.DevUi = CB_DevUI.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.CustomArgs = TB_CustomArgs.Text;
+		CentralManager.CurrentProfile.LaunchSettings.NewAsset = CB_NewAsset.Checked;
+		CentralManager.CurrentProfile.LaunchSettings.LoadAsset = CB_LoadAsset.Checked;
 
 		CentralManager.CurrentProfile.LsmSettings.SkipFile = IOUtil.ToRealPath(DD_SkipFile.SelectedFile);
 		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
@@ -304,7 +309,7 @@ public partial class PC_Profiles : PanelContent
 
 		L_CurrentProfile.Text = newProfile.Name;
 		I_ProfileIcon.Loading = true;
-		FLP_Options.Enabled = false;
+		TLP_Options.Enabled = false;
 		TLP_Main.Visible = true;
 		TLP_New.Visible = false;
 		B_EditName_Click(sender, e);
@@ -328,7 +333,7 @@ public partial class PC_Profiles : PanelContent
 
 		L_CurrentProfile.Text = newProfile.Name;
 		I_ProfileIcon.Loading = true;
-		FLP_Options.Enabled = false;
+		TLP_Options.Enabled = false;
 		TLP_Main.Visible = true;
 		TLP_New.Visible = false;
 		B_EditName_Click(sender, e);

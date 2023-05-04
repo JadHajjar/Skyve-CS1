@@ -147,7 +147,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				.OrderBy(x => x.Item.Subscriptions),
 
 			PackageSorting.Votes => items
-				.OrderBy(x => SteamUtil.GetScore(x.Item)).ThenBy(x => x.Item.PositiveVotes - x.Item.NegativeVotes),
+				.OrderBy(x => SteamUtil.GetScore(x.Item)).ThenBy(x => x.Item.PositiveVotes - x.Item.NegativeVotes / 10 - x.Item.Reports),
 
 			_ => items
 				.OrderByDescending(x => x.Item.IsIncluded)
@@ -213,7 +213,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.ScoreRect.Contains(location))
 		{
-			setTip(string.Format(Locale.RatingCount, item.Item.PositiveVotes > item.Item.NegativeVotes ? '+' : '-', Math.Abs(item.Item.PositiveVotes - item.Item.NegativeVotes).ToString("N0")) + "\r\n" + string.Format(Locale.SubscribersCount, item.Item.Subscriptions.ToString("N0")), rects.ScoreRect);
+			setTip(string.Format(Locale.RatingCount, item.Item.PositiveVotes > item.Item.NegativeVotes ? '+' : '-', Math.Abs(item.Item.PositiveVotes - item.Item.NegativeVotes / 10 - item.Item.Reports).ToString("N0")) + "\r\n" + string.Format(Locale.SubscribersCount, item.Item.Subscriptions.ToString("N0")), rects.ScoreRect);
 			return true;
 		}
 

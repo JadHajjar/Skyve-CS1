@@ -15,6 +15,7 @@ public class SteamWorkshopItem : IPackage
 {
 	private static readonly DateTime _epoch = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
+	public DateTime Timestamp { get; set; }
 	public SteamUser? Author { get; set; }
 	public string? Title { get; set; }
 	public string? PublishedFileID { get; set; }
@@ -51,6 +52,7 @@ public class SteamWorkshopItem : IPackage
 
 	public SteamWorkshopItem(SteamWorkshopItemEntry entry)
 	{
+		Timestamp = DateTime.UtcNow;
 		RemovedFromSteam = entry.result is not 1;
 		Visibility = entry.visibility;
 		Title = entry.title;

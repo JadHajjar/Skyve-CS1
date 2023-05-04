@@ -329,6 +329,8 @@ internal static class CentralManager
 		Log.Info($"Applying analysis results..");
 
 		ModLogicManager.ApplyRequiredStates();
+
+		CompatibilityManager.CacheReport(content);
 	}
 
 	private static void HandleNewPackage(Package package)

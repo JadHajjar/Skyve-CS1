@@ -5,6 +5,7 @@ using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 					if (profileAsset.WorkshopInfo == null)
 					{
-						if (cachedSteamInfo.ContainsKey(package.Key))
+						if (cachedSteamInfo.ContainsKey(package.Key) && DateTime.UtcNow - cachedSteamInfo[package.Key].Timestamp < TimeSpan.FromDays(2))
 						{
 							profileAsset.WorkshopInfo = cachedSteamInfo[package.Key];
 						}

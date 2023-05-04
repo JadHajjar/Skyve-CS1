@@ -17,5 +17,7 @@ public class LaunchSettings
 	public string? MapToLoad { get; set; }
 	public bool StartNewGame { get; set; }
 	public string? CustomArgs { get; set; }
+	public bool NewAsset { get; set; }
+	public bool LoadAsset { get; set; }
 	[JsonIgnore] public bool RefreshWorkshop { get; set; }
 }

@@ -173,6 +173,16 @@ public static class CitiesManager
 			args.Add("-refreshWorkshop");
 		}
 
+		if (CentralManager.CurrentProfile.LaunchSettings.NewAsset)
+		{
+			args.Add("-newAsset");
+		}
+
+		if (CentralManager.CurrentProfile.LaunchSettings.LoadAsset)
+		{
+			args.Add("-loadAsset");
+		}
+
 		if (CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame)
 		{
 			if (LocationManager.FileExists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))

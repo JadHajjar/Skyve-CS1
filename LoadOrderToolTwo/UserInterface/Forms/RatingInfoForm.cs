@@ -48,7 +48,7 @@ public partial class RatingInfoForm : SlickForm
 		B_Ok.Font = UI.Font(9.75F);
 		L_1.Font = L_2.Font = L_3.Font = L_4.Font = UI.Font(9F);
 		L_1.Margin = L_2.Margin = L_3.Margin = L_4.Margin = UI.Scale(new Padding(10), UI.UIScale);
-		PB_1.Size = PB_2.Size = PB_3.Size = PB_4.Size = UI.Scale(new Size(24, 24), UI.UIScale);
+		PB_11.Size = PB_12.Size = PB_13.Size = PB_3.Size = PB_4.Size = UI.Scale(new Size(24, 24), UI.UIScale);
 	}
 
 	private void B_Ok_Click(object sender, EventArgs e)
@@ -69,12 +69,22 @@ public partial class RatingInfoForm : SlickForm
 
 	private void PB_1_Paint(object sender, PaintEventArgs e)
 	{
-
-	}
-	private void PB_2_Paint(object sender, PaintEventArgs e)
-	{
 		var subscriptions = 0;
-		var score = 65;
+		var score = 35;
+		Draw(e, subscriptions, score);
+	}
+
+	private void PB_12_Paint(object sender, PaintEventArgs e)
+	{
+		var subscriptions = 200;
+		var score = 60;
+		Draw(e, subscriptions, score);
+	}
+
+	private void PB_13_Paint(object sender, PaintEventArgs e)
+	{
+		var subscriptions = 1000;
+		var score = 85;
 		Draw(e, subscriptions, score);
 	}
 
@@ -94,12 +104,12 @@ public partial class RatingInfoForm : SlickForm
 
 	private void Draw(PaintEventArgs e, int subscriptions, int score)
 	{
-		e.Graphics.SetUp(PB_2.BackColor);
+		e.Graphics.SetUp(PB_11.BackColor);
 		var clip = e.Graphics.ClipBounds;
-		var labelH = PB_2.Height - 2*(int)(1.5 * UI.FontScale);
+		var labelH = PB_11.Height - 2*(int)(2 * UI.FontScale);
 		labelH -= labelH % 2;
 		var small = UI.FontScale < 1.25;
-		var scoreRect = PB_2.ClientRectangle.CenterR(labelH, labelH);
+		var scoreRect = PB_11.ClientRectangle.CenterR(labelH, labelH);
 		var backColor = score > 90 && subscriptions >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 
 		if (!small)

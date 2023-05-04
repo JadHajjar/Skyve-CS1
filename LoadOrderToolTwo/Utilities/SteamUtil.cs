@@ -418,7 +418,7 @@ public static class SteamUtil
 	public static int GetScore(IPackage package)
 	{
 		var upvotes = package.PositiveVotes;
-		var downvotes = (package.NegativeVotes + package.Reports) / 10;
+		var downvotes = package.NegativeVotes / 10 + package.Reports;
 
 		if (upvotes + downvotes < 5)
 		{

@@ -200,6 +200,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (e.Location.X > rects.SteamIdRect.X)
 		{
+			SlickTip.SetTo(this, string.Empty);
 			return;
 		}
 
@@ -229,6 +230,12 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				setTip(Locale.ExcludeInclude, rects.IncludedRect);
 			}
+		}
+
+		if (rects.ScoreRect.Contains(location))
+		{
+			setTip(string.Format(Locale.RatingCount, Package!.PositiveVotes > Package.NegativeVotes ? '+' : '-', Math.Abs(Package.PositiveVotes - Package.NegativeVotes / 10 - Package.Reports).ToString("N0")) + "\r\n" + string.Format(Locale.SubscribersCount, Package.Subscriptions.ToString("N0")), rects.ScoreRect);
+			return;
 		}
 
 		if (rects.CenterRect.Contains(location) || rects.IconRect.Contains(location))

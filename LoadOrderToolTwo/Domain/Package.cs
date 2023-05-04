@@ -21,6 +21,7 @@ public class Package : IPackage
 		Folder = folder.FormatPath();
 		BuiltIn = builtIn;
 		Workshop = workshop;
+		Assets = new Asset[0];
 
 		if (workshop)
 		{
@@ -28,7 +29,7 @@ public class Package : IPackage
 		}
 	}
 
-	public Asset[]? Assets { get; set; }
+	public Asset[] Assets { get; set; }
 	public Mod? Mod { get; set; }
 
 	public bool BuiltIn { get; }

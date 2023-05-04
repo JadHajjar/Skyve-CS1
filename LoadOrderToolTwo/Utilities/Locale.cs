@@ -322,4 +322,7 @@ internal class Locale : LocaleHelper
 	public static string VotingInfo5 => _instance.GetText(nameof(VotingInfo5));
 	public static string VotingInfo6 => _instance.GetText(nameof(VotingInfo6));
 	public static string UnknownPackage => _instance.GetText(nameof(UnknownPackage));
+	public static string AssetsWithMinorIssues => _instance.GetText(nameof(AssetsWithMinorIssues));
+	public static string AssetsWithMajorIssues => _instance.GetText(nameof(AssetsWithMajorIssues));
+	public static string AssetsShouldUnsub => _instance.GetText(nameof(AssetsShouldUnsub));
 }

@@ -26,6 +26,10 @@ namespace LoadOrderToolTwo.Utilities.Managers;
 #pragma warning disable IDE1006 // Naming Styles
 public static class CompatibilityManager
 {
+	private static bool firstLoadPassed;
+	private static readonly Dictionary<ulong, ReportInfo> steamIdCache = new();
+	private static readonly Dictionary<Domain.Package, ReportInfo> packageCache = new();
+
 	public static Catalog Catalog { get; private set; }
 	public static AssetCatalog AssetCatalog { get; private set; }
 	public static bool CatalogAvailable { get; private set; }
@@ -60,6 +64,9 @@ public static class CompatibilityManager
 				AssetCatalog = ser.Deserialize(reader) as AssetCatalog;
 				AssetCatalog.CreateDictionary();
 			}
+
+			CentralManager.ContentLoaded += () => new BackgroundAction(CacheReport).Run();
+			CentralManager.PackageInformationUpdated += () => new BackgroundAction(CacheReport).Run();
 		}
 		catch { }
 	}
@@ -75,18 +82,21 @@ public static class CompatibilityManager
 		return ser.Deserialize(reader) as Catalog;
 	}
 
-	public static ReportInfo GetCompatibilityReport(Domain.Package package)
+	public static ReportInfo GetCompatibilityReport(Domain.Package package, bool forced = false)
 	{
+		if (packageCache.ContainsKey(package) && !forced)
+			return packageCache[package];
+
 		var reportInfo = new ReportInfo(package);
 
 		if (!package.IsMod && package.IsIncluded && (package.RequiredPackages?.Any() ?? false))
 		{
-			var mods = package.RequiredPackages.AllWhere(x => Catalog is null || !Catalog.IsValidID(x) || ModAndGroupItem(x) != null);
+			var mods = package.RequiredPackages.AllWhere(x => CentralManager.Packages.FirstOrDefault(y => !y.IsMod && y.SteamId == x && y.IsIncluded) is null && (Catalog is null || ModAndGroupItem(x, true) is not null));
 
 			if (mods.Any())
 			{
 				reportInfo.Messages.Add(new ReportMessage(ReportType.RequiredMods
-					, ReportSeverity.MajorIssues
+					, ReportSeverity.MinorIssues
 					, Locale.CR_RequiredModsMissing
 					, packages: mods.ToArray()));
 			}
@@ -94,7 +104,7 @@ public static class CompatibilityManager
 
 		if (!package.Workshop || Catalog is null)
 		{
-			return reportInfo;
+			return packageCache[package] = reportInfo;
 		}
 
 		var subscribedMod = Catalog.GetMod(package.SteamId);
@@ -108,7 +118,7 @@ public static class CompatibilityManager
 								, assetEntry.Stability
 								, string.Format(Locale.CR_IncompatibleAsset, assetEntry.Name)));
 
-			return reportInfo;
+			return packageCache[package] = reportInfo;
 		}
 
 		if (subscribedMod is null)
@@ -117,7 +127,7 @@ public static class CompatibilityManager
 				, package.IsMod ? ReportSeverity.Remarks : ReportSeverity.NothingToReport
  				, Locale.CR_NotInCatalogMod));
 
-			return reportInfo;
+			return packageCache[package] = reportInfo;
 		}
 
 		var subscriptionAuthor = Catalog.GetAuthor(subscribedMod.AuthorID, subscribedMod.AuthorUrl);
@@ -143,11 +153,14 @@ public static class CompatibilityManager
 			}
 		}
 
-		return reportInfo;
+		return packageCache[package] = reportInfo;
 	}
 
-	public static ReportInfo GetCompatibilityReport(ulong packageId)
+	public static ReportInfo GetCompatibilityReport(ulong packageId, bool forced = false)
 	{
+		if (steamIdCache.ContainsKey(packageId) && !forced)
+			return steamIdCache[packageId];
+
 		if (Catalog is null || packageId is 0)
 		{
 			return null;
@@ -178,7 +191,7 @@ public static class CompatibilityManager
 			reportInfo.Messages.AddRange(ExtraStatuses(subscribedMod));
 		}
 
-		return reportInfo;
+		return steamIdCache[packageId] = reportInfo;
 	}
 
 	public static bool? IsForAssetEditor(Domain.Package package)
@@ -536,6 +549,28 @@ public static class CompatibilityManager
 			, packages: missingRecommendations.ToArray());
 	}
 
+	private static Message ModAndGroupItem(ulong steamID, bool withSuccessors)
+	{
+		var message = ModAndGroupItem(steamID);
+
+		if (message is null)
+			return null;
+
+		if (!withSuccessors)
+			return message;
+
+		var successors = Catalog?.GetMod(steamID)?.Successors;
+
+		if (successors is not null)
+			foreach (var item in successors)
+			{
+				if (ModAndGroupItem(item, true) is null)
+					return null;
+			}
+
+		return message;
+	}
+
 	private static Message ModAndGroupItem(ulong steamID)
 	{
 		var catalogMod = Catalog.GetSubscription(steamID);
@@ -546,7 +581,11 @@ public static class CompatibilityManager
 			return null;
 		}
 		catalogMod = Catalog.GetMod(steamID);
-
+		if (catalogMod is null)
+		{
+			// Mod is not subscribed and not in a group. Report as missing with Workshop page.
+			return new Message() { message = "missing" };
+		}
 		if (catalogMod.IsDisabled)
 		{
 			// Mod is subscribed and disabled. Report as "missing", without Workshop page.
@@ -739,6 +778,15 @@ public static class CompatibilityManager
 			ReportSeverity.Remarks or (ReportSeverity)(-1) => FormDesign.Design.ForeColor,
 			_ => FormDesign.Design.GreenColor
 		};
+	}
+
+	internal static void CacheReport() => CacheReport(CentralManager.Packages);
+	internal static void CacheReport(IEnumerable<Domain.Package> content)
+	{
+		foreach (var package in content)
+		{
+			GetCompatibilityReport(package, true);
+		}
 	}
 
 	public class ModInfo
