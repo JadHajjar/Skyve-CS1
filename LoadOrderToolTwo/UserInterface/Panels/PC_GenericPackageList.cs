@@ -102,7 +102,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
 					LC_Items.Invalidate(package);
 			}
-		});
+		}, 4);
 
 		return true;
 	}

@@ -77,14 +77,22 @@ public static class CompatibilityManager
 
 	public static ReportInfo GetCompatibilityReport(Domain.Package package)
 	{
-		if (Catalog is null)
-		{
-			return null;
-		}
-
 		var reportInfo = new ReportInfo(package);
 
-		if (!package.Workshop)
+		if (!package.IsMod && package.IsIncluded && (package.RequiredPackages?.Any() ?? false))
+		{
+			var mods = package.RequiredPackages.AllWhere(x => Catalog is null || !Catalog.IsValidID(x) || ModAndGroupItem(x) != null);
+
+			if (mods.Any())
+			{
+				reportInfo.Messages.Add(new ReportMessage(ReportType.RequiredMods
+					, ReportSeverity.MajorIssues
+					, Locale.CR_RequiredModsMissing
+					, packages: mods.ToArray()));
+			}
+		}
+
+		if (!package.Workshop || Catalog is null)
 		{
 			return reportInfo;
 		}
@@ -103,16 +111,11 @@ public static class CompatibilityManager
 			return reportInfo;
 		}
 
-		if (subscribedMod is null && package.Mod is null)
-		{
-			return null;
-		}
-
 		if (subscribedMod is null)
 		{
 			reportInfo.Messages.Add(new ReportMessage(ReportType.Stability
-				, ReportSeverity.Remarks
-				, Locale.CR_NotInCatalogMod));
+				, package.IsMod ? ReportSeverity.Remarks : ReportSeverity.NothingToReport
+ 				, Locale.CR_NotInCatalogMod));
 
 			return reportInfo;
 		}

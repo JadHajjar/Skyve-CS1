@@ -48,6 +48,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		TLP_Main.Controls.Add(LC_Items, 0, TLP_Main.RowCount - 1);
 		TLP_Main.SetColumnSpan(LC_Items, TLP_Main.ColumnCount);
 
+		if (this is not PC_GenericPackageList)
+		{
+			TLP_Main.SetColumn(FLP_Search, 0);
+			TLP_Main.SetColumnSpan(FLP_Search, 2);
+			TLP_Main.SetColumn(P_FiltersContainer, 0);
+			TLP_Main.SetColumnSpan(P_FiltersContainer, 4);
+		}
+
 		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
 		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
@@ -313,6 +321,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 
+		B_Filters.Size = B_Filters.GetAutoSize(true);
+
 		OT_Enabled.Margin = OT_Included.Margin = OT_Workshop.Margin
 			= DD_ReportSeverity.Margin = DR_SubscribeTime.Margin = DR_ServerTime.Margin
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
@@ -548,7 +558,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 			else
 			{
-				if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)) && !DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)))
+				if (string.IsNullOrEmpty(item.Folder))
+				{
+					if (!DD_Profile.SelectedItem.Assets.Any(x => x.SteamId == item.SteamId) && !DD_Profile.SelectedItem.Mods.Any(x => x.SteamId == item.SteamId))
+					{
+						return true;
+					}
+				}
+				else if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)) && !DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)))
 				{
 					return true;
 				}

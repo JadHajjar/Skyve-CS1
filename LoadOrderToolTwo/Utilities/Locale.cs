@@ -312,4 +312,14 @@ internal class Locale : LocaleHelper
 	public static string MissingLSMReport => _instance.GetText(nameof(MissingLSMReport));
 	public static string UnusedLSMReport => _instance.GetText(nameof(UnusedLSMReport));
 	public static string MissingPackagesProfile => _instance.GetText(nameof(MissingPackagesProfile));
+	public static string SearchWorkshop => _instance.GetText(nameof(SearchWorkshop));
+	public static string SearchWorkshopBrowser => _instance.GetText(nameof(SearchWorkshopBrowser));
+	public static string VotingTitle => _instance.GetText(nameof(VotingTitle));
+	public static string VotingInfo1 => _instance.GetText(nameof(VotingInfo1));
+	public static string VotingInfo2 => _instance.GetText(nameof(VotingInfo2));
+	public static string VotingInfo3 => _instance.GetText(nameof(VotingInfo3));
+	public static string VotingInfo4 => _instance.GetText(nameof(VotingInfo4));
+	public static string VotingInfo5 => _instance.GetText(nameof(VotingInfo5));
+	public static string VotingInfo6 => _instance.GetText(nameof(VotingInfo6));
+	public static string UnknownPackage => _instance.GetText(nameof(UnknownPackage));
 }

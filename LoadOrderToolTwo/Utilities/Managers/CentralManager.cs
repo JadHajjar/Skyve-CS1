@@ -260,7 +260,7 @@ internal static class CentralManager
 					InformationUpdate(package);
 				}
 			}
-		});
+		}, 10);
 
 		Log.Info($"Load Complete");
 		_delayedWorkshopInfoUpdated.Run();

@@ -415,25 +415,6 @@ public static class SteamUtil
 		}).Run();
 	}
 
-	//public static int WilsonScore(int upvotes, int downvotes)
-	//{
-	//	if (upvotes + downvotes < 5)
-	//		return -1;
-
-	//	var z = 1.96; // z-score for 95% confidence level
-	//	var n = 250D;
-	//	var p = (upvotes - downvotes) / n;
-
-	//	if (p > 1)
-	//		return 100;
-
-	//	var a = p + (z * z / (2 * n));
-	//	var b = z * Math.Sqrt(((p * (1 - p)) + (z * z / (4 * n))) / n);
-	//	var upperBound = (a + b) / (1 + (z * z / n));
-
-	//	return (int)(100 * upperBound).Between(0, 100);
-	//}
-
 	public static int GetScore(IPackage package)
 	{
 		var upvotes = package.PositiveVotes;

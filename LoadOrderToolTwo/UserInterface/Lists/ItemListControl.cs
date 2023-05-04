@@ -4,6 +4,7 @@ using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
+using LoadOrderToolTwo.UserInterface.Forms;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -146,7 +147,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				.OrderBy(x => x.Item.Subscriptions),
 
 			PackageSorting.Votes => items
-				.OrderBy(x => x.Item.PositiveVotes - x.Item.NegativeVotes),
+				.OrderBy(x => SteamUtil.GetScore(x.Item)).ThenBy(x => x.Item.PositiveVotes - x.Item.NegativeVotes),
 
 			_ => items
 				.OrderByDescending(x => x.Item.IsIncluded)
@@ -260,7 +261,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.DownloadStatusRect.Contains(location))
 		{
-			setTipFilter(item.Item.Package?.StatusReason, Locale.FilterByThisPackageStatus, rects.DownloadStatusRect);
+			if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+			{
+				setTip(Locale.FilterByThisPackageStatus + "\r\n\r\n" + item.Item.Package?.StatusReason, rects.DownloadStatusRect);
+			}
+			else
+			{
+				setTip(item.Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToLower()), rects.DownloadStatusRect);
+			}
 		}
 
 		if (rects.DateRect.Contains(location))
@@ -439,6 +447,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 		}
 
+		if (rects.ScoreRect.Contains(e.Location))
+		{
+			new RatingInfoForm { Icon = Program.MainForm?.Icon }.ShowDialog(Program.MainForm);
+			return;
+		}
+
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
 			if (item.Item.Package is not null)
@@ -595,30 +609,31 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 				using var icon = IconManager.GetIcon("I_Link");
 
-				var buttonSize1 = SlickButton.GetSize(e.Graphics, icon, "Search the workshop instead..", UI.Font(9.75F));
-				var buttonSize2 = SlickButton.GetSize(e.Graphics, icon, "Search the workshop in your browser..", UI.Font(9.75F));
+				var buttonSize1 = SlickButton.GetSize(e.Graphics, icon, Locale.SearchWorkshop, UI.Font(9.75F));
+				var buttonSize2 = SlickButton.GetSize(e.Graphics, icon, Locale.SearchWorkshopBrowser, UI.Font(9.75F));
 				PopupSearchRect1 = ClientRectangle.Pad(0, Height / 3, 0, 0).CenterR(buttonSize1);
 
-				SlickButton.GetColors(out var fore, out var back, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal);
+				//SlickButton.GetColors(out var fore, out var back, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal);
 
-				if (!PopupSearchRect1.Contains(CursorLocation))
-				{
-					back = Color.Empty;
-				}
+				//if (!PopupSearchRect1.Contains(CursorLocation))
+				//{
+				//	back = Color.Empty;
+				//}
 
-				SlickButton.DrawButton(e, PopupSearchRect1.Location, PopupSearchRect1.Size, "Search the workshop instead..", UI.Font(9.75F), back, fore, icon, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
+				//SlickButton.DrawButton(e, PopupSearchRect1.Location, PopupSearchRect1.Size, Locale.SearchWorkshop, UI.Font(9.75F), back, fore, icon, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
 
 				PopupSearchRect2 = new Rectangle(PopupSearchRect1.X, PopupSearchRect1.Bottom + (Padding.Vertical * 2), buttonSize2.Width, buttonSize2.Height);
 
-				SlickButton.GetColors(out fore, out back, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal);
+				SlickButton.GetColors(out var fore, out var back, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal);
 
 				if (!PopupSearchRect2.Contains(CursorLocation))
 				{
 					back = Color.Empty;
 				}
 
-				SlickButton.DrawButton(e, PopupSearchRect2.Location, PopupSearchRect2.Size, "Search the workshop in your browser..", UI.Font(9.75F), back, fore, icon, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
+				SlickButton.DrawButton(e, PopupSearchRect2.Location, PopupSearchRect2.Size, Locale.SearchWorkshopBrowser, UI.Font(9.75F), back, fore, icon, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
 
+				PopupSearchRect1 = Rectangle.Empty;
 				Cursor = PopupSearchRect1.Contains(CursorLocation) || PopupSearchRect2.Contains(CursorLocation) ? Cursors.Hand : Cursors.Default;
 			}
 			else
@@ -760,10 +775,18 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			var clip = e.Graphics.ClipBounds;
 			var labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
 			labelH -= labelH % 2;
+			var small = UI.FontScale < 1.25;
 			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.BottomLeft);
 			var backColor = score > 90 && e.Item.Subscriptions >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 
-			e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);
+			if (!small)
+			{
+				e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);
+			}
+			else
+			{
+				scoreRect.Y--;
+			}
 
 			using var scoreFilled = IconManager.GetSmallIcon("I_VoteFilled");
 
@@ -771,21 +794,32 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
 
-				e.Graphics.DrawImage(scoreIcon.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
+				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
 				e.Graphics.SetClip(scoreRect.CenterR(scoreFilled.Size).Pad(0, scoreFilled.Height - (scoreFilled.Height * score / 105), 0, 0));
-				e.Graphics.DrawImage(scoreFilled.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
+				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
 				e.Graphics.SetClip(clip);
 			}
 			else
 			{
-				e.Graphics.DrawImage(scoreFilled.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
+				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
 			}
 
 			if (e.Item.Subscriptions < 50000 || score <= 90)
 			{
-				using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
-				e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * e.Item.Subscriptions / 15000) / 2), Math.Min(360, 360F * e.Item.Subscriptions / 15000));
+				if (small)
+				{
+					using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+
+					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * e.Item.Subscriptions / 15000), 0, 0));
+					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
+					e.Graphics.SetClip(clip);
+				}
+				else
+				{
+					using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
+					e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * e.Item.Subscriptions / 15000) / 2), Math.Min(360, 360F * e.Item.Subscriptions / 15000));
+				}
 			}
 
 			return labelH + Padding.Left;
@@ -839,7 +873,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	{
 		if (!e.Item.Workshop)
 		{
-			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(package?.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, true);
+			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(package?.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleLeft : ContentAlignment.BottomLeft, true);
 			rects.AuthorRect = Rectangle.Empty;
 			return;
 		}
@@ -903,7 +937,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		List<string>? tags = null;
 
-		var mod = package?.Mod is not null;
+		var mod = e.Item is not Asset;
 		var text = mod ? e.Item.ToString().RemoveVersionText(out tags) : e.Item.ToString();
 		using var font = UI.Font(large ? 11.25F : 9F, FontStyle.Bold);
 		var textSize = e.Graphics.Measure(text, font);
@@ -916,7 +950,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return;
 		}
 
-		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 1, (int)textSize.Height);
+		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 0, (int)textSize.Height);
 
 		foreach (var item in tags)
 		{
@@ -997,6 +1031,22 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		size.Width += Padding.Left;
+
+		if (rectangle.Width > 0 && size.Width > rectangle.Width)
+		{
+			if (alignment == ContentAlignment.TopLeft)
+			{
+				alignment = ContentAlignment.TopRight;
+			}
+			else if (alignment == ContentAlignment.MiddleLeft)
+			{
+				alignment = ContentAlignment.MiddleRight;
+			}
+			else if (alignment == ContentAlignment.BottomLeft)
+			{
+				alignment = ContentAlignment.BottomRight;
+			}
+		}
 
 		rectangle = rectangle.Pad(smaller ? Padding.Left / 2 : Padding.Left).Align(size, alignment);
 
@@ -1110,6 +1160,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			rects.AuthorRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y + (rectangle.Height / 2), (int)(100 * UI.FontScale), rectangle.Height / 2);
 			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
 			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 2);
+		}
+
+		if (!item.Workshop)
+		{
+			rects.SteamIdRect = rects.SteamIdRect.Pad(-Padding.Left - buttonRectangle.Width, 0, 0, 0);
 		}
 
 		//}
