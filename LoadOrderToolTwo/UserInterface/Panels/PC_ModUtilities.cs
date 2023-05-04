@@ -53,8 +53,8 @@ public partial class PC_ModUtilities : PanelContent
 	private void RefreshModIssues()
 	{
 		var duplicates = ModsUtil.GetDuplicateMods();
-		var modsOutOfDate = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Status == DownloadStatus.PartiallyDownloaded);
+		var modsOutOfDate = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.OutOfDate);
+		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.PartiallyDownloaded);
 
 		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
 		LC_Duplicates.SetSorting(PackageSorting.Mod, false);
@@ -125,14 +125,17 @@ public partial class PC_ModUtilities : PanelContent
 			B_LoadCollection.Loading = true;
 
 			var collectionId = Regex.Match(TB_CollectionLink.Text, TB_CollectionLink.ValidationRegex).Groups[1].Value;
-			var contents = await SteamUtil.GetCollectionContentsAsync(collectionId);
 
-			if (contents?.Any() ?? false)
+			if (ulong.TryParse(collectionId, out var steamId))
 			{
-				var collection = contents[ulong.Parse(collectionId)];
-				contents.Remove(ulong.Parse(collectionId));
-				Form.PushPanel(null, new PC_ImportCollection(collection, contents));
-				TB_CollectionLink.Text = string.Empty;
+				var contents = await SteamUtil.GetWorkshopInfoAsync(new[] { steamId });
+
+				if (contents.TryGet(steamId)?.RequiredPackages?.Any() ?? false)
+				{
+					Form.PushPanel(null, new PC_ImportCollection(contents[steamId]));
+
+					TB_CollectionLink.Text = string.Empty;
+				}
 			}
 
 			B_LoadCollection.Loading = false;
@@ -142,7 +145,7 @@ public partial class PC_ModUtilities : PanelContent
 	private void B_ReDownload_Click(object sender, EventArgs e)
 	{
 		B_ReDownload.Loading = true;
-		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).ToArray());
+		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).ToArray());
 	}
 
 	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -159,7 +162,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		var assets = LsmUtil.LoadMissingAssets(obj);
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets.ToList()));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = Locale.MissingLSMReport });
 	}
 
 	private bool LSMDragDrop_ValidFile(object sender, string arg)
@@ -171,7 +174,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		var assets = LsmUtil.LoadUnusedAssets(obj);
 
-		Form.PushPanel(null, new PC_UnusedLsmPackages(assets.ToList()));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = Locale.UnusedLSMReport });
 	}
 
 	private void DD_BOB_FileSelected(string obj)
@@ -191,7 +194,7 @@ public partial class PC_ModUtilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(P_BOB.Text) });
 	}
 
 	private bool DD_BOB_ValidFile(object sender, string arg)
@@ -221,7 +224,7 @@ public partial class PC_ModUtilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(P_Text.Text) });
 	}
 
 	private void B_ImportClipboard_Click(object sender, EventArgs e)
@@ -246,7 +249,7 @@ public partial class PC_ModUtilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_MissingLsmPackages(assets));
+		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(B_ImportClipboard.Text) });
 	}
 
 	private void B_Cleanup_Click(object sender, EventArgs e)
@@ -256,5 +259,10 @@ public partial class PC_ModUtilities : PanelContent
 			B_Cleanup.Loading = true;
 			SubscriptionsUtil.Redownload = true;
 		}
+	}
+
+	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
+	{
+		slickSpacer1.Visible = slickScroll1.Percentage != 0;
 	}
 }

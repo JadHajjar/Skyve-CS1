@@ -24,13 +24,17 @@ namespace LoadOrderToolTwo.Utilities.Managers;
 #nullable disable
 #pragma warning disable CS0649 // Never Used
 #pragma warning disable IDE1006 // Naming Styles
-internal static class CompatibilityManager
+public static class CompatibilityManager
 {
-	internal static Catalog Catalog { get; private set; }
-	internal static AssetCatalog AssetCatalog { get; private set; }
-	internal static bool CatalogAvailable { get; private set; }
+	private static bool firstLoadPassed;
+	private static readonly Dictionary<ulong, ReportInfo> steamIdCache = new();
+	private static readonly Dictionary<Domain.Package, ReportInfo> packageCache = new();
 
-	internal static void LoadCompatibilityReport(Domain.Package compatibilityReport)
+	public static Catalog Catalog { get; private set; }
+	public static AssetCatalog AssetCatalog { get; private set; }
+	public static bool CatalogAvailable { get; private set; }
+
+	public static void LoadCompatibilityReport(Domain.Package compatibilityReport)
 	{
 		try
 		{
@@ -60,6 +64,9 @@ internal static class CompatibilityManager
 				AssetCatalog = ser.Deserialize(reader) as AssetCatalog;
 				AssetCatalog.CreateDictionary();
 			}
+
+			CentralManager.ContentLoaded += () => new BackgroundAction(CacheReport).Run();
+			CentralManager.PackageInformationUpdated += () => new BackgroundAction(CacheReport).Run();
 		}
 		catch { }
 	}
@@ -75,18 +82,29 @@ internal static class CompatibilityManager
 		return ser.Deserialize(reader) as Catalog;
 	}
 
-	internal static ReportInfo GetCompatibilityReport(Domain.Package package)
+	public static ReportInfo GetCompatibilityReport(Domain.Package package, bool forced = false)
 	{
-		if (Catalog is null)
-		{
-			return null;
-		}
+		if (packageCache.ContainsKey(package) && !forced)
+			return packageCache[package];
 
 		var reportInfo = new ReportInfo(package);
 
-		if (!package.Workshop)
+		if (!package.IsMod && package.IsIncluded && (package.RequiredPackages?.Any() ?? false))
 		{
-			return reportInfo;
+			var mods = package.RequiredPackages.AllWhere(x => CentralManager.Packages.FirstOrDefault(y => !y.IsMod && y.SteamId == x && y.IsIncluded) is null && (Catalog is null || ModAndGroupItem(x, true) is not null));
+
+			if (mods.Any())
+			{
+				reportInfo.Messages.Add(new ReportMessage(ReportType.RequiredMods
+					, ReportSeverity.MinorIssues
+					, Locale.CR_RequiredModsMissing
+					, packages: mods.ToArray()));
+			}
+		}
+
+		if (!package.Workshop || Catalog is null)
+		{
+			return packageCache[package] = reportInfo;
 		}
 
 		var subscribedMod = Catalog.GetMod(package.SteamId);
@@ -100,21 +118,16 @@ internal static class CompatibilityManager
 								, assetEntry.Stability
 								, string.Format(Locale.CR_IncompatibleAsset, assetEntry.Name)));
 
-			return reportInfo;
-		}
-
-		if (subscribedMod is null && package.Mod is null)
-		{
-			return null;
+			return packageCache[package] = reportInfo;
 		}
 
 		if (subscribedMod is null)
 		{
 			reportInfo.Messages.Add(new ReportMessage(ReportType.Stability
-				, ReportSeverity.Remarks
-				, Locale.CR_NotInCatalogMod));
+				, package.IsMod ? ReportSeverity.Remarks : ReportSeverity.NothingToReport
+ 				, Locale.CR_NotInCatalogMod));
 
-			return reportInfo;
+			return packageCache[package] = reportInfo;
 		}
 
 		var subscriptionAuthor = Catalog.GetAuthor(subscribedMod.AuthorID, subscribedMod.AuthorUrl);
@@ -140,11 +153,14 @@ internal static class CompatibilityManager
 			}
 		}
 
-		return reportInfo;
+		return packageCache[package] = reportInfo;
 	}
 
-	internal static ReportInfo GetCompatibilityReport(ulong packageId)
+	public static ReportInfo GetCompatibilityReport(ulong packageId, bool forced = false)
 	{
+		if (steamIdCache.ContainsKey(packageId) && !forced)
+			return steamIdCache[packageId];
+
 		if (Catalog is null || packageId is 0)
 		{
 			return null;
@@ -175,10 +191,10 @@ internal static class CompatibilityManager
 			reportInfo.Messages.AddRange(ExtraStatuses(subscribedMod));
 		}
 
-		return reportInfo;
+		return steamIdCache[packageId] = reportInfo;
 	}
 
-	internal static bool? IsForAssetEditor(Domain.Package package)
+	public static bool? IsForAssetEditor(Domain.Package package)
 	{
 		if (Catalog is null || !package.Workshop)
 		{
@@ -188,7 +204,7 @@ internal static class CompatibilityManager
 		return Catalog.GetMod(package.SteamId)?.Statuses.Any(x => x == Status.ModForModders);
 	}
 
-	internal static bool? IsForNormalGame(Domain.Package package)
+	public static bool? IsForNormalGame(Domain.Package package)
 	{
 		if (Catalog is null || !package.Workshop)
 		{
@@ -533,6 +549,28 @@ internal static class CompatibilityManager
 			, packages: missingRecommendations.ToArray());
 	}
 
+	private static Message ModAndGroupItem(ulong steamID, bool withSuccessors)
+	{
+		var message = ModAndGroupItem(steamID);
+
+		if (message is null)
+			return null;
+
+		if (!withSuccessors)
+			return message;
+
+		var successors = Catalog?.GetMod(steamID)?.Successors;
+
+		if (successors is not null)
+			foreach (var item in successors)
+			{
+				if (ModAndGroupItem(item, true) is null)
+					return null;
+			}
+
+		return message;
+	}
+
 	private static Message ModAndGroupItem(ulong steamID)
 	{
 		var catalogMod = Catalog.GetSubscription(steamID);
@@ -543,7 +581,11 @@ internal static class CompatibilityManager
 			return null;
 		}
 		catalogMod = Catalog.GetMod(steamID);
-
+		if (catalogMod is null)
+		{
+			// Mod is not subscribed and not in a group. Report as missing with Workshop page.
+			return new Message() { message = "missing" };
+		}
 		if (catalogMod.IsDisabled)
 		{
 			// Mod is subscribed and disabled. Report as "missing", without Workshop page.
@@ -738,7 +780,16 @@ internal static class CompatibilityManager
 		};
 	}
 
-	internal class ModInfo
+	internal static void CacheReport() => CacheReport(CentralManager.Packages);
+	internal static void CacheReport(IEnumerable<Domain.Package> content)
+	{
+		foreach (var package in content)
+		{
+			GetCompatibilityReport(package, true);
+		}
+	}
+
+	public class ModInfo
 	{
 		public bool isLocal;
 		public string authorName;
@@ -789,7 +840,7 @@ internal static class CompatibilityManager
 		}
 	}
 
-	internal class MessageList
+	public class MessageList
 	{
 		public string title;
 		public string titleLocaleId;
@@ -797,7 +848,7 @@ internal static class CompatibilityManager
 		public Dictionary<int, List<Message>> messageDictionary;
 	}
 
-	internal class CompatibilityList
+	public class CompatibilityList
 	{
 		public string message;
 		public string messageLocaleId;
@@ -805,7 +856,7 @@ internal static class CompatibilityManager
 		public List<Details> details;
 	}
 
-	internal class Message
+	public class Message
 	{
 		public string message;
 		public string messageLocaleId;
@@ -817,7 +868,7 @@ internal static class CompatibilityManager
 		public string detailsValue;
 	}
 
-	internal class Details
+	public class Details
 	{
 		public string details;
 		public string detailsLocaleId;
@@ -825,7 +876,7 @@ internal static class CompatibilityManager
 		public string detailsValue;
 	}
 
-	internal class ReportMessage
+	public class ReportMessage
 	{
 		public string ReportType => Type.ToString().FormatWords();
 		[JsonProperty("Severity")] public string ReportSeverity => Severity.ToString().FormatWords();
@@ -845,7 +896,7 @@ internal static class CompatibilityManager
 		}
 	}
 
-	internal class ReportCompatibilityMessage : ReportMessage
+	public class ReportCompatibilityMessage : ReportMessage
 	{
 		[JsonIgnore] public CompatibilityStatus Compatibility { get; }
 
@@ -855,10 +906,10 @@ internal static class CompatibilityManager
 		}
 	}
 
-	internal class ReportInfo
+	public class ReportInfo
 	{
 		public string PackageName => Package.ToString();
-		public string PackageLink => Package.SteamPage;
+		public string PackageLink => $"https://steamcommunity.com/workshop/filedetails?id={Package.SteamId}";
 		[JsonProperty("Severity")] public string _Severity => Severity.ToString().FormatWords();
 
 		[JsonIgnore] public Domain.Package Package { get; }

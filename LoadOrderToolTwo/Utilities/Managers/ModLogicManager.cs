@@ -52,7 +52,7 @@ internal class ModLogicManager
 
 		if (IsPseudoMod(mod))
 		{
-			mod.IsPseudoMod = true;
+			mod.Package.IsPseudoMod = true;
 
 			if (CentralManager.SessionSettings.UserSettings.HidePseudoMods)
 			{

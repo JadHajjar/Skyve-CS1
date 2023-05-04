@@ -2,10 +2,13 @@ using Extensions;
 
 using LoadOrderShared;
 
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.Utilities.IO;
 using LoadOrderToolTwo.Utilities.Managers;
+
+using Newtonsoft.Json;
 
 using SlickControls;
 
@@ -17,7 +20,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +31,7 @@ public static class SteamUtil
 	private const string STEAM_CACHE_FILE = "SteamModsCache.json";
 	private const string DLC_CACHE_FILE = "SteamDlcsCache.json";
 	private static readonly CSCache _csCache;
+	private static readonly Dictionary<string, SteamUserEntry> _usersCache = new();
 
 	public static List<SteamDlc> Dlcs { get; private set; }
 
@@ -66,7 +69,7 @@ public static class SteamUtil
 		{
 			var path = ISave.GetPath(STEAM_CACHE_FILE);
 
-			if (DateTime.Now - File.GetLastWriteTime(path) > TimeSpan.FromDays(1.5) && ConnectionHandler.IsConnected)
+			if (DateTime.Now - File.GetLastWriteTime(path) > TimeSpan.FromDays(7) && ConnectionHandler.IsConnected)
 			{
 				return null;
 			}
@@ -144,7 +147,7 @@ public static class SteamUtil
 			{
 				var response = await httpResponse.Content.ReadAsStringAsync();
 
-				return Newtonsoft.Json.JsonConvert.DeserializeObject<SteamUserRootResponse>(response)?.response.players.ToDictionary(x => x.steamid) ?? new();
+				return JsonConvert.DeserializeObject<SteamUserRootResponse>(response)?.response.players.ToDictionary(x => x.steamid) ?? new();
 			}
 
 			Log.Error("failed to get steam author data: " + httpResponse.RequestMessage);
@@ -159,7 +162,9 @@ public static class SteamUtil
 
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoAsync(ulong[] ids)
 	{
-		var results = await ConvertInChunks(ids, 1000, GetWorkshopInfoImplementationAsync);
+		await QueryFilesAsync(SteamQueryOrder.RankedByLastUpdatedDate, requiredTags: new[] { "Mod" });
+
+		var results = await ConvertInChunks(ids, 200, GetWorkshopInfoImplementationAsync);
 
 		SaveCache(results);
 
@@ -168,60 +173,21 @@ public static class SteamUtil
 
 	private static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoImplementationAsync(List<ulong> ids)
 	{
-		var url = @"https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/";
+		var url = "https://api.steampowered.com/IPublishedFileService/GetDetails/v1/?key=706303B24FA0E63B1FB25965E081C2E1&includetags=true&includechildren=true&includevotes=true";
 
 		ids.Remove(0);
 
-		var bodyDictionary = new Dictionary<string, string>
+		for (var i = 0; i < ids.Count; i++)
 		{
-			["itemcount"] = ids.Count.ToString()
-		};
-
-		for (var i = 0; i < ids.Count; ++i)
-		{
-			bodyDictionary[$"publishedfileids[{i}]"] = ids[i].ToString();
+			url += $"&publishedfileids[{i}]={ids[i]}";
 		}
 
 		try
 		{
 			using var httpClient = new HttpClient();
-			var body = new FormUrlEncodedContent(bodyDictionary);
-			var httpResponse = await httpClient.PostAsync(url, body);
+			var httpResponse = await httpClient.GetAsync(url);
 
-			if (httpResponse.IsSuccessStatusCode)
-			{
-				var response = await httpResponse.Content.ReadAsStringAsync();
-
-				var data = Newtonsoft.Json.JsonConvert.DeserializeObject<SteamWorkshopItemRootResponse>(response)?.response.publishedfiledetails
-					.Where(x => x.result is 1 or 17 or 86 or 9)
-					.Select(x => new SteamWorkshopItem(x))
-					.ToList() ?? new();
-
-				var users = await ConvertInChunks(data.Select(x => x.AuthorID ?? string.Empty).Distinct(), 100, GetSteamUsers);
-
-				foreach (var item in data)
-				{
-					if (!string.IsNullOrEmpty(item.AuthorID) && users.ContainsKey(item.AuthorID!))
-					{
-						item.Author = new(users[item.AuthorID!]);
-					}
-				}
-
-				foreach (var item in data.Where(x => x.Private))
-				{
-					var info = await GetUnlistedWorkshopEntryAsync("https://steamcommunity.com/workshop/filedetails?id=" + item.SteamId);
-
-					if (info.Item1 is not null)
-					{
-						item.Title = info.Item1;
-						item.PreviewURL = info.Item2;
-					}
-				}
-
-				return data.ToDictionary(x => ulong.Parse(x.PublishedFileID));
-			}
-
-			Log.Error("failed to get steam data: " + httpResponse.RequestMessage);
+			return await ConvertPublishedFileResponse(httpResponse);
 		}
 		catch (Exception ex)
 		{
@@ -231,64 +197,81 @@ public static class SteamUtil
 		return new();
 	}
 
-	public static async Task<(string?, string?)> GetUnlistedWorkshopEntryAsync(string entryUrl)
+	public static async Task<Dictionary<ulong, SteamWorkshopItem>> QueryFilesAsync(SteamQueryOrder order, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null)
 	{
-		using var client = new HttpClient();
-		var response = await client.GetAsync(entryUrl);
-		var entryHtml = await response.Content.ReadAsStringAsync();
+		var url = $"https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key=706303B24FA0E63B1FB25965E081C2E1&query_type={(int)order}&page=0&numperpage=100&creator_appid=255710&appid=255710&match_all_tags=true&return_tags=true&return_children=true&return_details=true";
 
-		// Extract the entry name from the HTML using a regular expression
-		var nameMatch = Regex.Match(entryHtml, "<div class=\"workshopItemTitle\">\\s*(.*?)\\s*</div>");
-		var entryName = nameMatch.Success ? nameMatch.Groups[1].Value : null;
-
-		// Extract the thumbnail URL from the HTML using a regular expression
-		var thumbnailMatch = Regex.Match(entryHtml, "<img .+? class=\"workshopItemPreviewImageMain\" src=\"(.*?)\"");
-		var thumbnailUrl = thumbnailMatch.Success ? Regex.Replace(thumbnailMatch.Groups[1].Value, @"imw=\d+&imh=\d+", "imw=5000&imh=5000").Replace("letterbox=true", "letterbox=false") : null;
-
-		return (entryName, thumbnailUrl);
-	}
-
-	public static async Task<Dictionary<ulong, SteamWorkshopItem>> GetCollectionContentsAsync(string collectionId)
-	{
-		var url = @"https://api.steampowered.com/ISteamRemoteStorage/GetCollectionDetails/v1/";
-
-		var bodyDictionary = new Dictionary<string, string>
+		if (!string.IsNullOrWhiteSpace(query))
 		{
-			["collectioncount"] = "1",
-			[$"publishedfileids[0]"] = collectionId
-		};
+			url += $"&search_text={System.Net.WebUtility.UrlEncode(query)}";
+		}
+
+		if (requiredTags?.Any() ?? false)
+		{
+			for (var i = 0; i < requiredTags.Length; i++)
+			{
+				url += $"&requiredtags[{i}]={System.Net.WebUtility.UrlEncode(requiredTags[i])}";
+			}
+		}
+
+		if (excludedTags?.Any() ?? false)
+		{
+			for (var i = 0; i < excludedTags.Length; i++)
+			{
+				url += $"&excludedtags[{i}]={System.Net.WebUtility.UrlEncode(excludedTags[i])}";
+			}
+		}
+
+		if (dateRange is not null)
+		{
+			url += $"&date_range_updated[0]={dateRange?.Item1}&date_range_updated[1]={dateRange?.Item2}";
+		}
 
 		try
 		{
 			using var httpClient = new HttpClient();
-			var body = new FormUrlEncodedContent(bodyDictionary);
-			var httpResponse = await httpClient.PostAsync(url, body);
+			var httpResponse = await httpClient.GetAsync(url);
 
-			if (httpResponse.IsSuccessStatusCode)
-			{
-				var response = await httpResponse.Content.ReadAsStringAsync();
-
-				var data = Newtonsoft.Json.JsonConvert.DeserializeObject<SteamWorkshopCollectionRootResponse>(response)?.response.collectiondetails?.FirstOrDefault()?.children?
-					.Where(x => x.filetype == 0)
-					.Select(x => ulong.Parse(x.publishedfileid))
-					.ToList() ?? new();
-
-				if (data.Count == 0)
-				{
-					return new();
-				}
-
-				data.Insert(0, ulong.Parse(collectionId));
-
-				return await GetWorkshopInfoAsync(data.ToArray());
-			}
-
-			Log.Error("failed to get steam data: " + httpResponse.RequestMessage);
+			return await ConvertPublishedFileResponse(httpResponse);
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, "Failed to get steam collection information");
+			Log.Exception(ex, "Failed to get steam information");
 		}
+
+		return new();
+	}
+
+	private static async Task<Dictionary<ulong, SteamWorkshopItem>> ConvertPublishedFileResponse(HttpResponseMessage httpResponse)
+	{
+		if (httpResponse.IsSuccessStatusCode)
+		{
+			var response = await httpResponse.Content.ReadAsStringAsync();
+
+			var data = JsonConvert.DeserializeObject<SteamFileServiceInfo>(response)?.response.publishedfiledetails
+				.Where(x => x.result is 1 or 17 or 86 or 9)
+				.Select(x => new SteamWorkshopItem(x))
+				.ToList() ?? new();
+
+			var users = await ConvertInChunks(data.Select(x => x.AuthorID ?? string.Empty).Distinct().Where(x => !_usersCache.ContainsKey(x)), 100, GetSteamUsers);
+
+			foreach (var item in users)
+			{
+				_usersCache[item.Key] = item.Value;
+			}
+
+			foreach (var item in data)
+			{
+				if (!string.IsNullOrEmpty(item.AuthorID) && _usersCache.ContainsKey(item.AuthorID!))
+				{
+					item.Author = new(_usersCache[item.AuthorID!]);
+				}
+			}
+
+			return data.ToDictionary(x => ulong.Parse(x.PublishedFileID));
+		}
+
+		Log.Error("failed to get steam data: " + httpResponse.RequestMessage);
 
 		return new();
 	}
@@ -306,7 +289,7 @@ public static class SteamUtil
 			{
 				var response = await httpResponse.Content.ReadAsStringAsync();
 
-				return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
+				return JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
 			}
 		}
 		catch (Exception ex) { Log.Exception(ex, "Failed to get the steam information for appid " + steamId); }
@@ -316,7 +299,7 @@ public static class SteamUtil
 
 	public static void ReDownload(params IPackage[] packages)
 	{
-		var currentPath= IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
+		var currentPath = IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
 
 		if (packages.Any(x => x.Folder.PathEquals(currentPath)))
 		{
@@ -368,37 +351,9 @@ public static class SteamUtil
 		return _csCache?.Dlcs?.Contains(dlcId) ?? false;
 	}
 
-	public static void SetSteamInformation(this IPackage package, SteamWorkshopItem steamWorkshopItem, bool cache)
+	public static void SetSteamInformation(this Package package, SteamWorkshopItem steamWorkshopItem, bool cache)
 	{
-		if (package.Private = steamWorkshopItem.Private)
-		{
-			package.Name = steamWorkshopItem.Title ?? package.Name;
-
-			if (package.IconUrl != steamWorkshopItem.PreviewURL)
-			{
-				package.IconUrl = steamWorkshopItem.PreviewURL ?? package.IconUrl;
-			}
-
-			return;
-		}
-
-		if (package.RemovedFromSteam = steamWorkshopItem.Removed)
-		{
-			return;
-		}
-
-		package.SteamInfoLoaded = true;
-		package.Name = package.SteamId == 2040656402ul ? "Harmony" : steamWorkshopItem.Title ?? package.Name;
-		package.Author = steamWorkshopItem.Author;
-		package.ServerTime = steamWorkshopItem.UpdatedUTC;
-		package.WorkshopTags = steamWorkshopItem.Tags;
-		package.ServerSize = steamWorkshopItem.Size;
-		package.SteamDescription = steamWorkshopItem.Description;
-
-		if (package.IconUrl != steamWorkshopItem.PreviewURL)
-		{
-			package.IconUrl = steamWorkshopItem.PreviewURL;
-		}
+		package.WorkshopInfo = steamWorkshopItem;
 
 		if (!cache)
 		{
@@ -458,5 +413,24 @@ public static class SteamUtil
 				DLCsLoaded?.Invoke();
 			}
 		}).Run();
+	}
+
+	public static int GetScore(IPackage package)
+	{
+		var upvotes = package.PositiveVotes;
+		var downvotes = package.NegativeVotes / 10 + package.Reports;
+
+		if (upvotes + downvotes < 5)
+		{
+			return -1;
+		}
+
+		var subscribersFactor = -Math.Min(100000, package.Subscriptions) / 2000 - 10;
+		var goal = 1.472 * (Math.Pow(subscribersFactor, 2) + Math.Pow(subscribersFactor, 3) / 100) - 120;
+
+		if (!package.IsMod)
+			goal /= 3.5;
+
+		return ((int)(100 * (upvotes - downvotes) / goal)).Between(0, 100);
 	}
 }

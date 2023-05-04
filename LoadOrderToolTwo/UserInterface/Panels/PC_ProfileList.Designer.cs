@@ -115,7 +115,7 @@ partial class PC_ProfileList
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 3);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 79);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 86);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(895, 2);
@@ -136,6 +136,7 @@ partial class PC_ProfileList
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
 			this.TB_Search.SelectionStart = 0;
+			this.TB_Search.ShowLabel = false;
 			this.TB_Search.Size = new System.Drawing.Size(140, 48);
 			this.TB_Search.TabIndex = 0;
 			this.TB_Search.TextChanged += new System.EventHandler(this.FilterChanged);
@@ -171,16 +172,16 @@ partial class PC_ProfileList
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 23);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 30);
 			this.tableLayoutPanel3.TabIndex = 6;
 			// 
 			// L_Counts
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(837, 0);
+			this.L_Counts.Location = new System.Drawing.Point(821, 0);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(55, 23);
+			this.L_Counts.Size = new System.Drawing.Size(71, 30);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			// 
@@ -189,7 +190,7 @@ partial class PC_ProfileList
 			this.L_FilterCount.AutoSize = true;
 			this.L_FilterCount.Location = new System.Drawing.Point(3, 0);
 			this.L_FilterCount.Name = "L_FilterCount";
-			this.L_FilterCount.Size = new System.Drawing.Size(55, 23);
+			this.L_FilterCount.Size = new System.Drawing.Size(71, 30);
 			this.L_FilterCount.TabIndex = 2;
 			this.L_FilterCount.Text = "label1";
 			// 
@@ -199,19 +200,19 @@ partial class PC_ProfileList
 			this.panel1.Controls.Add(this.slickScroll1);
 			this.panel1.Controls.Add(this.FLP_Profiles);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(0, 81);
+			this.panel1.Location = new System.Drawing.Point(0, 88);
 			this.panel1.Margin = new System.Windows.Forms.Padding(0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(895, 405);
+			this.panel1.Size = new System.Drawing.Size(895, 398);
 			this.panel1.TabIndex = 14;
 			// 
 			// slickScroll1
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.FLP_Profiles;
-			this.slickScroll1.Location = new System.Drawing.Point(887, 0);
+			this.slickScroll1.Location = new System.Drawing.Point(885, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(8, 405);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 398);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 0;
 			this.slickScroll1.TabStop = false;

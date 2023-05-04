@@ -24,10 +24,23 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
 		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
 		ColumnCount = 3;
+
+		CentralManager.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
+	}
+
+	private void CentralManager_PackageInformationUpdated()
+	{
+		this.TryInvoke(Reset);
 	}
 
 	public Package Package { get; }
 	public CompatibilityManager.ReportInfo? Report { get; private set; }
+
+	protected override void Dispose(bool disposing)
+	{
+		CentralManager.PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
+		base.Dispose(disposing);
+	}
 
 	protected override void OnCreateControl()
 	{

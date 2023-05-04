@@ -28,7 +28,7 @@ public partial class PC_Options : PanelContent
 
 		foreach (var button in this.GetControls<SlickButton>())
 		{
-			if (button != B_ChangeLog)
+			if (button != B_ChangeLog && button is not SlickLabel)
 			{
 				SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
 			}
@@ -62,7 +62,8 @@ public partial class PC_Options : PanelContent
 		DD_Language.SelectedItem = DD_Language.Items.FirstOrDefault(x => x.IetfLanguageTag == LocaleHelper.CurrentCulture.IetfLanguageTag) ?? DD_Language.Items[0];
 		DD_Language.SelectedItemChanged += DD_Language_SelectedItemChanged;
 
-		TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
+		if (!CB_ShowFolderSettings.Checked)
+			TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
 	}
 
 	public override Color GetTopBarColor()
@@ -245,5 +246,10 @@ public partial class PC_Options : PanelContent
 	private void B_ChangeLog_Click(object sender, EventArgs e)
 	{
 		Form.PushPanel<PC_LotChangeLog>(null);
+	}
+
+	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
+	{
+		slickSpacer3.Visible = slickScroll1.Percentage != 0;
 	}
 }

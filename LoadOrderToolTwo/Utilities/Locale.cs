@@ -163,7 +163,6 @@ internal class Locale : LocaleHelper
 	public static string ProfileMerge => _instance.GetText(nameof(ProfileMerge));
 	public static string ProfileDelete => _instance.GetText(nameof(ProfileDelete));
 	public static string ShouldNotBeSubscribed => _instance.GetText(nameof(ShouldNotBeSubscribed));
-	public static string MissingPackages => _instance.GetText(nameof(MissingPackages));
 	public static string LoadingScreenMod => _instance.GetText(nameof(LoadingScreenMod));
 	public static string ExcludeInclude => _instance.GetText(nameof(ExcludeInclude));
 	public static string EnableDisable => _instance.GetText(nameof(EnableDisable));
@@ -220,7 +219,6 @@ internal class Locale : LocaleHelper
 	public static string SetupIncomplete => _instance.GetText(nameof(SetupIncomplete));
 	public static string CopyAuthorSteamId => _instance.GetText(nameof(CopyAuthorSteamId));
 	public static string LoadProfile => _instance.GetText(nameof(LoadProfile));
-	public static string UnusedPackages => _instance.GetText(nameof(UnusedPackages));
 	public static string CloseCitiesToSub => _instance.GetText(nameof(CloseCitiesToSub));
 	public static string ShowingFilteredItems => _instance.GetText(nameof(ShowingFilteredItems));
 	public static string ShowingMods => _instance.GetText(nameof(ShowingMods));
@@ -308,4 +306,23 @@ internal class Locale : LocaleHelper
 	public static string CleanupInfo => _instance.GetText(nameof(CleanupInfo));
 	public static string CloseCitiesToClean => _instance.GetText(nameof(CloseCitiesToClean));
 	public static string CleanupRequiresGameToOpen => _instance.GetText(nameof(CleanupRequiresGameToOpen));
+	public static string SubscribersCount => _instance.GetText(nameof(SubscribersCount));
+	public static string RatingCount => _instance.GetText(nameof(RatingCount));
+	public static string SubscribeAll => _instance.GetText(nameof(SubscribeAll));
+	public static string MissingLSMReport => _instance.GetText(nameof(MissingLSMReport));
+	public static string UnusedLSMReport => _instance.GetText(nameof(UnusedLSMReport));
+	public static string MissingPackagesProfile => _instance.GetText(nameof(MissingPackagesProfile));
+	public static string SearchWorkshop => _instance.GetText(nameof(SearchWorkshop));
+	public static string SearchWorkshopBrowser => _instance.GetText(nameof(SearchWorkshopBrowser));
+	public static string VotingTitle => _instance.GetText(nameof(VotingTitle));
+	public static string VotingInfo1 => _instance.GetText(nameof(VotingInfo1));
+	public static string VotingInfo2 => _instance.GetText(nameof(VotingInfo2));
+	public static string VotingInfo3 => _instance.GetText(nameof(VotingInfo3));
+	public static string VotingInfo4 => _instance.GetText(nameof(VotingInfo4));
+	public static string VotingInfo5 => _instance.GetText(nameof(VotingInfo5));
+	public static string VotingInfo6 => _instance.GetText(nameof(VotingInfo6));
+	public static string UnknownPackage => _instance.GetText(nameof(UnknownPackage));
+	public static string AssetsWithMinorIssues => _instance.GetText(nameof(AssetsWithMinorIssues));
+	public static string AssetsWithMajorIssues => _instance.GetText(nameof(AssetsWithMajorIssues));
+	public static string AssetsShouldUnsub => _instance.GetText(nameof(AssetsShouldUnsub));
 }

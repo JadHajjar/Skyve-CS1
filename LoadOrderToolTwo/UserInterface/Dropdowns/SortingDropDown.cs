@@ -63,6 +63,8 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 			PackageSorting.UpdateTime => "I_UpdateTime",
 			PackageSorting.SubscribeTime => "I_Add",
 			PackageSorting.Status => "I_Broken",
+			PackageSorting.Subscribers => "I_People",
+			PackageSorting.Votes => "I_Vote",
 			_ => "I_Check",
 		};
 	}

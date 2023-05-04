@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 
 namespace LoadOrderToolTwo.Domain;
 public class Profile
@@ -61,18 +63,36 @@ public class Profile
 	public Color? Color { get; set; }
 	public DateTime LastUsed { get; set; }
 
-	public class Asset : IGenericPackage
+	public class Asset : IPackage
 	{
 		public string? Name { get; set; }
 		public string? RelativePath { get; set; }
 		public ulong SteamId { get; set; }
 
 		[JsonIgnore, CloneIgnore] public bool IsMod { get; protected set; }
+		[JsonIgnore, CloneIgnore] public bool Workshop => SteamId != 0;
+		[JsonIgnore, CloneIgnore] public string Folder => RelativePath is null ? string.Empty : IsMod ? ProfileManager.ToLocalPath(RelativePath) : Path.GetDirectoryName(ProfileManager.ToLocalPath(RelativePath));
+		[JsonIgnore, CloneIgnore] public Package? Package => SteamId == 0 ? null : CentralManager.Packages.FirstOrDefault(x => x.SteamId == SteamId);
 		[JsonIgnore, CloneIgnore] public SteamWorkshopItem? WorkshopInfo { get; set; }
-		[JsonIgnore, CloneIgnore] public string[]? Tags => WorkshopInfo?.Tags;
-		[JsonIgnore, CloneIgnore] public Bitmap? Thumbnail => WorkshopInfo?.Thumbnail;
-		[JsonIgnore, CloneIgnore] public string? ThumbnailUrl => WorkshopInfo?.ThumbnailUrl;
+		[JsonIgnore, CloneIgnore] public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? new[] { new TagItem(Enums.TagSource.InGame, IsMod ? "Mod" : "Asset") };
+		[JsonIgnore, CloneIgnore] public Bitmap? IconImage => WorkshopInfo?.IconImage;
+		[JsonIgnore, CloneIgnore] public Bitmap? AuthorIconImage => WorkshopInfo?.AuthorIconImage;
 		[JsonIgnore, CloneIgnore] public SteamUser? Author => WorkshopInfo?.Author;
+		[JsonIgnore, CloneIgnore] public int Subscriptions => WorkshopInfo?.Subscriptions ?? 0;
+		[JsonIgnore, CloneIgnore] public int PositiveVotes => WorkshopInfo?.PositiveVotes ?? 0;
+		[JsonIgnore, CloneIgnore] public int NegativeVotes => WorkshopInfo?.NegativeVotes ?? 0;
+		[JsonIgnore, CloneIgnore] public int Reports => WorkshopInfo?.Reports ?? 0;
+		[JsonIgnore, CloneIgnore] public bool IsIncluded { get => WorkshopInfo?.IsIncluded ?? false; set { if (WorkshopInfo is not null) { WorkshopInfo.IsIncluded = value; } } }
+		[JsonIgnore, CloneIgnore] public long FileSize => WorkshopInfo?.FileSize ?? 0;
+		[JsonIgnore, CloneIgnore] public DateTime ServerTime => WorkshopInfo?.ServerTime ?? DateTime.MinValue;
+		[JsonIgnore, CloneIgnore] public CompatibilityManager.ReportInfo? CompatibilityReport => CompatibilityManager.GetCompatibilityReport(SteamId);
+		[JsonIgnore, CloneIgnore] public SteamVisibility Visibility => WorkshopInfo?.Visibility ?? SteamVisibility.Local;
+		[JsonIgnore, CloneIgnore] public ulong[]? RequiredPackages => WorkshopInfo?.RequiredPackages;
+		[JsonIgnore, CloneIgnore] public string? IconUrl => WorkshopInfo?.IconUrl;
+		[JsonIgnore, CloneIgnore] public long ServerSize => WorkshopInfo?.ServerSize ?? 0;
+		[JsonIgnore, CloneIgnore] public string? SteamDescription => WorkshopInfo?.SteamDescription;
+		[JsonIgnore, CloneIgnore] public bool RemovedFromSteam => WorkshopInfo?.RemovedFromSteam ?? false;
+		[JsonIgnore, CloneIgnore] public string[]? WorkshopTags => WorkshopInfo?.WorkshopTags;
 
 		public Asset(Domain.Asset asset)
 		{
@@ -84,6 +104,11 @@ public class Profile
 		public Asset()
 		{
 
+		}
+
+		public override string ToString()
+		{
+			return WorkshopInfo?.Title ?? Name ?? Locale.UnknownPackage;
 		}
 	}
 

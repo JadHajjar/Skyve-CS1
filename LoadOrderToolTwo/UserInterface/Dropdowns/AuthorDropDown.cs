@@ -61,6 +61,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 
+		if (_counts.ContainsKey(item!))
 		e.Graphics.DrawString(string.Format(Locale.ItemsCount, _counts[item!]), Font, new SolidBrush(Color.FromArgb(200, foreColor)), rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 	}
 

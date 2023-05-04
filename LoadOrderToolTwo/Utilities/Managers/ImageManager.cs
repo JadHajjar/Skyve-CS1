@@ -132,7 +132,7 @@ public static class ImageManager
 			using var ms = await _httpClient.GetStreamAsync(url);
 			using var img = Image.FromStream(ms);
 
-			var squareSize = img.Width <= 64 ? img.Width : 256;
+			var squareSize = img.Width <= 64 ? img.Width : 512;
 			var size = string.IsNullOrEmpty(fileName) ? img.Size.GetProportionalDownscaledSize(squareSize) : img.Size;
 			using var image = string.IsNullOrEmpty(fileName) ? square ? new Bitmap(squareSize, squareSize) : new Bitmap(size.Width, size.Height) : img;
 

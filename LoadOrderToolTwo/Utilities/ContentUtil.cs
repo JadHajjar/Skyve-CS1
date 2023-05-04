@@ -351,12 +351,12 @@ internal class ContentUtil
 		}
 	}
 
-	internal static GenericPackageState GetGenericPackageState(IGenericPackage item)
+	internal static GenericPackageState GetGenericPackageState(IPackage item)
 	{
 		return GetGenericPackageState(item, out _);
 	}
 
-	internal static GenericPackageState GetGenericPackageState(IGenericPackage item, out Package? package)
+	internal static GenericPackageState GetGenericPackageState(IPackage item, out Package? package)
 	{
 		if (item.SteamId == 0)
 		{

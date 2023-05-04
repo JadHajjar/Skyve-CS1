@@ -1,40 +1,37 @@
 ﻿using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Steam;
+using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace LoadOrderToolTwo.Domain.Interfaces;
-
 public interface IPackage
 {
-	Package Package { get; }
-	SteamUser? Author { get; set; }
-	bool BuiltIn { get; }
-	string Folder { get; }
-	string? VirtualFolder { get; }
+	string? Name { get; }
+	bool IsMod { get; }
+	IEnumerable<TagItem> Tags { get; }
+	ulong SteamId { get; }
 	Bitmap? IconImage { get; }
 	Bitmap? AuthorIconImage { get; }
-	string? IconUrl { get; set; }
-	long LocalSize { get; }
-	DateTime LocalTime { get; }
-	string Name { get; set; }
-	bool RemovedFromSteam { get; set; }
-	bool Private { get; set; }
-	long ServerSize { get; set; }
-	DateTime ServerTime { get; set; }
-	DownloadStatus Status { get; set; }
-	string? StatusReason { get; set; }
-	ulong SteamId { get; }
-	bool SteamInfoLoaded { get; set; }
-	string? SteamDescription { get; set; }
-	string? SteamPage { get; }
-	IEnumerable<TagItem> Tags { get; }
-	string[]? WorkshopTags { set; }
-	bool Workshop { get; }
+	SteamUser? Author { get; }
+	int Subscriptions { get; }
+	int PositiveVotes { get; }
+	int NegativeVotes { get; }
+	int Reports { get; }
 	bool IsIncluded { get; set; }
+	bool Workshop { get; }
+	Package? Package { get; }
 	long FileSize { get; }
-	bool IsPseudoMod { get; set; }
-	DateTime SubscribeTime { get; }
+	DateTime ServerTime { get; }
+	CompatibilityManager.ReportInfo? CompatibilityReport { get; }
+	SteamVisibility Visibility { get; }
+	ulong[]? RequiredPackages { get; }
+	string? IconUrl { get; }
+	long ServerSize { get; }
+	string? SteamDescription { get; }
+	string[]? WorkshopTags { get; }
+	string Folder { get; }
+	bool RemovedFromSteam { get; }
 }

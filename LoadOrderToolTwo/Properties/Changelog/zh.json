@@ -65,7 +65,7 @@
     },
     {
         "Version": "2.1.3",
-        "Date": "2023-04-05",
+        "Date": "2023-04-06",
         "ChangeGroups": [
             {
                 "Name": "修复",
@@ -77,7 +77,7 @@
     },
     {
         "Version": "2.1.2",
-        "Date": "2023-04-06",
+        "Date": "2023-04-05",
         "ChangeGroups": [
             {
                 "Name": "更改",
@@ -192,7 +192,7 @@
                     "为“插件状态”和“兼容性报告”的下拉菜单添加了一个新的“任何问题”选项。",
                     "现在按照标签进行快速筛选的方式更改为：按住 Ctrl 键 + 鼠标单击标签。并且添加了一个选项来切换筛选的方式。",
                     "当您在使用快速筛选的功能时，会自动清空上一次选择的筛选标签。",
-                    "在搜索栏中用“ , ”分隔关键词时，搜索结果会匹配任一一个关键词（或）\n• 在关键词开头添加“ + ”，搜索结果会同时匹配所有关键词（与）\n• 在关键词开头添加“ - ”，会排除与该关键词匹配的搜索结果\n\n举例：\n• 汽车，卡车（搜索结果为：“汽车”或者“卡车”）\n• 建筑 +欧式（搜索结果为：“欧式”的“建筑”）\n• 建筑，住宅 +欧式（搜索结果为：“欧式”的“建筑”或“住宅”）\n• 公寓，房子 -rico +美式（搜索结果为：美式的非 rico “公寓”或“房子”）"
+                    "现在在搜索栏中，可以用 “ , ”（英文逗号）分隔多个关键词：\n• 默认情况下，将显示匹配任意关键词的项目\n• 在某个关键词前面添加 “ + ”（英文加号），搜索结果将必须匹配该关键词\n• 在某个关键词前面添加 “ - ”（英文减号），会排除与该关键词匹配的搜索结果\n\n举例：\n• car, truck（显示 \"car\" 或 \"truck\" 的搜索结果）\n• building +commercial（搜索结果为：匹配 \"building\" 的商业建筑）\n• big, grass +decal（搜索结果为：匹配\"big\"或\"grass\"的贴花资产）\n• building, apartment +european（搜索结果为：匹配的 \"building\" 或 \"apartment\" 的欧式建筑）\n• condo, house -rico +american（搜索结果为：匹配 \"condo\" 或 \"house\" 的美式非 RICO 建筑）"
                 ]
             },
             {
@@ -201,7 +201,7 @@
                     "更新了新的图标系统，现在会根据您的界面比例适当缩放所有图标。",
                     "重做了列表的渲染方式，显著提高了内容页面的性能和响应速度。",
                     "添加了切换排序顺序的功能，现在可以自己选择升序和降序。",
-                    "调整了内容页面中操作选项的位置，并添加了两个新选项。",
+                    "调整了内容页面中操作选项的位置，并添加了两个新的操作选项。",
                     "现在包含多个资产的插件，如果您只装载了其中一部分资产，在列表中会显示出新的图标。",
                     "改进了内容列表中的按钮和筛选控件，减小了它们的整体大小，并添加了更多视觉提示。",
                     "更改了鼠标悬停时增加项目显示大小的功能，现在默认会放大项目的显示大小。改进了放大后的 UI，并将此功能应用于 LOT2 程序中的其他列表部分。",
@@ -215,8 +215,8 @@
                 "Name": "改进文件的选择方式",
                 "Changes": [
                     "更新了文件选择窗口的界面。",
-                    "添加了固定文件夹的功能，以方便快速打开相关文件夹。",
-                    "添加了一个创意工坊的页面，以方便选择创意工坊里的地图和存档。",
+                    "新增将文件夹置顶的功能，便于快速打开相关文件夹。",
+                    "在选择地图或存档的页面新增 \"创意工坊\" 选项卡，便于快速找到您在创意工坊订阅的地图和存档。",
                     "新增排序方式下拉列表，和切换排序顺序的功能。",
                     "添加了切换列表/网格视图的功能。"
                 ]
@@ -244,6 +244,51 @@
                     "现在您未订阅的插件将不会被载入到游戏中。",
                     "当您打开 LOT2 并启动游戏时，会自动删除您已经取消订阅（但没删除干净）的插件。",
                     "在实用程序选项卡中添加了一个按钮，可以手动运行清理程序，并强制下载缺失的插件。"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added an option to disable the automatic cleanup when opening the game.",
+                    "Added a custom arguments box for advanced launch settings."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Vote & Subscribers Icon",
+                "Changes": [
+                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
+                    "Hover over it to display the values.",
+                    "Click on the icon for an in-depth description of this feature.",
+                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                ]
+            },
+            {
+                "Name": "Asset Requirements",
+                "Changes": [
+                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
+                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                ]
+            },
+            {
+                "Name": "Other Changes",
+                "Changes": [
+                    "Updated the Package Page to match the displayed information in the content lists.",
+                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
+                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
                 ]
             }
         ]

@@ -39,34 +39,11 @@ public class Asset : IPackage
 	public string FileName { get; }
 	public Package Package { get; }
 	public long FileSize { get; }
-	public string Name { get; set; }
+	public string Name { get; }
 	public string? Description { get; }
 	public DateTime LocalTime { get; }
-	public bool IsIncluded { get => AssetsUtil.IsIncluded(this); set => AssetsUtil.SetIncluded(this, value); }
-
-	public string Folder => ((IPackage)Package).Folder;
-	public bool BuiltIn => ((IPackage)Package).BuiltIn;
-	public ulong SteamId => ((IPackage)Package).SteamId;
-	public string? SteamPage => ((IPackage)Package).SteamPage;
-	public bool Workshop => ((IPackage)Package).Workshop;
-	public SteamUser? Author { get => ((IPackage)Package).Author; set => ((IPackage)Package).Author = value; }
-	public Bitmap? IconImage => AssetsUtil.GetIcon(this) ?? ((IPackage)Package).IconImage;
-	public string? IconUrl { get => ((IPackage)Package).IconUrl; set => ((IPackage)Package).IconUrl = value; }
-	public long LocalSize => ((IPackage)Package).LocalSize;
-	public bool RemovedFromSteam { get => ((IPackage)Package).RemovedFromSteam; set => ((IPackage)Package).RemovedFromSteam = value; }
-	public bool Private { get => ((IPackage)Package).Private; set => ((IPackage)Package).Private = value; }
-	public long ServerSize { get => ((IPackage)Package).ServerSize; set => ((IPackage)Package).ServerSize = value; }
-	public DateTime ServerTime { get => ((IPackage)Package).ServerTime; set => ((IPackage)Package).ServerTime = value; }
-	public DownloadStatus Status { get => ((IPackage)Package).Status; set => ((IPackage)Package).Status = value; }
-	public string? StatusReason { get => ((IPackage)Package).StatusReason; set => ((IPackage)Package).StatusReason = value; }
-	public bool SteamInfoLoaded { get => ((IPackage)Package).SteamInfoLoaded; set => ((IPackage)Package).SteamInfoLoaded = value; }
-	public string? SteamDescription { get => ((IPackage)Package).SteamDescription; set => ((IPackage)Package).SteamDescription = value; }
-	public string? VirtualFolder => ((IPackage)Package).VirtualFolder;
-	public Bitmap? AuthorIconImage => ((IPackage)Package).AuthorIconImage;
-	public DateTime SubscribeTime => ((IPackage)Package).SubscribeTime;
-	public bool IsPseudoMod { get => ((IPackage)Package).IsPseudoMod; set => ((IPackage)Package).IsPseudoMod = value; }
-	public string[]? WorkshopTags { set => ((IPackage)Package).WorkshopTags = value; }
 	public string[] AssetTags => _assetTags;
+	public bool IsIncluded { get => AssetsUtil.IsIncluded(this); set => AssetsUtil.SetIncluded(this, value); }
 	public IEnumerable<TagItem> Tags
 	{
 		get
@@ -90,6 +67,27 @@ public class Asset : IPackage
 			}
 		}
 	}
+
+	public string Folder => ((IPackage)Package).Folder;
+	public bool IsMod => ((IPackage)Package).IsMod;
+	public ulong SteamId => ((IPackage)Package).SteamId;
+	public Bitmap? IconImage => ((IPackage)Package).IconImage;
+	public Bitmap? AuthorIconImage => ((IPackage)Package).AuthorIconImage;
+	public SteamUser? Author => ((IPackage)Package).Author;
+	public int Subscriptions => ((IPackage)Package).Subscriptions;
+	public int PositiveVotes => ((IPackage)Package).PositiveVotes;
+	public int NegativeVotes => ((IPackage)Package).NegativeVotes;
+	public int Reports => ((IPackage)Package).Reports;
+	public bool Workshop => ((IPackage)Package).Workshop;
+	public DateTime ServerTime => ((IPackage)Package).ServerTime;
+	public CompatibilityManager.ReportInfo? CompatibilityReport => ((IPackage)Package).CompatibilityReport;
+	public SteamVisibility Visibility => ((IPackage)Package).Visibility;
+	public ulong[]? RequiredPackages => ((IPackage)Package).RequiredPackages;
+	public string? IconUrl => ((IPackage)Package).IconUrl;
+	public long ServerSize => ((IPackage)Package).ServerSize;
+	public string? SteamDescription => ((IPackage)Package).SteamDescription;
+	public string[]? WorkshopTags => ((IPackage)Package).WorkshopTags;
+	public bool RemovedFromSteam => ((IPackage)Package).RemovedFromSteam;
 
 	public override bool Equals(object? obj)
 	{

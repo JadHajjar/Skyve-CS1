@@ -133,14 +133,7 @@ internal static class CentralManager
 			catch (Exception ex) { Log.Exception(ex, "Failed to complete the First Time Setup", true); }
 		}
 
-		if (LocationManager.Platform is Platform.MacOSX)
-		{
-			ConnectionHandler.Start("steamcommunity.com", 60000);
-		}
-		else
-		{
-			ConnectionHandler.Start();
-		}
+		ConnectionHandler.Start();
 
 		Log.Info("Loading packages..");
 
@@ -267,7 +260,7 @@ internal static class CentralManager
 					InformationUpdate(package);
 				}
 			}
-		});
+		}, 10);
 
 		Log.Info($"Load Complete");
 		_delayedWorkshopInfoUpdated.Run();
@@ -336,6 +329,8 @@ internal static class CentralManager
 		Log.Info($"Applying analysis results..");
 
 		ModLogicManager.ApplyRequiredStates();
+
+		CompatibilityManager.CacheReport(content);
 	}
 
 	private static void HandleNewPackage(Package package)

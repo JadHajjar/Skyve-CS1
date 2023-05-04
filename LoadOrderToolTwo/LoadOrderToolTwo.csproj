@@ -78,21 +78,13 @@
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Lists\GenericPackageListControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Lists\GenericPackageListControl.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Panels\PC_UnusedLsmPackages.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Panels\PC_MissingLsmPackages.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Panels\PC_ProfileList.cs">

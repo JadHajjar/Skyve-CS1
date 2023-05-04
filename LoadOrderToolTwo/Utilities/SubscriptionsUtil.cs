@@ -42,7 +42,9 @@ internal class SubscriptionsUtil
 
                 var list = File.ReadAllLines(e.FullPath).ToList();
 
-                ExtensionClass.DeleteFile(e.FullPath);
+                try
+                { ExtensionClass.DeleteFile(e.FullPath); }
+                catch { Thread.Sleep(500); }
 
                 HandleSubscriptions(list);
             }
