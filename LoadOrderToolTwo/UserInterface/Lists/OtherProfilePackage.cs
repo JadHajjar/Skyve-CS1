@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -17,9 +18,9 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 {
 	public IEnumerable<Profile> FilteredItems => SafeGetItems().Select(x => x.Item);
 
-	public Package Package { get; }
+	public IPackage Package { get; }
 
-	public OtherProfilePackage(Package package)
+	public OtherProfilePackage(IPackage package)
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;

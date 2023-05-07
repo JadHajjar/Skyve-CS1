@@ -85,7 +85,6 @@ public class Profile
 		[JsonIgnore, CloneIgnore] public bool IsIncluded { get => WorkshopInfo?.IsIncluded ?? false; set { if (WorkshopInfo is not null) { WorkshopInfo.IsIncluded = value; } } }
 		[JsonIgnore, CloneIgnore] public long FileSize => WorkshopInfo?.FileSize ?? 0;
 		[JsonIgnore, CloneIgnore] public DateTime ServerTime => WorkshopInfo?.ServerTime ?? DateTime.MinValue;
-		[JsonIgnore, CloneIgnore] public CompatibilityManager.ReportInfo? CompatibilityReport => CompatibilityManager.GetCompatibilityReport(SteamId);
 		[JsonIgnore, CloneIgnore] public SteamVisibility Visibility => WorkshopInfo?.Visibility ?? SteamVisibility.Local;
 		[JsonIgnore, CloneIgnore] public ulong[]? RequiredPackages => WorkshopInfo?.RequiredPackages;
 		[JsonIgnore, CloneIgnore] public string? IconUrl => WorkshopInfo?.IconUrl;
@@ -123,6 +122,15 @@ public class Profile
 			Name = mod.Name;
 			Enabled = mod.IsEnabled;
 			RelativePath = ProfileManager.ToRelativePath(mod.Folder);
+		}
+
+		public Mod(IPackage package)
+		{
+			IsMod = true;
+			SteamId = package.SteamId;
+			Name = package.Name;
+			Enabled = true;
+			RelativePath = LocationManager.Combine(ProfileManager.WS_CONTENT_PATH, package.SteamId.ToString());
 		}
 
 		public Mod()

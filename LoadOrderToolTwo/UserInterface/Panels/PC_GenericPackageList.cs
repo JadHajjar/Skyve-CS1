@@ -28,7 +28,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 		{
 			if (package.Key != 0)
 			{
-				if (ModLogicManager.IsBlackListed(package.Key))
+				if (CompatibilityManager.IsBlacklisted(package.First()))
 				{
 					continue;
 				}

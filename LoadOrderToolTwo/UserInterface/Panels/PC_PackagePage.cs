@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
-	public PC_PackagePage(Package package)
+	public PC_PackagePage(IPackage package)
 	{
 		InitializeComponent();
 
@@ -35,7 +35,7 @@ public partial class PC_PackagePage : PanelContent
 
 		T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
 
-		if (Package.Assets is not null && Package.Assets.Length > 0)
+		if (Package is Package p && p.Assets is not null && p.Assets.Length > 0)
 		{
 			var c = new ItemListControl<IPackage>
 			{
@@ -43,7 +43,7 @@ public partial class PC_PackagePage : PanelContent
 				Dock = DockStyle.Fill
 			};
 
-			c.AddRange(Package.Assets);
+			c.AddRange(p.Assets);
 
 			T_Info.FillTab = true;
 			T_Info.LinkedControl = c;
@@ -78,7 +78,7 @@ public partial class PC_PackagePage : PanelContent
 		T_Info.LinkedControl?.Invalidate();
 	}
 
-	public Package Package { get; }
+	public IPackage Package { get; }
 
 	protected override void UIChanged()
 	{

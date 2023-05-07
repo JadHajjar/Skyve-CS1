@@ -20,7 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-using static CompatibilityReport.CatalogData.Enums;
+using NotificationType = LoadOrderToolTwo.Domain.Compatibility.NotificationType;
 
 namespace LoadOrderToolTwo.UserInterface.Lists;
 internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackage
@@ -30,7 +30,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	private Rectangle PopupSearchRect2;
 	private readonly Dictionary<DrawableItem<T>, Rectangles> _itemRects = new();
 
-	public event Action<ReportSeverity>? CompatibilityReportSelected;
+	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
 	public event Action<DateTime>? DateSelected;
 	public event Action<TagItem>? TagSelected;
@@ -141,7 +141,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				.OrderBy(x => Path.GetFileName(x.Item.Package?.Mod?.FileName ?? string.Empty)),
 
 			PackageSorting.CompatibilityReport => items
-				.OrderBy(x => x.Item.CompatibilityReport?.Severity ?? default),
+				.OrderBy(x => x.Item.GetCompatibilityInfo().Notification),
 
 			PackageSorting.Subscribers => items
 				.OrderBy(x => x.Item.Subscriptions),
@@ -213,7 +213,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.ScoreRect.Contains(location))
 		{
-			setTip(string.Format(Locale.RatingCount, item.Item.PositiveVotes > item.Item.NegativeVotes ? '+' : '-', Math.Abs(item.Item.PositiveVotes - item.Item.NegativeVotes / 10 - item.Item.Reports).ToString("N0")) + "\r\n" + string.Format(Locale.SubscribersCount, item.Item.Subscriptions.ToString("N0")), rects.ScoreRect);
+			setTip(string.Format(Locale.RatingCount, (item.Item.PositiveVotes > item.Item.NegativeVotes ? '+' : '-') + Math.Abs(item.Item.PositiveVotes - item.Item.NegativeVotes / 10 - item.Item.Reports).ToString("N0"), $"({SteamUtil.GetScore(item.Item)}%)") + "\r\n" + string.Format(Locale.SubscribersCount, item.Item.Subscriptions.ToString("N0")), rects.ScoreRect);
 			return true;
 		}
 
@@ -455,18 +455,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			if (item.Item.Package is not null)
-			{
-				(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Item.Package));
+			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Item));
 
-				if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
-				{
-					ScrollTo(item.Item);
-				}
-			}
-			else if (item.Item.SteamId != 0)
+			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 			{
-				OpenSteamLink($"https://steamcommunity.com/workshop/filedetails?id={item.Item.SteamId}");
+				ScrollTo(item.Item);
 			}
 
 			return;
@@ -476,7 +469,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (filter)
 			{
-				CompatibilityReportSelected?.Invoke(item.Item.CompatibilityReport?.Severity ?? ReportSeverity.NothingToReport);
+				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().Notification);
 			}
 			else if (item.Item.Package is not null)
 			{
@@ -695,19 +688,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			labelRect = DrawStatusDescriptor(e, rects, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft);
 		}
 
-		var report = e.Item.CompatibilityReport;
-		if (report is not null && report.Severity != ReportSeverity.NothingToReport)
+		var report = e.Item.GetCompatibilityInfo();
+		if (report is not null && (int)report.Notification % 0x10 != 0)
 		{
-			var labelColor = report.Severity switch
-			{
-				ReportSeverity.MinorIssues => FormDesign.Design.YellowColor,
-				ReportSeverity.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
-				ReportSeverity.Unsubscribe => FormDesign.Design.RedColor,
-				ReportSeverity.Remarks => FormDesign.Design.ButtonColor,
-				_ => FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.AccentColor, 20)
-			};
+			var labelColor = report.Notification.GetColor();
 
-			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Severity}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
+			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Notification}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
 
 			labelRect.X += Padding.Left + rects.CompatibilityRect.Width;
 		}
@@ -961,7 +947,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
 				"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-				"deprecated" => Color.FromArgb(225, FormDesign.Design.RedColor),
+				"deprecated" or "obsolete" or "abandoned" => Color.FromArgb(225, FormDesign.Design.RedColor),
 				_ => (Color?)null
 			};
 
@@ -974,15 +960,16 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
 		{
+			var activeColor = FormDesign.Design.ActiveColor;
 			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (mod.IsEnabled)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.YellowColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, activeColor = FormDesign.Design.YellowColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (inclEnableRect.Contains(CursorLocation))
@@ -991,16 +978,17 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color(rects.EnabledRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color(rects.EnabledRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
 			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
 			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
 		}
 		else
 		{
+			var activeColor = FormDesign.Design.ActiveColor;
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 			else if (inclEnableRect.Contains(CursorLocation))
@@ -1009,7 +997,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
 
-			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
 			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
 		}
 	}

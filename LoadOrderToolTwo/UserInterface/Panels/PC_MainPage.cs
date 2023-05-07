@@ -120,25 +120,6 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
-	private void CompatibilityReportBubble_MouseClick(object sender, MouseEventArgs e)
-	{
-		if (e.Button == MouseButtons.Left)
-		{
-			if (CentralManager.IsContentLoaded && !CompatibilityManager.CatalogAvailable)
-			{
-				PlatformUtil.OpenUrl("https://steamcommunity.com/sharedfiles/filedetails/?id=2881031511");
-			}
-			else
-			{
-				var current = CentralManager.SessionSettings.UserSettings.PackageSorting;
-				CentralManager.SessionSettings.UserSettings.PackageSorting = Domain.Enums.PackageSorting.CompatibilityReport;
-				Form.PushPanel<PC_Packages>((Form as MainForm)?.PI_Packages);
-				CentralManager.SessionSettings.UserSettings.PackageSorting = current;
-				//Form.PushPanel<PC_CompatibilityReport>((Form as MainForm)?.PI_Compatibility);
-			}
-		}
-	}
-
 	private void B_StartStop_Click(object sender, System.EventArgs e)
 	{
 		Program.MainForm.LaunchStopCities();

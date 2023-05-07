@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
@@ -22,8 +23,6 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static CompatibilityReport.CatalogData.Enums;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 internal partial class PC_ContentList<T> : PanelContent where T : IPackage
@@ -199,15 +198,15 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 	}
 
-	private void LC_Items_CompatibilityReportSelected(ReportSeverity obj)
+	private void LC_Items_CompatibilityReportSelected(NotificationType obj)
 	{
-		if (DD_ReportSeverity.SelectedItem == (ReportSeverityFilter)(obj + 2))
+		if ((int)DD_ReportSeverity.SelectedItem == (int)(obj))
 		{
-			DD_ReportSeverity.SelectedItem = ReportSeverityFilter.Any;
+			DD_ReportSeverity.SelectedItem = Dropdowns.CompatibilityNotificationFilter.Any;
 		}
 		else
 		{
-			DD_ReportSeverity.SelectedItem = (ReportSeverityFilter)(obj + 2);
+			DD_ReportSeverity.SelectedItem = (Dropdowns.CompatibilityNotificationFilter)obj;
 		}
 
 		if (P_FiltersContainer.Height == 0)
@@ -496,16 +495,16 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (DD_ReportSeverity.SelectedItem != ReportSeverityFilter.Any)
+		if (DD_ReportSeverity.SelectedItem != Dropdowns.CompatibilityNotificationFilter.Any)
 		{
-			if (DD_ReportSeverity.SelectedItem == ReportSeverityFilter.AnyIssue)
+			if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.AnyIssue)
 			{
-				if (!(item.CompatibilityReport?.Severity > ReportSeverity.Remarks))
+				if ((int)item.GetCompatibilityInfo().Notification % 0x1 != 0)
 				{
 					return true;
 				}
 			}
-			else if (((int)DD_ReportSeverity.SelectedItem - 2) != (int)(item.CompatibilityReport?.Severity ?? 0))
+			else if ((int)item.GetCompatibilityInfo().Notification == (int)DD_ReportSeverity.SelectedItem)
 			{
 				return true;
 			}
@@ -711,9 +710,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private async void B_SubscribeAll_Click()
 	{
 		var removeBadPackages = false;
-		var steamIds = LC_Items.SafeGetItems().Where(x => x.Item.Package == null).ToList(x => x.Item.SteamId);
-
-		steamIds.Remove(0);
+		var steamIds = LC_Items.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.SteamId != 0);
 
 		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
 		{
@@ -722,9 +719,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		foreach (var item in steamIds.ToList())
 		{
-			var report = CompatibilityManager.GetCompatibilityReport(item);
+			var report = item.Item.GetCompatibilityInfo();
 
-			if (report?.Severity == ReportSeverity.Unsubscribe)
+			if (report.Notification >= Domain.Compatibility.NotificationType.Unsubscribe)
 			{
 				if (!removeBadPackages && ShowPrompt(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand) == DialogResult.No)
 				{
@@ -736,7 +733,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 				}
 
 				steamIds.Remove(item);
-				LC_Items.RemoveAll(x => x.SteamId == item);
+				LC_Items.RemoveAll(x => x.SteamId == item.Item.SteamId);
 			}
 		}
 

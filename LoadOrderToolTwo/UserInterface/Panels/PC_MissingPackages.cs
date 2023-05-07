@@ -1,6 +1,4 @@
-﻿using CompatibilityReport.CatalogData;
-
-using Extensions;
+﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;

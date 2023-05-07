@@ -1,8 +1,8 @@
-﻿using CompatibilityReport.CatalogData;
-
-using Extensions;
+﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
 internal class PackageCompatibilityReportControl : TableLayoutPanel
 {
-	public PackageCompatibilityReportControl(Package package)
+	public PackageCompatibilityReportControl(IPackage package)
 	{
 		Package = package;
 		AutoSize = true;
@@ -33,8 +33,8 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		this.TryInvoke(Reset);
 	}
 
-	public Package Package { get; }
-	public CompatibilityManager.ReportInfo? Report { get; private set; }
+	public IPackage Package { get; }
+	public CompatibilityInfo? Report { get; private set; }
 
 	protected override void Dispose(bool disposing)
 	{
@@ -58,7 +58,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 	internal void Reset()
 	{
-		Report = Package.CompatibilityReport;
+		Report = Package.GetCompatibilityInfo();
 
 		RowStyles.Clear();
 		RowCount = 0;
@@ -66,35 +66,35 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 		if (Report == null)
 		{
-			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, Enums.ReportType.Note, new CompatibilityManager.ReportMessage(Enums.ReportType.Note, Enums.ReportSeverity.NothingToReport, Locale.CR_NoAvailableReport)));
+			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Note, new Domain.Compatibility.ReportMessage { Type = ReportType.Note, Message = Locale.CR_NoAvailableReport }));
 			return;
 		}
 
-		foreach (var item in Report.Messages.GroupBy(x => x.Type).OrderBy(x => x.Key))
+		foreach (var item in Report.ReportMessages.GroupBy(x => x.Type).OrderBy(x => x.Key))
 		{
 			GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), item.Select(x => new CompatibilityMessageControl(this, item.Key, x)).ToArray());
 		}
 	}
 
-	private Color GetTypeColor(IGrouping<Enums.ReportType, CompatibilityManager.ReportMessage> item)
+	private Color GetTypeColor(IGrouping<ReportType, ReportMessage> item)
 	{
-		return item.Max(x => x.Severity).GetSeverityColor().MergeColor(BackColor, 15);
+		return item.Max(x => x.Status.Notification).GetColor().MergeColor(BackColor, 15);
 	}
 
-	private DynamicIcon GetTypeIcon(Enums.ReportType type)
+	private DynamicIcon GetTypeIcon(ReportType type)
 	{
 		return type switch
 		{
-			Enums.ReportType.Stability => "I_Stability",
-			Enums.ReportType.DlcMissing or Enums.ReportType.RequiredMods => "I_MissingMod",
-			Enums.ReportType.UnneededDependency => "I_Disposable",
-			Enums.ReportType.WorksWhenDisabled => "I_Malicious",
-			Enums.ReportType.Successors => "I_Upgrade",
-			Enums.ReportType.Alternatives => "I_Alternatives",
-			Enums.ReportType.Status => "I_Statuses",
-			Enums.ReportType.Note => "I_Note",
-			Enums.ReportType.Recommendations => "I_Recommendations",
-			Enums.ReportType.Compatibility => "I_Compatibilities",
+			ReportType.Stability => "I_Stability",
+			ReportType.DlcMissing or ReportType.RequiredMods => "I_MissingMod",
+			ReportType.UnneededDependency => "I_Disposable",
+			ReportType.WorksWhenDisabled => "I_Malicious",
+			ReportType.Successors => "I_Upgrade",
+			ReportType.Alternatives => "I_Alternatives",
+			ReportType.Status => "I_Statuses",
+			ReportType.Note => "I_Note",
+			ReportType.Recommendations => "I_Recommendations",
+			ReportType.Compatibility => "I_Compatibilities",
 			_ => "I_CompatibilityReport",
 		};
 	}

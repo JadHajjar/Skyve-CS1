@@ -25,7 +25,6 @@ public interface IPackage
 	Package? Package { get; }
 	long FileSize { get; }
 	DateTime ServerTime { get; }
-	CompatibilityManager.ReportInfo? CompatibilityReport { get; }
 	SteamVisibility Visibility { get; }
 	ulong[]? RequiredPackages { get; }
 	string? IconUrl { get; }

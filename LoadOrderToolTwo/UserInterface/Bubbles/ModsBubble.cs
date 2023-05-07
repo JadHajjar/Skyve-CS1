@@ -10,8 +10,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-using static CompatibilityReport.CatalogData.Enums;
-
 namespace LoadOrderToolTwo.UserInterface.StatusBubbles;
 
 internal class ModsBubble : StatusBubbleBase
@@ -108,28 +106,28 @@ internal class ModsBubble : StatusBubbleBase
 			DrawValue(e, ref targetHeight, modsIncomplete.ToString(), modsIncomplete == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural, FormDesign.Design.YellowColor);
 		}
 
-		var groups = CentralManager.Mods.Where(x => x.IsIncluded).GroupBy(x => x.Package.CompatibilityReport?.Severity);
+		var groups = CentralManager.Mods.Where(x => x.IsIncluded).GroupBy(x => x.Package.GetCompatibilityInfo().Notification);
 
 		foreach (var group in groups.OrderBy(x => x.Key))
 		{
-			if (!(group.Key > ReportSeverity.Remarks))
+			if ((int)group.Key % 0x10 == 0)
 			{
 				continue;
 			}
 
-			DrawValue(e, ref targetHeight, group.Count().ToString(), group.Key switch
-			{
-				ReportSeverity.MinorIssues => Locale.ModsWithMinorIssues,
-				ReportSeverity.MajorIssues => Locale.ModsWithMajorIssues,
-				ReportSeverity.Unsubscribe => Locale.ModsShouldUnsub,
-				_ => ""
-			}, group.Key switch
-			{
-				ReportSeverity.MinorIssues => FormDesign.Design.YellowColor,
-				ReportSeverity.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
-				ReportSeverity.Unsubscribe => FormDesign.Design.RedColor,
-				_ => Color.Empty
-			});
+			//DrawValue(e, ref targetHeight, group.Count().ToString(), group.Key switch
+			//{
+			//	ReportSeverity.MinorIssues => Locale.ModsWithMinorIssues,
+			//	ReportSeverity.MajorIssues => Locale.ModsWithMajorIssues,
+			//	ReportSeverity.Unsubscribe => Locale.ModsShouldUnsub,
+			//	_ => ""
+			//}, group.Key switch
+			//{
+			//	ReportSeverity.MinorIssues => FormDesign.Design.YellowColor,
+			//	ReportSeverity.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
+			//	ReportSeverity.Unsubscribe => FormDesign.Design.RedColor,
+			//	_ => Color.Empty
+			//});
 		}
 
 		if (multipleModsIncluded)

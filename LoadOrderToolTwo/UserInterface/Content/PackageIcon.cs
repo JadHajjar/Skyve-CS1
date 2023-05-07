@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Interfaces;
 
 using SlickControls;
 
@@ -12,7 +13,7 @@ namespace LoadOrderToolTwo.UserInterface.Content;
 internal class PackageIcon : SlickImageControl
 {
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-	public Package? Package { get; set; }
+	public IPackage? Package { get; set; }
 	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 	public bool Collection { get; set; }
 	[Category("Appearance"), DefaultValue(true)]
@@ -41,7 +42,7 @@ internal class PackageIcon : SlickImageControl
 
 		if (Image == null)
 		{
-			using var image = (Collection ? Properties.Resources.I_CollectionIcon : Package?.Mod is not null ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
+			using var image = (Collection ? Properties.Resources.I_CollectionIcon : Package?.IsMod ?? false ? Properties.Resources.I_ModIcon : Properties.Resources.I_AssetIcon).Color(FormDesign.Design.IconColor);
 			var iconRect = ClientRectangle.CenterR(image.Size);
 
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.IconColor), ClientRectangle, (int)(10 * UI.FontScale));

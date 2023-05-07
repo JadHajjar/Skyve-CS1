@@ -14,6 +14,7 @@ public class SteamFileServiceInfo
 
 public class Response
 {
+    public int total { get; set; }
 	public SteamWorkshopItemEntry[] publishedfiledetails { get; set; }
 }
 

@@ -28,34 +28,34 @@
                     "Corrigido o problema em que os perfis antigos não eram convertidos após o primeiro lançamento.",
                     "Corrigido o problema em que os recursos locais não eram atualizados automaticamente após mudanças externas.",
                     "Corrigido o problema de deletar recursos locais no menu de clique com o botão direito, que estava deletando todos os recursos locais em vez de apenas um",
-                    "Fixed converting LOT 1 profiles resulting in assets being marked as 'Local'",
-                    "Fixed 'Real' folders being swapped on save for Linux & Mac users.",
-                    "Fixed Linux & Mac users not being able to generate a log zip."
+                    "Corrigido a conversão de perfis LOT 1 resultando em recursos sendo marcados como 'Local'",
+                    "Corrigido a troca de pastas \"Real\" durante o salvamento para usuários do Linux e Mac.",
+                    "Corrigido o problema que impedia usuários de Linux e Mac de gerar um arquivo zip de registro."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.4",
-        "Date": "2023-04-08",
+        "Date": "08/04/2023",
         "ChangeGroups": [
             {
-                "Name": "Added the Help & Logs section",
+                "Name": "Seção de Ajuda & Relátórios adicionada",
                 "Changes": [
-                    "Easily access your logs.",
-                    "Quickly view errors in your most recent/current game session.",
-                    "Simplify a log file to focus on what's actually happening.",
-                    "Share a zip file containing all the logs needed for someone to help you out."
+                    "Acesse facilmente seus registros.",
+                    "Visualize rapidamente os erros na sua sessão de jogo mais recente/atual.",
+                    "Simplifique um arquivo de registro para focar no que está realmente acontecendo.",
+                    "Compartilhe um arquivo zip contendo todos os registros necessários para alguém ajudá-lo."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Melhorias",
                 "Changes": [
-                    "Changed the icons of filters to reflect the correct icons used in the list."
+                    "Alterado os ícones dos filtros para refletir os ícones corretos usados na lista."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
                     "Corrigido o texto na importação de coleções para assinar e cancelar a assinatura estando invertidos.",
                     "Corrigido o problema na seleção de mapas para um novo jogo que não permitia aos usuários selecionar um mapa padrão."
@@ -150,38 +150,38 @@
                 "Changes": [
                     "Corrigido o congelamento que ocorria nas páginas da lista de conteúdo.",
                     "Corrigido problema com o salvamento automático dos perfis que não estava funcionando corretamente.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "Corrigido o problema que impedia o uso de mapas e salvamentos da Oficina nas configurações de perfil",
+                    "Corrigido o problema em que mapas personalizados não eram carregados ao serem selecionados nas configurações de perfil.",
+                    "Corrigido o problema de carregamento de Perfis no macOS e Linux que nem sempre eram aplicados corretamente.",
+                    "Ter uma localização personalizada para arquivos de relatório do LSMR agora iniciará corretamente a partir desse local ao selecionar um arquivo de relatório na página de Utilitades."
                 ]
             }
         ]
     },
     {
         "Version": "2.2.2",
-        "Date": "2023-04-19",
+        "Date": "19/04/2023",
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New & Improved",
+                "Name": "Novo e Melhorado",
                 "Changes": [
-                    "Added in the Utilities page an import from any text file or from your clipboard.",
-                    "BOB import is now a generic XML import by supporting any XML format that contains package IDs."
+                    "Adicionada na página Utilidades uma opção de importar a partir de qualquer arquivo de texto ou do conteúdo da área de transferência.",
+                    "A importação do BOB agora é uma importação genérica de XML, suportando qualquer formato XML que contenha IDs de pacote."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed loading a collection URL sometimes not parsing the ID correctly.",
-                    "Fixed LOT becoming unresponsive on Mac/Linux when unsubscribing from a package."
+                    "Corrigido o problema em que o carregamento de uma URL de coleção às vezes não analisava corretamente o ID.",
+                    "Corrigido o LOT ficar sem resposta no Mac/Linux ao cancelar a inscrição em um pacote."
                 ]
             }
         ]
     },
     {
         "Version": "2.3.0",
-        "Date": "2023-04-27",
+        "Date": "27/04/2023",
         "Tagline": "Atualização de limpeza de Primavera",
         "ChangeGroups": [
             {
@@ -234,7 +234,7 @@
     },
     {
         "Version": "2.3.1",
-        "Date": "2023-04-29",
+        "Date": "29/04/2023",
         "Tagline": "",
         "ChangeGroups": [
             {
@@ -250,45 +250,45 @@
     },
     {
         "Version": "2.3.2",
-        "Date": "2023-04-30",
+        "Date": "30/04/2023",
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Novidades",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Adicionada uma opção para desativar a limpeza automática ao abrir o jogo.",
+                    "Adicionada uma caixa de argumentos personalizados para configurações avançadas de inicialização."
                 ]
             }
         ]
     },
     {
         "Version": "2.3.3",
-        "Date": "2023-05-04",
+        "Date": "04/05/2023",
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Ícone de Voto & Assinantes",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Adicionado um novo ícone ao lado de um pacote que exibe um resumo rápido dos votos e da contagem de assinantes do pacote.",
+                    "Passe o mouse sobre isso para exibir os valores.",
+                    "Clique no ícone para uma descrição detalhada dessa funcionalidade.",
+                    "Opçõe de Ordenação Adicionada 'Votos' e 'Total de Assinantes'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Requisitos de recursos",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Os itens necessários exibidos na página do recurso na Oficina agora estão integrados no LOT.",
+                    "Esta informação agora será incluída no Relatório de Compatibilidade para que você possa ver rapidamente o que está faltando."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Outras Alterações",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Página de Pacotes atualizada para corresponder às informações exibidas nas listas de conteúdo.",
+                    "As listas secundárias de conteúdo, como 'Pacotes Ausentes' e 'Coleção da Oficina', agora usam a mesma interface do usuário das páginas principais de lista de conteúdo, permitindo uma experiência mais simplificada e mais opções.",
+                    "Adicionadas as opções de inicialização 'Novo Recurso' e 'Carregar Recurso' no perfil para carregar rapidamente o Editor de Recursos."
                 ]
             }
         ]

@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Curățarea Pachetelor din atelier",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Noi funcționalități adăugate pentru a gestiona cu ușurință neconcordanțele dintre Steam și pachetele descărcate.",
+                    "Pachetele la care nu ești abonat nu mai sunt încărcate în joc.",
+                    "Lansarea jocului cât timp LOT este deschis va șterge automat orice pachet la care nu ești abonat, dar care este descărcat pe calculatorul tău.",
+                    "S-a adăugat un buton în fila Utilities pentru a rula manual această curățare, forțând descărcarea pachetelor lipsă."
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Nou",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "A fost adăugată o opțiune pentru dezactivarea ștergerii automate la deschiderea jocului.",
+                    "S-a adăugat o casetă de argumente personalizate pentru setările avansate de lansare."
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Iconiță Votare și Abonați",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "S-a adăugat o nouă pictogramă alături de un pachet care afișează un scurt rezumat al voturilor și numărul abonaților la pachet.",
+                    "Apasă pentru a afișa valorile.",
+                    "Faceți clic pe pictogramă pentru o descriere detaliată a acestei funcții.",
+                    "Opțiuni de sortare adăugate 'Voturi' și 'Total Abonați'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Cerințe privind asset-urile",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Articolele necesare afişate pe asset-urile unei pagini din atelier sunt acum integrate în instrumentul de încărcare a comenzii.",
+                    "Aceste informații vor fi acum incluse în raportul de compatibilitate pentru a vedea cu ușurință ceea ce lipsești."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Alte schimbări",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "S-a actualizat pagina pachetului pentru a se potrivi cu informațiile afișate în listele de conținut.",
+                    "Listele de conținut secundar cum ar fi „Pachete lipsă” și „Colecție workshop” folosesc acum aceeași interfață ca paginile principale ale listei de conținut, facilitarea unei experiențe simplificate și a mai multor opțiuni.",
+                    "Opțiuni de lansare \"Activă nouă\" și \"Încarcă Activ\" adăugate în profil pentru a se încărca rapid în Editorul de active."
                 ]
             }
         ]

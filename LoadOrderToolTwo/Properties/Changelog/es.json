@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Nuevo",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Opción para desactivar la limpieza automática al abrir el juego.",
+                    "Cuadro de argumentos personalizados para la configuración avanzada de lanzamiento."
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Icono de votos y suscriptores",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Icono junto a paquete, muestra un resumen rápido de los votos y el número de suscriptores del paquete.",
+                    "Pasar el ratón por encima para mostrar los valores.",
+                    "Clic en el icono para obtener una descripción detallada de esta función.",
+                    "Opciones de ordenar por 'Votos' y 'Número de suscriptores'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Requisitos del asset",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Los elementos requeridos mostrados en la página del workshop para un asset, ahora están integrados en Load Order Tool.",
+                    "Esta información ahora se incluirá en el Informe de compatibilidad para ver rápida y fácilmente lo que te falta."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Otros cambios",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Actualizada la página de Paquetes para que coincida con la información mostrada en las listas de contenido.",
+                    "Las listas de contenido secundarias como 'Paquetes faltantes' y 'Colección del Workshop', ahora usan la misma interfaz de usuario que las páginas de las listas de contenido principales, permitiendo una experiencia estándar y más opciones.",
+                    "Añadidas opciones de lanzamiento 'Nuevo Asset' y 'Cargar Asset' en el perfil, para cargar rápidamente en el Editor de assets."
                 ]
             }
         ]

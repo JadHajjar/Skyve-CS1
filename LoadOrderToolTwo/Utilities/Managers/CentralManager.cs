@@ -211,6 +211,8 @@ internal static class CentralManager
 			Log.Info($"No Steam Cache");
 		}
 
+		CompatibilityManager.CacheReport(content);
+
 		if (!ConnectionHandler.WhenConnected(UpdateSteamInformation))
 		{
 			_delayedWorkshopInfoUpdated.Run();
@@ -329,8 +331,6 @@ internal static class CentralManager
 		Log.Info($"Applying analysis results..");
 
 		ModLogicManager.ApplyRequiredStates();
-
-		CompatibilityManager.CacheReport(content);
 	}
 
 	private static void HandleNewPackage(Package package)

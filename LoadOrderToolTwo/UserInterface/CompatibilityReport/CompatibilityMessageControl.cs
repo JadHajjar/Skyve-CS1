@@ -1,7 +1,6 @@
-﻿using CompatibilityReport.CatalogData;
+﻿using Extensions;
 
-using Extensions;
-
+using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.IO;
@@ -23,14 +22,14 @@ internal class CompatibilityMessageControl : SlickControl
 	private readonly Dictionary<SmallMod, Rectangle> _buttonRects = new();
 	private readonly Dictionary<SmallMod, Rectangle> _modRects = new();
 
-	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, Enums.ReportType type, CompatibilityManager.ReportMessage message)
+	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportMessage message)
 	{
 		Dock = DockStyle.Top;
 		Type = type;
 		Message = message;
 		PackageCompatibilityReportControl = packageCompatibilityReportControl;
 
-		if (message.LinkedPackages.Any())
+		if (message.Status.Packages?.Any() ?? false)
 		{
 			Loading = true;
 			new BackgroundAction("Loading package info", LoadPackages).Run();
@@ -76,17 +75,20 @@ internal class CompatibilityMessageControl : SlickControl
 		var packages = new List<SmallMod>();
 		var remainingPackages = new List<ulong>();
 
-		foreach (var package in Message.LinkedPackages)
+		if (Message.Status.Packages is not null)
 		{
-			var localMod = ModsUtil.FindMod(package);
+			foreach (var package in Message.Status.Packages)
+			{
+				var localMod = ModsUtil.FindMod(package);
 
-			if (localMod != null)
-			{
-				packages.Add(new SmallMod(package, localMod.Name, localMod.IconImage) { Package = localMod });
-			}
-			else
-			{
-				remainingPackages.Add(package);
+				if (localMod != null)
+				{
+					packages.Add(new SmallMod(package, localMod.Name, localMod.IconImage) { Package = localMod });
+				}
+				else
+				{
+					remainingPackages.Add(package);
+				}
 			}
 		}
 
@@ -111,11 +113,11 @@ internal class CompatibilityMessageControl : SlickControl
 			{
 				foreach (var item in remainingPackages)
 				{
-					var mod = CompatibilityManager.Catalog?.GetMod(item);
+					var mod = CompatibilityManager.CompatibilityData.Packages.TryGet(item);
 
 					if (mod != null)
 					{
-						packages.Add(new SmallMod(item, mod.Name, null));
+						packages.Add(new SmallMod(item, mod.Package.Name ?? Locale.UnknownPackage, null));
 					}
 					else
 					{
@@ -129,8 +131,8 @@ internal class CompatibilityMessageControl : SlickControl
 		Loading = false;
 	}
 
-	public Enums.ReportType Type { get; }
-	public CompatibilityManager.ReportMessage Message { get; }
+	public ReportType Type { get; }
+	public ReportMessage Message { get; }
 	private List<SmallMod>? LinkedMods { get; set; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
 
@@ -146,12 +148,12 @@ internal class CompatibilityMessageControl : SlickControl
 			var actionHovered = false;
 			var cursor = PointToClient(Cursor.Position);
 			var pad = (int)(4 * UI.FontScale);
-			var color = Message.Severity.GetSeverityColor().MergeColor(BackColor, 60);
+			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, UI.Scale(new Size(24, 24), UI.FontScale));
 			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
-			var noteSize = e.Graphics.Measure(Message.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
+			var noteSize = e.Graphics.Measure(Message.Status.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + pad);
-			using var icon = Message.Severity.GetSeverityIcon(false).Default;
+			using var icon = Message.Status.Notification.GetIcon(false).Default;
 			using var brush = new SolidBrush(color);
 
 			e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
@@ -159,9 +161,9 @@ internal class CompatibilityMessageControl : SlickControl
 
 			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
-			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && Message.LinkedPackages.Length == 0 ? StringAlignment.Center : StringAlignment.Near });
+			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && !(Message.Status.Packages?.Any() ?? false) ? StringAlignment.Center : StringAlignment.Near });
 
-			e.Graphics.DrawString(Message.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height, 0, 0));
+			e.Graphics.DrawString(Message.Status.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height, 0, 0));
 
 			if (Loading && LinkedMods is null)
 			{
@@ -213,12 +215,12 @@ internal class CompatibilityMessageControl : SlickControl
 					{
 						var buttonText =
 							item.Package is null ? Locale.Subscribe :
-							Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? Locale.Switch :
+							Type is ReportType.Successors or ReportType.Alternatives ? Locale.Switch :
 							Locale.Enable;
 
 						var buttonIcon = IconManager.GetIcon(
 							item.Package is null ? "I_Add" :
-							Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives ? "I_Switch" :
+							Type is ReportType.Successors or ReportType.Alternatives ? "I_Switch" :
 							"I_Ok");
 
 						buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(8.25F));
@@ -304,12 +306,12 @@ internal class CompatibilityMessageControl : SlickControl
 		item.Package.IsIncluded = true;
 		item.Package.IsEnabled = true;
 
-		if (Type is Enums.ReportType.Successors or Enums.ReportType.Alternatives)
+		if (Type is ReportType.Successors or ReportType.Alternatives)
 		{
-			if (PackageCompatibilityReportControl.Package.Mod is not null)
+			if (PackageCompatibilityReportControl.Package.Package?.Mod is not null)
 			{
-				PackageCompatibilityReportControl.Package.Mod.IsIncluded = false;
-				PackageCompatibilityReportControl.Package.Mod.IsIncluded = false;
+				PackageCompatibilityReportControl.Package.Package.Mod.IsIncluded = false;
+				PackageCompatibilityReportControl.Package.Package.Mod.IsIncluded = false;
 			}
 		}
 

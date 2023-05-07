@@ -40,17 +40,6 @@ public partial class MainForm : BasePanelForm
 		try
 		{
 			SetPanel<PC_MainPage>(PI_Dashboard);
-
-			if (currentVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification)
-			{
-				if (CentralManager.SessionSettings.FirstTimeSetupCompleted)
-				{
-					PushPanel<PC_LotChangeLog>(null);
-				}
-
-				CentralManager.SessionSettings.LastVersionNotification = currentVersion.ToString();
-				CentralManager.SessionSettings.Save();
-			}
 		}
 		catch (Exception ex)
 		{ OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this)); }
@@ -251,6 +240,19 @@ public partial class MainForm : BasePanelForm
 		{
 			WindowState = FormWindowState.Minimized;
 			WindowState = FormWindowState.Maximized;
+		}
+
+		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+
+		if (currentVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification)
+		{
+			if (CentralManager.SessionSettings.FirstTimeSetupCompleted)
+			{
+				PushPanel<PC_LotChangeLog>(null);
+			}
+
+			CentralManager.SessionSettings.LastVersionNotification = currentVersion.ToString();
+			CentralManager.SessionSettings.Save();
 		}
 	}
 

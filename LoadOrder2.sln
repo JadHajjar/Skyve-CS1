@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "..\Extensions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyResolver", "AssemblyResolver\AssemblyResolver.csproj", "{00D6D8F2-A392-4E8D-870A-775193BEB042}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Extensions.Sql", "..\Extensions\Extensions.Sql\Extensions.Sql.shproj", "{F37ECE4B-E1BB-4A75-97BA-FEF60F98CF96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,5 +70,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8BD5477-8A30-4573-983C-3D47F3CE2C8A}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Extensions\Extensions.Sql\Extensions.Sql.projitems*{abb03609-79e2-41ba-ad76-39a64906dcdd}*SharedItemsImports = 5
+		..\Extensions\Extensions.Sql\Extensions.Sql.projitems*{f37ece4b-e1bb-4a75-97ba-fef60f98cf96}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

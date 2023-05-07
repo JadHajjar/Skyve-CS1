@@ -45,7 +45,6 @@ public class Mod : IPackage
 	public int Reports => ((IPackage)Package).Reports;
 	public bool Workshop => ((IPackage)Package).Workshop;
 	public DateTime ServerTime => ((IPackage)Package).ServerTime;
-	public CompatibilityManager.ReportInfo? CompatibilityReport => ((IPackage)Package).CompatibilityReport;
 	public SteamVisibility Visibility => ((IPackage)Package).Visibility;
 	public ulong[]? RequiredPackages => ((IPackage)Package).RequiredPackages;
 	public string? IconUrl => ((IPackage)Package).IconUrl;

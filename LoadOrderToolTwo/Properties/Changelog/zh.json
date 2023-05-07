@@ -240,7 +240,7 @@
             {
                 "Name": "创意工坊插件清理程序",
                 "Changes": [
-                    "添加了一个新功能，可以轻松处理您订阅的插件与 Steam 创意工坊不匹配的问题。",
+                    "新增了一个功能，可以轻松处理您在工坊订阅的插件与 Steam 所下载的插件不匹配的问题。",
                     "现在您未订阅的插件将不会被载入到游戏中。",
                     "当您打开 LOT2 并启动游戏时，会自动删除您已经取消订阅（但没删除干净）的插件。",
                     "在实用程序选项卡中添加了一个按钮，可以手动运行清理程序，并强制下载缺失的插件。"
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "新增",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "新增了一个选项以禁用创意工坊插件清理程序。",
+                    "为开发者启动选项添加了自定义启动参数项。"
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "评分与订阅量图标",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "在插件名称旁边添加了一个新图标，显示该插件的评分和订阅量。",
+                    "将鼠标指针悬停在图标上面以显示评分与订阅量。",
+                    "点击该图标可深入了解相关功能。",
+                    "新增了“评分”和“订阅量”的排序选项。"
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "资产要求",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Load Order Tool 2 新增了订阅创意工坊资产的必需物品的功能。",
+                    "现在兼容性报告包含了此提示信息，以便快速轻松地查看您缺少的必需物品。"
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "其他更改：",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "更新了插件页面以匹配内容列表中显示的信息。",
+                    "现在，例如“缺失的插件”和“创意工坊合集”等二级内容页面，用户界面的设计与一级页面（内容列表主页面）相同，可以给用户提供流线型体验，并提供更多选项。",
+                    "在配置文件中添加了“新建资产”和“读取资产”的启动选项，以快速载入到资产编辑器。"
                 ]
             }
         ]

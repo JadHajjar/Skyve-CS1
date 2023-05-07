@@ -254,7 +254,7 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Нове",
                 "Changes": [
                     "Added an option to disable the automatic cleanup when opening the game.",
                     "Added a custom arguments box for advanced launch settings."
@@ -284,7 +284,7 @@
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Інші зміни",
                 "Changes": [
                     "Updated the Package Page to match the displayed information in the content lists.",
                     "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",

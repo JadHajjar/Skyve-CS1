@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "新規",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "ゲーム起動時に自動で行うクリーンアップを無効化するオプションを追加",
+                    "詳細な起動オプションを指定出来るように、カスタム用のパラメータボックスを追加"
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "評価システムとサブスク数のアイコン",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "パッケージ欄にパッケージの評価数とサブスク数の簡単な概要を表示する新しいアイコンを追加",
+                    "カーソルを合わせると値が表示",
+                    "アイコンをクリックすると機能の詳細な説明を表示",
+                    "「評価」と「総サブスク数」のソートオプションを追加"
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "アセットの要件",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "ワークショップのアセットでページ内に表示される必須アイテム欄をLoad Order Toolに統合",
+                    "この情報はCompatibility Reportで記載されて、不足したアイテムを素早く簡単に確認が可能"
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "その他の変更",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "コンテンツリストの表示内容と同期するようにパッケージページを更新",
+                    "「不足したパッケージ」や「ワークショップのコレクション」などの2次コンテンツリストは、メインコンテンツのリストページと同じUIを使用するように変更と合理化を行い、より多くのオプションが提供可能",
+                    "プロファイルに「アセットの新規作成」と「アセットのロード」の起動オプションを追加し、アセットエディタを素早くロード可能"
                 ]
             }
         ]

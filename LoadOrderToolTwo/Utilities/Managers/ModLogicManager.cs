@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 
 using System;
@@ -10,7 +11,6 @@ using System.Linq;
 namespace LoadOrderToolTwo.Utilities.Managers;
 internal class ModLogicManager
 {
-	private const ulong CompatibilityReport_STEAM_ID = 2881031511;
 	private const string HARMONY_ASSEMBLY = "CitiesHarmony.dll";
 	private const string PATCH_ASSEMBLY = "PatchLoaderMod.dll";
 	private const string LOM_ASSEMBLY = "LoadOrderModTwo.dll";
@@ -29,19 +29,8 @@ internal class ModLogicManager
 		};
 	}
 
-	internal static readonly ulong[] BlackList = new ulong[]
-	{
-		2620852727,
-		2448824112,
-	};
-
 	internal static void Analyze(Mod mod)
 	{
-		if (mod.SteamId == CompatibilityReport_STEAM_ID)
-		{
-			CompatibilityManager.LoadCompatibilityReport(mod.Package);
-		}
-
 		_modCollection.CheckAndAdd(mod);
 
 		if (IsForbidden(mod))
@@ -126,10 +115,5 @@ internal class ModLogicManager
 	internal static bool AreMultipleLOMsPresent()
 	{
 		return (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM_ASSEMBLY, out _)?.Count ?? 0) > 1;
-	}
-
-	internal static bool IsBlackListed(ulong steamId)
-	{
-		return BlackList.Contains(steamId);
 	}
 }

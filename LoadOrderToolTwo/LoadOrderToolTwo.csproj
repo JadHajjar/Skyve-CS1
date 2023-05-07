@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+  <Import Project="..\..\Extensions\Extensions.Sql\Extensions.Sql.projitems" Label="Shared" />
   <Import Project="../Version.props" />
   <PropertyGroup>
     <Company>T. D. W.</Company>
@@ -28,6 +29,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="ColossalOrder\GameSettings.cs" />
+    <Compile Remove="Utilities\Managers\CompatibilityManager - Copy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Properties\Changelog.json" />
@@ -78,7 +80,6 @@
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Lists\GenericPackageListControl.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,9 +103,6 @@
     <Compile Update="UserInterface\Dropdowns\ProfilesDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\TagsDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\SortingDropDown.cs" />
-    <Compile Update="UserInterface\Bubbles\CompatibilityReportBubble.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="UserInterface\Generic\DoubleButton.cs" />
   </ItemGroup>
 
@@ -128,6 +126,7 @@
 
 	<ItemGroup>
 	  <None Include="ColossalOrder\GameSettings.cs" />
+	  <None Include="Utilities\Managers\CompatibilityManager - Copy.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

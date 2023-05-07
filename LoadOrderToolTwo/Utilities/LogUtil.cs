@@ -122,9 +122,9 @@ public static class LogUtil
 		using var writer = new StreamWriter(profileEntry.Open());
 		var packages = CentralManager.Packages.Where(x => x.Workshop && x.IsIncluded).ToList();
 		var reports = packages
-			.Select(x => CompatibilityManager.GetCompatibilityReport(x))
+			.Select(x => CompatibilityManager.GetCompatibilityInfo(x))
 			.Where(x => x != null)
-			.GroupBy(x => x.Severity)
+			.GroupBy(x => x.Notification)
 			.OrderByDescending(x => x.Key)
 			.ToDictionary(x => x.Key.ToString(), x => x.ToList());
 

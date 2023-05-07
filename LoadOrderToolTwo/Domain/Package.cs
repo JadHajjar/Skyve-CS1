@@ -43,9 +43,8 @@ public class Package : IPackage
 	public DownloadStatus Status { get; set; }
 	public string? StatusReason { get; set; }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
-	public CompatibilityManager.ReportInfo? CompatibilityReport => CompatibilityManager.GetCompatibilityReport(this);
-	internal bool? ForAssetEditor => CompatibilityManager.IsForAssetEditor(this);
-	internal bool? ForNormalGame => CompatibilityManager.IsForNormalGame(this);
+	internal bool? ForAssetEditor => this.GetCompatibilityInfo().Data?.Package.Usage == Compatibility.PackageUsage.AssetCreation;
+	internal bool? ForNormalGame => this.GetCompatibilityInfo().Data?.Package.Usage == Compatibility.PackageUsage.CityBuilding;
 	Package? IPackage.Package => this;
 	public string? Name => WorkshopInfo?.Name;
 	public bool IsMod => Mod is not null || (WorkshopInfo?.IsMod ?? false);

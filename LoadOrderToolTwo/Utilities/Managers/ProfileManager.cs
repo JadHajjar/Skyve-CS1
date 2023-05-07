@@ -17,9 +17,10 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.Utilities.Managers;
 public static class ProfileManager
 {
-	private const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";
-	private const string CITIES_PATH = "%CITIES%";
-	private const string WS_CONTENT_PATH = "%WORKSHOP%";
+	internal const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";
+	internal const string CITIES_PATH = "%CITIES%";
+	internal const string WS_CONTENT_PATH = "%WORKSHOP%";
+
 	private static readonly List<Profile> _profiles;
 	private static bool disableAutoSave;
 	private static readonly FileSystemWatcher? _watcher;
@@ -1042,37 +1043,57 @@ public static class ProfileManager
 		Save(profile);
 	}
 
-	internal static bool IsPackageIncludedInProfile(Package package, Profile profile)
+	internal static bool IsPackageIncludedInProfile(IPackage ipackage, Profile profile)
 	{
-		var profileMod = package.Mod is null ? null : new Profile.Mod(package.Mod);
-		var assets = package.Assets?.Select(x => new Profile.Asset(x)).ToList() ?? new();
-
-		if (profileMod is not null)
+		if (ipackage is Package package)
 		{
-			if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			var profileMod = package.Mod is null ? null : new Profile.Mod(package.Mod);
+			var assets = package.Assets?.Select(x => new Profile.Asset(x)).ToList() ?? new();
+
+			if (profileMod is not null)
 			{
-				return false;
+				if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+				{
+					return false;
+				}
+			}
+
+			if (assets.Count > 0)
+			{
+				if (!assets.All(profileAsset => profile.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
+				{
+					return false;
+				}
 			}
 		}
-
-		if (assets.Count > 0)
+		else
 		{
-			if (!assets.All(profileAsset => profile.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
+			if (ipackage.IsMod)
 			{
-				return false;
+				return profile.Mods.Any(x => x.SteamId == ipackage.SteamId);
 			}
+
+			return profile.Assets.Any(x => x.SteamId == ipackage.SteamId);
 		}
 
 		return true;
 	}
 
-	internal static void SetIncludedFor(Package package, Profile profile, bool value)
+	internal static void SetIncludedFor(IPackage ipackage, Profile profile, bool value)
 	{
-		var profileMod = package.Mod is null ? null : new Profile.Mod(package.Mod);
-		var assets = package.Assets?.Select(x => new Profile.Asset(x)).ToList() ?? new();
+		if (ipackage is Package package)
+		{
+			var profileMod = package.Mod is null ? null : new Profile.Mod(package.Mod);
+			var assets = package.Assets?.Select(x => new Profile.Asset(x)).ToList() ?? new();
 
-		SetIncludedFor(value, profileMod, assets, profile);
+			SetIncludedFor(value, profileMod, assets, profile);
+		}
+		else
+		{
+			var profileMod = profile.Mods.FirstOrDefault(x => x.SteamId == ipackage.SteamId) ?? new Profile.Mod(ipackage);
 
+			SetIncludedFor(value, profileMod, new(), profile);
+		}
 	}
 
 	internal static string GetFileName(Profile profile)

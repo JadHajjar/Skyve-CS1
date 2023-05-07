@@ -48,7 +48,6 @@ public class SteamWorkshopItem : IPackage
 	[JsonIgnore] public Package? Package => SteamId == 0 ? null : CentralManager.Packages.FirstOrDefault(x => x.SteamId == SteamId);
 	[JsonIgnore] public long FileSize => ServerSize;
 	[JsonIgnore] public string Folder => Package?.Folder ?? string.Empty;
-	[JsonIgnore] public CompatibilityManager.ReportInfo? CompatibilityReport => CompatibilityManager.GetCompatibilityReport(SteamId);
 
 	public SteamWorkshopItem(SteamWorkshopItemEntry entry)
 	{
