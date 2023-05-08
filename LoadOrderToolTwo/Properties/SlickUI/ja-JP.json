@@ -27,6 +27,8 @@
   "AppDataPath": "Cities: Skylinesが使うApp Dataのフォルダ",
   "Content": "コンテンツ",
   "Other": "その他",
+  "Date Modified": "Date Modified",
+  "Date Created": "Date Created",
   "AdvancedIncludeEnable": "MODのステータスで含めると有効化の両方を表示",
   "PackageStatus": "パッケージのステータス",
   "Copy": "クリップボードにコピー",

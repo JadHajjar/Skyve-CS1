@@ -27,6 +27,8 @@
   "AppDataPath": "โฟลเดอร์ App Data ของ Cities: Skylines",
   "Content": "เนื้อหา",
   "Other": "อื่น ๆ",
+  "Date Modified": "Date Modified",
+  "Date Created": "Date Created",
   "AdvancedIncludeEnable": "แสดงสถานะของม็อดทั้งการประกอบและการเปิดใช้งาน",
   "PackageStatus": "สถานะแพกเกจ",
   "Copy": "Copy",

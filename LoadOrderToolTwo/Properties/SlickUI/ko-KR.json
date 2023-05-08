@@ -27,6 +27,8 @@
   "AppDataPath": "Cities: Skylines의 앱 데이터 폴더",
   "Content": "콘텐츠",
   "Other": "기타",
+  "Date Modified": "Date Modified",
+  "Date Created": "Date Created",
   "AdvancedIncludeEnable": "모드의 포함됨 상태와 활성화됨 상태를 모두 표시하기",
   "PackageStatus": "패키지 상태",
   "Copy": "복사하기",

@@ -27,6 +27,8 @@
   "AppDataPath": "Le dossier AppData de Cities: Skylines",
   "Content": "Contenu",
   "Other": "Autre",
+  "Date Modified": "Date Modified",
+  "Date Created": "Date Created",
   "AdvancedIncludeEnable": "Afficher les deux états inclus et activé pour les mods",
   "PackageStatus": "État du package",
   "Copy": "Copier",

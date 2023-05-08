@@ -27,6 +27,8 @@
   "AppDataPath": "Тека даних Cities: Skylines (AppData)",
   "Content": "Вміст",
   "Other": "Інше",
+  "Date Modified": "Date Modified",
+  "Date Created": "Date Created",
   "AdvancedIncludeEnable": "Показувати стан включено та увімкнено для модів",
   "PackageStatus": "Статус пакунку",
   "Copy": "Копіювати",
