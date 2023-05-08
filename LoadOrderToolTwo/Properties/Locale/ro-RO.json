@@ -384,5 +384,6 @@
   "AssetsWithMajorIssues": "activele cu probleme majore",
   "AssetsShouldUnsub": "active care ar trebui să fie dezabonate de la",
   "LoadNewAsset": "Activă Nouă (Editor)",
-  "LoadLoadAsset": "Încarcă activ (Editor)"
+  "LoadLoadAsset": "Încarcă activ (Editor)",
+  "Profiles": "Profiles"
 }
