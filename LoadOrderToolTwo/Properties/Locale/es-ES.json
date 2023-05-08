@@ -384,5 +384,6 @@
   "AssetsWithMajorIssues": "assets con problemas mayores",
   "AssetsShouldUnsub": "assets que debes anular suscripción",
   "LoadNewAsset": "Nuevo Asset (Editor)",
-  "LoadLoadAsset": "Cargar Asset (Editor)"
+  "LoadLoadAsset": "Cargar Asset (Editor)",
+  "Profiles": "Perfiles"
 }
