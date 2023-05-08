@@ -1,0 +1,296 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Vítejte v éře protokolu změn",
+        "ChangeGroups": [
+            {
+                "Name": "Nové",
+                "Changes": [
+                    "Přidáno tlačítko 'Odhlásit vše' v rámci akcí obsahu.",
+                    "Přidána sekce Utility k odběru chybějících položek v BOB konfiguraci.",
+                    "Přidána možnost mít ve výchozím nastavení otevřené sekce Filtry a akce.",
+                    "Přidány stránky protokolu změn, uvidíte je na nových verzích nebo pomocí tlačítka v sekcích Nápověda."
+                ]
+            },
+            {
+                "Name": "Zlepšení",
+                "Changes": [
+                    "Přidána zpráva o kompatibilitě pro poškozené položky",
+                    "Neuvedené balíčky mají nyní správný název a náhled.",
+                    "Zástupné symboly pro nastavení složek nyní správně odrážejí váš OS.",
+                    "Ctrl + Klepněte na jméno autora pro přidání do vašeho filtru"
+                ]
+            },
+            {
+                "Name": "Opravy",
+                "Changes": [
+                    "Pevné starší profily nebyly po prvním spuštění převedeny.",
+                    "Fixní místní aktiva nejsou automaticky obnovena po externích změnách.",
+                    "Opraveno odstranění lokálních aktiv z menu pravým tlačítkem myši odstraňujícího všechny lokální položky místo jen jednoho",
+                    "Fixní konverze profilů LOT 1 vedoucí k tomu, že aktiva jsou označena jako „lokální“",
+                    "Opraveny složky 'Real' se vyměňují na uložení pro uživatele Linuxu a Mac.",
+                    "Opraveni uživatelé Linuxu a Mac nejsou schopni vygenerovat zip."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Přidána sekce Nápověda a logy",
+                "Changes": [
+                    "Snadný přístup k vašim logům.",
+                    "Rychlé zobrazení chyb ve vaší poslední nebo aktuální herní relaci.",
+                    "Zjednodušte soubor protokolu a zaměřte se na to, co se skutečně děje.",
+                    "Sdílejte zip soubor obsahující všechny logy potřebné k tomu, aby vám někdo pomohl."
+                ]
+            },
+            {
+                "Name": "Zlepšení",
+                "Changes": [
+                    "Změněny ikony filtrů tak, aby odrážely správné ikony použité v seznamu."
+                ]
+            },
+            {
+                "Name": "Opravy",
+                "Changes": [
+                    "Opraven text ve sbírce importů pro odebírání a odhlášení byl přepsán.",
+                    "Opraven výběr mapy pro novou hru neumožňuje uživatelům vybrat vanilní mapu."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Opravy",
+                "Changes": [
+                    "Opravena chyba, která způsobila nekonečné načítání pro některé uživatele."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Změny",
+                "Changes": [
+                    "Odebírka byla odebrána z možností modu ve hře.",
+                    "Při načítání profilu se neuplatňují pevné DLC.",
+                    "Opravena volba jazyka, která je pro některé lidi prázdná.",
+                    "Obnovení stahování z páry již nevnutí zaměření zpět na nástroj.",
+                    "Další změny uživatelského rozhraní."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Změny",
+                "Changes": [
+                    "Přidávám informační vyskakovací okno při prvním odebírání položek.",
+                    "Přidán varovný text na nástěnce, pokud máte nainstalováno více LOM instancí.",
+                    "Přidány malé značky vedle názvů balíčků.",
+                    "Obnovením stahování Objednávky spustí stahování a zavře aplikaci, dokud se aktualizuje.",
+                    "Pevná a vylepšená rychlost načítání módu obrazovky."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta veřejné vydání",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Zobrazení, generální oprava profilu",
+        "ChangeGroups": [
+            {
+                "Name": "Změny profilu",
+                "Changes": [
+                    "Změna vzhledu Vašeho seznamu profilů byla změněna.",
+                    "Oblíbené profily jsou nyní zobrazeny na vaší nástěnce, což umožňuje snadné přepínání mezi nimi.",
+                    "Přidána sekce 'Ostatní profily' na stránce balíčku, aby byla snadno vyloučena nebo zahrnuta do vašich ostatních profilů",
+                    "Přidány nové možnosti řazení profilu. Vybrané řazení bude zapamatováno během relací.",
+                    "Přidána akce kliknutím pravým tlačítkem myši v seznamu obsahu, aby se vyloučila nebo zahrnula položka do všech vašich balíčků.",
+                    "Přidáno tlačítko pro zobrazení profilového souboru na vašem počítači.",
+                    "Nyní můžete přiřadit barvu ke svým profilům.",
+                    "Nyní můžete vytvořit zástupce pro vaše profily.",
+                    "Nyní můžete importovat profil LOT 1 v sekci 'Přidat profil'."
+                ]
+            },
+            {
+                "Name": "Zlepšení",
+                "Changes": [
+                    "Steam odkazy se nyní otevřou uvnitř Steamova okna. To lze vypnout v Nastavení.",
+                    "Místní aktiva jsou nyní správně seskupena na základě složek, ve kterých se nacházejí.",
+                    "Váš Paradox účet bude vždy zobrazen od této chvíle.",
+                    "Okno tlačítek nahoře má nyní ikony pro vysvětlení jejich akcí.",
+                    "Zlepšená reakce stránek v seznamu obsahu.",
+                    "Hledat na stránkách seznamu obsahu je nyní mnohem rychlejší.",
+                    "Načítání módu je nyní uloženo do mezipaměti; výsledkem je účinnější zatížení Windows & Linuxu, stejně jako mnohem rychlejší zatížení na macOS.",
+                    "Nyní můžete vygenerovat zip soubor vašich logů, zatímco hra běží."
+                ]
+            },
+            {
+                "Name": "Opravy",
+                "Changes": [
+                    "Opravené zmrazení, které se děje na stránkách seznamu obsahu.",
+                    "Opravené profily' automatické ukládání nefunguje správně.",
+                    "Opraveno, že v nastavení profilu není možné používat Workshop mapy a ukládat hry",
+                    "Opraveny vlastní mapy nenačtené, když jsou vybrány v nastavení profilu.",
+                    "Načítání profilů na macOS a Linuxu nebylo vždy prováděno správně.",
+                    "Mít vlastní umístění pro LSMR soubory se nyní správně spustí při výběru souboru reportu na stránce Utility."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nové & Vylepšené",
+                "Changes": [
+                    "Přidáno na stránce Nástroje import z libovolného textového souboru nebo ze schránky.",
+                    "BOB import je nyní generický XML import skrze XML formát obsahující ID balíčku."
+                ]
+            },
+            {
+                "Name": "Opravy",
+                "Changes": [
+                    "Opraveno načítání URL kolekce, která někdy chybně parsuje ID.",
+                    "Při odhlášení z balíčku se LOT stane nereagujícím na Mac/Linuxu."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Aktualizace jarního čištění",
+        "ChangeGroups": [
+            {
+                "Name": "Filtrovat a hledat změny",
+                "Changes": [
+                    "Přidán nový autor filtr rozbalovacího seznamu.",
+                    "Přidáno více akcí do popisků v seznamech obsahu.",
+                    "Přidána nová možnost \"Jakékoliv problémy\" pro \"Stav balíčku\" a \"Zpráva o kompatibilitě\".",
+                    "Všechny akce filtru jsou nyní prováděny pomocí Ctrl+Click, přidány možnost výměny této funkce.",
+                    "Přefiltrování pomocí zkratek v seznamu nyní odstraňuje položku z vašeho filtru.",
+                    "Oddělením termínů čárkou ve vašem vyhledávání bude vaše hledání rozděleno tak, aby odpovídalo některé z termínů (OR)\r\n\t• Přidáním '+' na začátek vašeho termínu bude vyžadováno, aby termín odpovídal (AND)\r\n\t• Přidáním '-' na začátek vašeho termínu vyloučíte položky, které odpovídají tomuto termínu\r\n\r\nPříklady nového vyhledávání:\r\n\t• auto, nákladní auto (zápasy 'au' NEBO 'truck')\r\n\t• budova, byt +evropský (zápasy 'evropský' A ['budova' NEBO 'bytu'])\r\n\t• condo; dům -rico +american (odpovídá 'americký' A ['kondo' NEBO 'dům'] A NENÍ 'rico')"
+                ]
+            },
+            {
+                "Name": "UI & UX změny",
+                "Changes": [
+                    "Zavedl nový systém ikon, který vhodně rozšiřuje všechny ikony do měřítka vašeho uživatelského rozhraní.",
+                    "Přepracovalo vykreslování seznamů, drasticky zlepšovalo výkon a schopnost stránek s obsahem.",
+                    "Přidán přepínač pořadí pro výběr mezi vzestupným a sestupným řazením.",
+                    "Přesunuto do sekce 'Akce' na stránky s obsahem a přidáno 2 nové možnosti.",
+                    "Částečně zahrnuté balíky mají nyní v seznamu jiné uživatelské rozhraní.",
+                    "Vylepšené ovládání tlačítek a filtrů v seznamech obsahu, zmenšení jejich celkové velikosti a přidávání více vizuálních narážek.",
+                    "Změněna možnost zvětšit velikost položek v seznamu při přejetí pro vždy zvětšení jejich velikosti, vylepšeno uživatelské rozhraní položek rozšířeného seznamu a aplikováno na zbytek seznamů v aplikaci.",
+                    "Přidána zkratka Ctrl+[0-9] pro přepínání mezi dostupnými kartami.",
+                    "Prohodili všechna dvojitá tlačítka a volba přepíná strany.",
+                    "Animace jsou nyní ve výchozím nastavení zakázány na macOS a Linuxu.",
+                    "Tolik další vylepšení, změny a opravy uživatelského rozhraní, které jsem ztratil počet."
+                ]
+            },
+            {
+                "Name": "Revize výběru souboru",
+                "Changes": [
+                    "Aktualizováno uživatelské rozhraní obrazovky pro výběr souborů.",
+                    "Přidány připnuté složky pro snadný přístup k příslušným složkám.",
+                    "Přidána sekce Workshop pro snadný výběr map a uložení.",
+                    "Přepínač rozevírací nabídky a řazení řazení",
+                    "Přepínač seznamu nebo mřížky byl přidán."
+                ]
+            },
+            {
+                "Name": "Opravy chyb",
+                "Changes": [
+                    "Opraveno spuštění LOT poté, co byl displej dříve zapnut, což vedlo k tomu, že se okno nyní zobrazuje.",
+                    "Opravena možnost LHT nefunguje při spuštění nové mapy.",
+                    "Opravené stránky autora se ve Steamu neotevírají správně.",
+                    "Opravena zmražení při vyhledávání, zatímco bylo vybráno řazení 'Odebírat čas'."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Workshop Packages Cleanup",
+                "Changes": [
+                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
+                    "Packages you are not subscribed to are no longer loaded in-game.",
+                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
+                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added an option to disable the automatic cleanup when opening the game.",
+                    "Added a custom arguments box for advanced launch settings."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Vote & Subscribers Icon",
+                "Changes": [
+                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
+                    "Hover over it to display the values.",
+                    "Click on the icon for an in-depth description of this feature.",
+                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                ]
+            },
+            {
+                "Name": "Asset Requirements",
+                "Changes": [
+                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
+                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                ]
+            },
+            {
+                "Name": "Other Changes",
+                "Changes": [
+                    "Updated the Package Page to match the displayed information in the content lists.",
+                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
+                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                ]
+            }
+        ]
+    }
+]
