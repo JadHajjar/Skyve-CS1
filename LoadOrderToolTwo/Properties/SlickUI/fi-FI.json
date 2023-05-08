@@ -27,6 +27,8 @@
   "AppDataPath": "Kaupungit: Skylinesin sovellustietokansio",
   "Content": "Sisältö",
   "Other": "Muut",
+  "Date Modified": "Date Modified",
+  "Date Created": "Date Created",
   "AdvancedIncludeEnable": "Näytä sekä mukana olevat että käytössä olevat tilat modeille",
   "PackageStatus": "Paketin tila",
   "Copy": "Kopio",
