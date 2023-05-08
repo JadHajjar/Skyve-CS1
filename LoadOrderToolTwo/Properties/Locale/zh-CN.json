@@ -71,7 +71,6 @@
   "LoadCollection": "加载合集",
   "CollectionTitle": "创意工坊合集",
   "HelpLogs": "获取帮助和日志",
-  "CrNotAvailable": "Compatibility Report 当前不可用，点击此处订阅此模组",
   "ModsWithMinorIssues": "个有次要问题的模组",
   "ModsWithMajorIssues": "个有主要问题的模组",
   "ModsShouldUnsub": "个应当取消订阅的模组",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "个有主要问题的资产",
   "AssetsShouldUnsub": "个应当取消订阅的资产",
   "LoadNewAsset": "新建资产（资产编辑器）",
-  "LoadLoadAsset": "读取资产（资产编辑器）"
+  "LoadLoadAsset": "读取资产（资产编辑器）",
+  "Profiles": "配置文件"
 }

@@ -71,7 +71,6 @@
   "LoadCollection": "Pengumpulan Muat",
   "CollectionTitle": "Koleksi lokakarya",
   "HelpLogs": "Bantuan & Log",
-  "CrNotAvailable": "Laporan Kompatibilitas tidak tersedia, klik di sini untuk berlangganan MOD",
   "ModsWithMinorIssues": "mod dengan masalah kecil",
   "ModsWithMajorIssues": "mod dengan masalah besar",
   "ModsShouldUnsub": "mod yang harus tidak diterjemahkan dari",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

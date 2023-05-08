@@ -71,7 +71,6 @@
   "LoadCollection": "Charger la collection",
   "CollectionTitle": "Collections du Workshop",
   "HelpLogs": "Aide et logs",
-  "CrNotAvailable": "Le rapport de Compatibility Report n'est pas disponible, cliquez ici pour vous abonner au mod",
   "ModsWithMinorIssues": "les mods avec des avertissements",
   "ModsWithMajorIssues": "les mods avec des problèmes",
   "ModsShouldUnsub": "les mods qui devraient être désabonnés",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profils"
 }

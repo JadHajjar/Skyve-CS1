@@ -71,7 +71,6 @@
   "LoadCollection": "Laadverzameling",
   "CollectionTitle": "Workshop -collecties",
   "HelpLogs": "Help en logboeken",
-  "CrNotAvailable": "Compatibiliteitsrapport is niet beschikbaar, klik hier om u te abonneren op de mod",
   "ModsWithMinorIssues": "mods met kleine problemen",
   "ModsWithMajorIssues": "mods met grote problemen",
   "ModsShouldUnsub": "mods die moeten worden afgenomen van",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profielen"
 }

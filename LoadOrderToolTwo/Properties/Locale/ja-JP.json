@@ -71,7 +71,6 @@
   "LoadCollection": "コレクションのロード",
   "CollectionTitle": "ワークショップのコレクション",
   "HelpLogs": "ヘルプ & ログ",
-  "CrNotAvailable": "Compatibility Reportが利用できません。ここをクリックしてMODをサブスクして下さい。",
   "ModsWithMinorIssues": "個のMODにマイナーな問題",
   "ModsWithMajorIssues": "個のMODにメジャーな問題",
   "ModsShouldUnsub": "個のMODはサブスクを解除",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "個のアセットにメジャーな問題",
   "AssetsShouldUnsub": "個のアセットはサブスクを解除",
   "LoadNewAsset": "アセットを新規作成 (エディタ)",
-  "LoadLoadAsset": "アセットをロード (エディタ)"
+  "LoadLoadAsset": "アセットをロード (エディタ)",
+  "Profiles": "プロファイル"
 }

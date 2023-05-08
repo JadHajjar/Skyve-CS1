@@ -71,7 +71,6 @@
   "LoadCollection": "Загрузить коллекцию",
   "CollectionTitle": "Коллекции мастерской",
   "HelpLogs": "Помощь и логи",
-  "CrNotAvailable": "Отчет о совместимости недоступен, нажмите здесь, чтобы подписаться на мод",
   "ModsWithMinorIssues": "моды с незначительными проблемами",
   "ModsWithMajorIssues": "моды с серьезными проблемами",
   "ModsShouldUnsub": "моды от которых необходимо отписаться",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Профили"
 }

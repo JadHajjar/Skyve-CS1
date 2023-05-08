@@ -71,7 +71,6 @@
   "LoadCollection": "Завантажити колекцію",
   "CollectionTitle": "Колекції майстерні",
   "HelpLogs": "Довідка та журнали",
-  "CrNotAvailable": "Звіт про сумісність недоступний, натисніть тут, щоб підписатися на мод",
   "ModsWithMinorIssues": "Моди з незначними проблемами",
   "ModsWithMajorIssues": "Моди зі значними проблемами",
   "ModsShouldUnsub": "Моди, від яких слід відписатись",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "Ассети зі значними проблемами",
   "AssetsShouldUnsub": "Ассети, від яких слід відписатись",
   "LoadNewAsset": "Новий Ассет (редактор)",
-  "LoadLoadAsset": "Завантажити Ассет (редактор)"
+  "LoadLoadAsset": "Завантажити Ассет (редактор)",
+  "Profiles": "Профілі"
 }

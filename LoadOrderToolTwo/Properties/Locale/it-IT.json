@@ -71,7 +71,6 @@
   "LoadCollection": "Carica Collezione",
   "CollectionTitle": "Collezioni del workshop",
   "HelpLogs": "Aiuto e Log",
-  "CrNotAvailable": "Il rapporto di compatibilità non è disponibile, fai clic qui per iscriverti alla mod",
   "ModsWithMinorIssues": "Mod con problemi minori",
   "ModsWithMajorIssues": "Mod con problemi importanti",
   "ModsShouldUnsub": "mod di cui si dovrebbe annullare l'iscrizione",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "risorse con problemi importanti",
   "AssetsShouldUnsub": "risorse di cui si dovrebbe annullare l'iscrizione",
   "LoadNewAsset": "Nuova risorsa (Editor)",
-  "LoadLoadAsset": "Carica risorsa (Editor)"
+  "LoadLoadAsset": "Carica risorsa (Editor)",
+  "Profiles": "Profili"
 }
