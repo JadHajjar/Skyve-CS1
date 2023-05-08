@@ -384,5 +384,6 @@
   "AssetsWithMajorIssues": "個のアセットにメジャーな問題",
   "AssetsShouldUnsub": "個のアセットはサブスクを解除",
   "LoadNewAsset": "アセットを新規作成 (エディタ)",
-  "LoadLoadAsset": "アセットをロード (エディタ)"
+  "LoadLoadAsset": "アセットをロード (エディタ)",
+  "Profiles": "プロファイル"
 }
