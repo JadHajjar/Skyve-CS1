@@ -1,0 +1,296 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Välkommen till förändringsloggen era",
+        "ChangeGroups": [
+            {
+                "Name": "Ny",
+                "Changes": [
+                    "Lade till en \"Avsluta prenumeration\"-knapp i innehållssidor\"-åtgärder.",
+                    "Lade till en verktygssektion för att prenumerera på saknade objekt i en BOB-konfiguration.",
+                    "Lade till ett alternativ för att ha filter och åtgärdssektioner öppna som standard.",
+                    "Lade till ändringsloggsidor, du ser den på nya versioner eller använder dess knapp i hjälpsektionerna."
+                ]
+            },
+            {
+                "Name": "Förbättringar",
+                "Changes": [
+                    "Tillagd kompatibilitetsrapport för trasiga tillgångar",
+                    "Olistade paket har nu rätt namn och miniatyrbild.",
+                    "Platshållare för mappinställningar speglar nu korrekt ditt operativsystem.",
+                    "Ctrl+Klicka på en författares namn för att lägga till dem i ditt filter"
+                ]
+            },
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fasta äldre profiler som inte konverteras efter den första lanseringen.",
+                    "Fast lokala tillgångar uppdateras inte automatiskt efter externa ändringar.",
+                    "Fast ta bort lokala tillgångar från högerklicka menyn ta bort alla lokala tillgångar istället för bara en",
+                    "Fast konvertering av LOT 1-profiler vilket resulterar i att tillgångar markeras som \"lokala\"",
+                    "Fast \"Real\" mappar som byts ut mot spara för Linux & Mac-användare.",
+                    "Fasta Linux- och Mac-användare som inte kan generera en loggzip."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Lade till sektionen Hjälp & Loggar",
+                "Changes": [
+                    "Lätt att komma åt dina loggar.",
+                    "Visa fel snabbt i din senaste / nuvarande spelsession.",
+                    "Förenkla en loggfil för att fokusera på vad som faktiskt händer.",
+                    "Dela en zip-fil med alla loggar som behövs för att någon ska kunna hjälpa dig."
+                ]
+            },
+            {
+                "Name": "Förbättringar",
+                "Changes": [
+                    "Ändrade ikonerna i filter för att återspegla de rätta ikonerna som används i listan."
+                ]
+            },
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fast texten i importsamlingen för att prenumerera och avprenumerera vänds.",
+                    "Fast kartval för ett nytt spel som inte låter användare välja en vaniljkarta."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fixade en bugg som orsakade oändlig laddning för vissa användare."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Ändringar",
+                "Changes": [
+                    "Tog bort fliken prenumeration från mod alternativ i spelet.",
+                    "Fasta DLC:er används inte vid inläsning av en profil.",
+                    "Fast språkalternativet är tomt för vissa människor.",
+                    "Återhämtning från ånga kommer inte längre att tvinga fokus tillbaka till verktyget.",
+                    "Andra UI ändringar."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Ändringar",
+                "Changes": [
+                    "Lägga till en info popup när du prenumererar på objekt för första gången.",
+                    "Lade till en varningstext i instrumentpanelen när du har flera LOM-instanser installerade.",
+                    "Lade till små taggar bredvid paketets titlar.",
+                    "Ladda ner lastbeställningsverktyget igen kommer att initiera nedladdningen och stänga appen medan den uppdateras.",
+                    "Fast och förbättrade hastigheten på Loading Screen Mod rapporter."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta offentlig release",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Presenterar, profilöversikten",
+        "ChangeGroups": [
+            {
+                "Name": "Förändringar i profilen",
+                "Changes": [
+                    "Ändrade utformningen av din profillista.",
+                    "Favoritprofiler visas nu på din instrumentpanel för att enkelt kunna växla mellan dem.",
+                    "Lade till sektionen \"Andra profiler\" i ett pakets sida för att enkelt utesluta eller inkludera dem från dina andra profiler",
+                    "Lade till nya sorteringsalternativ för profiler. Den valda sorteringen kommer nu att komma ihåg under sessionerna.",
+                    "Lade till högerklicksåtgärder i innehållslistan för att exkludera eller inkludera en artikel i alla dina paket.",
+                    "Lade till en knapp för att visa profilens fil på din dator.",
+                    "Du kan nu tilldela en färg till dina profiler.",
+                    "Du kan nu skapa en genväg på skrivbordet för dina profiler.",
+                    "Du kan nu importera en LOT 1-profil i avsnittet \"Lägg till profil\"."
+                ]
+            },
+            {
+                "Name": "Förbättringar",
+                "Changes": [
+                    "Steam-länkar öppnas nu inne i Steams fönster. Detta kan slås av i Alternativen.",
+                    "Lokala tillgångar är nu korrekt inspelade baserat på de mappar de befinner sig i.",
+                    "Din Paradox kontopanel kommer alltid att visas från och med nu.",
+                    "Fönsterknapparna längst upp just nu har ikoner för att förklara sina handlingar.",
+                    "Förbättrad respons på innehållslistans sidor.",
+                    "Sök i innehållslistan sidorna är nu mycket snabbare.",
+                    "Mod laddning är nu cachelagrad, vilket resulterar i effektivare laster på Windows & Linux, samt mycket snabbare laster på macOS.",
+                    "Du kan nu generera en zip-fil av dina loggar medan spelet körs."
+                ]
+            },
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fasta frysningar händer i innehållslistan sidor.",
+                    "Fasta Profilers Auto-Spara fungerar inte korrekt.",
+                    "Fast att inte kunna använda Workshop-kartor och spar-spel i profilinställningarna",
+                    "Fasta anpassade kartor som inte laddas när den är markerad i profilinställningarna.",
+                    "Fast inläsning av Profiler på macOS och Linux gäller inte alltid korrekt.",
+                    "Att ha en anpassad plats för LSMR-rapportfiler startar nu korrekt därifrån när du väljer en rapportfil på sidan Verktygsverktyg."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nytt & förbättrat",
+                "Changes": [
+                    "Lade till på Utilities sidan en import från någon textfil eller från ditt urklipp.",
+                    "BOB-import är nu en generisk XML-import genom att stötta alla XML-format som innehåller paket-ID."
+                ]
+            },
+            {
+                "Name": "Åtgärder",
+                "Changes": [
+                    "Fast laddar en samlings-URL ibland inte tolka ID korrekt.",
+                    "Fast LOT blir inte responsivt på Mac/Linux när du avregistrerar från ett paket."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Uppdatering för vårrensning",
+        "ChangeGroups": [
+            {
+                "Name": "Filtrera & sök ändringar",
+                "Changes": [
+                    "Lade till en ny författarfilter rullgardinsmeny.",
+                    "Lade till fler åtgärder till etiketter i innehållslistorna.",
+                    "Lade till ett nytt \"Eventuella problem\" alternativ för \"Paketstatus\" och \"Kompatibilitetsrapport\" nedrullningar.",
+                    "Alla filteråtgärder görs nu med hjälp av Ctrl + Klick, lagt till ett alternativ för att byta den här funktionen.",
+                    "Återfiltrering med genvägarna i listan tar nu bort objektet från ditt filter.",
+                    "Separera termer med kommatecken i din sökning kommer att dela upp din sökning för att matcha något av termerna (OR)\r\n\t<unk> • Lägga till '+' i början av din term kommer att kräva att termen matchas (AND)\r\n\t<unk> • Lägga till '-' i början av din termin kommer att utesluta objekt som matchar termen\r\n\r\nExempel på den nya sökningen:\r\n\t<unk> • bil, lastbil (matchar 'bil' ELLER 'truck')\r\n\t<unk> • byggnad, lägenhet +europeisk (matchar 'europeisk' OCH ['byggnad' ELLER 'lägenhet'])\r\n\t<unk> • condo, hus -rico +amerikanska (matchar 'american' och ['condo' eller 'hus'] OCH INTE 'rico')"
+                ]
+            },
+            {
+                "Name": "UI & UX ändringar",
+                "Changes": [
+                    "Genomfört ett nytt ikonsystem som skalar alla ikoner på lämpligt sätt till din UI-skala.",
+                    "Omarbetade rendering av listor, förbättra prestanda och lyhördhet för innehållssidor drastiskt.",
+                    "Lade till en sorteringsordning för att välja mellan stigande och fallande sortering.",
+                    "Flyttade avsnittet \"Åtgärder\" på innehållssidorna och lade till 2 nya alternativ.",
+                    "Delvis inkluderade paket har nu ett annat gränssnitt i listan.",
+                    "Förbättrade knappar och filterkontroller i innehållslistorna, minskade deras totala storlek och lägga till fler visuella ledtrådar.",
+                    "Ändrade alternativet att öka listobjektens storlek på hovrar för att alltid öka sin storlek, förbättrade UI för förstorade listobjekt och tillämpade denna funktionalitet på resten av listorna i appen.",
+                    "Lade till en genväg Ctrl+[0-9] för att växla mellan tillgängliga flikar.",
+                    "Bytte alla dubbelknappar och alternativ toggles' sidor.",
+                    "Animationer är nu inaktiverade som standard på macOS & Linux.",
+                    "Så många fler UI förbättringar, förändringar och korrigeringar jag förlorade räkningen."
+                ]
+            },
+            {
+                "Name": "Revamp för filval",
+                "Changes": [
+                    "Uppdaterade UI för filmarkeringsskärmarna.",
+                    "Lade till Pinned mappar för att enkelt komma åt relevanta mappar.",
+                    "Lade till en verkstadssektion för att enkelt välja verkstadskartor och sparar.",
+                    "Lade till en sorterings-rullgardinsmeny & sorteringsordning att växla",
+                    "Lade till en lista/rutnätsvy."
+                ]
+            },
+            {
+                "Name": "Bugg Fixar",
+                "Changes": [
+                    "Fast lansering LOT efter skärmen det var tidigare på fick avstängt vilket resulterade i att fönstret nu dyker upp.",
+                    "Fast LHT alternativet fungerar inte när du startar in i en ny karta.",
+                    "Fasta författarsidor som inte öppnas korrekt i Steam.",
+                    "Fast fryser händer när du söker medan \"Prenumerera tid\" sorteringen valdes."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Workshop Packages Cleanup",
+                "Changes": [
+                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
+                    "Packages you are not subscribed to are no longer loaded in-game.",
+                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
+                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added an option to disable the automatic cleanup when opening the game.",
+                    "Added a custom arguments box for advanced launch settings."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Vote & Subscribers Icon",
+                "Changes": [
+                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
+                    "Hover over it to display the values.",
+                    "Click on the icon for an in-depth description of this feature.",
+                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                ]
+            },
+            {
+                "Name": "Asset Requirements",
+                "Changes": [
+                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
+                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                ]
+            },
+            {
+                "Name": "Other Changes",
+                "Changes": [
+                    "Updated the Package Page to match the displayed information in the content lists.",
+                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
+                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                ]
+            }
+        ]
+    }
+]
