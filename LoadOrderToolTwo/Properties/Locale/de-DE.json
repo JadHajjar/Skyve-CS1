@@ -384,5 +384,6 @@
   "AssetsWithMajorIssues": "Gegenstände mit größeren Problemen",
   "AssetsShouldUnsub": "Gegenstände, die abbestellt werden sollten",
   "LoadNewAsset": "Neuer Gegenstand (Editor)",
-  "LoadLoadAsset": "Gegenstand laden (Editor)"
+  "LoadLoadAsset": "Gegenstand laden (Editor)",
+  "Profiles": "Profile"
 }
