@@ -27,6 +27,8 @@
   "AppDataPath": "Şehirler: Skylines'ın Uygulama Veri Klasörü",
   "Content": "İçerik",
   "Other": "Diğer",
+  "Date Modified": "Date Modified",
+  "Date Created": "Date Created",
   "AdvancedIncludeEnable": "Show both of the included and enabled state for mods",
   "PackageStatus": "Paket durumu",
   "Copy": "Kopya",
