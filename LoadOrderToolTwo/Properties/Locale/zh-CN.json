@@ -384,5 +384,6 @@
   "AssetsWithMajorIssues": "个有主要问题的资产",
   "AssetsShouldUnsub": "个应当取消订阅的资产",
   "LoadNewAsset": "新建资产（资产编辑器）",
-  "LoadLoadAsset": "读取资产（资产编辑器）"
+  "LoadLoadAsset": "读取资产（资产编辑器）",
+  "Profiles": "配置文件"
 }
