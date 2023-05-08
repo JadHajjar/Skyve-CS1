@@ -7,15 +7,28 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
+using static LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle;
 
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
 internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 {
+	protected override void OnCreateControl()
+	{
+		base.OnCreateControl();
+
+		if (Live)
+		{
+			ItemHeight = 22;
+		}
+	}
+
 	protected override void UIChanged()
 	{
-		Font = UI.Font("Segoe UI", 9.75F);
-		Padding = UI.Scale(new Padding(5), UI.FontScale);
+		Font = UI.Font("Segoe UI", 7.5F);
+		Padding = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
 	protected override void OnSizeChanged(EventArgs e)
@@ -42,19 +55,28 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 			return;
 		}
 
-		var text = $"{item.EnglishName} / {item.NativeName.ToCapital()}";
 		using var icon = (Bitmap)Properties.Resources.ResourceManager.GetObject("Lang_" + item.IetfLanguageTag.ToUpper(), Properties.Resources.Culture);
 
 		if (icon != null)
 		{
-			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
+			var iconSize = Math.Min(48, (int)(16 * UI.UIScale));
 
-			var textSize = (int)e.Graphics.Measure(text, Font).Height;
-			var textRect = new Rectangle(rectangle.X + icon.Width + Padding.Left, rectangle.Y + ((rectangle.Height - textSize) / 2), 0, textSize);
+			e.Graphics.DrawImage(icon, rectangle.Pad(Padding).Align(new Size(iconSize, iconSize), ContentAlignment.MiddleLeft));
+
+			var textHeight = (int)e.Graphics.Measure(" ", Font).Height + 1;
+			var text1 = (item.Parent.EnglishName, Regex.Match(item.EnglishName, @"\((.+?)\)").Groups[1].Value);
+			var text2 = (item.Parent.NativeName, Regex.Match(item.NativeName, @"\((.+?)\)").Groups[1].Value);
+			var textRect = rectangle.Pad( iconSize + Padding.Horizontal, -Padding.Top, Padding.Right, -Padding.Bottom);
+			var textRect1 = textRect.Align(new Size(textRect.Width, textHeight), ContentAlignment.TopLeft);
+			var textRect2 = textRect.Align(new Size(textRect.Width, textHeight), ContentAlignment.BottomLeft);
 
 			textRect.Width = rectangle.Width - textRect.X;
 
-			e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), textRect, new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+			e.Graphics.DrawString(text1.EnglishName, Font, new SolidBrush(foreColor), textRect1, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+			e.Graphics.DrawString(text2.NativeName, Font, new SolidBrush(foreColor), textRect2, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+			e.Graphics.DrawString(" / " + text1.Value, Font, new SolidBrush(Color.FromArgb(175,foreColor)), textRect1, new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter });
+			e.Graphics.DrawString(" / " + text2.Value, Font, new SolidBrush(Color.FromArgb(175,foreColor)), textRect2, new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter });
 		}
 	}
 }

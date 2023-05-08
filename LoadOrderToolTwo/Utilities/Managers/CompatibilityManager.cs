@@ -157,7 +157,7 @@ public static class CompatibilityManager
 
 		var text = interaction.Type switch
 		{
-			InteractionType.Successor => Locale.CR_SuccessorsAvailable,
+			InteractionType.Successor => Locale.CR_SuccessorsAvailable.ToString(),
 			_ => string.Empty
 		};
 

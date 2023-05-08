@@ -221,12 +221,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
+				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
 			}
 
 			if (rects.EnabledRect.Contains(location))
 			{
-				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToLower())}", rects.EnabledRect);
+				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}", rects.EnabledRect);
 			}
 
 			if (rects.VersionRect.Contains(location))
@@ -240,7 +240,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				if (item.Item.Package != null)
 				{
-					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
+					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
 				}
 				else
 				{
@@ -267,7 +267,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 			else
 			{
-				setTip(item.Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToLower()), rects.DownloadStatusRect);
+				setTip(item.Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower()), rects.DownloadStatusRect);
 			}
 		}
 
