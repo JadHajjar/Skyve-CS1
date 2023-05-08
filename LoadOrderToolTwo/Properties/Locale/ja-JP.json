@@ -351,7 +351,7 @@
   "FilterByThisAuthor": "作者でフィルタ",
   "AddToSearch": "検索に「 {0} 」を追加",
   "CopyToClipboard": "クリップボードに「 {0} 」をコピー",
-  "ViewPackageCR": "パッケージのCompatibility Reportを表示",
+  "ViewPackageCR": "View this package's compatibility info",
   "FilterByThisEnabledStatus": "「有効」ステータスでフィルタ",
   "FilterByThisIncludedStatus": "「含める」ステータスでフィルタ",
   "CleanupInfo": "クイッククリーンアップを強制的に実行して、既にサブスクしていないパッケージをPCから削除・サブスク中で不足したパッケージを再DLします。",
