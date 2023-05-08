@@ -71,7 +71,6 @@
   "LoadCollection": "Kuormituskokoelma",
   "CollectionTitle": "Työpajakokoelmat",
   "HelpLogs": "Apu ja lokit",
-  "CrNotAvailable": "Yhteensopivuusraportti ei ole käytettävissä, napsauta tätä tilataksesi modin",
   "ModsWithMinorIssues": "Modit, joilla on pieniä kysymyksiä",
   "ModsWithMajorIssues": "Modit, joilla on suuria kysymyksiä",
   "ModsShouldUnsub": "modit, joita tulisi peruuttaa",
