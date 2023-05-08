@@ -2713,9 +2713,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_EN_UK {
+        internal static System.Drawing.Bitmap Lang_EN_GB {
             get {
-                object obj = ResourceManager.GetObject("Lang_EN-UK", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_EN-GB", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

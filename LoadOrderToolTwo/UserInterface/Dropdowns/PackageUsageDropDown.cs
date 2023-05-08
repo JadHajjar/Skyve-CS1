@@ -25,6 +25,13 @@ internal class PackageUsageDropDown : SlickSelectionDropDown<PackageUsage>
 		}
 	}
 
+	protected override void UIChanged()
+	{
+		base.UIChanged();
+
+		Width = (int)(200 * UI.FontScale);
+	}
+
 	protected override bool SearchMatch(string searchText, PackageUsage item)
 	{
 		var text = LocaleHelper.GetGlobalText($"CR_{item}");

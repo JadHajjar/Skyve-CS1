@@ -74,6 +74,7 @@ internal static class Program
 			}
 
 			SlickCursors.Initialize();
+			LocaleSlickUI.Load();
 
 			if (OSVersion.Version.Major == 6)
 			{

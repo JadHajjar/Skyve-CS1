@@ -54,8 +54,14 @@ public partial class PC_CompatibilityManagement : PanelContent
 		P_Main.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
 
-		slickTextBox1.MinimumSize = UI.Scale(new Size(275, 200), UI.FontScale);
-		packageStabilityDropDown1.Width = packageUsageDropDown1.Width = slickTextBox1.MinimumSize.Width;
+		foreach (Control control in TLP_MainInfo.Controls)
+		{
+			control.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		}
+
+		slickTextBox1.MinimumSize = UI.Scale(new Size(275, 100), UI.FontScale);
+		P_Tags.Size = UI.Scale(new Size(275, 100), UI.FontScale);
+		P_Links.Size = UI.Scale(new Size(275, 100), UI.FontScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -63,6 +69,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		base.DesignChanged(design);
 
 		P_Main.BackColor = design.AccentBackColor;
+		P_Tags.BackColor = P_Links.BackColor = design.BackColor;
 	}
 
 	public override bool CanExit(bool toBeDisposed)
@@ -87,6 +94,12 @@ public partial class PC_CompatibilityManagement : PanelContent
 	protected override void OnDataLoad()
 	{
 		SetPackage(_packages.Count - 1);
+	}
+
+	protected override void OnLoadFail()
+	{
+		ShowPrompt("Failed to load data, try again later", PromptButtons.OK, PromptIcons.Error);
+		Form.PushBack();
 	}
 
 	private void SetPackage(int page)

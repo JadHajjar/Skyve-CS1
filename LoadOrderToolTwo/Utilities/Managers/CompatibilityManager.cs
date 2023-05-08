@@ -122,7 +122,7 @@ public static class CompatibilityManager
 
 		if (packageData is null)
 		{
-			info.Add(ReportType.Stability, new PackageStatus { Type = StatusType.NotReviewed }, Locale.CR_NotReviewedOutdated);
+			info.Add(ReportType.Stability, new PackageStatus { Type = StatusType.NotReviewed }, LocaleCR.CR_NotReviewedOutdated);
 
 			return info;
 		}
@@ -157,7 +157,7 @@ public static class CompatibilityManager
 
 		var text = interaction.Type switch
 		{
-			InteractionType.Successor => Locale.CR_SuccessorsAvailable.ToString(),
+			InteractionType.Successor => LocaleCR.CR_SuccessorsAvailable.ToString(),
 			_ => string.Empty
 		};
 
@@ -197,14 +197,14 @@ public static class CompatibilityManager
 				info.Add(
 					ReportType.Stability,
 					new PackageStatus { Action = InteractionAction.Unsubscribe, Type = StatusType.Deprecated },
-					Locale.CR_Abandoned);
+					LocaleCR.CR_Abandoned);
 			}
 			else if (tag.ToLower() is "alpha" or "experimental" or "beta" or "test" or "testing" && !(packageData?.Statuses.ContainsKey(StatusType.TestVersion) ?? false))
 			{
 				info.Add(
 					ReportType.Stability,
 					new PackageStatus { Type = StatusType.TestVersion },
-					Locale.CR_TestVersion);
+					LocaleCR.CR_TestVersion);
 			}
 		}
 
@@ -215,7 +215,7 @@ public static class CompatibilityManager
 			info.Add(
 				ReportType.Status,
 				new PackageStatus { Type = StatusType.MusicCanBeCopyrighted },
-				Locale.CR_MusicCopyright);
+				LocaleCR.CR_MusicCopyright);
 		}
 
 		if (package.SteamDescription is not null && !(packageData?.Package.Links?.Any() ?? false))
@@ -246,12 +246,12 @@ public static class CompatibilityManager
 
 		if (package.IsMod && !(packageData?.Statuses.ContainsKey(StatusType.SourceCodeAvailable) ?? false) && !info.Links.Any(x => x.Type is LinkType.Github))
 		{
-			info.Add(ReportType.Status, new PackageStatus { Type = StatusType.SourceCodeNotAvailable }, Locale.CR_SourceNotPublic);
+			info.Add(ReportType.Status, new PackageStatus { Type = StatusType.SourceCodeNotAvailable }, LocaleCR.CR_SourceNotPublic);
 		}
 
 		if (package.IsMod && package.SteamDescription is not null && package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3)
 		{
-			info.Add(ReportType.Status, new PackageStatus { Type = StatusType.IncompleteDescription }, Locale.CR_SourceNotPublic);
+			info.Add(ReportType.Status, new PackageStatus { Type = StatusType.IncompleteDescription }, LocaleCR.CR_SourceNotPublic);
 		}
 
 		return info;

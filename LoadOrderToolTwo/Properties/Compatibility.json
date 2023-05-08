@@ -17,7 +17,6 @@
   "CR_UserReportsWithNote": "Users are reporting issues with this mod.",
   "CR_NotEnoughInformationUpdated": "There is not enough information about this mod to know if it works well, though it is updated for the current game version.",
   "CR_NotEnoughInformationOutdated": "There is not enough information about this mod to know if it works well and it is not up-to-date for the current game version.",
-  "CR_Stable": "This mod is stable and compatible with the current game version.",
   "CR_NotReviewedUpdated": "This mod has not been reviewed yet, though it is updated for the current game version.",
   "CR_NotReviewedOutdated": "This mod has not been reviewed yet and is not up-to-date with the current game version.",
   "CR_NotInCatalogMod": "This mod has not been reviewed, use it at your own risk.",
@@ -71,5 +70,14 @@
   "CRT_Status": "Status",
   "CRT_Recommendations": "Recommendations",
   "CRT_Note": "Note",
-  "CR_IncompatibleAsset": "The asset '{0}' in this package is known to cause these issues."
+  "CR_IncompatibleAsset": "The asset '{0}' in this package is known to cause these issues.",
+  "CR_Stable": "Package is stable",
+  "CR_NotEnoughInformation": "Not enough information",
+  "CR_HasIssues": "Package has issues",
+  "CR_Broken": "Package is broken",
+  "CR_CityBuilding": "City Building",
+  "CR_AssetCreation": "Asset Creation",
+  "CR_MapCreation": "Map Making",
+  "Usage": "Usage",
+  "Stability": "Stability"
 }

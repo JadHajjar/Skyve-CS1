@@ -26,6 +26,13 @@ internal class PackageStabilityDropDown : SlickSelectionDropDown<PackageStabilit
 		}
 	}
 
+	protected override void UIChanged()
+	{
+		base.UIChanged();
+
+		Width = (int)(200 * UI.FontScale);
+	}
+
 	protected override bool SearchMatch(string searchText, PackageStability item)
 	{
 		var text = LocaleHelper.GetGlobalText($"CR_{item}");

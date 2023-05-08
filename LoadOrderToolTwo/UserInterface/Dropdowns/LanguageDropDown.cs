@@ -10,8 +10,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-using static LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle;
-
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
 internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 {
@@ -27,8 +25,8 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 
 	protected override void UIChanged()
 	{
-		Font = UI.Font("Segoe UI", 7.5F);
-		Padding = UI.Scale(new Padding(3), UI.FontScale);
+		Font = UI.Font("Segoe UI", 8.25F);
+		Padding = UI.Scale(new Padding(5), UI.FontScale);
 	}
 
 	protected override void OnSizeChanged(EventArgs e)
@@ -40,7 +38,7 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 
 	protected override IEnumerable<DrawableItem<CultureInfo>> OrderItems(IEnumerable<DrawableItem<CultureInfo>> items)
 	{
-		return items.OrderByDescending(x => x.Item.IetfLanguageTag == "en").ThenBy(x => x.Item.EnglishName);
+		return items.OrderByDescending(x => x.Item.IetfLanguageTag == "en-US").ThenBy(x => x.Item.EnglishName);
 	}
 
 	protected override bool SearchMatch(string searchText, CultureInfo item)
@@ -63,20 +61,18 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 
 			e.Graphics.DrawImage(icon, rectangle.Pad(Padding).Align(new Size(iconSize, iconSize), ContentAlignment.MiddleLeft));
 
-			var textHeight = (int)e.Graphics.Measure(" ", Font).Height + 1;
-			var text1 = (item.Parent.EnglishName, Regex.Match(item.EnglishName, @"\((.+?)\)").Groups[1].Value);
-			var text2 = (item.Parent.NativeName, Regex.Match(item.NativeName, @"\((.+?)\)").Groups[1].Value);
-			var textRect = rectangle.Pad( iconSize + Padding.Horizontal, -Padding.Top, Padding.Right, -Padding.Bottom);
-			var textRect1 = textRect.Align(new Size(textRect.Width, textHeight), ContentAlignment.TopLeft);
-			var textRect2 = textRect.Align(new Size(textRect.Width, textHeight), ContentAlignment.BottomLeft);
+			var text = hoverState.HasFlag(HoverState.Hovered) ? (item.NativeName.RegexRemove(@"\((.+?)\)").Trim().UpperFirstLetter(), Regex.Match(item.NativeName, @"\((.+?)\)").Groups[1].Value) : (item.EnglishName.RegexRemove(@"\((.+?)\)").Trim(), Regex.Match(item.EnglishName, @"\((.+?)\)").Groups[1].Value);
+			var textSize1 = Size.Ceiling(e.Graphics.Measure(text.Item1, Font));
+			var textSize2 = Size.Ceiling(e.Graphics.Measure(" / " + text.Value, UI.Font(7F)));
+			var textRect = rectangle.Pad(iconSize + Padding.Horizontal, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -1 : (-Padding.Top + 1), Padding.Right * 3 / 2, (int)(ItemHeight * UI.FontScale) + 1 != rectangle.Height ? -3 : (-Padding.Bottom + 1));
+			var textRect1 = textRect.Align(new Size(textRect.Width, textSize1.Height), textSize1.Width + textSize2.Width > textRect.Width ? ContentAlignment.TopCenter : ContentAlignment.MiddleCenter);
+			var textRect2 = textRect.Align(new Size(textRect.Width, textSize2.Height), textSize1.Width + textSize2.Width > textRect.Width ? ContentAlignment.BottomCenter : ContentAlignment.MiddleCenter);
 
 			textRect.Width = rectangle.Width - textRect.X;
 
-			e.Graphics.DrawString(text1.EnglishName, Font, new SolidBrush(foreColor), textRect1, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
-			e.Graphics.DrawString(text2.NativeName, Font, new SolidBrush(foreColor), textRect2, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+			e.Graphics.DrawString(text.Item1, Font, new SolidBrush(foreColor), textRect1, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-			e.Graphics.DrawString(" / " + text1.Value, Font, new SolidBrush(Color.FromArgb(175,foreColor)), textRect1, new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter });
-			e.Graphics.DrawString(" / " + text2.Value, Font, new SolidBrush(Color.FromArgb(175,foreColor)), textRect2, new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter });
+			e.Graphics.DrawString(" / " + text.Value, UI.Font(7F), new SolidBrush(Color.FromArgb(175, foreColor)), textRect2, new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter });
 		}
 	}
 }

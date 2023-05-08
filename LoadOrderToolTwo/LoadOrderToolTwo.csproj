@@ -132,6 +132,11 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\Compatibility\" />
+	  <Folder Include="Properties\SlickUI\" />
+	</ItemGroup>
 	
 	<PropertyGroup>
 		<DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\Tool\</DeployDir>

@@ -33,6 +33,8 @@ public partial class PC_CompatibilityReport : PanelContent
 		return true;
 	}
 
+	protected override void OnLoadFail() => OnDataLoad();
+
 	protected override void OnDataLoad()
 	{
 		B_Manage.Visible = isManager;

@@ -66,7 +66,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 		if (Report == null)
 		{
-			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Note, new Domain.Compatibility.ReportMessage { Type = ReportType.Note, Message = Locale.CR_NoAvailableReport }));
+			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Note, new Domain.Compatibility.ReportMessage { Type = ReportType.Note, Message = LocaleCR.CR_NoAvailableReport }));
 			return;
 		}
 
