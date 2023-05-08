@@ -384,5 +384,6 @@
   "AssetsWithMajorIssues": "중대한 문제가 있는 에셋",
   "AssetsShouldUnsub": "구독 취소가 필요한 에셋",
   "LoadNewAsset": "새 에셋 (에디터)",
-  "LoadLoadAsset": "에셋 불러오기 (에디터)"
+  "LoadLoadAsset": "에셋 불러오기 (에디터)",
+  "Profiles": "프로필"
 }
