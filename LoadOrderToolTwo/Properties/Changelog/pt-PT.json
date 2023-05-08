@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Novo",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Adicionada opção para desativar a limpeza automática ao iniciar o jogo.",
+                    "Adicionada uma caixa de argumentos personalizados para configurações avançadas de inicialização."
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Ícone de Voto & Assinantes",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Adicionado um novo ícone ao lado de um pacote que exibe um resumo rápido dos votos e da contagem de assinantes do pacote.",
+                    "Passe o mouse para exibir os valores.",
+                    "Clique no ícone para uma descrição detalhada dessa funcionalidade.",
+                    "Adicionadas 2 opções de ordenação 'Votos' & 'Total de Assinantes'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Requisitos do recurso",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Os itens necessários disponíveis na página de um recurso da Oficina agora estão integrados ao LOT.",
+                    "Esta informação agora será incluída no Relatório de Compatibilidade para ver fácil e rapidamente o que está faltando."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Outras Alterações",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Página de Pacote atualizada para corresponder às informações exibidas nas listas de conteúdo.",
+                    "Lista de conteúdo secundário como 'Pacotes faltando' e 'Coleção na Oficina' agora usam a mesma interface das páginas de lista de conteúdos principais, permitindo uma experiência simplificada e mais opções.",
+                    "Adicionadas opções de inicialização de 'Novo Recurso' e 'Carregar Recurso' no perfil para carregar rapidamente no Editor de Recursos."
                 ]
             }
         ]
