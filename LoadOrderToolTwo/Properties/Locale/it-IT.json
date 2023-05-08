@@ -384,5 +384,6 @@
   "AssetsWithMajorIssues": "risorse con problemi importanti",
   "AssetsShouldUnsub": "risorse di cui si dovrebbe annullare l'iscrizione",
   "LoadNewAsset": "Nuova risorsa (Editor)",
-  "LoadLoadAsset": "Carica risorsa (Editor)"
+  "LoadLoadAsset": "Carica risorsa (Editor)",
+  "Profiles": "Profili"
 }
