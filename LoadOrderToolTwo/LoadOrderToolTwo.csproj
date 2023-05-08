@@ -32,14 +32,12 @@
     <Compile Remove="Utilities\Managers\CompatibilityManager - Copy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Properties\Changelog.json" />
-    <None Remove="Properties\Changelog\*" />
-    <None Remove="Properties\Locale.csv" />
+    <None Remove="Properties\*.json" />
+    <None Remove="Properties\*\*.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Changelog.json" />
-    <EmbeddedResource Include="Properties\Changelog\*" />
-    <EmbeddedResource Include="Properties\Locale.csv" />
+    <EmbeddedResource Include="Properties\*.json" />
+    <EmbeddedResource Include="Properties\*\*.json" />
   </ItemGroup>
 
   <ItemGroup>
