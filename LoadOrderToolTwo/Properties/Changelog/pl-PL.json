@@ -1,0 +1,296 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Witamy w erze zmian",
+        "ChangeGroups": [
+            {
+                "Name": "Nowy",
+                "Changes": [
+                    "Dodano przycisk \"Wypisz wszystkie\" w działaniach na stronie treści.",
+                    "Dodano sekcję usług użyteczności publicznej, aby subskrybować brakujące elementy w konfiguracji BOB.",
+                    "Dodano opcję, aby filtry i sekcje akcji były domyślnie otwarte.",
+                    "Dodano strony dziennika zmian, zobaczysz je na nowych wersjach lub za pomocą przycisku w sekcjach pomocy."
+                ]
+            },
+            {
+                "Name": "Ulepszenia",
+                "Changes": [
+                    "Dodano raport zgodności dla uszkodzonych aktywów",
+                    "Niewymienione pakiety mają teraz poprawną nazwę i miniaturę.",
+                    "Umiejscowienia dla ustawień folderu teraz poprawnie odzwierciedlają system operacyjny.",
+                    "Ctrl+Kliknij na imię autora, aby dodać je do filtru"
+                ]
+            },
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawione dotychczasowe profile nie są konwertowane po pierwszym uruchomieniu.",
+                    "Środki trwałe nie odświeżają się automatycznie po zmianach zewnętrznych.",
+                    "Naprawiono usunięcie lokalnych zasobów z menu prawym przyciskiem myszy, usuwając wszystkie lokalne zasoby zamiast tylko jednego.",
+                    "Stała konwersja profili LOT 1 skutkująca oznaczeniem aktywów jako \"Lokalnych\"",
+                    "Naprawiono foldery 'Real' zamieniane na zapis dla użytkowników Linux i Mac.",
+                    "Naprawieni użytkownicy systemu Linux i Mac, którzy nie są w stanie wygenerować pliku zip."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Dodano sekcję Pomoc i Logi",
+                "Changes": [
+                    "Łatwy dostęp do swoich wpisów.",
+                    "Szybko wyświetl błędy w ostatniej lub bieżącej sesji gry.",
+                    "Uprość plik dziennika, aby skoncentrować się na tym, co faktycznie się dzieje.",
+                    "Udostępnij plik zip zawierający wszystkie logi potrzebne komuś aby Ci pomóc."
+                ]
+            },
+            {
+                "Name": "Ulepszenia",
+                "Changes": [
+                    "Zmieniono ikony filtrów w celu odzwierciedlenia poprawnych ikon używanych na liście."
+                ]
+            },
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawiono tekst w kolekcji importu dla subskrypcji i anulowania subskrypcji.",
+                    "Naprawiono wybór mapy dla nowej gry, nie pozwalając użytkownikom wybrać mapę wanilii."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawiono błąd, który spowodował nieskończone ładowanie dla niektórych użytkowników."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Zmiany",
+                "Changes": [
+                    "Usunięto zakładkę subskrypcji z opcji modyfikacji w grze.",
+                    "Ustalone DLC nie są stosowane podczas ładowania profilu.",
+                    "Naprawiono opcję języka jako pustą dla niektórych osób.",
+                    "Ponowne pobieranie z pary nie spowoduje już wymuszenia skoncentrowania się na narzędziu.",
+                    "Inne zmiany interfejsu użytkownika."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Zmiany",
+                "Changes": [
+                    "Dodawanie wyskakujących informacji podczas pierwszej subskrypcji elementów.",
+                    "Dodano tekst ostrzeżenia w kokpicie menedżerskim, gdy masz zainstalowane wiele instancji LOM.",
+                    "Dodano małe tagi obok tytułów pakietów.",
+                    "Ponowne pobieranie narzędzia do ładowania zamówień rozpocznie pobieranie i zamknie aplikację, gdy zostanie ona zaktualizowana.",
+                    "Naprawiono i poprawiono szybkość raportów o modyfikacji ekranu."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Publiczne wydanie Beta",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Prezentacja, przegląd profilu",
+        "ChangeGroups": [
+            {
+                "Name": "Zmiany profilu",
+                "Changes": [
+                    "Zmieniono wygląd Twojej listy profilowej.",
+                    "Ulubione profile są teraz wyświetlane na Twoim pulpicie menedżerskim, aby umożliwić łatwe przełączanie się między nimi.",
+                    "Dodano sekcję \"Inne profile\" na stronie pakietu, aby łatwo wykluczyć lub uwzględnić je z innych profili",
+                    "Dodano nowe opcje sortowania profilu. Wybrane sortowanie będzie teraz zapamiętane podczas sesji.",
+                    "Dodano akcje prawym przyciskiem myszy na liście treści, aby wykluczyć lub włączyć element do wszystkich pakietów.",
+                    "Dodano przycisk, aby wyświetlić plik profilu na komputerze.",
+                    "Możesz teraz przypisać kolor do profili.",
+                    "Możesz teraz utworzyć skrót na pulpicie dla profili.",
+                    "Teraz możesz zaimportować profil LOT 1 w sekcji 'Dodaj profil'."
+                ]
+            },
+            {
+                "Name": "Ulepszenia",
+                "Changes": [
+                    "Łącza Steam zostaną teraz otwarte wewnątrz okna Steam. Można je wyłączyć w Opcjach.",
+                    "Lokalne zasoby są teraz poprawnie pogrupowane na podstawie folderów, w których się znajdują.",
+                    "Panel Twojego konta Paradoksa będzie zawsze wyświetlany od teraz.",
+                    "Przyciski okna na górze mają teraz ikony, aby wyjaśnić ich akcje.",
+                    "Poprawiono zdolność reagowania stron z listą treści.",
+                    "Wyszukiwanie na stronach listy treści jest teraz znacznie szybsze.",
+                    "Ładowanie moda jest teraz w pamięci podręcznej, co prowadzi do bardziej wydajnych obciążeń na Windows i Linux, a także znacznie szybszych ładunków na macOS.",
+                    "Możesz teraz wygenerować plik zip z logów, gdy gra jest uruchomiona."
+                ]
+            },
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawiono zamrożenie na stronach listy treści.",
+                    "Naprawione automatyczne zapisywanie profili nie działa poprawnie.",
+                    "Naprawiono niemożność korzystania z map i gier w Warsztacie w ustawieniach profilu",
+                    "Naprawione niestandardowe mapy nie wczytywane po wybraniu ustawień profilu.",
+                    "Naprawiono wczytywanie profili na macOS i Linux nie zawsze poprawnie.",
+                    "Posiadanie niestandardowej lokalizacji dla plików raportu LSMR zacznie się od tego miejsca po wybraniu pliku raportu na stronie Narzędzia."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nowe i ulepszone",
+                "Changes": [
+                    "Dodano do strony Utilities import z dowolnego pliku tekstowego lub ze schowka.",
+                    "Import BOB jest teraz ogólnym importem XML, wspierając każdy format XML, który zawiera ID pakietu."
+                ]
+            },
+            {
+                "Name": "Naprawa",
+                "Changes": [
+                    "Naprawiono ładowanie adresu URL kolekcji czasami nie analizuje poprawnie identyfikatora.",
+                    "Naprawione LOT staje się niereagujący na Mac/Linux podczas anulowania subskrypcji pakietu."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Aktualizacja wiosennego czyszczenia",
+        "ChangeGroups": [
+            {
+                "Name": "Filtruj i wyszukaj zmiany",
+                "Changes": [
+                    "Dodano listę filtrów nowego autora.",
+                    "Dodano więcej akcji do etykiet na listach treści.",
+                    "Dodano nową opcję \"Wszelkie problemy\" dla listy rozwijanej \"Status pakietu\" i \"Raport zgodności\".",
+                    "Wszystkie akcje filtrowania są teraz wykonywane za pomocą Ctrl+Click, dodał opcję zamiany tej funkcji.",
+                    "Ponowne filtrowanie za pomocą skrótów na liście usuwa element z filtra.",
+                    "Oddzielenie wyrażeń przecinkiem w wyszukiwaniu podzieli Twoje wyszukiwanie, aby dopasować dowolne wyrazy (OR)\r\n\t• Dodanie '+' na początku Twojego wyrażenia będzie wymagało dopasowania wyrażeń (AND)\r\n\t• Dodanie '-' na początku Twojego wyrażenia wykluczy elementy, które pasują do tego terminu\r\n\r\nPrzykłady nowego wyszukiwania:\r\n\t• samochód, samochód ciężarowy (pasujący do „samochodu” LUB „ciężarówki”)\r\n\t• budowa, mieszkanie +europejskie (pasujące do „europejskiej” ORAZ [„budownictwo” LUB „mieszkanie”])\r\n\t• kondo, dom -rico + american (pasuje do 'amerykan' ORAZ ['condo' LUB 'dom'] ORAZ NIE 'rico')"
+                ]
+            },
+            {
+                "Name": "Zmiany interfejsu użytkownika i UX",
+                "Changes": [
+                    "Zaimplementowano nowy system ikon, który skaluje wszystkie ikony odpowiednio do Twojej skali UI.",
+                    "Nastąpiła radykalna rewizja wykazów, poprawiając wydajność i reagowanie stron treści.",
+                    "Dodano przełącznik kolejności sortowania, aby wybrać pomiędzy sortowaniem rosnąco i malejącym.",
+                    "Przenieś sekcję \"Akcje\" na stronach treści i dodano 2 nowe opcje.",
+                    "Częściowo zawarte pakiety mają teraz inny interfejs użytkownika na liście.",
+                    "Ulepszono przyciski i ustawienia filtrów na listach treści, zmniejszając ich ogólny rozmiar i dodając więcej optycznych.",
+                    "Zmieniono opcję, aby zwiększyć rozmiar elementów listy po najechaniu po najechaniu, aby zawsze zwiększyć ich rozmiar, ulepszył interfejs elementów rozszerzonej listy i zastosował tę funkcję do pozostałych list w aplikacji.",
+                    "Dodano skrót Ctrl+[0-9] do przełączania pomiędzy dostępnymi kartami.",
+                    "Zamień wszystkie podwójne przyciski i strony przełącznika.",
+                    "Animacje są teraz domyślnie wyłączone na macOS i Linux.",
+                    "Tak wiele ulepszeń, zmian i napraw, które przegrałem."
+                ]
+            },
+            {
+                "Name": "Odwołanie wyboru pliku",
+                "Changes": [
+                    "Zaktualizowano interfejs ekranu wyboru plików.",
+                    "Dodano przypięte foldery do łatwego dostępu do odpowiednich folderów.",
+                    "Dodano sekcję Warsztatu, aby łatwo wybrać mapy warsztatów i zapisy.",
+                    "Dodano menu sortowania i sortowania",
+                    "Dodano przełącznik widoku listy/siatki."
+                ]
+            },
+            {
+                "Name": "Poprawki błędów",
+                "Changes": [
+                    "Naprawiono uruchomienie LOT po wyłączeniu monitora, co spowodowało pojawienie się okna.",
+                    "Naprawiono opcję LHT nie działającą podczas uruchamiania do nowej mapy.",
+                    "Naprawione strony autora nie otwierają się poprawnie w Steam.",
+                    "Naprawiono zamrożenie podczas wyszukiwania podczas sortowania 'Subskrypcja'."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Workshop Packages Cleanup",
+                "Changes": [
+                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
+                    "Packages you are not subscribed to are no longer loaded in-game.",
+                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
+                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added an option to disable the automatic cleanup when opening the game.",
+                    "Added a custom arguments box for advanced launch settings."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Vote & Subscribers Icon",
+                "Changes": [
+                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
+                    "Hover over it to display the values.",
+                    "Click on the icon for an in-depth description of this feature.",
+                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                ]
+            },
+            {
+                "Name": "Asset Requirements",
+                "Changes": [
+                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
+                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                ]
+            },
+            {
+                "Name": "Other Changes",
+                "Changes": [
+                    "Updated the Package Page to match the displayed information in the content lists.",
+                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
+                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                ]
+            }
+        ]
+    }
+]
