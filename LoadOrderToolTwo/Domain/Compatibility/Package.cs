@@ -24,7 +24,7 @@ public class Package : IDynamicSql
 	[DynamicSqlProperty]
 	public PackageStability Stability { get; set; }
 	[DynamicSqlProperty]
-	public PackageUsage Usage { get; set; }
+	public PackageUsage Usage { get; set; } = (PackageUsage)(-1);
 	public List<string>? Tags { get; set; }
 	public List<PackageLink>? Links { get; set; }
 	public List<PackageStatus>? Statuses { get; set; }

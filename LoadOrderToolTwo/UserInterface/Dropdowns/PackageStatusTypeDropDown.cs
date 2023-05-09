@@ -30,19 +30,19 @@ internal class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T 
 	{
 		base.UIChanged();
 
-		Width = (int)(150 * UI.FontScale);
+		Width = (int)(175 * UI.FontScale);
 	}
 
 	protected override bool SearchMatch(string searchText, T item)
 	{
-		var text = LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = LocaleCR.Get($"{item}");
 
 		return searchText.SearchCheck(text);
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, T item)
 	{
-		var text = LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = LocaleCR.Get($"{item}");
 		var color = CRNAttribute.GetNotification(item).GetColor();
 
 		using var icon = IconManager.GetIcon("I_Stability", rectangle.Height - 2).Color(color);

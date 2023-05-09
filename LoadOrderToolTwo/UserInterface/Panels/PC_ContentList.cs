@@ -419,7 +419,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (CentralManager.CurrentProfile.ForAssetEditor)
 		{
-			if (item.Package?.ForNormalGame == true)
+			if (!(item.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1)).HasFlag(PackageUsage.AssetCreation))
 			{
 				return true;
 			}
@@ -427,7 +427,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (CentralManager.CurrentProfile.ForGameplay)
 		{
-			if (item.Package?.ForAssetEditor == true)
+			if (!(item.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1)).HasFlag(PackageUsage.CityBuilding))
 			{
 				return true;
 			}

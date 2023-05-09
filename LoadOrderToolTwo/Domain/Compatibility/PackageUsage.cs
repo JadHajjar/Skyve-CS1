@@ -1,8 +1,11 @@
-﻿namespace LoadOrderToolTwo.Domain.Compatibility;
+﻿using System;
 
+namespace LoadOrderToolTwo.Domain.Compatibility;
+
+[Flags]
 public enum PackageUsage
 {
-	CityBuilding,
-	AssetCreation,
-	MapCreation
+	CityBuilding = 1 << 0,
+	AssetCreation = 1 << 1,
+	MapCreation = 1 << 2,
 }

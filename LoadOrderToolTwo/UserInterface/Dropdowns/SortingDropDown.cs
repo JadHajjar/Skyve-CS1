@@ -19,7 +19,7 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => x != PackageSorting.Mod).ToArray();
+			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => x < PackageSorting.Mod).ToArray();
 			selectedItem = CentralManager.SessionSettings.UserSettings.PackageSorting;
 		}
 	}

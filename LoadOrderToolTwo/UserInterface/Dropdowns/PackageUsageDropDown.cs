@@ -1,11 +1,13 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,7 +15,7 @@ using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
 
-internal class PackageUsageDropDown : SlickSelectionDropDown<PackageUsage>
+internal class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -34,14 +36,26 @@ internal class PackageUsageDropDown : SlickSelectionDropDown<PackageUsage>
 
 	protected override bool SearchMatch(string searchText, PackageUsage item)
 	{
-		var text = LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = LocaleCR.Get($"{item}");
 
 		return searchText.SearchCheck(text);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageUsage item)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageUsage item, bool selected)
 	{
-		var text = LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = LocaleCR.Get($"{item}");
+
+		using var icon = IconManager.GetIcon("I_City", rectangle.Height - 2).Color(foreColor);
+
+		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
+
+		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+	}
+
+	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<PackageUsage> items)
+	{
+		var text = !items.Any() ? "Invalid" : items.Count() == Items.Length ? "All" : items.ListStrings(x => LocaleCR.Get($"{x}"), ", ");
 
 		using var icon = IconManager.GetIcon("I_City", rectangle.Height - 2).Color(foreColor);
 

@@ -1103,6 +1103,66 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Github_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Github_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Github_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Github_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Github_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Github_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Globe_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Globe_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Globe_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Globe_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Globe_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Globe_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Guide_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Guide_16", resourceCulture);
@@ -1916,6 +1976,36 @@ namespace LoadOrderToolTwo.Properties {
         internal static System.Drawing.Bitmap I_RemoveSteam_24 {
             get {
                 object obj = ResourceManager.GetObject("I_RemoveSteam_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Share_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Share_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Share_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Share_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Share_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Share_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

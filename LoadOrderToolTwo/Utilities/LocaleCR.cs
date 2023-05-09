@@ -10,6 +10,8 @@ internal class LocaleCR : LocaleHelper
 
 	protected LocaleCR() : base($"{nameof(LoadOrderToolTwo)}.Properties.Compatibility.json") { }
 
+	public static Translation Get(string value) => _instance.GetText(value);
+
 	public static Translation CR_NoAvailableReport => _instance.GetText(nameof(CR_NoAvailableReport));
 	public static Translation CR_IncompatibleWithGameVersion => _instance.GetText(nameof(CR_IncompatibleWithGameVersion));
 	public static Translation CR_RequiresIncompatibleMod => _instance.GetText(nameof(CR_RequiresIncompatibleMod));
@@ -67,4 +69,5 @@ internal class LocaleCR : LocaleHelper
 	public static Translation CR_SameFunctionalityCompatible => _instance.GetText(nameof(CR_SameFunctionalityCompatible));
 	public static Translation CR_CompatibleAccordingToAuthor => _instance.GetText(nameof(CR_CompatibleAccordingToAuthor));
 	public static Translation CR_IncompatibleAsset => _instance.GetText(nameof(CR_IncompatibleAsset));
+	public static Translation LinkedPackages => _instance.GetText(nameof(LinkedPackages));
 }

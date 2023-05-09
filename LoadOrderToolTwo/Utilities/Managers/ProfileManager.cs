@@ -824,15 +824,15 @@ public static class ProfileManager
 
 	internal static List<Package> GetInvalidPackages(bool gameplay, bool editor)
 	{
-		if (gameplay)
-		{
-			return new List<Package>(CentralManager.Packages.Where(x => x.IsIncluded && x.ForAssetEditor == true));
-		}
+		//if (gameplay)
+		//{
+		//	return new List<Package>(CentralManager.Packages.Where(x => x.IsIncluded && x.ForAssetEditor == true));
+		//}
 
-		if (editor)
-		{
-			return new List<Package>(CentralManager.Packages.Where(x => x.IsIncluded && x.ForNormalGame == true));
-		}
+		//if (editor)
+		//{
+		//	return new List<Package>(CentralManager.Packages.Where(x => x.IsIncluded && x.ForNormalGame == true));
+		//}
 
 		return new();
 	}

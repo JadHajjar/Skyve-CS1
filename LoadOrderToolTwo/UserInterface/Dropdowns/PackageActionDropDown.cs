@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -30,19 +31,19 @@ internal class PackageActionDropDown : SlickSelectionDropDown<InteractionAction>
 	{
 		base.UIChanged();
 
-		Width = (int)(150 * UI.FontScale);
+		Width = (int)(175 * UI.FontScale);
 	}
 
 	protected override bool SearchMatch(string searchText, InteractionAction item)
 	{
-		var text = LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = LocaleCR.Get($"{item}");
 
 		return searchText.SearchCheck(text);
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, InteractionAction item)
 	{
-		var text = LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = LocaleCR.Get($"{item}");
 		var color = CRNAttribute.GetNotification(item).GetColor();
 
 		using var icon = IconManager.GetIcon("I_Actions", rectangle.Height - 2).Color(color);

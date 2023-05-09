@@ -37,8 +37,8 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	protected override void OnDataLoad()
 	{
-		//B_Manage.Visible = isManager;
-		//B_YourPackages.Visible = hasPackages;
+		B_Manage.Visible = isManager;
+		B_YourPackages.Visible = hasPackages;
 
 		PB_Loading.Dispose();
 	}
@@ -60,7 +60,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void B_YourPackages_Click(object sender, EventArgs e)
 	{
-//		if (hasPackages)
+		if (hasPackages)
 		{
 			Form.PushPanel(null, new PC_CompatibilityManagement(userId));
 		}

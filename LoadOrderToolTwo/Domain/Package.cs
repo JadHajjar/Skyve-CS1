@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Steam;
@@ -43,8 +44,7 @@ public class Package : IPackage
 	public DownloadStatus Status { get; set; }
 	public string? StatusReason { get; set; }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
-	internal bool? ForAssetEditor => this.GetCompatibilityInfo().Data?.Package.Usage == Compatibility.PackageUsage.AssetCreation;
-	internal bool? ForNormalGame => this.GetCompatibilityInfo().Data?.Package.Usage == Compatibility.PackageUsage.CityBuilding;
+	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
 	public string? Name => WorkshopInfo?.Name;
 	public bool IsMod => Mod is not null || (WorkshopInfo?.IsMod ?? false);

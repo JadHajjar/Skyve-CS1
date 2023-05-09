@@ -3,6 +3,7 @@
 using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.Content;
+using LoadOrderToolTwo.UserInterface.Forms;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -14,6 +15,8 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_CompatibilityManagement : PanelContent
@@ -39,7 +42,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var package in CentralManager.Packages)
 		{
-			//if (package.Author?.SteamId == userId.ToString())
+			if (package.Author?.SteamId == userId.ToString())
 				_packages[package.SteamId] = package;
 		}
 
@@ -55,6 +58,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 		B_Skip.Margin = UI.Scale(new Padding(10, 5, 0, 0), UI.FontScale);
 		P_Main.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
+		I_Note.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		I_Note.Padding = UI.Scale(new Padding(5), UI.FontScale);
 
 		foreach (Control control in TLP_MainInfo.Controls)
 		{
@@ -62,10 +67,11 @@ public partial class PC_CompatibilityManagement : PanelContent
 		}
 
 		B_AddInteraction.Padding = B_AddStatus.Padding = UI.Scale(new Padding(15), UI.FontScale);
+		B_AddInteraction.Font = B_AddStatus.Font = UI.Font(9.75F);
+		B_AddInteraction.Margin = B_AddStatus.Margin = UI.Scale(new Padding(50,40,0,0), UI.UIScale);
 
-		slickTextBox1.MinimumSize = UI.Scale(new Size(275, 100), UI.FontScale);
-		P_Tags.Size = UI.Scale(new Size(275, 100), UI.FontScale);
-		P_Links.Size = UI.Scale(new Size(275, 100), UI.FontScale);
+		TB_Note.MinimumSize = UI.Scale(new Size(275, 100), UI.UIScale);
+		P_Tags.MinimumSize = P_Links.MinimumSize = UI.Scale(new Size(275, 00), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -78,7 +84,10 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	public override bool CanExit(bool toBeDisposed)
 	{
-		return !toBeDisposed || currentPage == _packages.Count - 1 || ShowPrompt("Are you sure you want to conclude your session?", PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
+		return !toBeDisposed
+			|| currentPage < 0 
+			|| currentPage >= _packages.Count
+			|| ShowPrompt("Are you sure you want to conclude your session?", PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -108,6 +117,12 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void SetPackage(int page)
 	{
+		if (page < 0 || page >= _packages.Count)
+		{
+			Form.PushBack();
+			return;
+		}
+
 		currentPage = page;
 		currentPackage = _packages.Values.OrderByDescending(x => x.ServerTime).ElementAt(page);
 
@@ -116,7 +131,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		PB_Icon.LoadImage(currentPackage.IconUrl, ImageManager.GetImage);
 		P_Info.SetPackage(currentPackage, null);
 
-		B_Skip.Enabled = currentPage != 0;
+		B_Skip.Enabled = currentPage > 0;
 		B_Previous.Enabled = currentPage != _packages.Count - 1;
 	}
 
@@ -150,6 +165,15 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void T_NewLink_Click(object sender, EventArgs e)
 	{
+		var form = new AddLinkForm(currentPackage?.GetCompatibilityInfo().Links ?? new());
+		
+		form.Show(Form);
+
+		form.LinksReturned += SetLinks;
+	}
+
+	private void SetLinks(IEnumerable<PackageLink> links)
+	{
 
 	}
 
@@ -167,5 +191,15 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		FLP_Interactions.Controls.Add(control);
 		B_AddInteraction.SendToBack();
+	}
+
+	private void B_Apply_Click(object sender, EventArgs e)
+	{
+		SetPackage(currentPage - 1);
+	}
+
+	private void I_Note_Click(object sender, EventArgs e)
+	{
+		TB_Note.Visible = I_Note.Selected = !I_Note.Selected;
 	}
 }

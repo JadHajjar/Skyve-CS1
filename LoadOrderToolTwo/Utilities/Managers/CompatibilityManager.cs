@@ -272,6 +272,19 @@ public static class CompatibilityManager
 		};
 	}
 
+	public static DynamicIcon GetIcon(this LinkType link)
+	{
+		return link switch
+		{
+			LinkType.Website => "I_Globe",
+			LinkType.Github => "I_Github",
+			LinkType.Crowdin => "I_Translate",
+			LinkType.Donation => "I_Donate",
+			LinkType.Discord => "I_Discord",
+			_ => "I_Share",
+		};
+	}
+
 	public static Color GetColor(this NotificationType notification)
 	{
 		return notification switch
