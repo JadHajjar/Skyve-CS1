@@ -3,7 +3,7 @@
 namespace LoadOrderToolTwo.Domain.Compatibility;
 
 [DynamicSqlClass("PackageStatuses")]
-public struct PackageStatus : IPackageStatus, IDynamicSql
+public struct PackageStatus : IPackageStatus<StatusType>, IDynamicSql
 {
 #if API
 	[DynamicSqlProperty(PrimaryKey = true, Indexer = true), System.Text.Json.Serialization.JsonIgnore]

@@ -20,6 +20,7 @@ internal class TagControl : SlickImageControl
 		if (Live)
 		{
 			AutoSize = true;
+			Cursor = Cursors.Hand;
 		}
 	}
 
@@ -45,24 +46,35 @@ internal class TagControl : SlickImageControl
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
-		e.Graphics.Clear(BackColor);
+		e.Graphics.SetUp(BackColor);
 
-		using var brush = new SolidBrush(FormDesign.Design.ButtonColor);
-		using var foreBrush = new SolidBrush(FormDesign.Design.ButtonForeColor);
+		SlickButton.GetColors(out var fore, out var back, HoverState, ImageName is null ? ColorStyle.Red : ColorStyle.Active);
+
+		using var brush = new SolidBrush(back);
+		using var foreBrush = new SolidBrush(fore);
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), Padding.Left);
 
-
 		if (ImageName is null)
 		{
-			e.Graphics.DrawString(Text, Font, foreBrush, ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+			if (HoverState.HasFlag(HoverState.Hovered))
+			{
+				using var delete = IconManager.GetIcon("I_Disposable");
+				e.Graphics.DrawImage(delete.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(delete.Size));
+			}
+			else
+			{
+				e.Graphics.DrawString(Text, Font, foreBrush, ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+			}
 		}
 		else if (Live)
 		{
 			using (Image)
 			{
-				e.Graphics.DrawImage(Image.Color(FormDesign.Design.ButtonForeColor), ClientSize.CenterR(Image.Size));
+				e.Graphics.DrawImage(Image.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(Image.Size));
 			}
 		}
+
+		DrawFocus(e.Graphics, ClientRectangle.Pad(1), Padding.Left, ImageName is null ? FormDesign.Design.RedColor : null);
 	}
 }

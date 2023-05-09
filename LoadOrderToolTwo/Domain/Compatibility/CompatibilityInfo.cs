@@ -1,5 +1,6 @@
 ﻿using LoadOrderToolTwo.Domain.Interfaces;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,7 @@ public class CompatibilityInfo
 		ReportMessages = new();
 	}
 
-	public void Add(ReportType type, IPackageStatus status, string message)
+	public void Add<TType>(ReportType type, IPackageStatus<TType> status, string message) where TType : struct, Enum
 	{
 		ReportMessages.Add(new ReportMessage
 		{

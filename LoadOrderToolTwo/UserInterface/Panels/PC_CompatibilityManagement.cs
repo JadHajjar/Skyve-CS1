@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.UserInterface.Content;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -37,7 +39,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var package in CentralManager.Packages)
 		{
-			if (package.Author?.SteamId == userId.ToString())
+			//if (package.Author?.SteamId == userId.ToString())
 				_packages[package.SteamId] = package;
 		}
 
@@ -58,6 +60,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 		{
 			control.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		}
+
+		B_AddInteraction.Padding = B_AddStatus.Padding = UI.Scale(new Padding(15), UI.FontScale);
 
 		slickTextBox1.MinimumSize = UI.Scale(new Size(275, 100), UI.FontScale);
 		P_Tags.Size = UI.Scale(new Size(275, 100), UI.FontScale);
@@ -124,5 +128,44 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private void B_Previous_Click(object sender, EventArgs e)
 	{
 		SetPackage(currentPage+1);
+	}
+
+	private void T_NewTag_Click(object sender, EventArgs e)
+	{
+		var prompt = ShowInputPrompt("Add a global tag");
+
+		if (prompt.DialogResult == DialogResult.OK)
+		{
+			var control = new TagControl { Text = prompt.Input };
+			control.Click += TagControl_Click;
+			P_Tags.Controls.Add(control);
+			T_NewTag.SendToBack();
+		}
+	}
+
+	private void TagControl_Click(object sender, EventArgs e)
+	{
+		(sender as Control)?.Dispose();
+	}
+
+	private void T_NewLink_Click(object sender, EventArgs e)
+	{
+
+	}
+
+	private void B_AddStatus_Click(object sender, EventArgs e)
+	{
+		var control = new IPackageStatusControl<StatusType>();
+
+		FLP_Statuses.Controls.Add(control);
+		B_AddStatus.SendToBack();
+	}
+
+	private void B_AddInteraction_Click(object sender, EventArgs e)
+	{
+		var control = new IPackageStatusControl<InteractionType>();
+
+		FLP_Interactions.Controls.Add(control);
+		B_AddInteraction.SendToBack();
 	}
 }

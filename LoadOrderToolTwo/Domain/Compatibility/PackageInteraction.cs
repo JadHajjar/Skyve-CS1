@@ -5,7 +5,7 @@ using System;
 namespace LoadOrderToolTwo.Domain.Compatibility;
 
 [DynamicSqlClass("PackageInteractions")]
-public struct PackageInteraction : IPackageStatus, IDynamicSql
+public struct PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 {
 #if API
 	[DynamicSqlProperty(PrimaryKey = true, Indexer = true), System.Text.Json.Serialization.JsonIgnore]

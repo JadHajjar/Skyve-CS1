@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
 
-internal class PackageStabilityDropDown : SlickSelectionDropDown<PackageStability>
+internal class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : struct, Enum
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -22,7 +22,7 @@ internal class PackageStabilityDropDown : SlickSelectionDropDown<PackageStabilit
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(PackageStability)).Cast<PackageStability>().Where(x => CRNAttribute.GetAttribute(x).Browsable).ToArray();
+			Items = Enum.GetValues(typeof(T)).Cast<T>().Where(x => CRNAttribute.GetAttribute(x).Browsable).ToArray();
 		}
 	}
 
@@ -30,17 +30,17 @@ internal class PackageStabilityDropDown : SlickSelectionDropDown<PackageStabilit
 	{
 		base.UIChanged();
 
-		Width = (int)(200 * UI.FontScale);
+		Width = (int)(150 * UI.FontScale);
 	}
 
-	protected override bool SearchMatch(string searchText, PackageStability item)
+	protected override bool SearchMatch(string searchText, T item)
 	{
 		var text = LocaleHelper.GetGlobalText($"CR_{item}");
 
 		return searchText.SearchCheck(text);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageStability item)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, T item)
 	{
 		var text = LocaleHelper.GetGlobalText($"CR_{item}");
 		var color = CRNAttribute.GetNotification(item).GetColor();
