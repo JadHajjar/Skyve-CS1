@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filtrar por autor",
   "AddToSearch": "Agregar '{0}' a tu búsqueda",
   "CopyToClipboard": "Copiar {0} al portapapeles",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Ver la información de compatibilidad de este paquete",
   "FilterByThisEnabledStatus": "Filtrar por estado 'Habilitado'",
   "FilterByThisIncludedStatus": "Filtrar por estado 'Incluido'",
   "CleanupInfo": "Ejecute una limpieza rápida que eliminará cualquier paquete al que no esté suscrito en su equipo así como forzar la descarga de paquetes que faltan.",
