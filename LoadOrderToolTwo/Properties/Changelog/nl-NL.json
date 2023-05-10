@@ -254,7 +254,7 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Nieuw",
                 "Changes": [
                     "Added an option to disable the automatic cleanup when opening the game.",
                     "Added a custom arguments box for advanced launch settings."
