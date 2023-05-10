@@ -383,7 +383,7 @@
   "AssetsWithMinorIssues": "assets with minor issues",
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
-  "LoadNewAsset": "New Asset (Editor)",
+  "LoadNewAsset": "Создать Актив (Редактор)",
   "LoadLoadAsset": "Загрузить актив (Редактор)",
   "Profiles": "Профили"
 }
