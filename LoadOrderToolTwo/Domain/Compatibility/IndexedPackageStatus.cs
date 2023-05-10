@@ -12,11 +12,14 @@ public class IndexedPackageStatus
 		Status = status;
 		Packages = new();
 
-		foreach (var item in status.Packages)
+		if (status.Packages is not null)
 		{
-			if (packages.ContainsKey(item))
+			foreach (var item in status.Packages)
 			{
-				Packages[item] = packages[item];
+				if (packages.ContainsKey(item))
+				{
+					Packages[item] = packages[item];
+				}
 			}
 		}
 	}

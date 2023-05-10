@@ -2,7 +2,6 @@
 
 using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Interfaces;
-using LoadOrderToolTwo.Domain.Steam;
 using LoadOrderToolTwo.UserInterface.Content;
 using LoadOrderToolTwo.UserInterface.Forms;
 using LoadOrderToolTwo.Utilities;
@@ -28,11 +27,6 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
 		InitializeComponent();
-
-		if (!load)
-		{
-			CB_BlackListId.Visible = CB_BlackListName.Visible = false;
-		}
 	}
 
 	public PC_CompatibilityManagement() : this(true)
@@ -49,6 +43,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 				_packages[package.SteamId] = package;
 			}
 		}
+
+		CB_BlackListId.Visible = CB_BlackListName.Visible = false;
 
 		OnDataLoad();
 	}
@@ -96,8 +92,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 	public override bool CanExit(bool toBeDisposed)
 	{
 		return !toBeDisposed
-			|| currentPage < 0
-			|| currentPage >= _packages.Count
+			|| currentPage <= 0
+			|| currentPage >= _packages.Count - 1
 			|| ShowPrompt("Are you sure you want to conclude your session?", PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
 	}
 
@@ -118,6 +114,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	protected override void OnDataLoad()
 	{
 		SetPackage(_packages.Count - 1);
+		PB_Loading.Dispose();
 	}
 
 	protected override void OnLoadFail()
@@ -134,30 +131,50 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return;
 		}
 
+		PB_LoadingPackage.BringToFront();
+		PB_LoadingPackage.Loading = true;
+
 		currentPage = page;
 		currentPackage = _packages.Values.OrderByDescending(x => x.ServerTime).ElementAt(page);
 
-		var catalogue = await CompatibilityApiUtil.Catalogue(currentPackage.SteamId);
+		try
+		{
+			var catalogue = await CompatibilityApiUtil.Catalogue(currentPackage.SteamId);
 
-		postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<Package, PostPackage>() ?? new();
+			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<Package, PostPackage>();
 
-		SetData(postPackage);
+			postPackage ??= CompatibilityManager.GetAutomatedReport(currentPackage).CloneTo<Package, PostPackage>();
 
-		PB_Icon.Package = currentPackage;
-		PB_Icon.Image = null;
-		PB_Icon.LoadImage(currentPackage.IconUrl, ImageManager.GetImage);
-		P_Info.SetPackage(currentPackage, null);
+			postPackage.BlackListId = catalogue?.BlackListedIds?.Contains(postPackage.SteamId) ?? false;
+			postPackage.BlackListName = catalogue?.BlackListedNames?.Contains(postPackage.Name ?? string.Empty) ?? false;
 
-		B_Skip.Enabled = currentPage > 0;
-		B_Previous.Enabled = currentPage != _packages.Count - 1;
+			SetData(postPackage);
+
+			PB_Icon.Package = currentPackage;
+			PB_Icon.Image = null;
+			PB_Icon.LoadImage(currentPackage.IconUrl, ImageManager.GetImage);
+			P_Info.SetPackage(currentPackage, null);
+
+			B_Skip.Enabled = currentPage > 0;
+			B_Previous.Enabled = currentPage != _packages.Count - 1;
+
+			PB_LoadingPackage.SendToBack();
+			PB_LoadingPackage.Loading = false;
+		}
+		catch { OnLoadFail(); }
 	}
 
 	private void SetData(PostPackage postPackage)
 	{
+		if (!IsHandleCreated)
+		{
+			CreateHandle();
+		}
+
 		CB_BlackListName.Checked = postPackage.BlackListName;
 		CB_BlackListId.Checked = postPackage.BlackListId;
 		DD_Stability.SelectedItem = postPackage.Stability;
-		DD_Usage.SelectedItem = postPackage.Usage;
+		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => postPackage.Usage.HasFlag(x));
 		TB_Note.Text = postPackage.Note;
 		TB_Note.Visible = I_Note.Selected = !string.IsNullOrWhiteSpace(postPackage.Note);
 
@@ -213,13 +230,20 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		var prompt = ShowInputPrompt("Add a global tag");
 
-		if (prompt.DialogResult == DialogResult.OK)
+		if (prompt.DialogResult != DialogResult.OK)
 		{
-			var control = new TagControl { Text = prompt.Input };
-			control.Click += TagControl_Click;
-			P_Tags.Controls.Add(control);
-			T_NewTag.SendToBack();
+			return;
 		}
+
+		if (string.IsNullOrWhiteSpace(prompt.Input) || P_Tags.Controls.Any(x => x.Text.Equals(prompt.Input, StringComparison.CurrentCultureIgnoreCase)))
+		{
+			return;
+		}
+
+		var control = new TagControl { Text = prompt.Input };
+		control.Click += TagControl_Click;
+		P_Tags.Controls.Add(control);
+		T_NewTag.SendToBack();
 	}
 
 	private void TagControl_Click(object sender, EventArgs e)
@@ -260,7 +284,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private async void B_Apply_Click(object sender, EventArgs e)
 	{
 		if (B_Apply.Loading)
+		{
 			return;
+		}
 
 		B_Apply.Loading = true;
 
@@ -276,14 +302,20 @@ public partial class PC_CompatibilityManagement : PanelContent
 		};
 
 		postPackage.Stability = DD_Stability.SelectedItem;
-		postPackage.Usage = DD_Usage.SelectedItem;
-		postPackage.Note = I_Note.Selected ? string.Empty : TB_Note.Text;
+		postPackage.Usage = DD_Usage.SelectedItems.Aggregate((prev, next) => prev | next);
+		postPackage.Note = I_Note.Selected ? TB_Note.Text : string.Empty;
 		postPackage.Tags = P_Tags.Controls.OfType<TagControl>().Where(x => !string.IsNullOrEmpty(x.Text)).ToList(x => x.Text);
 		postPackage.Links = P_Tags.Controls.OfType<LinkControl>().ToList(x => x.Link);
 		postPackage.Statuses = FLP_Statuses.Controls.OfType<IPackageStatusControl<StatusType, PackageStatus>>().ToList(x => x.PackageStatus);
-		postPackage.Interactions = FLP_Statuses.Controls.OfType<IPackageStatusControl<InteractionType, PackageInteraction>>().ToList(x => x.PackageStatus);
+		postPackage.Interactions = FLP_Interactions.Controls.OfType<IPackageStatusControl<InteractionType, PackageInteraction>>().ToList(x => x.PackageStatus);
 
-		await CompatibilityApiUtil.SaveEntry(postPackage);
+		var response = await CompatibilityApiUtil.SaveEntry(postPackage);
+
+		if (!response.Success)
+		{
+			ShowPrompt(response.Message, PromptButtons.OK, PromptIcons.Error);
+			return;
+		}
 
 		SetPackage(currentPage - 1);
 	}

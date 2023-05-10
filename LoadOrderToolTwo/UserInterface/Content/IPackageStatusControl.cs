@@ -40,6 +40,9 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 		if (item is not null)
 		{
+		if (!IsHandleCreated)
+			CreateHandle();
+
 			typeDropDown.SelectedItem = item.Type;
 			DD_Action.SelectedItem = item.Action;
 			TB_Note.Text = item.Note;

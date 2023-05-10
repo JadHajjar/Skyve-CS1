@@ -112,7 +112,7 @@ public partial class AddPackageForm : BaseForm
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.Author?.Name)
-			|| Path.GetFileName(item.Folder).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| item.SteamId.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	protected override void UIChanged()

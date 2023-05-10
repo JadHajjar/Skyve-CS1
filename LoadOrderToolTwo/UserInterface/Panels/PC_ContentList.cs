@@ -615,7 +615,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.Author?.Name)
-			|| Path.GetFileName(item.Folder).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| (item.Workshop ? item.SteamId.ToString() : Path.GetFileName(item.Folder)).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)

@@ -51,7 +51,7 @@ partial class PC_CompatibilityReport
 			this.TLP_Main.ColumnCount = 2;
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Main.Controls.Add(this.TLP_Buttons, 1, 0);
+			this.TLP_Main.Controls.Add(this.TLP_Buttons, 0, 0);
 			this.TLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TLP_Main.Location = new System.Drawing.Point(0, 30);
 			this.TLP_Main.Name = "TLP_Main";
@@ -67,6 +67,7 @@ partial class PC_CompatibilityReport
 			this.TLP_Buttons.AutoSize = true;
 			this.TLP_Buttons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.TLP_Buttons.ColumnCount = 3;
+			this.TLP_Main.SetColumnSpan(this.TLP_Buttons, 2);
 			this.TLP_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());

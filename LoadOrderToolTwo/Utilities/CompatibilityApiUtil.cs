@@ -24,12 +24,12 @@ internal class CompatibilityApiUtil
 
 	internal static async Task<CompatibilityData?> Catalogue(object steamId)
 	{
-		return await Get<CompatibilityData>("/Catalogue", ("steamId", steamId));
+		return await Get<CompatibilityData>("/Package", ("steamId", steamId));
 	}
 
-	internal static async Task<string?> SaveEntry(PostPackage package)
+	internal static async Task<ApiResponse> SaveEntry(PostPackage package)
 	{
-		return await Post<PostPackage, string>("/SaveEntry", package);
+		return await Post<PostPackage, ApiResponse>("/SaveEntry", package);
 	}
 
 	internal static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
@@ -72,7 +72,7 @@ internal class CompatibilityApiUtil
 
 		var json = JsonConvert.SerializeObject(body);
 		var content = new StringContent(json, Encoding.UTF8, "application/json");
-		var httpResponse = await httpClient.PostAsync(url, content);
+		var httpResponse = await httpClient.PostAsync(KEYS.API_URL + url, content);
 
 		if (httpResponse.IsSuccessStatusCode)
 		{

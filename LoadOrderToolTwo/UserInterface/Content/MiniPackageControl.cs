@@ -1,7 +1,9 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.Panels;
+using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -17,10 +19,29 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Content;
 internal class MiniPackageControl : SlickControl
 {
-    public MiniPackageControl(IPackage package)
-    {
-		Package=package;
+	public IPackage Package { get; private set; }
+
+	public MiniPackageControl(IPackage package)
+	{
+		Package = package;
 		Dock = DockStyle.Top;
+	}
+
+	public MiniPackageControl(ulong steamId)
+	{
+		Package = new Profile.Asset { SteamId = steamId };
+		Dock = DockStyle.Top;
+
+		new BackgroundAction(async () =>
+		{
+			var data = await SteamUtil.GetWorkshopInfoAsync(new[] { steamId });
+
+			if (data.ContainsKey(steamId))
+			{
+				Package = data[steamId];
+				Invalidate();
+			}
+		}).Run();
 	}
 
 	protected override void UIChanged()
@@ -50,8 +71,6 @@ internal class MiniPackageControl : SlickControl
 				break;
 		}
 	}
-
-	public IPackage Package { get; }
 
 	protected override void OnPaint(PaintEventArgs e)
 	{

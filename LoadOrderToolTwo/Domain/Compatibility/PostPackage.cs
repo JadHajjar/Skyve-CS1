@@ -1,5 +1,8 @@
-﻿namespace LoadOrderToolTwo.Domain.Compatibility;
+﻿using Extensions.Sql;
 
+namespace LoadOrderToolTwo.Domain.Compatibility;
+
+[DynamicSqlClass("Packages")]
 public class PostPackage : Package
 {
 	public Author? Author { get; set; }
