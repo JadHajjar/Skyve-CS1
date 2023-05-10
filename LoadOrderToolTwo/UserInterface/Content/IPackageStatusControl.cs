@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.UserInterface.Dropdowns;
 using LoadOrderToolTwo.UserInterface.Forms;
 using LoadOrderToolTwo.Utilities;
@@ -17,11 +18,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Content;
-public partial class IPackageStatusControl<T> : SlickControl where T : struct, Enum
+public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
 {
-private PackageStatusTypeDropDown<T> typeDropDown;
+	private PackageStatusTypeDropDown<T> typeDropDown;
 
-	public IPackageStatusControl()
+	public IPackageStatusControl(TBase? item = default)
 	{
 		InitializeComponent();
 
@@ -36,7 +37,29 @@ private PackageStatusTypeDropDown<T> typeDropDown;
 
 		AutoInvalidate = false;
 		AutoSize = true;
+
+		if (item is not null)
+		{
+			typeDropDown.SelectedItem = item.Type;
+			DD_Action.SelectedItem = item.Action;
+			TB_Note.Text = item.Note;
+			TB_Note.Visible = I_Note.Selected = !string.IsNullOrWhiteSpace(item.Note);
+			typeDropDown.SelectedItem = item.Type;
+
+			foreach (var package in item.Packages ?? new ulong[0])
+			{
+				P_Packages.Controls.Add(new MiniPackageControl(package));
+			}
+		}
 	}
+
+	public TBase PackageStatus => new TBase()
+	{
+		Type = typeDropDown.SelectedItem,
+		Action = DD_Action.SelectedItem,
+		Note = TB_Note.Text,
+		Packages = P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Package.SteamId).ToArray(),
+	};
 
 	protected override void DesignChanged(FormDesign design)
 	{

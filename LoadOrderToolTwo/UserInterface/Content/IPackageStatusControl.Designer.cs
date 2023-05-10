@@ -1,6 +1,6 @@
 ﻿namespace LoadOrderToolTwo.UserInterface.Content;
 
-partial class IPackageStatusControl<T>
+partial class IPackageStatusControl<T, TBase>
 {
 	/// <summary> 
 	/// Required designer variable.

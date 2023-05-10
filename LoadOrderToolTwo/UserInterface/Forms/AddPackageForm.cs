@@ -179,7 +179,7 @@ public partial class AddPackageForm : BaseForm
 	{
 		var items = ulong.TryParse(TB_Search.Text.Trim(), out var steamId) 
 			? await SteamUtil.GetWorkshopInfoAsync(new[] { steamId }) 
-			: await SteamUtil.QueryFilesAsync(searchEmpty ? SteamQueryOrder.RankedByTrend : SteamQueryOrder.RankedByTextSearch,
+			: await SteamUtil.QueryFilesAsync(SteamQueryOrder.RankedByTrend,
 				TB_Search.Text,
 				OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option1 ? new[] { "Mod" } : null,
 			 	OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null);

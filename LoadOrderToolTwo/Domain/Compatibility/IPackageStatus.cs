@@ -4,14 +4,14 @@ namespace LoadOrderToolTwo.Domain.Compatibility;
 
 public interface IPackageStatus<TType> : IGenericPackageStatus where TType : struct, Enum
 {
-	TType Type { get; } 
+	TType Type { get; set; } 
 }
 
 public interface IGenericPackageStatus 
 {
-	InteractionAction Action { get; }
-	ulong[]? Packages { get; }
-	string? Note { get; }
+	InteractionAction Action { get; set; }
+	ulong[]? Packages { get; set; }
+	string? Note { get; set; }
 #if !API
 	NotificationType Notification { get; }
 #endif

@@ -3,11 +3,14 @@
 namespace LoadOrderToolTwo.Domain.Compatibility;
 
 [DynamicSqlClass("PackageStatuses")]
-public struct PackageStatus : IPackageStatus<StatusType>, IDynamicSql
-{
 #if API
+public class PackageStatus : IPackageStatus<StatusType>, IDynamicSql
+{
 	[DynamicSqlProperty(PrimaryKey = true, Indexer = true), System.Text.Json.Serialization.JsonIgnore]
 	public ulong PackageId { get; set; }
+#else
+public struct PackageStatus : IPackageStatus<StatusType>, IDynamicSql
+{
 #endif
 
 	[DynamicSqlProperty(PrimaryKey = true)]

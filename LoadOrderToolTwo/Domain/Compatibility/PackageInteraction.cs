@@ -5,13 +5,15 @@ using System;
 namespace LoadOrderToolTwo.Domain.Compatibility;
 
 [DynamicSqlClass("PackageInteractions")]
-public struct PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
-{
 #if API
+public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
+{
 	[DynamicSqlProperty(PrimaryKey = true, Indexer = true), System.Text.Json.Serialization.JsonIgnore]
 	public ulong PackageId { get; set; }
+#else
+public struct PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
+{
 #endif
-
 	[DynamicSqlProperty(PrimaryKey = true)]
 	public InteractionType Type { get; set; }
 
