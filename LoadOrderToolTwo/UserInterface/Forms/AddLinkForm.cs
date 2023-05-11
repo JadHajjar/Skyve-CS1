@@ -63,7 +63,7 @@ public partial class AddLinkForm : BaseForm
 
 	private IEnumerable<PackageLink> GetLinks()
 	{
-		throw new NotImplementedException();
+		return TLP.Controls.OfType<LinkControl>().Select(x => x.Link);
 	}
 
 	private class LinkControl : TableLayoutPanel
@@ -121,6 +121,13 @@ public partial class AddLinkForm : BaseForm
 			Controls.Add(deleteButton, 3, 0);
 			SetColumnSpan(tbLink, 2);
 		}
+
+		public PackageLink Link => new PackageLink
+		{
+			Type = link.Type,
+			Title = tbName.Text,
+			Url = tbLink.Text,
+		};
 
 		private void Icon_Click(object sender, EventArgs e)
 		{

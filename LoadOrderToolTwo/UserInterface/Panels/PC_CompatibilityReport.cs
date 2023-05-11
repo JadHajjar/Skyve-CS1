@@ -27,7 +27,6 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
-		isManager = true;
 		userId = SteamUtil.GetLoggedInSteamId();
 		hasPackages = userId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == userId.ToString());
 		isManager = await CompatibilityApiUtil.IsCommunityManager(userId);

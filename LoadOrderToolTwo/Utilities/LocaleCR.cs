@@ -10,6 +10,8 @@ internal class LocaleCR : LocaleHelper
 
 	protected LocaleCR() : base($"{nameof(LoadOrderToolTwo)}.Properties.Compatibility.json") { }
 
+	public static void Load() { }
+
 	public static Translation Get(string value) => _instance.GetText(value);
 
 	public static Translation CR_NoAvailableReport => _instance.GetText(nameof(CR_NoAvailableReport));
@@ -75,4 +77,8 @@ internal class LocaleCR : LocaleHelper
 	public static Translation InteractionCount => _instance.GetText(nameof(InteractionCount));
 	public static Translation CrDataLoadFailed => _instance.GetText(nameof(CrDataLoadFailed));
 	public static Translation AddGlobalTag => _instance.GetText(nameof(AddGlobalTag));
+	public static Translation PleaseReviewTheStability => _instance.GetText(nameof(PleaseReviewTheStability));
+	public static Translation PleaseReviewPackageStatuses => _instance.GetText(nameof(PleaseReviewPackageStatuses));
+	public static Translation PleaseReviewPackageInteractions => _instance.GetText(nameof(PleaseReviewPackageInteractions));
+	public static Translation PleaseReviewPackageUsage => _instance.GetText(nameof(PleaseReviewPackageUsage));
 }
