@@ -59,7 +59,7 @@
   "AnyStatus": "สถานะใด ๆ",
   "AnyReportStatus": "รายงานความรุนแรงได ๆ",
   "ModOwned": "คุณมีม็อดนี้",
-  "NoLocalPackagesFound": "ไม่มีแพกเกจภายในเครื่องของคุณ",
+  "NoLocalPackagesFound": "ไม่พลแพ็กเกจภายในเครื่องของคุณ",
   "CheckFolderInOptions": "หากคุณเลือกโฟลเดอร์ผิด ให้ตรวจสอบแผงตัวเลือก",
   "NoPackagesMatchFilters": "ไม่มีแพกเกจที่ตรงกับเกณท์การกรอง",
   "ExcludeAll": "ถอดไอเทมทั้งหมดที่แสดงออก",
