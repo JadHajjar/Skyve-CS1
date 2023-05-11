@@ -7,7 +7,7 @@
   "Note": "Note",
   "NoteInfo": "Extra informational text displayed for the package",
   "BlackListName": "Black-list by name",
-  "BlackListId": "Black-list by name",
+  "BlackListId": "Black-list by Steam ID",
   "GlobalTags": "Global Tags",
   "GlobalTagsInfo": "Tags all players will see in the app",
   "Links": "Links",
@@ -58,5 +58,11 @@
   "AddPackages": "Add Packages",
   "ConfirmEndSession": "Are you sure you want to conclude your session?",
   "CrDataLoadFailed": "Failed to load data, try again later",
-  "AddGlobalTag": "Add a global tag"
+  "AddGlobalTag": "Add a global tag",
+  "ReuseData": "Re-use Previous Data",
+  "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
+  "PleaseReviewTheStability": "Please review the stability of this package before saving.",
+  "PleaseReviewPackageStatuses": "Please review the statuses of this package before saving.\r\nSome have an invalid Status Type.",
+  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageUsage": "Please select a valid usage for this package."
 }
