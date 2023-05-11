@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "個のアセットはサブスクを解除",
   "LoadNewAsset": "アセットを新規作成 (エディタ)",
   "LoadLoadAsset": "アセットをロード (エディタ)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "プロファイル"
 }
