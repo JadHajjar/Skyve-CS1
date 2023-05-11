@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "active care ar trebui să fie dezabonate de la",
   "LoadNewAsset": "Activă Nouă (Editor)",
   "LoadLoadAsset": "Încarcă activ (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profiluri"
 }
