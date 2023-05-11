@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "Data di Iscrizione",
   "Sorting_Author": "Nome dell'Autore",
   "Sorting_Status": "Stato del pacchetto",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "Rapporto di compatibilità",
   "IncreaseItemSize": "Aumenta dimensioni degli elementi della lista",
   "FolderSettings": "Impostazioni cartelle",
   "GamePath": "Cities: Skylines: Cartella Steam",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filtra per questo autore",
   "AddToSearch": "Aggiungi '{0}' alla tua ricerca",
   "CopyToClipboard": "Copia '{0}' negli appunti",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Visualizza il report di compatibilità di questo pacchetto",
   "FilterByThisEnabledStatus": "Filtra per questo stato di 'Attivazione'",
   "FilterByThisIncludedStatus": "Filtra per questo stato di 'Inclusione'",
   "CleanupInfo": "Esegue una veloce pulizia che cancella dal tuo computer tutti i pacchetti a cui non sei iscritto, e forza lo scaricamento dei pacchetti sottoscritti mancanti.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "risorse di cui si dovrebbe annullare l'iscrizione",
   "LoadNewAsset": "Nuova risorsa (Editor)",
   "LoadLoadAsset": "Carica risorsa (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profili"
 }
