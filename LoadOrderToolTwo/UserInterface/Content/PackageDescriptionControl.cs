@@ -307,7 +307,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		else
 		{
 			e.Graphics.SetUp(FormDesign.Design.AccentBackColor);
-			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, Height / 2 + 1, 1, 1), (int)(5 * UI.FontScale));
+			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.BackColor), ClientRectangle.Pad(1, (Height / 2) + 1, 1, 1), (int)(5 * UI.FontScale));
 		}
 
 		if (Package == null)
@@ -377,7 +377,15 @@ internal class PackageDescriptionControl : SlickImageControl
 		if (Package!.Workshop)
 		{
 			rects.SteamRect = rects.FolderRect;
-			rects.SteamRect.X -= rects.FolderRect.Width + Padding.Left;
+
+			if (!string.IsNullOrEmpty(Package.Folder))
+			{
+				rects.SteamRect.X -= rects.FolderRect.Width + Padding.Left;
+			}
+			else
+			{
+				rects.FolderRect = Rectangle.Empty;
+			}
 		}
 
 		var brushRect = new Rectangle(rects.SteamRect.X.If(0, rects.FolderRect.X) - (int)(150 * UI.FontScale), 0, (int)(150 * UI.FontScale), Height / 2);
@@ -392,8 +400,9 @@ internal class PackageDescriptionControl : SlickImageControl
 			SlickButton.DrawButton(e, rects.MoreRect, string.Empty, Font, icon, null, rects.MoreRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
 		}
 
-		using (var icon = IconManager.GetIcon("I_Folder", rects.FolderRect.Height / 2))
+		if (rects.FolderRect != Rectangle.Empty)
 		{
+			using var icon = IconManager.GetIcon("I_Folder", rects.FolderRect.Height / 2);
 			SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, icon, null, rects.FolderRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
 		}
 

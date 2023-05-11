@@ -8,6 +8,8 @@ internal class Locale : LocaleHelper
 {
 	private static readonly Locale _instance = new();
 
+	public static void Load() { }
+
 	protected Locale() : base($"{nameof(LoadOrderToolTwo)}.Properties.Locale.json") { }
 
 	public static Translation Dashboard => _instance.GetText(nameof(Dashboard));

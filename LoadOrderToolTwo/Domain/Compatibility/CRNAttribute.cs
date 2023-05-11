@@ -23,7 +23,7 @@ public class CRNAttribute : Attribute // Compatibility Report Notification (CRN)
 	{
 		var memberInfo = enumValue.GetType().GetMember(enumValue.ToString()).FirstOrDefault() ?? throw new ArgumentException($"Invalid enum value: {enumValue}");
 
-		var crnAttribute = (CRNAttribute)memberInfo.GetCustomAttributes(typeof(CRNAttribute), false).FirstOrDefault();
+		var crnAttribute = (CRNAttribute?)memberInfo.GetCustomAttributes(typeof(CRNAttribute), false).FirstOrDefault();
 
 		return crnAttribute ?? throw new ArgumentException($"Enum value {enumValue} is missing CRN attribute");
 	}
