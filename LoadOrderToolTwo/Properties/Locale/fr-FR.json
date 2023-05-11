@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "les assets dont il faut se désabonner",
   "LoadNewAsset": "Nouveau asset (Éditeur)",
   "LoadLoadAsset": "Charger asset (Éditeur)",
+  "Info": "Info",
+  "SelectThisPackage": "Sélectionnez ce paquet",
+  "SelectPackage": "Sélectionner un paquet",
   "Profiles": "Profils"
 }
