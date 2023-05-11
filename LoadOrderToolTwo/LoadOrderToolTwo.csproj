@@ -75,6 +75,10 @@
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
+    <Compile Update="UserInterface\Forms\AddPackageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +135,11 @@
 	  <None Update="Resources\mono-debug._dll">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\Compatibility\" />
+	  <Folder Include="Properties\SlickUI\" />
 	</ItemGroup>
 	
 	<PropertyGroup>

@@ -229,12 +229,12 @@ internal class PackageDescriptionControl : SlickImageControl
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
+				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
 			}
 
 			if (rects.EnabledRect.Contains(location))
 			{
-				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToLower())}", rects.EnabledRect);
+				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}", rects.EnabledRect);
 			}
 
 			if (rects.VersionRect.Contains(location))
@@ -248,7 +248,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				if (Package.Package != null)
 				{
-					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
+					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
 				}
 				else
 				{
@@ -340,7 +340,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		{
 			var labelColor = report.Notification.GetColor();
 
-			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Notification}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, ContentAlignment.TopLeft, true);
+			rects.CompatibilityRect = DrawLabel(e, LocaleCR.Get($"{report.Notification}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, ContentAlignment.TopLeft, true);
 
 			labelRect.X += Padding.Left + rects.CompatibilityRect.Width;
 		}

@@ -103,16 +103,18 @@ public partial class PC_PackagePage : PanelContent
 	internal static SlickStripItem[] GetRightClickMenuItems<T>(T item) where T : IPackage
 	{
 		var isPackageIncluded = item.IsIncluded;
+		var isInstalled = item.Package is not null;
 
 		return new SlickStripItem[]
 		{
-			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded, action: () => { item.IsIncluded = true; })
-			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded, action: () => { item.IsIncluded = false; })
-			, new (Locale.ReDownloadPackage, "I_ReDownload", SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
-			, new (Locale.MovePackageToLocalFolder, "I_PC",item.Workshop, action: () => ContentUtil.MoveToLocalFolder(item))
+			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded && isInstalled, action: () => { item.IsIncluded = true; })
+			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded && isInstalled, action: () => { item.IsIncluded = false; })
+			, new (Locale.ReDownloadPackage, "I_ReDownload", isInstalled && SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
+			, new (Locale.MovePackageToLocalFolder, "I_PC", isInstalled && item.Workshop, action: () => ContentUtil.MoveToLocalFolder(item))
 			, new (string.Empty)
-			, new (!item.Workshop && item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, "I_Disposable", !(item.Package?.BuiltIn ?? false), action: () => AskThenDelete(item))
-			, new (Locale.UnsubscribePackage, "I_Steam", item.Workshop && !(item.Package?.BuiltIn ?? false), action: async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true))
+			, new (!item.Workshop && item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, "I_Disposable", isInstalled && !(item.Package?.BuiltIn ?? false), action: () => AskThenDelete(item))
+			, new (Locale.UnsubscribePackage, "I_Steam", isInstalled && item.Workshop && !(item.Package?.BuiltIn ?? false), action: async () => await CitiesManager.Subscribe(new[] { item.SteamId }, true))
+			, new (Locale.SubscribeToItem, "I_Steam", !isInstalled && item.Workshop, action: async () => await CitiesManager.Subscribe(new[] { item.SteamId }))
 			, new (string.Empty)
 			, new (Locale.OtherProfiles, "I_ProfileSettings", fade: true)
 			, new (Locale.IncludeThisItemInAllProfiles, "I_Ok", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; })

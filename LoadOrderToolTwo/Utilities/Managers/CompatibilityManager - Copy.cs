@@ -97,7 +97,7 @@ public static class CompatibilityManager
 			{
 				reportInfo.Messages.Add(new ReportMessage(ReportType.RequiredMods
 					, ReportSeverity.MinorIssues
-					, Locale.CR_RequiredModsMissing
+					, LocaleCR.CR_RequiredModsMissing
 					, packages: mods.ToArray()));
 			}
 		}
@@ -116,7 +116,7 @@ public static class CompatibilityManager
 			reportInfo.Messages.Add(new ReportMessage(ReportType.Stability
 								, ReportSeverity.Unsubscribe
 								, assetEntry.Stability
-								, string.Format(Locale.CR_IncompatibleAsset, assetEntry.Name)));
+								, string.Format(LocaleCR.CR_IncompatibleAsset, assetEntry.Name)));
 
 			return packageCache[package] = reportInfo;
 		}
@@ -125,7 +125,7 @@ public static class CompatibilityManager
 		{
 			reportInfo.Messages.Add(new ReportMessage(ReportType.Stability
 				, package.IsMod ? ReportSeverity.Remarks : ReportSeverity.NothingToReport
- 				, Locale.CR_NotInCatalogMod));
+ 				, LocaleCR.CR_NotInCatalogMod));
 
 			return packageCache[package] = reportInfo;
 		}
@@ -220,52 +220,52 @@ public static class CompatibilityManager
 		{
 			Enums.Stability.IncompatibleAccordingToWorkshop => new ReportMessage(ReportType.Stability
 								, ReportSeverity.Unsubscribe
-								, Locale.CR_IncompatibleWithGameVersion
+								, LocaleCR.CR_IncompatibleWithGameVersion
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.RequiresIncompatibleMod => new ReportMessage(ReportType.Stability
 								, ReportSeverity.Unsubscribe
-								, Locale.CR_RequiresIncompatibleMod
+								, LocaleCR.CR_RequiresIncompatibleMod
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.GameBreaking => new ReportMessage(ReportType.Stability
 								, ReportSeverity.Unsubscribe
-								, Locale.CR_BreaksGame
+								, LocaleCR.CR_BreaksGame
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.Broken => new ReportMessage(ReportType.Stability
 								, ReportSeverity.Unsubscribe
-								, Locale.CR_BrokenMod
+								, LocaleCR.CR_BrokenMod
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.MajorIssues => new ReportMessage(ReportType.Stability
 								, ReportSeverity.MajorIssues
-								, string.IsNullOrEmpty(subscribedMod.StabilityNote.Value) ? Locale.CR_MajorIssuesNoNote : Locale.CR_MajorIssuesWithNote
+								, string.IsNullOrEmpty(subscribedMod.StabilityNote.Value) ? LocaleCR.CR_MajorIssuesNoNote : LocaleCR.CR_MajorIssuesWithNote
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.MinorIssues => new ReportMessage(ReportType.Stability
 								, ReportSeverity.MinorIssues
-								, string.IsNullOrEmpty(subscribedMod.StabilityNote.Value) ? Locale.CR_MinorIssuesNoNote : Locale.CR_MinorIssuesWithNote
+								, string.IsNullOrEmpty(subscribedMod.StabilityNote.Value) ? LocaleCR.CR_MinorIssuesNoNote : LocaleCR.CR_MinorIssuesWithNote
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.UsersReportIssues => new ReportMessage(ReportType.Stability
 								, ReportSeverity.MinorIssues
-								, string.IsNullOrEmpty(subscribedMod.StabilityNote.Value) ? Locale.CR_UserReportsNoNote : Locale.CR_UserReportsWithNote
+								, string.IsNullOrEmpty(subscribedMod.StabilityNote.Value) ? LocaleCR.CR_UserReportsNoNote : LocaleCR.CR_UserReportsWithNote
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.NotEnoughInformation => new ReportMessage(ReportType.Stability
 								, ReportSeverity.Remarks
-								, subscribedMod.GameVersion() == CurrentGameVersion() ? Locale.CR_NotEnoughInformationUpdated : Locale.CR_NotEnoughInformationOutdated
+								, subscribedMod.GameVersion() == CurrentGameVersion() ? LocaleCR.CR_NotEnoughInformationUpdated : LocaleCR.CR_NotEnoughInformationOutdated
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.Stable => new ReportMessage(ReportType.Stability
 								, string.IsNullOrEmpty(subscribedMod.StabilityNote.Value) ? ReportSeverity.NothingToReport : ReportSeverity.Remarks
-								, Locale.CR_Stable
+								, LocaleCR.CR_Stable
 								, subscribedMod.StabilityNote.Value),
 
 			Enums.Stability.NotReviewed or Enums.Stability.Undefined => new ReportMessage(ReportType.Stability
 								, ReportSeverity.Remarks
-								, subscribedMod.GameVersion() == CurrentGameVersion() ? Locale.CR_NotReviewedUpdated : Locale.CR_NotReviewedOutdated
+								, subscribedMod.GameVersion() == CurrentGameVersion() ? LocaleCR.CR_NotReviewedUpdated : LocaleCR.CR_NotReviewedOutdated
 								, subscribedMod.StabilityNote.Value),
 			_ => null,
 		};
@@ -287,41 +287,41 @@ public static class CompatibilityManager
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.Unsubscribe
-				, Locale.CR_Obsolete);
+				, LocaleCR.CR_Obsolete);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.RemovedFromWorkshop) || package?.Status == DownloadStatus.Removed)
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.MajorIssues
-				, Locale.CR_RemovedFromWorkshop);
+				, LocaleCR.CR_RemovedFromWorkshop);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.Deprecated))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.MajorIssues
-				, Locale.CR_Deprecated);
+				, LocaleCR.CR_Deprecated);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.Abandoned))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, authorRetired ? Locale.CR_AbandonedRetired : Locale.CR_Abandoned);
+				, authorRetired ? LocaleCR.CR_AbandonedRetired : LocaleCR.CR_Abandoned);
 		}
 		else if (authorRetired)
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_Retired);
+				, LocaleCR.CR_Retired);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.SavesCantLoadWithout))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.Remarks
-				, Locale.CR_SavesCantLoadWithout);
+				, LocaleCR.CR_SavesCantLoadWithout);
 		}
 
 		//added to inform about non public source code
@@ -329,7 +329,7 @@ public static class CompatibilityManager
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_SourceNotPublic);
+				, LocaleCR.CR_SourceNotPublic);
 		}
 
 		// added to inform about mods that have no comment section active, no workshop description and no source code available
@@ -337,14 +337,14 @@ public static class CompatibilityManager
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_NoDescription);
+				, LocaleCR.CR_NoDescription);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.NoCommentSection))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_NoCommentSection);
+				, LocaleCR.CR_NoCommentSection);
 		}
 
 		var abandoned = subscribedMod.Statuses.Contains(Status.Obsolete) || subscribedMod.Statuses.Contains(Status.Deprecated) ||
@@ -355,19 +355,19 @@ public static class CompatibilityManager
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_SourceBundled);
+				, LocaleCR.CR_SourceBundled);
 		}
 		else if (abandoned && subscribedMod.Statuses.Contains(Status.SourceNotPublic))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_SourceNotPublicAbandoned);
+				, LocaleCR.CR_SourceNotPublicAbandoned);
 		}
 		else if (abandoned && subscribedMod.Statuses.Contains(Status.SourceObfuscated))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_SourceObfuscated);
+				, LocaleCR.CR_SourceObfuscated);
 		}
 	}
 
@@ -378,28 +378,28 @@ public static class CompatibilityManager
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.Unsubscribe
-				, Locale.CR_Reupload);
+				, LocaleCR.CR_Reupload);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.BreaksEditors))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.Remarks
-				, Locale.CR_BreaksEditors);
+				, LocaleCR.CR_BreaksEditors);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.ModForModders))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.Remarks
-				, Locale.CR_ModForModders);
+				, LocaleCR.CR_ModForModders);
 		}
 
 		if (subscribedMod.Statuses.Contains(Status.TestVersion))
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, subscribedMod.Stability == Enums.Stability.Stable ? Locale.CR_TestVersionStable : Locale.CR_TestVersion);
+				, subscribedMod.Stability == Enums.Stability.Stable ? LocaleCR.CR_TestVersionStable : LocaleCR.CR_TestVersion);
 		}
 
 		// Changed to have only one Music Pack Copyright status
@@ -407,7 +407,7 @@ public static class CompatibilityManager
 		{
 			yield return new ReportMessage(ReportType.Status
 				, ReportSeverity.NothingToReport
-				, Locale.CR_MusicCopyright);
+				, LocaleCR.CR_MusicCopyright);
 		}
 	}
 
@@ -437,7 +437,7 @@ public static class CompatibilityManager
 
 		return new ReportMessage(ReportType.UnneededDependency
 			, ReportSeverity.Unsubscribe
-			, Locale.CR_UnneededDependency);
+			, LocaleCR.CR_UnneededDependency);
 	}
 
 
@@ -472,7 +472,7 @@ public static class CompatibilityManager
 
 		return new ReportMessage(ReportType.WorksWhenDisabled
 			, ReportSeverity.Unsubscribe
-			, Locale.CR_WorksWhenDisabled);
+			, LocaleCR.CR_WorksWhenDisabled);
 	}
 
 
@@ -483,7 +483,7 @@ public static class CompatibilityManager
 			return null;
 		}
 
-		return new ReportMessage(ReportType.Note, ReportSeverity.Remarks, Locale.CR_Note, subscribedMod.Note.Value);
+		return new ReportMessage(ReportType.Note, ReportSeverity.Remarks, LocaleCR.CR_Note, subscribedMod.Note.Value);
 	}
 
 
@@ -506,7 +506,7 @@ public static class CompatibilityManager
 
 		return new ReportMessage(ReportType.DlcMissing
 			, ReportSeverity.Unsubscribe
-			, Locale.CR_MissingDLC
+			, LocaleCR.CR_MissingDLC
 			, dlcs.Select(x => "• " + x.GetDLCInfo()?.Text).ListStrings("\r\n"));
 	}
 
@@ -530,7 +530,7 @@ public static class CompatibilityManager
 
 		return new ReportMessage(ReportType.RequiredMods
 			, ReportSeverity.MajorIssues
-			, Locale.CR_RequiredModsMissing
+			, LocaleCR.CR_RequiredModsMissing
 			, packages: mods.ToArray());
 	}
 
@@ -545,7 +545,7 @@ public static class CompatibilityManager
 
 		return new ReportMessage(ReportType.Recommendations
 			, ReportSeverity.Remarks
-			, Locale.CR_Recommendations
+			, LocaleCR.CR_Recommendations
 			, packages: missingRecommendations.ToArray());
 	}
 
@@ -628,7 +628,7 @@ public static class CompatibilityManager
 		var successorsAvailable = subscribedMod.Successors.Any(x => Catalog.IsValidID(x) && Catalog.GetSubscription(x) != null);
 		return new ReportMessage(ReportType.Successors
 			, successorsAvailable ? ReportSeverity.Unsubscribe : ReportSeverity.MinorIssues
-			, subscribedMod.Successors.Count == 1 ? Locale.CR_SuccessorsAvailable : Locale.CR_SuccessorsAvailableMultiple
+			, subscribedMod.Successors.Count == 1 ? LocaleCR.CR_SuccessorsAvailable : LocaleCR.CR_SuccessorsAvailableMultiple
 			, packages: subscribedMod.Successors.ToArray());
 	}
 
@@ -643,7 +643,7 @@ public static class CompatibilityManager
 
 		return new ReportMessage(ReportType.Alternatives
 			, alternativesAvailable ? ReportSeverity.Remarks : ReportSeverity.NothingToReport
-			, subscribedMod.Alternatives.Count == 1 ? Locale.CR_AlternativesAvailable : Locale.CR_AlternativesAvailableMultiple
+			, subscribedMod.Alternatives.Count == 1 ? LocaleCR.CR_AlternativesAvailable : LocaleCR.CR_AlternativesAvailableMultiple
 			, packages: subscribedMod.Alternatives.ToArray());
 	}
 
@@ -666,7 +666,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.Unsubscribe
 						, compatibility.Status
-						, Locale.CR_SameModDifferentReleaseType
+						, LocaleCR.CR_SameModDifferentReleaseType
 						, otherModID);
 					break;
 
@@ -674,7 +674,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.Unsubscribe
 						, compatibility.Status
-						, Locale.CR_SameFunctionality
+						, LocaleCR.CR_SameFunctionality
 						, otherModID);
 					break;
 
@@ -682,7 +682,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.Unsubscribe
 						, compatibility.Status
-						, Locale.CR_IncompatibleAccordingToAuthor
+						, LocaleCR.CR_IncompatibleAccordingToAuthor
 						, otherModID);
 					break;
 
@@ -690,7 +690,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.MajorIssues
 						, compatibility.Status
-						, Locale.CR_IncompatibleAccordingToUsers
+						, LocaleCR.CR_IncompatibleAccordingToUsers
 						, otherModID);
 					break;
 
@@ -698,7 +698,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.MajorIssues
 						, compatibility.Status
-						, Locale.CR_MajorIssuesWith
+						, LocaleCR.CR_MajorIssuesWith
 						, otherModID);
 					break;
 
@@ -706,7 +706,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.MinorIssues
 						, compatibility.Status
-						, Locale.CR_MinorIssuesWith
+						, LocaleCR.CR_MinorIssuesWith
 						, otherModID);
 					break;
 
@@ -714,7 +714,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.Remarks
 						, compatibility.Status
-						, Locale.CR_RequiresSpecificSettings
+						, LocaleCR.CR_RequiresSpecificSettings
 						, otherModID);
 					break;
 
@@ -722,7 +722,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.Remarks
 						, compatibility.Status
-						, Locale.CR_SameFunctionalityCompatible
+						, LocaleCR.CR_SameFunctionalityCompatible
 						, otherModID);
 					break;
 
@@ -730,7 +730,7 @@ public static class CompatibilityManager
 					yield return new ReportCompatibilityMessage(ReportType.Compatibility
 						, ReportSeverity.Remarks
 						, compatibility.Status
-						, Locale.CR_CompatibleAccordingToAuthor
+						, LocaleCR.CR_CompatibleAccordingToAuthor
 						, otherModID);
 					break;
 

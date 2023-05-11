@@ -1103,6 +1103,66 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Github_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Github_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Github_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Github_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Github_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Github_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Globe_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Globe_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Globe_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Globe_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Globe_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Globe_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Guide_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Guide_16", resourceCulture);
@@ -1923,6 +1983,36 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Share_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Share_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Share_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Share_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Share_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Share_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Slash_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Slash_16", resourceCulture);
@@ -2673,9 +2763,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_AR {
+        internal static System.Drawing.Bitmap Lang_AR_SA {
             get {
-                object obj = ResourceManager.GetObject("Lang_AR", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_AR-SA", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2683,9 +2773,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_BN {
+        internal static System.Drawing.Bitmap Lang_BN_BD {
             get {
-                object obj = ResourceManager.GetObject("Lang_BN", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_BN-BD", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2693,9 +2783,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_CS {
+        internal static System.Drawing.Bitmap Lang_CS_CZ {
             get {
-                object obj = ResourceManager.GetObject("Lang_CS", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_CS-CZ", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2703,9 +2793,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_DE {
+        internal static System.Drawing.Bitmap Lang_DE_DE {
             get {
-                object obj = ResourceManager.GetObject("Lang_DE", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_DE-DE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2713,9 +2803,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_EN {
+        internal static System.Drawing.Bitmap Lang_EN_GB {
             get {
-                object obj = ResourceManager.GetObject("Lang_EN", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_EN-GB", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2723,9 +2813,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_ES {
+        internal static System.Drawing.Bitmap Lang_EN_US {
             get {
-                object obj = ResourceManager.GetObject("Lang_ES", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_EN-US", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2733,9 +2823,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_FI {
+        internal static System.Drawing.Bitmap Lang_ES_ES {
             get {
-                object obj = ResourceManager.GetObject("Lang_FI", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_ES-ES", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2743,9 +2833,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_FR {
+        internal static System.Drawing.Bitmap Lang_FI_FI {
             get {
-                object obj = ResourceManager.GetObject("Lang_FR", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_FI-FI", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2753,9 +2843,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_HI {
+        internal static System.Drawing.Bitmap Lang_FR_FR {
             get {
-                object obj = ResourceManager.GetObject("Lang_HI", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_FR-FR", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2763,9 +2853,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_ID {
+        internal static System.Drawing.Bitmap Lang_HI_IN {
             get {
-                object obj = ResourceManager.GetObject("Lang_ID", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_HI-IN", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2773,9 +2863,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_IT {
+        internal static System.Drawing.Bitmap Lang_ID_ID {
             get {
-                object obj = ResourceManager.GetObject("Lang_IT", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_ID-ID", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2783,9 +2873,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_JA {
+        internal static System.Drawing.Bitmap Lang_IT_IT {
             get {
-                object obj = ResourceManager.GetObject("Lang_JA", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_IT-IT", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2793,9 +2883,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_KA {
+        internal static System.Drawing.Bitmap Lang_JA_JP {
             get {
-                object obj = ResourceManager.GetObject("Lang_KA", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_JA-JP", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2803,9 +2893,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_KO {
+        internal static System.Drawing.Bitmap Lang_KA_GE {
             get {
-                object obj = ResourceManager.GetObject("Lang_KO", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_KA-GE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2813,9 +2903,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_NL {
+        internal static System.Drawing.Bitmap Lang_KO_KR {
             get {
-                object obj = ResourceManager.GetObject("Lang_NL", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_KO-KR", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2823,9 +2913,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_NO {
+        internal static System.Drawing.Bitmap Lang_NL_NL {
             get {
-                object obj = ResourceManager.GetObject("Lang_NO", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_NL-NL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2833,9 +2923,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_PL {
+        internal static System.Drawing.Bitmap Lang_NO_NO {
             get {
-                object obj = ResourceManager.GetObject("Lang_PL", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_NO-NO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2843,9 +2933,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_PT {
+        internal static System.Drawing.Bitmap Lang_PL_PL {
             get {
-                object obj = ResourceManager.GetObject("Lang_PT", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_PL-PL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2853,9 +2943,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_RO {
+        internal static System.Drawing.Bitmap Lang_PT_BR {
             get {
-                object obj = ResourceManager.GetObject("Lang_RO", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_PT-BR", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2863,9 +2953,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_RU {
+        internal static System.Drawing.Bitmap Lang_PT_PT {
             get {
-                object obj = ResourceManager.GetObject("Lang_RU", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_PT-PT", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2873,9 +2963,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_SV {
+        internal static System.Drawing.Bitmap Lang_RO_RO {
             get {
-                object obj = ResourceManager.GetObject("Lang_SV", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_RO-RO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2883,9 +2973,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_TR {
+        internal static System.Drawing.Bitmap Lang_RU_RU {
             get {
-                object obj = ResourceManager.GetObject("Lang_TR", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_RU-RU", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2893,9 +2983,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_UK {
+        internal static System.Drawing.Bitmap Lang_SV_SE {
             get {
-                object obj = ResourceManager.GetObject("Lang_UK", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_SV-SE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2903,9 +2993,9 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_VI {
+        internal static System.Drawing.Bitmap Lang_TH_TH {
             get {
-                object obj = ResourceManager.GetObject("Lang_VI", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_TH-TH", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2913,9 +3003,49 @@ namespace LoadOrderToolTwo.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Lang_ZH {
+        internal static System.Drawing.Bitmap Lang_TR_TR {
             get {
-                object obj = ResourceManager.GetObject("Lang_ZH", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_TR-TR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lang_UK_UA {
+            get {
+                object obj = ResourceManager.GetObject("Lang_UK-UA", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lang_VI_VN {
+            get {
+                object obj = ResourceManager.GetObject("Lang_VI-VN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lang_ZH_CN {
+            get {
+                object obj = ResourceManager.GetObject("Lang_ZH-CN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lang_ZH_TW {
+            get {
+                object obj = ResourceManager.GetObject("Lang_ZH-TW", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

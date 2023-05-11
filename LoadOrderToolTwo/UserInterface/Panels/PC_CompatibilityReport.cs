@@ -7,6 +7,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 using LoadOrderToolTwo.Utilities;
 using System.Threading.Tasks;
+using LoadOrderToolTwo.UserInterface.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
@@ -26,6 +27,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
+		isManager = true;
 		userId = SteamUtil.GetLoggedInSteamId();
 		hasPackages = userId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == userId.ToString());
 		isManager = await CompatibilityApiUtil.IsCommunityManager(userId);
@@ -33,10 +35,13 @@ public partial class PC_CompatibilityReport : PanelContent
 		return true;
 	}
 
+	protected override void OnLoadFail() => OnDataLoad();
+
 	protected override void OnDataLoad()
 	{
-		B_Manage.Visible = isManager;
+		B_ManageSingle.Visible = B_Manage.Visible = isManager;
 		B_YourPackages.Visible = hasPackages;
+		TLP_Buttons.Visible = isManager || hasPackages;
 
 		PB_Loading.Dispose();
 	}
@@ -62,5 +67,23 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			Form.PushPanel(null, new PC_CompatibilityManagement(userId));
 		}
+	}
+
+	private void B_ManageSingle_Click(object sender, EventArgs e)
+	{
+		if (isManager)
+		{
+			var form = new AddPackageForm() { Text = LocaleHelper.GetGlobalText("Select a package") };
+
+			form.PackageSelected += Form_PackageSelected;
+			
+			form.Show(Form);
+		}
+
+	}
+
+	private void Form_PackageSelected(Domain.Steam.SteamWorkshopItem obj)
+	{
+		Form.PushPanel(null, new PC_CompatibilityManagement(obj));
 	}
 }

@@ -117,13 +117,11 @@ public static class CompatibilityManager
 
 	private static CompatibilityInfo GetCompatibilityReport(IPackage package)
 	{
-		var packageData = package.Workshop ? CompatibilityData.Packages.TryGet(package.SteamId) : package.Package?.Mod is not null ? CompatibilityData.Packages.Values.FirstOrDefault(x => x.Package.FileName == Path.GetFileName(package.Package.Mod.FileName)) : null;
-		var info = GetAutomatedReport(package, packageData);
+		var packageData = GetPackageData(package);
+		var info = new CompatibilityInfo(package, packageData);
 
 		if (packageData is null)
 		{
-			info.Add(ReportType.Stability, new PackageStatus { Type = StatusType.NotReviewed }, Locale.CR_NotReviewedOutdated);
-
 			return info;
 		}
 
@@ -138,6 +136,30 @@ public static class CompatibilityManager
 		}
 
 		return info;
+	}
+
+	private static IndexedPackage? GetPackageData(IPackage package)
+	{
+		if (package.Workshop)
+		{
+			var packageData = CompatibilityData.Packages.TryGet(package.SteamId);
+
+			if (packageData is null)
+			{
+				packageData = new IndexedPackage(GetAutomatedReport(package));
+
+				packageData.Load(CompatibilityData.Packages);
+			}
+
+			return packageData;
+		}
+
+		if (package.Package?.Mod is not null)
+		{
+			return CompatibilityData.Packages.Values.FirstOrDefault(x => x.Package.FileName == Path.GetFileName(package.Package.Mod.FileName));
+		}
+
+		return null;
 	}
 
 	private static void HandleInteraction(CompatibilityInfo info, PackageInteraction interaction)
@@ -157,7 +179,7 @@ public static class CompatibilityManager
 
 		var text = interaction.Type switch
 		{
-			InteractionType.Successor => Locale.CR_SuccessorsAvailable,
+			InteractionType.Successor => LocaleCR.CR_SuccessorsAvailable.ToString(),
 			_ => string.Empty
 		};
 
@@ -174,51 +196,46 @@ public static class CompatibilityManager
 		return CentralManager.Packages.FirstOrDefault(x => x.SteamId == steamId);
 	}
 
-	private static CompatibilityInfo GetAutomatedReport(IPackage package, IndexedPackage? packageData)
+	internal static Package GetAutomatedReport(IPackage package)
 	{
-		if (!package.Workshop)
+		var info = new Package
 		{
-			return new(package, packageData);
-		}
+			Stability = PackageStability.NotReviewed,
+			SteamId = package.SteamId,
+			Name = package.Name,
+			FileName = package.Package?.Mod?.FileName,
+			Links = new(),
+			Interactions = new(),
+			Statuses = new(),
+		};
 
-		var info = new CompatibilityInfo(package, packageData);
-
-		if (!(packageData?.Interactions.ContainsKey(InteractionType.Required) ?? false) && (package.RequiredPackages?.Any() ?? false))
+		if (package.RequiredPackages?.Any() ?? false)
 		{
-			HandleInteraction(info, new PackageInteraction { Type = InteractionType.Required, Packages = package.RequiredPackages });
+			info.Interactions.Add(new PackageInteraction { Type = InteractionType.Required, Action = InteractionAction.SubscribeToPackages, Packages = package.RequiredPackages });
 		}
 
 		package.ToString().RemoveVersionText(out var titleTags);
 
 		foreach (var tag in titleTags)
 		{
-			if (tag.ToLower() is "obsolete" or "deprecated" or "abandoned" && !(packageData?.Statuses.ContainsKey(StatusType.Deprecated) ?? false))
+			if (tag.ToLower() is "obsolete" or "deprecated" or "abandoned")
 			{
-				info.Add(
-					ReportType.Stability,
-					new PackageStatus { Action = InteractionAction.Unsubscribe, Type = StatusType.Deprecated },
-					Locale.CR_Abandoned);
+				info.Stability = PackageStability.Broken;
 			}
-			else if (tag.ToLower() is "alpha" or "experimental" or "beta" or "test" or "testing" && !(packageData?.Statuses.ContainsKey(StatusType.TestVersion) ?? false))
+			else if (tag.ToLower() is "alpha" or "experimental" or "beta" or "test" or "testing")
 			{
-				info.Add(
-					ReportType.Stability,
-					new PackageStatus { Type = StatusType.TestVersion },
-					Locale.CR_TestVersion);
+				info.Statuses.Add(new PackageStatus { Type = StatusType.TestVersion });
 			}
 		}
 
 		const ulong MUSIC_MOD_ID = 2474585115;
 
-		if ((package.RequiredPackages?.Contains(MUSIC_MOD_ID) ??false) && !(packageData?.Statuses.ContainsKey(StatusType.MusicIsCopyrightFree) ?? false))
+		if ((package.RequiredPackages?.Contains(MUSIC_MOD_ID) ??false))
 		{
-			info.Add(
-				ReportType.Status,
-				new PackageStatus { Type = StatusType.MusicCanBeCopyrighted },
-				Locale.CR_MusicCopyright);
+			info.Statuses.Add(new PackageStatus { Type = StatusType.MusicCanBeCopyrighted });
 		}
 
-		if (package.SteamDescription is not null && !(packageData?.Package.Links?.Any() ?? false))
+		if (package.SteamDescription is not null)
 		{
 			var matches = Regex.Matches(package.SteamDescription, @"\[url\=(https://(?:www\.)?(.+?)/.*?)\]");
 
@@ -244,14 +261,14 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (package.IsMod && !(packageData?.Statuses.ContainsKey(StatusType.SourceCodeAvailable) ?? false) && !info.Links.Any(x => x.Type is LinkType.Github))
+		if (package.IsMod && !info.Links.Any(x => x.Type is LinkType.Github))
 		{
-			info.Add(ReportType.Status, new PackageStatus { Type = StatusType.SourceCodeNotAvailable }, Locale.CR_SourceNotPublic);
+			info.Statuses.Add(new PackageStatus { Type = StatusType.SourceCodeNotAvailable });
 		}
 
-		if (package.IsMod && package.SteamDescription is not null && package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3)
+		if (package.IsMod && (package.SteamDescription is null || package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3))
 		{
-			info.Add(ReportType.Status, new PackageStatus { Type = StatusType.IncompleteDescription }, Locale.CR_SourceNotPublic);
+			info.Statuses.Add(new PackageStatus { Type = StatusType.IncompleteDescription });
 		}
 
 		return info;
@@ -269,6 +286,19 @@ public static class CompatibilityManager
 			NotificationType.Switch => "I_Switch",
 			NotificationType.Unsubscribe => "I_Broken",
 			NotificationType.None or _ => status ? "I_Ok" : "I_Info",
+		};
+	}
+
+	public static DynamicIcon GetIcon(this LinkType link)
+	{
+		return link switch
+		{
+			LinkType.Website => "I_Globe",
+			LinkType.Github => "I_Github",
+			LinkType.Crowdin => "I_Translate",
+			LinkType.Donation => "I_Donate",
+			LinkType.Discord => "I_Discord",
+			_ => "I_Share",
 		};
 	}
 

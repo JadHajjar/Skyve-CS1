@@ -12,4 +12,5 @@ internal enum PackageSorting
 	Status,
 	CompatibilityReport,
 	Mod,
+	None,
 }

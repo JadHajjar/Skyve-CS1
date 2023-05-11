@@ -58,7 +58,7 @@ public partial class PC_Options : PanelContent
 
 		folderPathsChanged = false;
 
-		DD_Language.Items = LocaleHelper.GetAvailableLanguages().Select(lang => new CultureInfo(lang)).ToArray();
+		DD_Language.Items = LocaleHelper.GetAvailableLanguages().Distinct().Select(lang => new CultureInfo(lang)).ToArray();
 		DD_Language.SelectedItem = DD_Language.Items.FirstOrDefault(x => x.IetfLanguageTag == LocaleHelper.CurrentCulture.IetfLanguageTag) ?? DD_Language.Items[0];
 		DD_Language.SelectedItemChanged += DD_Language_SelectedItemChanged;
 

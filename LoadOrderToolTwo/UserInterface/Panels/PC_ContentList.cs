@@ -419,7 +419,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (CentralManager.CurrentProfile.ForAssetEditor)
 		{
-			if (item.Package?.ForNormalGame == true)
+			if (!(item.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1)).HasFlag(PackageUsage.AssetCreation))
 			{
 				return true;
 			}
@@ -427,7 +427,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (CentralManager.CurrentProfile.ForGameplay)
 		{
-			if (item.Package?.ForAssetEditor == true)
+			if (!(item.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1)).HasFlag(PackageUsage.CityBuilding))
 			{
 				return true;
 			}
@@ -615,7 +615,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.Author?.Name)
-			|| Path.GetFileName(item.Folder).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| (item.Workshop ? item.SteamId.ToString() : Path.GetFileName(item.Folder)).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)

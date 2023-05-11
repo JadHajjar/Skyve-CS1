@@ -205,7 +205,7 @@ public static class SteamUtil
 
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> QueryFilesAsync(SteamQueryOrder order, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false)
 	{
-		var url = $"https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key={KEYS.STEAM_API_KEY}&query_type={(int)order}&numperpage=100&creator_appid=255710&appid=255710&match_all_tags=true&return_tags=true&return_children=true&return_details=true";
+		var url = $"https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key={KEYS.STEAM_API_KEY}&query_type={(int)order}&numperpage=100&return_vote_data=true&appid=255710&match_all_tags=true&return_tags=true&return_children=true&return_details=true";
 
 		if (!string.IsNullOrWhiteSpace(query))
 		{

@@ -355,79 +355,79 @@
   <data name="I_LSM_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_LSM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_AR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_AR-SA" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_AR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_BN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_BN-BD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_BN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_CS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_CS-CZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_CS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_EN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_EN-US" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_EN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_ES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_ES-ES" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_ES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_FI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_FI-FI" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_FI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_FR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_FR-FR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_FR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_HI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_HI-IN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_HI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_ID" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_ID-ID" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_ID.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_IT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_IT-IT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_IT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_JA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_JA-JP" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_JA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_KO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_KO-KR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_KO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_NL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_NL-NL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_NL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_PL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_PL-PL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_PL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_PT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_PT-PT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_PT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_RO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_RO-RO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_RO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_RU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_RU-RU" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_RU.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_TR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_TR-TR" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_TR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_VI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_VI-VN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_VI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_ZH" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_ZH-CN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_ZH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_DE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_DE-DE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_DE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_KA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_KA-GE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_KA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_NO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_NO-NO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_NO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_SV" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_SV-SE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_SV.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Lang_UK" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Lang_UK-UA" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Lang_UK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="I_Sort_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -975,5 +975,44 @@
   </data>
   <data name="I_VoteFilled_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_VoteFilled_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lang_EN-GB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lang_EN-UK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lang_PT-BR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lang_PT-BR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lang_TH-TH" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lang_TH-TH.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lang_ZH-TW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lang_ZH-TW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Github_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Github_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Github_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Github_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Github_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Github_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Globe_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Globe_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Globe_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Globe_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Globe_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Globe_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Share_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Share_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Share_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Share_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Share_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Share_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

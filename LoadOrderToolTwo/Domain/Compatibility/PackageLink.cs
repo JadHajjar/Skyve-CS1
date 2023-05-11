@@ -3,11 +3,14 @@
 namespace LoadOrderToolTwo.Domain.Compatibility;
 
 [DynamicSqlClass("PackageLinks")]
-public struct PackageLink : IDynamicSql
-{
 #if API
+public class PackageLink : IDynamicSql
+{
 	[DynamicSqlProperty(Indexer = true), System.Text.Json.Serialization.JsonIgnore]
 	public ulong PackageId { get; set; }
+#else
+public struct PackageLink : IDynamicSql
+{
 #endif
 
 	[DynamicSqlProperty]

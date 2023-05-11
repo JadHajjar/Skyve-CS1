@@ -40,14 +40,14 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNoti
 
 	protected override bool SearchMatch(string searchText, CompatibilityNotificationFilter item)
 	{
-		var text = item == CompatibilityNotificationFilter.Any ? Locale.AnyReportStatus : LocaleHelper.GetGlobalText($"CR_{item}");
+		var text = item == CompatibilityNotificationFilter.Any ? Locale.AnyReportStatus : LocaleCR.Get($"{item}");
 
 		return searchText.SearchCheck(text);
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, CompatibilityNotificationFilter item)
 	{
-		var text = item switch { CompatibilityNotificationFilter.Any => Locale.AnyReportStatus, CompatibilityNotificationFilter.AnyIssue => Locale.AnyIssues, _ => LocaleHelper.GetGlobalText($"CR_{item}") };
+		var text = item switch { CompatibilityNotificationFilter.Any => Locale.AnyReportStatus, CompatibilityNotificationFilter.AnyIssue => Locale.AnyIssues, _ => LocaleCR.Get($"{item}") };
 		var color = ((NotificationType)(int)item).GetColor();
 
 		using var icon = (item switch { CompatibilityNotificationFilter.Any => new DynamicIcon("I_Stability"), CompatibilityNotificationFilter.AnyIssue => new DynamicIcon("I_Warning"), _ => ((NotificationType)(int)item).GetIcon(true) }).Get(rectangle.Height - 2).Color(color);

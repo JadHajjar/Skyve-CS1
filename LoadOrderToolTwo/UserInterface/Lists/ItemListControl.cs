@@ -38,6 +38,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	public event Action<bool>? FilterByIncluded;
 	public event Action<bool>? FilterByEnabled;
 	public event Action<string>? AddToSearch;
+	public event Action<T>? PackageSelected;
 	public event Action? OpenWorkshopSearch;
 	public event Action? OpenWorkshopSearchInBrowser;
 	public event EventHandler? FilterRequested;
@@ -66,6 +67,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	public bool PackagePage { get; set; }
 	public bool TextSearchEmpty { get; set; }
 	public bool IsGenericPage { get; set; }
+	public bool IsSelection { get; set; }
 
 	protected override void UIChanged()
 	{
@@ -140,6 +142,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			PackageSorting.Mod => items
 				.OrderBy(x => Path.GetFileName(x.Item.Package?.Mod?.FileName ?? string.Empty)),
 
+			PackageSorting.None => items,
+
 			PackageSorting.CompatibilityReport => items
 				.OrderBy(x => x.Item.GetCompatibilityInfo().Notification),
 
@@ -147,7 +151,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				.OrderBy(x => x.Item.Subscriptions),
 
 			PackageSorting.Votes => items
-				.OrderBy(x => SteamUtil.GetScore(x.Item)).ThenBy(x => x.Item.PositiveVotes - x.Item.NegativeVotes / 10 - x.Item.Reports),
+				.OrderBy(x => SteamUtil.GetScore(x.Item)).ThenBy(x => x.Item.PositiveVotes - (x.Item.NegativeVotes / 10) - x.Item.Reports),
 
 			_ => items
 				.OrderByDescending(x => x.Item.IsIncluded)
@@ -213,7 +217,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.ScoreRect.Contains(location))
 		{
-			setTip(string.Format(Locale.RatingCount, (item.Item.PositiveVotes > item.Item.NegativeVotes ? '+' : '-') + Math.Abs(item.Item.PositiveVotes - item.Item.NegativeVotes / 10 - item.Item.Reports).ToString("N0"), $"({SteamUtil.GetScore(item.Item)}%)") + "\r\n" + string.Format(Locale.SubscribersCount, item.Item.Subscriptions.ToString("N0")), rects.ScoreRect);
+			setTip(string.Format(Locale.RatingCount, (item.Item.PositiveVotes > item.Item.NegativeVotes ? '+' : '-') + Math.Abs(item.Item.PositiveVotes - (item.Item.NegativeVotes / 10) - item.Item.Reports).ToString("N0"), $"({SteamUtil.GetScore(item.Item)}%)") + "\r\n" + string.Format(Locale.SubscribersCount, item.Item.Subscriptions.ToString("N0")), rects.ScoreRect);
 			return true;
 		}
 
@@ -221,12 +225,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
+				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
 			}
 
 			if (rects.EnabledRect.Contains(location))
 			{
-				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToLower())}", rects.EnabledRect);
+				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}", rects.EnabledRect);
 			}
 
 			if (rects.VersionRect.Contains(location))
@@ -240,7 +244,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				if (item.Item.Package != null)
 				{
-					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToLower())}", rects.IncludedRect);
+					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
 				}
 				else
 				{
@@ -251,6 +255,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.CenterRect.Contains(location) || rects.IconRect.Contains(location))
 		{
+			if (IsSelection)
+			{
+				setTip(Locale.SelectThisPackage, rects.CenterRect);
+				return true;
+			}
+
 			setTip(Locale.OpenPackagePage, rects.CenterRect);
 		}
 
@@ -267,7 +277,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 			else
 			{
-				setTip(item.Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToLower()), rects.DownloadStatusRect);
+				setTip(item.Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower()), rects.DownloadStatusRect);
 			}
 		}
 
@@ -455,6 +465,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
+			if (IsSelection)
+			{
+				PackageSelected?.Invoke(item.Item);
+			}
+
 			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Item));
 
 			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
@@ -530,12 +545,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	public void ShowRightClickMenu(T item)
 	{
-		if (item.Package is not null)
-		{
-			var items = PC_PackagePage.GetRightClickMenuItems(item.Package);
+		var items = PC_PackagePage.GetRightClickMenuItems(item);
 
-			this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
-		}
+		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
 
 	private void OpenSteamLink(string? url)
@@ -656,9 +668,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		var partialIncluded = e.Item is Package p && p.IsPartiallyIncluded();
 		var isIncluded = partialIncluded || e.Item.IsIncluded;
 
-		PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large, package);
+		if (!IsSelection)
+		{
+			PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large, package);
+		}
 
-		DrawThumbnailAndTitle(e, rects, large, package);
+		DrawThumbnailAndTitle(e, rects, large);
 
 		if (!large)
 		{
@@ -693,7 +708,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			var labelColor = report.Notification.GetColor();
 
-			rects.CompatibilityRect = DrawLabel(e, LocaleHelper.GetGlobalText($"CR_{report.Notification}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
+			rects.CompatibilityRect = DrawLabel(e, LocaleCR.Get($"{report.Notification}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
 
 			labelRect.X += Padding.Left + rects.CompatibilityRect.Width;
 		}
@@ -902,7 +917,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomLeft, true);
 	}
 
-	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool large, Package? package)
+	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool large)
 	{
 		var iconRectangle = rects.IconRect;
 
@@ -1110,18 +1125,21 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		var rects = new Rectangles() { Item = item };
 		var includeItemHeight = doubleSize ? (ItemHeight / 2) : ItemHeight;
 
-		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package?.Mod is not null)
+		if (!IsSelection)
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
-			rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
-		}
-		else if (item is not Asset)
-		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (includeItemHeight * 2 * 9 / 10) : includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
-		}
-		else
-		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
+			if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package?.Mod is not null)
+			{
+				rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
+				rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
+			}
+			else if (item is not Asset)
+			{
+				rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (includeItemHeight * 2 * 9 / 10) : includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
+			}
+			else
+			{
+				rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
+			}
 		}
 
 		var buttonRectangle = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight / (doubleSize ? 2 : 1), ItemHeight / (doubleSize ? 2 : 1)), ContentAlignment.TopRight);
@@ -1155,11 +1173,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			rects.SteamIdRect = rects.SteamIdRect.Pad(-Padding.Left - buttonRectangle.Width, 0, 0, 0);
 		}
 
-		//}
-		//else
-		//{
-		//	rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, buttonRectangle.X - rects.IconRect.X, rectangle.Height / 2);
-		//}
+		if (IsSelection)
+		{
+			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, buttonRectangle.X - rects.IconRect.X, rectangle.Height);
+		}
 
 		return rects;
 	}

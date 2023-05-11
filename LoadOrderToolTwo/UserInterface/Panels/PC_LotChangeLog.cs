@@ -17,7 +17,7 @@ internal class PC_LotChangeLog : PC_Changelog
 	private static string GetChangelogFile()
 	{
 		var assembly = Assembly.GetExecutingAssembly();
-		var name = $"{nameof(LoadOrderToolTwo)}.Properties.Changelog.{LocaleHelper.CurrentCulture.TwoLetterISOLanguageName.ToLower()}.json";
+		var name = $"{nameof(LoadOrderToolTwo)}.Properties.Changelog.{LocaleHelper.CurrentCulture.IetfLanguageTag}.json";
 		using var resource = assembly.GetManifestResourceStream(name);
 
 		if (resource is null)

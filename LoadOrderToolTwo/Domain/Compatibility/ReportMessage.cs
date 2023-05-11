@@ -2,7 +2,7 @@
 
 public struct ReportMessage
 {
-	public IPackageStatus Status { get; set; }
+	public IGenericPackageStatus Status { get; set; }
 	public ReportType Type { get; set; }
 	public string Message { get; set; }
 }

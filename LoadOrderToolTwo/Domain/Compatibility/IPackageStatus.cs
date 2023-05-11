@@ -1,10 +1,17 @@
-﻿namespace LoadOrderToolTwo.Domain.Compatibility;
+﻿using System;
 
-public interface IPackageStatus
+namespace LoadOrderToolTwo.Domain.Compatibility;
+
+public interface IPackageStatus<TType> : IGenericPackageStatus where TType : struct, Enum
 {
-	InteractionAction Action { get; }
-	ulong[]? Packages { get; }
-	string? Note { get; }
+	TType Type { get; set; } 
+}
+
+public interface IGenericPackageStatus 
+{
+	InteractionAction Action { get; set; }
+	ulong[]? Packages { get; set; }
+	string? Note { get; set; }
 #if !API
 	NotificationType Notification { get; }
 #endif
