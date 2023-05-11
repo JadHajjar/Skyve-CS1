@@ -273,14 +273,14 @@
                     "Ajout d'une nouvelle icône à côté d'un paquet qui affiche un résumé rapide des votes et le nombre d'abonnés du paquet.",
                     "Survolez-le pour afficher les valeurs.",
                     "Cliquez sur l'icône pour obtenir une description détaillée de cette fonctionnalité.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Ajout des options de tri 'Votes\" et 'Total des abonnés'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Exigences d'asset",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Les éléments requis affichés sur la page Workshop d'un asset sont maintenant intégrés dans Load Order Tool.",
+                    "Ces informations seront désormais incluses dans le rapport de compatibilité, ce qui vous permettra de voir rapidement et facilement ce qu'il vous manque."
                 ]
             },
             {
@@ -288,7 +288,7 @@
                 "Changes": [
                     "Mise à jour de la page du paquet pour correspondre aux informations affichées dans les listes de contenu.",
                     "Les listes de contenu secondaires comme 'Paquets manquants' et 'Collection Workshop' utilisent maintenant la même interface utilisateur que les pages de la liste de contenu principale, permettant une expérience simplifiée et plus d'options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Ajout d'options de lancement 'Nouvel asset' et 'Charger un asset' dans le profil actuel pour charger rapidement l'éditeur d'assets."
                 ]
             }
         ]
