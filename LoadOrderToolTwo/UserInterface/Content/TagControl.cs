@@ -38,9 +38,9 @@ internal class TagControl : SlickImageControl
 			return Size.Ceiling(FontMeasuring.Measure(Text, Font)) + new Size(Padding.Horizontal, Padding.Vertical);
 		}
 
-		using (Image)
+		using (var img = Image)
 		{
-			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + Image.Width * 2, Padding.Vertical);
+			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + img.Width * 2, Padding.Vertical);
 		}
 	}
 
@@ -69,9 +69,9 @@ internal class TagControl : SlickImageControl
 		}
 		else if (Live)
 		{
-			using (Image)
+			using (var img = Image)
 			{
-				e.Graphics.DrawImage(Image.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(Image.Size));
+				e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(img.Size));
 			}
 		}
 

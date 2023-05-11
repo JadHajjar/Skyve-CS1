@@ -2,7 +2,7 @@
 
 public enum InteractionAction
 {
-	[CRN(NotificationType.None)] None = 0,
+	[CRN(NotificationType.None)] NoAction = 0,
 	[CRN(NotificationType.None)] SubscribeToPackages,
 	[CRN(NotificationType.AttentionRequired)] RequiresConfiguration,
 	[CRN(NotificationType.AttentionRequired)] SelectOne,

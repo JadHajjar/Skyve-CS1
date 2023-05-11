@@ -1,18 +1,14 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
-using LoadOrderToolTwo.Domain.Steam.Markdown;
+using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
+
 using SlickControls;
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static System.Net.Mime.MediaTypeNames;
 
 namespace LoadOrderToolTwo.UserInterface.Content;
 internal class LinkControl : SlickImageControl
@@ -31,6 +27,7 @@ internal class LinkControl : SlickImageControl
 		{
 			AutoSize = true;
 			Cursor = Cursors.Hand;
+			SlickTip.SetTo(this, Link.Url);
 		}
 	}
 
@@ -43,14 +40,9 @@ internal class LinkControl : SlickImageControl
 
 	public override Size GetPreferredSize(Size proposedSize)
 	{
-		if (ImageName is null)
+		using (var img = Link.Type.GetIcon().Default)
 		{
-			return Size.Ceiling(FontMeasuring.Measure(Text, Font)) + new Size(Padding.Horizontal, Padding.Vertical);
-		}
-
-		using (Image)
-		{
-			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + Image.Width * 2, Padding.Vertical);
+			return Size.Ceiling(FontMeasuring.Measure(Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())), Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
 		}
 	}
 
@@ -65,24 +57,11 @@ internal class LinkControl : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), Padding.Left);
 
-		if (ImageName is null)
+		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? "I_Edit" : Link.Type.GetIcon()).Default)
 		{
-			if (HoverState.HasFlag(HoverState.Hovered))
-			{
-				using var delete = IconManager.GetIcon("I_Disposable");
-				e.Graphics.DrawImage(delete.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(delete.Size));
-			}
-			else
-			{
-				e.Graphics.DrawString(Text, Font, foreBrush, ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-			}
-		}
-		else if (Live)
-		{
-			using (Image)
-			{
-				e.Graphics.DrawImage(Image.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(Image.Size));
-			}
+			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
+
+			e.Graphics.DrawString(Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())), Font, foreBrush, ClientRectangle.Pad(Padding.Horizontal + img.Width, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 		}
 
 		DrawFocus(e.Graphics, ClientRectangle.Pad(1), Padding.Left, ImageName is null ? FormDesign.Design.RedColor : null);

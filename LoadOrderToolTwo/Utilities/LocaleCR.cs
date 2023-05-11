@@ -70,4 +70,9 @@ internal class LocaleCR : LocaleHelper
 	public static Translation CR_CompatibleAccordingToAuthor => _instance.GetText(nameof(CR_CompatibleAccordingToAuthor));
 	public static Translation CR_IncompatibleAsset => _instance.GetText(nameof(CR_IncompatibleAsset));
 	public static Translation LinkedPackages => _instance.GetText(nameof(LinkedPackages));
+	public static Translation ConfirmEndSession => _instance.GetText(nameof(ConfirmEndSession));
+	public static Translation StatusesCount => _instance.GetText(nameof(StatusesCount));
+	public static Translation InteractionCount => _instance.GetText(nameof(InteractionCount));
+	public static Translation CrDataLoadFailed => _instance.GetText(nameof(CrDataLoadFailed));
+	public static Translation AddGlobalTag => _instance.GetText(nameof(AddGlobalTag));
 }

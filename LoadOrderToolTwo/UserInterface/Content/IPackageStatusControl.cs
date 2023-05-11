@@ -30,6 +30,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 		typeDropDown = new()
 		{
+			Dock = DockStyle.Top,
 			Text = typeof(T).Name,
 		};
 

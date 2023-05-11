@@ -33,12 +33,12 @@ partial class IPackageStatusControl<T, TBase>
 			this.CloseIcon = new SlickControls.TopIcon();
 			this.P_Main = new SlickControls.RoundedTableLayoutPanel();
 			this.TB_Note = new SlickControls.SlickTextBox();
+			this.DD_Action = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageActionDropDown();
 			this.I_Note = new SlickControls.SlickIcon();
 			this.label1 = new System.Windows.Forms.Label();
 			this.I_AddPackage = new SlickControls.SlickIcon();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.P_Packages = new System.Windows.Forms.Panel();
-			this.DD_Action = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageActionDropDown();
 			((System.ComponentModel.ISupportInitialize)(this.CloseIcon)).BeginInit();
 			this.P_Main.SuspendLayout();
 			this.SuspendLayout();
@@ -100,6 +100,16 @@ partial class IPackageStatusControl<T, TBase>
 			this.TB_Note.TabIndex = 19;
 			this.TB_Note.Visible = false;
 			// 
+			// DD_Action
+			// 
+			this.DD_Action.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Action.Dock = System.Windows.Forms.DockStyle.Top;
+			this.DD_Action.Location = new System.Drawing.Point(3, 25);
+			this.DD_Action.Name = "DD_Action";
+			this.DD_Action.Size = new System.Drawing.Size(300, 44);
+			this.DD_Action.TabIndex = 1;
+			this.DD_Action.Text = "Recommended Action";
+			// 
 			// I_Note
 			// 
 			this.I_Note.ActiveColor = null;
@@ -117,9 +127,9 @@ partial class IPackageStatusControl<T, TBase>
 			// 
 			this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 253);
+			this.label1.Location = new System.Drawing.Point(3, 254);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(44, 16);
+			this.label1.Size = new System.Drawing.Size(35, 13);
 			this.label1.TabIndex = 21;
 			this.label1.Text = "label1";
 			// 
@@ -158,15 +168,6 @@ partial class IPackageStatusControl<T, TBase>
 			this.P_Packages.Name = "P_Packages";
 			this.P_Packages.Size = new System.Drawing.Size(386, 0);
 			this.P_Packages.TabIndex = 23;
-			// 
-			// DD_Action
-			// 
-			this.DD_Action.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Action.Location = new System.Drawing.Point(3, 25);
-			this.DD_Action.Name = "DD_Action";
-			this.DD_Action.Size = new System.Drawing.Size(300, 44);
-			this.DD_Action.TabIndex = 1;
-			this.DD_Action.Text = "Recommended Action";
 			// 
 			// IPackageStatusControl
 			// 

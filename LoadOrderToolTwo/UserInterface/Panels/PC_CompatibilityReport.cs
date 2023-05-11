@@ -73,7 +73,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		if (isManager)
 		{
-			var form = new AddPackageForm() { Text = "Select a package" };
+			var form = new AddPackageForm() { Text = LocaleHelper.GetGlobalText("Select a package") };
 
 			form.PackageSelected += Form_PackageSelected;
 			

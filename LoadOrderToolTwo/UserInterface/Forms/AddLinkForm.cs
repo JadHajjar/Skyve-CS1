@@ -96,11 +96,13 @@ public partial class AddLinkForm : BaseForm
 			tbLink.ShowLabel = false;
 			tbLink.Placeholder = "Link URL";
 			tbLink.MinimumSize = new(0, (int)(24 * UI.FontScale));
+			tbLink.Text = packageLink.Url;
 
 			tbName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 			tbName.ShowLabel = false;
 			tbName.Placeholder = "Link Name";
 			tbName.MinimumSize = new(0, (int)(24 * UI.FontScale));
+			tbName.Text = packageLink.Title;
 
 			deleteButton.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 			deleteButton.Padding = UI.Scale(new Padding(5), UI.FontScale);

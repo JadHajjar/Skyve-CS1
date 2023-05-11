@@ -27,6 +27,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
 		InitializeComponent();
+
+		T_Statuses.Text = LocaleCR.StatusesCount.Format(0);
+		T_Interactions.Text = LocaleCR.InteractionCount.Format(0);
 	}
 
 	public PC_CompatibilityManagement() : this(true)
@@ -94,7 +97,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		return !toBeDisposed
 			|| currentPage <= 0
 			|| currentPage >= _packages.Count - 1
-			|| ShowPrompt("Are you sure you want to conclude your session?", PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
+			|| ShowPrompt(LocaleCR.ConfirmEndSession, PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -119,7 +122,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	protected override void OnLoadFail()
 	{
-		ShowPrompt("Failed to load data, try again later", PromptButtons.OK, PromptIcons.Error);
+		ShowPrompt(LocaleCR.CrDataLoadFailed, PromptButtons.OK, PromptIcons.Error);
 		Form.PushBack();
 	}
 
@@ -179,7 +182,6 @@ public partial class PC_CompatibilityManagement : PanelContent
 		TB_Note.Visible = I_Note.Selected = !string.IsNullOrWhiteSpace(postPackage.Note);
 
 		P_Tags.Controls.Clear(true, x => !string.IsNullOrEmpty(x.Text));
-		P_Links.Controls.Clear(true, x => x is LinkControl);
 		FLP_Statuses.Controls.Clear(true, x => x is IPackageStatusControl<StatusType, PackageStatus>);
 		FLP_Interactions.Controls.Clear(true, x => x is IPackageStatusControl<InteractionType, PackageInteraction>);
 
@@ -191,13 +193,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			T_NewTag.SendToBack();
 		}
 
-		foreach (var item in postPackage.Links ?? new())
-		{
-			var control = new LinkControl { Link = item };
-			control.Click += TagControl_Click;
-			P_Links.Controls.Add(control);
-			T_NewLink.SendToBack();
-		}
+		SetLinks(postPackage.Links ?? new());
 
 		foreach (var item in postPackage.Statuses ?? new())
 		{
@@ -228,7 +224,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void T_NewTag_Click(object sender, EventArgs e)
 	{
-		var prompt = ShowInputPrompt("Add a global tag");
+		var prompt = ShowInputPrompt(LocaleCR.AddGlobalTag);
 
 		if (prompt.DialogResult != DialogResult.OK)
 		{
@@ -253,7 +249,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void T_NewLink_Click(object sender, EventArgs e)
 	{
-		var form = new AddLinkForm(currentPackage?.GetCompatibilityInfo().Links ?? new());
+		var form = new AddLinkForm(P_Links.Controls.OfType<LinkControl>().ToList(x => x.Link));
 
 		form.Show(Form);
 
@@ -262,7 +258,16 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void SetLinks(IEnumerable<PackageLink> links)
 	{
+		P_Links.Controls.Clear(true, x => x is LinkControl);
 
+		foreach (var item in links)
+		{
+			var control = new LinkControl { Link = item };
+			control.Click += T_NewLink_Click;
+			P_Links.Controls.Add(control);
+		}
+	
+		T_NewLink.SendToBack();
 	}
 
 	private void B_AddStatus_Click(object sender, EventArgs e)
@@ -305,7 +310,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		postPackage.Usage = DD_Usage.SelectedItems.Aggregate((prev, next) => prev | next);
 		postPackage.Note = I_Note.Selected ? TB_Note.Text : string.Empty;
 		postPackage.Tags = P_Tags.Controls.OfType<TagControl>().Where(x => !string.IsNullOrEmpty(x.Text)).ToList(x => x.Text);
-		postPackage.Links = P_Tags.Controls.OfType<LinkControl>().ToList(x => x.Link);
+		postPackage.Links = P_Links.Controls.OfType<LinkControl>().ToList(x => x.Link);
 		postPackage.Statuses = FLP_Statuses.Controls.OfType<IPackageStatusControl<StatusType, PackageStatus>>().ToList(x => x.PackageStatus);
 		postPackage.Interactions = FLP_Interactions.Controls.OfType<IPackageStatusControl<InteractionType, PackageInteraction>>().ToList(x => x.PackageStatus);
 
@@ -323,5 +328,11 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private void I_Note_Click(object sender, EventArgs e)
 	{
 		TB_Note.Visible = I_Note.Selected = !I_Note.Selected;
+	}
+
+	private void FLP_Statuses_ControlAdded(object sender, ControlEventArgs e)
+	{
+		T_Statuses.Text = LocaleCR.StatusesCount.Format(FLP_Statuses.Controls.Count - 1);
+		T_Interactions.Text = LocaleCR.InteractionCount.Format(FLP_Interactions.Controls.Count - 1);
 	}
 }
