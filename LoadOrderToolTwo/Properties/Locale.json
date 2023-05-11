@@ -387,5 +387,6 @@
   "LoadLoadAsset": "Load Asset (Editor)",
   "Info": "Info",
   "SelectThisPackage": "Select this package",
-  "SelectPackage": "Select a package"
+  "SelectPackage": "Select a package",
+  "Profiles": "Profiles"
 }

@@ -71,7 +71,6 @@
   "LoadCollection": "コレクションのロード",
   "CollectionTitle": "ワークショップのコレクション",
   "HelpLogs": "ヘルプ & ログ",
-  "CrNotAvailable": "Compatibility Reportが利用できません。ここをクリックしてMODをサブスクして下さい。",
   "ModsWithMinorIssues": "個のMODにマイナーな問題",
   "ModsWithMajorIssues": "個のMODにメジャーな問題",
   "ModsShouldUnsub": "個のMODはサブスクを解除",
@@ -115,7 +114,7 @@
   "Sorting_SubscribeTime": "サブスク開始日",
   "Sorting_Author": "作者名",
   "Sorting_Status": "パッケージのステータス",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "互換性レポート",
   "IncreaseItemSize": "リストのアイテム部分を拡大",
   "FolderSettings": "フォルダの設定",
   "GamePath": "Cities: SkylinesがあるSteamのフォルダ",
@@ -351,7 +350,7 @@
   "FilterByThisAuthor": "作者でフィルタ",
   "AddToSearch": "検索に「 {0} 」を追加",
   "CopyToClipboard": "クリップボードに「 {0} 」をコピー",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "パッケージの互換性情報を表示",
   "FilterByThisEnabledStatus": "「有効」ステータスでフィルタ",
   "FilterByThisIncludedStatus": "「含める」ステータスでフィルタ",
   "CleanupInfo": "クイッククリーンアップを強制的に実行して、既にサブスクしていないパッケージをPCから削除・サブスク中で不足したパッケージを再DLします。",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "個のアセットにメジャーな問題",
   "AssetsShouldUnsub": "個のアセットはサブスクを解除",
   "LoadNewAsset": "アセットを新規作成 (エディタ)",
-  "LoadLoadAsset": "アセットをロード (エディタ)"
+  "LoadLoadAsset": "アセットをロード (エディタ)",
+  "Profiles": "プロファイル"
 }

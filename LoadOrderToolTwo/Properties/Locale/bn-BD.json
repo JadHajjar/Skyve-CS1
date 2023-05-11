@@ -71,7 +71,6 @@
   "LoadCollection": "লোড সংগ্রহ",
   "CollectionTitle": "কর্মশালা সংগ্রহ",
   "HelpLogs": "সহায়তা এবং লগ",
-  "CrNotAvailable": "সামঞ্জস্যতা প্রতিবেদন উপলভ্য নয়, মোডে সাবস্ক্রাইব করতে এখানে ক্লিক করুন",
   "ModsWithMinorIssues": "ছোটখাটো সমস্যা সহ মোড",
   "ModsWithMajorIssues": "প্রধান সমস্যা সহ মোড",
   "ModsShouldUnsub": "মোডগুলি যা থেকে সাবস্ক্রাইব করা উচিত",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

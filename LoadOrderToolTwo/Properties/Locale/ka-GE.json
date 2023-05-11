@@ -71,7 +71,6 @@
   "LoadCollection": "დატვირთვის კოლექცია",
   "CollectionTitle": "სემინარის კოლექციები",
   "HelpLogs": "დახმარება და ჟურნალი",
-  "CrNotAvailable": "თავსებადობის ანგარიში არ არის ხელმისაწვდომი, დააჭირეთ აქ, რომ გამოიწეროთ mod",
   "ModsWithMinorIssues": "MODS მცირე საკითხებით",
   "ModsWithMajorIssues": "MODS ძირითადი საკითხებით",
   "ModsShouldUnsub": "რეჟიმები, რომლებიც უნდა იყოს გამოწერილი",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

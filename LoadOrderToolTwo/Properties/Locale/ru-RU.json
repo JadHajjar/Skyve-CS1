@@ -71,7 +71,6 @@
   "LoadCollection": "Загрузить коллекцию",
   "CollectionTitle": "Коллекции мастерской",
   "HelpLogs": "Помощь и логи",
-  "CrNotAvailable": "Отчет о совместимости недоступен, нажмите здесь, чтобы подписаться на мод",
   "ModsWithMinorIssues": "моды с незначительными проблемами",
   "ModsWithMajorIssues": "моды с серьезными проблемами",
   "ModsShouldUnsub": "моды от которых необходимо отписаться",
@@ -115,7 +114,7 @@
   "Sorting_SubscribeTime": "Время подписки",
   "Sorting_Author": "Имя автора",
   "Sorting_Status": "Состояние пакета",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "Отчет о совместимости",
   "IncreaseItemSize": "Увеличить размер списка",
   "FolderSettings": "Настройки папки",
   "GamePath": "Папка Steam где находится Cities: Skylines",
@@ -351,7 +350,7 @@
   "FilterByThisAuthor": "Фильтр по этому автору",
   "AddToSearch": "Добавить '{0}' в ваш поиск",
   "CopyToClipboard": "Копировать {0} в буфер обмена",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Просмотреть отчёт о совместимости пакетов",
   "FilterByThisEnabledStatus": "Фильтровать по статусу 'Включен'",
   "FilterByThisIncludedStatus": "Фильтровать по статусу 'Отключен'",
   "CleanupInfo": "Запустите быструю очистку, которая удаляет ни один пакет, на который вы на самом деле не подписаны с вашего компьютера, а также вынуждает загружать отсутствующие подписанные пакеты.",
@@ -384,6 +383,7 @@
   "AssetsWithMinorIssues": "assets with minor issues",
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
-  "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadNewAsset": "Создать Актив (Редактор)",
+  "LoadLoadAsset": "Загрузить актив (Редактор)",
+  "Profiles": "Профили"
 }

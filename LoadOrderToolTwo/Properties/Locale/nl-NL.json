@@ -34,7 +34,7 @@
   "AssetIsMaybeOutOfDate": "Het vermogen kan verouderd zijn",
   "AssetIsIncomplete": "Activa is niet volledig gedownload of ontbreekt bestanden",
   "AssetIsUpToDate": "Activa is up -to -date en volledig gedownload",
-  "Vanilla": "Vanille",
+  "Vanilla": "Vanilla",
   "UpToDate": "Actueel",
   "StatusUnknown": "Onbekende status",
   "PartiallyDownloaded": "Gedeeltelijk gedownload",
@@ -71,7 +71,6 @@
   "LoadCollection": "Laadverzameling",
   "CollectionTitle": "Workshop -collecties",
   "HelpLogs": "Help en logboeken",
-  "CrNotAvailable": "Compatibiliteitsrapport is niet beschikbaar, klik hier om u te abonneren op de mod",
   "ModsWithMinorIssues": "mods met kleine problemen",
   "ModsWithMajorIssues": "mods met grote problemen",
   "ModsShouldUnsub": "mods die moeten worden afgenomen van",
@@ -368,9 +367,9 @@
   "MissingLSMReport": "LSM Missing Assets",
   "SearchGenericPackages": "Search through these packages..",
   "Sorting_Subscribers": "Total Subscribers",
-  "Sorting_Votes": "Votes",
+  "Sorting_Votes": "Stemmen",
   "RatingCount": "{0} votes {1}",
-  "SubscribersCount": "{0} subscribers",
+  "SubscribersCount": "{0} abonnees",
   "SearchWorkshop": "Search the workshop instead..",
   "SearchWorkshopBrowser": "Search the workshop in your browser..",
   "VotingTitle": "How the voting system works",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profielen"
 }

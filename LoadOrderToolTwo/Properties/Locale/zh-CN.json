@@ -71,7 +71,6 @@
   "LoadCollection": "加载合集",
   "CollectionTitle": "创意工坊合集",
   "HelpLogs": "获取帮助和日志",
-  "CrNotAvailable": "Compatibility Report 当前不可用，点击此处订阅此模组",
   "ModsWithMinorIssues": "个有次要问题的模组",
   "ModsWithMajorIssues": "个有主要问题的模组",
   "ModsShouldUnsub": "个应当取消订阅的模组",
@@ -115,7 +114,7 @@
   "Sorting_SubscribeTime": "订阅时间",
   "Sorting_Author": "作者名称",
   "Sorting_Status": "插件状态",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "兼容性报告",
   "IncreaseItemSize": "增大项目列表的显示大小",
   "FolderSettings": "文件夹设置",
   "GamePath": "Cities: Skylines 的 Steam 文件夹",
@@ -351,7 +350,7 @@
   "FilterByThisAuthor": "按照此作者进行筛选",
   "AddToSearch": "将“ {0} ”添加到筛选标签",
   "CopyToClipboard": "将 '{0}' 复制到您的剪贴板",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "查看此插件的兼容性信息",
   "FilterByThisEnabledStatus": "按照“已启用”状态进行筛选",
   "FilterByThisIncludedStatus": "按照“已装载”状态进行筛选",
   "CleanupInfo": "运行快速清理程序，强制删除您已经取消订阅（但没删除干净）的插件，并自动下载丢失的插件。",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "个有主要问题的资产",
   "AssetsShouldUnsub": "个应当取消订阅的资产",
   "LoadNewAsset": "新建资产（资产编辑器）",
-  "LoadLoadAsset": "读取资产（资产编辑器）"
+  "LoadLoadAsset": "读取资产（资产编辑器）",
+  "Profiles": "配置文件"
 }

@@ -71,7 +71,6 @@
   "LoadCollection": "Zbieranie obciążenia",
   "CollectionTitle": "Kolekcje warsztatowe",
   "HelpLogs": "Pomoc i dzienniki",
-  "CrNotAvailable": "Raport kompatybilności nie jest dostępny, kliknij tutaj, aby zasubskrybować mod",
   "ModsWithMinorIssues": "Mody z drobnymi problemami",
   "ModsWithMajorIssues": "Mody z głównymi problemami",
   "ModsShouldUnsub": "Mody, które powinny być rezygnowane z subskrypcji",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

@@ -71,7 +71,6 @@
   "LoadCollection": "भार संग्रह",
   "CollectionTitle": "कार्यशाला संग्रह",
   "HelpLogs": "मदद और लॉग",
-  "CrNotAvailable": "संगतता रिपोर्ट उपलब्ध नहीं है, MOD की सदस्यता लेने के लिए यहां क्लिक करें",
   "ModsWithMinorIssues": "मामूली मुद्दों के साथ मॉड",
   "ModsWithMajorIssues": "प्रमुख मुद्दों के साथ मॉड",
   "ModsShouldUnsub": "मॉड्स जो से अनसब्स किया जाना चाहिए",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

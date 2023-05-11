@@ -71,7 +71,6 @@
   "LoadCollection": "Yük toplama",
   "CollectionTitle": "Atölye koleksiyonları",
   "HelpLogs": "Yardım ve Günlükler",
-  "CrNotAvailable": "Uyumluluk raporu mevcut değil, moduna abone olmak için buraya tıklayın",
   "ModsWithMinorIssues": "Küçük sorunları olan modlar",
   "ModsWithMajorIssues": "Büyük sorunları olan modlar",
   "ModsShouldUnsub": "abonelik edilmesi gereken modlar",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

@@ -71,7 +71,6 @@
   "LoadCollection": "Lastsamling",
   "CollectionTitle": "Workshop -samlinger",
   "HelpLogs": "Hjelp og logger",
-  "CrNotAvailable": "Kompatibilitetsrapport er ikke tilgjengelig, klikk her for å abonnere på moden",
   "ModsWithMinorIssues": "mods med mindre problemer",
   "ModsWithMajorIssues": "mods med store problemer",
   "ModsShouldUnsub": "mods som skal være avmeldt fra",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

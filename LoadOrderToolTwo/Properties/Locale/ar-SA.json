@@ -71,7 +71,6 @@
   "LoadCollection": "مجموعة التحميل",
   "CollectionTitle": "مجموعات ورشة العمل",
   "HelpLogs": "المساعدة والسجلات",
-  "CrNotAvailable": "تقرير التوافق غير متوفر ، انقر هنا للاشتراك في وزارة الدفاع",
   "ModsWithMinorIssues": "تعديل مع قضايا بسيطة",
   "ModsWithMajorIssues": "تعديل مع القضايا الرئيسية",
   "ModsShouldUnsub": "تعديل يجب إلغاء الاشتراك من",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

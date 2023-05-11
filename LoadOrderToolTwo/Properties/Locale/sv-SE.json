@@ -71,7 +71,6 @@
   "LoadCollection": "Lastuppsamling",
   "CollectionTitle": "Verkstadssamlingar",
   "HelpLogs": "Hjälp & loggar",
-  "CrNotAvailable": "Kompatibilitetsrapport är inte tillgänglig, klicka här för att prenumerera på mod",
   "ModsWithMinorIssues": "mods med mindre problem",
   "ModsWithMajorIssues": "mods med stora problem",
   "ModsShouldUnsub": "mods som bör avskrivas från",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Profiles"
 }

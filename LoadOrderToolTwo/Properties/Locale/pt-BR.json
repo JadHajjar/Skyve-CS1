@@ -71,7 +71,6 @@
   "LoadCollection": "Carregar Coleção",
   "CollectionTitle": "Coleções da Oficina",
   "HelpLogs": "Ajuda e logs",
-  "CrNotAvailable": "O Compatibility Report não está disponível, clique aqui para se inscrever no mod",
   "ModsWithMinorIssues": "mods com pequenos problemas",
   "ModsWithMajorIssues": "mods com grandes problemas",
   "ModsShouldUnsub": "mods que devem ser candidatos a",
@@ -115,7 +114,7 @@
   "Sorting_SubscribeTime": "Inscreva -se horário",
   "Sorting_Author": "Nome do autor",
   "Sorting_Status": "Status do pacote",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "Relatório de Compatibilidade",
   "IncreaseItemSize": "Aumentar o tamanho da lista de itens",
   "FolderSettings": "Configurações da pasta",
   "GamePath": "Pasta Steam de Cities: Skylines",
@@ -351,7 +350,7 @@
   "FilterByThisAuthor": "Filtrar por este autor",
   "AddToSearch": "Adicione '{0}' à sua pesquisa",
   "CopyToClipboard": "Copiar '{0}' para a área de transferência",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Ver as informações de compatibilidade deste pacote",
   "FilterByThisEnabledStatus": "Filtrar por 'Ativado'",
   "FilterByThisIncludedStatus": "Filtrar por 'Incluído'",
   "CleanupInfo": "Executa uma limpeza rápida que apaga qualquer pacote que você não se inscreveu, do seu computador, e também forçando o carregamento de pacotes inscritos que faltam.",
@@ -385,5 +384,6 @@
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)"
+  "LoadLoadAsset": "Load Asset (Editor)",
+  "Profiles": "Perfis"
 }
