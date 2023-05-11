@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "Subskrybuj czas",
   "Sorting_Author": "Imię autora",
   "Sorting_Status": "Status pakietu",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "Raport zgodności",
   "IncreaseItemSize": "Zwiększ rozmiary elementów listy",
   "FolderSettings": "Ustawienia folderu",
   "GamePath": "Miasta: folder parowy Skylines",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filtruj według tego autora",
   "AddToSearch": "Dodaj '{0}' do wyszukiwania",
   "CopyToClipboard": "Skopiuj '{0}' do schowka",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Zobacz raport zgodności tego pakietu",
   "FilterByThisEnabledStatus": "Filtruj według tego statusu 'Włączony'",
   "FilterByThisIncludedStatus": "Filtruj według tego statusu 'Zawiera'",
   "CleanupInfo": "Uruchom szybkie czyszczenie, które usuwa dowolny pakiet, którego nie subskrybujesz z komputera, a także wymusza pobranie brakujących subskrybowanych pakietów.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profiles"
 }
