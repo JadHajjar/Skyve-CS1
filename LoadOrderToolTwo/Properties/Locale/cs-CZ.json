@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "Přihlásit se k odběru",
   "Sorting_Author": "Jméno autora",
   "Sorting_Status": "Stav balíčku",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "Zpráva kompatibility",
   "IncreaseItemSize": "Zvětšit velikost položek seznamu",
   "FolderSettings": "Nastavení složky",
   "GamePath": "CITIES: SCYLILES 'SLOBLE SLOBY",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filtrovat podle tohoto autora",
   "AddToSearch": "Přidat '{0}' k vašemu hledání",
   "CopyToClipboard": "Kopírovat '{0}' do vaší schránky",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Zobrazit zprávu o kompatibilitě tohoto balíčku",
   "FilterByThisEnabledStatus": "Filtrovat podle tohoto stavu 'Povoleno'",
   "FilterByThisIncludedStatus": "Filtrovat podle tohoto stavu 'Zahrnuto'",
   "CleanupInfo": "Spusťte rychlé vyčištění, které odstraní jakýkoliv balíček, který jste ze svého počítače neodebírali, a zároveň si vynutíte stažení chybějících odebíraných balíčků.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profiles"
 }
