@@ -240,8 +240,8 @@
             {
                 "Name": "Очищення пакунків майстерні",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
+                    "Додано нову функцію для легкої перевірки невідповідності між Steam і завантаженими пакетами.",
+                    "Пакунки, на які ви не підписані, більше не будуть завантажуватись у гру.",
                     "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
                     "Додана кнопка на вкладці \"Утиліти\" для ручного запуску очищення, а також завантаження відсутніх пакунків."
                 ]
