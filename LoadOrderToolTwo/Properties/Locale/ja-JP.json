@@ -386,7 +386,7 @@
   "LoadNewAsset": "アセットを新規作成 (エディタ)",
   "LoadLoadAsset": "アセットをロード (エディタ)",
   "Info": "情報",
-  "SelectThisPackage": "このパッケージを選択",
+  "SelectThisPackage": "パッケージを選択",
   "SelectPackage": "パッケージを選択",
   "Profiles": "プロファイル"
 }
