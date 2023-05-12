@@ -228,6 +228,11 @@ public static class CompatibilityManager
 			}
 		}
 
+		if (DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365))
+		{
+			info.Statuses.Add(new PackageStatus { Type = StatusType.Deprecated });
+		}
+
 		const ulong MUSIC_MOD_ID = 2474585115;
 
 		if ((package.RequiredPackages?.Contains(MUSIC_MOD_ID) ??false))
@@ -263,12 +268,12 @@ public static class CompatibilityManager
 
 		if (package.IsMod && !info.Links.Any(x => x.Type is LinkType.Github))
 		{
-			info.Statuses.Add(new PackageStatus { Type = StatusType.SourceCodeNotAvailable });
+			info.Statuses.Add(new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = InteractionAction.Unsubscribe });
 		}
 
 		if (package.IsMod && (package.SteamDescription is null || package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3))
 		{
-			info.Statuses.Add(new PackageStatus { Type = StatusType.IncompleteDescription });
+			info.Statuses.Add(new PackageStatus { Type = StatusType.IncompleteDescription, Action = InteractionAction.Unsubscribe });
 		}
 
 		return info;

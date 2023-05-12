@@ -3,7 +3,6 @@
 public enum StatusType
 {
 	[CRN(NotificationType.None, false)] None = 0,
-	[CRN(NotificationType.Caution, false)] NotReviewed,
 	[CRN(NotificationType.Warning)] Deprecated,
 	[CRN(NotificationType.Warning)] Reupload,
 	[CRN(NotificationType.Warning)] CausesIssues,
@@ -12,5 +11,5 @@ public enum StatusType
 	[CRN(NotificationType.None)] DependencyMod,
 	[CRN(NotificationType.Warning)] SourceCodeNotAvailable,
 	[CRN(NotificationType.Caution)] MusicCanBeCopyrighted,
-	[CRN(NotificationType.Caution, false)] IncompleteDescription,
+	[CRN(NotificationType.Caution)] IncompleteDescription,
 }
