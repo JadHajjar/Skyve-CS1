@@ -385,8 +385,8 @@
   "AssetsShouldUnsub": "Ассети, від яких слід відписатись",
   "LoadNewAsset": "Новий Ассет (редактор)",
   "LoadLoadAsset": "Завантажити Ассет (редактор)",
-  "Info": "Info",
-  "SelectThisPackage": "Select this package",
-  "SelectPackage": "Select a package",
+  "Info": "Інформація",
+  "SelectThisPackage": "Вибрати цей пакунок",
+  "SelectPackage": "Вибрати пакунок",
   "Profiles": "Профілі"
 }
