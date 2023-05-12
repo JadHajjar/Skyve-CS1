@@ -240,9 +240,9 @@
             {
                 "Name": "Очищення пакунків майстерні",
                 "Changes": [
-                    "Додано нову функцію для легкої перевірки невідповідності між Steam і завантаженими пакетами.",
+                    "Додано нову функцію для легкої перевірки невідповідності між Steam і завантаженими пакунками.",
                     "Пакунки, на які ви не підписані, більше не будуть завантажуватись у гру.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
+                    "Запуск гри при відкритому LOT автоматично видалить всі пакунки, на які ви не підписані, присутні на вашому комп'ютері.",
                     "Додана кнопка на вкладці \"Утиліти\" для ручного запуску очищення, а також завантаження відсутніх пакунків."
                 ]
             }
@@ -256,8 +256,8 @@
             {
                 "Name": "Нове",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Додана опція вимкнення автоматичного очищення при відкритті гри.",
+                    "Додано блок користувацьких аргументів для додаткових параметрів запуску."
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Іконка голосів та підписників",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Додана нова іконка біля пакунка, яка показує сумарне зведення по голосах та кількості підписників.",
+                    "Наведіться на нього для показу значень.",
+                    "Натисніть на значок, щоб дізнатись детальніше про цю функцію.",
+                    "Додано варіанти сортування 'Голоси' і 'Всього підписників'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Вимоги ассету",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Необхідні предмети, що відображаються у майстерні ассета, тепер інтегровані в Load Order Tool.",
+                    "Тепер ця інформація включена у Звіт про Сумісність для швидкого та легкого перегляду відсутності предметів."
                 ]
             },
             {
                 "Name": "Інші зміни",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Оновлено сторінку пакунків для відповідності відображеній інформації в списку контенту.",
+                    "Вторинні списки контенту, такі як 'Відсутні пакунки' та 'Колекція Майстерні' тепер використовують той же інтерфейс, що і сторінки основного списку контенту, це створює приємніший досвід та додає більше можливостей.",
+                    "Додано опції запуску \"Новий Ассет\" та \"Завантажити Ассет\" у профілі, щоб швидко завантажити його в редактор."
                 ]
             }
         ]
