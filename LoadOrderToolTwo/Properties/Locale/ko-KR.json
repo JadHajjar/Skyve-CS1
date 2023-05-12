@@ -284,7 +284,7 @@
   "BETA": "베타",
   "STABLE": "안정적인",
   "EXPERIMENTAL": "실험적인",
-  "DEPRECATED": "사용되지 않음",
+  "DEPRECATED": "사용되지 않는",
   "ActionUnreversible": "이 작업은 되돌릴 수 없습니다.",
   "AlwaysOpenFiltersAndActions": "기본적으로 필터 섹션을 표시하기",
   "AlwaysOpenFiltersAndActions_Tip": "콘텐츠 탭을 열 때 필터 섹션을 항상 펼쳐둡니다",
