@@ -144,7 +144,7 @@
   "FilterOutPackagesWithOneAsset": "Hide single-asset packages from the packages page",
   "DeletePackage": "ลบแพ็กเกจนี้",
   "UnsubscribePackage": "ยกเลิกการสมัครสมาชิกจากแพ็กเกจนี้",
-  "CopyWorkshopId": "Copy this package's Workshop ID",
+  "CopyWorkshopId": "คัดลอกไอดีเวิร์คชอปของแพ็กเกจนี้",
   "CopyAuthorLink": "Copy the Author's profile link",
   "CopyAuthorId": "คัดลอกไอดีของผู้สร้าง",
   "YourProfiles": "โปรไฟล์ของคุณ",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "กรองจากผู้สร้าง",
   "AddToSearch": "เพิ่ม '{0}' ไปยังการค้นหาของคุณ",
   "CopyToClipboard": "Copy '{0}' to your clipboard",
-  "ViewPackageCR": "ดูข้อมูลความเข้ากันได้ของแพ็กเกจนี้",
+  "ViewPackageCR": "ดูรายงาน 'ความเข้ากันได้' ของแพ็กเกจนี้",
   "FilterByThisEnabledStatus": "Filter by this 'Enabled' status",
   "FilterByThisIncludedStatus": "กรองจากสถานะ 'ประกอบไปด้วย'",
   "CleanupInfo": "Run a quick cleanup that deletes any package you're not actually subscribed to from your computer as well as forcing the download of missing subscribed packages.",
@@ -386,7 +386,7 @@
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
   "Info": "Info",
-  "SelectThisPackage": "Select this package",
+  "SelectThisPackage": "เลือกแพ็กเกจนี้",
   "SelectPackage": "เลือกแพ็กเกจ",
   "Profiles": "Profiles"
 }
