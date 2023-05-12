@@ -385,8 +385,8 @@
   "AssetsShouldUnsub": "个应当取消订阅的资产",
   "LoadNewAsset": "新建资产（资产编辑器）",
   "LoadLoadAsset": "读取资产（资产编辑器）",
-  "Info": "Info",
-  "SelectThisPackage": "Select this package",
-  "SelectPackage": "Select a package",
+  "Info": "提示",
+  "SelectThisPackage": "选择此插件",
+  "SelectPackage": "选择一个插件",
   "Profiles": "配置文件"
 }
