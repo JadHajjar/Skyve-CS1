@@ -3,8 +3,6 @@
 using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Interfaces;
 
-using Newtonsoft.Json;
-
 using SlickControls;
 
 using System;
@@ -12,7 +10,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 
 namespace LoadOrderToolTwo.Utilities.Managers;
@@ -22,7 +19,7 @@ public static class CompatibilityManager
 	private static IndexedCompatibilityData compatibilityData;
 	private static readonly Dictionary<IPackage, CompatibilityInfo> _cache = new();
 
-	public static IndexedCompatibilityData CompatibilityData  => compatibilityData;
+	public static IndexedCompatibilityData CompatibilityData => compatibilityData;
 
 	static CompatibilityManager()
 	{
@@ -89,7 +86,7 @@ public static class CompatibilityManager
 
 	public static bool IsBlacklisted(IPackage package)
 	{
-		return CompatibilityData.BlackListedIds.Contains(package.SteamId) 
+		return CompatibilityData.BlackListedIds.Contains(package.SteamId)
 			|| CompatibilityData.BlackListedNames.Contains(package.Name ?? string.Empty);
 	}
 
@@ -169,7 +166,9 @@ public static class CompatibilityManager
 		var packages = interaction.Packages.AllWhere(x => GetPackage(x) is null == requiresPackage);
 
 		if (!packages.Any())
+		{
 			return;
+		}
 
 		var reportType = interaction.Type switch
 		{
@@ -191,7 +190,9 @@ public static class CompatibilityManager
 		var package = CompatibilityData.Packages.TryGet(steamId);
 
 		if (package is not null)
+		{
 			return FindPackage(package.Package);
+		}
 
 		return CentralManager.Packages.FirstOrDefault(x => x.SteamId == steamId);
 	}
@@ -235,7 +236,7 @@ public static class CompatibilityManager
 
 		const ulong MUSIC_MOD_ID = 2474585115;
 
-		if ((package.RequiredPackages?.Contains(MUSIC_MOD_ID) ??false))
+		if (package.RequiredPackages?.Contains(MUSIC_MOD_ID) ?? false)
 		{
 			info.Statuses.Add(new PackageStatus { Type = StatusType.MusicCanBeCopyrighted });
 		}
