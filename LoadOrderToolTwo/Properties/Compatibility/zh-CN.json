@@ -1,5 +1,5 @@
 {
-  "Usage": "使用说明",
+  "Usage": "用法",
   "Stability": "稳定性",
   "ApplyContinue": "应用并继续",
   "Previous": "返回",
@@ -32,7 +32,7 @@
   "Switch": "切换到链接的插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
-  "CausesIssues": "导致的问题",
+  "CausesIssues": "导致问题",
   "SavesCantLoadWithoutIt": "没有它，存档将无法载入",
   "TestVersion": "测试版",
   "DependencyMod": "前置模组",
