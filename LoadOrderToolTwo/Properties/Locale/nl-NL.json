@@ -173,6 +173,7 @@
   "HidePseudoMods": "Verberg pseudo-mods zoals themamixen",
   "YourDlcs": "Uw DLC's",
   "AllDlcs": "Alle DLC's",
+  "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Gedetecteerde problemen",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Alle problemen oplossen",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Kopieer Steam ID van de auteur",
   "CloseCitiesToSub": "Je moet burgers sluiten: Skylines om je te abonneren of af te melden van pakketten",
   "ShowingFilteredItems": "Toont {0} van de {1} totale items",
-  "ShowingMods": "Toont {0} mods",
-  "ShowingAssets": "Toont {0} activa",
-  "ShowingPackages": "Toont {0} pakketten",
-  "ShowingProfiles": "Toont {0} profielen",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Thema & UI Schaal",
   "SearchProfiles": "Zoek door je profielen..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Start een nieuw spel wanneer je de burgers opent: Skylines opent. Je kunt aangeven in welke map je wilt starten",
   "LoadSaveGame_Tip": "Laad een opgeslagen spel wanneer u Cities: Skylines opstart. Het selecteren van een opgeslagen bestand zal uw laatste save voortzetten",
   "BETA": "BETA",
+  "ALPHA": "ALFA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "STABLE",
   "EXPERIMENTAL": "EXPERIMENTEEL",
   "DEPRECATED": "VERWIJDERD",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Deze actie kan niet ongedaan worden gemaakt.",
   "AlwaysOpenFiltersAndActions": "Toon de filtersectie standaard",
   "AlwaysOpenFiltersAndActions_Tip": "Altijd de filters sectie openen bij het invoeren van een inhoudstabblad",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Workshop opgeslagen spellen",
   "Workshop Maps": "Workshop kaarten",
   "AnyAuthor": "Elke auteur",
-  "ItemsCount": "{0} items",
-  "AuthorsSelected": "{0} auteurs geselecteerd",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Gebruik het thema van het systeem",
   "Donate": "Doneren",
   "CopyAllIds": "Kopieer alle weergegeven items met ID's Werkplaats IDs",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profielen"
+  "Profiles": "Profielen",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Mods",
+  "Local": "Lokaal",
+  "Workshop": "Workshop",
+  "CompatibilityReport": "Compatibiliteitsrapport",
+  "AppDataPath": "Steden: de map Gegevensmap van Skylines",
+  "Enabled": "Ingeschakeld",
+  "Disabled": "Uitgeschakeld",
+  "Included": "Opgenomen",
+  "Excluded": "Uitgesloten",
+  "Server": "Server",
+  "Assets": "Activa",
+  "OutOfDate": "Verouderd",
+  "Subscribe": "Abonneren",
+  "Switch": "Schakelaar",
+  "Packages": "Pakketjes",
+  "AdvancedIncludeEnable": "Toon beide van de ingebouwde en ingeschakelde staat voor mods",
+  "PackageStatus": "Pakketstatus",
+  "Author": "Auteur"
 }
