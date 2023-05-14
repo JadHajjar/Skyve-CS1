@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Aktuelles Profil",
   "StartCities": "Starte Cities: Skylines",
   "StopCities": "Cities: Skylines anhalten",
@@ -7,15 +8,8 @@
   "Dashboard": "Übersicht",
   "ModOutOfDate": "Mod ist veraltet",
   "ModOutOfDatePlural": "Mods sind veraltet",
-  "MultipleModsIncluded": "Mehrere Versionen derselben Mod sind enthalten",
-  "ModIncluded": "Mod enthalten",
-  "ModIncludedPlural": "Mods enthalten",
   "SearchDlcs": "Durchsuche deine DLCs...",
   "SearchPackages": "Durchsuche deine Pakete...",
-  "ModEnabled": "Mod aktiviert",
-  "ModIncludedAndEnabled": "Mod enthalten und aktiviert",
-  "ModEnabledPlural": "Mods aktiviert",
-  "ModIncludedAndEnabledPlural": "Mods enthalten und aktiviert",
   "ModIsLocal": "Lokale Mod",
   "ModIsRemoved": "Aus Steam entfernt",
   "ModIsUnknown": "Konnte Informationen zu dieser Mod nicht von Steam abrufen",
@@ -52,8 +46,6 @@
   "NoAssets": "Alle Gegenstände deaktivieren",
   "NoMods": "Alle Mods deaktivieren",
   "AutoSave": "Automatisch Speichern",
-  "AssetIncluded": "Gegenstand enthalten",
-  "AssetIncludedPlural": "Gegenstände enthalten",
   "TotalSize": "Gesamtgröße",
   "ReportSeverity": "Schweregrad der Meldung",
   "AnyStatus": "Beliebiger Status",
@@ -138,7 +130,6 @@
   "DateUpdated": "Aktualisierungsdatum",
   "PackageIncluded": "Paket enthalten",
   "PackageIncludedPlural": "Pakete enthalten",
-  "MultiplePackagesIncluded": "Mehrere Versionen desselben Pakets sind enthalten",
   "CopyWorkshopLink": "Kopiere den Workshop -Link",
   "FilterOutPackagesWithMods": "Mods in der Pakete-Seite ausblenden",
   "FilterOutPackagesWithOneAsset": "Pakete mit nur einem Gegenstand auf der Pakete-Seite ausblenden",
@@ -175,7 +166,6 @@
   "AllDlcs": "Alle DLCs",
   "DLCs": "DLCs & CCPs",
   "DetectedIssues": "Erkannte Probleme",
-  "DuplicateMods": "Duplikate",
   "FixAllIssues": "Alle Probleme beheben",
   "LaunchTooltip": "Klicken, um Cities: Skylines zu starten/stoppen oder drücke jederzeit {0} in der App",
   "LsmImport": "Loading Screen Mod Report",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Farbe des Profils ändern",
   "Sorting_Color": "Profil-Farbe",
   "CreateShortcutProfile": "Erstelle eine Verknüpfung für dieses Profil auf deinem Desktop",
-  "ProfilesLoaded": "geladene Profile",
   "AskToLaunchGameForShortcut": "Soll die Verknüpfung das Spiel mit dem ausgewählten Profil starten?",
   "TextImportMissingInfo": "Lade eine Textdatei mit Steam-IDs, um sie einfach zu abonnieren oder zu verwalten",
   "ImportFromText": "Import aus Text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profile",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Mods",
   "Local": "Lokal",
   "Workshop": "Workshop",
   "CompatibilityReport": "Kompatibilitätsbericht",
@@ -424,12 +411,46 @@
   "Included": "Enthalten",
   "Excluded": "Ausgeschlossen",
   "Server": "Server",
-  "Assets": "Gegenstände",
   "OutOfDate": "Veraltet",
   "Subscribe": "Abonnieren",
   "Switch": "Wechseln",
-  "Packages": "Pakete",
   "AdvancedIncludeEnable": "Zeige sowohl Enthalten als auch Aktiviert-Status für Mods",
   "PackageStatus": "Paket-Status",
-  "Author": "Autor"
+  "Author": "Autor",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
