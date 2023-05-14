@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "მიმდინარე პროფილი",
   "StartCities": "გაუშვი Cities: Skylines",
   "StopCities": "გააჩერე Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "მართვის პანელი",
   "ModOutOfDate": "მოდიფიკაცია არის მოძველებული",
   "ModOutOfDatePlural": "მოდიფიკაციები არიან მოძველებული",
-  "MultipleModsIncluded": "იგივე მოდიფიკაციის მრავალი ვერსია არის დაინსტალირებული",
-  "ModIncluded": "მოდი შედის",
-  "ModIncludedPlural": "მოდები შედის",
   "SearchDlcs": "მოძებნეთ თქვენი DLC– ებს შორის..",
   "SearchPackages": "მოძებნეთ თქვენი პაკეტები ..",
-  "ModEnabled": "ჩართულია",
-  "ModIncludedAndEnabled": "Mod შედის და ჩართულია",
-  "ModEnabledPlural": "Mods ჩართულია",
-  "ModIncludedAndEnabledPlural": "მოდები შედის და ჩართულია",
   "ModIsLocal": "Mod არის ადგილობრივი",
   "ModIsRemoved": "ამოღებულია ორთქლიდან",
   "ModIsUnknown": "ვერ მიიღო ამ მოდელის ინფორმაცია ორთქლისგან",
@@ -52,8 +46,6 @@
   "NoAssets": "არ არის საბაჟო აქტივები",
   "NoMods": "ყველა მოდის გათიშვა",
   "AutoSave": "ავტომატური შენახვა",
-  "AssetIncluded": "აქტივი შედის",
-  "AssetIncludedPlural": "ასეტები შედის",
   "TotalSize": "მთლიანი ზომა",
   "ReportSeverity": "ანგარიშის სიმძმე",
   "AnyStatus": "ნებისმიერი სტატუსი",
@@ -138,7 +130,6 @@
   "DateUpdated": "თარიღი განახლებულია",
   "PackageIncluded": "ამანათი შეიცავს",
   "PackageIncludedPlural": "პაკეტებში შედის",
-  "MultiplePackagesIncluded": "იგივე პაკეტის მრავალი ვერსია შედის",
   "CopyWorkshopLink": "ასლის სემინარის ბმული",
   "FilterOutPackagesWithMods": "მოდების დამალვა პაკეტების გვერდზე",
   "FilterOutPackagesWithOneAsset": "დამალეთ ერთჯერადი პაკეტები პაკეტების გვერდიდან",
@@ -175,7 +166,6 @@
   "AllDlcs": "ყველა DLC",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "შემჩნეული შეცდომები",
-  "DuplicateMods": "დუპლიკატი მოდიფიკაციები",
   "FixAllIssues": "გამოასწორე ყველა პრობლემა",
   "LaunchTooltip": "დააჭირე რომ გაუშვა/გააჩერო Cities: Skylines ან დააჭირე [F5]-ს ღილაკს სადმე აპლიკაციაში",
   "LsmImport": "Loading Screen Mod ანგარიში",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Change this profile's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
-  "ProfilesLoaded": "profiles loaded",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "მოდიფიკაციები",
   "Local": "ადგილობრივი",
   "Workshop": "სახელოსნო",
   "CompatibilityReport": "თავსებადობის ანგარიში",
@@ -424,12 +411,46 @@
   "Included": "შედის",
   "Excluded": "გამორიცხულია",
   "Server": "სერვერი",
-  "Assets": "ქონება",
   "OutOfDate": "Ვადა გასული",
   "Subscribe": "გამოწერა",
   "Switch": "შეცვლა",
-  "Packages": "პაკეტები",
   "AdvancedIncludeEnable": "Show both of the included and enabled state for mods",
   "PackageStatus": "პაკეტის სტატუსი",
-  "Author": "Author"
+  "Author": "Author",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
