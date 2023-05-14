@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Obecny profil",
   "StartCities": "Początek Cities: Skylines",
   "StopCities": "Zatrzymywać się Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Panel",
   "ModOutOfDate": "Mod jest nieaktualny",
   "ModOutOfDatePlural": "Mody są nieaktualne",
-  "MultipleModsIncluded": "Uwzględniono wiele wersji tego samego moda",
-  "ModIncluded": "W zestawie Mod",
-  "ModIncludedPlural": "Dołączone mody",
   "SearchDlcs": "Przeszukaj swoje DLC.",
   "SearchPackages": "Przeszukaj swoje pakiety ..",
-  "ModEnabled": "MOD włączony",
-  "ModIncludedAndEnabled": "Mod zawarte i włączone",
-  "ModEnabledPlural": "Mody włączone",
-  "ModIncludedAndEnabledPlural": "Uwzględnione i włączone mody",
   "ModIsLocal": "Mod jest lokalny",
   "ModIsRemoved": "Usunięte z pary",
   "ModIsUnknown": "Nie mogłem uzyskać informacji tego modu z Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Brak niestandardowych zasobów",
   "NoMods": "Wyłącz wszystkie Modyfikacje",
   "AutoSave": "Automatyczne zapisywanie",
-  "AssetIncluded": "w tym zasoby",
-  "AssetIncludedPlural": "W zestawie aktywa",
   "TotalSize": "całkowity rozmiar",
   "ReportSeverity": "Dotkliwość zgłoszenia",
   "AnyStatus": "Dowolny status",
@@ -138,7 +130,6 @@
   "DateUpdated": "Data zaktualizowana",
   "PackageIncluded": "W zestawie pakiet",
   "PackageIncludedPlural": "Dołączone pakiety",
-  "MultiplePackagesIncluded": "Uwzględniono wiele wersji tego samego pakietu",
   "CopyWorkshopLink": "Kopiuj link warsztatowy",
   "FilterOutPackagesWithMods": "Ukryj mody na stronie pakietów",
   "FilterOutPackagesWithOneAsset": "Ukryj pakiety jednoprawne na stronie pakietów",
@@ -175,7 +166,6 @@
   "AllDlcs": "Wszystkie DLC",
   "DLCs": "DLCS i CCPS",
   "DetectedIssues": "Wykryte problemy",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Napraw wszystkie problemy",
   "LaunchTooltip": "Kliknij, aby uruchomić/zatrzymać Miasta: Skylines lub użyć {0} gdziekolwiek w aplikacji",
   "LsmImport": "Wczytywanie raportu modyfikacji ekranu",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Zmień kolor tego profilu",
   "Sorting_Color": "Kolor profilu",
   "CreateShortcutProfile": "Utwórz dla niego skrót na pulpicie",
-  "ProfilesLoaded": "profile załadowane",
   "AskToLaunchGameForShortcut": "Czy chcesz aby skrót również uruchomił grę z Twoim profilem?",
   "TextImportMissingInfo": "Załaduj plik tekstowy zawierający identyfikatory Steam, aby łatwo subskrybować lub zarządzać nimi",
   "ImportFromText": "Importuj z tekstu",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Mody",
   "Local": "Lokalny",
   "Workshop": "Warsztat",
   "CompatibilityReport": "Raport zgodności",
@@ -424,12 +411,46 @@
   "Included": "Dołączony",
   "Excluded": "Wyłączony",
   "Server": "serwer",
-  "Assets": "Aktywa",
   "OutOfDate": "Przeterminowany",
   "Subscribe": "Subskrybuj",
   "Switch": "Przełącznik",
-  "Packages": "Pakiety",
   "AdvancedIncludeEnable": "Pokaż stan włączonych i włączonych modyfikacji",
   "PackageStatus": "Status pakietu",
-  "Author": "Autor"
+  "Author": "Autor",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
