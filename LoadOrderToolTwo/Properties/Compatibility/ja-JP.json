@@ -88,10 +88,15 @@
     "One": "「{0}」で必要なパッケージが不足しています。",
     "Plural": "「{0}」で必要な以下のパッケージが不足しています。"
   },
+  "Interaction_OptionalPackages": {
+    "One": "You're missing an optional package for '{0}'.",
+    "Plural": "You're missing the following optional packages for '{0}'."
+  },
   "Interaction_SucceededBy": {
     "One": "「{0}」は「{1}」によって引き継がれています。",
     "Plural": "「{0}」は以下のパッケージによって引き継がれています。"
   },
+  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
   "Status_Reupload": {
     "Zero": "「{0}」はオリジナルパッケージの再アップロードです。",
@@ -135,6 +140,11 @@
     "One": "「{1}」はサブスクを解除して下さい。",
     "Plural": "以下のパッケージはサブスクを解除して下さい。"
   },
+  "Action_ExcludeThis": "You should exclude '{0}'.",
+  "Action_ExcludeOther": {
+    "One": "You should exclude '{1}'.",
+    "Plural": "You should exclude the following packages."
+  },
   "Action_Switch": {
     "One": "「{1}」に切り替えて下さい。",
     "Plural": "以下のいずれかのパッケージに切り替える必要があります。"
@@ -144,5 +154,32 @@
     "One": "DLCを選択中: {0} 個",
     "Plural": "DLCを選択中: {0} 個"
   },
-  "RequiredDLCs": "DLC/CCPが必要"
+  "RequiredDLCs": "DLC/CCPが必要",
+  "CRT_Stability": "Stability",
+  "CRT_Successors": "Successors",
+  "CRT_RequiredPackages": "Required Packages",
+  "CRT_OptionalPackages": "Optional Packages",
+  "CRT_DlcMissing": "Missing DLCs/CCPs",
+  "CRT_Compatibility": "Compatibility Issues",
+  "CRT_Alternatives": "Alternatives",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Ambiguity",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} that is missing dependencies",
+    "Plural": "{0} {1} that are missing dependencies"
+  },
+  "CautionCount": "{0} {1} where caution is advised",
+  "WarningCount": "{0} {1} with a warning",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} that requires your attention",
+    "Plural": "{0} {1} that require your attention"
+  },
+  "ExcludeCount": "{0} {1} that should be excluded",
+  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "SwitchCount": {
+    "One": "{0} {1} that requires switching to another",
+    "Plural": "{0} {1} that require switching to another"
+  }
 }
