@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "Abonneer de tijd",
   "Sorting_Author": "Auteur naam",
   "Sorting_Status": "Pakketstatus",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "Compatibiliteitsrapport",
   "IncreaseItemSize": "Lijstitems vergroten",
   "FolderSettings": "Mapinstellingen",
   "GamePath": "Steden: de stoommap van Skylines",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filteren op deze auteur",
   "AddToSearch": "Voeg '{0}' toe aan uw zoekopdracht",
   "CopyToClipboard": "Kopieer '{0}' naar uw klembord",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Bekijk het Compatibiliteitsrapport van dit pakket",
   "FilterByThisEnabledStatus": "Filter op deze status 'Ingeschakeld'",
   "FilterByThisIncludedStatus": "Filter op deze 'Opgenomen' status",
   "CleanupInfo": "Voer een snelle opschonen uit die elk pakket verwijdert waarop je niet bent geabonneerd op je computer en download ontbrekende abonnementspakketten.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profielen"
 }

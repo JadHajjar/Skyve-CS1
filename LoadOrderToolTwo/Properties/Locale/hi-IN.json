@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "सदस्यता समय",
   "Sorting_Author": "लेखक का नाम",
   "Sorting_Status": "पैकेज स्थिति",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "संगतता रिपोर्ट",
   "IncreaseItemSize": "Increase list items' sizes",
   "FolderSettings": "फ़ोल्डर सेटिंग्स",
   "GamePath": "शहर: स्काईलाइन्स स्टीम फ़ोल्डर",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filter by this author",
   "AddToSearch": "Add '{0}' to your search",
   "CopyToClipboard": "Copy '{0}' to your clipboard",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "View this package's Compatibility Report",
   "FilterByThisEnabledStatus": "Filter by this 'Enabled' status",
   "FilterByThisIncludedStatus": "Filter by this 'Included' status",
   "CleanupInfo": "Run a quick cleanup that deletes any package you're not actually subscribed to from your computer as well as forcing the download of missing subscribed packages.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profiles"
 }

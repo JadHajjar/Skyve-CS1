@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets que debes anular suscripción",
   "LoadNewAsset": "Nuevo Asset (Editor)",
   "LoadLoadAsset": "Cargar Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Selecciona este paquete",
+  "SelectPackage": "Selecciona un paquete",
   "Profiles": "Perfiles"
 }
