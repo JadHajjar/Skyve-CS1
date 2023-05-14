@@ -88,10 +88,15 @@
     "One": "要使用 '{0}'，您需要订阅一个必需物品。",
     "Plural": "要使用 '{0}'，您需要订阅下列必需物品："
   },
+  "Interaction_OptionalPackages": {
+    "One": "You're missing an optional package for '{0}'.",
+    "Plural": "You're missing the following optional packages for '{0}'."
+  },
   "Interaction_SucceededBy": {
     "One": "'{0}' 的功能已被 '{1}' 继承。",
     "Plural": "'{0}' 的功能已被下列任意一个插件继承："
   },
+  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个原始插件的重新上传版本。",
@@ -108,7 +113,7 @@
   },
   "Status_MissingDlc": {
     "One": "要使用这个插件，您必须购买 '{0}' DLC。",
-    "Plural": "要使用这个插件，您必须购买下列DLC："
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_DependencyMod": "这是一个前置模组，但你似乎没有使用任何依赖于该模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
@@ -127,13 +132,18 @@
   },
   "Action_RequiresConfiguration": "您应当遵循下列使用说明：",
   "Action_SelectOne": {
-    "One": "您只能选择 '{0}' 和 '{1}' 中的一个来使用。",
-    "Plural": "您只能在 '{0}' 和下列插件之中选择一个使用："
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
   },
   "Action_UnsubscribeThis": "您应该取消订阅 '{0}' 。",
   "Action_UnsubscribeOther": {
     "One": "您应该取消订阅 '{1}' 。",
     "Plural": "您应该取消订阅下列插件："
+  },
+  "Action_ExcludeThis": "You should exclude '{0}'.",
+  "Action_ExcludeOther": {
+    "One": "You should exclude '{1}'.",
+    "Plural": "You should exclude the following packages."
   },
   "Action_Switch": {
     "One": "您应当改为使用 '{1}'。",
@@ -144,5 +154,32 @@
     "One": "已选择 {0} 个DLC",
     "Plural": "已选择 {0} 个DLC"
   },
-  "RequiredDLCs": "前置 DLC/CCP"
+  "RequiredDLCs": "前置 DLC/CCP",
+  "CRT_Stability": "Stability",
+  "CRT_Successors": "Successors",
+  "CRT_RequiredPackages": "Required Packages",
+  "CRT_OptionalPackages": "Optional Packages",
+  "CRT_DlcMissing": "Missing DLCs/CCPs",
+  "CRT_Compatibility": "Compatibility Issues",
+  "CRT_Alternatives": "Alternatives",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Ambiguity",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} that is missing dependencies",
+    "Plural": "{0} {1} that are missing dependencies"
+  },
+  "CautionCount": "{0} {1} where caution is advised",
+  "WarningCount": "{0} {1} with a warning",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} that requires your attention",
+    "Plural": "{0} {1} that require your attention"
+  },
+  "ExcludeCount": "{0} {1} that should be excluded",
+  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "SwitchCount": {
+    "One": "{0} {1} that requires switching to another",
+    "Plural": "{0} {1} that require switching to another"
+  }
 }
