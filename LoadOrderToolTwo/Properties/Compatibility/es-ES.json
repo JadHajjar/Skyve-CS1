@@ -107,8 +107,8 @@
     "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_MissingDlc": {
-    "One": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "You're missing the following DLCs to use this package."
   },
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
@@ -127,8 +127,8 @@
   },
   "Action_RequiresConfiguration": "You should follow the following instructions.",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Between '{0}' and '{1}', you should choose only one of them.",
+    "Plural": "Between '{0}' and the following packages, you should only choose one."
   },
   "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
   "Action_UnsubscribeOther": {
