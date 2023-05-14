@@ -165,8 +165,8 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
-		var rect = DrawLabel(e, $"{e.Item.Assets.Count} {(e.Item.Assets.Count == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural)}", IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
-		rect = DrawLabel(e, $"{e.Item.Mods.Count} {(e.Item.Mods.Count == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural)}", IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
+		var rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Assets.Count, Locale.Asset.FormatPlural(e.Item.Assets.Count).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
+		rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Mods.Count, Locale.Mod.FormatPlural(e.Item.Mods.Count).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
 
 		if (e.Item == ProfileManager.CurrentProfile)
 		{

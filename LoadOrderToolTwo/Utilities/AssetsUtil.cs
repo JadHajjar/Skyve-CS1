@@ -82,7 +82,7 @@ internal class AssetsUtil
 			ExcludedHashSet.Add(asset.FileName.ToLower());
 		}
 
-		CentralManager.InformationUpdate(asset);
+		CentralManager.OnInformationUpdated();
 		ProfileManager.TriggerAutoSave();
 
 		SaveChanges();

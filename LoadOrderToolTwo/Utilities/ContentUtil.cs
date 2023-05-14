@@ -72,19 +72,25 @@ internal class ContentUtil
 		foreach (var item in CentralManager.Packages)
 		{
 			if (includedOnly && !item.IsIncluded)
+			{
 				continue;
+			}
 
 			var crData = CompatibilityManager.CompatibilityData.Packages.TryGet(item.SteamId);
 
 			if (crData == null)
 			{
-				if (item.RequiredPackages?.Contains(steamId)??false)
+				if (item.RequiredPackages?.Contains(steamId) ?? false)
+				{
 					yield return item;
+				}
 			}
 			else if (crData.Interactions.ContainsKey(Domain.Compatibility.InteractionType.RequiredPackages))
 			{
-				if (crData.Interactions[Domain.Compatibility.InteractionType.RequiredPackages].Any(x => x.Interaction.Packages?.Contains(steamId)??false))
+				if (crData.Interactions[Domain.Compatibility.InteractionType.RequiredPackages].Any(x => x.Interaction.Packages?.Contains(steamId) ?? false))
+				{
 					yield return item;
+				}
 			}
 		}
 	}
@@ -142,7 +148,16 @@ internal class ContentUtil
 
 	public static long GetTotalSize(string path)
 	{
-		return new DirectoryInfo(path).GetFiles("*", SearchOption.AllDirectories).Sum(f => f.Length);
+		try
+		{
+			if (Directory.Exists(path))
+			{
+				return new DirectoryInfo(path).GetFiles("*", SearchOption.AllDirectories).Sum(f => f.Length);
+			}
+		}
+		catch { }
+
+		return 0;
 	}
 
 	internal static List<Package> LoadContents()
@@ -287,8 +302,7 @@ internal class ContentUtil
 			CentralManager.OnContentLoaded();
 		}
 
-		CentralManager.InformationUpdate(package);
-		CentralManager.RefreshSteamInfo(package);
+		CentralManager.OnInformationUpdated();
 	}
 
 	internal static void StartListeners()
@@ -475,7 +489,7 @@ internal class ContentUtil
 
 		BulkUpdating = false;
 
-		CentralManager.InformationUpdate(packageList[0]);
+		CentralManager.OnInformationUpdated();
 		ModsUtil.SavePendingValues();
 		AssetsUtil.SaveChanges();
 		ProfileManager.TriggerAutoSave();

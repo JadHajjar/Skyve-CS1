@@ -5,10 +5,10 @@ public enum ReportType
 	Stability,
 	Successors,
 	RequiredPackages,
+	OptionalPackages,
 	DlcMissing,
 	Compatibility,
 	Alternatives,
 	Status,
-	Note,
 	Ambiguous,
 }

@@ -136,7 +136,7 @@ internal static class ModsUtil
 			return;
 		}
 
-		CentralManager.InformationUpdate(mod.Package);
+		CentralManager.OnInclusionUpdated();
 		ProfileManager.TriggerAutoSave();
 	}
 
@@ -179,7 +179,7 @@ internal static class ModsUtil
 			SetLocallyEnabled(mod, value, save);
 		}
 
-		CentralManager.InformationUpdate(mod.Package);
+		CentralManager.OnInclusionUpdated();
 		ProfileManager.TriggerAutoSave();
 	}
 
@@ -262,14 +262,6 @@ internal static class ModsUtil
 		return DownloadStatus.OK;
 	}
 
-	public static IEnumerable<IGrouping<string, Mod>> GetDuplicateMods()
-	{
-		return CentralManager.Mods
-			.Where(x => x.IsIncluded)
-			.GroupBy(x => Path.GetFileName(x.FileName))
-			.Where(x => x.Count() > 1);
-	}
-
 	internal static Mod FindMod(string? folder)
 	{
 		return CentralManager.Mods.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
@@ -287,7 +279,7 @@ internal static class ModsUtil
 		var text = name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
 
-		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces();
+		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
 
 		tags = new();
 

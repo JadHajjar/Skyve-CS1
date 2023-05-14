@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
+
 using System;
 using System.Windows.Forms;
 
@@ -23,9 +25,6 @@ internal class Locale : LocaleHelper
 	public static Translation ModIncompletePlural => _instance.GetText(nameof(ModIncompletePlural));
 	public static Translation ModIncomplete => _instance.GetText(nameof(ModIncomplete));
 	public static Translation MultipleModsIncluded => _instance.GetText(nameof(MultipleModsIncluded));
-	public static Translation ModIncluded => _instance.GetText(nameof(ModIncluded));
-	public static Translation ModIncludedPlural => _instance.GetText(nameof(ModIncludedPlural));
-	public static Translation Mods => _instance.GetText(nameof(Mods));
 	public static Translation Local => _instance.GetText(nameof(Local));
 	public static Translation Workshop => _instance.GetText(nameof(Workshop));
 	public static Translation Enabled => _instance.GetText(nameof(Enabled));
@@ -33,10 +32,6 @@ internal class Locale : LocaleHelper
 	public static Translation Included => _instance.GetText(nameof(Included));
 	public static Translation Excluded => _instance.GetText(nameof(Excluded));
 	public static Translation Loading => _instance.GetText(nameof(Loading));
-	public static Translation ModEnabled => _instance.GetText(nameof(ModEnabled));
-	public static Translation ModIncludedAndEnabled => _instance.GetText(nameof(ModIncludedAndEnabled));
-	public static Translation ModEnabledPlural => _instance.GetText(nameof(ModEnabledPlural));
-	public static Translation ModIncludedAndEnabledPlural => _instance.GetText(nameof(ModIncludedAndEnabledPlural));
 	public static Translation ModIsLocal => _instance.GetText(nameof(ModIsLocal));
 	public static Translation ModIsRemoved => _instance.GetText(nameof(ModIsRemoved));
 	public static Translation ModIsUnknown => _instance.GetText(nameof(ModIsUnknown));
@@ -54,14 +49,12 @@ internal class Locale : LocaleHelper
 	public static Translation AssetIsIncomplete => _instance.GetText(nameof(AssetIsIncomplete));
 	public static Translation AssetIsUpToDate => _instance.GetText(nameof(AssetIsUpToDate));
 	public static Translation Server => _instance.GetText(nameof(Server));
-	public static Translation Assets => _instance.GetText(nameof(Assets));
 	public static Translation Vanilla => _instance.GetText(nameof(Vanilla));
 	public static Translation UpToDate => _instance.GetText(nameof(UpToDate));
 	public static Translation StatusUnknown => _instance.GetText(nameof(StatusUnknown));
 	public static Translation OutOfDate => _instance.GetText(nameof(OutOfDate));
 	public static Translation PartiallyDownloaded => _instance.GetText(nameof(PartiallyDownloaded));
 	public static Translation CompatibilityReport => _instance.GetText(nameof(CompatibilityReport));
-	public static Translation Back => _instance.GetText(nameof(Back));
 	public static Translation AutoProfileSaveOn => _instance.GetText(nameof(AutoProfileSaveOn));
 	public static Translation AutoProfileSaveOff => _instance.GetText(nameof(AutoProfileSaveOff));
 	public static Translation TemporaryProfileCanNotBeEdited => _instance.GetText(nameof(TemporaryProfileCanNotBeEdited));
@@ -70,8 +63,6 @@ internal class Locale : LocaleHelper
 	public static Translation ContentAndInfo => _instance.GetText(nameof(ContentAndInfo));
 	public static Translation OtherProfiles => _instance.GetText(nameof(OtherProfiles));
 	public static Translation Filters => _instance.GetText(nameof(Filters));
-	public static Translation AssetIncluded => _instance.GetText(nameof(AssetIncluded));
-	public static Translation AssetIncludedPlural => _instance.GetText(nameof(AssetIncludedPlural));
 	public static Translation TotalSize => _instance.GetText(nameof(TotalSize));
 	public static Translation AssetStatus => _instance.GetText(nameof(AssetStatus));
 	public static Translation ModStatus => _instance.GetText(nameof(ModStatus));
@@ -88,7 +79,6 @@ internal class Locale : LocaleHelper
 	public static Translation Actions => _instance.GetText(nameof(Actions));
 	public static Translation Utilities => _instance.GetText(nameof(Utilities));
 	public static Translation CollectionTitle => _instance.GetText(nameof(CollectionTitle));
-	public static Translation Packages => _instance.GetText(nameof(Packages));
 	public static Translation Options => _instance.GetText(nameof(Options));
 	public static Translation CrNotAvailable => _instance.GetText(nameof(CrNotAvailable));
 	public static Translation ModsWithMinorIssues => _instance.GetText(nameof(ModsWithMinorIssues));
@@ -129,8 +119,6 @@ internal class Locale : LocaleHelper
 	public static Translation To => _instance.GetText(nameof(To));
 	public static Translation DateSubscribed => _instance.GetText(nameof(DateSubscribed));
 	public static Translation DateUpdated => _instance.GetText(nameof(DateUpdated));
-	public static object PackageIncluded => _instance.GetText(nameof(PackageIncluded));
-	public static object PackageIncludedPlural => _instance.GetText(nameof(PackageIncludedPlural));
 	public static Translation PackageStatus => _instance.GetText(nameof(PackageStatus));
 	public static Translation MultiplePackagesIncluded => _instance.GetText(nameof(MultiplePackagesIncluded));
 	public static Translation CopyWorkshopLink => _instance.GetText(nameof(CopyWorkshopLink));
@@ -225,7 +213,6 @@ internal class Locale : LocaleHelper
 	public static Translation OpenProfileFolder => _instance.GetText(nameof(OpenProfileFolder));
 	public static Translation CreateShortcutProfile => _instance.GetText(nameof(CreateShortcutProfile));
 	public static Translation AskToLaunchGameForShortcut => _instance.GetText(nameof(AskToLaunchGameForShortcut));
-	public static Translation ProfilesLoaded => _instance.GetText(nameof(ProfilesLoaded));
 	public static Translation NoProfilesFound => _instance.GetText(nameof(NoProfilesFound));
 	public static Translation NoProfilesMatchFilters => _instance.GetText(nameof(NoProfilesMatchFilters));
 	public static Translation Author => _instance.GetText(nameof(Author));
@@ -271,4 +258,16 @@ internal class Locale : LocaleHelper
 	public static Translation AssetsShouldUnsub => _instance.GetText(nameof(AssetsShouldUnsub));
 	public static Translation SelectThisPackage => _instance.GetText(nameof(SelectThisPackage));
 	public static Translation ControlToSelectMultiplePackages => _instance.GetText(nameof(ControlToSelectMultiplePackages));
+	public static Translation Include => _instance.GetText(nameof(Include));
+	public static Translation Snooze => _instance.GetText(nameof(Snooze));
+	public static Translation Unsubscribe => _instance.GetText(nameof(Unsubscribe));
+	public static Translation Exclude => _instance.GetText(nameof(Exclude));
+	public static Translation Mod => _instance.GetText(nameof(Mod));
+	public static Translation Asset => _instance.GetText(nameof(Asset));
+	public static Translation Package => _instance.GetText(nameof(Package));
+	public static Translation Profile => _instance.GetText(nameof(Profile));
+	public static Translation IncludedCount => _instance.GetText(nameof(IncludedCount));
+	public static Translation EnabledCount => _instance.GetText(nameof(EnabledCount));
+	public static Translation IncludedEnabledCount => _instance.GetText(nameof(IncludedEnabledCount));
+	public static Translation LoadedCount => _instance.GetText(nameof(LoadedCount));
 }

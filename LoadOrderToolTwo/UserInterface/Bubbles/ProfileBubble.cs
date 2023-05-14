@@ -58,7 +58,7 @@ internal class ProfileBubble : StatusBubbleBase
 
 		if (ProfileManager.ProfilesLoaded)
 		{
-			DrawValue(e, ref targetHeight, (ProfileManager.Profiles.Count() - 1).ToString(), Locale.ProfilesLoaded);
+			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(ProfileManager.Profiles.Count() - 1, Locale.Profile.FormatPlural(ProfileManager.Profiles.Count() - 1).ToLower()));
 		}
 	}
 }

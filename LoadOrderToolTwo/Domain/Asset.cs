@@ -48,12 +48,9 @@ public class Asset : IPackage
 	{
 		get
 		{
-			if (Package.WorkshopTags is not null)
+			foreach (var item in Package.Tags)
 			{
-				foreach (var item in Package.WorkshopTags)
-				{
-					yield return new(TagSource.Workshop, item);
-				}
+				yield return item;
 			}
 
 			foreach (var item in _assetTags)

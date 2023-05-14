@@ -20,6 +20,7 @@ public static class ImageManager
 	private static readonly Dictionary<string, (Bitmap image, DateTime lastAccessed)> _cache = new Dictionary<string, (Bitmap, DateTime)>();
 	private static readonly TimeSpan _expirationTime = TimeSpan.FromMinutes(1);
 	private static readonly HttpClient _httpClient = new();
+	private static readonly SteamImageProcessor _imageProcessor = new();
 
 	static ImageManager()
 	{
@@ -115,6 +116,8 @@ public static class ImageManager
 
 			if (localOnly)
 			{
+				_imageProcessor.Add(new(url, fileName, square));
+
 				return false;
 			}
 		}
@@ -159,6 +162,8 @@ public static class ImageManager
 					image.Save(filePath.FullName);
 				}
 			}
+
+			Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 
 			return true;
 		}

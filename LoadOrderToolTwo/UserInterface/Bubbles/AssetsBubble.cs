@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -93,7 +94,7 @@ internal class AssetsBubble : StatusBubbleBase
 			}
 		}
 
-		DrawValue(e, ref targetHeight, assets.ToString(), assets == 1 ? Locale.AssetIncluded : Locale.AssetIncludedPlural);
+		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assets, Locale.Asset.FormatPlural(assets).ToLower()));
 		DrawValue(e, ref targetHeight, assetsSize.SizeString(), Locale.TotalSize);
 
 		if (outOfDate > 0)
@@ -103,24 +104,12 @@ internal class AssetsBubble : StatusBubbleBase
 
 		foreach (var group in groups.OrderBy(x => x.Key))
 		{
-			if (!(group.Key > Domain.Compatibility.NotificationType.MissingDependency))
+			if (group.Key <= NotificationType.Info)
 			{
 				continue;
 			}
 
-			//DrawValue(e, ref targetHeight, group.Count().ToString(), group.Key switch
-			//{
-			//	ReportSeverity.MinorIssues => Locale.AssetsWithMinorIssues,
-			//	ReportSeverity.MajorIssues => Locale.AssetsWithMajorIssues,
-			//	ReportSeverity.Unsubscribe => Locale.AssetsShouldUnsub,
-			//	_ => ""
-			//}, group.Key switch
-			//{
-			//	ReportSeverity.MinorIssues => FormDesign.Design.YellowColor,
-			//	ReportSeverity.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
-			//	ReportSeverity.Unsubscribe => FormDesign.Design.RedColor,
-			//	_ => Color.Empty
-			//});
+			DrawText(e, ref targetHeight, LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Count(), Locale.Asset.FormatPlural(group.Count()).ToLower()), group.Key.GetColor());
 		}
 	}
 }

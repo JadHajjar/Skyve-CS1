@@ -11,23 +11,29 @@ public enum InteractionType
 	[CRN(NotificationType.None, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.NoAction })]
 	Alternative = 2,
 
-	[CRN(NotificationType.Caution, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
+	[CRN(NotificationType.Caution, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.ExcludeThis, StatusAction.ExcludeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
 	SameFunctionality = 3,
 
-	[CRN(NotificationType.AttentionRequired, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
+	[CRN(NotificationType.AttentionRequired, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.ExcludeThis, StatusAction.ExcludeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
 	IncompatibleWith = 4,
 
 	[CRN(NotificationType.Info, new[] { StatusAction.NoAction })]
 	RequirementAlternative = 5,
 
-	[CRN(NotificationType.Warning, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
+	[CRN(NotificationType.Warning, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.ExcludeThis, StatusAction.ExcludeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
 	CausesIssuesWith = 6,
 
 	[CRN(NotificationType.MissingDependency, new[] { StatusAction.SubscribeToPackages, StatusAction.NoAction })]
 	RequiredPackages = 7,
 
+	[CRN(NotificationType.Info, new[] { StatusAction.SubscribeToPackages, StatusAction.NoAction })]
+	OptionalPackages = 8,
+
 	/***********************************/
 
 	[CRN(NotificationType.Switch, false)]
-	SucceededBy
+	SucceededBy,
+
+	[CRN(NotificationType.AttentionRequired, false)]
+	Identical
 }

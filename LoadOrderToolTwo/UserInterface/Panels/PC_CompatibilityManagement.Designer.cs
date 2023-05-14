@@ -493,6 +493,7 @@ partial class PC_CompatibilityManagement
 			// B_ReuseData
 			// 
 			this.B_ReuseData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_ReuseData.AutoSize = true;
 			this.B_ReuseData.ColorShade = null;
 			this.B_ReuseData.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon10.Name = "I_Refresh";
@@ -509,6 +510,7 @@ partial class PC_CompatibilityManagement
 			// B_Previous
 			// 
 			this.B_Previous.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.B_Previous.AutoSize = true;
 			this.B_Previous.ColorShade = null;
 			this.B_Previous.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon11.Name = "I_ArrowLeft";
@@ -524,6 +526,7 @@ partial class PC_CompatibilityManagement
 			// B_Skip
 			// 
 			this.B_Skip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.B_Skip.AutoSize = true;
 			this.B_Skip.ColorShade = null;
 			this.B_Skip.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon12.Name = "I_ArrowRight";
@@ -539,6 +542,7 @@ partial class PC_CompatibilityManagement
 			// B_Apply
 			// 
 			this.B_Apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_Apply.AutoSize = true;
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon13.Name = "I_Ok";

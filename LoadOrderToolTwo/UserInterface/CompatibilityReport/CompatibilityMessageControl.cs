@@ -11,6 +11,7 @@ using SlickControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,8 +20,9 @@ namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
 internal class CompatibilityMessageControl : SlickControl
 {
 	private readonly List<ulong> _subscribingTo = new();
-	private readonly Dictionary<SmallMod, Rectangle> _buttonRects = new();
-	private readonly Dictionary<SmallMod, Rectangle> _modRects = new();
+	private readonly Dictionary<PseudoPackage, Rectangle> _buttonRects = new();
+	private readonly Dictionary<PseudoPackage, Rectangle> _modRects = new();
+	private Rectangle allButtonRect;
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportItem message)
 	{
@@ -29,111 +31,14 @@ internal class CompatibilityMessageControl : SlickControl
 		Message = message;
 		PackageCompatibilityReportControl = packageCompatibilityReportControl;
 
-		if (message.Packages.Length > 0)
+		if (message.Packages.Length != 0 && !message.Packages.All(x => x.Package is not null))
 		{
-			Loading = true;
-			new BackgroundAction("Loading package info", LoadPackages).Run();
-
-			CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+			SteamUtil.WorkshopItemsLoaded += Invalidate;
 		}
-		else
-		{
-			AutoInvalidate = false;
-		}
-	}
-
-	protected override void Dispose(bool disposing)
-	{
-		base.Dispose(disposing);
-
-		CentralManager.ContentLoaded -= CentralManager_ContentLoaded;
-	}
-
-	private void CentralManager_ContentLoaded()
-	{
-		if (LinkedMods is null)
-		{
-			return;
-		}
-
-		foreach (var package in LinkedMods)
-		{
-			var localMod = ModsUtil.FindMod(package.SteamId);
-
-			if (package.Package != localMod)
-			{
-				_subscribingTo.Remove(package.SteamId);
-				package.Package = localMod;
-			}
-		}
-
-		Loading = _subscribingTo.Any();
-	}
-
-	private async void LoadPackages()
-	{
-		var packages = new List<SmallMod>();
-		var remainingPackages = new List<ulong>();
-
-		if (Message.Packages is not null)
-		{
-			foreach (var package in Message.Packages)
-			{
-				var localMod = ModsUtil.FindMod(package);
-
-				if (localMod != null)
-				{
-					packages.Add(new SmallMod(package, localMod.Name, localMod.IconImage) { Package = localMod });
-				}
-				else
-				{
-					remainingPackages.Add(package);
-				}
-			}
-		}
-
-		if (remainingPackages.Count > 0)
-		{
-			try
-			{
-				var steamData = await SteamUtil.GetWorkshopInfoAsync(remainingPackages.ToArray());
-
-				foreach (var item in steamData)
-				{
-					try
-					{
-						var image = await ImageManager.GetImage(item.Value.PreviewURL);
-
-						packages.Add(new SmallMod(item.Key, item.Value.Title ?? string.Empty, image));
-					}
-					catch { packages.Add(new SmallMod(item.Key, item.Value.Title ?? string.Empty, null)); }
-				}
-			}
-			catch
-			{
-				foreach (var item in remainingPackages)
-				{
-					var mod = CompatibilityManager.CompatibilityData.Packages.TryGet(item);
-
-					if (mod != null)
-					{
-						packages.Add(new SmallMod(item, mod.Package.Name ?? Locale.UnknownPackage, null));
-					}
-					else
-					{
-						packages.Add(new SmallMod(item, item.ToString(), null));
-					}
-				}
-			}
-		}
-
-		LinkedMods = packages;
-		Loading = false;
 	}
 
 	public ReportType Type { get; }
 	public ReportItem Message { get; }
-	private List<SmallMod>? LinkedMods { get; set; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -142,96 +47,160 @@ internal class CompatibilityMessageControl : SlickControl
 		{
 			e.Graphics.Clear(BackColor);
 
-			e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+			e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
 			e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
+			using var icon = Message.Status.Notification.GetIcon(false).Large;
 			var actionHovered = false;
 			var cursor = PointToClient(Cursor.Position);
-			var pad = (int)(4 * UI.FontScale);
+			var pad = (int)(6 * UI.FontScale);
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
-			var iconRect = new Rectangle(Point.Empty, UI.Scale(new Size(24, 24), UI.FontScale));
-			var messageSize = e.Graphics.Measure(Message.Status.Action.ToString(), UI.Font(9F), Width - iconRect.Width - pad);
-			var noteSize = e.Graphics.Measure(Message.Message, UI.Font(8.25F), Width - iconRect.Width - pad);
+			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
+			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
+			var noteSize = e.Graphics.Measure(Message.Status.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + pad);
-			using var icon = Message.Status.Notification.GetIcon(false).Default;
 			using var brush = new SolidBrush(color);
+
+			GetAllButton(out var allText, out var allIcon, out var colorStyle);
 
 			e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
 			e.Graphics.FillRoundedRectangle(brush, new Rectangle(iconRect.Width - (2 * pad), 0, 2 * pad, Height - pad), pad);
 
 			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
-			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && !(Message.Status.Packages?.Any() ?? false) ? StringAlignment.Center : StringAlignment.Near });
+			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
 			e.Graphics.DrawString(Message.Status.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height, 0, 0));
 
-			if (Loading && LinkedMods is null)
+			if (allText is not null)
 			{
-				DrawLoader(e.Graphics, ClientRectangle.Pad(iconRect.Width + pad, y, 0, 0).CenterR(24, 24));
+				var buttonIcon = IconManager.GetIcon(allIcon);
+				var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, UI.Font(8.25F), UI.Scale(new Padding(4), UI.FontScale));
 
-				y += 32;
+				allButtonRect = new Rectangle(0, y, Width, 0).Pad(iconRect.Width + pad, 0, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
+
+				SlickButton.DrawButton(e, allButtonRect, allText, UI.Font(8.25F), buttonIcon, UI.Scale(new Padding(4), UI.FontScale), allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
+
+				actionHovered |= allButtonRect.Contains(cursor);
+
+				y += allButtonRect.Height + (pad * 2);
 			}
-			else if (LinkedMods is not null)
+
+			if (Message.Packages.Length > 0)
 			{
+				var isDlc = Message.Type == ReportType.DlcMissing;
 				var rect = ClientRectangle.Pad(iconRect.Width + pad, y, 0, 0);
 
-				rect.Height = (int)(50 * UI.FontScale);
+				rect.Height = (int)(40 * UI.FontScale);
 
-				foreach (var item in LinkedMods)
+				foreach (var packageID in Message.Packages)
 				{
 					var fore = ForeColor;
 
 					actionHovered |= rect.Contains(cursor);
 
-					_modRects[item] = rect;
+					_modRects[packageID] = rect;
 
-					var buttonSize = Size.Empty;
-
-					if (rect.Contains(cursor) && (!_buttonRects.ContainsKey(item) || !_buttonRects[item].Contains(cursor)))
+					if (rect.Contains(cursor) && (!_buttonRects.ContainsKey(packageID) || !_buttonRects[packageID].Contains(cursor)))
 					{
 						if (HoverState.HasFlag(HoverState.Pressed))
 						{
-							fore = FormDesign.Design.ActiveForeColor;
+							fore = FormDesign.Design.ActiveColor;
 						}
 
-						e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 255 : 50, FormDesign.Design.ActiveColor)), rect.Pad(1), pad);
+						using var gradientbrush = new LinearGradientBrush(ClientRectangle.Pad(rect.Height / 2, 0, 0, 0), Color.FromArgb(50, fore), Color.Empty, LinearGradientMode.Horizontal);
+
+						e.Graphics.FillRectangle(gradientbrush, rect.Pad(rect.Height / 2, 0, 0, 0));
 					}
 
-					e.Graphics.DrawRoundedImage(item.Icon ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(50, 50), UI.FontScale), ContentAlignment.TopLeft), pad, fore);
+					var dlc = isDlc ? SteamUtil.Dlcs.FirstOrDefault(x => x.Id == packageID) : null;
+					var package = packageID.Package;
 
-					e.Graphics.DrawString(item.Name, UI.Font(9F, FontStyle.Bold), new SolidBrush(fore), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0));
+					e.Graphics.DrawRoundedImage(dlc?.Thumbnail ?? package?.IconImage ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(isDlc ? (40 * 460 / 215) : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
 
-					if (item.Package is not null)
+					List<string>? tags = null;
+
+					var textRect = rect.Pad((int)(((isDlc ? (40 * 460 / 215) : 40) + 3) * UI.FontScale), 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+
+					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+					var tagRect = new Rectangle(textRect.Left, textRect.Y, 0, textRect.Height);
+
+					if (tags is not null)
 					{
-						e.Graphics.DrawString(Locale.ModOwned, UI.Font(7.5F, FontStyle.Italic), new SolidBrush(Color.FromArgb(150, fore)), rect.Pad((int)(55 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Far });
+						foreach (var item in tags)
+						{
+							if (item.ToLower() == "stable")
+							{ continue; }
+
+							var tcolor = item.ToLower() switch
+							{
+								"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
+								"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
+								"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
+								_ => (Color?)null
+							};
+
+							tagRect.X += Padding.Left + e.DrawLabel(tcolor is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, tcolor ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
+						}
 					}
 
-					if (_subscribingTo.Contains(item.SteamId))
+					string? buttonText = null;
+					string? iconName = null;
+
+					switch (Message.Status.Action)
 					{
-						_buttonRects[item] = Rectangle.Empty;
+						case StatusAction.SubscribeToPackages:
+							var p = package?.Package;
+
+							if (p is null)
+							{
+								buttonText = Locale.Subscribe;
+								iconName = "I_Add";
+							}
+							else if (!p.IsIncluded)
+							{
+								buttonText = Locale.Include;
+								iconName = "I_Check";
+							}
+							else if (!(p.Mod?.IsEnabled ?? true))
+							{
+								buttonText = Locale.Enable;
+								iconName = "I_Enabled";
+							}
+							break;
+						case StatusAction.SelectOne:
+							buttonText = Locale.SelectThisPackage;
+							iconName = "I_Ok";
+							break;
+						case StatusAction.Switch:
+							buttonText = Locale.Switch;
+							iconName = "I_Switch";
+							break;
+					}
+
+					if (buttonText is null)
+					{
+						rect.Y += _modRects[packageID].Height + pad;
+						continue;
+					}
+
+					var buttonIcon = IconManager.GetIcon(iconName);
+					var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(7.5F), UI.Scale(new Padding(3), UI.FontScale));
+
+					if (_subscribingTo.Contains(packageID))
+					{
+						_buttonRects[packageID] = Rectangle.Empty;
 						DrawLoader(e.Graphics, rect.Align(new Size(24, 24), ContentAlignment.BottomRight));
 					}
-					else if (item.Package is null || !item.Package.IsIncluded || !item.Package.IsEnabled)
+					else
 					{
-						var buttonText =
-							item.Package is null ? Locale.Subscribe :
-							Type is ReportType.Successors or ReportType.Alternatives ? Locale.Switch :
-							Locale.Enable;
+						_buttonRects[packageID] = _modRects[packageID].Align(buttonSize, ContentAlignment.BottomRight);
 
-						var buttonIcon = IconManager.GetIcon(
-							item.Package is null ? "I_Add" :
-							Type is ReportType.Successors or ReportType.Alternatives ? "I_Switch" :
-							"I_Ok");
-
-						buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, buttonText, UI.Font(8.25F));
-
-						_modRects[item] = _modRects[item].Pad(0, 0, 0, -buttonSize.Height);
-						_buttonRects[item] = _modRects[item].Align(buttonSize, ContentAlignment.BottomRight);
-
-						SlickButton.DrawButton(e, _buttonRects[item], buttonText, UI.Font(8.25F), buttonIcon, null, _buttonRects[item].Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, ColorStyle.Green);
+						SlickButton.DrawButton(e, _buttonRects[packageID], buttonText, UI.Font(7.5F), buttonIcon, UI.Scale(new Padding(3), UI.FontScale), _buttonRects[packageID].Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, Message.Status.Action is StatusAction.SelectOne ? ColorStyle.Active : ColorStyle.Green);
 					}
 
-					rect.Y += _modRects[item].Height + pad;
+					rect.Y += _modRects[packageID].Height + pad;
 				}
 
 				y = rect.Y;
@@ -241,6 +210,66 @@ internal class CompatibilityMessageControl : SlickControl
 			Height = Math.Max(iconRect.Height, y);
 		}
 		catch { }
+	}
+
+	private void GetAllButton(out string? allText, out string? allIcon, out ColorStyle colorStyle)
+	{
+		allText = null;
+		allIcon = null;
+		colorStyle = ColorStyle.Red;
+
+		switch (Message.Status.Action)
+		{
+			case StatusAction.SubscribeToPackages:
+				if (Message.Packages.Length > 1)
+				{
+					var max = Message.Packages.Max(x =>
+					{
+						var p = SteamUtil.GetItem(x)?.Package;
+
+						if (p is null)
+						{
+							return 3;
+						}
+						else if (!p.IsIncluded)
+						{
+							return 2;
+						}
+						else if (!(p.Mod?.IsEnabled ?? true))
+						{
+							return 1;
+						}
+
+						return 0;
+					});
+
+					colorStyle = ColorStyle.Green;
+					allText = max switch { 3 => Locale.SubscribeAll, 2 => Locale.IncludeAll, 1 => Locale.EnableAll, _ => null };
+					allIcon = max switch { 3 => "I_Add", 2 => "I_Check", 1 => "I_Enabled", _ => null };
+				}
+				break;
+			case StatusAction.RequiresConfiguration:
+				allText = Locale.Snooze;
+				allIcon = "I_Snooze";
+				colorStyle = ColorStyle.Active;
+				break;
+			case StatusAction.UnsubscribeThis:
+				allText = Locale.Unsubscribe;
+				allIcon = "I_RemoveSteam";
+				break;
+			case StatusAction.UnsubscribeOther:
+				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.UnsubscribeAll };
+				allIcon = "I_RemoveSteam";
+				break;
+			case StatusAction.ExcludeThis:
+				allText = Locale.Exclude;
+				allIcon = "I_X";
+				break;
+			case StatusAction.ExcludeOther:
+				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
+				allIcon = "I_X";
+				break;
+		}
 	}
 
 	protected override void OnMouseClick(MouseEventArgs e)
@@ -265,71 +294,75 @@ internal class CompatibilityMessageControl : SlickControl
 		{
 			if (item.Value.Contains(e.Location))
 			{
-				if (item.Key.Package is not null)
-				{
-					(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Key.Package.Package));
-				}
-				else
-				{
-					Clicked(item.Key, false);
-				}
+				Clicked(item.Key, false);
 
 				return;
 			}
 		}
 	}
 
-	private async void Clicked(SmallMod item, bool button)
+	private async void Clicked(PseudoPackage item, bool button)
 	{
-		if (item.Package is null)
+		var package = item.Package;
+
+		if (!button)
 		{
-			try
+			if (Message.Type is ReportType.DlcMissing)
 			{
-				if (button)
-				{
-					_subscribingTo.Add(item.SteamId);
-
-					Loading = true;
-
-					await CitiesManager.Subscribe(new[] { item.SteamId });
-				}
-				else
-				{
-					PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.SteamId}");
-				}
+				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.SteamId}");
 			}
-			catch { }
+			else if (package is not null)
+			{
+				Program.MainForm.PushPanel(null, new PC_PackagePage(package));
+			}
+			else
+			{
+				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.SteamId}");
+			}
 
 			return;
 		}
 
-		item.Package.IsIncluded = true;
-		item.Package.IsEnabled = true;
+		var p = package?.Package;
 
-		if (Type is ReportType.Successors or ReportType.Alternatives)
+		if (p is null)
 		{
-			if (PackageCompatibilityReportControl.Package.Package?.Mod is not null)
+			_subscribingTo.Add(item);
+
+			Loading = true;
+
+			await CitiesManager.Subscribe(new[] { item.SteamId });
+		}
+		else
+		{
+			p.IsIncluded = true;
+
+			if (p.Mod is not null)
 			{
-				PackageCompatibilityReportControl.Package.Package.Mod.IsIncluded = false;
-				PackageCompatibilityReportControl.Package.Package.Mod.IsIncluded = false;
+				p.Mod.IsEnabled = true;
 			}
 		}
 
-		PackageCompatibilityReportControl.Reset();
-	}
-
-	class SmallMod
-	{
-		public Bitmap? Icon { get; set; }
-		public string Name { get; set; }
-		public ulong SteamId { get; set; }
-		public Domain.Mod? Package { get; set; }
-
-		public SmallMod(ulong steamId, string name, Bitmap? icon)
+		switch (Message.Status.Action)
 		{
-			Icon = icon;
-			Name = name;
-			SteamId = steamId;
+			case StatusAction.SelectOne:
+				foreach (var id in Message.Packages)
+				{
+					if (id != item)
+					{
+						var pp = id.Package;
+
+						if (pp is not null)
+						{
+							pp.IsIncluded = false;
+						}
+					}
+				}
+				break;
+			case StatusAction.Switch:
+				PackageCompatibilityReportControl.Package.IsIncluded = false;
+				PackageCompatibilityReportControl.Package.IsIncluded = false;
+				break;
 		}
 	}
 }

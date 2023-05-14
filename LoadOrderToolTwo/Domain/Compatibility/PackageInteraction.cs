@@ -1,13 +1,9 @@
 ﻿using Extensions.Sql;
 
-using LoadOrderToolTwo.Utilities;
-
-using System;
-
 namespace LoadOrderToolTwo.Domain.Compatibility;
 
-[DynamicSqlClass("PackageInteractions")]
 #if API
+[DynamicSqlClass("PackageInteractions")]
 public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 {
 	[DynamicSqlProperty(PrimaryKey = true, Indexer = true), System.Text.Json.Serialization.JsonIgnore]

@@ -41,7 +41,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 
 	protected override bool SearchMatch(string searchText, SteamUser item)
 	{
-		return searchText.SearchCheck(item.Name) || item.SteamId.Contains(searchText);
+		return searchText.SearchCheck(item.Name) || item.SteamId.ToString().Contains(searchText);
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, SteamUser item, bool selected)
@@ -51,10 +51,21 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 
 		var text = item.Name;
 		var icon = ImageManager.GetImage(item?.AvatarUrl, true).Result;
+		var avatarRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
 
 		if (icon != null)
 		{
-			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft), (int)(4 * UI.FontScale));
+			e.Graphics.DrawRoundedImage(icon, avatarRect, (int)(4 * UI.FontScale));
+		}
+
+		if (CompatibilityManager.CompatibilityData.Authors.TryGet(item!.SteamId)?.Verified ?? false)
+		{
+			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
+
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+
+			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
 
 		rectangle = rectangle.Pad(rectangle.Height + Padding.Left, 0, 0, 0);
@@ -62,7 +73,9 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 
 		if (_counts.ContainsKey(item!))
-		e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_counts[item!]), Font, new SolidBrush(Color.FromArgb(200, foreColor)), rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		{
+			e.Graphics.DrawString(Locale.ItemsCount.FormatPlural(_counts[item!]), Font, new SolidBrush(Color.FromArgb(200, foreColor)), rectangle.Pad(0, 0, (int)(5 * UI.FontScale), 0).AlignToFontSize(Font), new StringFormat { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		}
 	}
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<SteamUser> items)
@@ -97,6 +110,6 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 			iconRect.X += iconRect.Width * 9 / 10;
 		}
 
-		e.Graphics.DrawString(Locale.AuthorsSelected.FormatPlural(items.Count()), Font, new SolidBrush(foreColor), rectangle.Pad(iconRect.Right- iconRect.Width, 0, 0, 0).AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(Locale.AuthorsSelected.FormatPlural(items.Count()), Font, new SolidBrush(foreColor), rectangle.Pad(iconRect.Right - iconRect.Width, 0, 0, 0).AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 	}
 }

@@ -19,20 +19,15 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_ModUtilities : PanelContent
 {
-	private readonly ItemListControl<Mod> LC_Duplicates;
-
 	public PC_ModUtilities()
 	{
-		LC_Duplicates = new ItemListControl<Mod>() { Dock = DockStyle.Top };
 		InitializeComponent();
 
-		P_DuplicateMods.Controls.Add(LC_Duplicates);
-		LC_Duplicates.SizeChanged += LC_Duplicates_SizeChanged;
 		RefreshModIssues();
 
 		B_LoadCollection.Height = 0;
 
-		CentralManager.ModInformationUpdated += RefreshModIssues;
+		CentralManager.PackageInformationUpdated += RefreshModIssues;
 
 		DD_BOB.StartingFolder = LocationManager.AppDataPath;
 		DD_Missing.StartingFolder = DD_Unused.StartingFolder = LsmUtil.GetReportFolder();
@@ -52,20 +47,14 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void RefreshModIssues()
 	{
-		var duplicates = ModsUtil.GetDuplicateMods();
 		var modsOutOfDate = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.OutOfDate);
 		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.PartiallyDownloaded);
-
-		LC_Duplicates.SetItems(duplicates.SelectMany(x => x));
-		LC_Duplicates.SetSorting(PackageSorting.Mod, false);
 
 		B_ReDownload.Loading = false;
 		B_Cleanup.Loading = false;
 
 		this.TryInvoke(() =>
 		{
-			P_DuplicateMods.Visible = duplicates.Any();
-
 			L_OutOfDate.Text = $"{modsOutOfDate.Count} {(modsOutOfDate.Count == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}:\r\n{modsOutOfDate.ListStrings(x => $"    • {x}", "\r\n")}";
 			L_Incomplete.Text = $"{modsIncomplete.Count} {(modsIncomplete.Count == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}:\r\n{modsIncomplete.ListStrings(x => $"    • {x}", "\r\n")}";
 
@@ -86,7 +75,7 @@ public partial class PC_ModUtilities : PanelContent
 		base.UIChanged();
 
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Cleanup.Margin = P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Text.Margin = P_ModIssues.Margin = P_DuplicateMods.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		P_Cleanup.Margin = P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Text.Margin = P_ModIssues.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		B_ReDownload.Margin = TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_ImportClipboard.Margin = UI.Scale(new Padding(10), UI.FontScale);
 		L_CleanupInfo.Font = L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9F);
@@ -108,16 +97,6 @@ public partial class PC_ModUtilities : PanelContent
 		}
 	}
 
-	private void LC_Duplicates_SizeChanged(object sender, EventArgs e)
-	{
-		var height = LC_Duplicates.GetTotalHeight(LC_Duplicates.SafeGetItems());
-
-		if (height != LC_Duplicates.Height)
-		{
-			LC_Duplicates.Height = height;
-		}
-	}
-
 	private async void B_LoadCollection_Click(object sender, EventArgs e)
 	{
 		if (!B_LoadCollection.Loading && this.CheckValidation())
@@ -128,11 +107,11 @@ public partial class PC_ModUtilities : PanelContent
 
 			if (ulong.TryParse(collectionId, out var steamId))
 			{
-				var contents = await SteamUtil.GetWorkshopInfoAsync(new[] { steamId });
+				var contents = await SteamUtil.GetItemAsync(steamId);
 
-				if (contents.TryGet(steamId)?.RequiredPackages?.Any() ?? false)
+				if (contents?.RequiredPackages?.Any() ?? false)
 				{
-					Form.PushPanel(null, new PC_ImportCollection(contents[steamId]));
+					Form.PushPanel(null, new PC_ImportCollection(contents));
 
 					TB_CollectionLink.Text = string.Empty;
 				}
