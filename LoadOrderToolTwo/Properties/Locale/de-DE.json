@@ -173,6 +173,7 @@
   "HidePseudoMods": "Pseudo-Mods wie Themen-Mixe ausblenden",
   "YourDlcs": "Deine DLCs",
   "AllDlcs": "Alle DLCs",
+  "DLCs": "DLCs & CCPs",
   "DetectedIssues": "Erkannte Probleme",
   "DuplicateMods": "Duplikate",
   "FixAllIssues": "Alle Probleme beheben",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Steam-ID des Autors kopieren",
   "CloseCitiesToSub": "Cities: Skylines muss geschlossen werden, um Pakete zu abonnieren oder abzubestellen",
   "ShowingFilteredItems": "Zeige {0} von insgesamt {1} Elementen",
-  "ShowingMods": "Zeige {0} Mods",
-  "ShowingAssets": "Zeige {0} Gegenstände",
-  "ShowingPackages": "Zeige {0} Pakete",
-  "ShowingProfiles": "Zeige {0} Profile",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Ziehe oder wähle die .json oder .xml Datei eines Profils um diese zu importieren",
   "ThemeUIScale": "Design & UI-Skalierung",
   "SearchProfiles": "Durchsuche deine Profile...",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Startet einen neuen Spielstand beim Start von Cities: Skylines. Du kannst die Karte angeben, auf der du starten möchtest",
   "LoadSaveGame_Tip": "Lade einen Spielstand beim Starten von Cities: Skylines. Wenn du keine Speicherdatei auswählst, wird automatisch der aktuellste Spielstand geladen",
   "BETA": "BETA",
+  "ALPHA": "ALPHA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "STABIL",
   "EXPERIMENTAL": "EXPERIMENTELL",
   "DEPRECATED": "VERALTET",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Diese Aktion kann nicht rückgängig gemacht werden.",
   "AlwaysOpenFiltersAndActions": "Filter standardmäßig anzeigen",
   "AlwaysOpenFiltersAndActions_Tip": "Filter sind immer eingeblendet, wenn du einen Inhalts-Tab öffnest",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Workshop Spielstände",
   "Workshop Maps": "Workshop Karten",
   "AnyAuthor": "Jeder Autor",
-  "ItemsCount": "{0} Elemente",
-  "AuthorsSelected": "{0} Autoren ausgewählt",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Das System-Theme verwenden",
   "Donate": "Spenden",
   "CopyAllIds": "Alle angezeigten Workshop-IDs kopieren",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profile"
+  "Profiles": "Profile",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Mods",
+  "Local": "Lokal",
+  "Workshop": "Workshop",
+  "CompatibilityReport": "Kompatibilitätsbericht",
+  "AppDataPath": "Cities: Skylines App-Data Ordner",
+  "Enabled": "Aktiviert",
+  "Disabled": "Deaktiviert",
+  "Included": "Enthalten",
+  "Excluded": "Ausgeschlossen",
+  "Server": "Server",
+  "Assets": "Gegenstände",
+  "OutOfDate": "Veraltet",
+  "Subscribe": "Abonnieren",
+  "Switch": "Wechseln",
+  "Packages": "Pakete",
+  "AdvancedIncludeEnable": "Zeige sowohl Enthalten als auch Aktiviert-Status für Mods",
+  "PackageStatus": "Paket-Status",
+  "Author": "Autor"
 }
