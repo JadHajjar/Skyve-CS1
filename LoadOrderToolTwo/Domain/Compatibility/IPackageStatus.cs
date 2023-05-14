@@ -9,7 +9,7 @@ public interface IPackageStatus<TType> : IGenericPackageStatus where TType : str
 
 public interface IGenericPackageStatus 
 {
-	InteractionAction Action { get; set; }
+	StatusAction Action { get; set; }
 	ulong[]? Packages { get; set; }
 	string? Note { get; set; }
 #if !API

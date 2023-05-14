@@ -72,13 +72,13 @@
     <Compile Update="UserInterface\Bubbles\FavoriteProfileBubble.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Dropdowns\AuthorDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
-    <Compile Update="UserInterface\Forms\AddPackageForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -138,7 +138,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Properties\Compatibility\" />
 	  <Folder Include="Properties\SlickUI\" />
 	</ItemGroup>
 	

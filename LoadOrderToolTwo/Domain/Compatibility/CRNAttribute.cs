@@ -6,12 +6,21 @@ namespace LoadOrderToolTwo.Domain.Compatibility;
 public class CRNAttribute : Attribute // Compatibility Report Notification (CRN)
 {
 	public NotificationType Notification { get; }
+	public StatusAction[] ValidActions { get; }
 	public bool Browsable { get; }
 
 	public CRNAttribute(NotificationType notification, bool browsable = true)
 	{
 		Notification = notification;
 		Browsable = browsable;
+		ValidActions = new StatusAction[0];
+	}
+
+	public CRNAttribute(NotificationType notification, StatusAction[] actions, bool browsable = true)
+	{
+		Notification = notification;
+		Browsable = browsable;
+		ValidActions = actions;
 	}
 
 	public static NotificationType GetNotification<TEnum>(TEnum enumValue) where TEnum : struct, Enum

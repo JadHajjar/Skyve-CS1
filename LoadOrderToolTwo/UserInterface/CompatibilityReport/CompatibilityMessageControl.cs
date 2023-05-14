@@ -22,14 +22,14 @@ internal class CompatibilityMessageControl : SlickControl
 	private readonly Dictionary<SmallMod, Rectangle> _buttonRects = new();
 	private readonly Dictionary<SmallMod, Rectangle> _modRects = new();
 
-	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportMessage message)
+	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportItem message)
 	{
 		Dock = DockStyle.Top;
 		Type = type;
 		Message = message;
 		PackageCompatibilityReportControl = packageCompatibilityReportControl;
 
-		if (message.Status.Packages?.Any() ?? false)
+		if (message.Packages.Length > 0)
 		{
 			Loading = true;
 			new BackgroundAction("Loading package info", LoadPackages).Run();
@@ -75,9 +75,9 @@ internal class CompatibilityMessageControl : SlickControl
 		var packages = new List<SmallMod>();
 		var remainingPackages = new List<ulong>();
 
-		if (Message.Status.Packages is not null)
+		if (Message.Packages is not null)
 		{
-			foreach (var package in Message.Status.Packages)
+			foreach (var package in Message.Packages)
 			{
 				var localMod = ModsUtil.FindMod(package);
 
@@ -132,7 +132,7 @@ internal class CompatibilityMessageControl : SlickControl
 	}
 
 	public ReportType Type { get; }
-	public ReportMessage Message { get; }
+	public ReportItem Message { get; }
 	private List<SmallMod>? LinkedMods { get; set; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
 
@@ -150,8 +150,8 @@ internal class CompatibilityMessageControl : SlickControl
 			var pad = (int)(4 * UI.FontScale);
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, UI.Scale(new Size(24, 24), UI.FontScale));
-			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
-			var noteSize = e.Graphics.Measure(Message.Status.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
+			var messageSize = e.Graphics.Measure(Message.Status.Action.ToString(), UI.Font(9F), Width - iconRect.Width - pad);
+			var noteSize = e.Graphics.Measure(Message.Message, UI.Font(8.25F), Width - iconRect.Width - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + pad);
 			using var icon = Message.Status.Notification.GetIcon(false).Default;
 			using var brush = new SolidBrush(color);

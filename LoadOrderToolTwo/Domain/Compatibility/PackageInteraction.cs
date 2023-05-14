@@ -1,5 +1,7 @@
 ﻿using Extensions.Sql;
 
+using LoadOrderToolTwo.Utilities;
+
 using System;
 
 namespace LoadOrderToolTwo.Domain.Compatibility;
@@ -11,14 +13,14 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 	[DynamicSqlProperty(PrimaryKey = true, Indexer = true), System.Text.Json.Serialization.JsonIgnore]
 	public ulong PackageId { get; set; }
 #else
-public struct PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
+public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 {
 #endif
 	[DynamicSqlProperty(PrimaryKey = true)]
 	public InteractionType Type { get; set; }
 
 	[DynamicSqlProperty]
-	public InteractionAction Action { get; set; }
+	public StatusAction Action { get; set; }
 
 	public ulong[]? Packages { get; set; }
 

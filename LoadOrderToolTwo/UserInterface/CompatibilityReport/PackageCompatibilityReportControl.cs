@@ -66,17 +66,17 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 		if (Report == null)
 		{
-			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Note, new Domain.Compatibility.ReportMessage { Type = ReportType.Note, Message = LocaleCR.CR_NoAvailableReport }));
+			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Note, new Domain.Compatibility.ReportItem { Type = ReportType.Note }));
 			return;
 		}
 
-		foreach (var item in Report.ReportMessages.GroupBy(x => x.Type).OrderBy(x => x.Key))
+		foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key))
 		{
 			GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), item.Select(x => new CompatibilityMessageControl(this, item.Key, x)).ToArray());
 		}
 	}
 
-	private Color GetTypeColor(IGrouping<ReportType, ReportMessage> item)
+	private Color GetTypeColor(IGrouping<ReportType, ReportItem> item)
 	{
 		return item.Max(x => x.Status.Notification).GetColor().MergeColor(BackColor, 15);
 	}
@@ -86,14 +86,14 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		return type switch
 		{
 			ReportType.Stability => "I_Stability",
-			ReportType.DlcMissing or ReportType.RequiredMods => "I_MissingMod",
-			ReportType.UnneededDependency => "I_Disposable",
-			ReportType.WorksWhenDisabled => "I_Malicious",
+			ReportType.DlcMissing or ReportType.RequiredPackages => "I_MissingMod",
+			//ReportType.UnneededDependency => "I_Disposable",
+			//ReportType.WorksWhenDisabled => "I_Malicious",
 			ReportType.Successors => "I_Upgrade",
 			ReportType.Alternatives => "I_Alternatives",
 			ReportType.Status => "I_Statuses",
 			ReportType.Note => "I_Note",
-			ReportType.Recommendations => "I_Recommendations",
+			//ReportType.Recommendations => "I_Recommendations",
 			ReportType.Compatibility => "I_Compatibilities",
 			_ => "I_CompatibilityReport",
 		};

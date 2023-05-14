@@ -41,7 +41,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override string GetFilteredCountText(int filteredCount)
 	{
-		return string.Format(Locale.ShowingAssets, filteredCount);
+		return Locale.ShowingAssets.FormatPlural(filteredCount);
 	}
 
 	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)

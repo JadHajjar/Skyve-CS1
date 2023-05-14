@@ -464,7 +464,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
 				"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-				"deprecated" => Color.FromArgb(225, FormDesign.Design.RedColor),
+				"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
 				_ => (Color?)null
 			};
 

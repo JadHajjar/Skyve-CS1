@@ -468,9 +468,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			if (IsSelection)
 			{
 				PackageSelected?.Invoke(item.Item);
+				return;
 			}
 
-			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage(item.Item));
+			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item));
 
 			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -488,7 +489,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 			else if (item.Item.Package is not null)
 			{
-				var pc = new PC_PackagePage(item.Item.Package);
+				var pc = new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item);
+
 				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
 				pc.T_CR.Selected = true;
@@ -962,7 +964,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
 				"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-				"deprecated" or "obsolete" or "abandoned" => Color.FromArgb(225, FormDesign.Design.RedColor),
+				"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
 				_ => (Color?)null
 			};
 

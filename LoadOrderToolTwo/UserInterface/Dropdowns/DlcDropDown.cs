@@ -1,0 +1,87 @@
+﻿using Extensions;
+
+using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.Domain.Steam;
+using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
+
+using SlickControls;
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+
+namespace LoadOrderToolTwo.UserInterface.Dropdowns;
+internal class DlcDropDown : SlickMultiSelectionDropDown<SteamDlc>
+{
+	protected override void OnHandleCreated(EventArgs e)
+	{
+		base.OnHandleCreated(e);
+
+		if (Live)
+		{
+			Items =SteamUtil.Dlcs.ToArray();
+		}
+	}
+
+	protected override void UIChanged()
+	{
+		base.UIChanged();
+
+		Width = (int)(200 * UI.FontScale);
+	}
+
+	protected override IEnumerable<DrawableItem<SteamDlc>> OrderItems(IEnumerable<DrawableItem<SteamDlc>> items)
+	{
+		return items.OrderByDescending(x => SelectedItems.Contains(x.Item)).ThenByDescending(x => x.Item.ReleaseDate);
+	}
+
+	protected override bool SearchMatch(string searchText, SteamDlc item)
+	{
+		return searchText.SearchCheck(item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP"));
+	}
+
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, SteamDlc item, bool selected)
+	{
+		if (item is null)
+		{ return; }
+
+		var text = item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP");
+		var icon = item.Thumbnail;
+
+		if (icon != null)
+		{
+			e.Graphics.DrawRoundedImage(icon, rectangle.Align(new Size(rectangle.Height * 460 / 215, rectangle.Height), ContentAlignment.MiddleLeft), (int)(4 * UI.FontScale));
+		}
+
+		rectangle = rectangle.Pad(rectangle.Height * 460 / 215 + Padding.Left, 0, 0, 0);
+
+		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+	}
+
+	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<SteamDlc> items)
+	{
+		if (items.Count() == 1)
+		{
+			PaintItem(e, rectangle, foreColor, hoverState, items.First(), false);
+
+			return;
+		}
+
+		if (!items.Any())
+		{
+			using var icon = IconManager.GetIcon("I_Slash", rectangle.Height - 2).Color(foreColor);
+
+			e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
+
+			e.Graphics.DrawString(LocaleCR.NoRequiredDlcs, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+			return;
+		}
+
+		e.Graphics.DrawString(LocaleCR.DlcsSelected.FormatPlural(items.Count()), Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+	}
+}

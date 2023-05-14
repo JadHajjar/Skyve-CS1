@@ -67,6 +67,28 @@ internal class ContentUtil
 		}
 	}
 
+	public static IEnumerable<IPackage> GetReferencingPackage(ulong steamId, bool includedOnly)
+	{
+		foreach (var item in CentralManager.Packages)
+		{
+			if (includedOnly && !item.IsIncluded)
+				continue;
+
+			var crData = CompatibilityManager.CompatibilityData.Packages.TryGet(item.SteamId);
+
+			if (crData == null)
+			{
+				if (item.RequiredPackages?.Contains(steamId)??false)
+					yield return item;
+			}
+			else if (crData.Interactions.ContainsKey(Domain.Compatibility.InteractionType.RequiredPackages))
+			{
+				if (crData.Interactions[Domain.Compatibility.InteractionType.RequiredPackages].Any(x => x.Interaction.Packages?.Contains(steamId)??false))
+					yield return item;
+			}
+		}
+	}
+
 	public static string GetSubscribedItemPath(ulong id)
 	{
 		return LocationManager.Combine(LocationManager.WorkshopContentPath, id.ToString());
@@ -332,7 +354,7 @@ internal class ContentUtil
 			return;
 		}
 
-		if (item.Package.Assets?.Any() ?? false)
+		if (item.Package?.Assets?.Any() ?? false)
 		{
 			var target = new DirectoryInfo(LocationManager.Combine(LocationManager.AssetsPath, Path.GetFileName(item.Folder)));
 
@@ -341,7 +363,7 @@ internal class ContentUtil
 			target.RemoveEmptyFolders();
 		}
 
-		if (item.Package.Mod is not null)
+		if (item.Package?.Mod is not null)
 		{
 			var target = new DirectoryInfo(LocationManager.Combine(LocationManager.ModsPath, Path.GetFileName(item.Folder)));
 

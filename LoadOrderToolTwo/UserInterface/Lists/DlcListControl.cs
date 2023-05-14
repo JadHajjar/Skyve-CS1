@@ -150,7 +150,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 			e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 
-		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(e.Item.Name.Remove("Cities: Skylines - "), UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 		e.Graphics.DrawString(System.Net.WebUtility.HtmlDecode(e.Item.Description), UI.Font(large ? 9.75F : 7F), new SolidBrush(Color.FromArgb(150, e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor)), textRect.Pad(0, (int)e.Graphics.Measure(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold)).Height, 0, 0), new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Far });
 
 		if (e.Item.ReleaseDate != DateTime.MinValue)

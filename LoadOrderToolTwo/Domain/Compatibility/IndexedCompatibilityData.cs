@@ -22,6 +22,11 @@ public class IndexedCompatibilityData
 		{
 			item.Load(Packages);
 		}
+
+		foreach (var item in Packages.Values)
+		{
+			item.SetUpInteractions(Packages);
+		}
 	}
 
 	public Dictionary<ulong, IndexedPackage> Packages { get; }

@@ -15,18 +15,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
-internal class PackageActionDropDown : SlickSelectionDropDown<InteractionAction>
+internal class PackageActionDropDown : SlickSelectionDropDown<StatusAction>
 {
-	protected override void OnHandleCreated(EventArgs e)
-	{
-		base.OnHandleCreated(e);
-
-		if (Live)
-		{
-			Items = Enum.GetValues(typeof(InteractionAction)).Cast<InteractionAction>().Where(x => CRNAttribute.GetAttribute(x).Browsable).ToArray();
-		}
-	}
-
 	protected override void UIChanged()
 	{
 		base.UIChanged();
@@ -34,14 +24,14 @@ internal class PackageActionDropDown : SlickSelectionDropDown<InteractionAction>
 		Width = (int)(175 * UI.FontScale);
 	}
 
-	protected override bool SearchMatch(string searchText, InteractionAction item)
+	protected override bool SearchMatch(string searchText, StatusAction item)
 	{
 		var text = LocaleCR.Get($"{item}");
 
 		return searchText.SearchCheck(text);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, InteractionAction item)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, StatusAction item)
 	{
 		var text = LocaleCR.Get($"{item}");
 		var color = CRNAttribute.GetNotification(item).GetColor();

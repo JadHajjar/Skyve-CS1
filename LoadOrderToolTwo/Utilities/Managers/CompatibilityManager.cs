@@ -12,18 +12,19 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 namespace LoadOrderToolTwo.Utilities.Managers;
 public static class CompatibilityManager
 {
 	private const string DATA_CACHE_FILE = "CompatibilityDataCache.json";
-	private static IndexedCompatibilityData compatibilityData;
 	private static readonly Dictionary<IPackage, CompatibilityInfo> _cache = new();
 
-	public static IndexedCompatibilityData CompatibilityData => compatibilityData;
+	public static IndexedCompatibilityData CompatibilityData { get; private set; }
 
 	static CompatibilityManager()
 	{
-		compatibilityData = new(null);
+		CompatibilityData = new(null);
 
 		LoadDataCached();
 
@@ -54,7 +55,7 @@ public static class CompatibilityManager
 
 			ISave.Load(out CompatibilityData? data, DATA_CACHE_FILE);
 
-			compatibilityData = new IndexedCompatibilityData(data);
+			CompatibilityData = new IndexedCompatibilityData(data);
 		}
 		catch { }
 	}
@@ -67,7 +68,7 @@ public static class CompatibilityManager
 
 			if (data is not null)
 			{
-				compatibilityData = new IndexedCompatibilityData(data);
+				CompatibilityData = new IndexedCompatibilityData(data);
 
 				ISave.Save(data, DATA_CACHE_FILE);
 
@@ -81,7 +82,7 @@ public static class CompatibilityManager
 			Log.Exception(ex, "Failed to get compatibility data");
 		}
 
-		compatibilityData ??= new IndexedCompatibilityData(new());
+		CompatibilityData ??= new IndexedCompatibilityData(new());
 	}
 
 	public static bool IsBlacklisted(IPackage package)
@@ -122,14 +123,36 @@ public static class CompatibilityManager
 			return info;
 		}
 
-		foreach (var item in packageData.Statuses)
+		info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, packageData.Package.Note), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new ulong[0]);
+
+		foreach (var status in packageData.Statuses)
 		{
-			info.Add(ReportType.Status, item.Value.Status, item.Value.Status.Note ?? string.Empty);
+			foreach (var item in status.Value)
+			{
+				HandleStatus(info, status.Key, item);
+			}
 		}
 
-		foreach (var item in packageData.Interactions)
+		foreach (var interaction in packageData.Interactions)
 		{
-			HandleInteraction(info, item.Value.Interaction);
+			foreach (var item in interaction.Value)
+			{
+				HandleInteraction(info, interaction.Key, item);
+			}
+		}
+
+		if (packageData.Package.RequiredDLCs?.Any() ?? false)
+		{
+			var missing = packageData.Package.RequiredDLCs.Where(x => !SteamUtil.IsDlcInstalledLocally(x));
+			
+			if (missing.Any())
+			{
+				HandleStatus(info, StatusType.MissingDlc, new IndexedPackageStatus(new PackageStatus
+				{
+					Type = StatusType.MissingDlc,
+					Action = StatusAction.NoAction,
+				}, missing.ToDictionary(x => (ulong)x, x => packageData)));
+			}
 		}
 
 		return info;
@@ -159,30 +182,68 @@ public static class CompatibilityManager
 		return null;
 	}
 
-	private static void HandleInteraction(CompatibilityInfo info, PackageInteraction interaction)
+	private static void HandleStatus(CompatibilityInfo info, StatusType key, IndexedPackageStatus status)
 	{
-		var requiresPackage = interaction.Type is not InteractionType.Successor and not InteractionType.Alternative; // the interaction requires both mods present to be eligible
-
-		var packages = interaction.Packages.AllWhere(x => GetPackage(x) is null == requiresPackage);
-
-		if (!packages.Any())
+		if (key == StatusType.DependencyMod && ContentUtil.GetReferencingPackage(info.Package.SteamId, true).Any())
 		{
 			return;
 		}
 
-		var reportType = interaction.Type switch
+		var type = key switch
 		{
-			InteractionType.Successor => ReportType.Successors,
+			StatusType.Deprecated or StatusType.CausesIssues or StatusType.SavesCantLoadWithoutIt => ReportType.Stability,
+			StatusType.DependencyMod or StatusType.TestVersion or StatusType.MusicCanBeCopyrighted => ReportType.Status,
+			StatusType.SourceCodeNotAvailable or StatusType.IncompleteDescription or StatusType.Reupload => ReportType.Ambiguous,
+			StatusType.MissingDlc => ReportType.DlcMissing,
+			_ => ReportType.Status,
+		};
+
+		var translation = LocaleCR.Get($"Status_{key}");
+		var action = LocaleCR.Get($"Action_{status.Status.Action}");
+		var text = (status.Status.Packages?.Length ?? 0) switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
+		var actionText = (status.Status.Packages?.Length ?? 0) switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
+		var message = string.Format($"{text}\r\n\r\n{actionText}", info.Package.CleanName(), status.Status.Packages?.FirstOrDefault().Value?.Package.Name?.RemoveVersionText(out _)).Trim();
+
+		info.Add(type, status.Status, message, status.Status.Packages ?? new ulong[0]);
+	}
+
+	private static void HandleInteraction(CompatibilityInfo info, InteractionType key, IndexedPackageInteraction interaction)
+	{
+		if (key is InteractionType.Successor or InteractionType.RequirementAlternative)
+		{
+			return;
+		}
+
+		var packages = interaction.Interaction.Packages?.ToList() ?? new();
+
+		if (key is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
+		{
+			packages.RemoveAll(x => GetPackage(x) is null);
+		}
+		else if (key is InteractionType.RequiredPackages)
+		{
+			packages.RemoveAll(x => GetPackage(x) is not null);
+		}
+
+		if (packages.Count == 0)
+			return;
+
+		var type = key switch
+		{
+			InteractionType.SucceededBy => ReportType.Successors,
+			InteractionType.Alternative => ReportType.Alternatives,
+			InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith => ReportType.Compatibility,
+			InteractionType.RequiredPackages => ReportType.RequiredPackages,
 			_ => ReportType.Note
 		};
 
-		var text = interaction.Type switch
-		{
-			InteractionType.Successor => LocaleCR.CR_SuccessorsAvailable.ToString(),
-			_ => string.Empty
-		};
+		var translation = LocaleCR.Get($"Interaction_{key}");
+		var action = LocaleCR.Get($"Action_{interaction.Interaction.Action}");
+		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
+		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
+		var message = string.Format($"{text}\r\n\r\n{actionText}", info.Package.CleanName(), packages.FirstOrDefault().Value?.Package.Name?.RemoveVersionText(out _)).Trim();
 
-		info.Add(reportType, interaction, text);
+		info.Add(type, interaction.Interaction, message, packages.ToArray());
 	}
 
 	private static IPackage? GetPackage(ulong steamId)
@@ -212,14 +273,14 @@ public static class CompatibilityManager
 
 		if (package.RequiredPackages?.Any() ?? false)
 		{
-			info.Interactions.Add(new PackageInteraction { Type = InteractionType.Required, Action = InteractionAction.SubscribeToPackages, Packages = package.RequiredPackages });
+			info.Interactions.Add(new PackageInteraction { Type = InteractionType.RequiredPackages, Action = StatusAction.SubscribeToPackages, Packages = package.RequiredPackages });
 		}
 
 		package.ToString().RemoveVersionText(out var titleTags);
 
 		foreach (var tag in titleTags)
 		{
-			if (tag.ToLower() is "obsolete" or "deprecated" or "abandoned")
+			if (tag.ToLower() is "obsolete" or "deprecated" or "abandoned" or "broken")
 			{
 				info.Stability = PackageStability.Broken;
 			}
@@ -227,11 +288,6 @@ public static class CompatibilityManager
 			{
 				info.Statuses.Add(new PackageStatus { Type = StatusType.TestVersion });
 			}
-		}
-
-		if (DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365))
-		{
-			info.Statuses.Add(new PackageStatus { Type = StatusType.Deprecated });
 		}
 
 		const ulong MUSIC_MOD_ID = 2474585115;
@@ -267,17 +323,35 @@ public static class CompatibilityManager
 			}
 		}
 
+		if (package.IsMod && DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365))
+		{
+			info.Statuses.Add(new PackageStatus { Type = StatusType.Deprecated });
+		}
+
 		if (package.IsMod && !info.Links.Any(x => x.Type is LinkType.Github))
 		{
-			info.Statuses.Add(new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = InteractionAction.Unsubscribe });
+			info.Statuses.Add(new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.UnsubscribeThis });
 		}
 
 		if (package.IsMod && (package.SteamDescription is null || package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3))
 		{
-			info.Statuses.Add(new PackageStatus { Type = StatusType.IncompleteDescription, Action = InteractionAction.Unsubscribe });
+			info.Statuses.Add(new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
 		}
 
 		return info;
+	}
+
+	public static DynamicIcon GetIcon(this LinkType link)
+	{
+		return link switch
+		{
+			LinkType.Website => "I_Globe",
+			LinkType.Github => "I_Github",
+			LinkType.Crowdin => "I_Translate",
+			LinkType.Donation => "I_Donate",
+			LinkType.Discord => "I_Discord",
+			_ => "I_Share",
+		};
 	}
 
 	public static DynamicIcon GetIcon(this NotificationType notification, bool status)
@@ -295,30 +369,21 @@ public static class CompatibilityManager
 		};
 	}
 
-	public static DynamicIcon GetIcon(this LinkType link)
-	{
-		return link switch
-		{
-			LinkType.Website => "I_Globe",
-			LinkType.Github => "I_Github",
-			LinkType.Crowdin => "I_Translate",
-			LinkType.Donation => "I_Donate",
-			LinkType.Discord => "I_Discord",
-			_ => "I_Share",
-		};
-	}
-
 	public static Color GetColor(this NotificationType notification)
 	{
 		return notification switch
 		{
 			NotificationType.Info => FormDesign.Design.InfoColor,
-			NotificationType.MissingDependency => FormDesign.Design.YellowColor,
+
+			NotificationType.MissingDependency or
 			NotificationType.Caution => FormDesign.Design.YellowColor,
-			NotificationType.Warning => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
+
+			NotificationType.Warning or
 			NotificationType.AttentionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
-			NotificationType.Switch => FormDesign.Design.RedColor,
+
+			NotificationType.Switch or
 			NotificationType.Unsubscribe => FormDesign.Design.RedColor,
+
 			_ => FormDesign.Design.GreenColor
 		};
 	}

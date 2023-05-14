@@ -2,14 +2,38 @@
 
 public enum StatusType
 {
-	[CRN(NotificationType.None, false)] None = 0,
-	[CRN(NotificationType.Warning)] Deprecated,
-	[CRN(NotificationType.Warning)] Reupload,
-	[CRN(NotificationType.Warning)] CausesIssues,
-	[CRN(NotificationType.Warning)] SavesCantLoadWithoutIt,
-	[CRN(NotificationType.Info)] TestVersion,
-	[CRN(NotificationType.None)] DependencyMod,
-	[CRN(NotificationType.Warning)] SourceCodeNotAvailable,
-	[CRN(NotificationType.Caution)] MusicCanBeCopyrighted,
-	[CRN(NotificationType.Caution)] IncompleteDescription,
+	[CRN(NotificationType.None, false)]
+	None = 0,
+
+	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.Switch, StatusAction.NoAction })]
+	Deprecated = 1,
+
+	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.Switch, StatusAction.NoAction })]
+	Reupload = 2,
+
+	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
+	CausesIssues = 3,
+
+	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.Switch, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
+	SavesCantLoadWithoutIt = 4,
+
+	[CRN(NotificationType.Info, new[] { StatusAction.NoAction, StatusAction.UnsubscribeThis, StatusAction.Switch })]
+	TestVersion = 5,
+
+	[CRN(NotificationType.None, new[] { StatusAction.NoAction })]
+	DependencyMod = 6,
+
+	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.NoAction })]
+	SourceCodeNotAvailable = 7,
+
+	[CRN(NotificationType.Caution, new[] { StatusAction.NoAction })]
+	MusicCanBeCopyrighted = 8,
+
+	[CRN(NotificationType.Caution, new[] { StatusAction.UnsubscribeThis, StatusAction.NoAction })]
+	IncompleteDescription = 9,
+
+	/********************************/
+
+	[CRN(NotificationType.MissingDependency, false)]
+	MissingDlc
 }
