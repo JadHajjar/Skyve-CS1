@@ -173,6 +173,7 @@
   "HidePseudoMods": "Скрыть псевдомоды, такие, как миксы тем",
   "YourDlcs": "Ваши DLC",
   "AllDlcs": "Все DLC",
+  "DLCs": "DLC & CCP",
   "DetectedIssues": "Обнаруженные проблемы",
   "DuplicateMods": "Дублирующие моды",
   "FixAllIssues": "Исправить все проблемы",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Копировать Steam ID автора",
   "CloseCitiesToSub": "Вам нужно закрыть Cities: Skylines для того чтобы подписаться или отписаться от пакетов",
   "ShowingFilteredItems": "Показано {0} из {1} элементов",
-  "ShowingMods": "Показано {0} модов",
-  "ShowingAssets": "Показано {0} ассетов",
-  "ShowingPackages": "Показано {0} пакетов",
-  "ShowingProfiles": "Показано {0} профилей",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Тема и масштаб интерфейса",
   "SearchProfiles": "Поиск среди профайлов...",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Начинает новую игру при запуске Cities: Skylines. Вы можете указать карту, на которой хотите начать игру",
   "LoadSaveGame_Tip": "Загрузка сохраненной игры при запуске Cities: Skylines. Если не выбирать файл сохранения, то будет загружено ваше последнее сохранение",
   "BETA": "BETA",
+  "ALPHA": "ALPHA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "STABLE",
   "EXPERIMENTAL": "ЭКСПЕРИМЕНТАЛЬНЫЙ",
   "DEPRECATED": "УСТАРЕВШИЙ",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Это действие не может быть отменено.",
   "AlwaysOpenFiltersAndActions": "Показывать секцию фильтров по умолчанию",
   "AlwaysOpenFiltersAndActions_Tip": "Всегда открывать раздел фильтров при входе в вкладку содержимого",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Сохранения с Мастерской",
   "Workshop Maps": "Карты с Мастерской",
   "AnyAuthor": "Любой автор",
-  "ItemsCount": "{0} элементов",
-  "AuthorsSelected": "Выбрано {0} авторов",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Системная тема",
   "Donate": "Пожертвовать",
   "CopyAllIds": "Скопировать все ID мастерской",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Профили"
+  "Profiles": "Профили",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Моды",
+  "Local": "Локальный",
+  "Workshop": "Мастерская",
+  "CompatibilityReport": "Отчет о совместимости",
+  "AppDataPath": "Папка с данными Cities: Skylines",
+  "Enabled": "Активирован",
+  "Disabled": "Выключено",
+  "Included": "Добавлен в игру",
+  "Excluded": "Исключён из игры",
+  "Server": "Сервер",
+  "Assets": "Ассеты",
+  "OutOfDate": "Устарел",
+  "Subscribe": "Подписаться",
+  "Switch": "Переключить",
+  "Packages": "Пакеты",
+  "AdvancedIncludeEnable": "Показывать раздельно состояния «Добавлен в игру» и «Активирован» для модов",
+  "PackageStatus": "Состояние пакета",
+  "Author": "Автор"
 }
