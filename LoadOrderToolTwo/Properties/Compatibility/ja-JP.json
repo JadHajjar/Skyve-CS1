@@ -39,14 +39,14 @@
   "SourceCodeNotAvailable": "ソースコードが未確認・存在しません",
   "MusicCanBeCopyrighted": "収録された音楽は、著作権で保護されている場合があります",
   "IncompleteDescription": "説明が無い・不完全です",
-  "Successor": "移行先",
-  "Alternative": "代替",
-  "SameFunctionality": "同じ機能",
-  "Incompatible": "非互換",
-  "RequirementAlternative": "動作要件の代替",
-  "IncompatibleWith": "互換性なし",
-  "CausesIssuesWith": "問題の原因",
-  "RequiredPackages": "必須",
+  "Successor": "移行先 ..",
+  "Alternative": "代替 ..",
+  "SameFunctionality": "同じ機能 ..",
+  "Incompatible": "非互換 ..",
+  "RequirementAlternative": "動作要件の代替 ..",
+  "IncompatibleWith": "非互換 ..",
+  "CausesIssuesWith": "問題の原因 ..",
+  "RequiredPackages": "必須 ..",
   "StatusType": "ステータスのタイプ",
   "InteractionType": "依存関係のタイプ",
   "MissingDependency": "依存関係が不足",
@@ -66,11 +66,11 @@
   "ReuseData_Tip": "前回、保存したパッケージの互換性データをこのまま再利用します。\nShiftキーを押しながら適用して下さい。",
   "PleaseReviewTheStability": "保存する前に、パッケージの安定性を確認して下さい。",
   "PleaseReviewPackageStatuses": "保存する前に、パッケージのステータスを確認して下さい。\n一部で無効なステータスのタイプがあります。",
-  "PleaseReviewPackageInteractions": "保存する前に、パッケージの依存関係を確認して下さい。\n一部で無効な依存関係のタイプがあります。",
+  "PleaseReviewPackageInteractions": "保存する前に、パッケージの依存関係を確認して下さい。\n無効な依存関係のタイプ・リンク先のパッケージが無い場合があります。",
   "PleaseReviewPackageUsage": "パッケージの有効な用途を選択して下さい。",
   "Interaction_Alternative": {
-    "One": "「{1}」 は 「{0}」 の代替として使用可能です。",
-    "Plural": "次のいずれかのパッケージは、 「{0}」 の代替として使用可能です。"
+    "One": "「{1}」は「{0}」の代替として使用可能です。",
+    "Plural": "次のいずれかのパッケージは、「{0}」の代替として使用可能です。"
   },
   "Interaction_SameFunctionality": {
     "One": "「{0}」と「{1}」は同じ機能があります。",
@@ -99,50 +99,50 @@
   },
   "Status_CausesIssues": "「{0}」はプレイ中のゲームで問題を引き起こします。",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.",
-    "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードが不可能になります。",
+    "One": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードが不可能になります。\n\n必要に応じて、「{1}」を使ってセーブデータの復元を試して下さい。詳しくはワークショップの説明を確認して下さい。"
   },
   "Status_TestVersion": {
-    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "Zero": "オリジナルMODの「テスト」バージョンです。予期しない問題が発生する可能性があるので注意して下さい。",
+    "One": "「{1}」の「テスト」バージョンです。\nアップデートすることで、予期しない問題が発生する可能性があるので注意して下さい。"
   },
   "Status_MissingDlc": {
-    "One": "You're missing the '{0}' DLC to use this package.",
-    "Plural": "You're missing the following DLCs to use this package."
+    "One": "パッケージを使用するには、DLC 「{0}」がありません。",
+    "Plural": "パッケージを使用するには、以下のDLCがありません。"
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
-  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
-  "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "OutputText": "Expected Output",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
-  "Stability_Stable": "This package is stable.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
-  "Stability_HasIssues": "This package can cause issues.",
-  "Stability_Broken": "This package is broken.",
+  "Status_DependencyMod": "依存関係のMODですが、これを必要とするパッケージは使用していないようです。",
+  "Status_SourceCodeNotAvailable": "MODのソースコードは公開されていません。作者を信頼できない場合は使用しないで下さい。",
+  "Status_MusicCanBeCopyrighted": "パック内に収録されている音楽は著作権で保護されている可能性があります。ストリーミングでの使用は避けた方が無難です。",
+  "Status_IncompleteDescription": "MODのワークショップ内の説明文が少ない・曖昧です。作者を信頼できない場合は使用しないで下さい。",
+  "OutputText": "予想される結果",
+  "Stability_NotReviewed": "このパッケージは検証されていません。互換性に関する情報が不正確な可能性があります。",
+  "Stability_Stable": "パッケージは安定しています。",
+  "Stability_NotEnoughInformation": "パッケージを適切に評価・確認するには十分な情報がありません。",
+  "Stability_HasIssues": "パッケージが問題を引き起こす可能性があります。",
+  "Stability_Broken": "パッケージは破損しています。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
-    "Plural": "You should subscribe to these packages."
+    "One": "以下のパッケージをサブスクする必要があります。",
+    "Plural": "これらのパッケージをサブスクする必要があります。"
   },
-  "Action_RequiresConfiguration": "You should follow the following instructions.",
+  "Action_RequiresConfiguration": "以下の手順に従って下さい。",
   "Action_SelectOne": {
-    "One": "Between '{0}' and '{1}', you should choose only one of them.",
-    "Plural": "Between '{0}' and the following packages, you should only choose one."
+    "One": "「{0}」と「{1}」の中から、どちらか「1つだけ」を選択して下さい。",
+    "Plural": "「{0}」と以下のパッケージから、どちらか「1つだけ」を選択して下さい。"
   },
-  "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
+  "Action_UnsubscribeThis": "「{0}」はサブスクを解除して下さい。",
   "Action_UnsubscribeOther": {
-    "One": "You should unsubscribe from '{1}'.",
-    "Plural": "You should unsubscribe from the following packages."
+    "One": "「{1}」はサブスクを解除して下さい。",
+    "Plural": "以下のパッケージはサブスクを解除して下さい。"
   },
   "Action_Switch": {
-    "One": "You should switch to '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "One": "「{1}」に切り替えて下さい。",
+    "Plural": "以下のいずれかのパッケージに切り替える必要があります。"
   },
-  "NoRequiredDlcs": "No Required DLCs",
+  "NoRequiredDlcs": "必須DLCは無し",
   "DlcsSelected": {
-    "One": "{0} DLC selected",
-    "Plural": "{0} DLCs selected"
+    "One": "DLCを選択中: {0} 個",
+    "Plural": "DLCを選択中: {0} 個"
   },
-  "RequiredDLCs": "Required DLCs/CCPs"
+  "RequiredDLCs": "DLC/CCPが必要"
 }
