@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "โปรไฟล์ปัจจุบัน",
   "StartCities": "เปิดเกม Cities: Skylines",
   "StopCities": "ปิดเกม Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "แดชบอร์ด",
   "ModOutOfDate": "ม็อดเก่า",
   "ModOutOfDatePlural": "ม็อดพวกนี้เก่า",
-  "MultipleModsIncluded": "ประกอบไปด้วยม็อดเดียวกันอยู่หลายเวอร์ชั่น",
-  "ModIncluded": "ประกอบไปด้วยม็อด",
-  "ModIncludedPlural": "ประกอบไปด้วยม็อด",
   "SearchDlcs": "ค้นหาจากเนื้อหาดาวน์โหลดของคุณ..",
   "SearchPackages": "ค้นหาจากแพ็กเกจของคุณ..",
-  "ModEnabled": "เปิดใช้งานม็อด",
-  "ModIncludedAndEnabled": "ประกอบม็อดแล้วเปิดใช้งาน",
-  "ModEnabledPlural": "เปิดใช้งานม็อด",
-  "ModIncludedAndEnabledPlural": "ประกอบม็อดแล้วเปิดใช้งาน",
   "ModIsLocal": "ม็อดภายในเครื่อง",
   "ModIsRemoved": "ลบออกจากสตีม",
   "ModIsUnknown": "ไม่สามารถเรียกข้อมูลของม็อดนี้จากสตีมได้",
@@ -52,8 +46,6 @@
   "NoAssets": "ปิดการใช้งานแอสเซททั้งหมด",
   "NoMods": "ปิดการใช้งานม็อดทั้งหมด",
   "AutoSave": "บันทึกอัตโนมัติ",
-  "AssetIncluded": "ประกอบไปด้วยแอสเซท",
-  "AssetIncludedPlural": "ประกอบไปด้วยแอสเซท",
   "TotalSize": "ขนาดรวม",
   "ReportSeverity": "รายงานความรุนแรง",
   "AnyStatus": "สถานะใด ๆ",
@@ -138,7 +130,6 @@
   "DateUpdated": "วันที่อัปเดต",
   "PackageIncluded": "ประกอบไปด้วยแพกเกจ",
   "PackageIncludedPlural": "ประกอบไปด้วยแพกเกจ",
-  "MultiplePackagesIncluded": "ประกอบไปด้วยแพกเกจเดียวกันอยู่หลายเวอร์ชั่น",
   "CopyWorkshopLink": "คัดลอกลิงก์เวิร์คชอปของแพ็กเกจนี้",
   "FilterOutPackagesWithMods": "ซ่อนม็อดในหน้าแพ็กเกจ",
   "FilterOutPackagesWithOneAsset": "Hide single-asset packages from the packages page",
@@ -175,7 +166,6 @@
   "AllDlcs": "DLC ทั้งหมด",
   "DLCs": "DLCs & CCPs",
   "DetectedIssues": "ตรวจพบปัญหา",
-  "DuplicateMods": "ม็อดที่ซ้ำกัน",
   "FixAllIssues": "แก้ไขปัญหาทั้งหมด",
   "LaunchTooltip": "Click to launch/stop Cities: Skylines or use {0} anywhere in the app",
   "LsmImport": "รายงาน Loading Screen Mod",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Change this profile's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
-  "ProfilesLoaded": "profiles loaded",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "เลือกแพ็กเกจนี้",
   "SelectPackage": "เลือกแพ็กเกจ",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "ม็อด",
   "Local": "ในเครื่อง",
   "Workshop": "เวิร์กชอป",
   "CompatibilityReport": "รายงานความเข้ากันได้",
@@ -424,12 +411,46 @@
   "Included": "ประกอบไปด้วย",
   "Excluded": "เอาออก",
   "Server": "เซิร์ฟเวอร์",
-  "Assets": "แอสเซท",
   "OutOfDate": "ล้าสมัย",
   "Subscribe": "สมัครสมาชิก",
   "Switch": "สลับ",
-  "Packages": "แพกเกจ",
   "AdvancedIncludeEnable": "แสดงสถานะของม็อดทั้งการประกอบและการเปิดใช้งาน",
   "PackageStatus": "สถานะแพกเกจ",
-  "Author": "Author"
+  "Author": "Author",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
