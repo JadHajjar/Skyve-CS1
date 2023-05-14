@@ -192,20 +192,20 @@
   "CloseCitiesToSub": "Devi chiudere Cities: Skylines per iscriverti o annullare l'iscrizione ai pacchetti",
   "ShowingFilteredItems": "{0} di {1} elementi totali visibili",
   "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
+    "One": "{0} mod visualizzata",
+    "Plural": "{0} mod visualizzate"
   },
   "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
+    "One": "{0} risorsa visualizzata",
+    "Plural": "{0} risorse visualizzate"
   },
   "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
+    "One": "{0} pacchetto visualizzato",
+    "Plural": "{0} pacchetti visualizzati"
   },
   "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
+    "One": "{0} profilo visualizzato",
+    "Plural": "{0} profili visualizzati"
   },
   "DropNewProfile": "Trascina qui o seleziona un file di profilo .json o.xml per importarlo",
   "ThemeUIScale": "Tema e Scala UI",
@@ -296,13 +296,13 @@
   "LoadSaveGame_Tip": "Carica un salvataggio quando si avvia Cities: Skylines. Se non selezioni un file di salvataggio, verrà aperto il tuo ultimo salvataggio",
   "BETA": "BETA",
   "ALPHA": "ALFA",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "PROVA",
+  "TESTING": "PROVA IN CORSO",
   "STABLE": "STABILE",
   "EXPERIMENTAL": "SPERIMENTALE",
   "DEPRECATED": "DEPRECATO",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "OBSOLETO",
+  "ABANDONED": "ABBANDONATO",
   "ActionUnreversible": "Questa azione non può essere annullata.",
   "AlwaysOpenFiltersAndActions": "Mostra la sezione Filtri per impostazione predefinita",
   "AlwaysOpenFiltersAndActions_Tip": "Mostra sempre la sezione dei filtri quando si visita una scheda di contenuti",
@@ -357,12 +357,12 @@
   "Workshop Maps": "Mappe del Workshop",
   "AnyAuthor": "Qualsiasi Autore",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "{0} elemento",
+    "Plural": "{0} elementi"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "{0} autore selezionato",
+    "Plural": "{0} autori selezionati"
   },
   "Use the System's Theme": "Usa il tema di sistema",
   "Donate": "Dona",
@@ -410,10 +410,10 @@
   "LoadNewAsset": "Nuova risorsa (Editor)",
   "LoadLoadAsset": "Carica risorsa (Editor)",
   "Info": "Info",
-  "SelectThisPackage": "Select this package",
-  "SelectPackage": "Select a package",
+  "SelectThisPackage": "Seleziona questo pacchetto",
+  "SelectPackage": "Seleziona un pacchetto",
   "Profiles": "Profili",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "ControlToSelectMultiplePackages": "Ctrl + Clic per selezionare più pacchetti in una volta.",
   "Mods": "Mod",
   "Local": "Locale",
   "Workshop": "Workshop",
