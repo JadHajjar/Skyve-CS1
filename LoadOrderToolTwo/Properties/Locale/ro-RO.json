@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Profilul curent",
   "StartCities": "Lansare Cities: Skylines",
   "StopCities": "Stop Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Panou de bord",
   "ModOutOfDate": "modul nu este actualizat",
   "ModOutOfDatePlural": "mod-urile nu sunt actualizate",
-  "MultipleModsIncluded": "Sunt incluse mai multe versiuni ale aceluiași mod",
-  "ModIncluded": "mod inclus",
-  "ModIncludedPlural": "mod-uri incluse",
   "SearchDlcs": "Căutați prin DLC -urile dvs.",
   "SearchPackages": "Căutați prin pachetele dvs. ..",
-  "ModEnabled": "mod activat",
-  "ModIncludedAndEnabled": "Mod inclus și activat",
-  "ModEnabledPlural": "moduri activate",
-  "ModIncludedAndEnabledPlural": "Moduri incluse și activate",
   "ModIsLocal": "Mod-ul este local",
   "ModIsRemoved": "Eliminat de pe Steam",
   "ModIsUnknown": "Nu am putut obține informațiile acestui mod de la Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Dezactivează toate activele",
   "NoMods": "Dezactivează toate Modurile",
   "AutoSave": "Salvare automată",
-  "AssetIncluded": "activ inclus",
-  "AssetIncludedPlural": "active incluse",
   "TotalSize": "marimea totala",
   "ReportSeverity": "Raportul severității",
   "AnyStatus": "Orice statut",
@@ -138,7 +130,6 @@
   "DateUpdated": "Data actualizată",
   "PackageIncluded": "pachet inclus",
   "PackageIncludedPlural": "pachete incluse",
-  "MultiplePackagesIncluded": "Sunt incluse mai multe versiuni ale aceluiași pachet",
   "CopyWorkshopLink": "Copiați linkul de pe atelierul Steam al acestui pachet",
   "FilterOutPackagesWithMods": "Ascunde moduri în pagina pachetelor",
   "FilterOutPackagesWithOneAsset": "Ascundeți pachetele cu un singur activ din pagina pachetelor",
@@ -175,7 +166,6 @@
   "AllDlcs": "Toate DLC -urile",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Probleme detectate",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Repară toate problemele",
   "LaunchTooltip": "Click pentru a lansa/opri orașele: Skylines sau pentru a folosi {0} oriunde în aplicație",
   "LsmImport": "Încărcare raport mod ecran",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Schimbă culoarea acestui profil",
   "Sorting_Color": "Culoare profil",
   "CreateShortcutProfile": "Creează o scurtătură pentru ea pe desktop",
-  "ProfilesLoaded": "profiluri încărcate",
   "AskToLaunchGameForShortcut": "Dorești ca scurtătura să lanseze și jocul cu profilul tău?",
   "TextImportMissingInfo": "Încarcă un fișier text care conține ID-uri Steam pentru a te abona cu ușurință sau pentru a le gestiona",
   "ImportFromText": "Importă din Text",
@@ -412,9 +401,7 @@
   "Info": "Informații",
   "SelectThisPackage": "Selectaţi acest pachet",
   "SelectPackage": "Alege un pachet",
-  "Profiles": "Profiluri",
   "ControlToSelectMultiplePackages": "Ctrl + Click pentru a selecta mai multe pachete simultan.",
-  "Mods": "Moduri",
   "Local": "Local",
   "Workshop": "Atelier",
   "CompatibilityReport": "Raport de compatibilitate",
@@ -424,12 +411,46 @@
   "Included": "Inclus",
   "Excluded": "Exclus",
   "Server": "Server",
-  "Assets": "Active",
   "OutOfDate": "Expirat",
   "Subscribe": "Abonati-va",
   "Switch": "Comutare",
-  "Packages": "Pachete",
   "AdvancedIncludeEnable": "Arată starea inclusă și activată pentru mod-uri",
   "PackageStatus": "Starea pachetului",
-  "Author": "Autor"
+  "Author": "Autor",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
