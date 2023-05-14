@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Nykyinen profiili",
   "StartCities": "alkaa Cities: Skylines",
   "StopCities": "Lopettaa Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Kojelauta",
   "ModOutOfDate": "Mod on vanhentunut",
   "ModOutOfDatePlural": "Modit ovat vanhentuneita",
-  "MultipleModsIncluded": "Mukana on useita versioita samasta modista",
-  "ModIncluded": "MOD Mukana",
-  "ModIncludedPlural": "Moduulit sisältyvät",
   "SearchDlcs": "Etsi DLC: t ..",
   "SearchPackages": "Etsi pakettejasi ..",
-  "ModEnabled": "Mod käytössä",
-  "ModIncludedAndEnabled": "Modiin sisältyy ja käytössä",
-  "ModEnabledPlural": "Modit käytössä",
-  "ModIncludedAndEnabledPlural": "Modit sisältyvät ja käytössä",
   "ModIsLocal": "Mod on paikallinen",
   "ModIsRemoved": "Poistettu höyrystä",
   "ModIsUnknown": "Ei voinut saada tätä modin tietoja höyrystä",
@@ -52,8 +46,6 @@
   "NoAssets": "Ei mukautettuja varoja",
   "NoMods": "Poista Kaikki Modit Käytöstä",
   "AutoSave": "Automaattinen tallennus",
-  "AssetIncluded": "omaisuus sisältyy",
-  "AssetIncludedPlural": "Mukana omaisuus",
   "TotalSize": "kokonaiskoko",
   "ReportSeverity": "Ilmoita vakavuus",
   "AnyStatus": "Mikä tahansa tila",
@@ -138,7 +130,6 @@
   "DateUpdated": "Päivämäärä päivitetty",
   "PackageIncluded": "paketti sisältää",
   "PackageIncludedPlural": "Paketit mukana",
-  "MultiplePackagesIncluded": "Saman paketin useita versioita sisältyy",
   "CopyWorkshopLink": "Kopioi työpajalinkki",
   "FilterOutPackagesWithMods": "Piilota modit pakkausten sivulla",
   "FilterOutPackagesWithOneAsset": "Piilota yksi-omaisuuspaketit Packages-sivulta",
@@ -175,7 +166,6 @@
   "AllDlcs": "Kaikki DLC: t",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Havaitut Ongelmat",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Korjaa Kaikki Ongelmat",
   "LaunchTooltip": "Klikkaa käynnistääksesi tai pysäyttääksesi kaupungit: Skylines tai käytä {0} missä tahansa sovelluksessa",
   "LsmImport": "Ladataan Näytön Mod-raporttia",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Muuta profiilin väriä",
   "Sorting_Color": "Profiilin Väri",
   "CreateShortcutProfile": "Luo pikakuvake sitä varten työpöydällä",
-  "ProfilesLoaded": "profiilit ladattu",
   "AskToLaunchGameForShortcut": "Haluatko että pikakuvake voi myös käynnistää pelin profiilisi avulla?",
   "TextImportMissingInfo": "Lataa tekstitiedosto, joka sisältää Steam-tunnuksia, jotta voit helposti tilata tai hallita niitä",
   "ImportFromText": "Tuo Tekstistä",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Modit",
   "Local": "Paikallinen",
   "Workshop": "Työpaja",
   "CompatibilityReport": "Yhteensopivuusraportti",
@@ -424,12 +411,46 @@
   "Included": "Mukana",
   "Excluded": "Ulkopuolelle",
   "Server": "Palvelin",
-  "Assets": "Omaisuus",
   "OutOfDate": "Vanhentunut",
   "Subscribe": "Tilata",
   "Switch": "Vaihtaa",
-  "Packages": "Paketit",
   "AdvancedIncludeEnable": "Näytä sekä mukana olevat että käytössä olevat tilat modeille",
   "PackageStatus": "Paketin tila",
-  "Author": "Tekijä"
+  "Author": "Tekijä",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
