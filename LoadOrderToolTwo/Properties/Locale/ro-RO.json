@@ -82,7 +82,7 @@
   "StartScratch": "Începeți un profil de la zero",
   "ContinueFromCurrent": "Păstrați setările curente",
   "GamePlay": "Construiți orașe",
-  "EditorPlay": "Face active",
+  "EditorPlay": "Creează active",
   "ProfileUsage": "Utilizarea profilului",
   "SomePackagesWillBeDisabled": "Unele pachete vor fi eliminate modificând utilizarea acestui profil.",
   "AffectedPackagesAre": "Pachetele afectate sunt:",
@@ -148,16 +148,16 @@
   "CopyAuthorLink": "Copiază link-ul de profil al autorului",
   "CopyAuthorId": "Copiază ID-ul Autorului",
   "YourProfiles": "Profilurile dvs",
-  "UnFavoriteThisProfile": "UN-Favorite acest profil",
-  "FavoriteThisProfile": "Preferat acest profil",
+  "UnFavoriteThisProfile": "Nefavorizati acest profil",
+  "FavoriteThisProfile": "Preferă acest profil",
   "ProfileCreationFailed": "Nu am putut crea un profil nou, asigurați -vă că setările folderului dvs. sunt configurate corect în panoul de opțiuni",
   "UseDebugMono": "Folosiți debug mono",
-  "LaunchThroughCities": "Lansați prin orașe.exe",
+  "LaunchThroughCities": "Lansare prin Cities.exe",
   "UnityProfilerMode": "Utilizați Profiler Unity",
   "NoDlcsNoInternet": "Nu am putut încărca DLC -uri, vă rugăm să vă conectați la Internet",
   "NoDlcsOpenGame": "Niciun DLC -uri nu se potrivesc căutării",
   "DlcUpdateNotice": "Dacă DLC -urile dvs. nu se afișează aici, asigurați -vă că deschideți jocul cel puțin o dată",
-  "DlcCount": "{0} total de CD-uri deținute",
+  "DlcCount": "{0} total de DLC-uri deținute",
   "IncludeAllItemsInThisPackage": "Includeți toate articolele din acest pachet",
   "ExcludeAllItemsInThisPackage": "Excludeți toate articolele din acest pachet",
   "Unfiltered": "Nefiltrat",
@@ -192,20 +192,20 @@
   "CloseCitiesToSub": "Trebuie să închideți orașele: Skylines pentru a vă abona sau dezabona de la pachete",
   "ShowingFilteredItems": "Se afișează {0} din {1} produse în total",
   "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
+    "One": "Se afișează {0} mod",
+    "Plural": "Se afișează {0} moduri"
   },
   "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
+    "One": "Se afișează {0} activ",
+    "Plural": "Se afișează {0} active"
   },
   "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
+    "One": "Se afișează {0} pachet",
+    "Plural": "Se afișează {0} pachete"
   },
   "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
+    "One": "Se afișează {0} profil",
+    "Plural": "Se afișează {0} profiluri"
   },
   "DropNewProfile": "Plasați aici sau selectați aici un fișier de profil .json sau .xml pentru a-l importa",
   "ThemeUIScale": "Temă și dimensiune interfață",
@@ -297,12 +297,12 @@
   "BETA": "BETA",
   "ALPHA": "ALFA",
   "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TESTING": "TESTARE",
   "STABLE": "STABILE",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "DEPRECAT",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "OBSOLET",
+  "ABANDONED": "ABANDONAT",
   "ActionUnreversible": "Această acțiune nu poate fi inversată.",
   "AlwaysOpenFiltersAndActions": "Afișează implicit secțiunea filtrelor",
   "AlwaysOpenFiltersAndActions_Tip": "Întotdeauna trebuie deschisă secțiunea de filtre la introducerea filei de conținut",
@@ -357,12 +357,12 @@
   "Workshop Maps": "Hărţi atelier",
   "AnyAuthor": "Orice autor",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "{0} articol",
+    "Plural": "{0} articole"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "{0} autor selectat",
+    "Plural": "{0} autori selectați"
   },
   "Use the System's Theme": "Utilizați tema sistemului",
   "Donate": "Donează",
@@ -413,7 +413,7 @@
   "SelectThisPackage": "Selectaţi acest pachet",
   "SelectPackage": "Alege un pachet",
   "Profiles": "Profiluri",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "ControlToSelectMultiplePackages": "Ctrl + Click pentru a selecta mai multe pachete simultan.",
   "Mods": "Moduri",
   "Local": "Local",
   "Workshop": "Atelier",
