@@ -27,8 +27,8 @@
   "SubscribeToPackages": "リンク先のパッケージをサブスク",
   "RequiresConfiguration": "特定・固有の設定が必要",
   "SelectOne": "いずれか1つを選択",
-  "UnsubscribeThis": "Unsubscribe from this package",
-  "UnsubscribeOther": "Unsubscribe from linked packages",
+  "UnsubscribeThis": "パッケージのサブスクを解除",
+  "UnsubscribeOther": "リンクされたパッケージのサブスクを解除",
   "Switch": "リンク先のパッケージに切り替え",
   "Deprecated": "非推奨",
   "Reupload": "再アップロード",
@@ -44,9 +44,9 @@
   "SameFunctionality": "同じ機能",
   "Incompatible": "非互換",
   "RequirementAlternative": "動作要件の代替",
-  "IncompatibleWith": "Incompatible With ..",
-  "CausesIssuesWith": "Causes Issues With ..",
-  "RequiredPackages": "Requires ..",
+  "IncompatibleWith": "互換性なし",
+  "CausesIssuesWith": "問題の原因",
+  "RequiredPackages": "必須",
   "StatusType": "ステータスのタイプ",
   "InteractionType": "依存関係のタイプ",
   "MissingDependency": "依存関係が不足",
@@ -69,35 +69,35 @@
   "PleaseReviewPackageInteractions": "保存する前に、パッケージの依存関係を確認して下さい。\n一部で無効な依存関係のタイプがあります。",
   "PleaseReviewPackageUsage": "パッケージの有効な用途を選択して下さい。",
   "Interaction_Alternative": {
-    "One": "'{1}' can be used as an alternative to '{0}'.",
-    "Plural": "One of the following packages can be used as an alternative to '{0}'."
+    "One": "「{1}」 は 「{0}」 の代替として使用可能です。",
+    "Plural": "次のいずれかのパッケージは、 「{0}」 の代替として使用可能です。"
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' and '{1}' have the same functionalities.",
-    "Plural": "'{0}' and the following packages have the same functionalities."
+    "One": "「{0}」と「{1}」は同じ機能があります。",
+    "Plural": "「{0}」と以下のパッケージは同じ機能があります。"
   },
   "Interaction_IncompatibleWith": {
-    "One": "'{0}' and '{1}' are not compatible with each other.",
-    "Plural": "'{0}' is not compatible with any of the following packages."
+    "One": "「{0}」と「{1}」は、互いに互換性がありません。",
+    "Plural": "「{0}」は以下のパッケージと互換性がありません。"
   },
   "Interaction_CausesIssuesWith": {
-    "One": "'{0}' can cause issues when used with '{1}'.",
-    "Plural": "'{0}' can cause issues when used with the following mods."
+    "One": "「{0}」は「{1}」と併用すると、問題が発生する可能性があります。",
+    "Plural": "「{0}」は以下のMODと併用すると、問題が発生する可能性があります。"
   },
   "Interaction_RequiredPackages": {
-    "One": "You're missing a required package for '{0}'.",
-    "Plural": "You're missing the following required packages for '{0}'."
+    "One": "「{0}」で必要なパッケージが不足しています。",
+    "Plural": "「{0}」で必要な以下のパッケージが不足しています。"
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "One": "「{0}」は「{1}」によって引き継がれています。",
+    "Plural": "「{0}」は以下のパッケージによって引き継がれています。"
   },
-  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
   "Status_Reupload": {
-    "Zero": "'{0}' is a re-upload of an original package.",
-    "One": "This is a re-upload of '{1}'."
+    "Zero": "「{0}」はオリジナルパッケージの再アップロードです。",
+    "One": "これは「{1}」の再アップロードです。"
   },
-  "Status_CausesIssues": "'{0}' causes issues with your game.",
+  "Status_CausesIssues": "「{0}」はプレイ中のゲームで問題を引き起こします。",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.",
     "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
