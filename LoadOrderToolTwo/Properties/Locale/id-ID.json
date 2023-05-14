@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Profil saat ini",
   "StartCities": "Awal Cities: Skylines",
   "StopCities": "Berhenti Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Dasbor",
   "ModOutOfDate": "mod sudah ketinggalan kedaluwarsa",
   "ModOutOfDatePlural": "mod sudah ketinggalan kedaluwarsa",
-  "MultipleModsIncluded": "Beberapa versi mod yang sama disertakan",
-  "ModIncluded": "termasuk mod",
-  "ModIncludedPlural": "termasuk mod",
   "SearchDlcs": "Cari DLC Anda ..",
   "SearchPackages": "Cari Paket Anda ..",
-  "ModEnabled": "mod diaktifkan",
-  "ModIncludedAndEnabled": "dimasukkan dan diaktifkan mod",
-  "ModEnabledPlural": "mod diaktifkan",
-  "ModIncludedAndEnabledPlural": "mod termasuk dan diaktifkan",
   "ModIsLocal": "Mod bersifat lokal",
   "ModIsRemoved": "Dihapus dari uap",
   "ModIsUnknown": "Tidak bisa mendapatkan informasi mod ini dari Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Tidak ada aset khusus",
   "NoMods": "Nonaktifkan Semua Mod",
   "AutoSave": "Simpan Otomatis",
-  "AssetIncluded": "termasuk aset",
-  "AssetIncludedPlural": "termasuk aset",
   "TotalSize": "ukuran total",
   "ReportSeverity": "Laporkan keparahan",
   "AnyStatus": "Status apapun",
@@ -138,7 +130,6 @@
   "DateUpdated": "Tanggal diperbarui",
   "PackageIncluded": "Isi Kemasan",
   "PackageIncludedPlural": "termasuk paket",
-  "MultiplePackagesIncluded": "Beberapa versi paket yang sama disertakan",
   "CopyWorkshopLink": "Salin tautan lokakarya",
   "FilterOutPackagesWithMods": "Sembunyikan mod di halaman paket",
   "FilterOutPackagesWithOneAsset": "Sembunyikan paket aset tunggal dari halaman paket",
@@ -175,7 +166,6 @@
   "AllDlcs": "Semua DLC",
   "DLCs": "DLC & CCPS",
   "DetectedIssues": "Masalah yang Terdeteksi",
-  "DuplicateMods": "Mod Duplikat",
   "FixAllIssues": "Perbaiki Semua Masalah",
   "LaunchTooltip": "Klik untuk meluncurkan/menghentikan Cities: Skylines atau gunakan {0} di mana saja di aplikasi",
   "LsmImport": "Memuat Laporan Mod Layar",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Change this profile's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
-  "ProfilesLoaded": "profiles loaded",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Mods",
   "Local": "Lokal",
   "Workshop": "Bengkel",
   "CompatibilityReport": "Laporan Kompatibilitas",
@@ -424,12 +411,46 @@
   "Included": "Termasuk",
   "Excluded": "Pengecualian",
   "Server": "Server",
-  "Assets": "Aset",
   "OutOfDate": "Kadaluarsa",
   "Subscribe": "Langganan",
   "Switch": "Mengalihkan",
-  "Packages": "Paket",
   "AdvancedIncludeEnable": "Tampilkan status yang disertakan dan diaktifkan untuk mod",
   "PackageStatus": "Status paket",
-  "Author": "Author"
+  "Author": "Author",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
