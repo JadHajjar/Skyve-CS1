@@ -27,8 +27,8 @@
   "SubscribeToPackages": "Subscribe to linked packages",
   "RequiresConfiguration": "Requires a specific configuration",
   "SelectOne": "Select either one",
-  "UnsubscribeThis": "Unsubscribe from this package",
-  "UnsubscribeOther": "Unsubscribe from linked packages",
+  "UnsubscribeThis": "Dezabonare de la acest pachet",
+  "UnsubscribeOther": "Dezabonare de la pachetele asociate",
   "Switch": "Switch to linked package",
   "Deprecated": "Deprecated",
   "Reupload": "Re-Upload",
@@ -44,9 +44,9 @@
   "SameFunctionality": "Same Functionality",
   "Incompatible": "Incompatible",
   "RequirementAlternative": "Requirement Alternative",
-  "IncompatibleWith": "Incompatible With ..",
-  "CausesIssuesWith": "Causes Issues With ..",
-  "RequiredPackages": "Requires ..",
+  "IncompatibleWith": "Incompatibil cu ..",
+  "CausesIssuesWith": "Cauzează probleme cu ..",
+  "RequiredPackages": "Necesită ..",
   "StatusType": "Status Type",
   "InteractionType": "Interaction Type",
   "MissingDependency": "Missing Dependency",
@@ -69,27 +69,27 @@
   "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
   "PleaseReviewPackageUsage": "Please select a valid usage for this package.",
   "Interaction_Alternative": {
-    "One": "'{1}' can be used as an alternative to '{0}'.",
-    "Plural": "One of the following packages can be used as an alternative to '{0}'."
+    "One": "'{1}' poate fi folosit ca o alternativă la '{0}'.",
+    "Plural": "Unul dintre următoarele pachete poate fi folosit ca o alternativă la '{0}'."
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' and '{1}' have the same functionalities.",
-    "Plural": "'{0}' and the following packages have the same functionalities."
+    "One": "'{0}' și '{1}' au aceleași funcționalități.",
+    "Plural": "'{0}' și următoarele pachete au aceleași funcționalități."
   },
   "Interaction_IncompatibleWith": {
-    "One": "'{0}' and '{1}' are not compatible with each other.",
-    "Plural": "'{0}' is not compatible with any of the following packages."
+    "One": "'{0}' și '{1}' nu sunt compatibile între ele.",
+    "Plural": "'{0}' nu este compatibil cu oricare dintre următoarele pachete."
   },
   "Interaction_CausesIssuesWith": {
-    "One": "'{0}' can cause issues when used with '{1}'.",
-    "Plural": "'{0}' can cause issues when used with the following mods."
+    "One": "'{0}' poate cauza probleme atunci când este folosit cu '{1}'.",
+    "Plural": "'{0}' poate cauza probleme atunci când este folosit cu următoarele moduri."
   },
   "Interaction_RequiredPackages": {
-    "One": "You're missing a required package for '{0}'.",
-    "Plural": "You're missing the following required packages for '{0}'."
+    "One": "Îți lipsește un pachet necesar pentru '{0}'.",
+    "Plural": "Îți lipsesc următoarele pachete necesare pentru '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
+    "One": "'{0}' este succes de '{1}'.",
     "Plural": "'{0}' is succeeded by either one of the following packages."
   },
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
