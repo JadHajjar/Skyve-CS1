@@ -173,6 +173,7 @@
   "HidePseudoMods": "Ascunde pseudo-mod-uri precum mixurile de temă",
   "YourDlcs": "DLC -urile tale",
   "AllDlcs": "Toate DLC -urile",
+  "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Probleme detectate",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Repară toate problemele",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Copiază ID-ul autorului Steam",
   "CloseCitiesToSub": "Trebuie să închideți orașele: Skylines pentru a vă abona sau dezabona de la pachete",
   "ShowingFilteredItems": "Se afișează {0} din {1} produse în total",
-  "ShowingMods": "Se afișează {0} moduri",
-  "ShowingAssets": "Se afișează {0} active",
-  "ShowingPackages": "Se afișează {0} pachete",
-  "ShowingProfiles": "Se afișează {0} profiluri",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Plasați aici sau selectați aici un fișier de profil .json sau .xml pentru a-l importa",
   "ThemeUIScale": "Temă și dimensiune interfață",
   "SearchProfiles": "Caută prin Profilurile tale...",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Începe un joc nou când lansezi Cities: Skylines. Poți specifica harta în care dorești să începi",
   "LoadSaveGame_Tip": "Încărcați un joc de salvare atunci când porniți orașe: Skylines. Nu selectați un fișier de salvare va continua ultima salvare",
   "BETA": "BETA",
+  "ALPHA": "ALFA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "STABILE",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "DEPRECAT",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Această acțiune nu poate fi inversată.",
   "AlwaysOpenFiltersAndActions": "Afișează implicit secțiunea filtrelor",
   "AlwaysOpenFiltersAndActions_Tip": "Întotdeauna trebuie deschisă secțiunea de filtre la introducerea filei de conținut",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Jocuri de salvare la atelier",
   "Workshop Maps": "Hărţi atelier",
   "AnyAuthor": "Orice autor",
-  "ItemsCount": "{0} articole",
-  "AuthorsSelected": "{0} autori selectați",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Utilizați tema sistemului",
   "Donate": "Donează",
   "CopyAllIds": "Copiați toate ID-urile din Atelierul articolelor",
@@ -388,5 +412,24 @@
   "Info": "Informații",
   "SelectThisPackage": "Selectaţi acest pachet",
   "SelectPackage": "Alege un pachet",
-  "Profiles": "Profiluri"
+  "Profiles": "Profiluri",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Moduri",
+  "Local": "Local",
+  "Workshop": "Atelier",
+  "CompatibilityReport": "Raport de compatibilitate",
+  "AppDataPath": "Folderul AppData Cities: Skylines",
+  "Enabled": "Activat",
+  "Disabled": "Dezactivat",
+  "Included": "Inclus",
+  "Excluded": "Exclus",
+  "Server": "Server",
+  "Assets": "Active",
+  "OutOfDate": "Expirat",
+  "Subscribe": "Abonati-va",
+  "Switch": "Comutare",
+  "Packages": "Pachete",
+  "AdvancedIncludeEnable": "Arată starea inclusă și activată pentru mod-uri",
+  "PackageStatus": "Starea pachetului",
+  "Author": "Autor"
 }
