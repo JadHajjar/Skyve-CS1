@@ -438,19 +438,19 @@
     "Plural": "プロファイル"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} を含める",
+    "Plural": "{0} {1} を含める"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} を有効化",
+    "Plural": "{0} {1} を有効化"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} を含めて有効化",
+    "Plural": "{0} {1} を含めて有効化"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} をロード済み",
+    "Plural": "{0} {1} をロード済み"
   }
 }
