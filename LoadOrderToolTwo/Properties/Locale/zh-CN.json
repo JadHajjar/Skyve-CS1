@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "当前配置文件",
   "StartCities": "启动 Cities: Skylines",
   "StopCities": "关闭 Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "统计面板",
   "ModOutOfDate": "个模组已过期",
   "ModOutOfDatePlural": "个模组已过期",
-  "MultipleModsIncluded": "警告：当前装载了同一模组的多个版本，请选择所需要且正确的版本",
-  "ModIncluded": "个已装载的模组",
-  "ModIncludedPlural": "个已装载的模组",
   "SearchDlcs": "搜索您的 DLC…",
   "SearchPackages": "搜索您的插件…",
-  "ModEnabled": "个已启用的模组",
-  "ModIncludedAndEnabled": "个已装载并已启用的模组",
-  "ModEnabledPlural": "个已启用的模组",
-  "ModIncludedAndEnabledPlural": "个已装载并已启用的模组",
   "ModIsLocal": "这是本地模组",
   "ModIsRemoved": "已从 Steam 工坊移除",
   "ModIsUnknown": "无法从 Steam 获取此模组的信息",
@@ -52,8 +46,6 @@
   "NoAssets": "禁用自定义资产",
   "NoMods": "禁用全部模组",
   "AutoSave": "自动保存",
-  "AssetIncluded": "个已装载的资产",
-  "AssetIncludedPlural": "个已装载的资产",
   "TotalSize": "总大小",
   "ReportSeverity": "兼容性问题严重程度",
   "AnyStatus": "任何状态",
@@ -138,7 +130,6 @@
   "DateUpdated": "更新日期",
   "PackageIncluded": "个已装载的插件",
   "PackageIncludedPlural": "个已装载的插件",
-  "MultiplePackagesIncluded": "警告：当前装载了同一插件的多个版本，请选择所需要且正确的版本",
   "CopyWorkshopLink": "复制此插件的创意工坊链接",
   "FilterOutPackagesWithMods": "隐藏插件页面内的模组",
   "FilterOutPackagesWithOneAsset": "在插件页面中，隐藏仅包含单个资产的插件",
@@ -175,7 +166,6 @@
   "AllDlcs": "所有 DLC",
   "DLCs": "DLC 和 CCP",
   "DetectedIssues": "检测到的问题",
-  "DuplicateMods": "重复的模组",
   "FixAllIssues": "全部修复",
   "LaunchTooltip": "点击以启动 / 关闭 Cities: Skylines，或在程序中任意位置按 [F5]",
   "LsmImport": "Loading Screen Mod Revisited 的资产报告",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "更改该配置文件图标的颜色",
   "Sorting_Color": "配置文件图标颜色",
   "CreateShortcutProfile": "在电脑桌面上为其创建快捷方式",
-  "ProfilesLoaded": "个配置文件当前可用",
   "AskToLaunchGameForShortcut": "是否要在点开 LOT 2 的快捷方式时，同时使用您的配置文件启动游戏？",
   "TextImportMissingInfo": "导入包含 Steam ID 的文本文件，以方便订阅或管理插件",
   "ImportFromText": "导入文本文件",
@@ -412,9 +401,7 @@
   "Info": "提示",
   "SelectThisPackage": "选择此插件",
   "SelectPackage": "选择一个插件",
-  "Profiles": "配置文件",
   "ControlToSelectMultiplePackages": "按住 Ctrl 并左键点击，可选择多个插件。",
-  "Mods": "模组",
   "Local": "本地",
   "Workshop": "创意工坊",
   "CompatibilityReport": "兼容性报告",
@@ -424,12 +411,46 @@
   "Included": "已装载（模组需要启用！）",
   "Excluded": "已卸下",
   "Server": "服务器",
-  "Assets": "资产",
   "OutOfDate": "已过期",
   "Subscribe": "订阅",
   "Switch": "切换",
-  "Packages": "插件",
   "AdvancedIncludeEnable": "同时显示模组的装载和启用状态",
   "PackageStatus": "插件状态",
-  "Author": "作者"
+  "Author": "作者",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
