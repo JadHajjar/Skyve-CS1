@@ -159,7 +159,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 	protected override string GetFilteredCountText(int filteredCount)
 	{
-		return string.Format(Locale.ShowingPackages, filteredCount);
+		return Locale.ShowingPackages.FormatPlural(filteredCount);
 	}
 
 	protected override void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)

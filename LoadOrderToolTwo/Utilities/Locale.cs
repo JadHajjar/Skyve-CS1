@@ -270,4 +270,5 @@ internal class Locale : LocaleHelper
 	public static Translation AssetsWithMajorIssues => _instance.GetText(nameof(AssetsWithMajorIssues));
 	public static Translation AssetsShouldUnsub => _instance.GetText(nameof(AssetsShouldUnsub));
 	public static Translation SelectThisPackage => _instance.GetText(nameof(SelectThisPackage));
+	public static Translation ControlToSelectMultiplePackages => _instance.GetText(nameof(ControlToSelectMultiplePackages));
 }

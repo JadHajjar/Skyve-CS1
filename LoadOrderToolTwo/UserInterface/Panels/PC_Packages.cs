@@ -84,7 +84,7 @@ internal class PC_Packages : PC_ContentList<Package>
 
 	protected override string GetFilteredCountText(int filteredCount)
 	{
-		return string.Format(Locale.ShowingPackages, filteredCount);
+		return Locale.ShowingPackages.FormatPlural(filteredCount);
 	}
 
 	protected override void SetIncluded(IEnumerable<Package> filteredItems, bool included)

@@ -29,6 +29,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private PostPackage? postPackage;
 	private PostPackage? lastPackageData;
 
+	internal IPackage? CurrentPackage => currentPackage;
+
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
 		InitializeComponent();
@@ -60,12 +62,16 @@ public partial class PC_CompatibilityManagement : PanelContent
 		SetPackage(0);
 	}
 
-	public PC_CompatibilityManagement(IPackage package) : this(false)
+	public PC_CompatibilityManagement(IEnumerable<IPackage> packages) : this(false)
 	{
-		_packages[package.SteamId] = package;
-		_pages.Add(package.SteamId);
+		foreach (var package in packages)
+		{
+			_packages[package.SteamId] = package;
+		}
 
-		OnDataLoad();
+		_pages.AddRange(_packages.OrderByDescending(x => x.Value.ServerTime).Select(x => x.Key));
+
+		SetPackage(0);
 	}
 
 	protected override void UIChanged()
@@ -142,7 +148,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		if (page < 0 || page >= _packages.Count)
 		{
-			Form.PushBack();
+			Form?.PushBack();
 			return;
 		}
 
@@ -191,6 +197,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		CB_BlackListName.Checked = postPackage.BlackListName;
 		CB_BlackListId.Checked = postPackage.BlackListId;
 		DD_Stability.SelectedItem = postPackage.Stability;
+		DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => postPackage.RequiredDLCs?.Contains(x.Id) ?? false);
 		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => postPackage.Usage.HasFlag(x));
 		TB_Note.Text = postPackage.Note;
 
@@ -273,7 +280,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		P_Links.Controls.Clear(true, x => x is LinkControl);
 
-		foreach (var item in links)
+		foreach (var item in links.OrderBy(x => x.Type))
 		{
 			var control = new LinkControl { Link = item };
 			control.Click += T_NewLink_Click;
@@ -319,6 +326,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		postPackage.Stability = DD_Stability.SelectedItem;
 		postPackage.Usage = DD_Usage.SelectedItems.Aggregate((prev, next) => prev | next);
+		postPackage.RequiredDLCs = DD_DLCs.SelectedItems.Select(x => x.Id).ToArray();
 		postPackage.Note = TB_Note.Text;
 		postPackage.Tags = P_Tags.Controls.OfType<TagControl>().Where(x => !string.IsNullOrEmpty(x.Text)).ToList(x => x.Text);
 		postPackage.Links = P_Links.Controls.OfType<LinkControl>().ToList(x => x.Link);
@@ -343,7 +351,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return;
 		}
 
-		if (postPackage.Interactions.Any(x => !CRNAttribute.GetAttribute(x.Type).Browsable))
+		if (postPackage.Interactions.Any(x => !CRNAttribute.GetAttribute(x.Type).Browsable || !(x.Packages?.Any() ?? false)))
 		{
 			ShowPrompt(LocaleCR.PleaseReviewPackageInteractions, PromptButtons.OK, PromptIcons.Hand);
 			return;

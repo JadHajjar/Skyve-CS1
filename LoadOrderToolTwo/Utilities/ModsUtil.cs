@@ -280,6 +280,8 @@ internal static class ModsUtil
 		return CentralManager.Mods.FirstOrDefault(x => x.SteamId == steamID);
 	}
 
+	internal static string CleanName(this IPackage package) => package.ToString().RemoveVersionText(out _);
+
 	internal static string RemoveVersionText(this string name, out List<string> tags)
 	{
 		var text = name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");

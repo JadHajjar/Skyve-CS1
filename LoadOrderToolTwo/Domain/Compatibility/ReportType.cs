@@ -4,13 +4,11 @@ public enum ReportType
 {
 	Stability,
 	Successors,
-	RequiredMods,
+	RequiredPackages,
 	DlcMissing,
 	Compatibility,
-	UnneededDependency,
-	WorksWhenDisabled,
 	Alternatives,
 	Status,
-	Recommendations,
 	Note,
+	Ambiguous,
 }

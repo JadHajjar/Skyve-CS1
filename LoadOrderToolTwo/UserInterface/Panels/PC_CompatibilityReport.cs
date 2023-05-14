@@ -8,6 +8,8 @@ using SlickControls;
 using LoadOrderToolTwo.Utilities;
 using System.Threading.Tasks;
 using LoadOrderToolTwo.UserInterface.Forms;
+using LoadOrderToolTwo.Domain.Interfaces;
+using System.Collections.Generic;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
@@ -72,17 +74,17 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		if (isManager)
 		{
-			var form = new AddPackageForm() { Text = LocaleHelper.GetGlobalText("Select a package") };
+			var form = new PC_SelectPackage() { Text = LocaleHelper.GetGlobalText("Select a package") };
 
 			form.PackageSelected += Form_PackageSelected;
-			
-			form.Show(Form);
+
+			Program.MainForm.PushPanel(null, form);
 		}
 
 	}
 
-	private void Form_PackageSelected(Domain.Steam.SteamWorkshopItem obj)
+	private void Form_PackageSelected(IEnumerable<IPackage> packages)
 	{
-		Form.PushPanel(null, new PC_CompatibilityManagement(obj));
+		Form.PushPanel(null, new PC_CompatibilityManagement(packages));
 	}
 }

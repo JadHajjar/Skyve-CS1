@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LoadOrderToolTwo.Domain.Compatibility;
 [DynamicSqlClass("Packages")]
@@ -25,6 +26,13 @@ public class Package : IDynamicSql
 	public PackageStability Stability { get; set; }
 	[DynamicSqlProperty]
 	public PackageUsage Usage { get; set; } = (PackageUsage)(-1);
+
+#if API
+	[DynamicSqlProperty(ColumnName = nameof(RequiredDLCs)), System.Text.Json.Serialization.JsonIgnore]
+	public string? RequiredDLCsList { get => RequiredDLCs is null ? null : string.Join(',', RequiredDLCs); set => RequiredDLCs = value?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(uint.Parse).ToArray(); }
+#endif
+
+	public uint[]? RequiredDLCs { get; set; }
 	public List<string>? Tags { get; set; }
 	public List<PackageLink>? Links { get; set; }
 	public List<PackageStatus>? Statuses { get; set; }

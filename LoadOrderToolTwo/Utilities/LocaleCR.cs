@@ -81,4 +81,7 @@ internal class LocaleCR : LocaleHelper
 	public static Translation PleaseReviewPackageStatuses => _instance.GetText(nameof(PleaseReviewPackageStatuses));
 	public static Translation PleaseReviewPackageInteractions => _instance.GetText(nameof(PleaseReviewPackageInteractions));
 	public static Translation PleaseReviewPackageUsage => _instance.GetText(nameof(PleaseReviewPackageUsage));
+	public static Translation OutputText => _instance.GetText(nameof(OutputText));
+	public static Translation NoRequiredDlcs => _instance.GetText(nameof(NoRequiredDlcs));
+	public static Translation DlcsSelected => _instance.GetText(nameof(DlcsSelected));
 }

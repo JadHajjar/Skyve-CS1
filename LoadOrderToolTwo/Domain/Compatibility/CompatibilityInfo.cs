@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.Domain.Compatibility;
 public class CompatibilityInfo
@@ -10,24 +11,25 @@ public class CompatibilityInfo
 	public IPackage Package { get; }
 	public IndexedPackage? Data { get; }
 	public List<PackageLink> Links { get; }
-	public List<ReportMessage> ReportMessages { get; }
-	public NotificationType Notification => ReportMessages.Count > 0 ? ReportMessages.Max(x => x.Status.Notification) : NotificationType.None;
+	public List<ReportItem> ReportItems { get; }
+	public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => x.Status.Notification) : NotificationType.None;
 
 	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
 	{
 		Package = package;
 		Data = packageData;
 		Links = new();
-		ReportMessages = new();
+		ReportItems = new();
 	}
 
-	public void Add<TType>(ReportType type, IPackageStatus<TType> status, string message) where TType : struct, Enum
+	public void Add(ReportType type, IGenericPackageStatus status, string message, ulong[] packages)
 	{
-		ReportMessages.Add(new ReportMessage
+		ReportItems.Add(new ReportItem
 		{
 			Type = type,
 			Status = status,
 			Message = message,
+			Packages = packages
 		});
 	}
 }

@@ -50,17 +50,6 @@ public partial class AddLinkForm : BaseForm
 		TLP.ResumeDrawing();
 	}
 
-	protected override void OnDeactivate(EventArgs e)
-	{
-		base.OnDeactivate(e);
-
-		if (CurrentFormState != FormState.ForcedFocused)
-		{
-			LinksReturned?.Invoke(GetLinks());
-			Close();
-		}
-	}
-
 	private IEnumerable<PackageLink> GetLinks()
 	{
 		return TLP.Controls.OfType<LinkControl>().Select(x => x.Link);

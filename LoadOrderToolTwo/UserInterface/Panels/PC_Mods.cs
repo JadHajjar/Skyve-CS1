@@ -46,7 +46,7 @@ internal class PC_Mods : PC_ContentList<Mod>
 
 	protected override string GetFilteredCountText(int filteredCount)
 	{
-		return string.Format(Locale.ShowingMods, filteredCount);
+		return Locale.ShowingMods.FormatPlural(filteredCount);
 	}
 
 	protected override void SetIncluded(IEnumerable<Mod> filteredItems, bool included)
