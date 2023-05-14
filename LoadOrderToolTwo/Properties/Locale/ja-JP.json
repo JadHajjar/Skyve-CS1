@@ -173,6 +173,7 @@
   "HidePseudoMods": "テーマミックスのような擬似MODは非表示",
   "YourDlcs": "所有中のDLC",
   "AllDlcs": "全てのDLC",
+  "DLCs": "DLC & CCP",
   "DetectedIssues": "検出した問題点",
   "DuplicateMods": "重複したMOD",
   "FixAllIssues": "全ての問題点を修正",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "作者のSteam IDをコピー",
   "CloseCitiesToSub": "パッケージのサブスク操作を行うには、Cities: Skylinesを終了する必要があります。",
   "ShowingFilteredItems": "合計 {1} 個のアイテムから {0} 個を表示中",
-  "ShowingMods": "表示中: {0} 個のMOD",
-  "ShowingAssets": "表示中: {0} 個のアセット",
-  "ShowingPackages": "表示中: {0} 個のパッケージ",
-  "ShowingProfiles": "表示中: {0} 個のプロファイル",
+  "ShowingMods": {
+    "One": "表示中: {0} 個のMOD",
+    "Plural": "表示中: {0} 個のMOD"
+  },
+  "ShowingAssets": {
+    "One": "表示中: {0} 個のアセット",
+    "Plural": "表示中: {0} 個のアセット"
+  },
+  "ShowingPackages": {
+    "One": "表示中: {0} 個のパッケージ",
+    "Plural": "表示中: {0} 個のパッケージ"
+  },
+  "ShowingProfiles": {
+    "One": "表示中: {0} 個のプロファイル",
+    "Plural": "表示中: {0} 個のプロファイル"
+  },
   "DropNewProfile": "インポートしたいプロファイルのjsonファイル/xmlファイルをD&D・クリックして選択",
   "ThemeUIScale": "テーマ & UIスケール",
   "SearchProfiles": "プロファイルを検索...",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Cities Skylinesを起動すると、新規でゲームを開始します。起動時に開始するマップを指定できます。",
   "LoadSaveGame_Tip": "Cities Skylinesを起動すると、セーブゲームをロードします。セーブファイルが未選択の場合は、最新のセーブで再開します。",
   "BETA": "β版",
+  "ALPHA": "α版",
+  "TEST": "テスト",
+  "TESTING": "テスト中",
   "STABLE": "安定版",
   "EXPERIMENTAL": "実験版",
   "DEPRECATED": "非推奨",
+  "OBSOLETE": "廃止",
+  "ABANDONED": "放棄",
   "ActionUnreversible": "このアクションは元に戻せません！",
   "AlwaysOpenFiltersAndActions": "フィルタセクションをデフォルトで表示",
   "AlwaysOpenFiltersAndActions_Tip": "コンテンツタブに入るときは、常にフィルタセクションを展開します。",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "ワークショップのセーブゲーム",
   "Workshop Maps": "ワークショップのマップ",
   "AnyAuthor": "全ての作者",
-  "ItemsCount": "{0} 個のアイテム",
-  "AuthorsSelected": "{0} 人の作者を選択",
+  "ItemsCount": {
+    "One": "アイテム: {0} 個",
+    "Plural": "アイテム: {0} 個"
+  },
+  "AuthorsSelected": {
+    "One": "作者を選択中: {0} 人",
+    "Plural": "作者を選択中: {0} 人"
+  },
   "Use the System's Theme": "システムのテーマを使用",
   "Donate": "寄付",
   "CopyAllIds": "表示中のワークショップIDを全てコピー",
@@ -388,5 +412,24 @@
   "Info": "情報",
   "SelectThisPackage": "パッケージを選択",
   "SelectPackage": "パッケージを選択",
-  "Profiles": "プロファイル"
+  "Profiles": "プロファイル",
+  "ControlToSelectMultiplePackages": "Ctrl + クリックで複数のパッケージをまとめて選択出来ます。",
+  "Mods": "MOD",
+  "Local": "ローカル",
+  "Workshop": "ワークショップ",
+  "CompatibilityReport": "互換性レポート",
+  "AppDataPath": "Cities: Skylinesが使うApp Dataのフォルダ",
+  "Enabled": "有効化",
+  "Disabled": "無効化",
+  "Included": "含める",
+  "Excluded": "除外",
+  "Server": "サーバー",
+  "Assets": "アセット",
+  "OutOfDate": "古いバージョン",
+  "Subscribe": "サブスク",
+  "Switch": "切り替え",
+  "Packages": "パッケージ",
+  "AdvancedIncludeEnable": "MODのステータスで含めると有効化の両方を表示",
+  "PackageStatus": "パッケージのステータス",
+  "Author": "作者"
 }

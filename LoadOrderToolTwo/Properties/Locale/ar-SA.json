@@ -173,6 +173,7 @@
   "HidePseudoMods": "إخفاء موود الزائفة مثل خلطات السمة",
   "YourDlcs": "DLCs ​​الخاص بك",
   "AllDlcs": "جميع DLCs",
+  "DLCs": "DLCS و CCPS",
   "DetectedIssues": "اكتشفت مشكلات",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "إصلاح جميع المشكلات",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "نسخ معرف الستيم الخاص بالمؤلف",
   "CloseCitiesToSub": "تحتاج إلى إغلاق المدن: Skylines للاشتراك أو إلغاء الاشتراك من الحزم",
   "ShowingFilteredItems": "عرض {0} من إجمالي العناصر {1}",
-  "ShowingMods": "عرض {0} مودات",
-  "ShowingAssets": "عرض {0} أصول",
-  "ShowingPackages": "عرض {0} حزم",
-  "ShowingProfiles": "عرض {0} ملفات شخصية",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "قالب و مقياس واجهة المستخدم",
   "SearchProfiles": "البحث عن طريق ملفاتك الشخصية..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "يبدأ لعبة جديدة عند إطلاق المدن: Skylines. يمكنك تحديد الخريطة التي ترغب في البدء فيها",
   "LoadSaveGame_Tip": "تحميل لعبة ادخار عند اطلاق المدن: Skylines. عدم اختيار ملف الحفظ سيستمر في حفظك الاحدث",
   "BETA": "بيتا",
+  "ALPHA": "ألفا",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "ابدأ",
   "EXPERIMENTAL": "الخبرة",
   "DEPRECATED": "التحميل",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "لا يمكن عكس هذا الإجراء.",
   "AlwaysOpenFiltersAndActions": "إظهار قسم الفلاتر بشكل افتراضي",
   "AlwaysOpenFiltersAndActions_Tip": "جعل دائماً قسم الفلاتر مفتوحًا عند إدخال علامة تبويب المحتوى",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "حفظ ألعاب الورشة",
   "Workshop Maps": "خرائط ورشة العمل",
   "AnyAuthor": "أي مؤلف",
-  "ItemsCount": "{0} عنصر",
-  "AuthorsSelected": "{0} مؤلف محدد",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "استخدام سمة النظام",
   "Donate": "تبرع",
   "CopyAllIds": "نسخ جميع معرفات ورشة العناصر المعروضة",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles"
+  "Profiles": "Profiles",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "تعديل",
+  "Local": "محلي",
+  "Workshop": "ورشة عمل",
+  "CompatibilityReport": "تقرير التوافق",
+  "AppDataPath": "المدن: مجلد بيانات تطبيق Skylines '",
+  "Enabled": "تمكين",
+  "Disabled": "عاجز",
+  "Included": "وشملت",
+  "Excluded": "مستبعد",
+  "Server": "الخادم",
+  "Assets": "أصول",
+  "OutOfDate": "انتهت صلاحيته",
+  "Subscribe": "يشترك",
+  "Switch": "يُحوّل",
+  "Packages": "حزم",
+  "AdvancedIncludeEnable": "إظهار كل من الحالة المضمنة والمفعلة للمودز",
+  "PackageStatus": "وضع رزمة",
+  "Author": "المؤلف"
 }

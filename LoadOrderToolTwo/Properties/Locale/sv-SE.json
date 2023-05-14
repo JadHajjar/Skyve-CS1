@@ -173,6 +173,7 @@
   "HidePseudoMods": "Dölj pseudo-mods som temablandningar",
   "YourDlcs": "Dina dlcs",
   "AllDlcs": "Alla DLC: er",
+  "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Upptäckta ärenden",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Fixa alla ärenden",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Kopiera författarens Steam-ID",
   "CloseCitiesToSub": "Du måste stänga Städer: Skylines för att prenumerera eller avregistrera dig från paket",
   "ShowingFilteredItems": "Visar {0} av {1} totalt objekt",
-  "ShowingMods": "Visar {0} moddar",
-  "ShowingAssets": "Visar {0} tillgångar",
-  "ShowingPackages": "Visar {0} paket",
-  "ShowingProfiles": "Visar {0} profiler",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Tema & UI skala",
   "SearchProfiles": "Sök igenom dina profiler..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Startar ett nytt spel när Städer: Skylines. Du kan ange vilken karta du vill starta i",
   "LoadSaveGame_Tip": "Ladda ett sparspel när du startar städer: Skylines. Om du inte väljer en sparfil kommer din senaste sparfil att fortsätta",
   "BETA": "BETA",
+  "ALPHA": "ALFA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "STABELL",
   "EXPERIMENTAL": "ERFARENHET",
   "DEPRECATED": "DEPRECATED",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Denna åtgärd kan inte vändas.",
   "AlwaysOpenFiltersAndActions": "Visa avsnittet filter som standard",
   "AlwaysOpenFiltersAndActions_Tip": "Alltid ha filtersektionen öppen när du går in i en innehållsflik",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Workshop Save-spel",
   "Workshop Maps": "Verkstad Kartor",
   "AnyAuthor": "Valfri författare",
-  "ItemsCount": "{0} objekt",
-  "AuthorsSelected": "{0} författare valda",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Använd systemets tema",
   "Donate": "Donera",
   "CopyAllIds": "Kopiera alla visade objekts Workshop-ID",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles"
+  "Profiles": "Profiles",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Mods",
+  "Local": "Lokal",
+  "Workshop": "Verkstad",
+  "CompatibilityReport": "Kompatibilitetsrapport",
+  "AppDataPath": "Städer: Skylines appdatamapp",
+  "Enabled": "Aktiverad",
+  "Disabled": "Inaktiverad",
+  "Included": "Ingick",
+  "Excluded": "Utesluten",
+  "Server": "Servern",
+  "Assets": "Tillgångar",
+  "OutOfDate": "Förfallen",
+  "Subscribe": "Prenumerera",
+  "Switch": "Växla",
+  "Packages": "Paket",
+  "AdvancedIncludeEnable": "Visa både den inkluderade och aktiverade statusen för moddar",
+  "PackageStatus": "Förpackningsstatus",
+  "Author": "Författare"
 }

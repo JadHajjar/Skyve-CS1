@@ -7,7 +7,7 @@
   "Note": "Nota",
   "NoteInfo": "Texto adicional de información mostrado para el paquete",
   "BlackListName": "Black-list by name",
-  "BlackListId": "Black-list by Steam ID",
+  "BlackListId": "Black-list by name",
   "GlobalTags": "Etiquetas globales",
   "GlobalTagsInfo": "Etiquetas que todos los jugadores verán en la aplicación",
   "Links": "Enlaces",
@@ -27,7 +27,8 @@
   "SubscribeToPackages": "Suscribirse a paquetes enlazados",
   "RequiresConfiguration": "Requiere una configuración específica",
   "SelectOne": "Seleccione uno",
-  "Unsubscribe": "Anular suscripción de este paquete",
+  "UnsubscribeThis": "Unsubscribe from this package",
+  "UnsubscribeOther": "Unsubscribe from linked packages",
   "Switch": "Suscribirse a paquete enlazado",
   "Deprecated": "Obsoleto",
   "Reupload": "Volver a subir datos",
@@ -43,7 +44,9 @@
   "SameFunctionality": "Misma funcionalidad",
   "Incompatible": "Incompatible",
   "RequirementAlternative": "Requisito alternativo",
-  "Required": "Requerido",
+  "IncompatibleWith": "Incompatible With ..",
+  "CausesIssuesWith": "Causes Issues With ..",
+  "RequiredPackages": "Requires ..",
   "StatusType": "Tipo de estado",
   "InteractionType": "Tipo de interacción",
   "MissingDependency": "Faltan dependencias",
@@ -64,5 +67,82 @@
   "PleaseReviewTheStability": "Por favor, revise la estabilidad de este paquete antes de guardar.",
   "PleaseReviewPackageStatuses": "Por favor, revise los estados de este paquete antes de guardar.\nAlgunos tienen un tipo de estado inválido.",
   "PleaseReviewPackageInteractions": "Por favor, revise los estados de este paquete antes de guardar.\nAlgunos tienen un tipo de estado inválido.",
-  "PleaseReviewPackageUsage": "Por favor, selecciona un uso válido para el cambio."
+  "PleaseReviewPackageUsage": "Por favor, selecciona un uso válido para el cambio.",
+  "Interaction_Alternative": {
+    "One": "'{1}' can be used as an alternative to '{0}'.",
+    "Plural": "One of the following packages can be used as an alternative to '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' and '{1}' have the same functionalities.",
+    "Plural": "'{0}' and the following packages have the same functionalities."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' and '{1}' are not compatible with each other.",
+    "Plural": "'{0}' is not compatible with any of the following packages."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' can cause issues when used with '{1}'.",
+    "Plural": "'{0}' can cause issues when used with the following mods."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "You're missing a required package for '{0}'.",
+    "Plural": "You're missing the following required packages for '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{0}' is succeeded by '{1}'.",
+    "Plural": "'{0}' is succeeded by either one of the following packages."
+  },
+  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Status_Reupload": {
+    "Zero": "'{0}' is a re-upload of an original package.",
+    "One": "This is a re-upload of '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' causes issues with your game.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.",
+    "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+  },
+  "Status_TestVersion": {
+    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+  },
+  "Status_MissingDlc": {
+    "One": "You're missing the '{0}' DLC to use this package.",
+    "Plural": "You're missing the following DLCs to use this package."
+  },
+  "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
+  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
+  "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
+  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "OutputText": "Expected Output",
+  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_Stable": "This package is stable.",
+  "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
+  "Stability_HasIssues": "This package can cause issues.",
+  "Stability_Broken": "This package is broken.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "You should subscribe to the following package.",
+    "Plural": "You should subscribe to these packages."
+  },
+  "Action_RequiresConfiguration": "You should follow the following instructions.",
+  "Action_SelectOne": {
+    "One": "Between '{0}' and '{1}', you should choose only one of them.",
+    "Plural": "Between '{0}' and the following packages, you should only choose one."
+  },
+  "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "You should unsubscribe from '{1}'.",
+    "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_Switch": {
+    "One": "You should switch to '{1}'.",
+    "Plural": "You should switch to one of the following packages."
+  },
+  "NoRequiredDlcs": "No Required DLCs",
+  "DlcsSelected": {
+    "One": "{0} DLC selected",
+    "Plural": "{0} DLCs selected"
+  },
+  "RequiredDLCs": "Required DLCs/CCPs"
 }

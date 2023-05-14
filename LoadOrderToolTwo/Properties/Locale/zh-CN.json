@@ -173,6 +173,7 @@
   "HidePseudoMods": "隐藏伪模组（如自定义混合主题）",
   "YourDlcs": "您的 DLC",
   "AllDlcs": "所有 DLC",
+  "DLCs": "DLC 和 CCP",
   "DetectedIssues": "检测到的问题",
   "DuplicateMods": "重复的模组",
   "FixAllIssues": "全部修复",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "复制作者的 Steam 数字 ID",
   "CloseCitiesToSub": "你需要关闭 Cities: Skylines 才能订阅/取消订阅插件",
   "ShowingFilteredItems": "当前显示 {0} 项，共 {1} 项",
-  "ShowingMods": "当前显示{0}个模组",
-  "ShowingAssets": "当前显示{0}个资产",
-  "ShowingPackages": "当前显示{0}个插件",
-  "ShowingProfiles": "当前显示{0}个配置文件",
+  "ShowingMods": {
+    "One": "当前显示{0}个模组",
+    "Plural": "当前显示{0}个模组"
+  },
+  "ShowingAssets": {
+    "One": "当前显示{0}个资产",
+    "Plural": "当前显示{0}个资产"
+  },
+  "ShowingPackages": {
+    "One": "当前显示{0}个插件",
+    "Plural": "当前显示{0}个插件"
+  },
+  "ShowingProfiles": {
+    "One": "当前显示{0}个配置文件",
+    "Plural": "当前显示{0}个配置文件"
+  },
   "DropNewProfile": "将 json / xml 配置文件拖到此处；或单击此处，选择一个 json / xml 配置文件，以导入配置文件。",
   "ThemeUIScale": "界面主题与UI缩放",
   "SearchProfiles": "搜索您的配置文件…",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "启动 Cities: Skylines 并新建一个存档。您可以选择新建存档使用的地图。",
   "LoadSaveGame_Tip": "启动 Cities: Skylines 时，自动开始加载所选存档。 如果您没有选择存档文件，会自动加载最近一次保存的存档。",
   "BETA": "BETA 测试版",
+  "ALPHA": "ALPHA 测试版",
+  "TEST": "测试版",
+  "TESTING": "测试版",
   "STABLE": "稳定版",
   "EXPERIMENTAL": "实验版",
   "DEPRECATED": "已弃用",
+  "OBSOLETE": "已淘汰",
+  "ABANDONED": "作者弃坑",
   "ActionUnreversible": "此操作无法撤销。",
   "AlwaysOpenFiltersAndActions": "默认显示筛选选项",
   "AlwaysOpenFiltersAndActions_Tip": "进入“内容”选项卡时，始终显示筛选选项。",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "创意工坊的游戏存档",
   "Workshop Maps": "创意工坊的地图",
   "AnyAuthor": "任何作者",
-  "ItemsCount": "有 {0} 个项目",
-  "AuthorsSelected": "已选择 {0} 个作者",
+  "ItemsCount": {
+    "One": "有 {0} 个项目",
+    "Plural": "有 {0} 个项目"
+  },
+  "AuthorsSelected": {
+    "One": "已选择 {0} 个作者",
+    "Plural": "已选择 {0} 个作者"
+  },
   "Use the System's Theme": "使用电脑系统主题",
   "Donate": "赞助",
   "CopyAllIds": "复制所有显示的项目的 Steam 创意工坊 ID",
@@ -388,5 +412,24 @@
   "Info": "提示",
   "SelectThisPackage": "选择此插件",
   "SelectPackage": "选择一个插件",
-  "Profiles": "配置文件"
+  "Profiles": "配置文件",
+  "ControlToSelectMultiplePackages": "按住 Ctrl 并左键点击，可选择多个插件。",
+  "Mods": "模组",
+  "Local": "本地",
+  "Workshop": "创意工坊",
+  "CompatibilityReport": "兼容性报告",
+  "AppDataPath": "Cities: Skylines 的 App Data 文件夹",
+  "Enabled": "已启用",
+  "Disabled": "已禁用",
+  "Included": "已装载（模组需要启用！）",
+  "Excluded": "已卸下",
+  "Server": "服务器",
+  "Assets": "资产",
+  "OutOfDate": "已过期",
+  "Subscribe": "订阅",
+  "Switch": "切换",
+  "Packages": "插件",
+  "AdvancedIncludeEnable": "同时显示模组的装载和启用状态",
+  "PackageStatus": "插件状态",
+  "Author": "作者"
 }

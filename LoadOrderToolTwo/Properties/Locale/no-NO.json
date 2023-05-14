@@ -173,6 +173,7 @@
   "HidePseudoMods": "Skjul pseudo-mods som temamikser",
   "YourDlcs": "Dine DLC -er",
   "AllDlcs": "Alle DLC -er",
+  "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Oppdagede problemer",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Fiks alle problemer",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Kopier forfatterens Steam-Id",
   "CloseCitiesToSub": "Du må lukke byer: Skyliner for å abonnere eller stoppe abonnementet på pakker",
   "ShowingFilteredItems": "Viser {0} av {1} produkter totalt",
-  "ShowingMods": "Viser {0} mods",
-  "ShowingAssets": "Viser {0} ressurser",
-  "ShowingPackages": "Viser {0} pakker",
-  "ShowingProfiles": "Viser {0} profiler",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Tema & UI skala",
   "SearchProfiles": "Søk gjennom profilene dine..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Starter et nytt spill når du starter Cities: Skyllinger. Du kan angi kartet du vil starte på",
   "LoadSaveGame_Tip": "Laste inn en lagringsplass når du starter Cities: Skyllinger. Ikke å velge en lagringsfil vil fortsette den siste lagringsfilen",
   "BETA": "META",
+  "ALPHA": "ALFA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "TILBAKESTILL",
   "EXPERIMENTAL": "EKSPERIMENTELL",
   "DEPRECATED": "FORTSETT",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Denne handlingen kan ikke angres.",
   "AlwaysOpenFiltersAndActions": "Vis filterseksjonen som standard",
   "AlwaysOpenFiltersAndActions_Tip": "Ha alltid filterseksjonen åpne når du skriver inn en innholdsfane",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Workshop save-games",
   "Workshop Maps": "Verksted kart",
   "AnyAuthor": "Enhver forfatter",
-  "ItemsCount": "{0} elementer",
-  "AuthorsSelected": "{0} forfattere valgt",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Bruk systemets tema",
   "Donate": "Doner",
   "CopyAllIds": "Kopier alle viste elementers Workshop-ID-er",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles"
+  "Profiles": "Profiles",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Modifikasjoner",
+  "Local": "Lokal",
+  "Workshop": "Verksted",
+  "CompatibilityReport": "Kompatibilitetsrapport",
+  "AppDataPath": "Byer: Skylines 'appdata -mappe",
+  "Enabled": "Aktivert",
+  "Disabled": "Funksjonshemmet",
+  "Included": "Inkludert",
+  "Excluded": "Ekskludert",
+  "Server": "Tjener",
+  "Assets": "Eiendeler",
+  "OutOfDate": "Utdatert",
+  "Subscribe": "Abonnere",
+  "Switch": "Bytte om",
+  "Packages": "Pakker",
+  "AdvancedIncludeEnable": "Vis både av inkludert og aktivert status for mods",
+  "PackageStatus": "Pakkestatus",
+  "Author": "Forfatter"
 }

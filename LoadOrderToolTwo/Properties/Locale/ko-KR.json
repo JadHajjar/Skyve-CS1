@@ -173,6 +173,7 @@
   "HidePseudoMods": "테마 믹스 같이 유사 모드인 모드 숨기기",
   "YourDlcs": "내 DLC",
   "AllDlcs": "모든 DLC",
+  "DLCs": "DLC & CCP",
   "DetectedIssues": "감지된 이슈",
   "DuplicateMods": "중복된 모드",
   "FixAllIssues": "모든 이슈 고치기",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "제작자의 Steam ID 복사",
   "CloseCitiesToSub": "패키지를 구독하거나 구독 취소하려면 Cities: Skylines를 닫아야 합니다",
   "ShowingFilteredItems": "총 {1}개 항목 중 {0}개 표시 중",
-  "ShowingMods": "모드 {0}개 표시 중",
-  "ShowingAssets": "에셋 {0}개 표시 중",
-  "ShowingPackages": "패키지 {0}개 표시 중",
-  "ShowingProfiles": "프로필 {0}개 표시 중",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "프로필의 .json 또는 .xml 파일을 여기에 놓거나 선택해서 프로필을 가져오세요",
   "ThemeUIScale": "테마 & UI 크기",
   "SearchProfiles": "내 프로필에서 검색..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Cities: Skylines를 실행할 때 새 게임을 시작합니다. 시작하려는 맵을 정할 수 있습니다.",
   "LoadSaveGame_Tip": "Cities: Skylines를 실행할 때 저장된 게임을 불러옵니다. 선택한 게임이 없는 경우 마지막으로 저장된 게임을 불러옵니다.",
   "BETA": "베타",
+  "ALPHA": "알파",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "안정적인",
   "EXPERIMENTAL": "실험적인",
   "DEPRECATED": "사용되지 않는",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "이 작업은 되돌릴 수 없습니다.",
   "AlwaysOpenFiltersAndActions": "기본적으로 필터 섹션을 표시하기",
   "AlwaysOpenFiltersAndActions_Tip": "콘텐츠 탭을 열 때 필터 섹션을 항상 펼쳐둡니다",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "창작마당 저장 게임",
   "Workshop Maps": "창작마당 지도",
   "AnyAuthor": "모든 제작자",
-  "ItemsCount": "{0} 항목",
-  "AuthorsSelected": "제작자 {0}명 선택됨",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "시스템 테마 사용",
   "Donate": "후원하기",
   "CopyAllIds": "표시된 모든 항목의 창작마당 ID 복사하기",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "프로필"
+  "Profiles": "프로필",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "모드",
+  "Local": "로컬",
+  "Workshop": "창작마당",
+  "CompatibilityReport": "호환성 보고서",
+  "AppDataPath": "Cities: Skylines의 앱 데이터 폴더",
+  "Enabled": "활성화됨",
+  "Disabled": "비활성화됨",
+  "Included": "포함됨",
+  "Excluded": "제외됨",
+  "Server": "서버",
+  "Assets": "에셋",
+  "OutOfDate": "업데이트되지 않음",
+  "Subscribe": "구독",
+  "Switch": "바꾸기",
+  "Packages": "패키지",
+  "AdvancedIncludeEnable": "모드의 포함됨 상태와 활성화됨 상태를 모두 표시하기",
+  "PackageStatus": "패키지 상태",
+  "Author": "제작자"
 }

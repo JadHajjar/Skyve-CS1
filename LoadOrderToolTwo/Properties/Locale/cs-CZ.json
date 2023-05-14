@@ -173,6 +173,7 @@
   "HidePseudoMods": "Skrýt pseudomody jako motivy",
   "YourDlcs": "Vaše DLCS",
   "AllDlcs": "Všechny DLC",
+  "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Detekovány úkoly",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Opravit všechny problémy",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Zkopírujte Steam ID autora",
   "CloseCitiesToSub": "Musíte zavřít města: Skylines pro odběr nebo odhlášení z balíčků",
   "ShowingFilteredItems": "Zobrazeno {0} z celkem {1} položek",
-  "ShowingMods": "Zobrazuji {0} modů",
-  "ShowingAssets": "Zobrazeno {0} položek",
-  "ShowingPackages": "Zobrazuje se {0} balíčků",
-  "ShowingProfiles": "Zobrazení {0} profilů",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Měřítko šablony a uživatelského rozhraní",
   "SearchProfiles": "Vyhledávání prostřednictvím profilů..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Spustí novou hru při spouštění měst: Skyliny. Můžete zadat mapu, ve které chcete začít",
   "LoadSaveGame_Tip": "Načíst uloženou hru při spouštění měst: Skyliny. Nevybráním uloženého souboru bude pokračovat vaše poslední uložení",
   "BETA": "BETA",
+  "ALPHA": "LUCEMBURSKO",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "STABILNÍ",
   "EXPERIMENTAL": "ZKUŠEBNÍ PROSTŘEDKY",
   "DEPRECATED": "VYTVOŘENO",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Tuto akci nelze vrátit zpět.",
   "AlwaysOpenFiltersAndActions": "Zobrazit sekci filtrů ve výchozím nastavení",
   "AlwaysOpenFiltersAndActions_Tip": "Vždy zobrazovat sekci filtrů při vstupu do záložky obsahu",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Uložené partie dílny",
   "Workshop Maps": "Mapy dílny",
   "AnyAuthor": "Jakýkoliv autor",
-  "ItemsCount": "{0} položek",
-  "AuthorsSelected": "{0} autorů vybráno",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Použít motiv systému",
   "Donate": "Přispět",
   "CopyAllIds": "Zkopírovat všechna zobrazená ID Workshopu",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles"
+  "Profiles": "Profiles",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Modifikace",
+  "Local": "Místní",
+  "Workshop": "Dílna",
+  "CompatibilityReport": "Zpráva kompatibility",
+  "AppDataPath": "CITIES: Složka Data App Skylines '",
+  "Enabled": "Povoleno",
+  "Disabled": "Deaktivované",
+  "Included": "Zahrnuta",
+  "Excluded": "Vyloučen",
+  "Server": "Server",
+  "Assets": "Aktiva",
+  "OutOfDate": "Zastaralý",
+  "Subscribe": "předplatit",
+  "Switch": "Přepínač",
+  "Packages": "Balíčky",
+  "AdvancedIncludeEnable": "Zobrazit stav pro mody obojí včetně seznamu povolených",
+  "PackageStatus": "Stav balíčku",
+  "Author": "Autor"
 }
