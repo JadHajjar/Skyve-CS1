@@ -173,6 +173,7 @@
   "HidePseudoMods": "Piilota pseudo-modit, kuten teemakirjat",
   "YourDlcs": "DLCS",
   "AllDlcs": "Kaikki DLC: t",
+  "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Havaitut Ongelmat",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Korjaa Kaikki Ongelmat",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Kopioi kirjoittajan Steam-tunnus",
   "CloseCitiesToSub": "Sinun täytyy sulkea Cities: Skylines tilataksesi tai peruuttaaksesi paketteja",
   "ShowingFilteredItems": "Näytetään {0} yhteensä {1} kohdetta",
-  "ShowingMods": "Näytetään {0} modeja",
-  "ShowingAssets": "Näytetään {0} assettia",
-  "ShowingPackages": "Näytetään {0} pakettia",
-  "ShowingProfiles": "Näytetään {0} profiilia",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Teeman & Käyttöliittymän Mittakaava",
   "SearchProfiles": "Etsi profiilisi kautta..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Aloita uusi peli käynnistettäessä Cities: Skylines. Voit määrittää kartan, jonka haluat aloittaa",
   "LoadSaveGame_Tip": "Lataa tallennuspeli käynnistettäessä Cities: Skylines. Jos et valitse tallennustiedostoa, jatka viimeisintä tallennustasi",
   "BETA": "BETA",
+  "ALPHA": "ALPHA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "VAKUUTUS",
   "EXPERIMENTAL": "KOKEELLINEN",
   "DEPRECATED": "MÄÄRITYS",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Tätä toimintoa ei voi peruuttaa.",
   "AlwaysOpenFiltersAndActions": "Näytä suodattimien osio oletuksena",
   "AlwaysOpenFiltersAndActions_Tip": "Suodattimien osio on aina auki, kun syötetään sisältövälilehti",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Työpajan Tallennuspelit",
   "Workshop Maps": "Huoltopisteen Kartat",
   "AnyAuthor": "Mikä Tahansa Tekijä",
-  "ItemsCount": "{0} kohdetta",
-  "AuthorsSelected": "{0} kirjoittajaa valittu",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Käytä järjestelmän teemaa",
   "Donate": "Lahjoita",
   "CopyAllIds": "Kopioi kaikki näytetyt kohteet Workshopin tunnukset",
@@ -388,5 +412,24 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles"
+  "Profiles": "Profiles",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Modit",
+  "Local": "Paikallinen",
+  "Workshop": "Työpaja",
+  "CompatibilityReport": "Yhteensopivuusraportti",
+  "AppDataPath": "Kaupungit: Skylinesin sovellustietokansio",
+  "Enabled": "Poistettu",
+  "Disabled": "Liikuntarajoitteinen",
+  "Included": "Mukana",
+  "Excluded": "Ulkopuolelle",
+  "Server": "Palvelin",
+  "Assets": "Omaisuus",
+  "OutOfDate": "Vanhentunut",
+  "Subscribe": "Tilata",
+  "Switch": "Vaihtaa",
+  "Packages": "Paketit",
+  "AdvancedIncludeEnable": "Näytä sekä mukana olevat että käytössä olevat tilat modeille",
+  "PackageStatus": "Paketin tila",
+  "Author": "Tekijä"
 }
