@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "現在のプロファイル",
   "StartCities": "Cities: Skylinesを起動",
   "StopCities": "Cities: Skylinesを終了",
@@ -7,15 +8,8 @@
   "Dashboard": "ダッシュボード",
   "ModOutOfDate": "個のMODが古い",
   "ModOutOfDatePlural": "個のMODが古い",
-  "MultipleModsIncluded": "同じMODで複数のバージョンが含まれています。",
-  "ModIncluded": "個のMODが有効",
-  "ModIncludedPlural": "個のMODが有効",
   "SearchDlcs": "DLCを検索...",
   "SearchPackages": "パッケージを検索...",
-  "ModEnabled": "MODの有効化",
-  "ModIncludedAndEnabled": "MODを含めて有効化",
-  "ModEnabledPlural": "MODの有効化",
-  "ModIncludedAndEnabledPlural": "MODを含めて有効化",
   "ModIsLocal": "ローカルMOD",
   "ModIsRemoved": "Steamから削除済み",
   "ModIsUnknown": "MODの情報がSteamから取得できません。",
@@ -52,8 +46,6 @@
   "NoAssets": "カスタムアセットを無効化",
   "NoMods": "全てのMODを無効化",
   "AutoSave": "オートセーブ",
-  "AssetIncluded": "個のアセットが有効",
-  "AssetIncludedPlural": "個のアセットが有効",
   "TotalSize": "合計サイズ",
   "ReportSeverity": "レポートの深刻度",
   "AnyStatus": "全てのステータス",
@@ -138,7 +130,6 @@
   "DateUpdated": "更新した日付",
   "PackageIncluded": "個のパッケージが有効",
   "PackageIncludedPlural": "個のパッケージが有効",
-  "MultiplePackagesIncluded": "同じパッケージで複数のバージョンが含まれます",
   "CopyWorkshopLink": "パッケージのワークショップリンクをコピー",
   "FilterOutPackagesWithMods": "パッケージのページでMODを非表示",
   "FilterOutPackagesWithOneAsset": "パッケージのページから単体アセットのパッケージを非表示",
@@ -175,7 +166,6 @@
   "AllDlcs": "全てのDLC",
   "DLCs": "DLC & CCP",
   "DetectedIssues": "検出した問題点",
-  "DuplicateMods": "重複したMOD",
   "FixAllIssues": "全ての問題点を修正",
   "LaunchTooltip": "クリックしてCities: Skylinesの起動や停止 / もしくはアプリ内で {0} を押して起動",
   "LsmImport": "Loading Screen Modのレポート",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "プロファイルの色を変更",
   "Sorting_Color": "プロファイルの色",
   "CreateShortcutProfile": "デスクトップにショートカットを作成",
-  "ProfilesLoaded": "個のプロファイルをロード",
   "AskToLaunchGameForShortcut": "プロファイル経由でゲームを起動するショートカットを作成しますか?",
   "TextImportMissingInfo": "Steam IDを含むテキストファイルをロードして、簡単にサブスク操作や管理が可能",
   "ImportFromText": "テキストファイルをインポート",
@@ -412,9 +401,7 @@
   "Info": "情報",
   "SelectThisPackage": "パッケージを選択",
   "SelectPackage": "パッケージを選択",
-  "Profiles": "プロファイル",
   "ControlToSelectMultiplePackages": "Ctrl + クリックで複数のパッケージをまとめて選択出来ます。",
-  "Mods": "MOD",
   "Local": "ローカル",
   "Workshop": "ワークショップ",
   "CompatibilityReport": "互換性レポート",
@@ -424,12 +411,46 @@
   "Included": "含める",
   "Excluded": "除外",
   "Server": "サーバー",
-  "Assets": "アセット",
   "OutOfDate": "古いバージョン",
   "Subscribe": "サブスク",
   "Switch": "切り替え",
-  "Packages": "パッケージ",
   "AdvancedIncludeEnable": "MODのステータスで含めると有効化の両方を表示",
   "PackageStatus": "パッケージのステータス",
-  "Author": "作者"
+  "Author": "作者",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
