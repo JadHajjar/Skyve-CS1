@@ -192,20 +192,20 @@
   "CloseCitiesToSub": "パッケージのサブスク操作を行うには、Cities: Skylinesを終了する必要があります。",
   "ShowingFilteredItems": "合計 {1} 個のアイテムから {0} 個を表示中",
   "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
+    "One": "表示中: {0} 個のMOD",
+    "Plural": "表示中: {0} 個のMOD"
   },
   "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
+    "One": "表示中: {0} 個のアセット",
+    "Plural": "表示中: {0} 個のアセット"
   },
   "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
+    "One": "表示中: {0} 個のパッケージ",
+    "Plural": "表示中: {0} 個のパッケージ"
   },
   "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
+    "One": "表示中: {0} 個のプロファイル",
+    "Plural": "表示中: {0} 個のプロファイル"
   },
   "DropNewProfile": "インポートしたいプロファイルのjsonファイル/xmlファイルをD&D・クリックして選択",
   "ThemeUIScale": "テーマ & UIスケール",
@@ -296,13 +296,13 @@
   "LoadSaveGame_Tip": "Cities Skylinesを起動すると、セーブゲームをロードします。セーブファイルが未選択の場合は、最新のセーブで再開します。",
   "BETA": "β版",
   "ALPHA": "α版",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "テスト",
+  "TESTING": "テスト中",
   "STABLE": "安定版",
   "EXPERIMENTAL": "実験版",
   "DEPRECATED": "非推奨",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "廃止",
+  "ABANDONED": "放棄",
   "ActionUnreversible": "このアクションは元に戻せません！",
   "AlwaysOpenFiltersAndActions": "フィルタセクションをデフォルトで表示",
   "AlwaysOpenFiltersAndActions_Tip": "コンテンツタブに入るときは、常にフィルタセクションを展開します。",
@@ -357,12 +357,12 @@
   "Workshop Maps": "ワークショップのマップ",
   "AnyAuthor": "全ての作者",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "アイテム: {0} 個",
+    "Plural": "アイテム: {0} 個"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "作者を選択中: {0} 人",
+    "Plural": "作者を選択中: {0} 人"
   },
   "Use the System's Theme": "システムのテーマを使用",
   "Donate": "寄付",
@@ -413,7 +413,7 @@
   "SelectThisPackage": "パッケージを選択",
   "SelectPackage": "パッケージを選択",
   "Profiles": "プロファイル",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "ControlToSelectMultiplePackages": "Ctrl + クリックで複数のパッケージをまとめて選択出来ます。",
   "Mods": "MOD",
   "Local": "ローカル",
   "Workshop": "ワークショップ",
