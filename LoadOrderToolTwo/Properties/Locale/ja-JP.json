@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "互換性情報",
   "ProfileBubble": "現在のプロファイル",
   "StartCities": "Cities: Skylinesを起動",
   "StopCities": "Cities: Skylinesを終了",
@@ -417,25 +417,25 @@
   "AdvancedIncludeEnable": "MODのステータスで含めると有効化の両方を表示",
   "PackageStatus": "パッケージのステータス",
   "Author": "作者",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Include": "含める",
+  "Unsubscribe": "サブスク解除",
+  "Exclude": "除外",
+  "Snooze": "休止",
   "Mod": {
-    "One": "Mod",
-    "Plural": "Mods"
+    "One": "MOD",
+    "Plural": "MOD"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "アセット",
+    "Plural": "アセット"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "パッケージ",
+    "Plural": "パッケージ"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "プロファイル",
+    "Plural": "プロファイル"
   },
   "IncludedCount": {
     "One": "{0} {1} included",
