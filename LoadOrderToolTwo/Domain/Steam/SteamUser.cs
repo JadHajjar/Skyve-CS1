@@ -1,25 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using Extensions;
+
+using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.Utilities.Managers;
+using Newtonsoft.Json;
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace LoadOrderToolTwo.Domain.Steam;
-public class SteamUser
+public class SteamUser : ITimestamped
 {
 	public SteamUser(SteamUserEntry entry)
 	{
-		SteamId = entry.steamid;
+		SteamId = ulong.Parse(entry.steamid);
 		Name = entry.personaname;
 		ProfileUrl = entry.profileurl;
 		AvatarUrl = entry.avatarmedium;
+		Timestamp = DateTime.Now;
 	}
 
-	public SteamUser()
-	{
+#nullable disable
+	public SteamUser() { }
+#nullable enable
 
-	}
-
-	public string SteamId { get; set; }
+	public ulong SteamId { get; set; }
 	public string Name { get; set; }
 	public string ProfileUrl { get; set; }
 	public string AvatarUrl { get; set; }
+	public DateTime Timestamp { get; set; }
+
+	[JsonIgnore] public Bitmap? AvatarImage => ImageManager.GetImage(AvatarUrl, true).Result;
 
 	public override string ToString()
 	{
@@ -34,6 +45,6 @@ public class SteamUser
 
 	public override int GetHashCode()
 	{
-		return -80009682 + EqualityComparer<string>.Default.GetHashCode(SteamId);
+		return 2139390487 + SteamId.GetHashCode();
 	}
 }

@@ -30,7 +30,7 @@ public partial class PC_CompatibilityReport : PanelContent
 	protected override async Task<bool> LoadDataAsync()
 	{
 		userId = SteamUtil.GetLoggedInSteamId();
-		hasPackages = userId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == userId.ToString());
+		hasPackages = userId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == userId);
 		isManager = await CompatibilityApiUtil.IsCommunityManager(userId);
 
 		return true;
@@ -83,7 +83,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	}
 
-	private void Form_PackageSelected(IEnumerable<IPackage> packages)
+	private void Form_PackageSelected(IEnumerable<ulong> packages)
 	{
 		Form.PushPanel(null, new PC_CompatibilityManagement(packages));
 	}

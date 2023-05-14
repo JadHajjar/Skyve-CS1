@@ -79,7 +79,7 @@ internal static class ColossalOrderUtil
 
 			foreach (var mod in CentralManager.Mods)
 			{
-				CentralManager.InformationUpdate(mod);
+				CentralManager.OnInformationUpdated();
 			}
 		}
 	}

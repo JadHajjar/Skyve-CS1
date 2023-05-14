@@ -22,8 +22,6 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		TB_Search.Placeholder = "SearchGenericPackages";
 
-		var cachedSteamInfo = SteamUtil.GetCachedInfo() ?? new();
-
 		foreach (var package in items.GroupBy(x => x.SteamId))
 		{
 			if (package.Key != 0)
@@ -44,19 +42,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 				if (steamPackage is Profile.Asset profileAsset)
 				{
-					profileAsset.WorkshopInfo = steamPackage.Package?.WorkshopInfo;
-
-					if (profileAsset.WorkshopInfo == null)
-					{
-						if (cachedSteamInfo.ContainsKey(package.Key) && DateTime.UtcNow - cachedSteamInfo[package.Key].Timestamp < TimeSpan.FromDays(2))
-						{
-							profileAsset.WorkshopInfo = cachedSteamInfo[package.Key];
-						}
-						else
-						{
-							_workshopPackages[package.Key] = profileAsset;
-						}
-					}
+					profileAsset.WorkshopInfo = SteamUtil.GetItem(package.Key);
 				}
 			}
 			else
@@ -65,47 +51,18 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 			}
 		}
 
+		SteamUtil.WorkshopItemsLoaded += () =>
+		{
+			LC_Items.Invalidate();
+
+			new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
+		};
+
 		LC_Items.SetItems(_items);
 
 		RefreshCounts();
 
 		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
-	}
-
-	protected override async Task<bool> LoadDataAsync()
-	{
-		var steamIds = _workshopPackages.Keys.Distinct().ToArray();
-
-		var info = await SteamUtil.GetWorkshopInfoAsync(steamIds);
-
-		foreach (var item in info)
-		{
-			if (_workshopPackages.ContainsKey(item.Key))
-			{
-				_workshopPackages[item.Key].WorkshopInfo = item.Value;
-			}
-		}
-
-		RefreshAuthorAndTags();
-
-		LC_Items.Invalidate();
-
-		Parallelism.ForEach(LC_Items.Items.ToList(), async package =>
-		{
-			if (!string.IsNullOrWhiteSpace(package.IconUrl))
-			{
-				if (await ImageManager.Ensure(package.IconUrl))
-					LC_Items.Invalidate(package);
-			}
-
-			if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
-			{
-				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
-					LC_Items.Invalidate(package);
-			}
-		}, 4);
-
-		return true;
 	}
 
 	protected override IEnumerable<IPackage> GetItems()

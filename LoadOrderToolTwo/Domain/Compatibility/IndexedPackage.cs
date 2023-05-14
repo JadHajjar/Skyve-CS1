@@ -40,11 +40,14 @@ public class IndexedPackage
 			}
 		}
 
-		foreach (var item in packages.Values)
+		if (Package.GroupId != 0)
 		{
-			if (item.Package.GroupId == Package.GroupId)
+			foreach (var item in packages.Values)
 			{
-				Group[item.Package.SteamId] = item;
+				if (item.Package.GroupId == Package.GroupId)
+				{
+					Group[item.Package.SteamId] = item;
+				}
 			}
 		}
 	}

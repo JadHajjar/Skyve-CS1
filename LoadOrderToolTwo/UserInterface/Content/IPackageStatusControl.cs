@@ -1,7 +1,6 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
-using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.Dropdowns;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
@@ -13,8 +12,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LoadOrderToolTwo.UserInterface.Content;
 public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
@@ -53,7 +50,6 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			DD_Action.SelectedItem = item.Action;
 			TB_Note.Text = item.Note;
 			TB_Note.Visible = I_Note.Selected = !string.IsNullOrWhiteSpace(item.Note);
-			typeDropDown.SelectedItem = item.Type;
 
 			foreach (var package in item.Packages ?? new ulong[0])
 			{
@@ -94,7 +90,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		Type = typeDropDown.SelectedItem,
 		Action = DD_Action.SelectedItem,
 		Note = TB_Note.Text,
-		Packages = P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Package.SteamId).ToArray(),
+		Packages = P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId).ToArray(),
 	};
 
 	protected override void DesignChanged(FormDesign design)
@@ -107,12 +103,12 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	protected override void UIChanged()
 	{
 		MinimumSize = UI.Scale(new Size(250, 0), UI.UIScale);
-		P_Main.Padding = slickSpacer1.Margin =L_OutputTitle.Margin= UI.Scale(new Padding(5), UI.FontScale);
+		P_Main.Padding = slickSpacer1.Margin = L_OutputTitle.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		CloseIcon.Size = UI.Scale(new Size(16, 16), UI.FontScale);
 		TB_Note.MinimumSize = new Size(0, (int)(64 * UI.FontScale));
 		I_Paste.Size = I_Copy.Size = I_AddPackage.Size = I_Note.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		I_Paste.Padding = I_Copy.Padding = I_AddPackage.Padding = I_Note.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		L_OutputTitle.Font = UI.Font(7.5F, FontStyle.Bold);	
+		L_OutputTitle.Font = UI.Font(7.5F, FontStyle.Bold);
 	}
 
 	private void I_Note_Click(object sender, EventArgs e)
@@ -129,12 +125,14 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		Program.MainForm.PushPanel(null, form);
 	}
 
-	private void Form_PackageSelected(IEnumerable<IPackage> packages)
+	private void Form_PackageSelected(IEnumerable<ulong> packages)
 	{
 		foreach (var item in packages)
 		{
-			if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Package.SteamId == item.SteamId))
+			if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == item))
+			{
 				P_Packages.Controls.Add(new MiniPackageControl(item) { Dock = DockStyle.Top });
+			}
 		}
 	}
 
@@ -147,7 +145,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	{
 		if (P_Packages.Controls.Count > 0)
 		{
-			Clipboard.SetText(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Package.SteamId).ListStrings(","));
+			Clipboard.SetText(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId).ListStrings(","));
 		}
 	}
 
@@ -164,8 +162,10 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		{
 			if (ulong.TryParse(text[i], out var id))
 			{
-				if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Package.SteamId == id))
+				if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == id))
+				{
 					P_Packages.Controls.Add(new MiniPackageControl(id) { Dock = DockStyle.Top });
+				}
 			}
 		}
 	}
@@ -191,13 +191,13 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		if (typeDropDown.SelectedItem is InteractionType.Successor)
 		{
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{InteractionType.SucceededBy}");
-			message = string.Format($"{translation.One}\r\n\r\n{actionText}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package.CleanName(), (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName()).Trim();
+			message = string.Format($"{translation.One}\r\n\r\n{actionText}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName(), (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName()).Trim();
 		}
 		else
 		{
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{typeDropDown.SelectedItem}");
 			var text = P_Packages.Controls.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
-			message = string.Format($"{text}\r\n\r\n{actionText}", (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName(), (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package.CleanName()).Trim();
+			message = string.Format($"{text}\r\n\r\n{actionText}", (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName(), (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName()).Trim();
 		}
 
 		e.Graphics.DrawString(message, L_Output.Font, new SolidBrush(L_Output.ForeColor), L_Output.ClientRectangle);

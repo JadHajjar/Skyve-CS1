@@ -23,7 +23,7 @@ namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_CompatibilityManagement : PanelContent
 {
 	private readonly List<ulong> _pages = new List<ulong>();
-	private readonly Dictionary<ulong, IPackage> _packages = new();
+	private readonly Dictionary<ulong, IPackage?> _packages = new();
 	private int currentPage;
 	private IPackage? currentPackage;
 	private PostPackage? postPackage;
@@ -50,26 +50,26 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		foreach (var package in CentralManager.Packages)
 		{
-			if (package.Author?.SteamId == userId.ToString())
+			if (package.Author?.SteamId == userId)
 			{
 				_packages[package.SteamId] = package;
 			}
 		}
 
-		_pages.AddRange(_packages.OrderByDescending(x => x.Value.ServerTime).Select(x => x.Key));
+		_pages.AddRange(_packages.OrderByDescending(x => x.Value?.ServerTime).Select(x => x.Key));
 		CB_BlackListId.Visible = CB_BlackListName.Visible = false;
 
 		SetPackage(0);
 	}
 
-	public PC_CompatibilityManagement(IEnumerable<IPackage> packages) : this(false)
+	public PC_CompatibilityManagement(IEnumerable<ulong> packages) : this(false)
 	{
 		foreach (var package in packages)
 		{
-			_packages[package.SteamId] = package;
+			_packages[package] = SteamUtil.GetItem(package);
 		}
 
-		_pages.AddRange(_packages.OrderByDescending(x => x.Value.ServerTime).Select(x => x.Key));
+		_pages.AddRange(_packages.OrderByDescending(x => x.Value?.ServerTime).Select(x => x.Key));
 
 		SetPackage(0);
 	}
@@ -127,7 +127,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			}
 		}
 
-		_pages.AddRange(_packages.OrderBy(x => x.Value.ServerTime).Select(x => x.Key));
+		_pages.AddRange(_packages.OrderBy(x => x.Value?.ServerTime).Select(x => x.Key));
 
 		return true;
 	}
@@ -162,7 +162,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		try
 		{
-			var catalogue = await CompatibilityApiUtil.Catalogue(currentPackage.SteamId);
+			currentPackage ??= await SteamUtil.GetItemAsync(_pages[page]);
+
+			var catalogue = await CompatibilityApiUtil.Catalogue(currentPackage!.SteamId);
 
 			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<Package, PostPackage>();
 
@@ -317,7 +319,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		postPackage.FileName = Path.GetFileName(currentPackage.Package?.Mod?.FileName ?? string.Empty);
 		postPackage.Name = currentPackage.Name;
 		postPackage.ReviewDate = DateTime.UtcNow;
-		postPackage.AuthorId = ulong.TryParse(currentPackage.Author?.SteamId, out var id) ? id : 0;
+		postPackage.AuthorId = currentPackage.Author?.SteamId ?? 0;
 		postPackage.Author = new Author
 		{
 			SteamId = postPackage.AuthorId,

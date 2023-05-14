@@ -559,6 +559,16 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				e.Graphics.DrawRoundImage(authorImg, avatarRect);
 			}
+
+			if (CompatibilityManager.CompatibilityData.Authors.TryGet(Package.Author.SteamId)?.Verified ?? false)
+			{
+				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
+
+				e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+
+				using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+				e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
+			}
 		}
 		else
 		{

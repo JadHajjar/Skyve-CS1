@@ -19,7 +19,7 @@ internal class PC_Packages : PC_ContentList<Package>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Packages} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Package.Plural} - {ProfileManager.CurrentProfile.Name}";
 	}
 
 	protected override IEnumerable<Package> GetItems()

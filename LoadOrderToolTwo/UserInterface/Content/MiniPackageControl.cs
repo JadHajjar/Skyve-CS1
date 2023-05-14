@@ -7,6 +7,7 @@ using LoadOrderToolTwo.Utilities;
 
 using SlickControls;
 
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -14,29 +15,18 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Content;
 internal class MiniPackageControl : SlickControl
 {
-	public IPackage Package { get; private set; }
-
-	public MiniPackageControl(IPackage package)
-	{
-		Package = package;
-		Cursor = Cursors.Hand;
-	}
+	public IPackage? Package => SteamUtil.GetItem(SteamId);
+	public ulong SteamId { get; }
 
 	public MiniPackageControl(ulong steamId)
 	{
-		Package = new Profile.Asset { SteamId = steamId };
 		Cursor = Cursors.Hand;
+		SteamId = steamId;
 
-		new BackgroundAction(async () =>
+		if (Package is null)
 		{
-			var data = await SteamUtil.GetWorkshopInfoAsync(new[] { steamId });
-
-			if (data.ContainsKey(steamId))
-			{
-				Package = data[steamId];
-				Invalidate();
-			}
-		}).Run();
+			SteamUtil.WorkshopItemsLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
+		}
 	}
 
 	protected override void UIChanged()
@@ -50,13 +40,16 @@ internal class MiniPackageControl : SlickControl
 	{
 		base.OnMouseClick(e);
 
+		if (Package is null)
+			return;
+
 		switch (e.Button)
 		{
 			case MouseButtons.Left:
 			case MouseButtons.None:
 				var imageRect = ClientRectangle.Pad(Padding);
 				imageRect = imageRect.Align(new Size(imageRect.Height, imageRect.Height), ContentAlignment.MiddleRight);
-				
+
 				if (imageRect.Contains(e.Location))
 				{
 					Dispose();
@@ -90,7 +83,7 @@ internal class MiniPackageControl : SlickControl
 
 		var imageRect = ClientRectangle.Pad(Padding);
 		imageRect.Width = imageRect.Height;
-		var image = Package.IconImage;
+		var image = Package?.IconImage;
 
 		if (image is not null)
 		{
@@ -103,14 +96,41 @@ internal class MiniPackageControl : SlickControl
 			e.Graphics.DrawRoundedImage(generic, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 
-		e.Graphics.DrawString(Package.Name?.RemoveVersionText(out _) ?? Locale.UnknownPackage, Font, new SolidBrush(ForeColor), ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, imageRect.Right + Padding.Left, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		List<string>? tags = null;
+
+		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, HoverState.HasFlag(HoverState.Hovered) ? (imageRect.Right + Padding.Left) : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+
+		e.Graphics.DrawString(Package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+		var tagRect = new Rectangle(textRect.Right, textRect.Y, 0, textRect.Height);
+
+		if (tags is not null)
+		{
+			foreach (var item in tags)
+			{
+				if (item.ToLower() == "stable")
+				{ continue; }
+
+				var color = item.ToLower() switch
+				{
+					"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
+					"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
+					"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
+					_ => (Color?)null
+				};
+
+				tagRect.X -= Padding.Left + e.DrawLabel(color is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleRight, smaller: true).Width;
+			}
+		}
 
 		if (HoverState.HasFlag(HoverState.Hovered))
 		{
 			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
 
-			if(imageRect.Contains(PointToClient(Cursor.Position)))
-			e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 50 : 20, FormDesign.Design.RedColor.MergeColor(ForeColor, 65))), imageRect.Pad(1), (int)(4 * UI.FontScale));
+			if (imageRect.Contains(PointToClient(Cursor.Position)))
+			{
+				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(HoverState.HasFlag(HoverState.Pressed) ? 50 : 20, FormDesign.Design.RedColor.MergeColor(ForeColor, 65))), imageRect.Pad(1), (int)(4 * UI.FontScale));
+			}
 
 			using var img = IconManager.GetIcon("I_Disposable");
 
@@ -119,7 +139,7 @@ internal class MiniPackageControl : SlickControl
 
 		if (Dock == DockStyle.None)
 		{
-			Width = 2 * (imageRect.Width + Padding.Horizontal) + (int)e.Graphics.Measure(Package.Name?.RemoveVersionText(out _) ?? Locale.UnknownPackage, Font).Width + 1;
+			Width = (2 * (imageRect.Width + Padding.Horizontal)) + textRect.Right - tagRect.X + (int)e.Graphics.Measure(Package?.Name?.RemoveVersionText(out _) ?? Locale.UnknownPackage, Font).Width + 1;
 		}
 	}
 }

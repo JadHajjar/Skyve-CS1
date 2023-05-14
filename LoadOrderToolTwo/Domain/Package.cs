@@ -38,7 +38,7 @@ public class Package : IPackage
 	public bool Workshop { get; }
 	public string Folder { get; }
 	public bool IsPseudoMod { get; set; }
-	public SteamWorkshopItem? WorkshopInfo { get; set; }
+	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId);
 	public long FileSize => ContentUtil.GetTotalSize(Folder);
 	public DateTime LocalTime => ContentUtil.GetLocalUpdatedTime(Folder);
 	public DownloadStatus Status { get; set; }
@@ -48,7 +48,7 @@ public class Package : IPackage
 	Package? IPackage.Package => this;
 	public string? Name => WorkshopInfo?.Name;
 	public bool IsMod => Mod is not null || (WorkshopInfo?.IsMod ?? false);
-	public IEnumerable<TagItem> Tags => WorkshopTags?.Select(x => new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<TagItem>();
+	public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? Enumerable.Empty<TagItem>();
 	public Bitmap? IconImage => WorkshopInfo?.IconImage;
 	public Bitmap? AuthorIconImage => WorkshopInfo?.AuthorIconImage;
 	public string? IconUrl => WorkshopInfo?.IconUrl;

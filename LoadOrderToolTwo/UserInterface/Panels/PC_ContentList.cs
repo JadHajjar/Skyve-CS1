@@ -253,12 +253,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
 		LC_Items.BackColor = design.BackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
-		L_Duplicates.ForeColor = design.RedColor;
 	}
 
 	protected override void LocaleChanged()
 	{
-		L_Duplicates.Text = Locale.MultipleModsIncluded;
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.ReportSeverity;
 		DD_Tags.Text = Locale.Tags;
@@ -317,7 +315,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		base.UIChanged();
 
 		P_FiltersContainer.Padding = TB_Search.Margin = I_Refresh.Padding = B_Filters.Padding
-			= L_Duplicates.Margin = L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding
+			= L_Counts.Margin = L_FilterCount.Margin = I_SortOrder.Padding
 			= B_Filters.Margin = I_SortOrder.Margin = I_Refresh.Margin = DD_Sorting.Margin = UI.Scale(new Padding(5), UI.FontScale);
 
 		B_Filters.Size = B_Filters.GetAutoSize(true);
@@ -327,7 +325,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		L_Duplicates.Font = L_Counts.Font = L_FilterCount.Font = UI.Font(8.25F, FontStyle.Bold);
+		L_Counts.Font = L_FilterCount.Font = UI.Font(8.25F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
@@ -638,8 +636,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			L_FilterCount.Visible = !string.IsNullOrEmpty(filteredText);
 			L_FilterCount.Text = filteredText;
 		}
-
-		L_Duplicates.Visible = typeof(T) != typeof(Asset) && ModsUtil.GetDuplicateMods().Any();
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)

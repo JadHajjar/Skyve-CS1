@@ -17,7 +17,7 @@ internal class PC_Mods : PC_ContentList<Mod>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mods} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Mod.Plural} - {ProfileManager.CurrentProfile.Name}";
 	}
 
 	protected override IEnumerable<Mod> GetItems()

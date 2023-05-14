@@ -24,10 +24,6 @@ public partial class PC_PackagePage : PanelContent
 
 		Package = package;
 
-		Text = Locale.Back;
-		T_Info.Text = Locale.ContentAndInfo;
-		T_CR.Text = Locale.CompatibilityReport;
-		T_Profiles.Text = Locale.OtherProfiles;
 		PB_Icon.Package = package;
 		PB_Icon.LoadImage(package.IconUrl, ImageManager.GetImage);
 
@@ -127,7 +123,7 @@ public partial class PC_PackagePage : PanelContent
 			, new (Locale.CopyAuthorName, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.Name))
 			, new (Locale.CopyAuthorLink, null, item.Workshop, tab: 1, action: () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"))
 			, new (Locale.CopyAuthorId, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()))
-			, new (Locale.CopyAuthorSteamId, null, item.Workshop, tab: 1,  action: () => Clipboard.SetText(item.Author?.SteamId))
+			, new (Locale.CopyAuthorSteamId, null, item.Workshop, tab: 1,  action: () => Clipboard.SetText(item.Author?.SteamId.ToString()))
 		};
 	}
 

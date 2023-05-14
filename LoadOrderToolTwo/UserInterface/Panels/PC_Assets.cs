@@ -17,7 +17,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Assets} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Asset.Plural} - {ProfileManager.CurrentProfile.Name}";
 	}
 
 	protected override IEnumerable<Asset> GetItems()

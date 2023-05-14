@@ -12,13 +12,12 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace LoadOrderToolTwo.Utilities.Managers;
+
 public static class CompatibilityManager
 {
 	private const string DATA_CACHE_FILE = "CompatibilityDataCache.json";
-	private static readonly Dictionary<IPackage, CompatibilityInfo> _cache = new();
+	private static readonly Dictionary<IPackage, CompatibilityInfo> _cache = new(new Domain.IPackageEqualityComparer());
 
 	public static IndexedCompatibilityData CompatibilityData { get; private set; }
 
@@ -28,10 +27,10 @@ public static class CompatibilityManager
 
 		LoadDataCached();
 
-		ConnectionHandler.WhenConnected(DownloadData);
+		ConnectionHandler.WhenConnected(() => new BackgroundAction(DownloadData).Run());
 
 		CentralManager.ContentLoaded += () => new BackgroundAction(CacheReport).Run();
-		CentralManager.PackageInformationUpdated += () => new BackgroundAction(CacheReport).Run();
+		CentralManager.PackageInclusionUpdated += () => new BackgroundAction(CacheReport).Run();
 	}
 
 	internal static void CacheReport()
@@ -43,8 +42,10 @@ public static class CompatibilityManager
 	{
 		foreach (var package in content)
 		{
-			GetCompatibilityReport(package);
+			GetCompatibilityInfo(package, true);
 		}
+
+		CentralManager.OnInformationUpdated();
 	}
 
 	private static void LoadDataCached()
@@ -103,27 +104,41 @@ public static class CompatibilityManager
 		return CentralManager.Mods.FirstOrDefault(x => Path.GetFileName(x.FileName) == package.FileName)?.Package;
 	}
 
-	internal static CompatibilityInfo GetCompatibilityInfo(this IPackage package)
+	internal static CompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
 	{
-		if (_cache.TryGetValue(package, out var info))
+		if (!noCache && _cache.TryGetValue(package, out var info))
 		{
 			return info;
 		}
 
-		return _cache[package] = GetCompatibilityReport(package);
+		return _cache[package] = GenerateCompatibilityInfo(package);
 	}
 
-	private static CompatibilityInfo GetCompatibilityReport(IPackage package)
+	private static CompatibilityInfo GenerateCompatibilityInfo(IPackage package)
 	{
 		var packageData = GetPackageData(package);
 		var info = new CompatibilityInfo(package, packageData);
+
+		if (package.Package?.Mod is not null)
+		{
+			var modName = Path.GetFileName(package.Package.Mod.FileName);
+			var duplicate = CentralManager.Mods.AllWhere(x => x.IsIncluded && modName == Path.GetFileName(x.FileName));
+
+			if (duplicate.Count > 1)
+			{
+				info.Add(ReportType.Compatibility
+					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
+					, LocaleCR.Get($"Interaction_{InteractionType.Identical}")
+					, duplicate.Select(x => new PseudoPackage(x)).ToArray());
+			}
+		}
 
 		if (packageData is null)
 		{
 			return info;
 		}
 
-		info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, packageData.Package.Note), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new ulong[0]);
+		info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, packageData.Package.Note), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
 
 		foreach (var status in packageData.Statuses)
 		{
@@ -144,14 +159,15 @@ public static class CompatibilityManager
 		if (packageData.Package.RequiredDLCs?.Any() ?? false)
 		{
 			var missing = packageData.Package.RequiredDLCs.Where(x => !SteamUtil.IsDlcInstalledLocally(x));
-			
+
 			if (missing.Any())
 			{
 				HandleStatus(info, StatusType.MissingDlc, new IndexedPackageStatus(new PackageStatus
 				{
 					Type = StatusType.MissingDlc,
 					Action = StatusAction.NoAction,
-				}, missing.ToDictionary(x => (ulong)x, x => packageData)));
+					Packages = missing.Select(x => (ulong)x).ToArray()
+				}, new()));
 			}
 		}
 
@@ -176,7 +192,9 @@ public static class CompatibilityManager
 
 		if (package.Package?.Mod is not null)
 		{
-			return CompatibilityData.Packages.Values.FirstOrDefault(x => x.Package.FileName == Path.GetFileName(package.Package.Mod.FileName));
+			return CompatibilityData.Packages.Values
+				.AllWhere(x => x.Package.FileName == Path.GetFileName(package.Package.Mod.FileName))
+				.FirstOrAny(x => !x.Statuses.ContainsKey(StatusType.TestVersion));
 		}
 
 		return null;
@@ -202,7 +220,7 @@ public static class CompatibilityManager
 		var action = LocaleCR.Get($"Action_{status.Status.Action}");
 		var text = (status.Status.Packages?.Length ?? 0) switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
 		var actionText = (status.Status.Packages?.Length ?? 0) switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
-		var message = string.Format($"{text}\r\n\r\n{actionText}", info.Package.CleanName(), status.Status.Packages?.FirstOrDefault().Value?.Package.Name?.RemoveVersionText(out _)).Trim();
+		var message = string.Format($"{text}\r\n\r\n{actionText}", info.Package.CleanName(), SteamUtil.GetItem(status.Status.Packages?.FirstOrDefault() ?? 0)?.CleanName() ?? string.Empty).Trim();
 
 		info.Add(type, status.Status, message, status.Status.Packages ?? new ulong[0]);
 	}
@@ -218,15 +236,17 @@ public static class CompatibilityManager
 
 		if (key is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
-			packages.RemoveAll(x => GetPackage(x) is null);
+			packages.RemoveAll(x => !(GetPackage(x)?.IsIncluded ?? false));
 		}
-		else if (key is InteractionType.RequiredPackages)
+		else if (key is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
 		{
-			packages.RemoveAll(x => GetPackage(x) is not null);
+			packages.RemoveAll(x => GetPackage(x)?.IsIncluded ?? false);
 		}
 
 		if (packages.Count == 0)
+		{
 			return;
+		}
 
 		var type = key switch
 		{
@@ -234,14 +254,20 @@ public static class CompatibilityManager
 			InteractionType.Alternative => ReportType.Alternatives,
 			InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith => ReportType.Compatibility,
 			InteractionType.RequiredPackages => ReportType.RequiredPackages,
-			_ => ReportType.Note
+			InteractionType.OptionalPackages => ReportType.OptionalPackages,
+			_ => ReportType.Compatibility
 		};
 
 		var translation = LocaleCR.Get($"Interaction_{key}");
 		var action = LocaleCR.Get($"Action_{interaction.Interaction.Action}");
 		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
 		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
-		var message = string.Format($"{text}\r\n\r\n{actionText}", info.Package.CleanName(), packages.FirstOrDefault().Value?.Package.Name?.RemoveVersionText(out _)).Trim();
+		var message = string.Format($"{text}\r\n\r\n{actionText}", info.Package.CleanName(), SteamUtil.GetItem(packages.FirstOrDefault())?.CleanName() ?? string.Empty).Trim();
+
+		if (interaction.Interaction.Action is StatusAction.SelectOne)
+		{
+			packages.Insert(0, info.Package.SteamId);
+		}
 
 		info.Add(type, interaction.Interaction, message, packages.ToArray());
 	}
@@ -252,7 +278,27 @@ public static class CompatibilityManager
 
 		if (package is not null)
 		{
-			return FindPackage(package.Package);
+			var ipackage = FindPackage(package.Package);
+
+			if (ipackage is not null)
+			{
+				return ipackage;
+			}
+
+			foreach (var item in package.Group)
+			{
+				if (item.Key != steamId)
+				{
+					ipackage = FindPackage(item.Value.Package);
+
+					if (ipackage is not null)
+					{
+						return ipackage;
+					}
+				}
+			}
+
+			return null;
 		}
 
 		return CentralManager.Packages.FirstOrDefault(x => x.SteamId == steamId);
@@ -273,7 +319,7 @@ public static class CompatibilityManager
 
 		if (package.RequiredPackages?.Any() ?? false)
 		{
-			info.Interactions.Add(new PackageInteraction { Type = InteractionType.RequiredPackages, Action = StatusAction.SubscribeToPackages, Packages = package.RequiredPackages });
+			info.Interactions.Add(new PackageInteraction { Type = package.IsMod ? InteractionType.RequiredPackages : InteractionType.OptionalPackages, Action = StatusAction.SubscribeToPackages, Packages = package.RequiredPackages });
 		}
 
 		package.ToString().RemoveVersionText(out var titleTags);
@@ -365,6 +411,7 @@ public static class CompatibilityManager
 			NotificationType.AttentionRequired => "I_MajorIssues",
 			NotificationType.Switch => "I_Switch",
 			NotificationType.Unsubscribe => "I_Broken",
+			NotificationType.Exclude => "I_Disposable",
 			NotificationType.None or _ => status ? "I_Ok" : "I_Info",
 		};
 	}
@@ -381,6 +428,7 @@ public static class CompatibilityManager
 			NotificationType.Warning or
 			NotificationType.AttentionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
 
+			NotificationType.Exclude or
 			NotificationType.Switch or
 			NotificationType.Unsubscribe => FormDesign.Design.RedColor,
 

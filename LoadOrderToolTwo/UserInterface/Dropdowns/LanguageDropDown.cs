@@ -55,6 +55,9 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 
 		using var icon = (Bitmap)Properties.Resources.ResourceManager.GetObject("Lang_" + item.IetfLanguageTag.ToUpper(), Properties.Resources.Culture);
 
+		if (item.IetfLanguageTag == "no-NO")
+			item = new("nn-NO");
+
 		if (icon != null)
 		{
 			var iconSize = Math.Min(48, (int)(16 * UI.UIScale));

@@ -20,18 +20,16 @@ internal class UserBubble : StatusBubbleBase
 		Visible = false;
 		Enabled = false;
 
-		new BackgroundAction(async () =>
+		new BackgroundAction(() =>
 		{
 			var steamId = SteamUtil.GetLoggedInSteamId();
 
 			if (steamId != 0)
 			{
-				var dic = await SteamUtil.GetSteamUsers(new List<string> { steamId.ToString() });
+				User = SteamUtil.GetUser(steamId);
 
-				if (dic?.ContainsKey(steamId.ToString()) ?? false)
+				if (User is not null)
 				{
-					User = new( dic[steamId.ToString()]);
-					await ImageManager.Ensure(User.AvatarUrl);
 					this.TryInvoke(Show);
 				}
 			}

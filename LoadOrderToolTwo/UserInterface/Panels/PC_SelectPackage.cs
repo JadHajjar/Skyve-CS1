@@ -27,7 +27,7 @@ public partial class PC_SelectPackage : PanelContent
 	private readonly List<string> searchTermsOr = new();
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
-	public event Action<IEnumerable<IPackage>>? PackageSelected;
+	public event Action<IEnumerable<ulong>>? PackageSelected;
 
 	public PC_SelectPackage()
 	{
@@ -67,9 +67,9 @@ public partial class PC_SelectPackage : PanelContent
 		if (ModifierKeys.HasFlag(Keys.Control))
 		{
 			B_Continue.Visible = true;
-			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Package.SteamId == obj.SteamId))
+			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == obj.SteamId))
 			{
-				FLP_Packages.Controls.Add(new MiniPackageControl(obj));
+				FLP_Packages.Controls.Add(new MiniPackageControl(obj.SteamId));
 			}
 
 			return;
@@ -77,18 +77,18 @@ public partial class PC_SelectPackage : PanelContent
 
 		if (FLP_Packages.Controls.Count > 0)
 		{
-			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Package.SteamId == obj.SteamId))
+			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == obj.SteamId))
 			{
-				FLP_Packages.Controls.Add(new MiniPackageControl(obj));
+				FLP_Packages.Controls.Add(new MiniPackageControl(obj.SteamId));
 			}
 
 			Form.PushBack();
-			PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Package));
+			PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId));
 			return;
 		}
 
 		Form.PushBack();
-		PackageSelected?.Invoke(new[] { obj });
+		PackageSelected?.Invoke(new[] { obj.SteamId });
 	}
 
 	private bool DoNotDraw(SteamWorkshopItem item)
@@ -204,12 +204,28 @@ public partial class PC_SelectPackage : PanelContent
 
 	private async void DelayedSearch(TicketBooth.Ticket ticket)
 	{
-		var items = TB_Search.Text.Trim().Length > 7 && ulong.TryParse(TB_Search.Text.Trim(), out var steamId)
-			? await SteamUtil.GetWorkshopInfoAsync(new[] { steamId })
-			: await SteamUtil.QueryFilesAsync(SteamQueryOrder.RankedByTrend,
+		Dictionary<ulong, SteamWorkshopItem> items;
+
+		if (TB_Search.Text.Trim().Length > 7 && ulong.TryParse(TB_Search.Text.Trim(), out var steamId))
+		{
+			var item = await SteamUtil.GetItemAsync(steamId);
+
+			if (item is not null)
+			{
+				items = new() { [steamId] = item };
+			}
+			else
+			{
+				items = new();
+			}
+		}
+		else
+		{
+			items = await SteamUtil.QueryFilesAsync(SteamQueryOrder.RankedByTrend,
 				TB_Search.Text,
 				OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option1 ? new[] { "Mod" } : null,
 			 	OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null);
+		}
 
 		if (!_ticketBooth.IsLast(ticket))
 		{
@@ -253,6 +269,6 @@ public partial class PC_SelectPackage : PanelContent
 	private void B_Continue_Click(object sender, EventArgs e)
 	{
 		Form.PushBack();
-		PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Package));
+		PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId));
 	}
 }

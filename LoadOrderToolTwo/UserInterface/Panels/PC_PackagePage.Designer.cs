@@ -41,8 +41,8 @@ partial class PC_PackagePage
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.P_Back = new System.Windows.Forms.Panel();
 			this.PB_Icon = new LoadOrderToolTwo.UserInterface.Content.PackageIcon();
+			this.P_Back = new System.Windows.Forms.Panel();
 			this.P_Info = new LoadOrderToolTwo.UserInterface.Content.PackageDescriptionControl();
 			this.P_Content.SuspendLayout();
 			this.TLP_Top.SuspendLayout();
@@ -88,7 +88,7 @@ partial class PC_PackagePage
 			this.T_Info.Size = new System.Drawing.Size(261, 25);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
-			this.T_Info.Text = "tab1";
+			this.T_Info.Text = "ContentAndInfo";
 			// 
 			// T_CR
 			// 
@@ -104,7 +104,7 @@ partial class PC_PackagePage
 			this.T_CR.Size = new System.Drawing.Size(261, 25);
 			this.T_CR.TabIndex = 0;
 			this.T_CR.TabStop = false;
-			this.T_CR.Text = "tab2";
+			this.T_CR.Text = "CompatibilityInfo";
 			// 
 			// T_Profiles
 			// 
@@ -120,7 +120,7 @@ partial class PC_PackagePage
 			this.T_Profiles.Size = new System.Drawing.Size(261, 25);
 			this.T_Profiles.TabIndex = 0;
 			this.T_Profiles.TabStop = false;
-			this.T_Profiles.Text = "tab3";
+			this.T_Profiles.Text = "OtherProfiles";
 			// 
 			// TLP_Profiles
 			// 
@@ -157,15 +157,6 @@ partial class PC_PackagePage
 			this.TLP_Top.Size = new System.Drawing.Size(783, 100);
 			this.TLP_Top.TabIndex = 0;
 			// 
-			// P_Back
-			// 
-			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Back.Location = new System.Drawing.Point(0, 50);
-			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
-			this.P_Back.Name = "P_Back";
-			this.P_Back.Size = new System.Drawing.Size(32, 50);
-			this.P_Back.TabIndex = 2;
-			// 
 			// PB_Icon
 			// 
 			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
@@ -176,6 +167,15 @@ partial class PC_PackagePage
 			this.PB_Icon.Size = new System.Drawing.Size(100, 100);
 			this.PB_Icon.TabIndex = 0;
 			this.PB_Icon.TabStop = false;
+			// 
+			// P_Back
+			// 
+			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.P_Back.Location = new System.Drawing.Point(0, 50);
+			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
+			this.P_Back.Name = "P_Back";
+			this.P_Back.Size = new System.Drawing.Size(32, 50);
+			this.P_Back.TabIndex = 2;
 			// 
 			// P_Info
 			// 

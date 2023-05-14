@@ -1,4 +1,6 @@
-﻿using LoadOrderToolTwo.Domain.Interfaces;
+﻿using Extensions;
+
+using LoadOrderToolTwo.Domain.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,17 @@ public class CompatibilityInfo
 	}
 
 	public void Add(ReportType type, IGenericPackageStatus status, string message, ulong[] packages)
+	{
+		ReportItems.Add(new ReportItem
+		{
+			Type = type,
+			Status = status,
+			Message = message,
+			Packages = packages.Select(x => new PseudoPackage(x)).ToArray()
+		});
+	}
+
+	public void Add(ReportType type, IGenericPackageStatus status, string message, PseudoPackage[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{

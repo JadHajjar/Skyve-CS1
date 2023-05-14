@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
@@ -15,6 +14,9 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
 internal class PackageCompatibilityReportControl : TableLayoutPanel
 {
+	private readonly TableLayoutPanel[] _panels;
+	private int controlCount;
+
 	public PackageCompatibilityReportControl(IPackage package)
 	{
 		Package = package;
@@ -24,6 +26,22 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
 		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
 		ColumnCount = 3;
+
+		_panels = new TableLayoutPanel[ColumnCount];
+		for (var i = 0; i < ColumnCount; i++)
+		{
+			_panels[i] = new()
+			{
+				Dock = DockStyle.Top,
+				AutoSize = true,
+				AutoSizeMode = AutoSizeMode.GrowAndShrink
+			};
+
+			_panels[i].ColumnStyles.Add(new ColumnStyle(SizeType.Percent));
+			_panels[i].ColumnCount = 1;
+
+			Controls.Add(_panels[i], i, 0);
+		}
 
 		CentralManager.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
@@ -58,21 +76,34 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 	internal void Reset()
 	{
-		Report = Package.GetCompatibilityInfo();
-
-		RowStyles.Clear();
-		RowCount = 0;
-		Controls.Clear(true);
-
-		if (Report == null)
+		try
 		{
-			GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Note, new Domain.Compatibility.ReportItem { Type = ReportType.Note }));
-			return;
+			this.SuspendDrawing();
+
+			Report = Package.GetCompatibilityInfo(true);
+
+			for (var i = 0; i < _panels.Length; i++)
+			{
+				_panels[i].Controls.Clear(true);
+				_panels[i].RowStyles.Clear();
+			}
+
+			controlCount = 0;
+
+			if (Report == null)
+			{
+				GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Stability, new Domain.Compatibility.ReportItem { Type = ReportType.Stability }));
+				return;
+			}
+
+			foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key))
+			{
+				GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), item.Select(x => new CompatibilityMessageControl(this, item.Key, x)).ToArray());
+			}
 		}
-
-		foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key))
+		finally
 		{
-			GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), item.Select(x => new CompatibilityMessageControl(this, item.Key, x)).ToArray());
+			this.ResumeDrawing();
 		}
 	}
 
@@ -87,13 +118,11 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		{
 			ReportType.Stability => "I_Stability",
 			ReportType.DlcMissing or ReportType.RequiredPackages => "I_MissingMod",
-			//ReportType.UnneededDependency => "I_Disposable",
-			//ReportType.WorksWhenDisabled => "I_Malicious",
+			ReportType.Ambiguous => "I_Malicious",
 			ReportType.Successors => "I_Upgrade",
 			ReportType.Alternatives => "I_Alternatives",
 			ReportType.Status => "I_Statuses",
-			ReportType.Note => "I_Note",
-			//ReportType.Recommendations => "I_Recommendations",
+			ReportType.OptionalPackages => "I_Recommendations",
 			ReportType.Compatibility => "I_Compatibilities",
 			_ => "I_CompatibilityReport",
 		};
@@ -153,12 +182,8 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		tlp.RowCount = tlp.RowStyles.Count;
 		tlp.ColumnCount = tlp.ColumnStyles.Count;
 
-		if (Controls.Count % 3 == 0)
-		{
-			RowCount++;
-			RowStyles.Add(new());
-		}
+		_panels[controlCount % 3].Controls.Add(tlp);
 
-		Controls.Add(tlp, Controls.Count % 3, RowCount - 1);
+		controlCount++;
 	}
 }

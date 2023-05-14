@@ -1,11 +1,13 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Enums;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -37,7 +39,7 @@ internal class ModsBubble : StatusBubbleBase
 		}
 
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-		CentralManager.ModInformationUpdated += Invalidate;
+		CentralManager.PackageInformationUpdated += Invalidate;
 		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
 
@@ -47,7 +49,7 @@ internal class ModsBubble : StatusBubbleBase
 
 		CentralManager.ContentLoaded -= Invalidate;
 		CentralManager.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-		CentralManager.ModInformationUpdated -= Invalidate;
+		CentralManager.PackageInformationUpdated -= Invalidate;
 		ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 	}
 
@@ -80,20 +82,19 @@ internal class ModsBubble : StatusBubbleBase
 		var modsEnabled = CentralManager.Mods.Count(x => x.IsEnabled && x.IsIncluded);
 		var modsOutOfDate = CentralManager.Mods.Count(x => x.IsIncluded && x.Package.Status == DownloadStatus.OutOfDate);
 		var modsIncomplete = CentralManager.Mods.Count(x => x.IsIncluded && x.Package.Status == DownloadStatus.PartiallyDownloaded);
-		var multipleModsIncluded = ModsUtil.GetDuplicateMods().Any();
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
-			DrawValue(e, ref targetHeight, modsIncluded.ToString(), modsIncluded == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural);
+			DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower()));
 		}
 		else if (modsIncluded == modsEnabled)
 		{
-			DrawValue(e, ref targetHeight, modsIncluded.ToString(), modsIncluded == 1 ? Locale.ModIncludedAndEnabled : Locale.ModIncludedAndEnabledPlural);
+			DrawText(e, ref targetHeight, Locale.IncludedEnabledCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower()));
 		}
 		else
 		{
-			DrawValue(e, ref targetHeight, modsIncluded.ToString(), modsIncluded == 1 ? Locale.ModIncluded : Locale.ModIncludedPlural);
-			DrawValue(e, ref targetHeight, modsEnabled.ToString(), modsEnabled == 1 ? Locale.ModEnabled : Locale.ModEnabledPlural);
+			DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower()));
+			DrawText(e, ref targetHeight, Locale.EnabledCount.FormatPlural(modsEnabled, Locale.Mod.FormatPlural(modsEnabled).ToLower()));
 		}
 
 		if (modsOutOfDate > 0)
@@ -110,29 +111,12 @@ internal class ModsBubble : StatusBubbleBase
 
 		foreach (var group in groups.OrderBy(x => x.Key))
 		{
-			if ((int)group.Key % 0x10 == 0)
+			if (group.Key <= NotificationType.Info)
 			{
 				continue;
 			}
 
-			//DrawValue(e, ref targetHeight, group.Count().ToString(), group.Key switch
-			//{
-			//	ReportSeverity.MinorIssues => Locale.ModsWithMinorIssues,
-			//	ReportSeverity.MajorIssues => Locale.ModsWithMajorIssues,
-			//	ReportSeverity.Unsubscribe => Locale.ModsShouldUnsub,
-			//	_ => ""
-			//}, group.Key switch
-			//{
-			//	ReportSeverity.MinorIssues => FormDesign.Design.YellowColor,
-			//	ReportSeverity.MajorIssues => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
-			//	ReportSeverity.Unsubscribe => FormDesign.Design.RedColor,
-			//	_ => Color.Empty
-			//});
-		}
-
-		if (multipleModsIncluded)
-		{
-			DrawText(e, ref targetHeight, Locale.MultipleModsIncluded, FormDesign.Design.RedColor);
+			DrawText(e, ref targetHeight, LocaleCR.Get($"{group.Key}Count").Format(group.Count(), Locale.Mod.FormatPlural(group.Count()).ToLower()), group.Key.GetColor());
 		}
 	}
 }

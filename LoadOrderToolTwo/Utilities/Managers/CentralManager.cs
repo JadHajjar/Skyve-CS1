@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 using static System.Environment;
 
@@ -21,13 +20,11 @@ internal static class CentralManager
 	public static event Action? ContentLoaded;
 	public static event Action? WorkshopInfoUpdated;
 	public static event Action? PackageInformationUpdated;
-	public static event Action? ModInformationUpdated;
-	public static event Action? AssetInformationUpdated;
+	public static event Action? PackageInclusionUpdated;
 
 	private static readonly DelayedAction _delayedWorkshopInfoUpdated;
 	private static readonly DelayedAction _delayedPackageInformationUpdated;
-	private static readonly DelayedAction _delayedModInformationUpdated;
-	private static readonly DelayedAction _delayedAssetInformationUpdated;
+	private static readonly DelayedAction _delayedPackageInclusionUpdated;
 	private static readonly DelayedAction _delayedContentLoaded;
 
 	public static Profile CurrentProfile => ProfileManager.CurrentProfile;
@@ -120,8 +117,7 @@ internal static class CentralManager
 		_delayedContentLoaded = new(300, () => ContentLoaded?.Invoke());
 		_delayedWorkshopInfoUpdated = new(300, () => WorkshopInfoUpdated?.Invoke());
 		_delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
-		_delayedModInformationUpdated = new(300, () => ModInformationUpdated?.Invoke());
-		_delayedAssetInformationUpdated = new(300, () => AssetInformationUpdated?.Invoke());
+		_delayedPackageInclusionUpdated = new(300, () => PackageInclusionUpdated?.Invoke());
 	}
 
 	public static void Start()
@@ -181,93 +177,10 @@ internal static class CentralManager
 		ContentUtil.StartListeners();
 
 		Log.Info($"Listeners Started");
-		Log.Info($"Loading Steam Cache..");
 
-		var cachedSteamInfo = SteamUtil.GetCachedInfo();
+		ConnectionHandler.WhenConnected(() => new BackgroundAction("Loading DLCs", SteamUtil.LoadDlcs).Run());
 
-		if (cachedSteamInfo != null)
-		{
-			Log.Info($"Applying Steam Cache..");
-			foreach (var package in Packages)
-			{
-				if (cachedSteamInfo.ContainsKey(package.SteamId))
-				{
-					package.SetSteamInformation(cachedSteamInfo[package.SteamId], true);
-				}
-			}
-
-			_delayedWorkshopInfoUpdated.Run();
-
-			Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ToList(), (package) =>
-			{
-				package.Status = ModsUtil.GetStatus(package, out var reason);
-				package.StatusReason = reason;
-
-				InformationUpdate(package);
-			});
-		}
-		else
-		{
-			Log.Info($"No Steam Cache");
-		}
-
-		CompatibilityManager.CacheReport(content);
-
-		if (!ConnectionHandler.WhenConnected(UpdateSteamInformation))
-		{
-			_delayedWorkshopInfoUpdated.Run();
-
-			Log.Warning("Not connected to the internet");
-		}
-	}
-
-	private static async void UpdateSteamInformation()
-	{
-		if (!ConnectionHandler.IsConnected)
-		{
-			return;
-		}
-
-		SteamUtil.LoadDlcs();
-
-		Log.Info($"Loading Steam info from the web..");
-		var result = await SteamUtil.GetWorkshopInfoAsync(Packages.Where(x => x.Workshop).Select(x => x.SteamId).ToArray());
-
-		Log.Info($"Applying updated steam info..");
-		foreach (var package in Packages)
-		{
-			if (result.ContainsKey(package.SteamId))
-			{
-				package.SetSteamInformation(result[package.SteamId], false);
-			}
-		}
-
-		_delayedWorkshopInfoUpdated.Run();
-
-		Log.Info($"Loading thumbnails..");
-		Parallelism.ForEach(Packages.OrderBy(x => x.Mod == null).ThenBy(x => x.Name).ToList(), async (package) =>
-		{
-			if (!string.IsNullOrWhiteSpace(package.IconUrl))
-			{
-				if (await ImageManager.Ensure(package.IconUrl))
-				{
-					InformationUpdate(package);
-				}
-			}
-
-			if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
-			{
-				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
-				{
-					InformationUpdate(package);
-				}
-			}
-		}, 10);
-
-		Log.Info($"Load Complete");
-		_delayedWorkshopInfoUpdated.Run();
-
-		new BackgroundAction(UpdateSteamInformation).RunIn((int)TimeSpan.FromHours(1).TotalMilliseconds);
+		Log.Info($"Finished.");
 	}
 
 	private static void RunFirstTimeSetup()
@@ -359,41 +272,13 @@ internal static class CentralManager
 		}
 	}
 
-	public static void InformationUpdate(IPackage iPackage)
-	{
-		if (iPackage is Package package)
-		{
-			_delayedPackageInformationUpdated.Run();
-
-			if (package.Mod != null)
-			{
-				_delayedModInformationUpdated.Run();
-			}
-
-			if (package.Assets != null && package.Assets.Length > 0)
-			{
-				_delayedAssetInformationUpdated.Run();
-			}
-		}
-		else if (iPackage is Mod)
-		{
-			_delayedModInformationUpdated.Run();
-			_delayedPackageInformationUpdated.Run();
-		}
-		else if (iPackage is Asset)
-		{
-			_delayedAssetInformationUpdated.Run();
-			_delayedPackageInformationUpdated.Run();
-		}
-	}
-
 	internal static void AddPackage(Package package)
 	{
-		var cachedSteamInfo = SteamUtil.GetCachedInfo();
+		var info = SteamUtil.GetItem(package.SteamId);
 
-		if (cachedSteamInfo != null && cachedSteamInfo.ContainsKey(package.SteamId))
+		if (info is not null)
 		{
-			package.SetSteamInformation(cachedSteamInfo[package.SteamId], true);
+			package.SetSteamInformation(info, true);
 		}
 
 		if (packages is null)
@@ -412,46 +297,8 @@ internal static class CentralManager
 			ModLogicManager.Analyze(package.Mod);
 		}
 
-		RefreshSteamInfo(package);
+		OnInformationUpdated();
 		OnContentLoaded();
-	}
-
-	internal static void RefreshSteamInfo(Package package)
-	{
-		if (!package.Workshop)
-		{
-			return;
-		}
-
-		ConnectionHandler.WhenConnected(async () =>
-		{
-			var result = await SteamUtil.GetWorkshopInfoAsync(new ulong[] { package.SteamId });
-
-			if (result.ContainsKey(package.SteamId))
-			{
-				package.SetSteamInformation(result[package.SteamId], false);
-			}
-
-			_delayedWorkshopInfoUpdated.Run();
-
-			if (!string.IsNullOrWhiteSpace(package.IconUrl))
-			{
-				if (await ImageManager.Ensure(package.IconUrl))
-				{
-					InformationUpdate(package);
-				}
-			}
-
-			if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
-			{
-				if (await ImageManager.Ensure(package.Author?.AvatarUrl))
-				{
-					InformationUpdate(package);
-				}
-			}
-
-			_delayedWorkshopInfoUpdated.Run();
-		});
 	}
 
 	internal static void RemovePackage(Package package)
@@ -465,6 +312,22 @@ internal static class CentralManager
 
 		package.Status = DownloadStatus.NotDownloaded;
 		OnContentLoaded();
+		_delayedWorkshopInfoUpdated.Run();
+	}
+
+	internal static void OnInformationUpdated()
+	{
+		_delayedPackageInformationUpdated.Run();
+	}
+
+	internal static void OnInclusionUpdated()
+	{
+		_delayedPackageInclusionUpdated.Run();
+		_delayedPackageInformationUpdated.Run();
+	}
+
+	internal static void OnWorkshopInfoUpdated()
+	{
 		_delayedWorkshopInfoUpdated.Run();
 	}
 
