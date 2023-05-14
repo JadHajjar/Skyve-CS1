@@ -173,6 +173,7 @@
   "HidePseudoMods": "Ocultar pseudo-mods como mixagens de temas",
   "YourDlcs": "Seus DLCs",
   "AllDlcs": "Todos os DLCs",
+  "DLCs": "DLCs ​​e CCPs",
   "DetectedIssues": "Problemas Detectados",
   "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Corrigir todos os problemas",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Copie o número de identificação Steam do Autor",
   "CloseCitiesToSub": "Você precisa fechar Cities: Skylines para assinar ou cancelar a assinatura de pacotes",
   "ShowingFilteredItems": "Mostrando {0} de {1} itens no total",
-  "ShowingMods": "Mostrando {0} mods",
-  "ShowingAssets": "Exibindo {0} recursos",
-  "ShowingPackages": "Exibindo {0} pacotes",
-  "ShowingProfiles": "Mostrando perfis de {0}",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Escala do Tema e UI",
   "SearchProfiles": "Pesquise através do seu perfil..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Inicia um novo jogo ao iniciar Cidades: Skylines. Você pode especificar o mapa em que gostaria de começar",
   "LoadSaveGame_Tip": "Carregue um jogo de salvamento quando abrir Cities: Skylines. Não selecionar um arquivo salvado vai continuar sua última gravação",
   "BETA": "BETA",
+  "ALPHA": "ALPHA",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "ESTÁVEL",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "PRETERIDO",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Esta ação não pode ser revertida.",
   "AlwaysOpenFiltersAndActions": "Mostrar segmento de Filtros por padrão",
   "AlwaysOpenFiltersAndActions_Tip": "Sempre deixar a área de filtros aberta quando entra em uma aba de conteúdo",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Jogos Salvos da Oficina",
   "Workshop Maps": "Mapas da Oficina",
   "AnyAuthor": "Qualquer Autor",
-  "ItemsCount": "{0} itens",
-  "AuthorsSelected": "{0} Autor(es) selecionado(s)",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Usar Tema do Sistema",
   "Donate": "Doar",
   "CopyAllIds": "Copiar todos os IDs dos itens exibidos da Oficina",
@@ -388,5 +412,24 @@
   "Info": "Informações",
   "SelectThisPackage": "Selecione este pacote",
   "SelectPackage": "Selecione um pacote",
-  "Profiles": "Perfis"
+  "Profiles": "Perfis",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Mods",
+  "Local": "Local",
+  "Workshop": "Workshop",
+  "CompatibilityReport": "Relatório de Compatibilidade",
+  "AppDataPath": "Cidades: pasta de dados do aplicativo Skylines",
+  "Enabled": "Ativado",
+  "Disabled": "Desativado",
+  "Included": "Incluído",
+  "Excluded": "Excluído",
+  "Server": "Servidor",
+  "Assets": "Recursos",
+  "OutOfDate": "Desatualizado",
+  "Subscribe": "Se inscrever",
+  "Switch": "Trocar",
+  "Packages": "Pacotes",
+  "AdvancedIncludeEnable": "Mostrar ambos os estados incluídos e habilitado para mods",
+  "PackageStatus": "Status do pacote",
+  "Author": "Autor"
 }
