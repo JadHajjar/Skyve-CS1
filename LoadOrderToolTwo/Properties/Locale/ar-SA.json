@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "وقت الاشتراك",
   "Sorting_Author": "اسم المؤلف",
   "Sorting_Status": "وضع رزمة",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "تقرير التوافق",
   "IncreaseItemSize": "زيادة أحجام قائمة العناصر",
   "FolderSettings": "إعدادات المجلد",
   "GamePath": "المدن: مجلد البخار Skylines '",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "تصفية حسب هذا المؤلف",
   "AddToSearch": "إضافة '{0}' إلى بحثك",
   "CopyToClipboard": "نسخ '{0}' إلى الحافظة الخاصة بك",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "عرض تقرير التوافق لهذه الحزمة",
   "FilterByThisEnabledStatus": "تصفية حسب حالة 'تمكين' هذه",
   "FilterByThisIncludedStatus": "تصفية حسب هذه الحالة 'المشتملة'",
   "CleanupInfo": "قم بتنظيف سريع يحذف أي حزمة لم تشترك فيها من جهاز الكمبيوتر الخاص بك بالإضافة إلى إجبار تنزيل الحزم المشتركة المفقودة.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profiles"
 }

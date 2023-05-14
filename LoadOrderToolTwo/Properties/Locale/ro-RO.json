@@ -68,8 +68,8 @@
   "DisableAll": "Dezactivați toate elementele afișate",
   "CollectionLink": "URL de colectare Steam sau număr de identificare",
   "PasteCollection": "Lipiți adresa URL sau ID -ul colecției pe care doriți să o vizualizați",
-  "LoadCollection": "Colectarea încărcăturii",
-  "CollectionTitle": "Colecții de ateliere",
+  "LoadCollection": "Încarcă Colecția",
+  "CollectionTitle": "Colecţii atelier",
   "HelpLogs": "Ajutor și jurnale",
   "ModsWithMinorIssues": "moduri cu probleme minore",
   "ModsWithMajorIssues": "moduri cu probleme majore",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "active care ar trebui să fie dezabonate de la",
   "LoadNewAsset": "Activă Nouă (Editor)",
   "LoadLoadAsset": "Încarcă activ (Editor)",
+  "Info": "Informații",
+  "SelectThisPackage": "Selectaţi acest pachet",
+  "SelectPackage": "Alege un pachet",
   "Profiles": "Profiluri"
 }

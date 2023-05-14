@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "Abonner tiden",
   "Sorting_Author": "Forfatternavn",
   "Sorting_Status": "Pakkestatus",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "Kompatibilitetsrapport",
   "IncreaseItemSize": "Øk listens størrelser",
   "FolderSettings": "Mappeinnstillinger",
   "GamePath": "Byer: Skylines 'dampmappe",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filtrer etter denne forfatteren",
   "AddToSearch": "Legg til '{0}til ditt søk",
   "CopyToClipboard": "Kopier '{0}' til utklippstavlen",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "Vis denne pakkens kompatibilitetsrapport",
   "FilterByThisEnabledStatus": "Filtrer etter denne 'aktiverte' statusen",
   "FilterByThisIncludedStatus": "Filtrer etter denne statusen 'Inkludert'",
   "CleanupInfo": "Kjør en hurtigopprydding som sletter hvilken som helst pakke du faktisk ikke abonnerer på fra datamaskinen din, i tillegg til å tvinge nedlasting av manglende abonnementspakker.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profiles"
 }

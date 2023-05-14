@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Фильтр по этому автору",
   "AddToSearch": "Добавить '{0}' в ваш поиск",
   "CopyToClipboard": "Копировать {0} в буфер обмена",
-  "ViewPackageCR": "Просмотреть отчёт о совместимости пакетов",
+  "ViewPackageCR": "Просмотреть отчёт о совместимости этого пакета",
   "FilterByThisEnabledStatus": "Фильтровать по статусу 'Включен'",
   "FilterByThisIncludedStatus": "Фильтровать по статусу 'Отключен'",
   "CleanupInfo": "Запустите быструю очистку, которая удаляет ни один пакет, на который вы на самом деле не подписаны с вашего компьютера, а также вынуждает загружать отсутствующие подписанные пакеты.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "Создать Актив (Редактор)",
   "LoadLoadAsset": "Загрузить актив (Редактор)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Профили"
 }

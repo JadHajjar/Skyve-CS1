@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "সময় সাবস্ক্রাইব করুন",
   "Sorting_Author": "লেখকের নাম",
   "Sorting_Status": "প্যাকেজ স্থিতি",
-  "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_CompatibilityReport": "সামঞ্জস্যতা প্রতিবেদন",
   "IncreaseItemSize": "Increase list items' sizes",
   "FolderSettings": "ফোল্ডার সেটিংস",
   "GamePath": "শহরগুলি: স্কাইলাইনগুলির বাষ্প ফোল্ডার",
@@ -350,7 +350,7 @@
   "FilterByThisAuthor": "Filter by this author",
   "AddToSearch": "Add '{0}' to your search",
   "CopyToClipboard": "Copy '{0}' to your clipboard",
-  "ViewPackageCR": "View this package's compatibility info",
+  "ViewPackageCR": "View this package's Compatibility Report",
   "FilterByThisEnabledStatus": "Filter by this 'Enabled' status",
   "FilterByThisIncludedStatus": "Filter by this 'Included' status",
   "CleanupInfo": "Run a quick cleanup that deletes any package you're not actually subscribed to from your computer as well as forcing the download of missing subscribed packages.",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
   "LoadLoadAsset": "Load Asset (Editor)",
+  "Info": "Info",
+  "SelectThisPackage": "Select this package",
+  "SelectPackage": "Select a package",
   "Profiles": "Profiles"
 }

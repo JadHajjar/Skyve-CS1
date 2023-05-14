@@ -114,7 +114,7 @@
   "Sorting_SubscribeTime": "订阅时间",
   "Sorting_Author": "作者名称",
   "Sorting_Status": "插件状态",
-  "Sorting_CompatibilityReport": "兼容性报告",
+  "Sorting_CompatibilityReport": "兼容性问题严重程度",
   "IncreaseItemSize": "增大项目列表的显示大小",
   "FolderSettings": "文件夹设置",
   "GamePath": "Cities: Skylines 的 Steam 文件夹",
@@ -385,5 +385,8 @@
   "AssetsShouldUnsub": "个应当取消订阅的资产",
   "LoadNewAsset": "新建资产（资产编辑器）",
   "LoadLoadAsset": "读取资产（资产编辑器）",
+  "Info": "提示",
+  "SelectThisPackage": "选择此插件",
+  "SelectPackage": "选择一个插件",
   "Profiles": "配置文件"
 }
