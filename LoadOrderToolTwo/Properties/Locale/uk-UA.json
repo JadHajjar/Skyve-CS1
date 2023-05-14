@@ -173,6 +173,7 @@
   "HidePseudoMods": "Приховати псевдо-моди, такі як мікси тем",
   "YourDlcs": "Ваші DLC",
   "AllDlcs": "Всі DLC",
+  "DLCs": "DLC & CCP",
   "DetectedIssues": "Виявлені проблеми",
   "DuplicateMods": "Однакові моди",
   "FixAllIssues": "Виправити всі проблеми",
@@ -190,10 +191,22 @@
   "CopyAuthorSteamId": "Скопіювати Steam ID автора",
   "CloseCitiesToSub": "Вам необхідно закрити Cities: Skylines для того, щоб підписатися або скасувати підписку на пакунки",
   "ShowingFilteredItems": "Показано {0} з {1} елементів",
-  "ShowingMods": "Показано {0} модифікацій",
-  "ShowingAssets": "Показано {0} ассетів",
-  "ShowingPackages": "Показано {0} пакунків",
-  "ShowingProfiles": "Показано {0} профілів",
+  "ShowingMods": {
+    "One": "Showing {0} mod",
+    "Plural": "Showing {0} mods"
+  },
+  "ShowingAssets": {
+    "One": "Showing {0} asset",
+    "Plural": "Showing {0} assets"
+  },
+  "ShowingPackages": {
+    "One": "Showing {0} package",
+    "Plural": "Showing {0} packages"
+  },
+  "ShowingProfiles": {
+    "One": "Showing {0} profile",
+    "Plural": "Showing {0} profiles"
+  },
   "DropNewProfile": "Перетягніть або виберіть .json або .xml файл профілю, щоб імпортувати його",
   "ThemeUIScale": "Розмір теми й інтерфейсу",
   "SearchProfiles": "Пошук у ваших профілях..",
@@ -282,9 +295,14 @@
   "NewGame_Tip": "Починає нову гру під час запуску Cities: Skylines. Ви можете вказати карту, яку хочете використати",
   "LoadSaveGame_Tip": "Завантажте збереження при запуску Cities: Skylines. Якщо не вибрано файл збереження, продовжиться ваше останнє збереження",
   "BETA": "БЕТА",
+  "ALPHA": "АЛЬФА",
+  "TEST": "TEST",
+  "TESTING": "TESTING",
   "STABLE": "СТАБІЛЬНИЙ",
   "EXPERIMENTAL": "ЕКСПЕРИМЕНТАЛЬНИЙ",
   "DEPRECATED": "ЗАСТАРІЛИЙ",
+  "OBSOLETE": "OBSOLETE",
+  "ABANDONED": "ABANDONED",
   "ActionUnreversible": "Цю дію неможливо скасувати.",
   "AlwaysOpenFiltersAndActions": "Показувати розділ фільтрів за замовчуванням",
   "AlwaysOpenFiltersAndActions_Tip": "Завжди відкривати фільтри при вході у вкладку вмісту",
@@ -338,8 +356,14 @@
   "Workshop Save-games": "Збережені ігри з Майстерні",
   "Workshop Maps": "Карти з Майстерні",
   "AnyAuthor": "Будь-який автор",
-  "ItemsCount": "{0} елементів",
-  "AuthorsSelected": "Вибрано {0} авторів",
+  "ItemsCount": {
+    "One": "{0} item",
+    "Plural": "{0} items"
+  },
+  "AuthorsSelected": {
+    "One": "{0} author selected",
+    "Plural": "{0} authors selected"
+  },
   "Use the System's Theme": "Використовувати системну тему",
   "Donate": "Підтримати",
   "CopyAllIds": "Скопіювати ID усіх показаних предметів",
@@ -388,5 +412,24 @@
   "Info": "Інформація",
   "SelectThisPackage": "Вибрати цей пакунок",
   "SelectPackage": "Вибрати пакунок",
-  "Profiles": "Профілі"
+  "Profiles": "Профілі",
+  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Моди",
+  "Local": "Локальний",
+  "Workshop": "Майстерня",
+  "CompatibilityReport": "Звіт про сумісність",
+  "AppDataPath": "Тека даних Cities: Skylines (AppData)",
+  "Enabled": "Увімкнено",
+  "Disabled": "Вимкнено",
+  "Included": "Включений",
+  "Excluded": "Виключений",
+  "Server": "Сервер",
+  "Assets": "Ассети",
+  "OutOfDate": "Застарілий",
+  "Subscribe": "Підписатися",
+  "Switch": "Перемикнути",
+  "Packages": "Пакунки",
+  "AdvancedIncludeEnable": "Показувати стан включено та увімкнено для модів",
+  "PackageStatus": "Статус пакунку",
+  "Author": "Автор"
 }
