@@ -1,5 +1,4 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Current Profile",
   "StartCities": "Launch Cities: Skylines",
   "StopCities": "Stop Cities: Skylines",
@@ -8,8 +7,15 @@
   "Dashboard": "Dashboard",
   "ModOutOfDate": "mod is out of date",
   "ModOutOfDatePlural": "mods are out of date",
+  "MultipleModsIncluded": "Multiple versions of the same mod are included",
+  "ModIncluded": "mod included",
+  "ModIncludedPlural": "mods included",
   "SearchDlcs": "Search through your DLCs..",
   "SearchPackages": "Search through your packages..",
+  "ModEnabled": "mod enabled",
+  "ModIncludedAndEnabled": "mod included and enabled",
+  "ModEnabledPlural": "mods enabled",
+  "ModIncludedAndEnabledPlural": "mods included and enabled",
   "ModIsLocal": "Mod is local",
   "ModIsRemoved": "Removed from Steam",
   "ModIsUnknown": "Could not get this mod's information from Steam",
@@ -46,6 +52,8 @@
   "NoAssets": "Disable All Assets",
   "NoMods": "Disable All Mods",
   "AutoSave": "Automatic Save",
+  "AssetIncluded": "asset included",
+  "AssetIncludedPlural": "assets included",
   "TotalSize": "total size",
   "ReportSeverity": "Report Severity",
   "AnyStatus": "Any Status",
@@ -130,6 +138,7 @@
   "DateUpdated": "Date Updated",
   "PackageIncluded": "package included",
   "PackageIncludedPlural": "packages included",
+  "MultiplePackagesIncluded": "Multiple versions of the same package are included",
   "CopyWorkshopLink": "Copy this package's Workshop Link",
   "FilterOutPackagesWithMods": "Hide mods in the packages page",
   "FilterOutPackagesWithOneAsset": "Hide single-asset packages from the packages page",
@@ -166,6 +175,7 @@
   "AllDlcs": "All DLCs",
   "DLCs": "DLCs & CCPs",
   "DetectedIssues": "Detected Issues",
+  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Fix All Issues",
   "LaunchTooltip": "Click to launch/stop Cities: Skylines or use {0} anywhere in the app",
   "LsmImport": "Loading Screen Mod Report",
@@ -327,6 +337,7 @@
   "ChangeProfileColor": "Change this profile's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
+  "ProfilesLoaded": "profiles loaded",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
@@ -401,7 +412,9 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
+  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "Mods": "Mods",
   "Local": "Local",
   "Workshop": "Workshop",
   "CompatibilityReport": "Compatibility Report",
@@ -411,46 +424,12 @@
   "Included": "Included",
   "Excluded": "Excluded",
   "Server": "Server",
+  "Assets": "Assets",
   "OutOfDate": "Out of date",
   "Subscribe": "Subscribe",
   "Switch": "Switch",
+  "Packages": "Packages",
   "AdvancedIncludeEnable": "Show both of the included and enabled state for mods",
   "PackageStatus": "Package Status",
-  "Author": "Author",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
-  "Mod": {
-    "One": "Mod",
-    "Plural": "Mods"
-  },
-  "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
-  },
-  "Package": {
-    "One": "Package",
-    "Plural": "Packages"
-  },
-  "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
-  },
-  "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
-  },
-  "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
-  },
-  "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
-  },
-  "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
-  }
+  "Author": "Author"
 }
