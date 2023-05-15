@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "Informações de compatibilidade",
   "ProfileBubble": "Perfil atual",
   "StartCities": "Abrir Cities: Skylines",
   "StopCities": "Fechar Cities: Skylines",
@@ -417,40 +417,40 @@
   "AdvancedIncludeEnable": "Mostrar ambos os estados incluídos e habilitado para mods",
   "PackageStatus": "Status do pacote",
   "Author": "Autor",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Include": "Incluir",
+  "Unsubscribe": "Cancelar assinatura",
+  "Exclude": "Excluir",
+  "Snooze": "Adiar",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "Recurso",
+    "Plural": "Recursos"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Pacote",
+    "Plural": "Pacotes"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Perfil",
+    "Plural": "Perfis"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} incluídos",
+    "Plural": "{0} {1} incluídos"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} habilitado",
+    "Plural": "{0} {1} habilitado"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} incluídos e habilitado",
+    "Plural": "{0} {1} incluídos e habilitados"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} carregado",
+    "Plural": "{0} {1} carregados"
   }
 }
