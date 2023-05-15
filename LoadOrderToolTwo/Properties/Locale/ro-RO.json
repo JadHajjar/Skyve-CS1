@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "Informații despre compatibilitate",
   "ProfileBubble": "Profilul curent",
   "StartCities": "Lansare Cities: Skylines",
   "StopCities": "Stop Cities: Skylines",
@@ -418,12 +418,12 @@
   "PackageStatus": "Starea pachetului",
   "Author": "Autor",
   "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Unsubscribe": "Dezabonați-vă",
+  "Exclude": "Excludeți",
+  "Snooze": "Amână",
   "Mod": {
     "One": "Mod",
-    "Plural": "Mods"
+    "Plural": "Moduri"
   },
   "Asset": {
     "One": "Asset",
