@@ -89,14 +89,14 @@
     "Plural": "You're missing the following required packages for '{0}'."
   },
   "Interaction_OptionalPackages": {
-    "One": "You're missing an optional package for '{0}'.",
-    "Plural": "You're missing the following optional packages for '{0}'."
+    "One": "Está faltando um pacote opcional para '{0}'.",
+    "Plural": "Faltam os seguintes pacotes opcionais para '{0}'."
   },
   "Interaction_SucceededBy": {
     "One": "'{0}' is succeeded by '{1}'.",
     "Plural": "'{0}' is succeeded by either one of the following packages."
   },
-  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
+  "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
@@ -140,10 +140,10 @@
     "One": "You should unsubscribe from '{1}'.",
     "Plural": "You should unsubscribe from the following packages."
   },
-  "Action_ExcludeThis": "You should exclude '{0}'.",
+  "Action_ExcludeThis": "Você deve excluir '{0}'.",
   "Action_ExcludeOther": {
-    "One": "You should exclude '{1}'.",
-    "Plural": "You should exclude the following packages."
+    "One": "Você deve excluir '{1}'.",
+    "Plural": "Você deve excluir os seguintes pacotes."
   },
   "Action_Switch": {
     "One": "You should switch to '{1}'.",
@@ -155,19 +155,19 @@
     "Plural": "{0} DLCs selected"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stability",
-  "CRT_Successors": "Successors",
-  "CRT_RequiredPackages": "Required Packages",
-  "CRT_OptionalPackages": "Optional Packages",
-  "CRT_DlcMissing": "Missing DLCs/CCPs",
-  "CRT_Compatibility": "Compatibility Issues",
-  "CRT_Alternatives": "Alternatives",
-  "CRT_Status": "Statuses",
-  "CRT_Ambiguous": "Ambiguity",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
-  "RequestReview": "Request Review",
+  "CRT_Stability": "Estabilidade",
+  "CRT_Successors": "Sucessores",
+  "CRT_RequiredPackages": "Pacotes Necessários",
+  "CRT_OptionalPackages": "Pacotes Opcionais",
+  "CRT_DlcMissing": "DLCs/CCPs ausentes",
+  "CRT_Compatibility": "Problemas de Compatibilidade",
+  "CRT_Alternatives": "Alternativas",
+  "CRT_Status": "Estados",
+  "CRT_Ambiguous": "Ambiguidade",
+  "RequestReviewInfo": "Está tendo problemas com este pacote?\nSolicite uma nova análise aqui:",
+  "RequestReview": "Solicitar Análise",
   "MissingDependencyCount": {
-    "One": "{0} {1} that is missing dependencies",
+    "One": "{0} {1} que está faltando dependências",
     "Plural": "{0} {1} that are missing dependencies"
   },
   "CautionCount": "{0} {1} where caution is advised",
