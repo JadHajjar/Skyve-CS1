@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "兼容性信息",
   "ProfileBubble": "当前配置文件",
   "StartCities": "启动 Cities: Skylines",
   "StopCities": "关闭 Cities: Skylines",
@@ -417,40 +417,40 @@
   "AdvancedIncludeEnable": "同时显示模组的装载和启用状态",
   "PackageStatus": "插件状态",
   "Author": "作者",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Include": "装载",
+  "Unsubscribe": "取消订阅",
+  "Exclude": "卸下",
+  "Snooze": "稍后提醒",
   "Mod": {
-    "One": "Mod",
-    "Plural": "Mods"
+    "One": "模组",
+    "Plural": "模组"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "资产",
+    "Plural": "资产"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "插件",
+    "Plural": "插件"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "配置文件",
+    "Plural": "配置文件"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "已装载 {0} {1}",
+    "Plural": "已装载 {0} {1}"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "已启用 {0} {1} ",
+    "Plural": "已启用 {0} {1} "
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "已装载并启用 {0} {1} ",
+    "Plural": "已装载并启用 {0} {1} "
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "已加载 {0} {1} ",
+    "Plural": "已加载 {0} {1} "
   }
 }
