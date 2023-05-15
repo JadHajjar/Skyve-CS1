@@ -85,7 +85,7 @@
   "ProfileDelete": "Ştergeţi acest profil (Acest lucru nu poate fi inversat)",
   "ShouldNotBeSubscribed": "Nu vă abonați",
   "MissingPackages": "Pachete lipsă",
-  "LoadingScreenMod": "Încărcarea ecranului Mod",
+  "LoadingScreenMod": "Loading Screen Mod",
   "LoadEnabled": "Încarcă toate activele activate",
   "LoadUsed": "Încărcare active utilizate",
   "ExcludeInclude": "Include / exclude",
@@ -167,20 +167,20 @@
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Probleme detectate",
   "FixAllIssues": "Repară toate problemele",
-  "LaunchTooltip": "Click pentru a lansa/opri orașele: Skylines sau pentru a folosi {0} oriunde în aplicație",
-  "LsmImport": "Încărcare raport mod ecran",
+  "LaunchTooltip": "Click pentru a lansa/opri Cities: Skylines sau pentru a folosi {0} oriunde în aplicație",
+  "LsmImport": "Loading Screen Mod Report",
   "LsmImportMissingInfo": "Vizualizați și abonați-vă la activele lipsă",
   "SelectedFileInvalid": "Fișierul selectat nu este valid",
   "NoItemsToBeDisplayed": "Niciun articol nu va fi afișat",
-  "FirstSetupInfo": "Vă rugăm să activați mod în interiorul orașelor: mai întâi Skylines înainte de a utiliza unealta",
+  "FirstSetupInfo": "Va rugăm să activați Load Order Mod 2 in interiorul aplicatiei Cities: Skylines inainte de a folosi Load Order Tool 2",
   "SetupIncomplete": "Configurare incompletă",
   "LsmImportUnusedInfo": "Vizualizați și eliminați activele neutilizate",
-  "SkipFileInfo": "Selectați un fisier sărit pentru a fi folosit la încărcarea modului Ecran",
-  "SaveFileInfo": "Selectați un fișier joc de salvare pentru a fi încărcat automat când deschideți jocul",
+  "SkipFileInfo": "Selectați un fișier care sa fie sărit si folosit pe Loading Screen Mod",
+  "SaveFileInfo": "Selectați un fișier de salvare pentru a fi încărcat automat când deschideți jocul",
   "LoadProfile": "Încarcă profil",
   "CopyAuthorSteamId": "Copiază ID-ul autorului Steam",
-  "CloseCitiesToSub": "Trebuie să închideți orașele: Skylines pentru a vă abona sau dezabona de la pachete",
-  "ShowingFilteredItems": "Se afișează {0} din {1} produse în total",
+  "CloseCitiesToSub": "Trebuie să închideți Cities: Skylines pentru a vă abona sau dezabona de la pachete",
+  "ShowingFilteredItems": "Se afișează {0} din {1} total articole",
   "ShowingMods": {
     "One": "Se afișează {0} mod",
     "Plural": "Se afișează {0} moduri"
@@ -288,7 +288,7 @@
   "ALPHA": "ALFA",
   "TEST": "TEST",
   "TESTING": "TESTARE",
-  "STABLE": "STABILE",
+  "STABLE": "STABILĂ",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "DEPRECAT",
   "OBSOLETE": "OBSOLET",
@@ -427,30 +427,30 @@
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Assets"
+    "Plural": "Asset-uri"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Pachet",
+    "Plural": "Pachete"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Profil",
+    "Plural": "Profiluri"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} inclus",
+    "Plural": "{0} {1} incluse"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} activat",
+    "Plural": "{0} {1} activate"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} inclus & activat",
+    "Plural": "{0} {1} incluse & activate"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} încărcat",
+    "Plural": "{0} {1} încărcate"
   }
 }
