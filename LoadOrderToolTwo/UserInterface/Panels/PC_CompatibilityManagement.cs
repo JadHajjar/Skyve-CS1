@@ -2,6 +2,7 @@
 
 using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Domain.Interfaces;
+using LoadOrderToolTwo.UserInterface.CompatibilityReport;
 using LoadOrderToolTwo.UserInterface.Content;
 using LoadOrderToolTwo.UserInterface.Forms;
 using LoadOrderToolTwo.Utilities;

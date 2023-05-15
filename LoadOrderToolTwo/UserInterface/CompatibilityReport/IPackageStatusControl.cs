@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.UserInterface.Content;
 using LoadOrderToolTwo.UserInterface.Dropdowns;
 using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
@@ -13,7 +14,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LoadOrderToolTwo.UserInterface.Content;
+namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
 public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
 {
 	private readonly PackageStatusTypeDropDown<T> typeDropDown;

@@ -1,4 +1,4 @@
-﻿namespace LoadOrderToolTwo.UserInterface.Content;
+﻿namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
 
 partial class IPackageStatusControl<T, TBase>
 {
