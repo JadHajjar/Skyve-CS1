@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "Informações de compatibilidade",
   "ProfileBubble": "Perfil atual",
   "StartCities": "Abrir Cities: Skylines",
   "StopCities": "Fechar Cities: Skylines",
@@ -182,20 +182,20 @@
   "CloseCitiesToSub": "Você precisa fechar Cities: Skylines para assinar ou cancelar a assinatura de pacotes",
   "ShowingFilteredItems": "Mostrando {0} de {1} itens no total",
   "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
+    "One": "Mostrando {0} mod",
+    "Plural": "Mostrando {0} mods"
   },
   "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
+    "One": "Exibindo {0} recurso",
+    "Plural": "Exibindo {0} recursos"
   },
   "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
+    "One": "Exibindo {0} pacotes",
+    "Plural": "Exibindo {0} pacotes"
   },
   "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
+    "One": "Mostrando {0} perfil",
+    "Plural": "Mostrando {0} perfis"
   },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Escala do Tema e UI",
@@ -286,13 +286,13 @@
   "LoadSaveGame_Tip": "Carregue um jogo de salvamento quando abrir Cities: Skylines. Não selecionar um arquivo salvado vai continuar sua última gravação",
   "BETA": "BETA",
   "ALPHA": "ALPHA",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "TESTE",
+  "TESTING": "TESTANDO",
   "STABLE": "ESTÁVEL",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "PRETERIDO",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "OBSOLETO",
+  "ABANDONED": "ABANDONADO",
   "ActionUnreversible": "Esta ação não pode ser revertida.",
   "AlwaysOpenFiltersAndActions": "Mostrar segmento de Filtros por padrão",
   "AlwaysOpenFiltersAndActions_Tip": "Sempre deixar a área de filtros aberta quando entra em uma aba de conteúdo",
@@ -347,11 +347,11 @@
   "AnyAuthor": "Qualquer Autor",
   "ItemsCount": {
     "One": "{0} item",
-    "Plural": "{0} items"
+    "Plural": "{0} itens"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "{0} Autor Selecionado",
+    "Plural": "{0} Autores selecionados"
   },
   "Use the System's Theme": "Usar Tema do Sistema",
   "Donate": "Doar",
@@ -401,7 +401,7 @@
   "Info": "Informações",
   "SelectThisPackage": "Selecione este pacote",
   "SelectPackage": "Selecione um pacote",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "ControlToSelectMultiplePackages": "Ctrl + Clique para selecionar múltiplos pacotes.",
   "Local": "Local",
   "Workshop": "Workshop",
   "CompatibilityReport": "Relatório de Compatibilidade",
@@ -417,40 +417,40 @@
   "AdvancedIncludeEnable": "Mostrar ambos os estados incluídos e habilitado para mods",
   "PackageStatus": "Status do pacote",
   "Author": "Autor",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Include": "Incluir",
+  "Unsubscribe": "Cancelar Assinatura",
+  "Exclude": "Excluir",
+  "Snooze": "Suspender",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "Recurso",
+    "Plural": "Recursos"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Pacote",
+    "Plural": "Pacotes"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Perfil",
+    "Plural": "Perfis"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} incluído",
+    "Plural": "{0} {1} incluídos"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} habilitado",
+    "Plural": "{0} {1} habilitados"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} incluído e habilitado",
+    "Plural": "{0} {1} incluídos e habilitados"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} carregado",
+    "Plural": "{0} {1} carregados"
   }
 }
