@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "Інформація про сумісність",
   "ProfileBubble": "Поточний профіль",
   "StartCities": "Запустити Cities: Skylines",
   "StopCities": "Зупинити Cities: Skylines",
@@ -182,20 +182,20 @@
   "CloseCitiesToSub": "Вам необхідно закрити Cities: Skylines для того, щоб підписатися або скасувати підписку на пакунки",
   "ShowingFilteredItems": "Показано {0} з {1} елементів",
   "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
+    "One": "Показана {0} модифікація",
+    "Plural": "Показано {0} модифікацій"
   },
   "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
+    "One": "Показано {0} ассет",
+    "Plural": "Показано {0} ассетів"
   },
   "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
+    "One": "Показано {0} пакунок",
+    "Plural": "Показано {0} пакунків"
   },
   "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
+    "One": "Показано {0} профіль",
+    "Plural": "Показано {0} профілів"
   },
   "DropNewProfile": "Перетягніть або виберіть .json або .xml файл профілю, щоб імпортувати його",
   "ThemeUIScale": "Розмір теми й інтерфейсу",
@@ -286,13 +286,13 @@
   "LoadSaveGame_Tip": "Завантажте збереження при запуску Cities: Skylines. Якщо не вибрано файл збереження, продовжиться ваше останнє збереження",
   "BETA": "БЕТА",
   "ALPHA": "АЛЬФА",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "ТЕСТ",
+  "TESTING": "ТЕСТУВАННЯ",
   "STABLE": "СТАБІЛЬНИЙ",
   "EXPERIMENTAL": "ЕКСПЕРИМЕНТАЛЬНИЙ",
   "DEPRECATED": "ЗАСТАРІЛИЙ",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "ЗАСТАРІЛИЙ",
+  "ABANDONED": "ЗАКИНУТО",
   "ActionUnreversible": "Цю дію неможливо скасувати.",
   "AlwaysOpenFiltersAndActions": "Показувати розділ фільтрів за замовчуванням",
   "AlwaysOpenFiltersAndActions_Tip": "Завжди відкривати фільтри при вході у вкладку вмісту",
@@ -346,12 +346,12 @@
   "Workshop Maps": "Карти з Майстерні",
   "AnyAuthor": "Будь-який автор",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "{0} елемент",
+    "Plural": "{0} елементів"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "Вибрано {0} автор",
+    "Plural": "Вибрано {0} авторів"
   },
   "Use the System's Theme": "Використовувати системну тему",
   "Donate": "Підтримати",
@@ -401,7 +401,7 @@
   "Info": "Інформація",
   "SelectThisPackage": "Вибрати цей пакунок",
   "SelectPackage": "Вибрати пакунок",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "ControlToSelectMultiplePackages": "Ctrl + Клац, щоб вибрати кілька пакунків за раз.",
   "Local": "Локальний",
   "Workshop": "Майстерня",
   "CompatibilityReport": "Звіт про сумісність",
@@ -417,40 +417,40 @@
   "AdvancedIncludeEnable": "Показувати стан включено та увімкнено для модів",
   "PackageStatus": "Статус пакунку",
   "Author": "Автор",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
+  "Include": "Включити",
+  "Unsubscribe": "Відписатися",
+  "Exclude": "Виключити",
   "Snooze": "Snooze",
   "Mod": {
-    "One": "Mod",
-    "Plural": "Mods"
+    "One": "Мод",
+    "Plural": "Моди"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "Ассет",
+    "Plural": "Ассети"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Пакунок",
+    "Plural": "Пакунки"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Профіль",
+    "Plural": "Профілі"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} включений",
+    "Plural": "{0} {1} включено"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} увімкнений",
+    "Plural": "{0} {1} увімкнено"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} включений та увімкнений",
+    "Plural": "{0} {1} включено та увімкнено"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} завантажений",
+    "Plural": "{0} {1} завантажено"
   }
 }
