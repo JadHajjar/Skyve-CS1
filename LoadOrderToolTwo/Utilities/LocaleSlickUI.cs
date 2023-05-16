@@ -10,5 +10,7 @@ internal class LocaleSlickUI : LocaleHelper
 
 	protected LocaleSlickUI() : base($"{nameof(LoadOrderToolTwo)}.Properties.SlickUI.json") { }
 
+	public static Translation Search => _instance.GetText(nameof(Search));
+
 	public static void Load() { }
 }

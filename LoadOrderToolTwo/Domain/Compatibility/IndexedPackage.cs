@@ -11,6 +11,7 @@ public class IndexedPackage
 {
 	public Package Package { get; }
 	public Dictionary<ulong, IndexedPackage> Group { get; }
+	public Dictionary<ulong, IndexedPackage> RequirementAlternatives { get; }
 	public Dictionary<StatusType, List<IndexedPackageStatus>> Statuses { get; }
 	public Dictionary<InteractionType, List<IndexedPackageInteraction>> Interactions { get; }
 
@@ -19,6 +20,7 @@ public class IndexedPackage
 		Package = package;
 		Statuses = new();
 		Group = new();
+		RequirementAlternatives = new();
 		Interactions = new();
 	}
 
@@ -40,14 +42,59 @@ public class IndexedPackage
 			}
 		}
 
-		if (Package.GroupId != 0)
+		if (Statuses.ContainsKey(StatusType.TestVersion))
 		{
-			foreach (var item in packages.Values)
+			foreach (var item in Statuses[StatusType.TestVersion].SelectMany(x => x.Packages))
 			{
-				if (item.Package.GroupId == Package.GroupId)
-				{
-					Group[item.Package.SteamId] = item;
-				}
+				Group[item.Key] = item.Value;
+
+				item.Value.Group[Package.SteamId] = this;
+			}
+		}
+
+		if (Statuses.ContainsKey(StatusType.Deprecated))
+		{
+			foreach (var item in Statuses[StatusType.Deprecated].SelectMany(x => x.Packages))
+			{
+				RequirementAlternatives[item.Key] = item.Value;
+			}
+		}
+
+		if (Statuses.ContainsKey(StatusType.Reupload))
+		{
+			foreach (var item in Statuses[StatusType.Reupload].SelectMany(x => x.Packages))
+			{
+				RequirementAlternatives[item.Key] = item.Value;
+			}
+		}
+
+		if (Interactions.ContainsKey(InteractionType.RequirementAlternative))
+		{
+			foreach (var item in Interactions[InteractionType.RequirementAlternative].SelectMany(x => x.Packages))
+			{
+				RequirementAlternatives[item.Key] = item.Value;
+			}
+		}
+
+		if (Interactions.ContainsKey(InteractionType.Alternative))
+		{
+			foreach (var item in Interactions[InteractionType.RequirementAlternative].SelectMany(x => x.Packages))
+			{
+				RequirementAlternatives[item.Key] = item.Value;
+			}
+		}
+
+		if (Statuses.ContainsKey(StatusType.Deprecated) && Statuses[StatusType.Deprecated].Any(x => x.Packages.Any()))
+		{
+			var interaction = new IndexedPackageInteraction(new() { Type = InteractionType.SucceededBy, Packages = Statuses[StatusType.Deprecated].SelectMany(x => x.Packages.Keys).ToArray() }, packages);
+
+			if (!Interactions.ContainsKey(InteractionType.SucceededBy))
+			{
+				Interactions[InteractionType.SucceededBy] = new() { interaction };
+			}
+			else
+			{
+				Interactions[InteractionType.SucceededBy].Add(interaction);
 			}
 		}
 	}
@@ -139,5 +186,5 @@ public class IndexedPackage
 		return Package.SteamId.GetHashCode();
 	}
 
-	public Domain.Package? LocalPackage => CompatibilityManager.FindPackage(Package);
+	public Domain.Package? LocalPackage => CompatibilityManager.FindPackage(this);
 }

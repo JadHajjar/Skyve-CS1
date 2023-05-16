@@ -20,7 +20,7 @@ public class CompatibilityInfo
 	{
 		Package = package;
 		Data = packageData;
-		Links = new();
+		Links = packageData?.Package.Links ?? new();
 		ReportItems = new();
 	}
 

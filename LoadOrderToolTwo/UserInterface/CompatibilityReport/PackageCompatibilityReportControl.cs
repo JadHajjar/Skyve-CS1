@@ -7,6 +7,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -90,15 +91,11 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 			controlCount = 0;
 
-			if (Report == null)
-			{
-				GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Stability, new Domain.Compatibility.ReportItem { Type = ReportType.Stability }));
-				return;
-			}
-
 			foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key))
 			{
-				GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), item.Select(x => new CompatibilityMessageControl(this, item.Key, x)).ToArray());
+				var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
+
+				GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
 			}
 		}
 		finally
@@ -128,9 +125,9 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		};
 	}
 
-	private void GenerateSection(string title, Bitmap image, Color backColor, params Control[] controls)
+	private void GenerateSection(string title, Bitmap image, Color backColor, List<CompatibilityMessageControl> controls)
 	{
-		if (controls.Length == 0)
+		if (controls.Count == 0)
 		{
 			return;
 		}

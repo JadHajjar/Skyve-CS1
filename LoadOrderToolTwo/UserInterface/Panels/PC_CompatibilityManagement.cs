@@ -18,28 +18,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_CompatibilityManagement : PanelContent
 {
-	private readonly List<ulong> _pages = new List<ulong>();
 	private readonly Dictionary<ulong, IPackage?> _packages = new();
 	private int currentPage;
-	private IPackage? currentPackage;
 	private PostPackage? postPackage;
 	private PostPackage? lastPackageData;
 
-	internal IPackage? CurrentPackage => currentPackage;
+	internal IPackage? CurrentPackage { get; private set; }
 
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
 		InitializeComponent();
 
+		SlickTip.SetTo(B_Skip, "Skip");
+		SlickTip.SetTo(B_Previous, "Previous");
+		SlickTip.SetTo(P_Tags, "GlobalTagsInfo");
 		SlickTip.SetTo(P_Tags, "GlobalTagsInfo");
 		SlickTip.SetTo(B_ReuseData, "ReuseData_Tip");
+		TB_Search.Placeholder = $"{LocaleSlickUI.Search}..";
 		T_Statuses.Text = LocaleCR.StatusesCount.Format(0);
 		T_Interactions.Text = LocaleCR.InteractionCount.Format(0);
+
+		packageCrList.CanDrawItem += PackageCrList_CanDrawItem;
 	}
 
 	public PC_CompatibilityManagement() : this(true)
@@ -57,7 +59,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 			}
 		}
 
-		_pages.AddRange(_packages.OrderByDescending(x => x.Value?.ServerTime).Select(x => x.Key));
+		PackageList.AddRange(_packages.OrderByDescending(x => x.Value?.ServerTime).Select(x => x.Key));
+		packageCrList.SetItems(PackageList);
 		CB_BlackListId.Visible = CB_BlackListName.Visible = false;
 
 		SetPackage(0);
@@ -70,20 +73,40 @@ public partial class PC_CompatibilityManagement : PanelContent
 			_packages[package] = SteamUtil.GetItem(package);
 		}
 
-		_pages.AddRange(_packages.OrderByDescending(x => x.Value?.ServerTime).Select(x => x.Key));
+		packageCrList.SetItems(PackageList);
 
 		SetPackage(0);
 	}
+
+	private List<ulong> PackageList => _packages.Where(x =>
+	{
+		if (!CB_ShowUpToDate.Checked)
+		{
+			var package = SteamUtil.GetItem(x.Key);
+			var cr = package?.GetCompatibilityInfo();
+
+			if (cr?.Data is null || cr.Data.Package.ReviewDate > package?.ServerTime)
+			{
+				return false;
+			}
+		}
+
+		return true;
+
+	}).OrderByDescending(x => x.Value?.ServerTime).ToList(x => x.Key);
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
 		TLP_Main.Padding = UI.Scale(new Padding(5, 0, 5, 5), UI.FontScale);
-		B_Skip.Margin = B_Previous.Margin = B_Apply.Margin = L_Page.Margin = B_ReuseData.Margin = UI.Scale(new Padding(1, 5, 1, 0), UI.FontScale);
+		TLP_List.Padding = UI.Scale(new Padding(5), UI.FontScale);
+		I_List.Margin = B_Skip.Margin = B_Previous.Margin = B_Apply.Margin = L_Page.Margin = B_ReuseData.Margin = UI.Scale(new Padding(1, 5, 1, 0), UI.FontScale);
 		P_Main.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
-
+		TLP_List.Width = (int)(210 * UI.FontScale);
+		I_List.Padding = UI.Scale(new Padding(4), UI.FontScale);
+		I_List.Margin = UI.Scale(new Padding(1, 5, 6, 0), UI.FontScale);
 		foreach (Control control in TLP_MainInfo.Controls)
 		{
 			control.Margin = UI.Scale(new Padding(5), UI.FontScale);
@@ -117,24 +140,21 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		PB_Loading.Loading = true;
 
-		var compData = await CompatibilityApiUtil.Catalogue();
 		var mods = await SteamUtil.QueryFilesAsync(Domain.Steam.SteamQueryOrder.RankedByLastUpdatedDate, requiredTags: new[] { "Mod" }, all: true);
 
 		foreach (var mod in mods)
 		{
-			if (mod.Value.ServerTime > (compData?.Packages.FirstOrDefault(x => x.SteamId == mod.Key)?.ReviewDate ?? DateTime.MinValue))
-			{
-				_packages.Add(mod.Key, mod.Value);
-			}
+			_packages.Add(mod.Key, mod.Value);
 		}
 
-		_pages.AddRange(_packages.OrderBy(x => x.Value?.ServerTime).Select(x => x.Key));
+		packageCrList.SetItems(_packages.Keys);
 
 		return true;
 	}
 
 	protected override void OnDataLoad()
 	{
+		CB_ShowUpToDate.Checked = false;
 		SetPackage(0);
 		PB_Loading.Dispose();
 	}
@@ -142,44 +162,80 @@ public partial class PC_CompatibilityManagement : PanelContent
 	protected override void OnLoadFail()
 	{
 		ShowPrompt(LocaleCR.CrDataLoadFailed, PromptButtons.OK, PromptIcons.Error);
-		Form.PushBack();
+		PushBack();
 	}
 
 	private async void SetPackage(int page)
 	{
 		if (page < 0 || page >= _packages.Count)
 		{
-			Form?.PushBack();
+			PushBack();
 			return;
 		}
 
-		L_Page.Text = $"{_packages.Count - page} / {_packages.Count}";
+		var packages = PackageList;
+
+		if (packages.Count == 0)
+		{
+			L_Page.Text = $"{page + 1} / {_packages.Count}";
+			return;
+		}
+
+		L_Page.Text = $"{page + 1} / {packages.Count}";
 
 		PB_LoadingPackage.BringToFront();
 		PB_LoadingPackage.Loading = true;
 
 		currentPage = page;
-		currentPackage = _packages[_pages[page]];
+		CurrentPackage = _packages[packages[page]];
 
 		try
 		{
-			currentPackage ??= await SteamUtil.GetItemAsync(_pages[page]);
+			CurrentPackage ??= await SteamUtil.GetItemAsync(packages[page]);
 
-			var catalogue = await CompatibilityApiUtil.Catalogue(currentPackage!.SteamId);
+			var catalogue = await CompatibilityApiUtil.Catalogue(CurrentPackage!.SteamId);
 
 			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<Package, PostPackage>();
 
-			postPackage ??= CompatibilityManager.GetAutomatedReport(currentPackage).CloneTo<Package, PostPackage>();
+			var automatedPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<Package, PostPackage>();
+
+			if (postPackage is null)
+			{
+				postPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<Package, PostPackage>();
+			}
+			else
+			{
+				if (automatedPackage.Stability is PackageStability.Broken)
+				{
+					postPackage.Stability = PackageStability.Broken;
+				}
+
+				foreach (var item in automatedPackage.Statuses ?? new())
+				{
+					if (!postPackage.Statuses.Any(x => x.Type == item.Type))
+					{
+						postPackage.Statuses!.Add(item);
+					}
+				}
+
+				foreach (var item in automatedPackage.Interactions ?? new())
+				{
+					if (!postPackage.Interactions.Any(x => x.Type == item.Type))
+					{
+						postPackage.Interactions!.Add(item);
+					}
+				}
+			}
 
 			postPackage.BlackListId = catalogue?.BlackListedIds?.Contains(postPackage.SteamId) ?? false;
 			postPackage.BlackListName = catalogue?.BlackListedNames?.Contains(postPackage.Name ?? string.Empty) ?? false;
 
 			SetData(postPackage);
 
-			PB_Icon.Package = currentPackage;
+			PB_Icon.Package = CurrentPackage;
 			PB_Icon.Image = null;
-			PB_Icon.LoadImage(currentPackage.IconUrl, ImageManager.GetImage);
-			P_Info.SetPackage(currentPackage, null);
+			PB_Icon.LoadImage(CurrentPackage.IconUrl, ImageManager.GetImage);
+			P_Info.SetPackage(CurrentPackage, null);
 
 			B_Previous.Enabled = currentPage > 0;
 			B_Skip.Enabled = currentPage != _packages.Count - 1;
@@ -200,6 +256,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		CB_BlackListName.Checked = postPackage.BlackListName;
 		CB_BlackListId.Checked = postPackage.BlackListId;
 		DD_Stability.SelectedItem = postPackage.Stability;
+		DD_PackageType.SelectedItem = postPackage.Type;
 		DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => postPackage.RequiredDLCs?.Contains(x.Id) ?? false);
 		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => postPackage.Usage.HasFlag(x));
 		TB_Note.Text = postPackage.Note;
@@ -316,18 +373,19 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return;
 		}
 
-		postPackage!.SteamId = currentPackage!.SteamId;
-		postPackage.FileName = Path.GetFileName(currentPackage.Package?.Mod?.FileName ?? string.Empty);
-		postPackage.Name = currentPackage.Name;
+		postPackage!.SteamId = CurrentPackage!.SteamId;
+		postPackage.FileName = Path.GetFileName(CurrentPackage.Package?.Mod?.FileName ?? string.Empty);
+		postPackage.Name = CurrentPackage.Name;
 		postPackage.ReviewDate = DateTime.UtcNow;
-		postPackage.AuthorId = currentPackage.Author?.SteamId ?? 0;
+		postPackage.AuthorId = CurrentPackage.Author?.SteamId ?? 0;
 		postPackage.Author = new Author
 		{
 			SteamId = postPackage.AuthorId,
-			Name = currentPackage.Author?.Name,
+			Name = CurrentPackage.Author?.Name,
 		};
 
 		postPackage.Stability = DD_Stability.SelectedItem;
+		postPackage.Type = DD_PackageType.SelectedItem;
 		postPackage.Usage = DD_Usage.SelectedItems.Aggregate((prev, next) => prev | next);
 		postPackage.RequiredDLCs = DD_DLCs.SelectedItems.Select(x => x.Id).ToArray();
 		postPackage.Note = TB_Note.Text;
@@ -376,6 +434,12 @@ public partial class PC_CompatibilityManagement : PanelContent
 		B_ReuseData.Visible = true;
 
 		SetPackage(currentPage + 1);
+
+		await Task.Run(() =>
+		{
+			CompatibilityManager.DownloadData();
+			CompatibilityManager.CacheReport();
+		});
 	}
 
 	private void FLP_Statuses_ControlAdded(object sender, ControlEventArgs e)
@@ -395,5 +459,62 @@ public partial class PC_CompatibilityManagement : PanelContent
 		{
 			B_Apply_Click(sender, e);
 		}
+	}
+
+	private void I_List_Click(object sender, EventArgs e)
+	{
+		CB_ShowUpToDate.Visible = TLP_List.Visible = I_List.Selected = !I_List.Selected;
+	}
+
+	private void I_List_SizeChanged(object sender, EventArgs e)
+	{
+		I_List.Width = I_List.Height;
+	}
+
+	private void packageCrList1_ItemMouseClick(object sender, MouseEventArgs e)
+	{
+		SetPackage(PackageList.IndexOf((ulong)sender));
+	}
+
+	private void TB_Search_TextChanged(object sender, EventArgs e)
+	{
+		TB_Search.ImageName = string.IsNullOrWhiteSpace(TB_Search.Text) ? "I_Search" : "I_ClearSearch";
+
+		packageCrList.FilterChanged();
+
+		if (sender == CB_ShowUpToDate)
+		{
+			SetPackage(0);
+		}
+	}
+
+	private void PackageCrList_CanDrawItem(object sender, CanDrawItemEventArgs<ulong> e)
+	{
+		var package = SteamUtil.GetItem(e.Item);
+
+		if (package is null)
+		{
+			return;
+		}
+
+		if (!CB_ShowUpToDate.Checked)
+		{
+			var cr = package.GetCompatibilityInfo();
+
+			if (cr.Data is null || cr.Data.Package.ReviewDate > package.ServerTime)
+			{
+				e.DoNotDraw = true;
+				return;
+			}
+		}
+
+		e.DoNotDraw = !(TB_Search.Text.SearchCheck(package.ToString())
+			|| TB_Search.Text.SearchCheck(package.Author?.Name)
+			|| package.SteamId.ToString().IndexOf(TB_Search.Text, StringComparison.OrdinalIgnoreCase) != -1);
+	}
+
+	private void TB_Search_IconClicked(object sender, EventArgs e)
+	{
+		TB_Search.Text = string.Empty;
 	}
 }

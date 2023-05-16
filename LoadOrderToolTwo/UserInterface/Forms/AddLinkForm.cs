@@ -86,6 +86,7 @@ public partial class AddLinkForm : BaseForm
 			tbLink.Placeholder = "Link URL";
 			tbLink.MinimumSize = new(0, (int)(24 * UI.FontScale));
 			tbLink.Text = packageLink.Url;
+			tbLink.TextChanged += TbLink_TextChanged;
 
 			tbName.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 			tbName.ShowLabel = false;
@@ -108,7 +109,23 @@ public partial class AddLinkForm : BaseForm
 			Controls.Add(icon, 0, 0);
 			Controls.Add(tbLink, 1, 0);
 			Controls.Add(deleteButton, 3, 0);
-			SetColumnSpan(tbLink, 2);
+
+			if (link.Type == LinkType.Other)
+			{
+				SetColumnSpan(tbLink, 1);
+				Controls.Add(tbName, 2, 0);
+			}
+			else
+			{
+				Controls.Remove(tbName);
+				SetColumnSpan(tbLink, 2);
+			}
+		}
+
+		private void TbLink_TextChanged(object sender, EventArgs e)
+		{
+			if (tbLink.Text.StartsWith("https://steamcommunity.com/linkfilter/?url="))
+				tbLink.Text = tbLink.Text.Remove(0, "https://steamcommunity.com/linkfilter/?url=".Length);
 		}
 
 		public PackageLink Link => new PackageLink

@@ -59,7 +59,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		}
 		else
 		{
-			TypeDropDown_SelectedItemChanged(this, EventArgs.Empty);
+			typeDropDown.SelectedItem = typeDropDown.Items[0];
 		}
 
 		SlickTip.SetTo(I_Copy, "Copy");
@@ -82,6 +82,8 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			DD_Action.Items = actions;
 			DD_Action.SelectedItem = DD_Action.Items[0];
 		}
+
+		DD_Action.IsFlipped = InteractionType.Successor.Equals(typeDropDown.SelectedItem);
 
 		L_Output.Invalidate();
 	}
