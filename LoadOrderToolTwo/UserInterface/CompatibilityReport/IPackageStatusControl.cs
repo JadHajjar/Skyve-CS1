@@ -188,14 +188,14 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		string message;
 
 		var action = LocaleCR.Get($"Action_{DD_Action.SelectedItem}");
-		var actionText = P_Packages.Controls.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
 		if (typeDropDown.SelectedItem is InteractionType.Successor)
 		{
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{InteractionType.SucceededBy}");
-			message = string.Format($"{translation.One}\r\n\r\n{actionText}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName(), (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName()).Trim();
+			message = string.Format($"{translation.One}\r\n\r\n{action.Zero}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName(), (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName()).Trim();
 		}
 		else
 		{
+			var actionText = P_Packages.Controls.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{typeDropDown.SelectedItem}");
 			var text = P_Packages.Controls.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
 			message = string.Format($"{text}\r\n\r\n{actionText}", (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName(), (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName()).Trim();
