@@ -30,6 +30,7 @@
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
   "Switch": "切换到链接的插件",
+  "FlippedSwitch": "Switch to to this package",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
   "CausesIssues": "导致问题",
@@ -120,6 +121,7 @@
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期输出",
+  "Stability_AssetNotReviewed": "This asset has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate; though assets are generally stable",
   "Stability_NotReviewed": "此插件尚未被检查。兼容性信息可能不准确。",
   "Stability_Stable": "此插件能稳定运行。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
@@ -164,6 +166,7 @@
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
   "CRT_Ambiguous": "不明确的",
+  "LastReviewDate": "It was last reviewed on {0}",
   "RequestReviewInfo": "使用此插件时遇到问题？\n请在这里申请重新复查：",
   "RequestReview": "申请审查",
   "MissingDependencyCount": {
@@ -181,5 +184,13 @@
   "SwitchCount": {
     "One": "{0} {1} 需要切换到另一个",
     "Plural": "{0} {1} 需要切换到另一个"
-  }
+  },
+  "PackageType": "Package Type",
+  "GenericPackage": "Generic Package",
+  "MusicPack": "Music Pack",
+  "ThemeMix": "Theme Mix",
+  "IMTMarkings": "IMT Markings",
+  "RenderItPreset": "Render it! Preset",
+  "POFont": "Procedural Object Font/Module",
+  "NameList": "Name-List/Game Translations"
 }
