@@ -39,4 +39,15 @@ public class PackageStatus : IPackageStatus<StatusType>, IDynamicSql
 		}
 	}
 #endif
+
+    public PackageStatus()
+    {
+        
+    }
+
+    public PackageStatus(StatusType type, StatusAction action = StatusAction.NoAction)
+    {
+		Type = type;
+		Action = action;
+    }
 }

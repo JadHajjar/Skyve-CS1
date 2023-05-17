@@ -1,7 +1,6 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
-using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 
 using System;
@@ -105,6 +104,11 @@ internal class ModLogicManager
 	internal static bool IsPseudoMod(Mod mod)
 	{
 		if (LocationManager.FileExists(LocationManager.Combine(mod.Folder, "ThemeMix.xml")))
+		{
+			return true;
+		}
+
+		if (mod.GetCompatibilityInfo().Data?.Package.Type is not Domain.Compatibility.PackageType.GenericPackage and not Domain.Compatibility.PackageType.MusicPack and not Domain.Compatibility.PackageType.CSM)
 		{
 			return true;
 		}

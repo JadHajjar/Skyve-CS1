@@ -270,4 +270,5 @@ internal class Locale : LocaleHelper
 	public static Translation EnabledCount => _instance.GetText(nameof(EnabledCount));
 	public static Translation IncludedEnabledCount => _instance.GetText(nameof(IncludedEnabledCount));
 	public static Translation LoadedCount => _instance.GetText(nameof(LoadedCount));
+	public static Translation EditCompatibility => _instance.GetText(nameof(EditCompatibility));
 }

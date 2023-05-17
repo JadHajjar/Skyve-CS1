@@ -38,7 +38,7 @@ public class Package : IPackage
 	public bool Workshop { get; }
 	public string Folder { get; }
 	public bool IsPseudoMod { get; set; }
-	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId);
+	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : this.GetCompatibilityInfo().Data?.Package.SteamId ?? 0);
 	public long FileSize => ContentUtil.GetTotalSize(Folder);
 	public DateTime LocalTime => ContentUtil.GetLocalUpdatedTime(Folder);
 	public DownloadStatus Status { get; set; }
@@ -61,6 +61,7 @@ public class Package : IPackage
 	public SteamVisibility Visibility => WorkshopInfo?.Visibility ?? SteamVisibility.Local;
 	public ulong[]? RequiredPackages => WorkshopInfo?.RequiredPackages;
 	public bool RemovedFromSteam => WorkshopInfo?.RemovedFromSteam ?? false;
+	public bool Incompatible => WorkshopInfo?.Incompatible ?? false;
 	public long ServerSize => WorkshopInfo?.ServerSize??0;
 	public string? SteamDescription => WorkshopInfo?.SteamDescription;
 	public string[]? WorkshopTags => WorkshopInfo?.WorkshopTags;

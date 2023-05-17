@@ -5,7 +5,7 @@ public enum StatusType
 	[CRN(NotificationType.None, false)]
 	None = 0,
 
-	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.NoAction })]
+	[CRN(NotificationType.Caution, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.NoAction })]
 	Deprecated = 1,
 
 	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.NoAction })]
@@ -35,5 +35,8 @@ public enum StatusType
 	/********************************/
 
 	[CRN(NotificationType.MissingDependency, false)]
-	MissingDlc
+	MissingDlc,
+
+	[CRN(NotificationType.Unsubscribe, false)]
+	Succeeded
 }

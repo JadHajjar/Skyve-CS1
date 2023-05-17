@@ -33,4 +33,5 @@ public interface IPackage
 	string[]? WorkshopTags { get; }
 	string Folder { get; }
 	bool RemovedFromSteam { get; }
+	bool Incompatible { get; }
 }

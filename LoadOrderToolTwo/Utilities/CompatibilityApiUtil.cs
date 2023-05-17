@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace LoadOrderToolTwo.Utilities;
 internal class CompatibilityApiUtil
 {
-	internal static async Task<bool> IsCommunityManager(ulong steamId)
+	internal static async Task<bool> IsCommunityManager()
 	{
-		return await Get<bool>("/IsCommunityManager", ("steamId", Encryption.Encrypt(steamId.ToString(), KEYS.SALT)));
+		return await Get<bool>("/IsCommunityManager");
 	}
 
 	internal static async Task<CompatibilityData?> Catalogue()
@@ -32,11 +32,12 @@ internal class CompatibilityApiUtil
 		return await Post<PostPackage, ApiResponse>("/SaveEntry", package);
 	}
 
-	internal static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
+	private static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{
 		using var httpClient = new HttpClient();
 
 		httpClient.DefaultRequestHeaders.Add("API_KEY", KEYS.API_KEY);
+		httpClient.DefaultRequestHeaders.Add("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT));
 
 		if (queryParams.Length > 0)
 		{
@@ -57,11 +58,12 @@ internal class CompatibilityApiUtil
 		return default;
 	}
 
-	internal static async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
+	private static async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
 	{
 		using var httpClient = new HttpClient();
 
 		httpClient.DefaultRequestHeaders.Add("API_KEY", KEYS.API_KEY);
+		httpClient.DefaultRequestHeaders.Add("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT));
 
 		if (queryParams.Length > 0)
 		{

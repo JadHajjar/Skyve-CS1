@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using System.Collections.Generic;
@@ -78,7 +79,7 @@ public class IndexedPackage
 
 		if (Interactions.ContainsKey(InteractionType.Alternative))
 		{
-			foreach (var item in Interactions[InteractionType.RequirementAlternative].SelectMany(x => x.Packages))
+			foreach (var item in Interactions[InteractionType.Alternative].SelectMany(x => x.Packages))
 			{
 				RequirementAlternatives[item.Key] = item.Value;
 			}
@@ -110,20 +111,23 @@ public class IndexedPackage
 		{
 			foreach (var item in Interactions[InteractionType.Alternative])
 			{
+				var linkedPackages = item.Interaction.Packages.ToList();
+
+				linkedPackages.Add(Package.SteamId);
+
 				foreach (var package in item.Packages.Values)
 				{
-					var replacedInteraction = item.Clone();
+					var replacedInteraction = item.Interaction.Clone();
 
-					replacedInteraction.Packages[Package.SteamId] = this;
-					replacedInteraction.Packages.Remove(package.Package.SteamId);
+					replacedInteraction.Packages = linkedPackages.Where(x => x != package.Package.SteamId).ToArray();
 
 					if (package.Interactions.ContainsKey(InteractionType.Alternative))
 					{
-						package.Interactions[InteractionType.Alternative].Add(replacedInteraction);
+						package.Interactions[InteractionType.Alternative].Add(new(replacedInteraction, packages));
 					}
 					else
 					{
-						package.Interactions[InteractionType.Alternative] = new() { replacedInteraction };
+						package.Interactions[InteractionType.Alternative] = new() { new(replacedInteraction, packages) };
 					}
 				}
 			}
@@ -185,6 +189,4 @@ public class IndexedPackage
 	{
 		return Package.SteamId.GetHashCode();
 	}
-
-	public Domain.Package? LocalPackage => CompatibilityManager.FindPackage(this);
 }

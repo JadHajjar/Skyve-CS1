@@ -7,6 +7,8 @@ public enum PackageStability
 	[CRN(NotificationType.Warning)] HasIssues = 3,
 	[CRN(NotificationType.Unsubscribe)] Broken = 4,
 
+	[CRN(NotificationType.Unsubscribe, false)] Incompatible = 99,
 	[CRN(NotificationType.None, false)] AssetNotReviewed = 98,
+	[CRN(NotificationType.Caution, false)] Local = 97,
 	[CRN(NotificationType.Info, false)] NotReviewed = 0,
 }

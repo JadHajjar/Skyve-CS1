@@ -699,7 +699,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 
 		I_Actions.Loading = true;
-		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), true);
+		await CitiesManager.UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
 		I_Actions.Loading = false;
 	}
 
@@ -717,7 +717,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			var report = item.Item.GetCompatibilityInfo();
 
-			if (report.Notification >= Domain.Compatibility.NotificationType.Unsubscribe)
+			if (report.Notification >= NotificationType.Unsubscribe)
 			{
 				if (!removeBadPackages && ShowPrompt(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand) == DialogResult.No)
 				{
@@ -733,7 +733,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId), false);
+		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
 	}
 
 	private async void B_DeleteAll_Click()

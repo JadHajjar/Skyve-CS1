@@ -21,7 +21,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
     <StartupObject>LoadOrderToolTwo.Program</StartupObject>
-    <ApplicationIcon>Resources\LOT2.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Skyve.ico</ApplicationIcon>
     <FileVersion>2.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <NeutralLanguage>en</NeutralLanguage>
@@ -126,7 +126,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Resources\LOT2.ico" />
+	  <Content Include="Resources\Skyve.ico" />
 	</ItemGroup>
 
 	<ItemGroup>

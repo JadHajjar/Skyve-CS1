@@ -137,7 +137,7 @@ partial class PC_CompatibilityManagement
 			this.T_Info.LinkedControl = this.TLP_MainInfo;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
-			this.T_Info.Selected = true;
+			this.T_Info.Selected = false;
 			this.T_Info.Size = new System.Drawing.Size(258, 25);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
@@ -185,6 +185,7 @@ partial class PC_CompatibilityManagement
 			this.TB_Note.SelectionStart = 0;
 			this.TB_Note.Size = new System.Drawing.Size(388, 151);
 			this.TB_Note.TabIndex = 19;
+			this.TB_Note.TextChanged += new System.EventHandler(this.ControlValueChanged);
 			// 
 			// tableLayoutPanel1
 			// 
@@ -266,6 +267,7 @@ partial class PC_CompatibilityManagement
 			this.DD_Stability.Size = new System.Drawing.Size(375, 56);
 			this.DD_Stability.TabIndex = 0;
 			this.DD_Stability.Text = "Stability";
+			this.DD_Stability.SelectedItemChanged += new System.EventHandler(this.ControlValueChanged);
 			// 
 			// DD_DLCs
 			// 
@@ -276,6 +278,7 @@ partial class PC_CompatibilityManagement
 			this.DD_DLCs.Size = new System.Drawing.Size(375, 54);
 			this.DD_DLCs.TabIndex = 17;
 			this.DD_DLCs.Text = "RequiredDLCs";
+			this.DD_DLCs.SelectedItemChanged += new System.EventHandler(this.ControlValueChanged);
 			// 
 			// DD_Usage
 			// 
@@ -286,6 +289,7 @@ partial class PC_CompatibilityManagement
 			this.DD_Usage.Size = new System.Drawing.Size(375, 54);
 			this.DD_Usage.TabIndex = 17;
 			this.DD_Usage.Text = "Usage";
+			this.DD_Usage.SelectedItemChanged += new System.EventHandler(this.ControlValueChanged);
 			// 
 			// CB_BlackListId
 			// 
@@ -297,11 +301,12 @@ partial class PC_CompatibilityManagement
 			this.CB_BlackListId.EnterTriggersClick = false;
 			this.CB_BlackListId.Location = new System.Drawing.Point(3, 125);
 			this.CB_BlackListId.Name = "CB_BlackListId";
-			this.CB_BlackListId.Size = new System.Drawing.Size(243, 33);
+			this.CB_BlackListId.Size = new System.Drawing.Size(135, 33);
 			this.CB_BlackListId.SpaceTriggersClick = true;
 			this.CB_BlackListId.TabIndex = 17;
 			this.CB_BlackListId.Text = "BlackListId";
 			this.CB_BlackListId.UncheckedText = null;
+			this.CB_BlackListId.CheckChanged += new System.EventHandler(this.ControlValueChanged);
 			// 
 			// CB_BlackListName
 			// 
@@ -313,11 +318,12 @@ partial class PC_CompatibilityManagement
 			this.CB_BlackListName.EnterTriggersClick = false;
 			this.CB_BlackListName.Location = new System.Drawing.Point(3, 164);
 			this.CB_BlackListName.Name = "CB_BlackListName";
-			this.CB_BlackListName.Size = new System.Drawing.Size(209, 33);
+			this.CB_BlackListName.Size = new System.Drawing.Size(174, 33);
 			this.CB_BlackListName.SpaceTriggersClick = true;
 			this.CB_BlackListName.TabIndex = 17;
 			this.CB_BlackListName.Text = "BlackListName";
 			this.CB_BlackListName.UncheckedText = null;
+			this.CB_BlackListName.CheckChanged += new System.EventHandler(this.ControlValueChanged);
 			// 
 			// DD_PackageType
 			// 
@@ -328,6 +334,7 @@ partial class PC_CompatibilityManagement
 			this.DD_PackageType.Size = new System.Drawing.Size(375, 54);
 			this.DD_PackageType.TabIndex = 17;
 			this.DD_PackageType.Text = "PackageType";
+			this.DD_PackageType.SelectedItemChanged += new System.EventHandler(this.ControlValueChanged);
 			// 
 			// T_Statuses
 			// 
@@ -339,7 +346,7 @@ partial class PC_CompatibilityManagement
 			this.T_Statuses.LinkedControl = this.FLP_Statuses;
 			this.T_Statuses.Location = new System.Drawing.Point(258, 5);
 			this.T_Statuses.Name = "T_Statuses";
-			this.T_Statuses.Selected = false;
+			this.T_Statuses.Selected = true;
 			this.T_Statuses.Size = new System.Drawing.Size(258, 25);
 			this.T_Statuses.TabIndex = 0;
 			this.T_Statuses.TabStop = false;
@@ -480,6 +487,7 @@ partial class PC_CompatibilityManagement
 			// PB_LoadingPackage
 			// 
 			this.PB_LoadingPackage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PB_LoadingPackage.LoaderSpeed = 1D;
 			this.PB_LoadingPackage.Location = new System.Drawing.Point(0, 0);
 			this.PB_LoadingPackage.Name = "PB_LoadingPackage";
 			this.PB_LoadingPackage.Size = new System.Drawing.Size(775, 625);
@@ -669,6 +677,7 @@ partial class PC_CompatibilityManagement
 			// PB_Loading
 			// 
 			this.PB_Loading.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PB_Loading.LoaderSpeed = 1D;
 			this.PB_Loading.Location = new System.Drawing.Point(0, 30);
 			this.PB_Loading.Name = "PB_Loading";
 			this.PB_Loading.Size = new System.Drawing.Size(1061, 670);

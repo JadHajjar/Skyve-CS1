@@ -52,6 +52,7 @@ public class Mod : IPackage
 	public string? SteamDescription => ((IPackage)Package).SteamDescription;
 	public string[]? WorkshopTags => ((IPackage)Package).WorkshopTags;
 	public bool RemovedFromSteam => ((IPackage)Package).RemovedFromSteam;
+	public bool Incompatible => ((IPackage)Package).Incompatible;
 
 	public override bool Equals(object? obj)
 	{

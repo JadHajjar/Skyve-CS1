@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
 
@@ -37,11 +38,6 @@ internal class CompatibilityMessageControl : SlickControl
 		}
 	}
 
-	protected override void UIChanged()
-	{
-		Width = (int)(350 * UI.UIScale);
-	}
-
 	public ReportType Type { get; }
 	public ReportItem Message { get; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
@@ -63,7 +59,7 @@ internal class CompatibilityMessageControl : SlickControl
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
 			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
 			var noteSize = e.Graphics.Measure(Message.Status.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
-			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height==0?0:pad * 2));
+			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
 
 			GetAllButton(out var allText, out var allIcon, out var colorStyle);
@@ -88,13 +84,13 @@ internal class CompatibilityMessageControl : SlickControl
 
 				actionHovered |= allButtonRect.Contains(cursor);
 
-				y += allButtonRect.Height + (pad * 2);
+				y += allButtonRect.Height + pad;
 			}
 
 			if (Message.Packages.Length > 0)
 			{
 				var isDlc = Message.Type == ReportType.DlcMissing;
-				var rect = ClientRectangle.Pad(iconRect.Width + pad, y, 0, 0);
+				var rect = ClientRectangle.Pad(iconRect.Width + pad, y + pad, 0, 0);
 
 				rect.Height = (int)(40 * UI.FontScale);
 
@@ -282,20 +278,19 @@ internal class CompatibilityMessageControl : SlickControl
 		}
 	}
 
-	protected override void OnMouseClick(MouseEventArgs e)
+	protected override async void OnMouseClick(MouseEventArgs e)
 	{
 		base.OnMouseClick(e);
-
-		if (e.Button != MouseButtons.Left)
-		{
-			return;
-		}
 
 		foreach (var item in _buttonRects)
 		{
 			if (item.Value.Contains(e.Location))
 			{
-				Clicked(item.Key, true);
+				if (e.Button == MouseButtons.Left)
+				{
+					Clicked(item.Key, true);
+				}
+
 				return;
 			}
 		}
@@ -304,9 +299,50 @@ internal class CompatibilityMessageControl : SlickControl
 		{
 			if (item.Value.Contains(e.Location))
 			{
-				Clicked(item.Key, false);
+				if (e.Button == MouseButtons.Left)
+				{
+					Clicked(item.Key, false);
+				}
+				else if (e.Button == MouseButtons.Right && item.Key.Package is not null)
+				{
+					var items = PC_PackagePage.GetRightClickMenuItems(item.Key.Package);
+
+					this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
+				}
 
 				return;
+			}
+		}
+
+		if (e.Button == MouseButtons.Left && allButtonRect.Contains(e.Location))
+		{
+			switch (Message.Status.Action)
+			{
+				case StatusAction.SubscribeToPackages:
+					await CitiesManager.Subscribe(Message.Packages.Select(x=>x.SteamId));
+					break;
+				case StatusAction.RequiresConfiguration:
+					// Snooze
+					break;
+				case StatusAction.UnsubscribeThis:
+					await CitiesManager.UnSubscribe(new[] { PackageCompatibilityReportControl.Package.SteamId });
+					break;
+				case StatusAction.UnsubscribeOther:
+					await CitiesManager.UnSubscribe(Message.Packages.Select(x=>x.SteamId));
+					break;
+				case StatusAction.ExcludeThis:
+					PackageCompatibilityReportControl.Package.IsIncluded = false;
+					break;
+				case StatusAction.ExcludeOther:
+					foreach (var item in Message.Packages)
+					{
+						if(item.Package is not null)
+						item.Package.IsIncluded = false;
+					}
+					break;
+				case StatusAction.RequestReview:
+					// todo
+					break;
 			}
 		}
 	}

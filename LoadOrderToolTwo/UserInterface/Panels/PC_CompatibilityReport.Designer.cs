@@ -36,10 +36,8 @@ partial class PC_CompatibilityReport
 			this.B_Manage = new SlickControls.SlickButton();
 			this.B_YourPackages = new SlickControls.SlickButton();
 			this.B_ManageSingle = new SlickControls.SlickButton();
-			this.PB_Loading = new SlickControls.SlickPictureBox();
 			this.TLP_Main.SuspendLayout();
 			this.TLP_Buttons.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.PB_Loading)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -128,31 +126,19 @@ partial class PC_CompatibilityReport
 			this.B_ManageSingle.Text = "ManageSinglePackage";
 			this.B_ManageSingle.Click += new System.EventHandler(this.B_ManageSingle_Click);
 			// 
-			// PB_Loading
-			// 
-			this.PB_Loading.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PB_Loading.Location = new System.Drawing.Point(0, 30);
-			this.PB_Loading.Name = "PB_Loading";
-			this.PB_Loading.Size = new System.Drawing.Size(783, 408);
-			this.PB_Loading.TabIndex = 14;
-			this.PB_Loading.TabStop = false;
-			// 
 			// PC_CompatibilityReport
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.TLP_Main);
-			this.Controls.Add(this.PB_Loading);
 			this.LabelBounds = new System.Drawing.Point(-2, 3);
 			this.Name = "PC_CompatibilityReport";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
-			this.Controls.SetChildIndex(this.PB_Loading, 0);
 			this.Controls.SetChildIndex(this.TLP_Main, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.TLP_Main.ResumeLayout(false);
 			this.TLP_Main.PerformLayout();
 			this.TLP_Buttons.ResumeLayout(false);
 			this.TLP_Buttons.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.PB_Loading)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -164,6 +150,5 @@ partial class PC_CompatibilityReport
 	private System.Windows.Forms.TableLayoutPanel TLP_Buttons;
 	private SlickControls.SlickButton B_Manage;
 	private SlickControls.SlickButton B_YourPackages;
-	private SlickControls.SlickPictureBox PB_Loading;
 	private SlickControls.SlickButton B_ManageSingle;
 }

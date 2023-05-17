@@ -13,11 +13,36 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
-internal class PackageCompatibilityReportControl : SmartFlowPanel
+internal class PackageCompatibilityReportControl : TableLayoutPanel
 {
+	private readonly TableLayoutPanel[] _panels;
+	private int controlCount;
+
 	public PackageCompatibilityReportControl(IPackage package)
 	{
 		Package = package;
+		AutoSize = true;
+		AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
+		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
+		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
+		ColumnCount = 3;
+
+		_panels = new TableLayoutPanel[ColumnCount];
+		for (var i = 0; i < ColumnCount; i++)
+		{
+			_panels[i] = new()
+			{
+				Dock = DockStyle.Top,
+				AutoSize = true,
+				AutoSizeMode = AutoSizeMode.GrowAndShrink
+			};
+
+			_panels[i].ColumnStyles.Add(new ColumnStyle(SizeType.Percent));
+			_panels[i].ColumnCount = 1;
+
+			Controls.Add(_panels[i], i, 0);
+		}
 
 		CentralManager.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
@@ -58,9 +83,15 @@ internal class PackageCompatibilityReportControl : SmartFlowPanel
 
 			Report = Package.GetCompatibilityInfo(true);
 
-			Controls.Clear(true);
+			for (var i = 0; i < _panels.Length; i++)
+			{
+				_panels[i].Controls.Clear(true);
+				_panels[i].RowStyles.Clear();
+			}
 
-			foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key))
+			controlCount = 0;
+
+			foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
 			{
 				var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
 
@@ -103,6 +134,7 @@ internal class PackageCompatibilityReportControl : SmartFlowPanel
 
 		var tlp = new RoundedTableLayoutPanel
 		{
+			Dock = DockStyle.Top,
 			Padding = UI.Scale(new Padding(5), UI.FontScale),
 			Margin = UI.Scale(new Padding(5), UI.FontScale),
 			AutoSize = true,
@@ -147,6 +179,8 @@ internal class PackageCompatibilityReportControl : SmartFlowPanel
 		tlp.RowCount = tlp.RowStyles.Count;
 		tlp.ColumnCount = tlp.ColumnStyles.Count;
 
-		Controls.Add(tlp);
+		_panels[controlCount % 3].Controls.Add(tlp);
+
+		controlCount++;
 	}
 }

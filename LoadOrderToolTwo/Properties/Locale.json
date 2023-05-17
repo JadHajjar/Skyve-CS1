@@ -452,5 +452,6 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "EditCompatibility": "Edit Compatibility"
 }

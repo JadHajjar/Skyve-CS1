@@ -87,4 +87,7 @@ internal class LocaleCR : LocaleHelper
 	public static Translation RequestReview => _instance.GetText(nameof(RequestReview));
 	public static Translation RequestReviewInfo => _instance.GetText(nameof(RequestReviewInfo));
 	public static Translation LastReviewDate => _instance.GetText(nameof(LastReviewDate));
+	public static Translation ApplyChangedBeforeExit => _instance.GetText(nameof(ApplyChangedBeforeExit));
+	public static Translation Broken => _instance.GetText(nameof(Broken));
+	public static Translation Incompatible => _instance.GetText(nameof(Incompatible));
 }

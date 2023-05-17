@@ -12,12 +12,15 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
 public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
 {
 	private readonly PackageStatusTypeDropDown<T> typeDropDown;
+
+	public event EventHandler? ValuesChanged;
 
 	public IPackageStatusControl(TBase? item = default)
 	{
@@ -64,6 +67,13 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		SlickTip.SetTo(I_Paste, "Paste");
 		SlickTip.SetTo(I_AddPackage, "Add Package");
 		SlickTip.SetTo(I_Note, "Show/Hide Note");
+
+		typeDropDown.SelectedItemChanged += ValuesChanged;
+		DD_Action.SelectedItemChanged += ValuesChanged;
+		TB_Note.TextChanged += ValuesChanged;
+		TB_Note.TextChanged += ValuesChanged;
+		P_Packages.ControlAdded += (s, e) => ValuesChanged?.Invoke(s, e);
+		P_Packages.ControlRemoved += (s, e) => ValuesChanged?.Invoke(s, e);
 	}
 
 	private void TypeDropDown_SelectedItemChanged(object sender, EventArgs e)
@@ -157,11 +167,11 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			return;
 		}
 
-		var text = Clipboard.GetText().Split(',');
+		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
 
-		for (var i = 0; i < text.Length; i++)
+		foreach (Match item in matches)
 		{
-			if (ulong.TryParse(text[i], out var id))
+			if (ulong.TryParse(item.Value, out var id))
 			{
 				if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == id))
 				{

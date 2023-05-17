@@ -32,16 +32,16 @@ partial class PC_MainPage
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_StartStop = new SlickControls.SlickButton();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
-			this.label1 = new System.Windows.Forms.Label();
 			this.profileBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ProfileBubble();
 			this.modsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ModsBubble();
 			this.assetsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.AssetsBubble();
 			this.userBubble1 = new LoadOrderToolTwo.UserInterface.StatusBubbles.UserBubble();
+			this.label1 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.TLP_Profiles.SuspendLayout();
@@ -74,8 +74,8 @@ partial class PC_MainPage
 			this.B_StartStop.ColorShade = null;
 			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_StartStop.Enabled = false;
-			dynamicIcon2.Name = "I_AppIcon";
-			this.B_StartStop.ImageName = dynamicIcon2;
+			dynamicIcon1.Name = "I_CS";
+			this.B_StartStop.ImageName = dynamicIcon1;
 			this.B_StartStop.Location = new System.Drawing.Point(551, 368);
 			this.B_StartStop.Name = "B_StartStop";
 			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
@@ -117,17 +117,6 @@ partial class PC_MainPage
 			this.TLP_Profiles.Size = new System.Drawing.Size(212, 153);
 			this.TLP_Profiles.TabIndex = 13;
 			// 
-			// label1
-			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 373);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(71, 30);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "label1";
-			this.label1.Visible = false;
-			// 
 			// profileBubble
 			// 
 			this.profileBubble.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -161,9 +150,20 @@ partial class PC_MainPage
 			this.userBubble1.Enabled = false;
 			this.userBubble1.Location = new System.Drawing.Point(527, 3);
 			this.userBubble1.Name = "userBubble1";
-			this.userBubble1.Size = new System.Drawing.Size(150, 42);
+			this.userBubble1.Size = new System.Drawing.Size(150, 0);
 			this.userBubble1.TabIndex = 14;
 			this.userBubble1.Visible = false;
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(3, 373);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(71, 30);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "label1";
+			this.label1.Visible = false;
 			// 
 			// PC_MainPage
 			// 
