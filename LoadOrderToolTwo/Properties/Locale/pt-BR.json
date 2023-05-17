@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Informações de compatibilidade",
   "ProfileBubble": "Perfil atual",
   "StartCities": "Abrir Cities: Skylines",
   "StopCities": "Fechar Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Painel",
   "ModOutOfDate": "mod encontra-se desatualizado",
   "ModOutOfDatePlural": "mods encontram-se desatualizados",
-  "MultipleModsIncluded": "Várias versões do mesmo mod estão incluídas",
-  "ModIncluded": "mod incluído",
-  "ModIncludedPlural": "mods incluídos",
   "SearchDlcs": "Pesquise nas suas DLCs..",
   "SearchPackages": "Pesquise nos seus pacotes..",
-  "ModEnabled": "mod ativado",
-  "ModIncludedAndEnabled": "mod incluído e ativado",
-  "ModEnabledPlural": "mods ativados",
-  "ModIncludedAndEnabledPlural": "mods incluídos e ativados",
   "ModIsLocal": "O mod é local",
   "ModIsRemoved": "Removido da Steam",
   "ModIsUnknown": "Não foi possível obter as informações deste mod na Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Desativar todos os Recursos",
   "NoMods": "Desativar Todos os Mods",
   "AutoSave": "Salvamento Automático",
-  "AssetIncluded": "recurso incluído",
-  "AssetIncludedPlural": "recursos incluídos",
   "TotalSize": "tamanho total",
   "ReportSeverity": "Relatar Gravidade",
   "AnyStatus": "Qualquer Status",
@@ -138,7 +130,6 @@
   "DateUpdated": "Data atualizada",
   "PackageIncluded": "Incluído no Pacote",
   "PackageIncludedPlural": "pacotes incluídos",
-  "MultiplePackagesIncluded": "Várias versões do mesmo pacote estão incluídas",
   "CopyWorkshopLink": "Copie o link do workshop",
   "FilterOutPackagesWithMods": "Ocultar mods na página de pacotes",
   "FilterOutPackagesWithOneAsset": "Ocultar pacote de recursos únicos da página de pacotes",
@@ -175,7 +166,6 @@
   "AllDlcs": "Todos os DLCs",
   "DLCs": "DLCs ​​e CCPs",
   "DetectedIssues": "Problemas Detectados",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Corrigir todos os problemas",
   "LaunchTooltip": "Clique para iniciar/parar Cidades: Skylines ou use {0} em qualquer lugar do aplicativo",
   "LsmImport": "Carregando Relatório de Screen Mod",
@@ -192,20 +182,20 @@
   "CloseCitiesToSub": "Você precisa fechar Cities: Skylines para assinar ou cancelar a assinatura de pacotes",
   "ShowingFilteredItems": "Mostrando {0} de {1} itens no total",
   "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
+    "One": "Mostrando {0} mod",
+    "Plural": "Mostrando {0} mods"
   },
   "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
+    "One": "Exibindo {0} recurso",
+    "Plural": "Exibindo {0} recursos"
   },
   "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
+    "One": "Exibindo {0} pacotes",
+    "Plural": "Exibindo {0} pacotes"
   },
   "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
+    "One": "Mostrando {0} perfil",
+    "Plural": "Mostrando {0} perfis"
   },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Escala do Tema e UI",
@@ -296,13 +286,13 @@
   "LoadSaveGame_Tip": "Carregue um jogo de salvamento quando abrir Cities: Skylines. Não selecionar um arquivo salvado vai continuar sua última gravação",
   "BETA": "BETA",
   "ALPHA": "ALPHA",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "TESTE",
+  "TESTING": "TESTANDO",
   "STABLE": "ESTÁVEL",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "PRETERIDO",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "OBSOLETO",
+  "ABANDONED": "ABANDONADO",
   "ActionUnreversible": "Esta ação não pode ser revertida.",
   "AlwaysOpenFiltersAndActions": "Mostrar segmento de Filtros por padrão",
   "AlwaysOpenFiltersAndActions_Tip": "Sempre deixar a área de filtros aberta quando entra em uma aba de conteúdo",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Alterar as cores deste perfil",
   "Sorting_Color": "Cor do Perfil",
   "CreateShortcutProfile": "Criar um atalho na sua área de trabalho",
-  "ProfilesLoaded": "perfis carregados",
   "AskToLaunchGameForShortcut": "Gostaria que o atalho também abra o jogo com o seu perfil?",
   "TextImportMissingInfo": "Carregar um arquivo de texto contendo IDs do Steam para assinar facilmente ou gerenciá-los",
   "ImportFromText": "Importar do texto",
@@ -358,11 +347,11 @@
   "AnyAuthor": "Qualquer Autor",
   "ItemsCount": {
     "One": "{0} item",
-    "Plural": "{0} items"
+    "Plural": "{0} itens"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "{0} Autor Selecionado",
+    "Plural": "{0} Autores selecionados"
   },
   "Use the System's Theme": "Usar Tema do Sistema",
   "Donate": "Doar",
@@ -412,9 +401,7 @@
   "Info": "Informações",
   "SelectThisPackage": "Selecione este pacote",
   "SelectPackage": "Selecione um pacote",
-  "Profiles": "Perfis",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Mods",
+  "ControlToSelectMultiplePackages": "Ctrl + Clique para selecionar múltiplos pacotes.",
   "Local": "Local",
   "Workshop": "Workshop",
   "CompatibilityReport": "Relatório de Compatibilidade",
@@ -424,12 +411,46 @@
   "Included": "Incluído",
   "Excluded": "Excluído",
   "Server": "Servidor",
-  "Assets": "Recursos",
   "OutOfDate": "Desatualizado",
   "Subscribe": "Se inscrever",
   "Switch": "Trocar",
-  "Packages": "Pacotes",
   "AdvancedIncludeEnable": "Mostrar ambos os estados incluídos e habilitado para mods",
   "PackageStatus": "Status do pacote",
-  "Author": "Autor"
+  "Author": "Autor",
+  "Include": "Incluir",
+  "Unsubscribe": "Cancelar Assinatura",
+  "Exclude": "Excluir",
+  "Snooze": "Suspender",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Recurso",
+    "Plural": "Recursos"
+  },
+  "Package": {
+    "One": "Pacote",
+    "Plural": "Pacotes"
+  },
+  "Profile": {
+    "One": "Perfil",
+    "Plural": "Perfis"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} incluído",
+    "Plural": "{0} {1} incluídos"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} habilitado",
+    "Plural": "{0} {1} habilitados"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} incluído e habilitado",
+    "Plural": "{0} {1} incluídos e habilitados"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} carregado",
+    "Plural": "{0} {1} carregados"
+  }
 }

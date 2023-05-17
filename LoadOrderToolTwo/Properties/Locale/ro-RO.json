@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Informații despre compatibilitate",
   "ProfileBubble": "Profilul curent",
   "StartCities": "Lansare Cities: Skylines",
   "StopCities": "Stop Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Panou de bord",
   "ModOutOfDate": "modul nu este actualizat",
   "ModOutOfDatePlural": "mod-urile nu sunt actualizate",
-  "MultipleModsIncluded": "Sunt incluse mai multe versiuni ale aceluiași mod",
-  "ModIncluded": "mod inclus",
-  "ModIncludedPlural": "mod-uri incluse",
   "SearchDlcs": "Căutați prin DLC -urile dvs.",
   "SearchPackages": "Căutați prin pachetele dvs. ..",
-  "ModEnabled": "mod activat",
-  "ModIncludedAndEnabled": "Mod inclus și activat",
-  "ModEnabledPlural": "moduri activate",
-  "ModIncludedAndEnabledPlural": "Moduri incluse și activate",
   "ModIsLocal": "Mod-ul este local",
   "ModIsRemoved": "Eliminat de pe Steam",
   "ModIsUnknown": "Nu am putut obține informațiile acestui mod de la Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Dezactivează toate activele",
   "NoMods": "Dezactivează toate Modurile",
   "AutoSave": "Salvare automată",
-  "AssetIncluded": "activ inclus",
-  "AssetIncludedPlural": "active incluse",
   "TotalSize": "marimea totala",
   "ReportSeverity": "Raportul severității",
   "AnyStatus": "Orice statut",
@@ -93,7 +85,7 @@
   "ProfileDelete": "Ştergeţi acest profil (Acest lucru nu poate fi inversat)",
   "ShouldNotBeSubscribed": "Nu vă abonați",
   "MissingPackages": "Pachete lipsă",
-  "LoadingScreenMod": "Încărcarea ecranului Mod",
+  "LoadingScreenMod": "Loading Screen Mod",
   "LoadEnabled": "Încarcă toate activele activate",
   "LoadUsed": "Încărcare active utilizate",
   "ExcludeInclude": "Include / exclude",
@@ -138,7 +130,6 @@
   "DateUpdated": "Data actualizată",
   "PackageIncluded": "pachet inclus",
   "PackageIncludedPlural": "pachete incluse",
-  "MultiplePackagesIncluded": "Sunt incluse mai multe versiuni ale aceluiași pachet",
   "CopyWorkshopLink": "Copiați linkul de pe atelierul Steam al acestui pachet",
   "FilterOutPackagesWithMods": "Ascunde moduri în pagina pachetelor",
   "FilterOutPackagesWithOneAsset": "Ascundeți pachetele cu un singur activ din pagina pachetelor",
@@ -175,22 +166,21 @@
   "AllDlcs": "Toate DLC -urile",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Probleme detectate",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Repară toate problemele",
-  "LaunchTooltip": "Click pentru a lansa/opri orașele: Skylines sau pentru a folosi {0} oriunde în aplicație",
-  "LsmImport": "Încărcare raport mod ecran",
+  "LaunchTooltip": "Click pentru a lansa/opri Cities: Skylines sau pentru a folosi {0} oriunde în aplicație",
+  "LsmImport": "Loading Screen Mod Report",
   "LsmImportMissingInfo": "Vizualizați și abonați-vă la activele lipsă",
   "SelectedFileInvalid": "Fișierul selectat nu este valid",
   "NoItemsToBeDisplayed": "Niciun articol nu va fi afișat",
-  "FirstSetupInfo": "Vă rugăm să activați mod în interiorul orașelor: mai întâi Skylines înainte de a utiliza unealta",
+  "FirstSetupInfo": "Va rugăm să activați Load Order Mod 2 in interiorul aplicatiei Cities: Skylines inainte de a folosi Load Order Tool 2",
   "SetupIncomplete": "Configurare incompletă",
   "LsmImportUnusedInfo": "Vizualizați și eliminați activele neutilizate",
-  "SkipFileInfo": "Selectați un fisier sărit pentru a fi folosit la încărcarea modului Ecran",
-  "SaveFileInfo": "Selectați un fișier joc de salvare pentru a fi încărcat automat când deschideți jocul",
+  "SkipFileInfo": "Selectați un fișier care sa fie sărit si folosit pe Loading Screen Mod",
+  "SaveFileInfo": "Selectați un fișier de salvare pentru a fi încărcat automat când deschideți jocul",
   "LoadProfile": "Încarcă profil",
   "CopyAuthorSteamId": "Copiază ID-ul autorului Steam",
-  "CloseCitiesToSub": "Trebuie să închideți orașele: Skylines pentru a vă abona sau dezabona de la pachete",
-  "ShowingFilteredItems": "Se afișează {0} din {1} produse în total",
+  "CloseCitiesToSub": "Trebuie să închideți Cities: Skylines pentru a vă abona sau dezabona de la pachete",
+  "ShowingFilteredItems": "Se afișează {0} din {1} total articole",
   "ShowingMods": {
     "One": "Se afișează {0} mod",
     "Plural": "Se afișează {0} moduri"
@@ -298,7 +288,7 @@
   "ALPHA": "ALFA",
   "TEST": "TEST",
   "TESTING": "TESTARE",
-  "STABLE": "STABILE",
+  "STABLE": "STABILĂ",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "DEPRECAT",
   "OBSOLETE": "OBSOLET",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Schimbă culoarea acestui profil",
   "Sorting_Color": "Culoare profil",
   "CreateShortcutProfile": "Creează o scurtătură pentru ea pe desktop",
-  "ProfilesLoaded": "profiluri încărcate",
   "AskToLaunchGameForShortcut": "Dorești ca scurtătura să lanseze și jocul cu profilul tău?",
   "TextImportMissingInfo": "Încarcă un fișier text care conține ID-uri Steam pentru a te abona cu ușurință sau pentru a le gestiona",
   "ImportFromText": "Importă din Text",
@@ -412,9 +401,7 @@
   "Info": "Informații",
   "SelectThisPackage": "Selectaţi acest pachet",
   "SelectPackage": "Alege un pachet",
-  "Profiles": "Profiluri",
   "ControlToSelectMultiplePackages": "Ctrl + Click pentru a selecta mai multe pachete simultan.",
-  "Mods": "Moduri",
   "Local": "Local",
   "Workshop": "Atelier",
   "CompatibilityReport": "Raport de compatibilitate",
@@ -424,12 +411,46 @@
   "Included": "Inclus",
   "Excluded": "Exclus",
   "Server": "Server",
-  "Assets": "Active",
   "OutOfDate": "Expirat",
   "Subscribe": "Abonati-va",
   "Switch": "Comutare",
-  "Packages": "Pachete",
   "AdvancedIncludeEnable": "Arată starea inclusă și activată pentru mod-uri",
   "PackageStatus": "Starea pachetului",
-  "Author": "Autor"
+  "Author": "Autor",
+  "Include": "Include",
+  "Unsubscribe": "Dezabonați-vă",
+  "Exclude": "Excludeți",
+  "Snooze": "Amână",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Moduri"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Asset-uri"
+  },
+  "Package": {
+    "One": "Pachet",
+    "Plural": "Pachete"
+  },
+  "Profile": {
+    "One": "Profil",
+    "Plural": "Profiluri"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} inclus",
+    "Plural": "{0} {1} incluse"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} activat",
+    "Plural": "{0} {1} activate"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} inclus & activat",
+    "Plural": "{0} {1} incluse & activate"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} încărcat",
+    "Plural": "{0} {1} încărcate"
+  }
 }

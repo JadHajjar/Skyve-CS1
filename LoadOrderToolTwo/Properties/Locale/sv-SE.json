@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Aktuell profil",
   "StartCities": "Start Cities: Skylines",
   "StopCities": "Sluta Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "instrumentbräda",
   "ModOutOfDate": "mod är föråldrad",
   "ModOutOfDatePlural": "Mods är föråldrade",
-  "MultipleModsIncluded": "Flera versioner av samma mod ingår",
-  "ModIncluded": "mod ingår",
-  "ModIncludedPlural": "Mods ingår",
   "SearchDlcs": "Sök igenom dina DLC: er ..",
   "SearchPackages": "Sök igenom dina paket ..",
-  "ModEnabled": "mod aktiverad",
-  "ModIncludedAndEnabled": "mod inkluderat och aktiverat",
-  "ModEnabledPlural": "mods aktiverade",
-  "ModIncludedAndEnabledPlural": "mods ingår och aktiverade",
   "ModIsLocal": "Mod är lokal",
   "ModIsRemoved": "Bort från ånga",
   "ModIsUnknown": "Kunde inte få denna Mods information från Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Inga anpassade tillgångar",
   "NoMods": "Inaktivera alla Mods",
   "AutoSave": "Automatisk spara",
-  "AssetIncluded": "tillgång ingår",
-  "AssetIncludedPlural": "tillgångar ingår",
   "TotalSize": "total storlek",
   "ReportSeverity": "Rapportera svårighetsgrad",
   "AnyStatus": "Någon status",
@@ -138,7 +130,6 @@
   "DateUpdated": "Datum uppdaterat",
   "PackageIncluded": "förpackningen innehåller",
   "PackageIncludedPlural": "Paket ingår",
-  "MultiplePackagesIncluded": "Flera versioner av samma paket ingår",
   "CopyWorkshopLink": "Kopiera verkstadslänk",
   "FilterOutPackagesWithMods": "Dölj mods på paketsidan",
   "FilterOutPackagesWithOneAsset": "Dölj paket med en enda tillgång från paketets sida",
@@ -175,7 +166,6 @@
   "AllDlcs": "Alla DLC: er",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Upptäckta ärenden",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Fixa alla ärenden",
   "LaunchTooltip": "Klicka för att starta/stoppa Städer: Skylines eller använd {0} var som helst i appen",
   "LsmImport": "Laddar Screen Mod Report",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Ändra denna profils färg",
   "Sorting_Color": "Profilens färg",
   "CreateShortcutProfile": "Skapa en genväg för det på skrivbordet",
-  "ProfilesLoaded": "profiler laddade",
   "AskToLaunchGameForShortcut": "Vill du att genvägen också ska starta spelet med din profil?",
   "TextImportMissingInfo": "Ladda en textfil som innehåller Steam-ID för att enkelt prenumerera på eller hantera dem",
   "ImportFromText": "Importera från text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Mods",
   "Local": "Lokal",
   "Workshop": "Verkstad",
   "CompatibilityReport": "Kompatibilitetsrapport",
@@ -424,12 +411,46 @@
   "Included": "Ingick",
   "Excluded": "Utesluten",
   "Server": "Servern",
-  "Assets": "Tillgångar",
   "OutOfDate": "Förfallen",
   "Subscribe": "Prenumerera",
   "Switch": "Växla",
-  "Packages": "Paket",
   "AdvancedIncludeEnable": "Visa både den inkluderade och aktiverade statusen för moddar",
   "PackageStatus": "Förpackningsstatus",
-  "Author": "Författare"
+  "Author": "Författare",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Güncel profil",
   "StartCities": "Cities: Skylines'ı Başlat",
   "StopCities": "Cities: Skylines' ı Durdur",
@@ -7,15 +8,8 @@
   "Dashboard": "Gösterge Paneli",
   "ModOutOfDate": "Mod güncel değil",
   "ModOutOfDatePlural": "Modlar güncel değil",
-  "MultipleModsIncluded": "Aynı modun birden fazla versiyonu bulunmaktadır",
-  "ModIncluded": "Mod dahil",
-  "ModIncludedPlural": "Modlar dahil",
   "SearchDlcs": "DLC'lerinizi arayın ..",
   "SearchPackages": "Paketlerinizi arayın ..",
-  "ModEnabled": "mod etkinleştirildi",
-  "ModIncludedAndEnabled": "mod dahil edildi ve etkinleştirildi",
-  "ModEnabledPlural": "modlar etkinleştirildi",
-  "ModIncludedAndEnabledPlural": "modlar dahil edildi ve etkinleştirildi",
   "ModIsLocal": "Mod yereldir",
   "ModIsRemoved": "Steam' den Kaldırıldı",
   "ModIsUnknown": "Steam' den bu modun bilgileri alınamadı",
@@ -52,8 +46,6 @@
   "NoAssets": "Özel Varlık yok",
   "NoMods": "Bütün Modları devre dışı bırak",
   "AutoSave": "Otomatik Kaydet",
-  "AssetIncluded": "Varlık dahil",
-  "AssetIncludedPlural": "Varlıklar dahil",
   "TotalSize": "toplam boyut",
   "ReportSeverity": "Şiddeti bildirin",
   "AnyStatus": "Herhangi bir Durum",
@@ -138,7 +130,6 @@
   "DateUpdated": "Tarih Güncellendi",
   "PackageIncluded": "Paket içeriği",
   "PackageIncludedPlural": "paketler dahil",
-  "MultiplePackagesIncluded": "Aynı paketin birden çok sürümü dahil edilmiştir",
   "CopyWorkshopLink": "Atölye Bağlantısı Kopyala",
   "FilterOutPackagesWithMods": "Paketler sayfasındaki modları gizle",
   "FilterOutPackagesWithOneAsset": "Paketler sayfasından tek varlıklı paketleri gizle",
@@ -175,7 +166,6 @@
   "AllDlcs": "Tüm DLC'ler",
   "DLCs": "DLCS ve CCPS",
   "DetectedIssues": "Tespit Edilen Sorunlar",
-  "DuplicateMods": "Yinelenen Modlar",
   "FixAllIssues": "Fix All Issues",
   "LaunchTooltip": "Cities: Skylines'ı başlatmak/durdurmak için tıklayın veya uygulamanın herhangi bir yerinde {0} tuşunu kullanın",
   "LsmImport": "Yükleme Ekranı Modu Raporu",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Change this profile's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
-  "ProfilesLoaded": "profiles loaded",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Modlar",
   "Local": "Yerel",
   "Workshop": "Atölye",
   "CompatibilityReport": "Uyumluluk raporu",
@@ -424,12 +411,46 @@
   "Included": "Dahil",
   "Excluded": "Hariç tutuldu",
   "Server": "Sunucu",
-  "Assets": "Varlıklar",
   "OutOfDate": "Güncel değil",
   "Subscribe": "Abone",
   "Switch": "Anahtar",
-  "Packages": "Paketler",
   "AdvancedIncludeEnable": "Show both of the included and enabled state for mods",
   "PackageStatus": "Paket durumu",
-  "Author": "Author"
+  "Author": "Author",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

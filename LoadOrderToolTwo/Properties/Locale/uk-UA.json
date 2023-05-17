@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Інформація про сумісність",
   "ProfileBubble": "Поточний профіль",
   "StartCities": "Запустити Cities: Skylines",
   "StopCities": "Зупинити Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Панель керування",
   "ModOutOfDate": "Застарілий мод",
   "ModOutOfDatePlural": "Застарілі моди",
-  "MultipleModsIncluded": "Включені кілька версій одного мода",
-  "ModIncluded": "Мод включений",
-  "ModIncludedPlural": "Моди включені",
   "SearchDlcs": "Шукати у ваших DLC..",
   "SearchPackages": "Пошук серед ваших пакунків..",
-  "ModEnabled": "Мод увімкнено",
-  "ModIncludedAndEnabled": "Мод включено та увімкнено",
-  "ModEnabledPlural": "Моди увімкнено",
-  "ModIncludedAndEnabledPlural": "Моди включено та увімкнено",
   "ModIsLocal": "Мод локальний",
   "ModIsRemoved": "Видалено з Steam",
   "ModIsUnknown": "Не вдалося отримати інформацію цього моду з Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Вимкнути всі ассети",
   "NoMods": "Вимкнути всі моди",
   "AutoSave": "Автоматичне збереження",
-  "AssetIncluded": "Ассет включено",
-  "AssetIncludedPlural": "Ассети включені",
   "TotalSize": "Загальний розмір",
   "ReportSeverity": "Тяжкість звіту",
   "AnyStatus": "Будь-який статус",
@@ -138,7 +130,6 @@
   "DateUpdated": "Дата оновлення",
   "PackageIncluded": "Пакунок включений",
   "PackageIncludedPlural": "Пакунки включені",
-  "MultiplePackagesIncluded": "Включено кілька версій одного і того ж пакунку",
   "CopyWorkshopLink": "Копіювати посилання на майстерню цього пакунку",
   "FilterOutPackagesWithMods": "Сховати моди на сторінці пакунків",
   "FilterOutPackagesWithOneAsset": "Сховати одиничні ассети на сторінці пакунків",
@@ -175,7 +166,6 @@
   "AllDlcs": "Всі DLC",
   "DLCs": "DLC & CCP",
   "DetectedIssues": "Виявлені проблеми",
-  "DuplicateMods": "Однакові моди",
   "FixAllIssues": "Виправити всі проблеми",
   "LaunchTooltip": "Натисніть, щоб запустити/зупинити Cities: Skylines або використовуйте {0} будь-де в додатку",
   "LsmImport": "Звіт Loading Screen Mod",
@@ -192,20 +182,20 @@
   "CloseCitiesToSub": "Вам необхідно закрити Cities: Skylines для того, щоб підписатися або скасувати підписку на пакунки",
   "ShowingFilteredItems": "Показано {0} з {1} елементів",
   "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
+    "One": "Показана {0} модифікація",
+    "Plural": "Показано {0} модифікацій"
   },
   "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
+    "One": "Показано {0} ассет",
+    "Plural": "Показано {0} ассетів"
   },
   "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
+    "One": "Показано {0} пакунок",
+    "Plural": "Показано {0} пакунків"
   },
   "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
+    "One": "Показано {0} профіль",
+    "Plural": "Показано {0} профілів"
   },
   "DropNewProfile": "Перетягніть або виберіть .json або .xml файл профілю, щоб імпортувати його",
   "ThemeUIScale": "Розмір теми й інтерфейсу",
@@ -296,13 +286,13 @@
   "LoadSaveGame_Tip": "Завантажте збереження при запуску Cities: Skylines. Якщо не вибрано файл збереження, продовжиться ваше останнє збереження",
   "BETA": "БЕТА",
   "ALPHA": "АЛЬФА",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "ТЕСТ",
+  "TESTING": "ТЕСТУВАННЯ",
   "STABLE": "СТАБІЛЬНИЙ",
   "EXPERIMENTAL": "ЕКСПЕРИМЕНТАЛЬНИЙ",
   "DEPRECATED": "ЗАСТАРІЛИЙ",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "ЗАСТАРІЛИЙ",
+  "ABANDONED": "ЗАКИНУТО",
   "ActionUnreversible": "Цю дію неможливо скасувати.",
   "AlwaysOpenFiltersAndActions": "Показувати розділ фільтрів за замовчуванням",
   "AlwaysOpenFiltersAndActions_Tip": "Завжди відкривати фільтри при вході у вкладку вмісту",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Змінити колір цього профілю",
   "Sorting_Color": "Колір профілю",
   "CreateShortcutProfile": "Створити ярлик на робочому столі",
-  "ProfilesLoaded": "Профілі завантажено",
   "AskToLaunchGameForShortcut": "Ви хотіли б щоб комбінацією клавіш також запускалась гра з вашим профілем?",
   "TextImportMissingInfo": "Завантажте текстовий файл, що містить Steam ID, щоб легко підписатися або керувати ним",
   "ImportFromText": "Імпортувати з тексту",
@@ -357,12 +346,12 @@
   "Workshop Maps": "Карти з Майстерні",
   "AnyAuthor": "Будь-який автор",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "{0} елемент",
+    "Plural": "{0} елементів"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "Вибрано {0} автор",
+    "Plural": "Вибрано {0} авторів"
   },
   "Use the System's Theme": "Використовувати системну тему",
   "Donate": "Підтримати",
@@ -412,9 +401,7 @@
   "Info": "Інформація",
   "SelectThisPackage": "Вибрати цей пакунок",
   "SelectPackage": "Вибрати пакунок",
-  "Profiles": "Профілі",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Моди",
+  "ControlToSelectMultiplePackages": "Ctrl + Клац, щоб вибрати кілька пакунків за раз.",
   "Local": "Локальний",
   "Workshop": "Майстерня",
   "CompatibilityReport": "Звіт про сумісність",
@@ -424,12 +411,46 @@
   "Included": "Включений",
   "Excluded": "Виключений",
   "Server": "Сервер",
-  "Assets": "Ассети",
   "OutOfDate": "Застарілий",
   "Subscribe": "Підписатися",
   "Switch": "Перемикнути",
-  "Packages": "Пакунки",
   "AdvancedIncludeEnable": "Показувати стан включено та увімкнено для модів",
   "PackageStatus": "Статус пакунку",
-  "Author": "Автор"
+  "Author": "Автор",
+  "Include": "Включити",
+  "Unsubscribe": "Відписатися",
+  "Exclude": "Виключити",
+  "Snooze": "Відкласти",
+  "Mod": {
+    "One": "Мод",
+    "Plural": "Моди"
+  },
+  "Asset": {
+    "One": "Ассет",
+    "Plural": "Ассети"
+  },
+  "Package": {
+    "One": "Пакунок",
+    "Plural": "Пакунки"
+  },
+  "Profile": {
+    "One": "Профіль",
+    "Plural": "Профілі"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} включений",
+    "Plural": "{0} {1} включено"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} увімкнений",
+    "Plural": "{0} {1} увімкнено"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} включений та увімкнений",
+    "Plural": "{0} {1} включено та увімкнено"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} завантажений",
+    "Plural": "{0} {1} завантажено"
+  }
 }

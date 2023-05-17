@@ -2,35 +2,35 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Welcome to the change-log era",
+        "Tagline": "歡迎查看更新日誌",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "新增",
                 "Changes": [
-                    "Added an 'Unsubscribe All' button in content pages' actions.",
-                    "Added a Utility section to subscribe to missing items in a BOB config.",
-                    "Added an option to have Filters & Action sections open by default.",
-                    "Added change-log pages, you'll see it on new versions or using its button in the Help sections."
+                    "在內容頁面中新增「全部取消訂閱」的操作選項。",
+                    "在實用工具選項內添加了導入並查看 BOB 設定檔的功能，以方便玩家訂閱缺失的外掛程式。",
+                    "新增一個選項，現在可以選擇預設顯示/不顯示篩選選項和操作選項。",
+                    "新增更新日誌頁面。在 LOM2 模組更新後，打開 LOT2 軟體時主頁面將直接展示更新日誌；或者在「獲取説明與日誌」選項內點擊\"打開更新日誌\"按鈕查看更新日誌。"
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "優化",
                 "Changes": [
-                    "Added Compatibility Report for broken Assets",
-                    "Unlisted packages now have the correct name and thumbnail.",
-                    "Placeholders for folder settings now correctly reflect your OS.",
-                    "Ctrl+Click on an author's name to add it to your filter"
+                    "為損壞的資產添加了相容性報告",
+                    "未被列出的外掛程式現在具有正確的名稱和縮略圖。",
+                    "在設置資料夾時，預顯示的預留位置現在可以正確跟隨您的作業系統。",
+                    "按住Ctrl鍵+滑鼠按一下選擇作者的名稱，可以將作者名稱添加到搜索欄，並以此篩選。"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed legacy profiles not being converted after the first launch.",
-                    "Fixed local assets not automatically refreshing after external changes.",
-                    "Fixed deleting local assets from the right-click menu deleting all local assets instead of just one",
-                    "Fixed converting LOT 1 profiles resulting in assets being marked as 'Local'",
-                    "Fixed 'Real' folders being swapped on save for Linux & Mac users.",
-                    "Fixed Linux & Mac users not being able to generate a log zip."
+                    "修復了在首次啟動 LOT2 之後，舊版 LOT1 的設定檔沒有自動轉換的問題。",
+                    "修復了在外部更改本地資產後，列表不會自動刷新的問題。",
+                    "修復了按右鍵功能表中刪除所有本地資產時，只會刪除一個本地資產的問題。現在會刪除所有本地資產。",
+                    "修復了轉換 LOT1 設定檔後，所有資產被標記為「本地資產」的問題。",
+                    "修復了 Linux 和 Mac 使用者在保存交換時顯示正確的資料夾名稱。",
+                    "修復了 Linux 和 Mac 使用者無法生成日誌壓縮檔夾的問題。"
                 ]
             }
         ]
@@ -40,25 +40,25 @@
         "Date": "2023-04-08",
         "ChangeGroups": [
             {
-                "Name": "Added the Help & Logs section",
+                "Name": "添加了獲取説明和日誌的選項卡",
                 "Changes": [
-                    "Easily access your logs.",
-                    "Quickly view errors in your most recent/current game session.",
-                    "Simplify a log file to focus on what's actually happening.",
-                    "Share a zip file containing all the logs needed for someone to help you out."
+                    "現在可以輕鬆地訪問您的日誌。",
+                    "快速查看您最近/當前遊戲中的報錯資訊。",
+                    "簡化日誌檔以專注於解決關鍵問題。",
+                    "分享一個壓縮檔夾，其中包含幫助您解決問題所需的所有日誌檔。"
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "優化",
                 "Changes": [
-                    "Changed the icons of filters to reflect the correct icons used in the list."
+                    "更改了篩選選項的圖示，現在清單會顯示正確的圖示了。"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
-                    "Fixed the map selection for a new game not letting users select a vanilla map."
+                    "修復了導入需要訂閱或取消訂閱的合集時，文本被翻轉的問題。",
+                    "修復了當選擇新建存檔使用的地圖文件時，無法選擇遊戲自帶地圖的問題。"
                 ]
             }
         ]
@@ -68,9 +68,9 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed a bug that caused infinite loading for some users."
+                    "修復了導致某些使用者無限載入的錯誤。"
                 ]
             }
         ]
@@ -80,13 +80,13 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改動",
                 "Changes": [
-                    "Removed the subscription tab from the in-game mod options.",
-                    "Fixed DLCs not being applied when loading a profile.",
-                    "Fixed the language option being empty for some people.",
-                    "Re-downloading from steam will no longer force the focus back to the tool.",
-                    "Other UI changes."
+                    "移除遊戲內模組選項中的訂閱選項卡。",
+                    "修復了載入設定檔時，沒有應用 DLC 的設定的問題。",
+                    "修復了某些玩家語言選項為空的問題。",
+                    "修復了在 Steam 創意工坊重新訂閱外掛程式後，LOT2 軟體會強制增大專案顯示的問題。",
+                    "對其他一些使用者介面進行了改動。"
                 ]
             }
         ]
@@ -96,13 +96,13 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改動",
                 "Changes": [
-                    "Adding an info popup when subscribing to items for the first time.",
-                    "Added a warning text in the dashboard when you have multiple LOM instances installed.",
-                    "Added small tags next to package titles.",
-                    "Re-downloading Load Order Tool will initiate the download and close the app while it gets updated.",
-                    "Fixed and improved the speed of Loading Screen Mod reports."
+                    "添加了在首次訂閱項目時，會彈出相關資訊視窗的功能。",
+                    "當您安裝了多個 LOM 模組時，統計面板會顯示警告，讓您刪除其他多餘的 LOM 模組。",
+                    "在外掛程式名稱旁添加了小標籤。",
+                    "在實用工具內重新下載過期的 Load Order Tool 2 時，會關閉 LOT 2 應用程式，並自動開始下載與更新。",
+                    "修復並提高打開 Loading Screen Mod Revisited 資產報告的速度。"
                 ]
             }
         ]
@@ -110,50 +110,50 @@
     {
         "Version": "2.1.0",
         "Date": "2023-04-05",
-        "Tagline": "Beta Public Release",
+        "Tagline": "公開測試",
         "ChangeGroups": []
     },
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "介紹：設定檔功能重大更新",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "設定檔相關改動",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
-                    "Added a button to view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "更改了設定檔頁面的設計。",
+                    "現在統計面板會顯示收藏的設定檔，以方便切換設定檔。",
+                    "在外掛程式的頁面中，添加了「其他設定檔」選項卡，可以輕鬆地對其他設定檔中的這個外掛程式進行裝載或卸下。",
+                    "新增設定檔排序選項。在關閉程式前，將一直使用所選定的排序選項。",
+                    "新增內容清單中按右鍵的操作選項，可以在所有外掛程式中裝載或卸下項目。",
+                    "新增了一個按鈕，便於打開設定檔存儲資料夾目錄。",
+                    "現在您可以自訂設定檔圖示的顏色了。",
+                    "現在您可以為不同的設定檔分別創建桌面快捷方式了。",
+                    "您現在可以點擊「添加設定檔」，來導入 LOT 1 的配置。"
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "優化",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "Steam 連結現在會在 Steam 用戶端內打開。該功能可以在「選項」中關閉。",
+                    "現在可以根據本地資產所在資料夾，來對它們正確地分組。",
+                    "現在您的 Paradox 帳戶面板將會顯示在主功能表頁面。",
+                    "現在右上角的視窗按鈕會有相應的圖示來解釋它們的功能。",
+                    "優化了內容清單頁面程式的回應能力。",
+                    "現在在內容清單頁面中，搜索的回應速度更快。",
+                    "現在模組會通過快取記憶體載入遊戲； 能大幅提高 Windows 和 Linux 上的載入效率，提升 macOS 上的載入速度。",
+                    "現在您可以在遊戲運行時，生成遊戲日誌檔的壓縮檔夾。"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
-                    "Fixed not being able to use Workshop maps & save-games in the profile settings",
-                    "Fixed custom maps not loading when selected in the profile settings.",
-                    "Fixed loading Profiles on macOS & Linux not always applying correctly.",
-                    "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page."
+                    "修復了內容清單頁面卡住的問題。",
+                    "修復了無法自動保存設定檔的問題。",
+                    "修復了在設定檔設置中，無法使用創意工坊的地圖和存檔的問題。",
+                    "修復了在設定檔設置中選擇地圖時，自訂地圖無法顯示的問題。",
+                    "修復了 macOS 和 Linux 可能無法正確載入設定檔的問題。",
+                    "修復了在「實用工具」頁面裡選擇 Loading Screen Mod Revisited 資產報告文件時未正確打開對應資料夾的問題。"
                 ]
             }
         ]
@@ -164,17 +164,17 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New & Improved",
+                "Name": "新增與改進",
                 "Changes": [
-                    "Added in the Utilities page an import from any text file or from your clipboard.",
-                    "BOB import is now a generic XML import by supporting any XML format that contains package IDs."
+                    "在「實用工具」頁面裡新增了導入任何包含 Steam ID 的文字檔和剪貼板的功能（以方便訂閱或管理）。",
+                    "現在可以用通用的 XML 檔導入功能來導入 BOB 模組的設定檔了，該功能支持任何包含外掛程式 ID 的 XML 格式檔。"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed loading a collection URL sometimes not parsing the ID correctly.",
-                    "Fixed LOT becoming unresponsive on Mac/Linux when unsubscribing from a package."
+                    "修復了載入合集 URL 時可能無法正確解析 ID 的問題。",
+                    "修復了 Mac/Linux 取消訂閱外掛程式時 LOT2 無法回應的問題。"
                 ]
             }
         ]
@@ -182,52 +182,52 @@
     {
         "Version": "2.3.0",
         "Date": "2023-04-27",
-        "Tagline": "Spring cleaning update",
+        "Tagline": "春季大更新",
         "ChangeGroups": [
             {
-                "Name": "Filter & Search Changes",
+                "Name": "篩選和搜索功能有關改動",
                 "Changes": [
-                    "Added a new author filter dropdown.",
-                    "Added more actions to labels in the content lists.",
-                    "Added a new \"Any Issues\" option for \"Package Status\" & \"Compatibility Report\" dropdowns.",
-                    "All filter actions are now done using Ctrl+Click, added an option to swap this functionality.",
-                    "Re-filtering using the shortcuts in the list now removes the item from your filter.",
-                    "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
+                    "添加了按照作者進行篩選的下拉清單。",
+                    "為內容清單中的篩選標籤添加了更多操作。",
+                    "為「外掛程式狀態」和「相容性報告」的下拉式功能表添加了一個新的「任何問題」選項。",
+                    "現在按照標籤進行快速篩選的方式更改為：按住 Ctrl 鍵 + 滑鼠按一下標籤。並且添加了一個選項來切換篩選的方式。",
+                    "當您在使用快速篩選的功能時，會自動清空上一次選擇的篩選標籤。",
+                    "現在在搜索欄中，可以用 「 , 」（英文逗號）分隔多個關鍵字：\n• 預設情況下，將顯示匹配任意關鍵字的專案\n• 在某個關鍵字前面添加 「 + 」（英文加號），搜索結果將必須匹配該關鍵字\n• 在某個關鍵字前面添加 「 - 」（英文減號），會排除與該關鍵字匹配的搜索結果\n\n舉例：\n• car, truck（顯示 \"car\" 或 \"truck\" 的搜索結果）\n• building +commercial（搜索結果為：匹配 \"building\" 的商業建築）\n• big, grass +decal（搜索結果為：匹配\"big\"或\"grass\"的貼花資產）\n• building, apartment +european（搜索結果為：匹配的 \"building\" 或 \"apartment\" 的歐式建築）\n• condo, house -rico +american（搜索結果為：匹配 \"condo\" 或 \"house\" 的美式非 RICO 建築）"
                 ]
             },
             {
-                "Name": "UI & UX Changes",
+                "Name": "介面和使用者體驗相關優化改動",
                 "Changes": [
-                    "Implemented a new icon system that scales all of the icons appropriately to your UI scale.",
-                    "Reworked the rendering of lists, improving the performance and responsiveness of content pages drastically.",
-                    "Added a sorting order switch to select between Ascending and Descending sorting.",
-                    "Moved the 'Actions' section in the content pages and added 2 new options.",
-                    "Partially included packages now have a different UI in the list.",
-                    "Improved the buttons and filter controls in content lists, reducing their overall size, and adding more visual cues.",
-                    "Changed the option to increase list items' size on hover to always increase their size, improved the UI of enlarged list items, and applied this functionality to the rest of the lists in the app.",
-                    "Added a Ctrl+[0-9] shortcut to switch between available tabs.",
-                    "Swapped all double-buttons and option toggles' sides.",
-                    "Animations are now disabled by default on macOS & Linux.",
-                    "So many more UI improvements, changes, and fixes I lost count."
+                    "更新了新的圖示系統，現在會根據您的介面比例適當縮放所有圖示。",
+                    "重做了清單的渲染方式，顯著提高了內容頁面的性能和回應速度。",
+                    "添加了切換排序順序的功能，現在可以自己選擇昇冪和降冪。",
+                    "調整了內容頁面中操作選項的位置，並添加了兩個新的操作選項。",
+                    "現在包含多個資產的外掛程式，如果您只裝載了其中一部分資產，在清單中會顯示出新的圖示。",
+                    "改進了內容清單中的按鈕和篩選控制項，減小了它們的整體大小，並添加了更多視覺提示。",
+                    "更改了滑鼠懸停時增加專案顯示大小的功能，現在預設會放大專案的顯示大小。改進了放大後的 UI，並將此功能應用於 LOT2 程式中的其他清單部分。",
+                    "現在可以按住 Ctrl 鍵 + [0-9] 數位鍵的組合來選擇左側主功能表的選項。",
+                    "將所有雙功能按鈕更改為開/關按鈕選項。",
+                    "在 macOS 和 Linux 系統上預設禁用動畫。",
+                    "介面改進、功能更改和問題修復多到我都數不清了。"
                 ]
             },
             {
-                "Name": "File Selection Revamp",
+                "Name": "改進檔的選擇方式",
                 "Changes": [
-                    "Updated the UI of the file selection screens.",
-                    "Added Pinned folders to easily access relevant folders.",
-                    "Added a Workshop section to easily select workshop maps & saves.",
-                    "Added a Sorting dropdown & sort order toggle",
-                    "Added a List/Grid view toggle."
+                    "更新了檔選擇視窗的介面。",
+                    "新增將資料夾置頂的功能，便於快速打開相關資料夾。",
+                    "在選擇地圖或存檔的頁面新增 \"創意工坊\" 選項卡，便於快速找到您在創意工坊訂閱的地圖和存檔。",
+                    "新增排序方式下拉清單，和切換排序順序的功能。",
+                    "添加了切換列表/網格視圖的功能。"
                 ]
             },
             {
-                "Name": "Bug-Fixes",
+                "Name": "問題修復",
                 "Changes": [
-                    "Fixed launching LOT after the monitor it was previously on got turned off resulting in the window now showing up.",
-                    "Fixed the LHT option not working when launching into a new map.",
-                    "Fixed author pages not opening correctly in Steam.",
-                    "Fixed freezes happening while searching while the 'Subscribe Time' sorting was selected."
+                    "修復了最小化 LOT2 視窗後，視窗會再次彈出的問題。",
+                    "修復了在進入新地圖時，靠左行駛選項不起作用的問題。",
+                    "修復了無法在 Steam 中正確打開作者頁面的問題。",
+                    "修復了在選擇按照「訂閱日期」顯示搜索結果時介面卡頓的問題。"
                 ]
             }
         ]
@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "創意工坊外掛程式清理程式",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "新增了一個功能，可以輕鬆處理您在工坊訂閱的外掛程式與 Steam 所下載的外掛程式不匹配的問題。",
+                    "現在您未訂閱的外掛程式將不會被載入到遊戲中。",
+                    "當您打開 LOT2 並啟動遊戲時，會自動刪除您已經取消訂閱（但沒刪除乾淨）的外掛程式。",
+                    "在實用程式選項卡中添加了一個按鈕，可以手動運行清理程式，並強制下載缺失的外掛程式。"
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "新增",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "新增了一個選項以禁用創意工坊外掛程式清理程式。",
+                    "為開發者啟動選項添加了自訂啟動參數項。"
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "評分與訂閱量圖示",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "在外掛程式名稱旁邊新增了一個圖示，顯示該外掛程式的評分和訂閱量。",
+                    "將滑鼠指標懸停在圖示上面以顯示評分與訂閱量。",
+                    "點擊該圖示可深入瞭解相關功能。",
+                    "新增了「評分」和「訂閱量」的排序選項。"
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "資產要求",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Load Order Tool 2 新增了訂閱創意工坊資產的必需物品的功能。",
+                    "現在相容性報告包含了此提示資訊，以便快速輕鬆地查看您缺少的必需物品。"
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "其他改動",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "更新了外掛程式頁面以匹配內容清單中顯示的資訊。",
+                    "現在，例如「缺失的外掛程式」和「創意工坊合集」等二級內容頁面，使用者介面的設計與一級頁面（內容清單主頁面）相同，可以給用戶提供流線型體驗，並提供更多選項。",
+                    "在設定檔中添加了「新建資產」和「讀取資產」的啟動選項，以快速載入到資產編輯器。"
                 ]
             }
         ]

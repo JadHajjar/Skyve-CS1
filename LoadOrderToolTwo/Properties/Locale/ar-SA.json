@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "التعريف الحالي",
   "StartCities": "يبدأ Cities: Skylines",
   "StopCities": "قف Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "لوحة القيادة",
   "ModOutOfDate": "وزارة الدفاع قديمة",
   "ModOutOfDatePlural": "التعديلات قديمة",
-  "MultipleModsIncluded": "يتم تضمين إصدارات متعددة من نفس وزارة الدفاع",
-  "ModIncluded": "وشملت وزارة الدفاع",
-  "ModIncludedPlural": "وشملت تعديل",
   "SearchDlcs": "ابحث من خلال DLCs ..",
   "SearchPackages": "ابحث من خلال الحزم الخاصة بك ..",
-  "ModEnabled": "تمكين MOD",
-  "ModIncludedAndEnabled": "تضمنت وزارة الدفاع وتمكينها",
-  "ModEnabledPlural": "MODS تمكين",
-  "ModIncludedAndEnabledPlural": "تضمنت التعديلات وتمكينها",
   "ModIsLocal": "وزارة الدفاع محلية",
   "ModIsRemoved": "تمت إزالته من البخار",
   "ModIsUnknown": "لا يمكن الحصول على معلومات هذا التعديل من Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "لا أصول مخصصة",
   "NoMods": "تعطيل جميع المودات",
   "AutoSave": "حفظ تلقائي",
-  "AssetIncluded": "وشملت الأصول",
-  "AssetIncludedPlural": "وشملت الأصول",
   "TotalSize": "الحجم الإجمالي",
   "ReportSeverity": "الإبلاغ عن شدة",
   "AnyStatus": "أي حال أو أية حالة",
@@ -138,7 +130,6 @@
   "DateUpdated": "تاريخ تحديث",
   "PackageIncluded": "الحزمة تشمل",
   "PackageIncludedPlural": "شملت الحزم",
-  "MultiplePackagesIncluded": "يتم تضمين إصدارات متعددة من نفس الحزمة",
   "CopyWorkshopLink": "نسخ رابط ورشة العمل",
   "FilterOutPackagesWithMods": "إخفاء التعديلات في صفحة الحزم",
   "FilterOutPackagesWithOneAsset": "إخفاء حزم الأصول المفردة من صفحة الحزم",
@@ -175,7 +166,6 @@
   "AllDlcs": "جميع DLCs",
   "DLCs": "DLCS و CCPS",
   "DetectedIssues": "اكتشفت مشكلات",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "إصلاح جميع المشكلات",
   "LaunchTooltip": "انقر لإطلاق/إيقاف المدن: سكايين أو استخدام {0} في أي مكان في التطبيق",
   "LsmImport": "تحميل تقرير مودي الشاشة",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "تغيير لون هذا الملف الشخصي",
   "Sorting_Color": "لون الملف الشخصي",
   "CreateShortcutProfile": "إنشاء اختصار له على سطح المكتب الخاص بك",
-  "ProfilesLoaded": "الملفات الشخصية المحملة",
   "AskToLaunchGameForShortcut": "هل ترغب في أن يطلق الاختصار اللعبة أيضًا مع ملفك الشخصي؟",
   "TextImportMissingInfo": "تحميل ملف نصي يحتوي على معرفات ستيم لسهولة الاشتراك فيها أو إدارتها",
   "ImportFromText": "استيراد من النص",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "تعديل",
   "Local": "محلي",
   "Workshop": "ورشة عمل",
   "CompatibilityReport": "تقرير التوافق",
@@ -424,12 +411,46 @@
   "Included": "وشملت",
   "Excluded": "مستبعد",
   "Server": "الخادم",
-  "Assets": "أصول",
   "OutOfDate": "انتهت صلاحيته",
   "Subscribe": "يشترك",
   "Switch": "يُحوّل",
-  "Packages": "حزم",
   "AdvancedIncludeEnable": "إظهار كل من الحالة المضمنة والمفعلة للمودز",
   "PackageStatus": "وضع رزمة",
-  "Author": "المؤلف"
+  "Author": "المؤلف",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

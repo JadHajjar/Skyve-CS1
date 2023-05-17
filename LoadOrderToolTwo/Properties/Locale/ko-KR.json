@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "현재 프로필",
   "StartCities": "Cities: Skylines 실행",
   "StopCities": "Cities: Skylines 종료",
@@ -7,15 +8,8 @@
   "Dashboard": "대시보드",
   "ModOutOfDate": "업데이트되지 않은 모드가 있습니다",
   "ModOutOfDatePlural": "업데이트되지 않은 모드들이 있습니다",
-  "MultipleModsIncluded": "같은 모드의 여러 버전이 포함되었습니다",
-  "ModIncluded": "포함된 모드",
-  "ModIncludedPlural": "포함된 모드",
   "SearchDlcs": "내 DLC에서 검색..",
   "SearchPackages": "패키지 검색...",
-  "ModEnabled": "모드 활성화됨",
-  "ModIncludedAndEnabled": "모드 포함됨 및 활성화됨",
-  "ModEnabledPlural": "모드 활성화됨",
-  "ModIncludedAndEnabledPlural": "모드 포함됨 및 활성화됨",
   "ModIsLocal": "로컬 모드",
   "ModIsRemoved": "Steam에서 제거됨",
   "ModIsUnknown": "Steam에서 모드 정보를 가져올 수 없습니다",
@@ -52,8 +46,6 @@
   "NoAssets": "모든 자산 사용 안함",
   "NoMods": "모든 모드 사용 안함",
   "AutoSave": "자동 저장",
-  "AssetIncluded": "포함된 자산",
-  "AssetIncludedPlural": "포함된 자산",
   "TotalSize": "총 크기",
   "ReportSeverity": "보고서 심각도",
   "AnyStatus": "모든 상태",
@@ -138,7 +130,6 @@
   "DateUpdated": "업데이트된 날짜",
   "PackageIncluded": "포함된 패키지",
   "PackageIncludedPlural": "포함된 패키지",
-  "MultiplePackagesIncluded": "동일한 패키지의 여러 버전이 포함되어 있습니다",
   "CopyWorkshopLink": "창작마당 링크 복사",
   "FilterOutPackagesWithMods": "패키지 페이지에서 모드 숨기기",
   "FilterOutPackagesWithOneAsset": "패키지 페이지에서 단일 에셋 패키지 숨기기",
@@ -175,7 +166,6 @@
   "AllDlcs": "모든 DLC",
   "DLCs": "DLC & CCP",
   "DetectedIssues": "감지된 이슈",
-  "DuplicateMods": "중복된 모드",
   "FixAllIssues": "모든 이슈 고치기",
   "LaunchTooltip": "클릭하여 Cities: Skylines를 실행/종료하기 또는 앱의 아무데서나 {0}를 사용하세요",
   "LsmImport": "Loading Screen Mod 보고서",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "이 프로필의 색상 변경하기",
   "Sorting_Color": "프로필 색상",
   "CreateShortcutProfile": "바탕화면에 이 프로필로 실행하는 바로가기 생성하기",
-  "ProfilesLoaded": "프로필 로딩됨",
   "AskToLaunchGameForShortcut": "바로가기를 사용하여 저장된 프로필의 게임을 실행하시겠습니까?",
   "TextImportMissingInfo": "Steam ID가 포함된 텍스트 파일을 불러오고 간편하게 구독하거나 관리할 수 있습니다",
   "ImportFromText": "텍스트에서 가져오기",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "프로필",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "모드",
   "Local": "로컬",
   "Workshop": "창작마당",
   "CompatibilityReport": "호환성 보고서",
@@ -424,12 +411,46 @@
   "Included": "포함됨",
   "Excluded": "제외됨",
   "Server": "서버",
-  "Assets": "에셋",
   "OutOfDate": "업데이트되지 않음",
   "Subscribe": "구독",
   "Switch": "바꾸기",
-  "Packages": "패키지",
   "AdvancedIncludeEnable": "모드의 포함됨 상태와 활성화됨 상태를 모두 표시하기",
   "PackageStatus": "패키지 상태",
-  "Author": "제작자"
+  "Author": "제작자",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

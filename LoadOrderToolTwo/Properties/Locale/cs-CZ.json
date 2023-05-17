@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Aktuální profil",
   "StartCities": "Start Cities: Skylines",
   "StopCities": "Zastavit města: Skyliny",
@@ -7,15 +8,8 @@
   "Dashboard": "Přístrojová deska",
   "ModOutOfDate": "Mod je zastaralý",
   "ModOutOfDatePlural": "mody jsou zastaralé",
-  "MultipleModsIncluded": "Zahrnuty jsou více verzí stejného mod",
-  "ModIncluded": "Mod je zahrnut",
-  "ModIncludedPlural": "Mods včetně",
   "SearchDlcs": "Prohledejte své DLC ..",
   "SearchPackages": "Prohledejte své balíčky ..",
-  "ModEnabled": "Mod povolen",
-  "ModIncludedAndEnabled": "Mod je zahrnut a povolen",
-  "ModEnabledPlural": "Mods povoleno",
-  "ModIncludedAndEnabledPlural": "Mody zahrnuty a povoleny",
   "ModIsLocal": "Mod je místní",
   "ModIsRemoved": "Odstraněno z páry",
   "ModIsUnknown": "Nemohl získat informace o tomto mod od Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Žádná vlastní aktiva",
   "NoMods": "Zakázat všechny módy",
   "AutoSave": "Automatické uložení",
-  "AssetIncluded": "Aktivum zahrnuto",
-  "AssetIncludedPlural": "včetně aktiv",
   "TotalSize": "Celková velikost",
   "ReportSeverity": "Nahlásit závažnost",
   "AnyStatus": "Jakýkoli stav",
@@ -138,7 +130,6 @@
   "DateUpdated": "Aktualizováno datum",
   "PackageIncluded": "Balíček zahrnutý",
   "PackageIncludedPlural": "zahrnuty balíčky",
-  "MultiplePackagesIncluded": "Zahrnuty jsou více verzí stejného balíčku",
   "CopyWorkshopLink": "Zkopírujte odkaz Workshop",
   "FilterOutPackagesWithMods": "Skrýt mody na stránce balíčků",
   "FilterOutPackagesWithOneAsset": "Skrýt balíčky s jedním tepsem ze stránky balíčků",
@@ -175,7 +166,6 @@
   "AllDlcs": "Všechny DLC",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Detekovány úkoly",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Opravit všechny problémy",
   "LaunchTooltip": "Kliknutím spustíte/stop Cities: Skylines nebo použijte {0} kdekoli v aplikaci",
   "LsmImport": "Načítání přehledu modů obrazovky",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Změnit barvu tohoto profilu",
   "Sorting_Color": "Barva profilu",
   "CreateShortcutProfile": "Vytvořit zástupce pro něj na vaší ploše",
-  "ProfilesLoaded": "profily načteny",
   "AskToLaunchGameForShortcut": "Přejete si, aby zkratka také spustila hru s Vaším profilem?",
   "TextImportMissingInfo": "Načte textový soubor obsahující Steam ID pro jejich snadné předplatné nebo správu",
   "ImportFromText": "Importovat z textu",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Modifikace",
   "Local": "Místní",
   "Workshop": "Dílna",
   "CompatibilityReport": "Zpráva kompatibility",
@@ -424,12 +411,46 @@
   "Included": "Zahrnuta",
   "Excluded": "Vyloučen",
   "Server": "Server",
-  "Assets": "Aktiva",
   "OutOfDate": "Zastaralý",
   "Subscribe": "předplatit",
   "Switch": "Přepínač",
-  "Packages": "Balíčky",
   "AdvancedIncludeEnable": "Zobrazit stav pro mody obojí včetně seznamu povolených",
   "PackageStatus": "Stav balíčku",
-  "Author": "Autor"
+  "Author": "Autor",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

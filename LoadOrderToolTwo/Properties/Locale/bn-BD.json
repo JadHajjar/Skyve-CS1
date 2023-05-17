@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "বর্তমান প্রোফাইল",
   "StartCities": "শুরু Cities: Skylines",
   "StopCities": "থামুন Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "ড্যাশবোর্ড",
   "ModOutOfDate": "মোড পুরানো",
   "ModOutOfDatePlural": "মোডগুলি তারিখের বাইরে",
-  "MultipleModsIncluded": "একই মোডের একাধিক সংস্করণ অন্তর্ভুক্ত রয়েছে",
-  "ModIncluded": "মোড অন্তর্ভুক্ত",
-  "ModIncludedPlural": "মোড অন্তর্ভুক্ত",
   "SearchDlcs": "আপনার ডিএলসিগুলির মাধ্যমে অনুসন্ধান করুন ..",
   "SearchPackages": "আপনার প্যাকেজগুলির মাধ্যমে অনুসন্ধান করুন ..",
-  "ModEnabled": "মোড সক্ষম",
-  "ModIncludedAndEnabled": "মোড অন্তর্ভুক্ত এবং সক্ষম",
-  "ModEnabledPlural": "মোড সক্ষম",
-  "ModIncludedAndEnabledPlural": "মোডগুলি অন্তর্ভুক্ত এবং সক্ষম",
   "ModIsLocal": "মোড স্থানীয়",
   "ModIsRemoved": "বাষ্প থেকে সরানো",
   "ModIsUnknown": "বাষ্প থেকে এই মোডের তথ্য পেতে পারেনি",
@@ -52,8 +46,6 @@
   "NoAssets": "কোন কাস্টম সম্পদ নেই",
   "NoMods": "Disable All Mods",
   "AutoSave": "স্বয়ংক্রিয় সংরক্ষণ",
-  "AssetIncluded": "সম্পদ অন্তর্ভুক্ত",
-  "AssetIncludedPlural": "সম্পদ অন্তর্ভুক্ত",
   "TotalSize": "জ্ঞজ",
   "ReportSeverity": "তীব্রতা রিপোর্ট",
   "AnyStatus": "কোন স্থিতি",
@@ -138,7 +130,6 @@
   "DateUpdated": "তারিখ আপডেট",
   "PackageIncluded": "প্যাকেজ অন্তর্ভুক্ত",
   "PackageIncludedPlural": "প্যাকেজ অন্তর্ভুক্ত",
-  "MultiplePackagesIncluded": "একই প্যাকেজের একাধিক সংস্করণ অন্তর্ভুক্ত রয়েছে",
   "CopyWorkshopLink": "কর্মশালার লিঙ্কটি অনুলিপি করুন",
   "FilterOutPackagesWithMods": "প্যাকেজ পৃষ্ঠায় মোডগুলি লুকান",
   "FilterOutPackagesWithOneAsset": "প্যাকেজ পৃষ্ঠা থেকে একক গাধা প্যাকেজগুলি লুকান",
@@ -175,7 +166,6 @@
   "AllDlcs": "সমস্ত ডিএলসি",
   "DLCs": "ডিএলসিএস এবং সিসিপিএস",
   "DetectedIssues": "Detected Issues",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Fix All Issues",
   "LaunchTooltip": "Click to launch/stop Cities: Skylines or use {0} anywhere in the app",
   "LsmImport": "Loading Screen Mod Report",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Change this profile's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
-  "ProfilesLoaded": "profiles loaded",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "মোডস",
   "Local": "স্থানীয়",
   "Workshop": "কর্মশালা",
   "CompatibilityReport": "সামঞ্জস্যতা প্রতিবেদন",
@@ -424,12 +411,46 @@
   "Included": "অন্তর্ভুক্ত",
   "Excluded": "ছাঁটা",
   "Server": "সার্ভার",
-  "Assets": "সম্পদ",
   "OutOfDate": "তারিখের বাইরে",
   "Subscribe": "সাবস্ক্রাইব",
   "Switch": "স্যুইচ",
-  "Packages": "প্যাকেজ",
   "AdvancedIncludeEnable": "Show both of the included and enabled state for mods",
   "PackageStatus": "প্যাকেজ স্থিতি",
-  "Author": "Author"
+  "Author": "Author",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

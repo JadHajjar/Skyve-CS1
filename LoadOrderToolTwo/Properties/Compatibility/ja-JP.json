@@ -88,10 +88,15 @@
     "One": "「{0}」で必要なパッケージが不足しています。",
     "Plural": "「{0}」で必要な以下のパッケージが不足しています。"
   },
+  "Interaction_OptionalPackages": {
+    "One": "「{0}」でオプションパッケージが不足しています。",
+    "Plural": "「{0}」で以下のオプションパッケージが不足しています。"
+  },
   "Interaction_SucceededBy": {
     "One": "「{0}」は「{1}」によって引き継がれています。",
     "Plural": "「{0}」は以下のパッケージによって引き継がれています。"
   },
+  "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
   "Status_Reupload": {
     "Zero": "「{0}」はオリジナルパッケージの再アップロードです。",
@@ -107,7 +112,7 @@
     "One": "「{1}」の「テスト」バージョンです。\nアップデートすることで、予期しない問題が発生する可能性があるので注意して下さい。"
   },
   "Status_MissingDlc": {
-    "One": "パッケージを使用するには、DLC 「{0}」がありません。",
+    "One": "パッケージを使用するには、DLCがありません。",
     "Plural": "パッケージを使用するには、以下のDLCがありません。"
   },
   "Status_DependencyMod": "依存関係のMODですが、これを必要とするパッケージは使用していないようです。",
@@ -115,7 +120,7 @@
   "Status_MusicCanBeCopyrighted": "パック内に収録されている音楽は著作権で保護されている可能性があります。ストリーミングでの使用は避けた方が無難です。",
   "Status_IncompleteDescription": "MODのワークショップ内の説明文が少ない・曖昧です。作者を信頼できない場合は使用しないで下さい。",
   "OutputText": "予想される結果",
-  "Stability_NotReviewed": "このパッケージは検証されていません。互換性に関する情報が不正確な可能性があります。",
+  "Stability_NotReviewed": "このパッケージは検証されていません。\n互換性に関する情報が不正確な可能性があります。",
   "Stability_Stable": "パッケージは安定しています。",
   "Stability_NotEnoughInformation": "パッケージを適切に評価・確認するには十分な情報がありません。",
   "Stability_HasIssues": "パッケージが問題を引き起こす可能性があります。",
@@ -135,6 +140,11 @@
     "One": "「{1}」はサブスクを解除して下さい。",
     "Plural": "以下のパッケージはサブスクを解除して下さい。"
   },
+  "Action_ExcludeThis": "「{0}」を除外して下さい。",
+  "Action_ExcludeOther": {
+    "One": "「{1}」を除外して下さい。",
+    "Plural": "以下のパッケージを除外する必要があります。"
+  },
   "Action_Switch": {
     "One": "「{1}」に切り替えて下さい。",
     "Plural": "以下のいずれかのパッケージに切り替える必要があります。"
@@ -144,5 +154,32 @@
     "One": "DLCを選択中: {0} 個",
     "Plural": "DLCを選択中: {0} 個"
   },
-  "RequiredDLCs": "DLC/CCPが必要"
+  "RequiredDLCs": "DLC/CCPが必要",
+  "CRT_Stability": "安定性",
+  "CRT_Successors": "移行先",
+  "CRT_RequiredPackages": "必須パッケージ",
+  "CRT_OptionalPackages": "オプションパッケージ",
+  "CRT_DlcMissing": "DLC/CCPが不足",
+  "CRT_Compatibility": "互換性の問題",
+  "CRT_Alternatives": "変更可能",
+  "CRT_Status": "ステータス",
+  "CRT_Ambiguous": "不明瞭",
+  "RequestReviewInfo": "このパッケージで問題が発生しましたか？\nここから新たなレビューをリクエスト:",
+  "RequestReview": "レビューを依頼",
+  "MissingDependencyCount": {
+    "One": "{0} {1} は不足した依存関係",
+    "Plural": "{0} {1} は不足した依存関係"
+  },
+  "CautionCount": "{0} {1} は細心の注意が必要",
+  "WarningCount": "{0} {1} は警告あり",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} は注意が必要",
+    "Plural": "{0} {1} は注意が必要"
+  },
+  "ExcludeCount": "{0} {1} は除外すべき",
+  "UnsubscribeCount": "{0} {1} はサブスクを解除すべき",
+  "SwitchCount": {
+    "One": "{0} {1} は他へ切り替えが必要",
+    "Plural": "{0} {1} は他へ切り替えが必要"
+  }
 }

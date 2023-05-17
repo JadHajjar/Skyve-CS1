@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "वर्तमान प्रोफ़ाइल",
   "StartCities": "शुरू Cities: Skylines",
   "StopCities": "रुकना Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "चकरानेवाला",
   "ModOutOfDate": "MOD पुराना है",
   "ModOutOfDatePlural": "मॉड्स पुराने हैं",
-  "MultipleModsIncluded": "एक ही मॉड के कई संस्करण शामिल हैं",
-  "ModIncluded": "मॉड शामिल है",
-  "ModIncludedPlural": "मॉड्स शामिल हैं",
   "SearchDlcs": "अपने dlcs के माध्यम से खोजें ..",
   "SearchPackages": "अपने पैकेज के माध्यम से खोजें ।।",
-  "ModEnabled": "mod सक्षम",
-  "ModIncludedAndEnabled": "मॉड शामिल और सक्षम",
-  "ModEnabledPlural": "सक्षम mods",
-  "ModIncludedAndEnabledPlural": "मॉड्स शामिल और सक्षम",
   "ModIsLocal": "मॉड स्थानीय है",
   "ModIsRemoved": "भाप से हटा दिया गया",
   "ModIsUnknown": "स्टीम से इस मॉड की जानकारी नहीं मिल सका",
@@ -52,8 +46,6 @@
   "NoAssets": "कोई कस्टम संपत्ति नहीं",
   "NoMods": "Disable All Mods",
   "AutoSave": "स्वचालित सहेजें",
-  "AssetIncluded": "परिसंपत्ति शामिल है",
-  "AssetIncludedPlural": "परिसंपत्तियां शामिल हैं",
   "TotalSize": "कुल आकार",
   "ReportSeverity": "रिपोर्ट की गंभीरता",
   "AnyStatus": "कोई स्थिति",
@@ -138,7 +130,6 @@
   "DateUpdated": "अद्यतन की गई दिनांक",
   "PackageIncluded": "पैकेज में निम्न शामिल",
   "PackageIncludedPlural": "शामिल हैं",
-  "MultiplePackagesIncluded": "एक ही पैकेज के कई संस्करण शामिल हैं",
   "CopyWorkshopLink": "वर्कशॉप लिंक कॉपी करें",
   "FilterOutPackagesWithMods": "पैकेज पेज में मॉड्स छिपाएं",
   "FilterOutPackagesWithOneAsset": "पैकेज पेज से सिंगल-एसेट पैकेज छिपाएं",
@@ -175,7 +166,6 @@
   "AllDlcs": "सभी डीएलसी",
   "DLCs": "DLCS और CCPS",
   "DetectedIssues": "Detected Issues",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Fix All Issues",
   "LaunchTooltip": "Click to launch/stop Cities: Skylines or use {0} anywhere in the app",
   "LsmImport": "Loading Screen Mod Report",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Change this profile's color",
   "Sorting_Color": "Profile Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
-  "ProfilesLoaded": "profiles loaded",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
   "ImportFromText": "Import From Text",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "मॉड",
   "Local": "स्थानीय",
   "Workshop": "कार्यशाला",
   "CompatibilityReport": "संगतता रिपोर्ट",
@@ -424,12 +411,46 @@
   "Included": "शामिल",
   "Excluded": "छोड़ा गया",
   "Server": "सर्वर",
-  "Assets": "संपत्ति",
   "OutOfDate": "अप्रचलित",
   "Subscribe": "सदस्यता लें",
   "Switch": "बदलना",
-  "Packages": "संकुल",
   "AdvancedIncludeEnable": "Show both of the included and enabled state for mods",
   "PackageStatus": "पैकेज स्थिति",
-  "Author": "Author"
+  "Author": "Author",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

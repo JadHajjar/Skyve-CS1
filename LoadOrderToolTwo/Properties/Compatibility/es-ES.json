@@ -88,10 +88,15 @@
     "One": "You're missing a required package for '{0}'.",
     "Plural": "You're missing the following required packages for '{0}'."
   },
+  "Interaction_OptionalPackages": {
+    "One": "You're missing an optional package for '{0}'.",
+    "Plural": "You're missing the following optional packages for '{0}'."
+  },
   "Interaction_SucceededBy": {
     "One": "'{0}' is succeeded by '{1}'.",
     "Plural": "'{0}' is succeeded by either one of the following packages."
   },
+  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
@@ -108,7 +113,7 @@
   },
   "Status_MissingDlc": {
     "One": "You're missing the '{0}' DLC to use this package.",
-    "Plural": "You're missing the following DLCs to use this package."
+    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
@@ -127,13 +132,18 @@
   },
   "Action_RequiresConfiguration": "You should follow the following instructions.",
   "Action_SelectOne": {
-    "One": "Between '{0}' and '{1}', you should choose only one of them.",
-    "Plural": "Between '{0}' and the following packages, you should only choose one."
+    "One": "You should only use one between '{0}' and '{1}'.",
+    "Plural": "You should only use one between '{0}' and the following packages."
   },
   "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
   "Action_UnsubscribeOther": {
     "One": "You should unsubscribe from '{1}'.",
     "Plural": "You should unsubscribe from the following packages."
+  },
+  "Action_ExcludeThis": "You should exclude '{0}'.",
+  "Action_ExcludeOther": {
+    "One": "You should exclude '{1}'.",
+    "Plural": "You should exclude the following packages."
   },
   "Action_Switch": {
     "One": "You should switch to '{1}'.",
@@ -144,5 +154,32 @@
     "One": "{0} DLC selected",
     "Plural": "{0} DLCs selected"
   },
-  "RequiredDLCs": "Required DLCs/CCPs"
+  "RequiredDLCs": "Required DLCs/CCPs",
+  "CRT_Stability": "Stability",
+  "CRT_Successors": "Successors",
+  "CRT_RequiredPackages": "Required Packages",
+  "CRT_OptionalPackages": "Optional Packages",
+  "CRT_DlcMissing": "Missing DLCs/CCPs",
+  "CRT_Compatibility": "Compatibility Issues",
+  "CRT_Alternatives": "Alternatives",
+  "CRT_Status": "Statuses",
+  "CRT_Ambiguous": "Ambiguity",
+  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReview": "Request Review",
+  "MissingDependencyCount": {
+    "One": "{0} {1} that is missing dependencies",
+    "Plural": "{0} {1} that are missing dependencies"
+  },
+  "CautionCount": "{0} {1} where caution is advised",
+  "WarningCount": "{0} {1} with a warning",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} that requires your attention",
+    "Plural": "{0} {1} that require your attention"
+  },
+  "ExcludeCount": "{0} {1} that should be excluded",
+  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "SwitchCount": {
+    "One": "{0} {1} that requires switching to another",
+    "Plural": "{0} {1} that require switching to another"
+  }
 }

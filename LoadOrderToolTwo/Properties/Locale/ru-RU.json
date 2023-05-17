@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Текущий профиль",
   "StartCities": "Запустить Cities: Skylines",
   "StopCities": "Закрыть Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Панель управления",
   "ModOutOfDate": "Мод устарел",
   "ModOutOfDatePlural": "Моды устарели",
-  "MultipleModsIncluded": "Несколько версий одного и того же мода добавлено в игру",
-  "ModIncluded": "мод добавлен в игру",
-  "ModIncludedPlural": "моды добавлены в игру",
   "SearchDlcs": "Поиск среди ваших DLCS...",
   "SearchPackages": "Поиск среди ваших пакетов...",
-  "ModEnabled": "мод активирован",
-  "ModIncludedAndEnabled": "мод добавлен в игру и активирован",
-  "ModEnabledPlural": "моды активированы",
-  "ModIncludedAndEnabledPlural": "моды добавлены в игру и активированы",
   "ModIsLocal": "Локальный мод",
   "ModIsRemoved": "Удалено из Steam",
   "ModIsUnknown": "Не удалось получить информацию об этом моде из Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Нет пользовательских ассетов",
   "NoMods": "Отключить все моды",
   "AutoSave": "Автоматическое сохранение",
-  "AssetIncluded": "ассет добавлен в игру",
-  "AssetIncludedPlural": "ассеты добавлены в игру",
   "TotalSize": "общий размер",
   "ReportSeverity": "Серьезность отчёта",
   "AnyStatus": "Любое состояние",
@@ -138,7 +130,6 @@
   "DateUpdated": "Дата обновления",
   "PackageIncluded": "пакет добавлен в игру",
   "PackageIncludedPlural": "пакеты добавлены в игру",
-  "MultiplePackagesIncluded": "Несколько версий одного и того же пакета добавлены в игру",
   "CopyWorkshopLink": "Скопировать ссылку на мастерскую",
   "FilterOutPackagesWithMods": "Скрыть моды на странице пакетов",
   "FilterOutPackagesWithOneAsset": "Скрыть пакеты с одним активом со страницы пакетов",
@@ -175,7 +166,6 @@
   "AllDlcs": "Все DLC",
   "DLCs": "DLC & CCP",
   "DetectedIssues": "Обнаруженные проблемы",
-  "DuplicateMods": "Дублирующие моды",
   "FixAllIssues": "Исправить все проблемы",
   "LaunchTooltip": "Нажмите, чтобы запустить/остановить Cities: Skylines или используйте [F5] в любом месте приложения",
   "LsmImport": "Отчёт Loading Screen Mod",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Изменить цвет профиля",
   "Sorting_Color": "Цвет профиля",
   "CreateShortcutProfile": "Создать ярлык на рабочем столе",
-  "ProfilesLoaded": "профили загружены",
   "AskToLaunchGameForShortcut": "Хотите ли вы сделать ярлык для запуска игры с вашим профилем?",
   "TextImportMissingInfo": "Загрузите текстовый файл, содержащий Steam ID, чтобы легко подписаться на него или управлять им",
   "ImportFromText": "Импортировать из текста",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Профили",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Моды",
   "Local": "Локальный",
   "Workshop": "Мастерская",
   "CompatibilityReport": "Отчет о совместимости",
@@ -424,12 +411,46 @@
   "Included": "Добавлен в игру",
   "Excluded": "Исключён из игры",
   "Server": "Сервер",
-  "Assets": "Ассеты",
   "OutOfDate": "Устарел",
   "Subscribe": "Подписаться",
   "Switch": "Переключить",
-  "Packages": "Пакеты",
   "AdvancedIncludeEnable": "Показывать раздельно состояния «Добавлен в игру» и «Активирован» для модов",
   "PackageStatus": "Состояние пакета",
-  "Author": "Автор"
+  "Author": "Автор",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

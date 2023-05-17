@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Huidig ​​profiel",
   "StartCities": "Begin Cities: Skylines",
   "StopCities": "Stop Burgers: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Dashboard",
   "ModOutOfDate": "Mod is verouderd",
   "ModOutOfDatePlural": "Mods zijn verouderd",
-  "MultipleModsIncluded": "Meerdere versies van dezelfde mod zijn inbegrepen",
-  "ModIncluded": "MOD inbegrepen",
-  "ModIncludedPlural": "Mods inbegrepen",
   "SearchDlcs": "Zoek door uw DLC's ..",
   "SearchPackages": "Zoek door uw pakketten ..",
-  "ModEnabled": "MOD ingeschakeld",
-  "ModIncludedAndEnabled": "Mod opgenomen en ingeschakeld",
-  "ModEnabledPlural": "Mods ingeschakeld",
-  "ModIncludedAndEnabledPlural": "Mods opgenomen en ingeschakeld",
   "ModIsLocal": "Mod is lokaal",
   "ModIsRemoved": "Verwijderd uit stoom",
   "ModIsUnknown": "Kon de informatie van deze mod niet uit Steam halen",
@@ -52,8 +46,6 @@
   "NoAssets": "Geen aangepaste activa",
   "NoMods": "Alle mods uitschakelen",
   "AutoSave": "Automatisch opslaan",
-  "AssetIncluded": "Asset inbegrepen",
-  "AssetIncludedPlural": "Activa inbegrepen",
   "TotalSize": "totale grootte",
   "ReportSeverity": "Meld de ernst",
   "AnyStatus": "Elke status",
@@ -138,7 +130,6 @@
   "DateUpdated": "Datum bijgewerkt",
   "PackageIncluded": "Pakket inbegrepen",
   "PackageIncludedPlural": "Pakketten inbegrepen",
-  "MultiplePackagesIncluded": "Meerdere versies van hetzelfde pakket zijn inbegrepen",
   "CopyWorkshopLink": "Kopieer workshoplink",
   "FilterOutPackagesWithMods": "Verberg mods op de pagina Pakketten",
   "FilterOutPackagesWithOneAsset": "Verberg single-asset pakketten uit de pagina Pakketten",
@@ -175,7 +166,6 @@
   "AllDlcs": "Alle DLC's",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Gedetecteerde problemen",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Alle problemen oplossen",
   "LaunchTooltip": "Klik om te starten/stoppen van burgers: Skylines of gebruik {0} ergens in de app",
   "LsmImport": "Scherm Mod Rapport laden",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "De kleur van het profiel wijzigen",
   "Sorting_Color": "Profielkleur",
   "CreateShortcutProfile": "Maak een snelkoppeling voor dit profiel op uw bureaublad",
-  "ProfilesLoaded": "profielen geladen",
   "AskToLaunchGameForShortcut": "Moet de snelkoppeling het spel starten met het geselecteerde profiel?",
   "TextImportMissingInfo": "Laad een tekstbestand met Steam IDs om gemakkelijk te abonneren of te beheren",
   "ImportFromText": "Importeren uit tekst",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profielen",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Mods",
   "Local": "Lokaal",
   "Workshop": "Workshop",
   "CompatibilityReport": "Compatibiliteitsrapport",
@@ -424,12 +411,46 @@
   "Included": "Opgenomen",
   "Excluded": "Uitgesloten",
   "Server": "Server",
-  "Assets": "Activa",
   "OutOfDate": "Verouderd",
   "Subscribe": "Abonneren",
   "Switch": "Schakelaar",
-  "Packages": "Pakketjes",
   "AdvancedIncludeEnable": "Toon beide van de ingebouwde en ingeschakelde staat voor mods",
   "PackageStatus": "Pakketstatus",
-  "Author": "Auteur"
+  "Author": "Auteur",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }

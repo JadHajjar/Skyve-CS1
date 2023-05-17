@@ -1,4 +1,5 @@
 {
+  "CompatibilityInfo": "Compatibility Info",
   "ProfileBubble": "Gjeldende profil",
   "StartCities": "Start Cities: Skylines",
   "StopCities": "Stoppe Cities: Skylines",
@@ -7,15 +8,8 @@
   "Dashboard": "Dashbord",
   "ModOutOfDate": "Mod er utdatert",
   "ModOutOfDatePlural": "Mods er utdatert",
-  "MultipleModsIncluded": "Flere versjoner av samme mod er inkludert",
-  "ModIncluded": "mod inkludert",
-  "ModIncludedPlural": "mods inkludert",
   "SearchDlcs": "Søk gjennom DLC -ene dine ..",
   "SearchPackages": "Søk gjennom pakkene dine ..",
-  "ModEnabled": "mod aktivert",
-  "ModIncludedAndEnabled": "mod inkludert og aktivert",
-  "ModEnabledPlural": "mods aktivert",
-  "ModIncludedAndEnabledPlural": "mods inkludert og aktivert",
   "ModIsLocal": "Mod er lokal",
   "ModIsRemoved": "Fjernet fra damp",
   "ModIsUnknown": "Kunne ikke få denne modens informasjon fra Steam",
@@ -52,8 +46,6 @@
   "NoAssets": "Ingen tilpassede eiendeler",
   "NoMods": "Deaktivere alle modifikasjoner",
   "AutoSave": "Automatisk lagring",
-  "AssetIncluded": "eiendel inkludert",
-  "AssetIncludedPlural": "eiendeler inkludert",
   "TotalSize": "Total størrelse",
   "ReportSeverity": "Rapporter alvorlighetsgrad",
   "AnyStatus": "Noen status",
@@ -138,7 +130,6 @@
   "DateUpdated": "Dato oppdatert",
   "PackageIncluded": "pakke inkludert",
   "PackageIncludedPlural": "Pakker inkludert",
-  "MultiplePackagesIncluded": "Flere versjoner av den samme pakken er inkludert",
   "CopyWorkshopLink": "Kopier Verksted Link",
   "FilterOutPackagesWithMods": "Skjul mods på pakkesiden",
   "FilterOutPackagesWithOneAsset": "Skjul enkelthevingspakker fra pakkesiden",
@@ -175,7 +166,6 @@
   "AllDlcs": "Alle DLC -er",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Oppdagede problemer",
-  "DuplicateMods": "Duplicate Mods",
   "FixAllIssues": "Fiks alle problemer",
   "LaunchTooltip": "Klikk for å starte / stoppe Cities: Skylines eller bruk {0} hvor som helst i appen",
   "LsmImport": "Laster Skjermmod rapport",
@@ -337,7 +327,6 @@
   "ChangeProfileColor": "Endre profilens farge",
   "Sorting_Color": "Profil farge",
   "CreateShortcutProfile": "Lag en snarvei på skrivebordet ditt",
-  "ProfilesLoaded": "profiler belastet",
   "AskToLaunchGameForShortcut": "Ønsker du at snarveien skal også starte spillet med profilen din?",
   "TextImportMissingInfo": "Last inn en tekstfil som inneholder Steam-IDer for enkelt å abonnere på eller administrere dem",
   "ImportFromText": "Importer fra tekst",
@@ -412,9 +401,7 @@
   "Info": "Info",
   "SelectThisPackage": "Select this package",
   "SelectPackage": "Select a package",
-  "Profiles": "Profiles",
   "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
-  "Mods": "Modifikasjoner",
   "Local": "Lokal",
   "Workshop": "Verksted",
   "CompatibilityReport": "Kompatibilitetsrapport",
@@ -424,12 +411,46 @@
   "Included": "Inkludert",
   "Excluded": "Ekskludert",
   "Server": "Tjener",
-  "Assets": "Eiendeler",
   "OutOfDate": "Utdatert",
   "Subscribe": "Abonnere",
   "Switch": "Bytte om",
-  "Packages": "Pakker",
   "AdvancedIncludeEnable": "Vis både av inkludert og aktivert status for mods",
   "PackageStatus": "Pakkestatus",
-  "Author": "Forfatter"
+  "Author": "Forfatter",
+  "Include": "Include",
+  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Exclude",
+  "Snooze": "Snooze",
+  "Mod": {
+    "One": "Mod",
+    "Plural": "Mods"
+  },
+  "Asset": {
+    "One": "Asset",
+    "Plural": "Assets"
+  },
+  "Package": {
+    "One": "Package",
+    "Plural": "Packages"
+  },
+  "Profile": {
+    "One": "Profile",
+    "Plural": "Profiles"
+  },
+  "IncludedCount": {
+    "One": "{0} {1} included",
+    "Plural": "{0} {1} included"
+  },
+  "EnabledCount": {
+    "One": "{0} {1} enabled",
+    "Plural": "{0} {1} enabled"
+  },
+  "IncludedEnabledCount": {
+    "One": "{0} {1} included & enabled",
+    "Plural": "{0} {1} included & enabled"
+  },
+  "LoadedCount": {
+    "One": "{0} {1} loaded",
+    "Plural": "{0} {1} loaded"
+  }
 }
