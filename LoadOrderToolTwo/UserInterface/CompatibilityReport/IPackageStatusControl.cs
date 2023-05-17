@@ -40,13 +40,13 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 
 		typeDropDown.SelectedItemChanged += TypeDropDown_SelectedItemChanged;
 
+		if (!IsHandleCreated)
+		{
+			CreateHandle();
+		}
+
 		if (item is not null)
 		{
-			if (!IsHandleCreated)
-			{
-				CreateHandle();
-			}
-
 			typeDropDown.SelectedItem = item.Type;
 			DD_Action.SelectedItem = item.Action;
 			TB_Note.Text = item.Note;
@@ -58,9 +58,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			}
 		}
 		else
-		{
-			typeDropDown.SelectedItem = typeDropDown.Items[0];
-		}
+		{ TypeDropDown_SelectedItemChanged(this, EventArgs.Empty); }
 
 		SlickTip.SetTo(I_Copy, "Copy");
 		SlickTip.SetTo(I_Paste, "Paste");

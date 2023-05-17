@@ -9,6 +9,7 @@ using SlickControls;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -108,41 +109,29 @@ public partial class MainForm : BasePanelForm
 	{
 		e.Graphics.SetUp(base_PB_Icon.BackColor);
 
-		using var icon = IconManager.GetIcon("I_AppIcon", base_PB_Icon.Width);
+		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(FormDesign.Design.MenuForeColor);
 
-		if (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
-		{
-			icon.Color(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.MenuForeColor, Math.Abs(((int)base_PB_Icon.LoaderPercentage * 5 % 200) - 100)));
-		}
-		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Pressed))
-		{
-			icon.Color(FormDesign.Design.ActiveColor);
-		}
-		else if (base_PB_Icon.HoverState.HasFlag(HoverState.Hovered))
-		{
-			icon.Color(FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.MenuForeColor));
-		}
-		else
-		{
-			icon.Color(FormDesign.Design.MenuForeColor);
-		}
+		var useGlow = !ConnectionHandler.IsConnected
+			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
+			|| isGameRunning
+			|| base_PB_Icon.HoverState.HasFlag(HoverState.Hovered);
 
-		if (base_PB_Icon.Loading)
+		e.Graphics.DrawImage(icon, base_PB_Icon.ClientRectangle);
+
+		if (useGlow)
 		{
-			e.Graphics.TranslateTransform(base_PB_Icon.Width / 2f, base_PB_Icon.Height / 2f);
-			e.Graphics.RotateTransform((float)(base_PB_Icon.LoaderPercentage * 3.6));
-			e.Graphics.TranslateTransform(-base_PB_Icon.Width / 2f, -base_PB_Icon.Height / 2f);
-		}
+			using var glowIcon = new Bitmap(IconManager.GetIcons("I_GlowAppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value);
 
-		e.Graphics.DrawImage(icon, new Rectangle(Point.Empty, base_PB_Icon.Size));
+			var color = FormDesign.Design.ActiveColor;
 
-		if (!ConnectionHandler.IsConnected)
-		{
-			var rect = base_PB_Icon.ClientRectangle.Pad((int)(3 * UI.UIScale)).Align(new Size(base_PB_Icon.Width / 3, base_PB_Icon.Width / 3), ContentAlignment.BottomRight);
-			using var noInt = IconManager.GetSmallIcon("I_NoInternet").Color(FormDesign.Design.MenuForeColor);
+			if (!ConnectionHandler.IsConnected)
+			{
+				color = FormDesign.Design.RedColor;
+			}
 
-			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.RedColor), rect.Pad((int)(-2 * UI.UIScale)));
-			e.Graphics.DrawImage(noInt, rect.Pad(1, 1, -1, -1));
+			glowIcon.Color(color);//, (byte)(Math.Abs((base_PB_Icon.LoaderPercentage * 5 % 200 - 100) * 256 / 100)));
+
+			e.Graphics.DrawImage(glowIcon, base_PB_Icon.ClientRectangle);
 		}
 	}
 

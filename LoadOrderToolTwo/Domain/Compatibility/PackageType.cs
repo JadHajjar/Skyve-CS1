@@ -11,5 +11,7 @@ public enum PackageType
 	MusicPack = 1,
 	ThemeMix = 2,
 	IMTMarkings = 3,
-	RenderItPreset = 4
+	RenderItPreset = 4,
+	POFont = 5,
+	NameList = 6
 }

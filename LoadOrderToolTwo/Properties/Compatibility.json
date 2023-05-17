@@ -119,7 +119,7 @@
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
   "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_IncompleteDescription": "The Workshop description of this mod is too short. You should not use it unless you trust its author.",
   "OutputText": "Expected Output",
   "Stability_AssetNotReviewed": "This asset has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate; though assets are generally stable",
   "Stability_NotReviewed": "This package has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate.",
@@ -129,8 +129,8 @@
   "Stability_Broken": "This package is broken.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
-    "Plural": "You should subscribe to these packages."
+    "One": "You should subscribe to the following package:",
+    "Plural": "You should subscribe to these packages:"
   },
   "Action_RequiresConfiguration": "You should follow the following instructions.",
   "Action_SelectOne": {
@@ -140,16 +140,16 @@
   "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
   "Action_UnsubscribeOther": {
     "One": "You should unsubscribe from '{1}'.",
-    "Plural": "You should unsubscribe from the following packages."
+    "Plural": "You should unsubscribe from the following packages:"
   },
   "Action_ExcludeThis": "You should exclude '{0}'.",
   "Action_ExcludeOther": {
     "One": "You should exclude '{1}'.",
-    "Plural": "You should exclude the following packages."
+    "Plural": "You should exclude the following packages:"
   },
   "Action_Switch": {
     "One": "You should switch to '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "You should switch to one of the following packages:"
   },
   "NoRequiredDlcs": "No Required DLCs",
   "DlcsSelected": {
@@ -190,5 +190,7 @@
   "MusicPack": "Music Pack",
   "ThemeMix": "Theme Mix",
   "IMTMarkings": "IMT Markings",
-  "RenderItPreset": "Render it! Preset"
+  "RenderItPreset": "Render it! Preset",
+  "POFont": "Procedural Object Font/Module",
+  "NameList": "Name-List/Game Translations"
 }

@@ -37,6 +37,11 @@ internal class CompatibilityMessageControl : SlickControl
 		}
 	}
 
+	protected override void UIChanged()
+	{
+		Width = (int)(350 * UI.UIScale);
+	}
+
 	public ReportType Type { get; }
 	public ReportItem Message { get; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
