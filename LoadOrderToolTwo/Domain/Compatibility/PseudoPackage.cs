@@ -1,5 +1,8 @@
 ﻿using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Utilities;
+using LoadOrderToolTwo.Utilities.Managers;
+
+using System.Linq;
 
 namespace LoadOrderToolTwo.Domain.Compatibility;
 
@@ -9,6 +12,15 @@ public class PseudoPackage
 
 	public PseudoPackage(ulong steamId)
 	{
+		if (CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package) && package.Interactions.ContainsKey(InteractionType.SucceededBy))
+		{
+			steamId = package.Interactions[InteractionType.SucceededBy]
+					.SelectMany(x => x.Packages.Values)
+					.OrderByDescending(x => x.Package.ReviewDate)
+					.FirstOrDefault()?
+					.Package.SteamId ?? steamId;
+		}
+
 		SteamId = steamId;
 	}
 

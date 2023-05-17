@@ -339,6 +339,8 @@ public static class SteamUtil
 
 					data.AddRange(newData.Item2);
 
+					_workshopItemProcessor.AddToCache(newData.Item2);
+
 					if (data.Count == newData.Item1)
 					{
 						return data;
@@ -350,7 +352,11 @@ public static class SteamUtil
 
 			var httpResponse = await httpClient.GetAsync(url + "&page=0");
 
-			return (await ConvertPublishedFileResponse(httpResponse)).Item2;
+			var returnedData = (await ConvertPublishedFileResponse(httpResponse)).Item2;
+
+			_workshopItemProcessor.AddToCache(returnedData);
+
+			return returnedData;
 		}
 		catch (Exception ex)
 		{

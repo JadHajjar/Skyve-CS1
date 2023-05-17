@@ -7,41 +7,17 @@ using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
-internal class PackageCompatibilityReportControl : TableLayoutPanel
+internal class PackageCompatibilityReportControl : SmartFlowPanel
 {
-	private readonly TableLayoutPanel[] _panels;
-	private int controlCount;
-
 	public PackageCompatibilityReportControl(IPackage package)
 	{
 		Package = package;
-		AutoSize = true;
-		AutoSizeMode = AutoSizeMode.GrowAndShrink;
-		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
-		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
-		ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / 3F));
-		ColumnCount = 3;
-
-		_panels = new TableLayoutPanel[ColumnCount];
-		for (var i = 0; i < ColumnCount; i++)
-		{
-			_panels[i] = new()
-			{
-				Dock = DockStyle.Top,
-				AutoSize = true,
-				AutoSizeMode = AutoSizeMode.GrowAndShrink
-			};
-
-			_panels[i].ColumnStyles.Add(new ColumnStyle(SizeType.Percent));
-			_panels[i].ColumnCount = 1;
-
-			Controls.Add(_panels[i], i, 0);
-		}
 
 		CentralManager.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
@@ -82,23 +58,13 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 			Report = Package.GetCompatibilityInfo(true);
 
-			for (var i = 0; i < _panels.Length; i++)
-			{
-				_panels[i].Controls.Clear(true);
-				_panels[i].RowStyles.Clear();
-			}
-
-			controlCount = 0;
-
-			if (Report == null)
-			{
-				GenerateSection(Locale.CompatibilityReport, IconManager.GetLargeIcon("I_CompatibilityReport"), FormDesign.Design.ButtonColor, new CompatibilityMessageControl(this, ReportType.Stability, new Domain.Compatibility.ReportItem { Type = ReportType.Stability }));
-				return;
-			}
+			Controls.Clear(true);
 
 			foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key))
 			{
-				GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), item.Select(x => new CompatibilityMessageControl(this, item.Key, x)).ToArray());
+				var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
+
+				GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
 			}
 		}
 		finally
@@ -128,16 +94,15 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		};
 	}
 
-	private void GenerateSection(string title, Bitmap image, Color backColor, params Control[] controls)
+	private void GenerateSection(string title, Bitmap image, Color backColor, List<CompatibilityMessageControl> controls)
 	{
-		if (controls.Length == 0)
+		if (controls.Count == 0)
 		{
 			return;
 		}
 
 		var tlp = new RoundedTableLayoutPanel
 		{
-			Dock = DockStyle.Top,
 			Padding = UI.Scale(new Padding(5), UI.FontScale),
 			Margin = UI.Scale(new Padding(5), UI.FontScale),
 			AutoSize = true,
@@ -182,8 +147,6 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		tlp.RowCount = tlp.RowStyles.Count;
 		tlp.ColumnCount = tlp.ColumnStyles.Count;
 
-		_panels[controlCount % 3].Controls.Add(tlp);
-
-		controlCount++;
+		Controls.Add(tlp);
 	}
 }

@@ -17,8 +17,6 @@ public class Package : IDynamicSql
 	[DynamicSqlProperty]
 	public ulong AuthorId { get; set; }
 	[DynamicSqlProperty]
-	public int GroupId { get; set; }
-	[DynamicSqlProperty]
 	public string? Note { get; set; }
 	[DynamicSqlProperty]
 	public DateTime ReviewDate { get; set; }
@@ -26,6 +24,8 @@ public class Package : IDynamicSql
 	public PackageStability Stability { get; set; }
 	[DynamicSqlProperty]
 	public PackageUsage Usage { get; set; } = (PackageUsage)(-1);
+	[DynamicSqlProperty]
+	public PackageType Type { get; set; }
 
 #if API
 	[DynamicSqlProperty(ColumnName = nameof(RequiredDLCs)), System.Text.Json.Serialization.JsonIgnore]

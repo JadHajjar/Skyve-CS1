@@ -37,6 +37,11 @@ internal class CompatibilityMessageControl : SlickControl
 		}
 	}
 
+	protected override void UIChanged()
+	{
+		Width = (int)(350 * UI.UIScale);
+	}
+
 	public ReportType Type { get; }
 	public ReportItem Message { get; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
@@ -58,7 +63,7 @@ internal class CompatibilityMessageControl : SlickControl
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
 			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
 			var noteSize = e.Graphics.Measure(Message.Status.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
-			var y = (int)(messageSize.Height + noteSize.Height + pad);
+			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height==0?0:pad * 2));
 			using var brush = new SolidBrush(color);
 
 			GetAllButton(out var allText, out var allIcon, out var colorStyle);
@@ -70,7 +75,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
-			e.Graphics.DrawString(Message.Status.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height, 0, 0));
+			e.Graphics.DrawString(Message.Status.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height + pad, 0, 0));
 
 			if (allText is not null)
 			{
@@ -268,6 +273,11 @@ internal class CompatibilityMessageControl : SlickControl
 			case StatusAction.ExcludeOther:
 				allText = Message.Packages.Length switch { 0 => null, 1 => Locale.Exclude, _ => Locale.ExcludeAll };
 				allIcon = "I_X";
+				break;
+			case StatusAction.RequestReview:
+				allText = LocaleCR.RequestReview;
+				allIcon = "I_RequestReview";
+				colorStyle = ColorStyle.Active;
 				break;
 		}
 	}

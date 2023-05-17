@@ -146,6 +146,12 @@ internal static class CentralManager
 
 		packages = content;
 
+		CompatibilityManager.LoadCachedData();
+
+		CompatibilityManager.CacheReport(packages);
+
+		CompatibilityManager.FirstLoadComplete = true;
+
 		IsContentLoaded = true;
 
 		OnContentLoaded();
@@ -178,9 +184,39 @@ internal static class CentralManager
 
 		Log.Info($"Listeners Started");
 
-		ConnectionHandler.WhenConnected(() => new BackgroundAction("Loading DLCs", SteamUtil.LoadDlcs).Run());
+		if (ConnectionHandler.CheckConnection())
+		{
+			LoadDlcAndCR();
+		}
+		else
+		{
+			Log.Warning("Not connected to the internet, delaying remaining loads.");
+
+			ConnectionHandler.WhenConnected(() => new BackgroundAction(LoadDlcAndCR).Run());
+		}
+
+		WorkshopInfoUpdated?.Invoke();
 
 		Log.Info($"Finished.");
+	}
+
+	private static void LoadDlcAndCR()
+	{
+		try
+		{ SteamUtil.LoadDlcs(); }
+		catch { }
+
+		Log.Info($"Downloading compatibility data..");
+
+		CompatibilityManager.DownloadData();
+
+		Log.Info($"Compatibility data downloaded");
+
+		CompatibilityManager.CacheReport();
+
+		CompatibilityManager.FirstLoadComplete = true;
+
+		Log.Info($"Compatibility report cached");
 	}
 
 	private static void RunFirstTimeSetup()

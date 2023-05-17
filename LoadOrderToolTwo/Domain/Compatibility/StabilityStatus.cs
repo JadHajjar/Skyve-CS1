@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace LoadOrderToolTwo.Domain.Compatibility;
 internal class StabilityStatus : IPackageStatus<PackageStability>
 {
-    public StabilityStatus(PackageStability type, string? note)
+    public StabilityStatus(PackageStability type, string? note, bool review)
     {
         Type = type;
-		Action = type is PackageStability.Broken ? StatusAction.UnsubscribeThis : StatusAction.NoAction;
+		Action = type is PackageStability.Broken ? StatusAction.UnsubscribeThis : review?StatusAction.RequestReview: StatusAction.NoAction;
 		Note = note;
 	}
     public PackageStability Type { get; set; }

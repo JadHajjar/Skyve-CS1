@@ -74,7 +74,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 
 		if (LC_Items.ItemCount == 0)
 		{
-			this.TryInvoke(() => Form.PushBack());
+			this.TryInvoke(PushBack);
 		}
 	}
 

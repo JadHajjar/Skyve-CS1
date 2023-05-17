@@ -23,13 +23,13 @@ public enum StatusType
 	[CRN(NotificationType.None, new[] { StatusAction.NoAction })]
 	DependencyMod = 6,
 
-	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.NoAction })]
+	[CRN(NotificationType.Warning, false)]
 	SourceCodeNotAvailable = 7,
 
 	[CRN(NotificationType.Caution, new[] { StatusAction.NoAction })]
 	MusicCanBeCopyrighted = 8,
 
-	[CRN(NotificationType.Caution, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.NoAction })]
+	[CRN(NotificationType.Caution, false)]
 	IncompleteDescription = 9,
 
 	/********************************/
