@@ -30,7 +30,7 @@
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
   "Switch": "切换到链接的插件",
-  "FlippedSwitch": "Switch to to this package",
+  "FlippedSwitch": "切换到此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
   "CausesIssues": "导致问题",
