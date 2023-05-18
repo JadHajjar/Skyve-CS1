@@ -145,7 +145,7 @@
   "Action_ExcludeThis": "您应该卸下 '{0}'。",
   "Action_ExcludeOther": {
     "One": "您应该卸下 '{1}'。",
-    "Plural": "您应该卸下以下插件。"
+    "Plural": "您应该卸下以下插件："
   },
   "Action_Switch": {
     "One": "您应当改为使用 '{1}'。",
