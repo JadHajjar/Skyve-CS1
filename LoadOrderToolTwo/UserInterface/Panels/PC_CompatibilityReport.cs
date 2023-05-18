@@ -1,5 +1,8 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.UserInterface.Lists;
+using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
@@ -7,6 +10,7 @@ using SlickControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
@@ -20,6 +24,8 @@ public partial class PC_CompatibilityReport : PanelContent
 		B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager;
 		B_YourPackages.Visible = hasPackages;
 		TLP_Buttons.Visible = CompatibilityManager.User.Manager || hasPackages;
+
+		LoadReport(CentralManager.Packages.Select(x => x.GetCompatibilityInfo()));
 	}
 
 	private void B_Manage_Click(object sender, EventArgs e)
@@ -45,5 +51,49 @@ public partial class PC_CompatibilityReport : PanelContent
 	private void Form_PackageSelected(IEnumerable<ulong> packages)
 	{
 		Form.PushPanel(null, new PC_CompatibilityManagement(packages));
+	}
+
+	private void LoadReport(IEnumerable<CompatibilityInfo> reports)
+	{
+		TLP_Reports.SuspendDrawing();
+		TLP_Reports.Controls.Clear(true);
+		TLP_Reports.RowStyles.Clear();
+
+		foreach (var report in reports.GroupBy(x => x.Notification).OrderByDescending(x => x.Key))
+		{
+			TLP_Reports.RowStyles.Add(new());
+
+			var tlp = new RoundedGroupTableLayoutPanel
+			{
+				Text = LocaleCR.Get(report.Key.ToString()),
+				Dock = DockStyle.Top,
+				AutoSize = true,
+				AutoSizeMode = AutoSizeMode.GrowAndShrink,
+				AddOutline = true,
+				Margin = UI.Scale(new Padding(3, 10, 15, 0), UI.FontScale)
+			};
+
+			tlp.RowStyles.Add(new RowStyle(SizeType.Absolute));
+			tlp.RowStyles.Add(new RowStyle());
+			tlp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent));
+
+			var button = new SlickButton
+			{
+				Text = "Do_All",
+				AutoSize = true,
+				Anchor = AnchorStyles.Top | AnchorStyles.Right
+			};
+
+			var list = new CompatibilityReportList();
+
+			list.SetItems(report);
+
+			tlp.Controls.Add(button, 0, 0);
+			tlp.Controls.Add(list, 0, 1);
+
+			TLP_Reports.Controls.Add(tlp);
+		}
+
+		TLP_Reports.ResumeDrawing();
 	}
 }

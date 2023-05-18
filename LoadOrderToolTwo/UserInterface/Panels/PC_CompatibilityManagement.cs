@@ -139,12 +139,15 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		packageCrList.SetItems(_packages.Keys);
 
+
 		return true;
 	}
 
 	protected override void OnDataLoad()
 	{
 		CB_ShowUpToDate.Checked = false;
+		if (PackageList.Count == 0)
+			CB_ShowUpToDate.Checked = true;
 		SetPackage(0);
 		PB_Loading.Dispose();
 	}
@@ -173,17 +176,17 @@ public partial class PC_CompatibilityManagement : PanelContent
 			}
 		}
 
-		if (page < 0 || page >= _packages.Count)
-		{
-			PushBack();
-			return;
-		}
-
 		var packages = PackageList;
 
 		if (packages.Count == 0)
 		{
-			L_Page.Text = $"{page + 1} / {_packages.Count}";
+			L_Page.Text = $"0 / 0";
+			return;
+		}
+
+		if (page < 0 || page >= packages.Count)
+		{
+			PushBack();
 			return;
 		}
 

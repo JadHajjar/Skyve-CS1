@@ -108,14 +108,13 @@ internal class MiniPackageControl : SlickControl
 		{
 			foreach (var item in tags)
 			{
-				if (item.ToLower() == "stable")
+				if (item.ToLower() is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken" )
 				{ continue; }
 
 				var color = item.ToLower() switch
 				{
 					"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
 					"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-					"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
 					_ => (Color?)null
 				};
 

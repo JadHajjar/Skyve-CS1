@@ -204,7 +204,7 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (package.Incompatible)
+		if (package.Workshop && package.Incompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), LocaleCR.Get($"Stability_{PackageStability.Incompatible}"), new PseudoPackage[0]);
 		}
@@ -214,7 +214,7 @@ public static class CompatibilityManager
 			return info;
 		}
 
-		if (!package.Incompatible && (package.Workshop || packageData.Package.Stability is not PackageStability.Stable))
+		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable)&&!package.Incompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, packageData.Package.Note, false), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
 		}
@@ -315,6 +315,9 @@ public static class CompatibilityManager
 
 		User = CompatibilityData.Authors.TryGet(steamId) ?? new Author { SteamId = steamId };
 
-		User.Manager = await CompatibilityApiUtil.IsCommunityManager();
+		try
+		{ User.Manager = await CompatibilityApiUtil.IsCommunityManager(); }
+		catch
+		{ User.Manager = false; }
 	}
 }

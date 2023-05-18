@@ -163,6 +163,12 @@ public partial class PC_SelectPackage : PanelContent
 		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
 		TB_Search.Loading = true;
 
+		if (Regex.IsMatch(TB_Search.Text, @"filedetails/\?id=(\d+)"))
+		{
+			TB_Search.Text = Regex.Match(TB_Search.Text, @"filedetails/\?id=(\d+)").Groups[1].Value;
+			return;
+		}
+
 		var searchText = TB_Search.Text.Trim();
 
 		searchTermsAnd.Clear();

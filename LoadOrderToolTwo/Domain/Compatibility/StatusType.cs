@@ -5,10 +5,10 @@ public enum StatusType
 	[CRN(NotificationType.None, false)]
 	None = 0,
 
-	[CRN(NotificationType.Caution, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.NoAction })]
+	[CRN(NotificationType.Caution, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.SubscribeToPackages, StatusAction.NoAction })]
 	Deprecated = 1,
 
-	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.NoAction })]
+	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.Switch, StatusAction.SubscribeToPackages, StatusAction.NoAction })]
 	Reupload = 2,
 
 	[CRN(NotificationType.Warning, new[] { StatusAction.UnsubscribeThis, StatusAction.ExcludeThis, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
