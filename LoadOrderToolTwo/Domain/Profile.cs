@@ -57,11 +57,13 @@ public class Profile
 	public LaunchSettings LaunchSettings { get; set; }
 	public LsmSettings LsmSettings { get; set; }
 	public bool AutoSave { get; set; }
-	public bool ForAssetEditor { get; set; }
-	public bool ForGameplay { get; set; }
 	public bool IsFavorite { get; set; }
 	public Color? Color { get; set; }
 	public DateTime LastUsed { get; set; }
+	public Compatibility.PackageUsage Usage { get; set; }
+
+	public bool ForAssetEditor { set { if (value) Usage = Compatibility.PackageUsage.AssetCreation; } }
+	public bool ForGameplay { set { if (value) Usage = Compatibility.PackageUsage.CityBuilding; } }
 
 	public class Asset : IPackage
 	{

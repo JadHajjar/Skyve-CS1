@@ -375,7 +375,6 @@ public static class SteamUtil
 			var info = JsonConvert.DeserializeObject<SteamFileServiceInfo>(response);
 
 			var data = info?.response?.publishedfiledetails
-				.Where(x => x.result is 1 or 17 or 86 or 9)
 				.Select(x => new SteamWorkshopItem(x))
 				.ToList() ?? new();
 

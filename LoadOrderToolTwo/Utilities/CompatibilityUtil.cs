@@ -158,13 +158,29 @@ internal static class CompatibilityUtil
 
 	private static ulong GetFinalSuccessor(ulong steamId)
 	{
-		if (CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package) && package.Interactions.ContainsKey(InteractionType.SucceededBy))
+		if (!CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package))
+		{
+			return steamId;
+		}
+
+		if (package.Interactions.ContainsKey(InteractionType.SucceededBy))
 		{
 			return package.Interactions[InteractionType.SucceededBy]
 					.SelectMany(x => x.Packages.Values)
 					.OrderByDescending(x => x.Package.ReviewDate)
 					.FirstOrDefault()?
 					.Package.SteamId ?? steamId;
+		}
+
+		if (SteamUtil.GetItem(steamId)?.Package is null)
+		{
+			foreach (var item in package.RequirementAlternatives.Keys)
+			{
+				if (SteamUtil.GetItem(item)?.Package is not null)
+				{
+					return item;
+				}
+			}
 		}
 
 		return steamId;
@@ -188,7 +204,9 @@ internal static class CompatibilityUtil
 					foreach (var package in FindPackage(item.Value))
 					{
 						if (isEnabled(package))
+						{
 							return true;
+						}
 					}
 				}
 			}
@@ -197,7 +215,9 @@ internal static class CompatibilityUtil
 		foreach (var package in FindPackage(indexedPackage))
 		{
 			if (isEnabled(package))
+			{
 				return true;
+			}
 		}
 
 		foreach (var item in indexedPackage.Group)
@@ -207,7 +227,9 @@ internal static class CompatibilityUtil
 				foreach (var package in FindPackage(item.Value))
 				{
 					if (isEnabled(package))
+					{
 						return true;
+					}
 				}
 			}
 		}
@@ -232,6 +254,11 @@ internal static class CompatibilityUtil
 
 	private static bool ShouldNotBeUsed(ulong steamId)
 	{
+		if ((SteamUtil.GetItem(steamId)?.RemovedFromSteam ?? false) || (SteamUtil.GetItem(steamId)?.Incompatible ?? false))
+		{
+			return true;
+		}
+
 		if (!CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package))
 		{
 			return false;
@@ -330,7 +357,7 @@ internal static class CompatibilityUtil
 			NotificationType.AttentionRequired => "I_MajorIssues",
 			NotificationType.Switch => "I_Switch",
 			NotificationType.Unsubscribe => "I_Broken",
-			NotificationType.Exclude => "I_Disposable",
+			NotificationType.Exclude => "I_X",
 			NotificationType.None or _ => status ? "I_Ok" : "I_Info",
 		};
 	}

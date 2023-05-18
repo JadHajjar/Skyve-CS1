@@ -336,7 +336,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		labelRect = DrawStatusDescriptor(e, rects, labelRect, ContentAlignment.TopLeft);
 
 		var report = Package.GetCompatibilityInfo();
-		if (report is not null && (int)report.Notification % 0x10 != 0)
+		if (report is not null && report.Notification > Domain.Compatibility.NotificationType.Info)
 		{
 			var labelColor = report.Notification.GetColor();
 

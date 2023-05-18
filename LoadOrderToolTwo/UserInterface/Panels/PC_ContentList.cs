@@ -31,6 +31,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
 	protected readonly ItemListControl<T> LC_Items;
+	protected int UsageFilteredOut;
 	private bool searchEmpty = true;
 	private readonly List<string> searchTermsOr = new();
 	private readonly List<string> searchTermsAnd = new();
@@ -258,7 +259,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	protected override void LocaleChanged()
 	{
 		DD_PackageStatus.Text = Locale.PackageStatus;
-		DD_ReportSeverity.Text = Locale.ReportSeverity;
+		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
 		DD_Tags.Text = Locale.Tags;
 		DD_Profile.Text = Locale.ProfileFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
@@ -300,7 +301,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		throw new NotImplementedException();
 	}
 
-	protected virtual string GetFilteredCountText(int filteredCount)
+	protected virtual LocaleHelper.Translation GetItemText()
 	{
 		throw new NotImplementedException();
 	}
@@ -378,6 +379,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void DelayedSearch()
 	{
+		UsageFilteredOut = 0;
 		LC_Items.DoFilterChanged();
 		this.TryInvoke(RefreshCounts);
 		I_Refresh.Loading = false;
@@ -415,18 +417,11 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (CentralManager.CurrentProfile.ForAssetEditor)
+		if (CentralManager.CurrentProfile.Usage > 0)
 		{
-			if (!(item.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1)).HasFlag(PackageUsage.AssetCreation))
+			if (!(item.GetCompatibilityInfo().Data?.Package.Usage.HasFlag(CentralManager.CurrentProfile.Usage) ?? true))
 			{
-				return true;
-			}
-		}
-
-		if (CentralManager.CurrentProfile.ForGameplay)
-		{
-			if (!(item.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1)).HasFlag(PackageUsage.CityBuilding))
-			{
+				UsageFilteredOut++;
 				return true;
 			}
 		}
@@ -497,12 +492,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.AnyIssue)
 			{
-				if ((int)item.GetCompatibilityInfo().Notification % 0x1 != 0)
+				if (item.GetCompatibilityInfo().Notification > NotificationType.Info)
 				{
 					return true;
 				}
 			}
-			else if ((int)item.GetCompatibilityInfo().Notification == (int)DD_ReportSeverity.SelectedItem)
+			else if ((int)item.GetCompatibilityInfo().Notification != (int)DD_ReportSeverity.SelectedItem)
 			{
 				return true;
 			}
@@ -624,7 +619,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	protected void RefreshCounts()
 	{
 		var countText = GetCountText();
-		var filteredText = GetFilteredCountText(LC_Items.FilteredCount);
+		var filteredText = (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning).FormatPlural(LC_Items.FilteredCount, GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower(), Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower()));
 
 		if (L_Counts.Text != countText)
 		{

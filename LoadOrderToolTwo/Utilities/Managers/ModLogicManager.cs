@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.Domain.Utilities;
 
 using System;
@@ -37,16 +38,10 @@ internal class ModLogicManager
 			mod.IsIncluded = false;
 			mod.IsEnabled = false;
 		}
-
-		if (IsPseudoMod(mod))
+		else if (IsPseudoMod(mod) &&CentralManager.SessionSettings.UserSettings.HidePseudoMods)
 		{
-			mod.Package.IsPseudoMod = true;
-
-			if (CentralManager.SessionSettings.UserSettings.HidePseudoMods)
-			{
-				mod.IsIncluded = true;
-				mod.IsEnabled = true;
-			}
+			mod.IsIncluded = true;
+			mod.IsEnabled = true;
 		}
 	}
 
@@ -101,14 +96,14 @@ internal class ModLogicManager
 		}
 	}
 
-	internal static bool IsPseudoMod(Mod mod)
+	internal static bool IsPseudoMod(IPackage package)
 	{
-		if (LocationManager.FileExists(LocationManager.Combine(mod.Folder, "ThemeMix.xml")))
+		if (LocationManager.FileExists(LocationManager.Combine(package.Folder, "ThemeMix.xml")))
 		{
 			return true;
 		}
 
-		if (mod.GetCompatibilityInfo().Data?.Package.Type is not Domain.Compatibility.PackageType.GenericPackage and not Domain.Compatibility.PackageType.MusicPack and not Domain.Compatibility.PackageType.CSM)
+		if (package.GetCompatibilityInfo().Data?.Package.Type is not null and not Domain.Compatibility.PackageType.GenericPackage and not Domain.Compatibility.PackageType.MusicPack and not Domain.Compatibility.PackageType.CSM)
 		{
 			return true;
 		}

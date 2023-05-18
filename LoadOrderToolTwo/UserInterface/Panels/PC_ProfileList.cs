@@ -39,9 +39,9 @@ public partial class PC_ProfileList : PanelContent
 	{
 		var valid = true;
 
-		if (T_ProfileUsage.SelectedValue != ThreeOptionToggle.Value.None)
+		if (e.Item.Usage > 0)
 		{
-			valid &= (T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option1 && e.Item.ForGameplay) || (T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option2 && e.Item.ForAssetEditor);
+			valid &= DD_Usage.SelectedItems.Contains(e.Item.Usage);
 		}
 
 		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
@@ -99,7 +99,7 @@ public partial class PC_ProfileList : PanelContent
 
 		if (L_FilterCount.Visible = total != filteredCount)
 		{
-			L_FilterCount.Text = Locale.ShowingProfiles.FormatPlural(filteredCount);
+			L_FilterCount.Text = Locale.ShowingCount.FormatPlural(filteredCount, Locale.Profile.FormatPlural(filteredCount));
 		}
 	}
 
@@ -112,11 +112,10 @@ public partial class PC_ProfileList : PanelContent
 	{
 		base.UIChanged();
 
-		TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = T_ProfileUsage.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = DD_Usage.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(180 * UI.FontScale);
 		TB_Search.Width = (int)(400 * UI.FontScale);
-		T_ProfileUsage.Width = (int)(300 * UI.FontScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)

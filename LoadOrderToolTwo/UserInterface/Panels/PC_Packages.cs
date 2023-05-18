@@ -82,9 +82,9 @@ internal class PC_Packages : PC_ContentList<Package>
 		return string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
 	}
 
-	protected override string GetFilteredCountText(int filteredCount)
+	protected override LocaleHelper.Translation GetItemText()
 	{
-		return Locale.ShowingPackages.FormatPlural(filteredCount);
+		return Locale.Package;
 	}
 
 	protected override void SetIncluded(IEnumerable<Package> filteredItems, bool included)

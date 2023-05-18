@@ -20,7 +20,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
     public CompatibilityReportList()
     {
 		Dock = DockStyle.Top;
-        VerticalScrolling = true;
+        HorizontalScrolling = true;
         GridView = true;
         GridItemSize = new(300, 100);
     }

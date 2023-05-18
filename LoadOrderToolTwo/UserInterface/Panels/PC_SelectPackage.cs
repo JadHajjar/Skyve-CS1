@@ -240,7 +240,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)));
 
-		this.TryInvoke(() => L_Totals.Text = Locale.ShowingPackages.FormatPlural(LC_Items.ItemCount));
+		this.TryInvoke(() => L_Totals.Text = Locale.ShowingCount.FormatPlural(LC_Items.ItemCount, Locale.Package.FormatPlural(LC_Items.ItemCount)));
 
 		new BackgroundAction(() =>
 		{

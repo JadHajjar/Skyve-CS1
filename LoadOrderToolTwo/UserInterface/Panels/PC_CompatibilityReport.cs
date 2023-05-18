@@ -61,6 +61,9 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		foreach (var report in reports.GroupBy(x => x.Notification).OrderByDescending(x => x.Key))
 		{
+			if (report.Key <= NotificationType.Info)
+				continue;
+
 			TLP_Reports.RowStyles.Add(new());
 
 			var tlp = new RoundedGroupTableLayoutPanel
@@ -68,6 +71,7 @@ public partial class PC_CompatibilityReport : PanelContent
 				Text = LocaleCR.Get(report.Key.ToString()),
 				Dock = DockStyle.Top,
 				AutoSize = true,
+				UseFirstRowForPadding = true,
 				AutoSizeMode = AutoSizeMode.GrowAndShrink,
 				AddOutline = true,
 				Margin = UI.Scale(new Padding(3, 10, 15, 0), UI.FontScale)
@@ -80,7 +84,6 @@ public partial class PC_CompatibilityReport : PanelContent
 			var button = new SlickButton
 			{
 				Text = "Do_All",
-				AutoSize = true,
 				Anchor = AnchorStyles.Top | AnchorStyles.Right
 			};
 
@@ -91,7 +94,9 @@ public partial class PC_CompatibilityReport : PanelContent
 			tlp.Controls.Add(button, 0, 0);
 			tlp.Controls.Add(list, 0, 1);
 
-			TLP_Reports.Controls.Add(tlp);
+			TLP_Reports.Controls.Add(tlp, 0, TLP_Reports.RowStyles.Count - 1);
+
+			button.AutoSize=true;
 		}
 
 		TLP_Reports.ResumeDrawing();

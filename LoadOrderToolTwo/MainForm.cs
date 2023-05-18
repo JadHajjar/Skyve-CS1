@@ -101,7 +101,7 @@ public partial class MainForm : BasePanelForm
 				base_PB_Icon.Loading = isRunning;
 			}
 
-			base_PB_Icon.LoaderSpeed = 0.2;
+			base_PB_Icon.LoaderSpeed = 0.15;
 
 			buttonStateRunning = null;
 		}
@@ -116,6 +116,7 @@ public partial class MainForm : BasePanelForm
 		var useGlow = !ConnectionHandler.IsConnected
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 			|| isGameRunning
+			// || unsaved profile changes changes
 			|| base_PB_Icon.HoverState.HasFlag(HoverState.Pressed);
 
 		e.Graphics.DrawImage(icon, base_PB_Icon.ClientRectangle);
@@ -125,19 +126,33 @@ public partial class MainForm : BasePanelForm
 			using var glowIcon = new Bitmap(IconManager.GetIcons("I_GlowAppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value);
 
 			var color = FormDesign.Design.ActiveColor;
+			var minimum = 0;
+
+			if (buttonStateRunning is null && isGameRunning)
+			{
+				minimum = 120;
+				color = Color.FromArgb(15, 153, 212);
+			}
+
+			//if (false) // unsaved profile changes changes
+			//{
+			//	minimum = 100;
+			//	color = Color.FromArgb(122, 81, 207);
+			//}
 
 			if (!ConnectionHandler.IsConnected)
 			{
-				color = FormDesign.Design.RedColor;
+				minimum = 80;
+				color = Color.FromArgb(194, 38, 33);
 			}
 
 			glowIcon.Tint(Sat: color.GetSaturation(), Hue: color.GetHue());
 
-			if (base_PB_Icon.Loading)
+			if (base_PB_Icon.Loading && !base_PB_Icon.HoverState.HasFlag(HoverState.Pressed))
 			{
 				var loops = 10;
 				var target = 256;
-				var perc = -Math.Cos(base_PB_Icon.LoaderPercentage * loops * Math.PI / 200) * target / 2 + target / 2;
+				var perc = -Math.Cos(base_PB_Icon.LoaderPercentage * loops * Math.PI / 200) * (target - minimum) / 2 + (target + minimum) / 2;
 				var alpha = (byte)perc;
 
 				if (alpha == 0)

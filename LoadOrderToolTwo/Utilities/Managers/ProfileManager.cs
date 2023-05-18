@@ -808,33 +808,38 @@ public static class ProfileManager
 		{
 			return "I_TempProfile";
 		}
-		else if (profile.ForAssetEditor)
+
+		return profile.Usage switch
 		{
-			return "I_Tools";
-		}
-		else if (profile.ForGameplay)
-		{
-			return "I_City";
-		}
-		else
-		{
-			return "I_ProfileSettings";
-		}
+			Domain.Compatibility.PackageUsage.CityBuilding => "I_City",
+			Domain.Compatibility.PackageUsage.AssetCreation => "I_Tools",
+			_ => "I_ProfileSettings"
+		};
 	}
 
-	internal static List<Package> GetInvalidPackages(bool gameplay, bool editor)
+	internal static List<Package> GetInvalidPackages(Domain.Compatibility.PackageUsage usage)
 	{
-		//if (gameplay)
-		//{
-		//	return new List<Package>(CentralManager.Packages.Where(x => x.IsIncluded && x.ForAssetEditor == true));
-		//}
+		if ((int)usage == -1)
+		{
+			return new();
+		}
 
-		//if (editor)
-		//{
-		//	return new List<Package>(CentralManager.Packages.Where(x => x.IsIncluded && x.ForNormalGame == true));
-		//}
+		return CentralManager.Packages.AllWhere(x =>
+		{
+			var cr = x.GetCompatibilityInfo().Data;
 
-		return new();
+			if (cr is null)
+			{
+				return false;
+			}
+
+			if (cr.Package.Usage.HasFlag(usage))
+			{
+				return false;
+			}
+
+			return x.IsIncluded;
+		});
 	}
 
 	public static void SaveLsmSettings(Profile profile)

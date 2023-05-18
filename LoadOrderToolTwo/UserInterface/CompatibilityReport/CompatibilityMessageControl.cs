@@ -78,13 +78,13 @@ internal class CompatibilityMessageControl : SlickControl
 				var buttonIcon = IconManager.GetIcon(allIcon);
 				var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, UI.Font(8.25F), UI.Scale(new Padding(4), UI.FontScale));
 
-				allButtonRect = new Rectangle(0, y, Width, 0).Pad(iconRect.Width + pad, 0, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
+				allButtonRect = new Rectangle(0, y, Width, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
 
 				SlickButton.DrawButton(e, allButtonRect, allText, UI.Font(8.25F), buttonIcon, UI.Scale(new Padding(4), UI.FontScale), allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
 
 				actionHovered |= allButtonRect.Contains(cursor);
 
-				y += allButtonRect.Height + pad;
+				y += allButtonRect.Height + pad * 2;
 			}
 
 			if (Message.Packages.Length > 0)
@@ -319,7 +319,9 @@ internal class CompatibilityMessageControl : SlickControl
 			switch (Message.Status.Action)
 			{
 				case StatusAction.SubscribeToPackages:
-					await CitiesManager.Subscribe(Message.Packages.Select(x=>x.SteamId));
+					await CitiesManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
+					ContentUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.Package)!, true);
+					ContentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
 					break;
 				case StatusAction.RequiresConfiguration:
 					// Snooze

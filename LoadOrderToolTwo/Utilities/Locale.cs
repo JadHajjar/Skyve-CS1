@@ -66,9 +66,9 @@ internal class Locale : LocaleHelper
 	public static Translation TotalSize => _instance.GetText(nameof(TotalSize));
 	public static Translation AssetStatus => _instance.GetText(nameof(AssetStatus));
 	public static Translation ModStatus => _instance.GetText(nameof(ModStatus));
-	public static Translation ReportSeverity => _instance.GetText(nameof(ReportSeverity));
+	public static Translation CompatibilityStatus => _instance.GetText(nameof(CompatibilityStatus));
 	public static Translation AnyStatus => _instance.GetText(nameof(AnyStatus));
-	public static Translation AnyReportStatus => _instance.GetText(nameof(AnyReportStatus));
+	public static Translation AnyCompatibilityStatus => _instance.GetText(nameof(AnyCompatibilityStatus));
 	public static Translation Subscribe => _instance.GetText(nameof(Subscribe));
 	public static Translation Switch => _instance.GetText(nameof(Switch));
 	public static Translation Enable => _instance.GetText(nameof(Enable));
@@ -154,10 +154,9 @@ internal class Locale : LocaleHelper
 	public static Translation LoadProfile => _instance.GetText(nameof(LoadProfile));
 	public static Translation CloseCitiesToSub => _instance.GetText(nameof(CloseCitiesToSub));
 	public static Translation ShowingFilteredItems => _instance.GetText(nameof(ShowingFilteredItems));
-	public static Translation ShowingMods => _instance.GetText(nameof(ShowingMods));
-	public static Translation ShowingAssets => _instance.GetText(nameof(ShowingAssets));
-	public static Translation ShowingPackages => _instance.GetText(nameof(ShowingPackages));
-	public static Translation ShowingProfiles => _instance.GetText(nameof(ShowingProfiles));
+	public static Translation ShowingCount => _instance.GetText(nameof(ShowingCount));
+	public static Translation ShowingCountWarning => _instance.GetText(nameof(ShowingCountWarning));
+	public static Translation ItemsHidden => _instance.GetText(nameof(ItemsHidden));
 	public static Translation ClearFoldersPromptTitle => _instance.GetText(nameof(ClearFoldersPromptTitle));
 	public static Translation ClearFoldersPrompt => _instance.GetText(nameof(ClearFoldersPrompt));
 	public static Translation LaunchTooltip => _instance.GetText(nameof(LaunchTooltip));
@@ -219,7 +218,7 @@ internal class Locale : LocaleHelper
 	public static Translation AnyAuthor => _instance.GetText(nameof(AnyAuthor));
 	public static Translation ItemsCount => _instance.GetText(nameof(ItemsCount));
 	public static Translation AuthorsSelected => _instance.GetText(nameof(AuthorsSelected));
-	public static Translation AnyIssues => _instance.GetText(nameof(AnyIssues));
+	public static Translation AnyIssue => _instance.GetText(nameof(AnyIssue));
 	public static Translation IncludeAll => _instance.GetText(nameof(IncludeAll));
 	public static Translation ExcludeAll => _instance.GetText(nameof(ExcludeAll));
 	public static Translation EnableAll => _instance.GetText(nameof(EnableAll));
@@ -271,4 +270,5 @@ internal class Locale : LocaleHelper
 	public static Translation IncludedEnabledCount => _instance.GetText(nameof(IncludedEnabledCount));
 	public static Translation LoadedCount => _instance.GetText(nameof(LoadedCount));
 	public static Translation EditCompatibility => _instance.GetText(nameof(EditCompatibility));
+	public static Translation AnyUsage => _instance.GetText(nameof(AnyUsage));
 }

@@ -37,7 +37,6 @@ public class Package : IPackage
 	public bool BuiltIn { get; }
 	public bool Workshop { get; }
 	public string Folder { get; }
-	public bool IsPseudoMod { get; set; }
 	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : this.GetCompatibilityInfo().Data?.Package.SteamId ?? 0);
 	public long FileSize => ContentUtil.GetTotalSize(Folder);
 	public DateTime LocalTime => ContentUtil.GetLocalUpdatedTime(Folder);
