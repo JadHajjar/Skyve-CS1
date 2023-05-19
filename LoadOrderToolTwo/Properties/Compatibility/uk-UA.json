@@ -62,7 +62,7 @@
   "AddPackages": "Додати пакунки",
   "ConfirmEndSession": "Are you sure you want to conclude your session?",
   "CrDataLoadFailed": "Failed to load data, try again later",
-  "AddGlobalTag": "Add a global tag",
+  "AddGlobalTag": "Додати глобальний тег",
   "ReuseData": "Re-use Previous Data",
   "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
   "PleaseReviewTheStability": "Please review the stability of this package before saving.",
