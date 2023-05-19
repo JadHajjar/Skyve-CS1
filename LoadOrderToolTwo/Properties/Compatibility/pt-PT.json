@@ -20,6 +20,7 @@
   "NotEnoughInformation": "Não há informação suficiente",
   "HasIssues": "Tem problemas",
   "Broken": "Quebrado",
+  "Incompatible": "Incompatible",
   "CityBuilding": "Construção da Cidade",
   "AssetCreation": "Criação de Recurso",
   "MapCreation": "Criação de Mapa",
@@ -43,7 +44,6 @@
   "Successor": "Sucessor",
   "Alternative": "Alternativa",
   "SameFunctionality": "Mesma Funcionalidade",
-  "Incompatible": "Incompatível",
   "RequirementAlternative": "Alternativa para Requisito",
   "IncompatibleWith": "Incompatible With ..",
   "CausesIssuesWith": "Causes Issues With ..",
@@ -56,7 +56,7 @@
   "AttentionRequired": "Attention Required",
   "Website": "Website",
   "Donation": "Donate",
-  "ManageSinglePackage": "Manage a single package",
+  "ManageSinglePackage": "Manage specific packages",
   "ManageCompatibilityData": "Manage Compatibility Data",
   "YourPackages": "Manage your packages",
   "AddPackages": "Add Packages",
@@ -98,6 +98,7 @@
     "Plural": "'{0}' is succeeded by either one of the following packages."
   },
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
@@ -125,8 +126,10 @@
   "Stability_NotReviewed": "Este pacote não foi analisado ainda.\nA informação de compatibilidade pode não ser precisa.",
   "Stability_Stable": "This package is stable.",
   "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
-  "Stability_HasIssues": "This package can cause issues.",
-  "Stability_Broken": "This package is broken.",
+  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
+  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should subscribe to the following package.",
@@ -192,5 +195,8 @@
   "IMTMarkings": "IMT Markings",
   "RenderItPreset": "Render it! Preset",
   "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations"
+  "NameList": "Name-List/Game Translations",
+  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
 }
