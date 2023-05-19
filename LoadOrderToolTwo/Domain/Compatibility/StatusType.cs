@@ -32,6 +32,9 @@ public enum StatusType
 	[CRN(NotificationType.Caution, false)]
 	IncompleteDescription = 9,
 
+	[CRN(NotificationType.None, new[] { StatusAction.NoAction })]
+	SourceAvailable = 10,
+
 	/********************************/
 
 	[CRN(NotificationType.MissingDependency, false)]

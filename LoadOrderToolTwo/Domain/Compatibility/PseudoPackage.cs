@@ -19,6 +19,7 @@ public class PseudoPackage
 
 	public PseudoPackage(IPackage iPackage)
 	{
+		SteamId = iPackage.SteamId;
 		IPackage = iPackage;
 	}
 

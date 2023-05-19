@@ -7,6 +7,7 @@ using LoadOrderToolTwo.Utilities.Managers;
 using SlickControls;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -24,6 +25,11 @@ internal class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 		{
 			Items = Enum.GetValues(typeof(PackageType)).Cast<PackageType>().ToArray();
 		}
+	}
+
+	protected override IEnumerable<DrawableItem<PackageType>> OrderItems(IEnumerable<DrawableItem<PackageType>> items)
+	{
+		return items.OrderBy(x => LocaleCR.Get($"{x.Item}").One);
 	}
 
 	protected override void UIChanged()

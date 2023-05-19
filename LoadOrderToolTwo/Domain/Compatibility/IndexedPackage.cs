@@ -123,7 +123,7 @@ public class IndexedPackage
 
 					if (package.Interactions.ContainsKey(InteractionType.Alternative))
 					{
-						package.Interactions[InteractionType.Alternative].Add(new(replacedInteraction, packages));
+						package.Interactions[InteractionType.Alternative][0].Interaction.Packages = linkedPackages.Concat(package.Interactions[InteractionType.Alternative][0].Interaction.Packages ?? new ulong[0]).Distinct().ToArray();
 					}
 					else
 					{

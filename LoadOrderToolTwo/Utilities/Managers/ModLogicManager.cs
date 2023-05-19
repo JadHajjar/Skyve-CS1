@@ -103,7 +103,7 @@ internal class ModLogicManager
 			return true;
 		}
 
-		if (package.GetCompatibilityInfo().Data?.Package.Type is not null and not Domain.Compatibility.PackageType.GenericPackage and not Domain.Compatibility.PackageType.MusicPack and not Domain.Compatibility.PackageType.CSM)
+		if (package.GetCompatibilityInfo().Data?.Package.Type is not null and not Domain.Compatibility.PackageType.GenericPackage and not Domain.Compatibility.PackageType.MusicPack and not Domain.Compatibility.PackageType.CSM and not Domain.Compatibility.PackageType.ContentPackage)
 		{
 			return true;
 		}

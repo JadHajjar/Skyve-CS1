@@ -15,4 +15,5 @@ public enum PackageType
 	POFont = 5,
 	NameList = 6,
 	CSM = 7,
+	ContentPackage = 8
 }

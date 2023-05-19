@@ -90,6 +90,7 @@ public partial class PC_RequestReview : PanelContent
 
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
-
+		PushBack();
+		ShowPrompt(Locale.ReviewRequestSent.Format(CurrentPackage.CleanName()), PromptButtons.OK, PromptIcons.Info);
 	}
 }

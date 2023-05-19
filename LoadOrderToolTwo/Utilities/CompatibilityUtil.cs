@@ -18,12 +18,17 @@ internal static class CompatibilityUtil
 	{
 		var type = status.Status.Type;
 
-		if (type == StatusType.DependencyMod && ContentUtil.GetReferencingPackage(info.Package.SteamId, true).Any())
+		if (type is StatusType.SourceAvailable)
 		{
 			return;
 		}
 
-		if (type == StatusType.Deprecated && status.Status.Action is StatusAction.Switch && (status.Status.Packages?.Any() ?? false))
+		if (type is StatusType.DependencyMod && ContentUtil.GetReferencingPackage(info.Package.SteamId, true).Any())
+		{
+			return;
+		}
+
+		if (type is StatusType.Deprecated && status.Status.Action is StatusAction.Switch && (status.Status.Packages?.Any() ?? false))
 		{
 			if ((info.Data?.Interactions.ContainsKey(InteractionType.SucceededBy) ?? false) || HandleSucceededBy(info, status.Status.Packages))
 			{
@@ -95,17 +100,19 @@ internal static class CompatibilityUtil
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
-			packages.RemoveAll(x => !IsPackageEnabled(x, false));
+			packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
 		}
 		else if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
 		{
-			packages.RemoveAll(x => IsPackageEnabled(x, true));
+			packages.RemoveAll(x => IsPackageEnabled(x, true, true));
 		}
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
 		{
 			packages.RemoveAll(ShouldNotBeUsed);
 		}
+
+		packages.Remove(info.Package.SteamId);
 
 		if (packages.Count == 0)
 		{
@@ -145,7 +152,7 @@ internal static class CompatibilityUtil
 	{
 		foreach (var item in packages)
 		{
-			if (IsPackageEnabled(item, true))
+			if (IsPackageEnabled(item, true, true))
 			{
 				HandleStatus(info, new PackageStatus(StatusType.Succeeded, StatusAction.UnsubscribeThis) { Packages = new[] { item } });
 
@@ -186,7 +193,7 @@ internal static class CompatibilityUtil
 		return steamId;
 	}
 
-	private static bool IsPackageEnabled(ulong steamId, bool withAlternatives)
+	private static bool IsPackageEnabled(ulong steamId, bool withAlternatives, bool withSuccessors)
 	{
 		var indexedPackage = CompatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
@@ -201,7 +208,7 @@ internal static class CompatibilityUtil
 			{
 				if (item.Key != steamId)
 				{
-					foreach (var package in FindPackage(item.Value))
+					foreach (var package in FindPackage(item.Value, withSuccessors))
 					{
 						if (isEnabled(package))
 						{
@@ -212,7 +219,7 @@ internal static class CompatibilityUtil
 			}
 		}
 
-		foreach (var package in FindPackage(indexedPackage))
+		foreach (var package in FindPackage(indexedPackage, withSuccessors))
 		{
 			if (isEnabled(package))
 			{
@@ -224,7 +231,7 @@ internal static class CompatibilityUtil
 		{
 			if (item.Key != steamId)
 			{
-				foreach (var package in FindPackage(item.Value))
+				foreach (var package in FindPackage(item.Value, withSuccessors))
 				{
 					if (isEnabled(package))
 					{
@@ -254,7 +261,9 @@ internal static class CompatibilityUtil
 
 	private static bool ShouldNotBeUsed(ulong steamId)
 	{
-		if ((SteamUtil.GetItem(steamId)?.RemovedFromSteam ?? false) || (SteamUtil.GetItem(steamId)?.Incompatible ?? false))
+		var workshopItem = SteamUtil.GetItem(steamId);
+
+		if (workshopItem is not null && (CompatibilityManager.IsBlacklisted(workshopItem) || workshopItem.RemovedFromSteam || workshopItem.Incompatible))
 		{
 			return true;
 		}
@@ -303,7 +312,7 @@ internal static class CompatibilityUtil
 		return null;
 	}
 
-	private static IEnumerable<Domain.Package> FindPackage(IndexedPackage package)
+	private static IEnumerable<Domain.Package> FindPackage(IndexedPackage package, bool withSuccessors)
 	{
 		var localPackage = CentralManager.Packages.FirstOrDefault(x => x.SteamId == package.Package.SteamId);
 
@@ -319,17 +328,23 @@ internal static class CompatibilityUtil
 			yield return localPackage;
 		}
 
-		if (!package.Interactions.ContainsKey(InteractionType.SucceededBy))
+		if (!withSuccessors || !package.Interactions.ContainsKey(InteractionType.SucceededBy))
 		{
 			yield break;
 		}
 
-		foreach (var item in package.Interactions[InteractionType.SucceededBy]
+		var packages = package.Interactions[InteractionType.SucceededBy]
 					.SelectMany(x => x.Packages.Values)
-					.Select(FindPackage)
-					.FirstOrDefault(x => x is not null))
+					.Where(x => x.Package != package.Package)
+					.Select(x => FindPackage(x, true))
+					.FirstOrDefault(x => x is not null);
+
+		if (packages is not null)
 		{
-			yield return item;
+			foreach (var item in packages)
+			{
+				yield return item;
+			}
 		}
 	}
 

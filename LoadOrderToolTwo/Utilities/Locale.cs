@@ -271,4 +271,5 @@ internal class Locale : LocaleHelper
 	public static Translation LoadedCount => _instance.GetText(nameof(LoadedCount));
 	public static Translation EditCompatibility => _instance.GetText(nameof(EditCompatibility));
 	public static Translation AnyUsage => _instance.GetText(nameof(AnyUsage));
+	public static Translation ReviewRequestSent => _instance.GetText(nameof(ReviewRequestSent));
 }

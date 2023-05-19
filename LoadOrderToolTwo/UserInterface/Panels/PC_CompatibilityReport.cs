@@ -25,7 +25,20 @@ public partial class PC_CompatibilityReport : PanelContent
 		B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious;
 		B_YourPackages.Visible = hasPackages && CompatibilityManager.User.Verified && !CompatibilityManager.User.Malicious;
 
-		LoadReport(CentralManager.Packages.Select(x => x.GetCompatibilityInfo()));
+		if (CompatibilityManager.FirstLoadComplete)
+		{
+			slickPictureBox1.Visible = true;
+			slickPictureBox1.Loading = true;
+		}
+
+		CompatibilityManager_ReportProcessed();
+
+		CompatibilityManager.ReportProcessed += CompatibilityManager_ReportProcessed;
+	}
+
+	private void CompatibilityManager_ReportProcessed()
+	{
+		this.TryInvoke(() => { slickPictureBox1.Dispose(); LoadReport(CentralManager.Packages.Select(x => x.GetCompatibilityInfo())); });
 	}
 
 	private void B_Manage_Click(object sender, EventArgs e)
@@ -64,6 +77,9 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			if (report.Key <= NotificationType.Info)
 				continue;
+
+			var validReports = report.Key == NotificationType.Unsubscribe ? report
+				: report.Where(x => x.Package.IsIncluded);
 
 			FLP_Reports.Controls.Add(new CompatibilityGroupBubble(report.Key, report));
 		}

@@ -28,31 +28,31 @@ partial class PC_RequestReview
 	/// </summary>
 	private void InitializeComponent()
 	{
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			this.TLP_Actions = new System.Windows.Forms.TableLayoutPanel();
-			this.B_ReportIssue = new LoadOrderToolTwo.UserInterface.Generic.ReviewRequestOptionControl();
-			this.B_AddStatus = new LoadOrderToolTwo.UserInterface.Generic.ReviewRequestOptionControl();
-			this.B_AddInteraction = new LoadOrderToolTwo.UserInterface.Generic.ReviewRequestOptionControl();
 			this.P_Main = new SlickControls.RoundedPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.P_Content = new System.Windows.Forms.Panel();
 			this.TLP_MainInfo = new System.Windows.Forms.TableLayoutPanel();
 			this.TB_Note2 = new SlickControls.SlickTextBox();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.TB_Note = new SlickControls.SlickTextBox();
+			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
+			this.PB_LoadingPackage = new SlickControls.SlickPictureBox();
+			this.TLP_Button = new System.Windows.Forms.TableLayoutPanel();
+			this.B_Apply = new SlickControls.SlickButton();
 			this.DD_Stability = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageStabilityDropDown();
 			this.DD_DLCs = new LoadOrderToolTwo.UserInterface.Dropdowns.DlcDropDown();
 			this.DD_Usage = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.DD_PackageType = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageTypeDropDown();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.TB_Note = new SlickControls.SlickTextBox();
-			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
 			this.PB_Icon = new LoadOrderToolTwo.UserInterface.Content.PackageIcon();
 			this.P_Info = new LoadOrderToolTwo.UserInterface.Content.PackageDescriptionControl();
-			this.PB_LoadingPackage = new SlickControls.SlickPictureBox();
-			this.TLP_Button = new System.Windows.Forms.TableLayoutPanel();
-			this.B_Apply = new SlickControls.SlickButton();
+			this.B_ReportIssue = new LoadOrderToolTwo.UserInterface.Generic.ReviewRequestOptionControl();
+			this.B_AddStatus = new LoadOrderToolTwo.UserInterface.Generic.ReviewRequestOptionControl();
+			this.B_AddInteraction = new LoadOrderToolTwo.UserInterface.Generic.ReviewRequestOptionControl();
 			this.TLP_Actions.SuspendLayout();
 			this.P_Main.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -84,54 +84,6 @@ partial class PC_RequestReview
 			this.TLP_Actions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Actions.Size = new System.Drawing.Size(773, 367);
 			this.TLP_Actions.TabIndex = 2;
-			// 
-			// B_ReportIssue
-			// 
-			this.B_ReportIssue.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_ReportIssue.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
-			this.B_ReportIssue.FromScratch = false;
-			dynamicIcon1.Name = "I_Remarks";
-			this.B_ReportIssue.ImageName = dynamicIcon1;
-			this.B_ReportIssue.Location = new System.Drawing.Point(124, -79);
-			this.B_ReportIssue.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
-			this.B_ReportIssue.Name = "B_ReportIssue";
-			this.B_ReportIssue.Padding = new System.Windows.Forms.Padding(22);
-			this.B_ReportIssue.Size = new System.Drawing.Size(375, 135);
-			this.B_ReportIssue.TabIndex = 0;
-			this.B_ReportIssue.Text = "Report an issue that you are facing";
-			this.B_ReportIssue.Click += new System.EventHandler(this.B_ReportIssue_Click);
-			// 
-			// B_AddStatus
-			// 
-			this.B_AddStatus.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_AddStatus.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
-			this.B_AddStatus.FromScratch = false;
-			dynamicIcon2.Name = "I_Content";
-			this.B_AddStatus.ImageName = dynamicIcon2;
-			this.B_AddStatus.Location = new System.Drawing.Point(274, 116);
-			this.B_AddStatus.Margin = new System.Windows.Forms.Padding(150, 30, 0, 30);
-			this.B_AddStatus.Name = "B_AddStatus";
-			this.B_AddStatus.Padding = new System.Windows.Forms.Padding(22);
-			this.B_AddStatus.Size = new System.Drawing.Size(375, 135);
-			this.B_AddStatus.TabIndex = 0;
-			this.B_AddStatus.Text = "Add missing information about the package";
-			this.B_AddStatus.Click += new System.EventHandler(this.B_AddStatus_Click);
-			// 
-			// B_AddInteraction
-			// 
-			this.B_AddInteraction.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_AddInteraction.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
-			this.B_AddInteraction.FromScratch = false;
-			dynamicIcon3.Name = "I_Switch";
-			this.B_AddInteraction.ImageName = dynamicIcon3;
-			this.B_AddInteraction.Location = new System.Drawing.Point(124, 311);
-			this.B_AddInteraction.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
-			this.B_AddInteraction.Name = "B_AddInteraction";
-			this.B_AddInteraction.Padding = new System.Windows.Forms.Padding(22);
-			this.B_AddInteraction.Size = new System.Drawing.Size(375, 135);
-			this.B_AddInteraction.TabIndex = 0;
-			this.B_AddInteraction.Text = "Add a missing interaction with another package";
-			this.B_AddInteraction.Click += new System.EventHandler(this.B_AddInteraction_Click);
 			// 
 			// P_Main
 			// 
@@ -189,59 +141,22 @@ partial class PC_RequestReview
 			this.TLP_MainInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_MainInfo.Size = new System.Drawing.Size(773, 267);
 			this.TLP_MainInfo.TabIndex = 19;
+			this.TLP_MainInfo.Visible = false;
 			// 
 			// TB_Note2
 			// 
 			this.TLP_MainInfo.SetColumnSpan(this.TB_Note2, 2);
 			this.TB_Note2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.TB_Note2.LabelText = "Note";
+			this.TB_Note2.LabelText = "ExplainIssue";
 			this.TB_Note2.Location = new System.Drawing.Point(3, 125);
 			this.TB_Note2.MultiLine = true;
 			this.TB_Note2.Name = "TB_Note2";
-			this.TB_Note2.Placeholder = "NoteInfo";
+			this.TB_Note2.Placeholder = "ExplainIssueInfo";
 			this.TB_Note2.SelectedText = "";
 			this.TB_Note2.SelectionLength = 0;
 			this.TB_Note2.SelectionStart = 0;
 			this.TB_Note2.Size = new System.Drawing.Size(767, 151);
 			this.TB_Note2.TabIndex = 19;
-			// 
-			// DD_Stability
-			// 
-			this.DD_Stability.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Stability.Location = new System.Drawing.Point(3, 3);
-			this.DD_Stability.Name = "DD_Stability";
-			this.DD_Stability.Size = new System.Drawing.Size(300, 56);
-			this.DD_Stability.TabIndex = 0;
-			this.DD_Stability.Text = "Stability";
-			// 
-			// DD_DLCs
-			// 
-			this.DD_DLCs.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_DLCs.Location = new System.Drawing.Point(3, 65);
-			this.DD_DLCs.Name = "DD_DLCs";
-			this.DD_DLCs.Size = new System.Drawing.Size(300, 54);
-			this.DD_DLCs.TabIndex = 17;
-			this.DD_DLCs.Text = "RequiredDLCs";
-			// 
-			// DD_Usage
-			// 
-			this.DD_Usage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Usage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Usage.Location = new System.Drawing.Point(470, 3);
-			this.DD_Usage.Name = "DD_Usage";
-			this.DD_Usage.Size = new System.Drawing.Size(300, 54);
-			this.DD_Usage.TabIndex = 17;
-			this.DD_Usage.Text = "Usage";
-			// 
-			// DD_PackageType
-			// 
-			this.DD_PackageType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_PackageType.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_PackageType.Location = new System.Drawing.Point(470, 65);
-			this.DD_PackageType.Name = "DD_PackageType";
-			this.DD_PackageType.Size = new System.Drawing.Size(300, 54);
-			this.DD_PackageType.TabIndex = 17;
-			this.DD_PackageType.Text = "PackageType";
 			// 
 			// tableLayoutPanel1
 			// 
@@ -265,7 +180,7 @@ partial class PC_RequestReview
 			this.TB_Note.Location = new System.Drawing.Point(3, 3);
 			this.TB_Note.MultiLine = true;
 			this.TB_Note.Name = "TB_Note";
-			this.TB_Note.Placeholder = "ExplainIssuenfo";
+			this.TB_Note.Placeholder = "ExplainIssueInfo";
 			this.TB_Note.SelectedText = "";
 			this.TB_Note.SelectionLength = 0;
 			this.TB_Note.SelectionStart = 0;
@@ -289,28 +204,6 @@ partial class PC_RequestReview
 			this.TLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Top.Size = new System.Drawing.Size(773, 100);
 			this.TLP_Top.TabIndex = 0;
-			// 
-			// PB_Icon
-			// 
-			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
-			this.PB_Icon.HalfColor = false;
-			this.PB_Icon.Location = new System.Drawing.Point(0, 0);
-			this.PB_Icon.Margin = new System.Windows.Forms.Padding(0);
-			this.PB_Icon.Name = "PB_Icon";
-			this.TLP_Top.SetRowSpan(this.PB_Icon, 2);
-			this.PB_Icon.Size = new System.Drawing.Size(100, 100);
-			this.PB_Icon.TabIndex = 0;
-			this.PB_Icon.TabStop = false;
-			// 
-			// P_Info
-			// 
-			this.P_Info.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Info.Location = new System.Drawing.Point(105, 0);
-			this.P_Info.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.P_Info.Name = "P_Info";
-			this.TLP_Top.SetRowSpan(this.P_Info, 2);
-			this.P_Info.Size = new System.Drawing.Size(668, 100);
-			this.P_Info.TabIndex = 3;
 			// 
 			// PB_LoadingPackage
 			// 
@@ -351,8 +244,116 @@ partial class PC_RequestReview
 			this.B_Apply.Size = new System.Drawing.Size(216, 30);
 			this.B_Apply.SpaceTriggersClick = true;
 			this.B_Apply.TabIndex = 16;
-			this.B_Apply.Text = "Send Information For Review";
+			this.B_Apply.Text = "SendReview";
 			this.B_Apply.Click += new System.EventHandler(this.B_Apply_Click);
+			// 
+			// DD_Stability
+			// 
+			this.DD_Stability.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Stability.Location = new System.Drawing.Point(3, 3);
+			this.DD_Stability.Name = "DD_Stability";
+			this.DD_Stability.Size = new System.Drawing.Size(375, 56);
+			this.DD_Stability.TabIndex = 0;
+			this.DD_Stability.Text = "Stability";
+			// 
+			// DD_DLCs
+			// 
+			this.DD_DLCs.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_DLCs.Location = new System.Drawing.Point(3, 65);
+			this.DD_DLCs.Name = "DD_DLCs";
+			this.DD_DLCs.Size = new System.Drawing.Size(375, 54);
+			this.DD_DLCs.TabIndex = 17;
+			this.DD_DLCs.Text = "RequiredDLCs";
+			// 
+			// DD_Usage
+			// 
+			this.DD_Usage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_Usage.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Usage.Location = new System.Drawing.Point(395, 3);
+			this.DD_Usage.Name = "DD_Usage";
+			this.DD_Usage.Size = new System.Drawing.Size(375, 54);
+			this.DD_Usage.TabIndex = 17;
+			this.DD_Usage.Text = "Usage";
+			// 
+			// DD_PackageType
+			// 
+			this.DD_PackageType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_PackageType.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_PackageType.Location = new System.Drawing.Point(395, 65);
+			this.DD_PackageType.Name = "DD_PackageType";
+			this.DD_PackageType.Size = new System.Drawing.Size(375, 54);
+			this.DD_PackageType.TabIndex = 17;
+			this.DD_PackageType.Text = "PackageType";
+			// 
+			// PB_Icon
+			// 
+			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
+			this.PB_Icon.HalfColor = false;
+			this.PB_Icon.Location = new System.Drawing.Point(0, 0);
+			this.PB_Icon.Margin = new System.Windows.Forms.Padding(0);
+			this.PB_Icon.Name = "PB_Icon";
+			this.TLP_Top.SetRowSpan(this.PB_Icon, 2);
+			this.PB_Icon.Size = new System.Drawing.Size(100, 100);
+			this.PB_Icon.TabIndex = 0;
+			this.PB_Icon.TabStop = false;
+			// 
+			// P_Info
+			// 
+			this.P_Info.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.P_Info.Location = new System.Drawing.Point(105, 0);
+			this.P_Info.Margin = new System.Windows.Forms.Padding(5, 0, 0, 0);
+			this.P_Info.Name = "P_Info";
+			this.TLP_Top.SetRowSpan(this.P_Info, 2);
+			this.P_Info.Size = new System.Drawing.Size(668, 100);
+			this.P_Info.TabIndex = 3;
+			// 
+			// B_ReportIssue
+			// 
+			this.B_ReportIssue.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_ReportIssue.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
+			this.B_ReportIssue.FromScratch = false;
+			dynamicIcon1.Name = "I_Remarks";
+			this.B_ReportIssue.ImageName = dynamicIcon1;
+			this.B_ReportIssue.Location = new System.Drawing.Point(124, -79);
+			this.B_ReportIssue.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
+			this.B_ReportIssue.Name = "B_ReportIssue";
+			this.B_ReportIssue.Padding = new System.Windows.Forms.Padding(22);
+			this.B_ReportIssue.Size = new System.Drawing.Size(375, 135);
+			this.B_ReportIssue.TabIndex = 0;
+			this.B_ReportIssue.Text = "Report an issue that you are facing";
+			this.B_ReportIssue.Click += new System.EventHandler(this.B_ReportIssue_Click);
+			// 
+			// B_AddStatus
+			// 
+			this.B_AddStatus.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_AddStatus.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
+			this.B_AddStatus.FromScratch = false;
+			dynamicIcon2.Name = "I_Content";
+			this.B_AddStatus.ImageName = dynamicIcon2;
+			this.B_AddStatus.Location = new System.Drawing.Point(274, 116);
+			this.B_AddStatus.Margin = new System.Windows.Forms.Padding(150, 30, 0, 30);
+			this.B_AddStatus.Name = "B_AddStatus";
+			this.B_AddStatus.Padding = new System.Windows.Forms.Padding(22);
+			this.B_AddStatus.Size = new System.Drawing.Size(375, 135);
+			this.B_AddStatus.TabIndex = 0;
+			this.B_AddStatus.Text = "Add missing information about the package";
+			this.B_AddStatus.Click += new System.EventHandler(this.B_AddStatus_Click);
+			// 
+			// B_AddInteraction
+			// 
+			this.B_AddInteraction.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_AddInteraction.Font = new System.Drawing.Font("Segoe UI", 19.5F, System.Drawing.FontStyle.Bold);
+			this.B_AddInteraction.FromScratch = false;
+			dynamicIcon3.Name = "I_Switch";
+			this.B_AddInteraction.ImageName = dynamicIcon3;
+			this.B_AddInteraction.Location = new System.Drawing.Point(124, 311);
+			this.B_AddInteraction.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
+			this.B_AddInteraction.Name = "B_AddInteraction";
+			this.B_AddInteraction.Padding = new System.Windows.Forms.Padding(22);
+			this.B_AddInteraction.Size = new System.Drawing.Size(375, 135);
+			this.B_AddInteraction.TabIndex = 0;
+			this.B_AddInteraction.Text = "Add a missing interaction with another package";
+			this.B_AddInteraction.Click += new System.EventHandler(this.B_AddInteraction_Click);
 			// 
 			// PC_RequestReview
 			// 

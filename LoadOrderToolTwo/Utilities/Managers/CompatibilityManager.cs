@@ -25,6 +25,8 @@ public static class CompatibilityManager
 	public static Author User { get; private set; }
 	public static bool FirstLoadComplete { get; set; }
 
+	public static event Action? ReportProcessed;
+
 	static CompatibilityManager()
 	{
 		User = new();
@@ -53,6 +55,8 @@ public static class CompatibilityManager
 		}
 
 		CentralManager.OnInformationUpdated();
+
+		ReportProcessed?.Invoke();
 	}
 
 	internal static void LoadCachedData()
@@ -214,7 +218,9 @@ public static class CompatibilityManager
 			return info;
 		}
 
-		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable)&&!package.Incompatible)
+		var author = CompatibilityData.Authors[packageData.Package.AuthorId];
+
+		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable) && !package.Incompatible && !author.Malicious)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, packageData.Package.Note, false), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
 		}
@@ -229,7 +235,7 @@ public static class CompatibilityManager
 
 		if (packageData.Package.Type is PackageType.GenericPackage)
 		{
-			if (package.IsMod && !info.Links.Any(x => x.Type is LinkType.Github))
+			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && !info.Links.Any(x => x.Type is LinkType.Github))
 			{
 				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.UnsubscribeThis });
 			}
@@ -239,7 +245,7 @@ public static class CompatibilityManager
 				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
 			}
 
-			if (package.IsMod && DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
+			if (package.IsMod && !author.Malicious && DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
 			{
 				CompatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.Deprecated));
 			}
@@ -258,7 +264,7 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
+		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont or PackageType.ContentPackage && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
 		{
 			CompatibilityUtil.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
 			{
@@ -290,6 +296,15 @@ public static class CompatibilityManager
 					Packages = missing.Select(x => (ulong)x).ToArray()
 				});
 			}
+		}
+
+		if (author.Malicious)
+		{
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, LocaleCR.Get($"AuthorMalicious").Format(package.CleanName(), (package.Author?.Name).IfEmpty(author.Name)), new PseudoPackage[0]);
+		}
+		else if (package.IsMod && author.Retired)
+		{
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.HasIssues, null, false), LocaleCR.Get($"AuthorRetired").Format(package.CleanName(), (package.Author?.Name).IfEmpty(author.Name)), new PseudoPackage[0]);
 		}
 
 		if (!package.Workshop)
