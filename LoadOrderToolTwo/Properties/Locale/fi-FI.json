@@ -47,9 +47,9 @@
   "NoMods": "Poista Kaikki Modit Käytöstä",
   "AutoSave": "Automaattinen tallennus",
   "TotalSize": "kokonaiskoko",
-  "ReportSeverity": "Ilmoita vakavuus",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Mikä tahansa tila",
-  "AnyReportStatus": "Kaikki raportin vakavuus",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "Sinulla on tämä mod",
   "NoLocalPackagesFound": "Tietokoneeltasi ei löydy paketteja.",
   "CheckFolderInOptions": "Tarkista asetuspaneeli, jos vääriä kansioita käytetään.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Tarkastele ja merkitse puuttuvia omaisuuseriä",
   "SelectedFileInvalid": "Valitsemasi tiedosto ei ole kelvollinen",
   "NoItemsToBeDisplayed": "Yhtään kohdetta ei näytetä",
-  "FirstSetupInfo": "Ota käyttöön modi Cities: Skylines ensin ennen kuin käytät työkalua",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "Asettelu Epätäydellinen",
   "LsmImportUnusedInfo": "Näytä ja poista käyttämättömät assetit",
   "SkipFileInfo": "Valitse Skip-tiedosto, jota käytetään näytön modin lataamiseen",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Kopioi kirjoittajan Steam-tunnus",
   "CloseCitiesToSub": "Sinun täytyy sulkea Cities: Skylines tilataksesi tai peruuttaaksesi paketteja",
   "ShowingFilteredItems": "Näytetään {0} yhteensä {1} kohdetta",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Teeman & Käyttöliittymän Mittakaava",
   "SearchProfiles": "Etsi profiilisi kautta..",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Kun tilaat tai lisäät assetin, työkalu sulkee sen automaattisesti pois tai sisällyttää sen tämän asetuksen perusteella kun työkalu käynnistetään.",
   "FilterOutPackagesWithOneAsset_Tip": "Paketit, joilla on vain yksi omaisuus, eivät näy Paketit sivulla. Ne näkyvät edelleen Assets-sivulla.",
   "FilterOutPackagesWithMods_Tip": "Paketit, jotka sisältävät modin, eivät näy Paketit -sivulla. Ne näkyvät edelleen Mods -sivulla.",
-  "OverrideGameChanges_Tip": "Pelissä tehdyt muutokset modien tilaan tulevat automaattisesti ohittamaan asetuksesi Load Order Tools -työkalun sisällä, tämä toimii vain kun työkalu on auki.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Teema sekoittaa tuottaa mod-tiedosto, joka voi jakaa sen työpajassa. Tämän vaihtoehdon ottaminen käyttöön piilottaa modejesi listalta ja sisällyttää ne aina mukaan.",
   "AdvancedIncludeEnable_Tip": "Tämän valinnan käyttöönotto antaa sinun muuttaa sekä mukana olevia että käytössä olevia modeja, jotka ovat samanlaisia kuin lataustilaustyökalu 1.",
   "AdvancedLaunchOptions_Tip": "Näyttää ylimääräiset käynnistysasetukset, joita kehittäjät käyttävät profiilin asetuksissa.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Auta kääntämään tämä työkalu omaan äidinkielellesi Crowdin.",
   "ThemeUIScale_Tip": "Vaihda sovelluksen väriä & teemaa tai lisää käyttöliittymän skaalaa.",
   "JoinDiscord_Tip": "Kysy apua ja vastaanota päivityksiä työkalun käytöstä discord-palvelimella.",
-  "OpenGuide_Tip": "Näytä verkkoopas päästäksesi alkuun Load Order Tool:lla.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Nollaa asetuksesi oletusarvoihin. Tämä ei vaikuta kansion asetuksiin.",
   "EnableDevUi": "Ota Käyttöön Kehityskäyttöliittymä",
   "RefreshWorkshop": "Päivitä Huoltopisteen Sisältö",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Vedä ja pudota LSM-raporttitiedosto tähän tai napsauta valitaksesi sen tilataksesi puuttuvan omaisuuden, joka on listattu raportissa",
   "LsmUnusedTip": "Vedä ja pudota LSM-raporttitiedosto tähän tai valitse sellainen hallitaksesi sisältöä, jota et ole käyttänyt tallennuspelissäsi, joka on listattu raporttiin",
   "FixAllTip": "Yritetään ladata uudelleen kaikki paketit, joilla on ongelmia, tämä avaa höyryn lyhyen hetken",
-  "MultipleLOM": "Sinulla on useita versioita Load Order Mod asennettuna tai tilattu, mikä voi aiheuttaa ristiriitoja. Ongelmien välttämiseksi poista tai poista tilaus kaikista muista versioista paitsi käyttämästäsi versiosta",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Suodata tämän raportin tilan mukaan",
   "FilterByThisPackageStatus": "Suodata tämän paketin tilan mukaan",
   "FilterSinceThisDate": "Suodata kohteita käyttäen tätä päivämäärää",
   "FilterByThisTag": "Lisää '{0}' suodatettuihin tageihin",
   "ItemsShouldNotBeSubscribedInfo": "Olet tilaamassa paketteja, jotka saattavat olla rikki tai joilla on muita vakavia ongelmia.",
   "WouldYouLikeToSkipThose": "Haluatko ohittaa nämä paketit?",
-  "LOTWillRestart": "Lataa tilaustyökalu sulkeutuu väliaikaisesti päivitysprosessin aikana, mutta se jatkuu automaattisesti, kun päivitys on valmis.",
-  "UpdatingLot": "Lataa tilaustyökalu päivitetään parhaillaan. Odota...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Pakettien tilaaminen tai tilauksen peruuttaminen vaatii pelin avaamisen hetkeksi. Kun näet pelin käynnistyksen, jatka pelaamista napsauttamalla Play -painiketta.",
   "HelpSupport": "Apu Ja Tuki",
   "DisableFpsBoosterDebug": "Sinulla on FPS Booster käytössä, kun käytät debug mono, haluat poistaa sen käytöstä saadaksesi parempia lokeja?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Lokissa olevia virheitä",
   "OpenLogFolder": "Avaa pelin lokikansio",
   "CopyLogFile": "Kopioi pelin lokitiedosto leikepöydälle",
-  "OpenLOTLogFolder": "Avaa LOT:n lokikansio",
-  "CopyLOTLogFile": "Kopioi LOT:n lokitiedosto leikepöydälle",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Mukana olleet laitteet: {0}, yhteensä: {1}",
   "ModIncludedAndEnabledTotal": "Sisällytetyt muodot & otettu käyttöön: {0}, yhteensä: {1}",
   "ModIncludedEnabledTotal": "Sisällytetyt timet: {0}, joista on käytössä: {1}, Yhteensä: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "Näytä ja hallitse tallennettuja profiilejasi",
   "AutoSave_Tip": "Tallenna automaattisesti muutokset modeihin ja assetteihin profiiliisi",
   "LoadEnabled_Tip": "Lataukset käytössä ladattaessa peliä. Tämän pitäisi olla käytössä, ellet tiedä mitä teet",
-  "LoadUsed_Tip": "Lataa resursseja, joita käytetään kartassa, vaikka ne olisivat poissa käytöstä pelissä. Tämä ei liity laitteen asetuksiin sisällä Load Order Tool",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Käytä tätä jättääksesi vaniljan varat pois pelistäsi",
   "NewGame_Tip": "Aloita uusi peli käynnistettäessä Cities: Skylines. Voit määrittää kartan, jonka haluat aloittaa",
   "LoadSaveGame_Tip": "Lataa tallennuspeli käynnistettäessä Cities: Skylines. Jos et valitse tallennustiedostoa, jatka viimeisintä tallennustasi",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Suosikki profiilit: {0}, Yhteensä: {1}",
   "FavoriteTotal": "Profiilit yhteensä: {0}",
   "ProfileFilter": "Profiilin Suodatin",
-  "CheckDocumentsFolder": "Varmista, että lataustilaustyökalulla on pääsy dokumenttikansioon, se käyttää sitä tallentaakseen käyttöliittymäsi ja kielesi asetukset.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Valitun kielen tallentaminen epäonnistui",
   "FailedToOpenTC": "Teeman vaihtajan avaaminen epäonnistui",
   "FailedToDeleteItem": "Kohteen poistaminen epäonnistui",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }
