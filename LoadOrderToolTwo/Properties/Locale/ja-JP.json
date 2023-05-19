@@ -47,9 +47,9 @@
   "NoMods": "全てのMODを無効化",
   "AutoSave": "オートセーブ",
   "TotalSize": "合計サイズ",
-  "ReportSeverity": "レポートの深刻度",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "全てのステータス",
-  "AnyReportStatus": "全てのレポート",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "既にサブスク中",
   "NoLocalPackagesFound": "PCにパッケージが見つかりません",
   "CheckFolderInOptions": "間違ったフォルダが使用されている場合は、オプションパネルを確認して下さい。",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "不足中のアセットを表示してサブスク",
   "SelectedFileInvalid": "選択したファイルが無効です！",
   "NoItemsToBeDisplayed": "表示するアイテムがありません",
-  "FirstSetupInfo": "ツールを使用する前に、始めにCities: Skylines内でMODを有効化して下さい。",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "セットアップが不完全",
   "LsmImportUnusedInfo": "未使用アセットの表示と削除",
   "SkipFileInfo": "Loading Screen Modで使用するスキップファイルを選択",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "作者のSteam IDをコピー",
   "CloseCitiesToSub": "パッケージのサブスク操作を行うには、Cities: Skylinesを終了する必要があります。",
   "ShowingFilteredItems": "合計 {1} 個のアイテムから {0} 個を表示中",
-  "ShowingMods": {
-    "One": "表示中: {0} 個のMOD",
-    "Plural": "表示中: {0} 個のMOD"
-  },
-  "ShowingAssets": {
-    "One": "表示中: {0} 個のアセット",
-    "Plural": "表示中: {0} 個のアセット"
-  },
-  "ShowingPackages": {
-    "One": "表示中: {0} 個のパッケージ",
-    "Plural": "表示中: {0} 個のパッケージ"
-  },
-  "ShowingProfiles": {
-    "One": "表示中: {0} 個のプロファイル",
-    "Plural": "表示中: {0} 個のプロファイル"
-  },
   "DropNewProfile": "インポートしたいプロファイルのjsonファイル/xmlファイルをD&D・クリックして選択",
   "ThemeUIScale": "テーマ & UIスケール",
   "SearchProfiles": "プロファイルを検索...",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "アセットのサブスクを開始・追加すると、ツール起動時に設定に基づいて自動的に除外や含まれるようにします。",
   "FilterOutPackagesWithOneAsset_Tip": "アセットが1つしかない単体パッケージは、パッケージのページでは非表示にしてアセットのページで表示します。",
   "FilterOutPackagesWithMods_Tip": "MODが含まれるパッケージは、パッケージのページでは非表示にしてMODのページで表示します。",
-  "OverrideGameChanges_Tip": "ゲーム内で変更したMODの状態は、この設定をオンにするとツール内も自動的に上書きされます。 変更は次回の起動時に反映されて、ツールが起動中の場合のみ機能します。",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "例えばテーマミックスは、ワークショップで共有できるようにMODのファイルとして生成します。オプションを有効にすると、MODリストから該当するアイテムを非表示にして常に含まれるようにします。",
   "AdvancedIncludeEnable_Tip": "有効時はオリジナルのLoad Order Toolと同様に、MODでも「含める & 除外」のステータス変更を可能にします。",
   "AdvancedLaunchOptions_Tip": "プロファイルの設定で、MOD開発やクリエーターが使用する追加の起動オプションを表示します。",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Crowdinでツールの翻訳を手伝って下さい。",
   "ThemeUIScale_Tip": "アプリのカラーやテーマを変更したり、UIのスケールを拡大することができます。",
   "JoinDiscord_Tip": "Discordのサーバーで、ツールに関する最新情報やサポートを受けることが可能です。",
-  "OpenGuide_Tip": "初めてLoad Order Toolを使うユーザーは、オンラインガイドを参照してみて下さい。",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "オプション内の設定をデフォルトに全てリセットします。このリセットは、フォルダ設定には影響しません。",
   "EnableDevUi": "開発者向けUIを有効化",
   "RefreshWorkshop": "ワークショップをリフレッシュ",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "ここにLSMのレポートファイルをD&D・クリックしてファイルを選択して下さい。レポート内の情報から、不足したアセットがサブスク可能です。",
   "LsmUnusedTip": "ここにLSMのレポートファイルをD&D・クリックしてファイルを選択して下さい。レポート内の情報から、セーブゲームで未使用のアセットが管理できます。",
   "FixAllTip": "問題のある全てのパッケージで再DLを実行して、再DL中はSteamクライアントがしばらく開きます。",
-  "MultipleLOM": "複数のLoad Order Modや別のバージョンをサブスク中・有効化しているため、MODが競合する可能性があります。競合を回避するために、使用中のバージョン以外は削除・サブスクを解除して下さい。",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "レポートのステータスでフィルタ",
   "FilterByThisPackageStatus": "パッケージのステータスでフィルタ",
   "FilterSinceThisDate": "この日付以降でアイテムをフィルタ",
   "FilterByThisTag": "タグに「 {0} 」を挿入してフィルタ",
   "ItemsShouldNotBeSubscribedInfo": "既に破損している・致命的な問題を起こす可能性がある、パッケージをサブスクしようとしています。",
   "WouldYouLikeToSkipThose": "このパッケージは省きますか？",
-  "LOTWillRestart": "アップデート中はLoad Order Toolが一時的に閉じますが、完了すると自動的にツールが再開します。",
-  "UpdatingLot": "現在、Load Order Toolがアップデート中です。しばらくお待ち下さい...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "パッケージのサブスク操作を行う場合は、ゲームを一時的に起動する必要があります。ゲームのランチャーが表示されたら、「Play」をクリックして操作を続行して下さい。",
   "HelpSupport": "ヘルプ & サポート",
   "DisableFpsBoosterDebug": "Debug Monoを使用中ですが、FPS Boosterが有効になっています。詳細なログを取得するために、MODを無効化しても宜しいですか？",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "ログで検出したエラー",
   "OpenLogFolder": "ゲームのログフォルダを開く",
   "CopyLogFile": "ゲームのログをクリップボードにコピー",
-  "OpenLOTLogFolder": "LOTのログフォルダを開く",
-  "CopyLOTLogFile": "LOTのログをクリップボードにコピー",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "MODを含める: {0} 個 / 合計: {1} 個",
   "ModIncludedAndEnabledTotal": "MODを含める&有効化: {0} 個 / 合計: {1} 個",
   "ModIncludedEnabledTotal": "MODを含める: {0} 個の中から有効化したMOD {1} 個 / 合計: {2} 個",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "保存したプロファイルの確認や管理が出来ます。",
   "AutoSave_Tip": "MODやアセットの変更を使用中のプロファイルに自動で保存されます。",
   "LoadEnabled_Tip": "ゲームのロード時に、有効化したアセットのみをロードします。意味や何をしているか分からない場合は、有効のままにして下さい。",
-  "LoadUsed_Tip": "マップ上で使用中のアセットは、ゲーム内で無効化してもロードします。Load Order Tool内のアセットの設定とは連動しません。",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "バニラのアセットをゲームから除外したい場合に使用します。",
   "NewGame_Tip": "Cities Skylinesを起動すると、新規でゲームを開始します。起動時に開始するマップを指定できます。",
   "LoadSaveGame_Tip": "Cities Skylinesを起動すると、セーブゲームをロードします。セーブファイルが未選択の場合は、最新のセーブで再開します。",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "お気に入りのプロファイル: {0} 個 / 合計: {1} 個",
   "FavoriteTotal": "プロファイルの合計: {0} 個",
   "ProfileFilter": "プロファイルのフィルタ",
-  "CheckDocumentsFolder": "Load Order Toolがドキュメントフォルダにアクセス可能か確認して下さい。ドキュメントフォルダは、UIと言語の設定を保存するために使用します。",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "選択した言語の保存に失敗！",
   "FailedToOpenTC": "テーマチェンジャーが開けません！",
   "FailedToDeleteItem": "アイテムの削除に失敗！",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} をロード済み",
     "Plural": "{0} {1} をロード済み"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }
