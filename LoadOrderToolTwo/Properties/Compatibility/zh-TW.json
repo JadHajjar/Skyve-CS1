@@ -20,6 +20,7 @@
   "NotEnoughInformation": "沒有足夠的資訊",
   "HasIssues": "存在問題",
   "Broken": "損壞的",
+  "Incompatible": "Incompatible",
   "CityBuilding": "城市建設",
   "AssetCreation": "資產製作",
   "MapCreation": "地圖製作",
@@ -43,7 +44,6 @@
   "Successor": "繼任模組",
   "Alternative": "備選方案",
   "SameFunctionality": "相同的功能",
-  "Incompatible": "不相容",
   "RequirementAlternative": "可用的備選方案",
   "IncompatibleWith": "與…不相容",
   "CausesIssuesWith": "與…一起使用會導致問題",
@@ -56,7 +56,7 @@
   "AttentionRequired": "需要注意",
   "Website": "網站",
   "Donation": "贊助",
-  "ManageSinglePackage": "管理單個外掛程式",
+  "ManageSinglePackage": "Manage specific packages",
   "ManageCompatibilityData": "管理相容性報告的資料",
   "YourPackages": "管理您的外掛程式",
   "AddPackages": "添加外掛程式",
@@ -98,6 +98,7 @@
     "Plural": "'{0}' 的功能已被下列任意一個外掛程式繼承："
   },
   "Interaction_Identical": "這些是同一個外掛程式的多個不同版本。\n\n您應當只選擇使用其中一個，並取消訂閱其他版本。",
+  "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' 已經廢棄，不再受到作者的支持。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某個原始外掛程式的重新上傳版本。",
@@ -125,8 +126,10 @@
   "Stability_NotReviewed": "此外掛程式尚未被檢查。相容性資訊可能不準確。",
   "Stability_Stable": "此外掛程式能穩定運行。",
   "Stability_NotEnoughInformation": "沒有足夠的資訊來正確地檢查此外掛程式的穩定性。",
-  "Stability_HasIssues": "此外掛程式可能引發問題。",
-  "Stability_Broken": "此外掛程式已經損壞，無法運行。",
+  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
+  "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
+  "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
+  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您應該訂閱下列外掛程式：",
@@ -192,5 +195,8 @@
   "IMTMarkings": "IMT Markings",
   "RenderItPreset": "Render it! Preset",
   "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations"
+  "NameList": "Name-List/Game Translations",
+  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
 }
