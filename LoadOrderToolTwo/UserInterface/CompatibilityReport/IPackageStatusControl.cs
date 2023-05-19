@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.Content;
 using LoadOrderToolTwo.UserInterface.Dropdowns;
 using LoadOrderToolTwo.UserInterface.Panels;
@@ -21,11 +22,13 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	private readonly PackageStatusTypeDropDown<T> typeDropDown;
 
 	public event EventHandler? ValuesChanged;
+	public IPackage? CurrentPackage { get; }
 
-	public IPackageStatusControl(TBase? item = default)
+	public IPackageStatusControl(IPackage? currentPackage, TBase? item = default)
 	{
 		InitializeComponent();
 
+		CurrentPackage = currentPackage;
 		L_LinkedPackages.Text = LocaleCR.LinkedPackages;
 		L_OutputTitle.Text = LocaleCR.OutputText;
 
@@ -61,7 +64,12 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			}
 		}
 		else
-		{ TypeDropDown_SelectedItemChanged(this, EventArgs.Empty); }
+		{
+			if (typeDropDown.Items.Contains(typeDropDown.SelectedItem))
+				TypeDropDown_SelectedItemChanged(this, EventArgs.Empty);
+			else
+				typeDropDown.SelectedItem = typeDropDown.Items[0];
+		}
 
 		SlickTip.SetTo(I_Copy, "Copy");
 		SlickTip.SetTo(I_Paste, "Paste");
@@ -201,14 +209,14 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		if (typeDropDown.SelectedItem is InteractionType.Successor)
 		{
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{InteractionType.SucceededBy}");
-			message = string.Format($"{translation.One}\r\n\r\n{action.Zero}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName(), (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName()).Trim();
+			message = string.Format($"{translation.One}\r\n\r\n{action.Zero}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName(), CurrentPackage?.CleanName()).Trim();
 		}
 		else
 		{
 			var actionText = P_Packages.Controls.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{typeDropDown.SelectedItem}");
 			var text = P_Packages.Controls.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
-			message = string.Format($"{text}\r\n\r\n{actionText}", (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName(), (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName()).Trim();
+			message = string.Format($"{text}\r\n\r\n{actionText}", CurrentPackage?.CleanName(), (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName()).Trim();
 		}
 
 		e.Graphics.DrawString(message, L_Output.Font, new SolidBrush(L_Output.ForeColor), L_Output.ClientRectangle);

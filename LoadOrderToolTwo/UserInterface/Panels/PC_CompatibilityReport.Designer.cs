@@ -28,16 +28,16 @@ partial class PC_CompatibilityReport
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
 			this.TLP_Buttons = new System.Windows.Forms.TableLayoutPanel();
 			this.B_Manage = new SlickControls.SlickButton();
 			this.B_YourPackages = new SlickControls.SlickButton();
 			this.B_ManageSingle = new SlickControls.SlickButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
-			this.TLP_Reports = new System.Windows.Forms.TableLayoutPanel();
+			this.FLP_Reports = new SlickControls.SmartFlowPanel();
 			this.TLP_Buttons.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -62,19 +62,19 @@ partial class PC_CompatibilityReport
 			this.TLP_Buttons.Location = new System.Drawing.Point(0, 30);
 			this.TLP_Buttons.Margin = new System.Windows.Forms.Padding(0);
 			this.TLP_Buttons.Name = "TLP_Buttons";
-			this.TLP_Buttons.RowCount = 1;
+			this.TLP_Buttons.RowCount = 2;
+			this.TLP_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Buttons.Size = new System.Drawing.Size(783, 36);
 			this.TLP_Buttons.TabIndex = 0;
-			this.TLP_Buttons.Visible = false;
 			// 
 			// B_Manage
 			// 
 			this.B_Manage.AutoSize = true;
 			this.B_Manage.ColorShade = null;
 			this.B_Manage.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Cog";
-			this.B_Manage.ImageName = dynamicIcon1;
+			dynamicIcon4.Name = "I_Cog";
+			this.B_Manage.ImageName = dynamicIcon4;
 			this.B_Manage.Location = new System.Drawing.Point(555, 3);
 			this.B_Manage.Name = "B_Manage";
 			this.B_Manage.Size = new System.Drawing.Size(100, 30);
@@ -88,8 +88,8 @@ partial class PC_CompatibilityReport
 			this.B_YourPackages.AutoSize = true;
 			this.B_YourPackages.ColorShade = null;
 			this.B_YourPackages.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_User";
-			this.B_YourPackages.ImageName = dynamicIcon2;
+			dynamicIcon5.Name = "I_User";
+			this.B_YourPackages.ImageName = dynamicIcon5;
 			this.B_YourPackages.Location = new System.Drawing.Point(661, 3);
 			this.B_YourPackages.Name = "B_YourPackages";
 			this.B_YourPackages.Size = new System.Drawing.Size(119, 30);
@@ -103,8 +103,8 @@ partial class PC_CompatibilityReport
 			this.B_ManageSingle.AutoSize = true;
 			this.B_ManageSingle.ColorShade = null;
 			this.B_ManageSingle.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Edit";
-			this.B_ManageSingle.ImageName = dynamicIcon3;
+			dynamicIcon6.Name = "I_Edit";
+			this.B_ManageSingle.ImageName = dynamicIcon6;
 			this.B_ManageSingle.Location = new System.Drawing.Point(449, 3);
 			this.B_ManageSingle.Name = "B_ManageSingle";
 			this.B_ManageSingle.Size = new System.Drawing.Size(100, 30);
@@ -115,7 +115,7 @@ partial class PC_CompatibilityReport
 			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.TLP_Reports);
+			this.panel1.Controls.Add(this.FLP_Reports);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 66);
 			this.panel1.Name = "panel1";
@@ -125,7 +125,7 @@ partial class PC_CompatibilityReport
 			// slickScroll1
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.slickScroll1.LinkedControl = this.TLP_Reports;
+			this.slickScroll1.LinkedControl = this.FLP_Reports;
 			this.slickScroll1.Location = new System.Drawing.Point(775, 66);
 			this.slickScroll1.Name = "slickScroll1";
 			this.slickScroll1.Size = new System.Drawing.Size(8, 372);
@@ -134,20 +134,13 @@ partial class PC_CompatibilityReport
 			this.slickScroll1.TabStop = false;
 			this.slickScroll1.Text = "slickScroll1";
 			// 
-			// TLP_Reports
+			// FLP_Reports
 			// 
-			this.TLP_Reports.AutoSize = true;
-			this.TLP_Reports.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TLP_Reports.ColumnCount = 1;
-			this.TLP_Reports.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_Reports.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Reports.Location = new System.Drawing.Point(8, 8);
-			this.TLP_Reports.Name = "TLP_Reports";
-			this.TLP_Reports.RowCount = 2;
-			this.TLP_Reports.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Reports.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Reports.Size = new System.Drawing.Size(0, 0);
-			this.TLP_Reports.TabIndex = 3;
+			this.FLP_Reports.Location = new System.Drawing.Point(0, 186);
+			this.FLP_Reports.Margin = new System.Windows.Forms.Padding(0);
+			this.FLP_Reports.Name = "FLP_Reports";
+			this.FLP_Reports.Size = new System.Drawing.Size(783, 0);
+			this.FLP_Reports.TabIndex = 2;
 			// 
 			// PC_CompatibilityReport
 			// 
@@ -165,7 +158,6 @@ partial class PC_CompatibilityReport
 			this.TLP_Buttons.ResumeLayout(false);
 			this.TLP_Buttons.PerformLayout();
 			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -177,6 +169,6 @@ partial class PC_CompatibilityReport
 	private SlickControls.SlickButton B_YourPackages;
 	private SlickControls.SlickButton B_ManageSingle;
 	private System.Windows.Forms.Panel panel1;
-	private System.Windows.Forms.TableLayoutPanel TLP_Reports;
 	private SlickControls.SlickScroll slickScroll1;
+	private SlickControls.SmartFlowPanel FLP_Reports;
 }

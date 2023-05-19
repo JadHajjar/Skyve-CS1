@@ -343,7 +343,7 @@ internal class CompatibilityMessageControl : SlickControl
 					}
 					break;
 				case StatusAction.RequestReview:
-					// todo
+					Program.MainForm.PushPanel(null, new PC_RequestReview(PackageCompatibilityReportControl.Package));
 					break;
 			}
 		}

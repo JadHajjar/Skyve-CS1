@@ -289,7 +289,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Statuses ?? new())
 		{
-			var control = new IPackageStatusControl<StatusType, PackageStatus>(item);
+			var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage, item);
 
 			control.ValuesChanged += ControlValueChanged;
 
@@ -299,7 +299,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Interactions ?? new())
 		{
-			var control = new IPackageStatusControl<InteractionType, PackageInteraction>(item);
+			var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage, item);
 
 			control.ValuesChanged += ControlValueChanged;
 
@@ -373,7 +373,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void B_AddStatus_Click(object sender, EventArgs e)
 	{
-		var control = new IPackageStatusControl<StatusType, PackageStatus>();
+		var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage);
 		
 		control.ValuesChanged += ControlValueChanged;
 
@@ -385,7 +385,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void B_AddInteraction_Click(object sender, EventArgs e)
 	{
-		var control = new IPackageStatusControl<InteractionType, PackageInteraction>();
+		var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage);
 
 		control.ValuesChanged += ControlValueChanged;
 

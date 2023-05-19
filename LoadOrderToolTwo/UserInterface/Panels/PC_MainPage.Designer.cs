@@ -40,7 +40,6 @@ partial class PC_MainPage
 			this.profileBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ProfileBubble();
 			this.modsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.ModsBubble();
 			this.assetsBubble = new LoadOrderToolTwo.UserInterface.StatusBubbles.AssetsBubble();
-			this.userBubble1 = new LoadOrderToolTwo.UserInterface.StatusBubbles.UserBubble();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -93,12 +92,11 @@ partial class PC_MainPage
 			this.flowLayoutPanel1.Controls.Add(this.TLP_Profiles);
 			this.flowLayoutPanel1.Controls.Add(this.modsBubble);
 			this.flowLayoutPanel1.Controls.Add(this.assetsBubble);
-			this.flowLayoutPanel1.Controls.Add(this.userBubble1);
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 153);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 123);
 			this.flowLayoutPanel1.TabIndex = 1;
 			// 
 			// TLP_Profiles
@@ -114,7 +112,7 @@ partial class PC_MainPage
 			this.TLP_Profiles.RowCount = 1;
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Profiles.Size = new System.Drawing.Size(212, 153);
+			this.TLP_Profiles.Size = new System.Drawing.Size(212, 123);
 			this.TLP_Profiles.TabIndex = 13;
 			// 
 			// profileBubble
@@ -122,7 +120,7 @@ partial class PC_MainPage
 			this.profileBubble.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.profileBubble.Location = new System.Drawing.Point(3, 3);
 			this.profileBubble.Name = "profileBubble";
-			this.profileBubble.Size = new System.Drawing.Size(206, 147);
+			this.profileBubble.Size = new System.Drawing.Size(206, 117);
 			this.profileBubble.TabIndex = 0;
 			this.profileBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ProfileBubble_MouseClick);
 			// 
@@ -131,7 +129,7 @@ partial class PC_MainPage
 			this.modsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.modsBubble.Location = new System.Drawing.Point(215, 3);
 			this.modsBubble.Name = "modsBubble";
-			this.modsBubble.Size = new System.Drawing.Size(150, 30);
+			this.modsBubble.Size = new System.Drawing.Size(150, 24);
 			this.modsBubble.TabIndex = 1;
 			this.modsBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsBubble_MouseClick);
 			// 
@@ -140,27 +138,17 @@ partial class PC_MainPage
 			this.assetsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.assetsBubble.Location = new System.Drawing.Point(371, 3);
 			this.assetsBubble.Name = "assetsBubble";
-			this.assetsBubble.Size = new System.Drawing.Size(150, 30);
+			this.assetsBubble.Size = new System.Drawing.Size(150, 24);
 			this.assetsBubble.TabIndex = 2;
 			this.assetsBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AssetsBubble_MouseClick);
-			// 
-			// userBubble1
-			// 
-			this.userBubble1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.userBubble1.Enabled = false;
-			this.userBubble1.Location = new System.Drawing.Point(527, 3);
-			this.userBubble1.Name = "userBubble1";
-			this.userBubble1.Size = new System.Drawing.Size(150, 0);
-			this.userBubble1.TabIndex = 14;
-			this.userBubble1.Visible = false;
 			// 
 			// label1
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 373);
+			this.label1.Location = new System.Drawing.Point(3, 380);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(71, 30);
+			this.label1.Size = new System.Drawing.Size(55, 23);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "label1";
 			this.label1.Visible = false;
@@ -195,5 +183,4 @@ partial class PC_MainPage
 	private UserInterface.StatusBubbles.AssetsBubble assetsBubble;
 	private System.Windows.Forms.Label label1;
 	private System.Windows.Forms.TableLayoutPanel TLP_Profiles;
-	private StatusBubbles.UserBubble userBubble1;
 }

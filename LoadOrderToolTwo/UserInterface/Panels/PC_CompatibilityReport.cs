@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.UserInterface.Bubbles;
 using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
@@ -21,9 +22,8 @@ public partial class PC_CompatibilityReport : PanelContent
 
 		Text = string.Empty;
 		var hasPackages = CompatibilityManager.User.SteamId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == CompatibilityManager.User.SteamId);
-		B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager;
-		B_YourPackages.Visible = hasPackages;
-		TLP_Buttons.Visible = CompatibilityManager.User.Manager || hasPackages;
+		B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious;
+		B_YourPackages.Visible = hasPackages && CompatibilityManager.User.Verified && !CompatibilityManager.User.Malicious;
 
 		LoadReport(CentralManager.Packages.Select(x => x.GetCompatibilityInfo()));
 	}
@@ -55,50 +55,19 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void LoadReport(IEnumerable<CompatibilityInfo> reports)
 	{
-		TLP_Reports.SuspendDrawing();
-		TLP_Reports.Controls.Clear(true);
-		TLP_Reports.RowStyles.Clear();
+		FLP_Reports.SuspendDrawing();
+		FLP_Reports.Controls.Clear(true);
+
+		reports = reports.ToList();
 
 		foreach (var report in reports.GroupBy(x => x.Notification).OrderByDescending(x => x.Key))
 		{
 			if (report.Key <= NotificationType.Info)
 				continue;
 
-			TLP_Reports.RowStyles.Add(new());
-
-			var tlp = new RoundedGroupTableLayoutPanel
-			{
-				Text = LocaleCR.Get(report.Key.ToString()),
-				Dock = DockStyle.Top,
-				AutoSize = true,
-				UseFirstRowForPadding = true,
-				AutoSizeMode = AutoSizeMode.GrowAndShrink,
-				AddOutline = true,
-				Margin = UI.Scale(new Padding(3, 10, 15, 0), UI.FontScale)
-			};
-
-			tlp.RowStyles.Add(new RowStyle(SizeType.Absolute));
-			tlp.RowStyles.Add(new RowStyle());
-			tlp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent));
-
-			var button = new SlickButton
-			{
-				Text = "Do_All",
-				Anchor = AnchorStyles.Top | AnchorStyles.Right
-			};
-
-			var list = new CompatibilityReportList();
-
-			list.SetItems(report);
-
-			tlp.Controls.Add(button, 0, 0);
-			tlp.Controls.Add(list, 0, 1);
-
-			TLP_Reports.Controls.Add(tlp, 0, TLP_Reports.RowStyles.Count - 1);
-
-			button.AutoSize=true;
+			FLP_Reports.Controls.Add(new CompatibilityGroupBubble(report.Key, report));
 		}
 
-		TLP_Reports.ResumeDrawing();
+		FLP_Reports.ResumeDrawing();
 	}
 }

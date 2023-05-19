@@ -82,6 +82,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
+    <Compile Update="UserInterface\Generic\ReviewRequestOptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
