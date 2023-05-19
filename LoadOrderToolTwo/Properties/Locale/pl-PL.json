@@ -47,9 +47,9 @@
   "NoMods": "Wyłącz wszystkie Modyfikacje",
   "AutoSave": "Automatyczne zapisywanie",
   "TotalSize": "całkowity rozmiar",
-  "ReportSeverity": "Dotkliwość zgłoszenia",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Dowolny status",
-  "AnyReportStatus": "Wszelkie dotkliwość raportu",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "Masz ten mod",
   "NoLocalPackagesFound": "Brak pakietów znalezionych na twoim komputerze.",
   "CheckFolderInOptions": "Sprawdź panel opcji na wypadek użycia niewłaściwych folderów.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Przeglądaj i subskrybuj brakujące zasoby",
   "SelectedFileInvalid": "Wybrany plik jest nieprawidłowy",
   "NoItemsToBeDisplayed": "Brak elementów do wyświetlenia",
-  "FirstSetupInfo": "Proszę włączyć modyfikację wewnątrz miast: Najpierw przed użyciem narzędzia Skylines",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "Konfiguracja niekompletna",
   "LsmImportUnusedInfo": "Wyświetl i usuń nieużywane zasoby",
   "SkipFileInfo": "Wybierz plik pominięcia, który ma być użyty do wczytywania modyfikacji ekranu",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Skopiuj identyfikator Steam autora",
   "CloseCitiesToSub": "Musisz zamknąć Miasta: Skylines aby subskrybować lub anulować subskrypcję pakietów",
   "ShowingFilteredItems": "Wyświetlono {0} z {1} przedmiotów",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Skala motywu i interfejsu użytkownika",
   "SearchProfiles": "Szukaj w swoich profilach.",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Gdy subskrybujesz lub dodasz aktywa, narzędzie automatycznie wykluczy lub uwzględni je na podstawie tego ustawienia po uruchomieniu narzędzia.",
   "FilterOutPackagesWithOneAsset_Tip": "Pakiety, które mają tylko jeden zasób w nich nie będą wyświetlane na stronie pakietów. Będą nadal wyświetlane na stronie Aktywów.",
   "FilterOutPackagesWithMods_Tip": "Pakiety, które zawierają modyfikacje nie będą wyświetlane na stronie pakietów. Będą one nadal wyświetlane na stronie Modów.",
-  "OverrideGameChanges_Tip": "Zmiany wprowadzone w grze do włączonego stanu modów będą automatycznie nadpisywane przez twoje ustawienia wewnątrz narzędzia do ładowania zamówienia, działa tylko wtedy, gdy narzędzie jest otwarte.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Motyw miesza, generuje plik modyfikacji, aby móc go udostępniać w warsztacie. Włączenie tej opcji ukryje te z listy modyfikacji i zawsze będą one uwzględniane.",
   "AdvancedIncludeEnable_Tip": "Włączenie tej opcji pozwoli na zmianę zarówno włączonych, jak i włączonych stanów modów, podobnych do Narzędzia Ładowania Zamówień 1.",
   "AdvancedLaunchOptions_Tip": "Wyświetla dodatkowe opcje uruchamiania używane przez deweloperów w ustawieniach profilu.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Pomóż przetłumaczyć to narzędzie na swój język na Crowdin.",
   "ThemeUIScale_Tip": "Zmień kolor i motyw aplikacji lub zwiększ skalę interfejsu użytkownika.",
   "JoinDiscord_Tip": "Poproś o pomoc i otrzymuj aktualizacje o narzędziu na serwerze Discord.",
-  "OpenGuide_Tip": "Zobacz przewodnik online, aby rozpocząć korzystanie z narzędzia do Ładowania zamówień.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Przywróć ustawienia domyślne. Nie ma to wpływu na ustawienia folderów.",
   "EnableDevUi": "Włącz interfejs dev",
   "RefreshWorkshop": "Odśwież zawartość Warsztatu",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Przeciągnij i upuść plik raportu LSM lub kliknij aby wybrać jeden do subskrybowania brakujących zasobów wymienionych w raporcie",
   "LsmUnusedTip": "Przeciągnij i upuść tutaj plik raportu LSM lub kliknij aby wybrać jeden, aby zarządzać zasobami, których nie użyłeś w grze save-gry, które są wymienione w raporcie",
   "FixAllTip": "Próba ponownego pobrania wszystkich pakietów, które mają problemy, otworzy się na krótki moment",
-  "MultipleLOM": "Masz wiele wersji Moda Ładowania Zamówień zainstalowanych lub subskrybowanych, co może powodować konflikty. Aby uniknąć problemów, usuń lub wypisz się ze wszystkich innych wersji z wyjątkiem tych, których używasz",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Filtruj według statusu tego raportu",
   "FilterByThisPackageStatus": "Filtruj według statusu pakietu",
   "FilterSinceThisDate": "Filtruj pozycje używając tej daty",
   "FilterByThisTag": "Dodaj '{0}' do filtrowanych tagów",
   "ItemsShouldNotBeSubscribedInfo": "Zamierzasz subskrybować pakiety, które mogą być uszkodzone lub mają inne poważne problemy.",
   "WouldYouLikeToSkipThose": "Czy chcesz pominąć te paczki?",
-  "LOTWillRestart": "Narzędzie Ładowania Zamówień zostanie tymczasowo zamknięte podczas procesu aktualizacji, ale zostanie automatycznie wznowione po zakończeniu aktualizacji.",
-  "UpdatingLot": "Ładowanie narzędzia zamówienia jest obecnie aktualizowane. Proszę czekać...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Subskrypcja lub rezygnacja z subskrypcji pakietów wymaga otwarcia gry na krótką chwilę. Kiedy zobaczysz launcher gry, kliknij na Play, aby kontynuować.",
   "HelpSupport": "Pomoc i wsparcie",
   "DisableFpsBoosterDebug": "Masz włączony Booster FPS podczas używania debugowania mono, czy chcesz go wyłączyć, aby uzyskać lepsze logi?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Błędy w dzienniku",
   "OpenLogFolder": "Otwórz folder dziennika gry",
   "CopyLogFile": "Skopiuj do schowka plik dziennika gry",
-  "OpenLOTLogFolder": "Otwórz folder dziennika LOT-u",
-  "CopyLOTLogFile": "Skopiuj plik dziennika LOTa do schowka",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Modyfikacje uwzględnione: {0}, Razem: {1}",
   "ModIncludedAndEnabledTotal": "Włączone i włączone: {0}, Razem: {1}",
   "ModIncludedEnabledTotal": "Modyfikacje uwzględnione: {0}, z czego są włączone: {1}, Razem: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "Zobacz i zarządzaj zapisanymi profilami",
   "AutoSave_Tip": "Automatycznie zapisuj zmiany w modach i zasobach do profilu",
   "LoadEnabled_Tip": "Ładowanie włączonych zasobów podczas ładowania gry. Powinno być włączone, chyba że wiesz co robisz",
-  "LoadUsed_Tip": "Załaduj aktywa, które są używane na mapie, nawet jeśli są wyłączone w grze. Nie jest to związane z ustawieniami zasobów wewnątrz narzędzia do ładowania zamówienia",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Użyj tego, aby wykluczyć zasoby wanilii z Twojej gry",
   "NewGame_Tip": "Rozpoczyna nową grę podczas uruchamiania miast: Skylines. Możesz określić mapę, którą chcesz rozpocząć w",
   "LoadSaveGame_Tip": "Załaduj grę oszczędzającą podczas uruchamiania miast: Skylines. Niewybranie pliku oszczędzania będzie kontynuowało Twój ostatni zapis",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Ulubione profile: {0}, Razem: {1}",
   "FavoriteTotal": "Całkowita liczba profili: {0}",
   "ProfileFilter": "Filtr profilu",
-  "CheckDocumentsFolder": "Upewnij się, że Narzędzie do Ładowania Zamówień ma dostęp do folderu dokumentów, używa go do przechowywania ustawień interfejsu użytkownika i języka.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Nie udało się zapisać wybranego języka",
   "FailedToOpenTC": "Nie udało się otworzyć zmiany motywu",
   "FailedToDeleteItem": "Nie udało się usunąć elementu",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }
