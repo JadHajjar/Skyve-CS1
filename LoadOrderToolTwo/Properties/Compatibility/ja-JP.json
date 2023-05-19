@@ -20,7 +20,7 @@
   "NotEnoughInformation": "情報が不足しています",
   "HasIssues": "問題あり",
   "Broken": "破損",
-  "Incompatible": "Incompatible",
+  "Incompatible": "非互換",
   "CityBuilding": "都市の建設",
   "AssetCreation": "アセットの作成",
   "MapCreation": "マップの作成",
@@ -56,7 +56,7 @@
   "AttentionRequired": "注意が必要",
   "Website": "ウェブサイト",
   "Donation": "寄付",
-  "ManageSinglePackage": "Manage specific packages",
+  "ManageSinglePackage": "特定のパッケージを管理",
   "ManageCompatibilityData": "互換性データの管理",
   "YourPackages": "パッケージの管理",
   "AddPackages": "パッケージの追加",
@@ -98,7 +98,7 @@
     "Plural": "「{0}」は以下のパッケージによって引き継がれています。"
   },
   "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
+  "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要で必要ありません。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
   "Status_Reupload": {
     "Zero": "「{0}」はオリジナルパッケージの再アップロードです。",
@@ -126,10 +126,10 @@
   "Stability_NotReviewed": "このパッケージは検証されていません。\n\n互換性の情報が不正確な可能性があります。",
   "Stability_Stable": "パッケージは安定しています。",
   "Stability_NotEnoughInformation": "パッケージを適切に評価・確認するには十分な情報がありません。",
-  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
-  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Stability_HasIssues": "このパッケージは問題を引き起こす可能性があります。\n使用時は注意して下さい。",
+  "Stability_Broken": "このパッケージは破損しています。\nゲームがプレイできない・既に動作しないことが判明しています。",
+  "Stability_Incompatible": "このパッケージはゲームと互換性が無くプレイ出来ません。\n\n直ちに削除する必要があります。",
+  "Stability_Local": "このパッケージは、オリジナルMOD 「{0}」のローカルバージョンです。\n\n一般的にローカルバージョンは、テスト目的やSteam以外のプラットホームで使用されます。\n\nMODのアップデートを調べる場合は、パッケージのリンクをチェックして下さい。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "以下のパッケージをサブスクする必要があります。",
@@ -196,7 +196,7 @@
   "RenderItPreset": "Render it!のプリセット",
   "POFont": "Procedural Objectのフォントやモジュール",
   "NameList": "名前のリストやゲームの翻訳",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
+  "ApplyChangedBeforeExit": "保存していない変更点があります。\n\n続行する前に、これらの変更を適用しますか？",
+  "AuthorRetired": "{0} / {1} の作者は引退している・長期間で活動していません。\n今後のアップデートやパッケージの安定性は保証されません。",
+  "AuthorMalicious": "{0} / {1} の作者は、マルウェアなどのウイルスのような有害コンテンツをパッケージに含めたことで知られています。"
 }
