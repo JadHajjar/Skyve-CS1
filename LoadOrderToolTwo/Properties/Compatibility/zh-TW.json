@@ -30,6 +30,7 @@
   "UnsubscribeThis": "取消訂閱此外掛程式",
   "UnsubscribeOther": "取消訂閱關聯的外掛程式",
   "Switch": "切換到連結的外掛程式",
+  "FlippedSwitch": "Switch to to this package",
   "Deprecated": "已廢棄",
   "Reupload": "重新上傳",
   "CausesIssues": "導致問題",
@@ -120,6 +121,7 @@
   "Status_MusicCanBeCopyrighted": "此模組所含音樂可能受到版權保護。最好不要在串流直播時使用此模組。",
   "Status_IncompleteDescription": "這個模組的創意工坊頁面描述非常短。除非你信任此模組的作者，否則不應使用此模組。",
   "OutputText": "預期輸出",
+  "Stability_AssetNotReviewed": "This asset has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate; though assets are generally stable",
   "Stability_NotReviewed": "此外掛程式尚未被檢查。相容性資訊可能不準確。",
   "Stability_Stable": "此外掛程式能穩定運行。",
   "Stability_NotEnoughInformation": "沒有足夠的資訊來正確地檢查此外掛程式的穩定性。",
@@ -164,6 +166,7 @@
   "CRT_Alternatives": "備選方案",
   "CRT_Status": "狀態",
   "CRT_Ambiguous": "不明確的",
+  "LastReviewDate": "It was last reviewed on {0}",
   "RequestReviewInfo": "使用此外掛程式時遇到問題？\n請在這裡申請新的審查：",
   "RequestReview": "申請審查",
   "MissingDependencyCount": {
@@ -181,5 +184,13 @@
   "SwitchCount": {
     "One": "{0} {1} 需要切換到另一個",
     "Plural": "{0} {1} 需要切換到另一個"
-  }
+  },
+  "PackageType": "Package Type",
+  "GenericPackage": "Generic Package",
+  "MusicPack": "Music Pack",
+  "ThemeMix": "Theme Mix",
+  "IMTMarkings": "IMT Markings",
+  "RenderItPreset": "Render it! Preset",
+  "POFont": "Procedural Object Font/Module",
+  "NameList": "Name-List/Game Translations"
 }

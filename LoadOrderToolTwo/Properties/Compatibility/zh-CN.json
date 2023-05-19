@@ -1,5 +1,5 @@
 {
-  "Usage": "用法",
+  "Usage": "用途",
   "Stability": "稳定性",
   "ApplyContinue": "应用并继续",
   "Previous": "返回",
@@ -15,7 +15,7 @@
   "InteractionCount": "交互方式 ({0})",
   "AddStatus": "添加状态",
   "AddInteraction": "添加交互方式",
-  "NotReviewed": "尚未检查",
+  "NotReviewed": "尚未被检查",
   "Stable": "稳定的",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
@@ -30,6 +30,7 @@
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
   "Switch": "切换到链接的插件",
+  "FlippedSwitch": "切换到此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
   "CausesIssues": "导致问题",
@@ -49,7 +50,7 @@
   "RequiredPackages": "需要 ...",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
-  "MissingDependency": "缺少前置模组",
+  "MissingDependency": "缺少必需物品",
   "Caution": "注意事项",
   "Warning": "警告",
   "AttentionRequired": "需要注意",
@@ -120,7 +121,8 @@
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期输出",
-  "Stability_NotReviewed": "此插件尚未被检查。兼容性信息可能不准确。",
+  "Stability_AssetNotReviewed": "此资产尚未被检查。\n\n兼容性信息可能不准确；尽管资产一般都是稳定的。\n",
+  "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
   "Stability_Stable": "此插件能稳定运行。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
   "Stability_HasIssues": "此插件可能引发问题。",
@@ -143,7 +145,7 @@
   "Action_ExcludeThis": "您应该卸下 '{0}'。",
   "Action_ExcludeOther": {
     "One": "您应该卸下 '{1}'。",
-    "Plural": "您应该卸下以下插件。"
+    "Plural": "您应该卸下以下插件："
   },
   "Action_Switch": {
     "One": "您应当改为使用 '{1}'。",
@@ -164,8 +166,9 @@
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
   "CRT_Ambiguous": "不明确的",
+  "LastReviewDate": "最近一次检查于 {0}",
   "RequestReviewInfo": "使用此插件时遇到问题？\n请在这里申请重新复查：",
-  "RequestReview": "申请审查",
+  "RequestReview": "申请复查",
   "MissingDependencyCount": {
     "One": "{0} {1} 缺少必需物品",
     "Plural": "{0} {1} 缺少必需物品"
@@ -181,5 +184,13 @@
   "SwitchCount": {
     "One": "{0} {1} 需要切换到另一个",
     "Plural": "{0} {1} 需要切换到另一个"
-  }
+  },
+  "PackageType": "插件类型",
+  "GenericPackage": "普通插件",
+  "MusicPack": "音乐插件",
+  "ThemeMix": "混合主题",
+  "IMTMarkings": "Intersection Marking Tool 标线",
+  "RenderItPreset": "Render it! 的预设",
+  "POFont": "Procedural Object 的字体/效果模块",
+  "NameList": "名称列表/游戏翻译"
 }

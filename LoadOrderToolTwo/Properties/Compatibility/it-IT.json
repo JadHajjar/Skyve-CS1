@@ -30,6 +30,7 @@
   "UnsubscribeThis": "Annulla l'iscrizione a questo pacchetto",
   "UnsubscribeOther": "Annulla l'iscrizione ai pacchetti collegati",
   "Switch": "Passa al pacchetto collegato",
+  "FlippedSwitch": "Switch to to this package",
   "Deprecated": "Superato",
   "Reupload": "Ri-carica",
   "CausesIssues": "Causa problemi",
@@ -120,6 +121,7 @@
   "Status_MusicCanBeCopyrighted": "La musica contenuta in questo pacchetto potrebbe essere coperta da copyright. È meglio non usarlo se stai trasmettendo.",
   "Status_IncompleteDescription": "La descrizione del workshop di questa mod è troppo breve. Non dovresti usarla, a meno che non ti fidi del suo autore.",
   "OutputText": "Output atteso",
+  "Stability_AssetNotReviewed": "This asset has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate; though assets are generally stable",
   "Stability_NotReviewed": "Questo pacchetto non è stato ancora recensito. Le informazioni di compatibilità potrebbero non essere accurate.",
   "Stability_Stable": "Questo pacchetto è stabile.",
   "Stability_NotEnoughInformation": "Non ci sono abbastanza informazioni per poter recensire adeguatamente questo pacchetto.",
@@ -164,6 +166,7 @@
   "CRT_Alternatives": "Alternatives",
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Ambiguity",
+  "LastReviewDate": "It was last reviewed on {0}",
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
@@ -181,5 +184,13 @@
   "SwitchCount": {
     "One": "{0} {1} that requires switching to another",
     "Plural": "{0} {1} that require switching to another"
-  }
+  },
+  "PackageType": "Package Type",
+  "GenericPackage": "Generic Package",
+  "MusicPack": "Music Pack",
+  "ThemeMix": "Theme Mix",
+  "IMTMarkings": "IMT Markings",
+  "RenderItPreset": "Render it! Preset",
+  "POFont": "Procedural Object Font/Module",
+  "NameList": "Name-List/Game Translations"
 }

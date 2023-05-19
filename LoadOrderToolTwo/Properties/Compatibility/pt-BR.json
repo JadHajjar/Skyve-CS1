@@ -30,6 +30,7 @@
   "UnsubscribeThis": "Cancelar a assinatura deste pacote",
   "UnsubscribeOther": "Cancelar assinatura de pacotes vinculados",
   "Switch": "Mudar para pacote vinculado",
+  "FlippedSwitch": "Alternar para este pacote",
   "Deprecated": "Descontinuado",
   "Reupload": "Re-enviar",
   "CausesIssues": "Causa problemas",
@@ -120,6 +121,7 @@
   "Status_MusicCanBeCopyrighted": "A música dentro deste pacote pode ter direitos autorais. É melhor não usá-la durante o streaming.",
   "Status_IncompleteDescription": "A descrição deste mod é muito pequena. Você não deve usá-lo a menos que confie em seu autor.",
   "OutputText": "Saída Esperada",
+  "Stability_AssetNotReviewed": "Este recurso ainda não foi analisado ainda.\n\nAs informações de compatibilidade podem não ser precisas; embora os recursos sejam geralmente estáveis",
   "Stability_NotReviewed": "Este pacote ainda não foi analisado.\nA informação de compatibilidade pode não ser precisa.",
   "Stability_Stable": "Este pacote é estável.",
   "Stability_NotEnoughInformation": "Não há informação suficiente para rever adequadamente este pacote.",
@@ -164,6 +166,7 @@
   "CRT_Alternatives": "Alternativas",
   "CRT_Status": "Situações",
   "CRT_Ambiguous": "Ambiguidade",
+  "LastReviewDate": "Foi analisado pela última vez em {0}",
   "RequestReviewInfo": "Está enfrentando problemas com este pacote?\nSolicite uma nova análise aqui:",
   "RequestReview": "Solicitar Análise",
   "MissingDependencyCount": {
@@ -181,5 +184,13 @@
   "SwitchCount": {
     "One": "{0} {1} que requer mudança para outro",
     "Plural": "{0} {1} que requerem mudança para outros"
-  }
+  },
+  "PackageType": "Tipos de Pacotes",
+  "GenericPackage": "Pacote Genérico",
+  "MusicPack": "Pacote de Música",
+  "ThemeMix": "Mistura de Tema",
+  "IMTMarkings": "Marcação IMT",
+  "RenderItPreset": "Predefinição Render it!",
+  "POFont": "Fonte/Módulo de Objeto Procedural",
+  "NameList": "Nome-Lista/Traduções do Jogo"
 }

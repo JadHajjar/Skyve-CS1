@@ -7,7 +7,7 @@
   "Note": "Note",
   "NoteInfo": "Texte d'information supplémentaire affiché pour le paquet",
   "BlackListName": "Liste noire par nom",
-  "BlackListId": "Liste noire par nom",
+  "BlackListId": "Liste noire par numéro d'identification Steam",
   "GlobalTags": "Tags globaux",
   "GlobalTagsInfo": "Tags que tous les joueurs verront dans l'appli",
   "Links": "Liens",
@@ -30,6 +30,7 @@
   "UnsubscribeThis": "Se désabonner de ce paquet",
   "UnsubscribeOther": "Se désabonner des paquets liés",
   "Switch": "Basculer vers le paquet lié",
+  "FlippedSwitch": "Passer à ce paquet",
   "Deprecated": "Déprécié",
   "Reupload": "Re-charger",
   "CausesIssues": "Provoque des problèmes",
@@ -39,11 +40,11 @@
   "SourceCodeNotAvailable": "Le code source n'est pas disponible",
   "MusicCanBeCopyrighted": "La musique incluse peut être protégée par copyright",
   "IncompleteDescription": "Description incomplète",
-  "Successor": "Successeur",
-  "Alternative": "Alternative",
-  "SameFunctionality": "Fonctionnalité identique",
+  "Successor": "Successeur de ..",
+  "Alternative": "Alternative à ..",
+  "SameFunctionality": "Même fonctionnalité que ..",
   "Incompatible": "Incompatible",
-  "RequirementAlternative": "Alternative d'exigence",
+  "RequirementAlternative": "Exigence alternative à ..",
   "IncompatibleWith": "Incompatible avec..",
   "CausesIssuesWith": "Provoque des problèmes avec..",
   "RequiredPackages": "Il faut pour cela..",
@@ -66,7 +67,7 @@
   "ReuseData_Tip": "Réutilise les données de compatibilité de votre dernier package enregistré pour celui-ci.\nMaintenez Shift enfoncé pour appliquer et continuer",
   "PleaseReviewTheStability": "Veuillez vérifier la stabilité de ce paquet avant de sauvegarder.",
   "PleaseReviewPackageStatuses": "Veuillez vérifier les statuts de ce paquet avant de sauvegarder.\nCertains ont un type de statut invalide.",
-  "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
+  "PleaseReviewPackageInteractions": "Veuillez vérifier les Interactions de ce paquet avant de sauvegarder.\nCertains ont un type d'interaction invalide ou n'ont pas de paquet lié.",
   "PleaseReviewPackageUsage": "Veuillez sélectionner un rôle valide pour ce paquet.",
   "Interaction_Alternative": {
     "One": "'{1}' peut être utilisé comme alternative à '{0}'.",
@@ -112,15 +113,16 @@
     "One": "Ceci est une version test de '{1}'. \nSachez que les mises à jour de celui-ci peuvent causes des problèmes inattendus."
   },
   "Status_MissingDlc": {
-    "One": "You're missing the '{0}' DLC to use this package.",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Il vous manque un DLC pour utiliser ce paquet.",
+    "Plural": "Il vous manque les DLC suivants pour utiliser ce paquet."
   },
   "Status_DependencyMod": "C'est un mod de dépendance, mais il ne semble pas que vous utilisiez un paquet qui le requiert.",
   "Status_SourceCodeNotAvailable": "Le code source de ce mod n'est pas disponible. Vous ne devriez pas l'utiliser à moins que vous ne fassiez confiance à son auteur.",
   "Status_MusicCanBeCopyrighted": "La musique de ce pack peut être protégée par copyright. Il est préférable de ne pas l'utiliser en streaming.",
   "Status_IncompleteDescription": "La description Workshop de ce mod est trop court. Vous ne devriez pas l'utiliser à moins que vous ne fassiez confiance à son auteur.",
   "OutputText": "Résultats attendus",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_AssetNotReviewed": "Cet asset n'a pas encore été révisé.\n\nLes informations relatives à la compatibilité peuvent ne pas être exactes, mais les actifs sont généralement stables",
+  "Stability_NotReviewed": "Ce paquet n'a pas encore été révisé.\n\nLes informations relatives à la compatibilité peuvent ne pas être exactes.",
   "Stability_Stable": "Ce paquet est stable.",
   "Stability_NotEnoughInformation": "Il n'y a pas assez d'informations pour bien examiner ce paquet.",
   "Stability_HasIssues": "Ce paquet peut causer des problèmes.",
@@ -132,8 +134,8 @@
   },
   "Action_RequiresConfiguration": "Vous devriez suivre les instructions suivantes.",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Entre '{0}' et '{1}', vous ne devriez en choisir qu'un seul.",
+    "Plural": "Entre '{0}' et les paquets suivants, vous ne devriez en choisir qu'un seul."
   },
   "Action_UnsubscribeThis": "Vous devriez vous désabonner de '{0}'.",
   "Action_UnsubscribeOther": {
@@ -143,43 +145,52 @@
   "Action_ExcludeThis": "Vous devriez exclure '{0}'.",
   "Action_ExcludeOther": {
     "One": "Vous devriez exclure '{1}'.",
-    "Plural": "You should exclude the following packages."
+    "Plural": "Vous devriez exlure les paquets suivants :"
   },
   "Action_Switch": {
-    "One": "You should switch to '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "One": "Vous devriez basculer vers '{1}'.",
+    "Plural": "Vous devriez basculer vers un des paquets suivants :"
   },
-  "NoRequiredDlcs": "No Required DLCs",
+  "NoRequiredDlcs": "Aucun DLC requis",
   "DlcsSelected": {
-    "One": "{0} DLC selected",
-    "Plural": "{0} DLCs selected"
+    "One": "{0} DLC sélectionné",
+    "Plural": "{0} DLCs sélectionnés"
   },
-  "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stability",
-  "CRT_Successors": "Successors",
-  "CRT_RequiredPackages": "Required Packages",
-  "CRT_OptionalPackages": "Optional Packages",
-  "CRT_DlcMissing": "Missing DLCs/CCPs",
-  "CRT_Compatibility": "Compatibility Issues",
+  "RequiredDLCs": "DLCs / CCPs requis",
+  "CRT_Stability": "Stabilité",
+  "CRT_Successors": "Successeurs",
+  "CRT_RequiredPackages": "Paquets requis",
+  "CRT_OptionalPackages": "Paquets optionnels",
+  "CRT_DlcMissing": "DLCs/CCPs manquants",
+  "CRT_Compatibility": "Problèmes de compatibilité",
   "CRT_Alternatives": "Alternatives",
-  "CRT_Status": "Statuses",
-  "CRT_Ambiguous": "Ambiguity",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
-  "RequestReview": "Request Review",
+  "CRT_Status": "Statuts",
+  "CRT_Ambiguous": "Ambiguité",
+  "LastReviewDate": "La dernière révision a eu lieu le {0}",
+  "RequestReviewInfo": "Vous rencontrez des problèmes avec ce paquet ?",
+  "RequestReview": "Demander une révision",
   "MissingDependencyCount": {
-    "One": "{0} {1} that is missing dependencies",
-    "Plural": "{0} {1} that are missing dependencies"
+    "One": "{0} {1} qui manque des dépendances",
+    "Plural": "{0} {1} qui ont des dépendances manquantes"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "{0} {1} où la prudence est conseillée",
+  "WarningCount": "{0} {1} avec un avertissement",
   "AttentionRequiredCount": {
-    "One": "{0} {1} that requires your attention",
-    "Plural": "{0} {1} that require your attention"
+    "One": "{0} {1} qui nécessite votre attention",
+    "Plural": "{0} {1} qui nécessitent votre attention"
   },
-  "ExcludeCount": "{0} {1} that should be excluded",
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "ExcludeCount": "{0} {1} qui devraient être exclus",
+  "UnsubscribeCount": "{0} {1} dont vous devriez vous désabonner",
   "SwitchCount": {
-    "One": "{0} {1} that requires switching to another",
-    "Plural": "{0} {1} that require switching to another"
-  }
+    "One": "{0} {1} qui nécessite de passer à un autre",
+    "Plural": "{0} {1} qui nécessitent de passer à un autre"
+  },
+  "PackageType": "Type de paquet",
+  "GenericPackage": "Paquet générique",
+  "MusicPack": "Pack de musique",
+  "ThemeMix": "Mélange de thème",
+  "IMTMarkings": "Marquages IMT",
+  "RenderItPreset": "Préréglage de Render It!",
+  "POFont": "Police / Module de Procedural Objects",
+  "NameList": "Liste de noms/traductions de jeux"
 }

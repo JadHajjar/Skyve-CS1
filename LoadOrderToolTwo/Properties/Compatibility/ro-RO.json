@@ -30,6 +30,7 @@
   "UnsubscribeThis": "Dezabonare de la acest pachet",
   "UnsubscribeOther": "Dezabonare de la pachetele asociate",
   "Switch": "Switch to linked package",
+  "FlippedSwitch": "Treceți la acest pachet",
   "Deprecated": "Deprecated",
   "Reupload": "Re-Upload",
   "CausesIssues": "Causes Issues",
@@ -118,17 +119,18 @@
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
   "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_IncompleteDescription": "Descrierea Atelierului acestui mod este prea scurtă. Nu ar trebui să îl folosești decât dacă ai încredere în autorul său.",
   "OutputText": "Expected Output",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_AssetNotReviewed": "Acest activ nu a fost încă revizuit.\n\nInformațiile de compatibilitate ar putea să nu fie exacte; deși activele sunt în general stabile",
+  "Stability_NotReviewed": "Acest pachet nu a fost revizuit încă.\n\nInformațiile de compatibilitate pot să nu fie exacte.",
   "Stability_Stable": "This package is stable.",
   "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
   "Stability_HasIssues": "This package can cause issues.",
   "Stability_Broken": "This package is broken.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
-    "Plural": "You should subscribe to these packages."
+    "One": "Trebuie să vă abonați la următorul pachet:",
+    "Plural": "Ar trebui să vă abonați la aceste pachete:"
   },
   "Action_RequiresConfiguration": "You should follow the following instructions.",
   "Action_SelectOne": {
@@ -138,16 +140,16 @@
   "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
   "Action_UnsubscribeOther": {
     "One": "You should unsubscribe from '{1}'.",
-    "Plural": "You should unsubscribe from the following packages."
+    "Plural": "Ar trebui să vă dezabonați de la următoarele pachete:"
   },
   "Action_ExcludeThis": "You should exclude '{0}'.",
   "Action_ExcludeOther": {
     "One": "You should exclude '{1}'.",
-    "Plural": "You should exclude the following packages."
+    "Plural": "Ar trebui să excludeți următoarele ambalaje:"
   },
   "Action_Switch": {
     "One": "You should switch to '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Ar trebui să treceți la unul dintre următoarele ambalaje:"
   },
   "NoRequiredDlcs": "No Required DLCs",
   "DlcsSelected": {
@@ -164,8 +166,9 @@
   "CRT_Alternatives": "Alternatives",
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Ambiguity",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
-  "RequestReview": "Request Review",
+  "LastReviewDate": "A fost revizuit ultima dată la {0}",
+  "RequestReviewInfo": "Aveți probleme cu acest pachet?",
+  "RequestReview": "Solicită o revizuire",
   "MissingDependencyCount": {
     "One": "{0} {1} that is missing dependencies",
     "Plural": "{0} {1} that are missing dependencies"
@@ -181,5 +184,13 @@
   "SwitchCount": {
     "One": "{0} {1} that requires switching to another",
     "Plural": "{0} {1} that require switching to another"
-  }
+  },
+  "PackageType": "Tip de pachet",
+  "GenericPackage": "Pachet generic",
+  "MusicPack": "Pachet de muzică",
+  "ThemeMix": "Mix temă",
+  "IMTMarkings": "Marcaje IMT",
+  "RenderItPreset": "Randează! Presetare",
+  "POFont": "Obiectul de Procedură Font/Modul",
+  "NameList": "Traduceri pentru Nume/Listă de jocuri"
 }
