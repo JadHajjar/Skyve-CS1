@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.Domain.Interfaces;
 using LoadOrderToolTwo.UserInterface.Content;
 using LoadOrderToolTwo.UserInterface.Dropdowns;
 using LoadOrderToolTwo.UserInterface.Panels;
@@ -12,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.CompatibilityReport;
@@ -19,10 +21,14 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 {
 	private readonly PackageStatusTypeDropDown<T> typeDropDown;
 
-	public IPackageStatusControl(TBase? item = default)
+	public event EventHandler? ValuesChanged;
+	public IPackage? CurrentPackage { get; }
+
+	public IPackageStatusControl(IPackage? currentPackage, TBase? item = default)
 	{
 		InitializeComponent();
 
+		CurrentPackage = currentPackage;
 		L_LinkedPackages.Text = LocaleCR.LinkedPackages;
 		L_OutputTitle.Text = LocaleCR.OutputText;
 
@@ -58,12 +64,24 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			}
 		}
 		else
-		{ TypeDropDown_SelectedItemChanged(this, EventArgs.Empty); }
+		{
+			if (typeDropDown.Items.Contains(typeDropDown.SelectedItem))
+				TypeDropDown_SelectedItemChanged(this, EventArgs.Empty);
+			else
+				typeDropDown.SelectedItem = typeDropDown.Items[0];
+		}
 
 		SlickTip.SetTo(I_Copy, "Copy");
 		SlickTip.SetTo(I_Paste, "Paste");
 		SlickTip.SetTo(I_AddPackage, "Add Package");
 		SlickTip.SetTo(I_Note, "Show/Hide Note");
+
+		typeDropDown.SelectedItemChanged += ValuesChanged;
+		DD_Action.SelectedItemChanged += ValuesChanged;
+		TB_Note.TextChanged += ValuesChanged;
+		TB_Note.TextChanged += ValuesChanged;
+		P_Packages.ControlAdded += (s, e) => ValuesChanged?.Invoke(s, e);
+		P_Packages.ControlRemoved += (s, e) => ValuesChanged?.Invoke(s, e);
 	}
 
 	private void TypeDropDown_SelectedItemChanged(object sender, EventArgs e)
@@ -157,11 +175,11 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 			return;
 		}
 
-		var text = Clipboard.GetText().Split(',');
+		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
 
-		for (var i = 0; i < text.Length; i++)
+		foreach (Match item in matches)
 		{
-			if (ulong.TryParse(text[i], out var id))
+			if (ulong.TryParse(item.Value, out var id))
 			{
 				if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == id))
 				{
@@ -191,14 +209,14 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		if (typeDropDown.SelectedItem is InteractionType.Successor)
 		{
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{InteractionType.SucceededBy}");
-			message = string.Format($"{translation.One}\r\n\r\n{action.Zero}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName(), (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName()).Trim();
+			message = string.Format($"{translation.One}\r\n\r\n{action.Zero}", (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName(), CurrentPackage?.CleanName()).Trim();
 		}
 		else
 		{
 			var actionText = P_Packages.Controls.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
 			var translation = LocaleCR.Get($"{typeof(T).Name.Remove("Type")}_{typeDropDown.SelectedItem}");
 			var text = P_Packages.Controls.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
-			message = string.Format($"{text}\r\n\r\n{actionText}", (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.CleanName(), (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName()).Trim();
+			message = string.Format($"{text}\r\n\r\n{actionText}", CurrentPackage?.CleanName(), (P_Packages.Controls.FirstOrDefault(x => true) as MiniPackageControl)?.Package?.CleanName()).Trim();
 		}
 
 		e.Graphics.DrawString(message, L_Output.Font, new SolidBrush(L_Output.ForeColor), L_Output.ClientRectangle);

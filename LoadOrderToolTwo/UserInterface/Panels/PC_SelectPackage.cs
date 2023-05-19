@@ -163,6 +163,12 @@ public partial class PC_SelectPackage : PanelContent
 		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
 		TB_Search.Loading = true;
 
+		if (Regex.IsMatch(TB_Search.Text, @"filedetails/\?id=(\d+)"))
+		{
+			TB_Search.Text = Regex.Match(TB_Search.Text, @"filedetails/\?id=(\d+)").Groups[1].Value;
+			return;
+		}
+
 		var searchText = TB_Search.Text.Trim();
 
 		searchTermsAnd.Clear();
@@ -234,7 +240,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)));
 
-		this.TryInvoke(() => L_Totals.Text = Locale.ShowingPackages.FormatPlural(LC_Items.ItemCount));
+		this.TryInvoke(() => L_Totals.Text = Locale.ShowingCount.FormatPlural(LC_Items.ItemCount, Locale.Package.FormatPlural(LC_Items.ItemCount)));
 
 		new BackgroundAction(() =>
 		{

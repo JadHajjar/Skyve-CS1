@@ -38,7 +38,7 @@ internal static class CentralManager
 
 			foreach (var package in currentPackages)
 			{
-				if (package.IsPseudoMod && SessionSettings.UserSettings.HidePseudoMods)
+				if (SessionSettings.UserSettings.HidePseudoMods && ModLogicManager.IsPseudoMod(package))
 				{
 					continue;
 				}
@@ -56,7 +56,7 @@ internal static class CentralManager
 
 			foreach (var package in currentPackages)
 			{
-				if (package.IsPseudoMod && SessionSettings.UserSettings.HidePseudoMods)
+				if (SessionSettings.UserSettings.HidePseudoMods && ModLogicManager.IsPseudoMod(package))
 				{
 					continue;
 				}
@@ -77,7 +77,7 @@ internal static class CentralManager
 
 			foreach (var package in currentPackages)
 			{
-				if (package.IsPseudoMod && SessionSettings.UserSettings.HidePseudoMods)
+				if (SessionSettings.UserSettings.HidePseudoMods && ModLogicManager.IsPseudoMod(package))
 				{
 					continue;
 				}
@@ -136,6 +136,15 @@ internal static class CentralManager
 		var content = ContentUtil.LoadContents();
 
 		Log.Info($"Loaded {content.Count} packages");
+
+		packages = content;
+
+		Log.Info($"Loading and applying CR Data..");
+
+		CompatibilityManager.LoadCachedData();
+
+		CompatibilityManager.CacheReport(packages);
+
 		Log.Info($"Analyzing packages..");
 
 		try
@@ -143,12 +152,6 @@ internal static class CentralManager
 		catch (Exception ex) { Log.Exception(ex, "Failed to analyze packages"); }
 
 		Log.Info($"Finished analyzing packages..");
-
-		packages = content;
-
-		CompatibilityManager.LoadCachedData();
-
-		CompatibilityManager.CacheReport(packages);
 
 		CompatibilityManager.FirstLoadComplete = true;
 

@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
+using LoadOrderToolTwo.UserInterface.Panels;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -8,6 +9,7 @@ using SlickControls;
 
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Lists;
@@ -28,6 +30,11 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		Font = UI.Font(7F, FontStyle.Bold);
 	}
 
+	protected override IEnumerable<DrawableItem<ulong>> OrderItems(IEnumerable<DrawableItem<ulong>> items)
+	{
+		return items.OrderByDescending(x => SteamUtil.GetItem(x.Item)?.ServerTime);
+	}
+
 	protected override bool IsItemActionHovered(DrawableItem<ulong> item, Point location)
 	{
 		return true;
@@ -41,6 +48,13 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		var imageRect = e.ClipRectangle.Pad(Padding);
 		imageRect.Width = imageRect.Height;
 		var image = Package?.IconImage;
+
+		if( (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.SteamId == e.Item)
+		{
+			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
+
+			imageRect.X += 3 * Padding.Left;
+		}
 
 		if (image is not null)
 		{

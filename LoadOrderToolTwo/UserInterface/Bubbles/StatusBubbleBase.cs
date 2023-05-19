@@ -21,7 +21,7 @@ internal abstract class StatusBubbleBase : SlickImageControl
 		Width = (int)(180 * UI.FontScale);
 	}
 
-	protected virtual Color? TintColor { get; }
+	public virtual Color? TintColor { get; set; }
 
 	protected override void OnMouseMove(MouseEventArgs e)
 	{ }

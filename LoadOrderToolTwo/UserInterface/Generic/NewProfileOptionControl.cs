@@ -30,9 +30,7 @@ internal class NewProfileOptionControl : SlickImageControl
 
     protected sealed override void OnPaint(PaintEventArgs e)
     {
-        e.Graphics.Clear(BackColor);
-        e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-        e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+        e.Graphics.SetUp(BackColor);
 
         SlickButton.GetColors(out var fore, out var back, HoverState, FromScratch ? ColorStyle.Green : ColorStyle.Active);
 

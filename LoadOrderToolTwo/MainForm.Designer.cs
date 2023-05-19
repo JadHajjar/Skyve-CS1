@@ -208,9 +208,9 @@
 			this.L_Text.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Text.Name = "L_Text";
 			this.L_Text.Padding = new System.Windows.Forms.Padding(2);
-			this.L_Text.Size = new System.Drawing.Size(96, 19);
+			this.L_Text.Size = new System.Drawing.Size(41, 19);
 			this.L_Text.TabIndex = 31;
-			this.L_Text.Text = "Load Order Tool";
+			this.L_Text.Text = "Skyve";
 			// 
 			// L_Version
 			// 
@@ -258,7 +258,7 @@
         this.PI_Compatibility,
         this.PI_Troubleshoot,
         this.PI_Options};
-			this.Text = "Load Order Tool";
+			this.Text = "Skyve";
 			this.base_P_SideControls.ResumeLayout(false);
 			this.base_P_SideControls.PerformLayout();
 			this.base_P_Container.ResumeLayout(false);

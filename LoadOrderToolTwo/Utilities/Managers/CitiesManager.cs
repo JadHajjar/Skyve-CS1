@@ -239,12 +239,15 @@ public static class CitiesManager
 		return true;
 	}
 
-	public static async Task<bool> Subscribe(IEnumerable<string> ids, bool unsub = false)
-	{
-		return await Subscribe(UGCListTransfer.ToNumber(ids), unsub);
-	}
+	//public static async Task<bool> Subscribe(IEnumerable<string> ids, bool unsub = false)
+	//{
+	//	return await Subscribe(UGCListTransfer.ToNumber(ids), unsub);
+	//}
 
-	public static async Task<bool> Subscribe(IEnumerable<ulong> ids, bool unsub = false)
+	public static async Task<bool> Subscribe(IEnumerable<ulong> ids) => await SubscribePrivate(ids, false);
+	public static async Task<bool> UnSubscribe(IEnumerable<ulong> ids) => await SubscribePrivate(ids, true);
+
+	private static async Task<bool> SubscribePrivate(IEnumerable<ulong> ids, bool unsub)
 	{
 		if (!ids.Any())
 		{

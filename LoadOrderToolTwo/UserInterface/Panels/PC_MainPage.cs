@@ -133,8 +133,8 @@ public partial class PC_MainPage : PanelContent
 			{
 				this.TryInvoke(() =>
 				{
+					B_StartStop.ImageName = "I_CS";
 					B_StartStop.Text = Locale.StartCities;
-					B_StartStop.Image = Properties.Resources.I_AppIcon_24;
 					buttonStateRunning = false;
 				});
 			}
@@ -146,8 +146,8 @@ public partial class PC_MainPage : PanelContent
 		{
 			this.TryInvoke(() =>
 			{
+				B_StartStop.ImageName = "I_Stop";
 				B_StartStop.Text = Locale.StopCities;
-				B_StartStop.Image = Properties.Resources.I_Stop_24;
 				buttonStateRunning = true;
 			});
 		}

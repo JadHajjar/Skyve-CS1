@@ -24,7 +24,13 @@ internal class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 		if (Live)
 		{
 			Items = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().ToArray();
+			SelectedItems = Items;
 		}
+	}
+
+	public override void ResetValue()
+	{
+		SelectedItems = Items;
 	}
 
 	protected override void UIChanged()

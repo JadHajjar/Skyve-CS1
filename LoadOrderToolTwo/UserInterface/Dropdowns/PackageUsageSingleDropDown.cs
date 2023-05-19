@@ -2,12 +2,10 @@
 
 using LoadOrderToolTwo.Domain.Compatibility;
 using LoadOrderToolTwo.Utilities;
-using LoadOrderToolTwo.Utilities.Managers;
 
 using SlickControls;
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,7 +13,7 @@ using System.Windows.Forms;
 
 namespace LoadOrderToolTwo.UserInterface.Dropdowns;
 
-internal class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
+internal class PackageUsageSingleDropDown : SlickSelectionDropDown<PackageUsage>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -23,13 +21,8 @@ internal class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(PackageType)).Cast<PackageType>().ToArray();
+			Items = new[] { (PackageUsage)(-1) }.Concat(Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>()).ToArray();
 		}
-	}
-
-	protected override IEnumerable<DrawableItem<PackageType>> OrderItems(IEnumerable<DrawableItem<PackageType>> items)
-	{
-		return items.OrderBy(x => LocaleCR.Get($"{x.Item}").One);
 	}
 
 	protected override void UIChanged()
@@ -39,18 +32,18 @@ internal class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 		Width = (int)(200 * UI.FontScale);
 	}
 
-	protected override bool SearchMatch(string searchText, PackageType item)
+	protected override bool SearchMatch(string searchText, PackageUsage item)
 	{
-		var text = LocaleCR.Get($"{item}");
+		var text = (int)item == -1 ? Locale.AnyUsage : LocaleCR.Get(item.ToString());
 
 		return searchText.SearchCheck(text);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageType item)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, PackageUsage item)
 	{
-		var text = LocaleCR.Get($"{item}");
+		var text = (int)item == -1 ? Locale.AnyUsage : LocaleCR.Get(item.ToString());
 
-		using var icon = IconManager.GetIcon("I_Cog", rectangle.Height - 2).Color(foreColor);
+		using var icon = IconManager.GetIcon("I_City", rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

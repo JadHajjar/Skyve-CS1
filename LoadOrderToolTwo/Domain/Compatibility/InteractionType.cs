@@ -26,7 +26,7 @@ public enum InteractionType
 	[CRN(NotificationType.MissingDependency, new[] { StatusAction.SubscribeToPackages, StatusAction.NoAction })]
 	RequiredPackages = 7,
 
-	[CRN(NotificationType.Info, new[] { StatusAction.SubscribeToPackages, StatusAction.NoAction })]
+	[CRN(NotificationType.None, new[] { StatusAction.SubscribeToPackages, StatusAction.NoAction })]
 	OptionalPackages = 8,
 
 	/***********************************/

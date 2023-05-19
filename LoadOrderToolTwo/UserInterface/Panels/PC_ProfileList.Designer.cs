@@ -34,7 +34,6 @@ partial class PC_ProfileList
 	{
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
-			this.T_ProfileUsage = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
@@ -45,6 +44,7 @@ partial class PC_ProfileList
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.FLP_Profiles = new System.Windows.Forms.FlowLayoutPanel();
+			this.DD_Usage = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -61,13 +61,13 @@ partial class PC_ProfileList
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Main.Controls.Add(this.T_ProfileUsage, 1, 0);
 			this.TLP_Main.Controls.Add(this.slickSpacer2, 0, 1);
 			this.TLP_Main.Controls.Add(this.slickSpacer1, 0, 3);
 			this.TLP_Main.Controls.Add(this.TB_Search, 0, 0);
 			this.TLP_Main.Controls.Add(this.DD_Sorting, 2, 0);
 			this.TLP_Main.Controls.Add(this.tableLayoutPanel3, 0, 2);
 			this.TLP_Main.Controls.Add(this.panel1, 0, 4);
+			this.TLP_Main.Controls.Add(this.DD_Usage, 1, 0);
 			this.TLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TLP_Main.Location = new System.Drawing.Point(0, 30);
 			this.TLP_Main.Name = "TLP_Main";
@@ -80,24 +80,6 @@ partial class PC_ProfileList
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.TLP_Main.Size = new System.Drawing.Size(895, 486);
 			this.TLP_Main.TabIndex = 0;
-			// 
-			// T_ProfileUsage
-			// 
-			this.T_ProfileUsage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.T_ProfileUsage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_ProfileUsage.Image1 = "I_City";
-			this.T_ProfileUsage.Image2 = "I_Tools";
-			this.T_ProfileUsage.Location = new System.Drawing.Point(284, 7);
-			this.T_ProfileUsage.Margin = new System.Windows.Forms.Padding(7);
-			this.T_ProfileUsage.Name = "T_ProfileUsage";
-			this.T_ProfileUsage.Option1 = "GamePlay";
-			this.T_ProfileUsage.Option2 = "EditorPlay";
-			this.T_ProfileUsage.OptionStyle1 = Extensions.ColorStyle.Active;
-			this.T_ProfileUsage.OptionStyle2 = Extensions.ColorStyle.Active;
-			this.T_ProfileUsage.Size = new System.Drawing.Size(306, 40);
-			this.T_ProfileUsage.TabIndex = 21;
-			this.T_ProfileUsage.SelectedValueChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// slickSpacer2
 			// 
@@ -132,6 +114,7 @@ partial class PC_ProfileList
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
+			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 9, 0, 9);
 			this.TB_Search.Placeholder = "SearchProfiles";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
@@ -227,6 +210,15 @@ partial class PC_ProfileList
 			this.FLP_Profiles.Size = new System.Drawing.Size(0, 0);
 			this.FLP_Profiles.TabIndex = 1;
 			// 
+			// DD_Usage
+			// 
+			this.DD_Usage.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Usage.Location = new System.Drawing.Point(219, 3);
+			this.DD_Usage.Name = "DD_Usage";
+			this.DD_Usage.Size = new System.Drawing.Size(375, 43);
+			this.DD_Usage.TabIndex = 15;
+			this.DD_Usage.Text = "Usage";
+			// 
 			// PC_ProfileList
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -262,6 +254,6 @@ partial class PC_ProfileList
 	private System.Windows.Forms.Panel panel1;
 	private System.Windows.Forms.FlowLayoutPanel FLP_Profiles;
 	private SlickControls.SlickScroll slickScroll1;
-	private ThreeOptionToggle T_ProfileUsage;
 	private System.Windows.Forms.Label L_FilterCount;
+	private PackageUsageDropDown DD_Usage;
 }

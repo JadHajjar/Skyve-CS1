@@ -14,7 +14,7 @@ internal class ProfileBubble : StatusBubbleBase
 	public ProfileBubble()
 	{ }
 
-	protected override Color? TintColor => CentralManager.CurrentProfile.Color;
+	public override Color? TintColor { get => CentralManager.CurrentProfile.Color; set { } }
 
 	protected override void OnHandleCreated(EventArgs e)
 	{

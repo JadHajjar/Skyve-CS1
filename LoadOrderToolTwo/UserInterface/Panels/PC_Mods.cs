@@ -1,4 +1,6 @@
-﻿using LoadOrderToolTwo.Domain;
+﻿using Extensions;
+
+using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;
 
@@ -44,9 +46,9 @@ internal class PC_Mods : PC_ContentList<Mod>
 		return string.Format(Locale.ModIncludedEnabledTotal, modsIncluded, modsEnabled, total);
 	}
 
-	protected override string GetFilteredCountText(int filteredCount)
+	protected override LocaleHelper.Translation GetItemText()
 	{
-		return Locale.ShowingMods.FormatPlural(filteredCount);
+		return Locale.Mod;
 	}
 
 	protected override void SetIncluded(IEnumerable<Mod> filteredItems, bool included)

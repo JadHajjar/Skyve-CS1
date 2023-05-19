@@ -39,9 +39,9 @@ internal class PC_Assets : PC_ContentList<Asset>
 		return string.Format(Locale.AssetIncludedTotal, assetsIncluded, total);
 	}
 
-	protected override string GetFilteredCountText(int filteredCount)
+	protected override Extensions.LocaleHelper.Translation GetItemText()
 	{
-		return Locale.ShowingAssets.FormatPlural(filteredCount);
+		return Locale.Asset;
 	}
 
 	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)

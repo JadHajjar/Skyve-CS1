@@ -19,7 +19,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		Profile = profile;
 	}
 
-	protected override Color? TintColor => Profile.Color;
+	public override Color? TintColor { get => Profile.Color; set { } }
 
 	protected override void OnHandleCreated(EventArgs e)
 	{

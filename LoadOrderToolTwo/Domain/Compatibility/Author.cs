@@ -15,4 +15,7 @@ public class Author : IDynamicSql
 	public bool Verified { get; set; }
 	[DynamicSqlProperty]
 	public bool Malicious { get; set; }
+#if !API
+	public bool Manager { get; set; }
+#endif
 }

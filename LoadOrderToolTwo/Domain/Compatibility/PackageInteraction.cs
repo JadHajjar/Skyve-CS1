@@ -38,4 +38,15 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 		}
 	}
 #endif
+
+	public PackageInteraction()
+	{
+
+	}
+
+	public PackageInteraction(InteractionType type, StatusAction action = StatusAction.NoAction)
+	{
+		Type = type;
+		Action = action;
+	}
 }

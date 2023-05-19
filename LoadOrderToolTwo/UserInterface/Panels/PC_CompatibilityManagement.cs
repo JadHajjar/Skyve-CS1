@@ -25,6 +25,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private int currentPage;
 	private PostPackage? postPackage;
 	private PostPackage? lastPackageData;
+	private bool valuesChanged;
 
 	internal IPackage? CurrentPackage { get; private set; }
 
@@ -59,8 +60,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			}
 		}
 
-		PackageList.AddRange(_packages.OrderByDescending(x => x.Value?.ServerTime).Select(x => x.Key));
-		packageCrList.SetItems(PackageList);
+		packageCrList.SetItems(_packages.Keys);
 		CB_BlackListId.Visible = CB_BlackListName.Visible = false;
 
 		SetPackage(0);
@@ -73,27 +73,17 @@ public partial class PC_CompatibilityManagement : PanelContent
 			_packages[package] = SteamUtil.GetItem(package);
 		}
 
-		packageCrList.SetItems(PackageList);
+		packageCrList.SetItems(_packages.Keys);
 
 		SetPackage(0);
+
+		if (_packages.Count == 1)
+		{
+			I_List.Visible = false;
+		}
 	}
 
-	private List<ulong> PackageList => _packages.Where(x =>
-	{
-		if (!CB_ShowUpToDate.Checked)
-		{
-			var package = SteamUtil.GetItem(x.Key);
-			var cr = package?.GetCompatibilityInfo();
-
-			if (cr?.Data is null || cr.Data.Package.ReviewDate > package?.ServerTime)
-			{
-				return false;
-			}
-		}
-
-		return true;
-
-	}).OrderByDescending(x => x.Value?.ServerTime).ToList(x => x.Key);
+	private List<ulong> PackageList => packageCrList.SafeGetItems().ToList(x => x.Item);
 
 	protected override void UIChanged()
 	{
@@ -149,12 +139,15 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		packageCrList.SetItems(_packages.Keys);
 
+
 		return true;
 	}
 
 	protected override void OnDataLoad()
 	{
 		CB_ShowUpToDate.Checked = false;
+		if (PackageList.Count == 0)
+			CB_ShowUpToDate.Checked = true;
 		SetPackage(0);
 		PB_Loading.Dispose();
 	}
@@ -167,17 +160,33 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private async void SetPackage(int page)
 	{
-		if (page < 0 || page >= _packages.Count)
+		if (valuesChanged)
 		{
-			PushBack();
-			return;
+			switch (ShowPrompt(LocaleCR.ApplyChangedBeforeExit, PromptButtons.YesNoCancel, PromptIcons.Hand))
+			{
+				case DialogResult.Yes:
+					if (!await Apply())
+					{
+						return;
+					}
+
+					break;
+				case DialogResult.Cancel:
+					return;
+			}
 		}
 
 		var packages = PackageList;
 
 		if (packages.Count == 0)
 		{
-			L_Page.Text = $"{page + 1} / {_packages.Count}";
+			L_Page.Text = $"0 / 0";
+			return;
+		}
+
+		if (page < 0 || page >= packages.Count)
+		{
+			PushBack();
 			return;
 		}
 
@@ -242,6 +251,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			PB_LoadingPackage.SendToBack();
 			PB_LoadingPackage.Loading = false;
+
+			packageCrList.Invalidate();
+			valuesChanged = false;
 		}
 		catch { OnLoadFail(); }
 	}
@@ -277,7 +289,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Statuses ?? new())
 		{
-			var control = new IPackageStatusControl<StatusType, PackageStatus>(item);
+			var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage, item);
+
+			control.ValuesChanged += ControlValueChanged;
 
 			FLP_Statuses.Controls.Add(control);
 			B_AddStatus.SendToBack();
@@ -285,7 +299,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Interactions ?? new())
 		{
-			var control = new IPackageStatusControl<InteractionType, PackageInteraction>(item);
+			var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage, item);
+
+			control.ValuesChanged += ControlValueChanged;
 
 			FLP_Interactions.Controls.Add(control);
 			B_AddInteraction.SendToBack();
@@ -320,11 +336,14 @@ public partial class PC_CompatibilityManagement : PanelContent
 		control.Click += TagControl_Click;
 		P_Tags.Controls.Add(control);
 		T_NewTag.SendToBack();
+		ControlValueChanged(sender, e);
 	}
 
 	private void TagControl_Click(object sender, EventArgs e)
 	{
 		(sender as Control)?.Dispose();
+
+		ControlValueChanged(sender, e);
 	}
 
 	private void T_NewLink_Click(object sender, EventArgs e)
@@ -348,33 +367,57 @@ public partial class PC_CompatibilityManagement : PanelContent
 		}
 
 		T_NewLink.SendToBack();
+
+		ControlValueChanged(this, EventArgs.Empty);
 	}
 
 	private void B_AddStatus_Click(object sender, EventArgs e)
 	{
-		var control = new IPackageStatusControl<StatusType, PackageStatus>();
+		var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage);
+		
+		control.ValuesChanged += ControlValueChanged;
 
 		FLP_Statuses.Controls.Add(control);
 		B_AddStatus.SendToBack();
+
+		ControlValueChanged(sender, e);
 	}
 
 	private void B_AddInteraction_Click(object sender, EventArgs e)
 	{
-		var control = new IPackageStatusControl<InteractionType, PackageInteraction>();
+		var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage);
+
+		control.ValuesChanged += ControlValueChanged;
 
 		FLP_Interactions.Controls.Add(control);
 		B_AddInteraction.SendToBack();
+
+		ControlValueChanged(sender, e);
 	}
 
 	private async void B_Apply_Click(object sender, EventArgs e)
 	{
+		if (await Apply())
+		{
+			SetPackage(currentPage + 1);
+		}
+	}
+
+	private async Task<bool> Apply()
+	{
 		if (B_Apply.Loading)
 		{
-			return;
+			return false;
+		}
+
+		if (DD_Usage.SelectedItems.Count() == 0)
+		{
+			ShowPrompt(LocaleCR.PleaseReviewPackageUsage, PromptButtons.OK, PromptIcons.Hand);
+			return false;
 		}
 
 		postPackage!.SteamId = CurrentPackage!.SteamId;
-		postPackage.FileName = Path.GetFileName(CurrentPackage.Package?.Mod?.FileName ?? string.Empty);
+		postPackage.FileName = Path.GetFileName(CurrentPackage.Package?.Mod?.FileName ?? string.Empty).IfEmpty(postPackage.FileName);
 		postPackage.Name = CurrentPackage.Name;
 		postPackage.ReviewDate = DateTime.UtcNow;
 		postPackage.AuthorId = CurrentPackage.Author?.SteamId ?? 0;
@@ -384,6 +427,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 			Name = CurrentPackage.Author?.Name,
 		};
 
+		postPackage.BlackListId = CB_BlackListId.Checked;
+		postPackage.BlackListName = CB_BlackListName.Checked;
 		postPackage.Stability = DD_Stability.SelectedItem;
 		postPackage.Type = DD_PackageType.SelectedItem;
 		postPackage.Usage = DD_Usage.SelectedItems.Aggregate((prev, next) => prev | next);
@@ -397,25 +442,19 @@ public partial class PC_CompatibilityManagement : PanelContent
 		if (postPackage.Stability == PackageStability.NotReviewed)
 		{
 			ShowPrompt(LocaleCR.PleaseReviewTheStability, PromptButtons.OK, PromptIcons.Hand);
-			return;
-		}
-
-		if (postPackage.Usage == 0)
-		{
-			ShowPrompt(LocaleCR.PleaseReviewPackageUsage, PromptButtons.OK, PromptIcons.Hand);
-			return;
+			return false;
 		}
 
 		if (postPackage.Statuses.Any(x => !CRNAttribute.GetAttribute(x.Type).Browsable))
 		{
 			ShowPrompt(LocaleCR.PleaseReviewPackageStatuses, PromptButtons.OK, PromptIcons.Hand);
-			return;
+			return false;
 		}
 
 		if (postPackage.Interactions.Any(x => !CRNAttribute.GetAttribute(x.Type).Browsable || !(x.Packages?.Any() ?? false)))
 		{
 			ShowPrompt(LocaleCR.PleaseReviewPackageInteractions, PromptButtons.OK, PromptIcons.Hand);
-			return;
+			return false;
 		}
 
 		B_Apply.Loading = true;
@@ -427,19 +466,21 @@ public partial class PC_CompatibilityManagement : PanelContent
 		if (!response.Success)
 		{
 			ShowPrompt(response.Message, PromptButtons.OK, PromptIcons.Error);
-			return;
+			return false;
 		}
 
 		lastPackageData = postPackage;
 		B_ReuseData.Visible = true;
-
-		SetPackage(currentPage + 1);
 
 		await Task.Run(() =>
 		{
 			CompatibilityManager.DownloadData();
 			CompatibilityManager.CacheReport();
 		});
+
+		valuesChanged = false;
+
+		return true;
 	}
 
 	private void FLP_Statuses_ControlAdded(object sender, ControlEventArgs e)
@@ -516,5 +557,10 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private void TB_Search_IconClicked(object sender, EventArgs e)
 	{
 		TB_Search.Text = string.Empty;
+	}
+
+	private void ControlValueChanged(object sender, EventArgs e)
+	{
+		valuesChanged = true;
 	}
 }

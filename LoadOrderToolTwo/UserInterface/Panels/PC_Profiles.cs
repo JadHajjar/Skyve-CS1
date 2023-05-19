@@ -85,7 +85,7 @@ public partial class PC_Profiles : PanelContent
 	{
 		Text = Locale.ProfileBubble;
 		L_TempProfile.Text = Locale.TemporaryProfileCanNotBeEdited;
-		L_ProfileUsage.Text = Locale.ProfileUsage;
+		DD_ProfileUsage.Text = Locale.ProfileUsage;
 		L_Info.Text = Locale.ProfileSaveInfo;
 	}
 
@@ -96,20 +96,17 @@ public partial class PC_Profiles : PanelContent
 		B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = I_Info.Size = I_TempProfile.Size = I_Favorite.Size = UI.Scale(new Size(24, 24), UI.FontScale) + new Size(8, 8);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
 		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
-		L_ProfileUsage.Font = UI.Font(7.5F, FontStyle.Bold);
 		P_Options.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_TempProfile.Font = UI.Font(10.5F);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
 		B_ViewProfiles.Font = B_NewProfile.Font = B_TempProfile.Font = B_Cancel.Font = UI.Font(9.75F);
 		TLP_AdvancedDev.Margin = TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile.Margin = UI.Scale(new Padding(10), UI.UIScale);
-		T_ProfileUsage.Width = (int)(300 * UI.FontScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
 
-		L_ProfileUsage.ForeColor = design.LabelColor;
 		TLP_LaunchSettings.BackColor = TLP_AdvancedDev.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
 		L_TempProfile.ForeColor = design.YellowColor;
 		P_Options.BackColor = design.AccentBackColor;
@@ -173,6 +170,7 @@ public partial class PC_Profiles : PanelContent
 		I_ProfileIcon.Loading = false;
 		L_CurrentProfile.Text = profile.Name;
 		CB_AutoSave.Checked = profile.AutoSave;
+		DD_ProfileUsage.SelectedItem = profile.Usage > 0 ? profile.Usage : (Domain.Compatibility.PackageUsage)(-1);
 
 		CB_NoWorkshop.Checked = profile.LaunchSettings.NoWorkshop;
 		CB_NoAssets.Checked = profile.LaunchSettings.NoAssets;
@@ -197,19 +195,6 @@ public partial class PC_Profiles : PanelContent
 		DD_SaveFile.Enabled = CB_LoadSave.Checked;
 		DD_SkipFile.Enabled = CB_SkipFile.Checked;
 		DD_NewMap.Enabled = CB_StartNewGame.Checked;
-
-		if (profile.ForAssetEditor)
-		{
-			T_ProfileUsage.SelectedValue = ThreeOptionToggle.Value.Option2;
-		}
-		else if (profile.ForGameplay)
-		{
-			T_ProfileUsage.SelectedValue = ThreeOptionToggle.Value.Option1;
-		}
-		else
-		{
-			T_ProfileUsage.SelectedValue = ThreeOptionToggle.Value.None;
-		}
 
 		loadingProfile = false;
 	}
@@ -237,8 +222,7 @@ public partial class PC_Profiles : PanelContent
 		}
 
 		CentralManager.CurrentProfile.AutoSave = CB_AutoSave.Checked;
-		CentralManager.CurrentProfile.ForGameplay = T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option1;
-		CentralManager.CurrentProfile.ForAssetEditor = T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option2;
+		CentralManager.CurrentProfile.Usage = DD_ProfileUsage.SelectedItem;
 
 		CentralManager.CurrentProfile.LaunchSettings.NoWorkshop = CB_NoWorkshop.Checked;
 		CentralManager.CurrentProfile.LaunchSettings.NoAssets = CB_NoAssets.Checked;
@@ -417,16 +401,18 @@ public partial class PC_Profiles : PanelContent
 			return;
 		}
 
-		var invalidPackages = ProfileManager.GetInvalidPackages(T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option1, T_ProfileUsage.SelectedValue == ThreeOptionToggle.Value.Option2);
+		var invalidPackages = ProfileManager.GetInvalidPackages(DD_ProfileUsage.SelectedItem);
 
 		if (invalidPackages.Any())
 		{
 			if (ShowPrompt($"{Locale.SomePackagesWillBeDisabled}\r\n{Locale.AffectedPackagesAre}\r\n• {invalidPackages.ListStrings("\r\n• ")}", PromptButtons.OKCancel, PromptIcons.Warning) == DialogResult.Cancel)
 			{
-				T_ProfileUsage.SelectedValue = ThreeOptionToggle.Value.None;
+				DD_ProfileUsage.SelectedItem = (Domain.Compatibility.PackageUsage)(-1);
 
 				return;
 			}
+
+			ContentUtil.SetBulkIncluded(invalidPackages, false);
 		}
 
 		ValueChanged(sender, e);

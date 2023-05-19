@@ -13,5 +13,7 @@ public enum PackageType
 	IMTMarkings = 3,
 	RenderItPreset = 4,
 	POFont = 5,
-	NameList = 6
+	NameList = 6,
+	CSM = 7,
+	ContentPackage = 8
 }

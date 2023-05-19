@@ -76,7 +76,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	public SteamWorkshopItem(SteamWorkshopItemEntry entry)
 	{
 		Timestamp = DateTime.UtcNow;
-		RemovedFromSteam = entry.result is not 1;
+		RemovedFromSteam = entry.result is not 1 and not 17;
 		Visibility = entry.visibility;
 		Title = entry.title;
 		PublishedFileID = entry.publishedfileid;

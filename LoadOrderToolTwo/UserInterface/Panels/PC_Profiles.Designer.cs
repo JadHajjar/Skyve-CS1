@@ -64,9 +64,8 @@ partial class PC_Profiles
 			this.slickScroll = new SlickControls.SlickScroll();
 			this.TLP_Options = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_GeneralSettings = new SlickControls.RoundedGroupTableLayoutPanel();
-			this.L_ProfileUsage = new System.Windows.Forms.Label();
-			this.T_ProfileUsage = new LoadOrderToolTwo.UserInterface.Generic.ThreeOptionToggle();
 			this.CB_AutoSave = new SlickControls.SlickCheckbox();
+			this.DD_ProfileUsage = new LoadOrderToolTwo.UserInterface.Dropdowns.PackageUsageSingleDropDown();
 			this.TLP_LaunchSettings = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.DD_NewMap = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.CB_LHT = new SlickControls.SlickCheckbox();
@@ -75,6 +74,8 @@ partial class PC_Profiles
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.CB_LoadSave = new SlickControls.SlickCheckbox();
 			this.CB_StartNewGame = new SlickControls.SlickCheckbox();
+			this.CB_NewAsset = new SlickControls.SlickCheckbox();
+			this.CB_LoadAsset = new SlickControls.SlickCheckbox();
 			this.TLP_LSM = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.CB_LoadEnabled = new SlickControls.SlickCheckbox();
 			this.CB_LoadUsed = new SlickControls.SlickCheckbox();
@@ -96,8 +97,6 @@ partial class PC_Profiles
 			this.newProfileOptionControl2 = new LoadOrderToolTwo.UserInterface.Generic.NewProfileOptionControl();
 			this.DAD_NewProfile = new LoadOrderToolTwo.UserInterface.Generic.DragAndDropControl();
 			this.B_Cancel = new SlickControls.SlickButton();
-			this.CB_NewAsset = new SlickControls.SlickCheckbox();
-			this.CB_LoadAsset = new SlickControls.SlickCheckbox();
 			this.TLP_ProfileName.SuspendLayout();
 			this.TLP_Main.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
@@ -424,9 +423,8 @@ partial class PC_Profiles
 			this.TLP_GeneralSettings.ColumnCount = 1;
 			this.TLP_GeneralSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_GeneralSettings.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_GeneralSettings.Controls.Add(this.L_ProfileUsage, 0, 0);
-			this.TLP_GeneralSettings.Controls.Add(this.T_ProfileUsage, 0, 1);
 			this.TLP_GeneralSettings.Controls.Add(this.CB_AutoSave, 0, 2);
+			this.TLP_GeneralSettings.Controls.Add(this.DD_ProfileUsage, 0, 0);
 			this.TLP_GeneralSettings.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon5.Name = "I_Cog";
 			this.TLP_GeneralSettings.ImageName = dynamicIcon5;
@@ -437,35 +435,9 @@ partial class PC_Profiles
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_GeneralSettings.Size = new System.Drawing.Size(582, 168);
+			this.TLP_GeneralSettings.Size = new System.Drawing.Size(582, 159);
 			this.TLP_GeneralSettings.TabIndex = 0;
 			this.TLP_GeneralSettings.Text = "Settings";
-			// 
-			// L_ProfileUsage
-			// 
-			this.L_ProfileUsage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-			this.L_ProfileUsage.AutoSize = true;
-			this.L_ProfileUsage.Location = new System.Drawing.Point(255, 54);
-			this.L_ProfileUsage.Name = "L_ProfileUsage";
-			this.L_ProfileUsage.Size = new System.Drawing.Size(71, 30);
-			this.L_ProfileUsage.TabIndex = 21;
-			this.L_ProfileUsage.Text = "label1";
-			// 
-			// T_ProfileUsage
-			// 
-			this.T_ProfileUsage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_ProfileUsage.Dock = System.Windows.Forms.DockStyle.Top;
-			this.T_ProfileUsage.Image1 = "I_City";
-			this.T_ProfileUsage.Image2 = "I_Tools";
-			this.T_ProfileUsage.Location = new System.Drawing.Point(12, 87);
-			this.T_ProfileUsage.Name = "T_ProfileUsage";
-			this.T_ProfileUsage.Option1 = "GamePlay";
-			this.T_ProfileUsage.Option2 = "EditorPlay";
-			this.T_ProfileUsage.OptionStyle1 = Extensions.ColorStyle.Active;
-			this.T_ProfileUsage.OptionStyle2 = Extensions.ColorStyle.Active;
-			this.T_ProfileUsage.Size = new System.Drawing.Size(558, 30);
-			this.T_ProfileUsage.TabIndex = 0;
-			this.T_ProfileUsage.SelectedValueChanged += new System.EventHandler(this.T_ProfileUsage_SelectedValueChanged);
 			// 
 			// CB_AutoSave
 			// 
@@ -476,7 +448,7 @@ partial class PC_Profiles
 			this.CB_AutoSave.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_AutoSave.DefaultValue = false;
 			this.CB_AutoSave.EnterTriggersClick = false;
-			this.CB_AutoSave.Location = new System.Drawing.Point(12, 123);
+			this.CB_AutoSave.Location = new System.Drawing.Point(12, 114);
 			this.CB_AutoSave.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
 			this.CB_AutoSave.Name = "CB_AutoSave";
 			this.CB_AutoSave.Size = new System.Drawing.Size(125, 33);
@@ -485,6 +457,16 @@ partial class PC_Profiles
 			this.CB_AutoSave.Text = "AutoSave";
 			this.CB_AutoSave.UncheckedText = null;
 			this.CB_AutoSave.CheckChanged += new System.EventHandler(this.ValueChanged);
+			// 
+			// DD_ProfileUsage
+			// 
+			this.DD_ProfileUsage.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_ProfileUsage.Location = new System.Drawing.Point(12, 57);
+			this.DD_ProfileUsage.Name = "DD_ProfileUsage";
+			this.DD_ProfileUsage.Size = new System.Drawing.Size(375, 51);
+			this.DD_ProfileUsage.TabIndex = 2;
+			this.DD_ProfileUsage.Text = "Usage";
+			this.DD_ProfileUsage.SelectedItemChanged += new System.EventHandler(this.T_ProfileUsage_SelectedValueChanged);
 			// 
 			// TLP_LaunchSettings
 			// 
@@ -636,6 +618,42 @@ partial class PC_Profiles
 			this.CB_StartNewGame.UncheckedText = null;
 			this.CB_StartNewGame.CheckChanged += new System.EventHandler(this.ValueChanged);
 			// 
+			// CB_NewAsset
+			// 
+			this.CB_NewAsset.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.CB_NewAsset.AutoSize = true;
+			this.CB_NewAsset.Checked = false;
+			this.CB_NewAsset.CheckedText = null;
+			this.CB_NewAsset.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.CB_NewAsset.DefaultValue = false;
+			this.CB_NewAsset.EnterTriggersClick = false;
+			this.CB_NewAsset.Location = new System.Drawing.Point(12, 348);
+			this.CB_NewAsset.Name = "CB_NewAsset";
+			this.CB_NewAsset.Size = new System.Drawing.Size(176, 33);
+			this.CB_NewAsset.SpaceTriggersClick = true;
+			this.CB_NewAsset.TabIndex = 6;
+			this.CB_NewAsset.Text = "LoadNewAsset";
+			this.CB_NewAsset.UncheckedText = null;
+			this.CB_NewAsset.CheckChanged += new System.EventHandler(this.ValueChanged);
+			// 
+			// CB_LoadAsset
+			// 
+			this.CB_LoadAsset.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.CB_LoadAsset.AutoSize = true;
+			this.CB_LoadAsset.Checked = false;
+			this.CB_LoadAsset.CheckedText = null;
+			this.CB_LoadAsset.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.CB_LoadAsset.DefaultValue = false;
+			this.CB_LoadAsset.EnterTriggersClick = false;
+			this.CB_LoadAsset.Location = new System.Drawing.Point(294, 348);
+			this.CB_LoadAsset.Name = "CB_LoadAsset";
+			this.CB_LoadAsset.Size = new System.Drawing.Size(179, 33);
+			this.CB_LoadAsset.SpaceTriggersClick = true;
+			this.CB_LoadAsset.TabIndex = 7;
+			this.CB_LoadAsset.Text = "LoadLoadAsset";
+			this.CB_LoadAsset.UncheckedText = null;
+			this.CB_LoadAsset.CheckChanged += new System.EventHandler(this.ValueChanged);
+			// 
 			// TLP_LSM
 			// 
 			this.TLP_LSM.AddOutline = true;
@@ -650,7 +668,7 @@ partial class PC_Profiles
 			this.TLP_LSM.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon7.Name = "I_LSM";
 			this.TLP_LSM.ImageName = dynamicIcon7;
-			this.TLP_LSM.Location = new System.Drawing.Point(3, 177);
+			this.TLP_LSM.Location = new System.Drawing.Point(3, 168);
 			this.TLP_LSM.Name = "TLP_LSM";
 			this.TLP_LSM.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
 			this.TLP_LSM.RowCount = 4;
@@ -1018,42 +1036,6 @@ partial class PC_Profiles
 			this.B_Cancel.Text = "Cancel";
 			this.B_Cancel.Click += new System.EventHandler(this.B_Cancel_Click);
 			// 
-			// CB_NewAsset
-			// 
-			this.CB_NewAsset.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.CB_NewAsset.AutoSize = true;
-			this.CB_NewAsset.Checked = false;
-			this.CB_NewAsset.CheckedText = null;
-			this.CB_NewAsset.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.CB_NewAsset.DefaultValue = false;
-			this.CB_NewAsset.EnterTriggersClick = false;
-			this.CB_NewAsset.Location = new System.Drawing.Point(12, 348);
-			this.CB_NewAsset.Name = "CB_NewAsset";
-			this.CB_NewAsset.Size = new System.Drawing.Size(176, 33);
-			this.CB_NewAsset.SpaceTriggersClick = true;
-			this.CB_NewAsset.TabIndex = 6;
-			this.CB_NewAsset.Text = "LoadNewAsset";
-			this.CB_NewAsset.UncheckedText = null;
-			this.CB_NewAsset.CheckChanged += new System.EventHandler(this.ValueChanged);
-			// 
-			// CB_LoadAsset
-			// 
-			this.CB_LoadAsset.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.CB_LoadAsset.AutoSize = true;
-			this.CB_LoadAsset.Checked = false;
-			this.CB_LoadAsset.CheckedText = null;
-			this.CB_LoadAsset.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.CB_LoadAsset.DefaultValue = false;
-			this.CB_LoadAsset.EnterTriggersClick = false;
-			this.CB_LoadAsset.Location = new System.Drawing.Point(294, 348);
-			this.CB_LoadAsset.Name = "CB_LoadAsset";
-			this.CB_LoadAsset.Size = new System.Drawing.Size(179, 33);
-			this.CB_LoadAsset.SpaceTriggersClick = true;
-			this.CB_LoadAsset.TabIndex = 7;
-			this.CB_LoadAsset.Text = "LoadLoadAsset";
-			this.CB_LoadAsset.UncheckedText = null;
-			this.CB_LoadAsset.CheckChanged += new System.EventHandler(this.ValueChanged);
-			// 
 			// PC_Profiles
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1117,8 +1099,6 @@ partial class PC_Profiles
 	private NewProfileOptionControl newProfileOptionControl1;
 	private NewProfileOptionControl newProfileOptionControl2;
 	private SlickControls.SlickButton B_Cancel;
-	private ThreeOptionToggle T_ProfileUsage;
-	private System.Windows.Forms.Label L_ProfileUsage;
 	private SlickControls.RoundedGroupTableLayoutPanel TLP_LSM;
 	private SlickControls.SlickCheckbox CB_LoadEnabled;
 	private SlickControls.SlickCheckbox CB_LoadUsed;
@@ -1147,4 +1127,5 @@ partial class PC_Profiles
 	private SlickControls.SlickTextBox TB_CustomArgs;
 	private SlickControls.SlickCheckbox CB_NewAsset;
 	private SlickControls.SlickCheckbox CB_LoadAsset;
+	private Dropdowns.PackageUsageSingleDropDown DD_ProfileUsage;
 }

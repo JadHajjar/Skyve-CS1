@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using LoadOrderToolTwo.Domain;
 using LoadOrderToolTwo.Domain.Interfaces;
 
 using SlickControls;
@@ -52,7 +51,15 @@ internal class PackageIcon : SlickImageControl
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			if (!(Package?.Workshop ?? true))
+			{
+				using var unsatImg = new Bitmap(Image, Size).Tint(Sat: 0);
+				e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			}
+			else
+			{
+				e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			}
 		}
 	}
 }

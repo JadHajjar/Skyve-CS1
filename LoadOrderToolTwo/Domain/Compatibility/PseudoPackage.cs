@@ -12,15 +12,6 @@ public class PseudoPackage
 
 	public PseudoPackage(ulong steamId)
 	{
-		if (CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package) && package.Interactions.ContainsKey(InteractionType.SucceededBy))
-		{
-			steamId = package.Interactions[InteractionType.SucceededBy]
-					.SelectMany(x => x.Packages.Values)
-					.OrderByDescending(x => x.Package.ReviewDate)
-					.FirstOrDefault()?
-					.Package.SteamId ?? steamId;
-		}
-
 		SteamId = steamId;
 	}
 
@@ -28,6 +19,7 @@ public class PseudoPackage
 
 	public PseudoPackage(IPackage iPackage)
 	{
+		SteamId = iPackage.SteamId;
 		IPackage = iPackage;
 	}
 

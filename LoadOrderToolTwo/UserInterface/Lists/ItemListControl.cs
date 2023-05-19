@@ -659,6 +659,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Vertical, 0, Padding.Vertical);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var labelRect = new Rectangle(rects.TextRect.X, rects.CenterRect.Bottom, 0, e.ClipRectangle.Bottom - rects.CenterRect.Bottom);
+		var report = e.Item.GetCompatibilityInfo();
 
 		if (isPressed && (PackagePage || (!rects.CenterRect.Contains(CursorLocation) && !rects.IconRect.Contains(CursorLocation))))
 		{
@@ -666,6 +667,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		base.OnPaintItem(e);
+
+		if (e.Item.Incompatible || report.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+		{
+			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, FormDesign.Design.RedColor)), e.ClipRectangle);
+		}
 
 		var partialIncluded = e.Item is Package p && p.IsPartiallyIncluded();
 		var isIncluded = partialIncluded || e.Item.IsIncluded;
@@ -675,7 +681,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large, package);
 		}
 
-		DrawThumbnailAndTitle(e, rects, large);
+		DrawThumbnailAndTitle(e, rects, report, large);
 
 		if (!large)
 		{
@@ -705,8 +711,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			labelRect = DrawStatusDescriptor(e, rects, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft);
 		}
 
-		var report = e.Item.GetCompatibilityInfo();
-		if (report is not null && (int)report.Notification % 0x10 != 0)
+		if (report is not null && report.Notification > NotificationType.Info)
 		{
 			var labelColor = report.Notification.GetColor();
 
@@ -929,7 +934,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomLeft, true);
 	}
 
-	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool large)
+	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Domain.Compatibility.CompatibilityInfo compatibility, bool large)
 	{
 		var iconRectangle = rects.IconRect;
 
@@ -944,7 +949,17 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		else
 		{
 			try
-			{ e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor); }
+			{
+				if (!e.Item.Workshop)
+				{
+					using var unsatImg = new Bitmap(iconImg, iconRectangle.Size).Tint(Sat: 0);
+					e.Graphics.DrawRoundedImage(unsatImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+				}
+				else
+				{
+					e.Graphics.DrawRoundedImage(iconImg, iconRectangle, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+				}
+			}
 			catch { }
 		}
 
@@ -958,23 +973,32 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		using var brush = new SolidBrush(PackagePage ? base.ForeColor : e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : base.ForeColor);
 		e.Graphics.DrawString(text, font, brush, rects.TextRect.Pad(0, 0, -9999, 0), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
+		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 0, (int)textSize.Height);
+
+		if (compatibility.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+		{
+			tagRect.X += Padding.Left + DrawLabel(e, LocaleCR.Broken.One.ToUpper(), null, Color.FromArgb(225, FormDesign.Design.RedColor), tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
+		}
+
+		if (e.Item.Incompatible)
+		{
+			tagRect.X += Padding.Left + DrawLabel(e, LocaleCR.Incompatible.One.ToUpper(), null, Color.FromArgb(225, FormDesign.Design.RedColor), tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
+		}
+
 		if (tags is null)
 		{
 			return;
 		}
 
-		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 0, (int)textSize.Height);
-
 		foreach (var item in tags)
 		{
-			if (item.ToLower() == "stable")
+			if (item.ToLower() is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken")
 			{ continue; }
 
 			var color = item.ToLower() switch
 			{
 				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
 				"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-				"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
 				_ => (Color?)null
 			};
 

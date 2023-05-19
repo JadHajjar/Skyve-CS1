@@ -5,16 +5,10 @@ namespace LoadOrderToolTwo.Domain.Compatibility;
 
 public class IndexedCompatibilityData
 {
-	private readonly List<Package> _packages;
-	private readonly List<Author> _authors;
-
 	public IndexedCompatibilityData(CompatibilityData? data)
 	{
-		_packages = data?.Packages ?? new();
-		_authors = data?.Authors ?? new();
-
-		Packages = _packages.ToDictionary(x => x.SteamId, x => new IndexedPackage(x));
-		Authors = _authors.ToDictionary(x => x.SteamId);
+		Packages = data?.Packages?.ToDictionary(x => x.SteamId, x => new IndexedPackage(x)) ?? new();
+		Authors = data?.Authors?.ToDictionary(x => x.SteamId) ?? new();
 		BlackListedIds = data?.BlackListedIds ?? new();
 		BlackListedNames = data?.BlackListedNames ?? new();
 
