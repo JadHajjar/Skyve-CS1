@@ -47,9 +47,9 @@
   "NoMods": "Desativar Todos os Mods",
   "AutoSave": "Salvamento Automático",
   "TotalSize": "tamanho total",
-  "ReportSeverity": "Relatar Gravidade",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Qualquer Status",
-  "AnyReportStatus": "Qualquer Gravidade de Relatório",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "Você tem este mod",
   "NoLocalPackagesFound": "Não há pacotes encontrados no seu computador.",
   "CheckFolderInOptions": "Verifique o painel de opções caso as pastas erradas estejam sendo usadas.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Ver e inscrever-se nos recursos que faltam",
   "SelectedFileInvalid": "O arquivo selecionado não é válido",
   "NoItemsToBeDisplayed": "Nenhum item será exibido",
-  "FirstSetupInfo": "Por favor, ative o mod dentro das Cidades: Antes de usar a ferramenta",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "Configuração incompleta",
   "LsmImportUnusedInfo": "Ver e remover recursos não usados",
   "SkipFileInfo": "Selecione um arquivo pulo para ser usado para o carregamento de tela Mod",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Copie o número de identificação Steam do Autor",
   "CloseCitiesToSub": "Você precisa fechar Cities: Skylines para assinar ou cancelar a assinatura de pacotes",
   "ShowingFilteredItems": "Mostrando {0} de {1} itens no total",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Arraste ou selecione um arquivo de perfil .json ou .xml aqui para importá-lo",
   "ThemeUIScale": "Escala do Tema e UI",
   "SearchProfiles": "Pesquise através do seu perfil..",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Quando você inscrever-se ou adicionar um recurso, esta ferramenta vai automaticamente excluir ou inclui-lo nas configurações, quando a ferramenta for aberta.",
   "FilterOutPackagesWithOneAsset_Tip": "Pacotes que tenham um único recurso não apareceram na página de Pacotes. Irá aparecer diretamente na página de Recursos.",
   "FilterOutPackagesWithMods_Tip": "Pacotes que incluem um mod não serão exibidos na página de pacotes. Eles ainda serão exibidos na página de Mods.",
-  "OverrideGameChanges_Tip": "Alterações feitas no jogo para o status habilitado de mods serão automaticamente substituídas pelas suas configurações dentro da Ferramenta de Ordem de Carregamento, Isso só funciona enquanto a ferramenta estiver aberta.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "O tema mistura gera um arquivo mod para poder compartilhá-lo no workshop. Ativando essa opção irá esconder aqueles da sua lista de mods e fazê-los sempre incluídos.",
   "AdvancedIncludeEnable_Tip": "Habilitar esta opção permitirá que você altere os estados de mods incluídos e habilitados, similar à Ferramenta de Ordem de Carga 1.",
   "AdvancedLaunchOptions_Tip": "Exibe opções extras de inicialização usadas pelos desenvolvedores nas configurações do perfil.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Ajude a traduzir esta ferramenta para o seu idioma nativo no Crowdin.",
   "ThemeUIScale_Tip": "Muda a cor e o tema do aplicativo ou aumente a escala da UI.",
   "JoinDiscord_Tip": "Peça ajuda e receba atualizações sobre a ferramenta no servidor do discord.",
-  "OpenGuide_Tip": "Veja o guia online para começar com a Ferramenta de Ordem de Carregamento.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Redefina suas configurações para as padrão. Isso não afeta as configurações da pasta.",
   "EnableDevUi": "Habilitar Desenvolvedor UI",
   "RefreshWorkshop": "Atualizar Conteúdo da Oficina",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Araste e Solte um arquivo de Relatório do LSM aqui, ou clique para selecionar um e se inscrever nos recursos que faltam listados no Relatório",
   "LsmUnusedTip": "Arraste e solte um arquivo de relatório do LSM aqui ou clique para selecionar em um para gerenciar recursos que não usou no jogo salvo que estão listados no relatório",
   "FixAllTip": "Tentar baixar novamente todos os pacotes que tenham problemas, isto abrirá a Steam por um breve instante",
-  "MultipleLOM": "Você tem várias versões de ordem de carregamento do Mod instaladas ou inscritas, o que pode causar conflitos. Para evitar problemas, remova ou cancele a inscrição de todas as outras versões exceto a que você está usando",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Filtrar por status do relatório",
   "FilterByThisPackageStatus": "Filtrar por status do pacote",
   "FilterSinceThisDate": "Filtrar itens usando esta data",
   "FilterByThisTag": "Adicionar '{0}' às tags filtradas",
   "ItemsShouldNotBeSubscribedInfo": "Você está prestes a assinar pacotes que podem estar danificados ou com outros problemas sérios.",
   "WouldYouLikeToSkipThose": "Você quer ignorar esses pacotes?",
-  "LOTWillRestart": "A Ferramenta de Ordem de Carga fechará temporariamente durante o processo de atualização, mas será retomada automaticamente assim que a atualização for concluída.",
-  "UpdatingLot": "A Ferramenta de Ordem de Carga está sendo atualizada. Por favor aguarde...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Inscrever-se ou cancelar a assinatura de pacotes requer abrir o jogo por um breve momento. Quando você ver o iniciador do jogo, clique em Jogar para continuar.",
   "HelpSupport": "Ajuda & Suporte",
   "DisableFpsBoosterDebug": "Você tem o FPS Booster ativado enquanto usa a correção de bug mono, gostaria de desativá-lo para obter melhores registros?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Erros no Log",
   "OpenLogFolder": "Abrir a pasta de log do jogo",
   "CopyLogFile": "Copiar o arquivo de log do jogo para área de transferência",
-  "OpenLOTLogFolder": "Abrir pasta de log do LOT",
-  "CopyLOTLogFile": "Copiar arquivo de log do LOT para área de transferência",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Modos incluídos: {0}, Total: {1}",
   "ModIncludedAndEnabledTotal": "Mods incluídos e habilitados: {0}, Total: {1}",
   "ModIncludedEnabledTotal": "Mods incluídos: {0}, dos quais estão habilitados: {1}, Total: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "Ver e gerenciar seus perfis salvos",
   "AutoSave_Tip": "Salvar mudanças para os mods e arquivos no seu perfil automaticamente",
   "LoadEnabled_Tip": "Carrega recursos ativados ao carregar um jogo. Deve ser deixado habilitado a menos que saiba o que está fazendo",
-  "LoadUsed_Tip": "Carregar os recursos usados no seu mapa, mesmo que estejam desabilitados no jogo. Isto não está relacionado a configurações de recurso na Ferramenta LSM",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Use isto para excluir recursos padrão do seu jogo",
   "NewGame_Tip": "Inicia um novo jogo ao iniciar Cidades: Skylines. Você pode especificar o mapa em que gostaria de começar",
   "LoadSaveGame_Tip": "Carregue um jogo de salvamento quando abrir Cities: Skylines. Não selecionar um arquivo salvado vai continuar sua última gravação",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Perfis favoritos: {0}, Total: {1}",
   "FavoriteTotal": "Perfis totais: {0}",
   "ProfileFilter": "Filtro de Perfil",
-  "CheckDocumentsFolder": "Certifique-se de que a Ferramenta de Ordem de Carga tem acesso à sua pasta de documentos, ela a usa para armazenar suas configurações de UI & Idioma.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Falha ao salvar o idioma selecionado",
   "FailedToOpenTC": "Falha ao abrir o Alterador de Tema",
   "FailedToDeleteItem": "Falha ao excluir item",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} carregado",
     "Plural": "{0} {1} carregados"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }
