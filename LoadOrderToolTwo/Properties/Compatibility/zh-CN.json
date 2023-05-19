@@ -1,5 +1,5 @@
 {
-  "Usage": "用法",
+  "Usage": "用途",
   "Stability": "稳定性",
   "ApplyContinue": "应用并继续",
   "Previous": "返回",
@@ -50,7 +50,7 @@
   "RequiredPackages": "需要 ...",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
-  "MissingDependency": "缺少前置模组",
+  "MissingDependency": "缺少必需物品",
   "Caution": "注意事项",
   "Warning": "警告",
   "AttentionRequired": "需要注意",
