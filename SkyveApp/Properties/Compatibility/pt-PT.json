@@ -110,8 +110,8 @@
     "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
   },
   "Status_TestVersion": {
-    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "Zero": "Esta é uma versão de Teste esteja ciente que versões de teste de mods podem causar problemas e que atualizações nele podem causar erros inesperados.",
+    "One": "Esta é uma versão teste de '{1}'.\n\nEsteja ciente que atualizações nele podem causar problemas inesperados."
   },
   "Status_MissingDlc": {
     "One": "Você não tem a DLC '{0} para usar este pacote.",
@@ -197,6 +197,6 @@
   "POFont": "Procedural Object Font/Module",
   "NameList": "Name-List/Game Translations",
   "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\n\nAs atualizações futuras e a estabilidade dos pacotes não são garantidas.",
   "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
 }
