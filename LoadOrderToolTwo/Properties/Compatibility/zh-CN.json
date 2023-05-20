@@ -30,7 +30,7 @@
   "SelectOne": "选择任意一个",
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
-  "Switch": "切换到链接的插件",
+  "Switch": "改为使用其它插件",
   "FlippedSwitch": "切换到此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
@@ -173,20 +173,20 @@
   "RequestReviewInfo": "使用此插件时遇到问题？\n请在这里申请重新复查：",
   "RequestReview": "申请复查",
   "MissingDependencyCount": {
-    "One": "{0} {1} 缺少必需物品",
-    "Plural": "{0} {1} 缺少必需物品"
+    "One": "{0} {1} 缺少前置模组",
+    "Plural": "{0} {1} 缺少前置模组"
   },
   "CautionCount": "建议谨慎处理 {0} {1}",
   "WarningCount": "{0} {1} 存在一个警告",
   "AttentionRequiredCount": {
-    "One": "您需要注意一下 {0} {1}",
-    "Plural": "您需要注意一下 {0} {1}"
+    "One": "{0} {1} 需要注意一下",
+    "Plural": "{0} {1} 需要注意一下"
   },
-  "ExcludeCount": "应该卸下 {0} {1} ",
-  "UnsubscribeCount": "您应该取消订阅 {0} {1}",
+  "ExcludeCount": "{0} {1} 应当被卸下",
+  "UnsubscribeCount": "{0} {1} 应该取消订阅",
   "SwitchCount": {
-    "One": "{0} {1} 需要切换到另一个",
-    "Plural": "{0} {1} 需要切换到另一个"
+    "One": "{0} {1} 需要改为使用另一个模组",
+    "Plural": "{0} {1} 需要改为使用其它模组"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
