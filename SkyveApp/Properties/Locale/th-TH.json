@@ -455,6 +455,7 @@
   "ExplainIssue": "อธิบายปัญหาของคุณที่นี่",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "ส่งคำร้องขอตรวจสอบ '{0}' ของคุณแล้ว!\n\nขอบคุณสำหรับคำติชมของคุณ",
+  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
   "SendReview": "ส่งคำร้องขอให้ทำการตรวจสอบ",
   "EditTags": "Edit Tags",
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
