@@ -85,7 +85,17 @@ public static class CompatibilityManager
 				CompatibilityData = new IndexedCompatibilityData(data);
 
 				CacheReport();
+#if DEBUG
+				if (System.Diagnostics.Debugger.IsAttached)
+				{
+					var dic = await CompatibilityApiUtil.Translations();
 
+					if (dic is not null)
+					{
+						File.WriteAllText("../../../Properties/CompatibilityNotes.json", Newtonsoft.Json.JsonConvert.SerializeObject(dic, Newtonsoft.Json.Formatting.Indented));
+					}
+				}
+#endif
 				return;
 			}
 		}
