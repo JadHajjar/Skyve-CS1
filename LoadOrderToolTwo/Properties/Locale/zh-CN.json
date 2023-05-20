@@ -198,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "当您订阅或添加资产时，Load Order Tool 2 将会根据此选项的设置，自动装载或卸下该资产。",
   "FilterOutPackagesWithOneAsset_Tip": "插件页面不显示只含一个资产的插件。在资产页面，这些资产仍然会显示。",
   "FilterOutPackagesWithMods_Tip": "插件页面不显示模组。在模组页面，这些模组仍然会显示。",
-  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
+  "OverrideGameChanges_Tip": "在 Skyve 程序运行时，在游戏中对模组的启用状态所作的任何改动，将自动被配置文件的设定覆盖",
   "HidePseudoMods_Tip": "Theme Mixer 模组会生成一个 DLL 文件，以便在创意工坊分享混合主题。启用此选项将会隐藏模组列表中的混合主题，并且始终保持这些混合主题为载入状态。",
   "AdvancedIncludeEnable_Tip": "启用此选项时，您将可以分别更改模组的装载和启用状态，类似于 Load Order Tool 1。",
   "AdvancedLaunchOptions_Tip": "在配置文件设置中，显示供开发者使用的高级启动选项。",
@@ -206,7 +206,7 @@
   "HelpTranslate_Tip": "在 Crowdin 上帮助 Load Order Tool 2 的本地化翻译。",
   "ThemeUIScale_Tip": "更改 LOT2 显示的字体、颜色和主题风格，或调整 UI 界面的显示比例",
   "JoinDiscord_Tip": "在 Discord 服务器上寻求帮助，并接收 Load Order Tool 2 相关的更新信息。",
-  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
+  "OpenGuide_Tip": "联机查阅指南并开始使用 Skyve。",
   "ResetButton_Tip": "将您的设置重置为默认值。此操作不影响文件夹设置。",
   "EnableDevUi": "启用开发界面",
   "RefreshWorkshop": "刷新创意工坊内容",
@@ -228,15 +228,15 @@
   "LsmMissingTip": "将 Loading Screen Mod Revisited 的资产报告文件拖到此处；或单击此处，选择一个 LSMR 资产报告，来查看和订阅报告中列出的丢失资产。",
   "LsmUnusedTip": "将 Loading Screen Mod Revisited 的资产报告文件拖到此处；或单击此处，选择一个 LSMR 资产报告，来管理您在存档中未使用过的资产。",
   "FixAllTip": "尝试重新下载所有存在问题的插件，在这期间 LOT2 会打开 Steam 片刻（请确保打开加速器 / VPN）。",
-  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
+  "MultipleLOM": "检测到您已安装或订阅了多个版本的 Skyve，可能会引发冲突。 为了避免出现问题，请删除或取消订阅未使用的其他版本。",
   "FilterByThisReportStatus": "按照该报告状态进行筛选",
   "FilterByThisPackageStatus": "按照该插件状态进行筛选",
   "FilterSinceThisDate": "按照此日期进行筛选",
   "FilterByThisTag": "将 '{0}' 添加到筛选标签",
   "ItemsShouldNotBeSubscribedInfo": "您即将订阅的插件可能已损坏，或存在其他严重问题。",
   "WouldYouLikeToSkipThose": "您确定要跳过这些插件吗？",
-  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
-  "UpdatingLot": "Skyve is currently being updated. Please wait...",
+  "LOTWillRestart": "Skyve 进行更新时，程序会暂时关闭，更新完成后将自动重启。",
+  "UpdatingLot": "Skyve 正在进行更新，请稍候...",
   "SubscribingRequiresGameToOpen": "订阅或取消订阅插件时， LOT2 会启动游戏并在片刻后关闭游戏（请确保已打开加速器 / VPN）。如果你看到 Steam 游戏启动界面，请点击“开始游戏”。",
   "HelpSupport": "帮助与支持",
   "DisableFpsBoosterDebug": "您正在使用 Debug Mono，是否要禁用 FPS Booster 模组以获取更好的日志？",
@@ -250,8 +250,8 @@
   "ErrorsInLog": "日志中的报错信息",
   "OpenLogFolder": "打开游戏的日志文件夹",
   "CopyLogFile": "将游戏日志文件复制到剪贴板",
-  "OpenLOTLogFolder": "Open Skyve's log folder",
-  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
+  "OpenLOTLogFolder": "打开 Skyve 的日志文件夹",
+  "CopyLOTLogFile": "将 Skyve 的日志文件复制到剪贴板",
   "ModIncludedTotal": "您总共有 {1} 个模组，已装载 {0} 个",
   "ModIncludedAndEnabledTotal": "您总共有 {1} 个模组，已装载且已启用 {0} 个",
   "ModIncludedEnabledTotal": "您总共有 {2} 个模组，已装载 {0} 个，其中启用了 {1} 个。",
@@ -264,7 +264,7 @@
   "ViewProfiles_Tip": "查看和管理您已保存的配置文件",
   "AutoSave_Tip": "启用此选项后，对模组和资产状态进行的改动，将自动保存到配置文件中。",
   "LoadEnabled_Tip": "在载入存档时加载已启用的资产。 请不要随意禁用该功能，除非您很清楚自己正在做什么以及可能造成的后果。",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
+  "LoadUsed_Tip": "无论是否在内容管理器中禁用，始终加载地图中已经使用的资产。该功能不会被 Skyve 中的资产设置影响。",
   "UseSkipFile_Tip": "您可以使用该功能，来卸下所有原版游戏自带的资产。",
   "NewGame_Tip": "启动 Cities: Skylines 并新建一个存档。您可以选择新建存档使用的地图。",
   "LoadSaveGame_Tip": "启动 Cities: Skylines 时，自动开始加载所选存档。 如果您没有选择存档文件，会自动加载最近一次保存的存档。",
@@ -286,7 +286,7 @@
   "FavoriteProfileTotal": "您总共有 {1} 个配置文件，已收藏 {0} 个",
   "FavoriteTotal": "共 {0} 个配置文件",
   "ProfileFilter": "筛选配置文件",
-  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "请检查 Skyve 是否可以访问您的“文档”文件夹，Skyve 的界面和语言设置信息存储在该文件夹内。",
   "FailedToSaveLanguage": "保存所选语言失败",
   "FailedToOpenTC": "打开主题编辑器失败",
   "FailedToDeleteItem": "删除项目失败",
@@ -406,20 +406,20 @@
   "Exclude": "卸下",
   "Snooze": "稍后提醒",
   "Mod": {
-    "One": "模组",
-    "Plural": "模组"
+    "One": "个模组",
+    "Plural": "个模组"
   },
   "Asset": {
-    "One": "资产",
-    "Plural": "资产"
+    "One": "个资产",
+    "Plural": "个资产"
   },
   "Package": {
-    "One": "插件",
-    "Plural": "插件"
+    "One": "个插件",
+    "Plural": "个插件"
   },
   "Profile": {
-    "One": "配置文件",
-    "Plural": "配置文件"
+    "One": "个配置文件",
+    "Plural": "个配置文件"
   },
   "IncludedCount": {
     "One": "已装载 {0} {1}",
@@ -438,22 +438,22 @@
     "Plural": "已加载 {0} {1} "
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "当前显示 {0} {1}",
+    "Plural": "当前显示 {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "当前显示 {0} {1}，{2}",
+    "Plural": "当前显示 {0} {1}，{2}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "{0} {1} 由于当前配置文件的用途已被隐藏",
+    "Plural": "{0} {1} 由于当前配置文件的用途已被隐藏"
   },
-  "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
-  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "SendReview": "Send the request for review"
+  "EditCompatibility": "编辑兼容性信息",
+  "AnyIssue": "任意问题",
+  "AnyUsage": "任意用途",
+  "ExplainIssue": "在此处描述您遇到的问题",
+  "ExplainIssueInfo": "您的描述应尽可能地详细，其中包含遇到了什么问题以及重现此问题的方法",
+  "ReviewRequestSent": "您对于 '{0}' 的复查申请已发送成功！\n\n谢谢您的反馈。",
+  "SendReview": "发送复查申请"
 }
