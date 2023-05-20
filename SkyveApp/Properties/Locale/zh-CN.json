@@ -455,6 +455,7 @@
   "ExplainIssue": "在此处描述您遇到的问题",
   "ExplainIssueInfo": "您的描述应尽可能地详细，其中包含遇到了什么问题以及重现此问题的方法",
   "ReviewRequestSent": "您对于 '{0}' 的复查申请已发送成功！\n\n谢谢您的反馈。",
+  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
   "SendReview": "发送复查申请",
   "EditTags": "Edit Tags",
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
