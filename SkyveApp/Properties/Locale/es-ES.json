@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "Informe de Compatibilidad",
   "ProfileBubble": "Perfil Actual",
   "StartCities": "Iniciar Cities: Skylines",
   "StopCities": "Detener Cities: Skylines",
@@ -47,9 +47,9 @@
   "NoMods": "Desactivar todos los mods",
   "AutoSave": "Guardar Automáticamente",
   "TotalSize": "tamaño total",
-  "CompatibilityStatus": "Compatibility Status",
+  "CompatibilityStatus": "Estado de dompatibilidad",
   "AnyStatus": "Cualquier estado",
-  "AnyCompatibilityStatus": "Any Status",
+  "AnyCompatibilityStatus": "Cualquier estado",
   "ModOwned": "Tienes este mod",
   "NoLocalPackagesFound": "No se encontraron paquetes en tu computadora.",
   "CheckFolderInOptions": "Verifica las opciones, para validar que las rutas a las carpetas son las correctas.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Ver y suscribirse a los assets faltantes",
   "SelectedFileInvalid": "El archivo seleccionado no es válido",
   "NoItemsToBeDisplayed": "No hay elementos para mostrar",
-  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
+  "FirstSetupInfo": "Por favor habilite el mod \"Skyve\" en Cities: Skylines antes de usar la herramienta",
   "SetupIncomplete": "Configuración incompleta",
   "LsmImportUnusedInfo": "Ver y eliminar assets no utilizados",
   "SkipFileInfo": "Selecciona un archivo \"skip\" para ser usado por el Loading Screen Mod",
@@ -455,5 +455,10 @@
   "ExplainIssue": "Describe your issue here",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "SendReview": "Send the request for review"
+  "SendReview": "Send the request for review",
+  "EditTags": "Edit Tags",
+  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
+  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
+  "TreatOptionalAsRequired": "Treat optional packages as required",
+  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
 }

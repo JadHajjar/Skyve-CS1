@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "Informazioni sulla compatibilità",
   "ProfileBubble": "Profilo attuale",
   "StartCities": "Avvia Cities: Skylines",
   "StopCities": "Ferma Cities: Skylines",
@@ -47,9 +47,9 @@
   "NoMods": "Disabilita tutte le Mod",
   "AutoSave": "Salvataggio automatico",
   "TotalSize": "dimensione totale",
-  "CompatibilityStatus": "Compatibility Status",
+  "CompatibilityStatus": "Stato di compatibilità",
   "AnyStatus": "Qualsiasi stato",
-  "AnyCompatibilityStatus": "Any Status",
+  "AnyCompatibilityStatus": "Qualsiasi Stato",
   "ModOwned": "Hai questa mod",
   "NoLocalPackagesFound": "Nessun pacchetto trovato sul tuo computer.",
   "CheckFolderInOptions": "Controlla il pannello delle opzioni nel caso in cui le cartelle sbagliate siano utilizzate.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Visualizza e sottoscrivi le risorse mancanti",
   "SelectedFileInvalid": "Il file selezionato non è valido",
   "NoItemsToBeDisplayed": "Nessun elemento viene mostrato",
-  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
+  "FirstSetupInfo": "Abilitare la Skyve Mod all'interno di Cities: Skylines prima di utilizzare l'app Skyve",
   "SetupIncomplete": "Installazione incompleta",
   "LsmImportUnusedInfo": "Visualizza e rimuovi le risorse inutilizzate",
   "SkipFileInfo": "Seleziona un file di esclusione da usare con Loading Screen Mod",
@@ -198,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Quando ti iscrivi o aggiungi una risorsa, LoadOrderTool la escluderà o includerà in modo automatico all'avvio, in base a questa impostazione.",
   "FilterOutPackagesWithOneAsset_Tip": "I pacchetti che contengono una sola risorsa non verranno mostrati nella pagina Pacchetti. Verranno comunque mostrati nella pagina Risorse.",
   "FilterOutPackagesWithMods_Tip": "I pacchetti che includono una mod non verranno mostrati nella pagina Pacchetti. Verranno comunque mostrati nella pagina Mod.",
-  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
+  "OverrideGameChanges_Tip": "Le modifiche apportate in gioco allo stato di abilitazione delle mod saranno automaticamente sovrascritte dalle impostazioni all'interno di Skyve; le modifiche saranno applicate al lancio successivo. Questo funziona solo quando lo strumento è aperto.",
   "HidePseudoMods_Tip": "Le miscele di temi generano un file di tipo mod che è possibile condividere nel workshop. Abilitare questa opzione nasconderà questi file dalla lista delle tue mod e li manterrà sempre inclusi.",
   "AdvancedIncludeEnable_Tip": "Abilitando questa opzione potrai modificare sia lo stato incluso che quello abilitato delle mod, in modo simile a Load Order Tool originale.",
   "AdvancedLaunchOptions_Tip": "Visualizza le opzioni di avvio aggiuntive utilizzate dagli sviluppatori nelle impostazioni del profilo.",
@@ -206,7 +206,7 @@
   "HelpTranslate_Tip": "Aiuta a tradurre questo strumento nella tua lingua madre su Crowdin.",
   "ThemeUIScale_Tip": "Cambia colori e tema dell'applicazione o aumenta la scala dell'interfaccia utente.",
   "JoinDiscord_Tip": "Chiedi aiuto e ricevi aggiornamenti sullo strumento sul server discord.",
-  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
+  "OpenGuide_Tip": "Consultate la guida online per iniziare a lavorare con Skyve.",
   "ResetButton_Tip": "Reimposta le impostazioni a quelle predefinite. Ciò non influisce sulle impostazioni delle cartelle.",
   "EnableDevUi": "Abilita UI Dev",
   "RefreshWorkshop": "Aggiorna il Contenuto del Workshop",
@@ -228,15 +228,15 @@
   "LsmMissingTip": "Trascina qui un file di report LSM o fai clic per selezionarne uno per iscriverti alle risorse mancanti elencate nel report",
   "LsmUnusedTip": "Trascina qui un file di report LSM o fai clic per selezionarne uno per gestire le risorse che non hai usato nel tuo salvataggio, elencate nel report",
   "FixAllTip": "Prova a ri-scaricare tutti i pacchetti problematici, questo aprirà steam per un breve momento",
-  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
+  "MultipleLOM": "Sono state installate o sottoscritte più versioni di Skyve, il che può causare conflitti. Per evitare problemi, si prega di rimuovere o annullare l'iscrizione a tutte le altre versioni tranne quella in uso",
   "FilterByThisReportStatus": "Filtra per stato nel report",
   "FilterByThisPackageStatus": "Filtra per stato di questo pacchetto",
   "FilterSinceThisDate": "Filtra gli elementi usando questa data",
   "FilterByThisTag": "Aggiungi '{0}' ai tag filtrati",
   "ItemsShouldNotBeSubscribedInfo": "Stai per iscriverti a pacchetti che potrebbero non funzionare o avere altri problemi gravi.",
   "WouldYouLikeToSkipThose": "Vuoi saltare quei pacchetti?",
-  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
-  "UpdatingLot": "Skyve is currently being updated. Please wait...",
+  "LOTWillRestart": "Skyve si chiuderà temporaneamente durante il processo di aggiornamento, ma riprenderà automaticamente al termine dell'aggiornamento.",
+  "UpdatingLot": "Skyve è in fase di aggiornamento. Si prega di attendere...",
   "SubscribingRequiresGameToOpen": "La sottoscrizione ai pacchetti o il suo l'annullamento richiedono l'apertura del gioco per un breve momento. Quando vedi il launcher del gioco, fai clic su Gioca per procedere.",
   "HelpSupport": "Aiuto e Supporto",
   "DisableFpsBoosterDebug": "Hai FPS Booster abilitato mentre stai usando mono in modalità debug, vorresti disabilitarlo per ottenere log migliori?",
@@ -250,8 +250,8 @@
   "ErrorsInLog": "Errori nel log",
   "OpenLogFolder": "Apri la cartella dei log del gioco",
   "CopyLogFile": "Copia il file di log del gioco negli appunti",
-  "OpenLOTLogFolder": "Open Skyve's log folder",
-  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
+  "OpenLOTLogFolder": "Apri la cartella dei log di Skyve",
+  "CopyLOTLogFile": "Copia il file di log di Skyve negli appunti",
   "ModIncludedTotal": "Mod incluse: {0}, Totale: {1}",
   "ModIncludedAndEnabledTotal": "Mod incluse & abilitate: {0}, Totale: {1}",
   "ModIncludedEnabledTotal": "Mod incluse: {0}, di cui abilitate: {1}, Totale: {2}",
@@ -264,7 +264,7 @@
   "ViewProfiles_Tip": "Visualizza e gestisci i tuoi profili salvati",
   "AutoSave_Tip": "Salva automaticamente le modifiche alle mod e alle risorse nel tuo profilo",
   "LoadEnabled_Tip": "Carica le risorse abilitate quando si carica un salvataggio. Questa opzione andrebbe lasciata attiva a meno che tu non sappia cosa stai facendo",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
+  "LoadUsed_Tip": "Carica le risorse utilizzate nella mappa, anche se sono disattivate nel gioco. Questo non è legato alle impostazioni delle risorse in Skyve",
   "UseSkipFile_Tip": "Usa questa opzione per escludere risorse vanilla dalla tua partita",
   "NewGame_Tip": "Inizia una nuova partita quando si avvia Cities: Skylines. Puoi specificare la mappa con cui vuoi iniziare",
   "LoadSaveGame_Tip": "Carica un salvataggio quando si avvia Cities: Skylines. Se non selezioni un file di salvataggio, verrà aperto il tuo ultimo salvataggio",
@@ -286,7 +286,7 @@
   "FavoriteProfileTotal": "Profili preferiti: {0}, Totale: {1}",
   "FavoriteTotal": "Profili totali: {0}",
   "ProfileFilter": "Filtro Profili",
-  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "Assicurarsi che Skyve abbia accesso alla cartella dei documenti, che utilizza per memorizzare le impostazioni della UI e della lingua.",
   "FailedToSaveLanguage": "Impossibile salvare la lingua selezionata",
   "FailedToOpenTC": "Impossibile aprire Modifica Temi",
   "FailedToDeleteItem": "Impossibile eliminare l'elemento",
@@ -401,59 +401,64 @@
   "AdvancedIncludeEnable": "Mostra sia lo stato incluso che quello abilitato per le mod",
   "PackageStatus": "Stato del pacchetto",
   "Author": "Autore",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Include": "Includi",
+  "Unsubscribe": "Annulla iscrizione",
+  "Exclude": "Escludi",
+  "Snooze": "Postcipa",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "Risorsa",
+    "Plural": "Risorse"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Pacchetto",
+    "Plural": "Pacchetti"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Profilo",
+    "Plural": "Profili"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} inclusi",
+    "Plural": "{0} {1} inclusi"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} abilitato",
+    "Plural": "{0} {1} abilitati"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} inclusi e abilitati",
+    "Plural": "{0} {1} inclusi e abilitati"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} caricati",
+    "Plural": "{0} {1} caricati"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "Mostrati {0} {1}",
+    "Plural": "Mostrati {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "Mostrati {0} {1}, {2}",
+    "Plural": "Mostrati {0} {1}, {2}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "{0} {1} è nascosto a causa dell'utilizzo del vostro profilo",
+    "Plural": "{0} {1} sono nascosti a causa dell'utilizzo del tuo profilo"
   },
-  "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
-  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "SendReview": "Send the request for review"
+  "EditCompatibility": "Modifica la compatibilità",
+  "AnyIssue": "Qualsiasi Problema",
+  "AnyUsage": "Qualsiasi Uso",
+  "ExplainIssue": "Descrivete qui il vostro problema",
+  "ExplainIssueInfo": "Includete qui il maggior numero di informazioni su ciò che sta accadendo e su come replicarlo",
+  "ReviewRequestSent": "La tua richiesta di recensione per '{0}' è stata inviata!\n\nGrazie per il tuo feedback.",
+  "SendReview": "Inviare la richiesta di revisione",
+  "EditTags": "Modifica dei tag",
+  "ShowAllReferencedPackages": "Mostra i pacchetti esclusi nella scheda 'Riferimenti'",
+  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
+  "TreatOptionalAsRequired": "Trattare i pacchetti opzionali come richiesto",
+  "TreatOptionalAsRequired_Tip": "In sostanza, visualizza la notifica di dipendenza mancante per i pacchetti opzionali."
 }

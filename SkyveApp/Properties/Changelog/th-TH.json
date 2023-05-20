@@ -5,7 +5,7 @@
         "Tagline": "Welcome to the change-log era",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "ใหม่",
                 "Changes": [
                     "Added an 'Unsubscribe All' button in content pages' actions.",
                     "Added a Utility section to subscribe to missing items in a BOB config.",

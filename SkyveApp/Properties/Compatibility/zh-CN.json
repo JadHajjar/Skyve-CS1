@@ -15,7 +15,7 @@
   "InteractionCount": "交互方式 ({0})",
   "AddStatus": "添加状态",
   "AddInteraction": "添加交互方式",
-  "NotReviewed": "尚未检查",
+  "NotReviewed": "尚未被检查",
   "Stable": "稳定的",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
@@ -122,7 +122,7 @@
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期输出",
-  "Stability_AssetNotReviewed": "此资产尚未被检查。\n\n兼容性信息可能不准确；尽管资产一般都是稳定的。\n",
+  "Stability_AssetNotReviewed": "此资产尚未被检查。\n\n兼容性信息可能不准确；尽管资产一般都是稳定的。",
   "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
   "Stability_Stable": "此插件能稳定运行。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
@@ -168,7 +168,7 @@
   "CRT_Compatibility": "兼容性问题",
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
-  "CRT_Ambiguous": "不明确的",
+  "CRT_Ambiguous": "不明确性",
   "LastReviewDate": "最近一次检查于 {0}",
   "RequestReviewInfo": "使用此插件时遇到问题？\n请在这里申请重新复查：",
   "RequestReview": "申请复查",
@@ -176,8 +176,8 @@
     "One": "{0} {1} 缺少前置模组",
     "Plural": "{0} {1} 缺少前置模组"
   },
-  "CautionCount": "建议谨慎处理 {0} {1}",
-  "WarningCount": "{0} {1} 存在一个警告",
+  "CautionCount": "{0} {1} 建议谨慎使用",
+  "WarningCount": "{0} {1} 带有警告",
   "AttentionRequiredCount": {
     "One": "{0} {1} 需要注意一下",
     "Plural": "{0} {1} 需要注意一下"

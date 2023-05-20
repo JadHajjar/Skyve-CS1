@@ -20,7 +20,7 @@
   "NotEnoughInformation": "Não há informação suficiente",
   "HasIssues": "Tem problemas",
   "Broken": "Quebrado",
-  "Incompatible": "Incompatible",
+  "Incompatible": "Incompatível",
   "CityBuilding": "Construção da Cidade",
   "AssetCreation": "Criação de Recurso",
   "MapCreation": "Criação de Mapa",
@@ -56,7 +56,7 @@
   "AttentionRequired": "Atenção Requerida",
   "Website": "Página Web",
   "Donation": "Doar",
-  "ManageSinglePackage": "Manage specific packages",
+  "ManageSinglePackage": "Gerencie pacotes específicos",
   "ManageCompatibilityData": "Gerenciar Dados de Compatibilidade",
   "YourPackages": "Gerencie seus pacotes",
   "AddPackages": "Adicionar Pacotes",
@@ -98,7 +98,7 @@
     "Plural": "Os seguintes pacotes são sucessores de '{0}'."
   },
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
+  "Status_Succeeded": "'{0}' foi sucedido por '{1}'.\n\nVocê já está usando '{1}' então não há mais necessidade de ter o '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto e não é mais suportado pelo seu autor.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
@@ -126,10 +126,10 @@
   "Stability_NotReviewed": "Este pacote ainda não foi analisado.\nA informação de compatibilidade pode não ser precisa.",
   "Stability_Stable": "Este pacote é estável.",
   "Stability_NotEnoughInformation": "Não há informação suficiente para rever adequadamente este pacote.",
-  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
-  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Stability_HasIssues": "Este pacote pode causar problemas.\nTenha cuidado ao usá-lo.",
+  "Stability_Broken": "Este pacote está quebrado.\nÉ conhecido por quebrar o jogo ou simplesmente não funcionar.",
+  "Stability_Incompatible": "Este pacote não é compatível com, ou quebra, o jogo.\n\nVocê deve removê-lo imediatamente.",
+  "Stability_Local": "Este pacote é uma versão local do mod original '{0}'.\n\nVersões locais são geralmente usadas para fins de teste ou no caso de você não ter o Steam.\n\nVerifique os links do pacote para procurar por atualizações no mod.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Você deve assinar o seguinte pacote.",
@@ -196,7 +196,7 @@
   "RenderItPreset": "Predefinição Render it!",
   "POFont": "Fonte/Módulo de Objeto Procedural",
   "NameList": "Nome-Lista/Traduções do Jogo",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "ApplyChangedBeforeExit": "Você tem alterações não salvas.\n\nGostaria de aplicar essas alterações antes de continuar?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
+  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes."
 }

@@ -455,5 +455,10 @@
   "ExplainIssue": "ここに問題を記述",
   "ExplainIssueInfo": "何が起こるのか・それらの再現方法について、できるだけ多くの情報を含めて下さい。",
   "ReviewRequestSent": "「{0}」 のレビューリクエストを送信しました！\n\nフィードバックして頂きありがとうございます。",
-  "SendReview": "検証のリクエストを送信"
+  "SendReview": "検証のリクエストを送信",
+  "EditTags": "Edit Tags",
+  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
+  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
+  "TreatOptionalAsRequired": "Treat optional packages as required",
+  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
 }

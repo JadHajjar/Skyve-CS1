@@ -264,7 +264,7 @@
   "ViewProfiles_Tip": "Ver e gerenciar seus perfis salvos",
   "AutoSave_Tip": "Salvar mudanças para os mods e arquivos no seu perfil automaticamente",
   "LoadEnabled_Tip": "Carrega recursos ativados ao carregar um jogo. Deve ser deixado habilitado a menos que saiba o que está fazendo",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
+  "LoadUsed_Tip": "Carregar os recursos usados no seu mapa, mesmo que eles estejam desabilitados no jogo. Isto não está relacionado às configurações de recursos no Skyve",
   "UseSkipFile_Tip": "Use isto para excluir recursos padrão do seu jogo",
   "NewGame_Tip": "Inicia um novo jogo ao iniciar Cidades: Skylines. Você pode especificar o mapa em que gostaria de começar",
   "LoadSaveGame_Tip": "Carregue um jogo de salvamento quando abrir Cities: Skylines. Não selecionar um arquivo salvado vai continuar sua última gravação",
@@ -286,7 +286,7 @@
   "FavoriteProfileTotal": "Perfis favoritos: {0}, Total: {1}",
   "FavoriteTotal": "Perfis totais: {0}",
   "ProfileFilter": "Filtro de Perfil",
-  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "Certifique-se de que o Skyve tem acesso à sua pasta de documentos, é usado para armazenar suas configurações de interface e Idioma.",
   "FailedToSaveLanguage": "Falha ao salvar o idioma selecionado",
   "FailedToOpenTC": "Falha ao abrir o Alterador de Tema",
   "FailedToDeleteItem": "Falha ao excluir item",
@@ -438,22 +438,27 @@
     "Plural": "{0} {1} carregados"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "Exibindo {0} {1}",
+    "Plural": "Exibindo {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "Exibindo {0} {1}, {2}",
+    "Plural": "Exibindo {0} {1}, {2}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "{0} {1} Está oculto devido à configuração do seu perfil",
+    "Plural": "{0} {1} Está oculto devido à configuração do seu perfil"
   },
-  "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
+  "EditCompatibility": "Editar Compatibilidade",
+  "AnyIssue": "Algum Problema",
+  "AnyUsage": "Algum Uso",
+  "ExplainIssue": "Descreva seus problemas aqui",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "SendReview": "Send the request for review"
+  "ReviewRequestSent": "Sua solicitação de análise para '{0}' foi enviada!\n\nObrigado pelo seu comentário.",
+  "SendReview": "Enviar o pedido de análise",
+  "EditTags": "Edit Tags",
+  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
+  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
+  "TreatOptionalAsRequired": "Treat optional packages as required",
+  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
 }

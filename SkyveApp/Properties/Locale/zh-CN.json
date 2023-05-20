@@ -365,7 +365,7 @@
   "SearchGenericPackages": "搜索这些插件…",
   "Sorting_Subscribers": "总订阅量",
   "Sorting_Votes": "评分",
-  "RatingCount": "{0} 评分 {1}",
+  "RatingCount": "评分：{0} {1}",
   "SubscribersCount": "订阅量：{0}",
   "SearchWorkshop": "搜索创意工坊…",
   "SearchWorkshopBrowser": "在浏览器中搜索创意工坊…",
@@ -455,5 +455,10 @@
   "ExplainIssue": "在此处描述您遇到的问题",
   "ExplainIssueInfo": "您的描述应尽可能地详细，其中包含遇到了什么问题以及重现此问题的方法",
   "ReviewRequestSent": "您对于 '{0}' 的复查申请已发送成功！\n\n谢谢您的反馈。",
-  "SendReview": "发送复查申请"
+  "SendReview": "发送复查申请",
+  "EditTags": "Edit Tags",
+  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
+  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
+  "TreatOptionalAsRequired": "Treat optional packages as required",
+  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
 }
