@@ -185,18 +185,18 @@
   "ExcludeCount": "{0} {1} che dovrebbe essere escluso",
   "UnsubscribeCount": "{0} {1} da cui dovreste annullare la sottoscrizione",
   "SwitchCount": {
-    "One": "{0} {1} that requires switching to another",
-    "Plural": "{0} {1} that require switching to another"
+    "One": "{0} {1} che richiede il passaggio a un altro",
+    "Plural": "{0} {1} che richiedono il passaggio ad un altro"
   },
-  "PackageType": "Package Type",
-  "GenericPackage": "Generic Package",
-  "MusicPack": "Music Pack",
-  "ThemeMix": "Theme Mix",
-  "IMTMarkings": "IMT Markings",
-  "RenderItPreset": "Render it! Preset",
-  "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "PackageType": "Tipo Pacchetto",
+  "GenericPackage": "Pacchetto Generico",
+  "MusicPack": "Pacchetto Musica",
+  "ThemeMix": "Tema Mix",
+  "IMTMarkings": "Marcature IMT",
+  "RenderItPreset": "Renderizza! Preimpostazione",
+  "POFont": "Oggetto Procedurale Font/Modulo",
+  "NameList": "Elenco dei nomi/traduzioni dei giochi",
+  "ApplyChangedBeforeExit": "Le modifiche non sono state salvate.\n\nVolete applicare queste modifiche prima di continuare?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
+  "AuthorMalicious": "L'autore di {0}, {1}, è noto per essere malintenzionato e/o per includere contenuti dannosi come i virus nei suoi pacchetti."
 }
