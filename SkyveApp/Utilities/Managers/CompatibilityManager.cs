@@ -232,7 +232,7 @@ public static class CompatibilityManager
 
 		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable) && !package.Incompatible && !author.Malicious)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, packageData.Package.Note, false), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, null, false), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
 		}
 
 		foreach (var status in packageData.Statuses)
@@ -316,6 +316,9 @@ public static class CompatibilityManager
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), LocaleCR.Get($"AuthorRetired").Format(package.CleanName(), (package.Author?.Name).IfEmpty(author.Name)), new PseudoPackage[0]);
 		}
+
+		if (!string.IsNullOrEmpty(packageData.Package.Note))
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.NotReviewed, packageData.Package.Note, false), string.Empty, new ulong[0]);
 
 		if (!package.Workshop)
 		{

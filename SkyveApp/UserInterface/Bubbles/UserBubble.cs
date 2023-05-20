@@ -20,13 +20,13 @@ internal class UserBubble : StatusBubbleBase
 		Visible = false;
 		Enabled = false;
 
-		new BackgroundAction(() =>
+		new BackgroundAction(async () =>
 		{
 			var steamId = SteamUtil.GetLoggedInSteamId();
 
 			if (steamId != 0)
 			{
-				User = SteamUtil.GetUser(steamId);
+				User = await SteamUtil.GetUserAsync(steamId);
 
 				if (User is not null)
 				{
