@@ -47,9 +47,9 @@
   "NoMods": "Alle mods uitschakelen",
   "AutoSave": "Automatisch opslaan",
   "TotalSize": "totale grootte",
-  "ReportSeverity": "Meld de ernst",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Elke status",
-  "AnyReportStatus": "Elk rapport ernst",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "Je hebt deze mod",
   "NoLocalPackagesFound": "Geen pakketten op uw computer.",
   "CheckFolderInOptions": "Controleer het optiepaneel voor het geval dat de verkeerde mappen worden gebruikt.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Bekijk en abonneer op ontbrekende assets",
   "SelectedFileInvalid": "Het bestand dat je selecteerde is niet geldig",
   "NoItemsToBeDisplayed": "Er zullen geen items worden weergegeven",
-  "FirstSetupInfo": "Activeer de mod in de burgers: Skylines eerst voor het gebruik van de tool",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "Instellen onvolledig",
   "LsmImportUnusedInfo": "Ongebruikte assets bekijken en verwijderen",
   "SkipFileInfo": "Selecteer een overslagbestand om te gebruiken voor het laden van schermmod",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Kopieer Steam ID van de auteur",
   "CloseCitiesToSub": "Je moet burgers sluiten: Skylines om je te abonneren of af te melden van pakketten",
   "ShowingFilteredItems": "Toont {0} van de {1} totale items",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Thema & UI Schaal",
   "SearchProfiles": "Zoek door je profielen..",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Wanneer u abonneert of een asset toevoegt, zal de tool automatisch uitsluiten of toevoegen op basis van deze instelling wanneer de tool is gelanceerd.",
   "FilterOutPackagesWithOneAsset_Tip": "Pakketten die slechts één kenmerk erin hebben, worden niet weergegeven op de pagina Pakketten. Ze worden nog steeds getoond op de pagina Activa.",
   "FilterOutPackagesWithMods_Tip": "Pakketten die een mod bevatten worden niet weergegeven op de pagina Pakketten. Ze worden nog steeds getoond op de pagina Mods.",
-  "OverrideGameChanges_Tip": "Wijzigingen in het spel in de ingeschakelde status van mods worden automatisch overschreven door je instellingen in de Load Order Tool, Dit werkt alleen als het gereedschap open is.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Thema mixen genereert een mod bestand om het te kunnen delen in de workshop. Door deze optie in te schakelen, worden die van je mods lijst verborgen en worden ze altijd meegenomen.",
   "AdvancedIncludeEnable_Tip": "Door deze optie in te schakelen, kunt u beide opgenomen & ingeschakelde staten van mods, vergelijkbaar met het laden van ordertool 1.",
   "AdvancedLaunchOptions_Tip": "Geeft extra opstart opties weer die worden gebruikt door ontwikkelaars in de profielinstellingen.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Help dit hulpmiddel te vertalen in je moedertaal op Crowdin.",
   "ThemeUIScale_Tip": "Wijzig de kleur en thema van de app of verhoog de schaal van de gebruikersinterface.",
   "JoinDiscord_Tip": "Vraag om hulp en ontvang updates over de tool op de discord server.",
-  "OpenGuide_Tip": "Bekijk de online handleiding om aan de slag te gaan met Load Order Tool.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Reset uw instellingen naar de standaarden. Dit heeft geen invloed op de instellingen van de mappen.",
   "EnableDevUi": "Dev UI inschakelen",
   "RefreshWorkshop": "Vernieuw Werkplaats Inhoud",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Slepen en neerzetten van een LSM rapport bestand hier of klik om er een te selecteren om u te abonneren op ontbrekende assets die in het rapport staan",
   "LsmUnusedTip": "Sleep en zet een LSM rapport bestand hierheen of klik om er een te selecteren om assets te beheren die je niet hebt gebruikt in je save game die in het rapport staan",
   "FixAllTip": "Poging om alle pakketten die problemen hebben opnieuw te downloaden, dit zal stoom voor een kort moment openen",
-  "MultipleLOM": "U heeft meerdere versies van de Laad Order Mod geïnstalleerd of geabonneerd op welke conflicten kunnen veroorzaken. Om problemen te voorkomen, verwijder of meld je af van alle andere versies, behalve degene die je gebruikt",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Filteren op status van dit rapport",
   "FilterByThisPackageStatus": "Filter op deze pakketstatus",
   "FilterSinceThisDate": "Items filteren op deze datum",
   "FilterByThisTag": "Voeg '{0}' toe aan de gefilterde tags",
   "ItemsShouldNotBeSubscribedInfo": "U staat op het punt om u te abonneren op pakketten die mogelijk kapot zijn of andere ernstige problemen hebben.",
   "WouldYouLikeToSkipThose": "Wil je deze pakketten overslaan?",
-  "LOTWillRestart": "Het Laad Order Tool zal tijdelijk sluiten tijdens het updateproces, maar het zal automatisch hervatten zodra de update is voltooid.",
-  "UpdatingLot": "Het laden van de ordertool wordt momenteel bijgewerkt. Een ogenblik geduld...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Abonneren of uitschrijven van pakketten vereist kort voor het openen van het spel. Wanneer je de lancering van het spel ziet, klik op Speel om verder te gaan.",
   "HelpSupport": "Hulp & ondersteuning",
   "DisableFpsBoosterDebug": "Je hebt FPS Booster ingeschakeld tijdens het gebruik van debug mono, wil je het uitschakelen om betere logs te krijgen?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Fouten in het logboek",
   "OpenLogFolder": "Open de logmap van het spel",
   "CopyLogFile": "Kopieer het logbestand van het spel naar het klembord",
-  "OpenLOTLogFolder": "LOT's logmap openen",
-  "CopyLOTLogFile": "Logboekbestand van LOT's kopiëren naar klembord",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Inclusief modi: {0}, Totaal: {1}",
   "ModIncludedAndEnabledTotal": "De mods zijn inbegrepen & ingeschakeld: {0}, Totaal: {1}",
   "ModIncludedEnabledTotal": "Inclusief mods: {0}, waarvan ingeschakeld zijn: {1}, Totaal: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "Bekijk en beheer uw opgeslagen profielen",
   "AutoSave_Tip": "Wijzigingen in mods & assets automatisch opslaan in je profiel",
   "LoadEnabled_Tip": "Laad ingeschakelde assets tijdens het laden van een spel. Dit moet ingeschakeld blijven tenzij je weet wat je doet",
-  "LoadUsed_Tip": "Laad assets die worden gebruikt in je kaart, zelfs als ze in-game zijn uitgeschakeld. Dit is niet gerelateerd aan de asset instellingen in de Load Order Tool",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Gebruik dit om vanilla assets uit te sluiten van je spel",
   "NewGame_Tip": "Start een nieuw spel wanneer je de burgers opent: Skylines opent. Je kunt aangeven in welke map je wilt starten",
   "LoadSaveGame_Tip": "Laad een opgeslagen spel wanneer u Cities: Skylines opstart. Het selecteren van een opgeslagen bestand zal uw laatste save voortzetten",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Favoriete profielen: {0}, Totaal: {1}",
   "FavoriteTotal": "Totaal profielen: {0}",
   "ProfileFilter": "Profiel filter",
-  "CheckDocumentsFolder": "Zorg ervoor dat Laad Order Tool toegang heeft tot uw documentenmap, deze gebruikt om uw UI & Taal instellingen op te slaan.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Fout bij het opslaan van de geselecteerde taal",
   "FailedToOpenTC": "Kon Thema Wijziger niet openen",
   "FailedToDeleteItem": "Kan item niet verwijderen",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }

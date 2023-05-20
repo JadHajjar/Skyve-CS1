@@ -47,9 +47,9 @@
   "NoMods": "Deaktivere alle modifikasjoner",
   "AutoSave": "Automatisk lagring",
   "TotalSize": "Total størrelse",
-  "ReportSeverity": "Rapporter alvorlighetsgrad",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Noen status",
-  "AnyReportStatus": "Enhver rapport alvorlighetsgrad",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "Du har denne moden",
   "NoLocalPackagesFound": "Ingen pakker som finnes på datamaskinen din.",
   "CheckFolderInOptions": "Kontroller alternativpanelet i tilfelle feil mapper blir brukt.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Vis og abonnér på manglende ressurser",
   "SelectedFileInvalid": "Filen du valgte er ikke gyldig",
   "NoItemsToBeDisplayed": "Ingen elementer skal vises",
-  "FirstSetupInfo": "Vennligst aktiver moden inne i byer: Skyliner først før du bruker verktøyet",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "Oppsett ufullstendig",
   "LsmImportUnusedInfo": "Vis og fjern ubrukte midler",
   "SkipFileInfo": "Velg en Hopp-fil som skal brukes for lasting av skjermmod",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Kopier forfatterens Steam-Id",
   "CloseCitiesToSub": "Du må lukke byer: Skyliner for å abonnere eller stoppe abonnementet på pakker",
   "ShowingFilteredItems": "Viser {0} av {1} produkter totalt",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Tema & UI skala",
   "SearchProfiles": "Søk gjennom profilene dine..",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Når du abonnerer eller legger til en eiendel, vil verktøyet automatisk utelukke eller inkludere den basert på denne innstillingen når verktøyet lanseres.",
   "FilterOutPackagesWithOneAsset_Tip": "Pakkene som bare har en enkelt ressurs i dem vil ikke vises på pakkesiden. De vil fortsatt vises på eiendelssiden.",
   "FilterOutPackagesWithMods_Tip": "Pakkene som inkluderer en mod vil ikke vises på pakkesiden. De vil fortsatt vises på Mods-siden.",
-  "OverrideGameChanges_Tip": "Endringer gjort i spillet for aktivert status for mods vil automatisk overstyres av innstillingene inne i lastingsverktøyet, dette fungerer bare mens verktøyet er åpen.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Tema blandinger genererer en modifikasjonsfil for å kunne dele den på verkstedet. Aktivering av dette alternativet vil skjule de fra mods-listen din og alltid inkludere dem.",
   "AdvancedIncludeEnable_Tip": "Aktivering av denne innstillingen vil la deg endre både inkludert & aktivert status for modifikasjoner, som ligner på Last Ordreverktøy 1.",
   "AdvancedLaunchOptions_Tip": "Viser ekstra start-alternativer som brukes av utviklere i innstillingene til profilen.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Hjelp oversette dette verktøyet til ditt språk på Crowdin.",
   "ThemeUIScale_Tip": "Endre appens farge og tema eller øk skalaen på UI.",
   "JoinDiscord_Tip": "Be om hjelp og motta oppdateringer om verktøyet på discord serveren.",
-  "OpenGuide_Tip": "Se på den online-guiden du kommer i gang med laste-bestillingsverktøyet.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Tilbakestill innstillingene til standardinnstillingene. Dette påvirker ikke mappens innstillinger.",
   "EnableDevUi": "Aktiver utviklergrensesnittet",
   "RefreshWorkshop": "Oppdater Workshop-innhold",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Dra & slipp en LSM-rapportfil her, eller klikk for å abonnere på eiendeler som er oppført i rapporten",
   "LsmUnusedTip": "Dra & slipp en LSM rapport fil her, eller klikk for å velge en for å administrere ressurser du ikke har brukt i spillet du er oppført i rapporten",
   "FixAllTip": "Forsøk på å laste ned alle pakker som har problemer, vil dette åpne damp kort øyeblikk",
-  "MultipleLOM": "Du har flere versjoner av Load Order Mod installert eller abonnerer på, noe som kan føre til konflikter. For å unngå problemer, vennligst fjern eller meld deg av alle andre versjoner bortsett fra en du bruker",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Filtrer etter denne rapportstatusen",
   "FilterByThisPackageStatus": "Filtrer etter denne pakkestatusen",
   "FilterSinceThisDate": "Filtrer elementer med denne datoen",
   "FilterByThisTag": "Legg til '{0}' til filtrerte tagger",
   "ItemsShouldNotBeSubscribedInfo": "Du er i ferd med å abonnere på pakker som kan bli ødelagt eller ha andre alvorlige problemer.",
   "WouldYouLikeToSkipThose": "Vil du hoppe over disse pakkene?",
-  "LOTWillRestart": "Lastingsordre verktøy lukkes midlertidig under oppdateringsprosessen, men det vil automatisk gjenopptas når oppdateringen er fullført.",
-  "UpdatingLot": "Last inn bestillingsverktøyet for øyeblikket. Vennligst vent...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Abonnementer eller avslutte abonnering på pakker krever at spillet åpnes et kort øyeblikk. Når du ser spillets startskjerm, klikk på Spill for å fortsette.",
   "HelpSupport": "Hjelp & Støtte",
   "DisableFpsBoosterDebug": "Du har aktivert FPS Booster mens du bruker feilsøkingsmono, vil du deaktivere den for å få bedre logger?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Feil i loggen",
   "OpenLogFolder": "Åpne spillets loggmappe",
   "CopyLogFile": "Kopier spillets loggfil til utklippstavlen",
-  "OpenLOTLogFolder": "Åpne LOT's loggmappe",
-  "CopyLOTLogFile": "Kopier LOT loggfil til utklippstavlen",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Mods inkludert: {0}, Totalt: {1}",
   "ModIncludedAndEnabledTotal": "Mods inkludert og aktivert: {0}, Totalt: {1}",
   "ModIncludedEnabledTotal": "Mods inkludert: {0}, som er aktivert: {1}, Totalt: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "Se og administrer dine lagrede profiler",
   "AutoSave_Tip": "Lagre endringer av mods & eiendeler automatisk på profilen din",
   "LoadEnabled_Tip": "Laster inn ressurser aktivert under lasting et spill. Dette bør bli igjen aktivert med mindre du vet hva du gjør",
-  "LoadUsed_Tip": "Last inn eiendeler som er brukt på kartet ditt, selv om de er deaktivert i spillet. Dette er ikke relatert til eiendelsinnstillingene i Last bestillingsverktøyet",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Bruk dette for å utelukke standard elementer fra spillet ditt",
   "NewGame_Tip": "Starter et nytt spill når du starter Cities: Skyllinger. Du kan angi kartet du vil starte på",
   "LoadSaveGame_Tip": "Laste inn en lagringsplass når du starter Cities: Skyllinger. Ikke å velge en lagringsfil vil fortsette den siste lagringsfilen",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Profiler som er favorittert: {0}, Totalt: {1}",
   "FavoriteTotal": "Totalt antall profiler: {0}",
   "ProfileFilter": "Profil filter",
-  "CheckDocumentsFolder": "Pass på at \"Last Ordre\"-verktøyet har tilgang til dokumentmappene dine, bruker den til å lagre UI og Språkinnstillinger.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Kunne ikke lagre valgte språk",
   "FailedToOpenTC": "Kunne ikke åpne Tema Changer",
   "FailedToDeleteItem": "Kunne ikke slette elementet",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }

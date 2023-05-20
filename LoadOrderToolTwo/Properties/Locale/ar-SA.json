@@ -47,9 +47,9 @@
   "NoMods": "تعطيل جميع المودات",
   "AutoSave": "حفظ تلقائي",
   "TotalSize": "الحجم الإجمالي",
-  "ReportSeverity": "الإبلاغ عن شدة",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "أي حال أو أية حالة",
-  "AnyReportStatus": "أي تقرير شدة",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "لديك هذا التعديل",
   "NoLocalPackagesFound": "لا توجد حزم موجودة على جهاز الكمبيوتر الخاص بك.",
   "CheckFolderInOptions": "تحقق من لوحة الخيارات في حالة استخدام المجلدات الخاطئة.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "عرض والاشتراك في الأصول المفقودة",
   "SelectedFileInvalid": "الملف الذي اخترته غير صالح",
   "NoItemsToBeDisplayed": "لا توجد عناصر سيتم عرضها",
-  "FirstSetupInfo": "يرجى تمكين التعديل داخل المدن: سكاينين أولاً قبل استخدام الأداة",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "الإعداد غير مكتمل",
   "LsmImportUnusedInfo": "عرض وإزالة الأصول غير المستخدمة",
   "SkipFileInfo": "حدد ملف تخطي لاستخدامه لتحميل آلية الشاشة",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "نسخ معرف الستيم الخاص بالمؤلف",
   "CloseCitiesToSub": "تحتاج إلى إغلاق المدن: Skylines للاشتراك أو إلغاء الاشتراك من الحزم",
   "ShowingFilteredItems": "عرض {0} من إجمالي العناصر {1}",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "قالب و مقياس واجهة المستخدم",
   "SearchProfiles": "البحث عن طريق ملفاتك الشخصية..",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "عند الاشتراك أو إضافة أصل، ستقوم الأداة تلقائياً باستبعاده أو تضمينه استناداً إلى هذا الإعداد عند تشغيل الأداة.",
   "FilterOutPackagesWithOneAsset_Tip": "الحزم التي تحتوي على أصل واحد فقط لن تظهر على صفحة الحزم. ستظل تظهر على صفحة الأصول.",
   "FilterOutPackagesWithMods_Tip": "الحزم التي تتضمن التعديل لن تظهر على صفحة الحزم. ستظل تظهر على صفحة المود.",
-  "OverrideGameChanges_Tip": "التغييرات التي أجريت في اللعبة إلى حالة تمكين المودات سيتم تجاوزها تلقائياً من خلال إعداداتك داخل أداة طلب التحميل، هذا يعمل فقط عندما تكون الأداة مفتوحة.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "خلائط السمة تنشئ ملفا للمورد ليكون قادرا على مشاركته في ورشة العمل. تمكين هذا الخيار سوف يخفي أولئك من قائمة المودز الخاصة بك ويحملهم على الدوام.",
   "AdvancedIncludeEnable_Tip": "تمكين هذا الخيار سيسمح لك بتغيير كل حالة من الحالات المدرجة والمفعلة من الأوضاع، مشابهة لأداة طلب التحميل 1.",
   "AdvancedLaunchOptions_Tip": "يعرض خيارات اطلاق اضافية مستخدمة من قبل المطورين في إعدادات الملف الشخصي.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "ساعد في ترجمة هذه الأداة إلى لغتك الأم على كراودن.",
   "ThemeUIScale_Tip": "تغيير لون التطبيق و السمة أو زيادة حجم واجهة المستخدم.",
   "JoinDiscord_Tip": "اسأل عن المساعدة واستلم التحديثات حول الأداة على خادم ديسكورد.",
-  "OpenGuide_Tip": "عرض الدليل عبر الإنترنت للبدء بأداة طلب التحميل.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "إعادة تعيين الإعدادات الخاصة بك إلى الإعدادات الافتراضية. هذا لا يؤثر على إعدادات المجلد.",
   "EnableDevUi": "تمكين واجهة المستخدم",
   "RefreshWorkshop": "تحديث محتوى ورشة العمل",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "قم بسحب وإسقاط ملف تقرير LSM هنا أو انقر لتحديد واحد للاشتراك في الأصول المفقودة المدرجة في التقرير",
   "LsmUnusedTip": "قم بسحب وإسقاط ملف تقرير LSM هنا أو اضغط لتحديد واحد لإدارة الأصول التي لم تستخدمها في لعبة الحفظ الخاصة بك المدرجة في التقرير",
   "FixAllTip": "محاولة إعادة تحميل جميع الحزم التي لديها مشاكل، هذا سيفتح البخار لحظة وجيزة",
-  "MultipleLOM": "لديك إصدارات متعددة من \"نظام التحميل\" مثبت أو اشتركت فيها، مما قد يسبب تضاربات. لتجنب المشكلات، يرجى إزالة أو إلغاء الاشتراك من جميع الإصدارات الأخرى باستثناء الإصدار الذي تستخدمه",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "تصفية حسب حالة هذا التقرير",
   "FilterByThisPackageStatus": "تصفية حسب حالة الحزمة هذه",
   "FilterSinceThisDate": "تصفية العناصر باستخدام هذا التاريخ",
   "FilterByThisTag": "إضافة '{0}' إلى العلامات المصفاة",
   "ItemsShouldNotBeSubscribedInfo": "أنت على وشك الاشتراك في الحزم التي قد تنكسر أو لديها مشاكل خطيرة أخرى.",
   "WouldYouLikeToSkipThose": "هل تريد تخطي هذه الحزم؟",
-  "LOTWillRestart": "سيتم إغلاق أداة طلب التحميل مؤقتاً أثناء عملية التحديث، ولكن سيتم استئنافها تلقائياً بمجرد اكتمال التحديث.",
-  "UpdatingLot": "يتم حاليا تحديث أداة طلب التحميل. الرجاء الانتظار...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "يتطلب الاشتراك أو إلغاء الاشتراك من الحزم فتح اللعبة لحظة قصيرة. عندما ترى مشغل اللعبة، انقر على اللعب للمتابعة.",
   "HelpSupport": "المساعدة والدعم",
   "DisableFpsBoosterDebug": "لديك معزز FPS أثناء استخدام التصحيح الأحادي ، هل ترغب في تعطيله للحصول على سجلات أفضل؟",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "أخطاء في السجل",
   "OpenLogFolder": "فتح مجلد سجل اللعبة",
   "CopyLogFile": "نسخ ملف سجل اللعبة إلى الحافظة",
-  "OpenLOTLogFolder": "فتح مجلد سجل LOT",
-  "CopyLOTLogFile": "نسخ ملف سجل LOT إلى الحافظة",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "اشتملت الإضافات: {0}، المجموع: {1}",
   "ModIncludedAndEnabledTotal": "المواد المشتملة والمفعلة: {0}، المجموع: {1}",
   "ModIncludedEnabledTotal": "اشتملت الإضافات: {0}، والتي تم تمكين منها: {1}، المجموع: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "عرض وإدارة الملفات الشخصية المحفوظة",
   "AutoSave_Tip": "حفظ التغييرات تلقائياً إلى الموديلات والأصول إلى ملفك الشخصي",
   "LoadEnabled_Tip": "تحميل الأصول تمكين أثناء تحميل اللعبة. يجب أن يترك هذا ممكناً إلا إذا كنت تعرف ما تفعله",
-  "LoadUsed_Tip": "تحميل الأصول المستخدمة في الخريطة الخاصة بك، حتى لو تم تعطيلها داخل اللعبة. هذا غير متصل بإعدادات الأصول داخل أداة طلب التحميل",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "استخدم هذا لاستبعاد أصول الفانيلا من لعبتك",
   "NewGame_Tip": "يبدأ لعبة جديدة عند إطلاق المدن: Skylines. يمكنك تحديد الخريطة التي ترغب في البدء فيها",
   "LoadSaveGame_Tip": "تحميل لعبة ادخار عند اطلاق المدن: Skylines. عدم اختيار ملف الحفظ سيستمر في حفظك الاحدث",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "الملفات الشخصية المفضلة: {0}، المجموع: {1}",
   "FavoriteTotal": "إجمالي الملفات الشخصية: {0}",
   "ProfileFilter": "تصفية الملف الشخصي",
-  "CheckDocumentsFolder": "تأكد من أن أداة تحميل الطلب لها حق الوصول إلى مجلد المستندات الخاص بك، وتستخدمه لتخزين إعدادات واجهة المستخدم واللغة الخاصة بك.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "فشل في حفظ اللغة المحددة",
   "FailedToOpenTC": "فشل في فتح تغيير السمة",
   "FailedToDeleteItem": "فشل في حذف العنصر",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }

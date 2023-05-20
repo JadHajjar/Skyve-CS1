@@ -47,9 +47,9 @@
   "NoMods": "Zakázat všechny módy",
   "AutoSave": "Automatické uložení",
   "TotalSize": "Celková velikost",
-  "ReportSeverity": "Nahlásit závažnost",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Jakýkoli stav",
-  "AnyReportStatus": "Jakákoli závažnost zprávy",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "Máte tento mod",
   "NoLocalPackagesFound": "Na vašem počítači nebyly nalezeny žádné balíčky.",
   "CheckFolderInOptions": "Zkontrolujte panel Možnosti v případě, že jsou použity nesprávné složky.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Zobrazit a odebírat chybějící položky",
   "SelectedFileInvalid": "Vybraný soubor není platný",
   "NoItemsToBeDisplayed": "Žádné položky nejsou zobrazeny",
-  "FirstSetupInfo": "Před použitím nástroje prosím povolte mód uvnitř měst: Skylines",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "Nastavení nedokončeno",
   "LsmImportUnusedInfo": "Zobrazit a odstranit nepoužité položky",
   "SkipFileInfo": "Vyberte přeskakovací soubor, který bude použit pro načtení modu obrazovky",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Zkopírujte Steam ID autora",
   "CloseCitiesToSub": "Musíte zavřít města: Skylines pro odběr nebo odhlášení z balíčků",
   "ShowingFilteredItems": "Zobrazeno {0} z celkem {1} položek",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Měřítko šablony a uživatelského rozhraní",
   "SearchProfiles": "Vyhledávání prostřednictvím profilů..",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Při odebírání nebo přidání aktiva nástroj automaticky vyloučí nebo zahrne na základě tohoto nastavení, když je nástroj spuštěn.",
   "FilterOutPackagesWithOneAsset_Tip": "Balíčky, které v nich mají pouze jeden majetek, se nebudou zobrazovat na stránce Balíky. Budou se stále zobrazovat na stránce Vlastnosti.",
   "FilterOutPackagesWithMods_Tip": "Balíčky, které obsahují mód, se nezobrazí na stránce Balíků. Stále se budou zobrazovat na stránce Mody.",
-  "OverrideGameChanges_Tip": "Změny provedené ve hře ve stavu povoleném modem budou automaticky přepsány nastavením v rámci nástroje Load Order Tool, funguje pouze v případě, že je nástroj otevřený.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Šablona směřuje k vytvoření modu pro sdílení na workshopu. Povolení této volby skryje z vašeho seznamu modů a bude mít vždy i tyto mody.",
   "AdvancedIncludeEnable_Tip": "Povolení této volby vám umožní změnit jak zahrnuté a povolené stavy modů, podobně jako nástroj pro načtení objednávky 1.",
   "AdvancedLaunchOptions_Tip": "Zobrazí další možnosti spuštění používané vývojáři v nastavení profilu.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Pomozte přeložit tento nástroj do vašeho rodného jazyka na Crowdin.",
   "ThemeUIScale_Tip": "Změna barvy a motivu aplikace nebo zvýšení měřítka uživatelského rozhraní.",
   "JoinDiscord_Tip": "Požádejte o pomoc a získejte informace o nástroji na serveru Discord.",
-  "OpenGuide_Tip": "Prohlédněte si online průvodce a začněte s nástrojem pro načtení objednávky.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Resetovat vaše nastavení na výchozí nastavení. Toto nemá vliv na nastavení složky.",
   "EnableDevUi": "Povolit Dev UI",
   "RefreshWorkshop": "Aktualizovat obsah Workshopu",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Sem přetáhněte soubor hlášení LSM nebo vyberte jeden pro odběr chybějících položek uvedených ve zprávě",
   "LsmUnusedTip": "Sem přetáhněte soubor s LSM nebo klepněte na něj pro správu majetku, který jste nepoužili ve vaší uložené hře, které jsou uvedeny ve zprávě",
   "FixAllTip": "Pokusit se znovu stáhnout všechny balíky s problémem, toto otevře páru na krátký okamžik",
-  "MultipleLOM": "Máte nainstalovány nebo odebírány více verzí Load Order Mod, což může způsobit konflikty. Chcete-li se vyhnout problémům, odstraňte nebo odhlašte se od všech ostatních verzí kromě těch, které používáte",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Filtrovat podle tohoto stavu sestavy",
   "FilterByThisPackageStatus": "Filtrovat podle stavu balíčku",
   "FilterSinceThisDate": "Filtrovat položky pomocí tohoto data",
   "FilterByThisTag": "Přidat '{0}' k filtrovaným štítkům",
   "ItemsShouldNotBeSubscribedInfo": "Chystáte se přihlásit k odběru balíčků, které mohou být porušeny nebo mají jiné závažné problémy.",
   "WouldYouLikeToSkipThose": "Chcete tyto balíčky přeskočit?",
-  "LOTWillRestart": "Nástroj pro načtení objednávky se dočasně zavře během procesu aktualizace, ale po dokončení aktualizace se automaticky obnoví.",
-  "UpdatingLot": "Načítání nástroje objednávky je právě aktualizováno. Počkejte prosím...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Přihlášení k odběru nebo odhlášení balíčků vyžaduje otevření hry na krátkou chvíli. Když uvidíte spouštěč hry, klikněte na Hrát a pokračujte.",
   "HelpSupport": "Nápověda a podpora",
   "DisableFpsBoosterDebug": "Máte zapnutý FPS Booster při používání ladícího mona, chcete jej vypnout, abyste získali lepší logy?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Chyby v protokolu",
   "OpenLogFolder": "Otevřít složku protokolu hry",
   "CopyLogFile": "Zkopírovat log soubor hry do schránky",
-  "OpenLOTLogFolder": "Otevřít složku protokolu LOT",
-  "CopyLOTLogFile": "Kopírovat log soubor LOT do schránky",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Zahrnuty mody: {0}, Celkem: {1}",
   "ModIncludedAndEnabledTotal": "Zahrnuty a povoleno: {0}, Celkem: {1}",
   "ModIncludedEnabledTotal": "Zahrnuto mody: {0}, z nichž je povoleno: {1}, Celkem: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "Zobrazit a spravovat uložené profily",
   "AutoSave_Tip": "Automaticky ukládat změny do modů a položek do vašeho profilu",
   "LoadEnabled_Tip": "Načítá povolené položky při načítání hry. To by mělo zůstat povoleno, pokud nevíte, co děláte",
-  "LoadUsed_Tip": "Načítat aktiva, která jsou použita na vaší mapě, i když jsou vypnuta ve hře. Toto nesouvisí s nastavením majetku uvnitř nástroje pro načtení objednávky",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Použijte pro vyloučení vanilových aktiv z vaší hry",
   "NewGame_Tip": "Spustí novou hru při spouštění měst: Skyliny. Můžete zadat mapu, ve které chcete začít",
   "LoadSaveGame_Tip": "Načíst uloženou hru při spouštění měst: Skyliny. Nevybráním uloženého souboru bude pokračovat vaše poslední uložení",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Oblíbené profily: {0}, Celkem: {1}",
   "FavoriteTotal": "Celkem profilů: {0}",
   "ProfileFilter": "Filtr profilu",
-  "CheckDocumentsFolder": "Ujistěte se, že nástroj pro načtení objednávky má přístup ke složce dokumentů, používá ji k ukládání nastavení uživatelského rozhraní a jazyka.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Nepodařilo se uložit vybraný jazyk",
   "FailedToOpenTC": "Nepodařilo se otevřít změnu motivu",
   "FailedToDeleteItem": "Odstranění položky se nezdařilo",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }

@@ -47,9 +47,9 @@
   "NoMods": "禁用全部模組",
   "AutoSave": "自動保存",
   "TotalSize": "總大小",
-  "ReportSeverity": "相容性問題嚴重程度",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "任何狀態",
-  "AnyReportStatus": "任何相容性問題嚴重程度",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "您已訂閱該模組",
   "NoLocalPackagesFound": "在您的電腦上找不到外掛程式。",
   "CheckFolderInOptions": "如果您選擇了錯誤的資料夾，請查看選項面板。",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "查看缺失的資產並進行訂閱",
   "SelectedFileInvalid": "您選擇的檔無效",
   "NoItemsToBeDisplayed": "沒有要顯示的專案",
-  "FirstSetupInfo": "使用 LOT 2 程式前，請先在遊戲主功能表的內容管理器內啟用 Load Order Mod 2 模組",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "您還沒完成初始設置",
   "LsmImportUnusedInfo": "查看未使用的資產並卸載/移除",
   "SkipFileInfo": "選擇 LSMR 模組的跳過資產文字檔",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "複製作者的 Steam 數位 ID",
   "CloseCitiesToSub": "你需要關閉 Cities: Skylines 才能訂閱/取消訂閱外掛程式",
   "ShowingFilteredItems": "當前顯示 {0} 項，共 {1} 項",
-  "ShowingMods": {
-    "One": "當前顯示{0}個模組",
-    "Plural": "當前顯示{0}個模組"
-  },
-  "ShowingAssets": {
-    "One": "當前顯示{0}個資產",
-    "Plural": "當前顯示{0}個資產"
-  },
-  "ShowingPackages": {
-    "One": "當前顯示{0}個外掛程式",
-    "Plural": "當前顯示{0}個外掛程式"
-  },
-  "ShowingProfiles": {
-    "One": "當前顯示{0}個設定檔",
-    "Plural": "當前顯示{0}個設定檔"
-  },
   "DropNewProfile": "將 json / xml 設定檔拖到此處；或按一下此處，選擇一個 json / xml 設定檔，以導入設定檔。",
   "ThemeUIScale": "介面主題與UI縮放",
   "SearchProfiles": "搜索您的設定檔…",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "當您訂閱或添加資產時，Load Order Tool 2 將會根據此選項的設置，自動裝載或卸載該資產。",
   "FilterOutPackagesWithOneAsset_Tip": "外掛程式頁面不顯示只含一個資產的外掛程式。在資產頁面，這些資產仍然會顯示。",
   "FilterOutPackagesWithMods_Tip": "外掛程式頁面不顯示模組。在模組頁面，這些模組仍然會顯示。",
-  "OverrideGameChanges_Tip": "在 Load Order Tool 2 打開時，在遊戲中對模組的啟用狀態所作的更改，將自動被設定檔的設定覆蓋",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Theme Mixer 模組會生成一個 DLL 檔，以便在創意工坊分享混合主題。啟用此選項將會隱藏模組清單中的混合主題，並且始終保持這些混合主題為載入狀態。",
   "AdvancedIncludeEnable_Tip": "啟用此選項時，您將可以分別更改模組的裝載和啟用狀態，類似於 Load Order Tool 1。",
   "AdvancedLaunchOptions_Tip": "在設定檔設置中，顯示供開發者使用的高級啟動選項。",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "在 Crowdin 上幫助 Load Order Tool 2 的當地語系化翻譯。",
   "ThemeUIScale_Tip": "更改 LOT2 顯示的字體、顏色和主題風格，或調整 UI 介面的顯示比例",
   "JoinDiscord_Tip": "在 Discord 伺服器上尋求幫助，並接收 Load Order Tool 2 相關的更新資訊。",
-  "OpenGuide_Tip": "連線查閱指南並開始使用 Load Order Tool 2。",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "將您的設置重置為預設值。此操作不影響資料夾設置。",
   "EnableDevUi": "啟用開發介面",
   "RefreshWorkshop": "刷新創意工坊內容",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "將 Loading Screen Mod Revisited 的資產報告文件拖到此處；或按一下此處，選擇一個 LSMR 資產報告，來查看和訂閱報告中列出的丟失資產。",
   "LsmUnusedTip": "將 Loading Screen Mod Revisited 的資產報告文件拖到此處；或按一下此處，選擇一個 LSMR 資產報告，來管理您在存檔中未使用過的資產。",
   "FixAllTip": "嘗試重新下載所有存在問題的外掛程式，在這期間 LOT2 會打開 Steam 片刻（請確保打開加速器 / VPN）。",
-  "MultipleLOM": "您已經安裝或訂閱了多個版本的 Load Order Mod，可能會出現衝突。 為了避免出現問題，請刪除或取消訂閱您不使用的其他版本。",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "按照該報告狀態進行篩選",
   "FilterByThisPackageStatus": "按照該外掛程式狀態進行篩選",
   "FilterSinceThisDate": "按照此日期進行篩選",
   "FilterByThisTag": "將 '{0}' 添加到篩選標籤",
   "ItemsShouldNotBeSubscribedInfo": "您即將訂閱的外掛程式可能已損壞，或存在其他嚴重問題。",
   "WouldYouLikeToSkipThose": "您確定要跳過這些外掛程式嗎？",
-  "LOTWillRestart": "Load Order Tool 2 更新時，軟體會暫時關閉，更新完成後將自動重啟。",
-  "UpdatingLot": "Load Order Tool 2 正在更新，請稍候...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "訂閱或取消訂閱外掛程式時， LOT2 會啟動遊戲並在片刻後關閉遊戲（請確保已打開加速器 / VPN）。如果你看到 Steam 遊戲啟動介面，請點擊“開始遊戲”。",
   "HelpSupport": "幫助與支持",
   "DisableFpsBoosterDebug": "您正在使用 Debug Mono，是否要禁用 FPS Booster 模組以獲取更好的日誌？",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "日誌中的報錯資訊",
   "OpenLogFolder": "打開遊戲的日誌資料夾",
   "CopyLogFile": "將遊戲日誌檔複製到剪貼板",
-  "OpenLOTLogFolder": "打開 LOT2 的日誌資料夾",
-  "CopyLOTLogFile": "將 LOT2 的日誌檔複製到剪貼板",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "您總共有 {1} 個模組，已裝載 {0} 個",
   "ModIncludedAndEnabledTotal": "您總共有 {1} 個模組，已裝載且已啟用 {0} 個",
   "ModIncludedEnabledTotal": "您總共有 {2} 個模組，已裝載 {0} 個，其中啟用了 {1} 個。",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "查看和管理您已保存的設定檔",
   "AutoSave_Tip": "啟用此選項後，對模組和資產狀態進行的改動，將自動保存到設定檔中。",
   "LoadEnabled_Tip": "在載入存檔時載入已啟用的資產。 請不要隨意禁用該功能，除非您很清楚自己正在做什麼以及可能造成的後果。",
-  "LoadUsed_Tip": "載入地圖中已使用的資產，即使它們在內容管理器中被禁用。該功能不會被 Load Order Tool 2 中的資產設置影響。",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "您可以使用該功能，來卸載所有原版遊戲自帶的資產。",
   "NewGame_Tip": "啟動 Cities: Skylines 並新建一個存檔。您可以選擇新建存檔使用的地圖。",
   "LoadSaveGame_Tip": "啟動 Cities: Skylines 時，自動開始載入所選存檔。 如果您沒有選擇存檔檔，會自動載入最近一次保存的存檔。",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "您總共有 {1} 個設定檔，已收藏 {0} 個",
   "FavoriteTotal": "共 {0} 個設定檔",
   "ProfileFilter": "篩選設定檔",
-  "CheckDocumentsFolder": "請檢查 Load Order Tool 2 是否可以訪問您的“文檔”資料夾，LOT2 的介面和語言設置資訊存儲在該資料夾內。",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "保存所選語言失敗",
   "FailedToOpenTC": "打開主題編輯器失敗",
   "FailedToDeleteItem": "刪除專案失敗",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "已載入 {0} {1} ",
     "Plural": "已載入 {0} {1} "
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }

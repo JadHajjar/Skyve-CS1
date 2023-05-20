@@ -15,11 +15,12 @@
   "InteractionCount": "交互方式 ({0})",
   "AddStatus": "添加状态",
   "AddInteraction": "添加交互方式",
-  "NotReviewed": "尚未被检查",
+  "NotReviewed": "尚未检查",
   "Stable": "稳定的",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
   "Broken": "损坏的",
+  "Incompatible": "不兼容",
   "CityBuilding": "城市建设",
   "AssetCreation": "资产制作",
   "MapCreation": "地图制作",
@@ -29,7 +30,7 @@
   "SelectOne": "选择任意一个",
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
-  "Switch": "切换到链接的插件",
+  "Switch": "改为使用其它插件",
   "FlippedSwitch": "切换到此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
@@ -43,7 +44,6 @@
   "Successor": "继任模组",
   "Alternative": "备选方案",
   "SameFunctionality": "相同的功能",
-  "Incompatible": "不兼容",
   "RequirementAlternative": "可用的备选方案",
   "IncompatibleWith": "与…不兼容",
   "CausesIssuesWith": "与…一起使用会导致问题",
@@ -56,7 +56,7 @@
   "AttentionRequired": "需要注意",
   "Website": "网站",
   "Donation": "赞助",
-  "ManageSinglePackage": "管理单个插件",
+  "ManageSinglePackage": "管理特定插件",
   "ManageCompatibilityData": "管理兼容性报告的数据",
   "YourPackages": "管理您的插件",
   "AddPackages": "添加插件",
@@ -68,7 +68,7 @@
   "PleaseReviewTheStability": "请在保存之前检查此插件的稳定性。",
   "PleaseReviewPackageStatuses": "请在保存之前检查此插件的状态。\n部分状态类型是无效的。",
   "PleaseReviewPackageInteractions": "请在保存之前检查此插件的交互方式。\n部分交互方式是无效的。",
-  "PleaseReviewPackageUsage": "请为此插件选择一个有效的用法。",
+  "PleaseReviewPackageUsage": "请为此插件选择一个有效的用途。",
   "Interaction_Alternative": {
     "One": "'{1}' 可以作为 '{0}' 的替代方案。",
     "Plural": "下列任意一个插件可以作为 '{0}' 的替代方案："
@@ -98,6 +98,7 @@
     "Plural": "'{0}' 的功能已被下列任意一个插件继承："
   },
   "Interaction_Identical": "这些是同一个插件的多个不同版本。\n\n您应当只选择使用其中一个，并取消订阅其他版本。",
+  "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个原始插件的重新上传版本。",
@@ -125,8 +126,10 @@
   "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
   "Stability_Stable": "此插件能稳定运行。",
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
-  "Stability_HasIssues": "此插件可能引发问题。",
-  "Stability_Broken": "此插件已经损坏，无法运行。",
+  "Stability_HasIssues": "此插件可能引发问题。\n请小心使用。",
+  "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
+  "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应该立刻取消订阅或删除此插件。",
+  "Stability_Local": "此插件是 '{0}' 模组的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您应该订阅下列插件：",
@@ -170,20 +173,20 @@
   "RequestReviewInfo": "使用此插件时遇到问题？\n请在这里申请重新复查：",
   "RequestReview": "申请复查",
   "MissingDependencyCount": {
-    "One": "{0} {1} 缺少必需物品",
-    "Plural": "{0} {1} 缺少必需物品"
+    "One": "{0} {1} 缺少前置模组",
+    "Plural": "{0} {1} 缺少前置模组"
   },
   "CautionCount": "建议谨慎处理 {0} {1}",
   "WarningCount": "{0} {1} 存在一个警告",
   "AttentionRequiredCount": {
-    "One": "您需要注意一下 {0} {1}",
-    "Plural": "您需要注意一下 {0} {1}"
+    "One": "{0} {1} 需要注意一下",
+    "Plural": "{0} {1} 需要注意一下"
   },
-  "ExcludeCount": "应该卸下 {0} {1} ",
-  "UnsubscribeCount": "您应该取消订阅 {0} {1}",
+  "ExcludeCount": "{0} {1} 应当被卸下",
+  "UnsubscribeCount": "{0} {1} 应该取消订阅",
   "SwitchCount": {
-    "One": "{0} {1} 需要切换到另一个",
-    "Plural": "{0} {1} 需要切换到另一个"
+    "One": "{0} {1} 需要改为使用另一个模组",
+    "Plural": "{0} {1} 需要改为使用其它模组"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
@@ -192,5 +195,8 @@
   "IMTMarkings": "Intersection Marking Tool 标线",
   "RenderItPreset": "Render it! 的预设",
   "POFont": "Procedural Object 的字体/效果模块",
-  "NameList": "名称列表/游戏翻译"
+  "NameList": "名称列表/游戏翻译",
+  "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，您想保存并应用这些改动吗？",
+  "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证是否稳定运行，以及将来是否更新。",
+  "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。"
 }

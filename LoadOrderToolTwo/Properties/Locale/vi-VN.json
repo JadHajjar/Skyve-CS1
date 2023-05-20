@@ -47,9 +47,9 @@
   "NoMods": "Disable All Mods",
   "AutoSave": "Tiết kiệm tự động",
   "TotalSize": "Tổng kích thước",
-  "ReportSeverity": "Báo cáo mức độ nghiêm trọng",
+  "CompatibilityStatus": "Compatibility Status",
   "AnyStatus": "Bất kỳ trạng thái",
-  "AnyReportStatus": "Bất kỳ báo cáo mức độ nghiêm trọng",
+  "AnyCompatibilityStatus": "Any Status",
   "ModOwned": "Bạn có mod này",
   "NoLocalPackagesFound": "Không có gói nào được tìm thấy trên máy tính của bạn.",
   "CheckFolderInOptions": "Kiểm tra bảng tùy chọn trong trường hợp các thư mục sai đang được sử dụng.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "View and subscribe to missing assets",
   "SelectedFileInvalid": "The file you selected is not valid",
   "NoItemsToBeDisplayed": "No items are to be displayed",
-  "FirstSetupInfo": "Please enable Load Order Mod 2 inside Cities: Skylines before using Load Order Tool 2",
+  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
   "SetupIncomplete": "Set Up is Incomplete",
   "LsmImportUnusedInfo": "View and remove unused assets",
   "SkipFileInfo": "Select a Skip-file to be used for Loading Screen Mod",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Copy the Author's Steam ID",
   "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
   "ShowingFilteredItems": "Showing {0} out of {1} total items",
-  "ShowingMods": {
-    "One": "Showing {0} mod",
-    "Plural": "Showing {0} mods"
-  },
-  "ShowingAssets": {
-    "One": "Showing {0} asset",
-    "Plural": "Showing {0} assets"
-  },
-  "ShowingPackages": {
-    "One": "Showing {0} package",
-    "Plural": "Showing {0} packages"
-  },
-  "ShowingProfiles": {
-    "One": "Showing {0} profile",
-    "Plural": "Showing {0} profiles"
-  },
   "DropNewProfile": "Drop or select a profile's .json or .xml file here to import it",
   "ThemeUIScale": "Theme & UI Scale",
   "SearchProfiles": "Search through your Profiles..",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "When you subscribe or add an asset, the tool will automatically exclude or include it based on this setting when the tool is launched.",
   "FilterOutPackagesWithOneAsset_Tip": "Packages that only have a single asset in them will not show on the Packages page. They will still show on the Assets page.",
   "FilterOutPackagesWithMods_Tip": "Packages that include a mod will not show on the Packages page. They will still show on the Mods page.",
-  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Load Order Tool, changes are applied on the next launch. This only works while the tool is open.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Theme mixes generate a mod file in order to be shared on the workshop. Enabling this option will hide those from your mods list and have them always included.",
   "AdvancedIncludeEnable_Tip": "Enabling this option will let you change both included & enabled states of mods, similar to the original Load Order Tool.",
   "AdvancedLaunchOptions_Tip": "Displays extra launch options used by developers in the profile's settings.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Help translate this tool into your native language on Crowdin.",
   "ThemeUIScale_Tip": "Change the app's color & theme or increase the scale of the UI.",
   "JoinDiscord_Tip": "Ask for help & receive updates about the tool on the Discord server.",
-  "OpenGuide_Tip": "View the online guide to get started with Load Order Tool.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Reset your settings to the default ones. This does not affect folder settings.",
   "EnableDevUi": "Enable Dev UI",
   "RefreshWorkshop": "Refresh Workshop Content",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Drag & drop a LSM report file here or click to select one to subscribe to missing assets listed in the report",
   "LsmUnusedTip": "Drag & drop a LSM report file here or click to select one to manage assets you haven't used in your save-game that are listed in the report",
   "FixAllTip": "Attempt to re-download all packages that have issues, this will open steam for a brief moment",
-  "MultipleLOM": "You have multiple versions of Load Order Mod installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Filter by this report status",
   "FilterByThisPackageStatus": "Filter by this package status",
   "FilterSinceThisDate": "Filter items using this date",
   "FilterByThisTag": "Add '{0}' to the filtered tags",
   "ItemsShouldNotBeSubscribedInfo": "You're about to subscribe to packages that might be broken or have other serious issues.",
   "WouldYouLikeToSkipThose": "Do you want to skip those packages?",
-  "LOTWillRestart": "The Load Order Tool will temporarily close during the update process, but it will automatically resume once the update is complete.",
-  "UpdatingLot": "Load Order Tool is currently being updated. Please wait...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment. When you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Help & Support",
   "DisableFpsBoosterDebug": "You have FPS Booster enabled while using debug mono, would you like to disable it to get better logs?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Errors in the Log",
   "OpenLogFolder": "Open the game's log folder",
   "CopyLogFile": "Copy the game's log file to clipboard",
-  "OpenLOTLogFolder": "Open LOT's log folder",
-  "CopyLOTLogFile": "Copy LOT's log file to clipboard",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Mods included: {0}, Total: {1}",
   "ModIncludedAndEnabledTotal": "Mods included & enabled: {0}, Total: {1}",
   "ModIncludedEnabledTotal": "Mods included: {0}, of which are enabled: {1}, Total: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "View & manage your saved profiles",
   "AutoSave_Tip": "Automatically save changes to mods & assets to your profile",
   "LoadEnabled_Tip": "Loads enabled assets while loading a game. This should be left enabled unless you know what you're doing",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Load Order Tool",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Use this to exclude vanilla assets from your game",
   "NewGame_Tip": "Starts a new game when launching Cities: Skylines. You can specify the map you'd like to start in",
   "LoadSaveGame_Tip": "Load a save-game when launching Cities: Skylines. Not selecting a save-file will continue your latest save",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Profiles favorited: {0}, Total: {1}",
   "FavoriteTotal": "Total profiles: {0}",
   "ProfileFilter": "Profile Filter",
-  "CheckDocumentsFolder": "Make sure Load Order Tool has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Failed to save the selected language",
   "FailedToOpenTC": "Failed to open Theme Changer",
   "FailedToDeleteItem": "Failed to delete item",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} loaded",
     "Plural": "{0} {1} loaded"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }

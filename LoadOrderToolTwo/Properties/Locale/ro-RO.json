@@ -47,9 +47,9 @@
   "NoMods": "Dezactivează toate Modurile",
   "AutoSave": "Salvare automată",
   "TotalSize": "marimea totala",
-  "ReportSeverity": "Raportul severității",
+  "CompatibilityStatus": "Stare compatibilitate",
   "AnyStatus": "Orice statut",
-  "AnyReportStatus": "Orice severitate a raportului",
+  "AnyCompatibilityStatus": "Orice status",
   "ModOwned": "Ai acest mod",
   "NoLocalPackagesFound": "Nu se găsesc pachete pe computer.",
   "CheckFolderInOptions": "Verificați panoul de opțiuni în cazul în care sunt utilizate folderele greșite.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Vizualizați și abonați-vă la activele lipsă",
   "SelectedFileInvalid": "Fișierul selectat nu este valid",
   "NoItemsToBeDisplayed": "Niciun articol nu va fi afișat",
-  "FirstSetupInfo": "Va rugăm să activați Load Order Mod 2 in interiorul aplicatiei Cities: Skylines inainte de a folosi Load Order Tool 2",
+  "FirstSetupInfo": "Vă rugăm să activați Skyve Mod în interiorul Cities: Skylines înainte de a utiliza aplicația Skyve",
   "SetupIncomplete": "Configurare incompletă",
   "LsmImportUnusedInfo": "Vizualizați și eliminați activele neutilizate",
   "SkipFileInfo": "Selectați un fișier care sa fie sărit si folosit pe Loading Screen Mod",
@@ -181,22 +181,6 @@
   "CopyAuthorSteamId": "Copiază ID-ul autorului Steam",
   "CloseCitiesToSub": "Trebuie să închideți Cities: Skylines pentru a vă abona sau dezabona de la pachete",
   "ShowingFilteredItems": "Se afișează {0} din {1} total articole",
-  "ShowingMods": {
-    "One": "Se afișează {0} mod",
-    "Plural": "Se afișează {0} moduri"
-  },
-  "ShowingAssets": {
-    "One": "Se afișează {0} activ",
-    "Plural": "Se afișează {0} active"
-  },
-  "ShowingPackages": {
-    "One": "Se afișează {0} pachet",
-    "Plural": "Se afișează {0} pachete"
-  },
-  "ShowingProfiles": {
-    "One": "Se afișează {0} profil",
-    "Plural": "Se afișează {0} profiluri"
-  },
   "DropNewProfile": "Plasați aici sau selectați aici un fișier de profil .json sau .xml pentru a-l importa",
   "ThemeUIScale": "Temă și dimensiune interfață",
   "SearchProfiles": "Caută prin Profilurile tale...",
@@ -214,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Când vă abonați sau adăugați un activ, instrumentul va exclude automat sau îl va include în funcție de această setare atunci când instrumentul este lansat.",
   "FilterOutPackagesWithOneAsset_Tip": "Pachetele care au doar un singur activ în ele nu vor fi afișate pe pagina de pachete. Ele vor fi afișate în continuare pe pagina de active.",
   "FilterOutPackagesWithMods_Tip": "Pachetele care includ un mod nu vor fi afișate pe pagina de Pachete. Ele vor continua să apară pe pagina Moduri.",
-  "OverrideGameChanges_Tip": "Modificările făcute în joc la starea activă a modurilor vor fi automat suprascrise de setările din interiorul Uneltei de Ordine de Încărcare, aceasta funcționează doar în timp ce unealta este deschisă.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
   "HidePseudoMods_Tip": "Temele mixează generează un fişier moderator pentru a-l putea partaja în atelier. Activarea acestei opțiuni îi va ascunde pe cei din lista de moduri și îi va face să fie incluși întotdeauna.",
   "AdvancedIncludeEnable_Tip": "Activarea acestei opțiuni vă va permite să schimbați ambele stări incluse și activate ale mod-urilor, similare cu unealta de comenzi de încărcare 1.",
   "AdvancedLaunchOptions_Tip": "Afișează opțiuni suplimentare de lansare utilizate de dezvoltatori în setările profilului.",
@@ -222,7 +206,7 @@
   "HelpTranslate_Tip": "Ajută la traducerea acestei unelte în limba ta nativă pe Crowdin.",
   "ThemeUIScale_Tip": "Schimbă culoarea și tema aplicației sau mărește scala interfeței.",
   "JoinDiscord_Tip": "Solicitați ajutor și primiți actualizări despre unealta de pe serverul discord.",
-  "OpenGuide_Tip": "Vezi ghidul online pentru a începe cu instrumentul de încărcare a comenzii.",
+  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
   "ResetButton_Tip": "Resetați setările la cele implicite. Acest lucru nu afectează setările folderului.",
   "EnableDevUi": "Activează Interfața Dev",
   "RefreshWorkshop": "Reîmprospătează conţinutul atelierului",
@@ -244,15 +228,15 @@
   "LsmMissingTip": "Trageți și plasați aici un fișier de raport LSM sau faceți clic pentru a selecta unul care să se aboneze la activele lipsă listate în raport",
   "LsmUnusedTip": "Trageți și plasați aici un fișier de raportare LSM sau faceți clic pentru a selecta unul pentru a administra activele pe care nu le-ați folosit în jocul de salvare care sunt enumerate în raport",
   "FixAllTip": "Încercare de a redescărca toate pachetele care au probleme, acest lucru va deschide aburul pentru un scurt moment",
-  "MultipleLOM": "Aveți mai multe versiuni ale Modului de Comandă de încărcare instalat sau abonat, ceea ce poate cauza conflicte. Pentru a evita probleme, vă rugăm să eliminați sau să vă dezabonați de la toate celelalte versiuni, cu excepția celei pe care o utilizați",
+  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
   "FilterByThisReportStatus": "Filtrează după starea acestui raport",
   "FilterByThisPackageStatus": "Filtrează după starea acestui pachet",
   "FilterSinceThisDate": "Filtrează elementele folosind această dată",
   "FilterByThisTag": "Adaugă '{0}' la etichetele filtrate",
   "ItemsShouldNotBeSubscribedInfo": "Sunteți pe cale să vă abonați la pachete care ar putea fi stricate sau care au alte probleme serioase.",
   "WouldYouLikeToSkipThose": "Doriți să săriți peste aceste pachete?",
-  "LOTWillRestart": "Instrumentul de comandă a comenzii se va închide temporar în timpul procesului de actualizare, dar va fi reluat automat de îndată ce actualizarea este finalizată.",
-  "UpdatingLot": "Instrumentul de încărcare a comenzii este în curs de actualizare. Vă rugăm așteptați...",
+  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
+  "UpdatingLot": "Skyve is currently being updated. Please wait...",
   "SubscribingRequiresGameToOpen": "Abonarea sau dezabonarea de la pachete necesită deschiderea jocului pentru un scurt moment. Când vezi lansatorul jocului, apasă pe Play pentru a continua.",
   "HelpSupport": "Ajutor & Suport",
   "DisableFpsBoosterDebug": "Aveţi FPS Booster activat în timp ce utilizaţi mono de depanare, doriţi să-l dezactivaţi pentru a obţine jurnale mai bune?",
@@ -266,8 +250,8 @@
   "ErrorsInLog": "Erori în jurnal",
   "OpenLogFolder": "Deschide directorul de jurnal al jocului",
   "CopyLogFile": "Copiază fişierul de jurnal al jocului în clipboard",
-  "OpenLOTLogFolder": "Deschide directorul jurnal al URT",
-  "CopyLOTLogFile": "Copiază fişierul jurnal al LOT în clipboard",
+  "OpenLOTLogFolder": "Open Skyve's log folder",
+  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
   "ModIncludedTotal": "Modurile incluse: {0}, Total: {1}",
   "ModIncludedAndEnabledTotal": "Moduri incluse și activate: {0}, Total: {1}",
   "ModIncludedEnabledTotal": "Modurile incluse: {0}, din care sunt activate: {1}, Total: {2}",
@@ -280,7 +264,7 @@
   "ViewProfiles_Tip": "Vizualizați și gestionați profilurile salvate",
   "AutoSave_Tip": "Salvează automat modificările în mod-uri și active în profilul tău",
   "LoadEnabled_Tip": "Sarcini activate active în timpul încărcării unui joc. Acest lucru ar trebui să fie lăsat activat dacă nu știi ce faci",
-  "LoadUsed_Tip": "Încarcă activele care sunt utilizate pe harta ta, chiar dacă sunt dezactivate în joc. Acest lucru nu este legat de setările activelor din cadrul Uneltei de încărcare a comenzii",
+  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
   "UseSkipFile_Tip": "Folosește acest lucru pentru a exclude active de vanilie din jocul tău",
   "NewGame_Tip": "Începe un joc nou când lansezi Cities: Skylines. Poți specifica harta în care dorești să începi",
   "LoadSaveGame_Tip": "Încărcați un joc de salvare atunci când porniți orașe: Skylines. Nu selectați un fișier de salvare va continua ultima salvare",
@@ -302,7 +286,7 @@
   "FavoriteProfileTotal": "Profiluri favorite: {0}, Total: {1}",
   "FavoriteTotal": "Total profiluri: {0}",
   "ProfileFilter": "Filtru de profil",
-  "CheckDocumentsFolder": "Asigurați-vă că instrumentul de încărcare a comenzii are acces la dosarul cu documente, îl utilizează pentru a stoca setările interfeței și limbii.",
+  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Salvarea limbii selectate a eșuat",
   "FailedToOpenTC": "Eroare la deschiderea Schimbării Temei",
   "FailedToDeleteItem": "Ștergerea elementului a eșuat",
@@ -452,5 +436,24 @@
   "LoadedCount": {
     "One": "{0} {1} încărcat",
     "Plural": "{0} {1} încărcate"
-  }
+  },
+  "ShowingCount": {
+    "One": "Showing {0} {1}",
+    "Plural": "Showing {0} {1}"
+  },
+  "ShowingCountWarning": {
+    "One": "Showing {0} {1}, {2}",
+    "Plural": "Showing {0} {1}, {2}"
+  },
+  "ItemsHidden": {
+    "One": "{0} {1} is hidden because of your profile's usage",
+    "Plural": "{0} {1} are hidden because of your profile's usage"
+  },
+  "EditCompatibility": "Edit Compatibility",
+  "AnyIssue": "Any Issue",
+  "AnyUsage": "Any Usage",
+  "ExplainIssue": "Describe your issue here",
+  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "SendReview": "Send the request for review"
 }
