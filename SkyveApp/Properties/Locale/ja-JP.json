@@ -455,6 +455,7 @@
   "ExplainIssue": "ここに問題を記述",
   "ExplainIssueInfo": "何が起こるのか・それらの再現方法について、できるだけ多くの情報を含めて下さい。",
   "ReviewRequestSent": "「{0}」 のレビューリクエストを送信しました！\n\nフィードバックして頂きありがとうございます。",
+  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
   "SendReview": "検証のリクエストを送信",
   "EditTags": "Edit Tags",
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
