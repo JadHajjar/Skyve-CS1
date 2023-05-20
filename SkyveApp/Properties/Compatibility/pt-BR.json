@@ -1,0 +1,202 @@
+{
+  "Usage": "Utilização",
+  "Stability": "Estabilidade",
+  "ApplyContinue": "Aplicar e Continuar",
+  "Previous": "Voltar",
+  "Skip": "Pular",
+  "Note": "Observação",
+  "NoteInfo": "Texto informativo extra exibido para o pacote",
+  "BlackListName": "Lista Negra por nome",
+  "BlackListId": "Lista negra por ID Steam",
+  "GlobalTags": "Etiquetas Globais",
+  "GlobalTagsInfo": "Marca todos os jogadores que verão no aplicativo",
+  "Links": "Links",
+  "StatusesCount": "Situações ({0})",
+  "InteractionCount": "Interações ({0})",
+  "AddStatus": "Adicionar Situação",
+  "AddInteraction": "Adicionar Interação",
+  "NotReviewed": "Ainda não analisado",
+  "Stable": "Estável",
+  "NotEnoughInformation": "Não há informação suficiente",
+  "HasIssues": "Tem problemas",
+  "Broken": "Quebrado",
+  "Incompatible": "Incompatível",
+  "CityBuilding": "Construção da Cidade",
+  "AssetCreation": "Criação de Recurso",
+  "MapCreation": "Criação de Mapa",
+  "NoAction": "Não fazer nada",
+  "SubscribeToPackages": "Inscreva-se nos pacotes vinculados",
+  "RequiresConfiguration": "Requer uma configuração específica",
+  "SelectOne": "Selecione qualquer um",
+  "UnsubscribeThis": "Cancelar a assinatura deste pacote",
+  "UnsubscribeOther": "Cancelar assinatura de pacotes vinculados",
+  "Switch": "Mudar para pacote vinculado",
+  "FlippedSwitch": "Alternar para este pacote",
+  "Deprecated": "Descontinuado",
+  "Reupload": "Re-enviar",
+  "CausesIssues": "Causa problemas",
+  "SavesCantLoadWithoutIt": "Jogos salvos não podem carregar sem isso",
+  "TestVersion": "Versão de teste",
+  "DependencyMod": "Mod de dependência",
+  "SourceCodeNotAvailable": "O código-fonte não está disponível",
+  "MusicCanBeCopyrighted": "A música inclusa pode ter direitos autorais",
+  "IncompleteDescription": "Descrição Incompleta",
+  "Successor": "Sucessor",
+  "Alternative": "Alternativo para..",
+  "SameFunctionality": "Mesma Funcionalidade",
+  "RequirementAlternative": "Requisito Alternativo para..",
+  "IncompatibleWith": "Incompatível com ..",
+  "CausesIssuesWith": "Causa problemas com ..",
+  "RequiredPackages": "Exige ..",
+  "StatusType": "Tipo de Estados",
+  "InteractionType": "Tipo de Interação",
+  "MissingDependency": "Dependência ausente",
+  "Caution": "Cuidado",
+  "Warning": "Atenção",
+  "AttentionRequired": "Atenção Requerida",
+  "Website": "Página Web",
+  "Donation": "Doar",
+  "ManageSinglePackage": "Gerencie pacotes específicos",
+  "ManageCompatibilityData": "Gerenciar Dados de Compatibilidade",
+  "YourPackages": "Gerencie seus pacotes",
+  "AddPackages": "Adicionar Pacotes",
+  "ConfirmEndSession": "Tem certeza que deseja terminar sua sessão?",
+  "CrDataLoadFailed": "Falha ao carregar dados, tente novamente mais tarde",
+  "AddGlobalTag": "Adicionar uma etiqueta global",
+  "ReuseData": "Reutilizar dados anteriores",
+  "ReuseData_Tip": "Reutilize os dados de compatibilidade do seu último pacote salvo para este.\nSegure Shift para aplicar e continuar",
+  "PleaseReviewTheStability": "Por favor, reveja a estabilidade deste pacote antes de salvar.",
+  "PleaseReviewPackageStatuses": "Por favor, revise a situação deste pacote antes de salvar.\nAlguns têm um tipo de Estado inválido.",
+  "PleaseReviewPackageInteractions": "Revise as interações deste pacote antes de salvar.\nAlguns possuem um tipo de interação inválida ou não tem um pacote vinculado.",
+  "PleaseReviewPackageUsage": "Por favor, selecione um uso válido para este pacote.",
+  "Interaction_Alternative": {
+    "One": "'{1}' pode ser usado como uma alternativa a '{0}'.",
+    "Plural": "Um dos seguintes pacotes pode ser usado como uma alternativa a '{0}'."
+  },
+  "Interaction_SameFunctionality": {
+    "One": "'{0}' e '{1}' têm as mesmas funcionalidades.",
+    "Plural": "'{0}' e os seguintes pacotes têm as mesmas funcionalidades."
+  },
+  "Interaction_IncompatibleWith": {
+    "One": "'{0}' e '{1}' não são compatíveis um com o outro.",
+    "Plural": "'{0}' não é compatível com qualquer um dos seguintes pacotes."
+  },
+  "Interaction_CausesIssuesWith": {
+    "One": "'{0}' pode causar problemas quando usado com '{1}'.",
+    "Plural": "'{0}' pode causar problemas quando usado com os seguintes mods."
+  },
+  "Interaction_RequiredPackages": {
+    "One": "Está faltando um pacote necessário para '{0}'.",
+    "Plural": "Está faltando os seguintes pacotes obrigatórios para '{0}'."
+  },
+  "Interaction_OptionalPackages": {
+    "One": "Está faltando um pacote opcional para '{0}'.",
+    "Plural": "Está faltando os seguintes pacotes opcionais para '{0}'."
+  },
+  "Interaction_SucceededBy": {
+    "One": "'{1}' é sucessor de '{0}'.",
+    "Plural": "Os seguintes pacotes são sucessores de '{0}'."
+  },
+  "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
+  "Status_Succeeded": "'{0}' foi sucedido por '{1}'.\n\nVocê já está usando '{1}' então não há mais necessidade de ter o '{0}'.",
+  "Status_Deprecated": "'{0}' está obsoleto e não é mais suportado pelo seu autor.",
+  "Status_Reupload": {
+    "Zero": "'{0}' é um re-envio de um pacote original.",
+    "One": "Este é um re-envio de '{1}'."
+  },
+  "Status_CausesIssues": "'{0}' causa problemas com o seu jogo.",
+  "Status_SavesCantLoadWithoutIt": {
+    "Zero": "Ao criar um jogo e salva-lo com '{0}' habilitado, você não será mais capaz de carregar esse jogo salvo se '{0}' estiver desativado.",
+    "One": "Ao criar um jogo salvo com '{0}' habilitado, você não será mais capaz de carregar esse jogo salvo se '{0}' estiver desativado.\n\nUse '{1}' para recuperar seu jogo salvo se necessário. Leia a descrição da Oficina para mais informações."
+  },
+  "Status_TestVersion": {
+    "Zero": "Esta é uma versão 'Teste' do mod original. Esteja ciente que atualizações nele podem causar problemas inesperados.",
+    "One": "Esta é uma versão 'Teste' de '{1}'.\nEsteja ciente que atualizações nele podem causar problemas inesperados."
+  },
+  "Status_MissingDlc": {
+    "One": "Você está sem uma DLC para usar este pacote.",
+    "Plural": "Está faltando as seguintes DLCs para usar este pacote."
+  },
+  "Status_DependencyMod": "Este é um mod de dependência, mas não parece que você esteja usando qualquer pacote que o exija.",
+  "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
+  "Status_MusicCanBeCopyrighted": "A música dentro deste pacote pode ter direitos autorais. É melhor não usá-la durante o streaming.",
+  "Status_IncompleteDescription": "A descrição deste mod é muito pequena. Você não deve usá-lo a menos que confie em seu autor.",
+  "OutputText": "Saída Esperada",
+  "Stability_AssetNotReviewed": "Este recurso ainda não foi analisado ainda.\n\nAs informações de compatibilidade podem não ser precisas; embora os recursos sejam geralmente estáveis",
+  "Stability_NotReviewed": "Este pacote ainda não foi analisado.\nA informação de compatibilidade pode não ser precisa.",
+  "Stability_Stable": "Este pacote é estável.",
+  "Stability_NotEnoughInformation": "Não há informação suficiente para rever adequadamente este pacote.",
+  "Stability_HasIssues": "Este pacote pode causar problemas.\nTenha cuidado ao usá-lo.",
+  "Stability_Broken": "Este pacote está quebrado.\nÉ conhecido por quebrar o jogo ou simplesmente não funcionar.",
+  "Stability_Incompatible": "Este pacote não é compatível com, ou quebra, o jogo.\n\nVocê deve removê-lo imediatamente.",
+  "Stability_Local": "Este pacote é uma versão local do mod original '{0}'.\n\nVersões locais são geralmente usadas para fins de teste ou no caso de você não ter o Steam.\n\nVerifique os links do pacote para procurar por atualizações no mod.",
+  "Action_NoAction": "",
+  "Action_SubscribeToPackages": {
+    "One": "Você deve assinar o seguinte pacote.",
+    "Plural": "Você deveria assinar esses pacotes."
+  },
+  "Action_RequiresConfiguration": "Você deve seguir as seguintes instruções.",
+  "Action_SelectOne": {
+    "One": "Ou '{0}' ou '{1}', escolha apenas um dos dois.",
+    "Plural": "Entre '{0}' e os seguintes pacotes, você deve escolher apenas um."
+  },
+  "Action_UnsubscribeThis": "Você deve cancelar a assinatura de '{0}'.",
+  "Action_UnsubscribeOther": {
+    "One": "Você deve cancelar a assinatura de '{1}'.",
+    "Plural": "Você deve cancelar a assinatura dos seguintes pacotes."
+  },
+  "Action_ExcludeThis": "Você deve excluir '{0}'.",
+  "Action_ExcludeOther": {
+    "One": "Você deve excluir '{1}'.",
+    "Plural": "Você deve excluir os seguintes pacotes."
+  },
+  "Action_Switch": {
+    "One": "Você deve mudar para '{1}'.",
+    "Plural": "Você deve mudar para um dos seguintes pacotes."
+  },
+  "NoRequiredDlcs": "DLC não requerido",
+  "DlcsSelected": {
+    "One": "{0} DLC selecionado",
+    "Plural": "{0} DLCs selecionados"
+  },
+  "RequiredDLCs": "DLCs / CCPs Necessárias",
+  "CRT_Stability": "Estabilidade",
+  "CRT_Successors": "Sucessores",
+  "CRT_RequiredPackages": "Pacotes Necessários",
+  "CRT_OptionalPackages": "Pacotes Opcionais",
+  "CRT_DlcMissing": "DLCs/CCPs ausentes",
+  "CRT_Compatibility": "Problemas de Compatibilidade",
+  "CRT_Alternatives": "Alternativas",
+  "CRT_Status": "Situações",
+  "CRT_Ambiguous": "Ambiguidade",
+  "LastReviewDate": "Foi analisado pela última vez em {0}",
+  "RequestReviewInfo": "Está enfrentando problemas com este pacote?\nSolicite uma nova análise aqui:",
+  "RequestReview": "Solicitar Análise",
+  "MissingDependencyCount": {
+    "One": "{0} {1} que está faltando dependências",
+    "Plural": "{0} {1} que estão faltando dependências"
+  },
+  "CautionCount": "{0} {1} onde é aconselhado cuidado",
+  "WarningCount": "{0} {1} com um aviso",
+  "AttentionRequiredCount": {
+    "One": "{0} {1} que requerem sua atenção",
+    "Plural": "{0} {1} que requerem sua atenção"
+  },
+  "ExcludeCount": "{0} {1} que deve ser excluído",
+  "UnsubscribeCount": "{0} {1} que você deve cancelar a inscrição",
+  "SwitchCount": {
+    "One": "{0} {1} que requer mudança para outro",
+    "Plural": "{0} {1} que requerem mudança para outros"
+  },
+  "PackageType": "Tipos de Pacotes",
+  "GenericPackage": "Pacote Genérico",
+  "MusicPack": "Pacote de Música",
+  "ThemeMix": "Mistura de Tema",
+  "IMTMarkings": "Marcação IMT",
+  "RenderItPreset": "Predefinição Render it!",
+  "POFont": "Fonte/Módulo de Objeto Procedural",
+  "NameList": "Nome-Lista/Traduções do Jogo",
+  "ApplyChangedBeforeExit": "Você tem alterações não salvas.\n\nGostaria de aplicar essas alterações antes de continuar?",
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes."
+}
