@@ -65,7 +65,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	public bool SortDesc { get; private set; }
 	public bool PackagePage { get; set; }
-	public bool TextSearchEmpty { get; set; }
+	public bool TextSearchNotEmpty { get; set; }
 	public bool IsGenericPage { get; set; }
 	public bool IsSelection { get; set; }
 
@@ -154,8 +154,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				.OrderBy(x => SteamUtil.GetScore(x.Item)).ThenBy(x => x.Item.PositiveVotes - (x.Item.NegativeVotes / 10) - x.Item.Reports),
 
 			_ => items
-				.OrderByDescending(x => x.Item.IsIncluded)
-				.ThenByDescending(x => x.Item.Workshop)
+				.OrderBy(x => !x.Item.IsIncluded)
+				.ThenBy(x => !x.Item.Workshop)
+				.ThenBy(x => !x.Item.IsMod)
 				.ThenBy(x => x.Item.ToString())
 		};
 
@@ -604,7 +605,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 			else if (!SafeGetItems().Any())
 			{
-				if (TextSearchEmpty)
+				if (!TextSearchNotEmpty)
 				{
 					e.Graphics.DrawString(Locale.NoPackagesMatchFilters, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(FormDesign.Design.LabelColor), ClientRectangle.Pad(0, 0, 0, Height / 3), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 					return;
@@ -614,33 +615,33 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 				e.Graphics.DrawString(Locale.NoPackagesMatchFilters, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(FormDesign.Design.LabelColor), ClientRectangle.Pad(0, 0, 0, Height / 3), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
-				using var icon = IconManager.GetIcon("I_Link");
+				using var icon1 = IconManager.GetIcon("I_Steam");
+				using var icon2 = IconManager.GetIcon("I_Link");
 
-				var buttonSize1 = SlickButton.GetSize(e.Graphics, icon, Locale.SearchWorkshop, UI.Font(9.75F));
-				var buttonSize2 = SlickButton.GetSize(e.Graphics, icon, Locale.SearchWorkshopBrowser, UI.Font(9.75F));
+				var buttonSize1 = SlickButton.GetSize(e.Graphics, icon1, Locale.SearchWorkshop, UI.Font(9.75F));
+				var buttonSize2 = SlickButton.GetSize(e.Graphics, icon2, Locale.SearchWorkshopBrowser, UI.Font(9.75F));
 				PopupSearchRect1 = ClientRectangle.Pad(0, Height / 3, 0, 0).CenterR(buttonSize1);
 
-				//SlickButton.GetColors(out var fore, out var back, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal);
+				SlickButton.GetColors(out var fore, out var back, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal);
 
-				//if (!PopupSearchRect1.Contains(CursorLocation))
-				//{
-				//	back = Color.Empty;
-				//}
+				if (!PopupSearchRect1.Contains(CursorLocation))
+				{
+					back = Color.Empty;
+				}
 
-				//SlickButton.DrawButton(e, PopupSearchRect1.Location, PopupSearchRect1.Size, Locale.SearchWorkshop, UI.Font(9.75F), back, fore, icon, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
+				SlickButton.DrawButton(e, PopupSearchRect1.Location, PopupSearchRect1.Size, Locale.SearchWorkshop, UI.Font(9.75F), back, fore, icon1, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect1.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
 
 				PopupSearchRect2 = new Rectangle(PopupSearchRect1.X, PopupSearchRect1.Bottom + (Padding.Vertical * 2), buttonSize2.Width, buttonSize2.Height);
 
-				SlickButton.GetColors(out var fore, out var back, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal);
+				SlickButton.GetColors(out fore, out back, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal);
 
 				if (!PopupSearchRect2.Contains(CursorLocation))
 				{
 					back = Color.Empty;
 				}
 
-				SlickButton.DrawButton(e, PopupSearchRect2.Location, PopupSearchRect2.Size, Locale.SearchWorkshopBrowser, UI.Font(9.75F), back, fore, icon, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
+				SlickButton.DrawButton(e, PopupSearchRect2.Location, PopupSearchRect2.Size, Locale.SearchWorkshopBrowser, UI.Font(9.75F), back, fore, icon2, UI.Scale(new Padding(7), UI.UIScale), true, PopupSearchRect2.Contains(CursorLocation) ? HoverState : HoverState.Normal, ColorStyle.Active);
 
-				PopupSearchRect1 = Rectangle.Empty;
 				Cursor = PopupSearchRect1.Contains(CursorLocation) || PopupSearchRect2.Contains(CursorLocation) ? Cursors.Hand : Cursors.Default;
 			}
 			else
@@ -685,7 +686,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (!large)
 		{
-			labelRect.X += DrawScore(e, large, rects, labelRect);
+			if (!e.Item.Incompatible && report.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+				labelRect.X += DrawScore(e, large, rects, labelRect);
 		}
 
 		var isVersion = package?.Mod is not null && !package.BuiltIn;
@@ -728,7 +730,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			labelRect.X = rects.TextRect.X;
 
-			labelRect.X += DrawScore(e, large, rects, labelRect);
+			if (!e.Item.Incompatible && report?.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+				labelRect.X += DrawScore(e, large, rects, labelRect);
 		}
 
 		if (large && !e.Item.Workshop)

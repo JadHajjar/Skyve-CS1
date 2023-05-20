@@ -33,6 +33,7 @@ partial class PC_PackagePage
 	{
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			this.P_Content = new System.Windows.Forms.Panel();
 			this.slickTabControl1 = new SlickControls.SlickTabControl();
@@ -40,6 +41,7 @@ partial class PC_PackagePage
 			this.TLP_Info = new System.Windows.Forms.TableLayoutPanel();
 			this.P_List = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.TLP_About = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
@@ -47,16 +49,17 @@ partial class PC_PackagePage
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.FLP_Links = new SlickControls.SmartFlowPanel();
+			this.FLP_Tags = new SlickControls.SmartFlowPanel();
 			this.T_CR = new SlickControls.SlickTabControl.Tab();
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
+			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
 			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
-			this.label6 = new System.Windows.Forms.Label();
-			this.FLP_Links = new SlickControls.SmartFlowPanel();
-			this.FLP_Tags = new SlickControls.SmartFlowPanel();
+			this.T_References = new SlickControls.SlickTabControl.Tab();
 			this.P_Content.SuspendLayout();
 			this.TLP_Info.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -88,6 +91,7 @@ partial class PC_PackagePage
 			this.slickTabControl1.Tabs = new SlickControls.SlickTabControl.Tab[] {
         this.T_Info,
         this.T_CR,
+        this.T_References,
         this.T_Profiles};
 			// 
 			// T_Info
@@ -102,7 +106,7 @@ partial class PC_PackagePage
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
 			this.T_Info.Selected = true;
-			this.T_Info.Size = new System.Drawing.Size(261, 25);
+			this.T_Info.Size = new System.Drawing.Size(195, 25);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
 			this.T_Info.Text = "ContentAndInfo";
@@ -133,6 +137,7 @@ partial class PC_PackagePage
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.slickSpacer1);
 			this.panel1.Controls.Add(this.slickScroll1);
 			this.panel1.Controls.Add(this.TLP_About);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -141,6 +146,16 @@ partial class PC_PackagePage
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(314, 278);
 			this.panel1.TabIndex = 3;
+			// 
+			// slickSpacer1
+			// 
+			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 0);
+			this.slickSpacer1.Name = "slickSpacer1";
+			this.slickSpacer1.Size = new System.Drawing.Size(1, 278);
+			this.slickSpacer1.TabIndex = 4;
+			this.slickSpacer1.TabStop = false;
+			this.slickSpacer1.Text = "slickSpacer1";
 			// 
 			// slickScroll1
 			// 
@@ -227,6 +242,31 @@ partial class PC_PackagePage
 			this.label5.TabIndex = 1;
 			this.label5.Text = "label1";
 			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(3, 156);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(71, 30);
+			this.label6.TabIndex = 1;
+			this.label6.Text = "label1";
+			// 
+			// FLP_Links
+			// 
+			this.FLP_Links.Dock = System.Windows.Forms.DockStyle.Top;
+			this.FLP_Links.Location = new System.Drawing.Point(3, 153);
+			this.FLP_Links.Name = "FLP_Links";
+			this.FLP_Links.Size = new System.Drawing.Size(200, 0);
+			this.FLP_Links.TabIndex = 2;
+			// 
+			// FLP_Tags
+			// 
+			this.FLP_Tags.Dock = System.Windows.Forms.DockStyle.Top;
+			this.FLP_Tags.Location = new System.Drawing.Point(3, 189);
+			this.FLP_Tags.Name = "FLP_Tags";
+			this.FLP_Tags.Size = new System.Drawing.Size(200, 0);
+			this.FLP_Tags.TabIndex = 2;
+			// 
 			// T_CR
 			// 
 			this.T_CR.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -235,10 +275,10 @@ partial class PC_PackagePage
 			dynamicIcon2.Name = "I_CompatibilityReport";
 			this.T_CR.IconName = dynamicIcon2;
 			this.T_CR.LinkedControl = null;
-			this.T_CR.Location = new System.Drawing.Point(261, 5);
+			this.T_CR.Location = new System.Drawing.Point(195, 5);
 			this.T_CR.Name = "T_CR";
 			this.T_CR.Selected = false;
-			this.T_CR.Size = new System.Drawing.Size(261, 25);
+			this.T_CR.Size = new System.Drawing.Size(195, 25);
 			this.T_CR.TabIndex = 0;
 			this.T_CR.TabStop = false;
 			this.T_CR.Text = "CompatibilityInfo";
@@ -248,13 +288,13 @@ partial class PC_PackagePage
 			this.T_Profiles.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon3.Name = "I_ProfileSettings";
-			this.T_Profiles.IconName = dynamicIcon3;
+			dynamicIcon4.Name = "I_ProfileSettings";
+			this.T_Profiles.IconName = dynamicIcon4;
 			this.T_Profiles.LinkedControl = this.TLP_Profiles;
-			this.T_Profiles.Location = new System.Drawing.Point(522, 5);
+			this.T_Profiles.Location = new System.Drawing.Point(585, 5);
 			this.T_Profiles.Name = "T_Profiles";
 			this.T_Profiles.Selected = false;
-			this.T_Profiles.Size = new System.Drawing.Size(261, 25);
+			this.T_Profiles.Size = new System.Drawing.Size(195, 25);
 			this.T_Profiles.TabIndex = 0;
 			this.T_Profiles.TabStop = false;
 			this.T_Profiles.Text = "OtherProfiles";
@@ -294,6 +334,15 @@ partial class PC_PackagePage
 			this.TLP_Top.Size = new System.Drawing.Size(783, 100);
 			this.TLP_Top.TabIndex = 0;
 			// 
+			// P_Back
+			// 
+			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.P_Back.Location = new System.Drawing.Point(0, 50);
+			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
+			this.P_Back.Name = "P_Back";
+			this.P_Back.Size = new System.Drawing.Size(32, 50);
+			this.P_Back.TabIndex = 2;
+			// 
 			// PB_Icon
 			// 
 			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
@@ -305,15 +354,6 @@ partial class PC_PackagePage
 			this.PB_Icon.TabIndex = 0;
 			this.PB_Icon.TabStop = false;
 			// 
-			// P_Back
-			// 
-			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Back.Location = new System.Drawing.Point(0, 50);
-			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
-			this.P_Back.Name = "P_Back";
-			this.P_Back.Size = new System.Drawing.Size(32, 50);
-			this.P_Back.TabIndex = 2;
-			// 
 			// P_Info
 			// 
 			this.P_Info.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -324,30 +364,21 @@ partial class PC_PackagePage
 			this.P_Info.Size = new System.Drawing.Size(651, 100);
 			this.P_Info.TabIndex = 3;
 			// 
-			// label6
+			// T_References
 			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(3, 156);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(71, 30);
-			this.label6.TabIndex = 1;
-			this.label6.Text = "label1";
-			// 
-			// smartFlowPanel1
-			// 
-			this.FLP_Links.Dock = System.Windows.Forms.DockStyle.Top;
-			this.FLP_Links.Location = new System.Drawing.Point(3, 153);
-			this.FLP_Links.Name = "smartFlowPanel1";
-			this.FLP_Links.Size = new System.Drawing.Size(200, 0);
-			this.FLP_Links.TabIndex = 2;
-			// 
-			// smartFlowPanel2
-			// 
-			this.FLP_Tags.Dock = System.Windows.Forms.DockStyle.Top;
-			this.FLP_Tags.Location = new System.Drawing.Point(3, 189);
-			this.FLP_Tags.Name = "smartFlowPanel2";
-			this.FLP_Tags.Size = new System.Drawing.Size(200, 0);
-			this.FLP_Tags.TabIndex = 2;
+			this.T_References.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.T_References.Dock = System.Windows.Forms.DockStyle.Left;
+			this.T_References.FillTab = true;
+			dynamicIcon3.Name = "I_Share";
+			this.T_References.IconName = dynamicIcon3;
+			this.T_References.LinkedControl = null;
+			this.T_References.Location = new System.Drawing.Point(390, 5);
+			this.T_References.Name = "T_References";
+			this.T_References.Selected = false;
+			this.T_References.Size = new System.Drawing.Size(195, 25);
+			this.T_References.TabIndex = 1;
+			this.T_References.TabStop = false;
+			this.T_References.Text = "References";
 			// 
 			// PC_PackagePage
 			// 
@@ -396,4 +427,6 @@ partial class PC_PackagePage
 	private System.Windows.Forms.Label label6;
 	private SlickControls.SmartFlowPanel FLP_Links;
 	private SlickControls.SmartFlowPanel FLP_Tags;
+	private SlickControls.SlickSpacer slickSpacer1;
+	private SlickControls.SlickTabControl.Tab T_References;
 }

@@ -22,6 +22,8 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 		if (Live)
 		{
 			Items = ProfileManager.Profiles.ToArray();
+
+			selectedItem = Items[0];
 		}
 	}
 

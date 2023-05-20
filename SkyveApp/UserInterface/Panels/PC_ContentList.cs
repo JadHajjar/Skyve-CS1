@@ -130,7 +130,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void LC_Items_OpenWorkshopSearch()
 	{
-		throw new NotImplementedException();
+		Form.PushPanel(null, new PC_SelectPackage(TB_Search.Text, this is PC_Mods ? ThreeOptionToggle.Value.Option1 : this is PC_Assets ? ThreeOptionToggle.Value.Option2 : ThreeOptionToggle.Value.None));
 	}
 
 	private void LC_Items_OpenWorkshopSearchInBrowser()
@@ -649,7 +649,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		searchTermsExclude.Clear();
 		searchTermsOr.Clear();
 
-		LC_Items.TextSearchEmpty = searchEmpty;
+		LC_Items.TextSearchNotEmpty = !searchEmpty;
 
 		if (!searchEmpty)
 		{

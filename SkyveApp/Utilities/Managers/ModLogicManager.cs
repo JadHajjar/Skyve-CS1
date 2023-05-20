@@ -13,8 +13,9 @@ internal class ModLogicManager
 {
 	private const string HARMONY_ASSEMBLY = "CitiesHarmony.dll";
 	private const string PATCH_ASSEMBLY = "PatchLoaderMod.dll";
-	private const string LOM_ASSEMBLY = "SkyveMod.dll";
-	private const string LOM1_ASSEMBLY = "SkyveMod.dll";
+	private const string Skyve_ASSEMBLY = "SkyveMod.dll";
+	private const string LOM2_ASSEMBLY = "LoadOrderModTwo.dll";
+	private const string LOM1_ASSEMBLY = "LoadOrderMod.dll";
 
 	private static readonly ModCollection _modCollection = new(GetGroupInfo());
 
@@ -24,7 +25,8 @@ internal class ModLogicManager
 		{
 			[HARMONY_ASSEMBLY] = new() { Required = true },
 			[PATCH_ASSEMBLY] = new() { Required = true },
-			[LOM_ASSEMBLY] = new() { Required = true },
+			[Skyve_ASSEMBLY] = new() { Required = true },
+			[LOM2_ASSEMBLY] = new() { Required = false },
 			[LOM1_ASSEMBLY] = new() { Required = false },
 		};
 	}
@@ -113,6 +115,60 @@ internal class ModLogicManager
 
 	internal static bool AreMultipleLOMsPresent()
 	{
-		return (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM_ASSEMBLY, out _)?.Count ?? 0) > 1;
+		return (_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.Count ?? 0) > 1;
+	}
+
+	internal static IEnumerable<IPackage> GetPackagesThatReference(IPackage package) 
+	{
+		var packages = CentralManager.SessionSettings.UserSettings.ShowAllReferencedPackages ? CentralManager.Packages.ToList() : CentralManager.Packages.AllWhere(x => x.IsIncluded);
+
+		foreach (var p in packages)
+		{
+			var cr = CompatibilityUtil.GetPackageData(p);
+
+			if (cr is null)
+			{
+				//if (p.RequiredPackages is not null)
+				//{
+				//	foreach (var item in p.RequiredPackages)
+				//	{
+				//		if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
+				//		{
+				//			yield return p;
+
+				//			continue;
+				//		}
+				//	}
+				//}
+
+				continue;
+			}
+
+			if (cr.Interactions.ContainsKey(Domain.Compatibility.InteractionType.RequiredPackages))
+			{
+				foreach (var item in cr.Interactions[Domain.Compatibility.InteractionType.RequiredPackages].SelectMany(x => x.Interaction.Packages))
+				{
+					if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
+					{
+						yield return p;
+
+						continue;
+					}
+				}
+			}
+
+			if (cr.Interactions.ContainsKey(Domain.Compatibility.InteractionType.OptionalPackages))
+			{
+				foreach (var item in cr.Interactions[Domain.Compatibility.InteractionType.OptionalPackages].SelectMany(x => x.Interaction.Packages))
+				{
+					if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
+					{
+						yield return p;
+
+						continue;
+					}
+				}
+			}
+		}
 	}
 }

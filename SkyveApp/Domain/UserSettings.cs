@@ -23,4 +23,6 @@ internal class UserSettings
 	public bool PackageSortingDesc { get; set; }
 	public bool FlipItemCopyFilterAction { get; set; }
     public bool DisablePackageCleanup { get; set; }
+    public bool ShowAllReferencedPackages { get; set; }
+    public bool TreatOptionalAsRequired { get; set; }
 }

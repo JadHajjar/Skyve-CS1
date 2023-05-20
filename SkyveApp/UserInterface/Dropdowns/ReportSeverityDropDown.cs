@@ -14,14 +14,14 @@ using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
 
-public enum CompatibilityNotificationFilter // second hex is the id group of the notification, 0 means no notification | first hex is an id
+public enum CompatibilityNotificationFilter
 {
 	Any = -2,
 	AnyIssue = -1,
 	None,
 	Info,
-	MissingDependency,
 	Caution,
+	MissingDependency,
 	Warning,
 	AttentionRequired,
 	Exclude,

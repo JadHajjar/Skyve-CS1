@@ -60,7 +60,7 @@ internal static class Program
 			catch { }
 
 			var localAppData = GetFolderPath(SpecialFolder.LocalApplicationData);
-			if (Directory.Exists(Path.Combine(localAppData, "Load Order Tool")))
+			if (Directory.Exists(Path.Combine(localAppData, "Load Order Tool")) && !Directory.Exists(Path.Combine(localAppData, ISave.AppName)))
 			{
 				Directory.Move(Path.Combine(localAppData, "Load Order Tool"), Path.Combine(localAppData, ISave.AppName));
 			}

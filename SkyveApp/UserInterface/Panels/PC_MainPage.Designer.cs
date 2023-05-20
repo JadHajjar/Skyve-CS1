@@ -35,15 +35,15 @@ partial class PC_MainPage
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_StartStop = new SlickControls.SlickButton();
-			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
-			this.profileBubble = new SkyveApp.UserInterface.StatusBubbles.ProfileBubble();
-			this.modsBubble = new SkyveApp.UserInterface.StatusBubbles.ModsBubble();
-			this.assetsBubble = new SkyveApp.UserInterface.StatusBubbles.AssetsBubble();
 			this.label1 = new System.Windows.Forms.Label();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.assetsBubble = new SkyveApp.UserInterface.StatusBubbles.AssetsBubble();
+			this.modsBubble = new SkyveApp.UserInterface.StatusBubbles.ModsBubble();
+			this.profileBubble = new SkyveApp.UserInterface.StatusBubbles.ProfileBubble();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.flowLayoutPanel1.SuspendLayout();
 			this.TLP_Profiles.SuspendLayout();
+			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -53,10 +53,10 @@ partial class PC_MainPage
 			// tableLayoutPanel1
 			// 
 			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.B_StartStop, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 30);
@@ -84,21 +84,6 @@ partial class PC_MainPage
 			this.B_StartStop.Text = "Launch Cities: Skylines";
 			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
 			// 
-			// flowLayoutPanel1
-			// 
-			this.flowLayoutPanel1.AutoSize = true;
-			this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
-			this.flowLayoutPanel1.Controls.Add(this.TLP_Profiles);
-			this.flowLayoutPanel1.Controls.Add(this.modsBubble);
-			this.flowLayoutPanel1.Controls.Add(this.assetsBubble);
-			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(778, 123);
-			this.flowLayoutPanel1.TabIndex = 1;
-			// 
 			// TLP_Profiles
 			// 
 			this.TLP_Profiles.AutoSize = true;
@@ -106,52 +91,79 @@ partial class PC_MainPage
 			this.TLP_Profiles.ColumnCount = 1;
 			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Profiles.Controls.Add(this.profileBubble, 0, 0);
+			this.TLP_Profiles.Dock = System.Windows.Forms.DockStyle.Top;
 			this.TLP_Profiles.Location = new System.Drawing.Point(0, 0);
 			this.TLP_Profiles.Margin = new System.Windows.Forms.Padding(0);
 			this.TLP_Profiles.Name = "TLP_Profiles";
 			this.TLP_Profiles.RowCount = 1;
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Profiles.Size = new System.Drawing.Size(212, 123);
+			this.TLP_Profiles.Size = new System.Drawing.Size(257, 153);
 			this.TLP_Profiles.TabIndex = 13;
-			// 
-			// profileBubble
-			// 
-			this.profileBubble.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.profileBubble.Location = new System.Drawing.Point(3, 3);
-			this.profileBubble.Name = "profileBubble";
-			this.profileBubble.Size = new System.Drawing.Size(206, 117);
-			this.profileBubble.TabIndex = 0;
-			this.profileBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ProfileBubble_MouseClick);
-			// 
-			// modsBubble
-			// 
-			this.modsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.modsBubble.Location = new System.Drawing.Point(215, 3);
-			this.modsBubble.Name = "modsBubble";
-			this.modsBubble.Size = new System.Drawing.Size(150, 24);
-			this.modsBubble.TabIndex = 1;
-			this.modsBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsBubble_MouseClick);
-			// 
-			// assetsBubble
-			// 
-			this.assetsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.assetsBubble.Location = new System.Drawing.Point(371, 3);
-			this.assetsBubble.Name = "assetsBubble";
-			this.assetsBubble.Size = new System.Drawing.Size(150, 24);
-			this.assetsBubble.TabIndex = 2;
-			this.assetsBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AssetsBubble_MouseClick);
 			// 
 			// label1
 			// 
 			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 380);
+			this.label1.Location = new System.Drawing.Point(3, 373);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(55, 23);
+			this.label1.Size = new System.Drawing.Size(71, 30);
 			this.label1.TabIndex = 2;
 			this.label1.Text = "label1";
 			this.label1.Visible = false;
+			// 
+			// tableLayoutPanel2
+			// 
+			this.tableLayoutPanel2.AutoSize = true;
+			this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.tableLayoutPanel2.ColumnCount = 3;
+			this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 2);
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel2.Controls.Add(this.assetsBubble, 2, 0);
+			this.tableLayoutPanel2.Controls.Add(this.modsBubble, 1, 0);
+			this.tableLayoutPanel2.Controls.Add(this.TLP_Profiles, 0, 0);
+			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.tableLayoutPanel2.RowCount = 1;
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(772, 153);
+			this.tableLayoutPanel2.TabIndex = 2;
+			// 
+			// assetsBubble
+			// 
+			this.assetsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.assetsBubble.Dock = System.Windows.Forms.DockStyle.Top;
+			this.assetsBubble.Location = new System.Drawing.Point(517, 3);
+			this.assetsBubble.Name = "assetsBubble";
+			this.assetsBubble.Size = new System.Drawing.Size(252, 30);
+			this.assetsBubble.TabIndex = 2;
+			this.assetsBubble.TintColor = null;
+			this.assetsBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.AssetsBubble_MouseClick);
+			// 
+			// modsBubble
+			// 
+			this.modsBubble.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.modsBubble.Dock = System.Windows.Forms.DockStyle.Top;
+			this.modsBubble.Location = new System.Drawing.Point(260, 3);
+			this.modsBubble.Name = "modsBubble";
+			this.modsBubble.Size = new System.Drawing.Size(251, 30);
+			this.modsBubble.TabIndex = 1;
+			this.modsBubble.TintColor = null;
+			this.modsBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsBubble_MouseClick);
+			// 
+			// profileBubble
+			// 
+			this.profileBubble.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.profileBubble.Dock = System.Windows.Forms.DockStyle.Top;
+			this.profileBubble.Location = new System.Drawing.Point(3, 3);
+			this.profileBubble.Name = "profileBubble";
+			this.profileBubble.Size = new System.Drawing.Size(251, 147);
+			this.profileBubble.TabIndex = 0;
+			this.profileBubble.TintColor = null;
+			this.profileBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ProfileBubble_MouseClick);
 			// 
 			// PC_MainPage
 			// 
@@ -165,9 +177,9 @@ partial class PC_MainPage
 			this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			this.flowLayoutPanel1.ResumeLayout(false);
-			this.flowLayoutPanel1.PerformLayout();
 			this.TLP_Profiles.ResumeLayout(false);
+			this.tableLayoutPanel2.ResumeLayout(false);
+			this.tableLayoutPanel2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -178,9 +190,9 @@ partial class PC_MainPage
 	internal SlickControls.SlickButton B_StartStop;
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	private UserInterface.StatusBubbles.ProfileBubble profileBubble;
-	private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 	private UserInterface.StatusBubbles.ModsBubble modsBubble;
 	private UserInterface.StatusBubbles.AssetsBubble assetsBubble;
 	private System.Windows.Forms.Label label1;
 	private System.Windows.Forms.TableLayoutPanel TLP_Profiles;
+	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 }

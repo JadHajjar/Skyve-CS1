@@ -116,7 +116,7 @@ internal static class LocationManager
 			$"SteamPath: {SteamPath}\r\n" +
 			$"WorkshopContentPath: {WorkshopContentPath}");
 
-		if (Directory.Exists(Combine(AppDataPath, "LoadOrderTwo")))
+		if (Directory.Exists(Combine(AppDataPath, "LoadOrderTwo")) && !Directory.Exists(SkyveAppDataPath))
 		{
 			Directory.Move(Path.Combine(AppDataPath, "LoadOrderTwo"), SkyveAppDataPath);
 		}

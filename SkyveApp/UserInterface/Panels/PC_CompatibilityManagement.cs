@@ -120,10 +120,26 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	public override bool CanExit(bool toBeDisposed)
 	{
-		return !toBeDisposed
+		var canExit = !toBeDisposed
 			|| currentPage <= 0
 			|| currentPage >= _packages.Count - 1
 			|| ShowPrompt(LocaleCR.ConfirmEndSession, PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
+
+		if (toBeDisposed && canExit)
+		{
+			RefreshData();
+		}
+
+		return canExit;
+	}
+
+	private async void RefreshData()
+	{
+		await Task.Run(() =>
+		{
+			CompatibilityManager.DownloadData();
+			CompatibilityManager.CacheReport();
+		});
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -147,7 +163,10 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		CB_ShowUpToDate.Checked = false;
 		if (PackageList.Count == 0)
+		{
 			CB_ShowUpToDate.Checked = true;
+		}
+
 		SetPackage(0);
 		PB_Loading.Dispose();
 	}
@@ -374,7 +393,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private void B_AddStatus_Click(object sender, EventArgs e)
 	{
 		var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage);
-		
+
 		control.ValuesChanged += ControlValueChanged;
 
 		FLP_Statuses.Controls.Add(control);
@@ -439,7 +458,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		postPackage.Statuses = FLP_Statuses.Controls.OfType<IPackageStatusControl<StatusType, PackageStatus>>().ToList(x => x.PackageStatus);
 		postPackage.Interactions = FLP_Interactions.Controls.OfType<IPackageStatusControl<InteractionType, PackageInteraction>>().ToList(x => x.PackageStatus);
 
-		if (postPackage.Stability == PackageStability.NotReviewed)
+		if (!CRNAttribute.GetAttribute(postPackage.Stability).Browsable)
 		{
 			ShowPrompt(LocaleCR.PleaseReviewTheStability, PromptButtons.OK, PromptIcons.Hand);
 			return false;
@@ -471,12 +490,6 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		lastPackageData = postPackage;
 		B_ReuseData.Visible = true;
-
-		await Task.Run(() =>
-		{
-			CompatibilityManager.DownloadData();
-			CompatibilityManager.CacheReport();
-		});
 
 		valuesChanged = false;
 
@@ -514,7 +527,15 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void packageCrList1_ItemMouseClick(object sender, MouseEventArgs e)
 	{
-		SetPackage(PackageList.IndexOf((ulong)sender));
+		if (e.Button == MouseButtons.Left)
+		{
+			SetPackage(PackageList.IndexOf((ulong)sender));
+		}
+
+		if (e.Button == MouseButtons.Right)
+		{
+			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), PC_PackagePage.GetRightClickMenuItems(SteamUtil.GetItem((ulong)sender)!));
+		}
 	}
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)

@@ -163,7 +163,7 @@ internal static class CompatibilityUtil
 		return false;
 	}
 
-	private static ulong GetFinalSuccessor(ulong steamId)
+	internal static ulong GetFinalSuccessor(ulong steamId)
 	{
 		if (!CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package))
 		{
@@ -391,6 +391,8 @@ internal static class CompatibilityUtil
 
 			NotificationType.Exclude or
 			NotificationType.Unsubscribe => FormDesign.Design.RedColor,
+
+			NotificationType.Switch => FormDesign.Design.RedColor.Tint(FormDesign.Design.RedColor.GetHue() - 10),
 
 			_ => FormDesign.Design.GreenColor
 		};

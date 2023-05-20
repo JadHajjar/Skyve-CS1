@@ -31,7 +31,9 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 	{
 		get
 		{
-			var type = CRNAttribute.GetNotification(Type);
+			var type = Type is InteractionType.OptionalPackages && SkyveApp.Utilities.Managers.CentralManager.SessionSettings.UserSettings.TreatOptionalAsRequired
+				? NotificationType.MissingDependency
+				: CRNAttribute.GetNotification(Type);
 			var action = CRNAttribute.GetNotification(Action);
 
 			return type > action ? type : action;

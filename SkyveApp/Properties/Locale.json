@@ -456,5 +456,9 @@
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
   "SendReview": "Send the request for review",
-  "EditTags": "Edit Tags"
+  "EditTags": "Edit Tags",
+  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
+  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
+  "TreatOptionalAsRequired": "Treat optional packages as required",
+  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
 }

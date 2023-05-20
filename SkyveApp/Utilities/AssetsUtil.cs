@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using SkyveApp.Domain.Interfaces;
 
 namespace SkyveApp.Utilities;
 internal class AssetsUtil
@@ -112,24 +113,24 @@ internal class AssetsUtil
 		assetIndex = CentralManager.Assets.ToDictionary(x => x.FileName.FormatPath(), StringComparer.OrdinalIgnoreCase);
 	}
 
-	internal static Bitmap? GetIcon(Asset asset)
-	{
-		//var fileName = LocationManager.Combine(LocationManager.LotAppDataPath, "AssetPictures");
+	//internal static Bitmap? GetIcon(Asset asset)
+	//{
+	//	//var fileName = LocationManager.Combine(LocationManager.LotAppDataPath, "AssetPictures");
 
-		//if (asset.SteamId > 0)
-		//{
-		//	fileName = LocationManager.Combine(fileName, asset.SteamId.ToString());
-		//}
+	//	//if (asset.SteamId > 0)
+	//	//{
+	//	//	fileName = LocationManager.Combine(fileName, asset.SteamId.ToString());
+	//	//}
 
-		//fileName = LocationManager.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
+	//	//fileName = LocationManager.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
 
-		//if (File.Exists(fileName))
-		//{
-		//	return (Bitmap)Image.FromFile(fileName);
-		//}
+	//	//if (File.Exists(fileName))
+	//	//{
+	//	//	return (Bitmap)Image.FromFile(fileName);
+	//	//}
 
-		return null;
-	}
+	//	return null;
+	//}
 
 	internal static void SetAvailableDlcs(IEnumerable<uint> dlcs)
 	{
@@ -180,13 +181,15 @@ internal class AssetsUtil
 		}
 	}
 
-	internal static IEnumerable<string> GetFindItTags(Asset asset)
+	internal static IEnumerable<string> GetFindItTags(IPackage package)
 	{
-		var assetName = (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_');
+		var key = package is Asset asset
+			? (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_')
+			: package.Folder;
 
 		foreach (var item in _findItTags.assetTags)
 		{
-			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(assetName, StringComparison.CurrentCultureIgnoreCase))
+			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(key.RemoveDoubleSpaces().Replace(' ', '_'), StringComparison.CurrentCultureIgnoreCase))
 			{
 				return item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 			}
@@ -195,20 +198,22 @@ internal class AssetsUtil
 		return new string[0];
 	}
 
-	internal static void AddFindItTag(Asset asset, string tag)
+	internal static void SetFindItTag(IPackage package, string tag)
 	{
 		var newTags = new CustomTagsLibrary();
 
 		newTags.Deserialize();
 
-		var assetName = (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_');
 		var found = false;
+		var key = package is Asset asset 
+			? (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName)
+			: package.Folder;
 
 		foreach (var item in newTags.assetTags)
 		{
-			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(assetName, StringComparison.CurrentCultureIgnoreCase))
+			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(key.RemoveDoubleSpaces().Replace(' ', '_'), StringComparison.CurrentCultureIgnoreCase))
 			{
-				newTags.assetTags[item.Key] = item.Value + " " + tag.Trim();
+				newTags.assetTags[item.Key] = tag.Trim();
 
 				found = true;
 				break;
@@ -217,9 +222,7 @@ internal class AssetsUtil
 
 		if (!found)
 		{
-			assetName = (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName);
-
-			newTags.assetTags[assetName] = tag.Trim();
+			newTags.assetTags[key] = tag.Trim();
 		}
 
 		newTags.Serialize();

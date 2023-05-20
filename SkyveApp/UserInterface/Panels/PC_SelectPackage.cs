@@ -62,6 +62,14 @@ public partial class PC_SelectPackage : PanelContent
 		_delayedSearch.Run(_ticketBooth.GetTicket());
 	}
 
+	public PC_SelectPackage(string search, Generic.ThreeOptionToggle.Value value) : this()
+	{
+		TB_Search.Text = search;
+		LC_Items.IsSelection = false;
+		OT_ModAsset.SelectedValue = value;
+		L_Selected.Visible = false;
+	}
+
 	private void LC_Items_PackageSelected(SteamWorkshopItem obj)
 	{
 		if (ModifierKeys.HasFlag(Keys.Control))
@@ -175,7 +183,7 @@ public partial class PC_SelectPackage : PanelContent
 		searchTermsExclude.Clear();
 		searchTermsOr.Clear();
 
-		LC_Items.TextSearchEmpty = searchEmpty;
+		LC_Items.TextSearchNotEmpty = !searchEmpty;
 
 		if (!searchEmpty)
 		{

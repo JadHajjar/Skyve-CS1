@@ -235,12 +235,12 @@ public static class CompatibilityManager
 
 		if (packageData.Package.Type is PackageType.GenericPackage)
 		{
-			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && !info.Links.Any(x => x.Type is LinkType.Github))
+			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && !info.Links.Any(x => x.Type is LinkType.Github))
 			{
 				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.UnsubscribeThis });
 			}
 
-			if (package.IsMod && package.SteamDescription is not null && package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3)
+			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && package.SteamDescription is not null && package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3)
 			{
 				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
 			}
@@ -304,7 +304,7 @@ public static class CompatibilityManager
 		}
 		else if (package.IsMod && author.Retired)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.HasIssues, null, false), LocaleCR.Get($"AuthorRetired").Format(package.CleanName(), (package.Author?.Name).IfEmpty(author.Name)), new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), LocaleCR.Get($"AuthorRetired").Format(package.CleanName(), (package.Author?.Name).IfEmpty(author.Name)), new PseudoPackage[0]);
 		}
 
 		if (!package.Workshop)

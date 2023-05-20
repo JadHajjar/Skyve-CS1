@@ -571,7 +571,9 @@ public static class ProfileManager
 			_watcher.Created += new FileSystemEventHandler(FileChanged);
 			_watcher.Deleted += new FileSystemEventHandler(FileChanged);
 
-			_watcher.EnableRaisingEvents = true;
+			try
+			{ _watcher.EnableRaisingEvents = true; }
+			catch (Exception ex) { Log.Exception(ex, $"Failed to start profile watcher ({LocationManager.SkyveProfilesAppDataPath})"); }
 		}
 	}
 

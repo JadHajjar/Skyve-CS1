@@ -70,6 +70,13 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 					yield return new TagItem(TagSource.Global, item);
 				}
 			}
+
+			var findItTags =AssetsUtil.GetFindItTags(this);
+
+			foreach (var item in findItTags)
+			{
+				yield return new TagItem(TagSource.FindIt, item);
+			}
 		}
 	}
 

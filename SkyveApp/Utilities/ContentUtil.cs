@@ -328,7 +328,7 @@ internal class ContentUtil
 	{
 		try
 		{
-			ExtensionClass.CreateShortcut(LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "LOT 2.lnk"), Program.ExecutablePath);
+			ExtensionClass.CreateShortcut(LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Skyve CS-I.lnk"), Program.ExecutablePath);
 		}
 		catch (Exception ex)
 		{

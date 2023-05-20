@@ -53,7 +53,7 @@ public partial class PC_MainPage : PanelContent
 			foreach (var item in ProfileManager.Profiles.Where(x => x.IsFavorite))
 			{
 				TLP_Profiles.RowStyles.Add(new());
-				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item), 0, TLP_Profiles.RowStyles.Count - 1);
+				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);
 			}
 		});
 	}

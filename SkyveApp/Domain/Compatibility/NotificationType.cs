@@ -5,8 +5,8 @@ public enum NotificationType
 	None,
 	Info,
 
-	MissingDependency,
 	Caution,
+	MissingDependency,
 	Warning,
 
 	AttentionRequired,

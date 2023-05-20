@@ -78,7 +78,7 @@ internal class TagControl : SlickImageControl
 		}
 		else
 		{
-			using var img = (HoverState.HasFlag(HoverState.Hovered) ? (Display ? "I_Copy" : "I_Disposable") : TagInfo.Icon).Default;
+			using var img = (HoverState.HasFlag(HoverState.Hovered) ? (Display && TagInfo.Source is not Domain.Enums.TagSource.FindIt ? "I_Copy" : "I_Disposable") : TagInfo.Icon).Default;
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
 
 			e.Graphics.DrawString(TagInfo.Value, Font, foreBrush, ClientRectangle.Pad(Padding.Horizontal + img.Width, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });

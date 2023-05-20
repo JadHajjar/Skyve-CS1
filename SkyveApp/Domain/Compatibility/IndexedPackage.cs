@@ -152,7 +152,7 @@ public class IndexedPackage
 			{
 				item.Interactions[InteractionType.SucceededBy][0].Packages.Remove(Package.SteamId);
 
-				foreach (var package in Interactions[InteractionType.SucceededBy][0].Packages)
+				foreach (var package in Interactions[InteractionType.SucceededBy][0].Packages.ToList())
 				{
 					item.Interactions[InteractionType.SucceededBy][0].Packages[package.Key] = package.Value;
 				}

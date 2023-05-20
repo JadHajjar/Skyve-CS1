@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
+using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
@@ -19,6 +20,7 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
 	private readonly ItemListControl<IPackage>? LC_Items;
+	private readonly ItemListControl<IPackage>? LC_References;
 	private TagControl? addTagControl;
 
 	public IPackage Package { get; }
@@ -36,6 +38,7 @@ public partial class PC_PackagePage : PanelContent
 
 		T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
 
+		var tabs = slickTabControl1.Tabs.ToList();
 		var crAvailable = Package.GetCompatibilityInfo().Data is not null;
 
 		if (!crAvailable)
@@ -59,7 +62,7 @@ public partial class PC_PackagePage : PanelContent
 		}
 		else
 		{
-			slickTabControl1.Tabs = new[] { T_CR, T_Profiles };
+			tabs.Remove(T_Info);
 			T_CR.Selected = true;
 		}
 
@@ -70,18 +73,27 @@ public partial class PC_PackagePage : PanelContent
 				FLP_Links.Controls.Add(new LinkControl { Link = item, Display = true });
 			}
 
-			foreach (var item in Package.Tags)
-			{
-				var control = new TagControl { TagInfo = item, Display = true };
-				control.MouseClick += TagControl_Click;
-				FLP_Tags.Controls.Add(control);
-			}
-
-			addTagControl = new TagControl { ImageName = "I_Add" };
-			addTagControl.MouseClick += AddTagControl_MouseClick;
-			FLP_Tags.Controls.Add(addTagControl);
-
 			label5.Visible = FLP_Links.Visible = FLP_Links.Controls.Count > 0;
+
+			AddTags();
+		}
+
+		var references = ModLogicManager.GetPackagesThatReference(package).ToList();
+
+		if (references.Count > 0)
+		{
+			LC_References = new ItemListControl<IPackage>
+			{
+				Dock = DockStyle.Fill
+			};
+
+			LC_References.AddRange(references);
+
+			T_References.LinkedControl = LC_References;
+		}
+		else
+		{
+			tabs.Remove(T_References);
 		}
 
 		//if (!string.IsNullOrWhiteSpace(package.SteamDescription))
@@ -99,34 +111,49 @@ public partial class PC_PackagePage : PanelContent
 		T_Profiles.FillTab = true;
 		T_Profiles.LinkedControl = pc;
 
+		slickTabControl1.Tabs = tabs.ToArray();
+
 		CentralManager.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
 
 	private void AddTagControl_MouseClick(object sender, MouseEventArgs e)
 	{
-		var prompt = ShowInputPrompt(LocaleCR.AddGlobalTag);
+		var frm = EditTags(Package);
 
-		if (prompt.DialogResult != DialogResult.OK)
+		frm.FormClosed += (_, _) =>
 		{
-			return;
+			if (frm.DialogResult == DialogResult.OK)
+			{
+				AddTags();
+			}
+		};
+	}
+
+	private void AddTags()
+	{
+		FLP_Tags.Controls.Clear(true);
+
+		foreach (var item in Package.Tags)
+		{
+			var control = new TagControl { TagInfo = item, Display = true };
+			control.MouseClick += TagControl_Click;
+			FLP_Tags.Controls.Add(control);
 		}
 
-		if (string.IsNullOrWhiteSpace(prompt.Input) || FLP_Tags.Controls.Any(x => x.Text.Equals(prompt.Input, StringComparison.CurrentCultureIgnoreCase)))
-		{
-			return;
-		}
-
-		var control = new TagControl { TagInfo = new(Domain.Enums.TagSource.FindIt, prompt.Input) };
-		control.Click += TagControl_Click;
-		FLP_Tags.Controls.Add(control);
-		addTagControl?.SendToBack();
+		addTagControl = new TagControl { ImageName = "I_Add" };
+		addTagControl.MouseClick += AddTagControl_MouseClick;
+		FLP_Tags.Controls.Add(addTagControl);
 	}
 
 	private void TagControl_Click(object sender, EventArgs e)
 	{
-		var tag = (sender as TagControl)!.TagInfo;
+		if ((sender as TagControl)!.TagInfo.Source != Domain.Enums.TagSource.FindIt)
+			return;
 
 		(sender as TagControl)!.Dispose();
+
+		AssetsUtil.SetFindItTag(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Source == Domain.Enums.TagSource.FindIt ? x.TagInfo.Value?.Replace(' ', '-') : null).WhereNotEmpty().ListStrings(" "));
+		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}
 
 	private void CentralManager_PackageInformationUpdated()
@@ -142,7 +169,7 @@ public partial class PC_PackagePage : PanelContent
 		if (cr is null) return;
 
 		label1.Text = LocaleCR.Usage;
-		label2.Text = (int)cr.Usage == -1 ? Locale.AnyUsage : cr.Usage.GetValues().ListStrings(x => LocaleCR.Get(x.ToString()), ", ");
+		label2.Text = cr.Usage.GetValues().If(x => x.Count() == Enum.GetValues(typeof(Domain.Compatibility.PackageUsage)).Length, x => Locale.AnyUsage.One, x => x.ListStrings(x => LocaleCR.Get(x.ToString()), ", "));
 		label3.Text = LocaleCR.PackageType;
 		label4.Text = cr.Type == Domain.Compatibility.PackageType.GenericPackage ? (Package.IsMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
 		label5.Text = LocaleCR.Links;
@@ -193,7 +220,7 @@ public partial class PC_PackagePage : PanelContent
 			, new (string.Empty)
 			, new (Locale.EditCompatibility, "I_CompatibilityReport", CompatibilityManager.User.Manager || item.Author?.SteamId == CompatibilityManager.User.SteamId , action: ()=>{ Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(new[]{item.SteamId}));})
 			, new (string.Empty)
-			, new (Locale.EditTags, "I_Tag", isInstalled, action: () => { Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(new[]{item.SteamId}));})
+			, new (Locale.EditTags, "I_Tag", isInstalled, action: () => EditTags(item))
 			, new (Locale.OtherProfiles, "I_ProfileSettings", fade: true)
 			, new (Locale.IncludeThisItemInAllProfiles, "I_Ok", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; })
 			, new (Locale.ExcludeThisItemInAllProfiles, "I_Cancel", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; })
@@ -207,6 +234,15 @@ public partial class PC_PackagePage : PanelContent
 			, new (Locale.CopyAuthorId, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()))
 			, new (Locale.CopyAuthorSteamId, null, item.Workshop, tab: 1,  action: () => Clipboard.SetText(item.Author?.SteamId.ToString()))
 		};
+	}
+
+	private static EditTagsForm EditTags<T>(T item) where T : IPackage
+	{
+		var frm = new EditTagsForm(item);
+
+		frm.Show(Program.MainForm);
+
+		return frm;
 	}
 
 	private static void AskThenDelete<T>(T item) where T : IPackage
