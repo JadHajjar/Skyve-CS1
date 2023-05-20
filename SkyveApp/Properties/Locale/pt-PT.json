@@ -455,6 +455,7 @@
   "ExplainIssue": "Describe your issue here",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "ReviewRequestFailed": "Falha ao enviar a sua solicitação de análise para '{0}'.\n\n{1}",
   "SendReview": "Send the request for review",
   "EditTags": "Edit Tags",
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
