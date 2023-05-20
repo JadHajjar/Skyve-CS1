@@ -198,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "When you subscribe or add an asset, the tool will automatically exclude or include it based on this setting when the tool is launched.",
   "FilterOutPackagesWithOneAsset_Tip": "Packages that only have a single asset in them will not show on the Packages page. They will still show on the Assets page.",
   "FilterOutPackagesWithMods_Tip": "Packages that include a mod will not show on the Packages page. They will still show on the Mods page.",
-  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the app is open.",
   "HidePseudoMods_Tip": "Theme mixes generate a mod file in order to be shared on the workshop. Enabling this option will hide those from your mods list and have them always included.",
   "AdvancedIncludeEnable_Tip": "Enabling this option will let you change both included & enabled states of mods, similar to the original Load Order Tool.",
   "AdvancedLaunchOptions_Tip": "Displays extra launch options used by developers in the profile's settings.",
@@ -453,7 +453,7 @@
   "AnyIssue": "Any Issue",
   "AnyUsage": "Any Usage",
   "ExplainIssue": "Describe your issue here",
-  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ExplainIssueInfo": "Include as much information as you can about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
   "SendReview": "Send the request for review"
 }
