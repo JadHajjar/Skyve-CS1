@@ -14,7 +14,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace SkyveApp.UserInterface.CompatibilityReport;
 
@@ -46,19 +45,17 @@ internal class CompatibilityMessageControl : SlickControl
 	{
 		try
 		{
-			e.Graphics.Clear(BackColor);
-
-			e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-			e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+			e.Graphics.SetUp(BackColor);
 
 			using var icon = Message.Status.Notification.GetIcon(false).Large;
 			var actionHovered = false;
 			var cursor = PointToClient(Cursor.Position);
 			var pad = (int)(6 * UI.FontScale);
+			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
 			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
-			var noteSize = e.Graphics.Measure(Message.Status.Note, UI.Font(8.25F), Width - iconRect.Width - pad);
+			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - iconRect.Width - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
 
@@ -71,7 +68,10 @@ internal class CompatibilityMessageControl : SlickControl
 
 			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
-			e.Graphics.DrawString(Message.Status.Note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, (int)messageSize.Height + pad, 0, 0));
+			if (note is not null)
+			{
+				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 :((int)messageSize.Height + pad), 0, 0));
+			}
 
 			if (allText is not null)
 			{
@@ -84,7 +84,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 				actionHovered |= allButtonRect.Contains(cursor);
 
-				y += allButtonRect.Height + pad * 2;
+				y += allButtonRect.Height + (pad * 2);
 			}
 
 			if (Message.Packages.Length > 0)
@@ -330,7 +330,7 @@ internal class CompatibilityMessageControl : SlickControl
 					await CitiesManager.UnSubscribe(new[] { PackageCompatibilityReportControl.Package.SteamId });
 					break;
 				case StatusAction.UnsubscribeOther:
-					await CitiesManager.UnSubscribe(Message.Packages.Select(x=>x.SteamId));
+					await CitiesManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
 					break;
 				case StatusAction.ExcludeThis:
 					PackageCompatibilityReportControl.Package.IsIncluded = false;
@@ -338,8 +338,10 @@ internal class CompatibilityMessageControl : SlickControl
 				case StatusAction.ExcludeOther:
 					foreach (var item in Message.Packages)
 					{
-						if(item.Package is not null)
-						item.Package.IsIncluded = false;
+						if (item.Package is not null)
+						{
+							item.Package.IsIncluded = false;
+						}
 					}
 					break;
 				case StatusAction.RequestReview:

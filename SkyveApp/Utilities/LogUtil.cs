@@ -47,29 +47,32 @@ public static class LogUtil
 		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_hh-mm-tt}.zip");
 
 		using (var fileStream = File.Create(file))
-		using (var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create, true))
-		{
-			AddMainFilesToZip(zipArchive);
-
-			foreach (var filePath in GetFilesForZip())
-			{
-				if (LocationManager.FileExists(filePath))
-				{
-					zipArchive.CreateEntryFromFile(filePath, $"Other Files\\{Path.GetFileName(filePath)}");
-				}
-			}
-		}
+			CreateZipToStream(fileStream);
 
 		PlatformUtil.SetFileInClipboard(file);
 
 		return file;
 	}
 
+	public static void CreateZipToStream(Stream fileStream)
+	{
+		using var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create, true);
+
+		AddMainFilesToZip(zipArchive);
+
+		foreach (var filePath in GetFilesForZip())
+		{
+			if (LocationManager.FileExists(filePath))
+			{
+				zipArchive.CreateEntryFromFile(filePath, $"Other Files\\{Path.GetFileName(filePath)}");
+			}
+		}
+	}
+
 	private static IEnumerable<string> GetFilesForZip()
 	{
 		yield return GetLastCrashLog();
 		yield return GetLastLSMReport();
-		yield return LocationManager.Combine(GameDataPath, "CompatibilityReport.html");
 
 		foreach (var item in new DirectoryInfo(LocationManager.Combine(GameDataPath, "Logs")).GetFiles("*.log"))
 		{
@@ -120,13 +123,8 @@ public static class LogUtil
 	{
 		var profileEntry = zipArchive.CreateEntry("Tool\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
-		var packages = CentralManager.Packages.Where(x => x.Workshop && x.IsIncluded).ToList();
-		var reports = packages
-			.Select(x => CompatibilityManager.GetCompatibilityInfo(x))
-			.Where(x => x != null)
-			.GroupBy(x => x.Notification)
-			.OrderByDescending(x => x.Key)
-			.ToDictionary(x => x.Key.ToString(), x => x.ToList());
+		var packages = CentralManager.Packages.AllWhere(x => x.IsIncluded);
+		var reports = packages.ToList(x => CompatibilityManager.GetCompatibilityInfo(x));
 
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
 	}

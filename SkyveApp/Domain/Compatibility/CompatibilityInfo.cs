@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using Newtonsoft.Json;
+
 using SkyveApp.Domain.Interfaces;
 
 using System;
@@ -10,8 +12,8 @@ using System.Windows.Forms;
 namespace SkyveApp.Domain.Compatibility;
 public class CompatibilityInfo
 {
-	public IPackage Package { get; }
-	public IndexedPackage? Data { get; }
+	[JsonIgnore] public IPackage Package { get; }
+	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<PackageLink> Links { get; }
 	public List<ReportItem> ReportItems { get; }
 	public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => x.Status.Notification) : NotificationType.None;

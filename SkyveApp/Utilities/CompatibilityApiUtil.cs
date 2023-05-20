@@ -90,4 +90,19 @@ internal class CompatibilityApiUtil
 	{
 		return await Get<Dictionary<string, string>>("/Translations");
 	}
+
+	internal static async Task<ApiResponse> SendReviewRequest(ReviewRequest request)
+	{
+		return await Post<ReviewRequest, ApiResponse>("/RequestReview", request);
+	}
+
+	internal static async Task<ApiResponse> ProcessReviewRequest(ReviewRequest request)
+	{
+		return await Post<ReviewRequest, ApiResponse>("/ProcessReviewRequest", request);
+	}
+
+	internal static async Task<ReviewRequest[]?> GetReviewRequests()
+	{
+		return await Get<ReviewRequest[]>("/GetReviewRequests");
+	}
 }

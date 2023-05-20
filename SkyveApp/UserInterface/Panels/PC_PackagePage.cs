@@ -140,9 +140,12 @@ public partial class PC_PackagePage : PanelContent
 			FLP_Tags.Controls.Add(control);
 		}
 
-		addTagControl = new TagControl { ImageName = "I_Add" };
-		addTagControl.MouseClick += AddTagControl_MouseClick;
-		FLP_Tags.Controls.Add(addTagControl);
+		if (Package.Package is not null)
+		{
+			addTagControl = new TagControl { ImageName = "I_Add" };
+			addTagControl.MouseClick += AddTagControl_MouseClick;
+			FLP_Tags.Controls.Add(addTagControl);
+		}
 	}
 
 	private void TagControl_Click(object sender, EventArgs e)
