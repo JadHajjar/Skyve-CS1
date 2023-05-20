@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
 using LoadOrderToolTwo.Domain.Compatibility;
-using LoadOrderToolTwo.UserInterface.Bubbles;
+using LoadOrderToolTwo.UserInterface.CompatibilityReport;
 using LoadOrderToolTwo.UserInterface.Lists;
 using LoadOrderToolTwo.Utilities;
 using LoadOrderToolTwo.Utilities.Managers;

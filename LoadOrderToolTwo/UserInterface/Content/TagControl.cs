@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain;
+
 using SlickControls;
 
 using System;
@@ -9,6 +11,9 @@ using System.Windows.Forms;
 namespace LoadOrderToolTwo.UserInterface.Content;
 internal class TagControl : SlickImageControl
 {
+	public TagItem TagInfo { get; set; }
+	public bool Display { get; set; }
+
 	public TagControl()
 	{
 	}
@@ -31,16 +36,27 @@ internal class TagControl : SlickImageControl
 		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 	}
 
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		base.OnMouseClick(e);
+
+		if (Display && e.Button == MouseButtons.Left)
+		{
+			Clipboard.SetText(TagInfo.Value);
+		}
+	}
+
 	public override Size GetPreferredSize(Size proposedSize)
 	{
-		if (ImageName is null)
+		if (Live && ImageName is not null)
 		{
-			return Size.Ceiling(FontMeasuring.Measure(Text, Font)) + new Size(Padding.Horizontal, Padding.Vertical);
+			using var img = Image;
+			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + (img.Width * 2), Padding.Vertical);
 		}
 
-		using (var img = Image)
+		using (var img = TagInfo.Icon.Default)
 		{
-			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + img.Width * 2, Padding.Vertical);
+			return Size.Ceiling(FontMeasuring.Measure(TagInfo.Value, Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
 		}
 	}
 
@@ -48,33 +64,26 @@ internal class TagControl : SlickImageControl
 	{
 		e.Graphics.SetUp(BackColor);
 
-		SlickButton.GetColors(out var fore, out var back, HoverState, ImageName is null ? ColorStyle.Red : ColorStyle.Active);
+		SlickButton.GetColors(out var fore, out var back, HoverState, !Display && ImageName is null ? ColorStyle.Red : ColorStyle.Active);
 
 		using var brush = new SolidBrush(back);
 		using var foreBrush = new SolidBrush(fore);
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), Padding.Left);
 
-		if (ImageName is null)
+		if (Live && ImageName is not null)
 		{
-			if (HoverState.HasFlag(HoverState.Hovered))
-			{
-				using var delete = IconManager.GetIcon("I_Disposable");
-				e.Graphics.DrawImage(delete.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(delete.Size));
-			}
-			else
-			{
-				e.Graphics.DrawString(Text, Font, foreBrush, ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-			}
+			using var img = Image;
+			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(img.Size));
 		}
-		else if (Live)
+		else
 		{
-			using (var img = Image)
-			{
-				e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(img.Size));
-			}
+			using var img = (HoverState.HasFlag(HoverState.Hovered) ? (Display ? "I_Copy" : "I_Disposable") : TagInfo.Icon).Default;
+			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
+
+			e.Graphics.DrawString(TagInfo.Value, Font, foreBrush, ClientRectangle.Pad(Padding.Horizontal + img.Width, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 		}
 
-		DrawFocus(e.Graphics, ClientRectangle.Pad(1), Padding.Left, ImageName is null ? FormDesign.Design.RedColor : null);
+		DrawFocus(e.Graphics, ClientRectangle.Pad(1), Padding.Left, !Display && ImageName is null ? FormDesign.Design.RedColor : null);
 	}
 }

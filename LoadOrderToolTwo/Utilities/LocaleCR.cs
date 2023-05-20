@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using LoadOrderToolTwo.Domain.Compatibility;
+
 using System;
 using System.Windows.Forms;
 
@@ -90,4 +92,7 @@ internal class LocaleCR : LocaleHelper
 	public static Translation ApplyChangedBeforeExit => _instance.GetText(nameof(ApplyChangedBeforeExit));
 	public static Translation Broken => _instance.GetText(nameof(Broken));
 	public static Translation Incompatible => _instance.GetText(nameof(Incompatible));
+	public static Translation Usage => _instance.GetText(nameof(Usage));
+	public static Translation PackageType => _instance.GetText(nameof(PackageType));
+	public static Translation Links => _instance.GetText(nameof(Links));
 }

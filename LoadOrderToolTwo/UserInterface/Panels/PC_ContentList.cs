@@ -110,6 +110,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		CentralManager.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
+		CompatibilityManager.ReportProcessed += CentralManager_WorkshopInfoUpdated;
 
 		SlickTip.SetTo(I_Actions, Locale.Actions);
 

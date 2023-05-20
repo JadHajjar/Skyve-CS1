@@ -455,5 +455,6 @@
   "ExplainIssue": "Describe your issue here",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "SendReview": "Send the request for review"
+  "SendReview": "Send the request for review",
+  "EditTags": "Edit Tags"
 }

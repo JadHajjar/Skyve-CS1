@@ -56,7 +56,9 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 		using var icon = (Bitmap)Properties.Resources.ResourceManager.GetObject("Lang_" + item.IetfLanguageTag.ToUpper(), Properties.Resources.Culture);
 
 		if (item.IetfLanguageTag == "no-NO")
+		{
 			item = new("nn-NO");
+		}
 
 		if (icon != null)
 		{
@@ -74,6 +76,11 @@ internal class LanguageDropDown : SlickSelectionDropDown<CultureInfo>
 			textRect.Width = rectangle.Width - textRect.X;
 
 			e.Graphics.DrawString(text.Item1, Font, new SolidBrush(foreColor), textRect1, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+
+			if (item.IetfLanguageTag == "es-ES")
+			{
+				text.Value = hoverState.HasFlag(HoverState.Hovered) ? "España" : "Spain";
+			}
 
 			e.Graphics.DrawString(" / " + text.Value, UI.Font(7F), new SolidBrush(Color.FromArgb(175, foreColor)), textRect2, new StringFormat { Alignment = StringAlignment.Far, Trimming = StringTrimming.EllipsisCharacter });
 		}

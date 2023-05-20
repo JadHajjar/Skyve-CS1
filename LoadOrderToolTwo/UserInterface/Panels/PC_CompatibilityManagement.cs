@@ -279,7 +279,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Tags ?? new())
 		{
-			var control = new TagControl { Text = item };
+			var control = new TagControl { TagInfo = new Domain.TagItem(Domain.Enums.TagSource.Global, item) };
 			control.Click += TagControl_Click;
 			P_Tags.Controls.Add(control);
 			T_NewTag.SendToBack();
@@ -332,7 +332,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return;
 		}
 
-		var control = new TagControl { Text = prompt.Input };
+		var control = new TagControl { TagInfo = new Domain.TagItem(Domain.Enums.TagSource.Global, prompt.Input) };
 		control.Click += TagControl_Click;
 		P_Tags.Controls.Add(control);
 		T_NewTag.SendToBack();
@@ -434,7 +434,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		postPackage.Usage = DD_Usage.SelectedItems.Aggregate((prev, next) => prev | next);
 		postPackage.RequiredDLCs = DD_DLCs.SelectedItems.Select(x => x.Id).ToArray();
 		postPackage.Note = TB_Note.Text;
-		postPackage.Tags = P_Tags.Controls.OfType<TagControl>().Where(x => !string.IsNullOrEmpty(x.Text)).ToList(x => x.Text);
+		postPackage.Tags = P_Tags.Controls.OfType<TagControl>().Where(x => !string.IsNullOrEmpty(x.TagInfo.Value)).ToList(x => x.TagInfo.Value);
 		postPackage.Links = P_Links.Controls.OfType<LinkControl>().ToList(x => x.Link);
 		postPackage.Statuses = FLP_Statuses.Controls.OfType<IPackageStatusControl<StatusType, PackageStatus>>().ToList(x => x.PackageStatus);
 		postPackage.Interactions = FLP_Interactions.Controls.OfType<IPackageStatusControl<InteractionType, PackageInteraction>>().ToList(x => x.PackageStatus);

@@ -19,6 +19,7 @@ partial class PC_ContentList<T>
 	{
 		if (disposing && (components != null))
 		{
+			CompatibilityManager.ReportProcessed -= CentralManager_WorkshopInfoUpdated;
 			CentralManager.ContentLoaded -= CentralManager_ContentLoaded;
 			CentralManager.ContentLoaded -= CentralManager_WorkshopInfoUpdated;
 			CentralManager.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;

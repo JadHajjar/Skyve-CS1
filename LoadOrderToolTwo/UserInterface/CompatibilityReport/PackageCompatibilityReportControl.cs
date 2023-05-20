@@ -44,7 +44,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 			Controls.Add(_panels[i], i, 0);
 		}
 
-		CentralManager.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
+		CompatibilityManager.ReportProcessed += CentralManager_PackageInformationUpdated;
 	}
 
 	private void CentralManager_PackageInformationUpdated()
@@ -57,7 +57,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 	protected override void Dispose(bool disposing)
 	{
-		CentralManager.PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
+		CompatibilityManager.ReportProcessed -= CentralManager_PackageInformationUpdated;
 		base.Dispose(disposing);
 	}
 

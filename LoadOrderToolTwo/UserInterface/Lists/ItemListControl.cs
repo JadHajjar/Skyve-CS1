@@ -738,7 +738,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		foreach (var item in e.Item.Tags.Distinct(x => x.Value))
 		{
-			using var tagIcon = IconManager.GetSmallIcon(item.Source switch { TagSource.Workshop => "I_Steam", TagSource.FindIt => "I_Search", _ => "I_Tag" });
+			using var tagIcon = item.Icon.Small;
 
 			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.BottomLeft, true);
 
