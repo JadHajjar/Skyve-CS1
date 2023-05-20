@@ -206,7 +206,7 @@
   "HelpTranslate_Tip": "Ayuda a traducir esta herramienta a tu idioma en Crowdin.",
   "ThemeUIScale_Tip": "Cambie el color y el tema de la aplicación o aumente la escala de la interfaz de usuario.",
   "JoinDiscord_Tip": "Pida ayuda y recibe actualizaciones sobre la herramienta en el servidor de Discord.",
-  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
+  "OpenGuide_Tip": "Ver la guía en línea para saber como utilizar Skyve.",
   "ResetButton_Tip": "Restablece tus ajustes a los predeterminados. Esto no afecta a la configuración de carpetas.",
   "EnableDevUi": "Habilitar Interfaz de Usuario de Desarrollo",
   "RefreshWorkshop": "Actualizar contenido del Workshop",
@@ -228,15 +228,15 @@
   "LsmMissingTip": "Arrastra un archivo de reporte LSM o haz clic para seleccionar. Suscríbete a los assets faltantes listados en el reporte",
   "LsmUnusedTip": "Arrastra un archivo de reporte LSM o haz clic para seleccionar. Administra los assets que no has usado en tu partida que aparecen en el reporte",
   "FixAllTip": "Intento de volver a descargar todos los paquetes que tienen problemas, esto abrirá Steam por un momento",
-  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
+  "MultipleLOM": "Tienes varias versiones de Skyve instaladas o suscritas, esto puede causar conflictos. Para prevenir conflictos, anula la suscripción de todos menos el que estás utilizando actualmente",
   "FilterByThisReportStatus": "Filtrar basado en el estado de este reporte",
   "FilterByThisPackageStatus": "Filtrar basado en el estado de este paquete",
   "FilterSinceThisDate": "Filtrar elementos utilizando esta fecha",
   "FilterByThisTag": "Agreagar '{0}' a las etiquetas filtradas",
   "ItemsShouldNotBeSubscribedInfo": "Estás a punto de suscribirte a paquetes que podrían tener problemas serios.",
   "WouldYouLikeToSkipThose": "¿Deseas omitir los paquetes?",
-  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
-  "UpdatingLot": "Skyve is currently being updated. Please wait...",
+  "LOTWillRestart": "Skyve se cerrará durante el proceso de actualización, se ejecutará una vez se complete el proceso.",
+  "UpdatingLot": "Skyve se está actualizando. Por favor espere...",
   "SubscribingRequiresGameToOpen": "Para suscribirse y anular suscripciones a paquetes, el juego necesita ejecutarse por un período breve. Haz clic en \"Jugar\" cuando aparezca el \"launcher\".",
   "HelpSupport": "Ayuda y Soporte",
   "DisableFpsBoosterDebug": "Tienes activado FPS Booster mientras usas la depuración \"mono\". ¿Quieres desacrtivarlo para obtener mejores registros?",
@@ -250,8 +250,8 @@
   "ErrorsInLog": "Errores en el registro",
   "OpenLogFolder": "Abrir la carpeta del registro del juego",
   "CopyLogFile": "Copiar el archivo de registro del juego al portapapeles",
-  "OpenLOTLogFolder": "Open Skyve's log folder",
-  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
+  "OpenLOTLogFolder": "Abrir la carpeta del registro de Skyve",
+  "CopyLOTLogFile": "Copiar el archivo del registro de Skyve al portapapeles",
   "ModIncludedTotal": "Mods incluidos: {0}, Total: {1}",
   "ModIncludedAndEnabledTotal": "Mods incluidos y habilitados: {0}, Total: {1}",
   "ModIncludedEnabledTotal": "Mods incluidos: {0}, de los cuales están habilitados: {1}, Total: {2}",
@@ -264,19 +264,19 @@
   "ViewProfiles_Tip": "Ver y administrar tus perfiles guardados",
   "AutoSave_Tip": "Guardar automáticamente los cambios en mods y assets a tu perfil",
   "LoadEnabled_Tip": "Carga assets habilitados mientras se carga un juego. Esto debería dejarse habilitado a menos que sepas lo que está haciendo",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
+  "LoadUsed_Tip": "Carga assets que se utilizan en tu mapa, incluso si están desactivados en el juego. Esto no está relacionado con los ajustes de assets en Skyve",
   "UseSkipFile_Tip": "Usa esto para excluir assets Vanilla de tu juego",
   "NewGame_Tip": "Comienza un juego nuevo al ejecutar Cities: Skylines. Puedes especificar el mapa en el que quieres empezar",
   "LoadSaveGame_Tip": "Cargar un juego al ejecutar Cities: Skylines. Si no seleccionas algún archivo, se cargará el juego guardado más reciente",
   "BETA": "BETA",
   "ALPHA": "ALPHA",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "PRUEBA",
+  "TESTING": "PRUEBA",
   "STABLE": "STABLE",
   "EXPERIMENTAL": "EXPERIMENTAL",
   "DEPRECATED": "DEPRECATED",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "OBSOLETO",
+  "ABANDONED": "ABANDONADO",
   "ActionUnreversible": "Esta acción no se puede revertir",
   "AlwaysOpenFiltersAndActions": "Mostrar la sección de Filtros de manera predeterminada",
   "AlwaysOpenFiltersAndActions_Tip": "Mostrar siempre la sección de filtros al ingresar a una pestaña de contenido",
@@ -286,7 +286,7 @@
   "FavoriteProfileTotal": "Perfiles favoritos: {0}, Total: {1}",
   "FavoriteTotal": "Perfiles totales: {0}",
   "ProfileFilter": "Filtro de perfil",
-  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "Asegúrese de que Skyve tiene acceso a su carpeta de documentos, esta se utiliza para almacenar sus ajustes de interfaz de usuario e idioma.",
   "FailedToSaveLanguage": "Error al guardar el idioma seleccionado",
   "FailedToOpenTC": "Error al abrir el \"Theme Changer\"",
   "FailedToDeleteItem": "Error al eliminar el artículo",
@@ -330,12 +330,12 @@
   "Workshop Maps": "Mapas del Workshop",
   "AnyAuthor": "Cualquier autor",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "{0} elemento",
+    "Plural": "{0} elementos"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "{0} autor seleccionado",
+    "Plural": "{0} autores seleccionados"
   },
   "Use the System's Theme": "Usar el tema del sistema",
   "Donate": "Donar",
@@ -385,7 +385,7 @@
   "Info": "Info",
   "SelectThisPackage": "Selecciona este paquete",
   "SelectPackage": "Selecciona un paquete",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "ControlToSelectMultiplePackages": "Ctrl + Clic para seleccionar varios paquetes a la vez.",
   "Local": "Local",
   "Workshop": "Workshop",
   "CompatibilityReport": "Informe de Compatibilidad",
@@ -401,10 +401,10 @@
   "AdvancedIncludeEnable": "Mostrar ambos estados incluidos y habilitados para los Mods",
   "PackageStatus": "Estado del paquete",
   "Author": "Autor",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Include": "Incluido",
+  "Unsubscribe": "Anular suscripción",
+  "Exclude": "Excluido",
+  "Snooze": "Posponer",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -414,51 +414,52 @@
     "Plural": "Assets"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Paquete",
+    "Plural": "Paquetes"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Perfil",
+    "Plural": "Perfiles"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} incluido",
+    "Plural": "{0} {1} incluidos"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} activado",
+    "Plural": "{0} {1} activados"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} incluido y activado",
+    "Plural": "{0} {1} incluidos y activados"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} cargado",
+    "Plural": "{0} {1} cargados"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "Mostrando {0} {1}",
+    "Plural": "Mostrando {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "Mostrando {0} {1}, {2}",
+    "Plural": "Mostrando {0} {1}, {2}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "{0} {1} está oculto debido al uso de tu perfil",
+    "Plural": "{0} {1} están ocultos debido al uso de su perfil"
   },
-  "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
+  "EditCompatibility": "Editar compatibilidad",
+  "AnyIssue": "Cualquier problema",
+  "AnyUsage": "Cualquier uso",
+  "ExplainIssue": "Describe tu problema",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "SendReview": "Send the request for review",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "ReviewRequestSent": "Su solicitud de revisión para '{0}' ha sido enviada!\n\nGracias por sus comentarios.",
+  "ReviewRequestFailed": "Error al enviar su solicitud de revisión para '{0}'.\n\n{1}",
+  "SendReview": "Enviar la solicitud de revisión",
+  "EditTags": "Editar etiquetas",
+  "ShowAllReferencedPackages": "Mostrar paquetes excluidos en la pestaña 'Referencias'",
+  "ShowAllReferencedPackages_Tip": "Muestra tanto los paquetes excluidos como los incluidos que hacen referencia al que estás viendo.",
+  "TreatOptionalAsRequired": "Tratar paquetes opcionales como requeridos",
+  "TreatOptionalAsRequired_Tip": "Esencialmente, esto muestra la notificación de dependencias que faltan para los paquetes opcionales."
 }
