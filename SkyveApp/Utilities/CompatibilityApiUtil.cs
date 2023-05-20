@@ -85,4 +85,9 @@ internal class CompatibilityApiUtil
 
 		return default;
 	}
+
+	internal static async Task<Dictionary<string,string>?> Translations()
+	{
+		return await Get<Dictionary<string, string>>("/Translations");
+	}
 }
