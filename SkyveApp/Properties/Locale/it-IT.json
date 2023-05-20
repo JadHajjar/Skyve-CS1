@@ -455,6 +455,7 @@
   "ExplainIssue": "Descrivete qui il vostro problema",
   "ExplainIssueInfo": "Includete qui il maggior numero di informazioni su ciò che sta accadendo e su come replicarlo",
   "ReviewRequestSent": "La tua richiesta di recensione per '{0}' è stata inviata!\n\nGrazie per il tuo feedback.",
+  "ReviewRequestFailed": "Non è stato possibile inviare la richiesta di revisione per '{0}'.\n\n{1}",
   "SendReview": "Inviare la richiesta di revisione",
   "EditTags": "Modifica dei tag",
   "ShowAllReferencedPackages": "Mostra i pacchetti esclusi nella scheda 'Riferimenti'",
