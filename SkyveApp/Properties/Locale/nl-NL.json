@@ -418,8 +418,8 @@
     "Plural": "Packages"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Profiel",
+    "Plural": "Profielen"
   },
   "IncludedCount": {
     "One": "{0} {1} included",
