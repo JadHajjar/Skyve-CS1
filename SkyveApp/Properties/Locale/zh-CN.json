@@ -457,9 +457,9 @@
   "ReviewRequestSent": "您对于 '{0}' 的复查申请已发送成功！\n\n谢谢您的反馈。",
   "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
   "SendReview": "发送复查申请",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
+  "EditTags": "编辑标签",
+  "ShowAllReferencedPackages": "在“选项”面板里显示被卸下的插件",
   "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
+  "TreatOptionalAsRequired": "根据自己的实际需求处理这些可选插件",
   "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
 }
