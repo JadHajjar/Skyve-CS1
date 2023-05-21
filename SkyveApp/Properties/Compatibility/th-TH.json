@@ -148,11 +148,11 @@
   "Action_ExcludeThis": "คุณควรแยก '{0}' ออกจากเกม",
   "Action_ExcludeOther": {
     "One": "คุณควรแยก '{1}' ออกจากเกม",
-    "Plural": "You should exclude the following packages."
+    "Plural": "คุณควรแยกแพ็กเกจต่อไปนี้ออกจากเกม:"
   },
   "Action_Switch": {
-    "One": "You should switch to '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "One": "คุณควรเปลี่ยนไปใช้ '{1}'",
+    "Plural": "คุณควรเปลี่ยนไปใช้แพ็กเกจต่อไปนี้:"
   },
   "NoRequiredDlcs": "ไม่มี DLC ที่จำเป็น",
   "DlcsSelected": {
@@ -168,7 +168,7 @@
   "CRT_Compatibility": "ปัญหาความเข้ากันได้",
   "CRT_Alternatives": "ทางเลือกอื่น",
   "CRT_Status": "สถานะ",
-  "CRT_Ambiguous": "Ambiguity",
+  "CRT_Ambiguous": "ความน่าสงสัย",
   "LastReviewDate": "ได้รับการตรวจสอบครั้งล่าสุดเมื่อ {0}",
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
