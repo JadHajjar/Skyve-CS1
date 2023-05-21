@@ -198,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "アセットのサブスクを開始・追加すると、ツール起動時に設定に基づいて自動的に除外や含まれるようにします。",
   "FilterOutPackagesWithOneAsset_Tip": "アセットが1つしかない単体パッケージは、パッケージのページでは非表示にしてアセットのページで表示します。",
   "FilterOutPackagesWithMods_Tip": "MODが含まれるパッケージは、パッケージのページでは非表示にしてMODのページで表示します。",
-  "OverrideGameChanges_Tip": "ゲーム内で変更したMODの状態は、この設定をオンにするとSkyve内も自動的に上書きされます。 変更は次回の起動時に反映されて、ツールが起動中の場合のみ機能します。",
+  "OverrideGameChanges_Tip": "ゲーム内で変更したMODの状態は、この設定をオンにするとSkyve内も自動的に上書きされます。 変更は次回の起動時に反映されて、アプリが起動中の場合のみ機能します。",
   "HidePseudoMods_Tip": "例えばテーマミックスは、ワークショップで共有できるようにMODのファイルとして生成します。オプションを有効にすると、MODリストから該当するアイテムを非表示にして常に含まれるようにします。",
   "AdvancedIncludeEnable_Tip": "有効時はオリジナルのLoad Order Toolと同様に、MODでも「含める & 除外」のステータス変更を可能にします。",
   "AdvancedLaunchOptions_Tip": "プロファイルの設定で、MOD開発やクリエーターが使用する追加の起動オプションを表示します。",
