@@ -330,12 +330,12 @@
   "Workshop Maps": "창작마당 지도",
   "AnyAuthor": "모든 제작자",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "항목 {0}개",
+    "Plural": "{0} 항목"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "제작자 {0}명 선택됨",
+    "Plural": "제작자 {0}명 선택됨"
   },
   "Use the System's Theme": "시스템 테마 사용",
   "Donate": "후원하기",
@@ -406,51 +406,51 @@
   "Exclude": "Exclude",
   "Snooze": "Snooze",
   "Mod": {
-    "One": "Mod",
-    "Plural": "Mods"
+    "One": "모드",
+    "Plural": "모드"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "에셋",
+    "Plural": "에셋"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "패키지",
+    "Plural": "패키지"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "프로필",
+    "Plural": "프로필"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{1} {0}개 포함됨",
+    "Plural": "{1} {0}개 포함됨"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{1} {0}개 활성화됨",
+    "Plural": "{1} {0}개 활성화됨"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{1} {0}개 포함되고 활성화됨",
+    "Plural": "{1} {0}개 포함되고 활성화됨"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{1} {0}개 불러옴",
+    "Plural": "{1} {0}개 불러옴"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "{1} {0}개 표시 중",
+    "Plural": "{1} {0}개 표시 중"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "{1}, {2} {0}개 표시 중",
+    "Plural": "{1}, {2} {0}개 표시 중"
   },
   "ItemsHidden": {
     "One": "{0} {1} is hidden because of your profile's usage",
     "Plural": "{0} {1} are hidden because of your profile's usage"
   },
   "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
+  "AnyIssue": "아무 이슈",
   "AnyUsage": "Any Usage",
   "ExplainIssue": "Describe your issue here",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
