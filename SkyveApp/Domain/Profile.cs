@@ -94,6 +94,7 @@ public class Profile
 		[JsonIgnore, CloneIgnore] public string? SteamDescription => WorkshopInfo?.SteamDescription;
 		[JsonIgnore, CloneIgnore] public bool RemovedFromSteam => WorkshopInfo?.RemovedFromSteam ?? false;
 		[JsonIgnore, CloneIgnore] public bool Incompatible => WorkshopInfo?.Incompatible ?? false;
+		[JsonIgnore, CloneIgnore] public bool IsCollection => WorkshopInfo?.IsCollection ?? false;
 		[JsonIgnore, CloneIgnore] public string[]? WorkshopTags => WorkshopInfo?.WorkshopTags;
 
 		public Asset(Domain.Asset asset)

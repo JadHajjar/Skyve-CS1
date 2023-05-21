@@ -31,6 +31,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	public SteamVisibility Visibility { get; set; }
 	public bool Incompatible { get; set; }
 	public int Reports { get; set; }
+	public bool IsCollection { get; set; }
 	public ulong[]? RequiredPackages { get; set; }
 	public int PositiveVotes { get; set; }
 	public bool Banned { get; set; }
@@ -82,7 +83,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 
 	public SteamWorkshopItem(SteamWorkshopItemEntry entry)
 	{
-		Timestamp = DateTime.UtcNow;
+		Timestamp = DateTime.Now;
 		RemovedFromSteam = entry.result is not 1 and not 17;
 		Visibility = entry.visibility;
 		Title = entry.title;
@@ -99,6 +100,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 		Incompatible = entry.incompatible;
 		Subscriptions = entry.subscriptions;
 		Reports = entry.num_reports;
+		IsCollection = entry.file_type == 2;
 		RequiredPackages = entry.children?.Where(x => x.file_type == 0 && ulong.TryParse(x.publishedfileid, out _)).Select(x => ulong.Parse(x.publishedfileid)).ToArray();
 		WorkshopTags = (entry.tags
 			?.Select(item => item.tag)

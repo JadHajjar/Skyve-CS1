@@ -74,7 +74,7 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatusFilter.NotDownloaded:
-				text = Locale.ModIsNotDownloaded;
+				text = Locale.Missing;
 				icon = new DynamicIcon("I_Question");
 				color = FormDesign.Design.RedColor;
 				return;
@@ -84,7 +84,7 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatusFilter.Removed:
-				text = Locale.ModIsRemoved;
+				text = Locale.RemovedFromSteam;
 				icon = new DynamicIcon("I_ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;

@@ -2,7 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
-using SkyveApp.UserInterface.Lists;
+using SkyveApp.UserInterface.Content;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
@@ -47,19 +47,35 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void RefreshModIssues()
 	{
-		var modsOutOfDate = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = CentralManager.Mods.AllWhere(x => x.IsIncluded && x.Package.Status == DownloadStatus.PartiallyDownloaded);
+		var modsOutOfDate = CentralManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.OutOfDate);
+		var modsIncomplete = CentralManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.PartiallyDownloaded);
 
 		B_ReDownload.Loading = false;
 		B_Cleanup.Loading = false;
 
 		this.TryInvoke(() =>
 		{
-			L_OutOfDate.Text = $"{modsOutOfDate.Count} {(modsOutOfDate.Count == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural)}:\r\n{modsOutOfDate.ListStrings(x => $"    • {x}", "\r\n")}";
-			L_Incomplete.Text = $"{modsIncomplete.Count} {(modsIncomplete.Count == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural)}:\r\n{modsIncomplete.ListStrings(x => $"    • {x}", "\r\n")}";
+			L_OutOfDate.Text = Locale.OutOfDateCount.FormatPlural(modsOutOfDate.Count, Locale.Package.FormatPlural(modsOutOfDate.Count).ToLower());
+			L_Incomplete.Text = Locale.IncompleteCount.FormatPlural(modsIncomplete.Count, Locale.Package.FormatPlural(modsIncomplete.Count).ToLower());
 
-			L_OutOfDate.Visible = modsOutOfDate.Count > 0;
-			L_Incomplete.Visible = modsIncomplete.Count > 0;
+			P_OutOfDate.Controls.Clear(true);
+			P_Incomplete.Controls.Clear(true);
+
+			foreach (var mod in modsOutOfDate)
+			{
+				P_OutOfDate.Controls.Add(new MiniPackageControl(mod) { Dock = DockStyle.Top, ReadOnly = true });
+			}
+
+			foreach (var mod in modsIncomplete)
+			{
+				P_Incomplete.Controls.Add(new MiniPackageControl(mod) { Dock = DockStyle.Top, ReadOnly = true });
+			}
+
+			P_ModIssues.ColumnStyles[0].Width = modsOutOfDate.Count > 0 ? 50 : 0;
+			P_ModIssues.ColumnStyles[1].Width = modsIncomplete.Count > 0 ? 50 : 0;
+
+			L_OutOfDate.Visible = P_OutOfDate.Visible = modsOutOfDate.Count > 0;
+			L_Incomplete.Visible = P_Incomplete.Visible = modsIncomplete.Count > 0;
 			P_ModIssues.Visible = modsOutOfDate.Count > 0 || modsIncomplete.Count > 0;
 		});
 	}
@@ -111,7 +127,7 @@ public partial class PC_ModUtilities : PanelContent
 
 				if (contents?.RequiredPackages?.Any() ?? false)
 				{
-					Form.PushPanel(null, new PC_ImportCollection(contents));
+					Form.PushPanel(null, new PC_ViewCollection(contents));
 
 					TB_CollectionLink.Text = string.Empty;
 				}

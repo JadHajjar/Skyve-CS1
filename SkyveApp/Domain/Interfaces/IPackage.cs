@@ -22,6 +22,7 @@ public interface IPackage
 	int Reports { get; }
 	bool IsIncluded { get; set; }
 	bool Workshop { get; }
+	bool IsCollection { get; }
 	Package? Package { get; }
 	long FileSize { get; }
 	DateTime ServerTime { get; }

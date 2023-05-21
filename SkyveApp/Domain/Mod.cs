@@ -54,6 +54,8 @@ public class Mod : IPackage
 	public bool RemovedFromSteam => ((IPackage)Package).RemovedFromSteam;
 	public bool Incompatible => ((IPackage)Package).Incompatible;
 
+	public bool IsCollection => ((IPackage)Package).IsCollection;
+
 	public override bool Equals(object? obj)
 	{
 		return obj is Mod mod &&

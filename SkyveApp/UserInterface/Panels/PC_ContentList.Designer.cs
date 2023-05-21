@@ -41,7 +41,6 @@ partial class PC_ContentList<T>
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.FLP_Search = new System.Windows.Forms.FlowLayoutPanel();
 			this.TB_Search = new SlickControls.SlickTextBox();
@@ -50,8 +49,7 @@ partial class PC_ContentList<T>
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.DD_Sorting = new SkyveApp.UserInterface.Dropdowns.SortingDropDown();
-			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.I_Actions = new SlickControls.SlickIcon();
+			this.TLP_MiddleBar = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.L_FilterCount = new System.Windows.Forms.Label();
 			this.P_FiltersContainer = new System.Windows.Forms.Panel();
@@ -71,7 +69,7 @@ partial class PC_ContentList<T>
 			this.I_SortOrder = new SlickControls.SlickIcon();
 			this.TLP_Main.SuspendLayout();
 			this.FLP_Search.SuspendLayout();
-			this.tableLayoutPanel3.SuspendLayout();
+			this.TLP_MiddleBar.SuspendLayout();
 			this.P_FiltersContainer.SuspendLayout();
 			this.P_Filters.SuspendLayout();
 			this.SuspendLayout();
@@ -94,7 +92,7 @@ partial class PC_ContentList<T>
 			this.TLP_Main.Controls.Add(this.slickSpacer2, 0, 4);
 			this.TLP_Main.Controls.Add(this.slickSpacer1, 0, 6);
 			this.TLP_Main.Controls.Add(this.DD_Sorting, 3, 1);
-			this.TLP_Main.Controls.Add(this.tableLayoutPanel3, 0, 5);
+			this.TLP_Main.Controls.Add(this.TLP_MiddleBar, 0, 5);
 			this.TLP_Main.Controls.Add(this.P_FiltersContainer, 1, 3);
 			this.TLP_Main.Controls.Add(this.I_SortOrder, 2, 1);
 			this.TLP_Main.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -213,47 +211,31 @@ partial class PC_ContentList<T>
 			this.DD_Sorting.Text = "Sorting";
 			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
 			// 
-			// tableLayoutPanel3
+			// TLP_MiddleBar
 			// 
-			this.tableLayoutPanel3.AutoSize = true;
-			this.tableLayoutPanel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel3.ColumnCount = 4;
-			this.TLP_Main.SetColumnSpan(this.tableLayoutPanel3, 4);
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel3.Controls.Add(this.I_Actions, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.L_Counts, 3, 0);
-			this.tableLayoutPanel3.Controls.Add(this.L_FilterCount, 1, 0);
-			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 160);
-			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 1;
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 30);
-			this.tableLayoutPanel3.TabIndex = 6;
-			// 
-			// I_Actions
-			// 
-			this.I_Actions.ActiveColor = null;
-			this.I_Actions.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.I_Actions.Dock = System.Windows.Forms.DockStyle.Left;
-			dynamicIcon4.Name = "I_Actions";
-			this.I_Actions.ImageName = dynamicIcon4;
-			this.I_Actions.Location = new System.Drawing.Point(7, 1);
-			this.I_Actions.Margin = new System.Windows.Forms.Padding(7, 1, 0, 1);
-			this.I_Actions.Name = "I_Actions";
-			this.I_Actions.Padding = new System.Windows.Forms.Padding(2);
-			this.I_Actions.Size = new System.Drawing.Size(24, 28);
-			this.I_Actions.TabIndex = 10;
-			this.I_Actions.SizeChanged += new System.EventHandler(this.Icon_SizeChanged);
-			this.I_Actions.Click += new System.EventHandler(this.I_Actions_Click);
+			this.TLP_MiddleBar.AutoSize = true;
+			this.TLP_MiddleBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TLP_MiddleBar.ColumnCount = 4;
+			this.TLP_Main.SetColumnSpan(this.TLP_MiddleBar, 4);
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_MiddleBar.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_MiddleBar.Controls.Add(this.L_Counts, 3, 0);
+			this.TLP_MiddleBar.Controls.Add(this.L_FilterCount, 1, 0);
+			this.TLP_MiddleBar.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TLP_MiddleBar.Location = new System.Drawing.Point(0, 160);
+			this.TLP_MiddleBar.Margin = new System.Windows.Forms.Padding(0);
+			this.TLP_MiddleBar.Name = "TLP_MiddleBar";
+			this.TLP_MiddleBar.RowCount = 1;
+			this.TLP_MiddleBar.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_MiddleBar.Size = new System.Drawing.Size(895, 30);
+			this.TLP_MiddleBar.TabIndex = 6;
 			// 
 			// L_Counts
 			// 
-			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.L_Counts.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.L_Counts.AutoSize = true;
 			this.L_Counts.Location = new System.Drawing.Point(821, 0);
 			this.L_Counts.Name = "L_Counts";
@@ -264,8 +246,9 @@ partial class PC_ContentList<T>
 			// 
 			// L_FilterCount
 			// 
+			this.L_FilterCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_FilterCount.AutoSize = true;
-			this.L_FilterCount.Location = new System.Drawing.Point(34, 0);
+			this.L_FilterCount.Location = new System.Drawing.Point(3, 0);
 			this.L_FilterCount.Name = "L_FilterCount";
 			this.L_FilterCount.Size = new System.Drawing.Size(71, 30);
 			this.L_FilterCount.TabIndex = 2;
@@ -391,8 +374,8 @@ partial class PC_ContentList<T>
 			this.I_ClearFilters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.I_ClearFilters.ColorStyle = Extensions.ColorStyle.Red;
 			this.I_ClearFilters.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_ClearFilter";
-			this.I_ClearFilters.ImageName = dynamicIcon5;
+			dynamicIcon4.Name = "I_ClearFilter";
+			this.I_ClearFilters.ImageName = dynamicIcon4;
 			this.I_ClearFilters.Location = new System.Drawing.Point(853, 12);
 			this.I_ClearFilters.Name = "I_ClearFilters";
 			this.I_ClearFilters.Size = new System.Drawing.Size(30, 21);
@@ -512,8 +495,8 @@ partial class PC_ContentList<T>
 			this.TLP_Main.PerformLayout();
 			this.FLP_Search.ResumeLayout(false);
 			this.FLP_Search.PerformLayout();
-			this.tableLayoutPanel3.ResumeLayout(false);
-			this.tableLayoutPanel3.PerformLayout();
+			this.TLP_MiddleBar.ResumeLayout(false);
+			this.TLP_MiddleBar.PerformLayout();
 			this.P_FiltersContainer.ResumeLayout(false);
 			this.P_FiltersContainer.PerformLayout();
 			this.P_Filters.ResumeLayout(false);
@@ -533,7 +516,7 @@ partial class PC_ContentList<T>
 	private SlickControls.SlickIcon I_ClearFilters;
 	private System.Windows.Forms.Label L_Counts;
 	private SortingDropDown DD_Sorting;
-	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+	private System.Windows.Forms.TableLayoutPanel TLP_MiddleBar;
 	private SlickControls.SlickSpacer slickSpacer1;
 	private SlickControls.SlickSpacer slickSpacer2;
 	protected System.Windows.Forms.Panel P_FiltersContainer;
@@ -545,7 +528,6 @@ partial class PC_ContentList<T>
 	private SlickControls.SlickDateRange DR_ServerTime;
 	private AuthorDropDown DD_Author;
 	private SlickControls.SlickIcon I_SortOrder;
-	private SlickControls.SlickIcon I_Actions;
 	private System.Windows.Forms.Label L_FilterCount;
 	private System.Windows.Forms.FlowLayoutPanel FLP_Search;
 	private ThreeOptionToggle OT_ModAsset;

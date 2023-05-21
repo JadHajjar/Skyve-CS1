@@ -70,7 +70,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 :((int)messageSize.Height + pad), 0, 0));
+				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : ((int)messageSize.Height + pad), 0, 0));
 			}
 
 			if (allText is not null)
@@ -117,11 +117,19 @@ internal class CompatibilityMessageControl : SlickControl
 					var dlc = isDlc ? SteamUtil.Dlcs.FirstOrDefault(x => x.Id == packageID) : null;
 					var package = packageID.Package;
 
-					e.Graphics.DrawRoundedImage(dlc?.Thumbnail ?? package?.IconImage ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(isDlc ? (40 * 460 / 215) : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+					if (!(package?.Workshop ?? true) && package?.IconImage is not null)
+					{
+						using var unsatImg = new Bitmap(package.IconImage, UI.Scale(new Size(40, 40), UI.FontScale)).Tint(Sat: 0);
+						e.Graphics.DrawRoundedImage(unsatImg, rect.Align(UI.Scale(new Size(40, 40), UI.FontScale), ContentAlignment.TopLeft), (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+					}
+					else
+					{
+						e.Graphics.DrawRoundedImage(dlc?.Thumbnail ?? package?.IconImage ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(isDlc ? (40 * 460 / 215) : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+					}
 
-					List<string>? tags = null;
+					List<(Color Color, string Text)>? tags = null;
 
-					var textRect = rect.Pad((int)(((isDlc ? (40 * 460 / 215) : 40) + 3) * UI.FontScale), 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+					var textRect = rect.Pad((int)(((isDlc ? 40 * 460 / 215 : 40) + 3) * UI.FontScale), 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 
 					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
@@ -131,18 +139,7 @@ internal class CompatibilityMessageControl : SlickControl
 					{
 						foreach (var item in tags)
 						{
-							if (item.ToLower() == "stable")
-							{ continue; }
-
-							var tcolor = item.ToLower() switch
-							{
-								"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-								"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-								"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
-								_ => (Color?)null
-							};
-
-							tagRect.X += Padding.Left + e.DrawLabel(tcolor is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, tcolor ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
+							tagRect.X += Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
 						}
 					}
 
@@ -180,7 +177,7 @@ internal class CompatibilityMessageControl : SlickControl
 							break;
 					}
 
-					if (buttonText is null)
+					if (buttonText is null || package?.IsCollection == true)
 					{
 						rect.Y += _modRects[packageID].Height + pad;
 						continue;
@@ -363,7 +360,7 @@ internal class CompatibilityMessageControl : SlickControl
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, new PC_PackagePage(package));
+				Program.MainForm.PushPanel(null, package.IsCollection ? new PC_ViewCollection(package) : new PC_PackagePage(package));
 			}
 			else
 			{

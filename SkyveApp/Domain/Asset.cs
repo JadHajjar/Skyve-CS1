@@ -45,27 +45,7 @@ public class Asset : IPackage
 	public DateTime LocalTime { get; }
 	public string[] AssetTags => _assetTags;
 	public bool IsIncluded { get => AssetsUtil.IsIncluded(this); set => AssetsUtil.SetIncluded(this, value); }
-	public IEnumerable<TagItem> Tags
-	{
-		get
-		{
-			foreach (var item in Package.Tags)
-			{
-				yield return item;
-			}
-
-			foreach (var item in _assetTags)
-			{
-				yield return new(TagSource.InGame, item);
-			}
-
-			foreach (var item in AssetsUtil.GetFindItTags(this))
-			{
-				yield return new(TagSource.FindIt, item.ToCapital(false));
-			}
-		}
-	}
-
+	public IEnumerable<TagItem> Tags => Package.Tags.Concat(GetAssetTags());
 	public string Folder => ((IPackage)Package).Folder;
 	public bool IsMod => ((IPackage)Package).IsMod;
 	public ulong SteamId => ((IPackage)Package).SteamId;
@@ -86,6 +66,21 @@ public class Asset : IPackage
 	public string[]? WorkshopTags => ((IPackage)Package).WorkshopTags;
 	public bool RemovedFromSteam => ((IPackage)Package).RemovedFromSteam;
 	public bool Incompatible => ((IPackage)Package).Incompatible;
+
+	public bool IsCollection => ((IPackage)Package).IsCollection;
+
+	public IEnumerable<TagItem> GetAssetTags()
+	{
+		foreach (var item in _assetTags)
+		{
+			yield return new(TagSource.InGame, item);
+		}
+
+		foreach (var item in AssetsUtil.GetFindItTags(this))
+		{
+			yield return new(TagSource.FindIt, item.ToCapital(false));
+		}
+	}
 
 	public override bool Equals(object? obj)
 	{

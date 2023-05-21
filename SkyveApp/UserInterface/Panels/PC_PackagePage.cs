@@ -14,6 +14,7 @@ using SlickControls;
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -243,7 +244,12 @@ public partial class PC_PackagePage : PanelContent
 	{
 		var frm = new EditTagsForm(item);
 
-		frm.Show(Program.MainForm);
+		Program.MainForm.OnNextIdle(() =>
+		{
+			frm.Show(Program.MainForm);
+
+			frm.ShowUp();
+		});
 
 		return frm;
 	}

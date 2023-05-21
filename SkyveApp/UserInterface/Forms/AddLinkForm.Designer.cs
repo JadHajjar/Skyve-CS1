@@ -45,8 +45,8 @@ partial class AddLinkForm
 			// 
 			this.base_P_Content.AutoScroll = true;
 			this.base_P_Content.Controls.Add(this.tableLayoutPanel1);
-			this.base_P_Content.Location = new System.Drawing.Point(1, 40);
-			this.base_P_Content.Size = new System.Drawing.Size(367, 348);
+			this.base_P_Content.Location = new System.Drawing.Point(1, 43);
+			this.base_P_Content.Size = new System.Drawing.Size(367, 345);
 			// 
 			// base_P_Controls
 			// 
@@ -108,7 +108,7 @@ partial class AddLinkForm
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(367, 348);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(367, 345);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// B_Apply
@@ -118,11 +118,11 @@ partial class AddLinkForm
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon1.Name = "I_Ok";
 			this.B_Apply.ImageName = dynamicIcon1;
-			this.B_Apply.Location = new System.Drawing.Point(245, 315);
+			this.B_Apply.Location = new System.Drawing.Point(245, 312);
 			this.B_Apply.Name = "B_Apply";
 			this.B_Apply.Size = new System.Drawing.Size(119, 30);
 			this.B_Apply.SpaceTriggersClick = true;
-			this.B_Apply.TabIndex = 0;
+			this.B_Apply.TabIndex = 100;
 			this.B_Apply.Text = "Apply";
 			this.B_Apply.Click += new System.EventHandler(this.B_Apply_Click);
 			// 

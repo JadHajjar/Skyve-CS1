@@ -59,12 +59,14 @@ partial class PC_ModUtilities
 			this.DD_Unused = new SkyveApp.UserInterface.Generic.DragAndDropControl();
 			this.DD_Missing = new SkyveApp.UserInterface.Generic.DragAndDropControl();
 			this.P_ModIssues = new SlickControls.RoundedGroupTableLayoutPanel();
+			this.P_OutOfDate = new System.Windows.Forms.Panel();
 			this.B_ReDownload = new SlickControls.SlickButton();
+			this.L_OutOfDate = new System.Windows.Forms.Label();
+			this.L_Incomplete = new System.Windows.Forms.Label();
+			this.P_Incomplete = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.P_Container = new System.Windows.Forms.Panel();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
-			this.L_OutOfDate = new System.Windows.Forms.Label();
-			this.L_Incomplete = new System.Windows.Forms.Label();
 			this.P_Collecttions.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.TLP_Main.SuspendLayout();
@@ -111,7 +113,7 @@ partial class PC_ModUtilities
 			this.P_Collecttions.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon10.Name = "I_Steam";
 			this.P_Collecttions.ImageName = dynamicIcon10;
-			this.P_Collecttions.Location = new System.Drawing.Point(3, 261);
+			this.P_Collecttions.Location = new System.Drawing.Point(3, 227);
 			this.P_Collecttions.Name = "P_Collecttions";
 			this.P_Collecttions.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
 			this.P_Collecttions.Size = new System.Drawing.Size(694, 118);
@@ -179,7 +181,7 @@ partial class PC_ModUtilities
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Main.Size = new System.Drawing.Size(700, 931);
+			this.TLP_Main.Size = new System.Drawing.Size(700, 897);
 			this.TLP_Main.TabIndex = 17;
 			// 
 			// P_Cleanup
@@ -196,7 +198,7 @@ partial class PC_ModUtilities
 			this.P_Cleanup.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon2.Name = "I_Broom";
 			this.P_Cleanup.ImageName = dynamicIcon2;
-			this.P_Cleanup.Location = new System.Drawing.Point(3, 152);
+			this.P_Cleanup.Location = new System.Drawing.Point(3, 118);
 			this.P_Cleanup.Name = "P_Cleanup";
 			this.P_Cleanup.Padding = new System.Windows.Forms.Padding(9);
 			this.P_Cleanup.RowCount = 2;
@@ -245,7 +247,7 @@ partial class PC_ModUtilities
 			dynamicIcon4.Name = "I_Text";
 			this.P_Text.ImageName = dynamicIcon4;
 			this.P_Text.Info = "ImportFromTextInfo";
-			this.P_Text.Location = new System.Drawing.Point(3, 610);
+			this.P_Text.Location = new System.Drawing.Point(3, 576);
 			this.P_Text.Name = "P_Text";
 			this.P_Text.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
 			this.P_Text.Size = new System.Drawing.Size(344, 218);
@@ -312,10 +314,10 @@ partial class PC_ModUtilities
 			dynamicIcon5.Name = "I_XML";
 			this.P_BOB.ImageName = dynamicIcon5;
 			this.P_BOB.Info = "XMLImportInfo";
-			this.P_BOB.Location = new System.Drawing.Point(353, 610);
+			this.P_BOB.Location = new System.Drawing.Point(353, 576);
 			this.P_BOB.Name = "P_BOB";
-			this.P_BOB.Padding = new System.Windows.Forms.Padding(9, 87, 9, 9);
-			this.P_BOB.Size = new System.Drawing.Size(344, 209);
+			this.P_BOB.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.P_BOB.Size = new System.Drawing.Size(344, 176);
 			this.P_BOB.TabIndex = 19;
 			this.P_BOB.Text = "XMLImport";
 			// 
@@ -327,7 +329,7 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel6.Controls.Add(this.DD_BOB, 0, 0);
 			this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel6.Location = new System.Drawing.Point(9, 87);
+			this.tableLayoutPanel6.Location = new System.Drawing.Point(9, 54);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
 			this.tableLayoutPanel6.RowCount = 1;
 			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -360,7 +362,7 @@ partial class PC_ModUtilities
 			dynamicIcon6.Name = "I_LSM";
 			this.P_LsmReport.ImageName = dynamicIcon6;
 			this.P_LsmReport.Info = "LsmImportInfo";
-			this.P_LsmReport.Location = new System.Drawing.Point(3, 385);
+			this.P_LsmReport.Location = new System.Drawing.Point(3, 351);
 			this.P_LsmReport.Name = "P_LsmReport";
 			this.P_LsmReport.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
 			this.P_LsmReport.Size = new System.Drawing.Size(694, 219);
@@ -416,13 +418,16 @@ partial class PC_ModUtilities
 			this.P_ModIssues.AutoSize = true;
 			this.P_ModIssues.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_ModIssues.ColorStyle = Extensions.ColorStyle.Yellow;
-			this.P_ModIssues.ColumnCount = 2;
+			this.P_ModIssues.ColumnCount = 3;
 			this.TLP_Main.SetColumnSpan(this.P_ModIssues, 2);
-			this.P_ModIssues.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.P_ModIssues.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.P_ModIssues.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.P_ModIssues.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.P_ModIssues.Controls.Add(this.L_Incomplete, 0, 0);
-			this.P_ModIssues.Controls.Add(this.B_ReDownload, 1, 0);
-			this.P_ModIssues.Controls.Add(this.L_OutOfDate, 0, 1);
+			this.P_ModIssues.Controls.Add(this.P_OutOfDate, 0, 1);
+			this.P_ModIssues.Controls.Add(this.B_ReDownload, 2, 0);
+			this.P_ModIssues.Controls.Add(this.L_OutOfDate, 0, 0);
+			this.P_ModIssues.Controls.Add(this.L_Incomplete, 1, 0);
+			this.P_ModIssues.Controls.Add(this.P_Incomplete, 1, 1);
 			this.P_ModIssues.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon8.Name = "I_ModWarning";
 			this.P_ModIssues.ImageName = dynamicIcon8;
@@ -432,9 +437,20 @@ partial class PC_ModUtilities
 			this.P_ModIssues.RowCount = 2;
 			this.P_ModIssues.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.P_ModIssues.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.P_ModIssues.Size = new System.Drawing.Size(694, 143);
+			this.P_ModIssues.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.P_ModIssues.Size = new System.Drawing.Size(694, 109);
 			this.P_ModIssues.TabIndex = 16;
 			this.P_ModIssues.Text = "DetectedIssues";
+			// 
+			// P_OutOfDate
+			// 
+			this.P_OutOfDate.AutoSize = true;
+			this.P_OutOfDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.P_OutOfDate.Dock = System.Windows.Forms.DockStyle.Top;
+			this.P_OutOfDate.Location = new System.Drawing.Point(12, 97);
+			this.P_OutOfDate.Name = "P_OutOfDate";
+			this.P_OutOfDate.Size = new System.Drawing.Size(273, 0);
+			this.P_OutOfDate.TabIndex = 19;
 			// 
 			// B_ReDownload
 			// 
@@ -445,7 +461,7 @@ partial class PC_ModUtilities
 			this.B_ReDownload.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon7.Name = "I_Tools";
 			this.B_ReDownload.ImageName = dynamicIcon7;
-			this.B_ReDownload.Location = new System.Drawing.Point(571, 91);
+			this.B_ReDownload.Location = new System.Drawing.Point(571, 57);
 			this.B_ReDownload.Name = "B_ReDownload";
 			this.P_ModIssues.SetRowSpan(this.B_ReDownload, 2);
 			this.B_ReDownload.Size = new System.Drawing.Size(111, 40);
@@ -453,6 +469,36 @@ partial class PC_ModUtilities
 			this.B_ReDownload.TabIndex = 14;
 			this.B_ReDownload.Text = "FixAllIssues";
 			this.B_ReDownload.Click += new System.EventHandler(this.B_ReDownload_Click);
+			// 
+			// L_OutOfDate
+			// 
+			this.L_OutOfDate.AutoSize = true;
+			this.L_OutOfDate.Location = new System.Drawing.Point(12, 64);
+			this.L_OutOfDate.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
+			this.L_OutOfDate.Name = "L_OutOfDate";
+			this.L_OutOfDate.Size = new System.Drawing.Size(71, 30);
+			this.L_OutOfDate.TabIndex = 16;
+			this.L_OutOfDate.Text = "label1";
+			// 
+			// L_Incomplete
+			// 
+			this.L_Incomplete.AutoSize = true;
+			this.L_Incomplete.Location = new System.Drawing.Point(291, 64);
+			this.L_Incomplete.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
+			this.L_Incomplete.Name = "L_Incomplete";
+			this.L_Incomplete.Size = new System.Drawing.Size(71, 30);
+			this.L_Incomplete.TabIndex = 17;
+			this.L_Incomplete.Text = "label1";
+			// 
+			// P_Incomplete
+			// 
+			this.P_Incomplete.AutoSize = true;
+			this.P_Incomplete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.P_Incomplete.Dock = System.Windows.Forms.DockStyle.Top;
+			this.P_Incomplete.Location = new System.Drawing.Point(291, 97);
+			this.P_Incomplete.Name = "P_Incomplete";
+			this.P_Incomplete.Size = new System.Drawing.Size(273, 0);
+			this.P_Incomplete.TabIndex = 18;
 			// 
 			// slickScroll1
 			// 
@@ -486,26 +532,6 @@ partial class PC_ModUtilities
 			this.slickSpacer1.TabIndex = 20;
 			this.slickSpacer1.TabStop = false;
 			this.slickSpacer1.Text = "slickSpacer1";
-			// 
-			// L_OutOfDate
-			// 
-			this.L_OutOfDate.AutoSize = true;
-			this.L_OutOfDate.Location = new System.Drawing.Point(12, 104);
-			this.L_OutOfDate.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
-			this.L_OutOfDate.Name = "L_OutOfDate";
-			this.L_OutOfDate.Size = new System.Drawing.Size(71, 30);
-			this.L_OutOfDate.TabIndex = 16;
-			this.L_OutOfDate.Text = "label1";
-			// 
-			// L_Incomplete
-			// 
-			this.L_Incomplete.AutoSize = true;
-			this.L_Incomplete.Location = new System.Drawing.Point(12, 64);
-			this.L_Incomplete.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
-			this.L_Incomplete.Name = "L_Incomplete";
-			this.L_Incomplete.Size = new System.Drawing.Size(71, 30);
-			this.L_Incomplete.TabIndex = 17;
-			this.L_Incomplete.Text = "label1";
 			// 
 			// PC_ModUtilities
 			// 
@@ -576,4 +602,6 @@ partial class PC_ModUtilities
 	private SlickControls.SlickSpacer slickSpacer1;
 	private System.Windows.Forms.Label L_Incomplete;
 	private System.Windows.Forms.Label L_OutOfDate;
+	private System.Windows.Forms.Panel P_OutOfDate;
+	private System.Windows.Forms.Panel P_Incomplete;
 }

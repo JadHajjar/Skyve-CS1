@@ -472,7 +472,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				return;
 			}
 
-			(FindForm() as BasePanelForm)?.PushPanel(null, new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item));
+			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.IsCollection ? new PC_ViewCollection(item.Item) : new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item));
 
 			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 			{
@@ -488,7 +488,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().Notification);
 			}
-			else if (item.Item.Package is not null)
+			else
 			{
 				var pc = new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item);
 
@@ -657,7 +657,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		var package = e.Item.Package;
 		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.Graphics, e.ClipRectangle, e.Item, large);
-		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Vertical, 0, Padding.Vertical);
+		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var labelRect = new Rectangle(rects.TextRect.X, rects.CenterRect.Bottom, 0, e.ClipRectangle.Bottom - rects.CenterRect.Bottom);
 		var report = e.Item.GetCompatibilityInfo();
@@ -679,18 +679,20 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (!IsSelection)
 		{
-			PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large, package);
+			DrawIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large, package);
 		}
 
 		DrawThumbnailAndTitle(e, rects, report, large);
 
-		if (!large)
+		if (!large && !PackagePage)
 		{
 			if (!e.Item.Incompatible && report.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+			{
 				labelRect.X += DrawScore(e, large, rects, labelRect);
+			}
 		}
 
-		var isVersion = package?.Mod is not null && !package.BuiltIn;
+		var isVersion = package?.Mod is not null && !package.BuiltIn && !PackagePage;
 		var versionText = isVersion ? "v" + package!.Mod!.Version.GetString() : package?.BuiltIn ?? false ? Locale.Vanilla : (e.Item.FileSize == 0 ? string.Empty : e.Item.FileSize.SizeString());
 
 		if (!string.IsNullOrEmpty(versionText))
@@ -701,19 +703,19 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		var date = (e.Item.ServerTime == DateTime.MinValue && e.Item is Asset asset ? asset.LocalTime : e.Item.ServerTime).ToLocalTime();
 
-		if (date.Year > 1)
+		if (date.Year > 2000 && !PackagePage)
 		{
 			var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
 			rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
 			labelRect.X += Padding.Left + rects.DateRect.Width;
 		}
 
-		if (!large || e.Item.Workshop)
+		if ((!large || e.Item.Workshop) && !PackagePage)
 		{
 			labelRect = DrawStatusDescriptor(e, rects, labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft);
 		}
 
-		if (report is not null && report.Notification > NotificationType.Info)
+		if (!PackagePage && report is not null && report.Notification > NotificationType.Info)
 		{
 			var labelColor = report.Notification.GetColor();
 
@@ -730,16 +732,18 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			labelRect.X = rects.TextRect.X;
 
-			if (!e.Item.Incompatible && report?.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+			if (!PackagePage && !e.Item.Incompatible && report?.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+			{
 				labelRect.X += DrawScore(e, large, rects, labelRect);
+			}
 		}
 
-		if (large && !e.Item.Workshop)
+		if (large && !e.Item.Workshop && !PackagePage)
 		{
 			labelRect = DrawStatusDescriptor(e, rects, labelRect, ContentAlignment.BottomLeft);
 		}
 
-		foreach (var item in e.Item.Tags.Distinct(x => x.Value))
+		foreach (var item in (PackagePage && e.Item is Asset asset1 ? asset1.GetAssetTags() : e.Item.Tags).Distinct(x => x.Value))
 		{
 			using var tagIcon = item.Icon.Small;
 
@@ -841,6 +845,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
+		if (!e.Item.Workshop)
+			labelRect.X += Padding.Left + DrawLabel(e, Locale.Local, IconManager.GetSmallIcon("I_PC"), FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), labelRect, contentAlignment, true).Width;
+
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
 
 		if (!string.IsNullOrEmpty(text))
@@ -966,7 +973,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			catch { }
 		}
 
-		List<string>? tags = null;
+		List<(Color Color, string Text)>? tags = null;
 
 		var mod = e.Item is not Asset;
 		var text = mod ? e.Item.ToString().RemoveVersionText(out tags) : e.Item.ToString();
@@ -995,21 +1002,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		foreach (var item in tags)
 		{
-			if (item.ToLower() is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken")
-			{ continue; }
-
-			var color = item.ToLower() switch
-			{
-				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-				"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-				_ => (Color?)null
-			};
-
-			tagRect.X += Padding.Left + DrawLabel(e, color is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
+			tagRect.X += Padding.Left + DrawLabel(e, item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
 		}
 	}
 
-	private void PaintIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, Package? package)
+	private void DrawIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, Package? package)
 	{
 		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
@@ -1018,22 +1015,22 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 			else if (mod.IsEnabled)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, activeColor = FormDesign.Design.YellowColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = FormDesign.Design.YellowColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
-			else if (inclEnableRect.Contains(CursorLocation))
+			else if (inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 
-			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color(rects.EnabledRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color(rects.EnabledRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
 			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
 			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
 		}
@@ -1042,16 +1039,16 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			var activeColor = FormDesign.Design.ActiveColor;
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
-			else if (inclEnableRect.Contains(CursorLocation))
+			else if (inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
+				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 
-			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
 			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
 		}
 	}
@@ -1113,20 +1110,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	private void GetStatusDescriptors(T mod, out string text, out Bitmap? icon, out Color color)
 	{
-		if (!mod.Workshop)
-		{
-			text = Locale.Local;
-			icon = IconManager.GetSmallIcon("I_PC");
-			color = FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor);
-			return;
-		}
-
 		switch (mod.Package?.Status)
 		{
-			//text = Locale.UpToDate;
-			//icon = Properties.Resources.I_Ok_16;
-			//color = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.AccentColor, 20);
-			//return;
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
 				icon = IconManager.GetSmallIcon("I_Question");
@@ -1138,7 +1123,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatus.NotDownloaded:
-				text = Locale.ModIsNotDownloaded;
+				text = Locale.Missing;
 				icon = IconManager.GetSmallIcon("I_Question");
 				color = FormDesign.Design.RedColor;
 				return;
@@ -1148,7 +1133,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatus.Removed:
-				text = Locale.ModIsRemoved;
+				text = Locale.RemovedFromSteam;
 				icon = IconManager.GetSmallIcon("I_ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;

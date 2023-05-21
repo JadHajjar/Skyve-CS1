@@ -20,7 +20,7 @@ public enum InteractionType
 	[CRN(NotificationType.Info, new[] { StatusAction.NoAction })]
 	RequirementAlternative = 5,
 
-	[CRN(NotificationType.Warning, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.ExcludeThis, StatusAction.ExcludeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
+	[CRN(NotificationType.Caution, new[] { StatusAction.SelectOne, StatusAction.Switch, StatusAction.UnsubscribeThis, StatusAction.UnsubscribeOther, StatusAction.ExcludeThis, StatusAction.ExcludeOther, StatusAction.RequiresConfiguration, StatusAction.NoAction })]
 	CausesIssuesWith = 6,
 
 	[CRN(NotificationType.MissingDependency, new[] { StatusAction.SubscribeToPackages, StatusAction.NoAction })]

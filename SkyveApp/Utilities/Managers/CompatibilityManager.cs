@@ -147,10 +147,12 @@ public static class CompatibilityManager
 			info.Interactions.Add(new PackageInteraction { Type = package.IsMod ? InteractionType.RequiredPackages : InteractionType.OptionalPackages, Action = StatusAction.SubscribeToPackages, Packages = package.RequiredPackages });
 		}
 
-		package.ToString().RemoveVersionText(out var titleTags);
+		var tagMatches = Regex.Matches(package.ToString(), @"[\[\(](.+?)[\]\)]");
 
-		foreach (var tag in titleTags)
+		foreach (Match match in tagMatches)
 		{
+			var tag = match.Value.ToLower();
+
 			if (tag.ToLower() is "broken")
 			{
 				info.Stability = PackageStability.Broken;

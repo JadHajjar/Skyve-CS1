@@ -7,6 +7,7 @@ using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -78,10 +79,37 @@ internal class ModsBubble : StatusBubbleBase
 			return;
 		}
 
-		var modsIncluded = CentralManager.Mods.Count(x => x.IsIncluded);
-		var modsEnabled = CentralManager.Mods.Count(x => x.IsEnabled && x.IsIncluded);
-		var modsOutOfDate = CentralManager.Mods.Count(x => x.IsIncluded && x.Package.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = CentralManager.Mods.Count(x => x.IsIncluded && x.Package.Status == DownloadStatus.PartiallyDownloaded);
+		int modsIncluded = 0, modsEnabled = 0, modsOutOfDate = 0, modsIncomplete = 0;
+
+		var crDic = new Dictionary<NotificationType, int>();
+
+		foreach (var mod in CentralManager.Mods)
+		{
+			if(!mod.IsIncluded)
+				continue;
+
+			modsIncluded++;
+
+			if (mod.IsEnabled)
+				modsEnabled++;
+
+			switch (mod.Package.Status)
+			{
+				case DownloadStatus.OutOfDate:
+					modsOutOfDate++;
+					break;
+				case DownloadStatus.PartiallyDownloaded:
+					modsIncomplete++;
+					break;
+			}
+
+			var notif = mod.GetCompatibilityInfo().Notification;
+
+			if (crDic.ContainsKey(notif))
+				crDic[notif]++;
+			else
+				crDic[notif] = 1;
+		}
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
@@ -99,24 +127,22 @@ internal class ModsBubble : StatusBubbleBase
 
 		if (modsOutOfDate > 0)
 		{
-			DrawValue(e, ref targetHeight, modsOutOfDate.ToString(), modsOutOfDate == 1 ? Locale.ModOutOfDate : Locale.ModOutOfDatePlural, FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, Locale.OutOfDateCount.FormatPlural(modsOutOfDate, Locale.Mod.FormatPlural(modsOutOfDate).ToLower()), FormDesign.Design.YellowColor);
 		}
 
 		if (modsIncomplete > 0)
 		{
-			DrawValue(e, ref targetHeight, modsIncomplete.ToString(), modsIncomplete == 1 ? Locale.ModIncomplete : Locale.ModIncompletePlural, FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, Locale.IncompleteCount.FormatPlural(modsIncomplete, Locale.Mod.FormatPlural(modsIncomplete).ToLower()), FormDesign.Design.RedColor);
 		}
 
-		var groups = CentralManager.Mods.Where(x => x.IsIncluded).GroupBy(x => x.Package.GetCompatibilityInfo().Notification);
-
-		foreach (var group in groups.OrderBy(x => x.Key))
+		foreach (var group in crDic.OrderBy(x => x.Key))
 		{
 			if (group.Key <= NotificationType.Info)
 			{
 				continue;
 			}
 
-			DrawText(e, ref targetHeight, LocaleCR.Get($"{group.Key}Count").Format(group.Count(), Locale.Mod.FormatPlural(group.Count()).ToLower()), group.Key.GetColor());
+			DrawText(e, ref targetHeight, LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Mod.FormatPlural(group.Value).ToLower()), group.Key.GetColor());
 		}
 	}
 }

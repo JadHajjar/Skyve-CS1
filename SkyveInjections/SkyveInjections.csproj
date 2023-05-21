@@ -51,6 +51,7 @@
     <Compile Include="..\SkyveMod\Shared\SkyveConfig.cs" Link="Shared\SkyveConfig.cs" />
     <Compile Include="..\SkyveMod\Shared\UGCListTransfer.cs" Link="Shared\UGCListTransfer.cs" />
     <Compile Include="..\SkyveMod\Shared\SharedUtil.cs" Link="Shared\SharedUtil.cs" />
+    <Compile Include="..\SkyveMod\Shared\BlackListTransfer.cs" Link="Shared\BlackListTransfer.cs" />
     <Compile Include="KianCommons\KianCommons\UI\UIHelperExtension.cs" />
     <Compile Include="KianCommons\KianCommons\Util\EnumerationExtensions.cs" />
     <Compile Include="KianCommons\KianCommons\Util\ReflectionHelpers.cs" />
