@@ -157,46 +157,46 @@
   "NoRequiredDlcs": "No requiere DLCs",
   "DlcsSelected": {
     "One": "{0} DLC seleccionado",
-    "Plural": "{0} DLCs selected"
+    "Plural": "{0} DLCs seleccionados"
   },
   "RequiredDLCs": "DLCs/CCPs requeridos",
-  "CRT_Stability": "Stability",
-  "CRT_Successors": "Successors",
-  "CRT_RequiredPackages": "Required Packages",
-  "CRT_OptionalPackages": "Optional Packages",
-  "CRT_DlcMissing": "Missing DLCs/CCPs",
-  "CRT_Compatibility": "Compatibility Issues",
-  "CRT_Alternatives": "Alternatives",
-  "CRT_Status": "Statuses",
-  "CRT_Ambiguous": "Ambiguity",
-  "LastReviewDate": "It was last reviewed on {0}",
+  "CRT_Stability": "Estabilidad",
+  "CRT_Successors": "Sucesores",
+  "CRT_RequiredPackages": "Paquetes requeridos",
+  "CRT_OptionalPackages": "Paquetes opcionales",
+  "CRT_DlcMissing": "DLCs/Ccs faltantes",
+  "CRT_Compatibility": "Problemas de compatibilidad",
+  "CRT_Alternatives": "Alternativas",
+  "CRT_Status": "Estados",
+  "CRT_Ambiguous": "Ambigüedad",
+  "LastReviewDate": "Revisado por última vez el {0}",
   "RequestReviewInfo": "¿Tienes problemas con este paquete?",
   "RequestReview": "Solicitar valoración",
   "MissingDependencyCount": {
-    "One": "{0} {1} that is missing dependencies",
-    "Plural": "{0} {1} that are missing dependencies"
+    "One": "{0} {1} que le faltan dependencias",
+    "Plural": "{0} {1} que le faltan dependencias"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "{0} {1} donde se aconseja precaución",
+  "WarningCount": "{0} {1} con una advertencia",
   "AttentionRequiredCount": {
-    "One": "{0} {1} that requires your attention",
-    "Plural": "{0} {1} that require your attention"
+    "One": "{0} {1} que requiere atención",
+    "Plural": "{0} {1} que requieren atención"
   },
-  "ExcludeCount": "{0} {1} that should be excluded",
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "ExcludeCount": "{0} {1} que debe ser excluido",
+  "UnsubscribeCount": "{0} {1} que debes anular suscripción",
   "SwitchCount": {
-    "One": "{0} {1} that requires switching to another",
-    "Plural": "{0} {1} that require switching to another"
+    "One": "{0} {1} que requiere cambiar a otro",
+    "Plural": "{0} {1} que requieren cambiar a otro"
   },
-  "PackageType": "Package Type",
-  "GenericPackage": "Generic Package",
-  "MusicPack": "Music Pack",
-  "ThemeMix": "Theme Mix",
-  "IMTMarkings": "IMT Markings",
-  "RenderItPreset": "Render it! Preset",
-  "POFont": "Procedural Object Font/Module",
-  "NameList": "Name-List/Game Translations",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "PackageType": "Tipo de paquete",
+  "GenericPackage": "Paquete genérico",
+  "MusicPack": "Paquete de música",
+  "ThemeMix": "Mezcla de temas",
+  "IMTMarkings": "Marcas IMT",
+  "RenderItPreset": "Ajustes de Render It!",
+  "POFont": "Fuente/Módulo de Procedural Objects",
+  "NameList": "Lista de nombres/Traducciones de juego",
+  "ApplyChangedBeforeExit": "Tienes cambios sin guardar.\n\n¿Quieres aplicar esos cambios antes de continuar?",
   "AuthorRetired": "El autor de {0}, {1}, se ha retirado o ha estado inactivo durante mucho tiempo.\n\nLas actualizaciones futuras y la estabilidad de sus paquetes no están garantizadas.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
+  "AuthorMalicious": "El autor de {0}, {1}, es conocido por ser malicioso y/o por incluir contenido perjudicial como virus en sus paquetes."
 }
