@@ -135,7 +135,7 @@
     "One": "You should subscribe to the following package:",
     "Plural": "You should subscribe to these packages:"
   },
-  "Action_RequiresConfiguration": "You should follow the following instructions.",
+  "Action_RequiresConfiguration": "You should follow the following instructions:",
   "Action_SelectOne": {
     "One": "Between '{0}' and '{1}', you should choose only one of them.",
     "Plural": "Between '{0}' and the following packages, you should only choose one."

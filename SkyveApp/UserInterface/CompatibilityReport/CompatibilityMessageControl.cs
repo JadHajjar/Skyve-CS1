@@ -80,13 +80,13 @@ internal class CompatibilityMessageControl : SlickControl
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), snoozeRect, pad);
 				}
-				else if (isSnoozed || HoverState.HasFlag(HoverState.Pressed))
+				else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed)&&snoozeRect.Contains(cursor)))
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(purple), snoozeRect, pad);
 				}
 
 				using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
-				e.Graphics.DrawImage(snoozeIcon.Color(isSnoozed ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
+				e.Graphics.DrawImage(snoozeIcon.Color((isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
 			}
 
 			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });

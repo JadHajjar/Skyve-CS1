@@ -469,8 +469,8 @@
     "Plural": "{0} {1} are out of date"
   },
   "IncompleteCount": {
-    "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "One": "{0} {1} does not match its size from the Workshop",
+    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
   },
   "PackageIsRemoved": "'{0}' was removed from Steam",
   "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",

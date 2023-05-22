@@ -338,11 +338,6 @@ internal static class CentralManager
 	{
 		var info = SteamUtil.GetItem(package.SteamId);
 
-		if (info is not null)
-		{
-			package.SetSteamInformation(info, true);
-		}
-
 		if (packages is null)
 		{
 			packages = new List<Package>() { package };

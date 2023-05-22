@@ -983,22 +983,12 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		using var brush = new SolidBrush(PackagePage ? base.ForeColor : e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : base.ForeColor);
 		e.Graphics.DrawString(text, font, brush, rects.TextRect.Pad(0, 0, -9999, 0), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 0, (int)textSize.Height);
-
-		if (compatibility.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
-		{
-			tagRect.X += Padding.Left + DrawLabel(e, LocaleCR.Broken.One.ToUpper(), null, Color.FromArgb(225, FormDesign.Design.RedColor), tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
-		}
-
-		if (e.Item.Incompatible)
-		{
-			tagRect.X += Padding.Left + DrawLabel(e, LocaleCR.Incompatible.One.ToUpper(), null, Color.FromArgb(225, FormDesign.Design.RedColor), tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
-		}
-
 		if (tags is null)
 		{
 			return;
 		}
+
+		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 0, (int)textSize.Height);
 
 		foreach (var item in tags)
 		{

@@ -107,31 +107,31 @@ public class IndexedPackage
 			RecursiveSetSuccessor();
 		}
 
-		if (Interactions.ContainsKey(InteractionType.Alternative))
-		{
-			foreach (var item in Interactions[InteractionType.Alternative])
-			{
-				var linkedPackages = item.Interaction.Packages.ToList();
+		//if (Interactions.ContainsKey(InteractionType.Alternative))
+		//{
+		//	foreach (var item in Interactions[InteractionType.Alternative])
+		//	{
+		//		var linkedPackages = item.Interaction.Packages.ToList();
 
-				linkedPackages.Add(Package.SteamId);
+		//		linkedPackages.Add(Package.SteamId);
 
-				foreach (var package in item.Packages.Values)
-				{
-					var replacedInteraction = item.Interaction.Clone();
+		//		foreach (var package in item.Packages.Values)
+		//		{
+		//			var replacedInteraction = item.Interaction.Clone();
 
-					replacedInteraction.Packages = linkedPackages.Where(x => x != package.Package.SteamId).ToArray();
+		//			replacedInteraction.Packages = linkedPackages.Where(x => x != package.Package.SteamId).ToArray();
 
-					if (package.Interactions.ContainsKey(InteractionType.Alternative))
-					{
-						package.Interactions[InteractionType.Alternative][0].Interaction.Packages = linkedPackages.Concat(package.Interactions[InteractionType.Alternative][0].Interaction.Packages ?? new ulong[0]).Distinct().ToArray();
-					}
-					else
-					{
-						package.Interactions[InteractionType.Alternative] = new() { new(replacedInteraction, packages) };
-					}
-				}
-			}
-		}
+		//			if (package.Interactions.ContainsKey(InteractionType.Alternative))
+		//			{
+		//				package.Interactions[InteractionType.Alternative][0].Interaction.Packages = linkedPackages.Concat(package.Interactions[InteractionType.Alternative][0].Interaction.Packages ?? new ulong[0]).Distinct().ToArray();
+		//			}
+		//			else
+		//			{
+		//				package.Interactions[InteractionType.Alternative] = new() { new(replacedInteraction, packages) };
+		//			}
+		//		}
+		//	}
+		//}
 	}
 
 	private void RecursiveSetSuccessor()

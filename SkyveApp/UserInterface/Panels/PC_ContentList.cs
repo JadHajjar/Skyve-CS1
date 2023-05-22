@@ -768,11 +768,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		var removeBadPackages = false;
 		var steamIds = LC_Items.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.SteamId != 0);
 
-		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
-		{
-			return;
-		}
-
 		foreach (var item in steamIds.ToList())
 		{
 			var report = item.Item.GetCompatibilityInfo();
@@ -793,7 +788,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
+		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		await CitiesManager.Subscribe(steamIds.Select(x => x.Item.SteamId));
 	}
 
 	private async void DeleteAll(object sender, EventArgs e)
