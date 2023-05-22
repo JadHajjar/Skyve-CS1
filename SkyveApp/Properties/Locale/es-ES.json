@@ -405,6 +405,7 @@
   "Unsubscribe": "Anular suscripción",
   "Exclude": "Excluido",
   "Snooze": "Posponer",
+  "UnSnooze": "Un-Snooze",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -461,5 +462,22 @@
   "ShowAllReferencedPackages": "Mostrar paquetes excluidos en la pestaña 'Referencias'",
   "ShowAllReferencedPackages_Tip": "Muestra tanto los paquetes excluidos como los incluidos que hacen referencia al que estás viendo.",
   "TreatOptionalAsRequired": "Tratar paquetes opcionales como requeridos",
-  "TreatOptionalAsRequired_Tip": "Esencialmente, esto muestra la notificación de dependencias que faltan para los paquetes opcionales."
+  "TreatOptionalAsRequired_Tip": "Esencialmente, esto muestra la notificación de dependencias que faltan para los paquetes opcionales.",
+  "AddCustomTag": "Add a custom tag",
+  "OutOfDateCount": {
+    "One": "{0} {1} is out of date",
+    "Plural": "{0} {1} are out of date"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} does not match its size from the Workshop",
+    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+  },
+  "PackageIsRemoved": "'{0}' was removed from Steam",
+  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
+  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
+  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
+  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
+  "RemovedFromSteam": "Removed from Steam",
+  "Missing": "Missing"
 }
