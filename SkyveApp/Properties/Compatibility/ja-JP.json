@@ -135,7 +135,7 @@
     "One": "以下のパッケージをサブスクする必要があります。",
     "Plural": "これらのパッケージをサブスクする必要があります。"
   },
-  "Action_RequiresConfiguration": "You should follow the following instructions:",
+  "Action_RequiresConfiguration": "以下の指示に従ってください：",
   "Action_SelectOne": {
     "One": "「{0}」と「{1}」の中から、どちらか「1つだけ」を選択して下さい。",
     "Plural": "「{0}」と以下のパッケージから、どちらか「1つだけ」を選択して下さい。"
@@ -173,23 +173,23 @@
   "RequestReviewInfo": "このパッケージで問題が発生しましたか？",
   "RequestReview": "レビューを依頼",
   "MissingDependencyCount": {
-    "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "One": "{0} {1} に依存関係がありません",
+    "Plural": "{0} {1} に依存関係がありません"
   },
   "CautionCount": "{0} {1} は細心の注意が必要",
   "WarningCount": "{0} {1} は警告あり",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requires your attention",
-    "Plural": "{0} {1} require your attention"
+    "One": "{0} {1} はあなたの注意が必要です",
+    "Plural": "{0} {1} はあなたの注意が必要です"
   },
   "ExcludeCount": {
-    "One": "{0} {1} should be excluded",
-    "Plural": "{0} {1} should be excluded"
+    "One": "{0} {1} を除外する必要があります",
+    "Plural": "{0} {1} を除外する必要があります"
   },
   "UnsubscribeCount": "{0} {1} はサブスクを解除すべき",
   "SwitchCount": {
-    "One": "{0} {1} requires switching to another",
-    "Plural": "{0} {1} require switching to another"
+    "One": "{0} {1} は別のものに切り替える必要があります",
+    "Plural": "{0} {1} は別のものに切り替える必要があります"
   },
   "PackageType": "パッケージのタイプ",
   "GenericPackage": "標準パッケージ",
