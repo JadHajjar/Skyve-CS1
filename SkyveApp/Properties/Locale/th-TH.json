@@ -463,21 +463,21 @@
   "ShowAllReferencedPackages_Tip": "แสดงทั้งแพ็กเกจที่ถูกแยกออกและแพ็กเกจที่ถูกรวมเข้าไว้ในเกมโดยอ้างอิงจากแพ็กเกจที่คุณกำลังดูอยู่",
   "TreatOptionalAsRequired": "ปฎิบัติต่อแพ็กเกจทางเลือกตามความจำเป็น",
   "TreatOptionalAsRequired_Tip": "ให้ความสำคัญกับแพ็กเกจทางเลือกในการแสดงการแจ้งเตือน การขาดแพ็กเกจที่จำเป็นต้องพึ่งพา",
-  "AddCustomTag": "Add a custom tag",
+  "AddCustomTag": "เพิ่มแท็กที่กำหนดเอง",
   "OutOfDateCount": {
-    "One": "{0} {1} is out of date",
-    "Plural": "{0} {1} are out of date"
+    "One": "{0} {1} ล้าสมัย",
+    "Plural": "{0} {1} ล้าสมัย"
   },
   "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+    "One": "{0} {1} ไม่ตรงกับขนาดจากเวิร์กชอป",
+    "Plural": "{0} {1} ขนาดที่เกี่ยวข้องไม่ตรงกันกับขนาดจากเวิร์กชอป"
   },
-  "PackageIsRemoved": "'{0}' was removed from Steam",
-  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
-  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
-  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
-  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
-  "RemovedFromSteam": "Removed from Steam",
-  "Missing": "Missing"
+  "PackageIsRemoved": "'{0}' ถูกลบออกจากสตีม",
+  "PackageIsUnknown": "ยังไม่ได้โหลดข้อมูลจากสตีมของ '{0}'",
+  "PackageIsNotDownloaded": "'{0}' ถูกลบออกจากคอมพิวเตอร์ของคุณ",
+  "PackageIsOutOfDate": "'{0}' ล้าสมัย\n\nคุณตามหลัง {1}",
+  "PackageIsMaybeOutOfDate": "'{0}' อาจล้าสมัย {1} อัปเดตแล้ว",
+  "PackageIsIncomplete": "ขนาดของ '{0}' ({1}) ที่อยู่ในเครื่องแตกต่างกันกับ {2} ของสตีม",
+  "RemovedFromSteam": "ถูกลบออกจากสตีม",
+  "Missing": "หายไป"
 }
