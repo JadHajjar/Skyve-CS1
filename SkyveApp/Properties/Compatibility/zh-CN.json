@@ -135,7 +135,7 @@
     "One": "您应该订阅下列插件：",
     "Plural": "您应该订阅这些插件："
   },
-  "Action_RequiresConfiguration": "You should follow the following instructions:",
+  "Action_RequiresConfiguration": "您应该遵循以下指令：",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
@@ -173,23 +173,23 @@
   "RequestReviewInfo": "使用此插件时遇到问题？\n请在这里申请重新复查：",
   "RequestReview": "申请复查",
   "MissingDependencyCount": {
-    "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "One": "{0} {1} 缺少依赖关系",
+    "Plural": "{0} {1} 缺少依赖关系"
   },
   "CautionCount": "{0} {1} 建议谨慎使用",
   "WarningCount": "{0} {1} 带有警告",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requires your attention",
-    "Plural": "{0} {1} require your attention"
+    "One": "{0} {1} 需要您注意。",
+    "Plural": "{0} {1} 需要您注意。"
   },
   "ExcludeCount": {
-    "One": "{0} {1} should be excluded",
-    "Plural": "{0} {1} should be excluded"
+    "One": "{0} {1} 应该被删除",
+    "Plural": "{0} {1} 应该被删除"
   },
   "UnsubscribeCount": "{0} {1} 应该取消订阅",
   "SwitchCount": {
-    "One": "{0} {1} requires switching to another",
-    "Plural": "{0} {1} require switching to another"
+    "One": "{0} {1} 需要切换到另一个",
+    "Plural": "{0} {1} 需要切换到另一个"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
