@@ -405,6 +405,7 @@
   "Unsubscribe": "Unsubscribe",
   "Exclude": "Exclude",
   "Snooze": "Snooze",
+  "UnSnooze": "Un-Snooze",
   "Mod": {
     "One": "모드",
     "Plural": "모드"
@@ -461,5 +462,22 @@
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
   "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
   "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages.",
+  "AddCustomTag": "Add a custom tag",
+  "OutOfDateCount": {
+    "One": "{0} {1} is out of date",
+    "Plural": "{0} {1} are out of date"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} does not match its size from the Workshop",
+    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+  },
+  "PackageIsRemoved": "'{0}' was removed from Steam",
+  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
+  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
+  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
+  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
+  "RemovedFromSteam": "Removed from Steam",
+  "Missing": "Missing"
 }
