@@ -404,7 +404,7 @@
   "Include": "含める",
   "Unsubscribe": "サブスク解除",
   "Exclude": "除外",
-  "Snooze": "休止",
+  "Snooze": "スヌーズ",
   "UnSnooze": "スヌーズ解除",
   "Mod": {
     "One": "MOD",
@@ -465,16 +465,16 @@
   "TreatOptionalAsRequired_Tip": "基本的にオプションパッケージで不足している依存関係を通知＆表示します。",
   "AddCustomTag": "カスタムタグを追加",
   "OutOfDateCount": {
-    "One": "{0} {1} は期限切れです",
-    "Plural": "{0} {1} は期限切れです"
+    "One": "{0} {1} は古いバージョン",
+    "Plural": "{0} {1} は古いバージョン"
   },
   "IncompleteCount": {
-    "One": "{0} {1} はワークショップのサイズと一致しません",
-    "Plural": "{0} {1} はワークショップのそれぞれのサイズと一致しません"
+    "One": "{0} {1} はワークショップのサイズと不一致",
+    "Plural": "{0} {1} はワークショップのいずれかとサイズが不一致"
   },
-  "PackageIsRemoved": "'{0}' は Steam から削除されました",
-  "PackageIsUnknown": "Steamからの情報は '{0}' に読み込まれていません",
-  "PackageIsNotDownloaded": "'{0}' があなたのコンピュータから削除されました",
+  "PackageIsRemoved": "「{0}」はSteamから削除済",
+  "PackageIsUnknown": "「{0}」はSteamから情報をロードしていません",
+  "PackageIsNotDownloaded": "「{0}」はPCから削除済",
   "PackageIsOutOfDate": "'{0}' は期限切れです\r\n\r\nあなたは {1} 遅れています",
   "PackageIsMaybeOutOfDate": "'{0}' は期限切れの可能性があります。 {1}",
   "PackageIsIncomplete": "ローカルサイズの '{0}' ({1}) はスチームの {2} と異なります",
