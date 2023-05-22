@@ -473,11 +473,11 @@
     "Plural": "{0} {1} はワークショップのいずれかとサイズが不一致"
   },
   "PackageIsRemoved": "「{0}」はSteamから削除済",
-  "PackageIsUnknown": "「{0}」はSteamから情報をロードしていません",
+  "PackageIsUnknown": "「{0}」はSteamから情報が未取得",
   "PackageIsNotDownloaded": "「{0}」はPCから削除済",
-  "PackageIsOutOfDate": "'{0}' は期限切れです\r\n\r\nあなたは {1} 遅れています",
-  "PackageIsMaybeOutOfDate": "'{0}' は期限切れの可能性があります。 {1}",
-  "PackageIsIncomplete": "ローカルサイズの '{0}' ({1}) はスチームの {2} と異なります",
-  "RemovedFromSteam": "Steamから削除しました",
-  "Missing": "見つかりません"
+  "PackageIsOutOfDate": "「{0}」は古いバージョン\n\n{1} を経過しています",
+  "PackageIsMaybeOutOfDate": "「{0}」は古い可能性がありますが、{1} は更新済み",
+  "PackageIsIncomplete": "ローカル側の「{0}」 ({1}) とSteam側の {2} でサイズが違う",
+  "RemovedFromSteam": "Steamから削除済み",
+  "Missing": "不明"
 }
