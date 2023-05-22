@@ -3,7 +3,6 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
@@ -275,7 +274,9 @@ internal static class ModsUtil
 	internal static string CleanName(this IPackage package)
 	{
 		if (package?.Name is null)
+		{
 			return string.Empty;
+		}
 
 		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
 
@@ -287,7 +288,9 @@ internal static class ModsUtil
 		tags = new();
 
 		if (package?.Name is null)
+		{
 			return string.Empty;
+		}
 
 		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");

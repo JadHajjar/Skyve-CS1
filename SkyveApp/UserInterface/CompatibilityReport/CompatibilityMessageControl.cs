@@ -55,8 +55,8 @@ internal class CompatibilityMessageControl : SlickControl
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width*2 - pad);
-			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - iconRect.Width*2 - pad);
+			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - (iconRect.Width * 2) - pad);
+			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - (iconRect.Width * 2) - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
 
@@ -80,7 +80,7 @@ internal class CompatibilityMessageControl : SlickControl
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), snoozeRect, pad);
 				}
-				else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed)&&snoozeRect.Contains(cursor)))
+				else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor)))
 				{
 					e.Graphics.FillRoundedRectangle(new SolidBrush(purple), snoozeRect, pad);
 				}

@@ -1,13 +1,11 @@
 ﻿using Extensions;
+
 using SkyveApp.Domain.Steam;
-using SkyveApp.Domain.Steam.Markdown;
 using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyveApp.Utilities;

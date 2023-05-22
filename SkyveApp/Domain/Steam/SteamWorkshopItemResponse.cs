@@ -1,5 +1,4 @@
-﻿#nullable disable
-
+﻿
 namespace SkyveApp.Domain.Steam;
 
 //public class SteamWorkshopItemRootResponse
@@ -46,4 +45,3 @@ namespace SkyveApp.Domain.Steam;
 //{
 //	public string tag { get; set; }
 //}
-#nullable enable

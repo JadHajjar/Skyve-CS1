@@ -49,7 +49,7 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		imageRect.Width = imageRect.Height;
 		var image = Package?.IconImage;
 
-		if( (PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.SteamId == e.Item)
+		if ((PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.SteamId == e.Item)
 		{
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
 
@@ -96,7 +96,7 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		}
 
 		e.DrawLabel(LocaleCR.Get(cr.Data.Package.Stability.ToString()), null, CRNAttribute.GetNotification(cr.Data.Package.Stability).GetColor().MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomLeft, smaller: true);
-		
+
 		if (cr.Data.Package.ReviewDate > Package.ServerTime)
 		{
 			e.DrawLabel(Locale.UpToDate, null, FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomRight, smaller: true);

@@ -1,8 +1,8 @@
 using Extensions;
 
-using SkyveApp.Utilities.Managers;
-
 using Mono.Cecil;
+
+using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;

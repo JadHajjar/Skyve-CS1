@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using Newtonsoft.Json;
+
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
@@ -8,6 +10,8 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -148,5 +152,33 @@ public partial class PC_CompatibilityReport : PanelContent
 		}
 
 		return base.ProcessCmdKey(ref msg, keyData);
+	}
+
+	internal void Import(string file)
+	{
+		if (Path.GetExtension(file).ToLower() is ".zip")
+		{
+			using var stream = File.OpenRead(file);
+			using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
+
+			var entry = zipArchive.GetEntry("Skyve\\CompatibilityReport.json") ?? zipArchive.GetEntry("Skyve/CompatibilityReport.json");
+
+			if (entry is null)
+			{
+				return;
+			}
+
+			file = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.json");
+
+			entry.ExtractToFile(file);
+		}
+
+		try
+		{
+			var items = JsonConvert.DeserializeObject<List<CompatibilityInfo>>(File.ReadAllText(file));
+
+			this.TryInvoke(() => LoadReport(items));
+		}
+		catch { }
 	}
 }

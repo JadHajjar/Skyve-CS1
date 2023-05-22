@@ -2,16 +2,10 @@
 
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;

@@ -63,6 +63,10 @@ internal static class Program
 			if (Directory.Exists(Path.Combine(localAppData, "Load Order Tool")) && !Directory.Exists(Path.Combine(localAppData, ISave.AppName)))
 			{
 				Directory.Move(Path.Combine(localAppData, "Load Order Tool"), Path.Combine(localAppData, ISave.AppName));
+
+				try
+				{ File.Delete(Path.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log")); }
+				catch { }
 			}
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;

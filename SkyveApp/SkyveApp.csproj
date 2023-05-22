@@ -11,7 +11,7 @@
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <Nullable>enable</Nullable>
-    <DefineConstants>$(DefineConstants);TOOL2</DefineConstants>
+    <DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <Deterministic>false</Deterministic>

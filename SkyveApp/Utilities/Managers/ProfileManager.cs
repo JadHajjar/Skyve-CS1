@@ -1,10 +1,10 @@
 ﻿using Extensions;
 
-using SkyveShared;
-
 using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
+
+using SkyveShared;
 
 using SlickControls;
 

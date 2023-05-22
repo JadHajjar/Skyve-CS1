@@ -1,12 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-
-using System;
-using System.Drawing;
-using System.Reflection;
-using System.Windows.Forms;
-
 namespace SkyveApp.Utilities;
 internal class Locale : LocaleHelper
 {

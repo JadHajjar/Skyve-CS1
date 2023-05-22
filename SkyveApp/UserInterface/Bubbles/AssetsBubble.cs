@@ -8,7 +8,6 @@ using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -85,13 +84,17 @@ internal class AssetsBubble : StatusBubbleBase
 		foreach (var asset in CentralManager.Assets)
 		{
 			if (!asset.IsIncluded)
+			{
 				continue;
+			}
 
 			assetsIncluded++;
 			assetSize += asset.FileSize;
 
 			if (asset.IsMod)
+			{
 				continue;
+			}
 
 			switch (asset.Package.Status)
 			{
@@ -106,9 +109,13 @@ internal class AssetsBubble : StatusBubbleBase
 			var notif = asset.GetCompatibilityInfo().Notification;
 
 			if (crDic.ContainsKey(notif))
+			{
 				crDic[notif]++;
+			}
 			else
+			{
 				crDic[notif] = 1;
+			}
 		}
 
 		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower()));

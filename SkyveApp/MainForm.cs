@@ -111,7 +111,7 @@ public partial class MainForm : BasePanelForm
 	{
 		e.Graphics.SetUp(base_PB_Icon.BackColor);
 
-		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered)? FormDesign.Design.MenuForeColor.MergeColor(FormDesign.Design.ActiveColor, 85) : FormDesign.Design.MenuForeColor);
+		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.MenuForeColor.MergeColor(FormDesign.Design.ActiveColor, 85) : FormDesign.Design.MenuForeColor);
 
 		var useGlow = !ConnectionHandler.IsConnected
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
@@ -152,11 +152,13 @@ public partial class MainForm : BasePanelForm
 			{
 				var loops = 10;
 				var target = 256;
-				var perc = -Math.Cos(base_PB_Icon.LoaderPercentage * loops * Math.PI / 200) * (target - minimum) / 2 + (target + minimum) / 2;
+				var perc = (-Math.Cos(base_PB_Icon.LoaderPercentage * loops * Math.PI / 200) * (target - minimum) / 2) + ((target + minimum) / 2);
 				var alpha = (byte)perc;
 
 				if (alpha == 0)
+				{
 					return;
+				}
 
 				glowIcon.Alpha(alpha);
 			}

@@ -5,17 +5,9 @@ using SkyveApp.Utilities;
 using SlickControls;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SkyveApp.UserInterface.Forms;
 public partial class RatingInfoForm : SlickForm
@@ -58,7 +50,7 @@ public partial class RatingInfoForm : SlickForm
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 	{
-		if(keyData == Keys.Escape)
+		if (keyData == Keys.Escape)
 		{
 			Close();
 			return true;
@@ -106,7 +98,7 @@ public partial class RatingInfoForm : SlickForm
 	{
 		e.Graphics.SetUp(PB_11.BackColor);
 		var clip = e.Graphics.ClipBounds;
-		var labelH = PB_11.Height - 2*(int)(2 * UI.FontScale);
+		var labelH = PB_11.Height - (2 * (int)(2 * UI.FontScale));
 		labelH -= labelH % 2;
 		var small = UI.FontScale < 1.25;
 		var scoreRect = PB_11.ClientRectangle.CenterR(labelH, labelH);

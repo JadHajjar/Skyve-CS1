@@ -54,9 +54,9 @@ public partial class PC_Profiles : PanelContent
 
 		DD_SkipFile.StartingFolder = LocationManager.AppDataPath;
 		DD_SkipFile.PinnedFolders = new() { ["App Data"] = LocationManager.AppDataPath };
-		
+
 		DD_NewMap.StartingFolder = LocationManager.MapsPath;
-		DD_NewMap.PinnedFolders = new() 
+		DD_NewMap.PinnedFolders = new()
 		{
 			["Custom Maps"] = LocationManager.MapsPath,
 			["Vanilla Maps"] = LocationManager.Combine(LocationManager.GameContentPath, "Maps"),
@@ -215,7 +215,9 @@ public partial class PC_Profiles : PanelContent
 			foreach (var item in _launchOptions)
 			{
 				if (item == sender)
+				{
 					continue;
+				}
 
 				item.Checked = false;
 			}
@@ -518,7 +520,9 @@ public partial class PC_Profiles : PanelContent
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
 	{
 		if (ProfileManager.CurrentProfile.Temporary)
+		{
 			return;
+		}
 
 		var colorDialog = new SlickColorPicker(ProfileManager.CurrentProfile.Color ?? Color.Red);
 
@@ -536,7 +540,9 @@ public partial class PC_Profiles : PanelContent
 	private void I_Favorite_Click(object sender, EventArgs e)
 	{
 		if (ProfileManager.CurrentProfile.Temporary)
+		{
 			return;
+		}
 
 		ProfileManager.CurrentProfile.IsFavorite = !ProfileManager.CurrentProfile.IsFavorite;
 		ProfileManager.Save(ProfileManager.CurrentProfile);

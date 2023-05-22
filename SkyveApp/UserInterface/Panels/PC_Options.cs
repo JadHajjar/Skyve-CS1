@@ -63,7 +63,9 @@ public partial class PC_Options : PanelContent
 		DD_Language.SelectedItemChanged += DD_Language_SelectedItemChanged;
 
 		if (!CB_ShowFolderSettings.Checked)
+		{
 			TLP_Folders.Visible = CB_ShowFolderSettings.Checked;
+		}
 	}
 
 	public override Color GetTopBarColor()

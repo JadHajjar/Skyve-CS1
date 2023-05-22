@@ -1,15 +1,14 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Utilities;
-
 using Microsoft.Win32;
+
+using SkyveApp.Domain.Utilities;
 
 using System;
 using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using System.Windows.Forms;
 
 namespace SkyveApp.Utilities.Managers;
 internal static class LocationManager

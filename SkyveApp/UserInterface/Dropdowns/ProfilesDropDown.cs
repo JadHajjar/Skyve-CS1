@@ -44,7 +44,7 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 			text = Locale.Unfiltered;
 		}
 
-		using var icon = (item.Temporary ? new DynamicIcon( "I_Slash") : item.GetIcon()).Get(rectangle.Height - 2).Color(foreColor);
+		using var icon = (item.Temporary ? new DynamicIcon("I_Slash") : item.GetIcon()).Get(rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

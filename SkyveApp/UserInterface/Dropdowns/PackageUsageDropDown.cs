@@ -2,7 +2,6 @@
 
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

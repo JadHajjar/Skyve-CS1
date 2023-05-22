@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
+using Newtonsoft.Json;
+
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
-
-using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
@@ -62,8 +62,8 @@ public class Profile
 	public DateTime LastUsed { get; set; }
 	public Compatibility.PackageUsage Usage { get; set; }
 
-	public bool ForAssetEditor { set { if (value) Usage = Compatibility.PackageUsage.AssetCreation; } }
-	public bool ForGameplay { set { if (value) Usage = Compatibility.PackageUsage.CityBuilding; } }
+	public bool ForAssetEditor { set { if (value) { Usage = Compatibility.PackageUsage.AssetCreation; } } }
+	public bool ForGameplay { set { if (value) { Usage = Compatibility.PackageUsage.CityBuilding; } } }
 
 	public class Asset : IPackage
 	{

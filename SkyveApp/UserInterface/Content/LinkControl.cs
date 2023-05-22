@@ -56,10 +56,8 @@ internal class LinkControl : SlickImageControl
 
 	public override Size GetPreferredSize(Size proposedSize)
 	{
-		using (var img = Link.Type.GetIcon().Default)
-		{
-			return Size.Ceiling(FontMeasuring.Measure(Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())), Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
-		}
+		using var img = Link.Type.GetIcon().Default;
+		return Size.Ceiling(FontMeasuring.Measure(Link.Title.IfEmpty(LocaleCR.Get(Link.Type.ToString())), Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -73,7 +71,7 @@ internal class LinkControl : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(brush, ClientRectangle.Pad(1), Padding.Left);
 
-		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? (Display ?"I_Link": "I_Edit") : Link.Type.GetIcon()).Default)
+		using (var img = (HoverState.HasFlag(HoverState.Hovered) ? (Display ? "I_Link" : "I_Edit") : Link.Type.GetIcon()).Default)
 		{
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
 

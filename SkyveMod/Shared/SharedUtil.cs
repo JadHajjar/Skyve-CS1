@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace SkyveShared;
 internal class SharedUtil
 {
-#if TOOL2
+#if SkyveApp
 	internal static string LocalApplicationData => SkyveApp.Utilities.Managers.LocationManager.AppDataPath;
 	internal static string LocalLOMData => Path.Combine(LocalApplicationData, "Skyve");
 #elif TOOL

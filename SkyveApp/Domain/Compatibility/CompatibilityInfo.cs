@@ -12,8 +12,8 @@ using System.Linq;
 namespace SkyveApp.Domain.Compatibility;
 public class CompatibilityInfo
 {
-	public SteamWorkshopItem SteamItem { get => Package is SteamWorkshopItem s ? s : Package.Package?.WorkshopInfo ?? new SteamWorkshopItem() { SteamId = Package.SteamId }; }
-	[JsonIgnore] public IPackage Package { get; }
+	public SteamWorkshopItem SteamItem { get => Package is SteamWorkshopItem s ? s : Package.Package?.WorkshopInfo; set => Package = value; }
+	[JsonIgnore] public IPackage Package { get; set; }
 	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<PackageLink> Links { get; set; }
 	public List<ReportItem> ReportItems { get; set; }

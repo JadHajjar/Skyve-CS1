@@ -1,8 +1,8 @@
 ﻿using Extensions;
 
-using SkyveShared;
-
 using SkyveApp.Utilities.IO;
+
+using SkyveShared;
 
 using SlickControls;
 
@@ -244,8 +244,15 @@ public static class CitiesManager
 	//	return await Subscribe(UGCListTransfer.ToNumber(ids), unsub);
 	//}
 
-	public static async Task<bool> Subscribe(IEnumerable<ulong> ids) => await SubscribePrivate(ids, false);
-	public static async Task<bool> UnSubscribe(IEnumerable<ulong> ids) => await SubscribePrivate(ids, true);
+	public static async Task<bool> Subscribe(IEnumerable<ulong> ids)
+	{
+		return await SubscribePrivate(ids, false);
+	}
+
+	public static async Task<bool> UnSubscribe(IEnumerable<ulong> ids)
+	{
+		return await SubscribePrivate(ids, true);
+	}
 
 	private static async Task<bool> SubscribePrivate(IEnumerable<ulong> ids, bool unsub)
 	{

@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
+using Newtonsoft.Json;
+
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
-
-using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
@@ -49,7 +49,8 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	[JsonIgnore] public Package? Package => SteamId == 0 ? null : CentralManager.Packages.FirstOrDefault(x => x.SteamId == SteamId);
 	[JsonIgnore] public long FileSize => ServerSize;
 	[JsonIgnore] public string Folder => Package?.Folder ?? string.Empty;
-	[JsonIgnore] public IEnumerable<TagItem> Tags
+	[JsonIgnore]
+	public IEnumerable<TagItem> Tags
 	{
 		get
 		{
@@ -71,7 +72,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 				}
 			}
 
-			var findItTags =AssetsUtil.GetFindItTags(this);
+			var findItTags = AssetsUtil.GetFindItTags(this);
 
 			foreach (var item in findItTags)
 			{

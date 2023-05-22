@@ -1,11 +1,10 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Utilities.Managers;
 using Newtonsoft.Json;
 
+using SkyveApp.Utilities.Managers;
+
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace SkyveApp.Domain.Steam;
@@ -20,9 +19,7 @@ public class SteamUser : ITimestamped
 		Timestamp = DateTime.Now;
 	}
 
-#nullable disable
 	public SteamUser() { }
-#nullable enable
 
 	public ulong SteamId { get; set; }
 	public string Name { get; set; }

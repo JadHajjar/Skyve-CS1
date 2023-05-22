@@ -3,7 +3,6 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Interfaces;
-using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -22,11 +21,14 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Lists;
 internal class CompatibilityReportList : SlickStackedListControl<CompatibilityInfo>
 {
+	private bool isDragActive;
+	private bool isDragAvailable;
 	private readonly Dictionary<DrawableItem<CompatibilityInfo>, Rectangles> _itemRects = new();
 	public CompatibilityReportList()
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;
+		AllowDrop = true;
 	}
 
 	protected override void UIChanged()
@@ -242,7 +244,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			{
 				if (e.Button == MouseButtons.Left)
 				{
-					Clicked(item.Item, Message,rect.Key, false);
+					Clicked(item.Item, Message, rect.Key, false);
 				}
 				else if (e.Button == MouseButtons.Right && rect.Key.Package is not null)
 				{
@@ -272,7 +274,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 					break;
 				case StatusAction.RequiresConfiguration:
 					CompatibilityManager.ToggleSnoozed(Message);
-			FilterChanged();
+					FilterChanged();
 					break;
 				case StatusAction.UnsubscribeThis:
 					await CitiesManager.UnSubscribe(new[] { item.Item.Package.SteamId });
@@ -389,8 +391,12 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 	}
 
 	private void DrawReport(ItemPaintEventArgs<CompatibilityInfo> e, ReportItem Message, Rectangles rects)
-	{if (Message.Status is null)
+	{
+		if (Message.Status is null)
+		{
 			return;
+		}
+
 		using var icon = Message.Status.Notification.GetIcon(false).Large;
 		var actionHovered = false;
 		var cursor = PointToClient(Cursor.Position);
@@ -422,13 +428,17 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 				e.Graphics.FillRoundedRectangle(new SolidBrush(purple), rects.snoozeRect, pad);
 			}
 			else
+			{
 				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(20, purple)), rects.snoozeRect, pad);
+			}
 
 			using var snoozeIcon = IconManager.GetIcon("I_Snooze", rects.snoozeRect.Height / 2);
 			e.Graphics.DrawImage(snoozeIcon.Color((isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && rects.snoozeRect.Contains(cursor))) ? purple.GetTextColor() : FormDesign.Design.IconColor), rects.snoozeRect.CenterR(icon.Size));
 		}
 		else
+		{
 			rects.snoozeRect = default;
+		}
 
 		GetAllButton(Message, out var allText, out var allIcon, out var colorStyle);
 
@@ -444,13 +454,13 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			var buttonIcon = IconManager.GetIcon(allIcon);
 			var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, UI.Font(8.25F), UI.Scale(new Padding(4), UI.FontScale));
 
-			rects.allButtonRect =ClientRectangle.Pad(Padding.Left,y,0,0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
+			rects.allButtonRect = ClientRectangle.Pad(Padding.Left, y, 0, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages.Length > 0 ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
 
 			SlickButton.DrawButton(e, rects.allButtonRect, allText, UI.Font(8.25F), buttonIcon, UI.Scale(new Padding(4), UI.FontScale), rects.allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
 
 			actionHovered |= rects.allButtonRect.Contains(cursor);
 
-				y +=rects. allButtonRect.Height + (pad * 2);
+			y += rects.allButtonRect.Height + (pad * 2);
 		}
 
 		e.Graphics.FillRoundedRectangle(brush, iconRect, pad);
@@ -648,7 +658,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			using var font = UI.Font(8.25F);
 			var size = e.Graphics.Measure(e.Item.Package.Author.Name, font).ToSize();
 			var authorRect = rects.AuthorRect.Align(new Size(size.Width + Padding.Horizontal + rects.AuthorRect.Height, rects.AuthorRect.Height - 2), ContentAlignment.TopLeft);
-			var avatarRect = authorRect.Align(new(authorRect.Height-2, authorRect.Height-2), ContentAlignment.MiddleLeft).Pad(Padding);
+			var avatarRect = authorRect.Align(new(authorRect.Height - 2, authorRect.Height - 2), ContentAlignment.MiddleLeft).Pad(Padding);
 
 			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 4, -4)).MergeColor(FormDesign.Design.ActiveColor, authorRect.Contains(CursorLocation) ? 65 : 100));
 			e.Graphics.FillRoundedRectangle(brush, authorRect, (int)(4 * UI.FontScale));
@@ -931,5 +941,64 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 				modRects.Values.Any(x => x.Contains(location)) ||
 				(VersionRect.Contains(location) && Item?.Package.Package?.Mod is not null);
 		}
+	}
+
+
+
+	protected override void OnDragEnter(DragEventArgs drgevent)
+	{
+		base.OnDragEnter(drgevent);
+
+		isDragActive = true;
+
+		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
+		{
+			var file = ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
+
+			if (Path.GetExtension(file).ToLower() is ".zip" or ".json")
+			{
+				drgevent.Effect = DragDropEffects.Copy;
+				isDragAvailable = true;
+				Invalidate();
+			}
+			return;
+		}
+
+		drgevent.Effect = DragDropEffects.None;
+		isDragAvailable = false;
+		Invalidate();
+	}
+
+	protected override void OnDragLeave(EventArgs e)
+	{
+		base.OnDragLeave(e);
+
+		isDragActive = false;
+		Invalidate();
+	}
+
+	protected override void OnDragDrop(DragEventArgs drgevent)
+	{
+		base.OnDragDrop(drgevent);
+
+		var file = ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
+
+		if (file != null)
+		{
+			if (LocationManager.Platform is not Platform.Windows)
+			{
+				var realPath = IOUtil.ToRealPath(file);
+
+				if (LocationManager.FileExists(realPath))
+				{
+					file = realPath!;
+				}
+			}
+
+			(PanelContent.GetParentPanel(this) as PC_CompatibilityReport)!.Import(file);
+		}
+
+		isDragActive = false;
+		Invalidate();
 	}
 }

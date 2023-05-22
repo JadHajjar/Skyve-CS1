@@ -101,7 +101,9 @@ internal static class CompatibilityUtil
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
 			if (!info.Package.IsIncluded)
+			{
 				return;
+			}
 
 			packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
 		}

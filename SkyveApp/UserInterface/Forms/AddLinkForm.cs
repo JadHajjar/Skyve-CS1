@@ -126,7 +126,9 @@ public partial class AddLinkForm : BaseForm
 		private void TbLink_TextChanged(object sender, EventArgs e)
 		{
 			if (tbLink.Text.StartsWith("https://steamcommunity.com/linkfilter/?url="))
+			{
 				tbLink.Text = tbLink.Text.Remove(0, "https://steamcommunity.com/linkfilter/?url=".Length);
+			}
 		}
 
 		public PackageLink Link => new PackageLink

@@ -47,7 +47,9 @@ public static class LogUtil
 		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_hh-mm-tt}.zip");
 
 		using (var fileStream = File.Create(file))
+		{
 			CreateZipToStream(fileStream);
+		}
 
 		PlatformUtil.SetFileInClipboard(file);
 
@@ -106,7 +108,7 @@ public static class LogUtil
 
 		zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
 
-		zipArchive.CreateEntryFromFile(tempLotLogFile, "Tool\\LOT2.log");
+		zipArchive.CreateEntryFromFile(tempLotLogFile, "Skyve\\SkyveLog.log");
 
 		var logTrace = SimplifyLog(tempLogFile, out var simpleLogText);
 
@@ -121,7 +123,7 @@ public static class LogUtil
 
 	private static void AddCompatibilityReport(ZipArchive zipArchive)
 	{
-		var profileEntry = zipArchive.CreateEntry("Tool\\CompatibilityReport.json");
+		var profileEntry = zipArchive.CreateEntry("Skyve\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
 		var packages = CentralManager.Packages.AllWhere(x => x.IsIncluded);
 		var reports = packages.ToList(x => CompatibilityManager.GetCompatibilityInfo(x));
@@ -131,7 +133,7 @@ public static class LogUtil
 
 	private static void AddProfile(ZipArchive zipArchive)
 	{
-		var profileEntry = zipArchive.CreateEntry("Tool\\LogProfile.json");
+		var profileEntry = zipArchive.CreateEntry("Skyve\\LogProfile.json");
 		using var writer = new StreamWriter(profileEntry.Open());
 		var profile = new Profile("LogProfile");
 		ProfileManager.GatherInformation(profile);

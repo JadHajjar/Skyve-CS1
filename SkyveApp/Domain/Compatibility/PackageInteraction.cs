@@ -40,7 +40,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 		}
 	}
 
-	public int IntType => (int)Type;
+	public int IntType { get => (int)Type; set => Type = (InteractionType)value; }
 #endif
 
 	public PackageInteraction()

@@ -34,7 +34,7 @@ internal class ProfileBubble : StatusBubbleBase
 	protected override void Dispose(bool disposing)
 	{
 		base.Dispose(disposing);
-		
+
 		ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 	}
 

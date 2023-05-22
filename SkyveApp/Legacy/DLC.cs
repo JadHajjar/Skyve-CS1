@@ -107,7 +107,7 @@ public enum DLC
 	ModderPack15 = 2148903,
 }
 
-#if TOOL || TOOL2
+#if TOOL || SkyveApp
 public static class Extensions
 {
 	public static DLCInfoAttribute GetDLCInfo(this DLC dlc)
