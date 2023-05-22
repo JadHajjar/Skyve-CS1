@@ -135,7 +135,7 @@
     "One": "You should subscribe to the following package.",
     "Plural": "You should subscribe to these packages."
   },
-  "Action_RequiresConfiguration": "You should follow the following instructions.",
+  "Action_RequiresConfiguration": "You should follow the following instructions:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
@@ -173,20 +173,23 @@
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
-    "One": "{0} {1} that is missing dependencies",
-    "Plural": "{0} {1} that are missing dependencies"
+    "One": "{0} {1} is missing dependencies",
+    "Plural": "{0} {1} are missing dependencies"
   },
   "CautionCount": "{0} {1} where caution is advised",
   "WarningCount": "{0} {1} with a warning",
   "AttentionRequiredCount": {
-    "One": "{0} {1} that requires your attention",
-    "Plural": "{0} {1} that require your attention"
+    "One": "{0} {1} requires your attention",
+    "Plural": "{0} {1} require your attention"
   },
-  "ExcludeCount": "{0} {1} that should be excluded",
+  "ExcludeCount": {
+    "One": "{0} {1} should be excluded",
+    "Plural": "{0} {1} should be excluded"
+  },
   "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
   "SwitchCount": {
-    "One": "{0} {1} that requires switching to another",
-    "Plural": "{0} {1} that require switching to another"
+    "One": "{0} {1} requires switching to another",
+    "Plural": "{0} {1} require switching to another"
   },
   "PackageType": "Package Type",
   "GenericPackage": "Generic Package",
