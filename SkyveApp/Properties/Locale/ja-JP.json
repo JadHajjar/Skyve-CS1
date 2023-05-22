@@ -198,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "アセットのサブスクを開始・追加すると、ツール起動時に設定に基づいて自動的に除外や含まれるようにします。",
   "FilterOutPackagesWithOneAsset_Tip": "アセットが1つしかない単体パッケージは、パッケージのページでは非表示にしてアセットのページで表示します。",
   "FilterOutPackagesWithMods_Tip": "MODが含まれるパッケージは、パッケージのページでは非表示にしてMODのページで表示します。",
-  "OverrideGameChanges_Tip": "ゲーム内で変更したMODの状態は、この設定をオンにするとSkyve内も自動的に上書きされます。 変更は次回の起動時に反映されて、ツールが起動中の場合のみ機能します。",
+  "OverrideGameChanges_Tip": "ゲーム内で変更したMODの状態は、この設定をオンにするとSkyve内も自動的に上書きされます。 変更は次回の起動時に反映されて、アプリが起動中の場合のみ機能します。",
   "HidePseudoMods_Tip": "例えばテーマミックスは、ワークショップで共有できるようにMODのファイルとして生成します。オプションを有効にすると、MODリストから該当するアイテムを非表示にして常に含まれるようにします。",
   "AdvancedIncludeEnable_Tip": "有効時はオリジナルのLoad Order Toolと同様に、MODでも「含める & 除外」のステータス変更を可能にします。",
   "AdvancedLaunchOptions_Tip": "プロファイルの設定で、MOD開発やクリエーターが使用する追加の起動オプションを表示します。",
@@ -455,10 +455,11 @@
   "ExplainIssue": "ここに問題を記述",
   "ExplainIssueInfo": "何が起こるのか・それらの再現方法について、できるだけ多くの情報を含めて下さい。",
   "ReviewRequestSent": "「{0}」 のレビューリクエストを送信しました！\n\nフィードバックして頂きありがとうございます。",
+  "ReviewRequestFailed": "「{0}」のレビューリクエストの送信に失敗しました。\n\n{1}",
   "SendReview": "検証のリクエストを送信",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "EditTags": "タグの編集",
+  "ShowAllReferencedPackages": "「参照」タブに除外したパッケージを表示",
+  "ShowAllReferencedPackages_Tip": "表示中のパッケージを参照して、除外したパッケージと含めるパッケージの両方が表示されます。",
+  "TreatOptionalAsRequired": "オプションパッケージは必要に応じて処理",
+  "TreatOptionalAsRequired_Tip": "基本的にオプションパッケージで不足している依存関係を通知＆表示します。"
 }

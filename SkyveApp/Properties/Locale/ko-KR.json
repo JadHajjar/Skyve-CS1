@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "호환성 정보",
   "ProfileBubble": "현재 프로필",
   "StartCities": "Cities: Skylines 실행",
   "StopCities": "Cities: Skylines 종료",
@@ -47,9 +47,9 @@
   "NoMods": "모든 모드 사용 안함",
   "AutoSave": "자동 저장",
   "TotalSize": "총 크기",
-  "CompatibilityStatus": "Compatibility Status",
+  "CompatibilityStatus": "호환성 상태",
   "AnyStatus": "모든 상태",
-  "AnyCompatibilityStatus": "Any Status",
+  "AnyCompatibilityStatus": "모든 상태",
   "ModOwned": "이 모드를 가지고 있습니다",
   "NoLocalPackagesFound": "내 컴퓨터에 발견된 패키지가 없습니다.",
   "CheckFolderInOptions": "잘못된 폴더가 사용되는 경우 옵션 패널을 확인하세요.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "누락된 에셋 보기 및 구독하기",
   "SelectedFileInvalid": "선택한 파일이 유효하지 않음",
   "NoItemsToBeDisplayed": "표시할 항목 없음",
-  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
+  "FirstSetupInfo": "Skyve 앱을 사용하기 전에 Cities: Skylines 내에서 Skyve 모드를 활성화해주세요",
   "SetupIncomplete": "설정이 완료되지 않음",
   "LsmImportUnusedInfo": "사용되지 않은 에셋 보기 및 제거하기",
   "SkipFileInfo": "Loading Screen Mod에 사용할 스킵 파일을 선택하세요",
@@ -228,15 +228,15 @@
   "LsmMissingTip": "Loading Screen Mod 보고서 파일을 여기로 드래그 앤 드롭하거나 클릭하여 보고서 파일을 불러오면 누락된 자산을 확인하고 구독할 수 있습니다.",
   "LsmUnusedTip": "Loading Screen Mod 보고서 파일을 여기로 드래그 앤 드롭하거나 클릭하여 보고서 파일을 불러오면 사용하지 않은 자산을 관리할 수 있습니다.",
   "FixAllTip": "문제가 있는 모든 패키지를 다시 다운로드 시도합니다. 잠시 Steam이 열릴 것입니다.",
-  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
+  "MultipleLOM": "여러 버전의 Skyve가 설치되었거나 구독되어 있어 충돌을 일으킬 수 있습니다. 문제를 피하려면 사용하는 하나를 제외한 다른 모든 버전을 제거 또는 구독 취소하세요.",
   "FilterByThisReportStatus": "이 보고서 심각도로 필터링",
   "FilterByThisPackageStatus": "이 패키지의 상태로 필터링",
   "FilterSinceThisDate": "이 날짜를 기준으로 항목 필터링",
   "FilterByThisTag": "필터링된 태그에 '{0}' 추가하기",
   "ItemsShouldNotBeSubscribedInfo": "당신은 현재 망가졌거나 다른 심각한 문제가 있을 수 있는 패키지를 구독하려고 합니다.",
   "WouldYouLikeToSkipThose": "선택한 패키지를 건너뛰시겠습니까?",
-  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
-  "UpdatingLot": "Skyve is currently being updated. Please wait...",
+  "LOTWillRestart": "Skyve는 업데이트가 진행되는 동안 임시적으로 닫힐 것입니다. 업데이트가 완료되고 나면 자동으로 다시 시작됩니다.",
+  "UpdatingLot": "Skyve가 지금 업데이트되는 중입니다. 기다려 주세요...",
   "SubscribingRequiresGameToOpen": "패키지를 구독하거나 구독 취소하려면 잠시 게임을 열어야 합니다. 게임 런처가 표시되면 플레이를 클릭하여 계속 진행하세요.",
   "HelpSupport": "도움 & 지원",
   "DisableFpsBoosterDebug": "Debug Mono를 사용하는 데 FPS Booster가 활성화되어있습니다. 더 나은 로그를 얻기 위해 비활성화하시겠습니까?",
@@ -250,8 +250,8 @@
   "ErrorsInLog": "로그 내 오류",
   "OpenLogFolder": "게임의 로그 폴더 열기",
   "CopyLogFile": "게임의 로그 파일을 클립보드에 복사하기",
-  "OpenLOTLogFolder": "Open Skyve's log folder",
-  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
+  "OpenLOTLogFolder": "Skyve의 로그 폴더 열기",
+  "CopyLOTLogFile": "Skyve의 로그 파일을 클립보드에 복사하기",
   "ModIncludedTotal": "포함된 모드: {0}개, 총: {1}개",
   "ModIncludedAndEnabledTotal": "포함된 & 활성화된 모드: {0}개, 총: {1}개",
   "ModIncludedEnabledTotal": "포함된 모드: {0}개, 그 중 활성화된 모드: {1}개, 총: {2}개",
@@ -264,19 +264,19 @@
   "ViewProfiles_Tip": "저장된 내 모든 프로필 보기 및 관리하기",
   "AutoSave_Tip": "모드 및 자산에 대한 변경 사항을 프로필에 자동으로 저장합니다",
   "LoadEnabled_Tip": "게임을 불러올 때 활성화된 에셋을 불러옵니다. 이것이 무엇을 하는지 알지 못한다면 그냥 활성화된 상태로 두세요",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
+  "LoadUsed_Tip": "게임 내에서 비활성화된 에셋이라도 맵에 사용되어 있다면 에셋을 불러옵니다. 이는 Skyve에서의 에셋 설정과는 관련이 없습니다.",
   "UseSkipFile_Tip": "게임에서 바닐라 에셋을 제외하려면 이것을 사용하세요",
   "NewGame_Tip": "Cities: Skylines를 실행할 때 새 게임을 시작합니다. 시작하려는 맵을 정할 수 있습니다.",
   "LoadSaveGame_Tip": "Cities: Skylines를 실행할 때 저장된 게임을 불러옵니다. 선택한 게임이 없는 경우 마지막으로 저장된 게임을 불러옵니다.",
   "BETA": "베타",
   "ALPHA": "알파",
-  "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TEST": "테스트",
+  "TESTING": "테스트 중",
   "STABLE": "안정적인",
   "EXPERIMENTAL": "실험적인",
   "DEPRECATED": "사용되지 않는",
-  "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "OBSOLETE": "폐기",
+  "ABANDONED": "버려짐",
   "ActionUnreversible": "이 작업은 되돌릴 수 없습니다.",
   "AlwaysOpenFiltersAndActions": "기본적으로 필터 섹션을 표시하기",
   "AlwaysOpenFiltersAndActions_Tip": "콘텐츠 탭을 열 때 필터 섹션을 항상 펼쳐둡니다",
@@ -286,7 +286,7 @@
   "FavoriteProfileTotal": "즐겨찾는 프로필: {0}개, 총: {1}개",
   "FavoriteTotal": "총 프로필: {0}개",
   "ProfileFilter": "프로필 필터",
-  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "Skyve가 문서 폴더에 접근할 수 있는지 확인해주세요. UI 및 언어 설정을 저장하기 위해 사용합니다.",
   "FailedToSaveLanguage": "선택한 언어로 변경하지 못했습니다",
   "FailedToOpenTC": "테마 체인저를 열지 못했습니다",
   "FailedToDeleteItem": "항목을 삭제 하지 못했습니다",
@@ -330,12 +330,12 @@
   "Workshop Maps": "창작마당 지도",
   "AnyAuthor": "모든 제작자",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "항목 {0}개",
+    "Plural": "{0} 항목"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "제작자 {0}명 선택됨",
+    "Plural": "제작자 {0}명 선택됨"
   },
   "Use the System's Theme": "시스템 테마 사용",
   "Donate": "후원하기",
@@ -406,55 +406,56 @@
   "Exclude": "Exclude",
   "Snooze": "Snooze",
   "Mod": {
-    "One": "Mod",
-    "Plural": "Mods"
+    "One": "모드",
+    "Plural": "모드"
   },
   "Asset": {
-    "One": "Asset",
-    "Plural": "Assets"
+    "One": "에셋",
+    "Plural": "에셋"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "패키지",
+    "Plural": "패키지"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "프로필",
+    "Plural": "프로필"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{1} {0}개 포함됨",
+    "Plural": "{1} {0}개 포함됨"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{1} {0}개 활성화됨",
+    "Plural": "{1} {0}개 활성화됨"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{1} {0}개 포함되고 활성화됨",
+    "Plural": "{1} {0}개 포함되고 활성화됨"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{1} {0}개 불러옴",
+    "Plural": "{1} {0}개 불러옴"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "{1} {0}개 표시 중",
+    "Plural": "{1} {0}개 표시 중"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "{1}, {2} {0}개 표시 중",
+    "Plural": "{1}, {2} {0}개 표시 중"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다",
+    "Plural": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다"
   },
   "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
+  "AnyIssue": "아무 이슈",
   "AnyUsage": "Any Usage",
   "ExplainIssue": "Describe your issue here",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
   "SendReview": "Send the request for review",
   "EditTags": "Edit Tags",
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",

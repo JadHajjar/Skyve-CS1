@@ -455,10 +455,11 @@
   "ExplainIssue": "在此处描述您遇到的问题",
   "ExplainIssueInfo": "您的描述应尽可能地详细，其中包含遇到了什么问题以及重现此问题的方法",
   "ReviewRequestSent": "您对于 '{0}' 的复查申请已发送成功！\n\n谢谢您的反馈。",
+  "ReviewRequestFailed": "无法发送您关于 “{0}” 的审核请求。\n\n{1}",
   "SendReview": "发送复查申请",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "EditTags": "编辑标签",
+  "ShowAllReferencedPackages": "在“选项”面板里显示被卸下的插件",
+  "ShowAllReferencedPackages_Tip": "参考您正在查看的页面，可以同时显示已装载与已卸下的插件。",
+  "TreatOptionalAsRequired": "根据自己的实际需求处理这些可选插件",
+  "TreatOptionalAsRequired_Tip": "一般来说，它会显示这些可选插件缺失的必需物品信息。"
 }

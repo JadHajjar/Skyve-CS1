@@ -4,14 +4,14 @@
   "StartCities": "Begin Cities: Skylines",
   "StopCities": "Stop Burgers: Skylines",
   "AssetsBubble": "Uw activa",
-  "ModsBubble": "Uw mods",
+  "ModsBubble": "Jouw mods",
   "Dashboard": "Dashboard",
   "ModOutOfDate": "Mod is verouderd",
   "ModOutOfDatePlural": "Mods zijn verouderd",
   "SearchDlcs": "Zoek door uw DLC's ..",
   "SearchPackages": "Zoek door uw pakketten ..",
   "ModIsLocal": "Mod is lokaal",
-  "ModIsRemoved": "Verwijderd uit stoom",
+  "ModIsRemoved": "Verwijderd van Steam",
   "ModIsUnknown": "Kon de informatie van deze mod niet uit Steam halen",
   "ModIsNotDownloaded": "inhoud niet gevonden",
   "ModIsOutOfDate": "Mod is verouderd",
@@ -138,7 +138,7 @@
   "CopyWorkshopId": "Kopieer workshop -ID",
   "CopyAuthorLink": "Kopieer auteur link",
   "CopyAuthorId": "Kopieer auteur -ID",
-  "YourProfiles": "Uw profielen",
+  "YourProfiles": "Jouw profielen",
   "UnFavoriteThisProfile": "Dit profiel niet voorstander",
   "FavoriteThisProfile": "Favoriet dit profiel",
   "ProfileCreationFailed": "Kon geen nieuw profiel maken, zorg ervoor dat uw mapinstellingen correct zijn ingesteld in het paneel Opties",
@@ -162,7 +162,7 @@
   "MissingItemsRemain": "Sommige items ontbreken nog in dit profiel. Het profiel opslaan in de toekomst zal die items ervan verwijderen.",
   "ModIsPrivate": "Item is privé",
   "HidePseudoMods": "Verberg pseudo-mods zoals themamixen",
-  "YourDlcs": "Uw DLC's",
+  "YourDlcs": "Jouw DLC's",
   "AllDlcs": "Alle DLC's",
   "DLCs": "DLCS & CCPS",
   "DetectedIssues": "Gedetecteerde problemen",
@@ -198,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Wanneer u abonneert of een asset toevoegt, zal de tool automatisch uitsluiten of toevoegen op basis van deze instelling wanneer de tool is gelanceerd.",
   "FilterOutPackagesWithOneAsset_Tip": "Pakketten die slechts één kenmerk erin hebben, worden niet weergegeven op de pagina Pakketten. Ze worden nog steeds getoond op de pagina Activa.",
   "FilterOutPackagesWithMods_Tip": "Pakketten die een mod bevatten worden niet weergegeven op de pagina Pakketten. Ze worden nog steeds getoond op de pagina Mods.",
-  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
+  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the app is open.",
   "HidePseudoMods_Tip": "Thema mixen genereert een mod bestand om het te kunnen delen in de workshop. Door deze optie in te schakelen, worden die van je mods lijst verborgen en worden ze altijd meegenomen.",
   "AdvancedIncludeEnable_Tip": "Door deze optie in te schakelen, kunt u beide opgenomen & ingeschakelde staten van mods, vergelijkbaar met het laden van ordertool 1.",
   "AdvancedLaunchOptions_Tip": "Geeft extra opstart opties weer die worden gebruikt door ontwikkelaars in de profielinstellingen.",
@@ -402,7 +402,7 @@
   "PackageStatus": "Pakketstatus",
   "Author": "Auteur",
   "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
+  "Unsubscribe": "Uitschrijven",
   "Exclude": "Exclude",
   "Snooze": "Snooze",
   "Mod": {
@@ -414,12 +414,12 @@
     "Plural": "Assets"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Pakket",
+    "Plural": "Pakketten"
   },
   "Profile": {
-    "One": "Profile",
-    "Plural": "Profiles"
+    "One": "Profiel",
+    "Plural": "Profielen"
   },
   "IncludedCount": {
     "One": "{0} {1} included",
@@ -455,6 +455,7 @@
   "ExplainIssue": "Describe your issue here",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
   "SendReview": "Send the request for review",
   "EditTags": "Edit Tags",
   "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
