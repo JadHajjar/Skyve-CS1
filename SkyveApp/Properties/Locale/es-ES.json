@@ -405,7 +405,7 @@
   "Unsubscribe": "Anular suscripción",
   "Exclude": "Excluido",
   "Snooze": "Posponer",
-  "UnSnooze": "Un-Snooze",
+  "UnSnooze": "Encender",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -463,21 +463,21 @@
   "ShowAllReferencedPackages_Tip": "Muestra tanto los paquetes excluidos como los incluidos que hacen referencia al que estás viendo.",
   "TreatOptionalAsRequired": "Tratar paquetes opcionales como requeridos",
   "TreatOptionalAsRequired_Tip": "Esencialmente, esto muestra la notificación de dependencias que faltan para los paquetes opcionales.",
-  "AddCustomTag": "Add a custom tag",
+  "AddCustomTag": "Agregar etiqueta personalizada",
   "OutOfDateCount": {
-    "One": "{0} {1} is out of date",
-    "Plural": "{0} {1} are out of date"
+    "One": "{0} {1} está desactualizado",
+    "Plural": "{0} {1} están desactualizados"
   },
   "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+    "One": "{0} {1} no coincide con el tamaño en el taller de Steam",
+    "Plural": "{0} {1} no coinciden con sus respectivos tamaños en el taller de Steam"
   },
-  "PackageIsRemoved": "'{0}' was removed from Steam",
-  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
-  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
-  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
-  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
-  "RemovedFromSteam": "Removed from Steam",
-  "Missing": "Missing"
+  "PackageIsRemoved": "'{0}' ha sido eliminado de Steam",
+  "PackageIsUnknown": "La información de Steam no ha sido cargada aún para '{0}'",
+  "PackageIsNotDownloaded": "'{0}' ha sido eliminado de tu ordenador",
+  "PackageIsOutOfDate": "'{0}' está desactualizado\n\nEstás {1} detrás",
+  "PackageIsMaybeOutOfDate": "'{0}' puede estar desactualizado, fue actualizado {1}",
+  "PackageIsIncomplete": "El tamaño local de '{0}' ({1}) es diferente de {2} en Steam",
+  "RemovedFromSteam": "Eliminado de Steam",
+  "Missing": "Faltan"
 }
