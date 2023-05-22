@@ -405,6 +405,7 @@
   "Unsubscribe": "取消订阅",
   "Exclude": "卸下",
   "Snooze": "稍后提醒",
+  "UnSnooze": "Un-Snooze",
   "Mod": {
     "One": "个模组",
     "Plural": "个模组"
@@ -461,5 +462,22 @@
   "ShowAllReferencedPackages": "在“选项”面板里显示被卸下的插件",
   "ShowAllReferencedPackages_Tip": "参考您正在查看的页面，可以同时显示已装载与已卸下的插件。",
   "TreatOptionalAsRequired": "根据自己的实际需求处理这些可选插件",
-  "TreatOptionalAsRequired_Tip": "一般来说，它会显示这些可选插件缺失的必需物品信息。"
+  "TreatOptionalAsRequired_Tip": "一般来说，它会显示这些可选插件缺失的必需物品信息。",
+  "AddCustomTag": "Add a custom tag",
+  "OutOfDateCount": {
+    "One": "{0} {1} is out of date",
+    "Plural": "{0} {1} are out of date"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} does not match its size from the Workshop",
+    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+  },
+  "PackageIsRemoved": "'{0}' was removed from Steam",
+  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
+  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
+  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
+  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
+  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
+  "RemovedFromSteam": "Removed from Steam",
+  "Missing": "Missing"
 }
