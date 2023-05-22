@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Korjaamopakettien Puhdistus",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Lisätty uusia toimintoja, jotta voit helposti käsitellä Steamin ja ladattujen pakettien välisiä eroavaisuuksia.",
+                    "Paketit, joita et ole tilannut, eivät enää lataudu peliin.",
+                    "Pelin käynnistäminen kun LOT on auki, poistaa automaattisesti kaikki paketit, joita et ole tilannut, mutta ne ladataan tietokoneellesi.",
+                    "Lisätty painike Apuohjelmat välilehdessä manuaalisesti ajaa tämä puhdistus ja pakottaa ladata puuttuvat paketit."
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Uusi",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Lisätty mahdollisuus poistaa automaattinen puhdistus käytöstä pelin avaamisen yhteydessä.",
+                    "Lisätty mukautettu argumentit laatikko kehittyneitä käynnistys asetuksia."
                 ]
             }
         ]
@@ -268,27 +268,27 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Äänestä & Tilaajien Kuvake",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Lisäsi uuden kuvakkeen paketin viereen, joka näyttää nopean yhteenvedon paketin äänistä ja tilaajien määrästä.",
+                    "Paina sitä näyttääksesi arvot.",
+                    "Klikkaa kuvaketta saadaksesi perusteellisen kuvauksen tästä ominaisuudesta.",
+                    "Lisätty 'Ääni' ja 'Tilaajien Yhteensä' lajitteluvaihtoehtoja."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Omaisuuserän Vaatimukset",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Tarvittavat kohteet näytetään korjaamon sivulla on nyt integroitu Load Order Tool.",
+                    "Nämä tiedot sisällytetään nyt yhteensopivuusraporttiin, jotta näet nopeasti ja helposti mitä et puutu."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Muut Muutokset",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Päivitetään Pakettisivu, joka vastaa sisältöluetteloissa näytettyjä tietoja.",
+                    "Toissijaiset sisältölistat kuten 'Puuttuvat paketit' ja 'Työpajojen kokoelma' käyttävät nyt samaa käyttöliittymää kuin tärkeimmät sisältösivut, mahdollistetaan yksinkertaistettu kokemus ja enemmän vaihtoehtoja.",
+                    "Lisätty 'New Asset' ja 'Lataa Asset' käynnistysasetukset profiiliin, jotta ne ladataan nopeasti Asset Editoriin."
                 ]
             }
         ]
@@ -296,38 +296,38 @@
     {
         "Version": "3.0.0",
         "Date": "2023-05-23",
-        "Tagline": "Presenting, Skyve, the final successor of Load Order Mod 1/2 and Compatibility Report.\r\nComing for C:S I & C:S II",
+        "Tagline": "Esittää, Skyve, viimeinen seuraaja Load Order Mod 1/2 ja Yhteensopivuusraportti.\r\nComing for C:S I & C:S II",
         "ChangeGroups": [
             {
-                "Name": "Compatibility Report Overhaul",
+                "Name": "Yhteensopivuutta Koskevan Raportin Uudelleentarkastelu",
                 "Changes": [
-                    "Compatibility Report is now integrated directly into Skyve.",
-                    "Recommendations and info text are now clearer and easier to manage.",
-                    "Added a Snooze button to dismiss a certain compatibility notification.",
-                    "Required items automatically redirect to the packages' most recent successor.",
-                    "Local packages are automatically matched with their online counterpart, showing the information from Steam and correctly showing its compatibility info.",
-                    "You can now request a review for a package to notify us about missing information in the compatibility data.",
-                    "The Compatibility Report tab is now available."
+                    "Yhteensopivuusraportti on nyt integroitu suoraan Skyveen.",
+                    "Suositukset ja info teksti ovat nyt selkeämpiä ja helpompi hallita.",
+                    "Lisätty torkku-painike hylätäksesi tietyn yhteensopivuusilmoituksen.",
+                    "Tarvittavat kohteet ohjataan automaattisesti pakettien viimeisimpään seuraajaan.",
+                    "Paikalliset paketit sovitetaan automaattisesti nettivastineeseen, ja niissä näytetään Steamin tiedot ja osoitetaan niiden yhteensopivuus oikein.",
+                    "Voit nyt pyytää tarkista paketin, joka ilmoittaa meille yhteensopivuustietoihin sisältyvistä puuttuvista tiedoista.",
+                    "Yhteensopivuutta koskevan raportin välilehti on nyt saatavilla."
                 ]
             },
             {
-                "Name": "New Features",
+                "Name": "Uudet Ominaisuudet",
                 "Changes": [
-                    "You can now edit Find it! tags directly in the app to mods and assets. Assets are synched with the game.",
-                    "Added a \"References\" tab on a package's page to see all other packages that reference it.",
-                    "Added an option to make optional packages use the same notification as required packages.",
-                    "Added language dialects, Chinese Traditional (Taiwan), English UK, and Portuguese Brazil."
+                    "Voit nyt muokata Etsi sitä! tagit suoraan sovelluksessa modeihin ja resursseihin. Varat on synkronoitu pelin kanssa.",
+                    "Lisätty \"Viittaukset\" -välilehti paketin sivulle nähdäksesi kaikki muut siihen viittaavat paketit.",
+                    "Lisätty vaihtoehto tehdä valinnaisia paketteja käyttää samaa ilmoitusta kuin vaaditut paketit.",
+                    "Lisätty kielen murteita, Kiinan perinteinen (Taiwan), Englanti Iso-Britannia, ja Portugalin Brasilia."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Muut Muutokset",
                 "Changes": [
-                    "Pseudo-mods now include IMT Markings, Render it! Presets, Procedural Objects Fonts, and translation mods.",
-                    "Added links to the package page, as well as other information like its usage & type.",
-                    "Added new Profile usages: Map Creation, Scenario Making, and Theme Making.",
-                    "Added extra text in the list to show how many packages are hidden because of your profile usage.",
-                    "Improved the Actions button to make it more visible and easier to access.",
-                    "The new icon now glows based on what's happening, blue indicates that the game is running, red means no internet connection, and quick glowing means it's launching or closing the game."
+                    "Pseudo-modeihin kuuluvat nyt IMT Markings, Render it! Presets, Procedural Objects Fonts, ja käännösmoodit.",
+                    "Lisätty linkkejä pakettisivulle sekä muita tietoja, kuten sen käyttö & tyyppi.",
+                    "Lisätty uusia profiilin käyttöjä: Kartan luonti, Skenaarion Making, ja Teeman Making.",
+                    "Lisätty ylimääräinen teksti listaan näyttääksesi, kuinka monta pakettia on piilotettu profiilin käytön vuoksi.",
+                    "Parannettu Toiminnot-painiketta, jotta se olisi näkyvämpi ja helpompi käyttää.",
+                    "Uusi kuvake hehkuu nyt sen perusteella, mitä tapahtuu, sininen osoittaa, että peli on käynnissä, punainen tarkoittaa ei internet-yhteyttä, ja nopea hehku tarkoittaa sen käynnistämistä tai sulkemista peli."
                 ]
             }
         ]
