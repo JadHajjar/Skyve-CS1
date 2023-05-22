@@ -405,7 +405,7 @@
   "Unsubscribe": "Annulla iscrizione",
   "Exclude": "Escludi",
   "Snooze": "Postcipa",
-  "UnSnooze": "Un-Snooze",
+  "UnSnooze": "Non posticipare",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -463,21 +463,21 @@
   "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
   "TreatOptionalAsRequired": "Trattare i pacchetti opzionali come richiesto",
   "TreatOptionalAsRequired_Tip": "In sostanza, visualizza la notifica di dipendenza mancante per i pacchetti opzionali.",
-  "AddCustomTag": "Add a custom tag",
+  "AddCustomTag": "Aggiungi un tag personalizzato",
   "OutOfDateCount": {
-    "One": "{0} {1} is out of date",
-    "Plural": "{0} {1} are out of date"
+    "One": "{0} {1} è obsoleto",
+    "Plural": "{0} {1} sono obsolete"
   },
   "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+    "One": "{0} {1} non corrisponde alla sua dimensione nel Workshop",
+    "Plural": "{0} {1} non corrispondono alle rispettive dimensioni del Workshop"
   },
-  "PackageIsRemoved": "'{0}' was removed from Steam",
-  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
-  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
-  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
-  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
-  "RemovedFromSteam": "Removed from Steam",
-  "Missing": "Missing"
+  "PackageIsRemoved": "'{0}' è stato rimosso da Steam",
+  "PackageIsUnknown": "Le informazioni di Steam non sono ancora state caricate per '{0}'",
+  "PackageIsNotDownloaded": "'{0}' è stato rimosso dal computer",
+  "PackageIsOutOfDate": "'{0}' è obsoleto\n\nSei indietro di {1}",
+  "PackageIsMaybeOutOfDate": "'{0}' potrebbe essere obsoleto, è stato aggiornato {1}",
+  "PackageIsIncomplete": "La dimensione locale di '{0}' ({1}) è diversa da quella di {2} di Steam",
+  "RemovedFromSteam": "Rimosso da Steam",
+  "Missing": "Mancante"
 }
