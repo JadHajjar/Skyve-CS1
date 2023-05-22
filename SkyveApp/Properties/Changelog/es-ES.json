@@ -325,7 +325,7 @@
                     "Los pseudo-mods ahora incluyen marcadores de IMT, perfiles Render It!, fuentes de Procedural Objects y mods de traducción.",
                     "Enlaces a la página del paquete, así como otra información como su uso y tipo.",
                     "Nuevos tipos del perfil: Creación de mapas, Creación de escenarios y Creación de temas.",
-                    "Añadido texto extra en la lista para mostrar cuántos paquetes están ocultos debido al uso de su perfil.",
+                    "Texto extra en la lista para mostrar cuántos paquetes están ocultos debido al uso de su perfil.",
                     "Mejorado el botón Acciones para que sea más visible y fácil de acceder.",
                     "El nuevo icono ahora resplandece basado en lo que está sucediendo, azul indica que el juego se está ejecutando, rojo significa que no hay conexión a internet, y un rápido resplandor significa que está lanzando o cerrando el juego."
                 ]
