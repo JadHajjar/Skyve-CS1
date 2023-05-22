@@ -14,5 +14,6 @@ public interface IGenericPackageStatus
 	string? Note { get; set; }
 #if !API
 	NotificationType Notification { get; }
+	int IntType { get; }
 #endif
 }

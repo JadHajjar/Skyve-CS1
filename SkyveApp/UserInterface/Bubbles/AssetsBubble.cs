@@ -2,10 +2,12 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Enums;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -75,41 +77,61 @@ internal class AssetsBubble : StatusBubbleBase
 			return;
 		}
 
-		var assets = 0;
-		var outOfDate = 0;
-		var assetsSize = 0L;
-		var groups = CentralManager.Packages.Where(x => !x.IsMod && x.Assets.Any(a => a.IsIncluded)).GroupBy(x => x.GetCompatibilityInfo().Notification);
+		int assetsIncluded = 0, assetsOutOfDate = 0, assetsIncomplete = 0;
+		var assetSize = 0L;
 
-		foreach (var item in CentralManager.Assets)
+		var crDic = new Dictionary<NotificationType, int>();
+
+		foreach (var asset in CentralManager.Assets)
 		{
-			if (item.IsIncluded)
+			if (!asset.IsIncluded)
+				continue;
+
+			assetsIncluded++;
+			assetSize += asset.FileSize;
+
+			if (asset.IsMod)
+				continue;
+
+			switch (asset.Package.Status)
 			{
-				assets++;
-				assetsSize += item.FileSize;
-
-				if (item.Package.Status == Domain.Enums.DownloadStatus.OutOfDate)
-				{
-					outOfDate++;
-				}
+				case DownloadStatus.OutOfDate:
+					assetsOutOfDate++;
+					break;
+				case DownloadStatus.PartiallyDownloaded:
+					assetsIncomplete++;
+					break;
 			}
+
+			var notif = asset.GetCompatibilityInfo().Notification;
+
+			if (crDic.ContainsKey(notif))
+				crDic[notif]++;
+			else
+				crDic[notif] = 1;
 		}
 
-		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assets, Locale.Asset.FormatPlural(assets).ToLower()));
-		DrawValue(e, ref targetHeight, assetsSize.SizeString(), Locale.TotalSize);
+		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower()));
+		DrawValue(e, ref targetHeight, assetSize.SizeString(), Locale.TotalSize);
 
-		if (outOfDate > 0)
+		if (assetsOutOfDate > 0)
 		{
-			DrawValue(e, ref targetHeight, outOfDate.ToString(), outOfDate == 1 ? Locale.AssetOutOfDate : Locale.AssetOutOfDatePlural, FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, Locale.OutOfDateCount.FormatPlural(assetsOutOfDate, Locale.Mod.FormatPlural(assetsOutOfDate).ToLower()), FormDesign.Design.YellowColor);
 		}
 
-		foreach (var group in groups.OrderBy(x => x.Key))
+		if (assetsIncomplete > 0)
+		{
+			DrawText(e, ref targetHeight, Locale.IncompleteCount.FormatPlural(assetsIncomplete, Locale.Mod.FormatPlural(assetsIncomplete).ToLower()), FormDesign.Design.RedColor);
+		}
+
+		foreach (var group in crDic.OrderBy(x => x.Key))
 		{
 			if (group.Key <= NotificationType.Info)
 			{
 				continue;
 			}
 
-			DrawText(e, ref targetHeight, LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Count(), Locale.Asset.FormatPlural(group.Count()).ToLower()), group.Key.GetColor());
+			DrawText(e, ref targetHeight, LocaleCR.Get($"{group.Key}Count").FormatPlural(group.Value, Locale.Asset.FormatPlural(group.Value).ToLower()), group.Key.GetColor());
 		}
 	}
 }

@@ -67,11 +67,11 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 			e.Graphics.DrawRoundedImage(generic, imageRect, (int)(3 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 
-		List<string>? tags = null;
+		List<(Color Color, string Text)>? tags = null;
 
 		var textRect = e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.TopLeft);
 
-		e.Graphics.DrawString(Package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, Font, new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(Package?.CleanName(out tags) ?? Locale.UnknownPackage, Font, new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 		var tagRect = new Rectangle(textRect.Right, textRect.Y, 0, textRect.Height);
 
@@ -79,18 +79,7 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		{
 			foreach (var item in tags)
 			{
-				if (item.ToLower() == "stable")
-				{ continue; }
-
-				var color = item.ToLower() switch
-				{
-					"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-					"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-					"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
-					_ => (Color?)null
-				};
-
-				tagRect.X -= Padding.Left + e.DrawLabel(color is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.TopRight, smaller: true).Width;
+				tagRect.X -= Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.TopRight, smaller: true).Width;
 			}
 		}
 

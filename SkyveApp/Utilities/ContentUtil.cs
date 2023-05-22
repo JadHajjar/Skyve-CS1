@@ -235,6 +235,8 @@ internal class ContentUtil
 
 			package.Assets = AssetsUtil.GetAssets(package, withSubDirectories).ToArray();
 			package.Mod = ModsUtil.GetMod(package);
+			package.FileSize = GetTotalSize(package.Folder);
+			package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
 			if (package.Assets.Length != 0 || package.Mod != null)
 			{
@@ -282,6 +284,8 @@ internal class ContentUtil
 
 		package.Assets = AssetsUtil.GetAssets(package, !self).ToArray();
 		package.Mod = ModsUtil.GetMod(package);
+		package.FileSize = GetTotalSize(package.Folder);
+		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
 		CentralManager.AddPackage(package);
 	}
@@ -296,6 +300,8 @@ internal class ContentUtil
 
 		package.Assets = AssetsUtil.GetAssets(package, !self).ToArray();
 		package.Mod = ModsUtil.GetMod(package);
+		package.FileSize = GetTotalSize(package.Folder);
+		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
 		if (!package.Workshop && package.Mod is null)
 		{

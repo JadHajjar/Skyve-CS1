@@ -1,4 +1,5 @@
 ﻿using SkyveApp.Domain;
+using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -12,13 +13,13 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
-internal class PC_ImportCollection : PC_GenericPackageList
+internal class PC_ViewCollection : PC_GenericPackageList
 {
-	private readonly string? _id;
+	private readonly ulong _id;
 
-	internal PC_ImportCollection(Domain.Steam.SteamWorkshopItem collection) : base(collection.RequiredPackages.Select(x => new Profile.Asset { SteamId = x }))
+	internal PC_ViewCollection(IPackage collection) : base(collection.RequiredPackages.Select(x => new Profile.Asset { SteamId = x }))
 	{
-		_id = collection.PublishedFileID;
+		_id = collection.SteamId;
 
 		TLP_Main.SetColumn(P_FiltersContainer, 0);
 		TLP_Main.SetColumnSpan(P_FiltersContainer, TLP_Main.ColumnCount);
@@ -27,14 +28,14 @@ internal class PC_ImportCollection : PC_GenericPackageList
 		{
 			Collection = true
 		};
-		PB_Icon.LoadImage(collection.PreviewURL, ImageManager.GetImage);
+		PB_Icon.LoadImage(collection.IconUrl, ImageManager.GetImage);
 
 		TLP_Main.Controls.Add(PB_Icon, 0, 0);
 		TLP_Main.SetRowSpan(PB_Icon, 3);
 
 		L_CollectionName = new Label
 		{
-			Text = collection.Title,
+			Text = collection.Name,
 			AutoSize = true
 		};
 		TLP_Main.Controls.Add(L_CollectionName, 1, 0);

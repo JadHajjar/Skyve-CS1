@@ -28,7 +28,7 @@ public partial class EditTagsForm : BaseForm
 		Text = LocaleHelper.GetGlobalText("Tags");
 
 		foreach (var link in package.Tags.Where(x => x.Source == Domain.Enums.TagSource.FindIt))
-		{ AddLink(link); }
+		{ AddTag(link); }
 	}
 
 	protected override void UIChanged()
@@ -41,7 +41,7 @@ public partial class EditTagsForm : BaseForm
 
 	private void B_AddLink_Click(object sender, EventArgs e)
 	{
-		var prompt = MessagePrompt.ShowInput(LocaleCR.AddGlobalTag);
+		var prompt = MessagePrompt.ShowInput(Locale.AddCustomTag, "");
 
 		if (prompt.DialogResult != DialogResult.OK)
 		{
@@ -53,10 +53,7 @@ public partial class EditTagsForm : BaseForm
 			return;
 		}
 
-		var control = new TagControl { TagInfo = new(Domain.Enums.TagSource.FindIt, prompt.Input) };
-		control.Click += TagControl_Click;
-		FLP_Tags.Controls.Add(control);
-		addTagControl.SendToBack();
+		AddTag(new(Domain.Enums.TagSource.FindIt, prompt.Input));
 	}
 
 	private void TagControl_Click(object sender, EventArgs e)
@@ -64,11 +61,12 @@ public partial class EditTagsForm : BaseForm
 		(sender as Control)!.Dispose();
 	}
 
-	private void AddLink(TagItem packageLink)
+	private void AddTag(TagItem tag)
 	{
-		FLP_Tags.Controls.Add(new TagControl() { TagInfo= packageLink });
-
-		addTagControl.BringToFront();
+		var control = new TagControl { TagInfo = tag };
+		control.Click += TagControl_Click;
+		FLP_Tags.Controls.Add(control);
+		addTagControl.SendToBack();
 	}
 
 	private IEnumerable<string?> GetLinks()
@@ -78,6 +76,7 @@ public partial class EditTagsForm : BaseForm
 
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
+		DialogResult = DialogResult.OK;
 		AssetsUtil.SetFindItTag(Package, GetLinks().WhereNotEmpty().ListStrings(" "));							
 		Close();
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));

@@ -3,6 +3,8 @@
 using SkyveApp.Domain;
 
 using System;
+using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace SkyveApp.Utilities;
@@ -20,11 +22,6 @@ internal class Locale : LocaleHelper
 	public static Translation ProfileBubble => _instance.GetText(nameof(ProfileBubble));
 	public static Translation AssetsBubble => _instance.GetText(nameof(AssetsBubble));
 	public static Translation ModsBubble => _instance.GetText(nameof(ModsBubble));
-	public static Translation ModOutOfDatePlural => _instance.GetText(nameof(ModOutOfDatePlural));
-	public static Translation ModOutOfDate => _instance.GetText(nameof(ModOutOfDate));
-	public static Translation ModIncompletePlural => _instance.GetText(nameof(ModIncompletePlural));
-	public static Translation ModIncomplete => _instance.GetText(nameof(ModIncomplete));
-	public static Translation MultipleModsIncluded => _instance.GetText(nameof(MultipleModsIncluded));
 	public static Translation Local => _instance.GetText(nameof(Local));
 	public static Translation Workshop => _instance.GetText(nameof(Workshop));
 	public static Translation Enabled => _instance.GetText(nameof(Enabled));
@@ -32,22 +29,6 @@ internal class Locale : LocaleHelper
 	public static Translation Included => _instance.GetText(nameof(Included));
 	public static Translation Excluded => _instance.GetText(nameof(Excluded));
 	public static Translation Loading => _instance.GetText(nameof(Loading));
-	public static Translation ModIsLocal => _instance.GetText(nameof(ModIsLocal));
-	public static Translation ModIsRemoved => _instance.GetText(nameof(ModIsRemoved));
-	public static Translation ModIsUnknown => _instance.GetText(nameof(ModIsUnknown));
-	public static Translation ModIsNotDownloaded => _instance.GetText(nameof(ModIsNotDownloaded));
-	public static Translation ModIsOutOfDate => _instance.GetText(nameof(ModIsOutOfDate));
-	public static Translation ModIsMaybeOutOfDate => _instance.GetText(nameof(ModIsMaybeOutOfDate));
-	public static Translation ModIsIncomplete => _instance.GetText(nameof(ModIsIncomplete));
-	public static Translation ModIsUpToDate => _instance.GetText(nameof(ModIsUpToDate));
-	public static Translation AssetIsLocal => _instance.GetText(nameof(AssetIsLocal));
-	public static Translation AssetIsRemoved => _instance.GetText(nameof(AssetIsRemoved));
-	public static Translation AssetIsUnknown => _instance.GetText(nameof(AssetIsUnknown));
-	public static Translation AssetIsNotDownloaded => _instance.GetText(nameof(AssetIsNotDownloaded));
-	public static Translation AssetIsOutOfDate => _instance.GetText(nameof(AssetIsOutOfDate));
-	public static Translation AssetIsMaybeOutOfDate => _instance.GetText(nameof(AssetIsMaybeOutOfDate));
-	public static Translation AssetIsIncomplete => _instance.GetText(nameof(AssetIsIncomplete));
-	public static Translation AssetIsUpToDate => _instance.GetText(nameof(AssetIsUpToDate));
 	public static Translation Server => _instance.GetText(nameof(Server));
 	public static Translation Vanilla => _instance.GetText(nameof(Vanilla));
 	public static Translation UpToDate => _instance.GetText(nameof(UpToDate));
@@ -259,6 +240,7 @@ internal class Locale : LocaleHelper
 	public static Translation ControlToSelectMultiplePackages => _instance.GetText(nameof(ControlToSelectMultiplePackages));
 	public static Translation Include => _instance.GetText(nameof(Include));
 	public static Translation Snooze => _instance.GetText(nameof(Snooze));
+	public static Translation UnSnooze => _instance.GetText(nameof(UnSnooze));
 	public static Translation Unsubscribe => _instance.GetText(nameof(Unsubscribe));
 	public static Translation Exclude => _instance.GetText(nameof(Exclude));
 	public static Translation Mod => _instance.GetText(nameof(Mod));
@@ -274,4 +256,15 @@ internal class Locale : LocaleHelper
 	public static Translation ReviewRequestSent => _instance.GetText(nameof(ReviewRequestSent));
 	public static Translation ReviewRequestFailed => _instance.GetText(nameof(ReviewRequestFailed));
 	public static Translation EditTags => _instance.GetText(nameof(EditTags));
+	public static Translation AddCustomTag => _instance.GetText(nameof(AddCustomTag));
+	public static Translation OutOfDateCount => _instance.GetText(nameof(OutOfDateCount));
+	public static Translation IncompleteCount => _instance.GetText(nameof(IncompleteCount));
+	public static Translation PackageIsIncomplete => _instance.GetText(nameof(PackageIsIncomplete));
+	public static Translation PackageIsMaybeOutOfDate => _instance.GetText(nameof(PackageIsMaybeOutOfDate));
+	public static Translation PackageIsOutOfDate => _instance.GetText(nameof(PackageIsOutOfDate));
+	public static Translation PackageIsNotDownloaded => _instance.GetText(nameof(PackageIsNotDownloaded));
+	public static Translation PackageIsUnknown => _instance.GetText(nameof(PackageIsUnknown));
+	public static Translation PackageIsRemoved => _instance.GetText(nameof(PackageIsRemoved));
+	public static Translation RemovedFromSteam => _instance.GetText(nameof(RemovedFromSteam));
+	public static Translation Missing => _instance.GetText(nameof(Missing));
 }

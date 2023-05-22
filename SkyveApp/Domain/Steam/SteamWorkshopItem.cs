@@ -18,8 +18,8 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	private static readonly DateTime _epoch = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
 	public DateTime Timestamp { get; set; }
+	public ulong SteamId { get; set; }
 	public string? Title { get; set; }
-	public string? PublishedFileID { get; set; }
 	public long ServerSize { get; set; }
 	public string? PreviewURL { get; set; }
 	public ulong AuthorID { get; set; }
@@ -31,6 +31,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	public SteamVisibility Visibility { get; set; }
 	public bool Incompatible { get; set; }
 	public int Reports { get; set; }
+	public bool IsCollection { get; set; }
 	public ulong[]? RequiredPackages { get; set; }
 	public int PositiveVotes { get; set; }
 	public bool Banned { get; set; }
@@ -40,7 +41,6 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	[JsonIgnore] public SteamUser? Author => AuthorID == 0 ? null : SteamUtil.GetUser(AuthorID);
 	[JsonIgnore] public string? Name => Title;
 	[JsonIgnore] public bool IsMod => WorkshopTags?.Contains("Mod") ?? false;
-	[JsonIgnore] public ulong SteamId => ulong.TryParse(PublishedFileID, out var id) ? id : 0;
 	[JsonIgnore] public string? IconUrl => PreviewURL;
 	[JsonIgnore] public Bitmap? IconImage => ImageManager.GetImage(IconUrl, true).Result;
 	[JsonIgnore] public Bitmap? AuthorIconImage => ImageManager.GetImage(Author?.AvatarUrl, true).Result;
@@ -79,17 +79,18 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 			}
 		}
 	}
+	public string? PublishedFileID { set => SteamId = ulong.TryParse(value, out var id) ? id : 0; }
 
 	public SteamWorkshopItem(SteamWorkshopItemEntry entry)
 	{
-		Timestamp = DateTime.UtcNow;
+		Timestamp = DateTime.Now;
 		RemovedFromSteam = entry.result is not 1 and not 17;
 		Visibility = entry.visibility;
 		Title = entry.title;
-		PublishedFileID = entry.publishedfileid;
+		SteamId = ulong.TryParse(entry.publishedfileid, out var id) ? id : 0;
 		ServerSize = entry.file_size;
 		PreviewURL = entry.preview_url;
-		AuthorID = ulong.TryParse(entry.creator, out var id) ? id : 0;
+		AuthorID = ulong.TryParse(entry.creator, out var aid) ? aid : 0;
 		SteamDescription = entry.file_description;
 		ServerTime = _epoch.AddSeconds(entry.time_updated);
 		CreatedUTC = _epoch.AddSeconds(entry.time_created);
@@ -99,6 +100,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 		Incompatible = entry.incompatible;
 		Subscriptions = entry.subscriptions;
 		Reports = entry.num_reports;
+		IsCollection = entry.file_type == 2;
 		RequiredPackages = entry.children?.Where(x => x.file_type == 0 && ulong.TryParse(x.publishedfileid, out _)).Select(x => ulong.Parse(x.publishedfileid)).ToArray();
 		WorkshopTags = (entry.tags
 			?.Select(item => item.tag)

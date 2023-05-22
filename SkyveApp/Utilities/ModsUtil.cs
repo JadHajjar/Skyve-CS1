@@ -3,12 +3,14 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -211,54 +213,52 @@ internal static class ModsUtil
 
 	public static DownloadStatus GetStatus(IPackage mod, out string reason)
 	{
-		if (!mod.Workshop)
-		{
-			reason = Locale.ModIsLocal;
-			return DownloadStatus.OK;
-		}
-
 		if (mod.Package?.RemovedFromSteam ?? false)
 		{
-			reason = Locale.ModIsRemoved;
+			reason = Locale.PackageIsRemoved.Format(mod.CleanName());
 			return DownloadStatus.Removed;
 		}
 
 		if (mod.Package?.WorkshopInfo is null)
 		{
-			reason = Locale.ModIsUnknown;
+			if (!mod.Workshop)
+			{
+				reason = string.Empty;
+				return DownloadStatus.None;
+			}
+
+			reason = Locale.PackageIsUnknown.Format(mod.CleanName());
 			return DownloadStatus.Unknown;
 		}
 
 		if (!Directory.Exists(mod.Folder))
 		{
-			reason = Locale.ModIsNotDownloaded;
+			reason = Locale.PackageIsNotDownloaded.Format(mod.CleanName());
 			return DownloadStatus.NotDownloaded;
 		}
 
 		var updatedServer = mod.ServerTime;
 		var updatedLocal = mod.Package?.LocalTime ?? DateTime.MinValue;
 		var sizeServer = mod.ServerSize;
-		var localSize = ContentUtil.GetTotalSize(mod.Folder);
+		var localSize = mod.Package?.FileSize ?? 0;
 
 		if (updatedLocal < updatedServer)
 		{
-			var certain =
-				localSize < sizeServer ||
-				updatedLocal < updatedServer.AddHours(-24);
+			var certain = updatedLocal < updatedServer.AddHours(-24);
 
-			reason = certain ? Locale.ModIsOutOfDate : Locale.ModIsMaybeOutOfDate;
-			reason += $"\r\n{Locale.Server}: {updatedServer:g} | {Locale.Local}: {updatedLocal:g}";
+			reason = certain
+				? Locale.PackageIsOutOfDate.Format(mod.CleanName(), (updatedServer - updatedLocal).ToReadableString(true))
+				: Locale.PackageIsMaybeOutOfDate.Format(mod.CleanName(), updatedServer.ToLocalTime().ToRelatedString(true));
 			return DownloadStatus.OutOfDate;
 		}
 
-		if (localSize < sizeServer)
+		if (localSize != sizeServer && sizeServer > 0)
 		{
-			reason = Locale.ModIsIncomplete;
-			reason += $"\r\n{Locale.Server}: {sizeServer.SizeString()} | {Locale.Local}: {localSize.SizeString()}";
+			reason = Locale.PackageIsIncomplete.Format(mod.CleanName(), localSize.SizeString(), sizeServer.SizeString());
 			return DownloadStatus.PartiallyDownloaded;
 		}
 
-		reason = Locale.ModIsUpToDate;
+		reason = string.Empty;
 		return DownloadStatus.OK;
 	}
 
@@ -272,24 +272,60 @@ internal static class ModsUtil
 		return CentralManager.Mods.FirstOrDefault(x => x.SteamId == steamID);
 	}
 
-	internal static string CleanName(this IPackage package) => package.ToString().RemoveVersionText(out _);
-
-	internal static string RemoveVersionText(this string name, out List<string> tags)
+	internal static string CleanName(this IPackage package)
 	{
-		var text = name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
+		if (package?.Name is null)
+			return string.Empty;
+
+		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
+
+		return text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
+	}
+
+	internal static string CleanName(this IPackage package, out List<(Color Color, string Text)> tags)
+	{
+		tags = new();
+
+		if (package?.Name is null)
+			return string.Empty;
+
+		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
 
 		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
 
-		tags = new();
 
 		foreach (Match match in tagMatches)
 		{
 			var tagText = match.Groups[1].Value.Trim();
 
-			if (!tags.Contains(tagText))
+			if (!tags.Any(x => x.Text == tagText))
 			{
-				tags.Add(tagText);
+				if (tagText.ToLower() is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken")
+				{ continue; }
+
+				var color = tagText.ToLower() switch
+				{
+					"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
+					"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
+					_ => (Color?)null
+				};
+
+				tags.Add((color ?? FormDesign.Design.ButtonColor, color is null ? tagText : LocaleHelper.GetGlobalText(tagText).One.ToUpper()));
+			}
+		}
+
+		if (package.Incompatible)
+		{
+			tags.Add((FormDesign.Design.RedColor, LocaleCR.Incompatible.One.ToUpper()));
+		}
+		else
+		{
+			var compatibility = package.GetCompatibilityInfo();
+
+			if (compatibility.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+			{
+				tags.Add((Color.FromArgb(225, FormDesign.Design.RedColor), LocaleCR.Broken.One.ToUpper()));
 			}
 		}
 

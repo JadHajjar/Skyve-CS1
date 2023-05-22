@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveShared;
-public static class UGCListTransfer
+public static class BlackListTransfer
 {
-	public const string FILE_NAME = "UGCListTransfer.txt";
+	public const string FILE_NAME = "BlackListTransfer.txt";
 	const string MISSING = "missing";
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
 
@@ -28,11 +28,6 @@ public static class UGCListTransfer
 		if (missing)
 		{
 			ids2.Add(MISSING);
-		}
-
-		if (ids2.Count == 0)
-		{
-			DeleteFile();
 		}
 
 		var text = string.Join(";", ids2.ToArray());

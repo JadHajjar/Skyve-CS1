@@ -31,6 +31,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
 	protected readonly ItemListControl<T> LC_Items;
+	private readonly IncludeAllButton<T> I_Actions;
 	protected int UsageFilteredOut;
 	private bool searchEmpty = true;
 	private readonly List<string> searchTermsOr = new();
@@ -45,8 +46,17 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		InitializeComponent();
 
+		I_Actions = new IncludeAllButton<T>(LC_Items);
+		I_Actions.ActionClicked += I_Actions_Click;
+		I_Actions.IncludeAllClicked += IncludeAll;
+		I_Actions.ExcludeAllClicked += ExcludeAll;
+		I_Actions.EnableAllClicked += EnableAll;
+		I_Actions.DisableAllClicked += DisableAll;
+		I_Actions.SubscribeAllClicked += SubscribeAll;
+
 		TLP_Main.Controls.Add(LC_Items, 0, TLP_Main.RowCount - 1);
 		TLP_Main.SetColumnSpan(LC_Items, TLP_Main.ColumnCount);
+		TLP_MiddleBar.Controls.Add(I_Actions, 0, 0);
 
 		if (this is not PC_GenericPackageList)
 		{
@@ -111,8 +121,6 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		CentralManager.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
 		CompatibilityManager.ReportProcessed += CentralManager_WorkshopInfoUpdated;
-
-		SlickTip.SetTo(I_Actions, Locale.Actions);
 
 		if (!load)
 		{
@@ -202,7 +210,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void LC_Items_CompatibilityReportSelected(NotificationType obj)
 	{
-		if ((int)DD_ReportSeverity.SelectedItem == (int)(obj))
+		if ((int)DD_ReportSeverity.SelectedItem == (int)obj)
 		{
 			DD_ReportSeverity.SelectedItem = Dropdowns.CompatibilityNotificationFilter.Any;
 		}
@@ -219,13 +227,13 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void LC_Items_DownloadStatusSelected(DownloadStatus obj)
 	{
-		if (DD_PackageStatus.SelectedItem == (DownloadStatusFilter)(obj + 2))
+		if (DD_PackageStatus.SelectedItem == (DownloadStatusFilter)(obj + 1))
 		{
 			DD_PackageStatus.SelectedItem = DownloadStatusFilter.Any;
 		}
 		else
 		{
-			DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 2);
+			DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 1);
 		}
 
 		if (P_FiltersContainer.Height == 0)
@@ -251,7 +259,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		base.DesignChanged(design);
 
-		tableLayoutPanel3.BackColor = design.AccentBackColor;
+		TLP_MiddleBar.BackColor = design.AccentBackColor;
 		P_Filters.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, -1, 1));
 		LC_Items.BackColor = design.BackColor;
 		L_Counts.ForeColor = L_FilterCount.ForeColor = design.InfoColor;
@@ -327,7 +335,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			= DD_Author.Margin = DD_PackageStatus.Margin = DD_Profile.Margin = DD_Tags.Margin = UI.Scale(new Padding(4, 2, 4, 2), UI.FontScale);
 
 		I_ClearFilters.Size = UI.Scale(new Size(16, 16), UI.FontScale);
-		L_Counts.Font = L_FilterCount.Font = UI.Font(8.25F, FontStyle.Bold);
+		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
@@ -466,14 +474,15 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (DD_PackageStatus.SelectedItem != DownloadStatusFilter.Any)
 		{
-			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.None)
-			{
-				if (item.Workshop)
-				{
-					return true;
-				}
-			}
-			else if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
+			//if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.None)
+			//{
+			//	if (item.Workshop)
+			//	{
+			//		return true;
+			//	}
+			//}
+			//else
+			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
 				if (!item.Workshop || item.Package?.Status <= DownloadStatus.OK)
 				{
@@ -482,7 +491,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 2) != (int)(item.Package?.Status ?? DownloadStatus.None))
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)(item.Package?.Status ?? DownloadStatus.None))
 				{
 					return true;
 				}
@@ -682,12 +691,67 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		FilterChanged(sender, e);
 	}
 
-	private void L_Duplicates_Click(object sender, EventArgs e)
+	private void Icon_SizeChanged(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_ModUtilities>(null);
+		(sender as Control)!.Width = (sender as Control)!.Height;
 	}
 
-	private async void B_UnsubscribeAll_Click()
+	private void I_SortOrder_Click(object sender, EventArgs e)
+	{
+		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDesc);
+
+		CentralManager.SessionSettings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
+		CentralManager.SessionSettings.Save();
+
+		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
+	}
+
+	private void I_Actions_Click(object sender, EventArgs e)
+	{
+		var items = new SlickStripItem[]
+		{
+			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
+			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
+			, new (string.Empty)
+			, new (Locale.EnableAll, "I_Enabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
+			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () =>DisableAll(this, EventArgs.Empty))
+			, new (string.Empty)
+			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
+			, new (string.Empty)
+			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
+			, new (string.Empty, show: this is PC_GenericPackageList)
+			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
+			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
+		};
+
+		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
+	}
+
+	private void DisableAll(object sender, EventArgs e)
+	{
+		SetEnabled(LC_Items.FilteredItems, false);
+		LC_Items.Invalidate();
+	}
+
+	private void EnableAll(object sender, EventArgs e)
+	{
+		SetEnabled(LC_Items.FilteredItems, true);
+		LC_Items.Invalidate();
+	}
+
+	private void ExcludeAll(object sender, EventArgs e)
+	{
+		SetIncluded(LC_Items.FilteredItems, false);
+		LC_Items.Invalidate();
+	}
+
+	private void IncludeAll(object sender, EventArgs e)
+	{
+		SetIncluded(LC_Items.FilteredItems, true);
+		LC_Items.Invalidate();
+	}
+
+	private async void UnsubscribeAll(object sender, EventArgs e)
 	{
 		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
 		{
@@ -699,15 +763,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_Actions.Loading = false;
 	}
 
-	private async void B_SubscribeAll_Click()
+	private async void SubscribeAll(object sender, EventArgs e)
 	{
 		var removeBadPackages = false;
 		var steamIds = LC_Items.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.SteamId != 0);
-
-		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
-		{
-			return;
-		}
 
 		foreach (var item in steamIds.ToList())
 		{
@@ -729,10 +788,15 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		await CitiesManager.Subscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
+		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		{
+			return;
+		}
+
+		await CitiesManager.Subscribe(steamIds.Select(x => x.Item.SteamId));
 	}
 
-	private async void B_DeleteAll_Click()
+	private async void DeleteAll(object sender, EventArgs e)
 	{
 		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
 		{
@@ -756,41 +820,5 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		});
 		I_Actions.Loading = false;
-	}
-
-	private void Icon_SizeChanged(object sender, EventArgs e)
-	{
-		(sender as Control)!.Width = (sender as Control)!.Height;
-	}
-
-	private void I_SortOrder_Click(object sender, EventArgs e)
-	{
-		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDesc);
-
-		CentralManager.SessionSettings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
-		CentralManager.SessionSettings.Save();
-
-		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
-	}
-
-	private void I_Actions_Click(object sender, EventArgs e)
-	{
-		var items = new SlickStripItem[]
-		{
-			  new (Locale.IncludeAll, "I_Check", action: () => { SetIncluded(LC_Items.FilteredItems, true); LC_Items.Invalidate(); })
-			, new (Locale.ExcludeAll, "I_X", action: () => { SetIncluded(LC_Items.FilteredItems, false); LC_Items.Invalidate(); })
-			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => { SetEnabled(LC_Items.FilteredItems, true); LC_Items.Invalidate(); })
-			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () => { SetEnabled(LC_Items.FilteredItems, false); LC_Items.Invalidate(); })
-			, new (string.Empty)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
-			, new (string.Empty)
-			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: B_SubscribeAll_Click)
-			, new (string.Empty, show: this is PC_GenericPackageList)
-			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: B_UnsubscribeAll_Click)
-			, new (Locale.DeleteAll, "I_Disposable", action: B_DeleteAll_Click)
-		};
-
-		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, I_Actions.PointToScreen(new Point(I_Actions.Width + 5, 0)), items));
 	}
 }

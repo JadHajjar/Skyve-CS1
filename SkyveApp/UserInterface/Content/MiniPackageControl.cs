@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
@@ -15,13 +14,28 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Content;
 internal class MiniPackageControl : SlickControl
 {
-	public IPackage? Package => SteamUtil.GetItem(SteamId);
+	private readonly IPackage? _package;
+	public IPackage? Package => _package ?? SteamUtil.GetItem(SteamId);
 	public ulong SteamId { get; }
+
+	public bool ReadOnly { get; set; }
 
 	public MiniPackageControl(ulong steamId)
 	{
 		Cursor = Cursors.Hand;
 		SteamId = steamId;
+
+		if (Package is null)
+		{
+			SteamUtil.WorkshopItemsLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
+		}
+	}
+
+	public MiniPackageControl(IPackage package)
+	{
+		Cursor = Cursors.Hand;
+		_package = package;
+		SteamId = package.SteamId;
 
 		if (Package is null)
 		{
@@ -41,7 +55,9 @@ internal class MiniPackageControl : SlickControl
 		base.OnMouseClick(e);
 
 		if (Package is null)
+		{
 			return;
+		}
 
 		switch (e.Button)
 		{
@@ -50,13 +66,13 @@ internal class MiniPackageControl : SlickControl
 				var imageRect = ClientRectangle.Pad(Padding);
 				imageRect = imageRect.Align(new Size(imageRect.Height, imageRect.Height), ContentAlignment.MiddleRight);
 
-				if (imageRect.Contains(e.Location))
+				if (!ReadOnly && imageRect.Contains(e.Location))
 				{
 					Dispose();
 				}
 				else
 				{
-					Program.MainForm.PushPanel(null, new PC_PackagePage(Package));
+					Program.MainForm.PushPanel(null, Package.IsCollection ? new PC_ViewCollection(Package) : new PC_PackagePage(Package));
 				}
 
 				break;
@@ -87,7 +103,15 @@ internal class MiniPackageControl : SlickControl
 
 		if (image is not null)
 		{
-			e.Graphics.DrawRoundedImage(image, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			if (!Package!.Workshop)
+			{
+				using var unsatImg = new Bitmap(image, imageRect.Size).Tint(Sat: 0);
+				e.Graphics.DrawRoundedImage(unsatImg, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			}
+			else
+			{
+				e.Graphics.DrawRoundedImage(image, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+			}
 		}
 		else
 		{
@@ -96,33 +120,24 @@ internal class MiniPackageControl : SlickControl
 			e.Graphics.DrawRoundedImage(generic, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
 
-		List<string>? tags = null;
+		List<(Color Color, string Text)>? tags = null;
 
-		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, HoverState.HasFlag(HoverState.Hovered) ? (imageRect.Right + Padding.Left) : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, !ReadOnly && HoverState.HasFlag(HoverState.Hovered) ? (imageRect.Right + Padding.Left) : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+		var text = Package?.CleanName(out tags) ?? Locale.UnknownPackage;
 
-		e.Graphics.DrawString(Package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(text, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		var tagRect = new Rectangle(textRect.Right, textRect.Y, 0, textRect.Height);
+		var tagRect = new Rectangle(textRect.X + (int)e.Graphics.Measure(text, Font).Width, textRect.Y, 0, textRect.Height);
 
 		if (tags is not null)
 		{
 			foreach (var item in tags)
 			{
-				if (item.ToLower() is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken" )
-				{ continue; }
-
-				var color = item.ToLower() switch
-				{
-					"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-					"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-					_ => (Color?)null
-				};
-
-				tagRect.X -= Padding.Left + e.DrawLabel(color is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleRight, smaller: true).Width;
+				tagRect.X += Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
 			}
 		}
 
-		if (HoverState.HasFlag(HoverState.Hovered))
+		if (!ReadOnly && HoverState.HasFlag(HoverState.Hovered))
 		{
 			imageRect = ClientRectangle.Pad(Padding).Align(imageRect.Size, ContentAlignment.MiddleRight);
 
@@ -138,7 +153,7 @@ internal class MiniPackageControl : SlickControl
 
 		if (Dock == DockStyle.None)
 		{
-			Width = (2 * (imageRect.Width + Padding.Horizontal)) + textRect.Right - tagRect.X + (int)e.Graphics.Measure(Package?.Name?.RemoveVersionText(out _) ?? Locale.UnknownPackage, Font).Width + 1;
+			Width = (2 * (imageRect.Width + Padding.Horizontal)) + textRect.Right - tagRect.X + (int)e.Graphics.Measure(Package?.CleanName(out _) ?? Locale.UnknownPackage, Font).Width + 1;
 		}
 	}
 }

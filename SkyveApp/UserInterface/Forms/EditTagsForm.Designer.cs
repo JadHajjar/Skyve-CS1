@@ -76,7 +76,7 @@ partial class EditTagsForm
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(367, 345);
-			this.tableLayoutPanel1.TabIndex = 1;
+			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// B_Apply
 			// 
@@ -89,7 +89,7 @@ partial class EditTagsForm
 			this.B_Apply.Name = "B_Apply";
 			this.B_Apply.Size = new System.Drawing.Size(119, 30);
 			this.B_Apply.SpaceTriggersClick = true;
-			this.B_Apply.TabIndex = 0;
+			this.B_Apply.TabIndex = 100;
 			this.B_Apply.Text = "Apply";
 			this.B_Apply.Click += new System.EventHandler(this.B_Apply_Click);
 			// 
@@ -100,7 +100,7 @@ partial class EditTagsForm
 			this.FLP_Tags.Location = new System.Drawing.Point(3, 3);
 			this.FLP_Tags.Name = "FLP_Tags";
 			this.FLP_Tags.Size = new System.Drawing.Size(361, 48);
-			this.FLP_Tags.TabIndex = 1;
+			this.FLP_Tags.TabIndex = 0;
 			// 
 			// addTagControl
 			// 
@@ -116,7 +116,7 @@ partial class EditTagsForm
 			// EditTagsForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(380, 400);
+			this.ClientSize = new System.Drawing.Size(343, 268);
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 2560, 1380);
 			this.Name = "EditTagsForm";
 			this.ShowIcon = false;

@@ -415,10 +415,10 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private void DrawTitle(PaintEventArgs e, Package? package)
 	{
-		List<string>? tags = null;
+		List<(Color Color, string Text)>? tags = null;
 
 		var mod = true;
-		var text = mod ? Package!.ToString().RemoveVersionText(out tags) : Package!.ToString();
+		var text = mod ? Package!.CleanName(out tags) : Package!.ToString();
 		using var font = UI.Font(15F, FontStyle.Bold);
 		var textSize = e.Graphics.Measure(text, font);
 
@@ -457,18 +457,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		foreach (var item in tags)
 		{
-			if (item.ToLower() == "stable")
-			{ continue; }
-
-			var color = item.ToLower() switch
-			{
-				"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-				"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-				"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
-				_ => (Color?)null
-			};
-
-			tagRect.X += Padding.Left + DrawLabel(e, color is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, color ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.MiddleLeft, title: true).Width;
+			tagRect.X += Padding.Left + DrawLabel(e, item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, title: true).Width;
 		}
 	}
 
@@ -592,6 +581,9 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private Rectangle DrawStatusDescriptor(PaintEventArgs e, Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
+		if (!Package!.Workshop)
+			labelRect.X += Padding.Left + DrawLabel(e, Locale.Local, IconManager.GetSmallIcon("I_PC"), FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), labelRect, contentAlignment, true).Width;
+
 		GetStatusDescriptors(Package!, out var text, out var icon, out var color);
 
 		if (!string.IsNullOrEmpty(text))
@@ -612,22 +604,8 @@ internal class PackageDescriptionControl : SlickImageControl
 	}
 	private void GetStatusDescriptors(IPackage mod, out string text, out Bitmap? icon, out Color color)
 	{
-		if (!mod.Workshop)
-		{
-			text = Locale.Local;
-			icon = IconManager.GetSmallIcon("I_PC");
-			color = FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor);
-			return;
-		}
-
 		switch (mod.Package?.Status)
 		{
-			case DownloadStatus.OK:
-				break;
-			//text = Locale.UpToDate;
-			//icon = Properties.Resources.I_Ok_16;
-			//color = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.AccentColor, 20);
-			//return;
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
 				icon = IconManager.GetSmallIcon("I_Question");
@@ -639,7 +617,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				color = FormDesign.Design.YellowColor;
 				return;
 			case DownloadStatus.NotDownloaded:
-				text = Locale.ModIsNotDownloaded;
+				text = Locale.Missing;
 				icon = IconManager.GetSmallIcon("I_Question");
 				color = FormDesign.Design.RedColor;
 				return;
@@ -649,7 +627,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatus.Removed:
-				text = Locale.ModIsRemoved;
+				text = Locale.RemovedFromSteam;
 				icon = IconManager.GetSmallIcon("I_ContentRemoved");
 				color = FormDesign.Design.RedColor;
 				return;

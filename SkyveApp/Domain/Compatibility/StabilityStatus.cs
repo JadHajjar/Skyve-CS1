@@ -13,9 +13,11 @@ internal class StabilityStatus : IPackageStatus<PackageStability>
 		Action = type is PackageStability.Broken ? StatusAction.UnsubscribeThis : review?StatusAction.RequestReview: StatusAction.NoAction;
 		Note = note;
 	}
+
     public PackageStability Type { get; set; }
 	public StatusAction Action { get; set; }
 	public ulong[]? Packages { get; set; }
 	public string? Note { get; set; }
 	public NotificationType Notification => CRNAttribute.GetNotification(Type);
+	public int IntType => (int)Type;
 }

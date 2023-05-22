@@ -419,6 +419,17 @@ public static class SubscriptionManager
 		}
 		catch (Exception ex) { Log.Exception(ex); }
 
+		try
+		{
+			var blacklists = BlackListTransfer.GetList(out _);
+
+			foreach (var blacklist in blacklists)
+			{
+				PlatformService.workshop.Unsubscribe(new PublishedFileId(blacklist));
+			}
+		}
+		catch { }
+
 		if (SteamUtilities.GetStub())
 		{
 			System.Diagnostics.Process.GetCurrentProcess().Kill();

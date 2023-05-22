@@ -150,18 +150,6 @@ public static class SteamUtil
 		return _csCache?.Dlcs?.Contains(dlcId) ?? false;
 	}
 
-	public static void SetSteamInformation(this Package package, SteamWorkshopItem steamWorkshopItem, bool cache)
-	{
-		//package.WorkshopInfo = steamWorkshopItem;
-
-		//	package.Status = ModsUtil.GetStatus(package, out var reason);
-		//	package.StatusReason = reason;
-
-		//if (!cache)
-		//		CentralManager.InformationUpdate(package);
-		
-	}
-
 	public static int GetScore(IPackage package)
 	{
 		var upvotes = package.PositiveVotes;
@@ -380,7 +368,7 @@ public static class SteamUtil
 
 			_steamUserProcessor.AddRange(data.Select(x => x.AuthorID));
 
-			return (info?.response?.total ?? 0, data.ToDictionary(x => ulong.Parse(x.PublishedFileID)));
+			return (info?.response?.total ?? 0, data.ToDictionary(x => x.SteamId));
 		}
 
 		Log.Error("failed to get steam data: " + httpResponse.RequestMessage);

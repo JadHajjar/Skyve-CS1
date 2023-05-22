@@ -81,21 +81,24 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		{
 			this.SuspendDrawing();
 
-			Report = Package.GetCompatibilityInfo(true);
-
-			for (var i = 0; i < _panels.Length; i++)
+			lock (this)
 			{
-				_panels[i].Controls.Clear(true);
-				_panels[i].RowStyles.Clear();
-			}
+				Report = Package.GetCompatibilityInfo(true);
 
-			controlCount = 0;
+				for (var i = 0; i < _panels.Length; i++)
+				{
+					_panels[i].Controls.Clear(true);
+					_panels[i].RowStyles.Clear();
+				}
 
-			foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
-			{
-				var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
+				controlCount = 0;
 
-				GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
+				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
+				{
+					var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
+
+					GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
+				}
 			}
 		}
 		finally

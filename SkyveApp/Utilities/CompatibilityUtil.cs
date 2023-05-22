@@ -100,6 +100,9 @@ internal static class CompatibilityUtil
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
+			if (!info.Package.IsIncluded)
+				return;
+
 			packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
 		}
 		else if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
@@ -383,11 +386,12 @@ internal static class CompatibilityUtil
 		{
 			NotificationType.Info => FormDesign.Design.InfoColor,
 
-			NotificationType.MissingDependency or
-			NotificationType.Caution => FormDesign.Design.YellowColor,
+			NotificationType.Caution => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.GreenColor, 60),
 
-			NotificationType.Warning or
-			NotificationType.AttentionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor),
+			NotificationType.MissingDependency => FormDesign.Design.YellowColor,
+
+			NotificationType.Warning => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor, 60),
+			NotificationType.AttentionRequired => FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor, 30),
 
 			NotificationType.Exclude or
 			NotificationType.Unsubscribe => FormDesign.Design.RedColor,

@@ -23,6 +23,7 @@ internal class CompatibilityMessageControl : SlickControl
 	private readonly Dictionary<PseudoPackage, Rectangle> _buttonRects = new();
 	private readonly Dictionary<PseudoPackage, Rectangle> _modRects = new();
 	private Rectangle allButtonRect;
+	private Rectangle snoozeRect;
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportItem message)
 	{
@@ -47,15 +48,15 @@ internal class CompatibilityMessageControl : SlickControl
 		{
 			e.Graphics.SetUp(BackColor);
 
-			using var icon = Message.Status.Notification.GetIcon(false).Large;
+			using var icon = Message.Status.Notification.GetIcon(false).Default;
 			var actionHovered = false;
 			var cursor = PointToClient(Cursor.Position);
 			var pad = (int)(6 * UI.FontScale);
 			var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
 			var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 			var iconRect = new Rectangle(Point.Empty, icon.Size).Pad(0, 0, -pad * 2, -pad * 2);
-			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width - pad);
-			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - iconRect.Width - pad);
+			var messageSize = e.Graphics.Measure(Message.Message, UI.Font(9F), Width - iconRect.Width*2 - pad);
+			var noteSize = e.Graphics.Measure(note, UI.Font(8.25F), Width - iconRect.Width*2 - pad);
 			var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 			using var brush = new SolidBrush(color);
 
@@ -66,11 +67,33 @@ internal class CompatibilityMessageControl : SlickControl
 
 			e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
-			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, 0, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+			if (Message.Status.Notification > NotificationType.Info && Message.PackageId != 0)
+			{
+				snoozeRect = ClientRectangle.Align(iconRect.Size, ContentAlignment.TopRight);
+				actionHovered |= snoozeRect.Contains(cursor);
+				var purple = Color.FromArgb(100, 60, 220);
+				var isSnoozed = CompatibilityManager.IsSnoozed(Message);
+
+				SlickTip.SetTo(this, !actionHovered ? string.Empty : isSnoozed ? Locale.UnSnooze : Locale.Snooze, false, snoozeRect.Location);
+
+				if (HoverState.HasFlag(HoverState.Hovered) && !HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))
+				{
+					e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(125, purple)), snoozeRect, pad);
+				}
+				else if (isSnoozed || (HoverState.HasFlag(HoverState.Pressed)&&snoozeRect.Contains(cursor)))
+				{
+					e.Graphics.FillRoundedRectangle(new SolidBrush(purple), snoozeRect, pad);
+				}
+
+				using var snoozeIcon = IconManager.GetLargeIcon("I_Snooze");
+				e.Graphics.DrawImage(snoozeIcon.Color((isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && snoozeRect.Contains(cursor))) ? purple.GetTextColor() : FormDesign.Design.IconColor), snoozeRect.CenterR(icon.Size));
+			}
+
+			e.Graphics.DrawString(Message.Message, UI.Font(9F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
 			if (note is not null)
 			{
-				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 :((int)messageSize.Height + pad), 0, 0));
+				e.Graphics.DrawString(note, UI.Font(8.25F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : ((int)messageSize.Height + pad), iconRect.Width, 0));
 			}
 
 			if (allText is not null)
@@ -117,13 +140,21 @@ internal class CompatibilityMessageControl : SlickControl
 					var dlc = isDlc ? SteamUtil.Dlcs.FirstOrDefault(x => x.Id == packageID) : null;
 					var package = packageID.Package;
 
-					e.Graphics.DrawRoundedImage(dlc?.Thumbnail ?? package?.IconImage ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(isDlc ? (40 * 460 / 215) : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+					if (!(package?.Workshop ?? true) && package?.IconImage is not null)
+					{
+						using var unsatImg = new Bitmap(package.IconImage, UI.Scale(new Size(40, 40), UI.FontScale)).Tint(Sat: 0);
+						e.Graphics.DrawRoundedImage(unsatImg, rect.Align(UI.Scale(new Size(40, 40), UI.FontScale), ContentAlignment.TopLeft), (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);
+					}
+					else
+					{
+						e.Graphics.DrawRoundedImage(dlc?.Thumbnail ?? package?.IconImage ?? Properties.Resources.I_ModIcon.Color(fore), rect.Align(UI.Scale(new Size(isDlc ? (40 * 460 / 215) : 40, 40), UI.FontScale), ContentAlignment.TopLeft), pad, FormDesign.Design.AccentBackColor);
+					}
 
-					List<string>? tags = null;
+					List<(Color Color, string Text)>? tags = null;
 
-					var textRect = rect.Pad((int)(((isDlc ? (40 * 460 / 215) : 40) + 3) * UI.FontScale), 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
+					var textRect = rect.Pad((int)(((isDlc ? 40 * 460 / 215 : 40) + 3) * UI.FontScale), 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 
-					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+					e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.CleanName(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 					var tagRect = new Rectangle(textRect.Left, textRect.Y, 0, textRect.Height);
 
@@ -131,18 +162,7 @@ internal class CompatibilityMessageControl : SlickControl
 					{
 						foreach (var item in tags)
 						{
-							if (item.ToLower() == "stable")
-							{ continue; }
-
-							var tcolor = item.ToLower() switch
-							{
-								"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-								"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-								"deprecated" or "obsolete" or "abandoned" or "broken" => Color.FromArgb(225, FormDesign.Design.RedColor),
-								_ => (Color?)null
-							};
-
-							tagRect.X += Padding.Left + e.DrawLabel(tcolor is null ? item : LocaleHelper.GetGlobalText(item.ToUpper()), null, tcolor ?? FormDesign.Design.ButtonColor, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
+							tagRect.X += Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
 						}
 					}
 
@@ -180,7 +200,7 @@ internal class CompatibilityMessageControl : SlickControl
 							break;
 					}
 
-					if (buttonText is null)
+					if (buttonText is null || package?.IsCollection == true)
 					{
 						rect.Y += _modRects[packageID].Height + pad;
 						continue;
@@ -250,7 +270,7 @@ internal class CompatibilityMessageControl : SlickControl
 				}
 				break;
 			case StatusAction.RequiresConfiguration:
-				allText = Locale.Snooze;
+				allText = CompatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
 				allIcon = "I_Snooze";
 				colorStyle = ColorStyle.Active;
 				break;
@@ -314,6 +334,11 @@ internal class CompatibilityMessageControl : SlickControl
 			}
 		}
 
+		if (e.Button == MouseButtons.Left && snoozeRect.Contains(e.Location))
+		{
+			CompatibilityManager.ToggleSnoozed(Message);
+		}
+
 		if (e.Button == MouseButtons.Left && allButtonRect.Contains(e.Location))
 		{
 			switch (Message.Status.Action)
@@ -324,7 +349,7 @@ internal class CompatibilityMessageControl : SlickControl
 					ContentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
 					break;
 				case StatusAction.RequiresConfiguration:
-					// Snooze
+					CompatibilityManager.ToggleSnoozed(Message);
 					break;
 				case StatusAction.UnsubscribeThis:
 					await CitiesManager.UnSubscribe(new[] { PackageCompatibilityReportControl.Package.SteamId });
@@ -363,7 +388,7 @@ internal class CompatibilityMessageControl : SlickControl
 			}
 			else if (package is not null)
 			{
-				Program.MainForm.PushPanel(null, new PC_PackagePage(package));
+				Program.MainForm.PushPanel(null, package.IsCollection ? new PC_ViewCollection(package) : new PC_PackagePage(package));
 			}
 			else
 			{

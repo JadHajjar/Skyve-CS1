@@ -1,9 +1,9 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
+
+using SkyveShared;
 
 using System;
 using System.Collections.Generic;
@@ -250,9 +250,16 @@ internal static class CentralManager
 	private static void AnalyzePackages(List<Package> content)
 	{
 		var firstTime = UpdateManager.IsFirstTime();
+		var blackList = new List<Package>();
 
 		foreach (var package in content)
 		{
+			if (CompatibilityManager.IsBlacklisted(package))
+			{
+				blackList.Add(package);
+				continue;
+			}
+
 			if (!firstTime)
 			{
 				HandleNewPackage(package);
@@ -278,6 +285,22 @@ internal static class CentralManager
 
 				ModLogicManager.Analyze(package.Mod);
 			}
+		}
+
+		content.RemoveAll(x => blackList.Contains(x));
+
+		if (blackList.Count > 0)
+		{
+			BlackListTransfer.SendList(blackList.Select(x => x.SteamId), false);
+		}
+		else if (LocationManager.FileExists(BlackListTransfer.FilePath))
+		{
+			ExtensionClass.DeleteFile(BlackListTransfer.FilePath);
+		}
+
+		foreach (var item in blackList)
+		{
+			ContentUtil.DeleteAll(item.Folder);
 		}
 
 		Log.Info($"Applying analysis results..");
@@ -315,11 +338,6 @@ internal static class CentralManager
 	{
 		var info = SteamUtil.GetItem(package.SteamId);
 
-		if (info is not null)
-		{
-			package.SetSteamInformation(info, true);
-		}
-
 		if (packages is null)
 		{
 			packages = new List<Package>() { package };
@@ -349,7 +367,6 @@ internal static class CentralManager
 			ModLogicManager.ModRemoved(package.Mod);
 		}
 
-		package.Status = DownloadStatus.NotDownloaded;
 		OnContentLoaded();
 		_delayedWorkshopInfoUpdated.Run();
 	}

@@ -3,20 +3,21 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Domain.Steam;
+using SkyveApp.Utilities.Managers;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace SkyveApp.Domain.Compatibility;
 public class CompatibilityInfo
 {
+	public SteamWorkshopItem SteamItem { get => Package is SteamWorkshopItem s ? s : Package.Package?.WorkshopInfo ?? new SteamWorkshopItem() { SteamId = Package.SteamId }; }
 	[JsonIgnore] public IPackage Package { get; }
 	[JsonIgnore] public IndexedPackage? Data { get; }
-	public List<PackageLink> Links { get; }
-	public List<ReportItem> ReportItems { get; }
-	public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => x.Status.Notification) : NotificationType.None;
+	public List<PackageLink> Links { get; set; }
+	public List<ReportItem> ReportItems { get; set; }
+	[JsonIgnore] public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => CompatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 
 	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
 	{
@@ -30,6 +31,7 @@ public class CompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
 			Message = message,
@@ -41,6 +43,7 @@ public class CompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
 			Message = message,
