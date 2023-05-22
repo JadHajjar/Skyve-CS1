@@ -135,7 +135,7 @@
     "One": "您應該訂閱下列外掛程式：",
     "Plural": "您應該訂閱這些外掛程式："
   },
-  "Action_RequiresConfiguration": "您應當遵循下列使用說明：",
+  "Action_RequiresConfiguration": "You should follow the following instructions:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
@@ -173,20 +173,23 @@
   "RequestReviewInfo": "使用此外掛程式時遇到問題？\n請在這裡申請新的審查：",
   "RequestReview": "申請審查",
   "MissingDependencyCount": {
-    "One": "{0} {1} 缺少必需物品",
-    "Plural": "{0} {1} 缺少必需物品"
+    "One": "{0} {1} is missing dependencies",
+    "Plural": "{0} {1} are missing dependencies"
   },
   "CautionCount": "建議謹慎處理 {0} {1}",
   "WarningCount": "{0} {1} 存在一個警告",
   "AttentionRequiredCount": {
-    "One": "您需要注意一下 {0} {1}",
-    "Plural": "您需要注意一下 {0} {1}"
+    "One": "{0} {1} requires your attention",
+    "Plural": "{0} {1} require your attention"
   },
-  "ExcludeCount": "應該卸下 {0} {1} ",
+  "ExcludeCount": {
+    "One": "{0} {1} should be excluded",
+    "Plural": "{0} {1} should be excluded"
+  },
   "UnsubscribeCount": "您應該取消訂閱 {0} {1}",
   "SwitchCount": {
-    "One": "{0} {1} 需要切換到另一個",
-    "Plural": "{0} {1} 需要切換到另一個"
+    "One": "{0} {1} requires switching to another",
+    "Plural": "{0} {1} require switching to another"
   },
   "PackageType": "Package Type",
   "GenericPackage": "Generic Package",
