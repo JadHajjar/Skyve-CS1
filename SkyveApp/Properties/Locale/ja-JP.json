@@ -405,7 +405,7 @@
   "Unsubscribe": "サブスク解除",
   "Exclude": "除外",
   "Snooze": "休止",
-  "UnSnooze": "Un-Snooze",
+  "UnSnooze": "スヌーズ解除",
   "Mod": {
     "One": "MOD",
     "Plural": "MOD"
@@ -463,21 +463,21 @@
   "ShowAllReferencedPackages_Tip": "表示中のパッケージを参照して、除外したパッケージと含めるパッケージの両方が表示されます。",
   "TreatOptionalAsRequired": "オプションパッケージは必要に応じて処理",
   "TreatOptionalAsRequired_Tip": "基本的にオプションパッケージで不足している依存関係を通知＆表示します。",
-  "AddCustomTag": "Add a custom tag",
+  "AddCustomTag": "カスタムタグを追加",
   "OutOfDateCount": {
-    "One": "{0} {1} is out of date",
-    "Plural": "{0} {1} are out of date"
+    "One": "{0} {1} は期限切れです",
+    "Plural": "{0} {1} は期限切れです"
   },
   "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+    "One": "{0} {1} はワークショップのサイズと一致しません",
+    "Plural": "{0} {1} はワークショップのそれぞれのサイズと一致しません"
   },
-  "PackageIsRemoved": "'{0}' was removed from Steam",
-  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
-  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
-  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
-  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
-  "RemovedFromSteam": "Removed from Steam",
-  "Missing": "Missing"
+  "PackageIsRemoved": "'{0}' は Steam から削除されました",
+  "PackageIsUnknown": "Steamからの情報は '{0}' に読み込まれていません",
+  "PackageIsNotDownloaded": "'{0}' があなたのコンピュータから削除されました",
+  "PackageIsOutOfDate": "'{0}' は期限切れです\r\n\r\nあなたは {1} 遅れています",
+  "PackageIsMaybeOutOfDate": "'{0}' は期限切れの可能性があります。 {1}",
+  "PackageIsIncomplete": "ローカルサイズの '{0}' ({1}) はスチームの {2} と異なります",
+  "RemovedFromSteam": "Steamから削除しました",
+  "Missing": "見つかりません"
 }
