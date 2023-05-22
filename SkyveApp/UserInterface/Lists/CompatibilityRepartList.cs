@@ -65,7 +65,7 @@ internal class CompatibilityRepartList : SlickStackedListControl<CompatibilityIn
 
 		var textRect = rect.Pad(imageRect.Width + Padding.Left, 0,  0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 
-		e.Graphics.DrawString(package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(package?.CleanName(out tags) ?? Locale.UnknownPackage, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 		var tagRect = new Rectangle(textRect.Right, textRect.Y, 0, textRect.Height);
 

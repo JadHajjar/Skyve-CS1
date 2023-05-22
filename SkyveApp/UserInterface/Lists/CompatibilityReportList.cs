@@ -23,11 +23,12 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;
-		ItemHeight = 65;
 	}
 
 	protected override void UIChanged()
 	{
+		ItemHeight = 80;
+
 		base.UIChanged();
 
 		Padding = UI.Scale(new Padding(3), UI.FontScale);
@@ -48,44 +49,44 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		base.OnPaintItem(e);
 
 		var Package = e.Item.Package;
-		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.Graphics, e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width- (int)(350 * UI.FontScale), 0), e.Item, true);
+		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.Graphics, e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width- (int)(300 * UI.FontScale), 0), e.Item, true);
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
 		var partialIncluded = Package.Package?.IsPartiallyIncluded() ?? false;
 		var isIncluded = partialIncluded || Package.IsIncluded;
 
-		PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, true);
+		PaintIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, false);
 		DrawThumbnailAndTitle(e, rects, false);
 
-		var labelRect = new Rectangle(rects.TextRect.X, rects.CenterRect.Bottom, 0, e.ClipRectangle.Bottom - rects.CenterRect.Bottom);
-
-		var isVersion = e.Item.Package.Package?.Mod is not null && !e.Item.Package.Package.BuiltIn;
-		var versionText = isVersion ? "v" + e.Item.Package.Package!.Mod!.Version.GetString() : e.Item.Package.Package?.BuiltIn ?? false ? Locale.Vanilla : (e.Item.Package.FileSize == 0 ? string.Empty : e.Item.Package.FileSize.SizeString());
-
-		if (!string.IsNullOrEmpty(versionText))
+		var brushRect = new Rectangle((int)(300 * UI.FontScale) - (int)(50 * UI.FontScale), e.ClipRectangle.Y, (int)(50 * UI.FontScale), e.ClipRectangle.Height);
+		using (var brush = new LinearGradientBrush(brushRect, Color.Empty, e.BackColor, LinearGradientMode.Horizontal))
 		{
-			rects.VersionRect = e.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.TopLeft, true, mousePosition: CursorLocation);
-			labelRect.Y += Padding.Top + rects.VersionRect.Height;
+			e.Graphics.FillRectangle(brush, brushRect);
+			e.Graphics.FillRectangle(new SolidBrush(e.BackColor), new Rectangle((int)(300 * UI.FontScale), e.ClipRectangle.Y, Width, e.ClipRectangle.Height));
 		}
+
+		DrawAuthorAndSteamId(e, true, rects);
+
+		DrawButtons(e, rects, false);
+
+		var labelRect = new Rectangle(rects.AuthorRect.X, rects.AuthorRect.Y-Padding.Top, 0, 0);
 
 		var date = e.Item.Package.ServerTime.ToLocalTime();
 
 		if (date.Year > 2000)
 		{
 			var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-			rects.DateRect = e.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.TopLeft, true, mousePosition: CursorLocation);
-			labelRect.X += Padding.Left + rects.DateRect.Width;
+			rects.DateRect = e.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
+			labelRect.Y -= Padding.Top + rects.DateRect.Height;
 		}
 
-		var brushRect = new Rectangle(rects.FolderRect.X - (int)(125 * UI.FontScale), e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height);
-		using (var brush = new LinearGradientBrush(brushRect, Color.Empty, e.BackColor, LinearGradientMode.Horizontal))
+		var isVersion = e.Item.Package.Package?.Mod is not null && !e.Item.Package.Package.BuiltIn;
+		var versionText = isVersion ? "v" + e.Item.Package.Package!.Mod!.Version.GetString() : e.Item.Package.Package?.BuiltIn ?? false ? Locale.Vanilla : (e.Item.Package.FileSize == 0 ? string.Empty : e.Item.Package.FileSize.SizeString());
+
+		if (!string.IsNullOrEmpty(versionText))
 		{
-			e.Graphics.FillRectangle(brush, brushRect);
-			e.Graphics.FillRectangle(new SolidBrush(e.BackColor), new Rectangle(rects.FolderRect.X- (int)(26 * UI.FontScale), e.ClipRectangle.Y, Width, e.ClipRectangle.Height));
+			rects.VersionRect = e.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
+			labelRect.Y += Padding.Top + rects.VersionRect.Height;
 		}
-
-		DrawAuthorAndSteamId(e, true, rects);
-
-		DrawButtons(e, rects, false);
 
 		var item = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.Notification);
 
@@ -98,11 +99,11 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		var actionHovered = false;
 		var cursor = PointToClient(Cursor.Position);
 		var pad = (int)(4 * UI.FontScale);
-		var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
+		var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One.Replace("\r\n\r\n", "\r\n");
 		var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 		var ClientRectangle = e.ClipRectangle.Pad((int)(355*UI.FontScale), 0, 0, 0);
 		var iconRect = ClientRectangle.Align(icon.Size, ContentAlignment.MiddleLeft).Pad(0, 0, -pad * 2, -pad * 2);
-		var messageSize = e.Graphics.Measure(Message.Message, UI.Font(7.5F), Width - iconRect.Width - pad);
+		var messageSize = e.Graphics.Measure(Message.Message.Replace("\r\n\r\n", "\r\n"), UI.Font(8.25F), Width - iconRect.Width - pad);
 		var noteSize = e.Graphics.Measure(note, UI.Font(7.5F), Width - iconRect.Width - pad);
 		var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 		using var brush = new SolidBrush(color);
@@ -114,7 +115,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 		e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
-		e.Graphics.DrawString(Message.Message, UI.Font(7.5F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad+ (int)(5 * UI.FontScale), 0, (int)(175 * UI.FontScale), 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+		e.Graphics.DrawString(Message.Message.Replace("\r\n\r\n", "\r\n"), UI.Font(8.25F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad+ (int)(5 * UI.FontScale), 0, (int)(175 * UI.FontScale), 0), new StringFormat { LineAlignment = y < Height && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
 
 		if (note is not null)
 		{
@@ -179,7 +180,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 				var textRect = rect.Pad((int)(((isDlc ? 40 * 460 / 215 : 40) + 3) * UI.FontScale), 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 
-				e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.Name?.RemoveVersionText(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+				e.Graphics.DrawString(dlc?.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP") ?? package?.CleanName(out tags) ?? Locale.UnknownPackage, UI.Font(7.5F, FontStyle.Bold), new SolidBrush(fore), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
 				var tagRect = new Rectangle(textRect.Left, textRect.Y, 0, textRect.Height);
 
@@ -276,8 +277,8 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 
-			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color(rects.EnabledRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Width / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Width / 2)).Color(rects.EnabledRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
 			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
 			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
 		}
@@ -295,7 +296,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 
-			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Width / 2)).Color(rects.IncludedRect.Contains(CursorLocation) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
 			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
 		}
 	}
@@ -324,7 +325,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 	{
 		if (!e.Item.Package.Workshop)
 		{
-			rects.SteamIdRect = e.DrawLabel(Path.GetFileName(e.Item.Package?.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleLeft : ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
+			rects.SteamIdRect = e.DrawLabel(Path.GetFileName(e.Item.Package?.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.MiddleLeft, false, mousePosition: CursorLocation);
 			rects.AuthorRect = Rectangle.Empty;
 			return;
 		}
@@ -333,10 +334,8 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		{
 			using var font = UI.Font(7.5F);
 			var size = e.Graphics.Measure(e.Item.Package.Author.Name, font).ToSize();
-			var authorRect = rects.AuthorRect.Align(new Size(size.Width + Padding.Horizontal + Padding.Right + size.Height, size.Height + Padding.Vertical), ContentAlignment.BottomRight);
-			authorRect.X -= Padding.Left;
-			authorRect.Y += Padding.Top;
-			var avatarRect = authorRect.Pad(Padding).Align(new(size.Height - Padding.Top, size.Height - Padding.Top), ContentAlignment.MiddleLeft);
+			var authorRect = rects.AuthorRect.Align(new Size(size.Width + Padding.Horizontal  + rects.AuthorRect.Height, rects.AuthorRect.Height - 2), ContentAlignment.TopLeft);
+			var avatarRect = authorRect.Align(new(authorRect.Height, authorRect.Height), ContentAlignment.MiddleLeft).Pad(Padding);
 
 			using var brush = new SolidBrush(FormDesign.Design.BackColor.Tint(Lum: FormDesign.Design.Type.If(FormDesignType.Dark, 4, -4)).MergeColor(FormDesign.Design.ActiveColor, authorRect.Contains(CursorLocation) ? 65 : 100));
 			e.Graphics.FillRoundedRectangle(brush, authorRect, (int)(4 * UI.FontScale));
@@ -375,7 +374,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			rects.AuthorRect = e.DrawLabel(e.Item.Package.Author?.Name, IconManager.GetSmallIcon("I_Developer"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.TopLeft, true, mousePosition: CursorLocation);
 		}
 
-		rects.SteamIdRect = e.DrawLabel(e.Item.Package.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomRight, true, mousePosition: CursorLocation);
+		//rects.SteamIdRect = e.DrawLabel(e.Item.Package.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.BottomRight, true, mousePosition: CursorLocation);
 	}
 
 	private void DrawThumbnailAndTitle(ItemPaintEventArgs<CompatibilityInfo> e, Rectangles rects, bool large)
@@ -408,14 +407,14 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 
 
-		var text = e.Item.Package.ToString().RemoveVersionText(out var tags);
+		var text = e.Item.Package.CleanName(out var tags);
 		using var font = UI.Font(large ? 11.25F : 9F, FontStyle.Bold);
 		var textSize = e.Graphics.Measure(text, font);
 
 		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : (rects.CenterRect.Contains(CursorLocation) || rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.ActiveColor : base.ForeColor);
 		e.Graphics.DrawString(text, font, brush, rects.TextRect.Pad(0, 0, -9999, 0), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		var tagRect = new Rectangle(rects.TextRect.X + Math.Min(rects.TextRect.Width ,(int)textSize.Width), rects.TextRect.Y, 0, (int)textSize.Height);
+		var tagRect = new Rectangle(rects.TextRect.X + (int)textSize.Width, rects.TextRect.Y, 0, (int)textSize.Height);
 
 		if (e.Item.Data?.Package.Stability is PackageStability.Broken)
 		{
@@ -440,44 +439,39 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 	private Rectangles GetActionRectangles(Graphics g, Rectangle rectangle, CompatibilityInfo item, bool doubleSize)
 	{
+		var section = ItemHeight / 3 - Padding.Top / 2;
 		var rects = new Rectangles() { Item = item };
 		var includeItemHeight = doubleSize ? (ItemHeight / 2) : ItemHeight;
 
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package.Package?.Mod is not null)
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(section+Padding.Horizontal, rectangle.Height), ContentAlignment.MiddleLeft);
 			rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
 		}
 		else
 		{
-			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(section + Padding.Horizontal, rectangle.Height), ContentAlignment.MiddleLeft);
 		}
 
-		var buttonRectangle = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight * 4 / 10, ItemHeight * 4 / 10), ContentAlignment.TopRight);
+		var buttonRectangle = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(section, section), ContentAlignment.TopRight);
 		var iconSize = rectangle.Height - Padding.Vertical;
 
-		rects.FolderRect = buttonRectangle;
-		rects.IconRect = rectangle.Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + (2 * Padding.Left)).Align(new Size(iconSize, iconSize), ContentAlignment.MiddleLeft);
+		rects.FolderRect = rectangle.Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + (2 * Padding.Left),0,0,0).Align(new Size(section, section), ContentAlignment.BottomLeft);
+		rects.SteamRect = rectangle.Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + (2 * Padding.Left), 0, 0, 0).Align(new Size(section, section), ContentAlignment.MiddleLeft);
+		rects.IconRect = rectangle.Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + (2 * Padding.Left), 0, 0, 0).Align(new Size(section, section), ContentAlignment.TopLeft);
 		rects.TextRect = rectangle.Pad(rects.IconRect.X + rects.IconRect.Width + Padding.Left, 0, (item.Package.Workshop ? (2 * Padding.Left) + (2 * buttonRectangle.Width) + (int)(100 * UI.FontScale) : 0) + rectangle.Width - buttonRectangle.X, rectangle.Height / 2);
 
 		if (item.Package.Workshop)
 		{
 			buttonRectangle.X -= Padding.Left + buttonRectangle.Width;
-			rects.SteamRect = buttonRectangle;
+			//rects.SteamRect = buttonRectangle;
 		}
 
-		if (doubleSize)
-		{
-			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
-			rects.AuthorRect = new Rectangle(rectangle.X, rectangle.Y + (rectangle.Height / 2), rectangle.Width, (rectangle.Height / 2) - Padding.Bottom);
-			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 3);
-		}
-		else
-		{
-			rects.AuthorRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y + (rectangle.Height / 2), (int)(100 * UI.FontScale), rectangle.Height / 2);
-			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
-			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 2);
-		}
+		rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
+		rects.AuthorRect = rects.FolderRect;
+		rects.AuthorRect.X += rects.AuthorRect.Width + Padding.Left;
+		rects.AuthorRect.Width = 0;
+		rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 3);
 
 		if (!item.Package.Workshop)
 		{

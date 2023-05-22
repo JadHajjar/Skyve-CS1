@@ -3,11 +3,10 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Utilities.Managers;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace SkyveApp.Domain.Compatibility;
 public class CompatibilityInfo
@@ -16,7 +15,7 @@ public class CompatibilityInfo
 	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<PackageLink> Links { get; }
 	public List<ReportItem> ReportItems { get; }
-	public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => x.Status.Notification) : NotificationType.None;
+	public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => CompatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 
 	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
 	{
@@ -30,6 +29,7 @@ public class CompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
 			Message = message,
@@ -41,6 +41,7 @@ public class CompatibilityInfo
 	{
 		ReportItems.Add(new ReportItem
 		{
+			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
 			Message = message,

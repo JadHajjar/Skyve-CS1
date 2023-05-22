@@ -976,7 +976,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		List<(Color Color, string Text)>? tags = null;
 
 		var mod = e.Item is not Asset;
-		var text = mod ? e.Item.ToString().RemoveVersionText(out tags) : e.Item.ToString();
+		var text = mod ? e.Item.CleanName(out tags) : e.Item.ToString();
 		using var font = UI.Font(large ? 11.25F : 9F, FontStyle.Bold);
 		var textSize = e.Graphics.Measure(text, font);
 

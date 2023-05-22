@@ -39,6 +39,8 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 			return type > action ? type : action;
 		}
 	}
+
+	public int IntType => (int)Type;
 #endif
 
 	public PackageInteraction()

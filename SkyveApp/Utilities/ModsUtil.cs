@@ -220,6 +220,12 @@ internal static class ModsUtil
 
 		if (mod.Package?.WorkshopInfo is null)
 		{
+			if (!mod.Workshop)
+			{
+				reason = string.Empty;
+				return DownloadStatus.None;
+			}
+
 			reason = Locale.PackageIsUnknown.Format(mod.CleanName());
 			return DownloadStatus.Unknown;
 		}
@@ -239,8 +245,8 @@ internal static class ModsUtil
 		{
 			var certain = updatedLocal < updatedServer.AddHours(-24);
 
-			reason = certain 
-				? Locale.PackageIsOutOfDate.Format(mod.CleanName(), (updatedServer - updatedLocal).ToReadableString(true)) 
+			reason = certain
+				? Locale.PackageIsOutOfDate.Format(mod.CleanName(), (updatedServer - updatedLocal).ToReadableString(true))
 				: Locale.PackageIsMaybeOutOfDate.Format(mod.CleanName(), updatedServer.ToLocalTime().ToRelatedString(true));
 			return DownloadStatus.OutOfDate;
 		}
@@ -251,7 +257,7 @@ internal static class ModsUtil
 			return DownloadStatus.PartiallyDownloaded;
 		}
 
-		reason = "";
+		reason = string.Empty;
 		return DownloadStatus.OK;
 	}
 
@@ -267,12 +273,12 @@ internal static class ModsUtil
 
 	internal static string CleanName(this IPackage package)
 	{
-		return package.ToString().RemoveVersionText(out _);
+		return package.CleanName(out _);
 	}
 
-	internal static string RemoveVersionText(this string name, out List<(Color Color, string Text)> tags)
+	internal static string CleanName(this IPackage package, out List<(Color Color, string Text)> tags)
 	{
-		var text = name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
+		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
 
 		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
@@ -295,7 +301,21 @@ internal static class ModsUtil
 					_ => (Color?)null
 				};
 
-				tags.Add((color ?? FormDesign.Design.ButtonColor, color is null ? tagText : LocaleHelper.GetGlobalText(tagText.ToUpper())));
+				tags.Add((color ?? FormDesign.Design.ButtonColor, color is null ? tagText : LocaleHelper.GetGlobalText(tagText).One.ToUpper()));
+			}
+		}
+
+		if (package.Incompatible)
+		{
+			tags.Add((FormDesign.Design.RedColor, LocaleCR.Incompatible.One.ToUpper()));
+		}
+		else
+		{
+			var compatibility = package.GetCompatibilityInfo();
+
+			if (compatibility.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+			{
+				tags.Add((Color.FromArgb(225, FormDesign.Design.RedColor), LocaleCR.Broken.One.ToUpper()));
 			}
 		}
 

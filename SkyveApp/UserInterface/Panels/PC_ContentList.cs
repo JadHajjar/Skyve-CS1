@@ -227,13 +227,13 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void LC_Items_DownloadStatusSelected(DownloadStatus obj)
 	{
-		if (DD_PackageStatus.SelectedItem == (DownloadStatusFilter)(obj + 2))
+		if (DD_PackageStatus.SelectedItem == (DownloadStatusFilter)(obj + 1))
 		{
 			DD_PackageStatus.SelectedItem = DownloadStatusFilter.Any;
 		}
 		else
 		{
-			DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 2);
+			DD_PackageStatus.SelectedItem = (DownloadStatusFilter)(obj + 1);
 		}
 
 		if (P_FiltersContainer.Height == 0)
@@ -474,14 +474,15 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (DD_PackageStatus.SelectedItem != DownloadStatusFilter.Any)
 		{
-			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.None)
-			{
-				if (item.Workshop)
-				{
-					return true;
-				}
-			}
-			else if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
+			//if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.None)
+			//{
+			//	if (item.Workshop)
+			//	{
+			//		return true;
+			//	}
+			//}
+			//else
+			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
 				if (!item.Workshop || item.Package?.Status <= DownloadStatus.OK)
 				{
@@ -490,7 +491,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 2) != (int)(item.Package?.Status ?? DownloadStatus.None))
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)(item.Package?.Status ?? DownloadStatus.None))
 				{
 					return true;
 				}

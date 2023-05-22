@@ -19,7 +19,9 @@ public static class CompatibilityManager
 	private const ulong RENDERIT_MOD_ID = 1794015399;
 	private const ulong PO_MOD_ID = 1094334744;
 	private const string DATA_CACHE_FILE = "CompatibilityDataCache.json";
+	private const string SNOOZE_FILE = "CompatibilitySnoozed.json";
 	private static readonly Dictionary<IPackage, CompatibilityInfo> _cache = new(new Domain.IPackageEqualityComparer());
+	private static readonly List<SnoozedItem> _snoozedItems = new();
 
 	public static IndexedCompatibilityData CompatibilityData { get; private set; }
 	public static Author User { get; private set; }
@@ -31,6 +33,8 @@ public static class CompatibilityManager
 	{
 		User = new();
 		CompatibilityData = new(null);
+
+		LoadSnoozedData();
 
 		LoadCachedData();
 
@@ -57,6 +61,22 @@ public static class CompatibilityManager
 		CentralManager.OnInformationUpdated();
 
 		ReportProcessed?.Invoke();
+	}
+
+	internal static void LoadSnoozedData()
+	{
+		try
+		{
+			var path = ISave.GetPath(SNOOZE_FILE);
+
+			ISave.Load(out List<SnoozedItem>? data, SNOOZE_FILE);
+
+			if (data is not null)
+			{
+				_snoozedItems.AddRange(data);
+			}
+		}
+		catch { }
 	}
 
 	internal static void LoadCachedData()
@@ -107,7 +127,28 @@ public static class CompatibilityManager
 		CompatibilityData ??= new IndexedCompatibilityData(new());
 	}
 
-	public static bool IsBlacklisted(IPackage package)
+	internal static bool IsSnoozed(ReportItem reportItem)
+	{
+		return _snoozedItems.Any(x => x.Equals(reportItem));
+	}
+
+	internal static void ToggleSnoozed(ReportItem reportItem)
+	{
+		if (IsSnoozed(reportItem))
+		{
+			_snoozedItems.RemoveAll(x => x.Equals(reportItem));
+		}
+		else
+		{
+			_snoozedItems.Add(new SnoozedItem(reportItem));
+		}
+
+		ISave.Save(_snoozedItems, SNOOZE_FILE);
+
+		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
+	}
+
+	internal static bool IsBlacklisted(IPackage package)
 	{
 		return CompatibilityData.BlackListedIds.Contains(package.SteamId)
 			|| CompatibilityData.BlackListedNames.Contains(package.Name ?? string.Empty)
@@ -320,7 +361,9 @@ public static class CompatibilityManager
 		}
 
 		if (!string.IsNullOrEmpty(packageData.Package.Note))
+		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.NotReviewed, packageData.Package.Note, false), string.Empty, new ulong[0]);
+		}
 
 		if (!package.Workshop)
 		{

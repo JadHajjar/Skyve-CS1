@@ -30,11 +30,6 @@ public static class BlackListTransfer
 			ids2.Add(MISSING);
 		}
 
-		if (ids2.Count == 0)
-		{
-			DeleteFile();
-		}
-
 		var text = string.Join(";", ids2.ToArray());
 
 		File.WriteAllText(filePath, text);

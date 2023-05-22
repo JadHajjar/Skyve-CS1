@@ -1,8 +1,6 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 
 using SkyveShared;
@@ -291,7 +289,14 @@ internal static class CentralManager
 
 		content.RemoveAll(x => blackList.Contains(x));
 
-		BlackListTransfer.SendList(blackList.Select(x => x.SteamId), false);
+		if (blackList.Count > 0)
+		{
+			BlackListTransfer.SendList(blackList.Select(x => x.SteamId), false);
+		}
+		else if (LocationManager.FileExists(BlackListTransfer.FilePath))
+		{
+			ExtensionClass.DeleteFile(BlackListTransfer.FilePath);
+		}
 
 		foreach (var item in blackList)
 		{

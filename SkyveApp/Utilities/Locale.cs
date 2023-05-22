@@ -240,6 +240,7 @@ internal class Locale : LocaleHelper
 	public static Translation ControlToSelectMultiplePackages => _instance.GetText(nameof(ControlToSelectMultiplePackages));
 	public static Translation Include => _instance.GetText(nameof(Include));
 	public static Translation Snooze => _instance.GetText(nameof(Snooze));
+	public static Translation UnSnooze => _instance.GetText(nameof(UnSnooze));
 	public static Translation Unsubscribe => _instance.GetText(nameof(Unsubscribe));
 	public static Translation Exclude => _instance.GetText(nameof(Exclude));
 	public static Translation Mod => _instance.GetText(nameof(Mod));

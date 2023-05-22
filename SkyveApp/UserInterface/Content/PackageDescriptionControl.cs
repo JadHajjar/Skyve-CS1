@@ -418,7 +418,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		List<(Color Color, string Text)>? tags = null;
 
 		var mod = true;
-		var text = mod ? Package!.ToString().RemoveVersionText(out tags) : Package!.ToString();
+		var text = mod ? Package!.CleanName(out tags) : Package!.ToString();
 		using var font = UI.Font(15F, FontStyle.Bold);
 		var textSize = e.Graphics.Measure(text, font);
 
