@@ -1,6 +1,6 @@
 {
-  "Usage": "Usage",
-  "Stability": "Stability",
+  "Usage": "용도",
+  "Stability": "안정성",
   "ApplyContinue": "Apply & Continue",
   "Previous": "Previous",
   "Skip": "Skip",
@@ -10,7 +10,7 @@
   "BlackListId": "Black-list by name",
   "GlobalTags": "Global Tags",
   "GlobalTagsInfo": "Tags all players will see in the app",
-  "Links": "Links",
+  "Links": "링크",
   "StatusesCount": "Statuses ({0})",
   "InteractionCount": "Interactions ({0})",
   "AddStatus": "Add Status",
@@ -21,9 +21,9 @@
   "HasIssues": "Has issues",
   "Broken": "Broken",
   "Incompatible": "Incompatible",
-  "CityBuilding": "City-Building",
-  "AssetCreation": "Asset Creation",
-  "MapCreation": "Map Creation",
+  "CityBuilding": "도시 건설용",
+  "AssetCreation": "에셋 제작용",
+  "MapCreation": "맵 제작용",
   "NoAction": "Do Nothing",
   "SubscribeToPackages": "Subscribe to linked packages",
   "RequiresConfiguration": "Requires a specific configuration",
@@ -36,10 +36,10 @@
   "Reupload": "Re-Upload",
   "CausesIssues": "Causes Issues",
   "SavesCantLoadWithoutIt": "Saves can't load without it",
-  "TestVersion": "Test Version",
+  "TestVersion": "시험 버전",
   "DependencyMod": "Dependency Mod",
   "SourceCodeNotAvailable": "Source-code is not available",
-  "MusicCanBeCopyrighted": "Included music may be copyrighted",
+  "MusicCanBeCopyrighted": "포함된 음악에 저작권이 있을 수 있습니다",
   "IncompleteDescription": "Incomplete Description",
   "Successor": "Successor",
   "Alternative": "Alternative",
@@ -54,8 +54,8 @@
   "Caution": "주의",
   "Warning": "경고",
   "AttentionRequired": "주목 필요",
-  "Website": "Website",
-  "Donation": "Donate",
+  "Website": "웹사이트",
+  "Donation": "후원",
   "ManageSinglePackage": "Manage specific packages",
   "ManageCompatibilityData": "Manage Compatibility Data",
   "YourPackages": "Manage your packages",
@@ -82,8 +82,8 @@
     "Plural": "'{0}' is not compatible with any of the following packages."
   },
   "Interaction_CausesIssuesWith": {
-    "One": "'{0}' can cause issues when used with '{1}'.",
-    "Plural": "'{0}' can cause issues when used with the following mods."
+    "One": "'{0}' 는 '{1}' 와 함께 사용할 때 문제를 일으킬 수 있습니다.",
+    "Plural": "'{0}' 는 다음 모드와 함께 사용할 때 문제를 일으킬 수 있습니다."
   },
   "Interaction_RequiredPackages": {
     "One": "You're missing a required package for '{0}'.",
@@ -94,17 +94,17 @@
     "Plural": "You're missing the following optional packages for '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "One": "'{0}' 는 '{1}' 로 계승되었습니다.",
+    "Plural": "'{0}' 는 다음 패키지 중 하나로 계승되었습니다."
   },
-  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
-  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
+  "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있기에 '{0}' 는 더 이상 필요하지 않습니다.",
+  "Status_Deprecated": "'{0}' 는 더 이상 제작자에 의해 지원되지 않으며 사용되지 않습니다.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
     "One": "This is a re-upload of '{1}'."
   },
-  "Status_CausesIssues": "'{0}' causes issues with your game.",
+  "Status_CausesIssues": "'{0}' 는 게임에 문제를 일으킬 수 있습니다.",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.",
     "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
@@ -118,40 +118,40 @@
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
-  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
+  "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
   "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Expected Output",
-  "Stability_AssetNotReviewed": "This asset has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate; though assets are generally stable",
+  "Stability_AssetNotReviewed": "이 에셋은 아직 리뷰되지 않았습니다.\n\n에셋들은 일반적으로 안정적이지만 호환성 정보는 정확하지 않을 수 있습니다.",
   "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
-  "Stability_Stable": "This package is stable.",
+  "Stability_Stable": "이 패키지는 안정적입니다.",
   "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
-  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
+  "Stability_HasIssues": "이 패키지는 문제를 일으킬 수 있습니다.\n주의해서 사용하세요.",
+  "Stability_Broken": "이 패키지는 고장났습니다.\n작동하지 않거나 게임을 고장내는 것으로 알려져 있습니다.",
+  "Stability_Incompatible": "이 패키지는 게임과 호환되지 않거나 게임을 고장냅니다.\n\n이것은 바로 제거해야 합니다.",
   "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should subscribe to the following package.",
     "Plural": "You should subscribe to these packages."
   },
-  "Action_RequiresConfiguration": "You should follow the following instructions:",
+  "Action_RequiresConfiguration": "다음 지침을 따라야 합니다:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
+  "Action_UnsubscribeThis": "'{0}' 를 구독 취소해야 합니다.",
   "Action_UnsubscribeOther": {
-    "One": "You should unsubscribe from '{1}'.",
+    "One": "'{1}' 를 구독 취소해야 합니다.",
     "Plural": "You should unsubscribe from the following packages."
   },
-  "Action_ExcludeThis": "You should exclude '{0}'.",
+  "Action_ExcludeThis": "'{0}' 를 제외해야 합니다.",
   "Action_ExcludeOther": {
-    "One": "You should exclude '{1}'.",
+    "One": "'{1}' 를 제외해야 합니다.",
     "Plural": "You should exclude the following packages."
   },
   "Action_Switch": {
-    "One": "You should switch to '{1}'.",
+    "One": "'{1}' 로 전환해야 합니다.",
     "Plural": "You should switch to one of the following packages."
   },
   "NoRequiredDlcs": "No Required DLCs",
@@ -160,8 +160,8 @@
     "Plural": "{0} DLCs selected"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
-  "CRT_Stability": "Stability",
-  "CRT_Successors": "Successors",
+  "CRT_Stability": "안정성",
+  "CRT_Successors": "계승자",
   "CRT_RequiredPackages": "Required Packages",
   "CRT_OptionalPackages": "Optional Packages",
   "CRT_DlcMissing": "Missing DLCs/CCPs",
@@ -169,29 +169,29 @@
   "CRT_Alternatives": "Alternatives",
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Ambiguity",
-  "LastReviewDate": "It was last reviewed on {0}",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
-  "RequestReview": "Request Review",
+  "LastReviewDate": "이것은 {0} 에 마지막으로 리뷰되었습니다.",
+  "RequestReviewInfo": "이 패키지에서 이슈를 경험하고 있습니까?",
+  "RequestReview": "리뷰 요청하기",
   "MissingDependencyCount": {
     "One": "{0} {1} is missing dependencies",
-    "Plural": "{0} {1} are missing dependencies"
+    "Plural": "의존성을 누락한 {1} {0}개가 있습니다"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "주의가 권고되는 {1} {0}개가 있습니다",
+  "WarningCount": "경고가 있는 {1} {0}개가 있습니다",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requires your attention",
-    "Plural": "{0} {1} require your attention"
+    "One": "주목을 필요로 하는 {1} {0}개가 있습니다",
+    "Plural": "주목을 필요로 하는 {1} {0}개가 있습니다"
   },
   "ExcludeCount": {
-    "One": "{0} {1} should be excluded",
-    "Plural": "{0} {1} should be excluded"
+    "One": "제외되어야 하는 {1} {0}개가 있습니다",
+    "Plural": "제외되어야 하는 {1} {0}개가 있습니다"
   },
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "UnsubscribeCount": "구독을 취소해야 하는 {1} {0}개가 있습니다",
   "SwitchCount": {
-    "One": "{0} {1} requires switching to another",
-    "Plural": "{0} {1} require switching to another"
+    "One": "다른 {1}로 전환해야 하는 {1} {0}개가 있습니다",
+    "Plural": "다른 {1}로 전환해야 하는 {1} {0}개가 있습니다"
   },
-  "PackageType": "Package Type",
+  "PackageType": "패키지 유형",
   "GenericPackage": "Generic Package",
   "MusicPack": "Music Pack",
   "ThemeMix": "Theme Mix",
