@@ -296,12 +296,12 @@
     {
         "Version": "3.0.0",
         "Date": "2023-05-23",
-        "Tagline": "Vorgestellt, Skyve, der letzte Nachfolger des Lastordnermodells 1/2 und Kompatibilitätsbericht.\r\nKommt für C:S I & C:S II",
+        "Tagline": "Vorstellung: Skyve, der finale Nachfolger von Load Order Mod 1/2 und Compatibility Report.\nKommt für C:S I & C:S II",
         "ChangeGroups": [
             {
-                "Name": "Überprüfung des Kompatibilitätsberichts",
+                "Name": "Revision des Kompatibilitätsberichts",
                 "Changes": [
-                    "Kompatibilitätsbericht ist nun direkt in Skype integriert.",
+                    "Compatibility Report ist nun direkt in Skype integriert.",
                     "Empfehlungen und Infotext sind jetzt klarer und einfacher zu handhaben.",
                     "Eine Schlummer-Taste hinzugefügt, um eine bestimmte Kompatibilitätsbenachrichtigung abzubrechen.",
                     "Benötigte Elemente leiten automatisch zum letzten Nachfolger der Pakete weiter.",
