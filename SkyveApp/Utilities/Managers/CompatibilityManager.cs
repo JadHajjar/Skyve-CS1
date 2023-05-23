@@ -271,7 +271,7 @@ public static class CompatibilityManager
 			return info;
 		}
 
-		var author = CompatibilityData.Authors[packageData.Package.AuthorId];
+		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
 
 		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable) && !package.Incompatible && !author.Malicious)
 		{
@@ -369,7 +369,8 @@ public static class CompatibilityManager
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), LocaleCR.Get($"Stability_{PackageStability.Local}").Format(SteamUtil.GetItem(packageData.Package.SteamId)?.CleanName()), new PseudoPackage[] { new(packageData.Package.SteamId) });
 		}
-		else if (info.Notification < NotificationType.Unsubscribe)
+
+		if (!author.Malicious && !package.Incompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), ((packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed) ? (LocaleCR.LastReviewDate.Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n") : string.Empty) + LocaleCR.RequestReviewInfo, new PseudoPackage[0]);
 		}
