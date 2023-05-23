@@ -32,7 +32,11 @@ public partial class MainForm : BasePanelForm
 
 		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
+#if Stable
+		L_Version.Text = "v" + currentVersion.ToString(3);
+#else
 		L_Version.Text = "v" + currentVersion.ToString(3) + " Beta";
+#endif
 
 		try
 		{ FormDesign.Initialize(this, DesignChanged); }
@@ -169,7 +173,7 @@ public partial class MainForm : BasePanelForm
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		if (!LocationManager.FileExists(LocationManager.Combine(Program.CurrentDirectory, "Wake")))
+		if (!ExtensionClass.FileExists(LocationManager.Combine(Program.CurrentDirectory, "Wake")))
 		{
 			return;
 		}

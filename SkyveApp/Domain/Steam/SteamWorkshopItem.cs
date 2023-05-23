@@ -46,7 +46,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	[JsonIgnore] public Bitmap? AuthorIconImage => ImageManager.GetImage(Author?.AvatarUrl, true).Result;
 	[JsonIgnore] public bool IsIncluded { get => Package?.IsIncluded ?? false; set { if (Package is not null) { Package.IsIncluded = value; } } }
 	[JsonIgnore] public bool Workshop => true;
-	[JsonIgnore] public Package? Package => SteamId == 0 ? null : CentralManager.Packages.FirstOrDefault(x => x.SteamId == SteamId);
+	[JsonIgnore] public Package? Package => CentralManager.GetPackage(SteamId);
 	[JsonIgnore] public long FileSize => ServerSize;
 	[JsonIgnore] public string Folder => Package?.Folder ?? string.Empty;
 	[JsonIgnore]

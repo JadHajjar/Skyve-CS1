@@ -15,6 +15,7 @@ using static System.Environment;
 namespace SkyveApp.Utilities.Managers;
 internal static class CentralManager
 {
+	private static Dictionary<ulong, Package>? indexedPackages;
 	private static List<Package>? packages;
 
 	public static event Action? ContentLoaded;
@@ -137,13 +138,18 @@ internal static class CentralManager
 
 		Log.Info($"Loaded {content.Count} packages");
 
+		indexedPackages = content.Where(x => x.SteamId != 0).ToDictionary(x => x.SteamId);
 		packages = content;
+
+		IsContentLoaded = true;
+
+		OnContentLoaded();
 
 		Log.Info($"Loading and applying CR Data..");
 
 		CompatibilityManager.LoadCachedData();
 
-		CompatibilityManager.CacheReport(packages);
+		CompatibilityManager.DoFirstCache(packages);
 
 		Log.Info($"Analyzing packages..");
 
@@ -155,9 +161,7 @@ internal static class CentralManager
 
 		CompatibilityManager.FirstLoadComplete = true;
 
-		IsContentLoaded = true;
-
-		OnContentLoaded();
+		OnInformationUpdated();
 
 		SubscriptionsUtil.Start();
 
@@ -293,7 +297,7 @@ internal static class CentralManager
 		{
 			BlackListTransfer.SendList(blackList.Select(x => x.SteamId), false);
 		}
-		else if (LocationManager.FileExists(BlackListTransfer.FilePath))
+		else if (ExtensionClass.FileExists(BlackListTransfer.FilePath))
 		{
 			ExtensionClass.DeleteFile(BlackListTransfer.FilePath);
 		}
@@ -341,10 +345,13 @@ internal static class CentralManager
 		if (packages is null)
 		{
 			packages = new List<Package>() { package };
+		indexedPackages = packages.Where(x => x.SteamId != 0).ToDictionary(x => x.SteamId);
 		}
 		else
 		{
 			packages.Add(package);
+			if (indexedPackages is not null&&package.SteamId != 0)
+				indexedPackages[package.SteamId] = package;
 		}
 
 		HandleNewPackage(package);
@@ -361,6 +368,7 @@ internal static class CentralManager
 	internal static void RemovePackage(Package package)
 	{
 		packages?.Remove(package);
+		indexedPackages?.Remove(package.SteamId);
 
 		if (package.Mod is not null)
 		{
@@ -392,5 +400,13 @@ internal static class CentralManager
 		AssetsUtil.BuildAssetIndex();
 
 		_delayedContentLoaded.Run();
+	}
+
+	internal static Package? GetPackage(ulong steamId)
+	{
+		if (indexedPackages?.TryGetValue(steamId, out var package) ?? false)
+			return package;
+
+		return null;
 	}
 }

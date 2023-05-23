@@ -989,7 +989,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			{
 				var realPath = IOUtil.ToRealPath(file);
 
-				if (LocationManager.FileExists(realPath))
+				if (ExtensionClass.FileExists(realPath))
 				{
 					file = realPath!;
 				}

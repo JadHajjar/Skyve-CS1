@@ -6,6 +6,7 @@
 		<Deterministic>false</Deterministic>
 		<LangVersion>latest</LangVersion>
 		<DebugType>full</DebugType>
+		<Configurations>Debug;Release;Stable</Configurations>
 		<DebugSymbols>true</DebugSymbols>
 		<PathMap>$(MSBuildProjectDirectory)/=$(ProjectName)/</PathMap>
 		<DefineConstants Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">DEBUG;TRACE</DefineConstants>
@@ -23,6 +24,10 @@
 			$(CitiesSkylinesBinaries);
 			../libs/;
 		</AssemblySearchPaths>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+		<DefineConstants>$(DefineConstants);Stable</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CitiesHarmony.API" Version="2.0.0" />

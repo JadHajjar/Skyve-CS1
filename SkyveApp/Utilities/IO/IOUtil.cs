@@ -15,7 +15,7 @@ internal static class IOUtil
 		{
 			exeFile = exeFile.FormatPath();
 
-			if (!LocationManager.FileExists(exeFile))
+			if (!ExtensionClass.FileExists(exeFile))
 			{
 				Log.Error("Execute failed, could not find file: " + exeFile);
 

@@ -195,7 +195,7 @@ public static class SteamUtil
 
 	public static bool IsSteamAvailable()
 	{
-		return LocationManager.FileExists(LocationManager.SteamPathWithExe);
+		return ExtensionClass.FileExists(LocationManager.SteamPathWithExe);
 	}
 
 	public static void ExecuteSteam(string args)

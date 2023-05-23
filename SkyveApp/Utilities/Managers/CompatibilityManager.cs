@@ -53,6 +53,11 @@ public static class CompatibilityManager
 
 	internal static void CacheReport(IEnumerable<Domain.Package> content)
 	{
+		if (!FirstLoadComplete)
+		{
+			return;
+		}
+
 		foreach (var package in content)
 		{
 			GetCompatibilityInfo(package, true);
@@ -157,7 +162,7 @@ public static class CompatibilityManager
 
 	internal static CompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
 	{
-		if (!FirstLoadComplete && !noCache)
+		if (!FirstLoadComplete)
 		{
 			return new CompatibilityInfo(package, null);
 		}
@@ -393,5 +398,13 @@ public static class CompatibilityManager
 		{ User.Manager = await CompatibilityApiUtil.IsCommunityManager(); }
 		catch
 		{ User.Manager = false; }
+	}
+
+	internal static void DoFirstCache(List<Domain.Package> packages)
+	{
+		foreach (var package in packages)
+		{
+			_cache[package] = GenerateCompatibilityInfo(package);
+		}
 	}
 }

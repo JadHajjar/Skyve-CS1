@@ -1,3 +1,5 @@
+using Extensions;
+
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
@@ -145,7 +147,7 @@ public class SettingsFile
 		}
 		//if (!this.m_UseCloud)
 		{
-			return LocationManager.FileExists(pathName);
+			return ExtensionClass.FileExists(pathName);
 		}
 		//return PlatformService.cloud.Exists(this.pathName);
 	}

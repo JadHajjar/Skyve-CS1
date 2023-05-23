@@ -64,7 +64,7 @@ internal static class PlatformUtil
 
 			folder = folder.FormatPath();
 
-			if (LocationManager.FileExists(folder))
+			if (ExtensionClass.FileExists(folder))
 			{
 				OpenFileInFolder(folder);
 				return;

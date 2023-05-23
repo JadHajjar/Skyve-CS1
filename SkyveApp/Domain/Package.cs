@@ -46,7 +46,7 @@ public class Package : IPackage
 	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
 	public string? Name => WorkshopInfo?.Name;
-	public bool IsMod => Mod is not null || (WorkshopInfo?.IsMod ?? false);
+	public bool IsMod => Mod is not null;// || (WorkshopInfo?.IsMod ?? false);
 	public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? Enumerable.Empty<TagItem>();
 	public Bitmap? IconImage => WorkshopInfo?.IconImage;
 	public Bitmap? AuthorIconImage => WorkshopInfo?.AuthorIconImage;

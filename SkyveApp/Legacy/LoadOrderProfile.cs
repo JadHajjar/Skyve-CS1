@@ -1,3 +1,5 @@
+using Extensions;
+
 using SkyveApp.Domain;
 using SkyveApp.Legacy;
 using SkyveApp.Utilities.Managers;
@@ -184,7 +186,7 @@ public class LoadOrderProfile
 		profile.LsmSettings.LoadEnabled = LoadEnabled;
 		profile.LsmSettings.LoadUsed = LoadUsed;
 		profile.LsmSettings.SkipFile = SkipFilePathFinal;
-		profile.LsmSettings.UseSkipFile = LocationManager.FileExists(SkipFilePathFinal);
+		profile.LsmSettings.UseSkipFile = ExtensionClass.FileExists(SkipFilePathFinal);
 
 		return profile;
 	}

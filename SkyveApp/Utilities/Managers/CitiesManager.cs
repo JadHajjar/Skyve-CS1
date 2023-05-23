@@ -42,7 +42,7 @@ public static class CitiesManager
 			? LocationManager.CitiesPathWithExe
 			: LocationManager.SteamPathWithExe;
 
-		return LocationManager.FileExists(file);
+		return ExtensionClass.FileExists(file);
 	}
 
 	public static void Launch()
@@ -185,7 +185,7 @@ public static class CitiesManager
 
 		if (CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame)
 		{
-			if (LocationManager.FileExists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
+			if (ExtensionClass.FileExists(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad))
 			{
 				args.Add("--loadSave=" + quote(CentralManager.CurrentProfile.LaunchSettings.SaveToLoad!));
 			}
@@ -196,7 +196,7 @@ public static class CitiesManager
 		}
 		else if (CentralManager.CurrentProfile.LaunchSettings.StartNewGame)
 		{
-			if (LocationManager.FileExists(CentralManager.CurrentProfile.LaunchSettings.MapToLoad))
+			if (ExtensionClass.FileExists(CentralManager.CurrentProfile.LaunchSettings.MapToLoad))
 			{
 				args.Add("--newGame=" + quote(CentralManager.CurrentProfile.LaunchSettings.MapToLoad!));
 			}

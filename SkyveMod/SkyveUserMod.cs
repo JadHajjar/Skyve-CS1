@@ -34,7 +34,11 @@ public class SkyveUserMod : IUserMod
 {
 	public static Version ModVersion => typeof(SkyveUserMod).Assembly.GetName().Version;
 	public static string VersionString => ModVersion.ToString(3);
+#if Stable
 	public string Name => "Skyve " + VersionString;
+#else
+	public string Name => "Skyve Beta " + VersionString;
+#endif
 	public string Description => "Manage your custom content easily, from one place.";
 	public static string HARMONY_ID = "CS.TDW.Skyve";
 	private UIButton lotButton;

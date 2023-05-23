@@ -30,7 +30,7 @@ internal class SubscriptionsUtil
 
 	private static void FileChanged(object sender, FileSystemEventArgs e)
 	{
-		if (!CentralManager.SessionSettings.UserSettings.DisablePackageCleanup && LocationManager.FileExists(e.FullPath))
+		if (!CentralManager.SessionSettings.UserSettings.DisablePackageCleanup && ExtensionClass.FileExists(e.FullPath))
 		{
 			var date = File.GetLastWriteTime(e.FullPath);
 

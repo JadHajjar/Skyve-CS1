@@ -7,7 +7,7 @@
     <Product>Skyve App</Product>
     <LangVersion>latest</LangVersion>
     <Description>Helps to manage your mods and assets</Description>
-    <Configurations>Debug;Release</Configurations>
+    <Configurations>Debug;Release;Stable</Configurations>
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <Nullable>enable</Nullable>
@@ -38,6 +38,10 @@
     <EmbeddedResource Include="Properties\*.json" />
     <EmbeddedResource Include="Properties\*\*.json" />
   </ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+		<DefineConstants>$(DefineConstants);Stable</DefineConstants>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Costura.Fody" Version="5.7.0">
@@ -175,7 +179,7 @@
 		<ZipDirectory SourceDirectory="$(DeployDir)" DestinationFile="$(ZipFile)" />
 	</Target>
 
-	<Target Name="DeployToWorkshop" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' == 'Release'">
+	<Target Name="DeployToWorkshop" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' != 'Debug'">
 		<Message Text="Deploy to workshop $(WorkshopDir)" Importance="high" />
 		<ItemGroup>
 			<FilesToDelete Include="$(WorkshopDir)\**\*.*" />

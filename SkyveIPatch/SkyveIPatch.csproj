@@ -21,6 +21,7 @@
       $(CitiesSkylinesBinaries);
       ../libs/
     </AssemblySearchPaths>
+    <Configurations>Debug;Release;Stable</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="GitInfo" Version="2.1.2">

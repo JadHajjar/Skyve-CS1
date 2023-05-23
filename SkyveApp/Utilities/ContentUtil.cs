@@ -180,11 +180,11 @@ internal class ContentUtil
 			{
 				foreach (var subFolder in Directory.GetDirectories(folder))
 				{
-					getPackage(subFolder, false, false);
+					getPackage(subFolder, false, false, true);
 				}
 			}
 
-			getPackage(folder, false, false, false);
+			getPackage(folder, false, false, true, false);
 		}
 
 		if (Directory.Exists(gameModsPath))
@@ -192,7 +192,7 @@ internal class ContentUtil
 			Log.Info($"Looking for packages in: '{gameModsPath}'");
 			foreach (var folder in Directory.GetDirectories(gameModsPath))
 			{
-				getPackage(folder, true, false);
+				getPackage(folder, true, false, false);
 			}
 		}
 		else
@@ -205,7 +205,7 @@ internal class ContentUtil
 			Log.Info($"Looking for packages in: '{addonsModsPath}'");
 			foreach (var folder in Directory.GetDirectories(addonsModsPath))
 			{
-				getPackage(folder, false, false);
+				getPackage(folder, false, false, false);
 			}
 		}
 		else
@@ -217,12 +217,12 @@ internal class ContentUtil
 
 		Parallelism.ForEach(subscribedItems, (folder) =>
 		{
-			getPackage(folder, false, true);
+			getPackage(folder, false, true, false);
 		});
 
 		return packages;
 
-		void getPackage(string folder, bool builtIn, bool workshop, bool withSubDirectories = true)
+		void getPackage(string folder, bool builtIn, bool workshop, bool expectAssets, bool withSubDirectories = true)
 		{
 			if (!Directory.Exists(folder))
 			{
@@ -234,7 +234,7 @@ internal class ContentUtil
 			var package = new Package(folder, builtIn, workshop);
 
 			package.Assets = AssetsUtil.GetAssets(package, withSubDirectories).ToArray();
-			package.Mod = ModsUtil.GetMod(package);
+			package.Mod = expectAssets ? null : ModsUtil.GetMod(package);
 			package.FileSize = GetTotalSize(package.Folder);
 			package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
@@ -406,7 +406,7 @@ internal class ContentUtil
 			return GenericPackageState.Local;
 		}
 
-		package = CentralManager.Packages.FirstOrDefault(x => x.SteamId == item.SteamId);
+		package = CentralManager.GetPackage(item.SteamId);
 
 		if (package == null)
 		{

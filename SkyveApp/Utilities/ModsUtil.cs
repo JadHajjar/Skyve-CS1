@@ -101,7 +101,7 @@ internal static class ModsUtil
 
 	internal static bool IsLocallyIncluded(Mod mod)
 	{
-		return !LocationManager.FileExists(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+		return !ExtensionClass.FileExists(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 	}
 
 	internal static bool IsLocallyEnabled(Mod mod)
@@ -212,6 +212,9 @@ internal static class ModsUtil
 
 	public static DownloadStatus GetStatus(IPackage mod, out string reason)
 	{
+		reason = string.Empty;
+		return DownloadStatus.OK;
+
 		if (mod.Package?.RemovedFromSteam ?? false)
 		{
 			reason = Locale.PackageIsRemoved.Format(mod.CleanName());
@@ -251,7 +254,7 @@ internal static class ModsUtil
 			return DownloadStatus.OutOfDate;
 		}
 
-		if (localSize != sizeServer && sizeServer > 0)
+		if (localSize < sizeServer && sizeServer > 0)
 		{
 			reason = Locale.PackageIsIncomplete.Format(mod.CleanName(), localSize.SizeString(), sizeServer.SizeString());
 			return DownloadStatus.PartiallyDownloaded;

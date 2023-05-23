@@ -102,7 +102,7 @@ public static class ProfileManager
 
 		var profile = LocationManager.Combine(LocationManager.SkyveProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? CentralManager.SessionSettings.CurrentProfile) + ".json");
 
-		if (!LocationManager.FileExists(profile))
+		if (!ExtensionClass.FileExists(profile))
 		{
 			return null;
 		}
@@ -152,7 +152,7 @@ public static class ProfileManager
 		{
 			var newName = LocationManager.Combine(LocationManager.SkyveProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
 
-			if (LocationManager.FileExists(newName))
+			if (ExtensionClass.FileExists(newName))
 			{
 				Log.Info($"Profile '{newName}' already exists, skipping..");
 				continue;
@@ -586,7 +586,7 @@ public static class ProfileManager
 				return;
 			}
 
-			if (!LocationManager.FileExists(e.FullPath))
+			if (!ExtensionClass.FileExists(e.FullPath))
 			{
 				lock (_profiles)
 				{
@@ -751,12 +751,12 @@ public static class ProfileManager
 				return true;
 			}
 
-			if (LocationManager.FileExists(newName))
+			if (ExtensionClass.FileExists(newName))
 			{
 				return false;
 			}
 
-			if (LocationManager.FileExists(oldName))
+			if (ExtensionClass.FileExists(oldName))
 			{
 				File.Move(oldName, newName);
 
@@ -783,14 +783,14 @@ public static class ProfileManager
 		var startName = LocationManager.Combine(LocationManager.SkyveProfilesAppDataPath, "New Profile.json");
 
 		// Check if the file with the proposed name already exists
-		if (LocationManager.FileExists(startName))
+		if (ExtensionClass.FileExists(startName))
 		{
 			var extension = ".json";
 			var nameWithoutExtension = LocationManager.Combine(LocationManager.SkyveProfilesAppDataPath, "New Profile");
 			var counter = 1;
 
 			// Loop until a valid file name is found
-			while (LocationManager.FileExists(startName))
+			while (ExtensionClass.FileExists(startName))
 			{
 				// Generate the new file name with the counter appended
 				startName = $"{nameWithoutExtension} ({counter}){extension}";

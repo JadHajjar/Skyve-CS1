@@ -204,7 +204,7 @@ internal static class CompatibilityUtil
 
 		if (indexedPackage is null)
 		{
-			return isEnabled(CentralManager.Packages.FirstOrDefault(x => x.SteamId == steamId));
+			return isEnabled(CentralManager.GetPackage(steamId));
 		}
 
 		if (withAlternatives)
@@ -319,14 +319,14 @@ internal static class CompatibilityUtil
 
 	private static IEnumerable<Domain.Package> FindPackage(IndexedPackage package, bool withSuccessors)
 	{
-		var localPackage = CentralManager.Packages.FirstOrDefault(x => x.SteamId == package.Package.SteamId);
+		var localPackage = CentralManager.GetPackage(package.Package.SteamId);
 
 		if (localPackage is not null)
 		{
 			yield return localPackage;
 		}
 
-		localPackage = CentralManager.Mods.FirstOrDefault(x => Path.GetFileName(x.FileName) == package.Package.FileName)?.Package;
+		localPackage = CentralManager.Mods.FirstOrDefault(x => !x.Workshop && Path.GetFileName(x.FileName) == package.Package.FileName)?.Package;
 
 		if (localPackage is not null)
 		{

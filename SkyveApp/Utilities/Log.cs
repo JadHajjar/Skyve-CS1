@@ -70,7 +70,7 @@ public static class Log
 
 			try
 			{
-				if (LocationManager.FileExists(LogFilePath))
+				if (ExtensionClass.FileExists(LogFilePath))
 				{
 					ExtensionClass.DeleteFile(LogFilePath);
 				}

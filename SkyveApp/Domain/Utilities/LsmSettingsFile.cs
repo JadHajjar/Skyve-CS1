@@ -1,4 +1,6 @@
-﻿using SkyveApp.Utilities;
+﻿using Extensions;
+
+using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
 using System;
@@ -56,7 +58,7 @@ public class LsmSettingsFile
 	{
 		try
 		{
-			if (LocationManager.FileExists(FILE_PATH))
+			if (ExtensionClass.FileExists(FILE_PATH))
 			{
 				return SkyveShared.SharedUtil.Deserialize<LsmSettingsFile>(FILE_PATH);
 			}

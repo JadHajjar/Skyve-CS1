@@ -1,4 +1,6 @@
-﻿using SkyveApp.Domain;
+﻿using Extensions;
+
+using SkyveApp.Domain;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.Managers;
 
@@ -11,7 +13,7 @@ internal static class LsmUtil
 {
 	public static bool IsValidLsmReportFile(string filePath)
 	{
-		if (!LocationManager.FileExists(filePath) || new FileInfo(filePath).Length > 50 * 1024 * 1024)
+		if (!ExtensionClass.FileExists(filePath) || new FileInfo(filePath).Length > 50 * 1024 * 1024)
 		{
 			return false;
 		}

@@ -115,10 +115,26 @@ internal static class LocationManager
 			$"SteamPath: {SteamPath}\r\n" +
 			$"WorkshopContentPath: {WorkshopContentPath}");
 
-		if (Directory.Exists(Combine(AppDataPath, "LoadOrderTwo")) && !Directory.Exists(SkyveAppDataPath))
+		try
 		{
-			Directory.Move(Path.Combine(AppDataPath, "LoadOrderTwo"), SkyveAppDataPath);
+			if (Directory.Exists(Combine(AppDataPath, "LoadOrderTwo")))
+			{
+				ExtensionClass.MoveFolder(Combine(AppDataPath, "LoadOrderTwo"), SkyveAppDataPath, false);
+
+				if (ExtensionClass.FileExists(Combine(SkyveAppDataPath, "LoadOrderConfig.xml")) && !ExtensionClass.FileExists(Combine(SkyveAppDataPath, "SkyveConfig.xml")))
+				{
+					File.Move(Combine(SkyveAppDataPath, "LoadOrderConfig.xml"), Combine(SkyveAppDataPath, "SkyveConfig.xml"));
+				}
+
+				ExtensionClass.DeleteFolder(Combine(AppDataPath, "LoadOrderTwo"));
+
+				if (Platform is Platform.Windows)
+				{
+					ContentUtil.CreateShortcut();
+				}
+			}
 		}
+		catch (Exception ex) { Log.Exception(ex, "Failed to copy previous settings over"); }
 	}
 
 	internal static string FormatPath(this string path)
@@ -146,18 +162,6 @@ internal static class LocationManager
 		}
 
 		return sb.ToString();
-	}
-
-	internal static bool FileExists(string? path)
-	{
-		if (Platform is not Platform.Windows)
-		{
-			try
-			{ return Directory.GetFiles(Path.GetDirectoryName(path).FormatPath(), Path.GetFileName(path)).Length != 0; }
-			catch { }
-		}
-
-		return File.Exists(path);
 	}
 
 	internal static void RunFirstTimeSetup()
