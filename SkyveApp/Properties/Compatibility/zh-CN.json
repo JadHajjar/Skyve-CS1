@@ -170,8 +170,8 @@
   "CRT_Status": "状态",
   "CRT_Ambiguous": "不明确性",
   "LastReviewDate": "最近一次检查于 {0}",
-  "RequestReviewInfo": "使用此插件时遇到问题？\n请在这里申请重新复查：",
-  "RequestReview": "申请复查",
+  "RequestReviewInfo": "使用此插件时遇到问题？",
+  "RequestReview": "申请检查",
   "MissingDependencyCount": {
     "One": "{0} {1} 缺少依赖关系",
     "Plural": "{0} {1} 缺少依赖关系"
