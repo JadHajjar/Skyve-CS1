@@ -459,25 +459,25 @@
   "ReviewRequestFailed": "無法傳送您關於 「{0}」 的檢查申請。\n\n{1}",
   "SendReview": "傳送檢查申請",
   "EditTags": "編輯標籤",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages.",
-  "AddCustomTag": "Add a custom tag",
+  "ShowAllReferencedPackages": "在「引用」選項卡顯示被卸下的外掛",
+  "ShowAllReferencedPackages_Tip": "參考您正在查看的頁面，可以同時顯示已裝載與已卸下的外掛。",
+  "TreatOptionalAsRequired": "將可選外掛視為必需外掛",
+  "TreatOptionalAsRequired_Tip": "一般來說，它會顯示這些可選外掛缺失的必需物品資訊。",
+  "AddCustomTag": "新增自訂標籤",
   "OutOfDateCount": {
-    "One": "{0} {1} is out of date",
-    "Plural": "{0} {1} are out of date"
+    "One": "{0} {1} 已過期",
+    "Plural": "{0} {1} 已過期"
   },
   "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+    "One": "{0} {1} 與創意工坊版本的檔案大小不匹配",
+    "Plural": "{0} {1} 與創意工坊版本的檔案大小不匹配"
   },
-  "PackageIsRemoved": "'{0}' was removed from Steam",
-  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
-  "PackageIsNotDownloaded": "'{0}' was removed from your computer",
-  "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
-  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
-  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
-  "RemovedFromSteam": "Removed from Steam",
-  "Missing": "Missing"
+  "PackageIsRemoved": "外掛 「{0}」 已從 Steam 工坊移除",
+  "PackageIsUnknown": "外掛 「{0}」 的 Steam 工坊資訊尚未載入",
+  "PackageIsNotDownloaded": "「{0}」已從您的電腦中刪除",
+  "PackageIsOutOfDate": "外掛「{0}」 已經過期\n\n您的版本已落後 「{1}」",
+  "PackageIsMaybeOutOfDate": "外掛 「{0}」 可能已過期，它已經進行了更新 「{1}」",
+  "PackageIsIncomplete": "本地外掛「{0}」 的檔案大小({1}) 與其工坊版本的檔案大小 {2} 不同",
+  "RemovedFromSteam": "已從 Steam 工坊移除",
+  "Missing": "丟失"
 }
