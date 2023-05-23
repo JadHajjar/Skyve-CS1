@@ -315,7 +315,7 @@
   "TextImportMissingInfo": "Загрузите текстовый файл, содержащий Steam ID, чтобы легко подписаться на него или управлять им",
   "ImportFromText": "Импортировать из текста",
   "ImportFromClipboard": "Загрузить текст из буфера обмена",
-  "XMLImportInfo": "Вы можете использовать файлы из BOB, Tree Brush, Theme Mix и т.д..",
+  "XMLImportInfo": "Вы можете использовать файлы из BOB, Tree Brush, Theme Mix и т. д.",
   "ImportFromTextInfo": "Поддерживается любой формат текста",
   "LsmImportInfo": "Не забудьте выбрать файл 'Отчет'",
   "NoProfilesFound": "Профили не найдены",
