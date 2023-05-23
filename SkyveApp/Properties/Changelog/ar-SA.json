@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "تنظيف حزم الورشة",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "تم إضافة وظائف جديدة للتعامل بسهولة مع حالات عدم التوافق بين Steam والحزم التي تم تنزيلها.",
+                    "الحزم التي لم تشترك فيها لم تعد تحمل في اللعبة.",
+                    "سيؤدي تشغيل اللعبة أثناء فتح \"LOT\" تلقائياً إلى حذف أي حزم لم تشترك بها، ولكن يتم تنزيلها على جهاز الكمبيوتر الخاص بك.",
+                    "إضافة زر في علامة تبويب المرافق لتشغيل هذا التنظيف يدوياً بالإضافة إلى إجبار التنزيل من الحزم المفقودة."
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "جديد",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "إضافة خيار لتعطيل التنظيف التلقائي عند فتح اللعبة.",
+                    "إضافة صندوق حجج مخصص لإعدادات الإطلاق المتقدمة."
                 ]
             }
         ]
@@ -268,27 +268,66 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "أيقونة التصويت والمشتركين",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "أضف أيقونة جديدة بجوار حزمة تعرض ملخصا سريعا للأصوات وعدد المشتركين في الحزمة.",
+                    "قم بتحويله لعرض القيم.",
+                    "انقر على الرمز للحصول على وصف متعمق لهذه الميزة.",
+                    "إضافة خيارات فرز 'التصويت' و 'مجموع المشتركين'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "متطلبات الأصول",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "العناصر المطلوبة المعروضة على صفحة أصول الورشة مدمجة الآن في أداة طلب التحميل.",
+                    "سيتم تضمين هذه المعلومات الآن في تقرير التوافق لترى بسرعة وسهولة ما كنت مفقودا."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "تغييرات أخرى",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "حدّث صفحة الحزمة لتطابق المعلومات المعروضة في قوائم المحتوى.",
+                    "قوائم المحتوى الثانوي مثل 'حزم مفقودة' و 'مجموعة الورشة' تستخدم الآن نفس واجهة المستخدم كصفحات قائمة المحتوى الرئيسية، السماح بتجربة مبسطة وخيارات أكثر.",
+                    "إضافة 'أصول جديدة' و 'تحميل الأصول' خيارات الإطلاق في الملف الشخصي للتحميل بسرعة إلى محرر الأصول."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "تقديم, سماع, الخلف النهائي لمودة طلب الحمولة 1/2 وتقرير التوافق.\r\nقادمة لـ C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "إصلاح تقرير التوافق",
+                "Changes": [
+                    "ويجري الآن دمج تقرير التوافق مباشرة في السماء.",
+                    "التوصيات ونص المعلومات أصبحت الآن أكثر وضوحا وأسهل إدارتها.",
+                    "إضافة زر غفوة لرفض إشعار معين بالتوافق.",
+                    "العناصر المطلوبة إعادة توجيهها تلقائياً إلى أحدث خلف.",
+                    "يتم مطابقة الحزم المحلية تلقائيًا مع نظيرها على الإنترنت، مع عرض المعلومات من Steam وعرض معلومات التوافق بشكل صحيح.",
+                    "يمكنك الآن طلب مراجعة لحزمة لإعلامنا عن المعلومات الناقصة في بيانات التوافق.",
+                    "التبويب تقرير التوافق متاح الآن."
+                ]
+            },
+            {
+                "Name": "ميزات جديدة",
+                "Changes": [
+                    "يمكنك الآن تحرير العثور عليه! العلامات مباشرة في التطبيق للمودعات والأصول. يتم مزامنة الأصول مع اللعبة.",
+                    "إضافة علامة تبويب \"المراجع\" على صفحة الحزمة لرؤية جميع الحزم الأخرى التي تشير إليها.",
+                    "تم إضافة خيار لصنع حزم اختيارية باستخدام نفس الإشعار كحزم مطلوبة.",
+                    "أضيفت لهجات لغوية، اللغة الصينية التقليدية (تايوان)، والإنكليزية (المملكة المتحدة)، والبرتغالية البرازيلية."
+                ]
+            },
+            {
+                "Name": "تغييرات أخرى",
+                "Changes": [
+                    "الآن تتضمن Pseudo-mods علامات IMT ، وقم بتقديمها! مسبقًا، خطوط الأشياء الإجرائية، موديلات الترجمة.",
+                    "تم إضافة روابط إلى صفحة الحزمة، بالإضافة إلى معلومات أخرى مثل استخدامها ونوعها.",
+                    "إضافة استخدامات جديدة للملف الشخصي: إنشاء الخريطة، صنع السيناريو، صنع السمة.",
+                    "تم إضافة نص إضافي في القائمة لإظهار عدد الحزم المخفية بسبب استخدام الملف الشخصي الخاص بك.",
+                    "قم بتحسين زر الإجراءات لجعله أكثر وضوحا وسهولة في الوصول.",
+                    "الرمز الجديد يتدفق الآن بناء على ما يحدث، اللون الأزرق يشير إلى أن اللعبة تشتغل، أحمر يعني عدم وجود اتصال بالإنترنت، والتحرج السريع يعني أنها تبدأ أو تغلق اللعبة."
                 ]
             }
         ]

@@ -292,5 +292,44 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Vi presentiamo Skyve, il successore finale di Load Order Mod 1/2 e Compatibility Report.\nIn arrivo per C:S I e C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Revisione del Compatibility Report",
+                "Changes": [
+                    "Il Compatibility Report è ora integrato direttamente in Skyve.",
+                    "Le raccomandazioni e il testo informativo sono ora più chiari e facili da gestire.",
+                    "È stato aggiunto un pulsante Snooze per eliminare una determinata notifica di compatibilità.",
+                    "Gli elementi richiesti vengono automaticamente reindirizzati al successore più recente dei pacchetti.",
+                    "I pacchetti locali vengono automaticamente abbinati alla loro controparte online, mostrando le informazioni di Steam e mostrando correttamente le informazioni sulla compatibilità.",
+                    "È ora possibile richiedere una revisione di un pacchetto per segnalare la presenza di informazioni mancanti nei dati di compatibilità.",
+                    "La scheda Compatibility Report è ora disponibile."
+                ]
+            },
+            {
+                "Name": "Nuove caratteristiche",
+                "Changes": [
+                    "È ora possibile modificare i tag Find it! direttamente nell'app per le mod e le risorse. Le risorse sono sincronizzate con il gioco.",
+                    "Aggiunta la scheda \"Riferimenti\" nella pagina di un pacchetto per vedere tutti gli altri pacchetti che vi fanno riferimento.",
+                    "Aggiunta un'opzione per far sì che i pacchetti opzionali utilizzino la stessa notifica dei pacchetti obbligatori.",
+                    "Aggiunti dialetti linguistici, Cinese Tradizionale (Taiwan), Inglese UK e Portoghese Brasile."
+                ]
+            },
+            {
+                "Name": "Altre modifiche",
+                "Changes": [
+                    "Gli pseudo-mod ora includono marcature IMT, Render it! Preset, Font di Procedural Objects e mod di traduzione.",
+                    "Aggiunti i link alla pagina del pacchetto, oltre ad altre informazioni come l'uso e il tipo.",
+                    "Aggiunti nuovi utilizzi del Profilo: Creazione di Mappe, Creazione di Scenari e Creazione di Temi.",
+                    "Aggiunto un testo extra nell'elenco per mostrare quanti pacchetti sono nascosti a causa dell'uso del profilo.",
+                    "Il pulsante Azioni è stato migliorato per renderlo più visibile e di facile accesso.",
+                    "La nuova icona ora si illumina in base a ciò che sta accadendo: il blu indica che il gioco è in esecuzione, il rosso indica che non c'è connessione a Internet e il bagliore rapido indica che il gioco si sta avviando o chiudendo."
+                ]
+            }
+        ]
     }
 ]

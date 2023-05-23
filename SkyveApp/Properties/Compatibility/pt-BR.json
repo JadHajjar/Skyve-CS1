@@ -135,7 +135,7 @@
     "One": "Você deve assinar o seguinte pacote.",
     "Plural": "Você deveria assinar esses pacotes."
   },
-  "Action_RequiresConfiguration": "Você deve seguir as seguintes instruções.",
+  "Action_RequiresConfiguration": "Você deve seguir as seguintes instruções:",
   "Action_SelectOne": {
     "One": "Ou '{0}' ou '{1}', escolha apenas um dos dois.",
     "Plural": "Entre '{0}' e os seguintes pacotes, você deve escolher apenas um."
@@ -173,20 +173,23 @@
   "RequestReviewInfo": "Está enfrentando problemas com este pacote?\nSolicite uma nova análise aqui:",
   "RequestReview": "Solicitar Análise",
   "MissingDependencyCount": {
-    "One": "{0} {1} que está faltando dependências",
-    "Plural": "{0} {1} que estão faltando dependências"
+    "One": "{0} {1} está faltando dependências",
+    "Plural": "{0} {1} estão faltando dependências"
   },
   "CautionCount": "{0} {1} onde é aconselhado cuidado",
   "WarningCount": "{0} {1} com um aviso",
   "AttentionRequiredCount": {
-    "One": "{0} {1} que requerem sua atenção",
-    "Plural": "{0} {1} que requerem sua atenção"
+    "One": "{0} {1} requer sua atenção",
+    "Plural": "{0} {1} requer sua atenção"
   },
-  "ExcludeCount": "{0} {1} que deve ser excluído",
+  "ExcludeCount": {
+    "One": "{0} {1} deve ser excluído",
+    "Plural": "{0} {1} deve ser excluído"
+  },
   "UnsubscribeCount": "{0} {1} que você deve cancelar a inscrição",
   "SwitchCount": {
-    "One": "{0} {1} que requer mudança para outro",
-    "Plural": "{0} {1} que requerem mudança para outros"
+    "One": "{0} {1} requer mudança para outro",
+    "Plural": "{0} {1} requer mudança para outro"
   },
   "PackageType": "Tipos de Pacotes",
   "GenericPackage": "Pacote Genérico",
