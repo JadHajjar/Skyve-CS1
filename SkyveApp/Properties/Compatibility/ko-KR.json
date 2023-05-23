@@ -30,17 +30,17 @@
   "SelectOne": "Select either one",
   "UnsubscribeThis": "Unsubscribe from this package",
   "UnsubscribeOther": "Unsubscribe from linked packages",
-  "Switch": "링크된 패키지로 전환",
-  "FlippedSwitch": "Switch to to this package",
+  "Switch": "링크된 패키지로 바꾸기",
+  "FlippedSwitch": "링크된 패키지로 바꾸기",
   "Deprecated": "Deprecated",
   "Reupload": "Re-Upload",
   "CausesIssues": "Causes Issues",
-  "SavesCantLoadWithoutIt": "Saves can't load without it",
+  "SavesCantLoadWithoutIt": "없다면 세이브를 로드할 수 없습니다.",
   "TestVersion": "시험 버전",
   "DependencyMod": "Dependency Mod",
-  "SourceCodeNotAvailable": "Source-code is not available",
+  "SourceCodeNotAvailable": "소스 코드를 공개하지 않았습니다.",
   "MusicCanBeCopyrighted": "포함된 음악에 저작권이 있을 수 있습니다",
-  "IncompleteDescription": "Incomplete Description",
+  "IncompleteDescription": "불완전한 정보",
   "Successor": "Successor",
   "Alternative": "Alternative",
   "SameFunctionality": "Same Functionality",
@@ -59,7 +59,7 @@
   "ManageSinglePackage": "Manage specific packages",
   "ManageCompatibilityData": "Manage Compatibility Data",
   "YourPackages": "Manage your packages",
-  "AddPackages": "Add Packages",
+  "AddPackages": "패키지 추가",
   "ConfirmEndSession": "Are you sure you want to conclude your session?",
   "CrDataLoadFailed": "Failed to load data, try again later",
   "AddGlobalTag": "Add a global tag",
@@ -152,7 +152,7 @@
   },
   "Action_Switch": {
     "One": "'{1}' 로 전환해야 합니다.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "다음 패키지 중 하나로 바꿔야 합니다."
   },
   "NoRequiredDlcs": "No Required DLCs",
   "DlcsSelected": {
@@ -173,7 +173,7 @@
   "RequestReviewInfo": "이 패키지에서 이슈를 경험하고 있습니까?",
   "RequestReview": "리뷰 요청하기",
   "MissingDependencyCount": {
-    "One": "{0} {1} is missing dependencies",
+    "One": "의존성을 누락한 {1} {0}개가 있습니다",
     "Plural": "의존성을 누락한 {1} {0}개가 있습니다"
   },
   "CautionCount": "주의가 권고되는 {1} {0}개가 있습니다",
