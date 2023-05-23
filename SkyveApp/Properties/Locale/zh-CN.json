@@ -459,9 +459,9 @@
   "ReviewRequestFailed": "无法发送您关于 “{0}” 的检查申请。\n\n{1}",
   "SendReview": "发送检查申请",
   "EditTags": "编辑标签",
-  "ShowAllReferencedPackages": "在“选项”面板里显示被卸下的插件",
+  "ShowAllReferencedPackages": "在“引用”选项卡显示被卸下的插件",
   "ShowAllReferencedPackages_Tip": "参考您正在查看的页面，可以同时显示已装载与已卸下的插件。",
-  "TreatOptionalAsRequired": "根据自己的实际需求处理这些可选插件",
+  "TreatOptionalAsRequired": "将可选插件视为必需插件",
   "TreatOptionalAsRequired_Tip": "一般来说，它会显示这些可选插件缺失的必需物品信息。",
   "AddCustomTag": "添加自定义标签",
   "OutOfDateCount": {
@@ -469,15 +469,15 @@
     "Plural": "{0} {1} 已过期"
   },
   "IncompleteCount": {
-    "One": "{0} {1} 与创意工坊的大小不匹配",
-    "Plural": "{0} {1} 与来自创意工坊的各自大小不匹配"
+    "One": "{0} {1} 与创意工坊版本的文件大小不匹配",
+    "Plural": "{0} {1} 与创意工坊版本的文件大小不匹配"
   },
-  "PackageIsRemoved": "'{0}已从Steam中移除",
-  "PackageIsUnknown": "来自Steam的信息尚未加载 '{0}'",
+  "PackageIsRemoved": "插件 '{0}' 已从 Steam 工坊移除",
+  "PackageIsUnknown": "插件 '{0}' 的 Steam 工坊信息尚未加载",
   "PackageIsNotDownloaded": "'{0}'已从您的电脑中删除",
-  "PackageIsOutOfDate": "'{0}已经过期\r\n\r\n您已过期了 {1} 之后",
-  "PackageIsMaybeOutOfDate": "'{0}' 可能已过时，它已更新 {1}",
-  "PackageIsIncomplete": "'{0}' 的本地大小({1}) 不同于Steam的 {2}",
-  "RemovedFromSteam": "已从 Steam 删除",
+  "PackageIsOutOfDate": "插件 '{0}' 已经过期\n\n您的版本已落后 {1}",
+  "PackageIsMaybeOutOfDate": "插件 '{0}' 可能已过期，它已经进行了更新 {1}",
+  "PackageIsIncomplete": "本地插件 '{0}' 的文件大小({1}) 与其工坊版本的文件大小 {2} 不同",
+  "RemovedFromSteam": "已从 Steam 工坊移除",
   "Missing": "丢失"
 }
