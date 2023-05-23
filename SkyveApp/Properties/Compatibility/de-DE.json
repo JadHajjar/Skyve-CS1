@@ -94,11 +94,11 @@
     "Plural": "Ihnen fehlen die folgenden optionalen Pakete für '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' wird von '{1} ' abgeleitet.",
-    "Plural": "'{0}' wird von einem der folgenden Pakete erfolgreich verfolgt."
+    "One": "'{0}' wird von '{1}' abgelöst.",
+    "Plural": "'{0}' wird von einem der folgenden Pakete abgelöst."
   },
   "Interaction_Identical": "Dies sind mehrere Versionen des gleichen Paketes.\r\n\r\nSie sollten nur eine von ihnen auswählen.",
-  "Status_Succeeded": "'{0}' wird von '{1}' abgeleitet.\r\n\r\nSie verwenden bereits '{1}', so dass es keine Notwendigkeit mehr für '{0}' gibt.",
+  "Status_Succeeded": "'{0}' wird von '{1}' abgelöst.\n\nSie verwenden bereits '{1}', sodass es keine Notwendigkeit mehr für '{0}' gibt.",
   "Status_Deprecated": "'{0}' ist veraltet, es wird nicht mehr vom Autor unterstützt.",
   "Status_Reupload": {
     "Zero": "'{0}' ist ein erneutes Hochladen eines Originalpakets.",
@@ -106,11 +106,11 @@
   },
   "Status_CausesIssues": "'{0}' verursacht Probleme mit deinem Spiel.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "Beim Erstellen eines neuen Speichers mit '{0}' aktiviert können Sie diese Speicherung nicht mehr laden, wenn '{0}' deaktiviert ist.",
-    "One": "Beim Erstellen eines neuen Speichers mit '{0}' aktiviert können Sie diese Speicherung nicht mehr laden, wenn '{0}' deaktiviert ist.\r\n\r\nBenutzen Sie '{1}', um Ihren Speicherplatz wiederherzustellen, falls nötig. Lesen Sie die Workshopbeschreibung für weitere Informationen."
+    "Zero": "Wenn sie beim Erstellen eines neuen Spielstands mit '{0}' aktiviert haben, können Sie diesen Spielstand nicht mehr laden, wenn '{0}' deaktiviert ist.",
+    "One": "Wenn sie beim Erstellen eines neuen Spielstands mit '{0}' aktiviert haben, können Sie diesen Spielstand nicht mehr laden, wenn '{0}' deaktiviert ist.\n\nBenutzen Sie '{1}', um ihren Spielstand wiederherzustellen, falls nötig. Lesen Sie die Workshopbeschreibung für weitere Informationen."
   },
   "Status_TestVersion": {
-    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
+    "Zero": "Dies ist eine 'Test'-Version, beachten Sie, dass Testversionen von Mods Probleme verursachen können und Aktualisierungen von ihnen zu unerwarteten Fehlern führen können.",
     "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
   "Status_MissingDlc": {
