@@ -111,47 +111,47 @@
   },
   "Status_TestVersion": {
     "Zero": "Це бета-версія. Будьте усвідомлені, що тестові версії модів можуть призводити до проблем, а оновлення до них можуть спричиняти непередбачувані помилки.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Це бета-версія '{1}'.\n\nБудьте уважні, оскільки оновлення до неї можуть призводити до непередбачуваних проблем."
   },
   "Status_MissingDlc": {
-    "One": "You're missing the '{0}' DLC to use this package.",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "Вам не вистачає DLC для використання цього пакету.",
+    "Plural": "Вам не вистачає наступних DLC для використання цього пакету."
   },
-  "Status_DependencyMod": "Це режим залежності, але здається, що ви використовуєте будь-який пакет, який вимагає його.",
-  "Status_SourceCodeNotAvailable": "Вихідний код цього моду недоступний. Вам не слід використовувати його, якщо ви не довіряєте його автору.",
-  "Status_MusicCanBeCopyrighted": "Ця музика всередині цього пакету може бути авторським правотом. Найкраще не використовувати її під час трансляції.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "OutputText": "Очікуваний вихід",
-  "Stability_AssetNotReviewed": "Цей об'єкт ще не розглянуто.\r\n\r\nІнформація про сумісність може бути неточною; хоча активи як правило, стабільні.",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Status_DependencyMod": "Це мод залежності, але, здається, ви не використовуєте жоден пакет, який вимагає його.",
+  "Status_SourceCodeNotAvailable": "Вихідний код цього моду недоступний. Ви не повинні використовувати його, якщо не маєте довіри до його автора.",
+  "Status_MusicCanBeCopyrighted": "Музика в цьому пакеті може бути об'єктом авторського права. Найкраще не використовувати її під час стріму.",
+  "Status_IncompleteDescription": "Опис Майстерні для цього моду дуже короткий. Ви не повинні використовувати його, якщо не маєте довіри до його автора.",
+  "OutputText": "Очікуваний результат",
+  "Stability_AssetNotReviewed": "Цей ассет ще не пройшов огляд.\n\nІнформація про сумісність може бути неправдивою; хоча ассети, як правило, стабільні",
+  "Stability_NotReviewed": "Цей пакет ще не був пройшов огляд.\n\nІнформація про сумісність може бути недостовірною.",
   "Stability_Stable": "Цей пакунок стабільний.",
-  "Stability_NotEnoughInformation": "Немає достатньо інформації для того, щоб правильно переглядати цей пакет.",
-  "Stability_HasIssues": "Цей пакет може викликати проблеми.\r\nБудьте обережні при його використанні.",
-  "Stability_Broken": "Цей пакет пошкоджено.\r\nВідомо, що він зламає гру, або просто не працює.",
-  "Stability_Incompatible": "Цей пакет не сумісний з грою або перерви.\r\n\r\nВам слід видалити його негайно.",
-  "Stability_Local": "Цей пакунок є локальною версією оригіналу моду '{0}.\r\n\r\nЛокальні версії зазвичай використовуються для тестування цілей або якщо у вас немає Steam.\r\n\r\nПеревірити посилання пакету на оновлення в моді.",
+  "Stability_NotEnoughInformation": "Недостатньо інформації для належного огляду цього пакету.",
+  "Stability_HasIssues": "Цей пакет може створювати проблеми.\nБудьте обережні при його використанні.",
+  "Stability_Broken": "Цей пакет несправний.\nВідомо, що він або руйнує гру, або просто не працює.",
+  "Stability_Incompatible": "Цей пакет несумісний з грою або порушує її роботу.\n\nВам слід видалити його негайно.",
+  "Stability_Local": "Цей пакет є локальною версією оригінального моду '{0}'.\n\nЛокальні версії зазвичай використовуються для тестування або в разі відсутності Steam.\n\nПеревірте посилання пакету, щоб переглянути оновлення моду.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
+    "One": "Ви повинні підписатися на наступний пакет:",
     "Plural": "You should subscribe to these packages."
   },
-  "Action_RequiresConfiguration": "Ви повинні слідувати наступним інструкціям:",
+  "Action_RequiresConfiguration": "Ви повинні дотримуватися наступних інструкцій:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Між '{0}' і '{1}' ви повинні обрати лише один з них.",
+    "Plural": "Між '{0}' та наступними пакетами ви повинні обрати лише один."
   },
   "Action_UnsubscribeThis": "Ви повинні відписатися від '{0}'.",
   "Action_UnsubscribeOther": {
     "One": "Ви повинні відписатися від '{1}'.",
-    "Plural": "You should unsubscribe from the following packages."
+    "Plural": "Вам слід відписатися від наступних пакетів:"
   },
-  "Action_ExcludeThis": "Ви повинні виключити '{0}'.",
+  "Action_ExcludeThis": "Вам слід виключити '{0}'.",
   "Action_ExcludeOther": {
-    "One": "Ви повинні виключити '{1}'.",
-    "Plural": "You should exclude the following packages."
+    "One": "Вам слід виключити '{1}'.",
+    "Plural": "Вам слід виключити наступні пакети:"
   },
   "Action_Switch": {
-    "One": "Ви повинні переключитися на '{1}'.",
+    "One": "Вам слід переключитися на '{1}'.",
     "Plural": "You should switch to one of the following packages."
   },
   "NoRequiredDlcs": "Немає необхідних DLC",
