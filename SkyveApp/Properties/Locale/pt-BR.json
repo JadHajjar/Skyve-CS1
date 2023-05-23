@@ -405,6 +405,7 @@
   "Unsubscribe": "Cancelar Assinatura",
   "Exclude": "Excluir",
   "Snooze": "Suspender",
+  "UnSnooze": "Suspender",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -455,11 +456,28 @@
   "ExplainIssue": "Descreva seus problemas aqui",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
   "ReviewRequestSent": "Sua solicitação de análise para '{0}' foi enviada!\n\nObrigado pelo seu comentário.",
-  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
+  "ReviewRequestFailed": "Falha ao enviar sua solicitação de revisão para '{0}'.\r\n\r\n{1}",
   "SendReview": "Enviar o pedido de análise",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "EditTags": "Editar tags",
+  "ShowAllReferencedPackages": "Mostrar pacotes excluídos na guia 'Referências'",
+  "ShowAllReferencedPackages_Tip": "Exibe os pacotes excluídos e incluídos que referenciam o que você está visualizando.",
+  "TreatOptionalAsRequired": "Tratar pacotes opcionais conforme necessário",
+  "TreatOptionalAsRequired_Tip": "Essencialmente, isto exibe a notificação de dependência que falta para pacotes opcionais.",
+  "AddCustomTag": "Adicionar uma tag personalizada",
+  "OutOfDateCount": {
+    "One": "{0} {1} está desatualizado",
+    "Plural": "{0} {1} estão desatualizados"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} não corresponde ao seu tamanho da Oficina",
+    "Plural": "{0} {1} não corresponde aos tamanhos respectivos da Oficina"
+  },
+  "PackageIsRemoved": "'{0}' foi removido da Steam",
+  "PackageIsUnknown": "As informações do Steam ainda não carregaram para '{0}'",
+  "PackageIsNotDownloaded": "'{0}' foi removido do seu computador",
+  "PackageIsOutOfDate": "'{0}' está desatualizado\r\n\r\nVocê está {1} atrás",
+  "PackageIsMaybeOutOfDate": "'{0}' pode estar fora da data, foi atualizado {1}",
+  "PackageIsIncomplete": "O tamanho local de '{0}' ({1}) é diferente do da {2} do Steam",
+  "RemovedFromSteam": "Removido da Steam",
+  "Missing": "Faltando"
 }

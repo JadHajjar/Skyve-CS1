@@ -135,7 +135,7 @@
     "One": "Vous devriez vous abonner au paquet suivant.",
     "Plural": "Vous devriez vous abonner à ces paquets."
   },
-  "Action_RequiresConfiguration": "Vous devriez suivre les instructions suivantes.",
+  "Action_RequiresConfiguration": "Vous devriez suivre les instructions suivantes :",
   "Action_SelectOne": {
     "One": "Entre '{0}' et '{1}', vous ne devriez en choisir qu'un seul.",
     "Plural": "Entre '{0}' et les paquets suivants, vous ne devriez en choisir qu'un seul."
@@ -173,20 +173,23 @@
   "RequestReviewInfo": "Vous rencontrez des problèmes avec ce paquet ?",
   "RequestReview": "Demander une révision",
   "MissingDependencyCount": {
-    "One": "{0} {1} qui manque des dépendances",
-    "Plural": "{0} {1} qui ont des dépendances manquantes"
+    "One": "{0} {1} manque des dépendances",
+    "Plural": "{0} {1} sont des dépendances manquantes"
   },
   "CautionCount": "{0} {1} où la prudence est conseillée",
   "WarningCount": "{0} {1} avec un avertissement",
   "AttentionRequiredCount": {
-    "One": "{0} {1} qui nécessite votre attention",
-    "Plural": "{0} {1} qui nécessitent votre attention"
+    "One": "{0} {1} requiert votre attention",
+    "Plural": "{0} {1} requiert votre attention"
   },
-  "ExcludeCount": "{0} {1} qui devraient être exclus",
+  "ExcludeCount": {
+    "One": "{0} {1} doit être exclu",
+    "Plural": "{0} {1} doit être exclu"
+  },
   "UnsubscribeCount": "{0} {1} dont vous devriez vous désabonner",
   "SwitchCount": {
-    "One": "{0} {1} qui nécessite de passer à un autre",
-    "Plural": "{0} {1} qui nécessitent de passer à un autre"
+    "One": "{0} {1} nécessite de passer à un autre",
+    "Plural": "{0} {1} nécessite de passer à un autre"
   },
   "PackageType": "Type de paquet",
   "GenericPackage": "Paquet générique",
@@ -197,6 +200,6 @@
   "POFont": "Police / Module de Procedural Objects",
   "NameList": "Liste de noms/traductions de jeux",
   "ApplyChangedBeforeExit": "Vous avez des modifications non enregistrées.\n\nVoulez-vous appliquer ces modifications avant de continuer ?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorRetired": "L'auteur de {0}, {1}, a pris sa retraite ou est inactif depuis longtemps.\n\nLes mises à jour futures et la stabilité de leurs paquets ne sont pas garanties.",
   "AuthorMalicious": "L'auteur de {0}, {1} est connu pour être malveillant et/ou pour avoir inclus des contenus nuisibles comme des virus dans leurs paquets."
 }

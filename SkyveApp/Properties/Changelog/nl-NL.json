@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Werkplaats Pakketten Opschonen",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Nieuwe functies toegevoegd om makkelijk verkeerde matches tussen Steam en je gedownloade pakketten te verwerken.",
+                    "Pakketten waarop u niet bent geabonneerd zijn niet langer in het spel geladen.",
+                    "Het starten van het spel terwijl LOT geopend is, zal automatisch alle pakketten verwijderen waar u niet op bent geabonneerd, maar wordt gedownload op uw computer.",
+                    "Een knop toegevoegd op het tabblad Utilities om handmatig deze schoonmaak uit te voeren en de download van ontbrekende pakketten af te dwingen."
                 ]
             }
         ]
@@ -256,8 +256,8 @@
             {
                 "Name": "Nieuw",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Toegevoegd een optie om automatische opschoning uit te schakelen bij het openen van het spel.",
+                    "Een eigen selectievakje voor geavanceerd opstarten toegevoegd."
                 ]
             }
         ]
@@ -268,27 +268,66 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Stem & Abonnees Icoon",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Een nieuw pictogram toegevoegd naast een pakket dat een snel overzicht toont van de stemmen en de teller van het pakket.",
+                    "Beweeg erover om de waarden weer te geven.",
+                    "Klik op het pictogram voor een diepgaande beschrijving van deze functie.",
+                    "Sorteeropties voor 'Stemmen' & 'Totaal abonnees' toegevoegd."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Activa vereisten",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "De vereiste items die worden weergegeven op de pagina van een workshop asset, is nu geïntegreerd in Laad Gereedschap.",
+                    "Deze informatie zal nu worden opgenomen in het Compatibiliteitsrapport om snel en eenvoudig te zien wat je mist."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Andere wijzigingen",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "De pakketpagina is bijgewerkt op basis van de weergegeven informatie in de inhoudslijsten.",
+                    "Secundaire inhoudslijsten zoals 'Ontbrekende pakketten' & 'Verzameling werkplaats' gebruiken nu dezelfde UI als de belangrijkste inhoudslijst pagina's, toestaan voor een gestroomlijnde ervaring en meer opties.",
+                    "Opties voor het snel laden in de Asset Editor, 'Nieuw assetbestand laden' en 'Asset' in het profiel toegevoegd."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Presentatie, Skyve, de laatste opvolger van Load Order Mod 1/2 en Compatibility Report.\r\nCommentaar voor C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Compatibiliteitsrapport revisie",
+                "Changes": [
+                    "Compatibiliteitsrapport is nu direct geïntegreerd in Skyve.",
+                    "Aanbevelingen en informatieteksten zijn nu duidelijker en eenvoudiger te beheren.",
+                    "Een snooze knop toegevoegd om een bepaalde compatibiliteitsmelding af te wijzen.",
+                    "Vereiste items doorverwijzen automatisch naar de meest recente opvolger van de pakketten.",
+                    "Lokale pakketten worden automatisch gekoppeld aan hun online tegenhanger, door de informatie van Steam te tonen en de compatibiliteitsinformatie correct te tonen.",
+                    "U kunt nu een review aanvragen voor een pakket om ons op de hoogte te stellen van ontbrekende informatie in de compatibiliteitsgegevens.",
+                    "Het tabblad Compatibility Rapport is nu beschikbaar."
+                ]
+            },
+            {
+                "Name": "Nieuwe functies",
+                "Changes": [
+                    "Je kunt de zoekresultaten nu bewerken! tags in de app voor mods en assets. Assets worden gesynchroniseerd met het spel.",
+                    "Een tabblad \"Verwijzingen\" op de pagina van een pakket toegevoegd om alle andere pakketten te zien die ernaar verwijzen.",
+                    "Toegevoegd een optie om optionele pakketten te gebruiken dezelfde melding als de vereiste pakketten.",
+                    "Taaldialecten, Chinees (Taiwan), Engels Verenigd Koninkrijk en Portugees Brazilië toegevoegd."
+                ]
+            },
+            {
+                "Name": "Andere wijzigingen",
+                "Changes": [
+                    "Pseudo-mods omvatten nu IMT-markeringen, Render! Presets, Procedurele Objecten en Vertaalmods.",
+                    "Links toegevoegd aan de pakketpagina, evenals andere informatie zoals zijn gebruik & type.",
+                    "Nieuw profielgebruik toegevoegd: Kaart creatie, Scenario Making, en Thema Making.",
+                    "Extra tekst toegevoegd in de lijst om te laten zien hoeveel pakketten verborgen zijn vanwege uw profielgebruik.",
+                    "De knop Acties verbeteren om deze zichtbaarder en toegankelijker te maken.",
+                    "Het nieuwe icoon is nu gloort op basis van wat er gebeurt, blauw geeft aan dat het spel draait, rood betekent geen internetverbinding, en snel gloeien betekent dat het spel start of sluit."
                 ]
             }
         ]

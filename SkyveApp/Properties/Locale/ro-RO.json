@@ -236,7 +236,7 @@
   "ItemsShouldNotBeSubscribedInfo": "Sunteți pe cale să vă abonați la pachete care ar putea fi stricate sau care au alte probleme serioase.",
   "WouldYouLikeToSkipThose": "Doriți să săriți peste aceste pachete?",
   "LOTWillRestart": "Skyve se va închide temporar în timpul procesului de actualizare, dar se va relua automat după finalizarea actualizării.",
-  "UpdatingLot": "Skyve is currently being updated. Please wait...",
+  "UpdatingLot": "Skyve este în curs de actualizare. Vă rugăm așteptați...",
   "SubscribingRequiresGameToOpen": "Abonarea sau dezabonarea de la pachete necesită deschiderea jocului pentru un scurt moment. Când vezi lansatorul jocului, apasă pe Play pentru a continua.",
   "HelpSupport": "Ajutor & Suport",
   "DisableFpsBoosterDebug": "Aveţi FPS Booster activat în timp ce utilizaţi mono de depanare, doriţi să-l dezactivaţi pentru a obţine jurnale mai bune?",
@@ -250,8 +250,8 @@
   "ErrorsInLog": "Erori în jurnal",
   "OpenLogFolder": "Deschide directorul de jurnal al jocului",
   "CopyLogFile": "Copiază fişierul de jurnal al jocului în clipboard",
-  "OpenLOTLogFolder": "Open Skyve's log folder",
-  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
+  "OpenLOTLogFolder": "Deschide directorul de jurnal Skyve",
+  "CopyLOTLogFile": "Copiază fişierul de jurnal Skyve în clipboard",
   "ModIncludedTotal": "Modurile incluse: {0}, Total: {1}",
   "ModIncludedAndEnabledTotal": "Moduri incluse și activate: {0}, Total: {1}",
   "ModIncludedEnabledTotal": "Modurile incluse: {0}, din care sunt activate: {1}, Total: {2}",
@@ -264,7 +264,7 @@
   "ViewProfiles_Tip": "Vizualizați și gestionați profilurile salvate",
   "AutoSave_Tip": "Salvează automat modificările în mod-uri și active în profilul tău",
   "LoadEnabled_Tip": "Sarcini activate active în timpul încărcării unui joc. Acest lucru ar trebui să fie lăsat activat dacă nu știi ce faci",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
+  "LoadUsed_Tip": "Încarcă activele care sunt utilizate pe harta ta, chiar dacă sunt dezactivate în joc. Acest lucru nu este legat de setările de active din Skyve",
   "UseSkipFile_Tip": "Folosește acest lucru pentru a exclude active de vanilie din jocul tău",
   "NewGame_Tip": "Începe un joc nou când lansezi Cities: Skylines. Poți specifica harta în care dorești să începi",
   "LoadSaveGame_Tip": "Încărcați un joc de salvare atunci când porniți orașe: Skylines. Nu selectați un fișier de salvare va continua ultima salvare",
@@ -286,7 +286,7 @@
   "FavoriteProfileTotal": "Profiluri favorite: {0}, Total: {1}",
   "FavoriteTotal": "Total profiluri: {0}",
   "ProfileFilter": "Filtru de profil",
-  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "Asigură-te că Skyve are acces la dosarul de documente, îl folosește pentru a stoca setările de interfață și limbă.",
   "FailedToSaveLanguage": "Salvarea limbii selectate a eșuat",
   "FailedToOpenTC": "Eroare la deschiderea Schimbării Temei",
   "FailedToDeleteItem": "Ștergerea elementului a eșuat",
@@ -405,6 +405,7 @@
   "Unsubscribe": "Dezabonați-vă",
   "Exclude": "Excludeți",
   "Snooze": "Amână",
+  "UnSnooze": "Dezamânare",
   "Mod": {
     "One": "Mod",
     "Plural": "Moduri"
@@ -438,28 +439,45 @@
     "Plural": "{0} {1} încărcate"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "Se afișează {0} {1}",
+    "Plural": "Se afișează {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "Se afișează {0} {1}, {2}",
+    "Plural": "Se afișează {0} {1}, {2}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "{0} {1} este ascuns din cauza utilizării profilului dvs.",
+    "Plural": "{0} {1} sunt ascunse din cauza utilizării profilului dvs."
   },
-  "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
+  "EditCompatibility": "Editare compatibilitate",
+  "AnyIssue": "Orice problemă",
+  "AnyUsage": "Orice utilizare",
+  "ExplainIssue": "Descrie problema ta aici",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
-  "SendReview": "Send the request for review",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "ReviewRequestSent": "Solicitarea dvs. de revizuire pentru '{0}' a fost trimisă!\r\n\r\nVă mulțumim pentru feedback.",
+  "ReviewRequestFailed": "Nu am reușit să trimiteți solicitarea de revizuire pentru '{0}'.\r\n\r\n{1}",
+  "SendReview": "Trimite cererea de revizuire",
+  "EditTags": "Editare etichete",
+  "ShowAllReferencedPackages": "Arată pachetele excluse în fila 'Referinţe'",
+  "ShowAllReferencedPackages_Tip": "Afișează atât pachetele excluse, cât și cele incluse care fac referire la cele pe care le vizualizați.",
+  "TreatOptionalAsRequired": "Tratează pachetele opționale în funcție de necesitate",
+  "TreatOptionalAsRequired_Tip": "În esență, aceasta afișează notificarea de dependență lipsă pentru pachetele opționale.",
+  "AddCustomTag": "Adaugă o etichetă personalizată",
+  "OutOfDateCount": {
+    "One": "{0} {1} este expirat",
+    "Plural": "{0} {1} sunt expirate"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} nu se potrivește cu dimensiunea sa din Atelier",
+    "Plural": "{0} {1} nu se potrivește cu dimensiunile lor respective din Atelier"
+  },
+  "PackageIsRemoved": "'{0}' a fost eliminat de la Steam",
+  "PackageIsUnknown": "Informațiile de la Steam nu au fost încărcate încă pentru '{0}'",
+  "PackageIsNotDownloaded": "'{0}' a fost eliminat de pe computer",
+  "PackageIsOutOfDate": "'{0}' este învechit\r\n\r\nEști {1} în urmă",
+  "PackageIsMaybeOutOfDate": "'{0}' poate fi expirat, a fost actualizat {1}",
+  "PackageIsIncomplete": "Dimensiunea locală a '{0}' ({1}) este diferită de Steam {2}",
+  "RemovedFromSteam": "Eliminat din Steam",
+  "Missing": "Lipsă"
 }

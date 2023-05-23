@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Czyszczenie pakietów warsztatów",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Dodano nowe funkcje, aby łatwo radzić sobie z niedopasowaniem pomiędzy Steam a pobranymi pakietami.",
+                    "Pakiety, których nie subskrybujesz nie są już załadowane w grze.",
+                    "Uruchamianie gry, gdy LOT jest otwarty, automatycznie usunie wszystkie pakiety, których nie subskrybujesz, ale są pobierane na Twoim komputerze.",
+                    "Dodano przycisk w zakładce Narzędzia aby ręcznie uruchomić to czyszczenie, jak również wymusić pobranie brakujących pakietów."
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Nowy",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Dodano opcję, aby wyłączyć automatyczne czyszczenie podczas otwierania gry.",
+                    "Dodano własne argumenty pola dla zaawansowanych ustawień uruchamiania."
                 ]
             }
         ]
@@ -268,27 +268,66 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Ikona głosowania i subskrybentów",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Dodano nową ikonę obok pakietu, która wyświetla krótkie podsumowanie głosów i liczbę subskrybentów pakietu.",
+                    "Najedź kursorem aby wyświetlić wartości.",
+                    "Kliknij ikonę, aby uzyskać szczegółowy opis tej funkcji.",
+                    "Dodano opcje sortowania 'Głosów' i 'Suma subskrybentów'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Wymogi dotyczące aktywów",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Wymagane elementy wyświetlane na stronie zasobu warsztatowego są teraz zintegrowane w Narzędzie Ładowania Zamówień.",
+                    "Informacje te zostaną teraz zawarte w raporcie o zgodności, aby szybko i łatwo zobaczyć, czego brakuje."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Inne zmiany",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Zaktualizowano stronę pakietu, aby pasować do wyświetlanych informacji na listach treści.",
+                    "Drugorzędne listy treści, takie jak 'Brakujące pakiety' i 'Workshop Collection' teraz używają tego samego interfejsu użytkownika jako głównych stron listy treści, umożliwienie sprawniejszego korzystania z doświadczeń i większej liczby opcji.",
+                    "Dodano opcje uruchamiania 'Nowe aktywa' i 'Załaduj aktywa' w profilu, aby szybko załadować się do edytora zasobów."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Prezentacja, Skyve, ostateczny następca Zlecenia Load Order Mod 1/2 i Raport o zgodności.\r\nNadchodzi na C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Przegląd raportu o zgodności",
+                "Changes": [
+                    "Raport zgodności został teraz włączony bezpośrednio do Skyve.",
+                    "Zalecenia i tekst informacji są teraz jaśniejsze i łatwiejsze w zarządzaniu.",
+                    "Dodano przycisk drzemki, aby odrzucić powiadomienie o kompatybilności.",
+                    "Wymagane elementy automatycznie przekierowują do najnowszego następcy pakietów.",
+                    "Lokalne pakiety są automatycznie dopasowane do ich partnera internetowego, pokazując informacje ze Steam i prawidłowo pokazując informacje o kompatybilności.",
+                    "Teraz możesz poprosić o recenzję pakietu, aby powiadomić nas o brakujących informacjach w danych zgodności.",
+                    "Karta Raport o zgodności jest teraz dostępna."
+                ]
+            },
+            {
+                "Name": "Nowe funkcje",
+                "Changes": [
+                    "Teraz możesz go edytować! tagi bezpośrednio w aplikacji do modów i zasobów. Zasoby są synchronizowane z grą.",
+                    "Dodano zakładkę \"Odniesienia\" na stronie pakietu, aby zobaczyć wszystkie inne pakiety, które go odwołują.",
+                    "Dodano opcję aby opcjonalne pakiety używały tego samego powiadomienia co wymagane pakiety.",
+                    "Dodane dialekty językowe, chińskie tradycyjne (Tajwan), angielskie Wielka Brytania i Portugalska Brazylia."
+                ]
+            },
+            {
+                "Name": "Inne zmiany",
+                "Changes": [
+                    "Pseudomodyfikacje zawierają teraz oznaczenia IMT, Renderuj! Ustawienia, czcionki obiektów proceduralnych i modyfikacje tłumaczenia.",
+                    "Dodano linki do strony pakietu, jak również inne informacje, takie jak użycie i typ.",
+                    "Dodano nowe zastosowania profilu: tworzenie map, tworzenie scenariuszy i tworzenie motywów.",
+                    "Dodano dodatkowy tekst na liście, aby pokazać, ile pakietów jest ukrytych z powodu użycia Twojego profilu.",
+                    "Ulepszono przycisk Akcje, aby był bardziej widoczny i łatwiejszy w dostępie.",
+                    "Nowa ikona świeci się teraz w oparciu o to, co się dzieje, niebieski oznacza, że gra jest uruchomiona, czerwony oznacza brak połączenia z Internetem, a szybkie świecenie oznacza, że gra jest uruchamiana lub zamykana."
                 ]
             }
         ]

@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Verksted pakker opprydding",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Lagt til nye funksjoner for enkelt å håndtere manglende samsvar mellom Steam og de nedlastede pakkene.",
+                    "Pakkene du ikke abonnerer på er ikke lenger lastet i spillet.",
+                    "Når du starter spillet mens LOT er åpent slettes automatisk alle pakker som du ikke abonnerer på, men som lastes ned på datamaskinen.",
+                    "La til en knapp i verktøy-fanen for å kjøre denne opprydningen manuelt, i tillegg til å tvinge nedlasting av manglende pakker."
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Ny",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Lagt til et alternativ for å deaktivere automatisk opprydding når du åpner spillet.",
+                    "Lagt til en egendefinert argumenter boks for avanserte startinnstillinger."
                 ]
             }
         ]
@@ -268,27 +268,66 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Stem & abonnenter ikon",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "La til et nytt ikon ved siden av en pakke som viser et raskt sammendrag av stemmer og abonnent på pakken.",
+                    "Sveve over den for å vise verdiene.",
+                    "Klikk på ikonet for en grundig beskrivelse av denne funksjonen.",
+                    "Lagt til 'Stemmer' og 'Totale abonnementer' sorteringsalternativer."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Krav til eiendel",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "De nødvendige produktene vises på en verkstedeiendels side er nå integrert i lastordreverktøyet.",
+                    "Denne informasjonen skal nå inkluderes i kompatibilitetsrapporten og vil lett se hva du mangler."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Andre endringer",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Oppdaterte utvidelsessiden for å matche den viste informasjonen i innholdslistene.",
+                    "Sekundære innholdslister som \"Manglende Pakker\" og \"Workshop-samling\" bruker nå det samme grensesnittet som hovedinnholdslistedene, Tillat en strømlinjeformet erfaring og flere alternativer.",
+                    "La til 'Ny ressursen' og 'Last inn eiendel' start alternativene i profilen for hurtig å laste inn i Asset Editor."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Presenterer, Skyve, den siste etterfølgeren for laste-Mod 1/2 og kompatibilitetsrapport.\r\nKommer for C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Overhaling av kompabilitetsrapport",
+                "Changes": [
+                    "Kompatibilitetsrapport er nå integrert direkte i Skyve.",
+                    "Anbefalinger og informasjonstekst er nå tydeligere og enklere å håndtere.",
+                    "La til en slumreknapp for å fjerne en viss kompatibilitetsvarsler.",
+                    "Påkrevde elementer vil automatisk omdirigere til pakkenes siste suksess.",
+                    "Lokale pakker blir automatisk matchet med deres motparter, som viser informasjonen fra Steam og viser riktig sin kompatibilitetsinformasjon.",
+                    "Du kan nå be om en gjennomgang av en pakke for å varsle oss om manglende informasjon i kompatibilitetsdata.",
+                    "Fanen for kompabilitetsrapporter er nå tilgjengelig."
+                ]
+            },
+            {
+                "Name": "Nye funksjoner",
+                "Changes": [
+                    "Du kan nå redigere funnet. Få tagger direkte i appen for å modifisere og eiendeler. Eiendeler er synkronisert med spillet.",
+                    "Lagt til en \"Referanser\"-fane på en pakkeside for å se alle andre pakker som refererer til den.",
+                    "Lagt til et alternativ for å gjøre at valgfrie pakker bruker den samme meldingen som nødvendige pakker.",
+                    "Lagt til språkdialekter, kinesisk tradisjonell (Taiwan), engelsk UK, og portugisisk brasiliansk Brasil."
+                ]
+            },
+            {
+                "Name": "Andre endringer",
+                "Changes": [
+                    "Pseudo-mods inkluderer nå IMT Markings, Render den! Presets, prosedural Objects Fonts, and translation mods.",
+                    "Lagt til lenker til pakkesiden, samt annen informasjon som bruk og type.",
+                    "Lagt til ny profilbruk: Kartopprettelse og oppretting av Scenario, og tema fungerer.",
+                    "Lagt til ekstra tekst i listen for å vise hvor mange pakker som er skjult på grunn av din profilbruk.",
+                    "Forbedret handlingsknappen for å gjøre den mer synlig og enklere tilgang.",
+                    "Det nye ikonet nå bremser basert på hva som skjer, blått indikerer at spillet kjører, rød betyr ingen internettforbindelse, og rask gløder betyr at det blir lansert eller lukker spillet."
                 ]
             }
         ]

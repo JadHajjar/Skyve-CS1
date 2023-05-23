@@ -135,7 +135,7 @@
     "One": "Dovresti sottoscrivere il seguente pacchetto.",
     "Plural": "Dovresti sottoscrivere questi pacchetti."
   },
-  "Action_RequiresConfiguration": "Dovresti seguire queste istruzioni.",
+  "Action_RequiresConfiguration": "È necessario seguire le seguenti istruzioni:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
@@ -173,20 +173,23 @@
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
-    "One": "{0} {1} che manca di dipendenze",
-    "Plural": "{0} {1} che mancano di dipendenze"
+    "One": "{0} {1} manca la dipendenza",
+    "Plural": "{0} {1} mancano le dipendenze"
   },
   "CautionCount": "{0} {1} dove è consigliata la prudenza",
   "WarningCount": "{0} {1} con un'avvertenza",
   "AttentionRequiredCount": {
-    "One": "{0} {1} che richiede la vostra attenzione",
-    "Plural": "{0} {1} che richiedono la vostra attenzione"
+    "One": "{0} {1} richiede la vostra attenzione",
+    "Plural": "{0} {1} richiedono la vostra attenzione"
   },
-  "ExcludeCount": "{0} {1} che dovrebbe essere escluso",
+  "ExcludeCount": {
+    "One": "{0} {1} deve essere escluso",
+    "Plural": "{0} {1} devono essere esclusi"
+  },
   "UnsubscribeCount": "{0} {1} da cui dovreste annullare la sottoscrizione",
   "SwitchCount": {
-    "One": "{0} {1} che richiede il passaggio a un altro",
-    "Plural": "{0} {1} che richiedono il passaggio ad un altro"
+    "One": "{0} {1} richiede di passare ad un altro",
+    "Plural": "{0} {1} richiedono di passare ad un altro"
   },
   "PackageType": "Tipo Pacchetto",
   "GenericPackage": "Pacchetto Generico",

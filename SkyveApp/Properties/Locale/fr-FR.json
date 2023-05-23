@@ -198,7 +198,7 @@
   "DisableNewAssetsByDefault_Tip": "Lorsque vous vous abonnez ou ajoutez un asset, l'outil l'exclura automatiquement ou l'inclura en fonction de ce paramètre lorsque l'outil sera lancé.",
   "FilterOutPackagesWithOneAsset_Tip": "Les paquets qui n'ont qu'un seul asset ne s'afficheront pas sur la page des paquets. Ils seront toujours affichés sur la page des assets.",
   "FilterOutPackagesWithMods_Tip": "Les paquets qui contiennent un mod ne seront pas affichés sur la page des paquets. Ils seront toujours affichés sur la page des mods.",
-  "OverrideGameChanges_Tip": "Changes made in-game to the enabled status of mods will automatically be overridden by your settings inside of Skyve, changes are applied on the next launch. This only works while the tool is open.",
+  "OverrideGameChanges_Tip": "Les changements faits en jeu au statut activé seront automatiquement remplacées par vos paramètres dans Skyve ; les changements sont appliqués au prochain lancement. Cela ne fonctionne lorsque l'appli est ouvert.",
   "HidePseudoMods_Tip": "Les mélanges de thèmes génèrent un fichier mod afin d'être partagés sur le Workshop. Activer cette option masquera ceux de votre liste de mods et les fera toujours inclus.",
   "AdvancedIncludeEnable_Tip": "Permet de modifier à la fois les états inclus et Activés des mods, similaires à Load Order Tool 1.",
   "AdvancedLaunchOptions_Tip": "Affiche les options de lancement supplémentaires utilisées par les développeurs dans les paramètres du profil.",
@@ -405,6 +405,7 @@
   "Unsubscribe": "Se désabonner",
   "Exclude": "Exclure",
   "Snooze": "Répétition",
+  "UnSnooze": "Annuler le rappel",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -453,13 +454,30 @@
   "AnyIssue": "N'importe quel problème",
   "AnyUsage": "N'importe quel usage",
   "ExplainIssue": "Décrivez votre problème ici",
-  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ExplainIssueInfo": "Incluez autant d'informations que possible sur ce qui se passe et comment le répliquer ici",
   "ReviewRequestSent": "Votre demande de revue pour '{0}' a été envoyé !\n\nMerci pour votre commentaire.",
-  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
+  "ReviewRequestFailed": "Impossible d'envoyer votre demande de révision pour '{0}'.\r\n\r\n{1}",
   "SendReview": "Envoyer la demande de revue",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "EditTags": "Modifier les tags",
+  "ShowAllReferencedPackages": "Afficher les paquets exclus dans l'onglet 'Références'",
+  "ShowAllReferencedPackages_Tip": "Affiche à la fois les paquets exclus et inclus qui font référence à celui que vous visualisez.",
+  "TreatOptionalAsRequired": "Traiter les paquets facultatifs comme requis",
+  "TreatOptionalAsRequired_Tip": "Essentiellement, cela affiche la notification de dépendance manquante pour les paquets optionnels.",
+  "AddCustomTag": "Ajouter un tag personnalisé",
+  "OutOfDateCount": {
+    "One": "{0} {1} est obsolète",
+    "Plural": "{0} {1} sont obsolètes"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} ne correspond pas à sa taille de l'Atelier",
+    "Plural": "{0} {1} ne correspond pas à leurs tailles respectives de l'Atelier"
+  },
+  "PackageIsRemoved": "'{0}' a été retiré de Steam",
+  "PackageIsUnknown": "Les informations de Steam n'ont pas encore été chargées pour '{0}'",
+  "PackageIsNotDownloaded": "'{0}' a été retiré de votre ordinateur",
+  "PackageIsOutOfDate": "'{0}' est obsolète\r\n\r\nVous êtes {1} en retard",
+  "PackageIsMaybeOutOfDate": "'{0}' peut être obsolète, il a été mis à jour {1}",
+  "PackageIsIncomplete": "La taille locale de '{0}' ({1}) est différente de celle de Steam {2}",
+  "RemovedFromSteam": "Supprimé de Steam",
+  "Missing": "Manquant"
 }

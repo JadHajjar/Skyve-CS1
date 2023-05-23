@@ -292,5 +292,44 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Prezentare, Skyve, succesorul final al comenzii de încărcare Mod 1/2 și Raportul de compatibilitate.\r\nVine pentru C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Revizuirea raportului de compatibilitate",
+                "Changes": [
+                    "Raportul de compatibilitate este acum integrat direct în Skyve.",
+                    "Recomandările și textul informativ sunt acum mai clare și mai ușor de gestionat.",
+                    "S-a adăugat un buton de amânare pentru a anula o anumită notificare de compatibilitate.",
+                    "Articole necesare redirecționează automat către cel mai recent succesor al pachetelor.",
+                    "Pachetele locale se potrivesc automat cu contrapartida lor online, afișând informațiile de la Steam și afișând corect informațiile de compatibilitate.",
+                    "Acum puteți solicita o revizuire pentru un pachet pentru a ne notifica cu privire la informațiile lipsă din datele de compatibilitate.",
+                    "Tab-ul Raport de Compatibilitate este acum disponibil."
+                ]
+            },
+            {
+                "Name": "Caracteristici noi",
+                "Changes": [
+                    "Acum poți edita Căutarea etichetelor direct în aplicație pentru mod-uri și active. Activele sunt sincronizate cu jocul.",
+                    "S-a adăugat o filă \"Referinţe\" pe pagina unui pachet pentru a vedea toate celelalte pachete care îl referă.",
+                    "Adăugat o opţiune pentru a face pachetele opţionale să folosească aceeaşi notificare ca şi pachetele obligatorii.",
+                    "dialecte lingvistice adăugate, chineză tradițională (Taiwan), engleză Marea Britanie și Brazilia portugheză."
+                ]
+            },
+            {
+                "Name": "Alte schimbări",
+                "Changes": [
+                    "Pseudo-mods includ acum marcaje IMT, Randare! Presetări, Fonturi Obiecte Procedurale și moduri de traducere.",
+                    "Link-uri adăugate la pagina pachetului, precum și alte informații cum ar fi utilizarea și tipul acestuia.",
+                    "Utilizări adăugate de profil: Crearea hărții, Producerea de scenarii și crearea de teme.",
+                    "Adăugat text suplimentar în listă pentru a arăta câte pachete sunt ascunse din cauza utilizării profilului.",
+                    "S-a îmbunătățit butonul Acțiuni pentru a-l face mai vizibil și mai ușor de accesat.",
+                    "Noua pictogramă luminează acum pe baza a ceea ce se întâmplă, albastrul indică faptul că jocul rulează, roșu înseamnă că nu există conexiune la internet, iar strălucirea rapidă înseamnă lansarea sau închiderea jocului."
+                ]
+            }
+        ]
     }
 ]

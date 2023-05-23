@@ -292,5 +292,44 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Apresentando, Skyve, o sucessor final da Ordem de Carga Mod 1/2 e Relatório de Compatibilidade.\r\nChegando para C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Relatório de compatibilidade revisar",
+                "Changes": [
+                    "O Relatório de Compatibilidade agora é integrado diretamente ao Skyve.",
+                    "As recomendações e o texto da informação são agora mais claros e fáceis de gerir.",
+                    "Adicionamos um botão Adiar para dispensar uma certa notificação de compatibilidade.",
+                    "Itens necessários redirecionam automaticamente para o sucessor mais recente dos pacotes.",
+                    "Pacotes locais são automaticamente combinados com sua contraparte online, mostrando as informações do Steam e mostrando corretamente suas informações de compatibilidade.",
+                    "Agora você pode solicitar uma revisão de um pacote para nos notificar sobre falta de informações nos dados de compatibilidade.",
+                    "A guia Relatório de Compatibilidade está disponível."
+                ]
+            },
+            {
+                "Name": "Novos recursos",
+                "Changes": [
+                    "Agora você pode editar a localização! As tags diretamente no aplicativo para mods e conteúdos. Recursos são sincronizados com o jogo.",
+                    "Adicionada uma guia \"Referências\" na página de um pacote para ver todos os outros pacotes que a referenciam.",
+                    "Adicionada uma opção para fazer com que os pacotes opcionais usem a mesma notificação que os pacotes necessários.",
+                    "Dialectos de idioma adicionados, Chinês Tradicional (Taiwan), Inglês e Brasil Português."
+                ]
+            },
+            {
+                "Name": "Outras alterações",
+                "Changes": [
+                    "Pseudo-mods agora incluem Marcações IMT, Renderize-o! Pré-sets, Fontes Procedurais e mods de tradução.",
+                    "Adicionados links à página do pacote, bem como outras informações como seu uso e tipo.",
+                    "Adicionado novos usos de perfil: Criação de mapa, Criação de Cenário e Criação de Temas.",
+                    "Adicionado texto extra na lista para mostrar quantos pacotes estão escondidos por causa do uso do seu perfil.",
+                    "Melhorado o botão de Ações para torná-lo mais visível e mais fácil de acessar.",
+                    "O novo ícone agora brilha baseado no que está acontecendo, azul indica que o jogo está rodando, vermelho significa que não há conexão com a internet, e brilhar rapidamente significa que está iniciando ou fechando o jogo."
+                ]
+            }
+        ]
     }
 ]

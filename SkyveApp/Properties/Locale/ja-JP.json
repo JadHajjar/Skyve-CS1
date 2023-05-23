@@ -404,7 +404,8 @@
   "Include": "含める",
   "Unsubscribe": "サブスク解除",
   "Exclude": "除外",
-  "Snooze": "休止",
+  "Snooze": "スヌーズ",
+  "UnSnooze": "スヌーズ解除",
   "Mod": {
     "One": "MOD",
     "Plural": "MOD"
@@ -461,5 +462,22 @@
   "ShowAllReferencedPackages": "「参照」タブに除外したパッケージを表示",
   "ShowAllReferencedPackages_Tip": "表示中のパッケージを参照して、除外したパッケージと含めるパッケージの両方が表示されます。",
   "TreatOptionalAsRequired": "オプションパッケージは必要に応じて処理",
-  "TreatOptionalAsRequired_Tip": "基本的にオプションパッケージで不足している依存関係を通知＆表示します。"
+  "TreatOptionalAsRequired_Tip": "基本的にオプションパッケージで不足している依存関係を通知＆表示します。",
+  "AddCustomTag": "カスタムタグを追加",
+  "OutOfDateCount": {
+    "One": "{0} {1} は古いバージョン",
+    "Plural": "{0} {1} は古いバージョン"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} はワークショップのサイズと不一致",
+    "Plural": "{0} {1} はワークショップのいずれかとサイズが不一致"
+  },
+  "PackageIsRemoved": "「{0}」はSteamから削除済",
+  "PackageIsUnknown": "「{0}」はSteamから情報が未取得",
+  "PackageIsNotDownloaded": "「{0}」はPCから削除済",
+  "PackageIsOutOfDate": "「{0}」は古いバージョン\n\n{1} を経過しています",
+  "PackageIsMaybeOutOfDate": "「{0}」は古い可能性がありますが、{1} は更新済み",
+  "PackageIsIncomplete": "ローカル側の「{0}」 ({1}) とSteam側の {2} でサイズが違う",
+  "RemovedFromSteam": "Steamから削除済み",
+  "Missing": "不明"
 }

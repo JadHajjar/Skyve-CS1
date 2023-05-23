@@ -20,14 +20,14 @@
   "NotEnoughInformation": "Недостатньо інформації",
   "HasIssues": "Є проблеми",
   "Broken": "Зламано",
-  "Incompatible": "Incompatible",
+  "Incompatible": "Несумісно",
   "CityBuilding": "Містобудівництво",
   "AssetCreation": "Створення ассетів",
   "MapCreation": "Створення мап",
   "NoAction": "Нічого не робити",
   "SubscribeToPackages": "Підписатися на пов'язані пакети",
   "RequiresConfiguration": "Необхідна певна конфігурація",
-  "SelectOne": "Select either one",
+  "SelectOne": "Виберіть один",
   "UnsubscribeThis": "Відписатись від цього пакунку",
   "UnsubscribeOther": "Відписатись від пов'язаних пакунків",
   "Switch": "Перемикнутися на пов'язаний пакунок",
@@ -48,66 +48,66 @@
   "IncompatibleWith": "Несумісне з ..",
   "CausesIssuesWith": "Спричиняє проблеми з ..",
   "RequiredPackages": "Потребує ..",
-  "StatusType": "Status Type",
-  "InteractionType": "Interaction Type",
-  "MissingDependency": "Missing Dependency",
+  "StatusType": "Тип статусу",
+  "InteractionType": "Тип взаємодії",
+  "MissingDependency": "Відсутня залежність",
   "Caution": "Обережно",
   "Warning": "Застереження",
   "AttentionRequired": "Вимагає уваги",
   "Website": "Вебсайт",
   "Donation": "Підтримати",
-  "ManageSinglePackage": "Manage specific packages",
-  "ManageCompatibilityData": "Manage Compatibility Data",
-  "YourPackages": "Manage your packages",
+  "ManageSinglePackage": "Керувати конкретними пакунками",
+  "ManageCompatibilityData": "Керування даними сумісності",
+  "YourPackages": "Керуйте вашими пакунками",
   "AddPackages": "Додати пакунки",
-  "ConfirmEndSession": "Are you sure you want to conclude your session?",
-  "CrDataLoadFailed": "Failed to load data, try again later",
+  "ConfirmEndSession": "Ви впевнені, що хочете завершити сесію?",
+  "CrDataLoadFailed": "Не вдалося завантажити дані, спробуйте пізніше",
   "AddGlobalTag": "Додати глобальний тег",
-  "ReuseData": "Re-use Previous Data",
-  "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
-  "PleaseReviewTheStability": "Please review the stability of this package before saving.",
-  "PleaseReviewPackageStatuses": "Please review the statuses of this package before saving.\r\nSome have an invalid Status Type.",
+  "ReuseData": "Повторне використання попередніх даних",
+  "ReuseData_Tip": "Повторно використовує дані сумісності з вашого останнього збереженого пакету.\r\nУтримуйте Shift для застосування та продовження",
+  "PleaseReviewTheStability": "Будь ласка, ознайомтеся зі стабільністю цього пакету перед збереженням.",
+  "PleaseReviewPackageStatuses": "Будь ласка, перегляньте статуси цього пакету перед збереженням.\r\nДеякі мають неприпустимий тип статусу.",
   "PleaseReviewPackageInteractions": "Please review the interactions of this package before saving.\r\nSome have an invalid Interaction Type.",
-  "PleaseReviewPackageUsage": "Please select a valid usage for this package.",
+  "PleaseReviewPackageUsage": "Будь ласка, виберіть коректний код використання для цього пакету.",
   "Interaction_Alternative": {
-    "One": "'{1}' can be used as an alternative to '{0}'.",
-    "Plural": "One of the following packages can be used as an alternative to '{0}'."
+    "One": "'{1}' можна використовувати як альтернативу '{0}'.",
+    "Plural": "Один з наступних пакетів може бути використаний як альтернатива '{0}."
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' and '{1}' have the same functionalities.",
-    "Plural": "'{0}' and the following packages have the same functionalities."
+    "One": "'{0}' та '{1}' мають такі ж функціональності.",
+    "Plural": "'{0}' та наступні пакунки мають ті ж можливості."
   },
   "Interaction_IncompatibleWith": {
-    "One": "'{0}' and '{1}' are not compatible with each other.",
-    "Plural": "'{0}' is not compatible with any of the following packages."
+    "One": "'{0}' і '{1}' не сумісні між собою.",
+    "Plural": "'{0}' не сумісний з будь-яким з наступних пакетів."
   },
   "Interaction_CausesIssuesWith": {
-    "One": "'{0}' can cause issues when used with '{1}'.",
-    "Plural": "'{0}' can cause issues when used with the following mods."
+    "One": "'{0}' може викликати проблеми при використанні з '{1}'.",
+    "Plural": "'{0}' може викликати проблеми при використанні з наступних модів."
   },
   "Interaction_RequiredPackages": {
-    "One": "You're missing a required package for '{0}'.",
-    "Plural": "You're missing the following required packages for '{0}'."
+    "One": "Вам не вистачає потрібного пакунку для '{0}.",
+    "Plural": "У вас відсутні наступні пакунки для '{0}."
   },
   "Interaction_OptionalPackages": {
-    "One": "You're missing an optional package for '{0}'.",
-    "Plural": "You're missing the following optional packages for '{0}'."
+    "One": "Вам не вистачає додаткового пакунку для '{0}'.",
+    "Plural": "У вас відсутні наступні пакунки для '{0}."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "One": "'{0}' вдало виконали '{1}'.",
+    "Plural": "'{0}' є успішним або одним з наступних пакетів."
   },
-  "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
-  "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
-  "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Interaction_Identical": "Це декілька версій одного і того ж пакету.\r\n\r\nВам слід вибрати лише одну з них.",
+  "Status_Succeeded": "'{0}' вдало виконали '{1}'.\r\n\r\nВи вже використовуєте '{1}' тому немає потреби в '{0}' більше.",
+  "Status_Deprecated": "'{0}' є застарілим, він більше не підтримується її автором.",
   "Status_Reupload": {
-    "Zero": "'{0}' is a re-upload of an original package.",
-    "One": "This is a re-upload of '{1}'."
+    "Zero": "'{0}' є повторним завантаженням оригінального пакету.",
+    "One": "Це повторне завантаження '{1}."
   },
-  "Status_CausesIssues": "'{0}' causes issues with your game.",
+  "Status_CausesIssues": "'{0}' викликає проблеми з вашою грою.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.",
-    "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "При створенні нового збереження з '{0}увімкнено, ви більше не зможете завантажити це збереження, якщо '{0}' буде відключено.",
+    "One": "При створенні нового збереження з '{0}увімкнено, ви більше не зможете завантажити це збереження, якщо '{0}' буде відключено.\r\n\r\nВикористайте '{1}\", щоб відновити збереження, якщо потрібно. Прочитайте його Опис Майстерні для отримання додаткової інформації."
   },
   "Status_TestVersion": {
     "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
@@ -117,46 +117,46 @@
     "One": "You're missing the '{0}' DLC to use this package.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
-  "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
-  "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
+  "Status_DependencyMod": "Це режим залежності, але здається, що ви використовуєте будь-який пакет, який вимагає його.",
+  "Status_SourceCodeNotAvailable": "Вихідний код цього моду недоступний. Вам не слід використовувати його, якщо ви не довіряєте його автору.",
+  "Status_MusicCanBeCopyrighted": "Ця музика всередині цього пакету може бути авторським правотом. Найкраще не використовувати її під час трансляції.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "OutputText": "Expected Output",
-  "Stability_AssetNotReviewed": "This asset has not been reviewed yet.\r\n\r\nThe compatibility info may not be accurate; though assets are generally stable",
+  "OutputText": "Очікуваний вихід",
+  "Stability_AssetNotReviewed": "Цей об'єкт ще не розглянуто.\r\n\r\nІнформація про сумісність може бути неточною; хоча активи як правило, стабільні.",
   "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
   "Stability_Stable": "Цей пакунок стабільний.",
-  "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
-  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
-  "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
-  "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
-  "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
+  "Stability_NotEnoughInformation": "Немає достатньо інформації для того, щоб правильно переглядати цей пакет.",
+  "Stability_HasIssues": "Цей пакет може викликати проблеми.\r\nБудьте обережні при його використанні.",
+  "Stability_Broken": "Цей пакет пошкоджено.\r\nВідомо, що він зламає гру, або просто не працює.",
+  "Stability_Incompatible": "Цей пакет не сумісний з грою або перерви.\r\n\r\nВам слід видалити його негайно.",
+  "Stability_Local": "Цей пакунок є локальною версією оригіналу моду '{0}.\r\n\r\nЛокальні версії зазвичай використовуються для тестування цілей або якщо у вас немає Steam.\r\n\r\nПеревірити посилання пакету на оновлення в моді.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "You should subscribe to the following package.",
     "Plural": "You should subscribe to these packages."
   },
-  "Action_RequiresConfiguration": "Вам слід слідувати наступним інструкціям.",
+  "Action_RequiresConfiguration": "Ви повинні слідувати наступним інструкціям:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
   },
-  "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
+  "Action_UnsubscribeThis": "Ви повинні відписатися від '{0}'.",
   "Action_UnsubscribeOther": {
-    "One": "You should unsubscribe from '{1}'.",
+    "One": "Ви повинні відписатися від '{1}'.",
     "Plural": "You should unsubscribe from the following packages."
   },
-  "Action_ExcludeThis": "You should exclude '{0}'.",
+  "Action_ExcludeThis": "Ви повинні виключити '{0}'.",
   "Action_ExcludeOther": {
-    "One": "You should exclude '{1}'.",
+    "One": "Ви повинні виключити '{1}'.",
     "Plural": "You should exclude the following packages."
   },
   "Action_Switch": {
-    "One": "You should switch to '{1}'.",
+    "One": "Ви повинні переключитися на '{1}'.",
     "Plural": "You should switch to one of the following packages."
   },
   "NoRequiredDlcs": "Немає необхідних DLC",
   "DlcsSelected": {
-    "One": "{0} DLC selected",
+    "One": "{0} DLC вибрано",
     "Plural": "{0} DLC вибрано"
   },
   "RequiredDLCs": "Required DLCs/CCPs",
@@ -168,25 +168,28 @@
   "CRT_Compatibility": "Проблеми сумісності",
   "CRT_Alternatives": "Альтернативи",
   "CRT_Status": "Статуси",
-  "CRT_Ambiguous": "Ambiguity",
-  "LastReviewDate": "It was last reviewed on {0}",
+  "CRT_Ambiguous": "Неоднозначність",
+  "LastReviewDate": "Це було останнє рецензію на {0}",
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
-    "One": "{0} {1} that is missing dependencies",
-    "Plural": "{0} {1} that are missing dependencies"
+    "One": "{0} {1} відсутні залежності",
+    "Plural": "{0} {1} відсутні залежності"
   },
-  "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "CautionCount": "{0} {1} під час обачності",
+  "WarningCount": "{0} {1} із попередженням",
   "AttentionRequiredCount": {
-    "One": "{0} {1} that requires your attention",
-    "Plural": "{0} {1} that require your attention"
+    "One": "{0} {1} вимагає вашої уваги",
+    "Plural": "{0} {1} вимагає вашої уваги"
   },
-  "ExcludeCount": "{0} {1} that should be excluded",
-  "UnsubscribeCount": "{0} {1} that you should unsubscribe from",
+  "ExcludeCount": {
+    "One": "{0} {1} повинні бути виключені",
+    "Plural": "{0} {1} повинні бути виключені"
+  },
+  "UnsubscribeCount": "{0} {1} що ви повинні відписатися від",
   "SwitchCount": {
-    "One": "{0} {1} that requires switching to another",
-    "Plural": "{0} {1} that require switching to another"
+    "One": "{0} {1} вимагає переходу на інший",
+    "Plural": "{0} {1} вимагає переходу на інший"
   },
   "PackageType": "Тип пакунку",
   "GenericPackage": "Загальний пакунок",
@@ -195,8 +198,8 @@
   "IMTMarkings": "Розмітки IMT",
   "RenderItPreset": "Шаблон Render it!",
   "POFont": "Шрифт/модуль для Procedural Object",
-  "NameList": "Name-List/Game Translations",
-  "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
+  "NameList": "Ім'я/Ігрові переклади",
+  "ApplyChangedBeforeExit": "У вас є незбережені зміни.\r\n\r\nБажаєте застосувати ці зміни, перш ніж продовжити?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
+  "AuthorMalicious": "Автор {0}, {1}, відомий як зловмисник та / або шкідливий вміст, у тому числі віруси у своїх пакетах."
 }

@@ -135,7 +135,7 @@
     "One": "You should subscribe to the following package.",
     "Plural": "You should subscribe to these packages."
   },
-  "Action_RequiresConfiguration": "Recomendamos que sigas las siguientes instrucciones.",
+  "Action_RequiresConfiguration": "Recomendamos que sigas las siguientes instrucciones:",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
@@ -173,20 +173,23 @@
   "RequestReviewInfo": "¿Tienes problemas con este paquete?",
   "RequestReview": "Solicitar valoración",
   "MissingDependencyCount": {
-    "One": "{0} {1} que le faltan dependencias",
-    "Plural": "{0} {1} que le faltan dependencias"
+    "One": "{0} {1} le falta dependencias",
+    "Plural": "{0} {1} le faltan dependencias"
   },
   "CautionCount": "{0} {1} donde se aconseja precaución",
   "WarningCount": "{0} {1} con una advertencia",
   "AttentionRequiredCount": {
-    "One": "{0} {1} que requiere atención",
-    "Plural": "{0} {1} que requieren atención"
+    "One": "{0} {1} requiere atención",
+    "Plural": "{0} {1} requieren atención"
   },
-  "ExcludeCount": "{0} {1} que debe ser excluido",
+  "ExcludeCount": {
+    "One": "{0} {1} debe ser excluido",
+    "Plural": "{0} {1} que deben ser excluidos"
+  },
   "UnsubscribeCount": "{0} {1} que debes anular suscripción",
   "SwitchCount": {
-    "One": "{0} {1} que requiere cambiar a otro",
-    "Plural": "{0} {1} que requieren cambiar a otro"
+    "One": "{0} {1} requiere cambiar a otro",
+    "Plural": "{0} {1} requieren cambiar a otro"
   },
   "PackageType": "Tipo de paquete",
   "GenericPackage": "Paquete genérico",

@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Очистка пакетов Мастерской",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Добавлены новые функциональные возможности, чтобы легко обрабатывать несовпадения между Steam и вашими загруженными пакетами.",
+                    "Пакеты, на которые вы не подписаны, больше не загружаются в игре.",
+                    "Запуск игры в то время как игра открыта, автоматически удалит все пакеты, на которые вы не подписаны, но скачаны на вашем компьютере.",
+                    "Добавлена кнопка на вкладке Утилиты для ручной очистки и загрузки отсутствующих пакетов."
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Новый",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Добавлена опция отключения автоматической очистки при открытии игры.",
+                    "Добавлено пользовательское поле аргументов для расширенных настроек запуска."
                 ]
             }
         ]
@@ -268,27 +268,66 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Иконка для голосования и подписчиков",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Добавлена новая иконка рядом с пакетом, которая отображает краткую сводку голосов и количество абонентов пакета.",
+                    "Наведите на него, чтобы отобразить значения.",
+                    "Нажмите на иконку для подробного описания этой функции.",
+                    "Добавлены опции сортировки 'Голоса' и 'Всего подписчиков'."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Требования к Активам",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "Необходимые элементы, отображаемые на странице актива мастерской теперь интегрированы в инструмент заказа на загрузку.",
+                    "Теперь эта информация будет включена в отчет о совместимости, чтобы быстро и легко увидеть, что вы пропустили."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Другие изменения",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Обновлена страница пакета, чтобы соответствовать отображаемой информации в списках содержимого.",
+                    "Вторичные списки контента, такие как «Отсутствующие пакеты» и «Мастерская коллекция», теперь используют тот же интерфейс, что и основные страницы списка контента, • создание возможностей для рационализации опыта и создания новых вариантов.",
+                    "Добавлены опции запуска \"Новый актив\" и \"Загрузить активы\" в профиле для быстрой загрузки в Редактор активов."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Presenting, Skyve, the final successor of Load Order Mod 1/2 and Compatibility Report.\r\nComing for C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Совместимость отчета Overhaul",
+                "Changes": [
+                    "Отчет о совместимости теперь интегрирован непосредственно в Skyve.",
+                    "Рекомендации и текст информации теперь более ясны и легки в управлении.",
+                    "Добавлена кнопка \"Повторить\", чтобы отклонить уведомление о совместимости.",
+                    "Требуемые элементы автоматически перенаправляются на самый последний преемник пакетов.",
+                    "Локальные пакеты автоматически совпадают со своими сетевыми аналогами, показывающими информацию из Steam и корректно показывающими информацию о совместимости.",
+                    "Теперь вы можете запросить обзор пакета, чтобы сообщить нам об отсутствии информации в данных о совместимости.",
+                    "Вкладка Отчет о совместимости теперь доступна."
+                ]
+            },
+            {
+                "Name": "Новые возможности",
+                "Changes": [
+                    "Теперь вы можете редактировать Найти его! тэги прямо в приложении для модов и активов. Активы синхронизируются с игрой.",
+                    "На странице пакета добавлена закладка \"Ссылки\", чтобы увидеть все остальные связанные с ней пакеты.",
+                    "Добавлена возможность сделать необязательные пакеты в том же уведомлении, что и необходимые пакеты.",
+                    "Добавлены языковые диалекты, китайский (Тайвань), английский (Великобритания) и португальский (Бразилия)."
+                ]
+            },
+            {
+                "Name": "Другие изменения",
+                "Changes": [
+                    "Псевдомоды теперь включают IMT маркировку, визуализацию! Пресеты, Процедурные объекты и режимы перевода.",
+                    "Добавлены ссылки на страницу пакета, а также другая информация, такая как ее использование и тип.",
+                    "Добавлен новый профиль использования: создание карты, создание сценариев и создание тем.",
+                    "Добавлен дополнительный текст в списке, чтобы показать, сколько пакетов скрыто из-за использования вашего профиля.",
+                    "Улучшена кнопка \"Действия\", чтобы сделать ее более видимой и проще доступной.",
+                    "Теперь новый значок светится на основе того, что происходит, синий указывает на то, что игра запущена, красный означает отсутствие подключения к Интернету, а быстрое свечение означает его запуск или закрытие игры."
                 ]
             }
         ]

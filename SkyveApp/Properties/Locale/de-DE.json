@@ -1,5 +1,5 @@
 {
-  "CompatibilityInfo": "Compatibility Info",
+  "CompatibilityInfo": "Kompatibilitäts-Info",
   "ProfileBubble": "Aktuelles Profil",
   "StartCities": "Starte Cities: Skylines",
   "StopCities": "Cities: Skylines anhalten",
@@ -47,9 +47,9 @@
   "NoMods": "Alle Mods deaktivieren",
   "AutoSave": "Automatisch Speichern",
   "TotalSize": "Gesamtgröße",
-  "CompatibilityStatus": "Compatibility Status",
+  "CompatibilityStatus": "Kompatibilitätsstatus",
   "AnyStatus": "Beliebiger Status",
-  "AnyCompatibilityStatus": "Any Status",
+  "AnyCompatibilityStatus": "Jeder Status",
   "ModOwned": "Du hast diese Mod",
   "NoLocalPackagesFound": "Keine Pakete auf deinem Computer gefunden.",
   "CheckFolderInOptions": "Wähle das Optionsfeld für den Fall, dass die falschen Ordner verwendet werden.",
@@ -172,7 +172,7 @@
   "LsmImportMissingInfo": "Fehlende Gegenstände anzeigen und abonnieren",
   "SelectedFileInvalid": "Die ausgewählte Datei ist nicht gültig",
   "NoItemsToBeDisplayed": "Es gibt keine Elemente, die angezeigt werden können",
-  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App",
+  "FirstSetupInfo": "Bitte aktivieren Sie den Skyve-Mod in den Städten: Skylines bevor Sie die Skyve-App nutzen",
   "SetupIncomplete": "Setup unvollständig",
   "LsmImportUnusedInfo": "Nicht verwendete Assets anzeigen und entfernen",
   "SkipFileInfo": "Wähle eine Skip-Prefab-Datei zur Verwendung mit Loading Screen Mod Revisited",
@@ -206,7 +206,7 @@
   "HelpTranslate_Tip": "Helfe auf Crowdin dabei, diese App in deine Muttersprache zu übersetzen.",
   "ThemeUIScale_Tip": "Ändere die Farbe und das Thema der App oder erhöhe die Skalierung der Benutzeroberfläche.",
   "JoinDiscord_Tip": "Frage nach Hilfe und erhalte weitere Informationen über diese App auf dem Discord Server.",
-  "OpenGuide_Tip": "View the online guide to get started with Skyve.",
+  "OpenGuide_Tip": "Sehen Sie sich die Online-Anleitung an, um mit Skype loszulegen.",
   "ResetButton_Tip": "Setze die Einstellungen auf den Standard zurück. Dies wirkt sich nicht auf die Ordnereinstellungen aus.",
   "EnableDevUi": "Dev-UI aktivieren",
   "RefreshWorkshop": "Workshop-Inhalt aktualisieren",
@@ -228,15 +228,15 @@
   "LsmMissingTip": "Ziehe eine LSMR-Berichtsdatei hierhin oder wähle eine aus, um die im Bericht als \"fehlend\" aufgelistete Elemente zu abonnieren",
   "LsmUnusedTip": "Ziehe eine LSMR-Berichtsdatei hierhin oder wählen eine aus, um die im Bericht als \"nicht im Spielstand verwendet\" aufgelistete Elemente zu verwalten",
   "FixAllTip": "Versuche, alle Pakete mit Problemen erneut herunterzuladen. Dies wird für einen kurzen Moment Steam öffnen",
-  "MultipleLOM": "You have multiple versions of Skyve installed or subscribed to, which can cause conflicts. To avoid issues, please remove or unsubscribe from all other versions except for the one you're using",
+  "MultipleLOM": "Sie haben mehrere Versionen von Skyve installiert oder abonniert, was Konflikte verursachen kann. Um Probleme zu vermeiden, entfernen Sie bitte alle anderen Versionen mit Ausnahme der von Ihnen verwendeten Versionen",
   "FilterByThisReportStatus": "Nach diesem Berichtsstatus filtern",
   "FilterByThisPackageStatus": "Nach diesem Paketstatus filtern",
   "FilterSinceThisDate": "Elemente nach diesem Datum filtern",
   "FilterByThisTag": "'{0}' zu gefilterten Tags hinzufügen",
   "ItemsShouldNotBeSubscribedInfo": "Du bist dabei, Pakete zu abonnieren, die defekt sein könnten oder andere größere Probleme haben.",
   "WouldYouLikeToSkipThose": "Möchtest du diese Pakete überspringen?",
-  "LOTWillRestart": "Skyve will temporarily close during the update process, but it will automatically resume once the update is complete.",
-  "UpdatingLot": "Skyve is currently being updated. Please wait...",
+  "LOTWillRestart": "Skyve wird vorübergehend während des Aktualisierungsprozesses schließen, aber es wird automatisch fortgesetzt, sobald die Aktualisierung abgeschlossen ist.",
+  "UpdatingLot": "Skyve wird gerade aktualisiert. Bitte warten...",
   "SubscribingRequiresGameToOpen": "Wenn Pakete abonniert oder abbestellt werden, muss das Spiel für einen kurzen Moment geöffnet werden. Wenn man den Launcher des Spiels sieht, klicke auf Play, um fortzufahren.",
   "HelpSupport": "Hilfe & Support",
   "DisableFpsBoosterDebug": "Du hast FPS Booster aktiviert, während debug mono aktiviert ist. Möchtest du die Mod deaktivieren, um bessere Logs zu erhalten?",
@@ -250,8 +250,8 @@
   "ErrorsInLog": "Fehler in der Protokoll-Datei",
   "OpenLogFolder": "Öffne den Protokoll-Ordner des Spiels",
   "CopyLogFile": "Die Protokoll-Datei des Spiels in die Zwischenablage kopieren",
-  "OpenLOTLogFolder": "Open Skyve's log folder",
-  "CopyLOTLogFile": "Copy Skyve's log file to clipboard",
+  "OpenLOTLogFolder": "Öffne Skyve's Log-Ordner",
+  "CopyLOTLogFile": "Kopiere Skyve's Protokolldatei in die Zwischenablage",
   "ModIncludedTotal": "Mods enthalten: {0}, Gesamt: {1}",
   "ModIncludedAndEnabledTotal": "Mods enthalten & aktiviert: {0}, Gesamt: {1}",
   "ModIncludedEnabledTotal": "Mods enthalten: {0}, von diesen sind aktiviert: {1}, Gesamt: {2}",
@@ -264,19 +264,19 @@
   "ViewProfiles_Tip": "Gespeicherte Profile anzeigen und verwalten",
   "AutoSave_Tip": "Änderungen an Mods & Gegenständen automatisch in das aktuelle Profil speichern",
   "LoadEnabled_Tip": "Lädt aktivierte Gegenstände beim Laden eines Spiels. Dies sollte aktiviert bleiben, es sei denn, du weißt, was du tust",
-  "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
+  "LoadUsed_Tip": "Lade Assets die in deiner Karte verwendet werden, auch wenn sie im Spiel deaktiviert sind. Dies bezieht sich nicht auf die Asset-Einstellungen innerhalb von Skyve",
   "UseSkipFile_Tip": "Verwende dies, um Vanilla-Gegenstände aus deinem Spiel auszuschließen",
   "NewGame_Tip": "Startet einen neuen Spielstand beim Start von Cities: Skylines. Du kannst die Karte angeben, auf der du starten möchtest",
   "LoadSaveGame_Tip": "Lade einen Spielstand beim Starten von Cities: Skylines. Wenn du keine Speicherdatei auswählst, wird automatisch der aktuellste Spielstand geladen",
   "BETA": "BETA",
   "ALPHA": "ALPHA",
   "TEST": "TEST",
-  "TESTING": "TESTING",
+  "TESTING": "NACHRICHT",
   "STABLE": "STABIL",
   "EXPERIMENTAL": "EXPERIMENTELL",
   "DEPRECATED": "VERALTET",
   "OBSOLETE": "OBSOLETE",
-  "ABANDONED": "ABANDONED",
+  "ABANDONED": "ABANDONIERT",
   "ActionUnreversible": "Diese Aktion kann nicht rückgängig gemacht werden.",
   "AlwaysOpenFiltersAndActions": "Filter standardmäßig anzeigen",
   "AlwaysOpenFiltersAndActions_Tip": "Filter sind immer eingeblendet, wenn du einen Inhalts-Tab öffnest",
@@ -286,7 +286,7 @@
   "FavoriteProfileTotal": "Favorisierte Profile: {0}, Gesamt: {1}",
   "FavoriteTotal": "Gesamte Profilanzahl: {0}",
   "ProfileFilter": "Profilfilter",
-  "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
+  "CheckDocumentsFolder": "Vergewissern Sie sich, dass Skyve Zugriff auf Ihren Dokumentenordner hat, es verwendet es, um Ihre UI & Sprache Einstellungen zu speichern.",
   "FailedToSaveLanguage": "Fehler beim Speichern der ausgewählten Sprache",
   "FailedToOpenTC": "Fehler beim Öffnen des Themen-Wechslers",
   "FailedToDeleteItem": "Element konnte nicht gelöscht werden",
@@ -330,12 +330,12 @@
   "Workshop Maps": "Workshop Karten",
   "AnyAuthor": "Jeder Autor",
   "ItemsCount": {
-    "One": "{0} item",
-    "Plural": "{0} items"
+    "One": "{0} Element",
+    "Plural": "{0} Elemente"
   },
   "AuthorsSelected": {
-    "One": "{0} author selected",
-    "Plural": "{0} authors selected"
+    "One": "{0} Autor ausgewählt",
+    "Plural": "{0} Autoren ausgewählt"
   },
   "Use the System's Theme": "Das System-Theme verwenden",
   "Donate": "Spenden",
@@ -383,9 +383,9 @@
   "LoadNewAsset": "Neuer Gegenstand (Editor)",
   "LoadLoadAsset": "Gegenstand laden (Editor)",
   "Info": "Info",
-  "SelectThisPackage": "Select this package",
-  "SelectPackage": "Select a package",
-  "ControlToSelectMultiplePackages": "Ctrl + Click to select multiple packages at once.",
+  "SelectThisPackage": "Dieses Paket auswählen",
+  "SelectPackage": "Wählen Sie ein Paket",
+  "ControlToSelectMultiplePackages": "Strg + Klicken Sie, um mehrere Pakete auf einmal auszuwählen.",
   "Local": "Lokal",
   "Workshop": "Workshop",
   "CompatibilityReport": "Kompatibilitätsbericht",
@@ -401,10 +401,11 @@
   "AdvancedIncludeEnable": "Zeige sowohl Enthalten als auch Aktiviert-Status für Mods",
   "PackageStatus": "Paket-Status",
   "Author": "Autor",
-  "Include": "Include",
-  "Unsubscribe": "Unsubscribe",
-  "Exclude": "Exclude",
-  "Snooze": "Snooze",
+  "Include": "Einschließen",
+  "Unsubscribe": "Abmelden",
+  "Exclude": "Ausschließen",
+  "Snooze": "Schlummern",
+  "UnSnooze": "Entschlummern",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -414,52 +415,69 @@
     "Plural": "Assets"
   },
   "Package": {
-    "One": "Package",
-    "Plural": "Packages"
+    "One": "Paket",
+    "Plural": "Pakete"
   },
   "Profile": {
-    "One": "Profile",
+    "One": "Profil",
     "Plural": "Profiles"
   },
   "IncludedCount": {
-    "One": "{0} {1} included",
-    "Plural": "{0} {1} included"
+    "One": "{0} {1} enthalten",
+    "Plural": "{0} {1} enthalten"
   },
   "EnabledCount": {
-    "One": "{0} {1} enabled",
-    "Plural": "{0} {1} enabled"
+    "One": "{0} {1} aktiviert",
+    "Plural": "{0} {1} aktiviert"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} included & enabled",
-    "Plural": "{0} {1} included & enabled"
+    "One": "{0} {1} enthalten & aktiviert",
+    "Plural": "{0} {1} enthalten & aktiviert"
   },
   "LoadedCount": {
-    "One": "{0} {1} loaded",
-    "Plural": "{0} {1} loaded"
+    "One": "{0} {1} geladen",
+    "Plural": "{0} {1} geladen"
   },
   "ShowingCount": {
-    "One": "Showing {0} {1}",
-    "Plural": "Showing {0} {1}"
+    "One": "Zeige {0} {1}",
+    "Plural": "Zeige {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Showing {0} {1}, {2}",
-    "Plural": "Showing {0} {1}, {2}"
+    "One": "Zeige {0} {1}, {2}",
+    "Plural": "Zeige {0} {1}, {2}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} is hidden because of your profile's usage",
-    "Plural": "{0} {1} are hidden because of your profile's usage"
+    "One": "{0} {1} ist wegen der Nutzung Ihres Profils versteckt",
+    "Plural": "{0} {1} sind wegen der Nutzung Ihres Profils versteckt"
   },
-  "EditCompatibility": "Edit Compatibility",
-  "AnyIssue": "Any Issue",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
+  "EditCompatibility": "Kompatibilität bearbeiten",
+  "AnyIssue": "Jedes Problem",
+  "AnyUsage": "Jede Nutzung",
+  "ExplainIssue": "Beschreiben Sie hier Ihr Problem",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
-  "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
-  "SendReview": "Send the request for review",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages."
+  "ReviewRequestSent": "Ihre Bewertungsanfrage für '{0}' wurde gesendet!\r\n\r\nVielen Dank für Ihr Feedback.",
+  "ReviewRequestFailed": "Fehler beim Senden Ihrer Bewertungsanfrage für '{0}'.\r\n\r\n{1}",
+  "SendReview": "Anfrage zur Überprüfung senden",
+  "EditTags": "Tags bearbeiten",
+  "ShowAllReferencedPackages": "Ausgeschlossene Pakete im Reiter 'Referenzen' anzeigen",
+  "ShowAllReferencedPackages_Tip": "Zeigt sowohl ausgeschlossene als auch enthaltene Pakete, die auf das angezeigte verweisen.",
+  "TreatOptionalAsRequired": "Optionale Pakete bei Bedarf behandeln",
+  "TreatOptionalAsRequired_Tip": "Im Wesentlichen zeigt dies die fehlende Abhängigkeitsbenachrichtigung für optionale Pakete.",
+  "AddCustomTag": "Benutzerdefiniertes Tag hinzufügen",
+  "OutOfDateCount": {
+    "One": "{0} {1} ist veraltet",
+    "Plural": "{0} {1} sind veraltet"
+  },
+  "IncompleteCount": {
+    "One": "{0} {1} entspricht nicht seiner Größe aus dem Workshop",
+    "Plural": "{0} {1} stimmen nicht mit den entsprechenden Größen des Workshops überein"
+  },
+  "PackageIsRemoved": "'{0}' wurde von Steam entfernt",
+  "PackageIsUnknown": "Die Informationen von Steam haben noch nicht für '{0}' geladen",
+  "PackageIsNotDownloaded": "'{0}' wurde von Ihrem Computer entfernt",
+  "PackageIsOutOfDate": "'{0}' ist veraltet\r\n\r\nSie sind {1} hinterher",
+  "PackageIsMaybeOutOfDate": "'{0}' kann veraltet sein, es wurde aktualisiert {1}",
+  "PackageIsIncomplete": "Die lokale Größe von '{0}' ({1}) unterscheidet sich von Steams {2}",
+  "RemovedFromSteam": "Aus Steam entfernt",
+  "Missing": "Fehlend"
 }

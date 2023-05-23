@@ -238,12 +238,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Workshop Packages Cleanup",
+                "Name": "Rensa Workshop-paket",
                 "Changes": [
-                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-                    "Packages you are not subscribed to are no longer loaded in-game.",
-                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                    "Lade till nya funktioner för att enkelt hantera felmatchningar mellan Steam och dina nedladdade paket.",
+                    "Paket som du inte prenumererar på laddas inte längre i spelet.",
+                    "Starta spelet medan LOT är öppet kommer automatiskt ta bort alla paket som du inte prenumererar på, utan hämtas på din dator.",
+                    "Lade till en knapp i Verktygs fliken för att manuellt köra denna rensning samt tvinga nedladdning av saknade paket."
                 ]
             }
         ]
@@ -254,10 +254,10 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Ny",
                 "Changes": [
-                    "Added an option to disable the automatic cleanup when opening the game.",
-                    "Added a custom arguments box for advanced launch settings."
+                    "Lade till ett alternativ för att inaktivera automatisk rensning när spelet öppnades.",
+                    "Lade till en egen argumentruta för avancerade startinställningar."
                 ]
             }
         ]
@@ -268,27 +268,66 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Rösta & prenumeranter Ikon",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-                    "Hover over it to display the values.",
-                    "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Lade till en ny ikon bredvid ett paket som visar en snabb sammanfattning av rösterna och antalet prenumeranter på paketet.",
+                    "Håll muspekaren över den för att visa värdena.",
+                    "Klicka på ikonen för en fördjupad beskrivning av denna funktion.",
+                    "Lade till sorteringsalternativ för \"Röster\" och \"Totala prenumeranter\"."
                 ]
             },
             {
-                "Name": "Asset Requirements",
+                "Name": "Krav på tillgång",
                 "Changes": [
-                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                    "De nödvändiga objekten som visas på en verkstadstillgångs sida är nu integrerade i Load Order Tool.",
+                    "Denna information kommer nu att inkluderas i kompatibilitetsrapporten för att snabbt och enkelt se vad du saknar."
                 ]
             },
             {
-                "Name": "Other Changes",
+                "Name": "Andra ändringar",
                 "Changes": [
-                    "Updated the Package Page to match the displayed information in the content lists.",
-                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                    "Uppdaterade paketsidan för att matcha den visade informationen i innehållslistan.",
+                    "Sekundära innehållslistor som \"Saknade paket\" & \"Workshop Collection\" använder nu samma UI som huvudsidorna för innehållslistan, möjliggör en strömlinjeformad upplevelse och fler alternativ.",
+                    "Lade till 'New Asset' & 'Load Asset' startalternativ i profilen för att snabbt ladda in i redaktören."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Presenterar, Skyve, den sista efterföljaren till lastordern Mod 1/2 och kompatibilitetsrapporten.\r\nKommer för C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Kompatibilitetsrapport översyn",
+                "Changes": [
+                    "Kompatibilitetsrapporten är nu integrerad direkt i Skyve.",
+                    "Rekommendationer och info text är nu tydligare och lättare att hantera.",
+                    "Lade till en Snooze-knapp för att avfärda en viss kompatibilitetsnotifikation.",
+                    "Obligatoriska objekt omdirigeras automatiskt till paketets senaste efterföljare.",
+                    "Lokala paket matchas automatiskt med sin online motsvarighet som visar informationen från Steam och korrekt visar dess kompatibilitetsinformation.",
+                    "Du kan nu begära en översyn för ett paket för att meddela oss om saknad information i kompatibilitetsdata.",
+                    "Fliken Kompatibilitetsrapport är nu tillgänglig."
+                ]
+            },
+            {
+                "Name": "Nya funktioner",
+                "Changes": [
+                    "Du kan nu redigera Hitta den! taggar direkt i appen till moddar och tillgångar. Tillgångar synkroniseras med spelet.",
+                    "Lade till en \"Referenser\"-flik på ett pakets sida för att se alla andra paket som refererar till det.",
+                    "Lade till ett alternativ för att göra att valfria paket använder samma avisering som obligatoriska paket.",
+                    "Lade till språkdialekter, kinesiska traditionella (Taiwan), engelska Storbritannien och portugisiska Brasilien."
+                ]
+            },
+            {
+                "Name": "Andra ändringar",
+                "Changes": [
+                    "Pseudo-mods inkluderar nu IMT markeringar, Render it! Förinställningar, procedurobjekt teckensnitt och översättningsmods.",
+                    "Lade till länkar till paketsidan, liksom annan information som dess användning och typ.",
+                    "Lade till nya profilanvändningar: Kartskapande, Scenario Making, och Tema Making.",
+                    "Lade till extra text i listan för att visa hur många paket som döljs på grund av din profilanvändning.",
+                    "Förbättrade knappen Åtgärder för att göra den mer synlig och lättare att komma åt.",
+                    "Den nya ikonen lyser nu baserat på vad som händer, blå indikerar att spelet körs, röd betyder ingen internetuppkoppling, och snabb glödande innebär att det startar eller stänger spelet."
                 ]
             }
         ]
