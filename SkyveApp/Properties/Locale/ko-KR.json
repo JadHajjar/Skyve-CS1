@@ -402,7 +402,7 @@
   "PackageStatus": "패키지 상태",
   "Author": "제작자",
   "Include": "포함",
-  "Unsubscribe": "구독 해지하기",
+  "Unsubscribe": "구독 취소",
   "Exclude": "제외됨",
   "Snooze": "스누즈",
   "UnSnooze": "알람 해제",
@@ -450,27 +450,27 @@
     "One": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다",
     "Plural": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다"
   },
-  "EditCompatibility": "Edit Compatibility",
+  "EditCompatibility": "호환성 편집",
   "AnyIssue": "아무 이슈",
-  "AnyUsage": "Any Usage",
-  "ExplainIssue": "Describe your issue here",
+  "AnyUsage": "모든 용도",
+  "ExplainIssue": "여기에 문제를 설명하세요.",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
-  "ReviewRequestSent": "Your review request for '{0}' has been sent!\r\n\r\nThank you for your feedback.",
+  "ReviewRequestSent": "'{0}'에 대한 검토 요청이 전송되었습니다!\n\n의견을 보내 주셔서 감사합니다.",
   "ReviewRequestFailed": "Failed to send your review request for '{0}'.\r\n\r\n{1}",
-  "SendReview": "Send the request for review",
-  "EditTags": "Edit Tags",
-  "ShowAllReferencedPackages": "Show excluded packages in the 'References' tab",
-  "ShowAllReferencedPackages_Tip": "Displays both excluded and included packages that reference the one you're viewing.",
-  "TreatOptionalAsRequired": "Treat optional packages as required",
-  "TreatOptionalAsRequired_Tip": "Essentially, this displays the missing dependency notification for optional packages.",
-  "AddCustomTag": "Add a custom tag",
+  "SendReview": "검토 요청 보내기",
+  "EditTags": "태그 편집",
+  "ShowAllReferencedPackages": "'참조' 탭에서 제외된 패키지 표시",
+  "ShowAllReferencedPackages_Tip": "보고 있는 패키지를 참조하는 포함된 패키지와 제외된 패키지를 모두 표시합니다.",
+  "TreatOptionalAsRequired": "선택적 패키지를 필요에 따라 처리",
+  "TreatOptionalAsRequired_Tip": "기본적으로 이것은 선택적 패키지에 대한 누락된 종속성 알림을 표시합니다.",
+  "AddCustomTag": "맞춤 태그 추가",
   "OutOfDateCount": {
-    "One": "{0} {1} 가 오래 되었습니다",
-    "Plural": "{0} {1} are out of date"
+    "One": "{0} {1} 이(가) 오래되었습니다.",
+    "Plural": "{0} {1} 이(가) 오래되었습니다."
   },
   "IncompleteCount": {
-    "One": "{0} {1} does not match its size from the Workshop",
-    "Plural": "{0} {1} do not match their respective sizes from the Workshop"
+    "One": "{1} {0}개가 창작마당에서의 용량과 일치하지 않습니다",
+    "Plural": "{1} {0}개가 각각 창작마당에서의 용량과 일치하지 않습니다"
   },
   "PackageIsRemoved": "'{0}' was removed from Steam",
   "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
@@ -478,6 +478,6 @@
   "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
   "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
   "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
-  "RemovedFromSteam": "Removed from Steam",
-  "Missing": "Missing"
+  "RemovedFromSteam": "Steam에서 제거됨",
+  "Missing": "누락"
 }
