@@ -403,9 +403,9 @@
   "Author": "제작자",
   "Include": "포함",
   "Unsubscribe": "구독 취소",
-  "Exclude": "제외됨",
-  "Snooze": "스누즈",
-  "UnSnooze": "알람 해제",
+  "Exclude": "제외",
+  "Snooze": "나중에 다시 알림",
+  "UnSnooze": "다시 알림 해제",
   "Mod": {
     "One": "모드",
     "Plural": "모드"
@@ -465,8 +465,8 @@
   "TreatOptionalAsRequired_Tip": "기본적으로 이것은 선택적 패키지에 대한 누락된 종속성 알림을 표시합니다.",
   "AddCustomTag": "맞춤 태그 추가",
   "OutOfDateCount": {
-    "One": "{0} {1} 이(가) 오래되었습니다.",
-    "Plural": "{0} {1} 이(가) 오래되었습니다."
+    "One": "업데이트되지 않은 {1} {0}개가 있습니다",
+    "Plural": "업데이트되지 않은 {1} {0}개가 있습니다"
   },
   "IncompleteCount": {
     "One": "{1} {0}개가 창작마당에서의 용량과 일치하지 않습니다",
@@ -476,8 +476,8 @@
   "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
   "PackageIsNotDownloaded": "'{0}' was removed from your computer",
   "PackageIsOutOfDate": "'{0}' is out of date\r\n\r\nYou are {1} behind",
-  "PackageIsMaybeOutOfDate": "'{0}' may be out of date, it was updated {1}",
-  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
+  "PackageIsMaybeOutOfDate": "'{0}' 는 업데이트되지 않았을 수 있습니다. '{0}' 는 {1} 에 업데이트가 있었습니다.",
+  "PackageIsIncomplete": "'{0}' 의 로컬 크기 ({1}) 가 Steam에서의 크기 {2} 와 다릅니다.",
   "RemovedFromSteam": "Steam에서 제거됨",
   "Missing": "누락"
 }
