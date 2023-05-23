@@ -98,7 +98,7 @@
     "Plural": "'{0}' ha sido reemplazado por cualquiera de los siguientes paquetes."
   },
   "Interaction_Identical": "Estas son varias versiones del mismo paquete.\n\nDebería elegir sólo uno de ellos.",
-  "Status_Succeeded": "'{0}' ha sido reemplazado por '{1}'.\n\nYa está utilizando '{1}' así que ya no hay necesidad de '{0}'.",
+  "Status_Succeeded": "'{0}' ha sido reemplazado por '{1}'.\n\nYa estás utilizando '{1}', no necesitas '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, ya no está soportado por su autor.",
   "Status_Reupload": {
     "Zero": "'{0}' es una nueva versión de un paquete original.",
@@ -171,7 +171,7 @@
   "CRT_Ambiguous": "Ambigüedad",
   "LastReviewDate": "Revisado por última vez el {0}",
   "RequestReviewInfo": "¿Tienes problemas con este paquete?",
-  "RequestReview": "Solicitar valoración",
+  "RequestReview": "Solicitar revisión",
   "MissingDependencyCount": {
     "One": "{0} {1} le falta dependencias",
     "Plural": "{0} {1} le faltan dependencias"
