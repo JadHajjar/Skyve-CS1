@@ -86,8 +86,8 @@
     "Plural": "当 '{0}' 与以下模组同时使用时，可能引发问题："
   },
   "Interaction_RequiredPackages": {
-    "One": "要使用 '{0}'，您需要订阅一个必需物品。",
-    "Plural": "要使用 '{0}'，您需要订阅下列必需物品："
+    "One": "要使用 '{0}'，您需要订阅一个必需的插件。",
+    "Plural": "要使用 '{0}'，您需要订阅下列必需的插件："
   },
   "Interaction_OptionalPackages": {
     "One": "您缺少 '{0}' 中的可选插件。",
@@ -162,7 +162,7 @@
   "RequiredDLCs": "前置 DLC/CCP",
   "CRT_Stability": "稳定性",
   "CRT_Successors": "继任模组",
-  "CRT_RequiredPackages": "必需物品",
+  "CRT_RequiredPackages": "必需插件",
   "CRT_OptionalPackages": "可选插件",
   "CRT_DlcMissing": "缺失 DLCs/CCPs",
   "CRT_Compatibility": "兼容性问题",
