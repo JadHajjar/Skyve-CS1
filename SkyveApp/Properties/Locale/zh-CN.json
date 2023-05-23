@@ -474,7 +474,7 @@
   },
   "PackageIsRemoved": "插件 '{0}' 已从 Steam 工坊移除",
   "PackageIsUnknown": "插件 '{0}' 的 Steam 工坊信息尚未加载",
-  "PackageIsNotDownloaded": "'{0}'已从您的电脑中删除",
+  "PackageIsNotDownloaded": "插件 '{0}' 已成功从您的电脑中删除",
   "PackageIsOutOfDate": "插件 '{0}' 已经过期\n\n您的版本已落后 {1}",
   "PackageIsMaybeOutOfDate": "插件 '{0}' 可能已过期，它已经进行了更新 {1}",
   "PackageIsIncomplete": "本地插件 '{0}' 的文件大小({1}) 与其工坊版本的文件大小 {2} 不同",
