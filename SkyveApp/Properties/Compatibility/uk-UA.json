@@ -7,7 +7,7 @@
   "Note": "Примітка",
   "NoteInfo": "Додаткова інформація, що відображається для пакунка",
   "BlackListName": "Чорний список за іменем",
-  "BlackListId": "Black-list by name",
+  "BlackListId": "Чорний список за Steam ID",
   "GlobalTags": "Глобальні теги",
   "GlobalTagsInfo": "Додає тег, який будуть бачити всі користувачі додатку",
   "Links": "Посилання",
@@ -41,9 +41,9 @@
   "SourceCodeNotAvailable": "Вихідний код недоступний",
   "MusicCanBeCopyrighted": "Включена музика може бути захищена авторським правом",
   "IncompleteDescription": "Неповний опис",
-  "Successor": "Successor",
-  "Alternative": "Alternative",
-  "SameFunctionality": "Same Functionality",
+  "Successor": "Наступник ..",
+  "Alternative": "Альтернатива ..",
+  "SameFunctionality": "Та ж сама функціональність ..",
   "RequirementAlternative": "Requirement Alternative",
   "IncompatibleWith": "Несумісне з ..",
   "CausesIssuesWith": "Спричиняє проблеми з ..",
@@ -71,7 +71,7 @@
   "PleaseReviewPackageUsage": "Будь ласка, виберіть коректний код використання для цього пакету.",
   "Interaction_Alternative": {
     "One": "'{1}' можна використовувати як альтернативу '{0}'.",
-    "Plural": "Один з наступних пакетів може бути використаний як альтернатива '{0}."
+    "Plural": "Один з наступних пакунків може бути використаний як альтернатива '{0}."
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' та '{1}' мають такі ж функціональності.",
@@ -79,14 +79,14 @@
   },
   "Interaction_IncompatibleWith": {
     "One": "'{0}' і '{1}' не сумісні між собою.",
-    "Plural": "'{0}' не сумісний з будь-яким з наступних пакетів."
+    "Plural": "'{0}' не сумісний з будь-яким з наступних пакунків."
   },
   "Interaction_CausesIssuesWith": {
     "One": "'{0}' може викликати проблеми при використанні з '{1}'.",
-    "Plural": "'{0}' може викликати проблеми при використанні з наступних модів."
+    "Plural": "'{0}' може викликати проблеми при використанні з наступними модами."
   },
   "Interaction_RequiredPackages": {
-    "One": "Вам не вистачає потрібного пакунку для '{0}.",
+    "One": "Вам не вистачає потрібного пакунку для '{0}'.",
     "Plural": "У вас відсутні наступні пакунки для '{0}."
   },
   "Interaction_OptionalPackages": {
