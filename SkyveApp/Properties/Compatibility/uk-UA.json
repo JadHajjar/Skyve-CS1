@@ -133,7 +133,7 @@
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "Ви повинні підписатися на наступний пакет:",
-    "Plural": "You should subscribe to these packages."
+    "Plural": "Ви повинні підписатися на наступний пакет:"
   },
   "Action_RequiresConfiguration": "Ви повинні дотримуватися наступних інструкцій:",
   "Action_SelectOne": {
@@ -152,14 +152,14 @@
   },
   "Action_Switch": {
     "One": "Вам слід переключитися на '{1}'.",
-    "Plural": "You should switch to one of the following packages."
+    "Plural": "Вам слід переключитися на один з наступних пакетів:"
   },
   "NoRequiredDlcs": "Немає необхідних DLC",
   "DlcsSelected": {
     "One": "{0} DLC вибрано",
     "Plural": "{0} DLC вибрано"
   },
-  "RequiredDLCs": "Required DLCs/CCPs",
+  "RequiredDLCs": "Необхідні DLC / CCP (Зміст, створений користувачами)",
   "CRT_Stability": "Стабільність",
   "CRT_Successors": "Наступники",
   "CRT_RequiredPackages": "Необхідні пакунки",
@@ -168,28 +168,28 @@
   "CRT_Compatibility": "Проблеми сумісності",
   "CRT_Alternatives": "Альтернативи",
   "CRT_Status": "Статуси",
-  "CRT_Ambiguous": "Неоднозначність",
-  "LastReviewDate": "Це було останнє рецензію на {0}",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
-  "RequestReview": "Request Review",
+  "CRT_Ambiguous": "Амбігвітність",
+  "LastReviewDate": "Останній огляд був здійснений {0}",
+  "RequestReviewInfo": "Чи виникають проблеми з цим пакетом?",
+  "RequestReview": "Запит на перегляд",
   "MissingDependencyCount": {
-    "One": "{0} {1} відсутні залежності",
-    "Plural": "{0} {1} відсутні залежності"
+    "One": "Для {0} {1} не вистачає залежностей",
+    "Plural": "Для пакетів {0} {1} відсутні залежності"
   },
-  "CautionCount": "{0} {1} під час обачності",
-  "WarningCount": "{0} {1} із попередженням",
+  "CautionCount": "{0} {1}, де рекомендується бути обережним",
+  "WarningCount": "{0} {1} з попередженням",
   "AttentionRequiredCount": {
     "One": "{0} {1} вимагає вашої уваги",
     "Plural": "{0} {1} вимагає вашої уваги"
   },
   "ExcludeCount": {
-    "One": "{0} {1} повинні бути виключені",
-    "Plural": "{0} {1} повинні бути виключені"
+    "One": "{0} {1} слід виключити",
+    "Plural": "{0} {1} слід виключити"
   },
-  "UnsubscribeCount": "{0} {1} що ви повинні відписатися від",
+  "UnsubscribeCount": "{0} {1}, від яких ви повинні відписатися",
   "SwitchCount": {
-    "One": "{0} {1} вимагає переходу на інший",
-    "Plural": "{0} {1} вимагає переходу на інший"
+    "One": "{0} {1} вимагає переходу до іншого пакету",
+    "Plural": "{0} {1} вимагає переходу до іншого пакету"
   },
   "PackageType": "Тип пакунку",
   "GenericPackage": "Загальний пакунок",
@@ -198,8 +198,8 @@
   "IMTMarkings": "Розмітки IMT",
   "RenderItPreset": "Шаблон Render it!",
   "POFont": "Шрифт/модуль для Procedural Object",
-  "NameList": "Ім'я/Ігрові переклади",
+  "NameList": "Переклади",
   "ApplyChangedBeforeExit": "У вас є незбережені зміни.\r\n\r\nБажаєте застосувати ці зміни, перш ніж продовжити?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "Автор {0}, {1}, відомий як зловмисник та / або шкідливий вміст, у тому числі віруси у своїх пакетах."
+  "AuthorRetired": "Автор {0}, {1}, припинив свою діяльність або був неактивним протягом тривалого часу.\n\nМайбутні оновлення та стабільність їх пакетів не гарантовані.",
+  "AuthorMalicious": "Відомо, що автор {0}, {1}, має зловмисні наміри та/або включає шкідливий вміст, такий як віруси, у своїх пакетах."
 }
