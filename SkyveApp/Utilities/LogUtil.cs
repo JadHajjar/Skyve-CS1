@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
@@ -66,7 +67,9 @@ public static class LogUtil
 		{
 			if (LocationManager.FileExists(filePath))
 			{
-				zipArchive.CreateEntryFromFile(filePath, $"Other Files\\{Path.GetFileName(filePath)}");
+				try
+				{ zipArchive.CreateEntryFromFile(filePath, $"Other Files\\{Path.GetFileName(filePath)}"); }
+				catch { }
 			}
 		}
 	}
@@ -125,9 +128,8 @@ public static class LogUtil
 	{
 		var profileEntry = zipArchive.CreateEntry("Skyve\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
-		var packages = CentralManager.Packages.AllWhere(x => x.IsIncluded);
-		var reports = packages.ToList(x => CompatibilityManager.GetCompatibilityInfo(x));
-
+		var reports = CentralManager.Packages.ToList(x => x.GetCompatibilityInfo());
+		reports.RemoveAll(x => x.Notification < NotificationType.Unsubscribe && !x.Package.IsIncluded);
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
 	}
 

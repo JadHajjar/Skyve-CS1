@@ -223,7 +223,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			return;
 		}
 
-		var Message = item.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.Item.Notification);
+		var Message = item.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.Item.Notification && !CompatibilityManager.IsSnoozed(x));
 
 		foreach (var rect in rects.buttonRects)
 		{
@@ -385,7 +385,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			labelRect.Y += Padding.Top + rects.VersionRect.Height;
 		}
 
-		var item = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.Notification);
+		var item = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.Notification && !CompatibilityManager.IsSnoozed(x));
 
 		DrawReport(e, item, rects);
 	}
@@ -405,8 +405,8 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 		var ClientRectangle = e.ClipRectangle.Pad((int)(275 * UI.FontScale), 0, 0, 0);
 		var iconRect = ClientRectangle.Align(icon.Size, ContentAlignment.TopLeft).Pad(0, 0, -pad * 2, -pad * 2);
-		var messageSize = e.Graphics.Measure(Message.Message, UI.Font(7.5F), ClientRectangle.Width - iconRect.Width - (pad * 2) - (int)(200 * UI.FontScale));
-		var noteSize = e.Graphics.Measure(note, UI.Font(6.75F), ClientRectangle.Width - iconRect.Width - (pad * 2) - (int)(200 * UI.FontScale));
+		var messageSize = e.Graphics.Measure(Message.Message, UI.Font(7.5F), ClientRectangle.Width - iconRect.Width - (pad * 2) - (Message.Packages.Length > 0 ? (int)(200 * UI.FontScale) : 0));
+		var noteSize = e.Graphics.Measure(note, UI.Font(6.75F), ClientRectangle.Width - iconRect.Width - (pad * 2) - (Message.Packages.Length > 0 ? (int)(200 * UI.FontScale) : 0));
 		var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 		using var brush = new SolidBrush(color);
 
@@ -442,11 +442,11 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 		GetAllButton(Message, out var allText, out var allIcon, out var colorStyle);
 
-		e.Graphics.DrawString(Message.Message, UI.Font(7.5F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad + (int)(5 * UI.FontScale), 0, (int)(200 * UI.FontScale), 0));
+		e.Graphics.DrawString(Message.Message, UI.Font(7.5F), new SolidBrush(ForeColor), ClientRectangle.Pad(iconRect.Width + pad + (int)(5 * UI.FontScale), 0, (Message.Packages.Length > 0 ? (int)(200 * UI.FontScale) : 0), 0));
 
 		if (note is not null)
 		{
-			e.Graphics.DrawString(note, UI.Font(6.75F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad + (int)(5 * UI.FontScale), string.IsNullOrWhiteSpace(Message.Message) ? 0 : ((int)messageSize.Height + pad), (int)(200 * UI.FontScale), 0));
+			e.Graphics.DrawString(note, UI.Font(6.75F), new SolidBrush(Color.FromArgb(200, ForeColor)), ClientRectangle.Pad(iconRect.Width + pad + (int)(5 * UI.FontScale), string.IsNullOrWhiteSpace(Message.Message) ? 0 : ((int)messageSize.Height + pad), (Message.Packages.Length > 0 ? (int)(200 * UI.FontScale) : 0), 0));
 		}
 
 		if (allText is not null)
