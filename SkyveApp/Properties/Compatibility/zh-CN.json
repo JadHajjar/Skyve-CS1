@@ -135,7 +135,7 @@
     "One": "您应该订阅下列插件：",
     "Plural": "您应该订阅这些插件："
   },
-  "Action_RequiresConfiguration": "您应该遵循以下指令：",
+  "Action_RequiresConfiguration": "您应当遵循下列使用说明：",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
     "Plural": "You should only use one between '{0}' and the following packages."
@@ -179,17 +179,17 @@
   "CautionCount": "{0} {1} 建议谨慎使用",
   "WarningCount": "{0} {1} 带有警告",
   "AttentionRequiredCount": {
-    "One": "{0} {1} 需要您注意。",
-    "Plural": "{0} {1} 需要您注意。"
+    "One": "{0} {1} 需要注意一下",
+    "Plural": "{0} {1} 需要注意一下"
   },
   "ExcludeCount": {
-    "One": "{0} {1} 应该被删除",
-    "Plural": "{0} {1} 应该被删除"
+    "One": "{0} {1} 应当被卸下",
+    "Plural": "{0} {1} 应当被卸下"
   },
   "UnsubscribeCount": "{0} {1} 应该取消订阅",
   "SwitchCount": {
-    "One": "{0} {1} 需要切换到另一个",
-    "Plural": "{0} {1} 需要切换到另一个"
+    "One": "{0} {1} 需要改为使用其它模组",
+    "Plural": "{0} {1} 需要改为使用其它模组"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
