@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Poista tämän paketin tilaus",
   "UnsubscribeOther": "Poista linkitettyjen pakettien tilaus",
   "Switch": "Vaihda linkitettyyn pakettiin",
-  "FlippedSwitch": "Vaihda tähän pakettiin",
+  "FlippedSwitch": "Switch to this package",
   "Deprecated": "Vanhentunut",
   "Reupload": "Uudelleenlataa",
   "CausesIssues": "Aiheuttaa Ongelmia",
