@@ -377,7 +377,7 @@
   "VotingInfo5": "The second layer is the subscriber count, represented by the golden circle around the icon which scales up to {0} subscribers.",
   "VotingInfo6": "The third and final layer is when a package has a high voting score and over {0} subscribers, represented by a golden icon.",
   "UnknownPackage": "Unknown Package",
-  "AssetsWithMinorIssues": "assets with minor issues",
+  "AssetsWithMinorIssues": "recursos com pequenos problemas",
   "AssetsWithMajorIssues": "assets with major issues",
   "AssetsShouldUnsub": "assets that should be unsubscribed from",
   "LoadNewAsset": "New Asset (Editor)",
