@@ -111,7 +111,7 @@
   },
   "Status_TestVersion": {
     "Zero": "Esta é uma versão 'Teste' do mod original. Esteja ciente que atualizações nele podem causar problemas inesperados.",
-    "One": "Esta é uma versão 'Teste' de '{1}'.\nEsteja ciente que atualizações nele podem causar problemas inesperados."
+    "One": "Esta é uma versão Teste de '{1}'.\nEsteja ciente que atualizações nele podem causar problemas inesperados."
   },
   "Status_MissingDlc": {
     "One": "Você está sem uma DLC para usar este pacote.",
@@ -173,23 +173,23 @@
   "RequestReviewInfo": "Está enfrentando problemas com este pacote?\nSolicite uma nova análise aqui:",
   "RequestReview": "Solicitar Análise",
   "MissingDependencyCount": {
-    "One": "{0} {1} está faltando dependências",
-    "Plural": "{0} {1} estão faltando dependências"
+    "One": "{0} {1} Está faltando a dependência",
+    "Plural": "{0} {1} Estão faltando as dependências"
   },
   "CautionCount": "{0} {1} onde é aconselhado cuidado",
   "WarningCount": "{0} {1} com um aviso",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requer sua atenção",
-    "Plural": "{0} {1} requer sua atenção"
+    "One": "{0} {1} Requer sua atenção",
+    "Plural": "{0} {1} Requerem sua atenção"
   },
   "ExcludeCount": {
-    "One": "{0} {1} deve ser excluído",
-    "Plural": "{0} {1} deve ser excluído"
+    "One": "{0} {1} Deve ser excluído",
+    "Plural": "{0} {1} Devem ser excluídos"
   },
   "UnsubscribeCount": "{0} {1} que você deve cancelar a inscrição",
   "SwitchCount": {
-    "One": "{0} {1} requer mudança para outro",
-    "Plural": "{0} {1} requer mudança para outro"
+    "One": "{0} {1} Requer mudança para outro",
+    "Plural": "{0} {1} Requerem mudança para outro"
   },
   "PackageType": "Tipos de Pacotes",
   "GenericPackage": "Pacote Genérico",
@@ -200,6 +200,6 @@
   "POFont": "Fonte/Módulo de Objeto Procedural",
   "NameList": "Nome-Lista/Traduções do Jogo",
   "ApplyChangedBeforeExit": "Você tem alterações não salvas.\n\nGostaria de aplicar essas alterações antes de continuar?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\nAs atualizações futuras e a estabilidade de seus pacotes não são garantidas.",
   "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes."
 }
