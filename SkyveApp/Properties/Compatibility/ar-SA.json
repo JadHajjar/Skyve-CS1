@@ -31,7 +31,7 @@
   "UnsubscribeThis": "إلغاء الاشتراك من هذه الحزمة",
   "UnsubscribeOther": "إلغاء الاشتراك من الحزم المرتبطة",
   "Switch": "التبديل إلى الحزمة المرتبطة",
-  "FlippedSwitch": "التبديل إلى هذه الحزمة",
+  "FlippedSwitch": "Switch to this package",
   "Deprecated": "مهمل",
   "Reupload": "إعادة التحميل",
   "CausesIssues": "أسباب المشكلات",
