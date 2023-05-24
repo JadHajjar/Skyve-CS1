@@ -31,7 +31,7 @@
   "UnsubscribeThis": "이 패키지 구독 취소",
   "UnsubscribeOther": "연결된 패키지 구독 취소",
   "Switch": "링크된 패키지로 바꾸기",
-  "FlippedSwitch": "링크된 패키지로 바꾸기",
+  "FlippedSwitch": "Switch to this package",
   "Deprecated": "더 이상 사용되지 않음",
   "Reupload": "재업로드",
   "CausesIssues": "원인 문제",
