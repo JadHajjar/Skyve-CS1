@@ -21,7 +21,10 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		InitializeComponent();
 
-		DD_LogFile.StartingFolder = LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+		if (LocationManager.Platform is Platform.Windows)
+		{
+			DD_LogFile.StartingFolder = LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+		}
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
 		{

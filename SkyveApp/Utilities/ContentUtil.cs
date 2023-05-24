@@ -104,21 +104,25 @@ internal class ContentUtil
 	{
 		var dateTime = DateTime.MinValue;
 
-		if (Directory.Exists(path))
+		try
 		{
-			foreach (var filePAth in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
+			if (Directory.Exists(path))
 			{
-				if (Path.GetFileName(filePAth) != EXCLUDED_FILE_NAME)
+				foreach (var filePAth in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
 				{
-					var lastWriteTimeUtc = File.GetLastWriteTimeUtc(filePAth);
-
-					if (lastWriteTimeUtc > dateTime)
+					if (Path.GetFileName(filePAth) != EXCLUDED_FILE_NAME)
 					{
-						dateTime = lastWriteTimeUtc;
+						var lastWriteTimeUtc = File.GetLastWriteTimeUtc(filePAth);
+
+						if (lastWriteTimeUtc > dateTime)
+						{
+							dateTime = lastWriteTimeUtc;
+						}
 					}
 				}
 			}
 		}
+		catch (Exception ex) { Log.Exception(ex, $"Failed to get the local update time for '{path}'"); }
 
 		return dateTime;
 	}
