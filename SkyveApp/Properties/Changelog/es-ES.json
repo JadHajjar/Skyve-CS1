@@ -1,0 +1,335 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Bienvenido a la era de registro de cambios",
+        "ChangeGroups": [
+            {
+                "Name": "Nuevo",
+                "Changes": [
+                    "Agregado el botón 'Anular suscripción' en las acciones de las páginas de contenido.",
+                    "Agregada una sección de utilidad para suscribirse a elementos faltantes en una configuración BOB.",
+                    "Agregada opción para que las secciones Filtros & Accines se abran de manerta predeterminada.",
+                    "Agregadas páginas de registro de cambios, la verás en nuevas versiones o usando el botón en las secciones de Ayuda."
+                ]
+            },
+            {
+                "Name": "Mejoras",
+                "Changes": [
+                    "Agregado Informe de compatibilidad para activos no existentes",
+                    "Los paquetes no listados ahora tienen el nombre y la miniatura correcta.",
+                    "La configuración de carpetas (parámetros temporales) ahora reflejan correctamente su sistema operativo.",
+                    "Ctrl+Clic en el nombre de un autor para añadirlo al filtro"
+                ]
+            },
+            {
+                "Name": "Corregido",
+                "Changes": [
+                    "Perfiles antiguos no se convertían después de ejecutar la herramienta por primera vez.",
+                    "Activos locales no se actualizan automáticamente después de los cambios externos.",
+                    "Eliminación de assets locales desde el menú de clic derecho, eliminando todos los assets locales en lugar de uno",
+                    "Assets marcados como 'Local' al convertir perfiles de LOT1",
+                    "Carpetas se intercambiaban al guardar para los usuarios de Linux y Mac.",
+                    "Usuarios de Linux y Mac no podían generar los archivos zip de registro."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Sección de Ayuda y Registros",
+                "Changes": [
+                    "Accesa tus registros de manera fácil.",
+                    "Ve rápidamente los errores de tu sesión de juego más reciente.",
+                    "Simplifica un archivo de registro para centrarse en los errores más importantes.",
+                    "Comparte un archivo zip que contiene todos los registros necesarios para que alguien te ayude."
+                ]
+            },
+            {
+                "Name": "Mejoras",
+                "Changes": [
+                    "Cambiados los iconos de los filtros para reflejar los iconos utilizados en la lista."
+                ]
+            },
+            {
+                "Name": "Corregidos",
+                "Changes": [
+                    "Se ha corregido el texto al importar colecciones de suscribirse y anular suscripción.",
+                    "Se ha corregido la selección de mapas para un nuevo juego que no permitía a los usuarios seleccionar un mapa Vanilla."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Corregido",
+                "Changes": [
+                    "Error que causaba una carga infinita para algunos usuarios."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios",
+                "Changes": [
+                    "Eliminada pestaña de suscripción de las opciones de mods del juego.",
+                    "No se incluían DLCs al cargar un perfil.",
+                    "Opción de idioma estaba vacía para algunos usuarios.",
+                    "La descarga de Steam ya no forzará el enfoque a la herramienta.",
+                    "Otros cambios en la interfaz de usuario."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios",
+                "Changes": [
+                    "Ventana emergente de información al suscribirse a elementos por primera vez.",
+                    "Texto de advertencia en el panel de control cuando tienes varias instancias de LOM instaladas.",
+                    "Etiquetas pequeñas junto a los títulos del paquete.",
+                    "Volver a descargar Load Order Tool iniciará la descarga y cerrará la aplicación mientras se actualiza.",
+                    "Mejorada la velocidad de carga de los reportes de Loading Screen Mod."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Versión pública beta",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Presentando, Mejoras en Perfiles",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios en Perfiles",
+                "Changes": [
+                    "Nuevo diseño en la lista de perfiles.",
+                    "Los perfiles favoritos ahora se muestran en la Consola para permitir un cambio fácil entre ellos.",
+                    "Sección de 'Otros Perfiles' en la página de paquetes para excluirlos fácilmente de otros perfiles",
+                    "Nuevas opciones para ordenar perfiles. La selección se recordará a lo largo de las sesiones.",
+                    "Acciones de clic derecho en la lista de contenido para excluir o incluir un artículo en todos los paquetes.",
+                    "Botón para ver el archivo de un perfil en tu computadora.",
+                    "Ahora puedes asignar un color a tus perfiles.",
+                    "Ahora puedes crear un acceso directo en el escritorio para tus perfiles.",
+                    "Ahora puede importar un perfil de LOT 1 en la sección 'Agregar perfil'."
+                ]
+            },
+            {
+                "Name": "Mejoras",
+                "Changes": [
+                    "Los enlaces de Steam ahora se abrirán dentro de la ventana de Steam. Esto se puede desactivar en las Opciones.",
+                    "Los assets locales ahora están correctamente agrupados según las carpetas en las que se encuentran.",
+                    "Panel de tu cuenta de Paradox.",
+                    "Botones en la parte superior de la ventana tienes iconos reflejando sus acciones.",
+                    "Mejorada la capacidad de respuesta de las páginas de contenido.",
+                    "La búsqueda en las páginas de la contenidos es mucho más rápida.",
+                    "Carga de mods están en caché; resultando en cargas más eficientes en Windows y Linux, así como cargas mucho más rápidas en macOS.",
+                    "Ahora puedes generar un archivo zip de tus registros mientras el juego se está ejecutando."
+                ]
+            },
+            {
+                "Name": "Corregidos",
+                "Changes": [
+                    "Bloqueos que ocurren en las páginas de la lista de contenidos.",
+                    "Guardado automático de Perfiles no funciona correctamente.",
+                    "No era posible el uso de mapas del Workshop y juegos guardados en la configuración del perfil",
+                    "Mapas personalizados no cargaban cuando estaban seleccionados en la configuración del peril.",
+                    "Carga de perfiles en macOS y Linux que no siempre se aplican correctamente.",
+                    "Ubicación personalizada para los archivos de reportes de LSMR ahora comenzará correctamente al seleccionar un archivo de reporte en la página Utilidades."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nuevo y mejorado",
+                "Changes": [
+                    "Ahora puedes importar desde cualquier archivo de texto o desde el portapapeles en la sección de Utilidades.",
+                    "Soporte para archivos genéricos XML al importar configuraciones de BOB que contienen IDs de paquetes."
+                ]
+            },
+            {
+                "Name": "Corregido",
+                "Changes": [
+                    "ID se leen correctamente al importar una colección.",
+                    "LOT no respondía en Mac/Linux al anular la suscipción a un paquete."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Actualización de Primavera",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios en Filtros y Búsqueda",
+                "Changes": [
+                    "Ahora se puede filtrar por autor.",
+                    "Más acciones en las etiquetas en las listas de contenido.",
+                    "Nueva opción de \"Cualquier problema\" en el \"Estado de paquete\" y \"Reporte de Compatibilidad\".",
+                    "Acciones en filtros se ejecutan con Ctrl+Clic. Agregada la opción para intercambiar la funcionalidad.",
+                    "El refiltrado utilizando los accesos directos de la lista ahora elimina el elemento de su filtro.",
+                    "Separar los términos con una coma al buscar, dividirá tu búsqueda para que coincida con cualquiera de los términos (OR)\n- Añadir '+' al inicio de su término requerirá que el término sea agregado (AND)\n- Añadir '-' al inicio de su término excluirá los artículos que coincidan con ese término\n\nEjemplos de búsqueda:\n- car, truck (resulta en 'car' O 'camion')\n- building, apartment, +european (coincide con 'european' Y ['building' O 'apartment'])\n- condo, house, -rico, +american (coincide con 'american' Y ['condo' O 'house'] Y NO 'rico')"
+                ]
+            },
+            {
+                "Name": "Cambios de UI y UX",
+                "Changes": [
+                    "Nuevo sistema de iconos que escala todos los iconos apropiadamente a tu escala de interfaz de usuario.",
+                    "Mejorado drásticamente el rendimiento y la capacidad de respuesta de las páginas de contenido.",
+                    "Switch para seleccionar entre orden ascendente y descendente.",
+                    "La sección de 'Acciones' en las páginas de contenido tienen una nueva ubicación, se han añadido 2 nuevas opciones.",
+                    "Los paquetes parcialmente incluidos ahora tienen una interfaz de usuario diferente en la lista.",
+                    "Mejorados los botones y los controles de filtros en las listas de contenidos, reduciendo su tamaño total y añadiendo más señales visuales.",
+                    "Se ha cambiado la opción de aumentar el tamaño de los artículos en la lista al pasar el cursor para aumentar su tamaño. Mejoró la interfaz de usuario de los artículos de la lista y se aplicó esta funcionalidad al resto de las listas en la aplicación.",
+                    "Accesos directo Ctrl+[0-9] para cambiar entre las pestañas disponibles.",
+                    "Cambios en botones de selección.",
+                    "Las animaciones ahora están desactivadas por defecto en macOS y Linux.",
+                    "Muchas más mejoras en la interfaz de usuario, cambios y correcciones que he perdido cuenta."
+                ]
+            },
+            {
+                "Name": "Mejora en Selección de Archivos",
+                "Changes": [
+                    "Actualizada la interfaz de usuario de las pantallas de selección de archivos.",
+                    "Carpetas ancladas para acceder fácilmente a las carpetas relevantes.",
+                    "Sección de Workshop para seleccionar fácilmente mapas del Workshop y archivos guardados.",
+                    "Menú desplegable y opción para ordenar archivos",
+                    "Opción para lista / vista de cuadrícula."
+                ]
+            },
+            {
+                "Name": "Corregidos",
+                "Changes": [
+                    "Inicio de LOT después de apagar el monitor debido a que la ventana no se mostraba.",
+                    "Se ha corregido la opción LHT que no funcionaba al ejecutar el juego en un nuevo mapa.",
+                    "Páginas del autor no abrían correctamente en Steam.",
+                    "Bloqueo al buscar mientras se seleccionaba la opción de 'Tiempo de suscripción' al ordenar la lista."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Limpieza de paquetes del Workshop",
+                "Changes": [
+                    "Funcionalidades para manejar fácilmente el contenido entre Steam y los paquetes descargados.",
+                    "Los paquetes a los que no estás suscrito ya no se cargan en el juego.",
+                    "Al lanzar el juego mientras LOT está abierto eliminará automáticamente cualquier paquete al que no estés suscrito, pero descargado en tu computador.",
+                    "Botón en la pestaña Utilidades para ejecutar manualmente esta limpieza, así como forzar la descarga de paquetes faltantes."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nuevo",
+                "Changes": [
+                    "Opción para desactivar la limpieza automática al abrir el juego.",
+                    "Cuadro de argumentos personalizados para la configuración avanzada de lanzamiento."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Icono de votos y suscriptores",
+                "Changes": [
+                    "Icono junto a paquete, muestra un resumen rápido de los votos y el número de suscriptores del paquete.",
+                    "Pasar el ratón por encima para mostrar los valores.",
+                    "Clic en el icono para obtener una descripción detallada de esta función.",
+                    "Opciones de ordenar por 'Votos' y 'Número de suscriptores'."
+                ]
+            },
+            {
+                "Name": "Requisitos del asset",
+                "Changes": [
+                    "Los elementos requeridos mostrados en la página del workshop para un asset, ahora están integrados en Load Order Tool.",
+                    "Esta información ahora se incluirá en el Informe de compatibilidad para ver rápida y fácilmente lo que te falta."
+                ]
+            },
+            {
+                "Name": "Otros cambios",
+                "Changes": [
+                    "Actualizada la página de Paquetes para que coincida con la información mostrada en las listas de contenido.",
+                    "Las listas de contenido secundarias como 'Paquetes faltantes' y 'Colección del Workshop', ahora usan la misma interfaz de usuario que las páginas de las listas de contenido principales, permitiendo una experiencia estándar y más opciones.",
+                    "Añadidas opciones de lanzamiento 'Nuevo Asset' y 'Cargar Asset' en el perfil, para cargar rápidamente en el Editor de assets."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Presentando, Skyve, el sucesor final de Load Order Mod 1/2 y Compatibility Report.\nPróximamente para C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Cambios en Compatibility Report",
+                "Changes": [
+                    "Compatibility Report ahora está integrado en Skyve.",
+                    "Las recomendaciones y el texto de información son ahora más claros y fáciles de gestionar.",
+                    "Botón \"Silenciar\" para descartar una notificación de compatibilidad específica.",
+                    "Elementos requeridos redireccionan automáticamente al sucesor más reciente de los paquetes.",
+                    "Los paquetes locales coinciden automáticamente con su contraparte en línea, mostrando la información de Steam y mostrando correctamente su información de compatibilidad.",
+                    "Ahora puede solicitar una revisión de un paquete para notificarnos acerca de la falta de información en los datos de compatibilidad.",
+                    "Ya está disponible la pestaña Informe de Compatibilidad."
+                ]
+            },
+            {
+                "Name": "Nuevas funciones",
+                "Changes": [
+                    "Ahora puedes editar etiquetas de Find It! directamente en la aplicación de mods y activos. Los assets se sincronizan con el juego.",
+                    "Pestaña de \"Referencias\" en la página de un paquete para ver todos los demás paquetes que hacen referencia a él.",
+                    "Opción para hacer que los paquetes opcionales usen la misma notificación que los paquetes requeridos.",
+                    "Añadido dialectos de idiomas, chino tradicional (Taiwán), inglés británico y portugués Brasil."
+                ]
+            },
+            {
+                "Name": "Otros cambios",
+                "Changes": [
+                    "Los pseudo-mods ahora incluyen marcadores de IMT, perfiles Render It!, fuentes de Procedural Objects y mods de traducción.",
+                    "Enlaces a la página del paquete, así como otra información como su uso y tipo.",
+                    "Nuevos tipos del perfil: Creación de mapas, Creación de escenarios y Creación de temas.",
+                    "Texto extra en la lista para mostrar cuántos paquetes están ocultos debido al uso de su perfil.",
+                    "Mejorado el botón Acciones para que sea más visible y fácil de acceder.",
+                    "El nuevo icono ahora resplandece basado en lo que está sucediendo, azul indica que el juego se está ejecutando, rojo significa que no hay conexión a internet, y un rápido resplandor significa que está lanzando o cerrando el juego."
+                ]
+            }
+        ]
+    }
+]

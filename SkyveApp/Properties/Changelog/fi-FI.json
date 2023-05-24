@@ -1,0 +1,335 @@
+[
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Tervetuloa muutoslokin aikakauteen",
+        "ChangeGroups": [
+            {
+                "Name": "Uusi",
+                "Changes": [
+                    "Lisätty 'Peruuta kaikki' -painike sisältösivujen toimintoihin.",
+                    "Lisätty apuohjelma osio tilata puuttuvia kohteita BOB config.",
+                    "Lisätty vaihtoehto, jossa suodattimet ja toiminnot ovat oletuksena auki.",
+                    "Lisätyt muutosloki-sivut, näet sen uusissa versioissa tai käyttämällä sen painiketta Ohje-osioissa."
+                ]
+            },
+            {
+                "Name": "Parannukset",
+                "Changes": [
+                    "Lisätty yhteensopivuusraportti rikkoutuneille omaisuuserille",
+                    "Listaamattomat paketit ovat nyt oikea nimi ja pikkukuva.",
+                    "Paikat kansioiden asetuksille heijastavat nyt käyttöjärjestelmäsi oikein.",
+                    "Ctrl + Klikkaa tekijän nimeä lisätäksesi ne suodattimeesi"
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Kiinteitä vanhoja profiileja ei muunneta ensimmäisen käynnistyksen jälkeen.",
+                    "Kiinteä paikallinen omaisuus ei päivity automaattisesti ulkoisten muutosten jälkeen.",
+                    "Kiinteä paikallisten resurssien poistaminen hiiren kakkospainikkeella valikosta poistaen kaikki paikalliset resurssit vain yhden sijasta",
+                    "Kiinteä muuntaminen LOT 1 -profiilit, jolloin varat on merkitty ”paikallisiksi”",
+                    "Kiinteät 'todelliset' kansiot vaihdetaan tallennettaessa Linux- ja Mac-käyttäjiä.",
+                    "Kiinteät Linux- ja Mac-käyttäjät eivät voi luoda loki-zip-koodia."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Lisätty ohje & lokit -osio",
+                "Changes": [
+                    "Käyttää lokejasi helposti.",
+                    "Nopeasti tarkastele virheitä viimeisimmässä / nykyisessä peliistunnossa.",
+                    "Yksinkertaista lokitiedostoa keskittyäksesi siihen, mitä todella tapahtuu.",
+                    "Jaa zip-tiedosto, joka sisältää kaikki tarvittavat lokit, jotta joku auttaa sinua."
+                ]
+            },
+            {
+                "Name": "Parannukset",
+                "Changes": [
+                    "Muutti suodattimien kuvakkeita niin, että ne heijastavat luettelossa käytettyjä oikeita kuvakkeita."
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Korjaa tuontikokoelman teksti tilauksen ja tilauksen peruuttamisen osalta.",
+                    "Korjattu kartan valinta uudelle pelille, joka ei anna käyttäjien valita vaniljakartta."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Korjattu vika, joka aiheutti äärettömän lataamisen joillekin käyttäjille."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Muutokset",
+                "Changes": [
+                    "Poistettu tilaus välilehti pelin sisäisistä modin asetuksista.",
+                    "Profiilia ladatessa ei oteta käyttöön kiinteitä DLC-koodeja.",
+                    "Korjattu kieli vaihtoehto on tyhjä joillekin ihmisille.",
+                    "Uudelleen lataaminen höyrystä ei enää pakota tarkennusta takaisin työkaluun.",
+                    "Muut käyttöliittymän muutokset."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Muutokset",
+                "Changes": [
+                    "Lisäämällä infop- ponnahdusikkuna, kun tilaat kohteita ensimmäistä kertaa.",
+                    "Lisätty varoitus teksti kojelautaan, kun sinulla on useita LOM instansseja asennettu.",
+                    "Lisätty pieniä tunnisteita pakettien otsikoiden vieressä.",
+                    "Lataa uudelleen lataustilaustyökalu käynnistää lataamisen ja sulkee sovelluksen samalla kun se päivitetään.",
+                    "Korjattu ja parannettu nopeutta Ladataan Screen Mod raportteja."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta Julkinen Julkaisu",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Esittelyssä profiilin peruskorjaus",
+        "ChangeGroups": [
+            {
+                "Name": "Profiilin Muutokset",
+                "Changes": [
+                    "Muutti profiililistan muotoilua. @ info",
+                    "Suosikki profiilit näytetään nyt hallintapaneelillasi, jotta niiden välillä voi vaihtaa helposti.",
+                    "Lisätty ”Muut profiilit” -osio paketin sivulle, jotta ne voidaan helposti sulkea pois tai sisällyttää muihin profiileihin",
+                    "Lisää uusia Profiilin lajitteluvaihtoehtoja. Valittu lajittelu muistetaan nyt koko istunnon ajan.",
+                    "Lisätty hiiren kakkospainikkeella toiminnot sisältölistassa sulkemaan tai sisällyttämään kohteen kaikkiin paketteihisi.",
+                    "Lisätty painike, jolla voit tarkastella Profiilin tiedostoa tietokoneellasi.",
+                    "Voit nyt määrittää väriä profiileillesi ja profiileillesi.",
+                    "Voit nyt luoda työpöydän pikakuvakkeen profiileillesi.",
+                    "Voit nyt tuoda LOT 1 -profiilin 'Lisää profiili' -osiossa."
+                ]
+            },
+            {
+                "Name": "Parannukset",
+                "Changes": [
+                    "Steam-linkit avautuvat nyt Steamin ikkunan sisälle. Tämä voidaan kytkeä pois päältä asetuksista.",
+                    "Paikalliset varat on nyt oikein ryhmitetty kansioihin, joissa ne ovat.",
+                    "Paradox-tilisi paneeli näytetään aina tästä lähtien.",
+                    "Yläreunassa olevilla ikkunanpainikkeilla on nyt kuvakkeet selittääkseen toimintojaan.",
+                    "Parantanut sisältöluettelon sivujen reagointikykyä.",
+                    "Haku sisältöluettelosta on nyt paljon nopeampi.",
+                    "Modin lataus välimuistissa; se lisää Windows & Linuxin kuormitusta ja nopeuttaa huomattavasti macOS:n kuormia.",
+                    "Voit nyt luoda zip-tiedoston lokeista, kun peli on käynnissä."
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Sisältöluettelon sivuilla tapahtuu kiinteitä jäädytyksiä.",
+                    "Kiinteiden profiilien automaattinen tallennus ei toimi oikein.",
+                    "Korjattu ei voi käyttää Workshop karttoja ja tallennettuja pelejä profiiliasetuksissa",
+                    "Mukautettuja karttoja ei ladata, kun ne on valittu profiilin asetuksista.",
+                    "Kiinteä lataus profiileja macOS & Linux ei aina sovellu oikein.",
+                    "Ottaa mukautetun sijainnin LSMR raportti tiedostoja nyt oikein alkaa sieltä, kun valitset raportin tiedosto Utilities sivulla."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Uusi & Parannettu",
+                "Changes": [
+                    "Lisätty apuohjelmat sivulle tuonti mistä tahansa tekstitiedostosta tai leikepöydältä.",
+                    "BOB-tuonti on nyt yleinen XML-tuonti esittämällä minkä tahansa XML-muodon, joka sisältää pakettitunnuksia."
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Korjattu kokoelman URL-osoitteen lataaminen ei joskus osaa tunnusta oikein.",
+                    "Kiinteä LOT tulee reagoimattomaksi Mac/Linuxissa, kun tilaus paketista."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Kevätpesun päivitys",
+        "ChangeGroups": [
+            {
+                "Name": "Suodata & Hae Muutokset",
+                "Changes": [
+                    "Lisätty uusi tekijä suodatin pudota alas.",
+                    "Lisätty lisää toimia sisältöluetteloissa oleviin tunnisteisiin.",
+                    "Lisätty uusi \"Kaikki ongelmat\" vaihtoehto \"Paketin tila\" ja \"Yhteensopivuus raportti\" pudotetaan.",
+                    "Kaikki suodatintoiminnot on nyt suoritettu Ctrl+Clickillä, lisäsi vaihtoehdon vaihtaaksesi tämän toiminnon.",
+                    "Uudelleen suodatus käyttäen pikanäppäimiä luettelossa nyt poistaa kohteen suodattimestasi.",
+                    "Termien erottaminen pilkulla hakussasi jakaa hakun, joka vastaa mitä tahansa termiä (OR)\r\n\t- • Jos lisäät termiä '+' termin alussa (AND)\r\n\t- • Lisätään '-' termin alussa sulkee pois kohteet, jotka vastaavat tuota termiä\r\n\r\nEsimerkkejä uudesta hausta\r\n\t: • auto, kuorma-auto (vastaa 'auto' TAI 'kuorma-auto')\r\n\t¶ • rakennus, huoneisto +european (vastaa 'eurooppa' JA ['rakennus' TAI 'huoneisto'])\r\n\t¶ • condo, house -rico +american (vastaa 'american' JA ['condo' TAI 'house'] JA EI 'rico')"
+                ]
+            },
+            {
+                "Name": "Käyttöliittymän & Ux- Muutokset",
+                "Changes": [
+                    "Toteutettu uusi kuvake järjestelmä, joka skaalautuu kaikki kuvakkeet sopivalla tavalla käyttöliittymän mittakaavassa.",
+                    "Listat on muotoiltu uudelleen, sisältösivujen suorituskykyä ja reagointikykyä on parannettu rajusti.",
+                    "Lisätty lajittelutilauksen vaihtaminen valitaksesi Ascending ja Descending lajittelun.",
+                    "Siirsi ”Toimet” -osion sisältösivuille ja lisäsi 2 uutta vaihtoehtoa.",
+                    "Osittain mukana tulleilla paketeilla on nyt eri käyttöliittymä listalla.",
+                    "Parannettu painikkeita ja suodata kontrollit sisältöluetteloissa, vähentää niiden kokoa ja lisätä enemmän visuaalisia vihjeitä.",
+                    "Muutti mahdollisuutta lisätä luetteloiden kohteiden kokoa leikkurilla kasvattaaksesi niiden kokoa, parannettu laajennetun luettelon kohteiden käyttöliittymä ja soveltanut tätä toimintoa muihin sovelluksessa oleviin luetteloihin.",
+                    "Lisäsi Ctrl+[0-9] -pikakuvakkeen vaihtaaksesi käytettävissä olevien välilehtien välillä.",
+                    "Vaihdeltiin kaikki kaksoispainikkeet ja valitsimen sivut.",
+                    "Animaatiot on nyt oletusarvoisesti poistettu käytöstä macOS & Linuxissa.",
+                    "Niin paljon lisää Käyttöliittymän parannuksia, muutoksia ja korjauksia menetin count."
+                ]
+            },
+            {
+                "Name": "Tiedoston Valinnan Vahvista",
+                "Changes": [
+                    "Updated the UI of the file selection screens.",
+                    "Lisätty Pinned kansiot helposti käyttää merkityksellisiä kansioita.",
+                    "Lisätty työpajan osio, jotta voit helposti valita työpajakartat ja säästöt.",
+                    "Lisätty lajittelu pudotus & lajittele tilauksen vaihtaminen",
+                    "Lisätty listan/ruudukon näkymän vaihtaminen."
+                ]
+            },
+            {
+                "Name": "Virheiden Korjaukset",
+                "Changes": [
+                    "Kiinteä käynnistys LOT sen jälkeen, kun monitori oli aiemmin päässyt pois päältä, jolloin ikkuna nyt näkyy.",
+                    "Kiinteä LHT vaihtoehto ei toimi käynnistettäessä uuteen karttaan.",
+                    "Kiinteä kirjailija sivuja ei auki oikein Steam.",
+                    "Korjattu jäädytys tapahtuu haettaessa samalla kun 'Subscribe Time' -lajittelu on valittu."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Korjaamopakettien Puhdistus",
+                "Changes": [
+                    "Lisätty uusia toimintoja, jotta voit helposti käsitellä Steamin ja ladattujen pakettien välisiä eroavaisuuksia.",
+                    "Paketit, joita et ole tilannut, eivät enää lataudu peliin.",
+                    "Pelin käynnistäminen kun LOT on auki, poistaa automaattisesti kaikki paketit, joita et ole tilannut, mutta ne ladataan tietokoneellesi.",
+                    "Lisätty painike Apuohjelmat välilehdessä manuaalisesti ajaa tämä puhdistus ja pakottaa ladata puuttuvat paketit."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Uusi",
+                "Changes": [
+                    "Lisätty mahdollisuus poistaa automaattinen puhdistus käytöstä pelin avaamisen yhteydessä.",
+                    "Lisätty mukautettu argumentit laatikko kehittyneitä käynnistys asetuksia."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Äänestä & Tilaajien Kuvake",
+                "Changes": [
+                    "Lisäsi uuden kuvakkeen paketin viereen, joka näyttää nopean yhteenvedon paketin äänistä ja tilaajien määrästä.",
+                    "Paina sitä näyttääksesi arvot.",
+                    "Klikkaa kuvaketta saadaksesi perusteellisen kuvauksen tästä ominaisuudesta.",
+                    "Lisätty 'Ääni' ja 'Tilaajien Yhteensä' lajitteluvaihtoehtoja."
+                ]
+            },
+            {
+                "Name": "Omaisuuserän Vaatimukset",
+                "Changes": [
+                    "Tarvittavat kohteet näytetään korjaamon sivulla on nyt integroitu Load Order Tool.",
+                    "Nämä tiedot sisällytetään nyt yhteensopivuusraporttiin, jotta näet nopeasti ja helposti mitä et puutu."
+                ]
+            },
+            {
+                "Name": "Muut Muutokset",
+                "Changes": [
+                    "Päivitetään Pakettisivu, joka vastaa sisältöluetteloissa näytettyjä tietoja.",
+                    "Toissijaiset sisältölistat kuten 'Puuttuvat paketit' ja 'Työpajojen kokoelma' käyttävät nyt samaa käyttöliittymää kuin tärkeimmät sisältösivut, mahdollistetaan yksinkertaistettu kokemus ja enemmän vaihtoehtoja.",
+                    "Lisätty 'New Asset' ja 'Lataa Asset' käynnistysasetukset profiiliin, jotta ne ladataan nopeasti Asset Editoriin."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Esittää, Skyve, viimeinen seuraaja Load Order Mod 1/2 ja Yhteensopivuusraportti.\r\nComing for C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Yhteensopivuutta Koskevan Raportin Uudelleentarkastelu",
+                "Changes": [
+                    "Yhteensopivuusraportti on nyt integroitu suoraan Skyveen.",
+                    "Suositukset ja info teksti ovat nyt selkeämpiä ja helpompi hallita.",
+                    "Lisätty torkku-painike hylätäksesi tietyn yhteensopivuusilmoituksen.",
+                    "Tarvittavat kohteet ohjataan automaattisesti pakettien viimeisimpään seuraajaan.",
+                    "Paikalliset paketit sovitetaan automaattisesti nettivastineeseen, ja niissä näytetään Steamin tiedot ja osoitetaan niiden yhteensopivuus oikein.",
+                    "Voit nyt pyytää tarkista paketin, joka ilmoittaa meille yhteensopivuustietoihin sisältyvistä puuttuvista tiedoista.",
+                    "Yhteensopivuutta koskevan raportin välilehti on nyt saatavilla."
+                ]
+            },
+            {
+                "Name": "Uudet Ominaisuudet",
+                "Changes": [
+                    "Voit nyt muokata Etsi sitä! tagit suoraan sovelluksessa modeihin ja resursseihin. Varat on synkronoitu pelin kanssa.",
+                    "Lisätty \"Viittaukset\" -välilehti paketin sivulle nähdäksesi kaikki muut siihen viittaavat paketit.",
+                    "Lisätty vaihtoehto tehdä valinnaisia paketteja käyttää samaa ilmoitusta kuin vaaditut paketit.",
+                    "Lisätty kielen murteita, Kiinan perinteinen (Taiwan), Englanti Iso-Britannia, ja Portugalin Brasilia."
+                ]
+            },
+            {
+                "Name": "Muut Muutokset",
+                "Changes": [
+                    "Pseudo-modeihin kuuluvat nyt IMT Markings, Render it! Presets, Procedural Objects Fonts, ja käännösmoodit.",
+                    "Lisätty linkkejä pakettisivulle sekä muita tietoja, kuten sen käyttö & tyyppi.",
+                    "Lisätty uusia profiilin käyttöjä: Kartan luonti, Skenaarion Making, ja Teeman Making.",
+                    "Lisätty ylimääräinen teksti listaan näyttääksesi, kuinka monta pakettia on piilotettu profiilin käytön vuoksi.",
+                    "Parannettu Toiminnot-painiketta, jotta se olisi näkyvämpi ja helpompi käyttää.",
+                    "Uusi kuvake hehkuu nyt sen perusteella, mitä tapahtuu, sininen osoittaa, että peli on käynnissä, punainen tarkoittaa ei internet-yhteyttä, ja nopea hehku tarkoittaa sen käynnistämistä tai sulkemista peli."
+                ]
+            }
+        ]
+    }
+]

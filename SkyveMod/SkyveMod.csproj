@@ -1,0 +1,166 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../Version.props" />
+	<PropertyGroup>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<TargetFramework>net35</TargetFramework>
+		<Deterministic>false</Deterministic>
+		<LangVersion>latest</LangVersion>
+		<DebugType>full</DebugType>
+		<Configurations>Debug;Release;Stable</Configurations>
+		<DebugSymbols>true</DebugSymbols>
+		<PathMap>$(MSBuildProjectDirectory)/=$(ProjectName)/</PathMap>
+		<DefineConstants Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ManagedDLLPath>../dependencies</ManagedDLLPath>
+		<SteamPath>~/Library/Application Support/Steam/</SteamPath>
+		<SteamPath Condition="! Exists ('$(SteamPath)')">$(ProgramFiles)/Steam</SteamPath>
+		<SteamPath Condition="! Exists ('$(SteamPath)')">$(Registry:HKEY_CURRENT_USER\Software\Valve\Steam@SteamPath)</SteamPath>
+		<CSPath>$(SteamPath)/steamapps/common/Cities_Skylines</CSPath>
+		<ManagedDLLPath Condition="!  Exists ('$(ManagedDLLPath)')">$(CSPath)/Cities_Data/Managed</ManagedDLLPath>
+		<AssemblySearchPaths>
+			$(AssemblySearchPaths);
+			$(ManagedDLLPath);
+			$(CitiesSkylinesBinaries);
+			../libs/;
+		</AssemblySearchPaths>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+		<DefineConstants>$(DefineConstants);Stable</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="CitiesHarmony.API" Version="2.0.0" />
+		<PackageReference Include="Mono.Unofficial.pdb2mdb" Version="4.2.3.4" />
+		<PackageReference Include="GitInfo" Version="2.1.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp" />
+		<Reference Include="ColossalManaged" />
+		<Reference Include="ICities" />
+		<Reference Include="System.Configuration" />
+		<Reference Include="UnityEngine" />
+		<Reference Include="UnityEngine.UI" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SkyveInjections\SkyveInjections.csproj">
+			<Private>false</Private>
+			<Aliases>Injections</Aliases>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\SkyveApp\Legacy\DLC.cs" Link="Shared\DLC.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="KianCommons\KianCommons\Backport\**" />
+		<Compile Remove="KianCommons\KianCommons\Math\**" />
+		<Compile Remove="KianCommons\KianCommons\ObjUnity3D\**" />
+		<Compile Remove="KianCommons\KianCommons\obj\**" />
+		<Compile Remove="KianCommons\KianCommons\Patches\**" />
+		<Compile Remove="KianCommons\KianCommons\Properties\**" />
+		<Compile Remove="KianCommons\KianCommons\Serialization\**" />
+		<Compile Remove="KianCommons\KianCommons\StockCode\**" />
+		<Compile Remove="KianCommons\KianCommons\Tool\**" />
+		<Compile Remove="KianCommons\KianCommons\UI\**" />
+		<Compile Remove="KianCommons\KianCommons\Util\**" />
+		<Compile Remove="KianCommons\libs\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\Backport\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\Math\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\ObjUnity3D\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\obj\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\Patches\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\Properties\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\Serialization\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\StockCode\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\Tool\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\UI\**" />
+		<EmbeddedResource Remove="KianCommons\KianCommons\Util\**" />
+		<EmbeddedResource Remove="KianCommons\libs\**" />
+		<None Remove="KianCommons\KianCommons\Backport\**" />
+		<None Remove="KianCommons\KianCommons\Math\**" />
+		<None Remove="KianCommons\KianCommons\ObjUnity3D\**" />
+		<None Remove="KianCommons\KianCommons\obj\**" />
+		<None Remove="KianCommons\KianCommons\Patches\**" />
+		<None Remove="KianCommons\KianCommons\Properties\**" />
+		<None Remove="KianCommons\KianCommons\Serialization\**" />
+		<None Remove="KianCommons\KianCommons\StockCode\**" />
+		<None Remove="KianCommons\KianCommons\Tool\**" />
+		<None Remove="KianCommons\KianCommons\UI\**" />
+		<None Remove="KianCommons\KianCommons\Util\**" />
+		<None Remove="KianCommons\libs\**" />
+		<Compile Remove="KianCommons\KianCommons\LifeCycleBase.cs" />
+		<Compile Remove="KianCommons\KianCommons\Plugins\AdaptiveRoadsUtil.cs" />
+		<Compile Remove="KianCommons\KianCommons\Plugins\CSURUtil.cs" />
+		<Compile Remove="Patches\ContentManager\DebugStackTime.cs" />
+		<Compile Remove="Patches\HotReload\DebugStackTime.cs" />
+		<Compile Remove="Patches\LoadingProfiler_NewEventPatch.cs" />
+		<Compile Remove="Patches\LoadLevel\ForceLSMPatch.cs" />
+		<Compile Remove="Patches\SetSceneProgressPatch.cs" />
+		<Compile Remove="Util\Log.cs" />
+		<None Remove="KianCommons\.git" />
+		<None Remove="KianCommons\.gitattributes" />
+		<None Remove="KianCommons\.gitignore" />
+		<None Remove="KianCommons\KianCommons\.editorconfig" />
+		<None Remove="Resources\fully_downloaded.png" />
+		<None Remove="Resources\not_downloaded.png" />
+		<None Remove="Resources\partially_downloaded.png" />
+		<Compile Include="KianCommons\KianCommons\Patches\HarmonyUtil.cs" />
+		<Compile Include="KianCommons\KianCommons\Patches\TranspilerUtils.cs" />
+		<Compile Include="KianCommons\KianCommons\UI\TextureExtensions.cs" />
+		<Compile Include="KianCommons\KianCommons\UI\TextureUtil.cs" />
+		<Compile Include="KianCommons\KianCommons\UI\UIHelperExtension.cs" />
+		<Compile Include="KianCommons\KianCommons\UI\UIUtils.cs" />
+		<Compile Include="KianCommons\KianCommons\Util\Assertion.cs" />
+		<Compile Include="KianCommons\KianCommons\Util\EnumerationExtensions.cs" />
+		<Compile Include="KianCommons\KianCommons\Util\HelpersExtensions.cs" />
+		<Compile Include="KianCommons\KianCommons\Util\Prompt.cs" />
+		<Compile Include="KianCommons\KianCommons\Util\ReflectionHelpers.cs" />
+		<Compile Include="KianCommons\KianCommons\Util\StringExtensions.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="Resources\clipboard.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\PreviewImage.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\PreviewImageBeta.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Resources\Status.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="resub.bat">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+	<Target Name="DeployToModDirectory" AfterTargets="Build">
+		<GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+			<Output TaskParameter="Assemblies" ItemName="Targets" />
+		</GetAssemblyIdentity>
+		<ItemGroup>
+			<AuxiliaryFiles Include="$(TargetDir)CitiesHarmony.API.dll;$(TargetDir)*.bat;" />
+			<ResourceFiles Include="$(TargetDir)/Resources/*.png" />
+			<VersionNumber Include="@(Targets->'%(Version)')" />
+		</ItemGroup>
+		<PropertyGroup>
+			<DeployDir Condition="'$(DeployDir)'==''">$(LOCALAPPDATA)/Colossal Order/Cities_Skylines/Addons/Mods/$(SolutionName)/</DeployDir>
+			<Now>$([System.DateTime]::Now.ToString("HH:mm:ss"))</Now>
+			<pdb2mdb>$(PkgMono_Unofficial_pdb2mdb)/tools/pdb2mdb.exe</pdb2mdb>
+		</PropertyGroup>
+
+		<Delete Files="$(TargetPath).mdb" />
+		<Exec Command="&quot;$(pdb2mdb)&quot; &quot;$(TargetPath)&quot;" />
+		<Copy SourceFiles="$(TargetPath).mdb" DestinationFolder="$(DeployDir)" />
+
+		<Copy SourceFiles="@(AuxiliaryFiles)" DestinationFolder="$(DeployDir)" />
+		<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(DeployDir)Resources" />
+		<Move SourceFiles="$(DeployDir)Resources/PreviewImage.png" DestinationFolder="$(DeployDir)" />
+		<Delete Files="$(DeployDir)$(TargetFileName)" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
+		<Message Importance="high" Text="AssemblyVersion=@(VersionNumber) time=$(Now)" />
+	</Target>
+</Project>
