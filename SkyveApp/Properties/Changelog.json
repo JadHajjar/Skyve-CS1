@@ -361,5 +361,19 @@
         ]
       }
     ]
+  },
+  {
+    "Version": "3.0.3",
+    "Date": "2023-05-24",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the options tab not opening for macOS & Linux.",
+          "Fixed the Help & Logs tab not loading your current log automatically.",
+          "Fixed the log file path being wrong on Linux."
+        ]
+      }
+    ]
   }
 ]

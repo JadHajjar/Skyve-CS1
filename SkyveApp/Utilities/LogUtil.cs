@@ -33,7 +33,7 @@ public static class LogUtil
 	public static string GameLogFile => LocationManager.Platform switch
 	{
 		Platform.MacOSX => $"/Users/{Environment.UserName}/Library/Logs/Unity/Player.log",
-		Platform.Linux => $"/.config/unity3d/Colossal Order/Cities: Skylines/Player.log",
+		Platform.Linux => $"/home/{Environment.UserName}/.config/unity3d/Colossal Order/Cities_ Skylines/Player.log",
 		_ => LocationManager.Combine(LocationManager.GamePath, "Cities_Data", "output_log.txt")
 	};
 
@@ -45,7 +45,7 @@ public static class LogUtil
 
 	public static string CreateZipFileAndSetToClipboard(string? folder = null)
 	{
-		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_hh-mm-tt}.zip");
+		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_HH-mm}.zip");
 
 		using (var fileStream = File.Create(file))
 		{
@@ -67,8 +67,12 @@ public static class LogUtil
 		{
 			if (ExtensionClass.FileExists(filePath))
 			{
+				var tempFile = Path.GetTempFileName();
+
+				ExtensionClass.CopyFile(filePath, tempFile, true);
+
 				try
-				{ zipArchive.CreateEntryFromFile(filePath, $"Other Files\\{Path.GetFileName(filePath)}"); }
+				{ zipArchive.CreateEntryFromFile(tempFile, $"Other Files\\{Path.GetFileName(filePath)}"); }
 				catch { }
 			}
 		}

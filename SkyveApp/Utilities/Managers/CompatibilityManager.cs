@@ -322,7 +322,7 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont or PackageType.ContentPackage && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
+		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
 		{
 			CompatibilityUtil.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
 			{
