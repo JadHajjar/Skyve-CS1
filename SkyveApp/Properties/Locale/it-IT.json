@@ -423,7 +423,7 @@
     "Plural": "Profili"
   },
   "IncludedCount": {
-    "One": "{0} {1} inclusi",
+    "One": "{0} {1} incluso",
     "Plural": "{0} {1} inclusi"
   },
   "EnabledCount": {
@@ -431,19 +431,19 @@
     "Plural": "{0} {1} abilitati"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} inclusi e abilitati",
+    "One": "{0} {1} incluso e abilitato",
     "Plural": "{0} {1} inclusi e abilitati"
   },
   "LoadedCount": {
-    "One": "{0} {1} caricati",
+    "One": "{0} {1} caricato",
     "Plural": "{0} {1} caricati"
   },
   "ShowingCount": {
-    "One": "Mostrati {0} {1}",
+    "One": "Mostrato {0} {1}",
     "Plural": "Mostrati {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Mostrati {0} {1}, {2}",
+    "One": "Mostrato {0} {1}, {2}",
     "Plural": "Mostrati {0} {1}, {2}"
   },
   "ItemsHidden": {

@@ -13,7 +13,7 @@
   "Links": "Links",
   "StatusesCount": "Situações ({0})",
   "InteractionCount": "Interações ({0})",
-  "AddStatus": "Adicionar Situação",
+  "AddStatus": "Adicionar Estado",
   "AddInteraction": "Adicionar Interação",
   "NotReviewed": "Ainda não analisado",
   "Stable": "Estável",
@@ -66,7 +66,7 @@
   "ReuseData": "Reutilizar dados anteriores",
   "ReuseData_Tip": "Reutilize os dados de compatibilidade do seu último pacote salvo para este.\nSegure Shift para aplicar e continuar",
   "PleaseReviewTheStability": "Por favor, reveja a estabilidade deste pacote antes de salvar.",
-  "PleaseReviewPackageStatuses": "Por favor, revise a situação deste pacote antes de salvar.\nAlguns têm um tipo de Estado inválido.",
+  "PleaseReviewPackageStatuses": "Por favor, revise as situações deste pacote antes de salvar.\nAlgumas possuem um Tipo de Estado inválido.",
   "PleaseReviewPackageInteractions": "Revise as interações deste pacote antes de salvar.\nAlguns possuem um tipo de interação inválida ou não tem um pacote vinculado.",
   "PleaseReviewPackageUsage": "Por favor, selecione um uso válido para este pacote.",
   "Interaction_Alternative": {
@@ -98,7 +98,7 @@
     "Plural": "Os seguintes pacotes são sucessores de '{0}'."
   },
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
-  "Status_Succeeded": "'{0}' foi sucedido por '{1}'.\n\nVocê já está usando '{1}' então não há mais necessidade de ter o '{0}'.",
+  "Status_Succeeded": "'{0}' foi substituído por '{1}'.\n\nVocê já está usando '{1}', então não precisa mais de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto e não é mais suportado pelo seu autor.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
@@ -106,21 +106,21 @@
   },
   "Status_CausesIssues": "'{0}' causa problemas com o seu jogo.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "Ao criar um jogo e salva-lo com '{0}' habilitado, você não será mais capaz de carregar esse jogo salvo se '{0}' estiver desativado.",
-    "One": "Ao criar um jogo salvo com '{0}' habilitado, você não será mais capaz de carregar esse jogo salvo se '{0}' estiver desativado.\n\nUse '{1}' para recuperar seu jogo salvo se necessário. Leia a descrição da Oficina para mais informações."
+    "Zero": "Ao criar um salvamento com '{0}' habilitado, você não poderá mais carregar esse salvamento se '{0}' estiver desabilitado.",
+    "One": "Ao criar um salvamento com '{0}' habilitado, não será possível carregar esse salvamento caso '{0}' seja desativado.\n\nUse '{1}' para recuperar seu salvamento se necessário. Leia a descrição na Oficina para mais informações."
   },
   "Status_TestVersion": {
-    "Zero": "Esta é uma versão 'Teste' do mod original. Esteja ciente que atualizações nele podem causar problemas inesperados.",
-    "One": "Esta é uma versão 'Teste' de '{1}'.\nEsteja ciente que atualizações nele podem causar problemas inesperados."
+    "Zero": "Esta é uma versão de 'Teste', esteja ciente que versões de teste de mods podem causar problemas e que atualizações podem resultar em erros inesperados.",
+    "One": "Esta é uma versão de 'Teste' do '{1}'.\n\nEsteja ciente que atualizações podem causar problemas inesperados."
   },
   "Status_MissingDlc": {
-    "One": "Você está sem uma DLC para usar este pacote.",
-    "Plural": "Está faltando as seguintes DLCs para usar este pacote."
+    "One": "Você está sem um DLC necessário para usar este pacote.",
+    "Plural": "Você está sem os seguintes DLCs necessários para usar este pacote."
   },
-  "Status_DependencyMod": "Este é um mod de dependência, mas não parece que você esteja usando qualquer pacote que o exija.",
+  "Status_DependencyMod": "Este é um mod de dependência, mas parece que você não está usando nenhum pacote que o requer.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
-  "Status_MusicCanBeCopyrighted": "A música dentro deste pacote pode ter direitos autorais. É melhor não usá-la durante o streaming.",
-  "Status_IncompleteDescription": "A descrição deste mod é muito pequena. Você não deve usá-lo a menos que confie em seu autor.",
+  "Status_MusicCanBeCopyrighted": "A música contida neste pacote pode estar protegida por direitos autorais. É melhor não usá-la durante transmissões ao vivo.",
+  "Status_IncompleteDescription": "A descrição na Oficina deste mod é muito curta. Você não deve usá-lo a menos que confie em seu autor.",
   "OutputText": "Saída Esperada",
   "Stability_AssetNotReviewed": "Este recurso ainda não foi analisado ainda.\n\nAs informações de compatibilidade podem não ser precisas; embora os recursos sejam geralmente estáveis",
   "Stability_NotReviewed": "Este pacote ainda não foi analisado.\nA informação de compatibilidade pode não ser precisa.",
@@ -173,23 +173,23 @@
   "RequestReviewInfo": "Está enfrentando problemas com este pacote?\nSolicite uma nova análise aqui:",
   "RequestReview": "Solicitar Análise",
   "MissingDependencyCount": {
-    "One": "{0} {1} está faltando dependências",
-    "Plural": "{0} {1} estão faltando dependências"
+    "One": "{0} {1} Está faltando a dependência",
+    "Plural": "{0} {1} Estão faltando as dependências"
   },
   "CautionCount": "{0} {1} onde é aconselhado cuidado",
   "WarningCount": "{0} {1} com um aviso",
   "AttentionRequiredCount": {
-    "One": "{0} {1} requer sua atenção",
-    "Plural": "{0} {1} requer sua atenção"
+    "One": "{0} {1} Requer sua atenção",
+    "Plural": "{0} {1} Requerem sua atenção"
   },
   "ExcludeCount": {
-    "One": "{0} {1} deve ser excluído",
-    "Plural": "{0} {1} deve ser excluído"
+    "One": "{0} {1} Deve ser excluído",
+    "Plural": "{0} {1} Devem ser excluídos"
   },
   "UnsubscribeCount": "{0} {1} que você deve cancelar a inscrição",
   "SwitchCount": {
-    "One": "{0} {1} requer mudança para outro",
-    "Plural": "{0} {1} requer mudança para outro"
+    "One": "{0} {1} Requer mudança para outro",
+    "Plural": "{0} {1} Requerem mudança para outro"
   },
   "PackageType": "Tipos de Pacotes",
   "GenericPackage": "Pacote Genérico",
@@ -200,6 +200,6 @@
   "POFont": "Fonte/Módulo de Objeto Procedural",
   "NameList": "Nome-Lista/Traduções do Jogo",
   "ApplyChangedBeforeExit": "Você tem alterações não salvas.\n\nGostaria de aplicar essas alterações antes de continuar?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\nAs atualizações futuras e a estabilidade de seus pacotes não são garantidas.",
   "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes."
 }

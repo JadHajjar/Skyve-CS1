@@ -177,7 +177,7 @@
     "Plural": "{0} {1} are missing dependencies"
   },
   "CautionCount": "{0} {1} where caution is advised",
-  "WarningCount": "{0} {1} with a warning",
+  "WarningCount": "{0} {1} ที่ต้องระวัง",
   "AttentionRequiredCount": {
     "One": "{0} {1} requires your attention",
     "Plural": "{0} {1} require your attention"

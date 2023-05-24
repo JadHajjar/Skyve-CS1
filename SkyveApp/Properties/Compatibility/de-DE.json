@@ -94,11 +94,11 @@
     "Plural": "Ihnen fehlen die folgenden optionalen Pakete für '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' wird von '{1} ' abgeleitet.",
-    "Plural": "'{0}' wird von einem der folgenden Pakete erfolgreich verfolgt."
+    "One": "'{0}' wird von '{1}' abgelöst.",
+    "Plural": "'{0}' wird von einem der folgenden Pakete abgelöst."
   },
   "Interaction_Identical": "Dies sind mehrere Versionen des gleichen Paketes.\r\n\r\nSie sollten nur eine von ihnen auswählen.",
-  "Status_Succeeded": "'{0}' wird von '{1}' abgeleitet.\r\n\r\nSie verwenden bereits '{1}', so dass es keine Notwendigkeit mehr für '{0}' gibt.",
+  "Status_Succeeded": "'{0}' wird von '{1}' abgelöst.\n\nSie verwenden bereits '{1}', sodass es keine Notwendigkeit mehr für '{0}' gibt.",
   "Status_Deprecated": "'{0}' ist veraltet, es wird nicht mehr vom Autor unterstützt.",
   "Status_Reupload": {
     "Zero": "'{0}' ist ein erneutes Hochladen eines Originalpakets.",
@@ -106,60 +106,60 @@
   },
   "Status_CausesIssues": "'{0}' verursacht Probleme mit deinem Spiel.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "Beim Erstellen eines neuen Speichers mit '{0}' aktiviert können Sie diese Speicherung nicht mehr laden, wenn '{0}' deaktiviert ist.",
-    "One": "Beim Erstellen eines neuen Speichers mit '{0}' aktiviert können Sie diese Speicherung nicht mehr laden, wenn '{0}' deaktiviert ist.\r\n\r\nBenutzen Sie '{1}', um Ihren Speicherplatz wiederherzustellen, falls nötig. Lesen Sie die Workshopbeschreibung für weitere Informationen."
+    "Zero": "Wenn sie beim Erstellen eines neuen Spielstands mit '{0}' aktiviert haben, können Sie diesen Spielstand nicht mehr laden, wenn '{0}' deaktiviert ist.",
+    "One": "Wenn sie beim Erstellen eines neuen Spielstands mit '{0}' aktiviert haben, können Sie diesen Spielstand nicht mehr laden, wenn '{0}' deaktiviert ist.\n\nBenutzen Sie '{1}', um ihren Spielstand wiederherzustellen, falls nötig. Lesen Sie die Workshopbeschreibung für weitere Informationen."
   },
   "Status_TestVersion": {
-    "Zero": "This is a 'Test' version of the original mod. Be aware that updates to it might cause unexpected issues.",
-    "One": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "Zero": "Dies ist eine 'Test'-Version, beachten Sie, dass Testversionen von Mods Probleme verursachen können und Aktualisierungen von ihnen zu unerwarteten Fehlern führen können.",
+    "One": "Dies ist eine 'Test'-Version von '{1}'.\n\nBeachten Sie, dass Aktualisierungen zu unerwarteten Problemen führen können."
   },
   "Status_MissingDlc": {
-    "One": "You're missing the '{0}' DLC to use this package.",
+    "One": "Es fehlt ein DLC, um dieses Paket zu verwenden.",
     "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
   },
-  "Status_DependencyMod": "Dies ist ein Abhängigkeitsmod, aber es scheint nicht, als ob Sie ein Paket verwenden, das es erfordert.",
-  "Status_SourceCodeNotAvailable": "Der Quellcode dieses Mods ist nicht verfügbar. Du solltest ihn nur verwenden, wenn du seinem Autor vertraust.",
-  "Status_MusicCanBeCopyrighted": "Die Musik in diesem Paket ist möglicherweise urheberrechtlich geschützt. Am besten sollte sie nicht während des Streamens verwendet werden.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_DependencyMod": "Dies ist eine Abhängigkeitsmod, aber es scheint nicht, als ob Sie ein Paket verwenden, das diese erfordert.",
+  "Status_SourceCodeNotAvailable": "Der Quellcode dieser Mod ist nicht verfügbar. Du solltest sie nur verwenden, wenn du ihrem Autor vertraust.",
+  "Status_MusicCanBeCopyrighted": "Die Musik in diesem Paket ist möglicherweise urheberrechtlich geschützt. Am besten sollte es nicht während des Streamens verwendet werden.",
+  "Status_IncompleteDescription": "Die Workshop-Beschreibung dieser Mod ist zu kurz. Du solltest sie nicht verwenden, es sei denn, du vertraust ihrem Autor.",
   "OutputText": "Erwartete Ausgabe",
-  "Stability_AssetNotReviewed": "Dieses Asset wurde noch nicht überprüft.\r\n\r\nDie Kompatibilitätsinformationen sind möglicherweise nicht genau; obwohl Assets im Allgemeinen stabil sind",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_AssetNotReviewed": "Dieses Asset wurde noch nicht überprüft.\n\nDie Kompatibilitätsinformationen sind möglicherweise nicht präzise; obwohl Assets im Allgemeinen stabil sind",
+  "Stability_NotReviewed": "Dieses Paket wurde noch nicht überprüft.\n\nDie Kompatibilitätsinformationen sind möglicherweise nicht präzise.",
   "Stability_Stable": "Dieses Paket ist stabil.",
   "Stability_NotEnoughInformation": "Es gibt nicht genügend Informationen, um dieses Paket ordnungsgemäß zu überprüfen.",
   "Stability_HasIssues": "Dieses Paket kann Probleme verursachen.\r\nSeien Sie vorsichtig, wenn Sie es verwenden.",
-  "Stability_Broken": "Dieses Paket ist defekt.\r\nEs ist bekannt, dass es entweder das Spiel bricht oder einfach nicht funktioniert.",
-  "Stability_Incompatible": "Dieses Paket ist nicht kompatibel oder bricht das Spiel.\r\n\r\nDu solltest es sofort entfernen.",
+  "Stability_Broken": "Dieses Paket ist defekt.\nEs ist bekannt, dass es entweder das Spiel behindert oder einfach nicht funktioniert.",
+  "Stability_Incompatible": "Dieses Paket ist nicht kompatibel mit dem Spiel oder behindert es.\n\nSie sollten es sofort entfernen.",
   "Stability_Local": "Dieses Paket ist eine lokale Version seiner ursprünglichen Mod '{0}'.\r\n\r\nLokale Versionen werden in der Regel für Testzwecke verwendet oder für den Fall, dass Sie keinen Steam haben.\r\n\r\nÜberprüfen Sie die Links des Pakets, um nach Aktualisierungen für den Mod zu suchen.",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "You should subscribe to the following package.",
-    "Plural": "You should subscribe to these packages."
+    "One": "Sie sollten folgendes Paket abonnieren:",
+    "Plural": "Sie sollten diese Pakete abonnieren:"
   },
-  "Action_RequiresConfiguration": "Du solltest den folgenden Anweisungen folgen:",
+  "Action_RequiresConfiguration": "Sie sollten folgenden Anweisungen folgen:",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "Sie sollten sich zwischen '{0}' und '{1}' entscheiden.",
+    "Plural": "Sie sollten sich zwischen '{0}' und den folgenden Paketen entscheiden."
   },
-  "Action_UnsubscribeThis": "Du solltest '{0} ' abbestellen.",
+  "Action_UnsubscribeThis": "Sie sollten '{0}' abbestellen.",
   "Action_UnsubscribeOther": {
-    "One": "Du solltest '{1} ' abbestellen.",
+    "One": "Sie sollten '{1}' abbestellen.",
     "Plural": "You should unsubscribe from the following packages."
   },
-  "Action_ExcludeThis": "Du solltest '{0} ' ausschließen.",
+  "Action_ExcludeThis": "Sie sollten '{0}' ausschließen.",
   "Action_ExcludeOther": {
-    "One": "Du solltest '{1} ' ausschließen.",
-    "Plural": "You should exclude the following packages."
+    "One": "Sie sollten '{1}' ausschließen.",
+    "Plural": "Folgende Pakete sollten ausgeschlossen werden:"
   },
   "Action_Switch": {
-    "One": "Sie sollten zu '{1} ' wechseln.",
-    "Plural": "You should switch to one of the following packages."
+    "One": "Sie sollten zu '{1}' wechseln.",
+    "Plural": "Sie sollten zu einem der folgenden Pakete wechseln:"
   },
   "NoRequiredDlcs": "Keine erforderlichen DLCs",
   "DlcsSelected": {
     "One": "{0} DLC ausgewählt",
     "Plural": "{0} DLCs ausgewählt"
   },
-  "RequiredDLCs": "Required DLCs/CCPs",
+  "RequiredDLCs": "Erforderliche DLCs/CCP",
   "CRT_Stability": "Stabilität",
   "CRT_Successors": "Nachfolger",
   "CRT_RequiredPackages": "Erforderliche Pakete",
@@ -170,13 +170,13 @@
   "CRT_Status": "Statuses",
   "CRT_Ambiguous": "Unklarheit",
   "LastReviewDate": "Es wurde zuletzt am {0} überprüft",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
-  "RequestReview": "Request Review",
+  "RequestReviewInfo": "Haben Sie Probleme mit dem Paket?",
+  "RequestReview": "Überprüfung anfordern",
   "MissingDependencyCount": {
-    "One": "{0} {1} fehlt an Abhängigkeiten",
+    "One": "{0} {1} fehlen Abhängigkeiten",
     "Plural": "{0} {1} fehlen Abhängigkeiten"
   },
-  "CautionCount": "{0} {1} , wo Vorsicht empfohlen wird",
+  "CautionCount": "{0} {1}, wo Vorsicht geboten wird",
   "WarningCount": "{0} {1} mit einer Warnung",
   "AttentionRequiredCount": {
     "One": "{0} {1} erfordert Ihre Aufmerksamkeit",
@@ -186,7 +186,7 @@
     "One": "{0} {1} sollte ausgeschlossen werden",
     "Plural": "{0} {1} sollte ausgeschlossen werden"
   },
-  "UnsubscribeCount": "{0} {1} , die Sie abmelden sollten",
+  "UnsubscribeCount": "{0} {1}, die Sie abbestellen sollten",
   "SwitchCount": {
     "One": "{0} {1} muss zu einem anderen wechseln",
     "Plural": "{0} {1} müssen zu einem anderen wechseln"
@@ -196,10 +196,10 @@
   "MusicPack": "Musikpaket",
   "ThemeMix": "Theme-Mix",
   "IMTMarkings": "IMT-Markierungen",
-  "RenderItPreset": "Render! Voreinstellung",
+  "RenderItPreset": "Render It! Voreinstellung",
   "POFont": "Verarbeite Objekt-Schrift/-Modul",
-  "NameList": "Name-Liste/Spiele-Übersetzungen",
+  "NameList": "Namensliste/Spielübersetzungen",
   "ApplyChangedBeforeExit": "Sie haben ungespeicherte Änderungen.\r\n\r\nMöchten Sie diese Änderungen anwenden, bevor Sie fortfahren?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "Der Autor von {0}, {1}, ist bekannt als böswillig und/oder für die Aufnahme schädlicher Inhalte wie Viren in ihre Pakete."
+  "AuthorRetired": "Der Autor von {0}, {1}, hat sich zurückgezogen oder ist seit langem inaktiv.\n\nZukünftige Updates & Stabilität für ihre Pakete sind nicht garantiert.",
+  "AuthorMalicious": "Der Autor von {0}, {1}, ist als böswillig bekannt und/oder dafür, schädliche Inhalte wie Viren in ihre Pakete einzubeziehen."
 }

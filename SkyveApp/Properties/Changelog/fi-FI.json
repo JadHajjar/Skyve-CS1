@@ -7,7 +7,7 @@
             {
                 "Name": "Uusi",
                 "Changes": [
-                    "Lisätty 'Peruuta kaikki' -painikkeen sisältösivujen toimintoihin.",
+                    "Lisätty 'Peruuta kaikki' -painike sisältösivujen toimintoihin.",
                     "Lisätty apuohjelma osio tilata puuttuvia kohteita BOB config.",
                     "Lisätty vaihtoehto, jossa suodattimet ja toiminnot ovat oletuksena auki.",
                     "Lisätyt muutosloki-sivut, näet sen uusissa versioissa tai käyttämällä sen painiketta Ohje-osioissa."
