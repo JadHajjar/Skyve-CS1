@@ -188,8 +188,8 @@
   },
   "UnsubscribeCount": "{0} {1} 应该取消订阅",
   "SwitchCount": {
-    "One": "{0} {1} 需要改为使用其它模组",
-    "Plural": "{0} {1} 需要改为使用其它模组"
+    "One": "{0} {1} 需要替换",
+    "Plural": "{0} {1} 需要替换"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
