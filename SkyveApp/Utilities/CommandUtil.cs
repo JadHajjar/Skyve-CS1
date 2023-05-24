@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace SkyveApp.Utilities;
 internal static class CommandUtil

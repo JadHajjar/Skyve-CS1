@@ -29,7 +29,7 @@ namespace SkyveMod.Util {
             Log.Info("Turning off steam panels", true);
             var news = GameObject.FindObjectOfType<NewsFeedPanel>();
             var ad = GameObject.FindObjectOfType<WorkshopAdPanel>();
-            var dlc = GameObject.FindObjectOfType<DLCPanelNew>();
+            var dlc = GameObject.FindObjectOfType<DLCPanel>();
             GameObject.Destroy(news?.gameObject);
             GameObject.Destroy(ad?.gameObject);
             GameObject.Destroy(dlc?.gameObject);

@@ -66,9 +66,13 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		else
 		{
 			if (typeDropDown.Items.Contains(typeDropDown.SelectedItem))
+			{
 				TypeDropDown_SelectedItemChanged(this, EventArgs.Empty);
+			}
 			else
+			{
 				typeDropDown.SelectedItem = typeDropDown.Items[0];
+			}
 		}
 
 		SlickTip.SetTo(I_Copy, "Copy");

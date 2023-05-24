@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;

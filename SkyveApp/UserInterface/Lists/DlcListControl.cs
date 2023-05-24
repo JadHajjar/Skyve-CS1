@@ -127,8 +127,10 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		}
 
 		var dIcon = new DynamicIcon(!owned ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
-		using (var icon = (large ? dIcon.Large : dIcon.Get(rects.IncludedRect.Height / 2)))
+		using (var icon = large ? dIcon.Large : dIcon.Get(rects.IncludedRect.Height / 2))
+		{
 			e.Graphics.DrawImage(icon.Color(owned && rects.IncludedRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor), rects.IncludedRect.CenterR(icon.Size));
+		}
 
 		var iconRectangle = rects.IconRect;
 		var textRect = rects.TextRect;
@@ -159,7 +161,9 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		}
 
 		using (var steamIcon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height / 2))
+		{
 			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, steamIcon, null, rects.SteamRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		}
 
 		if (!isIncluded)
 		{

@@ -331,5 +331,49 @@
         ]
       }
     ]
+  },
+  {
+    "Version": "3.0.1",
+    "Date": "2023-05-23",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
+          "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
+          "Fixed a rare case where the compatibility info was not loading.",
+          "Enabled the ability to request a review for a package that is currently broken.",
+          "Loosened the sensitivity of the 'Partially Downloaded' notification."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.2",
+    "Date": "2023-05-23",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Improved the performance of the app. Quicker load times & less stutters are expected.",
+          "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+          "Fixed mods being detected in the local assets folder."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.3",
+    "Date": "2023-05-24",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the options tab not opening for macOS & Linux.",
+          "Fixed the Help & Logs tab not loading your current log automatically.",
+          "Fixed the log file path being wrong on Linux."
+        ]
+      }
+    ]
   }
 ]

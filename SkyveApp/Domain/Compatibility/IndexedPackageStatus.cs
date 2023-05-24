@@ -24,5 +24,8 @@ public class IndexedPackageStatus
 		}
 	}
 
-	public static implicit operator IndexedPackageStatus(PackageStatus status) => new(status, new());
+	public static implicit operator IndexedPackageStatus(PackageStatus status)
+	{
+		return new(status, new());
+	}
 }

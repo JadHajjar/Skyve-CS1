@@ -63,14 +63,14 @@ public static class Log
 				return;
 			}
 
-			var folder = LocationManager.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
+			var folder = LocationManager.Combine(ISave.CustomSaveDirectory, ISave.AppName);
 			LogFilePath = LocationManager.Combine(folder, LogFileName);
 
 			Directory.CreateDirectory(folder);
 
 			try
 			{
-				if (LocationManager.FileExists(LogFilePath))
+				if (ExtensionClass.FileExists(LogFilePath))
 				{
 					ExtensionClass.DeleteFile(LogFilePath);
 				}
@@ -84,7 +84,8 @@ public static class Log
 
 			var details = typeof(Log).Assembly.GetName();
 			Info($"{details.Name} v{details.Version}", true);
-			Info($"Now = {DateTime.Now}");
+			Info($"Now  = {DateTime.Now}");
+			Info($"Here = {Program.CurrentDirectory}");
 		}
 		catch (Exception ex)
 		{

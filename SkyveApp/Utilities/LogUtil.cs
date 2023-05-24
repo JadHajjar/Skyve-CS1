@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
@@ -32,7 +33,7 @@ public static class LogUtil
 	public static string GameLogFile => LocationManager.Platform switch
 	{
 		Platform.MacOSX => $"/Users/{Environment.UserName}/Library/Logs/Unity/Player.log",
-		Platform.Linux => $"/.config/unity3d/Colossal Order/Cities: Skylines/Player.log",
+		Platform.Linux => $"/home/{Environment.UserName}/.config/unity3d/Colossal Order/Cities_ Skylines/Player.log",
 		_ => LocationManager.Combine(LocationManager.GamePath, "Cities_Data", "output_log.txt")
 	};
 
@@ -44,10 +45,12 @@ public static class LogUtil
 
 	public static string CreateZipFileAndSetToClipboard(string? folder = null)
 	{
-		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_hh-mm-tt}.zip");
+		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_HH-mm}.zip");
 
 		using (var fileStream = File.Create(file))
+		{
 			CreateZipToStream(fileStream);
+		}
 
 		PlatformUtil.SetFileInClipboard(file);
 
@@ -62,9 +65,15 @@ public static class LogUtil
 
 		foreach (var filePath in GetFilesForZip())
 		{
-			if (LocationManager.FileExists(filePath))
+			if (ExtensionClass.FileExists(filePath))
 			{
-				zipArchive.CreateEntryFromFile(filePath, $"Other Files\\{Path.GetFileName(filePath)}");
+				var tempFile = Path.GetTempFileName();
+
+				ExtensionClass.CopyFile(filePath, tempFile, true);
+
+				try
+				{ zipArchive.CreateEntryFromFile(tempFile, $"Other Files\\{Path.GetFileName(filePath)}"); }
+				catch { }
 			}
 		}
 	}
@@ -93,7 +102,7 @@ public static class LogUtil
 
 	private static void AddMainFilesToZip(ZipArchive zipArchive)
 	{
-		if (!LocationManager.FileExists(GameLogFile))
+		if (!ExtensionClass.FileExists(GameLogFile))
 		{
 			return;
 		}
@@ -106,7 +115,7 @@ public static class LogUtil
 
 		zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
 
-		zipArchive.CreateEntryFromFile(tempLotLogFile, "Tool\\LOT2.log");
+		zipArchive.CreateEntryFromFile(tempLotLogFile, "Skyve\\SkyveLog.log");
 
 		var logTrace = SimplifyLog(tempLogFile, out var simpleLogText);
 
@@ -121,17 +130,16 @@ public static class LogUtil
 
 	private static void AddCompatibilityReport(ZipArchive zipArchive)
 	{
-		var profileEntry = zipArchive.CreateEntry("Tool\\CompatibilityReport.json");
+		var profileEntry = zipArchive.CreateEntry("Skyve\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
-		var packages = CentralManager.Packages.AllWhere(x => x.IsIncluded);
-		var reports = packages.ToList(x => CompatibilityManager.GetCompatibilityInfo(x));
-
+		var reports = CentralManager.Packages.ToList(x => x.GetCompatibilityInfo());
+		reports.RemoveAll(x => x.Notification < NotificationType.Unsubscribe && !x.Package.IsIncluded);
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
 	}
 
 	private static void AddProfile(ZipArchive zipArchive)
 	{
-		var profileEntry = zipArchive.CreateEntry("Tool\\LogProfile.json");
+		var profileEntry = zipArchive.CreateEntry("Skyve\\LogProfile.json");
 		using var writer = new StreamWriter(profileEntry.Open());
 		var profile = new Profile("LogProfile");
 		ProfileManager.GatherInformation(profile);

@@ -37,7 +37,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 
 	protected override void UIChanged()
 	{
-	Margin=	Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+		Margin = Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 
 		var ItemHeight = (int)((CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
 		var includeItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;

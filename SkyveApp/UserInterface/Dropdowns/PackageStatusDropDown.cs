@@ -2,7 +2,6 @@
 
 using SkyveApp.Domain.Enums;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 
@@ -36,7 +35,7 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 		GetStatusDescriptors(item, out var text, out var di, out var color);
 
 		using var icon = di.Get(rectangle.Height - 2).Color(hoverState.HasFlag(HoverState.Pressed) || item == DownloadStatusFilter.Any ? foreColor : color);
-		
+
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.Pad(icon.Width + Padding.Left, 0, 0, 0).AlignToFontSize(Font, ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });

@@ -40,7 +40,7 @@ internal class ModLogicManager
 			mod.IsIncluded = false;
 			mod.IsEnabled = false;
 		}
-		else if (IsPseudoMod(mod) &&CentralManager.SessionSettings.UserSettings.HidePseudoMods)
+		else if (IsPseudoMod(mod) && CentralManager.SessionSettings.UserSettings.HidePseudoMods)
 		{
 			mod.IsIncluded = true;
 			mod.IsEnabled = true;
@@ -100,7 +100,7 @@ internal class ModLogicManager
 
 	internal static bool IsPseudoMod(IPackage package)
 	{
-		if (LocationManager.FileExists(LocationManager.Combine(package.Folder, "ThemeMix.xml")))
+		if (ExtensionClass.FileExists(LocationManager.Combine(package.Folder, "ThemeMix.xml")))
 		{
 			return true;
 		}
@@ -118,7 +118,7 @@ internal class ModLogicManager
 		return (_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.Count ?? 0) > 1;
 	}
 
-	internal static IEnumerable<IPackage> GetPackagesThatReference(IPackage package) 
+	internal static IEnumerable<IPackage> GetPackagesThatReference(IPackage package)
 	{
 		var packages = CentralManager.SessionSettings.UserSettings.ShowAllReferencedPackages ? CentralManager.Packages.ToList() : CentralManager.Packages.AllWhere(x => x.IsIncluded);
 

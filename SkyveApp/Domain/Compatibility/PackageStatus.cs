@@ -39,17 +39,17 @@ public class PackageStatus : IPackageStatus<StatusType>, IDynamicSql
 		}
 	}
 
-	public int IntType => (int)Type;
+	public int IntType { get => (int)Type; set => Type = (StatusType)value; }
 #endif
 
 	public PackageStatus()
-    {
-        
-    }
+	{
 
-    public PackageStatus(StatusType type, StatusAction action = StatusAction.NoAction)
-    {
+	}
+
+	public PackageStatus(StatusType type, StatusAction action = StatusAction.NoAction)
+	{
 		Type = type;
 		Action = action;
-    }
+	}
 }

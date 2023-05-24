@@ -30,6 +30,11 @@ public partial class PC_HelpAndLogs : PanelContent
 				SlickTip.SetTo(button, LocaleHelper.GetGlobalText($"{button.Text}_Tip"));
 			}
 		}
+
+		if (LocationManager.Platform is not Platform.Windows)
+		{
+			B_CopyLogFile.Visible = B_CopyZip.Visible = B_LotLogCopy.Visible = false;
+		}
 	}
 
 	protected override void LocaleChanged()
@@ -77,7 +82,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		var tempName = Path.GetTempFileName();
 
-		File.Copy(LogUtil.GameLogFile, tempName);
+		File.Copy(LogUtil.GameLogFile, tempName, true);
 
 		var logs = LogUtil.SimplifyLog(tempName, out _);
 
@@ -108,7 +113,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void DD_LogFile_FileSelected(string obj)
 	{
-		if (!LocationManager.FileExists(obj))
+		if (!ExtensionClass.FileExists(obj))
 		{
 			DD_LogFile.SelectedFile = string.Empty;
 			return;

@@ -2,13 +2,10 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

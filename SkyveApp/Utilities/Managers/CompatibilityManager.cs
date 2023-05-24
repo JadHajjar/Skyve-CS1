@@ -53,6 +53,11 @@ public static class CompatibilityManager
 
 	internal static void CacheReport(IEnumerable<Domain.Package> content)
 	{
+		if (!FirstLoadComplete)
+		{
+			return;
+		}
+
 		foreach (var package in content)
 		{
 			GetCompatibilityInfo(package, true);
@@ -157,7 +162,7 @@ public static class CompatibilityManager
 
 	internal static CompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
 	{
-		if (!FirstLoadComplete && !noCache)
+		if (!FirstLoadComplete)
 		{
 			return new CompatibilityInfo(package, null);
 		}
@@ -271,7 +276,7 @@ public static class CompatibilityManager
 			return info;
 		}
 
-		var author = CompatibilityData.Authors[packageData.Package.AuthorId];
+		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
 
 		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable) && !package.Incompatible && !author.Malicious)
 		{
@@ -317,7 +322,7 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont or PackageType.ContentPackage && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
+		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
 		{
 			CompatibilityUtil.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
 			{
@@ -369,7 +374,8 @@ public static class CompatibilityManager
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), LocaleCR.Get($"Stability_{PackageStability.Local}").Format(SteamUtil.GetItem(packageData.Package.SteamId)?.CleanName()), new PseudoPackage[] { new(packageData.Package.SteamId) });
 		}
-		else if (info.Notification < NotificationType.Unsubscribe)
+
+		if (!author.Malicious && !package.Incompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), ((packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed) ? (LocaleCR.LastReviewDate.Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n") : string.Empty) + LocaleCR.RequestReviewInfo, new PseudoPackage[0]);
 		}
@@ -392,5 +398,13 @@ public static class CompatibilityManager
 		{ User.Manager = await CompatibilityApiUtil.IsCommunityManager(); }
 		catch
 		{ User.Manager = false; }
+	}
+
+	internal static void DoFirstCache(List<Domain.Package> packages)
+	{
+		foreach (var package in packages)
+		{
+			_cache[package] = GenerateCompatibilityInfo(package);
+		}
 	}
 }

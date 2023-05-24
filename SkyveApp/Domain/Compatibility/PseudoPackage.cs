@@ -1,21 +1,24 @@
-﻿using SkyveApp.Domain.Interfaces;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
+﻿using Newtonsoft.Json;
 
-using System.Linq;
+using SkyveApp.Domain.Interfaces;
+using SkyveApp.Utilities;
 
 namespace SkyveApp.Domain.Compatibility;
 
 public class PseudoPackage
 {
-    public ulong SteamId { get; set; }
+	public PseudoPackage()
+	{
+
+	}
+	public ulong SteamId { get; set; }
 
 	public PseudoPackage(ulong steamId)
 	{
 		SteamId = steamId;
 	}
 
-	private IPackage? IPackage;
+	private readonly IPackage? IPackage;
 
 	public PseudoPackage(IPackage iPackage)
 	{
@@ -23,7 +26,10 @@ public class PseudoPackage
 		IPackage = iPackage;
 	}
 
-	public static implicit operator ulong(PseudoPackage pkg) => pkg.SteamId;
+	public static implicit operator ulong(PseudoPackage pkg)
+	{
+		return pkg.SteamId;
+	}
 
-	public IPackage? Package => IPackage ?? SteamUtil.GetItem(SteamId);
+	[JsonIgnore] public IPackage? Package => IPackage ?? SteamUtil.GetItem(SteamId);
 }

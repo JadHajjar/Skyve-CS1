@@ -1,7 +1,7 @@
-﻿using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
+﻿using Newtonsoft.Json;
 
-using Newtonsoft.Json;
+using SkyveApp.Utilities;
+using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Drawing;

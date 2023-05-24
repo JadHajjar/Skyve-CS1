@@ -14,7 +14,6 @@ using SlickControls;
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -43,7 +42,9 @@ public partial class PC_PackagePage : PanelContent
 		var crAvailable = Package.GetCompatibilityInfo().Data is not null;
 
 		if (!crAvailable)
+		{
 			TLP_Info.ColumnStyles[1].Width = 0;
+		}
 
 		if (Package is Package p && p.Assets is not null && p.Assets.Length > 0)
 		{
@@ -152,9 +153,9 @@ public partial class PC_PackagePage : PanelContent
 	private void TagControl_Click(object sender, EventArgs e)
 	{
 		if ((sender as TagControl)!.TagInfo.Source != Domain.Enums.TagSource.FindIt)
+		{
 			return;
-
-		(sender as TagControl)!.Dispose();
+		} (sender as TagControl)!.Dispose();
 
 		AssetsUtil.SetFindItTag(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Source == Domain.Enums.TagSource.FindIt ? x.TagInfo.Value?.Replace(' ', '-') : null).WhereNotEmpty().ListStrings(" "));
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
@@ -170,7 +171,10 @@ public partial class PC_PackagePage : PanelContent
 	{
 		var cr = Package.GetCompatibilityInfo().Data?.Package;
 
-		if (cr is null) return;
+		if (cr is null)
+		{
+			return;
+		}
 
 		label1.Text = LocaleCR.Usage;
 		label2.Text = cr.Usage.GetValues().If(x => x.Count() == Enum.GetValues(typeof(Domain.Compatibility.PackageUsage)).Length, x => Locale.AnyUsage.One, x => x.ListStrings(x => LocaleCR.Get(x.ToString()), ", "));
@@ -198,7 +202,7 @@ public partial class PC_PackagePage : PanelContent
 		BackColor = design.AccentBackColor;
 		P_Content.BackColor = P_Back.BackColor = design.BackColor;
 		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor = design.InfoColor;
-		panel1.BackColor= LC_Items is null ? design.AccentBackColor: design.BackColor.Tint(Lum: design. Type.If(FormDesignType.Dark, 5, -5));
+		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 5, -5));
 	}
 
 	public override Color GetTopBarColor()

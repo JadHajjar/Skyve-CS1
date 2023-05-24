@@ -374,6 +374,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private void CentralManager_WorkshopInfoUpdated()
 	{
 		LC_Items.Invalidate();
+		I_Actions.Invalidate();
 
 		this.TryInvoke(RefreshCounts);
 	}
@@ -641,6 +642,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			L_FilterCount.Visible = !string.IsNullOrEmpty(filteredText);
 			L_FilterCount.Text = filteredText;
 		}
+
+		I_Actions.Invalidate();
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)
@@ -731,24 +734,28 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		SetEnabled(LC_Items.FilteredItems, false);
 		LC_Items.Invalidate();
+		I_Actions.Invalidate();
 	}
 
 	private void EnableAll(object sender, EventArgs e)
 	{
 		SetEnabled(LC_Items.FilteredItems, true);
 		LC_Items.Invalidate();
+		I_Actions.Invalidate();
 	}
 
 	private void ExcludeAll(object sender, EventArgs e)
 	{
 		SetIncluded(LC_Items.FilteredItems, false);
 		LC_Items.Invalidate();
+		I_Actions.Invalidate();
 	}
 
 	private void IncludeAll(object sender, EventArgs e)
 	{
 		SetIncluded(LC_Items.FilteredItems, true);
 		LC_Items.Invalidate();
+		I_Actions.Invalidate();
 	}
 
 	private async void UnsubscribeAll(object sender, EventArgs e)

@@ -24,5 +24,8 @@ public class IndexedPackageInteraction
 		}
 	}
 
-	public static implicit operator IndexedPackageInteraction(PackageInteraction status) => new(status, new());
+	public static implicit operator IndexedPackageInteraction(PackageInteraction status)
+	{
+		return new(status, new());
+	}
 }

@@ -582,7 +582,9 @@ internal class PackageDescriptionControl : SlickImageControl
 	private Rectangle DrawStatusDescriptor(PaintEventArgs e, Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
 		if (!Package!.Workshop)
+		{
 			labelRect.X += Padding.Left + DrawLabel(e, Locale.Local, IconManager.GetSmallIcon("I_PC"), FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), labelRect, contentAlignment, true).Width;
+		}
 
 		GetStatusDescriptors(Package!, out var text, out var icon, out var color);
 

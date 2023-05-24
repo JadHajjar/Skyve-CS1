@@ -3,7 +3,6 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
@@ -102,7 +101,7 @@ internal static class ModsUtil
 
 	internal static bool IsLocallyIncluded(Mod mod)
 	{
-		return !LocationManager.FileExists(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+		return !ExtensionClass.FileExists(LocationManager.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 	}
 
 	internal static bool IsLocallyEnabled(Mod mod)
@@ -213,6 +212,9 @@ internal static class ModsUtil
 
 	public static DownloadStatus GetStatus(IPackage mod, out string reason)
 	{
+		reason = string.Empty;
+		return DownloadStatus.OK;
+
 		if (mod.Package?.RemovedFromSteam ?? false)
 		{
 			reason = Locale.PackageIsRemoved.Format(mod.CleanName());
@@ -252,7 +254,7 @@ internal static class ModsUtil
 			return DownloadStatus.OutOfDate;
 		}
 
-		if (localSize != sizeServer && sizeServer > 0)
+		if (localSize < sizeServer && sizeServer > 0)
 		{
 			reason = Locale.PackageIsIncomplete.Format(mod.CleanName(), localSize.SizeString(), sizeServer.SizeString());
 			return DownloadStatus.PartiallyDownloaded;
@@ -275,7 +277,9 @@ internal static class ModsUtil
 	internal static string CleanName(this IPackage package)
 	{
 		if (package?.Name is null)
+		{
 			return string.Empty;
+		}
 
 		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
 
@@ -287,7 +291,9 @@ internal static class ModsUtil
 		tags = new();
 
 		if (package?.Name is null)
+		{
 			return string.Empty;
+		}
 
 		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");

@@ -40,13 +40,13 @@ public class Package : IPackage
 	public long FileSize { get; set; }
 	public DateTime LocalTime { get; set; }
 	public DownloadStatus Status => ModsUtil.GetStatus(this, out _);
-	public string? StatusReason { get { ModsUtil.GetStatus(this, out var reason);  return reason; } }
+	public string? StatusReason { get { ModsUtil.GetStatus(this, out var reason); return reason; } }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
 	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : this.GetCompatibilityInfo().Data?.Package.SteamId ?? 0);
 	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
 	public string? Name => WorkshopInfo?.Name;
-	public bool IsMod => Mod is not null || (WorkshopInfo?.IsMod ?? false);
+	public bool IsMod => Mod is not null;// || (WorkshopInfo?.IsMod ?? false);
 	public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? Enumerable.Empty<TagItem>();
 	public Bitmap? IconImage => WorkshopInfo?.IconImage;
 	public Bitmap? AuthorIconImage => WorkshopInfo?.AuthorIconImage;
@@ -62,7 +62,7 @@ public class Package : IPackage
 	public bool RemovedFromSteam => WorkshopInfo?.RemovedFromSteam ?? false;
 	public bool Incompatible => WorkshopInfo?.Incompatible ?? false;
 	public bool IsCollection => WorkshopInfo?.IsCollection ?? false;
-	public long ServerSize => WorkshopInfo?.ServerSize??0;
+	public long ServerSize => WorkshopInfo?.ServerSize ?? 0;
 	public string? SteamDescription => WorkshopInfo?.SteamDescription;
 	public string[]? WorkshopTags => WorkshopInfo?.WorkshopTags;
 
@@ -97,7 +97,9 @@ public class Package : IPackage
 				}
 
 				if (included && excluded)
+				{
 					return true;
+				}
 			}
 		}
 

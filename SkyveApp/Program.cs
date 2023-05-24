@@ -60,9 +60,17 @@ internal static class Program
 			catch { }
 
 			var localAppData = GetFolderPath(SpecialFolder.LocalApplicationData);
-			if (Directory.Exists(Path.Combine(localAppData, "Load Order Tool")) && !Directory.Exists(Path.Combine(localAppData, ISave.AppName)))
+			if (Directory.Exists(Path.Combine(localAppData, "Load Order Tool")))
 			{
-				Directory.Move(Path.Combine(localAppData, "Load Order Tool"), Path.Combine(localAppData, ISave.AppName));
+				ExtensionClass.MoveFolder(Path.Combine(localAppData, "Load Order Tool"), Path.Combine(localAppData, ISave.AppName), false);
+
+				try
+				{
+					ExtensionClass.DeleteFolder(Path.Combine(localAppData, "Load Order Tool"));
+
+					File.Delete(Path.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log"));
+				}
+				catch { }
 			}
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;

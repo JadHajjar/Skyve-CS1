@@ -29,7 +29,7 @@ namespace KianCommons {
         /// <summary>
         /// File name for log file.
         /// </summary>
-        private static readonly string LogFileName = "LoadOrder.log";
+        private static readonly string LogFileName = "SkyveMod.log";
 
         /// <summary>
         /// Full path and file name of log file.
@@ -357,7 +357,7 @@ namespace KianCommons {
                     // copying to game log is slow anyways so
                     // this is a good time to flush if necessary.
                     Flush();
-                    m = " LoadOrder | " + m;
+                    m = " Skyve | " + m;
                     m = RemoveExtraNewLine(m);
                     switch (level) {
                         case LogLevel.Error:

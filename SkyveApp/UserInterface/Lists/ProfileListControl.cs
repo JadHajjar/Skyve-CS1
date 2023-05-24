@@ -92,7 +92,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 
 	protected override void UIChanged()
 	{
-		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover?64: 36;
+		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36;
 
 		base.UIChanged();
 
@@ -272,8 +272,10 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), large ? rects.TextRect.Pad(Padding) : rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		if(large)
-		rects.TextRect = rects.TextRect.Pad(0, (int)e.Graphics.Measure(" ", UI.Font(large ? 11.25F : 9F, FontStyle.Bold)).Height + Padding.Bottom, 0, 0);
+		if (large)
+		{
+			rects.TextRect = rects.TextRect.Pad(0, (int)e.Graphics.Measure(" ", UI.Font(large ? 11.25F : 9F, FontStyle.Bold)).Height + Padding.Bottom, 0, 0);
+		}
 
 		var x = rects.TextRect.X;
 
@@ -288,7 +290,9 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		}
 
 		if (large)
+		{
 			rects.TextRect.X = x;
+		}
 
 		rects.TextRect.X += DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Mods.Count, Locale.Mod.FormatPlural(e.Item.Mods.Count).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;
 		rects.TextRect.X += DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Assets.Count, Locale.Asset.FormatPlural(e.Item.Assets.Count).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.BottomLeft).Width + Padding.Left;

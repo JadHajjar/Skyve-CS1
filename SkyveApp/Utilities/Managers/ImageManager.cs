@@ -1,7 +1,5 @@
 ﻿using Extensions;
 
-using SlickControls;
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;

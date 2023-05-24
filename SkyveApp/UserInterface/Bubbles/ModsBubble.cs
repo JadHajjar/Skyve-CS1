@@ -8,8 +8,6 @@ using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -85,13 +83,17 @@ internal class ModsBubble : StatusBubbleBase
 
 		foreach (var mod in CentralManager.Mods)
 		{
-			if(!mod.IsIncluded)
+			if (!mod.IsIncluded)
+			{
 				continue;
+			}
 
 			modsIncluded++;
 
 			if (mod.IsEnabled)
+			{
 				modsEnabled++;
+			}
 
 			switch (mod.Package.Status)
 			{
@@ -106,9 +108,13 @@ internal class ModsBubble : StatusBubbleBase
 			var notif = mod.GetCompatibilityInfo().Notification;
 
 			if (crDic.ContainsKey(notif))
+			{
 				crDic[notif]++;
+			}
 			else
+			{
 				crDic[notif] = 1;
+			}
 		}
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)

@@ -15,8 +15,6 @@ using System.Linq;
 namespace SkyveApp.Domain;
 public class Asset : IPackage
 {
-	private readonly string[] _assetTags;
-
 	public Asset(Package package, string crpPath)
 	{
 		FileName = crpPath.FormatPath();
@@ -28,12 +26,12 @@ public class Asset : IPackage
 		{
 			Name = asset.Name;
 			Description = asset.Description;
-			_assetTags = asset.Tags;
+			AssetTags = asset.Tags;
 		}
 		else
 		{
 			Name = Path.GetFileNameWithoutExtension(FileName).FormatWords();
-			_assetTags = new string[0];
+			AssetTags = new string[0];
 		}
 	}
 
@@ -43,7 +41,7 @@ public class Asset : IPackage
 	public string Name { get; }
 	public string? Description { get; }
 	public DateTime LocalTime { get; }
-	public string[] AssetTags => _assetTags;
+	public string[] AssetTags { get; }
 	public bool IsIncluded { get => AssetsUtil.IsIncluded(this); set => AssetsUtil.SetIncluded(this, value); }
 	public IEnumerable<TagItem> Tags => Package.Tags.Concat(GetAssetTags());
 	public string Folder => ((IPackage)Package).Folder;
@@ -71,7 +69,7 @@ public class Asset : IPackage
 
 	public IEnumerable<TagItem> GetAssetTags()
 	{
-		foreach (var item in _assetTags)
+		foreach (var item in AssetTags)
 		{
 			yield return new(TagSource.InGame, item);
 		}

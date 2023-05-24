@@ -1,6 +1,4 @@
-﻿using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Steam;
-using SkyveApp.Utilities.Managers;
+﻿using SkyveApp.Domain.Steam;
 
 using System;
 using System.Collections.Generic;

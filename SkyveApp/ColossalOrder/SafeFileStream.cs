@@ -26,7 +26,7 @@ public class SafeFileStream : Stream
 		_mainStream = new FileStream(_mainFilePath, mode);
 
 		// If the file exists, create a backup copy
-		if (LocationManager.FileExists(_mainFilePath))
+		if (ExtensionClass.FileExists(_mainFilePath))
 		{
 			ExtensionClass.CopyFile(_mainFilePath, _backupFilePath, true);
 		}
@@ -85,7 +85,7 @@ public class SafeFileStream : Stream
 				_tempStream.Close();
 
 				// Create a backup copy of the main file
-				if (LocationManager.FileExists(_mainFilePath))
+				if (ExtensionClass.FileExists(_mainFilePath))
 				{
 					ExtensionClass.CopyFile(_mainFilePath, _backupFilePath, true);
 				}

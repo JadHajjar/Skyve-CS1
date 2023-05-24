@@ -1,10 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Steam;
-
-using System;
-using System.Windows.Forms;
-
 namespace SkyveApp.Utilities;
 internal class LocaleCRNotes : LocaleHelper
 {
@@ -12,7 +7,10 @@ internal class LocaleCRNotes : LocaleHelper
 
 	protected LocaleCRNotes() : base($"{nameof(SkyveApp)}.Properties.CompatibilityNotes.json") { }
 
-	public static Translation Get(string value) => _instance.GetText(value);
+	public static Translation Get(string value)
+	{
+		return _instance.GetText(value);
+	}
 
 	public static void Load() { }
 }

@@ -846,7 +846,9 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
 		if (!e.Item.Workshop)
+		{
 			labelRect.X += Padding.Left + DrawLabel(e, Locale.Local, IconManager.GetSmallIcon("I_PC"), FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), labelRect, contentAlignment, true).Width;
+		}
 
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
 

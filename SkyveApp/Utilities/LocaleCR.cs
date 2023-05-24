@@ -1,10 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Compatibility;
-
-using System;
-using System.Windows.Forms;
-
 namespace SkyveApp.Utilities;
 internal class LocaleCR : LocaleHelper
 {
@@ -14,7 +9,10 @@ internal class LocaleCR : LocaleHelper
 
 	public static void Load() { }
 
-	public static Translation Get(string value) => _instance.GetText(value);
+	public static Translation Get(string value)
+	{
+		return _instance.GetText(value);
+	}
 
 	public static Translation CR_NoAvailableReport => _instance.GetText(nameof(CR_NoAvailableReport));
 	public static Translation CR_IncompatibleWithGameVersion => _instance.GetText(nameof(CR_IncompatibleWithGameVersion));

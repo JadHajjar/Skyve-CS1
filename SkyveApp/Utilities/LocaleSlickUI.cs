@@ -1,10 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Steam;
-
-using System;
-using System.Windows.Forms;
-
 namespace SkyveApp.Utilities;
 internal class LocaleSlickUI : LocaleHelper
 {

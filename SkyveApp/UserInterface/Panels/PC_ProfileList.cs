@@ -1,7 +1,6 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.UserInterface.Generic;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;

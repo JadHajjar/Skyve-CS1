@@ -1,14 +1,13 @@
 using Extensions;
 
-using SkyveShared;
+using Newtonsoft.Json;
 
-using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
 
-using Newtonsoft.Json;
+using SkyveShared;
 
 using SlickControls;
 
@@ -196,7 +195,7 @@ public static class SteamUtil
 
 	public static bool IsSteamAvailable()
 	{
-		return LocationManager.FileExists(LocationManager.SteamPathWithExe);
+		return ExtensionClass.FileExists(LocationManager.SteamPathWithExe);
 	}
 
 	public static void ExecuteSteam(string args)
@@ -378,19 +377,11 @@ public static class SteamUtil
 
 	public static async Task<Dictionary<string, SteamAppInfo>> GetSteamAppInfoAsync(uint steamId)
 	{
-		var url = $"https://store.steampowered.com/api/appdetails?appids={steamId}";
-
 		try
 		{
-			using var httpClient = new HttpClient();
-			var httpResponse = await httpClient.GetAsync(url);
+			var url = $"https://store.steampowered.com/api/appdetails";
 
-			if (httpResponse.IsSuccessStatusCode)
-			{
-				var response = await httpResponse.Content.ReadAsStringAsync();
-
-				return JsonConvert.DeserializeObject<Dictionary<string, SteamAppInfo>>(response);
-			}
+			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId)) ?? new();
 		}
 		catch (Exception ex) { Log.Exception(ex, "Failed to get the steam information for appid " + steamId); }
 

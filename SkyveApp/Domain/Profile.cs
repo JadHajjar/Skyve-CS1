@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
+using Newtonsoft.Json;
+
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
-
-using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
@@ -62,8 +62,8 @@ public class Profile
 	public DateTime LastUsed { get; set; }
 	public Compatibility.PackageUsage Usage { get; set; }
 
-	public bool ForAssetEditor { set { if (value) Usage = Compatibility.PackageUsage.AssetCreation; } }
-	public bool ForGameplay { set { if (value) Usage = Compatibility.PackageUsage.CityBuilding; } }
+	public bool ForAssetEditor { set { if (value) { Usage = Compatibility.PackageUsage.AssetCreation; } } }
+	public bool ForGameplay { set { if (value) { Usage = Compatibility.PackageUsage.CityBuilding; } } }
 
 	public class Asset : IPackage
 	{
@@ -74,7 +74,7 @@ public class Profile
 		[JsonIgnore, CloneIgnore] public bool IsMod { get; protected set; }
 		[JsonIgnore, CloneIgnore] public bool Workshop => SteamId != 0;
 		[JsonIgnore, CloneIgnore] public string Folder => RelativePath is null ? string.Empty : IsMod ? ProfileManager.ToLocalPath(RelativePath) : Path.GetDirectoryName(ProfileManager.ToLocalPath(RelativePath));
-		[JsonIgnore, CloneIgnore] public Package? Package => SteamId == 0 ? null : CentralManager.Packages.FirstOrDefault(x => x.SteamId == SteamId);
+		[JsonIgnore, CloneIgnore] public Package? Package => CentralManager.GetPackage(SteamId);
 		[JsonIgnore, CloneIgnore] public SteamWorkshopItem? WorkshopInfo { get; set; }
 		[JsonIgnore, CloneIgnore] public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? new[] { new TagItem(Enums.TagSource.InGame, IsMod ? "Mod" : "Asset") };
 		[JsonIgnore, CloneIgnore] public Bitmap? IconImage => WorkshopInfo?.IconImage;

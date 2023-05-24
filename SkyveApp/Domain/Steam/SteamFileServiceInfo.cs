@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkyveApp.Domain.Steam;
+﻿namespace SkyveApp.Domain.Steam;
 
 #nullable disable
 public class SteamFileServiceInfo
@@ -14,7 +8,7 @@ public class SteamFileServiceInfo
 
 public class Response
 {
-    public int total { get; set; }
+	public int total { get; set; }
 	public SteamWorkshopItemEntry[] publishedfiledetails { get; set; }
 }
 

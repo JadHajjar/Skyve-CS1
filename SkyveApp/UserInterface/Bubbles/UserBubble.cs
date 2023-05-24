@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
@@ -8,7 +7,6 @@ using SkyveApp.Utilities.Managers;
 using SlickControls;
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 

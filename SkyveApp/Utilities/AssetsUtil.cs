@@ -1,17 +1,16 @@
 ﻿using Extensions;
 
-using SkyveShared;
-
 using SkyveApp.Domain;
+using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.Managers;
 
+using SkyveShared;
+
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using SkyveApp.Domain.Interfaces;
 
 namespace SkyveApp.Utilities;
 internal class AssetsUtil
@@ -205,7 +204,7 @@ internal class AssetsUtil
 		newTags.Deserialize();
 
 		var found = false;
-		var key = package is Asset asset 
+		var key = package is Asset asset
 			? (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName)
 			: package.Folder;
 
