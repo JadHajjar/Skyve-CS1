@@ -451,7 +451,7 @@
     "Plural": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다"
   },
   "EditCompatibility": "호환성 편집",
-  "AnyIssue": "아무 이슈",
+  "AnyIssue": "모든 이슈",
   "AnyUsage": "모든 용도",
   "ExplainIssue": "여기에 문제를 설명하세요.",
   "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
