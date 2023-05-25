@@ -91,31 +91,31 @@ internal class AssetsBubble : StatusBubbleBase
 			assetsIncluded++;
 			assetSize += asset.FileSize;
 
-			//if (asset.IsMod)
-			//{
-			//	continue;
-			//}
+			if (asset.IsMod || Loading)
+			{
+				continue;
+			}
 
-			//switch (asset.Package.Status)
-			//{
-			//	case DownloadStatus.OutOfDate:
-			//		assetsOutOfDate++;
-			//		break;
-			//	case DownloadStatus.PartiallyDownloaded:
-			//		assetsIncomplete++;
-			//		break;
-			//}
+			switch (asset.Package.Status)
+			{
+				case DownloadStatus.OutOfDate:
+					assetsOutOfDate++;
+					break;
+				case DownloadStatus.PartiallyDownloaded:
+					assetsIncomplete++;
+					break;
+			}
 
-			//var notif = asset.GetCompatibilityInfo().Notification;
+			var notif = asset.GetCompatibilityInfo().Notification;
 
-			//if (crDic.ContainsKey(notif))
-			//{
-			//	crDic[notif]++;
-			//}
-			//else
-			//{
-			//	crDic[notif] = 1;
-			//}
+			if (crDic.ContainsKey(notif))
+			{
+				crDic[notif]++;
+			}
+			else
+			{
+				crDic[notif] = 1;
+			}
 		}
 
 		DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(assetsIncluded, Locale.Asset.FormatPlural(assetsIncluded).ToLower()));

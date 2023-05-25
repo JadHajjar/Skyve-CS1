@@ -31,6 +31,11 @@ public enum CompatibilityNotificationFilter
 
 internal class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNotificationFilter>
 {
+	public override void ResetValue()
+	{
+		SelectedItem = CompatibilityNotificationFilter.Any;
+	}
+
 	protected override void OnHandleCreated(EventArgs e)
 	{
 		base.OnHandleCreated(e);

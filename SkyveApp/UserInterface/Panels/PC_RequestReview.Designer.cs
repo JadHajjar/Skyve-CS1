@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using SkyveApp.UserInterface.Generic;
+
+namespace SkyveApp.UserInterface.Panels;
 
 partial class PC_RequestReview
 {
@@ -53,7 +55,8 @@ partial class PC_RequestReview
 			this.PB_LoadingPackage = new SlickControls.SlickPictureBox();
 			this.TLP_Button = new System.Windows.Forms.TableLayoutPanel();
 			this.B_Apply = new SlickControls.SlickButton();
-			this.userBubble1 = new SkyveApp.UserInterface.StatusBubbles.UserBubble();
+			this.userBubble1 = new SkyveApp.UserInterface.Generic.SteamUserControl();
+			this.L_Disclaimer = new System.Windows.Forms.Label();
 			this.TLP_Actions.SuspendLayout();
 			this.P_Main.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -83,7 +86,7 @@ partial class PC_RequestReview
 			this.TLP_Actions.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Actions.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Actions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Actions.Size = new System.Drawing.Size(773, 367);
+			this.TLP_Actions.Size = new System.Drawing.Size(773, 339);
 			this.TLP_Actions.TabIndex = 2;
 			// 
 			// B_ReportIssue
@@ -93,7 +96,7 @@ partial class PC_RequestReview
 			this.B_ReportIssue.FromScratch = false;
 			dynamicIcon1.Name = "I_Remarks";
 			this.B_ReportIssue.ImageName = dynamicIcon1;
-			this.B_ReportIssue.Location = new System.Drawing.Point(124, -79);
+			this.B_ReportIssue.Location = new System.Drawing.Point(124, -93);
 			this.B_ReportIssue.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
 			this.B_ReportIssue.Name = "B_ReportIssue";
 			this.B_ReportIssue.Padding = new System.Windows.Forms.Padding(22);
@@ -109,7 +112,7 @@ partial class PC_RequestReview
 			this.B_AddStatus.FromScratch = false;
 			dynamicIcon2.Name = "I_Content";
 			this.B_AddStatus.ImageName = dynamicIcon2;
-			this.B_AddStatus.Location = new System.Drawing.Point(274, 116);
+			this.B_AddStatus.Location = new System.Drawing.Point(274, 102);
 			this.B_AddStatus.Margin = new System.Windows.Forms.Padding(150, 30, 0, 30);
 			this.B_AddStatus.Name = "B_AddStatus";
 			this.B_AddStatus.Padding = new System.Windows.Forms.Padding(22);
@@ -125,7 +128,7 @@ partial class PC_RequestReview
 			this.B_AddInteraction.FromScratch = false;
 			dynamicIcon3.Name = "I_Switch";
 			this.B_AddInteraction.ImageName = dynamicIcon3;
-			this.B_AddInteraction.Location = new System.Drawing.Point(124, 311);
+			this.B_AddInteraction.Location = new System.Drawing.Point(124, 297);
 			this.B_AddInteraction.Margin = new System.Windows.Forms.Padding(0, 30, 150, 30);
 			this.B_AddInteraction.Name = "B_AddInteraction";
 			this.B_AddInteraction.Padding = new System.Windows.Forms.Padding(22);
@@ -142,7 +145,7 @@ partial class PC_RequestReview
 			this.P_Main.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.P_Main.Location = new System.Drawing.Point(5, 30);
 			this.P_Main.Name = "P_Main";
-			this.P_Main.Size = new System.Drawing.Size(773, 367);
+			this.P_Main.Size = new System.Drawing.Size(773, 339);
 			this.P_Main.TabIndex = 15;
 			this.P_Main.Visible = false;
 			// 
@@ -153,7 +156,7 @@ partial class PC_RequestReview
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(773, 367);
+			this.panel1.Size = new System.Drawing.Size(773, 339);
 			this.panel1.TabIndex = 17;
 			// 
 			// P_Content
@@ -163,7 +166,7 @@ partial class PC_RequestReview
 			this.P_Content.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.P_Content.Location = new System.Drawing.Point(0, 100);
 			this.P_Content.Name = "P_Content";
-			this.P_Content.Size = new System.Drawing.Size(773, 267);
+			this.P_Content.Size = new System.Drawing.Size(773, 239);
 			this.P_Content.TabIndex = 13;
 			// 
 			// TLP_MainInfo
@@ -188,7 +191,7 @@ partial class PC_RequestReview
 			this.TLP_MainInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_MainInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_MainInfo.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_MainInfo.Size = new System.Drawing.Size(773, 267);
+			this.TLP_MainInfo.Size = new System.Drawing.Size(773, 239);
 			this.TLP_MainInfo.TabIndex = 19;
 			this.TLP_MainInfo.Visible = false;
 			// 
@@ -256,7 +259,7 @@ partial class PC_RequestReview
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 267);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(773, 239);
 			this.tableLayoutPanel1.TabIndex = 4;
 			this.tableLayoutPanel1.Visible = false;
 			// 
@@ -320,7 +323,7 @@ partial class PC_RequestReview
 			this.PB_LoadingPackage.LoaderSpeed = 1D;
 			this.PB_LoadingPackage.Location = new System.Drawing.Point(0, 0);
 			this.PB_LoadingPackage.Name = "PB_LoadingPackage";
-			this.PB_LoadingPackage.Size = new System.Drawing.Size(773, 367);
+			this.PB_LoadingPackage.Size = new System.Drawing.Size(773, 339);
 			this.PB_LoadingPackage.TabIndex = 18;
 			this.PB_LoadingPackage.TabStop = false;
 			// 
@@ -328,17 +331,19 @@ partial class PC_RequestReview
 			// 
 			this.TLP_Button.AutoSize = true;
 			this.TLP_Button.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TLP_Button.ColumnCount = 2;
+			this.TLP_Button.ColumnCount = 3;
+			this.TLP_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.TLP_Button.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TLP_Button.Controls.Add(this.B_Apply, 1, 0);
+			this.TLP_Button.Controls.Add(this.B_Apply, 2, 0);
 			this.TLP_Button.Controls.Add(this.userBubble1, 0, 0);
+			this.TLP_Button.Controls.Add(this.L_Disclaimer, 1, 0);
 			this.TLP_Button.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.TLP_Button.Location = new System.Drawing.Point(5, 397);
+			this.TLP_Button.Location = new System.Drawing.Point(5, 369);
 			this.TLP_Button.Name = "TLP_Button";
 			this.TLP_Button.RowCount = 1;
 			this.TLP_Button.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Button.Size = new System.Drawing.Size(773, 36);
+			this.TLP_Button.Size = new System.Drawing.Size(773, 64);
 			this.TLP_Button.TabIndex = 16;
 			this.TLP_Button.Visible = false;
 			// 
@@ -350,7 +355,7 @@ partial class PC_RequestReview
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon4.Name = "I_Link";
 			this.B_Apply.ImageName = dynamicIcon4;
-			this.B_Apply.Location = new System.Drawing.Point(554, 3);
+			this.B_Apply.Location = new System.Drawing.Point(554, 31);
 			this.B_Apply.Name = "B_Apply";
 			this.B_Apply.Size = new System.Drawing.Size(216, 30);
 			this.B_Apply.SpaceTriggersClick = true;
@@ -365,10 +370,19 @@ partial class PC_RequestReview
 			this.userBubble1.Location = new System.Drawing.Point(3, 3);
 			this.userBubble1.MinimumSize = new System.Drawing.Size(0, 10);
 			this.userBubble1.Name = "userBubble1";
-			this.userBubble1.Size = new System.Drawing.Size(150, 10);
+			this.userBubble1.Size = new System.Drawing.Size(170, 58);
 			this.userBubble1.TabIndex = 17;
-			this.userBubble1.TintColor = null;
 			this.userBubble1.Visible = false;
+			// 
+			// L_Disclaimer
+			// 
+			this.L_Disclaimer.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.L_Disclaimer.AutoSize = true;
+			this.L_Disclaimer.Location = new System.Drawing.Point(477, 17);
+			this.L_Disclaimer.Name = "L_Disclaimer";
+			this.L_Disclaimer.Size = new System.Drawing.Size(71, 30);
+			this.L_Disclaimer.TabIndex = 18;
+			this.L_Disclaimer.Text = "label1";
 			// 
 			// PC_RequestReview
 			// 
@@ -420,5 +434,6 @@ partial class PC_RequestReview
 	private Dropdowns.DlcDropDown DD_DLCs;
 	private Dropdowns.PackageUsageDropDown DD_Usage;
 	private Dropdowns.PackageTypeDropDown DD_PackageType;
-	private StatusBubbles.UserBubble userBubble1;
+	private SteamUserControl userBubble1;
+	private System.Windows.Forms.Label L_Disclaimer;
 }

@@ -19,7 +19,7 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;
-		ItemHeight = 30;
+		ItemHeight = 32;
 	}
 
 	protected override void UIChanged()
@@ -48,8 +48,9 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		var imageRect = e.ClipRectangle.Pad(Padding);
 		imageRect.Width = imageRect.Height;
 		var image = Package?.IconImage;
+		var panel = PanelContent.GetParentPanel(this);
 
-		if ((PanelContent.GetParentPanel(this) as PC_CompatibilityManagement)?.CurrentPackage?.SteamId == e.Item)
+		if ((panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.SteamId == e.Item) || (panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item))
 		{
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
 

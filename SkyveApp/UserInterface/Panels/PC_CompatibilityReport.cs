@@ -27,7 +27,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		InitializeComponent();
 
 		var hasPackages = CompatibilityManager.User.SteamId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == CompatibilityManager.User.SteamId);
-	B_Requests.Visible=	B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious;
+		B_Requests.Visible = B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious;
 		B_YourPackages.Visible = hasPackages && CompatibilityManager.User.Verified && !CompatibilityManager.User.Malicious;
 		B_Requests.Text = LocaleCR.ReviewRequests.Format("");
 
@@ -204,9 +204,14 @@ public partial class PC_CompatibilityReport : PanelContent
 	{
 		if (reviewRequests == null)
 		{
-		reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
+			B_Requests.Loading = true;
+			reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
 		}
 
-		Form.PushPanel(null, new PC_ReviewRequests(reviewRequests));
+		B_Requests.Loading = false;
+		if (reviewRequests != null)
+		{
+			Form.Invoke(() => Form.PushPanel(null, new PC_ReviewRequests(reviewRequests)));
+		}
 	}
 }

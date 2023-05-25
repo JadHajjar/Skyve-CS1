@@ -260,4 +260,8 @@ internal class Locale : LocaleHelper
 	public static Translation PackageIsRemoved => _instance.GetText(nameof(PackageIsRemoved));
 	public static Translation RemovedFromSteam => _instance.GetText(nameof(RemovedFromSteam));
 	public static Translation Missing => _instance.GetText(nameof(Missing));
+	public static Translation LoggedInAs => _instance.GetText(nameof(LoggedInAs));
+	public static Translation SendReview => _instance.GetText(nameof(SendReview));
+	public static Translation UnknownUser => _instance.GetText(nameof(UnknownUser));
+	public static Translation SelectPackage => _instance.GetText(nameof(SelectPackage));
 }
