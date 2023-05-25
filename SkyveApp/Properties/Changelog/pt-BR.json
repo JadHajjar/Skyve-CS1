@@ -100,7 +100,7 @@
                 "Changes": [
                     "Adicionado uma janela de informações aparecerá ao assinar itens pela primeira vez.",
                     "Adicionado um texto de aviso no painel quando você tem várias versões do LOM instaladas.",
-                    "Foi adicionado pequenos rótulos ao lado dos títulos de pacote.",
+                    "Adicionadas etiquetas ao lado dos títulos dos pacotes.",
                     "Ao pedir ao LOT para baixar novamente, o mesmo iniciará o carregamento e fechará o aplicativo enquanto está atualizando.",
                     "A velocidade de criação de relatórios do LSM foi corrigida e melhorada."
                 ]
