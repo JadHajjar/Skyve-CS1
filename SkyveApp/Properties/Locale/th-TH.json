@@ -48,8 +48,8 @@
   "AutoSave": "บันทึกอัตโนมัติ",
   "TotalSize": "ขนาดทั้งหมด",
   "CompatibilityStatus": "สถานะความเข้ากันได้",
-  "AnyStatus": "สถานะต่าง ๆ",
-  "AnyCompatibilityStatus": "สถานะต่าง ๆ",
+  "AnyStatus": "ทุกสถานะ",
+  "AnyCompatibilityStatus": "ทุกสถานะ",
   "ModOwned": "คุณมีม็อดนี้",
   "NoLocalPackagesFound": "ไม่พบแพ็กเกจภายในคอมพิวเตอร์ของคุณ",
   "CheckFolderInOptions": "หากคุณเลือกโฟลเดอร์ผิด ให้ตรวจสอบที่แผงตัวเลือก",
@@ -152,7 +152,7 @@
   "IncludeAllItemsInThisPackage": "รวมไอเทมทั้งหมดในแพ็กเกจนี้เข้าไปในเกม",
   "ExcludeAllItemsInThisPackage": "แยกไอเทมทั้งหมดในแพ็กเกจนี้ออกจากเกม",
   "Unfiltered": "ไม่มีการกรอง",
-  "AnyTags": "แท็กใด ๆ",
+  "AnyTags": "ทุกแท็ก",
   "AdvancedLaunchOptions": "แสดงตัวเลือกการเปิดเกมเพิ่มเติม",
   "MovePackageToLocalFolder": "คัดลอกแพ็กเกจไปยังโฟลเดอร์ภายในเครื่อง",
   "AllItems": "ไอเทมทั้งหมด",
@@ -328,7 +328,7 @@
   "ResetScrollOnPackageClick_Tip": "เมื่อเปิดหน้าแพ็กเกจ ให้รีเช็ตการเลื่อนเพื่อให้แพ็กเกจที่เลือกอยู่บนสดของรายการ",
   "Workshop Save-games": "เวิร์กชอป เซฟเกม",
   "Workshop Maps": "แผนที่เวิร์กชอป",
-  "AnyAuthor": "ผู้สร้างได ๆ",
+  "AnyAuthor": "ผู้สร้างทุกคน",
   "ItemsCount": {
     "One": "{0} ไอเทม",
     "Plural": "{0} ไอเทม"
