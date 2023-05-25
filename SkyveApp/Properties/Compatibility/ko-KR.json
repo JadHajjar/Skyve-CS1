@@ -120,7 +120,7 @@
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
   "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
-  "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
+  "Status_IncompleteDescription": "이 모드의 창작마당 설명은 너무 짧습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
   "OutputText": "Expected Output",
   "Stability_AssetNotReviewed": "이 에셋은 아직 리뷰되지 않았습니다.\n\n에셋들은 일반적으로 안정적이지만 호환성 정보는 정확하지 않을 수 있습니다.",
   "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
@@ -200,6 +200,6 @@
   "POFont": "Procedural Object 폰트/모듈",
   "NameList": "Name-List/Game Translations",
   "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
+  "AuthorRetired": "{0}의 제작자인 {1}는 제작을 그만두었거나 오랫동안 활동하지 않았습니다.\n\n그의 패키지에 대한 앞으로의 업데이트와 안정성은 보장되지 않습니다.",
+  "AuthorMalicious": "{0}의 제작자인 {1}는 바이러스와 같은 유해하거나 악성인 콘텐츠를 자신의 패키지에 포함시키는 것으로 알려져 있습니다."
 }
