@@ -46,7 +46,7 @@
   "SameFunctionality": "Same Functionality",
   "RequirementAlternative": "Requirement Alternative",
   "IncompatibleWith": "Nekompatibilní s",
-  "CausesIssuesWith": "Způsobuje problémy ...",
+  "CausesIssuesWith": "Způsobuje problémy s ..",
   "RequiredPackages": "Vyžaduje ..",
   "StatusType": "Typ stavu",
   "InteractionType": "Typ interakce",
