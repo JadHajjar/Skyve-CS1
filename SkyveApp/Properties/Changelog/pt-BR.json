@@ -7,99 +7,99 @@
             {
                 "Name": "Novidades",
                 "Changes": [
-                    "Adicionado um botão 'Cancelar Todas as Inscrições' nas ações possíveis nas páginas de conteúdo'.",
-                    "Adicionada um Segmento de Utilitário para inscrever-se em itens que faltam nas configurações do BOB.",
-                    "Adicionada uma opção para que as sessões de Filtros e Ação abram por padrão.",
-                    "Adicionado Página com Relatório de alterações, poderá ver a partir das novas versões, ou usando o botão na Área de Ajuda."
+                    "Adicionado um botão \"Cancelar todas as assinaturas\" nas ações das páginas de conteúdo.",
+                    "Adicionada uma seção de \"Utilitários\" para assinar itens ausentes em uma configuração BOB.",
+                    "Adicionada uma opção para manter as seções de Filtros e Ações abertas por padrão.",
+                    "Adicionadas páginas de histórico de alterações, você as verá em novas versões ou usando o botão correspondente nas seções de Ajuda."
                 ]
             },
             {
                 "Name": "Melhorias",
                 "Changes": [
                     "Adicionado Relatório de Compatibilidade para Recursos Quebrados",
-                    "Foi corrigido a miniatura e nome dos pacotes não listados.",
-                    "Os Espaços Reservados para configurações de pasta agora refletem corretamente o seu Sistema Operacional.",
-                    "Ctrl+Clique no nome do autor para adicionar ao seu filtro"
+                    "Os pacotes não listados agora têm o nome e a miniatura corretos.",
+                    "Os espaços reservados para as configurações de pasta agora refletem corretamente o seu sistema operacional.",
+                    "Pressione Ctrl+clique no nome do autor para adicioná-lo ao filtro"
                 ]
             },
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Correção de perfis herdados não sendo convertidos depois da primeira inicialização.",
-                    "Os recursos locais corrigidos não atualizam automaticamente após alterações externas.",
-                    "Corrigido a função de excluir todos os recursos locais do menu com o botão direito, agora excluirá todos, invés de apenas um",
-                    "Corrigido a conversão de Perfis LOT 1 que resultava em recursos sendo marcados como 'Locais'",
-                    "Correção de pastas verdadeiras sendo trocadas no salvamento para usuários do Linux & Mac.",
-                    "Corrigido a criação de um relatório em Zip para usuários do Linux & Mac."
+                    "Corrigido o problema em que os perfis antigos não estavam sendo convertidos após a primeira inicialização.",
+                    "Corrigido o problema em que os recursos locais não eram atualizados automaticamente após alterações externas.",
+                    "Corrigido o problema em que excluir recursos locais pelo menu de clique com o botão direito excluía todos os recursos locais em vez de apenas um",
+                    "Corrigido o problema em que a conversão de perfis LOT 1 resultava em recursos sendo marcados como \"Local\"",
+                    "Corrigido o problema em que as pastas \"Reais\" eram trocadas ao salvar para usuários do Linux e Mac.",
+                    "Corrigido o problema em que usuários do Linux e Mac não conseguiam gerar um arquivo zip de registro."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.4",
-        "Date": "2023-04-08",
+        "Date": "08/04/2023",
         "ChangeGroups": [
             {
-                "Name": "Adicionada área de Ajuda & Relatórios",
+                "Name": "Adicionada a seção de Ajuda e Registros",
                 "Changes": [
                     "Acesse os seus relatórios facilmente.",
                     "Veja rapidamente os erros na sua sessão mais recente/atual.",
-                    "Simplifique um arquivo de relatório para focar no que realmente está acontecendo.",
-                    "Compartilhe um arquivo Zip contendo todos os relatórios necessários para que alguém o ajude."
+                    "Simplifique o arquivo de registro para se concentrar no que está acontecendo.",
+                    "Compartilhe um arquivo zip contendo todos os registros necessários para que alguém possa ajudá-lo."
                 ]
             },
             {
                 "Name": "Melhorias",
                 "Changes": [
-                    "Alteração nos ícones de filtros para refletir os ícones usados na lista."
+                    "Os ícones dos filtros foram trocados para refletir os ícones corretos usados nas listas."
                 ]
             },
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Corrigido o texto na coleção de importação para assinatura e cancelamento de assinatura que estavam invertidos.",
-                    "Corrigido a seleção de mapa para um novo jogo, que não permitia o usuário selecionar um mapa padrão."
+                    "Corrigido o texto na importação de coleção para assinar e cancelar a assinatura sendo invertido.",
+                    "Corrigido a seleção de mapa para um novo jogo não permitindo que os usuários selecionem um mapa padrão."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.3",
-        "Date": "2023-04-06",
+        "Date": "06/04/2023",
         "ChangeGroups": [
             {
                 "Name": "Correções",
                 "Changes": [
-                    "Corrigido um erro que causava carregamento infinito para alguns usuários."
+                    "Corrigido um bug que causava o carregamento infinito para alguns usuários."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.2",
-        "Date": "2023-04-05",
+        "Date": "05/04/2023",
         "ChangeGroups": [
             {
                 "Name": "Mudanças",
                 "Changes": [
-                    "Botão de Inscrever-se removido da guia do mod com o jogo aberto.",
-                    "Correção que não aplicava as DLCs quando carrega um perfil.",
-                    "Corrigido a opção de idioma estar vazia para alguns usuários.",
-                    "Baixar novamente pela Steam não forçará o foco de volta para a ferramenta.",
-                    "Outras alterações de UI."
+                    "Removida a guia de assinaturas das opções de mod do jogo.",
+                    "Corrigido o problema de os DLCs não serem aplicados ao carregar um perfil.",
+                    "Corrigido o problema de a opção de idioma estar vazia para algumas pessoas.",
+                    "Ao baixar novamente pela Steam, o foco não será mais redirecionado para a ferramenta.",
+                    "Outras alterações de Interface."
                 ]
             }
         ]
     },
     {
         "Version": "2.1.1",
-        "Date": "2023-04-05",
+        "Date": "05/04/2023",
         "ChangeGroups": [
             {
                 "Name": "Mudanças",
                 "Changes": [
-                    "Uma janela com informações aparecerá quando se inscrever em um item pela primeira vez.",
-                    "Adicionado um aviso em texto no painel quando se tem múltiplas versões do LOM instaladas.",
+                    "Adicionado uma janela de informações aparecerá ao assinar itens pela primeira vez.",
+                    "Adicionado um texto de aviso no painel quando você tem várias versões do LOM instaladas.",
                     "Foi adicionado pequenos rótulos ao lado dos títulos de pacote.",
                     "Ao pedir ao LOT para baixar novamente, o mesmo iniciará o carregamento e fechará o aplicativo enquanto está atualizando.",
                     "A velocidade de criação de relatórios do LSM foi corrigida e melhorada."
