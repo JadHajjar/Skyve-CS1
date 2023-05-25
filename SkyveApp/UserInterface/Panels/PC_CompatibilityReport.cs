@@ -13,20 +13,23 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_CompatibilityReport : PanelContent
 {
+	private ReviewRequest[]? reviewRequests;
 	private NotificationType CurrentKey;
 
-	public PC_CompatibilityReport()
+	public PC_CompatibilityReport() : base(CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious)
 	{
 		InitializeComponent();
 
 		var hasPackages = CompatibilityManager.User.SteamId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == CompatibilityManager.User.SteamId);
-		B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious;
+	B_Requests.Visible=	B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious;
 		B_YourPackages.Visible = hasPackages && CompatibilityManager.User.Verified && !CompatibilityManager.User.Malicious;
+		B_Requests.Text = LocaleCR.ReviewRequests.Format("");
 
 		LC_Items.Visible = false;
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
@@ -42,6 +45,18 @@ public partial class PC_CompatibilityReport : PanelContent
 		}
 
 		CompatibilityManager.ReportProcessed += CompatibilityManager_ReportProcessed;
+	}
+
+	protected override async Task<bool> LoadDataAsync()
+	{
+		reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
+
+		return true;
+	}
+
+	protected override void OnDataLoad()
+	{
+		B_Requests.Text = LocaleCR.ReviewRequests.Format($"({reviewRequests?.Length})");
 	}
 
 	protected override void LocaleChanged()
@@ -183,5 +198,15 @@ public partial class PC_CompatibilityReport : PanelContent
 			this.TryInvoke(() => LoadReport(items));
 		}
 		catch { }
+	}
+
+	private async void B_Requests_Click(object sender, EventArgs e)
+	{
+		if (reviewRequests == null)
+		{
+		reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
+		}
+
+		Form.PushPanel(null, new PC_ReviewRequests(reviewRequests));
 	}
 }

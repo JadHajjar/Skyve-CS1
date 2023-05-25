@@ -93,4 +93,5 @@ internal class LocaleCR : LocaleHelper
 	public static Translation Usage => _instance.GetText(nameof(Usage));
 	public static Translation PackageType => _instance.GetText(nameof(PackageType));
 	public static Translation Links => _instance.GetText(nameof(Links));
+	public static Translation ReviewRequests => _instance.GetText(nameof(ReviewRequests));
 }

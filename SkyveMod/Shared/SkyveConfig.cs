@@ -25,7 +25,7 @@ public class SkyveConfig
 	public string? GamePath;
 	public string? SteamPath;
 
-	public bool TurnOffSteamPanels = true;
+	public bool HidePanels;
 	public bool FastContentManager = true;
 	//public bool SoftDLLDependancy = false;
 	//public bool DeleteUnsubscribedItemsOnLoad = false;

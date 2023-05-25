@@ -307,11 +307,6 @@ public static class CitiesManager
 			await Task.Delay(1000);
 		}
 
-		if (!unsub)
-		{
-			SteamUtil.ReDownload(ids.ToArray());
-		}
-
 		return true;
 	}
 
