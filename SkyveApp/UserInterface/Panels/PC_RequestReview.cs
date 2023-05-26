@@ -110,7 +110,8 @@ public partial class PC_RequestReview : PanelContent
 
 		if (tb.Text.AsEnumerable().Count(x => !char.IsWhiteSpace(x) && x != '.') < 5)
 		{
-			ShowPrompt(LocaleCR.AddMeaningfulDescription, PromptButtons.OK, PromptIcons.Hand);
+			ShowPrompt(Locale.AddMeaningfulDescription, PromptButtons.OK, PromptIcons.Hand);
+			return;
 		}
 
 		if (B_Apply.Loading)

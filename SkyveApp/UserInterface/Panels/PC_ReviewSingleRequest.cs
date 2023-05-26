@@ -5,17 +5,15 @@ using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.Utilities;
+using SkyveApp.Utilities.IO;
+using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,7 +21,7 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ReviewSingleRequest : PanelContent
 {
 	private ReviewRequest _request;
-	private SlickControl logControl;
+	private readonly SlickControl logControl;
 
 	public PC_ReviewSingleRequest(ReviewRequest request) : base(true)
 	{
@@ -36,13 +34,15 @@ public partial class PC_ReviewSingleRequest : PanelContent
 
 		logControl = new SlickControl
 		{
-			Text = "Log Files.zip",
+			Cursor = Cursors.Hand,
+			Text = $"RequestBy_{SteamUtil.GetUser(_request.UserId)?.Name}_{DateTime.Now:yy-MM-dd_HH-mm}",
 			Dock = DockStyle.Top,
 			Height = (int)(50 * UI.UIScale),
 			Margin = UI.Scale(new Padding(5), UI.FontScale)
 		};
 
 		logControl.Paint += PC_ReviewSingleRequest_Paint;
+		logControl.Click += LogControl_Click;
 
 		TLP_Info.Controls.Add(logControl, 0, 2);
 
@@ -69,6 +69,18 @@ public partial class PC_ReviewSingleRequest : PanelContent
 				Packages = request.StatusPackages?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ulong.Parse).ToArray(),
 			})
 			{ BackColor = FormDesign.Design.AccentBackColor }, 0, 3);
+		}
+	}
+
+	private void LogControl_Click(object sender, EventArgs e)
+	{
+		if (_request.LogFile != null)
+		{
+			var fileName = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
+
+			File.WriteAllBytes(fileName, _request.LogFile);
+
+			PlatformUtil.OpenFolder(fileName);
 		}
 	}
 
@@ -102,8 +114,18 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		base.UIChanged();
 
-		tableLayoutPanel1.ColumnStyles[0].Width = (int)(200 * UI.FontScale);
-		label3.Font=label1.Font = UI.Font(7.5F, FontStyle.Bold);
+		tableLayoutPanel2.Width = (int)(200 * UI.FontScale);
+		label3.Font = label1.Font = UI.Font(7.5F, FontStyle.Bold);
+
+		foreach (Control item in roundedGroupTableLayoutPanel1.Controls)
+		{
+			item.Margin = UI.Scale(new Padding(3, 10, 3, 0), UI.FontScale);
+		}
+
+		foreach (Control item in tableLayoutPanel1.Controls)
+		{
+			item.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		}
 	}
 
 	private void PC_ReviewSingleRequest_Paint(object sender, PaintEventArgs e)

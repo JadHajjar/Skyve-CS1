@@ -264,4 +264,5 @@ internal class Locale : LocaleHelper
 	public static Translation SendReview => _instance.GetText(nameof(SendReview));
 	public static Translation UnknownUser => _instance.GetText(nameof(UnknownUser));
 	public static Translation SelectPackage => _instance.GetText(nameof(SelectPackage));
+	public static Translation AddMeaningfulDescription => _instance.GetText(nameof(AddMeaningfulDescription));
 }

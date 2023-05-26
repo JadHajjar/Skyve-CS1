@@ -77,7 +77,7 @@ partial class PC_CompatibilityReport
 			this.B_Requests.AutoSize = true;
 			this.B_Requests.ColorShade = null;
 			this.B_Requests.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Edit";
+			dynamicIcon1.Name = "I_RequestReview";
 			this.B_Requests.ImageName = dynamicIcon1;
 			this.B_Requests.Location = new System.Drawing.Point(997, 3);
 			this.B_Requests.Name = "B_Requests";
