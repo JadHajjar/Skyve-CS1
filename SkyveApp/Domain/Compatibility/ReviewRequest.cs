@@ -4,9 +4,16 @@ using System;
 
 namespace SkyveApp.Domain.Compatibility;
 [DynamicSqlClass("ReviewRequests")]
-public class ReviewRequest : IDynamicSql
+public class ReviewRequest : ReviewRequestNoLog
 {
-	[DynamicSqlProperty(PrimaryKey = true)]
+	[DynamicSqlProperty]
+	public byte[]? LogFile { get; set; }
+}
+
+[DynamicSqlClass("ReviewRequests")]
+public class ReviewRequestNoLog : IDynamicSql
+{
+	[DynamicSqlProperty(PrimaryKey = true, Indexer = true)]
 	public ulong PackageId { get; set; }
 	[DynamicSqlProperty(PrimaryKey = true)]
 	public ulong UserId { get; set; }
@@ -34,6 +41,4 @@ public class ReviewRequest : IDynamicSql
 	public bool IsStatus { get; set; }
 	[DynamicSqlProperty]
 	public DateTime Timestamp { get; set; }
-	[DynamicSqlProperty]
-	public byte[]? LogFile { get; set; }
 }

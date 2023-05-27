@@ -31,7 +31,7 @@
   "UnsubscribeThis": "取消訂閱此外掛程式",
   "UnsubscribeOther": "取消訂閱關聯的外掛程式",
   "Switch": "切換到連結的外掛程式",
-  "FlippedSwitch": "切換到此外掛",
+  "FlippedSwitch": "Switch to this package",
   "Deprecated": "已廢棄",
   "Reupload": "重新上傳",
   "CausesIssues": "導致問題",

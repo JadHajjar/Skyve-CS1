@@ -7,7 +7,7 @@ namespace SkyveMod.Patches.Startup {
     static class DLCPanel_Awake {
         static bool Prefix(DLCPanel __instance) {
             LogCalled();
-            if (!Settings.ConfigUtil.Config.TurnOffSteamPanels)
+            if (!Settings.ConfigUtil.Config.HidePanels)
                 return true;
             GameObject.DestroyImmediate(__instance.gameObject);
             return false;

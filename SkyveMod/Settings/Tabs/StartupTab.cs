@@ -17,10 +17,10 @@ namespace SkyveMod.Settings.Tabs {
             UIHelper panelHelper = tabStrip.AddTabPage("Startup");
 
             panelHelper.AddCheckbox(
-                "Remove ad panels",
-                ConfigUtil.Config.TurnOffSteamPanels,
+                "Hide steam panels",
+                ConfigUtil.Config.HidePanels,
                 val => {
-                    ConfigUtil.Config.TurnOffSteamPanels = val;
+                    ConfigUtil.Config.HidePanels = val;
                     ConfigUtil.SaveConfig();
                 });
 

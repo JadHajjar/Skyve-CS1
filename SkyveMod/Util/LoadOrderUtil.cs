@@ -24,7 +24,7 @@ namespace SkyveMod.Util {
         }
 
         public static void TurnOffSteamPanels() {
-            if(!Config.TurnOffSteamPanels) return;
+            if(!Config.HidePanels) return;
             SetFieldValue<WorkshopAdPanel>("dontInitialize", true);
             Log.Info("Turning off steam panels", true);
             var news = GameObject.FindObjectOfType<NewsFeedPanel>();

@@ -303,31 +303,31 @@
                 "Changes": [
                     "Compatibility Report ist nun direkt in Skype integriert.",
                     "Empfehlungen und Infotext sind jetzt klarer und einfacher zu handhaben.",
-                    "Eine Schlummer-Taste hinzugefügt, um eine bestimmte Kompatibilitätsbenachrichtigung abzubrechen.",
+                    "Eine Schlummer-Taste hinzugefügt, um eine bestimmte Kompatibilitätsbenachrichtigung auszublenden.",
                     "Benötigte Elemente leiten automatisch zum letzten Nachfolger der Pakete weiter.",
                     "Lokale Pakete werden automatisch mit ihrem Online-Gegenstück abgestimmt, indem sie die Informationen von Steam anzeigen und die Kompatibilitätsinformationen korrekt anzeigen.",
-                    "Sie können nun eine Überprüfung für ein Paket anfordern, um uns über fehlende Informationen in den Kompatibilitätsdaten zu informieren.",
+                    "Du kannst nun eine Überprüfung für ein Paket anfordern, um uns über fehlende Informationen in den Kompatibilitätsdaten zu informieren.",
                     "Der Reiter Kompatibilitätsbericht ist jetzt verfügbar."
                 ]
             },
             {
                 "Name": "Neue Funktionen",
                 "Changes": [
-                    "Du kannst jetzt die Tags direkt in der App für Mods und Assets bearbeiten. Assets sind mit dem Spiel synchronisiert.",
+                    "Du kannst jetzt die Find It! 2 Tags direkt in der App für Mods und Assets bearbeiten. Assets sind mit dem Spiel synchronisiert.",
                     "Auf der Paketseite wurde ein Reiter \"Referenzen\" hinzugefügt, um alle anderen Pakete zu sehen, die ihn referenzieren.",
                     "Option hinzugefügt, um optionale Pakete mit der gleichen Benachrichtigung wie benötigte Pakete zu versorgen.",
-                    "Hinzugefügte Sprachdialekte, Chinesisch Traditionell (Taiwan), Englisch Großbritannien und Portugiesisch Brasilien."
+                    "Hinzugefügte Sprachdialekte: Chinesisch Traditionell (Taiwan), Englisch (UK) und Portugiesisch (BR)."
                 ]
             },
             {
                 "Name": "Andere Änderungen",
                 "Changes": [
-                    "Pseudo-Mods beinhalten jetzt IMT Markings, Render! Presets, Proc<unk> Objects Fonts und Übersetzungsmods.",
+                    "Pseudo-Mods beinhalten jetzt IMT Markierungen, Render It! Presets, Procedural Objects Schriftarten und Übersetzungsmods.",
                     "Links zur Paketseite sowie weitere Informationen wie die Nutzung und den Typ des Pakets wurden hinzugefügt.",
                     "Neue Profilnutzung hinzugefügt: Karten-Erstellung, Szenario-Erstellung und Theme-Erstellung.",
-                    "Zusätzlichen Text in der Liste hinzugefügt, um anzuzeigen, wie viele Pakete aufgrund Ihrer Profilnutzung versteckt sind.",
-                    "Verbesserte den Actions-Button, um ihn sichtbarer und leichter zugänglich zu machen.",
-                    "Das neue Icon leuchtet nun basierend auf dem, was gerade passiert, blau zeigt, dass das Spiel läuft, rot bedeutet keine Internetverbindung, und schnell leuchten bedeutet, dass das Spiel gestartet oder geschlossen wird."
+                    "Zusätzlichen Text in der Liste hinzugefügt, um anzuzeigen, wie viele Pakete aufgrund der gewählten Profilnutzung ausgeblendet sind.",
+                    "Aktions-Button verbessert, um ihn sichtbarer und leichter zugänglich zu machen.",
+                    "Das neue Icon leuchtet nun basierend auf dem, was gerade passiert, blau zeigt, dass das Spiel läuft, rot bedeutet keine Internetverbindung, und schnelles leuchten bedeutet, dass das Spiel gestartet oder geschlossen wird."
                 ]
             }
         ]

@@ -213,6 +213,11 @@ public static class CompatibilityManager
 			}
 		}
 
+		if (package.Name.Contains("theme mix", StringComparison.InvariantCultureIgnoreCase))
+		{
+			info.Type = PackageType.ThemeMix;
+		}
+
 		if (package.RequiredPackages?.Contains(MUSIC_MOD_ID) ?? false)
 		{
 			info.Statuses.Add(new(StatusType.MusicCanBeCopyrighted));
@@ -298,14 +303,14 @@ public static class CompatibilityManager
 				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.UnsubscribeThis });
 			}
 
-			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && package.SteamDescription is not null && package.SteamDescription.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length <= 3)
+			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && package.SteamDescription is not null && package.SteamDescription.GetWords().Length <= 30)
 			{
 				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
 			}
 
 			if (package.IsMod && !author.Malicious && DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
 			{
-				CompatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.Deprecated));
+				CompatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
 			}
 		}
 

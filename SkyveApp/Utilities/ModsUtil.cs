@@ -212,16 +212,13 @@ internal static class ModsUtil
 
 	public static DownloadStatus GetStatus(IPackage mod, out string reason)
 	{
-		reason = string.Empty;
-		return DownloadStatus.OK;
-
-		if (mod.Package?.RemovedFromSteam ?? false)
+		if (mod.RemovedFromSteam)
 		{
 			reason = Locale.PackageIsRemoved.Format(mod.CleanName());
 			return DownloadStatus.Removed;
 		}
 
-		if (mod.Package?.WorkshopInfo is null)
+		if (mod.ServerTime == default)
 		{
 			if (!mod.Workshop)
 			{
@@ -233,11 +230,11 @@ internal static class ModsUtil
 			return DownloadStatus.Unknown;
 		}
 
-		if (!Directory.Exists(mod.Folder))
-		{
-			reason = Locale.PackageIsNotDownloaded.Format(mod.CleanName());
-			return DownloadStatus.NotDownloaded;
-		}
+		//if (!Directory.Exists(mod.Folder))
+		//{
+		//	reason = Locale.PackageIsNotDownloaded.Format(mod.CleanName());
+		//	return DownloadStatus.NotDownloaded;
+		//}
 
 		var updatedServer = mod.ServerTime;
 		var updatedLocal = mod.Package?.LocalTime ?? DateTime.MinValue;

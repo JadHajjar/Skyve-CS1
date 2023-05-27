@@ -19,7 +19,7 @@
   "Stable": "稳定的",
   "NotEnoughInformation": "没有足够的信息",
   "HasIssues": "存在问题",
-  "Broken": "损坏的",
+  "Broken": "已损坏",
   "Incompatible": "不兼容",
   "CityBuilding": "城市建设",
   "AssetCreation": "资产制作",
@@ -31,7 +31,7 @@
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
   "Switch": "改为使用其它插件",
-  "FlippedSwitch": "切换到此插件",
+  "FlippedSwitch": "替换为此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
   "CausesIssues": "导致问题",
@@ -110,7 +110,7 @@
     "One": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。\n\n如果需要，可以使用 '{1}' 来恢复您的存档。请阅读其工坊页面描述以获取更多信息。"
   },
   "Status_TestVersion": {
-    "Zero": "这是某个原版模组的测试版。请注意，测试版模组可能会出现意外问题。",
+    "Zero": "这是测试版模组。请注意，测试版模组有可能出现意外问题。",
     "One": "这是 '{1}' 的测试版。\n请注意，测试版模组可能会出现意外问题。"
   },
   "Status_MissingDlc": {
@@ -173,23 +173,23 @@
   "RequestReviewInfo": "使用此插件时遇到问题？",
   "RequestReview": "申请检查",
   "MissingDependencyCount": {
-    "One": "{0} {1} 缺少依赖关系",
-    "Plural": "{0} {1} 缺少依赖关系"
+    "One": "{0} 个{1} 缺少必需物品",
+    "Plural": "{0} 个{1} 缺少必需物品"
   },
   "CautionCount": "{0} {1} 建议谨慎使用",
   "WarningCount": "{0} {1} 带有警告",
   "AttentionRequiredCount": {
-    "One": "{0} {1} 需要注意一下",
-    "Plural": "{0} {1} 需要注意一下"
+    "One": "{0} 个{1} 需要注意一下",
+    "Plural": "{0} 个{1} 需要注意一下"
   },
   "ExcludeCount": {
-    "One": "{0} {1} 应当被卸下",
-    "Plural": "{0} {1} 应当被卸下"
+    "One": "{0} 个{1} 应当被卸下",
+    "Plural": "{0} 个{1} 应当被卸下"
   },
   "UnsubscribeCount": "{0} {1} 应该取消订阅",
   "SwitchCount": {
-    "One": "{0} {1} 需要替换",
-    "Plural": "{0} {1} 需要替换"
+    "One": "{0} 个{1} 需要替换",
+    "Plural": "{0} 个{1} 需要替换"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",

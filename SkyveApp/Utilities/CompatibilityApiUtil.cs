@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Steam;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +9,21 @@ using System.Threading.Tasks;
 namespace SkyveApp.Utilities;
 internal class CompatibilityApiUtil
 {
+	private static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
+	{
+		return await ApiUtil.Get<T>(KEYS.API_URL + url
+			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT)) }
+			, queryParams);
+	}
+
+	private static async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
+	{
+		return await ApiUtil.Post<TBody, T>(KEYS.API_URL + url
+			, body
+			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT)) }
+			, queryParams);
+	}
+
 	internal static async Task<bool> IsCommunityManager()
 	{
 		return await Get<bool>("/IsCommunityManager");
@@ -28,21 +44,6 @@ internal class CompatibilityApiUtil
 		return await Post<PostPackage, ApiResponse>("/SaveEntry", package);
 	}
 
-	private static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
-	{
-		return await ApiUtil.Get<T>(KEYS.API_URL + url
-			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT)) }
-			, queryParams);
-	}
-
-	private static async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
-	{
-		return await ApiUtil.Post<TBody, T>(KEYS.API_URL + url
-			, body
-			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT)) }
-			, queryParams);
-	}
-
 	internal static async Task<Dictionary<string, string>?> Translations()
 	{
 		return await Get<Dictionary<string, string>>("/Translations");
@@ -61,5 +62,10 @@ internal class CompatibilityApiUtil
 	internal static async Task<ReviewRequest[]?> GetReviewRequests()
 	{
 		return await Get<ReviewRequest[]>("/GetReviewRequests");
+	}
+
+	internal static async Task<ReviewRequest?> GetReviewRequest(ulong userId, ulong packageId)
+	{
+		return await Get<ReviewRequest>("/GetReviewRequest", (nameof(userId), userId), (nameof(packageId), packageId));
 	}
 }

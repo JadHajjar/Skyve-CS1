@@ -45,7 +45,7 @@ public class Package : IPackage
 	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : this.GetCompatibilityInfo().Data?.Package.SteamId ?? 0);
 	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
-	public string? Name => WorkshopInfo?.Name;
+	public string? Name => WorkshopInfo?.Name ?? Path.GetFileName(Folder);
 	public bool IsMod => Mod is not null;// || (WorkshopInfo?.IsMod ?? false);
 	public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? Enumerable.Empty<TagItem>();
 	public Bitmap? IconImage => WorkshopInfo?.IconImage;
