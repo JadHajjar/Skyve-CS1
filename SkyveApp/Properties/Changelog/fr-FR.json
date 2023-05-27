@@ -383,7 +383,7 @@
             {
                 "Name": "Changements",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
+                    "Les panneaux Steam dans le menu principal sont maintenant affichés par défaut, vous pouvez toujours les masquer dans les paramètres du mod.",
                     "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
                     "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
                 ]
@@ -392,7 +392,7 @@
                 "Name": "Corrections",
                 "Changes": [
                     "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Correction du Status obsolète."
                 ]
             }
         ]
