@@ -38,6 +38,8 @@ public partial class PC_RequestReview : PanelContent
 	protected override void LocaleChanged()
 	{
 		Text = LocaleCR.RequestReview;
+		L_Disclaimer.Text = LocaleCR.RequestReviewDisclaimer;
+		B_Apply.Text = Locale.SendReview + "*";
 	}
 
 	protected override void UIChanged()
@@ -46,7 +48,7 @@ public partial class PC_RequestReview : PanelContent
 
 		P_Main.Padding = UI.Scale(new Padding(7), UI.FontScale);
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
-		B_Apply.Margin = B_Apply.Padding = TB_Note.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		L_Disclaimer.Margin = B_Apply.Margin = B_Apply.Padding = TB_Note.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		foreach (Control item in TLP_MainInfo.Controls)
 		{
 			item.Margin = UI.Scale(new Padding(5), UI.FontScale);
@@ -57,12 +59,14 @@ public partial class PC_RequestReview : PanelContent
 		B_AddInteraction.Margin = B_AddStatus.Margin = UI.Scale(new Padding(50, 40, 0, 0), UI.UIScale);
 
 		TB_Note2.MinimumSize = TB_Note.MinimumSize = UI.Scale(new Size(0, 100), UI.UIScale);
+		L_Disclaimer.Font = UI.Font(7.5F, FontStyle.Bold | FontStyle.Italic);
 	}
 
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
 
+		L_Disclaimer.ForeColor = design.InfoColor;
 		P_Main.BackColor = design.AccentBackColor;
 	}
 
@@ -72,6 +76,12 @@ public partial class PC_RequestReview : PanelContent
 		TLP_Button.Show();
 		TLP_MainInfo.Show();
 		P_Main.Show();
+
+		var data = CurrentPackage.GetCompatibilityInfo();
+		DD_Stability.SelectedItem = data.Data?.Package.Stability ?? PackageStability.NotReviewed;
+		DD_PackageType.SelectedItem = data.Data?.Package.Type ?? PackageType.GenericPackage;
+		DD_DLCs.SelectedItems = data.Data?.Package is null ? Enumerable.Empty<Domain.Steam.SteamDlc>() : SteamUtil.Dlcs.Where(x => data.Data?.Package.RequiredDLCs?.Contains(x.Id) ?? false);
+		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => data.Data?.Package.Usage.HasFlag(x) ?? true);
 	}
 
 	private void B_AddStatus_Click(object sender, EventArgs e)
@@ -96,6 +106,14 @@ public partial class PC_RequestReview : PanelContent
 
 	private async void B_Apply_Click(object sender, EventArgs e)
 	{
+		var tb = statusControl is null && iteractionControl is null ? TB_Note2 : TB_Note;
+
+		if (tb.Text.AsEnumerable().Count(x => !char.IsWhiteSpace(x) && x != '.') < 5)
+		{
+			ShowPrompt(Locale.AddMeaningfulDescription, PromptButtons.OK, PromptIcons.Hand);
+			return;
+		}
+
 		if (B_Apply.Loading)
 		{
 			return;
@@ -106,7 +124,7 @@ public partial class PC_RequestReview : PanelContent
 		var postPackage = new ReviewRequest
 		{
 			PackageId = CurrentPackage!.SteamId,
-			PackageNote = TB_Note.Text
+			PackageNote = tb.Text
 		};
 
 		if (statusControl is not null)

@@ -137,7 +137,7 @@ partial class PC_CompatibilityManagement
 			this.T_Info.LinkedControl = this.TLP_MainInfo;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
-			this.T_Info.Selected = false;
+			this.T_Info.Selected = true;
 			this.T_Info.Size = new System.Drawing.Size(258, 25);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
@@ -223,6 +223,7 @@ partial class PC_CompatibilityManagement
 			// 
 			// T_NewLink
 			// 
+			this.T_NewLink.Display = false;
 			dynamicIcon2.Name = "I_Add";
 			this.T_NewLink.ImageName = dynamicIcon2;
 			this.T_NewLink.Location = new System.Drawing.Point(12, 57);
@@ -250,6 +251,7 @@ partial class PC_CompatibilityManagement
 			// 
 			// T_NewTag
 			// 
+			this.T_NewTag.Display = false;
 			dynamicIcon4.Name = "I_Add";
 			this.T_NewTag.ImageName = dynamicIcon4;
 			this.T_NewTag.Location = new System.Drawing.Point(12, 90);
@@ -301,7 +303,7 @@ partial class PC_CompatibilityManagement
 			this.CB_BlackListId.EnterTriggersClick = false;
 			this.CB_BlackListId.Location = new System.Drawing.Point(3, 125);
 			this.CB_BlackListId.Name = "CB_BlackListId";
-			this.CB_BlackListId.Size = new System.Drawing.Size(135, 33);
+			this.CB_BlackListId.Size = new System.Drawing.Size(243, 33);
 			this.CB_BlackListId.SpaceTriggersClick = true;
 			this.CB_BlackListId.TabIndex = 17;
 			this.CB_BlackListId.Text = "BlackListId";
@@ -318,7 +320,7 @@ partial class PC_CompatibilityManagement
 			this.CB_BlackListName.EnterTriggersClick = false;
 			this.CB_BlackListName.Location = new System.Drawing.Point(3, 164);
 			this.CB_BlackListName.Name = "CB_BlackListName";
-			this.CB_BlackListName.Size = new System.Drawing.Size(174, 33);
+			this.CB_BlackListName.Size = new System.Drawing.Size(209, 33);
 			this.CB_BlackListName.SpaceTriggersClick = true;
 			this.CB_BlackListName.TabIndex = 17;
 			this.CB_BlackListName.Text = "BlackListName";
@@ -346,7 +348,7 @@ partial class PC_CompatibilityManagement
 			this.T_Statuses.LinkedControl = this.FLP_Statuses;
 			this.T_Statuses.Location = new System.Drawing.Point(258, 5);
 			this.T_Statuses.Name = "T_Statuses";
-			this.T_Statuses.Selected = true;
+			this.T_Statuses.Selected = false;
 			this.T_Statuses.Size = new System.Drawing.Size(258, 25);
 			this.T_Statuses.TabIndex = 0;
 			this.T_Statuses.TabStop = false;
@@ -635,7 +637,7 @@ partial class PC_CompatibilityManagement
 			this.packageCrList.AutoScroll = true;
 			this.packageCrList.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.packageCrList.HighlightOnHover = true;
-			this.packageCrList.ItemHeight = 30;
+			this.packageCrList.ItemHeight = 32;
 			this.packageCrList.Location = new System.Drawing.Point(3, 72);
 			this.packageCrList.Name = "packageCrList";
 			this.packageCrList.SeparateWithLines = true;

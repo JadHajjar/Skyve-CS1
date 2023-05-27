@@ -113,8 +113,8 @@ namespace SkyveMod.UI {
         static string GetText() {
             if (IsDebugMono())
                 return "Debug Mono (SLOW!)";
-            else if (Helpers.InStartupMenu)
-                return "Release Mono";
+            //else if (Helpers.InStartupMenu)
+            //    return "Release Mono";
             else
                 return "";
         }

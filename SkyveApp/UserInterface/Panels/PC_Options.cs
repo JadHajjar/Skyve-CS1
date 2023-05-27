@@ -34,8 +34,6 @@ public partial class PC_Options : PanelContent
 			}
 		}
 
-		TB_VirtualAppDataPath.Visible = TB_VirtualGamePath.Visible = LocationManager.Platform is not Platform.Windows;
-
 		TB_GamePath.Text = LocationManager.GamePath;
 		TB_AppDataPath.Text = LocationManager.AppDataPath;
 		TB_SteamPath.Text = LocationManager.SteamPath;
@@ -45,14 +43,12 @@ public partial class PC_Options : PanelContent
 			TB_GamePath.Placeholder = "Z:\\...\\Steam\\SteamLibrary\\steamapps\\common\\Cities_Skylines";
 			TB_AppDataPath.Placeholder = "Z:\\home\\USERNAME\\.local\\share\\Colossal Order\\Cities_Skylines";
 			TB_SteamPath.Placeholder = "/usr/bin/steam";
-			TB_VirtualAppDataPath.Placeholder = "/home/USERNAME/.local/share/Colossal Order/Cities_Skylines";
-			TB_VirtualGamePath.Placeholder = "/.../Steam/SteamLibrary/steamapps/common/Cities_Skylines";
 		}
 
 		if (LocationManager.Platform is Platform.MacOSX)
 		{
-			TB_VirtualGamePath.Placeholder = TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
-			TB_VirtualGamePath.Placeholder = TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
+			TB_GamePath.Placeholder = TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
+			TB_GamePath.Placeholder = TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
 			TB_SteamPath.Placeholder = "/Applications/Steam.app/Contents";
 		}
 

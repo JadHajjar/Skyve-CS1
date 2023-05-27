@@ -91,6 +91,7 @@
     <Compile Update="UserInterface\Generic\ReviewRequestOptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Generic\SteamUserControl.cs" />
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />
     <Compile Update="UserInterface\Lists\CompatibilityReportList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Lists\ReviewRequestList.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />

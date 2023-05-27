@@ -26,6 +26,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private PostPackage? postPackage;
 	private PostPackage? lastPackageData;
 	private bool valuesChanged;
+	private readonly ReviewRequest? _request;
 
 	internal IPackage? CurrentPackage { get; private set; }
 
@@ -81,6 +82,11 @@ public partial class PC_CompatibilityManagement : PanelContent
 		{
 			I_List.Visible = false;
 		}
+	}
+
+	public PC_CompatibilityManagement(ReviewRequest request) : this(new[] { request.PackageId })
+	{
+		_request = request;
 	}
 
 	private List<ulong> PackageList => packageCrList.SafeGetItems().ToList(x => x.Item);
@@ -286,10 +292,22 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		CB_BlackListName.Checked = postPackage.BlackListName;
 		CB_BlackListId.Checked = postPackage.BlackListId;
-		DD_Stability.SelectedItem = postPackage.Stability;
-		DD_PackageType.SelectedItem = postPackage.Type;
-		DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => postPackage.RequiredDLCs?.Contains(x.Id) ?? false);
-		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => postPackage.Usage.HasFlag(x));
+
+		if (_request is not null && !_request.IsStatus && !_request.IsInteraction)
+		{
+			DD_Stability.SelectedItem = (PackageStability)_request.PackageStability;
+			DD_PackageType.SelectedItem = (PackageType)_request.PackageType;
+			DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => _request.RequiredDLCs?.Contains(x.Id.ToString()) ?? false);
+			DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => ((PackageUsage)_request.PackageUsage).HasFlag(x));
+		}
+		else
+		{
+			DD_Stability.SelectedItem = postPackage.Stability;
+			DD_PackageType.SelectedItem = postPackage.Type;
+			DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => postPackage.RequiredDLCs?.Contains(x.Id) ?? false);
+			DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => postPackage.Usage.HasFlag(x));
+		}
+
 		TB_Note.Text = postPackage.Note;
 
 		P_Tags.Controls.Clear(true, x => !string.IsNullOrEmpty(x.Text));
@@ -306,7 +324,32 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		SetLinks(postPackage.Links ?? new());
 
-		foreach (var item in postPackage.Statuses ?? new())
+		postPackage.Statuses ??= new();
+		postPackage.Interactions ??= new();
+
+		if (_request?.IsInteraction ?? false)
+		{
+			postPackage.Interactions.Add(new()
+			{
+				Action = (StatusAction)_request.StatusAction,
+				IntType = _request.StatusType,
+				Note = _request.StatusNote,
+				Packages = _request.StatusPackages?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ulong.Parse).ToArray(),
+			});
+		}
+
+		if (_request?.IsStatus ?? false)
+		{
+			postPackage.Statuses.Add(new()
+			{
+				Action = (StatusAction)_request.StatusAction,
+				IntType = _request.StatusType,
+				Note = _request.StatusNote,
+				Packages = _request.StatusPackages?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ulong.Parse).ToArray(),
+			});
+		}
+
+		foreach (var item in postPackage.Statuses)
 		{
 			var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage, item);
 
@@ -316,7 +359,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			B_AddStatus.SendToBack();
 		}
 
-		foreach (var item in postPackage.Interactions ?? new())
+		foreach (var item in postPackage.Interactions)
 		{
 			var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage, item);
 

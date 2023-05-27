@@ -95,6 +95,11 @@ internal class ModsBubble : StatusBubbleBase
 				modsEnabled++;
 			}
 
+			if (Loading)
+			{
+				continue;
+			}
+
 			switch (mod.Package.Status)
 			{
 				case DownloadStatus.OutOfDate:
