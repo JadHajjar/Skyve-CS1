@@ -339,8 +339,8 @@
             {
                 "Name": "Fixes",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
+                    "Herstelde oude instellingen en profielen worden soms niet in Skyve overgedragen.",
+                    "Er wordt een snelkoppeling aangemaakt als u Skyve opnieuw opent, wanneer u voorheen LOM2 had.",
                     "Fixed a rare case where the compatibility info was not loading.",
                     "Enabled the ability to request a review for a package that is currently broken.",
                     "Loosened the sensitivity of the 'Partially Downloaded' notification."
