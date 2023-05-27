@@ -339,10 +339,10 @@
             {
                 "Name": "Corrections",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
+                    "Correction d'un problème d'importation des paramètres et profil précédent sur Skyve.",
+                    "Un raccourci sera désormais créé lorsque vous lancez pour la première fois Skyve si vous aviez LOM2 précédemment.",
+                    "Correction d'un problème rare où les infos de compatibilités ne chargeaient pas.",
+                    "Activation de la possibilité de demander une révision pour un paquet qui est actuellement cassé.",
                     "Loosened the sensitivity of the 'Partially Downloaded' notification."
                 ]
             }
@@ -355,9 +355,9 @@
             {
                 "Name": "Changements",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
+                    "Amélioration des performances de l'application. Chargement plus rapide et moins de blocages attendus.",
                     "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Correction de mod détecté, à tort, dans le dossier des ressources local."
                 ]
             }
         ]
@@ -369,7 +369,7 @@
             {
                 "Name": "Corrections",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
+                    "Correction de l'onglet des options qui n'apparaissaient pas sur macOS et Linux.",
                     "Fixed the Help & Logs tab not loading your current log automatically.",
                     "Fixed the log file path being wrong on Linux."
                 ]
