@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' kan være utdatert, den ble oppdatert {1}",
   "PackageIsIncomplete": "Den lokale størrelsen av '{0}' ({1}) er forskjellig enn Steams {2}",
   "RemovedFromSteam": "Fjernet fra Steam",
-  "Missing": "Mangler"
+  "Missing": "Mangler",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }

@@ -100,6 +100,7 @@
   "Interaction_Identical": "هذه إصدارات متعددة من نفس الحزمة.\r\n\r\nيجب عليك اختيار واحد منها فقط.",
   "Status_Succeeded": "'{0}' نجح ب '{1}'.\r\n\r\nأنت تستخدم بالفعل '{1}' لذلك لا حاجة إلى '{0}' بعد الآن.",
   "Status_Deprecated": "'{0}' مهجور, لم يعد مدعوما من قبل مؤلفه.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' هو إعادة تحميل الحزمة الأصلية.",
     "One": "هذا هو إعادة تحميل من '{1}'."
@@ -201,5 +202,10 @@
   "NameList": "ترجمات الاسم / اللعبة",
   "ApplyChangedBeforeExit": "لديك تغييرات غير محفوظة.\r\n\r\nهل ترغب في تطبيق هذه التغييرات قبل المتابعة؟",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "مؤلف {0}، {1}، معروف بأنه خبيث و/أو أنه يتضمن محتوى ضار مثل الفيروسات في الحزم الخاصة بهم."
+  "AuthorMalicious": "مؤلف {0}، {1}، معروف بأنه خبيث و/أو أنه يتضمن محتوى ضار مثل الفيروسات في الحزم الخاصة بهم.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }

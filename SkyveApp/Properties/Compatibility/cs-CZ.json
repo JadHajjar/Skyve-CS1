@@ -100,6 +100,7 @@
   "Interaction_Identical": "Jedná se o více verzí stejného balíčku.\r\n\r\nMěli byste vybrat pouze jednu z nich.",
   "Status_Succeeded": "'{0}' je uspěl '{1}'.\r\n\r\nJiž používáte '{1}', takže již není potřeba '{0}'.",
   "Status_Deprecated": "'{0}' je zastaralé, není již podporováno jeho autorem.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' je opětovné nahrání původního balíčku.",
     "One": "Toto je opětovné nahrání '{1}'."
@@ -201,5 +202,10 @@
   "NameList": "Název/Seznam/Překlady her",
   "ApplyChangedBeforeExit": "Máte neuložené změny.\r\n\r\nChcete tyto změny použít, než budete pokračovat?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "Autor {0}, {1}, je známý jako škodlivý a/nebo za zahrnutí škodlivého obsahu jako jsou viry do svých balíčků."
+  "AuthorMalicious": "Autor {0}, {1}, je známý jako škodlivý a/nebo za zahrnutí škodlivého obsahu jako jsou viry do svých balíčků.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }

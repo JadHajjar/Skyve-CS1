@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "外掛 「{0}」 可能已過期，它已經進行了更新 「{1}」",
   "PackageIsIncomplete": "本地外掛「{0}」 的檔案大小({1}) 與其工坊版本的檔案大小 {2} 不同",
   "RemovedFromSteam": "已從 Steam 工坊移除",
-  "Missing": "丟失"
+  "Missing": "丟失",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }

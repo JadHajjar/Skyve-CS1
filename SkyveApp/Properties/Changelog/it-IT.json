@@ -331,5 +331,70 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il problema delle impostazioni e dei profili precedenti che a volte non venivano trasferiti a Skyve.",
+                    "Ora viene creato un collegamento quando si apre Skyve per la prima volta dopo aver utilizzato LOM2.",
+                    "Corretto un raro caso in cui le informazioni sulla compatibilità non venivano caricate.",
+                    "Abilitata la possibilità di richiedere una revisione per un pacchetto attualmente non funzionante.",
+                    "Ridotta la sensibilità della notifica \"Parzialmente scaricato\"."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Cambiamenti",
+                "Changes": [
+                    "Migliorate le prestazioni dell'app. Si prevedono tempi di caricamento più rapidi e meno stuttering.",
+                    "Corretta un'interazione tra mod simili che comparivano nel Rapporto di compatibilità quando se ne aveva solo una.",
+                    "Corretto il rilevamento delle mod nella cartella delle risorse locali."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretta la scheda delle opzioni che non si apre per macOS e Linux.",
+                    "È stato risolto il problema del caricamento automatico del registro corrente nella scheda Guida e Registri.",
+                    "Corretto il percorso errato del file di log su Linux."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Cambiamenti",
+                "Changes": [
+                    "I pannelli di Steam nel menu principale sono ora visualizzati per impostazione predefinita; è comunque possibile nasconderli nelle impostazioni della mod.",
+                    "La richiesta di una recensione ora richiede una descrizione valida e invia anche i vostri log con la richiesta. Una clausola di esclusione della responsabilità è visualizzata accanto al pulsante \"Invia\".",
+                    "Ridotto il livello di segnalazione di una mod che non viene aggiornata da un po' di tempo a 'Info', in modo che non ti informi."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il riepilogo delle attività che non viene visualizzato nel pannello di controllo.",
+                    "Risolto il problema dello stato di scaduto che non funziona correttamente."
+                ]
+            }
+        ]
     }
 ]

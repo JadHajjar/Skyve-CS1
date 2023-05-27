@@ -331,5 +331,70 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Fehlerbehebungen",
+                "Changes": [
+                    "Vorherige Einstellungen und Profile die manchmal nicht an Skype übertragen wurden, wurden behoben.",
+                    "Beim ersten Öffnen von Skyve wird nun eine Verknüpfung erstellt, wenn vorher LOM2 verwendet wurde.",
+                    "Es wurde ein seltener Fall behoben, in dem die Kompatibilitätsinformationen nicht geladen wurden.",
+                    "Die Möglichkeit, eine Überprüfung für ein derzeit defektes Paket anzufordern, wurde aktiviert.",
+                    "Die Empfindlichkeit der 'Teilweise heruntergeladen' Benachrichtigung wurde verringert."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Änderungen",
+                "Changes": [
+                    "Die Leistung der App wurde verbessert. Schnellere Ladezeiten und weniger Hänger werden erwartet.",
+                    "Es wurde eine Interaktion zwischen ähnlichen Mods behoben, die im Kompatibilitätsbericht angezeigt werden, wenn nur eine von ihnen vorhanden ist.",
+                    "Erkennung von Mods im Ordner für lokale Assets behoben."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Fehlerbehebungen",
+                "Changes": [
+                    "Beheben der Registerkarte Optionen, die nicht auf macOS & Linux geöffnet wurden.",
+                    "Im Reiter Hilfe & Protokolle wurde behoben, dass das aktuelle Log nicht automatisch geladen wurde.",
+                    "Falscher Pfad der Logdatei unter Linux wurde behoben."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Änderungen",
+                "Changes": [
+                    "Steam-Paneele im Hauptmenü werden nun standardmäßig angezeigt, du kannst sie immer noch in den Mod-Einstellungen ausblenden.",
+                    "Das Anfordern einer Überprüfung erfordert jetzt eine gültige Beschreibung und sendet auch deine Logs mit der Anfrage. Ein Haftungsausschluss wird neben dem 'Senden'-Knopf angezeigt.",
+                    "Die Meldungsstufe einer Mod, die seit längerer Zeit nicht aktualisiert wurde, wurde auf 'Info' verringert, so dass du nicht darüber benachrichtigt wirst."
+                ]
+            },
+            {
+                "Name": "Fehlerbehebungen",
+                "Changes": [
+                    "Die Zusammenfassung der Assets wurde im Dashboard nicht angezeigt.",
+                    "Das nicht korrekte Funktionieren des 'veraltet' Status wurde behoben."
+                ]
+            }
+        ]
     }
 ]
