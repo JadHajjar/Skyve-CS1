@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' อาจล้าสมัย {1} อัปเดตแล้ว",
   "PackageIsIncomplete": "ขนาดของ '{0}' ({1}) ที่อยู่ในเครื่องแตกต่างกันกับ {2} ของสตีม",
   "RemovedFromSteam": "ถูกลบออกจากสตีม",
-  "Missing": "หายไป"
+  "Missing": "หายไป",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }
