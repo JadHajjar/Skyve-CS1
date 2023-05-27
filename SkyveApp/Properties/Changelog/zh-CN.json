@@ -371,7 +371,7 @@
                 "Changes": [
                     "Fixed the options tab not opening for macOS & Linux.",
                     "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "修复 Linux 系统上日志文件路径错误的问题。"
                 ]
             }
         ]
@@ -391,8 +391,8 @@
             {
                 "Name": "修复",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "修复了统计面板的资产概要没有显示的问题。",
+                    "修复了检查插件是否已过期功能没有正常工作的问题。"
                 ]
             }
         ]
