@@ -344,7 +344,7 @@
   "Service Vehicle Selector 2 blocks Theme Mixer 2 for some players to be able to change the Theme textures.": "Service Vehicle Selector 2 会对 Theme Mixer 2 进行限制，以使某些玩家能够更改地图主题的纹理。",
   "Additive Shader is not compatible with the variable sunrise/sunset times from Real Time. Use the Additive Shader test version instead.": "Additive Shader 与 Real Time 模组的可变日出/日落时间功能不兼容。请改用 Prop Anarchy Temporary Fix 或 Visibility Control 模组。",
   "Deactivate the build in Unlimited Soil mod of Colossal Order, as its function is included in Extra Landscaping Tools.": "请在内容管理器内禁用原版游戏的“无限土地”模组。Extra Landscaping Tools 模组已经包含无限土地的功能。",
-  "The fix is part of the base game now.": "The fix is part of the base game now.",
+  "The fix is part of the base game now.": "原版游戏已经修复此问题，不再需要此模组。",
   "This is a standard, builtin mod uploaded to the Workshop.": "这是一个被上传至创意工坊的游戏内置模组。",
   "The original mod supports various languages.": "原版模组支持多种语言。",
   "The functionality of this mod is included in the game itself, even though the calculations in this mod are slightly different.": "这个模组的功能包含在游戏本身中，尽管这个模组的计算略有不同。",
