@@ -480,7 +480,7 @@
   "PackageIsIncomplete": "ローカル側の「{0}」 ({1}) とSteam側の {2} でサイズが違う",
   "RemovedFromSteam": "Steamから削除済み",
   "Missing": "不明",
-  "LoggedInAs": "ログイン中",
+  "LoggedInAs": "次でログイン中",
   "UnknownUser": "不明なユーザー",
   "AddMeaningfulDescription": "リクエストに具体的な問題点などの説明を追加して下さい。"
 }
