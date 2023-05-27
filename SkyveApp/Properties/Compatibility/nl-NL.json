@@ -100,6 +100,7 @@
   "Interaction_Identical": "Dit zijn meerdere versies van hetzelfde pakket.\r\n\r\nKies slechts één van hen.",
   "Status_Succeeded": "'{0}' is geslaagd door '{1}'.\r\n\r\nU gebruikt al '{1}' dus er is geen noodzaak meer voor '{0}'.",
   "Status_Deprecated": "'{0}' is verouderd, het wordt niet langer ondersteund door de auteur.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is een heruploaden van een origineel pakket.",
     "One": "Dit is een herupload van '{1}'."
@@ -201,5 +202,10 @@
   "NameList": "Naam-Lijst/Spelvertalingen",
   "ApplyChangedBeforeExit": "U hebt niet-opgeslagen wijzigingen.\r\n\r\nWilt u deze wijzigingen toepassen voordat u doorgaat?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "De auteur van {0}, {1}, is bekend als kwaadaardig en/of voor het opnemen van schadelijke inhoud zoals virussen in hun pakketten."
+  "AuthorMalicious": "De auteur van {0}, {1}, is bekend als kwaadaardig en/of voor het opnemen van schadelijke inhoud zoals virussen in hun pakketten.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }
