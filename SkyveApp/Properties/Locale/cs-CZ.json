@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' může být zastaralé, bylo aktualizováno {1}",
   "PackageIsIncomplete": "Místní velikost '{0}' ({1}) je jiná než Steam {2}",
   "RemovedFromSteam": "Odebráno ze Steamu",
-  "Missing": "Chybějící"
+  "Missing": "Chybějící",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }
