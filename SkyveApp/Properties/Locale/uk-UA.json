@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' може бути застарілим, воно було оновлено {1}",
   "PackageIsIncomplete": "Локальний розмір '{0}' ({1}) відрізняється від розміру в Steam {2}",
   "RemovedFromSteam": "Видалено з воркшопа",
-  "Missing": "Відсутний"
+  "Missing": "Відсутний",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }
