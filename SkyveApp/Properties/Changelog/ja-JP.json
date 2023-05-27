@@ -337,13 +337,13 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修正",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "以前の設定やプロファイルが、希にSkyveに引き継がれない問題を修正",
+                    "過去にLOM2を使用した場合は、Skyveを最初に開いたときにショートカットを作成",
+                    "互換性に関する情報がロードされないレアケースを修正",
+                    "サブスク時点で破損したパッケージのレビューを依頼する機能を有効化",
+                    "「部分的にDL済み」通知の感度設定を緩和"
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "変更",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "アプリのパフォーマンスを改善して、ロード時間の短縮とモタつきの低減を期待",
+                    "類似のMODが1つしか無い場合に、互換性レポートで表示される依存関係の表示を修正",
+                    "ローカルアセットのフォルダでMODとして検出される問題を修正"
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修正",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "macOSとLinuxでオプションタブが開かない問題を修正",
+                    "「ヘルプ＆ログ」のタブで、現在のログを自動的にロードしない問題を修正",
+                    "Linuxでログファイルのパスが違う問題を修正"
                 ]
             }
         ]
@@ -381,18 +381,18 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "変更",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "メインメニューのSteamパネルがデフォルトで表示されて、MODの設定から非表示が可能",
+                    "レビューのリクエスト時に説明文が必須になり、一緒にログも送信されるように改善して、更に「送信」ボタンの横に免責事項を表",
+                    "しばらく更新していないMODのレポートレベルは、「情報」に下げて通知しないように変更"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修正",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "ダッシュボードにアセットの概要が表示されない問題を修正",
+                    "最新の状態が正しく動作しない問題を修正"
                 ]
             }
         ]
