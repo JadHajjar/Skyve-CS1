@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' peut être obsolète, il a été mis à jour {1}",
   "PackageIsIncomplete": "La taille locale de '{0}' ({1}) est différente de celle de Steam {2}",
   "RemovedFromSteam": "Supprimé de Steam",
-  "Missing": "Manquant"
+  "Missing": "Manquant",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }
