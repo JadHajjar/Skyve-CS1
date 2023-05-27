@@ -41,5 +41,8 @@ public enum StatusType
 	MissingDlc,
 
 	[CRN(NotificationType.Unsubscribe, false)]
-	Succeeded
+	Succeeded,
+
+	[CRN(NotificationType.Info, false)]
+	AutoDeprecated,
 }

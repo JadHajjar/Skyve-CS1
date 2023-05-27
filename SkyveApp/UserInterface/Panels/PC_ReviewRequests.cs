@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ReviewRequests : PanelContent
 {
-	private readonly List<ReviewRequest> _reviewRequests;
+	private List<ReviewRequest> _reviewRequests;
 
 	internal ulong CurrentPackage;
 
@@ -30,6 +30,19 @@ public partial class PC_ReviewRequests : PanelContent
 		Text = LocaleCR.ReviewRequests.Format($"({reviewRequests?.Length})");
 	}
 
+	protected override async void OnShown()
+	{
+		base.OnShown();
+
+		_reviewRequests = (await CompatibilityApiUtil.GetReviewRequests())?.ToList() ?? _reviewRequests;
+
+		packageCrList.SetItems(_reviewRequests.Select(x => x.PackageId).Distinct());
+
+		Text = LocaleCR.ReviewRequests.Format($"({_reviewRequests.Count})");
+
+		SetPackage(_reviewRequests.Any(x => x.PackageId == CurrentPackage) ? CurrentPackage : 0);
+	}
+
 	protected override void UIChanged()
 	{
 		base.UIChanged();
@@ -41,7 +54,6 @@ public partial class PC_ReviewRequests : PanelContent
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
-
 	}
 
 	private void packageCrList_ItemMouseClick(object sender, MouseEventArgs e)
@@ -63,6 +75,8 @@ public partial class PC_ReviewRequests : PanelContent
 
 		packageCrList.Invalidate();
 		reviewRequestList1.SetItems(_reviewRequests.Where(x => x.PackageId == sender));
+
+		B_DeleteRequests.Visible = sender != 0;
 	}
 
 	private void PackageCrList_CanDrawItem(object sender, CanDrawItemEventArgs<ulong> e)
@@ -94,5 +108,19 @@ public partial class PC_ReviewRequests : PanelContent
 	private void TB_Search_IconClicked(object sender, EventArgs e)
 	{
 		TB_Search.Text = string.Empty;
+	}
+
+	private async void B_DeleteRequests_Click(object sender, EventArgs e)
+	{
+		B_DeleteRequests.Loading = true;
+
+		foreach (var request in _reviewRequests.Where(x => x.PackageId == CurrentPackage))
+		{
+			await CompatibilityApiUtil.ProcessReviewRequest(request);
+		}
+
+		OnShown();
+
+		B_DeleteRequests.Loading = false;
 	}
 }

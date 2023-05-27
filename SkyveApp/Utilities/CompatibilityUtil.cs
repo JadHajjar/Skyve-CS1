@@ -56,7 +56,7 @@ internal static class CompatibilityUtil
 		var reportType = type switch
 		{
 			StatusType.Deprecated => packages.Count == 0 ? ReportType.Stability : ReportType.Successors,
-			StatusType.CausesIssues or StatusType.SavesCantLoadWithoutIt => ReportType.Stability,
+			StatusType.CausesIssues or StatusType.SavesCantLoadWithoutIt or StatusType.AutoDeprecated => ReportType.Stability,
 			StatusType.DependencyMod or StatusType.TestVersion or StatusType.MusicCanBeCopyrighted => ReportType.Status,
 			StatusType.SourceCodeNotAvailable or StatusType.IncompleteDescription or StatusType.Reupload => ReportType.Ambiguous,
 			StatusType.MissingDlc => ReportType.DlcMissing,

@@ -19,7 +19,7 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest>
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;
-		ItemHeight = 32;
+		ItemHeight = 64;
 	}
 
 	protected override void UIChanged()
@@ -56,7 +56,7 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest>
 
 		var User = SteamUtil.GetUser(e.Item.UserId);
 		var imageRect = e.ClipRectangle.Pad(Padding);
-		imageRect.Width = imageRect.Height;
+		imageRect.Width = imageRect.Height/=2;
 		var image = User?.AvatarImage;
 
 		if (image is not null)
@@ -74,7 +74,11 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest>
 		using var brush = new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor);
 		e.Graphics.DrawString(User?.Name ?? Locale.UnknownUser, Font, brush, textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		e.DrawLabel(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other", IconManager.GetSmallIcon(e.Item.IsInteraction ? "I_Switch" : e.Item.IsStatus ? "I_Statuses" : "I_Content"), FormDesign.Design.AccentColor, textRect, ContentAlignment.BottomLeft, true);
+		using var typeIcon = IconManager.GetSmallIcon(e.Item.IsInteraction ? "I_Switch" : e.Item.IsStatus ? "I_Statuses" : "I_Content");
+		using var dateIcon = IconManager.GetSmallIcon("I_UpdateTime");
+		var r = e.DrawLabel(e.Item.Timestamp.ToLocalTime().ToString("g"), dateIcon, FormDesign.Design.AccentColor, e.ClipRectangle, ContentAlignment.BottomLeft, true);
+		e.DrawLabel(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other", typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
+	
 
 		e.Graphics.DrawString(e.Item.PackageNote, UI.Font(7.5F), brush, textRect.Pad((int)(125*UI.FontScale),0,0,0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment =	 StringAlignment.Far });
 	}

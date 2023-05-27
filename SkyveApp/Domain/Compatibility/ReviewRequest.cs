@@ -13,7 +13,7 @@ public class ReviewRequest : ReviewRequestNoLog
 [DynamicSqlClass("ReviewRequests")]
 public class ReviewRequestNoLog : IDynamicSql
 {
-	[DynamicSqlProperty(PrimaryKey = true)]
+	[DynamicSqlProperty(PrimaryKey = true, Indexer = true)]
 	public ulong PackageId { get; set; }
 	[DynamicSqlProperty(PrimaryKey = true)]
 	public ulong UserId { get; set; }

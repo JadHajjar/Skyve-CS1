@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Steam;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Generic;
@@ -29,7 +30,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 
 		_request = request;
 
-		TLP_Info.Controls.Add(new MiniPackageControl(request.PackageId) { Dock = DockStyle.Top }, 0, 0);
+		TLP_Info.Controls.Add(new MiniPackageControl(request.PackageId) { Dock = DockStyle.Top, ReadOnly = true }, 0, 0);
 		TLP_Info.Controls.Add(new SteamUserControl(request.UserId) { InfoText = "Requested by", Dock = DockStyle.Top, Margin = UI.Scale(new Padding(5), UI.FontScale) }, 0, 1);
 
 		logControl = new SlickControl
@@ -57,7 +58,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 				Note = request.StatusNote,
 				Packages = request.StatusPackages?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ulong.Parse).ToArray(),
 			})
-			{ BackColor = FormDesign.Design.AccentBackColor }, 0, 3);
+			{ BackColor = FormDesign.Design.AccentBackColor }, 0, 4);
 		}
 		else if (request.IsStatus)
 		{
@@ -68,7 +69,16 @@ public partial class PC_ReviewSingleRequest : PanelContent
 				Note = request.StatusNote,
 				Packages = request.StatusPackages?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ulong.Parse).ToArray(),
 			})
-			{ BackColor = FormDesign.Design.AccentBackColor }, 0, 3);
+			{ BackColor = FormDesign.Design.AccentBackColor }, 0, 4);
+		}
+		else
+		{
+			DD_Stability.SelectedItem = (PackageStability)_request.PackageStability;
+			DD_PackageType.SelectedItem = (PackageType)_request.PackageType;
+			DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => _request.RequiredDLCs?.Contains(x.Id.ToString()) ?? false);
+			DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => ((PackageUsage)_request.PackageUsage).HasFlag(x));
+
+			tableLayoutPanel3.Visible = true;
 		}
 	}
 
@@ -116,16 +126,24 @@ public partial class PC_ReviewSingleRequest : PanelContent
 
 		tableLayoutPanel2.Width = (int)(200 * UI.FontScale);
 		label3.Font = label1.Font = UI.Font(7.5F, FontStyle.Bold);
+		tableLayoutPanel1.Padding = UI.Scale(new Padding(5), UI.FontScale);
 
 		foreach (Control item in roundedGroupTableLayoutPanel1.Controls)
 		{
-			item.Margin = UI.Scale(new Padding(3, 10, 3, 0), UI.FontScale);
+			item.Margin = UI.Scale(new Padding(3, 7, 3, 3), UI.FontScale);
 		}
 
 		foreach (Control item in tableLayoutPanel1.Controls)
 		{
 			item.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		}
+	}
+
+	protected override void DesignChanged(FormDesign design)
+	{
+		base.DesignChanged(design);
+
+		tableLayoutPanel1.BackColor = design.AccentBackColor;
 	}
 
 	private void PC_ReviewSingleRequest_Paint(object sender, PaintEventArgs e)
@@ -151,5 +169,33 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		e.Graphics.FillRoundedRectangle(new SolidBrush(ctrl.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.MenuColor.MergeColor(FormDesign.Design.ActiveColor) : FormDesign.Design.MenuColor), fileRect, Padding.Left);
 		e.Graphics.DrawImage(fileIcon, fileContentRect.Align(fileIcon.Size, ContentAlignment.TopCenter));
 		e.Graphics.DrawString(ctrl.Text, new Font(Font, FontStyle.Bold), new SolidBrush(FormDesign.Design.MenuForeColor), fileContentRect, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Far });
+	}
+
+	private void B_ManagePackage_Click(object sender, EventArgs e)
+	{
+		Form.PushPanel(new PC_CompatibilityManagement(new[] { _request.PackageId }));
+	}
+
+	private void B_ApplyChanges_Click(object sender, EventArgs e)
+	{
+		Form.PushPanel(new PC_CompatibilityManagement(_request));
+	}
+
+	private async void B_DeleteRequest_Click(object sender, EventArgs e)
+	{
+		B_DeleteRequest.Loading = true;
+
+		var response = await CompatibilityApiUtil.ProcessReviewRequest(_request);
+
+		if (response.Success)
+		{
+			PushBack();
+		}
+		else
+		{
+			ShowPrompt("Failed to process the request: "+ response.Message, PromptButtons.OK, PromptIcons.Info);
+		}
+
+		B_DeleteRequest.Loading = false;
 	}
 }
