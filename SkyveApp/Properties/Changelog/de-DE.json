@@ -337,13 +337,13 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Vorherige Einstellungen und Profile die manchmal nicht an Skype übertragen wurden, wurden behoben.",
+                    "Beim ersten Öffnen von Skyve wird nun eine Verknüpfung erstellt, wenn vorher LOM2 verwendet wurde.",
+                    "Es wurde ein seltener Fall behoben, in dem die Kompatibilitätsinformationen nicht geladen wurden.",
+                    "Die Möglichkeit, eine Überprüfung für ein derzeit defektes Paket anzufordern, wurde aktiviert.",
+                    "Die Empfindlichkeit der 'Teilweise heruntergeladen' Benachrichtigung wurde verringert."
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Änderungen",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Die Leistung der App wurde verbessert. Schnellere Ladezeiten und weniger Hänger werden erwartet.",
+                    "Es wurde eine Interaktion zwischen ähnlichen Mods behoben, die im Kompatibilitätsbericht angezeigt werden, wenn nur eine von ihnen vorhanden ist.",
+                    "Erkennung von Mods im Ordner für lokale Assets behoben."
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Beheben der Registerkarte Optionen, die nicht auf macOS & Linux geöffnet wurden.",
+                    "Im Reiter Hilfe & Protokolle wurde behoben, dass das aktuelle Log nicht automatisch geladen wurde.",
+                    "Falscher Pfad der Logdatei unter Linux wurde behoben."
                 ]
             }
         ]
@@ -381,7 +381,7 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Änderungen",
                 "Changes": [
                     "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
                     "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
