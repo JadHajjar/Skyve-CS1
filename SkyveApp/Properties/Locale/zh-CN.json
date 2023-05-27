@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "插件 '{0}' 可能已过期，它已经进行了更新 {1}",
   "PackageIsIncomplete": "本地插件 '{0}' 的文件大小({1}) 与其工坊版本的文件大小 {2} 不同",
   "RemovedFromSteam": "已从 Steam 工坊移除",
-  "Missing": "丢失"
+  "Missing": "丢失",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }
