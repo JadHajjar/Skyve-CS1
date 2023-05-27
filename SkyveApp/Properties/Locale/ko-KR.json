@@ -331,7 +331,7 @@
   "AnyAuthor": "모든 제작자",
   "ItemsCount": {
     "One": "항목 {0}개",
-    "Plural": "{0} 항목"
+    "Plural": "항목 {0}개"
   },
   "AuthorsSelected": {
     "One": "제작자 {0}명 선택됨",
