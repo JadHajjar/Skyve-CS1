@@ -100,6 +100,7 @@
   "Interaction_Identical": "Это несколько версий одного и того же пакета.\r\n\r\nВы должны выбрать только один из них.",
   "Status_Succeeded": "'{0}' успешно '{1}'.\r\n\r\nВы уже используете '{1}', поэтому больше нет необходимости '{0}'.",
   "Status_Deprecated": "'{0}' является устаревшим, он больше не поддерживается его автором.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' является повторной загрузкой оригинального пакета.",
     "One": "Это повторная загрузка '{1}'."
@@ -201,5 +202,10 @@
   "NameList": "Переводы имени-списка/игры",
   "ApplyChangedBeforeExit": "У вас есть несохраненные изменения.\r\n\r\nВы хотите применить эти изменения перед продолжением?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "Известно, что автор {0}, {1}— вредоносный и/или содержит вредоносный контент, например вирусы."
+  "AuthorMalicious": "Известно, что автор {0}, {1}— вредоносный и/или содержит вредоносный контент, например вирусы.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }
