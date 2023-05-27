@@ -480,7 +480,7 @@
   "PackageIsIncomplete": "O tamanho local de '{0}' ({1}) é diferente da {2} da Steam",
   "RemovedFromSteam": "Removido da Steam",
   "Missing": "Faltando",
-  "LoggedInAs": "Logged in as",
-  "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "LoggedInAs": "Sessão iniciada como",
+  "UnknownUser": "Usuário desconhecido",
+  "AddMeaningfulDescription": "Por favor, adicione uma descrição significativa ao seu pedido."
 }
