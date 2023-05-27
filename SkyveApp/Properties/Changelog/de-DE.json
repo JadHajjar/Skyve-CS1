@@ -383,16 +383,16 @@
             {
                 "Name": "Änderungen",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Steam-Paneele im Hauptmenü werden nun standardmäßig angezeigt, du kannst sie immer noch in den Mod-Einstellungen ausblenden.",
+                    "Das Anfordern einer Überprüfung erfordert jetzt eine gültige Beschreibung und sendet auch deine Logs mit der Anfrage. Ein Haftungsausschluss wird neben dem 'Senden'-Knopf angezeigt.",
+                    "Die Meldungsstufe einer Mod, die seit längerer Zeit nicht aktualisiert wurde, wurde auf 'Info' verringert, so dass du nicht darüber benachrichtigt wirst."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Die Zusammenfassung der Assets wurde im Dashboard nicht angezeigt.",
+                    "Das nicht korrekte Funktionieren des 'veraltet' Status wurde behoben."
                 ]
             }
         ]
