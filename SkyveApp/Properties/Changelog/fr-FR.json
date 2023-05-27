@@ -334,10 +334,10 @@
     },
     {
         "Version": "3.0.1",
-        "Date": "2023-05-23",
+        "Date": "23/05/2023",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
                     "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
                     "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
@@ -350,10 +350,10 @@
     },
     {
         "Version": "3.0.2",
-        "Date": "2023-05-23",
+        "Date": "23/05/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Changements",
                 "Changes": [
                     "Improved the performance of the app. Quicker load times & less stutters are expected.",
                     "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
@@ -364,10 +364,10 @@
     },
     {
         "Version": "3.0.3",
-        "Date": "2023-05-24",
+        "Date": "24/05/2023",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
                     "Fixed the options tab not opening for macOS & Linux.",
                     "Fixed the Help & Logs tab not loading your current log automatically.",
@@ -378,10 +378,10 @@
     },
     {
         "Version": "3.0.4",
-        "Date": "2023-05-27",
+        "Date": "27/05/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Changements",
                 "Changes": [
                     "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
                     "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
@@ -389,7 +389,7 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
                     "Fixed the asset summary not showing in the dashboard.",
                     "Fixed the out of date status not working correctly."
