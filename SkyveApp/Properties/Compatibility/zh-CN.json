@@ -30,7 +30,7 @@
   "SelectOne": "请选择…",
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
-  "Switch": "改为使用其它插件",
+  "Switch": "需要替换",
   "FlippedSwitch": "替换为此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
@@ -152,7 +152,7 @@
     "Plural": "您应该卸下以下插件："
   },
   "Action_Switch": {
-    "One": "您应当改为使用 '{1}'。",
+    "One": "您应当将其替换为 '{1}'。",
     "Plural": "您应当改为使用下列任意一个插件："
   },
   "NoRequiredDlcs": "没有前置 DLC",
