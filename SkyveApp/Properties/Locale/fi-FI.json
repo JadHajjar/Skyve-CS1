@@ -480,7 +480,7 @@
   "PackageIsIncomplete": "Paikallinen koko '{0}' ({1}) on erilainen kuin Steamin {2}",
   "RemovedFromSteam": "Poistettu Steamistä",
   "Missing": "Puuttuu",
-  "LoggedInAs": "Logged in as",
-  "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "LoggedInAs": "Kirjautuneena käyttäjänä",
+  "UnknownUser": "Tuntematon käyttäjä",
+  "AddMeaningfulDescription": "Ole hyvä ja lisää tarkoituksellinen kuvaus pyyntöösi."
 }
