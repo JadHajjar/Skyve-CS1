@@ -480,7 +480,7 @@
   "PackageIsIncomplete": "本地插件 '{0}' 的文件大小({1}) 与其工坊版本的文件大小 {2} 不同",
   "RemovedFromSteam": "已从 Steam 工坊移除",
   "Missing": "丢失",
-  "LoggedInAs": "Logged in as",
-  "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "LoggedInAs": "登录为",
+  "UnknownUser": "未知用户",
+  "AddMeaningfulDescription": "请为您的请求添加一个有意义的描述"
 }
