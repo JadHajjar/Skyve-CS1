@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Cancelar a assinatura deste pacote",
   "UnsubscribeOther": "Cancelar assinatura de pacotes vinculados",
   "Switch": "Trocar para pacote vinculado",
-  "FlippedSwitch": "Trocar para este pacote",
+  "FlippedSwitch": "Switch to this package",
   "Deprecated": "Descontinuado",
   "Reupload": "Re-enviar",
   "CausesIssues": "Causa problemas",
@@ -100,6 +100,7 @@
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi substituído por '{1}'.\n\nVocê já está usando '{1}', então não precisa mais de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto e não é mais suportado pelo seu autor.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
     "One": "Este é um re-envio de '{1}'."
@@ -201,5 +202,10 @@
   "NameList": "Nome-Lista/Traduções do Jogo",
   "ApplyChangedBeforeExit": "Você tem alterações não salvas.\n\nGostaria de aplicar essas alterações antes de continuar?",
   "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\nAs atualizações futuras e a estabilidade de seus pacotes não são garantidas.",
-  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes."
+  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus nos seus pacotes.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }
