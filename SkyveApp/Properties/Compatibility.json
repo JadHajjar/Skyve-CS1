@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Unsubscribe from this package",
   "UnsubscribeOther": "Unsubscribe from linked packages",
   "Switch": "Switch to linked package",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Switch to to this package",
   "Deprecated": "Deprecated",
   "Reupload": "Re-Upload",
   "CausesIssues": "Causes Issues",
@@ -100,7 +100,6 @@
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
     "One": "This is a re-upload of '{1}'."
@@ -201,11 +200,6 @@
   "POFont": "Procedural Object Font/Module",
   "NameList": "Name-List/Game Translations",
   "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\n\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages.",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\n\nFuture updates & stability for their packages is not guaranteed.",
+  "AuthorMalicious": "The author of {0}, {1}, is known to be malicious and/or for including harmful content like viruses in their packages."
 }
