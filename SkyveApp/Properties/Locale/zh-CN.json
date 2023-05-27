@@ -407,48 +407,48 @@
   "Snooze": "稍后提醒",
   "UnSnooze": "取消稍后提醒",
   "Mod": {
-    "One": "个模组",
-    "Plural": "个模组"
+    "One": "模组",
+    "Plural": "模组"
   },
   "Asset": {
-    "One": "个资产",
-    "Plural": "个资产"
+    "One": "资产",
+    "Plural": "资产"
   },
   "Package": {
-    "One": "个插件",
-    "Plural": "个插件"
+    "One": "插件",
+    "Plural": "插件"
   },
   "Profile": {
-    "One": "个配置文件",
-    "Plural": "个配置文件"
+    "One": "配置文件",
+    "Plural": "配置文件"
   },
   "IncludedCount": {
-    "One": "已装载 {0} {1}",
-    "Plural": "已装载 {0} {1}"
+    "One": "已装载 {0} 个{1}",
+    "Plural": "已装载 {0} 个{1}"
   },
   "EnabledCount": {
-    "One": "已启用 {0} {1} ",
-    "Plural": "已启用 {0} {1} "
+    "One": "已启用 {0} 个{1}",
+    "Plural": "已启用 {0} 个{1}"
   },
   "IncludedEnabledCount": {
-    "One": "已装载并启用 {0} {1} ",
-    "Plural": "已装载并启用 {0} {1} "
+    "One": "已装载并启用 {0} 个{1}",
+    "Plural": "已装载并启用 {0} 个{1}"
   },
   "LoadedCount": {
-    "One": "已加载 {0} {1} ",
-    "Plural": "已加载 {0} {1} "
+    "One": "已加载 {0} 个{1}",
+    "Plural": "已加载 {0} 个{1}"
   },
   "ShowingCount": {
-    "One": "当前显示 {0} {1}",
-    "Plural": "当前显示 {0} {1}"
+    "One": "当前显示 {0} 个{1}",
+    "Plural": "当前显示 {0} 个{1}"
   },
   "ShowingCountWarning": {
-    "One": "当前显示 {0} {1}，{2}",
-    "Plural": "当前显示 {0} {1}，{2}"
+    "One": "当前显示 {0} 个{1}，{2}",
+    "Plural": "当前显示 {0} 个{1}，{2}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} 由于当前配置文件的用途已被隐藏",
-    "Plural": "{0} {1} 由于当前配置文件的用途已被隐藏"
+    "One": "{0} 个{1} 由于当前配置文件的用途已被隐藏",
+    "Plural": "{0} 个{1} 由于当前配置文件的用途已被隐藏"
   },
   "EditCompatibility": "编辑兼容性信息",
   "AnyIssue": "任意问题",
@@ -465,12 +465,12 @@
   "TreatOptionalAsRequired_Tip": "一般来说，它会显示这些可选插件缺失的必需物品信息。",
   "AddCustomTag": "添加自定义标签",
   "OutOfDateCount": {
-    "One": "{0} {1} 已过期",
-    "Plural": "{0} {1} 已过期"
+    "One": "{0} 个{1} 已过期",
+    "Plural": "{0} 个{1} 已过期"
   },
   "IncompleteCount": {
-    "One": "{0} {1} 与创意工坊版本的文件大小不匹配",
-    "Plural": "{0} {1} 与创意工坊版本的文件大小不匹配"
+    "One": "{0} 个{1} 与创意工坊版本的文件大小不匹配",
+    "Plural": "{0} 个{1} 与创意工坊版本的文件大小不匹配"
   },
   "PackageIsRemoved": "插件 '{0}' 已从 Steam 工坊移除",
   "PackageIsUnknown": "插件 '{0}' 的 Steam 工坊信息尚未加载",

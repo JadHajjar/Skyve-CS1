@@ -31,7 +31,7 @@
   "UnsubscribeThis": "パッケージのサブスクを解除",
   "UnsubscribeOther": "リンクされたパッケージのサブスクを解除",
   "Switch": "リンク先のパッケージに切り替え",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "このパッケージに切り替え",
   "Deprecated": "非推奨",
   "Reupload": "再アップロード",
   "CausesIssues": "問題の原因",
