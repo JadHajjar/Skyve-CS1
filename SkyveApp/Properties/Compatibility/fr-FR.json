@@ -204,8 +204,8 @@
   "AuthorRetired": "L'auteur de {0}, {1}, a pris sa retraite ou est inactif depuis longtemps.\n\nLes mises à jour futures et la stabilité de leurs paquets ne sont pas garanties.",
   "AuthorMalicious": "L'auteur de {0}, {1} est connu pour être malveillant et/ou pour avoir inclus des contenus nuisibles comme des virus dans leurs paquets.",
   "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
+  "DeleteRequest": "Supprimer la demande",
+  "ApplyRequestedChanges": "Appliquer les changements demandés",
   "ManagePackage": "Manage Package",
   "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }
