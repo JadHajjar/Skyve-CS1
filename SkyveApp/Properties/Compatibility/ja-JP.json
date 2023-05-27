@@ -31,7 +31,7 @@
   "UnsubscribeThis": "パッケージのサブスクを解除",
   "UnsubscribeOther": "リンクされたパッケージのサブスクを解除",
   "Switch": "パッケージの切り替え",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "パッケージの切り替え",
   "Deprecated": "非推奨",
   "Reupload": "再アップロード",
   "CausesIssues": "問題の原因",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
   "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要で必要ありません。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "「{0}」 は長期間で更新されておらず、恐らく作者によるサポートは無いでしょう。",
   "Status_Reupload": {
     "Zero": "「{0}」はオリジナルパッケージの再アップロードです。",
     "One": "これは「{1}」の再アップロードです。"
@@ -203,9 +203,9 @@
   "ApplyChangedBeforeExit": "保存していない変更点があります。\n\n続行する前に、これらの変更を適用しますか？",
   "AuthorRetired": "{0} / {1} の作者は引退している・長期間で活動していません。\n今後のアップデートやパッケージの安定性は保証されません。",
   "AuthorMalicious": "{0} / {1} の作者は、マルウェアなどのウイルスのような有害コンテンツをパッケージに含めたことで知られています。",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "ReviewRequests": "レビューをリクエスト {0}",
+  "DeleteRequest": "リクエストを削除",
+  "ApplyRequestedChanges": "リクエストの変更を適用",
+  "ManagePackage": "パッケージの管理",
+  "RequestReviewDisclaimer": "※あなたのSteam IDとログがリクエストと一緒に送信されます！"
 }
