@@ -221,6 +221,7 @@
   "AreYouSure": "Tem certeza que deseja continuar?",
   "MapFileInfo": "Selecione um arquivo de mapa para iniciar um novo jogo",
   "AssetOutOfDate": "recurso encontra-se desatualizado",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "recursos encontram-se desatualizados",
   "CopyVersionNumber": "Copiar número da versão",
   "SubscribeToItem": "Inscrever-se",
@@ -482,5 +483,7 @@
   "Missing": "Faltando",
   "LoggedInAs": "Logged in as",
   "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
