@@ -204,8 +204,8 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Kirjoittaja {0}, {1}, tiedetään olevan pahansuopia ja/tai sisällyttää haitallista sisältöä, kuten viruksia niiden pakkauksissa.",
   "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "DeleteRequest": "Poista pyyntö",
+  "ApplyRequestedChanges": "Hyväksy pyydetyt muutokset",
+  "ManagePackage": "Hallinnoi pakettia",
+  "RequestReviewDisclaimer": "*Sinun Steam-tunnuksesi ja lokisi lähetetään pyyntösi yhteydessä"
 }

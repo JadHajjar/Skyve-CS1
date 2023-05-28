@@ -339,7 +339,7 @@
             {
                 "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Vorherige Einstellungen und Profile die manchmal nicht an Skype übertragen wurden, wurden behoben.",
+                    "Vorherige Einstellungen und Profile die manchmal nicht an Skyve übertragen wurden, wurden behoben.",
                     "Beim ersten Öffnen von Skyve wird nun eine Verknüpfung erstellt, wenn vorher LOM2 verwendet wurde.",
                     "Es wurde ein seltener Fall behoben, in dem die Kompatibilitätsinformationen nicht geladen wurden.",
                     "Die Möglichkeit, eine Überprüfung für ein derzeit defektes Paket anzufordern, wurde aktiviert.",
@@ -357,7 +357,7 @@
                 "Changes": [
                     "Die Leistung der App wurde verbessert. Schnellere Ladezeiten und weniger Hänger werden erwartet.",
                     "Es wurde eine Interaktion zwischen ähnlichen Mods behoben, die im Kompatibilitätsbericht angezeigt werden, wenn nur eine von ihnen vorhanden ist.",
-                    "Erkennung von Mods im Ordner für lokale Assets behoben."
+                    "Erkennung von Mods im Ordner für lokale Assets wurde behoben."
                 ]
             }
         ]
@@ -369,7 +369,7 @@
             {
                 "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Beheben der Registerkarte Optionen, die nicht auf macOS & Linux geöffnet wurden.",
+                    "Das die Registerkarte Optionen auf macOS & Linux geöffnet nicht geöffnet wurde, ist nun behoben.",
                     "Im Reiter Hilfe & Protokolle wurde behoben, dass das aktuelle Log nicht automatisch geladen wurde.",
                     "Falscher Pfad der Logdatei unter Linux wurde behoben."
                 ]

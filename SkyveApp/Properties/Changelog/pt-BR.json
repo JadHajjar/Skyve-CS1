@@ -337,13 +337,13 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Corrigido o problema em que as configurações e perfis anteriores às vezes não eram transferidos para o Skyve.",
+                    "Agora, um atalho será criado quando você abrir o Skyve pela primeira vez após ter usado o LOM2 anteriormente.",
+                    "Corrigido um caso raro em que as informações de compatibilidade não estavam sendo carregadas.",
+                    "Habilitada a capacidade de solicitar uma análise para um pacote que está atualmente quebrado.",
+                    "Reduzida a sensibilidade da notificação de \"Parcialmente Baixado\"."
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Mudanças",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Desempenho do aplicativo foi aprimorado, resultando em tempos de carregamento mais rápidos e menos interrupções.",
+                    "Corrigido o problema de interação entre mods semelhantes exibidos no Relatório de Compatibilidade quando você tem apenas um deles.",
+                    "Corrigido o problema de detecção de mods na pasta de recursos locais."
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Corrigido o problema de abertura da guia de opções para macOS e Linux.",
+                    "Corrigido o problema da guia de Ajuda e Registros não carregar automaticamente o relatório atual.",
+                    "Corrigido o caminho do arquivo de registro incorreto no Linux."
                 ]
             }
         ]
@@ -381,18 +381,18 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Mudanças",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Os painéis do Steam no menu principal agora são exibidos por padrão. Ainda é possível ocultá-los nas configurações de mod.",
+                    "Agora, solicitar uma análise requer uma descrição válida. Um aviso legal é exibido ao lado do botão \"Enviar\" informando que seus registros serão enviados com a solicitação de análise.",
+                    "Reduzido o nível de relatório de um mod que não foi atualizado por um tempo para 'Info', para que não receba aviso sobre ele."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Corrigido o resumo do recurso não aparecendo no painel principal.",
+                    "Corrigido o estado \"desatualizado\" que não estava funcionando corretamente."
                 ]
             }
         ]
