@@ -179,7 +179,7 @@
   "SaveFileInfo": "Seleziona un file di salvataggio da caricare automaticamente all'apertura del gioco",
   "LoadProfile": "Carica Profilo",
   "CopyAuthorSteamId": "Copia l'ID Steam dell'autore",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
+  "CloseCitiesToSub": "Devi chiudere Cities: Skylines per iscriverti o annullare l'iscrizione ai pacchetti",
   "ShowingFilteredItems": "{0} di {1} elementi totali visibili",
   "DropNewProfile": "Trascina qui o seleziona un file di profilo .json o.xml per importarlo",
   "ThemeUIScale": "Tema e Scala UI",
