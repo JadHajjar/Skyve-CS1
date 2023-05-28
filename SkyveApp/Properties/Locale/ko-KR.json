@@ -384,7 +384,7 @@
   "LoadNewAsset": "새 에셋 (에디터)",
   "LoadLoadAsset": "에셋 불러오기 (에디터)",
   "Info": "정보",
-  "SelectThisPackage": "해당 패키지 선택",
+  "SelectThisPackage": "이 패키지를 선택하기",
   "SelectPackage": "패키지 선택",
   "ControlToSelectMultiplePackages": "한 번에 여러 패키지를 선택하려면 Ctrl + 클릭하십시오.",
   "Local": "로컬",
@@ -444,20 +444,20 @@
     "Plural": "{1} {0}개 표시 중"
   },
   "ShowingCountWarning": {
-    "One": "{1}, {2} {0}개 표시 중",
-    "Plural": "{1}, {2} {0}개 표시 중"
+    "One": "{1} {0}개 표시 중, {2}",
+    "Plural": "{1} {0}개 표시 중, {2}"
   },
   "ItemsHidden": {
     "One": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다",
     "Plural": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다"
   },
   "EditCompatibility": "호환성 편집",
-  "AnyIssue": "모든 이슈",
+  "AnyIssue": "아무 이슈",
   "AnyUsage": "모든 용도",
   "ExplainIssue": "여기에 문제를 설명하세요.",
-  "ExplainIssueInfo": "Include as much information about what is happening and how to replicate it here",
+  "ExplainIssueInfo": "무슨 일이 일어나고 있는지, 어떻게 재현할 수 있는지에 대한 정보를 여기에 아는 만큼 최대한 많이 포함하세요",
   "ReviewRequestSent": "'{0}'에 대한 검토 요청이 전송되었습니다!\n\n의견을 보내 주셔서 감사합니다.",
-  "ReviewRequestFailed": "'{0}'.{1} 에 대한 검토 요청을 보내지 못했습니다.",
+  "ReviewRequestFailed": "'{0}'에 대한 내 검토 요청을 보내는 데 실패했습니다.\n\n{1}",
   "SendReview": "검토 요청 보내기",
   "EditTags": "태그 편집",
   "ShowAllReferencedPackages": "'참조' 탭에 제외된 패키지 표시하기",
