@@ -337,13 +337,13 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "修復了之前的設定和組態檔案有時沒有匯入到 Skyve 的問題。",
+                    "現在，如果您之前使用了 Load Order Tool 2 並更新到了 Skyve，在第一次打開 Skyve 時，會自動在桌面建立 Skyve 的快捷方式。",
+                    "修復了相容性資訊無法載入的罕見問題。",
+                    "現在您可以對當前已損壞的外掛請求檢查。",
+                    "降低了「沒有完整下載」警告的敏感程度。"
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改動",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "最佳化了 Skyve 應用程式的性能。按照預期，載入速度會更快，並且減少了卡頓。",
+                    "修復了當您只有其中一個模組時，相容性報告中會顯示與之相似模組的互動方式的問題。",
+                    "修復了在本地資產資料夾內檢測到模組的問題。"
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "修復了 MacOS 和 Linux 系統上選項面板無法打開的問題。",
+                    "修復了「獲取幫助與日誌」選項卡內，沒有自動顯示簡化後的日誌的問題。",
+                    "修復 Linux 系統上記錄檔路徑錯誤的問題。"
                 ]
             }
         ]
@@ -381,18 +381,18 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改動",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "主選單中的 Steam 面板現在預設會顯示，您可以在模組選項中隱藏此面板。",
+                    "請求檢查現在需要有效的問題描述，且會將您的記錄檔與申請一起傳送。「傳送檢查申請」按鈕旁邊會顯示免責聲明。",
+                    "將模組很久沒有進行過更新的報告等級降低到「提示」等級，這樣一來，Skyve 就不會向您傳送這個警告。"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "修復了統計面板的資產概要沒有顯示的問題。",
+                    "修復了檢查外掛是否已過期功能沒有正常工作的問題。"
                 ]
             }
         ]
