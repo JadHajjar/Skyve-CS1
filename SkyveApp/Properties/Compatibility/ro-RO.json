@@ -7,7 +7,7 @@
   "Note": "Notă",
   "NoteInfo": "Text informativ suplimentar afișat pentru pachet",
   "BlackListName": "Lista neagră după nume",
-  "BlackListId": "Black-list by name",
+  "BlackListId": "Lista neagră după ID-ul Steam",
   "GlobalTags": "Etichete globale",
   "GlobalTagsInfo": "Etichete pe care toți jucătorii le vor vedea în aplicație",
   "Links": "Link-uri",
@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Dezabonare de la acest pachet",
   "UnsubscribeOther": "Dezabonare de la pachetele asociate",
   "Switch": "Comutați la pachetul legat",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Comutați la acest pachet",
   "Deprecated": "Dezaprobată",
   "Reupload": "Re-încărcați",
   "CausesIssues": "Cauze probleme",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Acestea sunt versiuni multiple ale aceluiași pachet.\r\n\r\nAr trebui să alegeți doar una dintre ele.",
   "Status_Succeeded": "'{0}' este succes de '{1}'.\r\n\r\nDeja folosești '{1}' așa că nu mai este nevoie de '{0}''.",
   "Status_Deprecated": "'{0}' este învechit, nu mai este susținut de autorul său.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' nu a fost actualizat de mult timp, probabil nu mai este actualizat de autorul său.",
   "Status_Reupload": {
     "Zero": "'{0}' este o reîncărcare a unui pachet original.",
     "One": "Aceasta este o reîncărcare a '{1}'."
@@ -203,9 +203,9 @@
   "ApplyChangedBeforeExit": "Aveți modificări nesalvate.\r\n\r\nDoriți să aplicați aceste modificări înainte de a continua?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Autorul {0}, {1}, este cunoscut ca fiind răuvoitor și/sau pentru includerea conținutului dăunător precum virușii în pachetele lor.",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "ReviewRequests": "Revizuiește solicitările {0}",
+  "DeleteRequest": "Ștergere solicitarea",
+  "ApplyRequestedChanges": "Aplică modificările solicitate",
+  "ManagePackage": "Gestionare pachet",
+  "RequestReviewDisclaimer": "*ID-ul tău de Steam și jurnalele sunt trimise cu solicitarea ta"
 }
