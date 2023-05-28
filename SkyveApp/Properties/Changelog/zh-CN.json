@@ -405,9 +405,9 @@
                 "Name": "修复与改动",
                 "Changes": [
                     "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "修复了导入 LOT 1 的配置文件可能卡死的罕见问题。",
+                    "修复了选择某些语言时，更新日志无法打开的问题。",
+                    "可能修复了无法大量订阅物品的问题。"
                 ]
             }
         ]
