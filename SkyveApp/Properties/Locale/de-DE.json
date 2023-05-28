@@ -221,6 +221,7 @@
   "AreYouSure": "Bist du sicher, dass du fortfahren möchtest?",
   "MapFileInfo": "Wähle eine Karte, um ein neues Spiel mit dieser zu starten",
   "AssetOutOfDate": "Gegenstand ist veraltet",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "Gegenstände sind veraltet",
   "CopyVersionNumber": "Versionsnummer kopieren",
   "SubscribeToItem": "Dieses Element abonnieren",
@@ -482,5 +483,7 @@
   "Missing": "Fehlend",
   "LoggedInAs": "Angemeldet als",
   "UnknownUser": "Unbekannter Benutzer",
-  "AddMeaningfulDescription": "Bitte füge deiner Anfrage eine sinnvolle Beschreibung hinzu."
+  "AddMeaningfulDescription": "Bitte füge deiner Anfrage eine sinnvolle Beschreibung hinzu.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
