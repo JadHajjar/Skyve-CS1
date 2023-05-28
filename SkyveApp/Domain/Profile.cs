@@ -67,7 +67,9 @@ public class Profile
 
 	public class Asset : IPackage
 	{
-		public string? Name { get; set; }
+		private string? _name;
+
+		public string? Name { get => WorkshopInfo?.Name ?? _name; set => _name = value; }
 		public string? RelativePath { get; set; }
 		public ulong SteamId { get; set; }
 
