@@ -179,7 +179,7 @@
   "SaveFileInfo": "ゲーム起動時にロードするセーブゲームのファイルを選択",
   "LoadProfile": "プロファイルをロード",
   "CopyAuthorSteamId": "作者のSteam IDをコピー",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
+  "CloseCitiesToSub": "パッケージのサブスク操作を行うには、Cities: Skylinesを終了する必要があります。",
   "ShowingFilteredItems": "合計 {1} 個のアイテムから {0} 個を表示中",
   "DropNewProfile": "インポートしたいプロファイルのjsonファイル/xmlファイルをD&D・クリックして選択",
   "ThemeUIScale": "テーマ & UIスケール",
