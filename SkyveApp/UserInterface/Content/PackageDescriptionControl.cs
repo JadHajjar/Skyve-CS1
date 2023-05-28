@@ -45,7 +45,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		Padding = UI.Scale(new Padding(4), UI.FontScale);
 	}
 
-	protected override async void OnMouseClick(MouseEventArgs e)
+	protected override void OnMouseClick(MouseEventArgs e)
 	{
 		base.OnMouseClick(e);
 
@@ -126,7 +126,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				if (Package.Package is null)
 				{
-					await CitiesManager.Subscribe(new[] { Package.SteamId });
+					SubscriptionsManager.Subscribe(new[] { Package.SteamId });
 					return;
 				}
 
@@ -424,7 +424,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		rects!.TextRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(Size.Ceiling(textSize), ContentAlignment.BottomLeft);
 
-		var partialIncluded = Package.Package?.IsPartiallyIncluded() ?? false;
+		var partialIncluded = Package!.Package?.IsPartiallyIncluded() ?? false;
 		var isIncluded = partialIncluded || Package.IsIncluded;
 
 		if (mod && CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
@@ -506,7 +506,6 @@ internal class PackageDescriptionControl : SlickImageControl
 		}
 	}
 
-
 	private void DrawAuthorAndSteamId(PaintEventArgs e, Rectangles rects)
 	{
 		if (!Package!.Workshop)
@@ -578,7 +577,6 @@ internal class PackageDescriptionControl : SlickImageControl
 		}
 	}
 
-
 	private Rectangle DrawStatusDescriptor(PaintEventArgs e, Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
 		if (!Package!.Workshop)
@@ -604,6 +602,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		return labelRect;
 	}
+	
 	private void GetStatusDescriptors(IPackage mod, out string text, out Bitmap? icon, out Color color)
 	{
 		switch (mod.Package?.Status)
@@ -687,10 +686,18 @@ internal class PackageDescriptionControl : SlickImageControl
 			var clip = e.Graphics.ClipBounds;
 			var labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
 			labelH -= labelH % 2;
-			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.TopLeft);
+			var small = UI.FontScale < 1.25;
+			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.BottomLeft);
 			var backColor = score > 90 && Package.Subscriptions >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 
-			e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);
+			if (!small)
+			{
+				e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);
+			}
+			else
+			{
+				scoreRect.Y--;
+			}
 
 			using var scoreFilled = IconManager.GetSmallIcon("I_VoteFilled");
 
@@ -698,21 +705,32 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
 
-				e.Graphics.DrawImage(scoreIcon.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
+				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
 				e.Graphics.SetClip(scoreRect.CenterR(scoreFilled.Size).Pad(0, scoreFilled.Height - (scoreFilled.Height * score / 105), 0, 0));
-				e.Graphics.DrawImage(scoreFilled.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
+				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
 				e.Graphics.SetClip(clip);
 			}
 			else
 			{
-				e.Graphics.DrawImage(scoreFilled.Color(backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
+				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
 			}
 
 			if (Package.Subscriptions < 50000 || score <= 90)
 			{
-				using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
-				e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * Package.Subscriptions / 15000) / 2), Math.Min(360, 360F * Package.Subscriptions / 15000));
+				if (small)
+				{
+					using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+
+					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * Package.Subscriptions / 15000), 0, 0));
+					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
+					e.Graphics.SetClip(clip);
+				}
+				else
+				{
+					using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
+					e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * Package.Subscriptions / 15000) / 2), Math.Min(360, 360F * Package.Subscriptions / 15000));
+				}
 			}
 
 			return labelH + Padding.Left;

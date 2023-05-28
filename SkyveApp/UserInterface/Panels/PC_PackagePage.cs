@@ -219,12 +219,12 @@ public partial class PC_PackagePage : PanelContent
 		{
 			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded && isInstalled, action: () => { item.Package!.IsIncluded = true; })
 			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded && isInstalled, action: () => { item.Package!.IsIncluded = false; })
-			, new (Locale.ReDownloadPackage, "I_ReDownload", isInstalled && SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
+			, new (isInstalled? Locale.ReDownloadPackage:Locale.ForceDownloadPackage, "I_ReDownload", SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
 			, new (Locale.MovePackageToLocalFolder, "I_PC", isInstalled && item.Workshop, action: () => ContentUtil.MoveToLocalFolder(item))
 			, new (string.Empty)
 			, new (!item.Workshop && item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, "I_Disposable", isInstalled && !(item.Package?.BuiltIn ?? false), action: () => AskThenDelete(item))
-			, new (Locale.UnsubscribePackage, "I_Steam", isInstalled && item.Workshop && !(item.Package?.BuiltIn ?? false), action: async () => await CitiesManager.UnSubscribe(new[] { item.SteamId }))
-			, new (Locale.SubscribeToItem, "I_Steam", !isInstalled && item.Workshop, action: async () => await CitiesManager.Subscribe(new[] { item.SteamId }))
+			, new (Locale.UnsubscribePackage, "I_Steam", isInstalled && item.Workshop && !(item.Package?.BuiltIn ?? false), action: () => SubscriptionsManager.UnSubscribe(new[] { item.SteamId }))
+			, new (Locale.SubscribeToItem, "I_Steam", !isInstalled && item.Workshop, action: () => SubscriptionsManager.Subscribe(new[] { item.SteamId }))
 			, new (string.Empty)
 			, new (Locale.EditCompatibility, "I_CompatibilityReport", CompatibilityManager.User.Manager || item.Author?.SteamId == CompatibilityManager.User.SteamId , action: ()=>{ Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(new[]{item.SteamId}));})
 			, new (string.Empty)
@@ -279,6 +279,6 @@ public partial class PC_PackagePage : PanelContent
 
 	private static void Redownload<T>(T item) where T : IPackage
 	{
-		SteamUtil.ReDownload(item);
+		SteamUtil.ReDownload(new IPackage[] { item });
 	}
 }

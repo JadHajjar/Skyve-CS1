@@ -758,19 +758,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_Actions.Invalidate();
 	}
 
-	private async void UnsubscribeAll(object sender, EventArgs e)
+	private void UnsubscribeAll(object sender, EventArgs e)
 	{
-		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		if (ShowPrompt(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(LC_Items.FilteredItems.Count()), PromptButtons.YesNo) != DialogResult.Yes)
 		{
 			return;
 		}
 
 		I_Actions.Loading = true;
-		await CitiesManager.UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
+		SubscriptionsManager.UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
 		I_Actions.Loading = false;
 	}
 
-	private async void SubscribeAll(object sender, EventArgs e)
+	private void SubscribeAll(object sender, EventArgs e)
 	{
 		var removeBadPackages = false;
 		var steamIds = LC_Items.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.SteamId != 0);
@@ -795,12 +795,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(LC_Items.FilteredItems.Count()), PromptButtons.YesNo) != DialogResult.Yes)
 		{
 			return;
 		}
 
-		await CitiesManager.Subscribe(steamIds.Select(x => x.Item.SteamId));
+		SubscriptionsManager.Subscribe(steamIds.Select(x => x.Item.SteamId));
 	}
 
 	private async void DeleteAll(object sender, EventArgs e)

@@ -163,7 +163,7 @@ internal static class CentralManager
 
 		OnInformationUpdated();
 
-		SubscriptionsUtil.Start();
+		SubscriptionsManager.Start();
 
 		if (CommandUtil.PreSelectedProfile == CurrentProfile.Name)
 		{

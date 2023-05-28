@@ -38,7 +38,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 			Cursor = Cursors.Hand,
 			Text = $"RequestBy_{SteamUtil.GetUser(_request.UserId)?.Name}_{DateTime.Now:yy-MM-dd_HH-mm}",
 			Dock = DockStyle.Top,
-			Height = (int)(50 * UI.UIScale),
+			Height = (int)(60 * UI.UIScale),
 			Margin = UI.Scale(new Padding(5), UI.FontScale)
 		};
 
@@ -127,6 +127,8 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		tableLayoutPanel2.Width = (int)(200 * UI.FontScale);
 		label3.Font = label1.Font = UI.Font(7.5F, FontStyle.Bold);
 		tableLayoutPanel1.Padding = UI.Scale(new Padding(5), UI.FontScale);
+		slickIcon1.Size = UI.Scale(new Size(24,24), UI.FontScale);
+		slickIcon1.Padding = UI.Scale(new Padding(5), UI.FontScale);
 
 		foreach (Control item in roundedGroupTableLayoutPanel1.Controls)
 		{
@@ -197,5 +199,10 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		}
 
 		B_DeleteRequest.Loading = false;
+	}
+
+	private void slickIcon1_Click(object sender, EventArgs e)
+	{
+		Clipboard.SetText(label2.Text);
 	}
 }
