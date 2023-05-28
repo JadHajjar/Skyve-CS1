@@ -247,7 +247,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				{
 					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
 				}
-				else
+				else if (item.Item.Workshop)
 				{
 					setTip(Locale.SubscribeToItem, rects.IncludedRect);
 				}
@@ -441,7 +441,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			{
 				if (item.Item.Package is null)
 				{
-					await CitiesManager.Subscribe(new[] { item.Item.SteamId });
+					if (item.Item.Workshop)
+					{
+						await CitiesManager.Subscribe(new[] { item.Item.SteamId });
+					}
+
 					return;
 				}
 
@@ -682,7 +686,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			DrawIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large, package);
 		}
 
-		DrawThumbnailAndTitle(e, rects, report, large);
+		DrawThumbnailAndTitle(e, rects, large);
 
 		if (!large && !PackagePage)
 		{
@@ -946,7 +950,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomLeft, true);
 	}
 
-	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Domain.Compatibility.CompatibilityInfo compatibility, bool large)
+	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool large)
 	{
 		var iconRectangle = rects.IconRect;
 
@@ -1000,6 +1004,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 	private void DrawIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, Package? package)
 	{
+		if (package is null && !e.Item.Workshop)
+		{
+			return; // missing local item
+		}
+
 		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
 		{

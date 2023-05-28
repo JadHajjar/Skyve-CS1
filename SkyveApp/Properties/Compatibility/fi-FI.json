@@ -100,6 +100,7 @@
   "Interaction_Identical": "Nämä ovat useita versioita samasta paketista.\r\n\r\nSinun pitäisi valita vain yksi niistä.",
   "Status_Succeeded": "'{0}' on onnistunut '{1}'.\r\n\r\nKäytät jo '{1}' -toimintoa, joten '{0}' -toimintoa ei enää tarvita.",
   "Status_Deprecated": "'{0}' on vanhentunut, sen tekijä ei enää tue sitä.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' on alkuperäisen paketin uudelleenlataus.",
     "One": "Tämä on '{1} ' uudelleenlataus."
@@ -201,5 +202,10 @@
   "NameList": "Nimi: Lista/Pelin Käännökset",
   "ApplyChangedBeforeExit": "Sinulla on tallentamattomia muutoksia.\r\n\r\nHaluatko ottaa nämä muutokset käyttöön ennen jatkamista?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "Kirjoittaja {0}, {1}, tiedetään olevan pahansuopia ja/tai sisällyttää haitallista sisältöä, kuten viruksia niiden pakkauksissa."
+  "AuthorMalicious": "Kirjoittaja {0}, {1}, tiedetään olevan pahansuopia ja/tai sisällyttää haitallista sisältöä, kuten viruksia niiden pakkauksissa.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Poista pyyntö",
+  "ApplyRequestedChanges": "Hyväksy pyydetyt muutokset",
+  "ManagePackage": "Hallinnoi pakettia",
+  "RequestReviewDisclaimer": "*Sinun Steam-tunnuksesi ja lokisi lähetetään pyyntösi yhteydessä"
 }

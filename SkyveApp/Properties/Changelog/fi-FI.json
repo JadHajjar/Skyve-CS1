@@ -331,5 +331,70 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Korjattu ongelma jossa viimeiset asetukset ja profiilit ei joskus siirtynyt Skyveen.",
+                    "Pikakuvake luodaan nykyään, kun ensimmäisen kerran avaat Skyven, kun sinulla aiemmin oli LOM2.",
+                    "Korjattu harvinainen ongelma, jossa yhteensopivuustiedot eivät ladanneet.",
+                    "Otetettiin käyttöön mahdollisuus pyytää uudelleentarkastusta paketille, joka on tällä hetkellä rikki.",
+                    "Löysennetty 'Osittain ladattu' -ilmoituksen herkkyyttä."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Muutokset",
+                "Changes": [
+                    "Sovelluksen suorityskykyä parannettu. Nopeammat latausajat ja vähemmän jäätymisiä odotettavissa.",
+                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+                    "Fixed mods being detected in the local assets folder."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Fixed the options tab not opening for macOS & Linux.",
+                    "Fixed the Help & Logs tab not loading your current log automatically.",
+                    "Fixed the log file path being wrong on Linux."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Muutokset",
+                "Changes": [
+                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
+                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
+                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                ]
+            },
+            {
+                "Name": "Korjaukset",
+                "Changes": [
+                    "Fixed the asset summary not showing in the dashboard.",
+                    "Fixed the out of date status not working correctly."
+                ]
+            }
+        ]
     }
 ]

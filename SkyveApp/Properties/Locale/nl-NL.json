@@ -41,9 +41,9 @@
   "OtherProfiles": "Andere profielen",
   "ViewProfiles": "Bekijk profielen",
   "AddProfile": "Profiel toevoegen",
-  "LHT": "Linker verkeer",
+  "LHT": "Linksrijdend verkeer",
   "NoWorkshop": "Geen workshoppakketten",
-  "NoAssets": "Geen aangepaste activa",
+  "NoAssets": "Alle activa uitschakelen",
   "NoMods": "Alle mods uitschakelen",
   "AutoSave": "Automatisch opslaan",
   "TotalSize": "totale grootte",
@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' kan verouderd zijn, het werd {1} bijgewerkt",
   "PackageIsIncomplete": "De lokale grootte van '{0}' ({1}) is verschillend van Steam's {2}",
   "RemovedFromSteam": "Verwijderd van Steam",
-  "Missing": "Ontbrekende"
+  "Missing": "Ontbrekende",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }

@@ -50,9 +50,6 @@ public partial class PC_ModUtilities : PanelContent
 		var modsOutOfDate = CentralManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.OutOfDate);
 		var modsIncomplete = CentralManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.PartiallyDownloaded);
 
-		B_ReDownload.Loading = false;
-		B_Cleanup.Loading = false;
-
 		this.TryInvoke(() =>
 		{
 			L_OutOfDate.Text = Locale.OutOfDateCount.FormatPlural(modsOutOfDate.Count, Locale.Package.FormatPlural(modsOutOfDate.Count).ToLower());
@@ -77,6 +74,20 @@ public partial class PC_ModUtilities : PanelContent
 			L_OutOfDate.Visible = P_OutOfDate.Visible = modsOutOfDate.Count > 0;
 			L_Incomplete.Visible = P_Incomplete.Visible = modsIncomplete.Count > 0;
 			P_ModIssues.Visible = modsOutOfDate.Count > 0 || modsIncomplete.Count > 0;
+
+			if (B_ReDownload.Loading)
+			{
+				B_ReDownload.Loading = false;
+
+				ShowPrompt(Locale.RedownloadComplete, LocaleSlickUI.TaskCompleted, icon: PromptIcons.Ok);
+			}
+
+			if (B_Cleanup.Loading)
+			{
+				B_Cleanup.Loading = false;
+
+				ShowPrompt(Locale.CleanupComplete, LocaleSlickUI.TaskCompleted, icon: PromptIcons.Ok);
+			}
 		});
 	}
 
@@ -115,26 +126,30 @@ public partial class PC_ModUtilities : PanelContent
 
 	private async void B_LoadCollection_Click(object sender, EventArgs e)
 	{
-		if (!B_LoadCollection.Loading && this.CheckValidation())
+		try
 		{
-			B_LoadCollection.Loading = true;
-
-			var collectionId = Regex.Match(TB_CollectionLink.Text, TB_CollectionLink.ValidationRegex).Groups[1].Value;
-
-			if (ulong.TryParse(collectionId, out var steamId))
+			if (!B_LoadCollection.Loading && this.CheckValidation())
 			{
-				var contents = await SteamUtil.GetItemAsync(steamId);
+				B_LoadCollection.Loading = true;
 
-				if (contents?.RequiredPackages?.Any() ?? false)
+				var collectionId = Regex.Match(TB_CollectionLink.Text, TB_CollectionLink.ValidationRegex).Groups[1].Value;
+
+				if (ulong.TryParse(collectionId, out var steamId))
 				{
-					Form.PushPanel(null, new PC_ViewCollection(contents));
+					var contents = await SteamUtil.GetItemAsync(steamId);
 
-					TB_CollectionLink.Text = string.Empty;
+					if (contents?.RequiredPackages?.Any() ?? false)
+					{
+						Form.PushPanel(null, new PC_ViewCollection(contents));
+
+						TB_CollectionLink.Text = string.Empty;
+					}
 				}
-			}
 
-			B_LoadCollection.Loading = false;
+				B_LoadCollection.Loading = false;
+			}
 		}
+		catch (Exception ex) { ShowPrompt(ex, LocaleSlickUI.UnexpectedError); }
 	}
 
 	private void B_ReDownload_Click(object sender, EventArgs e)

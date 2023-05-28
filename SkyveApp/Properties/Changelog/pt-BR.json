@@ -1,7 +1,7 @@
 [
     {
         "Version": "2.2.0",
-        "Date": "10/04/2023",
+        "Date": "2023-04-10",
         "Tagline": "Bem-vindo ao relatório de alterações",
         "ChangeGroups": [
             {
@@ -37,7 +37,7 @@
     },
     {
         "Version": "2.1.4",
-        "Date": "08/04/2023",
+        "Date": "2023-04-08",
         "ChangeGroups": [
             {
                 "Name": "Adicionada a seção de Ajuda e Registros",
@@ -65,7 +65,7 @@
     },
     {
         "Version": "2.1.3",
-        "Date": "06/04/2023",
+        "Date": "2023-04-06",
         "ChangeGroups": [
             {
                 "Name": "Correções",
@@ -77,7 +77,7 @@
     },
     {
         "Version": "2.1.2",
-        "Date": "05/04/2023",
+        "Date": "2023-04-05",
         "ChangeGroups": [
             {
                 "Name": "Mudanças",
@@ -93,7 +93,7 @@
     },
     {
         "Version": "2.1.1",
-        "Date": "05/04/2023",
+        "Date": "2023-04-05",
         "ChangeGroups": [
             {
                 "Name": "Mudanças",
@@ -160,7 +160,7 @@
     },
     {
         "Version": "2.2.2",
-        "Date": "19/04/2023",
+        "Date": "2023-04-19",
         "Tagline": "",
         "ChangeGroups": [
             {
@@ -328,6 +328,71 @@
                     "Adicionado texto extra na lista para mostrar quantos pacotes estão escondidos por predefinição do seu perfil.",
                     "Melhorado o botão de Ações para torná-lo mais visível e mais fácil de acessar.",
                     "O novo ícone agora brilha baseado no que está acontecendo, azul indica que o jogo está rodando, vermelho significa que não há conexão com a internet, e brilhar rapidamente significa que está iniciando ou fechando o jogo."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Correções",
+                "Changes": [
+                    "Corrigido o problema em que as configurações e perfis anteriores às vezes não eram transferidos para o Skyve.",
+                    "Agora, um atalho será criado quando você abrir o Skyve pela primeira vez após ter usado o LOM2 anteriormente.",
+                    "Corrigido um caso raro em que as informações de compatibilidade não estavam sendo carregadas.",
+                    "Habilitada a capacidade de solicitar uma análise para um pacote que está atualmente quebrado.",
+                    "Reduzida a sensibilidade da notificação de \"Parcialmente Baixado\"."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Mudanças",
+                "Changes": [
+                    "Desempenho do aplicativo foi aprimorado, resultando em tempos de carregamento mais rápidos e menos interrupções.",
+                    "Corrigido o problema de interação entre mods semelhantes exibidos no Relatório de Compatibilidade quando você tem apenas um deles.",
+                    "Corrigido o problema de detecção de mods na pasta de recursos locais."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Correções",
+                "Changes": [
+                    "Corrigido o problema de abertura da guia de opções para macOS e Linux.",
+                    "Corrigido o problema da guia de Ajuda e Registros não carregar automaticamente o relatório atual.",
+                    "Corrigido o caminho do arquivo de registro incorreto no Linux."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Mudanças",
+                "Changes": [
+                    "Os painéis do Steam no menu principal agora são exibidos por padrão. Ainda é possível ocultá-los nas configurações de mod.",
+                    "Agora, solicitar uma análise requer uma descrição válida. Um aviso legal é exibido ao lado do botão \"Enviar\" informando que seus registros serão enviados com a solicitação de análise.",
+                    "Reduzido o nível de relatório de um mod que não foi atualizado por um tempo para 'Info', para que não receba aviso sobre ele."
+                ]
+            },
+            {
+                "Name": "Correções",
+                "Changes": [
+                    "Corrigido o resumo do recurso não aparecendo no painel principal.",
+                    "Corrigido o estado \"desatualizado\" que não estava funcionando corretamente."
                 ]
             }
         ]

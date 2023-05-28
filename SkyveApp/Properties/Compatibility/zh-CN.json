@@ -27,10 +27,10 @@
   "NoAction": "不执行任何操作",
   "SubscribeToPackages": "订阅此链接的插件",
   "RequiresConfiguration": "需要一个特定的配置",
-  "SelectOne": "选择任意一个",
+  "SelectOne": "请选择…",
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅关联的插件",
-  "Switch": "改为使用其它插件",
+  "Switch": "需要替换",
   "FlippedSwitch": "替换为此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
@@ -90,8 +90,8 @@
     "Plural": "要使用 '{0}'，您需要订阅下列必需的插件："
   },
   "Interaction_OptionalPackages": {
-    "One": "您缺少 '{0}' 中的可选插件。",
-    "Plural": "您缺少 '{0}' 中以下可选的插件。"
+    "One": "对于插件 '{0}'，您缺少以下可选插件：",
+    "Plural": "对于插件 '{0}'，您缺少以下可选插件："
   },
   "Interaction_SucceededBy": {
     "One": "'{0}' 的功能已被 '{1}' 继承。",
@@ -100,6 +100,7 @@
   "Interaction_Identical": "这些是同一个插件的多个不同版本。\n\n您应当只选择使用其中一个，并取消订阅其他版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
+  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行过更新，可能不再受到作者的支持。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个原始插件的重新上传版本。",
     "One": "这是 '{1}' 的重新上传版本。"
@@ -121,7 +122,7 @@
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
-  "OutputText": "预期输出",
+  "OutputText": "预期显示文本",
   "Stability_AssetNotReviewed": "此资产尚未被检查。\n\n兼容性信息可能不准确；尽管资产一般都是稳定的。",
   "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
   "Stability_Stable": "此插件能稳定运行。",
@@ -151,7 +152,7 @@
     "Plural": "您应该卸下以下插件："
   },
   "Action_Switch": {
-    "One": "您应当改为使用 '{1}'。",
+    "One": "您应当将其替换为 '{1}'。",
     "Plural": "您应当改为使用下列任意一个插件："
   },
   "NoRequiredDlcs": "没有前置 DLC",
@@ -201,5 +202,10 @@
   "NameList": "名称列表/游戏翻译",
   "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，您想保存并应用这些改动吗？",
   "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证是否稳定运行，以及将来是否更新。",
-  "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。"
+  "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
+  "ReviewRequests": "检查申请 {0}",
+  "DeleteRequest": "删除申请",
+  "ApplyRequestedChanges": "应用申请的改动",
+  "ManagePackage": "管理插件",
+  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送"
 }

@@ -118,26 +118,29 @@ public static class SteamUtil
 	{
 		try
 		{
-			var steamArguments = new StringBuilder("steam://open/console");
-
-			if (LocationManager.Platform is not Platform.Windows)
+			foreach (var id in ids.Chunk(100))
 			{
-				steamArguments.Append(" \"");
+				var steamArguments = new StringBuilder("steam://open/console");
+
+				if (LocationManager.Platform is not Platform.Windows)
+				{
+					steamArguments.Append(" \"");
+				}
+
+				for (var i = 0; i < ids.Length; i++)
+				{
+					steamArguments.AppendFormat(" +workshop_download_item 255710 {0}", ids[i]);
+				}
+
+				if (LocationManager.Platform is not Platform.Windows)
+				{
+					steamArguments.Append("\"");
+				}
+
+				ExecuteSteam(steamArguments.ToString());
+
+				Thread.Sleep(150);
 			}
-
-			for (var i = 0; i < ids.Length; i++)
-			{
-				steamArguments.AppendFormat(" +workshop_download_item 255710 {0}", ids[i]);
-			}
-
-			if (LocationManager.Platform is not Platform.Windows)
-			{
-				steamArguments.Append("\"");
-			}
-
-			ExecuteSteam(steamArguments.ToString());
-
-			Thread.Sleep(150);
 
 			ExecuteSteam("steam://open/downloads");
 		}
@@ -217,15 +220,15 @@ public static class SteamUtil
 
 	internal static async Task<Dictionary<ulong, SteamUser>> GetSteamUsersAsync(List<ulong> steamId64s)
 	{
-		var idString = string.Join(",", steamId64s);
-		var url = $"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={KEYS.STEAM_API_KEY}&steamids={idString}";
-
-		steamId64s.Remove(0);
+		steamId64s.RemoveAll(x => x == 0);
 
 		if (steamId64s.Count == 0)
 		{
 			return new();
 		}
+
+		var idString = string.Join(",", steamId64s.Distinct());
+		var url = $"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={KEYS.STEAM_API_KEY}&steamids={idString}";
 
 		try
 		{
@@ -251,14 +254,14 @@ public static class SteamUtil
 
 	internal static async Task<Dictionary<ulong, SteamWorkshopItem>> GetWorkshopInfoAsync(List<ulong> ids)
 	{
-		var url = $"https://api.steampowered.com/IPublishedFileService/GetDetails/v1/?key={KEYS.STEAM_API_KEY}&includetags=true&includechildren=true&includevotes=true";
-
-		ids.Remove(0);
+		ids.RemoveAll(x => x == 0);
 
 		if (ids.Count == 0)
 		{
 			return new();
 		}
+
+		var url = $"https://api.steampowered.com/IPublishedFileService/GetDetails/v1/?key={KEYS.STEAM_API_KEY}&includetags=true&includechildren=true&includevotes=true";
 
 		for (var i = 0; i < ids.Count; i++)
 		{

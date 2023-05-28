@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' قد يكون قديما، لقد تم تحديث {1}",
   "PackageIsIncomplete": "الحجم المحلي لـ '{0}' ({1}) مختلف عن الفريق {2}",
   "RemovedFromSteam": "تمت الإزالة من Steam",
-  "Missing": "مفقود"
+  "Missing": "مفقود",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }

@@ -72,7 +72,7 @@
   "ProfileName": "配置文件名称",
   "RenameProfile": "重命名当前配置文件",
   "StartScratch": "从头开始创建一个配置文件",
-  "ContinueFromCurrent": "将当前配置保存为新配置文件",
+  "ContinueFromCurrent": "复制当前配置文件",
   "GamePlay": "建设城市",
   "EditorPlay": "制作资产",
   "ProfileUsage": "此配置文件的用途",
@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "插件 '{0}' 可能已过期，它已经进行了更新 {1}",
   "PackageIsIncomplete": "本地插件 '{0}' 的文件大小({1}) 与其工坊版本的文件大小 {2} 不同",
   "RemovedFromSteam": "已从 Steam 工坊移除",
-  "Missing": "丢失"
+  "Missing": "丢失",
+  "LoggedInAs": "登录为",
+  "UnknownUser": "未知用户",
+  "AddMeaningfulDescription": "发送申请前，请先添加一个有意义的描述。"
 }

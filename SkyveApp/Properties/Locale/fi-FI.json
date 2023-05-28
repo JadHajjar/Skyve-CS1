@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' saattaa olla vanhentunut, se päivitettiin {1}",
   "PackageIsIncomplete": "Paikallinen koko '{0}' ({1}) on erilainen kuin Steamin {2}",
   "RemovedFromSteam": "Poistettu Steamistä",
-  "Missing": "Puuttuu"
+  "Missing": "Puuttuu",
+  "LoggedInAs": "Kirjautuneena käyttäjänä",
+  "UnknownUser": "Tuntematon käyttäjä",
+  "AddMeaningfulDescription": "Ole hyvä ja lisää tarkoituksellinen kuvaus pyyntöösi."
 }

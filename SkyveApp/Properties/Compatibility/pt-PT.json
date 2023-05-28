@@ -100,6 +100,7 @@
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}'.\r\n\r\nVocê já está usando '{1}' então não há mais necessidade de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, não é mais suportado pelo seu autor.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
     "One": "Este é um re-upload de '{1}'."
@@ -201,5 +202,10 @@
   "NameList": "Nome-Lista/Traduções de Jogo",
   "ApplyChangedBeforeExit": "Você tem alterações não salvas.\r\n\r\nGostaria de aplicar essas alterações antes de continuar?",
   "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\n\nAs atualizações futuras e a estabilidade dos pacotes não são garantidas.",
-  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus em suas embalagens."
+  "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus em suas embalagens.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }

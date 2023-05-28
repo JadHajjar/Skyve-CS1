@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' может быть устаревшим, он был обновлен {1}",
   "PackageIsIncomplete": "Локальный размер '{0}' ({1}) отличается от {2} Steam",
   "RemovedFromSteam": "Удалено из Steam",
-  "Missing": "Отсутствует"
+  "Missing": "Отсутствует",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }

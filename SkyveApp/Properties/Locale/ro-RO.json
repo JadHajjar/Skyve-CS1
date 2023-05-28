@@ -479,5 +479,8 @@
   "PackageIsMaybeOutOfDate": "'{0}' poate fi expirat, a fost actualizat {1}",
   "PackageIsIncomplete": "Dimensiunea locală a '{0}' ({1}) este diferită de Steam {2}",
   "RemovedFromSteam": "Eliminat din Steam",
-  "Missing": "Lipsă"
+  "Missing": "Lipsă",
+  "LoggedInAs": "Logged in as",
+  "UnknownUser": "Unknown User",
+  "AddMeaningfulDescription": "Please add a meaningful description to your request."
 }

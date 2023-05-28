@@ -77,7 +77,7 @@
   "UI Scale": "UI schaal",
   "Font Family": "Lettertypefamilie",
   "Base Theme": "Basisthema",
-  "Select how the app interacts with your theme": "Selecteer hoe de app met uw thema communiceert",
+  "Select how the app interacts with your theme": "Selecteer hoe de app met uw thema omgaat",
   "Randomize": "Willekeurig",
   "Reset": "Reset",
   "Apply": "Toepassen",
@@ -96,9 +96,9 @@
   "Red": "Rood",
   "Green": "Groen",
   "Yellow": "Geel",
-  "Welcome to Theme Changer!": "Welkom bij Thema Moordenaar!",
-  "Customize the size and colors in the App however you want to.": "Pas de grootte en kleuren van de app aan zoals je wilt.",
+  "Welcome to Theme Changer!": "Welkom bij Theme Changer!",
+  "Customize the size and colors in the App however you want to.": "Pas de grootte en kleuren in de App aan zoals je wilt.",
   "Click on any color to change it, or right-click to reset it.": "Klik op een kleur om deze te veranderen of klik met de rechtermuisknop om deze te resetten.",
   "Custom Theme": "Aangepast Thema",
-  "Do you want to apply your changes before leaving?": "Wilt u de wijzigingen toepassen voor u vertrekt?"
+  "Do you want to apply your changes before leaving?": "Wilt u de wijzigingen toepassen voor u afsluit?"
 }

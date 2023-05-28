@@ -45,6 +45,49 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		Size = new Size((_doubleButtons ? (includeItemHeight * 2 * 9 / 10) : (includeItemHeight + 1)) + includeItemHeight, includeItemHeight * 2 / 3);
 	}
 
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		var packages = LC_Items?.SafeGetItems() ?? new();
+		var subscribe = packages.Any(x => x.Item.Package is null);
+
+		if (IncludedRect.Contains(e.Location))
+		{
+			if (subscribe)
+			{
+				SlickTip.SetTo(this, "SubscribeAll");
+			}
+			else if (packages.All(x => x.Item.IsIncluded))
+			{
+				SlickTip.SetTo(this, "ExcludeAll");
+			}
+			else
+			{
+				SlickTip.SetTo(this, "IncludeAll");
+			}
+		}
+		else if (EnabledRect.Contains(e.Location))
+		{
+			if (subscribe)
+			{
+				SlickTip.SetTo(this, "SubscribeAll");
+			}
+			else if (packages.All(x => x.Item.Package?.Mod?.IsEnabled ?? true))
+			{
+				SlickTip.SetTo(this, "DisableAll");
+			}
+			else
+			{
+				SlickTip.SetTo(this, "EnableAll");
+			}
+		}
+		else if (ActionRect.Contains(e.Location))
+		{
+			SlickTip.SetTo(this, "OtherActions");
+		}
+	}
+
 	protected override void OnMouseClick(MouseEventArgs e)
 	{
 		base.OnMouseClick(e);

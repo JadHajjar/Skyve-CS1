@@ -39,7 +39,7 @@
   "TestVersion": "เวอร์ชันทดสอบ",
   "DependencyMod": "Dependency Mod",
   "SourceCodeNotAvailable": "Source-code is not available",
-  "MusicCanBeCopyrighted": "Included music may be copyrighted",
+  "MusicCanBeCopyrighted": "มีเพลงที่มีลิขสิทธิ์อยู่ภายใน",
   "IncompleteDescription": "Incomplete Description",
   "Successor": "Successor",
   "Alternative": "Alternative",
@@ -100,6 +100,7 @@
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
     "One": "This is a re-upload of '{1}'."
@@ -126,7 +127,7 @@
   "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
   "Stability_Stable": "แพ็กเกจนี้มีความเสถียร",
   "Stability_NotEnoughInformation": "There is not enough information to properly review this package.",
-  "Stability_HasIssues": "This package can cause issues.\r\nBe careful while using it.",
+  "Stability_HasIssues": "แพ็กเกจนี้มีปัญหาเล็กน้อย\nโปรดใช้งานอย่างระมัดระวัง",
   "Stability_Broken": "This package is broken.\r\nIt is known to either break the game or just does not work.",
   "Stability_Incompatible": "This package is not compatible with, or breaks, the game.\r\n\r\nYou should remove it immediately.",
   "Stability_Local": "This package is a local version of its original mod '{0}'.\r\n\r\nLocal versions are usually used for testing purposes or in case you do not have Steam.\r\n\r\nCheck the package's links to look for updates to the mod.",
@@ -201,5 +202,10 @@
   "NameList": "รายการชื่อ/แปลเกม",
   "ApplyChangedBeforeExit": "การตั้งค่าของคุณยังไม่ได้ถูกบันทึก\n\nคุณต้องการปรับใช้การตั้งค่าเหล่านี้ก่อนที่จะดำเนินการต่อหรือไม่?",
   "AuthorRetired": "ผู้สร้าง {0} ของ {1} ได้ปลดเกษียณตัวเอง หรือ ไม่มีความเคลื่อนไหวมาเป็นเวลานานแล้ว\n\nไม่สามารถยืนยันถึงความเสถียร และรับประกันไม่ได้ว่าพวกเขาจะมีอัปเดตในอนาคต",
-  "AuthorMalicious": "เป็นที่รู้กันว่าผู้สร้าง {0} ของ {1} เป็นอันตราย และ/หรือ ได้ใส่เนื้อหาที่เป็นอันตรายเข้ามาในแพ็กเกจของเขา เช่น ไวรัส เป็นต้น"
+  "AuthorMalicious": "เป็นที่รู้กันว่าผู้สร้าง {0} ของ {1} เป็นอันตราย และ/หรือ ได้ใส่เนื้อหาที่เป็นอันตรายเข้ามาในแพ็กเกจของเขา เช่น ไวรัส เป็นต้น",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }

@@ -65,7 +65,7 @@
     },
     {
         "Version": "2.1.3",
-        "Date": "2023-04-05",
+        "Date": "2023-04-06",
         "ChangeGroups": [
             {
                 "Name": "Фікси",
@@ -77,7 +77,7 @@
     },
     {
         "Version": "2.1.2",
-        "Date": "2023-04-06",
+        "Date": "2023-04-05",
         "ChangeGroups": [
             {
                 "Name": "Зміни",
@@ -328,6 +328,71 @@
                     "Доданий додатковий текст до списку, щоб показати, скільки пакетів приховано через використання вашого профілю.",
                     "Удосконалені кнопки дій для більш помітного та зручного доступу.",
                     "Нова іконка тепер світиться, базуючись на тому, що відбувається, синій вказує на те, що працює гра, червоний означає відсутність підключення до Інтернету, а швидке блимання означає, що він запускає або закриває гру."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
+                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
+                    "Fixed a rare case where the compatibility info was not loading.",
+                    "Enabled the ability to request a review for a package that is currently broken.",
+                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
+                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+                    "Fixed mods being detected in the local assets folder."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the options tab not opening for macOS & Linux.",
+                    "Fixed the Help & Logs tab not loading your current log automatically.",
+                    "Fixed the log file path being wrong on Linux."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
+                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
+                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the asset summary not showing in the dashboard.",
+                    "Fixed the out of date status not working correctly."
                 ]
             }
         ]

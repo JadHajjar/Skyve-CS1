@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using System;
+
 namespace SkyveApp.Utilities;
 internal class Locale : LocaleHelper
 {
@@ -265,4 +267,6 @@ internal class Locale : LocaleHelper
 	public static Translation UnknownUser => _instance.GetText(nameof(UnknownUser));
 	public static Translation SelectPackage => _instance.GetText(nameof(SelectPackage));
 	public static Translation AddMeaningfulDescription => _instance.GetText(nameof(AddMeaningfulDescription));
+	public static Translation CleanupComplete => _instance.GetText(nameof(CleanupComplete));
+	public static Translation RedownloadComplete => _instance.GetText(nameof(RedownloadComplete));
 }

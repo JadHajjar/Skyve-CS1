@@ -100,6 +100,7 @@
   "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
   "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있기에 '{0}' 는 더 이상 필요하지 않습니다.",
   "Status_Deprecated": "'{0}' 는 더 이상 제작자에 의해 지원되지 않으며 사용되지 않습니다.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
     "One": "This is a re-upload of '{1}'."
@@ -201,5 +202,10 @@
   "NameList": "Name-List/Game Translations",
   "ApplyChangedBeforeExit": "You have un-saved changes.\r\n\r\nWould you like to apply those changes before continuing?",
   "AuthorRetired": "{0}의 제작자인 {1}는 제작을 그만두었거나 오랫동안 활동하지 않았습니다.\n\n그의 패키지에 대한 앞으로의 업데이트와 안정성은 보장되지 않습니다.",
-  "AuthorMalicious": "{0}의 제작자인 {1}는 바이러스와 같은 유해하거나 악성인 콘텐츠를 자신의 패키지에 포함시키는 것으로 알려져 있습니다."
+  "AuthorMalicious": "{0}의 제작자인 {1}는 바이러스와 같은 유해하거나 악성인 콘텐츠를 자신의 패키지에 포함시키는 것으로 알려져 있습니다.",
+  "ReviewRequests": "Review Requests {0}",
+  "DeleteRequest": "Delete Request",
+  "ApplyRequestedChanges": "Apply Requested Changes",
+  "ManagePackage": "Manage Package",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }
