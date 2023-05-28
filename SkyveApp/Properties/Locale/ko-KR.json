@@ -221,6 +221,7 @@
   "AreYouSure": "계속 진행하시겠습니까?",
   "MapFileInfo": "새 게임을 시작할 맵 파일을 선택하세요",
   "AssetOutOfDate": "업데이트되지 않은 에셋이 있습니다",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "업데이트되지 않은 에셋들이 있습니다",
   "CopyVersionNumber": "버전 숫자 복사하기",
   "SubscribeToItem": "이 항목 구독하기",
@@ -482,5 +483,7 @@
   "Missing": "누락",
   "LoggedInAs": "Logged in as",
   "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
