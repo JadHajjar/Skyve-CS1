@@ -31,7 +31,7 @@
   "UnsubscribeThis": "取消訂閱此外掛程式",
   "UnsubscribeOther": "取消訂閱關聯的外掛程式",
   "Switch": "切換到連結的外掛程式",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "取代為此外掛",
   "Deprecated": "已廢棄",
   "Reupload": "重新上傳",
   "CausesIssues": "導致問題",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "這些是同一個外掛程式的多個不同版本。\n\n您應當只選擇使用其中一個，並取消訂閱其他版本。",
   "Status_Succeeded": "「{0}」 的功能已被「{1}」繼承。\n\n您已經使用了「{1}」，因此不再需要使用「{0}」。",
   "Status_Deprecated": "'{0}' 已經廢棄，不再受到作者的支持。",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "「{0}」已經很長時間沒有進行過更新，可能不再受到作者的支援。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某個原始外掛程式的重新上傳版本。",
     "One": "這是 '{1}' 的重新上傳版本。"
@@ -203,9 +203,9 @@
   "ApplyChangedBeforeExit": "當前存在尚未保存的改動。\n\n在繼續操作前，您想保存並應用這些改動嗎？",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "已知 {0} 的作者 {1} 存在惡意，並且其製作的外掛中含有病毒等有害內容。",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "ReviewRequests": "檢查請求 {0}",
+  "DeleteRequest": "刪除請求",
+  "ApplyRequestedChanges": "應用請求的改動",
+  "ManagePackage": "管理外掛",
+  "RequestReviewDisclaimer": "* 傳送請求時，您的 Steam ID 和記錄檔也會一併傳送"
 }
