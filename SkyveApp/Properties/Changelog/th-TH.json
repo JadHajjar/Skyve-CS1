@@ -14,7 +14,7 @@
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "เพิ่มประสิทธิภาพ",
                 "Changes": [
                     "Added Compatibility Report for broken Assets",
                     "Unlisted packages now have the correct name and thumbnail.",
@@ -23,7 +23,7 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "แก้ไข",
                 "Changes": [
                     "Fixed legacy profiles not being converted after the first launch.",
                     "Fixed local assets not automatically refreshing after external changes.",
@@ -49,13 +49,13 @@
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "เพิ่มประสิทธิภาพ",
                 "Changes": [
                     "Changed the icons of filters to reflect the correct icons used in the list."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "แก้ไข",
                 "Changes": [
                     "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
                     "Fixed the map selection for a new game not letting users select a vanilla map."
@@ -68,7 +68,7 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "แก้ไข",
                 "Changes": [
                     "Fixed a bug that caused infinite loading for some users."
                 ]
@@ -80,7 +80,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "เปลี่ยน",
                 "Changes": [
                     "Removed the subscription tab from the in-game mod options.",
                     "Fixed DLCs not being applied when loading a profile.",
@@ -96,7 +96,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "เปลี่ยน",
                 "Changes": [
                     "Adding an info popup when subscribing to items for the first time.",
                     "Added a warning text in the dashboard when you have multiple LOM instances installed.",
@@ -133,7 +133,7 @@
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "เพิ่มประสิทธิภาพ",
                 "Changes": [
                     "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
                     "Local assets are now correctly groupped based on the folders they're in.",
