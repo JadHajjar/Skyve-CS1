@@ -221,7 +221,7 @@
   "AreYouSure": "Ești sigur că vrei să continui?",
   "MapFileInfo": "Selectați un fișier hartă pentru a începe un joc nou cu",
   "AssetOutOfDate": "activul este expirat",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "Alte Acțiuni...",
   "AssetOutOfDatePlural": "activele sunt expirate",
   "CopyVersionNumber": "Copiază numărul versiunii",
   "SubscribeToItem": "Abonează-te la acest element",
@@ -481,9 +481,9 @@
   "PackageIsIncomplete": "Dimensiunea locală a '{0}' ({1}) este diferită de Steam {2}",
   "RemovedFromSteam": "Eliminat din Steam",
   "Missing": "Lipsă",
-  "LoggedInAs": "Logged in as",
-  "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "LoggedInAs": "Conectat ca",
+  "UnknownUser": "Utilizator necunoscut",
+  "AddMeaningfulDescription": "Vă rugăm să adăugați o descriere semnificativă la cererea dvs.",
+  "RedownloadComplete": "Skyve a finalizat descărcarea pachetelor cu probleme.",
+  "CleanupComplete": "Skyve a terminat de curățat descărcările din Atelierul dvs."
 }
