@@ -221,6 +221,7 @@
   "AreYouSure": "Are you sure you want to proceed?",
   "MapFileInfo": "Chọn 1 map file để bắt đầu 1 game mới",
   "AssetOutOfDate": "tài sản đã lỗi thời",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "Asset đã bị lỗi thời",
   "CopyVersionNumber": "Sao chép mã phiên bản",
   "SubscribeToItem": "Subscribe vật phẩm này ",
@@ -482,5 +483,7 @@
   "Missing": "Missing",
   "LoggedInAs": "Logged in as",
   "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
