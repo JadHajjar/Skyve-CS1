@@ -221,7 +221,7 @@
   "AreYouSure": "Êtes-vous sûr de vouloir continuer ?",
   "MapFileInfo": "Sélectionnez un fichier de carte avec lequel commencer une nouvelle partie",
   "AssetOutOfDate": "l'asset est obsolète",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "Autres actions...",
   "AssetOutOfDatePlural": "les assets sont obsolètes",
   "CopyVersionNumber": "Copier le numéro de version",
   "SubscribeToItem": "S'abonner à cet élément",
@@ -484,6 +484,6 @@
   "LoggedInAs": "Connecté en tant que",
   "UnknownUser": "Utilisateur inconnu",
   "AddMeaningfulDescription": "Veuillez ajouter une description précise à votre demande.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "RedownloadComplete": "Skyve a fini de retélécharger les paquets avec des problèmes.",
+  "CleanupComplete": "Skyve a fini de nettoyer les téléchargements du Workshop."
 }
