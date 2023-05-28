@@ -94,6 +94,7 @@
   "OpenLocalFolder": "Deschideți folderul local care conține acest pachet",
   "ViewOnSteam": "Vizualizați acest pachet pe Steam",
   "ReDownloadPackage": "Re-descărcați acest pachet",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Copiați acest ID Steam",
   "OpenAuthorPage": "Deschide pagina autorului pe Steam",
   "Sorting_Default": "Sortare implicită",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "Selectați un fișier de salvare pentru a fi încărcat automat când deschideți jocul",
   "LoadProfile": "Încarcă profil",
   "CopyAuthorSteamId": "Copiază ID-ul autorului Steam",
-  "CloseCitiesToSub": "Trebuie să închideți Cities: Skylines pentru a vă abona sau dezabona de la pachete",
   "ShowingFilteredItems": "Se afișează {0} din {1} total articole",
   "DropNewProfile": "Plasați aici sau selectați aici un fișier de profil .json sau .xml pentru a-l importa",
   "ThemeUIScale": "Temă și dimensiune interfață",
@@ -238,7 +238,8 @@
   "WouldYouLikeToSkipThose": "Doriți să săriți peste aceste pachete?",
   "LOTWillRestart": "Skyve se va închide temporar în timpul procesului de actualizare, dar se va relua automat după finalizarea actualizării.",
   "UpdatingLot": "Skyve este în curs de actualizare. Vă rugăm așteptați...",
-  "SubscribingRequiresGameToOpen": "Abonarea sau dezabonarea de la pachete necesită deschiderea jocului pentru un scurt moment. Când vezi lansatorul jocului, apasă pe Play pentru a continua.",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
+  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Ajutor & Suport",
   "DisableFpsBoosterDebug": "Aveţi FPS Booster activat în timp ce utilizaţi mono de depanare, doriţi să-l dezactivaţi pentru a obţine jurnale mai bune?",
   "LogZipCopy_Tip": "Creați un fișier zip care conține toate informațiile de logare necesare pentru ca cineva să vă asiste în problema dvs., îl puteți lipi direct într-un canal de discord.",
@@ -485,5 +486,27 @@
   "UnknownUser": "Utilizator necunoscut",
   "AddMeaningfulDescription": "Vă rugăm să adăugați o descriere semnificativă la cererea dvs.",
   "RedownloadComplete": "Skyve a finalizat descărcarea pachetelor cu probleme.",
-  "CleanupComplete": "Skyve a terminat de curățat descărcările din Atelierul dvs."
+  "CleanupComplete": "Skyve a terminat de curățat descărcările din Atelierul dvs.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing to {0} package in this process.",
+    "Plural": "You will be unsubscribing to {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }
