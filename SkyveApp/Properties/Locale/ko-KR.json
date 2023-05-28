@@ -482,8 +482,8 @@
   "RemovedFromSteam": "Steam에서 제거됨",
   "Missing": "누락",
   "LoggedInAs": "Logged in as",
-  "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "UnknownUser": "알 수 없는 사용자",
+  "AddMeaningfulDescription": "요청에 의미있는 설명을 추가해주세요.",
+  "RedownloadComplete": "문제가 있는 패키지를 다시 다운로드했습니다.",
+  "CleanupComplete": "창작마당 다운로드를 정리했습니다."
 }
