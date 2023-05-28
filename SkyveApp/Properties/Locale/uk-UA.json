@@ -94,7 +94,6 @@
   "OpenLocalFolder": "Відкрити локальну теку, що містить цей пакунок",
   "ViewOnSteam": "Переглянути цей пакунок у Steam",
   "ReDownloadPackage": "Повторно завантажити цей пакунок",
-  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Скопіювати Steam ID",
   "OpenAuthorPage": "Відкрити сторінку автора у Steam",
   "Sorting_Default": "Сортування за замовчуванням",
@@ -180,6 +179,7 @@
   "SaveFileInfo": "Оберіть файл збереження для автоматичного завантаження при відкритті гри",
   "LoadProfile": "Завантажити профіль",
   "CopyAuthorSteamId": "Скопіювати Steam ID автора",
+  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
   "ShowingFilteredItems": "Показано {0} з {1} елементів",
   "DropNewProfile": "Перетягніть або виберіть .json або .xml файл профілю, щоб імпортувати його",
   "ThemeUIScale": "Розмір теми й інтерфейсу",
@@ -238,7 +238,6 @@
   "WouldYouLikeToSkipThose": "Бажаєте пропустити ці пакунки?",
   "LOTWillRestart": "Skyve тимчасово закриється під час процесу оновлення, але вона автоматично відкриється після завершення оновлення.",
   "UpdatingLot": "Skyve зараз оновлюється. Будь ласка, зачекайте...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Довідка та підтримка",
   "DisableFpsBoosterDebug": "У вас увімкнений FPS Booster при використанні режиму Налагодження Mono, бажаєте вимкнути його, щоб отримати кращі логи?",
@@ -486,27 +485,5 @@
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
-  "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
-  },
-  "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
-  },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
-  "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
-  },
-  "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing to {0} package in this process.",
-    "Plural": "You will be unsubscribing to {0} packages in this process."
-  },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
