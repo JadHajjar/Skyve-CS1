@@ -221,6 +221,7 @@
   "AreYouSure": "Are you sure you want to proceed?",
   "MapFileInfo": "Select a map file to start a new game with",
   "AssetOutOfDate": "परिसंपत्ति पुरानी है",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "assets are out of date",
   "CopyVersionNumber": "Copy version number",
   "SubscribeToItem": "Subscribe to this item",
@@ -482,5 +483,7 @@
   "Missing": "Missing",
   "LoggedInAs": "Logged in as",
   "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
