@@ -221,6 +221,7 @@
   "AreYouSure": "您确定要继续吗？",
   "MapFileInfo": "选择新建存档使用的地图文件",
   "AssetOutOfDate": "个资产已过期",
+  "OtherActions": "其它操作…",
   "AssetOutOfDatePlural": "个资产已过期",
   "CopyVersionNumber": "复制版本号",
   "SubscribeToItem": "订阅此项目",
@@ -482,5 +483,7 @@
   "Missing": "丢失",
   "LoggedInAs": "登录为",
   "UnknownUser": "未知用户",
-  "AddMeaningfulDescription": "发送申请前，请先添加一个有意义的描述。"
+  "AddMeaningfulDescription": "发送申请前，请先添加一个有意义的描述。",
+  "RedownloadComplete": "Skyve 已重新下载存在问题的插件。",
+  "CleanupComplete": "Skyve 已经将您已取消订阅（但没删除干净）的插件清理完毕。"
 }

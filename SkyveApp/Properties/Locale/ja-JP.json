@@ -221,6 +221,7 @@
   "AreYouSure": "続行してもよろしいですか？",
   "MapFileInfo": "新規でゲームを開始する場合はマップファイルを選択",
   "AssetOutOfDate": "個のアセットが古い",
+  "OtherActions": "他のアクション...",
   "AssetOutOfDatePlural": "個のアセットが古い",
   "CopyVersionNumber": "バージョン情報をコピー",
   "SubscribeToItem": "アイテムのサブスク",
@@ -482,5 +483,7 @@
   "Missing": "不明",
   "LoggedInAs": "次でログイン中",
   "UnknownUser": "不明なユーザー",
-  "AddMeaningfulDescription": "リクエストに具体的な問題点などの説明を追加して下さい。"
+  "AddMeaningfulDescription": "リクエストに具体的な問題点などの説明を追加して下さい。",
+  "RedownloadComplete": "Skyveは問題のあるパッケージの再DLを完了しました。",
+  "CleanupComplete": "SkyveはワークショップのDLをクリーンアップしました。"
 }

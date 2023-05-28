@@ -1,5 +1,5 @@
 {
-  "Usage": "ใช้งาน",
+  "Usage": "การใช้งาน",
   "Stability": "ความเสถียร",
   "ApplyContinue": "ปรับใช้แล้วดำเนินการต่อ",
   "Previous": "ก่อนหน้า",
@@ -21,7 +21,7 @@
   "HasIssues": "มีปัญหา",
   "Broken": "พัง",
   "Incompatible": "ไม่เข้ากัน",
-  "CityBuilding": "อาคารเมือง",
+  "CityBuilding": "การสร้างเมือง",
   "AssetCreation": "การสร้างแอสเซท",
   "MapCreation": "การสร้างแผนที่",
   "NoAction": "ไม่ต้องทำอะไร",

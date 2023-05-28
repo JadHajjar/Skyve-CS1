@@ -221,6 +221,7 @@
   "AreYouSure": "Êtes-vous sûr de vouloir continuer ?",
   "MapFileInfo": "Sélectionnez un fichier de carte avec lequel commencer une nouvelle partie",
   "AssetOutOfDate": "l'asset est obsolète",
+  "OtherActions": "Autres actions...",
   "AssetOutOfDatePlural": "les assets sont obsolètes",
   "CopyVersionNumber": "Copier le numéro de version",
   "SubscribeToItem": "S'abonner à cet élément",
@@ -482,5 +483,7 @@
   "Missing": "Manquant",
   "LoggedInAs": "Connecté en tant que",
   "UnknownUser": "Utilisateur inconnu",
-  "AddMeaningfulDescription": "Veuillez ajouter une description précise à votre demande."
+  "AddMeaningfulDescription": "Veuillez ajouter une description précise à votre demande.",
+  "RedownloadComplete": "Skyve a fini de retélécharger les paquets avec des problèmes.",
+  "CleanupComplete": "Skyve a fini de nettoyer les téléchargements du Workshop."
 }

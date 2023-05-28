@@ -337,12 +337,12 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Rezolvări",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
+                    "S-au remediat setările și profilurile anterioare care uneori nu se transferau la Skyve.",
+                    "O scurtătură va fi acum creată la prima deschidere a Skyve după ce ai avut LOM2 anterior.",
+                    "S-a remediat un caz rar în care informațiile despre compatibilitate nu se încărcau.",
+                    "A fost activată abilitatea de a solicita o revizuire a unui pachet care este în prezent stricat.",
                     "Loosened the sensitivity of the 'Partially Downloaded' notification."
                 ]
             }
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Modificări",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "A fost îmbunătățită performanța aplicației. Sunt așteptate timpi de încărcare mai rapizi și mai puține stiluri.",
+                    "S-a remediat o interacțiune între moduri similare care arată în Raportul de compatibilitate atunci când aveți doar una dintre ele.",
+                    "S-a remediat moduri detectate in folderul cu asset-uri locale."
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Rezolvări",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "A fost remediată deschiderea filei de opțiuni pentru macOS și Linux.",
+                    "S-a remediat problema Ajutor & Jurnale care nu incarca automat jurnalul curent.",
+                    "A reparat calea fișierului de jurnal greșită pe Linux."
                 ]
             }
         ]
@@ -381,18 +381,33 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Modificări",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
+                    "Panourile Steam din meniul principal sunt afișate în mod implicit, încă le puteți ascunde în setările modului.",
+                    "Solicitarea unei recenzii acum necesită o descriere validă și trimite jurnalele dvs. cu solicitarea. Un disclaimer este afișat lângă butonul „Trimite”.",
                     "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Rezolvări",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "S-a remediat rezumatul asset-urilor care nu se afișează în tabloul de bord.",
+                    "S-a remediat statusul învechit care nu funcționează corect."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Reparații și Modificări",
+                "Changes": [
+                    "S-a adăugat un mesaj pentru a te anunța când se termină 'Rezolvă toate problemele' & 'Curățare'.",
+                    "S-a remediat o eroare rară în care încărcarea unui profil LOT 1 ar continua încărcarea pentru totdeauna.",
+                    "S-a remediat jurnalul de modificări care nu se deschidea pentru unele limbi.",
+                    "S-a rezolvat potențial abonarea la o cantitate mare de elemente care eșua/nu funcționează."
                 ]
             }
         ]

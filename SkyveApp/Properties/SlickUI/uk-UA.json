@@ -100,5 +100,7 @@
   "Customize the size and colors in the App however you want to.": "Налаштуйте розміри та кольори у додатку, як тільки ви забажаєте.",
   "Click on any color to change it, or right-click to reset it.": "Натисніть на будь-який колір, щоб змінити його, або клацніть правою кнопкою миші, щоб скинути його.",
   "Custom Theme": "Користувацька тема",
-  "Do you want to apply your changes before leaving?": "Бажаєте застосувати зміни перед виходом?"
+  "Do you want to apply your changes before leaving?": "Бажаєте застосувати зміни перед виходом?",
+  "TaskCompleted": "Task Completed",
+  "UnexpectedError": "An unexpected error occurred"
 }

@@ -221,6 +221,7 @@
   "AreYouSure": "您確定要繼續嗎？",
   "MapFileInfo": "選擇新建存檔使用的地圖檔",
   "AssetOutOfDate": "個資產已過期",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "個資產已過期",
   "CopyVersionNumber": "複製版本號",
   "SubscribeToItem": "訂閱此項目",
@@ -482,5 +483,7 @@
   "Missing": "丟失",
   "LoggedInAs": "登錄為",
   "UnknownUser": "未知使用者",
-  "AddMeaningfulDescription": "傳送申請前，請先新增一個有意義的描述。"
+  "AddMeaningfulDescription": "傳送申請前，請先新增一個有意義的描述。",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }

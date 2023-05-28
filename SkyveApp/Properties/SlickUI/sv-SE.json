@@ -100,5 +100,7 @@
   "Customize the size and colors in the App however you want to.": "Anpassa storlek och färger i appen hur du vill.",
   "Click on any color to change it, or right-click to reset it.": "Klicka på valfri färg för att ändra den, eller högerklicka för att återställa den.",
   "Custom Theme": "Anpassat tema",
-  "Do you want to apply your changes before leaving?": "Vill du tillämpa dina ändringar innan du lämnar?"
+  "Do you want to apply your changes before leaving?": "Vill du tillämpa dina ändringar innan du lämnar?",
+  "TaskCompleted": "Uppgift slutförd",
+  "UnexpectedError": "Ett oväntat fel har uppstått"
 }

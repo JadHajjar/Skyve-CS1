@@ -396,5 +396,20 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes & Changes",
+                "Changes": [
+                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
+                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
+                    "Fixed the changelog not opening with some languages.",
+                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                ]
+            }
+        ]
     }
 ]

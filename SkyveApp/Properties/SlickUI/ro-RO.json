@@ -100,5 +100,7 @@
   "Customize the size and colors in the App however you want to.": "Personalizați dimensiunea și culorile în aplicație oricât doriți.",
   "Click on any color to change it, or right-click to reset it.": "Faceți clic pe orice culoare pentru a o modifica, sau faceți clic dreapta pentru a o reseta.",
   "Custom Theme": "Temă personalizată",
-  "Do you want to apply your changes before leaving?": "Doriți să aplicați modificările înainte de a pleca?"
+  "Do you want to apply your changes before leaving?": "Doriți să aplicați modificările înainte de a pleca?",
+  "TaskCompleted": "Sarcină terminată",
+  "UnexpectedError": "A apărut o eroare neașteptată"
 }

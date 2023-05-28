@@ -396,5 +396,20 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni e Cambiamenti",
+                "Changes": [
+                    "Aggiunto un messaggio per avvisare l'utente quando \"Correggi Tutti i Problemi\" e \"Esegui Pulizia\" terminano.",
+                    "Corretto un raro bug per cui il caricamento di un profilo LOT 1 continuava a caricarsi all'infinito.",
+                    "Corrretto il problema con il log delle modifiche che non si apriva con alcune lingue.",
+                    "Potenzialmente risolto l'iscrizione a una grande quantità di elementi che non funzionava/non funzionava."
+                ]
+            }
+        ]
     }
 ]

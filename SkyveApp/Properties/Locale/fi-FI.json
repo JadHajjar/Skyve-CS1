@@ -221,6 +221,7 @@
   "AreYouSure": "Oletko varma, että haluat jatkaa?",
   "MapFileInfo": "Valitse karttatiedosto aloittaaksesi uuden pelin",
   "AssetOutOfDate": "omaisuuserä on vanhentunut",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "varat ovat vanhentuneet",
   "CopyVersionNumber": "Kopioi versionumero",
   "SubscribeToItem": "Tilaa tämä tuote",
@@ -482,5 +483,7 @@
   "Missing": "Puuttuu",
   "LoggedInAs": "Kirjautuneena käyttäjänä",
   "UnknownUser": "Tuntematon käyttäjä",
-  "AddMeaningfulDescription": "Ole hyvä ja lisää tarkoituksellinen kuvaus pyyntöösi."
+  "AddMeaningfulDescription": "Ole hyvä ja lisää tarkoituksellinen kuvaus pyyntöösi.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
