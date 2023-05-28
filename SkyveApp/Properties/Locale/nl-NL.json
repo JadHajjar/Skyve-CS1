@@ -94,6 +94,7 @@
   "OpenLocalFolder": "Open de lokale map met dit pakket",
   "ViewOnSteam": "Bekijk dit pakket op Steam",
   "ReDownloadPackage": "Download dit pakket opnieuw",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Kopieer dit Steam -ID",
   "OpenAuthorPage": "Open de pagina van de auteur",
   "Sorting_Default": "Standaard sortering",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "Selecteer een opgeslagen spel bestand om automatisch te laden wanneer je het spel opent",
   "LoadProfile": "Profiel laden",
   "CopyAuthorSteamId": "Kopieer Steam ID van de auteur",
-  "CloseCitiesToSub": "Je moet burgers Cities: Skylines afsluiten om je te abonneren of af te melden van pakketten",
   "ShowingFilteredItems": "Toont {0} van de {1} totale items",
   "DropNewProfile": "Sleep of selecteer het .json van een profiel of .xml bestand om het te importeren",
   "ThemeUIScale": "Thema & UI Schaal",
@@ -238,7 +238,8 @@
   "WouldYouLikeToSkipThose": "Wil je deze pakketten overslaan?",
   "LOTWillRestart": "Skyve zal tijdelijk sluiten tijdens het updateproces, maar het wordt automatisch hervat zodra de update is voltooid.",
   "UpdatingLot": "Skyve wordt momenteel bijgewerkt. Een ogenblik geduld...",
-  "SubscribingRequiresGameToOpen": "Abonneren of uitschrijven van pakketten vereist kort voor het openen van het spel. Wanneer je de lancering van het spel ziet, klik op Speel om verder te gaan.",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
+  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Hulp & ondersteuning",
   "DisableFpsBoosterDebug": "Je hebt FPS Booster ingeschakeld tijdens het gebruik van debug mono, wil je het uitschakelen om betere logs te krijgen?",
   "LogZipCopy_Tip": "Maak een zip-bestand met alle log-informatie die iemand nodig heeft om u te helpen met uw probleem, je kunt deze direct in een discord kanaal plakken.",
@@ -485,5 +486,27 @@
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing to {0} package in this process.",
+    "Plural": "You will be unsubscribing to {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }

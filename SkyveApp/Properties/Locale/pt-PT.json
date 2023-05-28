@@ -94,6 +94,7 @@
   "OpenLocalFolder": "Abra a pasta local contendo este pacote",
   "ViewOnSteam": "Veja este pacote na Steam",
   "ReDownloadPackage": "Faça o download novamente deste pacote",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Copie este número de identificação da Steam",
   "OpenAuthorPage": "Abra a página do autor na Steam",
   "Sorting_Default": "Classificação padrão",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "Selecione um arquivo de salvamento do jogo para ser carregado automaticamente quando você abrir o jogo",
   "LoadProfile": "Carregar Perfil",
   "CopyAuthorSteamId": "Copie o número de identificação Steam do Autor",
-  "CloseCitiesToSub": "Você precisa fechar Cities: Skylines para assinar ou cancelar a assinatura de pacotes",
   "ShowingFilteredItems": "Mostrando {0} de {1} itens no total",
   "DropNewProfile": "Arraste ou selecione um arquivo de perfil .json ou .xml aqui para importá-lo",
   "ThemeUIScale": "Escala do Tema e UI",
@@ -238,7 +238,8 @@
   "WouldYouLikeToSkipThose": "Você quer ignorar esses pacotes?",
   "LOTWillRestart": "O Skyve será temporariamente fechado durante o processo de atualização, mas será retomado automaticamente assim que a atualização for concluída.",
   "UpdatingLot": "Skyve está sendo atualizado no momento. Por favor, aguarde...",
-  "SubscribingRequiresGameToOpen": "Inscrever-se ou cancelar a assinatura de pacotes requer abrir o jogo por um breve momento. Quando você ver o iniciador do jogo, clique em Jogar para continuar.",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
+  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Ajuda & Suporte",
   "DisableFpsBoosterDebug": "Você tem o FPS Booster ativado enquanto usa a correção de bug mono, gostaria de desativá-lo para obter melhores registros?",
   "LogZipCopy_Tip": "Crie um arquivo zip contendo todas as informações de registro necessárias para que alguém lhe ajude com o problema, você pode colá-lo diretamente em um canal do discord.",
@@ -485,5 +486,27 @@
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing to {0} package in this process.",
+    "Plural": "You will be unsubscribing to {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }
