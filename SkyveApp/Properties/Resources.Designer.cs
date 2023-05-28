@@ -2743,6 +2743,36 @@ namespace SkyveApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_ViewFile_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_ViewFile_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ViewFile_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_ViewFile_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ViewFile_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_ViewFile_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Vote_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Vote_16", resourceCulture);

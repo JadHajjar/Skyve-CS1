@@ -37,11 +37,6 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 				}
 
 				_items.Add(steamPackage);
-
-				if (steamPackage is Profile.Asset profileAsset)
-				{
-					profileAsset.WorkshopInfo = SteamUtil.GetItem(package.Key);
-				}
 			}
 			else
 			{

@@ -28,16 +28,16 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon11 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon12 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon13 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon14 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon15 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon16 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon17 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon18 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon19 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon20 = new SlickControls.DynamicIcon();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.PI_Dashboard = new SlickControls.PanelItem();
 			this.PI_Mods = new SlickControls.PanelItem();
@@ -52,6 +52,7 @@
 			this.L_Text = new System.Windows.Forms.Label();
 			this.L_Version = new System.Windows.Forms.Label();
 			this.PI_DLCs = new SlickControls.PanelItem();
+			this.subscriptionInfoControl1 = new SkyveApp.UserInterface.Content.SubscriptionInfoControl();
 			this.base_P_SideControls.SuspendLayout();
 			this.base_P_Container.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -67,8 +68,8 @@
 			this.base_P_SideControls.Controls.Add(this.tableLayoutPanel1);
 			this.base_P_SideControls.Font = new System.Drawing.Font("Nirmala UI", 6.75F);
 			this.base_P_SideControls.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(129)))), ((int)(((byte)(150)))));
-			this.base_P_SideControls.Location = new System.Drawing.Point(9, 516);
-			this.base_P_SideControls.Size = new System.Drawing.Size(282, 19);
+			this.base_P_SideControls.Location = new System.Drawing.Point(9, 474);
+			this.base_P_SideControls.Size = new System.Drawing.Size(282, 61);
 			// 
 			// base_P_Container
 			// 
@@ -81,8 +82,8 @@
 			this.PI_Dashboard.ForceReopen = false;
 			this.PI_Dashboard.Group = "";
 			this.PI_Dashboard.Highlighted = false;
-			dynamicIcon1.Name = "I_Dashboard";
-			this.PI_Dashboard.IconName = dynamicIcon1;
+			dynamicIcon11.Name = "I_Dashboard";
+			this.PI_Dashboard.IconName = dynamicIcon11;
 			this.PI_Dashboard.Selected = false;
 			this.PI_Dashboard.Text = "Dashboard";
 			this.PI_Dashboard.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Dashboard_OnClick);
@@ -93,8 +94,8 @@
 			this.PI_Mods.ForceReopen = false;
 			this.PI_Mods.Group = "Content";
 			this.PI_Mods.Highlighted = false;
-			dynamicIcon2.Name = "I_Mods";
-			this.PI_Mods.IconName = dynamicIcon2;
+			dynamicIcon12.Name = "I_Mods";
+			this.PI_Mods.IconName = dynamicIcon12;
 			this.PI_Mods.Selected = false;
 			this.PI_Mods.Text = "Mods";
 			this.PI_Mods.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Mods_OnClick);
@@ -105,8 +106,8 @@
 			this.PI_Assets.ForceReopen = false;
 			this.PI_Assets.Group = "Content";
 			this.PI_Assets.Highlighted = false;
-			dynamicIcon3.Name = "I_Assets";
-			this.PI_Assets.IconName = dynamicIcon3;
+			dynamicIcon13.Name = "I_Assets";
+			this.PI_Assets.IconName = dynamicIcon13;
 			this.PI_Assets.Selected = false;
 			this.PI_Assets.Text = "Assets";
 			this.PI_Assets.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Assets_OnClick);
@@ -117,8 +118,8 @@
 			this.PI_Profiles.ForceReopen = false;
 			this.PI_Profiles.Group = "";
 			this.PI_Profiles.Highlighted = false;
-			dynamicIcon4.Name = "I_ProfileSettings";
-			this.PI_Profiles.IconName = dynamicIcon4;
+			dynamicIcon14.Name = "I_ProfileSettings";
+			this.PI_Profiles.IconName = dynamicIcon14;
 			this.PI_Profiles.Selected = false;
 			this.PI_Profiles.Text = "Profiles";
 			this.PI_Profiles.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Profiles_OnClick);
@@ -129,8 +130,8 @@
 			this.PI_Options.ForceReopen = false;
 			this.PI_Options.Group = "Other";
 			this.PI_Options.Highlighted = false;
-			dynamicIcon5.Name = "I_UserOptions";
-			this.PI_Options.IconName = dynamicIcon5;
+			dynamicIcon15.Name = "I_UserOptions";
+			this.PI_Options.IconName = dynamicIcon15;
 			this.PI_Options.Selected = false;
 			this.PI_Options.Text = "Options";
 			this.PI_Options.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Options_OnClick);
@@ -141,8 +142,8 @@
 			this.PI_Compatibility.ForceReopen = false;
 			this.PI_Compatibility.Group = "Maintenance";
 			this.PI_Compatibility.Highlighted = false;
-			dynamicIcon6.Name = "I_CompatibilityReport";
-			this.PI_Compatibility.IconName = dynamicIcon6;
+			dynamicIcon16.Name = "I_CompatibilityReport";
+			this.PI_Compatibility.IconName = dynamicIcon16;
 			this.PI_Compatibility.Selected = false;
 			this.PI_Compatibility.Text = "CompatibilityReport";
 			this.PI_Compatibility.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Compatibility_OnClick);
@@ -153,8 +154,8 @@
 			this.PI_ModUtilities.ForceReopen = false;
 			this.PI_ModUtilities.Group = "Maintenance";
 			this.PI_ModUtilities.Highlighted = false;
-			dynamicIcon7.Name = "I_Wrench";
-			this.PI_ModUtilities.IconName = dynamicIcon7;
+			dynamicIcon17.Name = "I_Wrench";
+			this.PI_ModUtilities.IconName = dynamicIcon17;
 			this.PI_ModUtilities.Selected = false;
 			this.PI_ModUtilities.Text = "Utilities";
 			this.PI_ModUtilities.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_ModReview_OnClick);
@@ -165,8 +166,8 @@
 			this.PI_Troubleshoot.ForceReopen = false;
 			this.PI_Troubleshoot.Group = "Maintenance";
 			this.PI_Troubleshoot.Highlighted = false;
-			dynamicIcon8.Name = "I_AskHelp";
-			this.PI_Troubleshoot.IconName = dynamicIcon8;
+			dynamicIcon18.Name = "I_AskHelp";
+			this.PI_Troubleshoot.IconName = dynamicIcon18;
 			this.PI_Troubleshoot.Selected = false;
 			this.PI_Troubleshoot.Text = "HelpLogs";
 			this.PI_Troubleshoot.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Troubleshoot_OnClick);
@@ -177,8 +178,8 @@
 			this.PI_Packages.ForceReopen = false;
 			this.PI_Packages.Group = "Content";
 			this.PI_Packages.Highlighted = false;
-			dynamicIcon9.Name = "I_Package";
-			this.PI_Packages.IconName = dynamicIcon9;
+			dynamicIcon19.Name = "I_Package";
+			this.PI_Packages.IconName = dynamicIcon19;
 			this.PI_Packages.Selected = false;
 			this.PI_Packages.Text = "Packages";
 			this.PI_Packages.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_Packages_OnClick);
@@ -190,21 +191,23 @@
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.L_Text, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.L_Version, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.L_Text, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.L_Version, 1, 1);
+			this.tableLayoutPanel1.Controls.Add(this.subscriptionInfoControl1, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowCount = 2;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(282, 19);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(282, 61);
 			this.tableLayoutPanel1.TabIndex = 34;
 			// 
 			// L_Text
 			// 
 			this.L_Text.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.L_Text.AutoSize = true;
-			this.L_Text.Location = new System.Drawing.Point(0, 0);
+			this.L_Text.Location = new System.Drawing.Point(0, 42);
 			this.L_Text.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Text.Name = "L_Text";
 			this.L_Text.Padding = new System.Windows.Forms.Padding(2);
@@ -216,7 +219,7 @@
 			// 
 			this.L_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Version.AutoSize = true;
-			this.L_Version.Location = new System.Drawing.Point(233, 0);
+			this.L_Version.Location = new System.Drawing.Point(233, 42);
 			this.L_Version.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Version.Name = "L_Version";
 			this.L_Version.Padding = new System.Windows.Forms.Padding(2);
@@ -230,11 +233,21 @@
 			this.PI_DLCs.ForceReopen = false;
 			this.PI_DLCs.Group = "Content";
 			this.PI_DLCs.Highlighted = false;
-			dynamicIcon10.Name = "I_Dlc";
-			this.PI_DLCs.IconName = dynamicIcon10;
+			dynamicIcon20.Name = "I_Dlc";
+			this.PI_DLCs.IconName = dynamicIcon20;
 			this.PI_DLCs.Selected = false;
 			this.PI_DLCs.Text = "DLCs";
 			this.PI_DLCs.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_DLCs_OnClick);
+			// 
+			// subscriptionInfoControl1
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.subscriptionInfoControl1, 2);
+			this.subscriptionInfoControl1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.subscriptionInfoControl1.Location = new System.Drawing.Point(3, 3);
+			this.subscriptionInfoControl1.Name = "subscriptionInfoControl1";
+			this.subscriptionInfoControl1.Size = new System.Drawing.Size(276, 36);
+			this.subscriptionInfoControl1.TabIndex = 32;
+			this.subscriptionInfoControl1.Visible = false;
 			// 
 			// MainForm
 			// 
@@ -282,5 +295,6 @@
 		private System.Windows.Forms.Label L_Text;
 		private System.Windows.Forms.Label L_Version;
 		internal SlickControls.PanelItem PI_DLCs;
+		private UserInterface.Content.SubscriptionInfoControl subscriptionInfoControl1;
 	}
 }

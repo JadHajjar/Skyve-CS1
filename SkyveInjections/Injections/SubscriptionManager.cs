@@ -4,6 +4,10 @@ using ColossalFramework.PlatformServices;
 
 using KianCommons;
 
+using SkyveApp.Domain.Utilities;
+
+using SkyveMod.Util;
+
 using SkyveShared;
 
 using System;
@@ -13,7 +17,6 @@ using System.IO;
 using System.Linq;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 using static KianCommons.ReflectionHelpers;
 
@@ -432,6 +435,8 @@ public static class SubscriptionManager
 
 		if (SteamUtilities.GetStub())
 		{
+			SubscriptionUtil.Run();
+
 			System.Diagnostics.Process.GetCurrentProcess().Kill();
 
 			return true;
@@ -469,10 +474,14 @@ public static class SubscriptionManager
 
 public static class CMPatchHelpers
 {
-	private static List<string> subscribedItems;
+	private static readonly SubscriptionTransfer subscriptionTransfer;
+	private static readonly List<string> subscribedItems;
 
 	static CMPatchHelpers()
 	{
+		var filePath = Path.Combine(DataLocation.localApplicationData, Path.Combine("Skyve", "SubscriptionTransfer.xml"));
+		
+		subscriptionTransfer = File.Exists(filePath) ? SharedUtil.Deserialize<SubscriptionTransfer>(filePath) ?? new() : new();
 		subscribedItems = PlatformService.workshop.GetSubscribedItems().Select(x => x.AsUInt64.ToString()).ToList();
 	}
 
@@ -482,7 +491,8 @@ public static class CMPatchHelpers
 			path.IsNullOrWhiteSpace() ||
 			path[0] == '_' ||
 			Directory.Exists("_" + path) ||
-			(!subscribedItems.Contains(Path.GetFileName(path)) && Path.GetDirectoryName(path) == "255710")||
+			(!subscribedItems.Contains(Path.GetFileName(path)) && Path.GetDirectoryName(path) == "255710" && (subscriptionTransfer.SubscribeTo?.Contains(ulong.Parse(Path.GetFileName(path))) ?? false)) ||
+			(subscriptionTransfer.UnsubscribingFrom?.Contains(ulong.Parse(Path.GetFileName(path))) ?? false) ||
 			File.Exists(Path.Combine(path, SteamUtilities.EXCLUDED_FILE_NAME));
 	}
 

@@ -94,13 +94,6 @@ public class SkyveUserMod : IUserMod
 			var items = PlatformService.workshop.GetSubscribedItems();
 			Log.Debug("Subscribed Items are: " + items.ToSTR());
 
-			//Log.Debug("Testing StackTrace:\n" + new StackTrace(true).ToString(), copyToGameLog: true);
-			//KianCommons.UI.TextureUtil.EmbededResources = false;
-			//HelpersExtensions.VERBOSE = false;
-			//foreach(var p in ColossalFramework.Plugins.PluginManager.instance.GetPluginsInfo()) {
-			//    string savedKey = p.name + p.modPath.GetHashCode().ToString() + ".enabled";
-			//    Log.Debug($"plugin info: savedKey={savedKey} cachedName={p.name} modPath={p.modPath}");
-			//}
 			CheckPatchLoader();
 
 			HarmonyHelper.DoOnHarmonyReady(() =>
@@ -150,6 +143,8 @@ public class SkyveUserMod : IUserMod
 			MainMenuLoaded(default, default);
 
 			Log.Flush();
+
+			SubscriptionUtil.Start();
 		}
 		catch (Exception ex)
 		{
@@ -271,6 +266,8 @@ public class SkyveUserMod : IUserMod
 				}
 			}
 			catch { }
+
+			SubscriptionUtil.Stop();
 
 			Debug.Log("Skyve Disabled");
 		}

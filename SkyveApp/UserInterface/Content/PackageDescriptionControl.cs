@@ -4,7 +4,6 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Forms;
-using SkyveApp.UserInterface.Lists;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -46,7 +45,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		Padding = UI.Scale(new Padding(4), UI.FontScale);
 	}
 
-	protected override async void OnMouseClick(MouseEventArgs e)
+	protected override void OnMouseClick(MouseEventArgs e)
 	{
 		base.OnMouseClick(e);
 
@@ -127,7 +126,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				if (Package.Package is null)
 				{
-					await CitiesManager.Subscribe(new[] { Package.SteamId });
+					SubscriptionsManager.Subscribe(new[] { Package.SteamId });
 					return;
 				}
 
@@ -507,7 +506,6 @@ internal class PackageDescriptionControl : SlickImageControl
 		}
 	}
 
-
 	private void DrawAuthorAndSteamId(PaintEventArgs e, Rectangles rects)
 	{
 		if (!Package!.Workshop)
@@ -579,7 +577,6 @@ internal class PackageDescriptionControl : SlickImageControl
 		}
 	}
 
-
 	private Rectangle DrawStatusDescriptor(PaintEventArgs e, Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
 		if (!Package!.Workshop)
@@ -605,6 +602,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		return labelRect;
 	}
+	
 	private void GetStatusDescriptors(IPackage mod, out string text, out Bitmap? icon, out Color color)
 	{
 		switch (mod.Package?.Status)
