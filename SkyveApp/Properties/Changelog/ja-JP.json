@@ -396,5 +396,20 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "修正と変更",
+                "Changes": [
+                    "「全ての問題点を修正」と「クリーンアップを実行」の終了時に通知メッセージを追加",
+                    "古いLOTのプロファイルをロードすると、永遠にロードを続ける希なバグを修正",
+                    "Fixed the changelog not opening with some languages.",
+                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                ]
+            }
+        ]
     }
 ]
