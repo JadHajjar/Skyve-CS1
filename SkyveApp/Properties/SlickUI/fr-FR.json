@@ -100,5 +100,7 @@
   "Customize the size and colors in the App however you want to.": "Personnaliser la taille et les couleurs de l'appli comme vous le souhaitez.",
   "Click on any color to change it, or right-click to reset it.": "Cliquez sur n'importe quelle couleur pour la modifier, ou faites un clic droit pour la réinitialiser.",
   "Custom Theme": "Thème Personnalisé",
-  "Do you want to apply your changes before leaving?": "Voulez-vous sauvegarder les modifications avant de partir ?"
+  "Do you want to apply your changes before leaving?": "Voulez-vous sauvegarder les modifications avant de partir ?",
+  "TaskCompleted": "Task Completed",
+  "UnexpectedError": "An unexpected error occurred"
 }
