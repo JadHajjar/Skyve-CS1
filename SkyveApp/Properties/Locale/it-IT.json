@@ -221,7 +221,7 @@
   "AreYouSure": "Sei sicuro di voler procedere?",
   "MapFileInfo": "Seleziona un file di mappa con cui iniziare una nuova partita",
   "AssetOutOfDate": "la risorsa non è aggiornata",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "Altre Azioni...",
   "AssetOutOfDatePlural": "le risorse non sono aggiornate",
   "CopyVersionNumber": "Copia numero di versione",
   "SubscribeToItem": "Sottoscrivi questo elemento",
@@ -484,6 +484,6 @@
   "LoggedInAs": "Connesso come",
   "UnknownUser": "Utente Sconosciuto",
   "AddMeaningfulDescription": "Si prega di aggiungere una descrizione significativa alla richiesta.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "RedownloadComplete": "Skyve ha finito di riscaricare i pacchetti con i problemi.",
+  "CleanupComplete": "Skyve ha finito di ripulire i download del Workshop."
 }
