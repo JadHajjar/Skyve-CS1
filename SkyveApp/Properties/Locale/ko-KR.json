@@ -94,6 +94,7 @@
   "OpenLocalFolder": "이 패키지를 포함하는 로컬 폴더를 열기",
   "ViewOnSteam": "Steam에서 이 패키지 보기",
   "ReDownloadPackage": "이 패키지를 다시 다운로드",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Steam ID 복사하기",
   "OpenAuthorPage": "Steam의 제작자의 페이지 열기",
   "Sorting_Default": "기본 정렬",
@@ -130,7 +131,7 @@
   "DateUpdated": "업데이트된 날짜",
   "PackageIncluded": "포함된 패키지",
   "PackageIncludedPlural": "포함된 패키지",
-  "CopyWorkshopLink": "이 패키지의 창작마당 링크 복사",
+  "CopyWorkshopLink": "창작마당 링크 복사",
   "FilterOutPackagesWithMods": "패키지 페이지에서 모드 숨기기",
   "FilterOutPackagesWithOneAsset": "패키지 페이지에서 단일 에셋 패키지 숨기기",
   "DeletePackage": "이 패키지를 삭제",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "게임을 켤 때 자동으로 불러올 세이브 파일을 선택하세요",
   "LoadProfile": "프로필 불러오기",
   "CopyAuthorSteamId": "제작자 Steam ID 복사",
-  "CloseCitiesToSub": "패키지를 구독하거나 구독 취소하려면 Cities: Skylines를 닫아야 합니다",
   "ShowingFilteredItems": "총 {1}개 항목 중 {0}개 표시 중",
   "DropNewProfile": "프로필의 .json 또는 .xml 파일을 여기에 놓거나 선택해서 프로필을 가져오세요",
   "ThemeUIScale": "테마 & UI 크기",
@@ -238,7 +238,8 @@
   "WouldYouLikeToSkipThose": "선택한 패키지를 건너뛰시겠습니까?",
   "LOTWillRestart": "Skyve는 업데이트가 진행되는 동안 임시적으로 닫힐 것입니다. 업데이트가 완료되고 나면 자동으로 다시 시작됩니다.",
   "UpdatingLot": "Skyve가 지금 업데이트되는 중입니다. 기다려 주세요...",
-  "SubscribingRequiresGameToOpen": "패키지를 구독하거나 구독 취소하려면 잠시 게임을 열어야 합니다. 게임 런처가 표시되면 플레이를 클릭하여 계속 진행하세요.",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
+  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "도움 & 지원",
   "DisableFpsBoosterDebug": "Debug Mono를 사용하는 데 FPS Booster가 활성화되어있습니다. 더 나은 로그를 얻기 위해 비활성화하시겠습니까?",
   "LogZipCopy_Tip": "문제를 해결하는 데 필요한 모든 로그 정보가 포함된 압축 파일을 만들고 디스코드 채널에 직접 붙여넣을 수 있습니다.",
@@ -485,5 +486,27 @@
   "UnknownUser": "알 수 없는 사용자",
   "AddMeaningfulDescription": "요청에 의미있는 설명을 추가해주세요.",
   "RedownloadComplete": "문제가 있는 패키지를 다시 다운로드했습니다.",
-  "CleanupComplete": "창작마당 다운로드를 정리했습니다."
+  "CleanupComplete": "창작마당 다운로드를 정리했습니다.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing to {0} package in this process.",
+    "Plural": "You will be unsubscribing to {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }
