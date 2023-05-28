@@ -425,7 +425,7 @@ public static class ProfileManager
 
 						unprocessedMods.Remove(localMod);
 					}
-					else
+					else if (!CompatibilityManager.IsBlacklisted(mod))
 					{
 						missingMods.Add(mod);
 					}
@@ -441,7 +441,7 @@ public static class ProfileManager
 
 						unprocessedAssets.Remove(localAsset);
 					}
-					else
+					else if (!CompatibilityManager.IsBlacklisted(asset))
 					{
 						missingAssets.Add(asset);
 					}

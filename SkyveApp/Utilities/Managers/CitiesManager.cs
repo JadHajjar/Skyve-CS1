@@ -239,11 +239,6 @@ public static class CitiesManager
 		return true;
 	}
 
-	//public static async Task<bool> Subscribe(IEnumerable<string> ids, bool unsub = false)
-	//{
-	//	return await Subscribe(UGCListTransfer.ToNumber(ids), unsub);
-	//}
-
 	public static async Task<bool> Subscribe(IEnumerable<ulong> ids)
 	{
 		return await SubscribePrivate(ids, false);
@@ -303,8 +298,18 @@ public static class CitiesManager
 			{
 				await Task.Delay(100);
 			}
+		}
 
-			await Task.Delay(1000);
+		if (!unsub)
+		{
+			await Task.Delay(3000);
+
+			if (LocationManager.Platform is Platform.MacOSX)
+			{
+				SteamUtil.ReDownload(ids.ToArray());
+			}
+
+			SteamUtil.ReDownload(ids.ToArray());
 		}
 
 		return true;

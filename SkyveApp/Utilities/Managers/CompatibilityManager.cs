@@ -213,7 +213,7 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (package.Name.Contains("theme mix", StringComparison.InvariantCultureIgnoreCase))
+		if (package.Name?.Contains("theme mix", StringComparison.InvariantCultureIgnoreCase) ?? false)
 		{
 			info.Type = PackageType.ThemeMix;
 		}
@@ -254,6 +254,10 @@ public static class CompatibilityManager
 
 	private static CompatibilityInfo GenerateCompatibilityInfo(IPackage package)
 	{
+#if DEBUG
+		var sw = new System.Diagnostics.Stopwatch();
+		sw.Start();
+#endif
 		var packageData = CompatibilityUtil.GetPackageData(package);
 		var info = new CompatibilityInfo(package, packageData);
 
@@ -384,6 +388,14 @@ public static class CompatibilityManager
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), ((packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed) ? (LocaleCR.LastReviewDate.Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n") : string.Empty) + LocaleCR.RequestReviewInfo, new PseudoPackage[0]);
 		}
+
+#if DEBUG
+		sw.Stop();
+		if (sw.ElapsedMilliseconds > 100)
+		{
+			Log.Debug($"CR ({sw.Elapsed.ToReadableString()}) for {package.Name}");
+		}
+#endif
 
 		return info;
 	}
