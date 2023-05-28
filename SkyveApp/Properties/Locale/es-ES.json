@@ -221,7 +221,7 @@
   "AreYouSure": "¿Estás seguro que deseas continuar?",
   "MapFileInfo": "Selecciona un mapa para comenzar en él",
   "AssetOutOfDate": "asset está desactualizado",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "Otras Acciones...",
   "AssetOutOfDatePlural": "assets están desactualizados",
   "CopyVersionNumber": "Copiar número de versión",
   "SubscribeToItem": "Suscribirse a este artículo",
@@ -481,9 +481,9 @@
   "PackageIsIncomplete": "El tamaño local de '{0}' ({1}) es diferente de {2} en Steam",
   "RemovedFromSteam": "Eliminado de Steam",
   "Missing": "Faltan",
-  "LoggedInAs": "Logged in as",
-  "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "LoggedInAs": "Sesión iniciada como",
+  "UnknownUser": "Usuario desconocido",
+  "AddMeaningfulDescription": "Por favor, añada una descripción detallada a su solicitud.",
+  "RedownloadComplete": "Skyve ha terminado descargando paquetes problemáticos de nuevo.",
+  "CleanupComplete": "Skyve ha terminado de limpiar sus descargas de la Workshop."
 }
