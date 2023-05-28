@@ -221,6 +221,7 @@
   "AreYouSure": "Ești sigur că vrei să continui?",
   "MapFileInfo": "Selectați un fișier hartă pentru a începe un joc nou cu",
   "AssetOutOfDate": "activul este expirat",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "activele sunt expirate",
   "CopyVersionNumber": "Copiază numărul versiunii",
   "SubscribeToItem": "Abonează-te la acest element",
@@ -482,5 +483,7 @@
   "Missing": "Lipsă",
   "LoggedInAs": "Logged in as",
   "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
 }
