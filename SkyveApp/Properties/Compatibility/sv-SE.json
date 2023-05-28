@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Avsluta prenumerationen på detta paket",
   "UnsubscribeOther": "Avregistrera dig från länkade paket",
   "Switch": "Växla till länkat paket",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Växla till detta paket",
   "Deprecated": "Föråldrade",
   "Reupload": "Återuppladdning",
   "CausesIssues": "Orsakar problem",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Dessa är flera versioner av samma paket.\r\n\r\nDu bör endast välja en av dem.",
   "Status_Succeeded": "'{0}' efterträds av '{1}'.\r\n\r\nDu använder redan '{1}' så det finns inget behov av '{0}' längre.",
   "Status_Deprecated": "'{0}' är föråldrad, den stöds inte längre av dess författare.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' har inte uppdaterats på länge, det stöds förmodligen inte längre av sin författare.",
   "Status_Reupload": {
     "Zero": "'{0}' är en återsändning av ett originalpaket.",
     "One": "Detta är en ny uppladdning av '{1}'."
@@ -203,9 +203,9 @@
   "ApplyChangedBeforeExit": "Du har osparade ändringar.\r\n\r\nVill du tillämpa dessa ändringar innan du fortsätter?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Författaren till {0}, {1}, är känd för att vara skadlig och/eller för att inkludera skadligt innehåll som virus i sina paket.",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "ReviewRequests": "Granska förfrågningar {0}",
+  "DeleteRequest": "Ta bort förfrågan",
+  "ApplyRequestedChanges": "Tillämpa begärda ändringar",
+  "ManagePackage": "Hantera paket",
+  "RequestReviewDisclaimer": "*Ditt Steam-ID och dina loggar skickas med din begäran"
 }
