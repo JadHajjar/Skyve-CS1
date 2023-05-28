@@ -100,5 +100,7 @@
   "Customize the size and colors in the App however you want to.": "Customize the size and colors in the App however you want to.",
   "Click on any color to change it, or right-click to reset it.": "Click on any color to change it, or right-click to reset it.",
   "Custom Theme": "Tema Personalizado",
-  "Do you want to apply your changes before leaving?": "Gostaria de aplicar as alterações antes de sair?"
+  "Do you want to apply your changes before leaving?": "Gostaria de aplicar as alterações antes de sair?",
+  "TaskCompleted": "Task Completed",
+  "UnexpectedError": "An unexpected error occurred"
 }
