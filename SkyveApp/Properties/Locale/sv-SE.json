@@ -2,7 +2,7 @@
   "CompatibilityInfo": "Kompatibilitetsinformation",
   "ProfileBubble": "Aktuell profil",
   "StartCities": "Starta Cities: Skylines",
-  "StopCities": "Sluta Cities: Skylines",
+  "StopCities": "Stäng av Cities: Skylines",
   "AssetsBubble": "Dina speltillgångar",
   "ModsBubble": "Dina mods",
   "Dashboard": "Instrumentbräda",
@@ -221,6 +221,7 @@
   "AreYouSure": "Är du säker du vill fortsätta?",
   "MapFileInfo": "Välj en kartfil för att starta ett nytt spel med",
   "AssetOutOfDate": "tillgång är föråldrad",
+  "OtherActions": "Andra åtgärder...",
   "AssetOutOfDatePlural": "tillgångar är föråldrade",
   "CopyVersionNumber": "Kopiera versionsnummer",
   "SubscribeToItem": "Prenumerera på detta objekt",
@@ -480,7 +481,9 @@
   "PackageIsIncomplete": "Den lokala storleken av '{0}' ({1}) är annorlunda än Steams {2}",
   "RemovedFromSteam": "Borttagen från Steam",
   "Missing": "Saknas",
-  "LoggedInAs": "Logged in as",
-  "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "LoggedInAs": "Inloggad som",
+  "UnknownUser": "Okänd användare",
+  "AddMeaningfulDescription": "Lägg till en meningsfull beskrivning i din begäran.",
+  "RedownloadComplete": "Skyve har laddat ned paketen med problem på nytt.",
+  "CleanupComplete": "Skyve har slutfört nedladdningen från Workshop."
 }
