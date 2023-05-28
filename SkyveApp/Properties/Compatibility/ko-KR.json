@@ -7,7 +7,7 @@
   "Note": "참고",
   "NoteInfo": "패키지에 대해 표시되는 추가 정보 텍스트",
   "BlackListName": "이름으로 블랙리스트",
-  "BlackListId": "Black-list by name",
+  "BlackListId": "Steam 아이디로 블랙리스트",
   "GlobalTags": "전역 태그",
   "GlobalTagsInfo": "모든 플레이어가 앱에서 볼 수 있는 태그",
   "Links": "링크",
