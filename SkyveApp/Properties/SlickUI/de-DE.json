@@ -101,6 +101,6 @@
   "Click on any color to change it, or right-click to reset it.": "Klicke auf eine beliebige Farbe, um diese zu ändern, oder klicken mit der rechten Maustaste um sie zurückzusetzen.",
   "Custom Theme": "Eigenes Thema",
   "Do you want to apply your changes before leaving?": "Möchtest du deine Änderungen vor dem Verlassen anwenden?",
-  "TaskCompleted": "Task Completed",
-  "UnexpectedError": "An unexpected error occurred"
+  "TaskCompleted": "Aufgabe abgeschlossen",
+  "UnexpectedError": "Ein unerwarteter Fehler ist aufgetreten"
 }
