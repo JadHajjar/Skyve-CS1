@@ -404,10 +404,10 @@
             {
                 "Name": "Fehlerbehebungen & Änderungen",
                 "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
+                    "Fügte eine Nachricht hinzu, um Dich darüber zu informieren, wann 'Alle Probleme beheben' und 'Cleanup ausführen' endet.",
                     "Es wurde ein seltener Fehler behoben, bei dem das Laden eines LOT 1 Profils für immer andauerte.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "Es wurde behoben, das das Changelog mit einigen Sprachen nicht geöffnet wurde.",
+                    "Potenziell behoben, dass das Abonnieren einer große Anzahl von Artikeln, die fehlen/nicht funktionieren, fehlschlug."
                 ]
             }
         ]
@@ -420,24 +420,24 @@
                 "Name": "Überarbeiteter Abonnementprozess",
                 "Changes": [
                     "Du kannst jetzt Pakete abonnieren, während das Spiel geöffnet ist.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Mehrere Gegenstände hintereinander abonnieren, fügt diese in eine ausstehende Liste hinzu, anstatt jedes Mal das Spiel zu öffnen.",
+                    "Fügte am unteren linken Rand der App ein Kästchen hinzu, um über ausstehende Abonnement-/Abmeldungsaufgaben zu informieren.",
+                    "Eine erweiterte Option wurde hinzugefügt, um das Herunterladen oder Löschen von Paketen zu erzwingen, sobald diese bei Skype abonniert/abbestellt werden.",
+                    "Die neu abonnierten Elemente werden nicht mehr neu geladen, während das Spiel geöffnet ist.\nDies verhindert das Einfrieren des Spiels sowie die Funktionsstörung der Mods."
                 ]
             },
             {
                 "Name": "Neu",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups"
+                    "\"Inhalt dieses Profils anzeigen\" im Menü \"Rechtsklick\" hinzugefügt.",
+                    "Eine Option \"Download erzwingen\" im Rechtsklick der Pakete hinzugefügt.",
+                    "Mehr Kontext zu einigen Popups hinzugefügt"
                 ]
             },
             {
                 "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
+                    "Behoben, dass die Profilliste nicht sofort aktualisiert wurde.",
                     "Fixed profile packages not showing their workshop name.",
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
