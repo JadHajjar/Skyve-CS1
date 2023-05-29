@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Öffne den lokalen Ordner der dieses Paket enthält.",
   "ViewOnSteam": "Dieses Paket auf Steam ansehen",
   "ReDownloadPackage": "Dieses Paket erneut herunterladen",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "Dieses Paket herunterladen",
   "CopySteamId": "Diese Steam-ID kopieren",
   "OpenAuthorPage": "Die Seite des Autors auf Steam öffnen",
   "Sorting_Default": "Standard-Sortierung",
@@ -160,8 +160,8 @@
   "TotalItems": "Gesamtanzahl",
   "UnsubscribeAll": "Alle angezeigten Einträge abbestellen",
   "SubscribeAll": "Alle angezeigten Elemente abonnieren",
-  "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Re-Download all displayed & downloaded items",
+  "DownloadAll": "Alle angezeigten & fehlenden Elemente herunterladen",
+  "ReDownloadAll": "Alle angezeigten & heruntergeladenen Elemente erneut herunterladen",
   "MissingItemsRemain": "Einige Elemente aus diesem Profil fehlen. Das Speichern des Profils wird diese Elemente entfernen.",
   "ModIsPrivate": "Privates Element",
   "HidePseudoMods": "Pseudo-Mods wie Themen-Mixe ausblenden",
@@ -498,11 +498,11 @@
     "Plural": "{0} Elemente mit ausstehender Abbestellung"
   },
   "CancelSubs": "Alle ausstehenden Abonnements abbrechen",
-  "CancelDownloads": "Cancel all pending downloads",
+  "CancelDownloads": "Alle ausstehenden Downloads abbrechen",
   "ApplySubs": "Starte das Spiel für einen kurzen Moment, um ausstehende Abonnements anzuwenden",
-  "ApplyDownloads": "Force Steam to download all pending packages",
+  "ApplyDownloads": "Zwinge Steam, alle ausstehenden Pakete herunterzuladen",
   "SubsPendingInfo": "Pakete, die du abonnierst, sind hier gruppiert.\nSobald du das Spiel öffnest, werden diese Elemente auf Steam abonniert.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
+  "DownloadsPendingInfo": "Abonnierte Pakete, die noch nicht heruntergeladen wurden, werden hier gruppiert.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Starte das Herunterladen oder Entfernen von Paketen direkt nach dem Abonnieren/Abbestellen",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Erzwingt das Herunterladen oder Entfernen von Paketen, anstatt zu warten, bis sie tatsächlich abonniert oder abbestellt wurden.",
   "ThisSubscribesTo": {
@@ -515,11 +515,11 @@
   },
   "ViewThisProfilesPackages": "Inhalt dieses Profils anzeigen",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} Element mit ausstehendem Download",
+    "Plural": "{0} Elemente mit ausstehendem Download"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} Element mit ausstehender Entfernung",
+    "Plural": "{0} Elemente mit ausstehender Entfernung"
   }
 }
