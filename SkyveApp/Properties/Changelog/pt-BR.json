@@ -431,7 +431,8 @@
                 "Changes": [
                     "Adicionado \"Visualizar conteúdos deste perfil\" no menu de clique direito dos perfis.",
                     "Adicionado a opção \"Forçar para baixar\" no menu do botão direito'.",
-                    "Adicionado mais contexto a algumas janelas"
+                    "Adicionado mais contexto a algumas janelas",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
                 ]
             },
             {
@@ -440,7 +441,8 @@
                     "Corrigido a lista de perfil que não atualizava instantaneamente.",
                     "Corrigido o problema em que os pacotes do perfil não exibiam o nome da oficina.",
                     "Corrigido o problema em que as informações do Steam dos pacotes não eram carregadas corretamente ao visualizar um perfil ou uma coleção.",
-                    "O nome dos mods locais foi revertido para o nome da pasta em vez do nome da Oficina para evitar problemas."
+                    "O nome dos mods locais foi revertido para o nome da pasta em vez do nome da Oficina para evitar problemas.",
+                    "Improved the performance for people with a lot of mods."
                 ]
             }
         ]
