@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Deschideți folderul local care conține acest pachet",
   "ViewOnSteam": "Vizualizați acest pachet pe Steam",
   "ReDownloadPackage": "Re-descărcați acest pachet",
-  "ForceDownloadPackage": "Force-download this package",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Copiați acest ID Steam",
   "OpenAuthorPage": "Deschide pagina autorului pe Steam",
   "Sorting_Default": "Sortare implicită",
@@ -160,6 +160,8 @@
   "TotalItems": "Total articole",
   "UnsubscribeAll": "Dezabonare de la toate elementele afișate",
   "SubscribeAll": "Abonează-te la toate elementele afișate",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "Unele articole încă lipsesc din acest profil. Salvarea profilului în viitor va elimina acele elemente.",
   "ModIsPrivate": "Articolul este privat",
   "HidePseudoMods": "Ascunde pseudo-mod-uri precum mixurile de temă",
@@ -496,8 +498,11 @@
     "Plural": "{0} items pending unsubscription"
   },
   "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "You will be unsubscribing from {0} package in this process.",
     "Plural": "You will be unsubscribing from {0} packages in this process."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "View this profile's contents",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }
