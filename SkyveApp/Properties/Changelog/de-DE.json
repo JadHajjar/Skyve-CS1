@@ -438,9 +438,9 @@
                 "Name": "Fehlerbehebungen",
                 "Changes": [
                     "Behoben, dass die Profilliste nicht sofort aktualisiert wurde.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
+                    "Behoben, dass Profilpakete nicht ihren Workshop-Namen zeigen.",
+                    "Die Steam-Informationen der Pakete, die beim ersten Ansehen eines Profils oder einer Sammlung nicht geladen wurden, wurden behoben.",
+                    "Der Name der Lokalen Mods wurde auf den Ordnernamen anstelle des Workshops zurückgesetzt, um Probleme zu vermeiden."
                 ]
             }
         ]
