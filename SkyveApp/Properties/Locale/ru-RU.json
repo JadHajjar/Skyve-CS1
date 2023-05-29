@@ -483,7 +483,7 @@
   "Missing": "Отсутствует",
   "LoggedInAs": "Вы вошли как",
   "UnknownUser": "Неизвестный пользователь",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "AddMeaningfulDescription": "Пожалуйста, добавьте содержательное описание к вашему запросу.",
   "RedownloadComplete": "Skyve завершил подписку пакетов с ошибками.",
   "CleanupComplete": "Skyve закончил очистку ваших загрузок мастерской."
 }
