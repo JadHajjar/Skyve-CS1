@@ -417,20 +417,20 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Le système d'abonnement a été retravaillé",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
+                    "Vous pouvez désormais vous abonner à des paquets pendant que le jeu est ouvert.",
                     "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
                     "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "Ajout d'une option avancée pour forcer le téléchargement ou la suppression de paquets dès que vous vous abonnez/désabonnez dans Skyve.",
                     "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Nouveau",
                 "Changes": [
                     "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
+                    "Ajout d'une option \"Forcer le téléchargement\" en faisant clique droit sur un paquet.",
                     "Added more context to some popups"
                 ]
             },
@@ -438,8 +438,8 @@
                 "Name": "Fixes",
                 "Changes": [
                     "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
+                    "Les profils de paquets montrent désormais leur nom Workshop.",
+                    "Les paquets chargent correctement les informations Steam dès la première fois quand vous visionnez leur profil ou collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
                 ]
             }
