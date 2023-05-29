@@ -9,7 +9,7 @@ using IoPath = System.IO.Path;
 namespace SkyveApp.Domain.Utilities;
 internal class PackageWatcher
 {
-	private readonly DelayedAction<string> _delayedUpdate = new(1500);
+	private readonly DelayedAction<string> _delayedUpdate = new(5000);
 	private static readonly List<PackageWatcher> _watchers = new();
 
 	private FileSystemWatcher? watcher;

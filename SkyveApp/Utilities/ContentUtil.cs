@@ -296,7 +296,7 @@ internal class ContentUtil
 
 	internal static void RefreshPackage(Package package, bool self)
 	{
-		if (!Directory.Exists(package.Folder))
+		if (IsDirectoryEmpty(package.Folder))
 		{
 			CentralManager.RemovePackage(package);
 			return;
@@ -313,6 +313,21 @@ internal class ContentUtil
 		}
 
 		CentralManager.OnInformationUpdated();
+	}
+
+	private static bool IsDirectoryEmpty(string path)
+	{
+		if (!Directory.Exists(path))
+			return true;
+
+		var files = Directory.GetFiles(path);
+
+		if (files.Length == 1 && files[0].EndsWith(EXCLUDED_FILE_NAME))
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	internal static void StartListeners()

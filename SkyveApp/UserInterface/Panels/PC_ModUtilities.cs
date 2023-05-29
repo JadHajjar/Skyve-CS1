@@ -157,7 +157,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		B_ReDownload.Loading = true;
 
-		await Task.Run(() => SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Workshop && x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded)));
+		await Task.Run(() => SteamUtil.Download(CentralManager.Mods.Where(x => x.Workshop && x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded)));
 	}
 
 	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)

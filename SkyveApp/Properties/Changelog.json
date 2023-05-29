@@ -413,7 +413,7 @@
     ]
   },
   {
-    "Version": "3.0.6",
+    "Version": "3.0.7",
     "Date": "2023-05-29",
     "ChangeGroups": [
       {
@@ -431,7 +431,8 @@
         "Changes": [
           "Added \"View this Profile's contents\" in profiles' right-click menu.",
           "Added a \"Force download\" option in packages' right-click menu.",
-          "Added more context to some popups"
+          "Added more context to some popups",
+          "Added a \"Download all displayed items\" in the actions in list pages."
         ]
       },
       {
@@ -440,7 +441,8 @@
           "Fixed the profile list not updating instantly.",
           "Fixed profile packages not showing their workshop name.",
           "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-          "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
+          "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+          "Improved the performance for people with a lot of mods."
         ]
       }
     ]

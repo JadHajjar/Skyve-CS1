@@ -95,7 +95,7 @@ public static class SteamUtil
 		return await _workshopItemProcessor.Get(steamId, true);
 	}
 
-	public static void ReDownload(IEnumerable<IPackage> packages)
+	public static void Download(IEnumerable<IPackage> packages)
 	{
 		var currentPath = IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
 
@@ -111,10 +111,10 @@ public static class SteamUtil
 			Application.Exit();
 		}
 
-		ReDownload(packages.Select(x => x.SteamId));
+		Download(packages.Select(x => x.SteamId));
 	}
 
-	public static void ReDownload(IEnumerable<ulong> ids)
+	public static void Download(IEnumerable<ulong> ids)
 	{
 		try
 		{

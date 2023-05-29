@@ -475,24 +475,25 @@ public static class SubscriptionManager
 public static class CMPatchHelpers
 {
 	private static readonly SubscriptionTransfer subscriptionTransfer;
-	private static readonly List<string> subscribedItems;
+	private static readonly List<ulong> subscribedItems;
 
 	static CMPatchHelpers()
 	{
 		var filePath = Path.Combine(DataLocation.localApplicationData, Path.Combine("Skyve", "SubscriptionTransfer.xml"));
 		
 		subscriptionTransfer = File.Exists(filePath) ? SharedUtil.Deserialize<SubscriptionTransfer>(filePath) ?? new() : new();
-		subscribedItems = PlatformService.workshop.GetSubscribedItems().Select(x => x.AsUInt64.ToString()).ToList();
+		subscribedItems = PlatformService.workshop.GetSubscribedItems().Select(x => x.AsUInt64).ToList();
 	}
 
 	public static bool IsDirectoryExcluded(string path)
 	{
+		var workshopId = Path.GetDirectoryName(path) == "255710" && ulong.TryParse(Path.GetFileName(path), out var id) ? id : 0;
+
 		return
 			path.IsNullOrWhiteSpace() ||
 			path[0] == '_' ||
-			Directory.Exists("_" + path) ||
-			(!subscribedItems.Contains(Path.GetFileName(path)) && Path.GetDirectoryName(path) == "255710" && (subscriptionTransfer.SubscribeTo?.Contains(ulong.Parse(Path.GetFileName(path))) ?? false)) ||
-			(subscriptionTransfer.UnsubscribingFrom?.Contains(ulong.Parse(Path.GetFileName(path))) ?? false) ||
+			(workshopId > 0 && ((!subscribedItems.Contains(workshopId) && !(subscriptionTransfer.SubscribeTo?.Contains(workshopId) ?? false)) ||
+			(subscriptionTransfer.UnsubscribingFrom?.Contains(workshopId) ?? false))) ||
 			File.Exists(Path.Combine(path, SteamUtilities.EXCLUDED_FILE_NAME));
 	}
 
