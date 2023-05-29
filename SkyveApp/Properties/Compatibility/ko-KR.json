@@ -115,8 +115,8 @@
     "One": "이것은 '{1}'의 테스트 버전입니다.\n\n업데이트는 예기치 않은 오류를 발생시킬 수 있습니다."
   },
   "Status_MissingDlc": {
-    "One": "You're missing a DLC to use this package.",
-    "Plural": "You're missing the following DLCs to use this package."
+    "One": "이 패키지에 필요한 DLC를 누락했습니다.",
+    "Plural": "이 패키지에 필요한 다음 DLC들을 누락했습니다."
   },
   "Status_DependencyMod": "이것은 종속성 모드입니다. 하지만 이를 필요로 하는 어떤 패키지도 사용하고 있지 않은 것 같습니다.",
   "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",

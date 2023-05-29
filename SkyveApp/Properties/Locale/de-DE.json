@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Öffne den lokalen Ordner der dieses Paket enthält.",
   "ViewOnSteam": "Dieses Paket auf Steam ansehen",
   "ReDownloadPackage": "Dieses Paket erneut herunterladen",
-  "ForceDownloadPackage": "Herunterladen dieses Pakets erzwingen",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Diese Steam-ID kopieren",
   "OpenAuthorPage": "Die Seite des Autors auf Steam öffnen",
   "Sorting_Default": "Standard-Sortierung",
@@ -160,6 +160,8 @@
   "TotalItems": "Gesamtanzahl",
   "UnsubscribeAll": "Alle angezeigten Einträge abbestellen",
   "SubscribeAll": "Alle angezeigten Elemente abonnieren",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "Einige Elemente aus diesem Profil fehlen. Das Speichern des Profils wird diese Elemente entfernen.",
   "ModIsPrivate": "Privates Element",
   "HidePseudoMods": "Pseudo-Mods wie Themen-Mixe ausblenden",
@@ -496,8 +498,11 @@
     "Plural": "{0} Elemente mit ausstehender Abbestellung"
   },
   "CancelSubs": "Alle ausstehenden Abonnements abbrechen",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Starte das Spiel für einen kurzen Moment, um ausstehende Abonnements anzuwenden",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Pakete, die du abonnierst, sind hier gruppiert.\nSobald du das Spiel öffnest, werden diese Elemente auf Steam abonniert.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Starte das Herunterladen oder Entfernen von Paketen direkt nach dem Abonnieren/Abbestellen",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Erzwingt das Herunterladen oder Entfernen von Paketen, anstatt zu warten, bis sie tatsächlich abonniert oder abbestellt wurden.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "Du wirst während dieses Prozesses {0} Paket abbestellen.",
     "Plural": "Du wirst während dieses Prozesses {0} Pakete abbestellen."
   },
-  "ViewThisProfilesPackages": "Inhalt dieses Profils anzeigen"
+  "ViewThisProfilesPackages": "Inhalt dieses Profils anzeigen",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

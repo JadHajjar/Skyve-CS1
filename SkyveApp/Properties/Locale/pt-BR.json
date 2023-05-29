@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Abra a pasta local que contém este pacote",
   "ViewOnSteam": "Veja este pacote na Steam",
   "ReDownloadPackage": "Baixe o pacote novamente",
-  "ForceDownloadPackage": "Forçar para baixar este pacote",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Copie este número de identificação da Steam",
   "OpenAuthorPage": "Abra a página do autor na Steam",
   "Sorting_Default": "Classificação padrão",
@@ -160,6 +160,8 @@
   "TotalItems": "Total de Itens",
   "UnsubscribeAll": "Cancelar assinatura de todos os itens exibidos",
   "SubscribeAll": "Assinar todos os itens exibidos",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "Alguns itens ainda estão faltando neste perfil. Ao salvar o perfil no futuro, esses itens serão removidos dele.",
   "ModIsPrivate": "O item é privado",
   "HidePseudoMods": "Ocultar pseudo-mods como mesclas de temas",
@@ -496,8 +498,11 @@
     "Plural": "{0} Itens com cancelamento de assinaturas pendentes"
   },
   "CancelSubs": "Cancelar todas as assinaturas pendentes",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Inicie o jogo por um instante para aplicar assinaturas pendentes",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Os pacotes aos quais você se inscreveu estão agrupados aqui.\nAssim que você abrir o jogo, esses itens serão inscritos na Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Comece a baixar ou remover os pacotes imediatamente ao assinar, ou cancelar assinatura",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Força baixar ou remover os pacotes invés de esperar até que sejam assinados, ou cancelados.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "Você cancelará a assinatura do pacote {0} neste processo.",
     "Plural": "Você cancelará a assinatura dos pacotes {0} neste processo."
   },
-  "ViewThisProfilesPackages": "Ver conteúdo deste perfil"
+  "ViewThisProfilesPackages": "Ver conteúdo deste perfil",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

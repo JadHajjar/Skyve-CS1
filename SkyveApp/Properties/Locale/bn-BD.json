@@ -94,7 +94,7 @@
   "OpenLocalFolder": "এই প্যাকেজযুক্ত স্থানীয় ফোল্ডারটি খুলুন",
   "ViewOnSteam": "বাষ্পে এই প্যাকেজটি দেখুন",
   "ReDownloadPackage": "এই প্যাকেজটি পুনরায় ডাউনলোড করুন",
-  "ForceDownloadPackage": "Force-download this package",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "এই বাষ্প আইডি অনুলিপি করুন",
   "OpenAuthorPage": "লেখকের পৃষ্ঠা খুলুন",
   "Sorting_Default": "ডিফল্ট শ্রেণীবিভাজন",
@@ -160,6 +160,8 @@
   "TotalItems": "মোট আইটেম",
   "UnsubscribeAll": "Unsubscribe from all displayed items",
   "SubscribeAll": "Subscribe to all displayed items",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "কিছু আইটেম এখনও এই প্রোফাইল থেকে অনুপস্থিত। ভবিষ্যতে প্রোফাইল সংরক্ষণ করা এ থেকে সেই আইটেমগুলি সরিয়ে ফেলবে।",
   "ModIsPrivate": "আইটেম ব্যক্তিগত",
   "HidePseudoMods": "থিম মিশ্রণের মতো সিউডো-মডগুলি লুকান",
@@ -496,8 +498,11 @@
     "Plural": "{0} items pending unsubscription"
   },
   "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "You will be unsubscribing from {0} package in this process.",
     "Plural": "You will be unsubscribing from {0} packages in this process."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "View this profile's contents",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

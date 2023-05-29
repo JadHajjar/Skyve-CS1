@@ -94,7 +94,7 @@
   "OpenLocalFolder": "打開此外掛程式的本地資料夾",
   "ViewOnSteam": "在 Steam 工坊查看此外掛程式",
   "ReDownloadPackage": "重新下載此外掛程式",
-  "ForceDownloadPackage": "Force-download this package",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "複製這個 Steam ID",
   "OpenAuthorPage": "打開作者的創意工坊主頁",
   "Sorting_Default": "預設排序",
@@ -160,6 +160,8 @@
   "TotalItems": "項目總數",
   "UnsubscribeAll": "取消訂閱所有顯示的專案",
   "SubscribeAll": "訂閱所有顯示的專案",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "沒有找到設定檔中的某些項目，這些項目可能已經丟失。如果仍要保存設定檔，將會從設定檔中刪除已丟失的項目。",
   "ModIsPrivate": "此項目已被隱藏",
   "HidePseudoMods": "隱藏偽模組（如自訂混合主題）",
@@ -496,8 +498,11 @@
     "Plural": "{0} items pending unsubscription"
   },
   "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "You will be unsubscribing from {0} package in this process.",
     "Plural": "You will be unsubscribing from {0} packages in this process."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "View this profile's contents",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

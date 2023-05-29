@@ -94,7 +94,7 @@
   "OpenLocalFolder": "이 패키지를 포함하는 로컬 폴더를 열기",
   "ViewOnSteam": "Steam에서 이 패키지 보기",
   "ReDownloadPackage": "이 패키지를 다시 다운로드",
-  "ForceDownloadPackage": "Force-download this package",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Steam ID 복사하기",
   "OpenAuthorPage": "Steam의 제작자의 페이지 열기",
   "Sorting_Default": "기본 정렬",
@@ -160,6 +160,8 @@
   "TotalItems": "총 항목",
   "UnsubscribeAll": "표시된 모든 항목 구독 취소하기",
   "SubscribeAll": "표시된 모든 항목 구독하기",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "이 프로필에서 일부 항목이 여전히 누락되었습니다. 이후 프로필을 저장한다면 해당 항목들은 프로필에서 삭제될 것입니다.",
   "ModIsPrivate": "항목은 비공개입니다",
   "HidePseudoMods": "테마 믹스 같이 유사 모드인 모드 숨기기",
@@ -496,8 +498,11 @@
     "Plural": "항목 {0}개 구독 취소 대기 중"
   },
   "CancelSubs": "대기 중인 모든 구독을 취소합니다",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "대기 중인 구독을 적용하기 위해 잠시 게임을 실행합니다",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "구독하려는 패키지들이 여기에 모입니다.\n게임을 열면 이 항목들이 Steam에서 구독됩니다.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "구독/구독 취소하는 즉시 패키지를 다운로드/제거 시작하기",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "실제로 구독 또는 구독 취소될 때까지 기다리지 않고 패키지를 강제로 다운로드하거나 제거합니다.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "이 과정에서 패키지 {0}개를 구독 취소하게 됩니다.",
     "Plural": "이 과정에서 패키지 {0}개를 구독 취소하게 됩니다."
   },
-  "ViewThisProfilesPackages": "이 프로필의 콘텐츠 보기"
+  "ViewThisProfilesPackages": "이 프로필의 콘텐츠 보기",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

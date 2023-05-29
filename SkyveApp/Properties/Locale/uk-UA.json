@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Відкрити локальну теку, що містить цей пакунок",
   "ViewOnSteam": "Переглянути цей пакунок у Steam",
   "ReDownloadPackage": "Повторно завантажити цей пакунок",
-  "ForceDownloadPackage": "Force-download this package",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Скопіювати Steam ID",
   "OpenAuthorPage": "Відкрити сторінку автора у Steam",
   "Sorting_Default": "Сортування за замовчуванням",
@@ -160,6 +160,8 @@
   "TotalItems": "Всього",
   "UnsubscribeAll": "Відписатися від усіх показаних предметів",
   "SubscribeAll": "Підписатися на всі показані предмети",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "Деякі елементи все ще відсутні в цьому профілі. Збереження профілю в майбутньому видалить з нього ці елементи.",
   "ModIsPrivate": "Предмет приватний",
   "HidePseudoMods": "Приховати псевдо-моди, такі як мікси тем",
@@ -496,8 +498,11 @@
     "Plural": "{0} items pending unsubscription"
   },
   "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "You will be unsubscribing from {0} package in this process.",
     "Plural": "You will be unsubscribing from {0} packages in this process."
   },
-  "ViewThisProfilesPackages": "Переглянути вміст цього профілю"
+  "ViewThisProfilesPackages": "Переглянути вміст цього профілю",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }
