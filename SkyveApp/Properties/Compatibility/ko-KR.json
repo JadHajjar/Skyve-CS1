@@ -65,17 +65,17 @@
   "AddGlobalTag": "Add a global tag",
   "ReuseData": "Re-use Previous Data",
   "ReuseData_Tip": "Re-uses the compatibility data from your last saved package for this one.\r\nHold Shift to also apply & continue",
-  "PleaseReviewTheStability": "Please review the stability of this package before saving.",
-  "PleaseReviewPackageStatuses": "Please review the statuses of this package before saving.\r\nSome have an invalid Status Type.",
+  "PleaseReviewTheStability": "저장하기 전에 이 패키지의 안정성을 검토하세요.",
+  "PleaseReviewPackageStatuses": "저장하기 전에 이 패키지의 상태를 검토하세요.\n일부가 유효하지 않은 상태 유형을 가지고 있습니다.",
   "PleaseReviewPackageInteractions": "저장하기 전에 이 패키지의 상호작용을 검토하세요.\n일부가 잘못된 상호작용 유형을 가지고 있거나 연결된 패키지가 없습니다.",
-  "PleaseReviewPackageUsage": "Please select a valid usage for this package.",
+  "PleaseReviewPackageUsage": "이 패키지에 알맞는 용도를 선택해 주세요.",
   "Interaction_Alternative": {
     "One": "'{1}' 는 '{0}'의 대안으로 사용될 수 있습니다.",
-    "Plural": "One of the following packages can be used as an alternative to '{0}'."
+    "Plural": "다음 패키지들 중 하나는 '{0}'의 대안으로 사용될 수 있습니다."
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' 과 '{1}' 는 같은 기능을 가집니다.",
-    "Plural": "'{0}' 과 다음 패키지들은 같은 기능을 가집니다."
+    "One": "'{0}' 와 '{1}' 는 같은 기능을 가집니다.",
+    "Plural": "'{0}' 와 다음 패키지들은 같은 기능을 가집니다."
   },
   "Interaction_IncompatibleWith": {
     "One": "'{0}' 와 '{1}' 는 서로 호환되지 않습니다.",
@@ -107,8 +107,8 @@
   },
   "Status_CausesIssues": "'{0}' 는 게임에 문제를 일으킬 수 있습니다.",
   "Status_SavesCantLoadWithoutIt": {
-    "Zero": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.",
-    "One": "When creating a new save with '{0}' enabled, you will no longer be able to load that save if '{0}' is disabled.\r\n\r\nUse '{1}' to recover your save if needed. Read its Workshop description for more info."
+    "Zero": "'{0}' 가 활성화된 채로 새 세이브를 생성하고 '{0}' 가 비활성화되면 해당 세이브를 더 이상 불러올 수 없습니다.",
+    "One": "'{0}' 가 활성화된 채로 새 세이브를 생성하고 '{0}' 가 비활성화되면 해당 세이브를 더 이상 불러올 수 없습니다.\n\n세이브 복구가 필요하다면 '{1}' 를 사용하세요. 자세한 정보는 창작마당의 설명을 읽어보세요."
   },
   "Status_TestVersion": {
     "Zero": "이것은 '테스트' 버전입니다. 모드의 테스트 버전은 문제를 일으킬 수 있으며 업데이트는 예기치 않은 오류를 발생시킬 수 있습니다.",
@@ -118,13 +118,13 @@
     "One": "이 패키지에 필요한 DLC를 누락했습니다.",
     "Plural": "이 패키지에 필요한 다음 DLC들을 누락했습니다."
   },
-  "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
+  "Status_DependencyMod": "이것은 종속성 모드입니다. 하지만 이를 필요로 하는 어떤 패키지도 사용하고 있지 않은 것 같습니다.",
   "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
-  "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
+  "Status_MusicCanBeCopyrighted": "이 팩에 포함된 음악은 저작권이 있을 수 있습니다. 스트리밍 중에는 사용하지 않는 것이 가장 좋습니다.",
   "Status_IncompleteDescription": "이 모드의 창작마당 설명은 너무 짧습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
   "OutputText": "예상 출력",
   "Stability_AssetNotReviewed": "이 에셋은 아직 리뷰되지 않았습니다.\n\n에셋들은 일반적으로 안정적이지만 호환성 정보는 정확하지 않을 수 있습니다.",
-  "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
+  "Stability_NotReviewed": "이 패키지는 아직 리뷰되지 않았습니다.\n\n호환성 정보는 정확하지 않을 수 있습니다.",
   "Stability_Stable": "이 패키지는 안정적입니다.",
   "Stability_NotEnoughInformation": "이 패키지를 제대로 검토할 만한 정보가 충분하지 않습니다.",
   "Stability_HasIssues": "이 패키지는 문제를 일으킬 수 있습니다.\n주의해서 사용하세요.",
@@ -165,7 +165,7 @@
   "CRT_Successors": "계승자",
   "CRT_RequiredPackages": "필요한 패키지",
   "CRT_OptionalPackages": "선택적 패키지",
-  "CRT_DlcMissing": "Missing DLCs/CCPs",
+  "CRT_DlcMissing": "DLC/CCP 누락",
   "CRT_Compatibility": "호환성 문제",
   "CRT_Alternatives": "대안",
   "CRT_Status": "상태",
