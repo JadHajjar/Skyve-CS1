@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Apri la cartella locale contenente questo pacchetto",
   "ViewOnSteam": "Visualizza questo pacchetto su Steam",
   "ReDownloadPackage": "Ri-scarica questo pacchetto",
-  "ForceDownloadPackage": "Scaricamento forzato del pacchetto",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Copia questo ID Steam",
   "OpenAuthorPage": "Apri la pagina dell'autore su Steam",
   "Sorting_Default": "Ordinamento predefinito",
@@ -160,6 +160,8 @@
   "TotalItems": "Elementi totali",
   "UnsubscribeAll": "Annulla la sottoscrizione a tutti gli elementi mostrati",
   "SubscribeAll": "Sottoscrivi tutti gli elementi mostrati",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "Mancano ancora alcuni elementi di questo profilo. Se in futuro salverai il profilo, quegli elementi verranno rimossi.",
   "ModIsPrivate": "L'elemento è privato",
   "HidePseudoMods": "Nascondi pseudo-mod come le miscele di temi",
@@ -406,7 +408,7 @@
   "Include": "Includi",
   "Unsubscribe": "Annulla iscrizione",
   "Exclude": "Escludi",
-  "Snooze": "Posticipa",
+  "Snooze": "Postcipa",
   "UnSnooze": "Non posticipare",
   "Mod": {
     "One": "Mod",
@@ -496,8 +498,11 @@
     "Plural": "{0} elemento in attesa di annullamento della sottoscrizione"
   },
   "CancelSubs": "Annullare tutte le sottoscrizioni in corso",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Avviare il gioco per un breve momento per applicare le sottoscrizioni in corso",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "I pacchetti sottoscritti sono raggruppati qui.\nUna volta aperto il gioco, questi oggetti verranno sottoscritti su Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Avviare il download o la rimozione dei pacchetti subito dopo l'iscrizione/disiscrizione",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forza il download o la rimozione dei pacchetti invece di aspettare che vengano effettivamente sottoscritti o annullati.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "In questo processo si annullerà la sottoscrizione di {0} pacchetto.",
     "Plural": "In questo processo si annullerà la sottoscrizione di {0} pacchetti."
   },
-  "ViewThisProfilesPackages": "Visualizza i contenuti di questo profilo"
+  "ViewThisProfilesPackages": "Visualizza i contenuti di questo profilo",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }
