@@ -417,30 +417,30 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Processo di Sottoscrizione Relaborato",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "È ora possibile sottoscrivere i pacchetti mentre il gioco è aperto.",
+                    "La sottoscrizione di più elementi consecutivi li metterà in un elenco in attesa, invece di aprire il gioco ogni volta.",
+                    "Aggiunto un riquadro in basso a sinistra dell'app per segnalare eventuali attività di iscrizione/disiscrizione in sospeso.",
+                    "Aggiunta un'opzione avanzata per forzare il download o l'eliminazione dei pacchetti non appena ci si iscrive/disiscrive ad essi in Skyve.",
+                    "Gli oggetti appena sottoscritti non vengono più ricaricati mentre il gioco è aperto.\nIn questo modo si evitano i blocchi del gioco e il malfunzionamento delle mod."
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Nuovo",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups"
+                    "Aggiunta la voce \"Visualizza i contenuti di questo Profilo\" nel menu del tasto destro del mouse dei profili.",
+                    "Aggiunta l'opzione \"Forza download\" nel menu del tasto destro del mouse dei pacchetti.",
+                    "Aggiunto un maggiore contesto ad alcuni popup"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correzioni",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
+                    "Corretto l'aggiornamento istantaneo dell'elenco dei profili.",
+                    "Corretto il problema dei pacchetti profilo che non mostrano il nome del Workshop.",
+                    "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
+                    "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi."
                 ]
             }
         ]
