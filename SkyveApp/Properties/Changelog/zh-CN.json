@@ -427,7 +427,7 @@
                 ]
             },
             {
-                "Name": "New",
+                "Name": "新增",
                 "Changes": [
                     "Added \"View this Profile's contents\" in profiles' right-click menu.",
                     "Added a \"Force download\" option in packages' right-click menu.",
@@ -435,7 +435,7 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修复",
                 "Changes": [
                     "Fixed the profile list not updating instantly.",
                     "Fixed profile packages not showing their workshop name.",
