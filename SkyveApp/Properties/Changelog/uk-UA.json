@@ -357,7 +357,7 @@
                 "Changes": [
                     "Поліпшено швидкодію додатку. Очікуються швидші завантаження та менші підвисання.",
                     "Виправлена взаємодія між подібними модами, що показуються у звіті про сумісність, якщо у вас тільки одна з них.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Виправлено виявлення модів в локальній теці."
                 ]
             }
         ]
@@ -427,7 +427,7 @@
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Нове",
                 "Changes": [
                     "Added \"View this Profile's contents\" in profiles' right-click menu.",
                     "Added a \"Force download\" option in packages' right-click menu.",
