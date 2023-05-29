@@ -179,7 +179,7 @@
   "SaveFileInfo": "選擇打開遊戲時要自動載入的存檔檔",
   "LoadProfile": "載入設定檔",
   "CopyAuthorSteamId": "複製作者的 Steam 數位 ID",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
+  "CloseCitiesToSub": "你需要關閉 Cities: Skylines 才能訂閱/取消訂閱外掛程式",
   "ShowingFilteredItems": "當前顯示 {0} 項，共 {1} 項",
   "DropNewProfile": "將 json / xml 設定檔拖到此處；或按一下此處，選擇一個 json / xml 設定檔，以導入設定檔。",
   "ThemeUIScale": "介面主題與UI縮放",
@@ -221,7 +221,7 @@
   "AreYouSure": "您確定要繼續嗎？",
   "MapFileInfo": "選擇新建存檔使用的地圖檔",
   "AssetOutOfDate": "個資產已過期",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "其它操作…",
   "AssetOutOfDatePlural": "個資產已過期",
   "CopyVersionNumber": "複製版本號",
   "SubscribeToItem": "訂閱此項目",
@@ -484,6 +484,6 @@
   "LoggedInAs": "登錄為",
   "UnknownUser": "未知使用者",
   "AddMeaningfulDescription": "傳送申請前，請先新增一個有意義的描述。",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "RedownloadComplete": "Skyve 已重新下載存在問題的外掛。",
+  "CleanupComplete": "Skyve 已經將您已取消訂閱（但沒刪除乾淨）的外掛清理完畢。"
 }
