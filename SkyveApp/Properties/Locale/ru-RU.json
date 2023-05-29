@@ -484,6 +484,6 @@
   "LoggedInAs": "Вы вошли как",
   "UnknownUser": "Неизвестный пользователь",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "RedownloadComplete": "Skyve завершил подписку пакетов с ошибками.",
+  "CleanupComplete": "Skyve закончил очистку ваших загрузок мастерской."
 }
