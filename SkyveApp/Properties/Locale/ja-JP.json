@@ -94,7 +94,7 @@
   "OpenLocalFolder": "パッケージを含むローカルフォルダを開く",
   "ViewOnSteam": "パッケージをSteamで表示",
   "ReDownloadPackage": "パッケージの再DL",
-  "ForceDownloadPackage": "パッケージを強制的にDL",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "SteamのIDをコピー",
   "OpenAuthorPage": "Steamで作者のページを開く",
   "Sorting_Default": "デフォルトのソート",
@@ -160,6 +160,8 @@
   "TotalItems": "合計アイテム",
   "UnsubscribeAll": "表示した全てのアイテムからサブスクを解除",
   "SubscribeAll": "表示した全てのアイテムをサブスクする",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "プロファイル内に一部のアイテムがありません。次回以降でプロファイルを保存すると、これらのアイテムは削除されます。",
   "ModIsPrivate": "アイテムが非公開",
   "HidePseudoMods": "テーマミックスのような擬似MODは非表示",
@@ -496,8 +498,11 @@
     "Plural": "{0} アイテムがサブスク解除を待機中"
   },
   "CancelSubs": "保留中のサブスク処理を全てキャンセル",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "保留中のサブスク操作が適用されるまで、しばらくゲームを起動中にして下さい。",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "サブスクしたいパッケージは、ここにグループ化してまとめます。\nゲームを起動すると、それらのアイテムはSteam上でサブスク操作されます。",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "サブスクの開始/解除をすると、すぐにパッケージをDL開始や削除を実行",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "実際にはサブスク操作の完了を待たずに、パッケージのDLや削除の処理は強制的に実行します。",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "サブスク解除の処理を {0} 個のパッケージで実行します。",
     "Plural": "サブスク解除の処理を {0} 個のパッケージで実行します。"
   },
-  "ViewThisProfilesPackages": "プロファイルの内容を表示"
+  "ViewThisProfilesPackages": "プロファイルの内容を表示",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }
