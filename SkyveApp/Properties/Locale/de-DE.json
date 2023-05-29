@@ -239,7 +239,7 @@
   "LOTWillRestart": "Skyve wird sich vorübergehend während des Aktualisierungsprozesses schließen, sich aber automatisch wieder starten, sobald die Aktualisierung abgeschlossen ist.",
   "UpdatingLot": "Skyve wird gerade aktualisiert. Bitte warten...",
   "SubscribingRequiresGameToOpenTitle": "Abonnementprozess",
-  "SubscribingRequiresGameToOpen": "Das Abonnieren oder Abbestellen von Paketen erfordert, dass das Spiel für einen kurzen Moment geöffnet wird.",
+  "SubscribingRequiresGameToOpen": "Das Abonnieren oder Abbestellen von Paketen erfordert, dass das Spiel für einen kurzen Moment geöffnet wird.\n\nWenn du den Spiel-Launcher siehst, klicke aus Spielen um weiter zu machen.",
   "HelpSupport": "Hilfe & Support",
   "DisableFpsBoosterDebug": "Du hast FPS Booster aktiviert, während debug mono aktiviert ist. Möchtest du die Mod deaktivieren, um bessere Logs zu erhalten?",
   "LogZipCopy_Tip": "Erstellt eine Zip-Datei mit allen Protokoll-Informationen in der Zwischenablage. Diese Datei benötigen Personen, die bei Problemen helfen sollen. Diese Datei kann aus der Zwischenablage direkt in einen Discord Kanal eingefügt werden.",
@@ -486,7 +486,7 @@
   "UnknownUser": "Unbekannter Benutzer",
   "AddMeaningfulDescription": "Bitte füge deiner Anfrage eine sinnvolle Beschreibung hinzu.",
   "RedownloadComplete": "Skyve hat die Pakete mit Problemen erneut heruntergeladen.",
-  "CleanupComplete": "Skyve hat die Bereinigung Ihrer Workshop-Downloads beendet.",
+  "CleanupComplete": "Skyve hat die Bereinigung der Workshop-Downloads beendet.",
   "PendingSubscribeTo": {
     "One": "{0} Element mit ausstehendem Abonnement",
     "Plural": "{0} Elemente mit ausstehendem Abonnement"
