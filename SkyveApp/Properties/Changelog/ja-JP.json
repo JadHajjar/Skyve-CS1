@@ -417,30 +417,30 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "サブスクに関する処理の見直し",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "ゲームが起動中の間でもパッケージのサブスク操作が可能",
+                    "複数のアイテムを連続してサブスクする場合は、その都度ゲームを起動せずに保留リストに登録",
+                    "アプリの左下に保留中のサブスクに関するタスクを通知するボックスを追加",
+                    "Skyveでパッケージのサブスク操作を行うと、すぐにパッケージを強制的にDL・削除する高度なオプションを追加",
+                    "新規で登録したアイテムは、ゲームを起動中の間はリロードしないように変更\nMODの誤動作と同様に、ゲームのフリーズ・クラッシュを防止する措置"
                 ]
             },
             {
-                "Name": "New",
+                "Name": "新規",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups"
+                    "プロファイルの右クリックメニューに、「プロファイルの内容を表示」を追加",
+                    "パッケージの右クリックメニューに、「強制的にDL」オプションを追加",
+                    "いくつかのポップアップにコンテキストを更に追加"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修正",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
+                    "プロファイルのリストが即座に更新されない問題を修正",
+                    "プロファイルのパッケージにワークショップ名が表示されない問題を修正",
+                    "プロファイルやコレクションで初めて表示する時に、Steamからパッケージの情報がロードされない問題を修正",
+                    "ローカルMODの名前はトラブル防止のために、ワークショップの名前では無くフォルダ名に復元"
                 ]
             }
         ]
