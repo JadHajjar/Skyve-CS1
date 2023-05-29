@@ -94,7 +94,6 @@
   "OpenLocalFolder": "Abra a pasta local que contém este pacote",
   "ViewOnSteam": "Veja este pacote na Steam",
   "ReDownloadPackage": "Baixe o pacote novamente",
-  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Copie este número de identificação da Steam",
   "OpenAuthorPage": "Abra a página do autor na Steam",
   "Sorting_Default": "Classificação padrão",
@@ -180,6 +179,7 @@
   "SaveFileInfo": "Selecione um arquivo de salvamento para ser carregado automaticamente ao abrir o jogo",
   "LoadProfile": "Carregar Perfil",
   "CopyAuthorSteamId": "Copie o número de identificação Steam do Autor",
+  "CloseCitiesToSub": "É necessário fechar o Cities: Skylines para assinar ou cancelar a assinatura de pacotes",
   "ShowingFilteredItems": "Mostrando {0} de {1} itens no total",
   "DropNewProfile": "Arraste ou selecione aqui um arquivo .json / .xml de um perfil para importá-lo",
   "ThemeUIScale": "Escala do Tema e da Interface",
@@ -221,7 +221,7 @@
   "AreYouSure": "Tem certeza que deseja continuar?",
   "MapFileInfo": "Selecione um arquivo de mapa para iniciar um novo jogo",
   "AssetOutOfDate": "recurso encontra-se desatualizado",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "Outras Ações...",
   "AssetOutOfDatePlural": "recursos encontram-se desatualizados",
   "CopyVersionNumber": "Copiar número da versão",
   "SubscribeToItem": "Assinar este item",
@@ -238,8 +238,7 @@
   "WouldYouLikeToSkipThose": "Você quer ignorar esses pacotes?",
   "LOTWillRestart": "Skyve será fechado temporariamente para atualização e retomará automaticamente.",
   "UpdatingLot": "Skyve está atualizando. Por favor, aguarde...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpen": "Para assinar ou cancelar a assinatura de pacotes, é necessário abrir o jogo por um instante.\n\nQuando você visualizar o iniciador do jogo, clique em Jogar para prosseguir.",
   "HelpSupport": "Ajuda & Suporte",
   "DisableFpsBoosterDebug": "Você tem o FPS Booster ativado enquanto está usando o modo de depuração mono. Gostaria de desativá-lo para obter registros mais precisos?",
   "LogZipCopy_Tip": "Crie um arquivo zip contendo todas as informações de registro necessárias para que alguém possa ajudá-lo com o seu problema. Você pode colar diretamente em um canal do Discord.",
@@ -485,28 +484,6 @@
   "LoggedInAs": "Sessão iniciada como",
   "UnknownUser": "Usuário desconhecido",
   "AddMeaningfulDescription": "Por favor, adicione uma descrição significativa ao seu pedido.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
-  "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
-  },
-  "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
-  },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
-  "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
-  },
-  "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing to {0} package in this process.",
-    "Plural": "You will be unsubscribing to {0} packages in this process."
-  },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "RedownloadComplete": "Skyve terminou de baixar novamente os pacotes com problemas.",
+  "CleanupComplete": "Skyve terminou de limpar os itens baixados da Oficina."
 }

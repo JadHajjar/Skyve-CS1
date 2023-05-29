@@ -94,7 +94,6 @@
   "OpenLocalFolder": "パッケージを含むローカルフォルダを開く",
   "ViewOnSteam": "パッケージをSteamで表示",
   "ReDownloadPackage": "パッケージの再DL",
-  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "SteamのIDをコピー",
   "OpenAuthorPage": "Steamで作者のページを開く",
   "Sorting_Default": "デフォルトのソート",
@@ -180,6 +179,7 @@
   "SaveFileInfo": "ゲーム起動時にロードするセーブゲームのファイルを選択",
   "LoadProfile": "プロファイルをロード",
   "CopyAuthorSteamId": "作者のSteam IDをコピー",
+  "CloseCitiesToSub": "パッケージのサブスク操作を行うには、Cities: Skylinesを終了する必要があります。",
   "ShowingFilteredItems": "合計 {1} 個のアイテムから {0} 個を表示中",
   "DropNewProfile": "インポートしたいプロファイルのjsonファイル/xmlファイルをD&D・クリックして選択",
   "ThemeUIScale": "テーマ & UIスケール",
@@ -238,7 +238,6 @@
   "WouldYouLikeToSkipThose": "このパッケージは省きますか？",
   "LOTWillRestart": "アップデート中はSkyveが一時的に閉じますが、完了すると自動的にツールが再開します。",
   "UpdatingLot": "現在、Skyveがアップデート中です。しばらくお待ち下さい...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "ヘルプ & サポート",
   "DisableFpsBoosterDebug": "Debug Monoを使用中ですが、FPS Boosterが有効になっています。詳細なログを取得するために、MODを無効化しても宜しいですか？",
@@ -486,27 +485,5 @@
   "UnknownUser": "不明なユーザー",
   "AddMeaningfulDescription": "リクエストに具体的な問題点などの説明を追加して下さい。",
   "RedownloadComplete": "Skyveは問題のあるパッケージの再DLを完了しました。",
-  "CleanupComplete": "SkyveはワークショップのDLをクリーンアップしました。",
-  "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
-  },
-  "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
-  },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
-  "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
-  },
-  "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing to {0} package in this process.",
-    "Plural": "You will be unsubscribing to {0} packages in this process."
-  },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "CleanupComplete": "SkyveはワークショップのDLをクリーンアップしました。"
 }
