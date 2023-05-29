@@ -238,8 +238,8 @@
   "WouldYouLikeToSkipThose": "선택한 패키지를 건너뛰시겠습니까?",
   "LOTWillRestart": "Skyve는 업데이트가 진행되는 동안 임시적으로 닫힐 것입니다. 업데이트가 완료되고 나면 자동으로 다시 시작됩니다.",
   "UpdatingLot": "Skyve가 지금 업데이트되는 중입니다. 기다려 주세요...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "구독 과정",
+  "SubscribingRequiresGameToOpen": "패키지를 구독하거나 구독 취소하려면 잠시 게임을 열어야 합니다.\n\n게임 런처가 표시되면 플레이를 클릭하여 계속 진행하세요.",
   "HelpSupport": "도움 & 지원",
   "DisableFpsBoosterDebug": "Debug Mono를 사용하는 데 FPS Booster가 활성화되어있습니다. 더 나은 로그를 얻기 위해 비활성화하시겠습니까?",
   "LogZipCopy_Tip": "문제를 해결하는 데 필요한 모든 로그 정보가 포함된 압축 파일을 만들고 디스코드 채널에 직접 붙여넣을 수 있습니다.",
@@ -467,7 +467,7 @@
   "TreatOptionalAsRequired_Tip": "기본적으로 이것은 선택적 패키지에 대한 누락된 종속성 알림을 표시합니다.",
   "AddCustomTag": "맞춤 태그 추가",
   "OutOfDateCount": {
-    "One": "{0} {1} 가 오래 되었습니다",
+    "One": "업데이트되지 않은 {1} {0}개가 있습니다",
     "Plural": "업데이트되지 않은 {1} {0}개가 있습니다"
   },
   "IncompleteCount": {
@@ -488,25 +488,25 @@
   "RedownloadComplete": "문제가 있는 패키지를 다시 다운로드했습니다.",
   "CleanupComplete": "창작마당 다운로드를 정리했습니다.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "항목 {0}개 구독 대기 중",
+    "Plural": "항목 {0}개 구독 대기 중"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "항목 {0}개 구독 취소 대기 중",
+    "Plural": "항목 {0}개 구독 취소 대기 중"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "대기 중인 모든 구독을 취소합니다",
+  "ApplySubs": "대기 중인 구독을 적용하기 위해 잠시 게임을 실행합니다",
+  "SubsPendingInfo": "구독하려는 패키지들이 여기에 모입니다.\n게임을 열면 이 항목들이 Steam에서 구독됩니다.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "구독/구독 취소하는 즉시 패키지를 다운로드/제거 시작하기",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "실제로 구독 또는 구독 취소될 때까지 기다리지 않고 패키지를 강제로 다운로드하거나 제거합니다.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "이 과정에서 패키지 {0}개를 구독하게 됩니다.",
+    "Plural": "이 과정에서 패키지 {0}개를 구독하게 됩니다."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "이 과정에서 패키지 {0}개를 구독 취소하게 됩니다.",
+    "Plural": "이 과정에서 패키지 {0}개를 구독 취소하게 됩니다."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "이 프로필의 콘텐츠 보기"
 }
