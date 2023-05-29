@@ -402,12 +402,12 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "修復與改動",
                 "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "新增功能：在所有問題修復完畢，或沒刪乾淨的外掛清理完畢後，Skyve 會彈出一條通知消息。",
+                    "修復了匯入 LOT 1 的組態檔案可能卡死的罕見問題。",
+                    "修復了選擇某些語言時，更新日誌無法打開的問題。",
+                    "可能修復了無法大量訂閱物品的問題。"
                 ]
             }
         ]
