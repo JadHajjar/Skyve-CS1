@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Open the local folder containing this package",
   "ViewOnSteam": "View this package on Steam",
   "ReDownloadPackage": "Re-download this package",
-  "ForceDownloadPackage": "Force-download this package",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Copy this steam id",
   "OpenAuthorPage": "Open the author's page on Steam",
   "Sorting_Default": "Default Sorting",
@@ -160,6 +160,8 @@
   "TotalItems": "Total Items",
   "UnsubscribeAll": "Unsubscribe from all displayed items",
   "SubscribeAll": "Subscribe to all displayed items",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "Some items are still missing from this profile. Saving the profile in the future will remove those items from it.",
   "ModIsPrivate": "Item is private",
   "HidePseudoMods": "Hide pseudo-mods like theme mixes",
@@ -496,8 +498,11 @@
     "Plural": "{0} items pending unsubscription"
   },
   "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages, instead of waiting until they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "You will be unsubscribing from {0} package during this process.",
     "Plural": "You will be unsubscribing from {0} packages during this process."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "View this profile's contents",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }
