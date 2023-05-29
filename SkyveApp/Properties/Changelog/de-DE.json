@@ -402,10 +402,10 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Fehlerbehebungen & Änderungen",
                 "Changes": [
                     "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
+                    "Es wurde ein seltener Fehler behoben, bei dem das Laden eines LOT 1 Profils für immer andauerte.",
                     "Fixed the changelog not opening with some languages.",
                     "Potentially fixed subscribing to a large amount of items failing/not working."
                 ]
@@ -417,9 +417,9 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Überarbeiteter Abonnementprozess",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
+                    "Du kannst jetzt Pakete abonnieren, während das Spiel geöffnet ist.",
                     "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
                     "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
                     "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
@@ -427,7 +427,7 @@
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Neu",
                 "Changes": [
                     "Added \"View this Profile's contents\" in profiles' right-click menu.",
                     "Added a \"Force download\" option in packages' right-click menu.",
@@ -435,7 +435,7 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
                     "Fixed the profile list not updating instantly.",
                     "Fixed profile packages not showing their workshop name.",
