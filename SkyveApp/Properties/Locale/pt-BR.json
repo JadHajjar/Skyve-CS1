@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Abra a pasta local que contém este pacote",
   "ViewOnSteam": "Veja este pacote na Steam",
   "ReDownloadPackage": "Baixe o pacote novamente",
-  "ForceDownloadPackage": "Force-download this package",
+  "ForceDownloadPackage": "Forçar para baixar este pacote",
   "CopySteamId": "Copie este número de identificação da Steam",
   "OpenAuthorPage": "Abra a página do autor na Steam",
   "Sorting_Default": "Classificação padrão",
@@ -238,8 +238,8 @@
   "WouldYouLikeToSkipThose": "Você quer ignorar esses pacotes?",
   "LOTWillRestart": "Skyve será fechado temporariamente para atualização e retomará automaticamente.",
   "UpdatingLot": "Skyve está atualizando. Por favor, aguarde...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Processo de Assinatura",
+  "SubscribingRequiresGameToOpen": "Para assinar ou cancelar a assinatura de pacotes, é necessário abrir o jogo por um instante.\n\nQuando você visualizar o lançador do jogo, clique em Jogar para prosseguir.",
   "HelpSupport": "Ajuda & Suporte",
   "DisableFpsBoosterDebug": "Você tem o FPS Booster ativado enquanto está usando o modo de depuração mono. Gostaria de desativá-lo para obter registros mais precisos?",
   "LogZipCopy_Tip": "Crie um arquivo zip contendo todas as informações de registro necessárias para que alguém possa ajudá-lo com o seu problema. Você pode colar diretamente em um canal do Discord.",
@@ -488,25 +488,25 @@
   "RedownloadComplete": "Skyve terminou de baixar novamente os pacotes com problemas.",
   "CleanupComplete": "Skyve terminou de limpar os itens baixados da Oficina.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} Item com assinatura pendente",
+    "Plural": "{0} Itens com assinaturas pendentes"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} Item com cancelamento de assinatura pendente",
+    "Plural": "{0} Itens com cancelamento de assinaturas pendentes"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "Cancelar todas as assinaturas pendentes",
+  "ApplySubs": "Inicie o jogo por um instante para aplicar assinaturas pendentes",
+  "SubsPendingInfo": "Os pacotes aos quais você se inscreveu estão agrupados aqui.\nAssim que você abrir o jogo, esses itens serão inscritos na Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Comece a baixar ou remover os pacotes imediatamente ao assinar, ou cancelar assinatura",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Força baixar ou remover os pacotes invés de esperar até que sejam assinados, ou cancelados.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "Você assinará o pacote {0} neste processo.",
+    "Plural": "Você assinará os pacotes {0} neste processo."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "Você cancelará a assinatura do pacote {0} neste processo.",
+    "Plural": "Você cancelará a assinatura dos pacotes {0} neste processo."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "Ver conteúdo deste perfil"
 }
