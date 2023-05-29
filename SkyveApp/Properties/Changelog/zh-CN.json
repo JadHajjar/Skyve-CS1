@@ -417,30 +417,30 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "重制了订阅操作的进程",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "现在在游戏运行期间，您也可以订阅插件。",
+                    "现在如果连续订阅多个插件，Skyve 会记录到任务等待列表中，而不是每次都启动游戏来进行订阅操作。",
+                    "在 Skyve 应用程序界面的左下角新增了一个方框，以显示当前等待中的订阅 / 取消订阅操作。",
+                    "新增了一个高级选项，启用此选项后，在 Skyve 进行订阅 / 取消订阅操作之后，自动强制下载插件或删除已取订（但没删除干净）的插件。",
+                    "在游戏运行时，Skyve 会禁止新订阅的物品进行加载。\n这种做法可以防止游戏卡死或模组出错。"
                 ]
             },
             {
                 "Name": "新增",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups"
+                    "新增功能：右键点击一个配置文件时，可以“查看此配置文件的内容”。",
+                    "新增功能：右键点击一个插件时，可以“强制下载”此插件。",
+                    "在一些弹出窗口中新增了更多说明文字。"
                 ]
             },
             {
                 "Name": "修复",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
+                    "修复了配置文件列表没有立即更新的问题。",
+                    "修复了配置文件插件没有显示其创意工坊名称的问题。",
+                    "修复了第一次加载某个配置文件或合集时，来自 Steam 的插件信息没有加载的问题。",
+                    "已将本地模组的名称恢复为其所在文件夹名称，而不是模组的工坊名称，以防止出现问题。"
                 ]
             }
         ]
