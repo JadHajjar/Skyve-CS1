@@ -405,9 +405,9 @@
                 "Name": "Correções & Alterações",
                 "Changes": [
                     "Adicionada uma mensagem para que você saiba quando 'Corrigir Todos os Problemas' e 'Executar Limpeza' termina.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "Corrigido um bug raro em que carregar um perfil LOT 1 ficava carregando eternamente.",
+                    "Corrigido o problema de o registro de alterações não abrir com alguns idiomas.",
+                    "Possivelmente corrigido o problema de assinar um grande número de itens falhar/não funcionar."
                 ]
             }
         ]
