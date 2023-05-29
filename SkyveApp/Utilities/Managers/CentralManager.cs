@@ -141,10 +141,6 @@ internal static class CentralManager
 		indexedPackages = content.Where(x => x.SteamId != 0).ToDictionary(x => x.SteamId);
 		packages = content;
 
-		IsContentLoaded = true;
-
-		OnContentLoaded();
-
 		Log.Info($"Loading and applying CR Data..");
 
 		CompatibilityManager.LoadCachedData();
@@ -161,7 +157,9 @@ internal static class CentralManager
 
 		CompatibilityManager.FirstLoadComplete = true;
 
-		OnInformationUpdated();
+		IsContentLoaded = true;
+
+		OnContentLoaded();
 
 		SubscriptionsManager.Start();
 
@@ -273,13 +271,13 @@ internal static class CentralManager
 			{
 				if (!SessionSettings.UserSettings.AdvancedIncludeEnable)
 				{
-					if (package.Mod.IsIncluded && !package.Mod.IsEnabled)
+					if (!package.Mod.IsEnabled && package.Mod.IsIncluded)
 					{
 						package.Mod.IsIncluded = false;
 					}
 				}
 
-				if (!SessionSettings.UserSettings.LinkModAssets && package.Assets is not null)
+				if (SessionSettings.UserSettings.LinkModAssets && package.Assets is not null)
 				{
 					foreach (var asset in package.Assets)
 					{
@@ -345,13 +343,15 @@ internal static class CentralManager
 		if (packages is null)
 		{
 			packages = new List<Package>() { package };
-		indexedPackages = packages.Where(x => x.SteamId != 0).ToDictionary(x => x.SteamId);
+			indexedPackages = packages.Where(x => x.SteamId != 0).ToDictionary(x => x.SteamId);
 		}
 		else
 		{
 			packages.Add(package);
-			if (indexedPackages is not null&&package.SteamId != 0)
+			if (indexedPackages is not null && package.SteamId != 0)
+			{
 				indexedPackages[package.SteamId] = package;
+			}
 		}
 
 		HandleNewPackage(package);
@@ -377,22 +377,33 @@ internal static class CentralManager
 
 		OnContentLoaded();
 		_delayedWorkshopInfoUpdated.Run();
+
+		ContentUtil.DeleteAll(package.Folder);
 	}
 
 	internal static void OnInformationUpdated()
 	{
-		_delayedPackageInformationUpdated.Run();
+		if (IsContentLoaded)
+		{
+			_delayedPackageInformationUpdated.Run();
+		}
 	}
 
 	internal static void OnInclusionUpdated()
 	{
-		_delayedPackageInclusionUpdated.Run();
-		_delayedPackageInformationUpdated.Run();
+		if (IsContentLoaded)
+		{
+			_delayedPackageInclusionUpdated.Run();
+			_delayedPackageInformationUpdated.Run();
+		}
 	}
 
 	internal static void OnWorkshopInfoUpdated()
 	{
-		_delayedWorkshopInfoUpdated.Run();
+		if (IsContentLoaded)
+		{
+			_delayedWorkshopInfoUpdated.Run();
+		}
 	}
 
 	internal static void OnContentLoaded()
@@ -405,7 +416,9 @@ internal static class CentralManager
 	internal static Package? GetPackage(ulong steamId)
 	{
 		if (indexedPackages?.TryGetValue(steamId, out var package) ?? false)
+		{
 			return package;
+		}
 
 		return null;
 	}

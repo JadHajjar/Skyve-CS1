@@ -81,7 +81,7 @@ internal class Locale : LocaleHelper
 	public static Translation OpenLocalFolder => _instance.GetText(nameof(OpenLocalFolder));
 	public static Translation ViewOnSteam => _instance.GetText(nameof(ViewOnSteam));
 	public static Translation ReDownloadPackage => _instance.GetText(nameof(ReDownloadPackage));
-	public static Translation ForceDownloadPackage => _instance.GetText(nameof(ForceDownloadPackage));
+	public static Translation DownloadPackage => _instance.GetText(nameof(DownloadPackage));
 	public static Translation CopySteamId => _instance.GetText(nameof(CopySteamId));
 	public static Translation OpenAuthorPage => _instance.GetText(nameof(OpenAuthorPage));
 	public static Translation Sorting => _instance.GetText(nameof(Sorting));
@@ -276,4 +276,8 @@ internal class Locale : LocaleHelper
 	public static Translation ThisSubscribesTo => _instance.GetText(nameof(ThisSubscribesTo));
 	public static Translation ThisUnsubscribesFrom => _instance.GetText(nameof(ThisUnsubscribesFrom));
 	public static Translation ViewThisProfilesPackages => _instance.GetText(nameof(ViewThisProfilesPackages));
+	public static Translation DownloadAll => _instance.GetText(nameof(DownloadAll));
+	public static Translation ReDownloadAll => _instance.GetText(nameof(ReDownloadAll));
+	public static Translation PendingDownloads => _instance.GetText(nameof(PendingDownloads));
+	public static Translation PendingDeletions => _instance.GetText(nameof(PendingDeletions));
 }

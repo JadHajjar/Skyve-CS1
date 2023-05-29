@@ -219,7 +219,7 @@ public partial class PC_PackagePage : PanelContent
 		{
 			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded && isInstalled, action: () => { item.Package!.IsIncluded = true; })
 			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded && isInstalled, action: () => { item.Package!.IsIncluded = false; })
-			, new (isInstalled? Locale.ReDownloadPackage:Locale.ForceDownloadPackage, "I_ReDownload", SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
+			, new (isInstalled? Locale.ReDownloadPackage:Locale.DownloadPackage, "I_Install", SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
 			, new (Locale.MovePackageToLocalFolder, "I_PC", isInstalled && item.Workshop, action: () => ContentUtil.MoveToLocalFolder(item))
 			, new (string.Empty)
 			, new (!item.Workshop && item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, "I_Disposable", isInstalled && !(item.Package?.BuiltIn ?? false), action: () => AskThenDelete(item))
@@ -279,6 +279,6 @@ public partial class PC_PackagePage : PanelContent
 
 	private static void Redownload<T>(T item) where T : IPackage
 	{
-		SteamUtil.ReDownload(new IPackage[] { item });
+		SteamUtil.Download(new IPackage[] { item });
 	}
 }

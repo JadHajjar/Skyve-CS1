@@ -167,10 +167,10 @@ internal static class SubscriptionsManager
 
 		if (LocationManager.Platform is Platform.MacOSX)
 		{
-			SteamUtil.ReDownload(ids);
+			SteamUtil.Download(ids);
 		}
 
-		SteamUtil.ReDownload(ids);
+		SteamUtil.Download(ids);
 	}
 
 	internal static void Start()
@@ -197,6 +197,14 @@ internal static class SubscriptionsManager
 		watcher2.Deleted += new FileSystemEventHandler(SubscriptionTransferFileChanged);
 
 		watcher2.EnableRaisingEvents = true;
+
+		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+	}
+
+	private static void CentralManager_ContentLoaded()
+	{
+		PendingSubscribingTo.RemoveAll(x => CentralManager.GetPackage(x) is not null);
+		PendingUnsubscribingFrom.RemoveAll(x => CentralManager.GetPackage(x) is null);
 	}
 
 	private static void FileChanged(object sender, FileSystemEventArgs e)
@@ -240,7 +248,7 @@ internal static class SubscriptionsManager
 		{
 			Redownload = false;
 
-			SteamUtil.ReDownload(ids.Select(ulong.Parse));
+			SteamUtil.Download(ids.Select(ulong.Parse));
 		}
 	}
 

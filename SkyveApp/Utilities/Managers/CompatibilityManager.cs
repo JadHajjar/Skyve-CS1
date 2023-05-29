@@ -264,9 +264,9 @@ public static class CompatibilityManager
 		if (package.Package?.Mod is not null)
 		{
 			var modName = Path.GetFileName(package.Package.Mod.FileName);
-			var duplicate = CentralManager.Mods.AllWhere(x => x.IsIncluded && modName == Path.GetFileName(x.FileName));
+			var duplicate = CentralManager.Mods.AllWhere(x => modName == Path.GetFileName(x.FileName));
 
-			if (duplicate.Count > 1)
+			if (duplicate.Count > 1 && duplicate.Count(x => x.IsIncluded) > 1)
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
