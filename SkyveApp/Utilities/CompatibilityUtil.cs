@@ -293,7 +293,6 @@ internal static class CompatibilityUtil
 
 	internal static IndexedPackage? GetPackageData(IPackage package)
 	{
-		return null;
 		var steamId = package.Workshop? package.SteamId : package.Package?.Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(package.Package.Mod.FileName));
 
 		if (steamId > 0)
