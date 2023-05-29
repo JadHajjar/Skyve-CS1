@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Apri la cartella locale contenente questo pacchetto",
   "ViewOnSteam": "Visualizza questo pacchetto su Steam",
   "ReDownloadPackage": "Ri-scarica questo pacchetto",
-  "ForceDownloadPackage": "Force-download this package",
+  "ForceDownloadPackage": "Scaricamento forzato del pacchetto",
   "CopySteamId": "Copia questo ID Steam",
   "OpenAuthorPage": "Apri la pagina dell'autore su Steam",
   "Sorting_Default": "Ordinamento predefinito",
@@ -238,8 +238,8 @@
   "WouldYouLikeToSkipThose": "Vuoi saltare quei pacchetti?",
   "LOTWillRestart": "Skyve si chiuderà temporaneamente durante il processo di aggiornamento, ma riprenderà automaticamente al termine dell'aggiornamento.",
   "UpdatingLot": "Skyve è in fase di aggiornamento. Si prega di attendere...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Processo di Sottoscrizione",
+  "SubscribingRequiresGameToOpen": "Per sottoscrivere o annullare la sottoscrizione ai pacchetti è necessario aprire il gioco per un breve momento.\n\nUna volta visualizzato il launcher del gioco, cliccate su Play per procedere.",
   "HelpSupport": "Aiuto e Supporto",
   "DisableFpsBoosterDebug": "Hai FPS Booster abilitato mentre stai usando mono in modalità debug, vorresti disabilitarlo per ottenere log migliori?",
   "LogZipCopy_Tip": "Crea un file zip contenente tutte le informazioni di log necessarie ad assisterti nel tuo problema, puoi incollarlo direttamente in un canale di Discord.",
@@ -406,7 +406,7 @@
   "Include": "Includi",
   "Unsubscribe": "Annulla iscrizione",
   "Exclude": "Escludi",
-  "Snooze": "Postcipa",
+  "Snooze": "Posticipa",
   "UnSnooze": "Non posticipare",
   "Mod": {
     "One": "Mod",
@@ -488,25 +488,25 @@
   "RedownloadComplete": "Skyve ha finito di riscaricare i pacchetti con i problemi.",
   "CleanupComplete": "Skyve ha finito di ripulire i download del Workshop.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} elemento in attesa di sottoscrizione",
+    "Plural": "{0} elementi in attesa di sottoscrizione"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} elemento in attesa di annullamento della sottoscrizione",
+    "Plural": "{0} elemento in attesa di annullamento della sottoscrizione"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "Annullare tutte le sottoscrizioni in corso",
+  "ApplySubs": "Avviare il gioco per un breve momento per applicare le sottoscrizioni in corso",
+  "SubsPendingInfo": "I pacchetti sottoscritti sono raggruppati qui.\nUna volta aperto il gioco, questi oggetti verranno sottoscritti su Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Avviare il download o la rimozione dei pacchetti subito dopo l'iscrizione/disiscrizione",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forza il download o la rimozione dei pacchetti invece di aspettare che vengano effettivamente sottoscritti o annullati.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "In questo processo si sottoscriverà il pacchetto {0}.",
+    "Plural": "In questo processo si sottoscriveranno {0} pacchetti."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "In questo processo si annullerà la sottoscrizione di {0} pacchetto.",
+    "Plural": "In questo processo si annullerà la sottoscrizione di {0} pacchetti."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "Visualizza i contenuti di questo profilo"
 }
