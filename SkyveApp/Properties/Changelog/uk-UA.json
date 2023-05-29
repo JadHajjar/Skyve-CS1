@@ -369,8 +369,8 @@
             {
                 "Name": "Фікси",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
+                    "Виправлено: вкладка опцій не відкривається для macOS і Linux.",
+                    "Виправлено: Довідка і Журнали автоматично не завантажують поточний журнал.",
                     "Fixed the log file path being wrong on Linux."
                 ]
             }
