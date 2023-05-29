@@ -508,5 +508,5 @@
     "One": "You will be unsubscribing from {0} package in this process.",
     "Plural": "You will be unsubscribing from {0} packages in this process."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "查看此配置文件的内容"
 }
