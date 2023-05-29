@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Öffne den lokalen Ordner der dieses Paket enthält.",
   "ViewOnSteam": "Dieses Paket auf Steam ansehen",
   "ReDownloadPackage": "Dieses Paket erneut herunterladen",
-  "ForceDownloadPackage": "Force-download this package",
+  "ForceDownloadPackage": "Herunterladen dieses Pakets erzwingen",
   "CopySteamId": "Diese Steam-ID kopieren",
   "OpenAuthorPage": "Die Seite des Autors auf Steam öffnen",
   "Sorting_Default": "Standard-Sortierung",
@@ -221,7 +221,7 @@
   "AreYouSure": "Bist du sicher, dass du fortfahren möchtest?",
   "MapFileInfo": "Wähle eine Karte, um ein neues Spiel mit dieser zu starten",
   "AssetOutOfDate": "Gegenstand ist veraltet",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "Sonstige Aktionen...",
   "AssetOutOfDatePlural": "Gegenstände sind veraltet",
   "CopyVersionNumber": "Versionsnummer kopieren",
   "SubscribeToItem": "Dieses Element abonnieren",
@@ -238,8 +238,8 @@
   "WouldYouLikeToSkipThose": "Möchtest du diese Pakete überspringen?",
   "LOTWillRestart": "Skyve wird sich vorübergehend während des Aktualisierungsprozesses schließen, sich aber automatisch wieder starten, sobald die Aktualisierung abgeschlossen ist.",
   "UpdatingLot": "Skyve wird gerade aktualisiert. Bitte warten...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Abonnementprozess",
+  "SubscribingRequiresGameToOpen": "Das Abonnieren oder Abbestellen von Paketen erfordert, dass das Spiel für einen kurzen Moment geöffnet wird.",
   "HelpSupport": "Hilfe & Support",
   "DisableFpsBoosterDebug": "Du hast FPS Booster aktiviert, während debug mono aktiviert ist. Möchtest du die Mod deaktivieren, um bessere Logs zu erhalten?",
   "LogZipCopy_Tip": "Erstellt eine Zip-Datei mit allen Protokoll-Informationen in der Zwischenablage. Diese Datei benötigen Personen, die bei Problemen helfen sollen. Diese Datei kann aus der Zwischenablage direkt in einen Discord Kanal eingefügt werden.",
@@ -485,28 +485,28 @@
   "LoggedInAs": "Angemeldet als",
   "UnknownUser": "Unbekannter Benutzer",
   "AddMeaningfulDescription": "Bitte füge deiner Anfrage eine sinnvolle Beschreibung hinzu.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "RedownloadComplete": "Skyve hat die Pakete mit Problemen erneut heruntergeladen.",
+  "CleanupComplete": "Skyve hat die Bereinigung Ihrer Workshop-Downloads beendet.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} Element mit ausstehendem Abonnement",
+    "Plural": "{0} Elemente mit ausstehendem Abonnement"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} Element mit ausstehender Abbestellung",
+    "Plural": "{0} Elemente mit ausstehender Abbestellung"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "Alle ausstehenden Abonnements abbrechen",
+  "ApplySubs": "Starte das Spiel für einen kurzen Moment, um ausstehende Abonnements anzuwenden",
+  "SubsPendingInfo": "Pakete, die du abonnierst, sind hier gruppiert.\nSobald du das Spiel öffnest, werden diese Elemente auf Steam abonniert.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Starte das Herunterladen oder Entfernen von Paketen direkt nach dem Abonnieren/Abbestellen",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Erzwingt das Herunterladen oder Entfernen von Paketen, anstatt zu warten, bis sie tatsächlich abonniert oder abbestellt wurden.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "Du wirst während dieses Prozesses {0} Paket abonnieren.",
+    "Plural": "Du wirst während dieses Prozesses {0} Pakete abonnieren."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "Du wirst während dieses Prozesses {0} Paket abbestellen.",
+    "Plural": "Du wirst während dieses Prozesses {0} Pakete abbestellen."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "Inhalt dieses Profils anzeigen"
 }
