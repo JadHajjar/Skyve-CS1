@@ -17,6 +17,7 @@ internal static class SubscriptionUtil
 {
 	private static readonly string _filePath = Path.Combine(DataLocation.localApplicationData, Path.Combine("Skyve", "SubscriptionTransfer.xml"));
 	private static FileSystemWatcher? watcher;
+	private static DelayedAction _delayedAction = new(3000, Run);
 
 	internal static void Start()
 	{
@@ -42,7 +43,7 @@ internal static class SubscriptionUtil
 
 	private static void SubscriptionFileChanged(object sender, FileSystemEventArgs e)
 	{
-		Run();
+		_delayedAction.Run();
 	}
 
 	internal static void Run()

@@ -683,13 +683,13 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (Package!.Workshop && score != -1)
 		{
-			var clip = e.Graphics.ClipBounds;
+			var clip = ClientRectangle;
 			var labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
 			labelH -= labelH % 2;
 			var small = UI.FontScale < 1.25;
-			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.BottomLeft);
+			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.TopLeft);
 			var backColor = score > 90 && Package.Subscriptions >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
-
+			
 			if (!small)
 			{
 				e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);
