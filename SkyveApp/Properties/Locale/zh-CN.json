@@ -94,6 +94,7 @@
   "OpenLocalFolder": "打开此插件的本地文件夹",
   "ViewOnSteam": "在 Steam 工坊查看此插件",
   "ReDownloadPackage": "重新下载此插件",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "复制这个 Steam ID",
   "OpenAuthorPage": "打开作者的创意工坊主页",
   "Sorting_Default": "默认排序",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "选择打开游戏时要自动加载的存档文件",
   "LoadProfile": "加载配置文件",
   "CopyAuthorSteamId": "复制作者的 Steam 数字 ID",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
   "ShowingFilteredItems": "当前显示 {0} 项，共 {1} 项",
   "DropNewProfile": "将 json / xml 配置文件拖到此处；或单击此处，选择一个 json / xml 配置文件，以导入配置文件。",
   "ThemeUIScale": "界面主题与UI缩放",
@@ -238,6 +238,7 @@
   "WouldYouLikeToSkipThose": "您确定要跳过这些插件吗？",
   "LOTWillRestart": "Skyve 进行更新时，程序会暂时关闭，更新完成后将自动重启。",
   "UpdatingLot": "Skyve 正在进行更新，请稍候...",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "帮助与支持",
   "DisableFpsBoosterDebug": "您正在使用 Debug Mono，是否要禁用 FPS Booster 模组以获取更好的日志？",
@@ -485,5 +486,27 @@
   "UnknownUser": "未知用户",
   "AddMeaningfulDescription": "发送申请前，请先添加一个有意义的描述。",
   "RedownloadComplete": "Skyve 已重新下载存在问题的插件。",
-  "CleanupComplete": "Skyve 已经将您已取消订阅（但没删除干净）的插件清理完毕。"
+  "CleanupComplete": "Skyve 已经将您已取消订阅（但没删除干净）的插件清理完毕。",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }
