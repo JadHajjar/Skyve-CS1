@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Открыть локальную папку, содержащую этот пакет",
   "ViewOnSteam": "Посмотреть этот пакет в Steam",
   "ReDownloadPackage": "Повторно загрузить этот пакет",
-  "ForceDownloadPackage": "Force-download this package",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Копировать Steam ID",
   "OpenAuthorPage": "Открыть страницу автора в Steam",
   "Sorting_Default": "Сортировка по умолчанию",
@@ -160,6 +160,8 @@
   "TotalItems": "Все элементы",
   "UnsubscribeAll": "Отписаться от всех показанных элементов",
   "SubscribeAll": "Подписаться на все отображаемые элементы",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "Некоторые элементы все еще отсутствуют в этом профиле. Сохранение профиля удалит эти элементы из него.",
   "ModIsPrivate": "Элемент является скрытым",
   "HidePseudoMods": "Скрыть псевдомоды, такие, как миксы тем",
@@ -496,8 +498,11 @@
     "Plural": "{0} items pending unsubscription"
   },
   "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
@@ -508,5 +513,13 @@
     "One": "You will be unsubscribing from {0} package in this process.",
     "Plural": "You will be unsubscribing from {0} packages in this process."
   },
-  "ViewThisProfilesPackages": "View this profile's contents"
+  "ViewThisProfilesPackages": "View this profile's contents",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }
