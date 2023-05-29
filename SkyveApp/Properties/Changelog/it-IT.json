@@ -431,7 +431,8 @@
                 "Changes": [
                     "Aggiunta la voce \"Visualizza i contenuti di questo Profilo\" nel menu del tasto destro del mouse dei profili.",
                     "Aggiunta l'opzione \"Forza download\" nel menu del tasto destro del mouse dei pacchetti.",
-                    "Aggiunto un maggiore contesto ad alcuni popup"
+                    "Aggiunto un maggiore contesto ad alcuni popup",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
                 ]
             },
             {
@@ -440,7 +441,8 @@
                     "Corretto l'aggiornamento istantaneo dell'elenco dei profili.",
                     "Corretto il problema dei pacchetti profilo che non mostrano il nome del Workshop.",
                     "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
-                    "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi."
+                    "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi.",
+                    "Improved the performance for people with a lot of mods."
                 ]
             }
         ]
