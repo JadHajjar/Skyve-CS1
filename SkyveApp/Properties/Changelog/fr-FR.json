@@ -431,7 +431,8 @@
                 "Changes": [
                     "Added \"View this Profile's contents\" in profiles' right-click menu.",
                     "Ajout d'une option \"Forcer le téléchargement\" en faisant clique droit sur un paquet.",
-                    "Added more context to some popups"
+                    "Added more context to some popups",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
                 ]
             },
             {
@@ -440,7 +441,8 @@
                     "Fixed the profile list not updating instantly.",
                     "Les profils de paquets montrent désormais leur nom Workshop.",
                     "Les paquets chargent correctement les informations Steam dès la première fois quand vous visionnez leur profil ou collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
+                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Improved the performance for people with a lot of mods."
                 ]
             }
         ]
