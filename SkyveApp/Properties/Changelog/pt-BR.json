@@ -411,5 +411,38 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Processo de Assinatura Retrabalhada",
+                "Changes": [
+                    "Agora você pode assinar pacotes enquanto o jogo estiver aberto.",
+                    "Assinar vários itens seguidos os colocará em uma lista pendente ao invés de abrir o jogo cada vez.",
+                    "Adicionada uma caixa na parte inferior esquerda do aplicativo para informar sobre quaisquer tarefas pendentes de assinatura ou cancelamento de assinatura.",
+                    "Adicionada uma opção avançada para forçar baixar ou excluir pacotes assim que você os assina ou cancela a assinatura no Skyve.",
+                    "Os itens recém-assinados não são mais recarregados enquanto o jogo está aberto.\nFazer isso evita congelamentos no seu jogo, bem como mau funcionamento de mods."
+                ]
+            },
+            {
+                "Name": "Novidades",
+                "Changes": [
+                    "Adicionado \"Visualizar conteúdos deste perfil\" no menu de clique direito dos perfis.",
+                    "Adicionado a opção \"Forçar para baixar\" no menu do botão direito'.",
+                    "Adicionado mais contexto a algumas janelas"
+                ]
+            },
+            {
+                "Name": "Correções",
+                "Changes": [
+                    "Corrigido a lista de perfil que não atualizava instantaneamente.",
+                    "Corrigido o problema em que os pacotes do perfil não exibiam o nome da oficina.",
+                    "Corrigido o problema em que as informações do Steam dos pacotes não eram carregadas corretamente ao visualizar um perfil ou uma coleção.",
+                    "O nome dos mods locais foi revertido para o nome da pasta em vez do nome da Oficina para evitar problemas."
+                ]
+            }
+        ]
     }
 ]

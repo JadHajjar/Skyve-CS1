@@ -94,6 +94,7 @@
   "OpenLocalFolder": "افتح مجلد محلي يحتوي على هذه الحزمة",
   "ViewOnSteam": "عرض هذه الحزمة على Steam",
   "ReDownloadPackage": "إعادة تنزيل هذه الحزمة",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "انسخ معرف البخار هذا",
   "OpenAuthorPage": "افتح صفحة المؤلف",
   "Sorting_Default": "الفرز الافتراضى",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "حدد ملف حفظ اللعبة ليتم تحميله تلقائيا عند فتح اللعبة",
   "LoadProfile": "تحميل الملف الشخصي",
   "CopyAuthorSteamId": "نسخ معرف الستيم الخاص بالمؤلف",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
   "ShowingFilteredItems": "عرض {0} من إجمالي العناصر {1}",
   "DropNewProfile": "إسقاط أو تحديد ملف الملف الشخصي .json أو .xml هنا لاستيراده",
   "ThemeUIScale": "قالب و مقياس واجهة المستخدم",
@@ -238,6 +238,7 @@
   "WouldYouLikeToSkipThose": "هل تريد تخطي هذه الحزم؟",
   "LOTWillRestart": "سيتم إغلاق سماء مؤقتاً أثناء عملية التحديث، ولكن سيتم استئنافها تلقائياً بمجرد اكتمال التحديث.",
   "UpdatingLot": "يتم حالياً تحديث السماء. الرجاء الانتظار...",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "المساعدة والدعم",
   "DisableFpsBoosterDebug": "لديك معزز FPS أثناء استخدام التصحيح الأحادي ، هل ترغب في تعطيله للحصول على سجلات أفضل؟",
@@ -485,5 +486,27 @@
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }

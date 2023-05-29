@@ -357,7 +357,7 @@
                 "Changes": [
                     "Поліпшено швидкодію додатку. Очікуються швидші завантаження та менші підвисання.",
                     "Виправлена взаємодія між подібними модами, що показуються у звіті про сумісність, якщо у вас тільки одна з них.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Виправлено виявлення модів в локальній теці."
                 ]
             }
         ]
@@ -369,8 +369,8 @@
             {
                 "Name": "Фікси",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
+                    "Виправлено: вкладка опцій не відкривається для macOS і Linux.",
+                    "Виправлено: Довідка і Журнали автоматично не завантажують поточний журнал.",
                     "Fixed the log file path being wrong on Linux."
                 ]
             }
@@ -408,6 +408,39 @@
                     "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
                     "Fixed the changelog not opening with some languages.",
                     "Potentially fixed subscribing to a large amount of items failing/not working."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Reworked Subscription Process",
+                "Changes": [
+                    "You can now subscribe to packages while the game is open.",
+                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
+                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                ]
+            },
+            {
+                "Name": "Нове",
+                "Changes": [
+                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Added a \"Force download\" option in packages' right-click menu.",
+                    "Added more context to some popups"
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the profile list not updating instantly.",
+                    "Fixed profile packages not showing their workshop name.",
+                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
+                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues."
                 ]
             }
         ]

@@ -94,6 +94,7 @@
   "OpenLocalFolder": "打开此插件的本地文件夹",
   "ViewOnSteam": "在 Steam 工坊查看此插件",
   "ReDownloadPackage": "重新下载此插件",
+  "ForceDownloadPackage": "强制下载此插件",
   "CopySteamId": "复制这个 Steam ID",
   "OpenAuthorPage": "打开作者的创意工坊主页",
   "Sorting_Default": "默认排序",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "选择打开游戏时要自动加载的存档文件",
   "LoadProfile": "加载配置文件",
   "CopyAuthorSteamId": "复制作者的 Steam 数字 ID",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
   "ShowingFilteredItems": "当前显示 {0} 项，共 {1} 项",
   "DropNewProfile": "将 json / xml 配置文件拖到此处；或单击此处，选择一个 json / xml 配置文件，以导入配置文件。",
   "ThemeUIScale": "界面主题与UI缩放",
@@ -238,7 +238,8 @@
   "WouldYouLikeToSkipThose": "您确定要跳过这些插件吗？",
   "LOTWillRestart": "Skyve 进行更新时，程序会暂时关闭，更新完成后将自动重启。",
   "UpdatingLot": "Skyve 正在进行更新，请稍候...",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "进行订阅操作",
+  "SubscribingRequiresGameToOpen": "订阅或取消订阅插件时， Skyve 会启动游戏并在片刻后关闭游戏（请确保已打开加速器 / VPN）。\n\n如果你看到 Steam 游戏启动界面，请点击“开始游戏”。",
   "HelpSupport": "帮助与支持",
   "DisableFpsBoosterDebug": "您正在使用 Debug Mono，是否要禁用 FPS Booster 模组以获取更好的日志？",
   "LogZipCopy_Tip": "创建一个压缩文件夹（其中包含帮助您解决问题所需的所有日志文件），您可以将其直接粘贴到 QQ 群或者 Discord 频道的对话框中发送。",
@@ -485,5 +486,27 @@
   "UnknownUser": "未知用户",
   "AddMeaningfulDescription": "发送申请前，请先添加一个有意义的描述。",
   "RedownloadComplete": "Skyve 已重新下载存在问题的插件。",
-  "CleanupComplete": "Skyve 已经将您已取消订阅（但没删除干净）的插件清理完毕。"
+  "CleanupComplete": "Skyve 已经将您已取消订阅（但没删除干净）的插件清理完毕。",
+  "PendingSubscribeTo": {
+    "One": "当前有 {0} 个等待中的订阅操作",
+    "Plural": "当前有 {0} 个等待中的订阅操作"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "当前有 {0} 个等待中的取消订阅操作",
+    "Plural": "当前有 {0} 个等待中的取消订阅操作"
+  },
+  "CancelSubs": "移除所有等待中的订阅操作",
+  "ApplySubs": "启动游戏片刻以开始进行订阅",
+  "SubsPendingInfo": "这里将显示您要订阅的插件。\n一旦启动游戏，将从 Steam 创意工坊订阅这些插件。",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "订阅插件后立即开始下载，取消订阅插件后立即删除残留文件",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "强制下载或强制删除插件，而不是等到插件真正被订阅或取消订阅时，才下载或删除。",
+  "ThisSubscribesTo": {
+    "One": "在此进程中，您将订阅 {0} 个插件。",
+    "Plural": "在此进程中，您将订阅 {0} 个插件。"
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "在此进程中，您将取消订阅 {0} 个插件。",
+    "Plural": "在此进程中，您将取消订阅 {0} 个插件。"
+  },
+  "ViewThisProfilesPackages": "查看此配置文件的内容"
 }

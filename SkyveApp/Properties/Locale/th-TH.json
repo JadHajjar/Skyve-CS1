@@ -94,6 +94,7 @@
   "OpenLocalFolder": "เปิดโฟลเดอร์ภายในเครื่องที่มีแพ็กเกจนี้",
   "ViewOnSteam": "ดูแพ็กเกจนี้บนสตีม",
   "ReDownloadPackage": "ดาวน์โหลดแพ็กเกจนี้อีกครั้ง",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "คัดลอกสตีมไอดี",
   "OpenAuthorPage": "เปิดหน้าเพจของผู้สร้างบนสตีม",
   "Sorting_Default": "เรียงตามค่าเริ่มต้น",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "เลือกไฟล์เซฟเกมที่ต้องการให้ทำการโหลดอัตโนมัติเมื่อคุณเปิดเกม",
   "LoadProfile": "โหลดโพร์ไฟล์",
   "CopyAuthorSteamId": "คัดลอกไอดีสตีมของผู้สร้าง",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
   "ShowingFilteredItems": "แสดง {0} จาก {1} รายการทั้งหมด",
   "DropNewProfile": "วางหรือเลือกไฟล์ .json หรือ .xml ของโพร์ไฟล์ตรงนี้เพื่อนำเข้า",
   "ThemeUIScale": "ธิมและขนาด UI",
@@ -238,6 +238,7 @@
   "WouldYouLikeToSkipThose": "คุณต้องการข้ามแพ็กเกจเหล่านั้นหรือไม่?",
   "LOTWillRestart": "Skyve จะปิดชั่วคราวในระหว่างกระบวนการอัปเดต แล้วจะดำเนินการต่อโดยอัตโนมัติเมื่อการอัปเดตเสร็จสิ้นแล้ว",
   "UpdatingLot": "ขณะนี้ Skyve กำลังรับการอัปเดต กรุณารอสักครู่...",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "ช่วยเหลือและสนับสนุน",
   "DisableFpsBoosterDebug": "คุณกำลังเปิดใช้งาน FPS Booster ในระหว่างที่ใช้ Debug Mono ต้องการปิด FPS Booster เพื่อให้เก็บสามารถ Log ได้ดียิ่งกว่าไหม?",
@@ -485,5 +486,27 @@
   "UnknownUser": "Unknown User",
   "AddMeaningfulDescription": "Please add a meaningful description to your request.",
   "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }

@@ -94,6 +94,7 @@
   "OpenLocalFolder": "Avaa paikallinen kansio, joka sisältää tämän paketin",
   "ViewOnSteam": "Katso tämä paketti Steamissa",
   "ReDownloadPackage": "Lataa tämä paketti uudelleen",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Kopioi tämä höyrytunnus",
   "OpenAuthorPage": "Avaa kirjoittajan sivu",
   "Sorting_Default": "Lajittelu",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "Valitse tallennustiedosto, joka ladataan automaattisesti, kun avaat pelin",
   "LoadProfile": "Lataa Profiili",
   "CopyAuthorSteamId": "Kopioi kirjoittajan Steam-tunnus",
-  "CloseCitiesToSub": "You need to close Cities: Skylines to subscribe or unsubscribe from packages",
   "ShowingFilteredItems": "Näytetään {0} yhteensä {1} kohdetta",
   "DropNewProfile": "Pudota tai valitse profiilin .json tai .xml-tiedosto tänne tuodaksesi sen",
   "ThemeUIScale": "Teeman & Käyttöliittymän Mittakaava",
@@ -238,6 +238,7 @@
   "WouldYouLikeToSkipThose": "Haluatko ohittaa nämä paketit?",
   "LOTWillRestart": "Skyve sulkeutuu väliaikaisesti päivitysprosessin aikana, mutta se jatkuu automaattisesti, kun päivitys on valmis.",
   "UpdatingLot": "Skyveä päivitetään parhaillaan. Odota...",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Apu Ja Tuki",
   "DisableFpsBoosterDebug": "Sinulla on FPS Booster käytössä, kun käytät debug mono, haluat poistaa sen käytöstä saadaksesi parempia lokeja?",
@@ -485,5 +486,27 @@
   "UnknownUser": "Tuntematon käyttäjä",
   "AddMeaningfulDescription": "Ole hyvä ja lisää tarkoituksellinen kuvaus pyyntöösi.",
   "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads."
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }

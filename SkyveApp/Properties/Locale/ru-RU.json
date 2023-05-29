@@ -94,6 +94,7 @@
   "OpenLocalFolder": "Открыть локальную папку, содержащую этот пакет",
   "ViewOnSteam": "Посмотреть этот пакет в Steam",
   "ReDownloadPackage": "Повторно загрузить этот пакет",
+  "ForceDownloadPackage": "Force-download this package",
   "CopySteamId": "Копировать Steam ID",
   "OpenAuthorPage": "Открыть страницу автора в Steam",
   "Sorting_Default": "Сортировка по умолчанию",
@@ -179,7 +180,6 @@
   "SaveFileInfo": "Выберите файл сохранения для автоматической загрузки при открытии игры",
   "LoadProfile": "Загрузить профиль",
   "CopyAuthorSteamId": "Копировать Steam ID автора",
-  "CloseCitiesToSub": "Вам нужно закрыть Cities: Skylines для того, чтобы подписаться или отписаться от пакетов",
   "ShowingFilteredItems": "Показано {0} из {1} элементов",
   "DropNewProfile": "Перетащите или выберите файл .json или .xml для импорта",
   "ThemeUIScale": "Тема и масштаб интерфейса",
@@ -238,6 +238,7 @@
   "WouldYouLikeToSkipThose": "Вы действительно хотите пропустить эти пакеты?",
   "LOTWillRestart": "Skyve временно закроется во время процесса обновления, но он автоматически возобновится после завершения обновления.",
   "UpdatingLot": "Skyve в настоящее время обновляется. Пожалуйста, подождите...",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
   "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Помощь и Поддержка",
   "DisableFpsBoosterDebug": "У вас активирован FPS Booster и при включенном режиме отладки mono, хотите ли вы отключить его для получения более подробных логов?",
@@ -485,5 +486,27 @@
   "UnknownUser": "Неизвестный пользователь",
   "AddMeaningfulDescription": "Пожалуйста, добавьте содержательное описание к вашему запросу.",
   "RedownloadComplete": "Skyve завершил подписку пакетов с ошибками.",
-  "CleanupComplete": "Skyve закончил очистку ваших загрузок мастерской."
+  "CleanupComplete": "Skyve закончил очистку ваших загрузок мастерской.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents"
 }
