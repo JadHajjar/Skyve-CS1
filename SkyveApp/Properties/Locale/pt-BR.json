@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Abra a pasta local que contém este pacote",
   "ViewOnSteam": "Veja este pacote na Steam",
   "ReDownloadPackage": "Baixe o pacote novamente",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "Baixar este pacote",
   "CopySteamId": "Copie este número de identificação da Steam",
   "OpenAuthorPage": "Abra a página do autor na Steam",
   "Sorting_Default": "Classificação padrão",
@@ -160,8 +160,8 @@
   "TotalItems": "Total de Itens",
   "UnsubscribeAll": "Cancelar assinatura de todos os itens exibidos",
   "SubscribeAll": "Assinar todos os itens exibidos",
-  "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Re-Download all displayed & downloaded items",
+  "DownloadAll": "Baixe todos os itens exibidos e ausentes",
+  "ReDownloadAll": "Baixe novamente todos os itens exibidos e baixados",
   "MissingItemsRemain": "Alguns itens ainda estão faltando neste perfil. Ao salvar o perfil no futuro, esses itens serão removidos dele.",
   "ModIsPrivate": "O item é privado",
   "HidePseudoMods": "Ocultar pseudo-mods como mesclas de temas",
@@ -498,11 +498,11 @@
     "Plural": "{0} Itens com cancelamento de assinaturas pendentes"
   },
   "CancelSubs": "Cancelar todas as assinaturas pendentes",
-  "CancelDownloads": "Cancel all pending downloads",
+  "CancelDownloads": "Cancelar todos os downloads pendentes",
   "ApplySubs": "Inicie o jogo por um instante para aplicar assinaturas pendentes",
-  "ApplyDownloads": "Force Steam to download all pending packages",
+  "ApplyDownloads": "Forçar o Steam a baixar todos os pacotes pendentes",
   "SubsPendingInfo": "Os pacotes aos quais você se inscreveu estão agrupados aqui.\nAssim que você abrir o jogo, esses itens serão inscritos na Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
+  "DownloadsPendingInfo": "Os pacotes que você assinou e ainda não baixou estão agrupados aqui.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Comece a baixar ou remover os pacotes imediatamente ao assinar, ou cancelar assinatura",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Força baixar ou remover os pacotes invés de esperar até que sejam assinados, ou cancelados.",
   "ThisSubscribesTo": {
@@ -515,11 +515,11 @@
   },
   "ViewThisProfilesPackages": "Ver conteúdo deste perfil",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} item pendente para baixar",
+    "Plural": "{0} itens pendentes para baixar"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} item pendente de remoção",
+    "Plural": "{0} itens pendentes de remoção"
   }
 }
