@@ -396,5 +396,55 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "修復與改動",
+                "Changes": [
+                    "新增功能：在所有問題修復完畢，或沒刪乾淨的外掛清理完畢後，Skyve 會彈出一條通知消息。",
+                    "修復了匯入 LOT 1 的組態檔案可能卡死的罕見問題。",
+                    "修復了選擇某些語言時，更新日誌無法打開的問題。",
+                    "可能修復了無法大量訂閱物品的問題。"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Reworked Subscription Process",
+                "Changes": [
+                    "You can now subscribe to packages while the game is open.",
+                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
+                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                ]
+            },
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Added a \"Force download\" option in packages' right-click menu.",
+                    "Added more context to some popups",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the profile list not updating instantly.",
+                    "Fixed profile packages not showing their workshop name.",
+                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
+                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
     }
 ]

@@ -96,9 +96,13 @@
   "Red": "Punainen",
   "Green": "Vihreä",
   "Yellow": "Keltainen",
+  "Download": "Download",
+  "Remove": "Remove",
   "Welcome to Theme Changer!": "Tervetuloa teemavaihtajaan!",
   "Customize the size and colors in the App however you want to.": "Muokkaa kokoja ja värejä sovelluksessa kuin haluat.",
   "Click on any color to change it, or right-click to reset it.": "Klikkaa mitä tahansa väriä muuttaaksesi sitä, tai hiiren oikealla painikkeella nollataksesi sen.",
   "Custom Theme": "Mukautettu teema",
-  "Do you want to apply your changes before leaving?": "Haluatko tallentaa kaikki muutokset ennen poistumista?"
+  "Do you want to apply your changes before leaving?": "Haluatko tallentaa kaikki muutokset ennen poistumista?",
+  "TaskCompleted": "Task Completed",
+  "UnexpectedError": "An unexpected error occurred"
 }

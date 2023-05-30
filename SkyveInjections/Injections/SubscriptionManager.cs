@@ -4,6 +4,10 @@ using ColossalFramework.PlatformServices;
 
 using KianCommons;
 
+using SkyveApp.Domain.Utilities;
+
+using SkyveMod.Util;
+
 using SkyveShared;
 
 using System;
@@ -13,7 +17,6 @@ using System.IO;
 using System.Linq;
 
 using UnityEngine;
-using UnityEngine.UI;
 
 using static KianCommons.ReflectionHelpers;
 
@@ -432,6 +435,8 @@ public static class SubscriptionManager
 
 		if (SteamUtilities.GetStub())
 		{
+			SubscriptionUtil.Run();
+
 			System.Diagnostics.Process.GetCurrentProcess().Kill();
 
 			return true;
@@ -469,20 +474,26 @@ public static class SubscriptionManager
 
 public static class CMPatchHelpers
 {
-	private static List<string> subscribedItems;
+	private static readonly SubscriptionTransfer subscriptionTransfer;
+	private static readonly List<ulong> subscribedItems;
 
 	static CMPatchHelpers()
 	{
-		subscribedItems = PlatformService.workshop.GetSubscribedItems().Select(x => x.AsUInt64.ToString()).ToList();
+		var filePath = Path.Combine(DataLocation.localApplicationData, Path.Combine("Skyve", "SubscriptionTransfer.xml"));
+		
+		subscriptionTransfer = File.Exists(filePath) ? SharedUtil.Deserialize<SubscriptionTransfer>(filePath) ?? new() : new();
+		subscribedItems = PlatformService.workshop.GetSubscribedItems().Select(x => x.AsUInt64).ToList();
 	}
 
 	public static bool IsDirectoryExcluded(string path)
 	{
+		var workshopId = Path.GetDirectoryName(path) == "255710" && ulong.TryParse(Path.GetFileName(path), out var id) ? id : 0;
+
 		return
 			path.IsNullOrWhiteSpace() ||
 			path[0] == '_' ||
-			Directory.Exists("_" + path) ||
-			(!subscribedItems.Contains(Path.GetFileName(path)) && Path.GetDirectoryName(path) == "255710")||
+			(workshopId > 0 && ((!subscribedItems.Contains(workshopId) && !(subscriptionTransfer.SubscribeTo?.Contains(workshopId) ?? false)) ||
+			(subscriptionTransfer.UnsubscribingFrom?.Contains(workshopId) ?? false))) ||
 			File.Exists(Path.Combine(path, SteamUtilities.EXCLUDED_FILE_NAME));
 	}
 

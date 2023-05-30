@@ -1063,4 +1063,22 @@
   <data name="I_Snooze_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_Snooze_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_ViewFile_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_ViewFile_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_ViewFile_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_ViewFile_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_ViewFile_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_ViewFile_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Install_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Install_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Install_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Install_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Install_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Install_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

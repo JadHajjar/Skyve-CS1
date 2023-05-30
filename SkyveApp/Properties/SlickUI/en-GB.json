@@ -96,9 +96,13 @@
   "Red": "Red",
   "Green": "Green",
   "Yellow": "Yellow",
+  "Download": "Download",
+  "Remove": "Remove",
   "Welcome to Theme Changer!": "Welcome to Theme Changer!",
   "Customize the size and colors in the App however you want to.": "Customise the size and colours in the App however you want to.",
   "Click on any color to change it, or right-click to reset it.": "Click on any colour to change it, or right-click to reset it.",
   "Custom Theme": "Custom Theme",
-  "Do you want to apply your changes before leaving?": "Do you want to apply your changes before leaving?"
+  "Do you want to apply your changes before leaving?": "Do you want to apply your changes before leaving?",
+  "TaskCompleted": "Task Completed",
+  "UnexpectedError": "An unexpected error occurred"
 }

@@ -94,6 +94,7 @@
   "OpenLocalFolder": "افتح مجلد محلي يحتوي على هذه الحزمة",
   "ViewOnSteam": "عرض هذه الحزمة على Steam",
   "ReDownloadPackage": "إعادة تنزيل هذه الحزمة",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "انسخ معرف البخار هذا",
   "OpenAuthorPage": "افتح صفحة المؤلف",
   "Sorting_Default": "الفرز الافتراضى",
@@ -159,6 +160,8 @@
   "TotalItems": "إجمالي العناصر",
   "UnsubscribeAll": "إلغاء الاشتراك من جميع العناصر المعروضة",
   "SubscribeAll": "الاشتراك في جميع العناصر المعروضة",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "بعض العناصر لا تزال مفقودة من هذا الملف الشخصي. سيؤدي حفظ الملف الشخصي في المستقبل إلى إزالة هذه العناصر منه.",
   "ModIsPrivate": "العنصر خاص",
   "HidePseudoMods": "إخفاء موود الزائفة مثل خلطات السمة",
@@ -179,7 +182,6 @@
   "SaveFileInfo": "حدد ملف حفظ اللعبة ليتم تحميله تلقائيا عند فتح اللعبة",
   "LoadProfile": "تحميل الملف الشخصي",
   "CopyAuthorSteamId": "نسخ معرف الستيم الخاص بالمؤلف",
-  "CloseCitiesToSub": "تحتاج إلى إغلاق المدن: Skylines للاشتراك أو إلغاء الاشتراك من الحزم",
   "ShowingFilteredItems": "عرض {0} من إجمالي العناصر {1}",
   "DropNewProfile": "إسقاط أو تحديد ملف الملف الشخصي .json أو .xml هنا لاستيراده",
   "ThemeUIScale": "قالب و مقياس واجهة المستخدم",
@@ -221,6 +223,7 @@
   "AreYouSure": "هل أنت متأكد من أنك تريد المتابعة؟",
   "MapFileInfo": "حدد ملف خريطة لبدء لعبة جديدة مع",
   "AssetOutOfDate": "الأصل قديم التاريخ",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "الأصول قديمة",
   "CopyVersionNumber": "نسخ رقم الإصدار",
   "SubscribeToItem": "اشترك في هذا العنصر",
@@ -237,7 +240,8 @@
   "WouldYouLikeToSkipThose": "هل تريد تخطي هذه الحزم؟",
   "LOTWillRestart": "سيتم إغلاق سماء مؤقتاً أثناء عملية التحديث، ولكن سيتم استئنافها تلقائياً بمجرد اكتمال التحديث.",
   "UpdatingLot": "يتم حالياً تحديث السماء. الرجاء الانتظار...",
-  "SubscribingRequiresGameToOpen": "يتطلب الاشتراك أو إلغاء الاشتراك من الحزم فتح اللعبة لحظة قصيرة. عندما ترى مشغل اللعبة، انقر على اللعب للمتابعة.",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
+  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "المساعدة والدعم",
   "DisableFpsBoosterDebug": "لديك معزز FPS أثناء استخدام التصحيح الأحادي ، هل ترغب في تعطيله للحصول على سجلات أفضل؟",
   "LogZipCopy_Tip": "إنشاء ملف مضغوط يحتوي على جميع معلومات التسجيل المطلوبة لشخص ما لمساعدتك في مشكلتك. يمكنك لصقه مباشرة في قناة الشقاق.",
@@ -482,5 +486,40 @@
   "Missing": "مفقود",
   "LoggedInAs": "Logged in as",
   "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

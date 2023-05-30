@@ -343,7 +343,7 @@
                     "Un raccourci sera désormais créé lorsque vous lancez pour la première fois Skyve si vous aviez LOM2 précédemment.",
                     "Correction d'un problème rare où les infos de compatibilités ne chargeaient pas.",
                     "Activation de la possibilité de demander une révision pour un paquet qui est actuellement cassé.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "La sensibilité de la notification « partiellement téléchargée » a été allégée."
                 ]
             }
         ]
@@ -356,7 +356,7 @@
                 "Name": "Changements",
                 "Changes": [
                     "Amélioration des performances de l'application. Chargement plus rapide et moins de blocages attendus.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+                    "Correction d'une interaction entre les mods similaires affichés dans le rapport de compatibilité lorsque vous n'en avez qu'un seul.",
                     "Correction de mod détecté, à tort, dans le dossier des ressources local."
                 ]
             }
@@ -370,8 +370,8 @@
                 "Name": "Corrections",
                 "Changes": [
                     "Correction de l'onglet des options qui n'apparaissaient pas sur macOS et Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Correction de l'onglet Aide et Logs qui ne chargeaient pas automatiquement votre journal actuel.",
+                    "Correction du chemin d'accès du fichier journal erroné sous Linux."
                 ]
             }
         ]
@@ -384,15 +384,65 @@
                 "Name": "Changements",
                 "Changes": [
                     "Les panneaux Steam dans le menu principal sont maintenant affichés par défaut, vous pouvez toujours les masquer dans les paramètres du mod.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Demander un examen nécessite maintenant une description valide et envoie également vos logs avec la demande. Un avertissement est affiché à côté du bouton « Envoyer».",
+                    "Réduction du niveau de rapport d'un mod qui n'a pas été mis à jour depuis un certain temps à 'Info' donc il ne vous en avertit pas."
                 ]
             },
             {
                 "Name": "Corrections",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
+                    "Correction du résumé de l'actif qui ne s'affichait pas dans le tableau de bord.",
                     "Correction du Status obsolète."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Corrections & Changements",
+                "Changes": [
+                    "Ajout d'un message pour vous informer de la fin de la correction de tous les problèmes et de la fin du nettoyage.",
+                    "Correction d'un bug rare où le chargement d'un profil LOT 1 pouvait continuer à se charger pour toujours.",
+                    "Correction du changelog qui ne s'ouvre pas avec certaines langues.",
+                    "Correction potentielle lors de l'abonnement à une grande quantité d'éléments échoués/ne fonctionnant pas."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Le système d'abonnement a été retravaillé",
+                "Changes": [
+                    "Vous pouvez désormais vous abonner à des paquets pendant que le jeu est ouvert.",
+                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
+                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "Ajout d'une option avancée pour forcer le téléchargement ou la suppression de paquets dès que vous vous abonnez/désabonnez dans Skyve.",
+                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                ]
+            },
+            {
+                "Name": "Nouveau",
+                "Changes": [
+                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Ajout d'une option \"Forcer le téléchargement\" en faisant clique droit sur un paquet.",
+                    "Added more context to some popups",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the profile list not updating instantly.",
+                    "Les profils de paquets montrent désormais leur nom Workshop.",
+                    "Les paquets chargent correctement les informations Steam dès la première fois quand vous visionnez leur profil ou collection.",
+                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Improved the performance for people with a lot of mods."
                 ]
             }
         ]

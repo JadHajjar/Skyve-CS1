@@ -293,9 +293,11 @@ internal static class CompatibilityUtil
 
 	internal static IndexedPackage? GetPackageData(IPackage package)
 	{
-		if (package.Workshop)
+		var steamId = package.Workshop? package.SteamId : package.Package?.Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(package.Package.Mod.FileName));
+
+		if (steamId > 0)
 		{
-			var packageData = CompatibilityManager.CompatibilityData.Packages.TryGet(package.SteamId);
+			var packageData = CompatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
 			if (packageData is null)
 			{
@@ -307,12 +309,12 @@ internal static class CompatibilityUtil
 			return packageData;
 		}
 
-		if (package.Package?.Mod is not null)
-		{
-			return CompatibilityManager.CompatibilityData.Packages.Values
-				.AllWhere(x => x.Package.FileName == Path.GetFileName(package.Package.Mod.FileName))
-				.FirstOrAny(x => !x.Statuses.ContainsKey(StatusType.TestVersion));
-		}
+		//if (package.Package?.Mod is not null)
+		//{
+		//	return CompatibilityManager.CompatibilityData.Packages.Values
+		//		.AllWhere(x => x.Package.FileName == Path.GetFileName(package.Package.Mod.FileName))
+		//		.FirstOrAny(x => !x.Statuses.ContainsKey(StatusType.TestVersion));
+		//}
 
 		return null;
 	}

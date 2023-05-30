@@ -96,9 +96,13 @@
   "Red": "Rosso",
   "Green": "Verde",
   "Yellow": "Giallo",
+  "Download": "Download",
+  "Remove": "Remove",
   "Welcome to Theme Changer!": "Benvenuto in Modifica Temi!",
   "Customize the size and colors in the App however you want to.": "Personalizza dimensione e colori dell'App come preferisci.",
   "Click on any color to change it, or right-click to reset it.": "Fai clic su qualsiasi colore per cambiarlo, o fai clic col tasto destro per reimpostarlo.",
   "Custom Theme": "Tema Personalizzato",
-  "Do you want to apply your changes before leaving?": "Vuoi applicare le modifiche prima di uscire?"
+  "Do you want to apply your changes before leaving?": "Vuoi applicare le modifiche prima di uscire?",
+  "TaskCompleted": "Attività Completata",
+  "UnexpectedError": "Si è verificato un errore imprevisto"
 }

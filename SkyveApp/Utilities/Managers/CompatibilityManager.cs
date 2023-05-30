@@ -264,9 +264,9 @@ public static class CompatibilityManager
 		if (package.Package?.Mod is not null)
 		{
 			var modName = Path.GetFileName(package.Package.Mod.FileName);
-			var duplicate = CentralManager.Mods.AllWhere(x => x.IsIncluded && modName == Path.GetFileName(x.FileName));
+			var duplicate = CentralManager.Mods.AllWhere(x => modName == Path.GetFileName(x.FileName));
 
-			if (duplicate.Count > 1)
+			if (duplicate.Count > 1 && duplicate.Count(x => x.IsIncluded) > 1)
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
@@ -287,7 +287,7 @@ public static class CompatibilityManager
 
 		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
 
-		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable) && !package.Incompatible && !author.Malicious)
+		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable) && (!package.Workshop || (!package.Incompatible && !author.Malicious)))
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, null, false), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
 		}
@@ -300,7 +300,7 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (packageData.Package.Type is PackageType.GenericPackage)
+		if (package.Workshop && packageData.Package.Type is PackageType.GenericPackage)
 		{
 			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && !info.Links.Any(x => x.Type is LinkType.Github))
 			{
@@ -384,14 +384,14 @@ public static class CompatibilityManager
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), LocaleCR.Get($"Stability_{PackageStability.Local}").Format(SteamUtil.GetItem(packageData.Package.SteamId)?.CleanName()), new PseudoPackage[] { new(packageData.Package.SteamId) });
 		}
 
-		if (!author.Malicious && !package.Incompatible)
+		if (package.Workshop && !author.Malicious && !package.Incompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), ((packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed) ? (LocaleCR.LastReviewDate.Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n") : string.Empty) + LocaleCR.RequestReviewInfo, new PseudoPackage[0]);
 		}
 
 #if DEBUG
 		sw.Stop();
-		if (sw.ElapsedMilliseconds > 100)
+		if (sw.ElapsedMilliseconds > 100 && package.Workshop)
 		{
 			Log.Debug($"CR ({sw.Elapsed.ToReadableString()}) for {package.Name}");
 		}

@@ -96,9 +96,13 @@
   "Red": "紅色",
   "Green": "綠色",
   "Yellow": "黃色",
+  "Download": "Download",
+  "Remove": "Remove",
   "Welcome to Theme Changer!": "歡迎使用主題編輯器！",
   "Customize the size and colors in the App however you want to.": "根據自己的需要自訂 LOT2 應用程式的介面大小和顏色。",
   "Click on any color to change it, or right-click to reset it.": "左鍵按一下以更改顏色，按右鍵以重置顏色。",
   "Custom Theme": "自訂主題",
-  "Do you want to apply your changes before leaving?": "即將離開此頁面，要保存並應用更改嗎？"
+  "Do you want to apply your changes before leaving?": "即將離開此頁面，要保存並應用更改嗎？",
+  "TaskCompleted": "任務已完成",
+  "UnexpectedError": "出現意外錯誤！"
 }

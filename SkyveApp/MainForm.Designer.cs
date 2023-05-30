@@ -51,7 +51,9 @@
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.L_Text = new System.Windows.Forms.Label();
 			this.L_Version = new System.Windows.Forms.Label();
+			this.subscriptionInfoControl1 = new SkyveApp.UserInterface.Content.SubscriptionInfoControl();
 			this.PI_DLCs = new SlickControls.PanelItem();
+			this.downloadsInfoControl1 = new SkyveApp.UserInterface.Content.DownloadsInfoControl();
 			this.base_P_SideControls.SuspendLayout();
 			this.base_P_Container.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -67,8 +69,8 @@
 			this.base_P_SideControls.Controls.Add(this.tableLayoutPanel1);
 			this.base_P_SideControls.Font = new System.Drawing.Font("Nirmala UI", 6.75F);
 			this.base_P_SideControls.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(129)))), ((int)(((byte)(150)))));
-			this.base_P_SideControls.Location = new System.Drawing.Point(9, 516);
-			this.base_P_SideControls.Size = new System.Drawing.Size(282, 19);
+			this.base_P_SideControls.Location = new System.Drawing.Point(7, 522);
+			this.base_P_SideControls.Size = new System.Drawing.Size(236, 19);
 			// 
 			// base_P_Container
 			// 
@@ -190,14 +192,18 @@
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.L_Text, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.L_Version, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.L_Text, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.L_Version, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.subscriptionInfoControl1, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.downloadsInfoControl1, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 1;
+			this.tableLayoutPanel1.RowCount = 3;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(282, 19);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(236, 19);
 			this.tableLayoutPanel1.TabIndex = 34;
 			// 
 			// L_Text
@@ -216,13 +222,23 @@
 			// 
 			this.L_Version.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Version.AutoSize = true;
-			this.L_Version.Location = new System.Drawing.Point(233, 0);
+			this.L_Version.Location = new System.Drawing.Point(187, 0);
 			this.L_Version.Margin = new System.Windows.Forms.Padding(0);
 			this.L_Version.Name = "L_Version";
 			this.L_Version.Padding = new System.Windows.Forms.Padding(2);
 			this.L_Version.Size = new System.Drawing.Size(49, 19);
 			this.L_Version.TabIndex = 30;
 			this.L_Version.Text = "Version";
+			// 
+			// subscriptionInfoControl1
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.subscriptionInfoControl1, 2);
+			this.subscriptionInfoControl1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.subscriptionInfoControl1.Location = new System.Drawing.Point(3, 3);
+			this.subscriptionInfoControl1.Name = "subscriptionInfoControl1";
+			this.subscriptionInfoControl1.Size = new System.Drawing.Size(230, 25);
+			this.subscriptionInfoControl1.TabIndex = 32;
+			this.subscriptionInfoControl1.Visible = false;
 			// 
 			// PI_DLCs
 			// 
@@ -236,13 +252,23 @@
 			this.PI_DLCs.Text = "DLCs";
 			this.PI_DLCs.OnClick += new System.Windows.Forms.MouseEventHandler(this.PI_DLCs_OnClick);
 			// 
+			// downloadsInfoControl1
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.downloadsInfoControl1, 2);
+			this.downloadsInfoControl1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.downloadsInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.downloadsInfoControl1.Name = "downloadsInfoControl1";
+			this.downloadsInfoControl1.Size = new System.Drawing.Size(150, 43);
+			this.downloadsInfoControl1.TabIndex = 33;
+			this.downloadsInfoControl1.Visible = false;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(1000, 575);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.IconBounds = new System.Drawing.Rectangle(134, 41, 14, 42);
+			this.IconBounds = new System.Drawing.Rectangle(111, 31, 14, 42);
 			this.MaximizeBox = true;
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 1920, 1032);
 			this.MinimizeBox = true;
@@ -282,5 +308,7 @@
 		private System.Windows.Forms.Label L_Text;
 		private System.Windows.Forms.Label L_Version;
 		internal SlickControls.PanelItem PI_DLCs;
+		private UserInterface.Content.SubscriptionInfoControl subscriptionInfoControl1;
+		private UserInterface.Content.DownloadsInfoControl downloadsInfoControl1;
 	}
 }

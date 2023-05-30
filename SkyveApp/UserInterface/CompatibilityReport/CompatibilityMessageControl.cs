@@ -298,7 +298,7 @@ internal class CompatibilityMessageControl : SlickControl
 		}
 	}
 
-	protected override async void OnMouseClick(MouseEventArgs e)
+	protected override void OnMouseClick(MouseEventArgs e)
 	{
 		base.OnMouseClick(e);
 
@@ -344,7 +344,7 @@ internal class CompatibilityMessageControl : SlickControl
 			switch (Message.Status.Action)
 			{
 				case StatusAction.SubscribeToPackages:
-					await CitiesManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
+					SubscriptionsManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
 					ContentUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.Package)!, true);
 					ContentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
 					break;
@@ -352,10 +352,10 @@ internal class CompatibilityMessageControl : SlickControl
 					CompatibilityManager.ToggleSnoozed(Message);
 					break;
 				case StatusAction.UnsubscribeThis:
-					await CitiesManager.UnSubscribe(new[] { PackageCompatibilityReportControl.Package.SteamId });
+					SubscriptionsManager.UnSubscribe(new[] { PackageCompatibilityReportControl.Package.SteamId });
 					break;
 				case StatusAction.UnsubscribeOther:
-					await CitiesManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
+					SubscriptionsManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
 					break;
 				case StatusAction.ExcludeThis:
 					PackageCompatibilityReportControl.Package.IsIncluded = false;
@@ -376,7 +376,7 @@ internal class CompatibilityMessageControl : SlickControl
 		}
 	}
 
-	private async void Clicked(PseudoPackage item, bool button)
+	private void Clicked(PseudoPackage item, bool button)
 	{
 		var package = item.Package;
 
@@ -406,7 +406,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 			Loading = true;
 
-			await CitiesManager.Subscribe(new[] { item.SteamId });
+			SubscriptionsManager.Subscribe(new[] { item.SteamId });
 		}
 		else
 		{

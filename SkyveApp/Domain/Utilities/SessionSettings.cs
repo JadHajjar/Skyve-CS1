@@ -11,7 +11,8 @@ internal class SessionSettings : ISave
 	public string? CurrentProfile { get; set; }
 	public Rectangle? LastWindowsBounds { get; set; }
 	public bool WindowWasMaximized { get; set; }
-	public bool SubscribeInfoShown { get; set; }
+	public bool SubscribeFirstTimeShown { get; set; }
+	public bool CleanupFirstTimeShown { get; set; }
 	public bool FpsBoosterLogWarning { get; set; }
 	public string? LastVersionNotification { get; set; }
 

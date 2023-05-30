@@ -396,5 +396,55 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni e Cambiamenti",
+                "Changes": [
+                    "Aggiunto un messaggio per avvisare l'utente quando \"Correggi Tutti i Problemi\" e \"Esegui Pulizia\" terminano.",
+                    "Corretto un raro bug per cui il caricamento di un profilo LOT 1 continuava a caricarsi all'infinito.",
+                    "Corrretto il problema con il log delle modifiche che non si apriva con alcune lingue.",
+                    "Potenzialmente risolto l'iscrizione a una grande quantità di elementi che non funzionava/non funzionava."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Processo di Sottoscrizione Relaborato",
+                "Changes": [
+                    "È ora possibile sottoscrivere i pacchetti mentre il gioco è aperto.",
+                    "La sottoscrizione di più elementi consecutivi li metterà in un elenco in attesa, invece di aprire il gioco ogni volta.",
+                    "Aggiunto un riquadro in basso a sinistra dell'app per segnalare eventuali attività di iscrizione/disiscrizione in sospeso.",
+                    "Aggiunta un'opzione avanzata per forzare il download o l'eliminazione dei pacchetti non appena ci si iscrive/disiscrive ad essi in Skyve.",
+                    "Gli oggetti appena sottoscritti non vengono più ricaricati mentre il gioco è aperto.\nIn questo modo si evitano i blocchi del gioco e il malfunzionamento delle mod."
+                ]
+            },
+            {
+                "Name": "Nuovo",
+                "Changes": [
+                    "Aggiunta la voce \"Visualizza i contenuti di questo Profilo\" nel menu del tasto destro del mouse dei profili.",
+                    "Aggiunta l'opzione \"Forza download\" nel menu del tasto destro del mouse dei pacchetti.",
+                    "Aggiunto un maggiore contesto ad alcuni popup",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto l'aggiornamento istantaneo dell'elenco dei profili.",
+                    "Corretto il problema dei pacchetti profilo che non mostrano il nome del Workshop.",
+                    "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
+                    "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi.",
+                    "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
     }
 ]

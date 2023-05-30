@@ -214,105 +214,13 @@ public static class CitiesManager
 		return args.ToArray();
 	}
 
-	public static bool RunStub()
+	public static void RunStub()
 	{
-		if (IsRunning())
-		{
-			MessagePrompt.Show(Locale.CloseCitiesToClean, PromptButtons.OK, PromptIcons.Hand, Program.MainForm);
-			return false;
-		}
-
-		if (!CentralManager.SessionSettings.SubscribeInfoShown)
-		{
-			MessagePrompt.Show(Locale.CleanupRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
-
-			CentralManager.SessionSettings.SubscribeInfoShown = true;
-			CentralManager.SessionSettings.Save();
-		}
-
 		var command = $"-applaunch 255710 -stub";
 
 		var file = LocationManager.SteamPathWithExe;
 
 		IOUtil.Execute(file, command);
-
-		return true;
-	}
-
-	public static async Task<bool> Subscribe(IEnumerable<ulong> ids)
-	{
-		return await SubscribePrivate(ids, false);
-	}
-
-	public static async Task<bool> UnSubscribe(IEnumerable<ulong> ids)
-	{
-		return await SubscribePrivate(ids, true);
-	}
-
-	private static async Task<bool> SubscribePrivate(IEnumerable<ulong> ids, bool unsub)
-	{
-		if (!ids.Any())
-		{
-			return false;
-		}
-
-		if (IsRunning())
-		{
-			MessagePrompt.Show(Locale.CloseCitiesToSub, PromptButtons.OK, PromptIcons.Hand, Program.MainForm);
-			return false;
-		}
-
-		if (!CentralManager.SessionSettings.SubscribeInfoShown)
-		{
-			MessagePrompt.Show(Locale.SubscribingRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
-
-			CentralManager.SessionSettings.SubscribeInfoShown = true;
-			CentralManager.SessionSettings.Save();
-		}
-
-		if (unsub)
-		{
-			ContentUtil.DeleteAll(ids);
-		}
-
-		UGCListTransfer.SendList(ids, false);
-
-		var command = unsub ?
-			$"-applaunch 255710 -unsubscribe" :
-			$"-applaunch 255710 -subscribe";
-
-		var file = LocationManager.SteamPathWithExe;
-
-		IOUtil.Execute(file, command);
-
-		if (!unsub && LocationManager.Platform is Platform.Windows)
-		{
-			var stopwatch = Stopwatch.StartNew();
-
-			while (!IsRunning() && stopwatch.ElapsedMilliseconds < 60000)
-			{
-				await Task.Delay(100);
-			}
-
-			while (IsRunning() && stopwatch.ElapsedMilliseconds < 60000)
-			{
-				await Task.Delay(100);
-			}
-		}
-
-		if (!unsub)
-		{
-			await Task.Delay(3000);
-
-			if (LocationManager.Platform is Platform.MacOSX)
-			{
-				SteamUtil.ReDownload(ids.ToArray());
-			}
-
-			SteamUtil.ReDownload(ids.ToArray());
-		}
-
-		return true;
 	}
 
 	public static bool IsRunning()

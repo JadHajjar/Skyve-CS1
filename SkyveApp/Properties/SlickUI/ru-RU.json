@@ -96,9 +96,13 @@
   "Red": "Красный",
   "Green": "Зелёный",
   "Yellow": "Жёлтый",
+  "Download": "Download",
+  "Remove": "Remove",
   "Welcome to Theme Changer!": "Добро пожаловать в \"Редактор темы\"!",
   "Customize the size and colors in the App however you want to.": "Настройте размеры и цвета в приложении, как вы пожелаете.",
   "Click on any color to change it, or right-click to reset it.": "Нажмите, чтобы изменить на любой цвет, или щелкните ПКМ, чтобы сбросить его.",
   "Custom Theme": "Настраиваемая тема",
-  "Do you want to apply your changes before leaving?": "Вы хотите применить изменения перед закрытием?"
+  "Do you want to apply your changes before leaving?": "Вы хотите применить изменения перед закрытием?",
+  "TaskCompleted": "Задача выполнена",
+  "UnexpectedError": "Произошла непредвиденная ошибка"
 }

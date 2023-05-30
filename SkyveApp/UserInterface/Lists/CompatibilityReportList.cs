@@ -138,7 +138,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		return rects.Contain(location);
 	}
 
-	protected override async void OnItemMouseClick(DrawableItem<CompatibilityInfo> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<CompatibilityInfo> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -201,7 +201,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			{
 				if (item.Item.Package.Package is null)
 				{
-					await CitiesManager.Subscribe(new[] { item.Item.Package.SteamId });
+					SubscriptionsManager.Subscribe(new[] { item.Item.Package.SteamId });
 					return;
 				}
 
@@ -268,7 +268,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			switch (Message.Status.Action)
 			{
 				case StatusAction.SubscribeToPackages:
-					await CitiesManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
+					SubscriptionsManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
 					ContentUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.Package)!, true);
 					ContentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
 					break;
@@ -277,10 +277,10 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 					FilterChanged();
 					break;
 				case StatusAction.UnsubscribeThis:
-					await CitiesManager.UnSubscribe(new[] { item.Item.Package.SteamId });
+					SubscriptionsManager.UnSubscribe(new[] { item.Item.Package.SteamId });
 					break;
 				case StatusAction.UnsubscribeOther:
-					await CitiesManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
+					SubscriptionsManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
 					break;
 				case StatusAction.ExcludeThis:
 					item.Item.Package.IsIncluded = false;
@@ -745,7 +745,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 	}
 
-	private async void Clicked(CompatibilityInfo info, ReportItem Message, PseudoPackage item, bool button)
+	private void Clicked(CompatibilityInfo info, ReportItem Message, PseudoPackage item, bool button)
 	{
 		var package = item.Package;
 
@@ -774,8 +774,8 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			//_subscribingTo.Add(item);
 
 			Loading = true;
-
-			await CitiesManager.Subscribe(new[] { item.SteamId });
+			
+			SubscriptionsManager.Subscribe(new[] { item.SteamId });
 		}
 		else
 		{

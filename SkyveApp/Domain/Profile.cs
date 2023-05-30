@@ -77,7 +77,7 @@ public class Profile
 		[JsonIgnore, CloneIgnore] public bool Workshop => SteamId != 0;
 		[JsonIgnore, CloneIgnore] public string Folder => RelativePath is null ? string.Empty : IsMod ? ProfileManager.ToLocalPath(RelativePath) : Path.GetDirectoryName(ProfileManager.ToLocalPath(RelativePath));
 		[JsonIgnore, CloneIgnore] public Package? Package => CentralManager.GetPackage(SteamId);
-		[JsonIgnore, CloneIgnore] public SteamWorkshopItem? WorkshopInfo { get; set; }
+		[JsonIgnore, CloneIgnore] public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId);
 		[JsonIgnore, CloneIgnore] public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? new[] { new TagItem(Enums.TagSource.InGame, IsMod ? "Mod" : "Asset") };
 		[JsonIgnore, CloneIgnore] public Bitmap? IconImage => WorkshopInfo?.IconImage;
 		[JsonIgnore, CloneIgnore] public Bitmap? AuthorIconImage => WorkshopInfo?.AuthorIconImage;

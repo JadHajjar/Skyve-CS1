@@ -14,6 +14,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -152,10 +153,11 @@ public partial class PC_ModUtilities : PanelContent
 		catch (Exception ex) { ShowPrompt(ex, LocaleSlickUI.UnexpectedError); }
 	}
 
-	private void B_ReDownload_Click(object sender, EventArgs e)
+	private async void B_ReDownload_Click(object sender, EventArgs e)
 	{
 		B_ReDownload.Loading = true;
-		SteamUtil.ReDownload(CentralManager.Mods.Where(x => x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded).ToArray());
+
+		await Task.Run(() => SteamUtil.Download(CentralManager.Mods.Where(x => x.Workshop && x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded)));
 	}
 
 	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -264,11 +266,24 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void B_Cleanup_Click(object sender, EventArgs e)
 	{
-		if (CitiesManager.RunStub())
+		if (CitiesManager.IsRunning())
 		{
-			B_Cleanup.Loading = true;
-			SubscriptionsUtil.Redownload = true;
+			MessagePrompt.Show(Locale.CloseCitiesToClean, PromptButtons.OK, PromptIcons.Hand, Program.MainForm);
+			return;
 		}
+
+		if (!CentralManager.SessionSettings.CleanupFirstTimeShown)
+		{
+			MessagePrompt.Show(Locale.CleanupRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
+
+			CentralManager.SessionSettings.CleanupFirstTimeShown = true;
+			CentralManager.SessionSettings.Save();
+		}
+
+		CitiesManager.RunStub();
+
+		B_Cleanup.Loading = true;
+		SubscriptionsManager.Redownload = true;
 	}
 
 	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)

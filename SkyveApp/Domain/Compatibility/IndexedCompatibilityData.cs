@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,12 +11,18 @@ public class IndexedCompatibilityData
 	public IndexedCompatibilityData(CompatibilityData? data)
 	{
 		Packages = data?.Packages?.ToDictionary(x => x.SteamId, x => NewMethod(x, data.Packages)) ?? new();
+		PackageNames = new(StringComparer.InvariantCultureIgnoreCase);
 		Authors = data?.Authors?.ToDictionary(x => x.SteamId) ?? new();
-		BlackListedIds = data?.BlackListedIds ?? new();
-		BlackListedNames = data?.BlackListedNames ?? new();
+		BlackListedIds = new(data?.BlackListedIds ?? new());
+		BlackListedNames = new(data?.BlackListedNames ?? new());
 
 		foreach (var item in Packages.Values)
 		{
+			if (item.Package.FileName is not null and not "")
+			{
+				PackageNames[item.Package.FileName] = item.Package.SteamId;
+			}
+
 			item.Load(Packages);
 		}
 
@@ -52,8 +59,9 @@ public class IndexedCompatibilityData
 		return new IndexedPackage(package);
 	}
 
+	public Dictionary<string, ulong> PackageNames { get; }
 	public Dictionary<ulong, IndexedPackage> Packages { get; }
 	public Dictionary<ulong, Author> Authors { get; }
-	public List<ulong> BlackListedIds { get; }
-	public List<string> BlackListedNames { get; }
+	public HashSet<ulong> BlackListedIds { get; }
+	public HashSet<string> BlackListedNames { get; }
 }

@@ -120,6 +120,7 @@ public partial class MainForm : BasePanelForm
 		var useGlow = !ConnectionHandler.IsConnected
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 			|| isGameRunning
+			|| SubscriptionsManager.SubscriptionsPending
 			// || unsaved profile changes changes
 			|| base_PB_Icon.HoverState.HasFlag(HoverState.Pressed);
 
@@ -146,8 +147,14 @@ public partial class MainForm : BasePanelForm
 
 			if (!ConnectionHandler.IsConnected)
 			{
-				minimum = 80;
+				minimum = 60;
 				color = Color.FromArgb(194, 38, 33);
+			}
+
+			if (SubscriptionsManager.SubscriptionsPending)
+			{
+				minimum = 40;
+				color = Color.FromArgb(50, 168, 82);
 			}
 
 			glowIcon.Tint(Sat: color.GetSaturation(), Hue: color.GetHue());

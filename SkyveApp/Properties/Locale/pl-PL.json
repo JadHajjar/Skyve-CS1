@@ -94,6 +94,7 @@
   "OpenLocalFolder": "Otwórz lokalny folder zawierający ten pakiet",
   "ViewOnSteam": "Zobacz ten pakiet na Steam",
   "ReDownloadPackage": "Ponownie pobrać ten pakiet",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "Skopiuj ten identyfikator Steam",
   "OpenAuthorPage": "Otwórz stronę autora na Steamie",
   "Sorting_Default": "Domyślne sortowanie",
@@ -159,6 +160,8 @@
   "TotalItems": "Całkowite przedmioty",
   "UnsubscribeAll": "Anuluj subskrypcję wszystkich wyświetlanych elementów",
   "SubscribeAll": "Subskrybuj wszystkie wyświetlane elementy",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "W tym profilu wciąż brakuje niektórych elementów. Zapisywanie profilu w przyszłości usunie z niego te elementy.",
   "ModIsPrivate": "Przedmiot jest prywatny",
   "HidePseudoMods": "Ukryj pseudo-mody, takie jak miksacje motywowe",
@@ -179,7 +182,6 @@
   "SaveFileInfo": "Wybierz plik do automatycznego wczytywania po otwarciu gry",
   "LoadProfile": "Załaduj profil",
   "CopyAuthorSteamId": "Skopiuj identyfikator Steam autora",
-  "CloseCitiesToSub": "Musisz zamknąć Cities: Skylines aby subskrybować lub anulować subskrypcję pakietów",
   "ShowingFilteredItems": "Wyświetlono {0} z {1} przedmiotów",
   "DropNewProfile": "Upuść lub wybierz plik .json lub .xml profilu tutaj, aby go zaimportować",
   "ThemeUIScale": "Skala motywu i interfejsu użytkownika",
@@ -221,6 +223,7 @@
   "AreYouSure": "Czy na pewno chcesz kontynuować?",
   "MapFileInfo": "Wybierz plik mapy, aby rozpocząć nową grę",
   "AssetOutOfDate": "obiekt jest nieaktualny",
+  "OtherActions": "Other Actions...",
   "AssetOutOfDatePlural": "obiekty są nieaktualne",
   "CopyVersionNumber": "Kopiuj numer wersji",
   "SubscribeToItem": "Subskrybuj ten element",
@@ -237,7 +240,8 @@
   "WouldYouLikeToSkipThose": "Czy chcesz pominąć te paczki?",
   "LOTWillRestart": "Skyve tymczasowo zamknie się podczas procesu aktualizacji, ale zostanie automatycznie wznowiony po zakończeniu aktualizacji.",
   "UpdatingLot": "Skyve jest obecnie aktualizowany. Proszę czekać...",
-  "SubscribingRequiresGameToOpen": "Subskrypcja lub rezygnacja z subskrypcji pakietów wymaga otwarcia gry na krótką chwilę. Kiedy zobaczysz launcher gry, kliknij na Graj, aby kontynuować.",
+  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
+  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
   "HelpSupport": "Pomoc i Wsparcie",
   "DisableFpsBoosterDebug": "Masz włączony Booster FPS podczas używania debugowania mono, czy chcesz go wyłączyć, aby uzyskać lepsze logi?",
   "LogZipCopy_Tip": "Utwórz plik zip zawierający wszystkie informacje o logowaniu potrzebne komuś do pomocy w twoim problemie, możesz wkleić go bezpośrednio na kanał Discord.",
@@ -482,5 +486,40 @@
   "Missing": "Brakujące",
   "LoggedInAs": "Logged in as",
   "UnknownUser": "Unknown User",
-  "AddMeaningfulDescription": "Please add a meaningful description to your request."
+  "AddMeaningfulDescription": "Please add a meaningful description to your request.",
+  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
+  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "PendingSubscribeTo": {
+    "One": "{0} item pending subscription",
+    "Plural": "{0} items pending subscription"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} item pending unsubscription",
+    "Plural": "{0} items pending unsubscription"
+  },
+  "CancelSubs": "Cancel all pending subscriptions",
+  "CancelDownloads": "Cancel all pending downloads",
+  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplyDownloads": "Force Steam to download all pending packages",
+  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ThisSubscribesTo": {
+    "One": "You will be subscribing to {0} package in this process.",
+    "Plural": "You will be subscribing to {0} packages in this process."
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "You will be unsubscribing from {0} package in this process.",
+    "Plural": "You will be unsubscribing from {0} packages in this process."
+  },
+  "ViewThisProfilesPackages": "View this profile's contents",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

@@ -720,9 +720,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () =>DisableAll(this, EventArgs.Empty))
 			, new (string.Empty)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
-			, new (string.Empty)
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
-			, new (string.Empty, show: this is PC_GenericPackageList)
+			, new (Locale.DownloadAll, "I_Install", LC_Items.FilteredItems.Any(x => x.Package is null), action: () => DownloadAll(this, EventArgs.Empty))
+			, new (Locale.ReDownloadAll, "I_ReDownload", LC_Items.FilteredItems.Any(x => x.Package is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+			, new (string.Empty)
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
 		};
@@ -758,19 +759,35 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_Actions.Invalidate();
 	}
 
-	private async void UnsubscribeAll(object sender, EventArgs e)
+	private void DownloadAll(object sender, EventArgs e)
 	{
-		if (ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		SteamUtil.Download(LC_Items.FilteredItems.Where(x => x.Package is null).Select(x => x.SteamId));
+		LC_Items.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void ReDownloadAll(object sender, EventArgs e)
+	{
+		SteamUtil.Download(LC_Items.FilteredItems.Where(x => x.Package is not null).Select(x => x.SteamId));
+		LC_Items.Invalidate();
+		I_Actions.Invalidate();
+	}
+
+	private void UnsubscribeAll(object sender, EventArgs e)
+	{
+		if (ShowPrompt(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisUnsubscribesFrom.FormatPlural(LC_Items.FilteredItems.Count()), PromptButtons.YesNo) != DialogResult.Yes)
 		{
 			return;
 		}
 
 		I_Actions.Loading = true;
-		await CitiesManager.UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
+		SubscriptionsManager.UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
 		I_Actions.Loading = false;
+		LC_Items.Invalidate();
+		I_Actions.Invalidate();
 	}
 
-	private async void SubscribeAll(object sender, EventArgs e)
+	private void SubscribeAll(object sender, EventArgs e)
 	{
 		var removeBadPackages = false;
 		var steamIds = LC_Items.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.SteamId != 0);
@@ -795,12 +812,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure, PromptButtons.YesNo) != DialogResult.Yes)
+		if (steamIds.Count == 0 || ShowPrompt(Locale.AreYouSure + "\r\n\r\n" + Locale.ThisSubscribesTo.FormatPlural(LC_Items.FilteredItems.Count()), PromptButtons.YesNo) != DialogResult.Yes)
 		{
 			return;
 		}
 
-		await CitiesManager.Subscribe(steamIds.Select(x => x.Item.SteamId));
+		SubscriptionsManager.Subscribe(steamIds.Select(x => x.Item.SteamId));
+		LC_Items.Invalidate();
+		I_Actions.Invalidate();
 	}
 
 	private async void DeleteAll(object sender, EventArgs e)

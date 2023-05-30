@@ -94,6 +94,7 @@
   "OpenLocalFolder": "パッケージを含むローカルフォルダを開く",
   "ViewOnSteam": "パッケージをSteamで表示",
   "ReDownloadPackage": "パッケージの再DL",
+  "DownloadPackage": "Download this package",
   "CopySteamId": "SteamのIDをコピー",
   "OpenAuthorPage": "Steamで作者のページを開く",
   "Sorting_Default": "デフォルトのソート",
@@ -159,6 +160,8 @@
   "TotalItems": "合計アイテム",
   "UnsubscribeAll": "表示した全てのアイテムからサブスクを解除",
   "SubscribeAll": "表示した全てのアイテムをサブスクする",
+  "DownloadAll": "Download all displayed & missing items",
+  "ReDownloadAll": "Re-Download all displayed & downloaded items",
   "MissingItemsRemain": "プロファイル内に一部のアイテムがありません。次回以降でプロファイルを保存すると、これらのアイテムは削除されます。",
   "ModIsPrivate": "アイテムが非公開",
   "HidePseudoMods": "テーマミックスのような擬似MODは非表示",
@@ -179,7 +182,6 @@
   "SaveFileInfo": "ゲーム起動時にロードするセーブゲームのファイルを選択",
   "LoadProfile": "プロファイルをロード",
   "CopyAuthorSteamId": "作者のSteam IDをコピー",
-  "CloseCitiesToSub": "パッケージのサブスク操作を行うには、Cities: Skylinesを終了する必要があります。",
   "ShowingFilteredItems": "合計 {1} 個のアイテムから {0} 個を表示中",
   "DropNewProfile": "インポートしたいプロファイルのjsonファイル/xmlファイルをD&D・クリックして選択",
   "ThemeUIScale": "テーマ & UIスケール",
@@ -221,6 +223,7 @@
   "AreYouSure": "続行してもよろしいですか？",
   "MapFileInfo": "新規でゲームを開始する場合はマップファイルを選択",
   "AssetOutOfDate": "個のアセットが古い",
+  "OtherActions": "他のアクション...",
   "AssetOutOfDatePlural": "個のアセットが古い",
   "CopyVersionNumber": "バージョン情報をコピー",
   "SubscribeToItem": "アイテムのサブスク",
@@ -237,7 +240,8 @@
   "WouldYouLikeToSkipThose": "このパッケージは省きますか？",
   "LOTWillRestart": "アップデート中はSkyveが一時的に閉じますが、完了すると自動的にツールが再開します。",
   "UpdatingLot": "現在、Skyveがアップデート中です。しばらくお待ち下さい...",
-  "SubscribingRequiresGameToOpen": "パッケージのサブスク操作を行う場合は、ゲームを一時的に起動する必要があります。ゲームのランチャーが表示されたら、「Play」をクリックして操作を続行して下さい。",
+  "SubscribingRequiresGameToOpenTitle": "サブスク処理",
+  "SubscribingRequiresGameToOpen": "パッケージのサブスク操作を行う場合は、ゲームを一時的に起動する必要があります。\n\nゲームのランチャーが表示されたら、「Play」をクリックして操作を続行して下さい。",
   "HelpSupport": "ヘルプ & サポート",
   "DisableFpsBoosterDebug": "Debug Monoを使用中ですが、FPS Boosterが有効になっています。詳細なログを取得するために、MODを無効化しても宜しいですか？",
   "LogZipCopy_Tip": "第三者が問題点を調べるために、必要なログ情報を含むzipファイルを作成します。このzipファイルは、Discordチャンネルに直接貼り付けも可能です。",
@@ -482,5 +486,40 @@
   "Missing": "不明",
   "LoggedInAs": "次でログイン中",
   "UnknownUser": "不明なユーザー",
-  "AddMeaningfulDescription": "リクエストに具体的な問題点などの説明を追加して下さい。"
+  "AddMeaningfulDescription": "リクエストに具体的な問題点などの説明を追加して下さい。",
+  "RedownloadComplete": "Skyveは問題のあるパッケージの再DLを完了しました。",
+  "CleanupComplete": "SkyveはワークショップのDLをクリーンアップしました。",
+  "PendingSubscribeTo": {
+    "One": "{0} アイテムがサブスク開始を待機中",
+    "Plural": "{0} アイテムがサブスク開始を待機中"
+  },
+  "PendingUnsubscribeFrom": {
+    "One": "{0} アイテムがサブスク解除を待機中",
+    "Plural": "{0} アイテムがサブスク解除を待機中"
+  },
+  "CancelSubs": "保留中のサブスク処理を全てキャンセル",
+  "CancelDownloads": "Cancel all pending downloads",
+  "ApplySubs": "保留中のサブスク操作が適用されるまで、しばらくゲームを起動中にして下さい。",
+  "ApplyDownloads": "Force Steam to download all pending packages",
+  "SubsPendingInfo": "サブスクしたいパッケージは、ここにグループ化してまとめます。\nゲームを起動すると、それらのアイテムはSteam上でサブスク操作されます。",
+  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "サブスクの開始/解除をすると、すぐにパッケージをDL開始や削除を実行",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "実際にはサブスク操作の完了を待たずに、パッケージのDLや削除の処理は強制的に実行します。",
+  "ThisSubscribesTo": {
+    "One": "サブスク開始の処理を {0} 個のパッケージで実行します。",
+    "Plural": "サブスク開始の処理を {0} 個のパッケージで実行します。"
+  },
+  "ThisUnsubscribesFrom": {
+    "One": "サブスク解除の処理を {0} 個のパッケージで実行します。",
+    "Plural": "サブスク解除の処理を {0} 個のパッケージで実行します。"
+  },
+  "ViewThisProfilesPackages": "プロファイルの内容を表示",
+  "PendingDownloads": {
+    "One": "{0} item pending download",
+    "Plural": "{0} items pending download"
+  },
+  "PendingDeletions": {
+    "One": "{0} item pending removal",
+    "Plural": "{0} items pending removal"
+  }
 }

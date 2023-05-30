@@ -337,13 +337,13 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Фікси",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Виправлено: попередні налаштування і профілі іноді не переходять в Skyve.",
+                    "Буде створено ярлик коли ви вперше відкриєте Skyve після LOM2.",
+                    "Виправлено рідкісний випадок, коли інформація про сумісність не завантажується.",
+                    "Увімкнено можливість подати запит на перегляд пакету, який наразі зламаний.",
+                    "Послаблено чутливість повідомлення \"Частково завантажено\"."
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Зміни",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Поліпшено швидкодію додатку. Очікуються швидші завантаження та менші підвисання.",
+                    "Виправлена взаємодія між подібними модами, що показуються у звіті про сумісність, якщо у вас тільки одна з них.",
+                    "Виправлено виявлення модів в локальній теці."
                 ]
             }
         ]
@@ -367,10 +367,10 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Фікси",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
+                    "Виправлено: вкладка опцій не відкривається для macOS і Linux.",
+                    "Виправлено: Довідка і Журнали автоматично не завантажують поточний журнал.",
                     "Fixed the log file path being wrong on Linux."
                 ]
             }
@@ -381,7 +381,7 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Зміни",
                 "Changes": [
                     "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
                     "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
@@ -389,10 +389,60 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Фікси",
                 "Changes": [
                     "Fixed the asset summary not showing in the dashboard.",
                     "Fixed the out of date status not working correctly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Виправлення і зміни",
+                "Changes": [
+                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
+                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
+                    "Fixed the changelog not opening with some languages.",
+                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Reworked Subscription Process",
+                "Changes": [
+                    "You can now subscribe to packages while the game is open.",
+                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
+                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                ]
+            },
+            {
+                "Name": "Нове",
+                "Changes": [
+                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Added a \"Force download\" option in packages' right-click menu.",
+                    "Added more context to some popups",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the profile list not updating instantly.",
+                    "Fixed profile packages not showing their workshop name.",
+                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
+                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Improved the performance for people with a lot of mods."
                 ]
             }
         ]

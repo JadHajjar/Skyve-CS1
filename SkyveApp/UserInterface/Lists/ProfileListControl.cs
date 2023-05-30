@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
+using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
@@ -81,13 +82,9 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 		if (Loading)
 		{
 			Loading = false;
+		}
 
-			SetItems(ProfileManager.Profiles.Where(x => !x.Temporary));
-		}
-		else
-		{
-			Invalidate();
-		}
+		SetItems(ProfileManager.Profiles.Skip(1));
 	}
 
 	protected override void UIChanged()
@@ -191,6 +188,7 @@ internal class ProfileListControl : SlickStackedListControl<Profile>
 	{
 		var items = new SlickStripItem[]
 		{
+			  new (Locale.ViewThisProfilesPackages, "I_ViewFile", action: () => { Program.MainForm.PushPanel(new PC_GenericPackageList(item.Assets.Concat(item.Mods)) { Text = item.Name }); }),
 			  new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", action: () => { item.IsFavorite = !item.IsFavorite; ProfileManager.Save(item); })
 			, new (Locale.ChangeProfileColor, "I_Paint", action: () => this.TryBeginInvoke(() => ChangeColor(item)))
 			, new (Locale.CreateShortcutProfile, "I_Link", LocationManager.Platform is Platform.Windows, action: () => ProfileManager.CreateShortcut(item))

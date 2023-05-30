@@ -323,7 +323,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		return rects.Contain(location);
 	}
 
-	protected override async void OnItemMouseClick(DrawableItem<T> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<T> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -443,7 +443,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				{
 					if (item.Item.Workshop)
 					{
-						await CitiesManager.Subscribe(new[] { item.Item.SteamId });
+						SubscriptionsManager.Subscribe(new[] { item.Item.SteamId });
 					}
 
 					return;
@@ -1009,7 +1009,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return; // missing local item
 		}
 
-		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+		var incl = new DynamicIcon(e.Item.IsSubscribing() ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
 		{
 			var activeColor = FormDesign.Design.ActiveColor;

@@ -14,7 +14,7 @@
   "Other": "기타",
   "Date Modified": "수정된 날짜",
   "Date Created": "생성된 날짜",
-  "Copy": "복사하기",
+  "Copy": "복사",
   "Tags": "태그",
   "This PC": "내 PC",
   "PinnedFolders": "고정된 폴더",
@@ -96,9 +96,13 @@
   "Red": "빨간색",
   "Green": "초록색",
   "Yellow": "노란색",
+  "Download": "Download",
+  "Remove": "Remove",
   "Welcome to Theme Changer!": "테마 변환기에 오신 것을 환영합니다!",
   "Customize the size and colors in the App however you want to.": "앱 내 크기와 색상을 자유롭게 사용자 정의할 수 있습니다.",
   "Click on any color to change it, or right-click to reset it.": "색상을 클릭하여 변경하거나 마우스 오른쪽을 클릭하여 초기화합니다.",
   "Custom Theme": "사용자 정의 테마",
-  "Do you want to apply your changes before leaving?": "종료하기 전에 변경 사항을 저장하시겠습니까?"
+  "Do you want to apply your changes before leaving?": "종료하기 전에 변경 사항을 저장하시겠습니까?",
+  "TaskCompleted": "작업 완료",
+  "UnexpectedError": "예상치 못한 오류가 발생했습니다"
 }

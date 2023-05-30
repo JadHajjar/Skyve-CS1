@@ -42,8 +42,7 @@
     <Reference Include="UnityEngine" />
     <Reference Include="UnityEngine.UI" />
   </ItemGroup>
-
-
+	
   <ItemGroup>
     <Compile Remove="KianCommons\**" />
     <EmbeddedResource Remove="KianCommons\**" />
@@ -52,6 +51,9 @@
     <Compile Include="..\SkyveMod\Shared\UGCListTransfer.cs" Link="Shared\UGCListTransfer.cs" />
     <Compile Include="..\SkyveMod\Shared\SharedUtil.cs" Link="Shared\SharedUtil.cs" />
     <Compile Include="..\SkyveMod\Shared\BlackListTransfer.cs" Link="Shared\BlackListTransfer.cs" />
+    <Compile Include="..\SkyveMod\Util\SubscriptionUtil.cs" Link="Shared\SubscriptionUtil.cs" />
+    <Compile Include="..\SkyveApp\Domain\Utilities\SubscriptionTransfer.cs" Link="Shared\SubscriptionTransfer.cs" />
+	<Compile Include="..\SkyveApp\Domain\Utilities\DelayedAction.cs" Link="Shared\DelayedAction.cs" />
     <Compile Include="KianCommons\KianCommons\UI\UIHelperExtension.cs" />
     <Compile Include="KianCommons\KianCommons\Util\EnumerationExtensions.cs" />
     <Compile Include="KianCommons\KianCommons\Util\ReflectionHelpers.cs" />

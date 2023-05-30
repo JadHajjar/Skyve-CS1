@@ -25,4 +25,5 @@ internal class UserSettings
 	public bool DisablePackageCleanup { get; set; }
 	public bool ShowAllReferencedPackages { get; set; }
 	public bool TreatOptionalAsRequired { get; set; }
+	public bool ForceDownloadAndDeleteAsSoonAsRequested { get; set; }
 }

@@ -95,7 +95,7 @@ public static class SteamUtil
 		return await _workshopItemProcessor.Get(steamId, true);
 	}
 
-	public static void ReDownload(params IPackage[] packages)
+	public static void Download(IEnumerable<IPackage> packages)
 	{
 		var currentPath = IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
 
@@ -111,14 +111,14 @@ public static class SteamUtil
 			Application.Exit();
 		}
 
-		ReDownload(packages.Select(x => x.SteamId).ToArray());
+		Download(packages.Select(x => x.SteamId));
 	}
 
-	public static void ReDownload(params ulong[] ids)
+	public static void Download(IEnumerable<ulong> ids)
 	{
 		try
 		{
-			foreach (var id in ids.Chunk(100))
+			foreach (var id in ids.Reverse().Chunk(100))
 			{
 				var steamArguments = new StringBuilder("steam://open/console");
 
@@ -127,9 +127,9 @@ public static class SteamUtil
 					steamArguments.Append(" \"");
 				}
 
-				for (var i = 0; i < ids.Length; i++)
+				foreach (var item in id)
 				{
-					steamArguments.AppendFormat(" +workshop_download_item 255710 {0}", ids[i]);
+					steamArguments.AppendFormat(" +workshop_download_item 255710 {0}", item);
 				}
 
 				if (LocationManager.Platform is not Platform.Windows)
@@ -139,7 +139,7 @@ public static class SteamUtil
 
 				ExecuteSteam(steamArguments.ToString());
 
-				Thread.Sleep(150);
+				Thread.Sleep(250);
 			}
 
 			ExecuteSteam("steam://open/downloads");
