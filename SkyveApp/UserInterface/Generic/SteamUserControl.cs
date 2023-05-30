@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
+using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
 
 using SlickControls;
@@ -17,6 +18,7 @@ internal class SteamUserControl : SlickControl
 	{
 		Visible = false;
 		Enabled = false;
+		Cursor = Cursors.Hand;
 
 		new BackgroundAction(async () =>
 		{
@@ -38,6 +40,7 @@ internal class SteamUserControl : SlickControl
 	{
 		Visible = false;
 		Enabled = false;
+		Cursor = Cursors.Hand;
 
 		new BackgroundAction(async () =>
 		{
@@ -58,8 +61,18 @@ internal class SteamUserControl : SlickControl
 		Padding = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		base.OnMouseClick(e);
+
+		if (e.Button == MouseButtons.Left && User is not null)
+		{
+			PlatformUtil.OpenUrl(User.ProfileUrl);
+		}
+	}
+
 	public SteamUser? User { get; private set; }
-	public string InfoText { get; set; }
+	public string? InfoText { get; set; }
 
 	protected override void OnPaint(PaintEventArgs e)
 	{

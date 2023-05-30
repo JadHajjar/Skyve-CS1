@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 
@@ -813,13 +814,13 @@ public static class ProfileManager
 
 		return profile.Usage switch
 		{
-			Domain.Compatibility.PackageUsage.CityBuilding => "I_City",
-			Domain.Compatibility.PackageUsage.AssetCreation => "I_Tools",
+			PackageUsage.CityBuilding => "I_City",
+			PackageUsage.AssetCreation => "I_Tools",
 			_ => "I_ProfileSettings"
 		};
 	}
 
-	internal static List<Package> GetInvalidPackages(Domain.Compatibility.PackageUsage usage)
+	internal static List<Package> GetInvalidPackages(PackageUsage usage)
 	{
 		if ((int)usage == -1)
 		{

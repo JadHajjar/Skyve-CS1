@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Forms;
@@ -336,7 +337,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		labelRect = DrawStatusDescriptor(e, rects, labelRect, ContentAlignment.TopLeft);
 
 		var report = Package.GetCompatibilityInfo();
-		if (report is not null && report.Notification > Domain.Compatibility.NotificationType.Info)
+		if (report is not null && report.Notification > NotificationType.Info)
 		{
 			var labelColor = report.Notification.GetColor();
 

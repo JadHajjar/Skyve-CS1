@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 
 using System;
@@ -175,9 +177,9 @@ public static class CompatibilityManager
 		return _cache[package] = GenerateCompatibilityInfo(package);
 	}
 
-	internal static Package GetAutomatedReport(IPackage package)
+	internal static CrPackage GetAutomatedReport(IPackage package)
 	{
-		var info = new Package
+		var info = new CrPackage
 		{
 			Stability = package.IsMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
 			SteamId = package.SteamId,

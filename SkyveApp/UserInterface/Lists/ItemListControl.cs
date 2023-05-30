@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
@@ -20,7 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-using NotificationType = SkyveApp.Domain.Compatibility.NotificationType;
+using NotificationType = SkyveApp.Domain.Compatibility.Enums.NotificationType;
 
 namespace SkyveApp.UserInterface.Lists;
 internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackage
@@ -389,7 +390,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 			else
 			{
-				OpenSteamLink($"{item.Item.Author.ProfileUrl}myworkshopfiles");
+				var pc = new PC_UserPage(item.Item.Author?.SteamId ?? 0);
+
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+
+				//OpenSteamLink($"{item.Item.Author.ProfileUrl}myworkshopfiles");
 			}
 
 			return;
@@ -673,7 +678,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		base.OnPaintItem(e);
 
-		if (e.Item.Incompatible || report.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+		if (e.Item.Incompatible || report.Data?.Package.Stability is PackageStability.Broken)
 		{
 			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, FormDesign.Design.RedColor)), e.ClipRectangle);
 		}
@@ -690,7 +695,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (!large && !PackagePage)
 		{
-			if (!e.Item.Incompatible && report.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+			if (!e.Item.Incompatible && report.Data?.Package.Stability is not PackageStability.Broken)
 			{
 				labelRect.X += DrawScore(e, large, rects, labelRect);
 			}
@@ -736,7 +741,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			labelRect.X = rects.TextRect.X;
 
-			if (!PackagePage && !e.Item.Incompatible && report?.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+			if (!PackagePage && !e.Item.Incompatible && report?.Data?.Package.Stability is not PackageStability.Broken)
 			{
 				labelRect.X += DrawScore(e, large, rects, labelRect);
 			}

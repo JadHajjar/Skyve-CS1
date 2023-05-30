@@ -283,6 +283,58 @@ public static class SteamUtil
 		return new();
 	}
 
+	internal static async Task<Dictionary<ulong, SteamWorkshopItem>> GetUserWorkshopItems(ulong userId, bool all = false)
+	{
+		if (userId == 0)
+		{
+			return new();
+		}
+
+		var url = $"https://api.steampowered.com/IPublishedFileService/GetUserFiles/v1/?key={KEYS.STEAM_API_KEY}&steamid={userId}&appid=255710&type=1&return_vote_data=true&return_tags=true&return_children=true";
+
+		try
+		{
+			using var httpClient = new HttpClient();
+
+			if (all)
+			{
+				var data = new Dictionary<ulong, SteamWorkshopItem>();
+				var page = 1;
+
+				while (true)
+				{
+					var response = await httpClient.GetAsync(url + "&numperpage=100&page=" + page);
+					var newData = await ConvertPublishedFileResponse(response);
+
+					data.AddRange(newData.Item2);
+
+					_workshopItemProcessor.AddToCache(newData.Item2);
+
+					if (data.Count == newData.Item1)
+					{
+						return data;
+					}
+
+					page++;
+				}
+			}
+
+			var httpResponse = await httpClient.GetAsync(url);
+
+			var returnedData = (await ConvertPublishedFileResponse(httpResponse)).Item2;
+
+			_workshopItemProcessor.AddToCache(returnedData);
+
+			return returnedData;
+		}
+		catch (Exception ex)
+		{
+			Log.Exception(ex, "Failed to get steam information");
+		}
+
+		return new();
+	}
+
 	public static async Task<Dictionary<ulong, SteamWorkshopItem>> QueryFilesAsync(SteamQueryOrder order, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false)
 	{
 		var url = $"https://api.steampowered.com/IPublishedFileService/QueryFiles/v1/?key={KEYS.STEAM_API_KEY}&query_type={(int)order}&numperpage=100&return_vote_data=true&appid=255710&match_all_tags=true&return_tags=true&return_children=true&return_details=true";

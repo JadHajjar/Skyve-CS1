@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-
+using SkyveApp.Domain.Compatibility.Enums;
 using System;
 
 namespace SkyveApp.Domain.Compatibility;

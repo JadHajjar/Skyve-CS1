@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
@@ -326,7 +327,7 @@ internal static class ModsUtil
 		{
 			var compatibility = package.GetCompatibilityInfo();
 
-			if (compatibility.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+			if (compatibility.Data?.Package.Stability is PackageStability.Broken)
 			{
 				tags.Add((Color.FromArgb(225, FormDesign.Design.RedColor), LocaleCR.Broken.One.ToUpper()));
 			}

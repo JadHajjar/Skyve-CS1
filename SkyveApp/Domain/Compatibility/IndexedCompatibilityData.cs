@@ -1,5 +1,6 @@
 ﻿using Extensions;
-
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ public class IndexedCompatibilityData
 		}
 	}
 
-	private static IndexedPackage NewMethod(Package package, List<Package> packages)
+	private static IndexedPackage NewMethod(CrPackage package, List<CrPackage> packages)
 	{
 		var nonTest = package.Statuses?.FirstOrDefault(x => x.Type == StatusType.TestVersion && (x.Packages?.Any() ?? false));
 

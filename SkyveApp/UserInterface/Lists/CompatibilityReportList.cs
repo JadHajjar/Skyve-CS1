@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
@@ -21,8 +22,6 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Lists;
 internal class CompatibilityReportList : SlickStackedListControl<CompatibilityInfo>
 {
-	private bool isDragActive;
-	private bool isDragAvailable;
 	private readonly Dictionary<DrawableItem<CompatibilityInfo>, Rectangles> _itemRects = new();
 	public CompatibilityReportList()
 	{
@@ -949,7 +948,6 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 	{
 		base.OnDragEnter(drgevent);
 
-		isDragActive = true;
 
 		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
 		{
@@ -958,14 +956,12 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			if (Path.GetExtension(file).ToLower() is ".zip" or ".json")
 			{
 				drgevent.Effect = DragDropEffects.Copy;
-				isDragAvailable = true;
 				Invalidate();
 			}
 			return;
 		}
 
 		drgevent.Effect = DragDropEffects.None;
-		isDragAvailable = false;
 		Invalidate();
 	}
 
@@ -973,7 +969,6 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 	{
 		base.OnDragLeave(e);
 
-		isDragActive = false;
 		Invalidate();
 	}
 
@@ -998,7 +993,6 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			(PanelContent.GetParentPanel(this) as PC_CompatibilityReport)!.Import(file);
 		}
 
-		isDragActive = false;
 		Invalidate();
 	}
 }

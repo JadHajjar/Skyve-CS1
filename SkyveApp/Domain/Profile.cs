@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
 using Newtonsoft.Json;
-
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
@@ -60,10 +60,10 @@ public class Profile
 	public bool IsFavorite { get; set; }
 	public Color? Color { get; set; }
 	public DateTime LastUsed { get; set; }
-	public Compatibility.PackageUsage Usage { get; set; }
+	public PackageUsage Usage { get; set; }
 
-	public bool ForAssetEditor { set { if (value) { Usage = Compatibility.PackageUsage.AssetCreation; } } }
-	public bool ForGameplay { set { if (value) { Usage = Compatibility.PackageUsage.CityBuilding; } } }
+	public bool ForAssetEditor { set { if (value) { Usage = PackageUsage.AssetCreation; } } }
+	public bool ForGameplay { set { if (value) { Usage = PackageUsage.CityBuilding; } } }
 
 	public class Asset : IPackage
 	{
