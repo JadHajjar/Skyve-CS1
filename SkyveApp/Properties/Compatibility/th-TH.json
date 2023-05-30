@@ -32,7 +32,7 @@
   "UnsubscribeOther": "Unsubscribe from linked packages",
   "Switch": "Switch to linked package",
   "FlippedSwitch": "Switch to this package",
-  "Deprecated": "Deprecated",
+  "Deprecated": "เลิกใช้แล้ว",
   "Reupload": "อัปโหลดอีกครั้ง",
   "CausesIssues": "ทำให้เกิดปัญหา",
   "SavesCantLoadWithoutIt": "Saves can't load without it",
@@ -94,8 +94,8 @@
     "Plural": "You're missing the following optional packages for '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "One": "'{0}' ได้รับการ รับช่วงต่อ จาก '{1}'",
+    "Plural": "'{0}' ได้รับการ รับช่วงต่อ โดยม็อดต่อไปนี้"
   },
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
@@ -171,7 +171,7 @@
   "CRT_Status": "สถานะ",
   "CRT_Ambiguous": "ความน่าสงสัย",
   "LastReviewDate": "ได้รับการตรวจสอบครั้งล่าสุดเมื่อ {0}",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReviewInfo": "ประสบปัญหาการใช้งานแพ็กเกจนี้?\nร้องขอการตรวจสอบที่นี่:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
     "One": "{0} {1} is missing dependencies",
