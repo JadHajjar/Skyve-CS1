@@ -43,7 +43,7 @@ namespace SkyveMod.UI {
 
         static UILabel CreateLabel() {
             if (IsDebugMono()) {
-                Log.Warning("using DEBUG MONO is slow! use Load order tool to launch game in release mode!", true);
+                Log.Warning("using DEBUG MONO is slow! use Skyve to launch game in release mode!", true);
             }
             UILabel statusLabel = UIView.GetAView().AddUIComponent(typeof(FloatingMonoStatus)) as UILabel;
             statusLabel.name = LABEL_NAME;
@@ -112,7 +112,7 @@ namespace SkyveMod.UI {
 
         static string GetText() {
             if (IsDebugMono())
-                return "Debug Mono (SLOW!)";
+                return "Debug Mono";
             //else if (Helpers.InStartupMenu)
             //    return "Release Mono";
             else

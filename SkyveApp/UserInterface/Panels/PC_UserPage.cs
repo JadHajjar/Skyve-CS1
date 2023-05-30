@@ -22,7 +22,7 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
 {
-	private readonly ItemListControl<IPackage>? LC_Items;
+	private readonly ItemListControl<IPackage> LC_Items;
 	private readonly ItemListControl<IPackage>? LC_References;
 	private TagControl? addTagControl;
 
@@ -36,7 +36,7 @@ public partial class PC_UserPage : PanelContent
 		UserId = user;
 		User = SteamUtil.GetUser(user);
 
-		PB_Icon.LoadImage(User.AvatarUrl, ImageManager.GetImage);
+		PB_Icon.LoadImage(User?.AvatarUrl, ImageManager.GetImage);
 
 		//T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
 
@@ -46,19 +46,19 @@ public partial class PC_UserPage : PanelContent
 		//if (!crAvailable)
 		//{
 		//	TLP_Info.ColumnStyles[1].Width = 0;
-		//}
+		//}th
 
 		//if (Package is Package p && p.Assets is not null && p.Assets.Length > 0)
 		//{
-		//	LC_Items = new ItemListControl<IPackage>
-		//	{
-		//		PackagePage = true,
-		//		Dock = DockStyle.Fill
-		//	};
+		LC_Items = new ItemListControl<IPackage>
+		{
+			IsGenericPage = true,
+			Dock = DockStyle.Fill
+		};
 
 		//	LC_Items.AddRange(p.Assets);
 
-		//	P_List.Controls.Add(LC_Items);
+			T_Info.LinkedControl=LC_Items;
 		//}
 		//else if (crAvailable)
 		//{
@@ -122,7 +122,9 @@ public partial class PC_UserPage : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
-		await SteamUtil.GetUserWorkshopItems(UserId);
+		var results = await SteamUtil.GetWorkshopItemsByUserAsync(UserId, true);
+
+		LC_Items.SetItems(results.Values);
 
 		return true;
 	}
@@ -138,10 +140,6 @@ public partial class PC_UserPage : PanelContent
 		base.UIChanged();
 
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
-		TLP_About.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		label1.Margin = label3.Margin = label5.Margin = label6.Margin = UI.Scale(new Padding(3, 3, 0, 0), UI.FontScale);
-		label2.Margin = label4.Margin = FLP_Links.Margin = FLP_Links.Margin = UI.Scale(new Padding(3, 3, 0, 7), UI.FontScale);
-		label1.Font = label3.Font = label5.Font = label6.Font = UI.Font(7.5F, FontStyle.Bold);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -150,8 +148,6 @@ public partial class PC_UserPage : PanelContent
 
 		BackColor = design.AccentBackColor;
 		P_Content.BackColor = P_Back.BackColor = design.BackColor;
-		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor = design.InfoColor;
-		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 5, -5));
 	}
 
 	public override Color GetTopBarColor()
