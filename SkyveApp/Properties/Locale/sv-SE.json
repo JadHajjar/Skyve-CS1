@@ -240,8 +240,8 @@
   "WouldYouLikeToSkipThose": "Vill du hoppa över dessa paket?",
   "LOTWillRestart": "Skyve stängs tillfälligt under uppdateringsprocessen, men återupptas automatiskt när uppdateringen är klar.",
   "UpdatingLot": "Skyve uppdateras just nu. Vänta...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Abonnemangsprocess",
+  "SubscribingRequiresGameToOpen": "Att prenumerera eller avregistrera sig från paket kräver att spelet öppnas för en kort stund.\n\nNär du ser spelets launcher, klicka på Spela för att fortsätta.",
   "HelpSupport": "Hjälp & support",
   "DisableFpsBoosterDebug": "Du har FPS Booster aktiverat när du använder debug mono, vill du inaktivera det för att få bättre loggar?",
   "LogZipCopy_Tip": "Skapa en zip-fil med all logginformation som behövs för att hjälpa dig med ditt problem, Du kan klistra in den direkt i en discord-kanal.",
@@ -490,36 +490,36 @@
   "RedownloadComplete": "Skyve har laddat ned paketen med problem på nytt.",
   "CleanupComplete": "Skyve har slutfört nedladdningen från Workshop.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} objekt väntar på prenumeration",
+    "Plural": "{0} objekt väntar på prenumeration"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} objekt väntar på avslutande av prenumeration",
+    "Plural": "{0} objekt väntar på avslutande av prenumeration"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "CancelDownloads": "Cancel all pending downloads",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "ApplyDownloads": "Force Steam to download all pending packages",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "Avbryt alla väntande prenumerationer",
+  "CancelDownloads": "Avbryt alla väntande nedladdningar",
+  "ApplySubs": "Starta spelet för en kort stund för att tillämpa väntande prenumerationer",
+  "ApplyDownloads": "Tvinga Steam att ladda ner alla väntande paket",
+  "SubsPendingInfo": "Paket du prenumererar på är grupperade här.\nNär du öppnar spelet kommer dessa objekt att prenumereras på på Steam.",
+  "DownloadsPendingInfo": "Paket som du prenumererar på och inte har laddats ned ännu är grupperade här.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Starta hämtning eller borttagning av paket omedelbart efter prenumeration / avprenumeration",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Tvingar nedladdning eller borttagning av paket istället för att vänta tills de faktiskt prenumereras eller avprenumereras.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "Du kommer att prenumerera på {0} paket i denna process.",
+    "Plural": "Du kommer att prenumerera på {0} paket i den här processen."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "Du kommer att avsluta prenumerationen från {0} paket i denna process.",
+    "Plural": "Du kommer att avsluta prenumerationen från {0} paket i den här processen."
   },
-  "ViewThisProfilesPackages": "View this profile's contents",
+  "ViewThisProfilesPackages": "Visa denna profils innehåll",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} objekt väntar på nedladdning",
+    "Plural": "{0} objekt väntar på nedladdning"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} objekt väntar på borttagning",
+    "Plural": "{0} objekt väntar på borttagning"
   }
 }
