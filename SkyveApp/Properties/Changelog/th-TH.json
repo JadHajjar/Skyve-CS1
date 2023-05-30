@@ -119,7 +119,7 @@
         "Tagline": "Presenting, the Profile Overhaul",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "เปลี่ยนโพร์ไฟล์",
                 "Changes": [
                     "Changed the design of your profile list.",
                     "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
