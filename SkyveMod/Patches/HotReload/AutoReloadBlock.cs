@@ -5,7 +5,7 @@ using ColossalFramework.Plugins;
 
 using HarmonyLib;
 
-using System;
+using SkyveMod.Settings.Tabs;
 
 namespace SkyveMod.Patches.HotReload;
 
@@ -14,7 +14,7 @@ public class AutoReloadBlock1
 {
 	public static bool Prefix()
 	{
-		return false;
+		return DebugTab.HotReload;
 	}
 }
 
@@ -23,7 +23,7 @@ public class AutoReloadBlock2
 {
 	public static bool Prefix()
 	{
-		return false;
+		return DebugTab.HotReload;
 	}
 }
 
@@ -32,7 +32,7 @@ public class AutoReloadBlock3
 {
 	public static bool Prefix()
 	{
-		return false;
+		return DebugTab.HotReload;
 	}
 }
 
@@ -41,42 +41,24 @@ public class AutoReloadBlock4
 {
 	public static bool Prefix()
 	{
-		return false;
+		return DebugTab.HotReload;
 	}
 }
 
-[HarmonyPatch(typeof(Workshop), "EventWorkshopItemInstalled", new[] {typeof(PublishedFileId) })]
+[HarmonyPatch(typeof(Workshop), "EventWorkshopItemInstalled", new[] { typeof(PublishedFileId) })]
 public class AutoReloadBlock5
 {
 	public static bool Prefix()
 	{
-		return false;
+		return DebugTab.HotReload;
 	}
 }
 
-[HarmonyPatch(typeof(Workshop), "EventWorkshopSubscriptionChanged", new[] {typeof(PublishedFileId), typeof(bool) })]
+[HarmonyPatch(typeof(Workshop), "EventWorkshopSubscriptionChanged", new[] { typeof(PublishedFileId), typeof(bool) })]
 public class AutoReloadBlock6
 {
 	public static bool Prefix()
 	{
-		return false;
+		return DebugTab.HotReload;
 	}
 }
-
-//[HarmonyPatch(typeof(PackageManager), "ForceAssetStateChanged", new Type[0])]
-//public class AutoReloadBlock3
-//{
-//	public static bool Prefix()
-//	{
-//		return false;
-//	}
-//}
-
-//[HarmonyPatch(typeof(PluginManager), "TriggerEvents", new Type[0])]
-//public class AutoReloadBlock4
-//{
-//	public static bool Prefix()
-//	{
-//		return false;
-//	}
-//}
