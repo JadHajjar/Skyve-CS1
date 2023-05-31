@@ -442,7 +442,7 @@
                     "Corretto il problema dei pacchetti profilo che non mostrano il nome del Workshop.",
                     "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
                     "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi.",
-                    "Improved the performance for people with a lot of mods."
+                    "Migliorata la performance per chi ha molte mod."
                 ]
             }
         ]
