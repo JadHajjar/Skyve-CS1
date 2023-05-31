@@ -521,5 +521,9 @@
   "PendingDeletions": {
     "One": "{0} item pending removal",
     "Plural": "{0} items pending removal"
+  },
+  "YouHavePackagesUser": {
+    "One": "You have {0} package made by {1}",
+    "Plural": "You have {0} packages made by {1}"
   }
 }

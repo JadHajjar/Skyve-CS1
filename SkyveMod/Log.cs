@@ -1,10 +1,10 @@
 using System;
 using System.Diagnostics;
 
-using LogMain = Injections.KianCommons.Log;
-
 namespace KianCommons;
 extern alias Injections;
+
+using LogMain = Injections.KianCommons.Log;
 public static class Log
 {
 	public static bool ShowGap

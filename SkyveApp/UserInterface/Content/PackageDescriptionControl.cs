@@ -83,7 +83,9 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (Package.Workshop && rects.AuthorRect.Contains(e.Location) && Package.Author is not null)
 		{
-			PlatformUtil.OpenUrl($"{Package.Author.ProfileUrl}myworkshopfiles");
+			var pc = new PC_UserPage(Package.Author?.SteamId ?? 0);
+
+			(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
 			return;
 		}

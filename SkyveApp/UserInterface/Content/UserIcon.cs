@@ -50,18 +50,6 @@ internal class UserIcon : SlickImageControl
 		else
 		{
 			e.Graphics.DrawRoundedImage(Image, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);
-
-			if (CompatibilityManager.CompatibilityData.Authors.TryGet(UserId)?.Verified ?? false)
-			{
-				var checkRect = ClientRectangle.Pad((int)(5 * UI.FontScale)).Align(UI.Scale(new Size(24, 24), UI.FontScale), ContentAlignment.BottomRight);
-
-				e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect);
-
-				checkRect = checkRect.Pad((int)(5 * UI.FontScale));
-
-				using var img = IconManager.GetIcon("I_Check", checkRect.Height);
-				e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
-			}
 		}
 	}
 }

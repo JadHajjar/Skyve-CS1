@@ -38,15 +38,18 @@ partial class PC_UserPage
 			this.P_Content = new System.Windows.Forms.Panel();
 			this.slickTabControl1 = new SlickControls.SlickTabControl();
 			this.T_Info = new SlickControls.SlickTabControl.Tab();
-			this.T_CR = new SlickControls.SlickTabControl.Tab();
-			this.T_References = new SlickControls.SlickTabControl.Tab();
+			this.smartFlowPanel1 = new SlickControls.SmartFlowPanel();
+			this.roundedGroupPanel1 = new SlickControls.RoundedGroupPanel();
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
-			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
+			this.T_Packages = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new SkyveApp.UserInterface.Content.UserIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
-			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
+			this.label1 = new System.Windows.Forms.Label();
+			this.PB_Icon = new SkyveApp.UserInterface.Content.UserIcon();
+			this.P_Info = new SkyveApp.UserInterface.Content.UserDescriptionControl();
 			this.P_Content.SuspendLayout();
+			this.smartFlowPanel1.SuspendLayout();
+			this.roundedGroupPanel1.SuspendLayout();
 			this.TLP_Top.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -60,7 +63,7 @@ partial class PC_UserPage
 			this.P_Content.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.P_Content.Location = new System.Drawing.Point(0, 130);
 			this.P_Content.Name = "P_Content";
-			this.P_Content.Size = new System.Drawing.Size(783, 308);
+			this.P_Content.Size = new System.Drawing.Size(916, 387);
 			this.P_Content.TabIndex = 13;
 			// 
 			// slickTabControl1
@@ -69,13 +72,12 @@ partial class PC_UserPage
 			this.slickTabControl1.Location = new System.Drawing.Point(0, 0);
 			this.slickTabControl1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickTabControl1.Name = "slickTabControl1";
-			this.slickTabControl1.Size = new System.Drawing.Size(783, 308);
+			this.slickTabControl1.Size = new System.Drawing.Size(916, 387);
 			this.slickTabControl1.TabIndex = 0;
 			this.slickTabControl1.Tabs = new SlickControls.SlickTabControl.Tab[] {
         this.T_Info,
-        this.T_CR,
-        this.T_References,
-        this.T_Profiles};
+        this.T_Profiles,
+        this.T_Packages};
 			// 
 			// T_Info
 			// 
@@ -85,76 +87,70 @@ partial class PC_UserPage
 			this.T_Info.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			dynamicIcon1.Name = "I_Content";
 			this.T_Info.IconName = dynamicIcon1;
+			this.T_Info.LinkedControl = this.smartFlowPanel1;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
-			this.T_Info.Selected = true;
-			this.T_Info.Size = new System.Drawing.Size(195, 25);
+			this.T_Info.Selected = false;
+			this.T_Info.Size = new System.Drawing.Size(305, 25);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
 			this.T_Info.Text = "ContentAndInfo";
 			// 
-			// T_CR
+			// smartFlowPanel1
 			// 
-			this.T_CR.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_CR.Dock = System.Windows.Forms.DockStyle.Left;
-			this.T_CR.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon2.Name = "I_CompatibilityReport";
-			this.T_CR.IconName = dynamicIcon2;
-			this.T_CR.LinkedControl = null;
-			this.T_CR.Location = new System.Drawing.Point(195, 5);
-			this.T_CR.Name = "T_CR";
-			this.T_CR.Selected = false;
-			this.T_CR.Size = new System.Drawing.Size(195, 25);
-			this.T_CR.TabIndex = 0;
-			this.T_CR.TabStop = false;
-			this.T_CR.Text = "CompatibilityInfo";
+			this.smartFlowPanel1.Controls.Add(this.roundedGroupPanel1);
+			this.smartFlowPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.smartFlowPanel1.Location = new System.Drawing.Point(0, 0);
+			this.smartFlowPanel1.Name = "smartFlowPanel1";
+			this.smartFlowPanel1.Size = new System.Drawing.Size(916, 212);
+			this.smartFlowPanel1.TabIndex = 14;
 			// 
-			// T_References
+			// roundedGroupPanel1
 			// 
-			this.T_References.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.T_References.Dock = System.Windows.Forms.DockStyle.Left;
-			this.T_References.FillTab = true;
-			dynamicIcon3.Name = "I_Share";
-			this.T_References.IconName = dynamicIcon3;
-			this.T_References.LinkedControl = null;
-			this.T_References.Location = new System.Drawing.Point(390, 5);
-			this.T_References.Name = "T_References";
-			this.T_References.Selected = false;
-			this.T_References.Size = new System.Drawing.Size(195, 25);
-			this.T_References.TabIndex = 1;
-			this.T_References.TabStop = false;
-			this.T_References.Text = "References";
+			this.roundedGroupPanel1.AddPaddingForIcon = true;
+			this.roundedGroupPanel1.Controls.Add(this.label1);
+			this.roundedGroupPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+			dynamicIcon2.Name = "I_Package";
+			this.roundedGroupPanel1.ImageName = dynamicIcon2;
+			this.roundedGroupPanel1.Location = new System.Drawing.Point(3, 3);
+			this.roundedGroupPanel1.Name = "roundedGroupPanel1";
+			this.roundedGroupPanel1.Padding = new System.Windows.Forms.Padding(38, 43, 7, 7);
+			this.roundedGroupPanel1.Size = new System.Drawing.Size(501, 206);
+			this.roundedGroupPanel1.TabIndex = 0;
+			this.roundedGroupPanel1.Text = "WorkshopPackageSubmissions";
 			// 
 			// T_Profiles
 			// 
 			this.T_Profiles.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.T_Profiles.Dock = System.Windows.Forms.DockStyle.Left;
 			this.T_Profiles.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dynamicIcon4.Name = "I_ProfileSettings";
-			this.T_Profiles.IconName = dynamicIcon4;
-			this.T_Profiles.LinkedControl = this.TLP_Profiles;
-			this.T_Profiles.Location = new System.Drawing.Point(585, 5);
+			dynamicIcon3.Name = "I_ProfileSettings";
+			this.T_Profiles.IconName = dynamicIcon3;
+			this.T_Profiles.LinkedControl = null;
+			this.T_Profiles.Location = new System.Drawing.Point(305, 5);
 			this.T_Profiles.Name = "T_Profiles";
 			this.T_Profiles.Selected = false;
-			this.T_Profiles.Size = new System.Drawing.Size(195, 25);
+			this.T_Profiles.Size = new System.Drawing.Size(305, 25);
 			this.T_Profiles.TabIndex = 0;
 			this.T_Profiles.TabStop = false;
-			this.T_Profiles.Text = "OtherProfiles";
+			this.T_Profiles.Text = "Profiles";
 			// 
-			// TLP_Profiles
+			// T_Packages
 			// 
-			this.TLP_Profiles.ColumnCount = 2;
-			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Profiles.Location = new System.Drawing.Point(0, 0);
-			this.TLP_Profiles.MaximumSize = new System.Drawing.Size(773, 2147483647);
-			this.TLP_Profiles.MinimumSize = new System.Drawing.Size(773, 0);
-			this.TLP_Profiles.Name = "TLP_Profiles";
-			this.TLP_Profiles.RowCount = 2;
-			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Profiles.Size = new System.Drawing.Size(773, 208);
-			this.TLP_Profiles.TabIndex = 16;
+			this.T_Packages.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.T_Packages.Dock = System.Windows.Forms.DockStyle.Left;
+			this.T_Packages.FillTab = true;
+			this.T_Packages.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dynamicIcon4.Name = "I_Package";
+			this.T_Packages.IconName = dynamicIcon4;
+			this.T_Packages.LinkedControl = null;
+			this.T_Packages.Location = new System.Drawing.Point(610, 5);
+			this.T_Packages.Name = "T_Packages";
+			this.T_Packages.Selected = true;
+			this.T_Packages.Size = new System.Drawing.Size(305, 25);
+			this.T_Packages.TabIndex = 0;
+			this.T_Packages.TabStop = false;
+			this.T_Packages.Text = "Packages";
 			// 
 			// TLP_Top
 			// 
@@ -173,8 +169,27 @@ partial class PC_UserPage
 			this.TLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Top.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Top.Size = new System.Drawing.Size(783, 100);
+			this.TLP_Top.Size = new System.Drawing.Size(916, 100);
 			this.TLP_Top.TabIndex = 0;
+			// 
+			// P_Back
+			// 
+			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.P_Back.Location = new System.Drawing.Point(0, 50);
+			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
+			this.P_Back.Name = "P_Back";
+			this.P_Back.Size = new System.Drawing.Size(32, 50);
+			this.P_Back.TabIndex = 2;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.label1.Location = new System.Drawing.Point(38, 43);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(44, 16);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "label1";
 			// 
 			// PB_Icon
 			// 
@@ -187,15 +202,6 @@ partial class PC_UserPage
 			this.PB_Icon.TabIndex = 0;
 			this.PB_Icon.TabStop = false;
 			// 
-			// P_Back
-			// 
-			this.P_Back.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Back.Location = new System.Drawing.Point(0, 50);
-			this.P_Back.Margin = new System.Windows.Forms.Padding(0);
-			this.P_Back.Name = "P_Back";
-			this.P_Back.Size = new System.Drawing.Size(32, 50);
-			this.P_Back.TabIndex = 2;
-			// 
 			// P_Info
 			// 
 			this.P_Info.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -203,7 +209,7 @@ partial class PC_UserPage
 			this.P_Info.Margin = new System.Windows.Forms.Padding(0);
 			this.P_Info.Name = "P_Info";
 			this.TLP_Top.SetRowSpan(this.P_Info, 2);
-			this.P_Info.Size = new System.Drawing.Size(651, 100);
+			this.P_Info.Size = new System.Drawing.Size(784, 100);
 			this.P_Info.TabIndex = 3;
 			// 
 			// PC_UserPage
@@ -213,11 +219,15 @@ partial class PC_UserPage
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_UserPage";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
+			this.Size = new System.Drawing.Size(916, 517);
 			this.Text = "Back";
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.TLP_Top, 0);
 			this.Controls.SetChildIndex(this.P_Content, 0);
 			this.P_Content.ResumeLayout(false);
+			this.smartFlowPanel1.ResumeLayout(false);
+			this.roundedGroupPanel1.ResumeLayout(false);
+			this.roundedGroupPanel1.PerformLayout();
 			this.TLP_Top.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -229,11 +239,12 @@ partial class PC_UserPage
 	private UserIcon PB_Icon;
 	private System.Windows.Forms.Panel P_Content;
 	private System.Windows.Forms.Panel P_Back;
-	private PackageDescriptionControl P_Info;
+	private UserDescriptionControl P_Info;
 	private SlickControls.SlickTabControl slickTabControl1;
 	private SlickControls.SlickTabControl.Tab T_Info;
-	internal SlickControls.SlickTabControl.Tab T_CR;
+	internal SlickControls.SlickTabControl.Tab T_Packages;
 	private SlickControls.SlickTabControl.Tab T_Profiles;
-	private System.Windows.Forms.TableLayoutPanel TLP_Profiles;
-	private SlickControls.SlickTabControl.Tab T_References;
+	private SlickControls.SmartFlowPanel smartFlowPanel1;
+	private SlickControls.RoundedGroupPanel roundedGroupPanel1;
+	private System.Windows.Forms.Label label1;
 }

@@ -1,696 +1,607 @@
-using ColossalFramework;
-using ColossalFramework.UI;
-
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-
-using static KianCommons.Assertion;
-
-namespace KianCommons;
-internal static class ReflectionHelpers
+namespace KianCommons
 {
-	internal static Version Version(this Assembly asm)
-	{
-		return asm.GetName().Version;
-	}
+	using ColossalFramework;
+	using ColossalFramework.UI;
 
-	internal static Version VersionOf(this Type t)
-	{
-		return t.Assembly.GetName().Version;
-	}
+	using System;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.Linq;
+	using System.Linq.Expressions;
+	using System.Reflection;
+	using System.Runtime.CompilerServices;
 
-	internal static Version VersionOf(this object obj)
-	{
-		return VersionOf(obj.GetType());
-	}
+	using static KianCommons.Assertion;
 
-	internal static string Name(this Assembly assembly)
+	internal static class ReflectionHelpers
 	{
-		return assembly.GetName().Name;
-	}
+		internal static Version Version(this Assembly asm) =>
+		  asm.GetName().Version;
 
-	public static string FullName(this MethodBase m)
-	{
-		return m.DeclaringType.FullName + "." + m.Name;
-	}
+		internal static Version VersionOf(this Type t) =>
+			t.Assembly.GetName().Version;
 
-	internal static T ShalowClone<T>(this T source) where T : class, new()
-	{
-		var target = new T();
-		CopyProperties<T>(target, source);
-		return target;
-	}
+		internal static Version VersionOf(this object obj) =>
+			VersionOf(obj.GetType());
 
-	internal static T ShalowClone<T>(this T source, T target, bool primitiveOnly) where T : class
-	{
-		CopyProperties<T>(target, source, primitiveOnly);
-		return target;
-	}
+		internal static string Name(this Assembly assembly) => assembly.GetName().Name;
 
-	public const BindingFlags COPYABLE = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-	internal static void CopyProperties(object target, object origin)
-	{
-		var t1 = target.GetType();
-		var t2 = origin.GetType();
-		Assert(t1 == t2 || t1.IsSubclassOf(t2));
-		var fields = origin.GetType().GetFields(COPYABLE);
-		foreach (var fieldInfo in fields)
+		public static string FullName(this MethodBase m) =>
+			m.DeclaringType.FullName + "." + m.Name;
+
+		internal static T ShalowClone<T>(this T source) where T : class, new()
 		{
-			//Log.Debug($"Copying field:<{fieldInfo.Name}> ...>");
-			var value = fieldInfo.GetValue(origin);
-			var strValue = value?.ToString() ?? "null";
-			//Log.Debug($"Got field value:<{strValue}> ...>");
-			fieldInfo.SetValue(target, value);
-			//Log.Debug($"Copied field:<{fieldInfo.Name}> value:<{strValue}>");
+			T target = new T();
+			CopyProperties<T>(target, source);
+			return target;
 		}
-	}
 
-	internal static void CopyProperties<T>(object target, object origin)
-	{
-		Assert(target is T, "target is T");
-		Assert(origin is T, "origin is T");
-		var fields = typeof(T).GetFields(COPYABLE);
-		foreach (var fieldInfo in fields)
+		internal static T ShalowClone<T>(this T source, T target, bool primitiveOnly) where T : class
 		{
-			//Log.Debug($"Copying field:<{fieldInfo.Name}> ...>");
-			var value = fieldInfo.GetValue(origin);
-			//string strValue = value?.ToString() ?? "null";
-			//Log.Debug($"Got field value:<{strValue}> ...>");
-			fieldInfo.SetValue(target, value);
-			//Log.Debug($"Copied field:<{fieldInfo.Name}> value:<{strValue}>");
+			CopyProperties<T>(target, source, primitiveOnly);
+			return target;
 		}
-	}
 
-	internal static void CopyProperties<T>(object target, object origin, bool primitiveOnly)
-	{
-		Assertion.Assert(target is T, "target is T");
-		Assertion.Assert(origin is T, "origin is T");
-		var fields = typeof(T).GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-		foreach (var fieldInfo in fields)
+		public const BindingFlags COPYABLE = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+		internal static void CopyProperties(object target, object origin)
 		{
-			var flag = primitiveOnly && !ReflectionHelpers.IsStringOrPrimitiveType(fieldInfo.FieldType);
-			if (!flag)
+			var t1 = target.GetType();
+			var t2 = origin.GetType();
+			Assert(t1 == t2 || t1.IsSubclassOf(t2));
+			FieldInfo[] fields = origin.GetType().GetFields(COPYABLE);
+			foreach (FieldInfo fieldInfo in fields)
 			{
-				var value = fieldInfo.GetValue(origin);
-				var text = ((value != null) ? value.ToString() : null) ?? "null";
+				//Log.Debug($"Copying field:<{fieldInfo.Name}> ...>");
+				object value = fieldInfo.GetValue(origin);
+				string strValue = value?.ToString() ?? "null";
+				//Log.Debug($"Got field value:<{strValue}> ...>");
 				fieldInfo.SetValue(target, value);
-				Log.Debug(string.Concat(new string[]
-				{
-					"Copied field:<",
-					fieldInfo.Name,
-					"> value:<",
-					text,
-					">"
-				}), true);
+				//Log.Debug($"Copied field:<{fieldInfo.Name}> value:<{strValue}>");
 			}
 		}
-	}
 
-	private static bool IsStringOrPrimitiveType(Type propertyType)
-	{
-		var flag = typeof(Delegate).IsSubclassOf(propertyType);
-		bool result;
-		if (flag)
+		internal static void CopyProperties<T>(object target, object origin)
 		{
-			result = false;
-		}
-		else
-		{
-			var flag2 = propertyType == typeof(string) || propertyType.IsPrimitive || propertyType.IsValueType;
-			if (flag2)
+			Assert(target is T, "target is T");
+			Assert(origin is T, "origin is T");
+			FieldInfo[] fields = typeof(T).GetFields(COPYABLE);
+			foreach (FieldInfo fieldInfo in fields)
 			{
-				result = true;
+				//Log.Debug($"Copying field:<{fieldInfo.Name}> ...>");
+				object value = fieldInfo.GetValue(origin);
+				//string strValue = value?.ToString() ?? "null";
+				//Log.Debug($"Got field value:<{strValue}> ...>");
+				fieldInfo.SetValue(target, value);
+				//Log.Debug($"Copied field:<{fieldInfo.Name}> value:<{strValue}>");
+			}
+		}
+
+		internal static void CopyProperties<T>(object target, object origin, bool primitiveOnly)
+		{
+			Assertion.Assert(target is T, "target is T");
+			Assertion.Assert(origin is T, "origin is T");
+			FieldInfo[] fields = typeof(T).GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+			foreach (FieldInfo fieldInfo in fields)
+			{
+				bool flag = primitiveOnly && !ReflectionHelpers.IsStringOrPrimitiveType(fieldInfo.FieldType);
+				if (!flag)
+				{
+					object value = fieldInfo.GetValue(origin);
+					string text = ((value != null) ? value.ToString() : null) ?? "null";
+					fieldInfo.SetValue(target, value);
+					Log.Debug(string.Concat(new string[]
+					{
+						"Copied field:<",
+						fieldInfo.Name,
+						"> value:<",
+						text,
+						">"
+					}), true);
+				}
+			}
+		}
+
+		private static bool IsStringOrPrimitiveType(Type propertyType)
+		{
+			bool flag = typeof(Delegate).IsSubclassOf(propertyType);
+			bool result;
+			if (flag)
+			{
+				result = false;
 			}
 			else
 			{
-				var flag3 = propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>) && (propertyType.GetGenericArguments()[0].IsPrimitive || propertyType.GetGenericArguments()[0].IsValueType);
-				if (flag3)
+				bool flag2 = propertyType == typeof(string) || propertyType.IsPrimitive || propertyType.IsValueType;
+				if (flag2)
 				{
 					result = true;
 				}
 				else
 				{
-					var flag4 = typeof(Enum).IsAssignableFrom(propertyType);
-					result = flag4;
+					bool flag3 = propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>) && (propertyType.GetGenericArguments()[0].IsPrimitive || propertyType.GetGenericArguments()[0].IsValueType);
+					if (flag3)
+					{
+						result = true;
+					}
+					else
+					{
+						bool flag4 = typeof(Enum).IsAssignableFrom(propertyType);
+						result = flag4;
+					}
 				}
 			}
+			return result;
 		}
-		return result;
-	}
 
-	/// <summary>
-	/// copies fields with identical name from origin to target.
-	/// even if the declaring types don't match.
-	/// only copies existing fields and their types match.
-	/// </summary>
-	internal static void CopyPropertiesForced<T>(object target, object origin)
-	{
-		var fields = typeof(T).GetFields(COPYABLE);
-		foreach (var fieldInfo in fields)
+		/// <summary>
+		/// copies fields with identical name from origin to target.
+		/// even if the declaring types don't match.
+		/// only copies existing fields and their types match.
+		/// </summary>
+		internal static void CopyPropertiesForced<T>(object target, object origin)
 		{
-			var fieldName = fieldInfo.Name;
-			var originFieldInfo = origin.GetType().GetField(fieldName, ALL);
-			var targetFieldInfo = target.GetType().GetField(fieldName, ALL);
-			if (originFieldInfo != null && targetFieldInfo != null)
+			FieldInfo[] fields = typeof(T).GetFields(COPYABLE);
+			foreach (FieldInfo fieldInfo in fields)
 			{
-				object value = null;
-				try
+				string fieldName = fieldInfo.Name;
+				var originFieldInfo = origin.GetType().GetField(fieldName, ALL);
+				var targetFieldInfo = target.GetType().GetField(fieldName, ALL);
+				if (originFieldInfo != null && targetFieldInfo != null)
 				{
-					value = originFieldInfo.GetValue(origin);
-					targetFieldInfo.SetValue(target, value);
+					object value = null;
+					try
+					{
+						value = originFieldInfo.GetValue(origin);
+						targetFieldInfo.SetValue(target, value);
+					}
+					catch { }
 				}
-				catch { }
 			}
 		}
-	}
 
-	internal static void SetAllDeclaredFieldsToNull(object instance)
-	{
-		var type = instance.GetType();
-		var fields = type.GetAllFields(declaredOnly: true);
-		foreach (var f in fields)
+		internal static void SetAllDeclaredFieldsToNull(object instance)
 		{
-			if (f.FieldType.IsClass)
+			var type = instance.GetType();
+			var fields = type.GetAllFields(declaredOnly: true);
+			foreach (var f in fields)
 			{
-				if (Log.VERBOSE)
+				if (f.FieldType.IsClass)
 				{
-					Log.Debug($"SetAllDeclaredFieldsToNull: setting {instance}.{f} = null");
+					if (Log.VERBOSE)
+						Log.Debug($"SetAllDeclaredFieldsToNull: setting {instance}.{f} = null");
+					f.SetValue(instance, null);
 				}
-
-				f.SetValue(instance, null);
 			}
 		}
-	}
 
-	/// <summary>
-	/// call this in OnDestroy() to clear all references.
-	/// </summary>
-	internal static void SetAllDeclaredFieldsToNull(this UIComponent c)
-	{
-		SetAllDeclaredFieldsToNull(c as object);
-	}
+		/// <summary>
+		/// call this in OnDestroy() to clear all references.
+		/// </summary>
+		internal static void SetAllDeclaredFieldsToNull(this UIComponent c) =>
+			SetAllDeclaredFieldsToNull(c as object);
 
-	internal static string GetPrettyFunctionName(MethodInfo m)
-	{
-		var s = m.Name;
-		var ss = s.Split(new[] { "g__", "|" }, System.StringSplitOptions.RemoveEmptyEntries);
-		if (ss.Length == 3)
+		internal static string GetPrettyFunctionName(MethodInfo m)
 		{
-			return ss[1];
+			string s = m.Name;
+			string[] ss = s.Split(new[] { "g__", "|" }, System.StringSplitOptions.RemoveEmptyEntries);
+			if (ss.Length == 3)
+				return ss[1];
+			return s;
 		}
 
-		return s;
-	}
-
-	internal static T GetAttribute<T>(this ICustomAttributeProvider memberInfo, bool inherit = true) where T : Attribute
-	{
-		return memberInfo.GetAttributes<T>().FirstOrDefault();
-	}
-
-	internal static T[] GetAttributes<T>(this ICustomAttributeProvider memberInfo, bool inherit = true) where T : Attribute
-	{
-		return memberInfo.GetCustomAttributes(typeof(T), inherit) as T[];
-	}
-
-	internal static bool HasAttribute<T>(this MemberInfo member, bool inherit = true) where T : Attribute
-	{
-		return HasAttribute(member, typeof(T), inherit);
-	}
-
-	internal static bool HasAttribute(this MemberInfo member, Type t, bool inherit = true)
-	{
-		var att = member.GetCustomAttributes(t, inherit);
-		return att != null && att.Length != 0;
-	}
-
-	internal static IEnumerable<FieldInfo> GetFieldsWithAttribute<T>(
-		this object obj, bool inherit = true) where T : Attribute
-	{
-		return obj.GetType().GetFields()
-			.Where(_field => _field.HasAttribute<T>(inherit));
-	}
-
-	internal static IEnumerable<FieldInfo> GetFieldsWithAttribute<T>(
-		this Type type, bool inherit = true) where T : Attribute
-	{
-		return type.GetFields()
-			.Where(_field => _field.HasAttribute<T>(inherit));
-	}
-
-	internal static IEnumerable<MemberInfo> GetMembersWithAttribute<T>(
-		this object obj, bool inherit = true) where T : Attribute
-	{
-		return obj.GetType().GetMembersWithAttribute<T>(inherit);
-	}
-
-	internal static IEnumerable<MemberInfo> GetMembersWithAttribute<T>(
-		this Type type, bool inherit = true) where T : Attribute
-	{
-		return type.GetMembers().Where(_member => _member.HasAttribute<T>(inherit));
-	}
-
-	public const BindingFlags ALL = BindingFlags.Public
-		| BindingFlags.NonPublic
-		| BindingFlags.Instance
-		| BindingFlags.Static
-		| BindingFlags.GetField
-		| BindingFlags.SetField
-		| BindingFlags.GetProperty
-		| BindingFlags.SetProperty;
-
-	public const BindingFlags ALL_Declared = ALL | BindingFlags.DeclaredOnly;
-
-	/// <summary>
-	/// get value of the instant field target.Field.
-	/// </summary>
-	internal static object GetFieldValue(object target, string fieldName)
-	{
-		if (target == null)
+		internal static T GetAttribute<T>(this ICustomAttributeProvider memberInfo, bool inherit = true) where T : Attribute
 		{
-			throw new ArgumentNullException("target");
+			return memberInfo.GetAttributes<T>().FirstOrDefault();
 		}
 
-		if (fieldName == null)
+		internal static T[] GetAttributes<T>(this ICustomAttributeProvider memberInfo, bool inherit = true) where T : Attribute
 		{
-			throw new ArgumentNullException("fieldName");
+			return memberInfo.GetCustomAttributes(typeof(T), inherit) as T[];
 		}
 
-		var type = target.GetType();
-		var field = type.GetField(fieldName, ALL)
-			?? throw new Exception($"{type}.{fieldName} not found");
-		return field.GetValue(target);
-	}
+		internal static bool HasAttribute<T>(this MemberInfo member, bool inherit = true) where T : Attribute
+			=> HasAttribute(member, typeof(T), inherit);
 
-	/// <summary>
-	/// Get value of a static field from T.fieldName
-	/// </summary>
-	internal static object GetFieldValue<T>(string fieldName)
-	{
-		return GetFieldValue(typeof(T), fieldName);
-	}
-
-	/// <summary>
-	/// Get value of a static field from type.fieldName
-	/// </summary>
-	internal static object GetFieldValue(Type type, string fieldName)
-	{
-		if (type == null)
+		internal static bool HasAttribute(this MemberInfo member, Type t, bool inherit = true)
 		{
-			throw new ArgumentNullException("target");
+			var att = member.GetCustomAttributes(t, inherit);
+			return att != null && att.Length != 0;
 		}
 
-		if (fieldName == null)
+		internal static IEnumerable<FieldInfo> GetFieldsWithAttribute<T>(
+			this object obj, bool inherit = true) where T : Attribute
 		{
-			throw new ArgumentNullException("fieldName");
+			return obj.GetType().GetFields()
+				.Where(_field => _field.HasAttribute<T>(inherit));
 		}
 
-		var field = type.GetField(fieldName, ALL)
+		internal static IEnumerable<FieldInfo> GetFieldsWithAttribute<T>(
+			this Type type, bool inherit = true) where T : Attribute
+		{
+			return type.GetFields()
+				.Where(_field => _field.HasAttribute<T>(inherit));
+		}
+
+		internal static IEnumerable<MemberInfo> GetMembersWithAttribute<T>(
+			this object obj, bool inherit = true) where T : Attribute
+		{
+			return obj.GetType().GetMembersWithAttribute<T>(inherit);
+		}
+
+		internal static IEnumerable<MemberInfo> GetMembersWithAttribute<T>(
+			this Type type, bool inherit = true) where T : Attribute
+		{
+			return type.GetMembers().Where(_member => _member.HasAttribute<T>(inherit));
+		}
+
+		public const BindingFlags ALL = BindingFlags.Public
+			| BindingFlags.NonPublic
+			| BindingFlags.Instance
+			| BindingFlags.Static
+			| BindingFlags.GetField
+			| BindingFlags.SetField
+			| BindingFlags.GetProperty
+			| BindingFlags.SetProperty;
+
+		public const BindingFlags ALL_Declared = ALL | BindingFlags.DeclaredOnly;
+
+		/// <summary>
+		/// get value of the instant field target.Field.
+		/// </summary>
+		internal static object GetFieldValue(object target, string fieldName)
+		{
+			if (target == null)
+				throw new ArgumentNullException("target");
+			if (fieldName == null)
+				throw new ArgumentNullException("fieldName");
+			var type = target.GetType();
+			var field = type.GetField(fieldName, ALL)
 				?? throw new Exception($"{type}.{fieldName} not found");
-		return field.GetValue(null);
-	}
-
-	/// <summary>
-	/// sets static T.fieldName to value.
-	/// </summary>
-	internal static void SetFieldValue<T>(string fieldName, object value)
-	{
-		SetFieldValue(typeof(T), fieldName, value);
-	}
-
-	/// <summary>
-	/// sets static targetType.fieldName to value.
-	/// </summary>
-	internal static void SetFieldValue(Type targetType, string fieldName, object value)
-	{
-		var field = GetField(targetType, fieldName);
-		field.SetValue(null, value);
-	}
-
-	/// <summary>
-	/// sets target.fieldName to value.
-	/// </summary>
-	internal static void SetFieldValue(object target, string fieldName, object value)
-	{
-		var field = GetField(target.GetType(), fieldName);
-		field.SetValue(target, value);
-	}
-
-	internal static FieldInfo GetField(object target, string fieldName, bool throwOnError = true)
-	{
-		return GetField(target.GetType(), fieldName, throwOnError);
-	}
-
-	internal static FieldInfo GetField<T>(string fieldName, bool throwOnError = true)
-	{
-		return GetField(typeof(T), fieldName, throwOnError);
-	}
-
-	internal static FieldInfo GetField(Type declaringType, string fieldName, bool throwOnError = true)
-	{
-		var ret = declaringType.GetField(fieldName, ALL);
-		if (ret == null && throwOnError)
-		{
-			throw new Exception($"{declaringType}.{fieldName} not found");
+			return field.GetValue(target);
 		}
 
-		return ret;
-	}
+		/// <summary>
+		/// Get value of a static field from T.fieldName
+		/// </summary>
+		internal static object GetFieldValue<T>(string fieldName)
+			=> GetFieldValue(typeof(T), fieldName);
 
-
-	/// <summary>
-	/// gets method of any access type.
-	/// </summary>
-	internal static MethodInfo GetMethod(Type type, string method, bool throwOnError = true)
-	{
-		if (type == null)
+		/// <summary>
+		/// Get value of a static field from type.fieldName
+		/// </summary>
+		internal static object GetFieldValue(Type type, string fieldName)
 		{
-			throw new ArgumentNullException("type");
+			if (type == null)
+				throw new ArgumentNullException("target");
+			if (fieldName == null)
+				throw new ArgumentNullException("fieldName");
+
+			var field = type.GetField(fieldName, ALL)
+				?? throw new Exception($"{type}.{fieldName} not found");
+			return field.GetValue(null);
 		}
 
-		var ret = type.GetMethod(method, ALL);
-		if (throwOnError && ret == null)
+		/// <summary>
+		/// sets static T.fieldName to value.
+		/// </summary>
+		internal static void SetFieldValue<T>(string fieldName, object value) =>
+			SetFieldValue(typeof(T), fieldName, value);
+
+		/// <summary>
+		/// sets static targetType.fieldName to value.
+		/// </summary>
+		internal static void SetFieldValue(Type targetType, string fieldName, object value)
 		{
-			throw new Exception($"Method not found: {type.Name}.{method}");
+			var field = GetField(targetType, fieldName);
+			field.SetValue(null, value);
 		}
 
-		return ret;
-	}
-
-	/// <summary>
-	/// gets method of any access type.
-	/// </summary>
-	internal static MethodInfo GetMethod(
-		Type type,
-		string name,
-		BindingFlags bindingFlags,
-		Type[] types,
-		bool throwOnError = false)
-	{
-		if (type == null)
+		/// <summary>
+		/// sets target.fieldName to value.
+		/// </summary>
+		internal static void SetFieldValue(object target, string fieldName, object value)
 		{
-			throw new ArgumentNullException("type");
+			var field = GetField(target.GetType(), fieldName);
+			field.SetValue(target, value);
 		}
 
-		var ret = type.GetMethod(name, bindingFlags, null, types, null);
-		if (throwOnError && ret == null)
+		internal static FieldInfo GetField(object target, string fieldName, bool throwOnError = true) =>
+			GetField(target.GetType(), fieldName, throwOnError);
+		internal static FieldInfo GetField<T>(string fieldName, bool throwOnError = true) =>
+			GetField(typeof(T), fieldName, throwOnError);
+		internal static FieldInfo GetField(Type declaringType, string fieldName, bool throwOnError = true)
 		{
-			throw new Exception($"failed to retrieve method {type}.{name}({types.ToSTR()} bindingFlags:{bindingFlags.ToSTR()})");
+			var ret = declaringType.GetField(fieldName, ALL);
+			if (ret == null && throwOnError)
+				throw new Exception($"{declaringType}.{fieldName} not found");
+			return ret;
 		}
 
-		return ret;
-	}
 
-	internal static MethodInfo GetMethod(
-		Type type,
-		string name,
-		BindingFlags bindingFlags,
-		bool throwOnError = true)
-	{
-		if (type == null)
+		/// <summary>
+		/// gets method of any access type.
+		/// </summary>
+		internal static MethodInfo GetMethod(Type type, string method, bool throwOnError = true)
 		{
-			throw new ArgumentNullException("type");
+			if (type == null)
+				throw new ArgumentNullException("type");
+			var ret = type.GetMethod(method, ALL);
+			if (throwOnError && ret == null)
+				throw new Exception($"Method not found: {type.Name}.{method}");
+			return ret;
 		}
 
-		var ret = type.GetMethod(name, bindingFlags);
-		if (throwOnError && ret == null)
+		/// <summary>
+		/// gets method of any access type.
+		/// </summary>
+		internal static MethodInfo GetMethod(
+			Type type,
+			string name,
+			BindingFlags bindingFlags,
+			Type[] types,
+			bool throwOnError = false)
 		{
-			throw new Exception($"failed to retrieve method {type}.{name} bindingFlags:{bindingFlags.ToSTR()}");
+			if (type == null)
+				throw new ArgumentNullException("type");
+			var ret = type.GetMethod(name, bindingFlags, null, types, null);
+			if (throwOnError && ret == null)
+				throw new Exception($"failed to retrieve method {type}.{name}({types.ToSTR()} bindingFlags:{bindingFlags.ToSTR()})");
+			return ret;
 		}
 
-		return ret;
-	}
-
-	internal static string ToSTR(this BindingFlags flags)
-	{
-		return flags == ALL ? "ALL" : flags.ToString();
-	}
-
-
-
-	/// <summary>
-	/// Invokes static method of any access type.
-	/// like: type.method()
-	/// </summary>
-	/// <param name="method">static method without parameters</param>
-	/// <returns>return value of the function if any. null otherwise</returns>
-	internal static object InvokeMethod<T>(string method)
-	{
-		return GetMethod(typeof(T), method, true)?.Invoke(null, null);
-	}
-
-	internal static object InvokeMethod<T>(string method, params object[] args)
-	{
-		return GetMethod(typeof(T), method, true)?.Invoke(null, args);
-	}
-
-	/// <summary>
-	/// Invokes static method of any access type.
-	/// like: type.method()
-	/// </summary>
-	/// <param name="method">static method without parameters</param>
-	/// <returns>return value of the function if any. null otherwise</returns>
-	internal static object InvokeMethod(Type type, string method)
-	{
-		return GetMethod(type, method, true)?.Invoke(null, null);
-	}
-
-	/// <summary>
-	/// Invokes static method of any access type.
-	/// like: qualifiedType.method()
-	/// </summary>
-	/// <param name="method">static method without parameters</param>
-	/// <returns>return value of the function if any. null otherwise</returns>
-	internal static object InvokeMethod(string qualifiedType, string method)
-	{
-		var type = Type.GetType(qualifiedType, true);
-		return InvokeMethod(type, method);
-	}
-
-	/// <summary>
-	/// Invokes instance method of any access type.
-	/// like: qualifiedType.method()
-	/// </summary>
-	/// <param name="method">instance method without parameters</param>
-	/// <returns>return value of the function if any. null otherwise</returns>
-	internal static object InvokeMethod(object instance, string method)
-	{
-		var type = instance.GetType();
-		return GetMethod(type, method, true)?.Invoke(instance, null);
-	}
-
-	internal static object InvokeMethod(object instance, string method, params object[] args)
-	{
-		var type = instance.GetType();
-		return GetMethod(type, method, true)?.Invoke(instance, args);
-	}
-
-	internal static object InvokeSetter(object instance, string propertyName, object value)
-	{
-		var type = instance.GetType();
-		var property = type.GetProperty(propertyName) ?? throw new Exception($"{type}.{propertyName} not found");
-		return property.GetSetMethod().Invoke(instance, new object[] { value });
-	}
-
-	internal static EventInfo GetEvent(Type type, string eventName, bool throwOnError = true)
-	{
-		var e = type.GetEvent(eventName, ALL);
-		if (e == null && throwOnError)
+		internal static MethodInfo GetMethod(
+			Type type,
+			string name,
+			BindingFlags bindingFlags,
+			bool throwOnError = true)
 		{
-			throw new Exception($"could not find {eventName} in {type}");
+			if (type == null)
+				throw new ArgumentNullException("type");
+			var ret = type.GetMethod(name, bindingFlags);
+			if (throwOnError && ret == null)
+				throw new Exception($"failed to retrieve method {type}.{name} bindingFlags:{bindingFlags.ToSTR()}");
+			return ret;
 		}
 
-		return e;
-	}
+		internal static string ToSTR(this BindingFlags flags) => flags == ALL ? "ALL" : flags.ToString();
 
 
-	//instance
-	internal static T EventToDelegate<T>(object instance, string eventName)
-		where T : Delegate
-	{
-		return (T)instance
-			.GetType()
-			.GetField(eventName, ALL)
-			.GetValue(instance);
-	}
 
-	//static
-	internal static T EventToDelegate<T>(Type type, string eventName)
-		where T : Delegate
-	{
-		return (T)type
-			.GetField(eventName, ALL)
-			.GetValue(null);
-	}
-
-	//instance
-	internal static void InvokeEvent(object instance, string eventName, bool verbose = false)
-	{
-		var d = GetEventDelegates(instance, eventName);
-		if (verbose)
+		/// <summary>
+		/// Invokes static method of any access type.
+		/// like: type.method()
+		/// </summary>
+		/// <param name="method">static method without parameters</param>
+		/// <returns>return value of the function if any. null otherwise</returns>
+		internal static object InvokeMethod<T>(string method)
 		{
-			Log.Info($"Executing event `{instance.GetType().FullName}.{eventName}` ...");
+			return GetMethod(typeof(T), method, true)?.Invoke(null, null);
 		}
 
-		ExecuteDelegates(d, verbose);
-	}
-
-
-
-	//static
-	internal static void InvokeEvent(Type type, string eventName, bool verbose = false)
-	{
-		var d = GetEventDelegates(type, eventName);
-		if (verbose)
+		internal static object InvokeMethod<T>(string method, params object[] args)
 		{
-			Log.Info($"Executing event `{type.FullName}.{eventName}` ...");
+			return GetMethod(typeof(T), method, true)?.Invoke(null, args);
 		}
 
-		ExecuteDelegates(d, verbose);
-	}
-
-	//static
-	internal static Delegate[] GetEventDelegates(Type type, string eventName)
-	{
-		var eventDelagate =
-			(MulticastDelegate)type
-			.GetField(eventName, ALL)
-			.GetValue(null);
-		return eventDelagate.GetInvocationList();
-	}
-
-	//instance
-	internal static Delegate[] GetEventDelegates(object instance, string eventName)
-	{
-		var eventDelagate =
-			(MulticastDelegate)instance.GetType()
-			.GetField(eventName, ALL)
-			.GetValue(instance);
-		return eventDelagate.GetInvocationList();
-	}
-
-	internal static void ExecuteDelegates(Delegate[] delegates, bool verbose = false)
-	{
-		if (delegates is null)
+		/// <summary>
+		/// Invokes static method of any access type.
+		/// like: type.method()
+		/// </summary>
+		/// <param name="method">static method without parameters</param>
+		/// <returns>return value of the function if any. null otherwise</returns>
+		internal static object InvokeMethod(Type type, string method)
 		{
-			throw new ArgumentNullException("delegates");
+			return GetMethod(type, method, true)?.Invoke(null, null);
 		}
 
-		var timer = new Stopwatch();
-		foreach (var dlg in delegates)
+		/// <summary>
+		/// Invokes static method of any access type.
+		/// like: qualifiedType.method()
+		/// </summary>
+		/// <param name="method">static method without parameters</param>
+		/// <returns>return value of the function if any. null otherwise</returns>
+		internal static object InvokeMethod(string qualifiedType, string method)
 		{
-			if (dlg == null)
-			{
-				continue;
-			}
+			var type = Type.GetType(qualifiedType, true);
+			return InvokeMethod(type, method);
+		}
 
+		/// <summary>
+		/// Invokes instance method of any access type.
+		/// like: qualifiedType.method()
+		/// </summary>
+		/// <param name="method">instance method without parameters</param>
+		/// <returns>return value of the function if any. null otherwise</returns>
+		internal static object InvokeMethod(object instance, string method)
+		{
+			var type = instance.GetType();
+			return GetMethod(type, method, true)?.Invoke(instance, null);
+		}
+
+		internal static object InvokeMethod(object instance, string method, params object[] args)
+		{
+			var type = instance.GetType();
+			return GetMethod(type, method, true)?.Invoke(instance, args);
+		}
+
+		internal static object InvokeSetter(object instance, string propertyName, object value)
+		{
+			var type = instance.GetType();
+			var property = type.GetProperty(propertyName) ?? throw new Exception($"{type}.{propertyName} not found");
+			return property.GetSetMethod().Invoke(instance, new object[] { value });
+		}
+
+		internal static EventInfo GetEvent(Type type, string eventName, bool throwOnError = true)
+		{
+			var e = type.GetEvent(eventName, ALL);
+			if (e == null && throwOnError)
+				throw new Exception($"could not find {eventName} in {type}");
+			return e;
+		}
+
+
+		//instance
+		internal static T EventToDelegate<T>(object instance, string eventName)
+			where T : Delegate
+		{
+			return (T)instance
+				.GetType()
+				.GetField(eventName, ALL)
+				.GetValue(instance);
+		}
+
+		//static
+		internal static T EventToDelegate<T>(Type type, string eventName)
+			where T : Delegate
+		{
+			return (T)type
+				.GetField(eventName, ALL)
+				.GetValue(null);
+		}
+
+		//instance
+		internal static void InvokeEvent(object instance, string eventName, bool verbose = false)
+		{
+			var d = GetEventDelegates(instance, eventName);
 			if (verbose)
-			{
-				Log.Info($"Executing {dlg.Target}:{dlg.Method.Name} ...");
-				timer.Reset();
-				timer.Start();
-			}
-			dlg.Method.Invoke(dlg.Target, null);
+				Log.Info($"Executing event `{instance.GetType().FullName}.{eventName}` ...");
+			ExecuteDelegates(d, verbose);
+		}
+
+
+
+		//static
+		internal static void InvokeEvent(Type type, string eventName, bool verbose = false)
+		{
+			var d = GetEventDelegates(type, eventName);
 			if (verbose)
+				Log.Info($"Executing event `{type.FullName}.{eventName}` ...");
+			ExecuteDelegates(d, verbose);
+		}
+
+		//static
+		internal static Delegate[] GetEventDelegates(Type type, string eventName)
+		{
+			MulticastDelegate eventDelagate =
+				(MulticastDelegate)type
+				.GetField(eventName, ALL)
+				.GetValue(null);
+			return eventDelagate.GetInvocationList();
+		}
+
+		//instance
+		internal static Delegate[] GetEventDelegates(object instance, string eventName)
+		{
+			MulticastDelegate eventDelagate =
+				(MulticastDelegate)instance.GetType()
+				.GetField(eventName, ALL)
+				.GetValue(instance);
+			return eventDelagate.GetInvocationList();
+		}
+
+		internal static void ExecuteDelegates(Delegate[] delegates, bool verbose = false)
+		{
+			if (delegates is null)
+				throw new ArgumentNullException("delegates");
+			var timer = new Stopwatch();
+			foreach (Delegate dlg in delegates)
 			{
-				var ms = timer.ElapsedMilliseconds;
-				Log.Info($"Done executing {dlg.Target}:{dlg.Method.Name}! duration={ms:#,0}ms");
+				if (dlg == null)
+					continue;
+				if (verbose)
+				{
+					Log.Info($"Executing {dlg.Target}:{dlg.Method.Name} ...");
+					timer.Reset();
+					timer.Start();
+				}
+				dlg.Method.Invoke(dlg.Target, null);
+				if (verbose)
+				{
+					var ms = timer.ElapsedMilliseconds;
+					Log.Info($"Done executing {dlg.Target}:{dlg.Method.Name}! duration={ms:#,0}ms");
+				}
 			}
 		}
-	}
 
-	internal static string ThisMethod
-	{
+		internal static string ThisMethod
+		{
+			[MethodImpl(MethodImplOptions.NoInlining)]
+			get => CurrentMethod(2);
+		}
+
+		private static string JoinArgs(object[] args)
+		{
+			if (args.IsNullorEmpty())
+				return "";
+			else
+				return args.Select(a => a.ToSTR()).Join(", ");
+		}
+
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		get => CurrentMethod(2);
-	}
-
-	private static string JoinArgs(object[] args)
-	{
-		if (args.IsNullorEmpty())
+		internal static string CurrentMethod(int i = 1, params object[] args)
 		{
-			return "";
+			var method = new StackFrame(i).GetMethod();
+			return $"{method.DeclaringType.Name}.{method.Name}({JoinArgs(args)})";
 		}
-		else
+		[MethodImpl(MethodImplOptions.NoInlining)]
+		internal static string CurrentMethodFull(int i = 1, params object[] args)
 		{
-			return args.Select(a => a.ToSTR()).Join(", ");
+			var method = new StackFrame(i).GetMethod();
+			if (args.IsNullorEmpty())
+			{
+				var parameters = method
+					.GetParameters()
+					.Select(p => $"{p.ParameterType.Name} {p.Name}")
+					.Join(" ,");
+				return $"{method.FullName()}({parameters})";
+			}
+			else
+			{
+				return $"{method.FullName()}({JoinArgs(args)})";
+			}
 		}
+
+		internal static void LogCalled(params object[] args) => Log.Info(CurrentMethod(2, args) + " called.", false);
+		internal static void LogSucceeded() => Log.Info(CurrentMethod(2) + " succeeded!", false);
 	}
 
-	[MethodImpl(MethodImplOptions.NoInlining)]
-	internal static string CurrentMethod(int i = 1, params object[] args)
+	internal static class ReflectionExtension
 	{
-		var method = new StackFrame(i).GetMethod();
-		return $"{method.DeclaringType.Name}.{method.Name}({JoinArgs(args)})";
-	}
-	[MethodImpl(MethodImplOptions.NoInlining)]
-	internal static string CurrentMethodFull(int i = 1, params object[] args)
-	{
-		var method = new StackFrame(i).GetMethod();
-		if (args.IsNullorEmpty())
+		const BindingFlags ALL = ReflectionHelpers.ALL;
+
+		internal static MethodInfo GetMethod(this Type type, string name, bool throwOnError = true)
 		{
-			var parameters = method
-				.GetParameters()
-				.Select(p => $"{p.ParameterType.Name} {p.Name}")
-				.Join(" ,");
-			return $"{method.FullName()}({parameters})";
+			return ReflectionHelpers.GetMethod(type, name, ALL, throwOnError);
 		}
-		else
+
+		internal static MethodInfo GetMethod(this Type type, string name, BindingFlags binding = ALL, bool throwOnError = true)
 		{
-			return $"{method.FullName()}({JoinArgs(args)})";
+			return ReflectionHelpers.GetMethod(type, name, binding, throwOnError);
 		}
-	}
 
-	internal static void LogCalled(params object[] args)
-	{
-		Log.Info(CurrentMethod(2, args) + " called.", false);
-	}
+		internal static MethodInfo GetMethod(
+			this Type type,
+			string name,
+			Type[] types,
+			BindingFlags binding = ALL,
+			bool throwOnError = true)
+		{
+			return ReflectionHelpers.GetMethod(type, name, binding, types, throwOnError);
+		}
 
-	internal static void LogSucceeded()
-	{
-		Log.Info(CurrentMethod(2) + " succeeded!", false);
-	}
-}
+		// boxing and unboxing on SetValue so that it can be called with ref on struct types.
+		internal static void SetValue<TStruct>(this FieldInfo fieldInfo, ref TStruct obj, object val) where TStruct : struct
+		{
+			var tmp = (object)obj;
+			fieldInfo.SetValue(tmp, val);
+			obj = (TStruct)tmp;
+		}
 
-internal static class ReflectionExtension
-{
-	const BindingFlags ALL = ReflectionHelpers.ALL;
-
-	internal static MethodInfo GetMethod(this Type type, string name, bool throwOnError = true)
-	{
-		return ReflectionHelpers.GetMethod(type, name, ALL, throwOnError);
-	}
-
-	internal static MethodInfo GetMethod(this Type type, string name, BindingFlags binding = ALL, bool throwOnError = true)
-	{
-		return ReflectionHelpers.GetMethod(type, name, binding, throwOnError);
-	}
-
-	internal static MethodInfo GetMethod(
-		this Type type,
-		string name,
-		Type[] types,
-		BindingFlags binding = ALL,
-		bool throwOnError = true)
-	{
-		return ReflectionHelpers.GetMethod(type, name, binding, types, throwOnError);
-	}
-
-	// boxing and unboxing on SetValue so that it can be called with ref on struct types.
-	internal static void SetValue<TStruct>(this FieldInfo fieldInfo, ref TStruct obj, object val) where TStruct : struct
-	{
-		var tmp = (object)obj;
-		fieldInfo.SetValue(tmp, val);
-		obj = (TStruct)tmp;
-	}
-
-	internal static void SetValue<TStruct>(this PropertyInfo propertyInfo, ref TStruct obj, object value, object[] index) where TStruct : struct
-	{
-		var tmp = (object)obj;
-		propertyInfo.SetValue(tmp, value, index);
-		obj = (TStruct)tmp;
+		internal static void SetValue<TStruct>(this PropertyInfo propertyInfo, ref TStruct obj, object value, object[] index) where TStruct : struct
+		{
+			var tmp = (object)obj;
+			propertyInfo.SetValue(tmp, value, index);
+			obj = (TStruct)tmp;
+		}
 	}
 }

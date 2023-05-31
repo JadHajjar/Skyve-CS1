@@ -21,10 +21,10 @@ using System.Threading;
 using static ColossalFramework.Plugins.PluginManager;
 using static KianCommons.ReflectionHelpers;
 
-using SteamUtilities = Injections.SkyveInjections.SteamUtilities;
-
 namespace SkyveMod.Data;
 extern alias Injections;
+
+using SteamUtilities = Injections.SkyveInjections.SteamUtilities;
 public class CacheUtil
 {
 	public CSCache Cache;

@@ -38,6 +38,7 @@ public partial class PC_UserPage : PanelContent
 
 		PB_Icon.UserId = UserId;
 		PB_Icon.LoadImage(User?.AvatarUrl, ImageManager.GetImage);
+		P_Info.SetUser(User, this);
 
 		//T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
 
@@ -58,8 +59,6 @@ public partial class PC_UserPage : PanelContent
 		};
 
 		//	LC_Items.AddRange(p.Assets);
-
-			T_Info.LinkedControl=LC_Items;
 		//}
 		//else if (crAvailable)
 		//{
@@ -137,6 +136,25 @@ public partial class PC_UserPage : PanelContent
 		return true;
 	}
 
+	protected override void OnDataLoad()
+	{
+
+		if (LC_Items.ItemCount == 0)
+		{
+			OnLoadFail();
+			return;
+		}
+		T_Packages.LinkedControl = LC_Items;
+
+		if (T_Packages.Selected)
+			T_Packages.Selected = true;
+	}
+
+	protected override void OnLoadFail()
+	{
+		slickTabControl1.Tabs = slickTabControl1.Tabs.Where(x => x != T_Packages).ToArray();
+	}
+
 	private void CentralManager_PackageInformationUpdated()
 	{
 		P_Info.Invalidate();
@@ -147,7 +165,7 @@ public partial class PC_UserPage : PanelContent
 	{
 		base.UIChanged();
 
-		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
+		PB_Icon.Width = TLP_Top.Height = (int)(128 / 2 * UI.FontScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
