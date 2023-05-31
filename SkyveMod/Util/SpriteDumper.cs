@@ -2,10 +2,8 @@
 
 using KianCommons;
 
-using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SkyveMod.Util;
@@ -80,11 +78,9 @@ internal class SpriteDumper
 					{
 						var pngbytes = sprite.texture.EncodeToPNG();
 
-						File.WriteAllBytes(fileName + sprite.name+".png", pngbytes);
+						File.WriteAllBytes(fileName + sprite.name + ".png", pngbytes);
 					}
 				}
-
-				
 			}
 			catch { }
 		}

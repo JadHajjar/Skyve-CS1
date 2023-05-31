@@ -1,5 +1,4 @@
-namespace KianCommons.Plugins {
-    using System;
+using System;
 
-    public class FPSBoosterSkipOptimizationsAttribute : Attribute { }
-}
+namespace KianCommons.Plugins;
+public class FPSBoosterSkipOptimizationsAttribute : Attribute { }

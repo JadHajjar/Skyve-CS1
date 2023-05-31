@@ -1,16 +1,22 @@
-namespace SkyveMod.Patches.Startup {
-    using HarmonyLib;
-    using static KianCommons.ReflectionHelpers;
-    using UnityEngine;
+using HarmonyLib;
 
-    [HarmonyPatch(typeof(DLCPanel), "Start")] // does not have awake
-    static class DLCPanel_Awake {
-        static bool Prefix(DLCPanel __instance) {
-            LogCalled();
-            if (!Settings.ConfigUtil.Config.HidePanels)
-                return true;
-            GameObject.DestroyImmediate(__instance.gameObject);
-            return false;
-        }
-    }
+using UnityEngine;
+
+using static KianCommons.ReflectionHelpers;
+
+namespace SkyveMod.Patches.Startup;
+[HarmonyPatch(typeof(DLCPanel), "Start")] // does not have awake
+static class DLCPanel_Awake
+{
+	static bool Prefix(DLCPanel __instance)
+	{
+		LogCalled();
+		if (!Settings.ConfigUtil.Config.HidePanels)
+		{
+			return true;
+		}
+
+		GameObject.DestroyImmediate(__instance.gameObject);
+		return false;
+	}
 }
