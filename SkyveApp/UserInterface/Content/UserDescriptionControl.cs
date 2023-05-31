@@ -31,13 +31,7 @@ internal class UserDescriptionControl : SlickImageControl
 	public void SetPackage(SteamUser user, PC_UserPage? page)
 	{
 		UserPage = page;
-		Package = package;
-
-		if (!string.IsNullOrWhiteSpace(Package.Author?.AvatarUrl))
-		{
-			Image = null;
-			LoadImage(Package.Author?.AvatarUrl, ImageManager.GetImage);
-		}
+		User = user;
 
 		Invalidate();
 	}
@@ -51,7 +45,7 @@ internal class UserDescriptionControl : SlickImageControl
 	{
 		base.OnMouseClick(e);
 
-		if (e.Button != MouseButtons.Left || rects is null || Package is null)
+		if (e.Button != MouseButtons.Left || rects is null || User is null)
 		{
 			return;
 		}

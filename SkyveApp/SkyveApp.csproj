@@ -78,6 +78,9 @@
     <Compile Update="UserInterface\Content\DownloadsInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Content\UserDescriptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
