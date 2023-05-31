@@ -88,11 +88,11 @@ internal class SteamUserControl : SlickControl
 		var size = Height - (Padding.Vertical * 2);
 		var icon = ImageManager.GetImage(User.AvatarUrl, true).Result;
 		var textRectangle = ClientRectangle.Pad(size + (Padding.Left * 2), 0, 0, 0);
-
+		var avatarRect = ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft);
 		var infoSize = e.Graphics.Measure(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold));
 		var nameSize = e.Graphics.Measure(User.Name, UI.Font(9F, FontStyle.Bold));
 
-		e.Graphics.DrawRoundImage(icon, ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft));
+		e.Graphics.DrawRoundImage(icon, avatarRect);
 
 		e.Graphics.DrawString(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold), new SolidBrush(FormDesign.Design.InfoColor), textRectangle);
 		e.Graphics.DrawString(User.Name, UI.Font(9F, FontStyle.Bold), new SolidBrush(FormDesign.Design.ForeColor), textRectangle, new StringFormat { LineAlignment = StringAlignment.Far });
@@ -103,6 +103,16 @@ internal class SteamUserControl : SlickControl
 		if ((width != Width && Dock == DockStyle.None) || height != Height)
 		{
 			Size = new(width, height);
+		}
+
+		if (CompatibilityManager.CompatibilityData.Authors.TryGet(User.SteamId)?.Verified ?? false)
+		{
+			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
+
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+
+			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
 	}
 }

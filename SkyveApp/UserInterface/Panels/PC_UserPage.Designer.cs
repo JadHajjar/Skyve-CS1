@@ -43,7 +43,7 @@ partial class PC_UserPage
 			this.T_Profiles = new SlickControls.SlickTabControl.Tab();
 			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.TLP_Top = new System.Windows.Forms.TableLayoutPanel();
-			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
+			this.PB_Icon = new SkyveApp.UserInterface.Content.UserIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
 			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
 			this.P_Content.SuspendLayout();
@@ -226,7 +226,7 @@ partial class PC_UserPage
 
 	#endregion
 	private System.Windows.Forms.TableLayoutPanel TLP_Top;
-	private PackageIcon PB_Icon;
+	private UserIcon PB_Icon;
 	private System.Windows.Forms.Panel P_Content;
 	private System.Windows.Forms.Panel P_Back;
 	private PackageDescriptionControl P_Info;

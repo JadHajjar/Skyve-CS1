@@ -36,6 +36,7 @@ public partial class PC_UserPage : PanelContent
 		UserId = user;
 		User = SteamUtil.GetUser(user);
 
+		PB_Icon.UserId = UserId;
 		PB_Icon.LoadImage(User?.AvatarUrl, ImageManager.GetImage);
 
 		//T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
@@ -122,6 +123,13 @@ public partial class PC_UserPage : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
+		if  (User is null)
+		{
+			User = await SteamUtil.GetUserAsync(UserId);
+
+			PB_Icon.LoadImage(User?.AvatarUrl, ImageManager.GetImage);
+		}
+
 		var results = await SteamUtil.GetWorkshopItemsByUserAsync(UserId, true);
 
 		LC_Items.SetItems(results.Values);
