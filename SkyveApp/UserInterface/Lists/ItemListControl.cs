@@ -678,7 +678,35 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		base.OnPaintItem(e);
 
-		if (e.Item.Incompatible || report.Data?.Package.Stability is PackageStability.Broken)
+		if (e.Item.Incompatible || e.Item.Banned || report.Data?.Package.Stability is PackageStability.Broken)
+		{
+			int stripeWidth = (int)(19 * UI.UIScale);
+			var step = e.ClipRectangle.Height;
+			int diagonalLength = (int)Math.Sqrt(2 * Math.Pow(Height, 2));
+			var colors = new[]
+			{
+				FormDesign.Design.AccentColor.MergeColor(e.BackColor),
+				(e.Item.Incompatible || e.Item.Banned?FormDesign.Design.RedColor: FormDesign.Design.YellowColor).MergeColor(e.BackColor, 35),
+			};
+
+			// Create a pen with a width equal to the stripe width
+			using	Pen pen = new Pen(colors[0], stripeWidth);
+
+			var odd = false;
+			// Draw the yellow and black diagonal lines
+			for (int i = e.ClipRectangle .X- diagonalLength; i < e.ClipRectangle.Right; i += stripeWidth)
+			{
+				if (odd)
+					pen.Color = colors[0];
+				else
+					pen.Color = colors[1];
+
+				odd = !odd;
+
+				e.Graphics.DrawLine(pen, i-step, e.ClipRectangle.Y +2*step, i + step*2, e.ClipRectangle.Y-step);
+			}
+		}
+		else if (report.Data?.Package.Stability is PackageStability.Broken)
 		{
 			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, FormDesign.Design.RedColor)), e.ClipRectangle);
 		}
@@ -769,11 +797,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return;
 		}
 
-		var brushRect = new Rectangle(rects.SteamIdRect.X - (int)(100 * UI.FontScale), e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height);
+		var brushRect = new Rectangle(rects.SteamIdRect.X - (int)(100 * UI.FontScale), (int)e.Graphics.ClipBounds.Y, (int)(100 * UI.FontScale), (int)e.Graphics.ClipBounds.Height);
 		using (var brush = new LinearGradientBrush(brushRect, Color.Empty, e.BackColor, LinearGradientMode.Horizontal))
 		{
 			e.Graphics.FillRectangle(brush, brushRect);
-			e.Graphics.FillRectangle(new SolidBrush(e.BackColor), new Rectangle(rects.SteamIdRect.X, e.ClipRectangle.Y, Width, e.ClipRectangle.Height));
+			e.Graphics.FillRectangle(new SolidBrush(e.BackColor), new Rectangle(rects.SteamIdRect.X, (int)e.Graphics.ClipBounds.Y, Width, (int)e.Graphics.ClipBounds.Height));
 		}
 
 		DrawAuthorAndSteamId(e, large, rects, package);

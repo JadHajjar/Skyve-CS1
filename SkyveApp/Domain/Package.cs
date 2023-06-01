@@ -60,6 +60,7 @@ public class Package : IPackage
 	public ulong[]? RequiredPackages => WorkshopInfo?.RequiredPackages;
 	public bool RemovedFromSteam => WorkshopInfo?.RemovedFromSteam ?? false;
 	public bool Incompatible => WorkshopInfo?.Incompatible ?? false;
+	public bool Banned => WorkshopInfo?.Banned ?? false;
 	public bool IsCollection => WorkshopInfo?.IsCollection ?? false;
 	public long ServerSize => WorkshopInfo?.ServerSize ?? 0;
 	public string? SteamDescription => WorkshopInfo?.SteamDescription;

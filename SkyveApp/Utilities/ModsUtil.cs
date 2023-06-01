@@ -293,16 +293,10 @@ internal static class ModsUtil
 	{
 		tags = new();
 
-		if (package?.Name is null)
-		{
-			return string.Empty;
-		}
-
-		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
+		var text = package?.Name ?? Locale.UnknownPackage;
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
 
 		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
-
 
 		foreach (Match match in tagMatches)
 		{
@@ -324,7 +318,11 @@ internal static class ModsUtil
 			}
 		}
 
-		if (package.Incompatible)
+		if (package.Banned)
+		{
+			tags.Add((FormDesign.Design.RedColor, LocaleCR.Banned.One.ToUpper()));
+		}
+		else if (package.Incompatible)
 		{
 			tags.Add((FormDesign.Design.RedColor, LocaleCR.Incompatible.One.ToUpper()));
 		}

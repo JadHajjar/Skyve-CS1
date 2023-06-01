@@ -60,10 +60,7 @@ public static class CompatibilityManager
 			return;
 		}
 
-		foreach (var package in content)
-		{
-			GetCompatibilityInfo(package, true);
-		}
+		Parallelism.ForEach(content.ToList(), package => GetCompatibilityInfo(package, true));
 
 		CentralManager.OnInformationUpdated();
 
@@ -421,9 +418,6 @@ public static class CompatibilityManager
 
 	internal static void DoFirstCache(List<Domain.Package> packages)
 	{
-		foreach (var package in packages)
-		{
-			_cache[package] = GenerateCompatibilityInfo(package);
-		}
+		Parallelism.ForEach(packages, package => _cache[package] = GenerateCompatibilityInfo(package));
 	}
 }

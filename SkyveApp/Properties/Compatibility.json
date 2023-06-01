@@ -207,5 +207,6 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
+  "Banned": "Banned",
   "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
 }

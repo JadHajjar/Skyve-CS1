@@ -39,7 +39,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 				AutoSizeMode = AutoSizeMode.GrowAndShrink
 			};
 
-			_panels[i].ColumnStyles.Add(new ColumnStyle(SizeType.Percent));
+			_panels[i].ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 			_panels[i].ColumnCount = 1;
 
 			Controls.Add(_panels[i], i, 0);
@@ -100,6 +100,8 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 					GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
 				}
+
+				ColumnStyles[2].Width = controlCount > 2 ? 100/3F : 0;
 			}
 		}
 		finally

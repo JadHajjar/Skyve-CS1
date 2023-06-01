@@ -52,6 +52,7 @@ public class Mod : IPackage
 	public string[]? WorkshopTags => ((IPackage)Package).WorkshopTags;
 	public bool RemovedFromSteam => ((IPackage)Package).RemovedFromSteam;
 	public bool Incompatible => ((IPackage)Package).Incompatible;
+	public bool Banned => ((IPackage)Package).Banned;
 
 	public bool IsCollection => ((IPackage)Package).IsCollection;
 
