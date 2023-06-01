@@ -22,6 +22,21 @@ internal static class ApiUtil
 
 	internal static async Task<T?> Get<T>(string url, (string, string)[] headers, params (string, object)[] queryParams)
 	{
+		return await Send<T>("GET", url, headers, queryParams);
+	}
+
+	internal static async Task<T?> Delete<T>(string url, params (string, object)[] queryParams)
+	{
+		return await Delete<T>(url, new (string, string)[0], queryParams);
+	}
+
+	internal static async Task<T?> Delete<T>(string url, (string, string)[] headers, params (string, object)[] queryParams)
+	{
+		return await Send<T>("DELETE", url, headers, queryParams);
+	}
+
+	private static async Task<T?> Send<T>(string method, string url, (string, string)[] headers, params (string, object)[] queryParams)
+	{
 		if (queryParams.Length > 0)
 		{
 			var query = queryParams.Select(x => $"{Uri.EscapeDataString(x.Item1)}={Uri.EscapeDataString(x.Item2.ToString())}");
@@ -33,7 +48,7 @@ internal static class ApiUtil
 		{
 			var request = WebRequest.Create(url);
 
-			request.Method = "GET";
+			request.Method = method;
 
 			foreach (var item in headers)
 			{

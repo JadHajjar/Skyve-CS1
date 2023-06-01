@@ -1,7 +1,6 @@
 ﻿using Extensions.Sql;
-using SkyveApp.Domain.Compatibility.Api;
 
-namespace SkyveApp.Domain.Compatibility.Enums;
+namespace SkyveApp.Domain.Compatibility.Api;
 
 [DynamicSqlClass("Packages")]
 public class PostPackage : CrPackage

@@ -2,9 +2,9 @@
 
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Steam;
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -69,5 +69,15 @@ internal class CompatibilityApiUtil
 	internal static async Task<ReviewRequest?> GetReviewRequest(ulong userId, ulong packageId)
 	{
 		return await Get<ReviewRequest>("/GetReviewRequest", (nameof(userId), userId), (nameof(packageId), packageId));
+	}
+
+	internal static async Task<UserProfile[]?> GetUserProfiles(ulong userId)
+	{
+		return await Get<UserProfile[]>("/GetUserProfiles", (nameof(userId), userId));
+	}
+
+	internal static async Task<ApiResponse> SaveUserProfile(UserProfile profile)
+	{
+		return await Post<UserProfile, ApiResponse>("/SaveUserProfile", profile);
 	}
 }

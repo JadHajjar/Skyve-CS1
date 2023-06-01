@@ -112,6 +112,11 @@ internal static class ModsUtil
 
 	internal static void SetIncluded(Mod mod, bool value)
 	{
+		if (!value && ModLogicManager.IsRequired(mod))
+		{
+			value = true;
+		}
+
 		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating || CitiesManager.IsRunning())
 		{
 #if DEBUG

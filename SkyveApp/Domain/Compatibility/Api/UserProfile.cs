@@ -22,8 +22,12 @@ public class UserProfile : IDynamicSql
     public int AssetCount { get; set; }
     [DynamicSqlProperty]
     public DateTime DateCreated { get; set; }
-    [DynamicSqlProperty]
-    public DateTime DateModified { get; set; }
+	[DynamicSqlProperty]
+	public DateTime DateModified { get; set; }
+	[DynamicSqlProperty]
+	public bool Public { get; set; }
+	[DynamicSqlProperty]
+	public byte[]? Banner { get; set; }
 	[DynamicSqlProperty]
 	public int? Color { get; set; }
 

@@ -37,87 +37,18 @@ public partial class PC_UserPage : PanelContent
 		User = SteamUtil.GetUser(user);
 
 		PB_Icon.UserId = UserId;
-		PB_Icon.LoadImage(User?.AvatarUrl, ImageManager.GetImage);
-		P_Info.SetUser(User, this);
 
-		//T_CR.LinkedControl = new PackageCompatibilityReportControl(package);
+		if (User is not null)
+		{
+			PB_Icon.LoadImage(User.AvatarUrl, ImageManager.GetImage);
+			P_Info.SetUser(User, this);
+		}
 
-		//var tabs = slickTabControl1.Tabs.ToList();
-		//var crAvailable = Package.GetCompatibilityInfo().Data is not null;
-
-		//if (!crAvailable)
-		//{
-		//	TLP_Info.ColumnStyles[1].Width = 0;
-		//}th
-
-		//if (Package is Package p && p.Assets is not null && p.Assets.Length > 0)
-		//{
 		LC_Items = new ItemListControl<IPackage>
 		{
 			IsGenericPage = true,
 			Dock = DockStyle.Fill
 		};
-
-		//	LC_Items.AddRange(p.Assets);
-		//}
-		//else if (crAvailable)
-		//{
-		//	TLP_Info.ColumnStyles[0].Width = 0;
-		//}
-		//else
-		//{
-		//	tabs.Remove(T_Info);
-		//	T_CR.Selected = true;
-		//}
-
-		//if (crAvailable)
-		//{
-		//	foreach (var item in Package.GetCompatibilityInfo().Data?.Package.Links ?? new())
-		//	{
-		//		FLP_Links.Controls.Add(new LinkControl { Link = item, Display = true });
-		//	}
-
-		//	label5.Visible = FLP_Links.Visible = FLP_Links.Controls.Count > 0;
-
-		//	AddTags();
-		//}
-
-		//var references = ModLogicManager.GetPackagesThatReference(package).ToList();
-
-		//if (references.Count > 0)
-		//{
-		//	LC_References = new ItemListControl<IPackage>
-		//	{
-		//		Dock = DockStyle.Fill
-		//	};
-
-		//	LC_References.AddRange(references);
-
-		//	T_References.LinkedControl = LC_References;
-		//}
-		//else
-		//{
-		//	tabs.Remove(T_References);
-		//}
-
-		////if (!string.IsNullOrWhiteSpace(package.SteamDescription))
-		////{
-		////	var c = new SteamDescriptionViewer(package.SteamDescription!);
-
-		////	T_Info.LinkedControl = c;
-		////}
-
-		//var pc = new OtherProfilePackage(package)
-		//{
-		//	Dock = DockStyle.Fill
-		//};
-
-		//T_Profiles.FillTab = true;
-		//T_Profiles.LinkedControl = pc;
-
-		//slickTabControl1.Tabs = tabs.ToArray();
-
-		//CentralManager.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -126,7 +57,18 @@ public partial class PC_UserPage : PanelContent
 		{
 			User = await SteamUtil.GetUserAsync(UserId);
 
-			PB_Icon.LoadImage(User?.AvatarUrl, ImageManager.GetImage);
+			if (User is not null)
+			{
+				PB_Icon.LoadImage(User.AvatarUrl, ImageManager.GetImage);
+				P_Info.SetUser(User, this);
+			}
+		}
+
+		var profiles = await CompatibilityApiUtil.GetUserProfiles(UserId);
+
+		if (profiles?.Any() ?? false)
+		{
+
 		}
 
 		var results = await SteamUtil.GetWorkshopItemsByUserAsync(UserId, true);
@@ -138,12 +80,12 @@ public partial class PC_UserPage : PanelContent
 
 	protected override void OnDataLoad()
 	{
-
 		if (LC_Items.ItemCount == 0)
 		{
 			OnLoadFail();
 			return;
 		}
+
 		T_Packages.LinkedControl = LC_Items;
 
 		if (T_Packages.Selected)

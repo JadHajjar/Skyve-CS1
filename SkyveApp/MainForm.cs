@@ -108,6 +108,11 @@ public partial class MainForm : BasePanelForm
 			base_PB_Icon.LoaderSpeed = 0.15;
 
 			buttonStateRunning = null;
+
+			if (CurrentPanel is PC_MainPage mainPage)
+			{
+				mainPage.B_StartStop.Loading = false;
+			}
 		}
 	}
 
