@@ -100,7 +100,7 @@
   "Interaction_Identical": "هذه إصدارات متعددة من نفس الحزمة.\r\n\r\nيجب عليك اختيار واحد منها فقط.",
   "Status_Succeeded": "'{0}' نجح ب '{1}'.\r\n\r\nأنت تستخدم بالفعل '{1}' لذلك لا حاجة إلى '{0}' بعد الآن.",
   "Status_Deprecated": "'{0}' مهجور, لم يعد مدعوما من قبل مؤلفه.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' هو إعادة تحميل الحزمة الأصلية.",
     "One": "هذا هو إعادة تحميل من '{1}'."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "هذا هو وضع التبعية، ولكن يبدو أنك تستخدم أي حزمة تتطلب ذلك.",
   "Status_SourceCodeNotAvailable": "الرمز المصدر لهذا التعديل غير متوفر. لا يجب عليك استخدامه إلا إذا كنت تثق بمؤلفه.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "الموسيقى داخل هذه الحزمة قد تكون محفوظة في حقوق التأليف والنشر. من الأفضل عدم استخدامها أثناء البث.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "المخرجات المتوقعة",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "يجب أن تستبعد ''{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "استبعاد",
+  "Unsubscribe": "إلغاء الاشتراك",
   "Action_ExcludeOther": {
     "One": "يجب أن تستبعد ''{1}'.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
