@@ -523,12 +523,12 @@
     "Plural": "{0} アイテムが削除を待機中"
   },
   "YouHavePackagesUser": {
-    "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "One": "{1} が作成した {0} 個のパッケージ",
+    "Plural": "{1} が作成した {0} 個のパッケージ"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
-  "RequestOption3": "Add a missing interaction with another package",
+  "RequestOption1": "問題を報告・不足した情報を追加",
+  "RequestOption2": "パッケージに不足しているステータスを追加",
+  "RequestOption3": "別のパッケージで不足している依存関係を追加",
   "CurrentProfile": "現在のプロファイル",
-  "References": "References"
+  "References": "参照"
 }
