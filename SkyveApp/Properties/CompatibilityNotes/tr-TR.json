@@ -7,7 +7,7 @@
   "The functionality of this mod is included in the game itself.": "Bu modun işlevselliği zaten oyunun kendisinde mevcuttur.",
   "Demand stays at zero.": "Talep sıfırda kalıyor.",
   "Several users report it is not working at all.": "Birçok kullanıcı, modun hiç çalışmadığını bildiriyor.",
-  "Works, but causes \"InvalidOperationException\" error messages in log file.": "Works, but causes \"InvalidOperationException\" error messages in log file.",
+  "Works, but causes \"InvalidOperationException\" error messages in log file.": "Çalışıyor, ancak günlük dosyasında \"InvalidOperationException\" \"UygunsuzSıradışıİşlem\" hata mesajlarına neden oluyor.",
   "This is missing statistics from later DLCs and game patches.": "This is missing statistics from later DLCs and game patches.",
   "Several reports about conflicts with various mods.": "Several reports about conflicts with various mods.",
   "Bloom settings not being applied. Config files not loading.": "Bloom settings not being applied. Config files not loading.",
