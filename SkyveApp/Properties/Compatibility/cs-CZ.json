@@ -100,7 +100,7 @@
   "Interaction_Identical": "Jedná se o více verzí stejného balíčku.\r\n\r\nMěli byste vybrat pouze jednu z nich.",
   "Status_Succeeded": "'{0}' je uspěl '{1}'.\r\n\r\nJiž používáte '{1}', takže již není potřeba '{0}'.",
   "Status_Deprecated": "'{0}' je zastaralé, není již podporováno jeho autorem.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' je opětovné nahrání původního balíčku.",
     "One": "Toto je opětovné nahrání '{1}'."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Toto je režim závislosti, ale nezdá se, že používáte žádný balíček, který to vyžaduje.",
   "Status_SourceCodeNotAvailable": "Zdrojový kód tohoto modu není k dispozici. Neměli byste jej použít, pokud nedůvěřujete jeho autorovi.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Hudba uvnitř tohoto balíčku může být autorsky chráněná. Je nejlepší ji nepoužívat při streamování.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Očekávaný výstup",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Měli byste vyloučit '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Vyjmout",
+  "Unsubscribe": "Odhlásit odběr",
   "Action_ExcludeOther": {
     "One": "Měli byste vyloučit '{1}'.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
