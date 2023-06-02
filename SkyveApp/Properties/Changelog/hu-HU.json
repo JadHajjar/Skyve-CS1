@@ -5,7 +5,7 @@
         "Tagline": "Welcome to the change-log era",
         "ChangeGroups": [
             {
-                "Name": "ใหม่",
+                "Name": "New",
                 "Changes": [
                     "Added an 'Unsubscribe All' button in content pages' actions.",
                     "Added a Utility section to subscribe to missing items in a BOB config.",
@@ -14,7 +14,7 @@
                 ]
             },
             {
-                "Name": "เพิ่มประสิทธิภาพ",
+                "Name": "Improvements",
                 "Changes": [
                     "Added Compatibility Report for broken Assets",
                     "Unlisted packages now have the correct name and thumbnail.",
@@ -23,7 +23,7 @@
                 ]
             },
             {
-                "Name": "แก้ไข",
+                "Name": "Fixes",
                 "Changes": [
                     "Fixed legacy profiles not being converted after the first launch.",
                     "Fixed local assets not automatically refreshing after external changes.",
@@ -49,13 +49,13 @@
                 ]
             },
             {
-                "Name": "เพิ่มประสิทธิภาพ",
+                "Name": "Improvements",
                 "Changes": [
                     "Changed the icons of filters to reflect the correct icons used in the list."
                 ]
             },
             {
-                "Name": "แก้ไข",
+                "Name": "Fixes",
                 "Changes": [
                     "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
                     "Fixed the map selection for a new game not letting users select a vanilla map."
@@ -68,7 +68,7 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "แก้ไข",
+                "Name": "Fixes",
                 "Changes": [
                     "Fixed a bug that caused infinite loading for some users."
                 ]
@@ -80,7 +80,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "เปลี่ยน",
+                "Name": "Changes",
                 "Changes": [
                     "Removed the subscription tab from the in-game mod options.",
                     "Fixed DLCs not being applied when loading a profile.",
@@ -96,7 +96,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "เปลี่ยน",
+                "Name": "Changes",
                 "Changes": [
                     "Adding an info popup when subscribing to items for the first time.",
                     "Added a warning text in the dashboard when you have multiple LOM instances installed.",
@@ -119,7 +119,7 @@
         "Tagline": "Presenting, the Profile Overhaul",
         "ChangeGroups": [
             {
-                "Name": "เปลี่ยนโพร์ไฟล์",
+                "Name": "Profile Changes",
                 "Changes": [
                     "Changed the design of your profile list.",
                     "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
@@ -133,7 +133,7 @@
                 ]
             },
             {
-                "Name": "เพิ่มประสิทธิภาพ",
+                "Name": "Improvements",
                 "Changes": [
                     "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
                     "Local assets are now correctly groupped based on the folders they're in.",
@@ -413,7 +413,7 @@
         ]
     },
     {
-        "Version": "3.0.6",
+        "Version": "3.0.7",
         "Date": "2023-05-29",
         "ChangeGroups": [
             {

@@ -94,7 +94,7 @@
   "OpenLocalFolder": "打開此外掛程式的本地資料夾",
   "ViewOnSteam": "在 Steam 工坊查看此外掛程式",
   "ReDownloadPackage": "重新下載此外掛程式",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "下載此外掛",
   "CopySteamId": "複製這個 Steam ID",
   "OpenAuthorPage": "打開作者的創意工坊主頁",
   "Sorting_Default": "預設排序",
@@ -160,8 +160,8 @@
   "TotalItems": "項目總數",
   "UnsubscribeAll": "取消訂閱所有顯示的專案",
   "SubscribeAll": "訂閱所有顯示的專案",
-  "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Re-Download all displayed & downloaded items",
+  "DownloadAll": "下載所有顯示的項目和缺失的項目",
+  "ReDownloadAll": "重新下載所有顯示的和已下載的項目",
   "MissingItemsRemain": "沒有找到設定檔中的某些項目，這些項目可能已經丟失。如果仍要保存設定檔，將會從設定檔中刪除已丟失的項目。",
   "ModIsPrivate": "此項目已被隱藏",
   "HidePseudoMods": "隱藏偽模組（如自訂混合主題）",
@@ -240,8 +240,8 @@
   "WouldYouLikeToSkipThose": "您確定要跳過這些外掛程式嗎？",
   "LOTWillRestart": "Skyve 進行更新時，程序會暫時關閉，更新完成後將自動重啟。",
   "UpdatingLot": "Skyve 正在進行更新，請稍候...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "進行訂閱操作",
+  "SubscribingRequiresGameToOpen": "訂閱或取消訂閱外掛時， Skyve 會啟動遊戲並在片刻後關閉遊戲（請確保已打開加速器 / VPN）。\n\n如果你看到 Steam 遊戲啟動介面，請點選「開始遊戲」。",
   "HelpSupport": "幫助與支持",
   "DisableFpsBoosterDebug": "您正在使用 Debug Mono，是否要禁用 FPS Booster 模組以獲取更好的日誌？",
   "LogZipCopy_Tip": "創建一個壓縮檔夾（其中包含幫助您解決問題所需的所有日誌檔），您可以將其直接粘貼到 QQ 群或者 Discord 頻道的對話方塊中發送。",
@@ -490,36 +490,36 @@
   "RedownloadComplete": "Skyve 已重新下載存在問題的外掛。",
   "CleanupComplete": "Skyve 已經將您已取消訂閱（但沒刪除乾淨）的外掛清理完畢。",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "當前有 {0} 個等待中的訂閱操作",
+    "Plural": "當前有 {0} 個等待中的訂閱操作"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "當前有 {0} 個等待中的取消訂閱操作",
+    "Plural": "當前有 {0} 個等待中的取消訂閱操作"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "CancelDownloads": "Cancel all pending downloads",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "ApplyDownloads": "Force Steam to download all pending packages",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "移除所有等待中的訂閱操作",
+  "CancelDownloads": "取消所有等待下載的項目",
+  "ApplySubs": "啟動遊戲片刻以開始進行訂閱",
+  "ApplyDownloads": "強制 Steam 下載所有等待處理的外掛",
+  "SubsPendingInfo": "這裡將顯示您要訂閱的外掛。\n一旦啟動遊戲，將從 Steam 創意工坊訂閱這些外掛。",
+  "DownloadsPendingInfo": "這裡顯示的是您已訂閱但尚未下載的外掛。",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "訂閱外掛後立即開始下載，取消訂閱外掛後立即刪除殘留檔案",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "強制下載或強制刪除外掛，而不是等到外掛真正被訂閱或取消訂閱時，才下載或刪除。",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "在此處理程序中，您將訂閱 {0} 個外掛。",
+    "Plural": "在此處理程序中，您將訂閱 {0} 個外掛。"
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "在此處理程序中，您將取消訂閱 {0} 個外掛。",
+    "Plural": "在此處理程序中，您將取消訂閱 {0} 個外掛。"
   },
-  "ViewThisProfilesPackages": "View this profile's contents",
+  "ViewThisProfilesPackages": "查看此組態檔案的內容",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "當前有 {0} 個等待刪除的項目",
+    "Plural": "當前有 {0} 個等待下載的項目"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "當前有 {0} 個等待刪除的項目",
+    "Plural": "當前有 {0} 個等待刪除的項目"
   }
 }

@@ -8,7 +8,7 @@
                 "Name": "Novidades",
                 "Changes": [
                     "Adicionado um botão \"Cancelar todas as assinaturas\" nas ações das páginas de conteúdo.",
-                    "Adicionada uma seção de \"Utilitários\" para assinar itens ausentes em uma configuração BOB.",
+                    "Adicionada uma seção de \"Utilitários\" para assinar itens ausentes de uma configuração BOB.",
                     "Adicionada uma opção para manter as seções de Filtros e Ações abertas por padrão.",
                     "Adicionadas páginas de histórico de alterações, você as verá em novas versões ou usando o botão correspondente nas seções de Ajuda."
                 ]
@@ -174,7 +174,7 @@
                 "Name": "Correções",
                 "Changes": [
                     "Correção ao carregar uma coleção via link não repassando a ID correta.",
-                    "Correção do LOT travar ao cancelar assinatura de um pacote no Linux & Mac."
+                    "Corrigido o LOT travar ao cancelar assinatura de um pacote no Linux & Mac."
                 ]
             }
         ]
@@ -227,7 +227,7 @@
                     "Corrigido a abertura do LOT após o monitor em que estava aberto ser desligado, resultando agora em uma janela aparecendo.",
                     "Corrigido a opção de tráfego à esquerda ñao funcionar quando aberta um novo mapa.",
                     "Corrigido as paginas de Autores não abrindo corretamente na Steam.",
-                    "Congelamentos corrigidos ao buscar com o filtro 'Tempo Inscrito' ativo."
+                    "Corrigido congelamentos ao buscar com o filtro 'Tempo de Assinado' ativo."
                 ]
             }
         ]
@@ -241,8 +241,8 @@
                 "Name": "Limpeza de Pacotes da Oficina",
                 "Changes": [
                     "Adicionada novas funcionalidades para resolver incompatibilidade da Steam e os seus pacotes baixados.",
-                    "Os pacotes que você não está mais inscrito não serão mais carregados no jogo.",
-                    "Abrir o jogo enquanto o LOT está aberto apagará automaticamente qualquer pacote que não está inscrito, mas está carregado no seu computador.",
+                    "Os pacotes que você não está mais assinados não serão mais carregados no jogo.",
+                    "Iniciar o jogo enquanto o LOT está aberto apagará automaticamente qualquer pacote que não está inscrito, mas está carregado no seu computador.",
                     "Adicionado um botão na Aba Utilidades para a execução da limpeza automaticamente, e forçar o carregamento de pacotes que faltam."
                 ]
             }
@@ -268,12 +268,12 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "Vote & Subscribers Icon",
+                "Name": "Ícone de Voto & Assinantes",
                 "Changes": [
-                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
+                    "Adicionado um novo ícone ao lado de um pacote que exibe um resumo rápido dos votos e da contagem de assinantes do pacote.",
                     "Hover over it to display the values.",
                     "Click on the icon for an in-depth description of this feature.",
-                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                    "Adicionadas opções de ordenação 'Votos' e 'Total de Assinantes'."
                 ]
             },
             {
@@ -421,8 +421,8 @@
                 "Changes": [
                     "Agora você pode assinar pacotes enquanto o jogo estiver aberto.",
                     "Assinar vários itens seguidos os colocará em uma lista pendente ao invés de abrir o jogo cada vez.",
-                    "Adicionada uma caixa na parte inferior esquerda do aplicativo para informar sobre quaisquer tarefas pendentes de assinatura ou cancelamento de assinatura.",
-                    "Adicionada uma opção avançada para forçar baixar ou excluir pacotes assim que você os assina ou cancela a assinatura no Skyve.",
+                    "Adicionada caixa na parte inferior esquerda do aplicativo para informar sobre quaisquer itens pendentes de assinatura ou cancelamento de assinatura.",
+                    "Adicionada opção avançada para forçar baixar ou excluir pacotes assim que você os assina ou cancela a assinatura no Skyve.",
                     "Os itens recém-assinados não são mais recarregados enquanto o jogo está aberto.\nFazer isso evita congelamentos no seu jogo, bem como mau funcionamento de mods."
                 ]
             },
@@ -432,7 +432,7 @@
                     "Adicionado \"Visualizar conteúdos deste perfil\" no menu de clique direito dos perfis.",
                     "Adicionado a opção \"Forçar para baixar\" no menu do botão direito'.",
                     "Adicionado mais contexto a algumas janelas",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "Adicionado um \"Baixar todos os itens exibidos\" nas ações nas páginas da lista."
                 ]
             },
             {
@@ -442,7 +442,7 @@
                     "Corrigido o problema em que os pacotes do perfil não exibiam o nome da oficina.",
                     "Corrigido o problema em que as informações do Steam dos pacotes não eram carregadas corretamente ao visualizar um perfil ou uma coleção.",
                     "O nome dos mods locais foi revertido para o nome da pasta em vez do nome da Oficina para evitar problemas.",
-                    "Improved the performance for people with a lot of mods."
+                    "Melhorado o desempenho para pessoas com muitos mods."
                 ]
             }
         ]

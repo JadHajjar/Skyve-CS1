@@ -417,32 +417,32 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "重製了訂閱操作的處理程序",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "現在在遊戲運行期間，您也可以訂閱外掛。",
+                    "現在如果連續訂閱多個外掛，Skyve 會記錄到任務等待列表中，而不是每次都啟動遊戲來進行訂閱操作。",
+                    "在 Skyve 應用程式介面的左下角新增了一個方框，以顯示當前等待中的訂閱 / 取消訂閱操作。",
+                    "新增了一個進階選項，啟用此選項後，在 Skyve 進行訂閱 / 取消訂閱操作之後，自動強制下載外掛或刪除已取訂（但沒刪除乾淨）的外掛。",
+                    "在遊戲執行階段，Skyve 會禁止新訂閱的物品進行載入。\n這種做法可以防止遊戲卡死或模組出錯。"
                 ]
             },
             {
-                "Name": "New",
+                "Name": "新增",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "新增功能：右鍵點選一個組態檔案時，可以「查看此組態檔案的內容」。",
+                    "新增功能：右鍵點選一個外掛時，可以「強制下載」此外掛。",
+                    "在一些彈出窗口中新增了更多說明文字。",
+                    "在列表頁面的操作選項中，新增「下載所有顯示的項目」選項。"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-                    "Improved the performance for people with a lot of mods."
+                    "修復了組態檔案列表沒有立即更新的問題。",
+                    "修復了組態檔案外掛沒有顯示其創意工坊名稱的問題。",
+                    "修復了第一次載入某個組態檔案或合集時，來自 Steam 的外掛資訊沒有載入的問題。",
+                    "已將本地模組的名稱恢復為其所在資料夾名稱，而不是模組的工坊名稱，以防止出現問題。",
+                    "最佳化了擁有大量模組時軟體的性能。"
                 ]
             }
         ]

@@ -337,7 +337,7 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Naprawy błędów",
                 "Changes": [
                     "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
                     "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
@@ -353,7 +353,7 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Zmiany",
                 "Changes": [
                     "Improved the performance of the app. Quicker load times & less stutters are expected.",
                     "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
@@ -367,7 +367,7 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Naprawy błędów",
                 "Changes": [
                     "Fixed the options tab not opening for macOS & Linux.",
                     "Fixed the Help & Logs tab not loading your current log automatically.",
@@ -381,7 +381,7 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Zmiany",
                 "Changes": [
                     "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
                     "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
@@ -427,7 +427,7 @@
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Nowy",
                 "Changes": [
                     "Added \"View this Profile's contents\" in profiles' right-click menu.",
                     "Added a \"Force download\" option in packages' right-click menu.",
@@ -442,7 +442,7 @@
                     "Fixed profile packages not showing their workshop name.",
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-                    "Improved the performance for people with a lot of mods."
+                    "Poprawiono wydajność dla osób z wieloma modyfikacjami."
                 ]
             }
         ]

@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Apri la cartella locale contenente questo pacchetto",
   "ViewOnSteam": "Visualizza questo pacchetto su Steam",
   "ReDownloadPackage": "Ri-scarica questo pacchetto",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "Scarica questo pacchetto",
   "CopySteamId": "Copia questo ID Steam",
   "OpenAuthorPage": "Apri la pagina dell'autore su Steam",
   "Sorting_Default": "Ordinamento predefinito",
@@ -161,7 +161,7 @@
   "UnsubscribeAll": "Annulla la sottoscrizione a tutti gli elementi mostrati",
   "SubscribeAll": "Sottoscrivi tutti gli elementi mostrati",
   "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Re-Download all displayed & downloaded items",
+  "ReDownloadAll": "Scaricare nuovamente tutti gli elementi visualizzati e scaricati",
   "MissingItemsRemain": "Mancano ancora alcuni elementi di questo profilo. Se in futuro salverai il profilo, quegli elementi verranno rimossi.",
   "ModIsPrivate": "L'elemento è privato",
   "HidePseudoMods": "Nascondi pseudo-mod come le miscele di temi",
@@ -498,11 +498,11 @@
     "Plural": "{0} elemento in attesa di annullamento della sottoscrizione"
   },
   "CancelSubs": "Annullare tutte le sottoscrizioni in corso",
-  "CancelDownloads": "Cancel all pending downloads",
+  "CancelDownloads": "Annullare tutti i download in sospeso",
   "ApplySubs": "Avviare il gioco per un breve momento per applicare le sottoscrizioni in corso",
-  "ApplyDownloads": "Force Steam to download all pending packages",
+  "ApplyDownloads": "Forza Steam a scaricare tutti i pacchetti in attesa",
   "SubsPendingInfo": "I pacchetti sottoscritti sono raggruppati qui.\nUna volta aperto il gioco, questi oggetti verranno sottoscritti su Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
+  "DownloadsPendingInfo": "I pacchetti a cui si è sottoscritti e che non sono ancora stati scaricati sono raggruppati qui.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Avviare il download o la rimozione dei pacchetti subito dopo l'iscrizione/disiscrizione",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forza il download o la rimozione dei pacchetti invece di aspettare che vengano effettivamente sottoscritti o annullati.",
   "ThisSubscribesTo": {
@@ -515,11 +515,11 @@
   },
   "ViewThisProfilesPackages": "Visualizza i contenuti di questo profilo",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} elemento in attesa di download",
+    "Plural": "{0} elementi in attesa di download"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} elemento in attesa di rimozione",
+    "Plural": "{0} elementi in attesa di rimozione"
   }
 }

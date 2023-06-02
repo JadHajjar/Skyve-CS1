@@ -432,7 +432,7 @@
                     "\"Inhalt dieses Profils anzeigen\" im Menü \"Rechtsklick\" hinzugefügt.",
                     "Eine Option \"Download erzwingen\" im Rechtsklick der Pakete hinzugefügt.",
                     "Mehr Kontext zu einigen Popups hinzugefügt",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "\"Alle angezeigten Elemente herunterladen\" in den Aktionen auf Listenseiten hinzugefügt."
                 ]
             },
             {
@@ -442,7 +442,7 @@
                     "Behoben, dass Profilpakete nicht ihren Workshop-Namen zeigen.",
                     "Die Steam-Informationen der Pakete, die beim ersten Ansehen eines Profils oder einer Sammlung nicht geladen wurden, wurden behoben.",
                     "Der Name der Lokalen Mods wurde auf den Ordnernamen anstelle des Workshops zurückgesetzt, um Probleme zu vermeiden.",
-                    "Improved the performance for people with a lot of mods."
+                    "Verbesserte die Leistung für Spieler mit vielen Mods."
                 ]
             }
         ]

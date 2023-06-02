@@ -304,7 +304,7 @@
   "ProfileNameUsed": "คุณมีโพร์ไฟล์ที่ใช้ชื่อเดียวกันอยู่ โปรดเปลี่ยนชื่อไฟล์ไดไฟล์หนึ่งเพื่อดำเนินการต่อ",
   "FailedToImportLegacyProfile": "ล้มเหลวในการแปลงโพร์ไฟล์เก่า",
   "Sorting_LastUsed": "ครั้งสุดท้ายที่ใช้",
-  "OpenLinksInBrowser": "เปิดลิ้งก์สตีมบนบราวน์เตอร์ของคุณ",
+  "OpenLinksInBrowser": "เปิดลิ้งก์สตีมบนบราวน์เซอร์ของคุณ",
   "OpenLinksInBrowser_Tip": "เปลี่ยนลิงก์สตีม เพื่อเปิดในเบราว์เซอร์เริ่มต้นของคุณ แทนที่การเปิดในแอปพลิเคชั่นสตีม",
   "ProfileStillLoading": "โพร์ไฟล์ของคุณยังคงโหลดอยู่ โปรดรอสักครู่ก่อนที่จะออกจากหน้านี้",
   "ApplyProfileNameBeforeExit": "โปรดแก้ไขชื่อโพร์ไฟล์ให้เสร็จสิ้น ก่อนที่จะออกจากหน้านี้",
@@ -503,7 +503,7 @@
   "ApplyDownloads": "Force Steam to download all pending packages",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
   "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "เริ่มการดาวน์โหลดหรือลบออกในทันทีที่มีการสมัครสมาชิก/ยกเลิกการสมัครสมาชิกแพ็กเกจ",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
     "One": "You will be subscribing to {0} package in this process.",

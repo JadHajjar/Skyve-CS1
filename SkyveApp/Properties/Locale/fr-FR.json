@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Ouvrir le dossier local contenant ce paquet",
   "ViewOnSteam": "Affichez ce paquet sur Steam",
   "ReDownloadPackage": "Re-télécharger ce paquet",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "Télécharger ce paquet",
   "CopySteamId": "Copiez cet ID Steam",
   "OpenAuthorPage": "Ouvrez la page de l'auteur sur Steam",
   "Sorting_Default": "Le tri par défaut",
@@ -160,8 +160,8 @@
   "TotalItems": "Total des éléments",
   "UnsubscribeAll": "Se désabonner de tous les éléments affichés",
   "SubscribeAll": "S'abonner à tous les éléments affichés",
-  "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Re-Download all displayed & downloaded items",
+  "DownloadAll": "Télécharger tous les éléments affichés et manquants",
+  "ReDownloadAll": "Re-télécharger tous les éléments affichés et téléchargés",
   "MissingItemsRemain": "Certains éléments sont encore manquants de ce profil. L'enregistrement du profil dans le futur supprimera ces éléments.",
   "ModIsPrivate": "L'élément est privé",
   "HidePseudoMods": "Masquer les pseudo-mods comme des mélanges de thème",
@@ -498,11 +498,11 @@
     "Plural": "{0} items pending unsubscription"
   },
   "CancelSubs": "Cancel all pending subscriptions",
-  "CancelDownloads": "Cancel all pending downloads",
+  "CancelDownloads": "Annuler tous les téléchargements en attente",
   "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "ApplyDownloads": "Force Steam to download all pending packages",
+  "ApplyDownloads": "Forcer Steam à télécharger tous les paquets en attente",
   "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
+  "DownloadsPendingInfo": "Les paquets auxquels vous vous êtes abonné et qui n'ont pas encore été téléchargés sont regroupés ici.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
   "ThisSubscribesTo": {
@@ -515,11 +515,11 @@
   },
   "ViewThisProfilesPackages": "View this profile's contents",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} élément en attente de téléchargement",
+    "Plural": "{0} éléments en attente de téléchargement"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} élément en attente de suppression",
+    "Plural": "{0} éléments en attente de suppression"
   }
 }

@@ -9,7 +9,7 @@
   "BlackListName": "名前でブラックリスト",
   "BlackListId": "Steam IDでブラックリスト",
   "GlobalTags": "グローバルタグ",
-  "GlobalTagsInfo": "全てのプレイヤーにアプリ上で表示されるタグ",
+  "GlobalTagsInfo": "全てのユーザーにアプリ上で表示されるタグ",
   "Links": "リンク",
   "StatusesCount": "ステータス ({0})",
   "InteractionCount": "依存関係 ({0})",
@@ -71,14 +71,14 @@
   "PleaseReviewPackageUsage": "パッケージの有効な用途を選択して下さい。",
   "Interaction_Alternative": {
     "One": "「{1}」は「{0}」の代替として使用可能です。",
-    "Plural": "次のいずれかのパッケージは、「{0}」の代替として使用可能です。"
+    "Plural": "「{0}」のパッケージは、以下のいずれかの代替として使用可能です。"
   },
   "Interaction_SameFunctionality": {
     "One": "「{0}」と「{1}」は同じ機能があります。",
     "Plural": "「{0}」と以下のパッケージは同じ機能があります。"
   },
   "Interaction_IncompatibleWith": {
-    "One": "「{0}」と「{1}」は、互いに互換性がありません。",
+    "One": "「{0}」と「{1}」は互いに互換性がありません。",
     "Plural": "「{0}」は以下のパッケージと互換性がありません。"
   },
   "Interaction_CausesIssuesWith": {
@@ -100,9 +100,9 @@
   "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
   "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要で必要ありません。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
-  "Status_AutoDeprecated": "「{0}」 は長期間で更新されておらず、恐らく作者によるサポートは無いでしょう。",
+  "Status_AutoDeprecated": "「{0}」は長期間で更新されておらず、恐らく作者によるサポートは無いでしょう。",
   "Status_Reupload": {
-    "Zero": "「{0}」はオリジナルパッケージの再アップロードです。",
+    "Zero": "「{0}」はオリジナルパッケージの再アップロード版です。",
     "One": "これは「{1}」の再アップロードです。"
   },
   "Status_CausesIssues": "「{0}」はプレイ中のゲームで問題を引き起こします。",
@@ -115,7 +115,7 @@
     "One": "「{1}」の「テスト」バージョンです。\nアップデートすることで、予期しない問題が発生する可能性があるので注意して下さい。"
   },
   "Status_MissingDlc": {
-    "One": "パッケージを使用するには、DLCがありません。",
+    "One": "パッケージを使用するには、DLCが未購入・有効ではありません。",
     "Plural": "パッケージを使用するには、以下のDLCがありません。"
   },
   "Status_DependencyMod": "依存関係のMODですが、これを必要とするパッケージは使用していないようです。",
@@ -138,8 +138,8 @@
   },
   "Action_RequiresConfiguration": "以下の手順に従う:",
   "Action_SelectOne": {
-    "One": "「{0}」と「{1}」の中から、どちらか「1つだけ」を選択して下さい。",
-    "Plural": "「{0}」と以下のパッケージから、どちらか「1つだけ」を選択して下さい。"
+    "One": "「{0}」と「{1}」の中から、どちらか1つだけを選択して下さい。",
+    "Plural": "「{0}」と以下のパッケージから、どちらか1つだけを選択して下さい。"
   },
   "Action_UnsubscribeThis": "「{0}」はサブスクを解除して下さい。",
   "Action_UnsubscribeOther": {
@@ -170,7 +170,7 @@
   "CRT_Alternatives": "変更可能",
   "CRT_Status": "ステータス",
   "CRT_Ambiguous": "不明瞭",
-  "LastReviewDate": "{0} に最後のレビューを実行",
+  "LastReviewDate": "最後にレビューした日時: {0}",
   "RequestReviewInfo": "このパッケージで問題が発生しましたか？",
   "RequestReview": "レビューを依頼",
   "MissingDependencyCount": {
@@ -184,10 +184,10 @@
     "Plural": "{0} {1} は注意が必要"
   },
   "ExcludeCount": {
-    "One": "{0} {1} は除外すべき",
-    "Plural": "{0} {1} は除外すべき"
+    "One": "{0} {1} は除外が必要",
+    "Plural": "{0} {1} は除外が必要"
   },
-  "UnsubscribeCount": "{0} {1} はサブスクを解除すべき",
+  "UnsubscribeCount": "{0} {1} はサブスク解除が必要",
   "SwitchCount": {
     "One": "{0} {1} は他へ切り替えが必要",
     "Plural": "{0} {1} は他へ切り替えが必要"
@@ -201,7 +201,7 @@
   "POFont": "Procedural Objectのフォントやモジュール",
   "NameList": "名前のリストやゲームの翻訳",
   "ApplyChangedBeforeExit": "保存していない変更点があります。\n\n続行する前に、これらの変更を適用しますか？",
-  "AuthorRetired": "{0} / {1} の作者は引退している・長期間で活動していません。\n今後のアップデートやパッケージの安定性は保証されません。",
+  "AuthorRetired": "{0} / {1} の作者は引退済み・長期間で活動していません。\n\n今後のアップデートやパッケージの安定性は保証されません。",
   "AuthorMalicious": "{0} / {1} の作者は、マルウェアなどのウイルスのような有害コンテンツをパッケージに含めたことで知られています。",
   "ReviewRequests": "レビューをリクエスト {0}",
   "DeleteRequest": "リクエストを削除",
