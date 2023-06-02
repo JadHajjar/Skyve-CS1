@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
@@ -20,7 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-using NotificationType = SkyveApp.Domain.Compatibility.NotificationType;
+using NotificationType = SkyveApp.Domain.Compatibility.Enums.NotificationType;
 
 namespace SkyveApp.UserInterface.Lists;
 internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackage
@@ -389,7 +390,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			}
 			else
 			{
-				OpenSteamLink($"{item.Item.Author.ProfileUrl}myworkshopfiles");
+				var pc = new PC_UserPage(item.Item.Author?.SteamId ?? 0);
+
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+
+				//OpenSteamLink($"{item.Item.Author.ProfileUrl}myworkshopfiles");
 			}
 
 			return;
@@ -673,7 +678,35 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		base.OnPaintItem(e);
 
-		if (e.Item.Incompatible || report.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+		if (e.Item.Incompatible || e.Item.Banned || report.Data?.Package.Stability is PackageStability.Broken)
+		{
+			int stripeWidth = (int)(19 * UI.UIScale);
+			var step = e.ClipRectangle.Height;
+			int diagonalLength = (int)Math.Sqrt(2 * Math.Pow(Height, 2));
+			var colors = new[]
+			{
+				FormDesign.Design.AccentColor.MergeColor(e.BackColor),
+				(e.Item.Incompatible || e.Item.Banned?FormDesign.Design.RedColor: FormDesign.Design.YellowColor).MergeColor(e.BackColor, 35),
+			};
+
+			// Create a pen with a width equal to the stripe width
+			using	Pen pen = new Pen(colors[0], stripeWidth);
+
+			var odd = false;
+			// Draw the yellow and black diagonal lines
+			for (int i = e.ClipRectangle .X- diagonalLength; i < e.ClipRectangle.Right; i += stripeWidth)
+			{
+				if (odd)
+					pen.Color = colors[0];
+				else
+					pen.Color = colors[1];
+
+				odd = !odd;
+
+				e.Graphics.DrawLine(pen, i-step, e.ClipRectangle.Y +2*step, i + step*2, e.ClipRectangle.Y-step);
+			}
+		}
+		else if (report.Data?.Package.Stability is PackageStability.Broken)
 		{
 			e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, FormDesign.Design.RedColor)), e.ClipRectangle);
 		}
@@ -690,7 +723,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 
 		if (!large && !PackagePage)
 		{
-			if (!e.Item.Incompatible && report.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+			if (!e.Item.Incompatible && report.Data?.Package.Stability is not PackageStability.Broken)
 			{
 				labelRect.X += DrawScore(e, large, rects, labelRect);
 			}
@@ -736,7 +769,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			labelRect.X = rects.TextRect.X;
 
-			if (!PackagePage && !e.Item.Incompatible && report?.Data?.Package.Stability is not Domain.Compatibility.PackageStability.Broken)
+			if (!PackagePage && !e.Item.Incompatible && report?.Data?.Package.Stability is not PackageStability.Broken)
 			{
 				labelRect.X += DrawScore(e, large, rects, labelRect);
 			}
@@ -764,11 +797,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return;
 		}
 
-		var brushRect = new Rectangle(rects.SteamIdRect.X - (int)(100 * UI.FontScale), e.ClipRectangle.Y, (int)(100 * UI.FontScale), e.ClipRectangle.Height);
+		var brushRect = new Rectangle(rects.SteamIdRect.X - (int)(100 * UI.FontScale), (int)e.Graphics.ClipBounds.Y, (int)(100 * UI.FontScale), (int)e.Graphics.ClipBounds.Height);
 		using (var brush = new LinearGradientBrush(brushRect, Color.Empty, e.BackColor, LinearGradientMode.Horizontal))
 		{
 			e.Graphics.FillRectangle(brush, brushRect);
-			e.Graphics.FillRectangle(new SolidBrush(e.BackColor), new Rectangle(rects.SteamIdRect.X, e.ClipRectangle.Y, Width, e.ClipRectangle.Height));
+			e.Graphics.FillRectangle(new SolidBrush(e.BackColor), new Rectangle(rects.SteamIdRect.X, (int)e.Graphics.ClipBounds.Y, Width, (int)e.Graphics.ClipBounds.Height));
 		}
 
 		DrawAuthorAndSteamId(e, large, rects, package);
@@ -1010,28 +1043,36 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 
 		var incl = new DynamicIcon(e.Item.IsSubscribing() ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
-		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
+		var mod = package?.Mod;
+		var required = mod is not null && ModLogicManager.IsRequired(mod);
+
+		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{
 			var activeColor = FormDesign.Design.ActiveColor;
 			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 			else if (mod.IsEnabled)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = FormDesign.Design.YellowColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = FormDesign.Design.YellowColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
-			else if (inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))
+			else if (inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 
-			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color(rects.EnabledRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
+			if (required)
+			{
+				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(200, BackColor)), inclEnableRect);
+			}
+
+			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color((required || (rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color((required || (rects.EnabledRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
 			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
 			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
 		}
@@ -1040,16 +1081,21 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			var activeColor = FormDesign.Design.ActiveColor;
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
-			else if (inclEnableRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))
+			else if (inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered))
 			{
 				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
 			}
 
-			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
+			if (required)
+			{
+				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(200, BackColor)), inclEnableRect);
+			}
+
+			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(required || (rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered)) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
 			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
 		}
 	}

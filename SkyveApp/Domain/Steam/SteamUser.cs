@@ -2,6 +2,7 @@
 
 using Newtonsoft.Json;
 
+using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
 using System;
@@ -15,23 +16,23 @@ public class SteamUser : ITimestamped
 		SteamId = ulong.Parse(entry.steamid);
 		Name = entry.personaname;
 		ProfileUrl = entry.profileurl;
-		AvatarUrl = entry.avatarmedium;
+		AvatarUrl = entry.avatarfull;
 		Timestamp = DateTime.Now;
 	}
 
 	public SteamUser() { }
 
 	public ulong SteamId { get; set; }
-	public string Name { get; set; }
-	public string ProfileUrl { get; set; }
-	public string AvatarUrl { get; set; }
+	public string? Name { get; set; }
+	public string? ProfileUrl { get; set; }
+	public string? AvatarUrl { get; set; }
 	public DateTime Timestamp { get; set; }
 
 	[JsonIgnore] public Bitmap? AvatarImage => ImageManager.GetImage(AvatarUrl, true).Result;
 
 	public override string ToString()
 	{
-		return Name;
+		return Name ?? Locale.UnknownUser;
 	}
 
 	public override bool Equals(object? obj)

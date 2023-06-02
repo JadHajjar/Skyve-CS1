@@ -3083,6 +3083,16 @@ namespace SkyveApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Lang_HU_HU {
+            get {
+                object obj = ResourceManager.GetObject("Lang_HU_HU", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Lang_ID_ID {
             get {
                 object obj = ResourceManager.GetObject("Lang_ID-ID", resourceCulture);

@@ -1,5 +1,6 @@
 ﻿using Extensions;
-
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,13 +8,13 @@ namespace SkyveApp.Domain.Compatibility;
 
 public class IndexedPackage
 {
-	public Package Package { get; }
+	public CrPackage Package { get; }
 	public Dictionary<ulong, IndexedPackage> Group { get; }
 	public Dictionary<ulong, IndexedPackage> RequirementAlternatives { get; }
 	public Dictionary<StatusType, List<IndexedPackageStatus>> Statuses { get; }
 	public Dictionary<InteractionType, List<IndexedPackageInteraction>> Interactions { get; }
 
-	public IndexedPackage(Package package)
+	public IndexedPackage(Api.CrPackage package)
 	{
 		Package = package;
 		Statuses = new();

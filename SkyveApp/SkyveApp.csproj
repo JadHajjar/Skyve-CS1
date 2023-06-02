@@ -78,6 +78,9 @@
     <Compile Update="UserInterface\Content\DownloadsInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Content\UserDescriptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,6 +113,9 @@
     </Compile>
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_UserPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Panels\PC_ProfileList.cs">

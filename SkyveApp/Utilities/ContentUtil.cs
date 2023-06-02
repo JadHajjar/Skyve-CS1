@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
@@ -85,9 +86,9 @@ internal class ContentUtil
 					yield return item;
 				}
 			}
-			else if (crData.Interactions.ContainsKey(Domain.Compatibility.InteractionType.RequiredPackages))
+			else if (crData.Interactions.ContainsKey(InteractionType.RequiredPackages))
 			{
-				if (crData.Interactions[Domain.Compatibility.InteractionType.RequiredPackages].Any(x => x.Interaction.Packages?.Contains(steamId) ?? false))
+				if (crData.Interactions[InteractionType.RequiredPackages].Any(x => x.Interaction.Packages?.Contains(steamId) ?? false))
 				{
 					yield return item;
 				}

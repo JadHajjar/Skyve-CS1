@@ -1,8 +1,10 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Steam;
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,6 +14,13 @@ internal class CompatibilityApiUtil
 	private static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{
 		return await ApiUtil.Get<T>(KEYS.API_URL + url
+			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT)) }
+			, queryParams);
+	}
+
+	private static async Task<T?> Delete<T>(string url, params (string, object)[] queryParams)
+	{
+		return await ApiUtil.Delete<T>(KEYS.API_URL + url
 			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(SteamUtil.GetLoggedInSteamId().ToString(), KEYS.SALT)) }
 			, queryParams);
 	}
@@ -67,5 +76,30 @@ internal class CompatibilityApiUtil
 	internal static async Task<ReviewRequest?> GetReviewRequest(ulong userId, ulong packageId)
 	{
 		return await Get<ReviewRequest>("/GetReviewRequest", (nameof(userId), userId), (nameof(packageId), packageId));
+	}
+
+	internal static async Task<UserProfile[]?> GetUserProfiles(ulong userId)
+	{
+		return await Get<UserProfile[]>("/GetUserProfiles", (nameof(userId), userId));
+	}
+
+	internal static async Task<UserProfile?> GetUserProfileContents(int profileId)
+	{
+		return await Get<UserProfile>("/GetUserProfileContents", (nameof(profileId), profileId));
+	}
+
+	internal static async Task<ApiResponse> DeleteUserProfile(int profileId)
+	{
+		return await Delete<ApiResponse>("/DeleteUserProfile", (nameof(profileId), profileId));
+	}
+
+	internal static async Task<ApiResponse> SaveUserProfile(UserProfile profile)
+	{
+		return await Post<UserProfile, ApiResponse>("/SaveUserProfile", profile);
+	}
+
+	internal static async Task<ApiResponse> UpdateUserProfile(UserProfile profile)
+	{
+		return await Post<UserProfile, ApiResponse>("/UpdateUserProfile", profile);
 	}
 }

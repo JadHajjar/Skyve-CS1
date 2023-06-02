@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Dropdowns;

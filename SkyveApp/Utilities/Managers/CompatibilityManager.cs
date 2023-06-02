@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 
 using System;
@@ -58,10 +60,7 @@ public static class CompatibilityManager
 			return;
 		}
 
-		foreach (var package in content)
-		{
-			GetCompatibilityInfo(package, true);
-		}
+		Parallelism.ForEach(content.ToList(), package => GetCompatibilityInfo(package, true));
 
 		CentralManager.OnInformationUpdated();
 
@@ -175,9 +174,9 @@ public static class CompatibilityManager
 		return _cache[package] = GenerateCompatibilityInfo(package);
 	}
 
-	internal static Package GetAutomatedReport(IPackage package)
+	internal static CrPackage GetAutomatedReport(IPackage package)
 	{
-		var info = new Package
+		var info = new CrPackage
 		{
 			Stability = package.IsMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
 			SteamId = package.SteamId,
@@ -419,9 +418,6 @@ public static class CompatibilityManager
 
 	internal static void DoFirstCache(List<Domain.Package> packages)
 	{
-		foreach (var package in packages)
-		{
-			_cache[package] = GenerateCompatibilityInfo(package);
-		}
+		Parallelism.ForEach(packages, package => _cache[package] = GenerateCompatibilityInfo(package));
 	}
 }

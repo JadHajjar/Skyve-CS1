@@ -73,6 +73,14 @@ public partial class MainForm : BasePanelForm
 		}
 	}
 
+	protected override void LocaleChanged()
+	{
+		PI_Packages.Text = Locale.Package.Plural;
+		PI_Assets.Text = Locale.Asset.Plural;
+		PI_Profiles.Text = Locale.Profile.Plural;
+		PI_Mods.Text = Locale.Mod.Plural;
+	}
+
 	private void ConnectionHandler_ConnectionChanged(ConnectionState newState)
 	{
 		base_PB_Icon.Invalidate();
@@ -108,6 +116,11 @@ public partial class MainForm : BasePanelForm
 			base_PB_Icon.LoaderSpeed = 0.15;
 
 			buttonStateRunning = null;
+
+			if (CurrentPanel is PC_MainPage mainPage)
+			{
+				mainPage.B_StartStop.Loading = false;
+			}
 		}
 	}
 

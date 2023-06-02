@@ -5,16 +5,14 @@ using SlickControls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
 internal class LanguageDropDown : SlickSelectionDropDown<string>
 {
 	#region Names
-	private static Dictionary<string, Dictionary<bool, (string Name, string Dialect)>> _langNames = new()
+	private static readonly Dictionary<string, Dictionary<bool, (string Name, string Dialect)>> _langNames = new()
 	{
 		["en-US"] = new()
 		{
@@ -160,6 +158,11 @@ internal class LanguageDropDown : SlickSelectionDropDown<string>
 		{
 			[false] = ("Vietnamese", "Vietnam"),
 			[true] = ("Tiếng Việt", "Việt Nam")
+		},
+		["hu-HU"] = new()
+		{
+			[false] = ("Hungarian", "Hungary"),
+			[true] = ("Magyar", "Magyarország")
 		},
 	};
 	#endregion

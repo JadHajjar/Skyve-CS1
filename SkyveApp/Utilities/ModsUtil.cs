@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
@@ -111,6 +112,11 @@ internal static class ModsUtil
 
 	internal static void SetIncluded(Mod mod, bool value)
 	{
+		if (!value && ModLogicManager.IsRequired(mod))
+		{
+			value = true;
+		}
+
 		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating || CitiesManager.IsRunning())
 		{
 #if DEBUG
@@ -287,16 +293,10 @@ internal static class ModsUtil
 	{
 		tags = new();
 
-		if (package?.Name is null)
-		{
-			return string.Empty;
-		}
-
-		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
+		var text = package?.Name ?? Locale.UnknownPackage;
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
 
 		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
-
 
 		foreach (Match match in tagMatches)
 		{
@@ -318,7 +318,11 @@ internal static class ModsUtil
 			}
 		}
 
-		if (package.Incompatible)
+		if (package.Banned)
+		{
+			tags.Add((FormDesign.Design.RedColor, LocaleCR.Banned.One.ToUpper()));
+		}
+		else if (package.Incompatible)
 		{
 			tags.Add((FormDesign.Design.RedColor, LocaleCR.Incompatible.One.ToUpper()));
 		}
@@ -326,7 +330,7 @@ internal static class ModsUtil
 		{
 			var compatibility = package.GetCompatibilityInfo();
 
-			if (compatibility.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+			if (compatibility.Data?.Package.Stability is PackageStability.Broken)
 			{
 				tags.Add((Color.FromArgb(225, FormDesign.Design.RedColor), LocaleCR.Broken.One.ToUpper()));
 			}

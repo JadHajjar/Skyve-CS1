@@ -97,7 +97,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 		CreatedUTC = _epoch.AddSeconds(entry.time_created);
 		NegativeVotes = entry.vote_data?.votes_down ?? 0;
 		PositiveVotes = entry.vote_data?.votes_up ?? 0;
-		Banned = entry.banned || entry.result is 17;
+		Banned = entry.banned || entry.result is 15 or 16 or 17;
 		Incompatible = entry.incompatible;
 		Subscriptions = entry.subscriptions;
 		Reports = entry.num_reports;

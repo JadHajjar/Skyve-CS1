@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -170,7 +171,7 @@ public partial class PC_Profiles : PanelContent
 		I_ProfileIcon.Loading = false;
 		L_CurrentProfile.Text = profile.Name;
 		CB_AutoSave.Checked = profile.AutoSave;
-		DD_ProfileUsage.SelectedItem = profile.Usage > 0 ? profile.Usage : (Domain.Compatibility.PackageUsage)(-1);
+		DD_ProfileUsage.SelectedItem = profile.Usage > 0 ? profile.Usage : (PackageUsage)(-1);
 
 		CB_NoWorkshop.Checked = profile.LaunchSettings.NoWorkshop;
 		CB_NoAssets.Checked = profile.LaunchSettings.NoAssets;
@@ -409,7 +410,7 @@ public partial class PC_Profiles : PanelContent
 		{
 			if (ShowPrompt($"{Locale.SomePackagesWillBeDisabled}\r\n{Locale.AffectedPackagesAre}\r\n• {invalidPackages.ListStrings("\r\n• ")}", PromptButtons.OKCancel, PromptIcons.Warning) == DialogResult.Cancel)
 			{
-				DD_ProfileUsage.SelectedItem = (Domain.Compatibility.PackageUsage)(-1);
+				DD_ProfileUsage.SelectedItem = (PackageUsage)(-1);
 
 				return;
 			}

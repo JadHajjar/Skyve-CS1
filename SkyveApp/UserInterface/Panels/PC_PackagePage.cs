@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
@@ -177,9 +178,9 @@ public partial class PC_PackagePage : PanelContent
 		}
 
 		label1.Text = LocaleCR.Usage;
-		label2.Text = cr.Usage.GetValues().If(x => x.Count() == Enum.GetValues(typeof(Domain.Compatibility.PackageUsage)).Length, x => Locale.AnyUsage.One, x => x.ListStrings(x => LocaleCR.Get(x.ToString()), ", "));
+		label2.Text = cr.Usage.GetValues().If(x => x.Count() == Enum.GetValues(typeof(PackageUsage)).Length, x => Locale.AnyUsage.One, x => x.ListStrings(x => LocaleCR.Get(x.ToString()), ", "));
 		label3.Text = LocaleCR.PackageType;
-		label4.Text = cr.Type == Domain.Compatibility.PackageType.GenericPackage ? (Package.IsMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
+		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.IsMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
 		label5.Text = LocaleCR.Links;
 		label6.Text = LocaleSlickUI.Tags;
 	}

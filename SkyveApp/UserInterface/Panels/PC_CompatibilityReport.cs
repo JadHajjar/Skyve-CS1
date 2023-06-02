@@ -3,6 +3,8 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 

@@ -1,6 +1,7 @@
 ﻿using Extensions.Sql;
+using SkyveApp.Domain.Compatibility.Enums;
 
-namespace SkyveApp.Domain.Compatibility;
+namespace SkyveApp.Domain.Compatibility.Api;
 
 [DynamicSqlClass("PackageLinks")]
 #if API
@@ -13,12 +14,12 @@ public struct PackageLink : IDynamicSql
 {
 #endif
 
-	[DynamicSqlProperty]
-	public LinkType Type { get; set; }
+    [DynamicSqlProperty]
+    public LinkType Type { get; set; }
 
-	[DynamicSqlProperty]
-	public string? Url { get; set; }
+    [DynamicSqlProperty]
+    public string? Url { get; set; }
 
-	[DynamicSqlProperty]
-	public string? Title { get; set; }
+    [DynamicSqlProperty]
+    public string? Title { get; set; }
 }

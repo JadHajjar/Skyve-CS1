@@ -336,7 +336,7 @@ partial class PC_RequestReview
 			this.B_ReportIssue.Padding = new System.Windows.Forms.Padding(22);
 			this.B_ReportIssue.Size = new System.Drawing.Size(375, 135);
 			this.B_ReportIssue.TabIndex = 0;
-			this.B_ReportIssue.Text = "Report an issue that you are facing";
+			this.B_ReportIssue.Text = "RequestOption1";
 			this.B_ReportIssue.Click += new System.EventHandler(this.B_ReportIssue_Click);
 			// 
 			// B_AddStatus
@@ -352,7 +352,7 @@ partial class PC_RequestReview
 			this.B_AddStatus.Padding = new System.Windows.Forms.Padding(22);
 			this.B_AddStatus.Size = new System.Drawing.Size(375, 135);
 			this.B_AddStatus.TabIndex = 0;
-			this.B_AddStatus.Text = "Add missing information about the package";
+			this.B_AddStatus.Text = "RequestOption2";
 			this.B_AddStatus.Click += new System.EventHandler(this.B_AddStatus_Click);
 			// 
 			// B_AddInteraction
@@ -368,7 +368,7 @@ partial class PC_RequestReview
 			this.B_AddInteraction.Padding = new System.Windows.Forms.Padding(22);
 			this.B_AddInteraction.Size = new System.Drawing.Size(375, 135);
 			this.B_AddInteraction.TabIndex = 0;
-			this.B_AddInteraction.Text = "Add a missing interaction with another package";
+			this.B_AddInteraction.Text = "RequestOption3";
 			this.B_AddInteraction.Click += new System.EventHandler(this.B_AddInteraction_Click);
 			// 
 			// PC_RequestReview
