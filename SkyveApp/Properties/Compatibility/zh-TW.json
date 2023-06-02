@@ -100,7 +100,7 @@
   "Interaction_Identical": "這些是同一個外掛程式的多個不同版本。\n\n您應當只選擇使用其中一個，並取消訂閱其他版本。",
   "Status_Succeeded": "「{0}」 的功能已被「{1}」繼承。\n\n您已經使用了「{1}」，因此不再需要使用「{0}」。",
   "Status_Deprecated": "'{0}' 已經廢棄，不再受到作者的支持。",
-  "Status_AutoDeprecated": "「{0}」已經很長時間沒有進行過更新，可能不再受到作者的支援。",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' 是某個原始外掛程式的重新上傳版本。",
     "One": "這是 '{1}' 的重新上傳版本。"
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "這是一個前置模組，但你似乎沒有使用任何依賴於該模組的外掛程式。",
   "Status_SourceCodeNotAvailable": "此模組的原始程式碼不可用。除非您信任此模組的作者，否則不應使用此模組。",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "此模組所含音樂可能受到版權保護。最好不要在串流直播時使用此模組。",
   "Status_IncompleteDescription": "這個模組的創意工坊頁面描述非常短。除非你信任此模組的作者，否則不應使用此模組。",
   "OutputText": "預期輸出",
@@ -147,6 +148,9 @@
     "Plural": "您應該取消訂閱下列外掛程式："
   },
   "Action_ExcludeThis": "您應該卸下 '{0}'。",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "卸載",
+  "Unsubscribe": "取消訂閱",
   "Action_ExcludeOther": {
     "One": "您應該卸下 '{1}'。",
     "Plural": "您應該卸下以下外掛程式。"
@@ -207,5 +211,9 @@
   "DeleteRequest": "刪除請求",
   "ApplyRequestedChanges": "應用請求的改動",
   "ManagePackage": "管理外掛",
-  "RequestReviewDisclaimer": "* 傳送請求時，您的 Steam ID 和記錄檔也會一併傳送"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "* 傳送請求時，您的 Steam ID 和記錄檔也會一併傳送",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
