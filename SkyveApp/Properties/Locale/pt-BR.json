@@ -523,12 +523,12 @@
     "Plural": "{0} itens pendentes de remoção"
   },
   "YouHavePackagesUser": {
-    "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "One": "Você tem {0} pacote criado por {1}",
+    "Plural": "Você tem {0} pacotes criados por {1}"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
-  "RequestOption3": "Add a missing interaction with another package",
+  "RequestOption1": "Relatar um problema ou adicionar informações ausentes",
+  "RequestOption2": "Adicionar um estado faltando para o pacote",
+  "RequestOption3": "Adicionar uma interação ausente com outro pacote",
   "CurrentProfile": "Perfil Atual",
-  "References": "References"
+  "References": "Referências"
 }
