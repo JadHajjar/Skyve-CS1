@@ -100,7 +100,7 @@
   "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
   "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要で必要ありません。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
-  "Status_AutoDeprecated": "「{0}」は長期間で更新されておらず、恐らく作者によるサポートは無いでしょう。",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "「{0}」はオリジナルパッケージの再アップロード版です。",
     "One": "これは「{1}」の再アップロードです。"
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "依存関係のMODですが、これを必要とするパッケージは使用していないようです。",
   "Status_SourceCodeNotAvailable": "MODのソースコードは公開されていません。作者を信頼できない場合は使用しないで下さい。",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "パック内に収録されている音楽は著作権で保護されている可能性があります。ストリーミングでの使用は避けた方が無難です。",
   "Status_IncompleteDescription": "MODのワークショップ内の説明文が少ない・曖昧です。作者を信頼できない場合は使用しないで下さい。",
   "OutputText": "予想される結果",
@@ -147,6 +148,9 @@
     "Plural": "以下のパッケージはサブスクを解除して下さい。"
   },
   "Action_ExcludeThis": "「{0}」を除外して下さい。",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "除外",
+  "Unsubscribe": "サブスク解除",
   "Action_ExcludeOther": {
     "One": "「{1}」を除外して下さい。",
     "Plural": "以下のパッケージを除外する必要があります。"
@@ -207,5 +211,9 @@
   "DeleteRequest": "リクエストを削除",
   "ApplyRequestedChanges": "リクエストの変更を適用",
   "ManagePackage": "パッケージの管理",
-  "RequestReviewDisclaimer": "※あなたのSteam IDとログがリクエストと一緒に送信されます！"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "※あなたのSteam IDとログがリクエストと一緒に送信されます！",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
