@@ -100,7 +100,7 @@
   "Interaction_Identical": "Dies sind mehrere Versionen des gleichen Paketes.\n\nNur eines von ihnen auswählen.",
   "Status_Succeeded": "'{0}' wurde von '{1}' abgelöst.\n\nDu verwendest bereits '{1}', sodass es keine Notwendigkeit mehr für '{0}' gibt.",
   "Status_Deprecated": "'{0}' ist veraltet, es wird nicht mehr vom Autor unterstützt.",
-  "Status_AutoDeprecated": "'{0}' wurde seit langem nicht mehr aktualisiert, es wird wahrscheinlich vom Autor nicht mehr unterstützt.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' ist eine erneut hochgeladene Kopie eines Originalpakets.",
     "One": "Dies ist eine erneut hochgeladene Kopie von '{1}'."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Dies ist eine Abhängigkeitsmod, aber scheinbar verwendest du kein Paket, das diese Mod benötigt.",
   "Status_SourceCodeNotAvailable": "Der Quellcode dieser Mod ist nicht verfügbar. Du solltest sie nur verwenden, wenn du ihrem Autor vertraust.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Die Musik in diesem Paket ist möglicherweise urheberrechtlich geschützt. Am besten sollte es nicht während des Streamens verwendet werden.",
   "Status_IncompleteDescription": "Die Workshop-Beschreibung dieser Mod ist zu kurz. Du solltest sie nicht verwenden, es sei denn, du vertraust ihrem Autor.",
   "OutputText": "Erwartete Ausgabe",
@@ -147,6 +148,9 @@
     "Plural": "Du solltest folgende Pakete abbestellen:"
   },
   "Action_ExcludeThis": "Du solltest '{0}' ausschließen.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Ausschließen",
+  "Unsubscribe": "Abbestellen",
   "Action_ExcludeOther": {
     "One": "Du solltest '{1}' ausschließen.",
     "Plural": "Folgende Pakete sollten ausgeschlossen werden:"
@@ -207,5 +211,9 @@
   "DeleteRequest": "Anfrage löschen",
   "ApplyRequestedChanges": "Angeforderte Änderungen anwenden",
   "ManagePackage": "Paket verwalten",
-  "RequestReviewDisclaimer": "*Deine Steam ID und Protokolle werden mit deiner Anfrage gesendet"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Deine Steam ID und Protokolle werden mit deiner Anfrage gesendet",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
