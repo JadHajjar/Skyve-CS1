@@ -523,12 +523,12 @@
     "Plural": "{0} elementi in attesa di rimozione"
   },
   "YouHavePackagesUser": {
-    "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "One": "Hai {0} pacchetto creato da {1}",
+    "Plural": "Hai {0} pacchetti creati da {1}"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
-  "RequestOption3": "Add a missing interaction with another package",
+  "RequestOption1": "Segnalare un problema o aggiungere informazioni mancanti",
+  "RequestOption2": "Aggiungere uno stato mancante per il pacchetto",
+  "RequestOption3": "Aggiungere un'interazione mancante con un altro pacchetto",
   "CurrentProfile": "Profilo Corrente",
-  "References": "References"
+  "References": "Riferimenti"
 }
