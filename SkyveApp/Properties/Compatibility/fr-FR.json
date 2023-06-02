@@ -100,7 +100,7 @@
   "Interaction_Identical": "Il existe plusieurs versions du même paquet.\n\nVous ne devriez en choisir qu'une seule.",
   "Status_Succeeded": "'{0}' est succédé par '{1}'.\n\nVous utilisez déjà '{1}' donc il n'y a plus besoin de '{0}'.",
   "Status_Deprecated": "'{0}' est obsolète, il n'est plus supporté par son auteur.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Status_AutoDeprecated": "'{0} n'a pas été mis à jour depuis longtemps.",
   "Status_Reupload": {
     "Zero": "'{0}' est un re-téléchargement d'un paquet original.",
     "One": "Ceci est un re-téléchargement de '{1}'."
@@ -120,7 +120,7 @@
   },
   "Status_DependencyMod": "C'est un mod de dépendance, mais il ne semble pas que vous utilisiez un paquet qui le requiert.",
   "Status_SourceCodeNotAvailable": "Le code source de ce mod n'est pas disponible. Vous ne devriez pas l'utiliser à moins que vous ne fassiez confiance à son auteur.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "Le code source est disponible",
   "Status_MusicCanBeCopyrighted": "La musique de ce pack peut être protégée par copyright. Il est préférable de ne pas l'utiliser en streaming.",
   "Status_IncompleteDescription": "La description Workshop de ce mod est trop court. Vous ne devriez pas l'utiliser à moins que vous ne fassiez confiance à son auteur.",
   "OutputText": "Résultats attendus",
@@ -148,7 +148,7 @@
     "Plural": "Vous devriez vous désabonner des paquets suivants."
   },
   "Action_ExcludeThis": "Vous devriez exclure '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Exclure ce paquet",
   "Exclude": "Exclure",
   "Unsubscribe": "Se désabonner",
   "Action_ExcludeOther": {
@@ -211,9 +211,9 @@
   "DeleteRequest": "Supprimer la demande",
   "ApplyRequestedChanges": "Appliquer les changements demandés",
   "ManagePackage": "Gérer les Paquets",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
+  "Banned": "Banni",
+  "NoIssues": "Pas de problèmes",
   "RequestReviewDisclaimer": "*Votre ID Steam et vos logs seront envoyés avec votre demande",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ScenarioMaking": "Création de Scénario",
+  "ThemeMaking": "Création de Thème"
 }
