@@ -100,7 +100,7 @@
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}'.\r\n\r\nVocê já está usando '{1}' então não há mais necessidade de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, não é mais suportado pelo seu autor.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
     "One": "Este é um re-upload de '{1}'."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Este é um mod de dependência, mas não parece que você esteja usando qualquer pacote que o requeira.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "A música dentro deste pacote pode ter direitos autorais. É melhor não usá-la durante a transmissão.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Saída Esperada",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Você deve excluir '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Excluir",
+  "Unsubscribe": "Cancelar assinatura",
   "Action_ExcludeOther": {
     "One": "Você deve excluir '{1}'.",
     "Plural": "Você deve excluir os seguintes pacotes."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
