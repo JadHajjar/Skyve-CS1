@@ -120,7 +120,7 @@
   },
   "Status_DependencyMod": "Este é um mod de dependência, mas parece que você não está usando nenhum pacote que o requer.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "O código fonte está disponível",
   "Status_MusicCanBeCopyrighted": "A música contida neste pacote pode estar protegida por direitos autorais. É melhor não usá-la durante transmissões ao vivo.",
   "Status_IncompleteDescription": "A descrição na Oficina deste mod é muito curta. Você não deve usá-lo a menos que confie em seu autor.",
   "OutputText": "Saída Esperada",
@@ -148,7 +148,7 @@
     "Plural": "Você deve cancelar a assinatura dos seguintes pacotes."
   },
   "Action_ExcludeThis": "Você deve excluir '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Excluir este pacote",
   "Exclude": "Excluir",
   "Unsubscribe": "Cancelar Assinatura",
   "Action_ExcludeOther": {
@@ -211,9 +211,9 @@
   "DeleteRequest": "Excluir pedido",
   "ApplyRequestedChanges": "Aplicar as Alterações Solicitadas",
   "ManagePackage": "Gerenciar Pacote",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
+  "Banned": "Banido",
+  "NoIssues": "Sem problemas",
   "RequestReviewDisclaimer": "*Seu ID Steam e registros são enviados com o seu pedido",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ScenarioMaking": "Cenário/Fabricação",
+  "ThemeMaking": "Criação de Temas"
 }
