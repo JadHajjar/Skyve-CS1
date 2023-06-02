@@ -100,7 +100,7 @@
   "Interaction_Identical": "Si tratta di versioni multiple dello stesso pacchetto.\n\nSi dovrebbe scegliere solo una di esse.",
   "Status_Succeeded": "'{0}' è stato sostituito da '{1}'.\n\nSi sta già usando '{1}', quindi non c'è più bisogno di '{0}'.",
   "Status_Deprecated": "'{0}' è superato, non è più supportato dal suo autore.",
-  "Status_AutoDeprecated": "'{0}' non è stato aggiornato da molto tempo, probabilmente non è più supportato dal suo autore.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' è un doppione di un pacchetto originale.",
     "One": "Questo è un doppione di '{1}'."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Questa è una mod di dipendenza, ma non sembra che tu stia usando alcun pacchetto che la richiede.",
   "Status_SourceCodeNotAvailable": "Il codice sorgente di questa mod non è disponibile. Non dovresti usarla, a meno che non ti fidi del suo autore.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "La musica contenuta in questo pacchetto potrebbe essere coperta da copyright. È meglio non usarlo se stai trasmettendo.",
   "Status_IncompleteDescription": "La descrizione del workshop di questa mod è troppo breve. Non dovresti usarla, a meno che non ti fidi del suo autore.",
   "OutputText": "Output atteso",
@@ -147,6 +148,9 @@
     "Plural": "Dovresti rimuovere l'iscrizione dai seguenti pacchetti."
   },
   "Action_ExcludeThis": "È necessario escludere '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Escludi",
+  "Unsubscribe": "Annulla iscrizione",
   "Action_ExcludeOther": {
     "One": "Si dovrebbe escludere '{1}'.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Cancella la Richiesta",
   "ApplyRequestedChanges": "Applicare le Modifiche Richieste",
   "ManagePackage": "Gestione del Pacchetto",
-  "RequestReviewDisclaimer": "*Il vostro ID Steam e i log vengono inviati con la vostra richiesta"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Il vostro ID Steam e i log vengono inviati con la vostra richiesta",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
