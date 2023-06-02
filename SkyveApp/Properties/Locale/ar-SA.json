@@ -521,5 +521,14 @@
   "PendingDeletions": {
     "One": "{0} item pending removal",
     "Plural": "{0} items pending removal"
-  }
+  },
+  "YouHavePackagesUser": {
+    "One": "You have {0} package made by {1}",
+    "Plural": "You have {0} packages made by {1}"
+  },
+  "RequestOption1": "Report an issue or add missing information",
+  "RequestOption2": "Add a missing status for the package",
+  "RequestOption3": "Add a missing interaction with another package",
+  "CurrentProfile": "الملف الشخصي الحالي",
+  "References": "References"
 }
