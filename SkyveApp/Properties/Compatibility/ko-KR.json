@@ -100,7 +100,7 @@
   "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
   "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있으므로 '{0}' 는 더 이상 필요하지 않습니다.",
   "Status_Deprecated": "'{0}' 는 더 이상 제작자에 의해 지원되지 않으며 사용되지 않습니다.",
-  "Status_AutoDeprecated": "'{0}' 는 오랫동안 업데이트되지 않았습니다. 더 이상 제작자에 의해 지원되지 않는 것일 수 있습니다.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' 는 기존 패키지의 재업로드입니다.",
     "One": "이것은 '{1}'의 재업로드입니다."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "이것은 종속성 모드입니다. 하지만 이를 필요로 하는 어떤 패키지도 사용하고 있지 않은 것 같습니다.",
   "Status_SourceCodeNotAvailable": "이 모드의 소스 코드를 확인할 수 없습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "이 팩에 포함된 음악은 저작권이 있을 수 있습니다. 스트리밍 중에는 사용하지 않는 것이 가장 좋습니다.",
   "Status_IncompleteDescription": "이 모드의 창작마당 설명은 너무 짧습니다. 모드 제작자를 신뢰하지 않는 이상 사용하지 않아야 합니다.",
   "OutputText": "예상 출력",
@@ -147,6 +148,9 @@
     "Plural": "다음 패키지들을 구독 취소해야 합니다:"
   },
   "Action_ExcludeThis": "'{0}' 를 제외해야 합니다.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "제외",
+  "Unsubscribe": "구독 취소",
   "Action_ExcludeOther": {
     "One": "'{1}' 를 제외해야 합니다.",
     "Plural": "다음 패키지들을 제외해야 합니다:"
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*당신의 Steam ID와 로그가 요청과 함께 전송됩니다"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*당신의 Steam ID와 로그가 요청과 함께 전송됩니다",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
