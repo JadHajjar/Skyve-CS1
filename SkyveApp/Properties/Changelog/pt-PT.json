@@ -406,8 +406,8 @@
                 "Changes": [
                     "Adicionada mensagem para informar quando as opções 'Corrigir Todos os Problemas' e 'Executar Limpeza' forem concluídas.",
                     "Corrigido um bug raro em que o carregamento de um perfil do LOT 1 continuava indefinidamente.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "Corrigido o problema em que relatório de alterações não abria corretamente em alguns idiomas.",
+                    "Possivelmente corrigido o problema de assinatura de um grande número de itens que estava falhando/não funcionando corretamente."
                 ]
             }
         ]
@@ -417,26 +417,26 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Processo de Assinatura Refeito",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Agora poderá assinar pacotes enquanto o jogo estiver aberto.",
+                    "Inscrever-se em vários itens seguidos os colocará numa lista de pendentes ao invés de iniciar o jogo para cada item.",
+                    "Adicionada uma caixa no canto inferior esquerdo do aplicativo para que saiba de quaisquer tarefas pendentes de assinatura/cancelamento.",
+                    "Adicionada uma opção avançada para forçar para baixar ou excluir os pacotes assim que você se assinar/cancelar sua assinatura no Skyve.",
+                    "Itens recém-inscritos não são mais recarregados enquanto o jogo está aberto.\nFazer isso impede o congelamento do seu jogo, bem como o mau funcionamento de mods."
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Novo",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "Adicionado \"Ver conteúdo deste Perfil\" no menu com botão direito do mouse'.",
+                    "Adicionado a opção \"Forçar para baixar\" no menu do botão direito'.",
+                    "Adicionados mais contexto a algumas janelas",
+                    "Adicionado \"Baixar todos os itens exibidos\" nas ações nas páginas da lista."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
                     "Fixed the profile list not updating instantly.",
                     "Fixed profile packages not showing their workshop name.",
