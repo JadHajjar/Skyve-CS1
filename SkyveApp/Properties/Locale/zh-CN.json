@@ -521,5 +521,14 @@
   "PendingDeletions": {
     "One": "当前有 {0} 个等待删除的项目",
     "Plural": "当前有 {0} 个等待删除的项目"
-  }
+  },
+  "YouHavePackagesUser": {
+    "One": "You have {0} package made by {1}",
+    "Plural": "You have {0} packages made by {1}"
+  },
+  "RequestOption1": "Report an issue or add missing information",
+  "RequestOption2": "Add a missing status for the package",
+  "RequestOption3": "Add a missing interaction with another package",
+  "CurrentProfile": "当前配置文件",
+  "References": "References"
 }
