@@ -100,7 +100,7 @@
   "Interaction_Identical": "这些是同一个插件的多个不同版本。\n\n您应当只选择使用其中一个，并取消订阅其他版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
-  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行过更新，可能不再受到作者的支持。",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个原始插件的重新上传版本。",
     "One": "这是 '{1}' 的重新上传版本。"
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "这是一个前置模组，但你似乎没有使用任何依赖于该模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期显示文本",
@@ -147,6 +148,9 @@
     "Plural": "您应该取消订阅下列插件："
   },
   "Action_ExcludeThis": "您应该卸下 '{0}'。",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "卸下",
+  "Unsubscribe": "取消订阅",
   "Action_ExcludeOther": {
     "One": "您应该卸下 '{1}'。",
     "Plural": "您应该卸下以下插件："
@@ -207,5 +211,9 @@
   "DeleteRequest": "删除申请",
   "ApplyRequestedChanges": "应用申请的改动",
   "ManagePackage": "管理插件",
-  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
