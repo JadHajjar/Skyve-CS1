@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+
+using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using System;
 
@@ -18,20 +20,28 @@ public class GenericPackageStatus : IGenericPackageStatus
 			Packages = status.Packages;
 			Note = status.Note;
 			IntType = status.IntType;
-			Type = status.GetType().FullName;
+			Type = status.GetType().Name;
 		}
 	}
 
 	public StatusAction Action { get; set; }
 	public ulong[]? Packages { get; set; }
 	public string? Note { get; set; }
-	[JsonIgnore] public NotificationType Notification { get; }
 	public int IntType { get; set; }
 	public string? Type { get; set; }
+	[JsonIgnore] public NotificationType Notification { get; }
 
 	public IGenericPackageStatus ToGenericPackage()
 	{
-		var instance = (IGenericPackageStatus)Activator.CreateInstance(typeof(GenericPackageStatus).Assembly.GetType(Type));
+		var type = Type?.Contains(".") ?? false ? Type.Substring(Type.LastIndexOf('.') + 1) : Type;
+
+		var instance = (IGenericPackageStatus)(type switch
+		{
+			nameof(PackageInteraction) => new PackageInteraction(),
+			nameof(PackageStatus) => new PackageStatus(),
+			nameof(StabilityStatus) => new StabilityStatus(),
+			_ => new GenericPackageStatus(),
+		});
 
 		instance.Action = Action;
 		instance.Packages = Packages;

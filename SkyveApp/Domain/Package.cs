@@ -41,7 +41,7 @@ public class Package : IPackage
 	public DownloadStatus Status => ModsUtil.GetStatus(this, out _);
 	public string? StatusReason { get { ModsUtil.GetStatus(this, out var reason); return reason; } }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
-	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(Mod.FileName)));
+	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(Mod.FileName)).If(0ul, ulong.TryParse(Name, out var id) ? id : 0));
 	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
 	public string? Name => (Workshop ? WorkshopInfo?.Name : null) ?? Path.GetFileName(Folder);

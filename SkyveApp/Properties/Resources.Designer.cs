@@ -3085,7 +3085,7 @@ namespace SkyveApp.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap Lang_HU_HU {
             get {
-                object obj = ResourceManager.GetObject("Lang_HU_HU", resourceCulture);
+                object obj = ResourceManager.GetObject("Lang_HU-HU", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
