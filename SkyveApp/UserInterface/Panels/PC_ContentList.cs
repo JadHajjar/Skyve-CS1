@@ -503,10 +503,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.AnyIssue)
 			{
-				if (item.GetCompatibilityInfo().Notification > NotificationType.Info)
+				if (item.GetCompatibilityInfo().Notification <= NotificationType.Info)
 				{
 					return true;
 				}
+			}
+			else if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.NoIssues)
+			{
+				return item.GetCompatibilityInfo().Notification > NotificationType.Info;
 			}
 			else if ((int)item.GetCompatibilityInfo().Notification != (int)DD_ReportSeverity.SelectedItem)
 			{

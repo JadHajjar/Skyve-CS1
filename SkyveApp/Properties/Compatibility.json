@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
   "Status_IncompleteDescription": "The Workshop description of this mod is too short. You should not use it unless you trust its author.",
   "OutputText": "Expected Output",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages:"
   },
   "Action_ExcludeThis": "You should exclude '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Exclude",
+  "Unsubscribe": "Unsubscribe",
   "Action_ExcludeOther": {
     "One": "You should exclude '{1}'.",
     "Plural": "You should exclude the following packages:"
@@ -208,5 +212,8 @@
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
   "Banned": "Banned",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }
