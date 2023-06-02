@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Annulla l'iscrizione a questo pacchetto",
   "UnsubscribeOther": "Annulla l'iscrizione ai pacchetti collegati",
   "Switch": "Passa al pacchetto collegato",
-  "FlippedSwitch": "Passare a questo pacchetto",
+  "FlippedSwitch": "Passa a questo pacchetto",
   "Deprecated": "Superato",
   "Reupload": "Ri-carica",
   "CausesIssues": "Causa problemi",
@@ -178,23 +178,23 @@
   "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
-    "One": "{0} {1} manca la dipendenza",
-    "Plural": "{0} {1} mancano le dipendenze"
+    "One": "A {0} {1} mancano delle dipendenze",
+    "Plural": "A {0} {1} mancano delle dipendenze"
   },
   "CautionCount": "{0} {1} dove è consigliata la prudenza",
   "WarningCount": "{0} {1} con un'avvertenza",
   "AttentionRequiredCount": {
-    "One": "{0} {1} richiede la vostra attenzione",
-    "Plural": "{0} {1} richiedono la vostra attenzione"
+    "One": "{0} {1} richiede la tua attenzione",
+    "Plural": "{0} {1} richiedono la tua attenzione"
   },
   "ExcludeCount": {
-    "One": "{0} {1} deve essere escluso",
-    "Plural": "{0} {1} devono essere esclusi"
+    "One": "{0} {1} dovrebbe essere esclusa",
+    "Plural": "{0} {1} dovrebbero essere escluse"
   },
   "UnsubscribeCount": "{0} {1} da cui dovreste annullare la sottoscrizione",
   "SwitchCount": {
-    "One": "{0} {1} richiede di passare ad un altro",
-    "Plural": "{0} {1} richiedono di passare ad un altro"
+    "One": "{0} {1} richiede di passare ad un'altra",
+    "Plural": "{0} {1} richiedono di passare ad un'altra"
   },
   "PackageType": "Tipo Pacchetto",
   "GenericPackage": "Pacchetto Generico",
@@ -209,11 +209,11 @@
   "AuthorMalicious": "L'autore di {0}, {1}, è noto per essere malintenzionato e/o per includere contenuti dannosi come i virus nei suoi pacchetti.",
   "ReviewRequests": "Richieste di Revisione {0}",
   "DeleteRequest": "Cancella la Richiesta",
-  "ApplyRequestedChanges": "Applicare le Modifiche Richieste",
+  "ApplyRequestedChanges": "Applica le Modifiche Richieste",
   "ManagePackage": "Gestione del Pacchetto",
   "Banned": "Bannato",
   "NoIssues": "Nessun problema",
-  "RequestReviewDisclaimer": "*Il vostro ID Steam e i log vengono inviati con la vostra richiesta",
+  "RequestReviewDisclaimer": "*Il tuo ID Steam e i tuoi log vengono inviati insieme alla richiesta",
   "ScenarioMaking": "Creazione di scenari",
   "ThemeMaking": "Creazione di temi"
 }
