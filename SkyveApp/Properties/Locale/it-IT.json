@@ -160,8 +160,8 @@
   "TotalItems": "Elementi totali",
   "UnsubscribeAll": "Annulla la sottoscrizione a tutti gli elementi mostrati",
   "SubscribeAll": "Sottoscrivi tutti gli elementi mostrati",
-  "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Scaricare nuovamente tutti gli elementi visualizzati e scaricati",
+  "DownloadAll": "Scarica tutti gli elementi mostrati e mancanti",
+  "ReDownloadAll": "Scarica nuovamente tutti gli elementi visualizzati e scaricati",
   "MissingItemsRemain": "Mancano ancora alcuni elementi di questo profilo. Se in futuro salverai il profilo, quegli elementi verranno rimossi.",
   "ModIsPrivate": "L'elemento è privato",
   "HidePseudoMods": "Nascondi pseudo-mod come le miscele di temi",
@@ -200,7 +200,7 @@
   "DisableNewAssetsByDefault_Tip": "Quando ti iscrivi o aggiungi una risorsa, LoadOrderTool la escluderà o includerà in modo automatico all'avvio, in base a questa impostazione.",
   "FilterOutPackagesWithOneAsset_Tip": "I pacchetti che contengono una sola risorsa non verranno mostrati nella pagina Pacchetti. Verranno comunque mostrati nella pagina Risorse.",
   "FilterOutPackagesWithMods_Tip": "I pacchetti che includono una mod non verranno mostrati nella pagina Pacchetti. Verranno comunque mostrati nella pagina Mod.",
-  "OverrideGameChanges_Tip": "Le modifiche apportate in gioco allo stato di abilitazione delle mod saranno automaticamente sovrascritte dalle impostazioni all'interno di Skyve; le modifiche saranno applicate al lancio successivo. Questo funziona solo quando lo strumento è aperto.",
+  "OverrideGameChanges_Tip": "Le modifiche apportate in gioco allo stato di abilitazione delle mod saranno automaticamente sovrascritte dalle impostazioni all'interno di Skyve; le modifiche saranno applicate al lancio successivo. Questo funziona solo quando l'app è aperta.",
   "HidePseudoMods_Tip": "Le miscele di temi generano un file di tipo mod che è possibile condividere nel workshop. Abilitare questa opzione nasconderà questi file dalla lista delle tue mod e li manterrà sempre inclusi.",
   "AdvancedIncludeEnable_Tip": "Abilitando questa opzione potrai modificare sia lo stato incluso che quello abilitato delle mod, in modo simile a Load Order Tool originale.",
   "AdvancedLaunchOptions_Tip": "Visualizza le opzioni di avvio aggiuntive utilizzate dagli sviluppatori nelle impostazioni del profilo.",
@@ -241,7 +241,7 @@
   "LOTWillRestart": "Skyve si chiuderà temporaneamente durante il processo di aggiornamento, ma riprenderà automaticamente al termine dell'aggiornamento.",
   "UpdatingLot": "Skyve è in fase di aggiornamento. Si prega di attendere...",
   "SubscribingRequiresGameToOpenTitle": "Processo di Sottoscrizione",
-  "SubscribingRequiresGameToOpen": "Per sottoscrivere o annullare la sottoscrizione ai pacchetti è necessario aprire il gioco per un breve momento.\n\nUna volta visualizzato il launcher del gioco, cliccate su Play per procedere.",
+  "SubscribingRequiresGameToOpen": "Per sottoscrivere o annullare la sottoscrizione ai pacchetti è necessario aprire il gioco per un breve momento.\n\nUna volta visualizzato il launcher del gioco, fai clic su Gioca per procedere.",
   "HelpSupport": "Aiuto e Supporto",
   "DisableFpsBoosterDebug": "Hai FPS Booster abilitato mentre stai usando mono in modalità debug, vorresti disabilitarlo per ottenere log migliori?",
   "LogZipCopy_Tip": "Crea un file zip contenente tutte le informazioni di log necessarie ad assisterti nel tuo problema, puoi incollarlo direttamente in un canale di Discord.",
@@ -408,8 +408,8 @@
   "Include": "Includi",
   "Unsubscribe": "Annulla iscrizione",
   "Exclude": "Escludi",
-  "Snooze": "Postcipa",
-  "UnSnooze": "Non posticipare",
+  "Snooze": "Nascondi",
+  "UnSnooze": "Mostra di nuovo",
   "Mod": {
     "One": "Mod",
     "Plural": "Mods"
@@ -458,9 +458,9 @@
   "AnyIssue": "Qualsiasi Problema",
   "AnyUsage": "Qualsiasi Uso",
   "ExplainIssue": "Descrivete qui il vostro problema",
-  "ExplainIssueInfo": "Includete qui il maggior numero di informazioni su ciò che sta accadendo e su come replicarlo",
+  "ExplainIssueInfo": "Includi qui il maggior numero di informazioni possobile su ciò che sta accadendo e su come replicarlo",
   "ReviewRequestSent": "La tua richiesta di recensione per '{0}' è stata inviata!\n\nGrazie per il tuo feedback.",
-  "ReviewRequestFailed": "Non è stato possibile inviare la richiesta di revisione per '{0}'.\n\n{1}",
+  "ReviewRequestFailed": "Non è stato possibile inviare la tua richiesta di revisione per '{0}'.\n\n{1}",
   "SendReview": "Inviare la richiesta di revisione",
   "EditTags": "Modifica dei tag",
   "ShowAllReferencedPackages": "Mostra i pacchetti esclusi nella scheda 'Riferimenti'",
@@ -469,8 +469,8 @@
   "TreatOptionalAsRequired_Tip": "In sostanza, visualizza la notifica di dipendenza mancante per i pacchetti opzionali.",
   "AddCustomTag": "Aggiungi un tag personalizzato",
   "OutOfDateCount": {
-    "One": "{0} {1} è obsoleto",
-    "Plural": "{0} {1} sono obsolete"
+    "One": "{0} {1} non è aggiornata",
+    "Plural": "{0} {1} non sono aggiornate"
   },
   "IncompleteCount": {
     "One": "{0} {1} non corrisponde alla sua dimensione nel Workshop",
@@ -479,15 +479,15 @@
   "PackageIsRemoved": "'{0}' è stato rimosso da Steam",
   "PackageIsUnknown": "Le informazioni di Steam non sono ancora state caricate per '{0}'",
   "PackageIsNotDownloaded": "'{0}' è stato rimosso dal computer",
-  "PackageIsOutOfDate": "'{0}' è obsoleto\n\nSei indietro di {1}",
-  "PackageIsMaybeOutOfDate": "'{0}' potrebbe essere obsoleto, è stato aggiornato {1}",
+  "PackageIsOutOfDate": "'{0}' non è aggiornato\n\nSei indietro di {1}",
+  "PackageIsMaybeOutOfDate": "'{0}' potrebbe non essere aggiornato, è stato aggiornato {1}",
   "PackageIsIncomplete": "La dimensione locale di '{0}' ({1}) è diversa da quella di {2} di Steam",
   "RemovedFromSteam": "Rimosso da Steam",
   "Missing": "Mancante",
   "LoggedInAs": "Connesso come",
   "UnknownUser": "Utente Sconosciuto",
   "AddMeaningfulDescription": "Si prega di aggiungere una descrizione significativa alla richiesta.",
-  "RedownloadComplete": "Skyve ha finito di riscaricare i pacchetti con i problemi.",
+  "RedownloadComplete": "Skyve ha finito di riscaricare i pacchetti problematici.",
   "CleanupComplete": "Skyve ha finito di ripulire i download del Workshop.",
   "PendingSubscribeTo": {
     "One": "{0} elemento in attesa di sottoscrizione",
@@ -497,21 +497,21 @@
     "One": "{0} elemento in attesa di annullamento della sottoscrizione",
     "Plural": "{0} elemento in attesa di annullamento della sottoscrizione"
   },
-  "CancelSubs": "Annullare tutte le sottoscrizioni in corso",
-  "CancelDownloads": "Annullare tutti i download in sospeso",
-  "ApplySubs": "Avviare il gioco per un breve momento per applicare le sottoscrizioni in corso",
+  "CancelSubs": "Annulla tutte le sottoscrizioni in corso",
+  "CancelDownloads": "Annulla tutti i download in attesa",
+  "ApplySubs": "Avvia il gioco per un breve momento per applicare le sottoscrizioni in corso",
   "ApplyDownloads": "Forza Steam a scaricare tutti i pacchetti in attesa",
   "SubsPendingInfo": "I pacchetti sottoscritti sono raggruppati qui.\nUna volta aperto il gioco, questi oggetti verranno sottoscritti su Steam.",
   "DownloadsPendingInfo": "I pacchetti a cui si è sottoscritti e che non sono ancora stati scaricati sono raggruppati qui.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Avviare il download o la rimozione dei pacchetti subito dopo l'iscrizione/disiscrizione",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forza il download o la rimozione dei pacchetti invece di aspettare che vengano effettivamente sottoscritti o annullati.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Avvia lo scaricamento o la rimozione dei pacchetti subito dopo l'iscrizione/disiscrizione",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forza lo scaricamento o la rimozione dei pacchetti invece di aspettare che vengano effettivamente sottoscritti o annullati.",
   "ThisSubscribesTo": {
-    "One": "In questo processo si sottoscriverà il pacchetto {0}.",
-    "Plural": "In questo processo si sottoscriveranno {0} pacchetti."
+    "One": "In questo processo {0} pacchetto verrà sottoscritto.",
+    "Plural": "In questo processo {0} pacchetti verranno sottoscritti."
   },
   "ThisUnsubscribesFrom": {
-    "One": "In questo processo si annullerà la sottoscrizione di {0} pacchetto.",
-    "Plural": "In questo processo si annullerà la sottoscrizione di {0} pacchetti."
+    "One": "In questo processo si annullerà la sottoscrizione ad {0} pacchetto.",
+    "Plural": "In questo processo si annullerà la sottoscrizione a {0} pacchetti."
   },
   "ViewThisProfilesPackages": "Visualizza i contenuti di questo profilo",
   "PendingDownloads": {
