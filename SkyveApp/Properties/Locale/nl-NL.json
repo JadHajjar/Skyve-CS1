@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Open de lokale map met dit pakket",
   "ViewOnSteam": "Bekijk dit pakket op Steam",
   "ReDownloadPackage": "Download dit pakket opnieuw",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "Dit pakket downloaden",
   "CopySteamId": "Kopieer dit Steam -ID",
   "OpenAuthorPage": "Open de pagina van de auteur",
   "Sorting_Default": "Standaard sortering",
@@ -160,8 +160,8 @@
   "TotalItems": "Totaal artikelen",
   "UnsubscribeAll": "Afmelden van alle weergegeven items",
   "SubscribeAll": "Abonneer op alle weergegeven items",
-  "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Re-Download all displayed & downloaded items",
+  "DownloadAll": "Download alle weergegeven & ontbrekende items",
+  "ReDownloadAll": "Alle weergegeven & gedownloade items opnieuw downloaden",
   "MissingItemsRemain": "Sommige items ontbreken nog in dit profiel. Het profiel opslaan in de toekomst zal die items ervan verwijderen.",
   "ModIsPrivate": "Item is privé",
   "HidePseudoMods": "Verberg pseudo-mods zoals themamixen",
@@ -240,8 +240,8 @@
   "WouldYouLikeToSkipThose": "Wil je deze pakketten overslaan?",
   "LOTWillRestart": "Skyve zal tijdelijk sluiten tijdens het updateproces, maar het wordt automatisch hervat zodra de update is voltooid.",
   "UpdatingLot": "Skyve wordt momenteel bijgewerkt. Een ogenblik geduld...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Abonnement Proces",
+  "SubscribingRequiresGameToOpen": "Voor het abonneren of uitschrijven van pakketten zult u voor een kort moment het spel moeten openen.\n\nWanneer u de Launcher van het spel ziet, klik u op Play om verder te gaan.",
   "HelpSupport": "Hulp & ondersteuning",
   "DisableFpsBoosterDebug": "Je hebt FPS Booster ingeschakeld tijdens het gebruik van debug mono, wil je het uitschakelen om betere logs te krijgen?",
   "LogZipCopy_Tip": "Maak een zip-bestand met alle log-informatie die iemand nodig heeft om u te helpen met uw probleem, je kunt deze direct in een discord kanaal plakken.",
@@ -501,32 +501,32 @@
   "CancelDownloads": "Annuleer alle wachtende downloads",
   "ApplySubs": "Start het spel voor een korte tijd om wachtende abonnementen toe te passen",
   "ApplyDownloads": "Forceer Steam om alle wachtende pakketten te downloaden",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "SubsPendingInfo": "Pakketten waarop u zich abonneert, worden hier gegroepeerd.\nZodra u het spel opent worden die items geabonneerd op Steam.",
+  "DownloadsPendingInfo": "Pakketten waarop u zich aanmeldt en die nog niet zijn gedownload worden hier gegroepeerd.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Start het downloaden of verwijderen van pakketten onmiddellijk na het abonneren/uitschrijven",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forceert het downloaden of verwijderen van pakketten in plaats van te wachten tot ze daadwerkelijk zijn geabonneerd of uitgeschreven.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "U zult zich abonneren op {0} pakket in dit proces.",
+    "Plural": "U zult zich abonneren op {0} pakketten in dit proces."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "U zult zich uitschrijven voor {0} pakket in dit proces.",
+    "Plural": "U zult zich uitschrijven voor {0} pakketten in dit proces."
   },
-  "ViewThisProfilesPackages": "View this profile's contents",
+  "ViewThisProfilesPackages": "Bekijk de inhoud van dit profiel",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "Het downloaden van {0} item staat in de wacht",
+    "Plural": "{0} items wachten op download"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} item wacht op verwijderen",
+    "Plural": "{0} items wachten op verwijderen"
   },
   "YouHavePackagesUser": {
-    "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "One": "Je hebt {0} pakket gemaakt door {1}",
+    "Plural": "Je hebt {0} pakketten gemaakt door {1}"
   },
-  "RequestOption1": "Report an issue or add missing information",
+  "RequestOption1": "Rapporteer een probleem of voeg ontbrekende informatie toe",
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
   "CurrentProfile": "Huidig profiel",
