@@ -22,8 +22,8 @@
   "Broken": "已损坏",
   "Incompatible": "不兼容",
   "CityBuilding": "城市建设",
-  "AssetCreation": "资产制作",
-  "MapCreation": "地图制作",
+  "AssetCreation": "制作资产",
+  "MapCreation": "制作地图",
   "NoAction": "不执行任何操作",
   "SubscribeToPackages": "订阅此链接的插件",
   "RequiresConfiguration": "需要一个特定的配置",
@@ -105,7 +105,7 @@
     "Zero": "'{0}' 是某个原始插件的重新上传版本。",
     "One": "这是 '{1}' 的重新上传版本。"
   },
-  "Status_CausesIssues": "'{0}' 会导致游戏出现问题。",
+  "Status_CausesIssues": "'{0}' 可能导致游戏出现问题。",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。",
     "One": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。\n\n如果需要，可以使用 '{1}' 来恢复您的存档。请阅读其工坊页面描述以获取更多信息。"
@@ -134,17 +134,17 @@
   "Stability_Local": "此插件是 '{0}' 模组的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "您应该订阅下列插件：",
-    "Plural": "您应该订阅这些插件："
+    "One": "您应当订阅以下插件：",
+    "Plural": "您应当订阅这些插件："
   },
   "Action_RequiresConfiguration": "您应当遵循下列使用说明：",
   "Action_SelectOne": {
     "One": "对于 '{0}' 和 '{1}'，您只能使用其中一个插件：",
     "Plural": "对于 '{0}' 和下列插件，您只能使用其中一个插件："
   },
-  "Action_UnsubscribeThis": "您应该取消订阅 '{0}' 。",
+  "Action_UnsubscribeThis": "您应当取消订阅 '{0}' 。",
   "Action_UnsubscribeOther": {
-    "One": "您应该取消订阅 '{1}' 。",
+    "One": "您应当取消订阅 '{1}' 。",
     "Plural": "您应该取消订阅下列插件："
   },
   "Action_ExcludeThis": "您应该卸下 '{0}'。",
@@ -191,14 +191,14 @@
     "One": "{0} 个{1} 应当被卸下",
     "Plural": "{0} 个{1} 应当被卸下"
   },
-  "UnsubscribeCount": "{0} {1} 应该取消订阅",
+  "UnsubscribeCount": "{0} {1} 应当取消订阅",
   "SwitchCount": {
     "One": "{0} 个{1} 需要替换",
     "Plural": "{0} 个{1} 需要替换"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
-  "MusicPack": "音乐插件",
+  "MusicPack": "音乐包插件",
   "ThemeMix": "混合主题",
   "IMTMarkings": "Intersection Marking Tool 标线",
   "RenderItPreset": "Render it! 的预设",
