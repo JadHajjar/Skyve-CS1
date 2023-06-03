@@ -140,7 +140,7 @@
   "Action_RequiresConfiguration": "您应当遵循下列使用说明：",
   "Action_SelectOne": {
     "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "Plural": "对于 '{0}' 和下列插件，您只能使用其中一个插件："
   },
   "Action_UnsubscribeThis": "您应该取消订阅 '{0}' 。",
   "Action_UnsubscribeOther": {
