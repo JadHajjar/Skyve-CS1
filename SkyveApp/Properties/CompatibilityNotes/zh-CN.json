@@ -84,7 +84,7 @@
   "Game breaking": "导致游戏崩溃",
   "This causes (vanilla) trees to flicker.": "此模组会导致 (原版) 树木闪烁。",
   "This mod not have any function any more. The creator is not publishing his mods for the players but just to show people how good he can code.": "此模组不再有任何功能。 创建者并不是为了给玩家发布他的模组，而只是为了向人们展示他能够编程多么好。",
-  "Being unable to export with an 'XML root element missing' error in the log. Train tracks sometimes not included.": "日志中出现“XML 根元素丢失”的错误，无法导出城市规划图。有时候图片内不会显示火车轨道。",
+  "Being unable to export with an 'XML root element missing' error in the log. Train tracks sometimes not included.": "日志中可能会出现“XML 根元素丢失”的错误，这种情况下无法导出城市规划图。有时候图片内不会显示火车轨道。",
   "Creating 'ghost' vehicles": "生成幽灵载具",
   "Creating 'ghost' vehicles is reported and need to be verified.": "据报告，此插件会导致游戏生成“幽灵载具”，但仍需要进一步验证。",
   "Do not remove trees added after Campus DLC to the game.": "无法移除在校园DLC更新之后游戏新增的树木。",
