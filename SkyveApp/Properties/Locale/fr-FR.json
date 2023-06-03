@@ -240,8 +240,8 @@
   "WouldYouLikeToSkipThose": "Voulez-vous passer ces paquets ?",
   "LOTWillRestart": "Skyve se fermera temporairement pendant le processus de mise à jour, mais reprendra automatiquement une fois la mise à jour terminée.",
   "UpdatingLot": "Skyve est en cours de mise à jour, veuillez patienter...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Processus d'abonnement",
+  "SubscribingRequiresGameToOpen": "S'abonner ou se désabonner des paquets nécessite d'ouvrir le jeu pour un bref instant. \n\nLorsque vous voyez le lanceur du jeu, cliquez sur Jouer pour continuer.",
   "HelpSupport": "Aide et Support",
   "DisableFpsBoosterDebug": "Vous avez FPS Booster activé lorsque vous utilisez le débogage mono, voulez-vous le désactiver pour obtenir de meilleurs logs ?",
   "LogZipCopy_Tip": "Créer un fichier zip contenant toutes les informations de journalisation nécessaires à quelqu'un pour vous aider à résoudre votre problème. Le fichier zip sera copié dans le presse-papiers et vous pouvez le coller directement dans un canal Discord.",
@@ -490,24 +490,24 @@
   "RedownloadComplete": "Skyve a fini de retélécharger les paquets avec des problèmes.",
   "CleanupComplete": "Skyve a fini de nettoyer les téléchargements du Workshop.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} élément en attente d'abonnement",
+    "Plural": "{0} éléments en attente d'abonnement"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} élément en attente de désabonnement",
+    "Plural": "{0} éléments en attente de désabonnement"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
+  "CancelSubs": "Annuler tous les abonnements en attente",
   "CancelDownloads": "Annuler tous les téléchargements en attente",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplySubs": "Lancez le jeu pour un bref instant pour appliquer les abonnements en attente",
   "ApplyDownloads": "Forcer Steam à télécharger tous les paquets en attente",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "SubsPendingInfo": "Les paquets auxquels vous vous abonnez sont regroupés ici.\nUne fois que vous ouvriez le jeu, ces éléments seront abonnés sur Steam.",
   "DownloadsPendingInfo": "Les paquets auxquels vous vous êtes abonné et qui n'ont pas encore été téléchargés sont regroupés ici.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Démarrer le téléchargement ou la suppression des paquets immédiatement après l'abonnement/le désabonnement",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Force le téléchargement ou la suppression de paquets au lieu d'attendre qu'ils soient effectivement abonnés ou désabonnés.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "Vous vous abonnerez au paquet {0} dans ce processus.",
+    "Plural": "Vous vous abonnerez aux {0} paquets dans ce processus."
   },
   "ThisUnsubscribesFrom": {
     "One": "You will be unsubscribing from {0} package in this process.",
