@@ -6,10 +6,10 @@
   "Skip": "Overslaan",
   "Note": "Notitie",
   "NoteInfo": "Extra informatieve tekst weergegeven voor het pakket",
-  "BlackListName": "Black-list op naam",
-  "BlackListId": "Black-list op naam",
+  "BlackListName": "Zwarte-lijst op naam",
+  "BlackListId": "Zwarte-lijst op Steam ID",
   "GlobalTags": "Globale Tags",
-  "GlobalTagsInfo": "Tags maken voor alle spelers in de app",
+  "GlobalTagsInfo": "Tags die alle spelers zullen zien in de app",
   "Links": "Koppelingen",
   "StatusesCount": "Statussen ({0})",
   "InteractionCount": "Interacties ({0})",
@@ -23,7 +23,7 @@
   "Incompatible": "Incompatibel",
   "CityBuilding": "Stadsbouw",
   "AssetCreation": "Asset creëren",
-  "MapCreation": "Kaart maken",
+  "MapCreation": "Kaart Aanmaken",
   "NoAction": "Niets doen",
   "SubscribeToPackages": "Abonneren op gelinkte pakketten",
   "RequiresConfiguration": "Vereist een specifieke configuratie",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Dit zijn meerdere versies van hetzelfde pakket.\r\n\r\nKies slechts één van hen.",
   "Status_Succeeded": "'{0}' is geslaagd door '{1}'.\r\n\r\nU gebruikt al '{1}' dus er is geen noodzaak meer voor '{0}'.",
   "Status_Deprecated": "'{0}' is verouderd, het wordt niet langer ondersteund door de auteur.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Status_AutoDeprecated": "'{0}' is al een lange tijd niet bijgewerkt.",
   "Status_Reupload": {
     "Zero": "'{0}' is een heruploaden van een origineel pakket.",
     "One": "Dit is een herupload van '{1}'."
@@ -120,7 +120,7 @@
   },
   "Status_DependencyMod": "Dit is een afhankelijkheidsmodus, maar het lijkt er niet op dat je een pakket gebruikt dat het nodig heeft.",
   "Status_SourceCodeNotAvailable": "De broncode van deze mod is niet beschikbaar. Gebruik deze niet, tenzij je de auteur vertrouwt.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "Broncode is beschikbaar",
   "Status_MusicCanBeCopyrighted": "De muziek in dit pakket kan worden gekopieerd. Het is het beste om het niet te gebruiken tijdens het streamen.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Verwachte uitgang",
@@ -148,7 +148,7 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "U moet '{0} ' uitsluiten.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Dit pakket uitsluiten",
   "Exclude": "Uitsluiten",
   "Unsubscribe": "Uitschrijven",
   "Action_ExcludeOther": {
@@ -211,9 +211,9 @@
   "DeleteRequest": "Verzoek verwijderen",
   "ApplyRequestedChanges": "Aangevraagde wijzigingen toepassen",
   "ManagePackage": "Pakket beheren",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
+  "Banned": "Geblokkeerd",
+  "NoIssues": "Geen problemen",
   "RequestReviewDisclaimer": "*Je Steam ID en logs zijn verzonden met je verzoek",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ScenarioMaking": "Creëer een Scenario",
+  "ThemeMaking": "Creëer een Thema"
 }
