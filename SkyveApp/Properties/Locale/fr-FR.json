@@ -487,7 +487,7 @@
   "LoggedInAs": "Connecté en tant que",
   "UnknownUser": "Utilisateur inconnu",
   "AddMeaningfulDescription": "Veuillez ajouter une description précise à votre demande.",
-  "RedownloadComplete": "Skyve a fini de retélécharger les paquets avec des problèmes.",
+  "RedownloadComplete": "Skyve a fini de re-télécharger les paquets avec des problèmes.",
   "CleanupComplete": "Skyve a fini de nettoyer les téléchargements du Workshop.",
   "PendingSubscribeTo": {
     "One": "{0} élément en attente d'abonnement",
@@ -501,19 +501,19 @@
   "CancelDownloads": "Annuler tous les téléchargements en attente",
   "ApplySubs": "Lancez le jeu pour un bref instant pour appliquer les abonnements en attente",
   "ApplyDownloads": "Forcer Steam à télécharger tous les paquets en attente",
-  "SubsPendingInfo": "Les paquets auxquels vous vous abonnez sont regroupés ici.\nUne fois que vous ouvriez le jeu, ces éléments seront abonnés sur Steam.",
+  "SubsPendingInfo": "Les paquets auxquels vous vous êtes abonné ont regroupés ici.\nUne fois que vous ouvriez le jeu, ces éléments seront abonnés sur Steam.",
   "DownloadsPendingInfo": "Les paquets auxquels vous vous êtes abonné et qui n'ont pas encore été téléchargés sont regroupés ici.",
   "ForceDownloadAndDeleteAsSoonAsRequested": "Démarrer le téléchargement ou la suppression des paquets immédiatement après l'abonnement/le désabonnement",
   "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Force le téléchargement ou la suppression de paquets au lieu d'attendre qu'ils soient effectivement abonnés ou désabonnés.",
   "ThisSubscribesTo": {
-    "One": "Vous vous abonnerez au paquet {0} dans ce processus.",
-    "Plural": "Vous vous abonnerez aux {0} paquets dans ce processus."
+    "One": "Vous vous abonnerez au paquet {0} au cours de ce processus.",
+    "Plural": "Vous vous abonnerez aux {0} paquets au cours de ce processus."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "Vous vous désabonnerez de {0} paquet au cours de ce processus.",
+    "Plural": "Vous vous désabonnerez de {0} paquets au cours de ce processus."
   },
-  "ViewThisProfilesPackages": "View this profile's contents",
+  "ViewThisProfilesPackages": "Afficher le contenu de ce profil",
   "PendingDownloads": {
     "One": "{0} élément en attente de téléchargement",
     "Plural": "{0} éléments en attente de téléchargement"
@@ -530,5 +530,5 @@
   "RequestOption2": "Ajouter un statut manquant pour le paquet",
   "RequestOption3": "Ajouter une interaction manquante avec un autre paquet",
   "CurrentProfile": "Profil actuel",
-  "References": "References"
+  "References": "Références"
 }
