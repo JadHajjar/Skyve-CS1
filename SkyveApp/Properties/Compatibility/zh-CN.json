@@ -25,16 +25,16 @@
   "AssetCreation": "制作资产",
   "MapCreation": "制作地图",
   "NoAction": "不执行任何操作",
-  "SubscribeToPackages": "订阅此链接的插件",
+  "SubscribeToPackages": "订阅列出的插件",
   "RequiresConfiguration": "需要一个特定的配置",
   "SelectOne": "请选择…",
   "UnsubscribeThis": "取消订阅此插件",
-  "UnsubscribeOther": "取消订阅关联的插件",
+  "UnsubscribeOther": "取消订阅列出的插件",
   "Switch": "需要替换",
   "FlippedSwitch": "替换为此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
-  "CausesIssues": "导致问题",
+  "CausesIssues": "引发问题",
   "SavesCantLoadWithoutIt": "没有它，存档将无法载入",
   "TestVersion": "测试版",
   "DependencyMod": "前置模组",
@@ -115,8 +115,8 @@
     "One": "这是 '{1}' 的测试版。\n请注意，测试版模组可能会出现意外问题。"
   },
   "Status_MissingDlc": {
-    "One": "要使用这个插件，您必须购买 '{0}' DLC。",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "要使用这个插件，您需要购买一个 DLC。",
+    "Plural": "要使用这个插件，您需要购买下列 DLC："
   },
   "Status_DependencyMod": "这是一个前置模组，但你似乎没有使用任何依赖于该模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
@@ -130,7 +130,7 @@
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
   "Stability_HasIssues": "此插件可能引发问题。\n请小心使用。",
   "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
-  "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应该立刻取消订阅或删除此插件。",
+  "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应当立刻取消订阅或删除此插件。",
   "Stability_Local": "此插件是 '{0}' 模组的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
