@@ -528,7 +528,7 @@
   },
   "RequestOption1": "报告此插件的问题，或补充缺少的信息",
   "RequestOption2": "为此插件补充状态信息",
-  "RequestOption3": "Add a missing interaction with another package",
+  "RequestOption3": "补充此插件与另一个插件的交互方式",
   "CurrentProfile": "当前配置文件",
   "References": "引用"
 }
