@@ -5,7 +5,7 @@
   "StopCities": "關閉 Cities: Skylines",
   "AssetsBubble": "您的資產",
   "ModsBubble": "您的模組",
-  "Dashboard": "統計面板",
+  "Dashboard": "控制面板",
   "ModOutOfDate": "個模組已過期",
   "ModOutOfDatePlural": "個模組已過期",
   "SearchDlcs": "搜索您的 DLC…",
@@ -20,7 +20,7 @@
   "ModIsUpToDate": "該模組已更新至最新版，並且已完整下載",
   "ModIncomplete": "模組沒有下載完整，或者缺少了檔",
   "ModIncompletePlural": "模組沒有下載完整，或者缺少了檔",
-  "AssetIsLocal": "這是本地資產",
+  "AssetIsLocal": "這是本機資產",
   "AssetIsRemoved": "此資產已經從 Steam 工坊移除",
   "AssetIsUnknown": "無法從 Steam 獲取此資產的資訊",
   "AssetIsNotDownloaded": "此資產尚未下載，不存在於您的電腦上",
@@ -42,14 +42,14 @@
   "ViewProfiles": "查看設定檔",
   "AddProfile": "添加設定檔",
   "LHT": "靠左行駛",
-  "NoWorkshop": "禁用創意工坊外掛程式",
+  "NoWorkshop": "停用Steam 工坊外掛程式",
   "NoAssets": "禁用自訂資產",
   "NoMods": "禁用全部模組",
   "AutoSave": "自動保存",
   "TotalSize": "總大小",
   "CompatibilityStatus": "相容性狀態",
   "AnyStatus": "任何狀態",
-  "AnyCompatibilityStatus": "任意狀態",
+  "AnyCompatibilityStatus": "任何狀態",
   "ModOwned": "您已訂閱該模組",
   "NoLocalPackagesFound": "在您的電腦上找不到外掛程式。",
   "CheckFolderInOptions": "如果您選擇了錯誤的資料夾，請查看選項面板。",
@@ -523,12 +523,12 @@
     "Plural": "當前有 {0} 個等待刪除的項目"
   },
   "YouHavePackagesUser": {
-    "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "One": "你有{0} 個包裹是{1} 做的",
+    "Plural": "你有{0} 個包裹是{1} 做的"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
-  "RequestOption3": "Add a missing interaction with another package",
+  "RequestOption1": "舉報錯誤或補齊失漏資訊",
+  "RequestOption2": "為包裹補齊失漏資訊",
+  "RequestOption3": "為包裹補齊與其他包裹的互動",
   "CurrentProfile": "當前設定檔",
-  "References": "References"
+  "References": "資料依屬"
 }
