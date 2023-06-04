@@ -293,10 +293,15 @@ internal static class ModsUtil
 	{
 		tags = new();
 
-		var text = package?.Name ?? Locale.UnknownPackage;
+		var text = package?.Name.RegexRemove(@"v?\d+\.\d+(\.\d+)*(-[\d\w]+)*") ?? Locale.UnknownPackage;
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
 
 		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
+
+		if (package?.Workshop == false)
+		{
+			tags.Add((FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), Locale.Local.One.ToUpper()));
+		}
 
 		foreach (Match match in tagMatches)
 		{
@@ -314,8 +319,18 @@ internal static class ModsUtil
 					_ => (Color?)null
 				};
 
+				if (package?.Workshop == false && color is not null)
+				{
+					continue;
+				}
+
 				tags.Add((color ?? FormDesign.Design.ButtonColor, color is null ? tagText : LocaleHelper.GetGlobalText(tagText).One.ToUpper()));
 			}
+		}
+
+		if (package is null)
+		{
+			return text;
 		}
 
 		if (package.Banned)

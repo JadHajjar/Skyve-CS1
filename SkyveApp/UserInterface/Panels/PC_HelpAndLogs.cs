@@ -194,4 +194,9 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		slickSpacer3.Visible = slickScroll1.Percentage != 0;
 	}
+
+	private void B_OpenLog_Click(object sender, EventArgs e)
+	{
+		IOUtil.Execute(LogUtil.GameLogFile, string.Empty);
+	}
 }

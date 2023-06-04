@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SkyveApp.Utilities;
-internal class CompatibilityApiUtil
+internal class SkyveApiUtil
 {
 	private static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{

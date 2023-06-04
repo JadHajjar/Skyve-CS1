@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.Utilities.Managers;
@@ -805,7 +806,7 @@ public static class ProfileManager
 		return Path.GetFileNameWithoutExtension(startName);
 	}
 
-	internal static DynamicIcon GetIcon(this Profile profile)
+	internal static DynamicIcon GetIcon(this IProfile profile)
 	{
 		if (profile.Temporary)
 		{
@@ -1123,5 +1124,17 @@ public static class ProfileManager
 		{
 			Log.Exception(ex, "Failed to create shortcut");
 		}
+	}
+
+	internal static async Task Share(Profile item)
+	{
+		await SkyveApiUtil.SaveUserProfile(new()
+		{
+			AuthorId = SteamUtil.GetLoggedInSteamId(),
+			Banner = item.BannerBytes,
+			Color = item.Color?.ToArgb(),
+			Name = item.Name,
+			Contents = item.Assets.Concat(item.Mods).Select(x => x.AsProfileContent()).ToArray()
+		});
 	}
 }

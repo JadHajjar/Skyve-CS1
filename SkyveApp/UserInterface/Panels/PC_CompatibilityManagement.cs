@@ -229,7 +229,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		{
 			CurrentPackage ??= await SteamUtil.GetItemAsync(packages[page]);
 
-			var catalogue = await CompatibilityApiUtil.Catalogue(CurrentPackage!.SteamId);
+			var catalogue = await SkyveApiUtil.Catalogue(CurrentPackage!.SteamId);
 
 			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CrPackage, PostPackage>();
 
@@ -523,7 +523,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		B_Apply.Loading = true;
 
-		var response = await CompatibilityApiUtil.SaveEntry(postPackage);
+		var response = await SkyveApiUtil.SaveEntry(postPackage);
 
 		B_Apply.Loading = false;
 

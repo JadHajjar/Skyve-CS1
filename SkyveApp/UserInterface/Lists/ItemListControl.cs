@@ -24,12 +24,11 @@ using System.Windows.Forms;
 using NotificationType = SkyveApp.Domain.Compatibility.Enums.NotificationType;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackage
+internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T>.Rectangles> where T : IPackage
 {
 	private PackageSorting sorting;
 	private Rectangle PopupSearchRect1;
 	private Rectangle PopupSearchRect2;
-	private readonly Dictionary<DrawableItem<T>, Rectangles> _itemRects = new();
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -118,7 +117,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<T>> OrderItems(IEnumerable<DrawableItem<T>> items)
+	protected override IEnumerable<DrawableItem<T, Rectangles>> OrderItems(IEnumerable<DrawableItem<T, Rectangles>> items)
 	{
 		items = sorting switch
 		{
@@ -169,162 +168,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		return items;
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<T> item, Point location)
-	{
-		var rects = _itemRects.TryGet(item);
-
-		if (rects is null)
-		{
-			return false;
-		}
-
-		if (item.Item.Workshop)
-		{
-			if (rects.SteamRect.Contains(location))
-			{
-				setTip(Locale.ViewOnSteam, rects.SteamRect);
-				return true;
-			}
-
-			if (rects.SteamIdRect.Contains(location))
-			{
-				setTipFilter(string.Format(Locale.CopyToClipboard, item.Item.SteamId), string.Format(Locale.AddToSearch, item.Item.SteamId), rects.SteamIdRect);
-				return true;
-			}
-
-			if (rects.AuthorRect.Contains(location))
-			{
-				setTipFilter(Locale.OpenAuthorPage, Locale.FilterByThisAuthor, rects.AuthorRect);
-				return true;
-			}
-		}
-
-		else if (rects.SteamIdRect.Contains(location))
-		{
-			var folder = Path.GetFileName(item.Item.Package?.Folder);
-			setTipFilter(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder), rects.SteamIdRect);
-			return true;
-		}
-
-		if (rects.FolderRect.Contains(location))
-		{
-			setTip(Locale.OpenLocalFolder, rects.FolderRect);
-			return true;
-		}
-
-		if (rects.SteamIdRect != Rectangle.Empty && location.X > rects.SteamIdRect.X)
-		{
-			return false;
-		}
-
-		if (rects.ScoreRect.Contains(location))
-		{
-			setTip(string.Format(Locale.RatingCount, (item.Item.PositiveVotes > item.Item.NegativeVotes ? '+' : '-') + Math.Abs(item.Item.PositiveVotes - (item.Item.NegativeVotes / 10) - item.Item.Reports).ToString("N0"), $"({SteamUtil.GetScore(item.Item)}%)") + "\r\n" + string.Format(Locale.SubscribersCount, item.Item.Subscriptions.ToString("N0")), rects.ScoreRect);
-			return true;
-		}
-
-		if (item.Item.Package?.Mod is not null)
-		{
-			if (rects.IncludedRect.Contains(location))
-			{
-				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
-			}
-
-			if (rects.EnabledRect.Contains(location))
-			{
-				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}", rects.EnabledRect);
-			}
-
-			if (rects.VersionRect.Contains(location))
-			{
-				setTip(Locale.CopyVersionNumber, rects.VersionRect);
-			}
-		}
-		else
-		{
-			if (rects.IncludedRect.Contains(location))
-			{
-				if (item.Item.Package != null)
-				{
-					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
-				}
-				else if (item.Item.Workshop)
-				{
-					setTip(Locale.SubscribeToItem, rects.IncludedRect);
-				}
-			}
-		}
-
-		if (rects.CenterRect.Contains(location) || rects.IconRect.Contains(location))
-		{
-			if (IsSelection)
-			{
-				setTip(Locale.SelectThisPackage, rects.CenterRect);
-				return true;
-			}
-
-			setTip(Locale.OpenPackagePage, rects.CenterRect);
-		}
-
-		if (rects.CompatibilityRect.Contains(location))
-		{
-			setTipFilter(Locale.ViewPackageCR, Locale.FilterByThisReportStatus, rects.CompatibilityRect);
-		}
-
-		if (rects.DownloadStatusRect.Contains(location))
-		{
-			if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
-			{
-				setTip(Locale.FilterByThisPackageStatus + "\r\n\r\n" + item.Item.Package?.StatusReason, rects.DownloadStatusRect);
-			}
-			else
-			{
-				setTip(item.Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower()), rects.DownloadStatusRect);
-			}
-		}
-
-		if (rects.DateRect.Contains(location))
-		{
-			var date = (item.Item.ServerTime == DateTime.MinValue && item.Item is Asset asset ? asset.LocalTime : item.Item.ServerTime).ToLocalTime();
-			setTipFilter(string.Format(Locale.CopyToClipboard, date.ToString("g")), Locale.FilterSinceThisDate, rects.DateRect);
-		}
-
-		foreach (var tag in rects.TagRects)
-		{
-			if (tag.Value.Contains(location))
-			{
-				setTipFilter(string.Format(Locale.CopyToClipboard, tag.Key), string.Format(Locale.FilterByThisTag, tag.Key), tag.Value);
-			}
-		}
-
-		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
-
-		void setTipFilter(string? text, string? alt, Rectangle rectangle)
-		{
-			var tip = string.Empty;
-
-			if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
-			{
-				ExtensionClass.Swap(ref text, ref alt);
-			}
-
-			if (text is not null)
-			{
-				tip += text + "\r\n\r\n";
-			}
-
-			if (alt is not null)
-			{
-				tip += string.Format(Locale.ControlClickTo, alt.ToLower());
-			}
-
-			SlickTip.SetTo(this, tip.Trim(), offset: new Point(rectangle.X, item.Bounds.Y));
-		}
-
-		return rects.Contain(location);
-	}
-
-	protected override void OnItemMouseClick(DrawableItem<T> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<T, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -339,7 +183,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			return;
 		}
 
-		var rects = _itemRects.TryGet(item);
+		var rects = item.Rectangles;
 		var filter = ModifierKeys.HasFlag(Keys.Control) != CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction;
 
 		if (rects.FolderRect.Contains(e.Location))
@@ -661,11 +505,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		catch { }
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<T> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<T, Rectangles> e)
 	{
 		var package = e.Item.Package;
 		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
-		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.Graphics, e.ClipRectangle, e.Item, large);
+		var rects = e.Rects;
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var labelRect = new Rectangle(rects.TextRect.X, rects.CenterRect.Bottom, 0, e.ClipRectangle.Bottom - rects.CenterRect.Bottom);
@@ -676,7 +520,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 			e.HoverState &= ~HoverState.Pressed;
 		}
 
-		base.OnPaintItem(e);
+		base.OnPaintItemList(e);
 
 		if (e.Item.Incompatible || e.Item.Banned || report.Data?.Package.Stability is PackageStability.Broken)
 		{
@@ -818,7 +662,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private int DrawScore(ItemPaintEventArgs<T> e, bool large, ItemListControl<T>.Rectangles rects, Rectangle labelRect)
+	private int DrawScore(ItemPaintEventArgs<T, Rectangles> e, bool large, Rectangles rects, Rectangle labelRect)
 	{
 		var score = SteamUtil.GetScore(e.Item);
 
@@ -880,13 +724,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		return 0;
 	}
 
-	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
+	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
-		if (!e.Item.Workshop)
-		{
-			labelRect.X += Padding.Left + DrawLabel(e, Locale.Local, IconManager.GetSmallIcon("I_PC"), FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), labelRect, contentAlignment, true).Width;
-		}
-
 		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
 
 		if (!string.IsNullOrEmpty(text))
@@ -906,7 +745,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		return labelRect;
 	}
 
-	private void DrawButtons(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool isPressed, Package? package)
+	private void DrawButtons(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, bool isPressed, Package? package)
 	{
 		if (package is null)
 		{
@@ -926,7 +765,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private void DrawAuthorAndSteamId(ItemPaintEventArgs<T> e, bool large, ItemListControl<T>.Rectangles rects, Package? package)
+	private void DrawAuthorAndSteamId(ItemPaintEventArgs<T, Rectangles> e, bool large, Rectangles rects, Package? package)
 	{
 		if (!e.Item.Workshop)
 		{
@@ -983,7 +822,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		rects.SteamIdRect = DrawLabel(e, e.Item.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomLeft, true);
 	}
 
-	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, bool large)
+	private void DrawThumbnailAndTitle(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, bool large)
 	{
 		var iconRectangle = rects.IconRect;
 
@@ -1035,7 +874,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private void DrawIncludedButton(ItemPaintEventArgs<T> e, ItemListControl<T>.Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, Package? package)
+	private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, Package? package)
 	{
 		if (package is null && !e.Item.Workshop)
 		{
@@ -1100,7 +939,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<T> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment, bool action = false, bool smaller = false)
+	private Rectangle DrawLabel(ItemPaintEventArgs<T, Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment, bool action = false, bool smaller = false)
 	{
 		if (text == null)
 		{
@@ -1191,9 +1030,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		color = Color.White;
 	}
 
-	private Rectangles GetActionRectangles(Graphics g, Rectangle rectangle, T item, bool doubleSize)
+	protected override ItemListControl<T>.Rectangles GenerateRectangles(T item, Rectangle rectangle)
 	{
-		var rects = new Rectangles() { Item = item };
+		var rects = new Rectangles(item);
+		var doubleSize = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
 		var includeItemHeight = doubleSize ? (ItemHeight / 2) : ItemHeight;
 
 		if (!IsSelection)
@@ -1230,7 +1070,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		{
 			rects.SteamIdRect = new Rectangle(buttonRectangle.X - (int)(100 * UI.FontScale), rectangle.Y, (int)(100 * UI.FontScale), rectangle.Height / 2);
 			rects.AuthorRect = new Rectangle(rectangle.X, rectangle.Y + (rectangle.Height / 2), rectangle.Width, rectangle.Height / 2);
-			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, (int)g.Measure(" ", UI.Font(11.25F, FontStyle.Bold)).Height + Padding.Bottom);
+			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, (int)FontMeasuring.Measure(" ", UI.Font(11.25F, FontStyle.Bold)).Height + Padding.Bottom);
 		}
 		else
 		{
@@ -1252,10 +1092,8 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		return rects;
 	}
 
-	private class Rectangles
+	public class Rectangles : IDrawableItemRectangles<T>
 	{
-		internal T? Item;
-
 		internal Dictionary<TagItem, Rectangle> TagRects = new();
 		internal Rectangle IncludedRect;
 		internal Rectangle EnabledRect;
@@ -1272,7 +1110,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 		internal Rectangle DateRect;
 		internal Rectangle ScoreRect;
 
-		internal bool Contain(Point location)
+		public T Item { get; set; }
+
+		public Rectangles(T item)
+		{
+			Item = item;
+		}
+
+		public bool IsHovered(Control instance, Point location)
 		{
 			return
 				IncludedRect.Contains(location) ||
@@ -1288,6 +1133,182 @@ internal class ItemListControl<T> : SlickStackedListControl<T> where T : IPackag
 				(VersionRect.Contains(location) && Item?.Package?.Mod is not null) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
+		}
+		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
+		{
+			if (Item.Workshop)
+			{
+				if (SteamRect.Contains(location))
+				{
+					text = Locale.ViewOnSteam;
+					point= SteamRect.Location;
+					return true;
+				}
+
+				if (SteamIdRect.Contains(location))
+				{
+					text= getFilterTip(string.Format(Locale.CopyToClipboard, Item.SteamId), string.Format(Locale.AddToSearch, Item.SteamId));
+					point= SteamIdRect.Location;
+					return true;
+				}
+
+				if (AuthorRect.Contains(location))
+				{
+					text= getFilterTip(Locale.OpenAuthorPage, Locale.FilterByThisAuthor);
+					point= AuthorRect.Location;
+					return true;
+				}
+			}
+
+			else if (SteamIdRect.Contains(location))
+			{
+				var folder = Path.GetFileName(Item.Package?.Folder);
+				text = getFilterTip(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder));
+					point= AuthorRect.Location;
+				return true;
+			}
+
+			if (FolderRect.Contains(location))
+			{
+				text = Locale.OpenLocalFolder;
+				point= FolderRect.Location;
+				return true;
+			}
+
+			if (SteamIdRect != Rectangle.Empty && location.X > SteamIdRect.X)
+			{
+				text = string.Empty;
+				point = default;
+				return false;
+			}
+
+			if (ScoreRect.Contains(location))
+			{
+				text = string.Format(Locale.RatingCount, (Item.PositiveVotes > Item.NegativeVotes ? '+' : '-') + Math.Abs(Item.PositiveVotes - (Item.NegativeVotes / 10) - Item.Reports).ToString("N0"), $"({SteamUtil.GetScore(Item)}%)") + "\r\n" + string.Format(Locale.SubscribersCount, Item.Subscriptions.ToString("N0"));
+				point= ScoreRect.Location;
+				return true;
+			}
+
+			if (Item.Package?.Mod is not null)
+			{
+				if (IncludedRect.Contains(location))
+				{
+					text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
+				point= IncludedRect.Location;
+				return true;
+				}
+
+				if (EnabledRect.Contains(location))
+				{
+					text = $"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}";
+				point= EnabledRect.Location;
+				return true;
+				}
+
+				if (VersionRect.Contains(location))
+				{
+					text = Locale.CopyVersionNumber;
+				point= VersionRect.Location;
+				return true;
+				}
+			}
+			else
+			{
+				if (IncludedRect.Contains(location))
+				{
+					if (Item.Package != null)
+					{
+						text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
+				point= IncludedRect.Location;
+				return true;
+					}
+					else if (Item.Workshop)
+					{
+						text = Locale.SubscribeToItem;
+				point= IncludedRect.Location;
+				return true;
+					}
+				}
+			}
+
+			if (CenterRect.Contains(location) || IconRect.Contains(location))
+			{
+				if ((instance as ItemListControl<T>)!.IsSelection)
+				{
+					text = Locale.SelectThisPackage;
+				}
+				else
+				text = Locale.OpenPackagePage;
+				point= CenterRect.Location;
+					return true;
+			}
+
+			if (CompatibilityRect.Contains(location))
+			{
+				text=getFilterTip(Locale.ViewPackageCR, Locale.FilterByThisReportStatus);
+				point= CompatibilityRect.Location;
+				return true;
+			}
+
+			if (DownloadStatusRect.Contains(location))
+			{
+				if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				{
+					text = Locale.FilterByThisPackageStatus + "\r\n\r\n" + Item.Package?.StatusReason;
+					point= DownloadStatusRect.Location;
+					return true;
+				}
+				else
+				{
+					text = Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower());
+					point= DownloadStatusRect.Location;
+					return true;
+				}
+			}
+
+			if (DateRect.Contains(location))
+			{
+				var date = (Item.ServerTime == DateTime.MinValue && Item is Asset asset ? asset.LocalTime : Item.ServerTime).ToLocalTime();
+				text=getFilterTip(string.Format(Locale.CopyToClipboard, date.ToString("g")), Locale.FilterSinceThisDate);
+				point= DateRect.Location;
+				return true;
+			}
+
+			foreach (var tag in TagRects)
+			{
+				if (tag.Value.Contains(location))
+				{
+					text = getFilterTip(string.Format(Locale.CopyToClipboard, tag.Key), string.Format(Locale.FilterByThisTag, tag.Key));
+					point= tag.Value.Location;
+					return true;
+				}
+			}
+
+			text = string.Empty;
+			point = default;
+			return false;
+
+			static string getFilterTip(string? text, string? alt)
+			{
+				var tip = string.Empty;
+
+				if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				{
+					ExtensionClass.Swap(ref text, ref alt);
+				}
+
+				if (text is not null)
+				{
+					tip += text + "\r\n\r\n";
+				}
+
+				if (alt is not null)
+				{
+					tip += string.Format(Locale.ControlClickTo, alt.ToLower());
+				}
+
+				return tip.Trim();
+			}
 		}
 	}
 }

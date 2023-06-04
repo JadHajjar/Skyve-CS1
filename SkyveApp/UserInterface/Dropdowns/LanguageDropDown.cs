@@ -190,9 +190,9 @@ internal class LanguageDropDown : SlickSelectionDropDown<string>
 		Height = (int)(42 * UI.UIScale);
 	}
 
-	protected override IEnumerable<DrawableItem<string>> OrderItems(IEnumerable<DrawableItem<string>> items)
+	protected override IEnumerable<string> OrderItems(IEnumerable<string> items)
 	{
-		return items.OrderByDescending(x => x.Item == "en-US").ThenBy(x => _langNames[x.Item][false].Name);
+		return items.OrderByDescending(x => x == "en-US").ThenBy(x => _langNames[x][false].Name);
 	}
 
 	protected override bool SearchMatch(string searchText, string item)

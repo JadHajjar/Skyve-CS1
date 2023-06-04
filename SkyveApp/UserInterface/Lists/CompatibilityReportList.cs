@@ -20,9 +20,8 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class CompatibilityReportList : SlickStackedListControl<CompatibilityInfo>
+internal class CompatibilityReportList : SlickStackedListControl<CompatibilityInfo, CompatibilityReportList.Rectangles>
 {
-	private readonly Dictionary<DrawableItem<CompatibilityInfo>, Rectangles> _itemRects = new();
 	public CompatibilityReportList()
 	{
 		HighlightOnHover = true;
@@ -39,105 +38,12 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		Padding = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<CompatibilityInfo>> OrderItems(IEnumerable<DrawableItem<CompatibilityInfo>> items)
+	protected override IEnumerable<DrawableItem<CompatibilityInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<CompatibilityInfo, Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.Package.CleanName());
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<CompatibilityInfo> item, Point location)
-	{
-		var rects = _itemRects.TryGet(item);
-
-		if (rects is null)
-		{
-			return false;
-		}
-
-		if (item.Item.Package.Workshop)
-		{
-			if (rects.SteamRect.Contains(location))
-			{
-				setTip(Locale.ViewOnSteam, rects.SteamRect);
-				return true;
-			}
-
-			if (rects.AuthorRect.Contains(location))
-			{
-				setTipFilter(Locale.OpenAuthorPage, Locale.FilterByThisAuthor, rects.AuthorRect);
-				return true;
-			}
-		}
-
-		if (rects.FolderRect.Contains(location))
-		{
-			setTip(Locale.OpenLocalFolder, rects.FolderRect);
-			return true;
-		}
-
-		if (item.Item.Package.Package?.Mod is not null)
-		{
-			if (rects.IncludedRect.Contains(location))
-			{
-				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
-			}
-
-			if (rects.EnabledRect.Contains(location))
-			{
-				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}", rects.EnabledRect);
-			}
-
-			if (rects.VersionRect.Contains(location))
-			{
-				setTip(Locale.CopyVersionNumber, rects.VersionRect);
-			}
-		}
-		else
-		{
-			if (rects.IncludedRect.Contains(location))
-			{
-				setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
-			}
-		}
-
-		if (rects.CenterRect.Contains(location) || rects.IconRect.Contains(location))
-		{
-			setTip(Locale.OpenPackagePage, rects.CenterRect);
-		}
-
-		if (rects.DateRect.Contains(location))
-		{
-			var date = item.Item.Package.ServerTime.ToLocalTime();
-			setTipFilter(string.Format(Locale.CopyToClipboard, date.ToString("g")), Locale.FilterSinceThisDate, rects.DateRect);
-		}
-
-		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
-
-		void setTipFilter(string? text, string? alt, Rectangle rectangle)
-		{
-			var tip = string.Empty;
-
-			if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
-			{
-				ExtensionClass.Swap(ref text, ref alt);
-			}
-
-			if (text is not null)
-			{
-				tip += text + "\r\n\r\n";
-			}
-
-			if (alt is not null)
-			{
-				tip += string.Format(Locale.ControlClickTo, alt.ToLower());
-			}
-
-			SlickTip.SetTo(this, tip.Trim(), offset: new Point(rectangle.X, item.Bounds.Y));
-		}
-
-		return rects.Contain(location);
-	}
-
-	protected override void OnItemMouseClick(DrawableItem<CompatibilityInfo> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<CompatibilityInfo, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -152,7 +58,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			return;
 		}
 
-		var rects = _itemRects.TryGet(item);
+		var rects = item.Rectangles;
 
 		if (rects.FolderRect.Contains(e.Location))
 		{
@@ -328,10 +234,10 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		catch { }
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<CompatibilityInfo> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<CompatibilityInfo, Rectangles> e)
 	{
 		var Package = e.Item.Package;
-		var rects = _itemRects[e.DrawableItem] = GetActionRectangles(e.ClipRectangle.Pad(0, 0, e.ClipRectangle.Width - (int)(275 * UI.FontScale), 0), e.Item);
+		var rects = e.Rects;
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
 		var partialIncluded = Package.Package?.IsPartiallyIncluded() ?? false;
 		var isIncluded = partialIncluded || Package.IsIncluded;
@@ -343,7 +249,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			e.HoverState &= ~HoverState.Pressed & ~HoverState.Hovered;
 		}
 
-		base.OnPaintItem(e);
+		base.OnPaintItemList(e);
 
 		if (isHovered)
 		{
@@ -389,7 +295,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		DrawReport(e, item, rects);
 	}
 
-	private void DrawReport(ItemPaintEventArgs<CompatibilityInfo> e, ReportItem Message, Rectangles rects)
+	private void DrawReport(ItemPaintEventArgs<CompatibilityInfo, Rectangles> e, ReportItem Message, Rectangles rects)
 	{
 		if (Message.Status is null)
 		{
@@ -431,8 +337,8 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(20, purple)), rects.snoozeRect, pad);
 			}
 
-			using var snoozeIcon = IconManager.GetIcon("I_Snooze", rects.snoozeRect.Height / 2);
-			e.Graphics.DrawImage(snoozeIcon.Color((isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && rects.snoozeRect.Contains(cursor))) ? purple.GetTextColor() : FormDesign.Design.IconColor), rects.snoozeRect.CenterR(icon.Size));
+			using var snoozeIcon = IconManager.GetIcon("I_Snooze", rects.snoozeRect.Height * 3 / 4);
+			e.Graphics.DrawImage(snoozeIcon.Color((isSnoozed || (HoverState.HasFlag(HoverState.Pressed) && rects.snoozeRect.Contains(cursor))) ? purple.GetTextColor() : FormDesign.Design.IconColor), rects.snoozeRect.CenterR(snoozeIcon.Size));
 		}
 		else
 		{
@@ -576,7 +482,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 	}
 
-	private void PaintIncludedButton(ItemPaintEventArgs<CompatibilityInfo> e, Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large)
+	private void PaintIncludedButton(ItemPaintEventArgs<CompatibilityInfo, Rectangles> e, Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large)
 	{
 		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && e.Item.Package.Package?.Mod is Mod mod)
@@ -623,7 +529,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 	}
 
-	private void DrawButtons(ItemPaintEventArgs<CompatibilityInfo> e, Rectangles rects, bool isPressed)
+	private void DrawButtons(ItemPaintEventArgs<CompatibilityInfo, Rectangles> e, Rectangles rects, bool isPressed)
 	{
 		if (e.Item.Package.Package is null)
 		{
@@ -643,7 +549,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 	}
 
-	private void DrawAuthorAndSteamId(ItemPaintEventArgs<CompatibilityInfo> e, bool large, Rectangles rects)
+	private void DrawAuthorAndSteamId(ItemPaintEventArgs<CompatibilityInfo, Rectangles> e, bool large, Rectangles rects)
 	{
 		if (!e.Item.Package.Workshop)
 		{
@@ -694,7 +600,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 	}
 
-	private void DrawThumbnailAndTitle(ItemPaintEventArgs<CompatibilityInfo> e, Rectangles rects, bool large)
+	private void DrawThumbnailAndTitle(ItemPaintEventArgs<CompatibilityInfo, Rectangles> e, Rectangles rects, bool large)
 	{
 		var iconRectangle = rects.IconRect;
 
@@ -874,10 +780,10 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 	}
 
-	private Rectangles GetActionRectangles(Rectangle rectangle, CompatibilityInfo item)
+	protected override Rectangles GenerateRectangles(CompatibilityInfo item, Rectangle rectangle)
 	{
 		var section = (ItemHeight / 3) - (Padding.Top / 2);
-		var rects = new Rectangles() { Item = item };
+		var rects = new Rectangles(item);
 
 		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package.Package?.Mod is not null)
 		{
@@ -903,46 +809,6 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 		return rects;
 	}
-
-	private class Rectangles
-	{
-		internal CompatibilityInfo? Item;
-
-		internal Rectangle IncludedRect;
-		internal Rectangle EnabledRect;
-		internal Rectangle FolderRect;
-		internal Rectangle IconRect;
-		internal Rectangle TextRect;
-		internal Rectangle SteamRect;
-		internal Rectangle CenterRect;
-		internal Rectangle AuthorRect;
-		internal Rectangle VersionRect;
-		internal Rectangle DateRect;
-		internal Dictionary<PseudoPackage, Rectangle> buttonRects = new();
-		internal Dictionary<PseudoPackage, Rectangle> modRects = new();
-		internal Rectangle allButtonRect;
-		internal Rectangle snoozeRect;
-
-		internal bool Contain(Point location)
-		{
-			return
-				IncludedRect.Contains(location) ||
-				EnabledRect.Contains(location) ||
-				FolderRect.Contains(location) ||
-				SteamRect.Contains(location) ||
-				AuthorRect.Contains(location) ||
-				IconRect.Contains(location) ||
-				CenterRect.Contains(location) ||
-				DateRect.Contains(location) ||
-				allButtonRect.Contains(location) ||
-				snoozeRect.Contains(location) ||
-				buttonRects.Values.Any(x => x.Contains(location)) ||
-				modRects.Values.Any(x => x.Contains(location)) ||
-				(VersionRect.Contains(location) && Item?.Package.Package?.Mod is not null);
-		}
-	}
-
-
 
 	protected override void OnDragEnter(DragEventArgs drgevent)
 	{
@@ -994,5 +860,119 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		}
 
 		Invalidate();
+	}
+
+	public class Rectangles : IDrawableItemRectangles<CompatibilityInfo>
+	{
+		internal Rectangle IncludedRect;
+		internal Rectangle EnabledRect;
+		internal Rectangle FolderRect;
+		internal Rectangle IconRect;
+		internal Rectangle TextRect;
+		internal Rectangle SteamRect;
+		internal Rectangle CenterRect;
+		internal Rectangle AuthorRect;
+		internal Rectangle VersionRect;
+		internal Rectangle DateRect;
+		internal Dictionary<PseudoPackage, Rectangle> buttonRects = new();
+		internal Dictionary<PseudoPackage, Rectangle> modRects = new();
+		internal Rectangle allButtonRect;
+		internal Rectangle snoozeRect;
+
+		public CompatibilityInfo Item { get; set; }
+
+		public Rectangles(CompatibilityInfo item)
+		{
+			Item = item;
+		}
+
+		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
+		{
+			if (Item.Package.Workshop)
+			{
+				if (SteamRect.Contains(location))
+				{
+					text = Locale.ViewOnSteam;
+					point = SteamRect.Location;
+					return true;
+				}
+
+				if (AuthorRect.Contains(location))
+				{
+					text = Locale.OpenAuthorPage;
+					point = AuthorRect.Location;
+					return true;
+				}
+			}
+
+			if (FolderRect.Contains(location))
+			{
+				text = Locale.OpenLocalFolder;
+				point = FolderRect.Location;
+				return true;
+			}
+
+			if (Item.Package.Package?.Mod is not null)
+			{
+				if (IncludedRect.Contains(location))
+				{
+					text = Locale.ExcludeInclude;
+					point = IncludedRect.Location;
+					return true;
+				}
+
+				if (EnabledRect.Contains(location))
+				{
+					text = Locale.EnableDisable;
+					point = EnabledRect.Location;
+				return true;
+				}
+
+				if (VersionRect.Contains(location))
+				{
+					text = Locale.CopyVersionNumber;
+					point = VersionRect.Location;
+					return true;
+				}
+			}
+			else
+			{
+				if (IncludedRect.Contains(location))
+				{
+					text = Locale.ExcludeInclude;
+					point = IncludedRect.Location;
+					return true;
+				}
+			}
+
+			if (CenterRect.Contains(location) || IconRect.Contains(location))
+			{
+				text = Locale.OpenPackagePage;
+				point = CenterRect.Location;
+				return true;
+			}
+
+			text = string.Empty;
+			point = default;
+			return false;
+		}
+
+		public bool IsHovered(Control instance, Point location)
+		{
+			return
+				IncludedRect.Contains(location) ||
+				EnabledRect.Contains(location) ||
+				FolderRect.Contains(location) ||
+				SteamRect.Contains(location) ||
+				AuthorRect.Contains(location) ||
+				IconRect.Contains(location) ||
+				CenterRect.Contains(location) ||
+				DateRect.Contains(location) ||
+				allButtonRect.Contains(location) ||
+				snoozeRect.Contains(location) ||
+				buttonRects.Values.Any(x => x.Contains(location)) ||
+				modRects.Values.Any(x => x.Contains(location)) ||
+				(VersionRect.Contains(location) && Item?.Package.Package?.Mod is not null);
+		}
 	}
 }

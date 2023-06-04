@@ -1,14 +1,19 @@
 ﻿using Extensions.Sql;
 
+using SkyveApp.Domain.Compatibility.Enums;
+
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkyveApp.Domain.Compatibility.Api;
 [DynamicSqlClass("UserProfiles")]
 public class UserProfile : IDynamicSql
+#if !API
+	, Interfaces.IProfile
+#endif
 {
     [DynamicSqlProperty(PrimaryKey = true, Identity = true)]
     public int ProfileId { get; set; }
@@ -16,14 +21,14 @@ public class UserProfile : IDynamicSql
 	public ulong AuthorId { get; set; }
     [DynamicSqlProperty]
     public string? Name { get; set; }
-    [DynamicSqlProperty]
-    public int ModCount { get; set; }
-    [DynamicSqlProperty]
+	[DynamicSqlProperty]
+	public int ModCount { get; set; }
+	[DynamicSqlProperty]
     public int AssetCount { get; set; }
     [DynamicSqlProperty]
     public DateTime DateCreated { get; set; }
 	[DynamicSqlProperty]
-	public DateTime DateModified { get; set; }
+	public DateTime DateUpdated { get; set; }
 	[DynamicSqlProperty]
 	public bool Public { get; set; }
 	[DynamicSqlProperty]
@@ -32,4 +37,33 @@ public class UserProfile : IDynamicSql
 	public int? Color { get; set; }
 
 	public UserProfileContent[]? Contents { get; set; }
+
+#if !API
+	private Bitmap? _banner;
+	public ulong Author => AuthorId;
+	public bool IsFavorite { get; set; }
+	public bool IsMissingItems => false;
+	public DateTime LastEditDate => DateUpdated;
+	public DateTime LastUsed => DateUpdated;
+	public PackageUsage Usage => (PackageUsage)(-1);
+	public bool Temporary => false;
+	Color? Interfaces.IProfile.Color { get => Color == null ? null : System.Drawing.Color.FromArgb(Color.Value); set { } }
+	public List<Profile.Mod> Mods => Contents?.Where(x => x.IsMod).Select(x => new Profile.Mod(x)).ToList() ?? new();
+	public List<Profile.Asset> Assets => Contents?.Where(x => !x.IsMod).Select(x => new Profile.Asset(x)).ToList() ?? new();
+	Bitmap? Interfaces.IProfile.Banner
+	{
+		get
+		{
+			if (_banner is not null)
+				return _banner;
+
+			if (Banner is null || Banner.Length == 0)
+				return null;
+
+			using var ms = new MemoryStream(Banner);
+
+			return _banner = new Bitmap(ms);
+		}
+	}
+#endif
 }

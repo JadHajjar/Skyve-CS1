@@ -53,7 +53,7 @@ namespace SkyveMod.UI.EntryStatus
 			try
 			{
 				Assertion.NotNull(packageEntry, "packageEntry");
-				var ugc = m_WorkshopDetails(packageEntry);
+				var ugc = m_WorkshopDetails(m_EntryData(packageEntry));
 				if (!packageEntry.publishedFileId.IsValid() || !ugc.publishedFileId.IsValid())
 				{
 					//Log.Debug("[p0] entry name=" + packageEntry.entryName);
@@ -114,12 +114,15 @@ namespace SkyveMod.UI.EntryStatus
 			var topPanel = packageEntry.GetComponent<UIPanel>();
 			Assertion.Assert(topPanel, "topPanel");
 			var ret = topPanel.AddUIComponent<EntryStatusPanel>();
-			ret.StatusButton.UGCDetails = m_WorkshopDetails(packageEntry);
+			ret.StatusButton.UGCDetails = m_WorkshopDetails(m_EntryData(packageEntry));
 			return ret;//.LogRet(ThisMethod);
 		}
 
-		private static AccessTools.FieldRef<PackageEntry, UGCDetails> m_WorkshopDetails =
-			AccessTools.FieldRefAccess<PackageEntry, UGCDetails>("m_WorkshopDetails");
+		private static AccessTools.FieldRef<PackageEntry, EntryData> m_EntryData =
+			AccessTools.FieldRefAccess<PackageEntry, EntryData>("m_EntryData");
+
+		private static AccessTools.FieldRef<EntryData, UGCDetails> m_WorkshopDetails =
+			AccessTools.FieldRefAccess<EntryData, UGCDetails>("m_WorkshopDetails");
 
 	}
 }

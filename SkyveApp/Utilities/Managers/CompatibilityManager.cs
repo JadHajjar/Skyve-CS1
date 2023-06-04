@@ -60,7 +60,9 @@ public static class CompatibilityManager
 			return;
 		}
 
-		Parallelism.ForEach(content.ToList(), package => GetCompatibilityInfo(package, true));
+		foreach (var package in content)
+		{ GetCompatibilityInfo(package, true); }
+		//Parallelism.ForEach(content.ToList(), package => GetCompatibilityInfo(package, true), 5);
 
 		CentralManager.OnInformationUpdated();
 
@@ -100,7 +102,7 @@ public static class CompatibilityManager
 	{
 		try
 		{
-			var data = await CompatibilityApiUtil.Catalogue();
+			var data = await SkyveApiUtil.Catalogue();
 
 			if (data is not null)
 			{
@@ -112,7 +114,7 @@ public static class CompatibilityManager
 #if DEBUG
 				if (System.Diagnostics.Debugger.IsAttached)
 				{
-					var dic = await CompatibilityApiUtil.Translations();
+					var dic = await SkyveApiUtil.Translations();
 
 					if (dic is not null)
 					{
@@ -274,7 +276,7 @@ public static class CompatibilityManager
 			}
 		}
 
-		if (package.Workshop && package.Incompatible)
+		if (package.Incompatible)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), LocaleCR.Get($"Stability_{PackageStability.Incompatible}"), new PseudoPackage[0]);
 		}
@@ -286,7 +288,7 @@ public static class CompatibilityManager
 
 		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
 
-		if ((package.Workshop || packageData.Package.Stability is not PackageStability.Stable) && (!package.Workshop || (!package.Incompatible && !author.Malicious)))
+		if (packageData.Package.Stability is not PackageStability.Stable && !package.Incompatible && !author.Malicious)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, null, false), LocaleCR.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
 		}
@@ -303,7 +305,7 @@ public static class CompatibilityManager
 		{
 			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && !info.Links.Any(x => x.Type is LinkType.Github))
 			{
-				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.UnsubscribeThis });
+				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
 			}
 
 			if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && package.SteamDescription is not null && package.SteamDescription.GetWords().Length <= 30)
@@ -390,7 +392,7 @@ public static class CompatibilityManager
 
 #if DEBUG
 		sw.Stop();
-		if (sw.ElapsedMilliseconds > 100 && package.Workshop)
+		if (sw.ElapsedMilliseconds > 100)
 		{
 			Log.Debug($"CR ({sw.Elapsed.ToReadableString()}) for {package.Name}");
 		}
@@ -411,13 +413,15 @@ public static class CompatibilityManager
 		User = CompatibilityData.Authors.TryGet(steamId) ?? new Author { SteamId = steamId };
 
 		try
-		{ User.Manager = await CompatibilityApiUtil.IsCommunityManager(); }
+		{ User.Manager = await SkyveApiUtil.IsCommunityManager(); }
 		catch
 		{ User.Manager = false; }
 	}
 
 	internal static void DoFirstCache(List<Domain.Package> packages)
 	{
-		Parallelism.ForEach(packages, package => _cache[package] = GenerateCompatibilityInfo(package));
+		foreach (var package in packages)
+		{ _cache[package] = GenerateCompatibilityInfo(package); }
+		//Parallelism.ForEach(packages, package => _cache[package] = GenerateCompatibilityInfo(package), 10);
 	}
 }

@@ -281,4 +281,5 @@ internal class Locale : LocaleHelper
 	public static Translation PendingDownloads => _instance.GetText(nameof(PendingDownloads));
 	public static Translation PendingDeletions => _instance.GetText(nameof(PendingDeletions));
 	public static Translation YouHavePackagesUser => _instance.GetText(nameof(YouHavePackagesUser));
+	public static Translation ShareProfile => _instance.GetText(nameof(ShareProfile));
 }

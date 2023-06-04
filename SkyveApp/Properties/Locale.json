@@ -530,5 +530,6 @@
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
   "CurrentProfile": "Current Profile",
-  "References": "References"
+  "References": "References",
+  "OpenLog": "Open Log File"
 }

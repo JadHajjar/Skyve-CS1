@@ -46,9 +46,9 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNoti
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<CompatibilityNotificationFilter>> OrderItems(IEnumerable<DrawableItem<CompatibilityNotificationFilter>> items)
+	protected override IEnumerable<CompatibilityNotificationFilter> OrderItems(IEnumerable<CompatibilityNotificationFilter> items)
 	{
-		return items.OrderBy(x => (int)x.Item);
+		return items.OrderBy(x => (int)x);
 	}
 
 	protected override bool SearchMatch(string searchText, CompatibilityNotificationFilter item)

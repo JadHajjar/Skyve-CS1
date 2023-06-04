@@ -157,9 +157,7 @@ public class SkyveUserMod : IUserMod
 		var currentToolFolder = Path.Combine(PluginManager.instance.FindPluginInfo(Assembly.GetExecutingAssembly())?.modPath, "App");
 		var config = Path.Combine(currentToolFolder, "Skyve.exe.config");
 
-		try
-		{ PrepareFirstTimeConfig(config); }
-		catch { }
+		PrepareFirstTimeConfig(config);
 	}
 
 	private void PrepareFirstTimeConfig(string configFilePath)

@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
 using Newtonsoft.Json;
+
+using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
@@ -14,8 +16,10 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Domain;
-public class Profile
+public class Profile : IProfile
 {
+	private Bitmap? _banner;
+	private byte[]? _bannerBytes;
 	public static readonly Profile TemporaryProfile = new(Locale.TemporaryProfile) { Temporary = true, AutoSave = false };
 
 	[CloneIgnore] public string? Name { get; set; }
@@ -23,6 +27,8 @@ public class Profile
 	[JsonIgnore] public DateTime LastEditDate { get; set; }
 	[JsonIgnore] public DateTime DateCreated { get; set; }
 	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
+	[JsonIgnore] public int AssetCount => Assets.Count;
+	[JsonIgnore] public int ModCount => Mods.Count;
 
 	public Profile(string name) : this()
 	{
@@ -61,9 +67,25 @@ public class Profile
 	public Color? Color { get; set; }
 	public DateTime LastUsed { get; set; }
 	public PackageUsage Usage { get; set; }
+	public ulong Author { get; set; }
+	public byte[]? BannerBytes { get => _bannerBytes; set { _bannerBytes = value; _banner?.Dispose(); _banner = null; } }
 
 	public bool ForAssetEditor { set { if (value) { Usage = PackageUsage.AssetCreation; } } }
 	public bool ForGameplay { set { if (value) { Usage = PackageUsage.CityBuilding; } } }
+	public Bitmap? Banner
+	{
+		get
+		{
+			if (_banner is not null) return _banner;
+			
+			if (BannerBytes is null || BannerBytes.Length == 0)
+				return null;
+
+			using var ms = new MemoryStream(BannerBytes);
+
+			return _banner = new Bitmap(ms);
+		}
+	}
 
 	public class Asset : IPackage
 	{
@@ -112,9 +134,24 @@ public class Profile
 
 		}
 
+		public Asset(UserProfileContent content)
+		{
+			RelativePath = content.RelativePath;
+			SteamId = content.SteamId;
+		}
+
 		public override string ToString()
 		{
 			return WorkshopInfo?.Title ?? Name ?? Locale.UnknownPackage;
+		}
+
+		public virtual UserProfileContent AsProfileContent()
+		{
+			return new UserProfileContent
+			{
+				RelativePath = RelativePath,
+				SteamId = SteamId,
+			};
 		}
 	}
 
@@ -143,6 +180,25 @@ public class Profile
 		public Mod()
 		{
 			IsMod = true;
+		}
+
+		public Mod(UserProfileContent content)
+		{
+			IsMod = true;
+			Enabled = content.Enabled;
+			RelativePath = content.RelativePath;
+			SteamId = content.SteamId;
+		}
+
+		public override UserProfileContent AsProfileContent()
+		{
+			return new UserProfileContent
+			{
+				Enabled = Enabled,
+				IsMod = true,
+				RelativePath = RelativePath,
+				SteamId = SteamId,
+			};
 		}
 	}
 }

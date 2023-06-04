@@ -162,7 +162,7 @@ public partial class PC_RequestReview : PanelContent
 			return stream.ToArray();
 		});
 
-		var response = await CompatibilityApiUtil.SendReviewRequest(postPackage);
+		var response = await SkyveApiUtil.SendReviewRequest(postPackage);
 
 		if (response.Success)
 		{

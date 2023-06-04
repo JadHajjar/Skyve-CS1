@@ -34,9 +34,9 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 		Items = _counts.Keys.ToArray();
 	}
 
-	protected override IEnumerable<DrawableItem<SteamUser>> OrderItems(IEnumerable<DrawableItem<SteamUser>> items)
+	protected override IEnumerable<SteamUser> OrderItems(IEnumerable<SteamUser> items)
 	{
-		return items.OrderByDescending(x => SelectedItems.Contains(x.Item)).ThenBy(x => x.Item.Name);
+		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenBy(x => x.Name);
 	}
 
 	protected override bool SearchMatch(string searchText, SteamUser item)

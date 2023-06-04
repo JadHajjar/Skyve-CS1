@@ -13,7 +13,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class OtherProfilePackage : SlickStackedListControl<Profile>
+internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfilePackage.Rectangles>
 {
 	public IEnumerable<Profile> FilteredItems => SafeGetItems().Select(x => x.Item);
 
@@ -60,14 +60,14 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<Profile>> OrderItems(IEnumerable<DrawableItem<Profile>> items)
+	protected override IEnumerable<DrawableItem<Profile, OtherProfilePackage.Rectangles>> OrderItems(IEnumerable<DrawableItem<Profile, OtherProfilePackage.Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.LastEditDate);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<Profile> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<Profile, OtherProfilePackage.Rectangles> item, Point location)
 	{
-		var rects = GetActionRectangles(item.Bounds);
+		var rects = item.Rectangles;
 
 		if (rects.IncludedRect.Contains(location))
 		{
@@ -85,11 +85,11 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 		return false;
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<Profile> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<Profile, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
-		var rects = GetActionRectangles(item.Bounds);
+		var rects = item.Rectangles;
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
@@ -123,15 +123,15 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 		}
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<Profile> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<Profile, OtherProfilePackage.Rectangles> e)
 	{
 		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
-		var rects = GetActionRectangles(e.ClipRectangle);
+		var rects = e.Rects;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
 		e.HoverState &= ~HoverState.Pressed;
 
-		base.OnPaintItem(e);
+		base.OnPaintItemList(e);
 
 		var isIncluded = ProfileManager.IsPackageIncludedInProfile(Package, e.Item);
 
@@ -182,7 +182,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<Profile> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+	private Rectangle DrawLabel(ItemPaintEventArgs<Profile, OtherProfilePackage.Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
 	{
 		if (text == null)
 		{
@@ -215,9 +215,9 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 		return rectangle;
 	}
 
-	private Rectangles GetActionRectangles(Rectangle rectangle)
+	protected override Rectangles GenerateRectangles(Profile item, Rectangle rectangle)
 	{
-		var rects = new Rectangles
+		var rects = new Rectangles(item)
 		{
 			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
 			LoadRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight)
@@ -230,14 +230,28 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile>
 		return rects;
 	}
 
-	struct Rectangles
+	public class Rectangles : IDrawableItemRectangles<Profile>
 	{
 		internal Rectangle IncludedRect;
 		internal Rectangle IconRect;
 		internal Rectangle LoadRect;
 		internal Rectangle TextRect;
 
-		internal bool Contain(Point location)
+		public Profile Item { get; set; }
+
+		public Rectangles(Profile item)
+		{
+			Item = item;
+		}
+
+		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
+		{
+			text = string.Empty;
+			point = default;
+			return false;
+		}
+
+		public bool IsHovered(Control instance, Point location)
 		{
 			return
 				IncludedRect.Contains(location) ||

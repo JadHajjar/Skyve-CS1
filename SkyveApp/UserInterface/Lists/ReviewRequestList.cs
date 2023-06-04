@@ -12,7 +12,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class ReviewRequestList : SlickStackedListControl<ReviewRequest>
+internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRequestList.Rectangles>
 {
 	public ReviewRequestList()
 	{
@@ -29,12 +29,12 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest>
 		Font = UI.Font(8.25F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<ReviewRequest>> OrderItems(IEnumerable<DrawableItem<ReviewRequest>> items)
+	protected override IEnumerable<DrawableItem<ReviewRequest, ReviewRequestList.Rectangles>> OrderItems(IEnumerable<DrawableItem<ReviewRequest, ReviewRequestList.Rectangles>> items)
 	{
 		return items.OrderBy(x => x.Item.Timestamp);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ReviewRequest> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<ReviewRequest, ReviewRequestList.Rectangles> item, Point location)
 	{
 		return true;
 	}
@@ -49,9 +49,9 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest>
 		base.OnPaint(e);
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<ReviewRequest> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ReviewRequest, ReviewRequestList.Rectangles> e)
 	{
-		base.OnPaintItem(e);
+		base.OnPaintItemList(e);
 
 		var User = SteamUtil.GetUser(e.Item.UserId);
 		var imageRect = e.ClipRectangle.Pad(Padding);
@@ -80,5 +80,27 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest>
 	
 
 		e.Graphics.DrawString(e.Item.PackageNote, UI.Font(7.5F), brush, textRect.Pad((int)(125*UI.FontScale),0,0,0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment =	 StringAlignment.Far });
+	}
+
+	internal class Rectangles : IDrawableItemRectangles<ReviewRequest>
+	{
+		public ReviewRequest Item { get; set; }
+
+		public Rectangles(ReviewRequest item)
+		{
+			Item = item;
+		}
+
+		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
+		{
+			text = string.Empty;
+			point = default;
+			return false;
+		}
+
+		public bool IsHovered(Control instance, Point location)
+		{
+			return true;
+		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
@@ -23,7 +24,7 @@ public partial class PC_ProfileList : PanelContent
 
 		DD_Sorting.Height = TB_Search.Height = 0;
 
-		LC_Items = new ProfileListControl() { Dock = DockStyle.Fill };
+		LC_Items = new ProfileListControl() { Dock = DockStyle.Fill, GridView = true };
 		LC_Items.CanDrawItem += Ctrl_CanDrawItem;
 		LC_Items.LoadProfile += Ctrl_LoadProfile;
 		LC_Items.MergeProfile += Ctrl_MergeProfile;
@@ -31,10 +32,13 @@ public partial class PC_ProfileList : PanelContent
 		LC_Items.DisposeProfile += Ctrl_DisposeProfile;
 		panel1.Controls.Add(LC_Items);
 
+		SlickTip.SetTo(B_GridView, "Switch to Grid-View");
+		SlickTip.SetTo(B_ListView, "Switch to List-View");
+
 		RefreshCounts();
 	}
 
-	private void Ctrl_CanDrawItem(object sender, CanDrawItemEventArgs<Profile> e)
+	private void Ctrl_CanDrawItem(object sender, CanDrawItemEventArgs<IProfile> e)
 	{
 		var valid = true;
 
@@ -157,5 +161,19 @@ public partial class PC_ProfileList : PanelContent
 	private void TB_Search_IconClicked(object sender, EventArgs e)
 	{
 		TB_Search.Text = string.Empty;
+	}
+
+	private void B_ListView_Click(object sender, EventArgs e)
+	{
+		B_GridView.Selected = false;
+		B_ListView.Selected = true;
+		LC_Items.GridView = false;
+	}
+
+	private void B_GridView_Click(object sender, EventArgs e)
+	{
+		B_GridView.Selected = true;
+		B_ListView.Selected = false;
+		LC_Items.GridView = true;
 	}
 }

@@ -23,7 +23,7 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
 {
 	private readonly ItemListControl<IPackage> LC_Items;
-	private readonly ItemListControl<IPackage>? LC_References;
+	private readonly ProfileListControl L_Profiles;
 	private TagControl? addTagControl;
 
 	public ulong UserId { get; }
@@ -44,10 +44,15 @@ public partial class PC_UserPage : PanelContent
 			P_Info.SetUser(User, this);
 		}
 
-		LC_Items = new ItemListControl<IPackage>
+		L_Profiles = new ()
+		{
+			ReadOnly = true,
+			GridView = true,
+		};
+
+		LC_Items = new ()
 		{
 			IsGenericPage = true,
-			Dock = DockStyle.Fill
 		};
 	}
 
@@ -64,11 +69,23 @@ public partial class PC_UserPage : PanelContent
 			}
 		}
 
-		var profiles = await CompatibilityApiUtil.GetUserProfiles(UserId);
+		var profiles = await SkyveApiUtil.GetUserProfiles(UserId);
 
 		if (profiles?.Any() ?? false)
 		{
+			L_Profiles.SetItems(profiles);
 
+			this.TryInvoke(() =>
+			{
+				T_Profiles.LinkedControl = L_Profiles;
+
+				if (T_Profiles.Selected)
+					T_Profiles.Selected = true;
+			});
+		}
+		else
+		{
+			this.TryInvoke(() => tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Profiles).ToArray());
 		}
 
 		var results = await SteamUtil.GetWorkshopItemsByUserAsync(UserId, true);
@@ -94,7 +111,7 @@ public partial class PC_UserPage : PanelContent
 
 	protected override void OnLoadFail()
 	{
-		slickTabControl1.Tabs = slickTabControl1.Tabs.Where(x => x != T_Packages).ToArray();
+		tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Packages).ToArray();
 	}
 
 	private void CentralManager_PackageInformationUpdated()

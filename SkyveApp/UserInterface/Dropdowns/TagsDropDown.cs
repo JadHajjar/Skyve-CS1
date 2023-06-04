@@ -14,9 +14,9 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Dropdowns;
 internal class TagsDropDown : SlickMultiSelectionDropDown<TagItem>
 {
-	protected override IEnumerable<DrawableItem<TagItem>> OrderItems(IEnumerable<DrawableItem<TagItem>> items)
+	protected override IEnumerable<TagItem> OrderItems(IEnumerable<TagItem> items)
 	{
-		return items.OrderByDescending(x => SelectedItems.Contains(x.Item)).ThenBy(x => x.Item.Value);
+		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenBy(x => x.Value);
 	}
 
 	protected override bool SearchMatch(string searchText, TagItem item)

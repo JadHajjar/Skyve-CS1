@@ -48,7 +48,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
-		reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
+		reviewRequests = await SkyveApiUtil.GetReviewRequests();
 
 		return true;
 	}
@@ -214,7 +214,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		if (reviewRequests == null)
 		{
 			B_Requests.Loading = true;
-			reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
+			reviewRequests = await SkyveApiUtil.GetReviewRequests();
 		}
 
 		B_Requests.Loading = false;
