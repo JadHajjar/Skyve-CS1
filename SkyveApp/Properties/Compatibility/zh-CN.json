@@ -70,8 +70,8 @@
   "PleaseReviewPackageInteractions": "请在保存之前检查此插件的交互方式。\n部分交互方式是无效的。",
   "PleaseReviewPackageUsage": "请为此插件选择一个有效的用途。",
   "Interaction_Alternative": {
-    "One": "'{1}' 可以作为 '{0}' 的替代方案。",
-    "Plural": "下列任意一个插件可以作为 '{0}' 的替代方案："
+    "One": "'{1}' 可以作为 '{0}' 的备选方案。",
+    "Plural": "下列任意一个插件可以作为 '{0}' 的备选方案："
   },
   "Interaction_SameFunctionality": {
     "One": "'{0}' 和 '{1}' 都含有相同的功能。",
