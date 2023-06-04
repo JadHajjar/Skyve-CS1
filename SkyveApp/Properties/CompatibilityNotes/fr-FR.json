@@ -60,7 +60,7 @@
   "This might block the vanilla quay upgrade tool.": "Cela pourrait bloquer l'outil d'amélioration du quai vanilla.",
   "The Tab key this mod uses conflicts with several other mods. Either use another first person mod, or change the key in the xml file (see Workshop comments).": "La touche Tab que ce mod utilise en conflit avec plusieurs autres mods. Utilisez soit un autre mod de première personne, soit changez la clé dans le fichier xml (voir les commentaires de l'atelier).",
   "Create massive lags if no overlay.png is in the specified folder.": "Crée des lags massifs si aucun overlay.png n'est dans le dossier spécifié.",
-  "Error popup": "Affichage d'erreurs",
+  "Error popup": "Affiche des erreurs",
   "Missing UI. Performance issues (fps drops).": "Problèmes de performance de l'interface utilisateur manquant (drop fps).",
   "Users report that \"Make it Rain\" must be clicked (in Options) if many mods are used. Without other mods it works on its own. Also rain may flicker for a bit but settles later.": "Les utilisateurs signalent que « Faire pleuvoir » doit être cliqué (dans les options) si beaucoup de mods sont utilisés. Sans les autres mods, il fonctionne tout seul. La pluie peut aussi clignoter un peu mais se règle plus tard.",
   "Error messages popup": "Affichage de messages d'erreur",
