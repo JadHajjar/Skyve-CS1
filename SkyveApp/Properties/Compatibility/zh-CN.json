@@ -74,7 +74,7 @@
     "Plural": "下列任意一个插件可以作为 '{0}' 的替代方案："
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' 和 '{1}' 具有相同的功能。",
+    "One": "'{0}' 和 '{1}' 都含有相同的功能。",
     "Plural": "'{0}' 与下列插件都具有相同的功能："
   },
   "Interaction_IncompatibleWith": {
@@ -82,8 +82,8 @@
     "Plural": "'{0}' 与下列任何一个插件都不兼容："
   },
   "Interaction_CausesIssuesWith": {
-    "One": "同时使用 '{0}' 与 '{1}' 可能引发问题。",
-    "Plural": "当 '{0}' 与以下模组同时使用时，可能引发问题："
+    "One": "同时使用 '{0}' 和 '{1}' 可能引发问题。",
+    "Plural": "同时使用 '{0}' 和下列模组可能引发问题："
   },
   "Interaction_RequiredPackages": {
     "One": "要使用 '{0}'，您需要订阅一个必需的插件。",
@@ -102,8 +102,8 @@
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
   "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行更新了。",
   "Status_Reupload": {
-    "Zero": "'{0}' 是某个原始插件的重新上传版本。",
-    "One": "这是 '{1}' 的重新上传版本。"
+    "Zero": "'{0}' 是某个插件的重新上传版本。",
+    "One": "此插件是 '{1}' 的重新上传版本。"
   },
   "Status_CausesIssues": "'{0}' 可能导致游戏出现问题。",
   "Status_SavesCantLoadWithoutIt": {
@@ -120,7 +120,7 @@
   },
   "Status_DependencyMod": "这是一个前置模组，但你似乎没有使用任何依赖于该模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
-  "SourceAvailable": "源代码不可用",
+  "SourceAvailable": "源代码可用",
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期显示文本",
@@ -137,7 +137,7 @@
     "One": "您应当订阅以下插件：",
     "Plural": "您应当订阅这些插件："
   },
-  "Action_RequiresConfiguration": "您应当遵循下列使用说明：",
+  "Action_RequiresConfiguration": "您应当遵循以下使用说明：",
   "Action_SelectOne": {
     "One": "对于 '{0}' 和 '{1}'，您只能使用其中一个插件：",
     "Plural": "对于 '{0}' 和下列插件，您只能使用其中一个插件："
