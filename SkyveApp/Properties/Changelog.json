@@ -446,5 +446,17 @@
         ]
       }
     ]
+  },
+  {
+    "Version": "3.0.7.1",
+    "Date": "2023-06-05",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the crash on launch."
+        ]
+      }
+    ]
   }
 ]
