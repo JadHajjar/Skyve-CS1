@@ -219,7 +219,7 @@
   "Double UUI Button and the Grabber not work. A solution is worked on.": "Double UUI Button and the Grabber not work. A solution is worked on.",
   "This is only needed if you want to use the new generation mods Tree Control, Prop Control, Line Tool on a map/save that used before Extended Manager Library, Tree Anarchy, Prop Anarchy. For more details check the workshop page of this mod.": "只有當你想要使用新的一代模組樹控制項，Prop Control時，才需要這種操作。 在地圖/保存工具上使用擴展管理器庫，樹無主狀態，Prop 無主狀態。 欲瞭解更多詳情，請查看此模組的工作坊頁面。",
   "Do nothing right now. Should normally not be released publicly.": "現在沒有任何效果，正常的話不應公開發佈。",
-  "Next2 empties the tabs in Better Education Toolbar": "Next2 empties the tabs in Better Education Toolbar",
+  "Next2 empties the tabs in Better Education Toolbar": "Network Extensions 2 會導致 Better Education Toolbar 的選項卡內容消失。",
   "Service Vehicle Selector 2 blocks Theme Mixer 2 for some players to be able to change the Theme textures.": "服務車輛選擇器2塊主題混音器2塊，讓一些玩家能夠更改主題紋理。",
   "Some roads from Network Extensions spawn the wrong or no traffic light.": "某些來自網路擴展的道路會造成錯誤或沒有交通燈。",
   "Use the original Precision Engineering mod instead of the now deprecated 2.0 version.": "使用原來的精准工程模組而不是現在已廢棄的2.0版本。",
