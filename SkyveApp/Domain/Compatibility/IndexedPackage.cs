@@ -136,6 +136,9 @@ public class IndexedPackage
 	{
 		foreach (var item in Interactions[InteractionType.Successor].SelectMany(x => x.Packages.Values))
 		{
+			if (item.Package.SteamId == Package.SteamId)
+				continue;
+
 			if (!item.Interactions.ContainsKey(InteractionType.SucceededBy))
 			{
 				item.Interactions[InteractionType.SucceededBy] = new()
@@ -143,6 +146,9 @@ public class IndexedPackage
 					new IndexedPackageInteraction(new(){ Type = InteractionType.SucceededBy }, new())
 				};
 			}
+
+			if (item.Interactions[InteractionType.SucceededBy][0].Packages.ContainsKey(Package.SteamId))
+				continue;
 
 			PackageInteraction packageInteraction;
 
