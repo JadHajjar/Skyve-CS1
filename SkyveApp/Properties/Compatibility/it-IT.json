@@ -100,7 +100,7 @@
   "Interaction_Identical": "Si tratta di versioni multiple dello stesso pacchetto.\n\nSi dovrebbe scegliere solo una di esse.",
   "Status_Succeeded": "'{0}' è stato sostituito da '{1}'.\n\nSi sta già usando '{1}', quindi non c'è più bisogno di '{0}'.",
   "Status_Deprecated": "'{0}' è superato, non è più supportato dal suo autore.",
-  "Status_AutoDeprecated": "'{0}' non viene aggiornato da molto tempo.",
+  "Status_AutoDeprecated": "'{0}' non è stato aggiornato da molto tempo, probabilmente non è più supportato dal suo autore.",
   "Status_Reupload": {
     "Zero": "'{0}' è un doppione di un pacchetto originale.",
     "One": "Questo è un doppione di '{1}'."
