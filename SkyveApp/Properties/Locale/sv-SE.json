@@ -241,7 +241,7 @@
   "LOTWillRestart": "Skyve stängs tillfälligt under uppdateringsprocessen, men återupptas automatiskt när uppdateringen är klar.",
   "UpdatingLot": "Skyve uppdateras just nu. Vänta...",
   "SubscribingRequiresGameToOpenTitle": "Abonnemangsprocess",
-  "SubscribingRequiresGameToOpen": "Att prenumerera eller avregistrera sig från paket kräver att spelet öppnas för en kort stund.\n\nNär du ser spelets launcher, klicka på Spela för att fortsätta.",
+  "SubscribingRequiresGameToOpen": "Att prenumerera på eller avregistrera sig från paket kräver att spelet öppnas för en kort stund. När du ser spelets launcher, klicka på Spela för att fortsätta.",
   "HelpSupport": "Hjälp & support",
   "DisableFpsBoosterDebug": "Du har FPS Booster aktiverat när du använder debug mono, vill du inaktivera det för att få bättre loggar?",
   "LogZipCopy_Tip": "Skapa en zip-fil med all logginformation som behövs för att hjälpa dig med ditt problem, Du kan klistra in den direkt i en discord-kanal.",
@@ -530,5 +530,15 @@
   "RequestOption2": "Lägg till en status som saknas för paketet",
   "RequestOption3": "Lägg till en interaktion som saknas med ett annat paket",
   "CurrentProfile": "Aktuell profil",
-  "References": "Referenser"
+  "References": "Referenser",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }
