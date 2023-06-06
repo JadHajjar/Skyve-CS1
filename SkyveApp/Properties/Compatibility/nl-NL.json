@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Afmelden voor dit pakket",
   "UnsubscribeOther": "Afmelden voor gekoppelde pakketten",
   "Switch": "Overschakelen naar gekoppeld pakket",
-  "FlippedSwitch": "Wissel naar dit pakket",
+  "FlippedSwitch": "Overschakelen naar dit pakket",
   "Deprecated": "Afgekeurd",
   "Reupload": "Herladen",
   "CausesIssues": "Oorzaken problemen",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Dit zijn meerdere versies van hetzelfde pakket.\r\n\r\nKies slechts één van hen.",
   "Status_Succeeded": "'{0}' is geslaagd door '{1}'.\r\n\r\nU gebruikt al '{1}' dus er is geen noodzaak meer voor '{0}'.",
   "Status_Deprecated": "'{0}' is verouderd, het wordt niet langer ondersteund door de auteur.",
-  "Status_AutoDeprecated": "'{0}' is al een lange tijd niet bijgewerkt.",
+  "Status_AutoDeprecated": "{0} is niet recentelijk geactualiseerd en wordt waarschijnlijk niet langer door de ontwikkelaar ondersteund.",
   "Status_Reupload": {
     "Zero": "'{0}' is een heruploaden van een origineel pakket.",
     "One": "Dit is een herupload van '{1}'."
