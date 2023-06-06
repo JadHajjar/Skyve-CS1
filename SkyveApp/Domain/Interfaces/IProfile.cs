@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyveApp.Domain.Interfaces;
-internal interface IProfile
+public interface IProfile
 {
 	ulong Author { get; }
 	Bitmap? Banner { get; }
@@ -23,4 +23,7 @@ internal interface IProfile
 	bool Temporary { get; }
 	int AssetCount { get; }
 	int ModCount { get; }
+	IEnumerable<IPackage> Packages { get; }
+	int ProfileId { get; }
+	int Downloads { get; }
 }

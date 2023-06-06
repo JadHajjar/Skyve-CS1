@@ -29,6 +29,7 @@ public class Profile : IProfile
 	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
 	[JsonIgnore] public int AssetCount => Assets.Count;
 	[JsonIgnore] public int ModCount => Mods.Count;
+	[JsonIgnore] public IEnumerable<IPackage> Packages => Assets.Concat(Mods);
 
 	public Profile(string name) : this()
 	{
@@ -49,6 +50,8 @@ public class Profile : IProfile
 	{
 		ProfileManager.GatherInformation(this);
 
+		UnsavedChanges = false;
+
 		return ProfileManager.Save(this);
 	}
 
@@ -68,11 +71,14 @@ public class Profile : IProfile
 	public DateTime LastUsed { get; set; }
 	public PackageUsage Usage { get; set; }
 	public ulong Author { get; set; }
+	public int ProfileId { get; }
+	public bool UnsavedChanges { get; set; }
 	public byte[]? BannerBytes { get => _bannerBytes; set { _bannerBytes = value; _banner?.Dispose(); _banner = null; } }
 
 	public bool ForAssetEditor { set { if (value) { Usage = PackageUsage.AssetCreation; } } }
 	public bool ForGameplay { set { if (value) { Usage = PackageUsage.CityBuilding; } } }
-	public Bitmap? Banner
+	[JsonIgnore] public int Downloads { get; }
+	[JsonIgnore] public Bitmap? Banner
 	{
 		get
 		{

@@ -102,4 +102,9 @@ internal class SkyveApiUtil
 	{
 		return await Post<UserProfile, ApiResponse>("/UpdateUserProfile", profile);
 	}
+
+	internal static async Task<UserProfile[]?> GetPublicProfiles()
+	{
+		return await Get<UserProfile[]>("/GetPublicProfiles");
+	}
 }

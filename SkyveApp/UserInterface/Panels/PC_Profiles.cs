@@ -18,11 +18,16 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_Profiles : PanelContent
 {
+	private bool buttonStateRunning;
 	private bool loadingProfile;
 	private readonly SlickCheckbox[] _launchOptions;
 	public PC_Profiles()
 	{
 		InitializeComponent();
+
+		B_StartStop.Enabled = CitiesManager.CitiesAvailable();
+
+		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
 
 		_launchOptions = new[] { CB_StartNewGame, CB_LoadSave, CB_NewAsset, CB_LoadAsset };
 
@@ -75,6 +80,10 @@ public partial class PC_Profiles : PanelContent
 		DAD_NewProfile.StartingFolder = LocationManager.AppDataPath;
 
 		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+
+		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
+
+		RefreshButtonState(CitiesManager.IsRunning(), true);
 	}
 
 	private void ProfileManager_ProfileChanged(Profile p)
@@ -97,8 +106,9 @@ public partial class PC_Profiles : PanelContent
 		B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = I_Info.Size = I_TempProfile.Size = I_Favorite.Size = UI.Scale(new Size(24, 24), UI.FontScale) + new Size(8, 8);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
 		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
-		P_Options.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
+		B_Discover.Margin =	B_StartStop.Margin = P_Options.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_TempProfile.Font = UI.Font(10.5F);
+		B_Discover.Font = B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
 		B_ViewProfiles.Font = B_NewProfile.Font = B_TempProfile.Font = B_Cancel.Font = UI.Font(9.75F);
 		TLP_AdvancedDev.Margin = TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile.Margin = UI.Scale(new Padding(10), UI.UIScale);
@@ -256,7 +266,7 @@ public partial class PC_Profiles : PanelContent
 	{
 		if (!I_ProfileIcon.Loading)
 		{
-			Form.PushPanel<PC_ProfileList>(null);
+			Form.PushPanel(new PC_ProfileList());
 		}
 	}
 
@@ -549,5 +559,63 @@ public partial class PC_Profiles : PanelContent
 		ProfileManager.Save(ProfileManager.CurrentProfile);
 
 		I_Favorite.ImageName = ProfileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
+	}
+
+	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
+	{
+		this.TryInvoke(() => B_StartStop.Enabled = isAvailable);
+
+		RefreshButtonState(isRunning);
+	}
+
+	private void RefreshButtonState(bool running, bool firstTime = false)
+	{
+		if (!running)
+		{
+			if (buttonStateRunning || firstTime)
+			{
+				this.TryInvoke(() =>
+				{
+					B_StartStop.ImageName = "I_CS";
+					B_StartStop.Text = Locale.StartCities;
+					buttonStateRunning = false;
+				});
+			}
+
+			return;
+		}
+
+		if (!buttonStateRunning || firstTime)
+		{
+			this.TryInvoke(() =>
+			{
+				B_StartStop.ImageName = "I_Stop";
+				B_StartStop.Text = Locale.StopCities;
+				buttonStateRunning = true;
+			});
+		}
+	}
+
+	private void B_StartStop_Click(object sender, EventArgs e)
+	{
+		Program.MainForm.LaunchStopCities();
+	}
+
+	private async void B_Discover_Click(object sender, EventArgs e)
+	{
+		try
+		{
+			B_Discover.Loading = true;
+
+			var profiles = await SkyveApiUtil.GetPublicProfiles();
+
+			Invoke(() => Form.PushPanel(new PC_ProfileList(profiles)));
+		}
+		catch (Exception ex)
+		{
+			ShowPrompt(ex, Locale.FailedToRetrieveProfiles);
+		}
+
+		B_Discover.Loading = false;
 	}
 }

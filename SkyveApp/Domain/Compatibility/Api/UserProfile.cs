@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Domain.Compatibility.Api;
+
 [DynamicSqlClass("UserProfiles")]
 public class UserProfile : IDynamicSql
 #if !API
@@ -17,8 +18,8 @@ public class UserProfile : IDynamicSql
 {
     [DynamicSqlProperty(PrimaryKey = true, Identity = true)]
     public int ProfileId { get; set; }
-	[DynamicSqlProperty(Indexer = true)]
-	public ulong AuthorId { get; set; }
+	[DynamicSqlProperty(Indexer = true, ColumnName = "AuthorId")]
+	public ulong Author { get; set; }
     [DynamicSqlProperty]
     public string? Name { get; set; }
 	[DynamicSqlProperty]
@@ -35,21 +36,23 @@ public class UserProfile : IDynamicSql
 	public byte[]? Banner { get; set; }
 	[DynamicSqlProperty]
 	public int? Color { get; set; }
+	[DynamicSqlProperty]
+	public int Downloads { get; set; }
+	[DynamicSqlProperty(ColumnName = "Usage")]
+	public int? ProfileUsage { get; set; }
 
 	public UserProfileContent[]? Contents { get; set; }
 
 #if !API
 	private Bitmap? _banner;
-	public ulong Author => AuthorId;
 	public bool IsFavorite { get; set; }
 	public bool IsMissingItems => false;
 	public DateTime LastEditDate => DateUpdated;
 	public DateTime LastUsed => DateUpdated;
-	public PackageUsage Usage => (PackageUsage)(-1);
+	public PackageUsage Usage => (PackageUsage)(ProfileUsage ?? -1);
 	public bool Temporary => false;
 	Color? Interfaces.IProfile.Color { get => Color == null ? null : System.Drawing.Color.FromArgb(Color.Value); set { } }
-	public List<Profile.Mod> Mods => Contents?.Where(x => x.IsMod).Select(x => new Profile.Mod(x)).ToList() ?? new();
-	public List<Profile.Asset> Assets => Contents?.Where(x => !x.IsMod).Select(x => new Profile.Asset(x)).ToList() ?? new();
+	public IEnumerable<Interfaces.IPackage> Packages => Contents?.Select(x => x.IsMod ? new Profile.Mod(x) : new Profile.Asset(x)) ?? Enumerable.Empty<Interfaces.IPackage>();
 	Bitmap? Interfaces.IProfile.Banner
 	{
 		get

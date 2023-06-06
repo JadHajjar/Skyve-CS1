@@ -282,4 +282,10 @@ internal class Locale : LocaleHelper
 	public static Translation PendingDeletions => _instance.GetText(nameof(PendingDeletions));
 	public static Translation YouHavePackagesUser => _instance.GetText(nameof(YouHavePackagesUser));
 	public static Translation ShareProfile => _instance.GetText(nameof(ShareProfile));
+	public static Translation FailedToFetchLogs => _instance.GetText(nameof(FailedToFetchLogs));
+	public static Translation AllUsages => _instance.GetText(nameof(AllUsages));
+	public static Translation Invalid => _instance.GetText(nameof(Invalid));
+	public static Translation UpdateProfile => _instance.GetText(nameof(UpdateProfile));
+	public static Translation FailedToRetrieveProfiles => _instance.GetText(nameof(FailedToRetrieveProfiles));
+	public static Translation DownloadProfile => _instance.GetText(nameof(DownloadProfile));
 }

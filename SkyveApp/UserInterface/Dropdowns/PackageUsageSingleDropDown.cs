@@ -1,6 +1,7 @@
 ﻿using Extensions;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Utilities;
+using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 
@@ -42,7 +43,7 @@ internal class PackageUsageSingleDropDown : SlickSelectionDropDown<PackageUsage>
 	{
 		var text = (int)item == -1 ? Locale.AnyUsage : LocaleCR.Get(item.ToString());
 
-		using var icon = IconManager.GetIcon("I_City", rectangle.Height - 2).Color(foreColor);
+		using var icon = item.GetIcon().Get(rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 

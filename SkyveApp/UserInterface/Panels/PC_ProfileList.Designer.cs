@@ -41,14 +41,14 @@ partial class PC_ProfileList
 			this.TB_Search = new SlickControls.SlickTextBox();
 			this.DD_Sorting = new SkyveApp.UserInterface.Dropdowns.ProfileSortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.B_ListView = new SlickControls.SlickIcon();
+			this.B_GridView = new SlickControls.SlickIcon();
 			this.L_Counts = new System.Windows.Forms.Label();
 			this.L_FilterCount = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.FLP_Profiles = new System.Windows.Forms.FlowLayoutPanel();
 			this.DD_Usage = new SkyveApp.UserInterface.Dropdowns.PackageUsageDropDown();
-			this.B_ListView = new SlickControls.SlickIcon();
-			this.B_GridView = new SlickControls.SlickIcon();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -56,6 +56,8 @@ partial class PC_ProfileList
 			// 
 			// base_Text
 			// 
+			this.base_Text.ButtonType = SlickControls.ButtonType.Normal;
+			this.base_Text.ColorStyle = Extensions.ColorStyle.Active;
 			this.base_Text.Location = new System.Drawing.Point(-2, 3);
 			this.base_Text.Text = "Mods";
 			// 
@@ -89,7 +91,7 @@ partial class PC_ProfileList
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer2, 3);
 			this.slickSpacer2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer2.Location = new System.Drawing.Point(0, 54);
+			this.slickSpacer2.Location = new System.Drawing.Point(0, 27);
 			this.slickSpacer2.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer2.Name = "slickSpacer2";
 			this.slickSpacer2.Size = new System.Drawing.Size(895, 2);
@@ -101,7 +103,7 @@ partial class PC_ProfileList
 			// 
 			this.TLP_Main.SetColumnSpan(this.slickSpacer1, 3);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(0, 92);
+			this.slickSpacer1.Location = new System.Drawing.Point(0, 61);
 			this.slickSpacer1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickSpacer1.Name = "slickSpacer1";
 			this.slickSpacer1.Size = new System.Drawing.Size(895, 2);
@@ -111,20 +113,18 @@ partial class PC_ProfileList
 			// 
 			// TB_Search
 			// 
-			this.TB_Search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
 			dynamicIcon1.Name = "I_Search";
 			this.TB_Search.ImageName = dynamicIcon1;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
-			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 16, 0, 16);
+			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
 			this.TB_Search.Placeholder = "SearchProfiles";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
 			this.TB_Search.SelectionStart = 0;
 			this.TB_Search.ShowLabel = false;
-			this.TB_Search.Size = new System.Drawing.Size(140, 48);
+			this.TB_Search.Size = new System.Drawing.Size(140, 21);
 			this.TB_Search.TabIndex = 0;
 			this.TB_Search.TextChanged += new System.EventHandler(this.FilterChanged);
 			this.TB_Search.IconClicked += new System.EventHandler(this.TB_Search_IconClicked);
@@ -135,11 +135,11 @@ partial class PC_ProfileList
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_Sorting.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Sorting.Location = new System.Drawing.Point(604, 7);
-			this.DD_Sorting.Margin = new System.Windows.Forms.Padding(7);
+			this.DD_Sorting.Location = new System.Drawing.Point(611, 0);
+			this.DD_Sorting.Margin = new System.Windows.Forms.Padding(0);
 			this.DD_Sorting.Name = "DD_Sorting";
 			this.DD_Sorting.Padding = new System.Windows.Forms.Padding(7);
-			this.DD_Sorting.Size = new System.Drawing.Size(284, 40);
+			this.DD_Sorting.Size = new System.Drawing.Size(284, 27);
 			this.DD_Sorting.TabIndex = 4;
 			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
 			// 
@@ -158,21 +158,52 @@ partial class PC_ProfileList
 			this.tableLayoutPanel3.Controls.Add(this.L_Counts, 1, 0);
 			this.tableLayoutPanel3.Controls.Add(this.L_FilterCount, 0, 0);
 			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 56);
+			this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 29);
 			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 36);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(895, 32);
 			this.tableLayoutPanel3.TabIndex = 6;
+			// 
+			// B_ListView
+			// 
+			this.B_ListView.ActiveColor = null;
+			this.B_ListView.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_ListView.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon2.Name = "I_List";
+			this.B_ListView.ImageName = dynamicIcon2;
+			this.B_ListView.Location = new System.Drawing.Point(825, 1);
+			this.B_ListView.Margin = new System.Windows.Forms.Padding(1);
+			this.B_ListView.Name = "B_ListView";
+			this.B_ListView.Size = new System.Drawing.Size(34, 30);
+			this.B_ListView.SpaceTriggersClick = true;
+			this.B_ListView.TabIndex = 7;
+			this.B_ListView.Click += new System.EventHandler(this.B_ListView_Click);
+			// 
+			// B_GridView
+			// 
+			this.B_GridView.ActiveColor = null;
+			this.B_GridView.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.B_GridView.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon3.Name = "I_Grid";
+			this.B_GridView.ImageName = dynamicIcon3;
+			this.B_GridView.Location = new System.Drawing.Point(861, 1);
+			this.B_GridView.Margin = new System.Windows.Forms.Padding(1);
+			this.B_GridView.Name = "B_GridView";
+			this.B_GridView.Selected = true;
+			this.B_GridView.Size = new System.Drawing.Size(33, 30);
+			this.B_GridView.SpaceTriggersClick = true;
+			this.B_GridView.TabIndex = 6;
+			this.B_GridView.Click += new System.EventHandler(this.B_GridView_Click);
 			// 
 			// L_Counts
 			// 
 			this.L_Counts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(748, 0);
+			this.L_Counts.Location = new System.Drawing.Point(750, 0);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(65, 28);
+			this.L_Counts.Size = new System.Drawing.Size(71, 30);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			// 
@@ -181,7 +212,7 @@ partial class PC_ProfileList
 			this.L_FilterCount.AutoSize = true;
 			this.L_FilterCount.Location = new System.Drawing.Point(3, 0);
 			this.L_FilterCount.Name = "L_FilterCount";
-			this.L_FilterCount.Size = new System.Drawing.Size(65, 28);
+			this.L_FilterCount.Size = new System.Drawing.Size(71, 30);
 			this.L_FilterCount.TabIndex = 2;
 			this.L_FilterCount.Text = "label1";
 			// 
@@ -191,10 +222,10 @@ partial class PC_ProfileList
 			this.panel1.Controls.Add(this.slickScroll1);
 			this.panel1.Controls.Add(this.FLP_Profiles);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(0, 94);
+			this.panel1.Location = new System.Drawing.Point(0, 63);
 			this.panel1.Margin = new System.Windows.Forms.Padding(0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(895, 392);
+			this.panel1.Size = new System.Drawing.Size(895, 423);
 			this.panel1.TabIndex = 14;
 			// 
 			// slickScroll1
@@ -203,7 +234,7 @@ partial class PC_ProfileList
 			this.slickScroll1.LinkedControl = this.FLP_Profiles;
 			this.slickScroll1.Location = new System.Drawing.Point(885, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(10, 392);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 423);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 0;
 			this.slickScroll1.TabStop = false;
@@ -220,41 +251,16 @@ partial class PC_ProfileList
 			// 
 			// DD_Usage
 			// 
+			this.DD_Usage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.DD_Usage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Usage.Location = new System.Drawing.Point(232, 3);
+			this.DD_Usage.HideLabel = true;
+			this.DD_Usage.Location = new System.Drawing.Point(236, 0);
+			this.DD_Usage.Margin = new System.Windows.Forms.Padding(0);
 			this.DD_Usage.Name = "DD_Usage";
-			this.DD_Usage.Size = new System.Drawing.Size(362, 43);
+			this.DD_Usage.Size = new System.Drawing.Size(375, 27);
 			this.DD_Usage.TabIndex = 15;
 			this.DD_Usage.Text = "Usage";
-			// 
-			// B_ListView
-			// 
-			this.B_ListView.ActiveColor = null;
-			this.B_ListView.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.B_ListView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_List";
-			this.B_ListView.ImageName = dynamicIcon2;
-			this.B_ListView.Location = new System.Drawing.Point(819, 3);
-			this.B_ListView.Name = "B_ListView";
-			this.B_ListView.Size = new System.Drawing.Size(34, 30);
-			this.B_ListView.SpaceTriggersClick = true;
-			this.B_ListView.TabIndex = 7;
-			this.B_ListView.Click += new System.EventHandler(this.B_ListView_Click);
-			// 
-			// B_GridView
-			// 
-			this.B_GridView.ActiveColor = null;
-			this.B_GridView.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.B_GridView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Grid";
-			this.B_GridView.ImageName = dynamicIcon3;
-			this.B_GridView.Location = new System.Drawing.Point(859, 3);
-			this.B_GridView.Name = "B_GridView";
-			this.B_GridView.Selected = true;
-			this.B_GridView.Size = new System.Drawing.Size(33, 30);
-			this.B_GridView.SpaceTriggersClick = true;
-			this.B_GridView.TabIndex = 6;
-			this.B_GridView.Click += new System.EventHandler(this.B_GridView_Click);
 			// 
 			// PC_ProfileList
 			// 

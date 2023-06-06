@@ -513,9 +513,17 @@ public static class ProfileManager
 
 	internal static void TriggerAutoSave()
 	{
-		if (CurrentProfile.AutoSave && !disableAutoSave && !ApplyingProfile && CentralManager.IsContentLoaded && !ContentUtil.BulkUpdating)
+		if (!disableAutoSave && !ApplyingProfile && CentralManager.IsContentLoaded && !ContentUtil.BulkUpdating)
 		{
-			CurrentProfile.Save();
+			if (CurrentProfile.AutoSave)
+			{
+				CurrentProfile.Save();
+			}
+			else if (!CurrentProfile.Temporary)
+			{
+				CurrentProfile.UnsavedChanges = true;
+				Save(CurrentProfile);
+			}
 		}
 	}
 
@@ -813,10 +821,18 @@ public static class ProfileManager
 			return "I_TempProfile";
 		}
 
-		return profile.Usage switch
+		return profile.Usage.GetIcon();
+	}
+
+	internal static DynamicIcon GetIcon(this PackageUsage usage)
+	{
+		return usage switch
 		{
 			PackageUsage.CityBuilding => "I_City",
 			PackageUsage.AssetCreation => "I_Tools",
+			PackageUsage.MapCreation => "I_Map",
+			PackageUsage.ScenarioMaking => "I_ScenarioMaking",
+			PackageUsage.ThemeMaking => "I_Paint",
 			_ => "I_ProfileSettings"
 		};
 	}
@@ -1130,7 +1146,7 @@ public static class ProfileManager
 	{
 		await SkyveApiUtil.SaveUserProfile(new()
 		{
-			AuthorId = SteamUtil.GetLoggedInSteamId(),
+			Author = SteamUtil.GetLoggedInSteamId(),
 			Banner = item.BannerBytes,
 			Color = item.Color?.ToArgb(),
 			Name = item.Name,

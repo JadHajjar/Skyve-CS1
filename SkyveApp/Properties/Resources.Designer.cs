@@ -1573,6 +1573,36 @@ namespace SkyveApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap I_Map_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_Map_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Map_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_Map_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_Map_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_Map_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap I_Merge_16 {
             get {
                 object obj = ResourceManager.GetObject("I_Merge_16", resourceCulture);
@@ -2166,6 +2196,36 @@ namespace SkyveApp.Properties {
         internal static System.Drawing.Bitmap I_RequestReview_48 {
             get {
                 object obj = ResourceManager.GetObject("I_RequestReview_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ScenarioMaking_16 {
+            get {
+                object obj = ResourceManager.GetObject("I_ScenarioMaking_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ScenarioMaking_24 {
+            get {
+                object obj = ResourceManager.GetObject("I_ScenarioMaking_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap I_ScenarioMaking_48 {
+            get {
+                object obj = ResourceManager.GetObject("I_ScenarioMaking_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

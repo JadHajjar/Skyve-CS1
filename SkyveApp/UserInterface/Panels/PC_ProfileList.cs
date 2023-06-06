@@ -9,6 +9,7 @@ using SkyveApp.Utilities.Managers;
 using SlickControls;
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ public partial class PC_ProfileList : PanelContent
 {
 	private readonly ProfileListControl LC_Items;
 
-	public PC_ProfileList()
+	public PC_ProfileList(IEnumerable<IProfile>? profiles = null)
 	{
 		InitializeComponent();
 
@@ -26,11 +27,28 @@ public partial class PC_ProfileList : PanelContent
 
 		LC_Items = new ProfileListControl() { Dock = DockStyle.Fill, GridView = true };
 		LC_Items.CanDrawItem += Ctrl_CanDrawItem;
-		LC_Items.LoadProfile += Ctrl_LoadProfile;
-		LC_Items.MergeProfile += Ctrl_MergeProfile;
-		LC_Items.ExcludeProfile += Ctrl_ExcludeProfile;
-		LC_Items.DisposeProfile += Ctrl_DisposeProfile;
 		panel1.Controls.Add(LC_Items);
+
+		if (profiles is null)
+		{
+			LC_Items.LoadProfile += Ctrl_LoadProfile;
+			LC_Items.MergeProfile += Ctrl_MergeProfile;
+			LC_Items.ExcludeProfile += Ctrl_ExcludeProfile;
+			LC_Items.DisposeProfile += Ctrl_DisposeProfile;
+			LC_Items.Loading = !ProfileManager.ProfilesLoaded;
+
+			if (!LC_Items.Loading)
+			{
+				LC_Items.SetItems(ProfileManager.Profiles.Skip(1));
+			}
+		}
+		else
+		{
+			DD_Sorting.Visible = false;
+			LC_Items.ReadOnly = true;
+			LC_Items.SetItems(profiles);
+			LC_Items.SetSorting(Domain.Enums.ProfileSorting.Downloads);
+		}
 
 		SlickTip.SetTo(B_GridView, "Switch to Grid-View");
 		SlickTip.SetTo(B_ListView, "Switch to List-View");
@@ -100,10 +118,7 @@ public partial class PC_ProfileList : PanelContent
 			L_Counts.Text = text;
 		}
 
-		if (L_FilterCount.Visible = total != filteredCount)
-		{
-			L_FilterCount.Text = Locale.ShowingCount.FormatPlural(filteredCount, Locale.Profile.FormatPlural(filteredCount));
-		}
+		L_FilterCount.Text = Locale.ShowingCount.FormatPlural(filteredCount, Locale.Profile.FormatPlural(filteredCount));
 	}
 
 	protected override void LocaleChanged()
@@ -115,10 +130,16 @@ public partial class PC_ProfileList : PanelContent
 	{
 		base.UIChanged();
 
-		TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = DD_Usage.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		TB_Search.Margin = L_Counts.Margin = L_FilterCount.Margin = DD_Sorting.Margin = DD_Usage.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		B_ListView.Padding = B_GridView.Padding = UI.Scale(new Padding(5), UI.FontScale);
+		B_ListView.Size = B_GridView.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		L_Counts.Font = L_FilterCount.Font = UI.Font(7.5F, FontStyle.Bold);
-		DD_Sorting.Width = (int)(180 * UI.FontScale);
-		TB_Search.Width = (int)(400 * UI.FontScale);
+		DD_Usage.Width = DD_Sorting.Width = (int)(180 * UI.FontScale);
+		TB_Search.Width = (int)(250 * UI.FontScale);
+
+		var size = (int)(30 * UI.FontScale) - 6;
+		TB_Search.MaximumSize = new Size(9999, size);
+		TB_Search.MinimumSize = new Size(0, size);
 	}
 
 	protected override void DesignChanged(FormDesign design)

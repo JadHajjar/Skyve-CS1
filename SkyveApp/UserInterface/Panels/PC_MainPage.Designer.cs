@@ -34,16 +34,16 @@ partial class PC_MainPage
 	{
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.B_StartStop = new SlickControls.SlickButton();
-			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
-			this.label1 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.assetsBubble = new SkyveApp.UserInterface.StatusBubbles.AssetsBubble();
 			this.modsBubble = new SkyveApp.UserInterface.StatusBubbles.ModsBubble();
+			this.TLP_Profiles = new System.Windows.Forms.TableLayoutPanel();
 			this.profileBubble = new SkyveApp.UserInterface.StatusBubbles.ProfileBubble();
+			this.B_StartStop = new SlickControls.SlickButton();
+			this.label1 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.TLP_Profiles.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
+			this.TLP_Profiles.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -66,51 +66,6 @@ partial class PC_MainPage
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(778, 403);
 			this.tableLayoutPanel1.TabIndex = 0;
-			// 
-			// B_StartStop
-			// 
-			this.B_StartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.B_StartStop.ColorShade = null;
-			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.B_StartStop.Enabled = false;
-			dynamicIcon1.Name = "I_CS";
-			this.B_StartStop.ImageName = dynamicIcon1;
-			this.B_StartStop.Location = new System.Drawing.Point(551, 368);
-			this.B_StartStop.Name = "B_StartStop";
-			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
-			this.B_StartStop.Size = new System.Drawing.Size(224, 32);
-			this.B_StartStop.SpaceTriggersClick = true;
-			this.B_StartStop.TabIndex = 0;
-			this.B_StartStop.Text = "Launch Cities: Skylines";
-			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
-			// 
-			// TLP_Profiles
-			// 
-			this.TLP_Profiles.AutoSize = true;
-			this.TLP_Profiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TLP_Profiles.ColumnCount = 1;
-			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.TLP_Profiles.Controls.Add(this.profileBubble, 0, 0);
-			this.TLP_Profiles.Dock = System.Windows.Forms.DockStyle.Top;
-			this.TLP_Profiles.Location = new System.Drawing.Point(0, 0);
-			this.TLP_Profiles.Margin = new System.Windows.Forms.Padding(0);
-			this.TLP_Profiles.Name = "TLP_Profiles";
-			this.TLP_Profiles.RowCount = 1;
-			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Profiles.Size = new System.Drawing.Size(257, 153);
-			this.TLP_Profiles.TabIndex = 13;
-			// 
-			// label1
-			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 373);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(71, 30);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "label1";
-			this.label1.Visible = false;
 			// 
 			// tableLayoutPanel2
 			// 
@@ -154,6 +109,23 @@ partial class PC_MainPage
 			this.modsBubble.TintColor = null;
 			this.modsBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ModsBubble_MouseClick);
 			// 
+			// TLP_Profiles
+			// 
+			this.TLP_Profiles.AutoSize = true;
+			this.TLP_Profiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TLP_Profiles.ColumnCount = 1;
+			this.TLP_Profiles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.TLP_Profiles.Controls.Add(this.profileBubble, 0, 0);
+			this.TLP_Profiles.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TLP_Profiles.Location = new System.Drawing.Point(0, 0);
+			this.TLP_Profiles.Margin = new System.Windows.Forms.Padding(0);
+			this.TLP_Profiles.Name = "TLP_Profiles";
+			this.TLP_Profiles.RowCount = 1;
+			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_Profiles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_Profiles.Size = new System.Drawing.Size(257, 153);
+			this.TLP_Profiles.TabIndex = 13;
+			// 
 			// profileBubble
 			// 
 			this.profileBubble.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -164,6 +136,35 @@ partial class PC_MainPage
 			this.profileBubble.TabIndex = 0;
 			this.profileBubble.TintColor = null;
 			this.profileBubble.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ProfileBubble_MouseClick);
+			// 
+			// B_StartStop
+			// 
+			this.B_StartStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_StartStop.ColorShade = null;
+			this.B_StartStop.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_StartStop.Enabled = false;
+			dynamicIcon1.Name = "I_CS";
+			this.B_StartStop.ImageName = dynamicIcon1;
+			this.B_StartStop.Location = new System.Drawing.Point(554, 371);
+			this.B_StartStop.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
+			this.B_StartStop.Name = "B_StartStop";
+			this.B_StartStop.Padding = new System.Windows.Forms.Padding(10, 5, 0, 5);
+			this.B_StartStop.Size = new System.Drawing.Size(224, 32);
+			this.B_StartStop.SpaceTriggersClick = true;
+			this.B_StartStop.TabIndex = 0;
+			this.B_StartStop.Text = "Launch Cities: Skylines";
+			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(3, 373);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(71, 30);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "label1";
+			this.label1.Visible = false;
 			// 
 			// PC_MainPage
 			// 
@@ -177,9 +178,9 @@ partial class PC_MainPage
 			this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			this.TLP_Profiles.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.tableLayoutPanel2.PerformLayout();
+			this.TLP_Profiles.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

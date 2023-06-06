@@ -1093,4 +1093,22 @@
   <data name="I_EditImage_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\I_EditImage_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="I_Map_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Map_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Map_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Map_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_Map_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_Map_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_ScenarioMaking_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_ScenarioMaking_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_ScenarioMaking_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_ScenarioMaking_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="I_ScenarioMaking_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\I_ScenarioMaking_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

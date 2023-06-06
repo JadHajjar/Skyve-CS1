@@ -71,6 +71,7 @@ public partial class MainForm : BasePanelForm
 			{ ExtensionClass.DeleteFile(LocationManager.Combine(Program.CurrentDirectory, "batch.bat")); }
 			catch { }
 		}
+				base_PB_Icon.Loading = true;
 	}
 
 	protected override void LocaleChanged()
@@ -89,11 +90,16 @@ public partial class MainForm : BasePanelForm
 	private void StartTimeoutTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
 		buttonStateRunning = null;
-		base_PB_Icon.Loading = false;
+		//base_PB_Icon.Loading = false;
 
 		if (CurrentPanel is PC_MainPage mainPage)
 		{
 			mainPage.B_StartStop.Loading = false;
+		}
+
+		if (CurrentPanel is PC_Profiles profilePage)
+		{
+			profilePage.B_StartStop.Loading = false;
 		}
 	}
 
@@ -108,10 +114,10 @@ public partial class MainForm : BasePanelForm
 				_startTimeoutTimer.Stop();
 			}
 
-			if (base_PB_Icon.Loading != isRunning)
-			{
-				base_PB_Icon.Loading = isRunning;
-			}
+			//if (base_PB_Icon.Loading != isRunning)
+			//{
+			//	base_PB_Icon.Loading = isRunning;
+			//}
 
 			base_PB_Icon.LoaderSpeed = 0.15;
 
@@ -120,6 +126,11 @@ public partial class MainForm : BasePanelForm
 			if (CurrentPanel is PC_MainPage mainPage)
 			{
 				mainPage.B_StartStop.Loading = false;
+			}
+
+			if (CurrentPanel is PC_Profiles profilePage)
+			{
+				profilePage.B_StartStop.Loading = false;
 			}
 		}
 	}
@@ -134,7 +145,7 @@ public partial class MainForm : BasePanelForm
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 			|| isGameRunning
 			|| SubscriptionsManager.SubscriptionsPending
-			// || unsaved profile changes changes
+			|| ProfileManager.CurrentProfile.UnsavedChanges
 			|| base_PB_Icon.HoverState.HasFlag(HoverState.Pressed);
 
 		e.Graphics.DrawImage(icon, base_PB_Icon.ClientRectangle);
@@ -143,20 +154,26 @@ public partial class MainForm : BasePanelForm
 		{
 			using var glowIcon = new Bitmap(IconManager.GetIcons("I_GlowAppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value);
 
-			var color = FormDesign.Design.ActiveColor;
+			var color = FormDesign.Modern.ActiveColor;
 			var minimum = 0;
 
-			if (buttonStateRunning is null && isGameRunning)
+			if ((buttonStateRunning is null && isGameRunning))
 			{
 				minimum = 120;
 				color = Color.FromArgb(15, 153, 212);
 			}
 
-			//if (false) // unsaved profile changes changes
-			//{
-			//	minimum = 100;
-			//	color = Color.FromArgb(122, 81, 207);
-			//}
+			if (buttonStateRunning == false)
+			{
+				minimum = 0;
+				color = Color.FromArgb(235, 113, 52);
+			}
+
+			if (ProfileManager.CurrentProfile.UnsavedChanges)
+			{
+				minimum = 0;
+				color = Color.FromArgb(122, 81, 207);
+			}
 
 			if (!ConnectionHandler.IsConnected)
 			{
@@ -246,7 +263,12 @@ public partial class MainForm : BasePanelForm
 					mainPage.B_StartStop.Loading = true;
 				}
 
-				base_PB_Icon.Loading = true;
+				if (CurrentPanel is PC_Profiles profilePage)
+				{
+					profilePage.B_StartStop.Loading = true;
+				}
+
+				//base_PB_Icon.Loading = true;
 				base_PB_Icon.LoaderSpeed = 1;
 			}
 

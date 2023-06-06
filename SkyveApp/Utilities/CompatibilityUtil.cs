@@ -93,6 +93,11 @@ internal static class CompatibilityUtil
 			return;
 		}
 
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && !info.Package.IsIncluded)
+		{
+			return;
+		}
+
 		var packages = interaction.Interaction.Packages?.ToList() ?? new();
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
