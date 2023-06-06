@@ -241,7 +241,7 @@
   "LOTWillRestart": "Skyve 进行更新时，程序会暂时关闭，更新完成后将自动重启。",
   "UpdatingLot": "Skyve 正在进行更新，请稍候...",
   "SubscribingRequiresGameToOpenTitle": "进行订阅操作",
-  "SubscribingRequiresGameToOpen": "订阅或取消订阅插件时，游戏将启动，并在片刻后退出（请确保已打开加速器/VPN）。\n如果看到 Steam 游戏启动界面，请点击\"开始游戏\"。",
+  "SubscribingRequiresGameToOpen": "订阅或取消订阅插件时， LOT2 会启动游戏并在片刻后关闭游戏（请确保已打开加速器 / VPN）。如果你看到 Steam 游戏启动界面，请点击“开始游戏”。",
   "HelpSupport": "帮助与支持",
   "DisableFpsBoosterDebug": "您正在使用 Debug Mono，是否要禁用 FPS Booster 模组以获取更好的日志？",
   "LogZipCopy_Tip": "创建一个压缩文件夹（其中包含帮助您解决问题所需的所有日志文件），您可以将其直接粘贴到 QQ 群或者 Discord 频道的对话框中发送。",
@@ -530,5 +530,15 @@
   "RequestOption2": "为此插件补充状态信息",
   "RequestOption3": "补充此插件与另一个插件的交互方式",
   "CurrentProfile": "当前配置文件",
-  "References": "引用"
+  "References": "引用",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }
