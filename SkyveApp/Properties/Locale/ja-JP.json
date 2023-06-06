@@ -530,5 +530,15 @@
   "RequestOption2": "パッケージに不足しているステータスを追加",
   "RequestOption3": "別のパッケージで不足している依存関係を追加",
   "CurrentProfile": "現在のプロファイル",
-  "References": "参照"
+  "References": "参照",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }
