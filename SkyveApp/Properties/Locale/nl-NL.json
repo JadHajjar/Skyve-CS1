@@ -241,7 +241,7 @@
   "LOTWillRestart": "Skyve zal tijdelijk sluiten tijdens het updateproces, maar het wordt automatisch hervat zodra de update is voltooid.",
   "UpdatingLot": "Skyve wordt momenteel bijgewerkt. Een ogenblik geduld...",
   "SubscribingRequiresGameToOpenTitle": "Abonnement Proces",
-  "SubscribingRequiresGameToOpen": "Voor het abonneren of uitschrijven van pakketten zult u voor een kort moment het spel moeten openen.\n\nWanneer u de Launcher van het spel ziet, klik u op Play om verder te gaan.",
+  "SubscribingRequiresGameToOpen": "Abonneren of uitschrijven van pakketten vereist kort voor het openen van het spel. Wanneer je de lancering van het spel ziet, klik op Speel om verder te gaan.",
   "HelpSupport": "Hulp & ondersteuning",
   "DisableFpsBoosterDebug": "Je hebt FPS Booster ingeschakeld tijdens het gebruik van debug mono, wil je het uitschakelen om betere logs te krijgen?",
   "LogZipCopy_Tip": "Maak een zip-bestand met alle log-informatie die iemand nodig heeft om u te helpen met uw probleem, je kunt deze direct in een discord kanaal plakken.",
@@ -530,5 +530,15 @@
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
   "CurrentProfile": "Huidig profiel",
-  "References": "References"
+  "References": "References",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }
