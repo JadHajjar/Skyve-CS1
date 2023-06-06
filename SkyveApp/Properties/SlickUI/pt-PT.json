@@ -104,55 +104,55 @@
   "Do you want to apply your changes before leaving?": "Gostaria de aplicar as alterações antes de sair?",
   "TaskCompleted": "Task Completed",
   "UnexpectedError": "An unexpected error occurred",
-  "{0} ago": "{0} ago",
-  "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "{0} ago": "{0} atrás",
+  "in {0}": "em {0}",
+  "Today at {0}": "Hoje às {0}",
+  "Yesterday at {0}": "Ontem às {0}",
+  "Tomorrow at {0}": "Amanhã, às {0}",
+  "Last {0} at {1}": "Último {0} às {1}",
+  "Next {0} at {1}": "Próximo {0} às {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "{0} mês atrás na {1}",
+    "Plural": "{0} meses atrás na {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "em {0} meses na {1}",
+    "Plural": "em {0} meses no(a) {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} dia atrás",
+    "Plural": "{0} dias atrás"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "em {0} dia",
+    "Plural": "em {0} dias"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} ano",
+    "Plural": "{0} anos"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} mês",
+    "Plural": "{0} meses"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} dia",
+    "Plural": "{0} dias"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} hora",
+    "Plural": "{0} horas"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} minuto",
+    "Plural": "{0} minutos"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} segundo",
+    "Plural": "{0} segundos"
   },
   "{0}d": "{0}d",
   "{0}h": "{0}h",
   "{0}m": "{0}m",
-  "{0}s": "{0}s"
+  "{0}s": "{0} s"
 }
