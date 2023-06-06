@@ -521,5 +521,14 @@
   "PendingDeletions": {
     "One": "{0} アイテムが削除を待機中",
     "Plural": "{0} アイテムが削除を待機中"
-  }
+  },
+  "YouHavePackagesUser": {
+    "One": "{1} が作成した {0} 個のパッケージ",
+    "Plural": "{1} が作成した {0} 個のパッケージ"
+  },
+  "RequestOption1": "問題を報告・不足した情報を追加",
+  "RequestOption2": "パッケージに不足しているステータスを追加",
+  "RequestOption3": "別のパッケージで不足している依存関係を追加",
+  "CurrentProfile": "現在のプロファイル",
+  "References": "参照"
 }

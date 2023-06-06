@@ -6,20 +6,20 @@
   "AssetsBubble": "Vos assets",
   "ModsBubble": "Vos mods",
   "Dashboard": "Tableau de bord",
-  "ModOutOfDate": "mod est obsolète",
+  "ModOutOfDate": "Ce mod est obsolète",
   "ModOutOfDatePlural": "mods obsolés",
-  "SearchDlcs": "Recherchez vos DLCs..",
-  "SearchPackages": "Cherchez vos paquets..",
-  "ModIsLocal": "Le mod est local",
-  "ModIsRemoved": "Retiré du Steam",
+  "SearchDlcs": "Recherchez dans vos DLC..",
+  "SearchPackages": "Cherchez dans vos paquets..",
+  "ModIsLocal": "Ce mod est local",
+  "ModIsRemoved": "Retiré de Steam",
   "ModIsUnknown": "Impossible d'obtenir les informations de ce mod depuis Steam",
   "ModIsNotDownloaded": "Contenu introuvable",
-  "ModIsOutOfDate": "Le mod est obsolète",
+  "ModIsOutOfDate": "Ce mod est obsolète",
   "ModIsMaybeOutOfDate": "Le mod peut être obsolète",
   "ModIsIncomplete": "Le mod n'est pas entièrement téléchargé ou manque des fichiers",
   "ModIsUpToDate": "Le mod est à jour et entièrement téléchargé",
   "ModIncomplete": "le mod n'est pas entièrement téléchargé ou manque des fichiers",
-  "ModIncompletePlural": "les mods ne sont pas entièrement téléchargés ou manquent de fichiers",
+  "ModIncompletePlural": "ces mods ne sont pas entièrement téléchargés ou manquent de fichiers",
   "AssetIsLocal": "L'asset est local",
   "AssetIsRemoved": "Cet asset a été retiré du Steam",
   "AssetIsUnknown": "Impossible d'obtenir les informations de cet asset depuis Steam",
@@ -240,8 +240,8 @@
   "WouldYouLikeToSkipThose": "Voulez-vous passer ces paquets ?",
   "LOTWillRestart": "Skyve se fermera temporairement pendant le processus de mise à jour, mais reprendra automatiquement une fois la mise à jour terminée.",
   "UpdatingLot": "Skyve est en cours de mise à jour, veuillez patienter...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Processus d'abonnement",
+  "SubscribingRequiresGameToOpen": "S'abonner ou se désabonner des paquets nécessite d'ouvrir le jeu pour un bref instant. \n\nLorsque vous voyez le lanceur du jeu, cliquez sur Jouer pour continuer.",
   "HelpSupport": "Aide et Support",
   "DisableFpsBoosterDebug": "Vous avez FPS Booster activé lorsque vous utilisez le débogage mono, voulez-vous le désactiver pour obtenir de meilleurs logs ?",
   "LogZipCopy_Tip": "Créer un fichier zip contenant toutes les informations de journalisation nécessaires à quelqu'un pour vous aider à résoudre votre problème. Le fichier zip sera copié dans le presse-papiers et vous pouvez le coller directement dans un canal Discord.",
@@ -487,33 +487,33 @@
   "LoggedInAs": "Connecté en tant que",
   "UnknownUser": "Utilisateur inconnu",
   "AddMeaningfulDescription": "Veuillez ajouter une description précise à votre demande.",
-  "RedownloadComplete": "Skyve a fini de retélécharger les paquets avec des problèmes.",
+  "RedownloadComplete": "Skyve a fini de re-télécharger les paquets avec des problèmes.",
   "CleanupComplete": "Skyve a fini de nettoyer les téléchargements du Workshop.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} élément en attente d'abonnement",
+    "Plural": "{0} éléments en attente d'abonnement"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} élément en attente de désabonnement",
+    "Plural": "{0} éléments en attente de désabonnement"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
+  "CancelSubs": "Annuler tous les abonnements en attente",
   "CancelDownloads": "Annuler tous les téléchargements en attente",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplySubs": "Lancez le jeu pour un bref instant pour appliquer les abonnements en attente",
   "ApplyDownloads": "Forcer Steam à télécharger tous les paquets en attente",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
+  "SubsPendingInfo": "Les paquets auxquels vous vous êtes abonné ont regroupés ici.\nUne fois que vous ouvriez le jeu, ces éléments seront abonnés sur Steam.",
   "DownloadsPendingInfo": "Les paquets auxquels vous vous êtes abonné et qui n'ont pas encore été téléchargés sont regroupés ici.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Démarrer le téléchargement ou la suppression des paquets immédiatement après l'abonnement/le désabonnement",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Force le téléchargement ou la suppression de paquets au lieu d'attendre qu'ils soient effectivement abonnés ou désabonnés.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "Vous vous abonnerez au paquet {0} au cours de ce processus.",
+    "Plural": "Vous vous abonnerez aux {0} paquets au cours de ce processus."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "Vous vous désabonnerez de {0} paquet au cours de ce processus.",
+    "Plural": "Vous vous désabonnerez de {0} paquets au cours de ce processus."
   },
-  "ViewThisProfilesPackages": "View this profile's contents",
+  "ViewThisProfilesPackages": "Afficher le contenu de ce profil",
   "PendingDownloads": {
     "One": "{0} élément en attente de téléchargement",
     "Plural": "{0} éléments en attente de téléchargement"
@@ -521,5 +521,14 @@
   "PendingDeletions": {
     "One": "{0} élément en attente de suppression",
     "Plural": "{0} éléments en attente de suppression"
-  }
+  },
+  "YouHavePackagesUser": {
+    "One": "Vous avez {0} paquet créé par {1}",
+    "Plural": "Vous avez {0} paquets créés par {1}"
+  },
+  "RequestOption1": "Signaler un problème ou une information manquante",
+  "RequestOption2": "Ajouter un statut manquant pour le paquet",
+  "RequestOption3": "Ajouter une interaction manquante avec un autre paquet",
+  "CurrentProfile": "Profil actuel",
+  "References": "Références"
 }

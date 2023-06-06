@@ -100,7 +100,7 @@
   "Interaction_Identical": "Dette er flere versjoner av samme pakke.\r\n\r\nDu bør bare velge en av dem.",
   "Status_Succeeded": "'{0}' fullføres av '{1}'.\r\n\r\nDu bruker allerede '{1}' så det er ingen behov for '{0}' lenger.",
   "Status_Deprecated": "'{0}' er foreldet, den støttes ikke lenger av dens forfatter.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' er gjenopplasting av en originalpakke.",
     "One": "Dette er gjenopplasting av '{1}."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Dette er en avhengighetsmod, men det ser ikke ut til at du bruker alle pakkene som krever det.",
   "Status_SourceCodeNotAvailable": "Kildekoden til denne modden er ikke tilgjengelig. Du bør ikke bruke den med mindre du stoler på forfatteren.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Musikken i denne pakken kan kanskje bli opphavsrettet. Det er ikke best å bruke den mens den strømmes.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Forventet utgang",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Du skal ekskludere '{0}.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Ekskluder",
+  "Unsubscribe": "Avmeld",
   "Action_ExcludeOther": {
     "One": "Du skal ekskludere '{1}.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }

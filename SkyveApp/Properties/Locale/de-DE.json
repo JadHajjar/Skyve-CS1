@@ -521,5 +521,14 @@
   "PendingDeletions": {
     "One": "{0} Element mit ausstehender Entfernung",
     "Plural": "{0} Elemente mit ausstehender Entfernung"
-  }
+  },
+  "YouHavePackagesUser": {
+    "One": "Du hast {0} Paket, das von {1} erstellt wurde",
+    "Plural": "Du hast {0} Pakete, die von {1} erstellt wurden"
+  },
+  "RequestOption1": "Ein Problem melden oder fehlende Informationen hinzufügen",
+  "RequestOption2": "Fehlenden Status für das Paket hinzufügen",
+  "RequestOption3": "Fehlende Interaktion mit einem anderen Paket hinzufügen",
+  "CurrentProfile": "Aktuelles Profil",
+  "References": "Bezüge"
 }

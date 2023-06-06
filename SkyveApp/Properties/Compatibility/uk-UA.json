@@ -100,7 +100,7 @@
   "Interaction_Identical": "Це кілька версій одного й того ж пакету.\n\nВи повинні вибрати лише одну з них.",
   "Status_Succeeded": "'{0}' замінено на '{1}'.\n\nВи вже використовуєте '{1}', тому '{0}' більше не потрібно.",
   "Status_Deprecated": "'{0}' є застарілим, він більше не підтримується автором '{0}'.",
-  "Status_AutoDeprecated": "'{0}' не був оновлений упродовж довгого часу, та, ймовірно, більше не підтримується його автором.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
   "Status_Reupload": {
     "Zero": "'{0}' є повторним завантаженням оригінального пакету.",
     "One": "Це повторне завантаження '{1}."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Це мод залежності, але, здається, ви не використовуєте жоден пакет, який вимагає його.",
   "Status_SourceCodeNotAvailable": "Вихідний код цього моду недоступний. Ви не повинні використовувати його, якщо не маєте довіри до його автора.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Музика в цьому пакеті може бути об'єктом авторського права. Найкраще не використовувати її під час стріму.",
   "Status_IncompleteDescription": "Опис Майстерні для цього моду дуже короткий. Ви не повинні використовувати його, якщо не маєте довіри до його автора.",
   "OutputText": "Очікуваний результат",
@@ -147,6 +148,9 @@
     "Plural": "Вам слід відписатися від наступних пакетів:"
   },
   "Action_ExcludeThis": "Вам слід виключити '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Виключити",
+  "Unsubscribe": "Відписатися",
   "Action_ExcludeOther": {
     "One": "Вам слід виключити '{1}'.",
     "Plural": "Вам слід виключити наступні пакети:"
@@ -207,5 +211,9 @@
   "DeleteRequest": "Видалити запит",
   "ApplyRequestedChanges": "Застосувати вказані зміни",
   "ManagePackage": "Керування пакунком",
-  "RequestReviewDisclaimer": "*Ваш Steam ID і логи надсилаються з вашим запитом"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Ваш Steam ID і логи надсилаються з вашим запитом",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }

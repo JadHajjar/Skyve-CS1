@@ -339,11 +339,11 @@
             {
                 "Name": "Fixar",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Fixade tidigare inställningar och profiler som ibland inte förs över till Skyve.",
+                    "En genväg kommer nu att skapas när du först öppnar Skyve efter att du tidigare haft LOM2.",
+                    "Fixade ett sällsynt fall där kompatibilitetsinfo inte laddades.",
+                    "Aktiverade möjligheten att begära en granskning av ett paket som för närvarande är trasigt.",
+                    "Lättade på känsligheten för meddelandet \"Delvis Nedladdad\"."
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Ändringar",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Förbättrad prestanda för appen. Snabbare laddningstider och mindre hackande förväntas.",
+                    "Fixade en interaktion mellan liknande moddar som visas i Kompatibilitetsrapporten när du bara har en av dem.",
+                    "Fixade att mods upptäcks i mappen för lokala tillgångar."
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Korrigeringar",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Fixade fliken alternativ som inte öppnas för macOS & Linux.",
+                    "Fixade fliken Hjälp & Loggar inte ladda din nuvarande logg automatiskt.",
+                    "Fixade loggfilens sökväg som är fel på Linux."
                 ]
             }
         ]
@@ -381,18 +381,18 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Ändringar",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Steam-paneler i huvudmenyn visas nu som standard, du kan fortfarande gömma dem i mod inställningarna.",
+                    "Att begära en granskning kräver nu en giltig beskrivning och skickar även dina loggar med begäran. En friskrivning visas bredvid knappen 'Skicka'.",
+                    "Minskad rapportnivån för en mod som inte har uppdaterats på ett tag till 'Info' så den inte meddelar dig om det."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Korrigeringar",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Fixade att sammanfattningen av tillgångar inte visades i instrumentpanelen.",
+                    "Fixade att föråldrad status inte fungerade korrekt."
                 ]
             }
         ]
@@ -402,12 +402,12 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Korrigeringar och ändringar",
                 "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "Lade till ett meddelande för att låta dig veta när 'Fixa alla problem' & 'Kör rensning' är avklarad.",
+                    "Fixade en sällsynt bugg där laddning av en LOT 1-profil skulle ladda för evigt.",
+                    "Fixade att ändringsloggen inte öppnades med vissa språk.",
+                    "Fixade troligen att prenumeration på en stor mängd objekt misslyckas/inte fungerar."
                 ]
             }
         ]
@@ -417,32 +417,32 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Omarbetade prenumerationsprocessen",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Du kan nu prenumerera på paket medan spelet är öppet.",
+                    "Prenumerera på flera objekt i rad kommer att sätta dem i en väntande lista istället för att öppna spelet varje gång.",
+                    "Lade till en ruta längst ner till vänster i appen för att låta dig veta om eventuella pågående prenumeration/avprenumerationsuppgifter.",
+                    "Lade till ett avancerat alternativ för att tvinga ner eller ta bort paket så snart du prenumererar/avprenumererar på dem i Skyve.",
+                    "Nyprenumererade objekt laddas inte längre om medan spelet är öppet.\nDetta förhindrar frysningar av ditt spel samt moddar som inte fungerar."
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Nytt",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "Lade till \"Visa innehållet i denna profil\" i profilernas högerklicksmeny.",
+                    "Lade till ett \"Tvinga nedladdning\"-alternativ i paketens högerklicksmeny.",
+                    "Lade till fler sammanhang till vissa popups",
+                    "Lade till en \"Ladda ner alla visade objekt\" åtgärd i listorna."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Korrigeringar",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-                    "Improved the performance for people with a lot of mods."
+                    "Fixade att profillistan inte uppdateras omedelbart.",
+                    "Fixade att profilpaket som inte visade deras verkstadsnamn.",
+                    "Fixade pakets Steam-info som inte laddas första gången när du visar en profil eller samling.",
+                    "Lokala mods namn har återställts till mappnamnet istället för Workshopen för att förhindra problem.",
+                    "Förbättrad prestanda för personer med många mods."
                 ]
             }
         ]

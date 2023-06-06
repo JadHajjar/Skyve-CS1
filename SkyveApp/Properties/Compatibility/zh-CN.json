@@ -22,19 +22,19 @@
   "Broken": "已损坏",
   "Incompatible": "不兼容",
   "CityBuilding": "城市建设",
-  "AssetCreation": "资产制作",
-  "MapCreation": "地图制作",
+  "AssetCreation": "制作资产",
+  "MapCreation": "制作地图",
   "NoAction": "不执行任何操作",
-  "SubscribeToPackages": "订阅此链接的插件",
+  "SubscribeToPackages": "订阅列出的插件",
   "RequiresConfiguration": "需要一个特定的配置",
   "SelectOne": "请选择…",
   "UnsubscribeThis": "取消订阅此插件",
-  "UnsubscribeOther": "取消订阅关联的插件",
+  "UnsubscribeOther": "取消订阅列出的插件",
   "Switch": "需要替换",
   "FlippedSwitch": "替换为此插件",
   "Deprecated": "已废弃",
   "Reupload": "重新上传",
-  "CausesIssues": "导致问题",
+  "CausesIssues": "引发问题",
   "SavesCantLoadWithoutIt": "没有它，存档将无法载入",
   "TestVersion": "测试版",
   "DependencyMod": "前置模组",
@@ -70,11 +70,11 @@
   "PleaseReviewPackageInteractions": "请在保存之前检查此插件的交互方式。\n部分交互方式是无效的。",
   "PleaseReviewPackageUsage": "请为此插件选择一个有效的用途。",
   "Interaction_Alternative": {
-    "One": "'{1}' 可以作为 '{0}' 的替代方案。",
-    "Plural": "下列任意一个插件可以作为 '{0}' 的替代方案："
+    "One": "'{1}' 可以作为 '{0}' 的备选方案。",
+    "Plural": "下列任意一个插件可以作为 '{0}' 的备选方案："
   },
   "Interaction_SameFunctionality": {
-    "One": "'{0}' 和 '{1}' 具有相同的功能。",
+    "One": "'{0}' 和 '{1}' 都含有相同的功能。",
     "Plural": "'{0}' 与下列插件都具有相同的功能："
   },
   "Interaction_IncompatibleWith": {
@@ -82,8 +82,8 @@
     "Plural": "'{0}' 与下列任何一个插件都不兼容："
   },
   "Interaction_CausesIssuesWith": {
-    "One": "同时使用 '{0}' 与 '{1}' 可能引发问题。",
-    "Plural": "当 '{0}' 与以下模组同时使用时，可能引发问题："
+    "One": "同时使用 '{0}' 和 '{1}' 可能引发问题。",
+    "Plural": "同时使用 '{0}' 和下列模组可能引发问题："
   },
   "Interaction_RequiredPackages": {
     "One": "要使用 '{0}'，您需要订阅一个必需的插件。",
@@ -97,15 +97,15 @@
     "One": "'{0}' 的功能已被 '{1}' 继承。",
     "Plural": "'{0}' 的功能已被下列任意一个插件继承："
   },
-  "Interaction_Identical": "这些是同一个插件的多个不同版本。\n\n您应当只选择使用其中一个，并取消订阅其他版本。",
+  "Interaction_Identical": "以下是同一插件的多个不同版本。\n\n您应当只使用其中一个版本，并取消订阅此插件的其它版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
-  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行过更新，可能不再受到作者的支持。",
+  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行更新了。",
   "Status_Reupload": {
-    "Zero": "'{0}' 是某个原始插件的重新上传版本。",
-    "One": "这是 '{1}' 的重新上传版本。"
+    "Zero": "'{0}' 是某个插件的重新上传版本。",
+    "One": "此插件是 '{1}' 的重新上传版本。"
   },
-  "Status_CausesIssues": "'{0}' 会导致游戏出现问题。",
+  "Status_CausesIssues": "'{0}' 可能导致游戏出现问题。",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。",
     "One": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。\n\n如果需要，可以使用 '{1}' 来恢复您的存档。请阅读其工坊页面描述以获取更多信息。"
@@ -115,11 +115,12 @@
     "One": "这是 '{1}' 的测试版。\n请注意，测试版模组可能会出现意外问题。"
   },
   "Status_MissingDlc": {
-    "One": "要使用这个插件，您必须购买 '{0}' DLC。",
-    "Plural": "This is a 'Test' version of '{1}'.\r\nBe aware that updates to it might cause unexpected issues."
+    "One": "要使用这个插件，您需要购买一个 DLC。",
+    "Plural": "要使用这个插件，您需要购买下列 DLC："
   },
   "Status_DependencyMod": "这是一个前置模组，但你似乎没有使用任何依赖于该模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
+  "SourceAvailable": "源代码可用",
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期显示文本",
@@ -129,24 +130,27 @@
   "Stability_NotEnoughInformation": "没有足够的信息来正确地检查此插件的稳定性。",
   "Stability_HasIssues": "此插件可能引发问题。\n请小心使用。",
   "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
-  "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应该立刻取消订阅或删除此插件。",
+  "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应当立刻取消订阅或删除此插件。",
   "Stability_Local": "此插件是 '{0}' 模组的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
-    "One": "您应该订阅下列插件：",
-    "Plural": "您应该订阅这些插件："
+    "One": "您应当订阅以下插件：",
+    "Plural": "您应当订阅这些插件："
   },
-  "Action_RequiresConfiguration": "您应当遵循下列使用说明：",
+  "Action_RequiresConfiguration": "您应当遵循以下使用说明：",
   "Action_SelectOne": {
-    "One": "You should only use one between '{0}' and '{1}'.",
-    "Plural": "You should only use one between '{0}' and the following packages."
+    "One": "对于 '{0}' 和 '{1}'，您只能使用其中一个插件：",
+    "Plural": "对于 '{0}' 和下列插件，您只能使用其中一个插件："
   },
-  "Action_UnsubscribeThis": "您应该取消订阅 '{0}' 。",
+  "Action_UnsubscribeThis": "您应当取消订阅 '{0}' 。",
   "Action_UnsubscribeOther": {
-    "One": "您应该取消订阅 '{1}' 。",
+    "One": "您应当取消订阅 '{1}' 。",
     "Plural": "您应该取消订阅下列插件："
   },
   "Action_ExcludeThis": "您应该卸下 '{0}'。",
+  "ExcludeThis": "卸下此插件",
+  "Exclude": "卸下",
+  "Unsubscribe": "取消订阅",
   "Action_ExcludeOther": {
     "One": "您应该卸下 '{1}'。",
     "Plural": "您应该卸下以下插件："
@@ -187,14 +191,14 @@
     "One": "{0} 个{1} 应当被卸下",
     "Plural": "{0} 个{1} 应当被卸下"
   },
-  "UnsubscribeCount": "{0} {1} 应该取消订阅",
+  "UnsubscribeCount": "{0} {1} 应当取消订阅",
   "SwitchCount": {
     "One": "{0} 个{1} 需要替换",
     "Plural": "{0} 个{1} 需要替换"
   },
   "PackageType": "插件类型",
   "GenericPackage": "普通插件",
-  "MusicPack": "音乐插件",
+  "MusicPack": "音乐包插件",
   "ThemeMix": "混合主题",
   "IMTMarkings": "Intersection Marking Tool 标线",
   "RenderItPreset": "Render it! 的预设",
@@ -207,5 +211,9 @@
   "DeleteRequest": "删除申请",
   "ApplyRequestedChanges": "应用申请的改动",
   "ManagePackage": "管理插件",
-  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送"
+  "Banned": "已被封禁",
+  "NoIssues": "没有问题",
+  "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送",
+  "ScenarioMaking": "制作剧本",
+  "ThemeMaking": "制作地图主题"
 }

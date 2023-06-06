@@ -100,7 +100,7 @@
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi substituído por '{1}'.\n\nVocê já está usando '{1}', então não precisa mais de '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto e não é mais suportado pelo seu autor.",
-  "Status_AutoDeprecated": "'{0}' não é atualizado há muito tempo, provavelmente não é mais suportado pelo seu autor.",
+  "Status_AutoDeprecated": "'{0}' não foi atualizado em muito tempo.",
   "Status_Reupload": {
     "Zero": "'{0}' é um re-envio de um pacote original.",
     "One": "Este é um re-envio de '{1}'."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Este é um mod de dependência, mas parece que você não está usando nenhum pacote que o requer.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
+  "SourceAvailable": "O código fonte está disponível",
   "Status_MusicCanBeCopyrighted": "A música contida neste pacote pode estar protegida por direitos autorais. É melhor não usá-la durante transmissões ao vivo.",
   "Status_IncompleteDescription": "A descrição na Oficina deste mod é muito curta. Você não deve usá-lo a menos que confie em seu autor.",
   "OutputText": "Saída Esperada",
@@ -147,6 +148,9 @@
     "Plural": "Você deve cancelar a assinatura dos seguintes pacotes."
   },
   "Action_ExcludeThis": "Você deve excluir '{0}'.",
+  "ExcludeThis": "Excluir este pacote",
+  "Exclude": "Excluir",
+  "Unsubscribe": "Cancelar Assinatura",
   "Action_ExcludeOther": {
     "One": "Você deve excluir '{1}'.",
     "Plural": "Você deve excluir os seguintes pacotes."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Excluir pedido",
   "ApplyRequestedChanges": "Aplicar as Alterações Solicitadas",
   "ManagePackage": "Gerenciar Pacote",
-  "RequestReviewDisclaimer": "*Seu ID Steam e registros são enviados com o seu pedido"
+  "Banned": "Banido",
+  "NoIssues": "Sem problemas",
+  "RequestReviewDisclaimer": "*Seu ID Steam e registros são enviados com o seu pedido",
+  "ScenarioMaking": "Cenário/Fabricação",
+  "ThemeMaking": "Criação de Temas"
 }
