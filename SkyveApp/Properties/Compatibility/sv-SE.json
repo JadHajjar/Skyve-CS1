@@ -100,7 +100,7 @@
   "Interaction_Identical": "Dessa är flera versioner av samma paket.\r\n\r\nDu bör endast välja en av dem.",
   "Status_Succeeded": "'{0}' efterträds av '{1}'.\r\n\r\nDu använder redan '{1}' så det finns inget behov av '{0}' längre.",
   "Status_Deprecated": "'{0}' är föråldrad, den stöds inte längre av dess författare.",
-  "Status_AutoDeprecated": "'{0}' har inte uppdaterats på länge.",
+  "Status_AutoDeprecated": "'{0}' har inte uppdaterats på länge, det stöds förmodligen inte längre av sin författare.",
   "Status_Reupload": {
     "Zero": "'{0}' är en återsändning av ett originalpaket.",
     "One": "Detta är en ny uppladdning av '{1}'."
