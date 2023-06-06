@@ -354,7 +354,7 @@
   "ViewPackageCR": "ดูข้อมูลความเข้ากันได้ของแพ็กเกจนี้",
   "FilterByThisEnabledStatus": "กรองจากสถานะ 'เปิดใช้งาน'",
   "FilterByThisIncludedStatus": "กรองจากสถานะ 'บรรจุอยู่ในเกม'",
-  "CleanupInfo": "การเรียกใช้การทำความสะอาดด่วน จะลบแพ็กเกจต่าง ๆ ที่คุณไม่ได้กดสมัครสมาชิกแล้ว ออกไปจากคอมพิวเตอร์ของคุณ แล้วบังคับให้เกิดการดาวน์โหลดแพ็กเกจที่ขาดหายไป",
+  "CleanupInfo": "เรียกใช้การทำความสะอาดด่วน เพื่อลบแพ็กเกจต่าง ๆ ที่คุณไม่ได้ยกเลิกการสมัครสมาชิกไปแล้ว ให้ออกไปจากคอมพิวเตอร์ของคุณ แล้วบังคับให้เกิดการดาวน์โหลดแพ็กเกจที่ขาดหายไป",
   "CleanupTitle": "ล้างแพ็กเกจเวิร์กชอป",
   "RunCleanup": "เริ่มทำความสะอาด",
   "CloseCitiesToClean": "คุณต้องปิด Cities: Skylines เพื่อเริ่มทำความสะอาด",
@@ -529,6 +529,6 @@
   "RequestOption1": "Report an issue or add missing information",
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
-  "CurrentProfile": "Current Profile",
-  "References": "References"
+  "CurrentProfile": "โพร์ไฟล์ปัจจุบัน",
+  "References": "รายการอ้างอิง"
 }
