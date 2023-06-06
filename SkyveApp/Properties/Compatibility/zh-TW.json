@@ -100,7 +100,7 @@
   "Interaction_Identical": "這些是同一個外掛程式的多個不同版本。\n\n您應當只選擇使用其中一個，並取消訂閱其他版本。",
   "Status_Succeeded": "「{0}」 的功能已被「{1}」繼承。\n\n您已經使用了「{1}」，因此不再需要使用「{0}」。",
   "Status_Deprecated": "'{0}' 已經廢棄，不再受到作者的支持。",
-  "Status_AutoDeprecated": "「{0}」已久未被作者更新。",
+  "Status_AutoDeprecated": "「{0}」已經很長時間沒有進行過更新，可能不再受到作者的支援。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某個原始外掛程式的重新上傳版本。",
     "One": "這是 '{1}' 的重新上傳版本。"
