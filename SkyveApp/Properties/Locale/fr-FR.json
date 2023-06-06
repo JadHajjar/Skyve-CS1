@@ -530,5 +530,15 @@
   "RequestOption2": "Ajouter un statut manquant pour le paquet",
   "RequestOption3": "Ajouter une interaction manquante avec un autre paquet",
   "CurrentProfile": "Profil actuel",
-  "References": "Références"
+  "References": "Références",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }
