@@ -103,5 +103,56 @@
   "Custom Theme": "Mukautettu teema",
   "Do you want to apply your changes before leaving?": "Haluatko tallentaa kaikki muutokset ennen poistumista?",
   "TaskCompleted": "Task Completed",
-  "UnexpectedError": "An unexpected error occurred"
+  "UnexpectedError": "An unexpected error occurred",
+  "{0} ago": "{0} ago",
+  "in {0}": "in {0}",
+  "Today at {0}": "Today at {0}",
+  "Yesterday at {0}": "Yesterday at {0}",
+  "Tomorrow at {0}": "Tomorrow at {0}",
+  "Last {0} at {1}": "Last {0} at {1}",
+  "Next {0} at {1}": "Next {0} at {1}",
+  "{0} month ago on {1}": {
+    "One": "{0} month ago on {1}",
+    "Plural": "{0} months ago on {1}"
+  },
+  "in {0} month on {1}": {
+    "One": "in {0} month on {1}",
+    "Plural": "in {0} months on {1}"
+  },
+  "{0} day ago": {
+    "One": "{0} day ago",
+    "Plural": "{0} days ago"
+  },
+  "in {0} day": {
+    "One": "in {0} day",
+    "Plural": "in {0} days"
+  },
+  "{0} year": {
+    "One": "{0} year",
+    "Plural": "{0} years"
+  },
+  "{0} month": {
+    "One": "{0} month",
+    "Plural": "{0} months"
+  },
+  "{0} day": {
+    "One": "{0} day",
+    "Plural": "{0} days"
+  },
+  "{0} hour": {
+    "One": "{0} hour",
+    "Plural": "{0} hours"
+  },
+  "{0} minute": {
+    "One": "{0} minute",
+    "Plural": "{0} minutes"
+  },
+  "{0} second": {
+    "One": "{0} second",
+    "Plural": "{0} seconds"
+  },
+  "{0}d": "{0}d",
+  "{0}h": "{0}h",
+  "{0}m": "{0}m",
+  "{0}s": "{0}s"
 }
