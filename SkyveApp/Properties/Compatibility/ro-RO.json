@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Dezabonare de la acest pachet",
   "UnsubscribeOther": "Dezabonare de la pachetele asociate",
   "Switch": "Comutați la pachetul legat",
-  "FlippedSwitch": "Comutați la acest pachet",
+  "FlippedSwitch": "Treceți la acest pachet",
   "Deprecated": "Dezaprobată",
   "Reupload": "Re-încărcați",
   "CausesIssues": "Cauze probleme",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Acestea sunt versiuni multiple ale aceluiași pachet.\r\n\r\nAr trebui să alegeți doar una dintre ele.",
   "Status_Succeeded": "'{0}' este succes de '{1}'.\r\n\r\nDeja folosești '{1}' așa că nu mai este nevoie de '{0}''.",
   "Status_Deprecated": "'{0}' este învechit, nu mai este susținut de autorul său.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Status_AutoDeprecated": "'{0}' nu a fost actualizat de mult timp, probabil nu mai este actualizat de autorul său.",
   "Status_Reupload": {
     "Zero": "'{0}' este o reîncărcare a unui pachet original.",
     "One": "Aceasta este o reîncărcare a '{1}'."
