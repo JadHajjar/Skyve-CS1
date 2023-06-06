@@ -106,52 +106,52 @@
   "UnexpectedError": "Une erreur inconnue s'est produite",
   "{0} ago": "{0} ago",
   "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "Today at {0}": "Aujourd'hui à {0}",
+  "Yesterday at {0}": "Hier à {0}",
+  "Tomorrow at {0}": "Demain à {0}",
+  "Last {0} at {1}": "Dernier {0} à {1}",
+  "Next {0} at {1}": "Suivant {0} à {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "Il y a {0} mois sur {1}",
+    "Plural": "Il y a {0} mois sur {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "dans {0} mois sur {1}",
+    "Plural": "dans {0} mois sur {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "il y a {0} jours",
+    "Plural": "il y a {0} jours"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "dans {0} jours",
+    "Plural": "dans {0} jours"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} ans",
+    "Plural": "{0} années"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} mois",
+    "Plural": "{0} mois"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} jour",
+    "Plural": "{0} jours"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} heure",
+    "Plural": "{0} heures"
   },
   "{0} minute": {
     "One": "{0} minute",
     "Plural": "{0} minutes"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} seconde",
+    "Plural": "{0} secondes"
   },
-  "{0}d": "{0}d",
+  "{0}d": "{0}j",
   "{0}h": "{0}h",
   "{0}m": "{0}m",
   "{0}s": "{0}s"
