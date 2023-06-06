@@ -357,7 +357,7 @@
                 "Changes": [
                     "Amélioration des performances de l'application. Chargement plus rapide et moins de blocages attendus.",
                     "Correction d'une interaction entre les mods similaires affichés dans le rapport de compatibilité lorsque vous n'en avez qu'un seul.",
-                    "Correction de mod détecté, à tort, dans le dossier des ressources local."
+                    "Correction de mod détecté, à tort, dans le dossier d'assets local."
                 ]
             }
         ]
@@ -391,7 +391,7 @@
             {
                 "Name": "Corrections",
                 "Changes": [
-                    "Correction du résumé de l'actif qui ne s'affichait pas dans le tableau de bord.",
+                    "Correction du résumé de l'asset qui ne s'affichait pas dans le tableau de bord.",
                     "Correction du Status obsolète."
                 ]
             }
@@ -420,28 +420,28 @@
                 "Name": "Le système d'abonnement a été retravaillé",
                 "Changes": [
                     "Vous pouvez désormais vous abonner à des paquets pendant que le jeu est ouvert.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "S'abonner à plusieurs éléments à la suite les mettra dans une liste en attente au lieu d'ouvrir le jeu à chaque fois.",
+                    "Ajout d'une boîte en bas à gauche de l'appli pour vous informer de toutes les tâches d'abonnement/désabonnement en attente.",
                     "Ajout d'une option avancée pour forcer le téléchargement ou la suppression de paquets dès que vous vous abonnez/désabonnez dans Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Les éléments récemment abonnés ne sont plus rechargés lorsque le jeu est ouvert.\nCela empêche le gel de votre jeu ainsi que le dysfonctionnement des mods."
                 ]
             },
             {
                 "Name": "Nouveau",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Ajout de \"Afficher le contenu de ce profil\" dans le menu contextuel des profils.",
                     "Ajout d'une option \"Forcer le téléchargement\" en faisant clique droit sur un paquet.",
-                    "Added more context to some popups",
+                    "Ajout de plus de contexte à certaines popups",
                     "Ajout de \"Télécharger tous les éléments affiché\" dans les actions des pages de liste."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
+                    "Correction de la mise à jour instantanée de la liste des profils.",
                     "Les profils de paquets montrent désormais leur nom Workshop.",
                     "Les paquets chargent correctement les informations Steam dès la première fois quand vous visionnez leur profil ou collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Le nom des mods locaux a été retourné au nom du dossier au lieu de celui du Workshop pour éviter les problèmes.",
                     "Amélioration des performances pour les personnes ayant beaucoup de mods."
                 ]
             }

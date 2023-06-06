@@ -296,18 +296,18 @@
     {
         "Version": "3.0.0",
         "Date": "2023-05-23",
-        "Tagline": "Vi presentiamo Skyve, il successore finale di Load Order Mod 1/2 e Compatibility Report.\nIn arrivo per C:S I e C:S II",
+        "Tagline": "Vi presentiamo Skyve, il successore definitivo di Load Order Mod 1/2 e Compatibility Report.\nIn arrivo per C:S I e C:S II",
         "ChangeGroups": [
             {
-                "Name": "Revisione del Compatibility Report",
+                "Name": "Revisione di Compatibility Report",
                 "Changes": [
-                    "Il Compatibility Report è ora integrato direttamente in Skyve.",
+                    "Compatibility Report è ora integrata direttamente in Skyve.",
                     "Le raccomandazioni e il testo informativo sono ora più chiari e facili da gestire.",
-                    "È stato aggiunto un pulsante Snooze per eliminare una determinata notifica di compatibilità.",
+                    "È stato aggiunto il pulsante Nascondi per eliminare una determinata notifica di compatibilità.",
                     "Gli elementi richiesti vengono automaticamente reindirizzati al successore più recente dei pacchetti.",
                     "I pacchetti locali vengono automaticamente abbinati alla loro controparte online, mostrando le informazioni di Steam e mostrando correttamente le informazioni sulla compatibilità.",
                     "È ora possibile richiedere una revisione di un pacchetto per segnalare la presenza di informazioni mancanti nei dati di compatibilità.",
-                    "La scheda Compatibility Report è ora disponibile."
+                    "La scheda Rapporto di Compatibilità è ora disponibile."
                 ]
             },
             {
@@ -320,13 +320,13 @@
                 ]
             },
             {
-                "Name": "Altre modifiche",
+                "Name": "Altri cambiamenti",
                 "Changes": [
-                    "Gli pseudo-mod ora includono marcature IMT, Render it! Preset, Font di Procedural Objects e mod di traduzione.",
+                    "Le pseudo-mod ora includono marcature IMT, profili di Render it!, caratteri di Procedural Objects e mod di traduzione.",
                     "Aggiunti i link alla pagina del pacchetto, oltre ad altre informazioni come l'uso e il tipo.",
                     "Aggiunti nuovi utilizzi del Profilo: Creazione di Mappe, Creazione di Scenari e Creazione di Temi.",
                     "Aggiunto un testo extra nell'elenco per mostrare quanti pacchetti sono nascosti a causa dell'uso del profilo.",
-                    "Il pulsante Azioni è stato migliorato per renderlo più visibile e di facile accesso.",
+                    "Migliorato il pulsante Azioni per renderlo più visibile e di facile accesso.",
                     "La nuova icona ora si illumina in base a ciò che sta accadendo: il blu indica che il gioco è in esecuzione, il rosso indica che non c'è connessione a Internet e il bagliore rapido indica che il gioco si sta avviando o chiudendo."
                 ]
             }
@@ -417,7 +417,7 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Processo di Sottoscrizione Relaborato",
+                "Name": "Rivisto il Processo di Sottoscrizione",
                 "Changes": [
                     "È ora possibile sottoscrivere i pacchetti mentre il gioco è aperto.",
                     "La sottoscrizione di più elementi consecutivi li metterà in un elenco in attesa, invece di aprire il gioco ogni volta.",
@@ -442,7 +442,7 @@
                     "Corretto il problema dei pacchetti profilo che non mostrano il nome del Workshop.",
                     "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
                     "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi.",
-                    "Migliorata la performance per chi ha molte mod."
+                    "Migliorate le prestazioni per chi ha molte mod."
                 ]
             }
         ]

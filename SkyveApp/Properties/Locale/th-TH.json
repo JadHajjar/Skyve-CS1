@@ -94,7 +94,7 @@
   "OpenLocalFolder": "เปิดโฟลเดอร์ภายในเครื่องที่มีแพ็กเกจนี้",
   "ViewOnSteam": "ดูแพ็กเกจนี้บนสตีม",
   "ReDownloadPackage": "ดาวน์โหลดแพ็กเกจนี้อีกครั้ง",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "ดาวน์โหลดแพกเกจนี้",
   "CopySteamId": "คัดลอกสตีมไอดี",
   "OpenAuthorPage": "เปิดหน้าเพจของผู้สร้างบนสตีม",
   "Sorting_Default": "เรียงตามค่าเริ่มต้น",
@@ -354,11 +354,11 @@
   "ViewPackageCR": "ดูข้อมูลความเข้ากันได้ของแพ็กเกจนี้",
   "FilterByThisEnabledStatus": "กรองจากสถานะ 'เปิดใช้งาน'",
   "FilterByThisIncludedStatus": "กรองจากสถานะ 'บรรจุอยู่ในเกม'",
-  "CleanupInfo": "การเรียกใช้การทำความสะอาดด่วน จะลบแพ็กเกจต่าง ๆ ที่คุณไม่ได้กดสมัครสมาชิกแล้ว ออกไปจากคอมพิวเตอร์ของคุณ แล้วบังคับให้เกิดการดาวน์โหลดแพ็กเกจที่ขาดหายไป",
+  "CleanupInfo": "เรียกใช้การทำความสะอาดด่วน เพื่อลบแพ็กเกจต่าง ๆ ที่คุณไม่ได้ยกเลิกการสมัครสมาชิกไปแล้ว ให้ออกไปจากคอมพิวเตอร์ของคุณ แล้วบังคับให้เกิดการดาวน์โหลดแพ็กเกจที่ขาดหายไป",
   "CleanupTitle": "ล้างแพ็กเกจเวิร์กชอป",
   "RunCleanup": "เริ่มทำความสะอาด",
   "CloseCitiesToClean": "คุณต้องปิด Cities: Skylines เพื่อเริ่มทำความสะอาด",
-  "CleanupRequiresGameToOpen": "การทำความสะอาดจำต้องเปิดเกมขึ้นมาให้มีการทำงานสักระยะหนึ่งก่อน หากคุณพบหน้าต่างตัวเปิดเกมให้คลิ๊ก Play เพื่อดำเนินการต่อ",
+  "CleanupRequiresGameToOpen": "การทำความสะอาดจำต้องเปิดเกมขึ้นมาให้มีการทำงานสักครู่หนึ่งก่อน หากคุณพบหน้าต่างตัวเปิดเกมให้คลิ๊ก Play เพื่อดำเนินการต่อ",
   "DisablePackageCleanup": "ปิดการใช้งานการล้างแพ็กเกจอัตโนมัติ",
   "DisablePackageCleanup_Tip": "เมื่อเปิดเกมให้หยุดการทำงานเครื่องมืออัตโนมัติ ในการตรวจสอบแพ็กเกจที่คุณไม่ได้สมัครสมาชิกแล้ว",
   "CustomLaunchArguments": "อาร์กิวเมนต์การเปิดเกมแบบกำหนดเอง",
@@ -521,5 +521,14 @@
   "PendingDeletions": {
     "One": "{0} item pending removal",
     "Plural": "{0} items pending removal"
-  }
+  },
+  "YouHavePackagesUser": {
+    "One": "You have {0} package made by {1}",
+    "Plural": "You have {0} packages made by {1}"
+  },
+  "RequestOption1": "Report an issue or add missing information",
+  "RequestOption2": "Add a missing status for the package",
+  "RequestOption3": "Add a missing interaction with another package",
+  "CurrentProfile": "โพร์ไฟล์ปัจจุบัน",
+  "References": "รายการอ้างอิง"
 }

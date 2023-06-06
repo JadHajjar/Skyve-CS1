@@ -521,5 +521,14 @@
   "PendingDeletions": {
     "One": "항목 {0}개 제거 대기 중",
     "Plural": "항목 {0}개 제거 대기 중"
-  }
+  },
+  "YouHavePackagesUser": {
+    "One": "{1} 가 만든 패키지 {0}개가 있습니다",
+    "Plural": "{1} 가 만든 패키지 {0}개가 있습니다"
+  },
+  "RequestOption1": "문제를 보고하거나 누락된 정보를 추가하기",
+  "RequestOption2": "누락된 패캐지의 상태를 추가하기",
+  "RequestOption3": "누락된 다른 패키지와의 상호 작용을 추가하기",
+  "CurrentProfile": "현재 프로필",
+  "References": "참조"
 }
