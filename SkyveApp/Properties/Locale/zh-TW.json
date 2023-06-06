@@ -530,5 +530,15 @@
   "RequestOption2": "為包裹補齊失漏資訊",
   "RequestOption3": "為包裹補齊與其他包裹的互動",
   "CurrentProfile": "當前設定檔",
-  "References": "資料依屬"
+  "References": "資料依屬",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }
