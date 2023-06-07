@@ -449,12 +449,12 @@
     },
     {
         "Version": "3.0.7.1",
-        "Date": "2023-06-05",
+        "Date": "05/06/2023",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
-                    "Fixed the crash on launch."
+                    "Correction d'un crash au lancement."
                 ]
             }
         ]
