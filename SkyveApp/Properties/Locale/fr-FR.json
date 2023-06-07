@@ -532,13 +532,13 @@
   "CurrentProfile": "Profil actuel",
   "References": "Références",
   "OpenLog": "Open Log File",
-  "Sort By": "Sort By",
-  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "Sort By": "Trier par",
+  "OpenCitiesAppData": "Ouvrir le dossier AppData de C:S",
   "FailedToFetchLogs": "Failed to fetch your logs",
   "DiscoverProfiles": "Discover Profiles",
-  "AllUsages": "All Usages",
-  "Invalid": "Invalid",
-  "UpdateProfile": "Update Profile",
+  "AllUsages": "Toutes utilisations",
+  "Invalid": "Invalide",
+  "UpdateProfile": "Mettre à jour le profil",
   "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
-  "DownloadProfile": "Download Profile"
+  "DownloadProfile": "Télécharger le profil"
 }
