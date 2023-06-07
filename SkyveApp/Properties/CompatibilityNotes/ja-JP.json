@@ -216,7 +216,7 @@
   "Freezes the game": "ゲームがフリーズする",
   "This mod has a number of bugs and stability issues, and is not recommended for new games. It is provided here as an attempt to help players with existing cities using Extended Managers Library/Prop Anarchy continue their saves without having to redo their work.": "このMODには多くのバグと安定性に問題があるため、新規ゲーム・新規ユーザーでの使用は推奨しません。\nExtended Managers Library/Prop Anarchyを使用している既存のユーザーに対して、セーブデータが継続使用できるように最低限の動作サポートが提供されています。",
   "Adds rotating lights only to supported vehicles, listed on workshop page.": "ワークショップページに掲載されている、対応する車両のみで回転灯の機能を追加します。",
-  "Double UUI Button and the Grabber not work. A solution is worked on.": "Double UUIボタンとGrabber機能が動作しません。。解決策の検討と改善中です。",
+  "Double UUI Button and the Grabber not work. A solution is worked on.": "UUIボタンが2重になる問題とGrabber機能が動作しません。解決策の検討と改善中です。",
   "This is only needed if you want to use the new generation mods Tree Control, Prop Control, Line Tool on a map/save that used before Extended Manager Library, Tree Anarchy, Prop Anarchy. For more details check the workshop page of this mod.": "Extended Manager Library・Tree Anarchy・Prop Anarchyを未使用のマップ・セーブで、新世代MODであるTree Control・Prop Control・Line Toolを使用したい場合は必要です。詳しくはMODのワークショップのページを確認して下さい。",
   "Do nothing right now. Should normally not be released publicly.": "現時点では何もしないで下さい。通常は公開すべきではありません。",
   "Lumina includes an executable to run LUT Editor that is located in the Workshop folder of Lumina.": "Luminaのワークショップのフォルダ内には、外部アプリとしてLUTエディタの実行ファイルが同梱されています。",
