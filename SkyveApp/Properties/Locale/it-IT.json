@@ -412,7 +412,7 @@
   "UnSnooze": "Mostra di nuovo",
   "Mod": {
     "One": "Mod",
-    "Plural": "Mods"
+    "Plural": "Mod"
   },
   "Asset": {
     "One": "Risorsa",
@@ -531,14 +531,14 @@
   "RequestOption3": "Aggiungere un'interazione mancante con un altro pacchetto",
   "CurrentProfile": "Profilo Corrente",
   "References": "Riferimenti",
-  "OpenLog": "Open Log File",
-  "Sort By": "Sort By",
-  "OpenCitiesAppData": "Open C:S's AppData folder",
-  "FailedToFetchLogs": "Failed to fetch your logs",
-  "DiscoverProfiles": "Discover Profiles",
-  "AllUsages": "All Usages",
-  "Invalid": "Invalid",
-  "UpdateProfile": "Update Profile",
-  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
-  "DownloadProfile": "Download Profile"
+  "OpenLog": "Apri file di log",
+  "Sort By": "Ordina per",
+  "OpenCitiesAppData": "Apri cartella AppData di C:S",
+  "FailedToFetchLogs": "Impossibile recuperare i log",
+  "DiscoverProfiles": "Scopri i Profili",
+  "AllUsages": "Tutti gli utilizzi",
+  "Invalid": "Non valido",
+  "UpdateProfile": "Aggiorna profilo",
+  "FailedToRetrieveProfiles": "Impossibile recuperare Scopri Profili",
+  "DownloadProfile": "Scarica profilo"
 }
