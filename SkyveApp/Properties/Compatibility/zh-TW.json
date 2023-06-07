@@ -148,7 +148,7 @@
     "Plural": "您應該取消訂閱下列外掛程式："
   },
   "Action_ExcludeThis": "您應該卸下 '{0}'。",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "卸下此插件",
   "Exclude": "卸載",
   "Unsubscribe": "取消訂閱",
   "Action_ExcludeOther": {
