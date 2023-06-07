@@ -452,9 +452,9 @@
         "Date": "2023-06-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixed the crash on launch."
+                    "修復啟動時會發生崩潰的問題。"
                 ]
             }
         ]
