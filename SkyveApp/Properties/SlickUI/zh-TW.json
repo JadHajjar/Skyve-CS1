@@ -104,11 +104,11 @@
   "Do you want to apply your changes before leaving?": "即將離開此頁面，要保存並應用更改嗎？",
   "TaskCompleted": "任務已完成",
   "UnexpectedError": "出現意外錯誤！",
-  "{0} ago": "{0} ago",
-  "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
+  "{0} ago": "{0} 之前",
+  "in {0}": "{0} 以内",
+  "Today at {0}": "今日 {0}",
+  "Yesterday at {0}": "昨日 {0}",
+  "Tomorrow at {0}": "明日 {0}",
   "Last {0} at {1}": "Last {0} at {1}",
   "Next {0} at {1}": "Next {0} at {1}",
   "{0} month ago on {1}": {
@@ -120,39 +120,39 @@
     "Plural": "in {0} months on {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} 日前",
+    "Plural": "{0} 日前"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "{0} 日以内",
+    "Plural": "{0} 日以内"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} 年",
+    "Plural": "{0} 年"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} 個月",
+    "Plural": "{0} 個月"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} 日",
+    "Plural": "{0} 日"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} 小時",
+    "Plural": "{0} 小時"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} 分",
+    "Plural": "{0} 分"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} 秒",
+    "Plural": "{0} 秒"
   },
-  "{0}d": "{0}d",
-  "{0}h": "{0}h",
-  "{0}m": "{0}m",
-  "{0}s": "{0}s"
+  "{0}d": "{0}日",
+  "{0}h": "{0}時",
+  "{0}m": "{0}分",
+  "{0}s": "{0}秒"
 }
