@@ -92,15 +92,18 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			Loading = false;
 		}
 
-		if(!ReadOnly)
-		SetItems(ProfileManager.Profiles.Skip(1));
+		if (!ReadOnly)
+		{
+			SetItems(ProfileManager.Profiles.Skip(1));
+		}
 	}
 
 	protected override void OnViewChanged()
 	{
 		if (GridView)
 		{
-			Padding = UI.Scale(new Padding(5), UI.FontScale);
+			Padding = UI.Scale(new Padding(15, 15, 3, 3), UI.UIScale);
+			GridPadding = UI.Scale(new Padding(4), UI.UIScale);
 		}
 		else
 		{
@@ -129,7 +132,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		};
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<IProfile, Rectangles> item, MouseEventArgs e)
+	protected override async void OnItemMouseClick(DrawableItem<IProfile, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -165,7 +168,14 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 		else if (item.Rectangles.Load.Contains(e.Location) && !ReadOnly)
 		{
-			LoadProfile?.Invoke((item.Item as Profile)!);
+			if (ReadOnly)
+			{
+				await ProfileManager.DownloadProfile(item.Item);
+			}
+			else
+			{
+				LoadProfile?.Invoke((item.Item as Profile)!);
+			}
 		}
 		else if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
 		{
@@ -216,8 +226,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.ViewThisProfilesPackages, "I_ViewFile", action: () => { Program.MainForm.PushPanel(new PC_GenericPackageList(item.Packages) { Text = item.Name }); }),
-			  new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; ProfileManager.Save(item as Profile); })
+			  new (Locale.DownloadProfile, "I_Import", !local, action: async () => await ProfileManager.DownloadProfile(item))
+			, new (Locale.ViewThisProfilesPackages, "I_ViewFile", action: () => { Program.MainForm.PushPanel(new PC_GenericPackageList(item.Packages) { Text = item.Name }); })
+			, new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; ProfileManager.Save(item as Profile); })
 			, new (Locale.ChangeProfileColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
 			, new (Locale.CreateShortcutProfile, "I_Link", local && LocationManager.Platform is Platform.Windows, action: () => ProfileManager.CreateShortcut((item as Profile)!))
 			, new (Locale.OpenProfileFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(ProfileManager.GetFileName((item as Profile)!)))
@@ -268,19 +279,19 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		{
 			using var brush = new SolidBrush(e.Item.Color ?? FormDesign.Design.AccentColor);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-Padding.Left, -Padding.Top, -Padding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-GridPadding.Left, -GridPadding.Top, -GridPadding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
 
 			textColor = brush.Color.GetTextColor();
 		}
 		else
 		{
-			e.Graphics.DrawRoundedImage(e.Item.Banner, e.Rects.Thumbnail.Pad(-Padding.Left, -Padding.Top, -Padding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
+			e.Graphics.DrawRoundedImage(e.Item.Banner, e.Rects.Thumbnail.Pad(-GridPadding.Left, -GridPadding.Top, -GridPadding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
 
 			using var brush = new SolidBrush(Color.FromArgb(50, e.Item.Color ?? Color.Black));
-			using var gradientBrush = new LinearGradientBrush(e.Rects.Thumbnail.Pad(-Padding.Left, e.Rects.Thumbnail.Height / 3, -Padding.Right, 0), Color.FromArgb(200, e.Item.Color ?? Color.Black), Color.FromArgb(0, e.Item.Color ?? Color.Black), -90);
+			using var gradientBrush = new LinearGradientBrush(e.Rects.Thumbnail.Pad(-GridPadding.Left, e.Rects.Thumbnail.Height / 3, -GridPadding.Right, 0), Color.FromArgb(200, e.Item.Color ?? Color.Black), Color.FromArgb(0, e.Item.Color ?? Color.Black), -90);
 
-			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-Padding.Left, -Padding.Top, -Padding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
-			e.Graphics.FillRectangle(gradientBrush, e.Rects.Thumbnail.Pad(-Padding.Left, e.Rects.Thumbnail.Height / 3, -Padding.Right, 0));
+			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-GridPadding.Left, -GridPadding.Top, -GridPadding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
+			e.Graphics.FillRectangle(gradientBrush, e.Rects.Thumbnail.Pad(-GridPadding.Left, e.Rects.Thumbnail.Height / 3, -GridPadding.Right, 0));
 
 			textColor = brush.Color.GetTextColor();
 		}
@@ -312,8 +323,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		var labelRects = e.Rects.Content;
 
-		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + Padding.Top;
-		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + Padding.Top;
+		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
 
 		if (e.Item.Author != 0)
 		{
@@ -335,7 +346,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			e.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
 		}
 
-		using var importIcon = IconManager.GetIcon("I_Import");
+		var loadIcon = new DynamicIcon(e.Rects.Downloading ? "I_Wait" : "I_Import");
+		using var importIcon = ReadOnly ? loadIcon.Default : loadIcon.Get(e.Rects.Folder.Height * 3 / 4);
 		var loadSize = SlickButton.GetSize(e.Graphics, importIcon, ReadOnly ? Locale.DownloadProfile : Locale.LoadProfile, Font, null);
 
 		if (!ReadOnly)
@@ -352,11 +364,11 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			return;
 		}
 
-		using var folderIcon = IconManager.GetSmallIcon("I_Folder");
+		using var folderIcon = IconManager.GetIcon("I_Folder", e.Rects.Folder.Height * 3 / 4);
 
 		if (e.Item.Banner is not null)
 		{
-			e.Rects.Folder.X = e.Rects.Load.X - Padding.Left - e.Rects.Folder.Width;
+			e.Rects.Folder.X = e.Rects.Load.X - GridPadding.Left - e.Rects.Folder.Width;
 
 			if (e.Rects.EditThumbnail.Contains(CursorLocation))
 			{
@@ -369,7 +381,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 		else
 		{
-			using var editIcon = IconManager.GetIcon("I_EditImage");
+			using var editIcon = IconManager.GetIcon("I_EditImage", e.Rects.Folder.Height * 3 / 4);
 			SlickButton.DrawButton(e, e.Rects.EditThumbnail, string.Empty, Font, editIcon, null, e.Rects.EditThumbnail.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 		}
 
@@ -377,11 +389,11 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		if (e.Item.Banner is null)
 		{
-			e.Rects.Merge.X = e.Rects.Load.X - e.Rects.Merge.Width - Padding.Left;
-			e.Rects.Exclude.X = e.Rects.Merge.X - e.Rects.Exclude.Width - Padding.Left;
+			e.Rects.Merge.X = e.Rects.Load.X - e.Rects.Merge.Width - GridPadding.Left;
+			e.Rects.Exclude.X = e.Rects.Merge.X - e.Rects.Exclude.Width - GridPadding.Left;
 
-			using var i_Merge = IconManager.GetIcon("I_Merge");
-			using var i_Exclude = IconManager.GetIcon("I_Exclude");
+			using var i_Merge = IconManager.GetIcon("I_Merge", e.Rects.Folder.Height * 3 / 4);
+			using var i_Exclude = IconManager.GetIcon("I_Exclude", e.Rects.Folder.Height * 3 / 4);
 			SlickButton.DrawButton(e, e.Rects.Merge, string.Empty, Font, i_Merge, null, e.Rects.Merge.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 			SlickButton.DrawButton(e, e.Rects.Exclude, string.Empty, Font, i_Exclude, null, e.Rects.Exclude.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 		}
@@ -480,27 +492,27 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			var thumbAvailable = item.Banner is not null;
 			var size = UI.Scale(new Size(32, 32), UI.FontScale);
 
-			rects.Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, thumbAvailable ? (((rectangle.Width + Padding.Horizontal) * 2 / 7) - Padding.Top) : (rectangle.Height * 1 / 3));
-			rects.Content = new Rectangle(rectangle.X, rectangle.Y + rects.Thumbnail.Height + Padding.Top, rectangle.Width, rectangle.Height - rects.Thumbnail.Height - Padding.Top);
+			rects.Thumbnail = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, thumbAvailable ? (((rectangle.Width + GridPadding.Horizontal) * 2 / 7) - GridPadding.Top) : (rectangle.Height * 1 / 3));
+			rects.Content = new Rectangle(rectangle.X, rectangle.Y + rects.Thumbnail.Height + GridPadding.Top, rectangle.Width, rectangle.Height - rects.Thumbnail.Height - GridPadding.Top);
 
-			rects.Icon = rects.Thumbnail.Pad(Padding).Pad(0, 0, 0, thumbAvailable ? 0 : Padding.Bottom).Align(size, thumbAvailable ? ContentAlignment.BottomLeft : ContentAlignment.MiddleLeft);
+			rects.Icon = rects.Thumbnail.Pad(GridPadding).Pad(0, 0, 0, thumbAvailable ? 0 : GridPadding.Bottom).Align(size, thumbAvailable ? ContentAlignment.BottomLeft : ContentAlignment.MiddleLeft);
 
-			rects.Favorite = rects.Thumbnail.Pad(Padding).Pad(0, 0, 0, thumbAvailable ? 0 : Padding.Bottom).Align(size, thumbAvailable ? ContentAlignment.BottomRight : ContentAlignment.MiddleRight);
+			rects.Favorite = rects.Thumbnail.Pad(GridPadding).Pad(0, 0, 0, thumbAvailable ? 0 : GridPadding.Bottom).Align(size, thumbAvailable ? ContentAlignment.BottomRight : ContentAlignment.MiddleRight);
 
-			rects.Text = new Rectangle(rects.Icon.Right + Padding.Left, rects.Icon.Y, rectangle.Width - ((Padding.Horizontal - rects.Icon.Right) * 2), rects.Icon.Height);
+			rects.Text = new Rectangle(rects.Icon.Right + GridPadding.Left, rects.Icon.Y, rectangle.Width - ((GridPadding.Horizontal + rects.Icon.Width) * 2), rects.Icon.Height);
 
 			if (thumbAvailable)
 			{
 				rects.Folder = rectangle.Align(UI.Scale(new Size(24, 24), UI.FontScale), ContentAlignment.BottomLeft);
 
-				rects.EditThumbnail = rects.Thumbnail.Pad(Padding).Align(size, ContentAlignment.TopRight);
+				rects.EditThumbnail = rects.Thumbnail.Pad(GridPadding).Align(size, ContentAlignment.TopRight);
 			}
 			else
 			{
 				rects.EditThumbnail = rectangle.Align(UI.Scale(new Size(24, 24), UI.FontScale), ContentAlignment.BottomLeft);
 
 				rects.Folder = rects.EditThumbnail;
-				rects.Folder.X += rects.Folder.Width + Padding.Left;
+				rects.Folder.X += rects.Folder.Width + GridPadding.Left;
 
 				rects.Merge = rects.Exclude = rects.Folder;
 			}
@@ -537,6 +549,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		{
 			Item = item;
 		}
+
+		internal bool Downloading;
 
 		internal Rectangle Thumbnail;
 		internal Rectangle Favorite;

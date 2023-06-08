@@ -45,7 +45,7 @@ public class Package : IPackage
 	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
 	public string? Name => WorkshopInfo?.Name ?? Path.GetFileName(Folder);
-	public bool IsMod => Mod is not null;// || (WorkshopInfo?.IsMod ?? false);
+	public bool IsMod => Mod is not null;
 	public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? Enumerable.Empty<TagItem>();
 	public Bitmap? IconImage => WorkshopInfo?.IconImage;
 	public Bitmap? AuthorIconImage => WorkshopInfo?.AuthorIconImage;
@@ -83,7 +83,7 @@ public class Package : IPackage
 			}
 		}
 
-		if (Assets != null)
+		if (Assets is not null)
 		{
 			foreach (var item in Assets)
 			{

@@ -1153,4 +1153,30 @@ public static class ProfileManager
 			Contents = item.Assets.Concat(item.Mods).Select(x => x.AsProfileContent()).ToArray()
 		});
 	}
+
+	internal static async Task<bool> DownloadProfile(IProfile item)
+	{
+		try
+		{
+			var profile = await SkyveApiUtil.GetUserProfileContents(item.ProfileId);
+
+			if (profile == null)
+			{
+				return false;
+			}
+
+			var generatedProfile = item is Profile localProfile ? localProfile : profile.CloneTo<IProfile, Profile>();
+
+			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Profile.Asset(x));
+			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Profile.Mod(x));
+
+			return Save(generatedProfile);
+		}
+		catch (Exception ex)
+		{
+			Log.Exception(ex, "Failed to download profile");
+
+			return false;
+		}
+	}
 }
