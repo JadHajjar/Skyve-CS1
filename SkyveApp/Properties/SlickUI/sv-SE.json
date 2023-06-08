@@ -104,55 +104,55 @@
   "Do you want to apply your changes before leaving?": "Vill du tillämpa dina ändringar innan du lämnar?",
   "TaskCompleted": "Uppgift slutförd",
   "UnexpectedError": "Ett oväntat fel har uppstått",
-  "{0} ago": "{0} ago",
-  "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "{0} ago": "{0} sedan",
+  "in {0}": "om {0}",
+  "Today at {0}": "Idag kl. {0}",
+  "Yesterday at {0}": "Igår vid {0}",
+  "Tomorrow at {0}": "Imorgon kl. {0}",
+  "Last {0} at {1}": "Senaste {0} kl. {1}",
+  "Next {0} at {1}": "Nästa {0} kl. {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "{0} månad sedan den {1}",
+    "Plural": "{0} månader sedan på {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "om {0} månad {1}",
+    "Plural": "om {0} månader {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} dag sedan",
+    "Plural": "för {0} dagar sedan"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "om {0} dag",
+    "Plural": "om {0} dagar"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} år",
+    "Plural": "{0} år"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} månad",
+    "Plural": "{0} månader"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} dag",
+    "Plural": "{0} dagar"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} timme",
+    "Plural": "{0} timmar"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} minut",
+    "Plural": "{0} minuter"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} sekund",
+    "Plural": "{0} sekunder"
   },
   "{0}d": "{0}d",
-  "{0}h": "{0}h",
+  "{0}h": "{0}t",
   "{0}m": "{0}m",
   "{0}s": "{0}s"
 }
