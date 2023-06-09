@@ -503,20 +503,20 @@
   "ApplyDownloads": "Kényszerítsd a Steamet az összes függőben lévő csomag letöltésére",
   "SubsPendingInfo": "Itt vannak csoportosítva azok a csomagok, amelyekre felíratkozottál.\nAmint megnyitod a játékot, ezekre az elemekre felíratkozól a Steamen.",
   "DownloadsPendingInfo": "Itt vannak csoportosítva azok a csomagok, amelyekre feliratkoztál, és amelyeket még nem töltött le.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Az előfizetés/leiratkozás után azonnal indítsa el a csomagok letöltését vagy eltávolítását",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "A csomagok letöltését vagy eltávolítását kényszeríti ahelyett, hogy megvárná, amíg ténylegesen előfizetnek vagy leiratkoznak.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "Ebben a folyamatban előfizet a(z) {0} csomagra.",
+    "Plural": "Ebben a folyamatban {0} csomagra fog előfizetni."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "Ezzel a folyamattal leiratkozik a(z) {0} csomagról.",
+    "Plural": "Ebben a folyamatban leiratkozik {0} csomagról."
   },
-  "ViewThisProfilesPackages": "View this profile's contents",
+  "ViewThisProfilesPackages": "A profil tartalmának megtekintése",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} elem letöltésre vár",
+    "Plural": "{0} elem letöltésre vár"
   },
   "PendingDeletions": {
     "One": "{0} item pending removal",
