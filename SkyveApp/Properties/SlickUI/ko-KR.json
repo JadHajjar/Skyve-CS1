@@ -104,11 +104,11 @@
   "Do you want to apply your changes before leaving?": "종료하기 전에 변경 사항을 저장하시겠습니까?",
   "TaskCompleted": "작업 완료",
   "UnexpectedError": "예상치 못한 오류가 발생했습니다",
-  "{0} ago": "{0} ago",
+  "{0} ago": "{0} 전",
   "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
+  "Today at {0}": "오늘 {0}",
+  "Yesterday at {0}": "어제 {0}",
+  "Tomorrow at {0}": "내일 {0}",
   "Last {0} at {1}": "Last {0} at {1}",
   "Next {0} at {1}": "Next {0} at {1}",
   "{0} month ago on {1}": {
@@ -136,23 +136,23 @@
     "Plural": "{0} months"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0}일",
+    "Plural": "{0}일"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0}시간",
+    "Plural": "{0}시간"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0}분",
+    "Plural": "{0}분"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0}초",
+    "Plural": "{0}초"
   },
-  "{0}d": "{0}d",
-  "{0}h": "{0}h",
-  "{0}m": "{0}m",
-  "{0}s": "{0}s"
+  "{0}d": "{0}일",
+  "{0}h": "{0}시",
+  "{0}m": "{0}분",
+  "{0}s": "{0}초"
 }
