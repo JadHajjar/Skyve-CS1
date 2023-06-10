@@ -2,12 +2,12 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Welcome to the change-log era",
+        "Tagline": "Üdvözöljük a változásnaplók között",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Új",
                 "Changes": [
-                    "Added an 'Unsubscribe All' button in content pages' actions.",
+                    "A tartalmi oldalak műveleteihez hozzáadtunk egy „Leiratkozás minden” gombot.",
                     "Added a Utility section to subscribe to missing items in a BOB config.",
                     "Added an option to have Filters & Action sections open by default.",
                     "Added change-log pages, you'll see it on new versions or using its button in the Help sections."
