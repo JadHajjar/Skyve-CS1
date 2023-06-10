@@ -452,9 +452,9 @@
         "Date": "2023-06-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Fixed the crash on launch."
+                    "Absturz beim Start behoben."
                 ]
             }
         ]
