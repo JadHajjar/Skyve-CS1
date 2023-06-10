@@ -241,7 +241,7 @@
   "LOTWillRestart": "Skyve 进行更新时，程序会暂时关闭，更新完成后将自动重启。",
   "UpdatingLot": "Skyve 正在进行更新，请稍候...",
   "SubscribingRequiresGameToOpenTitle": "进行订阅操作",
-  "SubscribingRequiresGameToOpen": "订阅或取消订阅插件时， LOT2 会启动游戏并在片刻后关闭游戏（请确保已打开加速器 / VPN）。如果你看到 Steam 游戏启动界面，请点击“开始游戏”。",
+  "SubscribingRequiresGameToOpen": "订阅或取消订阅插件时，游戏将启动，并在片刻后退出（请确保已打开加速器/VPN）。\n如果看到 Steam 游戏启动界面，请点击\"开始游戏\"。",
   "HelpSupport": "帮助与支持",
   "DisableFpsBoosterDebug": "您正在使用 Debug Mono，是否要禁用 FPS Booster 模组以获取更好的日志？",
   "LogZipCopy_Tip": "创建一个压缩文件夹（其中包含帮助您解决问题所需的所有日志文件），您可以将其直接粘贴到 QQ 群或者 Discord 频道的对话框中发送。",
@@ -345,7 +345,7 @@
   "Donate": "赞助",
   "CopyAllIds": "复制所有显示的项目的 Steam 创意工坊 ID",
   "DeleteAll": "删除所有显示的项目",
-  "FlipItemCopyFilterAction": "无需按住 Ctrl 键，左键点击标签可直接将其添加到筛选标签",
+  "FlipItemCopyFilterAction": "无需按住 Ctrl 键，点击标签后直接将其添加到筛选标签",
   "FlipItemCopyFilterAction_Tip": "切换筛选标签的方式为：鼠标单击为选择筛选标签，按住 Ctrl 键 + 鼠标单击为按照此标签进行筛选。",
   "ControlClickTo": "按住 Ctrl 键 + 鼠标单击，以{0}",
   "FilterByThisAuthor": "按照此作者进行筛选",
@@ -515,7 +515,7 @@
   },
   "ViewThisProfilesPackages": "查看此配置文件的内容",
   "PendingDownloads": {
-    "One": "当前有 {0} 个等待删除的项目",
+    "One": "当前有 {0} 个等待下载的项目",
     "Plural": "当前有 {0} 个等待下载的项目"
   },
   "PendingDeletions": {
@@ -531,7 +531,7 @@
   "RequestOption3": "补充此插件与另一个插件的交互方式",
   "CurrentProfile": "当前配置文件",
   "References": "引用",
-  "OpenLog": "打开日志文件",
+  "OpenLog": "打开游戏的日志文件",
   "Sort By": "排序方式",
   "OpenCitiesAppData": "打开 Cities:Skylines 的 AppData 文件夹",
   "FailedToFetchLogs": "获取日志失败",
