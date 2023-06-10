@@ -106,53 +106,53 @@
   "UnexpectedError": "出现意外错误！",
   "{0} ago": "{0} 之前",
   "in {0}": "{0} 以内",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "Today at {0}": "今天 {0}",
+  "Yesterday at {0}": "昨天 {0}",
+  "Tomorrow at {0}": "明天 {0}",
+  "Last {0} at {1}": "上个 {0} {1}",
+  "Next {0} at {1}": "下个 {0} {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "{0} 个月前，于 {1}",
+    "Plural": "{0} 个月前，于 {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "在 {0} 个月内，于 {1}",
+    "Plural": "在 {0} 个月内，于 {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} 天前",
+    "Plural": "{0} 天前"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "在 {0} 天内",
+    "Plural": "在 {0} 天内"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} 年",
+    "Plural": "{0} 年"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} 个月",
+    "Plural": "{0} 个月"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} 天",
+    "Plural": "{0} 天"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} 小时",
+    "Plural": "{0} 小时"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} 分钟",
+    "Plural": "{0} 分钟"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} 秒",
+    "Plural": "{0} 秒"
   },
-  "{0}d": "{0}d",
-  "{0}h": "{0}h",
-  "{0}m": "{0}m",
-  "{0}s": "{0}s"
+  "{0}d": "{0} 天",
+  "{0}h": "{0} 小时",
+  "{0}m": "{0} 分钟",
+  "{0}s": "{0} 秒"
 }
