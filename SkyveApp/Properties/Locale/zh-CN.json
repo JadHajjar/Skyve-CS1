@@ -345,7 +345,7 @@
   "Donate": "赞助",
   "CopyAllIds": "复制所有显示的项目的 Steam 创意工坊 ID",
   "DeleteAll": "删除所有显示的项目",
-  "FlipItemCopyFilterAction": "把按照标签进行快速筛选的方式切换为：按住 Ctrl 键 + 鼠标单击标签",
+  "FlipItemCopyFilterAction": "无需按住 Ctrl 键，左键点击标签可直接将其添加到筛选标签",
   "FlipItemCopyFilterAction_Tip": "切换筛选标签的方式为：鼠标单击为选择筛选标签，按住 Ctrl 键 + 鼠标单击为按照此标签进行筛选。",
   "ControlClickTo": "按住 Ctrl 键 + 鼠标单击，以{0}",
   "FilterByThisAuthor": "按照此作者进行筛选",
