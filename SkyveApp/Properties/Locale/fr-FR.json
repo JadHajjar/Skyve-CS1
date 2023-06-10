@@ -531,14 +531,14 @@
   "RequestOption3": "Ajouter une interaction manquante avec un autre paquet",
   "CurrentProfile": "Profil actuel",
   "References": "Références",
-  "OpenLog": "Open Log File",
+  "OpenLog": "Ouvrir le fichier Log",
   "Sort By": "Trier par",
   "OpenCitiesAppData": "Ouvrir le dossier AppData de C:S",
   "FailedToFetchLogs": "Failed to fetch your logs",
-  "DiscoverProfiles": "Discover Profiles",
+  "DiscoverProfiles": "Découvrir des profils",
   "AllUsages": "Toutes utilisations",
   "Invalid": "Invalide",
   "UpdateProfile": "Mettre à jour le profil",
-  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "FailedToRetrieveProfiles": "Impossible d'accéder à la découverte des profils",
   "DownloadProfile": "Télécharger le profil"
 }
