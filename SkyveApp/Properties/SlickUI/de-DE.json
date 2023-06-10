@@ -109,8 +109,8 @@
   "Today at {0}": "Heute um {0}",
   "Yesterday at {0}": "Gestern um {0}",
   "Tomorrow at {0}": "Morgen um {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "Last {0} at {1}": "Zuletzt {0} am {1}",
+  "Next {0} at {1}": "Als Nächstes {0} am {1}",
   "{0} month ago on {1}": {
     "One": "vor {0} Monat am {1}",
     "Plural": "vor {0} Monaten am {1}"
