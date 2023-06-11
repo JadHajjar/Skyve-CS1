@@ -347,7 +347,7 @@
   "Some features of TM:PE work on reversible tram tracks, but not all.": "TM:PE 的部分功能（并不是全部功能）可以对双向电车轨道使用。",
   "Worker usage is the number of workers assigned to the building, not the number of workers in the current shift from Real Time.": "工人使用情况是指分配给建筑的工人数量，而不是 Real Time 的当前班次的工人数量。",
   "The vehicle limit will be increased correctly, but Watch It incorrectly shows the old vehicle limit.": "载具上限能够正常地提高，但 Watch It 会错误地显示原版游戏的车辆上限。",
-  "Both mods replace the 'vanilla matchmaker', making them incompatible.": "两个模组都对“原版匹配器”进行了替换，因此它们相互之间不兼容。",
+  "Both mods replace the 'vanilla matchmaker', making them incompatible.": "这两个模组都会修改原版游戏的 'matchmaker'，因此它们互不兼容。",
   "When doing automatic replacement, TM:PE settings will be lost on replaced and connected network segments, and lane arrows and lane connectors might be messed up on the entire map.": "进行自动替换时，被替换和所相连的道路段落的 TM:PE 的设置将会丢失，地图上的道路箭头和车道连接可能会变得混乱。",
   "CSUR is incompatible with the advanced zoning options in Network Extensions.": "CSUR 与 Network Extensions 的高级分区选项不兼容。",
   "Flickering and disappearing buildings and assets are reported.": "据报告，此插件会导致建筑物和资产闪烁或消失。",
