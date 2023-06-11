@@ -494,46 +494,46 @@
     "Plural": "{0} предметів очікує на підписку"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} предметів очікує на відписку",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} предмет очікує на відписку",
+    "Plural": "{0} предметів очікує на відписку"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "CancelDownloads": "Cancel all pending downloads",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "ApplyDownloads": "Force Steam to download all pending packages",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "Скасувати всі очікуючі підписки",
+  "CancelDownloads": "Скасувати всі очікуючі завантаження",
+  "ApplySubs": "Запускає гру на мить, щоб застосувати очікуючі підписки",
+  "ApplyDownloads": "Змусити Steam завантажити всі очікуючі пакунки",
+  "SubsPendingInfo": "Пакунки, на які ви підписалися тут.\nПісля відкриття гри, ці елементи будуть підписані на Steam.",
+  "DownloadsPendingInfo": "Пакунки, на які ви підписалися, і ще не були завантажені ще згруповані тут.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Почати завантаження або видалення пакетів відразу після підписки/відписки",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Починає завантаження чи видалення пакетів замість того, щоб чекати, поки вони не були підписані чи скасовані.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "В цьому процесі ви будете підписані на {0} пакунок.",
+    "Plural": "В цьому процесі ви будете підписані на {0} пакунків."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "В цьому процесі ви будете відписані від {0} пакунку.",
+    "Plural": "В цьому процесі ви будете відписані від {0} пакунків."
   },
   "ViewThisProfilesPackages": "Переглянути вміст цього профілю",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} елемент, що очікує завантаження",
+    "Plural": "{0} елементів, що очікують завантаження"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} елемент, що очікує видалення",
+    "Plural": "{0} елементів, що очікують видалення"
   },
   "YouHavePackagesUser": {
     "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "Plural": "У вас {0} пакетів зроблених {1}"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
-  "RequestOption3": "Add a missing interaction with another package",
+  "RequestOption1": "Повідомити про проблему або додати відсутню інформацію",
+  "RequestOption2": "Додати відсутній статус пакунка",
+  "RequestOption3": "Додайте відсутню взаємодію з іншим пакунком",
   "CurrentProfile": "Поточний профіль",
-  "References": "References",
-  "OpenLog": "Open Log File",
-  "Sort By": "Sort By",
-  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "References": "Посилання",
+  "OpenLog": "Відкрити лог файл",
+  "Sort By": "Сортувати за",
+  "OpenCitiesAppData": "Відкрити теку AppData",
   "FailedToFetchLogs": "Failed to fetch your logs",
   "DiscoverProfiles": "Discover Profiles",
   "AllUsages": "All Usages",
