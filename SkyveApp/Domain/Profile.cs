@@ -22,7 +22,7 @@ public class Profile : IProfile
 	private byte[]? _bannerBytes;
 	public static readonly Profile TemporaryProfile = new(Locale.TemporaryProfile) { Temporary = true, AutoSave = false };
 
-	[CloneIgnore] public string? Name { get; set; }
+	[CloneIgnore] public string Name { get; set; }
 	[CloneIgnore] public bool Temporary { get; set; }
 	[JsonIgnore] public DateTime LastEditDate { get; set; }
 	[JsonIgnore] public DateTime DateCreated { get; set; }
@@ -38,6 +38,7 @@ public class Profile : IProfile
 
 	public Profile()
 	{
+		Name = string.Empty;
 		LaunchSettings = new();
 		LsmSettings = new();
 		Assets = new();
@@ -71,9 +72,10 @@ public class Profile : IProfile
 	public DateTime LastUsed { get; set; }
 	public PackageUsage Usage { get; set; }
 	public ulong Author { get; set; }
-	public int ProfileId { get; }
+	public int ProfileId { get; set; }
 	public bool UnsavedChanges { get; set; }
 	public byte[]? BannerBytes { get => _bannerBytes; set { _bannerBytes = value; _banner?.Dispose(); _banner = null; } }
+	public bool Public { get; set; }
 
 	public bool ForAssetEditor { set { if (value) { Usage = PackageUsage.AssetCreation; } } }
 	public bool ForGameplay { set { if (value) { Usage = PackageUsage.CityBuilding; } } }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace SkyveApp.Utilities;
 internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 {
-	private const string STEAM_USER_CACHE_FILE = "SteamUsersCache.json";
+	internal const string STEAM_USER_CACHE_FILE = "SteamUsersCache.json";
 
 	public SteamUserProcessor() : base(200, 5000, GetCachedInfo())
 	{

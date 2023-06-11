@@ -88,6 +88,11 @@ internal class SkyveApiUtil
 		return await Get<UserProfile>("/GetUserProfileContents", (nameof(profileId), profileId));
 	}
 
+	internal static async Task<UserProfile?> GetUserProfileByLink(string link)
+	{
+		return await Get<UserProfile>("/GetUserProfileByLink", (nameof(link), link));
+	}
+
 	internal static async Task<ApiResponse> DeleteUserProfile(int profileId)
 	{
 		return await Delete<ApiResponse>("/DeleteUserProfile", (nameof(profileId), profileId));
@@ -98,13 +103,13 @@ internal class SkyveApiUtil
 		return await Post<UserProfile, ApiResponse>("/SaveUserProfile", profile);
 	}
 
-	internal static async Task<ApiResponse> UpdateUserProfile(UserProfile profile)
-	{
-		return await Post<UserProfile, ApiResponse>("/UpdateUserProfile", profile);
-	}
-
 	internal static async Task<UserProfile[]?> GetPublicProfiles()
 	{
 		return await Get<UserProfile[]>("/GetPublicProfiles");
+	}
+
+	internal static async Task<ApiResponse> SetProfileVisibility(int profileId, bool @public)
+	{
+		return await Post<bool, ApiResponse>("/SetProfileVisibility", @public, (nameof(profileId), profileId));
 	}
 }

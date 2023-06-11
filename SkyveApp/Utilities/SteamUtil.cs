@@ -23,6 +23,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SkyveApp.Utilities;
@@ -462,5 +463,23 @@ public static class SteamUtil
 
 			DLCsLoaded?.Invoke();
 		}
+	}
+
+	internal static void ClearCache()
+	{
+		_workshopItemProcessor.Clear();
+		_steamUserProcessor.Clear();
+
+		try
+		{ ExtensionClass.DeleteFile(ISave.GetPath(DLC_CACHE_FILE)); }
+		catch { }
+
+		try
+		{ ExtensionClass.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE)); }
+		catch { }
+
+		try
+		{ ExtensionClass.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE)); }
+		catch { }
 	}
 }

@@ -240,4 +240,24 @@ public static class ImageManager
 		}
 		catch { }
 	}
+
+	internal static void ClearCache()
+	{
+		lock (_lockObjects)
+		{
+			foreach (var item in _cache.Values)
+				item.image?.Dispose();
+
+			_cache.Clear();
+
+			foreach (var item in Directory.EnumerateFiles( LocationManager.Combine(ISave.DocsFolder, "Thumbs")))
+			{
+				try
+				{
+					ExtensionClass.DeleteFile(item);
+				}
+				catch { }
+			}
+		}
+	}
 }

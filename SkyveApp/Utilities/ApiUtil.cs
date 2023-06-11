@@ -71,7 +71,7 @@ internal static class ApiUtil
 			httpClient.DefaultRequestHeaders.Add(item.Item1, item.Item2);
 		}
 
-		var httpResponse = await httpClient.GetAsync(url);
+		var httpResponse = await httpClient.SendAsync(new HttpRequestMessage(new HttpMethod(method), new Uri(url)));
 
 		if (httpResponse.IsSuccessStatusCode)
 		{

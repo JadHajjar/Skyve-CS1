@@ -44,9 +44,8 @@ public partial class PC_UserPage : PanelContent
 			P_Info.SetUser(User, this);
 		}
 
-		L_Profiles = new ()
+		L_Profiles = new (true)
 		{
-			ReadOnly = true,
 			GridView = true,
 		};
 
@@ -54,6 +53,8 @@ public partial class PC_UserPage : PanelContent
 		{
 			IsGenericPage = true,
 		};
+
+		LC_Items.SetSorting(Domain.Enums.PackageSorting.UpdateTime, true);
 	}
 
 	protected override async Task<bool> LoadDataAsync()

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace SkyveApp.Utilities;
 internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopItem>
 {
-	private const string STEAM_CACHE_FILE = "SteamModsCache.json";
+	internal const string STEAM_CACHE_FILE = "SteamModsCache.json";
 
 	public SteamItemProcessor() : base(200, 5000, GetCachedInfo())
 	{

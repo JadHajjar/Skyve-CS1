@@ -64,7 +64,7 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 		}
 		else
 		{
-			using var generic = Properties.Resources.I_CollectionIcon.Color(FormDesign.Design.IconColor);
+			using var generic = Properties.Resources.I_GenericUser.Color(FormDesign.Design.IconColor);
 
 			e.Graphics.DrawRoundedImage(generic, imageRect, (int)(3 * UI.FontScale), FormDesign.Design.AccentBackColor);
 		}
