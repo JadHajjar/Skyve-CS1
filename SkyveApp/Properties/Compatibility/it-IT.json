@@ -67,7 +67,7 @@
   "ReuseData_Tip": "Riutilizza i dati di compatibilità del tuo ultimo pacchetto salvato per questo pacchetto.\nTieni premuto Maiusc se vuoi anche applicare e continuare",
   "PleaseReviewTheStability": "Per favore, controlla la stabilità di questo pacchetto prima di salvare.",
   "PleaseReviewPackageStatuses": "Per favore, ricontrolla gli status di questo pacchetto prima di salvare.\nAlcuni hanno un Tipo di Status non valido.",
-  "PleaseReviewPackageInteractions": "Per favore, controlla le interazioni di questo pacchetto prima di salvare.\nAlcune di esse hanno un Interaction Type non valido, o non hanno un pacchetto collegato.",
+  "PleaseReviewPackageInteractions": "Per favore, controlla le interazioni di questo pacchetto prima di salvare.\nAlcune di esse hanno un \"Tipo di Interazione\" non valido, o non hanno un pacchetto collegato.",
   "PleaseReviewPackageUsage": "Seleziona un uso valido per questo pacchetto per favore.",
   "Interaction_Alternative": {
     "One": "'{1}' può essere usata come alternativa a '{0}'.",
