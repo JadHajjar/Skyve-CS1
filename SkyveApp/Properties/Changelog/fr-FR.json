@@ -461,19 +461,19 @@
     },
     {
         "Version": "3.0.7.2",
-        "Date": "2023-06-12",
+        "Date": "12/06/2023",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "Mis à jour pour la dernière mise à jour du jeu."
                 ]
             }
         ]
     },
     {
         "Version": "3.1.0",
-        "Date": "2023-06-13",
+        "Date": "13/06/2023",
         "Tagline": "Online profiles, coming through!",
         "ChangeGroups": [
             {
