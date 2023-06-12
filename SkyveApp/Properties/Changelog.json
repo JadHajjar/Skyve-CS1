@@ -492,6 +492,7 @@
           "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
           "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
           "Changed the design of the top action buttons on both profile pages",
+          "If your profile has un-saved changes, the Skyve logo will now light up purple.",
           "Profiles can now have thumbnails.",
           "Profile usages now have separate icons."
         ]
@@ -504,11 +505,12 @@
           "Added 6 new reset buttons in the Utilities page.",
           "Added 2 new buttons in the Help & Logs page.",
           "Compatibility & package statuses are now shown on the right in the list.",
-          "Broken, incompatible, and banned packages now have a new background in the list."
+          "Broken, incompatible, and banned packages now have a new background in the list.",
           "Local mods' name & label have been updated.",
           "Missing source code will now generate a warning instead of an unsubscribe notification.",
           "Required mods now have a different UI to let you know you can not exclude them.",
-          "Added a setting in-game to enable hot-reload for mods & assets."
+          "Added a setting in-game to enable hot-reload for mods & assets.",
+          "Improved performance while including/excluding packages.",
           "Added Hungarian language"
         ]
       }
