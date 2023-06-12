@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Anuluj subskrypcję tego pakietu",
   "UnsubscribeOther": "Wypisz się z powiązanych pakietów",
   "Switch": "Przełącz na powiązany pakiet",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Przełącz na ten pakiet",
   "Deprecated": "Przestarzałe",
   "Reupload": "Prześlij ponownie",
   "CausesIssues": "Powoduje problemy",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Są to różne wersje tego samego pakietu.\r\n\r\nPowinieneś wybrać tylko jeden z nich.",
   "Status_Succeeded": "'{0}' zakończył się sukcesem '{1}'.\r\n\r\nJuż używasz '{1}' więc nie ma już potrzeby '{0}'.",
   "Status_Deprecated": "'{0}' jest przestarzały, nie jest już obsługiwany przez jego autora.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' to ponowne przesłanie oryginalnego pakietu.",
     "One": "To jest ponowne przesłanie '{1}'."

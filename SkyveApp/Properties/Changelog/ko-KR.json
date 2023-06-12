@@ -212,11 +212,11 @@
                 ]
             },
             {
-                "Name": "File Selection Revamp",
+                "Name": "파일 선택 기능 개편",
                 "Changes": [
-                    "Updated the UI of the file selection screens.",
-                    "Added Pinned folders to easily access relevant folders.",
-                    "Added a Workshop section to easily select workshop maps & saves.",
+                    "파일 선택 화면의 UI를 업데이트 했습니다.",
+                    "필요한 폴더에 쉽게 접근할 수 있도록 '고정된 폴더' 기능을 추가했습니다.",
+                    "창작마당 맵&세이브를 쉽게 고를 수 있도록 창작 마당 항목을 추가했습니다.",
                     "Added a Sorting dropdown & sort order toggle",
                     "Added a List/Grid view toggle."
                 ]
@@ -443,6 +443,18 @@
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
                     "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
                 ]
             }
         ]

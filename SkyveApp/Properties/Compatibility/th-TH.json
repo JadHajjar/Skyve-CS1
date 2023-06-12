@@ -1,5 +1,5 @@
 {
-  "Usage": "การใช้งาน",
+  "Usage": "ใช้งาน",
   "Stability": "ความเสถียร",
   "ApplyContinue": "ปรับใช้แล้วดำเนินการต่อ",
   "Previous": "ก่อนหน้า",
@@ -21,7 +21,7 @@
   "HasIssues": "มีปัญหา",
   "Broken": "พัง",
   "Incompatible": "ไม่เข้ากัน",
-  "CityBuilding": "การสร้างเมือง",
+  "CityBuilding": "อาคารเมือง",
   "AssetCreation": "การสร้างแอสเซท",
   "MapCreation": "การสร้างแผนที่",
   "NoAction": "ไม่ต้องทำอะไร",
@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Unsubscribe from this package",
   "UnsubscribeOther": "Unsubscribe from linked packages",
   "Switch": "Switch to linked package",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Switch to to this package",
   "Deprecated": "เลิกใช้แล้ว",
   "Reupload": "อัปโหลดอีกครั้ง",
   "CausesIssues": "ทำให้เกิดปัญหา",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' is a re-upload of an original package.",
     "One": "This is a re-upload of '{1}'."

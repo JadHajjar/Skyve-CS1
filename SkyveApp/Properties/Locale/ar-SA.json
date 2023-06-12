@@ -241,7 +241,7 @@
   "LOTWillRestart": "سيتم إغلاق سماء مؤقتاً أثناء عملية التحديث، ولكن سيتم استئنافها تلقائياً بمجرد اكتمال التحديث.",
   "UpdatingLot": "يتم حالياً تحديث السماء. الرجاء الانتظار...",
   "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpen": "يتطلب الاشتراك أو إلغاء الاشتراك من الحزم فتح اللعبة لحظة قصيرة. عندما ترى مشغل اللعبة، انقر على اللعب للمتابعة.",
   "HelpSupport": "المساعدة والدعم",
   "DisableFpsBoosterDebug": "لديك معزز FPS أثناء استخدام التصحيح الأحادي ، هل ترغب في تعطيله للحصول على سجلات أفضل؟",
   "LogZipCopy_Tip": "إنشاء ملف مضغوط يحتوي على جميع معلومات التسجيل المطلوبة لشخص ما لمساعدتك في مشكلتك. يمكنك لصقه مباشرة في قناة الشقاق.",
@@ -530,5 +530,15 @@
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
   "CurrentProfile": "الملف الشخصي الحالي",
-  "References": "References"
+  "References": "References",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }

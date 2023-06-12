@@ -185,7 +185,7 @@
   "ShowingFilteredItems": "Affichage de {0} éléments sur {1} au total",
   "DropNewProfile": "Déposez ou sélectionnez le fichier .json ou .xml d'un profil ici pour l'importer",
   "ThemeUIScale": "Thème et échelle de l'interface utilisateur",
-  "SearchProfiles": "Recherchez dans vos Profils...",
+  "SearchProfiles": "Recherchez dans ces Profils..",
   "AdvancedSettings": "Paramètres avancés",
   "HelpTranslate": "Améliorer les traductions",
   "HelpReset": "Aide & Réinitialiser",
@@ -530,5 +530,15 @@
   "RequestOption2": "Ajouter un statut manquant pour le paquet",
   "RequestOption3": "Ajouter une interaction manquante avec un autre paquet",
   "CurrentProfile": "Profil actuel",
-  "References": "Références"
+  "References": "Références",
+  "OpenLog": "Ouvrir le fichier Log",
+  "Sort By": "Trier par",
+  "OpenCitiesAppData": "Ouvrir le dossier AppData de C:S",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Découvrir des profils",
+  "AllUsages": "Toutes utilisations",
+  "Invalid": "Invalide",
+  "UpdateProfile": "Mettre à jour le profil",
+  "FailedToRetrieveProfiles": "Impossible d'accéder à la découverte des profils",
+  "DownloadProfile": "Télécharger le profil"
 }

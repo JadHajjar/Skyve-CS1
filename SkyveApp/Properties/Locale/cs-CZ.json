@@ -241,7 +241,7 @@
   "LOTWillRestart": "Skyve se dočasně zavře během procesu aktualizace, ale po dokončení aktualizace se automaticky obnoví.",
   "UpdatingLot": "Aplikace Skyve se právě aktualizuje. Počkejte prosím...",
   "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpen": "Přihlášení k odběru nebo odhlášení balíčků vyžaduje otevření hry na krátkou chvíli. Když uvidíte spouštěč hry, klikněte na Hrát a pokračujte.",
   "HelpSupport": "Nápověda a podpora",
   "DisableFpsBoosterDebug": "Máte zapnutý FPS Booster při používání ladícího mona, chcete jej vypnout, abyste získali lepší logy?",
   "LogZipCopy_Tip": "Vytvořte zip soubor obsahující všechny logovací informace potřebné k tomu, aby vám někdo mohl pomoci s Vaším problémem, můžeš ho vložit přímo do discord kanálu.",
@@ -530,5 +530,15 @@
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
   "CurrentProfile": "Aktuální profil",
-  "References": "References"
+  "References": "References",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }

@@ -103,5 +103,56 @@
   "Custom Theme": "Eigenes Thema",
   "Do you want to apply your changes before leaving?": "Möchtest du deine Änderungen vor dem Verlassen anwenden?",
   "TaskCompleted": "Aufgabe abgeschlossen",
-  "UnexpectedError": "Ein unerwarteter Fehler ist aufgetreten"
+  "UnexpectedError": "Ein unerwarteter Fehler ist aufgetreten",
+  "{0} ago": "vor {0}",
+  "in {0}": "in {0}",
+  "Today at {0}": "Heute um {0}",
+  "Yesterday at {0}": "Gestern um {0}",
+  "Tomorrow at {0}": "Morgen um {0}",
+  "Last {0} at {1}": "Zuletzt {0} am {1}",
+  "Next {0} at {1}": "Als Nächstes {0} am {1}",
+  "{0} month ago on {1}": {
+    "One": "vor {0} Monat am {1}",
+    "Plural": "vor {0} Monaten am {1}"
+  },
+  "in {0} month on {1}": {
+    "One": "in {0} Monat am {1}",
+    "Plural": "in {0} Monaten am {1}"
+  },
+  "{0} day ago": {
+    "One": "vor {0} Tag",
+    "Plural": "vor {0} Tagen"
+  },
+  "in {0} day": {
+    "One": "in {0} Tag",
+    "Plural": "in {0} Tagen"
+  },
+  "{0} year": {
+    "One": "{0} Jahr",
+    "Plural": "{0} Jahre"
+  },
+  "{0} month": {
+    "One": "{0} Monat",
+    "Plural": "{0} Monate"
+  },
+  "{0} day": {
+    "One": "{0} Tag",
+    "Plural": "{0} Tage"
+  },
+  "{0} hour": {
+    "One": "{0} Stunde",
+    "Plural": "{0} Stunden"
+  },
+  "{0} minute": {
+    "One": "{0} Minute",
+    "Plural": "{0} Minuten"
+  },
+  "{0} second": {
+    "One": "{0} Sekunde",
+    "Plural": "{0} Sekunden"
+  },
+  "{0}d": "{0}d",
+  "{0}h": "{0}h",
+  "{0}m": "{0}m",
+  "{0}s": "{0}s"
 }

@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Odhlásit se z tohoto balíčku",
   "UnsubscribeOther": "Odhlásit se z propojených balíčků",
   "Switch": "Přepnout na propojený balíček",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Přepnout na tento balíček",
   "Deprecated": "Zastaralé",
   "Reupload": "Znovu nahrát",
   "CausesIssues": "Problémy s příčinami",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Jedná se o více verzí stejného balíčku.\r\n\r\nMěli byste vybrat pouze jednu z nich.",
   "Status_Succeeded": "'{0}' je uspěl '{1}'.\r\n\r\nJiž používáte '{1}', takže již není potřeba '{0}'.",
   "Status_Deprecated": "'{0}' je zastaralé, není již podporováno jeho autorem.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' je opětovné nahrání původního balíčku.",
     "One": "Toto je opětovné nahrání '{1}'."

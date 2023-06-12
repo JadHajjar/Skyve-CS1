@@ -2,35 +2,35 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Welcome to the change-log era",
+        "Tagline": "Üdvözöljük a változásnaplók között",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Új",
                 "Changes": [
-                    "Added an 'Unsubscribe All' button in content pages' actions.",
-                    "Added a Utility section to subscribe to missing items in a BOB config.",
-                    "Added an option to have Filters & Action sections open by default.",
-                    "Added change-log pages, you'll see it on new versions or using its button in the Help sections."
+                    "A tartalmi oldalak műveleteihez hozzáadtunk egy „Leiratkozás minden” gombot.",
+                    "Hozzáadott egy Segédprogram szakaszt a BOB konfiguráció hiányzó elemeire való feliratkozáshoz.",
+                    "Hozzáadott egy opciót, amely alapértelmezés szerint megnyitja a Szűrők & Műveletek szakaszát.",
+                    "Változásnapló-oldalak hozzáadva, az új verziókat a Súgó részben található gomb használatával láthatja."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Fejlesztések",
                 "Changes": [
-                    "Added Compatibility Report for broken Assets",
-                    "Unlisted packages now have the correct name and thumbnail.",
-                    "Placeholders for folder settings now correctly reflect your OS.",
-                    "Ctrl+Click on an author's name to add it to your filter"
+                    "Kompatibilitási jelentés hozzáadva a törött eszközökhöz",
+                    "A nem listázott csomagoknak most már a megfelelő neve és miniatűrje van.",
+                    "A mappabeállítások adatai mostantól megfelelnek az operációs rendszernek.",
+                    "Ctrl+kattintás egy szerző nevére, hogy hozzáadja a szűrőhöz"
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Hibajavítások",
                 "Changes": [
-                    "Fixed legacy profiles not being converted after the first launch.",
-                    "Fixed local assets not automatically refreshing after external changes.",
-                    "Fixed deleting local assets from the right-click menu deleting all local assets instead of just one",
-                    "Fixed converting LOT 1 profiles resulting in assets being marked as 'Local'",
-                    "Fixed 'Real' folders being swapped on save for Linux & Mac users.",
-                    "Fixed Linux & Mac users not being able to generate a log zip."
+                    "A javított örökölt profilok nem konvertálódnak az első indítás után.",
+                    "A rögzített helyi assetek nem frissülnek automatikusan a külső változások után.",
+                    "A helyi assetek törlése javítva, a jobb egérgombos menüből az összes helyi asset törlődik egy helyett",
+                    "Javítva az 1. tétel profiljainak konvertálása, amelynek eredményeként az assetek „Helyi” megjelölést kaptak",
+                    "Javítva a „valódi” mappák cseréje, mentéskor Linux és Mac felhasználók számára.",
+                    "Javítva, hogy a Linux és Mac felhasználók nem tudnak napló-zip-et generálni."
                 ]
             }
         ]
@@ -40,25 +40,25 @@
         "Date": "2023-04-08",
         "ChangeGroups": [
             {
-                "Name": "Added the Help & Logs section",
+                "Name": "Hozzáadtuk a Súgó és Naplók szekciót",
                 "Changes": [
-                    "Easily access your logs.",
-                    "Quickly view errors in your most recent/current game session.",
-                    "Simplify a log file to focus on what's actually happening.",
-                    "Share a zip file containing all the logs needed for someone to help you out."
+                    "Könnyű naplóelérések.",
+                    "A legutóbbi/aktuális játékmenet hibáinak gyors megtekintése.",
+                    "Az aktuális történések bemutatása érdekében egyszerűsített naplófájl készítése.",
+                    "Ossza meg az összes szükséges naplót tartalmazó Zip-fájlt, hogy valaki segítsen Neked."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Fejlesztések",
                 "Changes": [
-                    "Changed the icons of filters to reflect the correct icons used in the list."
+                    "A szűrők ikonjait úgy módosítottuk, hogy azok tükrözzék a listában használt megfelelő ikonokat."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Hibajavítások",
                 "Changes": [
-                    "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
-                    "Fixed the map selection for a new game not letting users select a vanilla map."
+                    "Javítottuk az importálási gyűjteményben a feliratkozásra és a leiratkozásra fordított szöveget.",
+                    "Javítottuk az új játék térképkiválasztását, amely nem engedte volna a felhasználóknak a Vanilla térképeket."
                 ]
             }
         ]
@@ -68,9 +68,9 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Hibajavítások",
                 "Changes": [
-                    "Fixed a bug that caused infinite loading for some users."
+                    "Kijavítottunk egy hibát, amely néhány felhasználó számára végtelenül hosszú betöltést okozott."
                 ]
             }
         ]
@@ -80,13 +80,13 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Változtatások",
                 "Changes": [
-                    "Removed the subscription tab from the in-game mod options.",
-                    "Fixed DLCs not being applied when loading a profile.",
-                    "Fixed the language option being empty for some people.",
-                    "Re-downloading from steam will no longer force the focus back to the tool.",
-                    "Other UI changes."
+                    "Eltávolítottuk az előfizetés lapot a játékon belüli mod opciók közül.",
+                    "Javítottuk a DLC-k listáját, mert nem kerültek alkalmazásra a profil betöltésekor.",
+                    "Javítottuk néhány ember számára üres a nyelvi beállítást.",
+                    "A Steamből történő újratöltés nem kényszeríti vissza a fókuszt az assetre.",
+                    "Egyéb kinézeti változtatások."
                 ]
             }
         ]
@@ -96,13 +96,13 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Változtatások",
                 "Changes": [
-                    "Adding an info popup when subscribing to items for the first time.",
-                    "Added a warning text in the dashboard when you have multiple LOM instances installed.",
-                    "Added small tags next to package titles.",
-                    "Re-downloading Load Order Tool will initiate the download and close the app while it gets updated.",
-                    "Fixed and improved the speed of Loading Screen Mod reports."
+                    "Információs előugró ablak hozzáadása az elemekre való első előfizetéskor.",
+                    "Figyelmeztető szöveg lett hozzáadva az irányítópulthoz, ha több LOM-példány van telepítve.",
+                    "Kis címkék lettek hozzáadva a csomagcímek mellé.",
+                    "A Load Order Tool újbóli letöltése elindítja a letöltést, és bezárja az alkalmazást, amíg frissül.",
+                    "Ki lett javítva és fejlesztve lett a Loading Screen Mod jelentések sebessége."
                 ]
             }
         ]
@@ -110,22 +110,22 @@
     {
         "Version": "2.1.0",
         "Date": "2023-04-05",
-        "Tagline": "Beta Public Release",
+        "Tagline": "Béta nyilvános kiadás",
         "ChangeGroups": []
     },
     {
         "Version": "2.2.1",
         "Date": "2023-04-15",
-        "Tagline": "Presenting, the Profile Overhaul",
+        "Tagline": "Bemutattuk a Profilfelújítást",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Profil váltások",
                 "Changes": [
-                    "Changed the design of your profile list.",
-                    "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
-                    "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
-                    "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
+                    "Módosítottuk a profillista kialakítását.",
+                    "A kedvenc profilok mostantól megjelennek az irányítópulton, hogy megkönnyítsék a váltást közöttük.",
+                    "Hozzáadta az „Egyéb profilok” részt egy csomag oldalához, hogy könnyen kizárhassa vagy felvehesse őket a többi profilból",
+                    "Új profilrendezési beállítások lettek hozzáadva. A kiválasztott rendezésre a rendszer a munkamenetek során emlékezni fog.",
+                    "A jobb gombbal kattintási műveletek lettek hozzáadva a tartalomlistához, hogy kizárjanak vagy beemeljenek egy elemet az összes csomagba.",
                     "Added a button to view a Profile's file on your computer.",
                     "You can now assign a color to your profiles.",
                     "You can now create a desktop shortcut for your profiles.",
@@ -443,6 +443,18 @@
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
                     "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
                 ]
             }
         ]

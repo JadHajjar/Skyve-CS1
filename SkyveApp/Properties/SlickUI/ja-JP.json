@@ -103,5 +103,56 @@
   "Custom Theme": "カスタムテーマ",
   "Do you want to apply your changes before leaving?": "終了する前に変更を適用しますか？",
   "TaskCompleted": "タスクを完了",
-  "UnexpectedError": "予期しないエラーが発生！"
+  "UnexpectedError": "予期しないエラーが発生！",
+  "{0} ago": "{0} 前",
+  "in {0}": "{0} 以内",
+  "Today at {0}": "今日 {0}",
+  "Yesterday at {0}": "昨日 {0}",
+  "Tomorrow at {0}": "明日 {0}",
+  "Last {0} at {1}": "{1} の最終 {0}",
+  "Next {0} at {1}": "{1} の次 {0}",
+  "{0} month ago on {1}": {
+    "One": "{1} は {0} ヶ月前",
+    "Plural": "{1} は {0} ヶ月前"
+  },
+  "in {0} month on {1}": {
+    "One": "{1} は {0} ヶ月以内",
+    "Plural": "{1} は {0} ヶ月以内"
+  },
+  "{0} day ago": {
+    "One": "{0} 日前",
+    "Plural": "{0} 日前"
+  },
+  "in {0} day": {
+    "One": "{0} 日以内",
+    "Plural": "{0} 日以内"
+  },
+  "{0} year": {
+    "One": "{0} 年",
+    "Plural": "{0} 年"
+  },
+  "{0} month": {
+    "One": "{0} ヶ月",
+    "Plural": "{0} ヶ月"
+  },
+  "{0} day": {
+    "One": "{0} 日",
+    "Plural": "{0} 日"
+  },
+  "{0} hour": {
+    "One": "{0} 時間",
+    "Plural": "{0} 時間"
+  },
+  "{0} minute": {
+    "One": "{0} 分",
+    "Plural": "{0} 分"
+  },
+  "{0} second": {
+    "One": "{0} 秒",
+    "Plural": "{0} 秒"
+  },
+  "{0}d": "{0}日",
+  "{0}h": "{0}時",
+  "{0}m": "{0}分",
+  "{0}s": "{0}秒"
 }

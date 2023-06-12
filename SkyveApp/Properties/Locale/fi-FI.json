@@ -241,7 +241,7 @@
   "LOTWillRestart": "Skyve sulkeutuu väliaikaisesti päivitysprosessin aikana, mutta se jatkuu automaattisesti, kun päivitys on valmis.",
   "UpdatingLot": "Skyveä päivitetään parhaillaan. Odota...",
   "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpen": "Pakettien tilaaminen tai tilauksen peruuttaminen vaatii pelin avaamisen hetkeksi. Kun näet pelin käynnistyksen, jatka pelaamista napsauttamalla Play -painiketta.",
   "HelpSupport": "Apu Ja Tuki",
   "DisableFpsBoosterDebug": "Sinulla on FPS Booster käytössä, kun käytät debug mono, haluat poistaa sen käytöstä saadaksesi parempia lokeja?",
   "LogZipCopy_Tip": "Luo zip tiedosto, joka sisältää kaikki tarvittavat tiedot kirjautumisesta joku auttaa sinua ongelmasi voit liittää sen suoraan discord-kanavaan.",
@@ -530,5 +530,15 @@
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
   "CurrentProfile": "Nykyinen profiili",
-  "References": "References"
+  "References": "References",
+  "OpenLog": "Open Log File",
+  "Sort By": "Sort By",
+  "OpenCitiesAppData": "Open C:S's AppData folder",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }

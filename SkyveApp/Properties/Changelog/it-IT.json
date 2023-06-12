@@ -5,7 +5,7 @@
         "Tagline": "Benvenuto nell'era del change-log",
         "ChangeGroups": [
             {
-                "Name": "Nuovo",
+                "Name": "Novità",
                 "Changes": [
                     "Aggiunto un pulsante 'Annulla iscrizione' nelle azioni delle pagine dei contenuti.",
                     "Aggiunta una sezione Utility per iscriversi agli elementi mancanti in una configurazione BOB.",
@@ -443,6 +443,18 @@
                     "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
                     "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi.",
                     "Migliorate le prestazioni per chi ha molte mod."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretta l'interruzione forzata all'avvio."
                 ]
             }
         ]

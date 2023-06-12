@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Avslutt abonnement fra denne pakken",
   "UnsubscribeOther": "Avslutt abonnement fra linkede pakker",
   "Switch": "Bytt til lenket pakke",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Bytt til denne pakken",
   "Deprecated": "Foreldet",
   "Reupload": "Re-Last opp",
   "CausesIssues": "Årsaker saker",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Dette er flere versjoner av samme pakke.\r\n\r\nDu bør bare velge en av dem.",
   "Status_Succeeded": "'{0}' fullføres av '{1}'.\r\n\r\nDu bruker allerede '{1}' så det er ingen behov for '{0}' lenger.",
   "Status_Deprecated": "'{0}' er foreldet, den støttes ikke lenger av dens forfatter.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time.",
+  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
   "Status_Reupload": {
     "Zero": "'{0}' er gjenopplasting av en originalpakke.",
     "One": "Dette er gjenopplasting av '{1}."

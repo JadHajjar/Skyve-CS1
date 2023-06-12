@@ -50,7 +50,7 @@
   "RequiredPackages": "需要 ...",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
-  "MissingDependency": "缺少必需物品",
+  "MissingDependency": "缺少前置模组",
   "Caution": "注意事项",
   "Warning": "警告",
   "AttentionRequired": "需要注意",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "以下是同一插件的多个不同版本。\n\n您应当只使用其中一个版本，并取消订阅此插件的其它版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
-  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行更新了。",
+  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行过更新，可能不再受到作者的支持。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个插件的重新上传版本。",
     "One": "此插件是 '{1}' 的重新上传版本。"
@@ -120,9 +120,9 @@
   },
   "Status_DependencyMod": "这是一个前置模组，但你似乎没有使用任何依赖于该模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
-  "SourceAvailable": "源代码可用",
+  "SourceAvailable": "源代码不可用",
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
-  "Status_IncompleteDescription": "这个模组的创意工坊页面描述非常短。除非你信任此模组的作者，否则不应使用此模组。",
+  "Status_IncompleteDescription": "这个模组创意工坊页面的描述文本非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期显示文本",
   "Stability_AssetNotReviewed": "此资产尚未被检查。\n\n兼容性信息可能不准确；尽管资产一般都是稳定的。",
   "Stability_NotReviewed": "此插件尚未被检查。\n\n兼容性信息可能不准确。",
@@ -131,7 +131,7 @@
   "Stability_HasIssues": "此插件可能引发问题。\n请小心使用。",
   "Stability_Broken": "此插件已经损坏。\n目前已知此插件无法正常运行，或使游戏崩溃。",
   "Stability_Incompatible": "此插件与游戏不兼容，或者会使游戏崩溃。\n\n您应当立刻取消订阅或删除此插件。",
-  "Stability_Local": "此插件是 '{0}' 模组的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
+  "Stability_Local": "此插件是模组 '{0}' 的本地版本。\n\n本地模组通常用于进行测试，或在非 Steam 版本的游戏使用。\n\n请查看插件的链接以查找模组的更新版本。",
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "您应当订阅以下插件：",
@@ -145,7 +145,7 @@
   "Action_UnsubscribeThis": "您应当取消订阅 '{0}' 。",
   "Action_UnsubscribeOther": {
     "One": "您应当取消订阅 '{1}' 。",
-    "Plural": "您应该取消订阅下列插件："
+    "Plural": "您应当取消订阅下列插件："
   },
   "Action_ExcludeThis": "您应该卸下 '{0}'。",
   "ExcludeThis": "卸下此插件",
@@ -181,8 +181,8 @@
     "One": "{0} 个{1} 缺少必需物品",
     "Plural": "{0} 个{1} 缺少必需物品"
   },
-  "CautionCount": "{0} {1} 建议谨慎使用",
-  "WarningCount": "{0} {1} 带有警告",
+  "CautionCount": "{0} 个{1} 建议谨慎使用",
+  "WarningCount": "{0} 个{1} 带有警告",
   "AttentionRequiredCount": {
     "One": "{0} 个{1} 需要加以注意",
     "Plural": "{0} 个{1} 需要加以注意"
@@ -191,7 +191,7 @@
     "One": "{0} 个{1} 应当被卸下",
     "Plural": "{0} 个{1} 应当被卸下"
   },
-  "UnsubscribeCount": "{0} {1} 应当取消订阅",
+  "UnsubscribeCount": "{0} 个{1} 应当取消订阅",
   "SwitchCount": {
     "One": "{0} 个{1} 需要替换",
     "Plural": "{0} 个{1} 需要替换"
@@ -205,7 +205,7 @@
   "POFont": "Procedural Object 的字体/效果模块",
   "NameList": "名称列表/游戏翻译",
   "ApplyChangedBeforeExit": "当前存在尚未保存的改动。\n\n在继续操作前，您想保存并应用这些改动吗？",
-  "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证之后是否能够稳定运行，以及将来是否更新。",
+  "AuthorRetired": "{0} 的作者 {1} 已经退坑，或者长期不活跃。\n对于该作者制作的插件，无法保证其将来是否能够稳定运行，以及是否更新。",
   "AuthorMalicious": "已知 {0} 的作者 {1} 存在恶意，并且其制作的插件中含有病毒等有害内容。",
   "ReviewRequests": "检查申请 {0}",
   "DeleteRequest": "删除申请",

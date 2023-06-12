@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Відкрити локальну теку, що містить цей пакунок",
   "ViewOnSteam": "Переглянути цей пакунок у Steam",
   "ReDownloadPackage": "Повторно завантажити цей пакунок",
-  "DownloadPackage": "Download this package",
+  "DownloadPackage": "Завантажити цей пакунок",
   "CopySteamId": "Скопіювати Steam ID",
   "OpenAuthorPage": "Відкрити сторінку автора у Steam",
   "Sorting_Default": "Сортування за замовчуванням",
@@ -160,8 +160,8 @@
   "TotalItems": "Всього",
   "UnsubscribeAll": "Відписатися від усіх показаних предметів",
   "SubscribeAll": "Підписатися на всі показані предмети",
-  "DownloadAll": "Download all displayed & missing items",
-  "ReDownloadAll": "Re-Download all displayed & downloaded items",
+  "DownloadAll": "Завантажити всі показані та відсутні елементи",
+  "ReDownloadAll": "Перезавантажити всі показані та завантажені елементи",
   "MissingItemsRemain": "Деякі елементи все ще відсутні в цьому профілі. Збереження профілю в майбутньому видалить з нього ці елементи.",
   "ModIsPrivate": "Предмет приватний",
   "HidePseudoMods": "Приховати псевдо-моди, такі як мікси тем",
@@ -223,7 +223,7 @@
   "AreYouSure": "Ви справді хочете продовжити?",
   "MapFileInfo": "Оберіть файл карти, щоб розпочати нову гру",
   "AssetOutOfDate": "Ассет застарів",
-  "OtherActions": "Other Actions...",
+  "OtherActions": "Інші дії...",
   "AssetOutOfDatePlural": "Ассети є застарілими",
   "CopyVersionNumber": "Копіювати номер версії",
   "SubscribeToItem": "Підписатися на цей предмет",
@@ -240,8 +240,8 @@
   "WouldYouLikeToSkipThose": "Бажаєте пропустити ці пакунки?",
   "LOTWillRestart": "Skyve тимчасово закриється під час процесу оновлення, але вона автоматично відкриється після завершення оновлення.",
   "UpdatingLot": "Skyve зараз оновлюється. Будь ласка, зачекайте...",
-  "SubscribingRequiresGameToOpenTitle": "Subscription Process",
-  "SubscribingRequiresGameToOpen": "Subscribing or unsubscribing from packages requires opening the game for a brief moment.\r\n\r\nWhen you see the game's launcher, click on Play to proceed.",
+  "SubscribingRequiresGameToOpenTitle": "Процес підписки",
+  "SubscribingRequiresGameToOpen": "Підписка або відписка від пакунків потребують короткого відкриття гри. Коли ви побачите вікно лаунчера, натисніть на Play щоб продовжити.",
   "HelpSupport": "Довідка та підтримка",
   "DisableFpsBoosterDebug": "У вас увімкнений FPS Booster при використанні режиму Налагодження Mono, бажаєте вимкнути його, щоб отримати кращі логи?",
   "LogZipCopy_Tip": "Створити zip-файл, що містить всю необхідну інформацію для логування для того, хто допоможе вам у вашій проблемі, ви можете вставити його безпосередньо в Discord-канал.",
@@ -488,47 +488,57 @@
   "UnknownUser": "Невідомий користувач",
   "AddMeaningfulDescription": "Будь ласка, додайте змістовний опис до вашого запиту.",
   "RedownloadComplete": "Skyve завершив завантаження пакунків з проблемами.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "CleanupComplete": "Skyve закінчив прибрати ваші завантаження Майстерні.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} предмет очікує на підписку",
+    "Plural": "{0} предметів очікує на підписку"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} предмет очікує на відписку",
+    "Plural": "{0} предметів очікує на відписку"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
-  "CancelDownloads": "Cancel all pending downloads",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
-  "ApplyDownloads": "Force Steam to download all pending packages",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "CancelSubs": "Скасувати всі очікуючі підписки",
+  "CancelDownloads": "Скасувати всі очікуючі завантаження",
+  "ApplySubs": "Запускає гру на мить, щоб застосувати очікуючі підписки",
+  "ApplyDownloads": "Змусити Steam завантажити всі очікуючі пакунки",
+  "SubsPendingInfo": "Пакунки, на які ви підписалися тут.\nПісля відкриття гри, ці елементи будуть підписані на Steam.",
+  "DownloadsPendingInfo": "Пакунки, на які ви підписалися, і ще не були завантажені ще згруповані тут.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Почати завантаження або видалення пакетів відразу після підписки/відписки",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Починає завантаження чи видалення пакетів замість того, щоб чекати, поки вони не були підписані чи скасовані.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "В цьому процесі ви будете підписані на {0} пакунок.",
+    "Plural": "В цьому процесі ви будете підписані на {0} пакунків."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "В цьому процесі ви будете відписані від {0} пакунку.",
+    "Plural": "В цьому процесі ви будете відписані від {0} пакунків."
   },
   "ViewThisProfilesPackages": "Переглянути вміст цього профілю",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} елемент, що очікує завантаження",
+    "Plural": "{0} елементів, що очікують завантаження"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} елемент, що очікує видалення",
+    "Plural": "{0} елементів, що очікують видалення"
   },
   "YouHavePackagesUser": {
     "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "Plural": "У вас {0} пакетів зроблених {1}"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
-  "RequestOption3": "Add a missing interaction with another package",
+  "RequestOption1": "Повідомити про проблему або додати відсутню інформацію",
+  "RequestOption2": "Додати відсутній статус пакунка",
+  "RequestOption3": "Додайте відсутню взаємодію з іншим пакунком",
   "CurrentProfile": "Поточний профіль",
-  "References": "References"
+  "References": "Посилання",
+  "OpenLog": "Відкрити лог файл",
+  "Sort By": "Сортувати за",
+  "OpenCitiesAppData": "Відкрити теку AppData",
+  "FailedToFetchLogs": "Failed to fetch your logs",
+  "DiscoverProfiles": "Discover Profiles",
+  "AllUsages": "All Usages",
+  "Invalid": "Invalid",
+  "UpdateProfile": "Update Profile",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
+  "DownloadProfile": "Download Profile"
 }
