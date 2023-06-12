@@ -458,5 +458,62 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Updated for the latest game patch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online profiles, coming through!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profiles",
+                "Changes": [
+                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Online profiles can be downloaded, or updated if you already have it locally.",
+                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Improved performance while including/excluding packages.",
+                    "Added Hungarian language"
+                ]
+            }
+        ]
     }
 ]
