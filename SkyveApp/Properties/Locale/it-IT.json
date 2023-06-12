@@ -444,11 +444,11 @@
   },
   "ShowingCount": {
     "One": "Mostrato {0} {1}",
-    "Plural": "Mostrati {0} {1}"
+    "Plural": "Mostrate {0} {1}"
   },
   "ShowingCountWarning": {
     "One": "Mostrato {0} {1}, {2}",
-    "Plural": "Mostrati {0} {1}, {2}"
+    "Plural": "Mostrate {0} {1}, {2}"
   },
   "ItemsHidden": {
     "One": "{0} {1} è nascosto a causa dell'utilizzo del vostro profilo",
