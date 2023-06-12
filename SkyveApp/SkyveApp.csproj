@@ -109,6 +109,9 @@
     <Compile Update="UserInterface\Panels\PC_ContentList.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Panels\PC_ProfileAdd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Panels\PC_UserPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

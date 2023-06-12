@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -16,24 +17,22 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
-public partial class PC_Profiles : PanelContent
+public partial class PC_Profile : PanelContent
 {
-	private bool buttonStateRunning;
 	private bool loadingProfile;
 	private readonly SlickCheckbox[] _launchOptions;
-	public PC_Profiles()
+	public PC_Profile()
 	{
 		InitializeComponent();
 
-		B_StartStop.Enabled = CitiesManager.CitiesAvailable();
-
-		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
-
 		_launchOptions = new[] { CB_StartNewGame, CB_LoadSave, CB_NewAsset, CB_LoadAsset };
 
-		SlickTip.SetTo(B_NewProfile, "NewProfile_Tip");
-		SlickTip.SetTo(B_TempProfile, "TempProfile_Tip");
+		SlickTip.SetTo(B_AddProfile.Controls[0], "NewProfile_Tip");
+		SlickTip.SetTo(B_TempProfile.Controls[0], "TempProfile_Tip");
 		SlickTip.SetTo(B_ViewProfiles, "ViewProfiles_Tip");
+		SlickTip.SetTo(I_ProfileIcon, "ChangeProfileColor");
+		SlickTip.SetTo(B_EditName, "EditProfileName");
+		SlickTip.SetTo(B_Save, "SaveProfileChanges");
 
 		foreach (var item in this.GetControls<SlickCheckbox>())
 		{
@@ -77,13 +76,7 @@ public partial class PC_Profiles : PanelContent
 
 		TLP_AdvancedDev.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
 
-		DAD_NewProfile.StartingFolder = LocationManager.AppDataPath;
-
 		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
-
-		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
-
-		RefreshButtonState(CitiesManager.IsRunning(), true);
 	}
 
 	private void ProfileManager_ProfileChanged(Profile p)
@@ -103,21 +96,21 @@ public partial class PC_Profiles : PanelContent
 	{
 		base.UIChanged();
 
-		B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = I_Info.Size = I_TempProfile.Size = I_Favorite.Size = UI.Scale(new Size(24, 24), UI.FontScale) + new Size(8, 8);
+		slickIcon1.Size = slickIcon2.Size = B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = I_Info.Size = I_TempProfile.Size = I_Favorite.Size = UI.Scale(new Size(24, 24), UI.FontScale) + new Size(8, 8);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
-		slickSpacer1.Margin = UI.Scale(new Padding(5), UI.UIScale);
-		B_Discover.Margin =	B_StartStop.Margin = P_Options.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
+		P_Options.Padding = UI.Scale(new Padding(5,0,5,0), UI.UIScale);
+		slickSpacer1.Margin = B_TempProfile.Padding = B_AddProfile.Padding = TLP_ProfileName.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_TempProfile.Font = UI.Font(10.5F);
-		B_Discover.Font = B_StartStop.Font = UI.Font(9.75F, FontStyle.Bold);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
-		B_ViewProfiles.Font = B_NewProfile.Font = B_TempProfile.Font = B_Cancel.Font = UI.Font(9.75F);
-		TLP_AdvancedDev.Margin = TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = DAD_NewProfile.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		B_ViewProfiles.Font = UI.Font(9.75F);
+		TLP_AdvancedDev.Margin = TLP_GeneralSettings.Margin = TLP_LaunchSettings.Margin = TLP_LSM.Margin = UI.Scale(new Padding(10), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
 	{
 		base.DesignChanged(design);
 
+		B_TempProfile.BackColor = B_AddProfile.BackColor = FormDesign.Design.ButtonColor;
 		TLP_LaunchSettings.BackColor = TLP_AdvancedDev.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
 		L_TempProfile.ForeColor = design.YellowColor;
 		P_Options.BackColor = design.AccentBackColor;
@@ -170,8 +163,10 @@ public partial class PC_Profiles : PanelContent
 		TLP_Options.Enabled = true;
 		TLP_GeneralSettings.Visible = !profile.Temporary;
 
-		TLP_Main.SetColumn(B_TempProfile, profile.Temporary ? 2 : 3);
-		TLP_Main.SetColumn(B_NewProfile, profile.Temporary ? 3 : 2);
+		SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+
+		TLP_Main.SetColumn(B_TempProfile, profile.Temporary ? 4 : 3);
+		TLP_Main.SetColumn(B_AddProfile, profile.Temporary ? 3 : 4);
 
 		TLP_Options.SetRow(TLP_GeneralSettings, profile.Temporary ? 2 : 0);
 		TLP_Options.SetRow(TLP_LSM, profile.Temporary ? 0 : 1);
@@ -272,11 +267,10 @@ public partial class PC_Profiles : PanelContent
 
 	private void B_NewProfile_Click(object sender, EventArgs e)
 	{
-		TLP_New.Visible = true;
-		TLP_Main.Visible = false;
+		Form.PushPanel<PC_ProfileAdd>();
 	}
 
-	private void B_EditName_Click(object sender, EventArgs e)
+	internal void B_EditName_Click(object sender, EventArgs e)
 	{
 		TB_Name.Visible = true;
 		B_EditName.Visible = B_Save.Visible = false;
@@ -288,58 +282,6 @@ public partial class PC_Profiles : PanelContent
 			TB_Name.Focus();
 			TB_Name.SelectAll();
 		});
-	}
-
-	private void NewProfile_Click(object sender, EventArgs e)
-	{
-		var newProfile = new Profile() { Name = ProfileManager.GetNewProfileName(), LastEditDate = DateTime.Now };
-
-		if (!ProfileManager.Save(newProfile))
-		{
-			ShowPrompt(Locale.ProfileCreationFailed, icon: PromptIcons.Error);
-			return;
-		}
-
-		ProfileManager.AddProfile(newProfile);
-
-		ProfileManager.SetProfile(newProfile);
-
-		L_CurrentProfile.Text = newProfile.Name;
-		I_ProfileIcon.Loading = true;
-		TLP_Options.Enabled = false;
-		TLP_Main.Visible = true;
-		TLP_New.Visible = false;
-		B_EditName_Click(sender, e);
-	}
-
-	private void CopyProfile_Click(object sender, EventArgs e)
-	{
-		var newProfile = CentralManager.CurrentProfile.Clone();
-		newProfile.Name = ProfileManager.GetNewProfileName();
-		newProfile.LastEditDate = DateTime.Now;
-
-		if (!newProfile.Save())
-		{
-			ShowPrompt(Locale.CouldNotCreateProfile, icon: PromptIcons.Error);
-			return;
-		}
-
-		ProfileManager.AddProfile(newProfile);
-
-		ProfileManager.SetProfile(newProfile);
-
-		L_CurrentProfile.Text = newProfile.Name;
-		I_ProfileIcon.Loading = true;
-		TLP_Options.Enabled = false;
-		TLP_Main.Visible = true;
-		TLP_New.Visible = false;
-		B_EditName_Click(sender, e);
-	}
-
-	private void B_Cancel_Click(object sender, EventArgs e)
-	{
-		TLP_Main.Visible = true;
-		TLP_New.Visible = false;
 	}
 
 	private void TB_Name_KeyDown(object sender, KeyEventArgs e)
@@ -490,44 +432,6 @@ public partial class PC_Profiles : PanelContent
 		return (sender as DragAndDropControl)!.ValidExtensions.Any(x => x.Equals(Path.GetExtension(arg), StringComparison.CurrentCultureIgnoreCase));
 	}
 
-	private void DAD_NewProfile_FileSelected(string obj)
-	{
-		TLP_Main.Visible = true;
-		TLP_New.Visible = false;
-
-		var profile = ProfileManager.Profiles.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
-
-		if (obj.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
-		{
-			if (profile is not null)
-			{
-				ShowPrompt(Locale.ProfileNameUsed, icon: PromptIcons.Hand);
-				return;
-			}
-
-			profile = ProfileManager.ConvertLegacyProfile(obj, false);
-
-			if (profile is null)
-			{
-				ShowPrompt(Locale.FailedToImportLegacyProfile, icon: PromptIcons.Error);
-				return;
-			}
-		}
-		else if (profile is not null)
-		{
-			Ctrl_LoadProfile(profile);
-			return;
-		}
-		else
-		{
-			profile = ProfileManager.ImportProfile(obj);
-		}
-
-		try
-		{ Ctrl_LoadProfile(profile!); }
-		catch (Exception ex) { ShowPrompt(ex, "Failed to import your profile"); }
-	}
-
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
 	{
 		if (ProfileManager.CurrentProfile.Temporary)
@@ -559,63 +463,6 @@ public partial class PC_Profiles : PanelContent
 		ProfileManager.Save(ProfileManager.CurrentProfile);
 
 		I_Favorite.ImageName = ProfileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
-	}
-
-	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
-	{
-		this.TryInvoke(() => B_StartStop.Enabled = isAvailable);
-
-		RefreshButtonState(isRunning);
-	}
-
-	private void RefreshButtonState(bool running, bool firstTime = false)
-	{
-		if (!running)
-		{
-			if (buttonStateRunning || firstTime)
-			{
-				this.TryInvoke(() =>
-				{
-					B_StartStop.ImageName = "I_CS";
-					B_StartStop.Text = Locale.StartCities;
-					buttonStateRunning = false;
-				});
-			}
-
-			return;
-		}
-
-		if (!buttonStateRunning || firstTime)
-		{
-			this.TryInvoke(() =>
-			{
-				B_StartStop.ImageName = "I_Stop";
-				B_StartStop.Text = Locale.StopCities;
-				buttonStateRunning = true;
-			});
-		}
-	}
-
-	private void B_StartStop_Click(object sender, EventArgs e)
-	{
-		Program.MainForm.LaunchStopCities();
-	}
-
-	private async void B_Discover_Click(object sender, EventArgs e)
-	{
-		try
-		{
-			B_Discover.Loading = true;
-
-			var profiles = await SkyveApiUtil.GetPublicProfiles();
-
-			Invoke(() => Form.PushPanel(new PC_ProfileList(profiles)));
-		}
-		catch (Exception ex)
-		{
-			ShowPrompt(ex, Locale.FailedToRetrieveProfiles);
-		}
-
-		B_Discover.Loading = false;
+		SlickTip.SetTo(I_Favorite, ProfileManager.CurrentProfile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
 	}
 }

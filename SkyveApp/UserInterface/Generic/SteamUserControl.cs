@@ -86,13 +86,22 @@ internal class SteamUserControl : SlickControl
 		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), ClientRectangle, Padding.Horizontal);
 
 		var size = Height - (Padding.Vertical * 2);
-		var icon = ImageManager.GetImage(User.AvatarUrl, true).Result;
+		var image = ImageManager.GetImage(User.AvatarUrl, true).Result;
 		var textRectangle = ClientRectangle.Pad(size + (Padding.Left * 2), 0, 0, 0);
 		var avatarRect = ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft);
 		var infoSize = e.Graphics.Measure(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold));
 		var nameSize = e.Graphics.Measure(User.Name, UI.Font(9F, FontStyle.Bold));
 
-		e.Graphics.DrawRoundImage(icon, avatarRect);
+		if (image is not null)
+		{
+			e.Graphics.DrawRoundImage(image, avatarRect);
+		}
+		else
+		{
+			using var generic = Properties.Resources.I_GenericUser.Color(FormDesign.Design.IconColor);
+
+			e.Graphics.DrawRoundImage(generic, avatarRect);
+		}
 
 		e.Graphics.DrawString(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold), new SolidBrush(FormDesign.Design.InfoColor), textRectangle);
 		e.Graphics.DrawString(User.Name, UI.Font(9F, FontStyle.Bold), new SolidBrush(FormDesign.Design.ForeColor), textRectangle, new StringFormat { LineAlignment = StringAlignment.Far });

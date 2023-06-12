@@ -355,7 +355,7 @@ public static class ProfileManager
 			}
 			catch (Exception ex)
 			{
-				MessagePrompt.Show(ex, "Failed to merge your profiles", form: Program.MainForm);
+				MessagePrompt.Show(ex, "Failed to exclude items from your profile", form: Program.MainForm);
 			}
 			finally
 			{
@@ -499,7 +499,7 @@ public static class ProfileManager
 			}
 			catch (Exception ex)
 			{
-				MessagePrompt.Show(ex, "Failed to merge your profiles", form: Program.MainForm);
+				MessagePrompt.Show(ex, "Failed to apply your profile", form: Program.MainForm);
 
 				ProfileChanged?.Invoke(profile);
 			}
@@ -515,15 +515,18 @@ public static class ProfileManager
 	{
 		if (!disableAutoSave && !ApplyingProfile && CentralManager.IsContentLoaded && !ContentUtil.BulkUpdating)
 		{
-			if (CurrentProfile.AutoSave)
+			Task.Run(() =>
 			{
-				CurrentProfile.Save();
-			}
-			else if (!CurrentProfile.Temporary)
-			{
-				CurrentProfile.UnsavedChanges = true;
-				Save(CurrentProfile);
-			}
+				if (CurrentProfile.AutoSave)
+				{
+					CurrentProfile.Save();
+				}
+				else if (!CurrentProfile.Temporary)
+				{
+					CurrentProfile.UnsavedChanges = true;
+					Save(CurrentProfile);
+				}
+			});
 		}
 	}
 
@@ -788,7 +791,7 @@ public static class ProfileManager
 		return true;
 	}
 
-	internal static string? GetNewProfileName()
+	internal static string GetNewProfileName()
 	{
 		var startName = LocationManager.Combine(LocationManager.SkyveProfilesAppDataPath, "New Profile.json");
 
@@ -1144,13 +1147,118 @@ public static class ProfileManager
 
 	internal static async Task Share(Profile item)
 	{
-		await SkyveApiUtil.SaveUserProfile(new()
+		try
 		{
-			Author = SteamUtil.GetLoggedInSteamId(),
-			Banner = item.BannerBytes,
-			Color = item.Color?.ToArgb(),
-			Name = item.Name,
-			Contents = item.Assets.Concat(item.Mods).Select(x => x.AsProfileContent()).ToArray()
-		});
+			var result = await SkyveApiUtil.SaveUserProfile(new()
+			{
+				Author = SteamUtil.GetLoggedInSteamId(),
+				Banner = item.BannerBytes,
+				Color = item.Color?.ToArgb(),
+				Name = item.Name,
+				Contents = item.Assets.Concat(item.Mods).Select(x => x.AsProfileContent()).ToArray()
+			});
+
+			if (result.Success)
+			{
+				item.ProfileId = (int)Convert.ChangeType(result.Data, typeof(int));
+				item.Author = SteamUtil.GetLoggedInSteamId();
+
+				Save(item);
+			}
+			else
+			{
+				Program.MainForm.TryInvoke(() => MessagePrompt.Show((item.ProfileId == 0 ? Locale.FailedToUploadProfile : Locale.FailedToUpdateProfile) + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: Program.MainForm));
+			}
+		}
+		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, item.ProfileId == 0 ? Locale.FailedToUploadProfile : Locale.FailedToUpdateProfile, form: Program.MainForm)); }
+	}
+
+	internal static async Task<bool> DownloadProfile(IProfile item)
+	{
+		try
+		{
+			var profile = await SkyveApiUtil.GetUserProfileContents(item.ProfileId);
+
+			if (profile == null)
+			{
+				return false;
+			}
+
+			var generatedProfile = item is Profile localProfile ? localProfile : profile.CloneTo<IProfile, Profile>();
+
+			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Profile.Asset(x));
+			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Profile.Mod(x));
+
+			return Save(generatedProfile);
+		}
+		catch (Exception ex)
+		{
+			Log.Exception(ex, "Failed to download profile");
+
+			return false;
+		}
+	}
+
+	internal static async Task<bool> DownloadProfile(string link)
+	{
+		try
+		{
+			var profile = await SkyveApiUtil.GetUserProfileByLink(link);
+
+			if (profile == null)
+			{
+				return false;
+			}
+
+			var generatedProfile = profile.CloneTo<IProfile, Profile>();
+
+			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Profile.Asset(x));
+			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Profile.Mod(x));
+
+			return Save(generatedProfile);
+		}
+		catch (Exception ex)
+		{
+			Log.Exception(ex, "Failed to download profile");
+
+			return false;
+		}
+	}
+
+	internal static async Task<bool> SetVisibility(Profile profile, bool @public)
+	{
+		try
+		{
+			var result = await SkyveApiUtil.SetProfileVisibility(profile.ProfileId, @public);
+
+			if (!result.Success)
+			{
+				Program.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToUpdateProfile + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: Program.MainForm));
+			}
+			else
+			{
+				profile.Public = @public;
+				return Save(profile);
+			}
+
+			return result.Success;
+		}
+		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToUpdateProfile, form: Program.MainForm)); return false; }
+	}
+
+	internal static async Task<bool> DeleteOnlineProfile(IProfile profile)
+	{
+		try
+		{
+			var result = await SkyveApiUtil.DeleteUserProfile(profile.ProfileId);
+
+			if (!result.Success)
+			{
+				Program.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToDeleteProfile + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: Program.MainForm));
+			}
+
+			return result.Success;
+		}
+		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDeleteProfile, form: Program.MainForm)); return false; }
 	}
 }

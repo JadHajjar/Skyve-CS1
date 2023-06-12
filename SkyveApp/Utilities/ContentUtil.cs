@@ -11,10 +11,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 
 namespace SkyveApp.Utilities;
 internal class ContentUtil
 {
+	private const string CACHE_FILENAME = "ModDllCache.json";
 	public const string EXCLUDED_FILE_NAME = ".excluded";
 
 	private static readonly object _contentUpdateLock = new();
@@ -25,7 +27,7 @@ internal class ContentUtil
 
 	static ContentUtil()
 	{
-		ISave.Load(out List<ModDllCache> cache, "ModDllCache.json");
+		ISave.Load(out List<ModDllCache> cache, CACHE_FILENAME);
 
 		if (cache != null)
 		{
@@ -484,7 +486,17 @@ internal class ContentUtil
 
 	internal static void SaveDllCache()
 	{
-		ISave.Save(_dllCache.Values, "ModDllCache.json");
+		ISave.Save(_dllCache.Values, CACHE_FILENAME);
+	}
+
+	internal static void ClearDllCache()
+	{
+		_dllCache.Clear();
+
+		try
+		{
+			ExtensionClass.DeleteFile(ISave.GetPath(CACHE_FILENAME)); }
+		catch { }
 	}
 
 	internal static void SetBulkIncluded(IEnumerable<IPackage> packages, bool value)

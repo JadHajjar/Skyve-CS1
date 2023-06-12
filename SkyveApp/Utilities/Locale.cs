@@ -288,4 +288,17 @@ internal class Locale : LocaleHelper
 	public static Translation UpdateProfile => _instance.GetText(nameof(UpdateProfile));
 	public static Translation FailedToRetrieveProfiles => _instance.GetText(nameof(FailedToRetrieveProfiles));
 	public static Translation DownloadProfile => _instance.GetText(nameof(DownloadProfile));
+	public static Translation DiscoverProfiles => _instance.GetText(nameof(DiscoverProfiles));
+	public static Translation FailedToDownloadProfile => _instance.GetText(nameof(FailedToDownloadProfile));
+	public static Translation UpdateProfileTip => _instance.GetText(nameof(UpdateProfileTip));
+	public static Translation DownloadProfileTip => _instance.GetText(nameof(DownloadProfileTip));
+	public static Translation EditProfileThumbnail => _instance.GetText(nameof(EditProfileThumbnail));
+	public static Translation MakePrivate => _instance.GetText(nameof(MakePrivate));
+	public static Translation MakePublic => _instance.GetText(nameof(MakePublic));
+	public static Translation CopyProfileLink => _instance.GetText(nameof(CopyProfileLink));
+	public static Translation FailedToUploadProfile => _instance.GetText(nameof(FailedToUploadProfile));
+	public static Translation FailedToDeleteProfile => _instance.GetText(nameof(FailedToDeleteProfile));
+	public static Translation FailedToUpdateProfile => _instance.GetText(nameof(FailedToUpdateProfile));
+	public static Translation ImportFromLink => _instance.GetText(nameof(ImportFromLink));
+	public static Translation PasteProfileId => _instance.GetText(nameof(PasteProfileId));
 }

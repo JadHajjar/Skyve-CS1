@@ -96,11 +96,6 @@ public partial class MainForm : BasePanelForm
 		{
 			mainPage.B_StartStop.Loading = false;
 		}
-
-		if (CurrentPanel is PC_Profiles profilePage)
-		{
-			profilePage.B_StartStop.Loading = false;
-		}
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
@@ -126,11 +121,6 @@ public partial class MainForm : BasePanelForm
 			if (CurrentPanel is PC_MainPage mainPage)
 			{
 				mainPage.B_StartStop.Loading = false;
-			}
-
-			if (CurrentPanel is PC_Profiles profilePage)
-			{
-				profilePage.B_StartStop.Loading = false;
 			}
 		}
 	}
@@ -263,11 +253,6 @@ public partial class MainForm : BasePanelForm
 					mainPage.B_StartStop.Loading = true;
 				}
 
-				if (CurrentPanel is PC_Profiles profilePage)
-				{
-					profilePage.B_StartStop.Loading = true;
-				}
-
 				//base_PB_Icon.Loading = true;
 				base_PB_Icon.LoaderSpeed = 1;
 			}
@@ -366,7 +351,7 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_Profiles_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_Profiles>(PI_Profiles);
+		SetPanel<PC_ProfileList>(PI_Profiles);
 	}
 
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)

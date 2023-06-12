@@ -133,6 +133,15 @@ public static class CompatibilityManager
 		CompatibilityData ??= new IndexedCompatibilityData(new());
 	}
 
+	internal static void ResetSnoozes()
+	{
+		_snoozedItems.Clear();
+
+		try
+		{ ExtensionClass.DeleteFile(ISave.GetPath(SNOOZE_FILE)); }
+		catch { }
+	}
+
 	internal static bool IsSnoozed(ReportItem reportItem)
 	{
 		return _snoozedItems.Any(x => x.Equals(reportItem));
@@ -423,5 +432,16 @@ public static class CompatibilityManager
 		foreach (var package in packages)
 		{ _cache[package] = GenerateCompatibilityInfo(package); }
 		//Parallelism.ForEach(packages, package => _cache[package] = GenerateCompatibilityInfo(package), 10);
+	}
+
+	internal static void ResetCache()
+	{
+		_cache.Clear();
+
+		try
+		{ ExtensionClass.DeleteFile(ISave.GetPath(DATA_CACHE_FILE)); }
+		catch { }
+
+		CacheReport();
 	}
 }

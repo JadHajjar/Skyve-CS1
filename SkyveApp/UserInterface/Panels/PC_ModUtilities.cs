@@ -103,11 +103,16 @@ public partial class PC_ModUtilities : PanelContent
 		base.UIChanged();
 
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Cleanup.Margin = P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Text.Margin = P_ModIssues.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		P_Cleanup.Margin = P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Reset.Margin = P_Text.Margin = P_ModIssues.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		B_ReDownload.Margin = TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_ImportClipboard.Margin = UI.Scale(new Padding(10), UI.FontScale);
 		L_CleanupInfo.Font = L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9F);
 		L_CleanupInfo.Margin = L_OutOfDate.Margin = L_Incomplete.Margin = UI.Scale(new Padding(3), UI.FontScale);
+
+		foreach (Control item in P_Reset.Controls)
+		{
+			item.Margin = UI.Scale(new Padding(5), UI.FontScale);
+		}
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -289,5 +294,65 @@ public partial class PC_ModUtilities : PanelContent
 	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
 	{
 		slickSpacer1.Visible = slickScroll1.Percentage != 0;
+	}
+
+	private void B_ReloadAllData_Click(object sender, EventArgs e)
+	{
+
+	}
+
+	private async void B_ResetSnoozes_Click(object sender, EventArgs e)
+	{
+		var img = B_ResetSnoozes.ImageName;
+		CompatibilityManager.ResetSnoozes();
+		B_ResetSnoozes.ImageName = "I_Check";
+		await Task.Delay(1500);
+		B_ResetSnoozes.ImageName = img;
+	}
+
+	private async void B_ResetModsCache_Click(object sender, EventArgs e)
+	{
+		ContentUtil.ClearDllCache();
+		var img = B_ResetModsCache.ImageName;
+		B_ResetModsCache.ImageName = "I_Check";
+		await Task.Delay(1500);
+		B_ResetModsCache.ImageName = img;
+	}
+
+	private async void B_ResetCompatibilityCache_Click(object sender, EventArgs e)
+	{
+		if (!B_ResetCompatibilityCache.Loading)
+		{
+			B_ResetCompatibilityCache.Loading = true;
+			await Task.Run(CompatibilityManager.ResetCache);
+			B_ResetCompatibilityCache.Loading = false;
+			var img = B_ResetCompatibilityCache.ImageName;
+			B_ResetCompatibilityCache.ImageName = "I_Check";
+			await Task.Delay(1500);
+			B_ResetCompatibilityCache.ImageName = img;
+		}
+	}
+
+	private async void B_ResetImageCache_Click(object sender, EventArgs e)
+	{
+		if (!B_ResetImageCache.Loading)
+		{
+			B_ResetImageCache.Loading = true;
+			await Task.Run(ImageManager.ClearCache);
+			B_ResetImageCache.Loading = false;
+			var img = B_ResetImageCache.ImageName;
+			B_ResetImageCache.ImageName = "I_Check";
+			await Task.Delay(1500);
+			B_ResetImageCache.ImageName = img;
+		}
+	}
+
+	private async void B_ResetSteamCache_Click(object sender, EventArgs e)
+	{
+		var img = B_ResetSteamCache.ImageName;
+		SteamUtil.ClearCache();
+		B_ResetSteamCache.ImageName = "I_Check";
+		await Task.Delay(1500);
+		B_ResetSteamCache.ImageName = img;
 	}
 }

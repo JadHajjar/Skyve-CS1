@@ -26,4 +26,5 @@ public interface IProfile
 	IEnumerable<IPackage> Packages { get; }
 	int ProfileId { get; }
 	int Downloads { get; }
+	bool Public { get; }
 }

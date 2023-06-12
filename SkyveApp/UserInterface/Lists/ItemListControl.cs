@@ -244,7 +244,40 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			return;
 		}
 
-		if (rects.SteamIdRect != Rectangle.Empty && e.Location.X > rects.SteamIdRect.X)
+		if (rects.CompatibilityRect.Contains(e.Location))
+		{
+			if (filter)
+			{
+				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().Notification);
+			}
+			else
+			{
+				var pc = new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item);
+
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+
+				pc.T_CR.Selected = true;
+
+				if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
+				{
+					ScrollTo(item.Item);
+				}
+			}
+			return;
+		}
+
+		if (rects.DownloadStatusRect.Contains(e.Location))
+		{
+			if (filter && item.Item.Package is not null)
+			{
+				DownloadStatusSelected?.Invoke(item.Item.Package.Status);
+			}
+
+			return;
+		}
+
+		var minX = -Math.Min(-rects.SteamIdRect.X, Math.Min(-rects.DownloadStatusRect.X, -rects.CompatibilityRect.X));
+		if (e.Location.X > minX)
 		{
 			return;
 		}
@@ -330,38 +363,6 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 			{
 				ScrollTo(item.Item);
-			}
-
-			return;
-		}
-
-		if (rects.CompatibilityRect.Contains(e.Location))
-		{
-			if (filter)
-			{
-				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().Notification);
-			}
-			else
-			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-
-				pc.T_CR.Selected = true;
-
-				if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
-				{
-					ScrollTo(item.Item);
-				}
-			}
-			return;
-		}
-
-		if (rects.DownloadStatusRect.Contains(e.Location))
-		{
-			if (filter && item.Item.Package is not null)
-			{
-				DownloadStatusSelected?.Invoke(item.Item.Package.Status);
 			}
 
 			return;
@@ -1186,7 +1187,31 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 				return true;
 			}
 
-			if (SteamIdRect != Rectangle.Empty && location.X > SteamIdRect.X)
+			if (CompatibilityRect.Contains(location))
+			{
+				text = getFilterTip(Locale.ViewPackageCR, Locale.FilterByThisReportStatus);
+				point = CompatibilityRect.Location;
+				return true;
+			}
+
+			if (DownloadStatusRect.Contains(location))
+			{
+				if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				{
+					text = Locale.FilterByThisPackageStatus + "\r\n\r\n" + Item.Package?.StatusReason;
+					point = DownloadStatusRect.Location;
+					return true;
+				}
+				else
+				{
+					text = Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower());
+					point = DownloadStatusRect.Location;
+					return true;
+				}
+			}
+
+			var minX = -Math.Min(-SteamIdRect.X, Math.Min(-DownloadStatusRect.X, -CompatibilityRect.X));
+			if (SteamIdRect != Rectangle.Empty && location.X > minX)
 			{
 				text = string.Empty;
 				point = default;
@@ -1255,29 +1280,6 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 				point = CenterRect.Location;
 				return true;
-			}
-
-			if (CompatibilityRect.Contains(location))
-			{
-				text = getFilterTip(Locale.ViewPackageCR, Locale.FilterByThisReportStatus);
-				point = CompatibilityRect.Location;
-				return true;
-			}
-
-			if (DownloadStatusRect.Contains(location))
-			{
-				if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
-				{
-					text = Locale.FilterByThisPackageStatus + "\r\n\r\n" + Item.Package?.StatusReason;
-					point = DownloadStatusRect.Location;
-					return true;
-				}
-				else
-				{
-					text = Item.Package?.StatusReason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower());
-					point = DownloadStatusRect.Location;
-					return true;
-				}
 			}
 
 			if (DateRect.Contains(location))
