@@ -553,7 +553,7 @@
   "ResetInfo": "Achtung! Zurücksetzen kann nicht rückgängig gemacht werden.",
   "FailedToDownloadProfile": "Herunterladen dieses Profils fehlgeschlagen.\n\nBitte versuche es später erneut.",
   "UpdateProfileTip": "Lokale Version dieses Profils aktualisieren",
-  "DownloadProfileTip": "Dieses Profil auf den lokalen Computer herunterladen",
+  "DownloadProfileTip": "Donwload this profile to your local computer",
   "EditProfileThumbnail": "Thumbnail dieses Profils bearbeiten",
   "MakePublic": "Dieses Profil öffentlich machen",
   "MakePrivate": "Dieses Profil privat machen",
