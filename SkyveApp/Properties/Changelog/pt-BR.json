@@ -503,15 +503,15 @@
                     "Adicionada uma nova página de perfil de usuário, acessada ao clicar no autor de um mod ou perfil. Esta página inclui todos os perfis e pacotes do usuário.",
                     "As exclusões feitas pelo Skyve agora enviarão os arquivos para a lixeira no Windows.",
                     "Foram adicionados 6 novos botões de redefinição na página de Utilitários.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Foram adicionados 2 novos botões na página de Ajuda e Registros.",
+                    "Compatibilidade e Estado do Pacote agora são exibidos a direita para facilitar a referência.",
+                    "Agora, os pacotes quebrados, incompatíveis ou banidos possuem um novo plano de fundo na lista para fácil identificação.",
+                    "O nome e a etiqueta dos mods locais foram atualizados.",
+                    "A ausência do código-fonte agora gerará um aviso em vez de uma notificação de cancelamento de inscrição.",
+                    "Os mods necessários agora têm uma interface diferente para informar que você não pode excluí-los.",
+                    "Adicionada uma configuração no jogo para ativar o recarregamento rápido de mods e recursos.",
+                    "Melhorado o desempenho ao incluir/excluir recursos.",
+                    "Adicionado idioma húngaro"
                 ]
             }
         ]
