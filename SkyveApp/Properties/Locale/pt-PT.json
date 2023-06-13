@@ -553,7 +553,7 @@
   "ResetInfo": "Cuidado! Redefinir algo não pode ser desfeito.",
   "FailedToDownloadProfile": "Falha ao baixar este perfil.\n\nTente novamente mais tarde.",
   "UpdateProfileTip": "Atualizar sua versão local deste perfil",
-  "DownloadProfileTip": "Descarregar este perfil para o seu computador local",
+  "DownloadProfileTip": "Download this profile to your local computer",
   "EditProfileThumbnail": "Editar a imagem em miniatura deste perfil",
   "MakePublic": "Tornar este perfil público",
   "MakePrivate": "Tornar este perfil privado",
