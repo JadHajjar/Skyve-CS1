@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correzioni",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "Aggiornato con l'ultima patch del gioco."
                 ]
             }
         ]
@@ -474,44 +474,44 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "Profili online, in arrivo!",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "Profili Online",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "È ora possibile caricare un profilo online, fino a 5 profili per utente.",
+                    "I profili caricati possono essere privati, condivisi con un ID o pubblici per tutti.",
+                    "I profili online possono essere scaricati o aggiornati se già presenti in locale.",
+                    "È possibile scoprire i profili online utilizzando un nuovo pulsante nella scheda Profili.",
+                    "Aggiunta una terza opzione nella pagina \"Aggiungi profilo\" per importare un profilo online utilizzando il suo ID."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "Modifiche al Profilo",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "La scheda 'Profili' nella barra laterale aprirà ora l'elenco dei profili anziché le impostazioni del profilo corrente.",
+                    "L'elenco dei profili utilizza ora una visualizzazione a griglia ed è possibile passare dalla visualizzazione a griglia a quella a elenco.",
+                    "Modificato il design dei pulsanti di azione in alto su entrambe le pagine del profilo",
+                    "Se nel profilo sono presenti modifiche non salvate, il logo di Skyve si illuminerà di viola.",
+                    "I profili possono ora avere delle miniature.",
+                    "Gli usi del profilo hanno ora icone separate."
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "Novità e aggiornamenti",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Aggiunta una nuova pagina del profilo utente, accessibile cliccando sull'autore di una mod o di un profilo. Questa pagina include tutti i profili e i pacchetti dell'utente.",
+                    "Le cancellazioni effettuate da Skyve ora inviano i file al cestino di Windows.",
+                    "Aggiunti 6 nuovi pulsanti di ripristino nella pagina Utilità.",
+                    "Aggiunti 2 nuovi pulsanti nella pagina Aiuto e Registri.",
+                    "Gli stati di compatibilità e dei pacchetti sono ora mostrati a destra nell'elenco.",
+                    "I pacchetti rotti, incompatibili e vietati hanno ora un nuovo sfondo nell'elenco.",
+                    "Il nome e l'etichetta dei mod locali sono stati aggiornati.",
+                    "Il codice sorgente mancante ora genera un avviso invece di una notifica di annullamento dell'iscrizione.",
+                    "Le mod richieste hanno ora un'interfaccia utente diversa per segnalare che non è possibile escluderle.",
+                    "Aggiunta un'impostazione in gioco per abilitare il caricamento a caldo di mod e asset.",
+                    "Miglioramento delle prestazioni durante l'inclusione/esclusione dei pacchetti.",
+                    "Aggiunta della lingua Ungherese"
                 ]
             }
         ]
