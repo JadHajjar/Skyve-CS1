@@ -498,7 +498,7 @@
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "Nyheter & uppdateringar",
                 "Changes": [
                     "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
                     "Deletions by Skyve will now send the files to the recycle bin on Windows.",
@@ -511,7 +511,7 @@
                     "Required mods now have a different UI to let you know you can not exclude them.",
                     "Added a setting in-game to enable hot-reload for mods & assets.",
                     "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Lade till ungerska språket"
                 ]
             }
         ]
