@@ -458,5 +458,62 @@
                 ]
             }
         ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fehlerbehebungen",
+                "Changes": [
+                    "Aktualisiert für den neuesten Spiel-Patch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online-Profile kommen!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profile",
+                "Changes": [
+                    "Du kannst jetzt ein Profil online hochladen, bis zu 5 Profile pro Benutzer.",
+                    "Hochgeladene Profile können privat sein, mit einer ID geteilt werden oder öffentlich für alle zu sehen sein.",
+                    "Online-Profile können heruntergeladen oder aktualisiert werden, wenn sie bereits lokal vorhanden sind.",
+                    "Online-Profile können mit einem neuen Knopf im Profil-Reiter entdeckt werden.",
+                    "Eine dritte Option auf der Seite 'Profil hinzufügen' wurde hinzugefügt, um ein Online-Profil mit dessen ID zu importieren."
+                ]
+            },
+            {
+                "Name": "Profiländerungen",
+                "Changes": [
+                    "Die Registerkarte 'Profile' in der Seitenleiste öffnet nun die Profilliste anstelle der Einstellungen des aktuellen Profils.",
+                    "Die Profilliste verwendet nun eine Rasteransicht und es kann zwischen Raster und Listenansicht umgeschaltet werden.",
+                    "Design der obersten Aktionsknöpfe auf beiden Profilseiten geändert",
+                    "Wenn das Profil ungespeicherte Änderungen aufweist, leuchtet das Skyve-Logo nun violett auf.",
+                    "Profile können jetzt Thumbnails haben.",
+                    "Die Verwendungszwecke der Profile haben jetzt separate Symbole."
+                ]
+            },
+            {
+                "Name": "Neu & Aktualisiert",
+                "Changes": [
+                    "Fügt eine neue Benutzer-Profilseite hinzu, auf die durch Klicken auf den Autor eines Mods oder Profils zugegriffen wird. Diese Seite enthält alle Profile und Pakete des Benutzers.",
+                    "Beim Löschen durch Skyve werden die Dateien unter Windows nun in den Papierkorb verschoben.",
+                    "6 neue Knöpfe zum Zurücksetzen auf der Werkzeuge-Seite.",
+                    "2 neue Knöpfe auf der Hilfe & Protokolle Seite hinzugefügt.",
+                    "Kompatibilität & Paketstatus werden nun rechts in der Liste angezeigt.",
+                    "Defekte, inkompatible und gebannte Pakete haben nun einen neuen Hintergrund in der Liste.",
+                    "Name und Label lokaler Mods wurden aktualisiert.",
+                    "Fehlender Quelltext erzeugt jetzt eine Warnung anstelle einer Benachrichtigung für das Abbestellen.",
+                    "Benötigte Mods haben jetzt ein anderes UI, um dich wissen zu lassen, dass du sie nicht ausschließen kannst.",
+                    "Eine Einstellung im Spiel hinzugefügt, um Hot-Reload für Mods & Assets zu aktivieren.",
+                    "Verbesserte Leistung beim Ein-/Ausschluss von Paketen.",
+                    "Ungarische Sprache hinzugefügt"
+                ]
+            }
+        ]
     }
 ]
