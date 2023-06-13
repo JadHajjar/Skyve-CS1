@@ -511,7 +511,7 @@
                     "Required mods now have a different UI to let you know you can not exclude them.",
                     "Added a setting in-game to enable hot-reload for mods & assets.",
                     "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Ajout de la traduction Hongroise"
                 ]
             }
         ]
