@@ -117,7 +117,7 @@
   "Saving can take very long for maps with a high volume of trees and a large number of fires.": "Saving can take very long for maps with a high volume of trees and a large number of fires.",
   "Custom pillars might reset on next load. UI for the mod not fully working.": "Custom pillars might reset on next load. UI for the mod not fully working.",
   "This mod is suspected to sometimes prevent other mod buttons to show.": "This mod is suspected to sometimes prevent other mod buttons to show.",
-  "LOD has too many vertices.": "LOD has too many vertices.",
+  "LOD has too many vertices.": "LOD에 버텍스가 너무 많습니다.",
   "Various players report, information could not be gathered.": "Various players report, information could not be gathered.",
   "Seems to be a Traffic Manager clone, but tells it is Auto Line Color and the sourcecode is not available.": "Seems to be a Traffic Manager clone, but tells it is Auto Line Color and the sourcecode is not available.",
   "Demand stays at zero.": "수요가 0으로 고정됩니다.",
