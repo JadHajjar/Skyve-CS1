@@ -553,7 +553,7 @@
   "ResetInfo": "Attenzione! Il reset non può essere annullato.",
   "FailedToDownloadProfile": "Impossibile scaricare questo profilo.",
   "UpdateProfileTip": "Aggiornare la versione locale di questo profilo",
-  "DownloadProfileTip": "Scarica questo profilo sul tuo computer",
+  "DownloadProfileTip": "Scaricare questo profilo sul computer locale",
   "EditProfileThumbnail": "Modificare l'immagine di anteprima di questo profilo",
   "MakePublic": "Rendi questo profilo Pubblico",
   "MakePrivate": "Rendi questo profilo Privato",
