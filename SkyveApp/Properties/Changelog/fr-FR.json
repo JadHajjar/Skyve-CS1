@@ -474,12 +474,12 @@
     {
         "Version": "3.1.0",
         "Date": "13/06/2023",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "Découvrez les Profils de la communauté !",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "Profils de la communauté",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Vous pouvez désormais mettre en ligne un profil, dans la limite de 5 par utilisateur.",
                     "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
                     "Online profiles can be downloaded, or updated if you already have it locally.",
                     "You can discover online profiles using a new button in the Profiles tab.",
