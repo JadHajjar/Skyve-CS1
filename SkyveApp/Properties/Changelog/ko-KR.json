@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "수정",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "최신 게임 패치를 위해 업데이트됨."
                 ]
             }
         ]
@@ -474,44 +474,44 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "온라인 프로필이 다가옵니다!",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "온라인 프로필",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "이제 프로필을 온라인으로 사용자당 5개까지 업로드할 수 있습니다.",
+                    "업로드된 프로필은 비공개로 하거나, ID로 공유하거나, 또는 모든 사람이 볼 수 있게 공개할 수 있습니다.",
+                    "온라인 프로필을 다운로드하거나 이미 가지고 있는 경우 업데이트할 수 있습니다.",
+                    "프로필 탭의 새 버튼을 사용하여 온라인 프로필을 탐색할 수 있습니다.",
+                    "ID를 사용하여 온라인 프로필을 가져올 수 있게 '프로필 추가' 페이지에 세 번째 옵션을 추가했습니다."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "프로필 변경사항",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "사이드바의 '프로필' 탭은 이제 현재 프로필의 설정 대신 프로필 목록을 엽니다.",
+                    "프로필 목록은 이제 격자 보기를 사용하며 격자 보기와 목록 보기 사이를 전환할 수 있습니다.",
+                    "두 프로필 페이지의 상단 작업 버튼 디자인 변경",
+                    "이제 프로필에 저장되지 않은 변경 사항이 있으면 Skyve 로고가 보라색으로 빛납니다.",
+                    "프로필은 이제 섬네일을 가질 수 있습니다.",
+                    "이제 프로필 용도별로 다른 아이콘을 가집니다"
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "신규 및 업데이트",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "모드 또는 프로필의 제작자를 클릭하여 들어갈 수 있는 사용자 프로필 페이지를 새로 추가했습니다. 이 페이지에는 사용자의 모든 프로필과 패키지가 포함되어 있습니다.",
+                    "Skyve에서 삭제하는 파일은 이제 Windows의 휴지통으로 보내집니다.",
+                    "유틸리티 페이지에 6개의 새 초기화 버튼을 추가했습니다.",
+                    "도움 & 로그 페이지에 2개의 새 버튼을 추가했습니다.",
+                    "이제 호환성 및 패키지 상태가 목록의 오른쪽에 표시됩니다.",
+                    "망가진, 호환되지 않는, 차단된 패키지는 이제 목록에서 새로운 배경을 가집니다.",
+                    "로컬 모드의 이름과 레이블이 업데이트되었습니다.",
+                    "소스 코드가 누락된 경우는 이제 구독 취소 알림 대신 경고를 생성합니다.",
+                    "필요한 모드 UI는 이제 제외할수 없다는 점을 알려주는 다른 UI를 가집니다.",
+                    "모드와 에셋에 대한 핫 리로드를 활성화할 수 있는 설정을 인게임에 추가했습니다.",
+                    "패키지를 포함/제외할 때의 성능이 개선되었습니다.",
+                    "헝가리어 추가"
                 ]
             }
         ]
