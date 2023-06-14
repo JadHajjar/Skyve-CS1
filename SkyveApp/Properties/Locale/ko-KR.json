@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "프로필을 삭제하는 데 실패했습니다",
   "FailedToUpdateProfile": "프로필을 업데이트하는 데 실패했습니다",
   "ImportFromLink": "프로필 ID로 프로필 가져오기",
-  "PasteProfileId": "가져오고자 하는 프로필의 ID를 붙여넣으세요"
+  "PasteProfileId": "가져오고자 하는 프로필의 ID를 붙여넣으세요",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }
