@@ -310,7 +310,7 @@
   "ApplyProfileNameBeforeExit": "ページを終了する前に、プロファイル名の編集を完了して下さい。",
   "SteamNotOpenTo": "Steamクライアントが起動していません。",
   "OpenSteamToContinue": "以前の処理を続行するには、Steamクライアントを開いて下さい。",
-  "IncludeExcludeOtherProfile": "プロファイル「 {0} 」から {1} 個を含める / 除外",
+  "IncludeExcludeOtherProfile": "プロファイル「{0}」から {1} 個を含める / 除外",
   "OpenProfileFolder": "プロファイルのファイルをPC上で表示",
   "ChangeProfileColor": "プロファイルの色を変更",
   "EditProfileName": "このプロファイル名の編集",
@@ -437,8 +437,8 @@
     "Plural": "{0} {1} を有効化"
   },
   "IncludedEnabledCount": {
-    "One": "{0} {1} を含めて有効化",
-    "Plural": "{0} {1} を含めて有効化"
+    "One": "{0} {1} を含める＆有効化",
+    "Plural": "{0} {1} を含める＆有効化"
   },
   "LoadedCount": {
     "One": "{0} {1} をロード済み",
