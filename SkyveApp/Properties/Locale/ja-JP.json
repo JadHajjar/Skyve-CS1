@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "プロファイルの削除に失敗！",
   "FailedToUpdateProfile": "プロファイルのアップデートに失敗！",
   "ImportFromLink": "プロファイルIDを使用してプロファイルをインポート",
-  "PasteProfileId": "インポートしたいプロファイルIDを貼り付け"
+  "PasteProfileId": "インポートしたいプロファイルIDを貼り付け",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }
