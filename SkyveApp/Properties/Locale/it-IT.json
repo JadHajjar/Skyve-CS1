@@ -563,6 +563,6 @@
   "FailedToUpdateProfile": "Non è stato possibile aggiornare il profilo",
   "ImportFromLink": "Importare un profilo utilizzando un ID profilo",
   "PasteProfileId": "Incollare l'ID del profilo che si desidera importare",
-  "AssumeInternetConnectivity": "Ignore Internet connection checks",
-  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
+  "AssumeInternetConnectivity": "Non controllare la presenza di una connessione Internet",
+  "AssumeInternetConnectivity_Tip": "Non viene verificata la presenza di una connessione a Internet, viene assunto che tu sia già connesso."
 }
