@@ -33,9 +33,9 @@ public partial class MainForm : BasePanelForm
 		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
 #if Stable
-		L_Version.Text = "v" + currentVersion.ToString();
+		L_Version.Text = "v" + currentVersion.GetString();
 #else
-		L_Version.Text = "v" + currentVersion.ToString() + " Beta";
+		L_Version.Text = "v" + currentVersion.GetString() + " Beta";
 #endif
 
 		try

@@ -335,6 +335,8 @@ internal class ContentUtil
 
 	internal static void StartListeners()
 	{
+		PackageWatcher.Dispose();
+
 		var addonsAssetsPath = new[]
 		{
 			LocationManager.AssetsPath,

@@ -11,6 +11,7 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -1151,10 +1152,13 @@ public static class ProfileManager
 		{
 			var result = await SkyveApiUtil.SaveUserProfile(new()
 			{
+				
 				Author = SteamUtil.GetLoggedInSteamId(),
 				Banner = item.BannerBytes,
 				Color = item.Color?.ToArgb(),
 				Name = item.Name,
+				ProfileUsage = (int)item.Usage,
+				ProfileId = item.ProfileId,
 				Contents = item.Assets.Concat(item.Mods).Select(x => x.AsProfileContent()).ToArray()
 			});
 

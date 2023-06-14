@@ -33,7 +33,7 @@ namespace SkyveMod;
 public class SkyveUserMod : IUserMod
 {
 	public static Version ModVersion => typeof(SkyveUserMod).Assembly.GetName().Version;
-	public static string VersionString => ModVersion.ToString(3);
+	public static string VersionString => ModVersion.ToString(4);
 #if Stable
 	public string Name => "Skyve " + VersionString;
 #else

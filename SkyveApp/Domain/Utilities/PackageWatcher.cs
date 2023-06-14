@@ -124,4 +124,14 @@ internal class PackageWatcher
 			item.CreateWatcher();
 		}
 	}
+
+	public static void Dispose()
+	{
+		foreach (var item in _watchers)
+		{
+			item.watcher?.Dispose();
+		}
+
+		_watchers.Clear();
+	}
 }

@@ -2,6 +2,7 @@
 
 using Newtonsoft.Json;
 
+using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Utilities.Managers;
 
 using System;
@@ -80,6 +81,14 @@ internal static class ApiUtil
 			return JsonConvert.DeserializeObject<T>(response);
 		}
 
+		if (typeof(T) == typeof(ApiResponse))
+		{
+			return (T)(object)new ApiResponse
+			{
+				Message = httpResponse.ReasonPhrase
+			};
+		}
+
 		return default;
 	}
 
@@ -144,6 +153,14 @@ internal static class ApiUtil
 			var response = await httpResponse.Content.ReadAsStringAsync();
 
 			return JsonConvert.DeserializeObject<T>(response);
+		}
+
+		if (typeof(T) == typeof(ApiResponse))
+		{
+			return (T)(object)new ApiResponse
+			{
+				Message = httpResponse.ReasonPhrase
+			};
 		}
 
 		return default;

@@ -19,6 +19,8 @@ internal static class SubscriptionsManager
 	private static readonly string _filePath = Path.Combine(LocationManager.SkyveAppDataPath, "SubscriptionTransfer.xml");
 	private static readonly List<ulong> _delayedDownloads = new();
 	private static readonly DelayedAction _delayedDownloadsAction = new(4000, RunDownload);
+	private static FileSystemWatcher? SubscriptionListWatcher;
+	private static FileSystemWatcher? SubscriptionTransferWatcher;
 
 	public static List<ulong> SubscribingTo { get; private set; } = new();
 	public static List<ulong> UnsubscribingFrom { get; private set; } = new();
@@ -175,28 +177,31 @@ internal static class SubscriptionsManager
 
 	internal static void Start()
 	{
-		var watcher = new FileSystemWatcher
+		SubscriptionListWatcher?.Dispose();
+		SubscriptionTransferWatcher?.Dispose();
+
+		SubscriptionListWatcher = new FileSystemWatcher
 		{
 			Path = LocationManager.SkyveAppDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = "SubscriptionList.txt"
 		};
 
-		watcher.Changed += new FileSystemEventHandler(FileChanged);
-		watcher.Created += new FileSystemEventHandler(FileChanged);
+		SubscriptionListWatcher.Changed += new FileSystemEventHandler(FileChanged);
+		SubscriptionListWatcher.Created += new FileSystemEventHandler(FileChanged);
 
-		watcher.EnableRaisingEvents = true;
+		SubscriptionListWatcher.EnableRaisingEvents = true;
 
-		var watcher2 = new FileSystemWatcher
+		SubscriptionTransferWatcher = new FileSystemWatcher
 		{
 			Path = LocationManager.SkyveAppDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = "SubscriptionTransfer.xml"
 		};
 
-		watcher2.Deleted += new FileSystemEventHandler(SubscriptionTransferFileChanged);
+		SubscriptionTransferWatcher.Deleted += new FileSystemEventHandler(SubscriptionTransferFileChanged);
 
-		watcher2.EnableRaisingEvents = true;
+		SubscriptionTransferWatcher.EnableRaisingEvents = true;
 
 		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
 	}

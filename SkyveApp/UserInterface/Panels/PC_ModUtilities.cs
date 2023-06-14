@@ -296,9 +296,18 @@ public partial class PC_ModUtilities : PanelContent
 		slickSpacer1.Visible = slickScroll1.Percentage != 0;
 	}
 
-	private void B_ReloadAllData_Click(object sender, EventArgs e)
+	private async void B_ReloadAllData_Click(object sender, EventArgs e)
 	{
-
+		if (!B_ReloadAllData.Loading)
+		{
+			B_ReloadAllData.Loading = true;
+			await Task.Run(CentralManager.Start);
+			B_ReloadAllData.Loading = false;
+			var img = B_ReloadAllData.ImageName;
+			B_ReloadAllData.ImageName = "I_Check";
+			await Task.Delay(1500);
+			B_ReloadAllData.ImageName = img;
+		}
 	}
 
 	private async void B_ResetSnoozes_Click(object sender, EventArgs e)
