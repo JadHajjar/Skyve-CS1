@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "ล้มเหลวในการลบโพร์ไฟล์ของคุณ",
   "FailedToUpdateProfile": "ล้มเหลวในการอัปเดตโพร์ไฟล์ของคุณ",
   "ImportFromLink": "นำเข้าโพร์ไฟล์โดยใช้ ID ของโพร์ไฟล์",
-  "PasteProfileId": "วาง ID ของโพร์ไฟล์ที่คุณต้องการนำเข้า"
+  "PasteProfileId": "วาง ID ของโพร์ไฟล์ที่คุณต้องการนำเข้า",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }
