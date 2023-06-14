@@ -552,7 +552,7 @@
   "ShareProfile": "อัปโหลดโพร์ไฟล์นี้",
   "ResetInfo": "คำเตือน! การตั้งค่าใหม่นั้น จะไม่สามารถย้อนกลับเป็นค่าเดิมได้",
   "FailedToDownloadProfile": "ดาวน์โหลดไพร์ไฟล์นี้ไม่สำเร็จ\n\nกรุณาลองใหม่อีกครั้ง",
-  "UpdateProfileTip": "อัปเดตโพร์ไฟล์นี้ให้กับเวอร์ชั่นที่อยู่ในเครื่องของคุณ",
+  "UpdateProfileTip": "อัปเดตโพร์ไฟล์นี้ให้กับเวอร์ชันที่อยู่ในเครื่องของคุณ",
   "DownloadProfileTip": "Donwload this profile to your local computer",
   "EditProfileThumbnail": "แก้ไขภาพตัวอย่างของโพร์ไฟล์นี้",
   "MakePublic": "ทำให้โพร์ไฟล์นี้เป็นสาธารณะ",
@@ -563,6 +563,6 @@
   "FailedToUpdateProfile": "ล้มเหลวในการอัปเดตโพร์ไฟล์ของคุณ",
   "ImportFromLink": "นำเข้าโพร์ไฟล์โดยใช้ ID ของโพร์ไฟล์",
   "PasteProfileId": "วาง ID ของโพร์ไฟล์ที่คุณต้องการนำเข้า",
-  "AssumeInternetConnectivity": "Ignore Internet connection checks",
-  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
+  "AssumeInternetConnectivity": "ละเว้นการตรวจสอบการเชื่อมต่ออินเทอร์เน็ต",
+  "AssumeInternetConnectivity_Tip": "ข้ามการตรวจสอบอินเทอร์เน็ตแล้วสมมติว่าคุณได้มีการเชื่อมต่อแล้วโดยอัตโนมัติ"
 }
