@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "Non è stato possibile eliminare il profilo",
   "FailedToUpdateProfile": "Non è stato possibile aggiornare il profilo",
   "ImportFromLink": "Importare un profilo utilizzando un ID profilo",
-  "PasteProfileId": "Incollare l'ID del profilo che si desidera importare"
+  "PasteProfileId": "Incollare l'ID del profilo che si desidera importare",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }
