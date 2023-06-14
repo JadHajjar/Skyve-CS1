@@ -506,7 +506,7 @@
                     "Added 2 new buttons in the Help & Logs page.",
                     "Compatibility & package statuses are now shown on the right in the list.",
                     "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
+                    "Lokala mods namn och etikett har uppdaterats.",
                     "Missing source code will now generate a warning instead of an unsubscribe notification.",
                     "Required mods now have a different UI to let you know you can not exclude them.",
                     "Added a setting in-game to enable hot-reload for mods & assets.",
