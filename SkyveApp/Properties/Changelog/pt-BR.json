@@ -452,9 +452,9 @@
         "Date": "2023-06-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Fixed the crash on launch."
+                    "Corrigido o problema de travamento ao abrir."
                 ]
             }
         ]
@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correções",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "Atualizado para a versão mais recente do jogo."
                 ]
             }
         ]
@@ -474,44 +474,44 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "Perfis online, chegando aí!",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "Perfis Online",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "Agora você pode enviar um perfil online, com até 5 perfis por usuário.",
+                    "Os perfis enviados podem ser privados, compartilhados com um ID ou públicos para que todos possam ver.",
+                    "Os perfis online podem ser baixados ou atualizados caso você já os tenha localmente.",
+                    "Você pode descobrir perfis online usando um novo botão na guia Perfis.",
+                    "Adicionada uma terceira opção na página \"Adicionar Perfil\" para importar um perfil online usando o seu ID."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "Alterações de Perfil",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "A guia \"Perfis\" na barra lateral agora abrirá a lista de perfis em vez das configurações do seu perfil atual.",
+                    "A lista de perfis agora usa uma visualização em grade e você pode alternar entre a visualização em grade e em lista.",
+                    "O design dos botões de ação superior foi alterado em ambas as páginas de perfis",
+                    "Agora, se o seu perfil tiver alterações não salvas, o logotipo do Skyve ficará iluminado em roxo.",
+                    "Perfis agora tem imagens em miniaturas.",
+                    "Uso de perfil agora são separados por icones."
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "Novo e Atualizado",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Adicionada uma nova página de perfil de usuário, acessada ao clicar no autor de um mod ou perfil. Esta página inclui todos os perfis e pacotes do usuário.",
+                    "As exclusões feitas pelo Skyve agora enviarão os arquivos para a lixeira no Windows.",
+                    "Foram adicionados 6 novos botões de redefinição na página de Utilitários.",
+                    "Foram adicionados 2 novos botões na página de Ajuda e Registros.",
+                    "Compatibilidade e Estado do Pacote agora são exibidos a direita para facilitar a referência.",
+                    "Agora, os pacotes quebrados, incompatíveis ou banidos possuem um novo plano de fundo na lista para fácil identificação.",
+                    "O nome e a etiqueta dos mods locais foram atualizados.",
+                    "A ausência do código-fonte agora gerará um aviso em vez de uma notificação de cancelamento de inscrição.",
+                    "Os mods necessários agora têm uma interface diferente para informar que você não pode excluí-los.",
+                    "Adicionada uma configuração no jogo para ativar o recarregamento rápido de mods e recursos.",
+                    "Melhorado o desempenho ao incluir/excluir recursos.",
+                    "Adicionado idioma húngaro"
                 ]
             }
         ]

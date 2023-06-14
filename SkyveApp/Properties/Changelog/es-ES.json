@@ -23,7 +23,7 @@
                 ]
             },
             {
-                "Name": "Corregido",
+                "Name": "Correcciones",
                 "Changes": [
                     "Perfiles antiguos no se convertían después de ejecutar la herramienta por primera vez.",
                     "Activos locales no se actualizan automáticamente después de los cambios externos.",
@@ -55,7 +55,7 @@
                 ]
             },
             {
-                "Name": "Corregidos",
+                "Name": "Correcciones",
                 "Changes": [
                     "Se ha corregido el texto al importar colecciones de suscribirse y anular suscripción.",
                     "Se ha corregido la selección de mapas para un nuevo juego que no permitía a los usuarios seleccionar un mapa Vanilla."
@@ -68,7 +68,7 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "Corregido",
+                "Name": "Correcciones",
                 "Changes": [
                     "Error que causaba una carga infinita para algunos usuarios."
                 ]
@@ -146,7 +146,7 @@
                 ]
             },
             {
-                "Name": "Corregidos",
+                "Name": "Correcciones",
                 "Changes": [
                     "Bloqueos que ocurren en las páginas de la lista de contenidos.",
                     "Guardado automático de Perfiles no funciona correctamente.",
@@ -171,7 +171,7 @@
                 ]
             },
             {
-                "Name": "Corregido",
+                "Name": "Correcciones",
                 "Changes": [
                     "ID se leen correctamente al importar una colección.",
                     "LOT no respondía en Mac/Linux al anular la suscipción a un paquete."
@@ -222,7 +222,7 @@
                 ]
             },
             {
-                "Name": "Corregidos",
+                "Name": "Correcciones",
                 "Changes": [
                     "Inicio de LOT después de apagar el monitor debido a que la ventana no se mostraba.",
                     "Se ha corregido la opción LHT que no funcionaba al ejecutar el juego en un nuevo mapa.",
@@ -343,7 +343,7 @@
                     "Se creará un acceso directo cuando abra Skyve por primera vez tras haber tenido LOM2.",
                     "Se ha corregido un caso extraño en el que la información de compatibilidad no cargaba.",
                     "Se ha habilitado la habilidad de solicitar una revisión para los paquetes defectuosos.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Se ha atenuado la sensibilidad de la notificación \"Parcialmente Descargada\"."
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Cambios",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Se ha mejorado el rendimiento de la aplicación.",
+                    "Interacción entre mods similares mostrados en el Informe de compatibilidad cuando sólo tienes uno de ellos.",
+                    "Detección de mods en la carpeta local de assets."
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correcciones",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Pestaña de opciones no se abre para macOS y Linux.",
+                    "Pestaña Ayuda y Registros no carga el registro actual automáticamente.",
+                    "Ruta del archivo de registro que estaba en Linux."
                 ]
             }
         ]
@@ -381,18 +381,18 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Cambios",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Los paneles de Steam en el menú principal ahora se muestran de manera predeterminada, todavía puede ocultarlos en la configuración del mod.",
+                    "Al solicitar una revisión ahora requiere una descripción válida y también envía tus registros con la solicitud. Un aviso se muestra junto al botón 'Enviar'.",
+                    "Reducido el nivel de reporte de un mod que no ha sido actualizado en un tiempo a 'Info' para que no te notifique al respecto."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correcciones",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Resumen de assets no se muestran en la consola.",
+                    "Estado desactualizado no funciona correctamente."
                 ]
             }
         ]
@@ -402,12 +402,12 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Correcciones",
                 "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "Mensaje para informarte cuando termine 'Corregir todos los problemas' y 'Ejecutar limpieza'.",
+                    "Se ha corregido un error raro en el que cargar un perfil de LOT 1 seguiría cargando para siempre.",
+                    "Registro de cambios no se abre en algunos idiomas.",
+                    "Suscribirse a una gran cantidad de artículos que fallan o que no funcionan."
                 ]
             }
         ]
@@ -417,32 +417,32 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Proceso de suscripción ha sido revisada y optimizada",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Ahora puedes suscribirte a los paquetes mientras el juego está en ejecución.",
+                    "Suscribirse a múltiples objetos seguidos los pondrá en una lista pendiente en lugar de ejecutar el juego cada vez.",
+                    "Se ha añadido un cuadro en la parte inferior izquierda de la aplicación para informarte de cualquier tarea pendiente de suscripción/anular suscripción.",
+                    "Se ha añadido una opción avanzada para forzar la descarga o anulación de paquetes tan pronto como se suscriba/anule su suscripción en Skyve.",
+                    "Nuevas suscripciones ya no se vuelven a cargar mientras el juego se está ejecutando. Al hacerlo, evita que tu juego y los mods funcionen mal."
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Novedades",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "Opción \"Ver el contenido de este perfil\" en el menú de clic derecho de los perfiles.",
+                    "Opción \"Forzar descarga\" en el menú de clic derecho de los paquetes.",
+                    "Más contexto a algunas ventanas emergentes",
+                    "Oopción \"Descargar todos los elementos mostrados\" en las acciones en las páginas de la lista."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Correcciones",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-                    "Improved the performance for people with a lot of mods."
+                    "Lista de perfiles no se actualiza inmediatamente.",
+                    "Paquetes de perfil no muestran el nombre del Workshop de Steam.",
+                    "Información de Steam de los paquetes no cargados desde la primera vez que se visualizaba un perfil o colección.",
+                    "El nombre de los mods locales ha sido revertido al nombre de la carpeta en lugar del Workshop para prevenir problemas.",
+                    "Mejoró el rendimiento de las personas con muchos mods."
                 ]
             }
         ]
@@ -452,9 +452,9 @@
         "Date": "2023-06-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correcciones",
                 "Changes": [
-                    "Fixed the crash on launch."
+                    "Se ha corregido el fallo al iniciar el juego."
                 ]
             }
         ]
@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Correcciones",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "Actualizado para el último parche del juego."
                 ]
             }
         ]
@@ -474,44 +474,44 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "¡Presentando los perfiles en línea!",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "Perfiles en Línea",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "Ahora puedes subir un perfil en línea, hasta 5 perfiles por usuario.",
+                    "Los perfiles cargados pueden ser privados, compartidos con un ID, o públicos para que todos los puedan ver.",
+                    "Los perfiles en línea se pueden descargar o actualizar si ya los tienes localmente.",
+                    "Puede descubrir perfiles en línea usando un nuevo botón en la pestaña Perfiles.",
+                    "Se añadió una tercera opción en la página 'Agregar perfil' para importar un perfil en línea usando su ID."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "Cambio en Perfiles",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "La pestaña 'Perfiles' en la barra lateral ahora abrirá su lista de perfiles en lugar de la configuración de su perfil actual.",
+                    "La lista de perfiles ahora usa una vista de cuadrícula y puede alternar entre la vista de cuadrícula y lista.",
+                    "Cambiado el diseño de los botones de acción superiores en ambas páginas de perfil",
+                    "Si tu perfil tiene cambios sin guardar, el logotipo de Skyve ahora se iluminará púrpura.",
+                    "Los perfiles ahora pueden tener miniaturas (imágenes). Las imágenes deben tener un radio de 7:2 y un ancho máximo de 700px",
+                    "Los usos del perfil ahora tienen iconos separados."
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "Novedades y Actualizaciones",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Se ha añadido una nueva página de perfil de usuario, a la que se accede haciendo clic en el autor de un mod o perfil. Esta página incluye todos los perfiles y paquetes del usuario.",
+                    "Al eliminar perfiles de Skyve, se enviarán a la papelera de reciclaje en Windows.",
+                    "Añadidos 6 nuevos botones de restablecimiento en la página de utilidades.",
+                    "Se han añadido 2 nuevos botones en la página Ayuda y registros.",
+                    "Compatibilidad y estados del paquete ahora se muestran a la derecha en la lista.",
+                    "Los paquetes rotos, incompatibles y prohibidos ahora tienen un nuevo contexto en la lista.",
+                    "El nombre y la etiqueta de los mods locales han sido actualizados.",
+                    "Falta el código fuente generará ahora una advertencia en lugar de una notificación de baja de suscripción.",
+                    "Los mods requeridos ahora tienen una interfaz diferente para hacerle saber que no puede excluirlos.",
+                    "Se ha añadido un ajuste en el juego para habilitar 'hot-reload' para mods y activos.",
+                    "Rendimiento mejorado al incluir/excluir paquetes.",
+                    "Añadido idioma Ucraniano"
                 ]
             }
         ]

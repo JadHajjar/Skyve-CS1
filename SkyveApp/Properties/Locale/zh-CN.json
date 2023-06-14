@@ -553,7 +553,7 @@
   "ResetInfo": "Caution! Resetting anything can not be undone.",
   "FailedToDownloadProfile": "Failed to download this profile.\r\n\r\nPlease try again later.",
   "UpdateProfileTip": "Update your local version of this profile",
-  "DownloadProfileTip": "Download this profile to your local computer",
+  "DownloadProfileTip": "Donwload this profile to your local computer",
   "EditProfileThumbnail": "Edit this profile's thumbnail picture",
   "MakePublic": "Make this profile Public",
   "MakePrivate": "Make this profile Private",
@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "Failed to delete your profile",
   "FailedToUpdateProfile": "Failed to update your profile",
   "ImportFromLink": "Import a profile using a profile ID",
-  "PasteProfileId": "Paste the ID of the profile you'd like to import"
+  "PasteProfileId": "Paste the ID of the profile you'd like to import",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }

@@ -553,7 +553,7 @@
   "ResetInfo": "Varning! Återställning kan inte ångras.",
   "FailedToDownloadProfile": "Kunde inte ladda ner denna profil.\n\nFörsök igen senare.",
   "UpdateProfileTip": "Uppdatera din lokala version av denna profil",
-  "DownloadProfileTip": "Ladda ner denna profil till din lokala dator",
+  "DownloadProfileTip": "Donwload this profile to your local computer",
   "EditProfileThumbnail": "Redigera profilens miniatyrbild",
   "MakePublic": "Gör denna profil offentlig",
   "MakePrivate": "Gör denna profil privat",
@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "Det gick inte att ta bort din profil",
   "FailedToUpdateProfile": "Det gick inte att uppdatera din profil",
   "ImportFromLink": "Importera en profil med hjälp av profil-ID",
-  "PasteProfileId": "Klistra in ID för den profil du vill importera"
+  "PasteProfileId": "Klistra in ID för den profil du vill importera",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }

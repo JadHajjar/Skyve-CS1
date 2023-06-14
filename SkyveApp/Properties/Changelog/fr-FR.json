@@ -481,13 +481,13 @@
                 "Changes": [
                     "Vous pouvez désormais mettre en ligne un profil, dans la limite de 5 par utilisateur.",
                     "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Les profils de la communauté peuvent être téléchargé ou mis à jour si vous l'avez localement.",
+                    "Vous pouvez découvrir des profils de la communauté en utilisant le nouveau bouton dans l'onglet profils.",
                     "Added a third option in the 'Add Profile' page to import an online profile using its ID."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "Changements de profil",
                 "Changes": [
                     "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
                     "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
@@ -510,8 +510,8 @@
                     "Missing source code will now generate a warning instead of an unsubscribe notification.",
                     "Required mods now have a different UI to let you know you can not exclude them.",
                     "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Amélioration des performances en activant/désactivant les paquets.",
+                    "Ajout de la traduction Hongroise"
                 ]
             }
         ]

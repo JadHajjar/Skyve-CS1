@@ -525,8 +525,8 @@
     "Plural": "항목 {0}개 제거 대기 중"
   },
   "YouHavePackagesUser": {
-    "One": "{1} 가 만든 패키지 {0}개가 있습니다",
-    "Plural": "{1} 가 만든 패키지 {0}개가 있습니다"
+    "One": "현재 {1}(이)가 만든 패키지를 {0}개 가지고 있습니다",
+    "Plural": "현재 {1}(이)가 만든 패키지를 {0}개 가지고 있습니다"
   },
   "RequestOption1": "문제를 보고하거나 누락된 정보를 추가하기",
   "RequestOption2": "누락된 패캐지의 상태를 추가하기",
@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "프로필을 삭제하는 데 실패했습니다",
   "FailedToUpdateProfile": "프로필을 업데이트하는 데 실패했습니다",
   "ImportFromLink": "프로필 ID로 프로필 가져오기",
-  "PasteProfileId": "가져오고자 하는 프로필의 ID를 붙여넣으세요"
+  "PasteProfileId": "가져오고자 하는 프로필의 ID를 붙여넣으세요",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }
