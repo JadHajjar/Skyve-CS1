@@ -562,5 +562,7 @@
   "FailedToDeleteProfile": "Löschen des Profils fehlgeschlagen",
   "FailedToUpdateProfile": "Aktualisieren des Profils fehlgeschlagen",
   "ImportFromLink": "Ein Profil mit Profil-ID importieren",
-  "PasteProfileId": "Füge die ID des Profils ein, das du importieren willst"
+  "PasteProfileId": "Füge die ID des Profils ein, das du importieren willst",
+  "AssumeInternetConnectivity": "Ignore Internet connection checks",
+  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
 }
