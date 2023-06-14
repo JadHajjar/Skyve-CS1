@@ -32,9 +32,9 @@ partial class PC_Profile
 	/// </summary>
 	private void InitializeComponent()
 	{
+			SlickControls.DynamicIcon dynamicIcon12 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon11 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon12 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
@@ -118,18 +118,18 @@ partial class PC_Profile
 			this.TLP_ProfileName.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_ProfileName.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_ProfileName.Controls.Add(this.I_ProfileIcon, 1, 0);
-			this.TLP_ProfileName.Controls.Add(this.L_CurrentProfile, 2, 0);
-			this.TLP_ProfileName.Controls.Add(this.B_EditName, 4, 0);
-			this.TLP_ProfileName.Controls.Add(this.TB_Name, 3, 0);
+			this.TLP_ProfileName.Controls.Add(this.L_CurrentProfile, 3, 0);
+			this.TLP_ProfileName.Controls.Add(this.TB_Name, 4, 0);
 			this.TLP_ProfileName.Controls.Add(this.B_Save, 5, 0);
 			this.TLP_ProfileName.Controls.Add(this.I_Favorite, 0, 0);
+			this.TLP_ProfileName.Controls.Add(this.B_EditName, 2, 0);
 			this.TLP_ProfileName.Location = new System.Drawing.Point(10, 10);
 			this.TLP_ProfileName.Margin = new System.Windows.Forms.Padding(10);
 			this.TLP_ProfileName.Name = "TLP_ProfileName";
 			this.TLP_ProfileName.Padding = new System.Windows.Forms.Padding(5);
 			this.TLP_ProfileName.RowCount = 1;
 			this.TLP_ProfileName.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_ProfileName.Size = new System.Drawing.Size(471, 42);
+			this.TLP_ProfileName.Size = new System.Drawing.Size(455, 42);
 			this.TLP_ProfileName.TabIndex = 3;
 			// 
 			// I_ProfileIcon
@@ -150,9 +150,9 @@ partial class PC_Profile
 			// 
 			this.L_CurrentProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_CurrentProfile.AutoSize = true;
-			this.L_CurrentProfile.Location = new System.Drawing.Point(72, 6);
+			this.L_CurrentProfile.Location = new System.Drawing.Point(104, 9);
 			this.L_CurrentProfile.Name = "L_CurrentProfile";
-			this.L_CurrentProfile.Size = new System.Drawing.Size(71, 30);
+			this.L_CurrentProfile.Size = new System.Drawing.Size(55, 23);
 			this.L_CurrentProfile.TabIndex = 1;
 			this.L_CurrentProfile.Text = "label1";
 			// 
@@ -161,9 +161,9 @@ partial class PC_Profile
 			this.B_EditName.ActiveColor = null;
 			this.B_EditName.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_EditName.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon10.Name = "I_Edit";
-			this.B_EditName.ImageName = dynamicIcon10;
-			this.B_EditName.Location = new System.Drawing.Point(402, 5);
+			dynamicIcon12.Name = "I_Edit";
+			this.B_EditName.ImageName = dynamicIcon12;
+			this.B_EditName.Location = new System.Drawing.Point(69, 5);
 			this.B_EditName.Margin = new System.Windows.Forms.Padding(0);
 			this.B_EditName.Name = "B_EditName";
 			this.B_EditName.Padding = new System.Windows.Forms.Padding(5);
@@ -176,10 +176,10 @@ partial class PC_Profile
 			// 
 			this.TB_Name.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.TB_Name.EnterTriggersClick = false;
-			dynamicIcon11.Name = "I_Ok";
-			this.TB_Name.ImageName = dynamicIcon11;
+			dynamicIcon10.Name = "I_Ok";
+			this.TB_Name.ImageName = dynamicIcon10;
 			this.TB_Name.LabelText = "ProfileName";
-			this.TB_Name.Location = new System.Drawing.Point(149, 9);
+			this.TB_Name.Location = new System.Drawing.Point(165, 9);
 			this.TB_Name.Name = "TB_Name";
 			this.TB_Name.Placeholder = "RenameProfile";
 			this.TB_Name.SelectedText = "";
@@ -198,9 +198,9 @@ partial class PC_Profile
 			this.B_Save.ActiveColor = null;
 			this.B_Save.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_Save.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon12.Name = "I_Save";
-			this.B_Save.ImageName = dynamicIcon12;
-			this.B_Save.Location = new System.Drawing.Point(434, 5);
+			dynamicIcon11.Name = "I_Save";
+			this.B_Save.ImageName = dynamicIcon11;
+			this.B_Save.Location = new System.Drawing.Point(418, 5);
 			this.B_Save.Margin = new System.Windows.Forms.Padding(0);
 			this.B_Save.Name = "B_Save";
 			this.B_Save.Padding = new System.Windows.Forms.Padding(5);
@@ -260,7 +260,7 @@ partial class PC_Profile
 			this.B_AddProfile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.B_AddProfile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.B_AddProfile.Controls.Add(this.slickIcon2, 0, 0);
-			this.B_AddProfile.Location = new System.Drawing.Point(565, 10);
+			this.B_AddProfile.Location = new System.Drawing.Point(549, 10);
 			this.B_AddProfile.Margin = new System.Windows.Forms.Padding(10);
 			this.B_AddProfile.Name = "B_AddProfile";
 			this.B_AddProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -288,7 +288,7 @@ partial class PC_Profile
 			this.B_TempProfile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.B_TempProfile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.B_TempProfile.Controls.Add(this.slickIcon1, 0, 0);
-			this.B_TempProfile.Location = new System.Drawing.Point(501, 10);
+			this.B_TempProfile.Location = new System.Drawing.Point(485, 10);
 			this.B_TempProfile.Margin = new System.Windows.Forms.Padding(10);
 			this.B_TempProfile.Name = "B_TempProfile";
 			this.B_TempProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -319,7 +319,7 @@ partial class PC_Profile
 			this.I_TempProfile.Enabled = false;
 			dynamicIcon3.Name = "I_Warning";
 			this.I_TempProfile.ImageName = dynamicIcon3;
-			this.I_TempProfile.Location = new System.Drawing.Point(18, 85);
+			this.I_TempProfile.Location = new System.Drawing.Point(18, 81);
 			this.I_TempProfile.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
 			this.I_TempProfile.Name = "I_TempProfile";
 			this.I_TempProfile.Padding = new System.Windows.Forms.Padding(5);
@@ -336,7 +336,7 @@ partial class PC_Profile
 			this.L_TempProfile.Location = new System.Drawing.Point(56, 86);
 			this.L_TempProfile.Margin = new System.Windows.Forms.Padding(3, 10, 10, 10);
 			this.L_TempProfile.Name = "L_TempProfile";
-			this.L_TempProfile.Size = new System.Drawing.Size(71, 30);
+			this.L_TempProfile.Size = new System.Drawing.Size(55, 23);
 			this.L_TempProfile.TabIndex = 15;
 			this.L_TempProfile.Text = "label1";
 			this.L_TempProfile.UseMnemonic = false;
@@ -346,9 +346,9 @@ partial class PC_Profile
 			this.TLP_Main.SetColumnSpan(this.P_Options, 6);
 			this.P_Options.Controls.Add(this.P_ScrollPanel);
 			this.P_Options.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.P_Options.Location = new System.Drawing.Point(3, 179);
+			this.P_Options.Location = new System.Drawing.Point(3, 165);
 			this.P_Options.Name = "P_Options";
-			this.P_Options.Size = new System.Drawing.Size(1176, 607);
+			this.P_Options.Size = new System.Drawing.Size(1176, 621);
 			this.P_Options.TabIndex = 4;
 			// 
 			// P_ScrollPanel
@@ -359,16 +359,16 @@ partial class PC_Profile
 			this.P_ScrollPanel.Location = new System.Drawing.Point(0, 0);
 			this.P_ScrollPanel.Margin = new System.Windows.Forms.Padding(5);
 			this.P_ScrollPanel.Name = "P_ScrollPanel";
-			this.P_ScrollPanel.Size = new System.Drawing.Size(1176, 607);
+			this.P_ScrollPanel.Size = new System.Drawing.Size(1176, 621);
 			this.P_ScrollPanel.TabIndex = 0;
 			// 
 			// slickScroll
 			// 
 			this.slickScroll.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll.LinkedControl = this.TLP_Options;
-			this.slickScroll.Location = new System.Drawing.Point(1166, 0);
+			this.slickScroll.Location = new System.Drawing.Point(1167, 0);
 			this.slickScroll.Name = "slickScroll";
-			this.slickScroll.Size = new System.Drawing.Size(10, 607);
+			this.slickScroll.Size = new System.Drawing.Size(9, 621);
 			this.slickScroll.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll.TabIndex = 16;
 			this.slickScroll.TabStop = false;
@@ -393,7 +393,7 @@ partial class PC_Profile
 			this.TLP_Options.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Options.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Options.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Options.Size = new System.Drawing.Size(1176, 747);
+			this.TLP_Options.Size = new System.Drawing.Size(1176, 610);
 			this.TLP_Options.TabIndex = 0;
 			// 
 			// TLP_GeneralSettings
@@ -411,12 +411,12 @@ partial class PC_Profile
 			this.TLP_GeneralSettings.ImageName = dynamicIcon4;
 			this.TLP_GeneralSettings.Location = new System.Drawing.Point(3, 3);
 			this.TLP_GeneralSettings.Name = "TLP_GeneralSettings";
-			this.TLP_GeneralSettings.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.TLP_GeneralSettings.Padding = new System.Windows.Forms.Padding(7, 43, 7, 7);
 			this.TLP_GeneralSettings.RowCount = 3;
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_GeneralSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_GeneralSettings.Size = new System.Drawing.Size(582, 159);
+			this.TLP_GeneralSettings.Size = new System.Drawing.Size(582, 143);
 			this.TLP_GeneralSettings.TabIndex = 0;
 			this.TLP_GeneralSettings.Text = "Settings";
 			// 
@@ -429,10 +429,10 @@ partial class PC_Profile
 			this.CB_AutoSave.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_AutoSave.DefaultValue = false;
 			this.CB_AutoSave.EnterTriggersClick = false;
-			this.CB_AutoSave.Location = new System.Drawing.Point(12, 114);
+			this.CB_AutoSave.Location = new System.Drawing.Point(10, 103);
 			this.CB_AutoSave.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
 			this.CB_AutoSave.Name = "CB_AutoSave";
-			this.CB_AutoSave.Size = new System.Drawing.Size(184, 33);
+			this.CB_AutoSave.Size = new System.Drawing.Size(152, 30);
 			this.CB_AutoSave.SpaceTriggersClick = true;
 			this.CB_AutoSave.TabIndex = 1;
 			this.CB_AutoSave.Text = "AutoSave";
@@ -442,9 +442,9 @@ partial class PC_Profile
 			// DD_ProfileUsage
 			// 
 			this.DD_ProfileUsage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_ProfileUsage.Location = new System.Drawing.Point(12, 57);
+			this.DD_ProfileUsage.Location = new System.Drawing.Point(10, 46);
 			this.DD_ProfileUsage.Name = "DD_ProfileUsage";
-			this.DD_ProfileUsage.Size = new System.Drawing.Size(375, 51);
+			this.DD_ProfileUsage.Size = new System.Drawing.Size(310, 51);
 			this.DD_ProfileUsage.TabIndex = 2;
 			this.DD_ProfileUsage.Text = "Usage";
 			this.DD_ProfileUsage.SelectedItemChanged += new System.EventHandler(this.T_ProfileUsage_SelectedValueChanged);
@@ -471,7 +471,7 @@ partial class PC_Profile
 			this.TLP_LaunchSettings.ImageName = dynamicIcon5;
 			this.TLP_LaunchSettings.Location = new System.Drawing.Point(591, 3);
 			this.TLP_LaunchSettings.Name = "TLP_LaunchSettings";
-			this.TLP_LaunchSettings.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.TLP_LaunchSettings.Padding = new System.Windows.Forms.Padding(7, 43, 7, 7);
 			this.TLP_LaunchSettings.RowCount = 7;
 			this.TLP_Options.SetRowSpan(this.TLP_LaunchSettings, 2);
 			this.TLP_LaunchSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -481,7 +481,7 @@ partial class PC_Profile
 			this.TLP_LaunchSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LaunchSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LaunchSettings.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_LaunchSettings.Size = new System.Drawing.Size(582, 422);
+			this.TLP_LaunchSettings.Size = new System.Drawing.Size(582, 368);
 			this.TLP_LaunchSettings.TabIndex = 1;
 			this.TLP_LaunchSettings.Text = "LaunchSettings";
 			// 
@@ -491,9 +491,9 @@ partial class PC_Profile
 			this.TLP_LaunchSettings.SetColumnSpan(this.DD_NewMap, 2);
 			this.DD_NewMap.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_NewMap.Dock = System.Windows.Forms.DockStyle.Top;
-			this.DD_NewMap.Location = new System.Drawing.Point(12, 200);
+			this.DD_NewMap.Location = new System.Drawing.Point(10, 154);
 			this.DD_NewMap.Name = "DD_NewMap";
-			this.DD_NewMap.Size = new System.Drawing.Size(558, 63);
+			this.DD_NewMap.Size = new System.Drawing.Size(562, 63);
 			this.DD_NewMap.TabIndex = 3;
 			this.DD_NewMap.Text = "MapFileInfo";
 			this.DD_NewMap.ValidExtensions = new string[] {
@@ -508,10 +508,10 @@ partial class PC_Profile
 			this.CB_LHT.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_LHT.DefaultValue = false;
 			this.CB_LHT.EnterTriggersClick = false;
-			this.CB_LHT.Location = new System.Drawing.Point(12, 64);
+			this.CB_LHT.Location = new System.Drawing.Point(10, 53);
 			this.CB_LHT.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_LHT.Name = "CB_LHT";
-			this.CB_LHT.Size = new System.Drawing.Size(196, 33);
+			this.CB_LHT.Size = new System.Drawing.Size(162, 30);
 			this.CB_LHT.SpaceTriggersClick = true;
 			this.CB_LHT.TabIndex = 0;
 			this.CB_LHT.Text = "LHT";
@@ -524,9 +524,9 @@ partial class PC_Profile
 			this.TLP_LaunchSettings.SetColumnSpan(this.DD_SaveFile, 2);
 			this.DD_SaveFile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_SaveFile.Dock = System.Windows.Forms.DockStyle.Top;
-			this.DD_SaveFile.Location = new System.Drawing.Point(12, 308);
+			this.DD_SaveFile.Location = new System.Drawing.Point(10, 259);
 			this.DD_SaveFile.Name = "DD_SaveFile";
-			this.DD_SaveFile.Size = new System.Drawing.Size(558, 63);
+			this.DD_SaveFile.Size = new System.Drawing.Size(562, 63);
 			this.DD_SaveFile.TabIndex = 5;
 			this.DD_SaveFile.Text = "SaveFileInfo";
 			this.DD_SaveFile.ValidExtensions = new string[] {
@@ -541,10 +541,10 @@ partial class PC_Profile
 			this.CB_NoWorkshop.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_NoWorkshop.DefaultValue = false;
 			this.CB_NoWorkshop.EnterTriggersClick = false;
-			this.CB_NoWorkshop.Location = new System.Drawing.Point(294, 64);
+			this.CB_NoWorkshop.Location = new System.Drawing.Point(294, 53);
 			this.CB_NoWorkshop.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_NoWorkshop.Name = "CB_NoWorkshop";
-			this.CB_NoWorkshop.Size = new System.Drawing.Size(205, 62);
+			this.CB_NoWorkshop.Size = new System.Drawing.Size(246, 30);
 			this.CB_NoWorkshop.SpaceTriggersClick = true;
 			this.CB_NoWorkshop.TabIndex = 1;
 			this.CB_NoWorkshop.Text = "NoWorkshop";
@@ -555,9 +555,9 @@ partial class PC_Profile
 			// 
 			this.TLP_LaunchSettings.SetColumnSpan(this.slickSpacer1, 2);
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.slickSpacer1.Location = new System.Drawing.Point(12, 132);
+			this.slickSpacer1.Location = new System.Drawing.Point(10, 89);
 			this.slickSpacer1.Name = "slickSpacer1";
-			this.slickSpacer1.Size = new System.Drawing.Size(558, 23);
+			this.slickSpacer1.Size = new System.Drawing.Size(562, 23);
 			this.slickSpacer1.TabIndex = 10;
 			this.slickSpacer1.TabStop = false;
 			this.slickSpacer1.Text = "slickSpacer1";
@@ -572,9 +572,9 @@ partial class PC_Profile
 			this.CB_LoadSave.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_LoadSave.DefaultValue = false;
 			this.CB_LoadSave.EnterTriggersClick = false;
-			this.CB_LoadSave.Location = new System.Drawing.Point(12, 269);
+			this.CB_LoadSave.Location = new System.Drawing.Point(10, 223);
 			this.CB_LoadSave.Name = "CB_LoadSave";
-			this.CB_LoadSave.Size = new System.Drawing.Size(338, 33);
+			this.CB_LoadSave.Size = new System.Drawing.Size(276, 30);
 			this.CB_LoadSave.SpaceTriggersClick = true;
 			this.CB_LoadSave.TabIndex = 4;
 			this.CB_LoadSave.Text = "LoadSaveGame";
@@ -590,9 +590,9 @@ partial class PC_Profile
 			this.CB_StartNewGame.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_StartNewGame.DefaultValue = false;
 			this.CB_StartNewGame.EnterTriggersClick = false;
-			this.CB_StartNewGame.Location = new System.Drawing.Point(12, 161);
+			this.CB_StartNewGame.Location = new System.Drawing.Point(10, 118);
 			this.CB_StartNewGame.Name = "CB_StartNewGame";
-			this.CB_StartNewGame.Size = new System.Drawing.Size(202, 33);
+			this.CB_StartNewGame.Size = new System.Drawing.Size(167, 30);
 			this.CB_StartNewGame.SpaceTriggersClick = true;
 			this.CB_StartNewGame.TabIndex = 2;
 			this.CB_StartNewGame.Text = "NewGame";
@@ -608,9 +608,9 @@ partial class PC_Profile
 			this.CB_NewAsset.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_NewAsset.DefaultValue = false;
 			this.CB_NewAsset.EnterTriggersClick = false;
-			this.CB_NewAsset.Location = new System.Drawing.Point(12, 377);
+			this.CB_NewAsset.Location = new System.Drawing.Point(10, 328);
 			this.CB_NewAsset.Name = "CB_NewAsset";
-			this.CB_NewAsset.Size = new System.Drawing.Size(211, 33);
+			this.CB_NewAsset.Size = new System.Drawing.Size(174, 30);
 			this.CB_NewAsset.SpaceTriggersClick = true;
 			this.CB_NewAsset.TabIndex = 6;
 			this.CB_NewAsset.Text = "LoadNewAsset";
@@ -626,9 +626,9 @@ partial class PC_Profile
 			this.CB_LoadAsset.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_LoadAsset.DefaultValue = false;
 			this.CB_LoadAsset.EnterTriggersClick = false;
-			this.CB_LoadAsset.Location = new System.Drawing.Point(294, 377);
+			this.CB_LoadAsset.Location = new System.Drawing.Point(294, 328);
 			this.CB_LoadAsset.Name = "CB_LoadAsset";
-			this.CB_LoadAsset.Size = new System.Drawing.Size(215, 33);
+			this.CB_LoadAsset.Size = new System.Drawing.Size(177, 30);
 			this.CB_LoadAsset.SpaceTriggersClick = true;
 			this.CB_LoadAsset.TabIndex = 7;
 			this.CB_LoadAsset.Text = "LoadLoadAsset";
@@ -649,16 +649,16 @@ partial class PC_Profile
 			this.TLP_LSM.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon6.Name = "I_LSM";
 			this.TLP_LSM.ImageName = dynamicIcon6;
-			this.TLP_LSM.Location = new System.Drawing.Point(3, 168);
+			this.TLP_LSM.Location = new System.Drawing.Point(3, 152);
 			this.TLP_LSM.Name = "TLP_LSM";
-			this.TLP_LSM.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.TLP_LSM.Padding = new System.Windows.Forms.Padding(7, 43, 7, 7);
 			this.TLP_LSM.RowCount = 4;
 			this.TLP_Options.SetRowSpan(this.TLP_LSM, 2);
 			this.TLP_LSM.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LSM.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LSM.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_LSM.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_LSM.Size = new System.Drawing.Size(582, 253);
+			this.TLP_LSM.Size = new System.Drawing.Size(582, 231);
 			this.TLP_LSM.TabIndex = 2;
 			this.TLP_LSM.Text = "LoadingScreenMod";
 			// 
@@ -670,10 +670,10 @@ partial class PC_Profile
 			this.CB_LoadEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_LoadEnabled.DefaultValue = false;
 			this.CB_LoadEnabled.EnterTriggersClick = false;
-			this.CB_LoadEnabled.Location = new System.Drawing.Point(12, 64);
+			this.CB_LoadEnabled.Location = new System.Drawing.Point(10, 53);
 			this.CB_LoadEnabled.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_LoadEnabled.Name = "CB_LoadEnabled";
-			this.CB_LoadEnabled.Size = new System.Drawing.Size(256, 33);
+			this.CB_LoadEnabled.Size = new System.Drawing.Size(210, 30);
 			this.CB_LoadEnabled.SpaceTriggersClick = true;
 			this.CB_LoadEnabled.TabIndex = 0;
 			this.CB_LoadEnabled.Text = "LoadEnabled";
@@ -688,10 +688,10 @@ partial class PC_Profile
 			this.CB_LoadUsed.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_LoadUsed.DefaultValue = false;
 			this.CB_LoadUsed.EnterTriggersClick = false;
-			this.CB_LoadUsed.Location = new System.Drawing.Point(12, 100);
+			this.CB_LoadUsed.Location = new System.Drawing.Point(10, 86);
 			this.CB_LoadUsed.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
 			this.CB_LoadUsed.Name = "CB_LoadUsed";
-			this.CB_LoadUsed.Size = new System.Drawing.Size(197, 33);
+			this.CB_LoadUsed.Size = new System.Drawing.Size(163, 30);
 			this.CB_LoadUsed.SpaceTriggersClick = true;
 			this.CB_LoadUsed.TabIndex = 1;
 			this.CB_LoadUsed.Text = "LoadUsed";
@@ -703,9 +703,9 @@ partial class PC_Profile
 			this.DD_SkipFile.AllowDrop = true;
 			this.DD_SkipFile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.DD_SkipFile.Dock = System.Windows.Forms.DockStyle.Top;
-			this.DD_SkipFile.Location = new System.Drawing.Point(12, 178);
+			this.DD_SkipFile.Location = new System.Drawing.Point(10, 158);
 			this.DD_SkipFile.Name = "DD_SkipFile";
-			this.DD_SkipFile.Size = new System.Drawing.Size(558, 63);
+			this.DD_SkipFile.Size = new System.Drawing.Size(562, 63);
 			this.DD_SkipFile.TabIndex = 3;
 			this.DD_SkipFile.Text = "SkipFileInfo";
 			this.DD_SkipFile.ValidExtensions = new string[] {
@@ -721,9 +721,9 @@ partial class PC_Profile
 			this.CB_SkipFile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_SkipFile.DefaultValue = false;
 			this.CB_SkipFile.EnterTriggersClick = false;
-			this.CB_SkipFile.Location = new System.Drawing.Point(12, 139);
+			this.CB_SkipFile.Location = new System.Drawing.Point(10, 122);
 			this.CB_SkipFile.Name = "CB_SkipFile";
-			this.CB_SkipFile.Size = new System.Drawing.Size(405, 33);
+			this.CB_SkipFile.Size = new System.Drawing.Size(329, 30);
 			this.CB_SkipFile.SpaceTriggersClick = true;
 			this.CB_SkipFile.TabIndex = 2;
 			this.CB_SkipFile.Text = "UseSkipFile";
@@ -750,16 +750,16 @@ partial class PC_Profile
 			this.TLP_AdvancedDev.Dock = System.Windows.Forms.DockStyle.Top;
 			dynamicIcon7.Name = "I_Developer";
 			this.TLP_AdvancedDev.ImageName = dynamicIcon7;
-			this.TLP_AdvancedDev.Location = new System.Drawing.Point(591, 431);
+			this.TLP_AdvancedDev.Location = new System.Drawing.Point(591, 377);
 			this.TLP_AdvancedDev.Name = "TLP_AdvancedDev";
-			this.TLP_AdvancedDev.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.TLP_AdvancedDev.Padding = new System.Windows.Forms.Padding(7, 43, 7, 7);
 			this.TLP_AdvancedDev.RowCount = 5;
 			this.TLP_AdvancedDev.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_AdvancedDev.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_AdvancedDev.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_AdvancedDev.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_AdvancedDev.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_AdvancedDev.Size = new System.Drawing.Size(582, 313);
+			this.TLP_AdvancedDev.Size = new System.Drawing.Size(582, 230);
 			this.TLP_AdvancedDev.TabIndex = 3;
 			this.TLP_AdvancedDev.Text = "DevOptions";
 			// 
@@ -772,10 +772,10 @@ partial class PC_Profile
 			this.CB_NoMods.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_NoMods.DefaultValue = false;
 			this.CB_NoMods.EnterTriggersClick = false;
-			this.CB_NoMods.Location = new System.Drawing.Point(12, 64);
+			this.CB_NoMods.Location = new System.Drawing.Point(10, 53);
 			this.CB_NoMods.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_NoMods.Name = "CB_NoMods";
-			this.CB_NoMods.Size = new System.Drawing.Size(196, 33);
+			this.CB_NoMods.Size = new System.Drawing.Size(162, 30);
 			this.CB_NoMods.SpaceTriggersClick = true;
 			this.CB_NoMods.TabIndex = 0;
 			this.CB_NoMods.Text = "NoMods";
@@ -791,10 +791,10 @@ partial class PC_Profile
 			this.CB_NoAssets.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_NoAssets.DefaultValue = false;
 			this.CB_NoAssets.EnterTriggersClick = false;
-			this.CB_NoAssets.Location = new System.Drawing.Point(294, 64);
+			this.CB_NoAssets.Location = new System.Drawing.Point(294, 53);
 			this.CB_NoAssets.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
 			this.CB_NoAssets.Name = "CB_NoAssets";
-			this.CB_NoAssets.Size = new System.Drawing.Size(202, 33);
+			this.CB_NoAssets.Size = new System.Drawing.Size(167, 30);
 			this.CB_NoAssets.SpaceTriggersClick = true;
 			this.CB_NoAssets.TabIndex = 1;
 			this.CB_NoAssets.Text = "NoAssets";
@@ -810,9 +810,9 @@ partial class PC_Profile
 			this.CB_UseCitiesExe.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_UseCitiesExe.DefaultValue = false;
 			this.CB_UseCitiesExe.EnterTriggersClick = false;
-			this.CB_UseCitiesExe.Location = new System.Drawing.Point(12, 171);
+			this.CB_UseCitiesExe.Location = new System.Drawing.Point(10, 125);
 			this.CB_UseCitiesExe.Name = "CB_UseCitiesExe";
-			this.CB_UseCitiesExe.Size = new System.Drawing.Size(186, 62);
+			this.CB_UseCitiesExe.Size = new System.Drawing.Size(231, 30);
 			this.CB_UseCitiesExe.SpaceTriggersClick = true;
 			this.CB_UseCitiesExe.TabIndex = 4;
 			this.CB_UseCitiesExe.Text = "LaunchThroughCities";
@@ -825,13 +825,13 @@ partial class PC_Profile
 			this.TLP_AdvancedDev.SetColumnSpan(this.TB_CustomArgs, 2);
 			this.TB_CustomArgs.EnterTriggersClick = false;
 			this.TB_CustomArgs.LabelText = "CustomLaunchArguments";
-			this.TB_CustomArgs.Location = new System.Drawing.Point(12, 278);
+			this.TB_CustomArgs.Location = new System.Drawing.Point(10, 197);
 			this.TB_CustomArgs.Name = "TB_CustomArgs";
 			this.TB_CustomArgs.Placeholder = "LaunchArgsInfo";
 			this.TB_CustomArgs.SelectedText = "";
 			this.TB_CustomArgs.SelectionLength = 0;
 			this.TB_CustomArgs.SelectionStart = 0;
-			this.TB_CustomArgs.Size = new System.Drawing.Size(558, 23);
+			this.TB_CustomArgs.Size = new System.Drawing.Size(562, 23);
 			this.TB_CustomArgs.TabIndex = 2;
 			this.TB_CustomArgs.TextChanged += new System.EventHandler(this.ValueChanged);
 			// 
@@ -845,9 +845,9 @@ partial class PC_Profile
 			this.CB_DevUI.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_DevUI.DefaultValue = false;
 			this.CB_DevUI.EnterTriggersClick = false;
-			this.CB_DevUI.Location = new System.Drawing.Point(12, 117);
+			this.CB_DevUI.Location = new System.Drawing.Point(10, 89);
 			this.CB_DevUI.Name = "CB_DevUI";
-			this.CB_DevUI.Size = new System.Drawing.Size(168, 33);
+			this.CB_DevUI.Size = new System.Drawing.Size(140, 30);
 			this.CB_DevUI.SpaceTriggersClick = true;
 			this.CB_DevUI.TabIndex = 2;
 			this.CB_DevUI.Text = "EnableDevUi";
@@ -864,9 +864,9 @@ partial class PC_Profile
 			this.CB_RefreshWorkshop.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_RefreshWorkshop.DefaultValue = false;
 			this.CB_RefreshWorkshop.EnterTriggersClick = false;
-			this.CB_RefreshWorkshop.Location = new System.Drawing.Point(294, 103);
+			this.CB_RefreshWorkshop.Location = new System.Drawing.Point(294, 89);
 			this.CB_RefreshWorkshop.Name = "CB_RefreshWorkshop";
-			this.CB_RefreshWorkshop.Size = new System.Drawing.Size(209, 62);
+			this.CB_RefreshWorkshop.Size = new System.Drawing.Size(241, 30);
 			this.CB_RefreshWorkshop.SpaceTriggersClick = true;
 			this.CB_RefreshWorkshop.TabIndex = 3;
 			this.CB_RefreshWorkshop.Text = "RefreshWorkshop";
@@ -881,9 +881,9 @@ partial class PC_Profile
 			this.CB_UnityProfiler.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_UnityProfiler.DefaultValue = false;
 			this.CB_UnityProfiler.EnterTriggersClick = false;
-			this.CB_UnityProfiler.Location = new System.Drawing.Point(12, 239);
+			this.CB_UnityProfiler.Location = new System.Drawing.Point(10, 161);
 			this.CB_UnityProfiler.Name = "CB_UnityProfiler";
-			this.CB_UnityProfiler.Size = new System.Drawing.Size(201, 33);
+			this.CB_UnityProfiler.Size = new System.Drawing.Size(166, 30);
 			this.CB_UnityProfiler.SpaceTriggersClick = true;
 			this.CB_UnityProfiler.TabIndex = 5;
 			this.CB_UnityProfiler.Text = "UnityProfilerMode";
@@ -900,9 +900,9 @@ partial class PC_Profile
 			this.CB_DebugMono.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.CB_DebugMono.DefaultValue = false;
 			this.CB_DebugMono.EnterTriggersClick = false;
-			this.CB_DebugMono.Location = new System.Drawing.Point(294, 171);
+			this.CB_DebugMono.Location = new System.Drawing.Point(294, 125);
 			this.CB_DebugMono.Name = "CB_DebugMono";
-			this.CB_DebugMono.Size = new System.Drawing.Size(204, 33);
+			this.CB_DebugMono.Size = new System.Drawing.Size(168, 30);
 			this.CB_DebugMono.SpaceTriggersClick = true;
 			this.CB_DebugMono.TabIndex = 6;
 			this.CB_DebugMono.Text = "UseDebugMono";
@@ -918,7 +918,7 @@ partial class PC_Profile
 			this.I_Info.Enabled = false;
 			dynamicIcon8.Name = "I_Info";
 			this.I_Info.ImageName = dynamicIcon8;
-			this.I_Info.Location = new System.Drawing.Point(18, 135);
+			this.I_Info.Location = new System.Drawing.Point(18, 124);
 			this.I_Info.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
 			this.I_Info.Name = "I_Info";
 			this.I_Info.Padding = new System.Windows.Forms.Padding(5);
@@ -932,10 +932,10 @@ partial class PC_Profile
 			this.L_Info.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_Info.AutoSize = true;
 			this.TLP_Main.SetColumnSpan(this.L_Info, 5);
-			this.L_Info.Location = new System.Drawing.Point(56, 136);
+			this.L_Info.Location = new System.Drawing.Point(56, 129);
 			this.L_Info.Margin = new System.Windows.Forms.Padding(3, 10, 10, 10);
 			this.L_Info.Name = "L_Info";
-			this.L_Info.Size = new System.Drawing.Size(71, 30);
+			this.L_Info.Size = new System.Drawing.Size(55, 23);
 			this.L_Info.TabIndex = 15;
 			this.L_Info.Text = "label1";
 			this.L_Info.UseMnemonic = false;

@@ -250,4 +250,9 @@ public partial class PC_Options : PanelContent
 	{
 		slickSpacer3.Visible = slickScroll1.Percentage != 0;
 	}
+
+	private void AssumeInternetConnectivity_CheckChanged(object sender, EventArgs e)
+	{
+		ConnectionHandler.AssumeInternetConnectivity= CB_AssumeInternetConnectivity.Checked;
+	}
 }

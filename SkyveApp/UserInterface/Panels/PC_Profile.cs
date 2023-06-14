@@ -192,6 +192,8 @@ public partial class PC_Profile : PanelContent
 		DD_NewMap.SelectedFile = profile.LaunchSettings.MapToLoad;
 		DD_SaveFile.SelectedFile = profile.LaunchSettings.SaveToLoad;
 		TB_CustomArgs.Text = profile.LaunchSettings.CustomArgs;
+		CB_NewAsset.Checked = profile.LaunchSettings.NewAsset;
+		CB_LoadAsset.Checked = profile.LaunchSettings.LoadAsset;
 
 		CB_LoadUsed.Checked = profile.LsmSettings.LoadUsed;
 		CB_LoadEnabled.Checked = profile.LsmSettings.LoadEnabled;

@@ -70,8 +70,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		B_CopyLogFile.Margin = B_LotLogCopy.Margin = B_SaveZip.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.UIScale);
-		slickSpacer1.Height = slickSpacer2.Height = slickSpacer3.Height = (int)(1.5 * UI.FontScale);
-		slickSpacer1.Margin = slickSpacer2.Margin = slickSpacer3.Margin = UI.Scale(new Padding(5), UI.UIScale);
+		slickSpacer1.Height = slickSpacer2.Height = slickSpacer3.Height = slickSpacer4.Height = (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin = slickSpacer2.Margin = slickSpacer3.Margin = slickSpacer4.Margin = UI.Scale(new Padding(5), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -223,5 +223,10 @@ public partial class PC_HelpAndLogs : PanelContent
 	private void B_OpenLog_Click(object sender, EventArgs e)
 	{
 		IOUtil.Execute(LogUtil.GameLogFile, string.Empty);
+	}
+
+	private void B_OpenAppData_Click(object sender, EventArgs e)
+	{
+		PlatformUtil.OpenFolder(LocationManager.AppDataPath);
 	}
 }

@@ -49,9 +49,11 @@ public partial class PC_ProfileList : PanelContent
 		}
 		else
 		{
-			L_Counts.Visible = TLP_ProfileName.Visible = B_AddProfile.Visible = B_TempProfile.Visible = B_Discover.Visible = DD_Sorting.Visible = false;
+			L_Counts.Visible = TLP_ProfileName.Visible = B_AddProfile.Visible = B_TempProfile.Visible = B_Discover.Visible = false;
 
+			DD_Sorting.Parent = null;
 			TLP_Main.SetColumn(DD_Usage, 2);
+			TLP_Main.SetColumnSpan(TB_Search, 2);
 
 			LC_Items.ReadOnly = true;
 			LC_Items.SetItems(profiles);

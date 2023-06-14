@@ -38,12 +38,13 @@ partial class PC_ProfileList
 			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
 			this.TB_Search = new SlickControls.SlickTextBox();
+			this.DD_Sorting = new SkyveApp.UserInterface.Dropdowns.ProfileSortingDropDown();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_ListView = new SlickControls.SlickIcon();
 			this.B_GridView = new SlickControls.SlickIcon();
@@ -52,6 +53,7 @@ partial class PC_ProfileList
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.slickScroll1 = new SlickControls.SlickScroll();
 			this.FLP_Profiles = new System.Windows.Forms.FlowLayoutPanel();
+			this.DD_Usage = new SkyveApp.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.roundedPanel = new SlickControls.RoundedPanel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_AddProfile = new SlickControls.RoundedTableLayoutPanel();
@@ -65,8 +67,6 @@ partial class PC_ProfileList
 			this.B_EditName = new SlickControls.SlickIcon();
 			this.B_Save = new SlickControls.SlickIcon();
 			this.I_Favorite = new SlickControls.SlickIcon();
-			this.DD_Sorting = new SkyveApp.UserInterface.Dropdowns.ProfileSortingDropDown();
-			this.DD_Usage = new SkyveApp.UserInterface.Dropdowns.PackageUsageDropDown();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -139,7 +139,7 @@ partial class PC_ProfileList
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
-			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+			this.TB_Search.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
 			this.TB_Search.Placeholder = "SearchProfiles";
 			this.TB_Search.SelectedText = "";
 			this.TB_Search.SelectionLength = 0;
@@ -149,6 +149,20 @@ partial class PC_ProfileList
 			this.TB_Search.TabIndex = 0;
 			this.TB_Search.TextChanged += new System.EventHandler(this.FilterChanged);
 			this.TB_Search.IconClicked += new System.EventHandler(this.TB_Search_IconClicked);
+			// 
+			// DD_Sorting
+			// 
+			this.DD_Sorting.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Sorting.Font = new System.Drawing.Font("Nirmala UI", 15F);
+			this.DD_Sorting.Location = new System.Drawing.Point(906, 0);
+			this.DD_Sorting.Margin = new System.Windows.Forms.Padding(0);
+			this.DD_Sorting.Name = "DD_Sorting";
+			this.DD_Sorting.Padding = new System.Windows.Forms.Padding(7);
+			this.DD_Sorting.Size = new System.Drawing.Size(284, 27);
+			this.DD_Sorting.TabIndex = 4;
+			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
 			// 
 			// tableLayoutPanel3
 			// 
@@ -208,9 +222,9 @@ partial class PC_ProfileList
 			// 
 			this.L_Counts.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.L_Counts.AutoSize = true;
-			this.L_Counts.Location = new System.Drawing.Point(1045, 1);
+			this.L_Counts.Location = new System.Drawing.Point(1061, 4);
 			this.L_Counts.Name = "L_Counts";
-			this.L_Counts.Size = new System.Drawing.Size(71, 30);
+			this.L_Counts.Size = new System.Drawing.Size(55, 23);
 			this.L_Counts.TabIndex = 1;
 			this.L_Counts.Text = "label1";
 			// 
@@ -218,9 +232,9 @@ partial class PC_ProfileList
 			// 
 			this.L_FilterCount.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_FilterCount.AutoSize = true;
-			this.L_FilterCount.Location = new System.Drawing.Point(3, 1);
+			this.L_FilterCount.Location = new System.Drawing.Point(3, 4);
 			this.L_FilterCount.Name = "L_FilterCount";
-			this.L_FilterCount.Size = new System.Drawing.Size(71, 30);
+			this.L_FilterCount.Size = new System.Drawing.Size(55, 23);
 			this.L_FilterCount.TabIndex = 2;
 			this.L_FilterCount.Text = "label1";
 			// 
@@ -240,9 +254,9 @@ partial class PC_ProfileList
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.FLP_Profiles;
-			this.slickScroll1.Location = new System.Drawing.Point(1180, 0);
+			this.slickScroll1.Location = new System.Drawing.Point(1181, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(10, 554);
+			this.slickScroll1.Size = new System.Drawing.Size(9, 554);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 0;
 			this.slickScroll1.TabStop = false;
@@ -256,6 +270,19 @@ partial class PC_ProfileList
 			this.FLP_Profiles.Name = "FLP_Profiles";
 			this.FLP_Profiles.Size = new System.Drawing.Size(0, 0);
 			this.FLP_Profiles.TabIndex = 1;
+			// 
+			// DD_Usage
+			// 
+			this.DD_Usage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.DD_Usage.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.DD_Usage.HideLabel = true;
+			this.DD_Usage.Location = new System.Drawing.Point(531, 0);
+			this.DD_Usage.Margin = new System.Windows.Forms.Padding(0);
+			this.DD_Usage.Name = "DD_Usage";
+			this.DD_Usage.Size = new System.Drawing.Size(375, 27);
+			this.DD_Usage.TabIndex = 15;
+			this.DD_Usage.Text = "Usage";
 			// 
 			// roundedPanel
 			// 
@@ -295,7 +322,7 @@ partial class PC_ProfileList
 			this.B_AddProfile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.B_AddProfile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.B_AddProfile.Controls.Add(this.slickIcon2, 0, 0);
-			this.B_AddProfile.Location = new System.Drawing.Point(299, 10);
+			this.B_AddProfile.Location = new System.Drawing.Point(283, 10);
 			this.B_AddProfile.Margin = new System.Windows.Forms.Padding(10);
 			this.B_AddProfile.Name = "B_AddProfile";
 			this.B_AddProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -323,7 +350,7 @@ partial class PC_ProfileList
 			this.B_TempProfile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.B_TempProfile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.B_TempProfile.Controls.Add(this.slickIcon1, 0, 0);
-			this.B_TempProfile.Location = new System.Drawing.Point(235, 10);
+			this.B_TempProfile.Location = new System.Drawing.Point(219, 10);
 			this.B_TempProfile.Margin = new System.Windows.Forms.Padding(10);
 			this.B_TempProfile.Name = "B_TempProfile";
 			this.B_TempProfile.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -375,16 +402,16 @@ partial class PC_ProfileList
 			this.TLP_ProfileName.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_ProfileName.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_ProfileName.Controls.Add(this.I_ProfileIcon, 1, 0);
-			this.TLP_ProfileName.Controls.Add(this.L_CurrentProfile, 2, 0);
-			this.TLP_ProfileName.Controls.Add(this.B_EditName, 4, 0);
 			this.TLP_ProfileName.Controls.Add(this.B_Save, 5, 0);
 			this.TLP_ProfileName.Controls.Add(this.I_Favorite, 0, 0);
+			this.TLP_ProfileName.Controls.Add(this.L_CurrentProfile, 4, 0);
+			this.TLP_ProfileName.Controls.Add(this.B_EditName, 2, 0);
 			this.TLP_ProfileName.Location = new System.Drawing.Point(10, 10);
 			this.TLP_ProfileName.Margin = new System.Windows.Forms.Padding(10);
 			this.TLP_ProfileName.Name = "TLP_ProfileName";
 			this.TLP_ProfileName.RowCount = 1;
 			this.TLP_ProfileName.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_ProfileName.Size = new System.Drawing.Size(205, 32);
+			this.TLP_ProfileName.Size = new System.Drawing.Size(189, 32);
 			this.TLP_ProfileName.TabIndex = 5;
 			// 
 			// I_ProfileIcon
@@ -405,9 +432,9 @@ partial class PC_ProfileList
 			// 
 			this.L_CurrentProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_CurrentProfile.AutoSize = true;
-			this.L_CurrentProfile.Location = new System.Drawing.Point(67, 1);
+			this.L_CurrentProfile.Location = new System.Drawing.Point(99, 4);
 			this.L_CurrentProfile.Name = "L_CurrentProfile";
-			this.L_CurrentProfile.Size = new System.Drawing.Size(71, 30);
+			this.L_CurrentProfile.Size = new System.Drawing.Size(55, 23);
 			this.L_CurrentProfile.TabIndex = 1;
 			this.L_CurrentProfile.Text = "label1";
 			// 
@@ -416,9 +443,9 @@ partial class PC_ProfileList
 			this.B_EditName.ActiveColor = null;
 			this.B_EditName.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_EditName.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_Cog";
-			this.B_EditName.ImageName = dynamicIcon7;
-			this.B_EditName.Location = new System.Drawing.Point(141, 0);
+			dynamicIcon8.Name = "I_Cog";
+			this.B_EditName.ImageName = dynamicIcon8;
+			this.B_EditName.Location = new System.Drawing.Point(64, 0);
 			this.B_EditName.Margin = new System.Windows.Forms.Padding(0);
 			this.B_EditName.Name = "B_EditName";
 			this.B_EditName.Padding = new System.Windows.Forms.Padding(5);
@@ -432,9 +459,9 @@ partial class PC_ProfileList
 			this.B_Save.ActiveColor = null;
 			this.B_Save.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_Save.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon8.Name = "I_Save";
-			this.B_Save.ImageName = dynamicIcon8;
-			this.B_Save.Location = new System.Drawing.Point(173, 0);
+			dynamicIcon7.Name = "I_Save";
+			this.B_Save.ImageName = dynamicIcon7;
+			this.B_Save.Location = new System.Drawing.Point(157, 0);
 			this.B_Save.Margin = new System.Windows.Forms.Padding(0);
 			this.B_Save.Name = "B_Save";
 			this.B_Save.Padding = new System.Windows.Forms.Padding(5);
@@ -456,33 +483,6 @@ partial class PC_ProfileList
 			this.I_Favorite.TabIndex = 0;
 			this.I_Favorite.TabStop = false;
 			this.I_Favorite.Click += new System.EventHandler(this.I_Favorite_Click);
-			// 
-			// DD_Sorting
-			// 
-			this.DD_Sorting.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Sorting.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Sorting.Font = new System.Drawing.Font("Nirmala UI", 15F);
-			this.DD_Sorting.Location = new System.Drawing.Point(906, 0);
-			this.DD_Sorting.Margin = new System.Windows.Forms.Padding(0);
-			this.DD_Sorting.Name = "DD_Sorting";
-			this.DD_Sorting.Padding = new System.Windows.Forms.Padding(7);
-			this.DD_Sorting.Size = new System.Drawing.Size(284, 27);
-			this.DD_Sorting.TabIndex = 4;
-			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
-			// 
-			// DD_Usage
-			// 
-			this.DD_Usage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.DD_Usage.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.DD_Usage.HideLabel = true;
-			this.DD_Usage.Location = new System.Drawing.Point(531, 0);
-			this.DD_Usage.Margin = new System.Windows.Forms.Padding(0);
-			this.DD_Usage.Name = "DD_Usage";
-			this.DD_Usage.Size = new System.Drawing.Size(375, 27);
-			this.DD_Usage.TabIndex = 15;
-			this.DD_Usage.Text = "Usage";
 			// 
 			// PC_ProfileList
 			// 
