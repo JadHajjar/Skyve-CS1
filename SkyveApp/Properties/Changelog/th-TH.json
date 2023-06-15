@@ -2,7 +2,7 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Welcome to the change-log era",
+        "Tagline": "ยินดีต้อนรับสู่บันทึกการเปลี่ยนแปลง",
         "ChangeGroups": [
             {
                 "Name": "ใหม่",
@@ -296,12 +296,12 @@
     {
         "Version": "3.0.0",
         "Date": "2023-05-23",
-        "Tagline": "Presenting, Skyve, the final successor of Load Order Mod 1/2 and Compatibility Report.\r\nComing for C:S I & C:S II",
+        "Tagline": "ขอเสนอ Skyve ผู้สืบทอดคนสุดท้ายของ Load Order Mod 1/2 และ Compatibility Report\nสำหรับ C:S I & C:S II",
         "ChangeGroups": [
             {
                 "Name": "Compatibility Report Overhaul",
                 "Changes": [
-                    "Compatibility Report is now integrated directly into Skyve.",
+                    "รายงานความเข้ากันได้ ถูกนำมารวมไว้กับ Skyve แล้ว",
                     "Recommendations and info text are now clearer and easier to manage.",
                     "Added a Snooze button to dismiss a certain compatibility notification.",
                     "Required items automatically redirect to the packages' most recent successor.",
@@ -339,8 +339,8 @@
             {
                 "Name": "Fixes",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
+                    "แก้ไข ค่าของการตั้งค่าก่อนหน้า และโพร์ไฟล์ ที่บางครั้งไม่ถูกส่งไปยัง Skyve",
+                    "ทางลัดจะถูกสร้างขึ้นหลังจากที่คุณเปิด Skyve เป็นครั้งแรกคล้ายกับที่ LOM2 ทำก่อนหน้านี้",
                     "Fixed a rare case where the compatibility info was not loading.",
                     "Enabled the ability to request a review for a package that is currently broken.",
                     "Loosened the sensitivity of the 'Partially Downloaded' notification."
@@ -422,7 +422,7 @@
                     "You can now subscribe to packages while the game is open.",
                     "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
                     "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "เพิ่มตัวเลือกขั้นสูงเพื่อบังคับให้ดาวน์โหลดหรือลบแพ็กเกจทันทีที่คุณสมัคร/ยกเลิกการสมัครสมาชิกใน Skyve",
                     "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
                 ]
             },
@@ -492,7 +492,7 @@
                     "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
                     "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
                     "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "หากโพร์ไฟล์ของคุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก โลโก้ Skyve จะสว่างเป็นสีม่วง",
                     "Profiles can now have thumbnails.",
                     "Profile usages now have separate icons."
                 ]
@@ -501,7 +501,7 @@
                 "Name": "New & Updated",
                 "Changes": [
                     "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "การลบด้วย Skyve จะเป็นการส่งไฟล์ไปยังถังรีไซเคิลของวินโดวส์",
                     "Added 6 new reset buttons in the Utilities page.",
                     "Added 2 new buttons in the Help & Logs page.",
                     "Compatibility & package statuses are now shown on the right in the list.",
