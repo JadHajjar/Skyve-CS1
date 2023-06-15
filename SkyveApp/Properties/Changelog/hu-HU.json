@@ -126,30 +126,30 @@
                     "Hozzáadta az „Egyéb profilok” részt egy csomag oldalához, hogy könnyen kizárhassa vagy felvehesse őket a többi profilból",
                     "Új profilrendezési beállítások lettek hozzáadva. A kiválasztott rendezésre a rendszer a munkamenetek során emlékezni fog.",
                     "A jobb gombbal kattintási műveletek lettek hozzáadva a tartalomlistához, hogy kizárjanak vagy beemeljenek egy elemet az összes csomagba.",
-                    "Added a button to view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
-                    "You can now import a LOT 1 profile in the 'Add Profile' section."
+                    "Hozzáadott egy gombot, amellyel megtekintheti a profilfájlt a számítógépén.",
+                    "Mostantól színt rendelhet a profiljaihoz.",
+                    "Most már létrehozhat egy asztali parancsikont a profiljaihoz.",
+                    "Most már importálhat egy LOT 1 profilt a \"Profil hozzáadása\" részben."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Fejlesztések",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
-                    "Your Paradox account panel will always be displayed from now on.",
-                    "The window buttons on the top right now have icons to explain their actions.",
-                    "Improved the responsiveness of the content list pages.",
-                    "Search in the content list pages is now much faster.",
-                    "Mod loading is now cached; resulting in more efficient loads on Windows & Linux, as well as much faster loads on macOS.",
-                    "You can now generate a zip file of your logs while the game is running."
+                    "A Steam linkek most megnyílnak a Steam ablakában. Ezt a Beállításokban lehet kikapcsolni.",
+                    "A helyi eszközök mostantól megfelelően vannak csoportosítva a mappák alapján, amelyekben vannak.",
+                    "A Paradox fiókpanel mostantól mindig látható lesz.",
+                    "A jobb felső sarokban lévő ablakgombokon most ikonok találhatók, amelyek elmagyarázzák a műveleteiket.",
+                    "Javult a tartalomlista oldalak válaszkészsége.",
+                    "A tartalomlista oldalain végzett keresés most sokkal gyorsabb.",
+                    "A mod betöltés gyorsítótárazott; ami hatékonyabb betöltést eredményez Windows és Linux rendszeren, valamint sokkal gyorsabb betöltést macOS rendszeren.",
+                    "Most már létrehozhat egy zip fájlt a naplókból, miközben a játék fut."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Hibajavítások",
                 "Changes": [
-                    "Fixed freezes happening in the content list pages.",
-                    "Fixed Profiles' Auto-Save not working correctly.",
+                    "A tartalomlista oldalain előforduló lefagyások javítása.",
+                    "A javított profilok automatikus mentése nem működik megfelelően.",
                     "Fixed not being able to use Workshop maps & save-games in the profile settings",
                     "Fixed custom maps not loading when selected in the profile settings.",
                     "Fixed loading Profiles on macOS & Linux not always applying correctly.",
