@@ -24,6 +24,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 {
 	private ProfileSorting sorting;
 	private static IProfile? downloading;
+	private static IProfile? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
 	public IEnumerable<IProfile> FilteredItems => SafeGetItems().Select(x => x.Item);
@@ -290,7 +291,27 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 	private async void ShowProfileContents(IProfile item)
 	{
 		try
-		{ Program.MainForm.PushPanel(new PC_GenericPackageList((ReadOnly ? await SkyveApiUtil.GetUserProfileContents(item.ProfileId) : item)?.Packages ?? Enumerable.Empty<IPackage>()) { Text = item.Name }); }
+		{
+			IEnumerable<IPackage>? packages;
+
+			if (ReadOnly)
+			{
+				Loading = true;
+				opening = item;
+				packages = (await SkyveApiUtil.GetUserProfileContents(item.ProfileId))?.Packages;
+				opening = null;
+				Loading = false;
+			}
+			else
+			{
+				packages = item.Packages;
+			}
+
+			Program.MainForm.PushPanel(new PC_GenericPackageList(packages ?? Enumerable.Empty<IPackage>())
+			{
+				Text = item.Name
+			});
+		}
 		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadProfile, form: Program.MainForm)); }
 	}
 
@@ -363,7 +384,14 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		var fav = new DynamicIcon(ReadOnly ? "I_ViewFile" : e.Item.IsFavorite ? "I_StarFilled" : "I_Star");
 		using var favIcon = fav.Get(favViewRect.Height * 3 / 4);
 
-		e.Graphics.DrawImage(favIcon.Color(favViewRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : e.Item.IsFavorite ? FormDesign.Design.ActiveForeColor : textColor), favViewRect.CenterR(favIcon.Size));
+		if (opening == e.Item)
+		{
+			DrawLoader(e.Graphics, favViewRect.CenterR(favIcon.Size));
+		}
+		else
+		{
+			e.Graphics.DrawImage(favIcon.Color(favViewRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : e.Item.IsFavorite ? FormDesign.Design.ActiveForeColor : textColor), favViewRect.CenterR(favIcon.Size));
+		}
 
 		if (!ReadOnly && e.Rects.Icon.Contains(CursorLocation))
 		{
@@ -372,7 +400,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		using var profileIcon = e.Item.GetIcon().Get(e.Rects.Icon.Height * 3 / 4);
 
-		e.Graphics.DrawImage(profileIcon.Color(e.Rects.Icon.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : textColor), e.Rects.Icon.CenterR(profileIcon.Size));
+		e.Graphics.DrawImage(profileIcon.Color(!ReadOnly && e.Rects.Icon.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : textColor), e.Rects.Icon.CenterR(profileIcon.Size));
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(9.75F, FontStyle.Bold), new SolidBrush(textColor), e.Rects.Text.AlignToFontSize(UI.Font(9F, FontStyle.Bold), ContentAlignment.MiddleLeft, e.Graphics), new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
@@ -508,7 +536,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		using var profileIcon = large ? e.Item.GetIcon().Get(e.Rects.Favorite.Height * 3 / 4) : e.Item.GetIcon().Default;
 
-		e.Graphics.DrawImage(profileIcon.Color(e.Rects.Icon.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : iconColor), e.Rects.Icon.CenterR(profileIcon.Size));
+		e.Graphics.DrawImage(profileIcon.Color(!ReadOnly && e.Rects.Icon.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : iconColor), e.Rects.Icon.CenterR(profileIcon.Size));
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), large ? e.Rects.Text.Pad(Padding) : e.Rects.Text, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 

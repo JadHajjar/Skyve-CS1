@@ -99,7 +99,7 @@ public class Profile : IProfile
 	{
 		private string? _name;
 
-		public string? Name { get => WorkshopInfo?.Name ?? _name; set => _name = value; }
+		public string? Name { get => WorkshopInfo?.Name ?? _name ?? Path.GetFileNameWithoutExtension(RelativePath); set => _name = value; }
 		public string? RelativePath { get; set; }
 		public ulong SteamId { get; set; }
 
