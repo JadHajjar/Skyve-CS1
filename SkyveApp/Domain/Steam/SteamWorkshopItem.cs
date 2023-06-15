@@ -49,6 +49,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	[JsonIgnore] public Package? Package => CentralManager.GetPackage(SteamId);
 	[JsonIgnore] public long FileSize => ServerSize;
 	[JsonIgnore] public string Folder => Package?.Folder ?? string.Empty;
+
 	[JsonIgnore]
 	public IEnumerable<TagItem> Tags
 	{
@@ -80,6 +81,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 			}
 		}
 	}
+
 	public string? PublishedFileID { set => SteamId = ulong.TryParse(value, out var id) ? id : 0; }
 
 	public SteamWorkshopItem(SteamWorkshopItemEntry entry)
@@ -97,7 +99,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 		CreatedUTC = _epoch.AddSeconds(entry.time_created);
 		NegativeVotes = entry.vote_data?.votes_down ?? 0;
 		PositiveVotes = entry.vote_data?.votes_up ?? 0;
-		Banned = entry.banned || entry.result is 15 or 16 or 17;
+		Banned = entry.banned || entry.result is 16 or 17;
 		Incompatible = entry.incompatible;
 		Subscriptions = entry.subscriptions;
 		Reports = entry.num_reports;

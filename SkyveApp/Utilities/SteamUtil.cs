@@ -234,7 +234,7 @@ public static class SteamUtil
 		{
 			var idString = string.Join(",", steamId64s.Distinct());
 
-			var result = await ApiUtil.Get<SteamUserRootResponse>($"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
+			var result = await ApiUtil.Get<SteamUserRootResponse>($"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
 				("key", KEYS.STEAM_API_KEY),
 				("steamids", idString));
 
