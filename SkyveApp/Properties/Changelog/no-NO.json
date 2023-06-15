@@ -337,9 +337,9 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Fikser",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
+                    "Fikset at forrige og innstillinger og profiler noen ganger ikke overføres til Skyve.",
                     "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
                     "Fixed a rare case where the compatibility info was not loading.",
                     "Enabled the ability to request a review for a package that is currently broken.",
