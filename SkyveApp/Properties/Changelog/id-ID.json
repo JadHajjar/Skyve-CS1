@@ -125,18 +125,18 @@
                     "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
                     "Added the 'Other Profiles' section in a package's page to easily exclude or include them from your other profiles",
                     "Added new Profile sorting options. The selected sorting will now be remembered throughout sessions.",
-                    "Added right-click actions in the content list to exclude or include an item in all your packages.",
+                    "Menambahkan tindakan klik kanan di daftar konten untuk mengecualikan atau menyertakan item di semua paket Anda.",
                     "Added a button to view a Profile's file on your computer.",
-                    "You can now assign a color to your profiles.",
-                    "You can now create a desktop shortcut for your profiles.",
+                    "Anda sekarang dapat menetapkan warna ke profil Anda.",
+                    "Sekarang Anda dapat membuat pintasan desktop untuk profil Anda.",
                     "You can now import a LOT 1 profile in the 'Add Profile' section."
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Perbaikan",
                 "Changes": [
-                    "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
-                    "Local assets are now correctly groupped based on the folders they're in.",
+                    "Tautan steam sekarang akan terbuka di dalam jendela Steam. Hal ini dapat dinonaktifkan di Opsi.",
+                    "Aset lokal sekarang dikelompokkan dengan benar berdasarkan folder tempat aset tersebut berada.",
                     "Your Paradox account panel will always be displayed from now on.",
                     "The window buttons on the top right now have icons to explain their actions.",
                     "Improved the responsiveness of the content list pages.",
