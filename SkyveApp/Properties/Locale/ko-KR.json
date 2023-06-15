@@ -185,7 +185,7 @@
   "ShowingFilteredItems": "총 {1}개 항목 중 {0}개 표시 중",
   "DropNewProfile": "프로필의 .json 또는 .xml 파일을 여기에 놓거나 선택해서 프로필을 가져오세요",
   "ThemeUIScale": "테마 & UI 크기",
-  "SearchProfiles": "내 프로필에서 검색..",
+  "SearchProfiles": "이 프로필들 중 검색..",
   "AdvancedSettings": "고급 설정",
   "HelpTranslate": "번역 개선하기",
   "HelpReset": "도움 & 초기화",
