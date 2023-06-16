@@ -4,7 +4,7 @@
   "Unsubscribe after use! This will spam the game log and seriously increase the size.": "使用后请取消订阅！此模组会往游戏日志里写入大量的垃圾信息，并大幅增加日志文件大小。",
   "Broken / Can't be loaded": "已损坏 / 无法加载",
   "In Repaint options also a setting to fix the darker node colour on highways is available.": "在 Repaint 选项中，有一个修复道路节点颜色较暗问题的功能。",
-  "If intersections look blue, go into the mod's settings and enable auto-refresh. This increases loading time if you have many custom roads.": "如果路口出现蓝洞，请在此模组的选项中启用“Auto refresh all road junctions on startup”。如果您使用了较多的道路资产，加载存档用时会变长。",
+  "If intersections look blue, go into the mod's settings and enable auto-refresh. This increases loading time if you have many custom roads.": "如果路口出现蓝洞，请在此模组的选项中启用“Auto refresh all road junctions on startup”。\n如果您使用了较多的道路资产，加载存档用时会变长。",
   "This might increase loading time.": "此插件可能导致存档加载时间变长。",
   "This mod is not optimized and can cause performance issues. This probably has unknown incompatibilities with other mods. It is STRONGLY recommended not to use this mod!": "此模组没有进行过优化，可能会导致性能问题，可能与其他模组不兼容。强烈建议不要使用此模组！",
   "Mod options resetting on game load.": "存档加载完成时，此模组的选项会自动重置。",
