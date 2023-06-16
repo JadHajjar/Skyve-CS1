@@ -7,7 +7,7 @@ internal class Locale : LocaleHelper
 {
 	private static readonly Locale _instance = new();
 
-	public static void Load() { }
+	public static void Load() { _ = _instance; }
 
 	protected Locale() : base($"{nameof(SkyveApp)}.Properties.Locale.json") { }
 

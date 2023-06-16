@@ -16,5 +16,5 @@ internal class LocaleSlickUI : LocaleHelper
 	public static Translation Download => _instance.GetText(nameof(Download));
 	public static Translation Remove => _instance.GetText(nameof(Remove));
 
-	public static void Load() { }
+	public static void Load() { _ = _instance; }
 }

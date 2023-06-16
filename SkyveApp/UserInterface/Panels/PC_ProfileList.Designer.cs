@@ -32,14 +32,14 @@ partial class PC_ProfileList
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon11 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon12 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon13 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon14 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon15 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon16 = new SlickControls.DynamicIcon();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
 			this.slickSpacer2 = new SlickControls.SlickSpacer();
 			this.slickSpacer1 = new SlickControls.SlickSpacer();
@@ -63,10 +63,10 @@ partial class PC_ProfileList
 			this.B_Discover = new SlickControls.SlickButton();
 			this.TLP_ProfileName = new SlickControls.RoundedTableLayoutPanel();
 			this.I_ProfileIcon = new SlickControls.SlickIcon();
-			this.L_CurrentProfile = new System.Windows.Forms.Label();
-			this.B_EditName = new SlickControls.SlickIcon();
 			this.B_Save = new SlickControls.SlickIcon();
 			this.I_Favorite = new SlickControls.SlickIcon();
+			this.L_CurrentProfile = new System.Windows.Forms.Label();
+			this.B_EditName = new SlickControls.SlickIcon();
 			this.TLP_Main.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -134,8 +134,8 @@ partial class PC_ProfileList
 			// TB_Search
 			// 
 			this.TB_Search.EnterTriggersClick = false;
-			dynamicIcon1.Name = "I_Search";
-			this.TB_Search.ImageName = dynamicIcon1;
+			dynamicIcon9.Name = "I_Search";
+			this.TB_Search.ImageName = dynamicIcon9;
 			this.TB_Search.LabelText = "Search";
 			this.TB_Search.Location = new System.Drawing.Point(3, 3);
 			this.TB_Search.Name = "TB_Search";
@@ -192,8 +192,8 @@ partial class PC_ProfileList
 			this.B_ListView.ActiveColor = null;
 			this.B_ListView.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_ListView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_List";
-			this.B_ListView.ImageName = dynamicIcon2;
+			dynamicIcon10.Name = "I_List";
+			this.B_ListView.ImageName = dynamicIcon10;
 			this.B_ListView.Location = new System.Drawing.Point(1120, 1);
 			this.B_ListView.Margin = new System.Windows.Forms.Padding(1);
 			this.B_ListView.Name = "B_ListView";
@@ -207,8 +207,8 @@ partial class PC_ProfileList
 			this.B_GridView.ActiveColor = null;
 			this.B_GridView.Anchor = System.Windows.Forms.AnchorStyles.Right;
 			this.B_GridView.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Grid";
-			this.B_GridView.ImageName = dynamicIcon3;
+			dynamicIcon11.Name = "I_Grid";
+			this.B_GridView.ImageName = dynamicIcon11;
 			this.B_GridView.Location = new System.Drawing.Point(1156, 1);
 			this.B_GridView.Margin = new System.Windows.Forms.Padding(1);
 			this.B_GridView.Name = "B_GridView";
@@ -283,6 +283,7 @@ partial class PC_ProfileList
 			this.DD_Usage.Size = new System.Drawing.Size(375, 27);
 			this.DD_Usage.TabIndex = 15;
 			this.DD_Usage.Text = "Usage";
+			this.DD_Usage.SelectedItemChanged += new System.EventHandler(this.FilterChanged);
 			// 
 			// roundedPanel
 			// 
@@ -333,8 +334,8 @@ partial class PC_ProfileList
 			// 
 			this.slickIcon2.ActiveColor = null;
 			this.slickIcon2.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_Add";
-			this.slickIcon2.ImageName = dynamicIcon4;
+			dynamicIcon12.Name = "I_Add";
+			this.slickIcon2.ImageName = dynamicIcon12;
 			this.slickIcon2.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon2.Margin = new System.Windows.Forms.Padding(0);
 			this.slickIcon2.Name = "slickIcon2";
@@ -361,8 +362,8 @@ partial class PC_ProfileList
 			// 
 			this.slickIcon1.ActiveColor = null;
 			this.slickIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_TempProfile";
-			this.slickIcon1.ImageName = dynamicIcon5;
+			dynamicIcon13.Name = "I_TempProfile";
+			this.slickIcon1.ImageName = dynamicIcon13;
 			this.slickIcon1.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon1.Margin = new System.Windows.Forms.Padding(0);
 			this.slickIcon1.Name = "slickIcon1";
@@ -378,8 +379,8 @@ partial class PC_ProfileList
 			this.B_Discover.ColorShade = null;
 			this.B_Discover.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_Discover.Dock = System.Windows.Forms.DockStyle.Right;
-			dynamicIcon6.Name = "I_Discover";
-			this.B_Discover.ImageName = dynamicIcon6;
+			dynamicIcon14.Name = "I_Discover";
+			this.B_Discover.ImageName = dynamicIcon14;
 			this.B_Discover.LargeImage = true;
 			this.B_Discover.Location = new System.Drawing.Point(1086, 10);
 			this.B_Discover.Margin = new System.Windows.Forms.Padding(10);
@@ -428,39 +429,13 @@ partial class PC_ProfileList
 			this.I_ProfileIcon.TabStop = false;
 			this.I_ProfileIcon.Click += new System.EventHandler(this.I_ProfileIcon_Click);
 			// 
-			// L_CurrentProfile
-			// 
-			this.L_CurrentProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.L_CurrentProfile.AutoSize = true;
-			this.L_CurrentProfile.Location = new System.Drawing.Point(99, 4);
-			this.L_CurrentProfile.Name = "L_CurrentProfile";
-			this.L_CurrentProfile.Size = new System.Drawing.Size(55, 23);
-			this.L_CurrentProfile.TabIndex = 1;
-			this.L_CurrentProfile.Text = "label1";
-			// 
-			// B_EditName
-			// 
-			this.B_EditName.ActiveColor = null;
-			this.B_EditName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.B_EditName.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon8.Name = "I_Cog";
-			this.B_EditName.ImageName = dynamicIcon8;
-			this.B_EditName.Location = new System.Drawing.Point(64, 0);
-			this.B_EditName.Margin = new System.Windows.Forms.Padding(0);
-			this.B_EditName.Name = "B_EditName";
-			this.B_EditName.Padding = new System.Windows.Forms.Padding(5);
-			this.B_EditName.Size = new System.Drawing.Size(32, 32);
-			this.B_EditName.TabIndex = 3;
-			this.B_EditName.TabStop = false;
-			this.B_EditName.Click += new System.EventHandler(this.B_EditName_Click);
-			// 
 			// B_Save
 			// 
 			this.B_Save.ActiveColor = null;
 			this.B_Save.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_Save.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_Save";
-			this.B_Save.ImageName = dynamicIcon7;
+			dynamicIcon15.Name = "I_Save";
+			this.B_Save.ImageName = dynamicIcon15;
 			this.B_Save.Location = new System.Drawing.Point(157, 0);
 			this.B_Save.Margin = new System.Windows.Forms.Padding(0);
 			this.B_Save.Name = "B_Save";
@@ -483,6 +458,32 @@ partial class PC_ProfileList
 			this.I_Favorite.TabIndex = 0;
 			this.I_Favorite.TabStop = false;
 			this.I_Favorite.Click += new System.EventHandler(this.I_Favorite_Click);
+			// 
+			// L_CurrentProfile
+			// 
+			this.L_CurrentProfile.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.L_CurrentProfile.AutoSize = true;
+			this.L_CurrentProfile.Location = new System.Drawing.Point(99, 4);
+			this.L_CurrentProfile.Name = "L_CurrentProfile";
+			this.L_CurrentProfile.Size = new System.Drawing.Size(55, 23);
+			this.L_CurrentProfile.TabIndex = 1;
+			this.L_CurrentProfile.Text = "label1";
+			// 
+			// B_EditName
+			// 
+			this.B_EditName.ActiveColor = null;
+			this.B_EditName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.B_EditName.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon16.Name = "I_Cog";
+			this.B_EditName.ImageName = dynamicIcon16;
+			this.B_EditName.Location = new System.Drawing.Point(64, 0);
+			this.B_EditName.Margin = new System.Windows.Forms.Padding(0);
+			this.B_EditName.Name = "B_EditName";
+			this.B_EditName.Padding = new System.Windows.Forms.Padding(5);
+			this.B_EditName.Size = new System.Drawing.Size(32, 32);
+			this.B_EditName.TabIndex = 3;
+			this.B_EditName.TabStop = false;
+			this.B_EditName.Click += new System.EventHandler(this.B_EditName_Click);
 			// 
 			// PC_ProfileList
 			// 

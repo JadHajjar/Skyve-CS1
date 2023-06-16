@@ -322,7 +322,7 @@ public static class CompatibilityManager
 				CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
 			}
 
-			if (package.IsMod && !author.Malicious && DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
+			if (package.IsMod && !author.Malicious && package.ServerTime.Date < new DateTime(2023, 6, 12) && DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
 			{
 				CompatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
 			}

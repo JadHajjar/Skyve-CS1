@@ -9,7 +9,7 @@ internal class LocaleCR : LocaleHelper
 
 	protected LocaleCR() : base($"{nameof(SkyveApp)}.Properties.Compatibility.json") { }
 
-	public static void Load() { }
+	public static void Load() { _ = _instance; }
 
 	public static Translation Get(string value)
 	{

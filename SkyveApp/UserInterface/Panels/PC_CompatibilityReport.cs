@@ -23,6 +23,7 @@ public partial class PC_CompatibilityReport : PanelContent
 {
 	private ReviewRequest[]? reviewRequests;
 	private NotificationType CurrentKey;
+	private bool customReportLoaded;
 
 	public PC_CompatibilityReport() : base(CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious)
 	{
@@ -74,7 +75,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void CompatibilityManager_ReportProcessed()
 	{
-		if (CompatibilityManager.FirstLoadComplete)
+		if (CompatibilityManager.FirstLoadComplete && !customReportLoaded)
 		{
 			var packages = CentralManager.Packages.ToList(x => x.GetCompatibilityInfo());
 
@@ -204,7 +205,11 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			var items = JsonConvert.DeserializeObject<List<CompatibilityInfo>>(File.ReadAllText(file));
 
+			customReportLoaded = false;
+
 			this.TryInvoke(() => LoadReport(items));
+
+			customReportLoaded = true;
 		}
 		catch { }
 	}

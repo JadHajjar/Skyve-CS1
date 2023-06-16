@@ -30,6 +30,10 @@ internal class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 	public override void ResetValue()
 	{
 		SelectedItems = Items;
+
+		listDropDown?.Invalidate();
+		OnSelectedItemChanged();
+		Invalidate();
 	}
 
 	protected override void UIChanged()

@@ -11,7 +11,6 @@ using SlickControls;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -1152,7 +1151,7 @@ public static class ProfileManager
 		{
 			var result = await SkyveApiUtil.SaveUserProfile(new()
 			{
-				
+
 				Author = SteamUtil.GetLoggedInSteamId(),
 				Banner = item.BannerBytes,
 				Color = item.Color?.ToArgb(),
@@ -1188,8 +1187,13 @@ public static class ProfileManager
 				return false;
 			}
 
-			var generatedProfile = item is Profile localProfile ? localProfile : profile.CloneTo<IProfile, Profile>();
+			var generatedProfile = Profiles.FirstOrDefault(x => x.Name.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase)) ?? profile.CloneTo<IProfile, Profile>();
 
+			generatedProfile.Color = ((IProfile)profile).Color;
+			generatedProfile.Author = profile.Author;
+			generatedProfile.ProfileId = profile.ProfileId;
+			generatedProfile.Usage = profile.Usage;
+			generatedProfile.BannerBytes = profile.Banner;
 			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Profile.Asset(x));
 			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Profile.Mod(x));
 
