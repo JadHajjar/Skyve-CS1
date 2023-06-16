@@ -563,6 +563,6 @@
   "FailedToUpdateProfile": "プロファイルのアップデートに失敗！",
   "ImportFromLink": "プロファイルIDを使用してプロファイルをインポート",
   "PasteProfileId": "インポートしたいプロファイルIDを貼り付け",
-  "AssumeInternetConnectivity": "Ignore Internet connection checks",
-  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
+  "AssumeInternetConnectivity": "インターネットの接続確認を無視",
+  "AssumeInternetConnectivity_Tip": "インターネットの接続確認をスキップして、自動的に接続済みと判断します。"
 }

@@ -308,7 +308,7 @@
   "OpenLinksInBrowser_Tip": "将 Steam 链接的打开方式更改为在您的默认浏览器中打开，而不是在 Steam 应用程序中打开。",
   "ProfileStillLoading": "您的配置文件正在加载中，请等它加载完毕，再退出此页面。",
   "ApplyProfileNameBeforeExit": "请先编辑好配置文件名称，再退出此页面。",
-  "SteamNotOpenTo": "Steam 客户端未运行（请确保打开加速器 / VPN）。",
+  "SteamNotOpenTo": "Steam 客户端当前尚未运行（请确保已打开加速器 / VPN）",
   "OpenSteamToContinue": "请打开 Steam 客户端（请确保打开加速器 / VPN），以继续完成您之前的下载任务。",
   "IncludeExcludeOtherProfile": "在配置文件 '{1}' 中装载/卸下 {0} ",
   "OpenProfileFolder": "打开该配置文件存储位置文件夹",

@@ -185,7 +185,7 @@
   "ShowingFilteredItems": "총 {1}개 항목 중 {0}개 표시 중",
   "DropNewProfile": "프로필의 .json 또는 .xml 파일을 여기에 놓거나 선택해서 프로필을 가져오세요",
   "ThemeUIScale": "테마 & UI 크기",
-  "SearchProfiles": "내 프로필에서 검색..",
+  "SearchProfiles": "이 프로필들 중 검색..",
   "AdvancedSettings": "고급 설정",
   "HelpTranslate": "번역 개선하기",
   "HelpReset": "도움 & 초기화",
@@ -563,6 +563,6 @@
   "FailedToUpdateProfile": "프로필을 업데이트하는 데 실패했습니다",
   "ImportFromLink": "프로필 ID로 프로필 가져오기",
   "PasteProfileId": "가져오고자 하는 프로필의 ID를 붙여넣으세요",
-  "AssumeInternetConnectivity": "Ignore Internet connection checks",
-  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
+  "AssumeInternetConnectivity": "인터넷 연결 확인 무시",
+  "AssumeInternetConnectivity_Tip": "인터넷 확인을 건너뛰고 연결되어 있다고 가정합니다."
 }
