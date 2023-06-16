@@ -3,6 +3,7 @@
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Steam;
+using SkyveApp.Domain.Utilities;
 
 using System;
 using System.Collections.Generic;
@@ -111,5 +112,15 @@ internal class SkyveApiUtil
 	internal static async Task<ApiResponse> SetProfileVisibility(int profileId, bool @public)
 	{
 		return await Post<bool, ApiResponse>("/SetProfileVisibility", @public, (nameof(profileId), profileId));
+	}
+
+	internal static async Task<ApiResponse> GetUserGuid()
+	{
+		return await Get<ApiResponse>("/GetUserGuid");
+	}
+
+	internal static async Task<ApiResponse> SendRequestsData(RequestData requestData)
+	{
+		return await Post<RequestData, ApiResponse>("/SendRequestsData", requestData);
 	}
 }

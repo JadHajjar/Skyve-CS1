@@ -13,7 +13,7 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 {
 	internal const string STEAM_USER_CACHE_FILE = "SteamUsersCache.json";
 
-	public SteamUserProcessor() : base(100, 5000, GetCachedInfo())
+	public SteamUserProcessor() : base(200, 5000, GetCachedInfo())
 	{
 
 	}

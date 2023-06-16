@@ -36,8 +36,10 @@ internal static class ApiUtil
 		return await Send<T>("DELETE", url, headers, queryParams);
 	}
 
-	private static async Task<T?> Send<T>(string method, string url, (string, string)[] headers, params (string, object)[] queryParams)
+	private static async Task<T?> Send<T>(string method, string baseUrl, (string, string)[] headers, params (string, object)[] queryParams)
 	{
+		var url = baseUrl;
+
 		if (queryParams.Length > 0)
 		{
 			var query = queryParams.Select(x => $"{Uri.EscapeDataString(x.Item1)}={Uri.EscapeDataString(x.Item2.ToString())}");
@@ -62,6 +64,8 @@ internal static class ApiUtil
 
 			var responseContent = reader.ReadToEnd();
 
+			DataCollectionUtil.Log(baseUrl, response.ContentLength);
+
 			return JsonConvert.DeserializeObject<T>(responseContent);
 		}
 
@@ -77,6 +81,8 @@ internal static class ApiUtil
 		if (httpResponse.IsSuccessStatusCode)
 		{
 			var response = await httpResponse.Content.ReadAsStringAsync();
+
+			DataCollectionUtil.Log(baseUrl, httpResponse.Content.Headers.ContentLength!.Value);
 
 			return JsonConvert.DeserializeObject<T>(response);
 		}
@@ -97,8 +103,9 @@ internal static class ApiUtil
 		return await Post<TBody, T>(url, body, new (string, string)[0], queryParams);
 	}
 
-	internal static async Task<T?> Post<TBody, T>(string url, TBody body, (string, string)[] headers, params (string, object)[] queryParams)
+	internal static async Task<T?> Post<TBody, T>(string baseUrl, TBody body, (string, string)[] headers, params (string, object)[] queryParams)
 	{
+		var url = baseUrl;
 		var json = JsonConvert.SerializeObject(body);
 
 		if (queryParams.Length > 0)
@@ -135,6 +142,8 @@ internal static class ApiUtil
 
 			var responseContent = reader.ReadToEnd();
 
+			DataCollectionUtil.Log(baseUrl, response.ContentLength);
+
 			return JsonConvert.DeserializeObject<T>(responseContent);
 		}
 
@@ -151,6 +160,8 @@ internal static class ApiUtil
 		if (httpResponse.IsSuccessStatusCode)
 		{
 			var response = await httpResponse.Content.ReadAsStringAsync();
+
+			DataCollectionUtil.Log(baseUrl, httpResponse.Content.Headers.ContentLength!.Value);
 
 			return JsonConvert.DeserializeObject<T>(response);
 		}
