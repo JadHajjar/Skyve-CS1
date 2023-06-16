@@ -544,6 +544,7 @@
           "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
           "Fixed private packages being marked as .",
           "Fixed some parts of the UI not getting translated from the start."
+        ]
       }
     ]
   }
