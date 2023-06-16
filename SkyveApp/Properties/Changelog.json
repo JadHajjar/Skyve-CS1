@@ -532,5 +532,19 @@
         ]
       }
     ]
+  },
+  {
+    "Version": "3.1.1",
+    "Date": "2023-06-16",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Added a loading animation when viewing a profile's contents.",
+          "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+          "Fixed private packages being marked as .",
+          "Fixed some parts of the UI not getting translated from the start."
+      }
+    ]
   }
 ]
