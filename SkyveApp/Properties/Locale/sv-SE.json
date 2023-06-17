@@ -563,6 +563,6 @@
   "FailedToUpdateProfile": "Det gick inte att uppdatera din profil",
   "ImportFromLink": "Importera en profil med hjälp av profil-ID",
   "PasteProfileId": "Klistra in ID för den profil du vill importera",
-  "AssumeInternetConnectivity": "Ignore Internet connection checks",
-  "AssumeInternetConnectivity_Tip": "Skips checking for internet and automatically assumes you are connected."
+  "AssumeInternetConnectivity": "Ignorera kontroll av Internetanslutning",
+  "AssumeInternetConnectivity_Tip": "Hoppar över kontroll av internetanslutning och antar att du är ansluten."
 }
