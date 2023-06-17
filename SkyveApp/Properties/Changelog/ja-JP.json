@@ -525,7 +525,7 @@
                 "Changes": [
                     "インターネットの接続チェックを無視するオプションを追加",
                     "プロファイルがアップロード中かどうかを示すインジケーターを追加",
-                    "オンラインのプロファイルの内容を簡単に確認できるボタンを追加",
+                    "オンラインプロファイルの内容を簡単に確認できるボタンを追加",
                     "Steamのユーザー情報を取得時に起きるエラーを修正",
                     "アセットエディタの起動設定が正しく保存されない問題を修正",
                     "オンラインプロファイルの更新が正しく動作しない問題を修正"
@@ -541,9 +541,9 @@
                 "Name": "変更",
                 "Changes": [
                     "プロファイルの内容を表示するときにロードアニメーションを追加",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "プロファイルのDLや更新で、サムネイルなどの一部データが正しく保存されない問題を修正",
+                    "非公開のパッケージが、「.」としてマークされる問題を修正",
+                    "一部のUIが最初から翻訳されていない問題を修正"
                 ]
             }
         ]
