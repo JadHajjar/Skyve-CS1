@@ -1,16 +1,16 @@
 {
-  "Usage": "Usage",
-  "Stability": "Stability",
-  "ApplyContinue": "Apply & Continue",
-  "Previous": "Previous",
-  "Skip": "Skip",
-  "Note": "Note",
-  "NoteInfo": "Extra informational text displayed for the package",
-  "BlackListName": "Black-list by name",
-  "BlackListId": "Black-list by Steam ID",
-  "GlobalTags": "Global Tags",
-  "GlobalTagsInfo": "Tags all players will see in the app",
-  "Links": "Links",
+  "Usage": "Használat",
+  "Stability": "Stabilitás",
+  "ApplyContinue": "Alkalmazd & Folytasd",
+  "Previous": "Előző",
+  "Skip": "Kihagyás",
+  "Note": "Megjegyzés",
+  "NoteInfo": "Extra tájékoztató szöveg jelenik meg a csomaghoz",
+  "BlackListName": "Feketelista név szerint",
+  "BlackListId": "Feketelista a Steam ID alapján",
+  "GlobalTags": "Globális címkék",
+  "GlobalTagsInfo": "Címkék, amelyeket minden játékos látni fog az alkalmazásban",
+  "Links": "Linkek",
   "StatusesCount": "Állapotok ({0})",
   "InteractionCount": "Interakciók ({0})",
   "AddStatus": "Állapot hozzáadása",
@@ -135,34 +135,34 @@
   "Action_NoAction": "",
   "Action_SubscribeToPackages": {
     "One": "A következő csomagra kell feliratkoznod:",
-    "Plural": "You should subscribe to these packages:"
+    "Plural": "A következő csomagra kell feliratkoznod:"
   },
-  "Action_RequiresConfiguration": "You should follow the following instructions:",
+  "Action_RequiresConfiguration": "A következő műveleteket kell elvégezned:",
   "Action_SelectOne": {
-    "One": "Between '{0}' and '{1}', you should choose only one of them.",
-    "Plural": "Between '{0}' and the following packages, you should only choose one."
+    "One": "A(z) '{0}' és '{1}' közül csak egyet válassz.",
+    "Plural": "A(z) '{0}' és a következő csomagok közül csak egyet válassz."
   },
-  "Action_UnsubscribeThis": "You should unsubscribe from '{0}'.",
+  "Action_UnsubscribeThis": "Le kell iratkoznod a következőről: „{0}”.",
   "Action_UnsubscribeOther": {
-    "One": "You should unsubscribe from '{1}'.",
-    "Plural": "You should unsubscribe from the following packages:"
+    "One": "Le kell iratkoznod a következőről: \"{1}\".",
+    "Plural": "Le kell iratkoznod az alábbi csomagokról:"
   },
-  "Action_ExcludeThis": "You should exclude '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "Action_ExcludeThis": "Ki kell zárnod a következőt: „{0}”.",
+  "ExcludeThis": "Zárd ki ezt a csomagot",
   "Exclude": "Kihagyott",
   "Unsubscribe": "Leiratkozás",
   "Action_ExcludeOther": {
-    "One": "You should exclude '{1}'.",
-    "Plural": "You should exclude the following packages:"
+    "One": "Ki kell zárnod a következőt: „{1}”.",
+    "Plural": "Ki kell zárnod a következő csomagokat:"
   },
   "Action_Switch": {
-    "One": "You should switch to '{1}'.",
-    "Plural": "You should switch to one of the following packages:"
+    "One": "Válts a következőre: „{1}”.",
+    "Plural": "A következő csomagok egyikére kell váltanod:"
   },
-  "NoRequiredDlcs": "No Required DLCs",
+  "NoRequiredDlcs": "Nincs szükség további DLC-re",
   "DlcsSelected": {
-    "One": "{0} DLC selected",
-    "Plural": "{0} DLCs selected"
+    "One": "{0} DLC kiválasztva",
+    "Plural": "{0} DLC kiválasztva"
   },
   "RequiredDLCs": "Szükséges DLC-k / CCP-k",
   "CRT_Stability": "Stabilitás",
