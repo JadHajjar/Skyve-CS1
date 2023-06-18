@@ -482,36 +482,36 @@
                     "Mostantól online is feltölthet egy profilt, felhasználónként legfeljebb 5 profilt.",
                     "A feltöltött profilok lehetnek privátak, megoszthatók azonosítóval, vagy nyilvánosak, hogy mindenki megtekinthesse.",
                     "Az online profilok letölthetők vagy frissíthetők, ha már rendelkezik helyileg.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "Az online profilokat a Profilok lap új gombjával fedezheted fel.",
+                    "A „Profil hozzáadása” oldalon egy harmadik lehetőség is hozzáadva online profil importálásához az azonosítójával."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "Profil változások",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "Az oldalsáv „Profilok” lapja most a profillistát nyitja meg a jelenlegi profil beállításai helyett.",
+                    "A Profillista mostantól rácsnézetet használ, és válthatsz a rács- és listanézet között.",
+                    "Módosítottuk a felső műveletgombok kialakítását mindkét profiloldalon",
+                    "Ha a profilodban nem mentett módosítások vannak, a Skyve logó lilán kezd el világítani.",
+                    "A profilokhoz mostantól bélyegképek is tartozhatnak.",
+                    "A profilhasználatoknak mostantól külön ikonjaik vannak."
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "Újdonságok & Frissítések",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Hozzáadtál egy új felhasználói profil oldalt, amely egy mod vagy profil készítője kattintva érhető el. Ez az oldal tartalmazza az összes felhasználói profilt és csomagot.",
+                    "A Skyve által végzett törlések mostantól a Windows lomtárába küldik a fájlokat.",
+                    "6 új reset gomb lett hozzáadva a Segédprogramok oldalon.",
+                    "2 új gomb lett hozzáadva a Súgó és naplók oldalon.",
+                    "A kompatibilitás és a csomagállapotok most a lista jobb oldalán jelennek meg.",
+                    "A hibás, inkompatibilis és tiltott csomagok új hátteret kaptak a listán.",
+                    "A helyi modok neve és címkéje frissült.",
+                    "A hiányzó forráskód mostantól figyelmeztetést generál a leiratkozási értesítés helyett.",
+                    "A szükséges modok mostantól más felhasználói felülettel rendelkeznek, hogy tudd, nem zárhatod ki őket.",
+                    "Hozzáadtunk egy beállítást a játékon belül, amely lehetővé teszi a modok és eszközök forró újratöltését.",
+                    "Jobb teljesítmény csomagok be-/kizárása közben.",
+                    "Magyar nyelv hozzáadva"
                 ]
             }
         ]
@@ -521,14 +521,14 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Változtatások",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "Egy lehetőség lett hozzáadva az internetkapcsolat ellenőrzésének figyelmen kívül hagyásához.",
+                    "Hozzáadtunk egy jelzőt, amely jelzi, hogy a profil feltöltődik.",
+                    "Hozzáadtunk egy gombot az online profil tartalmának egyszerű megtekintéséhez.",
+                    "Hiba javítása a Steam felhasználói adatok lekérése közben.",
+                    "Megoldottuk, hogy az Asset Creator (eszköz készítő) indítási beállításai megmaradjanak.",
+                    "Javítva lett egy online profil frissítése, amely nem működik megfelelően."
                 ]
             }
         ]
@@ -538,12 +538,12 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Változtatások",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "Betöltési animáció lett hozzáadva a profil tartalmának megtekintéséhez.",
+                    "Javítva lett a profil letöltése vagy frissítése, amely nem mentett megfelelően bizonyos adatokat, például az indexképet.",
+                    "A megoldottuk a privát csomagok jelölését.",
+                    "Javítva lett a felhasználói felület, a fordítások pótlásához."
                 ]
             }
         ]
