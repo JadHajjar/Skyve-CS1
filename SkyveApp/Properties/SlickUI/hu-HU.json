@@ -117,42 +117,42 @@
   },
   "in {0} month on {1}": {
     "One": "{0} hónap múlva itt: {1}",
-    "Plural": "in {0} months on {1}"
+    "Plural": "{0} hónap múlva itt: {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} nappal ezelőtt",
+    "Plural": "{0} napja"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "{0} nap",
+    "Plural": "{0} napon belül"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} év",
+    "Plural": "{0} év"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} hónap",
+    "Plural": "{0} hónap"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} nap",
+    "Plural": "{0} nap"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} óra",
+    "Plural": "{0} óra"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} perc",
+    "Plural": "{0} perc"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} másodperc",
+    "Plural": "{0} másodperc"
   },
-  "{0}d": "{0}d",
-  "{0}h": "{0}h",
-  "{0}m": "{0}m",
-  "{0}s": "{0}s"
+  "{0}d": "{0} nap",
+  "{0}h": "{0} óra",
+  "{0}m": "{0}perc",
+  "{0}s": "{0}másodperc"
 }
