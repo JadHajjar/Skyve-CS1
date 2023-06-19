@@ -538,7 +538,7 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Änderungen",
                 "Changes": [
                     "Added a loading animation when viewing a profile's contents.",
                     "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
