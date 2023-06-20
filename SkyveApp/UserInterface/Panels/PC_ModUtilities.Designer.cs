@@ -103,6 +103,7 @@ partial class PC_ModUtilities
 			// TB_CollectionLink
 			// 
 			this.TB_CollectionLink.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TB_CollectionLink.EnterTriggersClick = false;
 			this.TB_CollectionLink.LabelText = "CollectionLink";
 			this.TB_CollectionLink.Location = new System.Drawing.Point(3, 3);
 			this.TB_CollectionLink.Name = "TB_CollectionLink";
@@ -237,7 +238,7 @@ partial class PC_ModUtilities
 			this.B_ResetImageCache.ColorShade = null;
 			this.B_ResetImageCache.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_ResetImageCache.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Snooze";
+			dynamicIcon1.Name = "I_RemoveImage";
 			this.B_ResetImageCache.ImageName = dynamicIcon1;
 			this.B_ResetImageCache.Location = new System.Drawing.Point(462, 57);
 			this.B_ResetImageCache.Name = "B_ResetImageCache";
@@ -465,8 +466,8 @@ partial class PC_ModUtilities
 			this.P_BOB.Info = "XMLImportInfo";
 			this.P_BOB.Location = new System.Drawing.Point(353, 576);
 			this.P_BOB.Name = "P_BOB";
-			this.P_BOB.Padding = new System.Windows.Forms.Padding(9, 87, 9, 9);
-			this.P_BOB.Size = new System.Drawing.Size(344, 209);
+			this.P_BOB.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.P_BOB.Size = new System.Drawing.Size(344, 176);
 			this.P_BOB.TabIndex = 19;
 			this.P_BOB.Text = "XMLImport";
 			// 
@@ -478,7 +479,7 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel6.Controls.Add(this.DD_BOB, 0, 0);
 			this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tableLayoutPanel6.Location = new System.Drawing.Point(9, 87);
+			this.tableLayoutPanel6.Location = new System.Drawing.Point(9, 54);
 			this.tableLayoutPanel6.Name = "tableLayoutPanel6";
 			this.tableLayoutPanel6.RowCount = 1;
 			this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());

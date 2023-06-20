@@ -131,10 +131,7 @@ internal static class ModsUtil
 
 		if (CentralManager.SessionSettings.UserSettings.LinkModAssets && mod.Package.Assets != null)
 		{
-			foreach (var asset in mod.Package.Assets)
-			{
-				asset.IsIncluded = value;
-			}
+			ContentUtil.SetBulkIncluded(mod.Package.Assets, value);
 		}
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)

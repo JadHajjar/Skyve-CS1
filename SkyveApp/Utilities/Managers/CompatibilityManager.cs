@@ -139,7 +139,7 @@ public static class CompatibilityManager
 
 		try
 		{ ExtensionClass.DeleteFile(ISave.GetPath(SNOOZE_FILE)); }
-		catch { }
+		catch (Exception ex) { Log.Exception(ex, "Failed to clear Snoozes"); }
 	}
 
 	internal static bool IsSnoozed(ReportItem reportItem)
@@ -440,7 +440,7 @@ public static class CompatibilityManager
 
 		try
 		{ ExtensionClass.DeleteFile(ISave.GetPath(DATA_CACHE_FILE)); }
-		catch { }
+		catch (Exception ex) { Log.Exception(ex, "Failed to clear CR cache"); }
 
 		CacheReport();
 	}

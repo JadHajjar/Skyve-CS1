@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace SkyveApp.Utilities;
-internal class DataCollectionUtil
+internal class RequestDataUtil
 {
 	private static RequestData? _requestData;
 	private static DateTime uptimeStart;

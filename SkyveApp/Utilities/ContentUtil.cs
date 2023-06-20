@@ -498,7 +498,7 @@ internal class ContentUtil
 		try
 		{
 			ExtensionClass.DeleteFile(ISave.GetPath(CACHE_FILENAME)); }
-		catch { }
+		catch (Exception ex) { Log.Exception(ex, "Failed to clear DLL cache"); }
 	}
 
 	internal static void SetBulkIncluded(IEnumerable<IPackage> packages, bool value)

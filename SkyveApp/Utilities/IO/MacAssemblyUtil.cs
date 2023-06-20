@@ -60,6 +60,9 @@ internal class MacAssemblyUtil
 
 	public static bool MacOsResolve(string dllPath, out Version? version)
 	{
+#if DEBUG
+		Log.Debug("Resolving " + dllPath);
+#endif
 		version = null;
 		var process = IOUtil.Execute(LocationManager.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
 		{
@@ -71,6 +74,9 @@ internal class MacAssemblyUtil
 
 		if (process is null)
 		{
+#if DEBUG
+			Log.Debug("Process null");
+#endif
 			return false;
 		}
 

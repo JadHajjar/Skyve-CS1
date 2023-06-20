@@ -145,7 +145,7 @@ internal static class CentralManager
 
 		Log.Info($"Loading and applying CR Data..");
 
-		DataCollectionUtil.Start(packages);
+		RequestDataUtil.Start(packages);
 
 		CompatibilityManager.LoadCachedData();
 

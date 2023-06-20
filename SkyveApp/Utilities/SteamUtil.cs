@@ -472,14 +472,14 @@ public static class SteamUtil
 
 		try
 		{ ExtensionClass.DeleteFile(ISave.GetPath(DLC_CACHE_FILE)); }
-		catch { }
+		catch (Exception ex) { Log.Exception(ex, "Failed to clear DLC_CACHE_FILE"); }
 
 		try
 		{ ExtensionClass.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE)); }
-		catch { }
+		catch (Exception ex) { Log.Exception(ex, "Failed to clear STEAM_USER_CACHE_FILE"); }
 
 		try
 		{ ExtensionClass.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE)); }
-		catch { }
+		catch (Exception ex) { Log.Exception(ex, "Failed to clear STEAM_CACHE_FILE"); }
 	}
 }

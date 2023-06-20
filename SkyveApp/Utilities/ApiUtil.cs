@@ -64,7 +64,7 @@ internal static class ApiUtil
 
 			var responseContent = reader.ReadToEnd();
 
-			DataCollectionUtil.Log(baseUrl, response.ContentLength);
+			RequestDataUtil.Log(baseUrl, response.ContentLength);
 
 			return JsonConvert.DeserializeObject<T>(responseContent);
 		}
@@ -82,7 +82,7 @@ internal static class ApiUtil
 		{
 			var response = await httpResponse.Content.ReadAsStringAsync();
 
-			DataCollectionUtil.Log(baseUrl, httpResponse.Content.Headers.ContentLength!.Value);
+			RequestDataUtil.Log(baseUrl, httpResponse.Content.Headers.ContentLength!.Value);
 
 			return JsonConvert.DeserializeObject<T>(response);
 		}
@@ -142,7 +142,7 @@ internal static class ApiUtil
 
 			var responseContent = reader.ReadToEnd();
 
-			DataCollectionUtil.Log(baseUrl, response.ContentLength);
+			RequestDataUtil.Log(baseUrl, response.ContentLength);
 
 			return JsonConvert.DeserializeObject<T>(responseContent);
 		}
@@ -161,7 +161,7 @@ internal static class ApiUtil
 		{
 			var response = await httpResponse.Content.ReadAsStringAsync();
 
-			DataCollectionUtil.Log(baseUrl, httpResponse.Content.Headers.ContentLength!.Value);
+			RequestDataUtil.Log(baseUrl, httpResponse.Content.Headers.ContentLength!.Value);
 
 			return JsonConvert.DeserializeObject<T>(response);
 		}
