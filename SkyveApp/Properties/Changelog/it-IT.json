@@ -1,565 +1,565 @@
 [
-  {
-    "Version": "2.2.0",
-    "Date": "2023-04-10",
-    "Tagline": "Benvenuto nell'era del change-log",
-    "ChangeGroups": [
-      {
-        "Name": "Novità",
-        "Changes": [
-          "Aggiunto un pulsante 'Annulla iscrizione' nelle azioni delle pagine dei contenuti.",
-          "Aggiunta una sezione Utility per iscriversi agli elementi mancanti in una configurazione BOB.",
-          "Aggiunta un'opzione per avere le sezioni Filtri & Azione aperte di default.",
-          "Aggiunte pagine del change-log, lo vedrai sulle nuove versioni o usando il suo pulsante nelle sezioni Aiuto."
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Benvenuto nell'era del change-log",
+        "ChangeGroups": [
+            {
+                "Name": "Novità",
+                "Changes": [
+                    "Aggiunto un pulsante 'Annulla iscrizione' nelle azioni delle pagine dei contenuti.",
+                    "Aggiunta una sezione Utility per iscriversi agli elementi mancanti in una configurazione BOB.",
+                    "Aggiunta un'opzione per avere le sezioni Filtri & Azione aperte di default.",
+                    "Aggiunte pagine del change-log, lo vedrai sulle nuove versioni o usando il suo pulsante nelle sezioni Aiuto."
+                ]
+            },
+            {
+                "Name": "Miglioramenti",
+                "Changes": [
+                    "Aggiunto Rapporto di Compatibilità per Attività Interrotte",
+                    "I pacchetti non elencati ora hanno il nome e la miniatura corretti.",
+                    "I segnaposto per le impostazioni della cartella ora riflettono correttamente il vostro sistema operativo.",
+                    "Ctrl+Fare clic sul nome di un autore per aggiungerli al filtro"
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "I profili legacy fissi non vengono convertiti dopo il primo lancio.",
+                    "Le attività locali fisse non si aggiornano automaticamente dopo le modifiche esterne.",
+                    "Risolto l'eliminazione delle risorse locali dal menu di scelta rapida che elimina tutte le risorse locali invece di una sola",
+                    "Conversione fissa dei profili LOT 1 con conseguente contrassegno di attività come 'Locale'",
+                    "Corretti cartelle 'Real' che vengono scambiate sul salvataggio per gli utenti Linux e Mac.",
+                    "Risolto gli utenti Linux e Mac non essendo in grado di generare una zip di registro."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Miglioramenti",
-        "Changes": [
-          "Aggiunto Rapporto di Compatibilità per Attività Interrotte",
-          "I pacchetti non elencati ora hanno il nome e la miniatura corretti.",
-          "I segnaposto per le impostazioni della cartella ora riflettono correttamente il vostro sistema operativo.",
-          "Ctrl+Fare clic sul nome di un autore per aggiungerli al filtro"
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "Aggiunta la sezione Aiuto & Log",
+                "Changes": [
+                    "Accedi facilmente ai tuoi registri.",
+                    "Visualizza rapidamente gli errori nella sessione di gioco più recente/corrente.",
+                    "Semplificare un file di registro per concentrarsi su ciò che sta effettivamente accadendo.",
+                    "Condividere un file zip contenente tutti i log necessari a qualcuno per aiutarti."
+                ]
+            },
+            {
+                "Name": "Miglioramenti",
+                "Changes": [
+                    "Cambiato le icone dei filtri per riflettere le icone corrette usate nella lista."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il testo nella raccolta di importazione per la sottoscrizione e la cancellazione di essere capovolto.",
+                    "Risolto la selezione di mappe per un nuovo gioco che non permetteva agli utenti di selezionare una mappa vanigliata."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "I profili legacy fissi non vengono convertiti dopo il primo lancio.",
-          "Le attività locali fisse non si aggiornano automaticamente dopo le modifiche esterne.",
-          "Risolto l'eliminazione delle risorse locali dal menu di scelta rapida che elimina tutte le risorse locali invece di una sola",
-          "Conversione fissa dei profili LOT 1 con conseguente contrassegno di attività come 'Locale'",
-          "Corretti cartelle 'Real' che vengono scambiate sul salvataggio per gli utenti Linux e Mac.",
-          "Risolto gli utenti Linux e Mac non essendo in grado di generare una zip di registro."
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto un bug che ha causato il caricamento infinito per alcuni utenti."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.4",
-    "Date": "2023-04-08",
-    "ChangeGroups": [
-      {
-        "Name": "Aggiunta la sezione Aiuto & Log",
-        "Changes": [
-          "Accedi facilmente ai tuoi registri.",
-          "Visualizza rapidamente gli errori nella sessione di gioco più recente/corrente.",
-          "Semplificare un file di registro per concentrarsi su ciò che sta effettivamente accadendo.",
-          "Condividere un file zip contenente tutti i log necessari a qualcuno per aiutarti."
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Modifiche",
+                "Changes": [
+                    "Rimosso la scheda di sottoscrizione dalle opzioni in-game mod.",
+                    "I DLC fissi non vengono applicati durante il caricamento di un profilo.",
+                    "Risolto l'opzione di lingua essendo vuota per alcune persone.",
+                    "Il re-download dal vapore non costringerà più il focus allo strumento.",
+                    "Altre modifiche dell'interfaccia utente."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Miglioramenti",
-        "Changes": [
-          "Cambiato le icone dei filtri per riflettere le icone corrette usate nella lista."
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Modifiche",
+                "Changes": [
+                    "Aggiungere un popup di informazioni quando ci si iscrive per la prima volta agli elementi.",
+                    "Aggiunto un testo di avviso nella dashboard quando si hanno più istanze LOM installate.",
+                    "Aggiunti piccoli tag accanto ai titoli del pacchetto.",
+                    "Ri-download Load Order Tool avvierà il download e chiuderà l'app mentre viene aggiornato.",
+                    "Corretto e migliorato la velocità di caricamento dei rapporti della mod dello schermo."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretto il testo nella raccolta di importazione per la sottoscrizione e la cancellazione di essere capovolto.",
-          "Risolto la selezione di mappe per un nuovo gioco che non permetteva agli utenti di selezionare una mappa vanigliata."
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Rilascio Pubblico Beta",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "Presentazione, la revisione del profilo",
+        "ChangeGroups": [
+            {
+                "Name": "Modifiche Del Profilo",
+                "Changes": [
+                    "Cambiato il design della tua lista profili.",
+                    "I profili preferiti sono ora mostrati sul cruscotto per consentire una facile commutazione tra di loro.",
+                    "Aggiunta la sezione 'Altri Profili' nella pagina di un pacchetto per escluderli o includerli facilmente dagli altri profili",
+                    "Aggiunte nuove opzioni di ordinamento del profilo. L'ordinamento selezionato verrà ora ricordato durante le sessioni.",
+                    "Aggiunte azioni con il tasto destro del mouse nella lista dei contenuti per escludere o includere un elemento in tutti i pacchetti.",
+                    "Aggiunto un pulsante per visualizzare il file di un profilo sul computer.",
+                    "Ora puoi assegnare un colore ai tuoi profili.",
+                    "Ora puoi creare una scorciatoia desktop per i tuoi profili.",
+                    "Ora puoi importare un profilo LOT 1 nella sezione 'Aggiungi profilo'."
+                ]
+            },
+            {
+                "Name": "Miglioramenti",
+                "Changes": [
+                    "I collegamenti di vapore ora si apriranno all'interno della finestra di Steam. Questo può essere disabilitato nelle opzioni.",
+                    "Le risorse locali sono ora correttamente raggruppate in base alle cartelle in cui si trovano.",
+                    "Il pannello del tuo account Paradox sarà sempre visualizzato da ora in poi.",
+                    "I pulsanti finestra in alto a destra ora hanno icone per spiegare le loro azioni.",
+                    "Migliorata la reattività delle pagine dell'elenco contenuti.",
+                    "La ricerca nelle pagine dell'elenco dei contenuti è ora molto più veloce.",
+                    "Il caricamento della mod è ora nella caching; con conseguente carichi più efficienti su Windows & Linux, così come carichi molto più veloci su macOS.",
+                    "Ora puoi generare un file zip dei tuoi log mentre il gioco è in esecuzione."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Blocchi fissi che si verificano nelle pagine dell'elenco contenuti.",
+                    "Salvataggio automatico dei profili corretti non funziona correttamente.",
+                    "Risolto non essendo in grado di utilizzare mappe e salvataggio-giochi di workshop nelle impostazioni del profilo",
+                    "Mappe fisse personalizzate non caricate quando selezionate nelle impostazioni del profilo.",
+                    "Corretto il caricamento dei profili su macOS e Linux non sempre si applica correttamente.",
+                    "Avere una posizione personalizzata per i file di report LSMR ora inizierà correttamente da lì quando si seleziona un file di report nella pagina Utilities."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.3",
-    "Date": "2023-04-06",
-    "ChangeGroups": [
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretto un bug che ha causato il caricamento infinito per alcuni utenti."
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nuovo & Migliorato",
+                "Changes": [
+                    "Aggiunto nella pagina Utilities un'importazione da qualsiasi file di testo o dagli appunti.",
+                    "L'importazione BOB è ora un'importazione XML generica suppoortando qualsiasi formato XML che contiene ID pacchetto."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il caricamento di un URL di raccolta a volte non analizzare l'ID correttamente.",
+                    "Corretto LOT che diventa non reattivo su Mac/Linux quando si cancella la sottoscrizione da un pacchetto."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.2",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "Modifiche",
-        "Changes": [
-          "Rimosso la scheda di sottoscrizione dalle opzioni in-game mod.",
-          "I DLC fissi non vengono applicati durante il caricamento di un profilo.",
-          "Risolto l'opzione di lingua essendo vuota per alcune persone.",
-          "Il re-download dal vapore non costringerà più il focus allo strumento.",
-          "Altre modifiche dell'interfaccia utente."
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Aggiornamento pulizie di primavera",
+        "ChangeGroups": [
+            {
+                "Name": "Filtra e Ricerca Modifiche",
+                "Changes": [
+                    "Aggiunto un nuovo filtro autore a discesa.",
+                    "Aggiunte altre azioni alle etichette negli elenchi dei contenuti.",
+                    "Aggiunta una nuova opzione \"Qualsiasi problema\" per \"Stato del pacchetto\" e \"Rapporto di compatibilità\".",
+                    "Tutte le azioni del filtro sono ora effettuate usando Ctrl+Click, ha aggiunto un'opzione per scambiare questa funzionalità.",
+                    "Il ri-filtraggio usando le scorciatoie nella lista ora rimuove l'elemento dal filtro.",
+                    "Separare i termini con una virgola nella ricerca significa dividere la ricerca per abbinare uno qualsiasi dei termini (OR)\r\n\t<unk> • Aggiungere '+' all'inizio del tuo termine richiederà che il termine sia abbinato (AND)\r\n\t<unk> • Aggiungere '-' all'inizio del tuo termine escluderà gli elementi che corrispondono a quel termine\r\n\r\nEsempi della nuova ricerca:\r\n\t<unk> • auto, camion (partite 'auto' O 'camion ')\r\n\t<unk> • edificio, appartamento +europeo (partite 'europeo' E ['edificio' O 'appartamento'])\r\n\t<unk> • condominio, house -rico +american (partite 'american' AND ['condo' OR 'house'] E NON 'rico')"
+                ]
+            },
+            {
+                "Name": "Modifiche UI & UX",
+                "Changes": [
+                    "Implementato un nuovo sistema di icone che scala tutte le icone in modo appropriato sulla tua scala UI.",
+                    "Ha rielaborato il rendering delle liste, migliorando drasticamente le prestazioni e la reattività delle pagine dei contenuti.",
+                    "Aggiunto un interruttore ordine di ordinamento per selezionare tra ordinamento crescente e discendente.",
+                    "Spostato la sezione 'Azioni' nelle pagine del contenuto e aggiunto 2 nuove opzioni.",
+                    "I pacchetti parzialmente inclusi ora hanno una interfaccia utente diversa nella lista.",
+                    "Migliorati i pulsanti e i controlli dei filtri negli elenchi dei contenuti, riducendone le dimensioni complessive e aggiungendo più spunti visivi.",
+                    "Cambiato l'opzione per aumentare la dimensione degli elementi di lista al passaggio per aumentare sempre la loro dimensione, ha migliorato l'interfaccia utente degli elementi ingranditi dell'elenco e ha applicato questa funzionalità al resto delle liste nell'app.",
+                    "Aggiunta una scorciatoia Ctrl+[0-9] per passare dalle schede disponibili.",
+                    "Cambia tutti i doppi pulsanti e l'opzione attiva i lati.",
+                    "Le animazioni sono ora disabilitate per impostazione predefinita su macOS e Linux.",
+                    "Così tanti altri miglioramenti, modifiche e correzioni dell'interfaccia utente ho perso il conteggio."
+                ]
+            },
+            {
+                "Name": "Selezione dei file migliorata",
+                "Changes": [
+                    "Aggiornato l'interfaccia utente delle schermate di selezione dei file.",
+                    "Aggiunte cartelle bloccate per accedere facilmente alle cartelle rilevanti.",
+                    "Aggiunta una sezione Workshop per selezionare facilmente le mappe e i salvataggi dell'officina.",
+                    "Aggiunta una selezione a discesa & ordina ordine",
+                    "Aggiunta una vista elenco/griglia."
+                ]
+            },
+            {
+                "Name": "Correzioni di bug",
+                "Changes": [
+                    "Lancio fisso LOT dopo che il monitor era precedentemente acceso si è spento con conseguente nella finestra ora in mostra.",
+                    "Risolto l'opzione LHT non funziona quando si avvia in una nuova mappa.",
+                    "Pagine dell'autore corrette che non si aprono correttamente in Steam.",
+                    "Corretto blocco durante la ricerca mentre l'ordinamento 'Abbonamento tempo' è stato selezionato."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.1",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "Modifiche",
-        "Changes": [
-          "Aggiungere un popup di informazioni quando ci si iscrive per la prima volta agli elementi.",
-          "Aggiunto un testo di avviso nella dashboard quando si hanno più istanze LOM installate.",
-          "Aggiunti piccoli tag accanto ai titoli del pacchetto.",
-          "Ri-download Load Order Tool avvierà il download e chiuderà l'app mentre viene aggiornato.",
-          "Corretto e migliorato la velocità di caricamento dei rapporti della mod dello schermo."
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Pulizia Pacchetti del Workshop",
+                "Changes": [
+                    "Aggiunte nuove funzioni per gestire facilmente le discrepanze tra Steam e i tuoi pacchetti scaricati.",
+                    "I pacchetti a cui non sei iscritto non vengono più caricati durante il gioco.",
+                    "Lanciando il gioco con LOT aperto cancellerà automaticamente tutti i pacchetti a cui non sei iscritto, ma che si trovano sul tuo computer.",
+                    "Aggiunto un pulsante nella scheda Utilità per eseguire manualmente questa pulizia e per forzare lo scaricamento dei pacchetti mancanti."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.0",
-    "Date": "2023-04-05",
-    "Tagline": "Rilascio Pubblico Beta",
-    "ChangeGroups": []
-  },
-  {
-    "Version": "2.2.1",
-    "Date": "2023-04-15",
-    "Tagline": "Presentazione, la revisione del profilo",
-    "ChangeGroups": [
-      {
-        "Name": "Modifiche Del Profilo",
-        "Changes": [
-          "Cambiato il design della tua lista profili.",
-          "I profili preferiti sono ora mostrati sul cruscotto per consentire una facile commutazione tra di loro.",
-          "Aggiunta la sezione 'Altri Profili' nella pagina di un pacchetto per escluderli o includerli facilmente dagli altri profili",
-          "Aggiunte nuove opzioni di ordinamento del profilo. L'ordinamento selezionato verrà ora ricordato durante le sessioni.",
-          "Aggiunte azioni con il tasto destro del mouse nella lista dei contenuti per escludere o includere un elemento in tutti i pacchetti.",
-          "Aggiunto un pulsante per visualizzare il file di un profilo sul computer.",
-          "Ora puoi assegnare un colore ai tuoi profili.",
-          "Ora puoi creare una scorciatoia desktop per i tuoi profili.",
-          "Ora puoi importare un profilo LOT 1 nella sezione 'Aggiungi profilo'."
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Novità",
+                "Changes": [
+                    "Aggiunta un'opzione per disabilitare la pulizia automatica all'apertura del gioco.",
+                    "Aggiunta una casella per parametri personalizzati, per impostazioni di avvio avanzate."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Miglioramenti",
-        "Changes": [
-          "I collegamenti di vapore ora si apriranno all'interno della finestra di Steam. Questo può essere disabilitato nelle opzioni.",
-          "Le risorse locali sono ora correttamente raggruppate in base alle cartelle in cui si trovano.",
-          "Il pannello del tuo account Paradox sarà sempre visualizzato da ora in poi.",
-          "I pulsanti finestra in alto a destra ora hanno icone per spiegare le loro azioni.",
-          "Migliorata la reattività delle pagine dell'elenco contenuti.",
-          "La ricerca nelle pagine dell'elenco dei contenuti è ora molto più veloce.",
-          "Il caricamento della mod è ora nella caching; con conseguente carichi più efficienti su Windows & Linux, così come carichi molto più veloci su macOS.",
-          "Ora puoi generare un file zip dei tuoi log mentre il gioco è in esecuzione."
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Icona di Valutazione & Sottoscrizioni",
+                "Changes": [
+                    "Aggiunta una nuova icona di fianco a un pacchetto che mostra un rapido riassunto delle valutazioni e del numero di iscritti del pacchetto.",
+                    "Passa il mouse sopra di essa per mostrare i valori.",
+                    "Fai clic sull'icona per una descrizione approfondita di questa funzionalità.",
+                    "Aggiunte opzioni di ordinamento per 'Valutazioni' e 'Sottoscrizioni totali'."
+                ]
+            },
+            {
+                "Name": "Requisiti Risorsa",
+                "Changes": [
+                    "Gli elementi richiesti da una risorsa mostrati nella sua pagina del workshop sono ora gestiti da Load Order Tool.",
+                    "Questa informazione sarà ora inclusa nel Rapporto di compatibilità, per scoprire velocemente e facilmente quello che ti manca."
+                ]
+            },
+            {
+                "Name": "Altri cambiamenti",
+                "Changes": [
+                    "Aggiornata la Pagina Pacchetto per metterla in pari con le informazioni mostrate nelle liste dei contenuti.",
+                    "Le liste dei contenuti secondari come 'Pacchetti Mancanti' e 'Collezione del Workshop ' ora usano la stessa interfaccia delle liste dei contenuti principali, per un'esperienza più uniforme e più opzioni disponibili.",
+                    "Aggiunte le opzioni di lancio 'Nuova risorsa' e 'Carica risorsa' nel profilo per aprire velocemente l'Editor Risorse."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Blocchi fissi che si verificano nelle pagine dell'elenco contenuti.",
-          "Salvataggio automatico dei profili corretti non funziona correttamente.",
-          "Risolto non essendo in grado di utilizzare mappe e salvataggio-giochi di workshop nelle impostazioni del profilo",
-          "Mappe fisse personalizzate non caricate quando selezionate nelle impostazioni del profilo.",
-          "Corretto il caricamento dei profili su macOS e Linux non sempre si applica correttamente.",
-          "Avere una posizione personalizzata per i file di report LSMR ora inizierà correttamente da lì quando si seleziona un file di report nella pagina Utilities."
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Vi presentiamo Skyve, il successore definitivo di Load Order Mod 1/2 e Compatibility Report.\nIn arrivo per C:S I e C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Revisione di Compatibility Report",
+                "Changes": [
+                    "Compatibility Report è ora integrata direttamente in Skyve.",
+                    "Le raccomandazioni e il testo informativo sono ora più chiari e facili da gestire.",
+                    "È stato aggiunto il pulsante Nascondi per eliminare una determinata notifica di compatibilità.",
+                    "Gli elementi richiesti vengono automaticamente reindirizzati al successore più recente dei pacchetti.",
+                    "I pacchetti locali vengono automaticamente abbinati alla loro controparte online, mostrando le informazioni di Steam e mostrando correttamente le informazioni sulla compatibilità.",
+                    "È ora possibile richiedere una revisione di un pacchetto per segnalare la presenza di informazioni mancanti nei dati di compatibilità.",
+                    "La scheda Rapporto di Compatibilità è ora disponibile."
+                ]
+            },
+            {
+                "Name": "Nuove caratteristiche",
+                "Changes": [
+                    "È ora possibile modificare i tag Find it! direttamente nell'app per le mod e le risorse. Le risorse sono sincronizzate con il gioco.",
+                    "Aggiunta la scheda \"Riferimenti\" nella pagina di un pacchetto per vedere tutti gli altri pacchetti che vi fanno riferimento.",
+                    "Aggiunta un'opzione per far sì che i pacchetti opzionali utilizzino la stessa notifica dei pacchetti obbligatori.",
+                    "Aggiunti dialetti linguistici, Cinese Tradizionale (Taiwan), Inglese UK e Portoghese Brasile."
+                ]
+            },
+            {
+                "Name": "Altri cambiamenti",
+                "Changes": [
+                    "Le pseudo-mod ora includono marcature IMT, profili di Render it!, caratteri di Procedural Objects e mod di traduzione.",
+                    "Aggiunti i link alla pagina del pacchetto, oltre ad altre informazioni come l'uso e il tipo.",
+                    "Aggiunti nuovi utilizzi del Profilo: Creazione di Mappe, Creazione di Scenari e Creazione di Temi.",
+                    "Aggiunto un testo extra nell'elenco per mostrare quanti pacchetti sono nascosti a causa dell'uso del profilo.",
+                    "Migliorato il pulsante Azioni per renderlo più visibile e di facile accesso.",
+                    "La nuova icona ora si illumina in base a ciò che sta accadendo: il blu indica che il gioco è in esecuzione, il rosso indica che non c'è connessione a Internet e il bagliore rapido indica che il gioco si sta avviando o chiudendo."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.2.2",
-    "Date": "2023-04-19",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Nuovo & Migliorato",
-        "Changes": [
-          "Aggiunto nella pagina Utilities un'importazione da qualsiasi file di testo o dagli appunti.",
-          "L'importazione BOB è ora un'importazione XML generica suppoortando qualsiasi formato XML che contiene ID pacchetto."
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il problema delle impostazioni e dei profili precedenti che a volte non venivano trasferiti a Skyve.",
+                    "Ora viene creato un collegamento quando si apre Skyve per la prima volta dopo aver utilizzato LOM2.",
+                    "Corretto un raro caso in cui le informazioni sulla compatibilità non venivano caricate.",
+                    "Abilitata la possibilità di richiedere una revisione per un pacchetto attualmente non funzionante.",
+                    "Ridotta la sensibilità della notifica \"Parzialmente scaricato\"."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretto il caricamento di un URL di raccolta a volte non analizzare l'ID correttamente.",
-          "Corretto LOT che diventa non reattivo su Mac/Linux quando si cancella la sottoscrizione da un pacchetto."
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Cambiamenti",
+                "Changes": [
+                    "Migliorate le prestazioni dell'app. Si prevedono tempi di caricamento più rapidi e meno stuttering.",
+                    "Corretta un'interazione tra mod simili che comparivano nel Rapporto di compatibilità quando se ne aveva solo una.",
+                    "Corretto il rilevamento delle mod nella cartella delle risorse locali."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.0",
-    "Date": "2023-04-27",
-    "Tagline": "Aggiornamento pulizie di primavera",
-    "ChangeGroups": [
-      {
-        "Name": "Filtra e Ricerca Modifiche",
-        "Changes": [
-          "Aggiunto un nuovo filtro autore a discesa.",
-          "Aggiunte altre azioni alle etichette negli elenchi dei contenuti.",
-          "Aggiunta una nuova opzione \"Qualsiasi problema\" per \"Stato del pacchetto\" e \"Rapporto di compatibilità\".",
-          "Tutte le azioni del filtro sono ora effettuate usando Ctrl+Click, ha aggiunto un'opzione per scambiare questa funzionalità.",
-          "Il ri-filtraggio usando le scorciatoie nella lista ora rimuove l'elemento dal filtro.",
-          "Separare i termini con una virgola nella ricerca significa dividere la ricerca per abbinare uno qualsiasi dei termini (OR)\r\n\t<unk> • Aggiungere '+' all'inizio del tuo termine richiederà che il termine sia abbinato (AND)\r\n\t<unk> • Aggiungere '-' all'inizio del tuo termine escluderà gli elementi che corrispondono a quel termine\r\n\r\nEsempi della nuova ricerca:\r\n\t<unk> • auto, camion (partite 'auto' O 'camion ')\r\n\t<unk> • edificio, appartamento +europeo (partite 'europeo' E ['edificio' O 'appartamento'])\r\n\t<unk> • condominio, house -rico +american (partite 'american' AND ['condo' OR 'house'] E NON 'rico')"
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretta la scheda delle opzioni che non si apre per macOS e Linux.",
+                    "È stato risolto il problema del caricamento automatico del registro corrente nella scheda Guida e Registri.",
+                    "Corretto il percorso errato del file di log su Linux."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Modifiche UI & UX",
-        "Changes": [
-          "Implementato un nuovo sistema di icone che scala tutte le icone in modo appropriato sulla tua scala UI.",
-          "Ha rielaborato il rendering delle liste, migliorando drasticamente le prestazioni e la reattività delle pagine dei contenuti.",
-          "Aggiunto un interruttore ordine di ordinamento per selezionare tra ordinamento crescente e discendente.",
-          "Spostato la sezione 'Azioni' nelle pagine del contenuto e aggiunto 2 nuove opzioni.",
-          "I pacchetti parzialmente inclusi ora hanno una interfaccia utente diversa nella lista.",
-          "Migliorati i pulsanti e i controlli dei filtri negli elenchi dei contenuti, riducendone le dimensioni complessive e aggiungendo più spunti visivi.",
-          "Cambiato l'opzione per aumentare la dimensione degli elementi di lista al passaggio per aumentare sempre la loro dimensione, ha migliorato l'interfaccia utente degli elementi ingranditi dell'elenco e ha applicato questa funzionalità al resto delle liste nell'app.",
-          "Aggiunta una scorciatoia Ctrl+[0-9] per passare dalle schede disponibili.",
-          "Cambia tutti i doppi pulsanti e l'opzione attiva i lati.",
-          "Le animazioni sono ora disabilitate per impostazione predefinita su macOS e Linux.",
-          "Così tanti altri miglioramenti, modifiche e correzioni dell'interfaccia utente ho perso il conteggio."
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Cambiamenti",
+                "Changes": [
+                    "I pannelli di Steam nel menu principale sono ora visualizzati per impostazione predefinita; è comunque possibile nasconderli nelle impostazioni della mod.",
+                    "La richiesta di una recensione ora richiede una descrizione valida e invia anche i vostri log con la richiesta. Una clausola di esclusione della responsabilità è visualizzata accanto al pulsante \"Invia\".",
+                    "Ridotto il livello di segnalazione di una mod che non viene aggiornata da un po' di tempo a 'Info', in modo che non ti informi."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto il riepilogo delle attività che non viene visualizzato nel pannello di controllo.",
+                    "Risolto il problema dello stato di scaduto che non funziona correttamente."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Selezione dei file migliorata",
-        "Changes": [
-          "Aggiornato l'interfaccia utente delle schermate di selezione dei file.",
-          "Aggiunte cartelle bloccate per accedere facilmente alle cartelle rilevanti.",
-          "Aggiunta una sezione Workshop per selezionare facilmente le mappe e i salvataggi dell'officina.",
-          "Aggiunta una selezione a discesa & ordina ordine",
-          "Aggiunta una vista elenco/griglia."
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni e Cambiamenti",
+                "Changes": [
+                    "Aggiunto un messaggio per avvisare l'utente quando \"Correggi Tutti i Problemi\" e \"Esegui Pulizia\" terminano.",
+                    "Corretto un raro bug per cui il caricamento di un profilo LOT 1 continuava a caricarsi all'infinito.",
+                    "Corrretto il problema con il log delle modifiche che non si apriva con alcune lingue.",
+                    "Potenzialmente risolto l'iscrizione a una grande quantità di elementi che non funzionava/non funzionava."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Correzioni di bug",
-        "Changes": [
-          "Lancio fisso LOT dopo che il monitor era precedentemente acceso si è spento con conseguente nella finestra ora in mostra.",
-          "Risolto l'opzione LHT non funziona quando si avvia in una nuova mappa.",
-          "Pagine dell'autore corrette che non si aprono correttamente in Steam.",
-          "Corretto blocco durante la ricerca mentre l'ordinamento 'Abbonamento tempo' è stato selezionato."
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Rivisto il Processo di Sottoscrizione",
+                "Changes": [
+                    "È ora possibile sottoscrivere i pacchetti mentre il gioco è aperto.",
+                    "La sottoscrizione di più elementi consecutivi li metterà in un elenco in attesa, invece di aprire il gioco ogni volta.",
+                    "Aggiunto un riquadro in basso a sinistra dell'app per segnalare eventuali attività di iscrizione/disiscrizione in sospeso.",
+                    "Aggiunta un'opzione avanzata per forzare il download o l'eliminazione dei pacchetti non appena ci si iscrive/disiscrive ad essi in Skyve.",
+                    "Gli oggetti appena sottoscritti non vengono più ricaricati mentre il gioco è aperto.\nIn questo modo si evitano i blocchi del gioco e il malfunzionamento delle mod."
+                ]
+            },
+            {
+                "Name": "Nuovo",
+                "Changes": [
+                    "Aggiunta la voce \"Visualizza i contenuti di questo Profilo\" nel menu del tasto destro del mouse dei profili.",
+                    "Aggiunta l'opzione \"Forza download\" nel menu del tasto destro del mouse dei pacchetti.",
+                    "Aggiunto un maggiore contesto ad alcuni popup",
+                    "Aggiunta la funzione \"Scarica tutti gli elementi visualizzati\" nelle azioni delle pagine degli elenchi."
+                ]
+            },
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretto l'aggiornamento istantaneo dell'elenco dei profili.",
+                    "Corretto il problema dei pacchetti profilo che non mostrano il nome del Workshop.",
+                    "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
+                    "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi.",
+                    "Migliorate le prestazioni per chi ha molte mod."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.1",
-    "Date": "2023-04-29",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Pulizia Pacchetti del Workshop",
-        "Changes": [
-          "Aggiunte nuove funzioni per gestire facilmente le discrepanze tra Steam e i tuoi pacchetti scaricati.",
-          "I pacchetti a cui non sei iscritto non vengono più caricati durante il gioco.",
-          "Lanciando il gioco con LOT aperto cancellerà automaticamente tutti i pacchetti a cui non sei iscritto, ma che si trovano sul tuo computer.",
-          "Aggiunto un pulsante nella scheda Utilità per eseguire manualmente questa pulizia e per forzare lo scaricamento dei pacchetti mancanti."
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Corretta l'interruzione forzata all'avvio."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.2",
-    "Date": "2023-04-30",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Novità",
-        "Changes": [
-          "Aggiunta un'opzione per disabilitare la pulizia automatica all'apertura del gioco.",
-          "Aggiunta una casella per parametri personalizzati, per impostazioni di avvio avanzate."
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Correzioni",
+                "Changes": [
+                    "Aggiornato con l'ultima patch del gioco."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.3",
-    "Date": "2023-05-04",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Icona di Valutazione & Sottoscrizioni",
-        "Changes": [
-          "Aggiunta una nuova icona di fianco a un pacchetto che mostra un rapido riassunto delle valutazioni e del numero di iscritti del pacchetto.",
-          "Passa il mouse sopra di essa per mostrare i valori.",
-          "Fai clic sull'icona per una descrizione approfondita di questa funzionalità.",
-          "Aggiunte opzioni di ordinamento per 'Valutazioni' e 'Sottoscrizioni totali'."
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Profili online, in arrivo!",
+        "ChangeGroups": [
+            {
+                "Name": "Profili Online",
+                "Changes": [
+                    "È ora possibile caricare un profilo online, fino a 5 profili per utente.",
+                    "I profili caricati possono essere privati, condivisi con un ID o pubblici per tutti.",
+                    "I profili online possono essere scaricati o aggiornati se già presenti in locale.",
+                    "È possibile scoprire i profili online utilizzando un nuovo pulsante nella scheda Profili.",
+                    "Aggiunta una terza opzione nella pagina \"Aggiungi profilo\" per importare un profilo online utilizzando il suo ID."
+                ]
+            },
+            {
+                "Name": "Modifiche al Profilo",
+                "Changes": [
+                    "La scheda 'Profili' nella barra laterale aprirà ora l'elenco dei profili anziché le impostazioni del profilo corrente.",
+                    "L'elenco dei profili utilizza ora una visualizzazione a griglia ed è possibile passare dalla visualizzazione a griglia a quella a elenco.",
+                    "Modificato il design dei pulsanti di azione in alto su entrambe le pagine del profilo",
+                    "Se nel profilo sono presenti modifiche non salvate, il logo di Skyve si illuminerà di viola.",
+                    "I profili possono ora avere delle miniature.",
+                    "Gli usi del profilo hanno ora icone separate."
+                ]
+            },
+            {
+                "Name": "Novità e aggiornamenti",
+                "Changes": [
+                    "Aggiunta una nuova pagina del profilo utente, accessibile cliccando sull'autore di una mod o di un profilo. Questa pagina include tutti i profili e i pacchetti dell'utente.",
+                    "Le cancellazioni effettuate da Skyve ora inviano i file al cestino di Windows.",
+                    "Aggiunti 6 nuovi pulsanti di ripristino nella pagina Utilità.",
+                    "Aggiunti 2 nuovi pulsanti nella pagina Aiuto e Registri.",
+                    "Gli stati di compatibilità e dei pacchetti sono ora mostrati a destra nell'elenco.",
+                    "I pacchetti rotti, incompatibili e vietati hanno ora un nuovo sfondo nell'elenco.",
+                    "Il nome e l'etichetta dei mod locali sono stati aggiornati.",
+                    "Il codice sorgente mancante ora genera un avviso invece di una notifica di annullamento dell'iscrizione.",
+                    "Le mod richieste hanno ora un'interfaccia utente diversa per segnalare che non è possibile escluderle.",
+                    "Aggiunta un'impostazione in gioco per abilitare il caricamento a caldo di mod e asset.",
+                    "Miglioramento delle prestazioni durante l'inclusione/esclusione dei pacchetti.",
+                    "Aggiunta della lingua Ungherese"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Requisiti Risorsa",
-        "Changes": [
-          "Gli elementi richiesti da una risorsa mostrati nella sua pagina del workshop sono ora gestiti da Load Order Tool.",
-          "Questa informazione sarà ora inclusa nel Rapporto di compatibilità, per scoprire velocemente e facilmente quello che ti manca."
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Cambiamenti",
+                "Changes": [
+                    "Aggiunta l'opzione per ignorare i controlli della connettività Internet.",
+                    "Aggiunto un indicatore che indica che un profilo è in fase di caricamento.",
+                    "Aggiunto un pulsante per visualizzare facilmente i contenuti di un profilo online.",
+                    "Corretto un errore durante il recupero delle informazioni sull'utente di Steam.",
+                    "Corretto il problema delle impostazioni di avvio dell'Editor Risorse che non vengono ricordate correttamente.",
+                    "Corretto l'aggiornamento di un profilo online che non funziona correttamente."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Altri cambiamenti",
-        "Changes": [
-          "Aggiornata la Pagina Pacchetto per metterla in pari con le informazioni mostrate nelle liste dei contenuti.",
-          "Le liste dei contenuti secondari come 'Pacchetti Mancanti' e 'Collezione del Workshop ' ora usano la stessa interfaccia delle liste dei contenuti principali, per un'esperienza più uniforme e più opzioni disponibili.",
-          "Aggiunte le opzioni di lancio 'Nuova risorsa' e 'Carica risorsa' nel profilo per aprire velocemente l'Editor Risorse."
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Cambiamenti",
+                "Changes": [
+                    "Aggiunta un'animazione di caricamento quando si visualizza il contenuto di un profilo.",
+                    "Corretto il download o l'aggiornamento di un profilo che non salvava correttamente alcuni dati come la miniatura.",
+                    "Corretto il problema dei pacchetti privati che vengono contrassegnati come .",
+                    "Corrette alcune parti dell'interfaccia utente che non venivano tradotte fin dall'inizio."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.0",
-    "Date": "2023-05-23",
-    "Tagline": "Vi presentiamo Skyve, il successore definitivo di Load Order Mod 1/2 e Compatibility Report.\nIn arrivo per C:S I e C:S II",
-    "ChangeGroups": [
-      {
-        "Name": "Revisione di Compatibility Report",
-        "Changes": [
-          "Compatibility Report è ora integrata direttamente in Skyve.",
-          "Le raccomandazioni e il testo informativo sono ora più chiari e facili da gestire.",
-          "È stato aggiunto il pulsante Nascondi per eliminare una determinata notifica di compatibilità.",
-          "Gli elementi richiesti vengono automaticamente reindirizzati al successore più recente dei pacchetti.",
-          "I pacchetti locali vengono automaticamente abbinati alla loro controparte online, mostrando le informazioni di Steam e mostrando correttamente le informazioni sulla compatibilità.",
-          "È ora possibile richiedere una revisione di un pacchetto per segnalare la presenza di informazioni mancanti nei dati di compatibilità.",
-          "La scheda Rapporto di Compatibilità è ora disponibile."
+    },
+    {
+        "Version": "3.1.2",
+        "Date": "2023-06-21",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixes an error caused by including/excluding mods that have contain assets.",
+                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
+                    "Fixed some packages not showing their successor properly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Nuove caratteristiche",
-        "Changes": [
-          "È ora possibile modificare i tag Find it! direttamente nell'app per le mod e le risorse. Le risorse sono sincronizzate con il gioco.",
-          "Aggiunta la scheda \"Riferimenti\" nella pagina di un pacchetto per vedere tutti gli altri pacchetti che vi fanno riferimento.",
-          "Aggiunta un'opzione per far sì che i pacchetti opzionali utilizzino la stessa notifica dei pacchetti obbligatori.",
-          "Aggiunti dialetti linguistici, Cinese Tradizionale (Taiwan), Inglese UK e Portoghese Brasile."
-        ]
-      },
-      {
-        "Name": "Altri cambiamenti",
-        "Changes": [
-          "Le pseudo-mod ora includono marcature IMT, profili di Render it!, caratteri di Procedural Objects e mod di traduzione.",
-          "Aggiunti i link alla pagina del pacchetto, oltre ad altre informazioni come l'uso e il tipo.",
-          "Aggiunti nuovi utilizzi del Profilo: Creazione di Mappe, Creazione di Scenari e Creazione di Temi.",
-          "Aggiunto un testo extra nell'elenco per mostrare quanti pacchetti sono nascosti a causa dell'uso del profilo.",
-          "Migliorato il pulsante Azioni per renderlo più visibile e di facile accesso.",
-          "La nuova icona ora si illumina in base a ciò che sta accadendo: il blu indica che il gioco è in esecuzione, il rosso indica che non c'è connessione a Internet e il bagliore rapido indica che il gioco si sta avviando o chiudendo."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.1",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretto il problema delle impostazioni e dei profili precedenti che a volte non venivano trasferiti a Skyve.",
-          "Ora viene creato un collegamento quando si apre Skyve per la prima volta dopo aver utilizzato LOM2.",
-          "Corretto un raro caso in cui le informazioni sulla compatibilità non venivano caricate.",
-          "Abilitata la possibilità di richiedere una revisione per un pacchetto attualmente non funzionante.",
-          "Ridotta la sensibilità della notifica \"Parzialmente scaricato\"."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.2",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "Cambiamenti",
-        "Changes": [
-          "Migliorate le prestazioni dell'app. Si prevedono tempi di caricamento più rapidi e meno stuttering.",
-          "Corretta un'interazione tra mod simili che comparivano nel Rapporto di compatibilità quando se ne aveva solo una.",
-          "Corretto il rilevamento delle mod nella cartella delle risorse locali."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.3",
-    "Date": "2023-05-24",
-    "ChangeGroups": [
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretta la scheda delle opzioni che non si apre per macOS e Linux.",
-          "È stato risolto il problema del caricamento automatico del registro corrente nella scheda Guida e Registri.",
-          "Corretto il percorso errato del file di log su Linux."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.4",
-    "Date": "2023-05-27",
-    "ChangeGroups": [
-      {
-        "Name": "Cambiamenti",
-        "Changes": [
-          "I pannelli di Steam nel menu principale sono ora visualizzati per impostazione predefinita; è comunque possibile nasconderli nelle impostazioni della mod.",
-          "La richiesta di una recensione ora richiede una descrizione valida e invia anche i vostri log con la richiesta. Una clausola di esclusione della responsabilità è visualizzata accanto al pulsante \"Invia\".",
-          "Ridotto il livello di segnalazione di una mod che non viene aggiornata da un po' di tempo a 'Info', in modo che non ti informi."
-        ]
-      },
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretto il riepilogo delle attività che non viene visualizzato nel pannello di controllo.",
-          "Risolto il problema dello stato di scaduto che non funziona correttamente."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.5",
-    "Date": "2023-05-28",
-    "ChangeGroups": [
-      {
-        "Name": "Correzioni e Cambiamenti",
-        "Changes": [
-          "Aggiunto un messaggio per avvisare l'utente quando \"Correggi Tutti i Problemi\" e \"Esegui Pulizia\" terminano.",
-          "Corretto un raro bug per cui il caricamento di un profilo LOT 1 continuava a caricarsi all'infinito.",
-          "Corrretto il problema con il log delle modifiche che non si apriva con alcune lingue.",
-          "Potenzialmente risolto l'iscrizione a una grande quantità di elementi che non funzionava/non funzionava."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.6",
-    "Date": "2023-05-29",
-    "ChangeGroups": [
-      {
-        "Name": "Rivisto il Processo di Sottoscrizione",
-        "Changes": [
-          "È ora possibile sottoscrivere i pacchetti mentre il gioco è aperto.",
-          "La sottoscrizione di più elementi consecutivi li metterà in un elenco in attesa, invece di aprire il gioco ogni volta.",
-          "Aggiunto un riquadro in basso a sinistra dell'app per segnalare eventuali attività di iscrizione/disiscrizione in sospeso.",
-          "Aggiunta un'opzione avanzata per forzare il download o l'eliminazione dei pacchetti non appena ci si iscrive/disiscrive ad essi in Skyve.",
-          "Gli oggetti appena sottoscritti non vengono più ricaricati mentre il gioco è aperto.\nIn questo modo si evitano i blocchi del gioco e il malfunzionamento delle mod."
-        ]
-      },
-      {
-        "Name": "Nuovo",
-        "Changes": [
-          "Aggiunta la voce \"Visualizza i contenuti di questo Profilo\" nel menu del tasto destro del mouse dei profili.",
-          "Aggiunta l'opzione \"Forza download\" nel menu del tasto destro del mouse dei pacchetti.",
-          "Aggiunto un maggiore contesto ad alcuni popup",
-          "Aggiunta la funzione \"Scarica tutti gli elementi visualizzati\" nelle azioni delle pagine degli elenchi."
-        ]
-      },
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretto l'aggiornamento istantaneo dell'elenco dei profili.",
-          "Corretto il problema dei pacchetti profilo che non mostrano il nome del Workshop.",
-          "Corretto il mancato caricamento delle informazioni di Steam dei pacchetti la prima volta che si visualizza un profilo o una collezione.",
-          "Il nome delle mod locali è stato riportato al nome della cartella invece che a quello del Workshop per evitare problemi.",
-          "Migliorate le prestazioni per chi ha molte mod."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.1",
-    "Date": "2023-06-05",
-    "ChangeGroups": [
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Corretta l'interruzione forzata all'avvio."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.2",
-    "Date": "2023-06-12",
-    "ChangeGroups": [
-      {
-        "Name": "Correzioni",
-        "Changes": [
-          "Aggiornato con l'ultima patch del gioco."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0",
-    "Date": "2023-06-13",
-    "Tagline": "Profili online, in arrivo!",
-    "ChangeGroups": [
-      {
-        "Name": "Profili Online",
-        "Changes": [
-          "È ora possibile caricare un profilo online, fino a 5 profili per utente.",
-          "I profili caricati possono essere privati, condivisi con un ID o pubblici per tutti.",
-          "I profili online possono essere scaricati o aggiornati se già presenti in locale.",
-          "È possibile scoprire i profili online utilizzando un nuovo pulsante nella scheda Profili.",
-          "Aggiunta una terza opzione nella pagina \"Aggiungi profilo\" per importare un profilo online utilizzando il suo ID."
-        ]
-      },
-      {
-        "Name": "Modifiche al Profilo",
-        "Changes": [
-          "La scheda 'Profili' nella barra laterale aprirà ora l'elenco dei profili anziché le impostazioni del profilo corrente.",
-          "L'elenco dei profili utilizza ora una visualizzazione a griglia ed è possibile passare dalla visualizzazione a griglia a quella a elenco.",
-          "Modificato il design dei pulsanti di azione in alto su entrambe le pagine del profilo",
-          "Se nel profilo sono presenti modifiche non salvate, il logo di Skyve si illuminerà di viola.",
-          "I profili possono ora avere delle miniature.",
-          "Gli usi del profilo hanno ora icone separate."
-        ]
-      },
-      {
-        "Name": "Novità e aggiornamenti",
-        "Changes": [
-          "Aggiunta una nuova pagina del profilo utente, accessibile cliccando sull'autore di una mod o di un profilo. Questa pagina include tutti i profili e i pacchetti dell'utente.",
-          "Le cancellazioni effettuate da Skyve ora inviano i file al cestino di Windows.",
-          "Aggiunti 6 nuovi pulsanti di ripristino nella pagina Utilità.",
-          "Aggiunti 2 nuovi pulsanti nella pagina Aiuto e Registri.",
-          "Gli stati di compatibilità e dei pacchetti sono ora mostrati a destra nell'elenco.",
-          "I pacchetti rotti, incompatibili e vietati hanno ora un nuovo sfondo nell'elenco.",
-          "Il nome e l'etichetta dei mod locali sono stati aggiornati.",
-          "Il codice sorgente mancante ora genera un avviso invece di una notifica di annullamento dell'iscrizione.",
-          "Le mod richieste hanno ora un'interfaccia utente diversa per segnalare che non è possibile escluderle.",
-          "Aggiunta un'impostazione in gioco per abilitare il caricamento a caldo di mod e asset.",
-          "Miglioramento delle prestazioni durante l'inclusione/esclusione dei pacchetti.",
-          "Aggiunta della lingua Ungherese"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0.1",
-    "Date": "2023-06-14",
-    "ChangeGroups": [
-      {
-        "Name": "Cambiamenti",
-        "Changes": [
-          "Aggiunta l'opzione per ignorare i controlli della connettività Internet.",
-          "Aggiunto un indicatore che indica che un profilo è in fase di caricamento.",
-          "Aggiunto un pulsante per visualizzare facilmente i contenuti di un profilo online.",
-          "Corretto un errore durante il recupero delle informazioni sull'utente di Steam.",
-          "Corretto il problema delle impostazioni di avvio dell'Editor Risorse che non vengono ricordate correttamente.",
-          "Corretto l'aggiornamento di un profilo online che non funziona correttamente."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.1",
-    "Date": "2023-06-16",
-    "ChangeGroups": [
-      {
-        "Name": "Cambiamenti",
-        "Changes": [
-          "Aggiunta un'animazione di caricamento quando si visualizza il contenuto di un profilo.",
-          "Corretto il download o l'aggiornamento di un profilo che non salvava correttamente alcuni dati come la miniatura.",
-          "Corretto il problema dei pacchetti privati che vengono contrassegnati come .",
-          "Corrette alcune parti dell'interfaccia utente che non venivano tradotte fin dall'inizio."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.2",
-    "Date": "2023-06-21",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixes an error caused by including/excluding mods that have contain assets.",
-          "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-          "Fixed some packages not showing their successor properly."
-        ]
-      }
-    ]
-  }
+    }
 ]
