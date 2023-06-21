@@ -21,6 +21,7 @@ public interface ICompatibilityManager
 	void CacheReport();
 	void DoFirstCache(List<Package> packages);
 	void DownloadData();
+	CrPackage GetAutomatedReport(IPackage package);
 	CompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false);
 	bool IsBlacklisted(IPackage package);
 	bool IsSnoozed(ReportItem reportItem);

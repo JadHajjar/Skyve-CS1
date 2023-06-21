@@ -31,8 +31,11 @@
     <Compile Remove="ColossalOrder\GameSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Utilities\Managers\**" />
+    <EmbeddedResource Remove="Utilities\Managers\**" />
     <None Remove="Properties\*.json" />
     <None Remove="Properties\*\*.json" />
+    <None Remove="Utilities\Managers\**" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\*.json" />
@@ -164,7 +167,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Properties\SlickUI\" />
-	  <Folder Include="Utilities\Managers\" />
 	</ItemGroup>
 	
 	<PropertyGroup>

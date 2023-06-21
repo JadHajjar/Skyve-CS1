@@ -47,7 +47,7 @@ internal static class ApiUtil
 			url += "?" + string.Join("&", query);
 		}
 
-		if (LocationManager.Platform is not Platform.Windows)
+		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
 			var request = WebRequest.Create(url);
 
@@ -115,7 +115,7 @@ internal static class ApiUtil
 			url += "?" + string.Join("&", query);
 		}
 
-		if (LocationManager.Platform is not Platform.Windows)
+		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
 			var request = WebRequest.Create(url);
 

@@ -1,4 +1,5 @@
 ﻿using SkyveApp.Domain;
+using SkyveApp.Domain.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,5 @@ namespace SkyveApp.Services.Interfaces;
 public interface IUpdateManager
 {
 	bool IsFirstTime();
-	bool IsPackageKnown(Package package);
+	bool IsPackageKnown(IPackage package);
 }

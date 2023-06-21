@@ -191,7 +191,7 @@ public class CompatibilityManager : ICompatibilityManager
         return _cache[package] = GenerateCompatibilityInfo(package);
     }
 
-    internal CrPackage GetAutomatedReport(IPackage package)
+	public CrPackage GetAutomatedReport(IPackage package)
     {
         var info = new CrPackage
         {

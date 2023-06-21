@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Services;
-internal class UpdateManager
+internal class UpdateManager : IUpdateManager
 {
     private readonly Dictionary<string, DateTime> _previousPackages = new(new PathEqualityComparer());
 
@@ -58,7 +58,7 @@ internal class UpdateManager
         ISave.Save(_contentManager.Packages.Select(x => new KnownPackage(x)), "KnownPackages.json");
     }
 
-    internal bool IsFirstTime()
+    public bool IsFirstTime()
     {
         return _previousPackages.Count == 0;
     }

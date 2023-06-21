@@ -23,10 +23,8 @@ public interface IContentManager
 	void AnalyzePackages(List<Package> content);
 	Package? GetPackage(ulong steamId);
 	void HandleNewPackage(Package package);
-	bool IsBlacklisted(IPackage mod);
 	void OnContentLoaded();
 	void OnInclusionUpdated();
 	void OnInformationUpdated();
-	void OnWorkshopInfoUpdated();
 	void RemovePackage(Package package);
 }

@@ -25,14 +25,28 @@ internal static class Program
 
 	static Program()
 	{
-		ISave.AppName = "Skyve-CS1";
 		IsRunning = true;
 		CurrentDirectory = Application.StartupPath;
 		ExecutablePath = Application.ExecutablePath;
 		Services = new();
 
-		Services.AddSingleton<ILogger, Logger>();
+		ISave.AppName = "Skyve-CS1";
+		ISave.CustomSaveDirectory = CurrentDirectory;
+
+		Services.AddSingleton<ICitiesManager, CitiesManager>();
+		Services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
+		Services.AddSingleton<IContentManager, ContentManager>();
+		Services.AddSingleton<IImageManager, ImageManager>();
 		Services.AddSingleton<ILocationManager, LocationManager>();
+		Services.AddSingleton<ILogger, Logger>();
+		Services.AddSingleton<IModLogicManager, ModLogicManager>();
+		Services.AddSingleton<IProfileManager, ProfileManager>();
+		Services.AddSingleton<ISettings, SettingsService>();
+		Services.AddSingleton<ISubscriptionsManager, SubscriptionsManager>();
+		Services.AddSingleton<IUpdateManager, UpdateManager>();
+
+		Services.AddTransient<ICompatibilityUtil, CompatibilityUtil>();
+		Services.AddTransient<IContentUtil, ContentUtil>();
 
 		Services.AddSingleton<CentralManager>();
 	}
@@ -52,6 +66,19 @@ internal static class Program
 
 			try
 			{
+				var folder = GetFolderPath(SpecialFolder.LocalApplicationData);
+
+				Directory.CreateDirectory(Path.Combine(folder, ISave.AppName));
+
+				if (Directory.Exists(Path.Combine(folder, ISave.AppName)))
+				{
+					ISave.CustomSaveDirectory = folder;
+				}
+			}
+			catch { }
+
+			try
+			{
 				var toolPath = ExecutablePath;
 				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
 
@@ -62,27 +89,27 @@ internal static class Program
 					return;
 				}
 
-				ExtensionClass.DeleteFile(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"));
+				CrossIO.DeleteFile(CrossIO.Combine(Directory.GetParent(toolPath).FullName, "Wake"));
 			}
 			catch { }
 
 			var localAppData = GetFolderPath(SpecialFolder.LocalApplicationData);
-			if (Directory.Exists(Path.Combine(localAppData, "Load Order Tool")))
+			if (Directory.Exists(CrossIO.Combine(localAppData, "Load Order Tool")))
 			{
-				ExtensionClass.MoveFolder(Path.Combine(localAppData, "Load Order Tool"), Path.Combine(localAppData, ISave.AppName), false);
+				CrossIO.MoveFolder(CrossIO.Combine(localAppData, "Load Order Tool"), CrossIO.Combine(localAppData, ISave.AppName), false);
 
 				try
 				{
-					ExtensionClass.DeleteFolder(Path.Combine(localAppData, "Load Order Tool"));
+					CrossIO.DeleteFolder(CrossIO.Combine(localAppData, "Load Order Tool"));
 
-					File.Delete(Path.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log"));
+					CrossIO.DeleteFile(CrossIO.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log"));
 				}
 				catch { }
 			}
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
-			if (!CentralManager.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
+			if (!Services.GetService<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
 			{
 				MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OK, PromptIcons.Hand);
 				return;
@@ -90,8 +117,8 @@ internal static class Program
 
 			if (CommandUtil.NoWindow)
 			{
-				Log.Info("[Console] Running without UI window");
-				CentralManager.Start();
+				Services.GetService<ILogger>().Info("[Console] Running without UI window");
+				Services.GetService<CentralManager>().Start();
 				return;
 			}
 
@@ -104,6 +131,10 @@ internal static class Program
 			{
 				SetProcessDPIAware();
 			}
+
+#if DEBUG
+			Services.CheckForLoops();
+#endif
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -118,7 +149,7 @@ internal static class Program
 
 	private static void BackgroundAction_BackgroundTaskError(BackgroundAction b, Exception e)
 	{
-		Log.Exception(e, $"The background action ({b}) failed", false);
+		Services.GetService<ILogger>().Exception(e, $"The background action ({b}) failed");
 	}
 
 	[System.Runtime.InteropServices.DllImport("user32.dll")]

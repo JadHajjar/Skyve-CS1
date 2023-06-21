@@ -6,6 +6,7 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -14,19 +15,31 @@ using System.Linq;
 using System.Net.Http.Headers;
 
 namespace SkyveApp.Utilities;
-internal class ContentUtil
+internal class ContentUtil : IContentUtil
 {
 	private const string CACHE_FILENAME = "ModDllCache.json";
 	public const string EXCLUDED_FILE_NAME = ".excluded";
 
-	private static readonly object _contentUpdateLock = new();
+	private readonly object _contentUpdateLock = new();
 
-	private static readonly Dictionary<string, ModDllCache> _dllCache = new(StringComparer.OrdinalIgnoreCase);
+	private readonly Dictionary<string, ModDllCache> _dllCache = new(StringComparer.OrdinalIgnoreCase);
 
-	internal static bool BulkUpdating { get; set; }
+	public bool BulkUpdating { get; set; }
 
-	static ContentUtil()
+	private readonly IContentManager _contentManager;
+	private readonly ILocationManager _locationManager;
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IProfileManager _profileManager;
+	private readonly ILogger _logger;
+
+	public ContentUtil(IContentManager contentManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, IProfileManager profileManager, ILogger logger)
 	{
+		_contentManager = contentManager;
+		_locationManager = locationManager;
+		_compatibilityManager = compatibilityManager;
+		_profileManager = profileManager;
+		_logger = logger;
+
 		ISave.Load(out List<ModDllCache> cache, CACHE_FILENAME);
 
 		if (cache != null)
@@ -40,19 +53,19 @@ internal class ContentUtil
 			}
 		}
 
-		CentralManager.ContentLoaded += SaveDllCache;
+		_contentManager.ContentLoaded += SaveDllCache;
 	}
 
-	public static IEnumerable<string> GetSubscribedItemPaths()
+	public IEnumerable<string> GetSubscribedItemPaths()
 	{
-		if (!Directory.Exists(LocationManager.WorkshopContentPath))
+		if (!Directory.Exists(_locationManager.WorkshopContentPath))
 		{
-			Log.Warning($"Folder not found: '{LocationManager.WorkshopContentPath}'");
+			_logger.Warning($"Folder not found: '{_locationManager.WorkshopContentPath}'");
 			yield break;
 		}
 
-		Log.Info($"Looking for packages in: '{LocationManager.WorkshopContentPath}'");
-		foreach (var path in Directory.EnumerateDirectories(LocationManager.WorkshopContentPath))
+		_logger.Info($"Looking for packages in: '{_locationManager.WorkshopContentPath}'");
+		foreach (var path in Directory.EnumerateDirectories(_locationManager.WorkshopContentPath))
 		{
 			if (!ulong.TryParse(Path.GetFileName(path), out _))
 			{
@@ -70,16 +83,16 @@ internal class ContentUtil
 		}
 	}
 
-	public static IEnumerable<IPackage> GetReferencingPackage(ulong steamId, bool includedOnly)
+	public IEnumerable<IPackage> GetReferencingPackage(ulong steamId, bool includedOnly)
 	{
-		foreach (var item in CentralManager.Packages)
+		foreach (var item in _contentManager.Packages)
 		{
 			if (includedOnly && !item.IsIncluded)
 			{
 				continue;
 			}
 
-			var crData = CompatibilityManager.CompatibilityData.Packages.TryGet(item.SteamId);
+			var crData = _compatibilityManager.CompatibilityData.Packages.TryGet(item.SteamId);
 
 			if (crData == null)
 			{
@@ -98,12 +111,12 @@ internal class ContentUtil
 		}
 	}
 
-	public static string GetSubscribedItemPath(ulong id)
+	public string GetSubscribedItemPath(ulong id)
 	{
-		return LocationManager.Combine(LocationManager.WorkshopContentPath, id.ToString());
+		return CrossIO.Combine(_locationManager.WorkshopContentPath, id.ToString());
 	}
 
-	public static DateTime GetLocalUpdatedTime(string path)
+	public DateTime GetLocalUpdatedTime(string path)
 	{
 		var dateTime = DateTime.MinValue;
 
@@ -125,12 +138,12 @@ internal class ContentUtil
 				}
 			}
 		}
-		catch (Exception ex) { Log.Exception(ex, $"Failed to get the local update time for '{path}'"); }
+		catch (Exception ex) { _logger.Exception(ex, $"Failed to get the local update time for '{path}'"); }
 
 		return dateTime;
 	}
 
-	public static DateTime GetLocalSubscribeTime(string path)
+	public DateTime GetLocalSubscribeTime(string path)
 	{
 		var dateTime = DateTime.MaxValue;
 
@@ -153,7 +166,7 @@ internal class ContentUtil
 		return dateTime;
 	}
 
-	public static long GetTotalSize(string path)
+	public long GetTotalSize(string path)
 	{
 		try
 		{
@@ -167,21 +180,21 @@ internal class ContentUtil
 		return 0;
 	}
 
-	internal static List<Package> LoadContents()
+	public List<Package> LoadContents()
 	{
 		var packages = new List<Package>();
-		var gameModsPath = LocationManager.Combine(LocationManager.GameContentPath, "Mods");
-		var addonsModsPath = LocationManager.ModsPath;
+		var gameModsPath = CrossIO.Combine(_locationManager.GameContentPath, "Mods");
+		var addonsModsPath = _locationManager.ModsPath;
 		var addonsAssetsPath = new[]
 		{
-			LocationManager.AssetsPath,
-			LocationManager.StylesPath,
-			LocationManager.MapThemesPath
+			_locationManager.AssetsPath,
+			_locationManager.StylesPath,
+			_locationManager.MapThemesPath
 		};
 
 		foreach (var folder in addonsAssetsPath)
 		{
-			Log.Info($"Looking for packages in: '{folder}'");
+			_logger.Info($"Looking for packages in: '{folder}'");
 
 			if (Directory.Exists(folder))
 			{
@@ -196,7 +209,7 @@ internal class ContentUtil
 
 		if (Directory.Exists(gameModsPath))
 		{
-			Log.Info($"Looking for packages in: '{gameModsPath}'");
+			_logger.Info($"Looking for packages in: '{gameModsPath}'");
 			foreach (var folder in Directory.GetDirectories(gameModsPath))
 			{
 				getPackage(folder, true, false, false);
@@ -204,12 +217,12 @@ internal class ContentUtil
 		}
 		else
 		{
-			Log.Warning($"Folder not found: '{gameModsPath}'");
+			_logger.Warning($"Folder not found: '{gameModsPath}'");
 		}
 
 		if (Directory.Exists(addonsModsPath))
 		{
-			Log.Info($"Looking for packages in: '{addonsModsPath}'");
+			_logger.Info($"Looking for packages in: '{addonsModsPath}'");
 			foreach (var folder in Directory.GetDirectories(addonsModsPath))
 			{
 				getPackage(folder, false, false, false);
@@ -217,7 +230,7 @@ internal class ContentUtil
 		}
 		else
 		{
-			Log.Warning($"Folder not found: '{addonsModsPath}'");
+			_logger.Warning($"Folder not found: '{addonsModsPath}'");
 		}
 
 		var subscribedItems = GetSubscribedItemPaths().ToList();
@@ -233,7 +246,7 @@ internal class ContentUtil
 		{
 			if (!Directory.Exists(folder))
 			{
-				Log.Warning($"Package folder not found: '{folder}'");
+				_logger.Warning($"Package folder not found: '{folder}'");
 
 				return;
 			}
@@ -255,21 +268,21 @@ internal class ContentUtil
 		}
 	}
 
-	internal static void ContentUpdated(string path, bool builtIn, bool workshop, bool self)
+	public void ContentUpdated(string path, bool builtIn, bool workshop, bool self)
 	{
 		lock (_contentUpdateLock)
 		{
 			if ((!workshop &&
-				!path.PathContains(LocationManager.AssetsPath) &&
-				!path.PathContains(LocationManager.StylesPath) &&
-				!path.PathContains(LocationManager.MapThemesPath) &&
-				!path.PathContains(LocationManager.ModsPath)) ||
-				path.PathEquals(LocationManager.ModsPath))
+				!path.PathContains(_locationManager.AssetsPath) &&
+				!path.PathContains(_locationManager.StylesPath) &&
+				!path.PathContains(_locationManager.MapThemesPath) &&
+				!path.PathContains(_locationManager.ModsPath)) ||
+				path.PathEquals(_locationManager.ModsPath))
 			{
 				return;
 			}
 
-			var existingPackage = CentralManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(path));
+			var existingPackage = _contentManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(path));
 
 			if (existingPackage != null)
 			{
@@ -282,7 +295,7 @@ internal class ContentUtil
 		}
 	}
 
-	private static void AddNewPackage(string path, bool builtIn, bool workshop, bool self)
+	private void AddNewPackage(string path, bool builtIn, bool workshop, bool self)
 	{
 		if (workshop && !ulong.TryParse(Path.GetFileName(path), out _))
 		{ return; }
@@ -294,14 +307,14 @@ internal class ContentUtil
 		package.FileSize = GetTotalSize(package.Folder);
 		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
-		CentralManager.AddPackage(package);
+		_contentManager.AddPackage(package);
 	}
 
-	internal static void RefreshPackage(Package package, bool self)
+	public void RefreshPackage(Package package, bool self)
 	{
 		if (IsDirectoryEmpty(package.Folder))
 		{
-			CentralManager.RemovePackage(package);
+			_contentManager.RemovePackage(package);
 			return;
 		}
 
@@ -312,13 +325,13 @@ internal class ContentUtil
 
 		if (!package.Workshop && package.Mod is null)
 		{
-			CentralManager.OnContentLoaded();
+			_contentManager.OnContentLoaded();
 		}
 
-		CentralManager.OnInformationUpdated();
+		_contentManager.OnInformationUpdated();
 	}
 
-	private static bool IsDirectoryEmpty(string path)
+	private bool IsDirectoryEmpty(string path)
 	{
 		if (!Directory.Exists(path))
 			return true;
@@ -333,15 +346,15 @@ internal class ContentUtil
 		return false;
 	}
 
-	internal static void StartListeners()
+	public void StartListeners()
 	{
 		PackageWatcher.Dispose();
 
 		var addonsAssetsPath = new[]
 		{
-			LocationManager.AssetsPath,
-			LocationManager.StylesPath,
-			LocationManager.MapThemesPath
+			_locationManager.AssetsPath,
+			_locationManager.StylesPath,
+			_locationManager.MapThemesPath
 		};
 
 		foreach (var folder in addonsAssetsPath)
@@ -349,58 +362,58 @@ internal class ContentUtil
 			PackageWatcher.Create(folder, true, false);
 		}
 
-		PackageWatcher.Create(LocationManager.ModsPath, false, false);
+		PackageWatcher.Create(_locationManager.ModsPath, false, false);
 
-		PackageWatcher.Create(LocationManager.WorkshopContentPath, false, true);
+		PackageWatcher.Create(_locationManager.WorkshopContentPath, false, true);
 	}
 
-	internal static void CreateShortcut()
+	public void CreateShortcut()
 	{
 		try
 		{
-			ExtensionClass.CreateShortcut(LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Skyve CS-I.lnk"), Program.ExecutablePath);
+			ExtensionClass.CreateShortcut(CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Skyve CS-I.lnk"), Program.ExecutablePath);
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, "Failed to create shortcut");
+			_logger.Exception(ex, "Failed to create shortcut");
 		}
 	}
 
-	internal static void DeleteAll(IEnumerable<ulong> ids)
+	public void DeleteAll(IEnumerable<ulong> ids)
 	{
 		foreach (var id in ids)
 		{
-			DeleteAll(LocationManager.Combine(LocationManager.WorkshopContentPath, id.ToString()));
+			DeleteAll(CrossIO.Combine(_locationManager.WorkshopContentPath, id.ToString()));
 		}
 	}
 
-	internal static void DeleteAll(string folder)
+	public void DeleteAll(string folder)
 	{
-		var package = CentralManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(folder));
+		var package = _contentManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(folder));
 
 		if (package != null)
 		{
-			CentralManager.RemovePackage(package);
+			_contentManager.RemovePackage(package);
 		}
 
 		PackageWatcher.Pause();
 		try
-		{ ExtensionClass.DeleteFolder(folder); }
-		catch (Exception ex) { Log.Exception(ex, $"Failed to delete the folder '{folder}'"); }
+		{ CrossIO.DeleteFolder(folder); }
+		catch (Exception ex) { _logger.Exception(ex, $"Failed to delete the folder '{folder}'"); }
 		PackageWatcher.Resume();
 	}
 
-	internal static void MoveToLocalFolder<T>(T item) where T : IPackage
+	public void MoveToLocalFolder<T>(T item) where T : IPackage
 	{
 		if (item is Asset asset)
 		{
-			ExtensionClass.CopyFile(asset.FileName, LocationManager.Combine(LocationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
+			CrossIO.CopyFile(asset.FileName, CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
 			return;
 		}
 
 		if (item.Package?.Assets?.Any() ?? false)
 		{
-			var target = new DirectoryInfo(LocationManager.Combine(LocationManager.AssetsPath, Path.GetFileName(item.Folder)));
+			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(item.Folder)));
 
 			new DirectoryInfo(item.Folder).CopyAll(target, x => Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
 
@@ -409,7 +422,7 @@ internal class ContentUtil
 
 		if (item.Package?.Mod is not null)
 		{
-			var target = new DirectoryInfo(LocationManager.Combine(LocationManager.ModsPath, Path.GetFileName(item.Folder)));
+			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.ModsPath, Path.GetFileName(item.Folder)));
 
 			new DirectoryInfo(item.Folder).CopyAll(target, x => !Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
 
@@ -417,12 +430,12 @@ internal class ContentUtil
 		}
 	}
 
-	internal static GenericPackageState GetGenericPackageState(IPackage item)
+	public GenericPackageState GetGenericPackageState(IPackage item)
 	{
 		return GetGenericPackageState(item, out _);
 	}
 
-	internal static GenericPackageState GetGenericPackageState(IPackage item, out Package? package)
+	public GenericPackageState GetGenericPackageState(IPackage item, out Package? package)
 	{
 		if (item.SteamId == 0)
 		{
@@ -430,7 +443,7 @@ internal class ContentUtil
 			return GenericPackageState.Local;
 		}
 
-		package = CentralManager.GetPackage(item.SteamId);
+		package = _contentManager.GetPackage(item.SteamId);
 
 		if (package == null)
 		{
@@ -450,7 +463,7 @@ internal class ContentUtil
 		return GenericPackageState.Disabled;
 	}
 
-	internal static bool? GetDllModCache(string path, out Version? version)
+	public bool? GetDllModCache(string path, out Version? version)
 	{
 		if (_dllCache.TryGetValue(path, out var dll))
 		{
@@ -468,7 +481,7 @@ internal class ContentUtil
 		return null;
 	}
 
-	internal static void SetDllModCache(string path, bool isMod, Version? version)
+	public void SetDllModCache(string path, bool isMod, Version? version)
 	{
 		try
 		{
@@ -483,25 +496,25 @@ internal class ContentUtil
 				};
 			}
 		}
-		catch (Exception ex) { Log.Exception(ex, "Failed to save DLL cache"); }
+		catch (Exception ex) { _logger.Exception(ex, "Failed to save DLL cache"); }
 	}
 
-	internal static void SaveDllCache()
+	public void SaveDllCache()
 	{
 		ISave.Save(_dllCache.Values, CACHE_FILENAME);
 	}
 
-	internal static void ClearDllCache()
+	public void ClearDllCache()
 	{
 		_dllCache.Clear();
 
 		try
 		{
-			ExtensionClass.DeleteFile(ISave.GetPath(CACHE_FILENAME)); }
-		catch (Exception ex) { Log.Exception(ex, "Failed to clear DLL cache"); }
+			CrossIO.DeleteFile(ISave.GetPath(CACHE_FILENAME)); }
+		catch (Exception ex) { _logger.Exception(ex, "Failed to clear DLL cache"); }
 	}
 
-	internal static void SetBulkIncluded(IEnumerable<IPackage> packages, bool value)
+	public void SetBulkIncluded(IEnumerable<IPackage> packages, bool value)
 	{
 		var packageList = packages.ToList();
 
@@ -529,12 +542,12 @@ internal class ContentUtil
 
 		BulkUpdating = false;
 
-		CentralManager.OnInformationUpdated();
+		_contentManager.OnInformationUpdated();
 		ModsUtil.SavePendingValues();
 		AssetsUtil.SaveChanges();
-		ProfileManager.TriggerAutoSave();
+		_profileManager.TriggerAutoSave();
 
-		static IEnumerable<IPackage> getPackageContents(Package package)
+		IEnumerable<IPackage> getPackageContents(Package package)
 		{
 			if (package.Mod is not null)
 			{
@@ -551,7 +564,7 @@ internal class ContentUtil
 		}
 	}
 
-	internal static void SetBulkEnabled(IEnumerable<Mod> mods, bool value)
+	public void SetBulkEnabled(IEnumerable<Mod> mods, bool value)
 	{
 		BulkUpdating = true;
 

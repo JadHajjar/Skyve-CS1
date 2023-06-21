@@ -15,16 +15,18 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Utilities;
-internal static class CompatibilityUtil
+internal class CompatibilityUtil : ICompatibilityUtil
 {
-	public static CompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
-	{
-		var manager = Program.Services.GetService<ICompatibilityManager>();
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IContentManager _contentManager;
 
-		return manager.GetCompatibilityInfo(package, noCache);
+	public CompatibilityUtil(ICompatibilityManager compatibilityManager, IContentManager contentManager)
+	{
+		_compatibilityManager = compatibilityManager;
+		_contentManager = contentManager;
 	}
 
-	internal static void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
+	public void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
 	{
 		var type = status.Status.Type;
 
@@ -87,7 +89,7 @@ internal static class CompatibilityUtil
 		info.Add(reportType, status.Status, message, packages.ToArray());
 	}
 
-	internal static void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
+	public void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
 	{
 		var type = interaction.Interaction.Type;
 
@@ -168,7 +170,7 @@ internal static class CompatibilityUtil
 		info.Add(reportType, interaction.Interaction, message, packages.ToArray());
 	}
 
-	private static bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)
+	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)
 	{
 		foreach (var item in packages)
 		{
@@ -183,9 +185,9 @@ internal static class CompatibilityUtil
 		return false;
 	}
 
-	internal static ulong GetFinalSuccessor(ulong steamId)
+	public ulong GetFinalSuccessor(ulong steamId)
 	{
-		if (!CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package))
+		if (!_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package))
 		{
 			return steamId;
 		}
@@ -213,13 +215,13 @@ internal static class CompatibilityUtil
 		return steamId;
 	}
 
-	private static bool IsPackageEnabled(ulong steamId, bool withAlternatives, bool withSuccessors)
+	private bool IsPackageEnabled(ulong steamId, bool withAlternatives, bool withSuccessors)
 	{
-		var indexedPackage = CompatibilityManager.CompatibilityData.Packages.TryGet(steamId);
+		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
 		if (indexedPackage is null)
 		{
-			return isEnabled(CentralManager.GetPackage(steamId));
+			return isEnabled(_contentManager.GetPackage(steamId));
 		}
 
 		if (withAlternatives)
@@ -228,7 +230,7 @@ internal static class CompatibilityUtil
 			{
 				if (item.Key != steamId)
 				{
-					foreach (var package in FindPackage(item.Value, withSuccessors))
+					foreach (var package in FindPackage(_contentManager, item.Value, withSuccessors))
 					{
 						if (isEnabled(package))
 						{
@@ -239,7 +241,7 @@ internal static class CompatibilityUtil
 			}
 		}
 
-		foreach (var package in FindPackage(indexedPackage, withSuccessors))
+		foreach (var package in FindPackage(_contentManager, indexedPackage, withSuccessors))
 		{
 			if (isEnabled(package))
 			{
@@ -251,7 +253,7 @@ internal static class CompatibilityUtil
 		{
 			if (item.Key != steamId)
 			{
-				foreach (var package in FindPackage(item.Value, withSuccessors))
+				foreach (var package in FindPackage(_contentManager, item.Value, withSuccessors))
 				{
 					if (isEnabled(package))
 					{
@@ -263,7 +265,7 @@ internal static class CompatibilityUtil
 
 		return false;
 
-		static bool isEnabled(Domain.Package? package)
+		bool isEnabled(Domain.Package? package)
 		{
 			if (package is null)
 			{
@@ -279,16 +281,16 @@ internal static class CompatibilityUtil
 		}
 	}
 
-	private static bool ShouldNotBeUsed(ulong steamId)
+	private bool ShouldNotBeUsed(ulong steamId)
 	{
 		var workshopItem = SteamUtil.GetItem(steamId);
 
-		if (workshopItem is not null && (CompatibilityManager.IsBlacklisted(workshopItem) || workshopItem.RemovedFromSteam || workshopItem.Incompatible))
+		if (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.RemovedFromSteam || workshopItem.Incompatible))
 		{
 			return true;
 		}
 
-		if (!CompatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package))
+		if (!_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package))
 		{
 			return false;
 		}
@@ -306,19 +308,19 @@ internal static class CompatibilityUtil
 		return false;
 	}
 
-	internal static IndexedPackage? GetPackageData(IPackage package)
+	public IndexedPackage? GetPackageData(IPackage package)
 	{
-		var steamId = package.Workshop ? package.SteamId : package.Package?.Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(package.Package.Mod.FileName));
+		var steamId = package.Workshop ? package.SteamId : package.Package?.Mod is null ? 0 : _compatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(package.Package.Mod.FileName));
 
 		if (steamId > 0)
 		{
-			var packageData = CompatibilityManager.CompatibilityData.Packages.TryGet(steamId);
+			var packageData = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
 			if (packageData is null)
 			{
-				packageData = new IndexedPackage(CompatibilityManager.GetAutomatedReport(package));
+				packageData = new IndexedPackage(_compatibilityManager.GetAutomatedReport(package));
 
-				packageData.Load(CompatibilityManager.CompatibilityData.Packages);
+				packageData.Load(_compatibilityManager.CompatibilityData.Packages);
 			}
 
 			return packageData;
@@ -334,16 +336,16 @@ internal static class CompatibilityUtil
 		return null;
 	}
 
-	private static IEnumerable<Domain.Package> FindPackage(IndexedPackage package, bool withSuccessors)
+	private IEnumerable<Domain.Package> FindPackage(IContentManager contentManager, IndexedPackage package, bool withSuccessors)
 	{
-		var localPackage = CentralManager.GetPackage(package.Package.SteamId);
+		var localPackage = contentManager.GetPackage(package.Package.SteamId);
 
 		if (localPackage is not null)
 		{
 			yield return localPackage;
 		}
 
-		localPackage = CentralManager.Mods.FirstOrDefault(x => !x.Workshop && Path.GetFileName(x.FileName) == package.Package.FileName)?.Package;
+		localPackage = contentManager.Mods.FirstOrDefault(x => !x.Workshop && Path.GetFileName(x.FileName) == package.Package.FileName)?.Package;
 
 		if (localPackage is not null)
 		{
@@ -358,7 +360,7 @@ internal static class CompatibilityUtil
 		var packages = package.Interactions[InteractionType.SucceededBy]
 					.SelectMany(x => x.Packages.Values)
 					.Where(x => x.Package != package.Package)
-					.Select(x => FindPackage(x, true))
+					.Select(x => FindPackage(contentManager, x, true))
 					.FirstOrDefault(x => x is not null);
 
 		if (packages is not null)
@@ -368,6 +370,16 @@ internal static class CompatibilityUtil
 				yield return item;
 			}
 		}
+	}
+}
+
+internal static class CompatibilityExtensions
+{
+	public static CompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
+	{
+		var manager = Program.Services.GetService<ICompatibilityManager>();
+
+		return manager.GetCompatibilityInfo(package, noCache);
 	}
 
 	public static DynamicIcon GetIcon(this LinkType link)

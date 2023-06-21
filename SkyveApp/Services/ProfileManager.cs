@@ -60,8 +60,9 @@ public class ProfileManager : IProfileManager
     private readonly ILocationManager _locationManager;
     private readonly ISettings _settings;
     private readonly IContentManager _contentManager;
+    private readonly ICompatibilityManager _compatibilityManager;
 
-	public ProfileManager(ILogger logger, ILocationManager locationManager, ISettings settings, IContentManager contentManager)
+	public ProfileManager(ILogger logger, ILocationManager locationManager, ISettings settings, IContentManager contentManager, ICompatibilityManager compatibilityManager)
 	{
 		_logger = logger;
 		_locationManager = locationManager;
@@ -104,6 +105,7 @@ public class ProfileManager : IProfileManager
 			new BackgroundAction(ConvertLegacyProfiles).Run();
 			new BackgroundAction(LoadAllProfiles).Run();
 		}
+		_compatibilityManager = compatibilityManager;
 	}
 
 	private Profile? LoadCurrentProfile()
@@ -438,7 +440,7 @@ public class ProfileManager : IProfileManager
 
                         unprocessedMods.Remove(localMod);
                     }
-                    else if (!_contentManager.IsBlacklisted(mod))
+                    else if (!_compatibilityManager.IsBlacklisted(mod))
                     {
                         missingMods.Add(mod);
                     }
@@ -454,7 +456,7 @@ public class ProfileManager : IProfileManager
 
                         unprocessedAssets.Remove(localAsset);
                     }
-                    else if (!_contentManager.IsBlacklisted(asset))
+                    else if (!_compatibilityManager.IsBlacklisted(asset))
                     {
                         missingAssets.Add(asset);
                     }
