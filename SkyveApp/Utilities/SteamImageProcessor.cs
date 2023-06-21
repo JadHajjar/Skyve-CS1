@@ -1,5 +1,7 @@
 ﻿using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRe
 		{
 			if (!string.IsNullOrWhiteSpace(img.Url))
 			{
-				await ImageManager.Ensure(img.Url, false, img.FileName, img.Square);
+				await Program.Services.GetService<IImageManager>().Ensure(img.Url, false, img.FileName, img.Square);
 			}
 		}
 

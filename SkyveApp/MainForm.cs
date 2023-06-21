@@ -64,10 +64,10 @@ public partial class MainForm : BasePanelForm
 
 		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
 
-		if (File.Exists(LocationManager.Combine(Program.CurrentDirectory, "batch.bat")))
+		if (File.Exists(CrossIO.Combine(Program.CurrentDirectory, "batch.bat")))
 		{
 			try
-			{ ExtensionClass.DeleteFile(LocationManager.Combine(Program.CurrentDirectory, "batch.bat")); }
+			{ ExtensionClass.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "batch.bat")); }
 			catch { }
 		}
 				base_PB_Icon.Loading = true;
@@ -199,12 +199,12 @@ public partial class MainForm : BasePanelForm
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		if (!ExtensionClass.FileExists(LocationManager.Combine(Program.CurrentDirectory, "Wake")))
+		if (!ExtensionClass.FileExists(CrossIO.Combine(Program.CurrentDirectory, "Wake")))
 		{
 			return;
 		}
 
-		ExtensionClass.DeleteFile(LocationManager.Combine(Program.CurrentDirectory, "Wake"));
+		ExtensionClass.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "Wake"));
 
 		if (isGameRunning)
 		{
@@ -245,7 +245,7 @@ public partial class MainForm : BasePanelForm
 	{
 		if (CitiesManager.CitiesAvailable())
 		{
-			if (LocationManager.Platform is Platform.Windows)
+			if (CrossIO.CurrentPlatform is Platform.Windows)
 			{
 				if (CurrentPanel is PC_MainPage mainPage)
 				{

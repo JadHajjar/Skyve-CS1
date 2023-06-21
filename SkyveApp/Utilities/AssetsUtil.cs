@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using SkyveShared;
 
@@ -13,17 +14,25 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Utilities;
-internal class AssetsUtil
+public class AssetsUtil : IAssetUtil
 {
-	private static readonly SkyveConfig _config;
-	private static CustomTagsLibrary _findItTags;
-	private static Dictionary<string, Asset> assetIndex = new();
+	private readonly SkyveConfig _config;
+	private CustomTagsLibrary _findItTags;
+	private Dictionary<string, Asset> assetIndex = new();
 
-	public static HashSet<string> ExcludedHashSet { get; }
-	public static Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
+	public HashSet<string> ExcludedHashSet { get; }
+	public Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
 
-	static AssetsUtil()
+	private readonly IContentManager _contentManager;
+	private readonly IProfileManager _profileManager;
+	private readonly INotifier _notifier;
+
+	public AssetsUtil(IContentManager contentManager, IProfileManager profileManager, INotifier notifier)
 	{
+		_contentManager = contentManager;
+		_profileManager = profileManager;
+		_notifier = notifier;
+
 		AssetInfoCache = new(StringComparer.InvariantCultureIgnoreCase);
 
 		var assets = CSCache.Deserialize()?.Assets;
@@ -49,9 +58,11 @@ internal class AssetsUtil
 				ExcludedHashSet.Add(item.Path);
 			}
 		}
+
+		_notifier.ContentLoaded += BuildAssetIndex;
 	}
 
-	public static IEnumerable<Asset> GetAssets(Package package, bool withSubDirectories = true)
+	public IEnumerable<Asset> GetAssets(Package package, bool withSubDirectories = true)
 	{
 		if (!Directory.Exists(package.Folder))
 		{
@@ -66,12 +77,12 @@ internal class AssetsUtil
 		}
 	}
 
-	internal static bool IsIncluded(Asset asset)
+	public bool IsIncluded(Asset asset)
 	{
 		return !ExcludedHashSet.Contains(asset.FileName.ToLower());
 	}
 
-	internal static void SetIncluded(Asset asset, bool value)
+	public void SetIncluded(Asset asset, bool value)
 	{
 		if (value)
 		{
@@ -82,15 +93,15 @@ internal class AssetsUtil
 			ExcludedHashSet.Add(asset.FileName.ToLower());
 		}
 
-		CentralManager.OnInclusionUpdated();
-		ProfileManager.TriggerAutoSave();
+		_notifier.OnInclusionUpdated();
+		_profileManager.TriggerAutoSave();
 
 		SaveChanges();
 	}
 
-	public static void SaveChanges()
+	public void SaveChanges()
 	{
-		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating)
+		if (_profileManager.ApplyingProfile || _notifier.BulkUpdating)
 		{
 			return;
 		}
@@ -102,26 +113,26 @@ internal class AssetsUtil
 		_config.Serialize();
 	}
 
-	internal static Asset GetAsset(string v)
+	public Asset GetAsset(string v)
 	{
 		return assetIndex.TryGet(v);
 	}
 
-	internal static void BuildAssetIndex()
+	public void BuildAssetIndex()
 	{
-		assetIndex = CentralManager.Assets.ToDictionary(x => x.FileName.FormatPath(), StringComparer.OrdinalIgnoreCase);
+		assetIndex = _contentManager.Assets.ToDictionary(x => x.FileName.FormatPath(), StringComparer.OrdinalIgnoreCase);
 	}
 
-	//internal static Bitmap? GetIcon(Asset asset)
+	//public Bitmap? GetIcon(Asset asset)
 	//{
-	//	//var fileName = LocationManager.Combine(LocationManager.LotAppDataPath, "AssetPictures");
+	//	//var fileName = CrossIO.Combine(LocationManager.LotAppDataPath, "AssetPictures");
 
 	//	//if (asset.SteamId > 0)
 	//	//{
-	//	//	fileName = LocationManager.Combine(fileName, asset.SteamId.ToString());
+	//	//	fileName = CrossIO.Combine(fileName, asset.SteamId.ToString());
 	//	//}
 
-	//	//fileName = LocationManager.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
+	//	//fileName = CrossIO.Combine(fileName, Path.GetFileNameWithoutExtension(asset.FileName).Trim().Replace(' ', '_') + ".png");
 
 	//	//if (File.Exists(fileName))
 	//	//{
@@ -131,26 +142,26 @@ internal class AssetsUtil
 	//	return null;
 	//}
 
-	internal static void SetAvailableDlcs(IEnumerable<uint> dlcs)
+	public void SetAvailableDlcs(IEnumerable<uint> dlcs)
 	{
 		_config.AvailableDLCs = dlcs.ToArray();
 		_config.Serialize();
 	}
 
-	internal static bool IsDlcExcluded(uint dlc)
+	public bool IsDlcExcluded(uint dlc)
 	{
 		return _config.RemovedDLCs.Contains(dlc);
 	}
 
-	internal static void SetDlcsExcluded(uint[] dlc)
+	public void SetDlcsExcluded(uint[] dlc)
 	{
 		_config.RemovedDLCs = dlc;
 
-		ProfileManager.TriggerAutoSave();
+		_profileManager.TriggerAutoSave();
 		SaveChanges();
 	}
 
-	internal static void SetDlcExcluded(uint dlc, bool excluded)
+	public void SetDlcExcluded(uint dlc, bool excluded)
 	{
 		var list = new List<uint>(_config.RemovedDLCs);
 
@@ -165,11 +176,11 @@ internal class AssetsUtil
 
 		_config.RemovedDLCs = list.ToArray();
 
-		ProfileManager.TriggerAutoSave();
+		_profileManager.TriggerAutoSave();
 		SaveChanges();
 	}
 
-	internal static IEnumerable<string> GetAllFindItTags()
+	public IEnumerable<string> GetAllFindItTags()
 	{
 		foreach (var item in _findItTags.assetTags)
 		{
@@ -180,7 +191,7 @@ internal class AssetsUtil
 		}
 	}
 
-	internal static IEnumerable<string> GetFindItTags(IPackage package)
+	public IEnumerable<string> GetFindItTags(IPackage package)
 	{
 		var key = package is Asset asset
 			? (asset.SteamId == 0 ? "" : $"{asset.SteamId}.") + Path.GetFileNameWithoutExtension(asset.FileName).RemoveDoubleSpaces().Replace(' ', '_')
@@ -197,7 +208,7 @@ internal class AssetsUtil
 		return new string[0];
 	}
 
-	internal static void SetFindItTag(IPackage package, string tag)
+	public void SetFindItTag(IPackage package, string tag)
 	{
 		var newTags = new CustomTagsLibrary();
 
@@ -229,7 +240,7 @@ internal class AssetsUtil
 		_findItTags = newTags;
 	}
 
-	internal static void RemoveFindItTag(Asset asset, string tag)
+	public void RemoveFindItTag(Asset asset, string tag)
 	{
 		var newTags = new CustomTagsLibrary();
 

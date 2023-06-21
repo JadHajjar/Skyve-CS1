@@ -3,7 +3,7 @@
 #nullable disable
 
 namespace SkyveApp.Domain.Utilities;
-internal class FolderSettings : ISave
+public class FolderSettings : ISave
 {
 	public override string Name => nameof(FolderSettings) + ".json";
 

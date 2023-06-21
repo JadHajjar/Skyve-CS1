@@ -28,5 +28,6 @@ public interface ILocationManager
 	string StylesPath { get; }
 	string WorkshopContentPath { get; }
 
+	void CreateShortcut();
 	void RunFirstTimeSetup();
 }

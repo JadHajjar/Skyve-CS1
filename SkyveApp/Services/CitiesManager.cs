@@ -26,12 +26,13 @@ public class CitiesManager : ICitiesManager
     private readonly IProfileManager _profileManager;
     private readonly IContentManager _contentManager;
 	private readonly ISettings _settings;
+    private readonly IOUtil _iOUtil;
 
-    public event MonitorTickDelegate? MonitorTick;
+	public event MonitorTickDelegate? MonitorTick;
 
     public delegate void MonitorTickDelegate(bool isAvailable, bool isRunning);
 
-	CitiesManager(ILogger logger, ILocationManager locationManager, IProfileManager profileManager, ISettings settings, IContentManager contentManager)
+	CitiesManager(ILogger logger, ILocationManager locationManager, IProfileManager profileManager, ISettings settings, IContentManager contentManager, IOUtil iOUtil)
 	{
 		_logger = logger;
 		_locationManager = locationManager;
@@ -43,6 +44,7 @@ public class CitiesManager : ICitiesManager
 		citiesMonitorTimer.Start();
 		_settings = settings;
 		_contentManager = contentManager;
+		_iOUtil = iOUtil;
 	}
 
 	private void CitiesMonitorTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -68,7 +70,7 @@ public class CitiesManager : ICitiesManager
             ? _locationManager.CitiesPathWithExe
             : _locationManager.SteamPathWithExe;
 
-        IOUtil.Execute(file, string.Join(" ", args));
+		_iOUtil.Execute(file, string.Join(" ", args));
     }
 
     private void UpdateFiles()
@@ -134,7 +136,7 @@ public class CitiesManager : ICitiesManager
         }
         catch (Exception ex)
         {
-            ex.Log();
+            _logger.Exception(ex, "Failed to update files");
         }
     }
 
@@ -234,7 +236,7 @@ public class CitiesManager : ICitiesManager
 
         var file = _locationManager.SteamPathWithExe;
 
-        IOUtil.Execute(file, command);
+        _iOUtil.Execute(file, command);
     }
 
     public bool IsRunning()
@@ -255,7 +257,7 @@ public class CitiesManager : ICitiesManager
                 KillProcessAndChildren(proc);
             }
         }
-        catch (Exception ex) { ex.Log(); }
+        catch (Exception ex) { _logger.Exception(ex, "Failed to kill C:S"); }
     }
 
     private void KillProcessAndChildren(Process proc)

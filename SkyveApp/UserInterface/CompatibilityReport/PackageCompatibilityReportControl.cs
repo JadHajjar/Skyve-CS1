@@ -4,6 +4,7 @@ using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -18,6 +19,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 {
 	private readonly TableLayoutPanel[] _panels;
 	private int controlCount;
+	private readonly ICompatibilityManager _compatibilityManager;
 
 	public PackageCompatibilityReportControl(IPackage package)
 	{
@@ -45,7 +47,8 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 			Controls.Add(_panels[i], i, 0);
 		}
 
-		CompatibilityManager.ReportProcessed += CentralManager_PackageInformationUpdated;
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_compatibilityManager.ReportProcessed += CentralManager_PackageInformationUpdated;
 	}
 
 	private void CentralManager_PackageInformationUpdated()
@@ -58,7 +61,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 	protected override void Dispose(bool disposing)
 	{
-		CompatibilityManager.ReportProcessed -= CentralManager_PackageInformationUpdated;
+		_compatibilityManager.ReportProcessed -= CentralManager_PackageInformationUpdated;
 		base.Dispose(disposing);
 	}
 

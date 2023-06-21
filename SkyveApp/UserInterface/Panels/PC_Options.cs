@@ -38,14 +38,14 @@ public partial class PC_Options : PanelContent
 		TB_AppDataPath.Text = LocationManager.AppDataPath;
 		TB_SteamPath.Text = LocationManager.SteamPath;
 
-		if (LocationManager.Platform is Platform.Linux)
+		if (CrossIO.CurrentPlatform is Platform.Linux)
 		{
 			TB_GamePath.Placeholder = "Z:\\...\\Steam\\SteamLibrary\\steamapps\\common\\Cities_Skylines";
 			TB_AppDataPath.Placeholder = "Z:\\home\\USERNAME\\.local\\share\\Colossal Order\\Cities_Skylines";
 			TB_SteamPath.Placeholder = "/usr/bin/steam";
 		}
 
-		if (LocationManager.Platform is Platform.MacOSX)
+		if (CrossIO.CurrentPlatform is Platform.MacOSX)
 		{
 			TB_GamePath.Placeholder = TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
 			TB_GamePath.Placeholder = TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
@@ -231,7 +231,7 @@ public partial class PC_Options : PanelContent
 			return;
 		}
 
-		ExtensionClass.DeleteFile(LocationManager.Combine(LocationManager.SkyveAppDataPath, "SetupComplete.txt"));
+		ExtensionClass.DeleteFile(CrossIO.Combine(LocationManager.SkyveAppDataPath, "SetupComplete.txt"));
 
 		CentralManager.SessionSettings.FirstTimeSetupCompleted = false;
 		CentralManager.SessionSettings.Save();

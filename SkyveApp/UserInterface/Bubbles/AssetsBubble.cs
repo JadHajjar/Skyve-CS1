@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -15,8 +16,16 @@ namespace SkyveApp.UserInterface.StatusBubbles;
 
 internal class AssetsBubble : StatusBubbleBase
 {
+	private readonly INotifier _notifier;
+	private readonly IContentManager _contentManager;
+	private readonly IProfileManager _profileManager;
+
 	public AssetsBubble()
-	{ }
+	{
+		_notifier = Program.Services.GetService<INotifier>();
+		_contentManager = Program.Services.GetService<IContentManager>();
+		_profileManager = Program.Services.GetService<IProfileManager>();
+	}
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -30,25 +39,26 @@ internal class AssetsBubble : StatusBubbleBase
 		ImageName = "I_Assets";
 		Text = Locale.AssetsBubble;
 
-		if (!CentralManager.IsContentLoaded)
+		if (!_notifier.IsContentLoaded)
 		{
 			Loading = true;
 
-			CentralManager.ContentLoaded += Invalidate;
+			_notifier.ContentLoaded += Invalidate;
 		}
 
-		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
+		_notifier.PackageInformationUpdated += Invalidate;
+		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void Dispose(bool disposing)
 	{
 		base.Dispose(disposing);
 
-		CentralManager.ContentLoaded -= Invalidate;
-		CentralManager.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-		ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+		_notifier.ContentLoaded -= Invalidate;
+		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
+		_notifier.PackageInformationUpdated -= Invalidate;
+		_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 	}
 
 	private void ProfileManager_ProfileChanged(Profile obj)
@@ -70,7 +80,7 @@ internal class AssetsBubble : StatusBubbleBase
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		if (!CentralManager.IsContentLoaded)
+		if (!_notifier.IsContentLoaded)
 		{
 			DrawText(e, ref targetHeight, Locale.Loading, FormDesign.Design.InfoColor);
 			return;
@@ -81,7 +91,7 @@ internal class AssetsBubble : StatusBubbleBase
 
 		var crDic = new Dictionary<NotificationType, int>();
 
-		foreach (var asset in CentralManager.Assets)
+		foreach (var asset in _contentManager.Assets)
 		{
 			if (!asset.IsIncluded)
 			{

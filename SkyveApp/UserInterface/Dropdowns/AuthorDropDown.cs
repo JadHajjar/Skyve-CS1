@@ -3,6 +3,7 @@
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -16,8 +17,16 @@ namespace SkyveApp.UserInterface.Dropdowns;
 internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 {
 	private readonly Dictionary<SteamUser, int> _counts = new();
+	private readonly IImageManager _imageManager;
+	private readonly ICompatibilityManager _compatibilityManager;
 
-	internal void SetItems<T>(IEnumerable<T> enumerable) where T : IPackage
+    public AuthorDropDown()
+    {
+		_imageManager = Program.Services.GetService<IImageManager>();
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+	}
+
+    internal void SetItems<T>(IEnumerable<T> enumerable) where T : IPackage
 	{
 		foreach (var item in enumerable)
 		{
@@ -50,7 +59,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 		{ return; }
 
 		var text = item.Name;
-		var icon = ImageManager.GetImage(item?.AvatarUrl, true).Result;
+		var icon = _imageManager.GetImage(item?.AvatarUrl, true).Result;
 		var avatarRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
 
 		if (icon != null)
@@ -58,7 +67,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 			e.Graphics.DrawRoundedImage(icon, avatarRect, (int)(4 * UI.FontScale));
 		}
 
-		if (CompatibilityManager.CompatibilityData.Authors.TryGet(item!.SteamId)?.Verified ?? false)
+		if (_compatibilityManager.CompatibilityData.Authors.TryGet(item!.SteamId)?.Verified ?? false)
 		{
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
@@ -101,7 +110,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 		var iconRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
 		foreach (var item in items)
 		{
-			var icon = ImageManager.GetImage(item?.AvatarUrl, true).Result;
+			var icon = _imageManager.GetImage(item?.AvatarUrl, true).Result;
 			if (icon is not null)
 			{
 				e.Graphics.DrawRoundedImage(icon, iconRect, (int)(4 * UI.FontScale));

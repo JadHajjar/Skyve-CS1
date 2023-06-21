@@ -1,7 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Utilities.Managers;
-
 using System.IO;
 
 namespace SkyveApp.ColossalOrder;
@@ -26,9 +24,9 @@ public class SafeFileStream : Stream
 		_mainStream = new FileStream(_mainFilePath, mode);
 
 		// If the file exists, create a backup copy
-		if (ExtensionClass.FileExists(_mainFilePath))
+		if (CrossIO.FileExists(_mainFilePath))
 		{
-			ExtensionClass.CopyFile(_mainFilePath, _backupFilePath, true);
+			CrossIO.CopyFile(_mainFilePath, _backupFilePath, true);
 		}
 
 		// Open the temporary file stream
@@ -85,22 +83,22 @@ public class SafeFileStream : Stream
 				_tempStream.Close();
 
 				// Create a backup copy of the main file
-				if (ExtensionClass.FileExists(_mainFilePath))
+				if (CrossIO.FileExists(_mainFilePath))
 				{
-					ExtensionClass.CopyFile(_mainFilePath, _backupFilePath, true);
+					CrossIO.CopyFile(_mainFilePath, _backupFilePath, true);
 				}
 
 				_mainStream?.Dispose();
 
 				// Replace the main file with the temporary file
-				ExtensionClass.CopyFile(_tempFilePath, _mainFilePath, true);
+				CrossIO.CopyFile(_tempFilePath, _mainFilePath, true);
 			}
 			finally
 			{
 				saved = true;
 
-				ExtensionClass.DeleteFile(_backupFilePath);
-				ExtensionClass.DeleteFile(_tempFilePath);
+				CrossIO.DeleteFile(_backupFilePath);
+				CrossIO.DeleteFile(_tempFilePath);
 			}
 		}
 

@@ -1,6 +1,6 @@
 ﻿namespace SkyveApp.Domain.Enums;
 
-internal enum ProfileSorting
+public enum ProfileSorting
 {
 	LastUsed,
 	Name,

@@ -2,6 +2,8 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+using SkyveApp.Utilities;
 
 using SlickControls;
 
@@ -12,10 +14,13 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.StatusBubbles;
 internal class FavoriteProfileBubble : StatusBubbleBase
 {
+	private readonly IProfileManager _profileManager;
+
 	public Profile Profile { get; }
 
 	public FavoriteProfileBubble(Profile profile)
 	{
+		_profileManager = Program.Services.GetService<IProfileManager>();
 		Profile = profile;
 	}
 
@@ -33,7 +38,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		Text = Profile.Name;
 		ImageName = Profile.GetIcon();
 
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void UIChanged()
@@ -47,7 +52,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 	{
 		if (disposing)
 		{
-			ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+			_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 		}
 
 		base.Dispose(disposing);
@@ -60,7 +65,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		if (e.Button == MouseButtons.Left)
 		{
 			Loading = true;
-			ProfileManager.SetProfile(Profile);
+			_profileManager.SetProfile(Profile);
 		}
 	}
 
@@ -74,7 +79,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		if (CentralManager.CurrentProfile == Profile)
+		if (_profileManager.CurrentProfile == Profile)
 		{
 			e.Graphics.DrawRoundedRectangle(new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale)), ClientRectangle.Pad(1 + (int)Math.Floor(1.5 * UI.FontScale)), Padding.Left);
 		}

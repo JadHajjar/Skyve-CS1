@@ -6,6 +6,7 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
@@ -28,7 +29,16 @@ internal class UserDescriptionControl : SlickImageControl
 	public SteamUser? User { get; private set; }
 	public PC_UserPage? UserPage { get; private set; }
 
-	public void SetUser(SteamUser user, PC_UserPage? page)
+	private readonly IContentManager _contentManager;
+	private readonly ICompatibilityManager _compatibilityManager;
+
+    public UserDescriptionControl()
+    {
+		_contentManager = Program.Services.GetService<IContentManager>();
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+	}
+
+    public void SetUser(SteamUser user, PC_UserPage? page)
 	{
 		UserPage = page;
 		User = user;
@@ -316,7 +326,7 @@ internal class UserDescriptionControl : SlickImageControl
 		DrawTitle(e);
 		DrawButtons(e);
 
-		var count = CentralManager.Packages.Count(x => x.Author?.SteamId == User.SteamId);
+		var count = _contentManager.Packages.Count(x => x.Author?.SteamId == User.SteamId);
 
 		if (count == 0)
 			return;
@@ -350,7 +360,7 @@ internal class UserDescriptionControl : SlickImageControl
 		using var brush = new SolidBrush(FormDesign.Design.ForeColor);
 		e.Graphics.DrawString(text, font, brush, rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 
-		if (CompatibilityManager.CompatibilityData.Authors.TryGet(User.SteamId)?.Verified ?? false)
+		if (_compatibilityManager.CompatibilityData.Authors.TryGet(User.SteamId)?.Verified ?? false)
 		{
 			var checkRect = rects.TextRect.Align(UI.Scale(new Size(16, 16), UI.FontScale), ContentAlignment.MiddleLeft);
 			checkRect.X += rects.TextRect.Width;

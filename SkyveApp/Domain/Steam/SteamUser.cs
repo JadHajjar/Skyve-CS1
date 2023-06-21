@@ -2,6 +2,7 @@
 
 using Newtonsoft.Json;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -27,7 +28,7 @@ public class SteamUser : ITimestamped
 	public string? AvatarUrl { get; set; }
 	public DateTime Timestamp { get; set; }
 
-	[JsonIgnore] public Bitmap? AvatarImage => ImageManager.GetImage(AvatarUrl, true).Result;
+	[JsonIgnore] public Bitmap? AvatarImage => Program.Services.GetService<IImageManager>().GetImage(AvatarUrl, true).Result;
 
 	public override string ToString()
 	{

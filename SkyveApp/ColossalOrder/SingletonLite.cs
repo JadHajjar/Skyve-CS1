@@ -1,4 +1,6 @@
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+
 using System;
 
 namespace SkyveApp.ColossalOrder;
@@ -19,9 +21,9 @@ public abstract class SingletonLite<T>
 					{
 						sInstance = new T();
 #if DEBUG
-						Log.Debug("Created singleton of type " + typeof(T).Name + ". calling Awake() ...");
+						Program.Services.GetService<ILogger>().Debug("Created singleton of type " + typeof(T).Name + ". calling Awake() ...");
 						sInstance.Awake();
-						Log.Debug("Awake() finished for " + typeof(T).Name);
+						Program.Services.GetService<ILogger>().Debug("Awake() finished for " + typeof(T).Name);
 #else
 						sInstance.Awake();
 #endif
@@ -31,7 +33,7 @@ public abstract class SingletonLite<T>
 			}
 			catch (Exception ex)
 			{
-				ex.Log();
+				Program.Services.GetService<ILogger>().Exception(ex, "");
 				throw;
 			}
 		}

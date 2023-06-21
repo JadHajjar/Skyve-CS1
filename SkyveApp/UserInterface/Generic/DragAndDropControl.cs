@@ -116,7 +116,7 @@ internal class DragAndDropControl : SlickControl
 
 		if (file != null)
 		{
-			if (LocationManager.Platform is not Platform.Windows)
+			if (CrossIO.CurrentPlatform is not Platform.Windows)
 			{
 				var realPath = IOUtil.ToRealPath(file);
 

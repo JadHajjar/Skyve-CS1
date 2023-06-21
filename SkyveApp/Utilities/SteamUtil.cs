@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities.IO;
 
 using SkyveShared;
@@ -125,7 +126,7 @@ public static class SteamUtil
 			{
 				var steamArguments = new StringBuilder("steam://open/console");
 
-				if (LocationManager.Platform is not Platform.Windows)
+				if (CrossIO.CurrentPlatform is not Platform.Windows)
 				{
 					steamArguments.Append(" \"");
 				}
@@ -135,7 +136,7 @@ public static class SteamUtil
 					steamArguments.AppendFormat(" +workshop_download_item 255710 {0}", item);
 				}
 
-				if (LocationManager.Platform is not Platform.Windows)
+				if (CrossIO.CurrentPlatform is not Platform.Windows)
 				{
 					steamArguments.Append("\"");
 				}
@@ -201,14 +202,14 @@ public static class SteamUtil
 
 	public static bool IsSteamAvailable()
 	{
-		return ExtensionClass.FileExists(LocationManager.SteamPathWithExe);
+		return CrossIO.FileExists(Program.Services.GetService<ILocationManager>().SteamPathWithExe);
 	}
 
 	public static void ExecuteSteam(string args)
 	{
-		var file = LocationManager.SteamPathWithExe;
+		var file = Program.Services.GetService<ILocationManager>().SteamPathWithExe;
 
-		if (LocationManager.Platform is Platform.Windows)
+		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
 			var process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(file));
 
@@ -242,7 +243,7 @@ public static class SteamUtil
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, "Failed to get steam author information");
+			Program.Services.GetService<ILogger>().Exception(ex, "Failed to get steam author information");
 		}
 
 		return new();
@@ -398,7 +399,7 @@ public static class SteamUtil
 		}
 		catch (Exception ex)
 		{
-			Log.Error("failed to get steam data: " + ex.Message);
+			Program.Services.GetService<ILogger>().Error("failed to get steam data: " + ex.Message);
 		}
 
 		return (0, new());
@@ -412,20 +413,20 @@ public static class SteamUtil
 
 			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId)) ?? new();
 		}
-		catch (Exception ex) { Log.Exception(ex, "Failed to get the steam information for appid " + steamId); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to get the steam information for appid " + steamId); }
 
 		return new();
 	}
 
 	public static async void LoadDlcs()
 	{
-		Log.Info($"Loading DLCs..");
+		Program.Services.GetService<ILogger>().Info($"Loading DLCs..");
 
 		var dlcs = await GetSteamAppInfoAsync(255710);
 
 		if (!dlcs.ContainsKey("255710"))
 		{
-			Log.Info($"Failed to load DLCs, steam info returned invalid content..");
+			Program.Services.GetService<ILogger>().Info($"Failed to load DLCs, steam info returned invalid content..");
 			return;
 		}
 
@@ -449,17 +450,17 @@ public static class SteamUtil
 			}
 		}
 
-		Log.Info($"DLCs ({newDlcs.Count}) loaded..");
+		Program.Services.GetService<ILogger>().Info($"DLCs ({newDlcs.Count}) loaded..");
 
 		ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 
 		DLCsLoaded?.Invoke();
 
-		AssetsUtil.SetAvailableDlcs(Dlcs.Select(x => x.Id));
+		Program.Services.GetService<AssetsUtil>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
 
 		foreach (var dlc in Dlcs)
 		{
-			await ImageManager.Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
+			await Program.Services.GetService<IImageManager>().Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
 
 			DLCsLoaded?.Invoke();
 		}
@@ -471,15 +472,15 @@ public static class SteamUtil
 		_steamUserProcessor.Clear();
 
 		try
-		{ ExtensionClass.DeleteFile(ISave.GetPath(DLC_CACHE_FILE)); }
-		catch (Exception ex) { Log.Exception(ex, "Failed to clear DLC_CACHE_FILE"); }
+		{ CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE)); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to clear DLC_CACHE_FILE"); }
 
 		try
-		{ ExtensionClass.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE)); }
-		catch (Exception ex) { Log.Exception(ex, "Failed to clear STEAM_USER_CACHE_FILE"); }
+		{ CrossIO.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE)); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to clear STEAM_USER_CACHE_FILE"); }
 
 		try
-		{ ExtensionClass.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE)); }
-		catch (Exception ex) { Log.Exception(ex, "Failed to clear STEAM_CACHE_FILE"); }
+		{ CrossIO.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE)); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to clear STEAM_CACHE_FILE"); }
 	}
 }

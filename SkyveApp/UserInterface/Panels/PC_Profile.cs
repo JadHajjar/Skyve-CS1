@@ -44,10 +44,10 @@ public partial class PC_Profile : PanelContent
 
 		LoadProfile(CentralManager.CurrentProfile);
 
-		DD_SaveFile.StartingFolder = LocationManager.Combine(LocationManager.AppDataPath, "Saves");
+		DD_SaveFile.StartingFolder = CrossIO.Combine(LocationManager.AppDataPath, "Saves");
 		DD_SaveFile.PinnedFolders = new()
 		{
-			["Your Save-games"] = LocationManager.Combine(LocationManager.AppDataPath, "Saves"),
+			["Your Save-games"] = CrossIO.Combine(LocationManager.AppDataPath, "Saves"),
 			["Workshop Save-games"] = IOSelectionDialog.CustomDirectory,
 		};
 		DD_SaveFile.CustomFiles = CentralManager.Assets.Where(x => x.Workshop && (x.Package.WorkshopTags?.Contains("SaveGame") ?? false)).Select(x => new IOSelectionDialog.CustomFile
@@ -64,7 +64,7 @@ public partial class PC_Profile : PanelContent
 		DD_NewMap.PinnedFolders = new()
 		{
 			["Custom Maps"] = LocationManager.MapsPath,
-			["Vanilla Maps"] = LocationManager.Combine(LocationManager.GameContentPath, "Maps"),
+			["Vanilla Maps"] = CrossIO.Combine(LocationManager.GameContentPath, "Maps"),
 			["Workshop Maps"] = IOSelectionDialog.CustomDirectory,
 		};
 		DD_NewMap.CustomFiles = CentralManager.Assets.Where(x => x.Workshop && (x.AssetTags.Contains("Map") || (x.Package.WorkshopTags?.Contains("Map") ?? false))).Select(x => new IOSelectionDialog.CustomFile

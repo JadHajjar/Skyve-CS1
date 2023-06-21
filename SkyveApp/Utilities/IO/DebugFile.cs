@@ -1,5 +1,7 @@
 using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+
 using System;
 using System.IO;
 
@@ -9,9 +11,9 @@ public class MonoFile : DebugFile
 {
 	public static MonoFile Instance = new MonoFile();
 
-	public override string FilePath => LocationManager.Combine(LocationManager.MonoPath, "mono.dll");
-	public override string ReleaseFilePath => LocationManager.Combine(LocationManager.MonoPath, "mono-orig.dll");
-	public override string DebugFilePath => LocationManager.Combine(LocationManager.MonoPath, "mono-debug.dll");
+	public override string FilePath => CrossIO.Combine(Program.Services.GetService<ILocationManager>().MonoPath, "mono.dll");
+	public override string ReleaseFilePath => CrossIO.Combine(Program.Services.GetService<ILocationManager>().MonoPath, "mono-orig.dll");
+	public override string DebugFilePath => CrossIO.Combine(Program.Services.GetService<ILocationManager>().MonoPath, "mono-debug.dll");
 	public override string ResourceFileName => "mono-debug._dll";
 }
 
@@ -19,7 +21,7 @@ public class CitiesFile : DebugFile
 {
 	public static CitiesFile Instance = new CitiesFile();
 
-	public override string FilePath => LocationManager.CitiesPathWithExe;
+	public override string FilePath => Program.Services.GetService<ILocationManager>().CitiesPathWithExe;
 	public override string ReleaseFilePath => FilePath + ".Orig";
 	public override string DebugFilePath => FilePath + ".Profiler";
 	public override string ResourceFileName => "Cities.exe.Profiler";
@@ -28,7 +30,7 @@ public class CitiesFile : DebugFile
 public abstract class DebugFile
 {
 	public abstract string ResourceFileName { get; }
-	public string ResourceFilePath => LocationManager.Combine(Program.CurrentDirectory, ResourceFileName);
+	public string ResourceFilePath => CrossIO.Combine(Program.CurrentDirectory, ResourceFileName);
 
 	public abstract string ReleaseFilePath { get; }
 	public abstract string DebugFilePath { get; }
@@ -45,21 +47,21 @@ public abstract class DebugFile
 			return; // already the same
 		}
 
-		ExtensionClass.DeleteFile(dest);
-		File.Copy(sourceFileName: source, destFileName: dest);
+		CrossIO.DeleteFile(dest);
+		CrossIO.CopyFile(source, dest, false);
 	}
 
 	public void EnsureDebugWritten()
 	{
-		if (!ExtensionClass.FileExists(DebugFilePath))
+		if (!CrossIO.FileExists(DebugFilePath))
 		{
-			File.Copy(ResourceFilePath, DebugFilePath);
+			CrossIO.CopyFile(ResourceFilePath, DebugFilePath, false);
 		}
 	}
 
 	public void EnsureBReleaseBackedup()
 	{
-		if (ExtensionClass.FileExists(ReleaseFilePath))
+		if (CrossIO.FileExists(ReleaseFilePath))
 		{
 			return;
 		}
@@ -78,7 +80,7 @@ public abstract class DebugFile
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, "can't move files if CS is running");
+			Program.Services.GetService<ILogger>().Exception(ex, "can't move files if CS is running");
 		}
 		return false;
 	}
@@ -86,7 +88,7 @@ public abstract class DebugFile
 	{
 		try
 		{
-			if (ExtensionClass.FileExists(ReleaseFilePath))
+			if (CrossIO.FileExists(ReleaseFilePath))
 			{
 				CopyFile(source: ReleaseFilePath, dest: FilePath);
 			}
@@ -94,7 +96,7 @@ public abstract class DebugFile
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex, "can't move files if CS is running");
+			Program.Services.GetService<ILogger>().Exception(ex, "can't move files if CS is running");
 		}
 		return false;
 	}
@@ -107,7 +109,7 @@ public abstract class DebugFile
 	public bool? ReleaseIsUsed()
 	{
 		static bool Equal(string path1, string path2) =>
-			ExtensionClass.FileExists(path1) && ExtensionClass.FileExists(path2) && FilesEqual(path1, path2);
+			CrossIO.FileExists(path1) && CrossIO.FileExists(path2) && FilesEqual(path1, path2);
 		if (Equal(ReleaseFilePath, FilePath))
 		{
 			return true;
@@ -123,7 +125,7 @@ public abstract class DebugFile
 			return false;
 		}
 
-		if (!ExtensionClass.FileExists(ReleaseFilePath))
+		if (!CrossIO.FileExists(ReleaseFilePath))
 		{
 			return true;
 		}

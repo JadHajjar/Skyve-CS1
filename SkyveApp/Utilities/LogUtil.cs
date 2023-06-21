@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities.IO;
 
 using System;
@@ -13,39 +14,49 @@ using System.IO.Compression;
 using System.Linq;
 
 namespace SkyveApp.Utilities;
-public static class LogUtil
+public class LogUtil : ILogUtil
 {
-	static LogUtil()
+	private readonly ILocationManager _locationManager;
+	private readonly IContentManager _contentManager;
+	private readonly IProfileManager _profileManager;
+	private readonly ILogger _logger;
+
+	public LogUtil(ILocationManager locationManager, IContentManager contentManager, IProfileManager profileManager, ILogger logger)
 	{
+		_locationManager = locationManager;
+		_contentManager = contentManager;
+		_profileManager = profileManager;
+		_logger = logger;
+
 		try
 		{
-			foreach (var item in Directory.GetFiles(LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs")))
+			foreach (var item in Directory.GetFiles(CrossIO.Combine(_locationManager.SkyveAppDataPath, "Support Logs")))
 			{
 				if (DateTime.Now - File.GetLastWriteTime(item) > TimeSpan.FromDays(15))
 				{
-					ExtensionClass.DeleteFile(item);
+					CrossIO.DeleteFile(item);
 				}
 			}
 		}
 		catch { }
 	}
 
-	public static string GameLogFile => LocationManager.Platform switch
+	public string GameLogFile => CrossIO.CurrentPlatform switch
 	{
 		Platform.MacOSX => $"/Users/{Environment.UserName}/Library/Logs/Unity/Player.log",
 		Platform.Linux => $"/home/{Environment.UserName}/.config/unity3d/Colossal Order/Cities_ Skylines/Player.log",
-		_ => LocationManager.Combine(LocationManager.GamePath, "Cities_Data", "output_log.txt")
+		_ => CrossIO.Combine(_locationManager.GamePath, "Cities_Data", "output_log.txt")
 	};
 
-	public static string GameDataPath => LocationManager.Platform switch
+	public string GameDataPath => CrossIO.CurrentPlatform switch
 	{
-		Platform.MacOSX => LocationManager.Combine(LocationManager.GamePath, "Cities.app", "Contents"),
-		_ => LocationManager.Combine(LocationManager.GamePath, "Cities_Data")
+		Platform.MacOSX => CrossIO.Combine(_locationManager.GamePath, "Cities.app", "Contents"),
+		_ => CrossIO.Combine(_locationManager.GamePath, "Cities_Data")
 	};
 
-	public static string CreateZipFileAndSetToClipboard(string? folder = null)
+	public string CreateZipFileAndSetToClipboard(string? folder = null)
 	{
-		var file = LocationManager.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_HH-mm}.zip");
+		var file = CrossIO.Combine(folder ?? Path.GetTempPath(), $"LogReport_{DateTime.Now:yy-MM-dd_HH-mm}.zip");
 
 		using (var fileStream = File.Create(file))
 		{
@@ -57,7 +68,7 @@ public static class LogUtil
 		return file;
 	}
 
-	public static void CreateZipToStream(Stream fileStream)
+	public void CreateZipToStream(Stream fileStream)
 	{
 		using var zipArchive = new ZipArchive(fileStream, ZipArchiveMode.Create, true);
 
@@ -65,11 +76,11 @@ public static class LogUtil
 
 		foreach (var filePath in GetFilesForZip())
 		{
-			if (ExtensionClass.FileExists(filePath))
+			if (CrossIO.FileExists(filePath))
 			{
 				var tempFile = Path.GetTempFileName();
 
-				ExtensionClass.CopyFile(filePath, tempFile, true);
+				CrossIO.CopyFile(filePath, tempFile, true);
 
 				try
 				{ zipArchive.CreateEntryFromFile(tempFile, $"Other Files\\{Path.GetFileName(filePath)}"); }
@@ -78,12 +89,12 @@ public static class LogUtil
 		}
 	}
 
-	private static IEnumerable<string> GetFilesForZip()
+	private IEnumerable<string> GetFilesForZip()
 	{
 		yield return GetLastCrashLog();
 		yield return GetLastLSMReport();
 
-		foreach (var item in new DirectoryInfo(LocationManager.Combine(GameDataPath, "Logs")).GetFiles("*.log"))
+		foreach (var item in new DirectoryInfo(CrossIO.Combine(GameDataPath, "Logs")).GetFiles("*.log"))
 		{
 			if (DateTime.Now - item.LastWriteTime < TimeSpan.FromDays(1))
 			{
@@ -100,9 +111,9 @@ public static class LogUtil
 		}
 	}
 
-	private static void AddMainFilesToZip(ZipArchive zipArchive)
+	private void AddMainFilesToZip(ZipArchive zipArchive)
 	{
-		if (!ExtensionClass.FileExists(GameLogFile))
+		if (!CrossIO.FileExists(GameLogFile))
 		{
 			return;
 		}
@@ -110,8 +121,8 @@ public static class LogUtil
 		var tempLogFile = Path.GetTempFileName();
 		var tempLotLogFile = Path.GetTempFileName();
 
-		ExtensionClass.CopyFile(GameLogFile, tempLogFile, true);
-		ExtensionClass.CopyFile(Log.LogFilePath, tempLotLogFile, true);
+		CrossIO.CopyFile(GameLogFile, tempLogFile, true);
+		CrossIO.CopyFile(_logger.LogFilePath, tempLotLogFile, true);
 
 		zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
 
@@ -128,21 +139,21 @@ public static class LogUtil
 		AddProfile(zipArchive);
 	}
 
-	private static void AddCompatibilityReport(ZipArchive zipArchive)
+	private void AddCompatibilityReport(ZipArchive zipArchive)
 	{
 		var profileEntry = zipArchive.CreateEntry("Skyve\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
-		var reports = CentralManager.Packages.ToList(x => x.GetCompatibilityInfo());
+		var reports = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
 		reports.RemoveAll(x => x.Notification < NotificationType.Unsubscribe && !x.Package.IsIncluded);
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
 	}
 
-	private static void AddProfile(ZipArchive zipArchive)
+	private void AddProfile(ZipArchive zipArchive)
 	{
 		var profileEntry = zipArchive.CreateEntry("Skyve\\LogProfile.json");
 		using var writer = new StreamWriter(profileEntry.Open());
 		var profile = new Profile("LogProfile");
-		ProfileManager.GatherInformation(profile);
+		_profileManager.GatherInformation(profile);
 		profile.Temporary = true;
 
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(profile, Newtonsoft.Json.Formatting.Indented));
@@ -169,9 +180,9 @@ public static class LogUtil
 		writer.Write(simpleLogText);
 	}
 
-	private static string GetLastCrashLog()
+	private string GetLastCrashLog()
 	{
-		if (LocationManager.Platform is not Platform.Windows)
+		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
 			return string.Empty;
 		}
@@ -187,15 +198,15 @@ public static class LogUtil
 
 			if (latest != null)
 			{
-				return LocationManager.Combine(latest.FullName, "error.log");
+				return CrossIO.Combine(latest.FullName, "error.log");
 			}
 		}
-		catch (Exception ex) { Log.Exception(ex, "Failed to load the previous crash dump log"); }
+		catch (Exception ex) { _logger.Exception(ex, "Failed to load the previous crash dump log"); }
 
 		return string.Empty;
 	}
 
-	private static string GetLastLSMReport()
+	private string GetLastLSMReport()
 	{
 		try
 		{
@@ -207,13 +218,13 @@ public static class LogUtil
 		}
 		catch (Exception e)
 		{
-			Log.Exception(e);
+			_logger.Exception(e, "Failed to get the last LSM report");
 		}
 
 		return string.Empty;
 	}
 
-	public static List<LogTrace> SimplifyLog(string log, out string simpleLog)
+	public List<LogTrace> SimplifyLog(string log, out string simpleLog)
 	{
 		var lines = File.ReadAllLines(log).ToList();
 

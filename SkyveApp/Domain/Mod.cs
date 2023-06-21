@@ -3,6 +3,7 @@
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -27,8 +28,8 @@ public class Mod : IPackage
 	public Package Package { get; }
 	public string Name => Package.Name.IfEmpty(_dllName);
 
-	public bool IsIncluded { get => ModsUtil.IsIncluded(this); set => ModsUtil.SetIncluded(this, value); }
-	public bool IsEnabled { get => ModsUtil.IsEnabled(this); set => ModsUtil.SetEnabled(this, value); }
+	public bool IsIncluded { get => Program.Services.GetService<IModUtil>().IsIncluded(this); set => Program.Services.GetService<IModUtil>().SetIncluded(this, value); }
+	public bool IsEnabled { get => Program.Services.GetService<IModUtil>().IsEnabled(this); set => Program.Services.GetService<IModUtil>().SetEnabled(this, value); }
 
 	public string Folder => ((IPackage)Package).Folder;
 	public long FileSize => ((IPackage)Package).FileSize;

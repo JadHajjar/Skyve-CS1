@@ -4,6 +4,7 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -38,10 +39,10 @@ public class Package : IPackage
 	public string Folder { get; }
 	public long FileSize { get; set; }
 	public DateTime LocalTime { get; set; }
-	public DownloadStatus Status => ModsUtil.GetStatus(this, out _);
-	public string? StatusReason { get { ModsUtil.GetStatus(this, out var reason); return reason; } }
-	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
-	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(Mod.FileName)).If(0ul, ulong.TryParse(Path.GetFileName(Folder), out var id) ? id : 0));
+	public DownloadStatus Status => Program.Services.GetService<IModUtil>().GetStatus(this, out _);
+	public string? StatusReason { get { Program.Services.GetService<IModUtil>().GetStatus(this, out var reason); return reason; } }
+	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => Program.Services.GetService<IContentUtil>().SetBulkIncluded(new[] { this }, value); }
+	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : Mod is null ? 0 : Program.Services.GetService<ICompatibilityManager>().CompatibilityData.PackageNames.TryGet(Path.GetFileName(Mod.FileName)).If(0ul, ulong.TryParse(Path.GetFileName(Folder), out var id) ? id : 0));
 	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
 	public string? Name => WorkshopInfo?.Name ?? Path.GetFileName(Folder);

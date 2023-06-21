@@ -1,5 +1,5 @@
 ﻿namespace SkyveApp.Domain.Enums;
-internal enum PackageSorting
+public enum PackageSorting
 {
 	Default,
 	Name,

@@ -23,38 +23,40 @@ public class Logger : ILogger
     /// <summary>
     /// Set to <c>true</c> to include log level in log entries.
     /// </summary>
-    private static readonly bool ShowLevel = true;
+    private readonly bool ShowLevel = true;
 
     /// <summary>
     /// Set to <c>true</c> to include timestamp in log entries.
     /// </summary>
-    private static readonly bool ShowTimestamp = true;
+    private readonly bool ShowTimestamp = true;
 
-    private static readonly string assemblyName_ = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+    private readonly string assemblyName_;
 
     /// <summary>
     /// File name for log file.
     /// </summary>
-    private static readonly string LogFileName = assemblyName_ + ".log";
+    private readonly string LogFileName;
 
     /// <summary>
     /// Full path and file name of log file.
     /// </summary>
-    internal static readonly string LogFilePath;
+    public string LogFilePath { get; }
 
     /// <summary>
     /// Stopwatch used if <see cref="ShowTimestamp"/> is <c>true</c>.
     /// </summary>
-    private static readonly Stopwatch? Timer;
+    private readonly Stopwatch? Timer;
 
-    private static readonly object fileLock = new object();
+    private readonly object fileLock = new object();
     /// <summary>
-    /// Initializes static members of the <see cref="Log"/> class.
+    /// Initializes members of the <see cref="Log"/> class.
     /// Resets log file on startup.
     /// </summary>
-    static Log()
+    public Logger()
     {
-        LogFilePath = LogFileName;
+		assemblyName_ = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+		LogFileName = assemblyName_ + ".log";
+		LogFilePath = LogFileName;
 
         try
         {
@@ -63,16 +65,16 @@ public class Logger : ILogger
                 return;
             }
 
-            var folder = LocationManager.Combine(ISave.CustomSaveDirectory, ISave.AppName);
-            LogFilePath = LocationManager.Combine(folder, LogFileName);
+            var folder = CrossIO.Combine(ISave.CustomSaveDirectory, ISave.AppName);
+            LogFilePath = CrossIO.Combine(folder, LogFileName);
 
             Directory.CreateDirectory(folder);
 
             try
             {
-                if (ExtensionClass.FileExists(LogFilePath))
+                if (CrossIO.FileExists(LogFilePath))
                 {
-                    ExtensionClass.DeleteFile(LogFilePath);
+					CrossIO.DeleteFile(LogFilePath);
                 }
             }
             catch { }
@@ -82,8 +84,8 @@ public class Logger : ILogger
                 Timer = Stopwatch.StartNew();
             }
 
-            var details = typeof(Log).Assembly.GetName();
-            Info($"{details.Name} v{details.Version}", true);
+            var details = typeof(Logger).Assembly.GetName();
+            Info($"{details.Name} v{details.Version}");
             Info($"Now  = {DateTime.Now}");
             Info($"Here = {Program.CurrentDirectory}");
         }
@@ -105,54 +107,13 @@ public class Logger : ILogger
         Exception,
     }
 
-
     public const int MAX_WAIT_ID = 1000;
-    private static readonly DateTime[] times_ = new DateTime[MAX_WAIT_ID];
+    private readonly DateTime[] times_ = new DateTime[MAX_WAIT_ID];
 
 #if DEBUG
-    [Conditional("DEBUG")]
-    public static void DebugWait(string message, int id, float seconds = 0.5f, bool copyToGameLog = true)
+    public void Debug(string message)
     {
-        var diff = seconds + 1;
-        if (id < 0)
-        {
-            id = -id;
-        }
-
-        id = Math.Abs(id % MAX_WAIT_ID);
-        if (times_[id] != default)
-        {
-            var diff0 = DateTime.Now - times_[id];
-            diff = diff0.Seconds;
-        }
-        if (diff >= seconds)
-        {
-            Debug(message, copyToGameLog);
-            times_[id] = DateTime.Now;
-        }
-    }
-
-    [Conditional("DEBUG")]
-    public static void DebugWait(string message, object? id = null, float seconds = 0.5f, bool copyToGameLog = true)
-    {
-        if (id == null)
-        {
-            id = Environment.StackTrace + message;
-        }
-
-        DebugWait(message, id.GetHashCode(), seconds, copyToGameLog);
-
-    }
-
-    /// <summary>
-    /// Logs debug trace, only in <c>DEBUG</c> builds.
-    /// </summary>
-    /// <param name="message">Log entry text.</param>
-    /// <param name="copyToGameLog">If <c>true</c> will copy to the main game log file.</param>
-    [Conditional("DEBUG")]
-    public static void Debug(string message, bool copyToGameLog = false)
-    {
-        LogImpl(message, LogLevel.Debug, copyToGameLog);
+        LogImpl(message, LogLevel.Debug);
     }
 #endif
 
@@ -162,9 +123,9 @@ public class Logger : ILogger
     /// 
     /// <param name="message">Log entry text.</param>
     /// <param name="copyToGameLog">If <c>true</c> will copy to the main game log file.</param>
-    public static void Info(string message, bool copyToGameLog = true)
+    public void Info(string message)
     {
-        LogImpl(message, LogLevel.Info, copyToGameLog);
+        LogImpl(message, LogLevel.Info);
     }
 
     /// <summary>
@@ -173,9 +134,9 @@ public class Logger : ILogger
     /// 
     /// <param name="message">Log entry text.</param>
     /// <param name="copyToGameLog">If <c>true</c> will copy to the main game log file.</param>
-    public static void Warning(string message, bool copyToGameLog = true)
+    public void Warning(string message)
     {
-        LogImpl(message, LogLevel.Warning, copyToGameLog);
+        LogImpl(message, LogLevel.Warning);
     }
 
 
@@ -185,12 +146,12 @@ public class Logger : ILogger
     /// 
     /// <param name="message">Log entry text.</param>
     /// <param name="copyToGameLog">If <c>true</c> will copy to the main game log file.</param>
-    public static void Error(string message, bool copyToGameLog = true)
+    public void Error(string message)
     {
-        LogImpl(message, LogLevel.Error, copyToGameLog);
+        LogImpl(message, LogLevel.Error);
     }
 
-    internal static void Exception(Exception e, string m = "", bool showInPanel = false)
+    public void Exception(Exception e, string m, bool showInPanel = false)
     {
         try
         {
@@ -200,7 +161,7 @@ public class Logger : ILogger
                 message = m + " -> \n" + message;
             }
 
-            LogImpl(message, LogLevel.Exception, true);
+            LogImpl(message, LogLevel.Exception);
 
             if (showInPanel)
             {
@@ -214,8 +175,8 @@ public class Logger : ILogger
         }
     }
 
-    private static readonly string nl = Environment.NewLine;
-    private static bool loggingFailed;
+    private readonly string nl = Environment.NewLine;
+    private bool loggingFailed;
 
     /// <summary>
     /// Write a message to log file.
@@ -223,7 +184,7 @@ public class Logger : ILogger
     /// 
     /// <param name="message">Log entry text.</param>
     /// <param name="level">Logging level. If set to <see cref="LogLevel.Error"/> a stack trace will be appended.</param>
-    private static void LogImpl(string message, LogLevel level, bool copyToGameLog)
+    private void LogImpl(string message, LogLevel level)
     {
         try
         {
@@ -262,12 +223,6 @@ public class Logger : ILogger
                     w.Write(m);
                 }
             }
-
-            if (copyToGameLog)
-            {
-                m = assemblyName_ + " | " + m;
-                Console.WriteLine(m);
-            }
         }
         catch (Exception ex)
         {
@@ -276,7 +231,7 @@ public class Logger : ILogger
         }
     }
 
-    internal static void LogToFileSimple(string file, string message)
+    internal void LogToFileSimple(string file, string message)
     {
         using var w = File.AppendText(file);
         w.WriteLine(message);
@@ -284,42 +239,15 @@ public class Logger : ILogger
         w.WriteLine();
     }
 
-    internal static void Called(params object[] args)
+    internal void Succeeded()
     {
-        Info(CurrentMethod(2, args) + " called.", false);
-    }
-
-    internal static void Succeeded()
-    {
-        Info(CurrentMethod(2) + " succeeded!", false);
+        Info(CurrentMethod(2) + " succeeded!");
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal static string CurrentMethod(int i = 1, params object[] args)
+    internal string CurrentMethod(int i = 1, params object[] args)
     {
         var method = new StackFrame(i).GetMethod();
         return $"{method.DeclaringType.Name}.{method.Name}({args.ListStrings(", ")})";
-    }
-}
-
-internal static class LogExtensions
-{
-    /// <summary>
-    /// useful for easily debugging inline functions
-    /// to be used like this example:
-    /// TYPE inlinefunctionname(...) => expression
-    /// TYPE inlinefunctionname(...) => expression.LogRet("message");
-    /// </summary>
-    internal static T LogRet<T>(this T a, string m)
-    {
-#if DEBUG
-        Services.Log.Debug(m + a);
-#endif
-        return a;
-    }
-
-    public static void Log(this Exception ex, bool showInPanel = false)
-    {
-        Services.Log.Exception(ex, showInPanel: showInPanel);
     }
 }

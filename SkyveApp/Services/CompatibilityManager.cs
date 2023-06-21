@@ -26,19 +26,24 @@ public class CompatibilityManager : ICompatibilityManager
     private readonly Dictionary<IPackage, CompatibilityInfo> _cache = new(new Domain.IPackageEqualityComparer());
     private readonly List<SnoozedItem> _snoozedItems = new();
 
+    private readonly ServiceCollection _services;
     private readonly ILogger _logger;
+	private readonly INotifier _notifier;
     private readonly IContentManager _contentManager;
 
-    public IndexedCompatibilityData CompatibilityData { get; private set; }
+	public IndexedCompatibilityData CompatibilityData { get; private set; }
     public Author User { get; private set; }
     public bool FirstLoadComplete { get; set; }
 
     public event Action? ReportProcessed;
 
-	CompatibilityManager(IContentManager contentManager, ILogger logger)
+	CompatibilityManager(ServiceCollection services, IContentManager contentManager, ILogger logger, INotifier notifier)
 	{
+        _services = services;
 		_contentManager = contentManager;
 		_logger = logger;
+		_notifier = notifier;
+
 		User = new();
 		CompatibilityData = new(null);
 
@@ -48,8 +53,8 @@ public class CompatibilityManager : ICompatibilityManager
 
 		ConnectionHandler.WhenConnected(() => new BackgroundAction(DownloadData).Run());
 
-		_contentManager.ContentLoaded += () => new BackgroundAction(CacheReport).Run();
-		_contentManager.PackageInclusionUpdated += () => new BackgroundAction(CacheReport).Run();
+		_notifier.ContentLoaded += () => new BackgroundAction(CacheReport).Run();
+		_notifier.PackageInclusionUpdated += () => new BackgroundAction(CacheReport).Run();
 
 		new BackgroundAction(RefreshUserState).RunEvery(60000, true);
 	}
@@ -68,9 +73,9 @@ public class CompatibilityManager : ICompatibilityManager
 
         foreach (var package in content)
         { package.GetCompatibilityInfo(true); }
-        //Parallelism.ForEach(content.ToList(), package => GetCompatibilityInfo(package, true), 5);
+		//Parallelism.ForEach(content.ToList(), package => GetCompatibilityInfo(package, true), 5);
 
-        _contentManager.OnInformationUpdated();
+		_notifier.OnInformationUpdated();
 
         ReportProcessed?.Invoke();
     }
@@ -274,7 +279,8 @@ public class CompatibilityManager : ICompatibilityManager
         var sw = new System.Diagnostics.Stopwatch();
         sw.Start();
 #endif
-        var packageData = CompatibilityUtil.GetPackageData(package);
+		var compatibilityUtil = _services.GetService<ICompatibilityUtil>();
+		var packageData = compatibilityUtil.GetPackageData(package);
         var info = new CompatibilityInfo(package, packageData);
 
         if (package.Package?.Mod is not null)
@@ -312,7 +318,7 @@ public class CompatibilityManager : ICompatibilityManager
         {
             foreach (var item in status.Value)
             {
-                CompatibilityUtil.HandleStatus(info, item);
+                compatibilityUtil.HandleStatus(info, item);
             }
         }
 
@@ -320,36 +326,36 @@ public class CompatibilityManager : ICompatibilityManager
         {
             if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && !info.Links.Any(x => x.Type is LinkType.Github))
             {
-                CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
+                compatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
             }
 
             if (package.IsMod && !packageData.Statuses.ContainsKey(StatusType.TestVersion) && package.SteamDescription is not null && package.SteamDescription.GetWords().Length <= 30)
             {
-                CompatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
+                compatibilityUtil.HandleStatus(info, new PackageStatus { Type = StatusType.IncompleteDescription, Action = StatusAction.UnsubscribeThis });
             }
 
             if (package.IsMod && !author.Malicious && package.ServerTime.Date < new DateTime(2023, 6, 12) && DateTime.UtcNow - package.ServerTime > TimeSpan.FromDays(365) && !packageData.Statuses.ContainsKey(StatusType.Deprecated))
             {
-                CompatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
+                compatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
             }
         }
 
         if (packageData.Package.Type is PackageType.CSM && !packageData.Statuses.ContainsKey(StatusType.Reupload))
         {
-            CompatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });
+            compatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });
         }
 
         foreach (var interaction in packageData.Interactions)
         {
             foreach (var item in interaction.Value)
             {
-                CompatibilityUtil.HandleInteraction(info, item);
+                compatibilityUtil.HandleInteraction(info, item);
             }
         }
 
         if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
         {
-            CompatibilityUtil.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
+            compatibilityUtil.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
             {
                 Packages = new ulong[]
                 {
@@ -372,7 +378,7 @@ public class CompatibilityManager : ICompatibilityManager
 
             if (missing.Any())
             {
-                CompatibilityUtil.HandleStatus(info, new PackageStatus
+                compatibilityUtil.HandleStatus(info, new PackageStatus
                 {
                     Type = StatusType.MissingDlc,
                     Action = StatusAction.NoAction,

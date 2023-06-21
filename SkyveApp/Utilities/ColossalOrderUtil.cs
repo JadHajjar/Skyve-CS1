@@ -2,6 +2,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System.Collections.Generic;
 using System.IO;
@@ -9,28 +10,35 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 
 namespace SkyveApp.Utilities;
-internal static class ColossalOrderUtil
+internal class ColossalOrderUtil : IColossalOrderUtil
 {
 	private const string GAME_SETTINGS_FILE_NAME = "userGameState";
-	private static SettingsFile _settingsFile;
-	private static bool _initialized;
-	private static readonly Dictionary<Mod, SavedBool> _settingsDictionary = new();
-	private static readonly FileSystemWatcher _watcher;
-	private static readonly DelayedAction _delayedAction = new(500);
+	private SettingsFile _settingsFile;
+	private bool _initialized;
+	private readonly Dictionary<Mod, SavedBool> _settingsDictionary = new();
+	private readonly FileSystemWatcher _watcher;
+	private readonly DelayedAction _delayedAction = new(500);
 
-	static ColossalOrderUtil()
+	private readonly ILocationManager _locationManager;
+	private readonly ISettings _settings;
+	private readonly INotifier _notifier;
+
+	ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings)
 	{
+		_locationManager = locationManager;
+		_notifier = notifier;
+		_settings = settings;
 		_settingsFile = new SettingsFile() { fileName = GAME_SETTINGS_FILE_NAME };
 		_settingsFile.Load();
 
 		_watcher = CreateWatcher();
 	}
 
-	private static FileSystemWatcher CreateWatcher()
+	private FileSystemWatcher CreateWatcher()
 	{
 		var watcher = new FileSystemWatcher
 		{
-			Path = LocationManager.AppDataPath,
+			Path = _locationManager.AppDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = GAME_SETTINGS_FILE_NAME + SettingsFile.extension
 		};
@@ -42,20 +50,20 @@ internal static class ColossalOrderUtil
 		return watcher;
 	}
 
-	public static void Start()
+	public void Start()
 	{
 		_initialized = true;
 		SaveSettings();
 	}
 
-	private static void FileChanged(object sender, FileSystemEventArgs e)
+	private void FileChanged(object sender, FileSystemEventArgs e)
 	{
 		_delayedAction.Run(SettingsFileChanged);
 	}
 
-	private static void SettingsFileChanged()
+	private void SettingsFileChanged()
 	{
-		if (CentralManager.SessionSettings.UserSettings.OverrideGameChanges)
+		if (_settings.SessionSettings.UserSettings.OverrideGameChanges)
 		{
 			var currentState = _settingsDictionary.ToDictionary(x => x.Key, x => x.Value.value);
 
@@ -76,14 +84,11 @@ internal static class ColossalOrderUtil
 			_settingsFile.Load();
 			_settingsDictionary.Clear();
 
-			foreach (var mod in CentralManager.Mods)
-			{
-				CentralManager.OnInformationUpdated();
-			}
+			_notifier.OnInformationUpdated();
 		}
 	}
 
-	public static bool IsEnabled(Mod mod)
+	public bool IsEnabled(Mod mod)
 	{
 		if (!_settingsDictionary.ContainsKey(mod))
 		{
@@ -93,7 +98,7 @@ internal static class ColossalOrderUtil
 		return _settingsDictionary[mod].value;
 	}
 
-	public static void SetEnabled(Mod mod, bool value)
+	public void SetEnabled(Mod mod, bool value)
 	{
 		if (!_settingsDictionary.ContainsKey(mod))
 		{
@@ -103,7 +108,7 @@ internal static class ColossalOrderUtil
 		_settingsDictionary[mod].value = value;
 	}
 
-	public static void SaveSettings()
+	public void SaveSettings()
 	{
 		if (_initialized)
 		{
@@ -113,7 +118,7 @@ internal static class ColossalOrderUtil
 		}
 	}
 
-	private static SavedBool GetEnabledSetting(Mod mod)
+	private SavedBool GetEnabledSetting(Mod mod)
 	{
 		var savedEnabledKey_ = $"{Path.GetFileNameWithoutExtension(mod.Folder)}{GetLegacyHashCode(mod.Folder)}.enabled";
 
@@ -121,7 +126,7 @@ internal static class ColossalOrderUtil
 	}
 
 	[ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-	public static unsafe int GetLegacyHashCode(string str)
+	private unsafe int GetLegacyHashCode(string str)
 	{
 		//fixed (char* ptr = str + (RuntimeHelpers.OffsetToStringData / 2))
 		fixed (char* ptr = str + (12 / 2))

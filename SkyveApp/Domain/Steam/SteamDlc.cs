@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -13,6 +14,6 @@ public class SteamDlc
 	public string? Description { get; set; }
 	public DateTime ReleaseDate { get; set; }
 	[JsonIgnore] public string ThumbnailUrl => $"https://cdn.akamai.steamstatic.com/steam/apps/{Id}/header.jpg";
-	[JsonIgnore] public Bitmap? Thumbnail => ImageManager.GetImage(ThumbnailUrl, true, $"{Id}.png").Result;
-	[JsonIgnore] public bool IsIncluded { get => !AssetsUtil.IsDlcExcluded(Id); set => AssetsUtil.SetDlcExcluded(Id, !value); }
+	[JsonIgnore] public Bitmap? Thumbnail => Program.Services.GetService<IImageManager>().GetImage(ThumbnailUrl, true, $"{Id}.png").Result;
+	[JsonIgnore] public bool IsIncluded { get => !Program.Services.GetService<IAssetUtil>().IsDlcExcluded(Id); set => Program.Services.GetService<IAssetUtil>().SetDlcExcluded(Id, !value); }
 }

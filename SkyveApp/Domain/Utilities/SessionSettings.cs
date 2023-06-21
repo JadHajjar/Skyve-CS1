@@ -3,7 +3,7 @@
 using System.Drawing;
 
 namespace SkyveApp.Domain.Utilities;
-internal class SessionSettings : ISave
+public class SessionSettings : ISave
 {
 	public override string Name => nameof(SessionSettings) + ".json";
 

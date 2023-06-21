@@ -1,7 +1,7 @@
 ﻿using SkyveApp.Domain.Enums;
 
 namespace SkyveApp.Domain;
-internal class UserSettings
+public class UserSettings
 {
 	public PackageSorting PackageSorting { get; set; }
 	public ProfileSorting ProfileSorting { get; set; }

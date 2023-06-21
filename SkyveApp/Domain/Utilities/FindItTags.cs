@@ -1,5 +1,6 @@
 ﻿using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,13 @@ public class CustomTagsLibrary
 	{
 		try
 		{
-			var path = LocationManager.Combine(LocationManager.AppDataPath, filename);
+			var path = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, filename);
 
 			if (assetTags.Count == 0)
 			{
-				if (ExtensionClass.FileExists(path))
+				if (CrossIO.FileExists(path))
 				{
-					ExtensionClass.DeleteFile(path);
+					CrossIO.DeleteFile(path);
 				}
 				return;
 			}
@@ -61,7 +62,7 @@ public class CustomTagsLibrary
 		}
 		catch (Exception e)
 		{
-			Log.Exception(e, "Couldn't serialize custom find-it tags");
+			Program.Services.GetService<ILogger>().Exception(e, "Couldn't serialize custom find-it tags");
 		}
 	}
 
@@ -71,9 +72,9 @@ public class CustomTagsLibrary
 		{
 			assetTags.Clear();
 
-			var path = LocationManager.Combine(LocationManager.AppDataPath, filename);
+			var path = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, filename);
 
-			if (!ExtensionClass.FileExists(path))
+			if (!CrossIO.FileExists(path))
 			{
 				return;
 			}
@@ -93,7 +94,7 @@ public class CustomTagsLibrary
 		}
 		catch (Exception e)
 		{
-			Log.Exception(e, "Couldn't load custom find-it tags");
+			Program.Services.GetService<ILogger>().Exception(e, "Couldn't load custom find-it tags");
 		}
 	}
 }

@@ -1,16 +1,22 @@
-﻿using SkyveApp.Utilities;
+﻿using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+using SkyveApp.Utilities;
 
 namespace SkyveApp.Domain.Utilities;
 
 internal class CachedModEnabled : CachedSaveItem<Mod, bool>
 {
-	public CachedModEnabled(Mod key, bool value) : base(key, value)
-	{ }
+	private readonly IModUtil _modUtil;
 
-	public override bool CurrentValue => ModsUtil.IsLocallyEnabled(Key);
+	public CachedModEnabled(Mod key, bool value) : base(key, value)
+	{
+		_modUtil = Program.Services.GetService<IModUtil>();
+	}
+
+	public override bool CurrentValue => _modUtil.IsLocallyEnabled(Key);
 
 	protected override void OnSave()
 	{
-		ModsUtil.SetLocallyEnabled(Key, ValueToSave, false);
+		_modUtil.SetLocallyEnabled(Key, ValueToSave, false);
 	}
 }

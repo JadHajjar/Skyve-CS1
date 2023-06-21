@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 		}
 		finally
 		{
-			CentralManager.OnWorkshopInfoUpdated();
+			Program.Services.GetService<INotifier>().OnWorkshopInfoUpdated();
 		}
 	}
 

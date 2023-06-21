@@ -5,6 +5,7 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -36,18 +37,26 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 	public event Action<Profile>? ExcludeProfile;
 	public event Action<Profile>? DisposeProfile;
 
+	private readonly ISettings _settings;
+	private readonly IProfileManager _profileManager;
+	private readonly ICompatibilityManager _compatibilityManager;
+
 	public ProfileListControl(bool readOnly)
 	{
+		_settings = Program.Services.GetService<ISettings>();
+		_profileManager = Program.Services.GetService<IProfileManager>();
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+
 		ReadOnly = readOnly;
 		HighlightOnHover = true;
 		SeparateWithLines = true;
-		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36;
+		ItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36;
 		GridItemSize = new Size(305, 160);
 
-		sorting = CentralManager.SessionSettings.UserSettings.ProfileSorting;
+		sorting = _settings.SessionSettings.UserSettings.ProfileSorting;
 
-		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_profileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
+		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
 
 		imagePrompt = new IOSelectionDialog()
 		{
@@ -74,8 +83,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		if (selectedItem != ProfileSorting.Downloads)
 		{
-			CentralManager.SessionSettings.UserSettings.ProfileSorting = selectedItem;
-			CentralManager.SessionSettings.Save();
+			_settings.SessionSettings.UserSettings.ProfileSorting = selectedItem;
+			_settings.SessionSettings.Save();
 		}
 	}
 
@@ -83,8 +92,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 	{
 		if (disposing)
 		{
-			ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
-			ProfileManager.ProfileUpdated -= ProfileManager_ProfileUpdated;
+			_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+			_profileManager.ProfileUpdated -= ProfileManager_ProfileUpdated;
 		}
 
 		base.Dispose(disposing);
@@ -99,7 +108,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		if (!ReadOnly)
 		{
-			SetItems(ProfileManager.Profiles.Skip(1));
+			SetItems(_profileManager.Profiles.Skip(1));
 		}
 	}
 
@@ -152,12 +161,12 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
 			{
 				item.Item.Color = null;
-				ProfileManager.Save((item.Item as Profile)!);
+				_profileManager.Save((item.Item as Profile)!);
 			}
 			else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is Profile profile)
 			{
 				profile.BannerBytes = null;
-				ProfileManager.Save(profile);
+				_profileManager.Save(profile);
 			}
 		}
 
@@ -169,7 +178,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		if (item.Rectangles.Favorite.Contains(e.Location) && !ReadOnly)
 		{
 			item.Item.IsFavorite = !item.Item.IsFavorite;
-			ProfileManager.Save((item.Item as Profile)!);
+			_profileManager.Save((item.Item as Profile)!);
 		}
 		else if (item.Rectangles.Load.Contains(e.Location))
 		{
@@ -188,7 +197,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 		else if (item.Rectangles.Folder.Contains(e.Location) && !ReadOnly)
 		{
-			PlatformUtil.OpenFolder(ProfileManager.GetFileName((item.Item as Profile)!));
+			PlatformUtil.OpenFolder(_profileManager.GetFileName((item.Item as Profile)!));
 		}
 		else if (item.Rectangles.Author.Contains(e.Location))
 		{
@@ -217,7 +226,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 						profile.BannerBytes = (byte[])converter.ConvertTo(img, typeof(byte[]));
 					}
 
-					ProfileManager.Save(profile);
+					_profileManager.Save(profile);
 
 					Invalidate(item.Item);
 				}
@@ -226,12 +235,12 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 	}
 
-	private static async void DownloadProfile(IProfile item)
+	private async void DownloadProfile(IProfile item)
 	{
 		try
 		{
 			downloading = item;
-			await ProfileManager.DownloadProfile(item);
+			await _profileManager.DownloadProfile(item);
 			downloading = null;
 		}
 		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadProfile, form: Program.MainForm)); }
@@ -247,7 +256,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 
 		item.Color = colorDialog.Color;
-		ProfileManager.Save((item as Profile)!);
+		_profileManager.Save((item as Profile)!);
 	}
 
 	private void ShowRightClickMenu(IProfile item)
@@ -258,22 +267,22 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		{
 			  new (Locale.DownloadProfile, "I_Import", !local, action: () => DownloadProfile(item))
 			, new (Locale.ViewThisProfilesPackages, "I_ViewFile", action: () => ShowProfileContents(item))
-			, new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; ProfileManager.Save(item as Profile); })
+			, new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item as Profile); })
 			, new (Locale.ChangeProfileColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
-			, new (Locale.CreateShortcutProfile, "I_Link", local && LocationManager.Platform is Platform.Windows, action: () => ProfileManager.CreateShortcut((item as Profile)!))
-			, new (Locale.OpenProfileFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(ProfileManager.GetFileName((item as Profile)!)))
+			, new (Locale.CreateShortcutProfile, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut((item as Profile)!))
+			, new (Locale.OpenProfileFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName((item as Profile)!)))
 			, new (string.Empty, show: local)
-			, new (Locale.ShareProfile, "I_Share", local && item.ProfileId == 0 && CompatibilityManager.User.SteamId != 0 && downloading != item, action: async () => await ShareProfile(item))
-			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && item.Author == CompatibilityManager.User.SteamId, action: async () => await ProfileManager.SetVisibility((item as Profile)!, !item.Public))
-			, new (Locale.UpdateProfile, "I_Share", local && item.ProfileId != 0 && item.Author == CompatibilityManager.User.SteamId, action: async () => await ShareProfile(item))
-			, new (Locale.UpdateProfile, "I_Refresh", local && item.ProfileId != 0 && item.Author != CompatibilityManager.User.SteamId, action: () => DownloadProfile(item))
+			, new (Locale.ShareProfile, "I_Share", local && item.ProfileId == 0 && _compatibilityManager.User.SteamId != 0 && downloading != item, action: async () => await ShareProfile(item))
+			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && item.Author == _compatibilityManager.User.SteamId, action: async () => await _profileManager.SetVisibility((item as Profile)!, !item.Public))
+			, new (Locale.UpdateProfile, "I_Share", local && item.ProfileId != 0 && item.Author == _compatibilityManager.User.SteamId, action: async () => await ShareProfile(item))
+			, new (Locale.UpdateProfile, "I_Refresh", local && item.ProfileId != 0 && item.Author != _compatibilityManager.User.SteamId, action: () => DownloadProfile(item))
 			, new (Locale.CopyProfileLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
 			, new (string.Empty, show: local)
 			, new (Locale.ProfileReplace, "I_Import", local, action: () => LoadProfile?.Invoke((item as Profile)!))
 			, new (Locale.ProfileMerge, "I_Merge", local, action: () => MergeProfile?.Invoke((item as Profile)!))
 			, new (Locale.ProfileExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke((item as Profile)!))
 			, new (string.Empty)
-			, new (Locale.ProfileDelete, "I_Disposable", local || item.Author == CompatibilityManager.User.SteamId, action: async () => { if(local) { DisposeProfile?.Invoke((item as Profile)!); } else if(await ProfileManager.DeleteOnlineProfile(item)) { base.Remove(item); } })
+			, new (Locale.ProfileDelete, "I_Disposable", local || item.Author == _compatibilityManager.User.SteamId, action: async () => { if(local) { DisposeProfile?.Invoke((item as Profile)!); } else if(await _profileManager.DeleteOnlineProfile(item)) { base.Remove(item); } })
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
@@ -283,7 +292,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 	{
 		Loading = true;
 		downloading = item;
-		await ProfileManager.Share((item as Profile)!);
+		await _profileManager.Share((item as Profile)!);
 		downloading = null;
 		Loading = false;
 	}
@@ -418,7 +427,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			e.Rects.Author = e.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), labelRects, ContentAlignment.TopLeft);
 		}
 
-		if (e.Item == ProfileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentProfile)
 		{
 			using var okIcon = IconManager.GetSmallIcon("I_Ok");
 			e.DrawLabel(Locale.CurrentProfile, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
@@ -433,8 +442,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			e.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
 		}
 
-		var loadText = ReadOnly ? ProfileManager.Profiles.Any(x => x.Name.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfile : Locale.DownloadProfile : Locale.LoadProfile;
-		var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "I_Wait" : ReadOnly && ProfileManager.Profiles.Any(x => x.Name.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "I_Refresh" : "I_Import");
+		var loadText = ReadOnly ? _profileManager.Profiles.Any(x => x.Name.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfile : Locale.DownloadProfile : Locale.LoadProfile;
+		var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "I_Wait" : ReadOnly && _profileManager.Profiles.Any(x => x.Name.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "I_Refresh" : "I_Import");
 		using var importIcon = ReadOnly ? loadIcon.Default : loadIcon.Get(e.Rects.Folder.Height * 3 / 4);
 		var loadSize = SlickButton.GetSize(e.Graphics, importIcon, loadText, Font, null);
 
@@ -497,7 +506,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<IProfile, Rectangles> e)
 	{
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
 		e.HoverState &= ~HoverState.Pressed;
@@ -547,7 +556,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		var x = e.Rects.Text.X;
 
-		if (e.Item == ProfileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentProfile)
 		{
 			e.Rects.Text.X += e.DrawLabel(Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
@@ -616,9 +625,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		else
 		{
 			rects.Favorite = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
-			rects.Folder = rectangle.Pad(0, 0, Padding.Right, 0).Align(CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? new Size(ItemHeight / 2, ItemHeight / 2) : new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
+			rects.Folder = rectangle.Pad(0, 0, Padding.Right, 0).Align(_settings.SessionSettings.UserSettings.LargeItemOnHover ? new Size(ItemHeight / 2, ItemHeight / 2) : new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
 
-			if (CentralManager.SessionSettings.UserSettings.LargeItemOnHover)
+			if (_settings.SessionSettings.UserSettings.LargeItemOnHover)
 			{
 				rects.Exclude = rects.Merge = rects.Folder.Pad(0, rects.Folder.Height, 0, -rects.Folder.Height);
 				rects.Merge.X -= rects.Merge.Width + Padding.Right;
@@ -692,7 +701,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 			if (Load.Contains(location))
 			{
-				text = (instance as ProfileListControl)!.ReadOnly ? ProfileManager.Profiles.Any(x => x.Name.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfileTip : Locale.DownloadProfileTip : Locale.ProfileReplace;
+				text = (instance as ProfileListControl)!.ReadOnly ? Program.Services.GetService<IProfileManager>().Profiles.Any(x => x.Name.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfileTip : Locale.DownloadProfileTip : Locale.ProfileReplace;
 				point = Load.Location;
 				return true;
 			}

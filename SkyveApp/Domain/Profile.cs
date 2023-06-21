@@ -7,6 +7,7 @@ using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -49,11 +50,13 @@ public class Profile : IProfile
 
 	public bool Save()
 	{
-		ProfileManager.GatherInformation(this);
+		var profileManager = Program.Services.GetService<IProfileManager>();
+	
+		profileManager.GatherInformation(this);
 
 		UnsavedChanges = false;
 
-		return ProfileManager.Save(this);
+		return profileManager.Save(this);
 	}
 
 	public override string ToString()
@@ -105,8 +108,8 @@ public class Profile : IProfile
 
 		[JsonIgnore, CloneIgnore] public bool IsMod { get; protected set; }
 		[JsonIgnore, CloneIgnore] public bool Workshop => SteamId != 0;
-		[JsonIgnore, CloneIgnore] public string Folder => RelativePath is null ? string.Empty : IsMod ? ProfileManager.ToLocalPath(RelativePath) : Path.GetDirectoryName(ProfileManager.ToLocalPath(RelativePath));
-		[JsonIgnore, CloneIgnore] public Package? Package => CentralManager.GetPackage(SteamId);
+		[JsonIgnore, CloneIgnore] public string Folder => RelativePath is null ? string.Empty : IsMod ? Program.Services.GetService<IProfileManager>().ToLocalPath(RelativePath) : Path.GetDirectoryName(Program.Services.GetService<IProfileManager>().ToLocalPath(RelativePath));
+		[JsonIgnore, CloneIgnore] public Package? Package => Program.Services.GetService<IContentManager>().GetPackage(SteamId);
 		[JsonIgnore, CloneIgnore] public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId);
 		[JsonIgnore, CloneIgnore] public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? new[] { new TagItem(Enums.TagSource.InGame, IsMod ? "Mod" : "Asset") };
 		[JsonIgnore, CloneIgnore] public Bitmap? IconImage => WorkshopInfo?.IconImage;
@@ -134,7 +137,7 @@ public class Profile : IProfile
 		{
 			SteamId = asset.SteamId;
 			Name = asset.Name;
-			RelativePath = ProfileManager.ToRelativePath(asset.FileName);
+			RelativePath = Program.Services.GetService<IProfileManager>().ToRelativePath(asset.FileName);
 		}
 
 		public Asset()
@@ -173,7 +176,7 @@ public class Profile : IProfile
 			SteamId = mod.SteamId;
 			Name = mod.Name;
 			Enabled = mod.IsEnabled;
-			RelativePath = ProfileManager.ToRelativePath(mod.Folder);
+			RelativePath = Program.Services.GetService<IProfileManager>().ToRelativePath(mod.Folder);
 		}
 
 		public Mod(IPackage package)
@@ -182,7 +185,7 @@ public class Profile : IProfile
 			SteamId = package.SteamId;
 			Name = package.Name;
 			Enabled = true;
-			RelativePath = LocationManager.Combine(ProfileManager.WS_CONTENT_PATH, package.SteamId.ToString());
+			RelativePath = CrossIO.Combine(ProfileManager.WS_CONTENT_PATH, package.SteamId.ToString());
 		}
 
 		public Mod()

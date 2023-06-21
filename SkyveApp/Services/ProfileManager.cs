@@ -61,13 +61,20 @@ public class ProfileManager : IProfileManager
     private readonly ISettings _settings;
     private readonly IContentManager _contentManager;
     private readonly ICompatibilityManager _compatibilityManager;
+    private readonly INotifier _notifier;
+    private readonly IModUtil _modUtil;
+    private readonly IAssetUtil _assetUtil;
 
-	public ProfileManager(ILogger logger, ILocationManager locationManager, ISettings settings, IContentManager contentManager, ICompatibilityManager compatibilityManager)
+	public ProfileManager(ILogger logger, ILocationManager locationManager, ISettings settings, IContentManager contentManager, ICompatibilityManager compatibilityManager, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil)
 	{
 		_logger = logger;
 		_locationManager = locationManager;
 		_settings = settings;
 		_contentManager = contentManager;
+		_compatibilityManager = compatibilityManager;
+		_notifier = notifier;
+		_modUtil = modUtil;
+		_assetUtil = assetUtil;
 
 		try
 		{
@@ -105,7 +112,6 @@ public class ProfileManager : IProfileManager
 			new BackgroundAction(ConvertLegacyProfiles).Run();
 			new BackgroundAction(LoadAllProfiles).Run();
 		}
-		_compatibilityManager = compatibilityManager;
 	}
 
 	private Profile? LoadCurrentProfile()
@@ -297,8 +303,8 @@ public class ProfileManager : IProfileManager
                 ApplyingProfile = false;
                 disableAutoSave = true;
 
-                ModsUtil.SavePendingValues();
-                AssetsUtil.SaveChanges();
+                _modUtil.SavePendingValues();
+                _assetUtil.SaveChanges();
 
                 disableAutoSave = false;
 
@@ -357,8 +363,8 @@ public class ProfileManager : IProfileManager
                 ApplyingProfile = false;
                 disableAutoSave = true;
 
-                ModsUtil.SavePendingValues();
-                AssetsUtil.SaveChanges();
+				_modUtil.SavePendingValues();
+                _assetUtil.SaveChanges();
 
                 disableAutoSave = false;
 
@@ -485,13 +491,13 @@ public class ProfileManager : IProfileManager
                     UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
                 }
 
-                AssetsUtil.SetDlcsExcluded(profile.ExcludedDLCs.ToArray());
+				_assetUtil.SetDlcsExcluded(profile.ExcludedDLCs.ToArray());
 
                 ApplyingProfile = false;
                 disableAutoSave = true;
 
-                ModsUtil.SavePendingValues();
-                AssetsUtil.SaveChanges();
+				_modUtil.SavePendingValues();
+                _assetUtil.SaveChanges();
 
                 profile.LastUsed = DateTime.Now;
                 Save(profile);
@@ -526,7 +532,7 @@ public class ProfileManager : IProfileManager
 
 	public void TriggerAutoSave()
     {
-        if (!disableAutoSave && !ApplyingProfile && _contentManager.IsContentLoaded && !ContentUtil.BulkUpdating)
+        if (!disableAutoSave && !ApplyingProfile && _notifier.IsContentLoaded && !_notifier.BulkUpdating)
         {
             Task.Run(() =>
             {
@@ -580,12 +586,12 @@ public class ProfileManager : IProfileManager
         }
         catch { }
 
-        if (_contentManager.IsContentLoaded)
+        if (_notifier.IsContentLoaded)
         {
             CentralManager_ContentLoaded();
         }
 
-		_contentManager.ContentLoaded += CentralManager_ContentLoaded;
+		_notifier.ContentLoaded += CentralManager_ContentLoaded;
 
         ProfilesLoaded = true;
 
@@ -663,7 +669,7 @@ public class ProfileManager : IProfileManager
 
     public void GatherInformation(Profile? profile)
     {
-        if (profile == null || profile.Temporary || !_contentManager.IsContentLoaded)
+        if (profile == null || profile.Temporary || !_notifier.IsContentLoaded)
         {
             return;
         }
@@ -675,7 +681,7 @@ public class ProfileManager : IProfileManager
 
     public bool Save(Profile? profile, bool forced = false)
     {
-        if (profile == null || !forced && (profile.Temporary || !_contentManager.IsContentLoaded))
+        if (profile == null || !forced && (profile.Temporary || !_notifier.IsContentLoaded))
         {
             return false;
         }
@@ -722,15 +728,15 @@ public class ProfileManager : IProfileManager
 
     internal Mod GetMod(Profile.Mod mod)
     {
-        return ModsUtil.FindMod(ToLocalPath(mod.RelativePath));
+        return _modUtil.FindMod(ToLocalPath(mod.RelativePath));
     }
 
     internal Asset GetAsset(Profile.Asset asset)
     {
-        return AssetsUtil.GetAsset(ToLocalPath(asset.RelativePath));
+        return _assetUtil.GetAsset(ToLocalPath(asset.RelativePath));
     }
 
-    internal string ToRelativePath(string? localPath)
+    public string ToRelativePath(string? localPath)
     {
         if (localPath is null or "")
         {
@@ -744,7 +750,7 @@ public class ProfileManager : IProfileManager
             .FormatPath();
     }
 
-    internal string ToLocalPath(string? relativePath)
+	public string ToLocalPath(string? relativePath)
     {
         if (relativePath is null or "")
         {
@@ -1114,12 +1120,12 @@ public class ProfileManager : IProfileManager
         }
     }
 
-    internal string GetFileName(Profile profile)
+    public string GetFileName(Profile profile)
     {
         return CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{profile.Name}.json");
     }
 
-    internal void CreateShortcut(Profile item)
+    public void CreateShortcut(Profile item)
     {
         try
         {
@@ -1135,7 +1141,7 @@ public class ProfileManager : IProfileManager
         }
     }
 
-    internal async Task Share(Profile item)
+    public async Task Share(Profile item)
     {
         try
         {
@@ -1166,7 +1172,7 @@ public class ProfileManager : IProfileManager
         catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, item.ProfileId == 0 ? Locale.FailedToUploadProfile : Locale.FailedToUpdateProfile, form: Program.MainForm)); }
     }
 
-    internal async Task<bool> DownloadProfile(IProfile item)
+    public async Task<bool> DownloadProfile(IProfile item)
     {
         try
         {
@@ -1197,7 +1203,7 @@ public class ProfileManager : IProfileManager
         }
     }
 
-    internal async Task<bool> DownloadProfile(string link)
+    public async Task<bool> DownloadProfile(string link)
     {
         try
         {
@@ -1223,7 +1229,7 @@ public class ProfileManager : IProfileManager
         }
     }
 
-    internal async Task<bool> SetVisibility(Profile profile, bool @public)
+    public async Task<bool> SetVisibility(Profile profile, bool @public)
     {
         try
         {
@@ -1244,7 +1250,7 @@ public class ProfileManager : IProfileManager
         catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToUpdateProfile, form: Program.MainForm)); return false; }
     }
 
-    internal async Task<bool> DeleteOnlineProfile(IProfile profile)
+	public async Task<bool> DeleteOnlineProfile(IProfile profile)
     {
         try
         {

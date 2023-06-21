@@ -46,7 +46,7 @@ internal class MacAssemblyUtil
 					return false;
 			}
 
-			if (LocationManager.Platform is Platform.MacOSX && MacOsResolve(dllPath, out version))
+			if (CrossIO.CurrentPlatform is Platform.MacOSX && MacOsResolve(dllPath, out version))
 			{
 				return true;
 			}
@@ -62,7 +62,7 @@ internal class MacAssemblyUtil
 		Log.Debug("Resolving " + dllPath);
 #endif
 		version = null;
-		var process = IOUtil.Execute(LocationManager.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
+		var process = IOUtil.Execute(CrossIO.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
 		{
 			dllPath,
 			LocationManager.ManagedDLL,

@@ -1,5 +1,7 @@
 ﻿using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+
 using SlickControls;
 
 using System;
@@ -13,7 +15,7 @@ internal class Image : Component
 	{
 		if (!string.IsNullOrEmpty(Text))
 		{
-			var image = ImageManager.GetImage(Text, true, BBCode.EscapeImageUrl(Text!)).Result;
+			var image = Program.Services.GetService<IImageManager>().GetImage(Text, true, BBCode.EscapeImageUrl(Text!)).Result;
 
 			if (image != null)
 			{

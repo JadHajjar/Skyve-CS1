@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -42,11 +43,11 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	[JsonIgnore] public string? Name => Title;
 	[JsonIgnore] public bool IsMod => WorkshopTags?.Contains("Mod") ?? false;
 	[JsonIgnore] public string? IconUrl => PreviewURL;
-	[JsonIgnore] public Bitmap? IconImage => ImageManager.GetImage(IconUrl, true).Result;
-	[JsonIgnore] public Bitmap? AuthorIconImage => ImageManager.GetImage(Author?.AvatarUrl, true).Result;
+	[JsonIgnore] public Bitmap? IconImage => Program.Services.GetService<ImageManager>().GetImage(IconUrl, true).Result;
+	[JsonIgnore] public Bitmap? AuthorIconImage => Program.Services.GetService<ImageManager>().GetImage(Author?.AvatarUrl, true).Result;
 	[JsonIgnore] public bool IsIncluded { get => Package?.IsIncluded ?? false; set { if (Package is not null) { Package.IsIncluded = value; } } }
 	[JsonIgnore] public bool Workshop => true;
-	[JsonIgnore] public Package? Package => CentralManager.GetPackage(SteamId);
+	[JsonIgnore] public Package? Package => Program.Services.GetService<IContentManager>().GetPackage(SteamId);
 	[JsonIgnore] public long FileSize => ServerSize;
 	[JsonIgnore] public string Folder => Package?.Folder ?? string.Empty;
 
@@ -73,7 +74,7 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 				}
 			}
 
-			var findItTags = AssetsUtil.GetFindItTags(this);
+			var findItTags = Program.Services.GetService<IAssetUtil>().GetFindItTags(this);
 
 			foreach (var item in findItTags)
 			{

@@ -1,8 +1,10 @@
 using Extensions;
 
+using SkyveApp;
 using SkyveApp.Domain;
 using SkyveApp.Legacy;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -25,18 +27,22 @@ public class LoadOrderProfile
 
 	static string? FromFinalPath(string? path)
 	{
+		var locationManager = Program.Services.GetService<ILocationManager>();
+
 		return path
-			?.Replace(LocationManager.AppDataPath, LOCAL_APP_DATA_PATH)
-			?.Replace(LocationManager.GamePath, CITIES_PATH)
-			?.Replace(LocationManager.WorkshopContentPath, WS_CONTENT_PATH);
+			?.Replace(locationManager.AppDataPath, LOCAL_APP_DATA_PATH)
+			?.Replace(locationManager.GamePath, CITIES_PATH)
+			?.Replace(locationManager.WorkshopContentPath, WS_CONTENT_PATH);
 	}
 
 	static string? ToFinalPath(string? path)
 	{
+		var locationManager = Program.Services.GetService<ILocationManager>();
+
 		return path
-			?.Replace(LOCAL_APP_DATA_PATH, LocationManager.AppDataPath)
-			?.Replace(CITIES_PATH, LocationManager.GamePath)
-			?.Replace(WS_CONTENT_PATH, LocationManager.WorkshopContentPath);
+			?.Replace(LOCAL_APP_DATA_PATH, locationManager.AppDataPath)
+			?.Replace(CITIES_PATH, locationManager.GamePath)
+			?.Replace(WS_CONTENT_PATH, locationManager.WorkshopContentPath);
 	}
 
 	public class Mod : IProfileItem
@@ -186,7 +192,7 @@ public class LoadOrderProfile
 		profile.LsmSettings.LoadEnabled = LoadEnabled;
 		profile.LsmSettings.LoadUsed = LoadUsed;
 		profile.LsmSettings.SkipFile = SkipFilePathFinal;
-		profile.LsmSettings.UseSkipFile = ExtensionClass.FileExists(SkipFilePathFinal);
+		profile.LsmSettings.UseSkipFile = CrossIO.FileExists(SkipFilePathFinal);
 
 		return profile;
 	}

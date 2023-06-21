@@ -4,6 +4,7 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System;
@@ -22,7 +23,7 @@ public class Asset : IPackage
 		FileSize = new FileInfo(FileName).Length;
 		LocalTime = File.GetLastWriteTimeUtc(FileName);
 
-		if (AssetsUtil.AssetInfoCache.TryGetValue(FileName, out var asset))
+		if (Program.Services.GetService<IAssetUtil>().AssetInfoCache.TryGetValue(FileName, out var asset))
 		{
 			Name = asset.Name;
 			Description = asset.Description;
@@ -42,7 +43,7 @@ public class Asset : IPackage
 	public string? Description { get; }
 	public DateTime LocalTime { get; }
 	public string[] AssetTags { get; }
-	public bool IsIncluded { get => AssetsUtil.IsIncluded(this); set => AssetsUtil.SetIncluded(this, value); }
+	public bool IsIncluded { get => Program.Services.GetService<IAssetUtil>().IsIncluded(this); set => Program.Services.GetService<IAssetUtil>().SetIncluded(this, value); }
 	public IEnumerable<TagItem> Tags => Package.Tags.Concat(GetAssetTags());
 	public string Folder => ((IPackage)Package).Folder;
 	public bool IsMod => ((IPackage)Package).IsMod;
@@ -75,7 +76,7 @@ public class Asset : IPackage
 			yield return new(TagSource.InGame, item);
 		}
 
-		foreach (var item in AssetsUtil.GetFindItTags(this))
+		foreach (var item in Program.Services.GetService<IAssetUtil>().GetFindItTags(this))
 		{
 			yield return new(TagSource.FindIt, item.ToCapital(false));
 		}

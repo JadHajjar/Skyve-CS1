@@ -30,15 +30,21 @@ internal class ContentUtil : IContentUtil
 	private readonly ILocationManager _locationManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IProfileManager _profileManager;
+	private readonly IModUtil _modUtil;
+	private readonly IAssetUtil _assetUtil;
 	private readonly ILogger _logger;
+	private readonly INotifier _notifier;
 
-	public ContentUtil(IContentManager contentManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, IProfileManager profileManager, ILogger logger)
+	public ContentUtil(IContentManager contentManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, IProfileManager profileManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil)
 	{
 		_contentManager = contentManager;
 		_locationManager = locationManager;
 		_compatibilityManager = compatibilityManager;
 		_profileManager = profileManager;
+		_modUtil = modUtil;
+		_assetUtil = assetUtil;
 		_logger = logger;
+		_notifier = notifier;
 
 		ISave.Load(out List<ModDllCache> cache, CACHE_FILENAME);
 
@@ -53,7 +59,7 @@ internal class ContentUtil : IContentUtil
 			}
 		}
 
-		_contentManager.ContentLoaded += SaveDllCache;
+		_notifier.ContentLoaded += SaveDllCache;
 	}
 
 	public IEnumerable<string> GetSubscribedItemPaths()
@@ -253,8 +259,8 @@ internal class ContentUtil : IContentUtil
 
 			var package = new Package(folder, builtIn, workshop);
 
-			package.Assets = AssetsUtil.GetAssets(package, withSubDirectories).ToArray();
-			package.Mod = expectAssets ? null : ModsUtil.GetMod(package);
+			package.Assets = _assetUtil.GetAssets(package, withSubDirectories).ToArray();
+			package.Mod = expectAssets ? null : _modUtil.GetMod(package);
 			package.FileSize = GetTotalSize(package.Folder);
 			package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
@@ -302,8 +308,8 @@ internal class ContentUtil : IContentUtil
 
 		var package = new Package(path, builtIn, workshop);
 
-		package.Assets = AssetsUtil.GetAssets(package, !self).ToArray();
-		package.Mod = ModsUtil.GetMod(package);
+		package.Assets = _assetUtil.GetAssets(package, !self).ToArray();
+		package.Mod = _modUtil.GetMod(package);
 		package.FileSize = GetTotalSize(package.Folder);
 		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
@@ -318,17 +324,17 @@ internal class ContentUtil : IContentUtil
 			return;
 		}
 
-		package.Assets = AssetsUtil.GetAssets(package, !self).ToArray();
-		package.Mod = ModsUtil.GetMod(package);
+		package.Assets = _assetUtil.GetAssets(package, !self).ToArray();
+		package.Mod = _modUtil.GetMod(package);
 		package.FileSize = GetTotalSize(package.Folder);
 		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
 		if (!package.Workshop && package.Mod is null)
 		{
-			_contentManager.OnContentLoaded();
+			_notifier.OnContentLoaded();
 		}
 
-		_contentManager.OnInformationUpdated();
+		_notifier.OnInformationUpdated();
 	}
 
 	private bool IsDirectoryEmpty(string path)
@@ -365,18 +371,6 @@ internal class ContentUtil : IContentUtil
 		PackageWatcher.Create(_locationManager.ModsPath, false, false);
 
 		PackageWatcher.Create(_locationManager.WorkshopContentPath, false, true);
-	}
-
-	public void CreateShortcut()
-	{
-		try
-		{
-			ExtensionClass.CreateShortcut(CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Skyve CS-I.lnk"), Program.ExecutablePath);
-		}
-		catch (Exception ex)
-		{
-			_logger.Exception(ex, "Failed to create shortcut");
-		}
 	}
 
 	public void DeleteAll(IEnumerable<ulong> ids)
@@ -542,9 +536,9 @@ internal class ContentUtil : IContentUtil
 
 		BulkUpdating = false;
 
-		_contentManager.OnInformationUpdated();
-		ModsUtil.SavePendingValues();
-		AssetsUtil.SaveChanges();
+		_notifier.OnInformationUpdated();
+		_modUtil.SavePendingValues();
+		_assetUtil.SaveChanges();
 		_profileManager.TriggerAutoSave();
 
 		IEnumerable<IPackage> getPackageContents(Package package)

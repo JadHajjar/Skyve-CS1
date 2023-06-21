@@ -33,16 +33,20 @@ internal class SubscriptionsManager : ISubscriptionsManager
     private readonly IContentManager _contentManager;
     private readonly ILocationManager _locationManager;
     private readonly ICitiesManager _citiesManager;
+    private readonly IContentUtil _contentUtil;
     private readonly ISettings _settings;
     private readonly ILogger _logger;
+    private readonly INotifier _notifier;
 
-	public SubscriptionsManager(IContentManager contentManager, ILocationManager locationManager, ICitiesManager citiesManager, ISettings settings, ILogger logger)
+	public SubscriptionsManager(IContentManager contentManager, ILocationManager locationManager, ICitiesManager citiesManager, ISettings settings, ILogger logger, IContentUtil contentUtil, INotifier notifier)
 	{
 		_contentManager = contentManager;
 		_locationManager = locationManager;
 		_citiesManager = citiesManager;
+		_contentUtil = contentUtil;
 		_settings = settings;
 		_logger = logger;
+		_notifier = notifier;
 
 		_filePath = Path.Combine(_locationManager.SkyveAppDataPath, "SubscriptionTransfer.xml");
 		_delayedDownloadsAction = new(4000, RunDownload);
@@ -93,7 +97,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
             {
                 if (unsub)
                 {
-                    ContentUtil.DeleteAll(ids);
+					_contentUtil.DeleteAll(ids);
                 }
                 else
                 {
@@ -219,7 +223,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
         SubscriptionTransferWatcher.EnableRaisingEvents = true;
 
-        _contentManager.ContentLoaded += CentralManager_ContentLoaded;
+		_notifier.ContentLoaded += CentralManager_ContentLoaded;
     }
 
     private void CentralManager_ContentLoaded()
@@ -257,7 +261,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
             if (!ids.Contains(name) && (!CrossIO.FileExists(_filePath) || !SubscribingTo.Any(x => x.ToString() == name)))
             {
-                ContentUtil.DeleteAll(folder);
+                _contentUtil.DeleteAll(folder);
             }
             else
             {
@@ -273,7 +277,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
         }
     }
 
-    internal void CancelPendingItems()
+    public void CancelPendingItems()
     {
         if (CrossIO.FileExists(_filePath))
         {

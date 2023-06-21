@@ -1,5 +1,6 @@
 using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ public class SettingsFile
 	public string fileName
 	{
 		get => Path.GetFileNameWithoutExtension(m_PathName);
-		set => m_PathName = LocationManager.Combine(LocationManager.AppDataPath, Path.ChangeExtension(value, extension));
+		set => m_PathName = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, Path.ChangeExtension(value, extension));
 	}
 
 	public string systemFileName
@@ -57,7 +58,7 @@ public class SettingsFile
 		get => Path.GetFileNameWithoutExtension(m_PathName);
 		set
 		{
-			m_PathName = LocationManager.Combine(LocationManager.GamePath, Path.ChangeExtension(value, extension));
+			m_PathName = CrossIO.Combine(Program.Services.GetService<ILocationManager>().GamePath, Path.ChangeExtension(value, extension));
 			isSystem = true;
 		}
 	}
@@ -145,7 +146,7 @@ public class SettingsFile
 		}
 		//if (!this.m_UseCloud)
 		{
-			return ExtensionClass.FileExists(pathName);
+			return CrossIO.FileExists(pathName);
 		}
 		//return PlatformService.cloud.Exists(this.pathName);
 	}
@@ -227,7 +228,7 @@ public class SettingsFile
 			}
 			binaryWriter.Flush();
 		}
-		catch (Exception ex) { ex.Log(); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, ""); }
 	}
 
 	private bool ValidateID(char[] id)
@@ -319,7 +320,7 @@ public class SettingsFile
 			}
 			throw new Exception("Setting file '" + fileName + "' header mismatch. The internal format of settings files has changed.");
 		}
-		catch (Exception ex) { ex.Log(); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex,""); }
 	}
 
 	internal void Load()
@@ -330,18 +331,20 @@ public class SettingsFile
 			{
 				using var stream = CreateReadStream();
 
+				var log = Program.Services.GetService<ILogger>();
+
 				if (stream != null)
 				{
 					Deserialize(stream);
-					Log.Info(message: "Loaded " + m_PathName, false);
+					log.Info(message: "Loaded " + m_PathName);
 				}
 				else
 				{
-					Log.Warning(message: "Failed to load " + m_PathName, false);
+					log.Warning(message: "Failed to load " + m_PathName);
 				}
 			}
 		}
-		catch (Exception ex) { ex.Log(); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, ""); }
 	}
 
 	internal void Save()
@@ -353,19 +356,22 @@ public class SettingsFile
 				lock (m_Saving)
 				{
 					using var stream = CreateWriteStream();
+
+					var log = Program.Services.GetService<ILogger>();
+
 					if (stream != null)
 					{
 						Serialize(stream);
-						Log.Info(message: "Saved " + m_PathName);
+						log.Info(message: "Saved " + m_PathName);
 					}
 					else
 					{
-						Log.Warning(message: "Failed to save " + m_PathName, false);
+						log.Warning(message: "Failed to save " + m_PathName);
 					}
 				}
 			}
 		}
-		catch (Exception ex) { ex.Log(); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, ""); }
 		finally
 		{
 			isDirty = false;
@@ -423,7 +429,7 @@ public class SettingsFile
 		if (!m_SettingsStringValues.TryGetValue(name, out var a) || a != val)
 		{
 #if DEBUG
-			Log.Debug("Setting " + name + " updated to " + val);
+			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsStringValues[name] = val;
 			MarkDirty();
@@ -451,7 +457,7 @@ public class SettingsFile
 			if (!m_SettingsBoolValues.TryGetValue(name, out var flag) || flag != val)
 			{
 #if DEBUG
-				Log.Debug("Setting " + name + " updated to " + val);
+				Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 				m_SettingsBoolValues[name] = val;
 				MarkDirty();
@@ -474,7 +480,7 @@ public class SettingsFile
 		if (!m_SettingsIntValues.TryGetValue(name, out var num) || num != val)
 		{
 #if DEBUG
-			Log.Debug("Setting " + name + " updated to " + val);
+			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsIntValues[name] = val;
 			MarkDirty();
@@ -496,7 +502,7 @@ public class SettingsFile
 		if (!m_SettingsInputKeyValues.TryGetValue(name, out var value) || value != val)
 		{
 #if DEBUG
-			Log.Debug("Setting " + name + " updated to " + val);
+			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsInputKeyValues[name] = val;
 			MarkDirty();
@@ -519,7 +525,7 @@ public class SettingsFile
 				Math.Abs(m_SettingsFloatValues[name] - val) > float.Epsilon)
 		{
 #if DEBUG
-			Log.Debug("Setting " + name + " updated to " + val);
+			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsFloatValues[name] = val;
 			MarkDirty();

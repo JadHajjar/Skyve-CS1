@@ -11,11 +11,8 @@ using System.Threading.Tasks;
 namespace SkyveApp.Services.Interfaces;
 public interface IContentUtil
 {
-	bool BulkUpdating { get; set; }
-
 	void ClearDllCache();
 	void ContentUpdated(string path, bool builtIn, bool workshop, bool self);
-	void CreateShortcut();
 	void DeleteAll(IEnumerable<ulong> ids);
 	void DeleteAll(string folder);
 	bool? GetDllModCache(string path, out Version? version);

@@ -13,7 +13,6 @@ public interface IModLogicManager
 	void Analyze(Mod mod);
 	void ApplyRequiredStates();
 	bool AreMultipleLOMsPresent();
-	IEnumerable<IPackage> GetPackagesThatReference(IPackage package);
 	bool IsForbidden(Mod mod);
 	bool IsPseudoMod(IPackage package);
 	bool IsRequired(Mod mod);

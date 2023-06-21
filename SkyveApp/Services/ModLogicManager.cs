@@ -34,12 +34,10 @@ internal class ModLogicManager : IModLogicManager
     }
 
     private readonly ISettings _settings;
-    private readonly IContentManager _contentManager;
 
-	public ModLogicManager(ISettings settings, IContentManager contentManager)
+	public ModLogicManager(ISettings settings)
 	{
 		_settings = settings;
-		_contentManager = contentManager;
 	}
 
 	public void Analyze(Mod mod)
@@ -127,59 +125,5 @@ internal class ModLogicManager : IModLogicManager
 	public bool AreMultipleLOMsPresent()
     {
         return (_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.Count ?? 0) > 1;
-    }
-
-	public IEnumerable<IPackage> GetPackagesThatReference(IPackage package)
-    {
-        var packages = _settings.SessionSettings.UserSettings.ShowAllReferencedPackages ? _contentManager.Packages.ToList() : _contentManager.Packages.AllWhere(x => x.IsIncluded);
-
-        foreach (var p in packages)
-        {
-            var cr = CompatibilityUtil.GetPackageData(p);
-
-            if (cr is null)
-            {
-                //if (p.RequiredPackages is not null)
-                //{
-                //	foreach (var item in p.RequiredPackages)
-                //	{
-                //		if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
-                //		{
-                //			yield return p;
-
-                //			continue;
-                //		}
-                //	}
-                //}
-
-                continue;
-            }
-
-            if (cr.Interactions.ContainsKey(InteractionType.RequiredPackages))
-            {
-                foreach (var item in cr.Interactions[InteractionType.RequiredPackages].SelectMany(x => x.Interaction.Packages))
-                {
-                    if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
-                    {
-                        yield return p;
-
-                        continue;
-                    }
-                }
-            }
-
-            if (cr.Interactions.ContainsKey(InteractionType.OptionalPackages))
-            {
-                foreach (var item in cr.Interactions[InteractionType.OptionalPackages].SelectMany(x => x.Interaction.Packages))
-                {
-                    if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
-                    {
-                        yield return p;
-
-                        continue;
-                    }
-                }
-            }
-        }
     }
 }

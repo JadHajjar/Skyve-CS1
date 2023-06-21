@@ -6,6 +6,7 @@ using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ public class CompatibilityInfo
 	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<PackageLink> Links { get; set; }
 	public List<ReportItem> ReportItems { get; set; }
-	[JsonIgnore] public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => CompatibilityManager.IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
+	[JsonIgnore] public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => Program.Services.GetService<ICompatibilityManager>().IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 
 	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
 	{

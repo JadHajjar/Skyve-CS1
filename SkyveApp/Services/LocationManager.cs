@@ -131,7 +131,7 @@ internal class LocationManager : ILocationManager
 
                 if (Platform is Platform.Windows)
                 {
-                    ContentUtil.CreateShortcut();
+                    CreateShortcut();
                 }
             }
         }
@@ -266,5 +266,17 @@ internal class LocationManager : ILocationManager
     {
         var field = typeof(Path).GetField(nameof(Path.DirectorySeparatorChar), BindingFlags.Static | BindingFlags.Public);
         field.SetValue(null, CrossIO.PathSeparator[0]);
-    }
+	}
+
+	public void CreateShortcut()
+	{
+		try
+		{
+			ExtensionClass.CreateShortcut(CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Skyve CS-I.lnk"), Program.ExecutablePath);
+		}
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Failed to create shortcut");
+		}
+	}
 }

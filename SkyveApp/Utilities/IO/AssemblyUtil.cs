@@ -146,7 +146,7 @@ public static class AssemblyUtil
 	internal static Assembly? ResolveInterface(object sender, ResolveEventArgs args)
 	{
 		var name = new AssemblyName(args.Name).Name + ".dll";
-		var managedPath = LocationManager.Combine(LocationManager.ManagedDLL, name);
+		var managedPath = CrossIO.Combine(LocationManager.ManagedDLL, name);
 
 		if (File.Exists(managedPath))
 		{
@@ -159,8 +159,8 @@ public static class AssemblyUtil
 	internal static Assembly? ReflectionResolveInterface(object sender, ResolveEventArgs args)
 	{
 		var name = new AssemblyName(args.Name).Name + ".dll";
-		var path = LocationManager.Combine(Directory.GetParent(args.RequestingAssembly.Location).FullName, name);
-		var managedPath = LocationManager.Combine(LocationManager.ManagedDLL, name);
+		var path = CrossIO.Combine(Directory.GetParent(args.RequestingAssembly.Location).FullName, name);
+		var managedPath = CrossIO.Combine(LocationManager.ManagedDLL, name);
 
 		if (File.Exists(path))
 		{

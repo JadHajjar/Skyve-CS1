@@ -6,6 +6,8 @@ using SkyveApp.Domain.Utilities;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
+using SkyveShared;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,30 +20,21 @@ internal class ContentManager : IContentManager
 	private Dictionary<ulong, Package>? indexedPackages;
 	private List<Package>? packages;
 
-	private readonly DelayedAction _delayedPackageInformationUpdated;
-	private readonly DelayedAction _delayedPackageInclusionUpdated;
-	private readonly DelayedAction _delayedContentLoaded;
-
 	private readonly IModLogicManager _modLogicManager;
-	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly ISettings _settings;
 	private readonly ILogger _logger;
 	private readonly IUpdateManager _updateManager;
+	private readonly INotifier _notifier;
 
-	public ContentManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, ISettings settings, ILogger logger, IUpdateManager updateManager)
+	public ContentManager(IModLogicManager modLogicManager, ISettings settings, ILogger logger, IUpdateManager updateManager, INotifier notifier)
 	{
-		_delayedContentLoaded = new(300, () => ContentLoaded?.Invoke());
-		_delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
-		_delayedPackageInclusionUpdated = new(300, () => PackageInclusionUpdated?.Invoke());
-
 		_modLogicManager = modLogicManager;
-		_compatibilityManager = compatibilityManager;
 		_settings = settings;
 		_logger = logger;
 		_updateManager = updateManager;
+		_notifier = notifier;
 	}
 
-	public bool IsContentLoaded { get; private set; }
 	public IEnumerable<Package> Packages
 	{
 		get
@@ -107,71 +100,6 @@ internal class ContentManager : IContentManager
 		}
 	}
 
-	public event Action? ContentLoaded;
-	public event Action? PackageInformationUpdated;
-	public event Action? PackageInclusionUpdated;
-
-	public void AnalyzePackages(List<Package> content)
-	{
-		var firstTime = _updateManager.IsFirstTime();
-		var blackList = new List<Package>();
-
-		foreach (var package in content)
-		{
-			if (_compatibilityManager.IsBlacklisted(package))
-			{
-				blackList.Add(package);
-				continue;
-			}
-
-			if (!firstTime)
-			{
-				HandleNewPackage(package);
-			}
-
-			if (package.Mod is not null)
-			{
-				if (!_settings.SessionSettings.UserSettings.AdvancedIncludeEnable)
-				{
-					if (!package.Mod.IsEnabled && package.Mod.IsIncluded)
-					{
-						package.Mod.IsIncluded = false;
-					}
-				}
-
-				if (_settings.SessionSettings.UserSettings.LinkModAssets && package.Assets is not null)
-				{
-					foreach (var asset in package.Assets)
-					{
-						asset.IsIncluded = package.Mod.IsIncluded;
-					}
-				}
-
-				_modLogicManager.Analyze(package.Mod);
-			}
-		}
-
-		content.RemoveAll(x => blackList.Contains(x));
-
-		if (blackList.Count > 0)
-		{
-			BlackListTransfer.SendList(blackList.Select(x => x.SteamId), false);
-		}
-		else if (CrossIO.FileExists(BlackListTransfer.FilePath))
-		{
-			CrossIO.DeleteFile(BlackListTransfer.FilePath);
-		}
-
-		foreach (var item in blackList)
-		{
-			ContentUtil.DeleteAll(item.Folder);
-		}
-
-		_logger.Info($"Applying analysis results..");
-
-		_modLogicManager.ApplyRequiredStates();
-	}
-
 	public void HandleNewPackage(Package package)
 	{
 		if (_updateManager.IsPackageKnown(package))
@@ -223,8 +151,8 @@ internal class ContentManager : IContentManager
 			_modLogicManager.Analyze(package.Mod);
 		}
 
-		OnInformationUpdated();
-		OnContentLoaded();
+		_notifier.OnInformationUpdated();
+		_notifier.OnContentLoaded();
 	}
 
 	public void RemovePackage(Package package)
@@ -237,35 +165,10 @@ internal class ContentManager : IContentManager
 			_modLogicManager.ModRemoved(package.Mod);
 		}
 
-		OnContentLoaded();
-		_delayedWorkshopInfoUpdated.Run();
+		_notifier.OnContentLoaded();
+		_notifier.OnWorkshopInfoUpdated();
 
-		ContentUtil.DeleteAll(package.Folder);
-	}
-
-	public void OnInformationUpdated()
-	{
-		if (IsContentLoaded)
-		{
-			_delayedPackageInformationUpdated.Run();
-		}
-	}
-
-	public void OnInclusionUpdated()
-	{
-		if (IsContentLoaded)
-		{
-			_delayedPackageInclusionUpdated.Run();
-			_delayedPackageInformationUpdated.Run();
-		}
-	}
-
-
-	public void OnContentLoaded()
-	{
-		AssetsUtil.BuildAssetIndex();
-
-		_delayedContentLoaded.Run();
+		Program.Services.GetService<IContentUtil>().DeleteAll(package.Folder);
 	}
 
 	public Package? GetPackage(ulong steamId)
@@ -276,5 +179,11 @@ internal class ContentManager : IContentManager
 		}
 
 		return null;
+	}
+
+	public void SetPackages(List<Package> content)
+	{
+		packages = content;
+		indexedPackages = content.Where(x => x.SteamId != 0).ToDictionary(x => x.SteamId);
 	}
 }

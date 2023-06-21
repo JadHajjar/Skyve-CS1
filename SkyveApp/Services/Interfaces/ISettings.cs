@@ -10,4 +10,5 @@ namespace SkyveApp.Services.Interfaces;
 public interface ISettings
 {
 	SessionSettings SessionSettings { get; }
+	FolderSettings FolderSettings { get; }
 }

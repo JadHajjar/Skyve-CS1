@@ -13,12 +13,11 @@ namespace SkyveApp.Services;
 internal class UpdateManager : IUpdateManager
 {
     private readonly Dictionary<string, DateTime> _previousPackages = new(new PathEqualityComparer());
+    private readonly INotifier _notifier;
 
-    private readonly IContentManager _contentManager;
-
-	UpdateManager(IContentManager contentManager)
+	public UpdateManager(INotifier notifier)
 	{
-		_contentManager = contentManager;
+		_notifier = notifier;
 
 		ISave.Load(out List<KnownPackage> packages, "KnownPackages.json");
 
@@ -39,8 +38,8 @@ internal class UpdateManager : IUpdateManager
 			}
 		}
 
-		_contentManager.ContentLoaded += CentralManager_WorkshopInfoUpdated;
-		_contentManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
+		_notifier.ContentLoaded += CentralManager_WorkshopInfoUpdated;
+		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 	}
 
 	public bool IsPackageKnown(IPackage package)
@@ -55,7 +54,7 @@ internal class UpdateManager : IUpdateManager
 
     private void CentralManager_WorkshopInfoUpdated()
     {
-        ISave.Save(_contentManager.Packages.Select(x => new KnownPackage(x)), "KnownPackages.json");
+        ISave.Save(Program.Services.GetService<IContentManager>().Packages.Select(x => new KnownPackage(x)), "KnownPackages.json");
     }
 
     public bool IsFirstTime()

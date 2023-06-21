@@ -4,7 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
@@ -27,6 +27,17 @@ internal class PackageDescriptionControl : SlickImageControl
 	public IPackage? Package { get; private set; }
 	public PC_PackagePage? PackagePage { get; private set; }
 
+	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly ISettings _settings;
+
+	public PackageDescriptionControl()
+	{
+		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+		_settings = Program.Services.GetService<ISettings>();
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+	}
+
 	public void SetPackage(IPackage package, PC_PackagePage? page)
 	{
 		PackagePage = page;
@@ -35,7 +46,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		if (!string.IsNullOrWhiteSpace(Package.Author?.AvatarUrl))
 		{
 			Image = null;
-			LoadImage(Package.Author?.AvatarUrl, ImageManager.GetImage);
+			LoadImage(Package.Author?.AvatarUrl, Program.Services.GetService<IImageManager>().GetImage);
 		}
 
 		Invalidate();
@@ -129,7 +140,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				if (Package.Package is null)
 				{
-					SubscriptionsManager.Subscribe(new[] { Package.SteamId });
+					_subscriptionsManager.Subscribe(new[] { Package.SteamId });
 					return;
 				}
 
@@ -332,7 +343,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		labelRect.X += Padding.Left + rects.VersionRect.Width;
 
 		var date = (Package.ServerTime == DateTime.MinValue && Package is Asset asset ? asset.LocalTime : Package.ServerTime).ToLocalTime();
-		var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+		var dateText = _settings.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
 		rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.TopLeft, true);
 		labelRect.X += Padding.Left + rects.DateRect.Width;
 
@@ -430,7 +441,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		var partialIncluded = Package!.Package?.IsPartiallyIncluded() ?? false;
 		var isIncluded = partialIncluded || Package.IsIncluded;
 
-		if (mod && CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (mod && _settings.SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			rects!.IncludedRect = rects!.EnabledRect = ClientRectangle.Pad(Padding.Left, 0, 0, Height / 2).Pad(Padding).Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.BottomLeft).Pad(1, 1, 2, 2);
 			rects!.EnabledRect.X += rects!.EnabledRect.Width;
@@ -467,7 +478,7 @@ internal class PackageDescriptionControl : SlickImageControl
 	private void PaintIncludedButton(PaintEventArgs e, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, Package? package)
 	{
 		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
-		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
+		if (_settings.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
 		{
 			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
 			if (isIncluded)
@@ -551,7 +562,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				e.Graphics.DrawRoundImage(authorImg, avatarRect);
 			}
 
-			if (CompatibilityManager.CompatibilityData.Authors.TryGet(Package.Author.SteamId)?.Verified ?? false)
+			if (_compatibilityManager.CompatibilityData.Authors.TryGet(Package.Author.SteamId)?.Verified ?? false)
 			{
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
@@ -605,7 +616,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		return labelRect;
 	}
-	
+
 	private void GetStatusDescriptors(IPackage mod, out string text, out Bitmap? icon, out Color color)
 	{
 		switch (mod.Package?.Status)
@@ -692,7 +703,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			var small = UI.FontScale < 1.25;
 			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.TopLeft);
 			var backColor = score > 90 && Package.Subscriptions >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
-			
+
 			if (!small)
 			{
 				e.Graphics.FillEllipse(new SolidBrush(backColor), scoreRect);

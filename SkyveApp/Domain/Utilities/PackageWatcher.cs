@@ -1,4 +1,7 @@
-﻿using SkyveApp.Services;
+﻿using Extensions;
+
+using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System.Collections.Generic;
@@ -67,12 +70,12 @@ internal class PackageWatcher
 
 	private void TriggerUpdate(string path)
 	{
-		ContentUtil.ContentUpdated(path, false, Workshop, false);
+		Program.Services.GetService<IContentUtil>().ContentUpdated(path, false, Workshop, false);
 	}
 
 	private void TriggerSelfUpdate(string path)
 	{
-		ContentUtil.ContentUpdated(path, false, Workshop, true);
+		Program.Services.GetService<IContentUtil>().ContentUpdated(path, false, Workshop, true);
 	}
 
 	public string GetFirstFolderOrFileName(string filePath, string sourceFolder)
@@ -95,7 +98,7 @@ internal class PackageWatcher
 		var parts = relativePath.Split(IoPath.DirectorySeparatorChar, IoPath.AltDirectorySeparatorChar);
 		if (parts.Length > 0 && string.IsNullOrEmpty(IoPath.GetExtension(parts[0])))
 		{
-			return LocationManager.Combine(Path, parts[0]);
+			return CrossIO.Combine(Path, parts[0]);
 		}
 
 		return Path;

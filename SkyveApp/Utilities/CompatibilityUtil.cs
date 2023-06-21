@@ -19,11 +19,13 @@ internal class CompatibilityUtil : ICompatibilityUtil
 {
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IContentManager _contentManager;
+	private readonly IContentUtil _contentUtil;
 
-	public CompatibilityUtil(ICompatibilityManager compatibilityManager, IContentManager contentManager)
+	public CompatibilityUtil(ICompatibilityManager compatibilityManager, IContentManager contentManager, IContentUtil contentUtil)
 	{
 		_compatibilityManager = compatibilityManager;
 		_contentManager = contentManager;
+		_contentUtil = contentUtil;
 	}
 
 	public void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
@@ -35,7 +37,7 @@ internal class CompatibilityUtil : ICompatibilityUtil
 			return;
 		}
 
-		if (type is StatusType.DependencyMod && ContentUtil.GetReferencingPackage(info.Package.SteamId, true).Any())
+		if (type is StatusType.DependencyMod && _contentUtil.GetReferencingPackage(info.Package.SteamId, true).Any())
 		{
 			return;
 		}

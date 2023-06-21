@@ -44,9 +44,14 @@ internal static class Program
 		Services.AddSingleton<ISettings, SettingsService>();
 		Services.AddSingleton<ISubscriptionsManager, SubscriptionsManager>();
 		Services.AddSingleton<IUpdateManager, UpdateManager>();
+		Services.AddSingleton<IAssetUtil, AssetsUtil>();
+		Services.AddSingleton<IColossalOrderUtil, ColossalOrderUtil>();
+		Services.AddSingleton<IModUtil, ModsUtil>();
+		Services.AddSingleton<INotifier, NotifierService>();
 
 		Services.AddTransient<ICompatibilityUtil, CompatibilityUtil>();
 		Services.AddTransient<IContentUtil, ContentUtil>();
+		Services.AddTransient<ILogUtil, LogUtil>();
 
 		Services.AddSingleton<CentralManager>();
 	}

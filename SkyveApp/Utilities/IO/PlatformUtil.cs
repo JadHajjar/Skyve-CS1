@@ -75,7 +75,7 @@ internal static class PlatformUtil
 				return;
 			}
 
-			_ = (char.IsLetter(folder[0]) ? Platform.Windows : LocationManager.Platform) switch
+			_ = (char.IsLetter(folder[0]) ? Platform.Windows : CrossIO.CurrentPlatform) switch
 			{
 				Platform.MacOSX => Process.Start("/bin/zsh", $"-c \" open -R '{Directory.EnumerateFiles(folder).FirstOrDefault()?.FormatPath() ?? folder}' \""),
 				Platform.Linux => Process.Start("/usr/bin/bash", $"-c \" xdg-open '{folder}' \""),
@@ -89,7 +89,7 @@ internal static class PlatformUtil
 	{
 		try
 		{
-			_ = (char.IsLetter(file[0]) ? Platform.Windows : LocationManager.Platform) switch
+			_ = (char.IsLetter(file[0]) ? Platform.Windows : CrossIO.CurrentPlatform) switch
 			{
 				Platform.MacOSX => Process.Start("/bin/zsh", $"-c \" open -R '{file}' \""),
 				Platform.Linux => Process.Start("/usr/bin/bash", $"-c \" xdg-open '{Path.GetDirectoryName(file).FormatPath()}' \""),
@@ -103,11 +103,11 @@ internal static class PlatformUtil
 	{
 		Program.MainForm.TryInvoke(() =>
 		{
-			if (LocationManager.Platform is not Platform.Windows)
+			if (CrossIO.CurrentPlatform is not Platform.Windows)
 			{
 				if (path[0] is 'c' or 'C')
 				{
-					var file = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
+					var file = CrossIO.Combine(LocationManager.SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
 
 					ExtensionClass.CopyFile(path, file, true);
 

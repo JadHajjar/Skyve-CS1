@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace SkyveApp.Services.Interfaces;
 public interface ILogger
 {
+	string LogFilePath { get; }
+
 	void Info(string message);
 	void Warning(string message);
 	void Error(string message);

@@ -5,6 +5,7 @@ using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -22,11 +23,21 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Lists;
 internal class CompatibilityReportList : SlickStackedListControl<CompatibilityInfo, CompatibilityReportList.Rectangles>
 {
+	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IContentUtil _contentUtil;
+	private readonly ISettings _settings;
+
 	public CompatibilityReportList()
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		AllowDrop = true;
+
+		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_contentUtil = Program.Services.GetService<IContentUtil>();
+		_settings = Program.Services.GetService<ISettings>();
 	}
 
 	protected override void UIChanged()
@@ -106,7 +117,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			{
 				if (item.Item.Package.Package is null)
 				{
-					SubscriptionsManager.Subscribe(new[] { item.Item.Package.SteamId });
+					_subscriptionsManager.Subscribe(new[] { item.Item.Package.SteamId });
 					return;
 				}
 
@@ -120,7 +131,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		{
 			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package.IsCollection ? new PC_ViewCollection(item.Item.Package) : new PC_PackagePage(item.Item.Package));
 
-			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
+			if (_settings.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 			{
 				ScrollTo(item.Item);
 			}
@@ -128,7 +139,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			return;
 		}
 
-		var Message = item.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.Item.Notification && !CompatibilityManager.IsSnoozed(x));
+		var Message = item.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.Item.Notification && !_compatibilityManager.IsSnoozed(x));
 
 		foreach (var rect in rects.buttonRects)
 		{
@@ -164,7 +175,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 		if (e.Button == MouseButtons.Left && rects.snoozeRect.Contains(e.Location))
 		{
-			CompatibilityManager.ToggleSnoozed(Message);
+			_compatibilityManager.ToggleSnoozed(Message);
 			FilterChanged();
 		}
 
@@ -173,19 +184,19 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			switch (Message.Status.Action)
 			{
 				case StatusAction.SubscribeToPackages:
-					SubscriptionsManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
-					ContentUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.Package)!, true);
-					ContentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
+					_subscriptionsManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
+					_contentUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.Package)!, true);
+					_contentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
 					break;
 				case StatusAction.RequiresConfiguration:
-					CompatibilityManager.ToggleSnoozed(Message);
+					_compatibilityManager.ToggleSnoozed(Message);
 					FilterChanged();
 					break;
 				case StatusAction.UnsubscribeThis:
-					SubscriptionsManager.UnSubscribe(new[] { item.Item.Package.SteamId });
+					_subscriptionsManager.UnSubscribe(new[] { item.Item.Package.SteamId });
 					break;
 				case StatusAction.UnsubscribeOther:
-					SubscriptionsManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
+					_subscriptionsManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
 					break;
 				case StatusAction.ExcludeThis:
 					item.Item.Package.IsIncluded = false;
@@ -276,7 +287,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 		if (date.Year > 2000)
 		{
-			var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+			var dateText = _settings.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
 			rects.DateRect = e.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
 			labelRect.Y -= Padding.Top + rects.DateRect.Height;
 		}
@@ -290,7 +301,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			labelRect.Y += Padding.Top + rects.VersionRect.Height;
 		}
 
-		var item = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.Notification && !CompatibilityManager.IsSnoozed(x));
+		var item = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.Notification && !_compatibilityManager.IsSnoozed(x));
 
 		DrawReport(e, item, rects);
 	}
@@ -320,7 +331,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			// = new Rectangle(e.ClipRectangle.Location, new Size(ClientRectangle.X, e.ClipRectangle.Height)).Align(iconRect.Size, ContentAlignment.BottomRight);
 			actionHovered |= rects.snoozeRect.Contains(cursor);
 			var purple = Color.FromArgb(100, 60, 220);
-			var isSnoozed = CompatibilityManager.IsSnoozed(Message);
+			var isSnoozed = _compatibilityManager.IsSnoozed(Message);
 
 			SlickTip.SetTo(this, !actionHovered ? string.Empty : isSnoozed ? Locale.UnSnooze : Locale.Snooze, false, rects.snoozeRect.Location);
 
@@ -485,7 +496,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 	private void PaintIncludedButton(ItemPaintEventArgs<CompatibilityInfo, Rectangles> e, Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large)
 	{
 		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : "I_Enabled");
-		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && e.Item.Package.Package?.Mod is Mod mod)
+		if (_settings.SessionSettings.UserSettings.AdvancedIncludeEnable && e.Item.Package.Package?.Mod is Mod mod)
 		{
 			var activeColor = FormDesign.Design.ActiveColor;
 			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
@@ -584,7 +595,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 				e.Graphics.DrawRoundImage(authorImg, avatarRect);
 			}
 
-			if (CompatibilityManager.CompatibilityData.Authors.TryGet(e.Item.Package.Author.SteamId)?.Verified ?? false)
+			if (_compatibilityManager.CompatibilityData.Authors.TryGet(e.Item.Package.Author.SteamId)?.Verified ?? false)
 			{
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
@@ -680,7 +691,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 			Loading = true;
 			
-			SubscriptionsManager.Subscribe(new[] { item.SteamId });
+			_subscriptionsManager.Subscribe(new[] { item.SteamId });
 		}
 		else
 		{
@@ -752,7 +763,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 				}
 				break;
 			case StatusAction.RequiresConfiguration:
-				allText = CompatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
+				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
 				allIcon = "I_Snooze";
 				colorStyle = ColorStyle.Active;
 				break;
@@ -785,7 +796,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		var section = (ItemHeight / 3) - (Padding.Top / 2);
 		var rects = new Rectangles(item);
 
-		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package.Package?.Mod is not null)
+		if (_settings.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package.Package?.Mod is not null)
 		{
 			rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(section + Padding.Horizontal, rectangle.Height), ContentAlignment.MiddleLeft);
 			rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
@@ -846,11 +857,11 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 		if (file != null)
 		{
-			if (LocationManager.Platform is not Platform.Windows)
+			if (CrossIO.CurrentPlatform is not Platform.Windows)
 			{
 				var realPath = IOUtil.ToRealPath(file);
 
-				if (ExtensionClass.FileExists(realPath))
+				if (CrossIO.FileExists(realPath))
 				{
 					file = realPath!;
 				}
