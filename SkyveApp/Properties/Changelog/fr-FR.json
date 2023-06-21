@@ -480,7 +480,7 @@
                 "Name": "Profils de la communauté",
                 "Changes": [
                     "Vous pouvez désormais mettre en ligne un profil, dans la limite de 5 par utilisateur.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Les profils mis en ligne peuvent être privés, partagés avec un ID, ou visible par tout le monde.",
                     "Les profils de la communauté peuvent être téléchargé ou mis à jour si vous l'avez localement.",
                     "Vous pouvez découvrir des profils de la communauté en utilisant le nouveau bouton dans l'onglet profils.",
                     "Added a third option in the 'Add Profile' page to import an online profile using its ID."
@@ -489,12 +489,12 @@
             {
                 "Name": "Changements de profil",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "L'onglet 'Profils' dans le menu ouvre désormais la liste de vos profils à la place des paramètres du profil actuel.",
+                    "La liste des profils utilise désormais une vue en grille, et vous pouvez passer entre les vues grille et liste.",
                     "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "Si votre profil a des modifications non enregistrées, le logo Skyve va s'illuminer en violet.",
+                    "Les profils peuvent maintenant avoir une miniature.",
+                    "Les utilisations du profil ont désormais des icônes distinctes."
                 ]
             },
             {
@@ -502,14 +502,14 @@
                 "Changes": [
                     "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
                     "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Ajout de 6 nouveaux boutons de réinitialisation sur la page Utilités.",
+                    "Ajout de 2 nouveaux boutons sur la page Aide et logs.",
+                    "La compatibilité et les statuts des paquets sont désormais affichés sur la droite dans la liste.",
+                    "Les paquets cassés, incompatibles et bannis ont désormais un nouvel arrière-plan dans la liste.",
                     "Local mods' name & label have been updated.",
                     "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Les mods requis ont désormais une apparence différente pour montrer qu'ils ne peuvent pas être exclus.",
+                    "Ajout d'un paramètre en jeu pour activer le rechargement à chaud pour les mods et ressources.",
                     "Amélioration des performances en activant/désactivant les paquets.",
                     "Ajout de la traduction Hongroise"
                 ]
@@ -518,32 +518,32 @@
     },
     {
         "Version": "3.1.0.1",
-        "Date": "2023-06-14",
+        "Date": "14/06/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Changements",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "Ajout d'une option pour ignorer les vérifications de connexion Internet.",
+                    "Ajout d'un indicateur pour les profils en cours de mise en ligne.",
+                    "Ajout d'un bouton pour voir facilement le contenu d'un profil en ligne.",
+                    "Correction d'une erreur lors de la récupération des infos utilisateur Steam.",
+                    "Correction du paramètre de lancement Éditeur de ressource qui n'était pas retenu.",
+                    "Correction de la mise à jour d'un profil en ligne qui ne fonctionnait pas correctement."
                 ]
             }
         ]
     },
     {
         "Version": "3.1.1",
-        "Date": "2023-06-16",
+        "Date": "16/06/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Changements",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "Ajout d'une animation de chargement lors de la visualisation du contenu d'un profil.",
+                    "Correction du téléchargement ou de la mise à jour d'un profil qui ne sauvegardait pas correctement certaines données comme la miniature.",
+                    "Correction des paquets privés marqués comme .",
+                    "Correction de certaines parties de l'interface qui n'étaient pas traduites dès le début."
                 ]
             }
         ]
