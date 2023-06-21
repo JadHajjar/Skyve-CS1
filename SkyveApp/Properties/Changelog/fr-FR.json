@@ -553,11 +553,11 @@
         "Date": "2023-06-21",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
                     "Fixes an error caused by including/excluding mods that have contain assets.",
-                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-                    "Fixed some packages not showing their successor properly."
+                    "Correction du bouton d'action à droite de la liste du Rapport de Compatibilité qui n'était pas cliquable.",
+                    "Correction de certains paquets qui ne montraient pas leurs successeurs correctement."
                 ]
             }
         ]
