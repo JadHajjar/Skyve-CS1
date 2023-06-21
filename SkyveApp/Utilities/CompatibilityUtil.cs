@@ -4,7 +4,8 @@ using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using SlickControls;
 
@@ -16,6 +17,13 @@ using System.Linq;
 namespace SkyveApp.Utilities;
 internal static class CompatibilityUtil
 {
+	public static CompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
+	{
+		var manager = Program.Services.GetService<ICompatibilityManager>();
+
+		return manager.GetCompatibilityInfo(package, noCache);
+	}
+
 	internal static void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
 	{
 		var type = status.Status.Type;

@@ -164,6 +164,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Properties\SlickUI\" />
+	  <Folder Include="Utilities\Managers\" />
 	</ItemGroup>
 	
 	<PropertyGroup>

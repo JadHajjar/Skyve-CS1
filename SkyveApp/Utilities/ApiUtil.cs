@@ -3,7 +3,7 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
 
 using System;
 using System.IO;

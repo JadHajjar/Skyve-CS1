@@ -1,4 +1,5 @@
-﻿using SkyveApp.UserInterface.Content;
+﻿using SkyveApp.Services;
+using SkyveApp.UserInterface.Content;
 
 namespace SkyveApp.UserInterface.Panels;
 
@@ -17,7 +18,7 @@ partial class PC_UserPage
 	{
 		if (disposing && (components != null))
 		{
-		    SkyveApp.Utilities.Managers.CentralManager.PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
+		    CentralManager.PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

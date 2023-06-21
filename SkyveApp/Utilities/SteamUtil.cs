@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
+using SkyveApp.Services;
 using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
 
 using SkyveShared;
 

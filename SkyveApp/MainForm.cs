@@ -1,8 +1,7 @@
 ﻿using Extensions;
-
+using SkyveApp.Services;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

@@ -2,7 +2,7 @@ using Extensions;
 
 using SkyveApp.Domain;
 using SkyveApp.Legacy;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
 
 using System.Linq;
 using System.Text.RegularExpressions;

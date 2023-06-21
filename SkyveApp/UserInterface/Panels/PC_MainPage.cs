@@ -1,8 +1,7 @@
 ﻿using Extensions;
-
+using SkyveApp.Services;
 using SkyveApp.UserInterface.StatusBubbles;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

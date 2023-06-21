@@ -2,9 +2,9 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
+using SkyveApp.Services;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

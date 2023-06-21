@@ -1,7 +1,5 @@
 ﻿using Extensions;
-
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
 
 using System;
 using System.Collections.Generic;

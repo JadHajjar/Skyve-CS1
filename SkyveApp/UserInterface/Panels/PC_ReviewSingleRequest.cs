@@ -2,12 +2,12 @@
 using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Steam;
+using SkyveApp.Services;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

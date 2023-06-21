@@ -2,10 +2,10 @@
 
 using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
+using SkyveApp.Services;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

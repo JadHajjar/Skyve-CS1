@@ -5,7 +5,7 @@ using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
 
 using System;
 using System.Collections.Generic;

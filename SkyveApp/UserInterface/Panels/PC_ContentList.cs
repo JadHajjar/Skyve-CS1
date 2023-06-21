@@ -6,11 +6,11 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
+using SkyveApp.Services;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

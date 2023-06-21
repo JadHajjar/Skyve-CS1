@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Steam;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
 
 using System;
 using System.Collections.Generic;

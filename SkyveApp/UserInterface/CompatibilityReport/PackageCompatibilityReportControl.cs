@@ -3,8 +3,8 @@
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Services;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 

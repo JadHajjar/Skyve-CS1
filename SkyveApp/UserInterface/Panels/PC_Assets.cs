@@ -1,6 +1,6 @@
 ﻿using SkyveApp.Domain;
+using SkyveApp.Services;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using System.Collections.Generic;
 using System.Linq;

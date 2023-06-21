@@ -5,7 +5,7 @@ using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
 
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
 using Extensions;
-
+using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 
@@ -21,13 +21,20 @@ internal static class Program
 	internal static string CurrentDirectory { get; }
 	internal static string ExecutablePath { get; }
 	internal static MainForm MainForm { get; private set; }
+	internal static ServiceCollection Services { get; }
 
 	static Program()
 	{
 		ISave.AppName = "Skyve-CS1";
+		IsRunning = true;
 		CurrentDirectory = Application.StartupPath;
 		ExecutablePath = Application.ExecutablePath;
-		IsRunning = true;
+		Services = new();
+
+		Services.AddSingleton<ILogger, Logger>();
+		Services.AddSingleton<ILocationManager, LocationManager>();
+
+		Services.AddSingleton<CentralManager>();
 	}
 
 	/// <summary>

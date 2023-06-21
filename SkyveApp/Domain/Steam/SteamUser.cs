@@ -1,9 +1,8 @@
 ﻿using Extensions;
 
 using Newtonsoft.Json;
-
+using SkyveApp.Services;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Drawing;

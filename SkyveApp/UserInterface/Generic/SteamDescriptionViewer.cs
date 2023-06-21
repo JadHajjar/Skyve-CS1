@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Steam.Markdown;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Services;
 
 using SlickControls;
 

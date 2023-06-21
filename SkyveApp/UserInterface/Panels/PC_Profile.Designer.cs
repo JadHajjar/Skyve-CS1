@@ -1,5 +1,5 @@
-﻿using SkyveApp.UserInterface.Generic;
-using SkyveApp.Utilities.Managers;
+﻿using SkyveApp.Services;
+using SkyveApp.UserInterface.Generic;
 
 namespace SkyveApp.UserInterface.Panels;
 

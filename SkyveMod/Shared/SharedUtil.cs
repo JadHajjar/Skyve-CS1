@@ -1,12 +1,13 @@
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using SkyveApp.Services;
 
 namespace SkyveShared;
 internal class SharedUtil
 {
 #if SkyveApp
-	internal static string LocalApplicationData => SkyveApp.Utilities.Managers.LocationManager.AppDataPath;
+	internal static string LocalApplicationData => LocationManager.AppDataPath;
 	internal static string LocalLOMData => Path.Combine(LocalApplicationData, "Skyve");
 #elif TOOL
 	internal static string LocalApplicationData => CO.IO.DataLocation.localApplicationData;

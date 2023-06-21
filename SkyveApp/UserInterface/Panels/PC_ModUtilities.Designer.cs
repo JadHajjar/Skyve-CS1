@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.UserInterface.Panels;
+﻿using SkyveApp.Services;
+
+namespace SkyveApp.UserInterface.Panels;
 
 partial class PC_ModUtilities
 {
@@ -15,7 +17,7 @@ partial class PC_ModUtilities
 	{
 		if (disposing && (components != null))
 		{
-			Utilities.Managers.CentralManager.PackageInformationUpdated -= RefreshModIssues;
+			CentralManager.PackageInformationUpdated -= RefreshModIssues;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

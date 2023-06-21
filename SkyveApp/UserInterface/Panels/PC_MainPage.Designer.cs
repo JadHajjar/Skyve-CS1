@@ -1,4 +1,4 @@
-﻿using SkyveApp.Utilities.Managers;
+﻿using SkyveApp.Services;
 
 namespace SkyveApp.UserInterface.Panels;
 

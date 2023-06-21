@@ -1,5 +1,5 @@
-﻿using SkyveApp.UserInterface.Dropdowns;
-using SkyveApp.Utilities.Managers;
+﻿using SkyveApp.Services;
+using SkyveApp.UserInterface.Dropdowns;
 
 namespace SkyveApp.UserInterface.Panels;
 

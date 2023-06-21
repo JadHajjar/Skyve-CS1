@@ -3,8 +3,8 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
+using SkyveApp.Services;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
 using System;
 using System.Collections.Generic;
