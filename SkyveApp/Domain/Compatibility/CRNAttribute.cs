@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using SkyveApp.Domain.Compatibility.Enums;
 
 namespace SkyveApp.Domain.Compatibility;
 

@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Detta är en beroende-mod, men det verkar inte som om du använder något paket som kräver den.",
   "Status_SourceCodeNotAvailable": "Källkoden för denna mod är inte tillgänglig. Du bör inte använda den om du inte litar på dess författare.",
+  "SourceAvailable": "Källkoden finns tillgänglig",
   "Status_MusicCanBeCopyrighted": "Musiken inuti detta paket kan vara upphovsrättsskyddad. Det är bäst att inte använda den när du streamar.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Förväntad utdata",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Du bör exkludera '{0}'.",
+  "ExcludeThis": "Exkludera detta paket",
+  "Exclude": "Exkludera",
+  "Unsubscribe": "Avprenumerera",
   "Action_ExcludeOther": {
     "One": "Du bör exkludera '{1}'.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Ta bort förfrågan",
   "ApplyRequestedChanges": "Tillämpa begärda ändringar",
   "ManagePackage": "Hantera paket",
-  "RequestReviewDisclaimer": "*Ditt Steam-ID och dina loggar skickas med din begäran"
+  "Banned": "Bannlyst",
+  "NoIssues": "Inga problem",
+  "RequestReviewDisclaimer": "*Ditt Steam-ID och dina loggar skickas med din begäran",
+  "ScenarioMaking": "Scenario-skapande",
+  "ThemeMaking": "Tema-skapande"
 }

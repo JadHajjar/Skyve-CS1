@@ -63,7 +63,6 @@
   "Go back to {0}": "Torna a {0}",
   "All Versions": "Tutte le Versioni",
   "Current Version": "Versione Attuale",
-  "CurrentProfile": "Profilo Corrente",
   "Profiles": "Profili",
   "Drives": "Dischi",
   "Switch to Grid-View": "Passa alla Vista Griglia",
@@ -96,13 +95,64 @@
   "Red": "Rosso",
   "Green": "Verde",
   "Yellow": "Giallo",
-  "Download": "Download",
-  "Remove": "Remove",
+  "Download": "Scarica",
+  "Remove": "Rimuovi",
   "Welcome to Theme Changer!": "Benvenuto in Modifica Temi!",
   "Customize the size and colors in the App however you want to.": "Personalizza dimensione e colori dell'App come preferisci.",
   "Click on any color to change it, or right-click to reset it.": "Fai clic su qualsiasi colore per cambiarlo, o fai clic col tasto destro per reimpostarlo.",
   "Custom Theme": "Tema Personalizzato",
   "Do you want to apply your changes before leaving?": "Vuoi applicare le modifiche prima di uscire?",
   "TaskCompleted": "Attività Completata",
-  "UnexpectedError": "Si è verificato un errore imprevisto"
+  "UnexpectedError": "Si è verificato un errore imprevisto",
+  "{0} ago": "{0} fa",
+  "in {0}": "in {0}",
+  "Today at {0}": "Oggi alle {0}",
+  "Yesterday at {0}": "Ieri alle {0}",
+  "Tomorrow at {0}": "Domani alle {0}",
+  "Last {0} at {1}": "{0} scorso alle {1}",
+  "Next {0} at {1}": "{0} prossimo alle {1}",
+  "{0} month ago on {1}": {
+    "One": "{0} mese fa il {1}",
+    "Plural": "{0} mesi fa il {1}"
+  },
+  "in {0} month on {1}": {
+    "One": "fra {0} mese il {1}",
+    "Plural": "fra {0} mesi il {1}"
+  },
+  "{0} day ago": {
+    "One": "{0} giorno fa",
+    "Plural": "{0} giorni fa"
+  },
+  "in {0} day": {
+    "One": "fra {0} giorno",
+    "Plural": "fra {0} giorni"
+  },
+  "{0} year": {
+    "One": "{0} anno",
+    "Plural": "{0} anni"
+  },
+  "{0} month": {
+    "One": "{0} mese",
+    "Plural": "{0} mesi"
+  },
+  "{0} day": {
+    "One": "{0} giorno",
+    "Plural": "{0} giorni"
+  },
+  "{0} hour": {
+    "One": "{0} ora",
+    "Plural": "{0} ore"
+  },
+  "{0} minute": {
+    "One": "{0} minuto",
+    "Plural": "{0} minuti"
+  },
+  "{0} second": {
+    "One": "{0} secondo",
+    "Plural": "{0} secondi"
+  },
+  "{0}d": "{0}g",
+  "{0}h": "{0}h",
+  "{0}m": "{0}m",
+  "{0}s": "{0}s"
 }

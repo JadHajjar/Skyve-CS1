@@ -17,7 +17,7 @@
                 "Name": "优化",
                 "Changes": [
                     "为损坏的资产添加了兼容性报告",
-                    "可见性设为非公开的插件现在能显示正确的名称和缩略图。",
+                    "现在，Skyve 能正确显示可见性设为非公开的插件的名称和缩略图。",
                     "在设置文件夹时，预显示的占位符现在可以正确跟随您的操作系统。",
                     "按住Ctrl键+鼠标单击选择作者的名称，可以将作者名称添加到搜索栏，并以此筛选。"
                 ]
@@ -29,7 +29,7 @@
                     "修复了在外部更改本地资产后，列表不会自动刷新的问题。",
                     "修复了右键单击菜单中删除所有本地资产时，只会删除一个本地资产的问题。现在会删除所有本地资产。",
                     "修复了转换 LOT1 配置文件后，所有资产被标记为“本地资产”的问题。",
-                    "修复了 Linux 和 Mac 用户在保存交换时显示正确的文件夹名称。",
+                    "修复了 Linux 和 Mac 用户在保存时，“实际文件夹”被掉换的问题。",
                     "修复了 Linux 和 Mac 用户无法生成日志压缩文件夹的问题。"
                 ]
             }
@@ -85,7 +85,7 @@
                     "移除游戏内模组选项中的订阅选项卡。",
                     "修复了加载配置文件时，没有应用 DLC 的设定的问题。",
                     "修复了某些玩家语言选项为空的问题。",
-                    "修复了在 Steam 创意工坊重新订阅插件后，LOT2 软件会强制增大项目显示的问题。",
+                    "重新订阅 Steam 创意工坊插件后，不再强制焦点回到 LOT 2 程序上。",
                     "对其他一些用户界面进行了改动。"
                 ]
             }
@@ -98,7 +98,7 @@
             {
                 "Name": "改动",
                 "Changes": [
-                    "添加了在首次订阅项目时，会弹出相关信息窗口的功能。",
+                    "新增在首次订阅项目时，弹出相关信息窗口的功能。",
                     "当您安装了多个 LOM 模组时，统计面板会显示警告，让您删除其他多余的 LOM 模组。",
                     "在插件名称旁添加了小标签。",
                     "在实用工具内重新下载过期的 Load Order Tool 2 时，会关闭 LOT 2 应用程序，并自动开始下载与更新。",
@@ -190,7 +190,7 @@
                     "添加了按照作者进行筛选的下拉列表。",
                     "为内容列表中的筛选标签添加了更多操作。",
                     "在“插件状态”和“兼容性报告”的下拉列表中，新增了“任意问题”选项。",
-                    "现在按照标签进行快速筛选的方式更改为：按住 Ctrl 键 + 鼠标单击标签。并且添加了一个选项来切换筛选的方式。",
+                    "现在您可以按住 Ctrl 键 + 鼠标左键点击标签，将该标签添加到筛选选项标签中。同时，新增了一个选项，可以更改为无需按住 Ctrl 键，鼠标左键点击标签直接将其添加到筛选标签中。",
                     "当您在使用快速筛选的功能时，会自动清空上一次选择的筛选标签。",
                     "现在在搜索栏中，可以用 “ , ”（英文逗号）分隔多个关键词：\n• 默认情况下，将显示匹配任意关键词的项目\n• 在某个关键词前面添加 “ + ”（英文加号），搜索结果将必须匹配该关键词\n• 在某个关键词前面添加 “ - ”（英文减号），会排除与该关键词匹配的搜索结果\n\n举例：\n• car, truck（显示 \"car\" 或 \"truck\" 的搜索结果）\n• building +commercial（搜索结果为：匹配 \"building\" 的商业建筑）\n• big, grass +decal（搜索结果为：匹配\"big\"或\"grass\"的贴花资产）\n• building, apartment +european（搜索结果为：匹配的 \"building\" 或 \"apartment\" 的欧式建筑）\n• condo, house -rico +american（搜索结果为：匹配 \"condo\" 或 \"house\" 的美式非 RICO 建筑）"
                 ]
@@ -322,10 +322,10 @@
             {
                 "Name": "其他改动",
                 "Changes": [
-                    "现在 Intersection Marking Tool 的标线、Render it! 的预设，Procedural Objects 的字体、以及游戏翻译模组将被识别为“伪模组”。",
+                    "现在 Intersection Marking Tool 的标线、Render it! 的预设，Procedural Objects 的字体模块、以及游戏翻译模组将被识别为“伪模组”。",
                     "新增了指向插件工坊页面的链接，以及其他信息，如插件的使用说明和类型。",
-                    "新增了三种配置文件用途：地图制作、剧本制作和地图主题制作。",
-                    "新增在列表页面显示隐藏插件数量的功能，显示根据配置文件的用途而被自动隐藏的插件数量。",
+                    "新增了三种配置文件用途：制作地图、制作剧本和制作地图主题。",
+                    "新增在列表页面显示隐藏插件数量的功能，根据配置文件的用途，显示被自动隐藏的插件数量。",
                     "优化操作选项的按钮，使其更显眼、更易于找到。",
                     "Skyve 程序的新图标根据游戏和 Skyve 程序的运行状态发光，蓝色表示游戏正在运行， 红色表示没有网络连接（请打开加速器 / VPN），快速闪烁表示正在启动或关闭游戏。"
                 ]
@@ -339,7 +339,7 @@
             {
                 "Name": "修复",
                 "Changes": [
-                    "修复了之前的设置和配置文件有时没有导入到 Skyve 的问题。",
+                    "修复了之前的设置和配置文件有时无法导入到 Skyve 的问题。",
                     "现在，如果您之前使用了 Load Order Tool 2 并更新到了 Skyve，在第一次打开 Skyve 时，会自动在桌面创建 Skyve 的快捷方式。",
                     "修复了兼容性信息无法加载的罕见问题。",
                     "现在您可以对当前已损坏的插件申请检查。",
@@ -383,7 +383,7 @@
             {
                 "Name": "改动",
                 "Changes": [
-                    "主菜单中的 Steam 面板现在默认会显示，您可以在模组选项中隐藏此面板。",
+                    "游戏主菜单的 Steam 面板现在默认会显示，您可以在游戏内 Skyve 模组的选项中选择隐藏这些面板。",
                     "申请检查现在需要有效的问题描述，且会将您的日志文件与申请一起发送。“发送检查申请”按钮旁边会显示免责声明。",
                     "将模组很久没有进行过更新的报告等级降低到“提示”级别，这样一来，Skyve 就不会向您发送这个警告。"
                 ]
@@ -413,13 +413,13 @@
         ]
     },
     {
-        "Version": "3.0.6",
+        "Version": "3.0.7",
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "重制了订阅操作的进程",
+                "Name": "重做了订阅操作的进程",
                 "Changes": [
-                    "现在在游戏运行期间，您也可以订阅插件。",
+                    "现在在游戏运行期间，您也可以使用 Skyve 订阅插件。",
                     "现在如果连续订阅多个插件，Skyve 会记录到任务等待列表中，而不是每次都启动游戏来进行订阅操作。",
                     "在 Skyve 应用程序界面的左下角新增了一个方框，以显示当前等待中的订阅 / 取消订阅操作。",
                     "新增了一个高级选项，启用此选项后，在 Skyve 进行订阅 / 取消订阅操作之后，自动强制下载插件或删除已取订（但没删除干净）的插件。",
@@ -432,7 +432,7 @@
                     "新增功能：右键点击一个配置文件时，可以“查看此配置文件的内容”。",
                     "新增功能：右键点击一个插件时，可以“强制下载”此插件。",
                     "在一些弹出窗口中新增了更多说明文字。",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "在列表页面的操作选项中，新增“下载所有显示的项目”选项。"
                 ]
             },
             {
@@ -442,7 +442,108 @@
                     "修复了配置文件插件没有显示其创意工坊名称的问题。",
                     "修复了第一次加载某个配置文件或合集时，来自 Steam 的插件信息没有加载的问题。",
                     "已将本地模组的名称恢复为其所在文件夹名称，而不是模组的工坊名称，以防止出现问题。",
-                    "Improved the performance for people with a lot of mods."
+                    "优化了拥有大量模组时软件的性能。"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "修复",
+                "Changes": [
+                    "修复启动时会发生崩溃的问题。"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Updated for the latest game patch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online profiles, coming through!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profiles",
+                "Changes": [
+                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Online profiles can be downloaded, or updated if you already have it locally.",
+                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Improved performance while including/excluding packages.",
+                    "Added Hungarian language"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
                 ]
             }
         ]

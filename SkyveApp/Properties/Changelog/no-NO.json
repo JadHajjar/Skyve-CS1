@@ -337,13 +337,13 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Fikser",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Fikset at forrige og innstillinger og profiler noen ganger ikke overføres til Skyve.",
+                    "En snarvei kommer til å bli laget når du først åpner Skyve om du tidligere hadde LOM2.",
+                    "Fikset et sjeldent problem hvor kompabilitetsinformasjon noen ganger ikke lastet inn.",
+                    "Skrudde på muligheten til å forespørre en sjekk av en pakke som er ødelagt for øyeblikket.",
+                    "Skrudde ned sensitiviteten til 'Delvis Nedlastet' notifikasjonen."
                 ]
             }
         ]
@@ -353,11 +353,11 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Endringer",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Forbredtet ytelsen til applikasjonen. Raskere innlastning & mindre opphenging er forventet.",
+                    "Fikset en interaksjon mellom lignende modder som vises om i Kompabilitets Rapporten når du bare har en av de.",
+                    "Fikset modder som ble funnet i 'local assets' mappen."
                 ]
             }
         ]
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Feilrettinger",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Fikset at innstillinger fanen ikke åpnet set for macOS & Linux.",
+                    "Fikset at Hjelp & Logger fanen ikke laster inn din nåværende log automatisk.",
+                    "Fikset at log filen peker til feil sti på Linux."
                 ]
             }
         ]
@@ -381,9 +381,9 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Endringer",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
+                    "Steam paneler i hoved menyen vises nå til vanlig, du kan forstatt gjømme den i mod innstillinger.",
                     "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
                     "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
                 ]
@@ -443,6 +443,107 @@
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
                     "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Updated for the latest game patch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online profiles, coming through!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profiles",
+                "Changes": [
+                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Online profiles can be downloaded, or updated if you already have it locally.",
+                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Improved performance while including/excluding packages.",
+                    "Added Hungarian language"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
                 ]
             }
         ]

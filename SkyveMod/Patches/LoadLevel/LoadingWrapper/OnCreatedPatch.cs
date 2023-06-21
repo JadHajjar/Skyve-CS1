@@ -1,75 +1,89 @@
 using HarmonyLib;
-using System;
-using System.Reflection.Emit;
-using System.Collections.Generic;
-using KianCommons;
-using static KianCommons.Patches.TranspilerUtils;
+
 using ICities;
-using System.Reflection;
-using System.Diagnostics;
+
+using KianCommons;
+
 using SkyveMod.Settings;
 
-namespace SkyveMod.Patches._LoadingWrapper {
-    [HarmonyPatch(typeof(LoadingWrapper))]
-    [HarmonyPatch("OnLoadingExtensionsCreated")]
-    public static class OnCreatedPatch {
-        static Stopwatch sw = new Stopwatch();
-        static Stopwatch sw_total = new Stopwatch();
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Reflection.Emit;
 
-        public static ILoadingExtension BeforeOnCreated(ILoadingExtension loadingExtension) {
-            if (ConfigUtil.Config.LogPerModOnCreatedTimes) {
-                Log.Info($"calling {loadingExtension}.OnCreated()", copyToGameLog: false);
-                sw.Reset();
-                sw.Start();
-            }
-            return loadingExtension;
-        }
-        public static void AfterOnCreated() {
-            if (ConfigUtil.Config.LogPerModOnCreatedTimes) {
-                sw.Stop();
-                var ms = sw.ElapsedMilliseconds;
-                Log.Info($"OnCreated() successful. duration = {ms:#,0}ms", copyToGameLog: false);
-            }
-        }
+using static KianCommons.Patches.TranspilerUtils;
 
-        static MethodInfo mBeforeOnCreated_ = typeof(OnCreatedPatch).GetMethod(nameof(BeforeOnCreated))
-            ?? throw new Exception("mBeforeOnCreated_ is null");
-        static MethodInfo mAfterOnCreated_ = typeof(OnCreatedPatch).GetMethod(nameof(AfterOnCreated))
-            ?? throw new Exception("mAfterOnCreated_ is null");
-        static MethodInfo mOnCreated_ = typeof(ILoadingExtension).GetMethod(nameof(ILoadingExtension.OnCreated))
-            ?? throw new Exception("mAfterOnCreated_ is null");
-        static MethodInfo mGetItem_ = GetMethod(typeof(List<ILoadingExtension>), "get_Item");
+namespace SkyveMod.Patches._LoadingWrapper;
+[HarmonyPatch(typeof(LoadingWrapper))]
+[HarmonyPatch("OnLoadingExtensionsCreated")]
+public static class OnCreatedPatch
+{
+	static readonly Stopwatch sw = new Stopwatch();
+	static readonly Stopwatch sw_total = new Stopwatch();
 
-        public static void Prefix(){
-            Log.Info("LoadingWrapper.OnLoadingExtensionsCreated() started", true);
-            sw_total.Reset();
-            sw_total.Start();
-        }
+	public static ILoadingExtension BeforeOnCreated(ILoadingExtension loadingExtension)
+	{
+		if (ConfigUtil.Config.LogPerModOnCreatedTimes)
+		{
+			Log.Info($"calling {loadingExtension}.OnCreated()", copyToGameLog: false);
+			sw.Reset();
+			sw.Start();
+		}
+		return loadingExtension;
+	}
+	public static void AfterOnCreated()
+	{
+		if (ConfigUtil.Config.LogPerModOnCreatedTimes)
+		{
+			sw.Stop();
+			var ms = sw.ElapsedMilliseconds;
+			Log.Info($"OnCreated() successful. duration = {ms:#,0}ms", copyToGameLog: false);
+		}
+	}
 
-        public static IEnumerable<CodeInstruction> Transpiler(ILGenerator il, IEnumerable<CodeInstruction> instructions) {
-            try {
-                List<CodeInstruction> codes = instructions.ToCodeList();
-                var Call_BeforeOnCreated = new CodeInstruction(OpCodes.Call, mBeforeOnCreated_);
-                var Call_AfterOnCreated = new CodeInstruction(OpCodes.Call, mAfterOnCreated_);
+	static readonly MethodInfo mBeforeOnCreated_ = typeof(OnCreatedPatch).GetMethod(nameof(BeforeOnCreated))
+		?? throw new Exception("mBeforeOnCreated_ is null");
+	static readonly MethodInfo mAfterOnCreated_ = typeof(OnCreatedPatch).GetMethod(nameof(AfterOnCreated))
+		?? throw new Exception("mAfterOnCreated_ is null");
+	static readonly MethodInfo mOnCreated_ = typeof(ILoadingExtension).GetMethod(nameof(ILoadingExtension.OnCreated))
+		?? throw new Exception("mAfterOnCreated_ is null");
+	static readonly MethodInfo mGetItem_ = GetMethod(typeof(List<ILoadingExtension>), "get_Item");
 
-                int index = codes.Search(c => c.Calls(mOnCreated_));
-                InsertInstructions(codes, new[] { Call_AfterOnCreated }, index + 1, moveLabels:false); // insert after.
+	public static void Prefix()
+	{
+		Log.Info("LoadingWrapper.OnLoadingExtensionsCreated() started", true);
+		sw_total.Reset();
+		sw_total.Start();
+	}
 
-                index = codes.Search(c => c.Calls(mGetItem_)); 
-                InsertInstructions(codes, new[] { Call_BeforeOnCreated }, index + 1, moveLabels: false); // insert after.
+	public static IEnumerable<CodeInstruction> Transpiler(ILGenerator il, IEnumerable<CodeInstruction> instructions)
+	{
+		try
+		{
+			var codes = instructions.ToCodeList();
+			var Call_BeforeOnCreated = new CodeInstruction(OpCodes.Call, mBeforeOnCreated_);
+			var Call_AfterOnCreated = new CodeInstruction(OpCodes.Call, mAfterOnCreated_);
 
-                return codes;
-            }
-            catch (Exception e) {
-                Log.Error(e.ToString());
-                throw e;
-            }
-        }
+			var index = codes.Search(c => c.Calls(mOnCreated_));
+			InsertInstructions(codes, new[] { Call_AfterOnCreated }, index + 1, moveLabels: false); // insert after.
 
-        public static void Postfix() {
-            sw_total.Stop();
-            var ms = sw_total.ElapsedMilliseconds;
-            Log.Info($"LoadingWrapper.OnLoadingExtensionsCreated() finished. total duration = {ms:#,0}ms ", true);
-        }
-    }
+			index = codes.Search(c => c.Calls(mGetItem_));
+			InsertInstructions(codes, new[] { Call_BeforeOnCreated }, index + 1, moveLabels: false); // insert after.
+
+			return codes;
+		}
+		catch (Exception e)
+		{
+			Log.Error(e.ToString());
+			throw e;
+		}
+	}
+
+	public static void Postfix()
+	{
+		sw_total.Stop();
+		var ms = sw_total.ElapsedMilliseconds;
+		Log.Info($"LoadingWrapper.OnLoadingExtensionsCreated() finished. total duration = {ms:#,0}ms ", true);
+	}
 }

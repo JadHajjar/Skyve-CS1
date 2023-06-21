@@ -18,7 +18,7 @@
   "Tags": "Labels",
   "This PC": "Deze PC",
   "PinnedFolders": "Vastgezette mappen",
-  "Common Folders": "Veelvoorkomende mappen",
+  "Common Folders": "Algemene mappen",
   "Select a file": "Selecteer een bestand",
   "Select a folder": "Selecteer een map",
   "Continue": "Doorgaan",
@@ -63,7 +63,6 @@
   "Go back to {0}": "Ga terug naar {0}",
   "All Versions": "Alle versies",
   "Current Version": "Huidige versie",
-  "CurrentProfile": "Huidig profiel",
   "Profiles": "Profielen",
   "Drives": "Stations",
   "Switch to Grid-View": "Overschakelen naar rasterweergave",
@@ -96,13 +95,64 @@
   "Red": "Rood",
   "Green": "Groen",
   "Yellow": "Geel",
-  "Download": "Download",
-  "Remove": "Remove",
+  "Download": "Downloaden",
+  "Remove": "Verwijderen",
   "Welcome to Theme Changer!": "Welkom bij Theme Changer!",
   "Customize the size and colors in the App however you want to.": "Pas de grootte en kleuren in de App aan zoals je wilt.",
   "Click on any color to change it, or right-click to reset it.": "Klik op een kleur om deze te veranderen of klik met de rechtermuisknop om deze te resetten.",
   "Custom Theme": "Aangepast Thema",
-  "Do you want to apply your changes before leaving?": "Wilt u de wijzigingen toepassen voor u afsluit?",
-  "TaskCompleted": "Task Completed",
-  "UnexpectedError": "An unexpected error occurred"
+  "Do you want to apply your changes before leaving?": "Wilt u de wijzigingen toepassen voordat u afsluit?",
+  "TaskCompleted": "Taak voltooid",
+  "UnexpectedError": "Er is een onverwachte fout opgetreden",
+  "{0} ago": "{0} ago",
+  "in {0}": "in {0}",
+  "Today at {0}": "Today at {0}",
+  "Yesterday at {0}": "Yesterday at {0}",
+  "Tomorrow at {0}": "Tomorrow at {0}",
+  "Last {0} at {1}": "Last {0} at {1}",
+  "Next {0} at {1}": "Next {0} at {1}",
+  "{0} month ago on {1}": {
+    "One": "{0} month ago on {1}",
+    "Plural": "{0} months ago on {1}"
+  },
+  "in {0} month on {1}": {
+    "One": "in {0} month on {1}",
+    "Plural": "in {0} months on {1}"
+  },
+  "{0} day ago": {
+    "One": "{0} day ago",
+    "Plural": "{0} days ago"
+  },
+  "in {0} day": {
+    "One": "in {0} day",
+    "Plural": "in {0} days"
+  },
+  "{0} year": {
+    "One": "{0} year",
+    "Plural": "{0} years"
+  },
+  "{0} month": {
+    "One": "{0} month",
+    "Plural": "{0} months"
+  },
+  "{0} day": {
+    "One": "{0} day",
+    "Plural": "{0} days"
+  },
+  "{0} hour": {
+    "One": "{0} hour",
+    "Plural": "{0} hours"
+  },
+  "{0} minute": {
+    "One": "{0} minute",
+    "Plural": "{0} minutes"
+  },
+  "{0} second": {
+    "One": "{0} second",
+    "Plural": "{0} seconds"
+  },
+  "{0}d": "{0}d",
+  "{0}h": "{0}h",
+  "{0}m": "{0}m",
+  "{0}s": "{0}s"
 }

@@ -9,7 +9,7 @@
   "BlackListName": "名前でブラックリスト",
   "BlackListId": "Steam IDでブラックリスト",
   "GlobalTags": "グローバルタグ",
-  "GlobalTagsInfo": "全てのプレイヤーにアプリ上で表示されるタグ",
+  "GlobalTagsInfo": "全てのユーザーにアプリ上で表示されるタグ",
   "Links": "リンク",
   "StatusesCount": "ステータス ({0})",
   "InteractionCount": "依存関係 ({0})",
@@ -53,7 +53,7 @@
   "MissingDependency": "依存関係が不足",
   "Caution": "注意",
   "Warning": "警告",
-  "AttentionRequired": "注意が必要",
+  "AttentionRequired": "要注意",
   "Website": "ウェブサイト",
   "Donation": "寄付",
   "ManageSinglePackage": "特定のパッケージを管理",
@@ -71,14 +71,14 @@
   "PleaseReviewPackageUsage": "パッケージの有効な用途を選択して下さい。",
   "Interaction_Alternative": {
     "One": "「{1}」は「{0}」の代替として使用可能です。",
-    "Plural": "次のいずれかのパッケージは、「{0}」の代替として使用可能です。"
+    "Plural": "「{0}」のパッケージは、以下のいずれかの代替として使用可能です。"
   },
   "Interaction_SameFunctionality": {
     "One": "「{0}」と「{1}」は同じ機能があります。",
     "Plural": "「{0}」と以下のパッケージは同じ機能があります。"
   },
   "Interaction_IncompatibleWith": {
-    "One": "「{0}」と「{1}」は、互いに互換性がありません。",
+    "One": "「{0}」と「{1}」は互いに互換性がありません。",
     "Plural": "「{0}」は以下のパッケージと互換性がありません。"
   },
   "Interaction_CausesIssuesWith": {
@@ -98,28 +98,29 @@
     "Plural": "「{0}」は以下のパッケージによって引き継がれています。"
   },
   "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
-  "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要で必要ありません。",
+  "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要です。",
   "Status_Deprecated": "「{0}」は非推奨で、作者によるサポートがありません。",
-  "Status_AutoDeprecated": "「{0}」 は長期間で更新されておらず、恐らく作者によるサポートは無いでしょう。",
+  "Status_AutoDeprecated": "「{0}」は長期間で更新されていません。",
   "Status_Reupload": {
-    "Zero": "「{0}」はオリジナルパッケージの再アップロードです。",
+    "Zero": "「{0}」はオリジナルパッケージの再アップロード版です。",
     "One": "これは「{1}」の再アップロードです。"
   },
-  "Status_CausesIssues": "「{0}」はプレイ中のゲームで問題を引き起こします。",
+  "Status_CausesIssues": "「{0}」はプレイ中に、問題が発生する可能性があります。",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードが不可能になります。",
     "One": "「{0}」を有効にして新規でセーブを作成すると、「{0}」が無効の場合は該当するセーブデータのロードが不可能になります。\n\n必要に応じて、「{1}」を使ってセーブデータの復元を試して下さい。詳しくはワークショップの説明を確認して下さい。"
   },
   "Status_TestVersion": {
     "Zero": "これは「テスト」バージョンです。MODのテスト版は問題が発生する可能性や、更新すると想定外のエラーが発生する可能性があるので注意して下さい。",
-    "One": "「{1}」の「テスト」バージョンです。\nアップデートすることで、予期しない問題が発生する可能性があるので注意して下さい。"
+    "One": "「{1}」の「テスト」バージョンです。\n\nアップデートすることで、予期しない問題が発生する可能性があるので注意して下さい。"
   },
   "Status_MissingDlc": {
-    "One": "パッケージを使用するには、DLCがありません。",
+    "One": "パッケージを使用するには、DLCが未購入・有効ではありません。",
     "Plural": "パッケージを使用するには、以下のDLCがありません。"
   },
-  "Status_DependencyMod": "依存関係のMODですが、これを必要とするパッケージは使用していないようです。",
+  "Status_DependencyMod": "依存関係のMODですが、これを必要とするパッケージは未使用のようです。",
   "Status_SourceCodeNotAvailable": "MODのソースコードは公開されていません。作者を信頼できない場合は使用しないで下さい。",
+  "SourceAvailable": "ソースコードは公開中",
   "Status_MusicCanBeCopyrighted": "パック内に収録されている音楽は著作権で保護されている可能性があります。ストリーミングでの使用は避けた方が無難です。",
   "Status_IncompleteDescription": "MODのワークショップ内の説明文が少ない・曖昧です。作者を信頼できない場合は使用しないで下さい。",
   "OutputText": "予想される結果",
@@ -136,10 +137,10 @@
     "One": "以下のパッケージをサブスクする必要があります。",
     "Plural": "これらのパッケージをサブスクする必要があります。"
   },
-  "Action_RequiresConfiguration": "以下の手順に従う:",
+  "Action_RequiresConfiguration": "以下の手順を確認:",
   "Action_SelectOne": {
-    "One": "「{0}」と「{1}」の中から、どちらか「1つだけ」を選択して下さい。",
-    "Plural": "「{0}」と以下のパッケージから、どちらか「1つだけ」を選択して下さい。"
+    "One": "「{0}」と「{1}」の中から、どちらか1つだけを選択して下さい。",
+    "Plural": "「{0}」と以下のパッケージから、どちらか1つだけを選択して下さい。"
   },
   "Action_UnsubscribeThis": "「{0}」はサブスクを解除して下さい。",
   "Action_UnsubscribeOther": {
@@ -147,6 +148,9 @@
     "Plural": "以下のパッケージはサブスクを解除して下さい。"
   },
   "Action_ExcludeThis": "「{0}」を除外して下さい。",
+  "ExcludeThis": "パッケージを除外",
+  "Exclude": "除外",
+  "Unsubscribe": "サブスク解除",
   "Action_ExcludeOther": {
     "One": "「{1}」を除外して下さい。",
     "Plural": "以下のパッケージを除外する必要があります。"
@@ -170,7 +174,7 @@
   "CRT_Alternatives": "変更可能",
   "CRT_Status": "ステータス",
   "CRT_Ambiguous": "不明瞭",
-  "LastReviewDate": "{0} に最後のレビューを実行",
+  "LastReviewDate": "最後にレビューした日: {0}",
   "RequestReviewInfo": "このパッケージで問題が発生しましたか？",
   "RequestReview": "レビューを依頼",
   "MissingDependencyCount": {
@@ -184,10 +188,10 @@
     "Plural": "{0} {1} は注意が必要"
   },
   "ExcludeCount": {
-    "One": "{0} {1} は除外すべき",
-    "Plural": "{0} {1} は除外すべき"
+    "One": "{0} {1} は除外が必要",
+    "Plural": "{0} {1} は除外が必要"
   },
-  "UnsubscribeCount": "{0} {1} はサブスクを解除すべき",
+  "UnsubscribeCount": "{0} {1} はサブスク解除が必要",
   "SwitchCount": {
     "One": "{0} {1} は他へ切り替えが必要",
     "Plural": "{0} {1} は他へ切り替えが必要"
@@ -201,11 +205,15 @@
   "POFont": "Procedural Objectのフォントやモジュール",
   "NameList": "名前のリストやゲームの翻訳",
   "ApplyChangedBeforeExit": "保存していない変更点があります。\n\n続行する前に、これらの変更を適用しますか？",
-  "AuthorRetired": "{0} / {1} の作者は引退している・長期間で活動していません。\n今後のアップデートやパッケージの安定性は保証されません。",
+  "AuthorRetired": "{0} / {1} の作者は引退済み・長期間で活動していません。\n\n今後のアップデートやパッケージの安定性は保証されません。",
   "AuthorMalicious": "{0} / {1} の作者は、マルウェアなどのウイルスのような有害コンテンツをパッケージに含めたことで知られています。",
   "ReviewRequests": "レビューをリクエスト {0}",
   "DeleteRequest": "リクエストを削除",
   "ApplyRequestedChanges": "リクエストの変更を適用",
   "ManagePackage": "パッケージの管理",
-  "RequestReviewDisclaimer": "※あなたのSteam IDとログがリクエストと一緒に送信されます！"
+  "Banned": "BAN済み",
+  "NoIssues": "問題なし",
+  "RequestReviewDisclaimer": "※あなたのSteam IDとログがリクエストと一緒に送信されます！",
+  "ScenarioMaking": "シナリオの作成",
+  "ThemeMaking": "テーマの作成"
 }

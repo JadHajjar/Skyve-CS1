@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -69,8 +70,8 @@ public partial class PC_HelpAndLogs : PanelContent
 		}
 
 		B_CopyLogFile.Margin = B_LotLogCopy.Margin = B_SaveZip.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.UIScale);
-		slickSpacer1.Height = slickSpacer2.Height = (int)(1.5 * UI.FontScale);
-		slickSpacer1.Margin = slickSpacer2.Margin = UI.Scale(new Padding(5), UI.UIScale);
+		slickSpacer1.Height = slickSpacer2.Height = slickSpacer3.Height = slickSpacer4.Height = (int)(1.5 * UI.FontScale);
+		slickSpacer1.Margin = slickSpacer2.Margin = slickSpacer3.Margin = slickSpacer4.Margin = UI.Scale(new Padding(5), UI.UIScale);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -94,24 +95,48 @@ public partial class PC_HelpAndLogs : PanelContent
 		return true;
 	}
 
-	private void B_CopyZip_Click(object sender, EventArgs e)
+	private async void B_CopyZip_Click(object sender, EventArgs e)
 	{
-		LogUtil.CreateZipFileAndSetToClipboard();
+		B_CopyZip.Loading = true;
+		await Task.Run(() =>
+		{
+			try
+			{
+				LogUtil.CreateZipFileAndSetToClipboard();
+			}
+			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
+		});
+		B_CopyZip.Loading = false;
+
+		B_CopyZip.ImageName = "I_Check";
+		await Task.Delay(1500);
+		B_CopyZip.ImageName = "I_CopyFile";
 	}
 
-	private void B_SaveZip_Click(object sender, EventArgs e)
+	private async void B_SaveZip_Click(object sender, EventArgs e)
 	{
-		var folder = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs");
+		B_SaveZip.Loading = true;
 
-		Directory.CreateDirectory(folder);
-
-		var fileName = LogUtil.CreateZipFileAndSetToClipboard(folder);
-
-		try
+		await Task.Run(() =>
 		{
-			PlatformUtil.OpenFolder(fileName);
-		}
-		catch { }
+			try
+			{
+				var folder = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs");
+
+				Directory.CreateDirectory(folder);
+
+				var fileName = LogUtil.CreateZipFileAndSetToClipboard(folder);
+
+				PlatformUtil.OpenFolder(fileName);
+			}
+			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
+		});
+
+		B_SaveZip.Loading = false;
+
+		B_SaveZip.ImageName = "I_Check";
+		await Task.Delay(1500);
+		B_SaveZip.ImageName = "I_Log";
 	}
 
 	private void DD_LogFile_FileSelected(string obj)
@@ -193,5 +218,15 @@ public partial class PC_HelpAndLogs : PanelContent
 	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
 	{
 		slickSpacer3.Visible = slickScroll1.Percentage != 0;
+	}
+
+	private void B_OpenLog_Click(object sender, EventArgs e)
+	{
+		IOUtil.Execute(LogUtil.GameLogFile, string.Empty);
+	}
+
+	private void B_OpenAppData_Click(object sender, EventArgs e)
+	{
+		PlatformUtil.OpenFolder(LocationManager.AppDataPath);
 	}
 }

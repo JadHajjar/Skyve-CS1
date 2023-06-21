@@ -63,7 +63,6 @@
   "Go back to {0}": "Volver a {0}",
   "All Versions": "Todas las versiones",
   "Current Version": "Versión actual",
-  "CurrentProfile": "Perfil Actual",
   "Profiles": "Perfiles",
   "Drives": "Discos",
   "Switch to Grid-View": "Cambiar a vista de cuadrícula",
@@ -96,13 +95,64 @@
   "Red": "Rojo",
   "Green": "Verde",
   "Yellow": "Amarillo",
-  "Download": "Download",
-  "Remove": "Remove",
+  "Download": "Descargar",
+  "Remove": "Eliminar",
   "Welcome to Theme Changer!": "¡Bienvenido al \"Theme Changer\"!",
   "Customize the size and colors in the App however you want to.": "Personaliza el tamaño y los colores de la aplicación como quieras.",
   "Click on any color to change it, or right-click to reset it.": "Haga clic en cualquier color para cambiarlo, o haga clic derecho para restablecerlo.",
   "Custom Theme": "Tema personalizado",
   "Do you want to apply your changes before leaving?": "¿Quieres guardar los cambios antes de salir?",
-  "TaskCompleted": "Task Completed",
-  "UnexpectedError": "An unexpected error occurred"
+  "TaskCompleted": "Tarea Terminada",
+  "UnexpectedError": "Se ha producido un error desconocido",
+  "{0} ago": "hace {0}",
+  "in {0}": "en {0}",
+  "Today at {0}": "hoy a las {0}",
+  "Yesterday at {0}": "Ayer a las {0}",
+  "Tomorrow at {0}": "Mañana a las {0}",
+  "Last {0} at {1}": "Último {0} a las {1}",
+  "Next {0} at {1}": "Siguiente {0} a las {1}",
+  "{0} month ago on {1}": {
+    "One": "hace {0} mes en {1}",
+    "Plural": "hace {0} meses en {1}"
+  },
+  "in {0} month on {1}": {
+    "One": "en {0} mes el {1}",
+    "Plural": "en {0} meses en {1}"
+  },
+  "{0} day ago": {
+    "One": "hace {0} día",
+    "Plural": "hace {0} días"
+  },
+  "in {0} day": {
+    "One": "en {0} día",
+    "Plural": "en {0} dias"
+  },
+  "{0} year": {
+    "One": "{0} año",
+    "Plural": "{0} años"
+  },
+  "{0} month": {
+    "One": "{0} mes",
+    "Plural": "{0} meses"
+  },
+  "{0} day": {
+    "One": "{0} día",
+    "Plural": "{0} días"
+  },
+  "{0} hour": {
+    "One": "{0} hora",
+    "Plural": "{0} horas"
+  },
+  "{0} minute": {
+    "One": "{0} minuto",
+    "Plural": "{0} minutos"
+  },
+  "{0} second": {
+    "One": "{0} segundo",
+    "Plural": "{0} segundos"
+  },
+  "{0}d": "{0}d",
+  "{0}h": "{0}h",
+  "{0}m": "{0}m",
+  "{0}s": "{0}s"
 }

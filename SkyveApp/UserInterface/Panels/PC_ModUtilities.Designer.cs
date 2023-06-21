@@ -29,21 +29,35 @@ partial class PC_ModUtilities
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon17 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon16 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon9 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon8 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon7 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon11 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon10 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon12 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon13 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon15 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon14 = new SlickControls.DynamicIcon();
 			this.TB_CollectionLink = new SlickControls.SlickTextBox();
 			this.P_Collecttions = new SlickControls.RoundedGroupPanel();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_LoadCollection = new SlickControls.SlickButton();
 			this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
+			this.P_Reset = new SlickControls.RoundedGroupTableLayoutPanel();
+			this.B_ResetImageCache = new SlickControls.SlickButton();
+			this.B_ResetSnoozes = new SlickControls.SlickButton();
+			this.B_ReloadAllData = new SlickControls.SlickButton();
+			this.B_ResetSteamCache = new SlickControls.SlickButton();
+			this.B_ResetCompatibilityCache = new SlickControls.SlickButton();
+			this.B_ResetModsCache = new SlickControls.SlickButton();
 			this.P_Cleanup = new SlickControls.RoundedGroupTableLayoutPanel();
 			this.L_CleanupInfo = new System.Windows.Forms.Label();
 			this.B_Cleanup = new SlickControls.SlickButton();
@@ -70,6 +84,7 @@ partial class PC_ModUtilities
 			this.P_Collecttions.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.TLP_Main.SuspendLayout();
+			this.P_Reset.SuspendLayout();
 			this.P_Cleanup.SuspendLayout();
 			this.P_Text.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -88,6 +103,7 @@ partial class PC_ModUtilities
 			// TB_CollectionLink
 			// 
 			this.TB_CollectionLink.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TB_CollectionLink.EnterTriggersClick = false;
 			this.TB_CollectionLink.LabelText = "CollectionLink";
 			this.TB_CollectionLink.Location = new System.Drawing.Point(3, 3);
 			this.TB_CollectionLink.Name = "TB_CollectionLink";
@@ -111,8 +127,8 @@ partial class PC_ModUtilities
 			this.TLP_Main.SetColumnSpan(this.P_Collecttions, 2);
 			this.P_Collecttions.Controls.Add(this.tableLayoutPanel1);
 			this.P_Collecttions.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon10.Name = "I_Steam";
-			this.P_Collecttions.ImageName = dynamicIcon10;
+			dynamicIcon17.Name = "I_Steam";
+			this.P_Collecttions.ImageName = dynamicIcon17;
 			this.P_Collecttions.Location = new System.Drawing.Point(3, 227);
 			this.P_Collecttions.Name = "P_Collecttions";
 			this.P_Collecttions.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
@@ -145,8 +161,8 @@ partial class PC_ModUtilities
 			this.B_LoadCollection.AutoSize = true;
 			this.B_LoadCollection.ColorShade = null;
 			this.B_LoadCollection.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon9.Name = "I_Import";
-			this.B_LoadCollection.ImageName = dynamicIcon9;
+			dynamicIcon16.Name = "I_Import";
+			this.B_LoadCollection.ImageName = dynamicIcon16;
 			this.B_LoadCollection.Location = new System.Drawing.Point(573, 3);
 			this.B_LoadCollection.Name = "B_LoadCollection";
 			this.B_LoadCollection.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
@@ -163,6 +179,7 @@ partial class PC_ModUtilities
 			this.TLP_Main.ColumnCount = 2;
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TLP_Main.Controls.Add(this.P_Reset, 0, 5);
 			this.TLP_Main.Controls.Add(this.P_Cleanup, 0, 1);
 			this.TLP_Main.Controls.Add(this.P_Text, 0, 4);
 			this.TLP_Main.Controls.Add(this.P_BOB, 1, 4);
@@ -172,17 +189,150 @@ partial class PC_ModUtilities
 			this.TLP_Main.Location = new System.Drawing.Point(0, 0);
 			this.TLP_Main.MinimumSize = new System.Drawing.Size(700, 0);
 			this.TLP_Main.Name = "TLP_Main";
-			this.TLP_Main.RowCount = 7;
+			this.TLP_Main.RowCount = 8;
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
 			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.TLP_Main.Size = new System.Drawing.Size(700, 897);
+			this.TLP_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+			this.TLP_Main.Size = new System.Drawing.Size(700, 1026);
 			this.TLP_Main.TabIndex = 17;
+			// 
+			// P_Reset
+			// 
+			this.P_Reset.AddOutline = true;
+			this.P_Reset.AutoSize = true;
+			this.P_Reset.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.P_Reset.ColorStyle = Extensions.ColorStyle.Red;
+			this.P_Reset.ColumnCount = 3;
+			this.TLP_Main.SetColumnSpan(this.P_Reset, 2);
+			this.P_Reset.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.P_Reset.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.P_Reset.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.P_Reset.Controls.Add(this.B_ResetImageCache, 2, 0);
+			this.P_Reset.Controls.Add(this.B_ResetSnoozes, 0, 1);
+			this.P_Reset.Controls.Add(this.B_ReloadAllData, 0, 0);
+			this.P_Reset.Controls.Add(this.B_ResetSteamCache, 2, 1);
+			this.P_Reset.Controls.Add(this.B_ResetCompatibilityCache, 1, 1);
+			this.P_Reset.Controls.Add(this.B_ResetModsCache, 1, 0);
+			this.P_Reset.Dock = System.Windows.Forms.DockStyle.Top;
+			dynamicIcon7.Name = "I_Undo";
+			this.P_Reset.ImageName = dynamicIcon7;
+			this.P_Reset.Info = "ResetInfo";
+			this.P_Reset.Location = new System.Drawing.Point(3, 800);
+			this.P_Reset.Name = "P_Reset";
+			this.P_Reset.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
+			this.P_Reset.RowCount = 2;
+			this.P_Reset.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.P_Reset.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.P_Reset.Size = new System.Drawing.Size(694, 103);
+			this.P_Reset.TabIndex = 22;
+			this.P_Reset.Text = "Reset";
+			// 
+			// B_ResetImageCache
+			// 
+			this.B_ResetImageCache.AutoSize = true;
+			this.B_ResetImageCache.ColorShade = null;
+			this.B_ResetImageCache.ColorStyle = Extensions.ColorStyle.Red;
+			this.B_ResetImageCache.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon1.Name = "I_RemoveImage";
+			this.B_ResetImageCache.ImageName = dynamicIcon1;
+			this.B_ResetImageCache.Location = new System.Drawing.Point(462, 57);
+			this.B_ResetImageCache.Name = "B_ResetImageCache";
+			this.B_ResetImageCache.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_ResetImageCache.Size = new System.Drawing.Size(103, 14);
+			this.B_ResetImageCache.SpaceTriggersClick = true;
+			this.B_ResetImageCache.TabIndex = 15;
+			this.B_ResetImageCache.Text = "ResetImageCache";
+			this.B_ResetImageCache.Click += new System.EventHandler(this.B_ResetImageCache_Click);
+			// 
+			// B_ResetSnoozes
+			// 
+			this.B_ResetSnoozes.AutoSize = true;
+			this.B_ResetSnoozes.ColorShade = null;
+			this.B_ResetSnoozes.ColorStyle = Extensions.ColorStyle.Yellow;
+			this.B_ResetSnoozes.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon2.Name = "I_Snooze";
+			this.B_ResetSnoozes.ImageName = dynamicIcon2;
+			this.B_ResetSnoozes.Location = new System.Drawing.Point(12, 77);
+			this.B_ResetSnoozes.Name = "B_ResetSnoozes";
+			this.B_ResetSnoozes.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_ResetSnoozes.Size = new System.Drawing.Size(103, 14);
+			this.B_ResetSnoozes.SpaceTriggersClick = true;
+			this.B_ResetSnoozes.TabIndex = 15;
+			this.B_ResetSnoozes.Text = "ResetSnoozes";
+			this.B_ResetSnoozes.Click += new System.EventHandler(this.B_ResetSnoozes_Click);
+			// 
+			// B_ReloadAllData
+			// 
+			this.B_ReloadAllData.AutoSize = true;
+			this.B_ReloadAllData.ColorShade = null;
+			this.B_ReloadAllData.ColorStyle = Extensions.ColorStyle.Yellow;
+			this.B_ReloadAllData.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon3.Name = "I_Refresh";
+			this.B_ReloadAllData.ImageName = dynamicIcon3;
+			this.B_ReloadAllData.Location = new System.Drawing.Point(12, 57);
+			this.B_ReloadAllData.Name = "B_ReloadAllData";
+			this.B_ReloadAllData.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_ReloadAllData.Size = new System.Drawing.Size(103, 14);
+			this.B_ReloadAllData.SpaceTriggersClick = true;
+			this.B_ReloadAllData.TabIndex = 15;
+			this.B_ReloadAllData.Text = "ReloadAllData";
+			this.B_ReloadAllData.Click += new System.EventHandler(this.B_ReloadAllData_Click);
+			// 
+			// B_ResetSteamCache
+			// 
+			this.B_ResetSteamCache.AutoSize = true;
+			this.B_ResetSteamCache.ColorShade = null;
+			this.B_ResetSteamCache.ColorStyle = Extensions.ColorStyle.Red;
+			this.B_ResetSteamCache.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon4.Name = "I_RemoveSteam";
+			this.B_ResetSteamCache.ImageName = dynamicIcon4;
+			this.B_ResetSteamCache.Location = new System.Drawing.Point(462, 77);
+			this.B_ResetSteamCache.Name = "B_ResetSteamCache";
+			this.B_ResetSteamCache.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_ResetSteamCache.Size = new System.Drawing.Size(103, 14);
+			this.B_ResetSteamCache.SpaceTriggersClick = true;
+			this.B_ResetSteamCache.TabIndex = 15;
+			this.B_ResetSteamCache.Text = "ResetSteamCache";
+			this.B_ResetSteamCache.Click += new System.EventHandler(this.B_ResetSteamCache_Click);
+			// 
+			// B_ResetCompatibilityCache
+			// 
+			this.B_ResetCompatibilityCache.AutoSize = true;
+			this.B_ResetCompatibilityCache.ColorShade = null;
+			this.B_ResetCompatibilityCache.ColorStyle = Extensions.ColorStyle.Orange;
+			this.B_ResetCompatibilityCache.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon5.Name = "I_CompatibilityReport";
+			this.B_ResetCompatibilityCache.ImageName = dynamicIcon5;
+			this.B_ResetCompatibilityCache.Location = new System.Drawing.Point(237, 77);
+			this.B_ResetCompatibilityCache.Name = "B_ResetCompatibilityCache";
+			this.B_ResetCompatibilityCache.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_ResetCompatibilityCache.Size = new System.Drawing.Size(103, 14);
+			this.B_ResetCompatibilityCache.SpaceTriggersClick = true;
+			this.B_ResetCompatibilityCache.TabIndex = 15;
+			this.B_ResetCompatibilityCache.Text = "ResetCompatibilityCache";
+			this.B_ResetCompatibilityCache.Click += new System.EventHandler(this.B_ResetCompatibilityCache_Click);
+			// 
+			// B_ResetModsCache
+			// 
+			this.B_ResetModsCache.AutoSize = true;
+			this.B_ResetModsCache.ColorShade = null;
+			this.B_ResetModsCache.ColorStyle = Extensions.ColorStyle.Orange;
+			this.B_ResetModsCache.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon6.Name = "I_Mods";
+			this.B_ResetModsCache.ImageName = dynamicIcon6;
+			this.B_ResetModsCache.Location = new System.Drawing.Point(237, 57);
+			this.B_ResetModsCache.Name = "B_ResetModsCache";
+			this.B_ResetModsCache.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.B_ResetModsCache.Size = new System.Drawing.Size(103, 14);
+			this.B_ResetModsCache.SpaceTriggersClick = true;
+			this.B_ResetModsCache.TabIndex = 15;
+			this.B_ResetModsCache.Text = "ResetModsCache";
+			this.B_ResetModsCache.Click += new System.EventHandler(this.B_ResetModsCache_Click);
 			// 
 			// P_Cleanup
 			// 
@@ -196,8 +346,8 @@ partial class PC_ModUtilities
 			this.P_Cleanup.Controls.Add(this.L_CleanupInfo, 0, 1);
 			this.P_Cleanup.Controls.Add(this.B_Cleanup, 1, 0);
 			this.P_Cleanup.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon2.Name = "I_Broom";
-			this.P_Cleanup.ImageName = dynamicIcon2;
+			dynamicIcon9.Name = "I_Broom";
+			this.P_Cleanup.ImageName = dynamicIcon9;
 			this.P_Cleanup.Location = new System.Drawing.Point(3, 118);
 			this.P_Cleanup.Name = "P_Cleanup";
 			this.P_Cleanup.Padding = new System.Windows.Forms.Padding(9);
@@ -225,8 +375,8 @@ partial class PC_ModUtilities
 			this.B_Cleanup.AutoSize = true;
 			this.B_Cleanup.ColorShade = null;
 			this.B_Cleanup.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_AppIcon";
-			this.B_Cleanup.ImageName = dynamicIcon1;
+			dynamicIcon8.Name = "I_AppIcon";
+			this.B_Cleanup.ImageName = dynamicIcon8;
 			this.B_Cleanup.Location = new System.Drawing.Point(582, 39);
 			this.B_Cleanup.Name = "B_Cleanup";
 			this.B_Cleanup.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
@@ -244,8 +394,8 @@ partial class PC_ModUtilities
 			this.P_Text.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_Text.Controls.Add(this.tableLayoutPanel3);
 			this.P_Text.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon4.Name = "I_Text";
-			this.P_Text.ImageName = dynamicIcon4;
+			dynamicIcon11.Name = "I_Text";
+			this.P_Text.ImageName = dynamicIcon11;
 			this.P_Text.Info = "ImportFromTextInfo";
 			this.P_Text.Location = new System.Drawing.Point(3, 576);
 			this.P_Text.Name = "P_Text";
@@ -293,8 +443,8 @@ partial class PC_ModUtilities
 			this.B_ImportClipboard.AutoSize = true;
 			this.B_ImportClipboard.ColorShade = null;
 			this.B_ImportClipboard.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_Copy";
-			this.B_ImportClipboard.ImageName = dynamicIcon3;
+			dynamicIcon10.Name = "I_Copy";
+			this.B_ImportClipboard.ImageName = dynamicIcon10;
 			this.B_ImportClipboard.Location = new System.Drawing.Point(216, 113);
 			this.B_ImportClipboard.Name = "B_ImportClipboard";
 			this.B_ImportClipboard.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
@@ -311,8 +461,8 @@ partial class PC_ModUtilities
 			this.P_BOB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_BOB.Controls.Add(this.tableLayoutPanel6);
 			this.P_BOB.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon5.Name = "I_XML";
-			this.P_BOB.ImageName = dynamicIcon5;
+			dynamicIcon12.Name = "I_XML";
+			this.P_BOB.ImageName = dynamicIcon12;
 			this.P_BOB.Info = "XMLImportInfo";
 			this.P_BOB.Location = new System.Drawing.Point(353, 576);
 			this.P_BOB.Name = "P_BOB";
@@ -359,8 +509,8 @@ partial class PC_ModUtilities
 			this.TLP_Main.SetColumnSpan(this.P_LsmReport, 2);
 			this.P_LsmReport.Controls.Add(this.tableLayoutPanel4);
 			this.P_LsmReport.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon6.Name = "I_LSM";
-			this.P_LsmReport.ImageName = dynamicIcon6;
+			dynamicIcon13.Name = "I_LSM";
+			this.P_LsmReport.ImageName = dynamicIcon13;
 			this.P_LsmReport.Info = "LsmImportInfo";
 			this.P_LsmReport.Location = new System.Drawing.Point(3, 351);
 			this.P_LsmReport.Name = "P_LsmReport";
@@ -429,8 +579,8 @@ partial class PC_ModUtilities
 			this.P_ModIssues.Controls.Add(this.L_Incomplete, 1, 0);
 			this.P_ModIssues.Controls.Add(this.P_Incomplete, 1, 1);
 			this.P_ModIssues.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon8.Name = "I_ModWarning";
-			this.P_ModIssues.ImageName = dynamicIcon8;
+			dynamicIcon15.Name = "I_ModWarning";
+			this.P_ModIssues.ImageName = dynamicIcon15;
 			this.P_ModIssues.Location = new System.Drawing.Point(3, 3);
 			this.P_ModIssues.Name = "P_ModIssues";
 			this.P_ModIssues.Padding = new System.Windows.Forms.Padding(9, 54, 9, 9);
@@ -459,8 +609,8 @@ partial class PC_ModUtilities
 			this.B_ReDownload.ColorShade = null;
 			this.B_ReDownload.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_ReDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_Tools";
-			this.B_ReDownload.ImageName = dynamicIcon7;
+			dynamicIcon14.Name = "I_Tools";
+			this.B_ReDownload.ImageName = dynamicIcon14;
 			this.B_ReDownload.Location = new System.Drawing.Point(571, 57);
 			this.B_ReDownload.Name = "B_ReDownload";
 			this.P_ModIssues.SetRowSpan(this.B_ReDownload, 2);
@@ -506,7 +656,7 @@ partial class PC_ModUtilities
 			this.slickScroll1.LinkedControl = this.TLP_Main;
 			this.slickScroll1.Location = new System.Drawing.Point(781, 31);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(10, 846);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 1046);
 			this.slickScroll1.SmallHandle = true;
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 18;
@@ -520,7 +670,7 @@ partial class PC_ModUtilities
 			this.P_Container.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.P_Container.Location = new System.Drawing.Point(0, 31);
 			this.P_Container.Name = "P_Container";
-			this.P_Container.Size = new System.Drawing.Size(781, 846);
+			this.P_Container.Size = new System.Drawing.Size(781, 1046);
 			this.P_Container.TabIndex = 19;
 			// 
 			// slickSpacer1
@@ -542,7 +692,7 @@ partial class PC_ModUtilities
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_ModUtilities";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
-			this.Size = new System.Drawing.Size(791, 877);
+			this.Size = new System.Drawing.Size(791, 1077);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.Controls.SetChildIndex(this.slickSpacer1, 0);
 			this.Controls.SetChildIndex(this.slickScroll1, 0);
@@ -553,6 +703,8 @@ partial class PC_ModUtilities
 			this.tableLayoutPanel1.PerformLayout();
 			this.TLP_Main.ResumeLayout(false);
 			this.TLP_Main.PerformLayout();
+			this.P_Reset.ResumeLayout(false);
+			this.P_Reset.PerformLayout();
 			this.P_Cleanup.ResumeLayout(false);
 			this.P_Cleanup.PerformLayout();
 			this.P_Text.ResumeLayout(false);
@@ -604,4 +756,11 @@ partial class PC_ModUtilities
 	private System.Windows.Forms.Label L_OutOfDate;
 	private System.Windows.Forms.Panel P_OutOfDate;
 	private System.Windows.Forms.Panel P_Incomplete;
+	private SlickControls.RoundedGroupTableLayoutPanel P_Reset;
+	private SlickControls.SlickButton B_ResetImageCache;
+	private SlickControls.SlickButton B_ResetSnoozes;
+	private SlickControls.SlickButton B_ReloadAllData;
+	private SlickControls.SlickButton B_ResetSteamCache;
+	private SlickControls.SlickButton B_ResetCompatibilityCache;
+	private SlickControls.SlickButton B_ResetModsCache;
 }

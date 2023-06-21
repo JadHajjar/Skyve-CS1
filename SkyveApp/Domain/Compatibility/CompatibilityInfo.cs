@@ -1,7 +1,8 @@
 ﻿using Extensions;
 
 using Newtonsoft.Json;
-
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities.Managers;

@@ -133,7 +133,7 @@ public static class ImageManager
 			using var ms = await _httpClient.GetStreamAsync(url);
 			using var img = Image.FromStream(ms);
 
-			var squareSize = img.Width <= 64 ? img.Width : 512;
+			var squareSize = Math.Min(img.Width, 512);
 			var size = string.IsNullOrEmpty(fileName) ? img.Size.GetProportionalDownscaledSize(squareSize) : img.Size;
 			using var image = string.IsNullOrEmpty(fileName) ? square ? new Bitmap(squareSize, squareSize) : new Bitmap(size.Width, size.Height) : img;
 
@@ -239,5 +239,25 @@ public static class ImageManager
 			}
 		}
 		catch { }
+	}
+
+	internal static void ClearCache()
+	{
+		lock (_lockObjects)
+		{
+			foreach (var item in _cache.Values)
+				item.image?.Dispose();
+
+			_cache.Clear();
+
+			foreach (var item in Directory.EnumerateFiles( LocationManager.Combine(ISave.DocsFolder, "Thumbs")))
+			{
+				try
+				{
+					ExtensionClass.DeleteFile(item);
+				}
+				catch { }
+			}
+		}
 	}
 }

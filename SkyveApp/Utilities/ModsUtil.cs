@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
@@ -111,6 +112,11 @@ internal static class ModsUtil
 
 	internal static void SetIncluded(Mod mod, bool value)
 	{
+		if (!value && ModLogicManager.IsRequired(mod))
+		{
+			value = true;
+		}
+
 		if (ProfileManager.ApplyingProfile || ContentUtil.BulkUpdating || CitiesManager.IsRunning())
 		{
 #if DEBUG
@@ -125,10 +131,7 @@ internal static class ModsUtil
 
 		if (CentralManager.SessionSettings.UserSettings.LinkModAssets && mod.Package.Assets != null)
 		{
-			foreach (var asset in mod.Package.Assets)
-			{
-				asset.IsIncluded = value;
-			}
+			ContentUtil.SetBulkIncluded(mod.Package.Assets, value);
 		}
 
 		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
@@ -287,16 +290,15 @@ internal static class ModsUtil
 	{
 		tags = new();
 
-		if (package?.Name is null)
-		{
-			return string.Empty;
-		}
-
-		var text = package.Name.RegexRemove(@"(?<!Catalogue\s+)v?\d+\.\d+(\.\d+)*(-[\d\w]+)*");
+		var text = package?.Name.RegexRemove(@"v?\d+\.\d+(\.\d+)*(-[\d\w]+)*") ?? Locale.UnknownPackage;
 		var tagMatches = Regex.Matches(text, @"[\[\(](.+?)[\]\)]");
 
 		text = text.RegexRemove(@"[\[\(](.+?)[\]\)]").RemoveDoubleSpaces().Trim('-', ']', '[', '(', ')', ' ');
 
+		if (package?.Workshop == false)
+		{
+			tags.Add((FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), Locale.Local.One.ToUpper()));
+		}
 
 		foreach (Match match in tagMatches)
 		{
@@ -314,11 +316,25 @@ internal static class ModsUtil
 					_ => (Color?)null
 				};
 
+				if (package?.Workshop == false && color is not null)
+				{
+					continue;
+				}
+
 				tags.Add((color ?? FormDesign.Design.ButtonColor, color is null ? tagText : LocaleHelper.GetGlobalText(tagText).One.ToUpper()));
 			}
 		}
 
-		if (package.Incompatible)
+		if (package is null)
+		{
+			return text;
+		}
+
+		if (package.Banned)
+		{
+			tags.Add((FormDesign.Design.RedColor, LocaleCR.Banned.One.ToUpper()));
+		}
+		else if (package.Incompatible)
 		{
 			tags.Add((FormDesign.Design.RedColor, LocaleCR.Incompatible.One.ToUpper()));
 		}
@@ -326,7 +342,7 @@ internal static class ModsUtil
 		{
 			var compatibility = package.GetCompatibilityInfo();
 
-			if (compatibility.Data?.Package.Stability is Domain.Compatibility.PackageStability.Broken)
+			if (compatibility.Data?.Package.Stability is PackageStability.Broken)
 			{
 				tags.Add((Color.FromArgb(225, FormDesign.Design.RedColor), LocaleCR.Broken.One.ToUpper()));
 			}

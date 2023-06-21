@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class PackageCrList : SlickStackedListControl<ulong>
+internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectangles>
 {
 	public PackageCrList()
 	{
@@ -30,19 +31,19 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		Font = UI.Font(7F, FontStyle.Bold);
 	}
 
-	protected override IEnumerable<DrawableItem<ulong>> OrderItems(IEnumerable<DrawableItem<ulong>> items)
+	protected override IEnumerable<DrawableItem<ulong, PackageCrList.Rectangles>> OrderItems(IEnumerable<DrawableItem<ulong, PackageCrList.Rectangles>> items)
 	{
 		return items.OrderByDescending(x => SteamUtil.GetItem(x.Item)?.ServerTime);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<ulong> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<ulong, PackageCrList.Rectangles> item, Point location)
 	{
 		return true;
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<ulong> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ulong, PackageCrList.Rectangles> e)
 	{
-		base.OnPaintItem(e);
+		base.OnPaintItemList(e);
 
 		var Package = SteamUtil.GetItem(e.Item);
 		var imageRect = e.ClipRectangle.Pad(Padding);
@@ -101,6 +102,23 @@ internal class PackageCrList : SlickStackedListControl<ulong>
 		if (cr.Data.Package.ReviewDate > Package.ServerTime)
 		{
 			e.DrawLabel(Locale.UpToDate, null, FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomRight, smaller: true);
+		}
+	}
+
+	internal class Rectangles : IDrawableItemRectangles<ulong>
+	{
+		public ulong Item { get; set; }
+
+		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
+		{
+			text = string.Empty;
+			point = default;
+			return false;
+		}
+
+		public bool IsHovered(Control instance, Point location)
+		{
+			return true;
 		}
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
@@ -42,11 +41,11 @@ public class Package : IPackage
 	public DownloadStatus Status => ModsUtil.GetStatus(this, out _);
 	public string? StatusReason { get { ModsUtil.GetStatus(this, out var reason); return reason; } }
 	public bool IsIncluded { get => (Mod?.IsIncluded ?? true) && (Assets?.All(x => x.IsIncluded) ?? true); set => ContentUtil.SetBulkIncluded(new[] { this }, value); }
-	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(Mod.FileName)));
+	public SteamWorkshopItem? WorkshopInfo => SteamUtil.GetItem(SteamId != 0 ? SteamId : Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(Mod.FileName)).If(0ul, ulong.TryParse(Path.GetFileName(Folder), out var id) ? id : 0));
 	internal PackageUsage Usage => this.GetCompatibilityInfo().Data?.Package.Usage ?? (PackageUsage)(-1);
 	Package? IPackage.Package => this;
-	public string? Name => (Workshop ? WorkshopInfo?.Name : null) ?? Path.GetFileName(Folder);
-	public bool IsMod => Mod is not null;// || (WorkshopInfo?.IsMod ?? false);
+	public string? Name => WorkshopInfo?.Name ?? Path.GetFileName(Folder);
+	public bool IsMod => Mod is not null;
 	public IEnumerable<TagItem> Tags => WorkshopInfo?.Tags ?? Enumerable.Empty<TagItem>();
 	public Bitmap? IconImage => WorkshopInfo?.IconImage;
 	public Bitmap? AuthorIconImage => WorkshopInfo?.AuthorIconImage;
@@ -61,6 +60,7 @@ public class Package : IPackage
 	public ulong[]? RequiredPackages => WorkshopInfo?.RequiredPackages;
 	public bool RemovedFromSteam => WorkshopInfo?.RemovedFromSteam ?? false;
 	public bool Incompatible => WorkshopInfo?.Incompatible ?? false;
+	public bool Banned => WorkshopInfo?.Banned ?? false;
 	public bool IsCollection => WorkshopInfo?.IsCollection ?? false;
 	public long ServerSize => WorkshopInfo?.ServerSize ?? 0;
 	public string? SteamDescription => WorkshopInfo?.SteamDescription;
@@ -83,7 +83,7 @@ public class Package : IPackage
 			}
 		}
 
-		if (Assets != null)
+		if (Assets is not null)
 		{
 			foreach (var item in Assets)
 			{

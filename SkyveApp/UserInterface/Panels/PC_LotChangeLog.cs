@@ -3,6 +3,7 @@
 using SlickControls;
 
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_LotChangeLog : PC_Changelog
@@ -27,4 +28,13 @@ internal class PC_LotChangeLog : PC_Changelog
 
 		return name;
 	}
+
+#if DEBUG
+	protected override void PrepareCurrentVersion(VersionChangeLog current)
+	{
+		Clipboard.SetText($"# :skyve: Skyve v{current.VersionString}\r\n"
+			+ (string.IsNullOrEmpty(current.Tagline) ? string.Empty : $"### *{current.Tagline}*\r\n")
+			+ current.ChangeGroups.ListStrings(x => $"## {x.Name}\r\n{x.Changes.ListStrings(y => $"* {y}", "\r\n")}", "\r\n\r\n"));
+	}
+#endif
 }

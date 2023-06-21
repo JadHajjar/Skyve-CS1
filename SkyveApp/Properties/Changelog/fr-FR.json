@@ -357,7 +357,7 @@
                 "Changes": [
                     "Amélioration des performances de l'application. Chargement plus rapide et moins de blocages attendus.",
                     "Correction d'une interaction entre les mods similaires affichés dans le rapport de compatibilité lorsque vous n'en avez qu'un seul.",
-                    "Correction de mod détecté, à tort, dans le dossier des ressources local."
+                    "Correction de mod détecté, à tort, dans le dossier d'assets local."
                 ]
             }
         ]
@@ -391,7 +391,7 @@
             {
                 "Name": "Corrections",
                 "Changes": [
-                    "Correction du résumé de l'actif qui ne s'affichait pas dans le tableau de bord.",
+                    "Correction du résumé de l'asset qui ne s'affichait pas dans le tableau de bord.",
                     "Correction du Status obsolète."
                 ]
             }
@@ -420,29 +420,130 @@
                 "Name": "Le système d'abonnement a été retravaillé",
                 "Changes": [
                     "Vous pouvez désormais vous abonner à des paquets pendant que le jeu est ouvert.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "S'abonner à plusieurs éléments à la suite les mettra dans une liste en attente au lieu d'ouvrir le jeu à chaque fois.",
+                    "Ajout d'une boîte en bas à gauche de l'appli pour vous informer de toutes les tâches d'abonnement/désabonnement en attente.",
                     "Ajout d'une option avancée pour forcer le téléchargement ou la suppression de paquets dès que vous vous abonnez/désabonnez dans Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Les éléments récemment abonnés ne sont plus rechargés lorsque le jeu est ouvert.\nCela empêche le gel de votre jeu ainsi que le dysfonctionnement des mods."
                 ]
             },
             {
                 "Name": "Nouveau",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Ajout de \"Afficher le contenu de ce profil\" dans le menu contextuel des profils.",
                     "Ajout d'une option \"Forcer le téléchargement\" en faisant clique droit sur un paquet.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "Ajout de plus de contexte à certaines popups",
+                    "Ajout de \"Télécharger tous les éléments affiché\" dans les actions des pages de liste."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Corrections",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
+                    "Correction de la mise à jour instantanée de la liste des profils.",
                     "Les profils de paquets montrent désormais leur nom Workshop.",
                     "Les paquets chargent correctement les informations Steam dès la première fois quand vous visionnez leur profil ou collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-                    "Improved the performance for people with a lot of mods."
+                    "Le nom des mods locaux a été retourné au nom du dossier au lieu de celui du Workshop pour éviter les problèmes.",
+                    "Amélioration des performances pour les personnes ayant beaucoup de mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "05/06/2023",
+        "ChangeGroups": [
+            {
+                "Name": "Corrections",
+                "Changes": [
+                    "Correction d'un crash au lancement."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "12/06/2023",
+        "ChangeGroups": [
+            {
+                "Name": "Corrections",
+                "Changes": [
+                    "Mis à jour pour la dernière mise à jour du jeu."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "13/06/2023",
+        "Tagline": "Découvrez les Profils de la communauté !",
+        "ChangeGroups": [
+            {
+                "Name": "Profils de la communauté",
+                "Changes": [
+                    "Vous pouvez désormais mettre en ligne un profil, dans la limite de 5 par utilisateur.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Les profils de la communauté peuvent être téléchargé ou mis à jour si vous l'avez localement.",
+                    "Vous pouvez découvrir des profils de la communauté en utilisant le nouveau bouton dans l'onglet profils.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Changements de profil",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Amélioration des performances en activant/désactivant les paquets.",
+                    "Ajout de la traduction Hongroise"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
                 ]
             }
         ]

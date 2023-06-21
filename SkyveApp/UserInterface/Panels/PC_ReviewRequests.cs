@@ -1,6 +1,5 @@
 ﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -34,7 +33,7 @@ public partial class PC_ReviewRequests : PanelContent
 	{
 		base.OnShown();
 
-		_reviewRequests = (await CompatibilityApiUtil.GetReviewRequests())?.ToList() ?? _reviewRequests;
+		_reviewRequests = (await SkyveApiUtil.GetReviewRequests())?.ToList() ?? _reviewRequests;
 
 		packageCrList.SetItems(_reviewRequests.Select(x => x.PackageId).Distinct());
 
@@ -116,7 +115,7 @@ public partial class PC_ReviewRequests : PanelContent
 
 		foreach (var request in _reviewRequests.Where(x => x.PackageId == CurrentPackage))
 		{
-			await CompatibilityApiUtil.ProcessReviewRequest(request);
+			await SkyveApiUtil.ProcessReviewRequest(request);
 		}
 
 		OnShown();

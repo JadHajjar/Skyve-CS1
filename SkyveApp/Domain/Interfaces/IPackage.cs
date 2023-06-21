@@ -33,4 +33,5 @@ public interface IPackage
 	string Folder { get; }
 	bool RemovedFromSteam { get; }
 	bool Incompatible { get; }
+	bool Banned { get; }
 }

@@ -1,6 +1,6 @@
 ﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Steam;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
@@ -98,7 +98,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		logControl.Loading = true;
 
-		var request = await CompatibilityApiUtil.GetReviewRequest(_request.UserId, _request.PackageId);
+		var request = await SkyveApiUtil.GetReviewRequest(_request.UserId, _request.PackageId);
 
 		if (request != null)
 		{
@@ -187,7 +187,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		B_DeleteRequest.Loading = true;
 
-		var response = await CompatibilityApiUtil.ProcessReviewRequest(_request);
+		var response = await SkyveApiUtil.ProcessReviewRequest(_request);
 
 		if (response.Success)
 		{

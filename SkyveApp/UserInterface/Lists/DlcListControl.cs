@@ -14,7 +14,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class DlcListControl : SlickStackedListControl<SteamDlc>
+internal class DlcListControl : SlickStackedListControl<SteamDlc, DlcListControl.Rectangles>
 {
 	public IEnumerable<SteamDlc> FilteredItems => SafeGetItems().Select(x => x.Item);
 
@@ -35,40 +35,16 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<SteamDlc>> OrderItems(IEnumerable<DrawableItem<SteamDlc>> items)
+	protected override IEnumerable<DrawableItem<SteamDlc, Rectangles>> OrderItems(IEnumerable<DrawableItem<SteamDlc, Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.ReleaseDate);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<SteamDlc> item, Point location)
-	{
-		var rects = GetActionRectangles(item.Bounds);
-
-		if (rects.IncludedRect.Contains(location) && SteamUtil.IsDlcInstalledLocally(item.Item.Id))
-		{
-			setTip(Locale.ExcludeInclude, rects.IncludedRect);
-			return true;
-		}
-		else if (rects.SteamRect.Contains(location))
-		{
-			setTip(Locale.ViewOnSteam, rects.SteamRect);
-			return true;
-		}
-		else
-		{
-			setTip(System.Net.WebUtility.HtmlDecode(item.Item.Description), rects.TextRect);
-		}
-
-		void setTip(string text, Rectangle rectangle) => SlickTip.SetTo(this, text, offset: new Point(rectangle.X, item.Bounds.Y));
-
-		return false;
-	}
-
-	protected override void OnItemMouseClick(DrawableItem<SteamDlc> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<SteamDlc, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
-		var rects = GetActionRectangles(item.Bounds);
+		var rects = item.Rectangles;
 
 		if (rects.IncludedRect.Contains(e.Location) && SteamUtil.IsDlcInstalledLocally(item.Item.Id))
 		{
@@ -101,15 +77,15 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		}
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<SteamDlc> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<SteamDlc, Rectangles> e)
 	{
 		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
-		var rects = GetActionRectangles(e.ClipRectangle);
+		var rects = e.Rects;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
 		e.HoverState &= ~HoverState.Pressed;
 
-		base.OnPaintItem(e);
+		base.OnPaintItemList(e);
 
 		var owned = SteamUtil.IsDlcInstalledLocally(e.Item.Id);
 		var isIncluded = owned && e.Item.IsIncluded;
@@ -173,7 +149,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<SteamDlc> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+	private Rectangle DrawLabel(ItemPaintEventArgs<SteamDlc, Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
 	{
 		if (text == null)
 		{
@@ -206,11 +182,11 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		return rectangle;
 	}
 
-	private Rectangles GetActionRectangles(Rectangle rectangle)
+	protected override Rectangles GenerateRectangles(SteamDlc item, Rectangle rectangle)
 	{
 		var includeItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
 		var iconSize = rectangle.Height - Padding.Vertical;
-		var rects = new Rectangles
+		var rects = new Rectangles(item)
 		{
 			IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft),
 			SteamRect = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(includeItemHeight, ItemHeight), ContentAlignment.TopRight)
@@ -225,7 +201,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		return rects;
 	}
 
-	struct Rectangles
+	public class Rectangles : IDrawableItemRectangles<SteamDlc>
 	{
 		internal Rectangle IncludedRect;
 		internal Rectangle IconRect;
@@ -233,7 +209,36 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc>
 		internal Rectangle SteamRect;
 		internal Rectangle CenterRect;
 
-		internal bool Contain(Point location)
+		public SteamDlc Item { get; set; }
+
+		public Rectangles(SteamDlc item)
+		{
+			Item = item;
+		}
+
+		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
+		{
+			if (IncludedRect.Contains(location) && SteamUtil.IsDlcInstalledLocally(Item.Id))
+			{
+				text = Locale.ExcludeInclude;
+				point = IncludedRect.Location;
+				return true;
+			}
+			else if (SteamRect.Contains(location))
+			{
+				text = Locale.ViewOnSteam;
+				point = SteamRect.Location;
+				return true;
+			}
+			else
+			{
+				text = Locale.ViewOnSteam;
+				point = default;
+				return true;
+			}
+		}
+
+		public bool IsHovered(Control instance, Point location)
 		{
 			return
 				IncludedRect.Contains(location) ||

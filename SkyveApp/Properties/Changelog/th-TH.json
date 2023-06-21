@@ -2,7 +2,7 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Welcome to the change-log era",
+        "Tagline": "ยินดีต้อนรับสู่บันทึกการเปลี่ยนแปลง",
         "ChangeGroups": [
             {
                 "Name": "ใหม่",
@@ -119,7 +119,7 @@
         "Tagline": "Presenting, the Profile Overhaul",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "เปลี่ยนโพร์ไฟล์",
                 "Changes": [
                     "Changed the design of your profile list.",
                     "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
@@ -296,12 +296,12 @@
     {
         "Version": "3.0.0",
         "Date": "2023-05-23",
-        "Tagline": "Presenting, Skyve, the final successor of Load Order Mod 1/2 and Compatibility Report.\r\nComing for C:S I & C:S II",
+        "Tagline": "ขอเสนอ Skyve ผู้สืบทอดคนสุดท้ายของ Load Order Mod 1/2 และ Compatibility Report\nสำหรับ C:S I & C:S II",
         "ChangeGroups": [
             {
                 "Name": "Compatibility Report Overhaul",
                 "Changes": [
-                    "Compatibility Report is now integrated directly into Skyve.",
+                    "รายงานความเข้ากันได้ ถูกนำมารวมไว้กับ Skyve แล้ว",
                     "Recommendations and info text are now clearer and easier to manage.",
                     "Added a Snooze button to dismiss a certain compatibility notification.",
                     "Required items automatically redirect to the packages' most recent successor.",
@@ -339,8 +339,8 @@
             {
                 "Name": "Fixes",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
+                    "แก้ไข ค่าของการตั้งค่าก่อนหน้า และโพร์ไฟล์ ที่บางครั้งไม่ถูกส่งไปยัง Skyve",
+                    "ทางลัดจะถูกสร้างขึ้นหลังจากที่คุณเปิด Skyve เป็นครั้งแรกคล้ายกับที่ LOM2 ทำก่อนหน้านี้",
                     "Fixed a rare case where the compatibility info was not loading.",
                     "Enabled the ability to request a review for a package that is currently broken.",
                     "Loosened the sensitivity of the 'Partially Downloaded' notification."
@@ -422,7 +422,7 @@
                     "You can now subscribe to packages while the game is open.",
                     "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
                     "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "เพิ่มตัวเลือกขั้นสูงเพื่อบังคับให้ดาวน์โหลดหรือลบแพ็กเกจทันทีที่คุณสมัคร/ยกเลิกการสมัครสมาชิกใน Skyve",
                     "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
                 ]
             },
@@ -443,6 +443,107 @@
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
                     "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Updated for the latest game patch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online profiles, coming through!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profiles",
+                "Changes": [
+                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Online profiles can be downloaded, or updated if you already have it locally.",
+                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "หากโพร์ไฟล์ของคุณมีการเปลี่ยนแปลงที่ยังไม่ได้บันทึก โลโก้ Skyve จะสว่างเป็นสีม่วง",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "การลบด้วย Skyve จะเป็นการส่งไฟล์ไปยังถังรีไซเคิลของวินโดวส์",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Improved performance while including/excluding packages.",
+                    "Added Hungarian language"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
                 ]
             }
         ]

@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
@@ -227,15 +229,15 @@ public partial class PC_CompatibilityManagement : PanelContent
 		{
 			CurrentPackage ??= await SteamUtil.GetItemAsync(packages[page]);
 
-			var catalogue = await CompatibilityApiUtil.Catalogue(CurrentPackage!.SteamId);
+			var catalogue = await SkyveApiUtil.Catalogue(CurrentPackage!.SteamId);
 
-			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<Package, PostPackage>();
+			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CrPackage, PostPackage>();
 
-			var automatedPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<Package, PostPackage>();
+			var automatedPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
 
 			if (postPackage is null)
 			{
-				postPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<Package, PostPackage>();
+				postPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
 			}
 			else
 			{
@@ -521,7 +523,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		B_Apply.Loading = true;
 
-		var response = await CompatibilityApiUtil.SaveEntry(postPackage);
+		var response = await SkyveApiUtil.SaveEntry(postPackage);
 
 		B_Apply.Loading = false;
 

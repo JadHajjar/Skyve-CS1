@@ -15,8 +15,8 @@ internal class SharedUtil
         internal static string LocalApplicationData => SkyveIPatch.Patches.Entry.GamePaths.AppDataPath;
         internal static string LocalLOMData => SkyveIPatch.Patches.Entry.LocalLOMData;
 #else
-        internal static string LocalApplicationData => ColossalFramework.IO.DataLocation.localApplicationData;
-        internal static string LocalLOMData => Path.Combine(LocalApplicationData, "Skyve");
+	internal static string LocalApplicationData => ColossalFramework.IO.DataLocation.localApplicationData;
+	internal static string LocalLOMData => Path.Combine(LocalApplicationData, "Skyve");
 #endif
 	internal static XmlWriterSettings Indented => new XmlWriterSettings() { Indent = true };
 

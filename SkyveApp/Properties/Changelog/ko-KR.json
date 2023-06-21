@@ -2,7 +2,7 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "로그 지옥에 오신 것을 환영합니다.",
+        "Tagline": "변경 사항 탭에 오신 것을 환영합니다",
         "ChangeGroups": [
             {
                 "Name": "신규",
@@ -212,11 +212,11 @@
                 ]
             },
             {
-                "Name": "File Selection Revamp",
+                "Name": "파일 선택 기능 개편",
                 "Changes": [
-                    "Updated the UI of the file selection screens.",
-                    "Added Pinned folders to easily access relevant folders.",
-                    "Added a Workshop section to easily select workshop maps & saves.",
+                    "파일 선택 화면의 UI를 업데이트 했습니다.",
+                    "필요한 폴더에 쉽게 접근할 수 있도록 '고정된 폴더' 기능을 추가했습니다.",
+                    "창작마당 맵&세이브를 쉽게 고를 수 있도록 창작 마당 항목을 추가했습니다.",
                     "Added a Sorting dropdown & sort order toggle",
                     "Added a List/Grid view toggle."
                 ]
@@ -443,6 +443,107 @@
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
                     "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "수정",
+                "Changes": [
+                    "최신 게임 패치를 위해 업데이트됨."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "온라인 프로필이 다가옵니다!",
+        "ChangeGroups": [
+            {
+                "Name": "온라인 프로필",
+                "Changes": [
+                    "이제 프로필을 온라인으로 사용자당 5개까지 업로드할 수 있습니다.",
+                    "업로드된 프로필은 비공개로 하거나, ID로 공유하거나, 또는 모든 사람이 볼 수 있게 공개할 수 있습니다.",
+                    "온라인 프로필을 다운로드하거나 이미 가지고 있는 경우 업데이트할 수 있습니다.",
+                    "프로필 탭의 새 버튼을 사용하여 온라인 프로필을 탐색할 수 있습니다.",
+                    "ID를 사용하여 온라인 프로필을 가져올 수 있게 '프로필 추가' 페이지에 세 번째 옵션을 추가했습니다."
+                ]
+            },
+            {
+                "Name": "프로필 변경사항",
+                "Changes": [
+                    "사이드바의 '프로필' 탭은 이제 현재 프로필의 설정 대신 프로필 목록을 엽니다.",
+                    "프로필 목록은 이제 격자 보기를 사용하며 격자 보기와 목록 보기 사이를 전환할 수 있습니다.",
+                    "두 프로필 페이지의 상단 작업 버튼 디자인 변경",
+                    "이제 프로필에 저장되지 않은 변경 사항이 있으면 Skyve 로고가 보라색으로 빛납니다.",
+                    "프로필은 이제 섬네일을 가질 수 있습니다.",
+                    "이제 프로필 용도별로 다른 아이콘을 가집니다"
+                ]
+            },
+            {
+                "Name": "신규 및 업데이트",
+                "Changes": [
+                    "모드 또는 프로필의 제작자를 클릭하여 들어갈 수 있는 사용자 프로필 페이지를 새로 추가했습니다. 이 페이지에는 사용자의 모든 프로필과 패키지가 포함되어 있습니다.",
+                    "Skyve에서 삭제하는 파일은 이제 Windows의 휴지통으로 보내집니다.",
+                    "유틸리티 페이지에 6개의 새 초기화 버튼을 추가했습니다.",
+                    "도움 & 로그 페이지에 2개의 새 버튼을 추가했습니다.",
+                    "이제 호환성 및 패키지 상태가 목록의 오른쪽에 표시됩니다.",
+                    "망가진, 호환되지 않는, 차단된 패키지는 이제 목록에서 새로운 배경을 가집니다.",
+                    "로컬 모드의 이름과 레이블이 업데이트되었습니다.",
+                    "소스 코드가 누락된 경우는 이제 구독 취소 알림 대신 경고를 생성합니다.",
+                    "필요한 모드 UI는 이제 제외할수 없다는 점을 알려주는 다른 UI를 가집니다.",
+                    "모드와 에셋에 대한 핫 리로드를 활성화할 수 있는 설정을 인게임에 추가했습니다.",
+                    "패키지를 포함/제외할 때의 성능이 개선되었습니다.",
+                    "헝가리어 추가"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
                 ]
             }
         ]

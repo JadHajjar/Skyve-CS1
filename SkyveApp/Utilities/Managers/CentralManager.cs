@@ -130,6 +130,8 @@ internal static class CentralManager
 			catch (Exception ex) { Log.Exception(ex, "Failed to complete the First Time Setup", true); }
 		}
 
+		ConnectionHandler.AssumeInternetConnectivity = SessionSettings.UserSettings.AssumeInternetConnectivity;
+
 		ConnectionHandler.Start();
 
 		Log.Info("Loading packages..");
@@ -142,6 +144,8 @@ internal static class CentralManager
 		packages = content;
 
 		Log.Info($"Loading and applying CR Data..");
+
+		RequestDataUtil.Start(packages);
 
 		CompatibilityManager.LoadCachedData();
 

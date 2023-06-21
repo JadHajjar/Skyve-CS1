@@ -63,7 +63,6 @@
   "Go back to {0}": "返回 {0}",
   "All Versions": "所有版本",
   "Current Version": "當前版本",
-  "CurrentProfile": "當前設定檔",
   "Profiles": "設定檔",
   "Drives": "磁碟分割",
   "Switch to Grid-View": "切換到網格視圖",
@@ -96,13 +95,64 @@
   "Red": "紅色",
   "Green": "綠色",
   "Yellow": "黃色",
-  "Download": "Download",
-  "Remove": "Remove",
+  "Download": "下載",
+  "Remove": "刪除",
   "Welcome to Theme Changer!": "歡迎使用主題編輯器！",
   "Customize the size and colors in the App however you want to.": "根據自己的需要自訂 LOT2 應用程式的介面大小和顏色。",
   "Click on any color to change it, or right-click to reset it.": "左鍵按一下以更改顏色，按右鍵以重置顏色。",
   "Custom Theme": "自訂主題",
   "Do you want to apply your changes before leaving?": "即將離開此頁面，要保存並應用更改嗎？",
   "TaskCompleted": "任務已完成",
-  "UnexpectedError": "出現意外錯誤！"
+  "UnexpectedError": "出現意外錯誤！",
+  "{0} ago": "{0} 之前",
+  "in {0}": "{0} 以内",
+  "Today at {0}": "今日 {0}",
+  "Yesterday at {0}": "昨日 {0}",
+  "Tomorrow at {0}": "明日 {0}",
+  "Last {0} at {1}": "Last {0} at {1}",
+  "Next {0} at {1}": "Next {0} at {1}",
+  "{0} month ago on {1}": {
+    "One": "{0} month ago on {1}",
+    "Plural": "{0} months ago on {1}"
+  },
+  "in {0} month on {1}": {
+    "One": "in {0} month on {1}",
+    "Plural": "in {0} months on {1}"
+  },
+  "{0} day ago": {
+    "One": "{0} 日前",
+    "Plural": "{0} 日前"
+  },
+  "in {0} day": {
+    "One": "{0} 日以内",
+    "Plural": "{0} 日以内"
+  },
+  "{0} year": {
+    "One": "{0} 年",
+    "Plural": "{0} 年"
+  },
+  "{0} month": {
+    "One": "{0} 個月",
+    "Plural": "{0} 個月"
+  },
+  "{0} day": {
+    "One": "{0} 日",
+    "Plural": "{0} 日"
+  },
+  "{0} hour": {
+    "One": "{0} 小時",
+    "Plural": "{0} 小時"
+  },
+  "{0} minute": {
+    "One": "{0} 分",
+    "Plural": "{0} 分"
+  },
+  "{0} second": {
+    "One": "{0} 秒",
+    "Plural": "{0} 秒"
+  },
+  "{0}d": "{0}日",
+  "{0}h": "{0}時",
+  "{0}m": "{0}分",
+  "{0}s": "{0}秒"
 }

@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Poista tämän paketin tilaus",
   "UnsubscribeOther": "Poista linkitettyjen pakettien tilaus",
   "Switch": "Vaihda linkitettyyn pakettiin",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Vaihda tähän pakettiin",
   "Deprecated": "Vanhentunut",
   "Reupload": "Uudelleenlataa",
   "CausesIssues": "Aiheuttaa Ongelmia",
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Tämä on riippuvuustila, mutta se ei näytä käyttävän mitään pakettia, joka vaatii sitä.",
   "Status_SourceCodeNotAvailable": "Tämän modin lähdekoodi ei ole saatavilla. Sinun ei pitäisi käyttää sitä ellet luota sen tekijään.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Tämän paketin sisältämä musiikki saattaa olla tekijänoikeuksissa. On parasta olla käyttämättä sitä suoratoiston aikana.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Odotettu Ulostulo",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Sinun pitäisi sulkea pois '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Ohita",
+  "Unsubscribe": "Peruuta Tilaus",
   "Action_ExcludeOther": {
     "One": "Sinun pitäisi sulkea pois '{1}'.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Poista pyyntö",
   "ApplyRequestedChanges": "Hyväksy pyydetyt muutokset",
   "ManagePackage": "Hallinnoi pakettia",
-  "RequestReviewDisclaimer": "*Sinun Steam-tunnuksesi ja lokisi lähetetään pyyntösi yhteydessä"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Sinun Steam-tunnuksesi ja lokisi lähetetään pyyntösi yhteydessä",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }

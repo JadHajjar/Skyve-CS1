@@ -33,7 +33,7 @@ namespace SkyveMod;
 public class SkyveUserMod : IUserMod
 {
 	public static Version ModVersion => typeof(SkyveUserMod).Assembly.GetName().Version;
-	public static string VersionString => ModVersion.ToString(3);
+	public static string VersionString => ModVersion.ToString(4);
 #if Stable
 	public string Name => "Skyve " + VersionString;
 #else
@@ -157,9 +157,7 @@ public class SkyveUserMod : IUserMod
 		var currentToolFolder = Path.Combine(PluginManager.instance.FindPluginInfo(Assembly.GetExecutingAssembly())?.modPath, "App");
 		var config = Path.Combine(currentToolFolder, "Skyve.exe.config");
 
-		try
-		{ PrepareFirstTimeConfig(config); }
-		catch { }
+		PrepareFirstTimeConfig(config);
 	}
 
 	private void PrepareFirstTimeConfig(string configFilePath)

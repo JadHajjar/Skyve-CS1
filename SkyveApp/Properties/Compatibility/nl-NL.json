@@ -6,10 +6,10 @@
   "Skip": "Overslaan",
   "Note": "Notitie",
   "NoteInfo": "Extra informatieve tekst weergegeven voor het pakket",
-  "BlackListName": "Black-list op naam",
-  "BlackListId": "Black-list op naam",
+  "BlackListName": "Zwarte-lijst op naam",
+  "BlackListId": "Zwarte-lijst op Steam ID",
   "GlobalTags": "Globale Tags",
-  "GlobalTagsInfo": "Tags maken voor alle spelers in de app",
+  "GlobalTagsInfo": "Tags die alle spelers zullen zien in de app",
   "Links": "Koppelingen",
   "StatusesCount": "Statussen ({0})",
   "InteractionCount": "Interacties ({0})",
@@ -23,7 +23,7 @@
   "Incompatible": "Incompatibel",
   "CityBuilding": "Stadsbouw",
   "AssetCreation": "Asset creëren",
-  "MapCreation": "Kaart maken",
+  "MapCreation": "Kaart Aanmaken",
   "NoAction": "Niets doen",
   "SubscribeToPackages": "Abonneren op gelinkte pakketten",
   "RequiresConfiguration": "Vereist een specifieke configuratie",
@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Afmelden voor dit pakket",
   "UnsubscribeOther": "Afmelden voor gekoppelde pakketten",
   "Switch": "Overschakelen naar gekoppeld pakket",
-  "FlippedSwitch": "Wissel naar dit pakket",
+  "FlippedSwitch": "Overschakelen naar dit pakket",
   "Deprecated": "Afgekeurd",
   "Reupload": "Herladen",
   "CausesIssues": "Oorzaken problemen",
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Dit is een afhankelijkheidsmodus, maar het lijkt er niet op dat je een pakket gebruikt dat het nodig heeft.",
   "Status_SourceCodeNotAvailable": "De broncode van deze mod is niet beschikbaar. Gebruik deze niet, tenzij je de auteur vertrouwt.",
+  "SourceAvailable": "Broncode is beschikbaar",
   "Status_MusicCanBeCopyrighted": "De muziek in dit pakket kan worden gekopieerd. Het is het beste om het niet te gebruiken tijdens het streamen.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Verwachte uitgang",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "U moet '{0} ' uitsluiten.",
+  "ExcludeThis": "Dit pakket uitsluiten",
+  "Exclude": "Uitsluiten",
+  "Unsubscribe": "Uitschrijven",
   "Action_ExcludeOther": {
     "One": "U moet '{1} ' uitsluiten.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Verzoek verwijderen",
   "ApplyRequestedChanges": "Aangevraagde wijzigingen toepassen",
   "ManagePackage": "Pakket beheren",
-  "RequestReviewDisclaimer": "*Je Steam ID en logs zijn verzonden met je verzoek"
+  "Banned": "Geblokkeerd",
+  "NoIssues": "Geen problemen",
+  "RequestReviewDisclaimer": "*Je Steam ID en logs zijn verzonden met je verzoek",
+  "ScenarioMaking": "Creëer een Scenario",
+  "ThemeMaking": "Creëer een Thema"
 }

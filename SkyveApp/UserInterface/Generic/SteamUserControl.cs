@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
+using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;
 
 using SlickControls;
@@ -17,6 +18,7 @@ internal class SteamUserControl : SlickControl
 	{
 		Visible = false;
 		Enabled = false;
+		Cursor = Cursors.Hand;
 
 		new BackgroundAction(async () =>
 		{
@@ -38,6 +40,7 @@ internal class SteamUserControl : SlickControl
 	{
 		Visible = false;
 		Enabled = false;
+		Cursor = Cursors.Hand;
 
 		new BackgroundAction(async () =>
 		{
@@ -58,8 +61,18 @@ internal class SteamUserControl : SlickControl
 		Padding = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		base.OnMouseClick(e);
+
+		if (e.Button == MouseButtons.Left && User is not null)
+		{
+			PlatformUtil.OpenUrl(User.ProfileUrl);
+		}
+	}
+
 	public SteamUser? User { get; private set; }
-	public string InfoText { get; set; }
+	public string? InfoText { get; set; }
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
@@ -73,13 +86,22 @@ internal class SteamUserControl : SlickControl
 		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), ClientRectangle, Padding.Horizontal);
 
 		var size = Height - (Padding.Vertical * 2);
-		var icon = ImageManager.GetImage(User.AvatarUrl, true).Result;
+		var image = ImageManager.GetImage(User.AvatarUrl, true).Result;
 		var textRectangle = ClientRectangle.Pad(size + (Padding.Left * 2), 0, 0, 0);
-
+		var avatarRect = ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft);
 		var infoSize = e.Graphics.Measure(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold));
 		var nameSize = e.Graphics.Measure(User.Name, UI.Font(9F, FontStyle.Bold));
 
-		e.Graphics.DrawRoundImage(icon, ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft));
+		if (image is not null)
+		{
+			e.Graphics.DrawRoundImage(image, avatarRect);
+		}
+		else
+		{
+			using var generic = Properties.Resources.I_GenericUser.Color(FormDesign.Design.IconColor);
+
+			e.Graphics.DrawRoundImage(generic, avatarRect);
+		}
 
 		e.Graphics.DrawString(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold), new SolidBrush(FormDesign.Design.InfoColor), textRectangle);
 		e.Graphics.DrawString(User.Name, UI.Font(9F, FontStyle.Bold), new SolidBrush(FormDesign.Design.ForeColor), textRectangle, new StringFormat { LineAlignment = StringAlignment.Far });
@@ -90,6 +112,16 @@ internal class SteamUserControl : SlickControl
 		if ((width != Width && Dock == DockStyle.None) || height != Height)
 		{
 			Size = new(width, height);
+		}
+
+		if (CompatibilityManager.CompatibilityData.Authors.TryGet(User.SteamId)?.Verified ?? false)
+		{
+			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
+
+			e.Graphics.FillEllipse(new SolidBrush(FormDesign.Design.GreenColor), checkRect.Pad(-(int)(2 * UI.FontScale)));
+
+			using var img = IconManager.GetIcon("I_Check", checkRect.Height);
+			e.Graphics.DrawImage(img.Color(Color.White), checkRect.Pad(0, 0, -1, -1));
 		}
 	}
 }

@@ -16,13 +16,17 @@ internal class NewProfileOptionControl : SlickImageControl
 	}
 
 	public bool FromScratch { get; set; }
+	public bool FromLink { get; set; }
 
 	protected override void UIChanged()
 	{
-		Font = UI.Font(12.75F, FontStyle.Bold);
-		Margin = UI.Scale(new Padding(FromScratch ? 0 : 100, 20, FromScratch ? 100 : 0, 20), UI.FontScale);
-		Padding = UI.Scale(new Padding(15), UI.FontScale);
-		Size = UI.Scale(new Size(330, 120), UI.FontScale);
+		if (Live)
+		{
+			Font = UI.Font(11.25F, FontStyle.Bold);
+			Margin = UI.Scale(new Padding(100 - (Parent.Controls.IndexOf(this) % 2 * 100), 15, (Parent.Controls.IndexOf(this) % 2 * 100), 15), UI.FontScale);
+			Padding = UI.Scale(new Padding(15), UI.FontScale);
+			Size = UI.Scale(new Size(250, 75), UI.FontScale);
+		}
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
@@ -41,10 +45,10 @@ internal class NewProfileOptionControl : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle, Padding.Left);
 
-		using var icon = IconManager.GetIcon(FromScratch ? "I_New" : "I_CopySettings", 48);
+		using var icon = IconManager.GetIcon(FromLink ? "I_LinkChain" : FromScratch ? "I_New" : "I_CopySettings", 48);
 
 		e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
 
-		e.Graphics.DrawString(FromScratch ? Locale.StartScratch : Locale.ContinueFromCurrent, Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon.Width, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(FromLink ? Locale.ImportFromLink : FromScratch ? Locale.StartScratch : Locale.ContinueFromCurrent, Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon.Width, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 	}
 }

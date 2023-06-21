@@ -78,6 +78,9 @@
     <Compile Update="UserInterface\Content\DownloadsInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserInterface\Content\UserDescriptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserInterface\Dropdowns\DlcDropDown.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -95,21 +98,21 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Generic\SteamUserControl.cs" />
-    <Compile Update="UserInterface\Lists\OtherProfilePackage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Lists\OtherProfilePackage.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Dropdowns\PackageStatusDropDown.cs" />
-    <Compile Update="UserInterface\Lists\CompatibilityReportList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInterface\Lists\ReviewRequestList.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserInterface\Lists\CompatibilityReportList.cs" />
+    <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_ProfileAdd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_UserPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserInterface\Panels\PC_ProfileList.cs">

@@ -19,7 +19,7 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(ProfileSorting)).Cast<ProfileSorting>().ToArray();
+			Items = Enum.GetValues(typeof(ProfileSorting)).Cast<ProfileSorting>().Where(x=> x!= ProfileSorting.Downloads).ToArray();
 
 			SelectedItem = CentralManager.SessionSettings.UserSettings.ProfileSorting;
 		}

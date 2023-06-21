@@ -5,7 +5,7 @@
         "Tagline": "Welcome to the change-log era",
         "ChangeGroups": [
             {
-                "Name": "New",
+                "Name": "Yeni",
                 "Changes": [
                     "Added an 'Unsubscribe All' button in content pages' actions.",
                     "Added a Utility section to subscribe to missing items in a BOB config.",
@@ -14,7 +14,7 @@
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Geliştirmeler",
                 "Changes": [
                     "Added Compatibility Report for broken Assets",
                     "Unlisted packages now have the correct name and thumbnail.",
@@ -23,7 +23,7 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed legacy profiles not being converted after the first launch.",
                     "Fixed local assets not automatically refreshing after external changes.",
@@ -49,13 +49,13 @@
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Geliştirmeler",
                 "Changes": [
                     "Changed the icons of filters to reflect the correct icons used in the list."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed the text in the import collection for subscribing and unsubscribing being flipped.",
                     "Fixed the map selection for a new game not letting users select a vanilla map."
@@ -68,7 +68,7 @@
         "Date": "2023-04-06",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed a bug that caused infinite loading for some users."
                 ]
@@ -80,7 +80,7 @@
         "Date": "2023-04-05",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Değişiklikler",
                 "Changes": [
                     "Removed the subscription tab from the in-game mod options.",
                     "Fixed DLCs not being applied when loading a profile.",
@@ -119,7 +119,7 @@
         "Tagline": "Presenting, the Profile Overhaul",
         "ChangeGroups": [
             {
-                "Name": "Profile Changes",
+                "Name": "Profil değişiklikleri",
                 "Changes": [
                     "Changed the design of your profile list.",
                     "Favorite Profiles are now shown on your dashboard to allow easy switching between them.",
@@ -133,7 +133,7 @@
                 ]
             },
             {
-                "Name": "Improvements",
+                "Name": "Geliştirmeler",
                 "Changes": [
                     "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
                     "Local assets are now correctly groupped based on the folders they're in.",
@@ -146,7 +146,7 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed freezes happening in the content list pages.",
                     "Fixed Profiles' Auto-Save not working correctly.",
@@ -164,14 +164,14 @@
         "Tagline": "",
         "ChangeGroups": [
             {
-                "Name": "New & Improved",
+                "Name": "Yeni ve geliştirilmiş",
                 "Changes": [
                     "Added in the Utilities page an import from any text file or from your clipboard.",
                     "BOB import is now a generic XML import by supporting any XML format that contains package IDs."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed loading a collection URL sometimes not parsing the ID correctly.",
                     "Fixed LOT becoming unresponsive on Mac/Linux when unsubscribing from a package."
@@ -222,7 +222,7 @@
                 ]
             },
             {
-                "Name": "Bug-Fixes",
+                "Name": "Hata düzeltmeleri",
                 "Changes": [
                     "Fixed launching LOT after the monitor it was previously on got turned off resulting in the window now showing up.",
                     "Fixed the LHT option not working when launching into a new map.",
@@ -337,7 +337,7 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
                     "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
@@ -367,7 +367,7 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed the options tab not opening for macOS & Linux.",
                     "Fixed the Help & Logs tab not loading your current log automatically.",
@@ -389,7 +389,7 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed the asset summary not showing in the dashboard.",
                     "Fixed the out of date status not working correctly."
@@ -402,7 +402,7 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Düzeltmeler ve değişiklikler",
                 "Changes": [
                     "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
                     "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
@@ -436,13 +436,114 @@
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Düzeltmeler",
                 "Changes": [
                     "Fixed the profile list not updating instantly.",
                     "Fixed profile packages not showing their workshop name.",
                     "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
                     "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
                     "Improved the performance for people with a lot of mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Updated for the latest game patch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online profiles, coming through!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profiles",
+                "Changes": [
+                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Online profiles can be downloaded, or updated if you already have it locally.",
+                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Improved performance while including/excluding packages.",
+                    "Added Hungarian language"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
                 ]
             }
         ]

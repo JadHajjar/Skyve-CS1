@@ -21,8 +21,8 @@
   "HasIssues": "Tiene problemas",
   "Broken": "Dañado",
   "Incompatible": "Incompatible",
-  "CityBuilding": "Construir ciudades",
-  "AssetCreation": "Hacer Assets",
+  "CityBuilding": "Crear ciudades",
+  "AssetCreation": "Crear assets",
   "MapCreation": "Crear mapas",
   "NoAction": "Hacer nada",
   "SubscribeToPackages": "Suscribirse a paquetes enlazados",
@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Anular suscripción a este paquete",
   "UnsubscribeOther": "Anular suscripción a paquetes vinculados",
   "Switch": "Suscribirse a paquete enlazado",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Cambiar a este paquete",
   "Deprecated": "Obsoleto",
   "Reupload": "Volver a subir datos",
   "CausesIssues": "Ocasiona problemas",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "Estas son varias versiones del mismo paquete.\n\nDebería elegir sólo uno de ellos.",
   "Status_Succeeded": "'{0}' ha sido reemplazado por '{1}'.\n\nYa estás utilizando '{1}', no necesitas '{0}'.",
   "Status_Deprecated": "'{0}' está obsoleto, ya no está soportado por su autor.",
-  "Status_AutoDeprecated": "'{0}' has not been updated in a long time, it is probably no longer supported by its author.",
+  "Status_AutoDeprecated": "'{0}' no ha sido actualizado en mucho tiempo.",
   "Status_Reupload": {
     "Zero": "'{0}' es una nueva versión de un paquete original.",
     "One": "Esta es una nueva versión de '{1}'."
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Este es un mod de dependencia, pero no parece que esté usando ningún paquete que lo requiera.",
   "Status_SourceCodeNotAvailable": "El código fuente de este mod no está disponible. No debería usarlo a menos que confíe en su autor.",
+  "SourceAvailable": "El código fuente está disponible ",
   "Status_MusicCanBeCopyrighted": "La música dentro de este paquete puede tener derechos de autor. Es mejor no usarla en streaming.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Salida esperada",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Deberías excluir '{0}'.",
+  "ExcludeThis": "Excluir este paquete",
+  "Exclude": "Excluido",
+  "Unsubscribe": "Anular suscripción",
   "Action_ExcludeOther": {
     "One": "Deberías excluir '{1}'.",
     "Plural": "You should exclude the following packages."
@@ -203,9 +207,13 @@
   "ApplyChangedBeforeExit": "Tienes cambios sin guardar.\n\n¿Quieres aplicar esos cambios antes de continuar?",
   "AuthorRetired": "El autor de {0}, {1}, se ha retirado o ha estado inactivo durante mucho tiempo.\n\nLas actualizaciones futuras y la estabilidad de sus paquetes no están garantizadas.",
   "AuthorMalicious": "El autor de {0}, {1}, es conocido por ser malicioso y/o por incluir contenido perjudicial como virus en sus paquetes.",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "ReviewRequests": "Confirmar Revisiones {0}",
+  "DeleteRequest": "Eliminar revisión",
+  "ApplyRequestedChanges": "Aplicar cambios solicitados",
+  "ManagePackage": "Gestionar Paquete",
+  "Banned": "Suspendido",
+  "NoIssues": "Sin problemas",
+  "RequestReviewDisclaimer": "*Tu ID de Steam y los registros se envían con tu solicitud",
+  "ScenarioMaking": "Crear escenarios",
+  "ThemeMaking": "Crear temas"
 }

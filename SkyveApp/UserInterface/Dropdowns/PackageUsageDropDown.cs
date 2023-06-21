@@ -1,7 +1,7 @@
 ﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Utilities;
+using SkyveApp.Utilities.Managers;
 
 using SlickControls;
 
@@ -30,13 +30,17 @@ internal class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 	public override void ResetValue()
 	{
 		SelectedItems = Items;
+
+		listDropDown?.Invalidate();
+		OnSelectedItemChanged();
+		Invalidate();
 	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		Width = (int)(200 * UI.FontScale);
+		//Width = (int)(200 * UI.FontScale);
 	}
 
 	protected override bool SearchMatch(string searchText, PackageUsage item)
@@ -50,7 +54,7 @@ internal class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 	{
 		var text = LocaleCR.Get($"{item}");
 
-		using var icon = IconManager.GetIcon("I_City", rectangle.Height - 2).Color(foreColor);
+		using var icon = item.GetIcon().Get(rectangle.Height - 2).Color(foreColor);
 
 		e.Graphics.DrawImage(icon, rectangle.Align(icon.Size, ContentAlignment.MiddleLeft));
 
@@ -60,7 +64,7 @@ internal class PackageUsageDropDown : SlickMultiSelectionDropDown<PackageUsage>
 
 	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<PackageUsage> items)
 	{
-		var text = !items.Any() ? "Invalid" : items.Count() == Items.Length ? "All" : items.ListStrings(x => LocaleCR.Get($"{x}"), ", ");
+		var text = !items.Any() ? Locale.Invalid : items.Count() == Items.Length ? Locale.AllUsages : items.ListStrings(x => LocaleCR.Get($"{x}"), ", ");
 
 		using var icon = IconManager.GetIcon("I_City", rectangle.Height - 2).Color(foreColor);
 

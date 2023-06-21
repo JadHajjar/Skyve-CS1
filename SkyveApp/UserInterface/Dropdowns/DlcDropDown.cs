@@ -31,9 +31,9 @@ internal class DlcDropDown : SlickMultiSelectionDropDown<SteamDlc>
 		Width = (int)(200 * UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<SteamDlc>> OrderItems(IEnumerable<DrawableItem<SteamDlc>> items)
+	protected override IEnumerable<SteamDlc> OrderItems(IEnumerable<SteamDlc> items)
 	{
-		return items.OrderByDescending(x => SelectedItems.Contains(x.Item)).ThenByDescending(x => x.Item.ReleaseDate);
+		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenByDescending(x => x.ReleaseDate);
 	}
 
 	protected override bool SearchMatch(string searchText, SteamDlc item)

@@ -27,9 +27,9 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<Profile>> OrderItems(IEnumerable<DrawableItem<Profile>> items)
+	protected override IEnumerable<Profile> OrderItems(IEnumerable<Profile> items)
 	{
-		return items.OrderByDescending(x => x.Item.Temporary).ThenByDescending(x => x.Item.LastEditDate);
+		return items.OrderByDescending(x => x.Temporary).ThenByDescending(x => x.LastEditDate);
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, Profile item)

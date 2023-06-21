@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Odhlásit se z tohoto balíčku",
   "UnsubscribeOther": "Odhlásit se z propojených balíčků",
   "Switch": "Přepnout na propojený balíček",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Přepnout na tento balíček",
   "Deprecated": "Zastaralé",
   "Reupload": "Znovu nahrát",
   "CausesIssues": "Problémy s příčinami",
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Toto je režim závislosti, ale nezdá se, že používáte žádný balíček, který to vyžaduje.",
   "Status_SourceCodeNotAvailable": "Zdrojový kód tohoto modu není k dispozici. Neměli byste jej použít, pokud nedůvěřujete jeho autorovi.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Hudba uvnitř tohoto balíčku může být autorsky chráněná. Je nejlepší ji nepoužívat při streamování.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Očekávaný výstup",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Měli byste vyloučit '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Vyjmout",
+  "Unsubscribe": "Odhlásit odběr",
   "Action_ExcludeOther": {
     "One": "Měli byste vyloučit '{1}'.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }

@@ -3,6 +3,8 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
@@ -21,6 +23,7 @@ public partial class PC_CompatibilityReport : PanelContent
 {
 	private ReviewRequest[]? reviewRequests;
 	private NotificationType CurrentKey;
+	private bool customReportLoaded;
 
 	public PC_CompatibilityReport() : base(CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious)
 	{
@@ -46,7 +49,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
-		reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
+		reviewRequests = await SkyveApiUtil.GetReviewRequests();
 
 		return true;
 	}
@@ -72,7 +75,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void CompatibilityManager_ReportProcessed()
 	{
-		if (CompatibilityManager.FirstLoadComplete)
+		if (CompatibilityManager.FirstLoadComplete && !customReportLoaded)
 		{
 			var packages = CentralManager.Packages.ToList(x => x.GetCompatibilityInfo());
 
@@ -202,7 +205,11 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			var items = JsonConvert.DeserializeObject<List<CompatibilityInfo>>(File.ReadAllText(file));
 
+			customReportLoaded = false;
+
 			this.TryInvoke(() => LoadReport(items));
+
+			customReportLoaded = true;
 		}
 		catch { }
 	}
@@ -212,7 +219,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		if (reviewRequests == null)
 		{
 			B_Requests.Loading = true;
-			reviewRequests = await CompatibilityApiUtil.GetReviewRequests();
+			reviewRequests = await SkyveApiUtil.GetReviewRequests();
 		}
 
 		B_Requests.Loading = false;

@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Utilities.Managers;
 
@@ -87,6 +89,11 @@ internal static class CompatibilityUtil
 		}
 
 		if (type is InteractionType.SucceededBy && interaction.Interaction.Action is StatusAction.NoAction)
+		{
+			return;
+		}
+
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && !info.Package.IsIncluded)
 		{
 			return;
 		}
@@ -293,7 +300,7 @@ internal static class CompatibilityUtil
 
 	internal static IndexedPackage? GetPackageData(IPackage package)
 	{
-		var steamId = package.Workshop? package.SteamId : package.Package?.Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(package.Package.Mod.FileName));
+		var steamId = package.Workshop ? package.SteamId : package.Package?.Mod is null ? 0 : CompatibilityManager.CompatibilityData.PackageNames.TryGet(Path.GetFileName(package.Package.Mod.FileName));
 
 		if (steamId > 0)
 		{

@@ -7,5 +7,6 @@ internal enum ProfileSorting
 	LastEdit,
 	DateCreated,
 	Usage,
-	Color
+	Color,
+	Downloads
 }

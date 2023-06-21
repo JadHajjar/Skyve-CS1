@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Dezabonare de la acest pachet",
   "UnsubscribeOther": "Dezabonare de la pachetele asociate",
   "Switch": "Comutați la pachetul legat",
-  "FlippedSwitch": "Comutați la acest pachet",
+  "FlippedSwitch": "Treceți la acest pachet",
   "Deprecated": "Dezaprobată",
   "Reupload": "Re-încărcați",
   "CausesIssues": "Cauze probleme",
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Aceasta este o modalitate de dependență, dar se pare că nu utilizați niciun pachet care necesită acest lucru.",
   "Status_SourceCodeNotAvailable": "Codul sursă al acestui mod nu este disponibil. Ar trebui să îl folosești doar dacă ai încredere în autorul său.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Muzica din interiorul acestui pachet ar putea avea drepturi de autor. Cel mai bine este să nu o folosești în timpul streamingului.",
   "Status_IncompleteDescription": "Descrierea Atelierului acestui mod este prea scurtă. Nu ar trebui să îl folosești decât dacă ai încredere în autorul său.",
   "OutputText": "Ieșire așteptată",
@@ -147,6 +148,9 @@
     "Plural": "Ar trebui să vă dezabonați de la următoarele pachete:"
   },
   "Action_ExcludeThis": "Ar trebui să excludeți '{0}'.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Excludeți",
+  "Unsubscribe": "Dezabonați-vă",
   "Action_ExcludeOther": {
     "One": "Ar trebui să excludeți '{1}'.",
     "Plural": "Ar trebui să excludeți următoarele ambalaje:"
@@ -207,5 +211,9 @@
   "DeleteRequest": "Ștergere solicitarea",
   "ApplyRequestedChanges": "Aplică modificările solicitate",
   "ManagePackage": "Gestionare pachet",
-  "RequestReviewDisclaimer": "*ID-ul tău de Steam și jurnalele sunt trimise cu solicitarea ta"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*ID-ul tău de Steam și jurnalele sunt trimise cu solicitarea ta",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }

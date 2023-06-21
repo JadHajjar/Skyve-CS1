@@ -26,4 +26,5 @@ internal class UserSettings
 	public bool ShowAllReferencedPackages { get; set; }
 	public bool TreatOptionalAsRequired { get; set; }
 	public bool ForceDownloadAndDeleteAsSoonAsRequested { get; set; }
+	public bool AssumeInternetConnectivity { get; set; }
 }

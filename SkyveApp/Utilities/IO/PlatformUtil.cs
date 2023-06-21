@@ -102,20 +102,23 @@ internal static class PlatformUtil
 
 	public static void SetFileInClipboard(string path)
 	{
-		if (LocationManager.Platform is not Platform.Windows)
+		Program.MainForm.TryInvoke(() =>
 		{
-			if (path[0] is 'c' or 'C')
+			if (LocationManager.Platform is not Platform.Windows)
 			{
-				var file = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
+				if (path[0] is 'c' or 'C')
+				{
+					var file = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
 
-				ExtensionClass.CopyFile(path, file, true);
+					ExtensionClass.CopyFile(path, file, true);
 
-				path = file;
+					path = file;
+				}
+
+				path = $"file://{IOUtil.ToRealPath(path)}";
 			}
 
-			path = $"file://{IOUtil.ToRealPath(path)}";
-		}
-
-		Clipboard.SetData(DataFormats.FileDrop, new[] { path });
+			Clipboard.SetData(DataFormats.FileDrop, new[] { path });
+		});
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 
@@ -105,7 +106,7 @@ internal class ModLogicManager
 			return true;
 		}
 
-		if (package.GetCompatibilityInfo().Data?.Package.Type is not null and not Domain.Compatibility.PackageType.GenericPackage and not Domain.Compatibility.PackageType.MusicPack and not Domain.Compatibility.PackageType.CSM and not Domain.Compatibility.PackageType.ContentPackage)
+		if (package.GetCompatibilityInfo().Data?.Package.Type is not null and not PackageType.GenericPackage and not PackageType.MusicPack and not PackageType.CSM and not PackageType.ContentPackage)
 		{
 			return true;
 		}
@@ -144,9 +145,9 @@ internal class ModLogicManager
 				continue;
 			}
 
-			if (cr.Interactions.ContainsKey(Domain.Compatibility.InteractionType.RequiredPackages))
+			if (cr.Interactions.ContainsKey(InteractionType.RequiredPackages))
 			{
-				foreach (var item in cr.Interactions[Domain.Compatibility.InteractionType.RequiredPackages].SelectMany(x => x.Interaction.Packages))
+				foreach (var item in cr.Interactions[InteractionType.RequiredPackages].SelectMany(x => x.Interaction.Packages))
 				{
 					if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
 					{
@@ -157,9 +158,9 @@ internal class ModLogicManager
 				}
 			}
 
-			if (cr.Interactions.ContainsKey(Domain.Compatibility.InteractionType.OptionalPackages))
+			if (cr.Interactions.ContainsKey(InteractionType.OptionalPackages))
 			{
-				foreach (var item in cr.Interactions[Domain.Compatibility.InteractionType.OptionalPackages].SelectMany(x => x.Interaction.Packages))
+				foreach (var item in cr.Interactions[InteractionType.OptionalPackages].SelectMany(x => x.Interaction.Packages))
 				{
 					if (CompatibilityUtil.GetFinalSuccessor(item) == package.SteamId)
 					{

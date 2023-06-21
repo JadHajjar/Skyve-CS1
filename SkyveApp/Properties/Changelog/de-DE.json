@@ -432,7 +432,7 @@
                     "\"Inhalt dieses Profils anzeigen\" im Menü \"Rechtsklick\" hinzugefügt.",
                     "Eine Option \"Download erzwingen\" im Rechtsklick der Pakete hinzugefügt.",
                     "Mehr Kontext zu einigen Popups hinzugefügt",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "\"Alle angezeigten Elemente herunterladen\" in den Aktionen auf Listenseiten hinzugefügt."
                 ]
             },
             {
@@ -442,7 +442,108 @@
                     "Behoben, dass Profilpakete nicht ihren Workshop-Namen zeigen.",
                     "Die Steam-Informationen der Pakete, die beim ersten Ansehen eines Profils oder einer Sammlung nicht geladen wurden, wurden behoben.",
                     "Der Name der Lokalen Mods wurde auf den Ordnernamen anstelle des Workshops zurückgesetzt, um Probleme zu vermeiden.",
-                    "Improved the performance for people with a lot of mods."
+                    "Verbesserte die Leistung für Spieler mit vielen Mods."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fehlerbehebungen",
+                "Changes": [
+                    "Absturz beim Start behoben."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fehlerbehebungen",
+                "Changes": [
+                    "Aktualisiert für den neuesten Spiel-Patch."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online-Profile kommen!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profile",
+                "Changes": [
+                    "Du kannst jetzt ein Profil online hochladen, bis zu 5 Profile pro Benutzer.",
+                    "Hochgeladene Profile können privat sein, mit einer ID geteilt werden oder öffentlich für alle zu sehen sein.",
+                    "Online-Profile können heruntergeladen oder aktualisiert werden, wenn sie bereits lokal vorhanden sind.",
+                    "Online-Profile können mit einem neuen Knopf im Profil-Reiter entdeckt werden.",
+                    "Eine dritte Option auf der Seite 'Profil hinzufügen' wurde hinzugefügt, um ein Online-Profil mit dessen ID zu importieren."
+                ]
+            },
+            {
+                "Name": "Profiländerungen",
+                "Changes": [
+                    "Die Registerkarte 'Profile' in der Seitenleiste öffnet nun die Profilliste anstelle der Einstellungen des aktuellen Profils.",
+                    "Die Profilliste verwendet nun eine Rasteransicht und es kann zwischen Raster und Listenansicht umgeschaltet werden.",
+                    "Design der obersten Aktionsknöpfe auf beiden Profilseiten geändert",
+                    "Wenn das Profil ungespeicherte Änderungen aufweist, leuchtet das Skyve-Logo nun violett auf.",
+                    "Profile können jetzt Vorschaubilder haben.",
+                    "Die Verwendungszwecke der Profile haben jetzt separate Symbole."
+                ]
+            },
+            {
+                "Name": "Neu & Aktualisiert",
+                "Changes": [
+                    "Fügt eine neue Benutzer-Profilseite hinzu, auf die durch Klicken auf den Autor eines Mods oder Profils zugegriffen wird. Diese Seite enthält alle Profile und Pakete des Benutzers.",
+                    "Beim Löschen durch Skyve werden die Dateien unter Windows nun in den Papierkorb verschoben.",
+                    "6 neue Knöpfe zum Zurücksetzen auf der Werkzeuge-Seite.",
+                    "2 neue Knöpfe auf der Hilfe & Protokolle Seite hinzugefügt.",
+                    "Kompatibilität & Paketstatus werden nun rechts in der Liste angezeigt.",
+                    "Defekte, inkompatible und gebannte Pakete haben nun einen neuen Hintergrund in der Liste.",
+                    "Name und Label lokaler Mods wurden aktualisiert.",
+                    "Fehlender Quelltext erzeugt jetzt eine Warnung anstelle einer Benachrichtigung für das Abbestellen.",
+                    "Benötigte Mods haben jetzt ein anderes UI, um dich wissen zu lassen, dass du sie nicht ausschließen kannst.",
+                    "Eine Einstellung im Spiel hinzugefügt, um Hot-Reload für Mods & Assets zu aktivieren.",
+                    "Verbesserte Leistung beim Ein-/Ausschluss von Paketen.",
+                    "Ungarische Sprache hinzugefügt"
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
                 ]
             }
         ]

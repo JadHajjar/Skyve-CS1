@@ -2,6 +2,8 @@
 
 using Newtonsoft.Json;
 
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Utilities;
@@ -14,15 +16,20 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Domain;
-public class Profile
+public class Profile : IProfile
 {
+	private Bitmap? _banner;
+	private byte[]? _bannerBytes;
 	public static readonly Profile TemporaryProfile = new(Locale.TemporaryProfile) { Temporary = true, AutoSave = false };
 
-	[CloneIgnore] public string? Name { get; set; }
+	[CloneIgnore] public string Name { get; set; }
 	[CloneIgnore] public bool Temporary { get; set; }
 	[JsonIgnore] public DateTime LastEditDate { get; set; }
 	[JsonIgnore] public DateTime DateCreated { get; set; }
 	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
+	[JsonIgnore] public int AssetCount => Assets.Count;
+	[JsonIgnore] public int ModCount => Mods.Count;
+	[JsonIgnore] public IEnumerable<IPackage> Packages => Assets.Concat(Mods);
 
 	public Profile(string name) : this()
 	{
@@ -31,6 +38,7 @@ public class Profile
 
 	public Profile()
 	{
+		Name = string.Empty;
 		LaunchSettings = new();
 		LsmSettings = new();
 		Assets = new();
@@ -42,6 +50,8 @@ public class Profile
 	public bool Save()
 	{
 		ProfileManager.GatherInformation(this);
+
+		UnsavedChanges = false;
 
 		return ProfileManager.Save(this);
 	}
@@ -60,16 +70,36 @@ public class Profile
 	public bool IsFavorite { get; set; }
 	public Color? Color { get; set; }
 	public DateTime LastUsed { get; set; }
-	public Compatibility.PackageUsage Usage { get; set; }
+	public PackageUsage Usage { get; set; }
+	public ulong Author { get; set; }
+	public int ProfileId { get; set; }
+	public bool UnsavedChanges { get; set; }
+	public byte[]? BannerBytes { get => _bannerBytes; set { _bannerBytes = value; _banner?.Dispose(); _banner = null; } }
+	public bool Public { get; set; }
 
-	public bool ForAssetEditor { set { if (value) { Usage = Compatibility.PackageUsage.AssetCreation; } } }
-	public bool ForGameplay { set { if (value) { Usage = Compatibility.PackageUsage.CityBuilding; } } }
+	public bool ForAssetEditor { set { if (value) { Usage = PackageUsage.AssetCreation; } } }
+	public bool ForGameplay { set { if (value) { Usage = PackageUsage.CityBuilding; } } }
+	[JsonIgnore] public int Downloads { get; }
+	[JsonIgnore] public Bitmap? Banner
+	{
+		get
+		{
+			if (_banner is not null) return _banner;
+			
+			if (BannerBytes is null || BannerBytes.Length == 0)
+				return null;
+
+			using var ms = new MemoryStream(BannerBytes);
+
+			return _banner = new Bitmap(ms);
+		}
+	}
 
 	public class Asset : IPackage
 	{
 		private string? _name;
 
-		public string? Name { get => WorkshopInfo?.Name ?? _name; set => _name = value; }
+		public string? Name { get => WorkshopInfo?.Name ?? _name ?? Path.GetFileNameWithoutExtension(RelativePath); set => _name = value; }
 		public string? RelativePath { get; set; }
 		public ulong SteamId { get; set; }
 
@@ -96,6 +126,7 @@ public class Profile
 		[JsonIgnore, CloneIgnore] public string? SteamDescription => WorkshopInfo?.SteamDescription;
 		[JsonIgnore, CloneIgnore] public bool RemovedFromSteam => WorkshopInfo?.RemovedFromSteam ?? false;
 		[JsonIgnore, CloneIgnore] public bool Incompatible => WorkshopInfo?.Incompatible ?? false;
+		[JsonIgnore, CloneIgnore] public bool Banned => WorkshopInfo?.Banned ?? false;
 		[JsonIgnore, CloneIgnore] public bool IsCollection => WorkshopInfo?.IsCollection ?? false;
 		[JsonIgnore, CloneIgnore] public string[]? WorkshopTags => WorkshopInfo?.WorkshopTags;
 
@@ -111,9 +142,24 @@ public class Profile
 
 		}
 
+		public Asset(UserProfileContent content)
+		{
+			RelativePath = content.RelativePath;
+			SteamId = content.SteamId;
+		}
+
 		public override string ToString()
 		{
 			return WorkshopInfo?.Title ?? Name ?? Locale.UnknownPackage;
+		}
+
+		public virtual UserProfileContent AsProfileContent()
+		{
+			return new UserProfileContent
+			{
+				RelativePath = RelativePath,
+				SteamId = SteamId,
+			};
 		}
 	}
 
@@ -142,6 +188,25 @@ public class Profile
 		public Mod()
 		{
 			IsMod = true;
+		}
+
+		public Mod(UserProfileContent content)
+		{
+			IsMod = true;
+			Enabled = content.Enabled;
+			RelativePath = content.RelativePath;
+			SteamId = content.SteamId;
+		}
+
+		public override UserProfileContent AsProfileContent()
+		{
+			return new UserProfileContent
+			{
+				Enabled = Enabled,
+				IsMod = true,
+				RelativePath = RelativePath,
+				SteamId = SteamId,
+			};
 		}
 	}
 }

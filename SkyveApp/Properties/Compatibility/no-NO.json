@@ -31,7 +31,7 @@
   "UnsubscribeThis": "Avslutt abonnement fra denne pakken",
   "UnsubscribeOther": "Avslutt abonnement fra linkede pakker",
   "Switch": "Bytt til lenket pakke",
-  "FlippedSwitch": "Switch to this package",
+  "FlippedSwitch": "Bytt til denne pakken",
   "Deprecated": "Foreldet",
   "Reupload": "Re-Last opp",
   "CausesIssues": "Årsaker saker",
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "Dette er en avhengighetsmod, men det ser ikke ut til at du bruker alle pakkene som krever det.",
   "Status_SourceCodeNotAvailable": "Kildekoden til denne modden er ikke tilgjengelig. Du bør ikke bruke den med mindre du stoler på forfatteren.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "Musikken i denne pakken kan kanskje bli opphavsrettet. Det er ikke best å bruke den mens den strømmes.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Forventet utgang",
@@ -147,6 +148,9 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Du skal ekskludere '{0}.",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "Ekskluder",
+  "Unsubscribe": "Avmeld",
   "Action_ExcludeOther": {
     "One": "Du skal ekskludere '{1}.",
     "Plural": "You should exclude the following packages."
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }

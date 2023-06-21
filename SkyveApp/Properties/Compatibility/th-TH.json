@@ -1,5 +1,5 @@
 {
-  "Usage": "การใช้งาน",
+  "Usage": "ใช้งาน",
   "Stability": "ความเสถียร",
   "ApplyContinue": "ปรับใช้แล้วดำเนินการต่อ",
   "Previous": "ก่อนหน้า",
@@ -21,7 +21,7 @@
   "HasIssues": "มีปัญหา",
   "Broken": "พัง",
   "Incompatible": "ไม่เข้ากัน",
-  "CityBuilding": "การสร้างเมือง",
+  "CityBuilding": "อาคารเมือง",
   "AssetCreation": "การสร้างแอสเซท",
   "MapCreation": "การสร้างแผนที่",
   "NoAction": "ไม่ต้องทำอะไร",
@@ -30,9 +30,9 @@
   "SelectOne": "เลือกอย่างใดอย่างหนึ่ง",
   "UnsubscribeThis": "Unsubscribe from this package",
   "UnsubscribeOther": "Unsubscribe from linked packages",
-  "Switch": "Switch to linked package",
-  "FlippedSwitch": "Switch to this package",
-  "Deprecated": "Deprecated",
+  "Switch": "สลับไปใช้แพ็กเกจที่เชื่อมโยงกัน",
+  "FlippedSwitch": "สลับมาใช้แพ็กเกจนี้",
+  "Deprecated": "เลิกใช้แล้ว",
   "Reupload": "อัปโหลดอีกครั้ง",
   "CausesIssues": "ทำให้เกิดปัญหา",
   "SavesCantLoadWithoutIt": "Saves can't load without it",
@@ -94,8 +94,8 @@
     "Plural": "You're missing the following optional packages for '{0}'."
   },
   "Interaction_SucceededBy": {
-    "One": "'{0}' is succeeded by '{1}'.",
-    "Plural": "'{0}' is succeeded by either one of the following packages."
+    "One": "'{0}' ได้รับการ รับช่วงต่อ จาก '{1}'",
+    "Plural": "'{0}' ได้รับการ รับช่วงต่อ โดยม็อดต่อไปนี้"
   },
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
@@ -120,6 +120,7 @@
   },
   "Status_DependencyMod": "This is a dependency mod, but it does not seem like you are using any package that requires it.",
   "Status_SourceCodeNotAvailable": "The source code of this mod is not available. You should not use it unless you trust its author.",
+  "SourceAvailable": "Source code is available",
   "Status_MusicCanBeCopyrighted": "The music inside this pack might be copyrighted. It's best not to use it while streaming.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "เอาท์พุตที่คาดหวัง",
@@ -147,6 +148,9 @@
     "Plural": "คุณควรยกเลิกการสมัครสมาชิกแพ็กเกจดังต่อไปนี้:"
   },
   "Action_ExcludeThis": "คุณควรแยก '{0}' ออกจากเกม",
+  "ExcludeThis": "Exclude this package",
+  "Exclude": "แยกออกจากเกม",
+  "Unsubscribe": "ยกเลิกการสมัครสมาชิก",
   "Action_ExcludeOther": {
     "One": "คุณควรแยก '{1}' ออกจากเกม",
     "Plural": "คุณควรแยกแพ็กเกจต่อไปนี้ออกจากเกม:"
@@ -171,7 +175,7 @@
   "CRT_Status": "สถานะ",
   "CRT_Ambiguous": "ความน่าสงสัย",
   "LastReviewDate": "ได้รับการตรวจสอบครั้งล่าสุดเมื่อ {0}",
-  "RequestReviewInfo": "Experiencing issues with this package?\r\nRequest a new review here:",
+  "RequestReviewInfo": "ประสบปัญหาการใช้งานแพ็กเกจนี้?\nร้องขอการตรวจสอบที่นี่:",
   "RequestReview": "Request Review",
   "MissingDependencyCount": {
     "One": "{0} {1} is missing dependencies",
@@ -207,5 +211,9 @@
   "DeleteRequest": "Delete Request",
   "ApplyRequestedChanges": "Apply Requested Changes",
   "ManagePackage": "Manage Package",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request"
+  "Banned": "Banned",
+  "NoIssues": "No Issues",
+  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
+  "ScenarioMaking": "Scenario-Making",
+  "ThemeMaking": "Theme-Making"
 }

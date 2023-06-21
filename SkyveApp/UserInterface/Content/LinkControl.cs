@@ -1,6 +1,5 @@
 ﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
 using SkyveApp.Utilities.Managers;

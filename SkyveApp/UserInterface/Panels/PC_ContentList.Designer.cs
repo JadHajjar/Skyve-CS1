@@ -208,7 +208,7 @@ partial class PC_ContentList<T>
 			this.DD_Sorting.Name = "DD_Sorting";
 			this.DD_Sorting.Size = new System.Drawing.Size(50, 0);
 			this.DD_Sorting.TabIndex = 2;
-			this.DD_Sorting.Text = "Sorting";
+			this.DD_Sorting.Text = "Sort By";
 			this.DD_Sorting.SelectedItemChanged += new System.EventHandler(this.DD_Sorting_SelectedItemChanged);
 			// 
 			// TLP_MiddleBar

@@ -1,6 +1,5 @@
 ﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -26,9 +25,9 @@ internal class PackageTypeDropDown : SlickSelectionDropDown<PackageType>
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<PackageType>> OrderItems(IEnumerable<DrawableItem<PackageType>> items)
+	protected override IEnumerable<PackageType> OrderItems(IEnumerable<PackageType> items)
 	{
-		return items.OrderBy(x => LocaleCR.Get($"{x.Item}").One);
+		return items.OrderBy(x => LocaleCR.Get($"{x}").One);
 	}
 
 	protected override void UIChanged()

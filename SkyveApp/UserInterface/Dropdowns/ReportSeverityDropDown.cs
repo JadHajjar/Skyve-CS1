@@ -1,6 +1,5 @@
 ﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.Managers;
 
@@ -18,9 +17,8 @@ public enum CompatibilityNotificationFilter
 {
 	Any = -2,
 	AnyIssue = -1,
-	None,
-	Info,
-	Caution,
+	NoIssues,
+	Caution = 2,
 	MissingDependency,
 	Warning,
 	AttentionRequired,
@@ -48,9 +46,9 @@ internal class ReportSeverityDropDown : SlickSelectionDropDown<CompatibilityNoti
 		}
 	}
 
-	protected override IEnumerable<DrawableItem<CompatibilityNotificationFilter>> OrderItems(IEnumerable<DrawableItem<CompatibilityNotificationFilter>> items)
+	protected override IEnumerable<CompatibilityNotificationFilter> OrderItems(IEnumerable<CompatibilityNotificationFilter> items)
 	{
-		return items.OrderBy(x => (int)x.Item);
+		return items.OrderBy(x => (int)x);
 	}
 
 	protected override bool SearchMatch(string searchText, CompatibilityNotificationFilter item)

@@ -1,6 +1,8 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.Utilities;
@@ -160,7 +162,7 @@ public partial class PC_RequestReview : PanelContent
 			return stream.ToArray();
 		});
 
-		var response = await CompatibilityApiUtil.SendReviewRequest(postPackage);
+		var response = await SkyveApiUtil.SendReviewRequest(postPackage);
 
 		if (response.Success)
 		{

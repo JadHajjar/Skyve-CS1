@@ -1,4 +1,5 @@
 ﻿using System;
+using SkyveApp.Domain.Compatibility.Enums;
 
 namespace SkyveApp.Domain.Compatibility;
 
