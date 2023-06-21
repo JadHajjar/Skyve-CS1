@@ -528,7 +528,7 @@
                     "Added a button to easily view an online profile's contents.",
                     "Fixed an error while fetching steam user info.",
                     "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "Behoben, dass die Aktualisierung des Online Profils nicht korrekt funktioniert."
                 ]
             }
         ]
@@ -540,10 +540,10 @@
             {
                 "Name": "Änderungen",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
+                    "Ladeanimation für das Betrachten von Inhalten auf Profilen hinzugefügt.",
                     "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
                     "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "Behoben, dass einige Teile der UI nicht von Anfang an übersetzt wurden."
                 ]
             }
         ]
@@ -553,7 +553,7 @@
         "Date": "2023-06-21",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Fehlerbehebungen",
                 "Changes": [
                     "Fixes an error caused by including/excluding mods that have contain assets.",
                     "Fixed the action button on the right of the Compatibility Report list not being clickable.",
