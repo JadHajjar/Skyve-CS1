@@ -1,565 +1,565 @@
 [
-  {
-    "Version": "2.2.0",
-    "Date": "2023-04-10",
-    "Tagline": "歡迎查看更新日誌",
-    "ChangeGroups": [
-      {
-        "Name": "新增",
-        "Changes": [
-          "在內容頁面中新增「全部取消訂閱」的操作選項。",
-          "在實用工具選項內添加了導入並查看 BOB 設定檔的功能，以方便玩家訂閱缺失的外掛程式。",
-          "新增一個選項，現在可以選擇預設顯示/不顯示篩選選項和操作選項。",
-          "新增更新日誌頁面。在 LOM2 模組更新後，打開 LOT2 軟體時主頁面將直接展示更新日誌；或者在「獲取説明與日誌」選項內點擊\"打開更新日誌\"按鈕查看更新日誌。"
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "歡迎查看更新日誌",
+        "ChangeGroups": [
+            {
+                "Name": "新增",
+                "Changes": [
+                    "在內容頁面中新增「全部取消訂閱」的操作選項。",
+                    "在實用工具選項內添加了導入並查看 BOB 設定檔的功能，以方便玩家訂閱缺失的外掛程式。",
+                    "新增一個選項，現在可以選擇預設顯示/不顯示篩選選項和操作選項。",
+                    "新增更新日誌頁面。在 LOM2 模組更新後，打開 LOT2 軟體時主頁面將直接展示更新日誌；或者在「獲取説明與日誌」選項內點擊\"打開更新日誌\"按鈕查看更新日誌。"
+                ]
+            },
+            {
+                "Name": "優化",
+                "Changes": [
+                    "為損壞的資產添加了相容性報告",
+                    "未被列出的外掛程式現在具有正確的名稱和縮略圖。",
+                    "在設置資料夾時，預顯示的預留位置現在可以正確跟隨您的作業系統。",
+                    "按住Ctrl鍵+滑鼠按一下選擇作者的名稱，可以將作者名稱添加到搜索欄，並以此篩選。"
+                ]
+            },
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了在首次啟動 LOT2 之後，舊版 LOT1 的設定檔沒有自動轉換的問題。",
+                    "修復了在外部更改本地資產後，列表不會自動刷新的問題。",
+                    "修復了按右鍵功能表中刪除所有本地資產時，只會刪除一個本地資產的問題。現在會刪除所有本地資產。",
+                    "修復了轉換 LOT1 設定檔後，所有資產被標記為「本地資產」的問題。",
+                    "修復了 Linux 和 Mac 使用者在保存交換時顯示正確的資料夾名稱。",
+                    "修復了 Linux 和 Mac 使用者無法生成日誌壓縮檔夾的問題。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "優化",
-        "Changes": [
-          "為損壞的資產添加了相容性報告",
-          "未被列出的外掛程式現在具有正確的名稱和縮略圖。",
-          "在設置資料夾時，預顯示的預留位置現在可以正確跟隨您的作業系統。",
-          "按住Ctrl鍵+滑鼠按一下選擇作者的名稱，可以將作者名稱添加到搜索欄，並以此篩選。"
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "添加了獲取説明和日誌的選項卡",
+                "Changes": [
+                    "現在可以輕鬆地訪問您的日誌。",
+                    "快速查看您最近/當前遊戲中的報錯資訊。",
+                    "簡化日誌檔以專注於解決關鍵問題。",
+                    "分享一個壓縮檔夾，其中包含幫助您解決問題所需的所有日誌檔。"
+                ]
+            },
+            {
+                "Name": "優化",
+                "Changes": [
+                    "更改了篩選選項的圖示，現在清單會顯示正確的圖示了。"
+                ]
+            },
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了導入需要訂閱或取消訂閱的合集時，文本被翻轉的問題。",
+                    "修復了當選擇新建存檔使用的地圖文件時，無法選擇遊戲自帶地圖的問題。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了在首次啟動 LOT2 之後，舊版 LOT1 的設定檔沒有自動轉換的問題。",
-          "修復了在外部更改本地資產後，列表不會自動刷新的問題。",
-          "修復了按右鍵功能表中刪除所有本地資產時，只會刪除一個本地資產的問題。現在會刪除所有本地資產。",
-          "修復了轉換 LOT1 設定檔後，所有資產被標記為「本地資產」的問題。",
-          "修復了 Linux 和 Mac 使用者在保存交換時顯示正確的資料夾名稱。",
-          "修復了 Linux 和 Mac 使用者無法生成日誌壓縮檔夾的問題。"
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了導致某些使用者無限載入的錯誤。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.4",
-    "Date": "2023-04-08",
-    "ChangeGroups": [
-      {
-        "Name": "添加了獲取説明和日誌的選項卡",
-        "Changes": [
-          "現在可以輕鬆地訪問您的日誌。",
-          "快速查看您最近/當前遊戲中的報錯資訊。",
-          "簡化日誌檔以專注於解決關鍵問題。",
-          "分享一個壓縮檔夾，其中包含幫助您解決問題所需的所有日誌檔。"
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "改動",
+                "Changes": [
+                    "移除遊戲內模組選項中的訂閱選項卡。",
+                    "修復了載入設定檔時，沒有應用 DLC 的設定的問題。",
+                    "修復了某些玩家語言選項為空的問題。",
+                    "修復了在 Steam 創意工坊重新訂閱外掛程式後，LOT2 軟體會強制增大專案顯示的問題。",
+                    "對其他一些使用者介面進行了改動。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "優化",
-        "Changes": [
-          "更改了篩選選項的圖示，現在清單會顯示正確的圖示了。"
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "改動",
+                "Changes": [
+                    "添加了在首次訂閱項目時，會彈出相關資訊視窗的功能。",
+                    "當您安裝了多個 LOM 模組時，統計面板會顯示警告，讓您刪除其他多餘的 LOM 模組。",
+                    "在外掛程式名稱旁添加了小標籤。",
+                    "在實用工具內重新下載過期的 Load Order Tool 2 時，會關閉 LOT 2 應用程式，並自動開始下載與更新。",
+                    "修復並提高打開 Loading Screen Mod Revisited 資產報告的速度。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了導入需要訂閱或取消訂閱的合集時，文本被翻轉的問題。",
-          "修復了當選擇新建存檔使用的地圖文件時，無法選擇遊戲自帶地圖的問題。"
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "公開測試",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "介紹：設定檔功能重大更新",
+        "ChangeGroups": [
+            {
+                "Name": "設定檔相關改動",
+                "Changes": [
+                    "更改了設定檔頁面的設計。",
+                    "現在統計面板會顯示收藏的設定檔，以方便切換設定檔。",
+                    "在外掛程式的頁面中，添加了「其他設定檔」選項卡，可以輕鬆地對其他設定檔中的這個外掛程式進行裝載或卸下。",
+                    "新增設定檔排序選項。在關閉程式前，將一直使用所選定的排序選項。",
+                    "新增內容清單中按右鍵的操作選項，可以在所有外掛程式中裝載或卸下項目。",
+                    "新增了一個按鈕，便於打開設定檔存儲資料夾目錄。",
+                    "現在您可以自訂設定檔圖示的顏色了。",
+                    "現在您可以為不同的設定檔分別創建桌面快捷方式了。",
+                    "您現在可以點擊「添加設定檔」，來導入 LOT 1 的配置。"
+                ]
+            },
+            {
+                "Name": "優化",
+                "Changes": [
+                    "Steam 連結現在會在 Steam 用戶端內打開。該功能可以在「選項」中關閉。",
+                    "現在可以根據本地資產所在資料夾，來對它們正確地分組。",
+                    "現在您的 Paradox 帳戶面板將會顯示在主功能表頁面。",
+                    "現在右上角的視窗按鈕會有相應的圖示來解釋它們的功能。",
+                    "優化了內容清單頁面程式的回應能力。",
+                    "現在在內容清單頁面中，搜索的回應速度更快。",
+                    "現在模組會通過快取記憶體載入遊戲； 能大幅提高 Windows 和 Linux 上的載入效率，提升 macOS 上的載入速度。",
+                    "現在您可以在遊戲運行時，生成遊戲日誌檔的壓縮檔夾。"
+                ]
+            },
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了內容清單頁面卡住的問題。",
+                    "修復了無法自動保存設定檔的問題。",
+                    "修復了在設定檔設置中，無法使用創意工坊的地圖和存檔的問題。",
+                    "修復了在設定檔設置中選擇地圖時，自訂地圖無法顯示的問題。",
+                    "修復了 macOS 和 Linux 可能無法正確載入設定檔的問題。",
+                    "修復了在「實用工具」頁面裡選擇 Loading Screen Mod Revisited 資產報告文件時未正確打開對應資料夾的問題。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.3",
-    "Date": "2023-04-06",
-    "ChangeGroups": [
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了導致某些使用者無限載入的錯誤。"
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "新增與改進",
+                "Changes": [
+                    "在「實用工具」頁面裡新增了導入任何包含 Steam ID 的文字檔和剪貼板的功能（以方便訂閱或管理）。",
+                    "現在可以用通用的 XML 檔導入功能來導入 BOB 模組的設定檔了，該功能支持任何包含外掛程式 ID 的 XML 格式檔。"
+                ]
+            },
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了載入合集 URL 時可能無法正確解析 ID 的問題。",
+                    "修復了 Mac/Linux 取消訂閱外掛程式時 LOT2 無法回應的問題。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.2",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "改動",
-        "Changes": [
-          "移除遊戲內模組選項中的訂閱選項卡。",
-          "修復了載入設定檔時，沒有應用 DLC 的設定的問題。",
-          "修復了某些玩家語言選項為空的問題。",
-          "修復了在 Steam 創意工坊重新訂閱外掛程式後，LOT2 軟體會強制增大專案顯示的問題。",
-          "對其他一些使用者介面進行了改動。"
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "春季大更新",
+        "ChangeGroups": [
+            {
+                "Name": "篩選和搜索功能有關改動",
+                "Changes": [
+                    "添加了按照作者進行篩選的下拉清單。",
+                    "為內容清單中的篩選標籤添加了更多操作。",
+                    "為「外掛程式狀態」和「相容性報告」的下拉式功能表添加了一個新的「任何問題」選項。",
+                    "現在按照標籤進行快速篩選的方式更改為：按住 Ctrl 鍵 + 滑鼠按一下標籤。並且添加了一個選項來切換篩選的方式。",
+                    "當您在使用快速篩選的功能時，會自動清空上一次選擇的篩選標籤。",
+                    "現在在搜索欄中，可以用 「 , 」（英文逗號）分隔多個關鍵字：\n• 預設情況下，將顯示匹配任意關鍵字的專案\n• 在某個關鍵字前面添加 「 + 」（英文加號），搜索結果將必須匹配該關鍵字\n• 在某個關鍵字前面添加 「 - 」（英文減號），會排除與該關鍵字匹配的搜索結果\n\n舉例：\n• car, truck（顯示 \"car\" 或 \"truck\" 的搜索結果）\n• building +commercial（搜索結果為：匹配 \"building\" 的商業建築）\n• big, grass +decal（搜索結果為：匹配\"big\"或\"grass\"的貼花資產）\n• building, apartment +european（搜索結果為：匹配的 \"building\" 或 \"apartment\" 的歐式建築）\n• condo, house -rico +american（搜索結果為：匹配 \"condo\" 或 \"house\" 的美式非 RICO 建築）"
+                ]
+            },
+            {
+                "Name": "介面和使用者體驗相關優化改動",
+                "Changes": [
+                    "更新了新的圖示系統，現在會根據您的介面比例適當縮放所有圖示。",
+                    "重做了清單的渲染方式，顯著提高了內容頁面的性能和回應速度。",
+                    "添加了切換排序順序的功能，現在可以自己選擇昇冪和降冪。",
+                    "調整了內容頁面中操作選項的位置，並添加了兩個新的操作選項。",
+                    "現在包含多個資產的外掛程式，如果您只裝載了其中一部分資產，在清單中會顯示出新的圖示。",
+                    "改進了內容清單中的按鈕和篩選控制項，減小了它們的整體大小，並添加了更多視覺提示。",
+                    "更改了滑鼠懸停時增加專案顯示大小的功能，現在預設會放大專案的顯示大小。改進了放大後的 UI，並將此功能應用於 LOT2 程式中的其他清單部分。",
+                    "現在可以按住 Ctrl 鍵 + [0-9] 數位鍵的組合來選擇左側主功能表的選項。",
+                    "將所有雙功能按鈕更改為開/關按鈕選項。",
+                    "在 macOS 和 Linux 系統上預設禁用動畫。",
+                    "介面改進、功能更改和問題修復多到我都數不清了。"
+                ]
+            },
+            {
+                "Name": "改進檔的選擇方式",
+                "Changes": [
+                    "更新了檔選擇視窗的介面。",
+                    "新增將資料夾置頂的功能，便於快速打開相關資料夾。",
+                    "在選擇地圖或存檔的頁面新增 \"創意工坊\" 選項卡，便於快速找到您在創意工坊訂閱的地圖和存檔。",
+                    "新增排序方式下拉清單，和切換排序順序的功能。",
+                    "添加了切換列表/網格視圖的功能。"
+                ]
+            },
+            {
+                "Name": "問題修復",
+                "Changes": [
+                    "修復了最小化 LOT2 視窗後，視窗會再次彈出的問題。",
+                    "修復了在進入新地圖時，靠左行駛選項不起作用的問題。",
+                    "修復了無法在 Steam 中正確打開作者頁面的問題。",
+                    "修復了在選擇按照「訂閱日期」顯示搜索結果時介面卡頓的問題。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.1",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "改動",
-        "Changes": [
-          "添加了在首次訂閱項目時，會彈出相關資訊視窗的功能。",
-          "當您安裝了多個 LOM 模組時，統計面板會顯示警告，讓您刪除其他多餘的 LOM 模組。",
-          "在外掛程式名稱旁添加了小標籤。",
-          "在實用工具內重新下載過期的 Load Order Tool 2 時，會關閉 LOT 2 應用程式，並自動開始下載與更新。",
-          "修復並提高打開 Loading Screen Mod Revisited 資產報告的速度。"
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "創意工坊外掛程式清理程式",
+                "Changes": [
+                    "新增了一個功能，可以輕鬆處理您在工坊訂閱的外掛程式與 Steam 所下載的外掛程式不匹配的問題。",
+                    "現在您未訂閱的外掛程式將不會被載入到遊戲中。",
+                    "當您打開 LOT2 並啟動遊戲時，會自動刪除您已經取消訂閱（但沒刪除乾淨）的外掛程式。",
+                    "在實用程式選項卡中添加了一個按鈕，可以手動運行清理程式，並強制下載缺失的外掛程式。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.0",
-    "Date": "2023-04-05",
-    "Tagline": "公開測試",
-    "ChangeGroups": []
-  },
-  {
-    "Version": "2.2.1",
-    "Date": "2023-04-15",
-    "Tagline": "介紹：設定檔功能重大更新",
-    "ChangeGroups": [
-      {
-        "Name": "設定檔相關改動",
-        "Changes": [
-          "更改了設定檔頁面的設計。",
-          "現在統計面板會顯示收藏的設定檔，以方便切換設定檔。",
-          "在外掛程式的頁面中，添加了「其他設定檔」選項卡，可以輕鬆地對其他設定檔中的這個外掛程式進行裝載或卸下。",
-          "新增設定檔排序選項。在關閉程式前，將一直使用所選定的排序選項。",
-          "新增內容清單中按右鍵的操作選項，可以在所有外掛程式中裝載或卸下項目。",
-          "新增了一個按鈕，便於打開設定檔存儲資料夾目錄。",
-          "現在您可以自訂設定檔圖示的顏色了。",
-          "現在您可以為不同的設定檔分別創建桌面快捷方式了。",
-          "您現在可以點擊「添加設定檔」，來導入 LOT 1 的配置。"
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "新增",
+                "Changes": [
+                    "新增了一個選項以禁用創意工坊外掛程式清理程式。",
+                    "為開發者啟動選項添加了自訂啟動參數項。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "優化",
-        "Changes": [
-          "Steam 連結現在會在 Steam 用戶端內打開。該功能可以在「選項」中關閉。",
-          "現在可以根據本地資產所在資料夾，來對它們正確地分組。",
-          "現在您的 Paradox 帳戶面板將會顯示在主功能表頁面。",
-          "現在右上角的視窗按鈕會有相應的圖示來解釋它們的功能。",
-          "優化了內容清單頁面程式的回應能力。",
-          "現在在內容清單頁面中，搜索的回應速度更快。",
-          "現在模組會通過快取記憶體載入遊戲； 能大幅提高 Windows 和 Linux 上的載入效率，提升 macOS 上的載入速度。",
-          "現在您可以在遊戲運行時，生成遊戲日誌檔的壓縮檔夾。"
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "評分與訂閱量圖示",
+                "Changes": [
+                    "在外掛程式名稱旁邊新增了一個圖示，顯示該外掛程式的評分和訂閱量。",
+                    "將滑鼠指標懸停在圖示上面以顯示評分與訂閱量。",
+                    "點擊該圖示可深入瞭解相關功能。",
+                    "新增了「評分」和「訂閱量」的排序選項。"
+                ]
+            },
+            {
+                "Name": "資產要求",
+                "Changes": [
+                    "Load Order Tool 2 新增了訂閱創意工坊資產的必需物品的功能。",
+                    "現在相容性報告包含了此提示資訊，以便快速輕鬆地查看您缺少的必需物品。"
+                ]
+            },
+            {
+                "Name": "其他改動",
+                "Changes": [
+                    "更新了外掛程式頁面以匹配內容清單中顯示的資訊。",
+                    "現在，例如「缺失的外掛程式」和「創意工坊合集」等二級內容頁面，使用者介面的設計與一級頁面（內容清單主頁面）相同，可以給用戶提供流線型體驗，並提供更多選項。",
+                    "在設定檔中添加了「新建資產」和「讀取資產」的啟動選項，以快速載入到資產編輯器。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了內容清單頁面卡住的問題。",
-          "修復了無法自動保存設定檔的問題。",
-          "修復了在設定檔設置中，無法使用創意工坊的地圖和存檔的問題。",
-          "修復了在設定檔設置中選擇地圖時，自訂地圖無法顯示的問題。",
-          "修復了 macOS 和 Linux 可能無法正確載入設定檔的問題。",
-          "修復了在「實用工具」頁面裡選擇 Loading Screen Mod Revisited 資產報告文件時未正確打開對應資料夾的問題。"
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "介紹：Skyve，Load Order Mod 1/2 和 Compatibility Report 的最終繼任模組。\n適用於 C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "相容性報告重大更新",
+                "Changes": [
+                    "現在 Compatibility Report 模組已被整合到 Skyve 中。",
+                    "建議和資訊文字現在更加清晰，更易於進行管理。",
+                    "新增「稍後提醒」按鈕，可以關閉某個相容性通知。",
+                    "如果必需的外掛中有過時的外掛，會自動重新導向到最新的繼任外掛。",
+                    "本地外掛會自動與工坊版本外掛匹配，顯示來自 Steam 創意工坊的外掛資訊，並正確顯示其相容性資訊。",
+                    "您現在可以對某個外掛申請檢查，以便我們補充並更新相容性資料中缺失的資訊。",
+                    "相容性報告選項卡現在已更新，可以使用。"
+                ]
+            },
+            {
+                "Name": "新功能",
+                "Changes": [
+                    "您現在可以直接在 Skyve 應用程式為模組和資產編輯 Find it! 標籤。資產已經與遊戲同步！",
+                    "在外掛的詳情頁面上，新增了一個「引用」選項卡，以便查看所有使用了此外掛的外掛。",
+                    "新增了一個選項，可以將可選外掛視為必需外掛。",
+                    "新增地方性語言分支：繁體中文（台灣）、英式英語、巴西葡萄牙語等。"
+                ]
+            },
+            {
+                "Name": "其他改動",
+                "Changes": [
+                    "現在 Intersection Marking Tool 的標線、Render it! 的預設，Procedural Objects 的字型、以及遊戲翻譯模組將被識別為「偽模組」。",
+                    "新增了指向外掛工坊頁面的連結，以及其他資訊，如外掛的使用說明和類型。",
+                    "新增了三種組態檔案用途：地圖製作、劇本製作和地圖主題製作。",
+                    "新增在列表頁面顯示隱藏外掛數量的功能，顯示根據組態檔案的用途而被自動隱藏的外掛數量。",
+                    "最佳化操作選項的按鈕，使其更顯眼、更易於找到。",
+                    "Skyve 程序的新圖示根據遊戲和 Skyve 程序的運行狀態發光，藍色表示遊戲正在運行， 紅色表示沒有網路連線（請打開加速器 / VPN），快速閃爍表示正在啟動或關閉遊戲。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.2.2",
-    "Date": "2023-04-19",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "新增與改進",
-        "Changes": [
-          "在「實用工具」頁面裡新增了導入任何包含 Steam ID 的文字檔和剪貼板的功能（以方便訂閱或管理）。",
-          "現在可以用通用的 XML 檔導入功能來導入 BOB 模組的設定檔了，該功能支持任何包含外掛程式 ID 的 XML 格式檔。"
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了之前的設定和組態檔案有時沒有匯入到 Skyve 的問題。",
+                    "現在，如果您之前使用了 Load Order Tool 2 並更新到了 Skyve，在第一次打開 Skyve 時，會自動在桌面建立 Skyve 的快捷方式。",
+                    "修復了相容性資訊無法載入的罕見問題。",
+                    "現在您可以對當前已損壞的外掛請求檢查。",
+                    "降低了「沒有完整下載」警告的敏感程度。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了載入合集 URL 時可能無法正確解析 ID 的問題。",
-          "修復了 Mac/Linux 取消訂閱外掛程式時 LOT2 無法回應的問題。"
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "改動",
+                "Changes": [
+                    "最佳化了 Skyve 應用程式的性能。按照預期，載入速度會更快，並且減少了卡頓。",
+                    "修復了當您只有其中一個模組時，相容性報告中會顯示與之相似模組的互動方式的問題。",
+                    "修復了在本地資產資料夾內檢測到模組的問題。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.0",
-    "Date": "2023-04-27",
-    "Tagline": "春季大更新",
-    "ChangeGroups": [
-      {
-        "Name": "篩選和搜索功能有關改動",
-        "Changes": [
-          "添加了按照作者進行篩選的下拉清單。",
-          "為內容清單中的篩選標籤添加了更多操作。",
-          "為「外掛程式狀態」和「相容性報告」的下拉式功能表添加了一個新的「任何問題」選項。",
-          "現在按照標籤進行快速篩選的方式更改為：按住 Ctrl 鍵 + 滑鼠按一下標籤。並且添加了一個選項來切換篩選的方式。",
-          "當您在使用快速篩選的功能時，會自動清空上一次選擇的篩選標籤。",
-          "現在在搜索欄中，可以用 「 , 」（英文逗號）分隔多個關鍵字：\n• 預設情況下，將顯示匹配任意關鍵字的專案\n• 在某個關鍵字前面添加 「 + 」（英文加號），搜索結果將必須匹配該關鍵字\n• 在某個關鍵字前面添加 「 - 」（英文減號），會排除與該關鍵字匹配的搜索結果\n\n舉例：\n• car, truck（顯示 \"car\" 或 \"truck\" 的搜索結果）\n• building +commercial（搜索結果為：匹配 \"building\" 的商業建築）\n• big, grass +decal（搜索結果為：匹配\"big\"或\"grass\"的貼花資產）\n• building, apartment +european（搜索結果為：匹配的 \"building\" 或 \"apartment\" 的歐式建築）\n• condo, house -rico +american（搜索結果為：匹配 \"condo\" 或 \"house\" 的美式非 RICO 建築）"
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了 MacOS 和 Linux 系統上選項面板無法打開的問題。",
+                    "修復了「獲取幫助與日誌」選項卡內，沒有自動顯示簡化後的日誌的問題。",
+                    "修復 Linux 系統上記錄檔路徑錯誤的問題。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "介面和使用者體驗相關優化改動",
-        "Changes": [
-          "更新了新的圖示系統，現在會根據您的介面比例適當縮放所有圖示。",
-          "重做了清單的渲染方式，顯著提高了內容頁面的性能和回應速度。",
-          "添加了切換排序順序的功能，現在可以自己選擇昇冪和降冪。",
-          "調整了內容頁面中操作選項的位置，並添加了兩個新的操作選項。",
-          "現在包含多個資產的外掛程式，如果您只裝載了其中一部分資產，在清單中會顯示出新的圖示。",
-          "改進了內容清單中的按鈕和篩選控制項，減小了它們的整體大小，並添加了更多視覺提示。",
-          "更改了滑鼠懸停時增加專案顯示大小的功能，現在預設會放大專案的顯示大小。改進了放大後的 UI，並將此功能應用於 LOT2 程式中的其他清單部分。",
-          "現在可以按住 Ctrl 鍵 + [0-9] 數位鍵的組合來選擇左側主功能表的選項。",
-          "將所有雙功能按鈕更改為開/關按鈕選項。",
-          "在 macOS 和 Linux 系統上預設禁用動畫。",
-          "介面改進、功能更改和問題修復多到我都數不清了。"
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "改動",
+                "Changes": [
+                    "主選單中的 Steam 面板現在預設會顯示，您可以在模組選項中隱藏此面板。",
+                    "請求檢查現在需要有效的問題描述，且會將您的記錄檔與申請一起傳送。「傳送檢查申請」按鈕旁邊會顯示免責聲明。",
+                    "將模組很久沒有進行過更新的報告等級降低到「提示」等級，這樣一來，Skyve 就不會向您傳送這個警告。"
+                ]
+            },
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了統計面板的資產概要沒有顯示的問題。",
+                    "修復了檢查外掛是否已過期功能沒有正常工作的問題。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "改進檔的選擇方式",
-        "Changes": [
-          "更新了檔選擇視窗的介面。",
-          "新增將資料夾置頂的功能，便於快速打開相關資料夾。",
-          "在選擇地圖或存檔的頁面新增 \"創意工坊\" 選項卡，便於快速找到您在創意工坊訂閱的地圖和存檔。",
-          "新增排序方式下拉清單，和切換排序順序的功能。",
-          "添加了切換列表/網格視圖的功能。"
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "修復與改動",
+                "Changes": [
+                    "新增功能：在所有問題修復完畢，或沒刪乾淨的外掛清理完畢後，Skyve 會彈出一條通知消息。",
+                    "修復了匯入 LOT 1 的組態檔案可能卡死的罕見問題。",
+                    "修復了選擇某些語言時，更新日誌無法打開的問題。",
+                    "可能修復了無法大量訂閱物品的問題。"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "問題修復",
-        "Changes": [
-          "修復了最小化 LOT2 視窗後，視窗會再次彈出的問題。",
-          "修復了在進入新地圖時，靠左行駛選項不起作用的問題。",
-          "修復了無法在 Steam 中正確打開作者頁面的問題。",
-          "修復了在選擇按照「訂閱日期」顯示搜索結果時介面卡頓的問題。"
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "重製了訂閱操作的處理程序",
+                "Changes": [
+                    "現在在遊戲運行期間，您也可以訂閱外掛。",
+                    "現在如果連續訂閱多個外掛，Skyve 會記錄到任務等待列表中，而不是每次都啟動遊戲來進行訂閱操作。",
+                    "在 Skyve 應用程式介面的左下角新增了一個方框，以顯示當前等待中的訂閱 / 取消訂閱操作。",
+                    "新增了一個進階選項，啟用此選項後，在 Skyve 進行訂閱 / 取消訂閱操作之後，自動強制下載外掛或刪除已取訂（但沒刪除乾淨）的外掛。",
+                    "在遊戲執行階段，Skyve 會禁止新訂閱的物品進行載入。\n這種做法可以防止遊戲卡死或模組出錯。"
+                ]
+            },
+            {
+                "Name": "新增",
+                "Changes": [
+                    "新增功能：右鍵點選一個組態檔案時，可以「查看此組態檔案的內容」。",
+                    "新增功能：右鍵點選一個外掛時，可以「強制下載」此外掛。",
+                    "在一些彈出窗口中新增了更多說明文字。",
+                    "在列表頁面的操作選項中，新增「下載所有顯示的項目」選項。"
+                ]
+            },
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復了組態檔案列表沒有立即更新的問題。",
+                    "修復了組態檔案外掛沒有顯示其創意工坊名稱的問題。",
+                    "修復了第一次載入某個組態檔案或合集時，來自 Steam 的外掛資訊沒有載入的問題。",
+                    "已將本地模組的名稱恢復為其所在資料夾名稱，而不是模組的工坊名稱，以防止出現問題。",
+                    "最佳化了擁有大量模組時軟體的性能。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.1",
-    "Date": "2023-04-29",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "創意工坊外掛程式清理程式",
-        "Changes": [
-          "新增了一個功能，可以輕鬆處理您在工坊訂閱的外掛程式與 Steam 所下載的外掛程式不匹配的問題。",
-          "現在您未訂閱的外掛程式將不會被載入到遊戲中。",
-          "當您打開 LOT2 並啟動遊戲時，會自動刪除您已經取消訂閱（但沒刪除乾淨）的外掛程式。",
-          "在實用程式選項卡中添加了一個按鈕，可以手動運行清理程式，並強制下載缺失的外掛程式。"
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "修復",
+                "Changes": [
+                    "修復啟動時會發生崩潰的問題。"
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.2",
-    "Date": "2023-04-30",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "新增",
-        "Changes": [
-          "新增了一個選項以禁用創意工坊外掛程式清理程式。",
-          "為開發者啟動選項添加了自訂啟動參數項。"
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Updated for the latest game patch."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.3",
-    "Date": "2023-05-04",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "評分與訂閱量圖示",
-        "Changes": [
-          "在外掛程式名稱旁邊新增了一個圖示，顯示該外掛程式的評分和訂閱量。",
-          "將滑鼠指標懸停在圖示上面以顯示評分與訂閱量。",
-          "點擊該圖示可深入瞭解相關功能。",
-          "新增了「評分」和「訂閱量」的排序選項。"
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online profiles, coming through!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profiles",
+                "Changes": [
+                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Online profiles can be downloaded, or updated if you already have it locally.",
+                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Improved performance while including/excluding packages.",
+                    "Added Hungarian language"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "資產要求",
-        "Changes": [
-          "Load Order Tool 2 新增了訂閱創意工坊資產的必需物品的功能。",
-          "現在相容性報告包含了此提示資訊，以便快速輕鬆地查看您缺少的必需物品。"
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "其他改動",
-        "Changes": [
-          "更新了外掛程式頁面以匹配內容清單中顯示的資訊。",
-          "現在，例如「缺失的外掛程式」和「創意工坊合集」等二級內容頁面，使用者介面的設計與一級頁面（內容清單主頁面）相同，可以給用戶提供流線型體驗，並提供更多選項。",
-          "在設定檔中添加了「新建資產」和「讀取資產」的啟動選項，以快速載入到資產編輯器。"
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.0",
-    "Date": "2023-05-23",
-    "Tagline": "介紹：Skyve，Load Order Mod 1/2 和 Compatibility Report 的最終繼任模組。\n適用於 C:S I & C:S II",
-    "ChangeGroups": [
-      {
-        "Name": "相容性報告重大更新",
-        "Changes": [
-          "現在 Compatibility Report 模組已被整合到 Skyve 中。",
-          "建議和資訊文字現在更加清晰，更易於進行管理。",
-          "新增「稍後提醒」按鈕，可以關閉某個相容性通知。",
-          "如果必需的外掛中有過時的外掛，會自動重新導向到最新的繼任外掛。",
-          "本地外掛會自動與工坊版本外掛匹配，顯示來自 Steam 創意工坊的外掛資訊，並正確顯示其相容性資訊。",
-          "您現在可以對某個外掛申請檢查，以便我們補充並更新相容性資料中缺失的資訊。",
-          "相容性報告選項卡現在已更新，可以使用。"
+    },
+    {
+        "Version": "3.1.2",
+        "Date": "2023-06-21",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixes an error caused by including/excluding mods that have contain assets.",
+                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
+                    "Fixed some packages not showing their successor properly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "新功能",
-        "Changes": [
-          "您現在可以直接在 Skyve 應用程式為模組和資產編輯 Find it! 標籤。資產已經與遊戲同步！",
-          "在外掛的詳情頁面上，新增了一個「引用」選項卡，以便查看所有使用了此外掛的外掛。",
-          "新增了一個選項，可以將可選外掛視為必需外掛。",
-          "新增地方性語言分支：繁體中文（台灣）、英式英語、巴西葡萄牙語等。"
-        ]
-      },
-      {
-        "Name": "其他改動",
-        "Changes": [
-          "現在 Intersection Marking Tool 的標線、Render it! 的預設，Procedural Objects 的字型、以及遊戲翻譯模組將被識別為「偽模組」。",
-          "新增了指向外掛工坊頁面的連結，以及其他資訊，如外掛的使用說明和類型。",
-          "新增了三種組態檔案用途：地圖製作、劇本製作和地圖主題製作。",
-          "新增在列表頁面顯示隱藏外掛數量的功能，顯示根據組態檔案的用途而被自動隱藏的外掛數量。",
-          "最佳化操作選項的按鈕，使其更顯眼、更易於找到。",
-          "Skyve 程序的新圖示根據遊戲和 Skyve 程序的運行狀態發光，藍色表示遊戲正在運行， 紅色表示沒有網路連線（請打開加速器 / VPN），快速閃爍表示正在啟動或關閉遊戲。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.1",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了之前的設定和組態檔案有時沒有匯入到 Skyve 的問題。",
-          "現在，如果您之前使用了 Load Order Tool 2 並更新到了 Skyve，在第一次打開 Skyve 時，會自動在桌面建立 Skyve 的快捷方式。",
-          "修復了相容性資訊無法載入的罕見問題。",
-          "現在您可以對當前已損壞的外掛請求檢查。",
-          "降低了「沒有完整下載」警告的敏感程度。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.2",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "改動",
-        "Changes": [
-          "最佳化了 Skyve 應用程式的性能。按照預期，載入速度會更快，並且減少了卡頓。",
-          "修復了當您只有其中一個模組時，相容性報告中會顯示與之相似模組的互動方式的問題。",
-          "修復了在本地資產資料夾內檢測到模組的問題。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.3",
-    "Date": "2023-05-24",
-    "ChangeGroups": [
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了 MacOS 和 Linux 系統上選項面板無法打開的問題。",
-          "修復了「獲取幫助與日誌」選項卡內，沒有自動顯示簡化後的日誌的問題。",
-          "修復 Linux 系統上記錄檔路徑錯誤的問題。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.4",
-    "Date": "2023-05-27",
-    "ChangeGroups": [
-      {
-        "Name": "改動",
-        "Changes": [
-          "主選單中的 Steam 面板現在預設會顯示，您可以在模組選項中隱藏此面板。",
-          "請求檢查現在需要有效的問題描述，且會將您的記錄檔與申請一起傳送。「傳送檢查申請」按鈕旁邊會顯示免責聲明。",
-          "將模組很久沒有進行過更新的報告等級降低到「提示」等級，這樣一來，Skyve 就不會向您傳送這個警告。"
-        ]
-      },
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了統計面板的資產概要沒有顯示的問題。",
-          "修復了檢查外掛是否已過期功能沒有正常工作的問題。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.5",
-    "Date": "2023-05-28",
-    "ChangeGroups": [
-      {
-        "Name": "修復與改動",
-        "Changes": [
-          "新增功能：在所有問題修復完畢，或沒刪乾淨的外掛清理完畢後，Skyve 會彈出一條通知消息。",
-          "修復了匯入 LOT 1 的組態檔案可能卡死的罕見問題。",
-          "修復了選擇某些語言時，更新日誌無法打開的問題。",
-          "可能修復了無法大量訂閱物品的問題。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.6",
-    "Date": "2023-05-29",
-    "ChangeGroups": [
-      {
-        "Name": "重製了訂閱操作的處理程序",
-        "Changes": [
-          "現在在遊戲運行期間，您也可以訂閱外掛。",
-          "現在如果連續訂閱多個外掛，Skyve 會記錄到任務等待列表中，而不是每次都啟動遊戲來進行訂閱操作。",
-          "在 Skyve 應用程式介面的左下角新增了一個方框，以顯示當前等待中的訂閱 / 取消訂閱操作。",
-          "新增了一個進階選項，啟用此選項後，在 Skyve 進行訂閱 / 取消訂閱操作之後，自動強制下載外掛或刪除已取訂（但沒刪除乾淨）的外掛。",
-          "在遊戲執行階段，Skyve 會禁止新訂閱的物品進行載入。\n這種做法可以防止遊戲卡死或模組出錯。"
-        ]
-      },
-      {
-        "Name": "新增",
-        "Changes": [
-          "新增功能：右鍵點選一個組態檔案時，可以「查看此組態檔案的內容」。",
-          "新增功能：右鍵點選一個外掛時，可以「強制下載」此外掛。",
-          "在一些彈出窗口中新增了更多說明文字。",
-          "在列表頁面的操作選項中，新增「下載所有顯示的項目」選項。"
-        ]
-      },
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復了組態檔案列表沒有立即更新的問題。",
-          "修復了組態檔案外掛沒有顯示其創意工坊名稱的問題。",
-          "修復了第一次載入某個組態檔案或合集時，來自 Steam 的外掛資訊沒有載入的問題。",
-          "已將本地模組的名稱恢復為其所在資料夾名稱，而不是模組的工坊名稱，以防止出現問題。",
-          "最佳化了擁有大量模組時軟體的性能。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.1",
-    "Date": "2023-06-05",
-    "ChangeGroups": [
-      {
-        "Name": "修復",
-        "Changes": [
-          "修復啟動時會發生崩潰的問題。"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.2",
-    "Date": "2023-06-12",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Updated for the latest game patch."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0",
-    "Date": "2023-06-13",
-    "Tagline": "Online profiles, coming through!",
-    "ChangeGroups": [
-      {
-        "Name": "Online Profiles",
-        "Changes": [
-          "You can now upload a profile online, up to 5 profiles per user.",
-          "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-          "Online profiles can be downloaded, or updated if you already have it locally.",
-          "You can discover online profiles using a new button in the Profiles tab.",
-          "Added a third option in the 'Add Profile' page to import an online profile using its ID."
-        ]
-      },
-      {
-        "Name": "Profile Changes",
-        "Changes": [
-          "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-          "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-          "Changed the design of the top action buttons on both profile pages",
-          "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-          "Profiles can now have thumbnails.",
-          "Profile usages now have separate icons."
-        ]
-      },
-      {
-        "Name": "New & Updated",
-        "Changes": [
-          "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-          "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-          "Added 6 new reset buttons in the Utilities page.",
-          "Added 2 new buttons in the Help & Logs page.",
-          "Compatibility & package statuses are now shown on the right in the list.",
-          "Broken, incompatible, and banned packages now have a new background in the list.",
-          "Local mods' name & label have been updated.",
-          "Missing source code will now generate a warning instead of an unsubscribe notification.",
-          "Required mods now have a different UI to let you know you can not exclude them.",
-          "Added a setting in-game to enable hot-reload for mods & assets.",
-          "Improved performance while including/excluding packages.",
-          "Added Hungarian language"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0.1",
-    "Date": "2023-06-14",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Added an option to ignore internet connectivity checks.",
-          "Added an indicator that a profile is uploading.",
-          "Added a button to easily view an online profile's contents.",
-          "Fixed an error while fetching steam user info.",
-          "Fixed Asset Editor launch settings not being remembered correctly.",
-          "Fixed updating an online profile not working properly."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.1",
-    "Date": "2023-06-16",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Added a loading animation when viewing a profile's contents.",
-          "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-          "Fixed private packages being marked as .",
-          "Fixed some parts of the UI not getting translated from the start."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.2",
-    "Date": "2023-06-21",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixes an error caused by including/excluding mods that have contain assets.",
-          "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-          "Fixed some packages not showing their successor properly."
-        ]
-      }
-    ]
-  }
+    }
 ]
