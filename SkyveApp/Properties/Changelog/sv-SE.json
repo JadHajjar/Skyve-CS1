@@ -1,551 +1,565 @@
 [
-    {
-        "Version": "2.2.0",
-        "Date": "2023-04-10",
-        "Tagline": "Välkommen till förändringsloggen era",
-        "ChangeGroups": [
-            {
-                "Name": "Ny",
-                "Changes": [
-                    "Lade till en \"Avsluta prenumeration\"-knapp i innehållssidor\"-åtgärder.",
-                    "Lade till en verktygssektion för att prenumerera på saknade objekt i en BOB-konfiguration.",
-                    "Lade till ett alternativ för att ha filter och åtgärdssektioner öppna som standard.",
-                    "Lade till ändringsloggsidor, du ser den på nya versioner eller använder dess knapp i hjälpsektionerna."
-                ]
-            },
-            {
-                "Name": "Förbättringar",
-                "Changes": [
-                    "Tillagd kompatibilitetsrapport för trasiga tillgångar",
-                    "Olistade paket har nu rätt namn och miniatyrbild.",
-                    "Platshållare för mappinställningar speglar nu korrekt ditt operativsystem.",
-                    "Ctrl+Klicka på en författares namn för att lägga till dem i ditt filter"
-                ]
-            },
-            {
-                "Name": "Åtgärder",
-                "Changes": [
-                    "Fasta äldre profiler som inte konverteras efter den första lanseringen.",
-                    "Fast lokala tillgångar uppdateras inte automatiskt efter externa ändringar.",
-                    "Fast ta bort lokala tillgångar från högerklicka menyn ta bort alla lokala tillgångar istället för bara en",
-                    "Fast konvertering av LOT 1-profiler vilket resulterar i att tillgångar markeras som \"lokala\"",
-                    "Fast \"Real\" mappar som byts ut mot spara för Linux & Mac-användare.",
-                    "Fasta Linux- och Mac-användare som inte kan generera en loggzip."
-                ]
-            }
+  {
+    "Version": "2.2.0",
+    "Date": "2023-04-10",
+    "Tagline": "Välkommen till förändringsloggen era",
+    "ChangeGroups": [
+      {
+        "Name": "Ny",
+        "Changes": [
+          "Lade till en \"Avsluta prenumeration\"-knapp i innehållssidor\"-åtgärder.",
+          "Lade till en verktygssektion för att prenumerera på saknade objekt i en BOB-konfiguration.",
+          "Lade till ett alternativ för att ha filter och åtgärdssektioner öppna som standard.",
+          "Lade till ändringsloggsidor, du ser den på nya versioner eller använder dess knapp i hjälpsektionerna."
         ]
-    },
-    {
-        "Version": "2.1.4",
-        "Date": "2023-04-08",
-        "ChangeGroups": [
-            {
-                "Name": "Lade till sektionen Hjälp & Loggar",
-                "Changes": [
-                    "Lätt att komma åt dina loggar.",
-                    "Visa fel snabbt i din senaste / nuvarande spelsession.",
-                    "Förenkla en loggfil för att fokusera på vad som faktiskt händer.",
-                    "Dela en zip-fil med alla loggar som behövs för att någon ska kunna hjälpa dig."
-                ]
-            },
-            {
-                "Name": "Förbättringar",
-                "Changes": [
-                    "Ändrade ikonerna i filter för att återspegla de rätta ikonerna som används i listan."
-                ]
-            },
-            {
-                "Name": "Åtgärder",
-                "Changes": [
-                    "Fast texten i importsamlingen för att prenumerera och avprenumerera vänds.",
-                    "Fast kartval för ett nytt spel som inte låter användare välja en vaniljkarta."
-                ]
-            }
+      },
+      {
+        "Name": "Förbättringar",
+        "Changes": [
+          "Tillagd kompatibilitetsrapport för trasiga tillgångar",
+          "Olistade paket har nu rätt namn och miniatyrbild.",
+          "Platshållare för mappinställningar speglar nu korrekt ditt operativsystem.",
+          "Ctrl+Klicka på en författares namn för att lägga till dem i ditt filter"
         ]
-    },
-    {
-        "Version": "2.1.3",
-        "Date": "2023-04-06",
-        "ChangeGroups": [
-            {
-                "Name": "Åtgärder",
-                "Changes": [
-                    "Fixade en bugg som orsakade oändlig laddning för vissa användare."
-                ]
-            }
+      },
+      {
+        "Name": "Åtgärder",
+        "Changes": [
+          "Fasta äldre profiler som inte konverteras efter den första lanseringen.",
+          "Fast lokala tillgångar uppdateras inte automatiskt efter externa ändringar.",
+          "Fast ta bort lokala tillgångar från högerklicka menyn ta bort alla lokala tillgångar istället för bara en",
+          "Fast konvertering av LOT 1-profiler vilket resulterar i att tillgångar markeras som \"lokala\"",
+          "Fast \"Real\" mappar som byts ut mot spara för Linux & Mac-användare.",
+          "Fasta Linux- och Mac-användare som inte kan generera en loggzip."
         ]
-    },
-    {
-        "Version": "2.1.2",
-        "Date": "2023-04-05",
-        "ChangeGroups": [
-            {
-                "Name": "Ändringar",
-                "Changes": [
-                    "Tog bort fliken prenumeration från mod alternativ i spelet.",
-                    "Fasta DLC:er används inte vid inläsning av en profil.",
-                    "Fast språkalternativet är tomt för vissa människor.",
-                    "Återhämtning från ånga kommer inte längre att tvinga fokus tillbaka till verktyget.",
-                    "Andra UI ändringar."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.4",
+    "Date": "2023-04-08",
+    "ChangeGroups": [
+      {
+        "Name": "Lade till sektionen Hjälp & Loggar",
+        "Changes": [
+          "Lätt att komma åt dina loggar.",
+          "Visa fel snabbt i din senaste / nuvarande spelsession.",
+          "Förenkla en loggfil för att fokusera på vad som faktiskt händer.",
+          "Dela en zip-fil med alla loggar som behövs för att någon ska kunna hjälpa dig."
         ]
-    },
-    {
-        "Version": "2.1.1",
-        "Date": "2023-04-05",
-        "ChangeGroups": [
-            {
-                "Name": "Ändringar",
-                "Changes": [
-                    "Lägga till en info popup när du prenumererar på objekt för första gången.",
-                    "Lade till en varningstext i instrumentpanelen när du har flera LOM-instanser installerade.",
-                    "Lade till små taggar bredvid paketets titlar.",
-                    "Ladda ner lastbeställningsverktyget igen kommer att initiera nedladdningen och stänga appen medan den uppdateras.",
-                    "Fast och förbättrade hastigheten på Loading Screen Mod rapporter."
-                ]
-            }
+      },
+      {
+        "Name": "Förbättringar",
+        "Changes": [
+          "Ändrade ikonerna i filter för att återspegla de rätta ikonerna som används i listan."
         ]
-    },
-    {
-        "Version": "2.1.0",
-        "Date": "2023-04-05",
-        "Tagline": "Beta offentlig release",
-        "ChangeGroups": []
-    },
-    {
-        "Version": "2.2.1",
-        "Date": "2023-04-15",
-        "Tagline": "Presenterar, profilöversikten",
-        "ChangeGroups": [
-            {
-                "Name": "Förändringar i profilen",
-                "Changes": [
-                    "Ändrade utformningen av din profillista.",
-                    "Favoritprofiler visas nu på din instrumentpanel för att enkelt kunna växla mellan dem.",
-                    "Lade till sektionen \"Andra profiler\" i ett pakets sida för att enkelt utesluta eller inkludera dem från dina andra profiler",
-                    "Lade till nya sorteringsalternativ för profiler. Den valda sorteringen kommer nu att komma ihåg under sessionerna.",
-                    "Lade till högerklicksåtgärder i innehållslistan för att exkludera eller inkludera en artikel i alla dina paket.",
-                    "Lade till en knapp för att visa profilens fil på din dator.",
-                    "Du kan nu tilldela en färg till dina profiler.",
-                    "Du kan nu skapa en genväg på skrivbordet för dina profiler.",
-                    "Du kan nu importera en LOT 1-profil i avsnittet \"Lägg till profil\"."
-                ]
-            },
-            {
-                "Name": "Förbättringar",
-                "Changes": [
-                    "Steam-länkar öppnas nu inne i Steams fönster. Detta kan slås av i Alternativen.",
-                    "Lokala tillgångar är nu korrekt inspelade baserat på de mappar de befinner sig i.",
-                    "Din Paradox kontopanel kommer alltid att visas från och med nu.",
-                    "Fönsterknapparna längst upp just nu har ikoner för att förklara sina handlingar.",
-                    "Förbättrad respons på innehållslistans sidor.",
-                    "Sök i innehållslistan sidorna är nu mycket snabbare.",
-                    "Mod laddning är nu cachelagrad, vilket resulterar i effektivare laster på Windows & Linux, samt mycket snabbare laster på macOS.",
-                    "Du kan nu generera en zip-fil av dina loggar medan spelet körs."
-                ]
-            },
-            {
-                "Name": "Åtgärder",
-                "Changes": [
-                    "Fasta frysningar händer i innehållslistan sidor.",
-                    "Fasta Profilers Auto-Spara fungerar inte korrekt.",
-                    "Fast att inte kunna använda Workshop-kartor och spar-spel i profilinställningarna",
-                    "Fasta anpassade kartor som inte laddas när den är markerad i profilinställningarna.",
-                    "Fast inläsning av Profiler på macOS och Linux gäller inte alltid korrekt.",
-                    "Att ha en anpassad plats för LSMR-rapportfiler startar nu korrekt därifrån när du väljer en rapportfil på sidan Verktygsverktyg."
-                ]
-            }
+      },
+      {
+        "Name": "Åtgärder",
+        "Changes": [
+          "Fast texten i importsamlingen för att prenumerera och avprenumerera vänds.",
+          "Fast kartval för ett nytt spel som inte låter användare välja en vaniljkarta."
         ]
-    },
-    {
-        "Version": "2.2.2",
-        "Date": "2023-04-19",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Nytt & förbättrat",
-                "Changes": [
-                    "Lade till på Utilities sidan en import från någon textfil eller från ditt urklipp.",
-                    "BOB-import är nu en generisk XML-import genom att stötta alla XML-format som innehåller paket-ID."
-                ]
-            },
-            {
-                "Name": "Åtgärder",
-                "Changes": [
-                    "Fast laddar en samlings-URL ibland inte tolka ID korrekt.",
-                    "Fast LOT blir inte responsivt på Mac/Linux när du avregistrerar från ett paket."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.3",
+    "Date": "2023-04-06",
+    "ChangeGroups": [
+      {
+        "Name": "Åtgärder",
+        "Changes": [
+          "Fixade en bugg som orsakade oändlig laddning för vissa användare."
         ]
-    },
-    {
-        "Version": "2.3.0",
-        "Date": "2023-04-27",
-        "Tagline": "Uppdatering för vårrensning",
-        "ChangeGroups": [
-            {
-                "Name": "Filtrera & sök ändringar",
-                "Changes": [
-                    "Lade till en ny författarfilter rullgardinsmeny.",
-                    "Lade till fler åtgärder till etiketter i innehållslistorna.",
-                    "Lade till ett nytt \"Eventuella problem\" alternativ för \"Paketstatus\" och \"Kompatibilitetsrapport\" nedrullningar.",
-                    "Alla filteråtgärder görs nu med hjälp av Ctrl + Klick, lagt till ett alternativ för att byta den här funktionen.",
-                    "Återfiltrering med genvägarna i listan tar nu bort objektet från ditt filter.",
-                    "Separera termer med kommatecken i din sökning kommer att dela upp din sökning för att matcha något av termerna (OR)\r\n\t<unk> • Lägga till '+' i början av din term kommer att kräva att termen matchas (AND)\r\n\t<unk> • Lägga till '-' i början av din termin kommer att utesluta objekt som matchar termen\r\n\r\nExempel på den nya sökningen:\r\n\t<unk> • bil, lastbil (matchar 'bil' ELLER 'truck')\r\n\t<unk> • byggnad, lägenhet +europeisk (matchar 'europeisk' OCH ['byggnad' ELLER 'lägenhet'])\r\n\t<unk> • condo, hus -rico +amerikanska (matchar 'american' och ['condo' eller 'hus'] OCH INTE 'rico')"
-                ]
-            },
-            {
-                "Name": "UI & UX ändringar",
-                "Changes": [
-                    "Genomfört ett nytt ikonsystem som skalar alla ikoner på lämpligt sätt till din UI-skala.",
-                    "Omarbetade rendering av listor, förbättra prestanda och lyhördhet för innehållssidor drastiskt.",
-                    "Lade till en sorteringsordning för att välja mellan stigande och fallande sortering.",
-                    "Flyttade avsnittet \"Åtgärder\" på innehållssidorna och lade till 2 nya alternativ.",
-                    "Delvis inkluderade paket har nu ett annat gränssnitt i listan.",
-                    "Förbättrade knappar och filterkontroller i innehållslistorna, minskade deras totala storlek och lägga till fler visuella ledtrådar.",
-                    "Ändrade alternativet att öka listobjektens storlek på hovrar för att alltid öka sin storlek, förbättrade UI för förstorade listobjekt och tillämpade denna funktionalitet på resten av listorna i appen.",
-                    "Lade till en genväg Ctrl+[0-9] för att växla mellan tillgängliga flikar.",
-                    "Bytte alla dubbelknappar och alternativ toggles' sidor.",
-                    "Animationer är nu inaktiverade som standard på macOS & Linux.",
-                    "Så många fler UI förbättringar, förändringar och korrigeringar jag förlorade räkningen."
-                ]
-            },
-            {
-                "Name": "Revamp för filval",
-                "Changes": [
-                    "Uppdaterade UI för filmarkeringsskärmarna.",
-                    "Lade till Pinned mappar för att enkelt komma åt relevanta mappar.",
-                    "Lade till en verkstadssektion för att enkelt välja verkstadskartor och sparar.",
-                    "Lade till en sorterings-rullgardinsmeny & sorteringsordning att växla",
-                    "Lade till en lista/rutnätsvy."
-                ]
-            },
-            {
-                "Name": "Bugg Fixar",
-                "Changes": [
-                    "Fast lansering LOT efter skärmen det var tidigare på fick avstängt vilket resulterade i att fönstret nu dyker upp.",
-                    "Fast LHT alternativet fungerar inte när du startar in i en ny karta.",
-                    "Fasta författarsidor som inte öppnas korrekt i Steam.",
-                    "Fast fryser händer när du söker medan \"Prenumerera tid\" sorteringen valdes."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.2",
+    "Date": "2023-04-05",
+    "ChangeGroups": [
+      {
+        "Name": "Ändringar",
+        "Changes": [
+          "Tog bort fliken prenumeration från mod alternativ i spelet.",
+          "Fasta DLC:er används inte vid inläsning av en profil.",
+          "Fast språkalternativet är tomt för vissa människor.",
+          "Återhämtning från ånga kommer inte längre att tvinga fokus tillbaka till verktyget.",
+          "Andra UI ändringar."
         ]
-    },
-    {
-        "Version": "2.3.1",
-        "Date": "2023-04-29",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Rensa Workshop-paket",
-                "Changes": [
-                    "Lade till nya funktioner för att enkelt hantera felmatchningar mellan Steam och dina nedladdade paket.",
-                    "Paket som du inte prenumererar på laddas inte längre i spelet.",
-                    "Starta spelet medan LOT är öppet kommer automatiskt ta bort alla paket som du inte prenumererar på, utan hämtas på din dator.",
-                    "Lade till en knapp i Verktygs fliken för att manuellt köra denna rensning samt tvinga nedladdning av saknade paket."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.1",
+    "Date": "2023-04-05",
+    "ChangeGroups": [
+      {
+        "Name": "Ändringar",
+        "Changes": [
+          "Lägga till en info popup när du prenumererar på objekt för första gången.",
+          "Lade till en varningstext i instrumentpanelen när du har flera LOM-instanser installerade.",
+          "Lade till små taggar bredvid paketets titlar.",
+          "Ladda ner lastbeställningsverktyget igen kommer att initiera nedladdningen och stänga appen medan den uppdateras.",
+          "Fast och förbättrade hastigheten på Loading Screen Mod rapporter."
         ]
-    },
-    {
-        "Version": "2.3.2",
-        "Date": "2023-04-30",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Ny",
-                "Changes": [
-                    "Lade till ett alternativ för att inaktivera automatisk rensning när spelet öppnades.",
-                    "Lade till en egen argumentruta för avancerade startinställningar."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.0",
+    "Date": "2023-04-05",
+    "Tagline": "Beta offentlig release",
+    "ChangeGroups": []
+  },
+  {
+    "Version": "2.2.1",
+    "Date": "2023-04-15",
+    "Tagline": "Presenterar, profilöversikten",
+    "ChangeGroups": [
+      {
+        "Name": "Förändringar i profilen",
+        "Changes": [
+          "Ändrade utformningen av din profillista.",
+          "Favoritprofiler visas nu på din instrumentpanel för att enkelt kunna växla mellan dem.",
+          "Lade till sektionen \"Andra profiler\" i ett pakets sida för att enkelt utesluta eller inkludera dem från dina andra profiler",
+          "Lade till nya sorteringsalternativ för profiler. Den valda sorteringen kommer nu att komma ihåg under sessionerna.",
+          "Lade till högerklicksåtgärder i innehållslistan för att exkludera eller inkludera en artikel i alla dina paket.",
+          "Lade till en knapp för att visa profilens fil på din dator.",
+          "Du kan nu tilldela en färg till dina profiler.",
+          "Du kan nu skapa en genväg på skrivbordet för dina profiler.",
+          "Du kan nu importera en LOT 1-profil i avsnittet \"Lägg till profil\"."
         ]
-    },
-    {
-        "Version": "2.3.3",
-        "Date": "2023-05-04",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Rösta & prenumeranter Ikon",
-                "Changes": [
-                    "Lade till en ny ikon bredvid ett paket som visar en snabb sammanfattning av rösterna och antalet prenumeranter på paketet.",
-                    "Håll muspekaren över den för att visa värdena.",
-                    "Klicka på ikonen för en fördjupad beskrivning av denna funktion.",
-                    "Lade till sorteringsalternativ för \"Röster\" och \"Totala prenumeranter\"."
-                ]
-            },
-            {
-                "Name": "Krav på tillgång",
-                "Changes": [
-                    "De nödvändiga objekten som visas på en verkstadstillgångs sida är nu integrerade i Load Order Tool.",
-                    "Denna information kommer nu att inkluderas i kompatibilitetsrapporten för att snabbt och enkelt se vad du saknar."
-                ]
-            },
-            {
-                "Name": "Andra ändringar",
-                "Changes": [
-                    "Uppdaterade paketsidan för att matcha den visade informationen i innehållslistan.",
-                    "Sekundära innehållslistor som \"Saknade paket\" & \"Workshop Collection\" använder nu samma UI som huvudsidorna för innehållslistan, möjliggör en strömlinjeformad upplevelse och fler alternativ.",
-                    "Lade till 'New Asset' & 'Load Asset' startalternativ i profilen för att snabbt ladda in i redaktören."
-                ]
-            }
+      },
+      {
+        "Name": "Förbättringar",
+        "Changes": [
+          "Steam-länkar öppnas nu inne i Steams fönster. Detta kan slås av i Alternativen.",
+          "Lokala tillgångar är nu korrekt inspelade baserat på de mappar de befinner sig i.",
+          "Din Paradox kontopanel kommer alltid att visas från och med nu.",
+          "Fönsterknapparna längst upp just nu har ikoner för att förklara sina handlingar.",
+          "Förbättrad respons på innehållslistans sidor.",
+          "Sök i innehållslistan sidorna är nu mycket snabbare.",
+          "Mod laddning är nu cachelagrad, vilket resulterar i effektivare laster på Windows & Linux, samt mycket snabbare laster på macOS.",
+          "Du kan nu generera en zip-fil av dina loggar medan spelet körs."
         ]
-    },
-    {
-        "Version": "3.0.0",
-        "Date": "2023-05-23",
-        "Tagline": "Presenterar, Skyve, den sista efterföljaren till lastordern Mod 1/2 och kompatibilitetsrapporten.\r\nKommer för C:S I & C:S II",
-        "ChangeGroups": [
-            {
-                "Name": "Kompatibilitetsrapport översyn",
-                "Changes": [
-                    "Kompatibilitetsrapporten är nu integrerad direkt i Skyve.",
-                    "Rekommendationer och info text är nu tydligare och lättare att hantera.",
-                    "Lade till en Snooze-knapp för att avfärda en viss kompatibilitetsnotifikation.",
-                    "Obligatoriska objekt omdirigeras automatiskt till paketets senaste efterföljare.",
-                    "Lokala paket matchas automatiskt med sin online motsvarighet som visar informationen från Steam och korrekt visar dess kompatibilitetsinformation.",
-                    "Du kan nu begära en översyn för ett paket för att meddela oss om saknad information i kompatibilitetsdata.",
-                    "Fliken Kompatibilitetsrapport är nu tillgänglig."
-                ]
-            },
-            {
-                "Name": "Nya funktioner",
-                "Changes": [
-                    "Du kan nu redigera Hitta den! taggar direkt i appen till moddar och tillgångar. Tillgångar synkroniseras med spelet.",
-                    "Lade till en \"Referenser\"-flik på ett pakets sida för att se alla andra paket som refererar till det.",
-                    "Lade till ett alternativ för att göra att valfria paket använder samma avisering som obligatoriska paket.",
-                    "Lade till språkdialekter, kinesiska traditionella (Taiwan), engelska Storbritannien och portugisiska Brasilien."
-                ]
-            },
-            {
-                "Name": "Andra ändringar",
-                "Changes": [
-                    "Pseudo-mods inkluderar nu IMT markeringar, Render it! Förinställningar, procedurobjekt teckensnitt och översättningsmods.",
-                    "Lade till länkar till paketsidan, liksom annan information som dess användning och typ.",
-                    "Lade till nya profilanvändningar: Kartskapande, Scenario Making, och Tema Making.",
-                    "Lade till extra text i listan för att visa hur många paket som döljs på grund av din profilanvändning.",
-                    "Förbättrade knappen Åtgärder för att göra den mer synlig och lättare att komma åt.",
-                    "Den nya ikonen lyser nu baserat på vad som händer, blå indikerar att spelet körs, röd betyder ingen internetuppkoppling, och snabb glödande innebär att det startar eller stänger spelet."
-                ]
-            }
+      },
+      {
+        "Name": "Åtgärder",
+        "Changes": [
+          "Fasta frysningar händer i innehållslistan sidor.",
+          "Fasta Profilers Auto-Spara fungerar inte korrekt.",
+          "Fast att inte kunna använda Workshop-kartor och spar-spel i profilinställningarna",
+          "Fasta anpassade kartor som inte laddas när den är markerad i profilinställningarna.",
+          "Fast inläsning av Profiler på macOS och Linux gäller inte alltid korrekt.",
+          "Att ha en anpassad plats för LSMR-rapportfiler startar nu korrekt därifrån när du väljer en rapportfil på sidan Verktygsverktyg."
         ]
-    },
-    {
-        "Version": "3.0.1",
-        "Date": "2023-05-23",
-        "ChangeGroups": [
-            {
-                "Name": "Fixar",
-                "Changes": [
-                    "Fixade tidigare inställningar och profiler som ibland inte förs över till Skyve.",
-                    "En genväg kommer nu att skapas när du först öppnar Skyve efter att du tidigare haft LOM2.",
-                    "Fixade ett sällsynt fall där kompatibilitetsinfo inte laddades.",
-                    "Aktiverade möjligheten att begära en granskning av ett paket som för närvarande är trasigt.",
-                    "Lättade på känsligheten för meddelandet \"Delvis Nedladdad\"."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.2.2",
+    "Date": "2023-04-19",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Nytt & förbättrat",
+        "Changes": [
+          "Lade till på Utilities sidan en import från någon textfil eller från ditt urklipp.",
+          "BOB-import är nu en generisk XML-import genom att stötta alla XML-format som innehåller paket-ID."
         ]
-    },
-    {
-        "Version": "3.0.2",
-        "Date": "2023-05-23",
-        "ChangeGroups": [
-            {
-                "Name": "Ändringar",
-                "Changes": [
-                    "Förbättrad prestanda för appen. Snabbare laddningstider och mindre hackande förväntas.",
-                    "Fixade en interaktion mellan liknande moddar som visas i Kompatibilitetsrapporten när du bara har en av dem.",
-                    "Fixade att mods upptäcks i mappen för lokala tillgångar."
-                ]
-            }
+      },
+      {
+        "Name": "Åtgärder",
+        "Changes": [
+          "Fast laddar en samlings-URL ibland inte tolka ID korrekt.",
+          "Fast LOT blir inte responsivt på Mac/Linux när du avregistrerar från ett paket."
         ]
-    },
-    {
-        "Version": "3.0.3",
-        "Date": "2023-05-24",
-        "ChangeGroups": [
-            {
-                "Name": "Korrigeringar",
-                "Changes": [
-                    "Fixade fliken alternativ som inte öppnas för macOS & Linux.",
-                    "Fixade fliken Hjälp & Loggar inte ladda din nuvarande logg automatiskt.",
-                    "Fixade loggfilens sökväg som är fel på Linux."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.0",
+    "Date": "2023-04-27",
+    "Tagline": "Uppdatering för vårrensning",
+    "ChangeGroups": [
+      {
+        "Name": "Filtrera & sök ändringar",
+        "Changes": [
+          "Lade till en ny författarfilter rullgardinsmeny.",
+          "Lade till fler åtgärder till etiketter i innehållslistorna.",
+          "Lade till ett nytt \"Eventuella problem\" alternativ för \"Paketstatus\" och \"Kompatibilitetsrapport\" nedrullningar.",
+          "Alla filteråtgärder görs nu med hjälp av Ctrl + Klick, lagt till ett alternativ för att byta den här funktionen.",
+          "Återfiltrering med genvägarna i listan tar nu bort objektet från ditt filter.",
+          "Separera termer med kommatecken i din sökning kommer att dela upp din sökning för att matcha något av termerna (OR)\r\n\t<unk> • Lägga till '+' i början av din term kommer att kräva att termen matchas (AND)\r\n\t<unk> • Lägga till '-' i början av din termin kommer att utesluta objekt som matchar termen\r\n\r\nExempel på den nya sökningen:\r\n\t<unk> • bil, lastbil (matchar 'bil' ELLER 'truck')\r\n\t<unk> • byggnad, lägenhet +europeisk (matchar 'europeisk' OCH ['byggnad' ELLER 'lägenhet'])\r\n\t<unk> • condo, hus -rico +amerikanska (matchar 'american' och ['condo' eller 'hus'] OCH INTE 'rico')"
         ]
-    },
-    {
-        "Version": "3.0.4",
-        "Date": "2023-05-27",
-        "ChangeGroups": [
-            {
-                "Name": "Ändringar",
-                "Changes": [
-                    "Steam-paneler i huvudmenyn visas nu som standard, du kan fortfarande gömma dem i mod inställningarna.",
-                    "Att begära en granskning kräver nu en giltig beskrivning och skickar även dina loggar med begäran. En friskrivning visas bredvid knappen 'Skicka'.",
-                    "Minskad rapportnivån för en mod som inte har uppdaterats på ett tag till 'Info' så den inte meddelar dig om det."
-                ]
-            },
-            {
-                "Name": "Korrigeringar",
-                "Changes": [
-                    "Fixade att sammanfattningen av tillgångar inte visades i instrumentpanelen.",
-                    "Fixade att föråldrad status inte fungerade korrekt."
-                ]
-            }
+      },
+      {
+        "Name": "UI & UX ändringar",
+        "Changes": [
+          "Genomfört ett nytt ikonsystem som skalar alla ikoner på lämpligt sätt till din UI-skala.",
+          "Omarbetade rendering av listor, förbättra prestanda och lyhördhet för innehållssidor drastiskt.",
+          "Lade till en sorteringsordning för att välja mellan stigande och fallande sortering.",
+          "Flyttade avsnittet \"Åtgärder\" på innehållssidorna och lade till 2 nya alternativ.",
+          "Delvis inkluderade paket har nu ett annat gränssnitt i listan.",
+          "Förbättrade knappar och filterkontroller i innehållslistorna, minskade deras totala storlek och lägga till fler visuella ledtrådar.",
+          "Ändrade alternativet att öka listobjektens storlek på hovrar för att alltid öka sin storlek, förbättrade UI för förstorade listobjekt och tillämpade denna funktionalitet på resten av listorna i appen.",
+          "Lade till en genväg Ctrl+[0-9] för att växla mellan tillgängliga flikar.",
+          "Bytte alla dubbelknappar och alternativ toggles' sidor.",
+          "Animationer är nu inaktiverade som standard på macOS & Linux.",
+          "Så många fler UI förbättringar, förändringar och korrigeringar jag förlorade räkningen."
         ]
-    },
-    {
-        "Version": "3.0.5",
-        "Date": "2023-05-28",
-        "ChangeGroups": [
-            {
-                "Name": "Korrigeringar och ändringar",
-                "Changes": [
-                    "Lade till ett meddelande för att låta dig veta när 'Fixa alla problem' & 'Kör rensning' är avklarad.",
-                    "Fixade en sällsynt bugg där laddning av en LOT 1-profil skulle ladda för evigt.",
-                    "Fixade att ändringsloggen inte öppnades med vissa språk.",
-                    "Fixade troligen att prenumeration på en stor mängd objekt misslyckas/inte fungerar."
-                ]
-            }
+      },
+      {
+        "Name": "Revamp för filval",
+        "Changes": [
+          "Uppdaterade UI för filmarkeringsskärmarna.",
+          "Lade till Pinned mappar för att enkelt komma åt relevanta mappar.",
+          "Lade till en verkstadssektion för att enkelt välja verkstadskartor och sparar.",
+          "Lade till en sorterings-rullgardinsmeny & sorteringsordning att växla",
+          "Lade till en lista/rutnätsvy."
         ]
-    },
-    {
-        "Version": "3.0.6",
-        "Date": "2023-05-29",
-        "ChangeGroups": [
-            {
-                "Name": "Omarbetade prenumerationsprocessen",
-                "Changes": [
-                    "Du kan nu prenumerera på paket medan spelet är öppet.",
-                    "Prenumerera på flera objekt i rad kommer att sätta dem i en väntande lista istället för att öppna spelet varje gång.",
-                    "Lade till en ruta längst ner till vänster i appen för att låta dig veta om eventuella pågående prenumeration/avprenumerationsuppgifter.",
-                    "Lade till ett avancerat alternativ för att tvinga ner eller ta bort paket så snart du prenumererar/avprenumererar på dem i Skyve.",
-                    "Nyprenumererade objekt laddas inte längre om medan spelet är öppet.\nDetta förhindrar frysningar av ditt spel samt moddar som inte fungerar."
-                ]
-            },
-            {
-                "Name": "Nytt",
-                "Changes": [
-                    "Lade till \"Visa innehållet i denna profil\" i profilernas högerklicksmeny.",
-                    "Lade till ett \"Tvinga nedladdning\"-alternativ i paketens högerklicksmeny.",
-                    "Lade till fler sammanhang till vissa popups",
-                    "Lade till en \"Ladda ner alla visade objekt\" åtgärd i listorna."
-                ]
-            },
-            {
-                "Name": "Korrigeringar",
-                "Changes": [
-                    "Fixade att profillistan inte uppdateras omedelbart.",
-                    "Fixade att profilpaket som inte visade deras verkstadsnamn.",
-                    "Fixade pakets Steam-info som inte laddas första gången när du visar en profil eller samling.",
-                    "Lokala mods namn har återställts till mappnamnet istället för Workshopen för att förhindra problem.",
-                    "Förbättrad prestanda för personer med många mods."
-                ]
-            }
+      },
+      {
+        "Name": "Bugg Fixar",
+        "Changes": [
+          "Fast lansering LOT efter skärmen det var tidigare på fick avstängt vilket resulterade i att fönstret nu dyker upp.",
+          "Fast LHT alternativet fungerar inte när du startar in i en ny karta.",
+          "Fasta författarsidor som inte öppnas korrekt i Steam.",
+          "Fast fryser händer när du söker medan \"Prenumerera tid\" sorteringen valdes."
         ]
-    },
-    {
-        "Version": "3.0.7.1",
-        "Date": "2023-06-05",
-        "ChangeGroups": [
-            {
-                "Name": "Korrigeringar",
-                "Changes": [
-                    "Fixade kraschen vid start."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.1",
+    "Date": "2023-04-29",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Rensa Workshop-paket",
+        "Changes": [
+          "Lade till nya funktioner för att enkelt hantera felmatchningar mellan Steam och dina nedladdade paket.",
+          "Paket som du inte prenumererar på laddas inte längre i spelet.",
+          "Starta spelet medan LOT är öppet kommer automatiskt ta bort alla paket som du inte prenumererar på, utan hämtas på din dator.",
+          "Lade till en knapp i Verktygs fliken för att manuellt köra denna rensning samt tvinga nedladdning av saknade paket."
         ]
-    },
-    {
-        "Version": "3.0.7.2",
-        "Date": "2023-06-12",
-        "ChangeGroups": [
-            {
-                "Name": "Korrigeringar",
-                "Changes": [
-                    "Uppdaterad för den senaste spelpatchen."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.2",
+    "Date": "2023-04-30",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Ny",
+        "Changes": [
+          "Lade till ett alternativ för att inaktivera automatisk rensning när spelet öppnades.",
+          "Lade till en egen argumentruta för avancerade startinställningar."
         ]
-    },
-    {
-        "Version": "3.1.0",
-        "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
-        "ChangeGroups": [
-            {
-                "Name": "Onlineprofiler",
-                "Changes": [
-                    "Du kan nu ladda upp en profil online, upp till 5 profiler per användare.",
-                    "Uppladdade profiler kan vara privata, delas med ett ID, eller vara offentlig för alla att se.",
-                    "Online-profiler kan laddas ner eller uppdateras om du redan har den lokalt.",
-                    "Du kan upptäcka online-profiler med hjälp av en ny knapp i fliken Profiler.",
-                    "Lade till ett tredje alternativ på sidan \"Lägg till profil\" för att importera en online-profil med hjälp av dess ID."
-                ]
-            },
-            {
-                "Name": "Förändringar i profilen",
-                "Changes": [
-                    "Fliken \"Profiler\" i sidofältet kommer nu att öppna din profillista istället för din nuvarande profils inställningar.",
-                    "Profillistan använder nu en Grid View, och du kan växla mellan rutnät och listvyn.",
-                    "Ändrade utformningen av de översta åtgärdsknapparna på båda profilsidorna",
-                    "Om din profil har ändringar som inte sparats kommer Skyves logotyp nu att lysa upp lila.",
-                    "Profiler kan nu ha miniatyrbilder.",
-                    "Profilens användningsområden har nu separata ikoner."
-                ]
-            },
-            {
-                "Name": "Nyheter & uppdateringar",
-                "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Lokala mods namn och etikett har uppdaterats.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Lade till ungerska språket"
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.3",
+    "Date": "2023-05-04",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Rösta & prenumeranter Ikon",
+        "Changes": [
+          "Lade till en ny ikon bredvid ett paket som visar en snabb sammanfattning av rösterna och antalet prenumeranter på paketet.",
+          "Håll muspekaren över den för att visa värdena.",
+          "Klicka på ikonen för en fördjupad beskrivning av denna funktion.",
+          "Lade till sorteringsalternativ för \"Röster\" och \"Totala prenumeranter\"."
         ]
-    },
-    {
-        "Version": "3.1.0.1",
-        "Date": "2023-06-14",
-        "ChangeGroups": [
-            {
-                "Name": "Ändringar",
-                "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
-                ]
-            }
+      },
+      {
+        "Name": "Krav på tillgång",
+        "Changes": [
+          "De nödvändiga objekten som visas på en verkstadstillgångs sida är nu integrerade i Load Order Tool.",
+          "Denna information kommer nu att inkluderas i kompatibilitetsrapporten för att snabbt och enkelt se vad du saknar."
         ]
-    },
-    {
-        "Version": "3.1.1",
-        "Date": "2023-06-16",
-        "ChangeGroups": [
-            {
-                "Name": "Ändringar",
-                "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
-                ]
-            }
+      },
+      {
+        "Name": "Andra ändringar",
+        "Changes": [
+          "Uppdaterade paketsidan för att matcha den visade informationen i innehållslistan.",
+          "Sekundära innehållslistor som \"Saknade paket\" & \"Workshop Collection\" använder nu samma UI som huvudsidorna för innehållslistan, möjliggör en strömlinjeformad upplevelse och fler alternativ.",
+          "Lade till 'New Asset' & 'Load Asset' startalternativ i profilen för att snabbt ladda in i redaktören."
         ]
-    }
+      }
+    ]
+  },
+  {
+    "Version": "3.0.0",
+    "Date": "2023-05-23",
+    "Tagline": "Presenterar, Skyve, den sista efterföljaren till lastordern Mod 1/2 och kompatibilitetsrapporten.\r\nKommer för C:S I & C:S II",
+    "ChangeGroups": [
+      {
+        "Name": "Kompatibilitetsrapport översyn",
+        "Changes": [
+          "Kompatibilitetsrapporten är nu integrerad direkt i Skyve.",
+          "Rekommendationer och info text är nu tydligare och lättare att hantera.",
+          "Lade till en Snooze-knapp för att avfärda en viss kompatibilitetsnotifikation.",
+          "Obligatoriska objekt omdirigeras automatiskt till paketets senaste efterföljare.",
+          "Lokala paket matchas automatiskt med sin online motsvarighet som visar informationen från Steam och korrekt visar dess kompatibilitetsinformation.",
+          "Du kan nu begära en översyn för ett paket för att meddela oss om saknad information i kompatibilitetsdata.",
+          "Fliken Kompatibilitetsrapport är nu tillgänglig."
+        ]
+      },
+      {
+        "Name": "Nya funktioner",
+        "Changes": [
+          "Du kan nu redigera Hitta den! taggar direkt i appen till moddar och tillgångar. Tillgångar synkroniseras med spelet.",
+          "Lade till en \"Referenser\"-flik på ett pakets sida för att se alla andra paket som refererar till det.",
+          "Lade till ett alternativ för att göra att valfria paket använder samma avisering som obligatoriska paket.",
+          "Lade till språkdialekter, kinesiska traditionella (Taiwan), engelska Storbritannien och portugisiska Brasilien."
+        ]
+      },
+      {
+        "Name": "Andra ändringar",
+        "Changes": [
+          "Pseudo-mods inkluderar nu IMT markeringar, Render it! Förinställningar, procedurobjekt teckensnitt och översättningsmods.",
+          "Lade till länkar till paketsidan, liksom annan information som dess användning och typ.",
+          "Lade till nya profilanvändningar: Kartskapande, Scenario Making, och Tema Making.",
+          "Lade till extra text i listan för att visa hur många paket som döljs på grund av din profilanvändning.",
+          "Förbättrade knappen Åtgärder för att göra den mer synlig och lättare att komma åt.",
+          "Den nya ikonen lyser nu baserat på vad som händer, blå indikerar att spelet körs, röd betyder ingen internetuppkoppling, och snabb glödande innebär att det startar eller stänger spelet."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.1",
+    "Date": "2023-05-23",
+    "ChangeGroups": [
+      {
+        "Name": "Fixar",
+        "Changes": [
+          "Fixade tidigare inställningar och profiler som ibland inte förs över till Skyve.",
+          "En genväg kommer nu att skapas när du först öppnar Skyve efter att du tidigare haft LOM2.",
+          "Fixade ett sällsynt fall där kompatibilitetsinfo inte laddades.",
+          "Aktiverade möjligheten att begära en granskning av ett paket som för närvarande är trasigt.",
+          "Lättade på känsligheten för meddelandet \"Delvis Nedladdad\"."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.2",
+    "Date": "2023-05-23",
+    "ChangeGroups": [
+      {
+        "Name": "Ändringar",
+        "Changes": [
+          "Förbättrad prestanda för appen. Snabbare laddningstider och mindre hackande förväntas.",
+          "Fixade en interaktion mellan liknande moddar som visas i Kompatibilitetsrapporten när du bara har en av dem.",
+          "Fixade att mods upptäcks i mappen för lokala tillgångar."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.3",
+    "Date": "2023-05-24",
+    "ChangeGroups": [
+      {
+        "Name": "Korrigeringar",
+        "Changes": [
+          "Fixade fliken alternativ som inte öppnas för macOS & Linux.",
+          "Fixade fliken Hjälp & Loggar inte ladda din nuvarande logg automatiskt.",
+          "Fixade loggfilens sökväg som är fel på Linux."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.4",
+    "Date": "2023-05-27",
+    "ChangeGroups": [
+      {
+        "Name": "Ändringar",
+        "Changes": [
+          "Steam-paneler i huvudmenyn visas nu som standard, du kan fortfarande gömma dem i mod inställningarna.",
+          "Att begära en granskning kräver nu en giltig beskrivning och skickar även dina loggar med begäran. En friskrivning visas bredvid knappen 'Skicka'.",
+          "Minskad rapportnivån för en mod som inte har uppdaterats på ett tag till 'Info' så den inte meddelar dig om det."
+        ]
+      },
+      {
+        "Name": "Korrigeringar",
+        "Changes": [
+          "Fixade att sammanfattningen av tillgångar inte visades i instrumentpanelen.",
+          "Fixade att föråldrad status inte fungerade korrekt."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.5",
+    "Date": "2023-05-28",
+    "ChangeGroups": [
+      {
+        "Name": "Korrigeringar och ändringar",
+        "Changes": [
+          "Lade till ett meddelande för att låta dig veta när 'Fixa alla problem' & 'Kör rensning' är avklarad.",
+          "Fixade en sällsynt bugg där laddning av en LOT 1-profil skulle ladda för evigt.",
+          "Fixade att ändringsloggen inte öppnades med vissa språk.",
+          "Fixade troligen att prenumeration på en stor mängd objekt misslyckas/inte fungerar."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.6",
+    "Date": "2023-05-29",
+    "ChangeGroups": [
+      {
+        "Name": "Omarbetade prenumerationsprocessen",
+        "Changes": [
+          "Du kan nu prenumerera på paket medan spelet är öppet.",
+          "Prenumerera på flera objekt i rad kommer att sätta dem i en väntande lista istället för att öppna spelet varje gång.",
+          "Lade till en ruta längst ner till vänster i appen för att låta dig veta om eventuella pågående prenumeration/avprenumerationsuppgifter.",
+          "Lade till ett avancerat alternativ för att tvinga ner eller ta bort paket så snart du prenumererar/avprenumererar på dem i Skyve.",
+          "Nyprenumererade objekt laddas inte längre om medan spelet är öppet.\nDetta förhindrar frysningar av ditt spel samt moddar som inte fungerar."
+        ]
+      },
+      {
+        "Name": "Nytt",
+        "Changes": [
+          "Lade till \"Visa innehållet i denna profil\" i profilernas högerklicksmeny.",
+          "Lade till ett \"Tvinga nedladdning\"-alternativ i paketens högerklicksmeny.",
+          "Lade till fler sammanhang till vissa popups",
+          "Lade till en \"Ladda ner alla visade objekt\" åtgärd i listorna."
+        ]
+      },
+      {
+        "Name": "Korrigeringar",
+        "Changes": [
+          "Fixade att profillistan inte uppdateras omedelbart.",
+          "Fixade att profilpaket som inte visade deras verkstadsnamn.",
+          "Fixade pakets Steam-info som inte laddas första gången när du visar en profil eller samling.",
+          "Lokala mods namn har återställts till mappnamnet istället för Workshopen för att förhindra problem.",
+          "Förbättrad prestanda för personer med många mods."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.7.1",
+    "Date": "2023-06-05",
+    "ChangeGroups": [
+      {
+        "Name": "Korrigeringar",
+        "Changes": [
+          "Fixade kraschen vid start."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.7.2",
+    "Date": "2023-06-12",
+    "ChangeGroups": [
+      {
+        "Name": "Korrigeringar",
+        "Changes": [
+          "Uppdaterad för den senaste spelpatchen."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.0",
+    "Date": "2023-06-13",
+    "Tagline": "Online profiles, coming through!",
+    "ChangeGroups": [
+      {
+        "Name": "Onlineprofiler",
+        "Changes": [
+          "Du kan nu ladda upp en profil online, upp till 5 profiler per användare.",
+          "Uppladdade profiler kan vara privata, delas med ett ID, eller vara offentlig för alla att se.",
+          "Online-profiler kan laddas ner eller uppdateras om du redan har den lokalt.",
+          "Du kan upptäcka online-profiler med hjälp av en ny knapp i fliken Profiler.",
+          "Lade till ett tredje alternativ på sidan \"Lägg till profil\" för att importera en online-profil med hjälp av dess ID."
+        ]
+      },
+      {
+        "Name": "Förändringar i profilen",
+        "Changes": [
+          "Fliken \"Profiler\" i sidofältet kommer nu att öppna din profillista istället för din nuvarande profils inställningar.",
+          "Profillistan använder nu en Grid View, och du kan växla mellan rutnät och listvyn.",
+          "Ändrade utformningen av de översta åtgärdsknapparna på båda profilsidorna",
+          "Om din profil har ändringar som inte sparats kommer Skyves logotyp nu att lysa upp lila.",
+          "Profiler kan nu ha miniatyrbilder.",
+          "Profilens användningsområden har nu separata ikoner."
+        ]
+      },
+      {
+        "Name": "Nyheter & uppdateringar",
+        "Changes": [
+          "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+          "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+          "Added 6 new reset buttons in the Utilities page.",
+          "Added 2 new buttons in the Help & Logs page.",
+          "Compatibility & package statuses are now shown on the right in the list.",
+          "Broken, incompatible, and banned packages now have a new background in the list.",
+          "Lokala mods namn och etikett har uppdaterats.",
+          "Missing source code will now generate a warning instead of an unsubscribe notification.",
+          "Required mods now have a different UI to let you know you can not exclude them.",
+          "Added a setting in-game to enable hot-reload for mods & assets.",
+          "Improved performance while including/excluding packages.",
+          "Lade till ungerska språket"
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.0.1",
+    "Date": "2023-06-14",
+    "ChangeGroups": [
+      {
+        "Name": "Ändringar",
+        "Changes": [
+          "Added an option to ignore internet connectivity checks.",
+          "Added an indicator that a profile is uploading.",
+          "Added a button to easily view an online profile's contents.",
+          "Fixed an error while fetching steam user info.",
+          "Fixed Asset Editor launch settings not being remembered correctly.",
+          "Fixed updating an online profile not working properly."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.1",
+    "Date": "2023-06-16",
+    "ChangeGroups": [
+      {
+        "Name": "Ändringar",
+        "Changes": [
+          "Added a loading animation when viewing a profile's contents.",
+          "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+          "Fixed private packages being marked as .",
+          "Fixed some parts of the UI not getting translated from the start."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.2",
+    "Date": "2023-06-21",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixes an error caused by including/excluding mods that have contain assets.",
+          "Fixed the action button on the right of the Compatibility Report list not being clickable.",
+          "Fixed some packages not showing their successor properly."
+        ]
+      }
+    ]
+  }
 ]

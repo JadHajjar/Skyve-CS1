@@ -85,7 +85,7 @@ public class IndexedPackage
 
 		if (Statuses.ContainsKey(StatusType.Deprecated) && Statuses[StatusType.Deprecated].Any(x => x.Packages.Any()))
 		{
-			var interaction = new IndexedPackageInteraction(new() { Type = InteractionType.SucceededBy, Packages = Statuses[StatusType.Deprecated].SelectMany(x => x.Packages.Keys).ToArray() }, packages);
+			var interaction = new IndexedPackageInteraction(new() { Type = InteractionType.SucceededBy, Action = StatusAction.Switch, Packages = Statuses[StatusType.Deprecated].SelectMany(x => x.Packages.Keys).ToArray() }, packages);
 
 			if (!Interactions.ContainsKey(InteractionType.SucceededBy))
 			{

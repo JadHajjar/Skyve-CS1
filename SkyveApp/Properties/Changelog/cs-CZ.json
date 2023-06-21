@@ -1,551 +1,565 @@
 [
-    {
-        "Version": "2.2.0",
-        "Date": "2023-04-10",
-        "Tagline": "Vítejte v éře protokolu změn",
-        "ChangeGroups": [
-            {
-                "Name": "Nové",
-                "Changes": [
-                    "Přidáno tlačítko 'Odhlásit vše' v rámci akcí obsahu.",
-                    "Přidána sekce Utility k odběru chybějících položek v BOB konfiguraci.",
-                    "Přidána možnost mít ve výchozím nastavení otevřené sekce Filtry a akce.",
-                    "Přidány stránky protokolu změn, uvidíte je na nových verzích nebo pomocí tlačítka v sekcích Nápověda."
-                ]
-            },
-            {
-                "Name": "Zlepšení",
-                "Changes": [
-                    "Přidána zpráva o kompatibilitě pro poškozené položky",
-                    "Neuvedené balíčky mají nyní správný název a náhled.",
-                    "Zástupné symboly pro nastavení složek nyní správně odrážejí váš OS.",
-                    "Ctrl + Klepněte na jméno autora pro přidání do vašeho filtru"
-                ]
-            },
-            {
-                "Name": "Opravy",
-                "Changes": [
-                    "Pevné starší profily nebyly po prvním spuštění převedeny.",
-                    "Fixní místní aktiva nejsou automaticky obnovena po externích změnách.",
-                    "Opraveno odstranění lokálních aktiv z menu pravým tlačítkem myši odstraňujícího všechny lokální položky místo jen jednoho",
-                    "Fixní konverze profilů LOT 1 vedoucí k tomu, že aktiva jsou označena jako „lokální“",
-                    "Opraveny složky 'Real' se vyměňují na uložení pro uživatele Linuxu a Mac.",
-                    "Opraveni uživatelé Linuxu a Mac nejsou schopni vygenerovat zip."
-                ]
-            }
+  {
+    "Version": "2.2.0",
+    "Date": "2023-04-10",
+    "Tagline": "Vítejte v éře protokolu změn",
+    "ChangeGroups": [
+      {
+        "Name": "Nové",
+        "Changes": [
+          "Přidáno tlačítko 'Odhlásit vše' v rámci akcí obsahu.",
+          "Přidána sekce Utility k odběru chybějících položek v BOB konfiguraci.",
+          "Přidána možnost mít ve výchozím nastavení otevřené sekce Filtry a akce.",
+          "Přidány stránky protokolu změn, uvidíte je na nových verzích nebo pomocí tlačítka v sekcích Nápověda."
         ]
-    },
-    {
-        "Version": "2.1.4",
-        "Date": "2023-04-08",
-        "ChangeGroups": [
-            {
-                "Name": "Přidána sekce Nápověda a logy",
-                "Changes": [
-                    "Snadný přístup k vašim logům.",
-                    "Rychlé zobrazení chyb ve vaší poslední nebo aktuální herní relaci.",
-                    "Zjednodušte soubor protokolu a zaměřte se na to, co se skutečně děje.",
-                    "Sdílejte zip soubor obsahující všechny logy potřebné k tomu, aby vám někdo pomohl."
-                ]
-            },
-            {
-                "Name": "Zlepšení",
-                "Changes": [
-                    "Změněny ikony filtrů tak, aby odrážely správné ikony použité v seznamu."
-                ]
-            },
-            {
-                "Name": "Opravy",
-                "Changes": [
-                    "Opraven text ve sbírce importů pro odebírání a odhlášení byl přepsán.",
-                    "Opraven výběr mapy pro novou hru neumožňuje uživatelům vybrat vanilní mapu."
-                ]
-            }
+      },
+      {
+        "Name": "Zlepšení",
+        "Changes": [
+          "Přidána zpráva o kompatibilitě pro poškozené položky",
+          "Neuvedené balíčky mají nyní správný název a náhled.",
+          "Zástupné symboly pro nastavení složek nyní správně odrážejí váš OS.",
+          "Ctrl + Klepněte na jméno autora pro přidání do vašeho filtru"
         ]
-    },
-    {
-        "Version": "2.1.3",
-        "Date": "2023-04-06",
-        "ChangeGroups": [
-            {
-                "Name": "Opravy",
-                "Changes": [
-                    "Opravena chyba, která způsobila nekonečné načítání pro některé uživatele."
-                ]
-            }
+      },
+      {
+        "Name": "Opravy",
+        "Changes": [
+          "Pevné starší profily nebyly po prvním spuštění převedeny.",
+          "Fixní místní aktiva nejsou automaticky obnovena po externích změnách.",
+          "Opraveno odstranění lokálních aktiv z menu pravým tlačítkem myši odstraňujícího všechny lokální položky místo jen jednoho",
+          "Fixní konverze profilů LOT 1 vedoucí k tomu, že aktiva jsou označena jako „lokální“",
+          "Opraveny složky 'Real' se vyměňují na uložení pro uživatele Linuxu a Mac.",
+          "Opraveni uživatelé Linuxu a Mac nejsou schopni vygenerovat zip."
         ]
-    },
-    {
-        "Version": "2.1.2",
-        "Date": "2023-04-05",
-        "ChangeGroups": [
-            {
-                "Name": "Změny",
-                "Changes": [
-                    "Odebírka byla odebrána z možností modu ve hře.",
-                    "Při načítání profilu se neuplatňují pevné DLC.",
-                    "Opravena volba jazyka, která je pro některé lidi prázdná.",
-                    "Obnovení stahování z páry již nevnutí zaměření zpět na nástroj.",
-                    "Další změny uživatelského rozhraní."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.4",
+    "Date": "2023-04-08",
+    "ChangeGroups": [
+      {
+        "Name": "Přidána sekce Nápověda a logy",
+        "Changes": [
+          "Snadný přístup k vašim logům.",
+          "Rychlé zobrazení chyb ve vaší poslední nebo aktuální herní relaci.",
+          "Zjednodušte soubor protokolu a zaměřte se na to, co se skutečně děje.",
+          "Sdílejte zip soubor obsahující všechny logy potřebné k tomu, aby vám někdo pomohl."
         ]
-    },
-    {
-        "Version": "2.1.1",
-        "Date": "2023-04-05",
-        "ChangeGroups": [
-            {
-                "Name": "Změny",
-                "Changes": [
-                    "Přidávám informační vyskakovací okno při prvním odebírání položek.",
-                    "Přidán varovný text na nástěnce, pokud máte nainstalováno více LOM instancí.",
-                    "Přidány malé značky vedle názvů balíčků.",
-                    "Obnovením stahování Objednávky spustí stahování a zavře aplikaci, dokud se aktualizuje.",
-                    "Pevná a vylepšená rychlost načítání módu obrazovky."
-                ]
-            }
+      },
+      {
+        "Name": "Zlepšení",
+        "Changes": [
+          "Změněny ikony filtrů tak, aby odrážely správné ikony použité v seznamu."
         ]
-    },
-    {
-        "Version": "2.1.0",
-        "Date": "2023-04-05",
-        "Tagline": "Beta veřejné vydání",
-        "ChangeGroups": []
-    },
-    {
-        "Version": "2.2.1",
-        "Date": "2023-04-15",
-        "Tagline": "Zobrazení, generální oprava profilu",
-        "ChangeGroups": [
-            {
-                "Name": "Změny profilu",
-                "Changes": [
-                    "Změna vzhledu Vašeho seznamu profilů byla změněna.",
-                    "Oblíbené profily jsou nyní zobrazeny na vaší nástěnce, což umožňuje snadné přepínání mezi nimi.",
-                    "Přidána sekce 'Ostatní profily' na stránce balíčku, aby byla snadno vyloučena nebo zahrnuta do vašich ostatních profilů",
-                    "Přidány nové možnosti řazení profilu. Vybrané řazení bude zapamatováno během relací.",
-                    "Přidána akce kliknutím pravým tlačítkem myši v seznamu obsahu, aby se vyloučila nebo zahrnula položka do všech vašich balíčků.",
-                    "Přidáno tlačítko pro zobrazení profilového souboru na vašem počítači.",
-                    "Nyní můžete přiřadit barvu ke svým profilům.",
-                    "Nyní můžete vytvořit zástupce pro vaše profily.",
-                    "Nyní můžete importovat profil LOT 1 v sekci 'Přidat profil'."
-                ]
-            },
-            {
-                "Name": "Zlepšení",
-                "Changes": [
-                    "Steam odkazy se nyní otevřou uvnitř Steamova okna. To lze vypnout v Nastavení.",
-                    "Místní aktiva jsou nyní správně seskupena na základě složek, ve kterých se nacházejí.",
-                    "Váš Paradox účet bude vždy zobrazen od této chvíle.",
-                    "Okno tlačítek nahoře má nyní ikony pro vysvětlení jejich akcí.",
-                    "Zlepšená reakce stránek v seznamu obsahu.",
-                    "Hledat na stránkách seznamu obsahu je nyní mnohem rychlejší.",
-                    "Načítání módu je nyní uloženo do mezipaměti; výsledkem je účinnější zatížení Windows & Linuxu, stejně jako mnohem rychlejší zatížení na macOS.",
-                    "Nyní můžete vygenerovat zip soubor vašich logů, zatímco hra běží."
-                ]
-            },
-            {
-                "Name": "Opravy",
-                "Changes": [
-                    "Opravené zmrazení, které se děje na stránkách seznamu obsahu.",
-                    "Opravené profily' automatické ukládání nefunguje správně.",
-                    "Opraveno, že v nastavení profilu není možné používat Workshop mapy a ukládat hry",
-                    "Opraveny vlastní mapy nenačtené, když jsou vybrány v nastavení profilu.",
-                    "Načítání profilů na macOS a Linuxu nebylo vždy prováděno správně.",
-                    "Mít vlastní umístění pro LSMR soubory se nyní správně spustí při výběru souboru reportu na stránce Utility."
-                ]
-            }
+      },
+      {
+        "Name": "Opravy",
+        "Changes": [
+          "Opraven text ve sbírce importů pro odebírání a odhlášení byl přepsán.",
+          "Opraven výběr mapy pro novou hru neumožňuje uživatelům vybrat vanilní mapu."
         ]
-    },
-    {
-        "Version": "2.2.2",
-        "Date": "2023-04-19",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Nové & Vylepšené",
-                "Changes": [
-                    "Přidáno na stránce Nástroje import z libovolného textového souboru nebo ze schránky.",
-                    "BOB import je nyní generický XML import skrze XML formát obsahující ID balíčku."
-                ]
-            },
-            {
-                "Name": "Opravy",
-                "Changes": [
-                    "Opraveno načítání URL kolekce, která někdy chybně parsuje ID.",
-                    "Při odhlášení z balíčku se LOT stane nereagujícím na Mac/Linuxu."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.3",
+    "Date": "2023-04-06",
+    "ChangeGroups": [
+      {
+        "Name": "Opravy",
+        "Changes": [
+          "Opravena chyba, která způsobila nekonečné načítání pro některé uživatele."
         ]
-    },
-    {
-        "Version": "2.3.0",
-        "Date": "2023-04-27",
-        "Tagline": "Aktualizace jarního čištění",
-        "ChangeGroups": [
-            {
-                "Name": "Filtrovat a hledat změny",
-                "Changes": [
-                    "Přidán nový autor filtr rozbalovacího seznamu.",
-                    "Přidáno více akcí do popisků v seznamech obsahu.",
-                    "Přidána nová možnost \"Jakékoliv problémy\" pro \"Stav balíčku\" a \"Zpráva o kompatibilitě\".",
-                    "Všechny akce filtru jsou nyní prováděny pomocí Ctrl+Click, přidány možnost výměny této funkce.",
-                    "Přefiltrování pomocí zkratek v seznamu nyní odstraňuje položku z vašeho filtru.",
-                    "Oddělením termínů čárkou ve vašem vyhledávání bude vaše hledání rozděleno tak, aby odpovídalo některé z termínů (OR)\r\n\t• Přidáním '+' na začátek vašeho termínu bude vyžadováno, aby termín odpovídal (AND)\r\n\t• Přidáním '-' na začátek vašeho termínu vyloučíte položky, které odpovídají tomuto termínu\r\n\r\nPříklady nového vyhledávání:\r\n\t• auto, nákladní auto (zápasy 'au' NEBO 'truck')\r\n\t• budova, byt +evropský (zápasy 'evropský' A ['budova' NEBO 'bytu'])\r\n\t• condo; dům -rico +american (odpovídá 'americký' A ['kondo' NEBO 'dům'] A NENÍ 'rico')"
-                ]
-            },
-            {
-                "Name": "UI & UX změny",
-                "Changes": [
-                    "Zavedl nový systém ikon, který vhodně rozšiřuje všechny ikony do měřítka vašeho uživatelského rozhraní.",
-                    "Přepracovalo vykreslování seznamů, drasticky zlepšovalo výkon a schopnost stránek s obsahem.",
-                    "Přidán přepínač pořadí pro výběr mezi vzestupným a sestupným řazením.",
-                    "Přesunuto do sekce 'Akce' na stránky s obsahem a přidáno 2 nové možnosti.",
-                    "Částečně zahrnuté balíky mají nyní v seznamu jiné uživatelské rozhraní.",
-                    "Vylepšené ovládání tlačítek a filtrů v seznamech obsahu, zmenšení jejich celkové velikosti a přidávání více vizuálních narážek.",
-                    "Změněna možnost zvětšit velikost položek v seznamu při přejetí pro vždy zvětšení jejich velikosti, vylepšeno uživatelské rozhraní položek rozšířeného seznamu a aplikováno na zbytek seznamů v aplikaci.",
-                    "Přidána zkratka Ctrl+[0-9] pro přepínání mezi dostupnými kartami.",
-                    "Prohodili všechna dvojitá tlačítka a volba přepíná strany.",
-                    "Animace jsou nyní ve výchozím nastavení zakázány na macOS a Linuxu.",
-                    "Tolik další vylepšení, změny a opravy uživatelského rozhraní, které jsem ztratil počet."
-                ]
-            },
-            {
-                "Name": "Revize výběru souboru",
-                "Changes": [
-                    "Aktualizováno uživatelské rozhraní obrazovky pro výběr souborů.",
-                    "Přidány připnuté složky pro snadný přístup k příslušným složkám.",
-                    "Přidána sekce Workshop pro snadný výběr map a uložení.",
-                    "Přepínač rozevírací nabídky a řazení řazení",
-                    "Přepínač seznamu nebo mřížky byl přidán."
-                ]
-            },
-            {
-                "Name": "Opravy chyb",
-                "Changes": [
-                    "Opraveno spuštění LOT poté, co byl displej dříve zapnut, což vedlo k tomu, že se okno nyní zobrazuje.",
-                    "Opravena možnost LHT nefunguje při spuštění nové mapy.",
-                    "Opravené stránky autora se ve Steamu neotevírají správně.",
-                    "Opravena zmražení při vyhledávání, zatímco bylo vybráno řazení 'Odebírat čas'."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.2",
+    "Date": "2023-04-05",
+    "ChangeGroups": [
+      {
+        "Name": "Změny",
+        "Changes": [
+          "Odebírka byla odebrána z možností modu ve hře.",
+          "Při načítání profilu se neuplatňují pevné DLC.",
+          "Opravena volba jazyka, která je pro některé lidi prázdná.",
+          "Obnovení stahování z páry již nevnutí zaměření zpět na nástroj.",
+          "Další změny uživatelského rozhraní."
         ]
-    },
-    {
-        "Version": "2.3.1",
-        "Date": "2023-04-29",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Čištění balíčků dílny",
-                "Changes": [
-                    "Přidány nové funkce, které snadno zvládnou nesoulad mezi Steamem a vašimi staženými balíčky.",
-                    "Balíčky, které nemáte předplatné, již nejsou načteny ve hře.",
-                    "Spuštění hry, když je LOT otevřen, automaticky smaže všechny balíčky, ke kterým nejste přihlášeni, ale jsou staženy na vašem počítači.",
-                    "Přidáno tlačítko v záložce Nástroje pro ruční spuštění tohoto čištění, stejně jako vynucení stahování chybějících balíčků."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.1",
+    "Date": "2023-04-05",
+    "ChangeGroups": [
+      {
+        "Name": "Změny",
+        "Changes": [
+          "Přidávám informační vyskakovací okno při prvním odebírání položek.",
+          "Přidán varovný text na nástěnce, pokud máte nainstalováno více LOM instancí.",
+          "Přidány malé značky vedle názvů balíčků.",
+          "Obnovením stahování Objednávky spustí stahování a zavře aplikaci, dokud se aktualizuje.",
+          "Pevná a vylepšená rychlost načítání módu obrazovky."
         ]
-    },
-    {
-        "Version": "2.3.2",
-        "Date": "2023-04-30",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Nové",
-                "Changes": [
-                    "Přidána možnost vypnout automatické čištění při otevření hry.",
-                    "Přidáno vlastní argumenty políčka pro pokročilé nastavení spouštění."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.1.0",
+    "Date": "2023-04-05",
+    "Tagline": "Beta veřejné vydání",
+    "ChangeGroups": []
+  },
+  {
+    "Version": "2.2.1",
+    "Date": "2023-04-15",
+    "Tagline": "Zobrazení, generální oprava profilu",
+    "ChangeGroups": [
+      {
+        "Name": "Změny profilu",
+        "Changes": [
+          "Změna vzhledu Vašeho seznamu profilů byla změněna.",
+          "Oblíbené profily jsou nyní zobrazeny na vaší nástěnce, což umožňuje snadné přepínání mezi nimi.",
+          "Přidána sekce 'Ostatní profily' na stránce balíčku, aby byla snadno vyloučena nebo zahrnuta do vašich ostatních profilů",
+          "Přidány nové možnosti řazení profilu. Vybrané řazení bude zapamatováno během relací.",
+          "Přidána akce kliknutím pravým tlačítkem myši v seznamu obsahu, aby se vyloučila nebo zahrnula položka do všech vašich balíčků.",
+          "Přidáno tlačítko pro zobrazení profilového souboru na vašem počítači.",
+          "Nyní můžete přiřadit barvu ke svým profilům.",
+          "Nyní můžete vytvořit zástupce pro vaše profily.",
+          "Nyní můžete importovat profil LOT 1 v sekci 'Přidat profil'."
         ]
-    },
-    {
-        "Version": "2.3.3",
-        "Date": "2023-05-04",
-        "Tagline": "",
-        "ChangeGroups": [
-            {
-                "Name": "Ikona hlasování a předplatitelů",
-                "Changes": [
-                    "Přidána nová ikona vedle balíčku, která zobrazuje rychlé shrnutí hlasů a počtu předplatitelů.",
-                    "Přejeďte prstem pro zobrazení hodnot.",
-                    "Klikněte na ikonu pro podrobný popis této funkce.",
-                    "Přidány 'Hlasy' a možnosti řazení celkového odběru."
-                ]
-            },
-            {
-                "Name": "Požadavky na aktiva",
-                "Changes": [
-                    "Požadované položky zobrazené na stránce položky dílny jsou nyní začleněny do nástroje pro načtení objednávky.",
-                    "Tyto informace budou nyní zahrnuty do zprávy o kompatibilitě, aby bylo možné rychle a snadno zjistit, co vám chybí."
-                ]
-            },
-            {
-                "Name": "Jiné změny",
-                "Changes": [
-                    "Aktualizována stránka balíčku, aby odpovídala zobrazeným informacím v seznamech obsahu.",
-                    "Sekundární seznamy obsahu jako 'Chybějící balíčky' a 'Sbírka dílenských seminářů' nyní používají stejné uživatelské rozhraní jako hlavní stránky seznamu obsahu, umožnění zjednodušené zkušenosti a více možností.",
-                    "Přidány možnosti spuštění 'Nový majetek' a 'Načíst majetek' do profilu pro rychlé načtení do Editoru majetku."
-                ]
-            }
+      },
+      {
+        "Name": "Zlepšení",
+        "Changes": [
+          "Steam odkazy se nyní otevřou uvnitř Steamova okna. To lze vypnout v Nastavení.",
+          "Místní aktiva jsou nyní správně seskupena na základě složek, ve kterých se nacházejí.",
+          "Váš Paradox účet bude vždy zobrazen od této chvíle.",
+          "Okno tlačítek nahoře má nyní ikony pro vysvětlení jejich akcí.",
+          "Zlepšená reakce stránek v seznamu obsahu.",
+          "Hledat na stránkách seznamu obsahu je nyní mnohem rychlejší.",
+          "Načítání módu je nyní uloženo do mezipaměti; výsledkem je účinnější zatížení Windows & Linuxu, stejně jako mnohem rychlejší zatížení na macOS.",
+          "Nyní můžete vygenerovat zip soubor vašich logů, zatímco hra běží."
         ]
-    },
-    {
-        "Version": "3.0.0",
-        "Date": "2023-05-23",
-        "Tagline": "Prezentace, Skyve, konečný nástupce příkazu k nakládce Mod 1/2 a zpráva o kompatibilitě.\r\nPřihlašuje se za C:S I & C:S II",
-        "ChangeGroups": [
-            {
-                "Name": "Přepsání zprávy o kompatibilitě",
-                "Changes": [
-                    "Zpráva o kompatibilitě je nyní přímo integrována do Skyve.",
-                    "Doporučení a informační text jsou nyní jasnější a snazší spravovat.",
-                    "Přidáno tlačítko Odložit pro zrušení určitého oznámení o kompatibilitě.",
-                    "Požadované položky automaticky přesměrovány na poslední následovníka balíčků.",
-                    "Místní balíčky jsou automaticky spárovány se svým online protějškem, zobrazují informace ze Steamu a správně zobrazují informace o kompatibilitě.",
-                    "Nyní můžete požádat o recenzi balíčku, abyste nás informovali o chybějících informacích v údajích o kompatibilitě.",
-                    "Záložka zprávy o kompatibilitě je nyní k dispozici."
-                ]
-            },
-            {
-                "Name": "Nové funkce",
-                "Changes": [
-                    "Nyní můžete upravit Najít! Tagy přímo v aplikaci do módu a majetku.",
-                    "Přidána záložka \"Reference\" na stránce balíčku, aby se zobrazily všechny ostatní balíčky, které na ni odkazují.",
-                    "Přidána možnost volitelných balíků používat stejné oznámení jako požadované balíky.",
-                    "The Czech language dialects is spoken by Czechs in the Czech Republic."
-                ]
-            },
-            {
-                "Name": "Jiné změny",
-                "Changes": [
-                    "Pseudomody nyní zahrnují IMT značení, předělat jej! Přednastavení, písma procedurálních objektů a překladové mody.",
-                    "Přidány odkazy na stránku balíčku, stejně jako další informace jako její použití a typ.",
-                    "Přidána nová použití profilu: Tvorba map, tvorba scénářů a tvorba motivů.",
-                    "Přidán další text v seznamu, který ukazuje, kolik balíčků je skryto z důvodu využití vašeho profilu.",
-                    "Zlepšeno tlačítko Akce, aby bylo viditelnější a snadnější.",
-                    "Nová ikona nyní svítí na základě toho, co se děje, modrá znamená, že hra běží, červená znamená žádné připojení k Internetu a rychlé zpomalení znamená, že je spuštěn nebo uzavřen hru."
-                ]
-            }
+      },
+      {
+        "Name": "Opravy",
+        "Changes": [
+          "Opravené zmrazení, které se děje na stránkách seznamu obsahu.",
+          "Opravené profily' automatické ukládání nefunguje správně.",
+          "Opraveno, že v nastavení profilu není možné používat Workshop mapy a ukládat hry",
+          "Opraveny vlastní mapy nenačtené, když jsou vybrány v nastavení profilu.",
+          "Načítání profilů na macOS a Linuxu nebylo vždy prováděno správně.",
+          "Mít vlastní umístění pro LSMR soubory se nyní správně spustí při výběru souboru reportu na stránce Utility."
         ]
-    },
-    {
-        "Version": "3.0.1",
-        "Date": "2023-05-23",
-        "ChangeGroups": [
-            {
-                "Name": "Fixes",
-                "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.2.2",
+    "Date": "2023-04-19",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Nové & Vylepšené",
+        "Changes": [
+          "Přidáno na stránce Nástroje import z libovolného textového souboru nebo ze schránky.",
+          "BOB import je nyní generický XML import skrze XML formát obsahující ID balíčku."
         ]
-    },
-    {
-        "Version": "3.0.2",
-        "Date": "2023-05-23",
-        "ChangeGroups": [
-            {
-                "Name": "Changes",
-                "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
-                ]
-            }
+      },
+      {
+        "Name": "Opravy",
+        "Changes": [
+          "Opraveno načítání URL kolekce, která někdy chybně parsuje ID.",
+          "Při odhlášení z balíčku se LOT stane nereagujícím na Mac/Linuxu."
         ]
-    },
-    {
-        "Version": "3.0.3",
-        "Date": "2023-05-24",
-        "ChangeGroups": [
-            {
-                "Name": "Fixes",
-                "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.0",
+    "Date": "2023-04-27",
+    "Tagline": "Aktualizace jarního čištění",
+    "ChangeGroups": [
+      {
+        "Name": "Filtrovat a hledat změny",
+        "Changes": [
+          "Přidán nový autor filtr rozbalovacího seznamu.",
+          "Přidáno více akcí do popisků v seznamech obsahu.",
+          "Přidána nová možnost \"Jakékoliv problémy\" pro \"Stav balíčku\" a \"Zpráva o kompatibilitě\".",
+          "Všechny akce filtru jsou nyní prováděny pomocí Ctrl+Click, přidány možnost výměny této funkce.",
+          "Přefiltrování pomocí zkratek v seznamu nyní odstraňuje položku z vašeho filtru.",
+          "Oddělením termínů čárkou ve vašem vyhledávání bude vaše hledání rozděleno tak, aby odpovídalo některé z termínů (OR)\r\n\t• Přidáním '+' na začátek vašeho termínu bude vyžadováno, aby termín odpovídal (AND)\r\n\t• Přidáním '-' na začátek vašeho termínu vyloučíte položky, které odpovídají tomuto termínu\r\n\r\nPříklady nového vyhledávání:\r\n\t• auto, nákladní auto (zápasy 'au' NEBO 'truck')\r\n\t• budova, byt +evropský (zápasy 'evropský' A ['budova' NEBO 'bytu'])\r\n\t• condo; dům -rico +american (odpovídá 'americký' A ['kondo' NEBO 'dům'] A NENÍ 'rico')"
         ]
-    },
-    {
-        "Version": "3.0.4",
-        "Date": "2023-05-27",
-        "ChangeGroups": [
-            {
-                "Name": "Changes",
-                "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
-                ]
-            },
-            {
-                "Name": "Fixes",
-                "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
-                ]
-            }
+      },
+      {
+        "Name": "UI & UX změny",
+        "Changes": [
+          "Zavedl nový systém ikon, který vhodně rozšiřuje všechny ikony do měřítka vašeho uživatelského rozhraní.",
+          "Přepracovalo vykreslování seznamů, drasticky zlepšovalo výkon a schopnost stránek s obsahem.",
+          "Přidán přepínač pořadí pro výběr mezi vzestupným a sestupným řazením.",
+          "Přesunuto do sekce 'Akce' na stránky s obsahem a přidáno 2 nové možnosti.",
+          "Částečně zahrnuté balíky mají nyní v seznamu jiné uživatelské rozhraní.",
+          "Vylepšené ovládání tlačítek a filtrů v seznamech obsahu, zmenšení jejich celkové velikosti a přidávání více vizuálních narážek.",
+          "Změněna možnost zvětšit velikost položek v seznamu při přejetí pro vždy zvětšení jejich velikosti, vylepšeno uživatelské rozhraní položek rozšířeného seznamu a aplikováno na zbytek seznamů v aplikaci.",
+          "Přidána zkratka Ctrl+[0-9] pro přepínání mezi dostupnými kartami.",
+          "Prohodili všechna dvojitá tlačítka a volba přepíná strany.",
+          "Animace jsou nyní ve výchozím nastavení zakázány na macOS a Linuxu.",
+          "Tolik další vylepšení, změny a opravy uživatelského rozhraní, které jsem ztratil počet."
         ]
-    },
-    {
-        "Version": "3.0.5",
-        "Date": "2023-05-28",
-        "ChangeGroups": [
-            {
-                "Name": "Fixes & Changes",
-                "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
-                ]
-            }
+      },
+      {
+        "Name": "Revize výběru souboru",
+        "Changes": [
+          "Aktualizováno uživatelské rozhraní obrazovky pro výběr souborů.",
+          "Přidány připnuté složky pro snadný přístup k příslušným složkám.",
+          "Přidána sekce Workshop pro snadný výběr map a uložení.",
+          "Přepínač rozevírací nabídky a řazení řazení",
+          "Přepínač seznamu nebo mřížky byl přidán."
         ]
-    },
-    {
-        "Version": "3.0.6",
-        "Date": "2023-05-29",
-        "ChangeGroups": [
-            {
-                "Name": "Reworked Subscription Process",
-                "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
-                ]
-            },
-            {
-                "Name": "New",
-                "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
-                ]
-            },
-            {
-                "Name": "Fixes",
-                "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-                    "Improved the performance for people with a lot of mods."
-                ]
-            }
+      },
+      {
+        "Name": "Opravy chyb",
+        "Changes": [
+          "Opraveno spuštění LOT poté, co byl displej dříve zapnut, což vedlo k tomu, že se okno nyní zobrazuje.",
+          "Opravena možnost LHT nefunguje při spuštění nové mapy.",
+          "Opravené stránky autora se ve Steamu neotevírají správně.",
+          "Opravena zmražení při vyhledávání, zatímco bylo vybráno řazení 'Odebírat čas'."
         ]
-    },
-    {
-        "Version": "3.0.7.1",
-        "Date": "2023-06-05",
-        "ChangeGroups": [
-            {
-                "Name": "Fixes",
-                "Changes": [
-                    "Fixed the crash on launch."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.1",
+    "Date": "2023-04-29",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Čištění balíčků dílny",
+        "Changes": [
+          "Přidány nové funkce, které snadno zvládnou nesoulad mezi Steamem a vašimi staženými balíčky.",
+          "Balíčky, které nemáte předplatné, již nejsou načteny ve hře.",
+          "Spuštění hry, když je LOT otevřen, automaticky smaže všechny balíčky, ke kterým nejste přihlášeni, ale jsou staženy na vašem počítači.",
+          "Přidáno tlačítko v záložce Nástroje pro ruční spuštění tohoto čištění, stejně jako vynucení stahování chybějících balíčků."
         ]
-    },
-    {
-        "Version": "3.0.7.2",
-        "Date": "2023-06-12",
-        "ChangeGroups": [
-            {
-                "Name": "Fixes",
-                "Changes": [
-                    "Updated for the latest game patch."
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.2",
+    "Date": "2023-04-30",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Nové",
+        "Changes": [
+          "Přidána možnost vypnout automatické čištění při otevření hry.",
+          "Přidáno vlastní argumenty políčka pro pokročilé nastavení spouštění."
         ]
-    },
-    {
-        "Version": "3.1.0",
-        "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
-        "ChangeGroups": [
-            {
-                "Name": "Online Profiles",
-                "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
-                ]
-            },
-            {
-                "Name": "Profile Changes",
-                "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
-                ]
-            },
-            {
-                "Name": "New & Updated",
-                "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "Version": "2.3.3",
+    "Date": "2023-05-04",
+    "Tagline": "",
+    "ChangeGroups": [
+      {
+        "Name": "Ikona hlasování a předplatitelů",
+        "Changes": [
+          "Přidána nová ikona vedle balíčku, která zobrazuje rychlé shrnutí hlasů a počtu předplatitelů.",
+          "Přejeďte prstem pro zobrazení hodnot.",
+          "Klikněte na ikonu pro podrobný popis této funkce.",
+          "Přidány 'Hlasy' a možnosti řazení celkového odběru."
         ]
-    },
-    {
-        "Version": "3.1.0.1",
-        "Date": "2023-06-14",
-        "ChangeGroups": [
-            {
-                "Name": "Changes",
-                "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
-                ]
-            }
+      },
+      {
+        "Name": "Požadavky na aktiva",
+        "Changes": [
+          "Požadované položky zobrazené na stránce položky dílny jsou nyní začleněny do nástroje pro načtení objednávky.",
+          "Tyto informace budou nyní zahrnuty do zprávy o kompatibilitě, aby bylo možné rychle a snadno zjistit, co vám chybí."
         ]
-    },
-    {
-        "Version": "3.1.1",
-        "Date": "2023-06-16",
-        "ChangeGroups": [
-            {
-                "Name": "Changes",
-                "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
-                ]
-            }
+      },
+      {
+        "Name": "Jiné změny",
+        "Changes": [
+          "Aktualizována stránka balíčku, aby odpovídala zobrazeným informacím v seznamech obsahu.",
+          "Sekundární seznamy obsahu jako 'Chybějící balíčky' a 'Sbírka dílenských seminářů' nyní používají stejné uživatelské rozhraní jako hlavní stránky seznamu obsahu, umožnění zjednodušené zkušenosti a více možností.",
+          "Přidány možnosti spuštění 'Nový majetek' a 'Načíst majetek' do profilu pro rychlé načtení do Editoru majetku."
         ]
-    }
+      }
+    ]
+  },
+  {
+    "Version": "3.0.0",
+    "Date": "2023-05-23",
+    "Tagline": "Prezentace, Skyve, konečný nástupce příkazu k nakládce Mod 1/2 a zpráva o kompatibilitě.\r\nPřihlašuje se za C:S I & C:S II",
+    "ChangeGroups": [
+      {
+        "Name": "Přepsání zprávy o kompatibilitě",
+        "Changes": [
+          "Zpráva o kompatibilitě je nyní přímo integrována do Skyve.",
+          "Doporučení a informační text jsou nyní jasnější a snazší spravovat.",
+          "Přidáno tlačítko Odložit pro zrušení určitého oznámení o kompatibilitě.",
+          "Požadované položky automaticky přesměrovány na poslední následovníka balíčků.",
+          "Místní balíčky jsou automaticky spárovány se svým online protějškem, zobrazují informace ze Steamu a správně zobrazují informace o kompatibilitě.",
+          "Nyní můžete požádat o recenzi balíčku, abyste nás informovali o chybějících informacích v údajích o kompatibilitě.",
+          "Záložka zprávy o kompatibilitě je nyní k dispozici."
+        ]
+      },
+      {
+        "Name": "Nové funkce",
+        "Changes": [
+          "Nyní můžete upravit Najít! Tagy přímo v aplikaci do módu a majetku.",
+          "Přidána záložka \"Reference\" na stránce balíčku, aby se zobrazily všechny ostatní balíčky, které na ni odkazují.",
+          "Přidána možnost volitelných balíků používat stejné oznámení jako požadované balíky.",
+          "The Czech language dialects is spoken by Czechs in the Czech Republic."
+        ]
+      },
+      {
+        "Name": "Jiné změny",
+        "Changes": [
+          "Pseudomody nyní zahrnují IMT značení, předělat jej! Přednastavení, písma procedurálních objektů a překladové mody.",
+          "Přidány odkazy na stránku balíčku, stejně jako další informace jako její použití a typ.",
+          "Přidána nová použití profilu: Tvorba map, tvorba scénářů a tvorba motivů.",
+          "Přidán další text v seznamu, který ukazuje, kolik balíčků je skryto z důvodu využití vašeho profilu.",
+          "Zlepšeno tlačítko Akce, aby bylo viditelnější a snadnější.",
+          "Nová ikona nyní svítí na základě toho, co se děje, modrá znamená, že hra běží, červená znamená žádné připojení k Internetu a rychlé zpomalení znamená, že je spuštěn nebo uzavřen hru."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.1",
+    "Date": "2023-05-23",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
+          "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
+          "Fixed a rare case where the compatibility info was not loading.",
+          "Enabled the ability to request a review for a package that is currently broken.",
+          "Loosened the sensitivity of the 'Partially Downloaded' notification."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.2",
+    "Date": "2023-05-23",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Improved the performance of the app. Quicker load times & less stutters are expected.",
+          "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+          "Fixed mods being detected in the local assets folder."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.3",
+    "Date": "2023-05-24",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the options tab not opening for macOS & Linux.",
+          "Fixed the Help & Logs tab not loading your current log automatically.",
+          "Fixed the log file path being wrong on Linux."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.4",
+    "Date": "2023-05-27",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
+          "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
+          "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+        ]
+      },
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the asset summary not showing in the dashboard.",
+          "Fixed the out of date status not working correctly."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.5",
+    "Date": "2023-05-28",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes & Changes",
+        "Changes": [
+          "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
+          "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
+          "Fixed the changelog not opening with some languages.",
+          "Potentially fixed subscribing to a large amount of items failing/not working."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.6",
+    "Date": "2023-05-29",
+    "ChangeGroups": [
+      {
+        "Name": "Reworked Subscription Process",
+        "Changes": [
+          "You can now subscribe to packages while the game is open.",
+          "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
+          "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+          "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+          "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+        ]
+      },
+      {
+        "Name": "New",
+        "Changes": [
+          "Added \"View this Profile's contents\" in profiles' right-click menu.",
+          "Added a \"Force download\" option in packages' right-click menu.",
+          "Added more context to some popups",
+          "Added a \"Download all displayed items\" in the actions in list pages."
+        ]
+      },
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the profile list not updating instantly.",
+          "Fixed profile packages not showing their workshop name.",
+          "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
+          "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+          "Improved the performance for people with a lot of mods."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.7.1",
+    "Date": "2023-06-05",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the crash on launch."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.0.7.2",
+    "Date": "2023-06-12",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Updated for the latest game patch."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.0",
+    "Date": "2023-06-13",
+    "Tagline": "Online profiles, coming through!",
+    "ChangeGroups": [
+      {
+        "Name": "Online Profiles",
+        "Changes": [
+          "You can now upload a profile online, up to 5 profiles per user.",
+          "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+          "Online profiles can be downloaded, or updated if you already have it locally.",
+          "You can discover online profiles using a new button in the Profiles tab.",
+          "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+        ]
+      },
+      {
+        "Name": "Profile Changes",
+        "Changes": [
+          "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+          "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+          "Changed the design of the top action buttons on both profile pages",
+          "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+          "Profiles can now have thumbnails.",
+          "Profile usages now have separate icons."
+        ]
+      },
+      {
+        "Name": "New & Updated",
+        "Changes": [
+          "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+          "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+          "Added 6 new reset buttons in the Utilities page.",
+          "Added 2 new buttons in the Help & Logs page.",
+          "Compatibility & package statuses are now shown on the right in the list.",
+          "Broken, incompatible, and banned packages now have a new background in the list.",
+          "Local mods' name & label have been updated.",
+          "Missing source code will now generate a warning instead of an unsubscribe notification.",
+          "Required mods now have a different UI to let you know you can not exclude them.",
+          "Added a setting in-game to enable hot-reload for mods & assets.",
+          "Improved performance while including/excluding packages.",
+          "Added Hungarian language"
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.0.1",
+    "Date": "2023-06-14",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Added an option to ignore internet connectivity checks.",
+          "Added an indicator that a profile is uploading.",
+          "Added a button to easily view an online profile's contents.",
+          "Fixed an error while fetching steam user info.",
+          "Fixed Asset Editor launch settings not being remembered correctly.",
+          "Fixed updating an online profile not working properly."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.1",
+    "Date": "2023-06-16",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Added a loading animation when viewing a profile's contents.",
+          "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+          "Fixed private packages being marked as .",
+          "Fixed some parts of the UI not getting translated from the start."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.1.2",
+    "Date": "2023-06-21",
+    "ChangeGroups": [
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixes an error caused by including/excluding mods that have contain assets.",
+          "Fixed the action button on the right of the Compatibility Report list not being clickable.",
+          "Fixed some packages not showing their successor properly."
+        ]
+      }
+    ]
+  }
 ]

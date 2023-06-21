@@ -520,6 +520,8 @@ internal class ContentUtil
 			return;
 		}
 
+		var isBulk = BulkUpdating;
+
 		BulkUpdating = true;
 
 		foreach (var package in packageList)
@@ -527,12 +529,15 @@ internal class ContentUtil
 			package.IsIncluded = value;
 		}
 
-		BulkUpdating = false;
+		if (!isBulk)
+		{
+			BulkUpdating = false;
 
-		CentralManager.OnInformationUpdated();
-		ModsUtil.SavePendingValues();
-		AssetsUtil.SaveChanges();
-		ProfileManager.TriggerAutoSave();
+			CentralManager.OnInformationUpdated();
+			ModsUtil.SavePendingValues();
+			AssetsUtil.SaveChanges();
+			ProfileManager.TriggerAutoSave();
+		}
 
 		static IEnumerable<IPackage> getPackageContents(Package package)
 		{

@@ -116,18 +116,6 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			}
 		}
 
-		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
-		{
-			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package.IsCollection ? new PC_ViewCollection(item.Item.Package) : new PC_PackagePage(item.Item.Package));
-
-			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
-			{
-				ScrollTo(item.Item);
-			}
-
-			return;
-		}
-
 		var Message = item.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == item.Item.Notification && !CompatibilityManager.IsSnoozed(x));
 
 		foreach (var rect in rects.buttonRects)
@@ -160,6 +148,18 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 				return;
 			}
+		}
+
+		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
+		{
+			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package.IsCollection ? new PC_ViewCollection(item.Item.Package) : new PC_PackagePage(item.Item.Package));
+
+			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
+			{
+				ScrollTo(item.Item);
+			}
+
+			return;
 		}
 
 		if (e.Button == MouseButtons.Left && rects.snoozeRect.Contains(e.Location))
