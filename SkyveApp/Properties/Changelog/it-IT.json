@@ -521,14 +521,14 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Cambiamenti",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "Aggiunta l'opzione per ignorare i controlli della connettività Internet.",
+                    "Aggiunto un indicatore che indica che un profilo è in fase di caricamento.",
+                    "Aggiunto un pulsante per visualizzare facilmente i contenuti di un profilo online.",
+                    "Corretto un errore durante il recupero delle informazioni sull'utente di Steam.",
+                    "Corretto il problema delle impostazioni di avvio dell'Editor Risorse che non vengono ricordate correttamente.",
+                    "Corretto l'aggiornamento di un profilo online che non funziona correttamente."
                 ]
             }
         ]
@@ -538,12 +538,12 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Cambiamenti",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "Aggiunta un'animazione di caricamento quando si visualizza il contenuto di un profilo.",
+                    "Corretto il download o l'aggiornamento di un profilo che non salvava correttamente alcuni dati come la miniatura.",
+                    "Corretto il problema dei pacchetti privati che vengono contrassegnati come .",
+                    "Corrette alcune parti dell'interfaccia utente che non venivano tradotte fin dall'inizio."
                 ]
             }
         ]

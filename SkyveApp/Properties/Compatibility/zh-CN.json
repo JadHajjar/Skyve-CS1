@@ -157,7 +157,7 @@
   },
   "Action_Switch": {
     "One": "您应当将其替换为 '{1}'。",
-    "Plural": "您应当改为使用下列任意一个插件："
+    "Plural": "您应当将此模组替换为下列任意一个插件："
   },
   "NoRequiredDlcs": "没有前置 DLC",
   "DlcsSelected": {

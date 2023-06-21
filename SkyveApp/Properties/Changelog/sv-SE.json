@@ -521,7 +521,7 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Ändringar",
                 "Changes": [
                     "Added an option to ignore internet connectivity checks.",
                     "Added an indicator that a profile is uploading.",
@@ -538,7 +538,7 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Ändringar",
                 "Changes": [
                     "Added a loading animation when viewing a profile's contents.",
                     "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",

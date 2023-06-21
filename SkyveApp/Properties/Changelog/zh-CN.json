@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修复",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "适配最新游戏版本。"
                 ]
             }
         ]
@@ -474,44 +474,44 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "在线配置文件，来了！",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "在线配置文件",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "您现在可以将配置文件上传到在线服务器，每个用户最多可上传 5 个配置文件。",
+                    "您可以将上传的配置文件设为私密的，或者使用 ID 共享配置文件，亦或设为公开并允许任何人查看。",
+                    "您可以下载在线配置文件；或者，如果您有本地配置文件并且已经上传，可以更新该配置文件。",
+                    "使用配置文件选项卡中的新按钮，可以查找在线配置文件。",
+                    "在“添加配置文件”页面新增第三个选项：使用 ID 导入在线配置文件。"
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "配置文件相关改动",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "现在，点击侧边栏中的“配置文件”选项卡，将打开配置文件列表，而不是当前配置文件的设置。",
+                    "配置文件列表现在显示为网格视图，您可以在网格/列表视图之间切换。",
+                    "更改了配置文件页面顶部操作按钮的设计",
+                    "现在，如果您的配置文件存在尚未保存的更改，Skyve 图标将会变成紫色。",
+                    "现在可以为配置文件添加缩略图。",
+                    "配置文件用途现在有单独的图标。"
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "新增内容与更新内容",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "新增作者的配置文件的页面，点击模组或配置文件的作者，即可访问该作者的配置文件的页面。该页面包含作者制作的插件和作者公开的所有配置文件。",
+                    "Windows 系统上，使用 Skyve 删除的文件将被放进回收站。",
+                    "在实用工具页面新增了6个重置按钮。",
+                    "在获取帮助与日志页面，新增了两个按钮。",
+                    "现在，兼容性状态和插件状态将在列表右侧显示。",
+                    "现在，已损坏/不兼容/已被封禁的插件，在列表中将有一个新的警告样式背景。",
+                    "本地模组名称和标签已更新。",
+                    "没有公开源代码现在是“警告”等级，而不是“取消订阅”。",
+                    "前置模组现在有不同的界面，以便让您知道不能卸下它们。",
+                    "在游戏内新增了一个设置，可以对模组和资产进行热重载。",
+                    "优化了装载/卸下插件时的性能。",
+                    "新增匈牙利语翻译"
                 ]
             }
         ]
@@ -521,14 +521,14 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改动",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "新增忽略网络连接检查的选项。",
+                    "新增配置文件正在上传的指示标志。",
+                    "新增了一个按钮，可以轻松查看在线配置文件的内容。",
+                    "修复了获取 Steam 用户信息出错的问题。",
+                    "修复了没有记住资产编辑器启动设置的问题。",
+                    "修复了更新在线配置文件功能无法正常使用的问题。"
                 ]
             }
         ]
@@ -538,12 +538,12 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改动",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "新增在查看配置文件的内容时的加载动画。",
+                    "修复了下载或更新配置文件时，部分数据如缩略图没有正确保存的问题。",
+                    "修复了设为私密的插件被标记为空的问题。",
+                    "修复了启动 Skyve 时用户界面中的部分字符串没有翻译的问题。"
                 ]
             }
         ]
