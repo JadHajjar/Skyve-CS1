@@ -555,9 +555,9 @@
             {
                 "Name": "修正",
                 "Changes": [
-                    "Fixes an error caused by including/excluding mods that have contain assets.",
-                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-                    "Fixed some packages not showing their successor properly."
+                    "アセットが含まれるMODで、含む/除外の操作で発生するエラーを修正",
+                    "互換性レポートのリスト右側にあるアクションボタンが、クリックできない問題を修正",
+                    "いくつかのパッケージで移行先が正しく表示されない問題を修正"
                 ]
             }
         ]
