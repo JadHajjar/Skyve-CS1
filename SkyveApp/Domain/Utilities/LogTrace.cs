@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace SkyveApp.Domain.Utilities;
-public class LogTrace
+public class LogTrace : ILogTrace
 {
 	public LogTrace(List<string> lines, int index, bool crash)
 	{

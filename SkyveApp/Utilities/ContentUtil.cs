@@ -122,7 +122,7 @@ internal class ContentUtil : IContentUtil
 		return CrossIO.Combine(_locationManager.WorkshopContentPath, id.ToString());
 	}
 
-	public DateTime GetLocalUpdatedTime(string path)
+	public static DateTime GetLocalUpdatedTime(string path)
 	{
 		var dateTime = DateTime.MinValue;
 
@@ -144,12 +144,12 @@ internal class ContentUtil : IContentUtil
 				}
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, $"Failed to get the local update time for '{path}'"); }
+		catch { }
 
 		return dateTime;
 	}
 
-	public DateTime GetLocalSubscribeTime(string path)
+	public static DateTime GetLocalSubscribeTime(string path)
 	{
 		var dateTime = DateTime.MaxValue;
 
@@ -172,7 +172,7 @@ internal class ContentUtil : IContentUtil
 		return dateTime;
 	}
 
-	public long GetTotalSize(string path)
+	public static long GetTotalSize(string path)
 	{
 		try
 		{
@@ -371,57 +371,6 @@ internal class ContentUtil : IContentUtil
 		PackageWatcher.Create(_locationManager.ModsPath, false, false);
 
 		PackageWatcher.Create(_locationManager.WorkshopContentPath, false, true);
-	}
-
-	public void DeleteAll(IEnumerable<ulong> ids)
-	{
-		foreach (var id in ids)
-		{
-			DeleteAll(CrossIO.Combine(_locationManager.WorkshopContentPath, id.ToString()));
-		}
-	}
-
-	public void DeleteAll(string folder)
-	{
-		var package = _contentManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(folder));
-
-		if (package != null)
-		{
-			_contentManager.RemovePackage(package);
-		}
-
-		PackageWatcher.Pause();
-		try
-		{ CrossIO.DeleteFolder(folder); }
-		catch (Exception ex) { _logger.Exception(ex, $"Failed to delete the folder '{folder}'"); }
-		PackageWatcher.Resume();
-	}
-
-	public void MoveToLocalFolder<T>(T item) where T : IPackage
-	{
-		if (item is Asset asset)
-		{
-			CrossIO.CopyFile(asset.FileName, CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
-			return;
-		}
-
-		if (item.Package?.Assets?.Any() ?? false)
-		{
-			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(item.Folder)));
-
-			new DirectoryInfo(item.Folder).CopyAll(target, x => Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
-
-			target.RemoveEmptyFolders();
-		}
-
-		if (item.Package?.Mod is not null)
-		{
-			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.ModsPath, Path.GetFileName(item.Folder)));
-
-			new DirectoryInfo(item.Folder).CopyAll(target, x => !Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
-
-			target.RemoveEmptyFolders();
-		}
 	}
 
 	public GenericPackageState GetGenericPackageState(IPackage item)

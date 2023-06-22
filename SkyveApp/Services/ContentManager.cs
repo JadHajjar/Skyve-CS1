@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
@@ -10,6 +11,7 @@ using SkyveShared;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,14 +27,16 @@ internal class ContentManager : IContentManager
 	private readonly ILogger _logger;
 	private readonly IUpdateManager _updateManager;
 	private readonly INotifier _notifier;
+	private readonly ILocationManager _locationManager;
 
-	public ContentManager(IModLogicManager modLogicManager, ISettings settings, ILogger logger, IUpdateManager updateManager, INotifier notifier)
+	public ContentManager(IModLogicManager modLogicManager, ISettings settings, ILogger logger, IUpdateManager updateManager, INotifier notifier, Interfaces.ILocationManager locationManager)
 	{
 		_modLogicManager = modLogicManager;
 		_settings = settings;
 		_logger = logger;
 		_updateManager = updateManager;
 		_notifier = notifier;
+		_locationManager = locationManager;
 	}
 
 	public IEnumerable<Package> Packages
@@ -185,5 +189,56 @@ internal class ContentManager : IContentManager
 	{
 		packages = content;
 		indexedPackages = content.Where(x => x.SteamId != 0).ToDictionary(x => x.SteamId);
+	}
+
+	public void DeleteAll(IEnumerable<ulong> ids)
+	{
+		foreach (var id in ids)
+		{
+			DeleteAll(CrossIO.Combine(_locationManager.WorkshopContentPath, id.ToString()));
+		}
+	}
+
+	public void DeleteAll(string folder)
+	{
+		var package = Packages.FirstOrDefault(x => x.Folder.PathEquals(folder));
+
+		if (package != null)
+		{
+			RemovePackage(package);
+		}
+
+		PackageWatcher.Pause();
+		try
+		{ CrossIO.DeleteFolder(folder); }
+		catch (Exception ex) { _logger.Exception(ex, $"Failed to delete the folder '{folder}'"); }
+		PackageWatcher.Resume();
+	}
+
+	public void MoveToLocalFolder(IPackage item)
+	{
+		if (item is Asset asset)
+		{
+			CrossIO.CopyFile(asset.FileName, CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(asset.FileName)), true);
+			return;
+		}
+
+		if (item.Package?.Assets?.Any() ?? false)
+		{
+			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(item.Folder)));
+
+			new DirectoryInfo(item.Folder).CopyAll(target, x => Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
+
+			target.RemoveEmptyFolders();
+		}
+
+		if (item.Package?.Mod is not null)
+		{
+			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.ModsPath, Path.GetFileName(item.Folder)));
+
+			new DirectoryInfo(item.Folder).CopyAll(target, x => !Path.GetExtension(x).Equals(".crp", StringComparison.CurrentCultureIgnoreCase));
+
+			target.RemoveEmptyFolders();
+		}
 	}
 }

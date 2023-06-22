@@ -1,10 +1,8 @@
 ﻿namespace SkyveApp.Domain.Enums;
 
-public enum DownloadStatusFilter
+public enum DownloadStatus
 {
-	Any,
-	AnyIssue,
-	//None,
+	None,
 	OK,
 	Unknown,
 	OutOfDate,
