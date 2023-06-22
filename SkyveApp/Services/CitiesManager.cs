@@ -32,7 +32,7 @@ public class CitiesManager : ICitiesManager
 
     public delegate void MonitorTickDelegate(bool isAvailable, bool isRunning);
 
-	CitiesManager(ILogger logger, ILocationManager locationManager, IProfileManager profileManager, ISettings settings, IContentManager contentManager, IOUtil iOUtil)
+	public CitiesManager(ILogger logger, ILocationManager locationManager, IProfileManager profileManager, ISettings settings, IContentManager contentManager, IOUtil iOUtil)
 	{
 		_logger = logger;
 		_locationManager = locationManager;

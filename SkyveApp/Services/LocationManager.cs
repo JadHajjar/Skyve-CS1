@@ -88,7 +88,7 @@ internal class LocationManager : ILocationManager
         Platform.Windows or _ => "Steam.exe",
     };
 
-    private LocationManager(ILogger logger)
+    public LocationManager(ILogger logger)
     {
 		_logger = logger;
 		_folderSettings = ISave.Load<FolderSettings>(nameof(FolderSettings) + ".json");
@@ -253,7 +253,7 @@ internal class LocationManager : ILocationManager
         return settings.SteamPath.FormatPath();
     }
 
-    internal void SetPaths(string gamePath, string appDataPath, string steamPath)
+    public void SetPaths(string gamePath, string appDataPath, string steamPath)
     {
         _folderSettings.GamePath = gamePath;
         _folderSettings.AppDataPath = appDataPath;

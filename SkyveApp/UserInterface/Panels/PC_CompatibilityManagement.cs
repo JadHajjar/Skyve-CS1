@@ -5,6 +5,7 @@ using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
@@ -30,10 +31,14 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private bool valuesChanged;
 	private readonly ReviewRequest? _request;
 
+	private readonly ICompatibilityManager _compatibilityManager;
+
 	internal IPackage? CurrentPackage { get; private set; }
 
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+
 		InitializeComponent();
 
 		SlickTip.SetTo(B_Skip, "Skip");
@@ -55,7 +60,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	public PC_CompatibilityManagement(ulong userId) : this(false)
 	{
-		foreach (var package in CentralManager.Packages)
+		foreach (var package in Program.Services.GetService<IContentManager>().Packages)
 		{
 			if (package.Author?.SteamId == userId)
 			{
@@ -145,8 +150,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		await Task.Run(() =>
 		{
-			CompatibilityManager.DownloadData();
-			CompatibilityManager.CacheReport();
+			_compatibilityManager.DownloadData();
+			_compatibilityManager.CacheReport();
 		});
 	}
 
@@ -233,11 +238,11 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CrPackage, PostPackage>();
 
-			var automatedPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
+			var automatedPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
 
 			if (postPackage is null)
 			{
-				postPackage = CompatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
+				postPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
 			}
 			else
 			{
@@ -270,7 +275,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			PB_Icon.Package = CurrentPackage;
 			PB_Icon.Image = null;
-			PB_Icon.LoadImage(CurrentPackage.IconUrl, ImageManager.GetImage);
+			PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageManager>().GetImage);
 			P_Info.SetPackage(CurrentPackage, null);
 
 			B_Previous.Enabled = currentPage > 0;

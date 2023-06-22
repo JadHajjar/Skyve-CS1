@@ -1,5 +1,6 @@
 ﻿using Extensions;
-using SkyveApp.Services;
+
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.StatusBubbles;
 using SkyveApp.Utilities;
 
@@ -17,24 +18,28 @@ public partial class PC_MainPage : PanelContent
 	{
 		InitializeComponent();
 
-		B_StartStop.Enabled = CentralManager.IsContentLoaded && CitiesManager.CitiesAvailable();
+		var notifier = Program.Services.GetService<INotifier>();
+		var citiesManager = Program.Services.GetService<ICitiesManager>();
+		var profileManager = Program.Services.GetService<IProfileManager>();
 
-		if (!CentralManager.IsContentLoaded)
+		B_StartStop.Enabled = notifier.IsContentLoaded && citiesManager.CitiesAvailable();
+
+		if (!notifier.IsContentLoaded)
 		{
-			CentralManager.ContentLoaded += SetButtonEnabledOnLoad;
+			notifier.ContentLoaded += SetButtonEnabledOnLoad;
 		}
 
-		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
+		citiesManager.MonitorTick += CitiesManager_MonitorTick;
 
-		RefreshButtonState(CitiesManager.IsRunning(), true);
+		RefreshButtonState(citiesManager.IsRunning(), true);
 
 		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
 
 		label1.Text = Locale.MultipleLOM;
 
-		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
+		profileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
 
-		if (ProfileManager.ProfilesLoaded)
+		if (Program.Services.GetService<INotifier>().ProfilesLoaded)
 		{
 			ProfileManager_ProfileUpdated();
 		}
@@ -48,7 +53,7 @@ public partial class PC_MainPage : PanelContent
 			TLP_Profiles.RowStyles.Clear();
 			TLP_Profiles.RowStyles.Add(new());
 
-			foreach (var item in ProfileManager.Profiles.Where(x => x.IsFavorite))
+			foreach (var item in Program.Services.GetService<IProfileManager>().Profiles.Where(x => x.IsFavorite))
 			{
 				TLP_Profiles.RowStyles.Add(new());
 				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);
@@ -60,9 +65,9 @@ public partial class PC_MainPage : PanelContent
 	{
 		this.TryInvoke(() =>
 		{
-			B_StartStop.Enabled = CitiesManager.CitiesAvailable();
+			B_StartStop.Enabled = Program.Services.GetService<ICitiesManager>().CitiesAvailable();
 
-			label1.Visible = ModLogicManager.AreMultipleLOMsPresent();
+			label1.Visible = Program.Services.GetService<IModLogicManager>().AreMultipleLOMsPresent();
 		});
 	}
 

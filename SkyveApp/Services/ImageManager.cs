@@ -23,7 +23,7 @@ public class ImageManager : IImageManager
     private readonly HttpClient _httpClient = new();
     private readonly SteamImageProcessor _imageProcessor = new();
 
-    private ImageManager()
+    public ImageManager()
     {
         _cacheClearTimer = new System.Timers.Timer(_expirationTime.TotalMilliseconds);
         _cacheClearTimer.Elapsed += CacheClearTimer_Elapsed;
@@ -244,7 +244,7 @@ public class ImageManager : IImageManager
         catch { }
     }
 
-    internal void ClearCache()
+    public void ClearCache()
     {
         lock (_lockObjects)
         {

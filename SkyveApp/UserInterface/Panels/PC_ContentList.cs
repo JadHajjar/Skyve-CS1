@@ -7,6 +7,7 @@ using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
@@ -38,6 +39,11 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
 
+	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
+	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
+	private readonly ICompatibilityManager _compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+
 	public PC_ContentList() : this(false) { }
 
 	public PC_ContentList(bool load) : base(load)
@@ -66,7 +72,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			TLP_Main.SetColumnSpan(P_FiltersContainer, 4);
 		}
 
-		OT_Workshop.Visible = !CentralManager.CurrentProfile.LaunchSettings.NoWorkshop;
+		OT_Workshop.Visible = !_profileManager.CurrentProfile.LaunchSettings.NoWorkshop;
 		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		LC_Items.FilterRequested += FilterChanged;
@@ -86,7 +92,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (!load)
 		{
-			if (!CentralManager.IsContentLoaded)
+			if (!_notifier.IsContentLoaded)
 			{
 				LC_Items.Loading = true;
 			}
@@ -96,7 +102,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
+		if (!_settings.SessionSettings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
 		{
 			OT_Enabled.Hide();
 			P_Filters.SetRow(OT_Workshop, 2);
@@ -111,16 +117,16 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (!load)
 		{
-			CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+			_notifier.ContentLoaded += CentralManager_ContentLoaded;
 		}
 		else
 		{
-			CentralManager.ContentLoaded += CentralManager_WorkshopInfoUpdated;
+			_notifier.ContentLoaded += CentralManager_WorkshopInfoUpdated;
 		}
 
-		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-		CentralManager.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
-		CompatibilityManager.ReportProcessed += CentralManager_WorkshopInfoUpdated;
+		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
+		_notifier.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
+		_compatibilityManager.ReportProcessed += CentralManager_WorkshopInfoUpdated;
 
 		if (!load)
 		{
@@ -282,7 +288,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		firstFilterPassed = true;
 
-		if (CentralManager.SessionSettings.UserSettings.AlwaysOpenFiltersAndActions)
+		if (_settings.SessionSettings.UserSettings.AlwaysOpenFiltersAndActions)
 		{
 			P_FiltersContainer.Visible = true;
 			P_FiltersContainer.AutoSize = true;
@@ -381,8 +387,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
-		CentralManager.SessionSettings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
-		CentralManager.SessionSettings.Save();
+		_settings.SessionSettings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
+		_settings.SessionSettings.Save();
 
 		LC_Items.SetSorting(DD_Sorting.SelectedItem, LC_Items.SortDesc);
 	}
@@ -419,7 +425,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private bool IsFilteredOut(T item)
 	{
-		if (CentralManager.CurrentProfile.LaunchSettings.NoWorkshop)
+		if (_profileManager.CurrentProfile.LaunchSettings.NoWorkshop)
 		{
 			if (item.Workshop)
 			{
@@ -427,9 +433,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (CentralManager.CurrentProfile.Usage > 0)
+		if (_profileManager.CurrentProfile.Usage > 0)
 		{
-			if (!(item.GetCompatibilityInfo().Data?.Package.Usage.HasFlag(CentralManager.CurrentProfile.Usage) ?? true))
+			if (!(item.GetCompatibilityInfo().Data?.Package.Usage.HasFlag(_profileManager.CurrentProfile.Usage) ?? true))
 			{
 				UsageFilteredOut++;
 				return true;
@@ -551,14 +557,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			if (item is Asset asset)
 			{
-				if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FileName)))
+				if (!DD_Profile.SelectedItem.Assets.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FileName)))
 				{
 					return true;
 				}
 			}
 			else if (item is Mod mod)
 			{
-				if (!DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathEquals(mod.Folder)))
+				if (!DD_Profile.SelectedItem.Mods.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathEquals(mod.Folder)))
 				{
 					return true;
 				}
@@ -572,7 +578,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 						return true;
 					}
 				}
-				else if (!DD_Profile.SelectedItem.Assets.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)) && !DD_Profile.SelectedItem.Mods.Any(x => ProfileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)))
+				else if (!DD_Profile.SelectedItem.Assets.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)) && !DD_Profile.SelectedItem.Mods.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)))
 				{
 					return true;
 				}
@@ -707,8 +713,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDesc);
 
-		CentralManager.SessionSettings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
-		CentralManager.SessionSettings.Save();
+		_settings.SessionSettings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
+		_settings.SessionSettings.Save();
 
 		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
 	}
@@ -720,8 +726,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
 			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
-			, new (Locale.DisableAll, "I_Disabled", CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () =>DisableAll(this, EventArgs.Empty))
+			, new (Locale.EnableAll, "I_Enabled", _settings.SessionSettings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
+			, new (Locale.DisableAll, "I_Disabled", _settings.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () =>DisableAll(this, EventArgs.Empty))
 			, new (string.Empty)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
@@ -785,7 +791,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 
 		I_Actions.Loading = true;
-		SubscriptionsManager.UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
+		Program.Services.GetService<ISubscriptionsManager>().UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
 		I_Actions.Loading = false;
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
@@ -821,7 +827,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			return;
 		}
 
-		SubscriptionsManager.Subscribe(steamIds.Select(x => x.Item.SteamId));
+		Program.Services.GetService<ISubscriptionsManager>().Subscribe(steamIds.Select(x => x.Item.SteamId));
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -841,11 +847,11 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			{
 				if (!item.Workshop && item is Asset asset)
 				{
-					ExtensionClass.DeleteFile(asset.FileName);
+					CrossIO.DeleteFile(asset.FileName);
 				}
 				else
 				{
-					ContentUtil.DeleteAll(item.Folder);
+					Program.Services.GetService<IContentUtil>().DeleteAll(item.Folder);
 				}
 			}
 		});

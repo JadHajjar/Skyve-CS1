@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.IO;
 
 namespace SkyveApp.Utilities.IO;
-internal class IOUtil
+public class IOUtil
 {
 	private readonly ILogger _logger;
 

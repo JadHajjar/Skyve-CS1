@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System.Collections.Generic;
@@ -19,21 +20,22 @@ internal class PC_Mods : PC_ContentList<Mod>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mod.Plural} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Mod.Plural} - {Program.Services.GetService<IProfileManager>().CurrentProfile.Name}";
 	}
 
 	protected override IEnumerable<Mod> GetItems()
 	{
-		return CentralManager.Mods;
+		return Program.Services.GetService<IContentManager>().Mods;
 	}
 
 	protected override string GetCountText()
 	{
-		var modsIncluded = CentralManager.Mods.Count(x => x.IsIncluded);
-		var modsEnabled = CentralManager.Mods.Count(x => x.IsEnabled && x.IsIncluded);
+		var mods = Program.Services.GetService<IContentManager>().Mods;
+		var modsIncluded = mods.Count(x => x.IsIncluded);
+		var modsEnabled = mods.Count(x => x.IsEnabled && x.IsIncluded);
 		var total = LC_Items.ItemCount;
 
-		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!Program.Services.GetService<ISettings>().SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			return string.Format(Locale.ModIncludedTotal, modsIncluded, total);
 		}
@@ -53,11 +55,11 @@ internal class PC_Mods : PC_ContentList<Mod>
 
 	protected override void SetIncluded(IEnumerable<Mod> filteredItems, bool included)
 	{
-		ContentUtil.SetBulkIncluded(filteredItems, included);
+		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Mod> filteredItems, bool enabled)
 	{
-		ContentUtil.SetBulkEnabled(filteredItems, enabled);
+		Program.Services.GetService<IContentUtil>().SetBulkEnabled(filteredItems, enabled);
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using SkyveApp.Domain;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System.Collections.Generic;
@@ -8,31 +9,33 @@ using System.Linq;
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_Assets : PC_ContentList<Asset>
 {
+	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
+	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
 	public PC_Assets()
 	{
-
 	}
 
 	protected override void LocaleChanged()
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Asset.Plural} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentProfile.Name}";
 	}
 
 	protected override IEnumerable<Asset> GetItems()
 	{
-		if (CentralManager.SessionSettings.UserSettings.LinkModAssets)
+		if (_settings.SessionSettings.UserSettings.LinkModAssets)
 		{
-			return CentralManager.Assets.Where(x => x.Package.Mod is null);
+			return _contentManager.Assets.Where(x => x.Package.Mod is null);
 		}
 
-		return CentralManager.Assets;
+		return _contentManager.Assets;
 	}
 
 	protected override string GetCountText()
 	{
-		var assetsIncluded = CentralManager.Assets.Count(x => x.IsIncluded);
+		var assetsIncluded = _contentManager.Assets.Count(x => x.IsIncluded);
 		var total = LC_Items.ItemCount;
 		var text = string.Empty;
 
@@ -46,7 +49,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)
 	{
-		ContentUtil.SetBulkIncluded(filteredItems, included);
+		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Asset> filteredItems, bool enabled)

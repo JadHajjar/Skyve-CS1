@@ -1,5 +1,7 @@
 ﻿using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+
 using System;
 using System.IO;
 using System.Linq;
@@ -10,18 +12,20 @@ internal class MacAssemblyUtil
 {
 	public static bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
 	{
+		var util = Program.Services.GetService<IContentUtil>();
+
 		foreach (var path in dllPaths)
 		{
-			var cache = ContentUtil.GetDllModCache(path, out version);
+			var cache = util.GetDllModCache(path, out version);
 
 			if (cache == true || (cache is null && CheckDllImplementsInterface(path, out version)))
 			{
-				ContentUtil.SetDllModCache(path, true, version);
+				util.SetDllModCache(path, true, version);
 				dllPath = path;
 				return true;
 			}
 
-			ContentUtil.SetDllModCache(path, false, null);
+			util.SetDllModCache(path, false, null);
 		}
 
 		dllPath = null;
@@ -59,21 +63,22 @@ internal class MacAssemblyUtil
 	public static bool MacOsResolve(string dllPath, out Version? version)
 	{
 #if DEBUG
-		Log.Debug("Resolving " + dllPath);
+		Program.Services.GetService<ILogger>().Debug("Resolving " + dllPath);
 #endif
 		version = null;
-		var process = IOUtil.Execute(CrossIO.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
+		var locationManager = Program.Services.GetService<ILocationManager>();
+		var process = Program.Services.GetService<IOUtil>().Execute(CrossIO.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
 		{
 			dllPath,
-			LocationManager.ManagedDLL,
-			LocationManager.ModsPath,
-			LocationManager.WorkshopContentPath
+			locationManager.ManagedDLL,
+			locationManager.ModsPath,
+			locationManager.WorkshopContentPath
 		}.Select(x => $"\"{x}\"")), false, true);
 
 		if (process is null)
 		{
 #if DEBUG
-			Log.Debug("Process null");
+			Program.Services.GetService<ILogger>().Debug("Process null");
 #endif
 			return false;
 		}

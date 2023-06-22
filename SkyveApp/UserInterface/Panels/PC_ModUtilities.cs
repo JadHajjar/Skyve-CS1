@@ -3,6 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.Utilities;
 
@@ -20,6 +21,13 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ModUtilities : PanelContent
 {
+	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
+	private readonly ICitiesManager _citiesManager = Program.Services.GetService<ICitiesManager>();
+	private readonly ISubscriptionsManager _subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
+	private readonly ILocationManager _locationManager = Program.Services.GetService<ILocationManager>();
+	private readonly IContentManager _contentManager =	Program.Services.GetService<IContentManager>();
+
 	public PC_ModUtilities()
 	{
 		InitializeComponent();
@@ -28,9 +36,9 @@ public partial class PC_ModUtilities : PanelContent
 
 		B_LoadCollection.Height = 0;
 
-		CentralManager.PackageInformationUpdated += RefreshModIssues;
+		_notifier.PackageInformationUpdated += RefreshModIssues;
 
-		DD_BOB.StartingFolder = LocationManager.AppDataPath;
+		DD_BOB.StartingFolder = _locationManager.AppDataPath;
 		DD_Missing.StartingFolder = DD_Unused.StartingFolder = LsmUtil.GetReportFolder();
 		DD_Missing.ValidExtensions = DD_Unused.ValidExtensions = new[] { ".htm", ".html" };
 
@@ -48,8 +56,8 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void RefreshModIssues()
 	{
-		var modsOutOfDate = CentralManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = CentralManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.PartiallyDownloaded);
+		var modsOutOfDate = _contentManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.OutOfDate);
+		var modsIncomplete = _contentManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.PartiallyDownloaded);
 
 		this.TryInvoke(() =>
 		{
@@ -162,7 +170,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		B_ReDownload.Loading = true;
 
-		await Task.Run(() => SteamUtil.Download(CentralManager.Mods.Where(x => x.Workshop && x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded)));
+		await Task.Run(() => SteamUtil.Download(_contentManager.Mods.Where(x => x.Workshop && x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded)));
 	}
 
 	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -271,24 +279,24 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void B_Cleanup_Click(object sender, EventArgs e)
 	{
-		if (CitiesManager.IsRunning())
+		if (_citiesManager.IsRunning())
 		{
 			MessagePrompt.Show(Locale.CloseCitiesToClean, PromptButtons.OK, PromptIcons.Hand, Program.MainForm);
 			return;
 		}
 
-		if (!CentralManager.SessionSettings.CleanupFirstTimeShown)
+		if (!_settings.SessionSettings.CleanupFirstTimeShown)
 		{
 			MessagePrompt.Show(Locale.CleanupRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
 
-			CentralManager.SessionSettings.CleanupFirstTimeShown = true;
-			CentralManager.SessionSettings.Save();
+			_settings.SessionSettings.CleanupFirstTimeShown = true;
+			_settings.SessionSettings.Save();
 		}
 
-		CitiesManager.RunStub();
+		_citiesManager.RunStub();
 
 		B_Cleanup.Loading = true;
-		SubscriptionsManager.Redownload = true;
+		_subscriptionsManager.Redownload = true;
 	}
 
 	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
@@ -301,7 +309,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ReloadAllData.Loading)
 		{
 			B_ReloadAllData.Loading = true;
-			await Task.Run(CentralManager.Start);
+			await Task.Run(Program.Services.GetService<CentralManager>().Start);
 			B_ReloadAllData.Loading = false;
 			var img = B_ReloadAllData.ImageName;
 			B_ReloadAllData.ImageName = "I_Check";
@@ -313,7 +321,7 @@ public partial class PC_ModUtilities : PanelContent
 	private async void B_ResetSnoozes_Click(object sender, EventArgs e)
 	{
 		var img = B_ResetSnoozes.ImageName;
-		CompatibilityManager.ResetSnoozes();
+		Program.Services.GetService<ICompatibilityManager>().ResetSnoozes();
 		B_ResetSnoozes.ImageName = "I_Check";
 		await Task.Delay(1500);
 		B_ResetSnoozes.ImageName = img;
@@ -321,7 +329,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	private async void B_ResetModsCache_Click(object sender, EventArgs e)
 	{
-		ContentUtil.ClearDllCache();
+		Program.Services.GetService<IContentUtil>().ClearDllCache();
 		var img = B_ResetModsCache.ImageName;
 		B_ResetModsCache.ImageName = "I_Check";
 		await Task.Delay(1500);
@@ -333,7 +341,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ResetCompatibilityCache.Loading)
 		{
 			B_ResetCompatibilityCache.Loading = true;
-			await Task.Run(CompatibilityManager.ResetCache);
+			await Task.Run(Program.Services.GetService<ICompatibilityManager>().ResetCache);
 			B_ResetCompatibilityCache.Loading = false;
 			var img = B_ResetCompatibilityCache.ImageName;
 			B_ResetCompatibilityCache.ImageName = "I_Check";
@@ -347,7 +355,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ResetImageCache.Loading)
 		{
 			B_ResetImageCache.Loading = true;
-			await Task.Run(ImageManager.ClearCache);
+			await Task.Run(Program.Services.GetService<IImageManager>().ClearCache);
 			B_ResetImageCache.Loading = false;
 			var img = B_ResetImageCache.ImageName;
 			B_ResetImageCache.ImageName = "I_Check";

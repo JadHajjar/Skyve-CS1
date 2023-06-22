@@ -3,6 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
 
@@ -20,6 +21,8 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_Options : PanelContent
 {
 	private bool folderPathsChanged;
+	private readonly ILocationManager _locationManager = Program.Services.GetService<ILocationManager>();
+	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
 
 	public PC_Options()
 	{
@@ -34,9 +37,9 @@ public partial class PC_Options : PanelContent
 			}
 		}
 
-		TB_GamePath.Text = LocationManager.GamePath;
-		TB_AppDataPath.Text = LocationManager.AppDataPath;
-		TB_SteamPath.Text = LocationManager.SteamPath;
+		TB_GamePath.Text = _locationManager.GamePath;
+		TB_AppDataPath.Text = _locationManager.AppDataPath;
+		TB_SteamPath.Text = _locationManager.SteamPath;
 
 		if (CrossIO.CurrentPlatform is Platform.Linux)
 		{
@@ -77,7 +80,7 @@ public partial class PC_Options : PanelContent
 			{
 				cb.Checked = (bool)typeof(UserSettings)
 					.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-					.GetValue(CentralManager.SessionSettings.UserSettings);
+					.GetValue(_settings.SessionSettings.UserSettings);
 
 				SlickTip.SetTo(cb, LocaleHelper.GetGlobalText($"{cb.Text}_Tip"));
 
@@ -127,7 +130,7 @@ public partial class PC_Options : PanelContent
 		{
 			if (ShowPrompt(Locale.ChangingFoldersRequiresRestart, PromptButtons.OKCancel, PromptIcons.Hand) == System.Windows.Forms.DialogResult.OK)
 			{
-				LocationManager.SetPaths(TB_GamePath.Text, TB_AppDataPath.Text, TB_SteamPath.Text);
+				_locationManager.SetPaths(TB_GamePath.Text, TB_AppDataPath.Text, TB_SteamPath.Text);
 
 				Process.Start(Program.ExecutablePath);
 
@@ -155,9 +158,9 @@ public partial class PC_Options : PanelContent
 
 		typeof(UserSettings)
 			.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-			.SetValue(CentralManager.SessionSettings.UserSettings, cb.Checked);
+			.SetValue(_settings.SessionSettings.UserSettings, cb.Checked);
 
-		CentralManager.SessionSettings.Save();
+		_settings.SessionSettings.Save();
 	}
 
 	private void TB_FolderPath_TextChanged(object sender, EventArgs e)
@@ -218,8 +221,8 @@ public partial class PC_Options : PanelContent
 
 	private void B_Reset_Click(object sender, EventArgs e)
 	{
-		CentralManager.SessionSettings.UserSettings = new();
-		CentralManager.SessionSettings.Save();
+		_settings.SessionSettings.UserSettings = new();
+		_settings.SessionSettings.Save();
 
 		ApplyCurrentSettings();
 	}
@@ -231,10 +234,10 @@ public partial class PC_Options : PanelContent
 			return;
 		}
 
-		ExtensionClass.DeleteFile(CrossIO.Combine(LocationManager.SkyveAppDataPath, "SetupComplete.txt"));
+		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveAppDataPath, "SetupComplete.txt"));
 
-		CentralManager.SessionSettings.FirstTimeSetupCompleted = false;
-		CentralManager.SessionSettings.Save();
+		_settings.SessionSettings.FirstTimeSetupCompleted = false;
+		_settings.SessionSettings.Save();
 
 		new FolderSettings().Save();
 

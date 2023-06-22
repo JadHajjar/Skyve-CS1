@@ -3,6 +3,8 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+using SkyveApp.Utilities.IO;
 
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +15,7 @@ internal static class LsmUtil
 {
 	public static bool IsValidLsmReportFile(string filePath)
 	{
-		if (!ExtensionClass.FileExists(filePath) || new FileInfo(filePath).Length > 50 * 1024 * 1024)
+		if (!CrossIO.FileExists(filePath) || new FileInfo(filePath).Length > 50 * 1024 * 1024)
 		{
 			return false;
 		}
@@ -47,7 +49,7 @@ internal static class LsmUtil
 
 		if (regex.Success) // attempt to match the file to any OS or user
 		{
-			path = CrossIO.Combine(LocationManager.AppDataPath, path.Substring(regex.Index + regex.Length));
+			path = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, path.Substring(regex.Index + regex.Length));
 		}
 
 		return path;

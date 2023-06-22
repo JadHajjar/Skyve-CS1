@@ -3,6 +3,7 @@ using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Generic;
@@ -86,7 +87,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		if (_request.LogFile != null)
 		{
-			var fileName = CrossIO.Combine(LocationManager.SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
+			var fileName = CrossIO.Combine(Program.Services.GetService<ILocationManager>().SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
 
 			File.WriteAllBytes(fileName, _request.LogFile);
 

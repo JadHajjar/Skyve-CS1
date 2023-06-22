@@ -60,7 +60,7 @@ internal class ProfileBubble : StatusBubbleBase
 			DrawText(e, ref targetHeight, _profileManager.CurrentProfile.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, _profileManager.CurrentProfile.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
 		}
 
-		if (_profileManager.ProfilesLoaded)
+		if (Program.Services.GetService<INotifier>().ProfilesLoaded)
 		{
 			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_profileManager.Profiles.Count() - 1, Locale.Profile.FormatPlural(_profileManager.Profiles.Count() - 1).ToLower()));
 		}

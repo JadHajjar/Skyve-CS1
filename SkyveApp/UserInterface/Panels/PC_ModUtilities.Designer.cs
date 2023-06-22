@@ -17,7 +17,7 @@ partial class PC_ModUtilities
 	{
 		if (disposing && (components != null))
 		{
-			CentralManager.PackageInformationUpdated -= RefreshModIssues;
+			_notifier.PackageInformationUpdated -= RefreshModIssues;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

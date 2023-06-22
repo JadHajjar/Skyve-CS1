@@ -6,6 +6,7 @@ using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 
@@ -26,7 +27,10 @@ public partial class PC_CompatibilityReport : PanelContent
 	private NotificationType CurrentKey;
 	private bool customReportLoaded;
 
-	public PC_CompatibilityReport() : base(CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious)
+	private readonly ICompatibilityManager _compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
+
+	public PC_CompatibilityReport() : base(Program.Services.GetService<ICompatibilityManager>().User.Manager && !Program.Services.GetService<ICompatibilityManager>().User.Malicious)
 	{
 		InitializeComponent();
 
@@ -35,7 +39,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		LC_Items.Visible = false;
 		LC_Items.CanDrawItem += LC_Items_CanDrawItem;
 
-		if (!CompatibilityManager.FirstLoadComplete)
+		if (!_compatibilityManager.FirstLoadComplete)
 		{
 			PB_Loader.Visible = true;
 			PB_Loader.Loading = true;
@@ -45,7 +49,7 @@ public partial class PC_CompatibilityReport : PanelContent
 			CompatibilityManager_ReportProcessed();
 		}
 
-		CompatibilityManager.ReportProcessed += CompatibilityManager_ReportProcessed;
+		_compatibilityManager.ReportProcessed += CompatibilityManager_ReportProcessed;
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -76,9 +80,9 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void CompatibilityManager_ReportProcessed()
 	{
-		if (CompatibilityManager.FirstLoadComplete && !customReportLoaded)
+		if (_compatibilityManager.FirstLoadComplete && !customReportLoaded)
 		{
-			var packages = CentralManager.Packages.ToList(x => x.GetCompatibilityInfo());
+			var packages = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
 
 			packages.RemoveAll(x => x.Notification < NotificationType.Unsubscribe && !x.Package.IsIncluded);
 
@@ -90,9 +94,9 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void SetManagementButtons()
 	{
-		var hasPackages = CompatibilityManager.User.SteamId != 0 && CentralManager.Packages.Any(x => x.Author?.SteamId == CompatibilityManager.User.SteamId);
-		B_Requests.Visible = B_ManageSingle.Visible = B_Manage.Visible = CompatibilityManager.User.Manager && !CompatibilityManager.User.Malicious;
-		B_YourPackages.Visible = hasPackages && CompatibilityManager.User.Verified && !CompatibilityManager.User.Malicious;
+		var hasPackages = _compatibilityManager.User.SteamId != 0 && _contentManager.Packages.Any(x => x.Author?.SteamId == _compatibilityManager.User.SteamId);
+		B_Requests.Visible = B_ManageSingle.Visible = B_Manage.Visible = _compatibilityManager.User.Manager && !_compatibilityManager.User.Malicious;
+		B_YourPackages.Visible = hasPackages && _compatibilityManager.User.Verified && !_compatibilityManager.User.Malicious;
 		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
 	}
 
@@ -103,7 +107,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void B_YourPackages_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(null, new PC_CompatibilityManagement(CompatibilityManager.User.SteamId));
+		Form.PushPanel(null, new PC_CompatibilityManagement(_compatibilityManager.User.SteamId));
 	}
 
 	private void B_ManageSingle_Click(object sender, EventArgs e)

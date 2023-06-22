@@ -1,5 +1,6 @@
 ﻿using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -59,7 +60,7 @@ public partial class PC_DLCs : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		Text = $"{Locale.DLCs} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.DLCs} - {Program.Services.GetService<IProfileManager>().CurrentProfile.Name}";
 		L_Duplicates.Text = Locale.DlcUpdateNotice;
 	}
 

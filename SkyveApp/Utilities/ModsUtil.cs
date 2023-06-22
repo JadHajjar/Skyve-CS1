@@ -18,8 +18,6 @@ internal class ModsUtil : IModUtil
 	private readonly CachedSaveLibrary<CachedModInclusion, Mod, bool> _includedLibrary = new();
 	private readonly CachedSaveLibrary<CachedModEnabled, Mod, bool> _enabledLibrary = new();
 
-	private readonly IProfileManager _profileManager;
-	private readonly ICitiesManager _citiesManager;
 	private readonly IContentManager _contentManager;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly IColossalOrderUtil _colossalOrderUtil;
@@ -27,26 +25,14 @@ internal class ModsUtil : IModUtil
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ModsUtil(IProfileManager profileManager, ICitiesManager citiesManager, IContentManager contentManager, IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, IColossalOrderUtil colossalOrderUtil)
+	public ModsUtil(IContentManager contentManager, IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, IColossalOrderUtil colossalOrderUtil)
 	{
-		_profileManager = profileManager;
-		_citiesManager = citiesManager;
 		_contentManager = contentManager;
 		_modLogicManager = modLogicManager;
 		_colossalOrderUtil = colossalOrderUtil;
 		_settings = settings;
 		_logger = logger;
 		_notifier = notifier;
-
-		_citiesManager.MonitorTick += CitiesManager_MonitorTick;
-	}
-
-	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
-	{
-		if (!isRunning && !_profileManager.ApplyingProfile && (_includedLibrary.Any() || _enabledLibrary.Any()))
-		{
-			SavePendingValues();
-		}
 	}
 
 	public Mod? GetMod(Package package)
@@ -72,7 +58,7 @@ internal class ModsUtil : IModUtil
 					return MacAssemblyUtil.FindImplementation(files, out dllPath, out version);
 				}
 
-				return AssemblyUtil.FindImplementation(files, out dllPath, out version);
+				return Program.Services.GetService<AssemblyUtil>().FindImplementation(files, out dllPath, out version);
 			}
 		}
 		catch { }
@@ -84,7 +70,7 @@ internal class ModsUtil : IModUtil
 
 	public void SavePendingValues()
 	{
-		if (_profileManager.ApplyingProfile || _notifier.BulkUpdating)
+		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
 		{
 			return;
 		}
@@ -132,7 +118,7 @@ internal class ModsUtil : IModUtil
 			value = true;
 		}
 
-		if (_profileManager.ApplyingProfile || _notifier.BulkUpdating || _citiesManager.IsRunning())
+		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
 		{
 #if DEBUG
 			_logger.Debug($"Delaying inclusion ({value}) for mod: {mod} (currently {IsLocallyIncluded(mod)}) ({mod.Folder})");
@@ -156,7 +142,7 @@ internal class ModsUtil : IModUtil
 		}
 
 		_notifier.OnInclusionUpdated();
-		_profileManager.TriggerAutoSave();
+		_notifier.TriggerAutoSave();
 	}
 
 	public void SetLocallyIncluded(Mod mod, bool value)
@@ -189,7 +175,7 @@ internal class ModsUtil : IModUtil
 
 	public void SetEnabled(Mod mod, bool value, bool save = true)
 	{
-		if (_profileManager.ApplyingProfile || _notifier.BulkUpdating || _citiesManager.IsRunning())
+		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
 		{
 			_enabledLibrary.SetValue(mod, value);
 		}
@@ -199,7 +185,7 @@ internal class ModsUtil : IModUtil
 		}
 
 		_notifier.OnInclusionUpdated();
-		_profileManager.TriggerAutoSave();
+		_notifier.TriggerAutoSave();
 	}
 
 	public void SetLocallyEnabled(Mod mod, bool value, bool save)

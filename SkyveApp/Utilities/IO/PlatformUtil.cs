@@ -1,5 +1,6 @@
 ﻿using Extensions;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using System;
 using System.Diagnostics;
@@ -20,7 +21,7 @@ internal static class PlatformUtil
 				return;
 			}
 
-			if (CentralManager.SessionSettings.UserSettings.OpenLinksInBrowser)
+			if (Program.Services.GetService<ISettings>().SessionSettings.UserSettings.OpenLinksInBrowser)
 			{
 				Process.Start(url);
 				return;
@@ -49,7 +50,7 @@ internal static class PlatformUtil
 				Process.Start(url);
 			}
 		}
-		catch (Exception ex) { Log.Exception(ex, $"Failed to open the URL: '{url}'"); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, $"Failed to open the URL: '{url}'"); }
 	}
 
 	public static void OpenFolder(string? folder)
@@ -63,7 +64,7 @@ internal static class PlatformUtil
 
 			folder = folder.FormatPath();
 
-			if (ExtensionClass.FileExists(folder))
+			if (CrossIO.FileExists(folder))
 			{
 				OpenFileInFolder(folder);
 				return;
@@ -71,7 +72,7 @@ internal static class PlatformUtil
 
 			if (!Directory.Exists(folder))
 			{
-				Log.Error($"Failed to open the folder: '{folder}' | Directory not found");
+				Program.Services.GetService<ILogger>().Error($"Failed to open the folder: '{folder}' | Directory not found");
 				return;
 			}
 
@@ -82,7 +83,7 @@ internal static class PlatformUtil
 				Platform.Windows or _ => Process.Start(folder),
 			};
 		}
-		catch (Exception ex) { Log.Exception(ex, $"Failed to open the folder: '{folder}'"); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, $"Failed to open the folder: '{folder}'"); }
 	}
 
 	private static void OpenFileInFolder(string file)
@@ -96,7 +97,7 @@ internal static class PlatformUtil
 				Platform.Windows or _ => Process.Start("explorer.exe", $"/select, \"{file}\""),
 			};
 		}
-		catch (Exception ex) { Log.Exception(ex, $"Failed to open the file: '{file}'"); }
+		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, $"Failed to open the file: '{file}'"); }
 	}
 
 	public static void SetFileInClipboard(string path)
@@ -107,14 +108,14 @@ internal static class PlatformUtil
 			{
 				if (path[0] is 'c' or 'C')
 				{
-					var file = CrossIO.Combine(LocationManager.SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
+					var file = CrossIO.Combine(Program.Services.GetService<ILocationManager>().SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
 
-					ExtensionClass.CopyFile(path, file, true);
+					CrossIO.CopyFile(path, file, true);
 
 					path = file;
 				}
 
-				path = $"file://{IOUtil.ToRealPath(path)}";
+				path = $"file://{Program.Services.GetService<IOUtil>().ToRealPath(path)}";
 			}
 
 			Clipboard.SetData(DataFormats.FileDrop, new[] { path });

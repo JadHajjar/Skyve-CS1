@@ -2,6 +2,7 @@ using Extensions;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
+using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
@@ -52,6 +53,8 @@ internal static class Program
 		Services.AddTransient<ICompatibilityUtil, CompatibilityUtil>();
 		Services.AddTransient<IContentUtil, ContentUtil>();
 		Services.AddTransient<ILogUtil, LogUtil>();
+		Services.AddTransient<IOUtil>();
+		Services.AddTransient<AssemblyUtil>();
 
 		Services.AddSingleton<CentralManager>();
 	}
@@ -84,17 +87,16 @@ internal static class Program
 
 			try
 			{
-				var toolPath = ExecutablePath;
-				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
+				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ExecutablePath)).Length > 1;
 
-				if (openTools)
+				if (openTools && !CrossIO.FileExists(CrossIO.Combine(CurrentDirectory, "Wake")))
 				{
-					File.WriteAllText(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"), "It's time to wake up");
+					File.WriteAllText(Path.Combine(CurrentDirectory, "Wake"), "It's time to wake up");
 
 					return;
 				}
 
-				CrossIO.DeleteFile(CrossIO.Combine(Directory.GetParent(toolPath).FullName, "Wake"));
+				CrossIO.DeleteFile(CrossIO.Combine(CurrentDirectory, "Wake"));
 			}
 			catch { }
 

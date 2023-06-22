@@ -321,7 +321,7 @@ internal class UserDescriptionControl : SlickImageControl
 			return;
 		}
 
-		rects = new Rectangles() { Item = User };
+		rects = new Rectangles();
 
 		DrawTitle(e);
 		DrawButtons(e);
@@ -376,8 +376,6 @@ internal class UserDescriptionControl : SlickImageControl
 
 	private class Rectangles
 	{
-		internal SteamUser Item;
-
 		internal Dictionary<TagItem, Rectangle> TagRects = new();
 		internal Rectangle IncludedRect;
 		internal Rectangle EnabledRect;
@@ -389,10 +387,7 @@ internal class UserDescriptionControl : SlickImageControl
 		internal Rectangle SteamIdRect;
 		internal Rectangle CenterRect;
 		internal Rectangle AuthorRect;
-		internal Rectangle ScoreRect;
-		internal Rectangle VersionRect;
 		internal Rectangle CompatibilityRect;
-		internal Rectangle DownloadStatusRect;
 		internal Rectangle DateRect;
 
 		internal bool Contain(Point location)

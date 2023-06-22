@@ -2,8 +2,10 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.Utilities;
+using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
@@ -74,7 +76,7 @@ public partial class EditTagsForm : BaseForm
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
 		DialogResult = DialogResult.OK;
-		AssetsUtil.SetFindItTag(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
+		Program.Services.GetService<IAssetUtil>().SetFindItTag(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
 		Close();
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}

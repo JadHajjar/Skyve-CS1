@@ -6,11 +6,10 @@ namespace SkyveApp.Domain.Utilities;
 
 internal class CachedModEnabled : CachedSaveItem<Mod, bool>
 {
-	private readonly IModUtil _modUtil;
+	private readonly IModUtil _modUtil = Program.Services.GetService<IModUtil>();
 
 	public CachedModEnabled(Mod key, bool value) : base(key, value)
 	{
-		_modUtil = Program.Services.GetService<IModUtil>();
 	}
 
 	public override bool CurrentValue => _modUtil.IsLocallyEnabled(Key);

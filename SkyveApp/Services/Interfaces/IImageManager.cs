@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace SkyveApp.Services.Interfaces;
 public interface IImageManager
 {
+	void ClearCache();
 	Task<bool> Ensure(string? url, bool localOnly = false, string? fileName = null, bool square = true);
 	FileInfo File(string url, string? fileName = null);
 	Bitmap? GetCache(string key);

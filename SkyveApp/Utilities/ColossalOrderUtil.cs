@@ -23,7 +23,7 @@ internal class ColossalOrderUtil : IColossalOrderUtil
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
 
-	ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings)
+	public ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings)
 	{
 		_locationManager = locationManager;
 		_notifier = notifier;

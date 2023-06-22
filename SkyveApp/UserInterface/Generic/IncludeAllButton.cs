@@ -2,7 +2,9 @@
 
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Lists;
+using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
@@ -27,20 +29,23 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 	public event EventHandler? DisableAllClicked;
 	public event EventHandler? SubscribeAllClicked;
 
+	private readonly ISettings _settings;
+
 	public IncludeAllButton(ItemListControl<T>? lC_Items)
 	{
 		Margin = default;
 		Cursor = Cursors.Hand;
 		LC_Items = lC_Items;
-		_doubleButtons = CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable;
+		_settings = Program.Services.GetService<ISettings>();
+		_doubleButtons = _settings.SessionSettings.UserSettings.AdvancedIncludeEnable;
 	}
 
 	protected override void UIChanged()
 	{
 		Margin = Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 
-		var ItemHeight = (int)((CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
-		var includeItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var ItemHeight = (int)((_settings.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
+		var includeItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
 
 		Size = new Size((_doubleButtons ? (includeItemHeight * 2 * 9 / 10) : (includeItemHeight + 1)) + includeItemHeight, includeItemHeight * 2 / 3);
 	}
@@ -142,8 +147,8 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var ItemHeight = (int)((CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
-		var includeItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var ItemHeight = (int)((_settings.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
+		var includeItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
 		var rectangle = ClientRectangle;
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;
@@ -177,7 +182,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 
 		var incl = new DynamicIcon(subscribe ? "I_Add"
 		: packages.All(x => x.Item.IsIncluded) ? "I_Ok" : "I_Enabled");
-		var inclIcon = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? incl.Large : incl.Get(includeItemHeight / 2);
+		var inclIcon = _settings.SessionSettings.UserSettings.LargeItemOnHover ? incl.Large : incl.Get(includeItemHeight / 2);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && IncludedRect.Contains(CursorLocation))
 		{
@@ -189,7 +194,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		if (_doubleButtons && EnabledRect != default)
 		{
 			var enl = new DynamicIcon(packages.All(x => x.Item.Package?.Mod?.IsEnabled ?? true) ? "I_Checked" : "I_Checked_OFF");
-			var enlIcon = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? enl.Large : enl.Get(includeItemHeight / 2);
+			var enlIcon = _settings.SessionSettings.UserSettings.LargeItemOnHover ? enl.Large : enl.Get(includeItemHeight / 2);
 
 			if (HoverState.HasFlag(HoverState.Hovered) && EnabledRect.Contains(CursorLocation))
 			{
@@ -200,7 +205,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		}
 
 		var action = new DynamicIcon("I_Actions");
-		var actionIcon = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? action.Large : action.Get(includeItemHeight / 2);
+		var actionIcon = _settings.SessionSettings.UserSettings.LargeItemOnHover ? action.Large : action.Get(includeItemHeight / 2);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && ActionRect.Contains(CursorLocation))
 		{

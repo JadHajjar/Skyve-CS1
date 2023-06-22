@@ -18,7 +18,7 @@ partial class PC_Profile
 	{
 		if (disposing && (components != null))
 		{
-			ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+			_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

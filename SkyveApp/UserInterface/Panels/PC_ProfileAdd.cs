@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -19,11 +20,13 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ProfileAdd : PanelContent
 {
+	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+
 	public PC_ProfileAdd()
 	{
 		InitializeComponent();
 		
-		DAD_NewProfile.StartingFolder = LocationManager.AppDataPath;
+		DAD_NewProfile.StartingFolder = Program.Services.GetService<ILocationManager>().AppDataPath;
 	}
 
 	protected override void UIChanged()
@@ -36,17 +39,17 @@ public partial class PC_ProfileAdd : PanelContent
 
 	private void NewProfile_Click(object sender, EventArgs e)
 	{
-		var newProfile = new Profile() { Name = ProfileManager.GetNewProfileName(), LastEditDate = DateTime.Now };
+		var newProfile = new Profile() { Name = _profileManager.GetNewProfileName(), LastEditDate = DateTime.Now };
 
-		if (!ProfileManager.Save(newProfile))
+		if (!_profileManager.Save(newProfile))
 		{
 			ShowPrompt(Locale.ProfileCreationFailed, icon: PromptIcons.Error);
 			return;
 		}
 
-		ProfileManager.AddProfile(newProfile);
+		_profileManager.AddProfile(newProfile);
 
-		ProfileManager.SetProfile(newProfile);
+		_profileManager.SetProfile(newProfile);
 
 		var panel = new PC_Profile();
 
@@ -58,8 +61,8 @@ public partial class PC_ProfileAdd : PanelContent
 
 	private void CopyProfile_Click(object sender, EventArgs e)
 	{
-		var newProfile = CentralManager.CurrentProfile.Clone();
-		newProfile.Name = ProfileManager.GetNewProfileName();
+		var newProfile = _profileManager.CurrentProfile.Clone();
+		newProfile.Name = _profileManager.GetNewProfileName();
 		newProfile.LastEditDate = DateTime.Now;
 
 		if (!newProfile.Save())
@@ -68,9 +71,9 @@ public partial class PC_ProfileAdd : PanelContent
 			return;
 		}
 
-		ProfileManager.AddProfile(newProfile);
+		_profileManager.AddProfile(newProfile);
 
-		ProfileManager.SetProfile(newProfile);
+		_profileManager.SetProfile(newProfile);
 
 		var panel = new PC_Profile();
 
@@ -98,7 +101,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 	private void DAD_NewProfile_FileSelected(string obj)
 	{
-		var profile = ProfileManager.Profiles.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
+		var profile = _profileManager.Profiles.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(obj), StringComparison.InvariantCultureIgnoreCase));
 
 		if (obj.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
 		{
@@ -108,7 +111,7 @@ public partial class PC_ProfileAdd : PanelContent
 				return;
 			}
 
-			profile = ProfileManager.ConvertLegacyProfile(obj, false);
+			profile = _profileManager.ConvertLegacyProfile(obj, false);
 
 			if (profile is null)
 			{
@@ -118,7 +121,7 @@ public partial class PC_ProfileAdd : PanelContent
 		}
 		else if (profile is null)
 		{
-			profile = ProfileManager.ImportProfile(obj);
+			profile = _profileManager.ImportProfile(obj);
 		}
 
 		try
@@ -142,7 +145,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 		try
 		{
-			await ProfileManager.DownloadProfile(result.Input);
+			await _profileManager.DownloadProfile(result.Input);
 		}
 		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadProfile, form: Program.MainForm)); }
 	}

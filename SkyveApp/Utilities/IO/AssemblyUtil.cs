@@ -2,6 +2,8 @@ using Extensions;
 
 using Mono.Cecil;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,14 +11,25 @@ using System.Linq;
 using System.Reflection;
 
 namespace SkyveApp.Utilities.IO;
-public static class AssemblyUtil
+public class AssemblyUtil
 {
-	public static AssemblyDefinition? ReadAssemblyDefinition(string dllpath)
+	private readonly ILocationManager _locationManager;
+	private readonly IContentUtil _contentUtil;
+	private readonly ILogger _logger;
+
+	public AssemblyUtil(ILocationManager locationManager, IContentUtil contentUtil, ILogger logger)
+	{
+		_locationManager = locationManager;
+		_contentUtil = contentUtil;
+		_logger = logger;
+	}
+
+	public AssemblyDefinition? ReadAssemblyDefinition(string dllpath)
 	{
 		try
 		{
 			var r = new AssemblyResolver();
-			r.AddSearchDirectory(LocationManager.ManagedDLL);
+			r.AddSearchDirectory(_locationManager.ManagedDLL);
 			r.AddSearchDirectory(Path.GetDirectoryName(dllpath));
 			var readerParameters = new ReaderParameters
 			{
@@ -29,32 +42,32 @@ public static class AssemblyUtil
 
 			if (asm == null)
 			{
-				Log.Info("Assembly Definition at " + dllpath + " failed to load.", false);
+				_logger.Info("Assembly Definition at " + dllpath + " failed to load.");
 			}
 
 			return asm;
 		}
 		catch (Exception ex)
 		{
-			Log.Info("Assembly Definition at " + dllpath + " failed to load.\n" + ex.Message, false);
+			_logger.Info("Assembly Definition at " + dllpath + " failed to load.\n" + ex.Message);
 			return null;
 		}
 	}
 
-	public static bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
+	public bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
 	{
 		foreach (var path in dllPaths)
 		{
-			var cache = ContentUtil.GetDllModCache(path, out version);
+			var cache = _contentUtil.GetDllModCache(path, out version);
 
 			if (cache == true || (cache is null && CheckDllImplementsInterface(path, "ICities.IUserMod", out version)))
 			{
-				ContentUtil.SetDllModCache(path, true, version);
+				_contentUtil.SetDllModCache(path, true, version);
 				dllPath = path;
 				return true;
 			}
 
-			ContentUtil.SetDllModCache(path, false, null);
+			_contentUtil.SetDllModCache(path, false, null);
 		}
 
 		dllPath = null;
@@ -63,7 +76,7 @@ public static class AssemblyUtil
 		return false;
 	}
 
-	public static bool CheckDllImplementsInterface(string dllPath, string interfaceName, out Version? version)
+	public bool CheckDllImplementsInterface(string dllPath, string interfaceName, out Version? version)
 	{
 		version = null;
 
@@ -80,7 +93,7 @@ public static class AssemblyUtil
 			}
 
 			var asm = ReadAssemblyDefinition(dllPath);
-			var userMod = asm?.GetExportedImplementation(interfaceName);
+			var userMod = asm is null ? null : GetExportedImplementation(asm, interfaceName);
 
 			version = userMod?.Module?.Assembly?.Name?.Version;
 
@@ -91,18 +104,18 @@ public static class AssemblyUtil
 		return false;
 	}
 
-	public static TypeDefinition GetExportedImplementation(this AssemblyDefinition asm, string fullInterfaceName)
+	public TypeDefinition GetExportedImplementation(AssemblyDefinition asm, string fullInterfaceName)
 	{
 		return asm.MainModule.Types.FirstOrDefault(t =>
-			!t.IsAbstract && t.IsPublic && t.ImplementsInterface(fullInterfaceName));
+			!t.IsAbstract && t.IsPublic && ImplementsInterface(t, fullInterfaceName));
 	}
 
-	public static bool ImplementsInterface(this TypeDefinition type, string fullInterfaceName)
+	public bool ImplementsInterface(TypeDefinition type, string fullInterfaceName)
 	{
-		return type.GetAllInterfaces().Any(i => i.FullName == fullInterfaceName);
+		return GetAllInterfaces(type).Any(i => i.FullName == fullInterfaceName);
 	}
 
-	public static IEnumerable<TypeReference> GetAllInterfaces(this TypeDefinition? type)
+	public IEnumerable<TypeReference> GetAllInterfaces(TypeDefinition? type)
 	{
 		while (type != null)
 		{
@@ -121,13 +134,13 @@ public static class AssemblyUtil
 			}
 			catch (Exception ex)
 			{
-				ex.Log(false);
+				_logger.Exception(ex, "");
 				type = null;
 			}
 		}
 	}
 
-	public static byte[]? ReadBytesFromGetManifestResource(string name)
+	public byte[]? ReadBytesFromGetManifestResource(string name)
 	{
 		try
 		{
@@ -138,15 +151,15 @@ public static class AssemblyUtil
 		}
 		catch (Exception ex)
 		{
-			Log.Exception(ex);
+			_logger.Exception(ex, "");
 			return null;
 		}
 	}
 
-	internal static Assembly? ResolveInterface(object sender, ResolveEventArgs args)
+	internal Assembly? ResolveInterface(object sender, ResolveEventArgs args)
 	{
 		var name = new AssemblyName(args.Name).Name + ".dll";
-		var managedPath = CrossIO.Combine(LocationManager.ManagedDLL, name);
+		var managedPath = CrossIO.Combine(_locationManager.ManagedDLL, name);
 
 		if (File.Exists(managedPath))
 		{
@@ -156,11 +169,11 @@ public static class AssemblyUtil
 		return null;
 	}
 
-	internal static Assembly? ReflectionResolveInterface(object sender, ResolveEventArgs args)
+	internal Assembly? ReflectionResolveInterface(object sender, ResolveEventArgs args)
 	{
 		var name = new AssemblyName(args.Name).Name + ".dll";
 		var path = CrossIO.Combine(Directory.GetParent(args.RequestingAssembly.Location).FullName, name);
-		var managedPath = CrossIO.Combine(LocationManager.ManagedDLL, name);
+		var managedPath = CrossIO.Combine(_locationManager.ManagedDLL, name);
 
 		if (File.Exists(path))
 		{
@@ -175,7 +188,7 @@ public static class AssemblyUtil
 		return null;
 	}
 
-	internal static string[] kIgnoreAssemblies = new string[]
+	internal string[] kIgnoreAssemblies = new string[]
 	{
 		"2.5.29.31",
 		"2.5.29.32",
@@ -184,45 +197,4 @@ public static class AssemblyUtil
 		"1.3.6.1.5.5.7.1.1",
 		"MoneyPanel"
 	};
-
-	internal static Assembly? CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-	{
-		Log.Called();
-		var name0 = args.Name;
-		if (kIgnoreAssemblies.Contains(name0))
-		{
-			return null;
-		}
-
-		var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-		Assembly? ret = null;
-		foreach (var asm in assemblies)
-		{
-			var name = asm.GetName().Name;
-			if (name0.StartsWith(name))
-			{
-				// get latest assembly
-				if (ret == null || ret.GetName().Version < asm.GetName().Version)
-				{
-					ret = asm;
-				}
-			}
-		}
-		if (ret != null)
-		{
-			Log.Info($"Assembly '{name0}' resolved to '{ret}'", false);
-		}
-		else
-		{
-			if (name0 == "Mono.Runtime")
-			{
-				Log.Info($"[harmless] Assembly resolution failure. No assembly named '{name0}' was found.", false);
-			}
-			else
-			{
-				Log.Error($"Assembly resolution failure. No assembly named '{name0}' was found.");
-			}
-		}
-		return ret;
-	}
 }

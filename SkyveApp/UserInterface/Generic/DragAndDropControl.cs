@@ -118,9 +118,9 @@ internal class DragAndDropControl : SlickControl
 		{
 			if (CrossIO.CurrentPlatform is not Platform.Windows)
 			{
-				var realPath = IOUtil.ToRealPath(file);
+				var realPath = Program.Services.GetService<IOUtil>().ToRealPath(file);
 
-				if (ExtensionClass.FileExists(realPath))
+				if (CrossIO.FileExists(realPath))
 				{
 					file = realPath!;
 				}

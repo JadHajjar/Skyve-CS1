@@ -3,6 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -19,15 +20,20 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 
 	public IPackage Package { get; }
 
+	private readonly IProfileManager _profileManager;
+	private readonly ISettings _settings;
+
 	public OtherProfilePackage(IPackage package)
 	{
+		_profileManager = Program.Services.GetService<IProfileManager>();
+		_settings = Program.Services.GetService<ISettings>();
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		Package = package;
-		SetItems(ProfileManager.Profiles.Skip(1));
+		SetItems(_profileManager.Profiles.Skip(1));
 
-		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_profileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
+		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
 
 	private void ProfileManager_ProfileChanged(Profile obj)
@@ -44,8 +50,8 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 	{
 		if (disposing)
 		{
-			ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
-			ProfileManager.ProfileUpdated -= ProfileManager_ProfileUpdated;
+			_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+			_profileManager.ProfileUpdated -= ProfileManager_ProfileUpdated;
 		}
 
 		base.Dispose(disposing);
@@ -53,7 +59,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 
 	protected override void UIChanged()
 	{
-		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 48 : 28;
+		ItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? 48 : 28;
 
 		base.UIChanged();
 
@@ -93,13 +99,13 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = ProfileManager.IsPackageIncludedInProfile(Package, item.Item);
-			ProfileManager.SetIncludedFor(Package, item.Item, !isIncluded);
+			var isIncluded = _profileManager.IsPackageIncludedInProfile(Package, item.Item);
+			_profileManager.SetIncludedFor(Package, item.Item, !isIncluded);
 		}
 
 		if (rects.LoadRect.Contains(e.Location))
 		{
-			ProfileManager.SetProfile(item.Item);
+			_profileManager.SetProfile(item.Item);
 		}
 	}
 
@@ -125,7 +131,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<Profile, OtherProfilePackage.Rectangles> e)
 	{
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = e.Rects;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -133,7 +139,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 
 		base.OnPaintItemList(e);
 
-		var isIncluded = ProfileManager.IsPackageIncludedInProfile(Package, e.Item);
+		var isIncluded = _profileManager.IsPackageIncludedInProfile(Package, e.Item);
 
 		if (isIncluded)
 		{
@@ -167,7 +173,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		var rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Assets.Count, Locale.Asset.FormatPlural(e.Item.Assets.Count).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
 		rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Mods.Count, Locale.Mod.FormatPlural(e.Item.Mods.Count).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
 
-		if (e.Item == ProfileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentProfile)
 		{
 			DrawLabel(e, Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rects.TextRect.Right - rect.X + Padding.Left, 0), ContentAlignment.MiddleRight);
 		}
@@ -189,7 +195,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 			return Rectangle.Empty;
 		}
 
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)

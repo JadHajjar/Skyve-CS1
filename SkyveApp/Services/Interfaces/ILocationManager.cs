@@ -30,4 +30,5 @@ public interface ILocationManager
 
 	void CreateShortcut();
 	void RunFirstTimeSetup();
+	void SetPaths(string gamePath, string appDataPath, string steamPath);
 }

@@ -37,7 +37,7 @@ public class CompatibilityManager : ICompatibilityManager
 
     public event Action? ReportProcessed;
 
-	CompatibilityManager(ServiceCollection services, IContentManager contentManager, ILogger logger, INotifier notifier)
+	public CompatibilityManager(ServiceCollection services, IContentManager contentManager, ILogger logger, INotifier notifier)
 	{
         _services = services;
 		_contentManager = contentManager;

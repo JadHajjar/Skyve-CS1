@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain.Steam.Markdown;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using SlickControls;
 
@@ -30,9 +31,11 @@ internal class SteamDescriptionViewer : SlickControl
 		{
 			new BackgroundAction(() =>
 			{
+				var imageManager = Program.Services.GetService<IImageManager>();
+
 				Parallelism.ForEach(images, async image =>
 				{
-					await ImageManager.Ensure(image, false, BBCode.EscapeImageUrl(image), false);
+					await imageManager.Ensure(image, false, BBCode.EscapeImageUrl(image), false);
 				});
 			}).Run();
 		}

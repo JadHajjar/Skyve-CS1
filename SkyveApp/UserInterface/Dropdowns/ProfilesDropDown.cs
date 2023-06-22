@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -21,7 +22,7 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 
 		if (Live)
 		{
-			Items = ProfileManager.Profiles.ToArray();
+			Items = Program.Services.GetService<IProfileManager>().Profiles.ToArray();
 
 			selectedItem = Items[0];
 		}

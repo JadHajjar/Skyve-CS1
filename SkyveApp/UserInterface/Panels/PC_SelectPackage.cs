@@ -3,6 +3,7 @@
 using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
@@ -251,11 +252,12 @@ public partial class PC_SelectPackage : PanelContent
 
 		new BackgroundAction(() =>
 		{
+			var manager = Program.Services.GetService<IImageManager>();
 			Parallelism.ForEach(LC_Items.Items.ToList(), async package =>
 			{
 				if (!string.IsNullOrWhiteSpace(package.IconUrl))
 				{
-					if (await ImageManager.Ensure(package.IconUrl))
+					if (await manager.Ensure(package.IconUrl))
 					{
 						LC_Items.Invalidate(package);
 					}
@@ -263,7 +265,7 @@ public partial class PC_SelectPackage : PanelContent
 
 				if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
 				{
-					if (await ImageManager.Ensure(package.Author?.AvatarUrl))
+					if (await manager.Ensure(package.Author?.AvatarUrl))
 					{
 						LC_Items.Invalidate(package);
 					}

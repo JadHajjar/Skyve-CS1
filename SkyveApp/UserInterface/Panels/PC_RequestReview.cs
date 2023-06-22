@@ -5,6 +5,7 @@ using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.Utilities;
 
@@ -31,7 +32,7 @@ public partial class PC_RequestReview : PanelContent
 
 		PB_Icon.Package = CurrentPackage;
 		PB_Icon.Image = null;
-		PB_Icon.LoadImage(CurrentPackage.IconUrl, ImageManager.GetImage);
+		PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageManager>().GetImage);
 		P_Info.SetPackage(CurrentPackage, null);
 	}
 
@@ -157,7 +158,7 @@ public partial class PC_RequestReview : PanelContent
 		{
 			using var stream = new MemoryStream();
 
-			LogUtil.CreateZipToStream(stream);
+			Program.Services.GetService<ILogUtil>().CreateZipToStream(stream);
 
 			return stream.ToArray();
 		});

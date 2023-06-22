@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
 
@@ -18,17 +19,21 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc, DlcListControl
 {
 	public IEnumerable<SteamDlc> FilteredItems => SafeGetItems().Select(x => x.Item);
 
+	private readonly ISettings _settings;
+
 	public DlcListControl()
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;
+
+		_settings = Program.Services.GetService<ISettings>();
 
 		Loading = SteamUtil.Dlcs.Count == 0;
 	}
 
 	protected override void UIChanged()
 	{
-		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 76 : 46;
+		ItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? 76 : 46;
 
 		base.UIChanged();
 
@@ -79,7 +84,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc, DlcListControl
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<SteamDlc, Rectangles> e)
 	{
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = e.Rects;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -133,7 +138,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc, DlcListControl
 
 		if (e.Item.ReleaseDate != DateTime.MinValue)
 		{
-			DrawLabel(e, CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.TopRight);
+			DrawLabel(e, _settings.SessionSettings.UserSettings.ShowDatesRelatively ? e.Item.ReleaseDate.ToLocalTime().ToRelatedString(true, false) : e.Item.ReleaseDate.ToString("D"), IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.TopRight);
 		}
 
 		using (var steamIcon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height / 2))
@@ -156,7 +161,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc, DlcListControl
 			return Rectangle.Empty;
 		}
 
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)
@@ -184,7 +189,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc, DlcListControl
 
 	protected override Rectangles GenerateRectangles(SteamDlc item, Rectangle rectangle)
 	{
-		var includeItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var includeItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
 		var iconSize = rectangle.Height - Padding.Vertical;
 		var rects = new Rectangles(item)
 		{

@@ -539,7 +539,7 @@ internal class ContentUtil : IContentUtil
 		_notifier.OnInformationUpdated();
 		_modUtil.SavePendingValues();
 		_assetUtil.SaveChanges();
-		_profileManager.TriggerAutoSave();
+		_notifier.TriggerAutoSave();
 
 		IEnumerable<IPackage> getPackageContents(Package package)
 		{

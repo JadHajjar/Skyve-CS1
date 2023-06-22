@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain.Enums;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 
 using SlickControls;
 
@@ -20,7 +21,7 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		if (Live)
 		{
 			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => x < PackageSorting.Mod).ToArray();
-			selectedItem = CentralManager.SessionSettings.UserSettings.PackageSorting;
+			selectedItem = Program.Services.GetService<ISettings>().SessionSettings.UserSettings.PackageSorting;
 		}
 	}
 

@@ -24,13 +24,11 @@ public class AssetsUtil : IAssetUtil
 	public Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
 
 	private readonly IContentManager _contentManager;
-	private readonly IProfileManager _profileManager;
 	private readonly INotifier _notifier;
 
-	public AssetsUtil(IContentManager contentManager, IProfileManager profileManager, INotifier notifier)
+	public AssetsUtil(IContentManager contentManager, INotifier notifier)
 	{
 		_contentManager = contentManager;
-		_profileManager = profileManager;
 		_notifier = notifier;
 
 		AssetInfoCache = new(StringComparer.InvariantCultureIgnoreCase);
@@ -94,14 +92,14 @@ public class AssetsUtil : IAssetUtil
 		}
 
 		_notifier.OnInclusionUpdated();
-		_profileManager.TriggerAutoSave();
+		_notifier.TriggerAutoSave();
 
 		SaveChanges();
 	}
 
 	public void SaveChanges()
 	{
-		if (_profileManager.ApplyingProfile || _notifier.BulkUpdating)
+		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
 		{
 			return;
 		}
@@ -157,7 +155,7 @@ public class AssetsUtil : IAssetUtil
 	{
 		_config.RemovedDLCs = dlc;
 
-		_profileManager.TriggerAutoSave();
+		_notifier.TriggerAutoSave();
 		SaveChanges();
 	}
 
@@ -176,7 +174,7 @@ public class AssetsUtil : IAssetUtil
 
 		_config.RemovedDLCs = list.ToArray();
 
-		_profileManager.TriggerAutoSave();
+		_notifier.TriggerAutoSave();
 		SaveChanges();
 	}
 

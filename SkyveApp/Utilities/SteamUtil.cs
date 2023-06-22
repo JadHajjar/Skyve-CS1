@@ -101,7 +101,7 @@ public static class SteamUtil
 
 	public static void Download(IEnumerable<IPackage> packages)
 	{
-		var currentPath = IOUtil.ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
+		var currentPath = Program.Services.GetService<IOUtil>().ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
 
 		if (packages.Any(x => x.Folder.PathEquals(currentPath)))
 		{
@@ -110,7 +110,7 @@ public static class SteamUtil
 				return;
 			}
 
-			IOUtil.WaitForUpdate();
+			Program.Services.GetService<IOUtil>().WaitForUpdate();
 
 			Application.Exit();
 		}
@@ -219,7 +219,7 @@ public static class SteamUtil
 			}
 		}
 
-		IOUtil.Execute(file, args);
+		Program.Services.GetService<IOUtil>().Execute(file, args);
 	}
 
 	internal static async Task<Dictionary<ulong, SteamUser>> GetSteamUsersAsync(List<ulong> steamId64s)
@@ -456,7 +456,7 @@ public static class SteamUtil
 
 		DLCsLoaded?.Invoke();
 
-		Program.Services.GetService<AssetsUtil>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
+		Program.Services.GetService<IAssetUtil>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
 
 		foreach (var dlc in Dlcs)
 		{

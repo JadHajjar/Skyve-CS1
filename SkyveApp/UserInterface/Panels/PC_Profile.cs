@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -21,6 +22,14 @@ public partial class PC_Profile : PanelContent
 {
 	private bool loadingProfile;
 	private readonly SlickCheckbox[] _launchOptions;
+
+	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly ILocationManager _locationManager = Program.Services.GetService<ILocationManager>();
+	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
+	private readonly IContentUtil _contentUtil = Program.Services.GetService<IContentUtil>();
+	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
+	private readonly IOUtil _iOUtil = Program.Services.GetService<IOUtil>();
+
 	public PC_Profile()
 	{
 		InitializeComponent();
@@ -42,41 +51,41 @@ public partial class PC_Profile : PanelContent
 			}
 		}
 
-		LoadProfile(CentralManager.CurrentProfile);
+		LoadProfile(_profileManager.CurrentProfile);
 
-		DD_SaveFile.StartingFolder = CrossIO.Combine(LocationManager.AppDataPath, "Saves");
+		DD_SaveFile.StartingFolder = CrossIO.Combine(_locationManager.AppDataPath, "Saves");
 		DD_SaveFile.PinnedFolders = new()
 		{
-			["Your Save-games"] = CrossIO.Combine(LocationManager.AppDataPath, "Saves"),
+			["Your Save-games"] = CrossIO.Combine(_locationManager.AppDataPath, "Saves"),
 			["Workshop Save-games"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_SaveFile.CustomFiles = CentralManager.Assets.Where(x => x.Workshop && (x.Package.WorkshopTags?.Contains("SaveGame") ?? false)).Select(x => new IOSelectionDialog.CustomFile
+		DD_SaveFile.CustomFiles = _contentManager.Assets.Where(x => x.Workshop && (x.Package.WorkshopTags?.Contains("SaveGame") ?? false)).Select(x => new IOSelectionDialog.CustomFile
 		{
 			Name = x.Package.Name,
 			Icon = x.IconImage,
 			Path = x.FileName
 		}).ToList();
 
-		DD_SkipFile.StartingFolder = LocationManager.AppDataPath;
-		DD_SkipFile.PinnedFolders = new() { ["App Data"] = LocationManager.AppDataPath };
+		DD_SkipFile.StartingFolder = _locationManager.AppDataPath;
+		DD_SkipFile.PinnedFolders = new() { ["App Data"] = _locationManager.AppDataPath };
 
-		DD_NewMap.StartingFolder = LocationManager.MapsPath;
+		DD_NewMap.StartingFolder = _locationManager.MapsPath;
 		DD_NewMap.PinnedFolders = new()
 		{
-			["Custom Maps"] = LocationManager.MapsPath,
-			["Vanilla Maps"] = CrossIO.Combine(LocationManager.GameContentPath, "Maps"),
+			["Custom Maps"] = _locationManager.MapsPath,
+			["Vanilla Maps"] = CrossIO.Combine(_locationManager.GameContentPath, "Maps"),
 			["Workshop Maps"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_NewMap.CustomFiles = CentralManager.Assets.Where(x => x.Workshop && (x.AssetTags.Contains("Map") || (x.Package.WorkshopTags?.Contains("Map") ?? false))).Select(x => new IOSelectionDialog.CustomFile
+		DD_NewMap.CustomFiles = _contentManager.Assets.Where(x => x.Workshop && (x.AssetTags.Contains("Map") || (x.Package.WorkshopTags?.Contains("Map") ?? false))).Select(x => new IOSelectionDialog.CustomFile
 		{
 			Name = x.Package.Name,
 			Icon = x.IconImage,
 			Path = x.FileName
 		}).ToList();
 
-		TLP_AdvancedDev.Visible = CentralManager.SessionSettings.UserSettings.AdvancedLaunchOptions;
+		TLP_AdvancedDev.Visible = _settings.SessionSettings.UserSettings.AdvancedLaunchOptions;
 
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
 
 	private void ProfileManager_ProfileChanged(Profile p)
@@ -146,7 +155,7 @@ public partial class PC_Profile : PanelContent
 		I_ProfileIcon.Loading = true;
 		L_CurrentProfile.Text = obj.Name;
 		TLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
-		ProfileManager.SetProfile(obj);
+		_profileManager.SetProfile(obj);
 	}
 
 	private void LoadProfile(Profile profile)
@@ -231,32 +240,32 @@ public partial class PC_Profile : PanelContent
 			}
 		}
 
-		CentralManager.CurrentProfile.AutoSave = CB_AutoSave.Checked;
-		CentralManager.CurrentProfile.Usage = DD_ProfileUsage.SelectedItem;
+		_profileManager.CurrentProfile.AutoSave = CB_AutoSave.Checked;
+		_profileManager.CurrentProfile.Usage = DD_ProfileUsage.SelectedItem;
 
-		CentralManager.CurrentProfile.LaunchSettings.NoWorkshop = CB_NoWorkshop.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.NoAssets = CB_NoAssets.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.NoMods = CB_NoMods.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.LHT = CB_LHT.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.StartNewGame = CB_StartNewGame.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.MapToLoad = IOUtil.ToRealPath(DD_NewMap.SelectedFile);
-		CentralManager.CurrentProfile.LaunchSettings.SaveToLoad = IOUtil.ToRealPath(DD_SaveFile.SelectedFile);
-		CentralManager.CurrentProfile.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.DebugMono = CB_DebugMono.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.DevUi = CB_DevUI.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.CustomArgs = TB_CustomArgs.Text;
-		CentralManager.CurrentProfile.LaunchSettings.NewAsset = CB_NewAsset.Checked;
-		CentralManager.CurrentProfile.LaunchSettings.LoadAsset = CB_LoadAsset.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.NoWorkshop = CB_NoWorkshop.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.NoAssets = CB_NoAssets.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.NoMods = CB_NoMods.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.LHT = CB_LHT.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.StartNewGame = CB_StartNewGame.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.MapToLoad = _iOUtil.ToRealPath(DD_NewMap.SelectedFile);
+		_profileManager.CurrentProfile.LaunchSettings.SaveToLoad = _iOUtil.ToRealPath(DD_SaveFile.SelectedFile);
+		_profileManager.CurrentProfile.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.DebugMono = CB_DebugMono.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.DevUi = CB_DevUI.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.CustomArgs = TB_CustomArgs.Text;
+		_profileManager.CurrentProfile.LaunchSettings.NewAsset = CB_NewAsset.Checked;
+		_profileManager.CurrentProfile.LaunchSettings.LoadAsset = CB_LoadAsset.Checked;
 
-		CentralManager.CurrentProfile.LsmSettings.SkipFile = IOUtil.ToRealPath(DD_SkipFile.SelectedFile);
-		CentralManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
-		CentralManager.CurrentProfile.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
-		CentralManager.CurrentProfile.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
+		_profileManager.CurrentProfile.LsmSettings.SkipFile = _iOUtil.ToRealPath(DD_SkipFile.SelectedFile);
+		_profileManager.CurrentProfile.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
+		_profileManager.CurrentProfile.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
+		_profileManager.CurrentProfile.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
 
-		ProfileManager.Save(CentralManager.CurrentProfile);
+		_profileManager.Save(_profileManager.CurrentProfile);
 	}
 
 	private void B_LoadProfiles_Click(object sender, EventArgs e)
@@ -333,19 +342,19 @@ public partial class PC_Profile : PanelContent
 			return;
 		}
 
-		if (!ProfileManager.RenameProfile(ProfileManager.CurrentProfile, TB_Name.Text))
+		if (!_profileManager.RenameProfile(_profileManager.CurrentProfile, TB_Name.Text))
 		{
 			TB_Name.SetError();
 			return;
 		}
 
-		if (ProfileManager.CurrentProfile.Name != TB_Name.Text)
+		if (_profileManager.CurrentProfile.Name != TB_Name.Text)
 		{
 			Notification.Create(Locale.ProfileNameChangedIllegalChars, null, PromptIcons.Info, null)
 				.Show(Form, 15);
 		}
 
-		L_CurrentProfile.Text = ProfileManager.CurrentProfile.Name;
+		L_CurrentProfile.Text = _profileManager.CurrentProfile.Name;
 		TB_Name.Visible = false;
 		B_EditName.Visible = B_Save.Visible = true;
 		L_CurrentProfile.Visible = true;
@@ -358,7 +367,7 @@ public partial class PC_Profile : PanelContent
 			return;
 		}
 
-		var invalidPackages = ProfileManager.GetInvalidPackages(DD_ProfileUsage.SelectedItem);
+		var invalidPackages = _profileManager.GetInvalidPackages(DD_ProfileUsage.SelectedItem);
 
 		if (invalidPackages.Any())
 		{
@@ -369,12 +378,12 @@ public partial class PC_Profile : PanelContent
 				return;
 			}
 
-			ContentUtil.SetBulkIncluded(invalidPackages, false);
+			_contentUtil.SetBulkIncluded(invalidPackages, false);
 		}
 
 		ValueChanged(sender, e);
 
-		I_ProfileIcon.Image = CentralManager.CurrentProfile.GetIcon();
+		I_ProfileIcon.Image = _profileManager.CurrentProfile.GetIcon();
 	}
 
 	private void LsmSettingsChanged(object sender, EventArgs e)
@@ -386,12 +395,12 @@ public partial class PC_Profile : PanelContent
 
 		ValueChanged(sender, e);
 
-		ProfileManager.SaveLsmSettings(ProfileManager.CurrentProfile);
+		_profileManager.SaveLsmSettings(_profileManager.CurrentProfile);
 	}
 
 	private void B_Save_Click(object sender, EventArgs e)
 	{
-		if (ProfileManager.CurrentProfile.Save())
+		if (_profileManager.CurrentProfile.Save())
 		{
 			B_Save.ImageName = "I_Check";
 
@@ -408,7 +417,7 @@ public partial class PC_Profile : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		ProfileManager.SetProfile(Profile.TemporaryProfile);
+		_profileManager.SetProfile(Profile.TemporaryProfile);
 	}
 
 	private void DD_SaveFile_FileSelected(string obj)
@@ -436,12 +445,12 @@ public partial class PC_Profile : PanelContent
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
 	{
-		if (ProfileManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentProfile.Temporary)
 		{
 			return;
 		}
 
-		var colorDialog = new SlickColorPicker(ProfileManager.CurrentProfile.Color ?? Color.Red);
+		var colorDialog = new SlickColorPicker(_profileManager.CurrentProfile.Color ?? Color.Red);
 
 		if (colorDialog.ShowDialog() != DialogResult.OK)
 		{
@@ -450,21 +459,21 @@ public partial class PC_Profile : PanelContent
 
 		TLP_ProfileName.BackColor = colorDialog.Color;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
-		ProfileManager.CurrentProfile.Color = colorDialog.Color;
-		ProfileManager.Save(ProfileManager.CurrentProfile);
+		_profileManager.CurrentProfile.Color = colorDialog.Color;
+		_profileManager.Save(_profileManager.CurrentProfile);
 	}
 
 	private void I_Favorite_Click(object sender, EventArgs e)
 	{
-		if (ProfileManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentProfile.Temporary)
 		{
 			return;
 		}
 
-		ProfileManager.CurrentProfile.IsFavorite = !ProfileManager.CurrentProfile.IsFavorite;
-		ProfileManager.Save(ProfileManager.CurrentProfile);
+		_profileManager.CurrentProfile.IsFavorite = !_profileManager.CurrentProfile.IsFavorite;
+		_profileManager.Save(_profileManager.CurrentProfile);
 
-		I_Favorite.ImageName = ProfileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
-		SlickTip.SetTo(I_Favorite, ProfileManager.CurrentProfile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		I_Favorite.ImageName = _profileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
+		SlickTip.SetTo(I_Favorite, _profileManager.CurrentProfile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
 	}
 }

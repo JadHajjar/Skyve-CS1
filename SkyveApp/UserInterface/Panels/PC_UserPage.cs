@@ -5,6 +5,7 @@ using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
@@ -40,7 +41,7 @@ public partial class PC_UserPage : PanelContent
 
 		if (User is not null)
 		{
-			PB_Icon.LoadImage(User.AvatarUrl, ImageManager.GetImage);
+			PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageManager>().GetImage);
 			P_Info.SetUser(User, this);
 		}
 
@@ -65,7 +66,7 @@ public partial class PC_UserPage : PanelContent
 
 			if (User is not null)
 			{
-				PB_Icon.LoadImage(User.AvatarUrl, ImageManager.GetImage);
+				PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageManager>().GetImage);
 				P_Info.SetUser(User, this);
 			}
 		}
@@ -115,12 +116,6 @@ public partial class PC_UserPage : PanelContent
 		tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Packages).ToArray();
 	}
 
-	private void CentralManager_PackageInformationUpdated()
-	{
-		P_Info.Invalidate();
-		LC_Items?.Invalidate();
-	}
-
 	protected override void UIChanged()
 	{
 		base.UIChanged();
@@ -145,24 +140,28 @@ public partial class PC_UserPage : PanelContent
 	{
 		var isPackageIncluded = item.IsIncluded;
 		var isInstalled = item.Package is not null;
+		var contentUtil = Program.Services.GetService<IContentUtil>();
+		var subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+		var compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		var profileManager = Program.Services.GetService<IProfileManager>();
 
 		return new SlickStripItem[]
 		{
 			  new (Locale.IncludeAllItemsInThisPackage, "I_Ok", !isPackageIncluded && isInstalled, action: () => { item.Package!.IsIncluded = true; })
 			, new (Locale.ExcludeAllItemsInThisPackage, "I_Cancel", isPackageIncluded && isInstalled, action: () => { item.Package!.IsIncluded = false; })
 			, new (isInstalled? Locale.ReDownloadPackage:Locale.DownloadPackage, "I_Install", SteamUtil.IsSteamAvailable(), action: () => Redownload(item))
-			, new (Locale.MovePackageToLocalFolder, "I_PC", isInstalled && item.Workshop, action: () => ContentUtil.MoveToLocalFolder(item))
+			, new (Locale.MovePackageToLocalFolder, "I_PC", isInstalled && item.Workshop, action: () => contentUtil.MoveToLocalFolder(item))
 			, new (string.Empty)
 			, new (!item.Workshop && item is Asset ? Locale.DeleteAsset : Locale.DeletePackage, "I_Disposable", isInstalled && !(item.Package?.BuiltIn ?? false), action: () => AskThenDelete(item))
-			, new (Locale.UnsubscribePackage, "I_Steam", isInstalled && item.Workshop && !(item.Package?.BuiltIn ?? false), action: () => SubscriptionsManager.UnSubscribe(new[] { item.SteamId }))
-			, new (Locale.SubscribeToItem, "I_Steam", !isInstalled && item.Workshop, action: () => SubscriptionsManager.Subscribe(new[] { item.SteamId }))
+			, new (Locale.UnsubscribePackage, "I_Steam", isInstalled && item.Workshop && !(item.Package?.BuiltIn ?? false), action: () => subscriptionsManager.UnSubscribe(new[] { item.SteamId }))
+			, new (Locale.SubscribeToItem, "I_Steam", !isInstalled && item.Workshop, action: () => subscriptionsManager.Subscribe(new[] { item.SteamId }))
 			, new (string.Empty)
-			, new (Locale.EditCompatibility, "I_CompatibilityReport", CompatibilityManager.User.Manager || item.Author?.SteamId == CompatibilityManager.User.SteamId , action: ()=>{ Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(new[]{item.SteamId}));})
+			, new (Locale.EditCompatibility, "I_CompatibilityReport", compatibilityManager.User.Manager || item.Author?.SteamId == compatibilityManager.User.SteamId , action: ()=>{ Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(new[]{item.SteamId}));})
 			, new (string.Empty)
 			, new (Locale.EditTags, "I_Tag", isInstalled, action: () => EditTags(item))
 			, new (Locale.OtherProfiles, "I_ProfileSettings", fade: true)
-			, new (Locale.IncludeThisItemInAllProfiles, "I_Ok", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; })
-			, new (Locale.ExcludeThisItemInAllProfiles, "I_Cancel", tab: 1, action: () => { new BackgroundAction(() => ProfileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; })
+			, new (Locale.IncludeThisItemInAllProfiles, "I_Ok", tab: 1, action: () => { new BackgroundAction(() => profileManager.SetIncludedForAll(item, true)).Run(); item.IsIncluded = true; })
+			, new (Locale.ExcludeThisItemInAllProfiles, "I_Cancel", tab: 1, action: () => { new BackgroundAction(() => profileManager.SetIncludedForAll(item, false)).Run(); item.IsIncluded = false; })
 			, new (Locale.Copy, "I_Copy", item.Workshop, fade: true)
 			, new (Locale.CopyPackageName, item.Workshop ? null : "I_Copy", tab: item.Workshop ? 1 : 0, action: () => Clipboard.SetText(item.ToString()))
 			, new (Locale.CopyWorkshopLink, null, item.Workshop, tab: 1, action: () => Clipboard.SetText($"https://steamcommunity.com/workshop/filedetails?id={item.SteamId}"))
@@ -170,7 +169,7 @@ public partial class PC_UserPage : PanelContent
 			, new (string.Empty, show: item.Workshop, tab: 1)
 			, new (Locale.CopyAuthorName, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.Name))
 			, new (Locale.CopyAuthorLink, null, item.Workshop, tab: 1, action: () => Clipboard.SetText($"{item.Author?.ProfileUrl}myworkshopfiles"))
-			, new (Locale.CopyAuthorId, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.ProfileUrl.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()))
+			, new (Locale.CopyAuthorId, null, item.Workshop, tab: 1, action: () => Clipboard.SetText(item.Author?.ProfileUrl?.Split(new[] { '\\', '/' }, StringSplitOptions.RemoveEmptyEntries).Last()))
 			, new (Locale.CopyAuthorSteamId, null, item.Workshop, tab: 1,  action: () => Clipboard.SetText(item.Author?.SteamId.ToString()))
 		};
 	}
@@ -197,11 +196,11 @@ public partial class PC_UserPage : PanelContent
 			{
 				if (!item.Workshop && item is Asset asset)
 				{
-					ExtensionClass.DeleteFile(asset.FileName);
+					CrossIO.DeleteFile(asset.FileName);
 				}
 				else
 				{
-					ContentUtil.DeleteAll(item.Folder);
+					Program.Services.GetService<IContentUtil>().DeleteAll(item.Folder);
 				}
 			}
 			catch (Exception ex) { MessagePrompt.Show(ex, Locale.FailedToDeleteItem); }

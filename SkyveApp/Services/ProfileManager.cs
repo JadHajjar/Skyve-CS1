@@ -28,7 +28,6 @@ public class ProfileManager : IProfileManager
     private bool disableAutoSave;
     private readonly FileSystemWatcher? _watcher;
 
-    public bool ApplyingProfile { get; private set; }
     public Profile CurrentProfile { get; private set; }
     public IEnumerable<Profile> Profiles
     {
@@ -49,8 +48,6 @@ public class ProfileManager : IProfileManager
             }
         }
     }
-
-    public bool ProfilesLoaded { get; private set; }
 
     public event Action<Profile>? ProfileChanged;
 
@@ -112,6 +109,8 @@ public class ProfileManager : IProfileManager
 			new BackgroundAction(ConvertLegacyProfiles).Run();
 			new BackgroundAction(LoadAllProfiles).Run();
 		}
+
+        _notifier.AutoSaveRequested += OnAutoSave;
 	}
 
 	private Profile? LoadCurrentProfile()
@@ -185,7 +184,7 @@ public class ProfileManager : IProfileManager
         }
     }
 
-    internal Profile? ConvertLegacyProfile(string profilePath, bool removeLegacyFile = true)
+    public Profile? ConvertLegacyProfile(string profilePath, bool removeLegacyFile = true)
     {
         var legacyProfilePath = CrossIO.Combine(_locationManager.AppDataPath, "LoadOrder", "LOMProfiles");
         var legacyProfile = LoadOrderTool.Legacy.LoadOrderProfile.Deserialize(profilePath);
@@ -260,7 +259,7 @@ public class ProfileManager : IProfileManager
                 var missingMods = new List<Profile.Mod>();
                 var missingAssets = new List<Profile.Asset>();
 
-                ApplyingProfile = true;
+                _notifier.ApplyingProfile = true;
 
                 foreach (var mod in profile.Mods)
                 {
@@ -300,7 +299,7 @@ public class ProfileManager : IProfileManager
                     UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
                 }
 
-                ApplyingProfile = false;
+				_notifier.ApplyingProfile = false;
                 disableAutoSave = true;
 
                 _modUtil.SavePendingValues();
@@ -310,7 +309,7 @@ public class ProfileManager : IProfileManager
 
                 ProfileChanged?.Invoke(CurrentProfile);
 
-                TriggerAutoSave();
+                OnAutoSave();
             }
             catch (Exception ex)
             {
@@ -318,7 +317,7 @@ public class ProfileManager : IProfileManager
             }
             finally
             {
-                ApplyingProfile = false;
+				_notifier.ApplyingProfile = false;
                 disableAutoSave = false;
             }
         }
@@ -337,7 +336,7 @@ public class ProfileManager : IProfileManager
                 var missingMods = new List<Profile.Mod>();
                 var missingAssets = new List<Profile.Asset>();
 
-                ApplyingProfile = true;
+                _notifier.ApplyingProfile = true;
 
                 foreach (var mod in profile.Mods)
                 {
@@ -360,7 +359,7 @@ public class ProfileManager : IProfileManager
                     }
                 }
 
-                ApplyingProfile = false;
+                _notifier.ApplyingProfile = false;
                 disableAutoSave = true;
 
 				_modUtil.SavePendingValues();
@@ -370,7 +369,7 @@ public class ProfileManager : IProfileManager
 
                 ProfileChanged?.Invoke(CurrentProfile);
 
-                TriggerAutoSave();
+                OnAutoSave();
             }
             catch (Exception ex)
             {
@@ -378,7 +377,7 @@ public class ProfileManager : IProfileManager
             }
             finally
             {
-                ApplyingProfile = false;
+                _notifier.ApplyingProfile = false;
                 disableAutoSave = false;
             }
         }
@@ -433,7 +432,7 @@ public class ProfileManager : IProfileManager
                 var missingMods = new List<Profile.Mod>();
                 var missingAssets = new List<Profile.Asset>();
 
-                ApplyingProfile = true;
+                _notifier.ApplyingProfile = true;
 
                 foreach (var mod in profile.Mods)
                 {
@@ -493,7 +492,7 @@ public class ProfileManager : IProfileManager
 
 				_assetUtil.SetDlcsExcluded(profile.ExcludedDLCs.ToArray());
 
-                ApplyingProfile = false;
+                _notifier.ApplyingProfile = false;
                 disableAutoSave = true;
 
 				_modUtil.SavePendingValues();
@@ -524,18 +523,18 @@ public class ProfileManager : IProfileManager
             }
             finally
             {
-                ApplyingProfile = false;
+                _notifier.ApplyingProfile = false;
                 disableAutoSave = false;
             }
         }
     }
 
-	public void TriggerAutoSave()
+	public void OnAutoSave()
     {
-        if (!disableAutoSave && !ApplyingProfile && _notifier.IsContentLoaded && !_notifier.BulkUpdating)
+        if (!disableAutoSave && !_notifier.ApplyingProfile && _notifier.IsContentLoaded && !_notifier.BulkUpdating)
         {
-            Task.Run(() =>
-            {
+           // Task.Run(() =>
+            //{
                 if (CurrentProfile.AutoSave)
                 {
                     CurrentProfile.Save();
@@ -545,7 +544,7 @@ public class ProfileManager : IProfileManager
                     CurrentProfile.UnsavedChanges = true;
                     Save(CurrentProfile);
                 }
-            });
+          //  });
         }
     }
 
@@ -593,7 +592,7 @@ public class ProfileManager : IProfileManager
 
 		_notifier.ContentLoaded += CentralManager_ContentLoaded;
 
-        ProfilesLoaded = true;
+		_notifier.ProfilesLoaded = true;
 
         ProfileUpdated?.Invoke();
 
@@ -726,12 +725,12 @@ public class ProfileManager : IProfileManager
         return false;
     }
 
-    internal Mod GetMod(Profile.Mod mod)
+    public Mod GetMod(Profile.Mod mod)
     {
         return _modUtil.FindMod(ToLocalPath(mod.RelativePath));
     }
 
-    internal Asset GetAsset(Profile.Asset asset)
+	public Asset GetAsset(Profile.Asset asset)
     {
         return _assetUtil.GetAsset(ToLocalPath(asset.RelativePath));
     }
@@ -764,7 +763,7 @@ public class ProfileManager : IProfileManager
             .FormatPath();
     }
 
-    internal bool RenameProfile(Profile profile, string text)
+    public bool RenameProfile(Profile profile, string text)
     {
         if (profile == null || profile.Temporary)
         {
@@ -810,7 +809,7 @@ public class ProfileManager : IProfileManager
         return true;
     }
 
-    internal string GetNewProfileName()
+    public string GetNewProfileName()
     {
         var startName = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, "New Profile.json");
 
@@ -836,7 +835,7 @@ public class ProfileManager : IProfileManager
         return Path.GetFileNameWithoutExtension(startName);
     }
 
-    internal List<Package> GetInvalidPackages(PackageUsage usage)
+    public List<Package> GetInvalidPackages(PackageUsage usage)
     {
         if ((int)usage == -1)
         {
@@ -878,7 +877,7 @@ public class ProfileManager : IProfileManager
         current.SyncAndSerialize();
     }
 
-    internal void AddProfile(Profile newProfile)
+    public void AddProfile(Profile newProfile)
     {
         lock (_profiles)
         {
@@ -888,7 +887,7 @@ public class ProfileManager : IProfileManager
         ProfileUpdated?.Invoke();
     }
 
-    internal Profile? ImportProfile(string obj)
+	public Profile? ImportProfile(string obj)
     {
         if (_watcher is not null)
         {
@@ -938,7 +937,7 @@ public class ProfileManager : IProfileManager
         return null;
     }
 
-    internal void SetIncludedForAll<T>(T item, bool value) where T : IPackage
+    public void SetIncludedForAll<T>(T item, bool value) where T : IPackage
     {
         try
         {
@@ -1067,7 +1066,7 @@ public class ProfileManager : IProfileManager
         Save(profile);
     }
 
-    internal bool IsPackageIncludedInProfile(IPackage ipackage, Profile profile)
+    public bool IsPackageIncludedInProfile(IPackage ipackage, Profile profile)
     {
         if (ipackage is Package package)
         {
@@ -1103,7 +1102,7 @@ public class ProfileManager : IProfileManager
         return true;
     }
 
-    internal void SetIncludedFor(IPackage ipackage, Profile profile, bool value)
+    public void SetIncludedFor(IPackage ipackage, Profile profile, bool value)
     {
         if (ipackage is Package package)
         {

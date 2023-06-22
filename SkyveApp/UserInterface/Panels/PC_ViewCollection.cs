@@ -1,6 +1,7 @@
 ﻿using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -27,7 +28,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 		{
 			Collection = true
 		};
-		PB_Icon.LoadImage(collection.IconUrl, ImageManager.GetImage);
+		PB_Icon.LoadImage(collection.IconUrl, Program.Services.GetService<IImageManager>().GetImage);
 
 		TLP_Main.Controls.Add(PB_Icon, 0, 0);
 		TLP_Main.SetRowSpan(PB_Icon, 3);

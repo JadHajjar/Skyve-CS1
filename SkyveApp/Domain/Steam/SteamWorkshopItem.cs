@@ -43,8 +43,8 @@ public class SteamWorkshopItem : IPackage, ITimestamped
 	[JsonIgnore] public string? Name => Title;
 	[JsonIgnore] public bool IsMod => WorkshopTags?.Contains("Mod") ?? false;
 	[JsonIgnore] public string? IconUrl => PreviewURL;
-	[JsonIgnore] public Bitmap? IconImage => Program.Services.GetService<ImageManager>().GetImage(IconUrl, true).Result;
-	[JsonIgnore] public Bitmap? AuthorIconImage => Program.Services.GetService<ImageManager>().GetImage(Author?.AvatarUrl, true).Result;
+	[JsonIgnore] public Bitmap? IconImage => Program.Services.GetService<IImageManager>().GetImage(IconUrl, true).Result;
+	[JsonIgnore] public Bitmap? AuthorIconImage => Program.Services.GetService<IImageManager>().GetImage(Author?.AvatarUrl, true).Result;
 	[JsonIgnore] public bool IsIncluded { get => Package?.IsIncluded ?? false; set { if (Package is not null) { Package.IsIncluded = value; } } }
 	[JsonIgnore] public bool Workshop => true;
 	[JsonIgnore] public Package? Package => Program.Services.GetService<IContentManager>().GetPackage(SteamId);

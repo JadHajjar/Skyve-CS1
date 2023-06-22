@@ -3,6 +3,7 @@
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -25,6 +26,10 @@ internal class CompatibilityMessageControl : SlickControl
 	private readonly Dictionary<PseudoPackage, Rectangle> _modRects = new();
 	private Rectangle allButtonRect;
 	private Rectangle snoozeRect;
+
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IContentUtil _contentUtil;
+	private readonly ISubscriptionsManager _subscriptionsManager;
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportItem message)
 	{
@@ -73,7 +78,7 @@ internal class CompatibilityMessageControl : SlickControl
 				snoozeRect = ClientRectangle.Align(iconRect.Size, ContentAlignment.TopRight);
 				actionHovered |= snoozeRect.Contains(cursor);
 				var purple = Color.FromArgb(100, 60, 220);
-				var isSnoozed = CompatibilityManager.IsSnoozed(Message);
+				var isSnoozed = _compatibilityManager.IsSnoozed(Message);
 
 				SlickTip.SetTo(this, !actionHovered ? string.Empty : isSnoozed ? Locale.UnSnooze : Locale.Snooze, false, snoozeRect.Location);
 
@@ -271,7 +276,7 @@ internal class CompatibilityMessageControl : SlickControl
 				}
 				break;
 			case StatusAction.RequiresConfiguration:
-				allText = CompatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
+				allText = _compatibilityManager.IsSnoozed(Message) ? Locale.UnSnooze : Locale.Snooze;
 				allIcon = "I_Snooze";
 				colorStyle = ColorStyle.Active;
 				break;
@@ -337,7 +342,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 		if (e.Button == MouseButtons.Left && snoozeRect.Contains(e.Location))
 		{
-			CompatibilityManager.ToggleSnoozed(Message);
+			_compatibilityManager.ToggleSnoozed(Message);
 		}
 
 		if (e.Button == MouseButtons.Left && allButtonRect.Contains(e.Location))
@@ -345,18 +350,18 @@ internal class CompatibilityMessageControl : SlickControl
 			switch (Message.Status.Action)
 			{
 				case StatusAction.SubscribeToPackages:
-					SubscriptionsManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
-					ContentUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.Package)!, true);
-					ContentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
+					_subscriptionsManager.Subscribe(Message.Packages.Where(x => x.Package?.Package is null).Select(x => x.SteamId));
+					_contentUtil.SetBulkIncluded(Message.Packages.SelectWhereNotNull(x => x.Package)!, true);
+					_contentUtil.SetBulkEnabled(Message.Packages.SelectWhereNotNull(x => x.Package?.Package?.Mod)!, true);
 					break;
 				case StatusAction.RequiresConfiguration:
-					CompatibilityManager.ToggleSnoozed(Message);
+					_compatibilityManager.ToggleSnoozed(Message);
 					break;
 				case StatusAction.UnsubscribeThis:
-					SubscriptionsManager.UnSubscribe(new[] { PackageCompatibilityReportControl.Package.SteamId });
+					_subscriptionsManager.UnSubscribe(new[] { PackageCompatibilityReportControl.Package.SteamId });
 					break;
 				case StatusAction.UnsubscribeOther:
-					SubscriptionsManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
+					_subscriptionsManager.UnSubscribe(Message.Packages.Select(x => x.SteamId));
 					break;
 				case StatusAction.ExcludeThis:
 					PackageCompatibilityReportControl.Package.IsIncluded = false;
@@ -407,7 +412,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 			Loading = true;
 
-			SubscriptionsManager.Subscribe(new[] { item.SteamId });
+			_subscriptionsManager.Subscribe(new[] { item.SteamId });
 		}
 		else
 		{

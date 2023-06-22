@@ -10,11 +10,13 @@ internal class NotifierService : INotifier
 	public event Action? WorkshopInfoUpdated;
 	public event Action? PackageInformationUpdated;
 	public event Action? PackageInclusionUpdated;
+	public event Action? AutoSaveRequested;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
 	private readonly DelayedAction _delayedWorkshopInfoUpdated;
 	private readonly DelayedAction _delayedContentLoaded;
+	private readonly DelayedAction _delayedAutoSaveRequested;
 
 	public NotifierService()
 	{
@@ -22,10 +24,13 @@ internal class NotifierService : INotifier
 		_delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
 		_delayedPackageInclusionUpdated = new(300, () => PackageInclusionUpdated?.Invoke());
 		_delayedWorkshopInfoUpdated = new(300, () => WorkshopInfoUpdated?.Invoke());
+		_delayedAutoSaveRequested = new(300, () => AutoSaveRequested?.Invoke());
 	}
 
 	public bool IsContentLoaded { get; private set; }
 	public bool BulkUpdating { get; set; }
+	public bool ApplyingProfile { get; set; }
+	public bool ProfilesLoaded { get; set; }
 
 	public void OnContentLoaded()
 	{
@@ -57,5 +62,10 @@ internal class NotifierService : INotifier
 			_delayedPackageInclusionUpdated.Run();
 			_delayedPackageInformationUpdated.Run();
 		}
+	}
+
+	public void TriggerAutoSave()
+	{
+		_delayedAutoSaveRequested.Run();
 	}
 }

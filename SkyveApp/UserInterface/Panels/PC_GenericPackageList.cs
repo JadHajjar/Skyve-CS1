@@ -3,6 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using System.Collections.Generic;
@@ -20,11 +21,12 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		TB_Search.Placeholder = "SearchGenericPackages";
 
+		var compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
 		foreach (var package in items.GroupBy(x => x.SteamId))
 		{
 			if (package.Key != 0)
 			{
-				if (CompatibilityManager.IsBlacklisted(package.First()))
+				if (compatibilityManager.IsBlacklisted(package.First()))
 				{
 					continue;
 				}
@@ -94,7 +96,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		var total = LC_Items.ItemCount;
 
-		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!Program.Services.GetService<ISettings>().SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
 		}
@@ -114,11 +116,11 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 	protected override void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
 	{
-		ContentUtil.SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
+		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
 	{
-		ContentUtil.SetBulkIncluded(filteredItems.Where(x => x.Package?.Mod is not null).Select(x => x.Package!.Mod!), enabled);
+		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems.Where(x => x.Package?.Mod is not null).Select(x => x.Package!.Mod!), enabled);
 	}
 }

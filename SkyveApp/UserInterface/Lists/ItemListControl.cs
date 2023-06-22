@@ -6,6 +6,7 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
@@ -43,20 +44,32 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 	public event Action? OpenWorkshopSearchInBrowser;
 	public event EventHandler? FilterRequested;
 
+	private readonly ISettings _settings;
+	private readonly INotifier _notifier;
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IModLogicManager _modLogicManager;
+	private readonly ISubscriptionsManager _subscriptionsManager;
+
 	public ItemListControl()
 	{
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 
-		if (!CentralManager.IsContentLoaded)
+		_settings = Program.Services.GetService<ISettings>();
+		_notifier = Program.Services.GetService<INotifier>();
+		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_modLogicManager = Program.Services.GetService<IModLogicManager>();
+		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+
+		if (!_notifier.IsContentLoaded)
 		{
 			Loading = true;
 
-			CentralManager.ContentLoaded += () => Loading = false;
+			_notifier.ContentLoaded += () => Loading = false;
 		}
 
-		sorting = CentralManager.SessionSettings.UserSettings.PackageSorting;
-		SortDesc = CentralManager.SessionSettings.UserSettings.PackageSortingDesc;
+		sorting = _settings.SessionSettings.UserSettings.PackageSorting;
+		SortDesc = _settings.SessionSettings.UserSettings.PackageSortingDesc;
 	}
 
 	public IEnumerable<T> FilteredItems => SafeGetItems().Select(x => x.Item);
@@ -71,7 +84,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 	protected override void UIChanged()
 	{
-		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36;
+		ItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36;
 
 		base.UIChanged();
 
@@ -184,7 +197,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 		}
 
 		var rects = item.Rectangles;
-		var filter = ModifierKeys.HasFlag(Keys.Control) != CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction;
+		var filter = ModifierKeys.HasFlag(Keys.Control) != _settings.SessionSettings.UserSettings.FlipItemCopyFilterAction;
 
 		if (rects.FolderRect.Contains(e.Location))
 		{
@@ -258,7 +271,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 				pc.T_CR.Selected = true;
 
-				if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
+				if (_settings.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 				{
 					ScrollTo(item.Item);
 				}
@@ -325,7 +338,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 				{
 					if (item.Item.Workshop)
 					{
-						SubscriptionsManager.Subscribe(new[] { item.Item.SteamId });
+						_subscriptionsManager.Subscribe(new[] { item.Item.SteamId });
 					}
 
 					return;
@@ -360,7 +373,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.IsCollection ? new PC_ViewCollection(item.Item) : new PC_PackagePage((IPackage?)item.Item.Package ?? item.Item));
 
-			if (CentralManager.SessionSettings.UserSettings.ResetScrollOnPackageClick)
+			if (_settings.SessionSettings.UserSettings.ResetScrollOnPackageClick)
 			{
 				ScrollTo(item.Item);
 			}
@@ -509,7 +522,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 	protected override void OnPaintItemList(ItemPaintEventArgs<T, Rectangles> e)
 	{
 		var package = e.Item.Package;
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = e.Rects;
 		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
@@ -591,7 +604,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 		if (date.Year > 2000 && !PackagePage)
 		{
-			var dateText = CentralManager.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
+			var dateText = _settings.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
 			rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, true);
 			labelRect.X += Padding.Left + rects.DateRect.Width;
 		}
@@ -808,7 +821,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 				e.Graphics.DrawRoundImage(authorImg, avatarRect);
 			}
 
-			if (CompatibilityManager.CompatibilityData.Authors.TryGet(e.Item.Author.SteamId)?.Verified ?? false)
+			if (_compatibilityManager.CompatibilityData.Authors.TryGet(e.Item.Author.SteamId)?.Verified ?? false)
 			{
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
@@ -887,11 +900,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			return; // missing local item
 		}
 
-		var incl = new DynamicIcon(e.Item.IsSubscribing() ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
+		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
 		var mod = package?.Mod;
-		var required = mod is not null && ModLogicManager.IsRequired(mod);
+		var required = mod is not null && _modLogicManager.IsRequired(mod);
 
-		if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && mod is not null)
+		if (_settings.SessionSettings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{
 			var activeColor = FormDesign.Design.ActiveColor;
 			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
@@ -952,7 +965,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			return Rectangle.Empty;
 		}
 
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		using var font = UI.Font((large ? 9F : 7.5F) - (smaller ? 0.5F : 0F));
 		var size = e.Graphics.Measure(text, font).ToSize();
 
@@ -1039,19 +1052,19 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 	protected override ItemListControl<T>.Rectangles GenerateRectangles(T item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item);
-		var doubleSize = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var doubleSize = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var includeItemHeight = doubleSize ? (ItemHeight / 2) : ItemHeight;
 
 		if (!IsSelection)
 		{
-			if (CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package?.Mod is not null)
+			if (_settings.SessionSettings.UserSettings.AdvancedIncludeEnable && item.Package?.Mod is not null)
 			{
 				rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(includeItemHeight * 9 / 10, rectangle.Height), ContentAlignment.MiddleLeft);
 				rects.EnabledRect = rects.IncludedRect.Pad(rects.IncludedRect.Width, 0, -rects.IncludedRect.Width, 0);
 			}
 			else if (item is not Asset)
 			{
-				rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable ? (includeItemHeight * 2 * 9 / 10) : includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
+				rects.IncludedRect = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(_settings.SessionSettings.UserSettings.AdvancedIncludeEnable ? (includeItemHeight * 2 * 9 / 10) : includeItemHeight + 1, rectangle.Height), ContentAlignment.MiddleLeft);
 			}
 			else
 			{
@@ -1196,7 +1209,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 			if (DownloadStatusRect.Contains(location))
 			{
-				if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				if (Program.Services.GetService<ISettings>().SessionSettings.UserSettings.FlipItemCopyFilterAction)
 				{
 					text = Locale.FilterByThisPackageStatus + "\r\n\r\n" + Item.Package?.StatusReason;
 					point = DownloadStatusRect.Location;
@@ -1308,7 +1321,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			{
 				var tip = string.Empty;
 
-				if (CentralManager.SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				if (Program.Services.GetService<ISettings>().SessionSettings.UserSettings.FlipItemCopyFilterAction)
 				{
 					ExtensionClass.Swap(ref text, ref alt);
 				}

@@ -19,11 +19,11 @@ partial class PC_ContentList<T>
 	{
 		if (disposing && (components != null))
 		{
-			CompatibilityManager.ReportProcessed -= CentralManager_WorkshopInfoUpdated;
-			CentralManager.ContentLoaded -= CentralManager_ContentLoaded;
-			CentralManager.ContentLoaded -= CentralManager_WorkshopInfoUpdated;
-			CentralManager.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-			CentralManager.PackageInformationUpdated -= CentralManager_WorkshopInfoUpdated;
+			_compatibilityManager.ReportProcessed -= CentralManager_WorkshopInfoUpdated;
+			_notifier.ContentLoaded -= CentralManager_ContentLoaded;
+			_notifier.ContentLoaded -= CentralManager_WorkshopInfoUpdated;
+			_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
+			_notifier.PackageInformationUpdated -= CentralManager_WorkshopInfoUpdated;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

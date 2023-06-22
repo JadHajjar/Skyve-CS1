@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
 
@@ -86,7 +87,7 @@ internal class SteamUserControl : SlickControl
 		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), ClientRectangle, Padding.Horizontal);
 
 		var size = Height - (Padding.Vertical * 2);
-		var image = ImageManager.GetImage(User.AvatarUrl, true).Result;
+		var image = Program.Services.GetService<IImageManager>().GetImage(User.AvatarUrl, true).Result;
 		var textRectangle = ClientRectangle.Pad(size + (Padding.Left * 2), 0, 0, 0);
 		var avatarRect = ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft);
 		var infoSize = e.Graphics.Measure(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold));
@@ -114,7 +115,7 @@ internal class SteamUserControl : SlickControl
 			Size = new(width, height);
 		}
 
-		if (CompatibilityManager.CompatibilityData.Authors.TryGet(User.SteamId)?.Verified ?? false)
+		if (Program.Services.GetService<ICompatibilityManager>().CompatibilityData.Authors.TryGet(User.SteamId)?.Verified ?? false)
 		{
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 

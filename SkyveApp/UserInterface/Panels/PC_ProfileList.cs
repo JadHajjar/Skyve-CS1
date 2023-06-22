@@ -3,6 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
 
@@ -19,6 +20,9 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ProfileList : PanelContent
 {
 	private readonly ProfileListControl LC_Items;
+
+	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
 
 	public PC_ProfileList() : this(null) { }
 
@@ -38,14 +42,14 @@ public partial class PC_ProfileList : PanelContent
 			LC_Items.MergeProfile += Ctrl_MergeProfile;
 			LC_Items.ExcludeProfile += Ctrl_ExcludeProfile;
 			LC_Items.DisposeProfile += Ctrl_DisposeProfile;
-			LC_Items.Loading = !ProfileManager.ProfilesLoaded;
+			LC_Items.Loading = !_notifier.ProfilesLoaded;
 
 			if (!LC_Items.Loading)
 			{
-				LC_Items.SetItems(ProfileManager.Profiles.Skip(1));
+				LC_Items.SetItems(_profileManager.Profiles.Skip(1));
 			}
 
-			ProfileManager.ProfileChanged += LoadProfile;
+			_profileManager.ProfileChanged += LoadProfile;
 		}
 		else
 		{
@@ -89,19 +93,19 @@ public partial class PC_ProfileList : PanelContent
 
 	private void Ctrl_DisposeProfile(Profile obj)
 	{
-		ProfileManager.DeleteProfile(obj);
+		_profileManager.DeleteProfile(obj);
 	}
 
 	private void Ctrl_ExcludeProfile(Profile obj)
 	{
 		FLP_Profiles.Enabled = false;
-		ProfileManager.ExcludeProfile(obj);
+		_profileManager.ExcludeProfile(obj);
 	}
 
 	private void Ctrl_MergeProfile(Profile obj)
 	{
 		FLP_Profiles.Enabled = false;
-		ProfileManager.MergeProfile(obj);
+		_profileManager.MergeProfile(obj);
 	}
 
 	private void Ctrl_LoadProfile(Profile obj)
@@ -111,7 +115,7 @@ public partial class PC_ProfileList : PanelContent
 			I_ProfileIcon.Loading = true;
 			L_CurrentProfile.Text = obj.Name;
 			I_Favorite.Visible = B_Save.Visible = false;
-			ProfileManager.SetProfile(obj);
+			_profileManager.SetProfile(obj);
 		}
 	}
 
@@ -121,7 +125,7 @@ public partial class PC_ProfileList : PanelContent
 
 		if (!LC_Items.ReadOnly)
 		{
-			LoadProfile(ProfileManager.CurrentProfile);
+			LoadProfile(_profileManager.CurrentProfile);
 		}
 	}
 
@@ -129,8 +133,8 @@ public partial class PC_ProfileList : PanelContent
 	{
 		if (L_Counts.Visible)
 		{
-			var favorites = ProfileManager.Profiles.Count(x => x.IsFavorite);
-			var total = ProfileManager.Profiles.Count(x => !x.Temporary);
+			var favorites = _profileManager.Profiles.Count(x => x.IsFavorite);
+			var total = _profileManager.Profiles.Count(x => !x.Temporary);
 			var text = string.Empty;
 
 			if (favorites == 0)
@@ -268,12 +272,12 @@ public partial class PC_ProfileList : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		ProfileManager.SetProfile(Profile.TemporaryProfile);
+		_profileManager.SetProfile(Profile.TemporaryProfile);
 	}
 
 	private async void B_Save_Click(object sender, EventArgs e)
 	{
-		if (ProfileManager.CurrentProfile.Save())
+		if (_profileManager.CurrentProfile.Save())
 		{
 			B_Save.ImageName = "I_Check";
 
@@ -294,12 +298,12 @@ public partial class PC_ProfileList : PanelContent
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
 	{
-		if (ProfileManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentProfile.Temporary)
 		{
 			return;
 		}
 
-		var colorDialog = new SlickColorPicker(ProfileManager.CurrentProfile.Color ?? Color.Red);
+		var colorDialog = new SlickColorPicker(_profileManager.CurrentProfile.Color ?? Color.Red);
 
 		if (colorDialog.ShowDialog() != DialogResult.OK)
 		{
@@ -308,22 +312,22 @@ public partial class PC_ProfileList : PanelContent
 
 		TLP_ProfileName.BackColor = colorDialog.Color;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
-		ProfileManager.CurrentProfile.Color = colorDialog.Color;
-		ProfileManager.Save(ProfileManager.CurrentProfile);
+		_profileManager.CurrentProfile.Color = colorDialog.Color;
+		_profileManager.Save(_profileManager.CurrentProfile);
 	}
 
 	private void I_Favorite_Click(object sender, EventArgs e)
 	{
-		if (ProfileManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentProfile.Temporary)
 		{
 			return;
 		}
 
-		ProfileManager.CurrentProfile.IsFavorite = !ProfileManager.CurrentProfile.IsFavorite;
-		ProfileManager.Save(ProfileManager.CurrentProfile);
+		_profileManager.CurrentProfile.IsFavorite = !_profileManager.CurrentProfile.IsFavorite;
+		_profileManager.Save(_profileManager.CurrentProfile);
 
-		I_Favorite.ImageName = ProfileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
-		SlickTip.SetTo(I_Favorite, ProfileManager.CurrentProfile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		I_Favorite.ImageName = _profileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
+		SlickTip.SetTo(I_Favorite, _profileManager.CurrentProfile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
 	}
 
 	private async void B_Discover_Click(object sender, EventArgs e)

@@ -3,6 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
+using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 
 using SlickControls;
@@ -19,19 +20,19 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 
 	public PC_MissingPackages(List<Profile.Mod> missingMods, List<Profile.Asset> missingAssets) : base(missingAssets.Concat(missingMods))
 	{
-		CentralManager.ContentLoaded += CentralManager_ContentLoaded;
+		Program.Services.GetService<INotifier>().ContentLoaded += CentralManager_ContentLoaded;
 	}
 
 	protected override void Dispose(bool disposing)
 	{
-		CentralManager.ContentLoaded -= CentralManager_ContentLoaded;
+		Program.Services.GetService<INotifier>().ContentLoaded -= CentralManager_ContentLoaded;
 
 		base.Dispose(disposing);
 	}
 
 	protected override void LocaleChanged()
 	{
-		Text = string.Format(Locale.MissingPackagesProfile, ProfileManager.CurrentProfile.Name);
+		Text = string.Format(Locale.MissingPackagesProfile, Program.Services.GetService<IProfileManager>().CurrentProfile.Name);
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -42,7 +43,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 		{
 			if (item is Profile.Mod mod)
 			{
-				var localMod = ProfileManager.GetMod(mod);
+				var localMod = Program.Services.GetService<IProfileManager>().GetMod(mod);
 
 				if (localMod is null)
 				{
@@ -56,7 +57,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 			}
 			else if (item is Profile.Asset asset)
 			{
-				var localAsset = ProfileManager.GetAsset(asset);
+				var localAsset = Program.Services.GetService<IProfileManager>().GetAsset(asset);
 
 				if (localAsset is null)
 				{
