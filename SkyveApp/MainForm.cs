@@ -23,6 +23,11 @@ public partial class MainForm : BasePanelForm
 	private bool isGameRunning;
 	private bool? buttonStateRunning;
 
+	private readonly ISubscriptionsManager _subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly ICitiesManager _citiesManager = Program.Services.GetService<ICitiesManager>();
+	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
+
 	public MainForm()
 	{
 		InitializeComponent();
@@ -135,13 +140,11 @@ public partial class MainForm : BasePanelForm
 
 		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.MenuForeColor.MergeColor(FormDesign.Design.ActiveColor, 85) : FormDesign.Design.MenuForeColor);
 
-		var subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
-		var profileManager = Program.Services.GetService<IProfileManager>();
 		var useGlow = !ConnectionHandler.IsConnected
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 			|| isGameRunning
-			|| subscriptionsManager.SubscriptionsPending
-			|| profileManager.CurrentProfile.UnsavedChanges
+			|| _subscriptionsManager.SubscriptionsPending
+			|| _profileManager.CurrentProfile.UnsavedChanges
 			|| base_PB_Icon.HoverState.HasFlag(HoverState.Pressed);
 
 		e.Graphics.DrawImage(icon, base_PB_Icon.ClientRectangle);
@@ -165,7 +168,7 @@ public partial class MainForm : BasePanelForm
 				color = Color.FromArgb(235, 113, 52);
 			}
 
-			if (profileManager.CurrentProfile.UnsavedChanges)
+			if (_profileManager.CurrentProfile.UnsavedChanges)
 			{
 				minimum = 0;
 				color = Color.FromArgb(122, 81, 207);
@@ -177,7 +180,7 @@ public partial class MainForm : BasePanelForm
 				color = Color.FromArgb(194, 38, 33);
 			}
 
-			if (subscriptionsManager.SubscriptionsPending)
+			if (_subscriptionsManager.SubscriptionsPending)
 			{
 				minimum = 40;
 				color = Color.FromArgb(50, 168, 82);
@@ -232,7 +235,7 @@ public partial class MainForm : BasePanelForm
 	{
 		if (keyData == Keys.F5)
 		{
-			if (Program.Services.GetService<ICitiesManager>().CitiesAvailable())
+			if (_citiesManager.CitiesAvailable())
 			{
 				LaunchStopCities();
 
@@ -250,9 +253,7 @@ public partial class MainForm : BasePanelForm
 
 	public void LaunchStopCities()
 	{
-		var citiesManager = Program.Services.GetService<ICitiesManager>();
-
-		if (citiesManager.CitiesAvailable())
+		if (_citiesManager.CitiesAvailable())
 		{
 			if (CrossIO.CurrentPlatform is Platform.Windows)
 			{
@@ -265,15 +266,15 @@ public partial class MainForm : BasePanelForm
 				base_PB_Icon.LoaderSpeed = 1;
 			}
 
-			if (citiesManager.IsRunning())
+			if (_citiesManager.IsRunning())
 			{
 				buttonStateRunning = false;
-				new BackgroundAction("Stopping Cities: Skylines", citiesManager.Kill).Run();
+				new BackgroundAction("Stopping Cities: Skylines", _citiesManager.Kill).Run();
 			}
 			else
 			{
 				buttonStateRunning = true;
-				new BackgroundAction("Starting Cities: Skylines", citiesManager.Launch).Run();
+				new BackgroundAction("Starting Cities: Skylines", _citiesManager.Launch).Run();
 			}
 
 			_startTimeoutTimer.Stop();
@@ -285,21 +286,19 @@ public partial class MainForm : BasePanelForm
 	{
 		base.OnCreateControl();
 
-		var settings = Program.Services.GetService<ISettings>();
-
-		if (settings.SessionSettings.LastWindowsBounds != null)
+		if (_settings.SessionSettings.LastWindowsBounds != null)
 		{
-			if (!SystemInformation.VirtualScreen.Contains(settings.SessionSettings.LastWindowsBounds.Value.Location))
+			if (!SystemInformation.VirtualScreen.Contains(_settings.SessionSettings.LastWindowsBounds.Value.Location))
 			{
 				return;
 			}
 
-			Bounds = settings.SessionSettings.LastWindowsBounds.Value;
+			Bounds = _settings.SessionSettings.LastWindowsBounds.Value;
 
 			LastUiScale = UI.UIScale;
 		}
 
-		if (settings.SessionSettings.WindowWasMaximized)
+		if (_settings.SessionSettings.WindowWasMaximized)
 		{
 			WindowState = FormWindowState.Minimized;
 			WindowState = FormWindowState.Maximized;
@@ -307,15 +306,15 @@ public partial class MainForm : BasePanelForm
 
 		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-		if (currentVersion.ToString() != settings.SessionSettings.LastVersionNotification)
+		if (currentVersion.ToString() != _settings.SessionSettings.LastVersionNotification)
 		{
-			if (settings.SessionSettings.FirstTimeSetupCompleted)
+			if (_settings.SessionSettings.FirstTimeSetupCompleted)
 			{
 				PushPanel<PC_LotChangeLog>(null);
 			}
 
-			settings.SessionSettings.LastVersionNotification = currentVersion.ToString();
-			settings.SessionSettings.Save();
+			_settings.SessionSettings.LastVersionNotification = currentVersion.ToString();
+			_settings.SessionSettings.Save();
 		}
 	}
 
@@ -325,24 +324,22 @@ public partial class MainForm : BasePanelForm
 
 		if (!TopMost)
 		{
-			var settings = Program.Services.GetService<ISettings>();
-
-			if (settings.SessionSettings.WindowWasMaximized = WindowState == FormWindowState.Maximized)
+			if (_settings.SessionSettings.WindowWasMaximized = WindowState == FormWindowState.Maximized)
 			{
 				if (SystemInformation.VirtualScreen.IntersectsWith(RestoreBounds))
 				{
-					settings.SessionSettings.LastWindowsBounds = RestoreBounds;
+					_settings.SessionSettings.LastWindowsBounds = RestoreBounds;
 				}
 			}
 			else
 			{
 				if (SystemInformation.VirtualScreen.IntersectsWith(Bounds))
 				{
-					settings.SessionSettings.LastWindowsBounds = Bounds;
+					_settings.SessionSettings.LastWindowsBounds = Bounds;
 				}
 			}
 
-			settings.SessionSettings.Save();
+			_settings.SessionSettings.Save();
 		}
 	}
 

@@ -139,10 +139,6 @@ internal static class Program
 				SetProcessDPIAware();
 			}
 
-#if DEBUG
-			Services.CheckForLoops();
-#endif
-
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(MainForm = new MainForm());

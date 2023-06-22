@@ -27,9 +27,9 @@ internal class CompatibilityMessageControl : SlickControl
 	private Rectangle allButtonRect;
 	private Rectangle snoozeRect;
 
-	private readonly ICompatibilityManager _compatibilityManager;
-	private readonly IContentUtil _contentUtil;
-	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly ICompatibilityManager _compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+	private readonly IContentUtil _contentUtil = Program.Services.GetService<IContentUtil>();
+	private readonly ISubscriptionsManager _subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportItem message)
 	{
@@ -38,7 +38,7 @@ internal class CompatibilityMessageControl : SlickControl
 		Message = message;
 		PackageCompatibilityReportControl = packageCompatibilityReportControl;
 
-		if (message.Packages.Length != 0 && !message.Packages.All(x => x.Package is not null))
+		if (message.Packages?.Length != 0 && !message.Packages.All(x => x.Package is not null))
 		{
 			SteamUtil.WorkshopItemsLoaded += Invalidate;
 		}
