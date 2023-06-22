@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "適配最新遊戲版本。"
                 ]
             }
         ]
@@ -474,44 +474,44 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "線上組態檔案，來了！",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "線上組態檔案",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "您現在可以將組態檔案上傳到線上伺服器，每個使用者最多可上傳 5 個組態檔案。",
+                    "您可以將上傳的組態檔案設為私密的，或者使用 ID 共享組態檔案，亦或設為公開並允許任何人查看。",
+                    "您可以下載線上組態檔案；或者，如果您有本地組態檔案並且已經上傳，可以更新該組態檔案。",
+                    "使用組態檔案選項卡中的新按鈕，可以尋找線上組態檔案。",
+                    "在「新增組態檔案」頁面新增第三個選項：使用 ID 匯入線上組態檔案。"
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "組態檔案相關改動",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "現在，點選側邊欄中的「組態檔案」選項卡，將打開組態檔案列表，而不是當前組態檔案的設定。",
+                    "組態檔案列表現在顯示為網格檢視，您可以在網格/列表檢視之間切換。",
+                    "更改了組態檔案頁面頂部操作按鈕的設計",
+                    "現在，如果您的組態檔案存在尚未保存的更改，Skyve 圖示將會變成紫色。",
+                    "現在可以為組態檔案新增縮圖。",
+                    "組態檔案用途現在有單獨的圖示。"
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "新增內容與更新內容",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "新增作者的組態檔案的頁面，點選模組或組態檔案的作者，即可訪問該作者的組態檔案的頁面。該頁面包含作者製作的外掛和作者公開的所有組態檔案。",
+                    "Windows 系統上，使用 Skyve 刪除的檔案將被放進回收站。",
+                    "在實用工具頁面新增了6個重設按鈕。",
+                    "在獲取幫助與日誌頁面，新增了兩個按鈕。",
+                    "現在，相容性狀態和外掛狀態將在列表右側顯示。",
+                    "現在，已損壞/不相容/已被封禁的外掛，在列表中將有一個新的警告樣式背景。",
+                    "本地模組名稱和標籤已更新。",
+                    "沒有公開放原始碼現在是「警告」等級，而不是「取消訂閱」。",
+                    "前置模組現在有不同的介面，以便讓您知道不能卸下它們。",
+                    "在遊戲內新增了一個設定，可以對模組和資產進行熱預載。",
+                    "最佳化了裝載/卸下外掛時的性能。",
+                    "新增匈牙利語翻譯"
                 ]
             }
         ]
@@ -521,14 +521,14 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改動",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "新增忽略網路連線檢查的選項。",
+                    "新增組態檔案正在上傳的指示標誌。",
+                    "新增了一個按鈕，可以輕鬆查看線上組態檔案的內容。",
+                    "修復了獲取 Steam 使用者資訊出錯的問題。",
+                    "修復了沒有記住資產編輯器啟動設定的問題。",
+                    "修復了更新線上組態檔案功能無法正常使用的問題。"
                 ]
             }
         ]
@@ -538,12 +538,12 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "改動",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "新增在查看組態檔案的內容時的載入動畫。",
+                    "修復了下載或更新組態檔案時，部分資料如縮圖沒有正確保存的問題。",
+                    "修復了設為私密的外掛被標記為空的問題。",
+                    "修復了啟動 Skyve 時使用者介面中的部分字串沒有翻譯的問題。"
                 ]
             }
         ]
@@ -553,11 +553,11 @@
         "Date": "2023-06-21",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "修復",
                 "Changes": [
-                    "Fixes an error caused by including/excluding mods that have contain assets.",
-                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-                    "Fixed some packages not showing their successor properly."
+                    "修復了包含/排除資產的模組導致的錯誤。",
+                    "修復了相容性報告列表右側的操作按鈕不可點擊的問題。",
+                    "修復了一些模組未正確顯示其後繼模組的問題。"
                 ]
             }
         ]
