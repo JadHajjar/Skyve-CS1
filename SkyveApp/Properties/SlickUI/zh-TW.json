@@ -109,15 +109,15 @@
   "Today at {0}": "今日 {0}",
   "Yesterday at {0}": "昨日 {0}",
   "Tomorrow at {0}": "明日 {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "Last {0} at {1}": "上個 {0} {1}",
+  "Next {0} at {1}": "下個 {0} {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "{0} 個月前，於 {1}",
+    "Plural": "{0} 個月前，於 {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "在 {0} 個月內，於 {1}",
+    "Plural": "在 {0} 個月內，於 {1}"
   },
   "{0} day ago": {
     "One": "{0} 日前",
