@@ -337,7 +337,7 @@
   "AnyAuthor": "Bármely készítő",
   "ItemsCount": {
     "One": "{0} elem",
-    "Plural": "{0} items"
+    "Plural": "{0} elem"
   },
   "AuthorsSelected": {
     "One": "{0} készítő kiválasztva",
