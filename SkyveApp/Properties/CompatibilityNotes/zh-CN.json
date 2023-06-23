@@ -217,7 +217,7 @@
   "Users reported various issues, see Workshop comments.": "玩家报告了很多问题，请查看此模组的创意工坊评论区了解详情。",
   "Will lead to various graphical issues ingame": "会导致游戏出现各种图形显示的问题",
   "Be aware that this mod is instable and crashes may occur in larger cities!": "请注意：此模组不稳定，且可能损坏您的存档！",
-  "Cargo trains for some do not spawn.": "对于一部分玩家，货运列车无法生成。",
+  "Cargo trains for some do not spawn.": "部分玩家使用此模组时，出现了无法生成货运列车的问题。",
   "This mod has a number of bugs and stability issues, and is not recommended for new games. It is provided here as an attempt to help players with existing cities using Extended Managers Library/Prop Anarchy continue their saves without having to redo their work.": "这个模组有已知的 Bug 和稳定性问题，不建议在新建存档中使用。 制作临时修复版，只是为了让之前在存档中使用过 Extended Managers Library / Prop Anarchy 的玩家仍然可以继续游玩存档，而不必重做他们的工作。",
   "Double UUI Button and the Grabber not work. A solution is worked on.": "此模组会导致显示两个重复的 Unified UI 按钮，并导致 UUI Grabber 无法使用。作者正在尝试解决此问题。",
   "This is only needed if you want to use the new generation mods Tree Control, Prop Control, Line Tool on a map/save that used before Extended Manager Library, Tree Anarchy, Prop Anarchy. For more details check the workshop page of this mod.": "只有当您想要使用新一代 Control 系列模组 Tree Control、Prop Control、Line Tool、Visibility Control，且该存档之前使用过 EML 框架下的 Extended Manager Library Temporary Fix、Tree Anarchy Temporary Fix、Prop Anarchy Temporary Fix 时，才需要使用此模组将 EML 从存档中移除。\n（注意：如果您将 EML 从一个存档中移除，该存档将再也无法使用 EML 加载！如果使用 EML 框架下的模组没有遇到问题，则不需要替换。）\n请查看此模组的创意工坊页面描述以了解详情。",
