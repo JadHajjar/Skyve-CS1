@@ -26,7 +26,7 @@
   "MapCreation": "制作地图",
   "NoAction": "无需采取任何操作",
   "SubscribeToPackages": "订阅列出的插件",
-  "RequiresConfiguration": "需要一个特定的配置",
+  "RequiresConfiguration": "需要特定的配置才能同时使用",
   "SelectOne": "请选择…",
   "UnsubscribeThis": "取消订阅此插件",
   "UnsubscribeOther": "取消订阅列出的插件",
@@ -43,7 +43,7 @@
   "IncompleteDescription": "描述不完整",
   "Successor": "继任模组",
   "Alternative": "备选方案",
-  "SameFunctionality": "相同的功能",
+  "SameFunctionality": "功能相同",
   "RequirementAlternative": "可用的备选方案",
   "IncompatibleWith": "与…不兼容",
   "CausesIssuesWith": "与…一起使用会导致问题",
@@ -66,7 +66,7 @@
   "ReuseData": "重新使用上一个数据",
   "ReuseData_Tip": "将上次保存的兼容性数据重新用于此插件。\n按住 Shift 键应用并继续",
   "PleaseReviewTheStability": "请在保存之前检查此插件的稳定性。",
-  "PleaseReviewPackageStatuses": "请在保存之前检查此插件的状态。\n部分状态类型是无效的。",
+  "PleaseReviewPackageStatuses": "请在保存之前检查此插件的状态。\n您选择的部分状态类型是无效的。",
   "PleaseReviewPackageInteractions": "请在保存之前检查此插件的交互方式。\n部分交互方式是无效的。",
   "PleaseReviewPackageUsage": "请为此插件选择一个有效的用途。",
   "Interaction_Alternative": {
@@ -108,7 +108,7 @@
   "Status_CausesIssues": "'{0}' 可能导致游戏出现问题。",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。",
-    "One": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。\n\n如果需要，可以使用 '{1}' 来恢复您的存档。请阅读其工坊页面描述以获取更多信息。"
+    "One": "一旦在新建存档时启用 '{0}' ，此后，当 '{0}' 被禁用时，这个存档将无法加载。\n\n您可以使用 '{1}' 来恢复无法加载的存档。请阅读其工坊页面描述以获取更多信息。"
   },
   "Status_TestVersion": {
     "Zero": "这是测试版模组。请注意，测试版模组有可能出现意外问题。",
@@ -118,7 +118,7 @@
     "One": "要使用这个插件，您需要购买一个 DLC。",
     "Plural": "要使用这个插件，您需要购买下列 DLC："
   },
-  "Status_DependencyMod": "这是一个前置模组，但你似乎没有使用任何依赖于该模组的插件。",
+  "Status_DependencyMod": "这是一个前置模组，但您似乎没有任何依赖于这个前置模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
   "SourceAvailable": "源代码不可用",
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
@@ -169,7 +169,7 @@
   "CRT_Successors": "继任模组",
   "CRT_RequiredPackages": "必需插件",
   "CRT_OptionalPackages": "可选插件",
-  "CRT_DlcMissing": "缺失 DLCs/CCPs",
+  "CRT_DlcMissing": "缺少的 DLC/CCP",
   "CRT_Compatibility": "兼容性问题",
   "CRT_Alternatives": "备选方案",
   "CRT_Status": "状态",
@@ -178,7 +178,7 @@
   "RequestReviewInfo": "使用此插件时遇到问题？",
   "RequestReview": "申请检查",
   "MissingDependencyCount": {
-    "One": "{0} 个{1} 缺少必需物品",
+    "One": "{0} 个{1} 缺少前置插件",
     "Plural": "{0} 个{1} 缺少必需物品"
   },
   "CautionCount": "{0} 个{1} 建议谨慎使用",
