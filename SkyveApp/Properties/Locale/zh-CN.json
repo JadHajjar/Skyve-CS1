@@ -280,7 +280,7 @@
   "EXPERIMENTAL": "实验性版本",
   "DEPRECATED": "已弃用",
   "OBSOLETE": "已淘汰",
-  "ABANDONED": "作者弃坑",
+  "ABANDONED": "作者已弃坑",
   "ActionUnreversible": "此操作无法撤销。",
   "AlwaysOpenFiltersAndActions": "默认显示筛选选项",
   "AlwaysOpenFiltersAndActions_Tip": "进入“内容”选项卡时，始终显示筛选选项。",
