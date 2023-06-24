@@ -418,15 +418,15 @@
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Assetek"
+    "Plural": "Asset"
   },
   "Package": {
     "One": "Csomagok",
-    "Plural": "Csomagok"
+    "Plural": "Csomag"
   },
   "Profile": {
     "One": "Profil",
-    "Plural": "Profilok"
+    "Plural": "Profil"
   },
   "IncludedCount": {
     "One": "{0} {1} alkalmazott",
