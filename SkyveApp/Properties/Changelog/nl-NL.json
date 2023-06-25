@@ -1,565 +1,565 @@
 [
-  {
-    "Version": "2.2.0",
-    "Date": "2023-04-10",
-    "Tagline": "Welkom bij de tijd van wijzigingen",
-    "ChangeGroups": [
-      {
-        "Name": "Nieuw",
-        "Changes": [
-          "Een 'Uitschrijven Alle' knop in inhoudspagina's acties toegevoegd.",
-          "Een gedeelte 'Hulpmiddelen' toegevoegd om te abonneren op ontbrekende items in een BOB configuratie.",
-          "Optie toegevoegd om filters & actie secties standaard te openen.",
-          "Aanpassingspagina's toegevoegd, u ziet het op nieuwe versies of met behulp van de knop in de Help secties."
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "Welkom bij de tijd van wijzigingen",
+        "ChangeGroups": [
+            {
+                "Name": "Nieuw",
+                "Changes": [
+                    "Een 'Uitschrijven Alle' knop in inhoudspagina's acties toegevoegd.",
+                    "Een gedeelte 'Hulpmiddelen' toegevoegd om te abonneren op ontbrekende items in een BOB configuratie.",
+                    "Optie toegevoegd om filters & actie secties standaard te openen.",
+                    "Aanpassingspagina's toegevoegd, u ziet het op nieuwe versies of met behulp van de knop in de Help secties."
+                ]
+            },
+            {
+                "Name": "Verbeteringen",
+                "Changes": [
+                    "Toegevoegde Compatibiliteitsrapport voor beschadigde Assets",
+                    "Niet-vermelde pakketten hebben nu de juiste naam en thumbnail.",
+                    "Placeholders voor mapinstellingen geven nu een juist beeld van uw besturingssysteem.",
+                    "Ctrl+Klik op de naam van een auteur om ze toe te voegen aan je filter"
+                ]
+            },
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "Oude profielen die niet worden geconverteerd na de eerste start, zijn opgelost.",
+                    "Vaste lokale assets worden niet automatisch vernieuwd na externe wijzigingen.",
+                    "Vaste verwijdering van lokale bestanden uit het menu met de rechtermuisknop om alle lokale bestanden te verwijderen in plaats van slechts één",
+                    "Vaste conversie van LOT 1 profielen wat resulteert in het gemarkeerd als 'Lokaal'",
+                    "'Real' mappen opgelost die werden verwisseld bij opslaan voor Linux en Mac-gebruikers.",
+                    "Vaste Linux & Mac gebruikers kunnen geen log-zip genereren."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Verbeteringen",
-        "Changes": [
-          "Toegevoegde Compatibiliteitsrapport voor beschadigde Assets",
-          "Niet-vermelde pakketten hebben nu de juiste naam en thumbnail.",
-          "Placeholders voor mapinstellingen geven nu een juist beeld van uw besturingssysteem.",
-          "Ctrl+Klik op de naam van een auteur om ze toe te voegen aan je filter"
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "De Help & Logs sectie toegevoegd",
+                "Changes": [
+                    "Eenvoudige toegang tot je logs.",
+                    "Bekijk snel fouten in je meest recente/huidige spelsessie.",
+                    "Vereenvoudig een logboekbestand om zich te concentreren op wat er daadwerkelijk gebeurt.",
+                    "Deel een zip-bestand met alle logs die iemand nodig heeft om u te helpen."
+                ]
+            },
+            {
+                "Name": "Verbeteringen",
+                "Changes": [
+                    "De pictogrammen van filters zijn gewijzigd om de juiste pictogrammen in de lijst weer te geven."
+                ]
+            },
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "De tekst is opgelost in de importcollectie om te abonneren op en af te melden.",
+                    "De kaartselectie is opgelost voor een nieuw spel waarbij de gebruikers geen vanilla kaart kunnen selecteren."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Oplossingen",
-        "Changes": [
-          "Oude profielen die niet worden geconverteerd na de eerste start, zijn opgelost.",
-          "Vaste lokale assets worden niet automatisch vernieuwd na externe wijzigingen.",
-          "Vaste verwijdering van lokale bestanden uit het menu met de rechtermuisknop om alle lokale bestanden te verwijderen in plaats van slechts één",
-          "Vaste conversie van LOT 1 profielen wat resulteert in het gemarkeerd als 'Lokaal'",
-          "'Real' mappen opgelost die werden verwisseld bij opslaan voor Linux en Mac-gebruikers.",
-          "Vaste Linux & Mac gebruikers kunnen geen log-zip genereren."
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "Bug opgelost die tot oneindig laden voor sommige gebruikers heeft geleid."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.4",
-    "Date": "2023-04-08",
-    "ChangeGroups": [
-      {
-        "Name": "De Help & Logs sectie toegevoegd",
-        "Changes": [
-          "Eenvoudige toegang tot je logs.",
-          "Bekijk snel fouten in je meest recente/huidige spelsessie.",
-          "Vereenvoudig een logboekbestand om zich te concentreren op wat er daadwerkelijk gebeurt.",
-          "Deel een zip-bestand met alle logs die iemand nodig heeft om u te helpen."
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Veranderingen",
+                "Changes": [
+                    "Het tabblad abonnement is verwijderd van de in-game mod opties.",
+                    "Vaste DLC's die niet worden toegepast bij het laden van een profiel.",
+                    "Vaste de taaloptie die voor sommige mensen leeg was",
+                    "Herdownloaden van stoom zal de focus niet langer naar de tool drukken.",
+                    "Andere UI veranderingen."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Verbeteringen",
-        "Changes": [
-          "De pictogrammen van filters zijn gewijzigd om de juiste pictogrammen in de lijst weer te geven."
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "Veranderingen",
+                "Changes": [
+                    "Een info popup toevoegen wanneer u zich voor het eerst abonnert op artikelen.",
+                    "Er is een waarschuwingstekst toegevoegd in het dashboard wanneer er meerdere LOM instanties geïnstalleerd zijn.",
+                    "Kleine tags toegevoegd naast pakket titels.",
+                    "Herdownloaden van Laad Order Tool zal de download starten en sluit de app terwijl het wordt bijgewerkt.",
+                    "Vaste en verbeterde de snelheid van het laden van scherm mod rapporten."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Oplossingen",
-        "Changes": [
-          "De tekst is opgelost in de importcollectie om te abonneren op en af te melden.",
-          "De kaartselectie is opgelost voor een nieuw spel waarbij de gebruikers geen vanilla kaart kunnen selecteren."
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "Beta openbare release",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "De profielwijziging wordt voorgesteld",
+        "ChangeGroups": [
+            {
+                "Name": "Profiel wijzigingen",
+                "Changes": [
+                    "Het ontwerp van de profiellijst is gewijzigd.",
+                    "Favoriete profielen worden nu getoond op je dashboard om eenvoudig tussen deze profielen te kunnen wisselen.",
+                    "Toegevoegd de 'Andere Profielen' sectie in een pakket pagina om ze eenvoudig uit te sluiten of op te nemen in je andere profielen",
+                    "Nieuwe profiel sorteeropties toegevoegd. De geselecteerde sortering zal nu worden opgeslagen tijdens sessies.",
+                    "Rechtsklik acties toegevoegd in de inhoudslijst om een item in al je pakketten uit te sluiten of toe te voegen.",
+                    "Een knop toegevoegd om het profielbestand op je computer te bekijken.",
+                    "U kunt nu een kleur toewijzen aan uw profielen.",
+                    "U kunt nu een desktopsnelkoppeling aanmaken voor uw profielen.",
+                    "U kunt nu een LOT 1-profiel importeren in de sectie 'Profiel toevoegen'."
+                ]
+            },
+            {
+                "Name": "Verbeteringen",
+                "Changes": [
+                    "Steam links zullen nu in Steam's venster worden geopend. Dit kan worden uitgeschakeld in de Opties.",
+                    "Lokale assets worden nu correct gegroepeerd op basis van de mappen waarin ze zich bevinden.",
+                    "Uw Paradox-accountpaneel wordt vanaf nu altijd weergegeven.",
+                    "De vensterknoppen op de bovenkant hebben nu pictogrammen om hun acties uit te leggen.",
+                    "Het reactievermogen van de inhoudslijst pagina's is verbeterd.",
+                    "Zoeken op inhoudslijst pagina's is nu veel sneller.",
+                    "Mod laden is nu gecached, wat resulteert in efficiëntere ladingen op Windows & Linux, en veel snellere ladingen in macOS.",
+                    "Je kunt nu een zip-bestand van je logs genereren terwijl het spel draait."
+                ]
+            },
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "Problemen die zich voordoen op de inhoudslijst pagina's opgelost.",
+                    "Auto-Opslaan is opgelost.",
+                    "Vaste mogelijkheid om geen Workshop kaarten & save-games te gebruiken in de profielinstellingen",
+                    "Aangepaste kaarten die niet worden geladen wanneer geselecteerd in de profielinstellingen.",
+                    "Het laden van profielen op macOS & Linux is niet altijd correct uitgevoerd.",
+                    "Het hebben van een aangepaste locatie voor LSMR rapportbestanden start daar nu correct bij het selecteren van een rapportbestand in de pagina nutsvoorzieningen."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.3",
-    "Date": "2023-04-06",
-    "ChangeGroups": [
-      {
-        "Name": "Oplossingen",
-        "Changes": [
-          "Bug opgelost die tot oneindig laden voor sommige gebruikers heeft geleid."
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nieuw en verbeterd",
+                "Changes": [
+                    "Op de pagina Hulpprogramma's is een import van een tekstbestand of van het klembord toegevoegd.",
+                    "BOB-import is nu een algemene XML-import door het vervangen van elk XML-formaat dat pakket-ID's bevat."
+                ]
+            },
+            {
+                "Name": "Oplossingen",
+                "Changes": [
+                    "Fout opgelost bij het laden van een collectie-URL die de ID niet correct parseert.",
+                    "Probleem opgelost dat LOT op Mac/Linux niet reageert bij het uitschrijven van een pakket."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.2",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "Veranderingen",
-        "Changes": [
-          "Het tabblad abonnement is verwijderd van de in-game mod opties.",
-          "Vaste DLC's die niet worden toegepast bij het laden van een profiel.",
-          "Vaste de taaloptie die voor sommige mensen leeg was",
-          "Herdownloaden van stoom zal de focus niet langer naar de tool drukken.",
-          "Andere UI veranderingen."
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "Lente schoonmaak update",
+        "ChangeGroups": [
+            {
+                "Name": "Filter & zoek wijzigingen",
+                "Changes": [
+                    "Nieuwe auteur filter dropdown toegevoegd.",
+                    "Meer acties aan labels in de inhoudslijst toegevoegd.",
+                    "Nieuwe \"Eventuele problemen\" optie voor \"Pakket Status\" & \"Compatibility Report\" dropdowns.",
+                    "Alle filteracties zijn nu gedaan met behulp van Ctrl+Click, een optie toegevoegd om deze functionaliteit te wisselen.",
+                    "Opnieuw filteren met behulp van de snelkoppelingen in de lijst verwijdert nu het item van uw filter.",
+                    "Het scheiden van termen met een komma in je zoekopdracht splitst je zoekopdracht om te voldoen aan een van de termen (OR)\r\n\t• Het toevoegen van '+' aan het begin van je term vereist dat de term wordt gematched (AND)\r\n\t½ • Het toevoegen '-' aan het begin van je term zal items die overeenkomen met die term\r\n\r\nVoorbeelden van de nieuwe zoekopdracht uitsluiten:\r\n\t• auto, Vrachtwagen (komt overeen met 'auto' OF 'vrachtwagen')\r\n\t• gebouwen, appartement +european (matcht 'european' EN ['gebouw' OF 'appartement'])\r\n\tvrees • condoe, house -rico +american (komt overeen met 'american' EN ['condo' OF 'huis'] EN NIET 'rico')"
+                ]
+            },
+            {
+                "Name": "UI & UX wijzigingen",
+                "Changes": [
+                    "Implementeer een nieuw pictogramsysteem dat alle pictogrammen naar behoren schaalde in je UI-schaal.",
+                    "Herwerkte het renderen van lijsten, het verbeteren van de prestaties en het reactievermogen van inhoudspagina's drastisch.",
+                    "Een sorteervolgorde schakelaar toegevoegd om te selecteren tussen oplopend en aflopend sorteren.",
+                    "De 'Acties' sectie is verplaatst naar de pagina inhoud en 2 nieuwe opties toegevoegd.",
+                    "Pakketten die nu zijn opgenomen hebben een andere UI in de lijst.",
+                    "Verbeterde knoppen en filteropties in de inhoudslijsten, hun totale grootte verkleinen en meer visuele aanwijzingen toevoegen.",
+                    "Veranderd de optie om de grootte van de lijst items bij zweven te verhogen om hun grootte altijd te vergroten, de UI van de uitgebreide lijstitems verbeterd en deze functionaliteit toegepast op de rest van de lijsten in de app.",
+                    "Een Ctrl+[0-9] snelkoppeling toegevoegd om te schakelen tussen beschikbare tabbladen.",
+                    "Wissel alle zijden van de dubbele knoppen en opties om te schakelen.",
+                    "Animaties zijn nu standaard uitgeschakeld op macOS & Linux.",
+                    "Zoveel verdere UI verbeteringen, veranderingen en oplossingen die ik verloren heb."
+                ]
+            },
+            {
+                "Name": "Bestands-selectie reamp",
+                "Changes": [
+                    "De UI van de bestandsselectieschermen is bijgewerkt.",
+                    "Vastgepinde mappen toegevoegd om gemakkelijk toegang te krijgen tot relevante mappen.",
+                    "Voeg een Workshop sectie toe om makkelijk de workshop kaarten & saves te selecteren.",
+                    "Een vervolgkeuzelijst en sorteer sorteervolgorde toegevoegd",
+                    "Een lijst/rasterweergave schakelaar toegevoegd."
+                ]
+            },
+            {
+                "Name": "Bug-fixes",
+                "Changes": [
+                    "Starten van LOT opgelost nadat het monitor eerder was uitgezet, wat resulteerde in het nu weergegeven venster.",
+                    "Vaste de LHT optie die niet werkt bij lanceren in een nieuwe kaart.",
+                    "Repareerde auteurspagina's die niet correct worden geopend in Steam.",
+                    "Vaste bevriezing tijdens zoeken tijdens het selecteren van de sortering 'Abonnement'."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.1",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "Veranderingen",
-        "Changes": [
-          "Een info popup toevoegen wanneer u zich voor het eerst abonnert op artikelen.",
-          "Er is een waarschuwingstekst toegevoegd in het dashboard wanneer er meerdere LOM instanties geïnstalleerd zijn.",
-          "Kleine tags toegevoegd naast pakket titels.",
-          "Herdownloaden van Laad Order Tool zal de download starten en sluit de app terwijl het wordt bijgewerkt.",
-          "Vaste en verbeterde de snelheid van het laden van scherm mod rapporten."
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Werkplaats Pakketten Opschonen",
+                "Changes": [
+                    "Nieuwe functies toegevoegd om makkelijk verkeerde matches tussen Steam en je gedownloade pakketten te verwerken.",
+                    "Pakketten waarop u niet bent geabonneerd zijn niet langer in het spel geladen.",
+                    "Het starten van het spel terwijl LOT geopend is, zal automatisch alle pakketten verwijderen waar u niet op bent geabonneerd, maar wordt gedownload op uw computer.",
+                    "Een knop toegevoegd op het tabblad Utilities om handmatig deze schoonmaak uit te voeren en de download van ontbrekende pakketten af te dwingen."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.0",
-    "Date": "2023-04-05",
-    "Tagline": "Beta openbare release",
-    "ChangeGroups": []
-  },
-  {
-    "Version": "2.2.1",
-    "Date": "2023-04-15",
-    "Tagline": "De profielwijziging wordt voorgesteld",
-    "ChangeGroups": [
-      {
-        "Name": "Profiel wijzigingen",
-        "Changes": [
-          "Het ontwerp van de profiellijst is gewijzigd.",
-          "Favoriete profielen worden nu getoond op je dashboard om eenvoudig tussen deze profielen te kunnen wisselen.",
-          "Toegevoegd de 'Andere Profielen' sectie in een pakket pagina om ze eenvoudig uit te sluiten of op te nemen in je andere profielen",
-          "Nieuwe profiel sorteeropties toegevoegd. De geselecteerde sortering zal nu worden opgeslagen tijdens sessies.",
-          "Rechtsklik acties toegevoegd in de inhoudslijst om een item in al je pakketten uit te sluiten of toe te voegen.",
-          "Een knop toegevoegd om het profielbestand op je computer te bekijken.",
-          "U kunt nu een kleur toewijzen aan uw profielen.",
-          "U kunt nu een desktopsnelkoppeling aanmaken voor uw profielen.",
-          "U kunt nu een LOT 1-profiel importeren in de sectie 'Profiel toevoegen'."
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Nieuw",
+                "Changes": [
+                    "Toegevoegd een optie om automatische opschoning uit te schakelen bij het openen van het spel.",
+                    "Een eigen selectievakje voor geavanceerd opstarten toegevoegd."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Verbeteringen",
-        "Changes": [
-          "Steam links zullen nu in Steam's venster worden geopend. Dit kan worden uitgeschakeld in de Opties.",
-          "Lokale assets worden nu correct gegroepeerd op basis van de mappen waarin ze zich bevinden.",
-          "Uw Paradox-accountpaneel wordt vanaf nu altijd weergegeven.",
-          "De vensterknoppen op de bovenkant hebben nu pictogrammen om hun acties uit te leggen.",
-          "Het reactievermogen van de inhoudslijst pagina's is verbeterd.",
-          "Zoeken op inhoudslijst pagina's is nu veel sneller.",
-          "Mod laden is nu gecached, wat resulteert in efficiëntere ladingen op Windows & Linux, en veel snellere ladingen in macOS.",
-          "Je kunt nu een zip-bestand van je logs genereren terwijl het spel draait."
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Stem & Abonnees Icoon",
+                "Changes": [
+                    "Een nieuw pictogram toegevoegd naast een pakket dat een snel overzicht toont van de stemmen en de teller van het pakket.",
+                    "Beweeg erover om de waarden weer te geven.",
+                    "Klik op het pictogram voor een diepgaande beschrijving van deze functie.",
+                    "Sorteeropties voor 'Stemmen' & 'Totaal abonnees' toegevoegd."
+                ]
+            },
+            {
+                "Name": "Activa vereisten",
+                "Changes": [
+                    "De vereiste items die worden weergegeven op de pagina van een workshop asset, is nu geïntegreerd in Laad Gereedschap.",
+                    "Deze informatie zal nu worden opgenomen in het Compatibiliteitsrapport om snel en eenvoudig te zien wat je mist."
+                ]
+            },
+            {
+                "Name": "Andere wijzigingen",
+                "Changes": [
+                    "De pakketpagina is bijgewerkt op basis van de weergegeven informatie in de inhoudslijsten.",
+                    "Secundaire inhoudslijsten zoals 'Ontbrekende pakketten' & 'Verzameling werkplaats' gebruiken nu dezelfde UI als de belangrijkste inhoudslijst pagina's, toestaan voor een gestroomlijnde ervaring en meer opties.",
+                    "Opties voor het snel laden in de Asset Editor, 'Nieuw assetbestand laden' en 'Asset' in het profiel toegevoegd."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Oplossingen",
-        "Changes": [
-          "Problemen die zich voordoen op de inhoudslijst pagina's opgelost.",
-          "Auto-Opslaan is opgelost.",
-          "Vaste mogelijkheid om geen Workshop kaarten & save-games te gebruiken in de profielinstellingen",
-          "Aangepaste kaarten die niet worden geladen wanneer geselecteerd in de profielinstellingen.",
-          "Het laden van profielen op macOS & Linux is niet altijd correct uitgevoerd.",
-          "Het hebben van een aangepaste locatie voor LSMR rapportbestanden start daar nu correct bij het selecteren van een rapportbestand in de pagina nutsvoorzieningen."
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Presentatie, Skyve, de laatste opvolger van Load Order Mod 1/2 en Compatibility Report.\r\nCommentaar voor C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Compatibiliteitsrapport revisie",
+                "Changes": [
+                    "Compatibiliteitsrapport is nu direct geïntegreerd in Skyve.",
+                    "Aanbevelingen en informatieteksten zijn nu duidelijker en eenvoudiger te beheren.",
+                    "Een snooze knop toegevoegd om een bepaalde compatibiliteitsmelding af te wijzen.",
+                    "Vereiste items doorverwijzen automatisch naar de meest recente opvolger van de pakketten.",
+                    "Lokale pakketten worden automatisch gekoppeld aan hun online tegenhanger, door de informatie van Steam te tonen en de compatibiliteitsinformatie correct te tonen.",
+                    "U kunt nu een review aanvragen voor een pakket om ons op de hoogte te stellen van ontbrekende informatie in de compatibiliteitsgegevens.",
+                    "Het tabblad Compatibility Rapport is nu beschikbaar."
+                ]
+            },
+            {
+                "Name": "Nieuwe functies",
+                "Changes": [
+                    "Je kunt de zoekresultaten nu bewerken! tags in de app voor mods en assets. Assets worden gesynchroniseerd met het spel.",
+                    "Een tabblad \"Verwijzingen\" op de pagina van een pakket toegevoegd om alle andere pakketten te zien die ernaar verwijzen.",
+                    "Toegevoegd een optie om optionele pakketten te gebruiken dezelfde melding als de vereiste pakketten.",
+                    "Taaldialecten, Chinees (Taiwan), Engels Verenigd Koninkrijk en Portugees Brazilië toegevoegd."
+                ]
+            },
+            {
+                "Name": "Andere wijzigingen",
+                "Changes": [
+                    "Pseudo-mods omvatten nu IMT-markeringen, Render! Presets, Procedurele Objecten en Vertaalmods.",
+                    "Links toegevoegd aan de pakketpagina, evenals andere informatie zoals zijn gebruik & type.",
+                    "Nieuw profielgebruik toegevoegd: Kaart creatie, Scenario Making, en Thema Making.",
+                    "Extra tekst toegevoegd in de lijst om te laten zien hoeveel pakketten verborgen zijn vanwege uw profielgebruik.",
+                    "De knop Acties verbeteren om deze zichtbaarder en toegankelijker te maken.",
+                    "Het nieuwe icoon is nu gloort op basis van wat er gebeurt, blauw geeft aan dat het spel draait, rood betekent geen internetverbinding, en snel gloeien betekent dat het spel start of sluit."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.2.2",
-    "Date": "2023-04-19",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Nieuw en verbeterd",
-        "Changes": [
-          "Op de pagina Hulpprogramma's is een import van een tekstbestand of van het klembord toegevoegd.",
-          "BOB-import is nu een algemene XML-import door het vervangen van elk XML-formaat dat pakket-ID's bevat."
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Herstelde oude instellingen en profielen worden soms niet in Skyve overgedragen.",
+                    "Er wordt een snelkoppeling aangemaakt als u Skyve opnieuw opent, wanneer u voorheen LOM2 had.",
+                    "Fixed a rare case where the compatibility info was not loading.",
+                    "Enabled the ability to request a review for a package that is currently broken.",
+                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Oplossingen",
-        "Changes": [
-          "Fout opgelost bij het laden van een collectie-URL die de ID niet correct parseert.",
-          "Probleem opgelost dat LOT op Mac/Linux niet reageert bij het uitschrijven van een pakket."
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
+                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+                    "Fixed mods being detected in the local assets folder."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.0",
-    "Date": "2023-04-27",
-    "Tagline": "Lente schoonmaak update",
-    "ChangeGroups": [
-      {
-        "Name": "Filter & zoek wijzigingen",
-        "Changes": [
-          "Nieuwe auteur filter dropdown toegevoegd.",
-          "Meer acties aan labels in de inhoudslijst toegevoegd.",
-          "Nieuwe \"Eventuele problemen\" optie voor \"Pakket Status\" & \"Compatibility Report\" dropdowns.",
-          "Alle filteracties zijn nu gedaan met behulp van Ctrl+Click, een optie toegevoegd om deze functionaliteit te wisselen.",
-          "Opnieuw filteren met behulp van de snelkoppelingen in de lijst verwijdert nu het item van uw filter.",
-          "Het scheiden van termen met een komma in je zoekopdracht splitst je zoekopdracht om te voldoen aan een van de termen (OR)\r\n\t• Het toevoegen van '+' aan het begin van je term vereist dat de term wordt gematched (AND)\r\n\t½ • Het toevoegen '-' aan het begin van je term zal items die overeenkomen met die term\r\n\r\nVoorbeelden van de nieuwe zoekopdracht uitsluiten:\r\n\t• auto, Vrachtwagen (komt overeen met 'auto' OF 'vrachtwagen')\r\n\t• gebouwen, appartement +european (matcht 'european' EN ['gebouw' OF 'appartement'])\r\n\tvrees • condoe, house -rico +american (komt overeen met 'american' EN ['condo' OF 'huis'] EN NIET 'rico')"
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the options tab not opening for macOS & Linux.",
+                    "Fixed the Help & Logs tab not loading your current log automatically.",
+                    "Fixed the log file path being wrong on Linux."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "UI & UX wijzigingen",
-        "Changes": [
-          "Implementeer een nieuw pictogramsysteem dat alle pictogrammen naar behoren schaalde in je UI-schaal.",
-          "Herwerkte het renderen van lijsten, het verbeteren van de prestaties en het reactievermogen van inhoudspagina's drastisch.",
-          "Een sorteervolgorde schakelaar toegevoegd om te selecteren tussen oplopend en aflopend sorteren.",
-          "De 'Acties' sectie is verplaatst naar de pagina inhoud en 2 nieuwe opties toegevoegd.",
-          "Pakketten die nu zijn opgenomen hebben een andere UI in de lijst.",
-          "Verbeterde knoppen en filteropties in de inhoudslijsten, hun totale grootte verkleinen en meer visuele aanwijzingen toevoegen.",
-          "Veranderd de optie om de grootte van de lijst items bij zweven te verhogen om hun grootte altijd te vergroten, de UI van de uitgebreide lijstitems verbeterd en deze functionaliteit toegepast op de rest van de lijsten in de app.",
-          "Een Ctrl+[0-9] snelkoppeling toegevoegd om te schakelen tussen beschikbare tabbladen.",
-          "Wissel alle zijden van de dubbele knoppen en opties om te schakelen.",
-          "Animaties zijn nu standaard uitgeschakeld op macOS & Linux.",
-          "Zoveel verdere UI verbeteringen, veranderingen en oplossingen die ik verloren heb."
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
+                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
+                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the asset summary not showing in the dashboard.",
+                    "Fixed the out of date status not working correctly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Bestands-selectie reamp",
-        "Changes": [
-          "De UI van de bestandsselectieschermen is bijgewerkt.",
-          "Vastgepinde mappen toegevoegd om gemakkelijk toegang te krijgen tot relevante mappen.",
-          "Voeg een Workshop sectie toe om makkelijk de workshop kaarten & saves te selecteren.",
-          "Een vervolgkeuzelijst en sorteer sorteervolgorde toegevoegd",
-          "Een lijst/rasterweergave schakelaar toegevoegd."
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes & Changes",
+                "Changes": [
+                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
+                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
+                    "Fixed the changelog not opening with some languages.",
+                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Bug-fixes",
-        "Changes": [
-          "Starten van LOT opgelost nadat het monitor eerder was uitgezet, wat resulteerde in het nu weergegeven venster.",
-          "Vaste de LHT optie die niet werkt bij lanceren in een nieuwe kaart.",
-          "Repareerde auteurspagina's die niet correct worden geopend in Steam.",
-          "Vaste bevriezing tijdens zoeken tijdens het selecteren van de sortering 'Abonnement'."
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Reworked Subscription Process",
+                "Changes": [
+                    "You can now subscribe to packages while the game is open.",
+                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
+                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                ]
+            },
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Added a \"Force download\" option in packages' right-click menu.",
+                    "Added more context to some popups",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the profile list not updating instantly.",
+                    "Fixed profile packages not showing their workshop name.",
+                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
+                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Improved the performance for people with a lot of mods."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.1",
-    "Date": "2023-04-29",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Werkplaats Pakketten Opschonen",
-        "Changes": [
-          "Nieuwe functies toegevoegd om makkelijk verkeerde matches tussen Steam en je gedownloade pakketten te verwerken.",
-          "Pakketten waarop u niet bent geabonneerd zijn niet langer in het spel geladen.",
-          "Het starten van het spel terwijl LOT geopend is, zal automatisch alle pakketten verwijderen waar u niet op bent geabonneerd, maar wordt gedownload op uw computer.",
-          "Een knop toegevoegd op het tabblad Utilities om handmatig deze schoonmaak uit te voeren en de download van ontbrekende pakketten af te dwingen."
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.2",
-    "Date": "2023-04-30",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Nieuw",
-        "Changes": [
-          "Toegevoegd een optie om automatische opschoning uit te schakelen bij het openen van het spel.",
-          "Een eigen selectievakje voor geavanceerd opstarten toegevoegd."
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Updated for the latest game patch."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.3",
-    "Date": "2023-05-04",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Stem & Abonnees Icoon",
-        "Changes": [
-          "Een nieuw pictogram toegevoegd naast een pakket dat een snel overzicht toont van de stemmen en de teller van het pakket.",
-          "Beweeg erover om de waarden weer te geven.",
-          "Klik op het pictogram voor een diepgaande beschrijving van deze functie.",
-          "Sorteeropties voor 'Stemmen' & 'Totaal abonnees' toegevoegd."
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "Online profiles, coming through!",
+        "ChangeGroups": [
+            {
+                "Name": "Online Profiles",
+                "Changes": [
+                    "You can now upload a profile online, up to 5 profiles per user.",
+                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
+                    "Online profiles can be downloaded, or updated if you already have it locally.",
+                    "You can discover online profiles using a new button in the Profiles tab.",
+                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                ]
+            },
+            {
+                "Name": "Profile Changes",
+                "Changes": [
+                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
+                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
+                    "Changed the design of the top action buttons on both profile pages",
+                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
+                    "Profiles can now have thumbnails.",
+                    "Profile usages now have separate icons."
+                ]
+            },
+            {
+                "Name": "New & Updated",
+                "Changes": [
+                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
+                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Added 6 new reset buttons in the Utilities page.",
+                    "Added 2 new buttons in the Help & Logs page.",
+                    "Compatibility & package statuses are now shown on the right in the list.",
+                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Local mods' name & label have been updated.",
+                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "Added a setting in-game to enable hot-reload for mods & assets.",
+                    "Improved performance while including/excluding packages.",
+                    "Added Hungarian language"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Activa vereisten",
-        "Changes": [
-          "De vereiste items die worden weergegeven op de pagina van een workshop asset, is nu geïntegreerd in Laad Gereedschap.",
-          "Deze informatie zal nu worden opgenomen in het Compatibiliteitsrapport om snel en eenvoudig te zien wat je mist."
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Andere wijzigingen",
-        "Changes": [
-          "De pakketpagina is bijgewerkt op basis van de weergegeven informatie in de inhoudslijsten.",
-          "Secundaire inhoudslijsten zoals 'Ontbrekende pakketten' & 'Verzameling werkplaats' gebruiken nu dezelfde UI als de belangrijkste inhoudslijst pagina's, toestaan voor een gestroomlijnde ervaring en meer opties.",
-          "Opties voor het snel laden in de Asset Editor, 'Nieuw assetbestand laden' en 'Asset' in het profiel toegevoegd."
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.0",
-    "Date": "2023-05-23",
-    "Tagline": "Presentatie, Skyve, de laatste opvolger van Load Order Mod 1/2 en Compatibility Report.\r\nCommentaar voor C:S I & C:S II",
-    "ChangeGroups": [
-      {
-        "Name": "Compatibiliteitsrapport revisie",
-        "Changes": [
-          "Compatibiliteitsrapport is nu direct geïntegreerd in Skyve.",
-          "Aanbevelingen en informatieteksten zijn nu duidelijker en eenvoudiger te beheren.",
-          "Een snooze knop toegevoegd om een bepaalde compatibiliteitsmelding af te wijzen.",
-          "Vereiste items doorverwijzen automatisch naar de meest recente opvolger van de pakketten.",
-          "Lokale pakketten worden automatisch gekoppeld aan hun online tegenhanger, door de informatie van Steam te tonen en de compatibiliteitsinformatie correct te tonen.",
-          "U kunt nu een review aanvragen voor een pakket om ons op de hoogte te stellen van ontbrekende informatie in de compatibiliteitsgegevens.",
-          "Het tabblad Compatibility Rapport is nu beschikbaar."
+    },
+    {
+        "Version": "3.1.2",
+        "Date": "2023-06-21",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixes an error caused by including/excluding mods that have contain assets.",
+                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
+                    "Fixed some packages not showing their successor properly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "Nieuwe functies",
-        "Changes": [
-          "Je kunt de zoekresultaten nu bewerken! tags in de app voor mods en assets. Assets worden gesynchroniseerd met het spel.",
-          "Een tabblad \"Verwijzingen\" op de pagina van een pakket toegevoegd om alle andere pakketten te zien die ernaar verwijzen.",
-          "Toegevoegd een optie om optionele pakketten te gebruiken dezelfde melding als de vereiste pakketten.",
-          "Taaldialecten, Chinees (Taiwan), Engels Verenigd Koninkrijk en Portugees Brazilië toegevoegd."
-        ]
-      },
-      {
-        "Name": "Andere wijzigingen",
-        "Changes": [
-          "Pseudo-mods omvatten nu IMT-markeringen, Render! Presets, Procedurele Objecten en Vertaalmods.",
-          "Links toegevoegd aan de pakketpagina, evenals andere informatie zoals zijn gebruik & type.",
-          "Nieuw profielgebruik toegevoegd: Kaart creatie, Scenario Making, en Thema Making.",
-          "Extra tekst toegevoegd in de lijst om te laten zien hoeveel pakketten verborgen zijn vanwege uw profielgebruik.",
-          "De knop Acties verbeteren om deze zichtbaarder en toegankelijker te maken.",
-          "Het nieuwe icoon is nu gloort op basis van wat er gebeurt, blauw geeft aan dat het spel draait, rood betekent geen internetverbinding, en snel gloeien betekent dat het spel start of sluit."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.1",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Herstelde oude instellingen en profielen worden soms niet in Skyve overgedragen.",
-          "Er wordt een snelkoppeling aangemaakt als u Skyve opnieuw opent, wanneer u voorheen LOM2 had.",
-          "Fixed a rare case where the compatibility info was not loading.",
-          "Enabled the ability to request a review for a package that is currently broken.",
-          "Loosened the sensitivity of the 'Partially Downloaded' notification."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.2",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Improved the performance of the app. Quicker load times & less stutters are expected.",
-          "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-          "Fixed mods being detected in the local assets folder."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.3",
-    "Date": "2023-05-24",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the options tab not opening for macOS & Linux.",
-          "Fixed the Help & Logs tab not loading your current log automatically.",
-          "Fixed the log file path being wrong on Linux."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.4",
-    "Date": "2023-05-27",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-          "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-          "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
-        ]
-      },
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the asset summary not showing in the dashboard.",
-          "Fixed the out of date status not working correctly."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.5",
-    "Date": "2023-05-28",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes & Changes",
-        "Changes": [
-          "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-          "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-          "Fixed the changelog not opening with some languages.",
-          "Potentially fixed subscribing to a large amount of items failing/not working."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.6",
-    "Date": "2023-05-29",
-    "ChangeGroups": [
-      {
-        "Name": "Reworked Subscription Process",
-        "Changes": [
-          "You can now subscribe to packages while the game is open.",
-          "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-          "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-          "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-          "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
-        ]
-      },
-      {
-        "Name": "New",
-        "Changes": [
-          "Added \"View this Profile's contents\" in profiles' right-click menu.",
-          "Added a \"Force download\" option in packages' right-click menu.",
-          "Added more context to some popups",
-          "Added a \"Download all displayed items\" in the actions in list pages."
-        ]
-      },
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the profile list not updating instantly.",
-          "Fixed profile packages not showing their workshop name.",
-          "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-          "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-          "Improved the performance for people with a lot of mods."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.1",
-    "Date": "2023-06-05",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the crash on launch."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.2",
-    "Date": "2023-06-12",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Updated for the latest game patch."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0",
-    "Date": "2023-06-13",
-    "Tagline": "Online profiles, coming through!",
-    "ChangeGroups": [
-      {
-        "Name": "Online Profiles",
-        "Changes": [
-          "You can now upload a profile online, up to 5 profiles per user.",
-          "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-          "Online profiles can be downloaded, or updated if you already have it locally.",
-          "You can discover online profiles using a new button in the Profiles tab.",
-          "Added a third option in the 'Add Profile' page to import an online profile using its ID."
-        ]
-      },
-      {
-        "Name": "Profile Changes",
-        "Changes": [
-          "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-          "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-          "Changed the design of the top action buttons on both profile pages",
-          "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-          "Profiles can now have thumbnails.",
-          "Profile usages now have separate icons."
-        ]
-      },
-      {
-        "Name": "New & Updated",
-        "Changes": [
-          "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-          "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-          "Added 6 new reset buttons in the Utilities page.",
-          "Added 2 new buttons in the Help & Logs page.",
-          "Compatibility & package statuses are now shown on the right in the list.",
-          "Broken, incompatible, and banned packages now have a new background in the list.",
-          "Local mods' name & label have been updated.",
-          "Missing source code will now generate a warning instead of an unsubscribe notification.",
-          "Required mods now have a different UI to let you know you can not exclude them.",
-          "Added a setting in-game to enable hot-reload for mods & assets.",
-          "Improved performance while including/excluding packages.",
-          "Added Hungarian language"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0.1",
-    "Date": "2023-06-14",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Added an option to ignore internet connectivity checks.",
-          "Added an indicator that a profile is uploading.",
-          "Added a button to easily view an online profile's contents.",
-          "Fixed an error while fetching steam user info.",
-          "Fixed Asset Editor launch settings not being remembered correctly.",
-          "Fixed updating an online profile not working properly."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.1",
-    "Date": "2023-06-16",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Added a loading animation when viewing a profile's contents.",
-          "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-          "Fixed private packages being marked as .",
-          "Fixed some parts of the UI not getting translated from the start."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.2",
-    "Date": "2023-06-21",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixes an error caused by including/excluding mods that have contain assets.",
-          "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-          "Fixed some packages not showing their successor properly."
-        ]
-      }
-    ]
-  }
+    }
 ]

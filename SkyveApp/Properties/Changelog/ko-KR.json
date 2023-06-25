@@ -1,565 +1,565 @@
 [
-  {
-    "Version": "2.2.0",
-    "Date": "2023-04-10",
-    "Tagline": "변경 사항 탭에 오신 것을 환영합니다",
-    "ChangeGroups": [
-      {
-        "Name": "신규",
-        "Changes": [
-          "콘텐츠 페이지의 작업에 '모두 구독 취소' 버튼 추가.",
-          "BOB 구성에서 누락된 항목을 구독하는 유틸리티 섹션 추가.",
-          "기본적으로 필터 & 작업 섹션이 열리는 옵션 추가.",
-          "변경사항 페이지 추가. 도움말 섹션의 버튼을 사용하거나 새 버전일 때 볼 수 있습니다."
+    {
+        "Version": "2.2.0",
+        "Date": "2023-04-10",
+        "Tagline": "변경 사항 탭에 오신 것을 환영합니다",
+        "ChangeGroups": [
+            {
+                "Name": "신규",
+                "Changes": [
+                    "콘텐츠 페이지의 작업에 '모두 구독 취소' 버튼 추가.",
+                    "BOB 구성에서 누락된 항목을 구독하는 유틸리티 섹션 추가.",
+                    "기본적으로 필터 & 작업 섹션이 열리는 옵션 추가.",
+                    "변경사항 페이지 추가. 도움말 섹션의 버튼을 사용하거나 새 버전일 때 볼 수 있습니다."
+                ]
+            },
+            {
+                "Name": "개선사항",
+                "Changes": [
+                    "고장난 에셋에 대한 호환성 보고서 추가",
+                    "미등록인 패키지도 이제 정상적인 이름과 썸네일을 가집니다.",
+                    "이제 폴더 설정에 대한 자리표시자에 당신의 OS가 올바르게 반영됩니다.",
+                    "제작자의 이름을 Ctrl+클릭하여 필터에 추가하기"
+                ]
+            },
+            {
+                "Name": "수정사항",
+                "Changes": [
+                    "최초 실행시 오래된 프로필이 변환되지 않는 오류 수정.",
+                    "외부 변경사항 발생 이후 로컬 자산이 자동으로 새로고침되지 않는 오류 수정.",
+                    "우클릭 메뉴에서 로컬 자산을 삭제했을 때 모든 로컬 자산이 삭제되는 오류 수정.",
+                    "LOT 1 프로필을 변환했을 때 자산이 '로컬'로 표시되는 오류 수정.",
+                    "Linux와 macOS 사용자가 저장하는 경우 실제 폴더가 바뀌는 오류 수정.",
+                    "Linux와 macOS 사용자가 로그 압축 파일을 생성할 수 없는 오류 수정."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "개선사항",
-        "Changes": [
-          "고장난 에셋에 대한 호환성 보고서 추가",
-          "미등록인 패키지도 이제 정상적인 이름과 썸네일을 가집니다.",
-          "이제 폴더 설정에 대한 자리표시자에 당신의 OS가 올바르게 반영됩니다.",
-          "제작자의 이름을 Ctrl+클릭하여 필터에 추가하기"
+    },
+    {
+        "Version": "2.1.4",
+        "Date": "2023-04-08",
+        "ChangeGroups": [
+            {
+                "Name": "도움말 및 로그 섹션 추가",
+                "Changes": [
+                    "더 쉬운 로그 파일 보기",
+                    "최신 또는 현재 게임 세션의 오류를 바로 볼 수 있습니다.",
+                    "실제로 발생하는 일에 집중하기 위해 로그 파일을 단순화했습니다.",
+                    "다른 사람의 도움을 받기 위해 모든 로그가 포함된 압축 파일을 공유할 수 있습니다."
+                ]
+            },
+            {
+                "Name": "개선사항",
+                "Changes": [
+                    "목록에 사용된 필터 아이콘을 올바르게 변경했습니다."
+                ]
+            },
+            {
+                "Name": "수정사항",
+                "Changes": [
+                    "모음집 불러오기에서 구독과 구독 취소 문자가 반대인 문제를 수정했습니다.",
+                    "새 게임 지도를 선택할 때 바닐라 지도를 선택할 수 없도록 수정했습니다."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "수정사항",
-        "Changes": [
-          "최초 실행시 오래된 프로필이 변환되지 않는 오류 수정.",
-          "외부 변경사항 발생 이후 로컬 자산이 자동으로 새로고침되지 않는 오류 수정.",
-          "우클릭 메뉴에서 로컬 자산을 삭제했을 때 모든 로컬 자산이 삭제되는 오류 수정.",
-          "LOT 1 프로필을 변환했을 때 자산이 '로컬'로 표시되는 오류 수정.",
-          "Linux와 macOS 사용자가 저장하는 경우 실제 폴더가 바뀌는 오류 수정.",
-          "Linux와 macOS 사용자가 로그 압축 파일을 생성할 수 없는 오류 수정."
+    },
+    {
+        "Version": "2.1.3",
+        "Date": "2023-04-06",
+        "ChangeGroups": [
+            {
+                "Name": "수정사항",
+                "Changes": [
+                    "일부 유저에게서 보고된 무한 로딩 버그 수정."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.4",
-    "Date": "2023-04-08",
-    "ChangeGroups": [
-      {
-        "Name": "도움말 및 로그 섹션 추가",
-        "Changes": [
-          "더 쉬운 로그 파일 보기",
-          "최신 또는 현재 게임 세션의 오류를 바로 볼 수 있습니다.",
-          "실제로 발생하는 일에 집중하기 위해 로그 파일을 단순화했습니다.",
-          "다른 사람의 도움을 받기 위해 모든 로그가 포함된 압축 파일을 공유할 수 있습니다."
+    },
+    {
+        "Version": "2.1.2",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "변경사항",
+                "Changes": [
+                    "게임 내 모드 설정에서 구독 탭 제거.",
+                    "프로필을 불러올 때 DLC가 적용되지 않은 오류 수정.",
+                    "일부 사용자 대상으로 언어 선택 항목이 비어있는 오류 수정.",
+                    "더 이상 Steam에서 항목을 다시 다운로드 했을 때 강제로 Loading Order Tool 도구로 전환되지 않습니다.",
+                    "기타 UI 수정."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "개선사항",
-        "Changes": [
-          "목록에 사용된 필터 아이콘을 올바르게 변경했습니다."
+    },
+    {
+        "Version": "2.1.1",
+        "Date": "2023-04-05",
+        "ChangeGroups": [
+            {
+                "Name": "변경사항",
+                "Changes": [
+                    "항목을 처음으로 구독할 때 정보창을 띄웁니다.",
+                    "복수의 LOM 인스턴스가 설치된 경우 대시보드에 경고 문구를 송출합니다.",
+                    "패키지 이름 옆에 작은 태그를 추가했습니다.",
+                    "Load Order Tool을 다시 다운로드하면 업데이트가 진행되는 동안 앱을 종료합니다.",
+                    "Loading Screen Mod 보고서의 속도를 개선합니다."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "수정사항",
-        "Changes": [
-          "모음집 불러오기에서 구독과 구독 취소 문자가 반대인 문제를 수정했습니다.",
-          "새 게임 지도를 선택할 때 바닐라 지도를 선택할 수 없도록 수정했습니다."
+    },
+    {
+        "Version": "2.1.0",
+        "Date": "2023-04-05",
+        "Tagline": "공개 베타 릴리즈",
+        "ChangeGroups": []
+    },
+    {
+        "Version": "2.2.1",
+        "Date": "2023-04-15",
+        "Tagline": "소개 및 프로필 변경",
+        "ChangeGroups": [
+            {
+                "Name": "프로필 변경",
+                "Changes": [
+                    "프로필 목록 보기 변경",
+                    "이제 즐겨찾는 프로필이 대시보드에 표시되어 손쉽게 프로필을 전환할 수 있습니다.",
+                    "기타 프로필에 패키지를 쉽게 추가하거나 제거할 수 있도록 패키지 페이지에 '기타 프로필' 섹션을 추가했습니다.",
+                    "새로운 프로필 정렬 방식을 추가했습니다. 선택한 정렬 방식은 이제 다음 세션에서도 기억됩니다.",
+                    "모든 패키지에서 항목을 제외하거나 포함할 수 있는 우클릭 메뉴를 추가했습니다.",
+                    "내 컴퓨터에서 프로필 파일을 볼 수 있는 버튼을 추가했습니다.",
+                    "이제 프로필 색상을 지정할 수 있습니다.",
+                    "프로필의 데스크톱 바로가기 생성 가능",
+                    "이제 '프로필 추가' 섹션에서 LOT 1 프로필을 불러올 수 있습니다."
+                ]
+            },
+            {
+                "Name": "개선사항",
+                "Changes": [
+                    "Steam 링크가 이제 Steam 브라우저에서 열립니다. 설정에서 해제할 수 있습니다.",
+                    "이제 로컬 자산이 포함된 폴더를 포함하여 올바르게 그룹화됩니다.",
+                    "패러독스 계정 패널은 이제 항상 표시됩니다.",
+                    "이제 오른쪽 상단 창의 버튼에 수행하는 작업을 설명하는 아이콘이 있습니다.",
+                    "콘텐츠 목록 페이지의 응답 성능을 개선했습니다.",
+                    "콘텐츠 목록 페이지 검색 기능이 훨씬 빨라졌습니다.",
+                    "이제 모드 로딩 캐싱 기능을 지원합니다. 이는 Windows, Linux 그리고 macOS에서 훨씬 더 효율적이고 빠르게 로딩됩니다.",
+                    "이제 게임이 실행되는 동안에도 로그의 압축 파일을 생성할 수 있습니다."
+                ]
+            },
+            {
+                "Name": "수정사항",
+                "Changes": [
+                    "콘텐츠 목록 페이지 멈춤 현상 수정.",
+                    "프로필 자동저장 실패 오류 수정.",
+                    "프로필 설정에서 창작마당 지도와 저장된 게임을 사용할 수 없는 오류 수정.",
+                    "프로필 설정에서 선택한 지도를 불러올 수 없는 오류 수정.",
+                    "macOS와 Linux에서 프로필이 올바르게 불러오지 않는 오류 수정.",
+                    "이제 유틸리티 페이지에서 Loading Screen Mod 보고서 파일을 열 때 올바른 보고서 파일 위치를 사용합니다."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.3",
-    "Date": "2023-04-06",
-    "ChangeGroups": [
-      {
-        "Name": "수정사항",
-        "Changes": [
-          "일부 유저에게서 보고된 무한 로딩 버그 수정."
+    },
+    {
+        "Version": "2.2.2",
+        "Date": "2023-04-19",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "새로운 & 개선사항",
+                "Changes": [
+                    "유틸리티 페이지에 텍스트 파일이나 클립보드에서 가져오기를 추가했습니다.",
+                    "BOB 가져오기는 이제 패키지 ID를 포함하는 모든 XML 형식을 지원하는 범용 XML 가져오기입니다."
+                ]
+            },
+            {
+                "Name": "수정사항",
+                "Changes": [
+                    "때때로 올바르지 않은 모음집 URL을 불러오는 문제를 수정했습니다.",
+                    "macOS와 Linux에서 패키지 구독을 취소할 때 LOT가 멈추는 문제를 수정했습니다."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.2",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "변경사항",
-        "Changes": [
-          "게임 내 모드 설정에서 구독 탭 제거.",
-          "프로필을 불러올 때 DLC가 적용되지 않은 오류 수정.",
-          "일부 사용자 대상으로 언어 선택 항목이 비어있는 오류 수정.",
-          "더 이상 Steam에서 항목을 다시 다운로드 했을 때 강제로 Loading Order Tool 도구로 전환되지 않습니다.",
-          "기타 UI 수정."
+    },
+    {
+        "Version": "2.3.0",
+        "Date": "2023-04-27",
+        "Tagline": "봄 맞이 대규모 패치",
+        "ChangeGroups": [
+            {
+                "Name": "필터 및 검색 변경 사항",
+                "Changes": [
+                    "작성자로 필터링하는 새로운 드롭다운 추가",
+                    "콘텐츠 목록의 라벨에 더 많은 작업 추가",
+                    "\"패키지 상태\" 및 \"호환성 보고서\" 드롭다운에 대한 새로운 \"아무 이슈\" 옵션을 추가했습니다.",
+                    "모든 필터 설정은 이제 Ctrl + 클릭을 통해 가능하며, 이 기능을 바꾸기 위한 옵션 추가",
+                    "이제 목록의 바로 가기를 사용하여 다시 필터링하면 필터에서 항목이 제거됩니다.",
+                    "검색에서 쉼표로 단어를 구분하면 나열된 단어와 일치하는 검색 실행 (OR 구문)\n- 단어 시작 부분에 '+'를 추가하면 해당 단어와 일치하는 결과 (AND 구문)\n- 단어 시작 부분에 '-'를 추가하면 해당 단어와 일치하는 결과 제외\n\n새로운 검색 기능 예시:\n- car, truck ('car' 또는 'truck'과 일치하는 결과)\n- building, apartment, +european ('european'과 일치하는 결과 중 'building' 또는 'apartment'와 일치하는 결과)\n- condo, house, -rico, +american ('american'과 일치하는 결과 중 'condo' 또는 'house'와 일치하지만 'rico'는 제외하는 결과)"
+                ]
+            },
+            {
+                "Name": "UI와 UX 변경 사항",
+                "Changes": [
+                    "사용자 UI 크기에 맞추어 모든 아이콘이 상대적 크기에 따라 적절한 크기로 유지되도록 새로운 아이콘 시스템 구현",
+                    "목록 불러오기 방식을 재작업하여 콘텐츠 페이지 성능과 응답성을 대폭 개선함",
+                    "오름차순 또는 내림차순 정렬을 선택하기 위한 정렬 순서 스위치 추가",
+                    "콘텐츠 페이지에서 '작업' 섹션을 이동하고 2개의 새로운 옵션을 추가했습니다.",
+                    "부분적으로 포함된 패키지는 이제 목록에 다른 UI가 있습니다.",
+                    "콘텐츠 목록의 버튼 및 필터 컨트롤을 개선하여 전체 크기를 줄이고 더 많은 시각적 신호를 추가했습니다.",
+                    "호버링 시 목록 항목의 크기를 늘리는 옵션을 항상 크기를 늘리도록 변경하고 확대된 목록 항목의 UI를 개선했으며 이 기능을 앱의 나머지 목록에 적용했습니다.",
+                    "사용 가능한 탭 사이를 전환하는 Ctrl+[0-9] 단축키를 추가했습니다.",
+                    "모든 더블 버튼과 옵션 토글의 측면을 교체했습니다.",
+                    "애니메이션은 이제 macOS 및 Linux에서 기본적으로 비활성화됩니다.",
+                    "셀 수 없을 정도의 더 많은 UI 개선, 변경 및 수정 사항."
+                ]
+            },
+            {
+                "Name": "파일 선택 기능 개편",
+                "Changes": [
+                    "파일 선택 화면의 UI를 업데이트 했습니다.",
+                    "필요한 폴더에 쉽게 접근할 수 있도록 '고정된 폴더' 기능을 추가했습니다.",
+                    "창작마당 맵&세이브를 쉽게 고를 수 있도록 창작 마당 항목을 추가했습니다.",
+                    "Added a Sorting dropdown & sort order toggle",
+                    "Added a List/Grid view toggle."
+                ]
+            },
+            {
+                "Name": "버그 수정",
+                "Changes": [
+                    "Fixed launching LOT after the monitor it was previously on got turned off resulting in the window now showing up.",
+                    "Fixed the LHT option not working when launching into a new map.",
+                    "Fixed author pages not opening correctly in Steam.",
+                    "Fixed freezes happening while searching while the 'Subscribe Time' sorting was selected."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.1",
-    "Date": "2023-04-05",
-    "ChangeGroups": [
-      {
-        "Name": "변경사항",
-        "Changes": [
-          "항목을 처음으로 구독할 때 정보창을 띄웁니다.",
-          "복수의 LOM 인스턴스가 설치된 경우 대시보드에 경고 문구를 송출합니다.",
-          "패키지 이름 옆에 작은 태그를 추가했습니다.",
-          "Load Order Tool을 다시 다운로드하면 업데이트가 진행되는 동안 앱을 종료합니다.",
-          "Loading Screen Mod 보고서의 속도를 개선합니다."
+    },
+    {
+        "Version": "2.3.1",
+        "Date": "2023-04-29",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Workshop Packages Cleanup",
+                "Changes": [
+                    "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
+                    "Packages you are not subscribed to are no longer loaded in-game.",
+                    "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
+                    "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.1.0",
-    "Date": "2023-04-05",
-    "Tagline": "공개 베타 릴리즈",
-    "ChangeGroups": []
-  },
-  {
-    "Version": "2.2.1",
-    "Date": "2023-04-15",
-    "Tagline": "소개 및 프로필 변경",
-    "ChangeGroups": [
-      {
-        "Name": "프로필 변경",
-        "Changes": [
-          "프로필 목록 보기 변경",
-          "이제 즐겨찾는 프로필이 대시보드에 표시되어 손쉽게 프로필을 전환할 수 있습니다.",
-          "기타 프로필에 패키지를 쉽게 추가하거나 제거할 수 있도록 패키지 페이지에 '기타 프로필' 섹션을 추가했습니다.",
-          "새로운 프로필 정렬 방식을 추가했습니다. 선택한 정렬 방식은 이제 다음 세션에서도 기억됩니다.",
-          "모든 패키지에서 항목을 제외하거나 포함할 수 있는 우클릭 메뉴를 추가했습니다.",
-          "내 컴퓨터에서 프로필 파일을 볼 수 있는 버튼을 추가했습니다.",
-          "이제 프로필 색상을 지정할 수 있습니다.",
-          "프로필의 데스크톱 바로가기 생성 가능",
-          "이제 '프로필 추가' 섹션에서 LOT 1 프로필을 불러올 수 있습니다."
+    },
+    {
+        "Version": "2.3.2",
+        "Date": "2023-04-30",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "신규",
+                "Changes": [
+                    "게임을 열 때 자동 정리를 비활성화하는 옵션을 추가했습니다.",
+                    "Added a custom arguments box for advanced launch settings."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "개선사항",
-        "Changes": [
-          "Steam 링크가 이제 Steam 브라우저에서 열립니다. 설정에서 해제할 수 있습니다.",
-          "이제 로컬 자산이 포함된 폴더를 포함하여 올바르게 그룹화됩니다.",
-          "패러독스 계정 패널은 이제 항상 표시됩니다.",
-          "이제 오른쪽 상단 창의 버튼에 수행하는 작업을 설명하는 아이콘이 있습니다.",
-          "콘텐츠 목록 페이지의 응답 성능을 개선했습니다.",
-          "콘텐츠 목록 페이지 검색 기능이 훨씬 빨라졌습니다.",
-          "이제 모드 로딩 캐싱 기능을 지원합니다. 이는 Windows, Linux 그리고 macOS에서 훨씬 더 효율적이고 빠르게 로딩됩니다.",
-          "이제 게임이 실행되는 동안에도 로그의 압축 파일을 생성할 수 있습니다."
+    },
+    {
+        "Version": "2.3.3",
+        "Date": "2023-05-04",
+        "Tagline": "",
+        "ChangeGroups": [
+            {
+                "Name": "Vote & Subscribers Icon",
+                "Changes": [
+                    "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
+                    "Hover over it to display the values.",
+                    "Click on the icon for an in-depth description of this feature.",
+                    "Added 'Votes' & 'Total Subscribers' sorting options."
+                ]
+            },
+            {
+                "Name": "자산 요구 사항",
+                "Changes": [
+                    "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
+                    "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+                ]
+            },
+            {
+                "Name": "기타 변경",
+                "Changes": [
+                    "Updated the Package Page to match the displayed information in the content lists.",
+                    "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
+                    "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "수정사항",
-        "Changes": [
-          "콘텐츠 목록 페이지 멈춤 현상 수정.",
-          "프로필 자동저장 실패 오류 수정.",
-          "프로필 설정에서 창작마당 지도와 저장된 게임을 사용할 수 없는 오류 수정.",
-          "프로필 설정에서 선택한 지도를 불러올 수 없는 오류 수정.",
-          "macOS와 Linux에서 프로필이 올바르게 불러오지 않는 오류 수정.",
-          "이제 유틸리티 페이지에서 Loading Screen Mod 보고서 파일을 열 때 올바른 보고서 파일 위치를 사용합니다."
+    },
+    {
+        "Version": "3.0.0",
+        "Date": "2023-05-23",
+        "Tagline": "Presenting, Skyve, the final successor of Load Order Mod 1/2 and Compatibility Report.\r\nComing for C:S I & C:S II",
+        "ChangeGroups": [
+            {
+                "Name": "Compatibility Report Overhaul",
+                "Changes": [
+                    "Compatibility Report is now integrated directly into Skyve.",
+                    "Recommendations and info text are now clearer and easier to manage.",
+                    "Added a Snooze button to dismiss a certain compatibility notification.",
+                    "Required items automatically redirect to the packages' most recent successor.",
+                    "Local packages are automatically matched with their online counterpart, showing the information from Steam and correctly showing its compatibility info.",
+                    "You can now request a review for a package to notify us about missing information in the compatibility data.",
+                    "이제 호환성 보고서 탭을 사용할 수 있습니다."
+                ]
+            },
+            {
+                "Name": "새로운 기능",
+                "Changes": [
+                    "You can now edit Find it! tags directly in the app to mods and assets. Assets are synched with the game.",
+                    "Added a \"References\" tab on a package's page to see all other packages that reference it.",
+                    "Added an option to make optional packages use the same notification as required packages.",
+                    "Added language dialects, Chinese Traditional (Taiwan), English UK, and Portuguese Brazil."
+                ]
+            },
+            {
+                "Name": "기타 변경",
+                "Changes": [
+                    "Pseudo-mods now include IMT Markings, Render it! Presets, Procedural Objects Fonts, and translation mods.",
+                    "Added links to the package page, as well as other information like its usage & type.",
+                    "Added new Profile usages: Map Creation, Scenario Making, and Theme Making.",
+                    "Added extra text in the list to show how many packages are hidden because of your profile usage.",
+                    "Improved the Actions button to make it more visible and easier to access.",
+                    "The new icon now glows based on what's happening, blue indicates that the game is running, red means no internet connection, and quick glowing means it's launching or closing the game."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.2.2",
-    "Date": "2023-04-19",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "새로운 & 개선사항",
-        "Changes": [
-          "유틸리티 페이지에 텍스트 파일이나 클립보드에서 가져오기를 추가했습니다.",
-          "BOB 가져오기는 이제 패키지 ID를 포함하는 모든 XML 형식을 지원하는 범용 XML 가져오기입니다."
+    },
+    {
+        "Version": "3.0.1",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
+                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
+                    "Fixed a rare case where the compatibility info was not loading.",
+                    "Enabled the ability to request a review for a package that is currently broken.",
+                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "수정사항",
-        "Changes": [
-          "때때로 올바르지 않은 모음집 URL을 불러오는 문제를 수정했습니다.",
-          "macOS와 Linux에서 패키지 구독을 취소할 때 LOT가 멈추는 문제를 수정했습니다."
+    },
+    {
+        "Version": "3.0.2",
+        "Date": "2023-05-23",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
+                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+                    "Fixed mods being detected in the local assets folder."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.0",
-    "Date": "2023-04-27",
-    "Tagline": "봄 맞이 대규모 패치",
-    "ChangeGroups": [
-      {
-        "Name": "필터 및 검색 변경 사항",
-        "Changes": [
-          "작성자로 필터링하는 새로운 드롭다운 추가",
-          "콘텐츠 목록의 라벨에 더 많은 작업 추가",
-          "\"패키지 상태\" 및 \"호환성 보고서\" 드롭다운에 대한 새로운 \"아무 이슈\" 옵션을 추가했습니다.",
-          "모든 필터 설정은 이제 Ctrl + 클릭을 통해 가능하며, 이 기능을 바꾸기 위한 옵션 추가",
-          "이제 목록의 바로 가기를 사용하여 다시 필터링하면 필터에서 항목이 제거됩니다.",
-          "검색에서 쉼표로 단어를 구분하면 나열된 단어와 일치하는 검색 실행 (OR 구문)\n- 단어 시작 부분에 '+'를 추가하면 해당 단어와 일치하는 결과 (AND 구문)\n- 단어 시작 부분에 '-'를 추가하면 해당 단어와 일치하는 결과 제외\n\n새로운 검색 기능 예시:\n- car, truck ('car' 또는 'truck'과 일치하는 결과)\n- building, apartment, +european ('european'과 일치하는 결과 중 'building' 또는 'apartment'와 일치하는 결과)\n- condo, house, -rico, +american ('american'과 일치하는 결과 중 'condo' 또는 'house'와 일치하지만 'rico'는 제외하는 결과)"
+    },
+    {
+        "Version": "3.0.3",
+        "Date": "2023-05-24",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the options tab not opening for macOS & Linux.",
+                    "Fixed the Help & Logs tab not loading your current log automatically.",
+                    "Fixed the log file path being wrong on Linux."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "UI와 UX 변경 사항",
-        "Changes": [
-          "사용자 UI 크기에 맞추어 모든 아이콘이 상대적 크기에 따라 적절한 크기로 유지되도록 새로운 아이콘 시스템 구현",
-          "목록 불러오기 방식을 재작업하여 콘텐츠 페이지 성능과 응답성을 대폭 개선함",
-          "오름차순 또는 내림차순 정렬을 선택하기 위한 정렬 순서 스위치 추가",
-          "콘텐츠 페이지에서 '작업' 섹션을 이동하고 2개의 새로운 옵션을 추가했습니다.",
-          "부분적으로 포함된 패키지는 이제 목록에 다른 UI가 있습니다.",
-          "콘텐츠 목록의 버튼 및 필터 컨트롤을 개선하여 전체 크기를 줄이고 더 많은 시각적 신호를 추가했습니다.",
-          "호버링 시 목록 항목의 크기를 늘리는 옵션을 항상 크기를 늘리도록 변경하고 확대된 목록 항목의 UI를 개선했으며 이 기능을 앱의 나머지 목록에 적용했습니다.",
-          "사용 가능한 탭 사이를 전환하는 Ctrl+[0-9] 단축키를 추가했습니다.",
-          "모든 더블 버튼과 옵션 토글의 측면을 교체했습니다.",
-          "애니메이션은 이제 macOS 및 Linux에서 기본적으로 비활성화됩니다.",
-          "셀 수 없을 정도의 더 많은 UI 개선, 변경 및 수정 사항."
+    },
+    {
+        "Version": "3.0.4",
+        "Date": "2023-05-27",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
+                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
+                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the asset summary not showing in the dashboard.",
+                    "Fixed the out of date status not working correctly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "파일 선택 기능 개편",
-        "Changes": [
-          "파일 선택 화면의 UI를 업데이트 했습니다.",
-          "필요한 폴더에 쉽게 접근할 수 있도록 '고정된 폴더' 기능을 추가했습니다.",
-          "창작마당 맵&세이브를 쉽게 고를 수 있도록 창작 마당 항목을 추가했습니다.",
-          "Added a Sorting dropdown & sort order toggle",
-          "Added a List/Grid view toggle."
+    },
+    {
+        "Version": "3.0.5",
+        "Date": "2023-05-28",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes & Changes",
+                "Changes": [
+                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
+                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
+                    "Fixed the changelog not opening with some languages.",
+                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "버그 수정",
-        "Changes": [
-          "Fixed launching LOT after the monitor it was previously on got turned off resulting in the window now showing up.",
-          "Fixed the LHT option not working when launching into a new map.",
-          "Fixed author pages not opening correctly in Steam.",
-          "Fixed freezes happening while searching while the 'Subscribe Time' sorting was selected."
+    },
+    {
+        "Version": "3.0.6",
+        "Date": "2023-05-29",
+        "ChangeGroups": [
+            {
+                "Name": "Reworked Subscription Process",
+                "Changes": [
+                    "You can now subscribe to packages while the game is open.",
+                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
+                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
+                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
+                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                ]
+            },
+            {
+                "Name": "New",
+                "Changes": [
+                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
+                    "Added a \"Force download\" option in packages' right-click menu.",
+                    "Added more context to some popups",
+                    "Added a \"Download all displayed items\" in the actions in list pages."
+                ]
+            },
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the profile list not updating instantly.",
+                    "Fixed profile packages not showing their workshop name.",
+                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
+                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Improved the performance for people with a lot of mods."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.1",
-    "Date": "2023-04-29",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Workshop Packages Cleanup",
-        "Changes": [
-          "Added new functionalities to easily handle mismatches between Steam and your downloaded packages.",
-          "Packages you are not subscribed to are no longer loaded in-game.",
-          "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.",
-          "Added a button in the Utilities tab to manually run this cleanup as well as forcing the download of missing packages."
+    },
+    {
+        "Version": "3.0.7.1",
+        "Date": "2023-06-05",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixed the crash on launch."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.2",
-    "Date": "2023-04-30",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "신규",
-        "Changes": [
-          "게임을 열 때 자동 정리를 비활성화하는 옵션을 추가했습니다.",
-          "Added a custom arguments box for advanced launch settings."
+    },
+    {
+        "Version": "3.0.7.2",
+        "Date": "2023-06-12",
+        "ChangeGroups": [
+            {
+                "Name": "수정",
+                "Changes": [
+                    "최신 게임 패치를 위해 업데이트됨."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "2.3.3",
-    "Date": "2023-05-04",
-    "Tagline": "",
-    "ChangeGroups": [
-      {
-        "Name": "Vote & Subscribers Icon",
-        "Changes": [
-          "Added a new icon next to a package that displays a quick summary of the votes and subscriber count of the package.",
-          "Hover over it to display the values.",
-          "Click on the icon for an in-depth description of this feature.",
-          "Added 'Votes' & 'Total Subscribers' sorting options."
+    },
+    {
+        "Version": "3.1.0",
+        "Date": "2023-06-13",
+        "Tagline": "온라인 프로필이 다가옵니다!",
+        "ChangeGroups": [
+            {
+                "Name": "온라인 프로필",
+                "Changes": [
+                    "이제 프로필을 온라인으로 사용자당 5개까지 업로드할 수 있습니다.",
+                    "업로드된 프로필은 비공개로 하거나, ID로 공유하거나, 또는 모든 사람이 볼 수 있게 공개할 수 있습니다.",
+                    "온라인 프로필을 다운로드하거나 이미 가지고 있는 경우 업데이트할 수 있습니다.",
+                    "프로필 탭의 새 버튼을 사용하여 온라인 프로필을 탐색할 수 있습니다.",
+                    "ID를 사용하여 온라인 프로필을 가져올 수 있게 '프로필 추가' 페이지에 세 번째 옵션을 추가했습니다."
+                ]
+            },
+            {
+                "Name": "프로필 변경사항",
+                "Changes": [
+                    "사이드바의 '프로필' 탭은 이제 현재 프로필의 설정 대신 프로필 목록을 엽니다.",
+                    "프로필 목록은 이제 격자 보기를 사용하며 격자 보기와 목록 보기 사이를 전환할 수 있습니다.",
+                    "두 프로필 페이지의 상단 작업 버튼 디자인 변경",
+                    "이제 프로필에 저장되지 않은 변경 사항이 있으면 Skyve 로고가 보라색으로 빛납니다.",
+                    "프로필은 이제 섬네일을 가질 수 있습니다.",
+                    "이제 프로필 용도별로 다른 아이콘을 가집니다"
+                ]
+            },
+            {
+                "Name": "신규 및 업데이트",
+                "Changes": [
+                    "모드 또는 프로필의 제작자를 클릭하여 들어갈 수 있는 사용자 프로필 페이지를 새로 추가했습니다. 이 페이지에는 사용자의 모든 프로필과 패키지가 포함되어 있습니다.",
+                    "Skyve에서 삭제하는 파일은 이제 Windows의 휴지통으로 보내집니다.",
+                    "유틸리티 페이지에 6개의 새 초기화 버튼을 추가했습니다.",
+                    "도움 & 로그 페이지에 2개의 새 버튼을 추가했습니다.",
+                    "이제 호환성 및 패키지 상태가 목록의 오른쪽에 표시됩니다.",
+                    "망가진, 호환되지 않는, 차단된 패키지는 이제 목록에서 새로운 배경을 가집니다.",
+                    "로컬 모드의 이름과 레이블이 업데이트되었습니다.",
+                    "소스 코드가 누락된 경우는 이제 구독 취소 알림 대신 경고를 생성합니다.",
+                    "필요한 모드 UI는 이제 제외할수 없다는 점을 알려주는 다른 UI를 가집니다.",
+                    "모드와 에셋에 대한 핫 리로드를 활성화할 수 있는 설정을 인게임에 추가했습니다.",
+                    "패키지를 포함/제외할 때의 성능이 개선되었습니다.",
+                    "헝가리어 추가"
+                ]
+            }
         ]
-      },
-      {
-        "Name": "자산 요구 사항",
-        "Changes": [
-          "The required items displayed on a workshop asset's page is now integrated in Load Order Tool.",
-          "This information will now be included in the Compatibility Report to quickly and easily see what you're missing."
+    },
+    {
+        "Version": "3.1.0.1",
+        "Date": "2023-06-14",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added an option to ignore internet connectivity checks.",
+                    "Added an indicator that a profile is uploading.",
+                    "Added a button to easily view an online profile's contents.",
+                    "Fixed an error while fetching steam user info.",
+                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fixed updating an online profile not working properly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "기타 변경",
-        "Changes": [
-          "Updated the Package Page to match the displayed information in the content lists.",
-          "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
-          "Added 'New Asset' & 'Load Asset' launch options in the profile to quickly load into the Asset Editor."
+    },
+    {
+        "Version": "3.1.1",
+        "Date": "2023-06-16",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a loading animation when viewing a profile's contents.",
+                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+                    "Fixed private packages being marked as .",
+                    "Fixed some parts of the UI not getting translated from the start."
+                ]
+            }
         ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.0",
-    "Date": "2023-05-23",
-    "Tagline": "Presenting, Skyve, the final successor of Load Order Mod 1/2 and Compatibility Report.\r\nComing for C:S I & C:S II",
-    "ChangeGroups": [
-      {
-        "Name": "Compatibility Report Overhaul",
-        "Changes": [
-          "Compatibility Report is now integrated directly into Skyve.",
-          "Recommendations and info text are now clearer and easier to manage.",
-          "Added a Snooze button to dismiss a certain compatibility notification.",
-          "Required items automatically redirect to the packages' most recent successor.",
-          "Local packages are automatically matched with their online counterpart, showing the information from Steam and correctly showing its compatibility info.",
-          "You can now request a review for a package to notify us about missing information in the compatibility data.",
-          "이제 호환성 보고서 탭을 사용할 수 있습니다."
+    },
+    {
+        "Version": "3.1.2",
+        "Date": "2023-06-21",
+        "ChangeGroups": [
+            {
+                "Name": "Fixes",
+                "Changes": [
+                    "Fixes an error caused by including/excluding mods that have contain assets.",
+                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
+                    "Fixed some packages not showing their successor properly."
+                ]
+            }
         ]
-      },
-      {
-        "Name": "새로운 기능",
-        "Changes": [
-          "You can now edit Find it! tags directly in the app to mods and assets. Assets are synched with the game.",
-          "Added a \"References\" tab on a package's page to see all other packages that reference it.",
-          "Added an option to make optional packages use the same notification as required packages.",
-          "Added language dialects, Chinese Traditional (Taiwan), English UK, and Portuguese Brazil."
-        ]
-      },
-      {
-        "Name": "기타 변경",
-        "Changes": [
-          "Pseudo-mods now include IMT Markings, Render it! Presets, Procedural Objects Fonts, and translation mods.",
-          "Added links to the package page, as well as other information like its usage & type.",
-          "Added new Profile usages: Map Creation, Scenario Making, and Theme Making.",
-          "Added extra text in the list to show how many packages are hidden because of your profile usage.",
-          "Improved the Actions button to make it more visible and easier to access.",
-          "The new icon now glows based on what's happening, blue indicates that the game is running, red means no internet connection, and quick glowing means it's launching or closing the game."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.1",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-          "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-          "Fixed a rare case where the compatibility info was not loading.",
-          "Enabled the ability to request a review for a package that is currently broken.",
-          "Loosened the sensitivity of the 'Partially Downloaded' notification."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.2",
-    "Date": "2023-05-23",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Improved the performance of the app. Quicker load times & less stutters are expected.",
-          "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-          "Fixed mods being detected in the local assets folder."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.3",
-    "Date": "2023-05-24",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the options tab not opening for macOS & Linux.",
-          "Fixed the Help & Logs tab not loading your current log automatically.",
-          "Fixed the log file path being wrong on Linux."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.4",
-    "Date": "2023-05-27",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-          "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-          "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
-        ]
-      },
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the asset summary not showing in the dashboard.",
-          "Fixed the out of date status not working correctly."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.5",
-    "Date": "2023-05-28",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes & Changes",
-        "Changes": [
-          "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-          "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-          "Fixed the changelog not opening with some languages.",
-          "Potentially fixed subscribing to a large amount of items failing/not working."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.6",
-    "Date": "2023-05-29",
-    "ChangeGroups": [
-      {
-        "Name": "Reworked Subscription Process",
-        "Changes": [
-          "You can now subscribe to packages while the game is open.",
-          "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-          "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-          "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-          "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
-        ]
-      },
-      {
-        "Name": "New",
-        "Changes": [
-          "Added \"View this Profile's contents\" in profiles' right-click menu.",
-          "Added a \"Force download\" option in packages' right-click menu.",
-          "Added more context to some popups",
-          "Added a \"Download all displayed items\" in the actions in list pages."
-        ]
-      },
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the profile list not updating instantly.",
-          "Fixed profile packages not showing their workshop name.",
-          "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-          "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-          "Improved the performance for people with a lot of mods."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.1",
-    "Date": "2023-06-05",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixed the crash on launch."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.0.7.2",
-    "Date": "2023-06-12",
-    "ChangeGroups": [
-      {
-        "Name": "수정",
-        "Changes": [
-          "최신 게임 패치를 위해 업데이트됨."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0",
-    "Date": "2023-06-13",
-    "Tagline": "온라인 프로필이 다가옵니다!",
-    "ChangeGroups": [
-      {
-        "Name": "온라인 프로필",
-        "Changes": [
-          "이제 프로필을 온라인으로 사용자당 5개까지 업로드할 수 있습니다.",
-          "업로드된 프로필은 비공개로 하거나, ID로 공유하거나, 또는 모든 사람이 볼 수 있게 공개할 수 있습니다.",
-          "온라인 프로필을 다운로드하거나 이미 가지고 있는 경우 업데이트할 수 있습니다.",
-          "프로필 탭의 새 버튼을 사용하여 온라인 프로필을 탐색할 수 있습니다.",
-          "ID를 사용하여 온라인 프로필을 가져올 수 있게 '프로필 추가' 페이지에 세 번째 옵션을 추가했습니다."
-        ]
-      },
-      {
-        "Name": "프로필 변경사항",
-        "Changes": [
-          "사이드바의 '프로필' 탭은 이제 현재 프로필의 설정 대신 프로필 목록을 엽니다.",
-          "프로필 목록은 이제 격자 보기를 사용하며 격자 보기와 목록 보기 사이를 전환할 수 있습니다.",
-          "두 프로필 페이지의 상단 작업 버튼 디자인 변경",
-          "이제 프로필에 저장되지 않은 변경 사항이 있으면 Skyve 로고가 보라색으로 빛납니다.",
-          "프로필은 이제 섬네일을 가질 수 있습니다.",
-          "이제 프로필 용도별로 다른 아이콘을 가집니다"
-        ]
-      },
-      {
-        "Name": "신규 및 업데이트",
-        "Changes": [
-          "모드 또는 프로필의 제작자를 클릭하여 들어갈 수 있는 사용자 프로필 페이지를 새로 추가했습니다. 이 페이지에는 사용자의 모든 프로필과 패키지가 포함되어 있습니다.",
-          "Skyve에서 삭제하는 파일은 이제 Windows의 휴지통으로 보내집니다.",
-          "유틸리티 페이지에 6개의 새 초기화 버튼을 추가했습니다.",
-          "도움 & 로그 페이지에 2개의 새 버튼을 추가했습니다.",
-          "이제 호환성 및 패키지 상태가 목록의 오른쪽에 표시됩니다.",
-          "망가진, 호환되지 않는, 차단된 패키지는 이제 목록에서 새로운 배경을 가집니다.",
-          "로컬 모드의 이름과 레이블이 업데이트되었습니다.",
-          "소스 코드가 누락된 경우는 이제 구독 취소 알림 대신 경고를 생성합니다.",
-          "필요한 모드 UI는 이제 제외할수 없다는 점을 알려주는 다른 UI를 가집니다.",
-          "모드와 에셋에 대한 핫 리로드를 활성화할 수 있는 설정을 인게임에 추가했습니다.",
-          "패키지를 포함/제외할 때의 성능이 개선되었습니다.",
-          "헝가리어 추가"
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.0.1",
-    "Date": "2023-06-14",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Added an option to ignore internet connectivity checks.",
-          "Added an indicator that a profile is uploading.",
-          "Added a button to easily view an online profile's contents.",
-          "Fixed an error while fetching steam user info.",
-          "Fixed Asset Editor launch settings not being remembered correctly.",
-          "Fixed updating an online profile not working properly."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.1",
-    "Date": "2023-06-16",
-    "ChangeGroups": [
-      {
-        "Name": "Changes",
-        "Changes": [
-          "Added a loading animation when viewing a profile's contents.",
-          "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-          "Fixed private packages being marked as .",
-          "Fixed some parts of the UI not getting translated from the start."
-        ]
-      }
-    ]
-  },
-  {
-    "Version": "3.1.2",
-    "Date": "2023-06-21",
-    "ChangeGroups": [
-      {
-        "Name": "Fixes",
-        "Changes": [
-          "Fixes an error caused by including/excluding mods that have contain assets.",
-          "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-          "Fixed some packages not showing their successor properly."
-        ]
-      }
-    ]
-  }
+    }
 ]
