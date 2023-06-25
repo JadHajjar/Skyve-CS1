@@ -552,7 +552,7 @@
   "ShareProfile": "上传此配置文件",
   "ResetInfo": "警告！任何重置操作都无法撤销。",
   "FailedToDownloadProfile": "无法下载此配置文件。\n\n请稍后重试。",
-  "UpdateProfileTip": "更新此配置文件的本地版本",
+  "UpdateProfileTip": "使用本地版本更新此配置文件",
   "DownloadProfileTip": "将此配置文件下载到本地计算机",
   "EditProfileThumbnail": "编辑此配置文件的缩略图",
   "MakePublic": "将此配置文件设为公开",
