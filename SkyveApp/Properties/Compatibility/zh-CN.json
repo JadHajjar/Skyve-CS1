@@ -120,7 +120,7 @@
   },
   "Status_DependencyMod": "这是一个前置模组，但您似乎没有任何依赖于这个前置模组的插件。",
   "Status_SourceCodeNotAvailable": "此模组的源代码不可用。除非您信任此模组的作者，否则不应使用此模组。",
-  "SourceAvailable": "源代码不可用",
+  "SourceAvailable": "源代码可用",
   "Status_MusicCanBeCopyrighted": "此模组所含音乐可能受到版权保护。最好不要在串流直播时使用此模组。",
   "Status_IncompleteDescription": "这个模组创意工坊页面的描述文本非常短。除非你信任此模组的作者，否则不应使用此模组。",
   "OutputText": "预期显示文本",
@@ -179,7 +179,7 @@
   "RequestReview": "申请检查",
   "MissingDependencyCount": {
     "One": "{0} 个{1} 缺少前置插件",
-    "Plural": "{0} 个{1} 缺少必需物品"
+    "Plural": "{0} 个{1} 缺少前置插件"
   },
   "CautionCount": "{0} 个{1} 建议谨慎使用",
   "WarningCount": "{0} 个{1} 带有警告",
