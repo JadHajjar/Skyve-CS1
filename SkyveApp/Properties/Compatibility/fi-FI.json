@@ -188,7 +188,7 @@
     "Plural": "{0} {1} vaatii huomiotasi"
   },
   "ExcludeCount": {
-    "One": "{0} {1} pitäisi sulkea pois",
+    "One": "{0} {1} pitäisi jättää pois",
     "Plural": "{0} {1} pitäisi sulkea pois"
   },
   "UnsubscribeCount": "{0} {1} , että sinun pitäisi peruuttaa tilaus",
@@ -205,8 +205,8 @@
   "POFont": "Menettelytavan Kohteen Kirjasin/Moduuli",
   "NameList": "Nimi: Lista/Pelin Käännökset",
   "ApplyChangedBeforeExit": "Sinulla on tallentamattomia muutoksia.\r\n\r\nHaluatko ottaa nämä muutokset käyttöön ennen jatkamista?",
-  "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
-  "AuthorMalicious": "Kirjoittaja {0}, {1}, tiedetään olevan pahansuopia ja/tai sisällyttää haitallista sisältöä, kuten viruksia niiden pakkauksissa.",
+  "AuthorRetired": "Modin {0} tekijä {1} on lopetttanut, tai ollut pitkään epäaktiivinen. \n\nPakettien päivityksiä ja vakautta ei voida taata.",
+  "AuthorMalicious": "Tekijän {0}, {1}, tiedetään olevan pahansuopa ja/tai sisällyttää haitallista sisältöä, kuten viruksia paketteihinsa.",
   "ReviewRequests": "Arvostelupyynnöt {0}",
   "DeleteRequest": "Poista pyyntö",
   "ApplyRequestedChanges": "Hyväksy pyydetyt muutokset",
