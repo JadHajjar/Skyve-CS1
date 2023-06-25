@@ -314,7 +314,7 @@
   "OpenProfileFolder": "Näytä tämän profiilin tiedosto tietokoneellasi",
   "ChangeProfileColor": "Muuta profiilin väriä",
   "EditProfileName": "Muokkaa tämän profiilin nimeä",
-  "SaveProfileChanges": "Save the current package settings to this profile's file",
+  "SaveProfileChanges": "Tallenna nykyisen paketin asetukset tämän profiilin tiedostoon",
   "Sorting_Color": "Profiilin Väri",
   "CreateShortcutProfile": "Luo pikakuvake sitä varten työpöydällä",
   "AskToLaunchGameForShortcut": "Haluatko että pikakuvake voi myös käynnistää pelin profiilisi avulla?",
@@ -489,60 +489,60 @@
   "LoggedInAs": "Kirjautuneena käyttäjänä",
   "UnknownUser": "Tuntematon käyttäjä",
   "AddMeaningfulDescription": "Ole hyvä ja lisää tarkoituksellinen kuvaus pyyntöösi.",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "RedownloadComplete": "Skyve suoritti pakettien, joiden kanssa oli ongelmia, uudelleenlatauksen.",
+  "CleanupComplete": "Skyve suoritti Workshop latausten siivouksen.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} kohde odottaa tilausta",
+    "Plural": "{0} kohdetta odottaa tilausta"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} kohde odottaa tilauksen peruuttamista",
+    "Plural": "{0} kohdetta odottaa tilauksen peruuttamista"
   },
-  "CancelSubs": "Cancel all pending subscriptions",
+  "CancelSubs": "Peruuta kaikki odottavat tilaukset",
   "CancelDownloads": "Peruuta kaikki odottavat lataukset",
-  "ApplySubs": "Launch the game for a brief moment to apply pending subscriptions",
+  "ApplySubs": "Käynnistä peli hetkeksi odottavien tilausten hakemiseksi",
   "ApplyDownloads": "Pakota Steam lataamaan kaikki odottavat paketit",
-  "SubsPendingInfo": "Packages you subscribe to are grouped here.\r\nOnce you open the game, those items will be subscribed to on Steam.",
-  "DownloadsPendingInfo": "Packages you subscribe to and haven't been downloaded yet are grouped here.",
-  "ForceDownloadAndDeleteAsSoonAsRequested": "Start the download or removal of packages immediately after subscribing/unsubscribing",
-  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Forces the download or removal of packages instead of waiting till they are actually subscribed or unsubscribed.",
+  "SubsPendingInfo": "Tilaamasi paketit on ryhmitelty täällä.\nKun avaat pelin, nämä kohteet tilataan Steamissa.",
+  "DownloadsPendingInfo": "Paketit jotka olet tilannut, mutta joita ei ole vielä ladattu on ryhmitelty tänne.",
+  "ForceDownloadAndDeleteAsSoonAsRequested": "Aloita pakettien lataus tai poisto välittömästi tilauksen tai tilauksen peruuttamisen jälkeen",
+  "ForceDownloadAndDeleteAsSoonAsRequested_Tip": "Pakottaa pakettien lataamisen tai poistamisen sen sijaan, että odotetaan kunnes ne on tilattu tai tilaus peruutetu.",
   "ThisSubscribesTo": {
-    "One": "You will be subscribing to {0} package in this process.",
-    "Plural": "You will be subscribing to {0} packages in this process."
+    "One": "Olet tilaamassa {0} pakettia tässä prosessissa.",
+    "Plural": "Olet tilaamassa {0} pakettia tässä prosessissa."
   },
   "ThisUnsubscribesFrom": {
-    "One": "You will be unsubscribing from {0} package in this process.",
-    "Plural": "You will be unsubscribing from {0} packages in this process."
+    "One": "Olet peruuttamass {0} paketin tilauksen tässä prosessissa.",
+    "Plural": "Olet peruuttamass {0} paketin tilauksen tässä prosessissa."
   },
-  "ViewThisProfilesPackages": "View this profile's contents",
+  "ViewThisProfilesPackages": "Näytä tämän profiilin sisältö",
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} kohde odottaa latausta",
+    "Plural": "{0} kohdetta odottaa latausta"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} kohde odottaa poistoa",
+    "Plural": "{0} kohdetta odottaa poistoa"
   },
   "YouHavePackagesUser": {
-    "One": "You have {0} package made by {1}",
-    "Plural": "You have {0} packages made by {1}"
+    "One": "Sinulla on {0} paketti, jonka on tehnyt {1}",
+    "Plural": "Sinulla on {0} pakettia, jonka on tehnyt {1}"
   },
-  "RequestOption1": "Report an issue or add missing information",
-  "RequestOption2": "Add a missing status for the package",
+  "RequestOption1": "Ilmoita ongelmasta tai lisää puuttuvia tietoja",
+  "RequestOption2": "Lisää puuttuva tila paketille",
   "RequestOption3": "Add a missing interaction with another package",
   "CurrentProfile": "Nykyinen profiili",
-  "References": "References",
-  "OpenLog": "Open Log File",
-  "Sort By": "Sort By",
-  "OpenCitiesAppData": "Open C:S's AppData folder",
-  "FailedToFetchLogs": "Failed to fetch your logs",
+  "References": "Viitteet",
+  "OpenLog": "Avaa Lokitiedosto",
+  "Sort By": "Lajitteluperuste",
+  "OpenCitiesAppData": "Avaa C:S:n AppData kansio",
+  "FailedToFetchLogs": "Lokitiedostojen noutaminen epäonnistui",
   "DiscoverProfiles": "Discover Profiles",
   "AllUsages": "All Usages",
-  "Invalid": "Invalid",
-  "UpdateProfile": "Update Profile",
+  "Invalid": "Virheellinen",
+  "UpdateProfile": "Päivitä profiili",
   "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
-  "DownloadProfile": "Download Profile",
+  "DownloadProfile": "Lataa Profiili",
   "ReloadAllData": "Reload all data",
   "ResetSnoozes": "Reset all snoozes",
   "ResetModsCache": "Reset mods' cache",
