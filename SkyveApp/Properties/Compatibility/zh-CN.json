@@ -33,7 +33,7 @@
   "Switch": "需要替换",
   "FlippedSwitch": "替换为此插件",
   "Deprecated": "已废弃",
-  "Reupload": "重新上传",
+  "Reupload": "重新上传版本",
   "CausesIssues": "引发问题",
   "SavesCantLoadWithoutIt": "没有它，存档将无法载入",
   "TestVersion": "测试版",
@@ -46,7 +46,7 @@
   "SameFunctionality": "功能相同",
   "RequirementAlternative": "可用的备选方案",
   "IncompatibleWith": "与…不兼容",
-  "CausesIssuesWith": "与…一起使用会导致问题",
+  "CausesIssuesWith": "与…同时使用会引发问题",
   "RequiredPackages": "需要 ...",
   "StatusType": "状态类型",
   "InteractionType": "交互类型",
@@ -100,7 +100,7 @@
   "Interaction_Identical": "以下是同一插件的多个不同版本。\n\n您应当只使用其中一个版本，并取消订阅此插件的其它版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
   "Status_Deprecated": "'{0}' 已经废弃，不再受到作者的支持。",
-  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行过更新，可能不再受到作者的支持。",
+  "Status_AutoDeprecated": "'{0}' 已经很长时间没有进行更新了。",
   "Status_Reupload": {
     "Zero": "'{0}' 是某个插件的重新上传版本。",
     "One": "此插件是 '{1}' 的重新上传版本。"
@@ -184,8 +184,8 @@
   "CautionCount": "{0} 个{1} 建议谨慎使用",
   "WarningCount": "{0} 个{1} 带有警告",
   "AttentionRequiredCount": {
-    "One": "{0} 个{1} 需要加以注意",
-    "Plural": "{0} 个{1} 需要加以注意"
+    "One": "{0} 个{1} 需要注意",
+    "Plural": "{0} 个{1} 需要注意"
   },
   "ExcludeCount": {
     "One": "{0} 个{1} 应当被卸下",
