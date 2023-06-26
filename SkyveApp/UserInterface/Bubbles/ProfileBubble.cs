@@ -11,14 +11,14 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.StatusBubbles;
 internal class ProfileBubble : StatusBubbleBase
 {
-	private readonly IProfileManager _profileManager;
+	private readonly IPlaysetManager _profileManager;
 
 	public ProfileBubble()
 	{ 
-		_profileManager = Program.Services.GetService<IProfileManager>();
+		_profileManager = Program.Services.GetService<IPlaysetManager>();
 	}
 
-	public override Color? TintColor { get => _profileManager.CurrentProfile.Color; set { } }
+	public override Color? TintColor { get => _profileManager.CurrentPlayset.Color; set { } }
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -30,7 +30,7 @@ internal class ProfileBubble : StatusBubbleBase
 		}
 
 		Text = Locale.ProfileBubble;
-		ImageName = _profileManager.CurrentProfile.GetIcon();
+		ImageName = _profileManager.CurrentPlayset.GetIcon();
 
 		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
@@ -42,22 +42,22 @@ internal class ProfileBubble : StatusBubbleBase
 		_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Domain.Profile obj)
+	private void ProfileManager_ProfileChanged(Domain.Playset obj)
 	{
-		ImageName = _profileManager.CurrentProfile.GetIcon();
+		ImageName = _profileManager.CurrentPlayset.GetIcon();
 	}
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		DrawText(e, ref targetHeight, _profileManager.CurrentProfile.Name ?? "");
+		DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.Name ?? "");
 
-		if (_profileManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentPlayset.Temporary)
 		{
 			DrawText(e, ref targetHeight, Locale.CreateProfileHere, FormDesign.Design.YellowColor);
 		}
 		else
 		{
-			DrawText(e, ref targetHeight, _profileManager.CurrentProfile.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, _profileManager.CurrentProfile.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, _profileManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
 		}
 
 		if (Program.Services.GetService<INotifier>().ProfilesLoaded)

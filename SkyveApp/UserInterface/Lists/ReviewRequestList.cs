@@ -1,5 +1,6 @@
 ﻿using Extensions;
-using SkyveApp.Domain.Compatibility.Api;
+
+using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SkyveApp.Domain.Enums;
+
+using System;
 
 namespace SkyveApp.Domain.Systems;
 public interface ICompatibilityManager
 {
-	event Action? ReportProcessed;
-
 	ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false);
+	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);
+	NotificationType GetNotification(ICompatibilityInfo info);
+	IPackageCompatibilityInfo? GetPackageInfo(IPackage package);
 	bool IsBlacklisted(IPackage package);
 	bool IsSnoozed(ICompatibilityItem reportItem);
 	void LoadCachedData();

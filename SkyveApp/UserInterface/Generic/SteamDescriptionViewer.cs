@@ -31,7 +31,7 @@ internal class SteamDescriptionViewer : SlickControl
 		{
 			new BackgroundAction(() =>
 			{
-				var imageManager = Program.Services.GetService<IImageManager>();
+				var imageManager = Program.Services.GetService<IImageService>();
 
 				Parallelism.ForEach(images, async image =>
 				{

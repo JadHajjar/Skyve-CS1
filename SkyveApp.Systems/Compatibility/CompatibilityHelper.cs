@@ -1,0 +1,351 @@
+﻿using Extensions;
+
+using SkyveApp.Domain;
+using SkyveApp.Domain.Enums;
+using SkyveApp.Domain.Systems;
+using SkyveApp.Systems.Compatibility.Domain;
+using SkyveApp.Systems.Compatibility.Domain.Api;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace SkyveApp.Systems.Compatibility;
+internal class CompatibilityHelper
+{
+	private readonly CompatibilityManager _compatibilityManager;
+	private readonly IContentManager _contentManager;
+	private readonly IContentUtil _contentUtil;
+	private readonly IPackageUtil _packageUtil;
+	private readonly IWorkshopService _workshopService;
+	private readonly ILocale _locale;
+
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, IContentManager contentManager, IContentUtil contentUtil, IPackageUtil packageUtil, IWorkshopService workshopService, ILocale locale)
+	{
+		_compatibilityManager = compatibilityManager;
+		_contentManager = contentManager;
+		_contentUtil = contentUtil;
+		_packageUtil = packageUtil;
+		_workshopService = workshopService;
+		_locale = locale;
+	}
+
+	public void HandleStatus(CompatibilityInfo info, IndexedPackageStatus status)
+	{
+		var type = status.Status.Type;
+
+		if (type is StatusType.SourceAvailable)
+		{
+			return;
+		}
+
+		if (type is StatusType.DependencyMod && _contentUtil.GetPackagesThatReference(info.Package, true).Any())
+		{
+			return;
+		}
+
+		if (type is StatusType.Deprecated && status.Status.Action is StatusAction.Switch && (status.Status.Packages?.Any() ?? false))
+		{
+			if ((info.Data?.Interactions.ContainsKey(InteractionType.SucceededBy) ?? false) || HandleSucceededBy(info, status.Status.Packages))
+			{
+				return;
+			}
+		}
+
+		var packages = status.Status.Packages?.ToList() ?? new();
+
+		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
+		{
+			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x, _workshopService)).Id);
+		}
+
+		if (status.Status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
+		{
+			_ = packages.RemoveAll(ShouldNotBeUsed);
+
+			if (packages.Count == 0)
+			{
+				return;
+			}
+		}
+
+		var reportType = type switch
+		{
+			StatusType.Deprecated => packages.Count == 0 ? ReportType.Stability : ReportType.Successors,
+			StatusType.CausesIssues or StatusType.SavesCantLoadWithoutIt or StatusType.AutoDeprecated => ReportType.Stability,
+			StatusType.DependencyMod or StatusType.TestVersion or StatusType.MusicCanBeCopyrighted => ReportType.Status,
+			StatusType.SourceCodeNotAvailable or StatusType.IncompleteDescription or StatusType.Reupload => ReportType.Ambiguous,
+			StatusType.MissingDlc => ReportType.DlcMissing,
+			_ => ReportType.Status,
+		};
+
+		if (status.Status.Action is StatusAction.SelectOne)
+		{
+			packages.Insert(0, info.Package.Id);
+		}
+
+		var translation = _locale.Get($"Status_{type}");
+		var action = _locale.Get($"Action_{status.Status.Action}");
+		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
+		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
+		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetPackage(status.Status.Packages?.FirstOrDefault() ?? 0), true)).Trim();
+
+		info.Add(reportType, status.Status, message, packages.ToArray(), _workshopService);
+	}
+
+	public void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
+	{
+		var type = interaction.Interaction.Type;
+
+		if (type is InteractionType.Successor or InteractionType.RequirementAlternative)
+		{
+			return;
+		}
+
+		if (type is InteractionType.SucceededBy && interaction.Interaction.Action is StatusAction.NoAction)
+		{
+			return;
+		}
+
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && !_contentUtil.IsIncluded(info.Package.LocalPackage!))
+		{
+			return;
+		}
+
+		var packages = interaction.Interaction.Packages?.ToList() ?? new();
+
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
+		{
+			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x, _workshopService)).Id);
+		}
+
+		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
+		{
+			if (!_contentUtil.IsIncluded(info.Package.LocalPackage!))
+			{
+				return;
+			}
+
+			_ = packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
+		}
+		else if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
+		{
+			_ = packages.RemoveAll(x => IsPackageEnabled(x, true, true));
+		}
+
+		if (interaction.Interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
+		{
+			_ = packages.RemoveAll(ShouldNotBeUsed);
+		}
+
+		_ = packages.Remove(info.Package.Id);
+
+		if (packages.Count == 0)
+		{
+			return;
+		}
+
+		if (type is InteractionType.SucceededBy && HandleSucceededBy(info, packages))
+		{
+			return;
+		}
+
+		var reportType = type switch
+		{
+			InteractionType.SucceededBy => ReportType.Successors,
+			InteractionType.Alternative => ReportType.Alternatives,
+			InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith => ReportType.Compatibility,
+			InteractionType.RequiredPackages => ReportType.RequiredPackages,
+			InteractionType.OptionalPackages => ReportType.OptionalPackages,
+			_ => ReportType.Compatibility
+		};
+
+		var translation = _locale.Get($"Interaction_{type}");
+		var action = _locale.Get($"Action_{interaction.Interaction.Action}");
+		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
+		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
+		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetPackage(packages.FirstOrDefault()))).Trim();
+
+		if (interaction.Interaction.Action is StatusAction.SelectOne)
+		{
+			packages.Insert(0, info.Package.Id);
+		}
+
+		info.Add(reportType, interaction.Interaction, message, packages.ToArray(), _workshopService);
+	}
+
+	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)
+	{
+		foreach (var item in packages)
+		{
+			if (IsPackageEnabled(item, true, true))
+			{
+				HandleStatus(info, new PackageStatus(StatusType.Succeeded, StatusAction.UnsubscribeThis) { Packages = new[] { item } });
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public IPackageIdentity GetFinalSuccessor(IPackageIdentity package)
+	{
+		if (!_compatibilityManager.CompatibilityData.Packages.TryGetValue(package.Id, out var indexedPackage))
+		{
+			return package;
+		}
+
+		if (indexedPackage.Interactions.ContainsKey(InteractionType.SucceededBy))
+		{
+			var workshopPackage = indexedPackage.Interactions[InteractionType.SucceededBy]
+					.SelectMany(x => x.Packages.Values)
+					.OrderByDescending(x => x.Package.ReviewDate)
+					.FirstOrDefault()?
+					.Package;
+			
+			if (workshopPackage != null)
+			{
+				return new GenericPackageIdentity(workshopPackage.SteamId, _workshopService);
+			}
+			
+			return package;
+		}
+
+		if (_contentManager.GetPackageById(package.Id) is null)
+		{
+			foreach (var item in indexedPackage.RequirementAlternatives.Keys)
+			{
+				if (_contentManager.GetPackageById(item) is IPackageIdentity identity)
+				{
+					return identity;
+				}
+			}
+		}
+
+		return package;
+	}
+
+	private bool IsPackageEnabled(ulong steamId, bool withAlternatives, bool withSuccessors)
+	{
+		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
+
+		if (indexedPackage is null)
+		{
+			return isEnabled(_contentManager.GetPackageById(steamId));
+		}
+
+		if (withAlternatives)
+		{
+			foreach (var item in indexedPackage.RequirementAlternatives)
+			{
+				if (item.Key != steamId)
+				{
+					foreach (var package in FindPackage(item.Value, withSuccessors))
+					{
+						if (isEnabled(package))
+						{
+							return true;
+						}
+					}
+				}
+			}
+		}
+
+		foreach (var package in FindPackage(indexedPackage, withSuccessors))
+		{
+			if (isEnabled(package))
+			{
+				return true;
+			}
+		}
+
+		foreach (var item in indexedPackage.Group)
+		{
+			if (item.Key != steamId)
+			{
+				foreach (var package in FindPackage(item.Value, withSuccessors))
+				{
+					if (isEnabled(package))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+
+		bool isEnabled(ILocalPackage? package) => package is null ? false : _contentUtil.IsIncludedAndEnabled(package);
+	}
+
+	private bool ShouldNotBeUsed(ulong steamId)
+	{
+		var workshopItem = _workshopService.GetPackage(steamId);
+
+		return workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.GetWorkshopInfo()!.Removed)
+			? true
+			: !_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
+			? false
+			: package.Package.Stability is PackageStability.Broken
+			? true
+			: package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false;
+	}
+
+	public IndexedPackage? GetPackageData(IPackage package)
+	{
+		var steamId = package.GetWorkshopInfo()?.Id;
+
+		if (steamId > 0)
+		{
+			var packageData = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId.Value);
+
+			if (packageData is null)
+			{
+				packageData = new IndexedPackage(_compatibilityManager.GetAutomatedReport(package));
+
+				packageData.Load(_compatibilityManager.CompatibilityData.Packages);
+			}
+
+			return packageData;
+		}
+
+		return null;
+	}
+
+	private IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
+	{
+		var localPackage = _contentManager.GetPackageById(package.Package.SteamId);
+
+		if (localPackage is not null)
+		{
+			yield return localPackage;
+		}
+
+		localPackage = _contentManager.Mods.FirstOrDefault(x => x.IsLocal && Path.GetFileName(x.FilePath) == package.Package.FileName)?.LocalPackage;
+
+		if (localPackage is not null)
+		{
+			yield return localPackage;
+		}
+
+		if (!withSuccessors || !package.Interactions.ContainsKey(InteractionType.SucceededBy))
+		{
+			yield break;
+		}
+
+		var packages = package.Interactions[InteractionType.SucceededBy]
+					.SelectMany(x => x.Packages.Values)
+					.Where(x => x.Package != package.Package)
+					.Select(x => FindPackage(x, true))
+					.FirstOrDefault(x => x is not null);
+
+		if (packages is not null)
+		{
+			foreach (var item in packages)
+			{
+				yield return item;
+			}
+		}
+	}
+}

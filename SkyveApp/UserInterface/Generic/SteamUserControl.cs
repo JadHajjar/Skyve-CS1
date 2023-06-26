@@ -87,7 +87,7 @@ internal class SteamUserControl : SlickControl
 		e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.AccentBackColor), ClientRectangle, Padding.Horizontal);
 
 		var size = Height - (Padding.Vertical * 2);
-		var image = Program.Services.GetService<IImageManager>().GetImage(User.AvatarUrl, true).Result;
+		var image = Program.Services.GetService<IImageService>().GetImage(User.AvatarUrl, true).Result;
 		var textRectangle = ClientRectangle.Pad(size + (Padding.Left * 2), 0, 0, 0);
 		var avatarRect = ClientRectangle.Pad(Padding).Align(new Size(size, size), ContentAlignment.MiddleLeft);
 		var infoSize = e.Graphics.Measure(InfoText.IfEmpty(Locale.LoggedInAs), UI.Font(6.75F, FontStyle.Bold));

@@ -205,7 +205,7 @@ public partial class PC_ModUtilities : PanelContent
 	private void DD_BOB_FileSelected(string obj)
 	{
 		var matches = Regex.Matches(File.ReadAllText(obj), "[\\>\"](\\d{8,20})\\.(.+?)[\\<\"]");
-		var assets = new List<Profile.Asset>();
+		var assets = new List<Playset.Asset>();
 
 		foreach (Match item in matches)
 		{
@@ -235,7 +235,7 @@ public partial class PC_ModUtilities : PanelContent
 	private void DD_TextImport_FileSelected(string obj)
 	{
 		var matches = Regex.Matches(File.ReadAllText(obj), "(\\d{8,20})");
-		var assets = new List<Profile.Asset>();
+		var assets = new List<Playset.Asset>();
 
 		foreach (Match item in matches)
 		{
@@ -260,7 +260,7 @@ public partial class PC_ModUtilities : PanelContent
 		}
 
 		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
-		var assets = new List<Profile.Asset>();
+		var assets = new List<Playset.Asset>();
 
 		foreach (Match item in matches)
 		{
@@ -355,7 +355,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ResetImageCache.Loading)
 		{
 			B_ResetImageCache.Loading = true;
-			await Task.Run(Program.Services.GetService<IImageManager>().ClearCache);
+			await Task.Run(Program.Services.GetService<IImageService>().ClearCache);
 			B_ResetImageCache.Loading = false;
 			var img = B_ResetImageCache.ImageName;
 			B_ResetImageCache.ImageName = "I_Check";

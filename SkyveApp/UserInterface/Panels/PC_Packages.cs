@@ -22,7 +22,7 @@ internal class PC_Packages : PC_ContentList<Package>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Package.Plural} - {Program.Services.GetService<IProfileManager>().CurrentProfile.Name}";
+		Text = $"{Locale.Package.Plural} - {Program.Services.GetService<IPlaysetManager>().CurrentPlayset.Name}";
 	}
 
 	protected override IEnumerable<Package> GetItems()

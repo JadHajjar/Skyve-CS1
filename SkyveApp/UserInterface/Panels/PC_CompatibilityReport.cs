@@ -2,11 +2,12 @@
 
 using Newtonsoft.Json;
 
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Compatibility.Api;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility.Domain;
+using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.Utilities;
 
 

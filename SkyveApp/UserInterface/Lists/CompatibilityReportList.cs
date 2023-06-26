@@ -1,11 +1,12 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+using SkyveApp.Domain.Systems;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility;
+using SkyveApp.Systems.Compatibility.Domain;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -26,6 +27,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IContentUtil _contentUtil;
+	private readonly IPackageUtil _packageUtil;
 	private readonly ISettings _settings;
 
 	public CompatibilityReportList()
@@ -51,7 +53,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 	protected override IEnumerable<DrawableItem<CompatibilityInfo, Rectangles>> OrderItems(IEnumerable<DrawableItem<CompatibilityInfo, Rectangles>> items)
 	{
-		return items.OrderByDescending(x => x.Item.Package.CleanName());
+		return items.OrderByDescending(x => _packageUtil.CleanName(x.Item.Package));
 	}
 
 	protected override void OnItemMouseClick(DrawableItem<CompatibilityInfo, Rectangles> item, MouseEventArgs e)
@@ -235,7 +237,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		{
 			if (item is Asset asset)
 			{
-				PlatformUtil.OpenFolder(asset.FileName);
+				PlatformUtil.OpenFolder(asset.FilePath);
 			}
 			else
 			{
@@ -669,7 +671,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		{
 			if (Message.Type is ReportType.DlcMissing)
 			{
-				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.SteamId}");
+				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Id}");
 			}
 			else if (package is not null)
 			{
@@ -677,7 +679,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 			}
 			else
 			{
-				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.SteamId}");
+				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.Id}");
 			}
 
 			return;
@@ -691,7 +693,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 			Loading = true;
 			
-			_subscriptionsManager.Subscribe(new[] { item.SteamId });
+			_subscriptionsManager.Subscribe(new[] { item.Id });
 		}
 		else
 		{

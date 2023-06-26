@@ -18,7 +18,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 {
 	private bool allowExit;
 
-	public PC_MissingPackages(List<Profile.Mod> missingMods, List<Profile.Asset> missingAssets) : base(missingAssets.Concat(missingMods))
+	public PC_MissingPackages(List<Playset.Mod> missingMods, List<Playset.Asset> missingAssets) : base(missingAssets.Concat(missingMods))
 	{
 		Program.Services.GetService<INotifier>().ContentLoaded += CentralManager_ContentLoaded;
 	}
@@ -32,7 +32,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 
 	protected override void LocaleChanged()
 	{
-		Text = string.Format(Locale.MissingPackagesProfile, Program.Services.GetService<IProfileManager>().CurrentProfile.Name);
+		Text = string.Format(Locale.MissingPackagesProfile, Program.Services.GetService<IPlaysetManager>().CurrentPlayset.Name);
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -41,9 +41,9 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 
 		foreach (var item in items)
 		{
-			if (item is Profile.Mod mod)
+			if (item is Playset.Mod mod)
 			{
-				var localMod = Program.Services.GetService<IProfileManager>().GetMod(mod);
+				var localMod = Program.Services.GetService<IPlaysetManager>().GetMod(mod);
 
 				if (localMod is null)
 				{
@@ -55,9 +55,9 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 
 				LC_Items.Remove(item);
 			}
-			else if (item is Profile.Asset asset)
+			else if (item is Playset.Asset asset)
 			{
-				var localAsset = Program.Services.GetService<IProfileManager>().GetAsset(asset);
+				var localAsset = Program.Services.GetService<IPlaysetManager>().GetAsset(asset);
 
 				if (localAsset is null)
 				{
@@ -92,7 +92,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 		return true;
 	}
 
-	internal static void PromptMissingPackages(BasePanelForm form, List<Profile.Mod> missingMods, List<Profile.Asset> missingAssets)
+	internal static void PromptMissingPackages(BasePanelForm form, List<Playset.Mod> missingMods, List<Playset.Asset> missingAssets)
 	{
 		var pauseEvent = new AutoResetEvent(false);
 

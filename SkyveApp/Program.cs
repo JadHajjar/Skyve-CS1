@@ -1,6 +1,9 @@
 using Extensions;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using SkyveApp.Domain.Systems;
 using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
 
@@ -22,46 +25,31 @@ internal static class Program
 	internal static string CurrentDirectory { get; }
 	internal static string ExecutablePath { get; }
 	internal static MainForm MainForm { get; private set; }
-	internal static ServiceCollection Services { get; }
+	internal static IServiceProvider Services { get; }
 
 	static Program()
 	{
 		IsRunning = true;
 		CurrentDirectory = Application.StartupPath;
 		ExecutablePath = Application.ExecutablePath;
-		Services = new();
 
 		ISave.AppName = "Skyve-CS1";
 		ISave.CustomSaveDirectory = CurrentDirectory;
 
-		Services.AddSingleton<ICitiesManager, CitiesManager>();
-		Services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
-		Services.AddSingleton<IContentManager, ContentManager>();
-		Services.AddSingleton<IImageManager, ImageManager>();
-		Services.AddSingleton<ILocationManager, LocationManager>();
-		Services.AddSingleton<ILogger, Logger>();
-		Services.AddSingleton<IModLogicManager, ModLogicManager>();
-		Services.AddSingleton<IProfileManager, ProfileManager>();
-		Services.AddSingleton<ISettings, SettingsService>();
-		Services.AddSingleton<ISubscriptionsManager, SubscriptionsManager>();
-		Services.AddSingleton<IUpdateManager, UpdateManager>();
-		Services.AddSingleton<IAssetUtil, AssetsUtil>();
-		Services.AddSingleton<IColossalOrderUtil, ColossalOrderUtil>();
-		Services.AddSingleton<IModUtil, ModsUtil>();
-		Services.AddSingleton<INotifier, NotifierService>();
-
-		Services.AddTransient<ICompatibilityUtil, CompatibilityUtil>();
-		Services.AddTransient<IContentUtil, ContentUtil>();
-		Services.AddTransient<ILogUtil, LogUtil>();
-		Services.AddTransient<IOUtil>();
-		Services.AddTransient<AssemblyUtil>();
-
-		Services.AddSingleton<CentralManager>();
+		Services = BuildServices();
 	}
 
-	/// <summary>
-	///  The main entry point for the application.
-	/// </summary>
+	private static IServiceProvider BuildServices()
+	{
+		var services = new ServiceCollection();
+
+		Systems.CS1.Startup.AddCs1SkyveSystems(services);
+
+		Systems.SystemsProgram.AddSkyveSystems(services);
+
+		return services.BuildServiceProvider();
+	}
+
 	[STAThread]
 	private static void Main(string[] args)
 	{
@@ -116,7 +104,7 @@ internal static class Program
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
-			if (!Services.GetService<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
+			if (!Services.GetService<SettingsService>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
 			{
 				MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OK, PromptIcons.Hand);
 				return;

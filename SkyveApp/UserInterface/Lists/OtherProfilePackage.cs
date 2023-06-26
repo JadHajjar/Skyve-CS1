@@ -14,18 +14,18 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfilePackage.Rectangles>
+internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfilePackage.Rectangles>
 {
-	public IEnumerable<Profile> FilteredItems => SafeGetItems().Select(x => x.Item);
+	public IEnumerable<Playset> FilteredItems => SafeGetItems().Select(x => x.Item);
 
 	public IPackage Package { get; }
 
-	private readonly IProfileManager _profileManager;
+	private readonly IPlaysetManager _profileManager;
 	private readonly ISettings _settings;
 
 	public OtherProfilePackage(IPackage package)
 	{
-		_profileManager = Program.Services.GetService<IProfileManager>();
+		_profileManager = Program.Services.GetService<IPlaysetManager>();
 		_settings = Program.Services.GetService<ISettings>();
 		HighlightOnHover = true;
 		SeparateWithLines = true;
@@ -36,7 +36,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Profile obj)
+	private void ProfileManager_ProfileChanged(Playset obj)
 	{
 		Invalidate();
 	}
@@ -66,12 +66,12 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<Profile, OtherProfilePackage.Rectangles>> OrderItems(IEnumerable<DrawableItem<Profile, OtherProfilePackage.Rectangles>> items)
+	protected override IEnumerable<DrawableItem<Playset, OtherProfilePackage.Rectangles>> OrderItems(IEnumerable<DrawableItem<Playset, OtherProfilePackage.Rectangles>> items)
 	{
 		return items.OrderByDescending(x => x.Item.LastEditDate);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<Profile, OtherProfilePackage.Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<Playset, OtherProfilePackage.Rectangles> item, Point location)
 	{
 		var rects = item.Rectangles;
 
@@ -91,7 +91,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		return false;
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<Profile, Rectangles> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<Playset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -129,7 +129,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		}
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<Profile, OtherProfilePackage.Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<Playset, OtherProfilePackage.Rectangles> e)
 	{
 		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
 		var rects = e.Rects;
@@ -173,9 +173,9 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		var rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Assets.Count, Locale.Asset.FormatPlural(e.Item.Assets.Count).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
 		rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Mods.Count, Locale.Mod.FormatPlural(e.Item.Mods.Count).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
 
-		if (e.Item == _profileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentPlayset)
 		{
-			DrawLabel(e, Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rects.TextRect.Right - rect.X + Padding.Left, 0), ContentAlignment.MiddleRight);
+			DrawLabel(e, Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, rects.TextRect.Pad(0, 0, rects.TextRect.Right - rect.X + Padding.Left, 0), ContentAlignment.MiddleRight);
 		}
 
 		SlickButton.DrawButton(e, rects.LoadRect, string.Empty, Font, IconManager.GetIcon("I_Import"), null, rects.LoadRect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
@@ -188,7 +188,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<Profile, OtherProfilePackage.Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+	private Rectangle DrawLabel(ItemPaintEventArgs<Playset, OtherProfilePackage.Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
 	{
 		if (text == null)
 		{
@@ -221,7 +221,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		return rectangle;
 	}
 
-	protected override Rectangles GenerateRectangles(Profile item, Rectangle rectangle)
+	protected override Rectangles GenerateRectangles(Playset item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{
@@ -236,16 +236,16 @@ internal class OtherProfilePackage : SlickStackedListControl<Profile, OtherProfi
 		return rects;
 	}
 
-	public class Rectangles : IDrawableItemRectangles<Profile>
+	public class Rectangles : IDrawableItemRectangles<Playset>
 	{
 		internal Rectangle IncludedRect;
 		internal Rectangle IconRect;
 		internal Rectangle LoadRect;
 		internal Rectangle TextRect;
 
-		public Profile Item { get; set; }
+		public Playset Item { get; set; }
 
-		public Rectangles(Profile item)
+		public Rectangles(Playset item)
 		{
 			Item = item;
 		}

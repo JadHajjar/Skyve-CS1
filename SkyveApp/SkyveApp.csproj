@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
-  <Import Project="..\..\Extensions\Extensions.Sql\Extensions.Sql.projitems" Label="Shared" />
   <Import Project="../Version.props" />
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
@@ -24,14 +23,8 @@
     <Title>Skyve</Title>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="ColossalOrder\GameSettings.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Utilities\Managers\**" />
-    <EmbeddedResource Remove="Utilities\Managers\**" />
     <None Remove="Properties\*.json" />
     <None Remove="Properties\*\*.json" />
-    <None Remove="Utilities\Managers\**" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\*.json" />
@@ -47,6 +40,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Mono.Cecil" Version="0.11.3" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
@@ -54,7 +48,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
     <ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
+    <ProjectReference Include="..\SkyveApp.Domain.CS1\SkyveApp.Domain.CS1.csproj" />
     <ProjectReference Include="..\SkyveApp.Domain\SkyveApp.Domain.csproj" />
+    <ProjectReference Include="..\SkyveApp.Systems.CS1\SkyveApp.Systems.CS1.csproj" />
     <ProjectReference Include="..\SkyveApp.Systems\SkyveApp.Systems.csproj" />
   </ItemGroup>
 
@@ -112,19 +108,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Compile Include="..\SkyveMod\Shared\SkyveConfig.cs" Link="Shared\SkyveConfig.cs" />
-		<Compile Include="..\SkyveMod\Shared\CSCache.cs" Link="Shared\CSCache.cs" />
-		<Compile Include="..\SkyveMod\Shared\SharedUtil.cs" Link="Shared\SharedUtil.cs" />
-		<Compile Include="..\SkyveMod\Shared\UGCListTransfer.cs" Link="Shared\UGCListTransfer.cs" />
-		<Compile Include="..\SkyveMod\Shared\BlackListTransfer.cs" Link="Shared\BlackListTransfer.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Content Include="Resources\Skyve.ico" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="ColossalOrder\GameSettings.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

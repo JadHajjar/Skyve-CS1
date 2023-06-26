@@ -2,5 +2,5 @@
 public interface IUpdateManager
 {
 	bool IsFirstTime();
-	bool IsPackageKnown(IPackage package);
+	bool IsPackageKnown(ILocalPackage package);
 }

@@ -1,15 +1,16 @@
 ﻿using SkyveApp.Domain.Enums;
 
-using System;
 using System.Collections.Generic;
 
 namespace SkyveApp.Domain.Systems;
+
 public interface IContentUtil
 {
-	List<ILocalPackage> LoadContents();
-	void ContentUpdated(string path, bool builtIn, bool workshop, bool self);
-	IEnumerable<ILocalPackage> GetReferencingPackage(ulong steamId, bool includedOnly);
-	void RefreshPackage(ILocalPackage package, bool self);
+	IEnumerable<ILocalPackage> GetPackagesThatReference(IPackage package, bool withExcluded = false);
 	DownloadStatus GetStatus(IPackage mod, out string reason);
-	void StartListeners();
+	bool IsEnabled(ILocalPackage package);
+	bool IsIncluded(ILocalPackage localPackage);
+	bool IsIncluded(ILocalPackage localPackage, out bool partiallyIncluded);
+	bool IsIncludedAndEnabled(ILocalPackage package);
+	void SetIncluded(ILocalPackage localPackage, bool value);
 }

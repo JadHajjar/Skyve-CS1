@@ -12,7 +12,7 @@ using System.Linq;
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_GenericPackageList : PC_ContentList<IPackage>
 {
-	private readonly Dictionary<ulong, Profile.Asset> _workshopPackages = new();
+	private readonly Dictionary<ulong, Playset.Asset> _workshopPackages = new();
 	private readonly List<IPackage> _items = new();
 
 	public PC_GenericPackageList(IEnumerable<IPackage> items) : base(true)

@@ -6,6 +6,7 @@ using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -32,19 +33,19 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 	public bool ReadOnly { get; set; }
 
-	public event Action<Profile>? LoadProfile;
-	public event Action<Profile>? MergeProfile;
-	public event Action<Profile>? ExcludeProfile;
-	public event Action<Profile>? DisposeProfile;
+	public event Action<Playset>? LoadProfile;
+	public event Action<Playset>? MergeProfile;
+	public event Action<Playset>? ExcludeProfile;
+	public event Action<Playset>? DisposeProfile;
 
 	private readonly ISettings _settings;
-	private readonly IProfileManager _profileManager;
+	private readonly IPlaysetManager _profileManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 
 	public ProfileListControl(bool readOnly)
 	{
 		_settings = Program.Services.GetService<ISettings>();
-		_profileManager = Program.Services.GetService<IProfileManager>();
+		_profileManager = Program.Services.GetService<IPlaysetManager>();
 		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
 
 		ReadOnly = readOnly;
@@ -161,9 +162,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
 			{
 				item.Item.Color = null;
-				_profileManager.Save((item.Item as Profile)!);
+				_profileManager.Save((item.Item as Playset)!);
 			}
-			else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is Profile profile)
+			else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is Playset profile)
 			{
 				profile.BannerBytes = null;
 				_profileManager.Save(profile);
@@ -178,7 +179,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		if (item.Rectangles.Favorite.Contains(e.Location) && !ReadOnly)
 		{
 			item.Item.IsFavorite = !item.Item.IsFavorite;
-			_profileManager.Save((item.Item as Profile)!);
+			_profileManager.Save((item.Item as Playset)!);
 		}
 		else if (item.Rectangles.Load.Contains(e.Location))
 		{
@@ -188,7 +189,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			}
 			else
 			{
-				LoadProfile?.Invoke((item.Item as Profile)!);
+				LoadProfile?.Invoke((item.Item as Playset)!);
 			}
 		}
 		else if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
@@ -197,7 +198,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 		else if (item.Rectangles.Folder.Contains(e.Location) && !ReadOnly)
 		{
-			PlatformUtil.OpenFolder(_profileManager.GetFileName((item.Item as Profile)!));
+			PlatformUtil.OpenFolder(_profileManager.GetFileName((item.Item as Playset)!));
 		}
 		else if (item.Rectangles.Author.Contains(e.Location))
 		{
@@ -207,7 +208,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		{
 			ShowProfileContents(item.Item);
 		}
-		else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is Profile profile)
+		else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is Playset profile)
 		{
 			if (imagePrompt.PromptFile(Program.MainForm) == DialogResult.OK)
 			{
@@ -256,33 +257,33 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 
 		item.Color = colorDialog.Color;
-		_profileManager.Save((item as Profile)!);
+		_profileManager.Save((item as Playset)!);
 	}
 
 	private void ShowRightClickMenu(IProfile item)
 	{
-		var local = item is Profile;
+		var local = item is Playset;
 
 		var items = new SlickStripItem[]
 		{
 			  new (Locale.DownloadProfile, "I_Import", !local, action: () => DownloadProfile(item))
 			, new (Locale.ViewThisProfilesPackages, "I_ViewFile", action: () => ShowProfileContents(item))
-			, new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item as Profile); })
+			, new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item as Playset); })
 			, new (Locale.ChangeProfileColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
-			, new (Locale.CreateShortcutProfile, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut((item as Profile)!))
-			, new (Locale.OpenProfileFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName((item as Profile)!)))
+			, new (Locale.CreateShortcutProfile, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut((item as Playset)!))
+			, new (Locale.OpenProfileFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName((item as Playset)!)))
 			, new (string.Empty, show: local)
 			, new (Locale.ShareProfile, "I_Share", local && item.ProfileId == 0 && _compatibilityManager.User.SteamId != 0 && downloading != item, action: async () => await ShareProfile(item))
-			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && item.Author == _compatibilityManager.User.SteamId, action: async () => await _profileManager.SetVisibility((item as Profile)!, !item.Public))
+			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && item.Author == _compatibilityManager.User.SteamId, action: async () => await _profileManager.SetVisibility((item as Playset)!, !item.Public))
 			, new (Locale.UpdateProfile, "I_Share", local && item.ProfileId != 0 && item.Author == _compatibilityManager.User.SteamId, action: async () => await ShareProfile(item))
 			, new (Locale.UpdateProfile, "I_Refresh", local && item.ProfileId != 0 && item.Author != _compatibilityManager.User.SteamId, action: () => DownloadProfile(item))
 			, new (Locale.CopyProfileLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
 			, new (string.Empty, show: local)
-			, new (Locale.ProfileReplace, "I_Import", local, action: () => LoadProfile?.Invoke((item as Profile)!))
-			, new (Locale.ProfileMerge, "I_Merge", local, action: () => MergeProfile?.Invoke((item as Profile)!))
-			, new (Locale.ProfileExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke((item as Profile)!))
+			, new (Locale.ProfileReplace, "I_Import", local, action: () => LoadProfile?.Invoke((item as Playset)!))
+			, new (Locale.ProfileMerge, "I_Merge", local, action: () => MergeProfile?.Invoke((item as Playset)!))
+			, new (Locale.ProfileExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke((item as Playset)!))
 			, new (string.Empty)
-			, new (Locale.ProfileDelete, "I_Disposable", local || item.Author == _compatibilityManager.User.SteamId, action: async () => { if(local) { DisposeProfile?.Invoke((item as Profile)!); } else if(await _profileManager.DeleteOnlineProfile(item)) { base.Remove(item); } })
+			, new (Locale.ProfileDelete, "I_Disposable", local || item.Author == _compatibilityManager.User.SteamId, action: async () => { if(local) { DisposeProfile?.Invoke((item as Playset)!); } else if(await _profileManager.DeleteOnlineProfile(item)) { base.Remove(item); } })
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
@@ -292,7 +293,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 	{
 		Loading = true;
 		downloading = item;
-		await _profileManager.Share((item as Profile)!);
+		await _profileManager.Share((item as Playset)!);
 		downloading = null;
 		Loading = false;
 	}
@@ -427,10 +428,10 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			e.Rects.Author = e.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), labelRects, ContentAlignment.TopLeft);
 		}
 
-		if (e.Item == _profileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentPlayset)
 		{
 			using var okIcon = IconManager.GetSmallIcon("I_Ok");
-			e.DrawLabel(Locale.CurrentProfile, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
+			e.DrawLabel(Locale.CurrentPlayset, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
 
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale));
 
@@ -556,9 +557,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		var x = e.Rects.Text.X;
 
-		if (e.Item == _profileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentPlayset)
 		{
-			e.Rects.Text.X += e.DrawLabel(Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.DrawLabel(Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (e.Item.IsMissingItems)
@@ -701,7 +702,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 			if (Load.Contains(location))
 			{
-				text = (instance as ProfileListControl)!.ReadOnly ? Program.Services.GetService<IProfileManager>().Profiles.Any(x => x.Name.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfileTip : Locale.DownloadProfileTip : Locale.ProfileReplace;
+				text = (instance as ProfileListControl)!.ReadOnly ? Program.Services.GetService<IPlaysetManager>().Profiles.Any(x => x.Name.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfileTip : Locale.DownloadProfileTip : Locale.ProfileReplace;
 				point = Load.Location;
 				return true;
 			}

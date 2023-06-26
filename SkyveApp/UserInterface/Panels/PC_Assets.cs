@@ -9,7 +9,7 @@ using System.Linq;
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_Assets : PC_ContentList<Asset>
 {
-	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
 	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
 	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
 	public PC_Assets()
@@ -20,7 +20,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset.Name}";
 	}
 
 	protected override IEnumerable<Asset> GetItems()

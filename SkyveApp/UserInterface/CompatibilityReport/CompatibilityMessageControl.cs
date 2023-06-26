@@ -1,9 +1,14 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.Enums;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility;
+using SkyveApp.Systems.Compatibility.Domain;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
 using SkyveApp.Utilities.IO;
@@ -22,8 +27,8 @@ namespace SkyveApp.UserInterface.CompatibilityReport;
 internal class CompatibilityMessageControl : SlickControl
 {
 	private readonly List<ulong> _subscribingTo = new();
-	private readonly Dictionary<PseudoPackage, Rectangle> _buttonRects = new();
-	private readonly Dictionary<PseudoPackage, Rectangle> _modRects = new();
+	private readonly Dictionary<IPackageIdentity, Rectangle> _buttonRects = new();
+	private readonly Dictionary<IPackageIdentity, Rectangle> _modRects = new();
 	private Rectangle allButtonRect;
 	private Rectangle snoozeRect;
 
@@ -31,21 +36,21 @@ internal class CompatibilityMessageControl : SlickControl
 	private readonly IContentUtil _contentUtil = Program.Services.GetService<IContentUtil>();
 	private readonly ISubscriptionsManager _subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
 
-	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ReportItem message)
+	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
 		Dock = DockStyle.Top;
 		Type = type;
 		Message = message;
 		PackageCompatibilityReportControl = packageCompatibilityReportControl;
 
-		if (message.Packages?.Length != 0 && !message.Packages.All(x => x.Package is not null))
+		if (message.Packages?.Length != 0 && !message.Packages.All(x => x.GetWorkshopInfo() is not null))
 		{
 			SteamUtil.WorkshopItemsLoaded += Invalidate;
 		}
 	}
 
 	public ReportType Type { get; }
-	public ReportItem Message { get; }
+	public ICompatibilityItem Message { get; }
 	public PackageCompatibilityReportControl PackageCompatibilityReportControl { get; }
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -390,7 +395,7 @@ internal class CompatibilityMessageControl : SlickControl
 		{
 			if (Message.Type is ReportType.DlcMissing)
 			{
-				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.SteamId}");
+				PlatformUtil.OpenUrl($"https://store.steampowered.com/app/{item.Id}");
 			}
 			else if (package is not null)
 			{
@@ -398,7 +403,7 @@ internal class CompatibilityMessageControl : SlickControl
 			}
 			else
 			{
-				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.SteamId}");
+				PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails/?id={item.Id}");
 			}
 
 			return;
@@ -412,7 +417,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 			Loading = true;
 
-			_subscriptionsManager.Subscribe(new[] { item.SteamId });
+			_subscriptionsManager.Subscribe(new[] { item.Id });
 		}
 		else
 		{

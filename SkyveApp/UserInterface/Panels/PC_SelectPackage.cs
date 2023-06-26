@@ -20,7 +20,7 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_SelectPackage : PanelContent
 {
-	private readonly ItemListControl<SteamWorkshopItem> LC_Items;
+	private readonly ItemListControl<SteamWorkshopInfo> LC_Items;
 	private readonly DelayedAction<TicketBooth.Ticket> _delayedSearch;
 	private readonly TicketBooth _ticketBooth = new();
 	private bool searchEmpty = true;
@@ -70,7 +70,7 @@ public partial class PC_SelectPackage : PanelContent
 		L_Selected.Visible = false;
 	}
 
-	private void LC_Items_PackageSelected(SteamWorkshopItem obj)
+	private void LC_Items_PackageSelected(SteamWorkshopInfo obj)
 	{
 		if (ModifierKeys.HasFlag(Keys.Control))
 		{
@@ -99,7 +99,7 @@ public partial class PC_SelectPackage : PanelContent
 		PackageSelected?.Invoke(new[] { obj.SteamId });
 	}
 
-	private bool DoNotDraw(SteamWorkshopItem item)
+	private bool DoNotDraw(SteamWorkshopInfo item)
 	{
 		if (!searchEmpty)
 		{
@@ -141,7 +141,7 @@ public partial class PC_SelectPackage : PanelContent
 		return false;
 	}
 
-	private bool Search(string searchTerm, SteamWorkshopItem item)
+	private bool Search(string searchTerm, SteamWorkshopInfo item)
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.Author?.Name)
@@ -218,7 +218,7 @@ public partial class PC_SelectPackage : PanelContent
 
 	private async void DelayedSearch(TicketBooth.Ticket ticket)
 	{
-		Dictionary<ulong, SteamWorkshopItem> items;
+		Dictionary<ulong, SteamWorkshopInfo> items;
 
 		if (TB_Search.Text.Trim().Length > 7 && ulong.TryParse(TB_Search.Text.Trim(), out var steamId))
 		{
@@ -252,7 +252,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		new BackgroundAction(() =>
 		{
-			var manager = Program.Services.GetService<IImageManager>();
+			var manager = Program.Services.GetService<IImageService>();
 			Parallelism.ForEach(LC_Items.Items.ToList(), async package =>
 			{
 				if (!string.IsNullOrWhiteSpace(package.IconUrl))

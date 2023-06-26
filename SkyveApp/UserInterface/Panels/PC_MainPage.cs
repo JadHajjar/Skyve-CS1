@@ -20,7 +20,7 @@ public partial class PC_MainPage : PanelContent
 
 		var notifier = Program.Services.GetService<INotifier>();
 		var citiesManager = Program.Services.GetService<ICitiesManager>();
-		var profileManager = Program.Services.GetService<IProfileManager>();
+		var profileManager = Program.Services.GetService<IPlaysetManager>();
 
 		B_StartStop.Enabled = notifier.IsContentLoaded && citiesManager.CitiesAvailable();
 
@@ -53,7 +53,7 @@ public partial class PC_MainPage : PanelContent
 			TLP_Profiles.RowStyles.Clear();
 			TLP_Profiles.RowStyles.Add(new());
 
-			foreach (var item in Program.Services.GetService<IProfileManager>().Profiles.Where(x => x.IsFavorite))
+			foreach (var item in Program.Services.GetService<IPlaysetManager>().Profiles.Where(x => x.IsFavorite))
 			{
 				TLP_Profiles.RowStyles.Add(new());
 				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);

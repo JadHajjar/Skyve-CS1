@@ -6,6 +6,7 @@ using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
@@ -41,7 +42,7 @@ public partial class PC_UserPage : PanelContent
 
 		if (User is not null)
 		{
-			PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageManager>().GetImage);
+			PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageService>().GetImage);
 			P_Info.SetUser(User, this);
 		}
 
@@ -66,7 +67,7 @@ public partial class PC_UserPage : PanelContent
 
 			if (User is not null)
 			{
-				PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageManager>().GetImage);
+				PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageService>().GetImage);
 				P_Info.SetUser(User, this);
 			}
 		}
@@ -143,7 +144,7 @@ public partial class PC_UserPage : PanelContent
 		var contentUtil = Program.Services.GetService<IContentUtil>();
 		var subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
 		var compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
-		var profileManager = Program.Services.GetService<IProfileManager>();
+		var profileManager = Program.Services.GetService<IPlaysetManager>();
 
 		return new SlickStripItem[]
 		{
@@ -196,7 +197,7 @@ public partial class PC_UserPage : PanelContent
 			{
 				if (!item.Workshop && item is Asset asset)
 				{
-					CrossIO.DeleteFile(asset.FileName);
+					CrossIO.DeleteFile(asset.FilePath);
 				}
 				else
 				{

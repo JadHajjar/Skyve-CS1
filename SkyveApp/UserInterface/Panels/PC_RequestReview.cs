@@ -1,11 +1,12 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.Utilities;
 
@@ -32,7 +33,7 @@ public partial class PC_RequestReview : PanelContent
 
 		PB_Icon.Package = CurrentPackage;
 		PB_Icon.Image = null;
-		PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageManager>().GetImage);
+		PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageService>().GetImage);
 		P_Info.SetPackage(CurrentPackage, null);
 	}
 

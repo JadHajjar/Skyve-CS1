@@ -2,12 +2,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace SkyveApp.Domain;
 public interface IPlayset
 {
 	string? Name { get; }
-	IUser Author { get; }
+	IUser? Author { get; }
 	string? BannerUrl { get; }
 	PackageUsage Usage { get; }
 	DateTime DateUpdated { get; }
@@ -17,4 +18,10 @@ public interface IPlayset
 	int AssetCount { get; }
 	int ModCount { get; }
 	IEnumerable<IPackage> Packages { get; }
+}
+
+public interface ICustomPlayset : IPlayset
+{
+	Color? Color { get; set; }
+	Bitmap? Banner { get; }
 }

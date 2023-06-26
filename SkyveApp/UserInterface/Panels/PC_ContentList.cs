@@ -8,6 +8,7 @@ using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems.Compatibility;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
@@ -42,7 +43,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
 	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
 	private readonly ICompatibilityManager _compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
-	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
 
 	public PC_ContentList() : this(false) { }
 
@@ -72,7 +73,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			TLP_Main.SetColumnSpan(P_FiltersContainer, 4);
 		}
 
-		OT_Workshop.Visible = !_profileManager.CurrentProfile.LaunchSettings.NoWorkshop;
+		OT_Workshop.Visible = !_profileManager.CurrentPlayset.LaunchSettings.NoWorkshop;
 		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		LC_Items.FilterRequested += FilterChanged;
@@ -425,7 +426,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private bool IsFilteredOut(T item)
 	{
-		if (_profileManager.CurrentProfile.LaunchSettings.NoWorkshop)
+		if (_profileManager.CurrentPlayset.LaunchSettings.NoWorkshop)
 		{
 			if (item.Workshop)
 			{
@@ -433,9 +434,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (_profileManager.CurrentProfile.Usage > 0)
+		if (_profileManager.CurrentPlayset.Usage > 0)
 		{
-			if (!(item.GetCompatibilityInfo().Data?.Package.Usage.HasFlag(_profileManager.CurrentProfile.Usage) ?? true))
+			if (!(item.GetCompatibilityInfo().Data?.Package.Usage.HasFlag(_profileManager.CurrentPlayset.Usage) ?? true))
 			{
 				UsageFilteredOut++;
 				return true;
@@ -557,7 +558,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			if (item is Asset asset)
 			{
-				if (!DD_Profile.SelectedItem.Assets.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FileName)))
+				if (!DD_Profile.SelectedItem.Assets.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FilePath)))
 				{
 					return true;
 				}
@@ -847,7 +848,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			{
 				if (!item.Workshop && item is Asset asset)
 				{
-					CrossIO.DeleteFile(asset.FileName);
+					CrossIO.DeleteFile(asset.FilePath);
 				}
 				else
 				{

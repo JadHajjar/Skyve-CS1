@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Systems.Compatibility.Domain.Enums;
 using SkyveApp.Utilities;
 
 using SlickControls;

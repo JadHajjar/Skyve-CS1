@@ -17,7 +17,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 {
 	private readonly ulong _id;
 
-	internal PC_ViewCollection(IPackage collection) : base(collection.RequiredPackages.Select(x => new Profile.Asset { SteamId = x }))
+	internal PC_ViewCollection(IPackage collection) : base(collection.RequiredPackages.Select(x => new Playset.Asset { SteamId = x }))
 	{
 		_id = collection.SteamId;
 
@@ -28,7 +28,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 		{
 			Collection = true
 		};
-		PB_Icon.LoadImage(collection.IconUrl, Program.Services.GetService<IImageManager>().GetImage);
+		PB_Icon.LoadImage(collection.IconUrl, Program.Services.GetService<IImageService>().GetImage);
 
 		TLP_Main.Controls.Add(PB_Icon, 0, 0);
 		TLP_Main.SetRowSpan(PB_Icon, 3);

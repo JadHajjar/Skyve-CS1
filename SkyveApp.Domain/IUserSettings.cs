@@ -2,4 +2,6 @@
 
 public interface IUserSettings
 {
+	bool ShowAllReferencedPackages { get; }
+	bool HidePseudoMods { get; }
 }

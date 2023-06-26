@@ -24,7 +24,7 @@ public partial class MainForm : BasePanelForm
 	private bool? buttonStateRunning;
 
 	private readonly ISubscriptionsManager _subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
-	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
 	private readonly ICitiesManager _citiesManager = Program.Services.GetService<ICitiesManager>();
 	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
 
@@ -144,7 +144,7 @@ public partial class MainForm : BasePanelForm
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 			|| isGameRunning
 			|| _subscriptionsManager.SubscriptionsPending
-			|| _profileManager.CurrentProfile.UnsavedChanges
+			|| _profileManager.CurrentPlayset.UnsavedChanges
 			|| base_PB_Icon.HoverState.HasFlag(HoverState.Pressed);
 
 		e.Graphics.DrawImage(icon, base_PB_Icon.ClientRectangle);
@@ -168,7 +168,7 @@ public partial class MainForm : BasePanelForm
 				color = Color.FromArgb(235, 113, 52);
 			}
 
-			if (_profileManager.CurrentProfile.UnsavedChanges)
+			if (_profileManager.CurrentPlayset.UnsavedChanges)
 			{
 				minimum = 0;
 				color = Color.FromArgb(122, 81, 207);

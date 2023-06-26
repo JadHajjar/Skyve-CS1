@@ -14,13 +14,13 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.StatusBubbles;
 internal class FavoriteProfileBubble : StatusBubbleBase
 {
-	private readonly IProfileManager _profileManager;
+	private readonly IPlaysetManager _profileManager;
 
-	public Profile Profile { get; }
+	public Playset Profile { get; }
 
-	public FavoriteProfileBubble(Profile profile)
+	public FavoriteProfileBubble(Playset profile)
 	{
-		_profileManager = Program.Services.GetService<IProfileManager>();
+		_profileManager = Program.Services.GetService<IPlaysetManager>();
 		Profile = profile;
 	}
 
@@ -69,7 +69,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		}
 	}
 
-	private void ProfileManager_ProfileChanged(Domain.Profile obj)
+	private void ProfileManager_ProfileChanged(Domain.Playset obj)
 	{
 		Loading = false;
 		Text = Profile.Name;
@@ -79,7 +79,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		if (_profileManager.CurrentProfile == Profile)
+		if (_profileManager.CurrentPlayset == Profile)
 		{
 			e.Graphics.DrawRoundedRectangle(new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale)), ClientRectangle.Pad(1 + (int)Math.Floor(1.5 * UI.FontScale)), Padding.Left);
 		}

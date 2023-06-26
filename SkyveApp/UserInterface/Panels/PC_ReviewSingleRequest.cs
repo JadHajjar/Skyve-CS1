@@ -1,9 +1,11 @@
 ﻿using Extensions;
-using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Domain.Compatibility.Enums;
+
+using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Generic;

@@ -5,6 +5,7 @@ using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems.Compatibility;
 using SkyveApp.Utilities;
 
 using System;
@@ -19,14 +20,14 @@ internal class ModsBubble : StatusBubbleBase
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
 	private readonly IContentManager _contentManager;
-	private readonly IProfileManager _profileManager;
+	private readonly IPlaysetManager _profileManager;
 
 	public ModsBubble()
 	{
 		_settings = Program.Services.GetService<ISettings>();
 		_notifier = Program.Services.GetService<INotifier>();
 		_contentManager = Program.Services.GetService<IContentManager>();
-		_profileManager = Program.Services.GetService<IProfileManager>();
+		_profileManager = Program.Services.GetService<IPlaysetManager>();
 	}
 
 	protected override void OnHandleCreated(EventArgs e)
@@ -63,7 +64,7 @@ internal class ModsBubble : StatusBubbleBase
 		_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Profile obj)
+	private void ProfileManager_ProfileChanged(Playset obj)
 	{
 		Invalidate();
 	}

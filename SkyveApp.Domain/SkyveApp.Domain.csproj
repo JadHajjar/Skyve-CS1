@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
 	<Import Project="../Version.props" />
+	<Import Project="..\..\Extensions\Extensions.Sql\Extensions.Sql.projitems" Label="Shared" />
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<Description>Helps to manage your mods and assets</Description>
@@ -17,4 +18,7 @@
 		<SignAssembly>True</SignAssembly>
 		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+	</ItemGroup>
 </Project>

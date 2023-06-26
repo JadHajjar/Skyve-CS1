@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
 using SkyveApp.UserInterface.Lists;
 using SkyveApp.Utilities;
 
@@ -21,7 +22,7 @@ public partial class PC_ProfileList : PanelContent
 {
 	private readonly ProfileListControl LC_Items;
 
-	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
 	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
 
 	public PC_ProfileList() : this(null) { }
@@ -91,24 +92,24 @@ public partial class PC_ProfileList : PanelContent
 		e.DoNotDraw = !valid;
 	}
 
-	private void Ctrl_DisposeProfile(Profile obj)
+	private void Ctrl_DisposeProfile(Playset obj)
 	{
 		_profileManager.DeleteProfile(obj);
 	}
 
-	private void Ctrl_ExcludeProfile(Profile obj)
+	private void Ctrl_ExcludeProfile(Playset obj)
 	{
 		FLP_Profiles.Enabled = false;
 		_profileManager.ExcludeProfile(obj);
 	}
 
-	private void Ctrl_MergeProfile(Profile obj)
+	private void Ctrl_MergeProfile(Playset obj)
 	{
 		FLP_Profiles.Enabled = false;
 		_profileManager.MergeProfile(obj);
 	}
 
-	private void Ctrl_LoadProfile(Profile obj)
+	private void Ctrl_LoadProfile(Playset obj)
 	{
 		if (!I_ProfileIcon.Loading)
 		{
@@ -125,7 +126,7 @@ public partial class PC_ProfileList : PanelContent
 
 		if (!LC_Items.ReadOnly)
 		{
-			LoadProfile(_profileManager.CurrentProfile);
+			LoadProfile(_profileManager.CurrentPlayset);
 		}
 	}
 
@@ -205,7 +206,7 @@ public partial class PC_ProfileList : PanelContent
 		return false;
 	}
 
-	private void LoadProfile(Profile profile)
+	private void LoadProfile(Playset profile)
 	{
 		this.TryInvoke(() =>
 	{
@@ -272,12 +273,12 @@ public partial class PC_ProfileList : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		_profileManager.SetProfile(Profile.TemporaryProfile);
+		_profileManager.SetProfile(Playset.TemporaryPlayset);
 	}
 
 	private async void B_Save_Click(object sender, EventArgs e)
 	{
-		if (_profileManager.CurrentProfile.Save())
+		if (_profileManager.CurrentPlayset.Save())
 		{
 			B_Save.ImageName = "I_Check";
 
@@ -298,12 +299,12 @@ public partial class PC_ProfileList : PanelContent
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
 	{
-		if (_profileManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentPlayset.Temporary)
 		{
 			return;
 		}
 
-		var colorDialog = new SlickColorPicker(_profileManager.CurrentProfile.Color ?? Color.Red);
+		var colorDialog = new SlickColorPicker(_profileManager.CurrentPlayset.Color ?? Color.Red);
 
 		if (colorDialog.ShowDialog() != DialogResult.OK)
 		{
@@ -312,22 +313,22 @@ public partial class PC_ProfileList : PanelContent
 
 		TLP_ProfileName.BackColor = colorDialog.Color;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
-		_profileManager.CurrentProfile.Color = colorDialog.Color;
-		_profileManager.Save(_profileManager.CurrentProfile);
+		_profileManager.CurrentPlayset.Color = colorDialog.Color;
+		_profileManager.Save(_profileManager.CurrentPlayset);
 	}
 
 	private void I_Favorite_Click(object sender, EventArgs e)
 	{
-		if (_profileManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentPlayset.Temporary)
 		{
 			return;
 		}
 
-		_profileManager.CurrentProfile.IsFavorite = !_profileManager.CurrentProfile.IsFavorite;
-		_profileManager.Save(_profileManager.CurrentProfile);
+		_profileManager.CurrentPlayset.IsFavorite = !_profileManager.CurrentPlayset.IsFavorite;
+		_profileManager.Save(_profileManager.CurrentPlayset);
 
-		I_Favorite.ImageName = _profileManager.CurrentProfile.IsFavorite ? "I_StarFilled" : "I_Star";
-		SlickTip.SetTo(I_Favorite, _profileManager.CurrentProfile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		I_Favorite.ImageName = _profileManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
+		SlickTip.SetTo(I_Favorite, _profileManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
 	}
 
 	private async void B_Discover_Click(object sender, EventArgs e)

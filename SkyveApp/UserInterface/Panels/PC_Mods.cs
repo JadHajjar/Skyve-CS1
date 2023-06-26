@@ -20,7 +20,7 @@ internal class PC_Mods : PC_ContentList<Mod>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mod.Plural} - {Program.Services.GetService<IProfileManager>().CurrentProfile.Name}";
+		Text = $"{Locale.Mod.Plural} - {Program.Services.GetService<IPlaysetManager>().CurrentPlayset.Name}";
 	}
 
 	protected override IEnumerable<Mod> GetItems()

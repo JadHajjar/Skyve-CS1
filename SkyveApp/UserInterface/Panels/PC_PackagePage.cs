@@ -3,8 +3,11 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
@@ -36,7 +39,7 @@ public partial class PC_PackagePage : PanelContent
 		Package = package;
 
 		PB_Icon.Package = package;
-		PB_Icon.LoadImage(package.IconUrl, Program.Services.GetService<IImageManager>().GetImage);
+		PB_Icon.LoadImage(package.GetWorkshopInfo()?.IconUrl, Program.Services.GetService<IImageService>().GetImage);
 
 		P_Info.SetPackage(package, this);
 
@@ -221,7 +224,7 @@ public partial class PC_PackagePage : PanelContent
 
 		var contentUtil = Program.Services.GetService<IContentUtil>();
 		var subscriptionManager = Program.Services.GetService<ISubscriptionsManager>();
-		var profileManager = Program.Services.GetService<IProfileManager>();
+		var profileManager = Program.Services.GetService<IPlaysetManager>();
 		var compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
 
 		return new SlickStripItem[]
@@ -275,7 +278,7 @@ public partial class PC_PackagePage : PanelContent
 			{
 				if (!item.Workshop && item is Asset asset)
 				{
-					CrossIO.DeleteFile(asset.FileName);
+					CrossIO.DeleteFile(asset.FilePath);
 				}
 				else
 				{

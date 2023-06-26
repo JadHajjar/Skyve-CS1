@@ -5,12 +5,12 @@ public interface ILogger
 {
 	string LogFilePath { get; }
 
-	void Info(string message);
-	void Warning(string message);
-	void Error(string message);
-	void Exception(Exception exception, string message, bool showInPanel = false);
+	void Info(object message);
+	void Warning(object message);
+	void Error(object message);
+	void Exception(Exception exception, object message);
 
 #if DEBUG
-	void Debug(string message);
+	void Debug(object message);
 #endif
 }

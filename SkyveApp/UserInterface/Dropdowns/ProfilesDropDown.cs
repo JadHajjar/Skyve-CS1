@@ -14,7 +14,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
-internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
+internal class ProfilesDropDown : SlickSelectionDropDown<Playset>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -22,18 +22,18 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Profile>
 
 		if (Live)
 		{
-			Items = Program.Services.GetService<IProfileManager>().Profiles.ToArray();
+			Items = Program.Services.GetService<IPlaysetManager>().Profiles.ToArray();
 
 			selectedItem = Items[0];
 		}
 	}
 
-	protected override IEnumerable<Profile> OrderItems(IEnumerable<Profile> items)
+	protected override IEnumerable<Playset> OrderItems(IEnumerable<Playset> items)
 	{
 		return items.OrderByDescending(x => x.Temporary).ThenByDescending(x => x.LastEditDate);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, Profile item)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, Playset item)
 	{
 		if (item is null)
 		{ return; }

@@ -2,10 +2,12 @@
 
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
@@ -236,13 +238,13 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			var catalogue = await SkyveApiUtil.Catalogue(CurrentPackage!.SteamId);
 
-			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CrPackage, PostPackage>();
+			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CompatibilityPackageData, PostPackage>();
 
-			var automatedPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
+			var automatedPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
 
 			if (postPackage is null)
 			{
-				postPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CrPackage, PostPackage>();
+				postPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
 			}
 			else
 			{
@@ -275,7 +277,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			PB_Icon.Package = CurrentPackage;
 			PB_Icon.Image = null;
-			PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageManager>().GetImage);
+			PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageService>().GetImage);
 			P_Info.SetPackage(CurrentPackage, null);
 
 			B_Previous.Enabled = currentPage > 0;
@@ -486,7 +488,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 		}
 
 		postPackage!.SteamId = CurrentPackage!.SteamId;
-		postPackage.FileName = Path.GetFileName(CurrentPackage.Package?.Mod?.FileName ?? string.Empty).IfEmpty(postPackage.FileName);
+		postPackage.FileName = Path.GetFileName(CurrentPackage.Package?.Mod?.FilePath ?? string.Empty).IfEmpty(postPackage.FileName);
 		postPackage.Name = CurrentPackage.Name;
 		postPackage.ReviewDate = DateTime.UtcNow;
 		postPackage.AuthorId = CurrentPackage.Author?.SteamId ?? 0;

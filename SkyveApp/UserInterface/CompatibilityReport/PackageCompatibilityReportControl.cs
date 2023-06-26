@@ -1,11 +1,15 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility;
+using SkyveApp.Systems.Compatibility.Domain;
 
 using SlickControls;
 
@@ -57,7 +61,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 	}
 
 	public IPackage Package { get; }
-	public CompatibilityInfo? Report { get; private set; }
+	public ICompatibilityInfo? Report { get; private set; }
 
 	protected override void Dispose(bool disposing)
 	{
@@ -87,7 +91,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 			lock (this)
 			{
-				Report = Package.GetCompatibilityInfo(true);
+				Report = _compatibilityManager.GetCompatibilityInfo( Package,true);
 
 				for (var i = 0; i < _panels.Length; i++)
 				{
@@ -97,7 +101,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 				controlCount = 0;
 
-				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
+				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status?.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
 				{
 					var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
 

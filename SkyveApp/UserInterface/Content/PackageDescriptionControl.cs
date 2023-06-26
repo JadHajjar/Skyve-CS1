@@ -5,6 +5,7 @@ using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems.Compatibility;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
@@ -46,7 +47,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		if (!string.IsNullOrWhiteSpace(Package.Author?.AvatarUrl))
 		{
 			Image = null;
-			LoadImage(Package.Author?.AvatarUrl, Program.Services.GetService<IImageManager>().GetImage);
+			LoadImage(Package.Author?.AvatarUrl, Program.Services.GetService<IImageService>().GetImage);
 		}
 
 		Invalidate();

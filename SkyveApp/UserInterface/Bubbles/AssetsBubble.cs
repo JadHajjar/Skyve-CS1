@@ -3,8 +3,11 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility;
 using SkyveApp.Utilities;
 
 using System;
@@ -17,14 +20,16 @@ namespace SkyveApp.UserInterface.StatusBubbles;
 internal class AssetsBubble : StatusBubbleBase
 {
 	private readonly INotifier _notifier;
+	private readonly IContentUtil _contentUtil;
 	private readonly IContentManager _contentManager;
-	private readonly IProfileManager _profileManager;
+	private readonly IPlaysetManager _profileManager;
 
 	public AssetsBubble()
 	{
 		_notifier = Program.Services.GetService<INotifier>();
+		_contentUtil = Program.Services.GetService<IContentUtil>();
 		_contentManager = Program.Services.GetService<IContentManager>();
-		_profileManager = Program.Services.GetService<IProfileManager>();
+		_profileManager = Program.Services.GetService<IPlaysetManager>();
 	}
 
 	protected override void OnHandleCreated(EventArgs e)
@@ -48,7 +53,7 @@ internal class AssetsBubble : StatusBubbleBase
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += Invalidate;
-		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void Dispose(bool disposing)
@@ -58,10 +63,10 @@ internal class AssetsBubble : StatusBubbleBase
 		_notifier.ContentLoaded -= Invalidate;
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated -= Invalidate;
-		_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Profile obj)
+	private void ProfileManager_ProfileChanged()
 	{
 		Invalidate();
 	}
@@ -93,20 +98,20 @@ internal class AssetsBubble : StatusBubbleBase
 
 		foreach (var asset in _contentManager.Assets)
 		{
-			if (!asset.IsIncluded)
+			if (!_contentUtil.IsIncluded(asset))
 			{
 				continue;
 			}
 
 			assetsIncluded++;
-			assetSize += asset.FileSize;
+			assetSize += asset.LocalSize;
 
 			if (asset.IsMod || Loading)
 			{
 				continue;
 			}
 
-			switch (asset.Package.Status)
+			switch (_contentUtil.GetStatus(asset, out _))
 			{
 				case DownloadStatus.OutOfDate:
 					assetsOutOfDate++;

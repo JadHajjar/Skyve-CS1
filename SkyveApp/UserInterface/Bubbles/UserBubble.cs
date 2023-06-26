@@ -45,7 +45,7 @@ internal class UserBubble : StatusBubbleBase
 		}
 
 		var size = UI.FontScale >= 4 ? 96 : UI.FontScale >= 2 ? 48 : 24;
-		var icon = Program.Services.GetService<IImageManager>().GetImage(User.AvatarUrl, true).Result;
+		var icon = Program.Services.GetService<IImageService>().GetImage(User.AvatarUrl, true).Result;
 		var titleHeight = Math.Max(size, (int)e.Graphics.Measure(User.Name, UI.Font(9.75F, FontStyle.Bold), Width - Padding.Horizontal).Height);
 		var iconRectangle = new Rectangle(Padding.Left, Padding.Top + ((titleHeight - size) / 2), size, size);
 

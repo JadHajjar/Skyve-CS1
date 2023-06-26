@@ -1,12 +1,13 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Steam;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems.Compatibility;
+using SkyveApp.Systems.Compatibility.Domain.Enums;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 using SkyveApp.Utilities;
@@ -431,7 +432,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 		{
 			if (item is Asset asset)
 			{
-				PlatformUtil.OpenFolder(asset.FileName);
+				PlatformUtil.OpenFolder(asset.FilePath);
 			}
 			else
 			{

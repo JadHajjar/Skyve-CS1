@@ -15,4 +15,5 @@ public interface IContentManager
 	void DeleteAll(IEnumerable<ulong> ids);
 	void DeleteAll(string folder);
 	void MoveToLocalFolder(IPackage package);
+	bool IsDlcAvailable(uint dlcId);
 }

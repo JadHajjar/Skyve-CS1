@@ -20,7 +20,7 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ProfileAdd : PanelContent
 {
-	private readonly IProfileManager _profileManager = Program.Services.GetService<IProfileManager>();
+	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
 
 	public PC_ProfileAdd()
 	{
@@ -39,7 +39,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 	private void NewProfile_Click(object sender, EventArgs e)
 	{
-		var newProfile = new Profile() { Name = _profileManager.GetNewProfileName(), LastEditDate = DateTime.Now };
+		var newProfile = new Playset() { Name = _profileManager.GetNewProfileName(), LastEditDate = DateTime.Now };
 
 		if (!_profileManager.Save(newProfile))
 		{
@@ -61,7 +61,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 	private void CopyProfile_Click(object sender, EventArgs e)
 	{
-		var newProfile = _profileManager.CurrentProfile.Clone();
+		var newProfile = _profileManager.CurrentPlayset.Clone();
 		newProfile.Name = _profileManager.GetNewProfileName();
 		newProfile.LastEditDate = DateTime.Now;
 
