@@ -149,8 +149,8 @@
   },
   "Action_ExcludeThis": "You should exclude '{0}'.",
   "ExcludeThis": "Exclude this package",
-  "Exclude": "Exclude",
-  "Unsubscribe": "Unsubscribe",
+  "Exclude": "Çıkar",
+  "Unsubscribe": "Aboneliği kaldır",
   "Action_ExcludeOther": {
     "One": "You should exclude '{1}'.",
     "Plural": "You should exclude the following packages."
