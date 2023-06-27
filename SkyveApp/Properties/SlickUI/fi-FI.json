@@ -124,35 +124,35 @@
     "Plural": "{0} päivää sitten"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "{0} päivän kuluttua",
+    "Plural": "{0} päivän kuluttua"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} vuosi",
+    "Plural": "{0} vuotta"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} kuukausi",
+    "Plural": "{0} kuukautta"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} päivä",
+    "Plural": "{0} päivää"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} tunti",
+    "Plural": "{0} tuntia"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} minuutti",
+    "Plural": "{0} minuuttia"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} sekunti",
+    "Plural": "{0} sekuntia"
   },
-  "{0}d": "{0}d",
-  "{0}h": "{0}h",
-  "{0}m": "{0}m",
-  "{0}s": "{0}s"
+  "{0}d": "{0} pv",
+  "{0}h": "{0} t",
+  "{0}m": "{0} min",
+  "{0}s": "{0} s"
 }
