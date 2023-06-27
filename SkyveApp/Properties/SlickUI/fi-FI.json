@@ -95,33 +95,33 @@
   "Red": "Punainen",
   "Green": "Vihreä",
   "Yellow": "Keltainen",
-  "Download": "Download",
-  "Remove": "Remove",
+  "Download": "Lataa",
+  "Remove": "Poista",
   "Welcome to Theme Changer!": "Tervetuloa teemavaihtajaan!",
   "Customize the size and colors in the App however you want to.": "Muokkaa kokoja ja värejä sovelluksessa kuin haluat.",
   "Click on any color to change it, or right-click to reset it.": "Klikkaa mitä tahansa väriä muuttaaksesi sitä, tai hiiren oikealla painikkeella nollataksesi sen.",
   "Custom Theme": "Mukautettu teema",
   "Do you want to apply your changes before leaving?": "Haluatko tallentaa kaikki muutokset ennen poistumista?",
-  "TaskCompleted": "Task Completed",
-  "UnexpectedError": "An unexpected error occurred",
-  "{0} ago": "{0} ago",
-  "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "TaskCompleted": "Tehtävä suoritettu",
+  "UnexpectedError": "Tapahtui odottamaton virhe",
+  "{0} ago": "{0} sitten",
+  "in {0}": "{0} kuluttua",
+  "Today at {0}": "Tänään klo {0}",
+  "Yesterday at {0}": "Eilen klo {0}",
+  "Tomorrow at {0}": "Huomenna klo {0}",
+  "Last {0} at {1}": "Viime {0} klo {1}",
+  "Next {0} at {1}": "Seuraavana {0} klo {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "{0} kuukausi sitten {1}",
+    "Plural": "{0} kuukautta sitten {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "{0} kuukauden kuluttua {1}",
+    "Plural": "{0} kuukauden kuluttua {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} päivä sitten",
+    "Plural": "{0} päivää sitten"
   },
   "in {0} day": {
     "One": "in {0} day",
