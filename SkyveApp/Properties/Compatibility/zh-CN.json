@@ -35,12 +35,12 @@
   "Deprecated": "已废弃",
   "Reupload": "重新上传版本",
   "CausesIssues": "引发问题",
-  "SavesCantLoadWithoutIt": "没有它，存档将无法载入",
+  "SavesCantLoadWithoutIt": "是否启用会影响存档能否加载",
   "TestVersion": "测试版",
   "DependencyMod": "前置模组",
   "SourceCodeNotAvailable": "源代码不可用",
   "MusicCanBeCopyrighted": "其中包含的音乐可能受版权保护",
-  "IncompleteDescription": "描述不完整",
+  "IncompleteDescription": "描述信息不完整",
   "Successor": "继任模组",
   "Alternative": "备选方案",
   "SameFunctionality": "功能相同",
@@ -139,8 +139,8 @@
   },
   "Action_RequiresConfiguration": "您应当遵循以下使用说明：",
   "Action_SelectOne": {
-    "One": "对于 '{0}' 和 '{1}'，您只能使用其中一个插件：",
-    "Plural": "对于 '{0}' 和下列插件，您只能使用其中一个插件："
+    "One": "对于 '{0}' 和 '{1}'，您应当只选择其中一个插件来使用：",
+    "Plural": "对于 '{0}' 和下列插件，您应当只选择其中一个插件来使用："
   },
   "Action_UnsubscribeThis": "您应当取消订阅 '{0}' 。",
   "Action_UnsubscribeOther": {
