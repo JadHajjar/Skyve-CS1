@@ -483,7 +483,7 @@
                     "Les profils mis en ligne peuvent être privés, partagés avec un ID, ou visible par tout le monde.",
                     "Les profils de la communauté peuvent être téléchargé ou mis à jour si vous l'avez localement.",
                     "Vous pouvez découvrir des profils de la communauté en utilisant le nouveau bouton dans l'onglet profils.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "Ajout d'une troisième option dans la page 'Ajouter un profil' pour importer un profil de la communauté en utilisant son ID."
                 ]
             },
             {
@@ -491,7 +491,7 @@
                 "Changes": [
                     "L'onglet 'Profils' dans le menu ouvre désormais la liste de vos profils à la place des paramètres du profil actuel.",
                     "La liste des profils utilise désormais une vue en grille, et vous pouvez passer entre les vues grille et liste.",
-                    "Changed the design of the top action buttons on both profile pages",
+                    "Modification du design des boutons du haut des pages profils",
                     "Si votre profil a des modifications non enregistrées, le logo Skyve va s'illuminer en violet.",
                     "Les profils peuvent maintenant avoir une miniature.",
                     "Les utilisations du profil ont désormais des icônes distinctes."
@@ -500,14 +500,14 @@
             {
                 "Name": "Nouveautés et Mises à jour",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Ajout d'une nouvelle page de profil utilisateur, accessible en cliquant sur l'auteur d'un mod ou d'un profil. Cette page inclus tous les profils et paquets de l'utilisateur en question.",
+                    "Supprimer un paquet ou autre avec Skyve déplacera désormais les fichiers liés à ce paquet dans la corbeille Windows.",
                     "Ajout de 6 nouveaux boutons de réinitialisation sur la page Utilités.",
                     "Ajout de 2 nouveaux boutons sur la page Aide et logs.",
                     "La compatibilité et les statuts des paquets sont désormais affichés sur la droite dans la liste.",
                     "Les paquets cassés, incompatibles et bannis ont désormais un nouvel arrière-plan dans la liste.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
+                    "Les noms et labels des mods locaux ont été mis à jour.",
+                    "Un code source manquant va désormais crée un avertissement aux lieux d'une notification de désabonnement.",
                     "Les mods requis ont désormais une apparence différente pour montrer qu'ils ne peuvent pas être exclus.",
                     "Ajout d'un paramètre en jeu pour activer le rechargement à chaud pour les mods et ressources.",
                     "Amélioration des performances en activant/désactivant les paquets.",
@@ -555,7 +555,7 @@
             {
                 "Name": "Corrections",
                 "Changes": [
-                    "Fixes an error caused by including/excluding mods that have contain assets.",
+                    "Correction d'une erreur causée par l'inclusion/exclusion de mods qui contenait des assets.",
                     "Correction du bouton d'action à droite de la liste du Rapport de Compatibilité qui n'était pas cliquable.",
                     "Correction de certains paquets qui ne montraient pas leurs successeurs correctement."
                 ]
