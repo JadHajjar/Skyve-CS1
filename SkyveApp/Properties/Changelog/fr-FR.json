@@ -498,7 +498,7 @@
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "Nouveautés et Mises à jour",
                 "Changes": [
                     "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
                     "Deletions by Skyve will now send the files to the recycle bin on Windows.",
