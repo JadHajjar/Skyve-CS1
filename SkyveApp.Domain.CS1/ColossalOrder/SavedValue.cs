@@ -1,4 +1,4 @@
-namespace SkyveApp.ColossalOrder;
+namespace SkyveApp.Domain.CS1.ColossalOrder;
 
 public abstract class SavedValue
 {
@@ -63,11 +63,7 @@ public abstract class SavedValue
 
 	public static bool operator ==(SavedValue x, SavedValue y)
 	{
-		if (ReferenceEquals(x, null))
-		{
-			return ReferenceEquals(y, null);
-		}
-		return x.Equals(y);
+		return x is null ? y is null : x.Equals(y);
 	}
 
 	public static bool operator !=(SavedValue x, SavedValue y)

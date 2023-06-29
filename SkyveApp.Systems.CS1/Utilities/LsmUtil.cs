@@ -1,10 +1,8 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities.IO;
+using SkyveApp.Domain.CS1;
+using SkyveApp.Domain.CS1.Utilities;
+using SkyveApp.Domain.Systems;
 
 using System.Collections.Generic;
 using System.IO;

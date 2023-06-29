@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SkyveApp.Domain;
+namespace SkyveApp.Domain.CS1;
 public class Asset : IAsset
 {
 	public Asset(ILocalPackageWithContents package, string crpPath, SkyveShared.CSCache.Asset? asset)

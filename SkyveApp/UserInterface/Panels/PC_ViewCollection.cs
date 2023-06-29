@@ -1,5 +1,4 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Domain.Interfaces;
+﻿using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Content;

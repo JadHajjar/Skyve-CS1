@@ -1,12 +1,12 @@
 using System;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 
 public struct PublishedFileId : IEquatable<PublishedFileId>
 {
 	public bool IsValid => this != invalid && AsUInt64 != 0;
 
-	public static readonly PublishedFileId invalid = new PublishedFileId(ulong.MaxValue);
+	public static readonly PublishedFileId invalid = new(ulong.MaxValue);
 
 	public PublishedFileId(ulong value)
 	{

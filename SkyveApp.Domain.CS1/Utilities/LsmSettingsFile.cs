@@ -1,6 +1,6 @@
 ﻿using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -8,13 +8,14 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 
 [XmlRoot("LoadingScreenModRevisited")]
 public class LsmSettingsFile
 {
-	const string FILE_NAME = "LoadingScreenModRevisited.xml";
-	static string FILE_PATH => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, FILE_NAME);
+	private const string FILE_NAME = "LoadingScreenModRevisited.xml";
+
+	private static string FILE_PATH => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, FILE_NAME);
 
 	public static string DefaultSkipPath => CrossIO.Combine(CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, "Maps"), "SkippedPrefabs");
 	public static string DefaultSkipFile => CrossIO.Combine(DefaultSkipPath, "skip.txt");
@@ -50,6 +51,7 @@ public class LsmSettingsFile
 		{
 			ret += $", {item.Name}={item.Value}";
 		}
+
 		return ret;
 	}
 
@@ -90,10 +92,10 @@ public class LsmSettingsFile
 
 			if (ret != null)
 			{
-				ret.skipFile = this.skipFile;
-				ret.skipPrefabs = this.skipPrefabs;
-				ret.loadEnabled = this.loadEnabled;
-				ret.loadUsed = this.loadUsed;
+				ret.skipFile = skipFile;
+				ret.skipPrefabs = skipPrefabs;
+				ret.loadEnabled = loadEnabled;
+				ret.loadUsed = loadUsed;
 
 				ret.Serialize();
 			}

@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain;
+﻿namespace SkyveApp.Domain.CS1;
 
 public class LsmSettings
 {

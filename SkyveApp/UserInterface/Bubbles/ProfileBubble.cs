@@ -1,4 +1,5 @@
 ﻿using Extensions;
+
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
@@ -42,7 +43,7 @@ internal class ProfileBubble : StatusBubbleBase
 		_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Domain.Playset obj)
+	private void ProfileManager_ProfileChanged(Playset obj)
 	{
 		ImageName = _profileManager.CurrentPlayset.GetIcon();
 	}

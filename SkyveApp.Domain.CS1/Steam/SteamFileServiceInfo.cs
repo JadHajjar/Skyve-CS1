@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain.Steam;
+﻿namespace SkyveApp.Domain.CS1.Steam;
 
 #nullable disable
 public class SteamFileServiceInfo

@@ -1,14 +1,17 @@
 ﻿using Extensions;
 
+using Newtonsoft.Json;
+
 using System.Drawing;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 public class SessionSettings : ISave, ISessionSettings
 {
 	public override string Name => nameof(SessionSettings) + ".json";
 
 	public bool FirstTimeSetupCompleted { get; set; }
-	public string? CurrentProfile { get; set; }
+	[JsonProperty("CurrentProfile")]
+	public string? CurrentPlayset { get; set; }
 	public Rectangle? LastWindowsBounds { get; set; }
 	public bool WindowWasMaximized { get; set; }
 	public bool SubscribeFirstTimeShown { get; set; }

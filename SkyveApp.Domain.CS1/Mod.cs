@@ -2,9 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 
-namespace SkyveApp.Domain;
+namespace SkyveApp.Domain.CS1;
 public class Mod : IMod
 {
 	public Mod(ILocalPackageWithContents package, string dllPath, Version version)

@@ -4,21 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 internal class AcfFileReader
 {
 	public string FileLocation { get; }
 
 	public AcfFileReader(string FileLocation)
 	{
-		if (File.Exists(FileLocation))
-		{
-			this.FileLocation = FileLocation;
-		}
-		else
-		{
-			throw new FileNotFoundException("Error", FileLocation);
-		}
+		this.FileLocation = File.Exists(FileLocation) ? FileLocation : throw new FileNotFoundException("Error", FileLocation);
 	}
 
 	public bool CheckIntegrity()
@@ -28,7 +21,7 @@ internal class AcfFileReader
 		var braceleft = Content.Count(x => x == '{');
 		var braceright = Content.Count(x => x == '}');
 
-		return (braceleft == braceright) && (quote % 2 == 0);
+		return braceleft == braceright && quote % 2 == 0;
 	}
 
 	public ACF_Struct ACFFileToStruct()
@@ -76,7 +69,7 @@ internal class AcfFileReader
 	}
 }
 
-class ACF_Struct
+internal class ACF_Struct
 {
 	public Dictionary<string, ACF_Struct> SubACF { get; private set; }
 	public Dictionary<string, string> SubItems { get; private set; }
@@ -105,6 +98,7 @@ class ACF_Struct
 			SB.Append('\t', Depth);
 			SB.AppendFormat("\"{0}\"\t\t\"{1}\"\r\n", item.Key, item.Value);
 		}
+
 		foreach (var item in SubACF)
 		{
 			SB.Append('\t', Depth);
@@ -115,11 +109,12 @@ class ACF_Struct
 			SB.Append('\t', Depth);
 			SB.AppendLine("}");
 		}
+
 		return SB.ToString();
 	}
 }
 
-static class Extension
+internal static class Extension
 {
 	public static int NextEndOf(this string str, char Open, char Close, int startIndex)
 	{
@@ -136,6 +131,7 @@ static class Extension
 			{
 				OpenItem++;
 			}
+
 			if (str[i] == Close)
 			{
 				CloseItem++;
@@ -145,6 +141,7 @@ static class Extension
 				}
 			}
 		}
+
 		throw new Exception("Not enough closing characters!");
 	}
 }

@@ -13,7 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Domain;
+namespace SkyveApp.Domain.CS1;
 public class Playset : IPlayset
 {
 	private Bitmap? _banner;
@@ -74,11 +74,37 @@ public class Playset : IPlayset
 	public ulong Author { get; set; }
 	public int ProfileId { get; set; }
 	public bool UnsavedChanges { get; set; }
-	public byte[]? BannerBytes { get => _bannerBytes; set { _bannerBytes = value; _banner?.Dispose(); _banner = null; } }
+	public byte[]? BannerBytes
+	{
+		get => _bannerBytes; set
+		{
+			_bannerBytes = value;
+			_banner?.Dispose();
+			_banner = null;
+		}
+	}
 	public bool Public { get; set; }
 
-	public bool ForAssetEditor { set { if (value) { Usage = PackageUsage.AssetCreation; } } }
-	public bool ForGameplay { set { if (value) { Usage = PackageUsage.CityBuilding; } } }
+	public bool ForAssetEditor
+	{
+		set
+		{
+			if (value)
+			{
+				Usage = PackageUsage.AssetCreation;
+			}
+		}
+	}
+	public bool ForGameplay
+	{
+		set
+		{
+			if (value)
+			{
+				Usage = PackageUsage.CityBuilding;
+			}
+		}
+	}
 	[JsonIgnore] public int Downloads { get; }
 	[JsonIgnore]
 	public Bitmap? Banner
@@ -123,7 +149,7 @@ public class Playset : IPlayset
 		[JsonIgnore, CloneIgnore] public string? Url => SteamId == 0 ? null : $"https://steamcommunity.com/workshop/filedetails/?id={Id}";
 		[JsonIgnore, CloneIgnore] public string FilePath => RelativePath!;
 
-		public Asset(Domain.Asset asset)
+		public Asset(CS1.Asset asset)
 		{
 			SteamId = asset.Id;
 			Name = asset.Name;
@@ -143,24 +169,18 @@ public class Playset : IPlayset
 
 		public override string ToString()
 		{
-			var name = this.GetWorkshopInfo()?.Title;
+			var name = this.GetWorkshopInfo()?.Name;
 
 			if (name is not null)
 			{
 				return name;
 			}
 
-			if (_name is not null)
-			{
-				return _name;
-			}
-
-			if (!string.IsNullOrEmpty(RelativePath))
-			{
-				return Path.GetFileNameWithoutExtension(RelativePath);
-			}
-
-			return LocaleHelper.GetGlobalText("UnknownPackage");
+			return _name is not null
+				? _name
+				: !string.IsNullOrEmpty(RelativePath)
+				? Path.GetFileNameWithoutExtension(RelativePath)
+				: (string)LocaleHelper.GetGlobalText("UnknownPackage");
 		}
 
 		public virtual UserProfileContent AsProfileContent()
@@ -178,7 +198,7 @@ public class Playset : IPlayset
 		public bool Enabled { get; set; }
 		[JsonIgnore, CloneIgnore] public override ILocalPackageWithContents? LocalPackage => ServiceCenter.Get<IPlaysetManager>().GetMod(this)?.LocalPackage;
 
-		public Mod(Domain.Mod mod)
+		public Mod(CS1.Mod mod)
 		{
 			IsMod = true;
 			SteamId = mod.Id;

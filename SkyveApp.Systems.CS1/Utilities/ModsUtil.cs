@@ -1,8 +1,9 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.CS1;
+using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Domain.Utilities;
 using SkyveApp.Utilities.IO;
 
 using System;
@@ -16,18 +17,20 @@ public class ModsUtil : IModUtil
 
 	private readonly ColossalOrderUtil _colossalOrderUtil;
 	private readonly AssemblyUtil _assemblyUtil;
-	private readonly IContentManager _contentManager;
+	private readonly MacAssemblyUtil _macAssemblyUtil;
+	private readonly IPackageManager _contentManager;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly ISettings _settings;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ModsUtil(IContentManager contentManager, IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ColossalOrderUtil colossalOrderUtil, AssemblyUtil assemblyUtil)
+	public ModsUtil(IPackageManager contentManager, IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ColossalOrderUtil colossalOrderUtil, AssemblyUtil assemblyUtil, MacAssemblyUtil macAssemblyUtil)
 	{
 		_assemblyUtil = assemblyUtil;
 		_contentManager = contentManager;
 		_modLogicManager = modLogicManager;
 		_colossalOrderUtil = colossalOrderUtil;
+		_macAssemblyUtil = macAssemblyUtil;
 		_settings = settings;
 		_logger = logger;
 		_notifier = notifier;
@@ -130,7 +133,11 @@ public class ModsUtil : IModUtil
 		}
 	}
 
-	public void SetEnabled(IMod mod, bool value) => SetEnabled(mod, value);
+	public void SetEnabled(IMod mod, bool value)
+	{
+		SetEnabled(mod, value);
+	}
+
 	public void SetEnabled(IMod mod, bool value, bool save)
 	{
 		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
@@ -202,7 +209,7 @@ public class ModsUtil : IModUtil
 			{
 				if (CrossIO.CurrentPlatform is Platform.MacOSX)
 				{
-					return MacAssemblyUtil.FindImplementation(files, out dllPath, out version);
+					return _macAssemblyUtil.FindImplementation(files, out dllPath, out version);
 				}
 
 				return _assemblyUtil.FindImplementation(files, out dllPath, out version);

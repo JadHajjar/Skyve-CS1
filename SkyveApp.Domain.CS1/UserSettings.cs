@@ -1,6 +1,6 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using SkyveApp.Domain.CS1.Enums;
 
-namespace SkyveApp.Domain;
+namespace SkyveApp.Domain.CS1;
 public class UserSettings : IUserSettings
 {
 	public PackageSorting PackageSorting { get; set; }

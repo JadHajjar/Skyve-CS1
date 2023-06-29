@@ -1,10 +1,8 @@
-﻿using SkyveApp.Domain.Enums;
-
-using SlickControls;
+﻿using SkyveApp.Domain.CS1.Enums;
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain;
+namespace SkyveApp.Domain.CS1;
 public struct TagItem : ITag
 {
 	public TagSource Source { get; set; }

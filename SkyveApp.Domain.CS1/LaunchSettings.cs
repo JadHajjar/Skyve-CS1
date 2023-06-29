@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SkyveApp.Domain;
+namespace SkyveApp.Domain.CS1;
 public class LaunchSettings
 {
 	public bool UseCitiesExe { get; set; }

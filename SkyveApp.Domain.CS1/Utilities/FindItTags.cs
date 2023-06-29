@@ -1,19 +1,19 @@
 ﻿using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 
 public class CustomTagsLibrary
 {
 	public const string filename = "FindItCustomTags.xml";
 
-	public Dictionary<string, string> assetTags = new Dictionary<string, string>();
+	public Dictionary<string, string> assetTags = new();
 
 	public struct TagEntry
 	{
@@ -42,6 +42,7 @@ public class CustomTagsLibrary
 				{
 					CrossIO.DeleteFile(path);
 				}
+
 				return;
 			}
 

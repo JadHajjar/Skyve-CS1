@@ -1,6 +1,4 @@
-﻿using SkyveApp.Domain.Systems;
-
-namespace SkyveApp.Domain.Steam;
+﻿namespace SkyveApp.Domain.CS1.Steam;
 
 internal class SteamPackageRequirement : IPackageRequirement
 {
@@ -15,5 +13,5 @@ internal class SteamPackageRequirement : IPackageRequirement
 	public bool Optional { get; }
 	public ulong Id { get; }
 	public string? Url { get; }
-	public string Name => this.GetWorkshopInfo()?.Title ?? Id.ToString();
+	public string Name => this.GetWorkshopInfo()?.Name ?? Id.ToString();
 }

@@ -31,7 +31,7 @@ public class PseudoPackage : IPackageIdentity
 
 	public ulong Id { get; set; }
 	[JsonIgnore] public string Name => Package?.Name ?? string.Empty;
-	[JsonIgnore] public IPackage? Package => _iPackage ?? _workshopService?.GetPackage(Id);
+	[JsonIgnore] public IPackage? Package => _iPackage ?? _workshopService?.GetPackage(new GenericPackageIdentity(Id));
 	[JsonIgnore] public string? Url => Package?.Url;
 
 	public IWorkshopInfo? GetWorkshopInfo()

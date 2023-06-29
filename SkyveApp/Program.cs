@@ -1,15 +1,10 @@
-using Extensions;
-
 using Microsoft.Extensions.DependencyInjection;
 
-using SkyveApp.Domain.Systems;
-using SkyveApp.Services;
+using SkyveApp.Systems.CS1;
 using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
-using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
@@ -25,7 +20,6 @@ internal static class Program
 	internal static string CurrentDirectory { get; }
 	internal static string ExecutablePath { get; }
 	internal static MainForm MainForm { get; private set; }
-	internal static IServiceProvider Services { get; }
 
 	static Program()
 	{
@@ -36,16 +30,16 @@ internal static class Program
 		ISave.AppName = "Skyve-CS1";
 		ISave.CustomSaveDirectory = CurrentDirectory;
 
-		ServiceCenter.Provider = Services = BuildServices();
+		ServiceCenter.Provider = BuildServices();
 	}
 
 	private static IServiceProvider BuildServices()
 	{
 		var services = new ServiceCollection();
 
-		Systems.CS1.Startup.AddCs1SkyveSystems(services);
+		services.AddSkyveSystems();
 
-		Systems.SystemsProgram.AddSkyveSystems(services);
+		services.AddCs1SkyveSystems();
 
 		return services.BuildServiceProvider();
 	}
@@ -104,7 +98,7 @@ internal static class Program
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
-			if (!Services.GetService<SettingsService>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
+			if (!ServiceCenter.Get<ISettings, SettingsService>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
 			{
 				MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OK, PromptIcons.Hand);
 				return;
@@ -112,8 +106,8 @@ internal static class Program
 
 			if (CommandUtil.NoWindow)
 			{
-				Services.GetService<ILogger>().Info("[Console] Running without UI window");
-				Services.GetService<CentralManager>().Start();
+				ServiceCenter.Get<ILogger>().Info("[Console] Running without UI window");
+				ServiceCenter.Get<CentralManager>().Start();
 				return;
 			}
 
@@ -129,7 +123,7 @@ internal static class Program
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(MainForm = new MainForm());
+			Application.Run(SystemsProgram.MainForm = MainForm = new MainForm());
 		}
 		catch (Exception ex)
 		{
@@ -140,7 +134,7 @@ internal static class Program
 
 	private static void BackgroundAction_BackgroundTaskError(BackgroundAction b, Exception e)
 	{
-		Services.GetService<ILogger>().Exception(e, $"The background action ({b}) failed");
+		ServiceCenter.Get<ILogger>().Exception(e, $"The background action ({b}) failed");
 	}
 
 	[System.Runtime.InteropServices.DllImport("user32.dll")]

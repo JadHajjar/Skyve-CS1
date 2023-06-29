@@ -23,10 +23,10 @@ internal class SharedUtil
 	internal static string LocalApplicationData => ColossalFramework.IO.DataLocation.localApplicationData;
 	internal static string LocalLOMData => Path.Combine(LocalApplicationData, "Skyve");
 #endif
-	internal static XmlWriterSettings Indented => new XmlWriterSettings() { Indent = true };
+	internal static XmlWriterSettings Indented => new() { Indent = true };
 
 	internal static XmlSerializerNamespaces NoNamespaces =>
-		new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+		new(new[] { XmlQualifiedName.Empty });
 
 	internal static void Serialize<T>(T obj, string filePath)
 	{
@@ -43,7 +43,7 @@ internal class SharedUtil
 		serializer.Serialize(xmlWriter, obj, NoNamespaces);
 	}
 
-	public static T Deserialize<T>(string filePath) where T : class
+	public static T? Deserialize<T>(string filePath) where T : class
 	{
 		var ser = new XmlSerializer(typeof(T));
 		var dirInfo = new FileInfo(filePath).Directory;

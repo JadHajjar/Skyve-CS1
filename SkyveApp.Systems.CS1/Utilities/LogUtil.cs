@@ -1,14 +1,10 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.CS1;
+using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
-using SkyveApp.Systems.Compatibility;
 using SkyveApp.Utilities.IO;
 
 using System;
@@ -21,12 +17,12 @@ namespace SkyveApp.Utilities;
 public class LogUtil : ILogUtil
 {
 	private readonly ILocationManager _locationManager;
-	private readonly IContentManager _contentManager;
-	private readonly IContentUtil _contentUtil;
+	private readonly IPackageManager _contentManager;
+	private readonly IPackageUtil _contentUtil;
 	private readonly IPlaysetManager _profileManager;
 	private readonly ILogger _logger;
 
-	public LogUtil(ILocationManager locationManager, IContentManager contentManager, IPlaysetManager profileManager, ILogger logger, IContentUtil contentUtil)
+	public LogUtil(ILocationManager locationManager, IPackageManager contentManager, IPlaysetManager profileManager, ILogger logger, IPackageUtil contentUtil)
 	{
 		_locationManager = locationManager;
 		_contentManager = contentManager;
@@ -150,7 +146,7 @@ public class LogUtil : ILogUtil
 		var profileEntry = zipArchive.CreateEntry("Skyve\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
 		var reports = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
-		reports.RemoveAll(x => x.Notification < NotificationType.Unsubscribe && !_contentUtil.IsIncluded(x.Package));
+		reports.RemoveAll(x => x.GetNotification() < NotificationType.Unsubscribe && !_contentUtil.IsIncluded(x.Package));
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
 	}
 

@@ -1,11 +1,8 @@
 using Extensions;
 
-using Newtonsoft.Json;
-
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Steam;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+using SkyveApp.Domain;
+using SkyveApp.Domain.CS1.Steam;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Systems;
 using SkyveApp.Utilities.IO;
 
@@ -19,14 +16,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using static System.Net.WebRequestMethods;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SkyveApp.Utilities;
 
@@ -102,11 +95,11 @@ public static class SteamUtil
 
 	public static void Download(IEnumerable<IPackage> packages)
 	{
-		var currentPath = ServiceCenter.Get<IOUtil>().ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
+		var currentPath = ServiceCenter.Get<IOUtil>().ToRealPath(Path.GetDirectoryName(Application.StartupPath));
 
-		if (packages.Any(x => x.Folder.PathEquals(currentPath)))
+		if (packages.Any(x => x is ILocalPackage lp && lp.Folder.PathEquals(currentPath)))
 		{
-			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, Program.MainForm) == DialogResult.Cancel)
+			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, SystemsProgram.MainForm as SlickForm) == DialogResult.Cancel)
 			{
 				return;
 			}
@@ -116,7 +109,7 @@ public static class SteamUtil
 			Application.Exit();
 		}
 
-		Download(packages.Select(x => x.SteamId));
+		Download(packages.Select(x => x.Id));
 	}
 
 	public static void Download(IEnumerable<ulong> ids)
@@ -157,27 +150,6 @@ public static class SteamUtil
 		return _csCache?.Dlcs?.Contains(dlcId) ?? false;
 	}
 
-	public static int GetScore(IPackage package)
-	{
-		var upvotes = package.PositiveVotes;
-		var downvotes = (package.NegativeVotes / 10) + package.Reports;
-
-		if (upvotes + downvotes < 5)
-		{
-			return -1;
-		}
-
-		var subscribersFactor = (-Math.Min(100000, package.Subscriptions) / 2000) - 10;
-		var goal = (1.472 * (Math.Pow(subscribersFactor, 2) + (Math.Pow(subscribersFactor, 3) / 100))) - 120;
-
-		if (!package.IsMod)
-		{
-			goal /= 3.5;
-		}
-
-		return ((int)(100 * (upvotes - downvotes) / goal)).Between(0, 100);
-	}
-
 	public static ulong GetLoggedInSteamId()
 	{
 		try
@@ -216,7 +188,7 @@ public static class SteamUtil
 
 			if (process.Length == 0)
 			{
-				Notification.Create(Locale.SteamNotOpenTo, null, PromptIcons.Info, null).Show(Program.MainForm, 10);
+				Notification.Create(Locale.SteamNotOpenTo, null, PromptIcons.Info, null).Show(SystemsProgram.MainForm, 10);
 			}
 		}
 
@@ -394,9 +366,9 @@ public static class SteamUtil
 				.Select(x => new SteamWorkshopInfo(x))
 				.ToList() ?? new();
 
-			_steamUserProcessor.AddRange(data.Select(x => x.AuthorID));
+			_steamUserProcessor.AddRange(data.Select(x => x.AuthorId));
 
-			return (info?.response?.total ?? 0, data.ToDictionary(x => x.SteamId));
+			return (info?.response?.total ?? 0, data.ToDictionary(x => x.Id));
 		}
 		catch (Exception ex)
 		{
@@ -433,13 +405,13 @@ public static class SteamUtil
 
 		var newDlcs = new List<SteamDlc>(Dlcs);
 
-		foreach (var dlc in dlcs["255710"].data.dlc.Where(x => !Dlcs.Any(y => y.Id == x)))
+		foreach (var dlc in dlcs["255710"].data!.dlc.Where(x => !Dlcs.Any(y => y.Id == x)))
 		{
 			var data = await GetSteamAppInfoAsync(dlc);
 
 			if (data.ContainsKey(dlc.ToString()))
 			{
-				var info = data[dlc.ToString()].data;
+				var info = data[dlc.ToString()].data!;
 
 				newDlcs.Add(new SteamDlc
 				{
@@ -457,7 +429,7 @@ public static class SteamUtil
 
 		DLCsLoaded?.Invoke();
 
-		ServiceCenter.Get<IAssetUtil>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
+		ServiceCenter.Get<IDlcManager>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
 
 		foreach (var dlc in Dlcs)
 		{

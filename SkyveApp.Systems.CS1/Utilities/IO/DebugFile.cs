@@ -1,9 +1,10 @@
 using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace SkyveApp.Utilities.IO;
 
@@ -30,7 +31,7 @@ public class CitiesFile : DebugFile
 public abstract class DebugFile
 {
 	public abstract string ResourceFileName { get; }
-	public string ResourceFilePath => CrossIO.Combine(Program.CurrentDirectory, ResourceFileName);
+	public string ResourceFilePath => CrossIO.Combine(Application.StartupPath, ResourceFileName);
 
 	public abstract string ReleaseFilePath { get; }
 	public abstract string DebugFilePath { get; }

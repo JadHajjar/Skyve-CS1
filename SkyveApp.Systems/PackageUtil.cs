@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace SkyveApp.Systems;
 
-public class PackageUtil : IPackageUtil
+public class PackageUtil : IPackageNameUtil
 {
 	private readonly IServiceProvider _serviceProvider;
 	private readonly ILocale _locale;
@@ -25,7 +25,7 @@ public class PackageUtil : IPackageUtil
 		_locale = locale;
 	}
 
-	public string CleanName(IPackage? package, bool keepTags = false)
+	public string CleanName(IPackageIdentity? package, bool keepTags = false)
 	{
 		if (package?.Name is null)
 		{

@@ -1,16 +1,14 @@
 ﻿using Extensions;
 
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
+using SkyveApp.Domain.Systems;
 
 using System.Collections.Generic;
 using System.IO;
 
 using IoPath = System.IO.Path;
 
-namespace SkyveApp.Domain.Utilities;
-internal class PackageWatcher
+namespace SkyveApp.Domain.CS1.Utilities;
+public class PackageWatcher
 {
 	private readonly DelayedAction<string> _delayedUpdate = new(5000);
 	private static readonly List<PackageWatcher> _watchers = new();
@@ -51,7 +49,7 @@ internal class PackageWatcher
 
 	private void FileChanged(object sender, FileSystemEventArgs e)
 	{
-		if (IoPath.GetFileName(e.FullPath) == ContentUtil.EXCLUDED_FILE_NAME)
+		if (IoPath.GetFileName(e.FullPath) == ".excluded")
 		{
 			return;
 		}
@@ -70,12 +68,12 @@ internal class PackageWatcher
 
 	private void TriggerUpdate(string path)
 	{
-		ServiceCenter.Get<IContentUtil>().ContentUpdated(path, false, Workshop, false);
+		ServiceCenter.Get<IContentManager>().ContentUpdated(path, false, Workshop, false);
 	}
 
 	private void TriggerSelfUpdate(string path)
 	{
-		ServiceCenter.Get<IContentUtil>().ContentUpdated(path, false, Workshop, true);
+		ServiceCenter.Get<IContentManager>().ContentUpdated(path, false, Workshop, true);
 	}
 
 	public string GetFirstFolderOrFileName(string filePath, string sourceFolder)
@@ -96,12 +94,7 @@ internal class PackageWatcher
 
 		// Get the first folder or file name from the relative path
 		var parts = relativePath.Split(IoPath.DirectorySeparatorChar, IoPath.AltDirectorySeparatorChar);
-		if (parts.Length > 0 && string.IsNullOrEmpty(IoPath.GetExtension(parts[0])))
-		{
-			return CrossIO.Combine(Path, parts[0]);
-		}
-
-		return Path;
+		return parts.Length > 0 && string.IsNullOrEmpty(IoPath.GetExtension(parts[0])) ? CrossIO.Combine(Path, parts[0]) : Path;
 	}
 
 	public static void Create(string folder, bool allowSelf, bool workshop)

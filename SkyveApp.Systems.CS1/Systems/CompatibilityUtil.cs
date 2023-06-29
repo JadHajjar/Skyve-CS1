@@ -1,14 +1,12 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
+﻿using Extensions;
 
-using Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using SkyveApp.Domain;
+using SkyveApp.Domain.Enums;
 using SkyveApp.Systems.Compatibility.Domain;
+using SkyveApp.Systems.Compatibility.Domain.Api;
+
+using System;
+using System.Linq;
 
 namespace SkyveApp.Systems.CS1.Systems;
 internal class CompatibilityUtil : ICompatibilityUtil
@@ -36,8 +34,6 @@ internal class CompatibilityUtil : ICompatibilityUtil
 
 	public void PopulatePackageReport()
 	{
-
-
 		if (packageData.Package.Type is PackageType.CSM && !packageData.Statuses.ContainsKey(StatusType.Reupload))
 		{
 			compatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });

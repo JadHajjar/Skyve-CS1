@@ -1,14 +1,13 @@
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+using SkyveApp.Domain.Systems;
 
 using System;
 
-namespace SkyveApp.ColossalOrder;
+namespace SkyveApp.Domain.CS1.ColossalOrder;
 public abstract class SingletonLite<T>
 		where T : SingletonLite<T>, new()
 {
 	protected static T? sInstance;
-	private static readonly object lockObject = new object(); // work around in case constructor was used by mistake.
+	private static readonly object lockObject = new(); // work around in case constructor was used by mistake.
 	public static T instance
 	{
 		get
@@ -29,6 +28,7 @@ public abstract class SingletonLite<T>
 #endif
 					}
 				}
+
 				return sInstance;
 			}
 			catch (Exception ex)

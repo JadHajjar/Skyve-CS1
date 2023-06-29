@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.ColossalOrder;
+﻿namespace SkyveApp.Domain.CS1.ColossalOrder;
 
 public struct InputKey
 {

@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.ColossalOrder;
+﻿namespace SkyveApp.Domain.CS1.ColossalOrder;
 
 public class SavedBool : SavedValue
 {
@@ -23,27 +23,25 @@ public class SavedBool : SavedValue
 	{
 		get
 		{
-			if (this.m_AutoUpdate || !this.m_Synced)
+			if (m_AutoUpdate || !m_Synced)
 			{
-				base.Sync();
+				Sync();
 			}
+
 			return m_Value;
 		}
 		set
 		{
 			m_Value = value;
-			if (base.settingsFile != null)
-			{
-				base.settingsFile.SetValue(this.m_Name, m_Value);
-			}
+			settingsFile?.SetValue(m_Name, m_Value);
 		}
 	}
 
 	protected override void SyncImpl()
 	{
-		if (base.settingsFile != null)
+		if (settingsFile != null)
 		{
-			this.m_Exists = base.settingsFile.GetValue(this.m_Name, ref m_Value);
+			m_Exists = settingsFile.GetValue(m_Name, ref m_Value);
 		}
 	}
 

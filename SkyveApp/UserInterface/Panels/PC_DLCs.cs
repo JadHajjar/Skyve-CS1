@@ -1,4 +1,6 @@
 ﻿using Extensions;
+
+using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
@@ -45,7 +47,7 @@ public partial class PC_DLCs : PanelContent
 		L_Counts.Text = string.Format(Locale.DlcCount, total);
 	}
 
-	private void LC_DLCs_CanDrawItem(object sender, CanDrawItemEventArgs<Domain.Steam.SteamDlc> e)
+	private void LC_DLCs_CanDrawItem(object sender, CanDrawItemEventArgs<SteamDlc> e)
 	{
 		if (T_YourDlcs.Selected && !SteamUtil.IsDlcInstalledLocally(e.Item.Id))
 		{

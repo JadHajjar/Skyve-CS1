@@ -1,19 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using SkyveApp.Domain.Enums;
+
+using System.Collections.Generic;
 
 namespace SkyveApp.Domain.Systems;
+
 public interface IContentManager
 {
-	IEnumerable<IAsset> Assets { get; }
-	IEnumerable<IMod> Mods { get; }
-	IEnumerable<ILocalPackage> Packages { get; }
-
-	ILocalPackageWithContents? GetPackageById(IPackageIdentity id);
-	void AddPackage(ILocalPackage package);
-	void HandleNewPackage(ILocalPackage package);
-	void RemovePackage(ILocalPackage package);
-	void SetPackages(List<ILocalPackage> content);
-	void DeleteAll(IEnumerable<ulong> ids);
-	void DeleteAll(string folder);
-	void MoveToLocalFolder(IPackage package);
-	bool IsDlcAvailable(uint dlcId);
+	List<ILocalPackage> LoadContents();
+	void ContentUpdated(string path, bool builtIn, bool workshop, bool self);
+	IEnumerable<ILocalPackage> GetReferencingPackage(ulong steamId, bool includedOnly);
+	void RefreshPackage(ILocalPackage package, bool self);
+	DownloadStatus GetStatus(IPackage mod, out string reason);
+	void StartListeners();
 }

@@ -1,16 +1,12 @@
 using Extensions;
 
-using SkyveApp;
-using SkyveApp.Domain;
-using SkyveApp.Legacy;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+using SkyveApp.Domain.Systems;
 
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace LoadOrderTool.Legacy;
+namespace SkyveApp.Domain.CS1.Legacy;
 public interface IProfileItem
 {
 	string? GetIncludedPath();
@@ -21,11 +17,11 @@ public interface IProfileItem
 
 public class LoadOrderProfile
 {
-	const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";
-	const string CITIES_PATH = "%CITIES%";
-	const string WS_CONTENT_PATH = "%WORKSHOP%";
+	private const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";
+	private const string CITIES_PATH = "%CITIES%";
+	private const string WS_CONTENT_PATH = "%WORKSHOP%";
 
-	static string? FromFinalPath(string? path)
+	private static string? FromFinalPath(string? path)
 	{
 		var locationManager = ServiceCenter.Get<ILocationManager>();
 
@@ -35,7 +31,7 @@ public class LoadOrderProfile
 			?.Replace(locationManager.WorkshopContentPath, WS_CONTENT_PATH);
 	}
 
-	static string? ToFinalPath(string? path)
+	private static string? ToFinalPath(string? path)
 	{
 		var locationManager = ServiceCenter.Get<ILocationManager>();
 
@@ -151,7 +147,7 @@ public class LoadOrderProfile
 		}
 	}
 
-	internal Playset ToLot2Profile(string name)
+	public Playset ToLot2Profile(string name)
 	{
 		var profile = new Playset(name)
 		{
@@ -166,7 +162,7 @@ public class LoadOrderProfile
 				profile.Assets.Add(new Playset.Asset
 				{
 					SteamId = rgx.Success ? ulong.Parse(rgx.Groups[1].Value) : 0,
-					Name = asset.DisplayText,
+					Name = asset.DisplayText ?? string.Empty,
 					RelativePath = asset.IncludedPath
 				});
 			}
@@ -179,7 +175,7 @@ public class LoadOrderProfile
 				var rgx = Regex.Match(mod.IncludedPath, Regex.Escape(WS_CONTENT_PATH) + "[\\\\/](\\d{8,20})[\\\\/]?");
 				profile.Mods.Add(new Playset.Mod
 				{
-					Name = mod.DisplayText,
+					Name = mod.DisplayText ?? string.Empty,
 					SteamId = rgx.Success ? ulong.Parse(rgx.Groups[1].Value) : 0,
 					RelativePath = mod.IncludedPath,
 					Enabled = mod.IsEnabled

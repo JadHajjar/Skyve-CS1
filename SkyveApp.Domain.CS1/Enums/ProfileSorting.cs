@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain.Enums;
+﻿namespace SkyveApp.Domain.CS1.Enums;
 
 public enum ProfileSorting
 {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace SkyveApp.Domain.Utilities;
-internal class ModCollection
+namespace SkyveApp.Domain.CS1.Utilities;
+public class ModCollection
 {
 	private readonly Dictionary<string, List<IMod>> _modList = new(StringComparer.OrdinalIgnoreCase);
 	private readonly Dictionary<string, CollectionInfo> _collectionList;
@@ -37,14 +37,14 @@ internal class ModCollection
 		}
 	}
 
-	internal List<IMod>? GetCollection(IMod mod, out CollectionInfo? collection)
+	public List<IMod>? GetCollection(IMod mod, out CollectionInfo? collection)
 	{
 		var key = Path.GetFileName(mod.FilePath);
 
 		return GetCollection(key, out collection);
 	}
 
-	internal List<IMod>? GetCollection(string key, out CollectionInfo? collection)
+	public List<IMod>? GetCollection(string key, out CollectionInfo? collection)
 	{
 		if (_modList.ContainsKey(key))
 		{
@@ -57,7 +57,7 @@ internal class ModCollection
 		return null;
 	}
 
-	internal void CheckAndAdd(IMod mod)
+	public void CheckAndAdd(IMod mod)
 	{
 		var fileName = Path.GetFileName(mod.FilePath);
 
@@ -67,10 +67,10 @@ internal class ModCollection
 		}
 	}
 
-	internal IEnumerable<List<IMod>> Collections => _modList.Values;
+	public IEnumerable<List<IMod>> Collections => _modList.Values;
 }
 
-internal class CollectionInfo
+public class CollectionInfo
 {
 	public bool Required { get; set; }
 	public bool Forbidden { get; set; }

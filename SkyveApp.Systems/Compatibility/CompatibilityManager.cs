@@ -28,11 +28,12 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 	private readonly IServiceProvider _services;
-	private readonly IContentManager _contentManager;
+	private readonly IPackageManager _contentManager;
 	private readonly ICompatibilityUtil _compatibilityUtil;
-	private readonly IContentUtil _contentUtil;
-	private readonly IPackageUtil _packageUtil;
+	private readonly IPackageUtil _contentUtil;
+	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
+	private readonly IDlcManager _dlcManager;
 	private readonly SkyveApiUtil _skyveApiUtil;
 	private readonly CompatibilityHelper _compatibilityHelper;
 
@@ -40,7 +41,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public IndexedCompatibilityData CompatibilityData { get; private set; }
 
-	public CompatibilityManager(IServiceProvider services, IContentManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IContentUtil contentUtil, ILocale locale, IPackageUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil)
+	public CompatibilityManager(IServiceProvider services, IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
 	{
 		_services = services;
 		_contentManager = contentManager;
@@ -52,6 +53,7 @@ public class CompatibilityManager : ICompatibilityManager
 		_packageUtil = packageUtil;
 		_workshopService = workshopService;
 		_skyveApiUtil = skyveApiUtil;
+		_dlcManager = dlcManager;
 		_compatibilityHelper = new CompatibilityHelper(this, contentManager, contentUtil, packageUtil, workshopService, locale);
 
 		CompatibilityData = new(null);
@@ -187,7 +189,7 @@ public class CompatibilityManager : ICompatibilityManager
 		_notifier.OnRefreshUI();
 	}
 
-	public bool IsBlacklisted(IPackage package)
+	public bool IsBlacklisted(IPackageIdentity package)
 	{
 		return CompatibilityData.BlackListedIds.Contains(package.Id)
 			|| CompatibilityData.BlackListedNames.Contains(package.Name ?? string.Empty)
@@ -227,7 +229,7 @@ public class CompatibilityManager : ICompatibilityManager
 				}));
 		}
 
-		var tagMatches = _bracketsRegex.Matches(workshopInfo?.Title ?? string.Empty);
+		var tagMatches = _bracketsRegex.Matches(workshopInfo?.Name ?? string.Empty);
 
 		foreach (Match match in tagMatches)
 		{
@@ -356,7 +358,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (packageData.Package.RequiredDLCs?.Any() ?? false)
 		{
-			var missing = packageData.Package.RequiredDLCs.Where(x => !_contentManager.IsDlcAvailable(x));
+			var missing = packageData.Package.RequiredDLCs.Where(x => !_dlcManager.IsDlcAvailable(x));
 
 			if (missing.Any())
 			{
@@ -385,7 +387,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (package.IsLocal)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _locale.Get($"Stability_{PackageStability.Local}").Format(_packageUtil.CleanName(_workshopService.GetPackage(packageData.Package.SteamId), true)), new PseudoPackage[] { new(packageData.Package.SteamId, _workshopService) });
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _locale.Get($"Stability_{PackageStability.Local}").Format(_packageUtil.CleanName(_workshopService.GetPackage(new GenericPackageIdentity(packageData.Package.SteamId)), true)), new PseudoPackage[] { new(packageData.Package.SteamId, _workshopService) });
 		}
 
 		if (!package.IsLocal && !author.Malicious && workshopInfo?.IsIncompatible != true)
@@ -448,5 +450,10 @@ public class CompatibilityManager : ICompatibilityManager
 		}
 
 		return info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification);
+	}
+
+	public ulong GetIdFromModName(string fileName)
+	{
+		return CompatibilityData.PackageNames.TryGet(fileName);
 	}
 }

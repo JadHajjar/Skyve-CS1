@@ -1,6 +1,8 @@
 ﻿using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+
+using SkyveApp.Domain.Systems;
+using SkyveApp.Systems;
+using SkyveApp.Systems.CS1.Systems;
 
 using System;
 using System.Diagnostics;
@@ -21,7 +23,7 @@ public static class PlatformUtil
 				return;
 			}
 
-			if (ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.OpenLinksInBrowser)
+			if (ServiceCenter.Get<ISettings, SettingsService>().SessionSettings.UserSettings.OpenLinksInBrowser)
 			{
 				Process.Start(url);
 				return;
@@ -102,7 +104,7 @@ public static class PlatformUtil
 
 	public static void SetFileInClipboard(string path)
 	{
-		Program.MainForm.TryInvoke(() =>
+		SystemsProgram.MainForm.TryInvoke(() =>
 		{
 			if (CrossIO.CurrentPlatform is not Platform.Windows)
 			{

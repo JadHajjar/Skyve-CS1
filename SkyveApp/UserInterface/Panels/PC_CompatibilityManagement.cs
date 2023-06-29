@@ -2,6 +2,8 @@
 
 using SkyveApp.Domain.Compatibility;
 using SkyveApp.Domain.Compatibility.Api;
+using SkyveApp.Domain.CS1.Enums;
+using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
@@ -161,7 +163,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		PB_Loading.Loading = true;
 
-		var mods = await SteamUtil.QueryFilesAsync(Domain.Steam.SteamQueryOrder.RankedByLastUpdatedDate, requiredTags: new[] { "Mod" }, all: true);
+		var mods = await SteamUtil.QueryFilesAsync(SteamQueryOrder.RankedByLastUpdatedDate, requiredTags: new[] { "Mod" }, all: true);
 
 		foreach (var mod in mods)
 		{
@@ -325,7 +327,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Tags ?? new())
 		{
-			var control = new TagControl { TagInfo = new Domain.TagItem(Domain.Enums.TagSource.Global, item) };
+			var control = new TagControl { TagInfo = new Domain.TagItem(TagSource.Global, item) };
 			control.Click += TagControl_Click;
 			P_Tags.Controls.Add(control);
 			T_NewTag.SendToBack();
@@ -403,7 +405,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return;
 		}
 
-		var control = new TagControl { TagInfo = new Domain.TagItem(Domain.Enums.TagSource.Global, prompt.Input) };
+		var control = new TagControl { TagInfo = new Domain.TagItem(TagSource.Global, prompt.Input) };
 		control.Click += TagControl_Click;
 		P_Tags.Controls.Add(control);
 		T_NewTag.SendToBack();

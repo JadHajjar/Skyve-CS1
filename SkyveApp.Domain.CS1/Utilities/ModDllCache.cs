@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 internal class ModDllCache
 {
 	public Version? Version { get; set; }

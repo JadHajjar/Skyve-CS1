@@ -20,15 +20,15 @@ namespace SkyveApp.UserInterface.StatusBubbles;
 internal class AssetsBubble : StatusBubbleBase
 {
 	private readonly INotifier _notifier;
-	private readonly IContentUtil _contentUtil;
-	private readonly IContentManager _contentManager;
+	private readonly IPackageUtil _contentUtil;
+	private readonly IPackageManager _contentManager;
 	private readonly IPlaysetManager _profileManager;
 
 	public AssetsBubble()
 	{
 		_notifier = ServiceCenter.Get<INotifier>();
-		_contentUtil = ServiceCenter.Get<IContentUtil>();
-		_contentManager = ServiceCenter.Get<IContentManager>();
+		_contentUtil = ServiceCenter.Get<IPackageUtil>();
+		_contentManager = ServiceCenter.Get<IPackageManager>();
 		_profileManager = ServiceCenter.Get<IPlaysetManager>();
 	}
 

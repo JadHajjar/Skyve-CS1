@@ -33,7 +33,7 @@ internal class CompatibilityMessageControl : SlickControl
 	private Rectangle snoozeRect;
 
 	private readonly ICompatibilityManager _compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
-	private readonly IContentUtil _contentUtil = ServiceCenter.Get<IContentUtil>();
+	private readonly IPackageUtil _contentUtil = ServiceCenter.Get<IPackageUtil>();
 	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
 
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)

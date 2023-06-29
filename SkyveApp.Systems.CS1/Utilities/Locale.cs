@@ -2,8 +2,6 @@
 
 using SkyveApp.Systems;
 
-using System;
-
 namespace SkyveApp.Utilities;
 public class Locale : LocaleHelper, ILocale
 {

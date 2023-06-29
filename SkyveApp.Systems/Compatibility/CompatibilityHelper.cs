@@ -14,13 +14,13 @@ namespace SkyveApp.Systems.Compatibility;
 internal class CompatibilityHelper
 {
 	private readonly CompatibilityManager _compatibilityManager;
-	private readonly IContentManager _contentManager;
-	private readonly IContentUtil _contentUtil;
-	private readonly IPackageUtil _packageUtil;
+	private readonly IPackageManager _contentManager;
+	private readonly IPackageUtil _contentUtil;
+	private readonly IPackageNameUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;
 	private readonly ILocale _locale;
 
-	public CompatibilityHelper(CompatibilityManager compatibilityManager, IContentManager contentManager, IContentUtil contentUtil, IPackageUtil packageUtil, IWorkshopService workshopService, ILocale locale)
+	public CompatibilityHelper(CompatibilityManager compatibilityManager, IPackageManager contentManager, IPackageUtil contentUtil, IPackageNameUtil packageUtil, IWorkshopService workshopService, ILocale locale)
 	{
 		_compatibilityManager = compatibilityManager;
 		_contentManager = contentManager;
@@ -56,7 +56,7 @@ internal class CompatibilityHelper
 
 		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
-			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x, _workshopService)).Id);
+			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id);
 		}
 
 		if (status.Status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
@@ -88,7 +88,7 @@ internal class CompatibilityHelper
 		var action = _locale.Get($"Action_{status.Status.Action}");
 		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
 		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
-		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetPackage(status.Status.Packages?.FirstOrDefault() ?? 0), true)).Trim();
+		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetInfo(status.Status.Packages?.FirstOrDefault() ?? 0), true)).Trim();
 
 		info.Add(reportType, status.Status, message, packages.ToArray(), _workshopService);
 	}
@@ -116,7 +116,7 @@ internal class CompatibilityHelper
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
 		{
-			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x, _workshopService)).Id);
+			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id);
 		}
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
@@ -164,7 +164,7 @@ internal class CompatibilityHelper
 		var action = _locale.Get($"Action_{interaction.Interaction.Action}");
 		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
 		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
-		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetPackage(packages.FirstOrDefault()))).Trim();
+		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetInfo(packages.FirstOrDefault()))).Trim();
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne)
 		{
@@ -206,17 +206,17 @@ internal class CompatibilityHelper
 			
 			if (workshopPackage != null)
 			{
-				return new GenericPackageIdentity(workshopPackage.SteamId, _workshopService);
+				return new GenericPackageIdentity(workshopPackage.SteamId);
 			}
 			
 			return package;
 		}
 
-		if (_contentManager.GetPackageById(package.Id) is null)
+		if (_contentManager.GetPackageById(package) is null)
 		{
 			foreach (var item in indexedPackage.RequirementAlternatives.Keys)
 			{
-				if (_contentManager.GetPackageById(item) is IPackageIdentity identity)
+				if (_contentManager.GetPackageById(new GenericPackageIdentity(item)) is IPackageIdentity identity)
 				{
 					return identity;
 				}
@@ -232,7 +232,7 @@ internal class CompatibilityHelper
 
 		if (indexedPackage is null)
 		{
-			return isEnabled(_contentManager.GetPackageById(steamId));
+			return isEnabled(_contentManager.GetPackageById(new GenericPackageIdentity(steamId)));
 		}
 
 		if (withAlternatives)
@@ -281,7 +281,7 @@ internal class CompatibilityHelper
 
 	private bool ShouldNotBeUsed(ulong steamId)
 	{
-		var workshopItem = _workshopService.GetPackage(steamId);
+		var workshopItem = _workshopService.GetInfo(steamId);
 
 		return workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.GetWorkshopInfo()!.IsRemoved)
 			? true
@@ -315,7 +315,7 @@ internal class CompatibilityHelper
 
 	private IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
 	{
-		var localPackage = _contentManager.GetPackageById(package.Package.SteamId);
+		var localPackage = _contentManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
 
 		if (localPackage is not null)
 		{

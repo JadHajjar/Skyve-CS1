@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities;
@@ -69,7 +68,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		}
 	}
 
-	private void ProfileManager_ProfileChanged(Domain.Playset obj)
+	private void ProfileManager_ProfileChanged(Playset obj)
 	{
 		Loading = false;
 		Text = Profile.Name;

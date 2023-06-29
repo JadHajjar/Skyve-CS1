@@ -58,6 +58,7 @@ public class SkyveConfig
 			return SharedUtil.Deserialize<SkyveConfig>(FilePath);
 		}
 		catch { }
+
 		return null;
 	}
 }

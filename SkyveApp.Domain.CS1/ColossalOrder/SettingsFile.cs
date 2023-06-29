@@ -1,13 +1,12 @@
 using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
+
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SkyveApp.ColossalOrder;
+namespace SkyveApp.Domain.CS1.ColossalOrder;
 
 public class SettingsFile
 {
@@ -22,19 +21,19 @@ public class SettingsFile
 	};
 
 	private readonly ushort settingsVersion = 3;
-	private readonly Dictionary<string, int> m_SettingsIntValues = new Dictionary<string, int>();
+	private readonly Dictionary<string, int> m_SettingsIntValues = new();
 
-	private readonly Dictionary<string, bool> m_SettingsBoolValues = new Dictionary<string, bool>();
+	private readonly Dictionary<string, bool> m_SettingsBoolValues = new();
 
-	private readonly Dictionary<string, float> m_SettingsFloatValues = new Dictionary<string, float>();
+	private readonly Dictionary<string, float> m_SettingsFloatValues = new();
 
-	private readonly Dictionary<string, string> m_SettingsStringValues = new Dictionary<string, string>();
+	private readonly Dictionary<string, string> m_SettingsStringValues = new();
 
-	private readonly Dictionary<string, InputKey> m_SettingsInputKeyValues = new Dictionary<string, InputKey>();
+	private readonly Dictionary<string, InputKey> m_SettingsInputKeyValues = new();
 
 	private string? m_PathName;
 	private bool m_DontSave;
-	private readonly object m_Saving = new object();
+	private readonly object m_Saving = new();
 
 	public ushort version { get; private set; }
 
@@ -83,24 +82,14 @@ public class SettingsFile
 	//	}
 	//}
 
-	internal Stream? CreateReadStream()
+	public Stream? CreateReadStream()
 	{
-		if (pathName is null)
-		{
-			return null;
-		}
-
-		return new FileStream(pathName, FileMode.Open, FileAccess.Read);
+		return pathName is null ? null : (Stream)new FileStream(pathName, FileMode.Open, FileAccess.Read);
 	}
 
-	internal Stream? CreateWriteStream()
+	public Stream? CreateWriteStream()
 	{
-		if (pathName is null)
-		{
-			return null;
-		}
-
-		return new SafeFileStream(pathName, FileMode.Create);
+		return pathName is null ? null : (Stream)new SafeFileStream(pathName, FileMode.Create);
 	}
 
 	public void DeleteEntry(string key)
@@ -141,13 +130,9 @@ public class SettingsFile
 
 	public bool IsValid()
 	{
-		if (string.IsNullOrEmpty(pathName))
-		{
-			return false;
-		}
+		return !string.IsNullOrEmpty(pathName) && CrossIO.FileExists(pathName);
 		//if (!this.m_UseCloud)
 		{
-			return CrossIO.FileExists(pathName);
 		}
 		//return PlatformService.cloud.Exists(this.pathName);
 	}
@@ -174,26 +159,31 @@ public class SettingsFile
 			{
 				dictionary = new Dictionary<string, int>(m_SettingsIntValues);
 			}
+
 			Dictionary<string, bool> dictionary2;
 			lock (m_SettingsBoolValues)
 			{
 				dictionary2 = new Dictionary<string, bool>(m_SettingsBoolValues);
 			}
+
 			Dictionary<string, float> dictionary3;
 			lock (m_SettingsFloatValues)
 			{
 				dictionary3 = new Dictionary<string, float>(m_SettingsFloatValues);
 			}
+
 			Dictionary<string, string> dictionary4;
 			lock (m_SettingsStringValues)
 			{
 				dictionary4 = new Dictionary<string, string>(m_SettingsStringValues);
 			}
+
 			Dictionary<string, InputKey> dictionary5;
 			lock (m_SettingsInputKeyValues)
 			{
 				dictionary5 = new Dictionary<string, InputKey>(m_SettingsInputKeyValues);
 			}
+
 			using var binaryWriter = new BinaryWriter(stream);
 			binaryWriter.Write(settingsIdentifier);
 			binaryWriter.Write(settingsVersion);
@@ -203,33 +193,41 @@ public class SettingsFile
 				binaryWriter.Write(keyValuePair.Key);
 				binaryWriter.Write(keyValuePair.Value);
 			}
+
 			binaryWriter.Write(dictionary2.Count);
 			foreach (var keyValuePair2 in dictionary2)
 			{
 				binaryWriter.Write(keyValuePair2.Key);
 				binaryWriter.Write(keyValuePair2.Value);
 			}
+
 			binaryWriter.Write(dictionary3.Count);
 			foreach (var keyValuePair3 in dictionary3)
 			{
 				binaryWriter.Write(keyValuePair3.Key);
 				binaryWriter.Write(keyValuePair3.Value);
 			}
+
 			binaryWriter.Write(dictionary4.Count);
 			foreach (var keyValuePair4 in dictionary4)
 			{
 				binaryWriter.Write(keyValuePair4.Key);
 				binaryWriter.Write(keyValuePair4.Value);
 			}
+
 			binaryWriter.Write(dictionary5.Count);
 			foreach (var keyValuePair5 in dictionary5)
 			{
 				binaryWriter.Write(keyValuePair5.Key);
 				binaryWriter.Write(keyValuePair5.Value);
 			}
+
 			binaryWriter.Flush();
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, ""); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "");
+		}
 	}
 
 	private bool ValidateID(char[] id)
@@ -260,8 +258,9 @@ public class SettingsFile
 				version = binaryReader.ReadUInt16();
 				if (version < 2)
 				{
-					throw new Exception("Setting file '" + fileName + "' version is incompatible. The internal format of settings files has changed and your settings will be reset.");
+					throw new Exception("Setting file '" + fileName + "' version is incompatible. The public format of settings files has changed and your settings will be reset.");
 				}
+
 				lock (m_SettingsIntValues)
 				{
 					m_SettingsIntValues.Clear();
@@ -273,6 +272,7 @@ public class SettingsFile
 						m_SettingsIntValues.Add(key, value);
 					}
 				}
+
 				lock (m_SettingsBoolValues)
 				{
 					m_SettingsBoolValues.Clear();
@@ -284,6 +284,7 @@ public class SettingsFile
 						m_SettingsBoolValues.Add(key2, value2);
 					}
 				}
+
 				lock (m_SettingsFloatValues)
 				{
 					m_SettingsFloatValues.Clear();
@@ -295,6 +296,7 @@ public class SettingsFile
 						m_SettingsFloatValues.Add(key3, value3);
 					}
 				}
+
 				lock (m_SettingsStringValues)
 				{
 					m_SettingsStringValues.Clear();
@@ -306,6 +308,7 @@ public class SettingsFile
 						m_SettingsStringValues.Add(key4, value4);
 					}
 				}
+
 				lock (m_SettingsInputKeyValues)
 				{
 					m_SettingsInputKeyValues.Clear();
@@ -317,14 +320,19 @@ public class SettingsFile
 						m_SettingsInputKeyValues.Add(key5, value5);
 					}
 				}
+
 				return;
 			}
-			throw new Exception("Setting file '" + fileName + "' header mismatch. The internal format of settings files has changed.");
+
+			throw new Exception("Setting file '" + fileName + "' header mismatch. The public format of settings files has changed.");
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex,""); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "");
+		}
 	}
 
-	internal void Load()
+	public void Load()
 	{
 		try
 		{
@@ -345,10 +353,13 @@ public class SettingsFile
 				}
 			}
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, ""); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "");
+		}
 	}
 
-	internal void Save()
+	public void Save()
 	{
 		try
 		{
@@ -372,7 +383,10 @@ public class SettingsFile
 				}
 			}
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, ""); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "");
+		}
 		finally
 		{
 			isDirty = false;
@@ -384,48 +398,54 @@ public class SettingsFile
 		isDirty = true;
 	}
 
-	internal bool GetValue(string name, out object? v)
+	public bool GetValue(string name, out object? v)
 	{
 		if (m_SettingsInputKeyValues.TryGetValue(name, out var inputKey))
 		{
 			v = inputKey;
 			return true;
 		}
+
 		if (m_SettingsIntValues.TryGetValue(name, out var num))
 		{
 			v = num;
 			return true;
 		}
+
 		if (m_SettingsBoolValues.TryGetValue(name, out var flag))
 		{
 			v = flag;
 			return true;
 		}
+
 		if (m_SettingsStringValues.TryGetValue(name, out var text))
 		{
 			v = text;
 			return true;
 		}
+
 		if (m_SettingsFloatValues.TryGetValue(name, out var num2))
 		{
 			v = num2;
 			return true;
 		}
+
 		v = null;
 		return false;
 	}
 
-	internal bool GetValue(string name, ref string val)
+	public bool GetValue(string name, ref string val)
 	{
 		if (m_SettingsStringValues.TryGetValue(name, out var text))
 		{
 			val = text;
 			return true;
 		}
+
 		return false;
 	}
 
-	internal void SetValue(string name, string val)
+	public void SetValue(string name, string val)
 	{
 		if (!m_SettingsStringValues.TryGetValue(name, out var a) || a != val)
 		{
@@ -437,7 +457,7 @@ public class SettingsFile
 		}
 	}
 
-	internal bool GetValue(string name, ref bool val)
+	public bool GetValue(string name, ref bool val)
 	{
 		lock (m_SettingsBoolValues)
 		{
@@ -451,7 +471,7 @@ public class SettingsFile
 		return false;
 	}
 
-	internal void SetValue(string name, bool val)
+	public void SetValue(string name, bool val)
 	{
 		lock (m_SettingsBoolValues)
 		{
@@ -466,17 +486,18 @@ public class SettingsFile
 		}
 	}
 
-	internal bool GetValue(string name, ref int val)
+	public bool GetValue(string name, ref int val)
 	{
 		if (m_SettingsIntValues.TryGetValue(name, out var num))
 		{
 			val = num;
 			return true;
 		}
+
 		return false;
 	}
 
-	internal void SetValue(string name, int val)
+	public void SetValue(string name, int val)
 	{
 		if (!m_SettingsIntValues.TryGetValue(name, out var num) || num != val)
 		{
@@ -488,17 +509,18 @@ public class SettingsFile
 		}
 	}
 
-	internal bool GetValue(string name, ref InputKey val)
+	public bool GetValue(string name, ref InputKey val)
 	{
 		if (m_SettingsInputKeyValues.TryGetValue(name, out var inputKey))
 		{
 			val = inputKey;
 			return true;
 		}
+
 		return false;
 	}
 
-	internal void SetValue(string name, InputKey val)
+	public void SetValue(string name, InputKey val)
 	{
 		if (!m_SettingsInputKeyValues.TryGetValue(name, out var value) || value != val)
 		{
@@ -510,17 +532,18 @@ public class SettingsFile
 		}
 	}
 
-	internal bool GetValue(string name, ref float val)
+	public bool GetValue(string name, ref float val)
 	{
 		if (m_SettingsFloatValues.TryGetValue(name, out var num))
 		{
 			val = num;
 			return true;
 		}
+
 		return false;
 	}
 
-	internal void SetValue(string name, float val)
+	public void SetValue(string name, float val)
 	{
 		if (!m_SettingsFloatValues.TryGetValue(name, out _) ||
 				Math.Abs(m_SettingsFloatValues[name] - val) > float.Epsilon)

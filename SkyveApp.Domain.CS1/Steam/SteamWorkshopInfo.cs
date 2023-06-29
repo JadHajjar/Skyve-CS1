@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Domain.Steam;
+namespace SkyveApp.Domain.CS1.Steam;
 public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 {
 	private static readonly DateTime _epoch = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -27,7 +27,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 	public bool IsRemoved { get; set; }
 	public bool IsIncompatible { get; set; }
 	public bool IsBanned { get; set; }
-	public string Title { get; set; }
+	public string Name { get; set; }
 	public string[] Tags { get; set; }
 	public ulong Id { get; set; }
 	public string? Url { get; set; }
@@ -39,7 +39,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 	public SteamWorkshopInfo(SteamWorkshopItemEntry entry)
 	{
 		Timestamp = DateTime.Now;
-		Title = entry.title;
+		Name = entry.title;
 		Id = ulong.TryParse(entry.publishedfileid, out var id) ? id : 0;
 		ServerSize = entry.file_size;
 		ThumbnailUrl = entry.preview_url;
@@ -56,7 +56,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 		IsMod = entry.tags?.Any(x => x.display_name == "Mod") ?? false;
 		Url = $"https://steamcommunity.com/workshop/filedetails/?id={Id}";
 
-		RequiredPackageIds = entry.children is null ? new ulong[0] : Enumerable.Where(entry.children, x => x.file_type == 0 && ulong.TryParse(x.publishedfileid, out _)).Select(x => ulong.Parse(x.publishedfileid)).ToArray();
+		RequiredPackageIds = entry.children is null ? new ulong[0] : entry.children.Where(x => x.file_type == 0 && ulong.TryParse(x.publishedfileid, out _)).Select(x => ulong.Parse(x.publishedfileid)).ToArray();
 		Tags = (entry.tags
 			?.Select(item => item.tag)
 			?.Where(item => item.IndexOf("compatible", StringComparison.OrdinalIgnoreCase) == -1)
@@ -65,13 +65,13 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 
 	public SteamWorkshopInfo()
 	{
-		Title = string.Empty;
+		Name = string.Empty;
 		Tags = new string[0];
 	}
 
 	public override string ToString()
 	{
-		return Title;
+		return Name;
 	}
 
 	public static int CalculateScore(SteamWorkshopItemEntry entry)

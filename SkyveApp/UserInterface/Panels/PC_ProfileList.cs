@@ -1,6 +1,6 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
+using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
@@ -62,7 +62,7 @@ public partial class PC_ProfileList : PanelContent
 
 			LC_Items.ReadOnly = true;
 			LC_Items.SetItems(profiles);
-			LC_Items.SetSorting(Domain.Enums.ProfileSorting.Downloads);
+			LC_Items.SetSorting(ProfileSorting.Downloads);
 		}
 
 		SlickTip.SetTo(B_AddProfile.Controls[0], "NewProfile_Tip");

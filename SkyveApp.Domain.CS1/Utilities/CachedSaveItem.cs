@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 public class CachedSaveItem<TKey, TValue>
 {
 	private readonly TValue _currentValue;

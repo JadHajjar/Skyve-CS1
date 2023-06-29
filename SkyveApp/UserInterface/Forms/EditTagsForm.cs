@@ -1,6 +1,6 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
+using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services.Interfaces;
 using SkyveApp.UserInterface.Content;
@@ -26,7 +26,7 @@ public partial class EditTagsForm : BaseForm
 		Package = package;
 		Text = LocaleHelper.GetGlobalText("Tags");
 
-		foreach (var link in package.Tags.Where(x => x.Source == Domain.Enums.TagSource.FindIt))
+		foreach (var link in package.Tags.Where(x => x.Source == TagSource.FindIt))
 		{ AddTag(link); }
 	}
 
@@ -52,7 +52,7 @@ public partial class EditTagsForm : BaseForm
 			return;
 		}
 
-		AddTag(new(Domain.Enums.TagSource.FindIt, prompt.Input));
+		AddTag(new(TagSource.FindIt, prompt.Input));
 	}
 
 	private void TagControl_Click(object sender, EventArgs e)

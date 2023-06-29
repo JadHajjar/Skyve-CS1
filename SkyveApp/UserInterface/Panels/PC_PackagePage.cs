@@ -1,7 +1,7 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Services;
@@ -159,12 +159,12 @@ public partial class PC_PackagePage : PanelContent
 
 	private void TagControl_Click(object sender, EventArgs e)
 	{
-		if ((sender as TagControl)!.TagInfo.Source != Domain.Enums.TagSource.FindIt)
+		if ((sender as TagControl)!.TagInfo.Source != TagSource.FindIt)
 		{
 			return;
 		} (sender as TagControl)!.Dispose();
 
-		ServiceCenter.Get<IAssetUtil>().SetFindItTag(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Source == Domain.Enums.TagSource.FindIt ? x.TagInfo.Value?.Replace(' ', '-') : null).WhereNotEmpty().ListStrings(" "));
+		ServiceCenter.Get<IAssetUtil>().SetFindItTag(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Source == TagSource.FindIt ? x.TagInfo.Value?.Replace(' ', '-') : null).WhereNotEmpty().ListStrings(" "));
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}
 
@@ -222,7 +222,7 @@ public partial class PC_PackagePage : PanelContent
 		var isPackageIncluded = item.IsIncluded;
 		var isInstalled = item.Package is not null;
 
-		var contentUtil = ServiceCenter.Get<IContentUtil>();
+		var contentUtil = ServiceCenter.Get<IPackageUtil>();
 		var subscriptionManager = ServiceCenter.Get<ISubscriptionsManager>();
 		var profileManager = ServiceCenter.Get<IPlaysetManager>();
 		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
@@ -282,7 +282,7 @@ public partial class PC_PackagePage : PanelContent
 				}
 				else
 				{
-					ServiceCenter.Get<IContentUtil>().DeleteAll(item.Folder);
+					ServiceCenter.Get<IPackageUtil>().DeleteAll(item.Folder);
 				}
 			}
 			catch (Exception ex) { MessagePrompt.Show(ex, Locale.FailedToDeleteItem); }

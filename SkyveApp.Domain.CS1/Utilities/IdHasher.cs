@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 public static class IdHasher
 {
 	public static string HashToShortString(int id)
 	{
 		using var md5 = MD5.Create();
-		var inputBytes = BitConverter.GetBytes(int.MaxValue / 2 - id);
+		var inputBytes = BitConverter.GetBytes((int.MaxValue / 2) - id);
 
 		var stringBuilder = new StringBuilder();
 		for (var i = 0; i < inputBytes.Length; i++)
@@ -31,6 +28,6 @@ public static class IdHasher
 			hashBytes[i / 2] = Convert.ToByte(hashedValue.Substring(i, 2), 16);
 		}
 
-		return int.MaxValue / 2 - BitConverter.ToInt32(hashBytes, 0);
+		return (int.MaxValue / 2) - BitConverter.ToInt32(hashBytes, 0);
 	}
 }

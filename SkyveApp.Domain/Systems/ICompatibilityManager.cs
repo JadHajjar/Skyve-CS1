@@ -10,7 +10,7 @@ public interface ICompatibilityManager
 	NotificationType GetNotification(ICompatibilityInfo info);
 	IPackageCompatibilityInfo? GetPackageInfo(IPackage package);
 	ulong GetIdFromModName(string fileName);
-	bool IsBlacklisted(IPackage package);
+	bool IsBlacklisted(IPackageIdentity package);
 	bool IsSnoozed(ICompatibilityItem reportItem);
 	void LoadCachedData();
 	void ResetCache();

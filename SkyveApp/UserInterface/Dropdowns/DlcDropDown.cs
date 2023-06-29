@@ -1,6 +1,6 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Steam;
+using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Utilities;
 
 using SlickControls;

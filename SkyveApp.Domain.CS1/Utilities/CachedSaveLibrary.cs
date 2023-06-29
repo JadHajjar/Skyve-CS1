@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain.Utilities;
+namespace SkyveApp.Domain.CS1.Utilities;
 public class CachedSaveLibrary<TKey, TValue>
 {
 	internal readonly Dictionary<TKey, CachedSaveItem<TKey, TValue>> _dictionary = new();

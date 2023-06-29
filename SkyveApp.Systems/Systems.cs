@@ -4,10 +4,13 @@ using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.Compatibility;
 
 using System;
+using System.Windows.Forms;
 
 namespace SkyveApp.Systems;
 public static class SystemsProgram
 {
+	public static Form? MainForm { get; set; }
+
 	public static IServiceCollection AddSkyveSystems(this IServiceCollection services)
 	{
 		services.AddSingleton<ILogger, LoggerSystem>();
@@ -16,8 +19,8 @@ public static class SystemsProgram
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
 
 		services.AddTransient<IBulkUtil, BulkUtil>();
-		services.AddTransient<IPackageUtil, PackageUtil>();
-		services.AddTransient<IContentUtil, ContentUtil>();
+		services.AddTransient<IPackageNameUtil, PackageUtil>();
+		services.AddTransient<IPackageUtil, ContentUtil>();
 
 		return services;
 	}

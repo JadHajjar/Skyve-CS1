@@ -1,6 +1,5 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Systems;
@@ -26,8 +25,8 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 {
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly ICompatibilityManager _compatibilityManager;
-	private readonly IContentUtil _contentUtil;
-	private readonly IPackageUtil _packageUtil;
+	private readonly IPackageUtil _contentUtil;
+	private readonly IPackageNameUtil _packageUtil;
 	private readonly ISettings _settings;
 
 	public CompatibilityReportList()
@@ -38,7 +37,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 
 		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
 		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
-		_contentUtil = ServiceCenter.Get<IContentUtil>();
+		_contentUtil = ServiceCenter.Get<IPackageUtil>();
 		_settings = ServiceCenter.Get<ISettings>();
 	}
 

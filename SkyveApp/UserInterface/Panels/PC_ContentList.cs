@@ -1,10 +1,10 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
 using SkyveApp.Domain.Compatibility.Enums;
+using SkyveApp.Domain.CS1.Enums;
+using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;

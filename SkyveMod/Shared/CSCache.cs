@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+#nullable disable
 namespace SkyveShared;
 public class CSCache
 {
@@ -45,14 +45,7 @@ public class CSCache
 
 	public Item GetItem(string path)
 	{
-		if (ItemTable.TryGetValue(path, out var ret))
-		{
-			return ret;
-		}
-		else
-		{
-			return null;
-		}
+		return ItemTable.TryGetValue(path, out var ret) ? ret : null;
 	}
 
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
@@ -83,6 +76,8 @@ public class CSCache
 			return ret;
 		}
 		catch { }
+
 		return null;
 	}
 }
+#nullable enable

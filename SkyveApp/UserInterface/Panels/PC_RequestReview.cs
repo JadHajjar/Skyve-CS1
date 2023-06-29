@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Compatibility;
+using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Interfaces;
 using SkyveApp.Services;
@@ -84,7 +85,7 @@ public partial class PC_RequestReview : PanelContent
 		var data = CurrentPackage.GetCompatibilityInfo();
 		DD_Stability.SelectedItem = data.Data?.Package.Stability ?? PackageStability.NotReviewed;
 		DD_PackageType.SelectedItem = data.Data?.Package.Type ?? PackageType.GenericPackage;
-		DD_DLCs.SelectedItems = data.Data?.Package is null ? Enumerable.Empty<Domain.Steam.SteamDlc>() : SteamUtil.Dlcs.Where(x => data.Data?.Package.RequiredDLCs?.Contains(x.Id) ?? false);
+		DD_DLCs.SelectedItems = data.Data?.Package is null ? Enumerable.Empty<SteamDlc>() : SteamUtil.Dlcs.Where(x => data.Data?.Package.RequiredDLCs?.Contains(x.Id) ?? false);
 		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => data.Data?.Package.Usage.HasFlag(x) ?? true);
 	}
 

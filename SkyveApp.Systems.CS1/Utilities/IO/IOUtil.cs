@@ -1,10 +1,11 @@
 ﻿using Extensions;
 
-using SkyveApp.Services.Interfaces;
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 
 namespace SkyveApp.Utilities.IO;
 public class IOUtil
@@ -66,9 +67,9 @@ public class IOUtil
 	{
 		try
 		{
-			File.WriteAllText(CrossIO.Combine(Program.CurrentDirectory, "batch.bat"), command);
+			File.WriteAllText(CrossIO.Combine(Application.StartupPath, "batch.bat"), command);
 
-			Execute(CrossIO.Combine(Program.CurrentDirectory, "batch.bat"), "", true, true);
+			Execute(CrossIO.Combine(Application.StartupPath, "batch.bat"), "", true, true);
 		}
 		catch (Exception ex) { _logger.Exception(ex, "Failed to start batch to restart the tool after update"); }
 	}

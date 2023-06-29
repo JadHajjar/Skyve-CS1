@@ -1,18 +1,15 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.CS1;
+using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 
 namespace SkyveApp.Utilities;
 public class ContentUtil
@@ -26,7 +23,7 @@ public class ContentUtil
 
 	public bool BulkUpdating { get; set; }
 
-	private readonly IContentManager _contentManager;
+	private readonly IPackageManager _contentManager;
 	private readonly ILocationManager _locationManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPlaysetManager _profileManager;
@@ -35,7 +32,7 @@ public class ContentUtil
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ContentUtil(IContentManager contentManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil)
+	public ContentUtil(IPackageManager contentManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil)
 	{
 		_contentManager = contentManager;
 		_locationManager = locationManager;
@@ -338,7 +335,9 @@ public class ContentUtil
 	private bool IsDirectoryEmpty(string path)
 	{
 		if (!Directory.Exists(path))
+		{
 			return true;
+		}
 
 		var files = Directory.GetFiles(path);
 
@@ -451,79 +450,8 @@ public class ContentUtil
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(CACHE_FILENAME)); }
+			CrossIO.DeleteFile(ISave.GetPath(CACHE_FILENAME));
+		}
 		catch (Exception ex) { _logger.Exception(ex, "Failed to clear DLL cache"); }
-	}
-
-	public void SetBulkIncluded(IEnumerable<IPackage> packages, bool value)
-	{
-		var packageList = packages.ToList();
-
-		if (packageList.Count == 0)
-		{
-			return;
-		}
-
-		if (packageList[0] is Package)
-		{
-			packageList = packageList.Cast<Package>().SelectMany(getPackageContents).ToList();
-		}
-
-		if (packageList.Count == 0)
-		{
-			return;
-		}
-
-		BulkUpdating = true;
-
-		foreach (var package in packageList)
-		{
-			package.IsIncluded = value;
-		}
-
-		BulkUpdating = false;
-
-		_notifier.OnInformationUpdated();
-		_modUtil.SavePendingValues();
-		_assetUtil.SaveChanges();
-		_notifier.TriggerAutoSave();
-
-		IEnumerable<IPackage> getPackageContents(Package package)
-		{
-			if (package.Mod is not null)
-			{
-				yield return package.Mod;
-			}
-
-			if (package.Assets is not null)
-			{
-				foreach (var asset in package.Assets)
-				{
-					yield return asset;
-				}
-			}
-		}
-	}
-
-	public void SetBulkEnabled(IEnumerable<Mod> mods, bool value)
-	{
-		BulkUpdating = true;
-
-		var modList = mods.ToList();
-
-		if (modList.Count == 0)
-		{
-			BulkUpdating = false;
-			return;
-		}
-
-		foreach (var package in modList.Skip(1))
-		{
-			package.IsEnabled = value;
-		}
-
-		BulkUpdating = false;
-
-		modList[0].IsEnabled = value;
 	}
 }

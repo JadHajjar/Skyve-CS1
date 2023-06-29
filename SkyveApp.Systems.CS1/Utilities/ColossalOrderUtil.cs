@@ -1,10 +1,10 @@
 ﻿using Extensions;
 
-using SkyveApp.ColossalOrder;
 using SkyveApp.Domain;
+using SkyveApp.Domain.CS1;
+using SkyveApp.Domain.CS1.ColossalOrder;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
+using SkyveApp.Systems.CS1.Systems;
 
 using System.Collections.Generic;
 using System.IO;
@@ -22,14 +22,14 @@ public class ColossalOrderUtil
 	private readonly DelayedAction _delayedAction = new(500);
 
 	private readonly ILocationManager _locationManager;
-	private readonly ISettings _settings;
+	private readonly SettingsService  _settings;
 	private readonly INotifier _notifier;
 
 	public ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings)
 	{
 		_locationManager = locationManager;
 		_notifier = notifier;
-		_settings = settings;
+		_settings = (settings as SettingsService)!;
 		_settingsFile = new SettingsFile() { fileName = GAME_SETTINGS_FILE_NAME };
 		_settingsFile.Load();
 
@@ -120,7 +120,7 @@ public class ColossalOrderUtil
 		}
 	}
 
-	private SavedBool GetEnabledSetting(Mod mod)
+	private SavedBool GetEnabledSetting(IMod mod)
 	{
 		var savedEnabledKey_ = $"{Path.GetFileNameWithoutExtension(mod.Folder)}{GetLegacyHashCode(mod.Folder)}.enabled";
 

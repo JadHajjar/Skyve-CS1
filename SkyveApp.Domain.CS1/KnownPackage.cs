@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace SkyveApp.Domain;
-internal class KnownPackage
+namespace SkyveApp.Domain.CS1;
+public class KnownPackage
 {
 	public KnownPackage(ILocalPackage x)
 	{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SkyveApp.Utilities;
 public static class CommandUtil
@@ -27,7 +28,7 @@ public static class CommandUtil
 	{
 		if (isCommand("stub", out _))
 		{
-			Process.Start(Program.ExecutablePath);
+			Process.Start(Application.ExecutablePath);
 
 			return true;
 		}

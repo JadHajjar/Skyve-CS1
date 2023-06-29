@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace SkyveApp.Domain;
-public interface IWorkshopInfo
+public interface IWorkshopInfo : IPackageIdentity
 {
 	IUser? Author { get; }
 	string? ThumbnailUrl { get; }
@@ -16,9 +16,6 @@ public interface IWorkshopInfo
 	bool IsRemoved { get; }
 	bool IsIncompatible { get; }
 	bool IsBanned { get; }
-	string Title { get; }
 	string[] Tags { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
-	ulong Id { get; }
-	string? Url { get; }
 }

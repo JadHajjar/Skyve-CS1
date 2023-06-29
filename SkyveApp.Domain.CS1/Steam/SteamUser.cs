@@ -3,12 +3,11 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
 
 using System;
 using System.Drawing;
 
-namespace SkyveApp.Domain.Steam;
+namespace SkyveApp.Domain.CS1.Steam;
 public class SteamUser : IUser, ITimestamped
 {
 	public SteamUser(SteamUserEntry entry)

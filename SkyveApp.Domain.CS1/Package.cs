@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Domain;
+namespace SkyveApp.Domain.CS1;
 
 public class Package : ILocalPackageWithContents
 {
@@ -76,17 +76,9 @@ public class Package : ILocalPackageWithContents
 	{
 		var workshopInfo = this.GetWorkshopInfo();
 
-		if (workshopInfo is not null)
-		{
-			return workshopInfo.Title;
-		}
-
-		if (Mod is not null)
-		{
-			return Path.GetFileNameWithoutExtension(Mod!.FilePath).FormatWords();
-		}
-
-		return Path.GetFileNameWithoutExtension(Folder);
+		return workshopInfo is not null
+			? workshopInfo.Name
+			: Mod is not null ? Path.GetFileNameWithoutExtension(Mod!.FilePath).FormatWords() : Path.GetFileNameWithoutExtension(Folder);
 	}
 
 	public override bool Equals(object? obj)

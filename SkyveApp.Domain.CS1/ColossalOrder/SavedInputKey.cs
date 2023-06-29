@@ -1,4 +1,4 @@
-namespace SkyveApp.ColossalOrder;
+namespace SkyveApp.Domain.CS1.ColossalOrder;
 
 public enum KeyCode
 {
@@ -26,14 +26,17 @@ public class SavedInputKey : SavedValue
 		{
 			inputKey |= 1073741824;
 		}
+
 		if (shift)
 		{
 			inputKey |= 536870912;
 		}
+
 		if (alt)
 		{
 			inputKey |= 268435456;
 		}
+
 		return inputKey;
 	}
 
@@ -65,15 +68,13 @@ public class SavedInputKey : SavedValue
 			{
 				Sync();
 			}
+
 			return m_Value;
 		}
 		set
 		{
 			m_Value = value;
-			if (settingsFile != null)
-			{
-				settingsFile.SetValue(m_Name, m_Value);
-			}
+			settingsFile?.SetValue(m_Name, m_Value);
 		}
 	}
 
@@ -142,6 +143,7 @@ public class SavedInputKey : SavedValue
 				this.value |= 1073741824;
 				return;
 			}
+
 			this.value &= -1073741825;
 		}
 	}
@@ -156,6 +158,7 @@ public class SavedInputKey : SavedValue
 				this.value |= 536870912;
 				return;
 			}
+
 			this.value &= -536870913;
 		}
 	}
@@ -170,6 +173,7 @@ public class SavedInputKey : SavedValue
 				this.value |= 268435456;
 				return;
 			}
+
 			this.value &= -268435457;
 		}
 	}
@@ -181,14 +185,17 @@ public class SavedInputKey : SavedValue
 		{
 			str += "Ctrl+";
 		}
+
 		if (Alt)
 		{
 			str += "Alt+";
 		}
+
 		if (Shift)
 		{
 			str += "Shift+";
 		}
+
 		return str + Key.ToString();
 	}
 
@@ -237,14 +244,17 @@ public class SavedInputKey : SavedValue
 		{
 			str += "Ctrl+";
 		}
+
 		if ((value & 268435456) != 0)
 		{
 			str += "Alt+";
 		}
+
 		if ((value & 536870912) != 0)
 		{
 			str += "Shift+";
 		}
+
 		return str + ((KeyCode)(value & 268435455)).ToString();
 	}
 

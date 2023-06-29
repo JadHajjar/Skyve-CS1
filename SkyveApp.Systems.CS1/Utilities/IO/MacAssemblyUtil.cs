@@ -1,31 +1,43 @@
 ﻿using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace SkyveApp.Utilities.IO;
 public class MacAssemblyUtil
 {
-	public static bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
-	{
-		var util = ServiceCenter.Get<IContentUtil>();
+	private readonly ILocationManager _locationManager;
+	private readonly ContentUtil _contentUtil;
+	private readonly IOUtil _iOUtil;
+	private readonly ILogger _logger;
 
+	public MacAssemblyUtil(ILocationManager locationManager, ContentUtil contentUtil, ILogger logger, IOUtil iOUtil)
+	{
+		_locationManager = locationManager;
+		_contentUtil = contentUtil;
+		_logger = logger;
+		_iOUtil = iOUtil;
+	}
+
+	public bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
+	{
 		foreach (var path in dllPaths)
 		{
-			var cache = util.GetDllModCache(path, out version);
+			var cache = _contentUtil.GetDllModCache(path, out version);
 
 			if (cache == true || (cache is null && CheckDllImplementsInterface(path, out version)))
 			{
-				util.SetDllModCache(path, true, version);
+				_contentUtil.SetDllModCache(path, true, version);
 				dllPath = path;
 				return true;
 			}
 
-			util.SetDllModCache(path, false, null);
+			_contentUtil.SetDllModCache(path, false, null);
 		}
 
 		dllPath = null;
@@ -34,7 +46,7 @@ public class MacAssemblyUtil
 		return false;
 	}
 
-	public static bool CheckDllImplementsInterface(string dllPath, out Version? version)
+	public bool CheckDllImplementsInterface(string dllPath, out Version? version)
 	{
 		version = null;
 
@@ -60,25 +72,24 @@ public class MacAssemblyUtil
 		return false;
 	}
 
-	public static bool MacOsResolve(string dllPath, out Version? version)
+	public bool MacOsResolve(string dllPath, out Version? version)
 	{
 #if DEBUG
-		ServiceCenter.Get<ILogger>().Debug("Resolving " + dllPath);
+		_logger.Debug("Resolving " + dllPath);
 #endif
 		version = null;
-		var locationManager = ServiceCenter.Get<ILocationManager>();
-		var process = ServiceCenter.Get<IOUtil>().Execute(CrossIO.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
+		var process = _iOUtil.Execute(CrossIO.Combine(Application.StartupPath, "AssemblyResolver.exe"), string.Join(" ", new string[]
 		{
 			dllPath,
-			locationManager.ManagedDLL,
-			locationManager.ModsPath,
-			locationManager.WorkshopContentPath
+			_locationManager.ManagedDLL,
+			_locationManager.ModsPath,
+			_locationManager.WorkshopContentPath
 		}.Select(x => $"\"{x}\"")), false, true);
 
 		if (process is null)
 		{
 #if DEBUG
-			ServiceCenter.Get<ILogger>().Debug("Process null");
+			_logger.Debug("Process null");
 #endif
 			return false;
 		}

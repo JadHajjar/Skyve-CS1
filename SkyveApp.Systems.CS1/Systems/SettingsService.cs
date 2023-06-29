@@ -1,17 +1,11 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
+using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Domain.Utilities;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkyveApp.Services;
-internal class SettingsService : ISettings
+namespace SkyveApp.Systems.CS1.Systems;
+public class SettingsService : ISettings
 {
 	public SessionSettings SessionSettings { get; }
 	public FolderSettings FolderSettings { get; }

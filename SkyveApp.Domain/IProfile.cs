@@ -18,6 +18,7 @@ public interface IPlayset
 	int AssetCount { get; }
 	int ModCount { get; }
 	IEnumerable<IPackage> Packages { get; }
+	bool Temporary { get; }
 }
 
 public interface ICustomPlayset : IPlayset

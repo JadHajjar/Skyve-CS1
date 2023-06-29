@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Services;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Managers;
+using SkyveApp.Systems.CS1.Systems;
+using SkyveApp.Utilities;
+using SkyveApp.Utilities.IO;
 
 namespace SkyveApp.Systems.CS1;
 public static class Startup
@@ -18,10 +13,10 @@ public static class Startup
 	{
 		services.AddSingleton<ILocale, Locale>();
 		services.AddSingleton<ICitiesManager, CitiesManager>();
-		services.AddSingleton<IContentManager, ContentManager>();
+		services.AddSingleton<IPackageManager, PackageManager>();
 		services.AddSingleton<ILocationManager, LocationManager>();
 		services.AddSingleton<IModLogicManager, ModLogicManager>();
-		services.AddSingleton<IPlaysetManager, ProfileManager>();
+		services.AddSingleton<IPlaysetManager, PlaysetManager>();
 		services.AddSingleton<ISettings, SettingsService>();
 		services.AddSingleton<ISubscriptionsManager, SubscriptionsManager>();
 		services.AddSingleton<IUpdateManager, UpdateManager>();
@@ -38,5 +33,4 @@ public static class Startup
 
 		return services;
 	}
-
 }

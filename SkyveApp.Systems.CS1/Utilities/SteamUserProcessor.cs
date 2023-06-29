@@ -1,8 +1,7 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Steam;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+using SkyveApp.Domain.CS1.Steam;
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;

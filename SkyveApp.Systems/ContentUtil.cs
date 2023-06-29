@@ -9,18 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace SkyveApp.Systems;
-public class ContentUtil : IContentUtil
+public class ContentUtil : IPackageUtil
 {
 	private readonly IServiceProvider _serviceProvider;
 	private readonly IModUtil _modUtil;
 	private readonly IAssetUtil _assetUtil;
 	private readonly IBulkUtil _bulkUtil;
 	private readonly ILocale _locale;
-	private readonly IContentManager _contentManager;
-	private readonly IPackageUtil _packageUtil;
+	private readonly IPackageManager _contentManager;
+	private readonly IPackageNameUtil _packageUtil;
 	private readonly ISettings _settings;
 
-	public ContentUtil(IServiceProvider serviceProvider, IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageUtil packageUtil, IContentManager contentManager, ISettings settings)
+	public ContentUtil(IServiceProvider serviceProvider, IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager contentManager, ISettings settings)
 	{
 		_serviceProvider = serviceProvider;
 		_modUtil = modUtil;
@@ -139,6 +139,20 @@ public class ContentUtil : IContentUtil
 		{
 			_assetUtil.SetIncluded(asset, value);
 		}
+	}
+
+	public void SetEnabled(ILocalPackage package, bool value)
+	{
+		if (package is IMod mod)
+		{
+			_modUtil.SetEnabled(mod, value);
+		}
+
+		if (package is ILocalPackageWithContents packageWithContents && packageWithContents.Mod is not null)
+		{
+			_modUtil.SetEnabled(packageWithContents.Mod, value);
+		}
+
 	}
 
 	public DownloadStatus GetStatus(IPackage mod, out string reason)

@@ -7,7 +7,7 @@ namespace SkyveShared;
 public static class BlackListTransfer
 {
 	public const string FILE_NAME = "BlackListTransfer.txt";
-	const string MISSING = "missing";
+	private const string MISSING = "missing";
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
 
 	public static void SendList(IEnumerable<ulong> ids, bool missing)
@@ -68,6 +68,7 @@ public static class BlackListTransfer
 				ret.Add(id);
 			}
 		}
+
 		return ret;
 	}
 }

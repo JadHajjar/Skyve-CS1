@@ -1,17 +1,12 @@
-﻿using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Interfaces;
-using SlickControls;
+﻿using SkyveApp.Domain;
+using SkyveApp.Domain.Enums;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SlickControls;
 
 namespace SkyveApp.Utilities;
 public static class ProfileUtil
 {
-	public static DynamicIcon GetIcon(this IProfile profile)
+	public static DynamicIcon GetIcon(this IPlayset profile)
 	{
 		if (profile.Temporary)
 		{

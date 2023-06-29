@@ -1,11 +1,9 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Interfaces;
+using SkyveApp.Domain.CS1;
+using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
 
 using SkyveShared;
 
@@ -24,10 +22,10 @@ public class AssetsUtil : IAssetUtil
 	public HashSet<string> ExcludedHashSet { get; }
 	public Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
 
-	private readonly IContentManager _contentManager;
+	private readonly IPackageManager _contentManager;
 	private readonly INotifier _notifier;
 
-	public AssetsUtil(IContentManager contentManager, INotifier notifier)
+	public AssetsUtil(IPackageManager contentManager, INotifier notifier)
 	{
 		_contentManager = contentManager;
 		_notifier = notifier;
@@ -61,7 +59,7 @@ public class AssetsUtil : IAssetUtil
 		_notifier.ContentLoaded += BuildAssetIndex;
 	}
 
-	public IEnumerable<IAsset> GetAssets(ILocalPackage package, bool withSubDirectories = true)
+	public IEnumerable<IAsset> GetAssets(ILocalPackageWithContents package, bool withSubDirectories = true)
 	{
 		if (!Directory.Exists(package.Folder))
 		{
@@ -118,7 +116,7 @@ public class AssetsUtil : IAssetUtil
 
 	public IAsset? GetAssetByFile(string? v)
 	{
-		return assetIndex.TryGet(v??string.Empty);
+		return assetIndex.TryGet(v ?? string.Empty);
 	}
 
 	public void BuildAssetIndex()

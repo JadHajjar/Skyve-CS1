@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Steam;
+using SkyveApp.Domain.CS1.Enums;
+using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
 using SkyveApp.Services.Interfaces;
@@ -51,7 +52,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		LC_Items.PackageSelected += LC_Items_PackageSelected;
 
-		LC_Items.SetSorting(Domain.Enums.PackageSorting.None, false);
+		LC_Items.SetSorting(PackageSorting.None, false);
 
 		Controls.Add(LC_Items);
 

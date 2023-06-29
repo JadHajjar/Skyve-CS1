@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain.Steam;
+﻿namespace SkyveApp.Domain.CS1.Steam;
 public enum SteamVisibility
 {
 	Local = -1,

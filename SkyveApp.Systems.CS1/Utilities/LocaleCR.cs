@@ -1,7 +1,5 @@
 ﻿using Extensions;
 
-using System;
-
 namespace SkyveApp.Utilities;
 public class LocaleCR : LocaleHelper
 {
