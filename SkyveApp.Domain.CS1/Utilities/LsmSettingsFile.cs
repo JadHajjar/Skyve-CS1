@@ -14,9 +14,9 @@ namespace SkyveApp.Domain.Utilities;
 public class LsmSettingsFile
 {
 	const string FILE_NAME = "LoadingScreenModRevisited.xml";
-	static string FILE_PATH => CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, FILE_NAME);
+	static string FILE_PATH => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, FILE_NAME);
 
-	public static string DefaultSkipPath => CrossIO.Combine(CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, "Maps"), "SkippedPrefabs");
+	public static string DefaultSkipPath => CrossIO.Combine(CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, "Maps"), "SkippedPrefabs");
 	public static string DefaultSkipFile => CrossIO.Combine(DefaultSkipPath, "skip.txt");
 
 	public bool loadEnabled = true;
@@ -64,7 +64,7 @@ public class LsmSettingsFile
 		}
 		catch (Exception ex)
 		{
-			Program.Services.GetService<ILogger>().Exception(ex, "Failed to deserialize LSM file");
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to deserialize LSM file");
 		}
 
 		return null;
@@ -78,7 +78,7 @@ public class LsmSettingsFile
 		}
 		catch (Exception ex)
 		{
-			Program.Services.GetService<ILogger>().Exception(ex, "Failed to serialize LSM file");
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to serialize LSM file");
 		}
 	}
 
@@ -100,7 +100,7 @@ public class LsmSettingsFile
 		}
 		catch (Exception ex)
 		{
-			Program.Services.GetService<ILogger>().Exception(ex, "Failed to sync and serialize LSM file");
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to sync and serialize LSM file");
 		}
 	}
 }

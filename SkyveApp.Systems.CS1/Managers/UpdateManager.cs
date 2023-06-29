@@ -54,7 +54,7 @@ internal class UpdateManager : IUpdateManager
 
     private void CentralManager_WorkshopInfoUpdated()
     {
-        ISave.Save(Program.Services.GetService<IContentManager>().Packages.Select(x => new KnownPackage(x)), "KnownPackages.json");
+        ISave.Save(ServiceCenter.Get<IContentManager>().Packages.Select(x => new KnownPackage(x)), "KnownPackages.json");
     }
 
     public bool IsFirstTime()

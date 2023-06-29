@@ -24,10 +24,10 @@ internal class ModsBubble : StatusBubbleBase
 
 	public ModsBubble()
 	{
-		_settings = Program.Services.GetService<ISettings>();
-		_notifier = Program.Services.GetService<INotifier>();
-		_contentManager = Program.Services.GetService<IContentManager>();
-		_profileManager = Program.Services.GetService<IPlaysetManager>();
+		_settings = ServiceCenter.Get<ISettings>();
+		_notifier = ServiceCenter.Get<INotifier>();
+		_contentManager = ServiceCenter.Get<IContentManager>();
+		_profileManager = ServiceCenter.Get<IPlaysetManager>();
 	}
 
 	protected override void OnHandleCreated(EventArgs e)

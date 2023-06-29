@@ -13,7 +13,7 @@ public static class CompatibilityExtensions
 {
 	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
 	{
-		var manager = Program.Services.GetService<ICompatibilityManager>();
+		var manager = ServiceCenter.Get<ICompatibilityManager>();
 
 		return manager.GetCompatibilityInfo(package, noCache);
 	}

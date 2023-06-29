@@ -51,7 +51,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 			Controls.Add(_panels[i], i, 0);
 		}
 
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 		_compatibilityManager.ReportProcessed += CentralManager_PackageInformationUpdated;
 	}
 

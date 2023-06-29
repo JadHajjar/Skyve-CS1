@@ -27,7 +27,7 @@ public class LoadOrderProfile
 
 	static string? FromFinalPath(string? path)
 	{
-		var locationManager = Program.Services.GetService<ILocationManager>();
+		var locationManager = ServiceCenter.Get<ILocationManager>();
 
 		return path
 			?.Replace(locationManager.AppDataPath, LOCAL_APP_DATA_PATH)
@@ -37,7 +37,7 @@ public class LoadOrderProfile
 
 	static string? ToFinalPath(string? path)
 	{
-		var locationManager = Program.Services.GetService<ILocationManager>();
+		var locationManager = ServiceCenter.Get<ILocationManager>();
 
 		return path
 			?.Replace(LOCAL_APP_DATA_PATH, locationManager.AppDataPath)

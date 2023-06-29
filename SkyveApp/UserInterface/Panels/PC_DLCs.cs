@@ -60,7 +60,7 @@ public partial class PC_DLCs : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		Text = $"{Locale.DLCs} - {Program.Services.GetService<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.DLCs} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
 		L_Duplicates.Text = Locale.DlcUpdateNotice;
 	}
 

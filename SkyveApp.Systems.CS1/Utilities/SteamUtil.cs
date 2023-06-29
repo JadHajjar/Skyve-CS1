@@ -102,7 +102,7 @@ public static class SteamUtil
 
 	public static void Download(IEnumerable<IPackage> packages)
 	{
-		var currentPath = Program.Services.GetService<IOUtil>().ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
+		var currentPath = ServiceCenter.Get<IOUtil>().ToRealPath(Path.GetDirectoryName(Program.CurrentDirectory));
 
 		if (packages.Any(x => x.Folder.PathEquals(currentPath)))
 		{
@@ -111,7 +111,7 @@ public static class SteamUtil
 				return;
 			}
 
-			Program.Services.GetService<IOUtil>().WaitForUpdate();
+			ServiceCenter.Get<IOUtil>().WaitForUpdate();
 
 			Application.Exit();
 		}
@@ -203,12 +203,12 @@ public static class SteamUtil
 
 	public static bool IsSteamAvailable()
 	{
-		return CrossIO.FileExists(Program.Services.GetService<ILocationManager>().SteamPathWithExe);
+		return CrossIO.FileExists(ServiceCenter.Get<ILocationManager>().SteamPathWithExe);
 	}
 
 	public static void ExecuteSteam(string args)
 	{
-		var file = Program.Services.GetService<ILocationManager>().SteamPathWithExe;
+		var file = ServiceCenter.Get<ILocationManager>().SteamPathWithExe;
 
 		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
@@ -220,7 +220,7 @@ public static class SteamUtil
 			}
 		}
 
-		Program.Services.GetService<IOUtil>().Execute(file, args);
+		ServiceCenter.Get<IOUtil>().Execute(file, args);
 	}
 
 	public static async Task<Dictionary<ulong, SteamUser>> GetSteamUsersAsync(List<ulong> steamId64s)
@@ -244,7 +244,7 @@ public static class SteamUtil
 		}
 		catch (Exception ex)
 		{
-			Program.Services.GetService<ILogger>().Exception(ex, "Failed to get steam author information");
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to get steam author information");
 		}
 
 		return new();
@@ -400,7 +400,7 @@ public static class SteamUtil
 		}
 		catch (Exception ex)
 		{
-			Program.Services.GetService<ILogger>().Error("failed to get steam data: " + ex.Message);
+			ServiceCenter.Get<ILogger>().Error("failed to get steam data: " + ex.Message);
 		}
 
 		return (0, new());
@@ -414,20 +414,20 @@ public static class SteamUtil
 
 			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId)) ?? new();
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to get the steam information for appid " + steamId); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to get the steam information for appid " + steamId); }
 
 		return new();
 	}
 
 	public static async void LoadDlcs()
 	{
-		Program.Services.GetService<ILogger>().Info($"Loading DLCs..");
+		ServiceCenter.Get<ILogger>().Info($"Loading DLCs..");
 
 		var dlcs = await GetSteamAppInfoAsync(255710);
 
 		if (!dlcs.ContainsKey("255710"))
 		{
-			Program.Services.GetService<ILogger>().Info($"Failed to load DLCs, steam info returned invalid content..");
+			ServiceCenter.Get<ILogger>().Info($"Failed to load DLCs, steam info returned invalid content..");
 			return;
 		}
 
@@ -451,17 +451,17 @@ public static class SteamUtil
 			}
 		}
 
-		Program.Services.GetService<ILogger>().Info($"DLCs ({newDlcs.Count}) loaded..");
+		ServiceCenter.Get<ILogger>().Info($"DLCs ({newDlcs.Count}) loaded..");
 
 		ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 
 		DLCsLoaded?.Invoke();
 
-		Program.Services.GetService<IAssetUtil>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
+		ServiceCenter.Get<IAssetUtil>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
 
 		foreach (var dlc in Dlcs)
 		{
-			await Program.Services.GetService<IImageService>().Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
+			await ServiceCenter.Get<IImageService>().Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
 
 			DLCsLoaded?.Invoke();
 		}
@@ -474,14 +474,14 @@ public static class SteamUtil
 
 		try
 		{ CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE)); }
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to clear DLC_CACHE_FILE"); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear DLC_CACHE_FILE"); }
 
 		try
 		{ CrossIO.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE)); }
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to clear STEAM_USER_CACHE_FILE"); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear STEAM_USER_CACHE_FILE"); }
 
 		try
 		{ CrossIO.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE)); }
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, "Failed to clear STEAM_CACHE_FILE"); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear STEAM_CACHE_FILE"); }
 	}
 }

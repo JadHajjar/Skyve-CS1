@@ -20,22 +20,22 @@ internal class PC_Mods : PC_ContentList<Mod>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mod.Plural} - {Program.Services.GetService<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
 	}
 
 	protected override IEnumerable<Mod> GetItems()
 	{
-		return Program.Services.GetService<IContentManager>().Mods;
+		return ServiceCenter.Get<IContentManager>().Mods;
 	}
 
 	protected override string GetCountText()
 	{
-		var mods = Program.Services.GetService<IContentManager>().Mods;
+		var mods = ServiceCenter.Get<IContentManager>().Mods;
 		var modsIncluded = mods.Count(x => x.IsIncluded);
 		var modsEnabled = mods.Count(x => x.IsEnabled && x.IsIncluded);
 		var total = LC_Items.ItemCount;
 
-		if (!Program.Services.GetService<ISettings>().SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			return string.Format(Locale.ModIncludedTotal, modsIncluded, total);
 		}
@@ -55,11 +55,11 @@ internal class PC_Mods : PC_ContentList<Mod>
 
 	protected override void SetIncluded(IEnumerable<Mod> filteredItems, bool included)
 	{
-		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems, included);
+		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Mod> filteredItems, bool enabled)
 	{
-		Program.Services.GetService<IContentUtil>().SetBulkEnabled(filteredItems, enabled);
+		ServiceCenter.Get<IContentUtil>().SetBulkEnabled(filteredItems, enabled);
 	}
 }

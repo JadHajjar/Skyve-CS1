@@ -94,11 +94,11 @@ public class PackageUtil : IPackageUtil
 			return text;
 		}
 
-		if (workshopInfo.Banned)
+		if (workshopInfo.IsBanned)
 		{
 			tags.Add((FormDesign.Design.RedColor, _locale.Get("Banned").One.ToUpper()));
 		}
-		else if (workshopInfo.Incompatible)
+		else if (workshopInfo.IsIncompatible)
 		{
 			tags.Add((FormDesign.Design.RedColor, _locale.Get("Incompatible").One.ToUpper()));
 		}

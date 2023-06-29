@@ -252,12 +252,12 @@ public partial class PC_SelectPackage : PanelContent
 
 		new BackgroundAction(() =>
 		{
-			var manager = Program.Services.GetService<IImageService>();
+			var manager = ServiceCenter.Get<IImageService>();
 			Parallelism.ForEach(LC_Items.Items.ToList(), async package =>
 			{
-				if (!string.IsNullOrWhiteSpace(package.IconUrl))
+				if (!string.IsNullOrWhiteSpace(package.ThumbnailUrl))
 				{
-					if (await manager.Ensure(package.IconUrl))
+					if (await manager.Ensure(package.ThumbnailUrl))
 					{
 						LC_Items.Invalidate(package);
 					}

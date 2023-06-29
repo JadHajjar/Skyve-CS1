@@ -8,6 +8,5 @@ public interface IModUtil
 	void SetIncluded(IMod mod, bool value);
 	void SetEnabled(IMod mod, bool value);
 	void SaveChanges();
-	IMod GetModByFolder(string? folder);
-	IEnumerable<IMod> GetMod(ILocalPackage package);
+	IMod? GetMod(ILocalPackageWithContents package);
 }

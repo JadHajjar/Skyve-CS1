@@ -18,8 +18,9 @@ public class ContentUtil : IContentUtil
 	private readonly ILocale _locale;
 	private readonly IContentManager _contentManager;
 	private readonly IPackageUtil _packageUtil;
+	private readonly ISettings _settings;
 
-	public ContentUtil(IServiceProvider serviceProvider, IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageUtil packageUtil, IContentManager contentManager)
+	public ContentUtil(IServiceProvider serviceProvider, IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageUtil packageUtil, IContentManager contentManager, ISettings settings)
 	{
 		_serviceProvider = serviceProvider;
 		_modUtil = modUtil;
@@ -28,6 +29,7 @@ public class ContentUtil : IContentUtil
 		_locale = locale;
 		_packageUtil = packageUtil;
 		_contentManager = contentManager;
+		_settings = settings;
 	}
 
 	public bool IsIncluded(ILocalPackage localPackage)
@@ -105,14 +107,32 @@ public class ContentUtil : IContentUtil
 
 	public void SetIncluded(ILocalPackage localPackage, bool value)
 	{
-		if (localPackage is ILocalPackageWithContents)
+		if (localPackage is ILocalPackageWithContents localPackageWithContents)
 		{
 			_bulkUtil.SetBulkIncluded(new[] { localPackage }, value);
+
+			if (!_settings.UserSettings.AdvancedIncludeEnable && localPackageWithContents.Mod is not null)
+			{
+				_modUtil.SetEnabled(localPackageWithContents.Mod, value);
+
+				return;
+			}
 		}
 
 		if (localPackage is IMod mod)
 		{
 			_modUtil.SetIncluded(mod, value);
+
+			if (_settings.UserSettings.LinkModAssets && mod.LocalPackage!.Assets.Any())
+			{
+				_bulkUtil.SetBulkIncluded(mod.LocalPackage!.Assets, value);
+			}
+
+			if (!_settings.UserSettings.AdvancedIncludeEnable)
+			{
+				_modUtil.SetEnabled(mod, value);
+				return;
+			}
 		}
 
 		if (localPackage is IAsset asset)
@@ -137,7 +157,7 @@ public class ContentUtil : IContentUtil
 			return DownloadStatus.None;
 		}
 
-		if (workshopInfo.Removed)
+		if (workshopInfo.IsRemoved)
 		{
 			reason = _locale.Get("PackageIsRemoved").Format(_packageUtil.CleanName(mod));
 			return DownloadStatus.Removed;

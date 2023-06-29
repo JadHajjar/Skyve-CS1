@@ -20,13 +20,13 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ProfileAdd : PanelContent
 {
-	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 
 	public PC_ProfileAdd()
 	{
 		InitializeComponent();
 		
-		DAD_NewProfile.StartingFolder = Program.Services.GetService<ILocationManager>().AppDataPath;
+		DAD_NewProfile.StartingFolder = ServiceCenter.Get<ILocationManager>().AppDataPath;
 	}
 
 	protected override void UIChanged()

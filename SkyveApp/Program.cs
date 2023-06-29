@@ -36,7 +36,7 @@ internal static class Program
 		ISave.AppName = "Skyve-CS1";
 		ISave.CustomSaveDirectory = CurrentDirectory;
 
-		Services = BuildServices();
+		ServiceCenter.Provider = Services = BuildServices();
 	}
 
 	private static IServiceProvider BuildServices()

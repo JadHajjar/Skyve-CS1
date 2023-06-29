@@ -12,7 +12,7 @@ public class MacAssemblyUtil
 {
 	public static bool FindImplementation(string[] dllPaths, out string? dllPath, out Version? version)
 	{
-		var util = Program.Services.GetService<IContentUtil>();
+		var util = ServiceCenter.Get<IContentUtil>();
 
 		foreach (var path in dllPaths)
 		{
@@ -63,11 +63,11 @@ public class MacAssemblyUtil
 	public static bool MacOsResolve(string dllPath, out Version? version)
 	{
 #if DEBUG
-		Program.Services.GetService<ILogger>().Debug("Resolving " + dllPath);
+		ServiceCenter.Get<ILogger>().Debug("Resolving " + dllPath);
 #endif
 		version = null;
-		var locationManager = Program.Services.GetService<ILocationManager>();
-		var process = Program.Services.GetService<IOUtil>().Execute(CrossIO.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
+		var locationManager = ServiceCenter.Get<ILocationManager>();
+		var process = ServiceCenter.Get<IOUtil>().Execute(CrossIO.Combine(Program.CurrentDirectory, "AssemblyResolver.exe"), string.Join(" ", new string[]
 		{
 			dllPath,
 			locationManager.ManagedDLL,
@@ -78,7 +78,7 @@ public class MacAssemblyUtil
 		if (process is null)
 		{
 #if DEBUG
-			Program.Services.GetService<ILogger>().Debug("Process null");
+			ServiceCenter.Get<ILogger>().Debug("Process null");
 #endif
 			return false;
 		}

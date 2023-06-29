@@ -42,7 +42,7 @@ public partial class PC_UserPage : PanelContent
 
 		if (User is not null)
 		{
-			PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageService>().GetImage);
+			PB_Icon.LoadImage(User.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
 			P_Info.SetUser(User, this);
 		}
 
@@ -67,7 +67,7 @@ public partial class PC_UserPage : PanelContent
 
 			if (User is not null)
 			{
-				PB_Icon.LoadImage(User.AvatarUrl, Program.Services.GetService<IImageService>().GetImage);
+				PB_Icon.LoadImage(User.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
 				P_Info.SetUser(User, this);
 			}
 		}
@@ -141,10 +141,10 @@ public partial class PC_UserPage : PanelContent
 	{
 		var isPackageIncluded = item.IsIncluded;
 		var isInstalled = item.Package is not null;
-		var contentUtil = Program.Services.GetService<IContentUtil>();
-		var subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
-		var compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
-		var profileManager = Program.Services.GetService<IPlaysetManager>();
+		var contentUtil = ServiceCenter.Get<IContentUtil>();
+		var subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		var profileManager = ServiceCenter.Get<IPlaysetManager>();
 
 		return new SlickStripItem[]
 		{
@@ -201,7 +201,7 @@ public partial class PC_UserPage : PanelContent
 				}
 				else
 				{
-					Program.Services.GetService<IContentUtil>().DeleteAll(item.Folder);
+					ServiceCenter.Get<IContentUtil>().DeleteAll(item.Folder);
 				}
 			}
 			catch (Exception ex) { MessagePrompt.Show(ex, Locale.FailedToDeleteItem); }

@@ -24,6 +24,7 @@
 		<None Include="ColossalOrder\GameSettings.cs" />
 	</ItemGroup>
 	<ItemGroup>
+		<Reference Include="System.Windows.Forms" />
 		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
 		<ProjectReference Include="..\SkyveApp.Domain\SkyveApp.Domain.csproj" />
 		<ProjectReference Include="..\SkyveApp.Systems\SkyveApp.Systems.csproj" />

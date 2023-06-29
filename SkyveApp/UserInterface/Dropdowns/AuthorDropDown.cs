@@ -25,8 +25,8 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
     public AuthorDropDown()
     {
-		_imageManager = Program.Services.GetService<IImageService>();
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_imageManager = ServiceCenter.Get<IImageService>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 	}
 
     internal void SetItems<T>(IEnumerable<T> enumerable) where T : IPackage

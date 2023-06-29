@@ -28,7 +28,7 @@ public partial class PC_PackagePage : PanelContent
 	private readonly ItemListControl<IPackage>? LC_References;
 	private TagControl? addTagControl;
 
-	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public IPackage Package { get; }
 
@@ -39,7 +39,7 @@ public partial class PC_PackagePage : PanelContent
 		Package = package;
 
 		PB_Icon.Package = package;
-		PB_Icon.LoadImage(package.GetWorkshopInfo()?.IconUrl, Program.Services.GetService<IImageService>().GetImage);
+		PB_Icon.LoadImage(package.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
 
 		P_Info.SetPackage(package, this);
 
@@ -164,7 +164,7 @@ public partial class PC_PackagePage : PanelContent
 			return;
 		} (sender as TagControl)!.Dispose();
 
-		Program.Services.GetService<IAssetUtil>().SetFindItTag(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Source == Domain.Enums.TagSource.FindIt ? x.TagInfo.Value?.Replace(' ', '-') : null).WhereNotEmpty().ListStrings(" "));
+		ServiceCenter.Get<IAssetUtil>().SetFindItTag(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Source == Domain.Enums.TagSource.FindIt ? x.TagInfo.Value?.Replace(' ', '-') : null).WhereNotEmpty().ListStrings(" "));
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}
 
@@ -222,10 +222,10 @@ public partial class PC_PackagePage : PanelContent
 		var isPackageIncluded = item.IsIncluded;
 		var isInstalled = item.Package is not null;
 
-		var contentUtil = Program.Services.GetService<IContentUtil>();
-		var subscriptionManager = Program.Services.GetService<ISubscriptionsManager>();
-		var profileManager = Program.Services.GetService<IPlaysetManager>();
-		var compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		var contentUtil = ServiceCenter.Get<IContentUtil>();
+		var subscriptionManager = ServiceCenter.Get<ISubscriptionsManager>();
+		var profileManager = ServiceCenter.Get<IPlaysetManager>();
+		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 
 		return new SlickStripItem[]
 		{
@@ -282,7 +282,7 @@ public partial class PC_PackagePage : PanelContent
 				}
 				else
 				{
-					Program.Services.GetService<IContentUtil>().DeleteAll(item.Folder);
+					ServiceCenter.Get<IContentUtil>().DeleteAll(item.Folder);
 				}
 			}
 			catch (Exception ex) { MessagePrompt.Show(ex, Locale.FailedToDeleteItem); }

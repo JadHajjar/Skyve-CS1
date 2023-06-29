@@ -32,7 +32,7 @@ public class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 		}
 		finally
 		{
-			Program.Services.GetService<INotifier>().OnWorkshopInfoUpdated();
+			ServiceCenter.Get<INotifier>().OnWorkshopInfoUpdated();
 		}
 	}
 

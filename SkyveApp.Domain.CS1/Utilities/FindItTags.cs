@@ -34,7 +34,7 @@ public class CustomTagsLibrary
 	{
 		try
 		{
-			var path = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, filename);
+			var path = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, filename);
 
 			if (assetTags.Count == 0)
 			{
@@ -62,7 +62,7 @@ public class CustomTagsLibrary
 		}
 		catch (Exception e)
 		{
-			Program.Services.GetService<ILogger>().Exception(e, "Couldn't serialize custom find-it tags");
+			ServiceCenter.Get<ILogger>().Exception(e, "Couldn't serialize custom find-it tags");
 		}
 	}
 
@@ -72,7 +72,7 @@ public class CustomTagsLibrary
 		{
 			assetTags.Clear();
 
-			var path = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, filename);
+			var path = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, filename);
 
 			if (!CrossIO.FileExists(path))
 			{
@@ -94,7 +94,7 @@ public class CustomTagsLibrary
 		}
 		catch (Exception e)
 		{
-			Program.Services.GetService<ILogger>().Exception(e, "Couldn't load custom find-it tags");
+			ServiceCenter.Get<ILogger>().Exception(e, "Couldn't load custom find-it tags");
 		}
 	}
 }

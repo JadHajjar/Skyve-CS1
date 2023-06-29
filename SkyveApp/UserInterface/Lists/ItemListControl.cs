@@ -56,11 +56,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 
-		_settings = Program.Services.GetService<ISettings>();
-		_notifier = Program.Services.GetService<INotifier>();
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
-		_modLogicManager = Program.Services.GetService<IModLogicManager>();
-		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+		_settings = ServiceCenter.Get<ISettings>();
+		_notifier = ServiceCenter.Get<INotifier>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		_modLogicManager = ServiceCenter.Get<IModLogicManager>();
+		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
 
 		if (!_notifier.IsContentLoaded)
 		{
@@ -1210,7 +1210,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 			if (DownloadStatusRect.Contains(location))
 			{
-				if (Program.Services.GetService<ISettings>().SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				if (ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.FlipItemCopyFilterAction)
 				{
 					text = Locale.FilterByThisPackageStatus + "\r\n\r\n" + Item.Package?.StatusReason;
 					point = DownloadStatusRect.Location;
@@ -1322,7 +1322,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			{
 				var tip = string.Empty;
 
-				if (Program.Services.GetService<ISettings>().SessionSettings.UserSettings.FlipItemCopyFilterAction)
+				if (ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.FlipItemCopyFilterAction)
 				{
 					ExtensionClass.Swap(ref text, ref alt);
 				}

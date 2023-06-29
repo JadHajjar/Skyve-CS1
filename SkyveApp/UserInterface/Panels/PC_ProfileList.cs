@@ -22,8 +22,8 @@ public partial class PC_ProfileList : PanelContent
 {
 	private readonly ProfileListControl LC_Items;
 
-	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
-	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public PC_ProfileList() : this(null) { }
 

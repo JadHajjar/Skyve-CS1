@@ -172,7 +172,7 @@ internal class ContentManager : IContentManager
         _notifier.OnContentLoaded();
         _notifier.OnWorkshopInfoUpdated();
 
-        Program.Services.GetService<IContentUtil>().DeleteAll(package.Folder);
+        ServiceCenter.Get<IContentUtil>().DeleteAll(package.Folder);
     }
 
     public Package? GetPackage(ulong steamId)

@@ -51,7 +51,7 @@ public class SettingsFile
 	public string fileName
 	{
 		get => Path.GetFileNameWithoutExtension(m_PathName);
-		set => m_PathName = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, Path.ChangeExtension(value, extension));
+		set => m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, Path.ChangeExtension(value, extension));
 	}
 
 	public string systemFileName
@@ -59,7 +59,7 @@ public class SettingsFile
 		get => Path.GetFileNameWithoutExtension(m_PathName);
 		set
 		{
-			m_PathName = CrossIO.Combine(Program.Services.GetService<ILocationManager>().GamePath, Path.ChangeExtension(value, extension));
+			m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().GamePath, Path.ChangeExtension(value, extension));
 			isSystem = true;
 		}
 	}
@@ -229,7 +229,7 @@ public class SettingsFile
 			}
 			binaryWriter.Flush();
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, ""); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, ""); }
 	}
 
 	private bool ValidateID(char[] id)
@@ -321,7 +321,7 @@ public class SettingsFile
 			}
 			throw new Exception("Setting file '" + fileName + "' header mismatch. The internal format of settings files has changed.");
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex,""); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex,""); }
 	}
 
 	internal void Load()
@@ -332,7 +332,7 @@ public class SettingsFile
 			{
 				using var stream = CreateReadStream();
 
-				var log = Program.Services.GetService<ILogger>();
+				var log = ServiceCenter.Get<ILogger>();
 
 				if (stream != null)
 				{
@@ -345,7 +345,7 @@ public class SettingsFile
 				}
 			}
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, ""); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, ""); }
 	}
 
 	internal void Save()
@@ -358,7 +358,7 @@ public class SettingsFile
 				{
 					using var stream = CreateWriteStream();
 
-					var log = Program.Services.GetService<ILogger>();
+					var log = ServiceCenter.Get<ILogger>();
 
 					if (stream != null)
 					{
@@ -372,7 +372,7 @@ public class SettingsFile
 				}
 			}
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, ""); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, ""); }
 		finally
 		{
 			isDirty = false;
@@ -430,7 +430,7 @@ public class SettingsFile
 		if (!m_SettingsStringValues.TryGetValue(name, out var a) || a != val)
 		{
 #if DEBUG
-			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
+			ServiceCenter.Get<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsStringValues[name] = val;
 			MarkDirty();
@@ -458,7 +458,7 @@ public class SettingsFile
 			if (!m_SettingsBoolValues.TryGetValue(name, out var flag) || flag != val)
 			{
 #if DEBUG
-				Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
+				ServiceCenter.Get<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 				m_SettingsBoolValues[name] = val;
 				MarkDirty();
@@ -481,7 +481,7 @@ public class SettingsFile
 		if (!m_SettingsIntValues.TryGetValue(name, out var num) || num != val)
 		{
 #if DEBUG
-			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
+			ServiceCenter.Get<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsIntValues[name] = val;
 			MarkDirty();
@@ -503,7 +503,7 @@ public class SettingsFile
 		if (!m_SettingsInputKeyValues.TryGetValue(name, out var value) || value != val)
 		{
 #if DEBUG
-			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
+			ServiceCenter.Get<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsInputKeyValues[name] = val;
 			MarkDirty();
@@ -526,7 +526,7 @@ public class SettingsFile
 				Math.Abs(m_SettingsFloatValues[name] - val) > float.Epsilon)
 		{
 #if DEBUG
-			Program.Services.GetService<ILogger>().Debug("Setting " + name + " updated to " + val);
+			ServiceCenter.Get<ILogger>().Debug("Setting " + name + " updated to " + val);
 #endif
 			m_SettingsFloatValues[name] = val;
 			MarkDirty();

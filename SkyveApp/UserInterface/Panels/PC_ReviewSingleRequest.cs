@@ -89,7 +89,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		if (_request.LogFile != null)
 		{
-			var fileName = CrossIO.Combine(Program.Services.GetService<ILocationManager>().SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
+			var fileName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
 
 			File.WriteAllBytes(fileName, _request.LogFile);
 

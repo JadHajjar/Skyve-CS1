@@ -1,21 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Steam;
-using SkyveApp.Services;
-using SkyveApp.Utilities;
-
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 
 namespace SkyveApp.Domain;
 public class Asset : IAsset
 {
-	public Asset(ILocalPackage package, string crpPath, SkyveShared.CSCache.Asset? asset)
+	public Asset(ILocalPackageWithContents package, string crpPath, SkyveShared.CSCache.Asset? asset)
 	{
 		FilePath = crpPath;
 		LocalPackage = package;
@@ -35,7 +27,7 @@ public class Asset : IAsset
 	}
 
 	public string FilePath { get; }
-	public ILocalPackage LocalPackage { get; }
+	public ILocalPackageWithContents LocalPackage { get; }
 	public long LocalSize { get; }
 	public DateTime LocalTime { get; }
 	public string Name { get; }
@@ -48,25 +40,9 @@ public class Asset : IAsset
 	public ulong Id => LocalPackage.Id;
 	public string? Url => LocalPackage.Url;
 
-	public IEnumerable<ITag> Tags
-	{
-		get
-		{
-			foreach (var item in AssetTags)
-			{
-				yield return new TagItem(TagSource.InGame, item);
-			}
-
-			foreach (var item in Program.Services.GetService<IAssetUtil>().GetFindItTags(this))
-			{
-				yield return new TagItem(TagSource.FindIt, item.ToCapital(false));
-			}
-		}
-	}
-
 	public override bool Equals(object? obj)
 	{
-		return obj is Asset asset &&
+		return obj is IAsset asset &&
 			   FilePath == asset.FilePath;
 	}
 

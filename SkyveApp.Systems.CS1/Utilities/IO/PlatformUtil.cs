@@ -21,7 +21,7 @@ public static class PlatformUtil
 				return;
 			}
 
-			if (Program.Services.GetService<ISettings>().SessionSettings.UserSettings.OpenLinksInBrowser)
+			if (ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.OpenLinksInBrowser)
 			{
 				Process.Start(url);
 				return;
@@ -50,7 +50,7 @@ public static class PlatformUtil
 				Process.Start(url);
 			}
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, $"Failed to open the URL: '{url}'"); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the URL: '{url}'"); }
 	}
 
 	public static void OpenFolder(string? folder)
@@ -72,7 +72,7 @@ public static class PlatformUtil
 
 			if (!Directory.Exists(folder))
 			{
-				Program.Services.GetService<ILogger>().Error($"Failed to open the folder: '{folder}' | Directory not found");
+				ServiceCenter.Get<ILogger>().Error($"Failed to open the folder: '{folder}' | Directory not found");
 				return;
 			}
 
@@ -83,7 +83,7 @@ public static class PlatformUtil
 				Platform.Windows or _ => Process.Start(folder),
 			};
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, $"Failed to open the folder: '{folder}'"); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the folder: '{folder}'"); }
 	}
 
 	private static void OpenFileInFolder(string file)
@@ -97,7 +97,7 @@ public static class PlatformUtil
 				Platform.Windows or _ => Process.Start("explorer.exe", $"/select, \"{file}\""),
 			};
 		}
-		catch (Exception ex) { Program.Services.GetService<ILogger>().Exception(ex, $"Failed to open the file: '{file}'"); }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the file: '{file}'"); }
 	}
 
 	public static void SetFileInClipboard(string path)
@@ -108,14 +108,14 @@ public static class PlatformUtil
 			{
 				if (path[0] is 'c' or 'C')
 				{
-					var file = CrossIO.Combine(Program.Services.GetService<ILocationManager>().SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
+					var file = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().SkyveAppDataPath, "Support Logs", Path.GetFileName(path));
 
 					CrossIO.CopyFile(path, file, true);
 
 					path = file;
 				}
 
-				path = $"file://{Program.Services.GetService<IOUtil>().ToRealPath(path)}";
+				path = $"file://{ServiceCenter.Get<IOUtil>().ToRealPath(path)}";
 			}
 
 			Clipboard.SetData(DataFormats.FileDrop, new[] { path });

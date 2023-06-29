@@ -28,10 +28,10 @@ public partial class PC_CompatibilityReport : PanelContent
 	private NotificationType CurrentKey;
 	private bool customReportLoaded;
 
-	private readonly ICompatibilityManager _compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
-	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
+	private readonly ICompatibilityManager _compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
 
-	public PC_CompatibilityReport() : base(Program.Services.GetService<ICompatibilityManager>().User.Manager && !Program.Services.GetService<ICompatibilityManager>().User.Malicious)
+	public PC_CompatibilityReport() : base(ServiceCenter.Get<ICompatibilityManager>().User.Manager && !ServiceCenter.Get<ICompatibilityManager>().User.Malicious)
 	{
 		InitializeComponent();
 

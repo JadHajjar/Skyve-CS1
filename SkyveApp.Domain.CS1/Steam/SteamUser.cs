@@ -3,9 +3,7 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Systems;
-using SkyveApp.Services;
 using SkyveApp.Systems;
-using SkyveApp.Utilities;
 
 using System;
 using System.Drawing;
@@ -22,7 +20,7 @@ public class SteamUser : IUser, ITimestamped
 		Timestamp = DateTime.Now;
 	}
 
-	public SteamUser() 
+	public SteamUser()
 	{
 		Name = string.Empty;
 		ProfileUrl = string.Empty;
@@ -35,11 +33,12 @@ public class SteamUser : IUser, ITimestamped
 	public string AvatarUrl { get; set; }
 	public DateTime Timestamp { get; set; }
 
-	[JsonIgnore] public Bitmap? AvatarImage => Program.Services.GetService<IImageService>().GetImage(AvatarUrl, true).Result;
+	[JsonIgnore] public object Id => SteamId;
+	[JsonIgnore] public Bitmap? AvatarImage => ServiceCenter.Get<IImageService>().GetImage(AvatarUrl, true).Result;
 
 	public override string ToString()
 	{
-		return Name ?? Locale.UnknownUser;
+		return Name ?? LocaleHelper.GetGlobalText("UnknownUser");
 	}
 
 	public override bool Equals(object? obj)

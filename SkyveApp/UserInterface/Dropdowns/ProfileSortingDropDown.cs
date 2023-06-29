@@ -22,7 +22,7 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 		{
 			Items = Enum.GetValues(typeof(ProfileSorting)).Cast<ProfileSorting>().Where(x=> x!= ProfileSorting.Downloads).ToArray();
 
-			SelectedItem = Program.Services.GetService<ISettings>().SessionSettings.UserSettings.ProfileSorting;
+			SelectedItem = ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.ProfileSorting;
 		}
 	}
 

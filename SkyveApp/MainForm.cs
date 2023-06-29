@@ -23,10 +23,10 @@ public partial class MainForm : BasePanelForm
 	private bool isGameRunning;
 	private bool? buttonStateRunning;
 
-	private readonly ISubscriptionsManager _subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
-	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
-	private readonly ICitiesManager _citiesManager = Program.Services.GetService<ICitiesManager>();
-	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
+	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
+	private readonly ICitiesManager _citiesManager = ServiceCenter.Get<ICitiesManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 
 	public MainForm()
 	{
@@ -56,7 +56,7 @@ public partial class MainForm : BasePanelForm
 		catch (Exception ex)
 		{ OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this)); }
 
-		new BackgroundAction("Loading content", Program.Services.GetService<CentralManager>().Start).Run();
+		new BackgroundAction("Loading content", ServiceCenter.Get<CentralManager>().Start).Run();
 
 		var timer = new System.Timers.Timer(1000);
 
@@ -64,7 +64,7 @@ public partial class MainForm : BasePanelForm
 
 		timer.Start();
 
-		var citiesManager = Program.Services.GetService<ICitiesManager>();
+		var citiesManager = ServiceCenter.Get<ICitiesManager>();
 
 		citiesManager.MonitorTick += CitiesManager_MonitorTick;
 

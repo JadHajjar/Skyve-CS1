@@ -36,7 +36,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		Margin = default;
 		Cursor = Cursors.Hand;
 		LC_Items = lC_Items;
-		_settings = Program.Services.GetService<ISettings>();
+		_settings = ServiceCenter.Get<ISettings>();
 		_doubleButtons = _settings.SessionSettings.UserSettings.AdvancedIncludeEnable;
 	}
 

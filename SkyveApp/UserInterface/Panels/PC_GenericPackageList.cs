@@ -21,7 +21,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		TB_Search.Placeholder = "SearchGenericPackages";
 
-		var compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 		foreach (var package in items.GroupBy(x => x.SteamId))
 		{
 			if (package.Key != 0)
@@ -96,7 +96,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		var total = LC_Items.ItemCount;
 
-		if (!Program.Services.GetService<ISettings>().SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.AdvancedIncludeEnable)
 		{
 			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
 		}
@@ -116,11 +116,11 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 	protected override void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
 	{
-		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
+		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
 	{
-		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems.Where(x => x.Package?.Mod is not null).Select(x => x.Package!.Mod!), enabled);
+		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems.Where(x => x.Package?.Mod is not null).Select(x => x.Package!.Mod!), enabled);
 	}
 }

@@ -34,8 +34,8 @@ internal class UserDescriptionControl : SlickImageControl
 
     public UserDescriptionControl()
     {
-		_contentManager = Program.Services.GetService<IContentManager>();
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_contentManager = ServiceCenter.Get<IContentManager>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 	}
 
     public void SetUser(SteamUser user, PC_UserPage? page)

@@ -1,8 +1,10 @@
-﻿using SkyveApp.ColossalOrder;
+﻿using Extensions;
+
+using SkyveApp.ColossalOrder;
 using SkyveApp.Domain;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Domain.Utilities;
 using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
 
 using System.Collections.Generic;
 using System.IO;
@@ -10,12 +12,12 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 
 namespace SkyveApp.Utilities;
-public class ColossalOrderUtil : IColossalOrderUtil
+public class ColossalOrderUtil
 {
 	private const string GAME_SETTINGS_FILE_NAME = "userGameState";
 	private SettingsFile _settingsFile;
 	private bool _initialized;
-	private readonly Dictionary<Mod, SavedBool> _settingsDictionary = new();
+	private readonly Dictionary<IMod, SavedBool> _settingsDictionary = new();
 	private readonly FileSystemWatcher _watcher;
 	private readonly DelayedAction _delayedAction = new(500);
 
@@ -88,7 +90,7 @@ public class ColossalOrderUtil : IColossalOrderUtil
 		}
 	}
 
-	public bool IsEnabled(Mod mod)
+	public bool IsEnabled(IMod mod)
 	{
 		if (!_settingsDictionary.ContainsKey(mod))
 		{
@@ -98,7 +100,7 @@ public class ColossalOrderUtil : IColossalOrderUtil
 		return _settingsDictionary[mod].value;
 	}
 
-	public void SetEnabled(Mod mod, bool value)
+	public void SetEnabled(IMod mod, bool value)
 	{
 		if (!_settingsDictionary.ContainsKey(mod))
 		{

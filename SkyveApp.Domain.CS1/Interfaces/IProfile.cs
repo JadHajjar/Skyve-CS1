@@ -1,4 +1,4 @@
-﻿using SkyveApp.Domain.Compatibility.Enums;
+﻿using SkyveApp.Domain.Enums;
 
 using System;
 using System.Collections.Generic;

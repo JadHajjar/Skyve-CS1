@@ -9,9 +9,9 @@ using System.Linq;
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_Assets : PC_ContentList<Asset>
 {
-	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
-	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
-	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
 	public PC_Assets()
 	{
 	}
@@ -49,7 +49,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)
 	{
-		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems, included);
+		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Asset> filteredItems, bool enabled)

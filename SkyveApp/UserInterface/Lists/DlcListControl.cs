@@ -26,7 +26,7 @@ internal class DlcListControl : SlickStackedListControl<SteamDlc, DlcListControl
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 
-		_settings = Program.Services.GetService<ISettings>();
+		_settings = ServiceCenter.Get<ISettings>();
 
 		Loading = SteamUtil.Dlcs.Count == 0;
 	}

@@ -7,31 +7,27 @@ using System.IO;
 namespace SkyveApp.Domain;
 public class Mod : IMod
 {
-	private readonly string _dllName;
-	public Mod(Package package, string dllPath, Version version)
+	public Mod(ILocalPackageWithContents package, string dllPath, Version version)
 	{
-		Package = package;
+		LocalPackage = package;
 		FilePath = dllPath.FormatPath();
 		Version = version;
-		_dllName = Path.GetFileNameWithoutExtension(FilePath).FormatWords();
 	}
 
-	public Package Package { get; }
 	public string FilePath { get; }
 	public Version Version { get; }
 	public bool IsMod { get; } = true;
 
-	public ILocalPackage? LocalPackage => Package;
-	public long LocalSize => ((ILocalPackage)Package).LocalSize;
-	public DateTime LocalTime => ((ILocalPackage)Package).LocalTime;
-	public string Folder => ((ILocalPackage)Package).Folder;
-	public bool IsLocal => ((IPackage)Package).IsLocal;
-	public bool IsBuiltIn => ((IPackage)Package).IsBuiltIn;
-	public IEnumerable<IPackageRequirement> Requirements => ((IPackage)Package).Requirements;
-	public IEnumerable<ITag> Tags => ((IPackage)Package).Tags;
-	public ulong Id => ((IPackageIdentity)Package).Id;
-	public string Name => ((IPackageIdentity)Package).Name;
-	public string? Url => ((IPackageIdentity)Package).Url;
+	public ILocalPackageWithContents LocalPackage { get; }
+	public long LocalSize => LocalPackage.LocalSize;
+	public DateTime LocalTime => LocalPackage.LocalTime;
+	public string Folder => LocalPackage.Folder;
+	public bool IsLocal => LocalPackage.IsLocal;
+	public bool IsBuiltIn => LocalPackage.IsBuiltIn;
+	public IEnumerable<IPackageRequirement> Requirements => LocalPackage.Requirements;
+	public ulong Id => LocalPackage.Id;
+	public string Name => LocalPackage.Name;
+	public string? Url => LocalPackage.Url;
 
 	public override bool Equals(object? obj)
 	{
@@ -46,7 +42,7 @@ public class Mod : IMod
 
 	public IWorkshopInfo? GetWorkshopInfo()
 	{
-		return ((IPackage)Package).GetWorkshopInfo();
+		return LocalPackage.GetWorkshopInfo();
 	}
 
 	public override string ToString()

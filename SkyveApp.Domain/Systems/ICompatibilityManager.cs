@@ -9,6 +9,7 @@ public interface ICompatibilityManager
 	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);
 	NotificationType GetNotification(ICompatibilityInfo info);
 	IPackageCompatibilityInfo? GetPackageInfo(IPackage package);
+	ulong GetIdFromModName(string fileName);
 	bool IsBlacklisted(IPackage package);
 	bool IsSnoozed(ICompatibilityItem reportItem);
 	void LoadCachedData();

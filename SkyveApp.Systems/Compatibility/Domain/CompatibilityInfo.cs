@@ -19,7 +19,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	[JsonIgnore] public IndexedPackage? Data { get; }
 	public List<PackageLink> Links { get; set; }
 	public List<ReportItem> ReportItems { get; set; }
-	//[JsonIgnore] public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => Program.Services.GetService<ICompatibilityManager>().IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
+	//[JsonIgnore] public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => ServiceCenter.Get<ICompatibilityManager>().IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 
 	ILocalPackage ICompatibilityInfo.Package { get; }
 	public IPackageCompatibilityInfo Info { get; }

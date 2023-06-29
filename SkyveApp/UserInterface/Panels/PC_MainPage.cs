@@ -18,9 +18,9 @@ public partial class PC_MainPage : PanelContent
 	{
 		InitializeComponent();
 
-		var notifier = Program.Services.GetService<INotifier>();
-		var citiesManager = Program.Services.GetService<ICitiesManager>();
-		var profileManager = Program.Services.GetService<IPlaysetManager>();
+		var notifier = ServiceCenter.Get<INotifier>();
+		var citiesManager = ServiceCenter.Get<ICitiesManager>();
+		var profileManager = ServiceCenter.Get<IPlaysetManager>();
 
 		B_StartStop.Enabled = notifier.IsContentLoaded && citiesManager.CitiesAvailable();
 
@@ -39,7 +39,7 @@ public partial class PC_MainPage : PanelContent
 
 		profileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
 
-		if (Program.Services.GetService<INotifier>().ProfilesLoaded)
+		if (ServiceCenter.Get<INotifier>().ProfilesLoaded)
 		{
 			ProfileManager_ProfileUpdated();
 		}
@@ -53,7 +53,7 @@ public partial class PC_MainPage : PanelContent
 			TLP_Profiles.RowStyles.Clear();
 			TLP_Profiles.RowStyles.Add(new());
 
-			foreach (var item in Program.Services.GetService<IPlaysetManager>().Profiles.Where(x => x.IsFavorite))
+			foreach (var item in ServiceCenter.Get<IPlaysetManager>().Profiles.Where(x => x.IsFavorite))
 			{
 				TLP_Profiles.RowStyles.Add(new());
 				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);
@@ -65,9 +65,9 @@ public partial class PC_MainPage : PanelContent
 	{
 		this.TryInvoke(() =>
 		{
-			B_StartStop.Enabled = Program.Services.GetService<ICitiesManager>().CitiesAvailable();
+			B_StartStop.Enabled = ServiceCenter.Get<ICitiesManager>().CitiesAvailable();
 
-			label1.Visible = Program.Services.GetService<IModLogicManager>().AreMultipleLOMsPresent();
+			label1.Visible = ServiceCenter.Get<IModLogicManager>().AreMultipleLOMsPresent();
 		});
 	}
 

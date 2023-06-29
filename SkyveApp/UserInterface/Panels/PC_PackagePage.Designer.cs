@@ -19,7 +19,7 @@ partial class PC_PackagePage
 	{
 		if (disposing && (components != null))
 		{
-			Program.Services.GetService<INotifier>().PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
+			ServiceCenter.Get<INotifier>().PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

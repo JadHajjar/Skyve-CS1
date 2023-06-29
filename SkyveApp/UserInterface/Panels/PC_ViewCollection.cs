@@ -28,7 +28,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 		{
 			Collection = true
 		};
-		PB_Icon.LoadImage(collection.IconUrl, Program.Services.GetService<IImageService>().GetImage);
+		PB_Icon.LoadImage(collection.IconUrl, ServiceCenter.Get<IImageService>().GetImage);
 
 		TLP_Main.Controls.Add(PB_Icon, 0, 0);
 		TLP_Main.SetRowSpan(PB_Icon, 3);

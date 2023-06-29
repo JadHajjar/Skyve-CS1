@@ -49,7 +49,7 @@ public static class LsmUtil
 
 		if (regex.Success) // attempt to match the file to any OS or user
 		{
-			path = CrossIO.Combine(Program.Services.GetService<ILocationManager>().AppDataPath, path.Substring(regex.Index + regex.Length));
+			path = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, path.Substring(regex.Index + regex.Length));
 		}
 
 		return path;

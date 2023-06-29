@@ -40,10 +40,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
 
-	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
-	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
-	private readonly ICompatibilityManager _compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
-	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
+	private readonly ICompatibilityManager _compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 
 	public PC_ContentList() : this(false) { }
 
@@ -792,7 +792,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 
 		I_Actions.Loading = true;
-		Program.Services.GetService<ISubscriptionsManager>().UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
+		ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
 		I_Actions.Loading = false;
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
@@ -828,7 +828,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			return;
 		}
 
-		Program.Services.GetService<ISubscriptionsManager>().Subscribe(steamIds.Select(x => x.Item.SteamId));
+		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => x.Item.SteamId));
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -852,7 +852,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 				}
 				else
 				{
-					Program.Services.GetService<IContentUtil>().DeleteAll(item.Folder);
+					ServiceCenter.Get<IContentUtil>().DeleteAll(item.Folder);
 				}
 			}
 		});

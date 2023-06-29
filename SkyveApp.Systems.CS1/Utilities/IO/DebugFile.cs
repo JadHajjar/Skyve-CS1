@@ -11,9 +11,9 @@ public class MonoFile : DebugFile
 {
 	public static MonoFile Instance = new MonoFile();
 
-	public override string FilePath => CrossIO.Combine(Program.Services.GetService<ILocationManager>().MonoPath, "mono.dll");
-	public override string ReleaseFilePath => CrossIO.Combine(Program.Services.GetService<ILocationManager>().MonoPath, "mono-orig.dll");
-	public override string DebugFilePath => CrossIO.Combine(Program.Services.GetService<ILocationManager>().MonoPath, "mono-debug.dll");
+	public override string FilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono.dll");
+	public override string ReleaseFilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono-orig.dll");
+	public override string DebugFilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono-debug.dll");
 	public override string ResourceFileName => "mono-debug._dll";
 }
 
@@ -21,7 +21,7 @@ public class CitiesFile : DebugFile
 {
 	public static CitiesFile Instance = new CitiesFile();
 
-	public override string FilePath => Program.Services.GetService<ILocationManager>().CitiesPathWithExe;
+	public override string FilePath => ServiceCenter.Get<ILocationManager>().CitiesPathWithExe;
 	public override string ReleaseFilePath => FilePath + ".Orig";
 	public override string DebugFilePath => FilePath + ".Profiler";
 	public override string ResourceFileName => "Cities.exe.Profiler";
@@ -80,7 +80,7 @@ public abstract class DebugFile
 		}
 		catch (Exception ex)
 		{
-			Program.Services.GetService<ILogger>().Exception(ex, "can't move files if CS is running");
+			ServiceCenter.Get<ILogger>().Exception(ex, "can't move files if CS is running");
 		}
 		return false;
 	}
@@ -96,7 +96,7 @@ public abstract class DebugFile
 		}
 		catch (Exception ex)
 		{
-			Program.Services.GetService<ILogger>().Exception(ex, "can't move files if CS is running");
+			ServiceCenter.Get<ILogger>().Exception(ex, "can't move files if CS is running");
 		}
 		return false;
 	}

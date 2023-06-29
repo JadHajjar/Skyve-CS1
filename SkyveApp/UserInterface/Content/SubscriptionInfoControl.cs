@@ -20,7 +20,7 @@ internal class SubscriptionInfoControl : SlickControl
 
 	public SubscriptionInfoControl()
 	{
-		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
 
 		Visible = false;
 		refreshTimer = new Timer() { Interval = 1000 };
@@ -108,7 +108,7 @@ internal class SubscriptionInfoControl : SlickControl
 
 		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
 		{
-			Program.Services.GetService<ICitiesManager>().RunStub();
+			ServiceCenter.Get<ICitiesManager>().RunStub();
 		}
 		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
 		{

@@ -26,7 +26,7 @@ public class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRequ
 		{
 			if (!string.IsNullOrWhiteSpace(img.Url))
 			{
-				await Program.Services.GetService<IImageService>().Ensure(img.Url, false, img.FileName, img.Square);
+				await ServiceCenter.Get<IImageService>().Ensure(img.Url, false, img.FileName, img.Square);
 			}
 		}
 

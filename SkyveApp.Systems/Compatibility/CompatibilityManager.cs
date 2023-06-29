@@ -191,7 +191,7 @@ public class CompatibilityManager : ICompatibilityManager
 	{
 		return CompatibilityData.BlackListedIds.Contains(package.Id)
 			|| CompatibilityData.BlackListedNames.Contains(package.Name ?? string.Empty)
-			|| (package.GetWorkshopInfo()?.Incompatible ?? false);
+			|| (package.GetWorkshopInfo()?.IsIncompatible ?? false);
 	}
 
 	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false)
@@ -303,7 +303,7 @@ public class CompatibilityManager : ICompatibilityManager
 			}
 		}
 
-		if (workshopInfo?.Incompatible == true)
+		if (workshopInfo?.IsIncompatible == true)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), _locale.Get($"Stability_{PackageStability.Incompatible}"), new PseudoPackage[0]);
 		}
@@ -315,7 +315,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
 
-		if (packageData.Package.Stability is not PackageStability.Stable && workshopInfo?.Incompatible != true && !author.Malicious)
+		if (packageData.Package.Stability is not PackageStability.Stable && workshopInfo?.IsIncompatible != true && !author.Malicious)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, null, false), _locale.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
 		}
@@ -388,7 +388,7 @@ public class CompatibilityManager : ICompatibilityManager
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _locale.Get($"Stability_{PackageStability.Local}").Format(_packageUtil.CleanName(_workshopService.GetPackage(packageData.Package.SteamId), true)), new PseudoPackage[] { new(packageData.Package.SteamId, _workshopService) });
 		}
 
-		if (!package.IsLocal && !author.Malicious && workshopInfo?.Incompatible != true)
+		if (!package.IsLocal && !author.Malicious && workshopInfo?.IsIncompatible != true)
 		{
 			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), new PseudoPackage[0]);
 		}

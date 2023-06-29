@@ -33,7 +33,7 @@ public partial class PC_RequestReview : PanelContent
 
 		PB_Icon.Package = CurrentPackage;
 		PB_Icon.Image = null;
-		PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageService>().GetImage);
+		PB_Icon.LoadImage(CurrentPackage.IconUrl, ServiceCenter.Get<IImageService>().GetImage);
 		P_Info.SetPackage(CurrentPackage, null);
 	}
 
@@ -159,7 +159,7 @@ public partial class PC_RequestReview : PanelContent
 		{
 			using var stream = new MemoryStream();
 
-			Program.Services.GetService<ILogUtil>().CreateZipToStream(stream);
+			ServiceCenter.Get<ILogUtil>().CreateZipToStream(stream);
 
 			return stream.ToArray();
 		});

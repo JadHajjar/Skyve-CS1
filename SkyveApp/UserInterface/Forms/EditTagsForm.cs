@@ -76,7 +76,7 @@ public partial class EditTagsForm : BaseForm
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
 		DialogResult = DialogResult.OK;
-		Program.Services.GetService<IAssetUtil>().SetFindItTag(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
+		ServiceCenter.Get<IAssetUtil>().SetFindItTag(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
 		Close();
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}

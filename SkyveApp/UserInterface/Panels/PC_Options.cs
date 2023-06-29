@@ -21,8 +21,8 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_Options : PanelContent
 {
 	private bool folderPathsChanged;
-	private readonly ILocationManager _locationManager = Program.Services.GetService<ILocationManager>();
-	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
+	private readonly ILocationManager _locationManager = ServiceCenter.Get<ILocationManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 
 	public PC_Options()
 	{

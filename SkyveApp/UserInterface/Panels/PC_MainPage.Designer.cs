@@ -18,8 +18,8 @@ partial class PC_MainPage
 	{
 		if (disposing && (components != null))
 		{
-			Program.Services.GetService<INotifier>().ContentLoaded -= SetButtonEnabledOnLoad;
-			Program.Services.GetService<ICitiesManager>().MonitorTick -= CitiesManager_MonitorTick;
+			ServiceCenter.Get<INotifier>().ContentLoaded -= SetButtonEnabledOnLoad;
+			ServiceCenter.Get<ICitiesManager>().MonitorTick -= CitiesManager_MonitorTick;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

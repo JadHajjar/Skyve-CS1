@@ -104,9 +104,9 @@ public static class ModExtensions
 
 	public static IEnumerable<IPackage> GetPackagesThatReference(this IPackage package)
 	{
-		var settings = Program.Services.GetService<ISettings>();
-		var contentManager = Program.Services.GetService<IContentManager>();
-		var compatibilityUtil = Program.Services.GetService<ICompatibilityUtil>();
+		var settings = ServiceCenter.Get<ISettings>();
+		var contentManager = ServiceCenter.Get<IContentManager>();
+		var compatibilityUtil = ServiceCenter.Get<ICompatibilityUtil>();
 		
 		var packages = settings.SessionSettings.UserSettings.ShowAllReferencedPackages ? contentManager.Packages.ToList() : contentManager.Packages.AllWhere(x => x.IsIncluded);
 

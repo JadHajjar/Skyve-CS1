@@ -21,7 +21,7 @@ internal class DownloadsInfoControl : SlickControl
 
 	public DownloadsInfoControl()
 	{
-		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
+		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
 
 		Visible = false;
 		refreshTimer = new Timer() { Interval = 1000 };
@@ -110,7 +110,7 @@ internal class DownloadsInfoControl : SlickControl
 		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
 		{
 			SteamUtil.Download(_subscriptionsManager.PendingSubscribingTo);
-			Program.Services.GetService<IContentUtil>().DeleteAll(_subscriptionsManager.PendingUnsubscribingFrom);
+			ServiceCenter.Get<IContentUtil>().DeleteAll(_subscriptionsManager.PendingUnsubscribingFrom);
 		}
 		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
 		{

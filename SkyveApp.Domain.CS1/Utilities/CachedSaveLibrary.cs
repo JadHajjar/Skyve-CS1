@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 
 namespace SkyveApp.Domain.Utilities;
-internal class CachedSaveLibrary<TItem, TKey, TValue> where TItem : CachedSaveItem<TKey, TValue>
+public class CachedSaveLibrary<TKey, TValue>
 {
-	internal readonly Dictionary<TKey, TItem> _dictionary = new();
+	internal readonly Dictionary<TKey, CachedSaveItem<TKey, TValue>> _dictionary = new();
+	private readonly Func<TKey, TValue> _getter;
+	private readonly Action<TKey, TValue> _setter;
 
-	public CachedSaveLibrary()
+	public int Count => _dictionary.Count;
+
+	public CachedSaveLibrary(Func<TKey, TValue> getter, Action<TKey, TValue> setter)
 	{
-
+		_getter = getter;
+		_setter = setter;
 	}
 
 	public void SetValue(TKey key, TValue value)
 	{
-		var entry = (Activator.CreateInstance(typeof(TItem), key, value) as TItem)!;
+		var entry = new CachedSaveItem<TKey, TValue>(key, value, _getter, _setter);
 
 		if (entry.IsStateValid())
 		{
@@ -48,7 +53,7 @@ internal class CachedSaveLibrary<TItem, TKey, TValue> where TItem : CachedSaveIt
 
 	public void Save()
 	{
-		List<TItem> values;
+		List<CachedSaveItem<TKey, TValue>> values;
 
 		lock (_dictionary)
 		{

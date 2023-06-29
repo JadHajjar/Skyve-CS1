@@ -21,9 +21,9 @@ public abstract class SingletonLite<T>
 					{
 						sInstance = new T();
 #if DEBUG
-						Program.Services.GetService<ILogger>().Debug("Created singleton of type " + typeof(T).Name + ". calling Awake() ...");
+						ServiceCenter.Get<ILogger>().Debug("Created singleton of type " + typeof(T).Name + ". calling Awake() ...");
 						sInstance.Awake();
-						Program.Services.GetService<ILogger>().Debug("Awake() finished for " + typeof(T).Name);
+						ServiceCenter.Get<ILogger>().Debug("Awake() finished for " + typeof(T).Name);
 #else
 						sInstance.Awake();
 #endif
@@ -33,7 +33,7 @@ public abstract class SingletonLite<T>
 			}
 			catch (Exception ex)
 			{
-				Program.Services.GetService<ILogger>().Exception(ex, "");
+				ServiceCenter.Get<ILogger>().Exception(ex, "");
 				throw;
 			}
 		}

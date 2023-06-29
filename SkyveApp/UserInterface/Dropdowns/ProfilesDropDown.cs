@@ -22,7 +22,7 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Playset>
 
 		if (Live)
 		{
-			Items = Program.Services.GetService<IPlaysetManager>().Profiles.ToArray();
+			Items = ServiceCenter.Get<IPlaysetManager>().Profiles.ToArray();
 
 			selectedItem = Items[0];
 		}

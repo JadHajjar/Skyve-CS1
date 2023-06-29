@@ -1,20 +1,30 @@
-﻿namespace SkyveApp.Domain.Utilities;
-internal abstract class CachedSaveItem<TKey, TValue>
+﻿using System;
+
+namespace SkyveApp.Domain.Utilities;
+public class CachedSaveItem<TKey, TValue>
 {
 	private readonly TValue _currentValue;
 
 	public TKey Key { get; }
 	public TValue ValueToSave { get; }
+	protected Func<TKey, TValue> Getter { get; }
+	protected Action<TKey, TValue> Setter { get; }
 
-	public CachedSaveItem(TKey key, TValue value)
+	public CachedSaveItem(TKey key, TValue value, Func<TKey, TValue> getter, Action<TKey, TValue> setter)
 	{
 		Key = key;
 		ValueToSave = value;
+		Getter = getter;
+		Setter = setter;
 		_currentValue = CurrentValue;
 	}
 
-	public abstract TValue CurrentValue { get; }
-	protected abstract void OnSave();
+	public virtual TValue CurrentValue => Getter(Key);
+
+	protected virtual void OnSave()
+	{
+		Setter(Key, ValueToSave);
+	}
 
 	public void Save()
 	{

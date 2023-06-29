@@ -25,9 +25,9 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	public PC_HelpAndLogs() : base(true)
 	{
-		_logUtil = Program.Services.GetService<ILogUtil>();
-		_logger = Program.Services.GetService<ILogger>();
-		_locationManager = Program.Services.GetService<ILocationManager>();
+		_logUtil = ServiceCenter.Get<ILogUtil>();
+		_logger = ServiceCenter.Get<ILogger>();
+		_locationManager = ServiceCenter.Get<ILocationManager>();
 
 		InitializeComponent();
 
@@ -231,7 +231,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenLog_Click(object sender, EventArgs e)
 	{
-		Program.Services.GetService<IOUtil>().Execute(_logUtil.GameLogFile, string.Empty);
+		ServiceCenter.Get<IOUtil>().Execute(_logUtil.GameLogFile, string.Empty);
 	}
 
 	private void B_OpenAppData_Click(object sender, EventArgs e)

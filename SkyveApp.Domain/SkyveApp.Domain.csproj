@@ -19,6 +19,7 @@
 		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+	    <ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
 	</ItemGroup>
 </Project>

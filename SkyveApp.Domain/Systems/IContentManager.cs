@@ -7,7 +7,7 @@ public interface IContentManager
 	IEnumerable<IMod> Mods { get; }
 	IEnumerable<ILocalPackage> Packages { get; }
 
-	ILocalPackage? GetPackageById(ulong id);
+	ILocalPackageWithContents? GetPackageById(IPackageIdentity id);
 	void AddPackage(ILocalPackage package);
 	void HandleNewPackage(ILocalPackage package);
 	void RemovePackage(ILocalPackage package);

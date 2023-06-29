@@ -21,12 +21,12 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ModUtilities : PanelContent
 {
-	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
-	private readonly ICitiesManager _citiesManager = Program.Services.GetService<ICitiesManager>();
-	private readonly ISubscriptionsManager _subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
-	private readonly INotifier _notifier = Program.Services.GetService<INotifier>();
-	private readonly ILocationManager _locationManager = Program.Services.GetService<ILocationManager>();
-	private readonly IContentManager _contentManager =	Program.Services.GetService<IContentManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly ICitiesManager _citiesManager = ServiceCenter.Get<ICitiesManager>();
+	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
+	private readonly ILocationManager _locationManager = ServiceCenter.Get<ILocationManager>();
+	private readonly IContentManager _contentManager =	ServiceCenter.Get<IContentManager>();
 
 	public PC_ModUtilities()
 	{
@@ -309,7 +309,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ReloadAllData.Loading)
 		{
 			B_ReloadAllData.Loading = true;
-			await Task.Run(Program.Services.GetService<CentralManager>().Start);
+			await Task.Run(ServiceCenter.Get<CentralManager>().Start);
 			B_ReloadAllData.Loading = false;
 			var img = B_ReloadAllData.ImageName;
 			B_ReloadAllData.ImageName = "I_Check";
@@ -321,7 +321,7 @@ public partial class PC_ModUtilities : PanelContent
 	private async void B_ResetSnoozes_Click(object sender, EventArgs e)
 	{
 		var img = B_ResetSnoozes.ImageName;
-		Program.Services.GetService<ICompatibilityManager>().ResetSnoozes();
+		ServiceCenter.Get<ICompatibilityManager>().ResetSnoozes();
 		B_ResetSnoozes.ImageName = "I_Check";
 		await Task.Delay(1500);
 		B_ResetSnoozes.ImageName = img;
@@ -329,7 +329,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	private async void B_ResetModsCache_Click(object sender, EventArgs e)
 	{
-		Program.Services.GetService<IContentUtil>().ClearDllCache();
+		ServiceCenter.Get<IContentUtil>().ClearDllCache();
 		var img = B_ResetModsCache.ImageName;
 		B_ResetModsCache.ImageName = "I_Check";
 		await Task.Delay(1500);
@@ -341,7 +341,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ResetCompatibilityCache.Loading)
 		{
 			B_ResetCompatibilityCache.Loading = true;
-			await Task.Run(Program.Services.GetService<ICompatibilityManager>().ResetCache);
+			await Task.Run(ServiceCenter.Get<ICompatibilityManager>().ResetCache);
 			B_ResetCompatibilityCache.Loading = false;
 			var img = B_ResetCompatibilityCache.ImageName;
 			B_ResetCompatibilityCache.ImageName = "I_Check";
@@ -355,7 +355,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ResetImageCache.Loading)
 		{
 			B_ResetImageCache.Loading = true;
-			await Task.Run(Program.Services.GetService<IImageService>().ClearCache);
+			await Task.Run(ServiceCenter.Get<IImageService>().ClearCache);
 			B_ResetImageCache.Loading = false;
 			var img = B_ResetImageCache.ImageName;
 			B_ResetImageCache.ImageName = "I_Check";

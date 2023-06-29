@@ -11,8 +11,8 @@ using System.Linq;
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_Packages : PC_ContentList<Package>
 {
-	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
-	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
 
 	public PC_Packages()
 	{
@@ -22,7 +22,7 @@ internal class PC_Packages : PC_ContentList<Package>
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Package.Plural} - {Program.Services.GetService<IPlaysetManager>().CurrentPlayset.Name}";
+		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
 	}
 
 	protected override IEnumerable<Package> GetItems()
@@ -92,11 +92,11 @@ internal class PC_Packages : PC_ContentList<Package>
 
 	protected override void SetIncluded(IEnumerable<Package> filteredItems, bool included)
 	{
-		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems, included);
+		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems, included);
 	}
 
 	protected override void SetEnabled(IEnumerable<Package> filteredItems, bool enabled)
 	{
-		Program.Services.GetService<IContentUtil>().SetBulkIncluded(filteredItems.Where(x => x.Mod is not null).Select(x => x.Mod!), enabled);
+		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems.Where(x => x.Mod is not null).Select(x => x.Mod!), enabled);
 	}
 }

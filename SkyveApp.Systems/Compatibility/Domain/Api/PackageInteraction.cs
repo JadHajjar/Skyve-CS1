@@ -34,7 +34,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 	//{
 	//	get
 	//	{
-	//		var type = Type is InteractionType.OptionalPackages && Program.Services.GetService<ISettings>().SessionSettings.UserSettings.TreatOptionalAsRequired
+	//		var type = Type is InteractionType.OptionalPackages && ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.TreatOptionalAsRequired
 	//			? NotificationType.MissingDependency
 	//			: CRNAttribute.GetNotification(Type);
 	//		var action = CRNAttribute.GetNotification(Action);

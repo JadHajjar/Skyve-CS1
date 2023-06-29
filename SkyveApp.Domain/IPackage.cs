@@ -8,5 +8,4 @@ public interface IPackage : IPackageIdentity
 	bool IsBuiltIn { get; }
 	ILocalPackageWithContents? LocalPackage { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
-	IEnumerable<ITag> Tags { get; }
 }

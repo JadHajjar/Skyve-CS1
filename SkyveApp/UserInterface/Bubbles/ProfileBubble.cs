@@ -15,7 +15,7 @@ internal class ProfileBubble : StatusBubbleBase
 
 	public ProfileBubble()
 	{ 
-		_profileManager = Program.Services.GetService<IPlaysetManager>();
+		_profileManager = ServiceCenter.Get<IPlaysetManager>();
 	}
 
 	public override Color? TintColor { get => _profileManager.CurrentPlayset.Color; set { } }
@@ -60,7 +60,7 @@ internal class ProfileBubble : StatusBubbleBase
 			DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, _profileManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
 		}
 
-		if (Program.Services.GetService<INotifier>().ProfilesLoaded)
+		if (ServiceCenter.Get<INotifier>().ProfilesLoaded)
 		{
 			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_profileManager.Profiles.Count() - 1, Locale.Profile.FormatPlural(_profileManager.Profiles.Count() - 1).ToLower()));
 		}

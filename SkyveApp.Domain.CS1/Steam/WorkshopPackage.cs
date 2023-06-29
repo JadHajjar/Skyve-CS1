@@ -1,6 +1,5 @@
 ﻿using SkyveApp.Domain.Systems;
 using SkyveApp.Systems;
-using SkyveApp.Utilities;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -25,14 +24,14 @@ public class WorkshopPackage : IPackage
 	public string Url { get; }
 	public bool IsLocal { get; }
 	public bool IsBuiltIn { get; }
-	public string Name => GetWorkshopInfo()?.Title ?? Locale.UnknownPackage;
-	public bool IsMod => GetWorkshopInfo()?.IsMod ?? false;
-	public ILocalPackage? LocalPackage => Program.Services.GetService<IContentManager>().GetPackageById(Id);
-	public IEnumerable<IPackageRequirement> Requirements => GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
-	public IEnumerable<ITag> Tags => GetWorkshopInfo()?.Tags.Select(x => (ITag)new TagItem(Enums.TagSource.Workshop, x)) ?? Enumerable.Empty<ITag>();
+	public string Name => GetInfo()?.Title ?? ServiceCenter.Get<ILocale>().Get("UnknownPackage");
+	public bool IsMod => GetInfo()?.IsMod ?? false;
+	public ILocalPackageWithContents? LocalPackage => ServiceCenter.Get<IContentManager>().GetPackageById(this);
+	public IEnumerable<IPackageRequirement> Requirements => GetInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
+	public IEnumerable<ITag> Tags => GetInfo()?.Tags.Select(x => (ITag)new TagItem(Enums.TagSource.Workshop, x)) ?? Enumerable.Empty<ITag>();
 
-	public IWorkshopInfo? GetWorkshopInfo()
+	private IWorkshopInfo? GetInfo()
 	{
-		return _info ?? SteamUtil.GetItem(Id);
+		return _info ?? this.GetWorkshopInfo();
 	}
 }

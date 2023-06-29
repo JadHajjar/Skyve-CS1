@@ -34,9 +34,9 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	public PackageDescriptionControl()
 	{
-		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
-		_settings = Program.Services.GetService<ISettings>();
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+		_settings = ServiceCenter.Get<ISettings>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 	}
 
 	public void SetPackage(IPackage package, PC_PackagePage? page)
@@ -47,7 +47,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		if (!string.IsNullOrWhiteSpace(Package.Author?.AvatarUrl))
 		{
 			Image = null;
-			LoadImage(Package.Author?.AvatarUrl, Program.Services.GetService<IImageService>().GetImage);
+			LoadImage(Package.Author?.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
 		}
 
 		Invalidate();

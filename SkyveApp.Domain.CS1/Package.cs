@@ -1,18 +1,18 @@
 ﻿using Extensions;
 
-using Microsoft.Extensions.DependencyInjection;
-
-using SkyveApp.Services;
-using SkyveApp.Utilities;
+using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SkyveApp.Domain;
 
 public class Package : ILocalPackageWithContents
 {
+	private ulong id;
+
 	public Package(string folder, bool builtIn, bool workshop, long localSize, DateTime localTime)
 	{
 		Folder = folder.FormatPath();
@@ -32,7 +32,6 @@ public class Package : ILocalPackageWithContents
 	public Asset[] Assets { get; set; }
 	public Mod? Mod { get; set; }
 	public string Folder { get; set; }
-	public ulong Id { get; }
 	public bool IsBuiltIn { get; }
 	public bool IsLocal { get; }
 	public long LocalSize { get; set; }
@@ -40,53 +39,42 @@ public class Package : ILocalPackageWithContents
 	public string Name => ToString();
 	public bool IsMod => Mod is not null;
 	public string? Url { get; }
-	public IEnumerable<ITag> Tags
+	public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
+
+	public ulong Id
 	{
 		get
 		{
-
-		}
-	}
-	public IEnumerable<IPackageRequirement> Requirements 
-	{
-		get 
-		{
-
-		}
-	}
-
-	public IWorkshopInfo? GetWorkshopInfo()
-	{
-		var id = Id;
-
-		if (id == 0)
-		{
-			if (ulong.TryParse(Path.GetFileName(Folder), out var folderId))
+			if (id == 0)
 			{
-				id = folderId;
-			}
-			else if (Mod is not null)
-			{
-				var crId = Program.Services.GetService<CompatibilityManager>()?.CompatibilityData.PackageNames.TryGet(Path.GetFileName(Mod.FilePath));
-
-				if (crId.HasValue)
+				if (Mod is not null)
 				{
-					id = crId.Value;
+					id = ServiceCenter.Get<ICompatibilityManager>().GetIdFromModName(Path.GetFileName(Mod.FilePath));
+				}
+
+				if (id == 0 && ulong.TryParse(Path.GetFileName(Folder), out var folderId))
+				{
+					if (folderId > 2_000_000_000)
+					{
+						id = folderId;
+					}
 				}
 			}
+
+			return id;
 		}
 
-		return SteamUtil.GetItem(id);
+		set => id = value;
 	}
 
 	IAsset[] ILocalPackageWithContents.Assets => Assets;
 	IMod? ILocalPackageWithContents.Mod => Mod;
-	ILocalPackage? IPackage.LocalPackage => this;
+	ILocalPackageWithContents? IPackage.LocalPackage => this;
 	string ILocalPackageIdentity.FilePath => Folder;
 
 	public override string ToString()
 	{
-		var workshopInfo = GetWorkshopInfo();
+		var workshopInfo = this.GetWorkshopInfo();
 
 		if (workshopInfo is not null)
 		{

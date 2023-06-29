@@ -44,9 +44,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 	public ProfileListControl(bool readOnly)
 	{
-		_settings = Program.Services.GetService<ISettings>();
-		_profileManager = Program.Services.GetService<IPlaysetManager>();
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_settings = ServiceCenter.Get<ISettings>();
+		_profileManager = ServiceCenter.Get<IPlaysetManager>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 
 		ReadOnly = readOnly;
 		HighlightOnHover = true;
@@ -702,7 +702,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 			if (Load.Contains(location))
 			{
-				text = (instance as ProfileListControl)!.ReadOnly ? Program.Services.GetService<IPlaysetManager>().Profiles.Any(x => x.Name.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfileTip : Locale.DownloadProfileTip : Locale.ProfileReplace;
+				text = (instance as ProfileListControl)!.ReadOnly ? ServiceCenter.Get<IPlaysetManager>().Profiles.Any(x => x.Name.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfileTip : Locale.DownloadProfileTip : Locale.ProfileReplace;
 				point = Load.Location;
 				return true;
 			}

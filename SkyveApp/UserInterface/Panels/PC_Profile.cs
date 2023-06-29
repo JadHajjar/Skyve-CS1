@@ -23,12 +23,12 @@ public partial class PC_Profile : PanelContent
 	private bool loadingProfile;
 	private readonly SlickCheckbox[] _launchOptions;
 
-	private readonly IPlaysetManager _profileManager = Program.Services.GetService<IPlaysetManager>();
-	private readonly ILocationManager _locationManager = Program.Services.GetService<ILocationManager>();
-	private readonly IContentManager _contentManager = Program.Services.GetService<IContentManager>();
-	private readonly IContentUtil _contentUtil = Program.Services.GetService<IContentUtil>();
-	private readonly ISettings _settings = Program.Services.GetService<ISettings>();
-	private readonly IOUtil _iOUtil = Program.Services.GetService<IOUtil>();
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
+	private readonly ILocationManager _locationManager = ServiceCenter.Get<ILocationManager>();
+	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
+	private readonly IContentUtil _contentUtil = ServiceCenter.Get<IContentUtil>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly IOUtil _iOUtil = ServiceCenter.Get<IOUtil>();
 
 	public PC_Profile()
 	{

@@ -20,19 +20,19 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 
 	public PC_MissingPackages(List<Playset.Mod> missingMods, List<Playset.Asset> missingAssets) : base(missingAssets.Concat(missingMods))
 	{
-		Program.Services.GetService<INotifier>().ContentLoaded += CentralManager_ContentLoaded;
+		ServiceCenter.Get<INotifier>().ContentLoaded += CentralManager_ContentLoaded;
 	}
 
 	protected override void Dispose(bool disposing)
 	{
-		Program.Services.GetService<INotifier>().ContentLoaded -= CentralManager_ContentLoaded;
+		ServiceCenter.Get<INotifier>().ContentLoaded -= CentralManager_ContentLoaded;
 
 		base.Dispose(disposing);
 	}
 
 	protected override void LocaleChanged()
 	{
-		Text = string.Format(Locale.MissingPackagesProfile, Program.Services.GetService<IPlaysetManager>().CurrentPlayset.Name);
+		Text = string.Format(Locale.MissingPackagesProfile, ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name);
 	}
 
 	private void CentralManager_ContentLoaded()
@@ -43,7 +43,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 		{
 			if (item is Playset.Mod mod)
 			{
-				var localMod = Program.Services.GetService<IPlaysetManager>().GetMod(mod);
+				var localMod = ServiceCenter.Get<IPlaysetManager>().GetMod(mod);
 
 				if (localMod is null)
 				{
@@ -57,7 +57,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 			}
 			else if (item is Playset.Asset asset)
 			{
-				var localAsset = Program.Services.GetService<IPlaysetManager>().GetAsset(asset);
+				var localAsset = ServiceCenter.Get<IPlaysetManager>().GetAsset(asset);
 
 				if (localAsset is null)
 				{

@@ -25,8 +25,8 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 
 	public OtherProfilePackage(IPackage package)
 	{
-		_profileManager = Program.Services.GetService<IPlaysetManager>();
-		_settings = Program.Services.GetService<ISettings>();
+		_profileManager = ServiceCenter.Get<IPlaysetManager>();
+		_settings = ServiceCenter.Get<ISettings>();
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		Package = package;

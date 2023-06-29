@@ -70,12 +70,12 @@ internal class PackageWatcher
 
 	private void TriggerUpdate(string path)
 	{
-		Program.Services.GetService<IContentUtil>().ContentUpdated(path, false, Workshop, false);
+		ServiceCenter.Get<IContentUtil>().ContentUpdated(path, false, Workshop, false);
 	}
 
 	private void TriggerSelfUpdate(string path)
 	{
-		Program.Services.GetService<IContentUtil>().ContentUpdated(path, false, Workshop, true);
+		ServiceCenter.Get<IContentUtil>().ContentUpdated(path, false, Workshop, true);
 	}
 
 	public string GetFirstFolderOrFileName(string filePath, string sourceFolder)

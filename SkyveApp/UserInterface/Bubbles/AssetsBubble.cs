@@ -26,10 +26,10 @@ internal class AssetsBubble : StatusBubbleBase
 
 	public AssetsBubble()
 	{
-		_notifier = Program.Services.GetService<INotifier>();
-		_contentUtil = Program.Services.GetService<IContentUtil>();
-		_contentManager = Program.Services.GetService<IContentManager>();
-		_profileManager = Program.Services.GetService<IPlaysetManager>();
+		_notifier = ServiceCenter.Get<INotifier>();
+		_contentUtil = ServiceCenter.Get<IContentUtil>();
+		_contentManager = ServiceCenter.Get<IContentManager>();
+		_profileManager = ServiceCenter.Get<IPlaysetManager>();
 	}
 
 	protected override void OnHandleCreated(EventArgs e)

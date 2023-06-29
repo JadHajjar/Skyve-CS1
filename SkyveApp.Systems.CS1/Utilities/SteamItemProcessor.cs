@@ -32,7 +32,7 @@ public class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 		}
 		finally
 		{
-			Program.Services.GetService<INotifier>().OnWorkshopInfoUpdated();
+			ServiceCenter.Get<INotifier>().OnWorkshopInfoUpdated();
 		}
 	}
 

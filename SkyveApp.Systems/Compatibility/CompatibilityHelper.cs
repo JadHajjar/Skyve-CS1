@@ -283,7 +283,7 @@ internal class CompatibilityHelper
 	{
 		var workshopItem = _workshopService.GetPackage(steamId);
 
-		return workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.GetWorkshopInfo()!.Removed)
+		return workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.GetWorkshopInfo()!.IsRemoved)
 			? true
 			: !_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 			? false

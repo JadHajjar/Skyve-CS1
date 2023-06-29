@@ -39,7 +39,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 
 		InitializeComponent();
 
@@ -62,7 +62,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	public PC_CompatibilityManagement(ulong userId) : this(false)
 	{
-		foreach (var package in Program.Services.GetService<IContentManager>().Packages)
+		foreach (var package in ServiceCenter.Get<IContentManager>().Packages)
 		{
 			if (package.Author?.SteamId == userId)
 			{
@@ -277,7 +277,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			PB_Icon.Package = CurrentPackage;
 			PB_Icon.Image = null;
-			PB_Icon.LoadImage(CurrentPackage.IconUrl, Program.Services.GetService<IImageService>().GetImage);
+			PB_Icon.LoadImage(CurrentPackage.IconUrl, ServiceCenter.Get<IImageService>().GetImage);
 			P_Info.SetPackage(CurrentPackage, null);
 
 			B_Previous.Enabled = currentPage > 0;

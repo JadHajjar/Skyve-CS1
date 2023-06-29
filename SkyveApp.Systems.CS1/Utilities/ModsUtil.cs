@@ -1,72 +1,39 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
 using SkyveApp.Utilities.IO;
 
 using System;
 using System.IO;
-using System.Linq;
 
 namespace SkyveApp.Utilities;
 public class ModsUtil : IModUtil
 {
-	private readonly CachedSaveLibrary<CachedModInclusion, Mod, bool> _includedLibrary = new();
-	private readonly CachedSaveLibrary<CachedModEnabled, Mod, bool> _enabledLibrary = new();
+	private readonly CachedSaveLibrary<IMod, bool> _includedLibrary;
+	private readonly CachedSaveLibrary<IMod, bool> _enabledLibrary;
 
+	private readonly ColossalOrderUtil _colossalOrderUtil;
+	private readonly AssemblyUtil _assemblyUtil;
 	private readonly IContentManager _contentManager;
 	private readonly IModLogicManager _modLogicManager;
-	private readonly ColossalOrderUtil _colossalOrderUtil;
 	private readonly ISettings _settings;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ModsUtil(IContentManager contentManager, IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, IColossalOrderUtil colossalOrderUtil)
+	public ModsUtil(IContentManager contentManager, IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ColossalOrderUtil colossalOrderUtil, AssemblyUtil assemblyUtil)
 	{
+		_assemblyUtil = assemblyUtil;
 		_contentManager = contentManager;
 		_modLogicManager = modLogicManager;
 		_colossalOrderUtil = colossalOrderUtil;
 		_settings = settings;
 		_logger = logger;
 		_notifier = notifier;
-	}
 
-	public Mod? GetMod(Package package)
-	{
-		if (IsValidModFolder(package.Folder, out var dllPath, out var version))
-		{
-			return new Mod(package, dllPath!, version!);
-		}
-
-		return null;
-	}
-
-	private bool IsValidModFolder(string dir, out string? dllPath, out Version? version)
-	{
-		try
-		{
-			var files = Directory.GetFiles(dir, "*.dll", SearchOption.AllDirectories);
-
-			if (files != null && files.Length > 0)
-			{
-				if (CrossIO.CurrentPlatform is Platform.MacOSX)
-				{
-					return MacAssemblyUtil.FindImplementation(files, out dllPath, out version);
-				}
-
-				return Program.Services.GetService<AssemblyUtil>().FindImplementation(files, out dllPath, out version);
-			}
-		}
-		catch { }
-
-		dllPath = null;
-		version = null;
-		return false;
+		_includedLibrary = new(IsLocallyIncluded, SetLocallyIncluded);
+		_enabledLibrary = new(IsLocallyEnabled, SetLocallyEnabled);
 	}
 
 	public void SavePendingValues()
@@ -78,8 +45,8 @@ public class ModsUtil : IModUtil
 
 #if DEBUG
 		_logger.Debug("Saving pending mod values:\r\n" +
-			$"_includedLibrary {_includedLibrary._dictionary.Count}\r\n" +
-			$"_enabledLibrary {_enabledLibrary._dictionary.Count}");
+			$"_includedLibrary {_includedLibrary.Count}\r\n" +
+			$"_enabledLibrary {_enabledLibrary.Count}");
 #endif
 		var saveSettings = _enabledLibrary.Any();
 
@@ -92,27 +59,27 @@ public class ModsUtil : IModUtil
 		}
 	}
 
-	public bool IsIncluded(Mod mod)
+	public bool IsIncluded(IMod mod)
 	{
 		return _includedLibrary.GetValue(mod, out var included) ? included : IsLocallyIncluded(mod);
 	}
 
-	public bool IsEnabled(Mod mod)
+	public bool IsEnabled(IMod mod)
 	{
 		return _enabledLibrary.GetValue(mod, out var enabled) ? enabled : IsLocallyEnabled(mod);
 	}
 
-	public bool IsLocallyIncluded(Mod mod)
+	public bool IsLocallyIncluded(IMod mod)
 	{
 		return !CrossIO.FileExists(CrossIO.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
 	}
 
-	public bool IsLocallyEnabled(Mod mod)
+	public bool IsLocallyEnabled(IMod mod)
 	{
 		return _colossalOrderUtil.IsEnabled(mod);
 	}
 
-	public void SetIncluded(Mod mod, bool value)
+	public void SetIncluded(IMod mod, bool value)
 	{
 		if (!value && _modLogicManager.IsRequired(mod))
 		{
@@ -131,22 +98,11 @@ public class ModsUtil : IModUtil
 			SetLocallyIncluded(mod, value);
 		}
 
-		if (_settings.SessionSettings.UserSettings.LinkModAssets && mod.Package.Assets != null)
-		{
-			Program.Services.GetService<IContentUtil>().SetBulkIncluded(mod.Package.Assets, value);
-		}
-
-		if (!_settings.SessionSettings.UserSettings.AdvancedIncludeEnable)
-		{
-			SetEnabled(mod, value);
-			return;
-		}
-
 		_notifier.OnInclusionUpdated();
 		_notifier.TriggerAutoSave();
 	}
 
-	public void SetLocallyIncluded(Mod mod, bool value)
+	public void SetLocallyIncluded(IMod mod, bool value)
 	{
 		try
 		{
@@ -174,7 +130,8 @@ public class ModsUtil : IModUtil
 		}
 	}
 
-	public void SetEnabled(Mod mod, bool value, bool save = true)
+	public void SetEnabled(IMod mod, bool value) => SetEnabled(mod, value);
+	public void SetEnabled(IMod mod, bool value, bool save)
 	{
 		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
 		{
@@ -189,7 +146,12 @@ public class ModsUtil : IModUtil
 		_notifier.TriggerAutoSave();
 	}
 
-	public void SetLocallyEnabled(Mod mod, bool value, bool save)
+	public void SetLocallyEnabled(IMod mod, bool value)
+	{
+		SetLocallyEnabled(mod, value, false);
+	}
+
+	public void SetLocallyEnabled(IMod mod, bool value, bool save)
 	{
 		try
 		{
@@ -215,59 +177,41 @@ public class ModsUtil : IModUtil
 		}
 	}
 
-	public DownloadStatus GetStatus(IPackage mod, out string reason)
+	public void SaveChanges()
 	{
-		if (mod.RemovedFromSteam)
-		{
-			reason = Locale.PackageIsRemoved.Format(mod.CleanName());
-			return DownloadStatus.Removed;
-		}
-
-		if (mod.ServerTime == default)
-		{
-			if (!mod.Workshop)
-			{
-				reason = string.Empty;
-				return DownloadStatus.None;
-			}
-
-			reason = Locale.PackageIsUnknown.Format(mod.CleanName());
-			return DownloadStatus.Unknown;
-		}
-
-		//if (!Directory.Exists(mod.Folder))
-		//{
-		//	reason = Locale.PackageIsNotDownloaded.Format(mod.CleanName());
-		//	return DownloadStatus.NotDownloaded;
-		//}
-
-		var updatedServer = mod.ServerTime;
-		var updatedLocal = mod.Package?.LocalTime ?? DateTime.MinValue;
-		var sizeServer = mod.ServerSize;
-		var localSize = mod.Package?.FileSize ?? 0;
-
-		if (updatedLocal < updatedServer)
-		{
-			var certain = updatedLocal < updatedServer.AddHours(-24);
-
-			reason = certain
-				? Locale.PackageIsOutOfDate.Format(mod.CleanName(), (updatedServer - updatedLocal).ToReadableString(true))
-				: Locale.PackageIsMaybeOutOfDate.Format(mod.CleanName(), updatedServer.ToLocalTime().ToRelatedString(true));
-			return DownloadStatus.OutOfDate;
-		}
-
-		if (localSize < sizeServer && sizeServer > 0)
-		{
-			reason = Locale.PackageIsIncomplete.Format(mod.CleanName(), localSize.SizeString(), sizeServer.SizeString());
-			return DownloadStatus.PartiallyDownloaded;
-		}
-
-		reason = string.Empty;
-		return DownloadStatus.OK;
+		throw new NotImplementedException();
 	}
 
-	public Mod FindMod(string? folder)
+	public IMod? GetMod(ILocalPackageWithContents package)
 	{
-		return _contentManager.Mods.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
+		if (IsValidModFolder(package.Folder, out var dllPath, out var version))
+		{
+			return new Mod(package, dllPath!, version!);
+		}
+
+		return null;
+	}
+
+	private bool IsValidModFolder(string dir, out string? dllPath, out Version? version)
+	{
+		try
+		{
+			var files = Directory.GetFiles(dir, "*.dll", SearchOption.AllDirectories);
+
+			if (files != null && files.Length > 0)
+			{
+				if (CrossIO.CurrentPlatform is Platform.MacOSX)
+				{
+					return MacAssemblyUtil.FindImplementation(files, out dllPath, out version);
+				}
+
+				return _assemblyUtil.FindImplementation(files, out dllPath, out version);
+			}
+		}
+		catch { }
+
+		dllPath = null;
+		version = null;
+		return false;
 	}
 }

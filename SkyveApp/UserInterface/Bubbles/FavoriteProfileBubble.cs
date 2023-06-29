@@ -20,7 +20,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 
 	public FavoriteProfileBubble(Playset profile)
 	{
-		_profileManager = Program.Services.GetService<IPlaysetManager>();
+		_profileManager = ServiceCenter.Get<IPlaysetManager>();
 		Profile = profile;
 	}
 

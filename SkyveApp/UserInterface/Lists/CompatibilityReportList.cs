@@ -36,10 +36,10 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		SeparateWithLines = true;
 		AllowDrop = true;
 
-		_subscriptionsManager = Program.Services.GetService<ISubscriptionsManager>();
-		_compatibilityManager = Program.Services.GetService<ICompatibilityManager>();
-		_contentUtil = Program.Services.GetService<IContentUtil>();
-		_settings = Program.Services.GetService<ISettings>();
+		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		_contentUtil = ServiceCenter.Get<IContentUtil>();
+		_settings = ServiceCenter.Get<ISettings>();
 	}
 
 	protected override void UIChanged()
@@ -861,7 +861,7 @@ internal class CompatibilityReportList : SlickStackedListControl<CompatibilityIn
 		{
 			if (CrossIO.CurrentPlatform is not Platform.Windows)
 			{
-				var realPath = Program.Services.GetService<IOUtil>().ToRealPath(file);
+				var realPath = ServiceCenter.Get<IOUtil>().ToRealPath(file);
 
 				if (CrossIO.FileExists(realPath))
 				{
