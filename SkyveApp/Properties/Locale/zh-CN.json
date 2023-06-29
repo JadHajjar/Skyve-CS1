@@ -563,6 +563,6 @@
   "FailedToUpdateProfile": "更新配置文件失败",
   "ImportFromLink": "使用配置文件 ID 导入配置文件",
   "PasteProfileId": "粘贴要导入的配置文件的 ID",
-  "AssumeInternetConnectivity": "忽略网络连接检查",
+  "AssumeInternetConnectivity": "跳过网络连接检查",
   "AssumeInternetConnectivity_Tip": "跳过网络连接检查，程序将默认您有可用的网络连接（请务必打开加速器 / VPN）。"
 }
