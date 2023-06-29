@@ -36,7 +36,7 @@
   "AutoProfileSaveOff": "已禁用自动保存",
   "TemporaryProfileCanNotBeEdited": "当您重新打开 Skyve 应用程序时，临时配置文件的设置将被重置",
   "LaunchSettings": "启动选项",
-  "IncludesItemsYouDoNotHave": "警告：此配置文件中含有您尚未拥有的项目",
+  "IncludesItemsYouDoNotHave": "警告：缺失了其中的一些插件",
   "ContentAndInfo": "内容和信息",
   "OtherProfiles": "其他配置文件",
   "ViewProfiles": "查看配置文件",
