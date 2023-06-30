@@ -104,55 +104,55 @@
   "Do you want to apply your changes before leaving?": "Wilt u de wijzigingen toepassen voordat u afsluit?",
   "TaskCompleted": "Taak voltooid",
   "UnexpectedError": "Er is een onverwachte fout opgetreden",
-  "{0} ago": "{0} ago",
-  "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "{0} ago": "{0} geleden",
+  "in {0}": "over {0}",
+  "Today at {0}": "Vandaag om {0}",
+  "Yesterday at {0}": "Gisteren om {0}",
+  "Tomorrow at {0}": "Morgen om {0}",
+  "Last {0} at {1}": "Afgelopen {0} om {1}",
+  "Next {0} at {1}": "Volgende {0} om {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "{0} maand geleden op {1}",
+    "Plural": "{0} maanden geleden op {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "over {0} maand op {1}",
+    "Plural": "over {0} maanden op {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} dag geleden",
+    "Plural": "{0} dagen geleden"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "over {0} dag",
+    "Plural": "over {0} dagen"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} jaar",
+    "Plural": "{0} jaren"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} maand",
+    "Plural": "{0} maanden"
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} dag",
+    "Plural": "{0} dagen"
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} uur",
+    "Plural": "{0} uren"
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} minuut",
+    "Plural": "{0} minuten"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} seconde",
+    "Plural": "{0} seconden"
   },
   "{0}d": "{0}d",
-  "{0}h": "{0}h",
+  "{0}h": "{0}u",
   "{0}m": "{0}m",
   "{0}s": "{0}s"
 }
