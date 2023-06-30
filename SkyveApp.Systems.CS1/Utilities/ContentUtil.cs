@@ -3,6 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Enums;
+using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
 
@@ -12,7 +13,7 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Utilities;
-public class ContentUtil
+public class ContentUtil : IContentManager
 {
 	private const string CACHE_FILENAME = "ModDllCache.json";
 	public const string EXCLUDED_FILE_NAME = ".excluded";
@@ -23,21 +24,21 @@ public class ContentUtil
 
 	public bool BulkUpdating { get; set; }
 
-	private readonly IPackageManager _contentManager;
+	private readonly IPackageManager _packageManager;
 	private readonly ILocationManager _locationManager;
 	private readonly ICompatibilityManager _compatibilityManager;
-	private readonly IPlaysetManager _profileManager;
+	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
 	private readonly IAssetUtil _assetUtil;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ContentUtil(IPackageManager contentManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil)
+	public ContentUtil(IPackageManager packageManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IPackageUtil packageUtil)
 	{
-		_contentManager = contentManager;
+		_packageManager = packageManager;
 		_locationManager = locationManager;
 		_compatibilityManager = compatibilityManager;
-		_profileManager = profileManager;
+		_packageUtil = packageUtil;
 		_modUtil = modUtil;
 		_assetUtil = assetUtil;
 		_logger = logger;
@@ -78,7 +79,7 @@ public class ContentUtil
 			var files = Directory.GetFiles(path);
 			if (files.Length == 1 && files[0].EndsWith(EXCLUDED_FILE_NAME))
 			{
-				DeleteAll(path);
+				_packageManager.DeleteAll(path);
 				continue;
 			}
 
@@ -86,30 +87,27 @@ public class ContentUtil
 		}
 	}
 
-	public IEnumerable<IPackage> GetReferencingPackage(ulong steamId, bool includedOnly)
+	public IEnumerable<ILocalPackage> GetReferencingPackage(ulong steamId, bool includedOnly)
 	{
-		foreach (var item in _contentManager.Packages)
+		foreach (var item in _packageManager.Packages)
 		{
-			if (includedOnly && !item.IsIncluded)
+			if (includedOnly && !(_packageUtil.IsIncluded(item, out var partiallyIncluded) || partiallyIncluded))
 			{
 				continue;
 			}
 
-			var crData = _compatibilityManager.CompatibilityData.Packages.TryGet(item.SteamId);
+			var crData = _compatibilityManager.GetPackageInfo(item);
 
 			if (crData == null)
 			{
-				if (item.RequiredPackages?.Contains(steamId) ?? false)
+				if (item.Requirements.Any(x => x.Id == steamId))
 				{
 					yield return item;
 				}
 			}
-			else if (crData.Interactions.ContainsKey(InteractionType.RequiredPackages))
+			else if (crData.Interactions?.Any(x => x.Type == InteractionType.RequiredPackages && (x.Packages?.Contains(steamId) ?? false)) ?? false)
 			{
-				if (crData.Interactions[InteractionType.RequiredPackages].Any(x => x.Interaction.Packages?.Contains(steamId) ?? false))
-				{
-					yield return item;
-				}
+				yield return item;
 			}
 		}
 	}
@@ -183,9 +181,9 @@ public class ContentUtil
 		return 0;
 	}
 
-	public List<Package> LoadContents()
+	public List<ILocalPackageWithContents> LoadContents()
 	{
-		var packages = new List<Package>();
+		var packages = new List<ILocalPackageWithContents>();
 		var gameModsPath = CrossIO.Combine(_locationManager.GameContentPath, "Mods");
 		var addonsModsPath = _locationManager.ModsPath;
 		var addonsAssetsPath = new[]
@@ -283,11 +281,11 @@ public class ContentUtil
 				return;
 			}
 
-			var existingPackage = _contentManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(path));
+			var existingPackage = _packageManager.Packages.FirstOrDefault(x => x.Folder.PathEquals(path));
 
-			if (existingPackage != null)
+			if (existingPackage is Package package)
 			{
-				RefreshPackage(existingPackage, self);
+				RefreshPackage(package, self);
 			}
 			else
 			{
@@ -301,30 +299,31 @@ public class ContentUtil
 		if (workshop && !ulong.TryParse(Path.GetFileName(path), out _))
 		{ return; }
 
-		var package = new Package(path, builtIn, workshop);
+		var package = new Package(path, builtIn, workshop, GetTotalSize(path), GetLocalUpdatedTime(path));
 
 		package.Assets = _assetUtil.GetAssets(package, !self).ToArray();
 		package.Mod = _modUtil.GetMod(package);
-		package.FileSize = GetTotalSize(package.Folder);
-		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
-		_contentManager.AddPackage(package);
+		_packageManager.AddPackage(package);
 	}
 
-	public void RefreshPackage(Package package, bool self)
+	public void RefreshPackage(ILocalPackage localPackage, bool self)
 	{
+		if (localPackage is not Package package)
+			return;
+
 		if (IsDirectoryEmpty(package.Folder))
 		{
-			_contentManager.RemovePackage(package);
+			_packageManager.RemovePackage(package);
 			return;
 		}
 
 		package.Assets = _assetUtil.GetAssets(package, !self).ToArray();
 		package.Mod = _modUtil.GetMod(package);
-		package.FileSize = GetTotalSize(package.Folder);
+		package.LocalSize = GetTotalSize(package.Folder);
 		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
-		if (!package.Workshop && package.Mod is null)
+		if (package.IsLocal && package.Mod is null)
 		{
 			_notifier.OnContentLoaded();
 		}
@@ -368,39 +367,6 @@ public class ContentUtil
 		PackageWatcher.Create(_locationManager.ModsPath, false, false);
 
 		PackageWatcher.Create(_locationManager.WorkshopContentPath, false, true);
-	}
-
-	public GenericPackageState GetGenericPackageState(IPackage item)
-	{
-		return GetGenericPackageState(item, out _);
-	}
-
-	public GenericPackageState GetGenericPackageState(IPackage item, out Package? package)
-	{
-		if (item.SteamId == 0)
-		{
-			package = null;
-			return GenericPackageState.Local;
-		}
-
-		package = _contentManager.GetPackage(item.SteamId);
-
-		if (package == null)
-		{
-			return GenericPackageState.Unsubscribed;
-		}
-
-		if (!package.IsIncluded)
-		{
-			return GenericPackageState.Excluded;
-		}
-
-		if (package.Mod is null || package.Mod.IsEnabled)
-		{
-			return GenericPackageState.Enabled;
-		}
-
-		return GenericPackageState.Disabled;
 	}
 
 	public bool? GetDllModCache(string path, out Version? version)

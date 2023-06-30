@@ -60,8 +60,6 @@ public class CompatibilityManager : ICompatibilityManager
 
 		LoadSnoozedData();
 
-		LoadCachedData();
-
 		ConnectionHandler.WhenConnected(() => new BackgroundAction(DownloadData).Run());
 
 		_notifier.ContentLoaded += () => new BackgroundAction(CacheReport).Run();
@@ -106,7 +104,7 @@ public class CompatibilityManager : ICompatibilityManager
 		catch { }
 	}
 
-	public void LoadCachedData()
+	public void Start(List<ILocalPackageWithContents> packages)
 	{
 		try
 		{
@@ -115,6 +113,13 @@ public class CompatibilityManager : ICompatibilityManager
 			ISave.Load(out CompatibilityData? data, DATA_CACHE_FILE);
 
 			CompatibilityData = new IndexedCompatibilityData(data);
+
+			foreach (var package in packages)
+			{
+				_cache[package] = GenerateCompatibilityInfo(package);
+			}
+
+			firstLoadComplete = true;
 		}
 		catch { }
 	}
@@ -406,16 +411,6 @@ public class CompatibilityManager : ICompatibilityManager
 		return info;
 	}
 
-	public void DoFirstCache(List<IPackage> packages)
-	{
-		foreach (var package in packages)
-		{
-			_cache[package] = GenerateCompatibilityInfo(package);
-		}
-
-		firstLoadComplete = true;
-	}
-
 	public void ResetCache()
 	{
 		_cache.Clear();
@@ -437,7 +432,7 @@ public class CompatibilityManager : ICompatibilityManager
 		return _compatibilityHelper.GetFinalSuccessor(package);
 	}
 
-	public IPackageCompatibilityInfo? GetPackageInfo(IPackage package)
+	public IPackageCompatibilityInfo? GetPackageInfo(IPackageIdentity package)
 	{
 		return _compatibilityHelper.GetPackageData(package)?.Package;
 	}

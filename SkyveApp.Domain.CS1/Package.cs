@@ -29,8 +29,8 @@ public class Package : ILocalPackageWithContents
 		}
 	}
 
-	public Asset[] Assets { get; set; }
-	public Mod? Mod { get; set; }
+	public IAsset[] Assets { get; set; }
+	public IMod? Mod { get; set; }
 	public string Folder { get; set; }
 	public bool IsBuiltIn { get; }
 	public bool IsLocal { get; }
@@ -67,8 +67,6 @@ public class Package : ILocalPackageWithContents
 		set => id = value;
 	}
 
-	IAsset[] ILocalPackageWithContents.Assets => Assets;
-	IMod? ILocalPackageWithContents.Mod => Mod;
 	ILocalPackageWithContents? IPackage.LocalPackage => this;
 	string ILocalPackageIdentity.FilePath => Folder;
 

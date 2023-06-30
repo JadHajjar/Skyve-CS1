@@ -6,4 +6,5 @@ public interface IUserSettings
 	bool HidePseudoMods { get; }
 	bool LinkModAssets { get; }
 	bool AdvancedIncludeEnable { get; }
+	bool AssumeInternetConnectivity { get; }
 }

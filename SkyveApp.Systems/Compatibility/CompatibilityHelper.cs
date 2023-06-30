@@ -292,13 +292,13 @@ internal class CompatibilityHelper
 			: package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false;
 	}
 
-	public IndexedPackage? GetPackageData(IPackage package)
+	public IndexedPackage? GetPackageData(IPackageIdentity package)
 	{
-		var steamId = package.GetWorkshopInfo()?.Id;
+		var steamId = package.Id;
 
 		if (steamId > 0)
 		{
-			var packageData = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId.Value);
+			var packageData = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
 			if (packageData is null)
 			{

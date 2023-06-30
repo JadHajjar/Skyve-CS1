@@ -17,4 +17,6 @@ public interface IPackageCompatibilityInfo
 	uint[]? RequiredDLCs { get; }
 	List<string>? Tags { get; }
 	List<ILink>? Links { get; }
+	List<IPackageStatus<InteractionType>>? Interactions { get; set; }
+	List<IPackageStatus<StatusType>>? Statuses { get; set; }
 }

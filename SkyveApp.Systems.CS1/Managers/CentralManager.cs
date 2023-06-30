@@ -1,10 +1,13 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Utilities;
 
 using SkyveShared;
+
+using SlickControls;
 
 using System;
 using System.Collections.Generic;
@@ -21,28 +24,32 @@ public class CentralManager
 	private readonly ILocationManager _locationManager;
 	private readonly IUpdateManager _updateManager;
 	private readonly ISubscriptionsManager _subscriptionManager;
-	private readonly IPackageManager _contentManager;
-	private readonly IPackageUtil _contentUtil;
-	private readonly IColossalOrderModUtil _colossalOrderUtil;
+	private readonly IPackageManager _packageManager;
+	private readonly IContentManager _contentManager;
+	private readonly ColossalOrderUtil _colossalOrderUtil;
 	private readonly ISettings _settings;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
+	private readonly IModUtil _modUtil;
+	private readonly IBulkUtil _bulkUtil;
 
-	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, IUpdateManager updateManager, ISubscriptionsManager subscriptionManager, ILogger logger, ISettings settings, IPackageManager contentManager, IPackageUtil contentUtil, INotifier notifier, IColossalOrderUtil colossalOrderUtil)
+	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, IUpdateManager updateManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil)
 	{
-		_logger = logger;
-		_subscriptionManager = subscriptionManager;
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
 		_profileManager = profileManager;
 		_citiesManager = citiesManager;
 		_locationManager = locationManager;
 		_updateManager = updateManager;
+		_subscriptionManager = subscriptionManager;
+		_packageManager = packageManager;
 		_contentManager = contentManager;
-		_settings = settings;
-		_contentUtil = contentUtil;
-		_notifier = notifier;
 		_colossalOrderUtil = colossalOrderUtil;
+		_settings = settings;
+		_logger = logger;
+		_notifier = notifier;
+		_modUtil = modUtil;
+		_bulkUtil = bulkUtil;
 	}
 
 	public void Start()
@@ -51,28 +58,29 @@ public class CentralManager
 		{
 			try
 			{ RunFirstTimeSetup(); }
-			catch (Exception ex) { _logger.Exception(ex, "Failed to complete the First Time Setup", true); }
+			catch (Exception ex)
+			{
+				_logger.Exception(ex, "Failed to complete the First Time Setup");
+
+				MessagePrompt.Show(ex, "Failed to complete the First Time Setup", form: SystemsProgram.MainForm as SlickForm);
+			}
 		}
 
-		ConnectionHandler.AssumeInternetConnectivity = _settings.SessionSettings.UserSettings.AssumeInternetConnectivity;
+		ConnectionHandler.AssumeInternetConnectivity = _settings.UserSettings.AssumeInternetConnectivity;
 
 		ConnectionHandler.Start();
 
 		_logger.Info("Loading packages..");
 
-		var content = _contentUtil.LoadContents();
+		var content = _contentManager.LoadContents();
 
 		_logger.Info($"Loaded {content.Count} packages");
 
-		_contentManager.SetPackages(content);
+		_packageManager.SetPackages(content);
 
 		_logger.Info($"Loading and applying CR Data..");
 
-		RequestDataUtil.Start(content);
-
-		_compatibilityManager.LoadCachedData();
-
-		_compatibilityManager.DoFirstCache(content);
+		_compatibilityManager.Start(content);
 
 		_logger.Info($"Analyzing packages..");
 
@@ -82,8 +90,6 @@ public class CentralManager
 
 		_logger.Info($"Finished analyzing packages..");
 
-		_compatibilityManager.FirstLoadComplete = true;
-
 		_notifier.OnContentLoaded();
 
 		_subscriptionManager.Start();
@@ -91,7 +97,7 @@ public class CentralManager
 		if (CommandUtil.PreSelectedProfile == _profileManager.CurrentPlayset.Name)
 		{
 			_logger.Info($"[Command] Applying Profile ({_profileManager.CurrentPlayset.Name})..");
-			_profileManager.SetProfile(_profileManager.CurrentPlayset);
+			_profileManager.SetCurrentPlayset(_profileManager.CurrentPlayset);
 		}
 
 		_colossalOrderUtil.Start();
@@ -110,7 +116,7 @@ public class CentralManager
 
 		_logger.Info($"Starting Listeners..");
 
-		_contentUtil.StartListeners();
+		_contentManager.StartListeners();
 
 		_logger.Info($"Listeners Started");
 
@@ -144,8 +150,6 @@ public class CentralManager
 
 		_compatibilityManager.CacheReport();
 
-		_compatibilityManager.FirstLoadComplete = true;
-
 		_logger.Info($"Compatibility report cached");
 	}
 
@@ -170,14 +174,12 @@ public class CentralManager
 		Directory.CreateDirectory(_locationManager.SkyveAppDataPath);
 
 		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Skyve from the main menu after deleting this file.");
-
-		_profileManager.ConvertLegacyProfiles();
 	}
 
-	public void AnalyzePackages(List<Package> content)
+	public void AnalyzePackages(List<ILocalPackageWithContents> content)
 	{
 		var firstTime = _updateManager.IsFirstTime();
-		var blackList = new List<Package>();
+		var blackList = new List<ILocalPackageWithContents>();
 
 		foreach (var package in content)
 		{
@@ -187,27 +189,19 @@ public class CentralManager
 				continue;
 			}
 
-			if (!firstTime)
-			{
-				_contentManager.HandleNewPackage(package);
-			}
-
 			if (package.Mod is not null)
 			{
-				if (!_settings.SessionSettings.UserSettings.AdvancedIncludeEnable)
+				if (!_settings.UserSettings.AdvancedIncludeEnable)
 				{
-					if (!package.Mod.IsEnabled && package.Mod.IsIncluded)
+					if (!_modUtil.IsEnabled(package.Mod) && _modUtil.IsIncluded(package.Mod))
 					{
-						package.Mod.IsIncluded = false;
+						_modUtil .SetIncluded(package.Mod, false);
 					}
 				}
 
-				if (_settings.SessionSettings.UserSettings.LinkModAssets && package.Assets is not null)
+				if (_settings.UserSettings.LinkModAssets && package.Assets is not null)
 				{
-					foreach (var asset in package.Assets)
-					{
-						asset.IsIncluded = package.Mod.IsIncluded;
-					}
+					_bulkUtil.SetBulkIncluded(package.Assets, _modUtil.IsIncluded(package.Mod));
 				}
 
 				_modLogicManager.Analyze(package.Mod);
@@ -218,7 +212,7 @@ public class CentralManager
 
 		if (blackList.Count > 0)
 		{
-			BlackListTransfer.SendList(blackList.Select(x => x.SteamId), false);
+			BlackListTransfer.SendList(blackList.Select(x => x.Id), false);
 		}
 		else if (CrossIO.FileExists(BlackListTransfer.FilePath))
 		{
@@ -227,7 +221,7 @@ public class CentralManager
 
 		foreach (var item in blackList)
 		{
-			_contentUtil.DeleteAll(item.Folder);
+			_packageManager.DeleteAll(item.Folder);
 		}
 
 		_logger.Info($"Applying analysis results..");
