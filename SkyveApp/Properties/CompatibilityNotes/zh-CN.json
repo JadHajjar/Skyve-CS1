@@ -200,7 +200,7 @@
   "The button cannot be moved, making the stats go off-screen on certain screen resolutions.": "无法移动此模组的按钮，这导致使用某些屏幕分辨率时，统计数据会在屏幕之外显示。",
   "Various issues reported, see Worshop comments for details.": "玩家报告了很多问题，请查看此模组的创意工坊评论区了解详情。",
   "Left hand traffic is not supported. This does not work on Linux. Opposite side traffic lights have some quirks on T-intersections and one-way roads.": "此模组不支持靠左行驶的地图，且无法在 Linux 系统上使用。在 T 型路口和单行道路上，相向的红绿灯可能会变得比较奇怪。",
-  "CAUTION: DO NOT SUPPRESS ERRORS in the mod options or in the popups from this mod, as it makes troubleshooting mod/asset issues near impossible. Hiding errors does not make them go away, and will make your game less reliable!": "警告：不要在模组选项或此模组弹出的窗口中禁用报错信息，禁用报错信息会导致难以进行模组/资产的故障排除。隐藏错误消息无法避免游戏出错，反而会使您的游戏不太可靠！",
+  "CAUTION: DO NOT SUPPRESS ERRORS in the mod options or in the popups from this mod, as it makes troubleshooting mod/asset issues near impossible. Hiding errors does not make them go away, and will make your game less reliable!": "警告：请勿在模组选项或此模组弹出的窗口中禁用报错信息（Suppress Errors），禁用报错信息会导致很难对模组/资产进行故障排除。\n隐藏错误消息并不能避免游戏出错，反而会使您的游戏不太可靠！",
   "Disasters are not recognized.": "无法识别自然灾害。",
   "This doesn't work for the new metro stations from the 'Content Creator Pack: Train Stations', and for some custom stations. You could use Move It instead for those stations.": "此模组不适用于“内容创作者包：火车站”中新增的地铁站，以及一些车站资产。 对于这些不受支持的车站，您可以改用 Move It 模组。",
   "Severe drop in FPS when creating roads. Some users get an 'invalid shape' error. Reversing direction sometimes gives an exception. The exception is harmless, but you can't reverse that segment and have to delete and recreate.": "创建道路时，帧数会严重下降。部分玩家会遇到“invalid shape”错误。反转方向升级道路时也会报错。 这些报错是无害的，但您无法恢复这些道路，必须铲除并重新生成。",
