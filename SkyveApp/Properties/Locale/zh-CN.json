@@ -159,7 +159,7 @@
   "AllItems": "所有项目",
   "TotalItems": "项目总数",
   "UnsubscribeAll": "取消订阅所有显示的项目",
-  "SubscribeAll": "订阅所有显示的项目",
+  "SubscribeAll": "订阅当前显示的所有项目",
   "DownloadAll": "下载当前显示的所有缺失的项目",
   "ReDownloadAll": "重新下载当前显示的所有已下载项目",
   "MissingItemsRemain": "没有找到配置文件中的某些项目，这些项目可能已经丢失。如果仍要保存配置文件，将会从配置文件中删除已丢失的项目。",
