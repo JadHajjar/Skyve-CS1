@@ -95,8 +95,8 @@
   "Red": "Красный",
   "Green": "Зелёный",
   "Yellow": "Жёлтый",
-  "Download": "Download",
-  "Remove": "Remove",
+  "Download": "Загрузить",
+  "Remove": "Удалить",
   "Welcome to Theme Changer!": "Добро пожаловать в \"Редактор темы\"!",
   "Customize the size and colors in the App however you want to.": "Настройте размеры и цвета в приложении, как вы пожелаете.",
   "Click on any color to change it, or right-click to reset it.": "Нажмите, чтобы изменить на любой цвет, или щелкните ПКМ, чтобы сбросить его.",
@@ -104,55 +104,55 @@
   "Do you want to apply your changes before leaving?": "Вы хотите применить изменения перед закрытием?",
   "TaskCompleted": "Задача выполнена",
   "UnexpectedError": "Произошла непредвиденная ошибка",
-  "{0} ago": "{0} ago",
-  "in {0}": "in {0}",
-  "Today at {0}": "Today at {0}",
-  "Yesterday at {0}": "Yesterday at {0}",
-  "Tomorrow at {0}": "Tomorrow at {0}",
-  "Last {0} at {1}": "Last {0} at {1}",
-  "Next {0} at {1}": "Next {0} at {1}",
+  "{0} ago": "{0} назад",
+  "in {0}": "через {0}",
+  "Today at {0}": "Сегодня в {0}",
+  "Yesterday at {0}": "Вчера в {0}",
+  "Tomorrow at {0}": "Завтра в {0}",
+  "Last {0} at {1}": "Прошлый Last {0} в {1}",
+  "Next {0} at {1}": "Следующий {0} в {1}",
   "{0} month ago on {1}": {
-    "One": "{0} month ago on {1}",
-    "Plural": "{0} months ago on {1}"
+    "One": "{0} месяца назад {1}",
+    "Plural": "{0} месяцев назад {1}"
   },
   "in {0} month on {1}": {
-    "One": "in {0} month on {1}",
-    "Plural": "in {0} months on {1}"
+    "One": "через {0} месяц {1}",
+    "Plural": "через {0} месяцев на {1}"
   },
   "{0} day ago": {
-    "One": "{0} day ago",
-    "Plural": "{0} days ago"
+    "One": "{0} день назад",
+    "Plural": "{0} дней назад"
   },
   "in {0} day": {
-    "One": "in {0} day",
-    "Plural": "in {0} days"
+    "One": "{0} день",
+    "Plural": "через {0} дней"
   },
   "{0} year": {
-    "One": "{0} year",
-    "Plural": "{0} years"
+    "One": "{0} год",
+    "Plural": "{0} лет"
   },
   "{0} month": {
-    "One": "{0} month",
-    "Plural": "{0} months"
+    "One": "{0} мес.",
+    "Plural": "{0} мес."
   },
   "{0} day": {
-    "One": "{0} day",
-    "Plural": "{0} days"
+    "One": "{0} дн.",
+    "Plural": "{0} дн."
   },
   "{0} hour": {
-    "One": "{0} hour",
-    "Plural": "{0} hours"
+    "One": "{0} ч.",
+    "Plural": "{0} ч."
   },
   "{0} minute": {
-    "One": "{0} minute",
-    "Plural": "{0} minutes"
+    "One": "{0} мин",
+    "Plural": "{0} мин"
   },
   "{0} second": {
-    "One": "{0} second",
-    "Plural": "{0} seconds"
+    "One": "{0} сек.",
+    "Plural": "{0} сек."
   },
-  "{0}d": "{0}d",
-  "{0}h": "{0}h",
-  "{0}m": "{0}m",
-  "{0}s": "{0}s"
+  "{0}d": "{0} дн",
+  "{0}h": "{0} ч.",
+  "{0}m": "{0} мин.",
+  "{0}s": "{0} сек."
 }
