@@ -1,17 +1,10 @@
-﻿using Extensions;
-
+﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services.Interfaces;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Forms;
@@ -26,7 +19,7 @@ public partial class EditTagsForm : BaseForm
 		Package = package;
 		Text = LocaleHelper.GetGlobalText("Tags");
 
-		foreach (var link in package.Tags.Where(x => x.Source == TagSource.FindIt))
+		foreach (var link in package.GetTags().Where(x => x.IsCustom))
 		{ AddTag(link); }
 	}
 
@@ -52,7 +45,7 @@ public partial class EditTagsForm : BaseForm
 			return;
 		}
 
-		AddTag(new(TagSource.FindIt, prompt.Input));
+		AddTag(new TagItem(TagSource.FindIt, prompt.Input));
 	}
 
 	private void TagControl_Click(object sender, EventArgs e)
@@ -60,7 +53,7 @@ public partial class EditTagsForm : BaseForm
 		(sender as Control)!.Dispose();
 	}
 
-	private void AddTag(TagItem tag)
+	private void AddTag(ITag tag)
 	{
 		var control = new TagControl { TagInfo = tag };
 		control.Click += TagControl_Click;
@@ -70,13 +63,13 @@ public partial class EditTagsForm : BaseForm
 
 	private IEnumerable<string?> GetLinks()
 	{
-		return FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Value?.Replace(' ', '-'));
+		return FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo?.Value?.Replace(' ', '-'));
 	}
 
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
 		DialogResult = DialogResult.OK;
-		ServiceCenter.Get<IAssetUtil>().SetFindItTag(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
+		ServiceCenter.Get<ITagsService>().SetTags(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
 		Close();
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}

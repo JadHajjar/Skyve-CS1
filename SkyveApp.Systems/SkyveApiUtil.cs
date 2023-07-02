@@ -20,14 +20,14 @@ public class SkyveApiUtil
 	private async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{
 		return await ApiUtil.Get<T>(KEYS.API_URL + url
-			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id.ToString(), KEYS.SALT)) }
+			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id?.ToString(), KEYS.SALT)) }
 			, queryParams);
 	}
 
 	private async Task<T?> Delete<T>(string url, params (string, object)[] queryParams)
 	{
 		return await ApiUtil.Delete<T>(KEYS.API_URL + url
-			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id.ToString(), KEYS.SALT)) }
+			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id?.ToString(), KEYS.SALT)) }
 			, queryParams);
 	}
 
@@ -35,7 +35,7 @@ public class SkyveApiUtil
 	{
 		return await ApiUtil.Post<TBody, T>(KEYS.API_URL + url
 			, body
-			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id.ToString(), KEYS.SALT)) }
+			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id?.ToString(), KEYS.SALT)) }
 			, queryParams);
 	}
 
@@ -84,7 +84,7 @@ public class SkyveApiUtil
 		return await Get<ReviewRequest>("/GetReviewRequest", (nameof(userId), userId), (nameof(packageId), packageId));
 	}
 
-	public async Task<UserProfile[]?> GetUserProfiles(ulong userId)
+	public async Task<UserProfile[]?> GetUserProfiles(object userId)
 	{
 		return await Get<UserProfile[]>("/GetUserProfiles", (nameof(userId), userId));
 	}

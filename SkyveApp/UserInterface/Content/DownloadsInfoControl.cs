@@ -1,13 +1,8 @@
-﻿using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Content;
@@ -109,8 +104,8 @@ internal class DownloadsInfoControl : SlickControl
 
 		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
 		{
-			SteamUtil.Download(_subscriptionsManager.PendingSubscribingTo);
-			ServiceCenter.Get<IContentUtil>().DeleteAll(_subscriptionsManager.PendingUnsubscribingFrom);
+			ServiceCenter.Get<IDownloadService>().Download(_subscriptionsManager.PendingSubscribingTo.Select(x => (IPackageIdentity)new GenericPackageIdentity(x)));
+			ServiceCenter.Get<IPackageManager>().DeleteAll(_subscriptionsManager.PendingUnsubscribingFrom);
 		}
 		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
 		{

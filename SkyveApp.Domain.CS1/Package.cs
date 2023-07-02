@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain.Systems;
+using SkyveApp.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -67,7 +68,8 @@ public class Package : ILocalPackageWithContents
 		set => id = value;
 	}
 
-	ILocalPackageWithContents? IPackage.LocalPackage => this;
+	ILocalPackageWithContents? IPackage.LocalParentPackage => this;
+	ILocalPackage? IPackage.LocalPackage => this;
 	string ILocalPackageIdentity.FilePath => Folder;
 
 	public override string ToString()

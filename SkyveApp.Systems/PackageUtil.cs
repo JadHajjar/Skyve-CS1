@@ -6,119 +6,216 @@ using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace SkyveApp.Systems;
-
-public class PackageUtil : IPackageNameUtil
+public class PackageUtil : IPackageUtil
 {
 	private readonly IServiceProvider _serviceProvider;
+	private readonly IModUtil _modUtil;
+	private readonly IAssetUtil _assetUtil;
+	private readonly IBulkUtil _bulkUtil;
 	private readonly ILocale _locale;
-	private readonly Regex _tagRegex = new(@"v?\d+\.\d+(\.\d+)*(-[\d\w]+)*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-	private readonly Regex _bracketsRegex = new(@"[\[\(](.+?)[\]\)]", RegexOptions.Compiled);
+	private readonly IPackageManager _contentManager;
+	private readonly IPackageNameUtil _packageUtil;
+	private readonly ISettings _settings;
 
-	public PackageUtil(IServiceProvider serviceProvider, ILocale locale)
+	public PackageUtil(IServiceProvider serviceProvider, IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager contentManager, ISettings settings)
 	{
 		_serviceProvider = serviceProvider;
+		_modUtil = modUtil;
+		_assetUtil = assetUtil;
+		_bulkUtil = bulkUtil;
 		_locale = locale;
+		_packageUtil = packageUtil;
+		_contentManager = contentManager;
+		_settings = settings;
 	}
 
-	public string CleanName(IPackageIdentity? package, bool keepTags = false)
+	public bool IsIncluded(ILocalPackage localPackage)
 	{
-		if (package?.Name is null)
-		{
-			return string.Empty;
-		}
-
-		var text = _tagRegex.Replace(package.Name, string.Empty);
-
-		return keepTags
-			? text.RemoveDoubleSpaces()
-			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
+		return IsIncluded(localPackage, out _);
 	}
 
-	public string CleanName(IPackage? package, out List<(Color Color, string Text)> tags, bool keepTags = false)
+	public bool IsIncluded(ILocalPackage localPackage, out bool partiallyIncluded)
 	{
-		tags = new();
-
-		if (package?.Name is null or "")
+		if (localPackage is ILocalPackageWithContents packageWithContents)
 		{
-			return _locale.Get("UnknownPackage");
-		}
+			var included = false;
+			var excluded = false;
 
-		var text = _tagRegex.Replace(package.Name, string.Empty);
-		var tagMatches = _bracketsRegex.Matches(text);
-
-		text = keepTags
-			? text.RemoveDoubleSpaces()
-			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
-
-		if (package.IsLocal)
-		{
-			tags.Add((FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), _locale.Get("Local").One.ToUpper()));
-		}
-
-		foreach (Match match in tagMatches)
-		{
-			var tagText = match.Groups[1].Value.Trim().ToLower();
-
-			if (!tags.Any(x => x.Text.Equals(tagText, StringComparison.InvariantCultureIgnoreCase)))
+			if (packageWithContents.Mod is not null)
 			{
-				if (tagText is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken")
+				if (IsIncluded(packageWithContents.Mod, out _))
 				{
-					continue;
+					included = true;
+				}
+				else
+				{
+					excluded = true;
+				}
+			}
+
+			foreach (var item in packageWithContents.Assets)
+			{
+				if (IsIncluded(item, out _))
+				{
+					included = true;
+				}
+				else
+				{
+					excluded = true;
 				}
 
-				var color = tagText switch
+				if (included && excluded)
 				{
-					"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
-					"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),
-					_ => (Color?)null
-				};
+					partiallyIncluded = true;
 
-				if (package.IsLocal && color is not null)
-				{
-					continue;
+					return true;
 				}
+			}
 
-				tags.Add((color ?? FormDesign.Design.ButtonColor, color is null ? tagText : LocaleHelper.GetGlobalText(tagText).One.ToUpper()));
+			partiallyIncluded = false;
+
+			return included;
+		}
+
+		partiallyIncluded = false;
+
+		return localPackage is IMod mod ? _modUtil.IsIncluded(mod) : localPackage is IAsset asset && _assetUtil.IsIncluded(asset);
+	}
+
+	public bool IsEnabled(ILocalPackage package)
+	{
+		return package is IMod mod
+			? _modUtil.IsEnabled(mod)
+			: package is not ILocalPackageWithContents packageWithContents || packageWithContents.Mod is null
+|| _modUtil.IsEnabled(packageWithContents.Mod);
+	}
+
+	public bool IsIncludedAndEnabled(ILocalPackage package)
+	{
+		return IsIncluded(package) && IsEnabled(package);
+	}
+
+	public void SetIncluded(ILocalPackage localPackage, bool value)
+	{
+		if (localPackage is ILocalPackageWithContents localPackageWithContents)
+		{
+			_bulkUtil.SetBulkIncluded(new[] { localPackage }, value);
+
+			if (!_settings.UserSettings.AdvancedIncludeEnable && localPackageWithContents.Mod is not null)
+			{
+				_modUtil.SetEnabled(localPackageWithContents.Mod, value);
+
+				return;
 			}
 		}
 
-		var workshopInfo = package.GetWorkshopInfo();
+		if (localPackage is IMod mod)
+		{
+			_modUtil.SetIncluded(mod, value);
+
+			if (_settings.UserSettings.LinkModAssets && mod.LocalParentPackage!.Assets.Any())
+			{
+				_bulkUtil.SetBulkIncluded(mod.LocalParentPackage!.Assets, value);
+			}
+
+			if (!_settings.UserSettings.AdvancedIncludeEnable)
+			{
+				_modUtil.SetEnabled(mod, value);
+				return;
+			}
+		}
+
+		if (localPackage is IAsset asset)
+		{
+			_assetUtil.SetIncluded(asset, value);
+		}
+	}
+
+	public void SetEnabled(ILocalPackage package, bool value)
+	{
+		if (package is IMod mod)
+		{
+			_modUtil.SetEnabled(mod, value);
+		}
+
+		if (package is ILocalPackageWithContents packageWithContents && packageWithContents.Mod is not null)
+		{
+			_modUtil.SetEnabled(packageWithContents.Mod, value);
+		}
+	}
+
+	public DownloadStatus GetStatus(IPackage mod, out string reason)
+	{
+		var workshopInfo = mod.GetWorkshopInfo();
 
 		if (workshopInfo is null)
 		{
-			return text;
-		}
-
-		if (workshopInfo.IsBanned)
-		{
-			tags.Add((FormDesign.Design.RedColor, _locale.Get("Banned").One.ToUpper()));
-		}
-		else if (workshopInfo.IsIncompatible)
-		{
-			tags.Add((FormDesign.Design.RedColor, _locale.Get("Incompatible").One.ToUpper()));
-		}
-		else
-		{
-			var info = _serviceProvider.GetService<ICompatibilityManager>().GetPackageInfo(package);
-
-			if (info.Stability is PackageStability.Broken)
+			if (mod.LocalParentPackage?.IsLocal ?? false)
 			{
-				tags.Add((Color.FromArgb(225, FormDesign.Design.RedColor), _locale.Get("Broken").One.ToUpper()));
+				reason = string.Empty;
+				return DownloadStatus.None;
 			}
+
+			reason = string.Empty;
+			return DownloadStatus.None;
 		}
 
-		return text;
+		if (workshopInfo.IsRemoved)
+		{
+			reason = _locale.Get("PackageIsRemoved").Format(_packageUtil.CleanName(mod));
+			return DownloadStatus.Removed;
+		}
+
+		if (workshopInfo.ServerTime == default)
+		{
+			reason = _locale.Get("PackageIsUnknown").Format(_packageUtil.CleanName(mod));
+			return DownloadStatus.Unknown;
+		}
+
+		var updatedServer = workshopInfo.ServerTime;
+		var updatedLocal = mod.LocalParentPackage?.LocalTime ?? DateTime.MinValue;
+		var sizeServer = workshopInfo.ServerSize;
+		var localSize = mod.LocalParentPackage?.LocalSize ?? 0;
+
+		if (updatedLocal < updatedServer)
+		{
+			var certain = updatedLocal < updatedServer.AddHours(-24);
+
+			reason = certain
+				? _locale.Get("PackageIsOutOfDate").Format(_packageUtil.CleanName(mod), (updatedServer - updatedLocal).ToReadableString(true))
+				: _locale.Get("PackageIsMaybeOutOfDate").Format(_packageUtil.CleanName(mod), updatedServer.ToLocalTime().ToRelatedString(true));
+			return DownloadStatus.OutOfDate;
+		}
+
+		if (localSize < sizeServer && sizeServer > 0)
+		{
+			reason = _locale.Get("PackageIsIncomplete").Format(_packageUtil.CleanName(mod), localSize.SizeString(), sizeServer.SizeString());
+			return DownloadStatus.PartiallyDownloaded;
+		}
+
+		reason = string.Empty;
+		return DownloadStatus.OK;
 	}
 
-	public string GetVersionText(string name)
+	public IEnumerable<ILocalPackage> GetPackagesThatReference(IPackage package, bool withExcluded = false)
 	{
-		var match = Regex.Match(name, @"v?(\d+\.\d+(\.\d+)*(-[\d\w]+)*)", RegexOptions.IgnoreCase);
+		var compatibilityUtil = _serviceProvider.GetService<ICompatibilityManager>();
+		var packages = withExcluded || _serviceProvider.GetService<ISettings>().UserSettings.ShowAllReferencedPackages
+			? _contentManager.Packages.ToList()
+			: _contentManager.Packages.AllWhere(IsIncluded);
 
-		return match.Success ? "v" + match.Groups[1].Value : string.Empty;
+		foreach (var localPackage in packages)
+		{
+			foreach (var requirement in localPackage.Requirements)
+			{
+				if (compatibilityUtil.GetFinalSuccessor(requirement)?.Id == package.Id)
+				{
+					yield return localPackage;
+				}
+			}
+		}
 	}
 }

@@ -1,14 +1,9 @@
-﻿using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -16,9 +11,9 @@ internal class PC_ViewCollection : PC_GenericPackageList
 {
 	private readonly ulong _id;
 
-	internal PC_ViewCollection(IPackage collection) : base(collection.RequiredPackages.Select(x => new Playset.Asset { SteamId = x }))
+	internal PC_ViewCollection(IPackage collection) : base(collection.Requirements, true)
 	{
-		_id = collection.SteamId;
+		_id = collection.Id;
 
 		TLP_Main.SetColumn(P_FiltersContainer, 0);
 		TLP_Main.SetColumnSpan(P_FiltersContainer, TLP_Main.ColumnCount);
@@ -27,7 +22,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 		{
 			Collection = true
 		};
-		PB_Icon.LoadImage(collection.IconUrl, ServiceCenter.Get<IImageService>().GetImage);
+		PB_Icon.LoadImage(collection.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
 
 		TLP_Main.Controls.Add(PB_Icon, 0, 0);
 		TLP_Main.SetRowSpan(PB_Icon, 3);

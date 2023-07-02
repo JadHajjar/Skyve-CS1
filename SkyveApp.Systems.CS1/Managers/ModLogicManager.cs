@@ -123,7 +123,7 @@ internal class ModLogicManager : IModLogicManager
 		return false;
 	}
 
-	public bool AreMultipleLOMsPresent()
+	public bool AreMultipleSkyvesPresent()
 	{
 		return (_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.Count ?? 0) > 1;
 	}

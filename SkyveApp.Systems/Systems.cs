@@ -13,14 +13,15 @@ public static class SystemsProgram
 
 	public static IServiceCollection AddSkyveSystems(this IServiceCollection services)
 	{
+		services.AddTransient<IBulkUtil, BulkUtil>();
+		services.AddSingleton<IImageService, ImageSystem>();
+		services.AddSingleton<IIOUtil, IOUtil>();
 		services.AddSingleton<ILogger, LoggerSystem>();
 		services.AddSingleton<INotifier, NotifierSystem>();
-		services.AddSingleton<IImageService, ImageSystem>();
+		services.AddTransient<IPackageNameUtil, PackageNameUtil>();
+		services.AddTransient<IPackageUtil, PackageUtil>();
+		services.AddTransient<SkyveApiUtil>();
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
-
-		services.AddTransient<IBulkUtil, BulkUtil>();
-		services.AddTransient<IPackageNameUtil, PackageUtil>();
-		services.AddTransient<IPackageUtil, ContentUtil>();
 
 		return services;
 	}

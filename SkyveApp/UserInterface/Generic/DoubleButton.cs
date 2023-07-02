@@ -1,8 +1,5 @@
-﻿using Extensions;
+﻿using SlickControls;
 
-using SlickControls;
-
-using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;

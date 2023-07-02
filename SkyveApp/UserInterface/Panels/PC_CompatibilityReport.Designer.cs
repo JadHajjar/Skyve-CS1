@@ -1,6 +1,4 @@
-﻿using SkyveApp.Services;
-
-namespace SkyveApp.UserInterface.Panels;
+﻿namespace SkyveApp.UserInterface.Panels;
 
 partial class PC_CompatibilityReport
 {
@@ -17,7 +15,7 @@ partial class PC_CompatibilityReport
 	{
 		if (disposing && (components != null))
 		{
-			_compatibilityManager.ReportProcessed -= CompatibilityManager_ReportProcessed;
+			_notifier.CompatibilityReportProcessed -= CompatibilityManager_ReportProcessed;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

@@ -1,6 +1,6 @@
 ﻿using Extensions;
 
-namespace SkyveApp.Utilities;
+namespace SkyveApp.Systems.CS1.Utilities;
 public class LocaleCRNotes : LocaleHelper
 {
 	private static readonly LocaleCRNotes _instance = new();

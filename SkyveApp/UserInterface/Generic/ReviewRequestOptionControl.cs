@@ -1,6 +1,4 @@
-﻿using Extensions;
-
-using SlickControls;
+﻿using SlickControls;
 
 using System.ComponentModel;
 using System.Drawing;

@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using SkyveApp.Systems;
+
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +10,7 @@ public class Mod : IMod
 {
 	public Mod(ILocalPackageWithContents package, string dllPath, Version version)
 	{
-		LocalPackage = package;
+		LocalParentPackage = package;
 		FilePath = dllPath.FormatPath();
 		Version = version;
 	}
@@ -17,16 +19,17 @@ public class Mod : IMod
 	public Version Version { get; }
 	public bool IsMod { get; } = true;
 
-	public ILocalPackageWithContents LocalPackage { get; }
-	public long LocalSize => LocalPackage.LocalSize;
-	public DateTime LocalTime => LocalPackage.LocalTime;
-	public string Folder => LocalPackage.Folder;
-	public bool IsLocal => LocalPackage.IsLocal;
-	public bool IsBuiltIn => LocalPackage.IsBuiltIn;
-	public IEnumerable<IPackageRequirement> Requirements => LocalPackage.Requirements;
-	public ulong Id => LocalPackage.Id;
-	public string Name => LocalPackage.Name;
-	public string? Url => LocalPackage.Url;
+	public ILocalPackageWithContents LocalParentPackage { get; }
+	public long LocalSize => LocalParentPackage.LocalSize;
+	public DateTime LocalTime => LocalParentPackage.LocalTime;
+	public string Folder => LocalParentPackage.Folder;
+	public bool IsLocal => LocalParentPackage.IsLocal;
+	public bool IsBuiltIn => LocalParentPackage.IsBuiltIn;
+	public IEnumerable<IPackageRequirement> Requirements => LocalParentPackage.Requirements;
+	public ulong Id => LocalParentPackage.Id;
+	public string Name => LocalParentPackage.Name;
+	public string? Url => LocalParentPackage.Url;
+	ILocalPackage? IPackage.LocalPackage => this;
 
 	public override bool Equals(object? obj)
 	{
@@ -41,7 +44,7 @@ public class Mod : IMod
 
 	public IWorkshopInfo? GetWorkshopInfo()
 	{
-		return LocalPackage.GetWorkshopInfo();
+		return LocalParentPackage.GetWorkshopInfo();
 	}
 
 	public override string ToString()

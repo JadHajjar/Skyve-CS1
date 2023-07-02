@@ -3,7 +3,7 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SkyveShared;
 
@@ -15,7 +15,7 @@ using System.IO;
 using System.Linq;
 
 namespace SkyveApp.Systems.CS1.Managers;
-public class CentralManager
+internal class CentralManager : ICentralManager
 {
 	private readonly IModLogicManager _modLogicManager;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -176,7 +176,7 @@ public class CentralManager
 		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Skyve from the main menu after deleting this file.");
 	}
 
-	public void AnalyzePackages(List<ILocalPackageWithContents> content)
+	private void AnalyzePackages(List<ILocalPackageWithContents> content)
 	{
 		var firstTime = _updateManager.IsFirstTime();
 		var blackList = new List<ILocalPackageWithContents>();

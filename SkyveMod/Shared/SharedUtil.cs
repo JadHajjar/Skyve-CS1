@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 
 #if SkyveApp
 using SkyveApp;
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 #endif
 

@@ -17,6 +17,8 @@ internal class NotifierSystem : INotifier
 	public event Action? RefreshUI;
 	public event Action<Exception>? LoggerFailed;
 	public event Action? CompatibilityReportProcessed;
+	public event Action? WorkshopPackagesInfoLoaded;
+	public event Action? WorkshopUsersInfoLoaded;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -37,8 +39,8 @@ internal class NotifierSystem : INotifier
 
 	public bool IsContentLoaded { get; private set; }
 	public bool BulkUpdating { get; set; }
-	public bool ApplyingProfile { get; set; }
-	public bool ProfilesLoaded { get; set; }
+	public bool ApplyingPlayset { get; set; }
+	public bool PlaysetsLoaded { get; set; }
 
 	public void OnContentLoaded()
 	{
@@ -100,5 +102,15 @@ internal class NotifierSystem : INotifier
 	public void OnCompatibilityReportProcessed()
 	{
 		CompatibilityReportProcessed?.Invoke();
+	}
+
+	public void OnWorkshopPackagesInfoLoaded()
+	{
+		WorkshopPackagesInfoLoaded?.Invoke();
+	}
+
+	public void OnWorkshopUsersInfoLoaded()
+	{
+		WorkshopUsersInfoLoaded?.Invoke();
 	}
 }

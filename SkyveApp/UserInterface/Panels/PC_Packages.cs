@@ -1,17 +1,10 @@
-﻿using Extensions;
-
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
-
-using System.Collections.Generic;
-using System.Linq;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 namespace SkyveApp.UserInterface.Panels;
-internal class PC_Packages : PC_ContentList<Package>
+internal class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 {
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
-	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
+	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
 
 	public PC_Packages()
 	{
@@ -24,18 +17,18 @@ internal class PC_Packages : PC_ContentList<Package>
 		Text = $"{Locale.Package.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
 	}
 
-	protected override IEnumerable<Package> GetItems()
+	protected override IEnumerable<ILocalPackageWithContents> GetItems()
 	{
-		if (_settings.SessionSettings.UserSettings.FilterOutPackagesWithOneAsset || _settings.SessionSettings.UserSettings.FilterOutPackagesWithMods)
+		if (_settings.UserSettings.FilterOutPackagesWithOneAsset || _settings.UserSettings.FilterOutPackagesWithMods)
 		{
 			return _contentManager.Packages.Where(x =>
 			{
-				if (_settings.SessionSettings.UserSettings.FilterOutPackagesWithOneAsset && (x.Assets?.Count() ?? 0) == 1)
+				if (_settings.UserSettings.FilterOutPackagesWithOneAsset && (x.Assets?.Count() ?? 0) == 1)
 				{
 					return false;
 				}
 
-				if (_settings.SessionSettings.UserSettings.FilterOutPackagesWithMods && x.Mod is not null)
+				if (_settings.UserSettings.FilterOutPackagesWithMods && x.Mod is not null)
 				{
 					return false;
 				}
@@ -53,7 +46,7 @@ internal class PC_Packages : PC_ContentList<Package>
 
 		foreach (var item in _contentManager.Packages)
 		{
-			if (item.IsIncluded)
+			if (item.IsIncluded())
 			{
 				packagesIncluded++;
 
@@ -61,7 +54,7 @@ internal class PC_Packages : PC_ContentList<Package>
 				{
 					modsIncluded++;
 
-					if (item.Mod.IsEnabled)
+					if (item.Mod.IsEnabled())
 					{
 						modsEnabled++;
 					}
@@ -71,7 +64,7 @@ internal class PC_Packages : PC_ContentList<Package>
 
 		var total = LC_Items.ItemCount;
 
-		if (!_settings.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
 			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
 		}
@@ -87,15 +80,5 @@ internal class PC_Packages : PC_ContentList<Package>
 	protected override LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Package;
-	}
-
-	protected override void SetIncluded(IEnumerable<Package> filteredItems, bool included)
-	{
-		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems, included);
-	}
-
-	protected override void SetEnabled(IEnumerable<Package> filteredItems, bool enabled)
-	{
-		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems.Where(x => x.Mod is not null).Select(x => x.Mod!), enabled);
 	}
 }

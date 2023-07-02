@@ -1,44 +1,34 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
+﻿using SkyveApp.Domain.Systems;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfilePackage.Rectangles>
+internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, OtherProfilePackage.Rectangles>
 {
-	public IEnumerable<Playset> FilteredItems => SafeGetItems().Select(x => x.Item);
+	public IEnumerable<ICustomPlayset> FilteredItems => SafeGetItems().Select(x => x.Item);
 
 	public IPackage Package { get; }
 
 	private readonly IPlaysetManager _profileManager;
 	private readonly ISettings _settings;
+	private readonly INotifier _notifier;
 
 	public OtherProfilePackage(IPackage package)
 	{
-		_profileManager = ServiceCenter.Get<IPlaysetManager>();
-		_settings = ServiceCenter.Get<ISettings>();
+		ServiceCenter.Get(out _notifier, out _settings, out _profileManager);
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		Package = package;
-		SetItems(_profileManager.Profiles.Skip(1));
+		SetItems(_profileManager.Playsets.Skip(1));
 
-		_profileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
-		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
+		_notifier.PlaysetChanged += ProfileManager_ProfileUpdated;
 	}
 
-	private void ProfileManager_ProfileChanged(Playset obj)
-	{
-		Invalidate();
-	}
 
 	private void ProfileManager_ProfileUpdated()
 	{
@@ -49,8 +39,8 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 	{
 		if (disposing)
 		{
-			_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
-			_profileManager.ProfileUpdated -= ProfileManager_ProfileUpdated;
+			_notifier.PlaysetUpdated -= ProfileManager_ProfileUpdated;
+			_notifier.PlaysetChanged -= ProfileManager_ProfileUpdated;
 		}
 
 		base.Dispose(disposing);
@@ -58,19 +48,19 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 
 	protected override void UIChanged()
 	{
-		ItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? 48 : 28;
+		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 48 : 28;
 
 		base.UIChanged();
 
 		Padding = UI.Scale(new Padding(3, 1, 3, 1), UI.FontScale);
 	}
 
-	protected override IEnumerable<DrawableItem<Playset, OtherProfilePackage.Rectangles>> OrderItems(IEnumerable<DrawableItem<Playset, OtherProfilePackage.Rectangles>> items)
+	protected override IEnumerable<DrawableItem<ICustomPlayset, OtherProfilePackage.Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, OtherProfilePackage.Rectangles>> items)
 	{
-		return items.OrderByDescending(x => x.Item.LastEditDate);
+		return items.OrderByDescending(x => x.Item.DateUpdated);
 	}
 
-	protected override bool IsItemActionHovered(DrawableItem<Playset, OtherProfilePackage.Rectangles> item, Point location)
+	protected override bool IsItemActionHovered(DrawableItem<ICustomPlayset, OtherProfilePackage.Rectangles> item, Point location)
 	{
 		var rects = item.Rectangles;
 
@@ -90,7 +80,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 		return false;
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<Playset, Rectangles> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -98,13 +88,13 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 
 		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var isIncluded = _profileManager.IsPackageIncludedInProfile(Package, item.Item);
+			var isIncluded = _profileManager.IsPackageIncludedInPlayset(Package, item.Item);
 			_profileManager.SetIncludedFor(Package, item.Item, !isIncluded);
 		}
 
 		if (rects.LoadRect.Contains(e.Location))
 		{
-			_profileManager.SetProfile(item.Item);
+			_profileManager.SetCurrentPlayset(item.Item);
 		}
 	}
 
@@ -128,9 +118,9 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 		}
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<Playset, OtherProfilePackage.Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, OtherProfilePackage.Rectangles> e)
 	{
-		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.UserSettings.LargeItemOnHover;
 		var rects = e.Rects;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -138,7 +128,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 
 		base.OnPaintItemList(e);
 
-		var isIncluded = _profileManager.IsPackageIncludedInProfile(Package, e.Item);
+		var isIncluded = _profileManager.IsPackageIncludedInPlayset(Package, e.Item);
 
 		if (isIncluded)
 		{
@@ -169,8 +159,8 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 
 		e.Graphics.DrawString(e.Item.Name, UI.Font(large ? 11.25F : 9F, FontStyle.Bold), new SolidBrush(e.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.ActiveForeColor : ForeColor), rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
-		var rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Assets.Count, Locale.Asset.FormatPlural(e.Item.Assets.Count).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
-		rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.Mods.Count, Locale.Mod.FormatPlural(e.Item.Mods.Count).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
+		var rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect, ContentAlignment.MiddleRight);
+		rect = DrawLabel(e, Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), rects.TextRect.Pad(0, 0, rect.Width + Padding.Left, 0), ContentAlignment.MiddleRight);
 
 		if (e.Item == _profileManager.CurrentPlayset)
 		{
@@ -187,14 +177,14 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 		}
 	}
 
-	private Rectangle DrawLabel(ItemPaintEventArgs<Playset, OtherProfilePackage.Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
+	private Rectangle DrawLabel(ItemPaintEventArgs<ICustomPlayset, OtherProfilePackage.Rectangles> e, string? text, Bitmap? icon, Color color, Rectangle rectangle, ContentAlignment alignment)
 	{
 		if (text == null)
 		{
 			return Rectangle.Empty;
 		}
 
-		var large = _settings.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = _settings.UserSettings.LargeItemOnHover;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)
@@ -220,7 +210,7 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 		return rectangle;
 	}
 
-	protected override Rectangles GenerateRectangles(Playset item, Rectangle rectangle)
+	protected override Rectangles GenerateRectangles(ICustomPlayset item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item)
 		{
@@ -235,16 +225,16 @@ internal class OtherProfilePackage : SlickStackedListControl<Playset, OtherProfi
 		return rects;
 	}
 
-	public class Rectangles : IDrawableItemRectangles<Playset>
+	public class Rectangles : IDrawableItemRectangles<ICustomPlayset>
 	{
 		internal Rectangle IncludedRect;
 		internal Rectangle IconRect;
 		internal Rectangle LoadRect;
 		internal Rectangle TextRect;
 
-		public Playset Item { get; set; }
+		public ICustomPlayset Item { get; set; }
 
-		public Rectangles(Playset item)
+		public Rectangles(ICustomPlayset item)
 		{
 			Item = item;
 		}

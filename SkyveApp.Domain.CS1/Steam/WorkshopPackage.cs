@@ -27,9 +27,11 @@ public class WorkshopPackage : IPackage
 	public bool IsBuiltIn { get; }
 	public string Name => GetInfo()?.Name ?? ServiceCenter.Get<ILocale>().Get("UnknownPackage");
 	public bool IsMod => GetInfo()?.IsMod ?? false;
-	public ILocalPackageWithContents? LocalPackage => ServiceCenter.Get<IPackageManager>().GetPackageById(this);
+	public ILocalPackageWithContents? LocalParentPackage => ServiceCenter.Get<IPackageManager>().GetPackageById(this);
+	public ILocalPackage? LocalPackage => ServiceCenter.Get<IPackageManager>().GetPackageById(this);
 	public IEnumerable<IPackageRequirement> Requirements => GetInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 	public IEnumerable<ITag> Tags => GetInfo()?.Tags.Select(x => (ITag)new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<ITag>();
+
 
 	private IWorkshopInfo? GetInfo()
 	{

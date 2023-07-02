@@ -1,21 +1,9 @@
-﻿using Extensions;
-
-using SkyveApp.Domain;
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
-using SkyveApp.Systems.Compatibility;
+﻿using SkyveApp.Domain.Enums;
 using SkyveApp.Systems.Compatibility.Domain;
 
 using SlickControls;
 
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.CompatibilityReport;
@@ -24,9 +12,11 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 	private readonly TableLayoutPanel[] _panels;
 	private int controlCount;
 	private readonly ICompatibilityManager _compatibilityManager;
-
+	private readonly INotifier _notifier;
 	public PackageCompatibilityReportControl(IPackage package)
 	{
+		ServiceCenter.Get(out _notifier, out _compatibilityManager);
+
 		Package = package;
 		AutoSize = true;
 		AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -51,8 +41,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 			Controls.Add(_panels[i], i, 0);
 		}
 
-		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
-		_compatibilityManager.ReportProcessed += CentralManager_PackageInformationUpdated;
+		_notifier.CompatibilityReportProcessed += CentralManager_PackageInformationUpdated;
 	}
 
 	private void CentralManager_PackageInformationUpdated()
@@ -65,7 +54,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 	protected override void Dispose(bool disposing)
 	{
-		_compatibilityManager.ReportProcessed -= CentralManager_PackageInformationUpdated;
+		_notifier.CompatibilityReportProcessed -= CentralManager_PackageInformationUpdated;
 		base.Dispose(disposing);
 	}
 
@@ -91,7 +80,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 			lock (this)
 			{
-				Report = _compatibilityManager.GetCompatibilityInfo( Package,true);
+				Report = _compatibilityManager.GetCompatibilityInfo(Package, true);
 
 				for (var i = 0; i < _panels.Length; i++)
 				{
@@ -108,7 +97,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 					GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
 				}
 
-				ColumnStyles[2].Width = controlCount > 2 ? 100/3F : 0;
+				ColumnStyles[2].Width = controlCount > 2 ? 100 / 3F : 0;
 			}
 		}
 		finally
@@ -117,7 +106,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		}
 	}
 
-	private Color GetTypeColor(IGrouping<ReportType, ReportItem> item)
+	private Color GetTypeColor(IGrouping<ReportType, ICompatibilityItem> item)
 	{
 		return item.Max(x => x.Status.Notification).GetColor().MergeColor(BackColor, 15);
 	}

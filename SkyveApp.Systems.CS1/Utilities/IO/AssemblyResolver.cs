@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace SkyveApp.Utilities.IO;
-public class AssemblyResolver : BaseAssemblyResolver
+namespace SkyveApp.Systems.CS1.Utilities.IO;
+internal class AssemblyResolver : BaseAssemblyResolver
 {
 	private readonly IDictionary<string, AssemblyDefinition> cache
 		= new Dictionary<string, AssemblyDefinition>(StringComparer.Ordinal);
@@ -23,14 +23,7 @@ public class AssemblyResolver : BaseAssemblyResolver
 			throw new ArgumentNullException("name");
 		}
 
-		if (cache.TryGetValue(name.FullName, out var assembly))
-		{
-			return assembly;
-		}
-		else
-		{
-			return cache[name.FullName] = Resolve(name, ReaderParameters);
-		}
+		return cache.TryGetValue(name.FullName, out var assembly) ? assembly : (cache[name.FullName] = Resolve(name, ReaderParameters));
 	}
 
 	protected void RegisterAssembly(AssemblyDefinition assembly)

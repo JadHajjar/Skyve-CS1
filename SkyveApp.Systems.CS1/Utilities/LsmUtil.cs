@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SkyveApp.Utilities;
+namespace SkyveApp.Systems.CS1.Utilities;
 public static class LsmUtil
 {
 	public static bool IsValidLsmReportFile(string filePath)

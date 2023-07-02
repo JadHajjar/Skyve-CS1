@@ -1,18 +1,9 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -77,9 +68,9 @@ public partial class PC_Options : PanelContent
 		{
 			if (!string.IsNullOrWhiteSpace(cb.Tag?.ToString()))
 			{
-				cb.Checked = (bool)typeof(UserSettings)
+				cb.Checked = (bool)_settings.UserSettings.GetType()
 					.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-					.GetValue(_settings.SessionSettings.UserSettings);
+					.GetValue(_settings.UserSettings);
 
 				SlickTip.SetTo(cb, LocaleHelper.GetGlobalText($"{cb.Text}_Tip"));
 
@@ -155,9 +146,9 @@ public partial class PC_Options : PanelContent
 
 		var cb = (sender as SlickCheckbox)!;
 
-		typeof(UserSettings)
+		_settings.UserSettings.GetType()
 			.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-			.SetValue(_settings.SessionSettings.UserSettings, cb.Checked);
+			.SetValue(_settings.UserSettings, cb.Checked);
 
 		_settings.SessionSettings.Save();
 	}
@@ -171,7 +162,7 @@ public partial class PC_Options : PanelContent
 	{
 		try
 		{
-			LocaleHelper.SetLanguage(new (DD_Language.SelectedItem));
+			LocaleHelper.SetLanguage(new(DD_Language.SelectedItem));
 		}
 		catch
 		{
@@ -220,8 +211,7 @@ public partial class PC_Options : PanelContent
 
 	private void B_Reset_Click(object sender, EventArgs e)
 	{
-		_settings.SessionSettings.UserSettings = new();
-		_settings.SessionSettings.Save();
+		_settings.ResetUserSettings();
 
 		ApplyCurrentSettings();
 	}
@@ -237,8 +227,7 @@ public partial class PC_Options : PanelContent
 
 		_settings.SessionSettings.FirstTimeSetupCompleted = false;
 		_settings.SessionSettings.Save();
-
-		new FolderSettings().Save();
+		_settings.ResetFolderSettings();
 
 		Application.Exit();
 	}
@@ -255,6 +244,6 @@ public partial class PC_Options : PanelContent
 
 	private void AssumeInternetConnectivity_CheckChanged(object sender, EventArgs e)
 	{
-		ConnectionHandler.AssumeInternetConnectivity= CB_AssumeInternetConnectivity.Checked;
+		ConnectionHandler.AssumeInternetConnectivity = CB_AssumeInternetConnectivity.Checked;
 	}
 }

@@ -4,10 +4,13 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Legacy;
 using SkyveApp.Domain.CS1.Utilities;
+using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SkyveShared;
+
+using SlickControls;
 
 using System;
 using System.Collections.Generic;
@@ -17,20 +20,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.Systems.CS1.Managers;
-public class PlaysetManager : IPlaysetManager
+internal class PlaysetManager : IPlaysetManager
 {
-	private readonly List<Playset> _profiles;
+	private readonly List<ICustomPlayset> _profiles;
 	private bool disableAutoSave;
 	private readonly FileSystemWatcher? _watcher;
 
-	public Playset CurrentProfile { get; private set; }
-	public IEnumerable<Playset> Profiles
+	public ICustomPlayset CurrentPlayset { get; private set; }
+	public IEnumerable<ICustomPlayset> Playsets
 	{
 		get
 		{
 			yield return Playset.TemporaryPlayset;
 
-			List<Playset> profiles;
+			List<ICustomPlayset> profiles;
 
 			lock (_profiles)
 			{
@@ -44,9 +47,7 @@ public class PlaysetManager : IPlaysetManager
 		}
 	}
 
-	public event Action<Playset>? ProfileChanged;
-
-	public event Action? ProfileUpdated;
+	public event PromptMissingItemsDelegate? PromptMissingItems;
 
 	private readonly ILogger _logger;
 	private readonly ILocationManager _locationManager;
@@ -57,26 +58,29 @@ public class PlaysetManager : IPlaysetManager
 	private readonly INotifier _notifier;
 	private readonly IModUtil _modUtil;
 	private readonly IAssetUtil _assetUtil;
+	private readonly IDlcManager _dlcManager;
 
-	public PlaysetManager(ILogger logger, ILocationManager locationManager, ISettings settings, IPackageManager packageManager, ICompatibilityManager compatibilityManager, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil)
+	public PlaysetManager(ILogger logger, ILocationManager locationManager, ISettings settings, IPackageManager packageManager, IPackageUtil packageUtil, ICompatibilityManager compatibilityManager, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IDlcManager dlcManager)
 	{
 		_logger = logger;
 		_locationManager = locationManager;
 		_settings = settings;
 		_packageManager = packageManager;
+		_packageUtil = packageUtil;
 		_compatibilityManager = compatibilityManager;
 		_notifier = notifier;
 		_modUtil = modUtil;
 		_assetUtil = assetUtil;
+		_dlcManager = dlcManager;
 
 		try
 		{
-			var current = LoadCurrentProfile();
+			var current = LoadCurrentPlayset();
 
 			if (current != null)
 			{
 				_profiles = new() { current };
-				CurrentProfile = current;
+				CurrentPlayset = current;
 			}
 		}
 		catch (Exception ex)
@@ -86,15 +90,15 @@ public class PlaysetManager : IPlaysetManager
 
 		_profiles ??= new();
 
-		CurrentProfile ??= Playset.TemporaryPlayset;
+		CurrentPlayset ??= Playset.TemporaryPlayset;
 
 		if (Directory.Exists(_locationManager.SkyveAppDataPath))
 		{
-			Directory.CreateDirectory(_locationManager.SkyveProfilesAppDataPath);
+			Directory.CreateDirectory(_locationManager.SkyvePlaysetsAppDataPath);
 
 			_watcher = new FileSystemWatcher
 			{
-				Path = _locationManager.SkyveProfilesAppDataPath,
+				Path = _locationManager.SkyvePlaysetsAppDataPath,
 				NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 				Filter = "*.json"
 			};
@@ -102,41 +106,41 @@ public class PlaysetManager : IPlaysetManager
 
 		if (!CommandUtil.NoWindow)
 		{
-			new BackgroundAction(ConvertLegacyProfiles).Run();
-			new BackgroundAction(LoadAllProfiles).Run();
+			new BackgroundAction(ConvertLegacyPlaysets).Run();
+			new BackgroundAction(LoadAllPlaysets).Run();
 		}
 
 		_notifier.AutoSaveRequested += OnAutoSave;
 	}
 
-	private Playset? LoadCurrentProfile()
+	private ICustomPlayset? LoadCurrentPlayset()
 	{
 		if (_settings.SessionSettings.CurrentPlayset is null or "" && CommandUtil.PreSelectedProfile is null or "")
 		{
 			return null;
 		}
 
-		var profile = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, (CommandUtil.PreSelectedProfile ?? _settings.SessionSettings.CurrentPlayset) + ".json");
+		var profile = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, (CommandUtil.PreSelectedProfile ?? _settings.SessionSettings.CurrentPlayset) + ".json");
 
 		if (!CrossIO.FileExists(profile))
 		{
 			return null;
 		}
 
-		var newProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(profile));
+		var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(profile));
 
-		if (newProfile != null)
+		if (newPlayset != null)
 		{
-			newProfile.Name = Path.GetFileNameWithoutExtension(profile);
-			newProfile.LastEditDate = File.GetLastWriteTime(profile);
-			newProfile.DateCreated = File.GetCreationTime(profile);
+			newPlayset.Name = Path.GetFileNameWithoutExtension(profile);
+			newPlayset.LastEditDate = File.GetLastWriteTime(profile);
+			newPlayset.DateCreated = File.GetCreationTime(profile);
 
-			if (newProfile.LastUsed == DateTime.MinValue)
+			if (newPlayset.LastUsed == DateTime.MinValue)
 			{
-				newProfile.LastUsed = newProfile.LastEditDate;
+				newPlayset.LastUsed = newPlayset.LastEditDate;
 			}
 
-			return newProfile;
+			return newPlayset;
 		}
 		else
 		{
@@ -146,7 +150,7 @@ public class PlaysetManager : IPlaysetManager
 		return null;
 	}
 
-	public void ConvertLegacyProfiles()
+	public void ConvertLegacyPlaysets()
 	{
 		if (!_settings.SessionSettings.FirstTimeSetupCompleted)
 		{
@@ -155,55 +159,55 @@ public class PlaysetManager : IPlaysetManager
 
 		_logger.Info("Checking for Legacy profiles");
 
-		var legacyProfilePath = CrossIO.Combine(_locationManager.AppDataPath, "LoadOrder", "LOMProfiles");
+		var legacyPlaysetPath = CrossIO.Combine(_locationManager.AppDataPath, "LoadOrder", "LOMPlaysets");
 
-		if (!Directory.Exists(legacyProfilePath))
+		if (!Directory.Exists(legacyPlaysetPath))
 		{
 			return;
 		}
 
 		_logger.Info("Checking for Legacy profiles");
 
-		foreach (var profile in Directory.EnumerateFiles(legacyProfilePath, "*.xml"))
+		foreach (var profile in Directory.EnumerateFiles(legacyPlaysetPath, "*.xml"))
 		{
-			var newName = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
+			var newName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
 
 			if (CrossIO.FileExists(newName))
 			{
-				_logger.Info($"Profile '{newName}' already exists, skipping..");
+				_logger.Info($"Playset '{newName}' already exists, skipping..");
 				continue;
 			}
 
 			_logger.Info($"Converting profile '{newName}'..");
 
-			ConvertLegacyProfile(profile);
+			ConvertLegacyPlayset(profile);
 		}
 	}
 
-	public Playset? ConvertLegacyProfile(string profilePath, bool removeLegacyFile = true)
+	public ICustomPlayset? ConvertLegacyPlayset(string profilePath, bool removeLegacyFile = true)
 	{
-		var legacyProfilePath = CrossIO.Combine(_locationManager.AppDataPath, "LoadOrder", "LOMProfiles");
-		var legacyProfile = LoadOrderProfile.Deserialize(profilePath);
-		var newProfile = legacyProfile?.ToLot2Profile(Path.GetFileNameWithoutExtension(profilePath));
+		var legacyPlaysetPath = CrossIO.Combine(_locationManager.AppDataPath, "LoadOrder", "LOMPlaysets");
+		var legacyPlayset = LoadOrderProfile.Deserialize(profilePath);
+		var newPlayset = legacyPlayset?.ToSkyvePlayset(Path.GetFileNameWithoutExtension(profilePath));
 
-		if (newProfile != null)
+		if (newPlayset != null)
 		{
-			newProfile.LastEditDate = File.GetLastWriteTime(profilePath);
-			newProfile.DateCreated = File.GetCreationTime(profilePath);
-			newProfile.LastUsed = newProfile.LastEditDate;
+			newPlayset.LastEditDate = File.GetLastWriteTime(profilePath);
+			newPlayset.DateCreated = File.GetCreationTime(profilePath);
+			newPlayset.LastUsed = newPlayset.LastEditDate;
 
 			lock (_profiles)
 			{
-				_profiles.Add(newProfile);
+				_profiles.Add(newPlayset);
 			}
 
-			Save(newProfile, true);
+			Save(newPlayset, true);
 
 			if (removeLegacyFile)
 			{
-				Directory.CreateDirectory(CrossIO.Combine(legacyProfilePath, "Legacy"));
+				Directory.CreateDirectory(CrossIO.Combine(legacyPlaysetPath, "Legacy"));
 
-				File.Move(profilePath, CrossIO.Combine(legacyProfilePath, "Legacy", Path.GetFileName(profilePath)));
+				File.Move(profilePath, CrossIO.Combine(legacyPlaysetPath, "Legacy", Path.GetFileName(profilePath)));
 			}
 		}
 		else
@@ -211,21 +215,21 @@ public class PlaysetManager : IPlaysetManager
 			_logger.Error($"Could not load the profile: '{profilePath}'");
 		}
 
-		return newProfile;
+		return newPlayset;
 	}
 
 	private void CentralManager_ContentLoaded()
 	{
 		new BackgroundAction(() =>
 		{
-			List<Playset> profiles;
+			List<IPlayset> profiles;
 
 			lock (_profiles)
 			{
 				profiles = new(_profiles);
 			}
 
-			foreach (var profile in profiles)
+			foreach (Playset profile in profiles)
 			{
 				profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
 #if DEBUG
@@ -238,11 +242,11 @@ public class PlaysetManager : IPlaysetManager
 #endif
 			}
 
-			ProfileUpdated?.Invoke();
+			_notifier.OnPlaysetUpdated();
 		}).Run();
 	}
 
-	public void MergeProfile(Playset profile)
+	public void MergeIntoCurrentPlayset(IPlayset profile)
 	{
 		new BackgroundAction("Applying profile", apply).Run();
 
@@ -255,9 +259,9 @@ public class PlaysetManager : IPlaysetManager
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
 
-				_notifier.ApplyingProfile = true;
+				_notifier.ApplyingPlayset = true;
 
-				foreach (var mod in profile.Mods)
+				foreach (var mod in (profile as Playset)!.Mods)
 				{
 					var localMod = GetMod(mod);
 
@@ -274,7 +278,7 @@ public class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				foreach (var asset in profile.Assets)
+				foreach (var asset in (profile as Playset)!.Assets)
 				{
 					var localAsset = GetAsset(asset);
 
@@ -290,36 +294,36 @@ public class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				if ((missingMods.Count > 0 || missingAssets.Count > 0) && Program.MainForm is not null)
+				if ((missingMods.Count > 0 || missingAssets.Count > 0))
 				{
-					UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
+					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
 				}
 
-				_notifier.ApplyingProfile = false;
+				_notifier.ApplyingPlayset = false;
 				disableAutoSave = true;
 
-				_modUtil.SavePendingValues();
+				_modUtil.SaveChanges();
 				_assetUtil.SaveChanges();
 
 				disableAutoSave = false;
 
-				ProfileChanged?.Invoke(CurrentProfile);
+				_notifier.OnPlaysetChanged();
 
 				OnAutoSave();
 			}
 			catch (Exception ex)
 			{
-				MessagePrompt.Show(ex, "Failed to merge your profiles", form: Program.MainForm);
+				MessagePrompt.Show(ex, "Failed to merge your profiles", form: SystemsProgram.MainForm as SlickForm);
 			}
 			finally
 			{
-				_notifier.ApplyingProfile = false;
+				_notifier.ApplyingPlayset = false;
 				disableAutoSave = false;
 			}
 		}
 	}
 
-	public void ExcludeProfile(Playset profile)
+	public void ExcludeFromCurrentPlayset(IPlayset profile)
 	{
 		new BackgroundAction("Applying profile", apply).Run();
 
@@ -332,77 +336,77 @@ public class PlaysetManager : IPlaysetManager
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
 
-				_notifier.ApplyingProfile = true;
+				_notifier.ApplyingPlayset = true;
 
-				foreach (var mod in profile.Mods)
+				foreach (var mod in (profile as Playset)!.Mods)
 				{
 					var localMod = GetMod(mod);
 
 					if (localMod != null)
 					{
-						localMod.IsIncluded = false;
-						localMod.IsEnabled = false;
+						_modUtil.SetIncluded(localMod, false);
+						_modUtil.SetEnabled(localMod, false);
 					}
 				}
 
-				foreach (var asset in profile.Assets)
+				foreach (var asset in (profile as Playset)!.Assets)
 				{
 					var localAsset = GetAsset(asset);
 
 					if (localAsset != null)
 					{
-						localAsset.IsIncluded = false;
+						_assetUtil.SetIncluded(localAsset, false);
 					}
 				}
 
-				_notifier.ApplyingProfile = false;
+				_notifier.ApplyingPlayset = false;
 				disableAutoSave = true;
 
-				_modUtil.SavePendingValues();
+				_modUtil.SaveChanges();
 				_assetUtil.SaveChanges();
 
 				disableAutoSave = false;
 
-				ProfileChanged?.Invoke(CurrentProfile);
+				_notifier.OnPlaysetChanged();
 
 				OnAutoSave();
 			}
 			catch (Exception ex)
 			{
-				MessagePrompt.Show(ex, "Failed to exclude items from your profile", form: Program.MainForm);
+				MessagePrompt.Show(ex, "Failed to exclude items from your profile", form: SystemsProgram.MainForm as SlickForm);
 			}
 			finally
 			{
-				_notifier.ApplyingProfile = false;
+				_notifier.ApplyingPlayset = false;
 				disableAutoSave = false;
 			}
 		}
 	}
 
-	public void DeleteProfile(Playset profile)
+	public void DeletePlayset(ICustomPlayset profile)
 	{
-		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{profile.Name}.json"));
+		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json"));
 
 		lock (_profiles)
 		{
 			_profiles.Remove(profile);
 		}
 
-		if (profile == CurrentProfile)
+		if (profile == CurrentPlayset)
 		{
-			SetProfile(Playset.TemporaryPlayset);
+			SetCurrentPlayset(Playset.TemporaryPlayset);
 		}
 
-		ProfileUpdated?.Invoke();
+		_notifier.OnPlaysetUpdated();
 	}
 
-	public void SetProfile(Playset profile)
+	public void SetCurrentPlayset(ICustomPlayset profile)
 	{
-		CurrentProfile = profile;
+		CurrentPlayset = profile;
 
 		if (profile.Temporary)
 		{
-			ProfileChanged?.Invoke(profile);
+			_notifier.OnPlaysetChanged();
 
 			_settings.SessionSettings.CurrentPlayset = null;
 			_settings.SessionSettings.Save();
@@ -410,7 +414,7 @@ public class PlaysetManager : IPlaysetManager
 			return;
 		}
 
-		if (Program.MainForm is null)
+		if (SystemsProgram.MainForm as SlickForm is null)
 		{
 			apply();
 		}
@@ -428,16 +432,16 @@ public class PlaysetManager : IPlaysetManager
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
 
-				_notifier.ApplyingProfile = true;
+				_notifier.ApplyingPlayset = true;
 
-				foreach (var mod in profile.Mods)
+				foreach (var mod in (profile as Playset)!.Mods)
 				{
 					var localMod = GetMod(mod);
 
 					if (localMod != null)
 					{
-						localMod.IsIncluded = true;
-						localMod.IsEnabled = mod.Enabled;
+						_modUtil.SetIncluded(localMod, true);
+						_modUtil.SetEnabled(localMod, mod.Enabled);
 
 						unprocessedMods.Remove(localMod);
 					}
@@ -447,13 +451,13 @@ public class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				foreach (var asset in profile.Assets)
+				foreach (var asset in (profile as Playset)!.Assets)
 				{
 					var localAsset = GetAsset(asset);
 
 					if (localAsset != null)
 					{
-						localAsset.IsIncluded = true;
+						_assetUtil.SetIncluded(localAsset, true);
 
 						unprocessedAssets.Remove(localAsset);
 					}
@@ -465,13 +469,13 @@ public class PlaysetManager : IPlaysetManager
 
 				foreach (var mod in unprocessedMods)
 				{
-					mod.IsIncluded = false;
-					mod.IsEnabled = false;
+					_modUtil.SetIncluded(mod, true);
+					_modUtil.SetEnabled(mod, false);
 				}
 
 				foreach (var asset in unprocessedAssets)
 				{
-					asset.IsIncluded = false;
+					_assetUtil.SetIncluded(asset, false);
 				}
 
 #if DEBUG
@@ -481,23 +485,23 @@ public class PlaysetManager : IPlaysetManager
 					$"missingAssets: {missingAssets.Count}");
 #endif
 
-				if ((missingMods.Count > 0 || missingAssets.Count > 0) && Program.MainForm is not null)
+				if ((missingMods.Count > 0 || missingAssets.Count > 0))
 				{
-					UserInterface.Panels.PC_MissingPackages.PromptMissingPackages(Program.MainForm, missingMods, missingAssets);
+					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
 				}
 
-				_assetUtil.SetDlcsExcluded(profile.ExcludedDLCs.ToArray());
+				_dlcManager.SetDlcsExcluded((profile as Playset)!.ExcludedDLCs.ToArray());
 
-				_notifier.ApplyingProfile = false;
+				_notifier.ApplyingPlayset = false;
 				disableAutoSave = true;
 
-				_modUtil.SavePendingValues();
+				_modUtil.SaveChanges();
 				_assetUtil.SaveChanges();
 
-				profile.LastUsed = DateTime.Now;
+				(profile as Playset)!.LastUsed = DateTime.Now;
 				Save(profile);
 
-				ProfileChanged?.Invoke(profile);
+				_notifier.OnPlaysetChanged();
 
 				try
 				{ SaveLsmSettings(profile); }
@@ -513,13 +517,13 @@ public class PlaysetManager : IPlaysetManager
 			}
 			catch (Exception ex)
 			{
-				MessagePrompt.Show(ex, "Failed to apply your profile", form: Program.MainForm);
+				MessagePrompt.Show(ex, "Failed to apply your profile", form: SystemsProgram.MainForm as SlickForm);
 
-				ProfileChanged?.Invoke(profile);
+				_notifier.OnPlaysetChanged();
 			}
 			finally
 			{
-				_notifier.ApplyingProfile = false;
+				_notifier.ApplyingPlayset = false;
 				disableAutoSave = false;
 			}
 		}
@@ -527,50 +531,50 @@ public class PlaysetManager : IPlaysetManager
 
 	public void OnAutoSave()
 	{
-		if (!disableAutoSave && !_notifier.ApplyingProfile && _notifier.IsContentLoaded && !_notifier.BulkUpdating)
+		if (!disableAutoSave && !_notifier.ApplyingPlayset && _notifier.IsContentLoaded && !_notifier.BulkUpdating)
 		{
-			// Task.Run(() =>
-			//{
-			if (CurrentProfile.AutoSave)
+			var playset = (CurrentPlayset as Playset)!;
+
+			if (playset.AutoSave)
 			{
-				CurrentProfile.Save();
+				playset.Save();
 			}
-			else if (!CurrentProfile.Temporary)
+			else if (!CurrentPlayset.Temporary)
 			{
-				CurrentProfile.UnsavedChanges = true;
-				Save(CurrentProfile);
+				playset.UnsavedChanges = true;
+
+				Save(CurrentPlayset);
 			}
-			//  });
 		}
 	}
 
-	private void LoadAllProfiles()
+	private void LoadAllPlaysets()
 	{
 		try
 		{
-			foreach (var profile in Directory.EnumerateFiles(_locationManager.SkyveProfilesAppDataPath, "*.json"))
+			foreach (var profile in Directory.EnumerateFiles(_locationManager.SkyvePlaysetsAppDataPath, "*.json"))
 			{
 				if (Path.GetFileNameWithoutExtension(profile).Equals(_settings.SessionSettings.CurrentPlayset, StringComparison.CurrentCultureIgnoreCase))
 				{
 					continue;
 				}
 
-				var newProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(profile));
+				var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(profile));
 
-				if (newProfile != null)
+				if (newPlayset != null)
 				{
-					newProfile.Name = Path.GetFileNameWithoutExtension(profile);
-					newProfile.LastEditDate = File.GetLastWriteTime(profile);
-					newProfile.DateCreated = File.GetCreationTime(profile);
+					newPlayset.Name = Path.GetFileNameWithoutExtension(profile);
+					newPlayset.LastEditDate = File.GetLastWriteTime(profile);
+					newPlayset.DateCreated = File.GetCreationTime(profile);
 
-					if (newProfile.LastUsed == DateTime.MinValue)
+					if (newPlayset.LastUsed == DateTime.MinValue)
 					{
-						newProfile.LastUsed = newProfile.LastEditDate;
+						newPlayset.LastUsed = newPlayset.LastEditDate;
 					}
 
 					lock (_profiles)
 					{
-						_profiles.Add(newProfile);
+						_profiles.Add(newPlayset);
 					}
 				}
 				else
@@ -588,9 +592,9 @@ public class PlaysetManager : IPlaysetManager
 
 		_notifier.ContentLoaded += CentralManager_ContentLoaded;
 
-		_notifier.ProfilesLoaded = true;
+		_notifier.PlaysetsLoaded = true;
 
-		ProfileUpdated?.Invoke();
+		_notifier.OnPlaysetUpdated();
 
 		if (_watcher is not null)
 		{
@@ -600,7 +604,7 @@ public class PlaysetManager : IPlaysetManager
 
 			try
 			{ _watcher.EnableRaisingEvents = true; }
-			catch (Exception ex) { _logger.Exception(ex, $"Failed to start profile watcher ({_locationManager.SkyveProfilesAppDataPath})"); }
+			catch (Exception ex) { _logger.Exception(ex, $"Failed to start profile watcher ({_locationManager.SkyvePlaysetsAppDataPath})"); }
 		}
 	}
 
@@ -625,34 +629,34 @@ public class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				ProfileUpdated?.Invoke();
+				_notifier.OnPlaysetUpdated();
 
 				return;
 			}
 
-			var newProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(e.FullPath));
+			var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(e.FullPath));
 
-			if (newProfile != null)
+			if (newPlayset != null)
 			{
-				newProfile.Name = Path.GetFileNameWithoutExtension(e.FullPath);
-				newProfile.LastEditDate = File.GetLastWriteTime(e.FullPath);
-				newProfile.DateCreated = File.GetCreationTime(e.FullPath);
+				newPlayset.Name = Path.GetFileNameWithoutExtension(e.FullPath);
+				newPlayset.LastEditDate = File.GetLastWriteTime(e.FullPath);
+				newPlayset.DateCreated = File.GetCreationTime(e.FullPath);
 
-				if (newProfile.LastUsed == DateTime.MinValue)
+				if (newPlayset.LastUsed == DateTime.MinValue)
 				{
-					newProfile.LastUsed = newProfile.LastEditDate;
+					newPlayset.LastUsed = newPlayset.LastEditDate;
 				}
 
 				lock (_profiles)
 				{
-					var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+					var currentPlayset = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
-					_profiles.Remove(currentProfile);
+					_profiles.Remove(currentPlayset);
 
-					_profiles.Add(newProfile);
+					_profiles.Add(newPlayset);
 				}
 
-				ProfileUpdated?.Invoke();
+				_notifier.OnPlaysetUpdated();
 			}
 			else
 			{
@@ -662,19 +666,19 @@ public class PlaysetManager : IPlaysetManager
 		catch (Exception ex) { _logger.Exception(ex, "Failed to refresh changes to profiles"); }
 	}
 
-	public void GatherInformation(Playset? profile)
+	public void GatherInformation(IPlayset? profile)
 	{
-		if (profile == null || profile.Temporary || !_notifier.IsContentLoaded)
+		if (profile is not Playset playset || profile.Temporary || !_notifier.IsContentLoaded)
 		{
 			return;
 		}
 
-		profile.Assets = _packageManager.Assets.Where(x => x.IsIncluded).Select(x => new Playset.Asset(x)).ToList();
-		profile.Mods = _packageManager.Mods.Where(x => x.IsIncluded).Select(x => new Playset.Mod(x)).ToList();
-		profile.ExcludedDLCs = SkyveConfig.Deserialize()?.RemovedDLCs.ToList() ?? new();
+		playset.Assets = _packageManager.Assets.Where(_assetUtil.IsIncluded).Select(x => new Playset.Asset(x)).ToList();
+		playset.Mods = _packageManager.Mods.Where(_modUtil.IsIncluded).Select(x => new Playset.Mod(x)).ToList();
+		playset.ExcludedDLCs = SkyveConfig.Deserialize()?.RemovedDLCs.ToList() ?? new();
 	}
 
-	public bool Save(Playset? profile, bool forced = false)
+	public bool Save(IPlayset? profile, bool forced = false)
 	{
 		if (profile == null || (!forced && (profile.Temporary || !_notifier.IsContentLoaded)))
 		{
@@ -688,19 +692,19 @@ public class PlaysetManager : IPlaysetManager
 				_watcher.EnableRaisingEvents = false;
 			}
 
-			Directory.CreateDirectory(_locationManager.SkyveProfilesAppDataPath);
+			Directory.CreateDirectory(_locationManager.SkyvePlaysetsAppDataPath);
 
 			File.WriteAllText(
-				CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{profile.Name}.json"),
+				CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json"),
 				Newtonsoft.Json.JsonConvert.SerializeObject(profile, Newtonsoft.Json.Formatting.Indented));
 
-			profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
+			(profile as Playset)!.IsMissingItems = (profile as Playset)!.Mods.Any(x => GetMod(x) is null) || (profile as Playset)!.Assets.Any(x => GetAsset(x) is null);
 #if DEBUG
-			if (profile.IsMissingItems)
+			if ((profile as Playset)!.IsMissingItems)
 			{
 				_logger.Debug($"Missing items in the profile: {profile}\r\n" +
-					profile.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
-					profile.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({ToLocalPath(x.RelativePath)})", "\r\n"));
+					(profile as Playset)!.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
+					(profile as Playset)!.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n"));
 			}
 #endif
 
@@ -708,7 +712,7 @@ public class PlaysetManager : IPlaysetManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, $"Failed to save profile ({profile.Name}) to {CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{profile.Name}.json")}");
+			_logger.Exception(ex, $"Failed to save profile ({profile.Name}) to {CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json")}");
 		}
 		finally
 		{
@@ -721,17 +725,19 @@ public class PlaysetManager : IPlaysetManager
 		return false;
 	}
 
-	public Mod GetMod(Playset.Mod mod)
+	public IMod? GetMod(IPlaysetEntry mod)
 	{
-		return _modUtil.FindMod(ToLocalPath(mod.RelativePath));
+		var folder = _locationManager.ToLocalPath(mod.RelativePath);
+
+		return _packageManager.Mods.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
 	}
 
-	public Asset GetAsset(Playset.Asset asset)
+	public IAsset? GetAsset(IPlaysetEntry asset)
 	{
-		return _assetUtil.GetAsset(ToLocalPath(asset.RelativePath));
+		return _assetUtil.GetAssetByFile(_locationManager.ToLocalPath(asset.RelativePath));
 	}
 
-	public bool RenameProfile(Playset profile, string text)
+	public bool RenamePlayset(IPlayset profile, string text)
 	{
 		if (profile == null || profile.Temporary)
 		{
@@ -740,8 +746,8 @@ public class PlaysetManager : IPlaysetManager
 
 		text = text.EscapeFileName();
 
-		var newName = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{text}.json");
-		var oldName = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{profile.Name}.json");
+		var newName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{text}.json");
+		var oldName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json");
 
 		try
 		{
@@ -777,15 +783,15 @@ public class PlaysetManager : IPlaysetManager
 		return true;
 	}
 
-	public string GetNewProfileName()
+	public string GetNewPlaysetName()
 	{
-		var startName = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, "New Profile.json");
+		var startName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, "New Playset.json");
 
 		// Check if the file with the proposed name already exists
 		if (CrossIO.FileExists(startName))
 		{
 			var extension = ".json";
-			var nameWithoutExtension = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, "New Profile");
+			var nameWithoutExtension = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, "New Playset");
 			var counter = 1;
 
 			// Loop until a valid file name is found
@@ -803,7 +809,7 @@ public class PlaysetManager : IPlaysetManager
 		return Path.GetFileNameWithoutExtension(startName);
 	}
 
-	public List<Package> GetInvalidPackages(PackageUsage usage)
+	public List<ILocalPackageWithContents> GetInvalidPackages(PackageUsage usage)
 	{
 		if ((int)usage == -1)
 		{
@@ -812,23 +818,23 @@ public class PlaysetManager : IPlaysetManager
 
 		return _packageManager.Packages.AllWhere(x =>
 		{
-			var cr = x.GetCompatibilityInfo().Data;
+			var cr = _compatibilityManager.GetPackageInfo(x);
 
 			if (cr is null)
 			{
 				return false;
 			}
 
-			if (cr.Package.Usage.HasFlag(usage))
+			if (cr.Usage.HasFlag(usage))
 			{
 				return false;
 			}
 
-			return x.IsIncluded;
+			return _packageUtil.IsIncluded(x, out var partial) || partial;
 		});
 	}
 
-	public void SaveLsmSettings(Playset profile)
+	public void SaveLsmSettings(IPlayset profile)
 	{
 		var current = LsmSettingsFile.Deserialize();
 
@@ -837,32 +843,32 @@ public class PlaysetManager : IPlaysetManager
 			return;
 		}
 
-		current.loadEnabled = profile.LsmSettings.LoadEnabled;
-		current.loadUsed = profile.LsmSettings.LoadUsed;
-		current.skipFile = profile.LsmSettings.SkipFile;
-		current.skipPrefabs = profile.LsmSettings.UseSkipFile;
+		current.loadEnabled = (profile as Playset)!.LsmSettings.LoadEnabled;
+		current.loadUsed = (profile as Playset)!.LsmSettings.LoadUsed;
+		current.skipFile = (profile as Playset)!.LsmSettings.SkipFile;
+		current.skipPrefabs = (profile as Playset)!.LsmSettings.UseSkipFile;
 
 		current.SyncAndSerialize();
 	}
 
-	public void AddProfile(Playset newProfile)
+	public void AddPlayset(ICustomPlayset newPlayset)
 	{
 		lock (_profiles)
 		{
-			_profiles.Add(newProfile);
+			_profiles.Add(newPlayset);
 		}
 
-		ProfileUpdated?.Invoke();
+		_notifier.OnPlaysetUpdated();
 	}
 
-	public Playset? ImportProfile(string obj)
+	public ICustomPlayset? ImportPlayset(string obj)
 	{
 		if (_watcher is not null)
 		{
 			_watcher.EnableRaisingEvents = false;
 		}
 
-		var newPath = CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, Path.GetFileName(obj));
+		var newPath = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, Path.GetFileName(obj));
 
 		File.Move(obj, newPath);
 
@@ -871,31 +877,31 @@ public class PlaysetManager : IPlaysetManager
 			_watcher.EnableRaisingEvents = true;
 		}
 
-		var newProfile = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(newPath));
+		var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(newPath));
 
-		if (newProfile != null)
+		if (newPlayset != null)
 		{
-			newProfile.Name = Path.GetFileNameWithoutExtension(newPath);
-			newProfile.LastEditDate = File.GetLastWriteTime(newPath);
-			newProfile.DateCreated = File.GetCreationTime(newPath);
+			newPlayset.Name = Path.GetFileNameWithoutExtension(newPath);
+			newPlayset.LastEditDate = File.GetLastWriteTime(newPath);
+			newPlayset.DateCreated = File.GetCreationTime(newPath);
 
-			if (newProfile.LastUsed == DateTime.MinValue)
+			if (newPlayset.LastUsed == DateTime.MinValue)
 			{
-				newProfile.LastUsed = newProfile.LastEditDate;
+				newPlayset.LastUsed = newPlayset.LastEditDate;
 			}
 
 			lock (_profiles)
 			{
-				var currentProfile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
+				var currentPlayset = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
-				_profiles.Remove(currentProfile);
+				_profiles.Remove(currentPlayset);
 
-				_profiles.Add(newProfile);
+				_profiles.Add(newPlayset);
 			}
 
-			ProfileUpdated?.Invoke();
+			_notifier.OnPlaysetUpdated();
 
-			return newProfile;
+			return newPlayset;
 		}
 		else
 		{
@@ -905,7 +911,7 @@ public class PlaysetManager : IPlaysetManager
 		return null;
 	}
 
-	public void SetIncludedForAll<T>(T item, bool value) where T : IPackage
+	public void SetIncludedForAll(IPackage item, bool value)
 	{
 		try
 		{
@@ -918,7 +924,7 @@ public class PlaysetManager : IPlaysetManager
 			{
 				var profileMod = new Playset.Mod(mod);
 
-				foreach (var profile in Profiles.Skip(1))
+				foreach (var profile in Playsets.Skip(1))
 				{
 					SetIncludedFor(value, profileMod, profile);
 				}
@@ -927,7 +933,7 @@ public class PlaysetManager : IPlaysetManager
 			{
 				var profileAsset = new Playset.Asset(asset);
 
-				foreach (var profile in Profiles.Skip(1))
+				foreach (var profile in Playsets.Skip(1))
 				{
 					SetIncludedFor(value, profileAsset, profile);
 				}
@@ -937,7 +943,7 @@ public class PlaysetManager : IPlaysetManager
 				var profileMod = package.Mod is null ? null : new Playset.Mod(package.Mod);
 				var assets = package.Assets?.Select(x => new Playset.Asset(x)).ToList() ?? new();
 
-				foreach (var profile in Profiles.Skip(1))
+				foreach (var profile in Playsets.Skip(1))
 				{
 					SetIncludedFor(value, profileMod, assets, profile);
 				}
@@ -953,15 +959,15 @@ public class PlaysetManager : IPlaysetManager
 		}
 	}
 
-	private void SetIncludedFor(bool value, Playset.Mod? profileMod, List<Playset.Asset> assets, Playset profile)
+	private void SetIncludedFor(bool value, Playset.Mod? profileMod, List<Playset.Asset> assets, IPlayset profile)
 	{
 		if (value)
 		{
 			if (profileMod is not null)
 			{
-				if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+				if (!(profile as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 				{
-					profile.Mods.Add(profileMod);
+					(profile as Playset)!.Mods.Add(profileMod);
 				}
 			}
 
@@ -969,7 +975,7 @@ public class PlaysetManager : IPlaysetManager
 			{
 				var assetsToAdd = new List<Playset.Asset>(assets);
 
-				foreach (var pa in profile.Assets)
+				foreach (var pa in (profile as Playset)!.Assets)
 				{
 					foreach (var profileAsset in assetsToAdd)
 					{
@@ -981,60 +987,60 @@ public class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				profile.Assets.AddRange(assetsToAdd);
+				(profile as Playset)!.Assets.AddRange(assetsToAdd);
 			}
 		}
 		else
 		{
 			if (profileMod is not null)
 			{
-				profile.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+				(profile as Playset)!.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
 			}
 
 			if (assets.Count > 0)
 			{
-				profile.Assets.RemoveAll(x => assets.Any(profileAsset => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false));
+				(profile as Playset)!.Assets.RemoveAll(x => assets.Any(profileAsset => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false));
 			}
 		}
 
 		Save(profile);
 	}
 
-	private void SetIncludedFor(bool value, Playset.Asset profileAsset, Playset profile)
+	private void SetIncludedFor(bool value, Playset.Asset profileAsset, IPlayset profile)
 	{
 		if (value)
 		{
-			if (!profile.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			if (!(profile as Playset)!.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 			{
-				profile.Assets.Add(profileAsset);
+				(profile as Playset)!.Assets.Add(profileAsset);
 			}
 		}
 		else
 		{
-			profile.Assets.RemoveAll(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+			(profile as Playset)!.Assets.RemoveAll(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
 		}
 
 		Save(profile);
 	}
 
-	private void SetIncludedFor(bool value, Playset.Mod profileMod, Playset profile)
+	private void SetIncludedFor(bool value, Playset.Mod profileMod, IPlayset profile)
 	{
 		if (value)
 		{
-			if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			if (!(profile as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 			{
-				profile.Mods.Add(profileMod);
+				(profile as Playset)!.Mods.Add(profileMod);
 			}
 		}
 		else
 		{
-			profile.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+			(profile as Playset)!.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
 		}
 
 		Save(profile);
 	}
 
-	public bool IsPackageIncludedInProfile(IPackage ipackage, Playset profile)
+	public bool IsPackageIncludedInPlayset(IPackage ipackage, IPlayset profile)
 	{
 		if (ipackage is Package package)
 		{
@@ -1043,7 +1049,7 @@ public class PlaysetManager : IPlaysetManager
 
 			if (profileMod is not null)
 			{
-				if (!profile.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+				if (!(profile as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 				{
 					return false;
 				}
@@ -1051,7 +1057,7 @@ public class PlaysetManager : IPlaysetManager
 
 			if (assets.Count > 0)
 			{
-				if (!assets.All(profileAsset => profile.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
+				if (!assets.All(profileAsset => (profile as Playset)!.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
 				{
 					return false;
 				}
@@ -1061,16 +1067,16 @@ public class PlaysetManager : IPlaysetManager
 		{
 			if (ipackage.IsMod)
 			{
-				return profile.Mods.Any(x => x.SteamId == ipackage.SteamId);
+				return (profile as Playset)!.Mods.Any(x => x.Id == ipackage.Id);
 			}
 
-			return profile.Assets.Any(x => x.SteamId == ipackage.SteamId);
+			return (profile as Playset)!.Assets.Any(x => x.Id == ipackage.Id);
 		}
 
 		return true;
 	}
 
-	public void SetIncludedFor(IPackage ipackage, Playset profile, bool value)
+	public void SetIncludedFor(IPackage ipackage, IPlayset profile, bool value)
 	{
 		if (ipackage is Package package)
 		{
@@ -1081,155 +1087,30 @@ public class PlaysetManager : IPlaysetManager
 		}
 		else
 		{
-			var profileMod = profile.Mods.FirstOrDefault(x => x.SteamId == ipackage.SteamId) ?? new Playset.Mod(ipackage);
+			var profileMod = (profile as Playset)!.Mods.FirstOrDefault(x => x.Id == ipackage.Id) ?? new Playset.Mod(ipackage);
 
 			SetIncludedFor(value, profileMod, new(), profile);
 		}
 	}
 
-	public string GetFileName(Playset profile)
+	public string GetFileName(IPlayset profile)
 	{
-		return CrossIO.Combine(_locationManager.SkyveProfilesAppDataPath, $"{profile.Name}.json");
+		return CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json");
 	}
 
-	public void CreateShortcut(Playset item)
+	public void CreateShortcut(IPlayset item)
 	{
 		try
 		{
 			var launch = MessagePrompt.Show(Locale.AskToLaunchGameForShortcut, PromptButtons.YesNo, PromptIcons.Question) == DialogResult.Yes;
 
 			ExtensionClass.CreateShortcut(CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), item.Name + ".lnk")
-				, Program.ExecutablePath
+				, Application.ExecutablePath
 				, (launch ? "-launch " : "") + $"-profile {item.Name}");
 		}
 		catch (Exception ex)
 		{
 			_logger.Exception(ex, "Failed to create shortcut");
 		}
-	}
-
-	public async Task Share(Playset item)
-	{
-		try
-		{
-			var result = await SkyveApiUtil.SaveUserProfile(new()
-			{
-
-				Author = SteamUtil.GetLoggedInSteamId(),
-				Banner = item.BannerBytes,
-				Color = item.Color?.ToArgb(),
-				Name = item.Name,
-				ProfileUsage = (int)item.Usage,
-				ProfileId = item.ProfileId,
-				Contents = item.Assets.Concat(item.Mods).Select(x => x.AsProfileContent()).ToArray()
-			});
-
-			if (result.Success)
-			{
-				item.ProfileId = (int)Convert.ChangeType(result.Data, typeof(int));
-				item.Author = SteamUtil.GetLoggedInSteamId();
-
-				Save(item);
-			}
-			else
-			{
-				Program.MainForm.TryInvoke(() => MessagePrompt.Show((item.ProfileId == 0 ? Locale.FailedToUploadProfile : Locale.FailedToUpdateProfile) + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: Program.MainForm));
-			}
-		}
-		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, item.ProfileId == 0 ? Locale.FailedToUploadProfile : Locale.FailedToUpdateProfile, form: Program.MainForm)); }
-	}
-
-	public async Task<bool> DownloadProfile(IProfile item)
-	{
-		try
-		{
-			var profile = await SkyveApiUtil.GetUserProfileContents(item.ProfileId);
-
-			if (profile == null)
-			{
-				return false;
-			}
-
-			var generatedProfile = Profiles.FirstOrDefault(x => x.Name.Equals(item.Name, StringComparison.InvariantCultureIgnoreCase)) ?? profile.CloneTo<IProfile, Playset>();
-
-			generatedProfile.Color = ((IProfile)profile).Color;
-			generatedProfile.Author = profile.Author;
-			generatedProfile.ProfileId = profile.ProfileId;
-			generatedProfile.Usage = profile.Usage;
-			generatedProfile.BannerBytes = profile.Banner;
-			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Playset.Asset(x));
-			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Playset.Mod(x));
-
-			return Save(generatedProfile);
-		}
-		catch (Exception ex)
-		{
-			_logger.Exception(ex, "Failed to download profile");
-
-			return false;
-		}
-	}
-
-	public async Task<bool> DownloadProfile(string link)
-	{
-		try
-		{
-			var profile = await SkyveApiUtil.GetUserProfileByLink(link);
-
-			if (profile == null)
-			{
-				return false;
-			}
-
-			var generatedProfile = profile.CloneTo<IProfile, Playset>();
-
-			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Playset.Asset(x));
-			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Playset.Mod(x));
-
-			return Save(generatedProfile);
-		}
-		catch (Exception ex)
-		{
-			_logger.Exception(ex, "Failed to download profile");
-
-			return false;
-		}
-	}
-
-	public async Task<bool> SetVisibility(Playset profile, bool @public)
-	{
-		try
-		{
-			var result = await SkyveApiUtil.SetProfileVisibility(profile.ProfileId, @public);
-
-			if (!result.Success)
-			{
-				Program.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToUpdateProfile + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: Program.MainForm));
-			}
-			else
-			{
-				profile.Public = @public;
-				return Save(profile);
-			}
-
-			return result.Success;
-		}
-		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToUpdateProfile, form: Program.MainForm)); return false; }
-	}
-
-	public async Task<bool> DeleteOnlineProfile(IProfile profile)
-	{
-		try
-		{
-			var result = await SkyveApiUtil.DeleteUserProfile(profile.ProfileId);
-
-			if (!result.Success)
-			{
-				Program.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToDeleteProfile + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: Program.MainForm));
-			}
-
-			return result.Success;
-		}
-		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDeleteProfile, form: Program.MainForm)); return false; }
 	}
 }

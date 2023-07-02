@@ -1,4 +1,6 @@
-﻿namespace SkyveApp.Domain.CS1.Steam;
+﻿using SkyveApp.Systems;
+
+namespace SkyveApp.Domain.CS1.Steam;
 
 internal class SteamPackageRequirement : IPackageRequirement
 {

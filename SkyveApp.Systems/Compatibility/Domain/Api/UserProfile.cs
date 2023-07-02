@@ -53,7 +53,6 @@ public class UserProfile : IDynamicSql
 	public PackageUsage Usage => (PackageUsage)(ProfileUsage ?? -1);
 	public bool Temporary => false;
 	Color? ICustomPlayset.Color { get => Color == null ? null : System.Drawing.Color.FromArgb(Color.Value); set { } }
-	//public IEnumerable<IPackage> Packages => Contents?.Select(x => x.IsMod ? new Playset.Mod(x) : new Playset.Asset(x)) ?? Enumerable.Empty<Interfaces.IPackage>();
 	Bitmap? ICustomPlayset.Banner
 	{
 		get
@@ -72,10 +71,24 @@ public class UserProfile : IDynamicSql
 
 			return _banner = new Bitmap(ms);
 		}
+		set
+		{
+			if (value is null)
+				Banner = null;
+			else
+				Banner = (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
+		}
 	}
 	IUser? IPlayset.Author { get; }
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUsed { get; }
-	IEnumerable<IPackage> IPlayset.Packages { get; }
+	public IEnumerable<IPlaysetEntry> Packages => Contents ?? Enumerable.Empty<IPlaysetEntry>();
+	bool ICustomPlayset.AutoSave { get; }
+	bool ICustomPlayset.UnsavedChanges { get; }
+
+	bool ICustomPlayset.Save()
+	{
+		return false;
+	}
 #endif
 }

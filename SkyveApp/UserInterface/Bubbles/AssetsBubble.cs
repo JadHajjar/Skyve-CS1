@@ -1,18 +1,6 @@
-﻿using Extensions;
+﻿using SkyveApp.Domain.Enums;
+using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
-using SkyveApp.Systems.Compatibility;
-using SkyveApp.Utilities;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;
@@ -22,14 +10,10 @@ internal class AssetsBubble : StatusBubbleBase
 	private readonly INotifier _notifier;
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPackageManager _contentManager;
-	private readonly IPlaysetManager _profileManager;
 
 	public AssetsBubble()
 	{
-		_notifier = ServiceCenter.Get<INotifier>();
-		_contentUtil = ServiceCenter.Get<IPackageUtil>();
-		_contentManager = ServiceCenter.Get<IPackageManager>();
-		_profileManager = ServiceCenter.Get<IPlaysetManager>();
+		ServiceCenter.Get(out _notifier, out _contentUtil, out _contentManager);
 	}
 
 	protected override void OnHandleCreated(EventArgs e)
@@ -121,7 +105,7 @@ internal class AssetsBubble : StatusBubbleBase
 					break;
 			}
 
-			var notif = asset.GetCompatibilityInfo().Notification;
+			var notif = asset.GetCompatibilityInfo().GetNotification();
 
 			if (crDic.ContainsKey(notif))
 			{

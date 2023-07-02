@@ -4,8 +4,8 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
+using SkyveApp.Systems.CS1.Utilities;
+using SkyveApp.Systems.CS1.Utilities.IO;
 
 using SlickControls;
 
@@ -19,7 +19,7 @@ using System.Timers;
 
 namespace SkyveApp.Systems.CS1.Managers;
 
-public class CitiesManager : ICitiesManager
+internal class CitiesManager : ICitiesManager
 {
 	private readonly ILogger _logger;
 	private readonly ILocationManager _locationManager;
@@ -27,11 +27,11 @@ public class CitiesManager : ICitiesManager
 	private readonly IPackageManager _contentManager;
 	private readonly IModUtil _modUtil;
 	private readonly ISettings _settings;
-	private readonly IOUtil _iOUtil;
+	private readonly IIOUtil _iOUtil;
 
 	public event MonitorTickDelegate? MonitorTick;
 
-	public CitiesManager(ILogger logger, ILocationManager locationManager, IPlaysetManager profileManager, ISettings settings, IPackageManager contentManager, IOUtil iOUtil, IModUtil modUtil)
+	public CitiesManager(ILogger logger, ILocationManager locationManager, IPlaysetManager profileManager, ISettings settings, IPackageManager contentManager, IIOUtil iOUtil, IModUtil modUtil)
 	{
 		_logger = logger;
 		_locationManager = locationManager;

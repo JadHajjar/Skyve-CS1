@@ -1,4 +1,4 @@
-﻿using SkyveApp.Domain.CS1.Enums;
+﻿using SkyveApp.Domain.Enums;
 
 namespace SkyveApp.Domain.CS1;
 public class UserSettings : IUserSettings

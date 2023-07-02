@@ -1,36 +1,39 @@
-﻿using SkyveApp.Domain;
+﻿using Newtonsoft.Json;
 
-using System;
+using SkyveApp.Domain;
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkyveApp.Systems;
 public class GenericWorkshopPackage : IPackage
 {
+	public GenericWorkshopPackage(IPackageIdentity identity)
+	{
+		Id = identity.Id;
+		Name = identity.Name;
+		Url = identity.Url;
+	}
+
 	public GenericWorkshopPackage(ulong id)
 	{
 		Id = id;
+		Name = id.ToString();
 	}
 
-    public GenericWorkshopPackage()
-    {
-        
-    }
+	public GenericWorkshopPackage()
+	{
+		Name = string.Empty;
+	}
 
-    public bool IsMod { get; set; }
+	public bool IsMod { get; set; }
 	public bool IsLocal { get; set; }
 	public bool IsBuiltIn { get; set; }
-	public ILocalPackageWithContents? LocalPackage { get; set; }
-	public IEnumerable<IPackageRequirement> Requirements { get; set; }
-	public IEnumerable<ITag> Tags { get; set; }
 	public ulong Id { get; set; }
 	public string Name { get; set; }
 	public string? Url { get; set; }
 
-	public IWorkshopInfo? GetWorkshopInfo()
-	{
-		return null;
-	}
+	[JsonIgnore] public ILocalPackageWithContents? LocalParentPackage => this.GetLocalPackage();
+	[JsonIgnore] public ILocalPackage? LocalPackage => this.GetLocalPackage();
+	[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 }

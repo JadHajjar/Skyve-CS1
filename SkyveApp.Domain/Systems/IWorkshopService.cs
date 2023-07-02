@@ -1,8 +1,18 @@
-﻿namespace SkyveApp.Domain.Systems;
+﻿using SkyveApp.Domain.Enums;
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace SkyveApp.Domain.Systems;
 public interface IWorkshopService
 {
-	IWorkshopInfo? GetInfo(object id);
+	void ClearCache();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
+	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage? GetPackage(IPackageIdentity identity);
+	Task<IPackage?> GetPackageAsync(IPackageIdentity identity);
 	IUser? GetUser(object authorId);
+	Task<IEnumerable<IWorkshopInfo>> GetWorkshopItemsByUserAsync(object userId);
+	Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(PackageSorting sorting, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false);
 }

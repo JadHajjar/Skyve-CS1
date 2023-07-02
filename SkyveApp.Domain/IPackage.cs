@@ -6,6 +6,7 @@ public interface IPackage : IPackageIdentity
 	bool IsMod { get; }
 	bool IsLocal { get; }
 	bool IsBuiltIn { get; }
-	ILocalPackageWithContents? LocalPackage { get; }
+	ILocalPackageWithContents? LocalParentPackage { get; }
+	ILocalPackage? LocalPackage { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
 }

@@ -1,29 +1,29 @@
-﻿using Extensions;
-
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;
 internal class FavoriteProfileBubble : StatusBubbleBase
 {
+	private readonly INotifier _notifier;
 	private readonly IPlaysetManager _profileManager;
 
-	public Playset Profile { get; }
+	public ICustomPlayset Profile { get; }
 
-	public FavoriteProfileBubble(Playset profile)
+	public FavoriteProfileBubble(ICustomPlayset profile)
 	{
-		_profileManager = ServiceCenter.Get<IPlaysetManager>();
+		ServiceCenter.Get(out _notifier, out _profileManager);
 		Profile = profile;
 	}
 
-	public override Color? TintColor { get => Profile.Color; set { } }
+	public override Color? TintColor
+	{
+		get => Profile.Color;
+		set { }
+	}
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -37,7 +37,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		Text = Profile.Name;
 		ImageName = Profile.GetIcon();
 
-		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void UIChanged()
@@ -51,7 +51,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 	{
 		if (disposing)
 		{
-			_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+			_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 		}
 
 		base.Dispose(disposing);
@@ -64,11 +64,11 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		if (e.Button == MouseButtons.Left)
 		{
 			Loading = true;
-			_profileManager.SetProfile(Profile);
+			_profileManager.SetCurrentPlayset(Profile);
 		}
 	}
 
-	private void ProfileManager_ProfileChanged(Playset obj)
+	private void ProfileManager_ProfileChanged()
 	{
 		Loading = false;
 		Text = Profile.Name;

@@ -1,8 +1,4 @@
-﻿using Extensions;
-
-
-
-using SlickControls;
+﻿using SlickControls;
 
 using System.ComponentModel;
 using System.Drawing;
@@ -12,8 +8,6 @@ namespace SkyveApp.UserInterface.Content;
 
 internal class UserIcon : SlickImageControl
 {
-	[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-	public ulong UserId { get; set; }
 	[Category("Appearance"), DefaultValue(true)]
 	public bool HalfColor { get; set; } = true;
 

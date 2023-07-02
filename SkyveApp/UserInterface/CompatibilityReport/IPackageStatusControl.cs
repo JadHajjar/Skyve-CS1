@@ -1,19 +1,12 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
+﻿using SkyveApp.Domain.Enums;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Dropdowns;
 using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -114,7 +107,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		Type = typeDropDown.SelectedItem,
 		Action = DD_Action.SelectedItem,
 		Note = TB_Note.Text,
-		Packages = P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId).ToArray(),
+		Packages = P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id).ToArray(),
 	};
 
 	protected override void DesignChanged(FormDesign design)
@@ -153,7 +146,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	{
 		foreach (var item in packages)
 		{
-			if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == item))
+			if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Id == item))
 			{
 				P_Packages.Controls.Add(new MiniPackageControl(item) { Dock = DockStyle.Top });
 			}
@@ -169,7 +162,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 	{
 		if (P_Packages.Controls.Count > 0)
 		{
-			Clipboard.SetText(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId).ListStrings(","));
+			Clipboard.SetText(P_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id).ListStrings(","));
 		}
 	}
 
@@ -186,7 +179,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		{
 			if (ulong.TryParse(item.Value, out var id))
 			{
-				if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == id))
+				if (!P_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Id == id))
 				{
 					P_Packages.Controls.Add(new MiniPackageControl(id) { Dock = DockStyle.Top });
 				}

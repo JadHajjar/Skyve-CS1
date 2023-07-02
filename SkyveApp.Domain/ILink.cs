@@ -3,7 +3,7 @@
 namespace SkyveApp.Domain;
 public interface ILink
 {
-	public LinkType Type { get; }
+	public LinkType Type { get; set; }
 	public string? Url { get; }
 	public string? Title { get; }
 }

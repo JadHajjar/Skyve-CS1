@@ -1,11 +1,12 @@
 ﻿using SkyveApp.Domain.Enums;
 
-using System;
 using System.Collections.Generic;
 
 namespace SkyveApp.Domain.Systems;
 public interface ICompatibilityManager
 {
+	bool FirstLoadComplete { get; }
+
 	ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false);
 	IPackageIdentity GetFinalSuccessor(IPackageIdentity item);
 	NotificationType GetNotification(ICompatibilityInfo info);
@@ -19,4 +20,5 @@ public interface ICompatibilityManager
 	void ToggleSnoozed(ICompatibilityItem reportItem);
 	void DownloadData();
 	void CacheReport();
+	bool IsUserVerified(IUser author);
 }

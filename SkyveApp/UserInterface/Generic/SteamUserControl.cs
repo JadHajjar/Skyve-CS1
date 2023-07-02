@@ -1,40 +1,23 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
+﻿using SkyveApp.Domain.CS1.Steam;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Generic;
 internal class SteamUserControl : SlickControl
 {
+	private readonly IUserService _userService = ServiceCenter.Get<IUserService>();
+	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
+	private readonly ulong _steamId;
+
 	public SteamUserControl()
 	{
 		Visible = false;
 		Enabled = false;
 		Cursor = Cursors.Hand;
-
-		new BackgroundAction(async () =>
-		{
-			var steamId = SteamUtil.GetLoggedInSteamId();
-
-			if (steamId != 0)
-			{
-				User = await SteamUtil.GetUserAsync(steamId);
-
-				if (User is not null)
-				{
-					this.TryInvoke(Show);
-				}
-			}
-		}).Run();
 	}
 
 	public SteamUserControl(ulong steamId)
@@ -42,19 +25,7 @@ internal class SteamUserControl : SlickControl
 		Visible = false;
 		Enabled = false;
 		Cursor = Cursors.Hand;
-
-		new BackgroundAction(async () =>
-		{
-			if (steamId != 0)
-			{
-				User = await SteamUtil.GetUserAsync(steamId);
-
-				if (User is not null)
-				{
-					this.TryInvoke(Show);
-				}
-			}
-		}).Run();
+		_steamId = steamId;
 	}
 
 	protected override void UIChanged()
@@ -72,7 +43,7 @@ internal class SteamUserControl : SlickControl
 		}
 	}
 
-	public SteamUser? User { get; private set; }
+	public IUser? User => _steamId==0? _userService.User: _workshopService.GetUser(_steamId);
 	public string? InfoText { get; set; }
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -115,7 +86,7 @@ internal class SteamUserControl : SlickControl
 			Size = new(width, height);
 		}
 
-		if (ServiceCenter.Get<ICompatibilityManager>().CompatibilityData.Authors.TryGet(User.SteamId)?.Verified ?? false)
+		if (ServiceCenter.Get<ICompatibilityManager>().IsUserVerified(User))
 		{
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 

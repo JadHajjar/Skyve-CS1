@@ -14,7 +14,7 @@ public interface ILocationManager
 	string ModsPath { get; }
 	string MonoPath { get; }
 	string SkyveAppDataPath { get; }
-	string SkyveProfilesAppDataPath { get; }
+	string SkyvePlaysetsAppDataPath { get; }
 	string SteamPath { get; set; }
 	string SteamPathWithExe { get; }
 	string StylesPath { get; }

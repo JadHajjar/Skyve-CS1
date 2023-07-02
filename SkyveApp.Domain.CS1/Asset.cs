@@ -1,5 +1,7 @@
 ﻿using Extensions;
 
+using SkyveApp.Systems;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +12,7 @@ public class Asset : IAsset
 	public Asset(ILocalPackageWithContents package, string crpPath, SkyveShared.CSCache.Asset? asset)
 	{
 		FilePath = crpPath;
-		LocalPackage = package;
+		LocalParentPackage = package;
 		LocalSize = new FileInfo(FilePath).Length;
 		LocalTime = File.GetLastWriteTimeUtc(FilePath);
 
@@ -27,18 +29,19 @@ public class Asset : IAsset
 	}
 
 	public string FilePath { get; }
-	public ILocalPackageWithContents LocalPackage { get; }
+	public ILocalPackageWithContents LocalParentPackage { get; }
 	public long LocalSize { get; }
 	public DateTime LocalTime { get; }
 	public string Name { get; }
 	public string[] AssetTags { get; }
 	public bool IsMod { get; }
-	public string Folder => LocalPackage.Folder;
-	public bool IsLocal => LocalPackage.IsLocal;
-	public bool IsBuiltIn => LocalPackage.IsBuiltIn;
-	public IEnumerable<IPackageRequirement> Requirements => LocalPackage.Requirements;
-	public ulong Id => LocalPackage.Id;
-	public string? Url => LocalPackage.Url;
+	public string Folder => LocalParentPackage.Folder;
+	public bool IsLocal => LocalParentPackage.IsLocal;
+	public bool IsBuiltIn => LocalParentPackage.IsBuiltIn;
+	public IEnumerable<IPackageRequirement> Requirements => LocalParentPackage.Requirements;
+	public ulong Id => LocalParentPackage.Id;
+	public string? Url => LocalParentPackage.Url;
+	ILocalPackage? IPackage.LocalPackage => this;
 
 	public override bool Equals(object? obj)
 	{
@@ -58,7 +61,7 @@ public class Asset : IAsset
 
 	public IWorkshopInfo? GetWorkshopInfo()
 	{
-		return LocalPackage.GetWorkshopInfo();
+		return LocalParentPackage.GetWorkshopInfo();
 	}
 
 	public static bool operator ==(Asset? left, Asset? right)

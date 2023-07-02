@@ -1,22 +1,17 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
-
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;
 internal class ProfileBubble : StatusBubbleBase
 {
 	private readonly IPlaysetManager _profileManager;
+	private readonly INotifier _notifier;
 
 	public ProfileBubble()
-	{ 
-		_profileManager = ServiceCenter.Get<IPlaysetManager>();
+	{
+		ServiceCenter.Get(out _notifier, out _profileManager);
 	}
 
 	public override Color? TintColor { get => _profileManager.CurrentPlayset.Color; set { } }
@@ -33,17 +28,17 @@ internal class ProfileBubble : StatusBubbleBase
 		Text = Locale.ProfileBubble;
 		ImageName = _profileManager.CurrentPlayset.GetIcon();
 
-		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void Dispose(bool disposing)
 	{
 		base.Dispose(disposing);
 
-		_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Playset obj)
+	private void ProfileManager_ProfileChanged()
 	{
 		ImageName = _profileManager.CurrentPlayset.GetIcon();
 	}
@@ -61,9 +56,9 @@ internal class ProfileBubble : StatusBubbleBase
 			DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, _profileManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
 		}
 
-		if (ServiceCenter.Get<INotifier>().ProfilesLoaded)
+		if (ServiceCenter.Get<INotifier>().PlaysetsLoaded)
 		{
-			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_profileManager.Profiles.Count() - 1, Locale.Profile.FormatPlural(_profileManager.Profiles.Count() - 1).ToLower()));
+			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_profileManager.Playsets.Count() - 1, Locale.Profile.FormatPlural(_profileManager.Playsets.Count() - 1).ToLower()));
 		}
 	}
 }

@@ -8,15 +8,15 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace SkyveApp.Utilities.IO;
-public class MacAssemblyUtil
+namespace SkyveApp.Systems.CS1.Utilities.IO;
+internal class MacAssemblyUtil
 {
 	private readonly ILocationManager _locationManager;
-	private readonly ContentUtil _contentUtil;
-	private readonly IOUtil _iOUtil;
+	private readonly ContentManager _contentUtil;
+	private readonly IIOUtil _iOUtil;
 	private readonly ILogger _logger;
 
-	public MacAssemblyUtil(ILocationManager locationManager, ContentUtil contentUtil, ILogger logger, IOUtil iOUtil)
+	public MacAssemblyUtil(ILocationManager locationManager, ContentManager contentUtil, ILogger logger, IIOUtil iOUtil)
 	{
 		_locationManager = locationManager;
 		_contentUtil = contentUtil;
@@ -30,7 +30,7 @@ public class MacAssemblyUtil
 		{
 			var cache = _contentUtil.GetDllModCache(path, out version);
 
-			if (cache == true || (cache is null && CheckDllImplementsInterface(path, out version)))
+			if (cache == true || cache is null && CheckDllImplementsInterface(path, out version))
 			{
 				_contentUtil.SetDllModCache(path, true, version);
 				dllPath = path;

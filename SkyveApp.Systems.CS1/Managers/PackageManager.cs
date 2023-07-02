@@ -4,7 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 
 using System;
 using System.Collections.Generic;
@@ -188,7 +188,7 @@ internal class PackageManager : IPackageManager
 			return;
 		}
 
-		if (item.LocalPackage?.Assets?.Any() ?? false)
+		if (item.LocalParentPackage?.Assets?.Any() ?? false)
 		{
 			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(item.Folder)));
 
@@ -197,7 +197,7 @@ internal class PackageManager : IPackageManager
 			target.RemoveEmptyFolders();
 		}
 
-		if (item.LocalPackage?.Mod is not null)
+		if (item.LocalParentPackage?.Mod is not null)
 		{
 			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.ModsPath, Path.GetFileName(item.Folder)));
 

@@ -16,6 +16,7 @@ public interface IWorkshopInfo : IPackageIdentity
 	bool IsRemoved { get; }
 	bool IsIncompatible { get; }
 	bool IsBanned { get; }
+	bool IsCollection { get; }
 	string[] Tags { get; }
 	IEnumerable<IPackageRequirement> Requirements { get; }
 }

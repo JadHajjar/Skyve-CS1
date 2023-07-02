@@ -31,7 +31,7 @@ internal class LocationManager : ILocationManager
 	public string MonoPath => CrossIO.Combine(DataPath, "Mono");
 	public string AddonsPath => CrossIO.Combine(AppDataPath, "Addons");
 	public string SkyveAppDataPath => CrossIO.Combine(AppDataPath, "Skyve");
-	public string SkyveProfilesAppDataPath => CrossIO.Combine(SkyveAppDataPath, "Profiles");
+	public string SkyvePlaysetsAppDataPath => CrossIO.Combine(SkyveAppDataPath, "Profiles");
 	public string ModsPath => CrossIO.Combine(AddonsPath, "Mods");
 	public string AssetsPath => CrossIO.Combine(AddonsPath, "Assets");
 	public string MapThemesPath => CrossIO.Combine(AddonsPath, "MapThemes");

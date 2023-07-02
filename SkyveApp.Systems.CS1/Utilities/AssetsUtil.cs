@@ -12,8 +12,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Utilities;
-public class AssetsUtil : IAssetUtil
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class AssetsUtil : IAssetUtil
 {
 	private readonly SkyveConfig _config;
 	private CustomTagsLibrary _findItTags;
@@ -102,7 +102,7 @@ public class AssetsUtil : IAssetUtil
 
 	public void SaveChanges()
 	{
-		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
+		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
 			return;
 		}

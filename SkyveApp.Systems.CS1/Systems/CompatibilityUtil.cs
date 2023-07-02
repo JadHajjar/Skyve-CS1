@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
+using SkyveApp.Systems.Compatibility;
 using SkyveApp.Systems.Compatibility.Domain;
 using SkyveApp.Systems.Compatibility.Domain.Api;
 
@@ -16,6 +17,13 @@ internal class CompatibilityUtil : ICompatibilityUtil
 	private const ulong THEMEMIXER_MOD_ID = 2954236385;
 	private const ulong RENDERIT_MOD_ID = 1794015399;
 	private const ulong PO_MOD_ID = 1094334744;
+
+	private readonly CompatibilityHelper _compatibilityHelper;
+
+	public CompatibilityUtil(CompatibilityHelper compatibilityHelper)
+	{
+		_compatibilityHelper = compatibilityHelper;
+	}
 
 	public DateTime MinimumModDate { get; } = new DateTime(2023, 6, 12);
 
@@ -32,16 +40,16 @@ internal class CompatibilityUtil : ICompatibilityUtil
 		}
 	}
 
-	public void PopulatePackageReport()
+	public void PopulatePackageReport(IndexedPackage packageData, CompatibilityInfo info)
 	{
 		if (packageData.Package.Type is PackageType.CSM && !packageData.Statuses.ContainsKey(StatusType.Reupload))
 		{
-			compatibilityUtil.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });
+			_compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });
 		}
 
 		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
 		{
-			compatibilityUtil.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
+			_compatibilityHelper.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
 			{
 				Packages = new ulong[]
 				{

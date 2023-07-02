@@ -1,19 +1,16 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.CS1.Utilities;
+﻿using SkyveApp.Domain.CS1.Utilities;
 
 using SlickControls;
 
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Generic;
-internal class LogTraceControl : SlickListControl<LogTrace>
+internal class LogTraceControl : SlickListControl<ILogTrace>
 {
-	private LogTrace? itemHovered;
+	private ILogTrace? itemHovered;
 
-	public LogTraceControl(IEnumerable<LogTrace> logs)
+	public LogTraceControl(IEnumerable<ILogTrace> logs)
 	{
 		Dock = DockStyle.Top;
 		CalculateItemSize += LogTraceControl_CalculateItemSize;
@@ -26,7 +23,7 @@ internal class LogTraceControl : SlickListControl<LogTrace>
 		Margin = UI.Scale(new Padding(3), UI.FontScale);
 	}
 
-	private void LogTraceControl_CalculateItemSize(object sender, SizeSourceEventArgs<LogTrace> e)
+	private void LogTraceControl_CalculateItemSize(object sender, SizeSourceEventArgs<ILogTrace> e)
 	{
 		var rect = ClientRectangle.Pad(Padding);
 		var y = rect.Top;
@@ -55,7 +52,7 @@ internal class LogTraceControl : SlickListControl<LogTrace>
 		e.Handled = true;
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<LogTrace> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<ILogTrace> item, MouseEventArgs e)
 	{
 		if (e.Button == MouseButtons.Left && itemHovered == item.Item)
 		{
@@ -71,7 +68,7 @@ internal class LogTraceControl : SlickListControl<LogTrace>
 		Cursor = itemHovered is not null ? Cursors.Hand : Cursors.Default;
 	}
 
-	protected override void OnPaintItem(ItemPaintEventArgs<LogTrace> e)
+	protected override void OnPaintItem(ItemPaintEventArgs<ILogTrace> e)
 	{
 		var rect = e.ClipRectangle.Pad(Padding);
 		var y = rect.Top;

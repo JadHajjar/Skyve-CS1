@@ -1,5 +1,4 @@
-﻿using SkyveApp.Services;
-using SkyveApp.UserInterface.Dropdowns;
+﻿using SkyveApp.UserInterface.Dropdowns;
 using SkyveApp.UserInterface.Generic;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -19,7 +18,7 @@ partial class PC_ContentList<T>
 	{
 		if (disposing && (components != null))
 		{
-			_compatibilityManager.ReportProcessed -= CentralManager_WorkshopInfoUpdated;
+			_notifier.CompatibilityReportProcessed -= CentralManager_WorkshopInfoUpdated;
 			_notifier.ContentLoaded -= CentralManager_ContentLoaded;
 			_notifier.ContentLoaded -= CentralManager_WorkshopInfoUpdated;
 			_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;

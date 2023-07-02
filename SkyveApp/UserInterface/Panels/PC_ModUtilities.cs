@@ -1,18 +1,11 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Enums;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+﻿using SkyveApp.Domain.Enums;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
-using SkyveApp.Utilities;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,15 +13,20 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_ModUtilities : PanelContent
 {
-	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
-	private readonly ICitiesManager _citiesManager = ServiceCenter.Get<ICitiesManager>();
-	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
-	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
-	private readonly ILocationManager _locationManager = ServiceCenter.Get<ILocationManager>();
-	private readonly IContentManager _contentManager =	ServiceCenter.Get<IContentManager>();
+	private readonly ISettings _settings;
+	private readonly ICitiesManager _citiesManager;
+	private readonly ISubscriptionsManager _subscriptionsManager;
+	private readonly INotifier _notifier;
+	private readonly ILocationManager _locationManager;
+	private readonly IPackageManager _contentManager;
+	private readonly IPackageUtil _packageUtil;
+	private readonly IWorkshopService _workshopService;
+	private readonly IDownloadService _downloadService;
 
 	public PC_ModUtilities()
 	{
+		ServiceCenter.Get(out _settings, out _citiesManager, out _subscriptionsManager, out _notifier, out _locationManager, out _packageUtil, out _contentManager, out _workshopService, out _downloadService);
+
 		InitializeComponent();
 
 		RefreshModIssues();
@@ -55,8 +53,8 @@ public partial class PC_ModUtilities : PanelContent
 
 	private void RefreshModIssues()
 	{
-		var modsOutOfDate = _contentManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.OutOfDate);
-		var modsIncomplete = _contentManager.Packages.AllWhere(x => x.Workshop && x.Status == DownloadStatus.PartiallyDownloaded);
+		var modsOutOfDate = _contentManager.Packages.AllWhere(x => _packageUtil.GetStatus(x, out _) == DownloadStatus.OutOfDate);
+		var modsIncomplete = _contentManager.Packages.AllWhere(x => _packageUtil.GetStatus(x, out _) == DownloadStatus.PartiallyDownloaded);
 
 		this.TryInvoke(() =>
 		{
@@ -149,9 +147,9 @@ public partial class PC_ModUtilities : PanelContent
 
 				if (ulong.TryParse(collectionId, out var steamId))
 				{
-					var contents = await SteamUtil.GetItemAsync(steamId);
+					var contents = await _workshopService.GetPackageAsync(new GenericPackageIdentity( steamId));
 
-					if (contents?.RequiredPackages?.Any() ?? false)
+					if (contents?.Requirements?.Any() ?? false)
 					{
 						Form.PushPanel(null, new PC_ViewCollection(contents));
 
@@ -169,7 +167,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		B_ReDownload.Loading = true;
 
-		await Task.Run(() => SteamUtil.Download(_contentManager.Mods.Where(x => x.Workshop && x.Package.Status is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded)));
+		await Task.Run(() => _downloadService.Download(_contentManager.Packages.Where(x => _packageUtil.GetStatus(x, out _) is DownloadStatus.OutOfDate or DownloadStatus.PartiallyDownloaded)));
 	}
 
 	private void TB_CollectionLink_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -186,7 +184,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		var assets = LsmUtil.LoadMissingAssets(obj);
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = Locale.MissingLSMReport });
+		Form.PushPanel(null, new PC_GenericPackageList(assets, false) { Text = Locale.MissingLSMReport });
 	}
 
 	private bool LSMDragDrop_ValidFile(object sender, string arg)
@@ -198,27 +196,23 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		var assets = LsmUtil.LoadUnusedAssets(obj);
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = Locale.UnusedLSMReport });
+		Form.PushPanel(null, new PC_GenericPackageList(assets, false) { Text = Locale.UnusedLSMReport });
 	}
 
 	private void DD_BOB_FileSelected(string obj)
 	{
 		var matches = Regex.Matches(File.ReadAllText(obj), "[\\>\"](\\d{8,20})\\.(.+?)[\\<\"]");
-		var assets = new List<Playset.Asset>();
+		var assets = new List<IPackageIdentity>();
 
 		foreach (Match item in matches)
 		{
-			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.SteamId == id))
+			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.Id == id))
 			{
-				assets.Add(new()
-				{
-					Name = item.Groups[2].Value,
-					SteamId = id
-				});
+				assets.Add(new GenericPackageIdentity(id));
 			}
 		}
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(P_BOB.Text) });
+		Form.PushPanel(null, new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(P_BOB.Text) });
 	}
 
 	private bool DD_BOB_ValidFile(object sender, string arg)
@@ -234,21 +228,17 @@ public partial class PC_ModUtilities : PanelContent
 	private void DD_TextImport_FileSelected(string obj)
 	{
 		var matches = Regex.Matches(File.ReadAllText(obj), "(\\d{8,20})");
-		var assets = new List<Playset.Asset>();
+		var assets = new List<IPackageIdentity>();
 
 		foreach (Match item in matches)
 		{
-			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.SteamId == id))
+			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.Id == id))
 			{
-				assets.Add(new()
-				{
-					Name = item.Groups[1].Value,
-					SteamId = id
-				});
+				assets.Add(new GenericPackageIdentity(id));
 			}
 		}
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(P_Text.Text) });
+		Form.PushPanel(null, new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(P_Text.Text) });
 	}
 
 	private void B_ImportClipboard_Click(object sender, EventArgs e)
@@ -259,21 +249,17 @@ public partial class PC_ModUtilities : PanelContent
 		}
 
 		var matches = Regex.Matches(Clipboard.GetText(), "(\\d{8,20})");
-		var assets = new List<Playset.Asset>();
+		var assets = new List<IPackageIdentity>();
 
 		foreach (Match item in matches)
 		{
-			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.SteamId == id))
+			if (ulong.TryParse(item.Groups[1].Value, out var id) && !assets.Any(x => x.Id == id))
 			{
-				assets.Add(new()
-				{
-					Name = item.Groups[1].Value,
-					SteamId = id
-				});
+				assets.Add(new GenericPackageIdentity(id));
 			}
 		}
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets) { Text = LocaleHelper.GetGlobalText(B_ImportClipboard.Text) });
+		Form.PushPanel(null, new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(B_ImportClipboard.Text) });
 	}
 
 	private void B_Cleanup_Click(object sender, EventArgs e)
@@ -308,7 +294,7 @@ public partial class PC_ModUtilities : PanelContent
 		if (!B_ReloadAllData.Loading)
 		{
 			B_ReloadAllData.Loading = true;
-			await Task.Run(ServiceCenter.Get<CentralManager>().Start);
+			await Task.Run(ServiceCenter.Get<ICentralManager>().Start);
 			B_ReloadAllData.Loading = false;
 			var img = B_ReloadAllData.ImageName;
 			B_ReloadAllData.ImageName = "I_Check";
@@ -328,7 +314,7 @@ public partial class PC_ModUtilities : PanelContent
 
 	private async void B_ResetModsCache_Click(object sender, EventArgs e)
 	{
-		ServiceCenter.Get<IContentUtil>().ClearDllCache();
+		ServiceCenter.Get<IModDllManager>().ClearDllCache();
 		var img = B_ResetModsCache.ImageName;
 		B_ResetModsCache.ImageName = "I_Check";
 		await Task.Delay(1500);
@@ -366,7 +352,7 @@ public partial class PC_ModUtilities : PanelContent
 	private async void B_ResetSteamCache_Click(object sender, EventArgs e)
 	{
 		var img = B_ResetSteamCache.ImageName;
-		SteamUtil.ClearCache();
+		_workshopService.ClearCache();
 		B_ResetSteamCache.ImageName = "I_Check";
 		await Task.Delay(1500);
 		B_ResetSteamCache.ImageName = img;

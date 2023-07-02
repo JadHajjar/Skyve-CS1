@@ -1,14 +1,8 @@
-﻿using Extensions;
-
-using SkyveApp.Systems;
-using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Utilities;
+﻿using SkyveApp.Systems.Compatibility.Domain.Api;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -17,6 +11,8 @@ public partial class PC_ReviewRequests : PanelContent
 	private List<ReviewRequest> _reviewRequests;
 
 	internal ulong CurrentPackage;
+
+	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
 
 	public PC_ReviewRequests(ReviewRequest[] reviewRequests)
 	{
@@ -35,7 +31,7 @@ public partial class PC_ReviewRequests : PanelContent
 	{
 		base.OnShown();
 
-		_reviewRequests = (await SkyveApiUtil.GetReviewRequests())?.ToList() ?? _reviewRequests;
+		_reviewRequests = (await ServiceCenter.Get<SkyveApiUtil>().GetReviewRequests())?.ToList() ?? _reviewRequests;
 
 		packageCrList.SetItems(_reviewRequests.Select(x => x.PackageId).Distinct());
 
@@ -66,7 +62,7 @@ public partial class PC_ReviewRequests : PanelContent
 
 		if (e.Button == MouseButtons.Right)
 		{
-			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), PC_PackagePage.GetRightClickMenuItems(SteamUtil.GetItem((ulong)sender)!));
+			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), PC_PackagePage.GetRightClickMenuItems(_workshopService.GetPackage(new GenericPackageIdentity((ulong)sender)!)!));
 		}
 	}
 
@@ -82,7 +78,7 @@ public partial class PC_ReviewRequests : PanelContent
 
 	private void PackageCrList_CanDrawItem(object sender, CanDrawItemEventArgs<ulong> e)
 	{
-		var package = SteamUtil.GetItem(e.Item);
+		var package = _workshopService.GetInfo(new GenericPackageIdentity(e.Item));
 
 		if (package is null)
 		{
@@ -91,7 +87,7 @@ public partial class PC_ReviewRequests : PanelContent
 
 		e.DoNotDraw = !(TB_Search.Text.SearchCheck(package.ToString())
 			|| TB_Search.Text.SearchCheck(package.Author?.Name)
-			|| package.SteamId.ToString().IndexOf(TB_Search.Text, StringComparison.OrdinalIgnoreCase) != -1);
+			|| package.Id.ToString().IndexOf(TB_Search.Text, StringComparison.OrdinalIgnoreCase) != -1);
 	}
 
 	private void reviewRequestList1_ItemMouseClick(object sender, MouseEventArgs e)
@@ -117,7 +113,7 @@ public partial class PC_ReviewRequests : PanelContent
 
 		foreach (var request in _reviewRequests.Where(x => x.PackageId == CurrentPackage))
 		{
-			await SkyveApiUtil.ProcessReviewRequest(request);
+			await ServiceCenter.Get<SkyveApiUtil>().ProcessReviewRequest(request);
 		}
 
 		OnShown();

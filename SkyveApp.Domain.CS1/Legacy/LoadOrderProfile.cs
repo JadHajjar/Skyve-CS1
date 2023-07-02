@@ -147,7 +147,7 @@ public class LoadOrderProfile
 		}
 	}
 
-	public Playset ToLot2Profile(string name)
+	public Playset ToSkyvePlayset(string name)
 	{
 		var profile = new Playset(name)
 		{

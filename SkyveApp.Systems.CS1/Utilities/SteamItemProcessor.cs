@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Systems;
 
@@ -8,8 +9,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Utilities;
-public class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 {
 	public const string STEAM_CACHE_FILE = "SteamModsCache.json";
 
@@ -38,7 +39,9 @@ public class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 	protected override void CacheItems(Dictionary<ulong, SteamWorkshopInfo> results)
 	{
 		try
-		{ ISave.Save(results, STEAM_CACHE_FILE); }
+		{
+			ISave.Save(results, STEAM_CACHE_FILE);
+		}
 		catch { }
 	}
 
@@ -57,6 +60,9 @@ public class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 
 			return dic;
 		}
-		catch { return null; }
+		catch
+		{
+			return null;
+		}
 	}
 }

@@ -1,19 +1,10 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
-
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
-internal class ProfilesDropDown : SlickSelectionDropDown<Playset>
+internal class ProfilesDropDown : SlickSelectionDropDown<IPlayset>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -21,18 +12,18 @@ internal class ProfilesDropDown : SlickSelectionDropDown<Playset>
 
 		if (Live)
 		{
-			Items = ServiceCenter.Get<IPlaysetManager>().Profiles.ToArray();
+			Items = ServiceCenter.Get<IPlaysetManager>().Playsets.ToArray();
 
 			selectedItem = Items[0];
 		}
 	}
 
-	protected override IEnumerable<Playset> OrderItems(IEnumerable<Playset> items)
+	protected override IEnumerable<IPlayset> OrderItems(IEnumerable<IPlayset> items)
 	{
-		return items.OrderByDescending(x => x.Temporary).ThenByDescending(x => x.LastEditDate);
+		return items.OrderByDescending(x => x.Temporary).ThenByDescending(x => x.DateUpdated);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, Playset item)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IPlayset item)
 	{
 		if (item is null)
 		{ return; }

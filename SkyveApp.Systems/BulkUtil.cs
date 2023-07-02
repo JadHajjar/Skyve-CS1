@@ -1,4 +1,6 @@
-﻿using SkyveApp.Domain;
+﻿using Extensions;
+
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 
 using System.Collections.Generic;
@@ -74,11 +76,11 @@ internal class BulkUtil : IBulkUtil
 		}
 	}
 
-	public void SetBulkEnabled(IEnumerable<IMod> mods, bool value)
+	public void SetBulkEnabled(IEnumerable<ILocalPackage> packages, bool value)
 	{
 		_notifier.BulkUpdating = true;
 
-		var modList = mods.ToList();
+		var modList = packages.ToList();
 
 		if (modList.Count == 0)
 		{
@@ -86,13 +88,21 @@ internal class BulkUtil : IBulkUtil
 			return;
 		}
 
-		for (var i = 1; i < modList.Count; i++)
+		for (var i = 0; i < modList.Count; i++)
 		{
-			_modUtil.SetEnabled(modList[i], value);
+			if (i == modList.Count - 1)
+			{
+				_notifier.BulkUpdating = false;
+			}
+
+			if (modList[i] is IMod mod)
+			{
+				_modUtil.SetEnabled(mod, value);
+			}
+			else if (modList[i].LocalParentPackage?.Mod is IMod mod_)
+			{
+				_modUtil.SetEnabled(mod_, value);
+			}
 		}
-
-		_notifier.BulkUpdating = false;
-
-		_modUtil.SetEnabled(modList[0], value);
 	}
 }

@@ -1,15 +1,6 @@
-﻿using Extensions;
+﻿using SkyveApp.Domain.Enums;
+using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems.Compatibility;
-using SkyveApp.Utilities;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;
@@ -18,15 +9,12 @@ internal class ModsBubble : StatusBubbleBase
 {
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
-	private readonly IContentManager _contentManager;
-	private readonly IPlaysetManager _profileManager;
+	private readonly IPackageUtil _packageUtil;
+	private readonly IPackageManager _contentManager;
 
 	public ModsBubble()
 	{
-		_settings = ServiceCenter.Get<ISettings>();
-		_notifier = ServiceCenter.Get<INotifier>();
-		_contentManager = ServiceCenter.Get<IContentManager>();
-		_profileManager = ServiceCenter.Get<IPlaysetManager>();
+		ServiceCenter.Get(out _settings, out _notifier, out _packageUtil, out _contentManager);
 	}
 
 	protected override void OnHandleCreated(EventArgs e)
@@ -50,7 +38,7 @@ internal class ModsBubble : StatusBubbleBase
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += Invalidate;
-		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void Dispose(bool disposing)
@@ -60,10 +48,10 @@ internal class ModsBubble : StatusBubbleBase
 		_notifier.ContentLoaded -= Invalidate;
 		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated -= Invalidate;
-		_profileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Playset obj)
+	private void ProfileManager_ProfileChanged()
 	{
 		Invalidate();
 	}
@@ -94,14 +82,14 @@ internal class ModsBubble : StatusBubbleBase
 
 		foreach (var mod in _contentManager.Mods)
 		{
-			if (!mod.IsIncluded)
+			if (!_packageUtil.IsIncluded(mod))
 			{
 				continue;
 			}
 
 			modsIncluded++;
 
-			if (mod.IsEnabled)
+			if (_packageUtil.IsEnabled(mod))
 			{
 				modsEnabled++;
 			}
@@ -111,7 +99,7 @@ internal class ModsBubble : StatusBubbleBase
 				continue;
 			}
 
-			switch (mod.Package.Status)
+			switch (_packageUtil.GetStatus(mod, out _))
 			{
 				case DownloadStatus.OutOfDate:
 					modsOutOfDate++;
@@ -121,7 +109,7 @@ internal class ModsBubble : StatusBubbleBase
 					break;
 			}
 
-			var notif = mod.GetCompatibilityInfo().Notification;
+			var notif = mod.GetCompatibilityInfo().GetNotification();
 
 			if (crDic.ContainsKey(notif))
 			{
@@ -133,7 +121,7 @@ internal class ModsBubble : StatusBubbleBase
 			}
 		}
 
-		if (!_settings.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{
 			DrawText(e, ref targetHeight, Locale.IncludedCount.FormatPlural(modsIncluded, Locale.Mod.FormatPlural(modsIncluded).ToLower()));
 		}

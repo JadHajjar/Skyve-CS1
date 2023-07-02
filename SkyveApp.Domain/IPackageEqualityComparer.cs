@@ -6,18 +6,12 @@ public class IPackageEqualityComparer : IEqualityComparer<IPackage>
 {
 	public bool Equals(IPackage x, IPackage y)
 	{
-		if (x is null)
-		{
-			return y is null;
-		}
-
-		if (y is null)
-		{
-			return x is null;
-		}
-
-		return x.Id == y.Id
-|| x is ILocalPackage localPackage1 && y is ILocalPackage localPackage2 && localPackage1.Folder == localPackage2.Folder;
+		return x is null
+			? y is null
+			: y is null
+			? x is null
+			: x.Id == y.Id
+|| (x is ILocalPackage localPackage1 && y is ILocalPackage localPackage2 && localPackage1.Folder == localPackage2.Folder);
 	}
 
 	public int GetHashCode(IPackage obj)

@@ -1,19 +1,10 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
+﻿using SkyveApp.Domain.CS1;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Lists;
-using SkyveApp.Utilities;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,7 +18,7 @@ public partial class PC_ProfileList : PanelContent
 
 	public PC_ProfileList() : this(null) { }
 
-	public PC_ProfileList(IEnumerable<IProfile>? profiles)
+	public PC_ProfileList(IEnumerable<ICustomPlayset>? profiles)
 	{
 		InitializeComponent();
 
@@ -43,14 +34,14 @@ public partial class PC_ProfileList : PanelContent
 			LC_Items.MergeProfile += Ctrl_MergeProfile;
 			LC_Items.ExcludeProfile += Ctrl_ExcludeProfile;
 			LC_Items.DisposeProfile += Ctrl_DisposeProfile;
-			LC_Items.Loading = !_notifier.ProfilesLoaded;
+			LC_Items.Loading = !_notifier.PlaysetsLoaded;
 
 			if (!LC_Items.Loading)
 			{
-				LC_Items.SetItems(_profileManager.Profiles.Skip(1));
+				LC_Items.SetItems(_profileManager.Playsets.Skip(1));
 			}
 
-			_profileManager.ProfileChanged += LoadProfile;
+			_notifier.PlaysetChanged += LoadProfile;
 		}
 		else
 		{
@@ -73,7 +64,7 @@ public partial class PC_ProfileList : PanelContent
 		RefreshCounts();
 	}
 
-	private void Ctrl_CanDrawItem(object sender, CanDrawItemEventArgs<IProfile> e)
+	private void Ctrl_CanDrawItem(object sender, CanDrawItemEventArgs<ICustomPlayset> e)
 	{
 		var valid = true;
 
@@ -84,7 +75,7 @@ public partial class PC_ProfileList : PanelContent
 
 		if (!string.IsNullOrWhiteSpace(TB_Search.Text))
 		{
-			var author = SteamUtil.GetUser(e.Item.Author);
+			var author = e.Item.Author;
 
 			valid &= TB_Search.Text.SearchCheck(e.Item.Name) || (author is not null && TB_Search.Text.SearchCheck(author.Name));
 		}
@@ -92,31 +83,31 @@ public partial class PC_ProfileList : PanelContent
 		e.DoNotDraw = !valid;
 	}
 
-	private void Ctrl_DisposeProfile(Playset obj)
+	private void Ctrl_DisposeProfile(ICustomPlayset obj)
 	{
-		_profileManager.DeleteProfile(obj);
+		_profileManager.DeletePlayset(obj);
 	}
 
-	private void Ctrl_ExcludeProfile(Playset obj)
-	{
-		FLP_Profiles.Enabled = false;
-		_profileManager.ExcludeProfile(obj);
-	}
-
-	private void Ctrl_MergeProfile(Playset obj)
+	private void Ctrl_ExcludeProfile(ICustomPlayset obj)
 	{
 		FLP_Profiles.Enabled = false;
-		_profileManager.MergeProfile(obj);
+		_profileManager.ExcludeFromCurrentPlayset(obj);
 	}
 
-	private void Ctrl_LoadProfile(Playset obj)
+	private void Ctrl_MergeProfile(ICustomPlayset obj)
+	{
+		FLP_Profiles.Enabled = false;
+		_profileManager.MergeIntoCurrentPlayset(obj);
+	}
+
+	private void Ctrl_LoadProfile(ICustomPlayset obj)
 	{
 		if (!I_ProfileIcon.Loading)
 		{
 			I_ProfileIcon.Loading = true;
 			L_CurrentProfile.Text = obj.Name;
 			I_Favorite.Visible = B_Save.Visible = false;
-			_profileManager.SetProfile(obj);
+			_profileManager.SetCurrentPlayset(obj);
 		}
 	}
 
@@ -126,7 +117,7 @@ public partial class PC_ProfileList : PanelContent
 
 		if (!LC_Items.ReadOnly)
 		{
-			LoadProfile(_profileManager.CurrentPlayset);
+			LoadProfile();
 		}
 	}
 
@@ -134,8 +125,8 @@ public partial class PC_ProfileList : PanelContent
 	{
 		if (L_Counts.Visible)
 		{
-			var favorites = _profileManager.Profiles.Count(x => x.IsFavorite);
-			var total = _profileManager.Profiles.Count(x => !x.Temporary);
+			var favorites = _profileManager.Playsets.Count(x => x.IsFavorite);
+			var total = _profileManager.Playsets.Count(x => !x.Temporary);
 			var text = string.Empty;
 
 			if (favorites == 0)
@@ -206,10 +197,11 @@ public partial class PC_ProfileList : PanelContent
 		return false;
 	}
 
-	private void LoadProfile(Playset profile)
+	private void LoadProfile()
 	{
 		this.TryInvoke(() =>
 	{
+		var profile = _profileManager.CurrentPlayset;
 		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 		I_ProfileIcon.ImageName = profile.GetIcon();
@@ -273,7 +265,7 @@ public partial class PC_ProfileList : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		_profileManager.SetProfile(Playset.TemporaryPlayset);
+		_profileManager.SetCurrentPlayset(Playset.TemporaryPlayset);
 	}
 
 	private async void B_Save_Click(object sender, EventArgs e)
@@ -337,7 +329,7 @@ public partial class PC_ProfileList : PanelContent
 		{
 			B_Discover.Loading = true;
 
-			var profiles = await SkyveApiUtil.GetPublicProfiles();
+			var profiles = await ServiceCenter.Get< SkyveApiUtil>().GetPublicProfiles();
 
 			Invoke(() => Form.PushPanel(new PC_ProfileList(profiles)));
 		}

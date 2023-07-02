@@ -1,16 +1,9 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+﻿using SkyveApp.Domain.CS1.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Generic;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -172,7 +165,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		}).Run();
 	}
 
-	private void SetTrace(List<LogTrace> logs)
+	private void SetTrace(List<ILogTrace> logs)
 	{
 		TLP_Errors.Controls.Clear(true);
 		TLP_Errors.Controls.Add(new LogTraceControl(logs));
@@ -231,7 +224,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenLog_Click(object sender, EventArgs e)
 	{
-		ServiceCenter.Get<IOUtil>().Execute(_logUtil.GameLogFile, string.Empty);
+		ServiceCenter.Get<IIOUtil>().Execute(_logUtil.GameLogFile, string.Empty);
 	}
 
 	private void B_OpenAppData_Click(object sender, EventArgs e)

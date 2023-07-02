@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Systems;
 
@@ -8,14 +9,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Utilities;
-public class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 {
 	public const string STEAM_USER_CACHE_FILE = "SteamUsersCache.json";
 
 	public SteamUserProcessor() : base(200, 5000, GetCachedInfo())
 	{
-
+		MaxCacheTime = TimeSpan.FromDays(2);
 	}
 
 	protected override bool CanProcess()
@@ -38,7 +39,9 @@ public class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 	protected override void CacheItems(Dictionary<ulong, SteamUser> results)
 	{
 		try
-		{ ISave.Save(results, STEAM_USER_CACHE_FILE); }
+		{
+			ISave.Save(results, STEAM_USER_CACHE_FILE);
+		}
 		catch { }
 	}
 
@@ -57,6 +60,9 @@ public class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 
 			return dic;
 		}
-		catch { return null; }
+		catch
+		{
+			return null;
+		}
 	}
 }

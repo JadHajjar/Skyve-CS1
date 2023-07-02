@@ -1,6 +1,4 @@
-﻿using SkyveApp.Domain.Enums;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SkyveApp.Domain;
 public interface ICompatibilityInfo

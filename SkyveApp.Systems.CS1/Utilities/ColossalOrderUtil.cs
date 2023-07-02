@@ -1,7 +1,6 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.ColossalOrder;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Systems;
@@ -11,8 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 
-namespace SkyveApp.Utilities;
-public class ColossalOrderUtil
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class ColossalOrderUtil
 {
 	private const string GAME_SETTINGS_FILE_NAME = "userGameState";
 	private SettingsFile _settingsFile;
@@ -22,7 +21,7 @@ public class ColossalOrderUtil
 	private readonly DelayedAction _delayedAction = new(500);
 
 	private readonly ILocationManager _locationManager;
-	private readonly SettingsService  _settings;
+	private readonly SettingsService _settings;
 	private readonly INotifier _notifier;
 
 	public ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings)
@@ -131,7 +130,7 @@ public class ColossalOrderUtil
 	private unsafe int GetLegacyHashCode(string str)
 	{
 		//fixed (char* ptr = str + (RuntimeHelpers.OffsetToStringData / 2))
-		fixed (char* ptr = str + (12 / 2))
+		fixed (char* ptr = str + 12 / 2)
 		{
 			var ptr2 = ptr;
 			var ptr3 = ptr2 + str.Length - 1;
@@ -142,11 +141,13 @@ public class ColossalOrderUtil
 				num = (num << 5) - num + ptr2[1];
 				ptr2 += 2;
 			}
+
 			ptr3++;
 			if (ptr2 < ptr3)
 			{
 				num = (num << 5) - num + *ptr2;
 			}
+
 			return num;
 		}
 	}

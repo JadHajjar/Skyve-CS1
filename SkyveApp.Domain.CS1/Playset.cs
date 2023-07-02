@@ -13,21 +13,23 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
+using static System.Resources.ResXFileRef;
+
 namespace SkyveApp.Domain.CS1;
-public class Playset : IPlayset
+public class Playset : ICustomPlayset
 {
 	private Bitmap? _banner;
 	private byte[]? _bannerBytes;
 	public static readonly Playset TemporaryPlayset = new(ServiceCenter.Get<ILocale>().Get("TemporaryPlayset")) { Temporary = true, AutoSave = false };
 
-	[CloneIgnore] public string Name { get; set; }
+	[CloneIgnore] public string? Name { get; set; }
 	[CloneIgnore] public bool Temporary { get; set; }
 	[JsonIgnore] public DateTime LastEditDate { get; set; }
 	[JsonIgnore] public DateTime DateCreated { get; set; }
 	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
 	[JsonIgnore] public int AssetCount => Assets.Count;
 	[JsonIgnore] public int ModCount => Mods.Count;
-	[JsonIgnore] public IEnumerable<IPackage> Packages => Assets.Concat(Mods);
+	[JsonIgnore] public IEnumerable<IPlaysetEntry> Packages => Assets.Concat(Mods);
 
 	public Playset(string name) : this()
 	{
@@ -125,6 +127,13 @@ public class Playset : IPlayset
 
 			return _banner = new Bitmap(ms);
 		}
+		set
+		{
+			if (value is null)
+				BannerBytes = null;
+			else
+				BannerBytes = (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
+		}
 	}
 
 	IUser? IPlayset.Author => ServiceCenter.Get<IWorkshopService>().GetUser(Author);
@@ -132,7 +141,7 @@ public class Playset : IPlayset
 	DateTime IPlayset.DateUpdated { get; }
 	DateTime IPlayset.DateUsed { get; }
 
-	public class Asset : IPackage, ILocalPackageIdentity
+	public class Asset : IPackage, IPlaysetEntry
 	{
 		private string? _name;
 
@@ -143,13 +152,14 @@ public class Playset : IPlayset
 		[JsonIgnore] public bool IsMod { get; set; }
 		[JsonIgnore, CloneIgnore] public bool IsLocal => SteamId == 0;
 		[JsonIgnore, CloneIgnore] public bool IsBuiltIn { get; }
-		[JsonIgnore, CloneIgnore] public virtual ILocalPackageWithContents? LocalPackage => ServiceCenter.Get<IPlaysetManager>().GetAsset(this)?.LocalPackage;
-		[JsonIgnore, CloneIgnore] public IEnumerable<IPackageRequirement> Requirements => LocalPackage?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
+		[JsonIgnore, CloneIgnore] public virtual ILocalPackageWithContents? LocalParentPackage => ServiceCenter.Get<IPlaysetManager>().GetAsset(this)?.LocalParentPackage;
+		[JsonIgnore, CloneIgnore] public virtual ILocalPackage? LocalPackage => ServiceCenter.Get<IPlaysetManager>().GetAsset(this);
+		[JsonIgnore, CloneIgnore] public IEnumerable<IPackageRequirement> Requirements => LocalParentPackage?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 		[JsonIgnore, CloneIgnore] public ulong Id => SteamId;
 		[JsonIgnore, CloneIgnore] public string? Url => SteamId == 0 ? null : $"https://steamcommunity.com/workshop/filedetails/?id={Id}";
 		[JsonIgnore, CloneIgnore] public string FilePath => RelativePath!;
 
-		public Asset(CS1.Asset asset)
+		public Asset(IAsset asset)
 		{
 			SteamId = asset.Id;
 			Name = asset.Name;
@@ -171,12 +181,9 @@ public class Playset : IPlayset
 		{
 			var name = this.GetWorkshopInfo()?.Name;
 
-			if (name is not null)
-			{
-				return name;
-			}
-
-			return _name is not null
+			return name is not null
+				? name
+				: _name is not null
 				? _name
 				: !string.IsNullOrEmpty(RelativePath)
 				? Path.GetFileNameWithoutExtension(RelativePath)
@@ -196,9 +203,10 @@ public class Playset : IPlayset
 	public class Mod : Asset
 	{
 		public bool Enabled { get; set; }
-		[JsonIgnore, CloneIgnore] public override ILocalPackageWithContents? LocalPackage => ServiceCenter.Get<IPlaysetManager>().GetMod(this)?.LocalPackage;
+		[JsonIgnore, CloneIgnore] public override ILocalPackageWithContents? LocalParentPackage => ServiceCenter.Get<IPlaysetManager>().GetMod(this)?.LocalParentPackage;
+		[JsonIgnore, CloneIgnore] public override ILocalPackage? LocalPackage => ServiceCenter.Get<IPlaysetManager>().GetMod(this);
 
-		public Mod(CS1.Mod mod)
+		public Mod(IMod mod)
 		{
 			IsMod = true;
 			SteamId = mod.Id;

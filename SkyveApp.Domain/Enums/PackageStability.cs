@@ -6,6 +6,7 @@ public enum PackageStability
 	[CRN(NotificationType.Info)] NotEnoughInformation = 2,
 	[CRN(NotificationType.Warning)] HasIssues = 3,
 	[CRN(NotificationType.Unsubscribe)] Broken = 4,
+	[CRN(NotificationType.Exclude)] BrokenFromPatch = 5,
 
 	[CRN(NotificationType.Unsubscribe, false)] Incompatible = 99,
 	[CRN(NotificationType.Info, false)] AssetNotReviewed = 98,

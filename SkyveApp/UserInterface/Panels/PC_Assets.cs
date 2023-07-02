@@ -1,16 +1,11 @@
-﻿using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
-
-using System.Collections.Generic;
-using System.Linq;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 namespace SkyveApp.UserInterface.Panels;
-internal class PC_Assets : PC_ContentList<Asset>
+internal class PC_Assets : PC_ContentList<IAsset>
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
-	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
+	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
 	public PC_Assets()
 	{
 	}
@@ -22,11 +17,11 @@ internal class PC_Assets : PC_ContentList<Asset>
 		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset.Name}";
 	}
 
-	protected override IEnumerable<Asset> GetItems()
+	protected override IEnumerable<IAsset> GetItems()
 	{
-		if (_settings.SessionSettings.UserSettings.LinkModAssets)
+		if (_settings.UserSettings.LinkModAssets)
 		{
-			return _contentManager.Assets.Where(x => x.Package.Mod is null);
+			return _contentManager.Assets.Where(x => x.LocalParentPackage?.IsMod ?? false);
 		}
 
 		return _contentManager.Assets;
@@ -34,7 +29,7 @@ internal class PC_Assets : PC_ContentList<Asset>
 
 	protected override string GetCountText()
 	{
-		var assetsIncluded = _contentManager.Assets.Count(x => x.IsIncluded);
+		var assetsIncluded = _contentManager.Assets.Count(x => x.IsIncluded());
 		var total = LC_Items.ItemCount;
 		var text = string.Empty;
 
@@ -44,14 +39,5 @@ internal class PC_Assets : PC_ContentList<Asset>
 	protected override Extensions.LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Asset;
-	}
-
-	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)
-	{
-		ServiceCenter.Get<IContentUtil>().SetBulkIncluded(filteredItems, included);
-	}
-
-	protected override void SetEnabled(IEnumerable<Asset> filteredItems, bool enabled)
-	{
 	}
 }

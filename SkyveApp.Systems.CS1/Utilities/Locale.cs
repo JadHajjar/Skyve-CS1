@@ -1,8 +1,8 @@
 ﻿using Extensions;
 
-using SkyveApp.Systems;
+using SkyveApp.Domain.Systems;
 
-namespace SkyveApp.Utilities;
+namespace SkyveApp.Systems.CS1.Utilities;
 public class Locale : LocaleHelper, ILocale
 {
 	private static readonly Locale _instance = new();
@@ -185,7 +185,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CopyFolderName => _instance.GetText(nameof(CopyFolderName));
 	public static Translation ProfileNameUsed => _instance.GetText(nameof(ProfileNameUsed));
 	public static Translation FailedToImportLegacyProfile => _instance.GetText(nameof(FailedToImportLegacyProfile));
-	public static Translation CurrentProfile => _instance.GetText(nameof(CurrentProfile));
+	public static Translation CurrentPlayset => _instance.GetText(nameof(CurrentPlayset));
 	public static Translation ProfileStillLoading => _instance.GetText(nameof(ProfileStillLoading));
 	public static Translation ApplyProfileNameBeforeExit => _instance.GetText(nameof(ApplyProfileNameBeforeExit));
 	public static Translation SteamNotOpenTo => _instance.GetText(nameof(SteamNotOpenTo));

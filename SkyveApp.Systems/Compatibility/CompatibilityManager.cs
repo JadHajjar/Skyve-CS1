@@ -27,7 +27,6 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly ILocale _locale;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
-	private readonly IServiceProvider _services;
 	private readonly IPackageManager _contentManager;
 	private readonly ICompatibilityUtil _compatibilityUtil;
 	private readonly IPackageUtil _contentUtil;
@@ -40,10 +39,10 @@ public class CompatibilityManager : ICompatibilityManager
 	private bool firstLoadComplete;
 
 	public IndexedCompatibilityData CompatibilityData { get; private set; }
+	public bool FirstLoadComplete => firstLoadComplete;
 
-	public CompatibilityManager(IServiceProvider services, IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
+	public CompatibilityManager(IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
 	{
-		_services = services;
 		_contentManager = contentManager;
 		_logger = logger;
 		_notifier = notifier;
@@ -215,7 +214,7 @@ public class CompatibilityManager : ICompatibilityManager
 			Stability = package.IsMod ? PackageStability.NotReviewed : PackageStability.AssetNotReviewed,
 			SteamId = package.Id,
 			Name = package.Name,
-			FileName = package.LocalPackage?.Mod?.FilePath,
+			FileName = package.LocalParentPackage?.Mod?.FilePath,
 			Links = new(),
 			Interactions = new(),
 			Statuses = new(),
@@ -296,7 +295,7 @@ public class CompatibilityManager : ICompatibilityManager
 		var info = new CompatibilityInfo(package, packageData);
 		var workshopInfo = package.GetWorkshopInfo();
 
-		if (package.LocalPackage?.Mod is IMod mod)
+		if (package.LocalParentPackage?.Mod is IMod mod)
 		{
 			var modName = Path.GetFileName(mod.FilePath);
 			var duplicate = _contentManager.Mods.AllWhere(x => modName == Path.GetFileName(x.FilePath));
@@ -319,6 +318,8 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			return info;
 		}
+
+		_compatibilityUtil.PopulatePackageReport(packageData, info);
 
 		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
 
@@ -363,7 +364,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (packageData.Package.RequiredDLCs?.Any() ?? false)
 		{
-			var missing = packageData.Package.RequiredDLCs.Where(x => !_dlcManager.IsDlcAvailable(x));
+			var missing = packageData.Package.RequiredDLCs.Where(x => !_dlcManager.IsAvailable(x));
 
 			if (missing.Any())
 			{
@@ -439,16 +440,16 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public NotificationType GetNotification(ICompatibilityInfo info)
 	{
-		if (info.ReportItems.Count == 0)
-		{
-			return NotificationType.None;
-		}
-
-		return info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification);
+		return info.ReportItems.Count == 0 ? NotificationType.None : info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification);
 	}
 
 	public ulong GetIdFromModName(string fileName)
 	{
 		return CompatibilityData.PackageNames.TryGet(fileName);
+	}
+
+	public bool IsUserVerified(IUser author)
+	{
+		return CompatibilityData.Authors.TryGet(ulong.Parse(author.Id.ToString()))?.Verified ?? false;
 	}
 }

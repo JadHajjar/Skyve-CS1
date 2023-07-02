@@ -1,16 +1,17 @@
 using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 
 using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.Utilities.IO;
+namespace SkyveApp.Systems.CS1.Utilities.IO;
 
-public class MonoFile : DebugFile
+internal class MonoFile : DebugFile
 {
-	public static MonoFile Instance = new MonoFile();
+	public static MonoFile Instance = new();
 
 	public override string FilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono.dll");
 	public override string ReleaseFilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono-orig.dll");
@@ -18,9 +19,9 @@ public class MonoFile : DebugFile
 	public override string ResourceFileName => "mono-debug._dll";
 }
 
-public class CitiesFile : DebugFile
+internal class CitiesFile : DebugFile
 {
-	public static CitiesFile Instance = new CitiesFile();
+	public static CitiesFile Instance = new();
 
 	public override string FilePath => ServiceCenter.Get<ILocationManager>().CitiesPathWithExe;
 	public override string ReleaseFilePath => FilePath + ".Orig";
@@ -83,6 +84,7 @@ public abstract class DebugFile
 		{
 			ServiceCenter.Get<ILogger>().Exception(ex, "can't move files if CS is running");
 		}
+
 		return false;
 	}
 	public virtual bool UseRelease()
@@ -93,12 +95,14 @@ public abstract class DebugFile
 			{
 				CopyFile(source: ReleaseFilePath, dest: FilePath);
 			}
+
 			return true;
 		}
 		catch (Exception ex)
 		{
 			ServiceCenter.Get<ILogger>().Exception(ex, "can't move files if CS is running");
 		}
+
 		return false;
 	}
 
@@ -126,11 +130,6 @@ public abstract class DebugFile
 			return false;
 		}
 
-		if (!CrossIO.FileExists(ReleaseFilePath))
-		{
-			return true;
-		}
-
-		return null;
+		return !CrossIO.FileExists(ReleaseFilePath) ? true : null;
 	}
 }

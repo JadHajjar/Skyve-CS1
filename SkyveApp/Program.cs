@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using SkyveApp.Systems.CS1;
-using SkyveApp.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
@@ -98,7 +98,7 @@ internal static class Program
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
-			if (!ServiceCenter.Get<ISettings, SettingsService>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
+			if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
 			{
 				MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OK, PromptIcons.Hand);
 				return;
@@ -107,7 +107,7 @@ internal static class Program
 			if (CommandUtil.NoWindow)
 			{
 				ServiceCenter.Get<ILogger>().Info("[Console] Running without UI window");
-				ServiceCenter.Get<CentralManager>().Start();
+				ServiceCenter.Get<ICentralManager>().Start();
 				return;
 			}
 

@@ -1,27 +1,18 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Compatibility.Api;
+﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
+using SkyveApp.Systems.Compatibility;
 using SkyveApp.Systems.Compatibility.Domain.Api;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
-using SkyveApp.Utilities;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,12 +27,13 @@ public partial class PC_CompatibilityManagement : PanelContent
 	private readonly ReviewRequest? _request;
 
 	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IWorkshopService _workshopService;
 
 	internal IPackage? CurrentPackage { get; private set; }
 
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
-		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		ServiceCenter.Get(out _workshopService, out _compatibilityManager);
 
 		InitializeComponent();
 
@@ -62,13 +54,13 @@ public partial class PC_CompatibilityManagement : PanelContent
 		PB_Loading.BringToFront();
 	}
 
-	public PC_CompatibilityManagement(ulong userId) : this(false)
+	public PC_CompatibilityManagement(IUser userId) : this(false)
 	{
-		foreach (var package in ServiceCenter.Get<IContentManager>().Packages)
+		foreach (var package in ServiceCenter.Get<IPackageManager>().Packages)
 		{
-			if (package.Author?.SteamId == userId)
+			if (package.GetWorkshopInfo()?.Author?.Id == userId.Id)
 			{
-				_packages[package.SteamId] = package;
+				_packages[package.Id] = package;
 			}
 		}
 
@@ -82,7 +74,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		foreach (var package in packages)
 		{
-			_packages[package] = SteamUtil.GetItem(package);
+			_packages[package] = _workshopService.GetPackage(new GenericPackageIdentity(package));
 		}
 
 		packageCrList.SetItems(_packages.Keys);
@@ -163,11 +155,11 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		PB_Loading.Loading = true;
 
-		var mods = await SteamUtil.QueryFilesAsync(SteamQueryOrder.RankedByLastUpdatedDate, requiredTags: new[] { "Mod" }, all: true);
+		var mods = await _workshopService.QueryFilesAsync(PackageSorting.UpdateTime, requiredTags: new[] { "Mod" }, all: true);
 
 		foreach (var mod in mods)
 		{
-			_packages.Add(mod.Key, mod.Value);
+			_packages.Add(mod.Id, new WorkshopPackage(mod));
 		}
 
 		packageCrList.SetItems(_packages.Keys);
@@ -236,17 +228,17 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		try
 		{
-			CurrentPackage ??= await SteamUtil.GetItemAsync(packages[page]);
+			CurrentPackage ??= await _workshopService.GetPackageAsync(new GenericPackageIdentity( packages[page]));
 
-			var catalogue = await SkyveApiUtil.Catalogue(CurrentPackage!.SteamId);
+			var catalogue = await ServiceCenter.Get<SkyveApiUtil>().Catalogue(CurrentPackage!.Id);
 
 			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CompatibilityPackageData, PostPackage>();
 
-			var automatedPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
+			var automatedPackage = (_compatibilityManager as CompatibilityManager)!.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
 
 			if (postPackage is null)
 			{
-				postPackage = _compatibilityManager.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
+				postPackage = (_compatibilityManager as CompatibilityManager)!.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
 			}
 			else
 			{
@@ -279,7 +271,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			PB_Icon.Package = CurrentPackage;
 			PB_Icon.Image = null;
-			PB_Icon.LoadImage(CurrentPackage.IconUrl, ServiceCenter.Get<IImageService>().GetImage);
+			PB_Icon.LoadImage(CurrentPackage.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
 			P_Info.SetPackage(CurrentPackage, null);
 
 			B_Previous.Enabled = currentPage > 0;
@@ -308,14 +300,14 @@ public partial class PC_CompatibilityManagement : PanelContent
 		{
 			DD_Stability.SelectedItem = (PackageStability)_request.PackageStability;
 			DD_PackageType.SelectedItem = (PackageType)_request.PackageType;
-			DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => _request.RequiredDLCs?.Contains(x.Id.ToString()) ?? false);
+			DD_DLCs.SelectedItems = ServiceCenter.Get<IDlcManager>().Dlcs.Where(x => _request.RequiredDLCs?.Contains(x.Id.ToString()) ?? false);
 			DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => ((PackageUsage)_request.PackageUsage).HasFlag(x));
 		}
 		else
 		{
 			DD_Stability.SelectedItem = postPackage.Stability;
 			DD_PackageType.SelectedItem = postPackage.Type;
-			DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => postPackage.RequiredDLCs?.Contains(x.Id) ?? false);
+			DD_DLCs.SelectedItems = ServiceCenter.Get<IDlcManager>().Dlcs.Where(x => postPackage.RequiredDLCs?.Contains(x.Id) ?? false);
 			DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => postPackage.Usage.HasFlag(x));
 		}
 
@@ -327,7 +319,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Tags ?? new())
 		{
-			var control = new TagControl { TagInfo = new Domain.TagItem(TagSource.Global, item) };
+			var control = new TagControl { TagInfo = new TagItem(TagSource.Global, item) };
 			control.Click += TagControl_Click;
 			P_Tags.Controls.Add(control);
 			T_NewTag.SendToBack();
@@ -405,7 +397,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return;
 		}
 
-		var control = new TagControl { TagInfo = new Domain.TagItem(TagSource.Global, prompt.Input) };
+		var control = new TagControl { TagInfo = new TagItem(TagSource.Global, prompt.Input) };
 		control.Click += TagControl_Click;
 		P_Tags.Controls.Add(control);
 		T_NewTag.SendToBack();
@@ -489,15 +481,15 @@ public partial class PC_CompatibilityManagement : PanelContent
 			return false;
 		}
 
-		postPackage!.SteamId = CurrentPackage!.SteamId;
-		postPackage.FileName = Path.GetFileName(CurrentPackage.Package?.Mod?.FilePath ?? string.Empty).IfEmpty(postPackage.FileName);
+		postPackage!.SteamId = CurrentPackage!.Id;
+		postPackage.FileName = Path.GetFileName(CurrentPackage.LocalParentPackage?.Mod?.FilePath ?? string.Empty).IfEmpty(postPackage.FileName);
 		postPackage.Name = CurrentPackage.Name;
 		postPackage.ReviewDate = DateTime.UtcNow;
-		postPackage.AuthorId = CurrentPackage.Author?.SteamId ?? 0;
+		postPackage.AuthorId = (ulong)(CurrentPackage.GetWorkshopInfo()?.Author?.Id ?? 0);
 		postPackage.Author = new Author
 		{
 			SteamId = postPackage.AuthorId,
-			Name = CurrentPackage.Author?.Name,
+			Name = CurrentPackage.GetWorkshopInfo()?.Author?.Name,
 		};
 
 		postPackage.BlackListId = CB_BlackListId.Checked;
@@ -507,8 +499,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 		postPackage.Usage = DD_Usage.SelectedItems.Aggregate((prev, next) => prev | next);
 		postPackage.RequiredDLCs = DD_DLCs.SelectedItems.Select(x => x.Id).ToArray();
 		postPackage.Note = TB_Note.Text;
-		postPackage.Tags = P_Tags.Controls.OfType<TagControl>().Where(x => !string.IsNullOrEmpty(x.TagInfo.Value)).ToList(x => x.TagInfo.Value);
-		postPackage.Links = P_Links.Controls.OfType<LinkControl>().ToList(x => x.Link);
+		postPackage.Tags = P_Tags.Controls.OfType<TagControl>().Where(x => !string.IsNullOrEmpty(x.TagInfo?.Value)).ToList(x => x.TagInfo!.Value);
+		postPackage.Links = P_Links.Controls.OfType<LinkControl>().ToList(x => (PackageLink)x.Link);
 		postPackage.Statuses = FLP_Statuses.Controls.OfType<IPackageStatusControl<StatusType, PackageStatus>>().ToList(x => x.PackageStatus);
 		postPackage.Interactions = FLP_Interactions.Controls.OfType<IPackageStatusControl<InteractionType, PackageInteraction>>().ToList(x => x.PackageStatus);
 
@@ -532,7 +524,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		B_Apply.Loading = true;
 
-		var response = await SkyveApiUtil.SaveEntry(postPackage);
+		var response = await ServiceCenter.Get<SkyveApiUtil>().SaveEntry(postPackage);
 
 		B_Apply.Loading = false;
 
@@ -588,7 +580,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		if (e.Button == MouseButtons.Right)
 		{
-			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), PC_PackagePage.GetRightClickMenuItems(SteamUtil.GetItem((ulong)sender)!));
+			SlickToolStrip.Show(Form, packageCrList.PointToClient(e.Location), PC_PackagePage.GetRightClickMenuItems(_workshopService.GetPackage(new GenericPackageIdentity((ulong)sender))!));
 		}
 	}
 
@@ -606,7 +598,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void PackageCrList_CanDrawItem(object sender, CanDrawItemEventArgs<ulong> e)
 	{
-		var package = SteamUtil.GetItem(e.Item);
+		var package = _workshopService.GetPackage(new GenericPackageIdentity( e.Item));
 
 		if (package is null)
 		{
@@ -615,9 +607,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		if (!CB_ShowUpToDate.Checked)
 		{
-			var cr = package.GetCompatibilityInfo();
+			var cr = _compatibilityManager.GetPackageInfo( package);
 
-			if (cr.Data is null || cr.Data.Package.ReviewDate > package.ServerTime)
+			if (cr is null || cr.ReviewDate > package.GetWorkshopInfo()?.ServerTime)
 			{
 				e.DoNotDraw = true;
 				return;
@@ -625,8 +617,8 @@ public partial class PC_CompatibilityManagement : PanelContent
 		}
 
 		e.DoNotDraw = !(TB_Search.Text.SearchCheck(package.ToString())
-			|| TB_Search.Text.SearchCheck(package.Author?.Name)
-			|| package.SteamId.ToString().IndexOf(TB_Search.Text, StringComparison.OrdinalIgnoreCase) != -1);
+			|| TB_Search.Text.SearchCheck(package.GetWorkshopInfo()?.Author?.Name)
+			|| package.Id.ToString().IndexOf(TB_Search.Text, StringComparison.OrdinalIgnoreCase) != -1);
 	}
 
 	private void TB_Search_IconClicked(object sender, EventArgs e)

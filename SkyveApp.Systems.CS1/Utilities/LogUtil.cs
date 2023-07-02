@@ -5,7 +5,6 @@ using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Utilities.IO;
 
 using System;
 using System.Collections.Generic;
@@ -13,8 +12,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 
-namespace SkyveApp.Utilities;
-public class LogUtil : ILogUtil
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class LogUtil : ILogUtil
 {
 	private readonly ILocationManager _locationManager;
 	private readonly IPackageManager _contentManager;
@@ -85,7 +84,9 @@ public class LogUtil : ILogUtil
 				CrossIO.CopyFile(filePath, tempFile, true);
 
 				try
-				{ zipArchive.CreateEntryFromFile(tempFile, $"Other Files\\{Path.GetFileName(filePath)}"); }
+				{
+					zipArchive.CreateEntryFromFile(tempFile, $"Other Files\\{Path.GetFileName(filePath)}");
+				}
 				catch { }
 			}
 		}
@@ -203,7 +204,10 @@ public class LogUtil : ILogUtil
 				return CrossIO.Combine(latest.FullName, "error.log");
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, "Failed to load the previous crash dump log"); }
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Failed to load the previous crash dump log");
+		}
 
 		return string.Empty;
 	}

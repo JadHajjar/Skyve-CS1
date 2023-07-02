@@ -1,26 +1,11 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility.Enums;
+﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems.Compatibility;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Generic;
 using SkyveApp.UserInterface.Lists;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -40,15 +25,20 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
 
-	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
-	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
-	private readonly ICompatibilityManager _compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
-	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
+	private readonly ISettings _settings;
+	private readonly INotifier _notifier;
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IPlaysetManager _profileManager;
+	private readonly ITagsService _tagUtil;
+	private readonly IPackageUtil _packageUtil;
+	private readonly IDownloadService _downloadService;
 
 	public PC_ContentList() : this(false) { }
 
 	public PC_ContentList(bool load) : base(load)
 	{
+		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _profileManager, out _tagUtil, out _packageUtil, out _downloadService);
+
 		LC_Items = new() { Dock = DockStyle.Fill, Margin = new() };
 
 		InitializeComponent();
@@ -73,7 +63,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			TLP_Main.SetColumnSpan(P_FiltersContainer, 4);
 		}
 
-		OT_Workshop.Visible = !_profileManager.CurrentPlayset.LaunchSettings.NoWorkshop;
+		OT_Workshop.Visible = !((_profileManager.CurrentPlayset as Playset)?.LaunchSettings.NoWorkshop??false);
 		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		LC_Items.FilterRequested += FilterChanged;
@@ -103,7 +93,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
-		if (!_settings.SessionSettings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
+		if (!_settings.UserSettings.AdvancedIncludeEnable || this is PC_Assets)
 		{
 			OT_Enabled.Hide();
 			P_Filters.SetRow(OT_Workshop, 2);
@@ -127,7 +117,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
 		_notifier.PackageInformationUpdated += CentralManager_WorkshopInfoUpdated;
-		_compatibilityManager.ReportProcessed += CentralManager_WorkshopInfoUpdated;
+		_notifier.CompatibilityReportProcessed += CentralManager_WorkshopInfoUpdated;
 
 		if (!load)
 		{
@@ -139,8 +129,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		var items = new List<T>(LC_Items.Items);
 
-		DD_Author.SetItems(items.Where(x => x.Author is not null));
-		DD_Tags.Items = items.SelectMany(x => x.Tags).Distinct(x => x.Value.ToLower()).ToArray();
+		DD_Author.SetItems(items);
+		DD_Tags.Items = _tagUtil.GetDistinctTags().ToArray();
 	}
 
 	private void LC_Items_OpenWorkshopSearch()
@@ -185,7 +175,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 	}
 
-	private void LC_Items_AuthorSelected(SteamUser obj)
+	private void LC_Items_AuthorSelected(IUser obj)
 	{
 		DD_Author.Select(obj);
 
@@ -195,7 +185,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 	}
 
-	private void LC_Items_TagSelected(TagItem obj)
+	private void LC_Items_TagSelected(ITag obj)
 	{
 		DD_Tags.Select(obj);
 
@@ -289,7 +279,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		firstFilterPassed = true;
 
-		if (_settings.SessionSettings.UserSettings.AlwaysOpenFiltersAndActions)
+		if (_settings.UserSettings.AlwaysOpenFiltersAndActions)
 		{
 			P_FiltersContainer.Visible = true;
 			P_FiltersContainer.AutoSize = true;
@@ -307,14 +297,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		throw new NotImplementedException();
 	}
 
-	protected virtual void SetEnabled(IEnumerable<T> filteredItems, bool included)
+	protected virtual void SetIncluded(IEnumerable<T> filteredItems, bool included)
 	{
-		throw new NotImplementedException();
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
 	}
 
-	protected virtual void SetIncluded(IEnumerable<T> filteredItems, bool enabled)
+	protected virtual void SetEnabled(IEnumerable<T> filteredItems, bool enabled)
 	{
-		throw new NotImplementedException();
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
 	}
 
 	protected virtual LocaleHelper.Translation GetItemText()
@@ -388,7 +378,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
-		_settings.SessionSettings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
+		_settings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
 		_settings.SessionSettings.Save();
 
 		LC_Items.SetSorting(DD_Sorting.SelectedItem, LC_Items.SortDesc);
@@ -426,9 +416,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private bool IsFilteredOut(T item)
 	{
-		if (_profileManager.CurrentPlayset.LaunchSettings.NoWorkshop)
+		if ((_profileManager.CurrentPlayset as Playset)!.LaunchSettings.NoWorkshop)
 		{
-			if (item.Workshop)
+			if (item is ILocalPackage && !item.IsLocal)
 			{
 				return true;
 			}
@@ -436,7 +426,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (_profileManager.CurrentPlayset.Usage > 0)
 		{
-			if (!(item.GetCompatibilityInfo().Data?.Package.Usage.HasFlag(_profileManager.CurrentPlayset.Usage) ?? true))
+			if (!(_compatibilityManager.GetPackageInfo(item)?.Usage.HasFlag(_profileManager.CurrentPlayset.Usage) ?? true))
 			{
 				UsageFilteredOut++;
 				return true;
@@ -450,7 +440,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (OT_Workshop.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == item.Workshop)
+			if (OT_Workshop.SelectedValue == ThreeOptionToggle.Value.Option1 == !item.IsLocal)
 			{
 				return true;
 			}
@@ -458,7 +448,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == item.IsIncluded)
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == item.LocalPackage?.IsIncluded())
 			{
 				return true;
 			}
@@ -466,7 +456,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (OT_Enabled.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (item.Package?.Mod is null || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option2 == item.Package.Mod.IsEnabled)
+			if (item.IsMod || OT_Enabled.SelectedValue == ThreeOptionToggle.Value.Option2 == item.LocalPackage?.IsEnabled())
 			{
 				return true;
 			}
@@ -492,14 +482,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			//else
 			if (DD_PackageStatus.SelectedItem == DownloadStatusFilter.AnyIssue)
 			{
-				if (!item.Workshop || item.Package?.Status <= DownloadStatus.OK)
+				if (item.IsLocal || _packageUtil.GetStatus(item, out _) <= DownloadStatus.OK)
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)(item.Package?.Status ?? DownloadStatus.None))
+				if (((int)DD_PackageStatus.SelectedItem - 1) != (int)_packageUtil.GetStatus(item, out _))
 				{
 					return true;
 				}
@@ -510,34 +500,34 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.AnyIssue)
 			{
-				if (item.GetCompatibilityInfo().Notification <= NotificationType.Info)
+				if (item.GetCompatibilityInfo().GetNotification() <= NotificationType.Info)
 				{
 					return true;
 				}
 			}
 			else if (DD_ReportSeverity.SelectedItem == Dropdowns.CompatibilityNotificationFilter.NoIssues)
 			{
-				return item.GetCompatibilityInfo().Notification > NotificationType.Info;
+				return item.GetCompatibilityInfo().GetNotification() > NotificationType.Info;
 			}
-			else if ((int)item.GetCompatibilityInfo().Notification != (int)DD_ReportSeverity.SelectedItem)
+			else if ((int)item.GetCompatibilityInfo().GetNotification() != (int)DD_ReportSeverity.SelectedItem)
 			{
 				return true;
 			}
 		}
 
-		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.Package?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
+		if (DR_SubscribeTime.Set && !DR_SubscribeTime.Match(item.LocalPackage?.LocalTime.ToLocalTime() ?? DateTime.MinValue))
 		{
 			return true;
 		}
 
-		if (DR_ServerTime.Set && !DR_ServerTime.Match(item.ServerTime.ToLocalTime()))
+		if (DR_ServerTime.Set && !DR_ServerTime.Match(item.GetWorkshopInfo()?.ServerTime.ToLocalTime() ?? default))
 		{
 			return true;
 		}
 
 		if (DD_Author.SelectedItems.Any())
 		{
-			if (!DD_Author.SelectedItems.Any(x => item.Author?.Equals(x) ?? false))
+			if (!DD_Author.SelectedItems.Any(x => item.GetWorkshopInfo()?.Author?.Equals(x) ?? false))
 			{
 				return true;
 			}
@@ -547,7 +537,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			foreach (var tag in DD_Tags.SelectedItems)
 			{
-				if (!(item.Tags?.Any(x => x.Value == tag.Value) ?? false))
+				if (!(item.GetTags()?.Any(x => x.Value == tag.Value) ?? false))
 				{
 					return true;
 				}
@@ -556,34 +546,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			if (item is Asset asset)
-			{
-				if (!DD_Profile.SelectedItem.Assets.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathEquals(asset.FilePath)))
-				{
-					return true;
-				}
-			}
-			else if (item is Mod mod)
-			{
-				if (!DD_Profile.SelectedItem.Mods.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathEquals(mod.Folder)))
-				{
-					return true;
-				}
-			}
-			else
-			{
-				if (string.IsNullOrEmpty(item.Folder))
-				{
-					if (!DD_Profile.SelectedItem.Assets.Any(x => x.SteamId == item.SteamId) && !DD_Profile.SelectedItem.Mods.Any(x => x.SteamId == item.SteamId))
-					{
-						return true;
-					}
-				}
-				else if (!DD_Profile.SelectedItem.Assets.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)) && !DD_Profile.SelectedItem.Mods.Any(x => _profileManager.ToLocalPath(x.RelativePath).PathContains(item.Folder)))
-				{
-					return true;
-				}
-			}
+			return !_profileManager.IsPackageIncludedInPlayset(item, DD_Profile .SelectedItem);
 		}
 
 		if (!searchEmpty)
@@ -629,8 +592,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private bool Search(string searchTerm, T item)
 	{
 		return searchTerm.SearchCheck(item.ToString())
-			|| searchTerm.SearchCheck(item.Author?.Name)
-			|| (item.Workshop ? item.SteamId.ToString() : Path.GetFileName(item.Folder)).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| searchTerm.SearchCheck(item.GetWorkshopInfo()?.Author?.Name)
+			|| (!item.IsLocal ? item.Id.ToString() : Path.GetFileName(item.LocalParentPackage?.Folder) ?? string.Empty).IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<T> e)
@@ -714,7 +677,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDesc);
 
-		_settings.SessionSettings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
+		_settings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
 		_settings.SessionSettings.Save();
 
 		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
@@ -727,13 +690,13 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			  new (Locale.IncludeAll, "I_Check", action: () => IncludeAll(this, EventArgs.Empty))
 			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.EnableAll, "I_Enabled", _settings.SessionSettings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
-			, new (Locale.DisableAll, "I_Disabled", _settings.SessionSettings.UserSettings.AdvancedIncludeEnable, action: () =>DisableAll(this, EventArgs.Empty))
+			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
+			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () =>DisableAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.SteamId != 0).Select(x => x.SteamId).ListStrings(" ")))
+			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.Id != 0).Select(x => x.Id).ListStrings(" ")))
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
-			, new (Locale.DownloadAll, "I_Install", LC_Items.FilteredItems.Any(x => x.Package is null), action: () => DownloadAll(this, EventArgs.Empty))
-			, new (Locale.ReDownloadAll, "I_ReDownload", LC_Items.FilteredItems.Any(x => x.Package is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
+			, new (Locale.DownloadAll, "I_Install", LC_Items.FilteredItems.Any(x => x.LocalPackage is null), action: () => DownloadAll(this, EventArgs.Empty))
+			, new (Locale.ReDownloadAll, "I_ReDownload", LC_Items.FilteredItems.Any(x => x.LocalPackage is not null), action: () => ReDownloadAll(this, EventArgs.Empty))
 			, new (string.Empty)
 			, new (Locale.UnsubscribeAll, "I_RemoveSteam", action: () => UnsubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DeleteAll, "I_Disposable", action: () => DeleteAll(this, EventArgs.Empty))
@@ -772,14 +735,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void DownloadAll(object sender, EventArgs e)
 	{
-		SteamUtil.Download(LC_Items.FilteredItems.Where(x => x.Package is null).Select(x => x.SteamId));
+		_downloadService.Download(LC_Items.FilteredItems.Where(x => x.LocalPackage is null).Select(x => (IPackageIdentity)x));
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
 	}
 
 	private void ReDownloadAll(object sender, EventArgs e)
 	{
-		SteamUtil.Download(LC_Items.FilteredItems.Where(x => x.Package is not null).Select(x => x.SteamId));
+		_downloadService.Download(LC_Items.FilteredItems.Where(x => x.LocalPackage is not null).Cast<IPackageIdentity>());
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -792,7 +755,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 
 		I_Actions.Loading = true;
-		ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(LC_Items.FilteredItems.Select(x => x.SteamId));
+		ServiceCenter.Get<ISubscriptionsManager>().UnSubscribe(LC_Items.FilteredItems.Cast<IPackageIdentity>());
 		I_Actions.Loading = false;
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
@@ -801,13 +764,13 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private void SubscribeAll(object sender, EventArgs e)
 	{
 		var removeBadPackages = false;
-		var steamIds = LC_Items.SafeGetItems().AllWhere(x => x.Item.Package == null && x.Item.SteamId != 0);
+		var steamIds = LC_Items.SafeGetItems().AllWhere(x => x.Item.LocalPackage == null && x.Item.Id != 0);
 
 		foreach (var item in steamIds.ToList())
 		{
 			var report = item.Item.GetCompatibilityInfo();
 
-			if (report.Notification >= NotificationType.Unsubscribe)
+			if (report.GetNotification() >= NotificationType.Unsubscribe)
 			{
 				if (!removeBadPackages && ShowPrompt(Locale.ItemsShouldNotBeSubscribedInfo + "\r\n\r\n" + Locale.WouldYouLikeToSkipThose, PromptButtons.YesNo, PromptIcons.Hand) == DialogResult.No)
 				{
@@ -819,7 +782,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 				}
 
 				steamIds.Remove(item);
-				LC_Items.RemoveAll(x => x.SteamId == item.Item.SteamId);
+				LC_Items.RemoveAll(x => x.Id == item.Item.Id);
 			}
 		}
 
@@ -828,7 +791,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			return;
 		}
 
-		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => x.Item.SteamId));
+		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x=>(IPackageIdentity)x.Item));
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
 	}
@@ -846,13 +809,13 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			var items = LC_Items.FilteredItems.ToList();
 			foreach (var item in items)
 			{
-				if (!item.Workshop && item is Asset asset)
+				if (item.IsLocal && item is IAsset asset)
 				{
 					CrossIO.DeleteFile(asset.FilePath);
 				}
-				else
+				else if (item is ILocalPackage package)
 				{
-					ServiceCenter.Get<IContentUtil>().DeleteAll(item.Folder);
+					ServiceCenter.Get<IPackageManager>().DeleteAll(package.Folder);
 				}
 			}
 		});

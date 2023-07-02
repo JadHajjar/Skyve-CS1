@@ -2,7 +2,6 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
@@ -12,8 +11,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Utilities;
-public class ContentUtil : IContentManager
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class ContentManager : IContentManager
 {
 	private const string CACHE_FILENAME = "ModDllCache.json";
 	public const string EXCLUDED_FILE_NAME = ".excluded";
@@ -33,7 +32,7 @@ public class ContentUtil : IContentManager
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ContentUtil(IPackageManager packageManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IPackageUtil packageUtil)
+	public ContentManager(IPackageManager packageManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IPackageUtil packageUtil)
 	{
 		_packageManager = packageManager;
 		_locationManager = locationManager;
@@ -271,11 +270,11 @@ public class ContentUtil : IContentManager
 	{
 		lock (_contentUpdateLock)
 		{
-			if ((!workshop &&
+			if (!workshop &&
 				!path.PathContains(_locationManager.AssetsPath) &&
 				!path.PathContains(_locationManager.StylesPath) &&
 				!path.PathContains(_locationManager.MapThemesPath) &&
-				!path.PathContains(_locationManager.ModsPath)) ||
+				!path.PathContains(_locationManager.ModsPath) ||
 				path.PathEquals(_locationManager.ModsPath))
 			{
 				return;
@@ -297,7 +296,9 @@ public class ContentUtil : IContentManager
 	private void AddNewPackage(string path, bool builtIn, bool workshop, bool self)
 	{
 		if (workshop && !ulong.TryParse(Path.GetFileName(path), out _))
-		{ return; }
+		{
+			return;
+		}
 
 		var package = new Package(path, builtIn, workshop, GetTotalSize(path), GetLocalUpdatedTime(path));
 
@@ -310,7 +311,9 @@ public class ContentUtil : IContentManager
 	public void RefreshPackage(ILocalPackage localPackage, bool self)
 	{
 		if (localPackage is not Package package)
+		{
 			return;
+		}
 
 		if (IsDirectoryEmpty(package.Folder))
 		{
@@ -340,12 +343,7 @@ public class ContentUtil : IContentManager
 
 		var files = Directory.GetFiles(path);
 
-		if (files.Length == 1 && files[0].EndsWith(EXCLUDED_FILE_NAME))
-		{
-			return true;
-		}
-
-		return false;
+		return files.Length == 1 && files[0].EndsWith(EXCLUDED_FILE_NAME);
 	}
 
 	public void StartListeners()
@@ -402,7 +400,10 @@ public class ContentUtil : IContentManager
 				};
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, "Failed to save DLL cache"); }
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Failed to save DLL cache");
+		}
 	}
 
 	public void SaveDllCache()
@@ -418,6 +419,9 @@ public class ContentUtil : IContentManager
 		{
 			CrossIO.DeleteFile(ISave.GetPath(CACHE_FILENAME));
 		}
-		catch (Exception ex) { _logger.Exception(ex, "Failed to clear DLL cache"); }
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, "Failed to clear DLL cache");
+		}
 	}
 }

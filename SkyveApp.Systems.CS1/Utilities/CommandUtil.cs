@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace SkyveApp.Utilities;
+namespace SkyveApp.Systems.CS1.Utilities;
 public static class CommandUtil
 {
 	public static string? PreSelectedProfile { get; private set; }

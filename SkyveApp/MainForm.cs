@@ -1,17 +1,10 @@
-﻿using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -56,7 +49,7 @@ public partial class MainForm : BasePanelForm
 		catch (Exception ex)
 		{ OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this)); }
 
-		new BackgroundAction("Loading content", ServiceCenter.Get<CentralManager>().Start).Run();
+		new BackgroundAction("Loading content", ServiceCenter.Get<ICentralManager>().Start).Run();
 
 		var timer = new System.Timers.Timer(1000);
 
@@ -65,10 +58,13 @@ public partial class MainForm : BasePanelForm
 		timer.Start();
 
 		var citiesManager = ServiceCenter.Get<ICitiesManager>();
+		var playsetManager = ServiceCenter.Get<IPlaysetManager>();
 
 		citiesManager.MonitorTick += CitiesManager_MonitorTick;
 
 		isGameRunning = citiesManager.IsRunning();
+
+		playsetManager.PromptMissingItems += PromptMissingItemsEvent;
 
 		_startTimeoutTimer.Elapsed += StartTimeoutTimer_Elapsed;
 
@@ -80,7 +76,13 @@ public partial class MainForm : BasePanelForm
 			{ CrossIO.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "batch.bat")); }
 			catch { }
 		}
-				base_PB_Icon.Loading = true;
+
+		base_PB_Icon.Loading = true;
+	}
+
+	private void PromptMissingItemsEvent(IPlaysetManager manager, IEnumerable<IPlaysetEntry> playsetEntries)
+	{
+		PC_MissingPackages.PromptMissingPackages(Program.MainForm, playsetEntries);
 	}
 
 	protected override void LocaleChanged()
@@ -156,7 +158,13 @@ public partial class MainForm : BasePanelForm
 			var color = FormDesign.Modern.ActiveColor;
 			var minimum = 0;
 
-			if ((buttonStateRunning is null && isGameRunning))
+			if (_profileManager.CurrentPlayset.UnsavedChanges)
+			{
+				minimum = 0;
+				color = Color.FromArgb(122, 81, 207);
+			}
+
+			if (buttonStateRunning is null && isGameRunning)
 			{
 				minimum = 120;
 				color = Color.FromArgb(15, 153, 212);
@@ -166,12 +174,6 @@ public partial class MainForm : BasePanelForm
 			{
 				minimum = 0;
 				color = Color.FromArgb(235, 113, 52);
-			}
-
-			if (_profileManager.CurrentPlayset.UnsavedChanges)
-			{
-				minimum = 0;
-				color = Color.FromArgb(122, 81, 207);
 			}
 
 			if (!ConnectionHandler.IsConnected)
@@ -235,7 +237,7 @@ public partial class MainForm : BasePanelForm
 	{
 		if (keyData == Keys.F5)
 		{
-			if (_citiesManager.CitiesAvailable())
+			if (_citiesManager.IsAvailable())
 			{
 				LaunchStopCities();
 
@@ -253,7 +255,7 @@ public partial class MainForm : BasePanelForm
 
 	public void LaunchStopCities()
 	{
-		if (_citiesManager.CitiesAvailable())
+		if (_citiesManager.IsAvailable())
 		{
 			if (CrossIO.CurrentPlatform is Platform.Windows)
 			{

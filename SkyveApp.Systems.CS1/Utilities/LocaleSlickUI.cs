@@ -1,6 +1,6 @@
 ﻿using Extensions;
 
-namespace SkyveApp.Utilities;
+namespace SkyveApp.Systems.CS1.Utilities;
 public class LocaleSlickUI : LocaleHelper
 {
 	private static readonly LocaleSlickUI _instance = new();

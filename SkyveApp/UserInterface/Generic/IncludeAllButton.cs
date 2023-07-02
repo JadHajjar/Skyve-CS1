@@ -1,16 +1,6 @@
-﻿using Extensions;
+﻿using SkyveApp.UserInterface.Lists;
 
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.UserInterface.Lists;
-using SkyveApp.Utilities.IO;
-
-using SlickControls;
-
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Generic;
@@ -37,15 +27,15 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		Cursor = Cursors.Hand;
 		LC_Items = lC_Items;
 		_settings = ServiceCenter.Get<ISettings>();
-		_doubleButtons = _settings.SessionSettings.UserSettings.AdvancedIncludeEnable;
+		_doubleButtons = _settings.UserSettings.AdvancedIncludeEnable;
 	}
 
 	protected override void UIChanged()
 	{
 		Margin = Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 
-		var ItemHeight = (int)((_settings.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
-		var includeItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var ItemHeight = (int)((_settings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
+		var includeItemHeight = _settings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
 
 		Size = new Size((_doubleButtons ? (includeItemHeight * 2 * 9 / 10) : (includeItemHeight + 1)) + includeItemHeight, includeItemHeight * 2 / 3);
 	}
@@ -55,7 +45,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		base.OnMouseMove(e);
 
 		var packages = LC_Items?.SafeGetItems() ?? new();
-		var subscribe = packages.Any(x => x.Item.Package is null);
+		var subscribe = packages.Any(x => x.Item.LocalParentPackage is null);
 
 		if (IncludedRect.Contains(e.Location))
 		{
@@ -63,7 +53,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.All(x => x.Item.IsIncluded))
+			else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage).All(x => x!.IsIncluded()))
 			{
 				SlickTip.SetTo(this, "ExcludeAll");
 			}
@@ -78,7 +68,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.All(x => x.Item.Package?.Mod?.IsEnabled ?? true))
+			else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
 			{
 				SlickTip.SetTo(this, "DisableAll");
 			}
@@ -100,7 +90,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		if (e.Button == MouseButtons.Left)
 		{
 			var packages = LC_Items?.SafeGetItems() ?? new();
-			var subscribe = packages.Any(x => x.Item.Package is null);
+			var subscribe = packages.Any(x => x.Item.LocalParentPackage is null);
 
 			if (IncludedRect.Contains(e.Location))
 			{
@@ -108,7 +98,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.All(x => x.Item.IsIncluded))
+				else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage).All(x => x!.IsIncluded()))
 				{
 					ExcludeAllClicked?.Invoke(this, e);
 				}
@@ -123,7 +113,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.All(x => x.Item.Package?.Mod?.IsEnabled ?? true))
+				else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage?.Mod).All(x => x!.IsEnabled()))
 				{
 					DisableAllClicked?.Invoke(this, e);
 				}
@@ -147,13 +137,15 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var ItemHeight = (int)((_settings.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
-		var includeItemHeight = _settings.SessionSettings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var ItemHeight = (int)((_settings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
+		var includeItemHeight = _settings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
 		var rectangle = ClientRectangle;
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;
 		var packages = LC_Items?.SafeGetItems() ?? new();
-		var subscribe = packages.Any(x => x.Item.Package is null);
+		var subscribe = packages.Any(x => x.Item.LocalParentPackage is null);
+		var include = !subscribe && packages.All(x => x.Item.LocalParentPackage!.IsIncluded());
+		var enable = !subscribe && packages.SelectWhereNotNull(x => x.Item.LocalParentPackage?.Mod).All(x => x!.IsEnabled());
 
 		if (_doubleButtons && !subscribe)
 		{
@@ -172,17 +164,16 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		{
 			if (IncludedRect.Contains(CursorLocation))
 			{
-				color = packages.All(x => x.Item.IsIncluded) ? FormDesign.Design.RedColor : FormDesign.Design.GreenColor;
+				color = include ? FormDesign.Design.RedColor : FormDesign.Design.GreenColor;
 			}
 			else if (EnabledRect.Contains(CursorLocation))
 			{
-				color = packages.All(x => x.Item.Package?.Mod?.IsEnabled ?? true) ? FormDesign.Design.RedColor : FormDesign.Design.GreenColor;
+				color = enable ? FormDesign.Design.RedColor : FormDesign.Design.GreenColor;
 			}
 		}
 
-		var incl = new DynamicIcon(subscribe ? "I_Add"
-		: packages.All(x => x.Item.IsIncluded) ? "I_Ok" : "I_Enabled");
-		var inclIcon = _settings.SessionSettings.UserSettings.LargeItemOnHover ? incl.Large : incl.Get(includeItemHeight / 2);
+		var incl = new DynamicIcon(subscribe ? "I_Add" : include ? "I_Ok" : "I_Enabled");
+		var inclIcon = _settings.UserSettings.LargeItemOnHover ? incl.Large : incl.Get(includeItemHeight / 2);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && IncludedRect.Contains(CursorLocation))
 		{
@@ -193,8 +184,8 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 
 		if (_doubleButtons && EnabledRect != default)
 		{
-			var enl = new DynamicIcon(packages.All(x => x.Item.Package?.Mod?.IsEnabled ?? true) ? "I_Checked" : "I_Checked_OFF");
-			var enlIcon = _settings.SessionSettings.UserSettings.LargeItemOnHover ? enl.Large : enl.Get(includeItemHeight / 2);
+			var enl = new DynamicIcon(enable ? "I_Checked" : "I_Checked_OFF");
+			var enlIcon = _settings.UserSettings.LargeItemOnHover ? enl.Large : enl.Get(includeItemHeight / 2);
 
 			if (HoverState.HasFlag(HoverState.Hovered) && EnabledRect.Contains(CursorLocation))
 			{
@@ -205,7 +196,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		}
 
 		var action = new DynamicIcon("I_Actions");
-		var actionIcon = _settings.SessionSettings.UserSettings.LargeItemOnHover ? action.Large : action.Get(includeItemHeight / 2);
+		var actionIcon = _settings.UserSettings.LargeItemOnHover ? action.Large : action.Get(includeItemHeight / 2);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && ActionRect.Contains(CursorLocation))
 		{

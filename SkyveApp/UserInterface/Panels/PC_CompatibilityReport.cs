@@ -1,23 +1,14 @@
-﻿using Extensions;
+﻿using Newtonsoft.Json;
 
-using Newtonsoft.Json;
-
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
 using SkyveApp.Systems.Compatibility.Domain;
 using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,9 +20,12 @@ public partial class PC_CompatibilityReport : PanelContent
 	private bool customReportLoaded;
 
 	private readonly ICompatibilityManager _compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
-	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
+	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
+	private readonly IUserService _userService = ServiceCenter.Get<IUserService>();
+	private readonly SkyveApiUtil _skyveApiUtil = ServiceCenter.Get<SkyveApiUtil>();
 
-	public PC_CompatibilityReport() : base(ServiceCenter.Get<ICompatibilityManager>().User.Manager && !ServiceCenter.Get<ICompatibilityManager>().User.Malicious)
+	public PC_CompatibilityReport() : base(ServiceCenter.Get<IUserService>().User.Manager && !ServiceCenter.Get<IUserService>().User.Malicious)
 	{
 		InitializeComponent();
 
@@ -50,12 +44,12 @@ public partial class PC_CompatibilityReport : PanelContent
 			CompatibilityManager_ReportProcessed();
 		}
 
-		_compatibilityManager.ReportProcessed += CompatibilityManager_ReportProcessed;
+		_notifier.CompatibilityReportProcessed += CompatibilityManager_ReportProcessed;
 	}
 
 	protected override async Task<bool> LoadDataAsync()
 	{
-		reviewRequests = await SkyveApiUtil.GetReviewRequests();
+		reviewRequests = await _skyveApiUtil.GetReviewRequests();
 
 		return true;
 	}
@@ -85,7 +79,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			var packages = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
 
-			packages.RemoveAll(x => x.Notification < NotificationType.Unsubscribe && !x.Package.IsIncluded);
+			packages.RemoveAll(x => x.GetNotification() < NotificationType.Unsubscribe && !x.Package.IsIncluded());
 
 			this.TryInvoke(() => { LoadReport(packages); PB_Loader.Dispose(); });
 		}
@@ -95,9 +89,9 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void SetManagementButtons()
 	{
-		var hasPackages = _compatibilityManager.User.SteamId != 0 && _contentManager.Packages.Any(x => x.Author?.SteamId == _compatibilityManager.User.SteamId);
-		B_Requests.Visible = B_ManageSingle.Visible = B_Manage.Visible = _compatibilityManager.User.Manager && !_compatibilityManager.User.Malicious;
-		B_YourPackages.Visible = hasPackages && _compatibilityManager.User.Verified && !_compatibilityManager.User.Malicious;
+		var hasPackages = _userService.User.Id is not null && _contentManager.Packages.Any(x => x.GetWorkshopInfo()?.Author?.Id == _userService.User.Id);
+		B_Requests.Visible = B_ManageSingle.Visible = B_Manage.Visible = _userService.User.Manager && !_userService.User.Malicious;
+		B_YourPackages.Visible = hasPackages && _userService.User.Verified && !_userService.User.Malicious;
 		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
 	}
 
@@ -108,7 +102,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void B_YourPackages_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel(null, new PC_CompatibilityManagement(_compatibilityManager.User.SteamId));
+		Form.PushPanel(null, new PC_CompatibilityManagement(_userService.User));
 	}
 
 	private void B_ManageSingle_Click(object sender, EventArgs e)
@@ -126,9 +120,9 @@ public partial class PC_CompatibilityReport : PanelContent
 		Form.PushPanel(null, new PC_CompatibilityManagement(packages));
 	}
 
-	private void LoadReport(List<CompatibilityInfo> reports)
+	private void LoadReport(List<ICompatibilityInfo> reports)
 	{
-		var notifs = reports.Select(x => x.Notification).Distinct().Where(x => x > NotificationType.Info).OrderByDescending(x => x).ToList();
+		var notifs = reports.Select(x => x.GetNotification()).Distinct().Where(x => x > NotificationType.Info).OrderByDescending(x => x).ToList();
 
 		if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs))
 		{
@@ -165,9 +159,9 @@ public partial class PC_CompatibilityReport : PanelContent
 		LC_Items.FilterChanged();
 	}
 
-	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<CompatibilityInfo> e)
+	private void LC_Items_CanDrawItem(object sender, CanDrawItemEventArgs<ICompatibilityInfo> e)
 	{
-		e.DoNotDraw = e.Item.Notification != CurrentKey;
+		e.DoNotDraw = e.Item.GetNotification() != CurrentKey;
 	}
 
 	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -213,7 +207,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 			customReportLoaded = false;
 
-			this.TryInvoke(() => LoadReport(items));
+			this.TryInvoke(() => LoadReport(items.ToList(x => (ICompatibilityInfo)x)));
 
 			customReportLoaded = true;
 		}
@@ -225,7 +219,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		if (reviewRequests == null)
 		{
 			B_Requests.Loading = true;
-			reviewRequests = await SkyveApiUtil.GetReviewRequests();
+			reviewRequests = await _skyveApiUtil.GetReviewRequests();
 		}
 
 		B_Requests.Loading = false;

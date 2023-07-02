@@ -4,7 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Systems;
-using SkyveApp.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SkyveShared;
 
@@ -63,17 +63,17 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
 	public bool IsSubscribing(IPackage package)
 	{
-		return package.LocalPackage is null ? SubscribingTo.Contains(package.Id) || PendingSubscribingTo.Contains(package.Id) : UnsubscribingFrom.Contains(package.Id) || PendingUnsubscribingFrom.Contains(package.Id);
+		return package.LocalParentPackage is null ? SubscribingTo.Contains(package.Id) || PendingSubscribingTo.Contains(package.Id) : UnsubscribingFrom.Contains(package.Id) || PendingUnsubscribingFrom.Contains(package.Id);
 	}
 
-	public bool Subscribe(IEnumerable<ulong> ids)
+	public bool Subscribe(IEnumerable<IPackageIdentity> ids)
 	{
-		return SubscribePrivate(ids, false);
+		return SubscribePrivate(ids.Select(x => x.Id), false);
 	}
 
-	public bool UnSubscribe(IEnumerable<ulong> ids)
+	public bool UnSubscribe(IEnumerable<IPackageIdentity> ids)
 	{
-		return SubscribePrivate(ids, true);
+		return SubscribePrivate(ids.Select(x => x.Id), true);
 	}
 
 	private bool SubscribePrivate(IEnumerable<ulong> ids, bool unsub)

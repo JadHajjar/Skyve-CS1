@@ -1,10 +1,7 @@
-﻿using Extensions;
-
-using SkyveApp.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;

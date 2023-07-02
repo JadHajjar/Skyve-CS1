@@ -1,24 +1,15 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.CS1.Enums;
+﻿using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services.Interfaces;
 using SkyveApp.Systems.Compatibility;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Content;
@@ -30,13 +21,12 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly IPackageUtil _packageUtil;
 	private readonly ISettings _settings;
 
 	public PackageDescriptionControl()
 	{
-		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
-		_settings = ServiceCenter.Get<ISettings>();
-		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+		ServiceCenter.Get(out _settings, out _packageUtil, out _compatibilityManager, out _subscriptionsManager);
 	}
 
 	public void SetPackage(IPackage package, PC_PackagePage? page)
@@ -44,10 +34,12 @@ internal class PackageDescriptionControl : SlickImageControl
 		PackagePage = page;
 		Package = package;
 
-		if (!string.IsNullOrWhiteSpace(Package.Author?.AvatarUrl))
+		var workshopInfo=Package.GetWorkshopInfo();
+
+		if (!string.IsNullOrWhiteSpace(workshopInfo?.Author?.AvatarUrl))
 		{
 			Image = null;
-			LoadImage(Package.Author?.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
+			LoadImage(workshopInfo?.Author?.AvatarUrl, ServiceCenter.Get<IImageService>().GetImage);
 		}
 
 		Invalidate();
@@ -69,33 +61,33 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (rects.FolderRect.Contains(e.Location))
 		{
-			PlatformUtil.OpenFolder(Package.Folder);
+			PlatformUtil.OpenFolder(Package.LocalParentPackage?.Folder);
 			return;
 		}
 
-		if (Package.Workshop && rects.SteamRect.Contains(e.Location))
+		if (Package.Url is not null && rects.SteamRect.Contains(e.Location))
 		{
-			PlatformUtil.OpenUrl($"https://steamcommunity.com/workshop/filedetails?id={Package.SteamId}");
+			PlatformUtil.OpenUrl(Package.Url);
 			return;
 		}
 
 		if (rects.SteamIdRect.Contains(e.Location))
 		{
-			if (Package.Workshop)
+			if (Package.IsLocal)
 			{
-				Clipboard.SetText(Package.SteamId.ToString());
+				Clipboard.SetText(Path.GetFileName(Package.LocalParentPackage!.Folder));
 			}
 			else
 			{
-				Clipboard.SetText(Path.GetFileName(Package.Folder));
+				Clipboard.SetText(Package.Id.ToString());
 			}
 
 			return;
 		}
 
-		if (Package.Workshop && rects.AuthorRect.Contains(e.Location) && Package.Author is not null)
+		if (!Package.IsLocal && rects.AuthorRect.Contains(e.Location) && Package.GetWorkshopInfo()?.Author is not null)
 		{
-			var pc = new PC_UserPage(Package.Author?.SteamId ?? 0);
+			var pc = new PC_UserPage(Package.GetWorkshopInfo()?.Author!);
 
 			(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
@@ -114,41 +106,31 @@ internal class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
-		if (Package.Package?.Mod is Mod mod)
+		if (Package.LocalParentPackage is ILocalPackageWithContents package)
 		{
 			if (rects.IncludedRect.Contains(e.Location))
 			{
-				mod.IsIncluded = !mod.IsIncluded;
+				_packageUtil.SetIncluded(package, !_packageUtil.IsIncluded(package));
 
 				return;
 			}
 
 			if (rects.EnabledRect.Contains(e.Location))
 			{
-				mod.IsEnabled = !mod.IsEnabled;
+				_packageUtil.SetEnabled(package, !_packageUtil.IsEnabled(package));
 
 				return;
 			}
 
-			if (rects.VersionRect.Contains(e.Location))
+			if (rects.VersionRect.Contains(e.Location) && package.Mod is not null)
 			{
-				Clipboard.SetText(Package.Package.Mod.Version.GetString());
+				Clipboard.SetText(package.Mod.Version.GetString());
 			}
 		}
-		else
+		else if (rects.IncludedRect.Contains(e.Location))
 		{
-			if (rects.IncludedRect.Contains(e.Location))
-			{
-				if (Package.Package is null)
-				{
-					_subscriptionsManager.Subscribe(new[] { Package.SteamId });
-					return;
-				}
-
-				Package.IsIncluded = !Package.IsIncluded;
-
-				return;
-			}
+			_subscriptionsManager.Subscribe(new[] { Package });
+			return;
 		}
 
 		if (rects.ScoreRect.Contains(e.Location))
@@ -170,8 +152,10 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (rects.DateRect.Contains(e.Location))
 		{
-			var date = (Package.ServerTime == DateTime.MinValue && Package is Asset asset ? asset.LocalTime : Package.ServerTime).ToLocalTime();
-			Clipboard.SetText(date.ToString("g"));
+			var date = Package.GetWorkshopInfo()?.ServerTime ?? Package.LocalParentPackage?.LocalTime;
+
+			if(date.HasValue)
+			Clipboard.SetText(date.Value.ToLocalTime().ToString("g"));
 			return;
 		}
 
@@ -206,7 +190,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
-		if (Package!.Workshop)
+		if (!Package!.IsLocal)
 		{
 			if (rects.SteamRect.Contains(location))
 			{
@@ -216,7 +200,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 			if (rects.SteamIdRect.Contains(location))
 			{
-				setTip(string.Format(Locale.CopyToClipboard, Package.SteamId), rects.SteamIdRect);
+				setTip(string.Format(Locale.CopyToClipboard, Package.Id), rects.SteamIdRect);
 				return;
 			}
 
@@ -229,7 +213,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		else if (rects.SteamIdRect.Contains(location))
 		{
-			var folder = Path.GetFileName(Package.Folder);
+			var folder = Path.GetFileName(Package.LocalParentPackage!.Folder);
 			setTip(string.Format(Locale.CopyToClipboard, folder), rects.SteamIdRect);
 			return;
 		}
@@ -240,7 +224,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
-		if (Package.Package?.Mod is not null)
+		if (Package.LocalParentPackage is ILocalPackageWithContents localPackage)
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
@@ -252,7 +236,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				setTip($"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}", rects.EnabledRect);
 			}
 
-			if (rects.VersionRect.Contains(location))
+			if (localPackage.Mod is not null && rects.VersionRect.Contains(location))
 			{
 				setTip(Locale.CopyVersionNumber, rects.VersionRect);
 			}
@@ -261,21 +245,18 @@ internal class PackageDescriptionControl : SlickImageControl
 		{
 			if (rects.IncludedRect.Contains(location))
 			{
-				if (Package.Package != null)
-				{
-					setTip($"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}", rects.IncludedRect);
-				}
-				else
-				{
-					setTip(Locale.SubscribeToItem, rects.IncludedRect);
-				}
+				setTip(Locale.SubscribeToItem, rects.IncludedRect);
 			}
 		}
 
 		if (rects.ScoreRect.Contains(location))
 		{
-			setTip(string.Format(Locale.RatingCount, (Package!.PositiveVotes > Package.NegativeVotes ? '+' : '-') + Math.Abs(Package.PositiveVotes - (Package.NegativeVotes / 10) - Package.Reports).ToString("N0"), $"({SteamUtil.GetScore(Package)}%)") + "\r\n" + string.Format(Locale.SubscribersCount, Package.Subscriptions.ToString("N0")), rects.ScoreRect);
-			return;
+			var workshopInfo = Package.GetWorkshopInfo();
+			if (workshopInfo != null)
+			{
+				setTip(string.Format(Locale.RatingCount, workshopInfo.ScoreVoteCount.ToString("N0"), $"({workshopInfo.Score}%)") + "\r\n" + string.Format(Locale.SubscribersCount, workshopInfo.Subscribers.ToString("N0")), rects.ScoreRect);
+				return;
+			}
 		}
 
 		if (rects.CenterRect.Contains(location) || rects.IconRect.Contains(location))
@@ -292,9 +273,13 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (rects.DateRect.Contains(location))
 		{
-			var date = (Package.ServerTime == DateTime.MinValue && Package is Asset asset ? asset.LocalTime : Package.ServerTime).ToLocalTime();
-			setTip(string.Format(Locale.CopyToClipboard, date.ToString("g")), rects.DateRect);
-			return;
+			var date = Package.GetWorkshopInfo()?.ServerTime ?? Package.LocalParentPackage?.LocalTime;
+
+			if (date.HasValue)
+			{
+				setTip(string.Format(Locale.CopyToClipboard, date.Value.ToLocalTime().ToString("g")), rects.DateRect);
+				return;
+			}
 		}
 
 		foreach (var tag in rects.TagRects)
@@ -330,7 +315,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			return;
 		}
 
-		var package = Package.Package;
+		var package = Package.LocalParentPackage;
 		rects = new Rectangles() { Item = Package };
 
 		DrawTitle(e, package);
@@ -338,24 +323,28 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		var labelRect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding);
 
-		var isVersion = package?.Mod is not null && !package.BuiltIn;
-		var versionText = isVersion ? "v" + package!.Mod!.Version.GetString() : package?.BuiltIn ?? false ? Locale.Vanilla : (Package.FileSize == 0 ? string.Empty : Package.FileSize.SizeString());
+		var isVersion = package?.Mod is not null && !package.IsBuiltIn;
+		var versionText = isVersion ? "v" + package!.Mod!.Version.GetString() : package?.IsBuiltIn ?? false ? Locale.Vanilla : (package?.LocalSize.SizeString()??string.Empty);
+
 		rects.VersionRect = DrawLabel(e, versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.TopLeft, isVersion);
 		labelRect.X += Padding.Left + rects.VersionRect.Width;
 
-		var date = (Package.ServerTime == DateTime.MinValue && Package is Asset asset ? asset.LocalTime : Package.ServerTime).ToLocalTime();
-		var dateText = _settings.SessionSettings.UserSettings.ShowDatesRelatively ? date.ToRelatedString(true, false) : date.ToString("g");
-		rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.TopLeft, true);
-		labelRect.X += Padding.Left + rects.DateRect.Width;
+		var date = (Package.GetWorkshopInfo()?.ServerTime ?? Package.LocalParentPackage?.LocalTime)?.ToLocalTime();
+		if (date.HasValue)
+		{
+			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
+			rects.DateRect = DrawLabel(e, dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.TopLeft, true);
+			labelRect.X += Padding.Left + rects.DateRect.Width;
+		}
 
 		labelRect = DrawStatusDescriptor(e, rects, labelRect, ContentAlignment.TopLeft);
 
 		var report = Package.GetCompatibilityInfo();
-		if (report is not null && report.Notification > NotificationType.Info)
+		if (report is not null && report.GetNotification() > NotificationType.Info)
 		{
-			var labelColor = report.Notification.GetColor();
+			var labelColor = report.GetNotification().GetColor();
 
-			rects.CompatibilityRect = DrawLabel(e, LocaleCR.Get($"{report.Notification}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, ContentAlignment.TopLeft, true);
+			rects.CompatibilityRect = DrawLabel(e, LocaleCR.Get($"{report.GetNotification()}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, labelRect, ContentAlignment.TopLeft, true);
 
 			labelRect.X += Padding.Left + rects.CompatibilityRect.Width;
 		}
@@ -369,9 +358,9 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		labelRect.X += DrawScore(e, true, rects, labelRect);
 
-		foreach (var item in Package.Tags.Distinct(x => x.Value))
+		foreach (var item in Package.GetTags().Distinct(x => x.Value))
 		{
-			using var tagIcon = IconManager.GetSmallIcon(item.Source switch { TagSource.Workshop => "I_Steam", TagSource.FindIt => "I_Search", _ => "I_Tag" });
+			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 
 			var tagRect = DrawLabel(e, item.Value, tagIcon, FormDesign.Design.ButtonColor, labelRect, ContentAlignment.TopLeft, true);
 
@@ -389,11 +378,11 @@ internal class PackageDescriptionControl : SlickImageControl
 		rects.FolderRect = rects.MoreRect;
 		rects.FolderRect.X -= rects.MoreRect.Width + Padding.Left;
 
-		if (Package!.Workshop)
+		if (!Package!.IsLocal)
 		{
 			rects.SteamRect = rects.FolderRect;
 
-			if (!string.IsNullOrEmpty(Package.Folder))
+			if (!string.IsNullOrEmpty(Package.LocalParentPackage!.Folder))
 			{
 				rects.SteamRect.X -= rects.FolderRect.Width + Padding.Left;
 			}
@@ -421,14 +410,14 @@ internal class PackageDescriptionControl : SlickImageControl
 			SlickButton.DrawButton(e, rects.FolderRect, string.Empty, Font, icon, null, rects.FolderRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
 		}
 
-		if (Package!.Workshop)
+		if (!Package!.IsLocal)
 		{
 			using var icon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height / 2);
 			SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, icon, null, rects.SteamRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
 		}
 	}
 
-	private void DrawTitle(PaintEventArgs e, Package? package)
+	private void DrawTitle(PaintEventArgs e, ILocalPackageWithContents? package)
 	{
 		List<(Color Color, string Text)>? tags = null;
 
@@ -439,10 +428,10 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		rects!.TextRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(Size.Ceiling(textSize), ContentAlignment.BottomLeft);
 
-		var partialIncluded = Package!.Package?.IsPartiallyIncluded() ?? false;
-		var isIncluded = partialIncluded || Package.IsIncluded;
+		var partialIncluded = false;
+		var isIncluded = package is not null&& (_packageUtil.IsIncluded(package, out partialIncluded) || partialIncluded);
 
-		if (mod && _settings.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (mod && _settings.UserSettings.AdvancedIncludeEnable)
 		{
 			rects!.IncludedRect = rects!.EnabledRect = ClientRectangle.Pad(Padding.Left, 0, 0, Height / 2).Pad(Padding).Align(UI.Scale(new Size(32, 32), UI.FontScale), ContentAlignment.BottomLeft).Pad(1, 1, 2, 2);
 			rects!.EnabledRect.X += rects!.EnabledRect.Width;
@@ -476,18 +465,18 @@ internal class PackageDescriptionControl : SlickImageControl
 		}
 	}
 
-	private void PaintIncludedButton(PaintEventArgs e, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, Package? package)
+	private void PaintIncludedButton(PaintEventArgs e, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, ILocalPackageWithContents? package)
 	{
 		var incl = new DynamicIcon(partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
-		if (_settings.SessionSettings.UserSettings.AdvancedIncludeEnable && package?.Mod is Mod mod)
+		if (_settings.UserSettings.AdvancedIncludeEnable && package?.Mod is IMod mod)
 		{
-			var enabl = new DynamicIcon(mod.IsEnabled ? "I_Checked" : "I_Checked_OFF");
+			var enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
+				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
 			}
-			else if (mod.IsEnabled)
+			else if (mod.IsEnabled())
 			{
 				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) ? 150 : 255, FormDesign.Design.YellowColor), 1.5F);
 				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, 4);
@@ -523,18 +512,19 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private void DrawAuthorAndSteamId(PaintEventArgs e, Rectangles rects)
 	{
-		if (!Package!.Workshop)
+		if (Package!.IsLocal)
 		{
 			DrawBack(Width - (int)(100 * UI.FontScale));
-			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(Package.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding), ContentAlignment.TopRight, true);
+			rects.SteamIdRect = DrawLabel(e, Path.GetFileName(Package.LocalParentPackage!.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding), ContentAlignment.TopRight, true);
 			rects.AuthorRect = Rectangle.Empty;
 			return;
 		}
 
-		if (Package.Author is not null)
+		var author = Package.GetWorkshopInfo()?.Author;
+		if (author is not null)
 		{
 			using var font = UI.Font(9.75F);
-			var size = e.Graphics.Measure(Package.Author.Name, font).ToSize();
+			var size = e.Graphics.Measure(author.Name, font).ToSize();
 			var authorRect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding).Align(new Size(size.Width + Padding.Horizontal + Padding.Right + size.Height, size.Height + Padding.Vertical), ContentAlignment.TopRight);
 			var avatarRect = authorRect.Pad(Padding).Align(new(size.Height, size.Height), ContentAlignment.MiddleLeft);
 
@@ -548,9 +538,9 @@ internal class PackageDescriptionControl : SlickImageControl
 			e.Graphics.FillRoundedRectangle(brush, authorRect, (int)(4 * UI.FontScale));
 
 			using var brush1 = new SolidBrush(FormDesign.Design.ForeColor);
-			e.Graphics.DrawString(Package.Author.Name, font, brush1, authorRect.Pad(avatarRect.Width + Padding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(author.Name, font, brush1, authorRect.Pad(avatarRect.Width + Padding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 
-			var authorImg = Package.AuthorIconImage;
+			var authorImg = author.GetUserAvatar();
 
 			if (authorImg is null)
 			{
@@ -563,7 +553,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				e.Graphics.DrawRoundImage(authorImg, avatarRect);
 			}
 
-			if (_compatibilityManager.CompatibilityData.Authors.TryGet(Package.Author.SteamId)?.Verified ?? false)
+			if (_compatibilityManager.IsUserVerified(author))
 			{
 				var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
@@ -580,7 +570,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			rects.AuthorRect = Rectangle.Empty;
 		}
 
-		rects.SteamIdRect = DrawLabel(e, Package.SteamId.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.TopRight, true);
+		rects.SteamIdRect = DrawLabel(e, Package.Id.ToString(), IconManager.GetSmallIcon("I_Steam"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.SteamIdRect, ContentAlignment.TopRight, true);
 
 		void DrawBack(int x)
 		{
@@ -594,7 +584,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private Rectangle DrawStatusDescriptor(PaintEventArgs e, Rectangles rects, Rectangle labelRect, ContentAlignment contentAlignment)
 	{
-		if (!Package!.Workshop)
+		if (Package!.IsLocal)
 		{
 			labelRect.X += Padding.Left + DrawLabel(e, Locale.Local, IconManager.GetSmallIcon("I_PC"), FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), labelRect, contentAlignment, true).Width;
 		}
@@ -620,7 +610,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private void GetStatusDescriptors(IPackage mod, out string text, out Bitmap? icon, out Color color)
 	{
-		switch (mod.Package?.Status)
+		switch (_packageUtil.GetStatus(mod, out text))
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
@@ -631,11 +621,6 @@ internal class PackageDescriptionControl : SlickImageControl
 				text = Locale.OutOfDate;
 				icon = IconManager.GetSmallIcon("I_OutOfDate");
 				color = FormDesign.Design.YellowColor;
-				return;
-			case DownloadStatus.NotDownloaded:
-				text = Locale.Missing;
-				icon = IconManager.GetSmallIcon("I_Question");
-				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
@@ -694,16 +679,17 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private int DrawScore(PaintEventArgs e, bool large, Rectangles rects, Rectangle labelRect)
 	{
-		var score = SteamUtil.GetScore(Package!);
+		var score = Package?.GetWorkshopInfo()?.Score ?? -1;
 
-		if (Package!.Workshop && score != -1)
+		if (!Package!.IsLocal && score != -1)
 		{
+			var subscribers = Package.GetWorkshopInfo()!.Subscribers;
 			var clip = ClientRectangle;
 			var labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
 			labelH -= labelH % 2;
 			var small = UI.FontScale < 1.25;
 			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.TopLeft);
-			var backColor = score > 90 && Package.Subscriptions >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
+			var backColor = score > 90 && subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 
 			if (!small)
 			{
@@ -731,20 +717,20 @@ internal class PackageDescriptionControl : SlickImageControl
 				e.Graphics.DrawImage(scoreFilled.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreFilled.Size));
 			}
 
-			if (Package.Subscriptions < 50000 || score <= 90)
+			if (subscribers < 50000 || score <= 90)
 			{
 				if (small)
 				{
 					using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
 
-					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * Package.Subscriptions / 15000), 0, 0));
+					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * subscribers / 15000), 0, 0));
 					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
 					e.Graphics.SetClip(clip);
 				}
 				else
 				{
 					using var pen = new Pen(Color.FromArgb(score >= 75 ? 255 : 200, FormDesign.Modern.ActiveColor), (float)(1.5 * UI.FontScale)) { EndCap = LineCap.Round, StartCap = LineCap.Round };
-					e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * Package.Subscriptions / 15000) / 2), Math.Min(360, 360F * Package.Subscriptions / 15000));
+					e.Graphics.DrawArc(pen, scoreRect.Pad(-1), 90 - (Math.Min(360, 360F * subscribers / 15000) / 2), Math.Min(360, 360F * subscribers / 15000));
 				}
 			}
 
@@ -758,7 +744,7 @@ internal class PackageDescriptionControl : SlickImageControl
 	{
 		internal IPackage? Item;
 
-		internal Dictionary<TagItem, Rectangle> TagRects = new();
+		internal Dictionary<ITag, Rectangle> TagRects = new();
 		internal Rectangle IncludedRect;
 		internal Rectangle EnabledRect;
 		internal Rectangle FolderRect;
@@ -788,7 +774,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				IconRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
 				DateRect.Contains(location) ||
-				(VersionRect.Contains(location) && Item?.Package?.Mod is not null) ||
+				(VersionRect.Contains(location) && Item?.LocalParentPackage?.Mod is not null) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}

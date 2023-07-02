@@ -3,8 +3,7 @@ using Extensions;
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
-using SkyveApp.Utilities.IO;
+using SkyveApp.Systems.CS1.Utilities.IO;
 
 using SkyveShared;
 
@@ -21,7 +20,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.Utilities;
+namespace SkyveApp.Systems.CS1.Utilities;
 
 public static class SteamUtil
 {
@@ -35,9 +34,6 @@ public static class SteamUtil
 
 	public static event Action? DLCsLoaded;
 
-	public static event Action? WorkshopItemsLoaded;
-	public static event Action? SteamUsersLoaded;
-
 	static SteamUtil()
 	{
 		_csCache = CSCache.Deserialize();
@@ -49,53 +45,35 @@ public static class SteamUtil
 		_workshopItemProcessor = new();
 		_steamUserProcessor = new();
 
-		_workshopItemProcessor.ItemsLoaded += _workshopItemProcessor_ItemsLoaded;
-		_steamUserProcessor.ItemsLoaded += _steamUserProcessor_ItemsLoaded;
+		var notifier = ServiceCenter.Get<INotifier>();
+
+		_workshopItemProcessor.ItemsLoaded += notifier.OnWorkshopPackagesInfoLoaded;
+		_steamUserProcessor.ItemsLoaded += notifier.OnWorkshopUsersInfoLoaded;
 	}
 
 	public static SteamUser? GetUser(ulong steamId)
 	{
-		if (steamId == 0)
-		{
-			return null;
-		}
-
-		return _steamUserProcessor.Get(steamId, false).Result;
+		return steamId == 0 ? null : _steamUserProcessor.Get(steamId, false).Result;
 	}
 
 	public static SteamWorkshopInfo? GetItem(ulong steamId)
 	{
-		if (steamId == 0)
-		{
-			return null;
-		}
-
-		return _workshopItemProcessor.Get(steamId, false).Result;
+		return steamId == 0 ? null : _workshopItemProcessor.Get(steamId, false).Result;
 	}
 
 	public static async Task<SteamUser?> GetUserAsync(ulong steamId)
 	{
-		if (steamId == 0)
-		{
-			return null;
-		}
-
-		return await _steamUserProcessor.Get(steamId, true);
+		return steamId == 0 ? null : await _steamUserProcessor.Get(steamId, true);
 	}
 
 	public static async Task<SteamWorkshopInfo?> GetItemAsync(ulong steamId)
 	{
-		if (steamId == 0)
-		{
-			return null;
-		}
-
-		return await _workshopItemProcessor.Get(steamId, true);
+		return steamId == 0 ? null : await _workshopItemProcessor.Get(steamId, true);
 	}
 
 	public static void Download(IEnumerable<IPackage> packages)
 	{
-		var currentPath = ServiceCenter.Get<IOUtil>().ToRealPath(Path.GetDirectoryName(Application.StartupPath));
+		var currentPath = ServiceCenter.Get<IIOUtil>().ToRealPath(Path.GetDirectoryName(Application.StartupPath));
 
 		if (packages.Any(x => x is ILocalPackage lp && lp.Folder.PathEquals(currentPath)))
 		{
@@ -104,7 +82,7 @@ public static class SteamUtil
 				return;
 			}
 
-			ServiceCenter.Get<IOUtil>().WaitForUpdate();
+			ServiceCenter.Get<IIOUtil>().WaitForUpdate();
 
 			Application.Exit();
 		}
@@ -158,19 +136,10 @@ public static class SteamUtil
 
 			return steam.GetSteamId();
 		}
-		catch { return 0; }
-	}
-
-	private static void _workshopItemProcessor_ItemsLoaded()
-	{
-		WorkshopItemsLoaded?.Invoke();
-		WorkshopItemsLoaded = null;
-	}
-
-	private static void _steamUserProcessor_ItemsLoaded()
-	{
-		SteamUsersLoaded?.Invoke();
-		SteamUsersLoaded = null;
+		catch
+		{
+			return 0;
+		}
 	}
 
 	public static bool IsSteamAvailable()
@@ -192,7 +161,7 @@ public static class SteamUtil
 			}
 		}
 
-		ServiceCenter.Get<IOUtil>().Execute(file, args);
+		ServiceCenter.Get<IIOUtil>().Execute(file, args);
 	}
 
 	public static async Task<Dictionary<ulong, SteamUser>> GetSteamUsersAsync(List<ulong> steamId64s)
@@ -386,7 +355,10 @@ public static class SteamUtil
 
 			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId)) ?? new();
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to get the steam information for appid " + steamId); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to get the steam information for appid " + steamId);
+		}
 
 		return new();
 	}
@@ -445,15 +417,30 @@ public static class SteamUtil
 		_steamUserProcessor.Clear();
 
 		try
-		{ CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE)); }
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear DLC_CACHE_FILE"); }
+		{
+			CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE));
+		}
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear DLC_CACHE_FILE");
+		}
 
 		try
-		{ CrossIO.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE)); }
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear STEAM_USER_CACHE_FILE"); }
+		{
+			CrossIO.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE));
+		}
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear STEAM_USER_CACHE_FILE");
+		}
 
 		try
-		{ CrossIO.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE)); }
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear STEAM_CACHE_FILE"); }
+		{
+			CrossIO.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE));
+		}
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to clear STEAM_CACHE_FILE");
+		}
 	}
 }

@@ -1,13 +1,14 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Utilities;
-public class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRequest, SteamImageProcessor.Stub>
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRequest, SteamImageProcessor.Stub>
 {
 	public SteamImageProcessor() : base(100, 500, null)
 	{

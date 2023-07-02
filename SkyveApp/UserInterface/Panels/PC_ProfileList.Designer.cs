@@ -1,5 +1,4 @@
-﻿using SkyveApp.Services;
-using SkyveApp.UserInterface.Dropdowns;
+﻿using SkyveApp.UserInterface.Dropdowns;
 
 namespace SkyveApp.UserInterface.Panels;
 
@@ -18,7 +17,7 @@ partial class PC_ProfileList
 	{
 		if (disposing && (components != null))
 		{
-			_profileManager.ProfileChanged -= LoadProfile;
+			_notifier.PlaysetChanged -= LoadProfile;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

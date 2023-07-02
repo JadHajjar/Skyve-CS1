@@ -13,6 +13,6 @@ public interface ISubscriptionsManager
 	void Start();
 	void CancelPendingItems();
 	bool IsSubscribing(IPackage package);
-	bool Subscribe(IEnumerable<ulong> ids);
-	bool UnSubscribe(IEnumerable<ulong> ids);
+	bool Subscribe(IEnumerable<IPackageIdentity> ids);
+	bool UnSubscribe(IEnumerable<IPackageIdentity> ids);
 }

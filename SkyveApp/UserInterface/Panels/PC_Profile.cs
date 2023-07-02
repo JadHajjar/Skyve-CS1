@@ -1,19 +1,12 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
+﻿using SkyveApp.Domain.CS1;
+using SkyveApp.Systems.CS1.Utilities;
+using SkyveApp.Systems.CS1.Utilities.IO;
 using SkyveApp.UserInterface.Generic;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -22,15 +15,18 @@ public partial class PC_Profile : PanelContent
 	private bool loadingProfile;
 	private readonly SlickCheckbox[] _launchOptions;
 
-	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
-	private readonly ILocationManager _locationManager = ServiceCenter.Get<ILocationManager>();
-	private readonly IContentManager _contentManager = ServiceCenter.Get<IContentManager>();
-	private readonly IContentUtil _contentUtil = ServiceCenter.Get<IContentUtil>();
-	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
-	private readonly IOUtil _iOUtil = ServiceCenter.Get<IOUtil>();
+	private readonly IPlaysetManager _playsetManager;
+	private readonly ILocationManager _locationManager;
+	private readonly IPackageManager _packageManager;
+	private readonly ISettings _settings;
+	private readonly IBulkUtil _bulkUtil;
+	private readonly IIOUtil _iOUtil;
+	private readonly INotifier _notifier;
 
 	public PC_Profile()
 	{
+		ServiceCenter.Get(out _bulkUtil, out _iOUtil, out _locationManager, out _playsetManager, out _packageManager, out _notifier, out _settings);
+
 		InitializeComponent();
 
 		_launchOptions = new[] { CB_StartNewGame, CB_LoadSave, CB_NewAsset, CB_LoadAsset };
@@ -50,7 +46,7 @@ public partial class PC_Profile : PanelContent
 			}
 		}
 
-		LoadProfile(_profileManager.CurrentPlayset);
+		LoadProfile(_playsetManager.CurrentPlayset as Playset);
 
 		DD_SaveFile.StartingFolder = CrossIO.Combine(_locationManager.AppDataPath, "Saves");
 		DD_SaveFile.PinnedFolders = new()
@@ -58,11 +54,11 @@ public partial class PC_Profile : PanelContent
 			["Your Save-games"] = CrossIO.Combine(_locationManager.AppDataPath, "Saves"),
 			["Workshop Save-games"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_SaveFile.CustomFiles = _contentManager.Assets.Where(x => x.Workshop && (x.Package.WorkshopTags?.Contains("SaveGame") ?? false)).Select(x => new IOSelectionDialog.CustomFile
+		DD_SaveFile.CustomFiles = _packageManager.Assets.Where(x => x.GetTags().Any(x => x.Value == "SaveGame")).Select(x => new IOSelectionDialog.CustomFile
 		{
-			Name = x.Package.Name,
-			Icon = x.IconImage,
-			Path = x.FileName
+			Name = x.Name,
+			Icon = x.GetThumbnail(),
+			Path = x.FilePath
 		}).ToList();
 
 		DD_SkipFile.StartingFolder = _locationManager.AppDataPath;
@@ -75,21 +71,21 @@ public partial class PC_Profile : PanelContent
 			["Vanilla Maps"] = CrossIO.Combine(_locationManager.GameContentPath, "Maps"),
 			["Workshop Maps"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_NewMap.CustomFiles = _contentManager.Assets.Where(x => x.Workshop && (x.AssetTags.Contains("Map") || (x.Package.WorkshopTags?.Contains("Map") ?? false))).Select(x => new IOSelectionDialog.CustomFile
+		DD_NewMap.CustomFiles = _packageManager.Assets.Where(x => x.GetTags().Any(x => x.Value=="Map")).Select(x => new IOSelectionDialog.CustomFile
 		{
-			Name = x.Package.Name,
-			Icon = x.IconImage,
-			Path = x.FileName
+			Name = x.Name,
+			Icon = x.GetThumbnail(),
+			Path = x.FilePath
 		}).ToList();
 
-		TLP_AdvancedDev.Visible = _settings.SessionSettings.UserSettings.AdvancedLaunchOptions;
+		TLP_AdvancedDev.Visible = _settings.UserSettings.AdvancedLaunchOptions;
 
-		_profileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Playset p)
+	private void ProfileManager_ProfileChanged()
 	{
-		this.TryInvoke(() => LoadProfile(p));
+		this.TryInvoke(() => LoadProfile(_playsetManager.CurrentPlayset as Playset));
 	}
 
 	protected override void LocaleChanged()
@@ -106,7 +102,7 @@ public partial class PC_Profile : PanelContent
 
 		slickIcon1.Size = slickIcon2.Size = B_EditName.Size = B_Save.Size = I_ProfileIcon.Size = I_Info.Size = I_TempProfile.Size = I_Favorite.Size = UI.Scale(new Size(24, 24), UI.FontScale) + new Size(8, 8);
 		slickSpacer1.Height = (int)(1.5 * UI.FontScale);
-		P_Options.Padding = UI.Scale(new Padding(5,0,5,0), UI.UIScale);
+		P_Options.Padding = UI.Scale(new Padding(5, 0, 5, 0), UI.UIScale);
 		slickSpacer1.Margin = B_TempProfile.Padding = B_AddProfile.Padding = TLP_ProfileName.Padding = P_Options.Margin = UI.Scale(new Padding(5), UI.UIScale);
 		L_TempProfile.Font = UI.Font(10.5F);
 		L_CurrentProfile.Font = UI.Font(12.75F, FontStyle.Bold);
@@ -149,16 +145,19 @@ public partial class PC_Profile : PanelContent
 		return true;
 	}
 
-	internal void Ctrl_LoadProfile(Playset obj)
+	internal void Ctrl_LoadProfile(ICustomPlayset obj)
 	{
 		I_ProfileIcon.Loading = true;
 		L_CurrentProfile.Text = obj.Name;
 		TLP_Options.Enabled = B_EditName.Visible = B_Save.Visible = false;
-		_profileManager.SetProfile(obj);
+		_playsetManager.SetCurrentPlayset(obj);
 	}
 
-	private void LoadProfile(Playset profile)
+	private void LoadProfile(Playset? profile)
 	{
+		if (profile == null)
+			return;
+
 		loadingProfile = true;
 
 		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
@@ -239,32 +238,34 @@ public partial class PC_Profile : PanelContent
 			}
 		}
 
-		_profileManager.CurrentPlayset.AutoSave = CB_AutoSave.Checked;
-		_profileManager.CurrentPlayset.Usage = DD_ProfileUsage.SelectedItem;
+		var playset =(_playsetManager.CurrentPlayset as Playset)!;
 
-		_profileManager.CurrentPlayset.LaunchSettings.NoWorkshop = CB_NoWorkshop.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.NoAssets = CB_NoAssets.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.NoMods = CB_NoMods.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.LHT = CB_LHT.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.StartNewGame = CB_StartNewGame.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.MapToLoad = _iOUtil.ToRealPath(DD_NewMap.SelectedFile);
-		_profileManager.CurrentPlayset.LaunchSettings.SaveToLoad = _iOUtil.ToRealPath(DD_SaveFile.SelectedFile);
-		_profileManager.CurrentPlayset.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.DebugMono = CB_DebugMono.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.DevUi = CB_DevUI.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.CustomArgs = TB_CustomArgs.Text;
-		_profileManager.CurrentPlayset.LaunchSettings.NewAsset = CB_NewAsset.Checked;
-		_profileManager.CurrentPlayset.LaunchSettings.LoadAsset = CB_LoadAsset.Checked;
+		playset.AutoSave = CB_AutoSave.Checked;
+		playset.Usage = DD_ProfileUsage.SelectedItem;
 
-		_profileManager.CurrentPlayset.LsmSettings.SkipFile = _iOUtil.ToRealPath(DD_SkipFile.SelectedFile);
-		_profileManager.CurrentPlayset.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
-		_profileManager.CurrentPlayset.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
-		_profileManager.CurrentPlayset.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
+		playset.LaunchSettings.NoWorkshop = CB_NoWorkshop.Checked;
+		playset.LaunchSettings.NoAssets = CB_NoAssets.Checked;
+		playset.LaunchSettings.NoMods = CB_NoMods.Checked;
+		playset.LaunchSettings.LHT = CB_LHT.Checked;
+		playset.LaunchSettings.StartNewGame = CB_StartNewGame.Checked;
+		playset.LaunchSettings.MapToLoad = _iOUtil.ToRealPath(DD_NewMap.SelectedFile);
+		playset.LaunchSettings.SaveToLoad = _iOUtil.ToRealPath(DD_SaveFile.SelectedFile);
+		playset.LaunchSettings.LoadSaveGame = CB_LoadSave.Checked;
+		playset.LaunchSettings.UseCitiesExe = CB_UseCitiesExe.Checked;
+		playset.LaunchSettings.UnityProfiler = CB_UnityProfiler.Checked;
+		playset.LaunchSettings.DebugMono = CB_DebugMono.Checked;
+		playset.LaunchSettings.RefreshWorkshop = CB_RefreshWorkshop.Checked;
+		playset.LaunchSettings.DevUi = CB_DevUI.Checked;
+		playset.LaunchSettings.CustomArgs = TB_CustomArgs.Text;
+		playset.LaunchSettings.NewAsset = CB_NewAsset.Checked;
+		playset.LaunchSettings.LoadAsset = CB_LoadAsset.Checked;
+		
+		playset.LsmSettings.SkipFile = _iOUtil.ToRealPath(DD_SkipFile.SelectedFile);
+		playset.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
+		playset.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
+		playset.LsmSettings.UseSkipFile = CB_SkipFile.Checked;
 
-		_profileManager.Save(_profileManager.CurrentPlayset);
+		_playsetManager.Save(playset);
 	}
 
 	private void B_LoadProfiles_Click(object sender, EventArgs e)
@@ -340,20 +341,20 @@ public partial class PC_Profile : PanelContent
 			L_CurrentProfile.Visible = true;
 			return;
 		}
-
-		if (!_profileManager.RenameProfile(_profileManager.CurrentPlayset, TB_Name.Text))
+		
+		if (!_playsetManager.RenamePlayset(_playsetManager.CurrentPlayset, TB_Name.Text))
 		{
 			TB_Name.SetError();
 			return;
 		}
 
-		if (_profileManager.CurrentPlayset.Name != TB_Name.Text)
+		if (_playsetManager.CurrentPlayset.Name != TB_Name.Text)
 		{
 			Notification.Create(Locale.ProfileNameChangedIllegalChars, null, PromptIcons.Info, null)
 				.Show(Form, 15);
 		}
 
-		L_CurrentProfile.Text = _profileManager.CurrentPlayset.Name;
+		L_CurrentProfile.Text = _playsetManager.CurrentPlayset.Name;
 		TB_Name.Visible = false;
 		B_EditName.Visible = B_Save.Visible = true;
 		L_CurrentProfile.Visible = true;
@@ -366,7 +367,7 @@ public partial class PC_Profile : PanelContent
 			return;
 		}
 
-		var invalidPackages = _profileManager.GetInvalidPackages(DD_ProfileUsage.SelectedItem);
+		var invalidPackages = _playsetManager.GetInvalidPackages(DD_ProfileUsage.SelectedItem);
 
 		if (invalidPackages.Any())
 		{
@@ -377,12 +378,12 @@ public partial class PC_Profile : PanelContent
 				return;
 			}
 
-			_contentUtil.SetBulkIncluded(invalidPackages, false);
+			_bulkUtil.SetBulkIncluded(invalidPackages, false);
 		}
 
 		ValueChanged(sender, e);
 
-		I_ProfileIcon.Image = _profileManager.CurrentPlayset.GetIcon();
+		I_ProfileIcon.Image = _playsetManager.CurrentPlayset.GetIcon();
 	}
 
 	private void LsmSettingsChanged(object sender, EventArgs e)
@@ -394,12 +395,12 @@ public partial class PC_Profile : PanelContent
 
 		ValueChanged(sender, e);
 
-		_profileManager.SaveLsmSettings(_profileManager.CurrentPlayset);
+		_playsetManager.SaveLsmSettings(_playsetManager.CurrentPlayset);
 	}
 
 	private void B_Save_Click(object sender, EventArgs e)
 	{
-		if (_profileManager.CurrentPlayset.Save())
+		if (_playsetManager.CurrentPlayset.Save())
 		{
 			B_Save.ImageName = "I_Check";
 
@@ -416,7 +417,7 @@ public partial class PC_Profile : PanelContent
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
 	{
-		_profileManager.SetProfile(Playset.TemporaryPlayset);
+		_playsetManager.SetCurrentPlayset(Playset.TemporaryPlayset);
 	}
 
 	private void DD_SaveFile_FileSelected(string obj)
@@ -444,12 +445,12 @@ public partial class PC_Profile : PanelContent
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
 	{
-		if (_profileManager.CurrentPlayset.Temporary)
+		if (_playsetManager.CurrentPlayset.Temporary)
 		{
 			return;
 		}
 
-		var colorDialog = new SlickColorPicker(_profileManager.CurrentPlayset.Color ?? Color.Red);
+		var colorDialog = new SlickColorPicker(_playsetManager.CurrentPlayset.Color ?? Color.Red);
 
 		if (colorDialog.ShowDialog() != DialogResult.OK)
 		{
@@ -458,21 +459,21 @@ public partial class PC_Profile : PanelContent
 
 		TLP_ProfileName.BackColor = colorDialog.Color;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
-		_profileManager.CurrentPlayset.Color = colorDialog.Color;
-		_profileManager.Save(_profileManager.CurrentPlayset);
+		_playsetManager.CurrentPlayset.Color = colorDialog.Color;
+		_playsetManager.Save(_playsetManager.CurrentPlayset);
 	}
 
 	private void I_Favorite_Click(object sender, EventArgs e)
 	{
-		if (_profileManager.CurrentPlayset.Temporary)
+		if (_playsetManager.CurrentPlayset.Temporary)
 		{
 			return;
 		}
 
-		_profileManager.CurrentPlayset.IsFavorite = !_profileManager.CurrentPlayset.IsFavorite;
-		_profileManager.Save(_profileManager.CurrentPlayset);
+		_playsetManager.CurrentPlayset.IsFavorite = !_playsetManager.CurrentPlayset.IsFavorite;
+		_playsetManager.Save(_playsetManager.CurrentPlayset);
 
-		I_Favorite.ImageName = _profileManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
-		SlickTip.SetTo(I_Favorite, _profileManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		I_Favorite.ImageName = _playsetManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
+		SlickTip.SetTo(I_Favorite, _playsetManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
 	}
 }

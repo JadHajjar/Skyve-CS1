@@ -5,8 +5,8 @@ public interface INotifier
 {
 	bool BulkUpdating { get; set; }
 	bool IsContentLoaded { get; }
-	bool ApplyingProfile { get; set; }
-	bool ProfilesLoaded { get; set; }
+	bool ApplyingPlayset { get; set; }
+	bool PlaysetsLoaded { get; set; }
 
 	event Action? ContentLoaded;
 	event Action? WorkshopInfoUpdated;
@@ -16,6 +16,8 @@ public interface INotifier
 	event Action? PlaysetUpdated;
 	event Action? PlaysetChanged;
 	event Action? RefreshUI;
+	event Action? WorkshopPackagesInfoLoaded;
+	event Action? WorkshopUsersInfoLoaded;
 	event Action? CompatibilityReportProcessed;
 	event Action<Exception>? LoggerFailed;
 
@@ -29,4 +31,6 @@ public interface INotifier
 	void OnRefreshUI();
 	void OnCompatibilityReportProcessed();
 	void OnLoggerFailed(Exception ex);
+	void OnWorkshopPackagesInfoLoaded();
+	void OnWorkshopUsersInfoLoaded();
 }

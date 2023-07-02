@@ -1,16 +1,27 @@
-﻿using Extensions;
+﻿using System.Drawing;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
-
-using System.Drawing;
-
-namespace SkyveApp.Systems.Compatibility;
+namespace SkyveApp;
 
 public static class CompatibilityExtensions
 {
+	public static DynamicIcon GetIcon(this IPlayset profile)
+	{
+		return profile.Temporary ? (DynamicIcon)"I_TempProfile" : profile.Usage.GetIcon();
+	}
+
+	public static DynamicIcon GetIcon(this PackageUsage usage)
+	{
+		return usage switch
+		{
+			PackageUsage.CityBuilding => "I_City",
+			PackageUsage.AssetCreation => "I_Tools",
+			PackageUsage.MapCreation => "I_Map",
+			PackageUsage.ScenarioMaking => "I_ScenarioMaking",
+			PackageUsage.ThemeMaking => "I_Paint",
+			_ => "I_ProfileSettings"
+		};
+	}
+
 	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package, bool noCache = false)
 	{
 		var manager = ServiceCenter.Get<ICompatibilityManager>();

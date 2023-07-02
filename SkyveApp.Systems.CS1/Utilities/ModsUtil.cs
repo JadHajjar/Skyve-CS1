@@ -4,13 +4,13 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Utilities.IO;
+using SkyveApp.Systems.CS1.Utilities.IO;
 
 using System;
 using System.IO;
 
-namespace SkyveApp.Utilities;
-public class ModsUtil : IModUtil
+namespace SkyveApp.Systems.CS1.Utilities;
+internal class ModsUtil : IModUtil
 {
 	private readonly CachedSaveLibrary<IMod, bool> _includedLibrary;
 	private readonly CachedSaveLibrary<IMod, bool> _enabledLibrary;
@@ -41,7 +41,7 @@ public class ModsUtil : IModUtil
 
 	public void SavePendingValues()
 	{
-		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
+		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
 			return;
 		}
@@ -74,7 +74,7 @@ public class ModsUtil : IModUtil
 
 	public bool IsLocallyIncluded(IMod mod)
 	{
-		return !CrossIO.FileExists(CrossIO.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+		return !CrossIO.FileExists(CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME));
 	}
 
 	public bool IsLocallyEnabled(IMod mod)
@@ -89,7 +89,7 @@ public class ModsUtil : IModUtil
 			value = true;
 		}
 
-		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
+		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
 #if DEBUG
 			_logger.Debug($"Delaying inclusion ({value}) for mod: {mod} (currently {IsLocallyIncluded(mod)}) ({mod.Folder})");
@@ -115,16 +115,16 @@ public class ModsUtil : IModUtil
 			if ((value || _modLogicManager.IsRequired(mod)) && !_modLogicManager.IsForbidden(mod))
 			{
 #if DEBUG
-				_logger.Debug($"Deleting the file ({CrossIO.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
+				_logger.Debug($"Deleting the file ({CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME)})");
 #endif
-				CrossIO.DeleteFile(CrossIO.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME));
+				CrossIO.DeleteFile(CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME));
 			}
 			else
 			{
 #if DEBUG
-				_logger.Debug($"Creating the file ({CrossIO.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME)})");
+				_logger.Debug($"Creating the file ({CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME)})");
 #endif
-				File.WriteAllBytes(CrossIO.Combine(mod.Folder, ContentUtil.EXCLUDED_FILE_NAME), new byte[0]);
+				File.WriteAllBytes(CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME), new byte[0]);
 			}
 		}
 		catch (Exception ex)
@@ -140,7 +140,7 @@ public class ModsUtil : IModUtil
 
 	public void SetEnabled(IMod mod, bool value, bool save)
 	{
-		if (_notifier.ApplyingProfile || _notifier.BulkUpdating)
+		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
 			_enabledLibrary.SetValue(mod, value);
 		}
@@ -191,12 +191,7 @@ public class ModsUtil : IModUtil
 
 	public IMod? GetMod(ILocalPackageWithContents package)
 	{
-		if (IsValidModFolder(package.Folder, out var dllPath, out var version))
-		{
-			return new Mod(package, dllPath!, version!);
-		}
-
-		return null;
+		return IsValidModFolder(package.Folder, out var dllPath, out var version) ? new Mod(package, dllPath!, version!) : (IMod?)null;
 	}
 
 	private bool IsValidModFolder(string dir, out string? dllPath, out Version? version)
@@ -207,12 +202,9 @@ public class ModsUtil : IModUtil
 
 			if (files != null && files.Length > 0)
 			{
-				if (CrossIO.CurrentPlatform is Platform.MacOSX)
-				{
-					return _macAssemblyUtil.FindImplementation(files, out dllPath, out version);
-				}
-
-				return _assemblyUtil.FindImplementation(files, out dllPath, out version);
+				return CrossIO.CurrentPlatform is Platform.MacOSX
+					? _macAssemblyUtil.FindImplementation(files, out dllPath, out version)
+					: _assemblyUtil.FindImplementation(files, out dllPath, out version);
 			}
 		}
 		catch { }

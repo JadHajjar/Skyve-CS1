@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkyveApp.Domain.Systems;
 public interface IDlcManager
 {
+	event Action DlcsLoaded;
+
+	IEnumerable<IDlcInfo> Dlcs { get; }
+
 	bool IsDlcExcluded(uint id);
-	bool IsDlcAvailable(uint dlcId);
+	bool IsAvailable(uint dlcId);
 	void SetAvailableDlcs(IEnumerable<uint> enumerable);
+	void SetDlcsExcluded(uint[] uints);
+	bool IsIncluded(IDlcInfo dlc);
+	void SetIncluded(IDlcInfo dlc, bool value);
 }

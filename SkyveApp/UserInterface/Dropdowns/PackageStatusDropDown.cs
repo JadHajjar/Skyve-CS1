@@ -1,13 +1,9 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Utilities;
+﻿using SkyveApp.Domain.CS1.Enums;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
@@ -71,11 +67,6 @@ internal class PackageStatusDropDown : SlickSelectionDropDown<DownloadStatusFilt
 				text = Locale.OutOfDate;
 				icon = new DynamicIcon("I_OutOfDate");
 				color = FormDesign.Design.YellowColor;
-				return;
-			case DownloadStatusFilter.NotDownloaded:
-				text = Locale.Missing;
-				icon = new DynamicIcon("I_Question");
-				color = FormDesign.Design.RedColor;
 				return;
 			case DownloadStatusFilter.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;

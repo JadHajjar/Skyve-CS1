@@ -7,7 +7,7 @@ using System.Drawing;
 namespace SkyveApp.Domain;
 public interface IPlayset
 {
-	string? Name { get; }
+	string? Name { get; set; }
 	IUser? Author { get; }
 	string? BannerUrl { get; }
 	PackageUsage Usage { get; }
@@ -17,12 +17,26 @@ public interface IPlayset
 	bool IsFavorite { get; set; }
 	int AssetCount { get; }
 	int ModCount { get; }
-	IEnumerable<IPackage> Packages { get; }
+	IEnumerable<IPlaysetEntry> Packages { get; }
 	bool Temporary { get; }
 }
 
 public interface ICustomPlayset : IPlayset
 {
 	Color? Color { get; set; }
-	Bitmap? Banner { get; }
+	Bitmap? Banner { get; set; }
+	bool AutoSave { get; }
+	int ProfileId { get; }
+	bool Public { get; }
+	bool IsMissingItems { get; }
+	bool UnsavedChanges { get; }
+
+	bool Save();
+}
+
+public interface IOnlinePlayset : IPlayset
+{
+	int ProfileId { get; }
+	bool Public { get; set; }
+	int Downloads { get; }
 }

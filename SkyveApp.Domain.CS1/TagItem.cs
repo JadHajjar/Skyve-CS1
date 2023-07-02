@@ -7,7 +7,8 @@ public struct TagItem : ITag
 {
 	public TagSource Source { get; set; }
 	public string Value { get; set; }
-	public readonly string Icon => Source switch { TagSource.Workshop => "I_Steam", TagSource.FindIt => "I_Search", _ => "I_Tag" };
+	public string Icon => Source switch { TagSource.Workshop => "I_Steam", TagSource.FindIt => "I_Search", _ => "I_Tag" };
+	public bool IsCustom => Source is TagSource.FindIt;
 
 	public TagItem(TagSource source, string value)
 	{

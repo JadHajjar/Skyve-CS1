@@ -1,22 +1,13 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.CS1.Steam;
+﻿using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Systems;
 using SkyveApp.Systems.Compatibility.Domain.Api;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.CompatibilityReport;
-using SkyveApp.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,7 +15,9 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_RequestReview : PanelContent
 {
 	private IPackageStatusControl<StatusType, PackageStatus>? statusControl;
-	private IPackageStatusControl<InteractionType, PackageInteraction>? iteractionControl;
+	private IPackageStatusControl<InteractionType, PackageInteraction>? interactionControl;
+
+	private readonly ICompatibilityManager _compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 
 	public PC_RequestReview(IPackage package)
 	{
@@ -34,7 +27,7 @@ public partial class PC_RequestReview : PanelContent
 
 		PB_Icon.Package = CurrentPackage;
 		PB_Icon.Image = null;
-		PB_Icon.LoadImage(CurrentPackage.IconUrl, ServiceCenter.Get<IImageService>().GetImage);
+		PB_Icon.LoadImage(CurrentPackage.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
 		P_Info.SetPackage(CurrentPackage, null);
 	}
 
@@ -82,11 +75,11 @@ public partial class PC_RequestReview : PanelContent
 		TLP_MainInfo.Show();
 		P_Main.Show();
 
-		var data = CurrentPackage.GetCompatibilityInfo();
-		DD_Stability.SelectedItem = data.Data?.Package.Stability ?? PackageStability.NotReviewed;
-		DD_PackageType.SelectedItem = data.Data?.Package.Type ?? PackageType.GenericPackage;
-		DD_DLCs.SelectedItems = data.Data?.Package is null ? Enumerable.Empty<SteamDlc>() : SteamUtil.Dlcs.Where(x => data.Data?.Package.RequiredDLCs?.Contains(x.Id) ?? false);
-		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => data.Data?.Package.Usage.HasFlag(x) ?? true);
+		var data = _compatibilityManager.GetPackageInfo( CurrentPackage);
+		DD_Stability.SelectedItem = data?.Stability ?? PackageStability.NotReviewed;
+		DD_PackageType.SelectedItem = data?.Type ?? PackageType.GenericPackage;
+		DD_DLCs.SelectedItems = data is null ? Enumerable.Empty<IDlcInfo>() : ServiceCenter.Get<IDlcManager>().Dlcs.Where(x => data.RequiredDLCs?.Contains(x.Id) ?? false);
+		DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => data?.Usage.HasFlag(x) ?? true);
 	}
 
 	private void B_AddStatus_Click(object sender, EventArgs e)
@@ -101,7 +94,7 @@ public partial class PC_RequestReview : PanelContent
 
 	private void B_AddInteraction_Click(object sender, EventArgs e)
 	{
-		tableLayoutPanel1.Controls.Add(iteractionControl = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage) { Margin = TB_Note.Margin }, 0, 0);
+		tableLayoutPanel1.Controls.Add(interactionControl = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage) { Margin = TB_Note.Margin }, 0, 0);
 
 		TLP_Button.Show();
 		tableLayoutPanel1.Show();
@@ -111,7 +104,7 @@ public partial class PC_RequestReview : PanelContent
 
 	private async void B_Apply_Click(object sender, EventArgs e)
 	{
-		var tb = statusControl is null && iteractionControl is null ? TB_Note2 : TB_Note;
+		var tb = statusControl is null && interactionControl is null ? TB_Note2 : TB_Note;
 
 		if (tb.Text.AsEnumerable().Count(x => !char.IsWhiteSpace(x) && x != '.') < 5)
 		{
@@ -128,7 +121,7 @@ public partial class PC_RequestReview : PanelContent
 
 		var postPackage = new ReviewRequest
 		{
-			PackageId = CurrentPackage!.SteamId,
+			PackageId = CurrentPackage!.Id,
 			PackageNote = tb.Text
 		};
 
@@ -140,13 +133,13 @@ public partial class PC_RequestReview : PanelContent
 			postPackage.StatusPackages = statusControl.PackageStatus.Packages!.ListStrings(",");
 			postPackage.StatusType = (int)statusControl.PackageStatus.Type;
 		}
-		else if (iteractionControl is not null)
+		else if (interactionControl is not null)
 		{
 			postPackage.IsInteraction = true;
-			postPackage.StatusNote = iteractionControl.PackageStatus.Note;
-			postPackage.StatusAction = (int)iteractionControl.PackageStatus.Action;
-			postPackage.StatusPackages = iteractionControl.PackageStatus.Packages!.ListStrings(",");
-			postPackage.StatusType = (int)iteractionControl.PackageStatus.Type;
+			postPackage.StatusNote = interactionControl.PackageStatus.Note;
+			postPackage.StatusAction = (int)interactionControl.PackageStatus.Action;
+			postPackage.StatusPackages = interactionControl.PackageStatus.Packages!.ListStrings(",");
+			postPackage.StatusType = (int)interactionControl.PackageStatus.Type;
 		}
 		else
 		{
@@ -165,7 +158,7 @@ public partial class PC_RequestReview : PanelContent
 			return stream.ToArray();
 		});
 
-		var response = await SkyveApiUtil.SendReviewRequest(postPackage);
+		var response = await ServiceCenter.Get<SkyveApiUtil>().SendReviewRequest(postPackage);
 
 		if (response.Success)
 		{

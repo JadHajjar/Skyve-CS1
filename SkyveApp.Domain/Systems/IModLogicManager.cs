@@ -3,6 +3,7 @@ public interface IModLogicManager
 {
 	void Analyze(IMod mod);
 	void ApplyRequiredStates();
+	bool AreMultipleSkyvesPresent();
 	bool IsForbidden(IMod mod);
 	bool IsPseudoMod(IPackage package);
 	bool IsRequired(IMod mod);

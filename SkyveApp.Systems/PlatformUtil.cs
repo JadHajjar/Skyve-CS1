@@ -1,8 +1,7 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
-using SkyveApp.Systems.CS1.Systems;
 
 using System;
 using System.Diagnostics;
@@ -11,7 +10,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace SkyveApp.Utilities.IO;
+namespace SkyveApp.Systems;
 public static class PlatformUtil
 {
 	public static void OpenUrl(string? url)
@@ -23,7 +22,7 @@ public static class PlatformUtil
 				return;
 			}
 
-			if (ServiceCenter.Get<ISettings, SettingsService>().SessionSettings.UserSettings.OpenLinksInBrowser)
+			if (ServiceCenter.Get<ISettings>().UserSettings.OpenLinksInBrowser)
 			{
 				Process.Start(url);
 				return;
@@ -33,26 +32,43 @@ public static class PlatformUtil
 
 			if (domain.Contains("store.steam", StringComparison.OrdinalIgnoreCase))
 			{
-				SteamUtil.ExecuteSteam("steam://store/" + Regex.Match(url, "\\d+$").Value);
+				if (ExecuteSteam("steam://store/" + Regex.Match(url, "\\d+$").Value))
+				{
+					return;
+				}
 			}
 			else if (domain.Contains("steam", StringComparison.OrdinalIgnoreCase))
 			{
-				SteamUtil.ExecuteSteam("steam://openurl/" + url);
-				//if (url.Contains("myworkshopfiles", StringComparison.OrdinalIgnoreCase))
-				//{
-				//	SteamUtil.ExecuteSteam("steam://openurl/" + url);
-				//}
-				//else
-				//{
-				//	SteamUtil.ExecuteSteam("steam://url/CommunityFilePage/" + Regex.Match(url, "\\d{8,20}").Value);
-				//}
+				if (ExecuteSteam("steam://openurl/" + url))
+				{
+					return;
+				}
 			}
 			else
 			{
 				Process.Start(url);
 			}
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the URL: '{url}'"); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the URL: '{url}'");
+		}
+	}
+
+	public static bool ExecuteSteam(string args)
+	{
+		var file = ServiceCenter.Get<ILocationManager>().SteamPathWithExe;
+
+		if (CrossIO.CurrentPlatform is Platform.Windows)
+		{
+			var process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(file));
+
+			return process.Length != 0;
+		}
+
+		ServiceCenter.Get<IIOUtil>().Execute(file, args);
+
+		return true;
 	}
 
 	public static void OpenFolder(string? folder)
@@ -85,7 +101,10 @@ public static class PlatformUtil
 				Platform.Windows or _ => Process.Start(folder),
 			};
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the folder: '{folder}'"); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the folder: '{folder}'");
+		}
 	}
 
 	private static void OpenFileInFolder(string file)
@@ -99,7 +118,10 @@ public static class PlatformUtil
 				Platform.Windows or _ => Process.Start("explorer.exe", $"/select, \"{file}\""),
 			};
 		}
-		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the file: '{file}'"); }
+		catch (Exception ex)
+		{
+			ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to open the file: '{file}'");
+		}
 	}
 
 	public static void SetFileInClipboard(string path)
@@ -117,7 +139,7 @@ public static class PlatformUtil
 					path = file;
 				}
 
-				path = $"file://{ServiceCenter.Get<IOUtil>().ToRealPath(path)}";
+				path = $"file://{ServiceCenter.Get<IIOUtil>().ToRealPath(path)}";
 			}
 
 			Clipboard.SetData(DataFormats.FileDrop, new[] { path });

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SkyveApp.Domain.Systems;
 public interface ITagsService
 {
-	public IEnumerable<ITag> GetTags(IPackage package);
+	IEnumerable<ITag> GetDistinctTags();
+	IEnumerable<ITag> GetTags(IPackage package, bool ignoreParent = false);
+	void SetTags(IPackage package, string value);
 }

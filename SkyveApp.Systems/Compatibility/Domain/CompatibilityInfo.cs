@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
 using SkyveApp.Systems.Compatibility.Domain.Api;
 
 using System.Collections.Generic;

@@ -1,11 +1,7 @@
-﻿using Extensions;
-using SkyveApp.Services;
-using SkyveApp.Services.Interfaces;
-using SkyveApp.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using SlickControls;
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 

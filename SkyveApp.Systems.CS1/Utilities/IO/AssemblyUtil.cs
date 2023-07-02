@@ -10,14 +10,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace SkyveApp.Utilities.IO;
-public class AssemblyUtil
+namespace SkyveApp.Systems.CS1.Utilities.IO;
+internal class AssemblyUtil
 {
 	private readonly ILocationManager _locationManager;
-	private readonly ContentUtil _contentUtil;
+	private readonly ContentManager _contentUtil;
 	private readonly ILogger _logger;
 
-	public AssemblyUtil(ILocationManager locationManager, ContentUtil contentUtil, ILogger logger)
+	public AssemblyUtil(ILocationManager locationManager, ContentManager contentUtil, ILogger logger)
 	{
 		_locationManager = locationManager;
 		_contentUtil = contentUtil;
@@ -60,7 +60,7 @@ public class AssemblyUtil
 		{
 			var cache = _contentUtil.GetDllModCache(path, out version);
 
-			if (cache == true || (cache is null && CheckDllImplementsInterface(path, "ICities.IUserMod", out version)))
+			if (cache == true || cache is null && CheckDllImplementsInterface(path, "ICities.IUserMod", out version))
 			{
 				_contentUtil.SetDllModCache(path, true, version);
 				dllPath = path;
@@ -161,12 +161,7 @@ public class AssemblyUtil
 		var name = new AssemblyName(args.Name).Name + ".dll";
 		var managedPath = CrossIO.Combine(_locationManager.ManagedDLL, name);
 
-		if (File.Exists(managedPath))
-		{
-			return Assembly.LoadFrom(managedPath);
-		}
-
-		return null;
+		return File.Exists(managedPath) ? Assembly.LoadFrom(managedPath) : null;
 	}
 
 	public Assembly? ReflectionResolveInterface(object sender, ResolveEventArgs args)
@@ -180,12 +175,7 @@ public class AssemblyUtil
 			return Assembly.ReflectionOnlyLoadFrom(path);
 		}
 
-		if (File.Exists(managedPath))
-		{
-			return Assembly.ReflectionOnlyLoadFrom(managedPath);
-		}
-
-		return null;
+		return File.Exists(managedPath) ? Assembly.ReflectionOnlyLoadFrom(managedPath) : null;
 	}
 
 	public string[] kIgnoreAssemblies = new string[]
