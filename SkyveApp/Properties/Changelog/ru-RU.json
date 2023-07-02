@@ -337,12 +337,12 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Исправления",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
+                    "Исправлены предыдущие настройки и профили, иногда не переносимые на Skyve.",
+                    "Ярлык будет создан, когда вы впервые откроете Skyve после того, как ранее у вас был LOM2.",
+                    "Исправлен редкий случай, когда информация о совместимости не загружалась.",
+                    "Включена возможность запрашивать обзор пакета, который в настоящее время нарушен.",
                     "Loosened the sensitivity of the 'Partially Downloaded' notification."
                 ]
             }
