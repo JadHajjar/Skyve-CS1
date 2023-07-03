@@ -22,7 +22,7 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly Dictionary<IPackage, CompatibilityInfo> _cache = new(new IPackageEqualityComparer());
 	private readonly List<SnoozedItem> _snoozedItems = new();
 	private readonly Regex _bracketsRegex = new(@"[\[\(](.+?)[\]\)]", RegexOptions.Compiled);
-	private readonly Regex _urlRegex = new(@"(https?):\/\/(?:([\w-]+)\.)?([\w-]+)\.(\w+)((?:\/[\w-]+)*\/)([\w-]+)+\.([\w]+)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+	private readonly Regex _urlRegex = new(@"(https?|ftp)://(?:www\.)?([\w-]+(?:\.[\w-]+)*)(?:/[^?\s]*)?(?:\?[^#\s]*)?(?:#.*)?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
 	private readonly ILocale _locale;
 	private readonly ILogger _logger;
@@ -261,8 +261,9 @@ public class CompatibilityManager : ICompatibilityManager
 
 			foreach (Match match in matches)
 			{
-				var type = (match.Groups[3].Value.ToLower() + match.Groups[4].Value.ToLower()) switch
+				var type = (match.Groups[2].Value.ToLower()) switch
 				{
+					"youtube.com" or "youtu.be" => LinkType.YouTube,
 					"github.com" => LinkType.Github,
 					"discord.com" or "discord.gg" => LinkType.Discord,
 					"crowdin.com" => LinkType.Crowdin,
@@ -440,7 +441,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public NotificationType GetNotification(ICompatibilityInfo info)
 	{
-		return info.ReportItems.Count == 0 ? NotificationType.None : info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification);
+		return info.ReportItems?.Count > 0 ? info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 	}
 
 	public ulong GetIdFromModName(string fileName)
@@ -450,6 +451,6 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public bool IsUserVerified(IUser author)
 	{
-		return CompatibilityData.Authors.TryGet(ulong.Parse(author.Id.ToString()))?.Verified ?? false;
+		return CompatibilityData.Authors.TryGet(ulong.Parse(author.Id?.ToString()))?.Verified ?? false;
 	}
 }

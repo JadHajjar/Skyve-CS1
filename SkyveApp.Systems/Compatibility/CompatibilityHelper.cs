@@ -280,7 +280,7 @@ public class CompatibilityHelper
 	{
 		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
 
-		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.GetWorkshopInfo()!.IsRemoved))
+		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
 || (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
 && (package.Package.Stability is PackageStability.Broken
 || (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));

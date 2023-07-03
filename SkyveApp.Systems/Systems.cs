@@ -25,14 +25,4 @@ public static class SystemsProgram
 
 		return services;
 	}
-
-	public static T GetService<T>(this IServiceProvider provider)
-	{
-		return provider.GetService<T>();
-	}
-
-	public static T2 GetService<T, T2>(this IServiceProvider provider) where T2 : T
-	{
-		return (T2)provider.GetService<T>()!;
-	}
 }

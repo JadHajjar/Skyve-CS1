@@ -161,7 +161,7 @@ public partial class PC_PackagePage : PanelContent
 		
 		(sender as TagControl)!.Dispose();
 
-		ServiceCenter.Get<ITagsService>().SetTags(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo!.IsCustom ? x.TagInfo.Value?.Replace(' ', '-') : null).WhereNotEmpty().ListStrings(" "));
+		ServiceCenter.Get<ITagsService>().SetTags(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo!.IsCustom ? x.TagInfo.Value?.Replace(' ', '-') : null)!);
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}
 

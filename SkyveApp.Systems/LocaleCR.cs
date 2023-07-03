@@ -5,7 +5,7 @@ public class LocaleCR : LocaleHelper
 {
 	private static readonly LocaleCR _instance = new();
 
-	protected LocaleCR() : base($"{nameof(SkyveApp)}.Properties.Compatibility.json") { }
+	protected LocaleCR() : base($"SkyveApp.Systems.Properties.Compatibility.json") { }
 
 	public static void Load() { _ = _instance; }
 

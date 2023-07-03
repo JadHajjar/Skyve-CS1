@@ -9,5 +9,4 @@ public interface IAssetUtil
 	void SaveChanges();
 	IAsset? GetAssetByFile(string? fileName);
 	IEnumerable<IAsset> GetAssets(ILocalPackageWithContents package, bool withSubDirectories = true);
-	void SetDlcExcluded(uint id, bool v);
 }

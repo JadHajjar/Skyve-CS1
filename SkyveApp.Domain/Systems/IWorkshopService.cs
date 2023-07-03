@@ -8,6 +8,7 @@ namespace SkyveApp.Domain.Systems;
 public interface IWorkshopService
 {
 	void ClearCache();
+	IEnumerable<IWorkshopInfo> GetAllPackages();
 	IWorkshopInfo? GetInfo(IPackageIdentity identity);
 	Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity);
 	IPackage? GetPackage(IPackageIdentity identity);

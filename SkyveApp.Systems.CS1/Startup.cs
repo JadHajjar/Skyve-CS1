@@ -34,6 +34,8 @@ public static class Startup
 		services.AddSingleton<IOnlinePlaysetUtil, OnlinePlaysetUtil>();
 		services.AddTransient<IWorkshopService, WorkshopService>();
 		services.AddSingleton<IUserService, UserService>();
+		services.AddSingleton<IDlcManager, DlcManager>();
+		services.AddSingleton<ITagsService, TagsService>();
 
 		return services;
 	}

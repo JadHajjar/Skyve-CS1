@@ -148,7 +148,13 @@ internal class PackageManager : IPackageManager
 	public void SetPackages(List<ILocalPackageWithContents> content)
 	{
 		packages = content;
-		indexedPackages = content.Where(x => x.Id != 0).ToDictionary(x => x.Id);
+
+		indexedPackages = content
+			.OrderBy(x => !x.IsLocal)
+			.GroupBy(x => x.Id)
+			.ToDictionary(x => x.Key, x => x.First());
+
+		indexedPackages.Remove(0);
 	}
 
 	public void DeleteAll(IEnumerable<ulong> ids)

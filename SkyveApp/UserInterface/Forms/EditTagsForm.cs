@@ -69,7 +69,7 @@ public partial class EditTagsForm : BaseForm
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
 		DialogResult = DialogResult.OK;
-		ServiceCenter.Get<ITagsService>().SetTags(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
+		ServiceCenter.Get<ITagsService>().SetTags(Package, GetLinks());
 		Close();
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}

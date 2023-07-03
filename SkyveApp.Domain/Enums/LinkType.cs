@@ -7,5 +7,6 @@ public enum LinkType
 	Github,
 	Crowdin,
 	Donation,
-	Other = 99
+	YouTube,
+	Other = 99,
 }

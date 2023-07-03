@@ -5,5 +5,5 @@ public interface ITagsService
 {
 	IEnumerable<ITag> GetDistinctTags();
 	IEnumerable<ITag> GetTags(IPackage package, bool ignoreParent = false);
-	void SetTags(IPackage package, string value);
+	void SetTags(IPackage package, IEnumerable<string> value);
 }

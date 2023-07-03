@@ -5,7 +5,7 @@ public class LocaleCRNotes : LocaleHelper
 {
 	private static readonly LocaleCRNotes _instance = new();
 
-	protected LocaleCRNotes() : base($"{nameof(SkyveApp)}.Properties.CompatibilityNotes.json") { }
+	protected LocaleCRNotes() : base($"SkyveApp.Systems.Properties.CompatibilityNotes.json") { }
 
 	public static Translation Get(string value)
 	{

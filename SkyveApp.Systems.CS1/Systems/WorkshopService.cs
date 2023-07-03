@@ -19,6 +19,11 @@ internal class WorkshopService : IWorkshopService
 		SteamUtil.ClearCache();
 	}
 
+	public IEnumerable<IWorkshopInfo> GetAllPackages()
+	{
+		return SteamUtil.Packages;
+	}
+
 	public IWorkshopInfo? GetInfo(IPackageIdentity identity)
 	{
 		return SteamUtil.GetItem(identity.Id);

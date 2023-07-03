@@ -15,7 +15,7 @@ using System.Linq;
 namespace SkyveApp.Systems.CS1.Utilities;
 internal class AssetsUtil : IAssetUtil
 {
-	private readonly SkyveConfig _config;
+	private readonly AssetConfig _config;
 	private CustomTagsLibrary _findItTags;
 	private Dictionary<string, IAsset> assetIndex = new();
 
@@ -44,17 +44,9 @@ internal class AssetsUtil : IAssetUtil
 
 		_findItTags = new();
 		_findItTags.Deserialize();
-		_config = SkyveConfig.Deserialize() ?? new();
+		_config = AssetConfig.Deserialize() ?? new();
 
-		ExcludedHashSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-		foreach (var item in _config.Assets)
-		{
-			if (item.Path is not null)
-			{
-				ExcludedHashSet.Add(item.Path);
-			}
-		}
+		ExcludedHashSet = new HashSet<string>(_config.ExcludedAssets, StringComparer.OrdinalIgnoreCase);
 
 		_notifier.ContentLoaded += BuildAssetIndex;
 	}
@@ -107,9 +99,7 @@ internal class AssetsUtil : IAssetUtil
 			return;
 		}
 
-		_config.Assets = ExcludedHashSet
-				.Select(x => new AssetInfo { Path = x })
-				.ToArray();
+		_config.ExcludedAssets = ExcludedHashSet.ToList();
 
 		_config.Serialize();
 	}
@@ -122,44 +112,6 @@ internal class AssetsUtil : IAssetUtil
 	public void BuildAssetIndex()
 	{
 		assetIndex = _contentManager.Assets.ToDictionary(x => x.FilePath.FormatPath(), StringComparer.OrdinalIgnoreCase);
-	}
-
-	public void SetAvailableDlcs(IEnumerable<uint> dlcs)
-	{
-		_config.AvailableDLCs = dlcs.ToArray();
-		_config.Serialize();
-	}
-
-	public bool IsDlcExcluded(uint dlc)
-	{
-		return _config.RemovedDLCs.Contains(dlc);
-	}
-
-	public void SetDlcsExcluded(uint[] dlc)
-	{
-		_config.RemovedDLCs = dlc;
-
-		_notifier.TriggerAutoSave();
-		SaveChanges();
-	}
-
-	public void SetDlcExcluded(uint dlc, bool excluded)
-	{
-		var list = new List<uint>(_config.RemovedDLCs);
-
-		if (excluded)
-		{
-			list.Add(dlc);
-		}
-		else
-		{
-			list.Remove(dlc);
-		}
-
-		_config.RemovedDLCs = list.ToArray();
-
-		_notifier.TriggerAutoSave();
-		SaveChanges();
 	}
 
 	public IEnumerable<string> GetAllFindItTags()

@@ -51,6 +51,8 @@ public static class SteamUtil
 		_steamUserProcessor.ItemsLoaded += notifier.OnWorkshopUsersInfoLoaded;
 	}
 
+	public static IEnumerable<SteamWorkshopInfo> Packages => _workshopItemProcessor.GetCache().Values;
+
 	public static SteamUser? GetUser(ulong steamId)
 	{
 		return steamId == 0 ? null : _steamUserProcessor.Get(steamId, false).Result;

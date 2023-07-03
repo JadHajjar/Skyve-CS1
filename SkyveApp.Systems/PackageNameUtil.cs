@@ -14,14 +14,12 @@ namespace SkyveApp.Systems;
 
 public class PackageNameUtil : IPackageNameUtil
 {
-	private readonly IServiceProvider _serviceProvider;
 	private readonly ILocale _locale;
 	private readonly Regex _tagRegex = new(@"v?\d+\.\d+(\.\d+)*(-[\d\w]+)*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 	private readonly Regex _bracketsRegex = new(@"[\[\(](.+?)[\]\)]", RegexOptions.Compiled);
 
-	public PackageNameUtil(IServiceProvider serviceProvider, ILocale locale)
+	public PackageNameUtil(ILocale locale)
 	{
-		_serviceProvider = serviceProvider;
 		_locale = locale;
 	}
 
@@ -105,7 +103,7 @@ public class PackageNameUtil : IPackageNameUtil
 		}
 		else
 		{
-			var info = _serviceProvider.GetService<ICompatibilityManager>().GetPackageInfo(package);
+			var info = ServiceCenter.Get<ICompatibilityManager>().GetPackageInfo(package);
 
 			if (info?.Stability is PackageStability.Broken)
 			{

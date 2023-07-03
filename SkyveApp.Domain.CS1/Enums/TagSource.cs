@@ -5,5 +5,6 @@ public enum TagSource
 	Workshop,
 	Global,
 	InGame,
-	FindIt
+	FindIt,
+	Custom
 }

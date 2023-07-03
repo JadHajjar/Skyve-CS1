@@ -11,7 +11,6 @@ using System.Linq;
 namespace SkyveApp.Systems;
 public class PackageUtil : IPackageUtil
 {
-	private readonly IServiceProvider _serviceProvider;
 	private readonly IModUtil _modUtil;
 	private readonly IAssetUtil _assetUtil;
 	private readonly IBulkUtil _bulkUtil;
@@ -20,9 +19,8 @@ public class PackageUtil : IPackageUtil
 	private readonly IPackageNameUtil _packageUtil;
 	private readonly ISettings _settings;
 
-	public PackageUtil(IServiceProvider serviceProvider, IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager contentManager, ISettings settings)
+	public PackageUtil(IModUtil modUtil, IAssetUtil assetUtil, IBulkUtil bulkUtil, ILocale locale, IPackageNameUtil packageUtil, IPackageManager contentManager, ISettings settings)
 	{
-		_serviceProvider = serviceProvider;
 		_modUtil = modUtil;
 		_assetUtil = assetUtil;
 		_bulkUtil = bulkUtil;
@@ -202,8 +200,8 @@ public class PackageUtil : IPackageUtil
 
 	public IEnumerable<ILocalPackage> GetPackagesThatReference(IPackage package, bool withExcluded = false)
 	{
-		var compatibilityUtil = _serviceProvider.GetService<ICompatibilityManager>();
-		var packages = withExcluded || _serviceProvider.GetService<ISettings>().UserSettings.ShowAllReferencedPackages
+		var compatibilityUtil = ServiceCenter.Get<ICompatibilityManager>();
+		var packages = withExcluded || ServiceCenter.Get<ISettings>().UserSettings.ShowAllReferencedPackages
 			? _contentManager.Packages.ToList()
 			: _contentManager.Packages.AllWhere(IsIncluded);
 

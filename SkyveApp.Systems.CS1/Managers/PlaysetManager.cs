@@ -490,7 +490,7 @@ internal class PlaysetManager : IPlaysetManager
 					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
 				}
 
-				_dlcManager.SetDlcsExcluded((profile as Playset)!.ExcludedDLCs.ToArray());
+				_dlcManager.SetExcludedDlcs((profile as Playset)!.ExcludedDLCs.ToArray());
 
 				_notifier.ApplyingPlayset = false;
 				disableAutoSave = true;
@@ -675,7 +675,7 @@ internal class PlaysetManager : IPlaysetManager
 
 		playset.Assets = _packageManager.Assets.Where(_assetUtil.IsIncluded).Select(x => new Playset.Asset(x)).ToList();
 		playset.Mods = _packageManager.Mods.Where(_modUtil.IsIncluded).Select(x => new Playset.Mod(x)).ToList();
-		playset.ExcludedDLCs = SkyveConfig.Deserialize()?.RemovedDLCs.ToList() ?? new();
+		playset.ExcludedDLCs = _dlcManager.GetExcludedDlcs();
 	}
 
 	public bool Save(IPlayset? profile, bool forced = false)

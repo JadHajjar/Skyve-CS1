@@ -17,7 +17,7 @@ public class SteamDlc : IDlcInfo
 	[JsonIgnore]
 	public bool IsIncluded
 	{
-		get => !ServiceCenter.Get<IDlcManager>().IsDlcExcluded(Id);
-		set => ServiceCenter.Get<IAssetUtil>().SetDlcExcluded(Id, !value);
+		get => ServiceCenter.Get<IDlcManager>().IsIncluded(this);
+		set => ServiceCenter.Get<IDlcManager>().SetIncluded(this, value);
 	}
 }
