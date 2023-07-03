@@ -6,7 +6,7 @@ using System;
 using System.Drawing;
 
 namespace SkyveApp.Domain.CS1.Steam;
-public class SteamDlc
+public class SteamDlc : IDlcInfo
 {
 	public uint Id { get; set; }
 	public string? Name { get; set; }

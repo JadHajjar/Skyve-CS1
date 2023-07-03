@@ -401,8 +401,6 @@ public static class SteamUtil
 
 		DLCsLoaded?.Invoke();
 
-		ServiceCenter.Get<IDlcManager>().SetAvailableDlcs(Dlcs.Select(x => x.Id));
-
 		foreach (var dlc in Dlcs)
 		{
 			await ServiceCenter.Get<IImageService>().Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);

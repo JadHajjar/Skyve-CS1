@@ -84,7 +84,7 @@ internal class ModsUtil : IModUtil
 
 	public void SetIncluded(IMod mod, bool value)
 	{
-		if (!value && _modLogicManager.IsRequired(mod))
+		if (!value && _modLogicManager.IsRequired(mod, this))
 		{
 			value = true;
 		}
@@ -112,7 +112,7 @@ internal class ModsUtil : IModUtil
 #if DEBUG
 			_logger.Debug($"Applying Inclusion status ({value}) for mod: {mod} ({mod.Folder})");
 #endif
-			if ((value || _modLogicManager.IsRequired(mod)) && !_modLogicManager.IsForbidden(mod))
+			if ((value || _modLogicManager.IsRequired(mod, this)) && !_modLogicManager.IsForbidden(mod))
 			{
 #if DEBUG
 				_logger.Debug($"Deleting the file ({CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME)})");
@@ -162,7 +162,7 @@ internal class ModsUtil : IModUtil
 	{
 		try
 		{
-			if (_modLogicManager.IsRequired(mod))
+			if (_modLogicManager.IsRequired(mod, this))
 			{
 				value = true;
 			}

@@ -33,31 +33,29 @@ internal class ModLogicManager : IModLogicManager
 	}
 
 	private readonly ISettings _settings;
-	private readonly IModUtil _modUtil;
 
-	public ModLogicManager(ISettings settings, IModUtil modUtil)
+	public ModLogicManager(ISettings settings)
 	{
 		_settings = settings;
-		_modUtil = modUtil;
 	}
 
-	public void Analyze(IMod mod)
+	public void Analyze(IMod mod, IModUtil modUtil)
 	{
 		_modCollection.CheckAndAdd(mod);
 
 		if (IsForbidden(mod))
 		{
-			_modUtil.SetIncluded(mod, false);
-			_modUtil.SetEnabled(mod, false);
+			modUtil.SetIncluded(mod, false);
+			modUtil.SetEnabled(mod, false);
 		}
 		else if (IsPseudoMod(mod) && _settings.UserSettings.HidePseudoMods)
 		{
-			_modUtil.SetIncluded(mod, true);
-			_modUtil.SetEnabled(mod, true);
+			modUtil.SetIncluded(mod, true);
+			modUtil.SetEnabled(mod, true);
 		}
 	}
 
-	public bool IsRequired(IMod mod)
+	public bool IsRequired(IMod mod, IModUtil modUtil)
 	{
 		var list = _modCollection.GetCollection(mod, out var collection);
 
@@ -68,7 +66,7 @@ internal class ModLogicManager : IModLogicManager
 
 		foreach (var modItem in list)
 		{
-			if (modItem != mod && _modUtil.IsIncluded(mod) && _modUtil.IsEnabled(mod))
+			if (modItem != mod && modUtil.IsIncluded(mod) && modUtil.IsEnabled(mod))
 			{
 				return false;
 			}
@@ -94,17 +92,17 @@ internal class ModLogicManager : IModLogicManager
 		_modCollection.RemoveMod(mod);
 	}
 
-	public void ApplyRequiredStates()
+	public void ApplyRequiredStates(IModUtil modUtil)
 	{
 		foreach (var item in _modCollection.Collections)
 		{
-			if (item.Any(mod => _modUtil.IsIncluded(mod) && _modUtil.IsEnabled(mod)))
+			if (item.Any(mod => modUtil.IsIncluded(mod) && modUtil.IsEnabled(mod)))
 			{
 				continue;
 			}
 
-			_modUtil.SetIncluded(item[0], true);
-			_modUtil.SetEnabled(item[0], true);
+			modUtil.SetIncluded(item[0], true);
+			modUtil.SetEnabled(item[0], true);
 		}
 	}
 

@@ -33,9 +33,11 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 	private readonly IModLogicManager _modLogicManager;
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly IPackageUtil _packageUtil;
+	private readonly IModUtil _modUtil;
+
 	public ItemListControl()
 	{
-		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil);
+		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 
 		HighlightOnHover = true;
 		SeparateWithLines = true;
@@ -857,7 +859,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
 		var mod = package?.Mod;
-		var required = mod is not null && _modLogicManager.IsRequired(mod);
+		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
 
 		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{

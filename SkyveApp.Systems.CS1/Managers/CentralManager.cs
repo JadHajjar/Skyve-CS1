@@ -204,7 +204,7 @@ internal class CentralManager : ICentralManager
 					_bulkUtil.SetBulkIncluded(package.Assets, _modUtil.IsIncluded(package.Mod));
 				}
 
-				_modLogicManager.Analyze(package.Mod);
+				_modLogicManager.Analyze(package.Mod, _modUtil);
 			}
 		}
 
@@ -226,6 +226,6 @@ internal class CentralManager : ICentralManager
 
 		_logger.Info($"Applying analysis results..");
 
-		_modLogicManager.ApplyRequiredStates();
+		_modLogicManager.ApplyRequiredStates(_modUtil);
 	}
 }

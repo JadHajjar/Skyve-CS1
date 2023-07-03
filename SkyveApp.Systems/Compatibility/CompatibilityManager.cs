@@ -319,7 +319,7 @@ public class CompatibilityManager : ICompatibilityManager
 			return info;
 		}
 
-		_compatibilityUtil.PopulatePackageReport(packageData, info);
+		_compatibilityUtil.PopulatePackageReport(packageData, info, _compatibilityHelper);
 
 		var author = CompatibilityData.Authors.TryGet(packageData.Package.AuthorId) ?? new();
 

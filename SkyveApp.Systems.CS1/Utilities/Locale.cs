@@ -14,7 +14,7 @@ public class Locale : LocaleHelper, ILocale
 		return GetGlobalText(key);
 	}
 
-	protected Locale() : base($"{nameof(SkyveApp)}.Properties.Locale.json") { }
+	public Locale() : base($"{nameof(SkyveApp)}.Properties.Locale.json") { }
 
 	public static Translation Dashboard => _instance.GetText(nameof(Dashboard));
 	public static Translation StartCities => _instance.GetText(nameof(StartCities));

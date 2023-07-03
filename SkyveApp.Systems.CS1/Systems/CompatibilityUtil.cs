@@ -18,11 +18,8 @@ internal class CompatibilityUtil : ICompatibilityUtil
 	private const ulong RENDERIT_MOD_ID = 1794015399;
 	private const ulong PO_MOD_ID = 1094334744;
 
-	private readonly CompatibilityHelper _compatibilityHelper;
-
-	public CompatibilityUtil(CompatibilityHelper compatibilityHelper)
+	public CompatibilityUtil()
 	{
-		_compatibilityHelper = compatibilityHelper;
 	}
 
 	public DateTime MinimumModDate { get; } = new DateTime(2023, 6, 12);
@@ -40,16 +37,16 @@ internal class CompatibilityUtil : ICompatibilityUtil
 		}
 	}
 
-	public void PopulatePackageReport(IndexedPackage packageData, CompatibilityInfo info)
+	public void PopulatePackageReport(IndexedPackage packageData, CompatibilityInfo info, CompatibilityHelper compatibilityHelper)
 	{
 		if (packageData.Package.Type is PackageType.CSM && !packageData.Statuses.ContainsKey(StatusType.Reupload))
 		{
-			_compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });
+			compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });
 		}
 
 		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
 		{
-			_compatibilityHelper.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
+			compatibilityHelper.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
 			{
 				Packages = new ulong[]
 				{

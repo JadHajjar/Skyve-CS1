@@ -28,9 +28,12 @@ public static class Startup
 		services.AddSingleton<IAssetUtil, AssetsUtil>();
 		services.AddSingleton<ColossalOrderUtil>();
 		services.AddSingleton<IContentManager, ContentManager>();
+		services.AddSingleton<IModDllManager, ModDllManager>();
 		services.AddTransient<ILogUtil, LogUtil>();
 		services.AddSingleton<IModUtil, ModsUtil>();
 		services.AddSingleton<IOnlinePlaysetUtil, OnlinePlaysetUtil>();
+		services.AddTransient<IWorkshopService, WorkshopService>();
+		services.AddSingleton<IUserService, UserService>();
 
 		return services;
 	}

@@ -5,6 +5,7 @@ using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
+using SkyveApp.Systems.CS1.Managers;
 
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,9 @@ using System.Linq;
 namespace SkyveApp.Systems.CS1.Utilities;
 internal class ContentManager : IContentManager
 {
-	private const string CACHE_FILENAME = "ModDllCache.json";
 	public const string EXCLUDED_FILE_NAME = ".excluded";
 
 	private readonly object _contentUpdateLock = new();
-
-	private readonly Dictionary<string, ModDllCache> _dllCache = new(StringComparer.OrdinalIgnoreCase);
-
-	public bool BulkUpdating { get; set; }
 
 	private readonly IPackageManager _packageManager;
 	private readonly ILocationManager _locationManager;
@@ -42,21 +38,6 @@ internal class ContentManager : IContentManager
 		_assetUtil = assetUtil;
 		_logger = logger;
 		_notifier = notifier;
-
-		ISave.Load(out List<ModDllCache> cache, CACHE_FILENAME);
-
-		if (cache != null)
-		{
-			foreach (var dll in cache)
-			{
-				if (dll.Path is not null or "")
-				{
-					_dllCache[dll.Path] = dll;
-				}
-			}
-		}
-
-		_notifier.ContentLoaded += SaveDllCache;
 	}
 
 	public IEnumerable<string> GetSubscribedItemPaths()
@@ -305,6 +286,11 @@ internal class ContentManager : IContentManager
 		package.Assets = _assetUtil.GetAssets(package, !self).ToArray();
 		package.Mod = _modUtil.GetMod(package);
 
+		if (package.Mod is not null)
+		{
+			ServiceCenter.Get<IModLogicManager>().Analyze(package.Mod, _modUtil);
+		}
+
 		_packageManager.AddPackage(package);
 	}
 
@@ -365,63 +351,5 @@ internal class ContentManager : IContentManager
 		PackageWatcher.Create(_locationManager.ModsPath, false, false);
 
 		PackageWatcher.Create(_locationManager.WorkshopContentPath, false, true);
-	}
-
-	public bool? GetDllModCache(string path, out Version? version)
-	{
-		if (_dllCache.TryGetValue(path, out var dll))
-		{
-			var currentDate = File.GetLastWriteTimeUtc(path);
-
-			if (currentDate == dll.Date)
-			{
-				version = dll.Version;
-
-				return dll.IsMod;
-			}
-		}
-
-		version = null;
-		return null;
-	}
-
-	public void SetDllModCache(string path, bool isMod, Version? version)
-	{
-		try
-		{
-			lock (_dllCache)
-			{
-				_dllCache[path] = new()
-				{
-					Path = path,
-					Date = File.GetLastWriteTimeUtc(path),
-					Version = version,
-					IsMod = isMod,
-				};
-			}
-		}
-		catch (Exception ex)
-		{
-			_logger.Exception(ex, "Failed to save DLL cache");
-		}
-	}
-
-	public void SaveDllCache()
-	{
-		ISave.Save(_dllCache.Values, CACHE_FILENAME);
-	}
-
-	public void ClearDllCache()
-	{
-		_dllCache.Clear();
-
-		try
-		{
-			CrossIO.DeleteFile(ISave.GetPath(CACHE_FILENAME));
-		}
-		catch (Exception ex)
-		{
-			_logger.Exception(ex, "Failed to clear DLL cache");
-		}
 	}
 }

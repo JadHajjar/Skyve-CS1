@@ -20,13 +20,14 @@ public partial class PC_PackagePage : PanelContent
 
 	private readonly INotifier _notifier;
 	private readonly ICompatibilityManager _compatibilityManager;
-	private readonly IDownloadService _downloadService;
 	private readonly IPackageUtil _packageUtil;
 	private readonly ISettings _settings;
 	public IPackage Package { get; }
 
 	public PC_PackagePage(IPackage package)
 	{
+		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings);
+
 		InitializeComponent();
 
 		Package = package;
@@ -71,7 +72,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (crAvailable)
 		{
-			foreach (var item in crdata.Links ?? new())
+			foreach (var item in crdata?.Links ?? new())
 			{
 				FLP_Links.Controls.Add(new LinkControl { Link = item, Display = true });
 			}

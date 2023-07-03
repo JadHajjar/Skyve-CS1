@@ -115,11 +115,6 @@ internal class PackageManager : IPackageManager
 			}
 		}
 
-		if (package.Mod is not null)
-		{
-			_modLogicManager.Analyze(package.Mod);
-		}
-
 		_notifier.OnInformationUpdated();
 		_notifier.OnContentLoaded();
 	}

@@ -14,10 +14,10 @@ namespace SkyveApp.Systems.CS1.Utilities.IO;
 internal class AssemblyUtil
 {
 	private readonly ILocationManager _locationManager;
-	private readonly ContentManager _contentUtil;
+	private readonly IModDllManager _contentUtil;
 	private readonly ILogger _logger;
 
-	public AssemblyUtil(ILocationManager locationManager, ContentManager contentUtil, ILogger logger)
+	public AssemblyUtil(ILocationManager locationManager, IModDllManager contentUtil, ILogger logger)
 	{
 		_locationManager = locationManager;
 		_contentUtil = contentUtil;
