@@ -5,7 +5,6 @@ using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Managers;
 
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ using System.Linq;
 namespace SkyveApp.Systems.CS1.Utilities;
 internal class ContentManager : IContentManager
 {
-	public const string EXCLUDED_FILE_NAME = ".excluded";
+	//public const string EXCLUDED_FILE_NAME = ".excluded";
 
 	private readonly object _contentUpdateLock = new();
 
@@ -57,7 +56,7 @@ internal class ContentManager : IContentManager
 			}
 
 			var files = Directory.GetFiles(path);
-			if (files.Length == 1 && files[0].EndsWith(EXCLUDED_FILE_NAME))
+			if (files.Length == 1 && files[0].EndsWith(".excluded"))
 			{
 				_packageManager.DeleteAll(path);
 				continue;
@@ -107,14 +106,11 @@ internal class ContentManager : IContentManager
 			{
 				foreach (var filePAth in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
 				{
-					if (Path.GetFileName(filePAth) != EXCLUDED_FILE_NAME)
-					{
-						var lastWriteTimeUtc = File.GetLastWriteTimeUtc(filePAth);
+					var lastWriteTimeUtc = File.GetLastWriteTimeUtc(filePAth);
 
-						if (lastWriteTimeUtc > dateTime)
-						{
-							dateTime = lastWriteTimeUtc;
-						}
+					if (lastWriteTimeUtc > dateTime)
+					{
+						dateTime = lastWriteTimeUtc;
 					}
 				}
 			}
@@ -132,14 +128,11 @@ internal class ContentManager : IContentManager
 		{
 			foreach (var filePAth in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
 			{
-				if (Path.GetFileName(filePAth) != EXCLUDED_FILE_NAME)
-				{
-					var lastWriteTimeUtc = File.GetCreationTimeUtc(filePAth);
+				var lastWriteTimeUtc = File.GetCreationTimeUtc(filePAth);
 
-					if (lastWriteTimeUtc < dateTime)
-					{
-						dateTime = lastWriteTimeUtc;
-					}
+				if (lastWriteTimeUtc < dateTime)
+				{
+					dateTime = lastWriteTimeUtc;
 				}
 			}
 		}
@@ -327,9 +320,7 @@ internal class ContentManager : IContentManager
 			return true;
 		}
 
-		var files = Directory.GetFiles(path);
-
-		return files.Length == 1 && files[0].EndsWith(EXCLUDED_FILE_NAME);
+		return GetTotalSize(path) == 0;
 	}
 
 	public void StartListeners()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace SkyveShared;
 
@@ -92,6 +93,7 @@ public class AssetConfig
 	}
 }
 
+[XmlRoot("SkyveConfig")]
 public class SkyveConfigOld
 {
 	public const int DefaultLoadOrder = 1000;

@@ -20,6 +20,7 @@ public class SessionSettings : ISave, ISessionSettings
 	public string? LastVersionNotification { get; set; }
 
 	public UserSettings UserSettings { get; set; } = new();
+	public int LastVersioningNumber { get; set; }
 
 	void ISessionSettings.Save()
 	{

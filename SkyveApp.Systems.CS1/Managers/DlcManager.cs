@@ -64,4 +64,10 @@ internal class DlcManager : IDlcManager
 	{
 		return new(_config.RemovedDLCs);
 	}
+
+	internal void SetAvailableDlcs(uint[] availableDLCs)
+	{
+		_config.AvailableDLCs = availableDLCs.ToList();
+		_config.Serialize();
+	}
 }

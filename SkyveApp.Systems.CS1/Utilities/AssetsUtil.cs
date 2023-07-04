@@ -16,7 +16,6 @@ namespace SkyveApp.Systems.CS1.Utilities;
 internal class AssetsUtil : IAssetUtil
 {
 	private readonly AssetConfig _config;
-	private CustomTagsLibrary _findItTags;
 	private Dictionary<string, IAsset> assetIndex = new();
 
 	public HashSet<string> ExcludedHashSet { get; }
@@ -42,11 +41,9 @@ internal class AssetsUtil : IAssetUtil
 			}
 		}
 
-		_findItTags = new();
-		_findItTags.Deserialize();
 		_config = AssetConfig.Deserialize() ?? new();
 
-		ExcludedHashSet = new HashSet<string>(_config.ExcludedAssets, StringComparer.OrdinalIgnoreCase);
+		ExcludedHashSet = new HashSet<string>(_config.ExcludedAssets, new PathEqualityComparer());
 
 		_notifier.ContentLoaded += BuildAssetIndex;
 	}
@@ -104,6 +101,18 @@ internal class AssetsUtil : IAssetUtil
 		_config.Serialize();
 	}
 
+	internal void SetExcludedAssets(IEnumerable<string> excludedAssets)
+	{
+		ExcludedHashSet.Clear();
+
+		foreach (var item in excludedAssets)
+		{
+			ExcludedHashSet.Add(item);
+		}
+
+		SaveChanges();
+	}
+
 	public IAsset? GetAssetByFile(string? v)
 	{
 		return assetIndex.TryGet(v ?? string.Empty);
@@ -112,88 +121,5 @@ internal class AssetsUtil : IAssetUtil
 	public void BuildAssetIndex()
 	{
 		assetIndex = _contentManager.Assets.ToDictionary(x => x.FilePath.FormatPath(), StringComparer.OrdinalIgnoreCase);
-	}
-
-	public IEnumerable<string> GetAllFindItTags()
-	{
-		foreach (var item in _findItTags.assetTags)
-		{
-			foreach (var tag in item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
-			{
-				yield return tag;
-			}
-		}
-	}
-
-	public IEnumerable<string> GetFindItTags(ILocalPackage package)
-	{
-		var key = package is Asset asset
-			? (asset.Id == 0 ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_')
-			: package.Folder;
-
-		foreach (var item in _findItTags.assetTags)
-		{
-			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(key.RemoveDoubleSpaces().Replace(' ', '_'), StringComparison.CurrentCultureIgnoreCase))
-			{
-				return item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-			}
-		}
-
-		return new string[0];
-	}
-
-	public void SetFindItTag(ILocalPackage package, string tag)
-	{
-		var newTags = new CustomTagsLibrary();
-
-		newTags.Deserialize();
-
-		var found = false;
-		var key = package is Asset asset
-			? (asset.Id == 0 ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath)
-			: package.Folder;
-
-		foreach (var item in newTags.assetTags)
-		{
-			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(key.RemoveDoubleSpaces().Replace(' ', '_'), StringComparison.CurrentCultureIgnoreCase))
-			{
-				newTags.assetTags[item.Key] = tag.Trim();
-
-				found = true;
-				break;
-			}
-		}
-
-		if (!found)
-		{
-			newTags.assetTags[key] = tag.Trim();
-		}
-
-		newTags.Serialize();
-
-		_findItTags = newTags;
-	}
-
-	public void RemoveFindItTag(Asset asset, string tag)
-	{
-		var newTags = new CustomTagsLibrary();
-
-		newTags.Deserialize();
-
-		var assetName = (asset.Id == 0 ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_');
-
-		foreach (var item in newTags.assetTags)
-		{
-			if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(assetName, StringComparison.CurrentCultureIgnoreCase))
-			{
-				newTags.assetTags[item.Key] = item.Value.Remove(tag).RemoveDoubleSpaces();
-
-				break;
-			}
-		}
-
-		newTags.Serialize();
-
-		_findItTags = newTags;
 	}
 }

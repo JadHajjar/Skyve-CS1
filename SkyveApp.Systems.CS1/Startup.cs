@@ -36,6 +36,7 @@ public static class Startup
 		services.AddSingleton<IUserService, UserService>();
 		services.AddSingleton<IDlcManager, DlcManager>();
 		services.AddSingleton<ITagsService, TagsService>();
+		services.AddTransient<IVersionUpdateService, VersionUpdateService>();
 
 		return services;
 	}

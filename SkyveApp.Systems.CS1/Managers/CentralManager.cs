@@ -32,8 +32,9 @@ internal class CentralManager : ICentralManager
 	private readonly INotifier _notifier;
 	private readonly IModUtil _modUtil;
 	private readonly IBulkUtil _bulkUtil;
+	private readonly IVersionUpdateService _versionUpdateService;
 
-	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, IUpdateManager updateManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil)
+	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, IUpdateManager updateManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService)
 	{
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
@@ -50,6 +51,7 @@ internal class CentralManager : ICentralManager
 		_notifier = notifier;
 		_modUtil = modUtil;
 		_bulkUtil = bulkUtil;
+		_versionUpdateService = versionUpdateService;
 	}
 
 	public void Start()
@@ -75,6 +77,8 @@ internal class CentralManager : ICentralManager
 		var content = _contentManager.LoadContents();
 
 		_logger.Info($"Loaded {content.Count} packages");
+
+		_versionUpdateService.Run(content);
 
 		_packageManager.SetPackages(content);
 

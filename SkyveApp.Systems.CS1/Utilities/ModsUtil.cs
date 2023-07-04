@@ -6,12 +6,17 @@ using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Utilities.IO;
 
+using SkyveShared;
+
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SkyveApp.Systems.CS1.Utilities;
 internal class ModsUtil : IModUtil
 {
+	private readonly ModConfig _config;
 	private readonly CachedSaveLibrary<IMod, bool> _includedLibrary;
 	private readonly CachedSaveLibrary<IMod, bool> _enabledLibrary;
 
@@ -24,6 +29,8 @@ internal class ModsUtil : IModUtil
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
+	public HashSet<string> ExcludedHashSet { get; }
+
 	public ModsUtil(IPackageManager contentManager, IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ColossalOrderUtil colossalOrderUtil, AssemblyUtil assemblyUtil, MacAssemblyUtil macAssemblyUtil)
 	{
 		_assemblyUtil = assemblyUtil;
@@ -35,11 +42,14 @@ internal class ModsUtil : IModUtil
 		_logger = logger;
 		_notifier = notifier;
 
+		_config = ModConfig.Deserialize();
 		_includedLibrary = new(IsLocallyIncluded, SetLocallyIncluded);
 		_enabledLibrary = new(IsLocallyEnabled, SetLocallyEnabled);
+
+		ExcludedHashSet = new(_config.ModsInfo.Where(x => x.Excluded).Select(x => x.Path ?? string.Empty), new PathEqualityComparer());
 	}
 
-	public void SavePendingValues()
+	public void SaveChanges()
 	{
 		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
@@ -74,7 +84,7 @@ internal class ModsUtil : IModUtil
 
 	public bool IsLocallyIncluded(IMod mod)
 	{
-		return !CrossIO.FileExists(CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME));
+		return !ExcludedHashSet.Contains(mod.Folder);
 	}
 
 	public bool IsLocallyEnabled(IMod mod)
@@ -114,18 +124,14 @@ internal class ModsUtil : IModUtil
 #endif
 			if ((value || _modLogicManager.IsRequired(mod, this)) && !_modLogicManager.IsForbidden(mod))
 			{
-#if DEBUG
-				_logger.Debug($"Deleting the file ({CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME)})");
-#endif
-				CrossIO.DeleteFile(CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME));
+				ExcludedHashSet.Remove(mod.Folder);
 			}
 			else
 			{
-#if DEBUG
-				_logger.Debug($"Creating the file ({CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME)})");
-#endif
-				File.WriteAllBytes(CrossIO.Combine(mod.Folder, ContentManager.EXCLUDED_FILE_NAME), new byte[0]);
+				ExcludedHashSet.Add(mod.Folder);
 			}
+
+			SaveChanges();
 		}
 		catch (Exception ex)
 		{
@@ -135,7 +141,7 @@ internal class ModsUtil : IModUtil
 
 	public void SetEnabled(IMod mod, bool value)
 	{
-		SetEnabled(mod, value);
+		SetEnabled(mod, value, true);
 	}
 
 	public void SetEnabled(IMod mod, bool value, bool save)
@@ -182,11 +188,6 @@ internal class ModsUtil : IModUtil
 		{
 			_logger.Exception(ex, $"Failed to set 'Enabled' status ({value}) for {mod}");
 		}
-	}
-
-	public void SaveChanges()
-	{
-		throw new NotImplementedException();
 	}
 
 	public IMod? GetMod(ILocalPackageWithContents package)
