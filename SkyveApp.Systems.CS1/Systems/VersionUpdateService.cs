@@ -46,9 +46,9 @@ internal class VersionUpdateService : IVersionUpdateService
 			{
 				if (CrossIO.FileExists(CrossIO.Combine(item.Folder, ".excluded")))
 				{
-					try
-					{ CrossIO.DeleteFile(CrossIO.Combine(item.Folder, ".excluded"), true); }
-					catch { }
+					//try
+					//{ CrossIO.DeleteFile(CrossIO.Combine(item.Folder, ".excluded"), true); }
+					//catch { }
 
 					if (item.Mod is not null)
 					{
@@ -60,6 +60,9 @@ internal class VersionUpdateService : IVersionUpdateService
 			ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(excludedPackages, false);
 
 			SteamUtil.ClearCache();
+
+			_settings.SessionSettings.LastVersioningNumber = 1;
+			_settings.SessionSettings.Save();
 		}
 	}
 }

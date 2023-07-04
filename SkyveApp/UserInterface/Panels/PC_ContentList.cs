@@ -267,7 +267,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_PackageStatus.Text = Locale.PackageStatus;
 		DD_ReportSeverity.Text = Locale.CompatibilityStatus;
 		DD_Tags.Text = Locale.Tags;
-		DD_Profile.Text = Locale.ProfileFilter;
+		DD_Profile.Text = Locale.PlaysetFilter;
 		DR_SubscribeTime.Text = Locale.DateSubscribed;
 		DR_ServerTime.Text = Locale.DateUpdated;
 		DD_Author.Text = Locale.Author;

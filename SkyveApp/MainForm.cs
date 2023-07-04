@@ -89,7 +89,7 @@ public partial class MainForm : BasePanelForm
 	{
 		PI_Packages.Text = Locale.Package.Plural;
 		PI_Assets.Text = Locale.Asset.Plural;
-		PI_Profiles.Text = Locale.Profile.Plural;
+		PI_Profiles.Text = Locale.Playset.Plural;
 		PI_Mods.Text = Locale.Mod.Plural;
 	}
 

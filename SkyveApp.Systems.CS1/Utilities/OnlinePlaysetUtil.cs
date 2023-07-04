@@ -50,12 +50,12 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 			}
 			else
 			{
-				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show((profile.ProfileId == 0 ? Locale.FailedToUploadProfile : Locale.FailedToUpdateProfile) + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
+				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show((profile.ProfileId == 0 ? Locale.FailedToUploadPlayset : Locale.FailedToUpdatePlayset) + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
 			}
 		}
 		catch (Exception ex)
 		{
-			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, (item as Playset)!.ProfileId == 0 ? Locale.FailedToUploadProfile : Locale.FailedToUpdateProfile, form: SystemsProgram.MainForm as SlickForm));
+			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, (item as Playset)!.ProfileId == 0 ? Locale.FailedToUploadPlayset : Locale.FailedToUpdatePlayset, form: SystemsProgram.MainForm as SlickForm));
 		}
 	}
 
@@ -123,7 +123,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 
 			if (!result.Success)
 			{
-				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToUpdateProfile + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
+				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToUpdatePlayset + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
 			}
 			else
 			{
@@ -135,7 +135,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 		}
 		catch (Exception ex)
 		{
-			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToUpdateProfile, form: SystemsProgram.MainForm as SlickForm));
+			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToUpdatePlayset, form: SystemsProgram.MainForm as SlickForm));
 			return false;
 		}
 	}
@@ -148,14 +148,14 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 
 			if (!result.Success)
 			{
-				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToDeleteProfile + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
+				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToDeletePlayset + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
 			}
 
 			return result.Success;
 		}
 		catch (Exception ex)
 		{
-			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDeleteProfile, form: SystemsProgram.MainForm as SlickForm));
+			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDeletePlayset, form: SystemsProgram.MainForm as SlickForm));
 			return false;
 		}
 	}

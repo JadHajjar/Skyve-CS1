@@ -66,12 +66,12 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 
 		if (rects.IncludedRect.Contains(location))
 		{
-			setTip(string.Format(Locale.IncludeExcludeOtherProfile, Package, item.Item), rects.IncludedRect);
+			setTip(string.Format(Locale.IncludeExcludeOtherPlayset, Package, item.Item), rects.IncludedRect);
 			return true;
 		}
 		else if (rects.LoadRect.Contains(location))
 		{
-			setTip(Locale.LoadProfile, rects.LoadRect);
+			setTip(Locale.LoadPlayset, rects.LoadRect);
 			return true;
 		}
 

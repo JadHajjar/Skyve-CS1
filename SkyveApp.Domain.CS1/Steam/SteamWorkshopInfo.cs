@@ -34,7 +34,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 	public DateTime Timestamp { get; set; }
 
 	[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => RequiredPackageIds?.Select(x => new SteamPackageRequirement(x, !IsMod)) ?? Enumerable.Empty<IPackageRequirement>();
-	[JsonIgnore] public IUser? Author => ServiceCenter.Get<IWorkshopService>().GetUser(AuthorId);
+	[JsonIgnore] public IUser? Author => ServiceCenter.Get<IWorkshopService>().GetUser(AuthorId) ?? (AuthorId > 0 ? new SteamUser { SteamId = AuthorId, Name = AuthorId.ToString() } : null);
 
 	public SteamWorkshopInfo(SteamWorkshopItemEntry entry)
 	{

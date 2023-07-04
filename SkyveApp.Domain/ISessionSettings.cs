@@ -11,7 +11,7 @@ public interface ISessionSettings
 	Rectangle? LastWindowsBounds { get; set; }
 	bool SubscribeFirstTimeShown { get; set; }
 	bool WindowWasMaximized { get; set; }
-	int LastVersioningNumber { get; }
+	int LastVersioningNumber { get; set; }
 
 	void Save();
 }

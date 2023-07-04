@@ -25,7 +25,7 @@ internal class ProfileBubble : StatusBubbleBase
 			return;
 		}
 
-		Text = Locale.ProfileBubble;
+		Text = Locale.PlaysetBubble;
 		ImageName = _profileManager.CurrentPlayset.GetIcon();
 
 		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
@@ -49,16 +49,16 @@ internal class ProfileBubble : StatusBubbleBase
 
 		if (_profileManager.CurrentPlayset.Temporary)
 		{
-			DrawText(e, ref targetHeight, Locale.CreateProfileHere, FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, Locale.CreatePlaysetHere, FormDesign.Design.YellowColor);
 		}
 		else
 		{
-			DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, _profileManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.AutoSave ? Locale.AutoPlaysetSaveOn : Locale.AutoPlaysetSaveOff, _profileManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
 		}
 
 		if (ServiceCenter.Get<INotifier>().PlaysetsLoaded)
 		{
-			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_profileManager.Playsets.Count() - 1, Locale.Profile.FormatPlural(_profileManager.Playsets.Count() - 1).ToLower()));
+			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_profileManager.Playsets.Count() - 1, Locale.Playset.FormatPlural(_profileManager.Playsets.Count() - 1).ToLower()));
 		}
 	}
 }

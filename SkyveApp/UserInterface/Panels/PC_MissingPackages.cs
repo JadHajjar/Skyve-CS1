@@ -28,7 +28,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 
 	protected override void LocaleChanged()
 	{
-		Text = string.Format(Locale.MissingPackagesProfile, ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name);
+		Text = string.Format(Locale.MissingPackagesPlayset, ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name);
 	}
 
 	private void CentralManager_ContentLoaded()

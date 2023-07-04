@@ -424,7 +424,7 @@
     "One": "Пакунок",
     "Plural": "Пакунки"
   },
-  "Profile": {
+  "Playset": {
     "One": "Профіль",
     "Plural": "Профілі"
   },
@@ -540,9 +540,9 @@
   "DiscoverProfiles": "Discover Profiles",
   "AllUsages": "All Usages",
   "Invalid": "Invalid",
-  "UpdateProfile": "Update Profile",
-  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
-  "DownloadProfile": "Download Profile",
+  "UpdateProfile": "Update Playset",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Playset Discovery",
+  "DownloadProfile": "Download Playset",
   "ReloadAllData": "Reload all data",
   "ResetSnoozes": "Reset all snoozes",
   "ResetModsCache": "Reset mods' cache",

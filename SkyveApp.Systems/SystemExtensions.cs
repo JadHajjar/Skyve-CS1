@@ -103,7 +103,7 @@ public static class SystemExtensions
 	{
 		return WorkshopService.GetPackage(identity);
 	}
-
+	
 	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package)
 	{
 		return CompatibilityManager.GetCompatibilityInfo(package);

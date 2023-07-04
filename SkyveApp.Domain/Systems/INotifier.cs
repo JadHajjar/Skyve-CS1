@@ -19,6 +19,7 @@ public interface INotifier
 	event Action? WorkshopPackagesInfoLoaded;
 	event Action? WorkshopUsersInfoLoaded;
 	event Action? CompatibilityReportProcessed;
+	event Action? CompatibilityDataLoaded;
 	event Action<Exception>? LoggerFailed;
 
 	void TriggerAutoSave();
@@ -33,4 +34,5 @@ public interface INotifier
 	void OnLoggerFailed(Exception ex);
 	void OnWorkshopPackagesInfoLoaded();
 	void OnWorkshopUsersInfoLoaded();
+	void OnCompatibilityDataLoaded();
 }

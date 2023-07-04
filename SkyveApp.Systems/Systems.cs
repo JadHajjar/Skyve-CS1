@@ -21,6 +21,7 @@ public static class SystemsProgram
 		services.AddTransient<IPackageNameUtil, PackageNameUtil>();
 		services.AddTransient<IPackageUtil, PackageUtil>();
 		services.AddTransient<SkyveApiUtil>();
+		services.AddTransient<ILoadOrderHelper, LoadOrderHelper>();
 		services.AddSingleton<ICompatibilityManager, CompatibilityManager>();
 
 		return services;

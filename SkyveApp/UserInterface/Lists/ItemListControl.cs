@@ -530,7 +530,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 		}
 
 		var partialIncluded = false;
-		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(localPackage, out partialIncluded)) || partialIncluded;
+		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded)) || partialIncluded;
 
 		if (!IsSelection)
 		{

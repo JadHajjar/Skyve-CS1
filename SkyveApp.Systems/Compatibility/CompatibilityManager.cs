@@ -136,6 +136,9 @@ public class CompatibilityManager : ICompatibilityManager
 				CompatibilityData = new IndexedCompatibilityData(data);
 
 				CacheReport();
+
+				_notifier.OnCompatibilityDataLoaded();
+
 #if DEBUG
 				if (System.Diagnostics.Debugger.IsAttached)
 				{

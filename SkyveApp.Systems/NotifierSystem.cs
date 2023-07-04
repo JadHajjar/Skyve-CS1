@@ -19,6 +19,7 @@ internal class NotifierSystem : INotifier
 	public event Action? CompatibilityReportProcessed;
 	public event Action? WorkshopPackagesInfoLoaded;
 	public event Action? WorkshopUsersInfoLoaded;
+	public event Action? CompatibilityDataLoaded;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
@@ -112,5 +113,10 @@ internal class NotifierSystem : INotifier
 	public void OnWorkshopUsersInfoLoaded()
 	{
 		WorkshopUsersInfoLoaded?.Invoke();
+	}
+
+	public void OnCompatibilityDataLoaded()
+	{
+		CompatibilityDataLoaded?.Invoke();
 	}
 }

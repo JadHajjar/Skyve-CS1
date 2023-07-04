@@ -21,7 +21,7 @@ internal class PC_Assets : PC_ContentList<IAsset>
 	{
 		if (_settings.UserSettings.LinkModAssets)
 		{
-			return _contentManager.Assets.Where(x => x.LocalParentPackage?.IsMod ?? false);
+			return _contentManager.Assets.Where(x => !(x.LocalParentPackage?.IsMod ?? false));
 		}
 
 		return _contentManager.Assets;

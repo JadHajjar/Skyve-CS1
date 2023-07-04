@@ -32,7 +32,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 		if (!_profileManager.Save(newProfile))
 		{
-			ShowPrompt(Locale.ProfileCreationFailed, icon: PromptIcons.Error);
+			ShowPrompt(Locale.PlaysetCreationFailed, icon: PromptIcons.Error);
 			return;
 		}
 
@@ -55,7 +55,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 		if (!newProfile.Save())
 		{
-			ShowPrompt(Locale.CouldNotCreateProfile, icon: PromptIcons.Error);
+			ShowPrompt(Locale.CouldNotCreatePlayset, icon: PromptIcons.Error);
 			return;
 		}
 
@@ -95,7 +95,7 @@ public partial class PC_ProfileAdd : PanelContent
 		{
 			if (profile is not null)
 			{
-				ShowPrompt(Locale.ProfileNameUsed, icon: PromptIcons.Hand);
+				ShowPrompt(Locale.PlaysetNameUsed, icon: PromptIcons.Hand);
 				return;
 			}
 
@@ -103,7 +103,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 			if (profile is null)
 			{
-				ShowPrompt(Locale.FailedToImportLegacyProfile, icon: PromptIcons.Error);
+				ShowPrompt(Locale.FailedToImportLegacyPlayset, icon: PromptIcons.Error);
 				return;
 			}
 		}
@@ -126,7 +126,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 	private async void B_ImportLink_Click(object sender, EventArgs e)
 	{
-		var result = ShowInputPrompt(Locale.PasteProfileId);
+		var result = ShowInputPrompt(Locale.PastePlaysetId);
 
 		if (result.DialogResult != DialogResult.OK)
 		{
@@ -137,6 +137,6 @@ public partial class PC_ProfileAdd : PanelContent
 		{
 			await ServiceCenter.Get<IOnlinePlaysetUtil>().DownloadPlayset(result.Input);
 		}
-		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadProfile, form: Program.MainForm)); }
+		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadPlayset, form: Program.MainForm)); }
 	}
 }

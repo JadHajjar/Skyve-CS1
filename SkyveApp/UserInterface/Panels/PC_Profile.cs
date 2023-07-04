@@ -90,10 +90,10 @@ public partial class PC_Profile : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		Text = Locale.ProfileBubble;
-		L_TempProfile.Text = Locale.TemporaryProfileCanNotBeEdited;
-		DD_ProfileUsage.Text = Locale.ProfileUsage;
-		L_Info.Text = Locale.ProfileSaveInfo;
+		Text = Locale.PlaysetBubble;
+		L_TempProfile.Text = Locale.TemporaryPlaysetCanNotBeEdited;
+		DD_ProfileUsage.Text = Locale.PlaysetUsage;
+		L_Info.Text = Locale.PlaysetSaveInfo;
 	}
 
 	protected override void UIChanged()
@@ -126,7 +126,7 @@ public partial class PC_Profile : PanelContent
 		{
 			if (toBeDisposed)
 			{
-				Notification.Create(Locale.ProfileStillLoading, null, PromptIcons.Hand, null).Show(Form, 10);
+				Notification.Create(Locale.PlaysetStillLoading, null, PromptIcons.Hand, null).Show(Form, 10);
 			}
 
 			return false;
@@ -136,7 +136,7 @@ public partial class PC_Profile : PanelContent
 		{
 			if (toBeDisposed)
 			{
-				Notification.Create(Locale.ApplyProfileNameBeforeExit, null, PromptIcons.Hand, null).Show(Form, 10);
+				Notification.Create(Locale.ApplyPlaysetNameBeforeExit, null, PromptIcons.Hand, null).Show(Form, 10);
 			}
 
 			return false;
@@ -350,7 +350,7 @@ public partial class PC_Profile : PanelContent
 
 		if (_playsetManager.CurrentPlayset.Name != TB_Name.Text)
 		{
-			Notification.Create(Locale.ProfileNameChangedIllegalChars, null, PromptIcons.Info, null)
+			Notification.Create(Locale.PlaysetNameChangedIllegalChars, null, PromptIcons.Info, null)
 				.Show(Form, 15);
 		}
 
@@ -411,7 +411,7 @@ public partial class PC_Profile : PanelContent
 		}
 		else
 		{
-			ShowPrompt(Locale.CouldNotCreateProfile, icon: PromptIcons.Error);
+			ShowPrompt(Locale.CouldNotCreatePlayset, icon: PromptIcons.Error);
 		}
 	}
 

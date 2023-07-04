@@ -100,7 +100,7 @@ internal class CentralManager : ICentralManager
 
 		if (CommandUtil.PreSelectedProfile == _profileManager.CurrentPlayset.Name)
 		{
-			_logger.Info($"[Command] Applying Profile ({_profileManager.CurrentPlayset.Name})..");
+			_logger.Info($"[Command] Applying Playset ({_profileManager.CurrentPlayset.Name})..");
 			_profileManager.SetCurrentPlayset(_profileManager.CurrentPlayset);
 		}
 

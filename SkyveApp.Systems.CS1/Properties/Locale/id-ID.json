@@ -289,7 +289,7 @@
   "XMLTip": "Select or drag & drop an XML config file to manage the packages listed inside of it.",
   "FavoriteProfileTotal": "Profiles favorited: {0}, Total: {1}",
   "FavoriteTotal": "Total profiles: {0}",
-  "ProfileFilter": "Profile Filter",
+  "ProfileFilter": "Playset Filter",
   "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Failed to save the selected language",
   "FailedToOpenTC": "Failed to open Theme Changer",
@@ -315,7 +315,7 @@
   "ChangeProfileColor": "Change this profile's color",
   "EditProfileName": "Edit this profile's name",
   "SaveProfileChanges": "Save the current package settings to this profile's file",
-  "Sorting_Color": "Profile Color",
+  "Sorting_Color": "Playset Color",
   "CreateShortcutProfile": "Create a shortcut for it on your desktop",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Load a text file containing Steam IDs to easily subscribe to or manage them",
@@ -424,8 +424,8 @@
     "One": "Package",
     "Plural": "Packages"
   },
-  "Profile": {
-    "One": "Profile",
+  "Playset": {
+    "One": "Playset",
     "Plural": "Profiles"
   },
   "IncludedCount": {
@@ -531,7 +531,7 @@
   "RequestOption1": "Report an issue or add missing information",
   "RequestOption2": "Add a missing status for the package",
   "RequestOption3": "Add a missing interaction with another package",
-  "CurrentProfile": "Current Profile",
+  "CurrentProfile": "Current Playset",
   "References": "References",
   "OpenLog": "Open Log File",
   "Sort By": "Sort By",
@@ -540,9 +540,9 @@
   "DiscoverProfiles": "Discover Profiles",
   "AllUsages": "All Usages",
   "Invalid": "Invalid",
-  "UpdateProfile": "Update Profile",
-  "FailedToRetrieveProfiles": "Failed to retrieve the Profile Discovery",
-  "DownloadProfile": "Download Profile",
+  "UpdateProfile": "Update Playset",
+  "FailedToRetrieveProfiles": "Failed to retrieve the Playset Discovery",
+  "DownloadProfile": "Download Playset",
   "ReloadAllData": "Reload all data",
   "ResetSnoozes": "Reset all snoozes",
   "ResetModsCache": "Reset mods' cache",

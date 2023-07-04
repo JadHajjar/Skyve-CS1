@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -37,7 +39,37 @@ public class ModConfig
 	public const string FILE_NAME = "ModConfig.xml";
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
 
-	public List<ModInfo> ModsInfo { get; set; } = new();
+	[EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
+	public List<SavedModInfo> SavedModsInfo { get; set; } = new();
+#if SkyveApp
+	public Dictionary<string, ModInfo> GetModsInfo()
+	{
+		var dictionary = new Dictionary<string, ModInfo>(new Extensions.PathEqualityComparer());
+
+		foreach (var item in SavedModsInfo)
+		{
+			dictionary[item.Path ?? string.Empty] = item;
+		}
+
+		return dictionary;
+	}
+	public void SetModsInfo(Dictionary<string, ModInfo> value)
+	{
+		var list = new List<SavedModInfo>();
+
+		foreach (var item in value)
+		{
+			list.Add(new()
+			{
+				Path = item.Key,
+				Excluded = item.Value.Excluded,
+				LoadOrder = item.Value.LoadOrder,
+			});
+		}
+
+		SavedModsInfo = list;
+	}
+#endif
 
 	public void Serialize()
 	{
@@ -58,9 +90,13 @@ public class ModConfig
 		return new ModConfig();
 	}
 
+	public class SavedModInfo : ModInfo 
+	{
+		public string? Path { get; set; } 
+	}
+
 	public class ModInfo
 	{
-		public string? Path { get; set; }
 		public bool Excluded { get; set; }
 		public int LoadOrder { get; set; }
 	}

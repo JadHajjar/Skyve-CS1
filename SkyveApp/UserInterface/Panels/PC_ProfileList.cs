@@ -135,7 +135,7 @@ public partial class PC_ProfileList : PanelContent
 			}
 			else
 			{
-				text = string.Format(Locale.FavoriteProfileTotal, favorites, total);
+				text = string.Format(Locale.FavoritePlaysetTotal, favorites, total);
 			}
 
 			if (L_Counts.Text != text)
@@ -146,12 +146,12 @@ public partial class PC_ProfileList : PanelContent
 
 		var filteredCount = LC_Items.FilteredItems.Count();
 
-		L_FilterCount.Text = Locale.ShowingCount.FormatPlural(filteredCount, Locale.Profile.FormatPlural(filteredCount));
+		L_FilterCount.Text = Locale.ShowingCount.FormatPlural(filteredCount, Locale.Playset.FormatPlural(filteredCount));
 	}
 
 	protected override void LocaleChanged()
 	{
-		Text = LC_Items.ReadOnly ? Locale.DiscoverProfiles : Locale.YourProfiles;
+		Text = LC_Items.ReadOnly ? Locale.DiscoverPlaysets : Locale.YourPlaysets;
 	}
 
 	protected override void UIChanged()
@@ -280,7 +280,7 @@ public partial class PC_ProfileList : PanelContent
 		}
 		else
 		{
-			ShowPrompt(Locale.CouldNotCreateProfile, icon: PromptIcons.Error);
+			ShowPrompt(Locale.CouldNotCreatePlayset, icon: PromptIcons.Error);
 		}
 	}
 
@@ -335,7 +335,7 @@ public partial class PC_ProfileList : PanelContent
 		}
 		catch (Exception ex)
 		{
-			ShowPrompt(ex, Locale.FailedToRetrieveProfiles);
+			ShowPrompt(ex, Locale.FailedToRetrievePlaysets);
 		}
 
 		B_Discover.Loading = false;

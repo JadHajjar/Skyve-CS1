@@ -35,5 +35,6 @@ public enum InteractionType
 	SucceededBy,
 
 	[CRN(NotificationType.AttentionRequired, false)]
-	Identical
+	Identical,
+	LoadOrderRequires
 }

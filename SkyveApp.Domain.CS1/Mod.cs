@@ -33,7 +33,7 @@ public class Mod : IMod
 
 	public override bool Equals(object? obj)
 	{
-		return obj is Mod mod &&
+		return obj is IMod mod &&
 			   FilePath == mod.FilePath;
 	}
 

@@ -71,21 +71,35 @@ internal class TagsService : ITagsService
 
 	public IEnumerable<ITag> GetDistinctTags()
 	{
+		var returned = new List<string>();
+
 		foreach (var item in _workshopTags)
 		{
-			yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item);
+			if (!returned.Contains(item))
+			{
+				returned.Add(item);
+				yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item);
+			}
 		}
 
 		foreach (var item in _assetTags)
 		{
-			yield return new TagItem(Domain.CS1.Enums.TagSource.InGame, item);
+			if (!returned.Contains(item))
+			{
+				returned.Add(item);
+				yield return new TagItem(Domain.CS1.Enums.TagSource.InGame, item);
+			} 
 		}
 
 		foreach (var item in _findItTags.assetTags)
 		{
 			foreach (var tag in item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
 			{
-				yield return new TagItem(Domain.CS1.Enums.TagSource.FindIt, tag);
+				if (!returned.Contains(tag))
+				{
+					returned.Add(tag);
+					yield return new TagItem(Domain.CS1.Enums.TagSource.FindIt, tag);
+				}
 			}
 		}
 	}
