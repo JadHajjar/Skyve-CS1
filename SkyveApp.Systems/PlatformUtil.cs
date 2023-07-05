@@ -59,13 +59,6 @@ public static class PlatformUtil
 	{
 		var file = ServiceCenter.Get<ILocationManager>().SteamPathWithExe;
 
-		if (CrossIO.CurrentPlatform is Platform.Windows)
-		{
-			var process = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(file));
-
-			return process.Length != 0;
-		}
-
 		ServiceCenter.Get<IIOUtil>().Execute(file, args);
 
 		return true;

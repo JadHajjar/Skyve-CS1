@@ -45,7 +45,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		base.OnMouseMove(e);
 
 		var packages = LC_Items?.SafeGetItems() ?? new();
-		var subscribe = packages.Any(x => x.Item.LocalParentPackage is null);
+		var subscribe = packages.Any(x => x.Item.LocalPackage is null);
 
 		if (IncludedRect.Contains(e.Location))
 		{
@@ -53,7 +53,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 			{
 				SlickTip.SetTo(this, "SubscribeAll");
 			}
-			else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage).All(x => x!.IsIncluded()))
+			else if (packages.SelectWhereNotNull(x => x.Item.LocalPackage).All(x => x!.IsIncluded()))
 			{
 				SlickTip.SetTo(this, "ExcludeAll");
 			}
@@ -90,7 +90,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		if (e.Button == MouseButtons.Left)
 		{
 			var packages = LC_Items?.SafeGetItems() ?? new();
-			var subscribe = packages.Any(x => x.Item.LocalParentPackage is null);
+			var subscribe = packages.Any(x => x.Item.LocalPackage is null);
 
 			if (IncludedRect.Contains(e.Location))
 			{
@@ -98,7 +98,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 				{
 					SubscribeAllClicked?.Invoke(this, e);
 				}
-				else if (packages.SelectWhereNotNull(x => x.Item.LocalParentPackage).All(x => x!.IsIncluded()))
+				else if (packages.SelectWhereNotNull(x => x.Item.LocalPackage).All(x => x!.IsIncluded()))
 				{
 					ExcludeAllClicked?.Invoke(this, e);
 				}
@@ -143,8 +143,8 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;
 		var packages = LC_Items?.SafeGetItems() ?? new();
-		var subscribe = packages.Any(x => x.Item.LocalParentPackage is null);
-		var include = !subscribe && packages.All(x => x.Item.LocalParentPackage!.IsIncluded());
+		var subscribe = packages.Any(x => x.Item.LocalPackage is null);
+		var include = !subscribe && packages.All(x => x.Item.LocalPackage!.IsIncluded());
 		var enable = !subscribe && packages.SelectWhereNotNull(x => x.Item.LocalParentPackage?.Mod).All(x => x!.IsEnabled());
 
 		if (_doubleButtons && !subscribe)

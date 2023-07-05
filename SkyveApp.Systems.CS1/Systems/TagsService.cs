@@ -2,7 +2,6 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
 
@@ -12,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyveApp.Systems.CS1.Systems;
@@ -22,6 +20,7 @@ internal class TagsService : ITagsService
 	private readonly HashSet<string> _workshopTags;
 	private readonly Dictionary<string, string[]> _assetTagsDictionary;
 	private readonly Dictionary<string, string[]> _customTagsDictionary;
+	private readonly Dictionary<string, HashSet<string>> _tagsCache;
 
 	private readonly IWorkshopService _workshopService;
 
@@ -31,6 +30,7 @@ internal class TagsService : ITagsService
 	{
 		_assetTagsDictionary = new(new PathEqualityComparer());
 		_customTagsDictionary = new(new PathEqualityComparer());
+		_tagsCache = new(StringComparer.InvariantCultureIgnoreCase);
 		_workshopService = workshopService;
 		_assetTags = new HashSet<string>();
 		_workshopTags = new HashSet<string>();
@@ -39,7 +39,7 @@ internal class TagsService : ITagsService
 
 		var csCache = CSCache.Deserialize();
 
-		if (csCache != null )
+		if (csCache is not null)
 		{
 			foreach (var asset in csCache.Assets)
 			{
@@ -52,8 +52,76 @@ internal class TagsService : ITagsService
 			}
 		}
 
+		ISave.Load(out Dictionary<string, string[]> customTags, "CustomTags.json");
+
+		if (customTags is not null)
+		{
+			foreach (var tag in customTags)
+			{
+				_customTagsDictionary[tag.Key] = tag.Value;
+			}
+		}
+
 		notifier.WorkshopInfoUpdated += UpdateWorkshopTags;
-		UpdateWorkshopTags();
+		notifier.ContentLoaded += GenerateCache;
+
+		Task.Run(UpdateWorkshopTags);
+		Task.Run(GenerateCache);
+	}
+
+	private void GenerateCache()
+	{
+		_tagsCache.Clear();
+
+		foreach (var kvp in _assetTagsDictionary)
+		{
+			foreach (var item in kvp.Value)
+			{
+				if (!_tagsCache.ContainsKey(item))
+				{
+					_tagsCache[item] = new(new PathEqualityComparer());
+				}
+
+				_tagsCache[item].Add(kvp.Key);
+			}
+		}
+
+		foreach (var kvp in _customTagsDictionary)
+		{
+			foreach (var item in kvp.Value)
+			{
+				if (!_tagsCache.ContainsKey(item))
+				{
+					_tagsCache[item] = new(new PathEqualityComparer());
+				}
+
+				_tagsCache[item].Add(kvp.Key);
+			}
+		}
+
+		var assetDictionary = new Dictionary<string, IAsset>(StringComparer.CurrentCultureIgnoreCase);
+
+		foreach (var asset in ServiceCenter.Get<IPackageManager>().Assets)
+		{
+			assetDictionary[(asset.IsLocal ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_')] = asset;
+		}
+
+		foreach (var kvp in _findItTags.assetTags)
+		{
+			if (assetDictionary.TryGetValue(kvp.Key.RemoveDoubleSpaces().Replace(' ', '_'), out var asset))
+			{
+				foreach (var item in kvp.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+				{
+					if (!_tagsCache.ContainsKey(item))
+					{
+						_tagsCache[item] = new(new PathEqualityComparer());
+					}
+
+					_tagsCache[item].Add(asset.FilePath);
+
+				}
+			}
+		}
 	}
 
 	private void UpdateWorkshopTags()
@@ -88,7 +156,7 @@ internal class TagsService : ITagsService
 			{
 				returned.Add(item);
 				yield return new TagItem(Domain.CS1.Enums.TagSource.InGame, item);
-			} 
+			}
 		}
 
 		foreach (var item in _findItTags.assetTags)
@@ -116,18 +184,26 @@ internal class TagsService : ITagsService
 				}
 			}
 
-			var key = (asset.IsLocal ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_');
-
-			foreach (var item in _findItTags.assetTags)
+			if (_customTagsDictionary.TryGetValue(asset.FilePath, out var customTags))
 			{
-				if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(key.RemoveDoubleSpaces().Replace(' ', '_'), StringComparison.CurrentCultureIgnoreCase))
+				foreach (var item in customTags)
 				{
-					foreach (var tag in item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
-					{
-						yield return new TagItem(Domain.CS1.Enums.TagSource.FindIt, tag);
-					}
+					yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
 				}
 			}
+
+			//var key = (asset.IsLocal ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_');
+
+			//foreach (var item in _findItTags.assetTags)
+			//{
+			//	if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(key.RemoveDoubleSpaces().Replace(' ', '_'), StringComparison.CurrentCultureIgnoreCase))
+			//	{
+			//		foreach (var tag in item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+			//		{
+			//			yield return new TagItem(Domain.CS1.Enums.TagSource.FindIt, tag);
+			//		}
+			//	}
+			//}
 		}
 		else if (package.LocalParentPackage is ILocalPackageWithContents lp && _customTagsDictionary.TryGetValue(lp.Folder, out var customTags))
 		{
@@ -146,7 +222,7 @@ internal class TagsService : ITagsService
 		}
 	}
 
-	public void SetTags(IPackage package, IEnumerable< string> value)
+	public void SetTags(IPackage package, IEnumerable<string> value)
 	{
 		if (package is IAsset asset)
 		{
@@ -176,12 +252,53 @@ internal class TagsService : ITagsService
 
 			_findItTags = newTags;
 			_findItTags.Serialize();
+
+			_customTagsDictionary[asset.FilePath] = value.WhereNotEmpty().ToArray();
+
+			ISave.Save(_customTagsDictionary, "CustomTags.json");
 		}
 		else if (package.LocalParentPackage is ILocalPackageWithContents lp)
 		{
 			_customTagsDictionary[lp.Folder] = value.WhereNotEmpty().ToArray();
 
-
+			ISave.Save(_customTagsDictionary, "CustomTags.json");
 		}
+	}
+
+	public bool HasAllTags(IPackage package, IEnumerable<ITag> tags)
+	{
+		var workshopTags = package.GetWorkshopInfo()?.Tags;
+
+		if (package is ILocalPackage localPackage)
+		{
+			foreach (var tag in tags)
+			{
+				if (_tagsCache.TryGetValue(tag.Value, out var hash) && hash.Contains(localPackage.FilePath))
+				{
+					continue;
+				}
+
+				if (workshopTags?.Any(x => x.Equals(tag.Value, StringComparison.InvariantCultureIgnoreCase)) ?? false)
+				{
+					continue;
+				}
+
+				return false;
+			}
+
+			return true;
+		}
+
+		foreach (var tag in tags)
+		{
+			if (workshopTags?.Any(x => x.Equals(tag.Value, StringComparison.InvariantCultureIgnoreCase)) ?? false)
+			{
+				continue;
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 }

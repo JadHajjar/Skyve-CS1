@@ -535,12 +535,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (DD_Tags.SelectedItems.Any())
 		{
-			foreach (var tag in DD_Tags.SelectedItems)
+			if (!_tagUtil.HasAllTags(item, DD_Tags.SelectedItems))
 			{
-				if (!(item.GetTags()?.Any(x => x.Value == tag.Value) ?? false))
-				{
-					return true;
-				}
+				return true;
 			}
 		}
 

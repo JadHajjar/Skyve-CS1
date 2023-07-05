@@ -22,10 +22,11 @@ public partial class PC_Profile : PanelContent
 	private readonly IBulkUtil _bulkUtil;
 	private readonly IIOUtil _iOUtil;
 	private readonly INotifier _notifier;
+	private readonly ITagsService _tagsService;
 
 	public PC_Profile()
 	{
-		ServiceCenter.Get(out _bulkUtil, out _iOUtil, out _locationManager, out _playsetManager, out _packageManager, out _notifier, out _settings);
+		ServiceCenter.Get(out _bulkUtil, out _iOUtil, out _locationManager, out _playsetManager, out _packageManager, out _notifier, out _settings, out _tagsService);
 
 		InitializeComponent();
 
@@ -48,13 +49,16 @@ public partial class PC_Profile : PanelContent
 
 		LoadProfile(_playsetManager.CurrentPlayset as Playset);
 
+		var saveGameTag = new ITag[] { new TagItem(Domain.CS1.Enums.TagSource.InGame, "SaveGame") };
+		var mapTag = new ITag[] { new TagItem(Domain.CS1.Enums.TagSource.InGame, "Map") };
+
 		DD_SaveFile.StartingFolder = CrossIO.Combine(_locationManager.AppDataPath, "Saves");
 		DD_SaveFile.PinnedFolders = new()
 		{
 			["Your Save-games"] = CrossIO.Combine(_locationManager.AppDataPath, "Saves"),
 			["Workshop Save-games"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_SaveFile.CustomFiles = _packageManager.Assets.Where(x => x.GetTags().Any(x => x.Value == "SaveGame")).Select(x => new IOSelectionDialog.CustomFile
+		DD_SaveFile.CustomFiles = _packageManager.Assets.Where(x => _tagsService.HasAllTags(x, saveGameTag)).Select(x => new IOSelectionDialog.CustomFile
 		{
 			Name = x.Name,
 			Icon = x.GetThumbnail(),
@@ -71,7 +75,7 @@ public partial class PC_Profile : PanelContent
 			["Vanilla Maps"] = CrossIO.Combine(_locationManager.GameContentPath, "Maps"),
 			["Workshop Maps"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_NewMap.CustomFiles = _packageManager.Assets.Where(x => x.GetTags().Any(x => x.Value=="Map")).Select(x => new IOSelectionDialog.CustomFile
+		DD_NewMap.CustomFiles = _packageManager.Assets.Where(x => _tagsService.HasAllTags(x, mapTag)).Select(x => new IOSelectionDialog.CustomFile
 		{
 			Name = x.Name,
 			Icon = x.GetThumbnail(),
