@@ -1,11 +1,7 @@
-﻿using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Generic;
-
-using SlickControls;
 
 using System.Drawing;
 using System.IO;

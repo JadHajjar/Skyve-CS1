@@ -53,7 +53,7 @@ public partial class AddLinkForm : BaseForm
 		private readonly SlickTextBox tbLink;
 		private readonly SlickTextBox tbName;
 		private readonly SlickIcon deleteButton;
-		private ILink link;
+		private readonly ILink link;
 
 		public LinkControl(ILink packageLink)
 		{

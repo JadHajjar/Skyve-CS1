@@ -1,8 +1,6 @@
 ﻿using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;

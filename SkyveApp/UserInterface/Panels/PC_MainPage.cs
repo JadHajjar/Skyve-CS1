@@ -15,7 +15,7 @@ public partial class PC_MainPage : PanelContent
 	public PC_MainPage()
 	{
 		ServiceCenter.Get(out _notifier, out _citiesManager, out _playsetManager, out _modLogicManager);
-		
+
 		InitializeComponent();
 
 		B_StartStop.Enabled = _notifier.IsContentLoaded && _citiesManager.IsAvailable();

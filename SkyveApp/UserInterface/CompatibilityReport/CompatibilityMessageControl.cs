@@ -26,7 +26,7 @@ internal class CompatibilityMessageControl : SlickControl
 	public CompatibilityMessageControl(PackageCompatibilityReportControl packageCompatibilityReportControl, ReportType type, ICompatibilityItem message)
 	{
 		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _subscriptionsManager, out _packageManager, out _bulkUtil, out _packageUtil, out _dlcManager);
-		
+
 		Dock = DockStyle.Top;
 		Type = type;
 		Message = message;
@@ -148,7 +148,7 @@ internal class CompatibilityMessageControl : SlickControl
 					}
 
 					var dlc = isDlc ? _dlcManager.Dlcs.FirstOrDefault(x => x.Id == packageID.Id) : null;
-					var package = dlc is null ? _packageManager.GetPackageById(packageID) : null;
+					var package = dlc is null ? packageID.GetWorkshopPackage() : null;
 					var packageThumbnail = dlc?.GetThumbnail() ?? package.GetThumbnail();
 
 					if ((package?.IsLocal ?? false) && packageThumbnail is not null)
@@ -183,7 +183,7 @@ internal class CompatibilityMessageControl : SlickControl
 					switch (Message.Status.Action)
 					{
 						case StatusAction.SubscribeToPackages:
-							var p = package;
+							var p = package?.LocalParentPackage;
 
 							if (p is null)
 							{

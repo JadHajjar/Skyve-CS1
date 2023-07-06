@@ -1,9 +1,5 @@
-﻿using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+﻿using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.Systems.CS1.Utilities;
-
-
-using SlickControls;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,7 +10,7 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 	private readonly IWorkshopService _workshopService;
 	public ReviewRequestList()
 	{
-		_workshopService=ServiceCenter.Get<IWorkshopService>();
+		_workshopService = ServiceCenter.Get<IWorkshopService>();
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		ItemHeight = 64;

@@ -1,8 +1,4 @@
-﻿using SkyveApp.Domain.CS1.Enums;
-
-using SlickControls;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Content;
@@ -51,7 +47,7 @@ internal class TagControl : SlickImageControl
 			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + (img.Width * 2), Padding.Vertical);
 		}
 
-		using (var img = IconManager.GetIcon( TagInfo?.Icon))
+		using (var img = IconManager.GetIcon(TagInfo?.Icon))
 		{
 			return Size.Ceiling(FontMeasuring.Measure(TagInfo?.Value, Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
 		}

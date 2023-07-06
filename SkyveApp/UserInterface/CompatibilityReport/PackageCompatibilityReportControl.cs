@@ -1,9 +1,4 @@
-﻿using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility.Domain;
-
-using SlickControls;
-
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.CompatibilityReport;

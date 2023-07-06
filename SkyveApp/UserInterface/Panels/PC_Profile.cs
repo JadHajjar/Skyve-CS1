@@ -1,9 +1,6 @@
 ﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.Systems.CS1.Utilities.IO;
 using SkyveApp.UserInterface.Generic;
-
-using SlickControls;
 
 using System.Drawing;
 using System.IO;
@@ -32,12 +29,12 @@ public partial class PC_Profile : PanelContent
 
 		_launchOptions = new[] { CB_StartNewGame, CB_LoadSave, CB_NewAsset, CB_LoadAsset };
 
-		SlickTip.SetTo(B_AddProfile.Controls[0], "NewProfile_Tip");
-		SlickTip.SetTo(B_TempProfile.Controls[0], "TempProfile_Tip");
-		SlickTip.SetTo(B_ViewProfiles, "ViewProfiles_Tip");
-		SlickTip.SetTo(I_ProfileIcon, "ChangeProfileColor");
-		SlickTip.SetTo(B_EditName, "EditProfileName");
-		SlickTip.SetTo(B_Save, "SaveProfileChanges");
+		SlickTip.SetTo(B_AddProfile.Controls[0], "NewPlayset_Tip");
+		SlickTip.SetTo(B_TempProfile.Controls[0], "TempPlayset_Tip");
+		SlickTip.SetTo(B_ViewProfiles, "ViewPlayset_Tip");
+		SlickTip.SetTo(I_ProfileIcon, "ChangePlaysetColor");
+		SlickTip.SetTo(B_EditName, "EditPlaysetName");
+		SlickTip.SetTo(B_Save, "SavePlaysetChanges");
 
 		foreach (var item in this.GetControls<SlickCheckbox>())
 		{
@@ -160,7 +157,9 @@ public partial class PC_Profile : PanelContent
 	private void LoadProfile(Playset? profile)
 	{
 		if (profile == null)
+		{
 			return;
+		}
 
 		loadingProfile = true;
 
@@ -174,7 +173,7 @@ public partial class PC_Profile : PanelContent
 		TLP_Options.Enabled = true;
 		TLP_GeneralSettings.Visible = !profile.Temporary;
 
-		SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 
 		TLP_Main.SetColumn(B_TempProfile, profile.Temporary ? 4 : 3);
 		TLP_Main.SetColumn(B_AddProfile, profile.Temporary ? 3 : 4);
@@ -242,7 +241,7 @@ public partial class PC_Profile : PanelContent
 			}
 		}
 
-		var playset =(_playsetManager.CurrentPlayset as Playset)!;
+		var playset = (_playsetManager.CurrentPlayset as Playset)!;
 
 		playset.AutoSave = CB_AutoSave.Checked;
 		playset.Usage = DD_ProfileUsage.SelectedItem;
@@ -263,7 +262,7 @@ public partial class PC_Profile : PanelContent
 		playset.LaunchSettings.CustomArgs = TB_CustomArgs.Text;
 		playset.LaunchSettings.NewAsset = CB_NewAsset.Checked;
 		playset.LaunchSettings.LoadAsset = CB_LoadAsset.Checked;
-		
+
 		playset.LsmSettings.SkipFile = _iOUtil.ToRealPath(DD_SkipFile.SelectedFile);
 		playset.LsmSettings.LoadEnabled = CB_LoadEnabled.Checked;
 		playset.LsmSettings.LoadUsed = CB_LoadUsed.Checked;
@@ -345,7 +344,7 @@ public partial class PC_Profile : PanelContent
 			L_CurrentProfile.Visible = true;
 			return;
 		}
-		
+
 		if (!_playsetManager.RenamePlayset(_playsetManager.CurrentPlayset, TB_Name.Text))
 		{
 			TB_Name.SetError();
@@ -478,6 +477,6 @@ public partial class PC_Profile : PanelContent
 		_playsetManager.Save(_playsetManager.CurrentPlayset);
 
 		I_Favorite.ImageName = _playsetManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
-		SlickTip.SetTo(I_Favorite, _playsetManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		SlickTip.SetTo(I_Favorite, _playsetManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 	}
 }

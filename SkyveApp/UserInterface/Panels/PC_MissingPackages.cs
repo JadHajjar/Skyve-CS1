@@ -1,7 +1,5 @@
 ﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
 using System.Threading;
 using System.Windows.Forms;
 
@@ -60,7 +58,7 @@ internal partial class PC_MissingPackages : PC_GenericPackageList
 					continue;
 				}
 
-		_assetUtil.SetIncluded(		localAsset,true);
+				_assetUtil.SetIncluded(localAsset, true);
 
 				LC_Items.Remove(item);
 			}

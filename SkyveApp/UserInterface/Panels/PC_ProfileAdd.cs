@@ -1,8 +1,6 @@
 ﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
 using System.IO;
 using System.Windows.Forms;
 
@@ -121,7 +119,7 @@ public partial class PC_ProfileAdd : PanelContent
 				panel.Ctrl_LoadProfile(profile!);
 			}
 		}
-		catch (Exception ex) { ShowPrompt(ex, "Failed to import your profile"); }
+		catch (Exception ex) { ShowPrompt(ex, "Failed to import your playset"); }
 	}
 
 	private async void B_ImportLink_Click(object sender, EventArgs e)

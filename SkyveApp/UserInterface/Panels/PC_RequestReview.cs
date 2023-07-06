@@ -1,10 +1,6 @@
-﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+﻿using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.CompatibilityReport;
-
-using SlickControls;
 
 using System.Drawing;
 using System.IO;
@@ -75,7 +71,7 @@ public partial class PC_RequestReview : PanelContent
 		TLP_MainInfo.Show();
 		P_Main.Show();
 
-		var data = _compatibilityManager.GetPackageInfo( CurrentPackage);
+		var data = _compatibilityManager.GetPackageInfo(CurrentPackage);
 		DD_Stability.SelectedItem = data?.Stability ?? PackageStability.NotReviewed;
 		DD_PackageType.SelectedItem = data?.Type ?? PackageType.GenericPackage;
 		DD_DLCs.SelectedItems = data is null ? Enumerable.Empty<IDlcInfo>() : ServiceCenter.Get<IDlcManager>().Dlcs.Where(x => data.RequiredDLCs?.Contains(x.Id) ?? false);

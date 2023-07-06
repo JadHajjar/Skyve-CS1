@@ -1,8 +1,5 @@
-﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
-
-using SlickControls;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -60,7 +57,7 @@ internal class UserDescriptionControl : SlickImageControl
 		DrawTitle(e);
 		DrawButtons(e);
 
-		var count = _contentManager.Packages.Count(x => User.Id?.Equals(x.GetWorkshopInfo()?.Author?.Id )??false );
+		var count = _contentManager.Packages.Count(x => User.Id?.Equals(x.GetWorkshopInfo()?.Author?.Id) ?? false);
 
 		if (count == 0)
 		{

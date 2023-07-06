@@ -3,7 +3,7 @@
 namespace SkyveApp.Domain;
 public interface ICompatibilityInfo
 {
-	ILocalPackage Package { get; }
-	IPackageCompatibilityInfo Info { get; }
-	List<ICompatibilityItem> ReportItems { get; }
+	ILocalPackage? Package { get; }
+	IPackageCompatibilityInfo? Info { get; }
+	IEnumerable<ICompatibilityItem> ReportItems { get; }
 }

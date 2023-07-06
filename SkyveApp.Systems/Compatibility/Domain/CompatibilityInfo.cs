@@ -20,9 +20,9 @@ public class CompatibilityInfo : ICompatibilityInfo
 	public List<ReportItem> ReportItems { get; set; }
 	//[JsonIgnore] public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => ServiceCenter.Get<ICompatibilityManager>().IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 
-	ILocalPackage ICompatibilityInfo.Package { get; }
-	public IPackageCompatibilityInfo Info { get; }
-	List<ICompatibilityItem> ICompatibilityInfo.ReportItems { get; }
+	ILocalPackage? ICompatibilityInfo.Package => Package?.LocalPackage;
+	public IPackageCompatibilityInfo? Info => Data?.Package;
+	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast< ICompatibilityItem>();
 
 	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
 	{

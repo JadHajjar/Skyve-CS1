@@ -2,8 +2,6 @@
 using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Lists;
 
-using SlickControls;
-
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,10 +54,13 @@ public partial class PC_ProfileList : PanelContent
 			LC_Items.SetSorting(ProfileSorting.Downloads);
 		}
 
-		SlickTip.SetTo(B_AddProfile.Controls[0], "NewProfile_Tip");
-		SlickTip.SetTo(B_TempProfile.Controls[0], "TempProfile_Tip");
 		SlickTip.SetTo(B_GridView, "Switch to Grid-View");
 		SlickTip.SetTo(B_ListView, "Switch to List-View");
+		SlickTip.SetTo(B_AddProfile.Controls[0], "NewPlayset_Tip");
+		SlickTip.SetTo(B_TempProfile.Controls[0], "TempPlayset_Tip");
+		SlickTip.SetTo(I_ProfileIcon, "ChangePlaysetColor");
+		SlickTip.SetTo(B_EditName, "EditPlaysetName");
+		SlickTip.SetTo(B_Save, "SavePlaysetChanges");
 
 		RefreshCounts();
 	}
@@ -212,7 +213,7 @@ public partial class PC_ProfileList : PanelContent
 		tableLayoutPanel1.SetColumn(B_TempProfile, profile.Temporary ? 2 : 1);
 		tableLayoutPanel1.SetColumn(B_AddProfile, profile.Temporary ? 1 : 2);
 
-		SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		SlickTip.SetTo(I_Favorite, profile.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 
 		I_Favorite.Visible = B_Save.Visible = !profile.Temporary;
 
@@ -320,7 +321,7 @@ public partial class PC_ProfileList : PanelContent
 		_profileManager.Save(_profileManager.CurrentPlayset);
 
 		I_Favorite.ImageName = _profileManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
-		SlickTip.SetTo(I_Favorite, _profileManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisProfile" : "FavoriteThisProfile");
+		SlickTip.SetTo(I_Favorite, _profileManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 	}
 
 	private async void B_Discover_Click(object sender, EventArgs e)
@@ -329,7 +330,7 @@ public partial class PC_ProfileList : PanelContent
 		{
 			B_Discover.Loading = true;
 
-			var profiles = await ServiceCenter.Get< SkyveApiUtil>().GetPublicProfiles();
+			var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetPublicProfiles();
 
 			Invoke(() => Form.PushPanel(new PC_ProfileList(profiles)));
 		}

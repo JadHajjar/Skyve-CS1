@@ -3,8 +3,6 @@ using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 
-using SlickControls;
-
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Forms;

@@ -148,7 +148,7 @@ partial class PC_ProfileAdd
 			this.DAD_NewProfile.Name = "DAD_NewProfile";
 			this.DAD_NewProfile.Size = new System.Drawing.Size(150, 150);
 			this.DAD_NewProfile.TabIndex = 15;
-			this.DAD_NewProfile.Text = "DropNewProfile";
+			this.DAD_NewProfile.Text = "DropNewPlayset";
 			this.DAD_NewProfile.ValidExtensions = new string[] {
         ".json",
         ".xml"};

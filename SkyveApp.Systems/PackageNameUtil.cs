@@ -33,7 +33,7 @@ public class PackageNameUtil : IPackageNameUtil
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 
 		return keepTags
-			? text.RemoveDoubleSpaces()
+			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
 	}
 
@@ -51,7 +51,7 @@ public class PackageNameUtil : IPackageNameUtil
 		var tagMatches = _bracketsRegex.Matches(text);
 
 		text = keepTags
-			? text.RemoveDoubleSpaces()
+			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
 
 		if (isLocal)
@@ -61,16 +61,16 @@ public class PackageNameUtil : IPackageNameUtil
 
 		foreach (Match match in tagMatches)
 		{
-			var tagText = match.Groups[1].Value.Trim().ToLower();
+			var tagText = match.Groups[1].Value.Trim();
 
 			if (!tags.Any(x => x.Text.Equals(tagText, StringComparison.InvariantCultureIgnoreCase)))
 			{
-				if (tagText is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken")
+				if (tagText.ToLower() is "stable" or "deprecated" or "obsolete" or "abandoned" or "broken")
 				{
 					continue;
 				}
 
-				var color = tagText switch
+				var color = tagText.ToLower() switch
 				{
 					"alpha" or "experimental" => Color.FromArgb(200, FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.RedColor)),
 					"beta" or "test" or "testing" => Color.FromArgb(180, FormDesign.Design.YellowColor),

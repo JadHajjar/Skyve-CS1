@@ -1,7 +1,4 @@
-﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Systems.CS1.Utilities;
-
-using SlickControls;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -12,7 +9,7 @@ public partial class PC_DLCs : PanelContent
 	private readonly IDlcManager _dlcManager;
 	public PC_DLCs()
 	{
-		ServiceCenter.Get(out  _dlcManager);
+		ServiceCenter.Get(out _dlcManager);
 
 		InitializeComponent();
 

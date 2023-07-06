@@ -1,8 +1,4 @@
-﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
-
-using SlickControls;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;

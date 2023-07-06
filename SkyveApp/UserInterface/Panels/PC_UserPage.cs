@@ -1,14 +1,8 @@
 ﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Content;
-using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Lists;
-
-using SlickControls;
 
 using System.Drawing;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
@@ -44,7 +38,7 @@ public partial class PC_UserPage : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
-		var profiles = await ServiceCenter.Get< SkyveApiUtil>().GetUserProfiles(User.Id!);
+		var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetUserProfiles(User.Id!);
 
 		if (profiles?.Any() ?? false)
 		{

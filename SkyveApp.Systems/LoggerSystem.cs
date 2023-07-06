@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Windows.Forms;
 
 namespace SkyveApp.Systems;
 
@@ -50,9 +51,9 @@ public class LoggerSystem : ILogger
 			var assembly = Assembly.GetExecutingAssembly();
 			var details = assembly.GetName();
 
-			Info($"{details.Name} v{details.Version}");
-			Info($"Now  = {DateTime.Now:yyyy-mm-dd hh:mm:ss tt}");
-			Info($"Here = {assembly.Location}");
+			Info($"Skyve v{details.Version}");
+			Info($"Now  = {DateTime.Now:yyyy-MM-dd hh:mm:ss tt}");
+			Info($"Here = {Application.StartupPath}");
 		}
 		catch
 		{
@@ -84,7 +85,7 @@ public class LoggerSystem : ILogger
 
 	public void Exception(Exception exception, object message)
 	{
-		ProcessLog("FATAL", $"{message}\r\n{exception.ToString().Replace("\n", "\n\t\t")}\r\n");
+		ProcessLog("FATAL", $"{message}\r\n{exception}\r\n");
 	}
 
 	private void ProcessLog(string type, object content)
@@ -94,24 +95,22 @@ public class LoggerSystem : ILogger
 			return;
 		}
 
-		var ticks = _stopwatch!.ElapsedTicks;
-		var secs = ticks / Stopwatch.Frequency;
-		var fraction = ticks % Stopwatch.Frequency;
+		var secs = _stopwatch!.ElapsedMilliseconds / 1000M;
 		var sb = new StringBuilder();
-		var time = $"{secs:n0}.{fraction:D3}";
+		var time = secs.ToString("0.000");
 
-		_ = sb.AppendFormat("\r\n{0} ", type);
+		sb.AppendFormat("\r\n[{0} ", type);
 
-		if (time.Length < 10)
+		if (time.Length < 6)
 		{
-			_ = sb.Append(' ', 10 - time.Length);
+			sb.Append(' ', 10 - time.Length);
 		}
 
-		_ = sb.Append(time);
+		sb.Append(time);
 
-		_ = sb.Append(" | ");
+		sb.Append("] ");
 
-		_ = sb.Append(content);
+		sb.Append(content?.ToString().Replace("\n", "\n                      "));
 
 		lock (LogFilePath)
 		{

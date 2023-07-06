@@ -1,7 +1,5 @@
 ﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;

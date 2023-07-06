@@ -1,8 +1,6 @@
 ﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
 
-using SlickControls;
-
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -71,7 +69,7 @@ internal class MiniPackageControl : SlickControl
 				}
 				else
 				{
-					Program.MainForm.PushPanel(null, Package.GetWorkshopInfo()?.IsCollection  == true? new PC_ViewCollection(Package) : new PC_PackagePage(Package));
+					Program.MainForm.PushPanel(null, Package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(Package) : new PC_PackagePage(Package));
 				}
 
 				break;

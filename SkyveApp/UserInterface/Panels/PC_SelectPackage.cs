@@ -1,9 +1,6 @@
-﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Lists;
-
-using SlickControls;
 
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -216,7 +213,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		if (TB_Search.Text.Trim().Length > 7 && ulong.TryParse(TB_Search.Text.Trim(), out var steamId))
 		{
-			var item = await _workshopService.GetInfoAsync(new GenericPackageIdentity( steamId));
+			var item = await _workshopService.GetInfoAsync(new GenericPackageIdentity(steamId));
 
 			if (item is not null)
 			{

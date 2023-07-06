@@ -1,15 +1,12 @@
 ﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Enums;
 using SkyveApp.Systems.Compatibility;
 using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
-
-using SlickControls;
 
 using System.Drawing;
 using System.IO;
@@ -228,7 +225,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		try
 		{
-			CurrentPackage ??= await _workshopService.GetPackageAsync(new GenericPackageIdentity( packages[page]));
+			CurrentPackage ??= await _workshopService.GetPackageAsync(new GenericPackageIdentity(packages[page]));
 
 			var catalogue = await ServiceCenter.Get<SkyveApiUtil>().Catalogue(CurrentPackage!.Id);
 
@@ -598,7 +595,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void PackageCrList_CanDrawItem(object sender, CanDrawItemEventArgs<ulong> e)
 	{
-		var package = _workshopService.GetPackage(new GenericPackageIdentity( e.Item));
+		var package = _workshopService.GetPackage(new GenericPackageIdentity(e.Item));
 
 		if (package is null)
 		{
@@ -607,7 +604,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		if (!CB_ShowUpToDate.Checked)
 		{
-			var cr = _compatibilityManager.GetPackageInfo( package);
+			var cr = _compatibilityManager.GetPackageInfo(package);
 
 			if (cr is null || cr.ReviewDate > package.GetWorkshopInfo()?.ServerTime)
 			{

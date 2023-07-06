@@ -1,10 +1,7 @@
-﻿using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Dropdowns;
 using SkyveApp.UserInterface.Panels;
-
-using SlickControls;
 
 using System.Drawing;
 using System.Text.RegularExpressions;

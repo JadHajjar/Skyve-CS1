@@ -1,7 +1,4 @@
-﻿using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Systems.CS1.Utilities;
-
-using SlickControls;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -43,7 +40,7 @@ internal class SteamUserControl : SlickControl
 		}
 	}
 
-	public IUser? User => _steamId==0? _userService.User: _workshopService.GetUser(_steamId);
+	public IUser? User => _steamId == 0 ? _userService.User : _workshopService.GetUser(_steamId);
 	public string? InfoText { get; set; }
 
 	protected override void OnPaint(PaintEventArgs e)

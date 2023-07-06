@@ -444,7 +444,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public NotificationType GetNotification(ICompatibilityInfo info)
 	{
-		return info.ReportItems?.Count > 0 ? info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
+		return info.ReportItems?.Any() == true ? info.ReportItems.Max(x => IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
 	}
 
 	public ulong GetIdFromModName(string fileName)

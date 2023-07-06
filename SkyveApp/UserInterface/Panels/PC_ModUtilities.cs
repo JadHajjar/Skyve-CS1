@@ -1,8 +1,5 @@
-﻿using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
-
-using SlickControls;
 
 using System.Drawing;
 using System.IO;
@@ -147,7 +144,7 @@ public partial class PC_ModUtilities : PanelContent
 
 				if (ulong.TryParse(collectionId, out var steamId))
 				{
-					var contents = await _workshopService.GetPackageAsync(new GenericPackageIdentity( steamId));
+					var contents = await _workshopService.GetPackageAsync(new GenericPackageIdentity(steamId));
 
 					if (contents?.Requirements?.Any() ?? false)
 					{

@@ -2,8 +2,6 @@
 using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
 
-using SlickControls;
-
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
@@ -145,7 +143,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 			if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
 			{
 				item.Item.Color = null;
-				_profileManager.Save((item.Item as ICustomPlayset)!);
+				_profileManager.Save(item.Item!);
 			}
 			else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is ICustomPlayset profile)
 			{
@@ -162,7 +160,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		if (item.Rectangles.Favorite.Contains(e.Location) && !ReadOnly)
 		{
 			item.Item.IsFavorite = !item.Item.IsFavorite;
-			_profileManager.Save((item.Item as ICustomPlayset)!);
+			_profileManager.Save(item.Item!);
 		}
 		else if (item.Rectangles.Load.Contains(e.Location))
 		{
@@ -172,7 +170,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 			}
 			else
 			{
-				LoadProfile?.Invoke((item.Item as ICustomPlayset)!);
+				LoadProfile?.Invoke(item.Item!);
 			}
 		}
 		else if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
@@ -181,9 +179,9 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		}
 		else if (item.Rectangles.Folder.Contains(e.Location) && !ReadOnly)
 		{
-			PlatformUtil.OpenFolder(_profileManager.GetFileName((item.Item as ICustomPlayset)!));
+			PlatformUtil.OpenFolder(_profileManager.GetFileName(item.Item!));
 		}
-		else if (item.Rectangles.Author.Contains(e.Location)&& item.Item.Author is not  null)
+		else if (item.Rectangles.Author.Contains(e.Location) && item.Item.Author is not null)
 		{
 			Program.MainForm.PushPanel(new PC_UserPage(item.Item.Author));
 		}
@@ -239,7 +237,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		}
 
 		item.Color = colorDialog.Color;
-		_profileManager.Save((item as ICustomPlayset)!);
+		_profileManager.Save(item!);
 	}
 
 	private void ShowRightClickMenu(ICustomPlayset item)
@@ -250,10 +248,10 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		{
 			  new (Locale.DownloadPlayset, "I_Import", !local, action: () => DownloadProfile(item))
 			, new (Locale.ViewThisPlaysetsPackages, "I_ViewFile", action: () => ShowProfileContents(item))
-			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item as ICustomPlayset); })
+			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); })
 			, new (Locale.ChangePlaysetColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
-			, new (Locale.CreateShortcutPlayset, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut((item as ICustomPlayset)!))
-			, new (Locale.OpenPlaysetFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName((item as ICustomPlayset)!)))
+			, new (Locale.CreateShortcutPlayset, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut(item!))
+			, new (Locale.OpenPlaysetFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item!)))
 			, new (string.Empty, show: local)
 			, new (Locale.SharePlayset, "I_Share", local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item, action: async () => await ShareProfile(item))
 			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && item.Author == _userService.User.Id, action: async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as IOnlinePlayset)!, !item.Public))
@@ -261,11 +259,11 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 			, new (Locale.UpdatePlayset, "I_Refresh", local && item.ProfileId != 0 && item.Author != _userService.User.Id, action: () => DownloadProfile(item))
 			, new (Locale.CopyPlaysetLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
 			, new (string.Empty, show: local)
-			, new (Locale.PlaysetReplace, "I_Import", local, action: () => LoadProfile?.Invoke((item as ICustomPlayset)!))
-			, new (Locale.PlaysetMerge, "I_Merge", local, action: () => MergeProfile?.Invoke((item as ICustomPlayset)!))
-			, new (Locale.PlaysetExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke((item as ICustomPlayset)!))
+			, new (Locale.PlaysetReplace, "I_Import", local, action: () => LoadProfile?.Invoke(item!))
+			, new (Locale.PlaysetMerge, "I_Merge", local, action: () => MergeProfile?.Invoke(item!))
+			, new (Locale.PlaysetExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke(item!))
 			, new (string.Empty)
-			, new (Locale.PlaysetDelete, "I_Disposable", local || item.Author == _userService.User.Id, action: async () => { if(local) { DisposeProfile?.Invoke((item as ICustomPlayset)!); } else if(await ServiceCenter.Get<IOnlinePlaysetUtil>().DeleteOnlinePlayset((item as IOnlinePlayset)!)) { base.Remove(item); } })
+			, new (Locale.PlaysetDelete, "I_Disposable", local || item.Author == _userService.User.Id, action: async () => { if(local) { DisposeProfile?.Invoke(item!); } else if(await ServiceCenter.Get<IOnlinePlaysetUtil>().DeleteOnlinePlayset((item as IOnlinePlayset)!)) { base.Remove(item); } })
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
@@ -275,7 +273,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 	{
 		Loading = true;
 		downloading = item;
-		await ServiceCenter.Get<IOnlinePlaysetUtil>().Share((item as ICustomPlayset)!);
+		await ServiceCenter.Get<IOnlinePlaysetUtil>().Share(item!);
 		downloading = null;
 		Loading = false;
 	}

@@ -1,12 +1,6 @@
 ﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain;
 using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.CompatibilityReport;
-using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
-
-using SlickControls;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -29,7 +23,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		SeparateWithLines = true;
 		AllowDrop = true;
 
-		ServiceCenter.Get(out  _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _bulkUtil, out _settings);
+		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _bulkUtil, out _settings);
 	}
 
 	protected override void UIChanged()
@@ -311,7 +305,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		var color = Message.Status.Notification.GetColor().MergeColor(BackColor, 60);
 		var ClientRectangle = e.ClipRectangle.Pad((int)(275 * UI.FontScale), 0, 0, 0);
 		var iconRect = ClientRectangle.Align(icon.Size, ContentAlignment.TopLeft).Pad(0, 0, -pad * 2, -pad * 2);
-		var messageSize = e.Graphics.Measure(Message.Message, UI.Font(7.5F), ClientRectangle.Width - iconRect.Width - (pad * 2) - (Message.Packages?.Any()==true ? (int)(200 * UI.FontScale) : 0));
+		var messageSize = e.Graphics.Measure(Message.Message, UI.Font(7.5F), ClientRectangle.Width - iconRect.Width - (pad * 2) - (Message.Packages?.Any() == true ? (int)(200 * UI.FontScale) : 0));
 		var noteSize = e.Graphics.Measure(note, UI.Font(6.75F), ClientRectangle.Width - iconRect.Width - (pad * 2) - (Message.Packages?.Any() == true ? (int)(200 * UI.FontScale) : 0));
 		var y = (int)(messageSize.Height + noteSize.Height + (noteSize.Height == 0 ? 0 : pad * 2));
 		using var brush = new SolidBrush(color);
@@ -360,7 +354,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			var buttonIcon = IconManager.GetIcon(allIcon);
 			var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, allText, UI.Font(8.25F), UI.Scale(new Padding(4), UI.FontScale));
 
-			rects.allButtonRect = ClientRectangle.Pad(Padding.Left, y, 0, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages?.Any()==true ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
+			rects.allButtonRect = ClientRectangle.Pad(Padding.Left, y, 0, 0).Pad(iconRect.Width + pad, pad, 0, 0).Align(buttonSize, Message.Packages?.Any() == true ? ContentAlignment.TopCenter : ContentAlignment.TopLeft);
 
 			SlickButton.DrawButton(e, rects.allButtonRect, allText, UI.Font(8.25F), buttonIcon, UI.Scale(new Padding(4), UI.FontScale), rects.allButtonRect.Contains(cursor) ? HoverState & ~HoverState.Focused : HoverState.Normal, colorStyle);
 
@@ -374,7 +368,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		e.Graphics.DrawImage(icon.Color(color.GetTextColor()), iconRect.CenterR(icon.Size));
 
-		if (Message.Packages?.Any()==true)
+		if (Message.Packages?.Any() == true)
 		{
 			var isDlc = Message.Type == ReportType.DlcMissing;
 			var rect = ClientRectangle.Align(new Size((int)(200 * UI.FontScale), 0), ContentAlignment.TopRight);
@@ -688,7 +682,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		}
 		else
 		{
-			_packageUtil.SetIncluded(p, true);	
+			_packageUtil.SetIncluded(p, true);
 			_packageUtil.SetEnabled(p, true);
 		}
 
@@ -703,13 +697,13 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 						if (pp is not null)
 						{
-			_packageUtil.SetIncluded(pp, false);	
+							_packageUtil.SetIncluded(pp, false);
 						}
 					}
 				}
 				break;
 			case StatusAction.Switch:
-			_packageUtil.SetIncluded(info.Package.LocalParentPackage!, false);	
+				_packageUtil.SetIncluded(info.Package.LocalParentPackage!, false);
 				break;
 		}
 	}

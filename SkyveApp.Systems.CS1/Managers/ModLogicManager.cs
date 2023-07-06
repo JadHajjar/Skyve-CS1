@@ -66,7 +66,7 @@ internal class ModLogicManager : IModLogicManager
 
 		foreach (var modItem in list)
 		{
-			if (modItem != mod && modUtil.IsIncluded(mod) && modUtil.IsEnabled(mod))
+			if (modItem != mod && modUtil.IsIncluded(modItem) && modUtil.IsEnabled(modItem))
 			{
 				return false;
 			}

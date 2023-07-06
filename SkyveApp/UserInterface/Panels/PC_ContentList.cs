@@ -63,7 +63,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			TLP_Main.SetColumnSpan(P_FiltersContainer, 4);
 		}
 
-		OT_Workshop.Visible = !((_profileManager.CurrentPlayset as Playset)?.LaunchSettings.NoWorkshop??false);
+		OT_Workshop.Visible = !((_profileManager.CurrentPlayset as Playset)?.LaunchSettings.NoWorkshop ?? false);
 		OT_ModAsset.Visible = this is not PC_Assets and not PC_Mods;
 
 		LC_Items.FilterRequested += FilterChanged;
@@ -543,7 +543,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (DD_Profile.SelectedItem is not null && !DD_Profile.SelectedItem.Temporary)
 		{
-			return !_profileManager.IsPackageIncludedInPlayset(item, DD_Profile .SelectedItem);
+			return !_profileManager.IsPackageIncludedInPlayset(item, DD_Profile.SelectedItem);
 		}
 
 		if (!searchEmpty)
@@ -788,7 +788,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			return;
 		}
 
-		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x=>(IPackageIdentity)x.Item));
+		ServiceCenter.Get<ISubscriptionsManager>().Subscribe(steamIds.Select(x => (IPackageIdentity)x.Item));
 		LC_Items.Invalidate();
 		I_Actions.Invalidate();
 	}

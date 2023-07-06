@@ -1,12 +1,8 @@
-﻿using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Systems.Compatibility;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Lists;
-
-using SlickControls;
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -22,6 +18,7 @@ public partial class PC_PackagePage : PanelContent
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly ISettings _settings;
+
 	public IPackage Package { get; }
 
 	public PC_PackagePage(IPackage package)
@@ -157,8 +154,8 @@ public partial class PC_PackagePage : PanelContent
 		if (!(sender as TagControl)!.TagInfo!.IsCustom)
 		{
 			return;
-		} 
-		
+		}
+
 		(sender as TagControl)!.Dispose();
 
 		ServiceCenter.Get<ITagsService>().SetTags(Package, FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo!.IsCustom ? x.TagInfo.Value?.Replace(' ', '-') : null)!);
@@ -173,7 +170,7 @@ public partial class PC_PackagePage : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		var cr =_compatibilityManager.GetPackageInfo( Package);
+		var cr = _compatibilityManager.GetPackageInfo(Package);
 
 		if (cr is null)
 		{

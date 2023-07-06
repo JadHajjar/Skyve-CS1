@@ -1,8 +1,6 @@
 ﻿using SkyveApp.Domain.CS1.Enums;
 using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
 using System.Drawing;
 using System.Windows.Forms;
 

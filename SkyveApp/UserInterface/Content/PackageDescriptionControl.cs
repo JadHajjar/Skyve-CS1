@@ -1,11 +1,6 @@
-﻿using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
-
-using SlickControls;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -34,7 +29,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		PackagePage = page;
 		Package = package;
 
-		var workshopInfo=Package.GetWorkshopInfo();
+		var workshopInfo = Package.GetWorkshopInfo();
 
 		if (!string.IsNullOrWhiteSpace(workshopInfo?.Author?.AvatarUrl))
 		{
@@ -154,8 +149,11 @@ internal class PackageDescriptionControl : SlickImageControl
 		{
 			var date = Package.GetWorkshopInfo()?.ServerTime ?? Package.LocalParentPackage?.LocalTime;
 
-			if(date.HasValue)
-			Clipboard.SetText(date.Value.ToLocalTime().ToString("g"));
+			if (date.HasValue)
+			{
+				Clipboard.SetText(date.Value.ToLocalTime().ToString("g"));
+			}
+
 			return;
 		}
 
@@ -324,7 +322,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		var labelRect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding);
 
 		var isVersion = package?.Mod is not null && !package.IsBuiltIn;
-		var versionText = isVersion ? "v" + package!.Mod!.Version.GetString() : package?.IsBuiltIn ?? false ? Locale.Vanilla : (package?.LocalSize.SizeString()??string.Empty);
+		var versionText = isVersion ? "v" + package!.Mod!.Version.GetString() : package?.IsBuiltIn ?? false ? Locale.Vanilla : (package?.LocalSize.SizeString() ?? string.Empty);
 
 		rects.VersionRect = DrawLabel(e, versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.TopLeft, isVersion);
 		labelRect.X += Padding.Left + rects.VersionRect.Width;
@@ -382,7 +380,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		{
 			rects.SteamRect = rects.FolderRect;
 
-			if (!string.IsNullOrEmpty(Package.LocalParentPackage!.Folder))
+			if (!string.IsNullOrEmpty(Package.LocalParentPackage?.Folder))
 			{
 				rects.SteamRect.X -= rects.FolderRect.Width + Padding.Left;
 			}
@@ -429,7 +427,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		rects!.TextRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(Size.Ceiling(textSize), ContentAlignment.BottomLeft);
 
 		var partialIncluded = false;
-		var isIncluded = package is not null&& (_packageUtil.IsIncluded(package, out partialIncluded) || partialIncluded);
+		var isIncluded = package is not null && (_packageUtil.IsIncluded(package, out partialIncluded) || partialIncluded);
 
 		if (mod && _settings.UserSettings.AdvancedIncludeEnable)
 		{

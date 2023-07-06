@@ -1,8 +1,6 @@
 ﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 
-using SlickControls;
-
 using System.Drawing;
 using System.Windows.Forms;
 

@@ -32,7 +32,28 @@ public class PackageUtil : IPackageUtil
 
 	public bool IsIncluded(ILocalPackage localPackage)
 	{
-		return IsIncluded(localPackage, out _);
+		if (localPackage is ILocalPackageWithContents packageWithContents)
+		{
+			if (packageWithContents.Mod is not null)
+			{
+				if (!_modUtil.IsIncluded(packageWithContents.Mod))
+				{
+					return false;
+				}
+			}
+
+			foreach (var item in packageWithContents.Assets)
+			{
+				if (!_assetUtil.IsIncluded(item))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return localPackage is IMod mod ? _modUtil.IsIncluded(mod) : localPackage is IAsset asset && _assetUtil.IsIncluded(asset);
 	}
 
 	public bool IsIncluded(ILocalPackage localPackage, out bool partiallyIncluded)

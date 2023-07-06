@@ -1,8 +1,5 @@
-﻿using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Generic;
-
-using SlickControls;
 
 using System.Drawing;
 using System.IO;

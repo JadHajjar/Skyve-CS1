@@ -1,5 +1,4 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;

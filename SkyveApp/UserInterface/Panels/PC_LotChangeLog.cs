@@ -1,6 +1,4 @@
-﻿using SlickControls;
-
-using System.Reflection;
+﻿using System.Reflection;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
