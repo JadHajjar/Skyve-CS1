@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
+using SkyveApp.Domain.Systems;
 
 namespace SkyveApp.Systems.Compatibility.Domain.Api;
 
@@ -30,22 +31,20 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 	[DynamicSqlProperty(ColumnName = nameof(Packages)), System.Text.Json.Serialization.JsonIgnore]
 	public string? PackageList { get => Packages is null ? null : string.Join(',', Packages); set => Packages = value?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(ulong.Parse).ToArray(); }
 #else
-	//public NotificationType Notification
-	//{
-	//	get
-	//	{
-	//		var type = Type is InteractionType.OptionalPackages && ServiceCenter.Get<ISettings>().SessionSettings.UserSettings.TreatOptionalAsRequired
-	//			? NotificationType.MissingDependency
-	//			: CRNAttribute.GetNotification(Type);
-	//		var action = CRNAttribute.GetNotification(Action);
+	public NotificationType Notification
+	{
+		get
+		{
+			var type = Type is InteractionType.OptionalPackages && ServiceCenter.Get<ISettings>().UserSettings.TreatOptionalAsRequired
+				? NotificationType.MissingDependency
+				: CRNAttribute.GetNotification(Type);
+			var action = CRNAttribute.GetNotification(Action);
 
-	//		return type > action ? type : action;
-	//	}
-	//}
+			return type > action ? type : action;
+		}
+	}
 
 	public int IntType { get => (int)Type; set => Type = (InteractionType)value; }
-	StatusAction IGenericPackageStatus.Action { get; set; }
-	NotificationType IGenericPackageStatus.Notification { get; }
 #endif
 
 	public PackageInteraction()

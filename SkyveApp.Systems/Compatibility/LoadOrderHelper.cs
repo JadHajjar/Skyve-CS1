@@ -3,22 +3,23 @@
 using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SkyveApp.Systems.Compatibility;
 internal class LoadOrderHelper : ILoadOrderHelper
 {
-	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly CompatibilityManager _compatibilityManager;
 	private readonly IModLogicManager _modLogicManager;
+	private readonly CompatibilityHelper _compatibilityHelper;
 	private readonly IPackageManager _packageManager;
 
-	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager, IModLogicManager modLogicManager)
+	public LoadOrderHelper(IPackageManager packageManager, ICompatibilityManager compatibilityManager, IModLogicManager modLogicManager, IPackageUtil packageUtil, IPackageNameUtil packageNameUtil, IWorkshopService workshopService, ILocale locale)
 	{
 		_packageManager = packageManager;
-		_compatibilityManager = compatibilityManager;
+		_compatibilityManager = (CompatibilityManager)compatibilityManager;
 		_modLogicManager = modLogicManager;
+		_compatibilityHelper = new CompatibilityHelper(_compatibilityManager, packageManager, packageUtil, packageNameUtil, workshopService, locale);
 	}
 
 	private List<ModInfo> GetEntities()
@@ -29,16 +30,12 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		{
 			var info = _compatibilityManager.GetPackageInfo(mod);
 
-			if (info == null || !(info.Interactions?.Any(x => x.Type == SkyveApp.Domain.Enums.InteractionType.RequiredPackages) ?? false))
-			{
-				entities.Add(new ModInfo(mod,new IMod[0]));
+			var interaction = info?.Interactions?.FirstOrDefault(x => x.Type == SkyveApp.Domain.Enums.InteractionType.RequiredPackages);
+			var loadOrder = info?.Interactions?.FirstOrDefault(x => x.Type == SkyveApp.Domain.Enums.InteractionType.LoadAfter);
 
-				continue;
-			}
-
-			var interaction = info.Interactions.First(x => x.Type == SkyveApp.Domain.Enums.InteractionType.RequiredPackages);
-
-			entities.Add(new ModInfo(mod, interaction.Packages.SelectWhereNotNull(x => _packageManager.GetPackageById(new GenericPackageIdentity(x))?.Mod).ToArray()!));
+			entities.Add(new ModInfo(mod
+				, (interaction?.Packages.SelectWhereNotNull(x => (IPackageIdentity)new GenericPackageIdentity(x)).ToArray() ?? new IPackageIdentity[0])!
+				, (loadOrder?.Packages.SelectWhereNotNull(x => (IPackageIdentity)new GenericPackageIdentity(x)).ToArray() ?? new IPackageIdentity[0])!));
 		}
 
 		return entities;
@@ -48,59 +45,93 @@ internal class LoadOrderHelper : ILoadOrderHelper
 	{
 		var entities = GetEntities();
 
-		// Create a dictionary to map each mod to its required mods
-		var modEntityMap = entities.ToDictionary(x => x.Mod);
-
-		// Populate the requiredModMap
 		foreach (var entity in entities)
 		{
 			foreach (var item in entity.RequiredMods)
 			{
-				Increment(modEntityMap, modEntityMap[item]);
+				Increment(entities, item, entity.Mod);
+			}
+		}
+
+		foreach (var entity in entities)
+		{
+			if (entity.LoadAfterMods.Length > 0)
+			{
+				entity.Order = entity.LoadAfterMods.SelectMany(x => GetEntity(x.Id, entities, entity.Mod)).Min(x => x.Order) - 1;
 			}
 		}
 
 		return entities.OrderByDescending(x => x.Order).Select(x => x.Mod);
 	}
 
-	private void Increment(Dictionary<IMod, ModInfo> modEntityMap, ModInfo entity)
+	private void Increment(List<ModInfo> modEntityMap, IPackageIdentity identity, IPackageIdentity original)
 	{
-		entity.Order++;
-
-		foreach (var item in entity.RequiredMods)
+		foreach (var entity in GetEntity(identity.Id, modEntityMap, original))
 		{
-			Increment(modEntityMap, modEntityMap[item]);
+			entity.Order += 100;
+
+			foreach (var item in entity.RequiredMods)
+			{
+				Increment(modEntityMap, item, identity);
+			}
 		}
 	}
 
-	private void Visit(IMod mod, Dictionary<IMod, HashSet<IMod>> requiredModMap, HashSet<IMod> visited, List<IMod> orderedMods)
+	private IEnumerable<ModInfo> GetEntity(ulong steamId, List<ModInfo> modEntityMap, IPackageIdentity original)
 	{
-		if (!visited.Contains(mod))
-		{
-			visited.Add(mod);
+		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
-			if (requiredModMap.ContainsKey(mod))
+		foreach (var item in modEntityMap.Where(x => x.Mod.Id == steamId))
+		{
+			yield return item;
+		}
+
+		if (indexedPackage is null)
+		{
+			yield break;
+		}
+
+		foreach (var item in indexedPackage.Group)
+		{
+			if (item.Key != steamId)
 			{
-				foreach (var requiredMod in requiredModMap[mod])
+				foreach (var package in _compatibilityHelper.FindPackage(item.Value, true))
 				{
-					Visit(requiredMod, requiredModMap, visited, orderedMods);
+					if (original.Id != package.Id)
+					{
+						foreach (var entity in modEntityMap.Where(x => x.Mod.Id == package.Id))
+						{
+							yield return entity;
+						}
+					}
 				}
 			}
+		}
 
-			orderedMods.Add(mod);
+		foreach (var package in _compatibilityHelper.FindPackage(indexedPackage, true))
+		{
+			if (original.Id != package.Id)
+			{
+				foreach (var entity in modEntityMap.Where(x => x.Mod.Id == package.Id))
+				{
+					yield return entity;
+				}
+			}
 		}
 	}
 
 	private class ModInfo
 	{
-		public IMod Mod;
 		public int Order;
-		public IMod[] RequiredMods;
+		public IMod Mod;
+		public IPackageIdentity[] RequiredMods;
+		public IPackageIdentity[] LoadAfterMods;
 
-		public ModInfo(IMod mod, IMod[] requiredMods)
+		public ModInfo(IMod mod, IPackageIdentity[] requiredMods, IPackageIdentity[] afterLoadMods)
 		{
 			Mod = mod;
 			RequiredMods = requiredMods;
+			LoadAfterMods = afterLoadMods;
 		}
 	}
 }

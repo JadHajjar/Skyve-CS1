@@ -439,7 +439,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public IPackageCompatibilityInfo? GetPackageInfo(IPackageIdentity package)
 	{
-		return _compatibilityHelper.GetPackageData(package)?.Package;
+		return _compatibilityHelper.GetPackageData(package);
 	}
 
 	public NotificationType GetNotification(ICompatibilityInfo info)

@@ -67,17 +67,18 @@ public class CustomTagsLibrary
 		}
 	}
 
-	public void Deserialize()
+	public static CustomTagsLibrary Deserialize()
 	{
 		try
 		{
-			assetTags.Clear();
+			var instance = new CustomTagsLibrary();
+			instance.assetTags.Clear();
 
 			var path = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, filename);
 
 			if (!CrossIO.FileExists(path))
 			{
-				return;
+				return new();
 			}
 
 			TagEntry[] tagsEntries;
@@ -90,12 +91,16 @@ public class CustomTagsLibrary
 
 			for (var i = 0; i < tagsEntries.Length; i++)
 			{
-				assetTags[tagsEntries[i].key] = tagsEntries[i].value;
+				instance.assetTags[tagsEntries[i].key] = tagsEntries[i].value;
 			}
+
+			return instance;
 		}
 		catch (Exception e)
 		{
 			ServiceCenter.Get<ILogger>().Exception(e, "Couldn't load custom find-it tags");
 		}
+
+		return new();
 	}
 }

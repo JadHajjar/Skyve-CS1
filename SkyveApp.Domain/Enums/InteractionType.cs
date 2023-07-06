@@ -29,6 +29,9 @@ public enum InteractionType
 	[CRN(NotificationType.None, new[] { StatusAction.SubscribeToPackages, StatusAction.NoAction })]
 	OptionalPackages = 8,
 
+	[CRN(NotificationType.None, new[] { StatusAction.NoAction })]
+	LoadAfter = 9,
+
 	/***********************************/
 
 	[CRN(NotificationType.Switch, false)]
@@ -36,5 +39,4 @@ public enum InteractionType
 
 	[CRN(NotificationType.AttentionRequired, false)]
 	Identical,
-	LoadOrderRequires
 }

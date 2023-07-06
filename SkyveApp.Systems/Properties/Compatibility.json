@@ -42,6 +42,7 @@
   "MusicCanBeCopyrighted": "Included music may be copyrighted",
   "IncompleteDescription": "Incomplete Description",
   "Successor": "Successor of ..",
+  "LoadAfter": "Load After ..",
   "Alternative": "Alternative To ..",
   "SameFunctionality": "Same Functionality As ..",
   "RequirementAlternative": "Requirement Alternative To ..",

@@ -575,7 +575,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			}
 		}
 
-		foreach (var item in e.Item.GetTags(PackagePage).Distinct(x => x.Value))
+		foreach (var item in e.Item.GetTags(PackagePage))
 		{
 			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 

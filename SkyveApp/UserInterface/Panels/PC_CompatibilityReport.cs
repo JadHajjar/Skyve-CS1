@@ -76,7 +76,7 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			var packages = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
 
-			packages.RemoveAll(x => x.GetNotification() < NotificationType.Unsubscribe && !x.Package.IsIncluded());
+			packages.RemoveAll(x => x.GetNotification() < NotificationType.Unsubscribe && !(x.Package?.IsIncluded() == true));
 
 			this.TryInvoke(() => { LoadReport(packages); PB_Loader.Dispose(); });
 		}

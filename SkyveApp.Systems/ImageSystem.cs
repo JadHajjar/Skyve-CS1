@@ -65,9 +65,9 @@ internal class ImageSystem : IImageService
 		return image is not null ? new(image) : null;
 	}
 
-	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null)
+	public async Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true)
 	{
-		if (url is null || !await Ensure(url, localOnly, fileName))
+		if (url is null || !await Ensure(url, localOnly, fileName, square))
 		{
 			return null;
 		}

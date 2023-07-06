@@ -99,7 +99,7 @@ public class CompatibilityHelper
 	{
 		var type = interaction.Interaction.Type;
 
-		if (type is InteractionType.Successor or InteractionType.RequirementAlternative)
+		if (type is InteractionType.Successor or InteractionType.RequirementAlternative or InteractionType.LoadAfter)
 		{
 			return;
 		}
@@ -281,9 +281,9 @@ public class CompatibilityHelper
 		var workshopItem = _workshopService.GetInfo(new GenericPackageIdentity(steamId));
 
 		return (workshopItem is not null && (_compatibilityManager.IsBlacklisted(workshopItem) || workshopItem.IsRemoved))
-|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
-&& (package.Package.Stability is PackageStability.Broken
-|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
+			|| (_compatibilityManager.CompatibilityData.Packages.TryGetValue(steamId, out var package)
+			&& (package.Package.Stability is PackageStability.Broken
+			|| (package.Package.Statuses?.Any(x => x.Type is StatusType.Deprecated) ?? false)));
 	}
 
 	public IndexedPackage? GetPackageData(IPackageIdentity identity)
@@ -307,7 +307,7 @@ public class CompatibilityHelper
 		return null;
 	}
 
-	private IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
+	internal IEnumerable<ILocalPackage> FindPackage(IndexedPackage package, bool withSuccessors)
 	{
 		var localPackage = _contentManager.GetPackageById(new GenericPackageIdentity(package.Package.SteamId));
 

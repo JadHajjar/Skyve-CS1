@@ -4,6 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
 
+#if SkyveApp
+using Extensions;
+#endif
+
 namespace SkyveShared;
 
 public class DlcConfig
@@ -11,7 +15,6 @@ public class DlcConfig
 	public const string FILE_NAME = "DlcConfig.xml";
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
 
-	public List<uint> AvailableDLCs { get; set; } = new() { 2148900, 2224691, 2224690, 2148902, 2225940, 2225941, 2148901, 2148903, 2148904, 2144480, 2144481, 2144482, 2144483, 2008400, 1992290, 1992291, 1992293, 1992292, 1726380, 1726382, 1726381, 1726384, 1726383, 1531471, 1531470, 1531473, 1531472, 1146930, 1148022, 1196100, 1148020, 1148021, 944071, 1059820, 1065491, 1065490, 715194, 944070, 715191, 614580, 547502, 515191, 420610, 369150, 715190, 547500, 515190, 815380, 715193, 614581, 614582, 547501, 346791, 715192, 456200, 563850 };
 	public List<uint> RemovedDLCs { get; set; } = new();
 
 	public void Serialize()
@@ -41,10 +44,9 @@ public class ModConfig
 
 	[EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
 	public List<SavedModInfo> SavedModsInfo { get; set; } = new();
-#if SkyveApp
 	public Dictionary<string, ModInfo> GetModsInfo()
 	{
-		var dictionary = new Dictionary<string, ModInfo>(new Extensions.PathEqualityComparer());
+		var dictionary = new Dictionary<string, ModInfo>(new PathEqualityComparer());
 
 		foreach (var item in SavedModsInfo)
 		{
@@ -53,6 +55,7 @@ public class ModConfig
 
 		return dictionary;
 	}
+#if SkyveApp
 	public void SetModsInfo(Dictionary<string, ModInfo> value)
 	{
 		var list = new List<SavedModInfo>();
@@ -129,6 +132,40 @@ public class AssetConfig
 	}
 }
 
+public class SkyveConfig
+{
+	public const string FILE_NAME = "SkyveConfig.xml";
+
+	public bool HidePanels { get; set; }
+	public bool FastContentManager { get; set; } = true;
+	public bool LogAssetLoadingTimes { get; set; } = true;
+	public bool LogPerModAssetLoadingTimes { get; set; } 
+	public bool LogPerModOnCreatedTimes { get; set; }
+	public bool IgnoranceIsBliss { get; set; }
+	public bool UGCCache { get; set; } = true;
+
+	public float StatusX { get; set; } = 1000;
+	public float StatusY { get; set; } = 10;
+
+	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
+
+	public void Serialize()
+	{
+		SharedUtil.Serialize(this, FilePath);
+	}
+
+	public static SkyveConfig Deserialize()
+	{
+		try
+		{
+			return SharedUtil.Deserialize<SkyveConfig>(FilePath);
+		}
+		catch { }
+
+		return null;
+	}
+}
+
 [XmlRoot("SkyveConfig")]
 public class SkyveConfigOld
 {
@@ -149,9 +186,6 @@ public class SkyveConfigOld
 	public bool LogPerModOnCreatedTimes = false;
 	public bool IgnoranceIsBliss = false; // turn off steam warnings.
 	public bool UGCCache = true;
-
-	public float StatusX = 1000;
-	public float StatusY = 10;
 
 	//public ModInfo[] Mods = new ModInfo[0];
 	public AssetInfo[] Assets { get; set; } = new AssetInfo[0];

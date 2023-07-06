@@ -10,5 +10,5 @@ public interface IImageService
 	FileInfo File(string url, string? fileName = null);
 	Bitmap? GetCache(string key);
 	Task<Bitmap?> GetImage(string? url);
-	Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null);
+	Task<Bitmap?> GetImage(string? url, bool localOnly, string? fileName = null, bool square = true);
 }

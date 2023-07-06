@@ -1,14 +1,16 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Systems.Compatibility.Domain.Api;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SkyveApp.Systems.Compatibility.Domain;
 
-public class IndexedPackage
+public class IndexedPackage : IPackageCompatibilityInfo
 {
 	public CompatibilityPackageData Package { get; }
 	public Dictionary<ulong, IndexedPackage> Group { get; }
@@ -199,4 +201,21 @@ public class IndexedPackage
 	{
 		return Package.SteamId.GetHashCode();
 	}
+
+	#region IPackageCompatibilityInfo
+	public string? Name => ((IPackageCompatibilityInfo)Package).Name;
+	public string? FileName => ((IPackageCompatibilityInfo)Package).FileName;
+	public ulong AuthorId => ((IPackageCompatibilityInfo)Package).AuthorId;
+	public string? Note => ((IPackageCompatibilityInfo)Package).Note;
+	public DateTime ReviewDate => ((IPackageCompatibilityInfo)Package).ReviewDate;
+	public PackageStability Stability => ((IPackageCompatibilityInfo)Package).Stability;
+	public PackageUsage Usage => ((IPackageCompatibilityInfo)Package).Usage;
+	public PackageType Type => ((IPackageCompatibilityInfo)Package).Type;
+	public uint[]? RequiredDLCs => ((IPackageCompatibilityInfo)Package).RequiredDLCs;
+	public List<string>? Tags => ((IPackageCompatibilityInfo)Package).Tags;
+	public List<ILink>? Links => ((IPackageCompatibilityInfo)Package).Links;
+	List<IPackageStatus<InteractionType>>? IPackageCompatibilityInfo.Interactions { get => ((IPackageCompatibilityInfo)Package).Interactions; set => ((IPackageCompatibilityInfo)Package).Interactions = value; }
+	List<IPackageStatus<StatusType>>? IPackageCompatibilityInfo.Statuses { get => ((IPackageCompatibilityInfo)Package).Statuses; set => ((IPackageCompatibilityInfo)Package).Statuses = value; }
+	Dictionary<ulong, IPackageCompatibilityInfo> IPackageCompatibilityInfo.Group => Group.ToDictionary(x => x.Key, x => (IPackageCompatibilityInfo)x.Value);
+	#endregion
 }

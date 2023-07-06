@@ -26,14 +26,16 @@ internal class ModsUtil : IModUtil
 	private readonly MacAssemblyUtil _macAssemblyUtil;
 	private readonly IModLogicManager _modLogicManager;
 	private readonly INotifier _notifier;
+	private readonly ISettings _settings;
 
-	public ModsUtil(IModLogicManager modLogicManager, INotifier notifier, ColossalOrderUtil colossalOrderUtil, AssemblyUtil assemblyUtil, MacAssemblyUtil macAssemblyUtil)
+	public ModsUtil(IModLogicManager modLogicManager, INotifier notifier, ColossalOrderUtil colossalOrderUtil, AssemblyUtil assemblyUtil, MacAssemblyUtil macAssemblyUtil, ISettings settings)
 	{
 		_assemblyUtil = assemblyUtil;
 		_modLogicManager = modLogicManager;
 		_colossalOrderUtil = colossalOrderUtil;
 		_macAssemblyUtil = macAssemblyUtil;
 		_notifier = notifier;
+		_settings = settings;
 
 		_notifier.CompatibilityDataLoaded += BuildLoadOrder;
 
@@ -90,6 +92,11 @@ internal class ModsUtil : IModUtil
 		modInfo.Excluded = !value;
 
 		_modConfigInfo[mod.Folder] = modInfo;
+
+		if (!_settings.UserSettings.AdvancedIncludeEnable)
+		{
+			_colossalOrderUtil.SetEnabled(mod, value);
+		}
 
 		_notifier.OnInclusionUpdated();
 		_notifier.TriggerAutoSave();

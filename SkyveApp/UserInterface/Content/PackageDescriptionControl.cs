@@ -356,7 +356,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		labelRect.X += DrawScore(e, true, rects, labelRect);
 
-		foreach (var item in Package.GetTags().Distinct(x => x.Value))
+		foreach (var item in Package.GetTags())
 		{
 			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 

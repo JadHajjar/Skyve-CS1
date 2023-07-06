@@ -37,9 +37,6 @@ internal class VersionUpdateService : IVersionUpdateService
 			ServiceCenter.Get<IDlcManager>()
 				.SetExcludedDlcs(oldConfig.RemovedDLCs);
 
-			ServiceCenter.Get<IDlcManager, DlcManager>()
-				.SetAvailableDlcs(oldConfig.AvailableDLCs);
-
 			var excludedPackages = new List<IMod>();
 
 			foreach (var item in content)

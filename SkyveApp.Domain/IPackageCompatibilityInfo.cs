@@ -19,4 +19,5 @@ public interface IPackageCompatibilityInfo
 	List<ILink>? Links { get; }
 	List<IPackageStatus<InteractionType>>? Interactions { get; set; }
 	List<IPackageStatus<StatusType>>? Statuses { get; set; }
+	Dictionary<ulong, IPackageCompatibilityInfo> Group { get; }
 }

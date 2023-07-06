@@ -31,7 +31,7 @@ internal class DlcManager : IDlcManager
 
     public bool IsAvailable(uint dlcId)
 	{
-		return _config.AvailableDLCs.Contains(dlcId);
+		return SteamUtil.IsDlcInstalledLocally(dlcId);
 	}
 
 	public bool IsIncluded(IDlcInfo dlc)
@@ -63,11 +63,5 @@ internal class DlcManager : IDlcManager
 	public List<uint> GetExcludedDlcs()
 	{
 		return new(_config.RemovedDLCs);
-	}
-
-	internal void SetAvailableDlcs(uint[] availableDLCs)
-	{
-		_config.AvailableDLCs = availableDLCs.ToList();
-		_config.Serialize();
 	}
 }

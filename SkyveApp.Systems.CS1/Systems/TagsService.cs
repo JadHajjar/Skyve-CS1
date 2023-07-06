@@ -24,8 +24,6 @@ internal class TagsService : ITagsService
 
 	private readonly IWorkshopService _workshopService;
 
-	private CustomTagsLibrary _findItTags;
-
 	public TagsService(INotifier notifier, IWorkshopService workshopService)
 	{
 		_assetTagsDictionary = new(new PathEqualityComparer());
@@ -34,8 +32,7 @@ internal class TagsService : ITagsService
 		_workshopService = workshopService;
 		_assetTags = new HashSet<string>();
 		_workshopTags = new HashSet<string>();
-		_findItTags = new();
-		_findItTags.Deserialize();
+		var findItTags =  CustomTagsLibrary.Deserialize();
 
 		var csCache = CSCache.Deserialize();
 
@@ -106,10 +103,12 @@ internal class TagsService : ITagsService
 			assetDictionary[(asset.IsLocal ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_')] = asset;
 		}
 
-		foreach (var kvp in _findItTags.assetTags)
+		foreach (var kvp in CustomTagsLibrary.Deserialize().assetTags)
 		{
 			if (assetDictionary.TryGetValue(kvp.Key.RemoveDoubleSpaces().Replace(' ', '_'), out var asset))
 			{
+				_customTagsDictionary[asset.FilePath] = (_customTagsDictionary.TryGet(asset.FilePath) ?? new string[0]).Concat(kvp.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)).Distinct().ToArray();
+
 				foreach (var item in kvp.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
 				{
 					if (!_tagsCache.ContainsKey(item))
@@ -159,14 +158,15 @@ internal class TagsService : ITagsService
 			}
 		}
 
-		foreach (var item in _findItTags.assetTags)
+		foreach (var kvp in _customTagsDictionary)
 		{
-			foreach (var tag in item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+			foreach (var item in kvp.Value)
 			{
-				if (!returned.Contains(tag))
+				if (!returned.Contains(item))
 				{
-					returned.Add(tag);
-					yield return new TagItem(Domain.CS1.Enums.TagSource.FindIt, tag);
+					returned.Add(item);
+
+					yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
 				}
 			}
 		}
@@ -174,13 +174,31 @@ internal class TagsService : ITagsService
 
 	public IEnumerable<ITag> GetTags(IPackage package, bool ignoreParent = false)
 	{
+		var returned = new List<string>();
+	
+		if (package.GetWorkshopInfo()?.Tags is string[] workshopTags)
+		{
+			foreach (var item in workshopTags)
+			{
+				if (!returned.Contains(item))
+				{
+					returned.Add(item);
+					yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item);
+				}
+			}
+		}
+
 		if (package is IAsset asset)
 		{
 			if (_assetTagsDictionary.TryGetValue(asset.FilePath, out var assetTags))
 			{
 				foreach (var item in assetTags)
 				{
-					yield return new TagItem(Domain.CS1.Enums.TagSource.InGame, item);
+					if (!returned.Contains(item))
+					{
+						returned.Add(item);
+						yield return new TagItem(Domain.CS1.Enums.TagSource.InGame, item);
+					}
 				}
 			}
 
@@ -188,36 +206,23 @@ internal class TagsService : ITagsService
 			{
 				foreach (var item in customTags)
 				{
-					yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
+					if (!returned.Contains(item))
+					{
+						returned.Add(item);
+						yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
+					}
 				}
 			}
-
-			//var key = (asset.IsLocal ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_');
-
-			//foreach (var item in _findItTags.assetTags)
-			//{
-			//	if (item.Key.RemoveDoubleSpaces().Replace(' ', '_').Equals(key.RemoveDoubleSpaces().Replace(' ', '_'), StringComparison.CurrentCultureIgnoreCase))
-			//	{
-			//		foreach (var tag in item.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
-			//		{
-			//			yield return new TagItem(Domain.CS1.Enums.TagSource.FindIt, tag);
-			//		}
-			//	}
-			//}
 		}
 		else if (package.LocalParentPackage is ILocalPackageWithContents lp && _customTagsDictionary.TryGetValue(lp.Folder, out var customTags))
 		{
 			foreach (var item in customTags)
 			{
-				yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
-			}
-		}
-
-		if (package.GetWorkshopInfo()?.Tags is string[] workshopTags)
-		{
-			foreach (var item in workshopTags)
-			{
-				yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item);
+				if (!returned.Contains(item))
+				{
+					returned.Add(item);
+					yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
+				}
 			}
 		}
 	}
@@ -226,9 +231,7 @@ internal class TagsService : ITagsService
 	{
 		if (package is IAsset asset)
 		{
-			var newTags = new CustomTagsLibrary();
-
-			newTags.Deserialize();
+			var newTags = CustomTagsLibrary.Deserialize();
 
 			var found = false;
 			var tag = value.WhereNotEmpty().ListStrings(" ");
@@ -250,8 +253,7 @@ internal class TagsService : ITagsService
 				newTags.assetTags[key] = tag.Trim();
 			}
 
-			_findItTags = newTags;
-			_findItTags.Serialize();
+			newTags.Serialize();
 
 			_customTagsDictionary[asset.FilePath] = value.WhereNotEmpty().ToArray();
 

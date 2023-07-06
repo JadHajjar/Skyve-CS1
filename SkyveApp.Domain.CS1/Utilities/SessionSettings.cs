@@ -18,9 +18,9 @@ public class SessionSettings : ISave, ISessionSettings
 	public bool CleanupFirstTimeShown { get; set; }
 	public bool FpsBoosterLogWarning { get; set; }
 	public string? LastVersionNotification { get; set; }
+	public int LastVersioningNumber { get; set; }
 
 	public UserSettings UserSettings { get; set; } = new();
-	public int LastVersioningNumber { get; set; }
 
 	void ISessionSettings.Save()
 	{

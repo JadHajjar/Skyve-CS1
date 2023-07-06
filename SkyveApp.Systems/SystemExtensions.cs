@@ -86,7 +86,7 @@ public static class SystemExtensions
 
 	public static Bitmap? GetThumbnail(this IDlcInfo? dlc)
 	{
-		return dlc?.ThumbnailUrl is null or "" ? null : ImageService.GetImage(dlc.ThumbnailUrl, true).Result;
+		return dlc?.ThumbnailUrl is null or "" ? null : ImageService.GetImage(dlc.ThumbnailUrl, true, $"{dlc.Id}.png", false).Result;
 	}
 
 	public static IEnumerable<ITag> GetTags(this IPackage package, bool ignoreParent = false)

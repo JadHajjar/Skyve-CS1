@@ -52,10 +52,7 @@ internal class UserService : IUserService
 
 		try
 		{
-			if (ConnectionHandler.IsConnected)
-			{
-				_user.Manager = await ServiceCenter.Get<SkyveApiUtil>().IsCommunityManager();
-			}
+			_user.Manager = await ServiceCenter.Get<SkyveApiUtil>().IsCommunityManager();
 		}
 		catch
 		{

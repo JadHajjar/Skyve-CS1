@@ -1,7 +1,6 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Utilities;
 
@@ -199,7 +198,7 @@ internal class CentralManager : ICentralManager
 				{
 					if (!_modUtil.IsEnabled(package.Mod) && _modUtil.IsIncluded(package.Mod))
 					{
-						_modUtil .SetIncluded(package.Mod, false);
+						_modUtil.SetIncluded(package.Mod, false);
 					}
 				}
 

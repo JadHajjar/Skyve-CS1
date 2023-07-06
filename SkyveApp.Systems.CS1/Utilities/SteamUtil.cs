@@ -73,7 +73,7 @@ public static class SteamUtil
 		return steamId == 0 ? null : await _workshopItemProcessor.Get(steamId, true);
 	}
 
-	public static void Download(IEnumerable<IPackage> packages)
+	public static void Download(IEnumerable<IPackageIdentity> packages)
 	{
 		var currentPath = ServiceCenter.Get<IIOUtil>().ToRealPath(Path.GetDirectoryName(Application.StartupPath));
 
@@ -91,7 +91,7 @@ public static class SteamUtil
 
 		Download(packages.Select(x => x.Id));
 	}
-
+	
 	public static void Download(IEnumerable<ulong> ids)
 	{
 		try

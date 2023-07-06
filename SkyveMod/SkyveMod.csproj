@@ -53,11 +53,6 @@
 		</ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
-		<Compile Include="..\SkyveApp\Domain\Utilities\SubscriptionTransfer.cs" Link="Shared\SubscriptionTransfer.cs" />
-		<Compile Include="..\SkyveApp\Domain\Utilities\DelayedAction.cs" Link="Shared\DelayedAction.cs" />
-		<Compile Include="..\SkyveApp\Legacy\DLC.cs" Link="Shared\DLC.cs" />
-	</ItemGroup>
-	<ItemGroup>
 		<Compile Remove="KianCommons\KianCommons\Backport\**" />
 		<Compile Remove="KianCommons\KianCommons\Math\**" />
 		<Compile Remove="KianCommons\KianCommons\ObjUnity3D\**" />

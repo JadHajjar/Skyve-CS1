@@ -122,13 +122,6 @@ public class PackageUtil : IPackageUtil
 		if (localPackage is ILocalPackageWithContents localPackageWithContents)
 		{
 			_bulkUtil.SetBulkIncluded(new[] { localPackage }, value);
-
-			if (!_settings.UserSettings.AdvancedIncludeEnable && localPackageWithContents.Mod is not null)
-			{
-				_modUtil.SetEnabled(localPackageWithContents.Mod, value);
-
-				return;
-			}
 		}
 
 		if (localPackage is IMod mod)
@@ -138,12 +131,6 @@ public class PackageUtil : IPackageUtil
 			if (_settings.UserSettings.LinkModAssets && mod.LocalParentPackage!.Assets.Any())
 			{
 				_bulkUtil.SetBulkIncluded(mod.LocalParentPackage!.Assets, value);
-			}
-
-			if (!_settings.UserSettings.AdvancedIncludeEnable)
-			{
-				_modUtil.SetEnabled(mod, value);
-				return;
 			}
 		}
 

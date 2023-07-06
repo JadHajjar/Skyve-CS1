@@ -1,22 +1,28 @@
 using ColossalFramework;
 using ColossalFramework.IO;
 using ColossalFramework.PlatformServices;
+
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+
 using Patch.API;
+
 using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+
 using static SkyveIPatch.Commons;
+
 using ILogger = Patch.API.ILogger;
 
-namespace SkyveIPatch.Patches {
-    extern alias Injections;
-    using SteamUtilities = Injections.SkyveInjections.SteamUtilities;
-    using CMPatchHeleprs = Injections.SkyveInjections.CMPatchHelpers;
+namespace SkyveIPatch.Patches
+{
+	extern alias Injections;
+	using SteamUtilities = Injections.SkyveInjections.SteamUtilities;
+	using CMPatchHeleprs = Injections.SkyveInjections.CMPatchHelpers;
 
-    public class CMPatch : IPatch {
+	public class CMPatch : IPatch {
         public int PatchOrderAsc { get; } = 100;
         public AssemblyToPatch PatchTarget { get; } = new AssemblyToPatch("ColossalManaged", new Version(0, 3, 0, 0));
         private ILogger logger_;
