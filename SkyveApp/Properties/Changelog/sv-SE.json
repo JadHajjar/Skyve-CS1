@@ -474,7 +474,7 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "Online-profiler, kommer snart!",
         "ChangeGroups": [
             {
                 "Name": "Onlineprofiler",
@@ -500,17 +500,17 @@
             {
                 "Name": "Nyheter & uppdateringar",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
+                    "Lade till en ny användarprofilsida, genom att klicka på författaren till en mod eller profil. Den här sidan innehåller alla användarens profiler och paket.",
+                    "Raderingar i Skyve kommer nu att skicka filerna till papperskorgen i Windows.",
+                    "Lade till 6 nya återställningsknappar på verktygssidan.",
+                    "Lade till 2 nya knappar på Hjälp & Loggar sidan.",
+                    "Kompatibilitet & paketstatus visas nu till höger i listan.",
+                    "Trasiga, inkompatibla och förbjudna paket har nu en ny bakgrund i listan.",
                     "Lokala mods namn och etikett har uppdaterats.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
+                    "Saknad källkod kommer nu att generera en varning istället för ett meddelande om avprenumeration.",
+                    "Nödvändiga mods har nu ett annat UI för att låta dig veta att du inte kan utesluta dem.",
+                    "Lade till en inställning i spelet för att aktivera hot-reload för moddar & tillgångar.",
+                    "Förbättrad prestanda för att inkludera/exkludera paket.",
                     "Lade till ungerska språket"
                 ]
             }
@@ -523,12 +523,12 @@
             {
                 "Name": "Ändringar",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "Lade till ett alternativ för att ignorera internetanslutningskontroller.",
+                    "Lade till en indikator på att en profil laddas upp.",
+                    "Lade till en knapp för att enkelt visa innehållet i en profil online.",
+                    "Fixade ett fel vid hämtning av Steam-användarinformation.",
+                    "Uppstartsinställningarna för Fixed Asset Editor blir inte korrekt ihågkomna.",
+                    "Fixade att uppdatera en online-profil inte fungerar korrekt."
                 ]
             }
         ]
@@ -540,10 +540,10 @@
             {
                 "Name": "Ändringar",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "Lade till en animation vid visning av en profils innehåll.",
+                    "Fixade att ladda ner eller uppdatera en profil inte korrekt sparar vissa data såsom miniatyrbilden.",
+                    "Fixade att privata paket markeras som .",
+                    "Fixade att vissa delar av UI inte blir översatt från början."
                 ]
             }
         ]
@@ -553,11 +553,11 @@
         "Date": "2023-06-21",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Korrigeringar",
                 "Changes": [
-                    "Fixes an error caused by including/excluding mods that have contain assets.",
-                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-                    "Fixed some packages not showing their successor properly."
+                    "Fixar ett fel som orsakas vid inkludering/exkludering av moddar som innehåller tillgångar.",
+                    "Fixade åtgärdsknappen till höger om kompatibilitetslistan som inte är klickbar.",
+                    "Fixade några paket som inte visar sin ersättare ordentligt."
                 ]
             }
         ]
