@@ -402,13 +402,6 @@ public static class SteamUtil
 		ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 
 		DLCsLoaded?.Invoke();
-
-		foreach (var dlc in Dlcs)
-		{
-			await ServiceCenter.Get<IImageService>().Ensure(dlc.ThumbnailUrl, false, $"{dlc.Id}.png", false);
-
-			DLCsLoaded?.Invoke();
-		}
 	}
 
 	public static void ClearCache()
@@ -418,6 +411,7 @@ public static class SteamUtil
 
 		try
 		{
+			Dlcs = new();
 			CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE));
 		}
 		catch (Exception ex)

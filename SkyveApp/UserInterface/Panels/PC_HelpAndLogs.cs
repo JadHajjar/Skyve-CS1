@@ -36,6 +36,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
+			B_SaveZip.ButtonType = ButtonType.Active;
 			B_CopyLogFile.Visible = B_CopyZip.Visible = B_LotLogCopy.Visible = false;
 		}
 	}
