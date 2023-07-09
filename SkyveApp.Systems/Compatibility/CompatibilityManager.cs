@@ -146,7 +146,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 					if (dic is not null)
 					{
-						File.WriteAllText("../../../Properties/CompatibilityNotes.json", Newtonsoft.Json.JsonConvert.SerializeObject(dic, Newtonsoft.Json.Formatting.Indented));
+						File.WriteAllText("../../../../SkyveApp.Systems/Properties/CompatibilityNotes.json", Newtonsoft.Json.JsonConvert.SerializeObject(dic, Newtonsoft.Json.Formatting.Indented));
 					}
 				}
 #endif

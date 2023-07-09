@@ -98,6 +98,10 @@
     "One": "'{0}' is succeeded by '{1}'.",
     "Plural": "'{0}' is succeeded by either one of the following packages."
   },
+  "Interaction_LoadAfter": {
+    "One": "'{0}' will load directly after '{1}'.",
+    "Plural": "'{0}' will load directly after the following packages."
+  },
   "Interaction_Identical": "These are multiple versions of the same package.\r\n\r\nYou should choose only one of them.",
   "Status_Succeeded": "'{0}' is succeeded by '{1}'.\r\n\r\nYou are already using '{1}' so there is no need for '{0}' anymore.",
   "Status_Deprecated": "'{0}' is deprecated, it is no longer supported by its author.",

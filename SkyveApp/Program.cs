@@ -96,12 +96,6 @@ internal static class Program
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
-			if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
-			{
-				MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OK, PromptIcons.Hand);
-				return;
-			}
-
 			if (CommandUtil.NoWindow)
 			{
 				ServiceCenter.Get<ILogger>().Info("[Console] Running without UI window");
@@ -114,13 +108,22 @@ internal static class Program
 			LocaleCR.Load();
 			LocaleSlickUI.Load();
 
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+
 			if (OSVersion.Version.Major == 6)
 			{
 				SetProcessDPIAware();
 			}
 
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
+			if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
+			{
+				if (MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OKIgnore, PromptIcons.Hand) == DialogResult.OK)
+				{
+					return;
+				}
+			}
+
 			Application.Run(SystemsProgram.MainForm = MainForm = new MainForm());
 		}
 		catch (Exception ex)

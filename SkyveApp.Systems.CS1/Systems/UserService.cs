@@ -52,7 +52,7 @@ internal class UserService : IUserService
 
 		try
 		{
-			_user.Manager = await ServiceCenter.Get<SkyveApiUtil>().IsCommunityManager();
+		//	_user.Manager = await ServiceCenter.Get<SkyveApiUtil>().IsCommunityManager();
 		}
 		catch
 		{
@@ -70,5 +70,15 @@ internal class UserService : IUserService
 		public string ProfileUrl { get; set; } = "";
 		public string AvatarUrl { get; set; } = "";
 		public object? Id { get; set; }
+
+		public override bool Equals(object? obj)
+		{
+			return obj is IUser user && (Id?.Equals(user.Id) ?? false);
+		}
+
+		public override int GetHashCode()
+		{
+			return 2139390487 + Id?.GetHashCode()??0;
+		}
 	}
 }

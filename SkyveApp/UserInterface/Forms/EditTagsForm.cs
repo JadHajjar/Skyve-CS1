@@ -8,17 +8,21 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Forms;
 public partial class EditTagsForm : BaseForm
 {
-	public IPackage Package { get; }
+	public List<ILocalPackage> Packages { get; }
 
-	public EditTagsForm(IPackage package)
+	public EditTagsForm(IEnumerable<ILocalPackage> packages)
 	{
 		InitializeComponent();
 
-		Package = package;
+		Packages = packages.ToList();
 		Text = LocaleHelper.GetGlobalText("Tags");
 
-		foreach (var link in package.GetTags().Where(x => x.IsCustom))
-		{ AddTag(link); }
+		foreach (var link in Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value))
+		{
+			AddTag(link);
+		}
+
+		//L_MultipleWarning.Visible = Packages.Count > 1;
 	}
 
 	protected override void UIChanged()
@@ -67,7 +71,10 @@ public partial class EditTagsForm : BaseForm
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
 		DialogResult = DialogResult.OK;
-		ServiceCenter.Get<ITagsService>().SetTags(Package, GetLinks());
+		foreach (var package in Packages)
+		{
+			ServiceCenter.Get<ITagsService>().SetTags(package, GetLinks()!);
+		}
 		Close();
 		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
 	}

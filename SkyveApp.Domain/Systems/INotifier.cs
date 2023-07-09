@@ -29,7 +29,7 @@ public interface INotifier
 	void OnWorkshopInfoUpdated();
 	void OnPlaysetUpdated();
 	void OnPlaysetChanged();
-	void OnRefreshUI();
+	void OnRefreshUI(bool now = false);
 	void OnCompatibilityReportProcessed();
 	void OnLoggerFailed(Exception ex);
 	void OnWorkshopPackagesInfoLoaded();

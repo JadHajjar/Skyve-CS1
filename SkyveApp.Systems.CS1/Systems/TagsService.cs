@@ -4,6 +4,7 @@ using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
+using SkyveApp.Systems.CS1.Utilities;
 
 using SkyveShared;
 
@@ -24,7 +25,7 @@ internal class TagsService : ITagsService
 
 	private readonly IWorkshopService _workshopService;
 
-	public TagsService(INotifier notifier, IWorkshopService workshopService)
+	public TagsService(INotifier notifier, IWorkshopService workshopService, IAssetUtil assetUtil)
 	{
 		_assetTagsDictionary = new(new PathEqualityComparer());
 		_customTagsDictionary = new(new PathEqualityComparer());
@@ -32,17 +33,17 @@ internal class TagsService : ITagsService
 		_workshopService = workshopService;
 		_assetTags = new HashSet<string>();
 		_workshopTags = new HashSet<string>();
-		var findItTags =  CustomTagsLibrary.Deserialize();
+		var findItTags = CustomTagsLibrary.Deserialize();
 
-		var csCache = CSCache.Deserialize();
+		var csCache = AssetInfoCache.Deserialize();
 
 		if (csCache is not null)
 		{
-			foreach (var asset in csCache.Assets)
+			foreach (var asset in (assetUtil as AssetsUtil)!.AssetInfoCache)
 			{
-				_assetTagsDictionary[asset.IncludedPath] = asset.Tags;
+				_assetTagsDictionary[asset.Key] = asset.Value.Tags;
 
-				foreach (var tag in asset.Tags)
+				foreach (var tag in asset.Value.Tags)
 				{
 					_assetTags.Add(tag);
 				}
@@ -100,12 +101,12 @@ internal class TagsService : ITagsService
 
 		foreach (var asset in ServiceCenter.Get<IPackageManager>().Assets)
 		{
-			assetDictionary[(asset.IsLocal ? "" : $"{asset.Id}.") + Path.GetFileNameWithoutExtension(asset.FilePath).RemoveDoubleSpaces().Replace(' ', '_')] = asset;
+			assetDictionary[(asset as Asset)!.FullName] = asset;
 		}
 
 		foreach (var kvp in CustomTagsLibrary.Deserialize().assetTags)
 		{
-			if (assetDictionary.TryGetValue(kvp.Key.RemoveDoubleSpaces().Replace(' ', '_'), out var asset))
+			if (assetDictionary.TryGetValue(kvp.Key, out var asset))
 			{
 				_customTagsDictionary[asset.FilePath] = (_customTagsDictionary.TryGet(asset.FilePath) ?? new string[0]).Concat(kvp.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)).Distinct().ToArray();
 
@@ -175,7 +176,7 @@ internal class TagsService : ITagsService
 	public IEnumerable<ITag> GetTags(IPackage package, bool ignoreParent = false)
 	{
 		var returned = new List<string>();
-	
+
 		if (package.GetWorkshopInfo()?.Tags is string[] workshopTags)
 		{
 			foreach (var item in workshopTags)

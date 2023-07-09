@@ -10,12 +10,12 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.CompatibilityReport;
 public partial class IPackageStatusControl<T, TBase> : SlickControl where T : struct, Enum where TBase : IPackageStatus<T>, new()
 {
-	private readonly PackageStatusTypeDropDown<T> typeDropDown;
+	internal readonly PackageStatusTypeDropDown<T> typeDropDown;
 
 	public event EventHandler? ValuesChanged;
 	public IPackage? CurrentPackage { get; }
 
-	public IPackageStatusControl(IPackage? currentPackage, TBase? item = default)
+	public IPackageStatusControl(IPackage? currentPackage, TBase? item = default, bool restricted = false)
 	{
 		InitializeComponent();
 
@@ -23,7 +23,7 @@ public partial class IPackageStatusControl<T, TBase> : SlickControl where T : st
 		L_LinkedPackages.Text = LocaleCR.LinkedPackages;
 		L_OutputTitle.Text = LocaleCR.OutputText;
 
-		typeDropDown = new()
+		typeDropDown = new(restricted)
 		{
 			Dock = DockStyle.Top,
 			Text = typeof(T).Name,

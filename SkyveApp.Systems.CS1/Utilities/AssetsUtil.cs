@@ -19,7 +19,7 @@ internal class AssetsUtil : IAssetUtil
 	private Dictionary<string, IAsset> assetIndex = new();
 
 	public HashSet<string> ExcludedHashSet { get; }
-	public Dictionary<string, CSCache.Asset> AssetInfoCache { get; }
+	public Dictionary<string, AssetInfoCache.Asset> AssetInfoCache { get; }
 
 	private readonly IPackageManager _contentManager;
 	private readonly INotifier _notifier;
@@ -29,15 +29,15 @@ internal class AssetsUtil : IAssetUtil
 		_contentManager = contentManager;
 		_notifier = notifier;
 
-		AssetInfoCache = new(StringComparer.InvariantCultureIgnoreCase);
+		AssetInfoCache = new(new PathEqualityComparer());
 
-		var assets = CSCache.Deserialize()?.Assets;
+		var assets = SkyveShared.AssetInfoCache.Deserialize().Assets;
 
 		if (assets is not null)
 		{
-			for (var i = 0; i < assets.Length; i++)
+			foreach (var item in assets)
 			{
-				AssetInfoCache[assets[i].IncludedPath] = assets[i];
+				AssetInfoCache[item.Path] = item;
 			}
 		}
 

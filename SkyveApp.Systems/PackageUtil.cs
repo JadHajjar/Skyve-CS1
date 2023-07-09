@@ -156,15 +156,10 @@ public class PackageUtil : IPackageUtil
 	public DownloadStatus GetStatus(IPackage mod, out string reason)
 	{
 		var workshopInfo = mod.GetWorkshopInfo();
+		var localPackage = mod.LocalParentPackage;
 
 		if (workshopInfo is null)
 		{
-			if (mod.LocalParentPackage?.IsLocal ?? false)
-			{
-				reason = string.Empty;
-				return DownloadStatus.None;
-			}
-
 			reason = string.Empty;
 			return DownloadStatus.None;
 		}
@@ -181,25 +176,28 @@ public class PackageUtil : IPackageUtil
 			return DownloadStatus.Unknown;
 		}
 
-		var updatedServer = workshopInfo.ServerTime;
-		var updatedLocal = mod.LocalParentPackage?.LocalTime ?? DateTime.MinValue;
-		var sizeServer = workshopInfo.ServerSize;
-		var localSize = mod.LocalParentPackage?.LocalSize ?? 0;
-
-		if (updatedLocal < updatedServer)
+		if (localPackage is not null)
 		{
-			var certain = updatedLocal < updatedServer.AddHours(-24);
+			var updatedServer = workshopInfo.ServerTime;
+			var updatedLocal = localPackage.LocalTime;
+			var sizeServer = workshopInfo.ServerSize;
+			var localSize = localPackage.LocalSize;
 
-			reason = certain
-				? _locale.Get("PackageIsOutOfDate").Format(_packageUtil.CleanName(mod), (updatedServer - updatedLocal).ToReadableString(true))
-				: _locale.Get("PackageIsMaybeOutOfDate").Format(_packageUtil.CleanName(mod), updatedServer.ToLocalTime().ToRelatedString(true));
-			return DownloadStatus.OutOfDate;
-		}
+			if (updatedLocal < updatedServer)
+			{
+				var certain = updatedLocal < updatedServer.AddHours(-24);
 
-		if (localSize < sizeServer && sizeServer > 0)
-		{
-			reason = _locale.Get("PackageIsIncomplete").Format(_packageUtil.CleanName(mod), localSize.SizeString(), sizeServer.SizeString());
-			return DownloadStatus.PartiallyDownloaded;
+				reason = certain
+					? _locale.Get("PackageIsOutOfDate").Format(_packageUtil.CleanName(mod), (updatedServer - updatedLocal).ToReadableString(true))
+					: _locale.Get("PackageIsMaybeOutOfDate").Format(_packageUtil.CleanName(mod), updatedServer.ToLocalTime().ToRelatedString(true));
+				return DownloadStatus.OutOfDate;
+			}
+
+			if (localSize < sizeServer && sizeServer > 0)
+			{
+				reason = _locale.Get("PackageIsIncomplete").Format(_packageUtil.CleanName(mod), localSize.SizeString(), sizeServer.SizeString());
+				return DownloadStatus.PartiallyDownloaded;
+			}
 		}
 
 		reason = string.Empty;

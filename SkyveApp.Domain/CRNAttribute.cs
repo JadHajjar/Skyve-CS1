@@ -10,6 +10,7 @@ public class CRNAttribute : Attribute // Compatibility Report Notification (CRN)
 	public NotificationType Notification { get; }
 	public StatusAction[] ValidActions { get; }
 	public bool Browsable { get; }
+	public ChangeType AllowedChange { get; set; }
 
 	public CRNAttribute(NotificationType notification, bool browsable = true)
 	{
@@ -37,5 +38,12 @@ public class CRNAttribute : Attribute // Compatibility Report Notification (CRN)
 		var crnAttribute = (CRNAttribute?)memberInfo.GetCustomAttributes(typeof(CRNAttribute), false).FirstOrDefault();
 
 		return crnAttribute ?? throw new ArgumentException($"Enum value {enumValue} is missing CRN attribute");
+	}
+
+	public enum ChangeType
+	{
+		Allow,
+		CanAdd,
+		Deny
 	}
 }

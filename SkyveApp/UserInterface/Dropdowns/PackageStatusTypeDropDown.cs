@@ -8,13 +8,20 @@ namespace SkyveApp.UserInterface.Dropdowns;
 
 internal class PackageStatusTypeDropDown<T> : SlickSelectionDropDown<T> where T : struct, Enum
 {
+	private readonly bool _restricted;
+
+	public PackageStatusTypeDropDown(bool restricted)
+	{
+		_restricted = restricted;
+	}
+
 	protected override void OnHandleCreated(EventArgs e)
 	{
 		base.OnHandleCreated(e);
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(T)).Cast<T>().Where(x => CRNAttribute.GetAttribute(x).Browsable).ToArray();
+			Items = Enum.GetValues(typeof(T)).Cast<T>().Where(x => CRNAttribute.GetAttribute(x).Browsable && (!_restricted || CRNAttribute.GetAttribute(x).AllowedChange != CRNAttribute.ChangeType.Deny)).ToArray();
 		}
 	}
 

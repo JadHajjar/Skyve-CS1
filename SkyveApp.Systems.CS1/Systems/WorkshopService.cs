@@ -34,7 +34,7 @@ internal class WorkshopService : IWorkshopService
 		return await SteamUtil.GetItemAsync(identity.Id);
 	}
 
-	public IPackage? GetPackage(IPackageIdentity identity)
+	public IPackage GetPackage(IPackageIdentity identity)
 	{
 		var info = GetInfo(identity);
 
@@ -43,10 +43,10 @@ internal class WorkshopService : IWorkshopService
 			return new WorkshopPackage(info);
 		}
 
-		return null;
+		return new GenericWorkshopPackage(identity);
 	}
 
-	public async Task<IPackage?> GetPackageAsync(IPackageIdentity identity)
+	public async Task<IPackage> GetPackageAsync(IPackageIdentity identity)
 	{
 		var info = await GetInfoAsync(identity);
 
@@ -55,7 +55,7 @@ internal class WorkshopService : IWorkshopService
 			return new WorkshopPackage(info);
 		}
 
-		return null;
+		return new GenericWorkshopPackage(identity);
 	}
 
 	public IUser? GetUser(object userId)

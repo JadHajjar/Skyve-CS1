@@ -145,7 +145,7 @@ public class Playset : ICustomPlayset
 	{
 		private string? _name;
 
-		public string Name { get => ToString(); set => _name = value; }
+		[JsonIgnore] public string Name { get => ToString(); protected set => _name = value; }
 		public string? RelativePath { get; set; }
 		public ulong SteamId { get; set; }
 

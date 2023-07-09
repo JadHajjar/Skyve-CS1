@@ -162,7 +162,6 @@ public class LoadOrderProfile
 				profile.Assets.Add(new Playset.Asset
 				{
 					SteamId = rgx.Success ? ulong.Parse(rgx.Groups[1].Value) : 0,
-					Name = asset.DisplayText ?? string.Empty,
 					RelativePath = asset.IncludedPath
 				});
 			}
@@ -175,7 +174,6 @@ public class LoadOrderProfile
 				var rgx = Regex.Match(mod.IncludedPath, Regex.Escape(WS_CONTENT_PATH) + "[\\\\/](\\d{8,20})[\\\\/]?");
 				profile.Mods.Add(new Playset.Mod
 				{
-					Name = mod.DisplayText ?? string.Empty,
 					SteamId = rgx.Success ? ulong.Parse(rgx.Groups[1].Value) : 0,
 					RelativePath = mod.IncludedPath,
 					Enabled = mod.IsEnabled

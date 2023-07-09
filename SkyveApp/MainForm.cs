@@ -1,8 +1,8 @@
 ﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
 
+using System.Configuration;
 using System.Drawing;
-using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -18,6 +18,7 @@ public partial class MainForm : BasePanelForm
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly ICitiesManager _citiesManager = ServiceCenter.Get<ICitiesManager>();
 	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public MainForm()
 	{
@@ -37,15 +38,27 @@ public partial class MainForm : BasePanelForm
 #endif
 
 		try
-		{ FormDesign.Initialize(this, DesignChanged); }
+		{
+			FormDesign.Initialize(this, DesignChanged);
+		}
 		catch { }
 
 		try
 		{
-			SetPanel<PC_MainPage>(PI_Dashboard);
+
+			if (!_settings.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
+			{
+				SetPanel<PC_Options>(PI_Options);
+			}
+			else
+			{
+				SetPanel<PC_MainPage>(PI_Dashboard);
+			}
 		}
 		catch (Exception ex)
-		{ OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this)); }
+		{
+			OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this));
+		}
 
 		new BackgroundAction("Loading content", ServiceCenter.Get<ICentralManager>().Start).Run();
 
@@ -66,12 +79,16 @@ public partial class MainForm : BasePanelForm
 
 		_startTimeoutTimer.Elapsed += StartTimeoutTimer_Elapsed;
 
+		_notifier.RefreshUI += () => this.TryInvoke(() => Invalidate(true));
+
 		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
 
-		if (File.Exists(CrossIO.Combine(Program.CurrentDirectory, "batch.bat")))
+		if (CrossIO.FileExists(CrossIO.Combine(Program.CurrentDirectory, "batch.bat")))
 		{
 			try
-			{ CrossIO.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "batch.bat")); }
+			{
+				CrossIO.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "batch.bat"));
+			}
 			catch { }
 		}
 

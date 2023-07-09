@@ -46,7 +46,7 @@ partial class EditTagsForm
 			this.base_P_Content.AutoScroll = true;
 			this.base_P_Content.Controls.Add(this.tableLayoutPanel1);
 			this.base_P_Content.Location = new System.Drawing.Point(1, 43);
-			this.base_P_Content.Size = new System.Drawing.Size(367, 345);
+			this.base_P_Content.Size = new System.Drawing.Size(652, 506);
 			// 
 			// base_P_Controls
 			// 
@@ -57,11 +57,11 @@ partial class EditTagsForm
 			// base_P_Top_Spacer
 			// 
 			this.base_P_Top_Spacer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-			this.base_P_Top_Spacer.Size = new System.Drawing.Size(367, 6);
+			this.base_P_Top_Spacer.Size = new System.Drawing.Size(652, 6);
 			// 
 			// base_P_Container
 			// 
-			this.base_P_Container.Size = new System.Drawing.Size(369, 389);
+			this.base_P_Container.Size = new System.Drawing.Size(654, 550);
 			// 
 			// tableLayoutPanel1
 			// 
@@ -75,7 +75,7 @@ partial class EditTagsForm
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(367, 345);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(652, 506);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// B_Apply
@@ -85,7 +85,7 @@ partial class EditTagsForm
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon1.Name = "I_Ok";
 			this.B_Apply.ImageName = dynamicIcon1;
-			this.B_Apply.Location = new System.Drawing.Point(245, 312);
+			this.B_Apply.Location = new System.Drawing.Point(530, 473);
 			this.B_Apply.Name = "B_Apply";
 			this.B_Apply.Size = new System.Drawing.Size(119, 30);
 			this.B_Apply.SpaceTriggersClick = true;
@@ -99,7 +99,7 @@ partial class EditTagsForm
 			this.FLP_Tags.Dock = System.Windows.Forms.DockStyle.Top;
 			this.FLP_Tags.Location = new System.Drawing.Point(3, 3);
 			this.FLP_Tags.Name = "FLP_Tags";
-			this.FLP_Tags.Size = new System.Drawing.Size(361, 48);
+			this.FLP_Tags.Size = new System.Drawing.Size(646, 48);
 			this.FLP_Tags.TabIndex = 0;
 			// 
 			// addTagControl
@@ -111,12 +111,13 @@ partial class EditTagsForm
 			this.addTagControl.Name = "addTagControl";
 			this.addTagControl.Size = new System.Drawing.Size(104, 42);
 			this.addTagControl.TabIndex = 0;
+			this.addTagControl.TagInfo = null;
 			this.addTagControl.Click += new System.EventHandler(this.B_AddLink_Click);
 			// 
 			// EditTagsForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(343, 268);
+			this.ClientSize = new System.Drawing.Size(665, 561);
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 2560, 1380);
 			this.Name = "EditTagsForm";
 			this.ShowIcon = false;

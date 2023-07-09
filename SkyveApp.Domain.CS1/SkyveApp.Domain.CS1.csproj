@@ -32,7 +32,7 @@
 
 	<ItemGroup>
 		<Compile Include="..\SkyveMod\Shared\SkyveConfig.cs" Link="Shared\SkyveConfig.cs" />
-		<Compile Include="..\SkyveMod\Shared\CSCache.cs" Link="Shared\CSCache.cs" />
+		<Compile Include="..\SkyveMod\Shared\AssetInfoCache.cs" Link="Shared\AssetInfoCache.cs" />
 		<Compile Include="..\SkyveMod\Shared\SharedUtil.cs" Link="Shared\SharedUtil.cs" />
 		<Compile Include="..\SkyveMod\Shared\UGCListTransfer.cs" Link="Shared\UGCListTransfer.cs" />
 		<Compile Include="..\SkyveMod\Shared\BlackListTransfer.cs" Link="Shared\BlackListTransfer.cs" />

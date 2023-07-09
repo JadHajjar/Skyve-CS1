@@ -54,7 +54,7 @@ public static class LsmUtil
 		return path;
 	}
 
-	public static IEnumerable<Playset.Asset> LoadMissingAssets(string obj)
+	public static IEnumerable<IPackageIdentity> LoadMissingAssets(string obj)
 	{
 		var lines = File.ReadAllLines(obj);
 
@@ -65,18 +65,13 @@ public static class LsmUtil
 			if (match.Success)
 			{
 				var steamId = match.Groups[2].Value;
-				var assetName = System.Net.WebUtility.HtmlDecode(match.Groups[3].Value);
 
-				yield return new Playset.Asset
-				{
-					SteamId = ulong.Parse(steamId),
-					Name = assetName
-				};
+				yield return new GenericPackageIdentity(ulong.Parse(steamId));
 			}
 		}
 	}
 
-	public static IEnumerable<Playset.Asset> LoadUnusedAssets(string obj)
+	public static IEnumerable<IPackageIdentity> LoadUnusedAssets(string obj)
 	{
 		var lines = File.ReadAllLines(obj);
 
@@ -87,13 +82,8 @@ public static class LsmUtil
 			if (match.Success)
 			{
 				var steamId = match.Groups[2].Value;
-				var assetName = System.Net.WebUtility.HtmlDecode(match.Groups[3].Value);
 
-				yield return new Playset.Asset
-				{
-					SteamId = ulong.Parse(steamId),
-					Name = assetName
-				};
+				yield return new GenericPackageIdentity(ulong.Parse(steamId));
 			}
 		}
 	}

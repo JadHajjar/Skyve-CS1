@@ -55,6 +55,7 @@ internal class BulkUtil : IBulkUtil
 
 		_notifier.BulkUpdating = false;
 
+		_notifier.OnRefreshUI(true);
 		_notifier.OnInformationUpdated();
 		_modUtil.SaveChanges();
 		_assetUtil.SaveChanges();
@@ -78,15 +79,14 @@ internal class BulkUtil : IBulkUtil
 
 	public void SetBulkEnabled(IEnumerable<ILocalPackage> packages, bool value)
 	{
-		_notifier.BulkUpdating = true;
-
 		var modList = packages.ToList();
 
 		if (modList.Count == 0)
 		{
-			_notifier.BulkUpdating = false;
 			return;
 		}
+
+		_notifier.BulkUpdating = true;
 
 		for (var i = 0; i < modList.Count; i++)
 		{
@@ -104,5 +104,12 @@ internal class BulkUtil : IBulkUtil
 				_modUtil.SetEnabled(mod_, value);
 			}
 		}
+
+		_notifier.BulkUpdating = false;
+
+		_notifier.OnRefreshUI(true);
+		_notifier.OnInformationUpdated();
+		_modUtil.SaveChanges();
+		_notifier.TriggerAutoSave();
 	}
 }

@@ -10,8 +10,8 @@ namespace SkyveApp.UserInterface.CompatibilityReport;
 internal class CompatibilityMessageControl : SlickControl
 {
 	private readonly List<ulong> _subscribingTo = new();
-	private readonly Dictionary<IPackageIdentity, Rectangle> _buttonRects = new();
-	private readonly Dictionary<IPackageIdentity, Rectangle> _modRects = new();
+	private readonly Dictionary<IPackage, Rectangle> _buttonRects = new();
+	private readonly Dictionary<IPackage, Rectangle> _modRects = new();
 	private Rectangle allButtonRect;
 	private Rectangle snoozeRect;
 
@@ -148,7 +148,7 @@ internal class CompatibilityMessageControl : SlickControl
 					}
 
 					var dlc = isDlc ? _dlcManager.Dlcs.FirstOrDefault(x => x.Id == packageID.Id) : null;
-					var package = dlc is null ? packageID.GetWorkshopPackage() : null;
+					var package = dlc is null ? packageID : null;
 					var packageThumbnail = dlc?.GetThumbnail() ?? package.GetThumbnail();
 
 					if ((package?.IsLocal ?? false) && packageThumbnail is not null)

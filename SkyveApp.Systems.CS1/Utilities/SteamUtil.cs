@@ -25,7 +25,7 @@ namespace SkyveApp.Systems.CS1.Utilities;
 public static class SteamUtil
 {
 	private const string DLC_CACHE_FILE = "SteamDlcsCache.json";
-	private static readonly CSCache _csCache;
+	private static readonly AssetInfoCache _csCache;
 
 	private static readonly SteamItemProcessor _workshopItemProcessor;
 	private static readonly SteamUserProcessor _steamUserProcessor;
@@ -36,7 +36,7 @@ public static class SteamUtil
 
 	static SteamUtil()
 	{
-		_csCache = CSCache.Deserialize();
+		_csCache = AssetInfoCache.Deserialize();
 
 		ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
 
@@ -127,7 +127,7 @@ public static class SteamUtil
 
 	public static bool IsDlcInstalledLocally(uint dlcId)
 	{
-		return _csCache?.Dlcs?.Contains(dlcId) ?? false;
+		return _csCache?.AvailableDLCs?.Contains(dlcId) ?? false;
 	}
 
 	public static ulong GetLoggedInSteamId()
@@ -208,6 +208,7 @@ public static class SteamUtil
 			("includetags", true),
 			("includechildren", true),
 			("includevotes", true),
+			("appid", 255710)
 		};
 
 		for (var i = 0; i < ids.Count; i++)

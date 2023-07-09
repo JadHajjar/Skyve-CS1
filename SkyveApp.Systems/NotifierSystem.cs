@@ -80,9 +80,16 @@ internal class NotifierSystem : INotifier
 		_delayedAutoSaveRequested.Run();
 	}
 
-	public void OnRefreshUI()
+	public void OnRefreshUI(bool now = false)
 	{
-		_delayedImageLoaded.Run();
+		if (now)
+		{
+			RefreshUI?.Invoke();
+		}
+		else
+		{
+			_delayedImageLoaded.Run();
+		}
 	}
 
 	public void OnPlaysetUpdated()

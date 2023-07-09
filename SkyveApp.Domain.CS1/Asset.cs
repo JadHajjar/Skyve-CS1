@@ -9,7 +9,7 @@ using System.IO;
 namespace SkyveApp.Domain.CS1;
 public class Asset : IAsset
 {
-	public Asset(ILocalPackageWithContents package, string crpPath, SkyveShared.CSCache.Asset? asset)
+	public Asset(ILocalPackageWithContents package, string crpPath, SkyveShared.AssetInfoCache.Asset? asset)
 	{
 		FilePath = crpPath;
 		LocalParentPackage = package;
@@ -20,10 +20,12 @@ public class Asset : IAsset
 		{
 			Name = asset.Name;
 			AssetTags = asset.Tags;
+			FullName = asset.FullName;
 		}
 		else
 		{
 			Name = Path.GetFileNameWithoutExtension(FilePath).FormatWords();
+			FullName = (IsLocal ? "" : $"{Id}.") + Path.GetFileNameWithoutExtension(FilePath).RemoveDoubleSpaces().Replace(' ', '_');
 			AssetTags = new string[0];
 		}
 	}
@@ -34,6 +36,7 @@ public class Asset : IAsset
 	public DateTime LocalTime { get; }
 	public string Name { get; }
 	public string[] AssetTags { get; }
+	public string FullName { get; }
 	public bool IsMod { get; }
 	public string Folder => LocalParentPackage.Folder;
 	public bool IsLocal => LocalParentPackage.IsLocal;

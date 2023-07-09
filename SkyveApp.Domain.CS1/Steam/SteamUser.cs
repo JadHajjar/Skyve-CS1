@@ -32,7 +32,7 @@ public class SteamUser : IUser, ITimestamped
 	public string AvatarUrl { get; set; }
 	public DateTime Timestamp { get; set; }
 
-	[JsonIgnore] public object Id => SteamId;
+	[JsonIgnore] public object? Id => SteamId;
 	[JsonIgnore] public Bitmap? AvatarImage => ServiceCenter.Get<IImageService>().GetImage(AvatarUrl, true).Result;
 
 	public override string ToString()
@@ -42,8 +42,7 @@ public class SteamUser : IUser, ITimestamped
 
 	public override bool Equals(object? obj)
 	{
-		return obj is SteamUser user &&
-			   SteamId == user.SteamId;
+		return obj is IUser user && SteamId.Equals(user.Id);
 	}
 
 	public override int GetHashCode()

@@ -217,7 +217,7 @@ public partial class PC_ModUtilities : PanelContent
 		return Path.GetExtension(arg).ToLower() == ".xml";
 	}
 
-	private bool DD_TextImport_ValidFile(object arg1, string arg2)
+	private bool DD_TextImport_ValidFile(object sender, string arg)
 	{
 		return true;
 	}

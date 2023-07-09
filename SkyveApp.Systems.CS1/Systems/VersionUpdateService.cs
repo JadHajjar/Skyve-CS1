@@ -43,9 +43,9 @@ internal class VersionUpdateService : IVersionUpdateService
 			{
 				if (CrossIO.FileExists(CrossIO.Combine(item.Folder, ".excluded")))
 				{
-					//try
-					//{ CrossIO.DeleteFile(CrossIO.Combine(item.Folder, ".excluded"), true); }
-					//catch { }
+					try
+					{ CrossIO.DeleteFile(CrossIO.Combine(item.Folder, ".excluded"), true); }
+					catch { }
 
 					if (item.Mod is not null)
 					{

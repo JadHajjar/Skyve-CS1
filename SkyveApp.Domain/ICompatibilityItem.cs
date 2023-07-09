@@ -7,5 +7,5 @@ public interface ICompatibilityItem
 	IGenericPackageStatus Status { get; }
 	ReportType Type { get; }
 	string? Message { get; }
-	IPackageIdentity[] Packages { get; }
+	IPackage[] Packages { get; }
 }

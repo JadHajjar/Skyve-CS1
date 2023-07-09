@@ -86,20 +86,15 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void SetManagementButtons()
 	{
-		var hasPackages = _userService.User.Id is not null && _contentManager.Packages.Any(x => x.GetWorkshopInfo()?.Author?.Id == _userService.User.Id);
-		B_Requests.Visible = B_ManageSingle.Visible = B_Manage.Visible = _userService.User.Manager && !_userService.User.Malicious;
-		B_YourPackages.Visible = hasPackages && _userService.User.Verified && !_userService.User.Malicious;
+		var hasPackages = _userService.User.Id is not null && _contentManager.Packages.Any(x => _userService.User.Equals(x.GetWorkshopInfo()?.Author));
+		B_Manage.Visible = B_Requests.Visible = B_ManageSingle.Visible = _userService.User.Manager && !_userService.User.Malicious;
+		B_YourPackages.Visible = hasPackages && !_userService.User.Manager && !_userService.User.Malicious;
 		B_Requests.Text = LocaleCR.ReviewRequests.Format(reviewRequests is null ? string.Empty : $"({reviewRequests.Length})");
 	}
 
 	private void B_Manage_Click(object sender, EventArgs e)
 	{
 		Form.PushPanel(null, new PC_CompatibilityManagement());
-	}
-
-	private void B_YourPackages_Click(object sender, EventArgs e)
-	{
-		Form.PushPanel(null, new PC_CompatibilityManagement(_userService.User));
 	}
 
 	private void B_ManageSingle_Click(object sender, EventArgs e)

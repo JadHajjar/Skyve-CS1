@@ -138,6 +138,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation ShowingFilteredItems => _instance.GetText(nameof(ShowingFilteredItems));
 	public static Translation ShowingCount => _instance.GetText(nameof(ShowingCount));
 	public static Translation ShowingCountWarning => _instance.GetText(nameof(ShowingCountWarning));
+	public static Translation ShowingSelectedCount => _instance.GetText(nameof(ShowingSelectedCount));
+	public static Translation ShowingSelectedCountWarning => _instance.GetText(nameof(ShowingSelectedCountWarning));
 	public static Translation ItemsHidden => _instance.GetText(nameof(ItemsHidden));
 	public static Translation ClearFoldersPromptTitle => _instance.GetText(nameof(ClearFoldersPromptTitle));
 	public static Translation ClearFoldersPrompt => _instance.GetText(nameof(ClearFoldersPrompt));
@@ -209,7 +211,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation UnsubscribeAll => _instance.GetText(nameof(UnsubscribeAll));
 	public static Translation CopyAllIds => _instance.GetText(nameof(CopyAllIds));
 	public static Translation DeleteAll => _instance.GetText(nameof(DeleteAll));
-	public static Translation ControlClickTo => _instance.GetText(nameof(ControlClickTo));
+	public static Translation AltClickTo => _instance.GetText(nameof(AltClickTo));
 	public static Translation FilterByThisAuthor => _instance.GetText(nameof(FilterByThisAuthor));
 	public static Translation AddToSearch => _instance.GetText(nameof(AddToSearch));
 	public static Translation CopyToClipboard => _instance.GetText(nameof(CopyToClipboard));
@@ -306,4 +308,6 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation FailedToUpdatePlayset => _instance.GetText(nameof(FailedToUpdatePlayset));
 	public static Translation ImportFromLink => _instance.GetText(nameof(ImportFromLink));
 	public static Translation PastePlaysetId => _instance.GetText(nameof(PastePlaysetId));
+	public static Translation SelectAll => _instance.GetText(nameof(SelectAll));
+	public static Translation DeselectAll => _instance.GetText(nameof(DeselectAll));
 }

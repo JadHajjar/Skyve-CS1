@@ -78,6 +78,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		LC_Items.AddToSearch += LC_Items_AddToSearch;
 		LC_Items.OpenWorkshopSearch += LC_Items_OpenWorkshopSearch;
 		LC_Items.OpenWorkshopSearchInBrowser += LC_Items_OpenWorkshopSearchInBrowser;
+		LC_Items.SelectedItemsChanged += (_, _) => RefreshCounts();
 
 		_delayedSearch = new(350, DelayedSearch);
 
@@ -424,6 +425,11 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		}
 
+		if (item.GetWorkshopInfo()?.IsInvalid == true)
+		{
+			return true;
+		}
+
 		if (_profileManager.CurrentPlayset.Usage > 0)
 		{
 			if (!(_compatibilityManager.GetPackageInfo(item)?.Usage.HasFlag(_profileManager.CurrentPlayset.Usage) ?? true))
@@ -601,7 +607,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	protected void RefreshCounts()
 	{
 		var countText = GetCountText();
-		var filteredText = (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning).FormatPlural(LC_Items.FilteredCount, GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower(), Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower()));
+		var format = LC_Items.SelectedItemsCount == 0 ? (UsageFilteredOut == 0 ? Locale.ShowingCount : Locale.ShowingCountWarning) : (UsageFilteredOut == 0 ? Locale.ShowingSelectedCount : Locale.ShowingSelectedCountWarning);
+		var filteredText = format.FormatPlural(
+			LC_Items.FilteredCount,
+			GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower(),
+			LC_Items.SelectedItemsCount, Locale.ItemsHidden.FormatPlural(UsageFilteredOut,
+			GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower()));
 
 		if (L_Counts.Text != countText)
 		{
@@ -688,9 +699,11 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			, new (Locale.ExcludeAll, "I_X", action: () =>ExcludeAll(this, EventArgs.Empty))
 			, new (string.Empty)
 			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
-			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () =>DisableAll(this, EventArgs.Empty))
+			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.Where(x => x.Id != 0).Select(x => x.Id).ListStrings(" ")))
+			, new (Locale.SelectAll, "I_Disabled", LC_Items.SelectedItemsCount < LC_Items.FilteredItems.Count(), action: LC_Items.SelectAll)
+			, new (Locale.DeselectAll, "I_Disabled", LC_Items.SelectedItemsCount > 0, action: LC_Items.DeselectAll)
+			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "I_Install", LC_Items.FilteredItems.Any(x => x.LocalPackage is null), action: () => DownloadAll(this, EventArgs.Empty))
 			, new (Locale.ReDownloadAll, "I_ReDownload", LC_Items.FilteredItems.Any(x => x.LocalPackage is not null), action: () => ReDownloadAll(this, EventArgs.Empty))

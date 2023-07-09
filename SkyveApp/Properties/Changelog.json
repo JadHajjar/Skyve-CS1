@@ -547,5 +547,41 @@
         ]
       }
     ]
+  },
+  {
+    "Version": "3.2.0",
+    "Date": "2023-07-07",
+    "Tagline": "A full rework! -behind the scenes",
+    "ChangeGroups": [
+      {
+        "Name": "What's changed?",
+        "Changes": [
+          "The core systems of Skyve have been changed, organised, and optimised.",
+          "Excluded mods no longer use the '.excluded' file, they instead use a new ModConfig file.",
+          "The Load Order of mods has been re-integrated, and is completely automated based on mods' requirements as well as other Compatibility-Report factors.",
+          "'Profiles' are now, appropriately, called 'Playsets'.",
+          "Improved the author info gathering, which will fix the issue of authors not loading.",
+          "Please report any issues or unusual behaviour on the discord server."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.2.1",
+    "Date": "2023-07-09",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Click-to-filter now uses the Alt key instead of the Ctrl key.",
+          "You can now select multiple items in the content lists using the Ctrl or Shift keys.",
+          "Added an 'Open File' option to the right-click menu when selecting a file.",
+          "Copy all IDs action now includes packages' names and local packages as well.",
+          "Your current playset's name is now displayed in the main menu in-game.",
+          "The 'First time setup incomplete' screen now has an ingnore button to manually set up your folder settings instead.",
+          "'Show Folder Settings' now automatically be turned on if one of the folder settings is incorrect."
+        ]
+      }
+    ]
   }
 ]

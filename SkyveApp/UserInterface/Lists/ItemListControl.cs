@@ -41,6 +41,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 		HighlightOnHover = true;
 		SeparateWithLines = true;
+		EnableSelection = true;
 
 		if (!_notifier.IsContentLoaded)
 		{
@@ -178,7 +179,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 		}
 
 		var rects = item.Rectangles;
-		var filter = ModifierKeys.HasFlag(Keys.Control) != _settings.UserSettings.FlipItemCopyFilterAction;
+		var filter = ModifierKeys.HasFlag(Keys.Alt) != _settings.UserSettings.FlipItemCopyFilterAction;
 
 		if (rects.FolderRect.Contains(e.Location))
 		{
@@ -286,7 +287,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 				return;
 			}
 
-			if (ModifierKeys.HasFlag(Keys.Control))
+			if (ModifierKeys.HasFlag(Keys.Alt))
 			{
 				FilterByIncluded?.Invoke(_packageUtil.IsIncluded(localPackage));
 			}
@@ -300,7 +301,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 		if (rects.EnabledRect.Contains(e.Location) && item.Item.LocalPackage is not null)
 		{
-			if (ModifierKeys.HasFlag(Keys.Control))
+			if (ModifierKeys.HasFlag(Keys.Alt))
 			{
 				FilterByEnabled?.Invoke(_packageUtil.IsEnabled(item.Item.LocalPackage));
 			}
@@ -380,7 +381,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 	public void ShowRightClickMenu(T item)
 	{
-		var items = PC_PackagePage.GetRightClickMenuItems(item);
+		var items = PC_PackagePage.GetRightClickMenuItems(SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new T[] { item });
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
 	}
@@ -490,7 +491,18 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			e.HoverState &= ~HoverState.Pressed;
 		}
 
+		if (e.IsSelected)
+		{
+			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
+		}
+
 		base.OnPaintItemList(e);
+
+		if (e.IsSelected)
+		{
+			using var gBrush = new Pen(FormDesign.Design.GreenColor, (float)(1.5 * UI.FontScale));
+			e.Graphics.DrawRectangle(gBrush, e.ClipRectangle.Pad((int)gBrush.Width));
+		}
 
 		if (workshopInfo is not null && (workshopInfo.IsIncompatible || workshopInfo.IsBanned || compatibilityInfo?.Stability is PackageStability.Broken))
 		{
@@ -615,7 +627,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 		{
 			var labelColor = compatibilityReport.GetNotification().GetColor();
 
-			rects.CompatibilityRect = DrawLabel(e, LocaleCR.Get($"{compatibilityReport.GetNotification()}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, !e.Item.IsLocal ? rects.CompatibilityRect : rects.AuthorRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, true);
+			rects.CompatibilityRect = DrawLabel(e, LocaleCR.Get($"{compatibilityReport.GetNotification()}"), IconManager.GetSmallIcon("I_CompatibilityReport"), labelColor, rects.CompatibilityRect, large ? ContentAlignment.MiddleRight : ContentAlignment.BottomRight, true);
 
 			if (large)
 			{
@@ -1028,7 +1040,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 		rects.FolderRect = buttonRectangle;
 		rects.IconRect = rectangle.Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + (2 * Padding.Left)).Align(new Size(iconSize, iconSize), ContentAlignment.MiddleLeft);
-		rects.TextRect = rectangle.Pad(rects.IconRect.X + rects.IconRect.Width + Padding.Left, 0, (!item.IsLocal ? (2 * Padding.Left) + (2 * buttonRectangle.Width) + (int)(120 * UI.FontScale) : 0) + rectangle.Width - buttonRectangle.X, rectangle.Height / 2);
+		rects.TextRect = rectangle.Pad(rects.IconRect.X + rects.IconRect.Width + Padding.Left, 0, (true ? (2 * Padding.Left) + (2 * buttonRectangle.Width) + (int)(120 * UI.FontScale) : 0) + rectangle.Width - buttonRectangle.X, rectangle.Height / 2);
 
 		if (item.GetWorkshopInfo()?.Url is not null)
 		{
@@ -1055,10 +1067,10 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 			rects.CenterRect = new Rectangle(rects.IconRect.X - 1, rectangle.Y, rects.SteamIdRect.X - rects.IconRect.X, rectangle.Height / 2);
 		}
 
-		if (item.IsLocal)
-		{
-			rects.SteamIdRect = rects.SteamIdRect.Pad(-Padding.Left - buttonRectangle.Width, 0, 0, 0);
-		}
+		//if (item.IsLocal)
+		//{
+		//	rects.SteamIdRect = rects.SteamIdRect.Pad(-Padding.Left - buttonRectangle.Width, 0, 0, 0);
+		//}
 
 		if (IsSelection)
 		{
@@ -1171,7 +1183,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 				}
 				else
 				{
-					text = reason + "\r\n\r\n" + string.Format(Locale.ControlClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower());
+					text = reason + "\r\n\r\n" + string.Format(Locale.AltClickTo, Locale.FilterByThisPackageStatus.ToString().ToLower());
 					point = DownloadStatusRect.Location;
 					return true;
 				}
@@ -1208,14 +1220,14 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 					}
 				}
 
-				text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
+				text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
 				point = IncludedRect.Location;
 				return true;
 			}
 
 			if (EnabledRect.Contains(location) && Item.LocalPackage is not null)
 			{
-				text = $"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.ControlClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}";
+				text = $"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}";
 				point = EnabledRect.Location;
 				return true;
 			}
@@ -1283,7 +1295,7 @@ internal class ItemListControl<T> : SlickStackedListControl<T, ItemListControl<T
 
 				if (alt is not null)
 				{
-					tip += string.Format(Locale.ControlClickTo, alt.ToLower());
+					tip += string.Format(Locale.AltClickTo, alt.ToLower());
 				}
 
 				return tip.Trim();

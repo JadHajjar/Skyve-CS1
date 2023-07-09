@@ -27,6 +27,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 	public bool IsRemoved { get; set; }
 	public bool IsIncompatible { get; set; }
 	public bool IsBanned { get; set; }
+	public bool IsInvalid { get; set; }
 	public string Name { get; set; }
 	public string[] Tags { get; set; }
 	public ulong Id { get; set; }
@@ -53,6 +54,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 		IsBanned = entry.banned || entry.result is 16 or 17;
 		IsIncompatible = entry.incompatible;
 		IsCollection = entry.file_type == 2;
+		IsInvalid = entry.creator_appid != 255710;
 		IsMod = entry.tags?.Any(x => x.display_name == "Mod") ?? false;
 		Url = $"https://steamcommunity.com/workshop/filedetails/?id={Id}";
 

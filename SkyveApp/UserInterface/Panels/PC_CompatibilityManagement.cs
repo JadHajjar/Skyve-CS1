@@ -25,12 +25,13 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IWorkshopService _workshopService;
+	private readonly IUserService _userService;
 
 	internal IPackage? CurrentPackage { get; private set; }
 
 	private PC_CompatibilityManagement(bool load) : base(load)
 	{
-		ServiceCenter.Get(out _workshopService, out _compatibilityManager);
+		ServiceCenter.Get(out _workshopService, out _compatibilityManager, out _userService);
 
 		InitializeComponent();
 
@@ -44,27 +45,14 @@ public partial class PC_CompatibilityManagement : PanelContent
 		T_Interactions.Text = LocaleCR.InteractionCount.Format(0);
 
 		packageCrList.CanDrawItem += PackageCrList_CanDrawItem;
+
+		DD_Stability.Enabled = _userService.User.Manager;
+		TB_Note.Enabled = _userService.User.Manager;
 	}
 
 	public PC_CompatibilityManagement() : this(true)
 	{
 		PB_Loading.BringToFront();
-	}
-
-	public PC_CompatibilityManagement(IUser userId) : this(false)
-	{
-		foreach (var package in ServiceCenter.Get<IPackageManager>().Packages)
-		{
-			if (package.GetWorkshopInfo()?.Author?.Id == userId.Id)
-			{
-				_packages[package.Id] = package;
-			}
-		}
-
-		packageCrList.SetItems(_packages.Keys);
-		CB_BlackListId.Visible = CB_BlackListName.Visible = false;
-
-		SetPackage(0);
 	}
 
 	public PC_CompatibilityManagement(IEnumerable<ulong> packages) : this(false)
@@ -152,7 +140,9 @@ public partial class PC_CompatibilityManagement : PanelContent
 	{
 		PB_Loading.Loading = true;
 
-		var mods = await _workshopService.QueryFilesAsync(PackageSorting.UpdateTime, requiredTags: new[] { "Mod" }, all: true);
+		var mods = _userService.User.Manager ?
+			await _workshopService.QueryFilesAsync(PackageSorting.UpdateTime, requiredTags: new[] { "Mod" }, all: true) :
+			await _workshopService.GetWorkshopItemsByUserAsync(_userService.User.Id ?? 0);
 
 		foreach (var mod in mods)
 		{
@@ -226,6 +216,13 @@ public partial class PC_CompatibilityManagement : PanelContent
 		try
 		{
 			CurrentPackage ??= await _workshopService.GetPackageAsync(new GenericPackageIdentity(packages[page]));
+
+			if (!_userService.User.Manager && !_userService.User.Equals(CurrentPackage.GetWorkshopInfo()?.Author))
+			{
+				packageCrList.Remove(CurrentPackage.Id);
+				SetPackage(page);
+				return;
+			}
 
 			var catalogue = await ServiceCenter.Get<SkyveApiUtil>().Catalogue(CurrentPackage!.Id);
 
@@ -351,7 +348,10 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Statuses)
 		{
-			var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage, item);
+			var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage, item, !_userService.User.Manager)
+			{
+				Enabled = _userService.User.Manager || CRNAttribute.GetAttribute(item.Type).AllowedChange == CRNAttribute.ChangeType.Allow
+			};
 
 			control.ValuesChanged += ControlValueChanged;
 
@@ -361,7 +361,10 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 		foreach (var item in postPackage.Interactions)
 		{
-			var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage, item);
+			var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage, item, !_userService.User.Manager)
+			{
+				Enabled = _userService.User.Manager || CRNAttribute.GetAttribute(item.Type).AllowedChange == CRNAttribute.ChangeType.Allow
+			};
 
 			control.ValuesChanged += ControlValueChanged;
 
@@ -435,7 +438,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void B_AddStatus_Click(object sender, EventArgs e)
 	{
-		var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage);
+		var control = new IPackageStatusControl<StatusType, PackageStatus>(CurrentPackage, default, !_userService.User.Manager);
 
 		control.ValuesChanged += ControlValueChanged;
 
@@ -447,7 +450,7 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 	private void B_AddInteraction_Click(object sender, EventArgs e)
 	{
-		var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage);
+		var control = new IPackageStatusControl<InteractionType, PackageInteraction>(CurrentPackage, default, !_userService.User.Manager);
 
 		control.ValuesChanged += ControlValueChanged;
 

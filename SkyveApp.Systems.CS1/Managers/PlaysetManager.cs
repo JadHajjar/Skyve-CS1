@@ -411,8 +411,16 @@ internal class PlaysetManager : IPlaysetManager
 			_settings.SessionSettings.CurrentPlayset = null;
 			_settings.SessionSettings.Save();
 
+			try
+			{
+				CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"));
+			}
+			catch { }
+
 			return;
 		}
+
+		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"), profile.Name);
 
 		if (SystemsProgram.MainForm as SlickForm is null)
 		{
@@ -469,7 +477,7 @@ internal class PlaysetManager : IPlaysetManager
 
 				foreach (var mod in unprocessedMods)
 				{
-					_modUtil.SetIncluded(mod, true);
+					_modUtil.SetIncluded(mod, false);
 					_modUtil.SetEnabled(mod, false);
 				}
 

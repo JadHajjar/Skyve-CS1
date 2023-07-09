@@ -4,6 +4,8 @@ using SkyveApp.Domain;
 
 using SkyveApp.Domain.Enums;
 
+using System.Linq;
+
 namespace SkyveApp.Systems.Compatibility.Domain;
 
 public class ReportItem : ICompatibilityItem
@@ -16,5 +18,5 @@ public class ReportItem : ICompatibilityItem
 
 	public GenericPackageStatus? StatusDTO { get => Status is null ? null : new GenericPackageStatus(Status); set => Status = value?.ToGenericPackage(); }
 
-	IPackageIdentity[] ICompatibilityItem.Packages => Packages ?? new IPackageIdentity[0];
+	IPackage[] ICompatibilityItem.Packages => Packages.Select(x => x.Package).ToArray() ?? new IPackage[0];
 }

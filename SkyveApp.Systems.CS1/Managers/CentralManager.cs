@@ -21,7 +21,6 @@ internal class CentralManager : ICentralManager
 	private readonly IPlaysetManager _profileManager;
 	private readonly ICitiesManager _citiesManager;
 	private readonly ILocationManager _locationManager;
-	private readonly IUpdateManager _updateManager;
 	private readonly ISubscriptionsManager _subscriptionManager;
 	private readonly IPackageManager _packageManager;
 	private readonly IContentManager _contentManager;
@@ -33,14 +32,13 @@ internal class CentralManager : ICentralManager
 	private readonly IBulkUtil _bulkUtil;
 	private readonly IVersionUpdateService _versionUpdateService;
 
-	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, IUpdateManager updateManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService)
+	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService)
 	{
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
 		_profileManager = profileManager;
 		_citiesManager = citiesManager;
 		_locationManager = locationManager;
-		_updateManager = updateManager;
 		_subscriptionManager = subscriptionManager;
 		_packageManager = packageManager;
 		_contentManager = contentManager;
@@ -181,7 +179,6 @@ internal class CentralManager : ICentralManager
 
 	private void AnalyzePackages(List<ILocalPackageWithContents> content)
 	{
-		var firstTime = _updateManager.IsFirstTime();
 		var blackList = new List<ILocalPackageWithContents>();
 
 		foreach (var package in content)

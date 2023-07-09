@@ -147,7 +147,7 @@ public partial class PC_ProfileList : PanelContent
 
 		var filteredCount = LC_Items.FilteredItems.Count();
 
-		L_FilterCount.Text = Locale.ShowingCount.FormatPlural(filteredCount, Locale.Playset.FormatPlural(filteredCount));
+		L_FilterCount.Text = Locale.ShowingCount.FormatPlural(filteredCount, Locale.Playset.FormatPlural(filteredCount).ToLower());
 	}
 
 	protected override void LocaleChanged()
