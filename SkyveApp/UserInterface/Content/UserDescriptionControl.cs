@@ -57,7 +57,7 @@ internal class UserDescriptionControl : SlickImageControl
 		DrawTitle(e);
 		DrawButtons(e);
 
-		var count = _contentManager.Packages.Count(x => User.Id?.Equals(x.GetWorkshopInfo()?.Author?.Id) ?? false);
+		var count = _contentManager.Packages.Count(x => User.Equals(x.GetWorkshopInfo()?.Author));
 
 		if (count == 0)
 		{

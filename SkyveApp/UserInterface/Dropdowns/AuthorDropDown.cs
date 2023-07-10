@@ -40,7 +40,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 
 	protected override bool SearchMatch(string searchText, IUser item)
 	{
-		return searchText.SearchCheck(item.Name) || item.Id.ToString().Contains(searchText);
+		return searchText.SearchCheck(item.Name) || (item.Id?.ToString().Contains(searchText) ?? false);
 	}
 
 	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IUser item, bool selected)
