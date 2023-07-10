@@ -105,7 +105,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		RefreshCounts();
 
-		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = LC_Items.SortDescending ? "I_SortDesc" : "I_SortAsc";
 
 		if (!load)
 		{
@@ -124,6 +124,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		{
 			new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 		}
+
+		SlickTip.SetTo(B_GridView, "Switch to Grid-View");
+		SlickTip.SetTo(B_ListView, "Switch to List-View");
 	}
 
 	protected void RefreshAuthorAndTags()
@@ -337,6 +340,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
+		B_ListView.Size = B_GridView.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+
 		var size = (int)(30 * UI.FontScale) - 6;
 
 		TB_Search.MaximumSize = I_Refresh.MaximumSize = B_Filters.MaximumSize = I_SortOrder.MaximumSize = DD_Sorting.MaximumSize = new Size(9999, size);
@@ -382,7 +387,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		_settings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
 		_settings.SessionSettings.Save();
 
-		LC_Items.SetSorting(DD_Sorting.SelectedItem, LC_Items.SortDesc);
+		LC_Items.SetSorting(DD_Sorting.SelectedItem, LC_Items.SortDescending);
 	}
 
 	private void DelayedSearch()
@@ -643,7 +648,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		searchTermsExclude.Clear();
 		searchTermsOr.Clear();
 
-		LC_Items.TextSearchNotEmpty = !searchEmpty;
+		LC_Items.IsTextSearchNotEmpty = !searchEmpty;
 
 		if (!searchEmpty)
 		{
@@ -683,12 +688,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void I_SortOrder_Click(object sender, EventArgs e)
 	{
-		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDesc);
+		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDescending);
 
-		_settings.UserSettings.PackageSortingDesc = LC_Items.SortDesc;
+		_settings.UserSettings.PackageSortingDesc = LC_Items.SortDescending;
 		_settings.SessionSettings.Save();
 
-		I_SortOrder.ImageName = LC_Items.SortDesc ? "I_SortDesc" : "I_SortAsc";
+		I_SortOrder.ImageName = LC_Items.SortDescending ? "I_SortDesc" : "I_SortAsc";
 	}
 
 	private void I_Actions_Click(object sender, EventArgs e)
@@ -830,5 +835,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			}
 		});
 		I_Actions.Loading = false;
+	}
+
+	private void B_ListView_Click(object sender, EventArgs e)
+	{
+		B_GridView.Selected = false;
+		B_ListView.Selected = true;
+		LC_Items.GridView = false;
+	}
+
+	private void B_GridView_Click(object sender, EventArgs e)
+	{
+		B_GridView.Selected = true;
+		B_ListView.Selected = false;
+		LC_Items.GridView = true;
 	}
 }

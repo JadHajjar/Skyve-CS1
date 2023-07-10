@@ -174,7 +174,7 @@ public partial class PC_SelectPackage : PanelContent
 		searchTermsExclude.Clear();
 		searchTermsOr.Clear();
 
-		LC_Items.TextSearchNotEmpty = !searchEmpty;
+		LC_Items.IsTextSearchNotEmpty = !searchEmpty;
 
 		if (!searchEmpty)
 		{

@@ -49,7 +49,7 @@ public partial class PC_PackagePage : PanelContent
 		{
 			LC_Items = new ItemListControl<IPackage>
 			{
-				PackagePage = true,
+				IsPackagePage = true,
 				Dock = DockStyle.Fill
 			};
 
@@ -246,18 +246,18 @@ public partial class PC_PackagePage : PanelContent
 			, new (string.Empty)
 			, new (Locale.EditCompatibility.FormatPlural(list.Count), "I_CompatibilityReport", userService.User.Manager || list.Any(item => userService.User.Equals(item.GetWorkshopInfo()?.Author)), action: () => { Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(items.Select(x => x.Id)));})
 			, new (string.Empty)
-			, new (Locale.EditTags.FormatPlural(list.Count), "I_Tag", isInstalled, action: () => EditTags(items.SelectWhereNotNull(x => x.LocalPackage)!))
+			, new (Locale.EditTags.FormatPlural(list.Count), "I_Tag", isInstalled, action: () => EditTags(list.SelectWhereNotNull(x => x.LocalPackage)!))
 			, new (Locale.OtherPlaysets, "I_ProfileSettings", fade: true)
 			, new (Locale.IncludeThisItemInAllPlaysets.FormatPlural(list.Count), "I_Ok", tab: 1, action: () => { new BackgroundAction(() => list.SelectWhereNotNull(x => x.LocalPackage).Foreach(x => profileManager.SetIncludedForAll(x!, true))).Run(); bulkUtil.SetBulkIncluded(list.SelectWhereNotNull(x => x.LocalPackage)!, true); })
 			, new (Locale.ExcludeThisItemInAllPlaysets.FormatPlural(list.Count), "I_Cancel", tab: 1, action: () => { new BackgroundAction(() => list.SelectWhereNotNull(x => x.LocalPackage).Foreach(x => profileManager.SetIncludedForAll(x!, false))).Run(); bulkUtil.SetBulkIncluded(list.SelectWhereNotNull(x => x.LocalPackage)!, false);})
 			, new (Locale.Copy, "I_Copy", !isLocal, fade: true)
-			, new (Locale.CopyPackageName.FormatPlural(list.Count), !isLocal ? null : "I_Copy", tab: !isLocal ? 1 : 0, action: () => Clipboard.SetText(items.ListStrings(CrossIO.NewLine)))
-			, new (Locale.CopyWorkshopLink.FormatPlural(list.Count), null, !isLocal, tab: 1, action: () => Clipboard.SetText(items.ListStrings(x => x.Url, CrossIO.NewLine)))
-			, new (Locale.CopyWorkshopId.FormatPlural(list.Count), null, !isLocal, tab: 1,  action: () => Clipboard.SetText(items.ListStrings(x => x.Id.ToString(), CrossIO.NewLine)))
+			, new (Locale.CopyPackageName.FormatPlural(list.Count), !isLocal ? null : "I_Copy", tab: !isLocal ? 1 : 0, action: () => Clipboard.SetText(list.ListStrings(CrossIO.NewLine)))
+			, new (Locale.CopyWorkshopLink.FormatPlural(list.Count), null, !isLocal, tab: 1, action: () => Clipboard.SetText(list.ListStrings(x => x.Url, CrossIO.NewLine)))
+			, new (Locale.CopyWorkshopId.FormatPlural(list.Count), null, !isLocal, tab: 1,  action: () => Clipboard.SetText(list.ListStrings(x => x.Id.ToString(), CrossIO.NewLine)))
 			, new (string.Empty, show: !isLocal, tab: 1)
-			, new (Locale.CopyAuthorName.FormatPlural(list.Count), null, !isLocal, tab: 1, action: () => Clipboard.SetText(items.ListStrings(x => x.GetWorkshopInfo()?.Author?.Name , CrossIO.NewLine)))
-			, new (Locale.CopyAuthorLink.FormatPlural(list.Count), null, !isLocal, tab: 1, action: () => Clipboard.SetText(items.ListStrings(x => x.GetWorkshopInfo()?.Author?.ProfileUrl , CrossIO.NewLine)))
-			, new (Locale.CopyAuthorSteamId.FormatPlural(list.Count), null, !isLocal, tab: 1,  action: () => Clipboard.SetText(items.ListStrings(x => x.GetWorkshopInfo()?.Author?.Id?.ToString() , CrossIO.NewLine)))
+			, new (Locale.CopyAuthorName.FormatPlural(list.Count), null, !isLocal, tab: 1, action: () => Clipboard.SetText(list.ListStrings(x => x.GetWorkshopInfo()?.Author?.Name , CrossIO.NewLine)))
+			, new (Locale.CopyAuthorLink.FormatPlural(list.Count), null, !isLocal, tab: 1, action: () => Clipboard.SetText(list.ListStrings(x => x.GetWorkshopInfo()?.Author?.ProfileUrl , CrossIO.NewLine)))
+			, new (Locale.CopyAuthorSteamId.FormatPlural(list.Count), null, !isLocal, tab: 1,  action: () => Clipboard.SetText(list.ListStrings(x => x.GetWorkshopInfo()?.Author?.Id?.ToString() , CrossIO.NewLine)))
 		};
 	}
 

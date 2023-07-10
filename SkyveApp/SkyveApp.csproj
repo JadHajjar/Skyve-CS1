@@ -112,6 +112,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="UserInterface\Lists\ItemListControl-Grid.cs" />
+	  <None Include="UserInterface\Lists\ItemListControl-List.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Update="Resources\mono-debug._dll">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
