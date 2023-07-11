@@ -8,21 +8,18 @@ using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveShared;
-
 using SlickControls;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.Systems.CS1.Managers;
 internal class PlaysetManager : IPlaysetManager
 {
-	private readonly List<ICustomPlayset> _profiles;
+	private readonly List<ICustomPlayset> _playsets;
 	private bool disableAutoSave;
 	private readonly FileSystemWatcher? _watcher;
 
@@ -33,16 +30,16 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			yield return Playset.TemporaryPlayset;
 
-			List<ICustomPlayset> profiles;
+			List<ICustomPlayset> playsets;
 
-			lock (_profiles)
+			lock (_playsets)
 			{
-				profiles = new(_profiles);
+				playsets = new(_playsets);
 			}
 
-			foreach (var profile in profiles)
+			foreach (var playset in playsets)
 			{
-				yield return profile;
+				yield return playset;
 			}
 		}
 	}
@@ -79,7 +76,7 @@ internal class PlaysetManager : IPlaysetManager
 
 			if (current != null)
 			{
-				_profiles = new() { current };
+				_playsets = new() { current };
 				CurrentPlayset = current;
 			}
 		}
@@ -88,7 +85,7 @@ internal class PlaysetManager : IPlaysetManager
 			_logger.Exception(ex, "Failed to load the current profile");
 		}
 
-		_profiles ??= new();
+		_playsets ??= new();
 
 		CurrentPlayset ??= Playset.TemporaryPlayset;
 
@@ -196,9 +193,9 @@ internal class PlaysetManager : IPlaysetManager
 			newPlayset.DateCreated = File.GetCreationTime(profilePath);
 			newPlayset.LastUsed = newPlayset.LastEditDate;
 
-			lock (_profiles)
+			lock (_playsets)
 			{
-				_profiles.Add(newPlayset);
+				_playsets.Add(newPlayset);
 			}
 
 			Save(newPlayset, true);
@@ -224,9 +221,9 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			List<IPlayset> profiles;
 
-			lock (_profiles)
+			lock (_playsets)
 			{
-				profiles = new(_profiles);
+				profiles = new(_playsets);
 			}
 
 			foreach (Playset profile in profiles)
@@ -294,7 +291,7 @@ internal class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				if ((missingMods.Count > 0 || missingAssets.Count > 0))
+				if (missingMods.Count > 0 || missingAssets.Count > 0)
 				{
 					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
 				}
@@ -387,9 +384,9 @@ internal class PlaysetManager : IPlaysetManager
 	{
 		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json"));
 
-		lock (_profiles)
+		lock (_playsets)
 		{
-			_profiles.Remove(profile);
+			_playsets.Remove(profile);
 		}
 
 		if (profile == CurrentPlayset)
@@ -493,7 +490,7 @@ internal class PlaysetManager : IPlaysetManager
 					$"missingAssets: {missingAssets.Count}");
 #endif
 
-				if ((missingMods.Count > 0 || missingAssets.Count > 0))
+				if (missingMods.Count > 0 || missingAssets.Count > 0)
 				{
 					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
 				}
@@ -580,9 +577,9 @@ internal class PlaysetManager : IPlaysetManager
 						newPlayset.LastUsed = newPlayset.LastEditDate;
 					}
 
-					lock (_profiles)
+					lock (_playsets)
 					{
-						_profiles.Add(newPlayset);
+						_playsets.Add(newPlayset);
 					}
 				}
 				else
@@ -606,14 +603,30 @@ internal class PlaysetManager : IPlaysetManager
 
 		if (_watcher is not null)
 		{
-			_watcher.Changed += new FileSystemEventHandler(FileChanged);
-			_watcher.Created += new FileSystemEventHandler(FileChanged);
-			_watcher.Deleted += new FileSystemEventHandler(FileChanged);
+			_watcher.Changed += new FileSystemEventHandler(FileChanged_Changed);
+			_watcher.Created += new FileSystemEventHandler(FileChanged_Created);
+			_watcher.Deleted += new FileSystemEventHandler(FileChanged_Deleted);
 
 			try
 			{ _watcher.EnableRaisingEvents = true; }
 			catch (Exception ex) { _logger.Exception(ex, $"Failed to start profile watcher ({_locationManager.SkyvePlaysetsAppDataPath})"); }
 		}
+	}
+
+	private void FileChanged_Changed(object sender, FileSystemEventArgs e)
+	{
+		_logger.Debug($"_watcher.Changed Called: {e.FullPath}");
+		FileChanged(sender, e);
+	}
+	private void FileChanged_Created(object sender, FileSystemEventArgs e)
+	{
+		_logger.Debug($"_watcher.Created Called: {e.FullPath}");
+		FileChanged(sender, e);
+	}
+	private void FileChanged_Deleted(object sender, FileSystemEventArgs e)
+	{
+		_logger.Debug($"_watcher.Deleted Called: {e.FullPath}");
+		FileChanged(sender, e);
 	}
 
 	private void FileChanged(object sender, FileSystemEventArgs e)
@@ -627,13 +640,17 @@ internal class PlaysetManager : IPlaysetManager
 
 			if (!CrossIO.FileExists(e.FullPath))
 			{
-				lock (_profiles)
+				lock (_playsets)
 				{
-					var profile = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+					var profile = _playsets.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
 					if (profile != null)
 					{
-						_profiles.Remove(profile);
+#if DEBUG
+						_logger.Debug($"Playset removed: {profile.Name}");
+#endif
+
+						_playsets.Remove(profile);
 					}
 				}
 
@@ -655,13 +672,24 @@ internal class PlaysetManager : IPlaysetManager
 					newPlayset.LastUsed = newPlayset.LastEditDate;
 				}
 
-				lock (_profiles)
+				lock (_playsets)
 				{
-					var currentPlayset = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+					var currentPlayset = _playsets.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
-					_profiles.Remove(currentPlayset);
+#if DEBUG
+					if (currentPlayset is not null)
+					{
+						_logger.Debug($"Playset removed: {currentPlayset?.Name}");
+					}
 
-					_profiles.Add(newPlayset);
+					_logger.Debug($"Playset added: {newPlayset.Name}");
+#endif
+					if (currentPlayset is not null)
+					{
+						_playsets.Remove(currentPlayset);
+					}
+
+					_playsets.Add(newPlayset);
 				}
 
 				_notifier.OnPlaysetUpdated();
@@ -861,9 +889,9 @@ internal class PlaysetManager : IPlaysetManager
 
 	public void AddPlayset(ICustomPlayset newPlayset)
 	{
-		lock (_profiles)
+		lock (_playsets)
 		{
-			_profiles.Add(newPlayset);
+			_playsets.Add(newPlayset);
 		}
 
 		_notifier.OnPlaysetUpdated();
@@ -898,13 +926,13 @@ internal class PlaysetManager : IPlaysetManager
 				newPlayset.LastUsed = newPlayset.LastEditDate;
 			}
 
-			lock (_profiles)
+			lock (_playsets)
 			{
-				var currentPlayset = _profiles.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
+				var currentPlayset = _playsets.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(newPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
-				_profiles.Remove(currentPlayset);
+				_playsets.Remove(currentPlayset);
 
-				_profiles.Add(newPlayset);
+				_playsets.Add(newPlayset);
 			}
 
 			_notifier.OnPlaysetUpdated();

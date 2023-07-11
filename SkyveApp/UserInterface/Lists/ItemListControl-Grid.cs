@@ -15,6 +15,8 @@ partial class ItemListControl<T>
 		var workshopInfo = e.Item.GetWorkshopInfo();
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var textColor = FormDesign.Design.ForeColor;
+		var partialIncluded = false;
+		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded)) || partialIncluded;
 
 		e.HoverState &= ~HoverState.Pressed;
 
@@ -22,6 +24,7 @@ partial class ItemListControl<T>
 
 		DrawThumbnail(e);
 		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo);
+		DrawIncludedButton(e, e.Rects, e.Rects.IncludedRect, isIncluded, partialIncluded, true, localParentPackage);
 
 		if (workshopInfo?.Author is not null)
 		{
@@ -165,6 +168,8 @@ partial class ItemListControl<T>
 		};
 
 		rects.CenterRect = rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(10.5F, FontStyle.Bold), ContentAlignment.TopLeft);
+
+		rects.IncludedRect = rects.TextRect.Align(new Size(rects.TextRect.Height, rects.TextRect.Height), ContentAlignment.TopRight);
 
 		return rects;
 	}
