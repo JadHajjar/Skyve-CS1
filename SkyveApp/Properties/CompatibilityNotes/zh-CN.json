@@ -17,7 +17,7 @@
   "Can't be loaded": "无法加载",
   "The warehouse does not empty for some users. This might be caused by fishing boats taking up all vehicle slots, so no warehouse truck can spawn. Users have noticed trucks transferring fish from one warehouse to another.": "对于某些玩家，仓库无法清空，原因可能是渔船占据了所有的载具位置，因此仓库无法继续生成货车。 玩家会注意到货车将鱼产品从一个仓库运往另一个仓库。",
   "To see the ship/ferry paths while placing a bridge, enable the transport info view.": "在铺设桥梁时如果要查看船只/渡轮路径，请打开公共交通信息视图。",
-  "Spawnpoints moved too far from the original spawnpoint sometimes prevent all public transport passengers. Spawn points for cargo trucks are not supported on cargo train stations, cargo airports or cargo harbors.": "如果您将生成点移动得太远，可能会导致公共交通乘客出现问题。\n此模组不支持更改货运火车站、货运机场或货运码头的货运卡车生成点。",
+  "Spawnpoints moved too far from the original spawnpoint sometimes prevent all public transport passengers. Spawn points for cargo trucks are not supported on cargo train stations, cargo airports or cargo harbors.": "如果您将生成点移动得太远，公共交通乘客可能会出现问题。\n此模组不支持更改货运火车站、货运机场或货运码头的货运卡车生成点。",
   "Prop hiding has been removed from this mod, but is available in the BOB mod.": "此模组的隐藏摆件功能已经移除，请使用 BOB, the Tree and Prop Replacer 模组来隐藏摆件。",
   "Only works on displays with a 16:9 aspect ratio.": "此模组只适用于宽高比为 16:9 的显示器。",
   "Not working for all buildings, performance issues, errors messages.": "此模组对于任何建筑物都无法使用，存在性能问题，还会导致游戏报错。",
