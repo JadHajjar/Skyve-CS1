@@ -48,7 +48,7 @@
   "AutoSave": "自动保存",
   "TotalSize": "总大小",
   "CompatibilityStatus": "兼容性状态",
-  "AnyStatus": "任何状态",
+  "AnyStatus": "任意状态",
   "AnyCompatibilityStatus": "任意状态",
   "ModOwned": "您已订阅该模组",
   "NoLocalPackagesFound": "在您的电脑上找不到插件。",
@@ -153,7 +153,7 @@
   "IncludeAllItemsInThisPackage": "装载此插件中的所有项目",
   "ExcludeAllItemsInThisPackage": "卸下此插件中的所有项目",
   "Unfiltered": "未筛选",
-  "AnyTags": "任何标签",
+  "AnyTags": "任意标签",
   "AdvancedLaunchOptions": "显示高级启动选项",
   "MovePackageToLocalFolder": "将插件复制到本地文件夹",
   "AllItems": "所有项目",
@@ -334,7 +334,7 @@
   "ResetScrollOnPackageClick_Tip": "打开某个插件的详情页面时，自动重置滚动条，以将选中的插件调整到列表的顶部。",
   "Workshop Save-games": "创意工坊的游戏存档",
   "Workshop Maps": "创意工坊的地图",
-  "AnyAuthor": "任何作者",
+  "AnyAuthor": "任意作者",
   "ItemsCount": {
     "One": "有 {0} 个项目",
     "Plural": "有 {0} 个项目"
