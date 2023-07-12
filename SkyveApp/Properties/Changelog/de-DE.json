@@ -555,9 +555,9 @@
             {
                 "Name": "Fehlerbehebungen",
                 "Changes": [
-                    "Fixes an error caused by including/excluding mods that have contain assets.",
-                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-                    "Fixed some packages not showing their successor properly."
+                    "Behebt einen Fehler, der durch Ein-/Ausschluss von Mods verursacht wurde, die Assets enthalten.",
+                    "Behebt den Fehler, dass der Aktionsknopf auf der rechten Seite der Kompatibilitätsberichte, nicht anklickbar ist.",
+                    "Es wurde behoben, dass einige Pakete ihren Nachfolger nicht korrekt anzeigen."
                 ]
             }
         ]
