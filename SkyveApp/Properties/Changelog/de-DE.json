@@ -525,9 +525,9 @@
                 "Changes": [
                     "Option zum Ignorieren von Internetverbindungsprüfungen hinzugefügt.",
                     "Ein Indikator für das Hochladen eines Profils hinzugefügt.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
+                    "Fügte einen Button hinzu, um die Inhalte eines Online-Profils einfach anzuzeigen.",
+                    "Fehler beim Abrufen der Steamnutzer-Informationen behoben.",
+                    "Fehler behoben, dass Asset Editor Starteinstellungen nicht korrekt gespeichert werden.",
                     "Behoben, dass die Aktualisierung des Online Profils nicht korrekt funktioniert."
                 ]
             }
@@ -541,8 +541,8 @@
                 "Name": "Änderungen",
                 "Changes": [
                     "Ladeanimation für das Betrachten von Inhalten auf Profilen hinzugefügt.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
+                    "Fehler behoben, dass beim Herunterladen oder Aktualisieren eines Profils, einige Daten wie das Vorschaubild nicht korrekt gespeichert wurden.",
+                    "Behoben, dass private Pakete, als . angezeigt wurden",
                     "Behoben, dass einige Teile der UI nicht von Anfang an übersetzt wurden."
                 ]
             }
@@ -550,7 +550,7 @@
     },
     {
         "Version": "3.1.2",
-        "Date": "2023-06-21",
+        "Date": "21.06.2023",
         "ChangeGroups": [
             {
                 "Name": "Fehlerbehebungen",
