@@ -1,12 +1,13 @@
-﻿using SkyveApp.Systems.Compatibility.Domain.Api;
+﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Systems.CS1.Utilities;
 
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 
 namespace SkyveApp.UserInterface.Lists;
 
-partial class ItemListControl<T>
+internal partial class ItemListControl<T>
 {
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e)
 	{
@@ -26,27 +27,135 @@ partial class ItemListControl<T>
 		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo);
 		DrawIncludedButton(e, e.Rects, e.Rects.IncludedRect, isIncluded, partialIncluded, true, localParentPackage);
 
+		var scoreX = DrawScore(e, false, e.Rects, default, workshopInfo);
+
 		if (workshopInfo?.Author is not null)
 		{
-			DrawAuthor(e, workshopInfo.Author);
+			DrawAuthor(e, workshopInfo.Author, scoreX);
 		}
 		else if (e.Item.IsLocal)
 		{
-			DrawFolderName(e, localParentPackage!);
+			DrawFolderName(e, localParentPackage!, scoreX);
+		}
+
+		var lineRect = new Rectangle(e.ClipRectangle.X, e.Rects.IconRect.Bottom + GridPadding.Vertical, e.ClipRectangle.Width, (int)(2 * UI.FontScale));
+		using var lineBrush = new LinearGradientBrush(lineRect, default, default, 0F);
+
+		lineBrush.InterpolationColors = new ColorBlend
+		{
+			Colors = new[] { Color.Empty, FormDesign.Design.AccentColor, FormDesign.Design.AccentColor, Color.Empty, Color.Empty },
+			Positions = new[] { 0.0f, 0.15f, 0.6f, 0.75f, 1f }
+		};
+
+		e.Graphics.FillRectangle(lineBrush, lineRect);
+
+		var maxTagX = DrawGridButtons(e, isPressed, localParentPackage);
+		var tagsRect = new Rectangle(e.ClipRectangle.X, e.Rects.IconRect.Bottom + GridPadding.Vertical * 2, 0, 0);
+
+		if (e.Item.Id > 0)
+		{
+			e.Rects.SteamIdRect = DrawTag(e, maxTagX, ref tagsRect, new TagItem(Domain.CS1.Enums.TagSource.Workshop, e.Item.Id.ToString()));
+		}
+
+		foreach (var item in e.Item.GetTags(IsPackagePage))
+		{
+			DrawTag(e, maxTagX, ref tagsRect, item);
 		}
 	}
 
-	private void DrawFolderName(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents package)
+	private Rectangle DrawTag(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, int maxTagX, ref Rectangle tagsRect, ITag item)
+	{
+		var tagIcon = IconManager.GetSmallIcon(item.Icon);
+
+		var tagRect = e.DrawLabel(item.Value, tagIcon, Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, ContentAlignment.TopLeft, large: true, mousePosition: CursorLocation);
+
+		e.Rects.TagRects[item] = tagRect;
+
+		tagsRect.X += GridPadding.Left + tagRect.Width;
+
+		if (tagsRect.X + (int)(60 * UI.FontScale) > maxTagX)
+		{
+			tagsRect.X = e.ClipRectangle.X;
+			tagsRect.Y += tagRect.Y + GridPadding.Top;
+		}
+
+		return tagRect;
+	}
+
+	private int DrawGridButtons(ItemPaintEventArgs<T, Rectangles> e, bool isPressed, ILocalPackageWithContents? package)
+	{
+		var size = UI.Scale(new Size(28, 28), UI.FontScale);
+		var rect = new Rectangle(e.ClipRectangle.Right - size.Width, e.ClipRectangle.Bottom - size.Height, size.Width, size.Height);
+
+		if (package is not null)
+		{
+			using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
+
+			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: FormDesign.Design.BackColor);
+
+			e.Rects.FolderRect = rect;
+
+			rect.X -= rect.Width + GridPadding.Left;
+		}
+
+		if (e.Item.GetWorkshopInfo()?.Url is not null)
+		{
+			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
+
+			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: FormDesign.Design.BackColor);
+
+			e.Rects.SteamRect = rect;
+
+			rect.X -= rect.Width + GridPadding.Left;
+		}
+
+		if (_compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		{
+			using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
+
+			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: FormDesign.Design.BackColor);
+
+			e.Rects.GithubRect = rect;
+
+			rect.X -= rect.Width + GridPadding.Left;
+		}
+
+		return rect.X;
+	}
+
+	private void DrawSteamId(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, IPackageIdentity package, int workshopX)
+	{
+		using var font = UI.Font(8.25F, FontStyle.Bold);
+		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom;
+		var size = e.Graphics.Measure(package.Id.ToString(), font).ToSize();
+		size = new Size(size.Width + GridPadding.Left + height, height);
+		var folderRect = new Rectangle(workshopX, e.Rects.IconRect.Bottom + GridPadding.Vertical * 2 + (int)(2 * UI.FontScale), size.Width, size.Height);
+		var iconRect = folderRect.Pad(GridPadding).Align(new(height * 3 / 4, height * 3 / 4), ContentAlignment.MiddleLeft);
+		using var brush = new SolidBrush(Color.FromArgb(120, folderRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)));
+		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
+
+		e.Graphics.FillRoundedRectangle(brush, folderRect, (int)(5 * UI.FontScale));
+		e.Graphics.DrawString(package.Id.ToString(), font, textBrush, folderRect.Pad(iconRect.Width + GridPadding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+
+		using var steamIcon = IconManager.GetIcon("I_Steam", iconRect.Height).Color(FormDesign.Design.ForeColor);
+
+		e.Graphics.DrawImage(steamIcon, iconRect.CenterR(steamIcon.Size));
+
+		e.Rects.FolderRect = folderRect;
+	}
+
+	private void DrawFolderName(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents package, int scoreX)
 	{
 		using var font = UI.Font(8.25F, FontStyle.Bold);
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom;
 		var size = e.Graphics.Measure(Path.GetFileName(package.Folder), font).ToSize();
 		size = new Size(size.Width + GridPadding.Left + height, height);
-		var folderRect = new Rectangle(e.Rects.TextRect.X, e.Rects.IconRect.Bottom - size.Height, size.Width, size.Height);
+		var folderRect = new Rectangle(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom - size.Height, size.Width, size.Height);
 		var iconRect = folderRect.Pad(GridPadding).Align(new(height * 3 / 4, height * 3 / 4), ContentAlignment.MiddleLeft);
-		using var brush = new SolidBrush(Color.FromArgb(100, folderRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor));
-		e.Graphics.FillRoundedRectangle(brush, folderRect, (int)(5 * UI.FontScale));
+		using var brush = new SolidBrush(Color.FromArgb(120, folderRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)));
 		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
+
+		e.Graphics.FillRoundedRectangle(brush, folderRect, (int)(5 * UI.FontScale));
 		e.Graphics.DrawString(Path.GetFileName(package.Folder), font, textBrush, folderRect.Pad(iconRect.Width + GridPadding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 
 		using var folderIcon = IconManager.GetIcon("I_Folder", iconRect.Height).Color(FormDesign.Design.IconColor);
@@ -56,15 +165,15 @@ partial class ItemListControl<T>
 		e.Rects.FolderRect = folderRect;
 	}
 
-	private void DrawAuthor(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, IUser author)
+	private void DrawAuthor(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, IUser author, int scoreX)
 	{
 		using var font = UI.Font(8.25F, FontStyle.Bold);
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom;
 		var size = e.Graphics.Measure(author!.Name, font).ToSize();
 		size = new Size(size.Width + GridPadding.Left + height, height);
-		var authorRect = new Rectangle(e.Rects.TextRect.X, e.Rects.IconRect.Bottom - size.Height, size.Width, size.Height);
+		var authorRect = new Rectangle(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom - size.Height, size.Width, size.Height);
 		var avatarRect = authorRect.Pad(GridPadding).Align(new(height * 3 / 4, height * 3 / 4), ContentAlignment.MiddleLeft);
-		using var brush = new SolidBrush(Color.FromArgb(100, authorRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.AccentColor));
+		using var brush = new SolidBrush(Color.FromArgb(120, authorRect.Contains(CursorLocation) ? FormDesign.Design.ActiveColor : FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)));
 		e.Graphics.FillRoundedRectangle(brush, authorRect, (int)(5 * UI.FontScale));
 		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
 		e.Graphics.DrawString(author.Name, font, textBrush, authorRect.Pad(avatarRect.Width + GridPadding.Horizontal, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
@@ -111,14 +220,14 @@ partial class ItemListControl<T>
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			tags.Insert(0, (isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), versionText!));
+			tags.Insert(0, (isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), versionText!));
 		}
 
 		var tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + GridPadding.Bottom, 0, 0);
 
 		for (var i = 0; i < tags.Count; i++)
 		{
-			var rect = e.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: i == 0 && !string.IsNullOrEmpty(versionText) ? null : CursorLocation);
+			var rect = e.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: i == 0 && !string.IsNullOrEmpty(versionText) ? CursorLocation : null);
 
 			if (i == 0 && !string.IsNullOrEmpty(versionText))
 			{
@@ -132,7 +241,7 @@ partial class ItemListControl<T>
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
 
-			e.Rects.DateRect = e.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
+			e.Rects.DateRect = e.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
 		}
 	}
 

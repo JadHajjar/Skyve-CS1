@@ -38,8 +38,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	public ItemListControl()
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
-
-		HighlightOnHover = true;
+		
 		SeparateWithLines = true;
 		EnableSelection = true;
 
@@ -53,7 +52,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		sorting = _settings.UserSettings.PackageSorting;
 		SortDescending = _settings.UserSettings.PackageSortingDesc;
 
-		GridItemSize = new Size(390, 220);
+		GridItemSize = new Size(390, 135);
 		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 64 : 36;
 	}
 
@@ -110,11 +109,13 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	{
 		if (GridView)
 		{
+			HighlightOnHover = false;
 			Padding = UI.Scale(new Padding(6), UI.UIScale);
 			GridPadding = UI.Scale(new Padding(4), UI.UIScale);
 		}
 		else
 		{
+			HighlightOnHover = true;
 			Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 		}
 	}
@@ -543,6 +544,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		internal Rectangle DownloadStatusRect;
 		internal Rectangle DateRect;
 		internal Rectangle ScoreRect;
+		internal Rectangle GithubRect;
 
 		public T Item { get; set; }
 
@@ -564,6 +566,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 				DownloadStatusRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
 				DateRect.Contains(location) ||
+				GithubRect.Contains(location) ||
 				(VersionRect.Contains(location) && Item?.LocalParentPackage?.Mod is not null) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);

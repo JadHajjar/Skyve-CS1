@@ -198,10 +198,8 @@ partial class ItemListControl<T>
 		if (score != -1)
 		{
 			var clip = e.Graphics.ClipBounds;
-			var labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
-			labelH -= labelH % 2;
-			var small = UI.FontScale < 1.25;
-			var scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.BottomLeft);
+			GetScoreRect(e, large, rects, labelRect, out var labelH, out var scoreRect);
+		var small = UI.FontScale < 1.25;
 			var backColor = score > 90 && workshopInfo!.Subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 
 			if (!small)
@@ -251,6 +249,20 @@ partial class ItemListControl<T>
 		}
 
 		return 0;
+	}
+
+	private void GetScoreRect(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, bool large, ItemListControl<T>.Rectangles rects, Rectangle labelRect, out int labelH, out Rectangle scoreRect)
+	{
+		if (GridView)
+		{
+			labelH = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom - 4;
+			scoreRect = new Rectangle(e.Rects.IconRect.Right + GridPadding.Left, e.Rects.IconRect.Bottom - labelH - 2, labelH, labelH);
+			return;
+		}
+
+		labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
+		labelH -= labelH % 2;
+		scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.BottomLeft);
 	}
 
 	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, ContentAlignment contentAlignment)
