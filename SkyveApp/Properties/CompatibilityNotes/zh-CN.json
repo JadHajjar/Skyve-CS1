@@ -176,7 +176,7 @@
   "This is not updated for the Industries DLC and will probably not work for the industrial areas from that DLC.": "此模组尚未针对工业 DLC 进行更新，并且可能不适用于工业 DLC 中的工业区。",
   "Simulation Errors and conflits with various other mods.": "引发模拟错误，并与其他模组冲突。",
   "If the default looks too dark, turn up the global and/or ambient light intensity settings in Ultimate Eyecandy. Shadows must be set to max using Shadow Strength Adjuster to prevent the sun from leaking through objects. To make shadows less visible, reduce global light intensity and increase ambient light intensity in Ultimate Eyecandy.": "如果默认设置看起来太暗，请使用 Ultimate Eyecandy 增大全局/环境光照强度。\n必须使用 Shadow Strength Adjuster 将阴影强度设置为最大，以防止阳光穿过物品对象。\n要使阴影强度更浅，请在 Ultimate Eyecandy 中降低全局光照强度，并增大环境光照强度。",
-  "Causes various issues as one path is randomly selected": "随机选择路径时，此模组会引发多种问题。",
+  "Causes various issues as one path is randomly selected": "选择人行路径时会引发多种问题。",
   "Do not support names for newer DLC districts.": "此模组不支持对较新 DLC 区域进行命名。",
   "Resources deplete instead of being unlimited, language switches back to English every start and game is unlocked even if this function is deactivated.": "自然资源仍会耗尽，而无法变成无限资源。\n每次启动游戏时，语言会自动变成英语。\n即使禁用此功能，游戏也会被解锁。",
   "Not working on Vanilla roads from later than Sunser Harbour. You could keep subscribed but deactivated to use BOB https://steamcommunity.com/sharedfiles/filedetails/?id=2197863850 to exchange the props.": "此模组不适用于在 Sunser Harbor DLC 之后的更新中原版游戏新增的道路。\n尽管如此，仍然可以订阅并禁用此模组，然后使用 BOB 模组（https://steamcommunity.com/sharedfiles/filedetails/?id=2197863850）来替换摆件。",
