@@ -13,7 +13,7 @@ public class PackageWatcher
 	private readonly DelayedAction<string> _delayedUpdate = new(5000);
 	private static readonly List<PackageWatcher> _watchers = new();
 
-	private FileSystemWatcher? watcher;
+	private FileWatcher? watcher;
 
 	private PackageWatcher(string folder, bool allowSelf, bool workshop)
 	{
@@ -36,9 +36,9 @@ public class PackageWatcher
 			IncludeSubdirectories = true
 		};
 
-		watcher.Changed += new FileSystemEventHandler(FileChanged);
-		watcher.Created += new FileSystemEventHandler(FileChanged);
-		watcher.Deleted += new FileSystemEventHandler(FileChanged);
+		watcher.Changed += FileChanged;
+		watcher.Created += FileChanged;
+		watcher.Deleted += FileChanged;
 
 		watcher.EnableRaisingEvents = true;
 	}
@@ -47,7 +47,7 @@ public class PackageWatcher
 	public bool Workshop { get; }
 	public string Path { get; }
 
-	private void FileChanged(object sender, FileSystemEventArgs e)
+	private void FileChanged(object sender, FileWatcherEventArgs e)
 	{
 		if (IoPath.GetFileName(e.FullPath) == ".excluded")
 		{

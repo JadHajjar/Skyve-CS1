@@ -22,8 +22,8 @@ internal class SubscriptionsManager : ISubscriptionsManager
 	private readonly string _filePath;
 	private readonly List<ulong> _delayedDownloads = new();
 	private readonly DelayedAction _delayedDownloadsAction;
-	private FileSystemWatcher? SubscriptionListWatcher;
-	private FileSystemWatcher? SubscriptionTransferWatcher;
+	private FileWatcher? SubscriptionListWatcher;
+	private FileWatcher? SubscriptionTransferWatcher;
 
 	public List<ulong> SubscribingTo { get; private set; } = new();
 	public List<ulong> UnsubscribingFrom { get; private set; } = new();
@@ -164,7 +164,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 		return true;
 	}
 
-	private void SubscriptionTransferFileChanged(object sender, FileSystemEventArgs e)
+	private void SubscriptionTransferFileChanged(object sender, FileWatcherEventArgs e)
 	{
 		var transferData = new SubscriptionTransfer();
 
@@ -200,26 +200,26 @@ internal class SubscriptionsManager : ISubscriptionsManager
 		SubscriptionListWatcher?.Dispose();
 		SubscriptionTransferWatcher?.Dispose();
 
-		SubscriptionListWatcher = new FileSystemWatcher
+		SubscriptionListWatcher = new FileWatcher
 		{
 			Path = _locationManager.SkyveAppDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = "SubscriptionList.txt"
 		};
 
-		SubscriptionListWatcher.Changed += new FileSystemEventHandler(FileChanged);
-		SubscriptionListWatcher.Created += new FileSystemEventHandler(FileChanged);
+		SubscriptionListWatcher.Changed += FileChanged;
+		SubscriptionListWatcher.Created += FileChanged;
 
 		SubscriptionListWatcher.EnableRaisingEvents = true;
 
-		SubscriptionTransferWatcher = new FileSystemWatcher
+		SubscriptionTransferWatcher = new FileWatcher
 		{
 			Path = _locationManager.SkyveAppDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = "SubscriptionTransfer.xml"
 		};
 
-		SubscriptionTransferWatcher.Deleted += new FileSystemEventHandler(SubscriptionTransferFileChanged);
+		SubscriptionTransferWatcher.Deleted += SubscriptionTransferFileChanged;
 
 		SubscriptionTransferWatcher.EnableRaisingEvents = true;
 
@@ -232,7 +232,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 		PendingUnsubscribingFrom.RemoveAll(x => _contentManager.GetPackageById(new GenericPackageIdentity(x)) is null);
 	}
 
-	private void FileChanged(object sender, FileSystemEventArgs e)
+	private void FileChanged(object sender, FileWatcherEventArgs e)
 	{
 		if (!_settings.SessionSettings.UserSettings.DisablePackageCleanup && CrossIO.FileExists(e.FullPath))
 		{

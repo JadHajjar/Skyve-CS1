@@ -21,7 +21,7 @@ internal class PlaysetManager : IPlaysetManager
 {
 	private readonly List<ICustomPlayset> _playsets;
 	private bool disableAutoSave;
-	private readonly FileSystemWatcher? _watcher;
+	private readonly FileWatcher? _watcher;
 
 	public ICustomPlayset CurrentPlayset { get; private set; }
 	public IEnumerable<ICustomPlayset> Playsets
@@ -93,7 +93,7 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			Directory.CreateDirectory(_locationManager.SkyvePlaysetsAppDataPath);
 
-			_watcher = new FileSystemWatcher
+			_watcher = new FileWatcher
 			{
 				Path = _locationManager.SkyvePlaysetsAppDataPath,
 				NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
@@ -603,9 +603,9 @@ internal class PlaysetManager : IPlaysetManager
 
 		if (_watcher is not null)
 		{
-			_watcher.Changed += new FileSystemEventHandler(FileChanged_Changed);
-			_watcher.Created += new FileSystemEventHandler(FileChanged_Created);
-			_watcher.Deleted += new FileSystemEventHandler(FileChanged_Deleted);
+			_watcher.Changed += FileChanged_Changed;
+			_watcher.Created += FileChanged_Created;
+			_watcher.Deleted += FileChanged_Deleted;
 
 			try
 			{ _watcher.EnableRaisingEvents = true; }
@@ -613,23 +613,23 @@ internal class PlaysetManager : IPlaysetManager
 		}
 	}
 
-	private void FileChanged_Changed(object sender, FileSystemEventArgs e)
+	private void FileChanged_Changed(object sender, FileWatcherEventArgs e)
 	{
 		_logger.Debug($"_watcher.Changed Called: {e.FullPath}");
 		FileChanged(sender, e);
 	}
-	private void FileChanged_Created(object sender, FileSystemEventArgs e)
+	private void FileChanged_Created(object sender, FileWatcherEventArgs e)
 	{
 		_logger.Debug($"_watcher.Created Called: {e.FullPath}");
 		FileChanged(sender, e);
 	}
-	private void FileChanged_Deleted(object sender, FileSystemEventArgs e)
+	private void FileChanged_Deleted(object sender, FileWatcherEventArgs e)
 	{
 		_logger.Debug($"_watcher.Deleted Called: {e.FullPath}");
 		FileChanged(sender, e);
 	}
 
-	private void FileChanged(object sender, FileSystemEventArgs e)
+	private void FileChanged(object sender, FileWatcherEventArgs e)
 	{
 		try
 		{

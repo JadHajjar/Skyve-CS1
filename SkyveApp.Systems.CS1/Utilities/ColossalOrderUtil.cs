@@ -17,7 +17,7 @@ internal class ColossalOrderUtil
 	private SettingsFile _settingsFile;
 	private bool _initialized;
 	private readonly Dictionary<IMod, SavedBool> _settingsDictionary = new();
-	private readonly FileSystemWatcher _watcher;
+	private readonly FileWatcher _watcher;
 	private readonly DelayedAction _delayedAction = new(500);
 
 	private readonly ILocationManager _locationManager;
@@ -35,18 +35,18 @@ internal class ColossalOrderUtil
 		_watcher = CreateWatcher();
 	}
 
-	private FileSystemWatcher CreateWatcher()
+	private FileWatcher CreateWatcher()
 	{
-		var watcher = new FileSystemWatcher
+		var watcher = new FileWatcher
 		{
 			Path = _locationManager.AppDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = GAME_SETTINGS_FILE_NAME + SettingsFile.extension
 		};
 
-		watcher.Changed += new FileSystemEventHandler(FileChanged);
-		watcher.Created += new FileSystemEventHandler(FileChanged);
-		watcher.Deleted += new FileSystemEventHandler(FileChanged);
+		watcher.Changed += FileChanged;
+		watcher.Created += FileChanged;
+		watcher.Deleted += FileChanged;
 
 		return watcher;
 	}
@@ -57,7 +57,7 @@ internal class ColossalOrderUtil
 		SaveSettings();
 	}
 
-	private void FileChanged(object sender, FileSystemEventArgs e)
+	private void FileChanged(object sender, FileWatcherEventArgs e)
 	{
 		_delayedAction.Run(SettingsFileChanged);
 	}
