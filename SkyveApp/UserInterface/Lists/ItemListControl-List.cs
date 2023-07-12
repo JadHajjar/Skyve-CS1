@@ -1,6 +1,4 @@
 ﻿using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Forms;
-using SkyveApp.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -16,7 +14,6 @@ partial class ItemListControl<T>
 		var localPackage = e.Item.LocalParentPackage;
 		var large = _settings.UserSettings.LargeItemOnHover;
 		var rects = e.Rects;
-		var inclEnableRect = (rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect)).Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var labelRect = new Rectangle(rects.TextRect.X, rects.CenterRect.Bottom, 0, e.ClipRectangle.Bottom - rects.CenterRect.Bottom);
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
@@ -83,7 +80,7 @@ partial class ItemListControl<T>
 
 		if (!IsSelection)
 		{
-			DrawIncludedButton(e, rects, inclEnableRect, isIncluded, partialIncluded, large, localPackage);
+			DrawIncludedButton(e, rects, isIncluded, partialIncluded, large, localPackage, out _);
 		}
 
 		DrawThumbnailAndTitle(e, rects, large, workshopInfo);
@@ -101,7 +98,7 @@ partial class ItemListControl<T>
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			rects.VersionRect = e.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, isVersion);
+			rects.VersionRect = e.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, mousePosition: isVersion ? CursorLocation : null);
 			labelRect.X += Padding.Left + rects.VersionRect.Width;
 		}
 
@@ -199,7 +196,7 @@ partial class ItemListControl<T>
 		{
 			var clip = e.Graphics.ClipBounds;
 			GetScoreRect(e, large, rects, labelRect, out var labelH, out var scoreRect);
-		var small = UI.FontScale < 1.25;
+			var small = UI.FontScale < 1.25;
 			var backColor = score > 90 && workshopInfo!.Subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 
 			if (!small)
@@ -267,11 +264,9 @@ partial class ItemListControl<T>
 
 	private Rectangle DrawStatusDescriptor(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, ContentAlignment contentAlignment)
 	{
-		GetStatusDescriptors(e.Item, out var text, out var icon, out var color);
-
-		if (!string.IsNullOrEmpty(text))
+		if (GetStatusDescriptors(e.Item, out var text, out var icon, out var color))
 		{
-			using (icon)
+			using (icon!.Small)
 			{
 				return e.DrawLabel(text, icon, color.MergeColor(FormDesign.Design.BackColor, 65), rects.DownloadStatusRect, contentAlignment, mousePosition: CursorLocation);
 			}
@@ -411,11 +406,20 @@ partial class ItemListControl<T>
 		}
 	}
 
-	private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, Rectangle inclEnableRect, bool isIncluded, bool partialIncluded, bool large, ILocalPackageWithContents? package)
+	private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, bool isIncluded, bool partialIncluded, bool large, ILocalPackageWithContents? package, out Color activeColor)
 	{
+		activeColor = FormDesign.Design.ActiveColor;
+
 		if (package is null && e.Item.IsLocal)
 		{
 			return; // missing local item
+		}
+
+		var inclEnableRect = rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect);
+
+		if (!GridView)
+		{
+			inclEnableRect = inclEnableRect.Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
 		}
 
 		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
@@ -424,7 +428,6 @@ partial class ItemListControl<T>
 
 		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{
-			var activeColor = FormDesign.Design.ActiveColor;
 			var enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
 			if (isIncluded)
 			{
@@ -454,7 +457,6 @@ partial class ItemListControl<T>
 		}
 		else
 		{
-			var activeColor = FormDesign.Design.ActiveColor;
 			if (isIncluded)
 			{
 				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);

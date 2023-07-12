@@ -82,7 +82,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to load the current profile");
+			_logger.Exception(ex, "Failed to load the current playset");
 		}
 
 		_playsets ??= new();
@@ -117,20 +117,20 @@ internal class PlaysetManager : IPlaysetManager
 			return null;
 		}
 
-		var profile = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, (CommandUtil.PreSelectedProfile ?? _settings.SessionSettings.CurrentPlayset) + ".json");
+		var playset = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, (CommandUtil.PreSelectedProfile ?? _settings.SessionSettings.CurrentPlayset) + ".json");
 
-		if (!CrossIO.FileExists(profile))
+		if (!CrossIO.FileExists(playset))
 		{
 			return null;
 		}
 
-		var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(profile));
+		var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(playset));
 
 		if (newPlayset != null)
 		{
-			newPlayset.Name = Path.GetFileNameWithoutExtension(profile);
-			newPlayset.LastEditDate = File.GetLastWriteTime(profile);
-			newPlayset.DateCreated = File.GetCreationTime(profile);
+			newPlayset.Name = Path.GetFileNameWithoutExtension(playset);
+			newPlayset.LastEditDate = File.GetLastWriteTime(playset);
+			newPlayset.DateCreated = File.GetCreationTime(playset);
 
 			if (newPlayset.LastUsed == DateTime.MinValue)
 			{
@@ -141,7 +141,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		else
 		{
-			_logger.Error($"Could not load the profile: '{profile}'");
+			_logger.Error($"Could not load the playset: '{playset}'");
 		}
 
 		return null;
@@ -165,9 +165,9 @@ internal class PlaysetManager : IPlaysetManager
 
 		_logger.Info("Checking for Legacy profiles");
 
-		foreach (var profile in Directory.EnumerateFiles(legacyPlaysetPath, "*.xml"))
+		foreach (var playset in Directory.EnumerateFiles(legacyPlaysetPath, "*.xml"))
 		{
-			var newName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{Path.GetFileNameWithoutExtension(profile)}.json");
+			var newName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{Path.GetFileNameWithoutExtension(playset)}.json");
 
 			if (CrossIO.FileExists(newName))
 			{
@@ -175,9 +175,9 @@ internal class PlaysetManager : IPlaysetManager
 				continue;
 			}
 
-			_logger.Info($"Converting profile '{newName}'..");
+			_logger.Info($"Converting playset '{newName}'..");
 
-			ConvertLegacyPlayset(profile);
+			ConvertLegacyPlayset(playset);
 		}
 	}
 
@@ -209,7 +209,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		else
 		{
-			_logger.Error($"Could not load the profile: '{profilePath}'");
+			_logger.Error($"Could not load the playset: '{profilePath}'");
 		}
 
 		return newPlayset;
@@ -226,15 +226,15 @@ internal class PlaysetManager : IPlaysetManager
 				profiles = new(_playsets);
 			}
 
-			foreach (Playset profile in profiles)
+			foreach (Playset playset in profiles)
 			{
-				profile.IsMissingItems = profile.Mods.Any(x => GetMod(x) is null) || profile.Assets.Any(x => GetAsset(x) is null);
+				playset.IsMissingItems = playset.Mods.Any(x => GetMod(x) is null) || playset.Assets.Any(x => GetAsset(x) is null);
 #if DEBUG
-				if (profile.IsMissingItems)
+				if (playset.IsMissingItems)
 				{
-					_logger.Debug($"Missing items in the profile: {profile}\r\n" +
-						profile.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
-						profile.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n"));
+					_logger.Debug($"Missing items in the playset: {playset}\r\n" +
+						playset.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
+						playset.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n"));
 				}
 #endif
 			}
@@ -243,9 +243,9 @@ internal class PlaysetManager : IPlaysetManager
 		}).Run();
 	}
 
-	public void MergeIntoCurrentPlayset(IPlayset profile)
+	public void MergeIntoCurrentPlayset(IPlayset playset)
 	{
-		new BackgroundAction("Applying profile", apply).Run();
+		new BackgroundAction("Applying playset", apply).Run();
 
 		void apply()
 		{
@@ -258,7 +258,7 @@ internal class PlaysetManager : IPlaysetManager
 
 				_notifier.ApplyingPlayset = true;
 
-				foreach (var mod in (profile as Playset)!.Mods)
+				foreach (var mod in (playset as Playset)!.Mods)
 				{
 					var localMod = GetMod(mod);
 
@@ -275,7 +275,7 @@ internal class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				foreach (var asset in (profile as Playset)!.Assets)
+				foreach (var asset in (playset as Playset)!.Assets)
 				{
 					var localAsset = GetAsset(asset);
 
@@ -320,9 +320,9 @@ internal class PlaysetManager : IPlaysetManager
 		}
 	}
 
-	public void ExcludeFromCurrentPlayset(IPlayset profile)
+	public void ExcludeFromCurrentPlayset(IPlayset playset)
 	{
-		new BackgroundAction("Applying profile", apply).Run();
+		new BackgroundAction("Applying playset", apply).Run();
 
 		void apply()
 		{
@@ -335,7 +335,7 @@ internal class PlaysetManager : IPlaysetManager
 
 				_notifier.ApplyingPlayset = true;
 
-				foreach (var mod in (profile as Playset)!.Mods)
+				foreach (var mod in (playset as Playset)!.Mods)
 				{
 					var localMod = GetMod(mod);
 
@@ -346,7 +346,7 @@ internal class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				foreach (var asset in (profile as Playset)!.Assets)
+				foreach (var asset in (playset as Playset)!.Assets)
 				{
 					var localAsset = GetAsset(asset);
 
@@ -370,7 +370,7 @@ internal class PlaysetManager : IPlaysetManager
 			}
 			catch (Exception ex)
 			{
-				MessagePrompt.Show(ex, "Failed to exclude items from your profile", form: SystemsProgram.MainForm as SlickForm);
+				MessagePrompt.Show(ex, "Failed to exclude items from your playset", form: SystemsProgram.MainForm as SlickForm);
 			}
 			finally
 			{
@@ -380,16 +380,16 @@ internal class PlaysetManager : IPlaysetManager
 		}
 	}
 
-	public void DeletePlayset(ICustomPlayset profile)
+	public void DeletePlayset(ICustomPlayset playset)
 	{
-		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json"));
+		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{playset.Name}.json"));
 
 		lock (_playsets)
 		{
-			_playsets.Remove(profile);
+			_playsets.Remove(playset);
 		}
 
-		if (profile == CurrentPlayset)
+		if (playset == CurrentPlayset)
 		{
 			SetCurrentPlayset(Playset.TemporaryPlayset);
 		}
@@ -397,11 +397,11 @@ internal class PlaysetManager : IPlaysetManager
 		_notifier.OnPlaysetUpdated();
 	}
 
-	public void SetCurrentPlayset(ICustomPlayset profile)
+	public void SetCurrentPlayset(ICustomPlayset playset)
 	{
-		CurrentPlayset = profile;
+		CurrentPlayset = playset;
 
-		if (profile.Temporary)
+		if (playset.Temporary)
 		{
 			_notifier.OnPlaysetChanged();
 
@@ -417,7 +417,7 @@ internal class PlaysetManager : IPlaysetManager
 			return;
 		}
 
-		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"), profile.Name);
+		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"), playset.Name);
 
 		if (SystemsProgram.MainForm as SlickForm is null)
 		{
@@ -425,7 +425,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		else
 		{
-			new BackgroundAction("Applying profile", apply).Run();
+			new BackgroundAction("Applying playset", apply).Run();
 		}
 
 		void apply()
@@ -439,7 +439,7 @@ internal class PlaysetManager : IPlaysetManager
 
 				_notifier.ApplyingPlayset = true;
 
-				foreach (var mod in (profile as Playset)!.Mods)
+				foreach (var mod in (playset as Playset)!.Mods)
 				{
 					var localMod = GetMod(mod);
 
@@ -456,7 +456,7 @@ internal class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				foreach (var asset in (profile as Playset)!.Assets)
+				foreach (var asset in (playset as Playset)!.Assets)
 				{
 					var localAsset = GetAsset(asset);
 
@@ -495,7 +495,7 @@ internal class PlaysetManager : IPlaysetManager
 					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
 				}
 
-				_dlcManager.SetExcludedDlcs((profile as Playset)!.ExcludedDLCs.ToArray());
+				_dlcManager.SetExcludedDlcs((playset as Playset)!.ExcludedDLCs.ToArray());
 
 				_notifier.ApplyingPlayset = false;
 				disableAutoSave = true;
@@ -503,18 +503,18 @@ internal class PlaysetManager : IPlaysetManager
 				_modUtil.SaveChanges();
 				_assetUtil.SaveChanges();
 
-				(profile as Playset)!.LastUsed = DateTime.Now;
-				Save(profile);
+				(playset as Playset)!.LastUsed = DateTime.Now;
+				Save(playset);
 
 				_notifier.OnPlaysetChanged();
 
 				try
-				{ SaveLsmSettings(profile); }
-				catch (Exception ex) { _logger.Exception(ex, "Failed to apply the LSM settings for profile " + profile.Name); }
+				{ SaveLsmSettings(playset); }
+				catch (Exception ex) { _logger.Exception(ex, "Failed to apply the LSM settings for playset " + playset.Name); }
 
 				if (!CommandUtil.NoWindow)
 				{
-					_settings.SessionSettings.CurrentPlayset = profile.Name;
+					_settings.SessionSettings.CurrentPlayset = playset.Name;
 					_settings.SessionSettings.Save();
 				}
 
@@ -522,7 +522,7 @@ internal class PlaysetManager : IPlaysetManager
 			}
 			catch (Exception ex)
 			{
-				MessagePrompt.Show(ex, "Failed to apply your profile", form: SystemsProgram.MainForm as SlickForm);
+				MessagePrompt.Show(ex, "Failed to apply your playset", form: SystemsProgram.MainForm as SlickForm);
 
 				_notifier.OnPlaysetChanged();
 			}
@@ -557,20 +557,20 @@ internal class PlaysetManager : IPlaysetManager
 	{
 		try
 		{
-			foreach (var profile in Directory.EnumerateFiles(_locationManager.SkyvePlaysetsAppDataPath, "*.json"))
+			foreach (var playset in Directory.EnumerateFiles(_locationManager.SkyvePlaysetsAppDataPath, "*.json"))
 			{
-				if (Path.GetFileNameWithoutExtension(profile).Equals(_settings.SessionSettings.CurrentPlayset, StringComparison.CurrentCultureIgnoreCase))
+				if (Path.GetFileNameWithoutExtension(playset).Equals(_settings.SessionSettings.CurrentPlayset, StringComparison.CurrentCultureIgnoreCase))
 				{
 					continue;
 				}
 
-				var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(profile));
+				var newPlayset = Newtonsoft.Json.JsonConvert.DeserializeObject<Playset>(File.ReadAllText(playset));
 
 				if (newPlayset != null)
 				{
-					newPlayset.Name = Path.GetFileNameWithoutExtension(profile);
-					newPlayset.LastEditDate = File.GetLastWriteTime(profile);
-					newPlayset.DateCreated = File.GetCreationTime(profile);
+					newPlayset.Name = Path.GetFileNameWithoutExtension(playset);
+					newPlayset.LastEditDate = File.GetLastWriteTime(playset);
+					newPlayset.DateCreated = File.GetCreationTime(playset);
 
 					if (newPlayset.LastUsed == DateTime.MinValue)
 					{
@@ -584,7 +584,7 @@ internal class PlaysetManager : IPlaysetManager
 				}
 				else
 				{
-					_logger.Error($"Could not load the profile: '{profile}'");
+					_logger.Error($"Could not load the playset: '{playset}'");
 				}
 			}
 		}
@@ -603,30 +603,14 @@ internal class PlaysetManager : IPlaysetManager
 
 		if (_watcher is not null)
 		{
-			_watcher.Changed += FileChanged_Changed;
-			_watcher.Created += FileChanged_Created;
-			_watcher.Deleted += FileChanged_Deleted;
+			_watcher.Changed += FileChanged;
+			_watcher.Created += FileChanged;
+			_watcher.Deleted += FileChanged;
 
 			try
 			{ _watcher.EnableRaisingEvents = true; }
-			catch (Exception ex) { _logger.Exception(ex, $"Failed to start profile watcher ({_locationManager.SkyvePlaysetsAppDataPath})"); }
+			catch (Exception ex) { _logger.Exception(ex, $"Failed to start playset watcher ({_locationManager.SkyvePlaysetsAppDataPath})"); }
 		}
-	}
-
-	private void FileChanged_Changed(object sender, FileWatcherEventArgs e)
-	{
-		_logger.Debug($"_watcher.Changed Called: {e.FullPath}");
-		FileChanged(sender, e);
-	}
-	private void FileChanged_Created(object sender, FileWatcherEventArgs e)
-	{
-		_logger.Debug($"_watcher.Created Called: {e.FullPath}");
-		FileChanged(sender, e);
-	}
-	private void FileChanged_Deleted(object sender, FileWatcherEventArgs e)
-	{
-		_logger.Debug($"_watcher.Deleted Called: {e.FullPath}");
-		FileChanged(sender, e);
 	}
 
 	private void FileChanged(object sender, FileWatcherEventArgs e)
@@ -642,15 +626,15 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				lock (_playsets)
 				{
-					var profile = _playsets.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
+					var playset = _playsets.FirstOrDefault(x => x.Name?.Equals(Path.GetFileNameWithoutExtension(e.FullPath), StringComparison.OrdinalIgnoreCase) ?? false);
 
-					if (profile != null)
+					if (playset != null)
 					{
 #if DEBUG
-						_logger.Debug($"Playset removed: {profile.Name}");
+						_logger.Debug($"Playset removed: {playset.Name}");
 #endif
 
-						_playsets.Remove(profile);
+						_playsets.Remove(playset);
 					}
 				}
 
@@ -696,15 +680,15 @@ internal class PlaysetManager : IPlaysetManager
 			}
 			else
 			{
-				_logger.Error($"Could not load the profile: '{e.FullPath}'");
+				_logger.Error($"Could not load the playset: '{e.FullPath}'");
 			}
 		}
 		catch (Exception ex) { _logger.Exception(ex, "Failed to refresh changes to profiles"); }
 	}
 
-	public void GatherInformation(IPlayset? profile)
+	public void GatherInformation(IPlayset? iplayset)
 	{
-		if (profile is not Playset playset || profile.Temporary || !_notifier.IsContentLoaded)
+		if (iplayset is not Playset playset || playset.Temporary || !_notifier.IsContentLoaded)
 		{
 			return;
 		}
@@ -714,9 +698,9 @@ internal class PlaysetManager : IPlaysetManager
 		playset.ExcludedDLCs = _dlcManager.GetExcludedDlcs();
 	}
 
-	public bool Save(IPlayset? profile, bool forced = false)
+	public bool Save(IPlayset? playset, bool forced = false)
 	{
-		if (profile == null || (!forced && (profile.Temporary || !_notifier.IsContentLoaded)))
+		if (playset == null || (!forced && (playset.Temporary || !_notifier.IsContentLoaded)))
 		{
 			return false;
 		}
@@ -731,16 +715,16 @@ internal class PlaysetManager : IPlaysetManager
 			Directory.CreateDirectory(_locationManager.SkyvePlaysetsAppDataPath);
 
 			File.WriteAllText(
-				CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json"),
-				Newtonsoft.Json.JsonConvert.SerializeObject(profile, Newtonsoft.Json.Formatting.Indented));
+				CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{playset.Name}.json"),
+				Newtonsoft.Json.JsonConvert.SerializeObject(playset, Newtonsoft.Json.Formatting.Indented));
 
-			(profile as Playset)!.IsMissingItems = (profile as Playset)!.Mods.Any(x => GetMod(x) is null) || (profile as Playset)!.Assets.Any(x => GetAsset(x) is null);
+			(playset as Playset)!.IsMissingItems = (playset as Playset)!.Mods.Any(x => GetMod(x) is null) || (playset as Playset)!.Assets.Any(x => GetAsset(x) is null);
 #if DEBUG
-			if ((profile as Playset)!.IsMissingItems)
+			if ((playset as Playset)!.IsMissingItems)
 			{
-				_logger.Debug($"Missing items in the profile: {profile}\r\n" +
-					(profile as Playset)!.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
-					(profile as Playset)!.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n"));
+				_logger.Debug($"Missing items in the playset: {playset}\r\n" +
+					(playset as Playset)!.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
+					(playset as Playset)!.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n"));
 			}
 #endif
 
@@ -748,7 +732,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, $"Failed to save profile ({profile.Name}) to {CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json")}");
+			_logger.Exception(ex, $"Failed to save playset ({playset.Name}) to {CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{playset.Name}.json")}");
 		}
 		finally
 		{
@@ -773,9 +757,9 @@ internal class PlaysetManager : IPlaysetManager
 		return _assetUtil.GetAssetByFile(_locationManager.ToLocalPath(asset.RelativePath));
 	}
 
-	public bool RenamePlayset(IPlayset profile, string text)
+	public bool RenamePlayset(IPlayset playset, string text)
 	{
-		if (profile == null || profile.Temporary)
+		if (playset == null || playset.Temporary)
 		{
 			return false;
 		}
@@ -783,7 +767,7 @@ internal class PlaysetManager : IPlaysetManager
 		text = text.EscapeFileName();
 
 		var newName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{text}.json");
-		var oldName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json");
+		var oldName = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{playset.Name}.json");
 
 		try
 		{
@@ -801,13 +785,13 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				File.Move(oldName, newName);
 
-				profile.Name = text;
+				playset.Name = text;
 			}
 			else
 			{
-				profile.Name = text;
+				playset.Name = text;
 
-				Save(profile);
+				Save(playset);
 			}
 		}
 		finally
@@ -870,7 +854,7 @@ internal class PlaysetManager : IPlaysetManager
 		});
 	}
 
-	public void SaveLsmSettings(IPlayset profile)
+	public void SaveLsmSettings(IPlayset playset)
 	{
 		var current = LsmSettingsFile.Deserialize();
 
@@ -879,10 +863,10 @@ internal class PlaysetManager : IPlaysetManager
 			return;
 		}
 
-		current.loadEnabled = (profile as Playset)!.LsmSettings.LoadEnabled;
-		current.loadUsed = (profile as Playset)!.LsmSettings.LoadUsed;
-		current.skipFile = (profile as Playset)!.LsmSettings.SkipFile;
-		current.skipPrefabs = (profile as Playset)!.LsmSettings.UseSkipFile;
+		current.loadEnabled = (playset as Playset)!.LsmSettings.LoadEnabled;
+		current.loadUsed = (playset as Playset)!.LsmSettings.LoadUsed;
+		current.skipFile = (playset as Playset)!.LsmSettings.SkipFile;
+		current.skipPrefabs = (playset as Playset)!.LsmSettings.UseSkipFile;
 
 		current.SyncAndSerialize();
 	}
@@ -941,7 +925,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		else
 		{
-			_logger.Error($"Could not load the profile: '{obj}' / '{newPath}'");
+			_logger.Error($"Could not load the playset: '{obj}' / '{newPath}'");
 		}
 
 		return null;
@@ -960,18 +944,18 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				var profileMod = new Playset.Mod(mod);
 
-				foreach (var profile in Playsets.Skip(1))
+				foreach (var playset in Playsets.Skip(1))
 				{
-					SetIncludedFor(value, profileMod, profile);
+					SetIncludedFor(value, profileMod, playset);
 				}
 			}
 			else if (item is Asset asset)
 			{
 				var profileAsset = new Playset.Asset(asset);
 
-				foreach (var profile in Playsets.Skip(1))
+				foreach (var playset in Playsets.Skip(1))
 				{
-					SetIncludedFor(value, profileAsset, profile);
+					SetIncludedFor(value, profileAsset, playset);
 				}
 			}
 			else if (item is Package package)
@@ -979,9 +963,9 @@ internal class PlaysetManager : IPlaysetManager
 				var profileMod = package.Mod is null ? null : new Playset.Mod(package.Mod);
 				var assets = package.Assets?.Select(x => new Playset.Asset(x)).ToList() ?? new();
 
-				foreach (var profile in Playsets.Skip(1))
+				foreach (var playset in Playsets.Skip(1))
 				{
-					SetIncludedFor(value, profileMod, assets, profile);
+					SetIncludedFor(value, profileMod, assets, playset);
 				}
 			}
 		}
@@ -995,15 +979,15 @@ internal class PlaysetManager : IPlaysetManager
 		}
 	}
 
-	private void SetIncludedFor(bool value, Playset.Mod? profileMod, List<Playset.Asset> assets, IPlayset profile)
+	private void SetIncludedFor(bool value, Playset.Mod? profileMod, List<Playset.Asset> assets, IPlayset playset)
 	{
 		if (value)
 		{
 			if (profileMod is not null)
 			{
-				if (!(profile as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+				if (!(playset as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 				{
-					(profile as Playset)!.Mods.Add(profileMod);
+					(playset as Playset)!.Mods.Add(profileMod);
 				}
 			}
 
@@ -1011,7 +995,7 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				var assetsToAdd = new List<Playset.Asset>(assets);
 
-				foreach (var pa in (profile as Playset)!.Assets)
+				foreach (var pa in (playset as Playset)!.Assets)
 				{
 					foreach (var profileAsset in assetsToAdd)
 					{
@@ -1023,60 +1007,60 @@ internal class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				(profile as Playset)!.Assets.AddRange(assetsToAdd);
+				(playset as Playset)!.Assets.AddRange(assetsToAdd);
 			}
 		}
 		else
 		{
 			if (profileMod is not null)
 			{
-				(profile as Playset)!.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+				(playset as Playset)!.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
 			}
 
 			if (assets.Count > 0)
 			{
-				(profile as Playset)!.Assets.RemoveAll(x => assets.Any(profileAsset => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false));
+				(playset as Playset)!.Assets.RemoveAll(x => assets.Any(profileAsset => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false));
 			}
 		}
 
-		Save(profile);
+		Save(playset);
 	}
 
-	private void SetIncludedFor(bool value, Playset.Asset profileAsset, IPlayset profile)
+	private void SetIncludedFor(bool value, Playset.Asset profileAsset, IPlayset playset)
 	{
 		if (value)
 		{
-			if (!(profile as Playset)!.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			if (!(playset as Playset)!.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 			{
-				(profile as Playset)!.Assets.Add(profileAsset);
+				(playset as Playset)!.Assets.Add(profileAsset);
 			}
 		}
 		else
 		{
-			(profile as Playset)!.Assets.RemoveAll(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+			(playset as Playset)!.Assets.RemoveAll(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
 		}
 
-		Save(profile);
+		Save(playset);
 	}
 
-	private void SetIncludedFor(bool value, Playset.Mod profileMod, IPlayset profile)
+	private void SetIncludedFor(bool value, Playset.Mod profileMod, IPlayset playset)
 	{
 		if (value)
 		{
-			if (!(profile as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+			if (!(playset as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 			{
-				(profile as Playset)!.Mods.Add(profileMod);
+				(playset as Playset)!.Mods.Add(profileMod);
 			}
 		}
 		else
 		{
-			(profile as Playset)!.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
+			(playset as Playset)!.Mods.RemoveAll(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false);
 		}
 
-		Save(profile);
+		Save(playset);
 	}
 
-	public bool IsPackageIncludedInPlayset(IPackage ipackage, IPlayset profile)
+	public bool IsPackageIncludedInPlayset(IPackage ipackage, IPlayset playset)
 	{
 		if (ipackage is Package package)
 		{
@@ -1085,7 +1069,7 @@ internal class PlaysetManager : IPlaysetManager
 
 			if (profileMod is not null)
 			{
-				if (!(profile as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
+				if (!(playset as Playset)!.Mods.Any(x => x.RelativePath?.Equals(profileMod.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false))
 				{
 					return false;
 				}
@@ -1093,7 +1077,7 @@ internal class PlaysetManager : IPlaysetManager
 
 			if (assets.Count > 0)
 			{
-				if (!assets.All(profileAsset => (profile as Playset)!.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
+				if (!assets.All(profileAsset => (playset as Playset)!.Assets.Any(x => x.RelativePath?.Equals(profileAsset.RelativePath, StringComparison.OrdinalIgnoreCase) ?? false)))
 				{
 					return false;
 				}
@@ -1103,35 +1087,35 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			if (ipackage.IsMod)
 			{
-				return (profile as Playset)!.Mods.Any(x => x.Id == ipackage.Id);
+				return (playset as Playset)!.Mods.Any(x => x.Id == ipackage.Id);
 			}
 
-			return (profile as Playset)!.Assets.Any(x => x.Id == ipackage.Id);
+			return (playset as Playset)!.Assets.Any(x => x.Id == ipackage.Id);
 		}
 
 		return true;
 	}
 
-	public void SetIncludedFor(IPackage ipackage, IPlayset profile, bool value)
+	public void SetIncludedFor(IPackage ipackage, IPlayset playset, bool value)
 	{
 		if (ipackage is Package package)
 		{
 			var profileMod = package.Mod is null ? null : new Playset.Mod(package.Mod);
 			var assets = package.Assets?.Select(x => new Playset.Asset(x)).ToList() ?? new();
 
-			SetIncludedFor(value, profileMod, assets, profile);
+			SetIncludedFor(value, profileMod, assets, playset);
 		}
 		else
 		{
-			var profileMod = (profile as Playset)!.Mods.FirstOrDefault(x => x.Id == ipackage.Id) ?? new Playset.Mod(ipackage);
+			var profileMod = (playset as Playset)!.Mods.FirstOrDefault(x => x.Id == ipackage.Id) ?? new Playset.Mod(ipackage);
 
-			SetIncludedFor(value, profileMod, new(), profile);
+			SetIncludedFor(value, profileMod, new(), playset);
 		}
 	}
 
-	public string GetFileName(IPlayset profile)
+	public string GetFileName(IPlayset playset)
 	{
-		return CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{profile.Name}.json");
+		return CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{playset.Name}.json");
 	}
 
 	public void CreateShortcut(IPlayset item)
@@ -1142,7 +1126,7 @@ internal class PlaysetManager : IPlaysetManager
 
 			ExtensionClass.CreateShortcut(CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), item.Name + ".lnk")
 				, Application.ExecutablePath
-				, (launch ? "-launch " : "") + $"-profile {item.Name}");
+				, (launch ? "-launch " : "") + $"-playset {item.Name}");
 		}
 		catch (Exception ex)
 		{

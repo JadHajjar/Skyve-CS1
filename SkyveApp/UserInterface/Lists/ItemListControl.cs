@@ -52,7 +52,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		sorting = _settings.UserSettings.PackageSorting;
 		SortDescending = _settings.UserSettings.PackageSortingDesc;
 
-		GridItemSize = new Size(390, 135);
+		GridItemSize = new Size(390, 140);
 		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 64 : 36;
 	}
 
@@ -285,7 +285,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		}
 
 		var minX = -Math.Min(-rects.SteamIdRect.X, Math.Min(-rects.DownloadStatusRect.X, -rects.CompatibilityRect.X));
-		if (e.Location.X > minX)
+		if (!GridView && e.Location.X > minX)
 		{
 			return;
 		}
@@ -497,34 +497,35 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		PlatformUtil.OpenFolder(item.LocalPackage?.FilePath);
 	}
 
-	private void GetStatusDescriptors(T mod, out string text, out Bitmap? icon, out Color color)
+	private bool GetStatusDescriptors(T mod, out string text, out DynamicIcon? icon, out Color color)
 	{
 		switch (_packageUtil.GetStatus(mod, out text))
 		{
 			case DownloadStatus.Unknown:
 				text = Locale.StatusUnknown;
-				icon = IconManager.GetSmallIcon("I_Question");
+				icon = "I_Question";
 				color = FormDesign.Design.YellowColor;
-				return;
+				return true;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = IconManager.GetSmallIcon("I_OutOfDate");
+				icon = ("I_OutOfDate");
 				color = FormDesign.Design.YellowColor;
-				return;
+				return true;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = IconManager.GetSmallIcon("I_Broken");
+				icon = ("I_Broken");
 				color = FormDesign.Design.RedColor;
-				return;
+				return true;
 			case DownloadStatus.Removed:
 				text = Locale.RemovedFromSteam;
-				icon = IconManager.GetSmallIcon("I_ContentRemoved");
+				icon = ("I_ContentRemoved");
 				color = FormDesign.Design.RedColor;
-				return;
+				return true;
 		}
 
 		icon = null;
 		color = Color.White;
+		return false;
 	}
 
 	public class Rectangles : IDrawableItemRectangles<T>
@@ -639,7 +640,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			}
 
 			var minX = -Math.Min(-SteamIdRect.X, Math.Min(-DownloadStatusRect.X, -CompatibilityRect.X));
-			if (SteamIdRect != Rectangle.Empty && location.X > minX)
+			if (!((ItemListControl<T>)instance).GridView && SteamIdRect != Rectangle.Empty && location.X > minX)
 			{
 				text = string.Empty;
 				point = default;
