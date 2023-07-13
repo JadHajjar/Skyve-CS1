@@ -8,6 +8,8 @@ internal class PC_Mods : PC_ContentList<IMod>
 
 	}
 
+	public override SkyvePage Page => SkyvePage.Mods;
+
 	protected override void LocaleChanged()
 	{
 		base.LocaleChanged();

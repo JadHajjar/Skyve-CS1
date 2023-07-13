@@ -63,7 +63,7 @@ internal class PackageManager : IPackageManager
 					continue;
 				}
 
-				if (package.Mod != null)
+				if (package.Mod is not null)
 				{
 					yield return package.Mod;
 				}
@@ -80,11 +80,6 @@ internal class PackageManager : IPackageManager
 			foreach (var package in currentPackages)
 			{
 				if (_settings.UserSettings.HidePseudoMods && _modLogicManager.IsPseudoMod(package))
-				{
-					continue;
-				}
-
-				if (package.Assets == null)
 				{
 					continue;
 				}
@@ -109,6 +104,7 @@ internal class PackageManager : IPackageManager
 		else
 		{
 			packages.Add(package);
+
 			if (indexedPackages is not null && package.Id != 0)
 			{
 				indexedPackages[package.Id] = package;

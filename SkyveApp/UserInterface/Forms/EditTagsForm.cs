@@ -1,5 +1,6 @@
 ﻿using SkyveApp.Domain.CS1;
 using SkyveApp.Domain.CS1.Enums;
+using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 
@@ -8,6 +9,8 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Forms;
 public partial class EditTagsForm : BaseForm
 {
+	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
+
 	public List<ILocalPackage> Packages { get; }
 
 	public EditTagsForm(IEnumerable<ILocalPackage> packages)
@@ -23,6 +26,28 @@ public partial class EditTagsForm : BaseForm
 		}
 
 		//L_MultipleWarning.Visible = Packages.Count > 1;
+
+		foreach (var tag in _tagsService.GetDistinctTags().OrderBy(x => x.Value))
+		{
+			var control = new TagControl { TagInfo = tag, ToAddPreview = true, CurrentTagsSource = GetLinks };
+
+			control.MouseClick += TagPreview_MouseClick;
+
+			smartFlowPanel1.Controls.Add(control);
+		}
+	}
+
+	private void TagPreview_MouseClick(object sender, MouseEventArgs e)
+	{
+		if (e.Button == MouseButtons.Left)
+		{
+			var tag = ((TagControl)sender).TagInfo?.Value;
+
+			if (!GetLinks().Contains(tag))
+			{
+				AddTag(new TagItem(TagSource.FindIt, tag!));
+			}
+		}
 	}
 
 	protected override void UIChanged()

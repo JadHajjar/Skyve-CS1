@@ -1,6 +1,9 @@
-﻿using Extensions.Sql;
+﻿using Extensions;
+using Extensions.Sql;
 
 using SkyveApp.Domain;
+using System.IO;
+using System.Xml.Linq;
 
 namespace SkyveApp.Systems.Compatibility.Domain.Api;
 
@@ -18,8 +21,20 @@ public class UserProfileContent : IDynamicSql, IPlaysetEntry
 	[DynamicSqlProperty]
 	public bool Enabled { get; set; }
 
-	string ILocalPackageIdentity.FilePath => RelativePath;
+	string ILocalPackageIdentity.FilePath => RelativePath ?? string.Empty;
 	ulong IPackageIdentity.Id => SteamId;
-	string IPackageIdentity.Name => RelativePath;
-	string? IPackageIdentity.Url { get; }
+	string? IPackageIdentity.Url => SteamId == 0 ? null : $"https://steamcommunity.com/workshop/filedetails/?id={SteamId}";
+	string IPackageIdentity.Name
+	{
+		get
+		{
+			var name = this.GetWorkshopInfo()?.Name;
+
+			return name is not null
+				? name
+				: !string.IsNullOrEmpty(RelativePath)
+				? Path.GetFileNameWithoutExtension(RelativePath)
+				: (string)LocaleHelper.GetGlobalText("UnknownPackage");
+		}
+	}
 }

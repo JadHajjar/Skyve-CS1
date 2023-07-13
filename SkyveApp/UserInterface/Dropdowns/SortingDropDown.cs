@@ -4,6 +4,8 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Dropdowns;
 internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 {
+	public SkyvePage SkyvePage { get; set; }
+
 	protected override void OnHandleCreated(EventArgs e)
 	{
 		base.OnHandleCreated(e);
@@ -11,8 +13,19 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 		if (Live)
 		{
 			Items = Enum.GetValues(typeof(PackageSorting)).Cast<PackageSorting>().Where(x => x < PackageSorting.Mod).ToArray();
-			selectedItem = ServiceCenter.Get<ISettings>().UserSettings.PackageSorting;
+
+			selectedItem = (PackageSorting)ServiceCenter.Get<ISettings>().UserSettings.PageSettings.GetOrAdd(SkyvePage).Sorting;
 		}
+	}
+
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		if (e.Button == MouseButtons.Middle)
+		{
+			SelectedItem = PackageSorting.Default;
+		}
+
+		base.OnMouseClick(e);
 	}
 
 	protected override void UIChanged()
@@ -56,6 +69,7 @@ internal class SortingDropDown : SlickSelectionDropDown<PackageSorting>
 			PackageSorting.Status => "I_Broken",
 			PackageSorting.Subscribers => "I_People",
 			PackageSorting.Votes => "I_Vote",
+			PackageSorting.LoadOrder => "I_Wrench",
 			_ => "I_Check",
 		};
 	}

@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace SkyveApp.Systems.CS1.Utilities;
 internal class ModsUtil : IModUtil
@@ -119,6 +120,17 @@ internal class ModsUtil : IModUtil
 	public IMod? GetMod(ILocalPackageWithContents package)
 	{
 		return IsValidModFolder(package.Folder, out var dllPath, out var version) ? new Mod(package, dllPath!, version!) : (IMod?)null;
+	}
+
+	public int GetLoadOrder(IPackage package)
+	{
+		if (package.LocalPackage?.Folder is null)
+			return 0;
+
+		if (_modConfigInfo.TryGetValue(package.LocalPackage.Folder, out var info))
+			return info.LoadOrder;
+
+		return 0;
 	}
 
 	private bool IsValidModFolder(string dir, out string? dllPath, out Version? version)

@@ -17,7 +17,8 @@ public interface IPlayset
 	bool IsFavorite { get; set; }
 	int AssetCount { get; }
 	int ModCount { get; }
-	IEnumerable<IPlaysetEntry> Packages { get; }
+	IEnumerable<IPlaysetEntry> Entries { get; }
+	IEnumerable<IPackage> Packages { get; }
 	bool Temporary { get; }
 }
 

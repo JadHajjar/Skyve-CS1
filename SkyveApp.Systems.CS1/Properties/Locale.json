@@ -114,6 +114,7 @@
   "Sorting_Author": "Author Name",
   "Sorting_Status": "Package Status",
   "Sorting_CompatibilityReport": "Compatibility Report",
+  "Sorting_LoadOrder": "Load Order",
   "IncreaseItemSize": "Increase list items' sizes",
   "FolderSettings": "Folder Settings",
   "GamePath": "Cities: Skylines' Steam Folder",

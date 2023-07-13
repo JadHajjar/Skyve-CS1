@@ -10,6 +10,8 @@ internal class PC_Assets : PC_ContentList<IAsset>
 	{
 	}
 
+	public override SkyvePage Page => SkyvePage.Assets;
+
 	protected override void LocaleChanged()
 	{
 		base.LocaleChanged();

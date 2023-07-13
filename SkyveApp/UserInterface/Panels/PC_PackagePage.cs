@@ -47,7 +47,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (Package is ILocalPackageWithContents p && p.Assets is not null && p.Assets.Length > 0)
 		{
-			LC_Items = new ItemListControl<IPackage>
+			LC_Items = new ItemListControl<IPackage>(SkyvePage.SinglePackage)
 			{
 				IsPackagePage = true,
 				Dock = DockStyle.Fill
@@ -83,7 +83,7 @@ public partial class PC_PackagePage : PanelContent
 
 		if (references.Count > 0)
 		{
-			LC_References = new ItemListControl<IPackage>
+			LC_References = new ItemListControl<IPackage>(SkyvePage.SinglePackage)
 			{
 				Dock = DockStyle.Fill
 			};

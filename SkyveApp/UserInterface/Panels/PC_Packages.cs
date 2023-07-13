@@ -10,6 +10,8 @@ internal class PC_Packages : PC_ContentList<ILocalPackageWithContents>
 	{
 	}
 
+	public override SkyvePage Page => SkyvePage.Packages;
+
 	protected override void LocaleChanged()
 	{
 		base.LocaleChanged();

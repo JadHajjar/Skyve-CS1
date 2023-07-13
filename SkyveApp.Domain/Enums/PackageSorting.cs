@@ -11,6 +11,7 @@ public enum PackageSorting
 	Votes,
 	Status,
 	CompatibilityReport,
+	LoadOrder,
 	Mod,
 	None,
 }

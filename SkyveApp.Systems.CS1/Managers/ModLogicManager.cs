@@ -108,12 +108,12 @@ internal class ModLogicManager : IModLogicManager
 
 	public bool IsPseudoMod(IPackage package)
 	{
-		if (package is ILocalPackage localPackage && CrossIO.FileExists(CrossIO.Combine(localPackage.Folder, "ThemeMix.xml")))
+		if (!package.IsLocal && package is ILocalPackage localPackage && CrossIO.FileExists(CrossIO.Combine(localPackage.Folder, "ThemeMix.xml")))
 		{
 			return true;
 		}
 
-		if (package.GetCompatibilityInfo().Info?.Type is not PackageType.GenericPackage and not PackageType.MusicPack and not PackageType.CSM and not PackageType.ContentPackage)
+		if (package.GetPackageInfo()?.Type is not null and not PackageType.GenericPackage and not PackageType.MusicPack and not PackageType.CSM and not PackageType.ContentPackage)
 		{
 			return true;
 		}

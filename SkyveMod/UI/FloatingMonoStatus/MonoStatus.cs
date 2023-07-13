@@ -4,6 +4,8 @@ using ColossalFramework.UI;
 using KianCommons;
 using KianCommons.IImplict;
 
+using SkyveMod.Settings.Tabs;
+
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -171,7 +173,7 @@ internal class MonoStatus : MonoBehaviour, IStartingObject
 	{
 		var playset = string.Empty;
 
-		if (File.Exists(Path.Combine(Path.Combine(DataLocation.localApplicationData, "Skyve"), "CurrentPlayset")))
+		if (!StartupTab.HidePlaysetName.value && File.Exists(Path.Combine(Path.Combine(DataLocation.localApplicationData, "Skyve"), "CurrentPlayset")))
 		{
 			playset = File.ReadAllText(Path.Combine(Path.Combine(DataLocation.localApplicationData, "Skyve"), "CurrentPlayset"));
 		}

@@ -32,7 +32,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		L_Selected.Text = Locale.ControlToSelectMultiplePackages;
 
-		LC_Items = new()
+		LC_Items = new(SkyvePage.None)
 		{
 			Loading = true,
 			IsSelection = true,

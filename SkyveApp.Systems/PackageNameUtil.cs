@@ -32,6 +32,11 @@ public class PackageNameUtil : IPackageNameUtil
 
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 
+		if (package is IPackage lp && lp.IsBuiltIn)
+		{
+			text = text.FormatWords();
+		}
+
 		return keepTags
 			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
@@ -46,7 +51,9 @@ public class PackageNameUtil : IPackageNameUtil
 			return _locale.Get("UnknownPackage");
 		}
 
-		var isLocal = package is ILocalPackage lp && lp.IsLocal;
+		var lp = package as IPackage;
+		var isLocal = lp?.IsLocal ?? false;
+		var isBuiltIn = lp?.IsBuiltIn ?? false;
 		var text = _tagRegex.Replace(package.Name, string.Empty);
 		var tagMatches = _bracketsRegex.Matches(text);
 
@@ -54,7 +61,11 @@ public class PackageNameUtil : IPackageNameUtil
 			? text.RemoveDoubleSpaces().RegexRemove(" +(?=[\\]\\)])").RegexRemove("(?<=[\\[\\(]) +")
 			: _bracketsRegex.Replace(text, string.Empty).Trim('-', ']', '[', '(', ')', ' ').RemoveDoubleSpaces();
 
-		if (isLocal)
+		if (isBuiltIn)
+		{
+			text = text.FormatWords();
+		}
+		else if (isLocal)
 		{
 			tags.Add((FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentColor).MergeColor(FormDesign.Design.BackColor, 65), _locale.Get("Local").One.ToUpper()));
 		}

@@ -583,5 +583,36 @@
         ]
       }
     ]
+  },
+  {
+    "Version": "3.2.2",
+    "Date": "2023-07-13",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Added a grid-view option for all content pages; toggle between list & grid view using the new icons on the top right of the list.",
+          "Sorting & Grid-view settings are now saved on a per-page basis.",
+          "Added a 'Load Order' sorting option.",
+          "Added an option to hide the current playset's name in the main menu.",
+          "Fixed the current playset's name staying visible while in-game.",
+          "Fixed playsets disappearing on macOS & Linux."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.2.3",
+    "Date": "2023-07-13",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Fixed the incorrect names of packages while viewing a playset's contents.",
+          "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
+          "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."
+        ]
+      }
+    ]
   }
 ]

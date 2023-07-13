@@ -28,7 +28,7 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		LC_Items = new()
+		LC_Items = new(SkyvePage.User)
 		{
 			IsGenericPage = true,
 		};

@@ -82,7 +82,8 @@ public class UserProfile : IDynamicSql
 	IUser? IPlayset.Author { get; }
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUsed { get; }
-	public IEnumerable<IPlaysetEntry> Packages => Contents ?? Enumerable.Empty<IPlaysetEntry>();
+	public IEnumerable<IPlaysetEntry> Entries => Contents ?? Enumerable.Empty<IPlaysetEntry>();
+	public IEnumerable<IPackage> Packages => Contents?.Select(x => (IPackage)new PlaysetEntryPackage(x)) ?? Enumerable.Empty<IPackage>();
 	bool ICustomPlayset.AutoSave { get; }
 	bool ICustomPlayset.UnsavedChanges { get; }
 

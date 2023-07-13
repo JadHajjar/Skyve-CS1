@@ -12,7 +12,7 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 		{
 			Items = Enum.GetValues(typeof(ProfileSorting)).Cast<ProfileSorting>().Where(x => x != ProfileSorting.Downloads).ToArray();
 
-			SelectedItem = ServiceCenter.Get<ISettings>().UserSettings.ProfileSorting;
+			SelectedItem = (ProfileSorting)ServiceCenter.Get<ISettings>().UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles).Sorting;
 		}
 	}
 

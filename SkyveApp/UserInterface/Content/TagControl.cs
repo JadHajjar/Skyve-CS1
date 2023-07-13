@@ -6,6 +6,8 @@ internal class TagControl : SlickImageControl
 {
 	public ITag? TagInfo { get; set; }
 	public bool Display { get; set; }
+	public bool ToAddPreview { get; set; }
+	public Func<IEnumerable<string?>> CurrentTagsSource { get; internal set; }
 
 	public TagControl()
 	{

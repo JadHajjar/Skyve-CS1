@@ -35,7 +35,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
 
-	public ItemListControl()
+	public ItemListControl(SkyvePage page)
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
 		
@@ -49,8 +49,12 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			_notifier.ContentLoaded += () => Loading = false;
 		}
 
-		sorting = _settings.UserSettings.PackageSorting;
-		SortDescending = _settings.UserSettings.PackageSortingDesc;
+		if (_settings.UserSettings.PageSettings.ContainsKey(page))
+		{
+			sorting = (PackageSorting)_settings.UserSettings.PageSettings[page].Sorting;
+			SortDescending = _settings.UserSettings.PageSettings[page].DescendingSort;
+			GridView = _settings.UserSettings.PageSettings[page].GridView;
+		}
 
 		GridItemSize = new Size(390, 140);
 		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 64 : 36;
@@ -163,8 +167,13 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			PackageSorting.Votes => items
 				.OrderBy(x => x.Item.GetWorkshopInfo()?.Score),
 
+			PackageSorting.LoadOrder => items
+				.OrderBy(x => !x.Item.LocalPackage?.IsIncluded())
+				.ThenByDescending(x => _modUtil.GetLoadOrder(x.Item))
+				.ThenBy(x => x.Item.ToString()),
+
 			_ => items
-				.OrderBy(x => !x.Item.LocalParentPackage?.IsIncluded())
+				.OrderBy(x => !x.Item.LocalPackage?.IsIncluded())
 				.ThenBy(x => x.Item.IsLocal)
 				.ThenBy(x => !x.Item.IsMod)
 				.ThenBy(x => x.Item.ToString())

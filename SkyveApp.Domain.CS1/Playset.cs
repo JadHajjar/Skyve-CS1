@@ -13,8 +13,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-using static System.Resources.ResXFileRef;
-
 namespace SkyveApp.Domain.CS1;
 public class Playset : ICustomPlayset
 {
@@ -29,7 +27,8 @@ public class Playset : ICustomPlayset
 	[JsonIgnore, CloneIgnore] public bool IsMissingItems { get; set; }
 	[JsonIgnore] public int AssetCount => Assets.Count;
 	[JsonIgnore] public int ModCount => Mods.Count;
-	[JsonIgnore] public IEnumerable<IPlaysetEntry> Packages => Assets.Concat(Mods);
+	[JsonIgnore] public IEnumerable<IPlaysetEntry> Entries => Assets.Concat(Mods);
+	[JsonIgnore] public IEnumerable<IPackage> Packages => Assets.Concat(Mods);
 
 	public Playset(string name) : this()
 	{

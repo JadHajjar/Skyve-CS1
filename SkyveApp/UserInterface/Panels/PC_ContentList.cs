@@ -17,6 +17,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private bool clearingFilters = true;
 	private bool firstFilterPassed;
 	private readonly DelayedAction _delayedSearch;
+	private readonly DelayedAction _delayedAuthorTagsRefresh;
 	protected readonly ItemListControl<T> LC_Items;
 	private readonly IncludeAllButton<T> I_Actions;
 	protected int UsageFilteredOut;
@@ -33,15 +34,19 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private readonly IPackageUtil _packageUtil;
 	private readonly IDownloadService _downloadService;
 
+	public virtual SkyvePage Page { get; }
+
 	public PC_ContentList() : this(false) { }
 
 	public PC_ContentList(bool load) : base(load)
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _profileManager, out _tagUtil, out _packageUtil, out _downloadService);
 
-		LC_Items = new() { Dock = DockStyle.Fill, Margin = new() };
+		LC_Items = new(Page) { Dock = DockStyle.Fill, Margin = new() };
 
 		InitializeComponent();
+
+		DD_Sorting.SkyvePage = Page;
 
 		I_Actions = new IncludeAllButton<T>(LC_Items);
 		I_Actions.ActionClicked += I_Actions_Click;
@@ -81,6 +86,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		LC_Items.SelectedItemsChanged += (_, _) => RefreshCounts();
 
 		_delayedSearch = new(350, DelayedSearch);
+		_delayedAuthorTagsRefresh = new(350, RefreshAuthorAndTags);
 
 		if (!load)
 		{
@@ -106,6 +112,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		RefreshCounts();
 
 		I_SortOrder.ImageName = LC_Items.SortDescending ? "I_SortDesc" : "I_SortAsc";
+		B_GridView.Selected = LC_Items.GridView;
+		B_ListView.Selected = !LC_Items.GridView;
 
 		if (!load)
 		{
@@ -380,11 +388,14 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		I_Actions.Invalidate();
 
 		this.TryInvoke(RefreshCounts);
+
+		_delayedAuthorTagsRefresh.Run();
 	}
 
 	private void DD_Sorting_SelectedItemChanged(object sender, EventArgs e)
 	{
-		_settings.UserSettings.PackageSorting = DD_Sorting.SelectedItem;
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.Sorting = (int)DD_Sorting.SelectedItem;
 		_settings.SessionSettings.Save();
 
 		LC_Items.SetSorting(DD_Sorting.SelectedItem, LC_Items.SortDescending);
@@ -690,7 +701,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		LC_Items.SetSorting(DD_Sorting.SelectedItem, !LC_Items.SortDescending);
 
-		_settings.UserSettings.PackageSortingDesc = LC_Items.SortDescending;
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.DescendingSort = LC_Items.SortDescending;
 		_settings.SessionSettings.Save();
 
 		I_SortOrder.ImageName = LC_Items.SortDescending ? "I_SortDesc" : "I_SortAsc";
@@ -706,8 +718,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 			, new (Locale.EnableAll, "I_Enabled", _settings.UserSettings.AdvancedIncludeEnable, action:() => EnableAll(this, EventArgs.Empty))
 			, new (Locale.DisableAll, "I_Disabled", _settings.UserSettings.AdvancedIncludeEnable, action: () => DisableAll(this, EventArgs.Empty))
 			, new (string.Empty)
-			, new (Locale.SelectAll, "I_Disabled", LC_Items.SelectedItemsCount < LC_Items.FilteredItems.Count(), action: LC_Items.SelectAll)
-			, new (Locale.DeselectAll, "I_Disabled", LC_Items.SelectedItemsCount > 0, action: LC_Items.DeselectAll)
+			, new (Locale.SelectAll, "I_DragDrop", LC_Items.SelectedItemsCount < LC_Items.FilteredItems.Count(), action: LC_Items.SelectAll)
+			, new (Locale.DeselectAll, "I_Select", LC_Items.SelectedItemsCount > 0, action: LC_Items.DeselectAll)
 			, new (Locale.CopyAllIds, "I_Copy", action: () => Clipboard.SetText(LC_Items.FilteredItems.ListStrings(x => x.IsLocal ? $"Local: {x.Name}" : $"{x.Id}: {x.Name}", CrossIO.NewLine)))
 			, new (Locale.SubscribeAll, "I_Steam", this is PC_GenericPackageList, action: () => SubscribeAll(this, EventArgs.Empty))
 			, new (Locale.DownloadAll, "I_Install", LC_Items.FilteredItems.Any(x => x.LocalPackage is null), action: () => DownloadAll(this, EventArgs.Empty))
@@ -842,6 +854,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		B_GridView.Selected = false;
 		B_ListView.Selected = true;
 		LC_Items.GridView = false;
+
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.GridView = LC_Items.GridView;
+		_settings.SessionSettings.Save();
 	}
 
 	private void B_GridView_Click(object sender, EventArgs e)
@@ -849,5 +865,9 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		B_GridView.Selected = true;
 		B_ListView.Selected = false;
 		LC_Items.GridView = true;
+
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.GridView = LC_Items.GridView;
+		_settings.SessionSettings.Save();
 	}
 }

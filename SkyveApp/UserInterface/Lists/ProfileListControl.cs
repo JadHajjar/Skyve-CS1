@@ -40,7 +40,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 64 : 36;
 		GridItemSize = new Size(305, 160);
 
-		sorting = _settings.UserSettings.ProfileSorting;
+		sorting = (ProfileSorting)_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles).Sorting;
 
 		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
 		_notifier.PlaysetChanged += ProfileManager_ProfileUpdated;
@@ -65,7 +65,8 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 		if (selectedItem != ProfileSorting.Downloads)
 		{
-			_settings.UserSettings.ProfileSorting = selectedItem;
+			var settings = _settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles);
+			settings.Sorting = (int)selectedItem;
 			_settings.SessionSettings.Save();
 		}
 	}
@@ -282,7 +283,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 	{
 		try
 		{
-			IEnumerable<IPlaysetEntry>? packages;
+			IEnumerable<IPackage>? packages;
 
 			if (ReadOnly)
 			{
@@ -297,7 +298,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 				packages = item.Packages;
 			}
 
-			Program.MainForm.PushPanel(new PC_GenericPackageList(packages ?? Enumerable.Empty<IPlaysetEntry>(), true)
+			Program.MainForm.PushPanel(new PC_GenericPackageList(packages ?? Enumerable.Empty<IPackage>(), true)
 			{
 				Text = item.Name
 			});

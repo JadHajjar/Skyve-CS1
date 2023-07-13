@@ -7,4 +7,5 @@ public interface IModUtil
 	void SetEnabled(IMod mod, bool value);
 	void SaveChanges();
 	IMod? GetMod(ILocalPackageWithContents package);
+	int GetLoadOrder(IPackage package);
 }

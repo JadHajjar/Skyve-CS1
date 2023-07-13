@@ -103,10 +103,15 @@ public static class SystemExtensions
 	{
 		return WorkshopService.GetPackage(identity);
 	}
-	
+
 	public static ICompatibilityInfo GetCompatibilityInfo(this IPackage package)
 	{
 		return CompatibilityManager.GetCompatibilityInfo(package);
+	}
+
+	public static IPackageCompatibilityInfo? GetPackageInfo(this IPackage package)
+	{
+		return CompatibilityManager.GetPackageInfo(package);
 	}
 
 	public static NotificationType GetNotification(this ICompatibilityInfo compatibilityInfo)

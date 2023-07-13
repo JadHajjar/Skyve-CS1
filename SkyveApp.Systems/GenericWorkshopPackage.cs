@@ -19,6 +19,7 @@ public class GenericWorkshopPackage : IPackage
 	{
 		Id = id;
 		Name = id.ToString();
+		Url = $"https://steamcommunity.com/workshop/filedetails/?id={Id}";
 	}
 
 	public GenericWorkshopPackage()

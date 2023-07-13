@@ -6,6 +6,8 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 	private readonly List<IPackage> _items = new();
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
+	public override SkyvePage Page => SkyvePage.Generic;
+
 	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true)
 	{
 		LC_Items.IsGenericPage = true;
