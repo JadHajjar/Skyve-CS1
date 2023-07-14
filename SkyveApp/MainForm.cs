@@ -155,7 +155,10 @@ public partial class MainForm : BasePanelForm
 	{
 		e.Graphics.SetUp(base_PB_Icon.BackColor);
 
-		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.MenuForeColor.MergeColor(FormDesign.Design.ActiveColor, 85) : FormDesign.Design.MenuForeColor);
+		var backBrightness = FormDesign.Design.MenuColor.GetBrightness();
+		var foreBrightness = FormDesign.Design.ForeColor.GetBrightness();		
+
+		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) && !base_PB_Icon.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.MenuForeColor : Math.Abs(backBrightness - foreBrightness) < 0.4F ? FormDesign.Design.BackColor : FormDesign.Design.ForeColor);
 
 		var useGlow = !ConnectionHandler.IsConnected
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
@@ -173,6 +176,12 @@ public partial class MainForm : BasePanelForm
 			var color = FormDesign.Modern.ActiveColor;
 			var minimum = 0;
 
+			if (!ConnectionHandler.IsConnected)
+			{
+				minimum = 60;
+				color = Color.FromArgb(194, 38, 33);
+			}
+
 			if (_profileManager.CurrentPlayset.UnsavedChanges)
 			{
 				minimum = 0;
@@ -185,22 +194,16 @@ public partial class MainForm : BasePanelForm
 				color = Color.FromArgb(15, 153, 212);
 			}
 
-			if (buttonStateRunning == false)
-			{
-				minimum = 0;
-				color = Color.FromArgb(235, 113, 52);
-			}
-
-			if (!ConnectionHandler.IsConnected)
-			{
-				minimum = 60;
-				color = Color.FromArgb(194, 38, 33);
-			}
-
 			if (_subscriptionsManager.SubscriptionsPending)
 			{
 				minimum = 40;
 				color = Color.FromArgb(50, 168, 82);
+			}
+
+			if (buttonStateRunning == false)
+			{
+				minimum = 0;
+				color = Color.FromArgb(232, 157, 22);
 			}
 
 			glowIcon.Tint(Sat: color.GetSaturation(), Hue: color.GetHue());
