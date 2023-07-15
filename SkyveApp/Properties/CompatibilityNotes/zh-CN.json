@@ -135,7 +135,7 @@
   "The copy feature from the Move It mod can also duplicate unique buildings.": "Move It 的复制功能也可以复制独特建筑。",
   "This does work for some corrupted game saves, but not for all. If the game save loads, the game will freeze for some time. This is normal.": "此模组确实可以修复某些损坏的存档，但并不是对任何损坏的存档都能修复。如果成功修复了存档，加载存档时游戏会卡住一段时间，这是正常现象。",
   "This is not updated for the latest DLCs and is still missing a lot from the Industries DLC.": "此模组没有针对最新的 DLC 进行更新，它仍然缺少了很多工业 DLC 相关的内容。",
-  "Catenaries and Props become black for the supported Vanilla tracks!": "原版轨道的接触网和摆件会变成黑色。",
+  "Catenaries and Props become black for the supported Vanilla tracks!": "原版游戏火车轨道的接触网和摆件都会变成黑色的！",
   "Bus stops on roads from newer patches and DLCs will not be replaced.": "此模组无法替换游戏最近更新新增的、以及 DLC 道路上的公交车站。",
   "Setting resets every load and for several players it is broken. Also very likely It will conflict with various other camera mods.": "每次存档加载完成后，设置都会重置，部分玩家报告说此模组已损坏。此模组也很可能会与其他摄像机模组冲突。",
   "Breaks game if you setup to high values.": "如果您设置的数值很大，将导致游戏出现问题。",
