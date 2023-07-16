@@ -69,6 +69,7 @@ public class Package : ILocalPackageWithContents
 	}
 
 	ILocalPackageWithContents? IPackage.LocalParentPackage => this;
+	ILocalPackageWithContents ILocalPackage.LocalParentPackage => this;
 	ILocalPackage? IPackage.LocalPackage => this;
 	string ILocalPackageIdentity.FilePath => Folder;
 

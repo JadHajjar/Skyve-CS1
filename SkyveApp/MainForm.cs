@@ -380,12 +380,12 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_Profiles_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_ProfileList>(PI_Profiles);
+		SetPanel<PC_PlaysetList>(PI_Profiles);
 	}
 
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_ModUtilities>(PI_ModUtilities);
+		SetPanel<PC_Utilities>(PI_ModUtilities);
 	}
 
 	private void PI_Packages_OnClick(object sender, MouseEventArgs e)

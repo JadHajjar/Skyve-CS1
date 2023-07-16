@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
-public partial class PC_ModUtilities : PanelContent
+public partial class PC_Utilities : PanelContent
 {
 	private readonly ISettings _settings;
 	private readonly ICitiesManager _citiesManager;
@@ -20,7 +20,7 @@ public partial class PC_ModUtilities : PanelContent
 	private readonly IWorkshopService _workshopService;
 	private readonly IDownloadService _downloadService;
 
-	public PC_ModUtilities()
+	public PC_Utilities()
 	{
 		ServiceCenter.Get(out _settings, out _citiesManager, out _subscriptionsManager, out _notifier, out _locationManager, out _packageUtil, out _contentManager, out _workshopService, out _downloadService);
 
@@ -98,6 +98,7 @@ public partial class PC_ModUtilities : PanelContent
 	{
 		Text = Locale.Utilities;
 		L_CleanupInfo.Text = Locale.CleanupInfo;
+		L_Troubleshoot.Text = Locale.TroubleshootInfo;
 	}
 
 	protected override void UIChanged()
@@ -105,11 +106,11 @@ public partial class PC_ModUtilities : PanelContent
 		base.UIChanged();
 
 		B_ReDownload.Margin = UI.Scale(new Padding(5), UI.FontScale);
-		P_Cleanup.Margin = P_Collecttions.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Reset.Margin = P_Text.Margin = P_ModIssues.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
+		B_Troubleshoot.Margin = P_Cleanup.Margin = P_Collections.Margin = P_BOB.Margin = P_LsmReport.Margin = P_Troubleshoot.Margin = P_Reset.Margin = P_Text.Margin = P_ModIssues.Margin = UI.Scale(new Padding(10, 0, 10, 10), UI.FontScale);
 		B_ReDownload.Margin = TB_CollectionLink.Margin = B_LoadCollection.Margin = UI.Scale(new Padding(5), UI.FontScale);
 		B_ImportClipboard.Margin = UI.Scale(new Padding(10), UI.FontScale);
-		L_CleanupInfo.Font = L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9F);
-		L_CleanupInfo.Margin = L_OutOfDate.Margin = L_Incomplete.Margin = UI.Scale(new Padding(3), UI.FontScale);
+		L_Troubleshoot.Font = L_CleanupInfo.Font = L_OutOfDate.Font = L_Incomplete.Font = UI.Font(9F);
+		L_Troubleshoot.Margin = L_CleanupInfo.Margin = L_OutOfDate.Margin = L_Incomplete.Margin = UI.Scale(new Padding(3), UI.FontScale);
 
 		foreach (Control item in P_Reset.Controls)
 		{
@@ -353,5 +354,10 @@ public partial class PC_ModUtilities : PanelContent
 		B_ResetSteamCache.ImageName = "I_Check";
 		await Task.Delay(1500);
 		B_ResetSteamCache.ImageName = img;
+	}
+
+	private void B_Troubleshoot_Click(object sender, EventArgs e)
+	{
+		Form.PushPanel<PC_Troubleshoot>();
 	}
 }

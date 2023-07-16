@@ -267,7 +267,7 @@ internal class CompatibilityMessageControl : SlickControl
 						{
 							return 2;
 						}
-						else if (!(p.Mod?.IsEnabled() ?? true))
+						else if (!(p.LocalParentPackage.Mod?.IsEnabled() ?? true))
 						{
 							return 1;
 						}

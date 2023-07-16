@@ -3,9 +3,9 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Generic;
-internal class ReviewRequestOptionControl : SlickImageControl
+internal class BigSelectionOptionControl : SlickImageControl
 {
-	public ReviewRequestOptionControl()
+	public BigSelectionOptionControl()
 	{
 		Cursor = Cursors.Hand;
 	}
@@ -47,8 +47,11 @@ internal class ReviewRequestOptionControl : SlickImageControl
 
 		using var icon = ImageName.Get((int)(32 * UI.UIScale));
 
-		e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		if (icon != null)
+		{
+			e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+		}
 
-		e.Graphics.DrawString(LocaleHelper.GetGlobalText(Text), Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon.Width, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(LocaleHelper.GetGlobalText(Text), Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon?.Width ?? 0, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 	}
 }

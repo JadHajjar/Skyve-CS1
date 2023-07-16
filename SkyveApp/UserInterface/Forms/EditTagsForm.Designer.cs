@@ -28,20 +28,19 @@ partial class EditTagsForm
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon5 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon6 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.B_Apply = new SlickControls.SlickButton();
-			this.FLP_Tags = new SlickControls.SmartFlowPanel();
-			this.addTagControl = new SkyveApp.UserInterface.Content.TagControl();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.smartFlowPanel1 = new SlickControls.SmartFlowPanel();
+			this.TLC = new SkyveApp.UserInterface.Lists.TagListControl();
 			this.slickScroll1 = new SlickControls.SlickScroll();
+			this.TB_NewTag = new SlickControls.SlickTextBox();
+			this.L_MultipleWarning = new System.Windows.Forms.Label();
 			this.base_P_Content.SuspendLayout();
 			this.base_P_Container.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.base_PB_Icon)).BeginInit();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.FLP_Tags.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -50,7 +49,7 @@ partial class EditTagsForm
 			this.base_P_Content.AutoScroll = true;
 			this.base_P_Content.Controls.Add(this.tableLayoutPanel1);
 			this.base_P_Content.Location = new System.Drawing.Point(1, 43);
-			this.base_P_Content.Size = new System.Drawing.Size(477, 554);
+			this.base_P_Content.Size = new System.Drawing.Size(387, 445);
 			// 
 			// base_P_Controls
 			// 
@@ -61,19 +60,21 @@ partial class EditTagsForm
 			// base_P_Top_Spacer
 			// 
 			this.base_P_Top_Spacer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(235)))), ((int)(((byte)(243)))));
-			this.base_P_Top_Spacer.Size = new System.Drawing.Size(477, 6);
+			this.base_P_Top_Spacer.Size = new System.Drawing.Size(387, 6);
 			// 
 			// base_P_Container
 			// 
-			this.base_P_Container.Size = new System.Drawing.Size(479, 598);
+			this.base_P_Container.Size = new System.Drawing.Size(389, 489);
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.ColumnCount = 1;
+			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.B_Apply, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.FLP_Tags, 0, 0);
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel1.Controls.Add(this.B_Apply, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.TB_NewTag, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.L_MultipleWarning, 0, 2);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -81,7 +82,7 @@ partial class EditTagsForm
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(477, 554);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(387, 445);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// B_Apply
@@ -89,9 +90,9 @@ partial class EditTagsForm
 			this.B_Apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_Ok";
-			this.B_Apply.ImageName = dynamicIcon5;
-			this.B_Apply.Location = new System.Drawing.Point(355, 521);
+			dynamicIcon1.Name = "I_Ok";
+			this.B_Apply.ImageName = dynamicIcon1;
+			this.B_Apply.Location = new System.Drawing.Point(265, 412);
 			this.B_Apply.Name = "B_Apply";
 			this.B_Apply.Size = new System.Drawing.Size(119, 30);
 			this.B_Apply.SpaceTriggersClick = true;
@@ -99,61 +100,74 @@ partial class EditTagsForm
 			this.B_Apply.Text = "Apply";
 			this.B_Apply.Click += new System.EventHandler(this.B_Apply_Click);
 			// 
-			// FLP_Tags
-			// 
-			this.FLP_Tags.Controls.Add(this.addTagControl);
-			this.FLP_Tags.Dock = System.Windows.Forms.DockStyle.Top;
-			this.FLP_Tags.Location = new System.Drawing.Point(3, 3);
-			this.FLP_Tags.Name = "FLP_Tags";
-			this.FLP_Tags.Size = new System.Drawing.Size(471, 48);
-			this.FLP_Tags.TabIndex = 0;
-			// 
-			// addTagControl
-			// 
-			this.addTagControl.Display = false;
-			dynamicIcon6.Name = "I_Add";
-			this.addTagControl.ImageName = dynamicIcon6;
-			this.addTagControl.Location = new System.Drawing.Point(3, 3);
-			this.addTagControl.Name = "addTagControl";
-			this.addTagControl.Size = new System.Drawing.Size(104, 42);
-			this.addTagControl.TabIndex = 0;
-			this.addTagControl.TagInfo = null;
-			this.addTagControl.Click += new System.EventHandler(this.B_AddLink_Click);
-			// 
 			// panel1
 			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.panel1, 2);
+			this.panel1.Controls.Add(this.TLC);
 			this.panel1.Controls.Add(this.slickScroll1);
-			this.panel1.Controls.Add(this.smartFlowPanel1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(3, 57);
+			this.panel1.Location = new System.Drawing.Point(3, 61);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(471, 458);
+			this.panel1.Size = new System.Drawing.Size(381, 345);
 			this.panel1.TabIndex = 101;
 			// 
-			// smartFlowPanel1
+			// TLC
 			// 
-			this.smartFlowPanel1.Location = new System.Drawing.Point(0, 0);
-			this.smartFlowPanel1.Name = "smartFlowPanel1";
-			this.smartFlowPanel1.Size = new System.Drawing.Size(200, 0);
-			this.smartFlowPanel1.TabIndex = 0;
+			this.TLC.Location = new System.Drawing.Point(0, 0);
+			this.TLC.Name = "TLC";
+			this.TLC.Size = new System.Drawing.Size(150, 0);
+			this.TLC.TabIndex = 2;
 			// 
 			// slickScroll1
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.slickScroll1.LinkedControl = this.smartFlowPanel1;
-			this.slickScroll1.Location = new System.Drawing.Point(459, 0);
+			this.slickScroll1.LinkedControl = this.TLC;
+			this.slickScroll1.Location = new System.Drawing.Point(371, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(12, 458);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 345);
+			this.slickScroll1.SmallHandle = true;
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 1;
 			this.slickScroll1.TabStop = false;
 			this.slickScroll1.Text = "slickScroll1";
 			// 
+			// TB_NewTag
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.TB_NewTag, 2);
+			this.TB_NewTag.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TB_NewTag.EnterTriggersClick = true;
+			dynamicIcon2.Name = "I_Add";
+			this.TB_NewTag.ImageName = dynamicIcon2;
+			this.TB_NewTag.Location = new System.Drawing.Point(3, 3);
+			this.TB_NewTag.Name = "TB_NewTag";
+			this.TB_NewTag.Padding = new System.Windows.Forms.Padding(0, 16, 0, 16);
+			this.TB_NewTag.Placeholder = "AddTagBox";
+			this.TB_NewTag.SelectedText = "";
+			this.TB_NewTag.SelectionLength = 0;
+			this.TB_NewTag.SelectionStart = 0;
+			this.TB_NewTag.ShowLabel = false;
+			this.TB_NewTag.Size = new System.Drawing.Size(381, 52);
+			this.TB_NewTag.TabIndex = 0;
+			this.TB_NewTag.TextChanged += new System.EventHandler(this.TB_NewTag_TextChanged);
+			this.TB_NewTag.IconClicked += new System.EventHandler(this.TB_NewTag_IconClicked);
+			// 
+			// L_MultipleWarning
+			// 
+			this.L_MultipleWarning.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.L_MultipleWarning.AutoSize = true;
+			this.L_MultipleWarning.Location = new System.Drawing.Point(3, 417);
+			this.L_MultipleWarning.Name = "L_MultipleWarning";
+			this.L_MultipleWarning.Size = new System.Drawing.Size(45, 19);
+			this.L_MultipleWarning.TabIndex = 103;
+			this.L_MultipleWarning.Text = "label1";
+			// 
 			// EditTagsForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(490, 609);
+			this.ClientSize = new System.Drawing.Size(400, 500);
+			this.MaximizeBox = false;
 			this.MaximizedBounds = new System.Drawing.Rectangle(0, 0, 2560, 1380);
+			this.MinimizeBox = false;
 			this.Name = "EditTagsForm";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
@@ -163,7 +177,7 @@ partial class EditTagsForm
 			this.base_P_Container.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.base_PB_Icon)).EndInit();
 			this.tableLayoutPanel1.ResumeLayout(false);
-			this.FLP_Tags.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -172,9 +186,9 @@ partial class EditTagsForm
 	#endregion
 	private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
 	private SlickControls.SlickButton B_Apply;
-	private SlickControls.SmartFlowPanel FLP_Tags;
-	private Content.TagControl addTagControl;
 	private System.Windows.Forms.Panel panel1;
-	private SmartFlowPanel smartFlowPanel1;
 	private SlickScroll slickScroll1;
+	private Lists.TagListControl TLC;
+	private SlickTextBox TB_NewTag;
+	private System.Windows.Forms.Label L_MultipleWarning;
 }

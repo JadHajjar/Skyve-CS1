@@ -5,11 +5,11 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
-public partial class PC_ProfileAdd : PanelContent
+public partial class PC_PlaysettAdd : PanelContent
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 
-	public PC_ProfileAdd()
+	public PC_PlaysettAdd()
 	{
 		InitializeComponent();
 
@@ -38,7 +38,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 		_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = new PC_Profile();
+		var panel = new PC_PlaysetSettings();
 
 		if (Form.SetPanel(null, panel))
 		{
@@ -61,7 +61,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 		_profileManager.SetCurrentPlayset(newProfile);
 
-		var panel = new PC_Profile();
+		var panel = new PC_PlaysetSettings();
 
 		if (Form.SetPanel(null, panel))
 		{
@@ -112,7 +112,7 @@ public partial class PC_ProfileAdd : PanelContent
 
 		try
 		{
-			var panel = new PC_Profile();
+			var panel = new PC_PlaysetSettings();
 
 			if (Form.SetPanel(null, panel))
 			{

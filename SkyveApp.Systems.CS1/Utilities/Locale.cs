@@ -310,4 +310,11 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation PastePlaysetId => _instance.GetText(nameof(PastePlaysetId));
 	public static Translation SelectAll => _instance.GetText(nameof(SelectAll));
 	public static Translation DeselectAll => _instance.GetText(nameof(DeselectAll));
+	public static Translation TagsTitle => _instance.GetText(nameof(TagsTitle));
+	public static Translation EditingMultipleTags => _instance.GetText(nameof(EditingMultipleTags));
+	public static Translation WorkshopAndGameTags => _instance.GetText(nameof(WorkshopAndGameTags));
+	public static Translation CustomTags => _instance.GetText(nameof(CustomTags));
+	public static Translation EditTagsOfPackage => _instance.GetText(nameof(EditTagsOfPackage));
+	public static Translation TroubleshootInfo => _instance.GetText(nameof(TroubleshootInfo));
+	public static Translation TroubleshootSelection => _instance.GetText(nameof(TroubleshootSelection));
 }

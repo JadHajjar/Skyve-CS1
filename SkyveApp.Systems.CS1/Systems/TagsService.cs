@@ -18,11 +18,12 @@ namespace SkyveApp.Systems.CS1.Systems;
 internal class TagsService : ITagsService
 {
 	private readonly HashSet<string> _assetTags;
-	private readonly HashSet<string> _workshopTags;
+	private readonly Dictionary<string, int> _workshopTags;
 	private readonly Dictionary<string, string[]> _assetTagsDictionary;
 	private readonly Dictionary<string, string[]> _customTagsDictionary;
 	private readonly Dictionary<string, HashSet<string>> _tagsCache;
 
+	private readonly INotifier _notifier;
 	private readonly IWorkshopService _workshopService;
 
 	public TagsService(INotifier notifier, IWorkshopService workshopService, IAssetUtil assetUtil)
@@ -30,9 +31,10 @@ internal class TagsService : ITagsService
 		_assetTagsDictionary = new(new PathEqualityComparer());
 		_customTagsDictionary = new(new PathEqualityComparer());
 		_tagsCache = new(StringComparer.InvariantCultureIgnoreCase);
+		_notifier = notifier;
 		_workshopService = workshopService;
 		_assetTags = new HashSet<string>();
-		_workshopTags = new HashSet<string>();
+		_workshopTags = new Dictionary<string, int>();
 		var findItTags = CustomTagsLibrary.Deserialize();
 
 		var csCache = AssetInfoCache.Deserialize();
@@ -60,8 +62,8 @@ internal class TagsService : ITagsService
 			}
 		}
 
-		notifier.WorkshopInfoUpdated += UpdateWorkshopTags;
-		notifier.ContentLoaded += GenerateCache;
+		_notifier.WorkshopInfoUpdated += UpdateWorkshopTags;
+		_notifier.ContentLoaded += GenerateCache;
 
 		Task.Run(UpdateWorkshopTags);
 		Task.Run(GenerateCache);
@@ -128,11 +130,16 @@ internal class TagsService : ITagsService
 	{
 		var packages = _workshopService.GetAllPackages().ToList();
 
-		foreach (var package in packages)
+		lock (_workshopTags)
 		{
-			foreach (var tag in package.Tags)
+			_workshopTags.Clear();
+
+			foreach (var package in packages)
 			{
-				_workshopTags.Add(tag);
+				foreach (var tag in package.Tags)
+				{
+					_workshopTags[tag] = _workshopTags.GetOrAdd(tag) + 1;
+				}
 			}
 		}
 	}
@@ -141,12 +148,15 @@ internal class TagsService : ITagsService
 	{
 		var returned = new List<string>();
 
-		foreach (var item in _workshopTags)
+		lock (_workshopTags)
 		{
-			if (!returned.Contains(item))
+			foreach (var item in _workshopTags)
 			{
-				returned.Add(item);
-				yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item);
+				if (!returned.Contains(item.Key))
+				{
+					returned.Add(item.Key);
+					yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item.Key);
+				}
 			}
 		}
 
@@ -266,6 +276,8 @@ internal class TagsService : ITagsService
 
 			ISave.Save(_customTagsDictionary, "CustomTags.json");
 		}
+
+		_notifier.OnRefreshUI(true);
 	}
 
 	public bool HasAllTags(IPackage package, IEnumerable<ITag> tags)
@@ -303,5 +315,15 @@ internal class TagsService : ITagsService
 		}
 
 		return true;
+	}
+
+	public int GetTagUsage(ITag tag)
+	{
+		lock (_workshopTags)
+		{
+			return
+				(_workshopTags.TryGetValue(tag.Value, out var count) ? count : 0) +
+				(_tagsCache.TryGetValue(tag.Value, out var hash) ? hash.Count : 0);
+		}
 	}
 }

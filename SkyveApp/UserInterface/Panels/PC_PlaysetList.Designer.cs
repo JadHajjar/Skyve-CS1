@@ -2,7 +2,7 @@
 
 namespace SkyveApp.UserInterface.Panels;
 
-partial class PC_ProfileList
+partial class PC_PlaysetList
 {
 	/// <summary> 
 	/// Required designer variable.

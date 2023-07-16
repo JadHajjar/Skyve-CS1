@@ -7,7 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
-public partial class PC_Profile : PanelContent
+public partial class PC_PlaysetSettings : PanelContent
 {
 	private bool loadingProfile;
 	private readonly SlickCheckbox[] _launchOptions;
@@ -21,7 +21,7 @@ public partial class PC_Profile : PanelContent
 	private readonly INotifier _notifier;
 	private readonly ITagsService _tagsService;
 
-	public PC_Profile()
+	public PC_PlaysetSettings()
 	{
 		ServiceCenter.Get(out _bulkUtil, out _iOUtil, out _locationManager, out _playsetManager, out _packageManager, out _notifier, out _settings, out _tagsService);
 
@@ -275,13 +275,13 @@ public partial class PC_Profile : PanelContent
 	{
 		if (!I_ProfileIcon.Loading)
 		{
-			Form.PushPanel(new PC_ProfileList());
+			Form.PushPanel(new PC_PlaysetList());
 		}
 	}
 
 	private void B_NewProfile_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_ProfileAdd>();
+		Form.PushPanel<PC_PlaysettAdd>();
 	}
 
 	internal void B_EditName_Click(object sender, EventArgs e)

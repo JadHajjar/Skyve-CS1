@@ -1,10 +1,7 @@
 ﻿using Extensions;
 
-using Newtonsoft.Json.Linq;
-
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Utilities.IO;
 
@@ -14,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace SkyveApp.Systems.CS1.Utilities;
 internal class ModsUtil : IModUtil
@@ -46,6 +42,11 @@ internal class ModsUtil : IModUtil
 
 	private void BuildLoadOrder()
 	{
+		if (!_notifier.IsContentLoaded)
+		{
+			return;
+		}
+
 		var index = 1;
 		var mods = ServiceCenter.Get<ILoadOrderHelper>().GetOrderedMods().Reverse();
 
@@ -125,10 +126,14 @@ internal class ModsUtil : IModUtil
 	public int GetLoadOrder(IPackage package)
 	{
 		if (package.LocalPackage?.Folder is null)
+		{
 			return 0;
+		}
 
 		if (_modConfigInfo.TryGetValue(package.LocalPackage.Folder, out var info))
+		{
 			return info.LoadOrder;
+		}
 
 		return 0;
 	}

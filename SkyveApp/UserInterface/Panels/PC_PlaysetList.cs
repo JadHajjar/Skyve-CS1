@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
-public partial class PC_ProfileList : PanelContent
+public partial class PC_PlaysetList : PanelContent
 {
 	private readonly ProfileListControl LC_Items;
 
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
-	public PC_ProfileList() : this(null) { }
+	public PC_PlaysetList() : this(null) { }
 
-	public PC_ProfileList(IEnumerable<ICustomPlayset>? profiles)
+	public PC_PlaysetList(IEnumerable<ICustomPlayset>? profiles)
 	{
 		InitializeComponent();
 
@@ -261,7 +261,7 @@ public partial class PC_ProfileList : PanelContent
 
 	private void B_AddProfile_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_ProfileAdd>();
+		Form.PushPanel<PC_PlaysettAdd>();
 	}
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
@@ -287,7 +287,7 @@ public partial class PC_ProfileList : PanelContent
 
 	private void B_EditName_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_Profile>();
+		Form.PushPanel<PC_PlaysetSettings>();
 	}
 
 	private void I_ProfileIcon_Click(object sender, EventArgs e)
@@ -332,7 +332,7 @@ public partial class PC_ProfileList : PanelContent
 
 			var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetPublicProfiles();
 
-			Invoke(() => Form.PushPanel(new PC_ProfileList(profiles)));
+			Invoke(() => Form.PushPanel(new PC_PlaysetList(profiles)));
 		}
 		catch (Exception ex)
 		{

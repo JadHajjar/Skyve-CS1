@@ -50,8 +50,11 @@ public static class SystemExtensions
 		return PackageUtil.IsEnabled(package);
 	}
 
-	public static ILocalPackageWithContents? GetLocalPackage(this IPackageIdentity package)
+	public static ILocalPackage? GetLocalPackage(this IPackageIdentity package)
 	{
+		if (package is ILocalPackage local)
+			return local;
+
 		return PackageManager.GetPackageById(package);
 	}
 

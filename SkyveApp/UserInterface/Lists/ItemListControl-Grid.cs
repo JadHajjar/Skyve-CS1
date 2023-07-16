@@ -142,7 +142,7 @@ internal partial class ItemListControl<T>
 
 	private Rectangle DrawTag(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, int maxTagX, ref Rectangle tagsRect, ITag item)
 	{
-		var tagIcon = IconManager.GetSmallIcon(item.Icon);
+		using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 
 		var tagRect = e.DrawLabel(item.Value, tagIcon, Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, ContentAlignment.TopLeft, large: true, mousePosition: CursorLocation);
 
@@ -202,7 +202,7 @@ internal partial class ItemListControl<T>
 
 	private void DrawFolderName(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents package, int scoreX)
 	{
-		DrawLargeLabel(e, new(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom), Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.BottomLeft);
+		e.Rects.SteamIdRect = DrawLargeLabel(e, new(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom), Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.BottomLeft);
 	}
 
 	private Rectangle DrawLargeLabel(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, Point point, string text, Bitmap bitmap, Color? color = null, ContentAlignment alignment = ContentAlignment.TopLeft)

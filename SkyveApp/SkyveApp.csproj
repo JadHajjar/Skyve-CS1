@@ -77,7 +77,7 @@
     <Compile Update="UserInterface\Dropdowns\PackageTypeDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\PackageStatusTypeDropDown.cs" />
     <Compile Update="UserInterface\Forms\EditTagsForm.cs" />
-    <Compile Update="UserInterface\Generic\ReviewRequestOptionControl.cs" />
+    <Compile Update="UserInterface\Generic\BigSelectionOptionControl.cs" />
     <Compile Update="UserInterface\Generic\SteamUserControl.cs" />
     <Compile Update="UserInterface\Lists\OtherProfilePackage.cs" />
     <Compile Update="UserInterface\Content\PackageDescriptionControl.cs" />
@@ -86,11 +86,14 @@
     <Compile Update="UserInterface\Lists\ReviewRequestList.cs" />
     <Compile Update="UserInterface\Panels\PC_Assets.cs" />
     <Compile Update="UserInterface\Panels\PC_ContentList.cs" />
-    <Compile Update="UserInterface\Panels\PC_ProfileAdd.cs" />
+    <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserInterface\Panels\PC_PlaysettAdd.cs" />
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />
-    <Compile Update="UserInterface\Panels\PC_ProfileList.cs" />
+    <Compile Update="UserInterface\Panels\PC_PlaysetList.cs" />
     <Compile Update="UserInterface\Panels\PC_Packages.cs" />
-    <Compile Update="UserInterface\Panels\PC_ModUtilities.cs" />
+    <Compile Update="UserInterface\Panels\PC_Utilities.cs" />
     <Compile Update="UserInterface\Generic\NewProfileOptionControl.cs" />
     <Compile Update="UserInterface\Dropdowns\LanguageDropDown.cs" />
     <Compile Update="UserInterface\Dropdowns\ProfileSortingDropDown.cs" />

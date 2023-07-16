@@ -608,6 +608,8 @@
       {
         "Name": "Changes",
         "Changes": [
+          "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once",
+          "Updated the color design of the app's logo on the top-left.",
           "Fixed the incorrect names of packages while viewing a playset's contents.",
           "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
           "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."

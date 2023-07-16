@@ -2,6 +2,7 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
+using SkyveApp.Domain.Enums;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,8 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		{
 			var info = _compatibilityManager.GetPackageInfo(mod);
 
-			var interaction = info?.Interactions?.FirstOrDefault(x => x.Type == SkyveApp.Domain.Enums.InteractionType.RequiredPackages);
-			var loadOrder = info?.Interactions?.FirstOrDefault(x => x.Type == SkyveApp.Domain.Enums.InteractionType.LoadAfter);
+			var interaction = info?.Interactions?.FirstOrDefault(x => x.Type is InteractionType.RequiredPackages);
+			var loadOrder = info?.Interactions?.FirstOrDefault(x => x.Type is InteractionType.LoadAfter);
 
 			entities.Add(new ModInfo(mod
 				, (interaction?.Packages.SelectWhereNotNull(x => (IPackageIdentity)new GenericPackageIdentity(x)).ToArray() ?? new IPackageIdentity[0])!
@@ -49,30 +50,53 @@ internal class LoadOrderHelper : ILoadOrderHelper
 		{
 			foreach (var item in entity.RequiredMods)
 			{
-				Increment(entities, item, entity.Mod);
+				Increment(entities, item, entity.Mod, 0);
 			}
 		}
 
-		foreach (var entity in entities)
+		bool changed;
+		var runs = 10;
+
+		do
 		{
-			if (entity.LoadAfterMods.Length > 0)
+			changed = false;
+
+			foreach (var entity in entities)
 			{
-				entity.Order = entity.LoadAfterMods.SelectMany(x => GetEntity(x.Id, entities, entity.Mod)).Min(x => x.Order) - 1;
+				if (entity.LoadAfterMods.Length > 0)
+				{
+					var loadAfter = entity.LoadAfterMods.SelectMany(x => GetEntity(x.Id, entities, entity.Mod)).AllWhere(x => x is not null);
+
+					if (loadAfter.Count > 0)
+					{
+						var order = loadAfter.Min(x => x.Order) - 1;
+
+						if (order != entity.Order)
+						{
+							changed = true;
+							entity.Order = order;
+						}
+					}
+				}
 			}
 		}
+		while (changed && --runs > 0);
 
 		return entities.OrderByDescending(x => x.Order).Select(x => x.Mod);
 	}
 
-	private void Increment(List<ModInfo> modEntityMap, IPackageIdentity identity, IPackageIdentity original)
+	private void Increment(List<ModInfo> modEntityMap, IPackageIdentity identity, IPackageIdentity original, int nesting)
 	{
+		if (nesting++ > 100)
+			return;
+
 		foreach (var entity in GetEntity(identity.Id, modEntityMap, original))
 		{
 			entity.Order += 100;
 
 			foreach (var item in entity.RequiredMods)
 			{
-				Increment(modEntityMap, item, identity);
+				Increment(modEntityMap, item, identity, nesting);
 			}
 		}
 	}
@@ -132,6 +156,7 @@ internal class LoadOrderHelper : ILoadOrderHelper
 			Mod = mod;
 			RequiredMods = requiredMods;
 			LoadAfterMods = afterLoadMods;
+			Order = 1000;
 		}
 	}
 }

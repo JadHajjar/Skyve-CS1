@@ -99,7 +99,7 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (e.Button == MouseButtons.Left)
 		{
-			Form.PushPanel<PC_Profile>();
+			Form.PushPanel<PC_PlaysetSettings>();
 		}
 	}
 
