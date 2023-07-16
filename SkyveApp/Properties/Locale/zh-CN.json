@@ -410,8 +410,8 @@
   "Include": "装载",
   "Unsubscribe": "取消订阅",
   "Exclude": "卸下",
-  "Snooze": "稍后提醒",
-  "UnSnooze": "取消稍后提醒",
+  "Snooze": "关闭提醒",
+  "UnSnooze": "允许提醒",
   "Mod": {
     "One": "模组",
     "Plural": "模组"
