@@ -288,7 +288,7 @@
                 "Changes": [
                     "Zaktualizowano stronę pakietu, aby pasować do wyświetlanych informacji na listach treści.",
                     "Drugorzędne listy treści, takie jak 'Brakujące pakiety' i 'Workshop Collection' teraz używają tego samego interfejsu użytkownika jako głównych stron listy treści, umożliwienie sprawniejszego korzystania z doświadczeń i większej liczby opcji.",
-                    "Dodano opcje uruchamiania 'Nowe aktywa' i 'Załaduj aktywa' w profilu, aby szybko załadować się do edytora zasobów."
+                    "Dodano opcje uruchamiania 'Nowe zasoby' i 'Załaduj zasoby' w profilu, aby szybko przejść do edytora zasobów."
                 ]
             }
         ]
