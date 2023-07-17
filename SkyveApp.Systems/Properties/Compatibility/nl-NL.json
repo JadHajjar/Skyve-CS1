@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "Opgenomen muziek kan worden gekopieerd",
   "IncompleteDescription": "Onvolledige beschrijving",
   "Successor": "Opvolger voor ..",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Laden na ..",
   "Alternative": "Alternatief voor..",
   "SameFunctionality": "Dezelfde functionaliteit als ..",
   "RequirementAlternative": "Benodigd alternatief voor ..",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' is gevolgd door een van de volgende pakketten."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' zal direct na '{1}' laden.",
+    "Plural": "'{0}' zal direct laden na de volgende pakketten laden."
   },
   "Interaction_Identical": "Dit zijn meerdere versies van hetzelfde pakket.\r\n\r\nKies slechts één van hen.",
   "Status_Succeeded": "'{0}' is geslaagd door '{1}'.\r\n\r\nU gebruikt al '{1}' dus er is geen noodzaak meer voor '{0}'.",
