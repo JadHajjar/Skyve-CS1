@@ -549,29 +549,29 @@
         ]
     },
     {
-        "Version": "3.1.2",
-        "Date": "2023-06-21",
-        "Tagline": "A full rework! -behind the scenes",
+        "Version": "3.2.0",
+        "Date": "07/07/2023",
+        "Tagline": "Uma reformulação completa! - nos bastidores",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "O que mudou?",
                 "Changes": [
-                    "Fixes an error caused by including/excluding mods that have contain assets.",
-                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-                    "Fixed some packages not showing their successor properly.",
-                    "'Profiles' are now, appropriately, called 'Playsets'.",
-                    "Improved the author info gathering, which will fix the issue of authors not loading.",
-                    "Please report any issues or unusual behaviour on the discord server."
+                    "Os sistemas centrais de Skyve foram alterados, organizados e otimizados.",
+                    "Mods excluídos não usam mais o arquivo '.excluded', invés disso usam um novo arquivo de ModConfig.",
+                    "LOM foi re-integrado, e é completamente automatizado baseado nos requerimentos dos mods, entre outros fatores do Relatório de Compatibilidade.",
+                    "Perfis são agora chamados corretamente como Modo de Jogo.",
+                    "Aprimorada a obtenção de informações do autor, o que resolverá o problema de não carregar os autores corretamente.",
+                    "Por favor, reporte quaisquer problemas ou comportamento incomum no servidor do discord."
                 ]
             }
         ]
     },
     {
         "Version": "3.2.1",
-        "Date": "2023-07-09",
+        "Date": "09/07/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Mudanças",
                 "Changes": [
                     "Click-to-filter now uses the Alt key instead of the Ctrl key.",
                     "You can now select multiple items in the content lists using the Ctrl or Shift keys.",
