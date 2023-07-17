@@ -1,6 +1,6 @@
 {
   "CompatibilityInfo": "Kompatibilitätsinfo",
-  "PlaysetBubble": "Current Playset",
+  "PlaysetBubble": "Aktuelles Spielset",
   "StartCities": "Starte Cities: Skylines",
   "StopCities": "Cities: Skylines anhalten",
   "AssetsBubble": "Deine Gegenstände",
@@ -32,15 +32,15 @@
   "UpToDate": "Aktuell",
   "StatusUnknown": "Unbekannter Status",
   "PartiallyDownloaded": "Teilweise heruntergeladen",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
-  "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
+  "AutoPlaysetSaveOn": "Automatisches Speichern ist aktiviert",
+  "AutoPlaysetSaveOff": "Automatisches Speichern ist deaktiviert",
+  "TemporaryPlaysetCanNotBeEdited": "Die Einstellungen des temporären Spielsets werden zurückgesetzt, wenn man die App erneut öffnet",
   "LaunchSettings": "Starteinstellungen",
   "IncludesItemsYouDoNotHave": "Beinhaltet nicht vorhandene Elemente",
   "ContentAndInfo": "Inhalt & Info",
-  "OtherPlaysets": "Other Playsets",
-  "ViewPlaysets": "View Your Playsets",
-  "AddPlayset": "Add Playset",
+  "OtherPlaysets": "Andere Spielsets",
+  "ViewPlaysets": "Deine Spielsets ansehen",
+  "AddPlayset": "Spielset hinzufügen",
   "LHT": "Linksverkehr",
   "NoWorkshop": "Workshop-Pakete deaktivieren",
   "NoAssets": "Alle Gegenstände deaktivieren",
@@ -69,20 +69,20 @@
   "ModsNoIssues": "Mods ohne Probleme",
   "LinkModAssets": "Verknüpft Gegenstände die zu Mods gehören mit deren 'Inklusiv' Status",
   "Preferences": "Präferenzen",
-  "PlaysetName": "Playset Name",
-  "RenamePlayset": "Rename the current playset",
+  "PlaysetName": "Spielset-Name",
+  "RenamePlayset": "Aktuelles Spielset umbenennen",
   "StartScratch": "Ein Profil von Grund auf neu anlegen",
   "ContinueFromCurrent": "Aktuelle Einstellungen beibehalten",
   "GamePlay": "Städte bauen",
   "EditorPlay": "Gegenstände erstellen",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "Spielset-Nutzung",
   "SomePackagesWillBeDisabled": "Einige Pakete werden entfernt, wenn der Verwendungszweck des Profils geändert wird.",
   "AffectedPackagesAre": "Betroffene Pakete sind:",
-  "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
-  "PlaysetReplace": "Load the settings of this playset",
-  "PlaysetMerge": "Merge its items into your current playset",
-  "PlaysetExclude": "Exclude its items from your current playset",
-  "PlaysetDelete": "Delete this playset",
+  "ConfirmDeletePlayset": "Möchtest Du das Spielset \"{0}\" wirklich löschen?",
+  "PlaysetReplace": "Lade die Einstellungen dieses Spielsets",
+  "PlaysetMerge": "Füge die Elemente in dein aktuelles Spielset ein",
+  "PlaysetExclude": "Die Elemente aus deinem aktuellen Spielset ausschließen",
+  "PlaysetDelete": "Dieses Spielset löschen",
   "ShouldNotBeSubscribed": "Nicht abonnieren",
   "MissingPackages": "Fehlende Pakete",
   "LoadingScreenMod": "Loading Screen Mod",
@@ -94,12 +94,12 @@
   "OpenLocalFolder": "Öffne den lokalen Ordner der dieses Paket enthält.",
   "ViewOnSteam": "Dieses Paket auf Steam ansehen",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
-    "Plural": "Re-download all selected Packages"
+    "One": "Dieses Paket erneut herunterladen",
+    "Plural": "Alle ausgewählten Pakete erneut herunterladen"
   },
   "DownloadPackage": {
-    "One": "Download this package",
-    "Plural": "Download all selected Packages"
+    "One": "Dieses Paket herunterladen",
+    "Plural": "Alle ausgewählten Pakete herunterladen"
   },
   "CopySteamId": "Diese Steam-ID kopieren",
   "OpenAuthorPage": "Seite des Autors öffnen",
@@ -114,7 +114,7 @@
   "Sorting_Author": "Name des Autors",
   "Sorting_Status": "Paket-Status",
   "Sorting_CompatibilityReport": "Kompatibilitätsbericht",
-  "Sorting_LoadOrder": "Load Order",
+  "Sorting_LoadOrder": "Ladereihenfolge",
   "IncreaseItemSize": "Größe der Listenelemente erhöhen",
   "FolderSettings": "Ordnereinstellungen",
   "GamePath": "Cities: Skylines Steam Ordner",
@@ -123,15 +123,15 @@
   "VirtualAppDataPath": "Tatsächlicher \"Cities: Skylines\" App-Data Ordner auf Linux/Mac",
   "ChangingFoldersRequiresRestart": "Wenn man die von der App verwendeten Pfade ändert, muss ein Neustart ausgeführt werden. Möchtest du fortfahren?",
   "ShowDatesRelatively": "Zeige die Daten relativ zur aktuellen Zeit an",
-  "CouldNotCreatePlayset": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
-  "TemporaryPlayset": "Temporary Playset",
-  "CreatePlaysetHere": "Create a new playset or load a previous one by clicking here",
+  "CouldNotCreatePlayset": "Es konnte kein neues Spielset erstellt werden. Stelle sicher, dass die Ordner-Einstellungen in den Optionen richtig sind",
+  "TemporaryPlayset": "Temporäres Spielset",
+  "CreatePlaysetHere": "Hier klicken zum Erstellen eines neuen Spielsets oder Laden eines Vorherigen",
   "Maintenance": "Wartung",
   "DisableNewModsByDefault": "Deaktiviere neu abonnierte Mods standardmäßig",
   "DisableNewAssetsByDefault": "Deaktiviere neu abonnierte Gegenstände standardmäßig",
   "OverrideGameChanges": "Überschreibe im Spiel vorgenommene Änderungen am Aktiviert-Status der Mods",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
-  "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
+  "PlaysetSaveInfo": "Die Änderungen in diesem Bildschirm werden automatisch gespeichert. Die Option \"Automatisch speichern\" und die obige Schaltfläche \"Speichern\" beeinflussen nur die ausgewählten Mods, Assets und DLCs",
+  "PlaysetNameChangedIllegalChars": "Einige Zeichen wurden aus dem Spielsetnamen entfernt, da sie nicht in einem Windows-Dateinamen verwendet werden können",
   "ShowFilters": "Filter anzeigen",
   "HideFilters": "Filter ausblenden",
   "DateSubscribed": "Abonnementsdatum",
@@ -139,50 +139,50 @@
   "PackageIncluded": "Paket enthalten",
   "PackageIncludedPlural": "Pakete enthalten",
   "CopyWorkshopLink": {
-    "One": "Copy this package's Workshop Link",
-    "Plural": "Copy the selected packages' Workshop Links"
+    "One": "Workshop-Link dieses Pakets kopieren",
+    "Plural": "Workshop-Link der ausgewählten Pakete kopieren"
   },
   "FilterOutPackagesWithMods": "Mods in der Pakete-Seite ausblenden",
   "FilterOutPackagesWithOneAsset": "Pakete mit nur einem Gegenstand auf der Pakete-Seite ausblenden",
   "DeletePackage": {
-    "One": "Delete this package",
-    "Plural": "Delete the selected packages"
+    "One": "Dieses Paket löschen",
+    "Plural": "Ausgewählte Pakete löschen"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
-    "Plural": "Unsubscribe from the selected packages"
+    "One": "Dieses Paket abbestellen",
+    "Plural": "Ausgewählte Pakete abbestellen"
   },
   "CopyWorkshopId": {
-    "One": "Copy this package's Workshop ID",
-    "Plural": "Copy the selected packages' Workshop IDs"
+    "One": "Workshop-ID dieses Pakets kopieren",
+    "Plural": "Workshop-IDs der ausgewählten Pakete kopieren"
   },
   "CopyAuthorLink": "Kopiere den Autor -Link",
   "CopyAuthorId": "Kopiere die Autor -ID",
-  "YourPlaysets": "Your Playsets",
-  "UnFavoriteThisPlayset": "Un-Favorite this playset",
-  "FavoriteThisPlayset": "Favorite this playset",
-  "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
+  "YourPlaysets": "Deine Spielsets",
+  "UnFavoriteThisPlayset": "Spielset aus den Favoriten entfernen",
+  "FavoriteThisPlayset": "Spielset zu den Favoriten hinzufügen",
+  "PlaysetCreationFailed": "Es konnte kein neues Spielset erstellt werden. Stelle sicher, dass die Ordner-Einstellungen in den Optionen richtig sind",
   "UseDebugMono": "Debug Mono verwenden",
   "LaunchThroughCities": "Start durch Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityPlaysetrMode": "Unity-Spielset benutzen",
   "NoDlcsNoInternet": "DLCs konnten nicht geladen werden, bitte den Computer mit dem Internet verbinden",
   "NoDlcsOpenGame": "Keine DLCs für den Suchbegriff",
   "DlcUpdateNotice": "Wenn deine DLCs hier nicht angezeigt werden, solltest du das Spiel mindestens einmal öffnen",
   "DlcCount": "{0} DLCs insgesamt im Besitz",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "Alle Elemente in diesem Paket einschließen",
+    "Plural": "Alle ausgewählten Pakete einschließen"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "Alle Elemente in diesem Paket ausschließen",
+    "Plural": "Alle ausgewählten Pakete ausschließen"
   },
   "Unfiltered": "Ungefiltert",
   "AnyTags": "Alle Schlagworte",
   "AdvancedLaunchOptions": "Weitere Startoptionen anzeigen",
   "MovePackageToLocalFolder": {
-    "One": "Copy package to a local folder",
-    "Plural": "Copy all selected packages to a local folder"
+    "One": "Paket in einen lokalen Ordner kopieren",
+    "Plural": "Alle ausgewählten Pakete in einen lokalen Ordner kopieren"
   },
   "AllItems": "Alle Elemente",
   "TotalItems": "Gesamtanzahl",
@@ -208,15 +208,15 @@
   "LsmImportUnusedInfo": "Nicht verwendete Assets anzeigen und entfernen",
   "SkipFileInfo": "Wähle eine Skip-Prefab-Datei zur Verwendung mit Loading Screen Mod Revisited",
   "SaveFileInfo": "Wähle einen Spielstand aus, der beim Öffnen des Spiels automatisch geladen werden soll",
-  "LoadPlayset": "Load Playset",
+  "LoadPlayset": "Spielset laden",
   "CopyAuthorSteamId": {
-    "One": "Copy this Author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "ID dieses Autors kopieren",
+    "Plural": "IDs der Autoren der ausgewählten Pakete kopieren"
   },
   "ShowingFilteredItems": "Zeige {0} von insgesamt {1} Elementen",
-  "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
+  "DropNewPlayset": "Ziehe oder wähle die .json oder .xml Datei eines Spielsets um diese zu importieren",
   "ThemeUIScale": "Design & UI-Skalierung",
-  "SearchPlaysets": "Search through these Playsets..",
+  "SearchPlaysets": "Durchsuche diese Spielsets...",
   "AdvancedSettings": "Erweiterte Einstellungen",
   "HelpTranslate": "Übersetzungen verbessern",
   "HelpReset": "Hilfe & Zurücksetzen",
@@ -258,8 +258,8 @@
   "AssetOutOfDatePlural": "Gegenstände sind veraltet",
   "CopyVersionNumber": "Versionsnummer kopieren",
   "SubscribeToItem": {
-    "One": "Subscribe from this Package",
-    "Plural": "Subscribe from the selected Packages"
+    "One": "Dieses Paket abonnieren",
+    "Plural": "Die ausgewählten Pakete abonnieren"
   },
   "LoadCollectionTip": "Lade die Liste der Elemente einer Sammlung und lege fest, welche du abonnieren, einschließen oder ausschließen möchtest.",
   "LsmMissingTip": "Ziehe eine LSMR-Berichtsdatei hierhin oder wähle eine aus, um die im Bericht als \"fehlend\" aufgelistete Elemente zu abonnieren",
@@ -297,9 +297,9 @@
   "PackageIncludedEnabledTotal": "Pakete enthalten: {0}, von denen {1} Mods und {2} aktiviert sind, Gesamt: {3}",
   "PackageIncludedAndEnabledTotal": "Pakete enthalten & aktiviert: {0}, Gesamt: {1}",
   "AssetIncludedTotal": "Gegenstände enthalten: {0}, Gesamt: {1}",
-  "NewPlayset_Tip": "Create or import a new playset",
-  "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "NewPlayset_Tip": "Neues Spielset erstellen oder importieren",
+  "TempPlayset_Tip": "Wechsel zu einem temporären Spielset mit den aktuellen Einstellungen",
+  "ViewPlaysets_Tip": "Gespeicherte Spielsets anzeigen und verwalten",
   "AutoSave_Tip": "Änderungen an Mods & Gegenständen automatisch in das aktuelle Profil speichern",
   "LoadEnabled_Tip": "Lädt aktivierte Gegenstände beim Laden eines Spiels. Dies sollte aktiviert bleiben, es sei denn, du weißt, was du tust",
   "LoadUsed_Tip": "Lade Assets die in deiner Karte verwendet werden, auch wenn sie im Spiel deaktiviert sind. Dies bezieht sich nicht auf die Asset-Einstellungen innerhalb von Skyve",
@@ -316,62 +316,62 @@
   "OBSOLETE": "VERALTET",
   "ABANDONED": "AUFGEGEBEN",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "Diese Aktion kann nicht rückgängig gemacht werden.",
+    "Plural": "Diese Aktion kann nicht rückgängig gemacht werden. Sie wirkt sich auf {0} Pakete aus"
   },
   "AlwaysOpenFiltersAndActions": "Filter standardmäßig anzeigen",
   "AlwaysOpenFiltersAndActions_Tip": "Filter sind immer eingeblendet, wenn du einen Inhalts-Tab öffnest",
   "XMLImport": "XML-Konfiguration importieren",
   "XMLImportMissingInfo": "Pakete in beliebigen XML-Konfigurationen anzeigen und abonnieren",
   "XMLTip": "Wähle eine XML-Konfigurationsdatei aus oder ziehe sie per Drag & Drop, um die darin aufgeführten Pakete zu verwalten.",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
+  "FavoritePlaysetTotal": "Favorisierte Spielsets: {0}; Gesamt: {1}",
   "FavoriteTotal": "Gesamte Profilanzahl: {0}",
-  "PlaysetFilter": "Playset Filter",
+  "PlaysetFilter": "Spielset-Filter",
   "CheckDocumentsFolder": "Vergewissere dich, dass Skyve Zugriff auf den Dokumentenordner hat. Es verwendet diesen, um die UI- & Sprach-Einstellungen zu speichern.",
   "FailedToSaveLanguage": "Fehler beim Speichern der ausgewählten Sprache",
   "FailedToOpenTC": "Fehler beim Öffnen des Themen-Wechslers",
   "FailedToDeleteItem": "Element konnte nicht gelöscht werden",
   "DeleteAsset": {
-    "One": "Delete this asset",
-    "Plural": "Delete the selected assets"
+    "One": "Dieses Asset löschen",
+    "Plural": "Die ausgewählten Assets löschen"
   },
   "OpenChangelog": "Änderungsprotokoll öffnen",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Dieses Element in allen deinen Spielsets einschließen",
+    "Plural": "Die ausgewählten Elemente in allen deinen Spielsets einschließen"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Dieses Element aus allen deinen Spielsets ausschließen",
+    "Plural": "Die ausgewählten Elemente aus allen deinen Spielsets ausschließen"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "Namen dieses Pakets kopieren",
+    "Plural": "Namen der ausgewählten Pakete kopieren"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "Namen dieses Autors kopieren",
+    "Plural": "Namen der Autoren der ausgewählten Pakete kopieren"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
-    "Plural": "Copy the selected packages' folder names"
+    "One": "Namen dieses Ordners kopieren",
+    "Plural": "Namen der Ordner der ausgewählten Pakete kopieren"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
-  "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
+  "PlaysetNameUsed": "Du hast bereits ein Spielset mit dem gleichen Namen. Bitte ändere den Namen einer der beiden Dateien, um fortzufahren.",
+  "FailedToImportLegacyPlayset": "Dieses alte Spielset konnte nicht konvertiert werden.",
   "Sorting_LastUsed": "Zuletzt Verwendet",
   "OpenLinksInBrowser": "Steam-Links in deinem Browser öffnen",
   "OpenLinksInBrowser_Tip": "Lege fest Steam-Links in deinem Standardbrowser zu öffnen anstatt in der Steam-Anwendung.",
-  "PlaysetStillLoading": "Your playset is still loading, please wait before exiting this page.",
-  "ApplyPlaysetNameBeforeExit": "Please finish editing the playset's name before exiting this page.",
+  "PlaysetStillLoading": "Dein Spielset wird noch geladen, bitte warte bevor du diese Seite verlässt.",
+  "ApplyPlaysetNameBeforeExit": "Bitte beende die Bearbeitung des Spielsetnamens bevor du diese Seite verlässt.",
   "SteamNotOpenTo": "Steam läuft momentan nicht",
   "OpenSteamToContinue": "Bitte öffne Steam, um deine vorherige Aufgabe fortzusetzen.",
-  "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
-  "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's color",
-  "EditPlaysetName": "Edit this playset's name",
-  "SavePlaysetChanges": "Save the current package settings to this playset's file",
+  "IncludeExcludeOtherPlayset": "{0} in dem Spielset '{1}' ein- / ausschließen",
+  "OpenPlaysetFolder": "Zeige die Datei dieses Spielsets auf deinem Computer",
+  "ChangePlaysetColor": "Farbe dieses Spielsets ändern",
+  "EditPlaysetName": "Name dieses Spielsets bearbeiten",
+  "SavePlaysetChanges": "Aktuelle Paketeinstellungen in der Spielsetdatei speichern",
   "Sorting_Color": "Profil-Farbe",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
+  "CreateShortcutPlayset": "Erstelle eine Verknüpfung für dieses Spielset auf deinem Desktop",
   "AskToLaunchGameForShortcut": "Soll die Verknüpfung das Spiel mit dem ausgewählten Profil starten?",
   "TextImportMissingInfo": "Lade eine Textdatei mit Steam-IDs, um sie einfach zu abonnieren oder zu verwalten",
   "ImportFromText": "Import aus Text",
@@ -379,8 +379,8 @@
   "XMLImportInfo": "Du kannst Dateien von BOB, Forest Brush, Theme Mixer und weiteren verwenden.",
   "ImportFromTextInfo": "Jedes Textformat wird unterstützt",
   "LsmImportInfo": "Stelle sicher, dass du die 'Report' Datei auswählst",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "Keine Spielsets zum Anzeigen",
+  "NoPlaysetsMatchFilters": "Keine Spielsets entsprechen der Suche",
   "Your Save-games": "Deine Spielstände",
   "App Data": "App-Daten",
   "Custom Maps": "Benutzerdefinierte Karten",
@@ -404,7 +404,7 @@
   "DeleteAll": "Alle angezeigten Elemente löschen",
   "FlipItemCopyFilterAction": "Strg+Klick-Verhalten zum Filtern in den Inhaltslisten tauschen",
   "FlipItemCopyFilterAction_Tip": "Tauscht das Standardverhalten des Anklickens auf Beschriftungen, so dass normale Klicks filtern und Strg+Klicken die Standard-Aktion ausführen.",
-  "AltClickTo": "Alt+Click to {0}",
+  "AltClickTo": "Alt+Klicke, um {0}",
   "FilterByThisAuthor": "Nach Autor filtern",
   "AddToSearch": "'{0}' zu deiner Suche hinzufügen",
   "CopyToClipboard": "'{0}' in die Zwischenablage kopieren",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "Hält das Tool davon ab, automatisch beim Öffnen des Spiels Pakete zu löschen, die du nicht abonniert hast.",
   "CustomLaunchArguments": "Benutzerdefinierte Start-Parameter",
   "LaunchArgsInfo": "Zusätzliche Argumente beim Starten des Spiels hinzufügen",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "Fehlende Pakete von \"{0}\"",
   "UnusedLSMReport": "LSM ungenutzte Assets",
   "MissingLSMReport": "LSM Fehlende Assets",
   "SearchGenericPackages": "Durchsuche diese Pakete...",
@@ -508,20 +508,20 @@
     "Plural": "Zeige {0} {1}, {2}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "Zeige {0} {1}, {2} ausgewählt",
+    "Plural": "Zeige {0} {1}, {2} ausgewählt"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "Zeige {0} {1}, {2} ausgewählt, {3}",
+    "Plural": "Zeige {0} {1}, {2} ausgewählt, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} ist wegen der eingestellten Profilnutzung versteckt",
     "Plural": "{0} {1} sind wegen der eingestellten Profilnutzung versteckt"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "Kompatibilität dieses Pakets bearbeiten",
+    "Plural": "Kompatibilität der ausgewählten Pakete bearbeiten"
   },
   "AnyIssue": "Jedes Problem",
   "AnyUsage": "Jede Nutzung",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "Fehler beim Senden der Überprüfungsanfrage für '{0}'.\n\n{1}",
   "SendReview": "Anfrage zur Überprüfung senden",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "Tags dieses Pakets bearbeiten",
+    "Plural": "Tags der ausgewählten Elemente bearbeiten"
   },
   "ShowAllReferencedPackages": "Ausgeschlossene Pakete im Reiter 'Referenzen' anzeigen",
   "ShowAllReferencedPackages_Tip": "Zeigt sowohl ausgeschlossene als auch enthaltene Pakete, die auf das angezeigte verweisen.",
@@ -584,7 +584,7 @@
     "One": "Du wirst während dieses Prozesses {0} Paket abbestellen.",
     "Plural": "Du wirst während dieses Prozesses {0} Pakete abbestellen."
   },
-  "ViewThisPlaysetsPackages": "View this playset's contents",
+  "ViewThisPlaysetsPackages": "Inhalt dieses Spielsets anzeigen",
   "PendingDownloads": {
     "One": "{0} Element mit ausstehendem Download",
     "Plural": "{0} Elemente mit ausstehendem Download"
@@ -600,59 +600,59 @@
   "RequestOption1": "Ein Problem melden oder fehlende Informationen hinzufügen",
   "RequestOption2": "Fehlenden Status für das Paket hinzufügen",
   "RequestOption3": "Fehlende Interaktion mit einem anderen Paket hinzufügen",
-  "CurrentPlayset": "Current Playset",
+  "CurrentPlayset": "Aktuelles Spielset",
   "References": "Bezüge",
   "OpenLog": "Logdatei öffnen",
   "Sort By": "Sortieren nach",
   "OpenCitiesAppData": "C:S's AppData Ordner öffnen",
   "FailedToFetchLogs": "Fehler beim Abrufen der Protokolldateien",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "Spielsets entdecken",
   "AllUsages": "Jede Nutzung",
   "Invalid": "Ungültig",
-  "UpdatePlayset": "Update Playset",
-  "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
-  "DownloadPlayset": "Download Playset",
+  "UpdatePlayset": "Spielset aktualisieren",
+  "FailedToRetrievePlaysets": "Fehler beim Abrufen der Spielsetentdeckung",
+  "DownloadPlayset": "Spielset herunterladen",
   "ReloadAllData": "Alle Daten neu laden",
   "ResetSnoozes": "Alle Schlummern zurücksetzen",
   "ResetModsCache": "Mod-Cache zurücksetzen",
   "ResetCompatibilityCache": "Kompatibilitäts-Cache zurücksetzen",
   "ResetImageCache": "Bilder im Cache löschen",
   "ResetSteamCache": "Steam-Cache löschen",
-  "SharePlayset": "Upload this playset",
+  "SharePlayset": "Dieses Spielset hochladen",
   "ResetInfo": "Achtung! Zurücksetzen kann nicht rückgängig gemacht werden.",
-  "FailedToDownloadPlayset": "Failed to download this playset.\r\n\r\nPlease try again later.",
-  "UpdatePlaysetTip": "Update your local version of this playset",
-  "DownloadPlaysetTip": "Download this playset to your local computer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail picture",
+  "FailedToDownloadPlayset": "Herunterladen dieses Spielsets fehlgeschlagen.\n\nBitte versuche es später erneut.",
+  "UpdatePlaysetTip": "Lokale Version dieses Spielsets aktualisieren",
+  "DownloadPlaysetTip": "Dieses Spielset auf den lokalen Computer herunterladen",
+  "EditPlaysetThumbnail": "Vorschaubild dieses Spielsets bearbeiten",
   "MakePublic": "Dieses Profil öffentlich machen",
   "MakePrivate": "Dieses Profil auf privat setzen",
-  "CopyPlaysetLink": "Copy this playset's ID",
-  "FailedToUploadPlayset": "Failed to upload your playset",
-  "FailedToDeletePlayset": "Failed to delete your playset",
-  "FailedToUpdatePlayset": "Failed to update your playset",
+  "CopyPlaysetLink": "ID dieses Spielsets kopieren",
+  "FailedToUploadPlayset": "Hochladen des Spielsets fehlgeschlagen",
+  "FailedToDeletePlayset": "Löschen des Spielsets fehlgeschlagen",
+  "FailedToUpdatePlayset": "Aktualisieren des Spielsets fehlgeschlagen",
   "ImportFromLink": "Ein Profil mit Profil-ID importieren",
-  "PastePlaysetId": "Paste the ID of the playset you'd like to import",
+  "PastePlaysetId": "Füge die ID des Spielsets ein, das du importieren willst",
   "AssumeInternetConnectivity": "Internetverbindungsüberprüfungen ignorieren",
   "AssumeInternetConnectivity_Tip": "Überspringt die Suche nach dem Internet und geht automatisch davon aus, dass du verbunden bist.",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
-  "AddTagBox": "Add a new tag here",
-  "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
+  "SelectAll": "Alle angezeigten Elemente auswählen",
+  "DeselectAll": "Alle angezeigten Elemente abwählen",
+  "AddTagBox": "Neues Tag hier hinzufügen",
+  "EditingMultipleTags": "Das Bearbeiten von Tags mehrerer Pakete überschreibt jedes ihrer benutzerdefinierten Tags.",
   "EditTagsOfPackage": {
-    "One": "Edit all of this package's assets' Tags",
-    "Plural": "Edit all of the selected packages' assets' Tags"
+    "One": "Bearbeite alle Tags der Assets dieses Pakets",
+    "Plural": "Bearbeite alle Tags der Assets der ausgewählten Pakete"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "Benutzerdefinierte Tags: {0}",
+    "Plural": "Benutzerdefinierte Tags: {0} Pakete"
   },
-  "CustomTags": "Custom Tags",
+  "CustomTags": "Benutzerdefinierte Tags",
   "WorkshopAndGameTags": "Workshop & In-Game Tags",
-  "TroubleshootIssues": "Troubleshoot Issues",
-  "ViewTroubleshootOptions": "View troubleshooting options",
-  "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
-  "TroubleshootSelection": "Which option best describes your situation?",
-  "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?"
+  "TroubleshootIssues": "Fehlerbehebung",
+  "ViewTroubleshootOptions": "Optionen zur Fehlerbehebung anzeigen",
+  "TroubleshootInfo": "Wenn du eine Mod oder ein Asset hast, die ein Problem verursacht oder fehlt, und du nicht weißt, welche; Versuche die Fehlerbehebung hier:",
+  "TroubleshootCaused": "Eine Mod oder Asset, das ich verwende, verursacht Probleme",
+  "TroubleshootMissing": "Mir fehlt eine Mod oder ein Asset und das verursacht Probleme",
+  "TroubleshootSelection": "Welche Option beschreibt deine Situation am besten?",
+  "TroubleshootModOrAsset": "Bei welcher Art von Inhalt möchtest du Fehler beheben?"
 }
