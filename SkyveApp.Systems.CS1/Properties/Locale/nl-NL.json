@@ -1,6 +1,6 @@
 {
   "CompatibilityInfo": "Compatibiliteit Info",
-  "PlaysetBubble": "Current Playset",
+  "PlaysetBubble": "Huidige Speelset",
   "StartCities": "Begin Cities: Skylines",
   "StopCities": "Stop Cities: Skylines",
   "AssetsBubble": "Uw activa",
@@ -32,8 +32,8 @@
   "UpToDate": "Actueel",
   "StatusUnknown": "Onbekende status",
   "PartiallyDownloaded": "Gedeeltelijk gedownload",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "Auto-save is ingeschakeld",
+  "AutoPlaysetSaveOff": "Auto-save is uitgeschakeld",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "Start instellingen",
   "IncludesItemsYouDoNotHave": "Inclusief items die u niet heeft",
