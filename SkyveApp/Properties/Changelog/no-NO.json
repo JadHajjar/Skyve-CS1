@@ -384,15 +384,15 @@
                 "Name": "Endringer",
                 "Changes": [
                     "Steam paneler i hoved menyen vises nå til vanlig, du kan forstatt gjømme den i mod innstillinger.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Å be om en gjennomgang krever nå gyldig beskrivelse og vil sende loggen din sammen med forespørselen. En ansvarsfraskrivelse vises ved siden av \"Send\" knappen.",
+                    "Reduserte rapporteringsnivået av en mod som ikke har blitt oppdatert på en stund til \"Info\", slik at den ikke notifiserer deg om den."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Feilrettinger",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Fikset at assetsammendrag ikke vises på dashbordet.",
+                    "Fikset at \"utdatertstatus\" ikke fungerer korrekt."
                 ]
             }
         ]
@@ -402,9 +402,9 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Feilrettinger og endringer",
                 "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
+                    "La til en melding som gir deg beskjed når \"Fikset alle problemer\" og \"Kjør opprydning\" er fullført.",
                     "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
                     "Fixed the changelog not opening with some languages.",
                     "Potentially fixed subscribing to a large amount of items failing/not working."
@@ -419,7 +419,7 @@
             {
                 "Name": "Reworked Subscription Process",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
+                    "Du kan nå abonnere på pakker mens spillet kjører.",
                     "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
                     "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
                     "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
