@@ -1,6 +1,6 @@
 {
   "CompatibilityInfo": "호환성 정보",
-  "PlaysetBubble": "Current Playset",
+  "PlaysetBubble": "현재 플레이셋",
   "StartCities": "Cities: Skylines 실행",
   "StopCities": "Cities: Skylines 종료",
   "AssetsBubble": "내 에셋",
@@ -32,15 +32,15 @@
   "UpToDate": "최신 상태",
   "StatusUnknown": "알 수 없는 상태",
   "PartiallyDownloaded": "부분적으로 다운로드됨",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
-  "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
+  "AutoPlaysetSaveOn": "자동 저장 활성화됨",
+  "AutoPlaysetSaveOff": "자동 저장 비활성화됨",
+  "TemporaryPlaysetCanNotBeEdited": "임시 플레이셋의 설정은 앱을 다시 열 때 재설정됩니다",
   "LaunchSettings": "시작 설정",
   "IncludesItemsYouDoNotHave": "현재 없는 항목 포함",
   "ContentAndInfo": "콘텐츠 및 정보",
-  "OtherPlaysets": "Other Playsets",
-  "ViewPlaysets": "View Your Playsets",
-  "AddPlayset": "Add Playset",
+  "OtherPlaysets": "다른 플레이셋",
+  "ViewPlaysets": "내 플레이셋 보기",
+  "AddPlayset": "플레이셋 추가",
   "LHT": "좌측통행",
   "NoWorkshop": "창작마당 패키지 비활성화",
   "NoAssets": "모든 에셋 비활성화",
@@ -69,20 +69,20 @@
   "ModsNoIssues": "문제가 없는 모드",
   "LinkModAssets": "모드 안의 에셋을 모드의 '포함됨' 상태에 연결하기",
   "Preferences": "환경설정",
-  "PlaysetName": "Playset Name",
-  "RenamePlayset": "Rename the current playset",
+  "PlaysetName": "플레이셋 이름",
+  "RenamePlayset": "현재 플레이셋의 이름을 바꿉니다",
   "StartScratch": "처음부터 프로필 만들기를 시작하기",
   "ContinueFromCurrent": "현재 설정을 유지한 채로 하기",
   "GamePlay": "도시 플레이용",
   "EditorPlay": "에셋 제작용",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "플레이셋 용도",
   "SomePackagesWillBeDisabled": "이 프로필의 용도를 변경하여 일부 패키지가 제거될 것입니다.",
   "AffectedPackagesAre": "영향을 받는 패키지:",
-  "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
-  "PlaysetReplace": "Load the settings of this playset",
-  "PlaysetMerge": "Merge its items into your current playset",
-  "PlaysetExclude": "Exclude its items from your current playset",
-  "PlaysetDelete": "Delete this playset",
+  "ConfirmDeletePlayset": "'{0}' 플레이셋을 정말 삭제하시겠습니까?",
+  "PlaysetReplace": "이 플레이셋의 설정 불러오기",
+  "PlaysetMerge": "이 플레이셋의 모든 항목을 현재 프로필에 합치기",
+  "PlaysetExclude": "이 플레이셋의 모든 항목을 현재 프로필에서 제외하기",
+  "PlaysetDelete": "이 플레이셋을 삭제",
   "ShouldNotBeSubscribed": "구독하지 마십시오",
   "MissingPackages": "누락된 패키지",
   "LoadingScreenMod": "Loading Screen Mod",
@@ -94,12 +94,12 @@
   "OpenLocalFolder": "이 패키지를 포함하는 로컬 폴더를 열기",
   "ViewOnSteam": "Steam에서 이 패키지 보기",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
-    "Plural": "Re-download all selected Packages"
+    "One": "이 패키지를 다시 다운로드",
+    "Plural": "선택된 모든 패키지를 다시 다운로드"
   },
   "DownloadPackage": {
-    "One": "Download this package",
-    "Plural": "Download all selected Packages"
+    "One": "이 패키지를 다운로드하기",
+    "Plural": "선택된 모든 패키지를 다운로드하기"
   },
   "CopySteamId": "Steam ID 복사하기",
   "OpenAuthorPage": "제작자의 페이지 열기",
@@ -114,7 +114,7 @@
   "Sorting_Author": "제작자 이름",
   "Sorting_Status": "패키지 상태",
   "Sorting_CompatibilityReport": "호환성 보고서",
-  "Sorting_LoadOrder": "Load Order",
+  "Sorting_LoadOrder": "로드 순서",
   "IncreaseItemSize": "목록 항목의 크기 키우기",
   "FolderSettings": "폴더 설정",
   "GamePath": "Cities: Skylines의 Steam 폴더",
@@ -123,15 +123,15 @@
   "VirtualAppDataPath": "Linux/Mac의 실제 Cities: Skylines의 앱 데이터 폴더",
   "ChangingFoldersRequiresRestart": "앱이 사용하는 경로를 변경하면 재시작이 필요합니다. 계속하시겠습니까?",
   "ShowDatesRelatively": "현재 시간에 상대적인 날짜 표기 보기",
-  "CouldNotCreatePlayset": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
-  "TemporaryPlayset": "Temporary Playset",
-  "CreatePlaysetHere": "Create a new playset or load a previous one by clicking here",
+  "CouldNotCreatePlayset": "새 플레이셋을 만들 수 없습니다. 옵션 패널에서 폴더 설정이 올바르게 설정되어 있는지 확인하세요",
+  "TemporaryPlayset": "임시 플레이셋",
+  "CreatePlaysetHere": "새 플레이셋을 만들거나 이전 플레이셋을 불러오려면 여기를 클릭하세요",
   "Maintenance": "유지보수",
   "DisableNewModsByDefault": "기본적으로 새로 구독한 모드를 비활성화하기",
   "DisableNewAssetsByDefault": "기본적으로 새로 구독한 에셋을 비활성화하기",
   "OverrideGameChanges": "인게임에서 모드의 활성화 상태를 변경한 것을 무시하기",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
-  "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
+  "PlaysetSaveInfo": "이 화면의 변경 사항은 자동으로 저장됩니다. \"자동 저장\" 옵션 및 상단의 저장 버튼은 선택한 모드, 에셋 및 DLC에만 영향을 미칩니다.",
+  "PlaysetNameChangedIllegalChars": "일부 문자는 Windows 파일 이름에서 사용할 수 없기 때문에 플레이셋 이름에서 제거되었습니다.",
   "ShowFilters": "필터 보기",
   "HideFilters": "필터 숨기기",
   "DateSubscribed": "구독한 날짜",
@@ -139,29 +139,29 @@
   "PackageIncluded": "포함된 패키지",
   "PackageIncludedPlural": "포함된 패키지",
   "CopyWorkshopLink": {
-    "One": "Copy this package's Workshop Link",
-    "Plural": "Copy the selected packages' Workshop Links"
+    "One": "창작마당 링크 복사",
+    "Plural": "선택된 패키지들의 창작마당 링크 복사"
   },
   "FilterOutPackagesWithMods": "패키지 페이지에서 모드 숨기기",
   "FilterOutPackagesWithOneAsset": "패키지 페이지에서 단일 에셋 패키지 숨기기",
   "DeletePackage": {
-    "One": "Delete this package",
-    "Plural": "Delete the selected packages"
+    "One": "이 패키지를 삭제",
+    "Plural": "선택된 패키지를 삭제"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
-    "Plural": "Unsubscribe from the selected packages"
+    "One": "이 패키지를 구독 취소",
+    "Plural": "선택된 패키지를 구독 취소"
   },
   "CopyWorkshopId": {
-    "One": "Copy this package's Workshop ID",
-    "Plural": "Copy the selected packages' Workshop IDs"
+    "One": "이 패키지의 창작마당 ID 복사",
+    "Plural": "선택된 패키지들의 창작마당 ID 복사"
   },
   "CopyAuthorLink": "제작자 프로필 링크 복사",
   "CopyAuthorId": "제작자 ID 복사",
-  "YourPlaysets": "Your Playsets",
-  "UnFavoriteThisPlayset": "Un-Favorite this playset",
-  "FavoriteThisPlayset": "Favorite this playset",
-  "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
+  "YourPlaysets": "내 플레이셋",
+  "UnFavoriteThisPlayset": "이 플레이셋을 즐겨찾기 해제",
+  "FavoriteThisPlayset": "이 플레이셋을 즐겨찾기",
+  "PlaysetCreationFailed": "새 플레이셋을 만들 수 없습니다. 옵션 패널에서 폴더 설정이 올바르게 설정되어 있는지 확인하세요",
   "UseDebugMono": "Debug Mono 사용",
   "LaunchThroughCities": "Cities.exe를 통해 실행",
   "UnityPlaysetrMode": "Use Unity Playsetr",
@@ -170,19 +170,19 @@
   "DlcUpdateNotice": "만약 가진 DLC가 여기에 표시되지 않는다면 게임을 한 번이라도 실행했는지 확인하세요",
   "DlcCount": "총 {0}개 DLC 보유",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "이 패키지의 모든 항목을 포함하기",
+    "Plural": "선택된 모든 패키지를 포함하기"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "이 패키지의 모든 항목을 제외하기",
+    "Plural": "선택된 모든 패키지를 제외하기"
   },
   "Unfiltered": "필터링하지 않음",
   "AnyTags": "모든 태그",
   "AdvancedLaunchOptions": "추가 시작 옵션 표시하기",
   "MovePackageToLocalFolder": {
-    "One": "Copy package to a local folder",
-    "Plural": "Copy all selected packages to a local folder"
+    "One": "로컬 폴더에 패키지를 복사",
+    "Plural": "로컬 폴더에 선택된 모든 패키지를 복사"
   },
   "AllItems": "모든 항목",
   "TotalItems": "총 항목",
@@ -208,15 +208,15 @@
   "LsmImportUnusedInfo": "사용되지 않은 에셋 보기 및 제거하기",
   "SkipFileInfo": "Loading Screen Mod에 사용할 스킵 파일을 선택하세요",
   "SaveFileInfo": "게임을 켤 때 자동으로 불러올 세이브 파일을 선택하세요",
-  "LoadPlayset": "Load Playset",
+  "LoadPlayset": "플레이셋 불러오기",
   "CopyAuthorSteamId": {
-    "One": "Copy this Author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "제작자 ID 복사",
+    "Plural": "선택된 패키지들의 제작자 ID 복사"
   },
   "ShowingFilteredItems": "총 {1}개 항목 중 {0}개 표시 중",
-  "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
+  "DropNewPlayset": "플레이셋의 .json 또는 .xml 파일을 여기에 놓거나 선택해서 프로필을 가져오세요",
   "ThemeUIScale": "테마 & UI 크기",
-  "SearchPlaysets": "Search through these Playsets..",
+  "SearchPlaysets": "이 플레이셋들 중 검색..",
   "AdvancedSettings": "고급 설정",
   "HelpTranslate": "번역 개선하기",
   "HelpReset": "도움 & 초기화",
@@ -258,8 +258,8 @@
   "AssetOutOfDatePlural": "업데이트되지 않은 에셋들이 있습니다",
   "CopyVersionNumber": "버전 숫자 복사하기",
   "SubscribeToItem": {
-    "One": "Subscribe from this Package",
-    "Plural": "Subscribe from the selected Packages"
+    "One": "이 패키지를 구독하기",
+    "Plural": "선택된 패키지를 구독하기"
   },
   "LoadCollectionTip": "모음집의 항목을 불러온 뒤 구독, 포함하거나 제외할 항목을 관리합니다.",
   "LsmMissingTip": "Loading Screen Mod 보고서 파일을 여기로 드래그 앤 드롭하거나 클릭하여 보고서 파일을 불러오면 누락된 자산을 확인하고 구독할 수 있습니다.",
@@ -297,8 +297,8 @@
   "PackageIncludedEnabledTotal": "포함된 패키지: {0}개, 그중 {1}개는 모드이며 {2}개가 활성화됨, 총: {3}개",
   "PackageIncludedAndEnabledTotal": "포함된 & 활성화된 패키지: {0}개, 총: {1}개",
   "AssetIncludedTotal": "포함된 에셋: {0}개, 총: {1}개",
-  "NewPlayset_Tip": "Create or import a new playset",
-  "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
+  "NewPlayset_Tip": "새 플레이셋 만들기 또는 가져오기",
+  "TempPlayset_Tip": "현재 설정을 사용하여 임시 플레이셋으로 전환하기",
   "ViewPlaysets_Tip": "View & manage your saved profiles",
   "AutoSave_Tip": "모드 및 자산에 대한 변경 사항을 프로필에 자동으로 저장합니다",
   "LoadEnabled_Tip": "게임을 불러올 때 활성화된 에셋을 불러옵니다. 이것이 무엇을 하는지 알지 못한다면 그냥 활성화된 상태로 두세요",
@@ -316,24 +316,24 @@
   "OBSOLETE": "폐기",
   "ABANDONED": "버려짐",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "이 작업은 되돌릴 수 없습니다.",
+    "Plural": "이 작업은 되돌릴 수 없습니다. 또한 패키지 {0}개에 영향을 미칩니다."
   },
   "AlwaysOpenFiltersAndActions": "기본적으로 필터 섹션을 표시하기",
   "AlwaysOpenFiltersAndActions_Tip": "콘텐츠 탭을 열 때 필터 섹션을 항상 펼쳐둡니다",
   "XMLImport": "XML 구성 가져오기",
   "XMLImportMissingInfo": "다양한 XML 구성에서 패키지 보기 및 구독",
   "XMLTip": "XML 구성 파일을 선택하거나 드래그 앤 드롭하여 파일 내부에 나열된 패키지를 관리하세요.",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
+  "FavoritePlaysetTotal": "즐겨찾는 플레이셋: {0}개, 총: {1}개",
   "FavoriteTotal": "총 프로필: {0}개",
-  "PlaysetFilter": "Playset Filter",
+  "PlaysetFilter": "플레이셋 필터",
   "CheckDocumentsFolder": "Skyve가 문서 폴더에 접근할 수 있는지 확인해주세요. UI 및 언어 설정을 저장하기 위해 사용합니다.",
   "FailedToSaveLanguage": "선택한 언어로 변경하지 못했습니다",
   "FailedToOpenTC": "테마 체인저를 열지 못했습니다",
   "FailedToDeleteItem": "항목을 삭제 하지 못했습니다",
   "DeleteAsset": {
-    "One": "Delete this asset",
-    "Plural": "Delete the selected assets"
+    "One": "이 에셋을 삭제",
+    "Plural": "선택된 에셋을 삭제"
   },
   "OpenChangelog": "변경사항 열기",
   "IncludeThisItemInAllPlaysets": {
@@ -345,33 +345,33 @@
     "Plural": "Exclude the selected items in all your profiles"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "패키지 이름 복사",
+    "Plural": "선택된 패키지들의 이름 복사"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "제작자 이름 복사",
+    "Plural": "선택된 패키지들의 제작자 이름 복사"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
-    "Plural": "Copy the selected packages' folder names"
+    "One": "폴더 이름 복사",
+    "Plural": "선택된 패키지들의 폴더 이름 복사"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
-  "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
+  "PlaysetNameUsed": "동일한 이름의 플레이셋이 이미 존재합니다. 계속하려면 파일의 이름을 변경하세요.",
+  "FailedToImportLegacyPlayset": "오래된 플레이셋을 변환하지 못했습니다.",
   "Sorting_LastUsed": "마지막으로 사용한 시간",
   "OpenLinksInBrowser": "브라우저에서 Steam 링크 열기",
   "OpenLinksInBrowser_Tip": "Steam 클라이언트가 아닌 기본 웹 브라우저에서 Steam 링크를 열도록 수정합니다.",
-  "PlaysetStillLoading": "Your playset is still loading, please wait before exiting this page.",
-  "ApplyPlaysetNameBeforeExit": "Please finish editing the playset's name before exiting this page.",
+  "PlaysetStillLoading": "아직 플레이셋을 불러오는 중입니다, 페이지를 나가기 전에 기다려 주세요",
+  "ApplyPlaysetNameBeforeExit": "이 페이지를 떠나기 전에 플레이셋 이름 편집을 완료해 주세요.",
   "SteamNotOpenTo": "현재 Steam이 작동하고 있지 않습니다.",
   "OpenSteamToContinue": "이전 작업을 계속하려면 Steam 클라이언트를 실행하세요.",
-  "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
-  "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's color",
-  "EditPlaysetName": "Edit this playset's name",
-  "SavePlaysetChanges": "Save the current package settings to this playset's file",
+  "IncludeExcludeOtherPlayset": "플레이셋 '{1}'에서 {0} 포함 / 제외",
+  "OpenPlaysetFolder": "이 플레이셋의 파일을 내 컴퓨터에서 보기",
+  "ChangePlaysetColor": "이 플레이셋의 색상 변경하기",
+  "EditPlaysetName": "이 플레이셋의 이름 수정하기",
+  "SavePlaysetChanges": "현재 패키지의 설정을 이 플레이셋의 파일에 저장하기",
   "Sorting_Color": "프로필 색상",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
+  "CreateShortcutPlayset": "바탕화면에 이 플레이셋 바로 가기 만들기",
   "AskToLaunchGameForShortcut": "바로가기를 사용하여 저장된 프로필의 게임을 실행하시겠습니까?",
   "TextImportMissingInfo": "Steam ID가 포함된 텍스트 파일을 불러오고 간편하게 구독하거나 관리할 수 있습니다",
   "ImportFromText": "텍스트에서 가져오기",
@@ -404,7 +404,7 @@
   "DeleteAll": "표시된 모든 항목 삭제하기",
   "FlipItemCopyFilterAction": "콘텐츠 목록에서 필터링하기 위한 Ctrl + 클릭 동작 바꾸기",
   "FlipItemCopyFilterAction_Tip": "라벨을 클릭할 때의 기본 동작을 전환하여 일반적인 클릭이 필터링을 하게 하고 Ctrl+클릭은 기본 작업을 하도록 합니다.",
-  "AltClickTo": "Alt+Click to {0}",
+  "AltClickTo": "Alt + 클릭으로 {0}",
   "FilterByThisAuthor": "이 제작자로 필터링",
   "AddToSearch": "'{0}'을 추가하여 검색",
   "CopyToClipboard": "'{0}' 를 클립보드에 복사하기",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "게임을 열 때 구독되어있지 않은 패키지를 자동으로 삭제하는 기능을 중지합니다.",
   "CustomLaunchArguments": "사용자 지정 시작 인수",
   "LaunchArgsInfo": "게임이 실행될 때의 추가 인수를 추가하세요",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "'{0}' 에 누락된 패키지",
   "UnusedLSMReport": "LSM 사용되지 않은 에셋",
   "MissingLSMReport": "LSM 누락된 에셋",
   "SearchGenericPackages": "이 패키지들 중 검색..",
@@ -508,20 +508,20 @@
     "Plural": "{1} {0}개 표시 중, {2}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "{1} {0}개 표시중, {2}개 선택됨",
+    "Plural": "{1} {0}개 표시중, {2}개 선택됨"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "{1} {0}개 표시중, {2}개 선택됨, {3}",
+    "Plural": "{1} {0}개 표시중, {2}개 선택됨, {3}"
   },
   "ItemsHidden": {
     "One": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다",
     "Plural": "내 프로필의 용도에 따라 {1} {0}개는 숨겨졌습니다"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "이 패키지의 호환성 편집하기",
+    "Plural": "선택된 패키지들의 호환성 편집하기"
   },
   "AnyIssue": "아무 이슈",
   "AnyUsage": "모든 용도",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "'{0}'에 대한 내 검토 요청을 보내는 데 실패했습니다.\n\n{1}",
   "SendReview": "검토 요청 보내기",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "이 패키지의 태그 편집하기",
+    "Plural": "선택된 항목들의 태그 편집하기"
   },
   "ShowAllReferencedPackages": "'참조' 탭에 제외된 패키지 표시하기",
   "ShowAllReferencedPackages_Tip": "보고 있는 패키지를 참조하는 포함된 패키지와 제외된 패키지를 모두 표시합니다.",
@@ -584,7 +584,7 @@
     "One": "이 과정에서 패키지 {0}개를 구독 취소하게 됩니다.",
     "Plural": "이 과정에서 패키지 {0}개를 구독 취소하게 됩니다."
   },
-  "ViewThisPlaysetsPackages": "View this playset's contents",
+  "ViewThisPlaysetsPackages": "이 플레이셋의 콘텐츠 보기",
   "PendingDownloads": {
     "One": "항목 {0}개 다운로드 대기 중",
     "Plural": "항목 {0}개 다운로드 대기 중"
@@ -600,59 +600,59 @@
   "RequestOption1": "문제를 보고하거나 누락된 정보를 추가하기",
   "RequestOption2": "누락된 패캐지의 상태를 추가하기",
   "RequestOption3": "누락된 다른 패키지와의 상호 작용을 추가하기",
-  "CurrentPlayset": "Current Playset",
+  "CurrentPlayset": "현재 플레이셋",
   "References": "참조",
   "OpenLog": "로그 파일 열기",
   "Sort By": "정렬",
   "OpenCitiesAppData": "시티즈 스카이라인의 앱 데이터 폴더 열기",
   "FailedToFetchLogs": "로그를 가져오는 데 실패했습니다",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "플레이셋 탐색",
   "AllUsages": "모든 용도",
   "Invalid": "유효하지 않음",
-  "UpdatePlayset": "Update Playset",
-  "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
-  "DownloadPlayset": "Download Playset",
+  "UpdatePlayset": "플레이셋 업데이트",
+  "FailedToRetrievePlaysets": "플레이셋 탐색을 찾아오는 데 실패했습니다",
+  "DownloadPlayset": "플레이셋 다운로드",
   "ReloadAllData": "모든 데이터 다시 불러오기",
   "ResetSnoozes": "모든 나중에 다시 알림 초기화",
   "ResetModsCache": "모드 캐시 초기화",
   "ResetCompatibilityCache": "호환성 캐시 초기화",
   "ResetImageCache": "캐시된 이미지 지우기",
   "ResetSteamCache": "Steam 캐시 지우기",
-  "SharePlayset": "Upload this playset",
+  "SharePlayset": "이 플레이셋을 업로드",
   "ResetInfo": "주의! 어떤 초기화도 취소할 수 없습니다.",
-  "FailedToDownloadPlayset": "Failed to download this playset.\r\n\r\nPlease try again later.",
-  "UpdatePlaysetTip": "Update your local version of this playset",
-  "DownloadPlaysetTip": "Download this playset to your local computer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail picture",
+  "FailedToDownloadPlayset": "이 플레이셋을 다운로드 하는 데 실패했습니다.\n\n나중에 다시 시도해 주세요.",
+  "UpdatePlaysetTip": "이 플레이셋의 내 로컬 버전 업데이트",
+  "DownloadPlaysetTip": "이 플레이셋을 내 컴퓨터에 다운로드",
+  "EditPlaysetThumbnail": "이 플레이셋의 섬네일 수정하기",
   "MakePublic": "이 프로필을 공개하기",
   "MakePrivate": "이 프로필을 비공개하기",
-  "CopyPlaysetLink": "Copy this playset's ID",
-  "FailedToUploadPlayset": "Failed to upload your playset",
-  "FailedToDeletePlayset": "Failed to delete your playset",
-  "FailedToUpdatePlayset": "Failed to update your playset",
+  "CopyPlaysetLink": "이 플레이셋의 ID 복사",
+  "FailedToUploadPlayset": "플레이셋을 업로드하는 데 실패했습니다",
+  "FailedToDeletePlayset": "플레이셋을 삭제하는 데 실패했습니다",
+  "FailedToUpdatePlayset": "플레이셋을 업데이트하는 데 실패했습니다",
   "ImportFromLink": "프로필 ID로 프로필 가져오기",
-  "PastePlaysetId": "Paste the ID of the playset you'd like to import",
+  "PastePlaysetId": "가져오고자 하는 플레이셋의 ID를 붙여넣으세요",
   "AssumeInternetConnectivity": "인터넷 연결 확인 무시",
   "AssumeInternetConnectivity_Tip": "인터넷 확인을 건너뛰고 연결되어 있다고 가정합니다.",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
-  "AddTagBox": "Add a new tag here",
-  "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
+  "SelectAll": "표시된 모든 항목 선택하기",
+  "DeselectAll": "표시된 모든 항목 선택 해제하기",
+  "AddTagBox": "여기에 새 태그를 추가",
+  "EditingMultipleTags": "여러 패키지의 태그를 편집하는 것은 각각의 커스텀 태그를 덮어씌울 것입니다.",
   "EditTagsOfPackage": {
-    "One": "Edit all of this package's assets' Tags",
-    "Plural": "Edit all of the selected packages' assets' Tags"
+    "One": "이 패키지의 모든 에셋의 태그를 편집",
+    "Plural": "선택된 모든 패키지의 에셋의 태그를 편집"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "커스텀 태그: {0}",
+    "Plural": "커스텀 태그: {0} 패키지"
   },
-  "CustomTags": "Custom Tags",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
-  "TroubleshootIssues": "Troubleshoot Issues",
-  "ViewTroubleshootOptions": "View troubleshooting options",
-  "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
-  "TroubleshootSelection": "Which option best describes your situation?",
-  "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?"
+  "CustomTags": "커스텀 태그",
+  "WorkshopAndGameTags": "창작마당 & 인게임 태그",
+  "TroubleshootIssues": "문제 해결",
+  "ViewTroubleshootOptions": "문제 해결 옵션 보기",
+  "TroubleshootInfo": "문제를 일으키거나 누락되는 에셋 또는 모드가 있는데 무엇이 그러는지 모르는 경우, 여기서 문제 해결을 시도해 보세요:",
+  "TroubleshootCaused": "내가 사용하는 모드 또는 에셋이 문제를 일으킵니다",
+  "TroubleshootMissing": "모드 또는 에셋을 누락했고 그것이 문제를 일으킵니다",
+  "TroubleshootSelection": "어떤 선지가 당신의 상황을 가장 잘 설명하나요?",
+  "TroubleshootModOrAsset": "어떤 종류의 콘텐츠로 문제를 해결하길 원하시나요?"
 }
