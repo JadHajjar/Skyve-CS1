@@ -81,8 +81,8 @@
   "ConfirmDeletePlayset": "Tem certeza que deseja excluir o conjunto '{0}'?",
   "PlaysetReplace": "Carregar as configurações deste conjunto",
   "PlaysetMerge": "Mesclar os seus itens no seu conjunto atual",
-  "PlaysetExclude": "Exclude its items from your current playset",
-  "PlaysetDelete": "Delete this playset",
+  "PlaysetExclude": "Excluir os itens do conjunto atual",
+  "PlaysetDelete": "Apagar este conjunto",
   "ShouldNotBeSubscribed": "Não assine",
   "MissingPackages": "Pacotes Faltando",
   "LoadingScreenMod": "Loading Screen Mod",
@@ -94,12 +94,12 @@
   "OpenLocalFolder": "Abra a pasta local que contém este pacote",
   "ViewOnSteam": "Veja este pacote na Steam",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
-    "Plural": "Re-download all selected Packages"
+    "One": "Baixe novamente este pacote",
+    "Plural": "Baixe novamente todos os pacotes selecionados"
   },
   "DownloadPackage": {
-    "One": "Download this package",
-    "Plural": "Download all selected Packages"
+    "One": "Baixar este pacote",
+    "Plural": "Baixar todos os pacotes selecionados"
   },
   "CopySteamId": "Copie este número de identificação da Steam",
   "OpenAuthorPage": "Abrir página do autor",
@@ -114,7 +114,7 @@
   "Sorting_Author": "Nome do autor",
   "Sorting_Status": "Estado do Pacote",
   "Sorting_CompatibilityReport": "Relatório de Compatibilidade",
-  "Sorting_LoadOrder": "Load Order",
+  "Sorting_LoadOrder": "Ordem de carregamento",
   "IncreaseItemSize": "Aumentar o tamanho da lista de itens",
   "FolderSettings": "Configurações da pasta",
   "GamePath": "Pasta Steam de Cities: Skylines",
@@ -123,8 +123,8 @@
   "VirtualAppDataPath": "Pasta 'AppData' real do \"Cities: Skylines\" no seu Linux/Mac",
   "ChangingFoldersRequiresRestart": "Alterar os caminhos usados pelo aplicativo exigirá uma reinicialização. Deseja prosseguir?",
   "ShowDatesRelatively": "Mostrar datas relativamente ao horário atual",
-  "CouldNotCreatePlayset": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
-  "TemporaryPlayset": "Temporary Playset",
+  "CouldNotCreatePlayset": "Não foi possível criar um conjunto de jogo. Verifique se suas configurações de pasta estão corretamente definidas no painel de opções",
+  "TemporaryPlayset": "Conjunto temporário",
   "CreatePlaysetHere": "Create a new playset or load a previous one by clicking here",
   "Maintenance": "Manutenção",
   "DisableNewModsByDefault": "Desativar por padrão os mods recém-assinados",
