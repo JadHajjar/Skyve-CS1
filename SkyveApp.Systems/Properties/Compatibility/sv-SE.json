@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "Inkluderad musik kan vara upphovsrättsskyddad",
   "IncompleteDescription": "Ofullständig beskrivning",
   "Successor": "Successor",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Ladda efter..",
   "Alternative": "Alternative",
   "SameFunctionality": "Same Functionality",
   "RequirementAlternative": "Requirement Alternative",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' efterträds av någon av följande paket."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' kommer att laddas direkt efter '{1}'.",
+    "Plural": "'{0}' kommer att laddas direkt efter följande paket."
   },
   "Interaction_Identical": "Dessa är flera versioner av samma paket.\r\n\r\nDu bör endast välja en av dem.",
   "Status_Succeeded": "'{0}' efterträds av '{1}'.\r\n\r\nDu använder redan '{1}' så det finns inget behov av '{0}' längre.",
