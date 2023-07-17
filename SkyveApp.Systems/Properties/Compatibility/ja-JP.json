@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "収録された音楽は、著作権で保護されている場合があります",
   "IncompleteDescription": "説明が無い・不完全です",
   "Successor": "移行先 ..",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "ロード後 ...",
   "Alternative": "代替 ..",
   "SameFunctionality": "同じ機能 ..",
   "RequirementAlternative": "動作要件の代替 ..",
@@ -99,8 +99,8 @@
     "Plural": "「{0}」は以下のパッケージによって引き継がれています。"
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "「{0}」は「{1}」の直後にロードします。",
+    "Plural": "「{0}」は次のパッケージの直後にロードします。"
   },
   "Interaction_Identical": "これらは同じパッケージで複数のバージョンがあります。\n\nその中から「1つだけ」選択して下さい。",
   "Status_Succeeded": "「{0}」は「{1}」に引き継がれています。\n\n既に「{1}」を使用しているので、「{0}」は不要です。",
