@@ -8,6 +8,7 @@ public interface IPackageManager
 	IEnumerable<ILocalPackageWithContents> Packages { get; }
 
 	ILocalPackageWithContents? GetPackageById(IPackageIdentity identity);
+	ILocalPackageWithContents? GetPackageByFolder(string folder);
 	void AddPackage(ILocalPackageWithContents package);
 	void RemovePackage(ILocalPackageWithContents package);
 	void SetPackages(List<ILocalPackageWithContents> content);

@@ -34,12 +34,20 @@ partial class PC_Troubleshoot
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC_Troubleshoot));
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
-			this.bigSelectionOptionControl2 = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
-			this.bigSelectionOptionControl1 = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_Caused = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_Missing = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
 			this.B_Cancel = new SlickControls.SlickButton();
 			this.L_Title = new System.Windows.Forms.Label();
+			this.TLP_ModAsset = new System.Windows.Forms.TableLayoutPanel();
+			this.B_Mods = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_Assets = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.slickButton1 = new SlickControls.SlickButton();
+			this.L_ModAssetTitle = new System.Windows.Forms.Label();
 			this.TLP_New.SuspendLayout();
+			this.TLP_ModAsset.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// base_Text
@@ -52,8 +60,8 @@ partial class PC_Troubleshoot
 			this.TLP_New.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TLP_New.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TLP_New.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_New.Controls.Add(this.bigSelectionOptionControl2, 1, 1);
-			this.TLP_New.Controls.Add(this.bigSelectionOptionControl1, 1, 2);
+			this.TLP_New.Controls.Add(this.B_Caused, 1, 1);
+			this.TLP_New.Controls.Add(this.B_Missing, 1, 2);
 			this.TLP_New.Controls.Add(this.B_Cancel, 2, 4);
 			this.TLP_New.Controls.Add(this.L_Title, 0, 0);
 			this.TLP_New.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -69,29 +77,31 @@ partial class PC_Troubleshoot
 			this.TLP_New.Size = new System.Drawing.Size(1182, 789);
 			this.TLP_New.TabIndex = 0;
 			// 
-			// bigSelectionOptionControl2
+			// B_Caused
 			// 
-			this.bigSelectionOptionControl2.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.bigSelectionOptionControl2.FromScratch = false;
+			this.B_Caused.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_Caused.FromScratch = false;
 			dynamicIcon1.Name = "I_Wrench";
-			this.bigSelectionOptionControl2.ImageName = dynamicIcon1;
-			this.bigSelectionOptionControl2.Location = new System.Drawing.Point(516, 169);
-			this.bigSelectionOptionControl2.Name = "bigSelectionOptionControl2";
-			this.bigSelectionOptionControl2.Size = new System.Drawing.Size(150, 150);
-			this.bigSelectionOptionControl2.TabIndex = 4;
-			this.bigSelectionOptionControl2.Text = "TroubleshootCaused";
+			this.B_Caused.ImageName = dynamicIcon1;
+			this.B_Caused.Location = new System.Drawing.Point(516, 169);
+			this.B_Caused.Name = "B_Caused";
+			this.B_Caused.Size = new System.Drawing.Size(150, 150);
+			this.B_Caused.TabIndex = 4;
+			this.B_Caused.Text = "TroubleshootCaused";
+			this.B_Caused.Load += new System.EventHandler(this.B_Caused_Load);
 			// 
-			// bigSelectionOptionControl1
+			// B_Missing
 			// 
-			this.bigSelectionOptionControl1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.bigSelectionOptionControl1.FromScratch = false;
+			this.B_Missing.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_Missing.FromScratch = false;
 			dynamicIcon2.Name = "I_Search";
-			this.bigSelectionOptionControl1.ImageName = dynamicIcon2;
-			this.bigSelectionOptionControl1.Location = new System.Drawing.Point(516, 325);
-			this.bigSelectionOptionControl1.Name = "bigSelectionOptionControl1";
-			this.bigSelectionOptionControl1.Size = new System.Drawing.Size(150, 150);
-			this.bigSelectionOptionControl1.TabIndex = 5;
-			this.bigSelectionOptionControl1.Text = "TroubleshootMissing";
+			this.B_Missing.ImageName = dynamicIcon2;
+			this.B_Missing.Location = new System.Drawing.Point(516, 325);
+			this.B_Missing.Name = "B_Missing";
+			this.B_Missing.Size = new System.Drawing.Size(150, 150);
+			this.B_Missing.TabIndex = 5;
+			this.B_Missing.Text = "TroubleshootMissing";
+			this.B_Missing.Load += new System.EventHandler(this.B_Missing_Load);
 			// 
 			// B_Cancel
 			// 
@@ -111,30 +121,110 @@ partial class PC_Troubleshoot
 			this.B_Cancel.Text = "Cancel";
 			this.B_Cancel.Click += new System.EventHandler(this.B_Cancel_Click);
 			// 
-			// label1
+			// L_Title
 			// 
 			this.L_Title.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.L_Title.AutoSize = true;
 			this.TLP_New.SetColumnSpan(this.L_Title, 3);
-			this.L_Title.Location = new System.Drawing.Point(555, 68);
-			this.L_Title.Name = "label1";
-			this.L_Title.Size = new System.Drawing.Size(71, 30);
+			this.L_Title.Location = new System.Drawing.Point(572, 76);
+			this.L_Title.Name = "L_Title";
+			this.L_Title.Size = new System.Drawing.Size(38, 13);
 			this.L_Title.TabIndex = 15;
 			this.L_Title.Text = "label1";
+			// 
+			// TLP_ModAsset
+			// 
+			this.TLP_ModAsset.ColumnCount = 3;
+			this.TLP_ModAsset.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TLP_ModAsset.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.TLP_ModAsset.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TLP_ModAsset.Controls.Add(this.B_Mods, 1, 1);
+			this.TLP_ModAsset.Controls.Add(this.B_Assets, 1, 2);
+			this.TLP_ModAsset.Controls.Add(this.slickButton1, 2, 4);
+			this.TLP_ModAsset.Controls.Add(this.L_ModAssetTitle, 0, 0);
+			this.TLP_ModAsset.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.TLP_ModAsset.Location = new System.Drawing.Point(0, 30);
+			this.TLP_ModAsset.Name = "TLP_ModAsset";
+			this.TLP_ModAsset.RowCount = 5;
+			this.TLP_ModAsset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+			this.TLP_ModAsset.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_ModAsset.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_ModAsset.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_ModAsset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+			this.TLP_ModAsset.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.TLP_ModAsset.Size = new System.Drawing.Size(1182, 789);
+			this.TLP_ModAsset.TabIndex = 2;
+			this.TLP_ModAsset.Visible = false;
+			// 
+			// B_Mods
+			// 
+			this.B_Mods.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_Mods.FromScratch = false;
+			dynamicIcon3.Name = "I_Mods";
+			this.B_Mods.ImageName = dynamicIcon3;
+			this.B_Mods.Location = new System.Drawing.Point(516, 169);
+			this.B_Mods.Name = "B_Mods";
+			this.B_Mods.Size = new System.Drawing.Size(150, 150);
+			this.B_Mods.TabIndex = 4;
+			this.B_Mods.Text = "Mods";
+			// 
+			// B_Assets
+			// 
+			this.B_Assets.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.B_Assets.FromScratch = false;
+			dynamicIcon4.Name = "I_Assets";
+			this.B_Assets.ImageName = dynamicIcon4;
+			this.B_Assets.Location = new System.Drawing.Point(516, 325);
+			this.B_Assets.Name = "B_Assets";
+			this.B_Assets.Size = new System.Drawing.Size(150, 150);
+			this.B_Assets.TabIndex = 5;
+			this.B_Assets.Text = "TroubleshootMissing";
+			// 
+			// slickButton1
+			// 
+			this.slickButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.slickButton1.AutoSize = true;
+			this.slickButton1.ColorShade = null;
+			this.slickButton1.ColorStyle = Extensions.ColorStyle.Red;
+			this.slickButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.slickButton1.Image = ((System.Drawing.Image)(resources.GetObject("slickButton1.Image")));
+			this.slickButton1.Location = new System.Drawing.Point(1038, 733);
+			this.slickButton1.Margin = new System.Windows.Forms.Padding(10);
+			this.slickButton1.Name = "slickButton1";
+			this.slickButton1.Padding = new System.Windows.Forms.Padding(10, 15, 10, 15);
+			this.slickButton1.Size = new System.Drawing.Size(134, 46);
+			this.slickButton1.SpaceTriggersClick = true;
+			this.slickButton1.TabIndex = 14;
+			this.slickButton1.Text = "Cancel";
+			// 
+			// L_ModAssetTitle
+			// 
+			this.L_ModAssetTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.L_ModAssetTitle.AutoSize = true;
+			this.TLP_ModAsset.SetColumnSpan(this.L_ModAssetTitle, 3);
+			this.L_ModAssetTitle.Location = new System.Drawing.Point(572, 76);
+			this.L_ModAssetTitle.Name = "L_ModAssetTitle";
+			this.L_ModAssetTitle.Size = new System.Drawing.Size(38, 13);
+			this.L_ModAssetTitle.TabIndex = 15;
+			this.L_ModAssetTitle.Text = "label1";
 			// 
 			// PC_Troubleshoot
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.Controls.Add(this.TLP_New);
+			this.Controls.Add(this.TLP_ModAsset);
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(58)))), ((int)(((byte)(69)))));
 			this.Name = "PC_Troubleshoot";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Size = new System.Drawing.Size(1182, 819);
 			this.Text = "TroubleshootIssues";
+			this.Controls.SetChildIndex(this.TLP_ModAsset, 0);
 			this.Controls.SetChildIndex(this.TLP_New, 0);
 			this.Controls.SetChildIndex(this.base_Text, 0);
 			this.TLP_New.ResumeLayout(false);
 			this.TLP_New.PerformLayout();
+			this.TLP_ModAsset.ResumeLayout(false);
+			this.TLP_ModAsset.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -143,7 +233,12 @@ partial class PC_Troubleshoot
 	#endregion
 	private System.Windows.Forms.TableLayoutPanel TLP_New;
 	private SlickControls.SlickButton B_Cancel;
-	private BigSelectionOptionControl bigSelectionOptionControl2;
-	private BigSelectionOptionControl bigSelectionOptionControl1;
+	private BigSelectionOptionControl B_Caused;
+	private BigSelectionOptionControl B_Missing;
 	private System.Windows.Forms.Label L_Title;
+	private System.Windows.Forms.TableLayoutPanel TLP_ModAsset;
+	private BigSelectionOptionControl B_Mods;
+	private BigSelectionOptionControl B_Assets;
+	private SlickButton slickButton1;
+	private System.Windows.Forms.Label L_ModAssetTitle;
 }

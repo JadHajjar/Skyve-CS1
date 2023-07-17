@@ -141,6 +141,11 @@ internal class PackageManager : IPackageManager
 		return null;
 	}
 
+	public ILocalPackageWithContents? GetPackageByFolder(string folder)
+	{
+		return Packages.FirstOrDefault(x => x.Folder.PathEquals(folder));
+	}
+
 	public void SetPackages(List<ILocalPackageWithContents> content)
 	{
 		packages = content;

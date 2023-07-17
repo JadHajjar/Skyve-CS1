@@ -38,6 +38,7 @@ public static class Startup
 		services.AddSingleton<ITagsService, TagsService>();
 		services.AddTransient<IVersionUpdateService, VersionUpdateService>();
 		services.AddTransient<IDownloadService, DownloadService>();
+		services.AddSingleton<ITroubleshootSystem, TroubleshootSystem>();
 
 		return services;
 	}

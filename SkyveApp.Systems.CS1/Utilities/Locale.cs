@@ -317,4 +317,5 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation EditTagsOfPackage => _instance.GetText(nameof(EditTagsOfPackage));
 	public static Translation TroubleshootInfo => _instance.GetText(nameof(TroubleshootInfo));
 	public static Translation TroubleshootSelection => _instance.GetText(nameof(TroubleshootSelection));
+	public static Translation TroubleshootModOrAsset => _instance.GetText(nameof(TroubleshootModOrAsset));
 }

@@ -23,7 +23,7 @@ internal class PlaysetManager : IPlaysetManager
 	private bool disableAutoSave;
 	private readonly FileWatcher? _watcher;
 
-	public ICustomPlayset CurrentPlayset { get; private set; }
+	public ICustomPlayset CurrentPlayset { get; internal set; }
 	public IEnumerable<ICustomPlayset> Playsets
 	{
 		get
@@ -421,116 +421,120 @@ internal class PlaysetManager : IPlaysetManager
 
 		if (SystemsProgram.MainForm as SlickForm is null)
 		{
-			apply();
+			ApplyPlayset(playset, true);
 		}
 		else
 		{
-			new BackgroundAction("Applying playset", apply).Run();
+			new BackgroundAction("Applying playset", () => ApplyPlayset(playset, true)).Run();
 		}
+	}
 
-		void apply()
+	internal void ApplyPlayset(ICustomPlayset playset, bool setCurrentPlayset)
+	{
+		try
 		{
-			try
+			var unprocessedMods = _packageManager.Mods.ToList();
+			var unprocessedAssets = _packageManager.Assets.ToList();
+			var missingMods = new List<Playset.Mod>();
+			var missingAssets = new List<Playset.Asset>();
+
+			_notifier.ApplyingPlayset = true;
+
+			foreach (var mod in (playset as Playset)!.Mods)
 			{
-				var unprocessedMods = _packageManager.Mods.ToList();
-				var unprocessedAssets = _packageManager.Assets.ToList();
-				var missingMods = new List<Playset.Mod>();
-				var missingAssets = new List<Playset.Asset>();
+				var localMod = GetMod(mod);
 
-				_notifier.ApplyingPlayset = true;
-
-				foreach (var mod in (playset as Playset)!.Mods)
+				if (localMod != null)
 				{
-					var localMod = GetMod(mod);
+					_modUtil.SetIncluded(localMod, true);
+					_modUtil.SetEnabled(localMod, mod.Enabled);
 
-					if (localMod != null)
-					{
-						_modUtil.SetIncluded(localMod, true);
-						_modUtil.SetEnabled(localMod, mod.Enabled);
-
-						unprocessedMods.Remove(localMod);
-					}
-					else if (!_compatibilityManager.IsBlacklisted(mod))
-					{
-						missingMods.Add(mod);
-					}
+					unprocessedMods.Remove(localMod);
 				}
-
-				foreach (var asset in (playset as Playset)!.Assets)
+				else if (!_compatibilityManager.IsBlacklisted(mod))
 				{
-					var localAsset = GetAsset(asset);
-
-					if (localAsset != null)
-					{
-						_assetUtil.SetIncluded(localAsset, true);
-
-						unprocessedAssets.Remove(localAsset);
-					}
-					else if (!_compatibilityManager.IsBlacklisted(asset))
-					{
-						missingAssets.Add(asset);
-					}
+					missingMods.Add(mod);
 				}
+			}
 
-				foreach (var mod in unprocessedMods)
+			foreach (var asset in (playset as Playset)!.Assets)
+			{
+				var localAsset = GetAsset(asset);
+
+				if (localAsset != null)
 				{
-					_modUtil.SetIncluded(mod, false);
-					_modUtil.SetEnabled(mod, false);
-				}
+					_assetUtil.SetIncluded(localAsset, true);
 
-				foreach (var asset in unprocessedAssets)
-				{
-					_assetUtil.SetIncluded(asset, false);
+					unprocessedAssets.Remove(localAsset);
 				}
+				else if (!_compatibilityManager.IsBlacklisted(asset))
+				{
+					missingAssets.Add(asset);
+				}
+			}
+
+			foreach (var mod in unprocessedMods)
+			{
+				_modUtil.SetIncluded(mod, false);
+				_modUtil.SetEnabled(mod, false);
+			}
+
+			foreach (var asset in unprocessedAssets)
+			{
+				_assetUtil.SetIncluded(asset, false);
+			}
 
 #if DEBUG
-				_logger.Debug($"unprocessedMods: {unprocessedMods.Count}\r\n" +
-					$"unprocessedAssets: {unprocessedAssets.Count}\r\n" +
-					$"missingMods: {missingMods.Count}\r\n" +
-					$"missingAssets: {missingAssets.Count}");
+			_logger.Debug($"unprocessedMods: {unprocessedMods.Count}\r\n" +
+				$"unprocessedAssets: {unprocessedAssets.Count}\r\n" +
+				$"missingMods: {missingMods.Count}\r\n" +
+				$"missingAssets: {missingAssets.Count}");
 #endif
 
-				if (missingMods.Count > 0 || missingAssets.Count > 0)
-				{
-					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
-				}
+			if (missingMods.Count > 0 || missingAssets.Count > 0)
+			{
+				PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
+			}
 
-				_dlcManager.SetExcludedDlcs((playset as Playset)!.ExcludedDLCs.ToArray());
+			_dlcManager.SetExcludedDlcs((playset as Playset)!.ExcludedDLCs.ToArray());
 
-				_notifier.ApplyingPlayset = false;
-				disableAutoSave = true;
+			_notifier.ApplyingPlayset = false;
+			disableAutoSave = true;
 
-				_modUtil.SaveChanges();
-				_assetUtil.SaveChanges();
+			_modUtil.SaveChanges();
+			_assetUtil.SaveChanges();
 
-				(playset as Playset)!.LastUsed = DateTime.Now;
-				Save(playset);
+			(playset as Playset)!.LastUsed = DateTime.Now;
+			Save(playset);
 
+			try
+			{ SaveLsmSettings(playset); }
+			catch (Exception ex) { _logger.Exception(ex, "Failed to apply the LSM settings for playset " + playset.Name); }
+
+			if (setCurrentPlayset)
+			{
+				CurrentPlayset = playset;
 				_notifier.OnPlaysetChanged();
-
-				try
-				{ SaveLsmSettings(playset); }
-				catch (Exception ex) { _logger.Exception(ex, "Failed to apply the LSM settings for playset " + playset.Name); }
 
 				if (!CommandUtil.NoWindow)
 				{
 					_settings.SessionSettings.CurrentPlayset = playset.Name;
 					_settings.SessionSettings.Save();
 				}
+			}
 
-				disableAutoSave = false;
-			}
-			catch (Exception ex)
-			{
-				MessagePrompt.Show(ex, "Failed to apply your playset", form: SystemsProgram.MainForm as SlickForm);
+			disableAutoSave = false;
+		}
+		catch (Exception ex)
+		{
+			MessagePrompt.Show(ex, "Failed to apply your playset", form: SystemsProgram.MainForm as SlickForm);
 
-				_notifier.OnPlaysetChanged();
-			}
-			finally
-			{
-				_notifier.ApplyingPlayset = false;
-				disableAutoSave = false;
-			}
+			_notifier.OnPlaysetChanged();
+		}
+		finally
+		{
+			_notifier.ApplyingPlayset = false;
+			disableAutoSave = false;
 		}
 	}
 
