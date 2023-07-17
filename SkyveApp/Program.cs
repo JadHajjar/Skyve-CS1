@@ -1,11 +1,8 @@
-using Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
+using SkyveApp.Systems.CS1;
+using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
-using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
@@ -24,15 +21,27 @@ internal static class Program
 
 	static Program()
 	{
-		ISave.AppName = "Skyve-CS1";
+		IsRunning = true;
 		CurrentDirectory = Application.StartupPath;
 		ExecutablePath = Application.ExecutablePath;
-		IsRunning = true;
+
+		ISave.AppName = "Skyve-CS1";
+		ISave.CustomSaveDirectory = CurrentDirectory;
+
+		ServiceCenter.Provider = BuildServices();
 	}
 
-	/// <summary>
-	///  The main entry point for the application.
-	/// </summary>
+	private static IServiceProvider BuildServices()
+	{
+		var services = new ServiceCollection();
+
+		services.AddSkyveSystems();
+
+		services.AddCs1SkyveSystems();
+
+		return services.BuildServiceProvider();
+	}
+
 	[STAThread]
 	private static void Main(string[] args)
 	{
@@ -45,46 +54,52 @@ internal static class Program
 
 			try
 			{
-				var toolPath = ExecutablePath;
-				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(toolPath)).Length > 1;
+				var folder = GetFolderPath(SpecialFolder.LocalApplicationData);
 
-				if (openTools)
+				Directory.CreateDirectory(Path.Combine(folder, ISave.AppName));
+
+				if (Directory.Exists(Path.Combine(folder, ISave.AppName)))
 				{
-					File.WriteAllText(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"), "It's time to wake up");
+					ISave.CustomSaveDirectory = folder;
+				}
+			}
+			catch { }
+
+			try
+			{
+				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(ExecutablePath)).Length > 1;
+
+				if (openTools && !CrossIO.FileExists(CrossIO.Combine(CurrentDirectory, "Wake")))
+				{
+					File.WriteAllText(Path.Combine(CurrentDirectory, "Wake"), "It's time to wake up");
 
 					return;
 				}
 
-				ExtensionClass.DeleteFile(Path.Combine(Directory.GetParent(toolPath).FullName, "Wake"));
+				CrossIO.DeleteFile(CrossIO.Combine(CurrentDirectory, "Wake"));
 			}
 			catch { }
 
 			var localAppData = GetFolderPath(SpecialFolder.LocalApplicationData);
-			if (Directory.Exists(Path.Combine(localAppData, "Load Order Tool")))
+			if (Directory.Exists(CrossIO.Combine(localAppData, "Load Order Tool")))
 			{
-				ExtensionClass.MoveFolder(Path.Combine(localAppData, "Load Order Tool"), Path.Combine(localAppData, ISave.AppName), false);
+				CrossIO.MoveFolder(CrossIO.Combine(localAppData, "Load Order Tool"), CrossIO.Combine(localAppData, ISave.AppName), false);
 
 				try
 				{
-					ExtensionClass.DeleteFolder(Path.Combine(localAppData, "Load Order Tool"));
+					CrossIO.DeleteFolder(CrossIO.Combine(localAppData, "Load Order Tool"));
 
-					File.Delete(Path.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log"));
+					CrossIO.DeleteFile(CrossIO.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log"));
 				}
 				catch { }
 			}
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 
-			if (!CentralManager.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(LocationManager.GamePath)]))
-			{
-				MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OK, PromptIcons.Hand);
-				return;
-			}
-
 			if (CommandUtil.NoWindow)
 			{
-				Log.Info("[Console] Running without UI window");
-				CentralManager.Start();
+				ServiceCenter.Get<ILogger>().Info("[Console] Running without UI window");
+				ServiceCenter.Get<ICentralManager>().Start();
 				return;
 			}
 
@@ -93,14 +108,23 @@ internal static class Program
 			LocaleCR.Load();
 			LocaleSlickUI.Load();
 
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+
 			if (OSVersion.Version.Major == 6)
 			{
 				SetProcessDPIAware();
 			}
 
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(MainForm = new MainForm());
+			if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
+			{
+				if (MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OKIgnore, PromptIcons.Hand) == DialogResult.OK)
+				{
+					return;
+				}
+			}
+
+			Application.Run(SystemsProgram.MainForm = MainForm = new MainForm());
 		}
 		catch (Exception ex)
 		{
@@ -111,7 +135,7 @@ internal static class Program
 
 	private static void BackgroundAction_BackgroundTaskError(BackgroundAction b, Exception e)
 	{
-		Log.Exception(e, $"The background action ({b}) failed", false);
+		ServiceCenter.Get<ILogger>().Exception(e, $"The background action ({b}) failed");
 	}
 
 	[System.Runtime.InteropServices.DllImport("user32.dll")]

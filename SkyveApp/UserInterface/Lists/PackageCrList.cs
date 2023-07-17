@@ -1,23 +1,17 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Compatibility.Api;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
-using SlickControls;
-
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
 internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rectangles>
 {
+	private readonly IWorkshopService _workshopService;
+	private readonly ICompatibilityManager _compatibilityManager;
 	public PackageCrList()
 	{
+		ServiceCenter.Get(out _workshopService, out _compatibilityManager);
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		ItemHeight = 32;
@@ -33,7 +27,7 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 
 	protected override IEnumerable<DrawableItem<ulong, PackageCrList.Rectangles>> OrderItems(IEnumerable<DrawableItem<ulong, PackageCrList.Rectangles>> items)
 	{
-		return items.OrderByDescending(x => SteamUtil.GetItem(x.Item)?.ServerTime);
+		return items.OrderByDescending(x => _workshopService.GetInfo(new GenericPackageIdentity(x.Item))?.ServerTime);
 	}
 
 	protected override bool IsItemActionHovered(DrawableItem<ulong, PackageCrList.Rectangles> item, Point location)
@@ -45,13 +39,13 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 	{
 		base.OnPaintItemList(e);
 
-		var Package = SteamUtil.GetItem(e.Item);
+		var Package = _workshopService.GetInfo(new GenericPackageIdentity(e.Item));
 		var imageRect = e.ClipRectangle.Pad(Padding);
 		imageRect.Width = imageRect.Height;
-		var image = Package?.IconImage;
+		var image = Package?.GetThumbnail();
 		var panel = PanelContent.GetParentPanel(this);
 
-		if ((panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.SteamId == e.Item) || (panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item))
+		if ((panel is PC_CompatibilityManagement cm && cm.CurrentPackage?.Id == e.Item) || (panel is PC_ReviewRequests rr && rr.CurrentPackage == e.Item))
 		{
 			e.Graphics.FillRoundedRectangle(new SolidBrush(FormDesign.Design.ActiveColor), imageRect.Align(new Size(2 * Padding.Left, imageRect.Height), ContentAlignment.MiddleLeft), Padding.Left);
 
@@ -90,16 +84,16 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 			return;
 		}
 
-		var cr = Package.GetCompatibilityInfo();
+		var cr = _compatibilityManager.GetPackageInfo(Package);
 
-		if (cr.Data is null)
+		if (cr is null)
 		{
 			return;
 		}
 
-		e.DrawLabel(LocaleCR.Get(cr.Data.Package.Stability.ToString()), null, CRNAttribute.GetNotification(cr.Data.Package.Stability).GetColor().MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomLeft, smaller: true);
+		e.DrawLabel(LocaleCR.Get(cr.Stability.ToString()), null, CRNAttribute.GetNotification(cr.Stability).GetColor().MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomLeft, smaller: true);
 
-		if (cr.Data.Package.ReviewDate > Package.ServerTime)
+		if (cr.ReviewDate > Package.ServerTime)
 		{
 			e.DrawLabel(Locale.UpToDate, null, FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomRight, smaller: true);
 		}

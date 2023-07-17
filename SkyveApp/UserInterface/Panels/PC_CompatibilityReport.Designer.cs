@@ -15,7 +15,7 @@ partial class PC_CompatibilityReport
 	{
 		if (disposing && (components != null))
 		{
-			SkyveApp.Utilities.Managers.CompatibilityManager.ReportProcessed -= CompatibilityManager_ReportProcessed;
+			_notifier.CompatibilityReportProcessed -= CompatibilityManager_ReportProcessed;
 			components.Dispose();
 		}
 		base.Dispose(disposing);
@@ -29,15 +29,15 @@ partial class PC_CompatibilityReport
 	/// </summary>
 	private void InitializeComponent()
 	{
-			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon1 = new SlickControls.DynamicIcon();
-			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
 			SlickControls.DynamicIcon dynamicIcon2 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon3 = new SlickControls.DynamicIcon();
+			SlickControls.DynamicIcon dynamicIcon4 = new SlickControls.DynamicIcon();
 			this.TLP_Buttons = new System.Windows.Forms.TableLayoutPanel();
-			this.B_Requests = new SlickControls.SlickButton();
 			this.B_Manage = new SlickControls.SlickButton();
-			this.B_ManageSingle = new SlickControls.SlickButton();
 			this.B_YourPackages = new SlickControls.SlickButton();
+			this.B_ManageSingle = new SlickControls.SlickButton();
+			this.B_Requests = new SlickControls.SlickButton();
 			this.tabHeader = new SlickControls.SlickTabHeader();
 			this.PB_Loader = new SlickControls.SlickPictureBox();
 			this.LC_Items = new SkyveApp.UserInterface.Lists.CompatibilityReportList();
@@ -72,21 +72,6 @@ partial class PC_CompatibilityReport
 			this.TLP_Buttons.Size = new System.Drawing.Size(1312, 36);
 			this.TLP_Buttons.TabIndex = 0;
 			// 
-			// B_Requests
-			// 
-			this.B_Requests.AutoSize = true;
-			this.B_Requests.ColorShade = null;
-			this.B_Requests.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_RequestReview";
-			this.B_Requests.ImageName = dynamicIcon4;
-			this.B_Requests.Location = new System.Drawing.Point(1103, 3);
-			this.B_Requests.Name = "B_Requests";
-			this.B_Requests.Size = new System.Drawing.Size(100, 30);
-			this.B_Requests.SpaceTriggersClick = true;
-			this.B_Requests.TabIndex = 2;
-			this.B_Requests.Text = "ViewRequests";
-			this.B_Requests.Click += new System.EventHandler(this.B_Requests_Click);
-			// 
 			// B_Manage
 			// 
 			this.B_Manage.AutoSize = true;
@@ -101,6 +86,22 @@ partial class PC_CompatibilityReport
 			this.B_Manage.TabIndex = 3;
 			this.B_Manage.Text = "ManageCompatibilityData";
 			this.B_Manage.Click += new System.EventHandler(this.B_Manage_Click);
+			// 
+			// B_YourPackages
+			// 
+			this.B_YourPackages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_YourPackages.AutoSize = true;
+			this.B_YourPackages.ColorShade = null;
+			this.B_YourPackages.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon2.Name = "I_User";
+			this.B_YourPackages.ImageName = dynamicIcon2;
+			this.B_YourPackages.Location = new System.Drawing.Point(872, 3);
+			this.B_YourPackages.Name = "B_YourPackages";
+			this.B_YourPackages.Size = new System.Drawing.Size(119, 30);
+			this.B_YourPackages.SpaceTriggersClick = true;
+			this.B_YourPackages.TabIndex = 0;
+			this.B_YourPackages.Text = "YourPackages";
+			this.B_YourPackages.Click += new System.EventHandler(this.B_Manage_Click);
 			// 
 			// B_ManageSingle
 			// 
@@ -117,20 +118,20 @@ partial class PC_CompatibilityReport
 			this.B_ManageSingle.Text = "ManageSinglePackage";
 			this.B_ManageSingle.Click += new System.EventHandler(this.B_ManageSingle_Click);
 			// 
-			// B_YourPackages
+			// B_Requests
 			// 
-			this.B_YourPackages.AutoSize = true;
-			this.B_YourPackages.ColorShade = null;
-			this.B_YourPackages.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_User";
-			this.B_YourPackages.ImageName = dynamicIcon2;
-			this.B_YourPackages.Location = new System.Drawing.Point(3, 3);
-			this.B_YourPackages.Name = "B_YourPackages";
-			this.B_YourPackages.Size = new System.Drawing.Size(119, 30);
-			this.B_YourPackages.SpaceTriggersClick = true;
-			this.B_YourPackages.TabIndex = 0;
-			this.B_YourPackages.Text = "YourPackages";
-			this.B_YourPackages.Click += new System.EventHandler(this.B_YourPackages_Click);
+			this.B_Requests.AutoSize = true;
+			this.B_Requests.ColorShade = null;
+			this.B_Requests.Cursor = System.Windows.Forms.Cursors.Hand;
+			dynamicIcon4.Name = "I_RequestReview";
+			this.B_Requests.ImageName = dynamicIcon4;
+			this.B_Requests.Location = new System.Drawing.Point(1103, 3);
+			this.B_Requests.Name = "B_Requests";
+			this.B_Requests.Size = new System.Drawing.Size(100, 30);
+			this.B_Requests.SpaceTriggersClick = true;
+			this.B_Requests.TabIndex = 2;
+			this.B_Requests.Text = "ViewRequests";
+			this.B_Requests.Click += new System.EventHandler(this.B_Requests_Click);
 			// 
 			// tabHeader
 			// 

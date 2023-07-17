@@ -1,15 +1,17 @@
-namespace SkyveIPatch {
-    extern alias Injections;
-    using SkyveIPatch.Patches;
-    using Mono.Cecil;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using System.Threading;
-    public static class FileUtil {
+namespace SkyveIPatch
+{
+	extern alias Injections;
+	using SkyveIPatch.Patches;
+	using Mono.Cecil;
+	using System;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.IO;
+	using System.Linq;
+	using System.Reflection;
+	using System.Threading;
+
+	public static class FileUtil {
         static void CacheWSFilesImpl() {
             try {
                 Log.Called();

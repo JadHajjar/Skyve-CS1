@@ -1,11 +1,15 @@
+using ColossalFramework.IO;
 using ColossalFramework.UI;
 
 using KianCommons;
 using KianCommons.IImplict;
 
+using SkyveMod.Settings.Tabs;
+
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 using UnityEngine;
@@ -62,13 +66,17 @@ internal class MonoStatus : MonoBehaviour, IStartingObject
 
 	static UILabel CreateLabel()
 	{
-		if (IsDebugMono())
+		var statusLabel = (FloatingMonoStatus)UIView.GetAView().AddUIComponent(typeof(FloatingMonoStatus));
+		
+		if (statusLabel.debug = IsDebugMono())
 		{
 			Log.Warning("using DEBUG MONO is slow! use Skyve to launch game in release mode!", true);
 		}
-		var statusLabel = UIView.GetAView().AddUIComponent(typeof(FloatingMonoStatus)) as UILabel;
+
 		statusLabel.name = LABEL_NAME;
 		statusLabel.text = GetText();
+		statusLabel.textScale = 1.3F;
+
 		return statusLabel;
 	}
 
@@ -163,15 +171,20 @@ internal class MonoStatus : MonoBehaviour, IStartingObject
 
 	static string GetText()
 	{
+		var playset = string.Empty;
+
+		if (!StartupTab.HidePlaysetName.value && File.Exists(Path.Combine(Path.Combine(DataLocation.localApplicationData, "Skyve"), "CurrentPlayset")))
+		{
+			playset = File.ReadAllText(Path.Combine(Path.Combine(DataLocation.localApplicationData, "Skyve"), "CurrentPlayset"));
+		}
+
 		if (IsDebugMono())
 		{
-			return "Debug Mono";
+			return $"Debug Mono\r\n{playset}";
 		}
-		//else if (Helpers.InStartupMenu)
-		//    return "Release Mono";
 		else
 		{
-			return "";
+			return playset;
 		}
 	}
 }

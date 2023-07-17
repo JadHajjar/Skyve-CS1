@@ -1,16 +1,4 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.CompatibilityReport;
@@ -18,9 +6,12 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 {
 	private readonly TableLayoutPanel[] _panels;
 	private int controlCount;
-
+	private readonly ICompatibilityManager _compatibilityManager;
+	private readonly INotifier _notifier;
 	public PackageCompatibilityReportControl(IPackage package)
 	{
+		ServiceCenter.Get(out _notifier, out _compatibilityManager);
+
 		Package = package;
 		AutoSize = true;
 		AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -45,7 +36,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 			Controls.Add(_panels[i], i, 0);
 		}
 
-		CompatibilityManager.ReportProcessed += CentralManager_PackageInformationUpdated;
+		_notifier.CompatibilityReportProcessed += CentralManager_PackageInformationUpdated;
 	}
 
 	private void CentralManager_PackageInformationUpdated()
@@ -54,11 +45,11 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 	}
 
 	public IPackage Package { get; }
-	public CompatibilityInfo? Report { get; private set; }
+	public ICompatibilityInfo? Report { get; private set; }
 
 	protected override void Dispose(bool disposing)
 	{
-		CompatibilityManager.ReportProcessed -= CentralManager_PackageInformationUpdated;
+		_notifier.CompatibilityReportProcessed -= CentralManager_PackageInformationUpdated;
 		base.Dispose(disposing);
 	}
 
@@ -84,7 +75,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 			lock (this)
 			{
-				Report = Package.GetCompatibilityInfo(true);
+				Report = _compatibilityManager.GetCompatibilityInfo(Package, true);
 
 				for (var i = 0; i < _panels.Length; i++)
 				{
@@ -94,14 +85,14 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 				controlCount = 0;
 
-				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
+				foreach (var item in Report.ReportItems.GroupBy(x => x.Type).OrderBy(x => x.Key is not ReportType.Stability).ThenByDescending(x => x.Max(y => y.Status?.Notification)).ThenByDescending(x => x.Sum(y => y.Packages.Length)))
 				{
 					var controls = item.ToList(x => new CompatibilityMessageControl(this, item.Key, x));
 
 					GenerateSection(LocaleHelper.GetGlobalText($"CRT_{item.Key}"), GetTypeIcon(item.Key), GetTypeColor(item), controls);
 				}
 
-				ColumnStyles[2].Width = controlCount > 2 ? 100/3F : 0;
+				ColumnStyles[2].Width = controlCount > 2 ? 100 / 3F : 0;
 			}
 		}
 		finally
@@ -110,7 +101,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		}
 	}
 
-	private Color GetTypeColor(IGrouping<ReportType, ReportItem> item)
+	private Color GetTypeColor(IGrouping<ReportType, ICompatibilityItem> item)
 	{
 		return item.Max(x => x.Status.Notification).GetColor().MergeColor(BackColor, 15);
 	}

@@ -1,18 +1,13 @@
-﻿using Extensions;
-
-using SkyveApp.Domain;
-
-using SlickControls;
-
-using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Content;
 internal class TagControl : SlickImageControl
 {
-	public TagItem TagInfo { get; set; }
+	public ITag? TagInfo { get; set; }
 	public bool Display { get; set; }
+	public bool ToAddPreview { get; set; }
+	public Func<IEnumerable<string?>> CurrentTagsSource { get; internal set; }
 
 	public TagControl()
 	{
@@ -42,7 +37,7 @@ internal class TagControl : SlickImageControl
 
 		if (Display && e.Button == MouseButtons.Left)
 		{
-			Clipboard.SetText(TagInfo.Value);
+			Clipboard.SetText(TagInfo?.Value);
 		}
 	}
 
@@ -54,9 +49,9 @@ internal class TagControl : SlickImageControl
 			return Size.Ceiling(FontMeasuring.Measure(" ", Font)) + new Size(Padding.Horizontal + (img.Width * 2), Padding.Vertical);
 		}
 
-		using (var img = TagInfo.Icon.Default)
+		using (var img = IconManager.GetIcon(TagInfo?.Icon))
 		{
-			return Size.Ceiling(FontMeasuring.Measure(TagInfo.Value, Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
+			return Size.Ceiling(FontMeasuring.Measure(TagInfo?.Value, Font)) + new Size(Padding.Horizontal + img.Width, Padding.Vertical);
 		}
 	}
 
@@ -76,9 +71,9 @@ internal class TagControl : SlickImageControl
 			using var img = Image;
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.CenterR(img.Size));
 		}
-		else
+		else if (TagInfo is not null)
 		{
-			using var img = (HoverState.HasFlag(HoverState.Hovered) ? (Display && TagInfo.Source is not Domain.Enums.TagSource.FindIt ? "I_Copy" : "I_Disposable") : TagInfo.Icon).Default;
+			using var img = IconManager.GetIcon(HoverState.HasFlag(HoverState.Hovered) ? (Display && !TagInfo.IsCustom ? "I_Copy" : "I_Disposable") : TagInfo.Icon);
 			e.Graphics.DrawImage(img.Color(FormDesign.Design.ButtonForeColor), ClientRectangle.Pad(Padding).Align(img.Size, ContentAlignment.MiddleLeft));
 
 			e.Graphics.DrawString(TagInfo.Value, Font, foreBrush, ClientRectangle.Pad(Padding.Horizontal + img.Width, 0, 0, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });

@@ -1,11 +1,5 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,8 +10,12 @@ internal class SubscriptionInfoControl : SlickControl
 	private Rectangle buttonRect;
 	private Rectangle cancelRect;
 
+	private readonly ISubscriptionsManager _subscriptionsManager;
+
 	public SubscriptionInfoControl()
 	{
+		_subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+
 		Visible = false;
 		refreshTimer = new Timer() { Interval = 1000 };
 		refreshTimer.Tick += RefreshTimer_Tick;
@@ -47,7 +45,7 @@ internal class SubscriptionInfoControl : SlickControl
 
 	private void RefreshTimer_Tick(object sender, EventArgs e)
 	{
-		if (Visible != SubscriptionsManager.SubscriptionsPending)
+		if (Visible != _subscriptionsManager.SubscriptionsPending)
 		{
 			Visible = !Visible;
 
@@ -73,14 +71,14 @@ internal class SubscriptionInfoControl : SlickControl
 
 		var y = Padding.Top;
 
-		if (SubscriptionsManager.SubscribingTo.Count > 0)
+		if (_subscriptionsManager.SubscribingTo.Count > 0)
 		{
-			e.Graphics.DrawStringItem(Locale.PendingSubscribeTo.FormatPlural(SubscriptionsManager.SubscribingTo.Count), Font, FormDesign.Design.MenuForeColor, Width - Padding.Horizontal, 0, ref y);
+			e.Graphics.DrawStringItem(Locale.PendingSubscribeTo.FormatPlural(_subscriptionsManager.SubscribingTo.Count), Font, FormDesign.Design.MenuForeColor, Width - Padding.Horizontal, 0, ref y);
 		}
 
-		if (SubscriptionsManager.UnsubscribingFrom.Count > 0)
+		if (_subscriptionsManager.UnsubscribingFrom.Count > 0)
 		{
-			e.Graphics.DrawStringItem(Locale.PendingUnsubscribeFrom.FormatPlural(SubscriptionsManager.UnsubscribingFrom.Count), Font, FormDesign.Design.MenuForeColor, Width - Padding.Horizontal, 0, ref y);
+			e.Graphics.DrawStringItem(Locale.PendingUnsubscribeFrom.FormatPlural(_subscriptionsManager.UnsubscribingFrom.Count), Font, FormDesign.Design.MenuForeColor, Width - Padding.Horizontal, 0, ref y);
 		}
 
 		using var buttonIcon = IconManager.GetSmallIcon("I_AppIcon");
@@ -104,11 +102,11 @@ internal class SubscriptionInfoControl : SlickControl
 
 		if (e.Button == MouseButtons.None || (e.Button == MouseButtons.Left && buttonRect.Contains(e.Location)))
 		{
-			CitiesManager.RunStub();
+			ServiceCenter.Get<ICitiesManager>().RunStub();
 		}
 		else if (e.Button == MouseButtons.Left && cancelRect.Contains(e.Location))
 		{
-			SubscriptionsManager.CancelPendingItems();
+			_subscriptionsManager.CancelPendingItems();
 		}
 	}
 }

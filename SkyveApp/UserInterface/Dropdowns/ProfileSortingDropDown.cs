@@ -1,13 +1,4 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Enums;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
@@ -19,9 +10,9 @@ internal class ProfileSortingDropDown : SlickSelectionDropDown<ProfileSorting>
 
 		if (Live)
 		{
-			Items = Enum.GetValues(typeof(ProfileSorting)).Cast<ProfileSorting>().Where(x=> x!= ProfileSorting.Downloads).ToArray();
+			Items = Enum.GetValues(typeof(ProfileSorting)).Cast<ProfileSorting>().Where(x => x != ProfileSorting.Downloads).ToArray();
 
-			SelectedItem = CentralManager.SessionSettings.UserSettings.ProfileSorting;
+			SelectedItem = (ProfileSorting)ServiceCenter.Get<ISettings>().UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles).Sorting;
 		}
 	}
 

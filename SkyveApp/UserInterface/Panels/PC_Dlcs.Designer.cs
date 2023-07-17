@@ -1,6 +1,6 @@
-﻿using SkyveApp.UserInterface.Generic;
+﻿using SkyveApp.Systems.CS1.Utilities;
+using SkyveApp.UserInterface.Generic;
 using SkyveApp.UserInterface.Lists;
-using SkyveApp.Utilities;
 
 namespace SkyveApp.UserInterface.Panels;
 
@@ -19,7 +19,7 @@ partial class PC_DLCs
 	{
 		if (disposing && (components != null))
 		{
-			SteamUtil.DLCsLoaded -= SteamUtil_DLCsLoaded;
+			_dlcManager.DlcsLoaded -= SteamUtil_DLCsLoaded;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

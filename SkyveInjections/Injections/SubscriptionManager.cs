@@ -4,7 +4,7 @@ using ColossalFramework.PlatformServices;
 
 using KianCommons;
 
-using SkyveApp.Domain.Utilities;
+using SkyveInjections;
 
 using SkyveMod.Util;
 
@@ -476,11 +476,14 @@ public static class CMPatchHelpers
 {
 	private static readonly SubscriptionTransfer subscriptionTransfer;
 	private static readonly List<ulong> subscribedItems;
+	private static readonly Dictionary<string, ModConfig.ModInfo> modConfig;
 
 	static CMPatchHelpers()
 	{
+		modConfig = ModConfig.Deserialize().GetModsInfo();
+
 		var filePath = Path.Combine(DataLocation.localApplicationData, Path.Combine("Skyve", "SubscriptionTransfer.xml"));
-		
+
 		subscriptionTransfer = File.Exists(filePath) ? SharedUtil.Deserialize<SubscriptionTransfer>(filePath) ?? new() : new();
 		subscribedItems = PlatformService.workshop.GetSubscribedItems().Select(x => x.AsUInt64).ToList();
 	}
@@ -494,7 +497,7 @@ public static class CMPatchHelpers
 			path[0] == '_' ||
 			(workshopId > 0 && ((!subscribedItems.Contains(workshopId) && !(subscriptionTransfer.SubscribeTo?.Contains(workshopId) ?? false)) ||
 			(subscriptionTransfer.UnsubscribingFrom?.Contains(workshopId) ?? false))) ||
-			File.Exists(Path.Combine(path, SteamUtilities.EXCLUDED_FILE_NAME));
+			(modConfig.TryGetValue(path, out var info) && info.Excluded);
 	}
 
 	public static bool IsIDExcluded(PublishedFileId id)
@@ -560,8 +563,7 @@ public static class SteamUtilities
 		return ParseCommandLine("unsubscribe", out filePath);
 	}
 
-	static SkyveShared.SkyveConfig Config =>
-			SkyveInjections.Util.LoadOrderUtil.Config;
+
 	// steam manager is already initialized at this point.
 
 	/// <summary>

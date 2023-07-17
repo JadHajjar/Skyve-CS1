@@ -1,10 +1,4 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Compatibility;
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Utilities;
-
-using SlickControls;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 using System.Drawing;
 using System.Windows.Forms;

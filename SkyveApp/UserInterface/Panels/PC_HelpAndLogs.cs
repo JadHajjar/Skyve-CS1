@@ -1,15 +1,6 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Generic;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
 
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,13 +9,21 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_HelpAndLogs : PanelContent
 {
+	private readonly ILogUtil _logUtil;
+	private readonly ILogger _logger;
+	private readonly ILocationManager _locationManager;
+
 	public PC_HelpAndLogs() : base(true)
 	{
+		_logUtil = ServiceCenter.Get<ILogUtil>();
+		_logger = ServiceCenter.Get<ILogger>();
+		_locationManager = ServiceCenter.Get<ILocationManager>();
+
 		InitializeComponent();
 
-		if (LocationManager.Platform is Platform.Windows)
+		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
-			DD_LogFile.StartingFolder = LocationManager.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+			DD_LogFile.StartingFolder = CrossIO.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
 		}
 
 		foreach (var button in TLP_HelpLogs.GetControls<SlickButton>())
@@ -35,8 +34,9 @@ public partial class PC_HelpAndLogs : PanelContent
 			}
 		}
 
-		if (LocationManager.Platform is not Platform.Windows)
+		if (CrossIO.CurrentPlatform is not Platform.Windows)
 		{
+			B_SaveZip.ButtonType = ButtonType.Active;
 			B_CopyLogFile.Visible = B_CopyZip.Visible = B_LotLogCopy.Visible = false;
 		}
 	}
@@ -86,9 +86,9 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		var tempName = Path.GetTempFileName();
 
-		File.Copy(LogUtil.GameLogFile, tempName, true);
+		File.Copy(_logUtil.GameLogFile, tempName, true);
 
-		var logs = LogUtil.SimplifyLog(tempName, out _);
+		var logs = _logUtil.SimplifyLog(tempName, out _);
 
 		this.TryInvoke(() => SetTrace(logs));
 
@@ -102,7 +102,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			try
 			{
-				LogUtil.CreateZipFileAndSetToClipboard();
+				_logUtil.CreateZipFileAndSetToClipboard();
 			}
 			catch (Exception ex) { ShowPrompt(ex, Locale.FailedToFetchLogs); }
 		});
@@ -121,11 +121,11 @@ public partial class PC_HelpAndLogs : PanelContent
 		{
 			try
 			{
-				var folder = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs");
+				var folder = CrossIO.Combine(_locationManager.SkyveAppDataPath, "Support Logs");
 
 				Directory.CreateDirectory(folder);
 
-				var fileName = LogUtil.CreateZipFileAndSetToClipboard(folder);
+				var fileName = _logUtil.CreateZipFileAndSetToClipboard(folder);
 
 				PlatformUtil.OpenFolder(fileName);
 			}
@@ -141,7 +141,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void DD_LogFile_FileSelected(string obj)
 	{
-		if (!ExtensionClass.FileExists(obj))
+		if (!CrossIO.FileExists(obj))
 		{
 			DD_LogFile.SelectedFile = string.Empty;
 			return;
@@ -151,7 +151,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		new BackgroundAction("Simplifying Log", () =>
 		{
-			var logs = LogUtil.SimplifyLog(obj, out var simpleLog);
+			var logs = _logUtil.SimplifyLog(obj, out var simpleLog);
 
 			this.TryInvoke(() => SetTrace(logs));
 
@@ -163,7 +163,7 @@ public partial class PC_HelpAndLogs : PanelContent
 		}).Run();
 	}
 
-	private void SetTrace(List<LogTrace> logs)
+	private void SetTrace(List<ILogTrace> logs)
 	{
 		TLP_Errors.Controls.Clear(true);
 		TLP_Errors.Controls.Add(new LogTraceControl(logs));
@@ -177,22 +177,22 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenLogFolder_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenFolder(Path.GetDirectoryName(LogUtil.GameLogFile));
+		PlatformUtil.OpenFolder(Path.GetDirectoryName(_logUtil.GameLogFile));
 	}
 
 	private void B_CopyLogFile_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.SetFileInClipboard(LogUtil.GameLogFile);
+		PlatformUtil.SetFileInClipboard(_logUtil.GameLogFile);
 	}
 
 	private void B_LotLog_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenFolder(Path.GetDirectoryName(Log.LogFilePath));
+		PlatformUtil.OpenFolder(Path.GetDirectoryName(_logger.LogFilePath));
 	}
 
 	private void B_LotLogCopy_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.SetFileInClipboard(Log.LogFilePath);
+		PlatformUtil.SetFileInClipboard(_logger.LogFilePath);
 	}
 
 	private void B_Discord_Click(object sender, EventArgs e)
@@ -222,11 +222,11 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private void B_OpenLog_Click(object sender, EventArgs e)
 	{
-		IOUtil.Execute(LogUtil.GameLogFile, string.Empty);
+		ServiceCenter.Get<IIOUtil>().Execute(_logUtil.GameLogFile, string.Empty);
 	}
 
 	private void B_OpenAppData_Click(object sender, EventArgs e)
 	{
-		PlatformUtil.OpenFolder(LocationManager.AppDataPath);
+		PlatformUtil.OpenFolder(_locationManager.AppDataPath);
 	}
 }

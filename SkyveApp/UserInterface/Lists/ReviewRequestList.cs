@@ -1,21 +1,16 @@
-﻿using Extensions;
-using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
+﻿using SkyveApp.Systems.Compatibility.Domain.Api;
+using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
 internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, ReviewRequestList.Rectangles>
 {
+	private readonly IWorkshopService _workshopService;
 	public ReviewRequestList()
 	{
+		_workshopService = ServiceCenter.Get<IWorkshopService>();
 		HighlightOnHover = true;
 		SeparateWithLines = true;
 		ItemHeight = 64;
@@ -53,10 +48,10 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 	{
 		base.OnPaintItemList(e);
 
-		var User = SteamUtil.GetUser(e.Item.UserId);
+		var User = _workshopService.GetUser(e.Item.UserId);
 		var imageRect = e.ClipRectangle.Pad(Padding);
-		imageRect.Width = imageRect.Height/=2;
-		var image = User?.AvatarImage;
+		imageRect.Width = imageRect.Height /= 2;
+		var image = User?.GetUserAvatar();
 
 		if (image is not null)
 		{
@@ -77,9 +72,9 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 		using var dateIcon = IconManager.GetSmallIcon("I_UpdateTime");
 		var r = e.DrawLabel(e.Item.Timestamp.ToLocalTime().ToString("g"), dateIcon, FormDesign.Design.AccentColor, e.ClipRectangle, ContentAlignment.BottomLeft, true);
 		e.DrawLabel(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other", typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
-	
 
-		e.Graphics.DrawString(e.Item.PackageNote, UI.Font(7.5F), brush, textRect.Pad((int)(125*UI.FontScale),0,0,0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment =	 StringAlignment.Far });
+
+		e.Graphics.DrawString(e.Item.PackageNote, UI.Font(7.5F), brush, textRect.Pad((int)(125 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });
 	}
 
 	internal class Rectangles : IDrawableItemRectangles<ReviewRequest>

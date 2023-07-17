@@ -1,25 +1,25 @@
-﻿using Extensions;
-
-using SkyveApp.Domain;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;
 internal class FavoriteProfileBubble : StatusBubbleBase
 {
-	public Profile Profile { get; }
+	private readonly INotifier _notifier;
+	private readonly IPlaysetManager _profileManager;
 
-	public FavoriteProfileBubble(Profile profile)
+	public ICustomPlayset Profile { get; }
+
+	public FavoriteProfileBubble(ICustomPlayset profile)
 	{
+		ServiceCenter.Get(out _notifier, out _profileManager);
 		Profile = profile;
 	}
 
-	public override Color? TintColor { get => Profile.Color; set { } }
+	public override Color? TintColor
+	{
+		get => Profile.Color;
+		set { }
+	}
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -33,7 +33,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		Text = Profile.Name;
 		ImageName = Profile.GetIcon();
 
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void UIChanged()
@@ -47,7 +47,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 	{
 		if (disposing)
 		{
-			ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+			_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 		}
 
 		base.Dispose(disposing);
@@ -60,11 +60,11 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 		if (e.Button == MouseButtons.Left)
 		{
 			Loading = true;
-			ProfileManager.SetProfile(Profile);
+			_profileManager.SetCurrentPlayset(Profile);
 		}
 	}
 
-	private void ProfileManager_ProfileChanged(Domain.Profile obj)
+	private void ProfileManager_ProfileChanged()
 	{
 		Loading = false;
 		Text = Profile.Name;
@@ -74,7 +74,7 @@ internal class FavoriteProfileBubble : StatusBubbleBase
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		if (CentralManager.CurrentProfile == Profile)
+		if (_profileManager.CurrentPlayset == Profile)
 		{
 			e.Graphics.DrawRoundedRectangle(new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale)), ClientRectangle.Pad(1 + (int)Math.Floor(1.5 * UI.FontScale)), Padding.Left);
 		}

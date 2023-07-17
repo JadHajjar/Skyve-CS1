@@ -1,59 +1,94 @@
-﻿using Extensions;
-
-using SkyveApp.Domain;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using System.Collections.Generic;
-using System.Linq;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_GenericPackageList : PC_ContentList<IPackage>
 {
-	private readonly Dictionary<ulong, Profile.Asset> _workshopPackages = new();
 	private readonly List<IPackage> _items = new();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
-	public PC_GenericPackageList(IEnumerable<IPackage> items) : base(true)
+	public override SkyvePage Page => SkyvePage.Generic;
+
+	public PC_GenericPackageList(IEnumerable<IPackageIdentity> items, bool groupItems) : base(true)
 	{
 		LC_Items.IsGenericPage = true;
 
 		TB_Search.Placeholder = "SearchGenericPackages";
 
-		foreach (var package in items.GroupBy(x => x.SteamId))
+		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+
+		if (!groupItems)
 		{
-			if (package.Key != 0)
+			foreach (var item in items)
 			{
-				if (CompatibilityManager.IsBlacklisted(package.First()))
+				if (item is IPackage localPackage)
 				{
-					continue;
+					_items.Add(localPackage);
 				}
-
-				var steamPackage = package.Last();
-
-				if (steamPackage.RemovedFromSteam)
+				else
 				{
-					continue;
+					_items.Add(new GenericWorkshopPackage(item));
 				}
-
-				_items.Add(steamPackage);
 			}
-			else
+		}
+		else
+		{
+			foreach (var package in items.GroupBy(x => x.Id))
 			{
-				_items.AddRange(package);
+				if (package.Key != 0)
+				{
+					if (compatibilityManager.IsBlacklisted(package.First()))
+					{
+						continue;
+					}
+
+					var steamPackage = package.Last();
+
+					if (steamPackage.GetWorkshopInfo()?.IsRemoved == true)
+					{
+						continue;
+					}
+
+					_items.Add(steamPackage is IPackage localPackage ? localPackage : new GenericWorkshopPackage(steamPackage));
+				}
+				else
+				{
+					foreach (var item in package)
+					{
+						if (item is IPackage localPackage)
+						{
+							_items.Add(localPackage);
+						}
+						else
+						{
+							_items.Add(new GenericWorkshopPackage(item));
+						}
+					}
+				}
 			}
 		}
 
-		SteamUtil.WorkshopItemsLoaded += () =>
-		{
-			LC_Items.Invalidate();
-
-			new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
-		};
+		_notifier.WorkshopPackagesInfoLoaded += _notifier_WorkshopPackagesInfoLoaded;
 
 		LC_Items.SetItems(_items);
 
 		RefreshCounts();
+
+		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
+	}
+
+	protected override void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+			_notifier.WorkshopPackagesInfoLoaded -= _notifier_WorkshopPackagesInfoLoaded;
+		}
+
+		base.Dispose(disposing);
+	}
+
+	private void _notifier_WorkshopPackagesInfoLoaded()
+	{
+		LC_Items.Invalidate();
 
 		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 	}
@@ -69,14 +104,14 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		foreach (var item in _items)
 		{
-			var package = item.Package;
+			var package = item.LocalParentPackage;
 
 			if (package is null)
 			{
 				continue;
 			}
 
-			if (package.IsIncluded)
+			if (package.IsIncluded())
 			{
 				packagesIncluded++;
 
@@ -84,7 +119,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 				{
 					modsIncluded++;
 
-					if (package.Mod.IsEnabled)
+					if (package.Mod.IsEnabled())
 					{
 						modsEnabled++;
 					}
@@ -94,31 +129,18 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 		var total = LC_Items.ItemCount;
 
-		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
 		{
 			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
 		}
 
-		if (modsIncluded == modsEnabled)
-		{
-			return string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total);
-		}
-
-		return string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
+		return modsIncluded == modsEnabled
+			? string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total)
+			: string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
 	}
 
 	protected override LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Package;
-	}
-
-	protected override void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
-	{
-		ContentUtil.SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.Package)!, included);
-	}
-
-	protected override void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
-	{
-		ContentUtil.SetBulkIncluded(filteredItems.Where(x => x.Package?.Mod is not null).Select(x => x.Package!.Mod!), enabled);
 	}
 }

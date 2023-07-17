@@ -1,18 +1,8 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Utilities;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
-using System.Linq;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -20,6 +10,8 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_Options : PanelContent
 {
 	private bool folderPathsChanged;
+	private readonly ILocationManager _locationManager = ServiceCenter.Get<ILocationManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
 
 	public PC_Options()
 	{
@@ -34,18 +26,18 @@ public partial class PC_Options : PanelContent
 			}
 		}
 
-		TB_GamePath.Text = LocationManager.GamePath;
-		TB_AppDataPath.Text = LocationManager.AppDataPath;
-		TB_SteamPath.Text = LocationManager.SteamPath;
+		TB_GamePath.Text = _locationManager.GamePath;
+		TB_AppDataPath.Text = _locationManager.AppDataPath;
+		TB_SteamPath.Text = _locationManager.SteamPath;
 
-		if (LocationManager.Platform is Platform.Linux)
+		if (CrossIO.CurrentPlatform is Platform.Linux)
 		{
 			TB_GamePath.Placeholder = "Z:\\...\\Steam\\SteamLibrary\\steamapps\\common\\Cities_Skylines";
 			TB_AppDataPath.Placeholder = "Z:\\home\\USERNAME\\.local\\share\\Colossal Order\\Cities_Skylines";
 			TB_SteamPath.Placeholder = "/usr/bin/steam";
 		}
 
-		if (LocationManager.Platform is Platform.MacOSX)
+		if (CrossIO.CurrentPlatform is Platform.MacOSX)
 		{
 			TB_GamePath.Placeholder = TB_GamePath.Placeholder = "/Users/USERNAME/Library/Application Support/Steam/steamapps/common/Cities_Skylines";
 			TB_GamePath.Placeholder = TB_AppDataPath.Placeholder = "/Users/USERNAME/Library/Application Support/Colossal Order/Cities_Skylines";
@@ -75,9 +67,9 @@ public partial class PC_Options : PanelContent
 		{
 			if (!string.IsNullOrWhiteSpace(cb.Tag?.ToString()))
 			{
-				cb.Checked = (bool)typeof(UserSettings)
+				cb.Checked = (bool)_settings.UserSettings.GetType()
 					.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-					.GetValue(CentralManager.SessionSettings.UserSettings);
+					.GetValue(_settings.UserSettings);
 
 				SlickTip.SetTo(cb, LocaleHelper.GetGlobalText($"{cb.Text}_Tip"));
 
@@ -87,6 +79,9 @@ public partial class PC_Options : PanelContent
 				}
 			}
 		}
+
+		if (!Directory.Exists(TB_AppDataPath.Text) || !Directory.Exists(TB_GamePath.Text) || !Directory.Exists(TB_SteamPath.Text))
+			CB_ShowFolderSettings.Checked = true;
 	}
 
 	protected override void LocaleChanged()
@@ -127,7 +122,7 @@ public partial class PC_Options : PanelContent
 		{
 			if (ShowPrompt(Locale.ChangingFoldersRequiresRestart, PromptButtons.OKCancel, PromptIcons.Hand) == System.Windows.Forms.DialogResult.OK)
 			{
-				LocationManager.SetPaths(TB_GamePath.Text, TB_AppDataPath.Text, TB_SteamPath.Text);
+				_locationManager.SetPaths(TB_GamePath.Text, TB_AppDataPath.Text, TB_SteamPath.Text);
 
 				Process.Start(Program.ExecutablePath);
 
@@ -153,11 +148,11 @@ public partial class PC_Options : PanelContent
 
 		var cb = (sender as SlickCheckbox)!;
 
-		typeof(UserSettings)
+		_settings.UserSettings.GetType()
 			.GetProperty(cb.Tag!.ToString(), BindingFlags.Instance | BindingFlags.Public)
-			.SetValue(CentralManager.SessionSettings.UserSettings, cb.Checked);
+			.SetValue(_settings.UserSettings, cb.Checked);
 
-		CentralManager.SessionSettings.Save();
+		_settings.SessionSettings.Save();
 	}
 
 	private void TB_FolderPath_TextChanged(object sender, EventArgs e)
@@ -169,7 +164,7 @@ public partial class PC_Options : PanelContent
 	{
 		try
 		{
-			LocaleHelper.SetLanguage(new (DD_Language.SelectedItem));
+			LocaleHelper.SetLanguage(new(DD_Language.SelectedItem));
 		}
 		catch
 		{
@@ -218,8 +213,7 @@ public partial class PC_Options : PanelContent
 
 	private void B_Reset_Click(object sender, EventArgs e)
 	{
-		CentralManager.SessionSettings.UserSettings = new();
-		CentralManager.SessionSettings.Save();
+		_settings.ResetUserSettings();
 
 		ApplyCurrentSettings();
 	}
@@ -231,12 +225,11 @@ public partial class PC_Options : PanelContent
 			return;
 		}
 
-		ExtensionClass.DeleteFile(LocationManager.Combine(LocationManager.SkyveAppDataPath, "SetupComplete.txt"));
+		CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveAppDataPath, "SetupComplete.txt"));
 
-		CentralManager.SessionSettings.FirstTimeSetupCompleted = false;
-		CentralManager.SessionSettings.Save();
-
-		new FolderSettings().Save();
+		_settings.SessionSettings.FirstTimeSetupCompleted = false;
+		_settings.SessionSettings.Save();
+		_settings.ResetFolderSettings();
 
 		Application.Exit();
 	}
@@ -253,6 +246,6 @@ public partial class PC_Options : PanelContent
 
 	private void AssumeInternetConnectivity_CheckChanged(object sender, EventArgs e)
 	{
-		ConnectionHandler.AssumeInternetConnectivity= CB_AssumeInternetConnectivity.Checked;
+		ConnectionHandler.AssumeInternetConnectivity = CB_AssumeInternetConnectivity.Checked;
 	}
 }

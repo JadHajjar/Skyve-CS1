@@ -1,0 +1,153 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+	<Import Project="../Version.props" />
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<Description>Helps to manage your mods and assets</Description>
+		<Configurations>Debug;Release;Stable</Configurations>
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<Nullable>enable</Nullable>
+		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Deterministic>false</Deterministic>
+		<TargetFramework>net4.7.2</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
+		<SignAssembly>True</SignAssembly>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Properties\Compatibility.json" />
+	  <None Remove="Properties\CompatibilityNotes.json" />
+	  <None Remove="Properties\CompatibilityNotes\ar-SA.json" />
+	  <None Remove="Properties\CompatibilityNotes\bn-BD.json" />
+	  <None Remove="Properties\CompatibilityNotes\cs-CZ.json" />
+	  <None Remove="Properties\CompatibilityNotes\de-DE.json" />
+	  <None Remove="Properties\CompatibilityNotes\en-GB.json" />
+	  <None Remove="Properties\CompatibilityNotes\es-ES.json" />
+	  <None Remove="Properties\CompatibilityNotes\fi-FI.json" />
+	  <None Remove="Properties\CompatibilityNotes\fr-FR.json" />
+	  <None Remove="Properties\CompatibilityNotes\hi-IN.json" />
+	  <None Remove="Properties\CompatibilityNotes\hu-HU.json" />
+	  <None Remove="Properties\CompatibilityNotes\id-ID.json" />
+	  <None Remove="Properties\CompatibilityNotes\it-IT.json" />
+	  <None Remove="Properties\CompatibilityNotes\ja-JP.json" />
+	  <None Remove="Properties\CompatibilityNotes\ka-GE.json" />
+	  <None Remove="Properties\CompatibilityNotes\ko-KR.json" />
+	  <None Remove="Properties\CompatibilityNotes\nl-NL.json" />
+	  <None Remove="Properties\CompatibilityNotes\no-NO.json" />
+	  <None Remove="Properties\CompatibilityNotes\pl-PL.json" />
+	  <None Remove="Properties\CompatibilityNotes\pt-BR.json" />
+	  <None Remove="Properties\CompatibilityNotes\pt-PT.json" />
+	  <None Remove="Properties\CompatibilityNotes\ro-RO.json" />
+	  <None Remove="Properties\CompatibilityNotes\ru-RU.json" />
+	  <None Remove="Properties\CompatibilityNotes\sv-SE.json" />
+	  <None Remove="Properties\CompatibilityNotes\th-TH.json" />
+	  <None Remove="Properties\CompatibilityNotes\tr-TR.json" />
+	  <None Remove="Properties\CompatibilityNotes\uk-UA.json" />
+	  <None Remove="Properties\CompatibilityNotes\vi-VN.json" />
+	  <None Remove="Properties\CompatibilityNotes\zh-CN.json" />
+	  <None Remove="Properties\CompatibilityNotes\zh-TW.json" />
+	  <None Remove="Properties\Compatibility\ar-SA.json" />
+	  <None Remove="Properties\Compatibility\bn-BD.json" />
+	  <None Remove="Properties\Compatibility\cs-CZ.json" />
+	  <None Remove="Properties\Compatibility\de-DE.json" />
+	  <None Remove="Properties\Compatibility\en-GB.json" />
+	  <None Remove="Properties\Compatibility\es-ES.json" />
+	  <None Remove="Properties\Compatibility\fi-FI.json" />
+	  <None Remove="Properties\Compatibility\fr-FR.json" />
+	  <None Remove="Properties\Compatibility\hi-IN.json" />
+	  <None Remove="Properties\Compatibility\hu-HU.json" />
+	  <None Remove="Properties\Compatibility\id-ID.json" />
+	  <None Remove="Properties\Compatibility\it-IT.json" />
+	  <None Remove="Properties\Compatibility\ja-JP.json" />
+	  <None Remove="Properties\Compatibility\ka-GE.json" />
+	  <None Remove="Properties\Compatibility\ko-KR.json" />
+	  <None Remove="Properties\Compatibility\nl-NL.json" />
+	  <None Remove="Properties\Compatibility\no-NO.json" />
+	  <None Remove="Properties\Compatibility\pl-PL.json" />
+	  <None Remove="Properties\Compatibility\pt-BR.json" />
+	  <None Remove="Properties\Compatibility\pt-PT.json" />
+	  <None Remove="Properties\Compatibility\ro-RO.json" />
+	  <None Remove="Properties\Compatibility\ru-RU.json" />
+	  <None Remove="Properties\Compatibility\sv-SE.json" />
+	  <None Remove="Properties\Compatibility\th-TH.json" />
+	  <None Remove="Properties\Compatibility\tr-TR.json" />
+	  <None Remove="Properties\Compatibility\uk-UA.json" />
+	  <None Remove="Properties\Compatibility\vi-VN.json" />
+	  <None Remove="Properties\Compatibility\zh-CN.json" />
+	  <None Remove="Properties\Compatibility\zh-TW.json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include="Properties\Compatibility.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\ar-SA.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\bn-BD.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\cs-CZ.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\de-DE.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\en-GB.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\es-ES.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\fi-FI.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\fr-FR.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\hi-IN.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\hu-HU.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\id-ID.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\it-IT.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\ja-JP.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\ka-GE.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\ko-KR.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\nl-NL.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\no-NO.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\pl-PL.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\pt-BR.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\pt-PT.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\ro-RO.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\ru-RU.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\sv-SE.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\th-TH.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\tr-TR.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\uk-UA.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\vi-VN.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\zh-CN.json" />
+	  <EmbeddedResource Include="Properties\CompatibilityNotes\zh-TW.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\ar-SA.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\bn-BD.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\cs-CZ.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\de-DE.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\en-GB.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\es-ES.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\fi-FI.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\fr-FR.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\hi-IN.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\hu-HU.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\id-ID.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\it-IT.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\ja-JP.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\ka-GE.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\ko-KR.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\nl-NL.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\no-NO.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\pl-PL.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\pt-BR.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\pt-PT.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\ro-RO.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\ru-RU.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\sv-SE.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\th-TH.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\tr-TR.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\uk-UA.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\vi-VN.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\zh-CN.json" />
+	  <EmbeddedResource Include="Properties\Compatibility\zh-TW.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\SkyveApp.Domain\SkyveApp.Domain.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Windows.Forms" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+	</ItemGroup>
+</Project>

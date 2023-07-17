@@ -1,38 +1,37 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using System.Collections.Generic;
-using System.Linq;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 namespace SkyveApp.UserInterface.Panels;
-internal class PC_Assets : PC_ContentList<Asset>
+internal class PC_Assets : PC_ContentList<IAsset>
 {
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly IPackageManager _contentManager = ServiceCenter.Get<IPackageManager>();
 	public PC_Assets()
 	{
-
 	}
+
+	public override SkyvePage Page => SkyvePage.Assets;
 
 	protected override void LocaleChanged()
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Asset.Plural} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Asset.Plural} - {_profileManager.CurrentPlayset.Name}";
 	}
 
-	protected override IEnumerable<Asset> GetItems()
+	protected override IEnumerable<IAsset> GetItems()
 	{
-		if (CentralManager.SessionSettings.UserSettings.LinkModAssets)
+		if (_settings.UserSettings.LinkModAssets)
 		{
-			return CentralManager.Assets.Where(x => x.Package.Mod is null);
+			return _contentManager.Assets.Where(x => !(x.LocalParentPackage?.IsMod ?? false));
 		}
 
-		return CentralManager.Assets;
+		return _contentManager.Assets;
 	}
 
 	protected override string GetCountText()
 	{
-		var assetsIncluded = CentralManager.Assets.Count(x => x.IsIncluded);
+		var assetsIncluded = _contentManager.Assets.Count(x => x.IsIncluded());
 		var total = LC_Items.ItemCount;
 		var text = string.Empty;
 
@@ -42,14 +41,5 @@ internal class PC_Assets : PC_ContentList<Asset>
 	protected override Extensions.LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Asset;
-	}
-
-	protected override void SetIncluded(IEnumerable<Asset> filteredItems, bool included)
-	{
-		ContentUtil.SetBulkIncluded(filteredItems, included);
-	}
-
-	protected override void SetEnabled(IEnumerable<Asset> filteredItems, bool enabled)
-	{
 	}
 }

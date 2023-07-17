@@ -549,15 +549,70 @@
     ]
   },
   {
-    "Version": "3.1.2",
-    "Date": "2023-06-21",
+    "Version": "3.2.0",
+    "Date": "2023-07-07",
+    "Tagline": "A full rework! -behind the scenes",
     "ChangeGroups": [
       {
-        "Name": "Fixes",
+        "Name": "What's changed?",
         "Changes": [
-          "Fixes an error caused by including/excluding mods that have contain assets.",
-          "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-          "Fixed some packages not showing their successor properly."
+          "The core systems of Skyve have been changed, organised, and optimised.",
+          "Excluded mods no longer use the '.excluded' file, they instead use a new ModConfig file.",
+          "The Load Order of mods has been re-integrated, and is completely automated based on mods' requirements as well as other Compatibility-Report factors.",
+          "'Profiles' are now, appropriately, called 'Playsets'.",
+          "Improved the author info gathering, which will fix the issue of authors not loading.",
+          "Please report any issues or unusual behaviour on the discord server."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.2.1",
+    "Date": "2023-07-09",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Click-to-filter now uses the Alt key instead of the Ctrl key.",
+          "You can now select multiple items in the content lists using the Ctrl or Shift keys.",
+          "Added an 'Open File' option to the right-click menu when selecting a file.",
+          "Copy all IDs action now includes packages' names and local packages as well.",
+          "Your current playset's name is now displayed in the main menu in-game.",
+          "The 'First time setup incomplete' screen now has an ingnore button to manually set up your folder settings instead.",
+          "'Show Folder Settings' now automatically be turned on if one of the folder settings is incorrect."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.2.2",
+    "Date": "2023-07-13",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Added a grid-view option for all content pages; toggle between list & grid view using the new icons on the top right of the list.",
+          "Sorting & Grid-view settings are now saved on a per-page basis.",
+          "Added a 'Load Order' sorting option.",
+          "Added an option to hide the current playset's name in the main menu.",
+          "Fixed the current playset's name staying visible while in-game.",
+          "Fixed playsets disappearing on macOS & Linux."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.2.3",
+    "Date": "2023-07-13",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once",
+          "Updated the color design of the app's logo on the top-left.",
+          "Fixed the incorrect names of packages while viewing a playset's contents.",
+          "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
+          "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."
         ]
       }
     ]

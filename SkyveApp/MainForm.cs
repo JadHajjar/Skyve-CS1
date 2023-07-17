@@ -1,15 +1,8 @@
-﻿using Extensions;
-
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
-using SlickControls;
-
-using System;
+using System.Configuration;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -20,6 +13,12 @@ public partial class MainForm : BasePanelForm
 	private readonly System.Timers.Timer _startTimeoutTimer = new(15000) { AutoReset = false };
 	private bool isGameRunning;
 	private bool? buttonStateRunning;
+
+	private readonly ISubscriptionsManager _subscriptionsManager = ServiceCenter.Get<ISubscriptionsManager>();
+	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
+	private readonly ICitiesManager _citiesManager = ServiceCenter.Get<ICitiesManager>();
+	private readonly ISettings _settings = ServiceCenter.Get<ISettings>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public MainForm()
 	{
@@ -39,17 +38,29 @@ public partial class MainForm : BasePanelForm
 #endif
 
 		try
-		{ FormDesign.Initialize(this, DesignChanged); }
+		{
+			FormDesign.Initialize(this, DesignChanged);
+		}
 		catch { }
 
 		try
 		{
-			SetPanel<PC_MainPage>(PI_Dashboard);
+
+			if (!_settings.SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
+			{
+				SetPanel<PC_Options>(PI_Options);
+			}
+			else
+			{
+				SetPanel<PC_MainPage>(PI_Dashboard);
+			}
 		}
 		catch (Exception ex)
-		{ OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this)); }
+		{
+			OnNextIdle(() => MessagePrompt.Show(ex, "Failed to load the dashboard", form: this));
+		}
 
-		new BackgroundAction("Loading content", CentralManager.Start).Run();
+		new BackgroundAction("Loading content", ServiceCenter.Get<ICentralManager>().Start).Run();
 
 		var timer = new System.Timers.Timer(1000);
 
@@ -57,28 +68,43 @@ public partial class MainForm : BasePanelForm
 
 		timer.Start();
 
-		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
+		var citiesManager = ServiceCenter.Get<ICitiesManager>();
+		var playsetManager = ServiceCenter.Get<IPlaysetManager>();
 
-		isGameRunning = CitiesManager.IsRunning();
+		citiesManager.MonitorTick += CitiesManager_MonitorTick;
+
+		isGameRunning = citiesManager.IsRunning();
+
+		playsetManager.PromptMissingItems += PromptMissingItemsEvent;
 
 		_startTimeoutTimer.Elapsed += StartTimeoutTimer_Elapsed;
 
+		_notifier.RefreshUI += () => this.TryInvoke(() => Invalidate(true));
+
 		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
 
-		if (File.Exists(LocationManager.Combine(Program.CurrentDirectory, "batch.bat")))
+		if (CrossIO.FileExists(CrossIO.Combine(Program.CurrentDirectory, "batch.bat")))
 		{
 			try
-			{ ExtensionClass.DeleteFile(LocationManager.Combine(Program.CurrentDirectory, "batch.bat")); }
+			{
+				CrossIO.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "batch.bat"));
+			}
 			catch { }
 		}
-				base_PB_Icon.Loading = true;
+
+		base_PB_Icon.Loading = true;
+	}
+
+	private void PromptMissingItemsEvent(IPlaysetManager manager, IEnumerable<IPlaysetEntry> playsetEntries)
+	{
+		PC_MissingPackages.PromptMissingPackages(Program.MainForm, playsetEntries);
 	}
 
 	protected override void LocaleChanged()
 	{
 		PI_Packages.Text = Locale.Package.Plural;
 		PI_Assets.Text = Locale.Asset.Plural;
-		PI_Profiles.Text = Locale.Profile.Plural;
+		PI_Profiles.Text = Locale.Playset.Plural;
 		PI_Mods.Text = Locale.Mod.Plural;
 	}
 
@@ -129,13 +155,16 @@ public partial class MainForm : BasePanelForm
 	{
 		e.Graphics.SetUp(base_PB_Icon.BackColor);
 
-		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) ? FormDesign.Design.MenuForeColor.MergeColor(FormDesign.Design.ActiveColor, 85) : FormDesign.Design.MenuForeColor);
+		var backBrightness = FormDesign.Design.MenuColor.GetBrightness();
+		var foreBrightness = FormDesign.Design.ForeColor.GetBrightness();		
+
+		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) && !base_PB_Icon.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.MenuForeColor : Math.Abs(backBrightness - foreBrightness) < 0.4F ? FormDesign.Design.BackColor : FormDesign.Design.ForeColor);
 
 		var useGlow = !ConnectionHandler.IsConnected
 			|| (buttonStateRunning is not null && buttonStateRunning != isGameRunning)
 			|| isGameRunning
-			|| SubscriptionsManager.SubscriptionsPending
-			|| ProfileManager.CurrentProfile.UnsavedChanges
+			|| _subscriptionsManager.SubscriptionsPending
+			|| _profileManager.CurrentPlayset.UnsavedChanges
 			|| base_PB_Icon.HoverState.HasFlag(HoverState.Pressed);
 
 		e.Graphics.DrawImage(icon, base_PB_Icon.ClientRectangle);
@@ -147,34 +176,34 @@ public partial class MainForm : BasePanelForm
 			var color = FormDesign.Modern.ActiveColor;
 			var minimum = 0;
 
-			if ((buttonStateRunning is null && isGameRunning))
-			{
-				minimum = 120;
-				color = Color.FromArgb(15, 153, 212);
-			}
-
-			if (buttonStateRunning == false)
-			{
-				minimum = 0;
-				color = Color.FromArgb(235, 113, 52);
-			}
-
-			if (ProfileManager.CurrentProfile.UnsavedChanges)
-			{
-				minimum = 0;
-				color = Color.FromArgb(122, 81, 207);
-			}
-
 			if (!ConnectionHandler.IsConnected)
 			{
 				minimum = 60;
 				color = Color.FromArgb(194, 38, 33);
 			}
 
-			if (SubscriptionsManager.SubscriptionsPending)
+			if (_profileManager.CurrentPlayset.UnsavedChanges)
+			{
+				minimum = 0;
+				color = Color.FromArgb(122, 81, 207);
+			}
+
+			if (buttonStateRunning is null && isGameRunning)
+			{
+				minimum = 120;
+				color = Color.FromArgb(15, 153, 212);
+			}
+
+			if (_subscriptionsManager.SubscriptionsPending)
 			{
 				minimum = 40;
 				color = Color.FromArgb(50, 168, 82);
+			}
+
+			if (buttonStateRunning == false)
+			{
+				minimum = 0;
+				color = Color.FromArgb(232, 157, 22);
 			}
 
 			glowIcon.Tint(Sat: color.GetSaturation(), Hue: color.GetHue());
@@ -200,12 +229,12 @@ public partial class MainForm : BasePanelForm
 
 	private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
-		if (!ExtensionClass.FileExists(LocationManager.Combine(Program.CurrentDirectory, "Wake")))
+		if (!CrossIO.FileExists(CrossIO.Combine(Program.CurrentDirectory, "Wake")))
 		{
 			return;
 		}
 
-		ExtensionClass.DeleteFile(LocationManager.Combine(Program.CurrentDirectory, "Wake"));
+		CrossIO.DeleteFile(CrossIO.Combine(Program.CurrentDirectory, "Wake"));
 
 		if (isGameRunning)
 		{
@@ -226,7 +255,7 @@ public partial class MainForm : BasePanelForm
 	{
 		if (keyData == Keys.F5)
 		{
-			if (CitiesManager.CitiesAvailable())
+			if (_citiesManager.IsAvailable())
 			{
 				LaunchStopCities();
 
@@ -244,9 +273,9 @@ public partial class MainForm : BasePanelForm
 
 	public void LaunchStopCities()
 	{
-		if (CitiesManager.CitiesAvailable())
+		if (_citiesManager.IsAvailable())
 		{
-			if (LocationManager.Platform is Platform.Windows)
+			if (CrossIO.CurrentPlatform is Platform.Windows)
 			{
 				if (CurrentPanel is PC_MainPage mainPage)
 				{
@@ -257,15 +286,15 @@ public partial class MainForm : BasePanelForm
 				base_PB_Icon.LoaderSpeed = 1;
 			}
 
-			if (CitiesManager.IsRunning())
+			if (_citiesManager.IsRunning())
 			{
 				buttonStateRunning = false;
-				new BackgroundAction("Stopping Cities: Skylines", CitiesManager.Kill).Run();
+				new BackgroundAction("Stopping Cities: Skylines", _citiesManager.Kill).Run();
 			}
 			else
 			{
 				buttonStateRunning = true;
-				new BackgroundAction("Starting Cities: Skylines", CitiesManager.Launch).Run();
+				new BackgroundAction("Starting Cities: Skylines", _citiesManager.Launch).Run();
 			}
 
 			_startTimeoutTimer.Stop();
@@ -277,19 +306,19 @@ public partial class MainForm : BasePanelForm
 	{
 		base.OnCreateControl();
 
-		if (CentralManager.SessionSettings.LastWindowsBounds != null)
+		if (_settings.SessionSettings.LastWindowsBounds != null)
 		{
-			if (!SystemInformation.VirtualScreen.Contains(CentralManager.SessionSettings.LastWindowsBounds.Value.Location))
+			if (!SystemInformation.VirtualScreen.Contains(_settings.SessionSettings.LastWindowsBounds.Value.Location))
 			{
 				return;
 			}
 
-			Bounds = CentralManager.SessionSettings.LastWindowsBounds.Value;
+			Bounds = _settings.SessionSettings.LastWindowsBounds.Value;
 
 			LastUiScale = UI.UIScale;
 		}
 
-		if (CentralManager.SessionSettings.WindowWasMaximized)
+		if (_settings.SessionSettings.WindowWasMaximized)
 		{
 			WindowState = FormWindowState.Minimized;
 			WindowState = FormWindowState.Maximized;
@@ -297,15 +326,15 @@ public partial class MainForm : BasePanelForm
 
 		var currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
-		if (currentVersion.ToString() != CentralManager.SessionSettings.LastVersionNotification)
+		if (currentVersion.ToString() != _settings.SessionSettings.LastVersionNotification)
 		{
-			if (CentralManager.SessionSettings.FirstTimeSetupCompleted)
+			if (_settings.SessionSettings.FirstTimeSetupCompleted)
 			{
 				PushPanel<PC_LotChangeLog>(null);
 			}
 
-			CentralManager.SessionSettings.LastVersionNotification = currentVersion.ToString();
-			CentralManager.SessionSettings.Save();
+			_settings.SessionSettings.LastVersionNotification = currentVersion.ToString();
+			_settings.SessionSettings.Save();
 		}
 	}
 
@@ -315,22 +344,22 @@ public partial class MainForm : BasePanelForm
 
 		if (!TopMost)
 		{
-			if (CentralManager.SessionSettings.WindowWasMaximized = WindowState == FormWindowState.Maximized)
+			if (_settings.SessionSettings.WindowWasMaximized = WindowState == FormWindowState.Maximized)
 			{
 				if (SystemInformation.VirtualScreen.IntersectsWith(RestoreBounds))
 				{
-					CentralManager.SessionSettings.LastWindowsBounds = RestoreBounds;
+					_settings.SessionSettings.LastWindowsBounds = RestoreBounds;
 				}
 			}
 			else
 			{
 				if (SystemInformation.VirtualScreen.IntersectsWith(Bounds))
 				{
-					CentralManager.SessionSettings.LastWindowsBounds = Bounds;
+					_settings.SessionSettings.LastWindowsBounds = Bounds;
 				}
 			}
 
-			CentralManager.SessionSettings.Save();
+			_settings.SessionSettings.Save();
 		}
 	}
 
@@ -351,12 +380,12 @@ public partial class MainForm : BasePanelForm
 
 	private void PI_Profiles_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_ProfileList>(PI_Profiles);
+		SetPanel<PC_PlaysetList>(PI_Profiles);
 	}
 
 	private void PI_ModReview_OnClick(object sender, MouseEventArgs e)
 	{
-		SetPanel<PC_ModUtilities>(PI_ModUtilities);
+		SetPanel<PC_Utilities>(PI_ModUtilities);
 	}
 
 	private void PI_Packages_OnClick(object sender, MouseEventArgs e)

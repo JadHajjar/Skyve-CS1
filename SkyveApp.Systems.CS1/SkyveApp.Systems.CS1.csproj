@@ -1,0 +1,103 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+	<Import Project="../Version.props" />
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<Description>Helps to manage your mods and assets</Description>
+		<Configurations>Debug;Release;Stable</Configurations>
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<Nullable>enable</Nullable>
+		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Deterministic>false</Deterministic>
+		<TargetFramework>net4.7.2</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
+		<SignAssembly>True</SignAssembly>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Properties\Locale.json" />
+	  <None Remove="Properties\Locale\ar-SA.json" />
+	  <None Remove="Properties\Locale\bn-BD.json" />
+	  <None Remove="Properties\Locale\cs-CZ.json" />
+	  <None Remove="Properties\Locale\de-DE.json" />
+	  <None Remove="Properties\Locale\en-GB.json" />
+	  <None Remove="Properties\Locale\es-ES.json" />
+	  <None Remove="Properties\Locale\fi-FI.json" />
+	  <None Remove="Properties\Locale\fr-FR.json" />
+	  <None Remove="Properties\Locale\hi-IN.json" />
+	  <None Remove="Properties\Locale\hu-HU.json" />
+	  <None Remove="Properties\Locale\id-ID.json" />
+	  <None Remove="Properties\Locale\it-IT.json" />
+	  <None Remove="Properties\Locale\ja-JP.json" />
+	  <None Remove="Properties\Locale\ka-GE.json" />
+	  <None Remove="Properties\Locale\ko-KR.json" />
+	  <None Remove="Properties\Locale\nl-NL.json" />
+	  <None Remove="Properties\Locale\no-NO.json" />
+	  <None Remove="Properties\Locale\pl-PL.json" />
+	  <None Remove="Properties\Locale\pt-BR.json" />
+	  <None Remove="Properties\Locale\pt-PT.json" />
+	  <None Remove="Properties\Locale\ro-RO.json" />
+	  <None Remove="Properties\Locale\ru-RU.json" />
+	  <None Remove="Properties\Locale\sv-SE.json" />
+	  <None Remove="Properties\Locale\th-TH.json" />
+	  <None Remove="Properties\Locale\tr-TR.json" />
+	  <None Remove="Properties\Locale\uk-UA.json" />
+	  <None Remove="Properties\Locale\vi-VN.json" />
+	  <None Remove="Properties\Locale\zh-CN.json" />
+	  <None Remove="Properties\Locale\zh-TW.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
+		<ProjectReference Include="..\SkyveApp.Domain.CS1\SkyveApp.Domain.CS1.csproj" />
+		<ProjectReference Include="..\SkyveApp.Domain\SkyveApp.Domain.csproj" />
+		<ProjectReference Include="..\SkyveApp.Systems\SkyveApp.Systems.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="System.Configuration" />
+		<Reference Include="System.IO.Compression" />
+		<Reference Include="System.Management" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Windows.Forms" />
+		<PackageReference Include="Mono.Cecil" Version="0.11.3" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="..\SkyveMod\Shared\SharedUtil.cs" Link="Utilities\SharedUtil.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include="Properties\Locale.json" />
+	  <EmbeddedResource Include="Properties\Locale\ar-SA.json" />
+	  <EmbeddedResource Include="Properties\Locale\bn-BD.json" />
+	  <EmbeddedResource Include="Properties\Locale\cs-CZ.json" />
+	  <EmbeddedResource Include="Properties\Locale\de-DE.json" />
+	  <EmbeddedResource Include="Properties\Locale\en-GB.json" />
+	  <EmbeddedResource Include="Properties\Locale\es-ES.json" />
+	  <EmbeddedResource Include="Properties\Locale\fi-FI.json" />
+	  <EmbeddedResource Include="Properties\Locale\fr-FR.json" />
+	  <EmbeddedResource Include="Properties\Locale\hi-IN.json" />
+	  <EmbeddedResource Include="Properties\Locale\hu-HU.json" />
+	  <EmbeddedResource Include="Properties\Locale\id-ID.json" />
+	  <EmbeddedResource Include="Properties\Locale\it-IT.json" />
+	  <EmbeddedResource Include="Properties\Locale\ja-JP.json" />
+	  <EmbeddedResource Include="Properties\Locale\ka-GE.json" />
+	  <EmbeddedResource Include="Properties\Locale\ko-KR.json" />
+	  <EmbeddedResource Include="Properties\Locale\nl-NL.json" />
+	  <EmbeddedResource Include="Properties\Locale\no-NO.json" />
+	  <EmbeddedResource Include="Properties\Locale\pl-PL.json" />
+	  <EmbeddedResource Include="Properties\Locale\pt-BR.json" />
+	  <EmbeddedResource Include="Properties\Locale\pt-PT.json" />
+	  <EmbeddedResource Include="Properties\Locale\ro-RO.json" />
+	  <EmbeddedResource Include="Properties\Locale\ru-RU.json" />
+	  <EmbeddedResource Include="Properties\Locale\sv-SE.json" />
+	  <EmbeddedResource Include="Properties\Locale\th-TH.json" />
+	  <EmbeddedResource Include="Properties\Locale\tr-TR.json" />
+	  <EmbeddedResource Include="Properties\Locale\uk-UA.json" />
+	  <EmbeddedResource Include="Properties\Locale\vi-VN.json" />
+	  <EmbeddedResource Include="Properties\Locale\zh-CN.json" />
+	  <EmbeddedResource Include="Properties\Locale\zh-TW.json" />
+	</ItemGroup>
+</Project>

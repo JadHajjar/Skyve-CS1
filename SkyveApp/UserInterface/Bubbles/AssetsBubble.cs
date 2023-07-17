@@ -1,22 +1,19 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;
 
 internal class AssetsBubble : StatusBubbleBase
 {
+	private readonly INotifier _notifier;
+	private readonly IPackageUtil _contentUtil;
+	private readonly IPackageManager _contentManager;
+
 	public AssetsBubble()
-	{ }
+	{
+		ServiceCenter.Get(out _notifier, out _contentUtil, out _contentManager);
+	}
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -30,28 +27,29 @@ internal class AssetsBubble : StatusBubbleBase
 		ImageName = "I_Assets";
 		Text = Locale.AssetsBubble;
 
-		if (!CentralManager.IsContentLoaded)
+		if (!_notifier.IsContentLoaded)
 		{
 			Loading = true;
 
-			CentralManager.ContentLoaded += Invalidate;
+			_notifier.ContentLoaded += Invalidate;
 		}
 
-		CentralManager.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
-
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
+		_notifier.PackageInformationUpdated += Invalidate;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void Dispose(bool disposing)
 	{
 		base.Dispose(disposing);
 
-		CentralManager.ContentLoaded -= Invalidate;
-		CentralManager.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
-		ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+		_notifier.ContentLoaded -= Invalidate;
+		_notifier.WorkshopInfoUpdated -= CentralManager_WorkshopInfoUpdated;
+		_notifier.PackageInformationUpdated -= Invalidate;
+		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Profile obj)
+	private void ProfileManager_ProfileChanged()
 	{
 		Invalidate();
 	}
@@ -70,7 +68,7 @@ internal class AssetsBubble : StatusBubbleBase
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		if (!CentralManager.IsContentLoaded)
+		if (!_notifier.IsContentLoaded)
 		{
 			DrawText(e, ref targetHeight, Locale.Loading, FormDesign.Design.InfoColor);
 			return;
@@ -81,22 +79,22 @@ internal class AssetsBubble : StatusBubbleBase
 
 		var crDic = new Dictionary<NotificationType, int>();
 
-		foreach (var asset in CentralManager.Assets)
+		foreach (var asset in _contentManager.Assets)
 		{
-			if (!asset.IsIncluded)
+			if (!_contentUtil.IsIncluded(asset))
 			{
 				continue;
 			}
 
 			assetsIncluded++;
-			assetSize += asset.FileSize;
+			assetSize += asset.LocalSize;
 
 			if (asset.IsMod || Loading)
 			{
 				continue;
 			}
 
-			switch (asset.Package.Status)
+			switch (_contentUtil.GetStatus(asset, out _))
 			{
 				case DownloadStatus.OutOfDate:
 					assetsOutOfDate++;
@@ -106,7 +104,7 @@ internal class AssetsBubble : StatusBubbleBase
 					break;
 			}
 
-			var notif = asset.GetCompatibilityInfo().Notification;
+			var notif = asset.GetCompatibilityInfo().GetNotification();
 
 			if (crDic.ContainsKey(notif))
 			{

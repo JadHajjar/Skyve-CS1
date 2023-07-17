@@ -1,20 +1,10 @@
-﻿using Extensions;
-using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Domain.Steam;
+﻿using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Generic;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
 
-using SlickControls;
-
-using System;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,8 +14,14 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	private ReviewRequest _request;
 	private readonly SlickControl logControl;
 
+	private readonly IWorkshopService _workshopService;
+	private readonly IDlcManager _dlcManager;
+	private readonly SkyveApiUtil _skyveApiUtil;
+
 	public PC_ReviewSingleRequest(ReviewRequest request) : base(true)
 	{
+		ServiceCenter.Get(out _dlcManager, out _skyveApiUtil, out _workshopService);
+
 		InitializeComponent();
 
 		_request = request;
@@ -36,7 +32,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		logControl = new SlickControl
 		{
 			Cursor = Cursors.Hand,
-			Text = $"RequestBy_{SteamUtil.GetUser(_request.UserId)?.Name}_{DateTime.Now:yy-MM-dd_HH-mm}",
+			Text = $"RequestBy_{_workshopService.GetUser(_request.UserId)?.Name}_{DateTime.Now:yy-MM-dd_HH-mm}",
 			Dock = DockStyle.Top,
 			Height = (int)(60 * UI.UIScale),
 			Margin = UI.Scale(new Padding(5), UI.FontScale)
@@ -51,7 +47,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 
 		if (request.IsInteraction)
 		{
-			tableLayoutPanel1.Controls.Add(new IPackageStatusControl<InteractionType, PackageInteraction>(SteamUtil.GetItem(request.PackageId), new PackageInteraction
+			tableLayoutPanel1.Controls.Add(new IPackageStatusControl<InteractionType, PackageInteraction>(_workshopService.GetPackage(new GenericPackageIdentity(request.PackageId)), new PackageInteraction
 			{
 				Action = (StatusAction)request.StatusAction,
 				IntType = request.StatusType,
@@ -62,7 +58,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		}
 		else if (request.IsStatus)
 		{
-			tableLayoutPanel1.Controls.Add(new IPackageStatusControl<StatusType, PackageStatus>(SteamUtil.GetItem(request.PackageId), new PackageStatus
+			tableLayoutPanel1.Controls.Add(new IPackageStatusControl<StatusType, PackageStatus>(_workshopService.GetPackage(new GenericPackageIdentity(request.PackageId)), new PackageStatus
 			{
 				Action = (StatusAction)request.StatusAction,
 				IntType = request.StatusType,
@@ -75,7 +71,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		{
 			DD_Stability.SelectedItem = (PackageStability)_request.PackageStability;
 			DD_PackageType.SelectedItem = (PackageType)_request.PackageType;
-			DD_DLCs.SelectedItems = SteamUtil.Dlcs.Where(x => _request.RequiredDLCs?.Contains(x.Id.ToString()) ?? false);
+			DD_DLCs.SelectedItems = _dlcManager.Dlcs.Where(x => _request.RequiredDLCs?.Contains(x.Id.ToString()) ?? false);
 			DD_Usage.SelectedItems = Enum.GetValues(typeof(PackageUsage)).Cast<PackageUsage>().Where(x => ((PackageUsage)_request.PackageUsage).HasFlag(x));
 
 			tableLayoutPanel3.Visible = true;
@@ -86,7 +82,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		if (_request.LogFile != null)
 		{
-			var fileName = LocationManager.Combine(LocationManager.SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
+			var fileName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().SkyveAppDataPath, "Support Logs", logControl.Text + ".zip");
 
 			File.WriteAllBytes(fileName, _request.LogFile);
 
@@ -98,7 +94,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		logControl.Loading = true;
 
-		var request = await SkyveApiUtil.GetReviewRequest(_request.UserId, _request.PackageId);
+		var request = await _skyveApiUtil.GetReviewRequest(_request.UserId, _request.PackageId);
 
 		if (request != null)
 		{
@@ -127,7 +123,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		tableLayoutPanel2.Width = (int)(200 * UI.FontScale);
 		label3.Font = label1.Font = UI.Font(7.5F, FontStyle.Bold);
 		tableLayoutPanel1.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		slickIcon1.Size = UI.Scale(new Size(24,24), UI.FontScale);
+		slickIcon1.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		slickIcon1.Padding = UI.Scale(new Padding(5), UI.FontScale);
 
 		foreach (Control item in roundedGroupTableLayoutPanel1.Controls)
@@ -187,7 +183,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 	{
 		B_DeleteRequest.Loading = true;
 
-		var response = await SkyveApiUtil.ProcessReviewRequest(_request);
+		var response = await _skyveApiUtil.ProcessReviewRequest(_request);
 
 		if (response.Success)
 		{
@@ -195,7 +191,7 @@ public partial class PC_ReviewSingleRequest : PanelContent
 		}
 		else
 		{
-			ShowPrompt("Failed to process the request: "+ response.Message, PromptButtons.OK, PromptIcons.Info);
+			ShowPrompt("Failed to process the request: " + response.Message, PromptButtons.OK, PromptIcons.Info);
 		}
 
 		B_DeleteRequest.Loading = false;

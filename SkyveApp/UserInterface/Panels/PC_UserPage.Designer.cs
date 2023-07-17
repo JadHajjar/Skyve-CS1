@@ -17,7 +17,6 @@ partial class PC_UserPage
 	{
 		if (disposing && (components != null))
 		{
-		    SkyveApp.Utilities.Managers.CentralManager.PackageInformationUpdated -= CentralManager_PackageInformationUpdated;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

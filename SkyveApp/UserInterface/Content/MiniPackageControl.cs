@@ -1,12 +1,6 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Interfaces;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
 
-using SlickControls;
-
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -15,19 +9,22 @@ namespace SkyveApp.UserInterface.Content;
 internal class MiniPackageControl : SlickControl
 {
 	private readonly IPackage? _package;
-	public IPackage? Package => _package ?? SteamUtil.GetItem(SteamId);
-	public ulong SteamId { get; }
+	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
+	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
+
+	public IPackage? Package => _package ?? _workshopService.GetPackage(new GenericPackageIdentity(Id));
+	public ulong Id { get; }
 
 	public bool ReadOnly { get; set; }
 
 	public MiniPackageControl(ulong steamId)
 	{
 		Cursor = Cursors.Hand;
-		SteamId = steamId;
+		Id = steamId;
 
 		if (Package is null)
 		{
-			SteamUtil.WorkshopItemsLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
+			_notifier.WorkshopPackagesInfoLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
 		}
 	}
 
@@ -35,11 +32,11 @@ internal class MiniPackageControl : SlickControl
 	{
 		Cursor = Cursors.Hand;
 		_package = package;
-		SteamId = package.SteamId;
+		Id = package.Id;
 
 		if (Package is null)
 		{
-			SteamUtil.WorkshopItemsLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
+			_notifier.WorkshopPackagesInfoLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
 		}
 	}
 
@@ -72,7 +69,7 @@ internal class MiniPackageControl : SlickControl
 				}
 				else
 				{
-					Program.MainForm.PushPanel(null, Package.IsCollection ? new PC_ViewCollection(Package) : new PC_PackagePage(Package));
+					Program.MainForm.PushPanel(null, Package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(Package) : new PC_PackagePage(Package));
 				}
 
 				break;
@@ -99,11 +96,11 @@ internal class MiniPackageControl : SlickControl
 
 		var imageRect = ClientRectangle.Pad(Padding);
 		imageRect.Width = imageRect.Height;
-		var image = Package?.IconImage;
+		var image = Package?.GetThumbnail();
 
 		if (image is not null)
 		{
-			if (!Package!.Workshop)
+			if (Package!.IsLocal)
 			{
 				using var unsatImg = new Bitmap(image, imageRect.Size).Tint(Sat: 0);
 				e.Graphics.DrawRoundedImage(unsatImg, imageRect, (int)(4 * UI.FontScale), FormDesign.Design.AccentBackColor);

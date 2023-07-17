@@ -1,18 +1,10 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Domain.Steam;
-using SkyveApp.Utilities;
-
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
-internal class DlcDropDown : SlickMultiSelectionDropDown<SteamDlc>
+internal class DlcDropDown : SlickMultiSelectionDropDown<IDlcInfo>
 {
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -20,7 +12,7 @@ internal class DlcDropDown : SlickMultiSelectionDropDown<SteamDlc>
 
 		if (Live)
 		{
-			Items = SteamUtil.Dlcs.ToArray();
+			Items = ServiceCenter.Get<IDlcManager>().Dlcs.ToArray();
 		}
 	}
 
@@ -31,23 +23,23 @@ internal class DlcDropDown : SlickMultiSelectionDropDown<SteamDlc>
 		Width = (int)(200 * UI.FontScale);
 	}
 
-	protected override IEnumerable<SteamDlc> OrderItems(IEnumerable<SteamDlc> items)
+	protected override IEnumerable<IDlcInfo> OrderItems(IEnumerable<IDlcInfo> items)
 	{
 		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenByDescending(x => x.ReleaseDate);
 	}
 
-	protected override bool SearchMatch(string searchText, SteamDlc item)
+	protected override bool SearchMatch(string searchText, IDlcInfo item)
 	{
 		return searchText.SearchCheck(item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP"));
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, SteamDlc item, bool selected)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IDlcInfo item, bool selected)
 	{
 		if (item is null)
 		{ return; }
 
 		var text = item.Name.Remove("Cities: Skylines - ").Replace("Content Creator Pack", "CCP");
-		var icon = item.Thumbnail;
+		var icon = item.GetThumbnail();
 
 		if (icon != null)
 		{
@@ -59,7 +51,7 @@ internal class DlcDropDown : SlickMultiSelectionDropDown<SteamDlc>
 		e.Graphics.DrawString(text, Font, new SolidBrush(foreColor), rectangle.AlignToFontSize(Font), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
 	}
 
-	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<SteamDlc> items)
+	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<IDlcInfo> items)
 	{
 		if (items.Count() == 1)
 		{

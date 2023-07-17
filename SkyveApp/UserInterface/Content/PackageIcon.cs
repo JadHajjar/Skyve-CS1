@@ -1,11 +1,4 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Steam;
-
-using SlickControls;
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -52,7 +45,7 @@ internal class PackageIcon : SlickImageControl
 		}
 		else
 		{
-			if (!(Package?.Workshop ?? true))
+			if (Package?.IsLocal ?? false)
 			{
 				using var unsatImg = new Bitmap(Image, Size).Tint(Sat: 0);
 				e.Graphics.DrawRoundedImage(unsatImg, ClientRectangle, (int)(10 * UI.FontScale), FormDesign.Design.AccentBackColor);

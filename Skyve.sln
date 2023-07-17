@@ -30,6 +30,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyResolver", "Assembl
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Extensions.Sql", "..\Extensions\Extensions.Sql\Extensions.Sql.shproj", "{F37ECE4B-E1BB-4A75-97BA-FEF60F98CF96}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyveApp.Domain", "SkyveApp.Domain\SkyveApp.Domain.csproj", "{0BBE911A-263C-4E57-A237-1311C2BB4D80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkyveApp.Systems", "SkyveApp.Systems\SkyveApp.Systems.csproj", "{A7049A03-718E-4C9D-8A25-A4DAEDC80B11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyveApp.Systems.CS1", "SkyveApp.Systems.CS1\SkyveApp.Systems.CS1.csproj", "{191FE2C7-9C4E-4EB3-A477-9271DB409ADD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyveApp.Domain.CS1", "SkyveApp.Domain.CS1\SkyveApp.Domain.CS1.csproj", "{13767EC2-21A3-49AB-8D9C-0230BC0DDCE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +87,30 @@ Global
 		{00D6D8F2-A392-4E8D-870A-775193BEB042}.Release|Any CPU.Build.0 = Release|Any CPU
 		{00D6D8F2-A392-4E8D-870A-775193BEB042}.Stable|Any CPU.ActiveCfg = Stable|Any CPU
 		{00D6D8F2-A392-4E8D-870A-775193BEB042}.Stable|Any CPU.Build.0 = Stable|Any CPU
+		{0BBE911A-263C-4E57-A237-1311C2BB4D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BBE911A-263C-4E57-A237-1311C2BB4D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BBE911A-263C-4E57-A237-1311C2BB4D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BBE911A-263C-4E57-A237-1311C2BB4D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BBE911A-263C-4E57-A237-1311C2BB4D80}.Stable|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BBE911A-263C-4E57-A237-1311C2BB4D80}.Stable|Any CPU.Build.0 = Debug|Any CPU
+		{A7049A03-718E-4C9D-8A25-A4DAEDC80B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7049A03-718E-4C9D-8A25-A4DAEDC80B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7049A03-718E-4C9D-8A25-A4DAEDC80B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7049A03-718E-4C9D-8A25-A4DAEDC80B11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7049A03-718E-4C9D-8A25-A4DAEDC80B11}.Stable|Any CPU.ActiveCfg = Stable|Any CPU
+		{A7049A03-718E-4C9D-8A25-A4DAEDC80B11}.Stable|Any CPU.Build.0 = Stable|Any CPU
+		{191FE2C7-9C4E-4EB3-A477-9271DB409ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191FE2C7-9C4E-4EB3-A477-9271DB409ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191FE2C7-9C4E-4EB3-A477-9271DB409ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191FE2C7-9C4E-4EB3-A477-9271DB409ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191FE2C7-9C4E-4EB3-A477-9271DB409ADD}.Stable|Any CPU.ActiveCfg = Debug|Any CPU
+		{191FE2C7-9C4E-4EB3-A477-9271DB409ADD}.Stable|Any CPU.Build.0 = Debug|Any CPU
+		{13767EC2-21A3-49AB-8D9C-0230BC0DDCE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13767EC2-21A3-49AB-8D9C-0230BC0DDCE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13767EC2-21A3-49AB-8D9C-0230BC0DDCE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13767EC2-21A3-49AB-8D9C-0230BC0DDCE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13767EC2-21A3-49AB-8D9C-0230BC0DDCE8}.Stable|Any CPU.ActiveCfg = Debug|Any CPU
+		{13767EC2-21A3-49AB-8D9C-0230BC0DDCE8}.Stable|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,7 +119,7 @@ Global
 		SolutionGuid = {E8BD5477-8A30-4573-983C-3D47F3CE2C8A}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\Extensions\Extensions.Sql\Extensions.Sql.projitems*{abb03609-79e2-41ba-ad76-39a64906dcdd}*SharedItemsImports = 5
+		..\Extensions\Extensions.Sql\Extensions.Sql.projitems*{0bbe911a-263c-4e57-a237-1311c2bb4d80}*SharedItemsImports = 5
 		..\Extensions\Extensions.Sql\Extensions.Sql.projitems*{f37ece4b-e1bb-4a75-97ba-fef60f98cf96}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

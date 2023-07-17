@@ -42,27 +42,28 @@ public class FloatingMonoStatus : UILabel
 	public override void Awake()
 	{
 		base.Awake();
-		textColor = new Color(0.97f, 1f, 0.69f);
-		bottomColor = new Color(1f, 0.2f, 0f);
-		useGradient = true;
+		textColor = debug ? new Color32(196, 24, 49, 255) : new Color32(132, 205, 245, 255);
 		autoSize = true;
+		isVisible = Helpers.InStartupMenu;
 		objectUserData = 1; //refcount
 	}
 
 	bool started_ = false;
+	internal bool debug;
+
 	public override void Start()
 	{
 		LogCalled();
 		base.Start();
 		Instance = this;
-		absolutePosition = new Vector3(SavedX, SavedY);
-		tooltip = "controlled by Skyve App";
+		absolutePosition = new Vector3((UIView.GetAView().fixedWidth - width) / 2, SavedY + 10);
+		tooltip = "Controlled by the Skyve App";
 		SetupDrag();
-		if (Helpers.InStartupMenu)
+		if (isVisible = Helpers.InStartupMenu)
 		{
 			var chirperSprite = UIView.GetAView().FindUIComponent<UISprite>("Chirper");
 			chirperSprite.parent.AttachUIComponent(gameObject);
-			relativePosition = new Vector3(140, 10);
+			relativePosition = new Vector3((chirperSprite.parent.width - width) / 2, 20);
 			drag_.enabled = false;
 		}
 		started_ = true;
@@ -87,6 +88,7 @@ public class FloatingMonoStatus : UILabel
 		base.OnPositionChanged();
 		Log.DebugWait(ThisMethod + " called",
 			id: "OnPositionChanged called".GetHashCode(), seconds: 0.2f, copyToGameLog: false);
+
 		if (!started_)
 		{
 			return;

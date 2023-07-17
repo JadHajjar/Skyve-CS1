@@ -53,9 +53,9 @@ partial class PC_RequestReview
 			this.DD_PackageType = new SkyveApp.UserInterface.Dropdowns.PackageTypeDropDown();
 			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
 			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
-			this.B_ReportIssue = new SkyveApp.UserInterface.Generic.ReviewRequestOptionControl();
-			this.B_AddStatus = new SkyveApp.UserInterface.Generic.ReviewRequestOptionControl();
-			this.B_AddInteraction = new SkyveApp.UserInterface.Generic.ReviewRequestOptionControl();
+			this.B_ReportIssue = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_AddStatus = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
+			this.B_AddInteraction = new SkyveApp.UserInterface.Generic.BigSelectionOptionControl();
 			this.TLP_Actions.SuspendLayout();
 			this.P_Main.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -401,9 +401,9 @@ partial class PC_RequestReview
 	#endregion
 
 	private System.Windows.Forms.TableLayoutPanel TLP_Actions;
-	private Generic.ReviewRequestOptionControl B_ReportIssue;
-	private Generic.ReviewRequestOptionControl B_AddStatus;
-	private Generic.ReviewRequestOptionControl B_AddInteraction;
+	private Generic.BigSelectionOptionControl B_ReportIssue;
+	private Generic.BigSelectionOptionControl B_AddStatus;
+	private Generic.BigSelectionOptionControl B_AddInteraction;
 	private SlickControls.RoundedPanel P_Main;
 	private System.Windows.Forms.Panel panel1;
 	private System.Windows.Forms.Panel P_Content;
