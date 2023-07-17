@@ -406,8 +406,8 @@
                 "Changes": [
                     "Een bericht toegevoegd om u te laten weten wanneer 'Alle problemen oplossen' & 'Opschonen uitvoeren' eindigt.",
                     "Een zeldzame bug opgelost waarbij het laden van een LOT 1 profiel voor altijd zou blijven laden.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "Een probleem waardoor de changelog niet opende met sommige talen, is opgelost.",
+                    "Probleem waardoor het abonneren op een groot aantal items mislukt/niet werkt, is mogelijk opgelost."
                 ]
             }
         ]
@@ -417,32 +417,32 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Het proces van abonneren is herwerkt",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Je kunt je nu abonneren op pakketten terwijl het spel open is.",
+                    "Het abonneren op meerdere items achter elkaar zal ze nu in een wachtlijst plaatsen i.p.v. elke keer de game te openen.",
+                    "Een vakje linksonder aan de app toegevoegd om je te laten weten of er 'abonneer' of 'abonnement afzeggen' taken in de wachtlijst staan.",
+                    "Een geavanceerde optie toegevoegd om het downloaden of verwijderen van pakketten te forceren zodra je je abonneert of afmeldt op hun in Skyve.",
+                    "Nieuw-geabonneerde items worden niet langer herladen terwijl het spel open is.\nDit voorkomt het vastlopen van uw spel en storende mods."
                 ]
             },
             {
-                "Name": "New",
+                "Name": "Nieuw",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "\"Bekijk de inhoud van dit profiel\" is toegevoegd aan het rechtermuisklikmenu van profielen.",
+                    "Er is een \"Forceer download\" optie toegevoegd aan het rechtermuisklikmenu van een pakket.",
+                    "Meer context toegevoegd aan sommige popups",
+                    "Een \"Download alle items die getoond worden\" toegevoegd in de acties in de lijst pagina's."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Oplossingen",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
-                    "Improved the performance for people with a lot of mods."
+                    "Een probleem waardoor de lijst van profielen niet meteen werd geüpdate is opgelost.",
+                    "Een probleem waardoor profielpakketten hun workshop naam niet laten zien is opgelost.",
+                    "Een probleem waardoor de Steam info van een pakket niet vanaf de eerste keer werd geladen is opgelost.",
+                    "De naam van lokale mods is teruggezet naar de mapnaam in plaats van die van de Workshop om problemen te voorkomen.",
+                    "Prestatie voor spelers met veel mods is verbeterd."
                 ]
             }
         ]
@@ -452,9 +452,9 @@
         "Date": "2023-06-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Oplossingen",
                 "Changes": [
-                    "Fixed the crash on launch."
+                    "Crash bij opstarten is opgelost."
                 ]
             }
         ]
@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Oplossingen",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "Bijgewerkt voor de nieuwste gamepatch."
                 ]
             }
         ]
@@ -477,41 +477,41 @@
         "Tagline": "Online profiles, coming through!",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "Online profielen",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "Je kunt nu online een profiel uploaden, max 5 profielen per gebruiker.",
+                    "Geüploade profielen kunnen privé zijn, gedeeld met een ID, of openbaar voor iedereen om te zien.",
+                    "Online profielen kunnen worden gedownload of bijgewerkt als je het profiel al lokaal hebt.",
+                    "Via een nieuwe knop in het tabblad Profielen kun je online profielen ontdekken.",
+                    "Een derde optie toegevoegd aan de 'Profiel toevoegen' pagina om een online profiel te importeren met behulp van het ID."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "Profiel wijzigingen",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
+                    "De 'Profielen' tab in de zijbalk opent nu je profiellijst in plaats van je huidige profielinstellingen.",
+                    "Profiellijst gebruikt nu een rasterweergave, en je kunt schakelen tussen de raster en lijstweergave.",
+                    "Het ontwerp van de bovenste actie knoppen op beide profielpagina's gewijzigd",
+                    "Als je profiel niet opgeslagen veranderingen heeft, zal het Skyve logo nu plaats oplichten.",
+                    "Profielen kunnen nu miniatuur afbeeldingen hebben.",
                     "Profile usages now have separate icons."
                 ]
             },
             {
                 "Name": "New & Updated",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
+                    "Nieuw gebruikersprofiel pagina toegevoegd, toegankelijk door te klikken op de auteur van een mod of profiel. Deze pagina bevat alle profielen en pakketten van gebruikers.",
+                    "Verwijdering door Skyve zal de bestanden nu naar de prullenbak sturen op Windows.",
                     "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
+                    "2 nieuwe knoppen toegevoegd in de Hulp & Logboeken pagina.",
+                    "Compatibiliteit & pakket statussen worden nu aan de rechterkant in de lijst getoond.",
+                    "Kapotte, incompatibielle en verbannen pakketten hebben nu een nieuwe achtergrond in de lijst.",
+                    "Lokale mods hun namen en labels zijn geüpdate.",
+                    "Ontbrekende broncode zal nu een waarschuwing genereren in plaats van een 'abonnement afzeggen' notificatie.",
+                    "Vereiste mods hebben nu een andere UI om je te laten weten dat je ze niet kunt uitsluiten.",
                     "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Prestatie tijdens het opnemen/uitsluiten van pakketten is verbeterd.",
+                    "De taal 'Hongaars' is toegevoegd"
                 ]
             }
         ]
@@ -521,10 +521,10 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Veranderingen",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
+                    "Een optie toegevoegd om controles van internetconnectiviteit te negeren.",
+                    "Een indicator toegevoegd dat een profiel wordt geüpload.",
                     "Added a button to easily view an online profile's contents.",
                     "Fixed an error while fetching steam user info.",
                     "Fixed Asset Editor launch settings not being remembered correctly.",
