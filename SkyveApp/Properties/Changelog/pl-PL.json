@@ -2,7 +2,7 @@
     {
         "Version": "2.2.0",
         "Date": "2023-04-10",
-        "Tagline": "Witamy w erze zmian",
+        "Tagline": "Witamy w erze dziennika zmian",
         "ChangeGroups": [
             {
                 "Name": "Nowy",
@@ -339,11 +339,11 @@
             {
                 "Name": "Naprawy błędów",
                 "Changes": [
-                    "Fixed previous settings and profiles sometimes not carrying over to Skyve.",
-                    "A shortcut will now be created when you first open Skyve after you previously had LOM2.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Naprawiono - poprzednie ustawienia i profile czasami nie były przenoszone do Skyve.",
+                    "Zostanie utworzony skrót na pulpicie przy pierwszym uruchomieniu Skyve, gdy wcześniej zainstalowany był LOM2.",
+                    "Naprawiono rzadki przypadek, w którym informacje o zgodności nie były wczytywane.",
+                    "Włączono możliwość żądania przeglądu pakietu, który jest obecnie uszkodzony.",
+                    "Zmniejszono czułość powiadomienia \"Częściowo pobrane\"."
                 ]
             }
         ]
@@ -355,9 +355,9 @@
             {
                 "Name": "Zmiany",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
-                    "Fixed mods being detected in the local assets folder."
+                    "Poprawiono wydajność aplikacji. Powinna się szybciej ładować i mniej się zacinać.",
+                    "Naprawiono informacje o interakcji pomiędzy podobnymi modyfikacjami pokazywanymi w Raporcie o zgodności, gdy masz tylko jeden z nich.",
+                    "Naprawiono wykrywanie modyfikacji umieszczonych w folderze lokalnym."
                 ]
             }
         ]
@@ -369,9 +369,9 @@
             {
                 "Name": "Naprawy błędów",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Naprawiono zakładkę opcji nieotwierającą się dla macOS i Linux.",
+                    "Naprawiono nieładowanie automatycznie dziennika po otwarciu zakładki Pomoc i Dzienniki.",
+                    "Naprawiono niepoprawną ścieżkę pliku dziennika w Linux."
                 ]
             }
         ]
@@ -383,16 +383,16 @@
             {
                 "Name": "Zmiany",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Panele Steam w menu głównym są teraz domyślnie wyświetlane, nadal możesz je ukryć w ustawieniach modyfikacji.",
+                    "Żądanie sprawdzenia teraz wymaga poprawnego opisu i wysyła Twoje logi z żądaniem. Wyłączenie odpowiedzialności jest wyświetlane obok przycisku \"Wyślij\".",
+                    "Zmniejszenie poziomu raportu modyfikacji, który nie został zaktualizowany od jakiegoś czasu do poziomu \"Info\", aby nie powiadamiał Cię o tym."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Poprawki",
                 "Changes": [
-                    "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Naprawiono podsumowanie zasobów niepokazywane w Panelu.",
+                    "Naprawiono nieprawidłowe działanie statusu \"Nieaktualny\"."
                 ]
             }
         ]
@@ -402,12 +402,12 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Poprawki i zmiany",
                 "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
-                    "Fixed the changelog not opening with some languages.",
-                    "Potentially fixed subscribing to a large amount of items failing/not working."
+                    "Dodano wiadomość, aby poinformować Cię, kiedy zakończy się 'Napraw wszystkie problemy' i 'Uruchom czyszczenie'.",
+                    "Naprawiono rzadki błąd, w którym ładowanie profilu LOT 1 trwało wiecznie.",
+                    "Naprawiono listę zmian nie otwierając się w niektórych językach.",
+                    "Potencjalnie naprawiono sytuację, gdy subskrybowanie dużej ilości elementów nie działało."
                 ]
             }
         ]
@@ -417,31 +417,31 @@
         "Date": "2023-05-29",
         "ChangeGroups": [
             {
-                "Name": "Reworked Subscription Process",
+                "Name": "Zmieniono proces subskrypcji",
                 "Changes": [
-                    "You can now subscribe to packages while the game is open.",
-                    "Subscribing to multiple items in a row will put them in a pending list instead of opening the game each time.",
-                    "Added a box at the bottom left of the app to let you know of any pending subscribe/unsubscribe tasks.",
-                    "Added an advanced option to force the download or delete of packages as soon as you subscribe/unsubscribe to them in Skyve.",
-                    "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning."
+                    "Możesz teraz subskrybować pakiety, gdy gra jest uruchomiona.",
+                    "Subskrybowanie wielu elementów umieści je na liście oczekujących, zamiast otwierać grę za każdym razem.",
+                    "Dodano pole w lewym dolnym rogu aplikacji, aby poinformować Cię o oczekujących zadaniach subskrypcji/anulowania.",
+                    "Dodano w opcjach zaawansowanych ustawienie, aby wymusić pobranie lub usunięcie pakietów, gdy tylko subskrybujesz/anulujesz je w Skyve.",
+                    "Nowo subskrybowane przedmioty nie są już ładowane ponownie, gdy gra jest otwarta.\nW ten sposób zapobiegniesz zawieszaniu się gry, a także nieprawidłowemu działaniu modów."
                 ]
             },
             {
                 "Name": "Nowy",
                 "Changes": [
-                    "Added \"View this Profile's contents\" in profiles' right-click menu.",
-                    "Added a \"Force download\" option in packages' right-click menu.",
-                    "Added more context to some popups",
-                    "Added a \"Download all displayed items\" in the actions in list pages."
+                    "Dodano \"Zobacz zawartość tego profilu\" w menu prawego przycisku myszy dla profilu.",
+                    "Dodano opcję \"Wymuś pobieranie\" w menu prawego przycisku myszy dla pakietów.",
+                    "Dodano więcej informacji do niektórych wyskakujących okienek",
+                    "Dodano \"Pobierz wszystkie wyświetlane pozycje\" w akcjach na stronach listy."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Poprawki",
                 "Changes": [
-                    "Fixed the profile list not updating instantly.",
-                    "Fixed profile packages not showing their workshop name.",
-                    "Fixed packages' steam info not loading from the first time when viewing a profile or collection.",
-                    "Local mods' name has been reverted to the folder name instead of the Workshop one to prevent issues.",
+                    "Naprawiono nieaktualizowanie się listy profili od razu.",
+                    "Naprawiono - pakiety profili nie pokazują ich nazwy z Warsztatu.",
+                    "Naprawiono - informacje o pakietach nie ładują się za pierwszym razem podczas przeglądania profilu lub kolekcji.",
+                    "Nazwa modów lokalnych została przywrócona do nazwy folderu zamiast do nazwy z Warsztatu, aby zapobiec problemom.",
                     "Poprawiono wydajność dla osób z wieloma modyfikacjami."
                 ]
             }
@@ -452,9 +452,9 @@
         "Date": "2023-06-05",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Poprawki",
                 "Changes": [
-                    "Fixed the crash on launch."
+                    "Naprawiono awarię przy uruchomieniu."
                 ]
             }
         ]
@@ -464,9 +464,9 @@
         "Date": "2023-06-12",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Poprawki",
                 "Changes": [
-                    "Updated for the latest game patch."
+                    "Zaktualizowano dla najnowszej wersji gry."
                 ]
             }
         ]
@@ -474,44 +474,44 @@
     {
         "Version": "3.1.0",
         "Date": "2023-06-13",
-        "Tagline": "Online profiles, coming through!",
+        "Tagline": "Profile online nadchodzą!",
         "ChangeGroups": [
             {
-                "Name": "Online Profiles",
+                "Name": "Profile online",
                 "Changes": [
-                    "You can now upload a profile online, up to 5 profiles per user.",
-                    "Uploaded profiles can be private, shared with an ID, or public for everyone to see.",
-                    "Online profiles can be downloaded, or updated if you already have it locally.",
-                    "You can discover online profiles using a new button in the Profiles tab.",
-                    "Added a third option in the 'Add Profile' page to import an online profile using its ID."
+                    "Możesz teraz przesłać profil online, maksymalnie 5 profili na użytkownika.",
+                    "Przesłane profile mogą być prywatne, udostępnione za pomocą identyfikatora lub publiczne dla wszystkich.",
+                    "Profile online mogą zostać pobrane lub zaktualizowane, jeśli masz je już lokalnie.",
+                    "Możesz odkryć profile online za pomocą nowego przycisku w zakładce Profil.",
+                    "Dodano trzecią opcję na stronie \"Dodaj profil\", aby zaimportować profil online za pomocą identyfikatora."
                 ]
             },
             {
-                "Name": "Profile Changes",
+                "Name": "Zmiany w profilach",
                 "Changes": [
-                    "The 'Profiles' tab in the sidebar will now open your profiles list instead of your current profile's settings.",
-                    "Profiles list now uses a Grid View, and you can toggle between the grid & list view.",
-                    "Changed the design of the top action buttons on both profile pages",
-                    "If your profile has un-saved changes, the Skyve logo will now light up purple.",
-                    "Profiles can now have thumbnails.",
-                    "Profile usages now have separate icons."
+                    "Zakładka \"Profile\" na pasku bocznym otworzy teraz listę twoich profili zamiast aktualnych ustawień profilu.",
+                    "Lista profili korzysta teraz z widoku siatki i możesz przełączać pomiędzy widokiem siatki i listy.",
+                    "Zmieniono wygląd górnych przycisków akcji na obu stronach profili",
+                    "Jeśli Twój profil ma niezapisane zmiany, logo Skyve podświetla się teraz na fioletowo.",
+                    "Profile mogą teraz mieć miniatury.",
+                    "Użycie profilu ma teraz odrębne ikony."
                 ]
             },
             {
-                "Name": "New & Updated",
+                "Name": "Nowe i zaktualizowane",
                 "Changes": [
-                    "Added a new User Profile page, accessed by clicking on the author of a mod or profile. This page includes all of the user's profiles & packages.",
-                    "Deletions by Skyve will now send the files to the recycle bin on Windows.",
-                    "Added 6 new reset buttons in the Utilities page.",
-                    "Added 2 new buttons in the Help & Logs page.",
-                    "Compatibility & package statuses are now shown on the right in the list.",
-                    "Broken, incompatible, and banned packages now have a new background in the list.",
-                    "Local mods' name & label have been updated.",
-                    "Missing source code will now generate a warning instead of an unsubscribe notification.",
-                    "Required mods now have a different UI to let you know you can not exclude them.",
-                    "Added a setting in-game to enable hot-reload for mods & assets.",
-                    "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "Dodano nową stronę profilu użytkownika, dostępną poprzez kliknięcie na autora modyfikacji lub profilu. Ta strona zawiera wszystkie profile użytkownika i pakiety.",
+                    "Usunięcia przez Skyve będą teraz wysyłać pliki do kosza w systemie Windows.",
+                    "Dodano 6 nowych przycisków resetowania na stronie Narzędzia.",
+                    "Dodano 2 nowe przyciski na stronie Pomoc i Dzienniki.",
+                    "Statusy kompatybilności i pakietów są teraz wyświetlane po prawej stronie na liście.",
+                    "Uszkodzone, niekompatybilne i zbanowane pakiety mają teraz nowe tło na liście.",
+                    "Nazwa i etykieta lokalnych modyfikacji zostały zaktualizowane.",
+                    "Brakujący kod źródłowy wygeneruje ostrzeżenie zamiast powiadomienia o anulowaniu subskrypcji.",
+                    "Wymagane modyfikacje mają teraz inny interfejs użytkownika, aby poinformować, że nie można ich wykluczyć.",
+                    "Dodano ustawienie w grze, aby włączyć szybkie przeładowanie dla modów i zasobów.",
+                    "Poprawa wydajności przy włączaniu/wyłączaniu pakietów.",
+                    "Dodano język węgierski"
                 ]
             }
         ]
@@ -521,14 +521,14 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Zmiany",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
-                    "Added a button to easily view an online profile's contents.",
-                    "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "Dodano opcję ignorowania kontroli połączenia z Internetem.",
+                    "Dodano wskaźnik, że profil jest przesyłany.",
+                    "Dodano przycisk, aby łatwo wyświetlić zawartość profilu online.",
+                    "Naprawiono błąd podczas pobierania informacji o użytkowniku Steam.",
+                    "Naprawiono ustawienia uruchamiania edytora zasobów, które nie były zapamiętywane poprawnie.",
+                    "Naprawiono aktualizację profilu online."
                 ]
             }
         ]
@@ -538,12 +538,12 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Zmiany",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
-                    "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "Dodano animację ładowania podczas wyświetlania zawartości profilu.",
+                    "Naprawiono pobieranie lub aktualizację profilu nieprawidłowo zapisując niektóre dane, takie jak miniatura.",
+                    "Naprawiono oznaczanie prywatnych pakietów.",
+                    "Naprawiono - niektóre części interfejsu użytkownika niebyły tłumaczone od początku."
                 ]
             }
         ]
