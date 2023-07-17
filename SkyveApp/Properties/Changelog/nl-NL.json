@@ -341,9 +341,9 @@
                 "Changes": [
                     "Herstelde oude instellingen en profielen worden soms niet in Skyve overgedragen.",
                     "Er wordt een snelkoppeling aangemaakt als u Skyve opnieuw opent, wanneer u voorheen LOM2 had.",
-                    "Fixed a rare case where the compatibility info was not loading.",
-                    "Enabled the ability to request a review for a package that is currently broken.",
-                    "Loosened the sensitivity of the 'Partially Downloaded' notification."
+                    "Een zeldzaam geval waarbij de compatibiliteitsinformatie niet geladen was is opgelost.",
+                    "Mogelijkheid om een beoordeling aan te vragen voor een pakket dat momenteel kapot is.",
+                    "Gevoeligheid van de 'Gedeeltelijk gedownload' melding is verlaagd."
                 ]
             }
         ]
@@ -353,10 +353,10 @@
         "Date": "2023-05-23",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Veranderingen",
                 "Changes": [
-                    "Improved the performance of the app. Quicker load times & less stutters are expected.",
-                    "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
+                    "Verbeterde prestaties van de app. Snellere laadtijden & minder stotteren worden verwacht.",
+                    "Interactie tussen gelijksoortige mods opgelost in het Compatibiliteitsrapport wanneer je maar één van deze hebt.",
                     "Fixed mods being detected in the local assets folder."
                 ]
             }
@@ -367,11 +367,11 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Oplossingen",
                 "Changes": [
-                    "Fixed the options tab not opening for macOS & Linux.",
-                    "Fixed the Help & Logs tab not loading your current log automatically.",
-                    "Fixed the log file path being wrong on Linux."
+                    "Problemen met het openen van het Opties tabblad op macOS en Linux zijn opgelost.",
+                    "Probleem waardoor het Hulp & Logboeken tabblad niet automatisch het huidige logboek laad, is opgelost.",
+                    "Probleem waardoor het bestandspad van het logboek verkeerd was in Linux, is opgelost."
                 ]
             }
         ]
@@ -381,18 +381,18 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Veranderingen",
                 "Changes": [
-                    "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
-                    "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
-                    "Reduced the report level of a mod that hasn't been updated in a while to 'Info' so it doesn't notify you about it."
+                    "Steam panelen in het hoofdmenu worden nu standaard weergeven. Je kan ze nogsteeds verbergen in de mod instellingen.",
+                    "Het opvragen van een beoordeling vereist nu een geldige beschrijving en stuurt ook uw logboeken met het verzoek. Een disclaimer wordt weergegeven naast de 'Verzenden' knop.",
+                    "Verminderd het rapportniveau van een mod die al een tijdje niet is bijgewerkt naar 'Info' waardoor het je er niet meer over informeert."
                 ]
             },
             {
-                "Name": "Fixes",
+                "Name": "Oplossingen",
                 "Changes": [
                     "Fixed the asset summary not showing in the dashboard.",
-                    "Fixed the out of date status not working correctly."
+                    "Probleem waardoor de \"verouderd\" status niet werkte is opgelost."
                 ]
             }
         ]
@@ -402,10 +402,10 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Oplossingen & Veranderingen",
                 "Changes": [
-                    "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
-                    "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
+                    "Een bericht toegevoegd om u te laten weten wanneer 'Alle problemen oplossen' & 'Opschonen uitvoeren' eindigt.",
+                    "Een zeldzame bug opgelost waarbij het laden van een LOT 1 profiel voor altijd zou blijven laden.",
                     "Fixed the changelog not opening with some languages.",
                     "Potentially fixed subscribing to a large amount of items failing/not working."
                 ]
@@ -551,13 +551,68 @@
     {
         "Version": "3.1.2",
         "Date": "2023-06-21",
+        "Tagline": "A full rework! -behind the scenes",
         "ChangeGroups": [
             {
                 "Name": "Fixes",
                 "Changes": [
                     "Fixes an error caused by including/excluding mods that have contain assets.",
                     "Fixed the action button on the right of the Compatibility Report list not being clickable.",
-                    "Fixed some packages not showing their successor properly."
+                    "Fixed some packages not showing their successor properly.",
+                    "'Profiles' are now, appropriately, called 'Playsets'.",
+                    "Improved the author info gathering, which will fix the issue of authors not loading.",
+                    "Please report any issues or unusual behaviour on the discord server."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.2.1",
+        "Date": "2023-07-09",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Click-to-filter now uses the Alt key instead of the Ctrl key.",
+                    "You can now select multiple items in the content lists using the Ctrl or Shift keys.",
+                    "Added an 'Open File' option to the right-click menu when selecting a file.",
+                    "Copy all IDs action now includes packages' names and local packages as well.",
+                    "Your current playset's name is now displayed in the main menu in-game.",
+                    "The 'First time setup incomplete' screen now has an ingnore button to manually set up your folder settings instead.",
+                    "'Show Folder Settings' now automatically be turned on if one of the folder settings is incorrect."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.2.2",
+        "Date": "2023-07-13",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Added a grid-view option for all content pages; toggle between list & grid view using the new icons on the top right of the list.",
+                    "Sorting & Grid-view settings are now saved on a per-page basis.",
+                    "Added a 'Load Order' sorting option.",
+                    "Added an option to hide the current playset's name in the main menu.",
+                    "Fixed the current playset's name staying visible while in-game.",
+                    "Fixed playsets disappearing on macOS & Linux."
+                ]
+            }
+        ]
+    },
+    {
+        "Version": "3.2.3",
+        "Date": "2023-07-13",
+        "ChangeGroups": [
+            {
+                "Name": "Changes",
+                "Changes": [
+                    "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once",
+                    "Updated the color design of the app's logo on the top-left.",
+                    "Fixed the incorrect names of packages while viewing a playset's contents.",
+                    "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
+                    "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."
                 ]
             }
         ]
