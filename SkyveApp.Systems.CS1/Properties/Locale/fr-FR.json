@@ -32,8 +32,8 @@
   "UpToDate": "À jour ",
   "StatusUnknown": "Statut inconnu",
   "PartiallyDownloaded": "Partiellement téléchargé",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "Sauvegarde automatique activé",
+  "AutoPlaysetSaveOff": "Sauvegarde automatique désactivé",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "Paramètres de lancement",
   "IncludesItemsYouDoNotHave": "Inclure les éléments que vous n'avez pas",
@@ -94,12 +94,12 @@
   "OpenLocalFolder": "Ouvrir le dossier local contenant ce paquet",
   "ViewOnSteam": "Affichez ce paquet sur Steam",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
-    "Plural": "Re-download all selected Packages"
+    "One": "Re-télécharger ce paquet",
+    "Plural": "Re-télécharger tous les paquets sélectionnés"
   },
   "DownloadPackage": {
-    "One": "Download this package",
-    "Plural": "Download all selected Packages"
+    "One": "Télécharger ce paquet",
+    "Plural": "Télécharger tous les paquets sélectionnés"
   },
   "CopySteamId": "Copiez cet ID Steam",
   "OpenAuthorPage": "Ouvrir la page de l'auteur",
@@ -114,7 +114,7 @@
   "Sorting_Author": "Nom de l'auteur",
   "Sorting_Status": "État du paquet",
   "Sorting_CompatibilityReport": "Rapport de compatibilité",
-  "Sorting_LoadOrder": "Load Order",
+  "Sorting_LoadOrder": "Ordre de chargement",
   "IncreaseItemSize": "Augmenter la taille des éléments dans la liste",
   "FolderSettings": "Paramètres du dossier",
   "GamePath": "Le dossier Steam du Cities: Skylines",
