@@ -16,13 +16,13 @@
   "AddStatus": "Dodaj status",
   "AddInteraction": "Dodaj Interakcję",
   "NotReviewed": "Jeszcze nie przejrzane",
-  "Stable": "Stabilność",
+  "Stable": "Stabilne",
   "NotEnoughInformation": "Za mało informacji",
-  "HasIssues": "Ma problemy",
-  "Broken": "Zniszczone",
+  "HasIssues": "Występują problemy",
+  "Broken": "Popsuty",
   "Incompatible": "Niekompatybilny",
   "CityBuilding": "Budowanie miast",
-  "AssetCreation": "Tworzenie obiektu",
+  "AssetCreation": "Tworzenie zasobów",
   "MapCreation": "Tworzenie mapy",
   "NoAction": "Nic nie rób",
   "SubscribeToPackages": "Subskrybuj połączone pakiety",
@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "Umieszczona muzyka może być chroniona prawem autorskim",
   "IncompleteDescription": "Niekompletny opis",
   "Successor": "Successor",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Załaduj po ..",
   "Alternative": "Alternative",
   "SameFunctionality": "Same Functionality",
   "RequirementAlternative": "Requirement Alternative",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' został pomyślnie wykonany przez jeden z następujących pakietów."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' załaduje się bezpośrednio po '{1}'.",
+    "Plural": "'{0}' załaduje się bezpośrednio po następujących pakietach."
   },
   "Interaction_Identical": "Są to różne wersje tego samego pakietu.\r\n\r\nPowinieneś wybrać tylko jeden z nich.",
   "Status_Succeeded": "'{0}' zakończył się sukcesem '{1}'.\r\n\r\nJuż używasz '{1}' więc nie ma już potrzeby '{0}'.",
@@ -125,7 +125,7 @@
   },
   "Status_DependencyMod": "To jest moda zależności, ale nie wygląda na to, że używasz żadnego pakietu, który tego wymaga.",
   "Status_SourceCodeNotAvailable": "Kod źródłowy tej modyfikacji jest niedostępny. Nie powinieneś go używać, chyba że ufasz jego autorowi.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "Kod źródłowy jest dostępny",
   "Status_MusicCanBeCopyrighted": "Muzyka w tym pakiecie może być chroniona prawem autorskim. Najlepiej nie używać jej podczas streamingu.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
   "OutputText": "Oczekiwane wyniki",
@@ -153,7 +153,7 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Powinieneś wykluczyć '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Wyklucz ten pakiet",
   "Exclude": "Wyklucz",
   "Unsubscribe": "Anuluj subskrypcję",
   "Action_ExcludeOther": {
@@ -212,13 +212,13 @@
   "ApplyChangedBeforeExit": "Masz niezapisane zmiany.\r\n\r\nCzy chcesz zastosować te zmiany przed kontynuowaniem?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Autor {0}, {1}, znany jest jako złośliwy i/lub zawierający szkodliwe treści, takie jak wirusy w ich opakowaniach.",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ReviewRequests": "Przejrzyj żądania {0}",
+  "DeleteRequest": "Usuń żądanie",
+  "ApplyRequestedChanges": "Zastosuj żądane zmiany",
+  "ManagePackage": "Zarządzaj pakietem",
+  "Banned": "Zbanowano",
+  "NoIssues": "Brak problemów",
+  "RequestReviewDisclaimer": "*Twoje Steam ID i logi są wysyłane ze zgłoszeniem",
+  "ScenarioMaking": "Tworzenie scenariusza",
+  "ThemeMaking": "Tworzenie tematu"
 }
