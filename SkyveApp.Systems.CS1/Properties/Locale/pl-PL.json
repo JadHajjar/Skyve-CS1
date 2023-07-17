@@ -1,6 +1,6 @@
 {
   "CompatibilityInfo": "Informacje o zgodności",
-  "PlaysetBubble": "Current Playset",
+  "PlaysetBubble": "Aktualny Profil",
   "StartCities": "Uruchom Cities: Skylines",
   "StopCities": "Zatrzymaj Cities: Skylines",
   "AssetsBubble": "Twoje zasoby",
@@ -32,15 +32,15 @@
   "UpToDate": "Aktualny",
   "StatusUnknown": "Nieznany status",
   "PartiallyDownloaded": "Częściowo pobrane",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
-  "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
+  "AutoPlaysetSaveOn": "Auto-zapis jest włączony",
+  "AutoPlaysetSaveOff": "Auto-zapis jest wyłączony",
+  "TemporaryPlaysetCanNotBeEdited": "Ustawienia profilu tymczasowego zresetują się po ponownym otwarciu aplikacji",
   "LaunchSettings": "Ustawienia uruchomienia",
   "IncludesItemsYouDoNotHave": "Zawiera przedmioty, których nie masz",
   "ContentAndInfo": "Treść i Informacje",
-  "OtherPlaysets": "Other Playsets",
-  "ViewPlaysets": "View Your Playsets",
-  "AddPlayset": "Add Playset",
+  "OtherPlaysets": "Pozostałe profile",
+  "ViewPlaysets": "Zobacz swoje profile",
+  "AddPlayset": "Dodaj profil",
   "LHT": "Ruch leworęczny",
   "NoWorkshop": "Brak pakietów warsztatowych",
   "NoAssets": "Brak niestandardowych obiektów",
@@ -69,20 +69,20 @@
   "ModsNoIssues": "Mody bez problemów",
   "LinkModAssets": "Połącz zasoby z modów do statusu „dołączonego” moda",
   "Preferences": "Preferencje",
-  "PlaysetName": "Playset Name",
-  "RenamePlayset": "Rename the current playset",
+  "PlaysetName": "Nazwa profilu",
+  "RenamePlayset": "Zmień nazwę bieżącego profilu",
   "StartScratch": "Rozpocznij profil od zera",
   "ContinueFromCurrent": "Zachowaj swoje bieżące ustawienia",
   "GamePlay": "Buduj miasta",
   "EditorPlay": "Tworzyć obiekty",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "Wykorzystanie profilu",
   "SomePackagesWillBeDisabled": "Niektóre pakiety zostaną usunięte, zmieniając użycie tego profilu.",
   "AffectedPackagesAre": "Pakiety dotknięte to:",
-  "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
-  "PlaysetReplace": "Load the settings of this playset",
-  "PlaysetMerge": "Merge its items into your current playset",
-  "PlaysetExclude": "Exclude its items from your current playset",
-  "PlaysetDelete": "Delete this playset",
+  "ConfirmDeletePlayset": "Czy na pewno chcesz usunąć profil '{0}'?",
+  "PlaysetReplace": "Załaduj ustawienia tego profilu",
+  "PlaysetMerge": "Scal jego elementy do bieżącego profilu",
+  "PlaysetExclude": "Wyklucz jego elementy z bieżącego profilu",
+  "PlaysetDelete": "Usuń ten profil",
   "ShouldNotBeSubscribed": "Nie subskrybuj",
   "MissingPackages": "Brakujące Pakiety",
   "LoadingScreenMod": "Loading Screen Mod",
@@ -94,12 +94,12 @@
   "OpenLocalFolder": "Otwórz lokalny folder zawierający ten pakiet",
   "ViewOnSteam": "Zobacz ten pakiet na Steam",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
-    "Plural": "Re-download all selected Packages"
+    "One": "Pobierz ponownie ten pakiet",
+    "Plural": "Pobierz ponownie wszystkie zaznaczone pakiety"
   },
   "DownloadPackage": {
-    "One": "Download this package",
-    "Plural": "Download all selected Packages"
+    "One": "Pobierz pakiet",
+    "Plural": "Pobierz wszystkie zaznaczone pakiety"
   },
   "CopySteamId": "Skopiuj ten identyfikator Steam",
   "OpenAuthorPage": "Otwórz stronę autora",
@@ -259,7 +259,7 @@
   "CopyVersionNumber": "Kopiuj numer wersji",
   "SubscribeToItem": {
     "One": "Subscribe from this Package",
-    "Plural": "Subscribe from the selected Packages"
+    "Plural": "Subskrybuj z wybranych pakietów"
   },
   "LoadCollectionTip": "Załaduj listę elementów kolekcji i zarządzaj elementami, które chcesz subskrybować, dołączyć lub wykluczyć z tej kolekcji.",
   "LsmMissingTip": "Przeciągnij i upuść plik raportu LSM lub kliknij, aby wybrać jeden do subskrybowania brakujących zasobów wymienionych w raporcie",
@@ -297,9 +297,9 @@
   "PackageIncludedEnabledTotal": "Pakiety włączone: {0}, z czego {1} to mody i {2} są włączone, Razem: {3}",
   "PackageIncludedAndEnabledTotal": "Pakiety włączone i włączone: {0}, Razem: {1}",
   "AssetIncludedTotal": "Obiekty uwzględnione: {0}, Razem: {1}",
-  "NewPlayset_Tip": "Create or import a new playset",
-  "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "NewPlayset_Tip": "Utwórz lub zaimportuj nowy profil",
+  "TempPlayset_Tip": "Przełącz na tymczasowy profil z bieżącymi ustawieniami",
+  "ViewPlaysets_Tip": "Wyświetl i zarządzaj zapisanymi profilami",
   "AutoSave_Tip": "Automatycznie zapisuj zmiany w modach i zasobach do profilu",
   "LoadEnabled_Tip": "Ładuje włączone obiekty podczas ładowania gry. Ta opcja powinna pozostać włączona, chyba że wiesz, co robisz",
   "LoadUsed_Tip": "Załaduj zasoby, które są używane na mapie, nawet jeśli są wyłączone w grze. Nie jest to związane z ustawieniami zasobów w Skyve",
@@ -316,47 +316,47 @@
   "OBSOLETE": "OBSOLETY",
   "ABANDONED": "PORZUCONY",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "Tej operacji nie można cofnąć!",
+    "Plural": "Ta operacja nie może zostać cofnięta i wpłynie na {0} pakietów"
   },
   "AlwaysOpenFiltersAndActions": "Domyślnie pokaż sekcję filtrów",
   "AlwaysOpenFiltersAndActions_Tip": "Zawsze otwieraj sekcję filtrów podczas wprowadzania karty zawartości",
   "XMLImport": "Importuj konfigurację XML",
   "XMLImportMissingInfo": "Wyświetl i subskrybuj pakiety w dowolnej konfiguracji XML",
   "XMLTip": "Wybierz lub przeciągnij i upuść plik konfiguracyjny XML, aby zarządzać pakietami wymienionymi wewnątrz niego.",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
+  "FavoritePlaysetTotal": "Ulubione profile: {0}, Razem: {1}",
   "FavoriteTotal": "Całkowita liczba profili: {0}",
-  "PlaysetFilter": "Playset Filter",
+  "PlaysetFilter": "Filtr profili",
   "CheckDocumentsFolder": "Upewnij się, że Skyve ma dostęp do folderu dokumentów, używa go do przechowywania ustawień interfejsu użytkownika i języka.",
   "FailedToSaveLanguage": "Nie udało się zapisać wybranego języka",
   "FailedToOpenTC": "Nie udało się otworzyć Zmiany Motywu",
   "FailedToDeleteItem": "Nie udało się usunąć elementu",
   "DeleteAsset": {
-    "One": "Delete this asset",
-    "Plural": "Delete the selected assets"
+    "One": "Usuń zasób",
+    "Plural": "Usuń wybrane zasoby"
   },
   "OpenChangelog": "Otwórz dziennik zmian",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Uwzględnij ten element we wszystkich profilach",
+    "Plural": "Uwzględnij zaznaczone elementy we wszystkich profilach"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Wyklucz ten element we wszystkich profili",
+    "Plural": "Wyklucz zaznaczone elementy we wszystkich profilach"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "Kopiuj nazwę pakietu",
+    "Plural": "Skopiuj nazwy zaznaczonych pakietów"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "Skopiuj nazwę autora",
+    "Plural": "Skopiuj nazwy autorów wybranych pakietów"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
-    "Plural": "Copy the selected packages' folder names"
+    "One": "Skopiuj nazwę folderu",
+    "Plural": "Skopiuj nazwy folderów zaznaczonych pakietów"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
+  "PlaysetNameUsed": "Masz już profil o tej samej nazwie. Zmień nazwę jednego z nich, aby kontynuować.",
   "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
   "Sorting_LastUsed": "Ostatni użyty czas",
   "OpenLinksInBrowser": "Otwórz linki Steam w przeglądarce",
@@ -614,8 +614,8 @@
   "DownloadPlayset": "Download Playset",
   "ReloadAllData": "Przeładuj wszystkie dane",
   "ResetSnoozes": "Resetuj wszystkie drzemki",
-  "ResetModsCache": "Reset mods' cache",
-  "ResetCompatibilityCache": "Reset compatibility's cache",
+  "ResetModsCache": "Zresetuj pamięć podręczną modów",
+  "ResetCompatibilityCache": "Zresetuj pamięć podręczną raportu zgodności",
   "ResetImageCache": "Clear cached images",
   "ResetSteamCache": "Clear Steam cache",
   "SharePlayset": "Upload this playset",
