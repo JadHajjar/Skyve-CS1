@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "포함된 음악에 저작권이 있을 수 있음",
   "IncompleteDescription": "불완전한 정보",
   "Successor": "이하의 계승자 ..",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "이하 이후에 로드 ..",
   "Alternative": "이하의 대안 ..",
   "SameFunctionality": "이하와 같은 기능을 하는 ..",
   "RequirementAlternative": "이하의 필요한 아이템 대안 ..",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' 는 다음 패키지 중 하나로 계승되었습니다."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' 는 '{1}' 직후에 로드됩니다.",
+    "Plural": "'{0}' 는 다음 패키지들 직후에 로드됩니다."
   },
   "Interaction_Identical": "이것들은 같은 패키지의 여러 버전들입니다.\n\n이 중 하나만 선택해야 합니다.",
   "Status_Succeeded": "'{0}' 는 '{1}' 로 계승되었습니다.\n\n이미 '{1}' 를 사용하고 있으므로 '{0}' 는 더 이상 필요하지 않습니다.",
