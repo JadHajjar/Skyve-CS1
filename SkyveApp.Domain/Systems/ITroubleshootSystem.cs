@@ -7,4 +7,10 @@ using System.Threading.Tasks;
 namespace SkyveApp.Domain.Systems;
 public interface ITroubleshootSystem
 {
+	int CurrentStage { get; }
+	bool IsInProgress { get; }
+	int TotalStages { get; }
+
+	void Start(ITroubleshootSettings settings);
+	void Stop();
 }

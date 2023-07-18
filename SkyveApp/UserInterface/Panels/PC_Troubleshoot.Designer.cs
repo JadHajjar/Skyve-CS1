@@ -88,7 +88,7 @@ partial class PC_Troubleshoot
 			this.B_Caused.Size = new System.Drawing.Size(150, 150);
 			this.B_Caused.TabIndex = 4;
 			this.B_Caused.Text = "TroubleshootCaused";
-			this.B_Caused.Load += new System.EventHandler(this.B_Caused_Load);
+			this.B_Caused.Click += new System.EventHandler(this.B_Caused_Load);
 			// 
 			// B_Missing
 			// 
@@ -101,7 +101,7 @@ partial class PC_Troubleshoot
 			this.B_Missing.Size = new System.Drawing.Size(150, 150);
 			this.B_Missing.TabIndex = 5;
 			this.B_Missing.Text = "TroubleshootMissing";
-			this.B_Missing.Load += new System.EventHandler(this.B_Missing_Load);
+			this.B_Missing.Click += new System.EventHandler(this.B_Missing_Load);
 			// 
 			// B_Cancel
 			// 
@@ -167,6 +167,7 @@ partial class PC_Troubleshoot
 			this.B_Mods.Size = new System.Drawing.Size(150, 150);
 			this.B_Mods.TabIndex = 4;
 			this.B_Mods.Text = "Mods";
+			this.B_Mods.Click += new System.EventHandler(this.B_Mods_Click);
 			// 
 			// B_Assets
 			// 
@@ -179,6 +180,7 @@ partial class PC_Troubleshoot
 			this.B_Assets.Size = new System.Drawing.Size(150, 150);
 			this.B_Assets.TabIndex = 5;
 			this.B_Assets.Text = "TroubleshootMissing";
+			this.B_Assets.Click += new System.EventHandler(this.B_Assets_Click);
 			// 
 			// slickButton1
 			// 

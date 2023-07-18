@@ -8,6 +8,9 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_Troubleshoot : PanelContent
 {
+	private bool missing;
+	private bool caused;
+
 	public PC_Troubleshoot()
 	{
 		InitializeComponent();
@@ -54,7 +57,7 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_ModAsset.Show();
 		TLP_New.Hide();
 
-
+		caused = true;
 	}
 
 	private void B_Missing_Load(object sender, EventArgs e)
@@ -62,5 +65,32 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_ModAsset.Show();
 		TLP_New.Hide();
 
+		missing = true;
+	}
+
+	private void B_Mods_Click(object sender, EventArgs e)
+	{
+		ServiceCenter.Get<ITroubleshootSystem>().Start(new TroubleshootSettings
+		{
+			ItemIsMissing = missing,
+			ItemIsCausingIssues = caused,
+			Mods = true
+		});
+	}
+
+	private void B_Assets_Click(object sender, EventArgs e)
+	{
+		ServiceCenter.Get<ITroubleshootSystem>().Start(new TroubleshootSettings
+		{
+			ItemIsMissing = missing,
+			ItemIsCausingIssues = caused,
+		});
+	}
+
+	private class TroubleshootSettings : ITroubleshootSettings
+	{
+		public bool ItemIsCausingIssues { get; set; }
+		public bool ItemIsMissing { get; set; }
+		public bool Mods { get; set; }
 	}
 }
