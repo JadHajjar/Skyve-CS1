@@ -164,7 +164,7 @@
   "PlaysetCreationFailed": "新しいプレイセットを作成できません！ オプションパネルで、フォルダが正しく設定されているか確認して下さい。",
   "UseDebugMono": "Debug Monoを使用",
   "LaunchThroughCities": "Cities.exeから起動",
-  "UnityPlaysetrMode": "Unityのプレイセットを使用",
+  "UnityPlaysetrMode": "Unityプロファイラを使用",
   "NoDlcsNoInternet": "DLCをロードできません。インターネットに接続して下さい。",
   "NoDlcsOpenGame": "検索と一致するDLCはありません",
   "DlcUpdateNotice": "DLCが一覧に表示されない場合は、少なくとも一度はゲームから開いて下さい。",
