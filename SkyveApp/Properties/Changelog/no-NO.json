@@ -511,7 +511,7 @@
                     "Required mods now have a different UI to let you know you can not exclude them.",
                     "Added a setting in-game to enable hot-reload for mods & assets.",
                     "Improved performance while including/excluding packages.",
-                    "Added Hungarian language"
+                    "La til ungarsk språk"
                 ]
             }
         ]
@@ -524,11 +524,11 @@
                 "Name": "Changes",
                 "Changes": [
                     "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
+                    "La til en indikator om at en profil lastes opp.",
                     "Added a button to easily view an online profile's contents.",
                     "Fixed an error while fetching steam user info.",
-                    "Fixed Asset Editor launch settings not being remembered correctly.",
-                    "Fixed updating an online profile not working properly."
+                    "Fikset at instillingene for assetredigerer ikke blir husket korrekt.",
+                    "Fikset at oppdatering av online profil ikke fungerer riktig."
                 ]
             }
         ]
@@ -538,12 +538,12 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Endringer",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
+                    "La til en loadinganimasjon når man ser på innhold i en profil.",
                     "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
-                    "Fixed private packages being marked as .",
-                    "Fixed some parts of the UI not getting translated from the start."
+                    "Fikset private pakker som blir markert som .",
+                    "Fikset at deler av brukergrensesnittet ikke blir oversatt fra starten."
                 ]
             }
         ]
