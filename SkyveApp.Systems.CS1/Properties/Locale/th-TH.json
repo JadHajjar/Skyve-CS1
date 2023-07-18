@@ -1,6 +1,6 @@
 {
   "CompatibilityInfo": "ข้อมูลความเข้ากันได้",
-  "PlaysetBubble": "Current Playset",
+  "PlaysetBubble": "เพลย์เซ็ตปัจจุบัน",
   "StartCities": "เปิด Cities: Skylines",
   "StopCities": "หยุด Cities: Skylines",
   "AssetsBubble": "แอสเซทของคุณ",
@@ -32,15 +32,15 @@
   "UpToDate": "รุ่นล่าสุด",
   "StatusUnknown": "ไม่ทราบสถานะ",
   "PartiallyDownloaded": "ดาวน์โหลดแล้วบางส่วน",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
-  "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
+  "AutoPlaysetSaveOn": "เซฟอัตโนมัติเปิดใช้งานอยู่",
+  "AutoPlaysetSaveOff": "เซฟอัตโนมัติปิดใช้งานอยู่",
+  "TemporaryPlaysetCanNotBeEdited": "การตั้งค่าชั่วคราวของเพลย์เซ็ต จะรีเซ็ตเมื่อคุณเปิดแอปใหม่อีกครั้ง",
   "LaunchSettings": "ตั้งค่าการเปิดเกม",
   "IncludesItemsYouDoNotHave": "ประกอบด้วยไอเทมที่คุณไม่มี",
   "ContentAndInfo": "เนื้อหากับข้อมูล",
-  "OtherPlaysets": "Other Playsets",
-  "ViewPlaysets": "View Your Playsets",
-  "AddPlayset": "Add Playset",
+  "OtherPlaysets": "เพลย์เซ็ตเพิ่มเติม",
+  "ViewPlaysets": "ดูเพลย์เซ็ตของคุณ",
+  "AddPlayset": "เพิ่มเพลย์เซ็ต",
   "LHT": "การจราจรซ้ายมือ",
   "NoWorkshop": "ปิดการใช้งานแพ็กเกจเวิร์กชอป",
   "NoAssets": "ปิดการใช้งานแอสเซททั้งหมด",
@@ -69,20 +69,20 @@
   "ModsNoIssues": "ม็อดที่ไม่มีปัญหา",
   "LinkModAssets": "แอสเซทที่เชื่อมโยงกันกับม็อด จากม็อดที่มีสถานะ 'รวมอยู่ในเกม'",
   "Preferences": "กำหนดลักษณะ",
-  "PlaysetName": "Playset Name",
-  "RenamePlayset": "Rename the current playset",
+  "PlaysetName": "ชื่อเพลย์เซ็ต",
+  "RenamePlayset": "เปลี่ยนชื่อเพลย์เซ็ตปัจจุบัน",
   "StartScratch": "เริ่มสร้างโพร์ไฟล์ใหม่ตั้งแต่ต้น",
   "ContinueFromCurrent": "รักษาการตั้งค่าปัจจุบันของคุณ",
   "GamePlay": "สร้างเมือง",
   "EditorPlay": "สร้างแอสเซท",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "เพลย์เซ็ตที่ใช้งานอยู่",
   "SomePackagesWillBeDisabled": "บางแพ็กเกจอาจถูกลบออกหากเปลี่ยนมาใช้โพร์ไฟล์นี้",
   "AffectedPackagesAre": "มีผลกระทบต่อแพ็กเกจ",
-  "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
-  "PlaysetReplace": "Load the settings of this playset",
-  "PlaysetMerge": "Merge its items into your current playset",
-  "PlaysetExclude": "Exclude its items from your current playset",
-  "PlaysetDelete": "Delete this playset",
+  "ConfirmDeletePlayset": "แน่ใจไหมว่าต้องการลบเพลย์เซ็ต '{0}'?",
+  "PlaysetReplace": "โหลดการตั้งค่าของเพลย์เซ็ตนี้",
+  "PlaysetMerge": "ผสานไอเทมเหล่านี้เข้ากับเพลย์เซ็ตปัจจุบันของคุณ",
+  "PlaysetExclude": "แยกไอเทมเหล่านี้ออกจากเพลย์เซ็ตปัจจุบันของคุณ",
+  "PlaysetDelete": "ลบเพลย์เช็ตนี้",
   "ShouldNotBeSubscribed": "อย่าสมัครสมาชิก",
   "MissingPackages": "แพ็กเกจที่สูญหาย",
   "LoadingScreenMod": "Loading Screen Mod",
@@ -94,12 +94,12 @@
   "OpenLocalFolder": "เปิดโฟลเดอร์ภายในเครื่องที่มีแพ็กเกจนี้",
   "ViewOnSteam": "ดูแพ็กเกจนี้บนสตีม",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
-    "Plural": "Re-download all selected Packages"
+    "One": "ดาวน์โหลดแพ็กเกจนี้อีกครั้ง",
+    "Plural": "ดาวน์โหลดแพ็กเกจที่เลือกทั้งหมดอีกครั้ง"
   },
   "DownloadPackage": {
-    "One": "Download this package",
-    "Plural": "Download all selected Packages"
+    "One": "ดาวน์โหลดแพ็กเกจนี้",
+    "Plural": "ดาวน์โหลดแพ็กเกจทั้งหมดที่เลือก"
   },
   "CopySteamId": "คัดลอกสตีม ID",
   "OpenAuthorPage": "เปิดเพจของผู้สร้าง",
@@ -123,9 +123,9 @@
   "VirtualAppDataPath": "\"โฟลเดอร์ App Data ของ Cities: Skylines\" ที่แท้จริงบนระบบ Linux/Mac",
   "ChangingFoldersRequiresRestart": "การเปลี่ยนที่อยู่ไฟล์ที่แอปใช้ จำเป็นจะต้องเริ่มโปรแกรมใหม่ คุณต้องการดำเนินการต่อหรือไม่",
   "ShowDatesRelatively": "แสดงเวลาโดยอ้างอิงจากปัจจุบัน",
-  "CouldNotCreatePlayset": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
-  "TemporaryPlayset": "Temporary Playset",
-  "CreatePlaysetHere": "Create a new playset or load a previous one by clicking here",
+  "CouldNotCreatePlayset": "ไม่สามารถสร้างเพลย์เซ็ตใหม่ได้ โปรดตรวจสอบในแผงการตั้งค่าให้แน่ใจว่าโฟลเดอร์การตั้งค่าได้ถูกกำหนดไว้แล้วอย่างถูกต้อง",
+  "TemporaryPlayset": "เพลย์เซ็ตชั่วคราว",
+  "CreatePlaysetHere": "คลิกที่นี่เพื่อสร้างเพลย์เซ็ตใหม่หรือโหลดจากเพลย์เซ็ตก่อนหน้า",
   "Maintenance": "การบํารุงรักษา",
   "DisableNewModsByDefault": "ปิดการใช้งานม็อดที่เพิ่งสมัครสมาชิกใหม่ตามค่าเริ่มต้น",
   "DisableNewAssetsByDefault": "ปิดการใช้งานแอสเซทที่เพิ่งสมัครสมาชิกใหม่ตามค่าเริ่มต้น",
@@ -145,22 +145,22 @@
   "FilterOutPackagesWithMods": "ซ่อนม็อดในหน้าแพ็กเกจ",
   "FilterOutPackagesWithOneAsset": "ซ่อน แพ็กเกจแอสเซทเดี่ยวจากหน้าแพ็กเกจ",
   "DeletePackage": {
-    "One": "Delete this package",
-    "Plural": "Delete the selected packages"
+    "One": "ลบแพ็กเกจนี้",
+    "Plural": "ลบแพ็กเกจทั้งหมดที่เลือก"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
-    "Plural": "Unsubscribe from the selected packages"
+    "One": "ยกเลิกการสมัครสมาชิกจากแพ็กเกจนี้",
+    "Plural": "ยกเลิกการสมัครสมาชิกจากแพ็กเกจที่เลือก"
   },
   "CopyWorkshopId": {
-    "One": "Copy this package's Workshop ID",
-    "Plural": "Copy the selected packages' Workshop IDs"
+    "One": "คัดลอก ID เวิร์คชอปของแพ็กเกจนี้",
+    "Plural": "คัดลอก ID เวิร์คชอปของแพ็กเกจที่เลือก"
   },
   "CopyAuthorLink": "คัดลองลิงก์โพร์ไฟล์ของผู้สร้าง",
   "CopyAuthorId": "คัดลอกไอดีของผู้สร้าง",
-  "YourPlaysets": "Your Playsets",
-  "UnFavoriteThisPlayset": "Un-Favorite this playset",
-  "FavoriteThisPlayset": "Favorite this playset",
+  "YourPlaysets": "เพลย์เซ็ตของคุณ",
+  "UnFavoriteThisPlayset": "นำเพลย์เซ็ตนี้ออกจากรายการชื่นชอบ",
+  "FavoriteThisPlayset": "เพิ่มเพลย์เซ็นนี้ในรายการชื่นชอบ",
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "ใช้ Debug Mono",
   "LaunchThroughCities": "เปิดผ่าน Cities.exe",
@@ -182,7 +182,7 @@
   "AdvancedLaunchOptions": "แสดงตัวเลือกการเปิดเกมเพิ่มเติม",
   "MovePackageToLocalFolder": {
     "One": "Copy package to a local folder",
-    "Plural": "Copy all selected packages to a local folder"
+    "Plural": "คัดลอกแพ็กเกจที่เลือกทั้งหมดไปยังโฟลเดอร์ภายในเครื่อง"
   },
   "AllItems": "ไอเทมทั้งหมด",
   "TotalItems": "ไอเทมทั้งหมด",
@@ -208,15 +208,15 @@
   "LsmImportUnusedInfo": "ดูและลบแอสเซทที่ไม่ได้ใช้",
   "SkipFileInfo": "เลือกไฟล์ ข้ามไฟล์ ที่จะใช้กับม็อดหน้าจอโหลด (LSM)",
   "SaveFileInfo": "เลือกเซฟเกมที่ต้องการให้โหลดอัตโนมัติเมื่อคุณเปิดเกม",
-  "LoadPlayset": "Load Playset",
+  "LoadPlayset": "โหลดเพลย์เซ็ต",
   "CopyAuthorSteamId": {
-    "One": "Copy this Author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "คัดลอก ID ของผู้สร้าง",
+    "Plural": "คัดลอก ID ของผู้สร้างแพ็กเกจที่เลือก"
   },
   "ShowingFilteredItems": "แสดง {0} จาก {1} รายการทั้งหมด",
-  "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
+  "DropNewPlayset": "วางหรือเลือกไฟล์ .json หรือ .xml ของเพลย์เซ็ตตรงนี้เพื่อนำเข้า",
   "ThemeUIScale": "ธิมและขนาด UI",
-  "SearchPlaysets": "Search through these Playsets..",
+  "SearchPlaysets": "ค้นหาไปตามเพลย์เซ็ตของคุณ..",
   "AdvancedSettings": "ตั้งค่าขั้นสูง",
   "HelpTranslate": "ปรับการแปลให้ดีขึ้น",
   "HelpReset": "วิธีใช้ & รีเซ็ต",
@@ -258,8 +258,8 @@
   "AssetOutOfDatePlural": "แอสเซทเก่าแล้ว",
   "CopyVersionNumber": "คัดลอกเลขเวอร์ชัน",
   "SubscribeToItem": {
-    "One": "Subscribe from this Package",
-    "Plural": "Subscribe from the selected Packages"
+    "One": "สมัครสมาชิกแพ็กเกจนี้",
+    "Plural": "สมัครสมาชิกแพ็กเกจที่เลือก"
   },
   "LoadCollectionTip": "โหลดรายการไอเทมของชุดสะสม แล้วจัดการไอเทมที่คุณต้องการสมัครสมาชิก รวมอยู่ในเกม หรือแยกออกจากเกม ด้วยรายการจากชุดสะสมนี้",
   "LsmMissingTip": "ลากแล้ววางไฟล์รายงาน LSM ที่นี่ หรือคลิกเพื่อเลือกมาสักไฟล์ เพื่อสมัครสมาชิกแอสเซทที่อยู่ในรายการแอสเซทสูญหาย",
@@ -297,9 +297,9 @@
   "PackageIncludedEnabledTotal": "แพ็กเกจที่รวมอยู่ในเกม: {0}, ที่เป็นม็อด {1} และที่เปิดใช้งาน {2}, ทั้งหมด: {3}",
   "PackageIncludedAndEnabledTotal": "แพ็กเกจที่รวมอยู่ในเกม และเปิดใช้งาน: {0}, ทั้งหมด: {1}",
   "AssetIncludedTotal": "แอสเซทที่รวมอยู่ในเกม: {0}, ทั้งหมด: {1}",
-  "NewPlayset_Tip": "Create or import a new playset",
-  "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "NewPlayset_Tip": "สร้างหรือนำเข้าเพลย์เซ็ตใหม่",
+  "TempPlayset_Tip": "เปลี่ยนไปเป็นเพลย์เซ็ตชั่วคราวด้วยการตั้งค่าปัจจุบันของคุณ",
+  "ViewPlaysets_Tip": "ดูและจัดการเพลย์เซ็ตที่คุณบันทึกไว้",
   "AutoSave_Tip": "บันทึกการเปลี่ยนแปลงม็อดและแอสเซท ไปยังโพร์ไฟล์ของคุณโดยอัตโนมัติ",
   "LoadEnabled_Tip": "โหลดแอสเซทที่เปิดใช้งานในระหว่างการโหลดเกม ควรเปิดใช้งานไว้ เว้นแต่คุณทราบอยู่แล้วว่าคุณกำลังทำอะไรอยู่",
   "LoadUsed_Tip": "โหลดแอสเซทที่ใช้ในแผนที่ของคุณ แม้ว่ามันจะถูกปิดการใช้งานในเกมก็ตาม ตัวเลือกนี้จะไม่เกี่ยวข้องกับการตั้งค่าแอสเซทภายใน Skyve",
@@ -316,7 +316,7 @@
   "OBSOLETE": "เลิกใช้แล้ว",
   "ABANDONED": "ถูกละทิ้ง",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
+    "One": "การกระทํานี้ไม่สามารถย้อนกลับได้",
     "Plural": "This action can not be reversed. And will affect {0} packages"
   },
   "AlwaysOpenFiltersAndActions": "แสดงช่องตัวกรองตามค่าเริ่มต้น",
@@ -324,54 +324,54 @@
   "XMLImport": "นำเข้าไฟล์ XML การกำหนดค่า",
   "XMLImportMissingInfo": "อ่านไฟล์ XML การกำหนดค่า แล้วสมัครสมาชิกแพ็กเกจในไฟล์เหล่านั้น",
   "XMLTip": "เลือก หรือลากแล้วปล่อย เพื่อจัดการแพ็กเกจที่อยู่ในรายการ ของไฟล์ XML config",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
+  "FavoritePlaysetTotal": "เพลย์เซ็ตที่ชื่นชอบ: {0} ทั้งหมด: {1}",
   "FavoriteTotal": "โพร์ไฟล์ทั้งหมด: {0}",
-  "PlaysetFilter": "Playset Filter",
+  "PlaysetFilter": "กรองเพลย์เซ็ต",
   "CheckDocumentsFolder": "ตรวจสอบให้แน่ใจว่า Skyve สามารถเข้าถึงโฟลเดอร์เอกสารของคุณ เพื่อใช้จัดเก็บข้อมูลการตั้งค่า UI และภาษาของคุณ",
   "FailedToSaveLanguage": "ล้มเหลวในการบันทึกภาษาที่เลือก",
   "FailedToOpenTC": "ล้มเหลวในการเปิด Theme Changer",
   "FailedToDeleteItem": "ล้มเหลวในการลบไอเทม",
   "DeleteAsset": {
-    "One": "Delete this asset",
-    "Plural": "Delete the selected assets"
+    "One": "ลบแอสเซทนี้",
+    "Plural": "ลบแอสเซทที่เลือก"
   },
   "OpenChangelog": "เปิดบันทึกการเปลี่ยนแปลง",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "บรรจุไอเทมนี้เข้าไปในทุกโพร์ไฟล์ของคุณ",
+    "Plural": "บรรจุไอเทมที่เลือกเข้าไปในทุกโพร์ไฟล์ของคุณ"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "แยกไอเทมนี้ออกจากทุกโพร์ไฟล์ของคุณ",
+    "Plural": "แยกไอเทมที่เลือกออกจากทุกโพร์ไฟล์ของคุณ"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "คัดลอกชื่อแพ็กเกจนี้",
+    "Plural": "คัดลอกชื่อแพ็กเกจที่เลือก"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "คัดลอกชื่อผู้สร้าง",
+    "Plural": "คัดลอกชื่อของผู้สร้างแพ็กเกจที่เลือก"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
-    "Plural": "Copy the selected packages' folder names"
+    "One": "คัดลอกชื่อโฟลเดอร์นี้",
+    "Plural": "คัดลอกชื่อโฟลเดอร์ของแพ็กเกจที่เลือก"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
-  "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
+  "PlaysetNameUsed": "คุณมีเพลย์เซ็ตที่ใช้ชื่อเดียวกันอยู่ โปรดเปลี่ยนชื่อของไฟล์ไดไฟล์หนึ่งเพื่อดำเนินการต่อ",
+  "FailedToImportLegacyPlayset": "ล้มเหลวในการแปลงเพลย์เซ็ตรุ่นเก่า",
   "Sorting_LastUsed": "ครั้งสุดท้ายที่ใช้",
   "OpenLinksInBrowser": "เปิดลิ้งก์สตีมบนบราวน์เตอร์ของคุณ",
   "OpenLinksInBrowser_Tip": "เปลี่ยนลิงก์สตีม เพื่อเปิดในเบราว์เซอร์เริ่มต้นของคุณ แทนที่การเปิดในแอปพลิเคชั่นสตีม",
-  "PlaysetStillLoading": "Your playset is still loading, please wait before exiting this page.",
-  "ApplyPlaysetNameBeforeExit": "Please finish editing the playset's name before exiting this page.",
+  "PlaysetStillLoading": "เพลย์เซ็ตของคุณยังคงโหลดอยู่ โปรดรอสักครู่ก่อนที่จะออกจากหน้านี้",
+  "ApplyPlaysetNameBeforeExit": "โปรดแก้ไขชื่อเพลย์เซ็ตให้เสร็จสิ้น ก่อนที่จะออกจากหน้านี้",
   "SteamNotOpenTo": "สตีมไม่ได้ทำงานอยู่ในขณะนี้",
   "OpenSteamToContinue": "โปรดเปิดสตีมเพื่อให้สตีมทำงานก่อนที่คุณจะเริ่มงานนี้",
-  "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
-  "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's color",
-  "EditPlaysetName": "Edit this playset's name",
-  "SavePlaysetChanges": "Save the current package settings to this playset's file",
+  "IncludeExcludeOtherPlayset": "บรรจุเข้า / แยกออก {0} จากเพลย์เซ็ต '{1}'",
+  "OpenPlaysetFolder": "ดูไฟล์ของเพลย์เซ็ตนี้บนคอมพิวเตอร์ของคุณ",
+  "ChangePlaysetColor": "เปลี่ยนสีเพลย์เซ็ตนี้",
+  "EditPlaysetName": "แก้ไขชื่อเพลย์เซ็ต",
+  "SavePlaysetChanges": "บันทึกการตั้งค่าแพ็กเกจปัจจุบันไปยังไฟล์ของเพลย์เซ็ตนี้",
   "Sorting_Color": "สีโพร์ไฟล์",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
+  "CreateShortcutPlayset": "สร้างทางลัดบนเดสก์ท็อปของคุณ",
   "AskToLaunchGameForShortcut": "คุณต้องการสร้างคำสั่งลัดเพื่อเปิดเกมด้วยโพร์ไฟล์ของคุณใช่หรือไม่?",
   "TextImportMissingInfo": "โหลดไฟล์ข้อความที่มีสตีมไอดี เพื่อให้ง่ายต่อการจัดการ หรือสมัครสมาชิก",
   "ImportFromText": "นำเข้าจากข้อความ",
@@ -379,8 +379,8 @@
   "XMLImportInfo": "คุณสามารถใช้ไฟล์จาก BOB, Tree Brush, Theme Mix และอื่น ๆ",
   "ImportFromTextInfo": "รองรับฟอร์แมตที่เป็นข้อความ",
   "LsmImportInfo": "ตรวจสอบให้แน่ใจว่าได้เลือกไฟล์ 'รายงาน' แล้ว",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "ไม่มีโพร์ไฟล์จะแสดง",
+  "NoPlaysetsMatchFilters": "ไม่มีโพร์ไฟล์ที่ตรงกับการค้นหาของคุณ",
   "Your Save-games": "เซฟเกมของคุณ",
   "App Data": "App Data",
   "Custom Maps": "แผนที่ปรับแต่ง",
@@ -404,7 +404,7 @@
   "DeleteAll": "ลบไอเทมทั้งหมดที่แสดง",
   "FlipItemCopyFilterAction": "สับเปลี่ยนวิธีการคลิกเพิ่มเงื่อนไข ไปยังการกรองเนื้อหา",
   "FlipItemCopyFilterAction_Tip": "สลับค่าเริ่มต้นของการคลิกที่ป้าย จากปกติที่ต้องกด Ctrl ค้างไว้แล้วคลิกที่ป้าย เพื่อเพิ่มเงื่อนไขไปยังการกรองการแสดงผล เปลี่ยนไปเป็น แค่คลิกธรรมดาก็เพิ่มไปยังเงื่อนไขการกรองได้",
-  "AltClickTo": "Alt+Click to {0}",
+  "AltClickTo": "Alt+Click เพื่อ {0}",
   "FilterByThisAuthor": "กรองจากผู้สร้าง",
   "AddToSearch": "เพิ่ม '{0}' ไปยังการค้นหาของคุณ",
   "CopyToClipboard": "คัดลอก '{0}' ไปยังคลิปบอร์ดของคุณ",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "เมื่อเปิดเกมให้หยุดการทำงานเครื่องมืออัตโนมัติ ในการตรวจสอบแพ็กเกจที่คุณไม่ได้สมัครสมาชิกแล้ว",
   "CustomLaunchArguments": "อาร์กิวเมนต์การเปิดเกมแบบกำหนดเอง",
   "LaunchArgsInfo": "เพิ่มอาร์กิวเมนต์สำหรับใช้ในการเปิดเกม",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "แพ็กเกจที่ไม่มีใน '{0}'",
   "UnusedLSMReport": "แอสเซทที่ LSM แจ้งว่าไม่ได้ใช้",
   "MissingLSMReport": "แอสเซทที่ LSM แจ้งว่าสูญหาย",
   "SearchGenericPackages": "ค้นหาผ่านแพ็กเกจเหล่านี้..",
@@ -508,20 +508,20 @@
     "Plural": "แสดง {0} {1}, {2}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "แสดง {0} {1}, {2} ที่เลือก",
+    "Plural": "แสดง {0} {1}, {2} ที่เลือก"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "แสดง {0} {1}, {2} ที่เลือก, {3}",
+    "Plural": "แสดง {0} {1}, {2} ที่เลือก, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} ถูกซ่อนเนื่องจากถูกใช้งานในโพร์ไฟล์ของคุณ",
     "Plural": "{0} {1} ถูกซ่อนเนื่องจากถูกใช้งานในโพร์ไฟล์ของคุณ"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "แก้ไขข้อมูลความเข้ากันได้ของแพ็กเกจนี้",
+    "Plural": "แก้ไขข้อมูลความเข้ากันได้ของแพ็กเกจที่เลือก"
   },
   "AnyIssue": "ปัญหาต่าง ๆ",
   "AnyUsage": "ถูกใช้งาน",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "ล้มเหลวในการส่งคำร้องขอตรวจสอบ '{0}'\n\n{1}",
   "SendReview": "ส่งคำร้องขอให้ทำการตรวจสอบ",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "แก้ไขแท็กของแพ็กเกจนี้",
+    "Plural": "แก้ไขแท็กของไอเทมที่เลือก"
   },
   "ShowAllReferencedPackages": "แสดงแพ็กเกจที่ถูกแยกออกจากเกมในแท็บ 'การอ้างอิง'",
   "ShowAllReferencedPackages_Tip": "แสดงทั้งแพ็กเกจที่ถูกแยกออกและแพ็กเกจที่ถูกรวมเข้าไว้ในเกมโดยอ้างอิงจากแพ็กเกจที่คุณกำลังดูอยู่",
@@ -584,7 +584,7 @@
     "One": "ในการดำเนินการนี้คุณจะยกเลิกการสมัครสมาชิกแพ็กเกจ {0}",
     "Plural": "ในการดำเนินการนี้คุณจะยกเลิกการสมัครสมาชิกแพ็กเกจ {0}"
   },
-  "ViewThisPlaysetsPackages": "View this playset's contents",
+  "ViewThisPlaysetsPackages": "แสดงเนื้อหาของเพลย์เซ็ตนี้",
   "PendingDownloads": {
     "One": "{0} ไอเทมรอการดาวน์โหลด",
     "Plural": "{0} ไอเทมรอการดาวน์โหลด"
@@ -600,54 +600,54 @@
   "RequestOption1": "รายงานปัญหาหรือเพิ่มข้อมูลสิ่งที่ขาดหายไป",
   "RequestOption2": "เพิ่มสถานะการขายหายไปของแพ็กเกจ",
   "RequestOption3": "เพิ่มการขาดหายไปของแพ็กเกจอื่นที่โต้ตอบกับแพ็กเกจนี้",
-  "CurrentPlayset": "Current Playset",
+  "CurrentPlayset": "เพลย์เซ็ตปัจจุบัน",
   "References": "รายการอ้างอิง",
   "OpenLog": "เปิดไฟล์ Log",
   "Sort By": "เรียงตาม",
   "OpenCitiesAppData": "เปิดโฟลเดอร์ AppData ของ C:S",
   "FailedToFetchLogs": "ล้มเหลวในการอ่าน Log ของคุณ",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "สำรวจเพลย์เซ็ต",
   "AllUsages": "ทั้งหมดที่ใช้",
   "Invalid": "ไม่ถูกต้อง",
-  "UpdatePlayset": "Update Playset",
-  "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
-  "DownloadPlayset": "Download Playset",
+  "UpdatePlayset": "อัปเดตเพลย์เซ็ต",
+  "FailedToRetrievePlaysets": "ล้มเหลวในการรับข้อมูลการสำรวจเพลย์เซ็ต",
+  "DownloadPlayset": "ดาวน์โหลดเพลย์เซ็ต",
   "ReloadAllData": "โหลดข้อมูลทั้งหมดใหม่",
   "ResetSnoozes": "รีเช็ตการปิดการแจ้งเตือนทั้งหมด",
   "ResetModsCache": "รีเซ็ตแคชของม็อด",
   "ResetCompatibilityCache": "รีเซ็ตแคชของความเข้ากันได้",
   "ResetImageCache": "ล้างแคชของรูปภาพ",
   "ResetSteamCache": "ล้างแคชของสตีม",
-  "SharePlayset": "Upload this playset",
+  "SharePlayset": "อัปโหลดเพลย์เซ็ตนี้",
   "ResetInfo": "คำเตือน! การตั้งค่าใหม่นั้น จะไม่สามารถย้อนกลับเป็นค่าเดิมได้",
-  "FailedToDownloadPlayset": "Failed to download this playset.\r\n\r\nPlease try again later.",
-  "UpdatePlaysetTip": "Update your local version of this playset",
-  "DownloadPlaysetTip": "Download this playset to your local computer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail picture",
+  "FailedToDownloadPlayset": "ดาวน์โหลดเพลย์เซ็ตนี้ไม่สำเร็จ\n\nกรุณาลองใหม่อีกครั้ง",
+  "UpdatePlaysetTip": "อัปเดตเพลย์เซ็ตนี้ให้กับเวอร์ชันที่อยู่ในเครื่องของคุณ",
+  "DownloadPlaysetTip": "ดาวน์โหลดเพลย์เซ็ตนี้ไปยังเครื่องคอมพิวเตอร์ของคุณ",
+  "EditPlaysetThumbnail": "แก้ไขภาพตัวอย่างของเพลย์เซ็ตนี้",
   "MakePublic": "ทำให้โพร์ไฟล์นี้เป็นสาธารณะ",
   "MakePrivate": "ทำให้โพร์ไฟล์นี้เป็นส่วนตัว",
-  "CopyPlaysetLink": "Copy this playset's ID",
-  "FailedToUploadPlayset": "Failed to upload your playset",
-  "FailedToDeletePlayset": "Failed to delete your playset",
-  "FailedToUpdatePlayset": "Failed to update your playset",
+  "CopyPlaysetLink": "คัดลอก ID ของเพลย์เซ็ตนี้",
+  "FailedToUploadPlayset": "ล้มเหลวในการอัปโหลดเพลย์เซ็ตของคุณ",
+  "FailedToDeletePlayset": "ล้มเหลวในการลบเพลย์เซ็ตของคุณ",
+  "FailedToUpdatePlayset": "ล้มเหลวในการอัปเดตเพลย์เซ็ตของคุณ",
   "ImportFromLink": "นำเข้าโพร์ไฟล์โดยใช้ ID ของโพร์ไฟล์",
-  "PastePlaysetId": "Paste the ID of the playset you'd like to import",
+  "PastePlaysetId": "วาง ID ของเพลย์เซ็ตที่คุณต้องการนำเข้า",
   "AssumeInternetConnectivity": "ละเว้นการตรวจสอบการเชื่อมต่ออินเทอร์เน็ต",
   "AssumeInternetConnectivity_Tip": "ข้ามการตรวจสอบอินเทอร์เน็ตแล้วสมมติว่าคุณได้มีการเชื่อมต่อแล้วโดยอัตโนมัติ",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
-  "AddTagBox": "Add a new tag here",
+  "SelectAll": "เลือกไอเทมทั้งหมดที่แสดง",
+  "DeselectAll": "ยกเลิกการเลือกไอเทมทั้งหมดที่แสดง",
+  "AddTagBox": "เพิ่มแท็กใหม่ที่นี่",
   "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
   "EditTagsOfPackage": {
     "One": "Edit all of this package's assets' Tags",
     "Plural": "Edit all of the selected packages' assets' Tags"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "แท็กที่กำหนดเอง: {0}",
+    "Plural": "แท็กที่กำหนดเอง: {0} แพ็กเกจ"
   },
-  "CustomTags": "Custom Tags",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
+  "CustomTags": "แท็กที่กำหนดเอง",
+  "WorkshopAndGameTags": "เวิร์กชอป & แท็กในเกม",
   "TroubleshootIssues": "Troubleshoot Issues",
   "ViewTroubleshootOptions": "View troubleshooting options",
   "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
