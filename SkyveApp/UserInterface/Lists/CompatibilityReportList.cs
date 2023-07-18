@@ -272,7 +272,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		if (date.HasValue)
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
-			rects.DateRect = e.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
+			rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 50), labelRect, ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
 			labelRect.Y -= Padding.Top + rects.DateRect.Height;
 		}
 
@@ -281,7 +281,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			rects.VersionRect = e.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
+			rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.BackColor, 40), labelRect, ContentAlignment.BottomLeft, true, mousePosition: CursorLocation);
 			labelRect.Y += Padding.Top + rects.VersionRect.Height;
 		}
 
@@ -466,7 +466,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 				{
 					foreach (var item in tags)
 					{
-						tagRect.X += Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
+						tagRect.X += Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
 					}
 				}
 
@@ -550,7 +550,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 	{
 		if (e.Item.Package.IsLocal)
 		{
-			e.DrawLabel(Path.GetFileName(e.Item.Package.LocalParentPackage?.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.MiddleLeft, false, mousePosition: CursorLocation);
+			e.Graphics.DrawLabel(Path.GetFileName(e.Item.Package.LocalParentPackage?.Folder), IconManager.GetSmallIcon("I_Folder"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.MiddleLeft, false, mousePosition: CursorLocation);
 			rects.AuthorRect = Rectangle.Empty;
 			return;
 		}
@@ -594,7 +594,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		}
 		else
 		{
-			rects.AuthorRect = e.DrawLabel(author?.Name, IconManager.GetSmallIcon("I_Developer"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.TopLeft, true, mousePosition: CursorLocation);
+			rects.AuthorRect = e.Graphics.DrawLabel(author?.Name, IconManager.GetSmallIcon("I_Developer"), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.ButtonColor, 30), rects.AuthorRect, ContentAlignment.TopLeft, true, mousePosition: CursorLocation);
 		}
 	}
 
@@ -644,7 +644,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		foreach (var item in tags)
 		{
-			tagRect.X += Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, true).Width;
+			tagRect.X += Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, true).Width;
 		}
 	}
 

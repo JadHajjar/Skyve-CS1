@@ -17,7 +17,6 @@ public interface IUserSettings
 	bool FlipItemCopyFilterAction { get; set; }
 	bool ForceDownloadAndDeleteAsSoonAsRequested { get; set; }
 	bool HidePseudoMods { get; set; }
-	bool LargeItemOnHover { get; set; }
 	bool LinkModAssets { get; set; }
 	bool OpenLinksInBrowser { get; set; }
 	bool OverrideGameChanges { get; set; }
@@ -27,4 +26,5 @@ public interface IUserSettings
 	bool ShowFolderSettings { get; set; }
 	bool TreatOptionalAsRequired { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
+	bool LargeItemOnHover { get; }
 }

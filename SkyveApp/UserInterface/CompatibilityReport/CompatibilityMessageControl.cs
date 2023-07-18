@@ -173,7 +173,7 @@ internal class CompatibilityMessageControl : SlickControl
 					{
 						foreach (var item in tags)
 						{
-							tagRect.X += Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
+							tagRect.X += Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.BottomLeft, smaller: true).Width;
 						}
 					}
 

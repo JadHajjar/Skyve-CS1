@@ -58,12 +58,12 @@ public class CompatibilityHelper
 
 		if (status.Status.Action is StatusAction.Switch && status.Status.Type is not StatusType.MissingDlc and not StatusType.TestVersion)
 		{
-			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id);
+			packages = packages.Select(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
 
 		if (status.Status.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
 		{
-			_ = packages.RemoveAll(ShouldNotBeUsed);
+			packages.RemoveAll(ShouldNotBeUsed);
 
 			if (packages.Count == 0)
 			{
@@ -118,7 +118,7 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages || interaction.Interaction.Action is StatusAction.Switch)
 		{
-			packages = packages.ToList(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id);
+			packages = packages.Select(x => GetFinalSuccessor(new GenericPackageIdentity(x)).Id).Distinct().ToList();
 		}
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
@@ -128,19 +128,19 @@ public class CompatibilityHelper
 				return;
 			}
 
-			_ = packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
+			packages.RemoveAll(x => !IsPackageEnabled(x, false, false));
 		}
 		else if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages)
 		{
-			_ = packages.RemoveAll(x => IsPackageEnabled(x, true, true));
+			packages.RemoveAll(x => IsPackageEnabled(x, true, true));
 		}
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne or StatusAction.Switch or StatusAction.SubscribeToPackages)
 		{
-			_ = packages.RemoveAll(ShouldNotBeUsed);
+			packages.RemoveAll(ShouldNotBeUsed);
 		}
 
-		_ = packages.Remove(info.Package.Id);
+		packages.Remove(info.Package.Id);
 
 		if (packages.Count == 0)
 		{

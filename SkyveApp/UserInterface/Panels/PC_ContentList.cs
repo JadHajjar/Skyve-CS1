@@ -113,7 +113,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		I_SortOrder.ImageName = LC_Items.SortDescending ? "I_SortDesc" : "I_SortAsc";
 		B_GridView.Selected = LC_Items.GridView;
-		B_ListView.Selected = !LC_Items.GridView;
+		B_ListView.Selected = !LC_Items.GridView && !LC_Items.CompactList;
+		B_CompactList.Selected = !LC_Items.GridView && LC_Items.CompactList;
 
 		if (!load)
 		{
@@ -134,6 +135,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		}
 
 		SlickTip.SetTo(B_GridView, "Switch to Grid-View");
+		SlickTip.SetTo(B_CompactList, "Switch to Compact-View");
 		SlickTip.SetTo(B_ListView, "Switch to List-View");
 	}
 
@@ -348,7 +350,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
-		B_ListView.Size = B_GridView.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		B_ListView.Size = B_GridView.Size = B_CompactList.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 
 		var size = (int)(30 * UI.FontScale) - 6;
 
@@ -852,8 +854,10 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private void B_ListView_Click(object sender, EventArgs e)
 	{
 		B_GridView.Selected = false;
+		B_CompactList.Selected = false;
 		B_ListView.Selected = true;
 		LC_Items.GridView = false;
+		LC_Items.CompactList = false;
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = LC_Items.GridView;
@@ -863,8 +867,23 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	private void B_GridView_Click(object sender, EventArgs e)
 	{
 		B_GridView.Selected = true;
+		B_CompactList.Selected = false;
 		B_ListView.Selected = false;
 		LC_Items.GridView = true;
+		LC_Items.CompactList = false;
+
+		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
+		settings.GridView = LC_Items.GridView;
+		_settings.SessionSettings.Save();
+	}
+
+	private void B_CompactList_Click(object sender, EventArgs e)
+	{
+		B_GridView.Selected = false;
+		B_ListView.Selected = false;
+		B_CompactList.Selected = true;
+		LC_Items.GridView = false;
+		LC_Items.CompactList = true;
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = LC_Items.GridView;

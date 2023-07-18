@@ -3,7 +3,6 @@ using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
@@ -13,6 +12,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	private PackageSorting sorting;
 	private Rectangle PopupSearchRect1;
 	private Rectangle PopupSearchRect2;
+	private bool _compactList;
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -38,7 +38,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	public ItemListControl(SkyvePage page)
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
-		
+
 		SeparateWithLines = true;
 		EnableSelection = true;
 
@@ -54,10 +54,10 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			sorting = (PackageSorting)_settings.UserSettings.PageSettings[page].Sorting;
 			SortDescending = _settings.UserSettings.PageSettings[page].DescendingSort;
 			GridView = _settings.UserSettings.PageSettings[page].GridView;
+			CompactList = _settings.UserSettings.PageSettings[page].Compact;
 		}
 
 		GridItemSize = new Size(390, 140);
-		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 64 : 36;
 	}
 
 	public IEnumerable<T> FilteredItems => SafeGetItems().Select(x => x.Item);
@@ -69,6 +69,19 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	public bool IsTextSearchNotEmpty { get; set; }
 	public bool IsGenericPage { get; set; }
 	public bool IsSelection { get; set; }
+	public bool CompactList
+	{
+		get => _compactList; set
+		{
+			_compactList = value;
+			ItemHeight = _compactList ? 24 : 54;
+
+			if (Live)
+			{
+				UIChanged();
+			}
+		}
+	}
 
 	public void DoFilterChanged()
 	{
@@ -120,7 +133,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		else
 		{
 			HighlightOnHover = true;
-			Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+			Padding = UI.Scale(new Padding(CompactList ? 2 : 3), UI.FontScale);
 		}
 	}
 
@@ -484,9 +497,13 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	protected override ItemListControl<T>.Rectangles GenerateRectangles(T item, Rectangle rectangle)
 	{
 		if (GridView)
+		{
 			return GenerateGridRectangles(item, rectangle);
+		}
 		else
+		{
 			return GenerateListRectangles(item, rectangle);
+		}
 	}
 
 	public void ShowRightClickMenu(T item)
@@ -517,17 +534,17 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 				return true;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = ("I_OutOfDate");
+				icon = "I_OutOfDate";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = ("I_Broken");
+				icon = "I_Broken";
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
 				text = Locale.RemovedFromSteam;
-				icon = ("I_ContentRemoved");
+				icon = "I_ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
 		}

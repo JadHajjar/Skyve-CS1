@@ -75,7 +75,7 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 		{
 			foreach (var item in tags)
 			{
-				tagRect.X -= Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.TopRight, smaller: true).Width;
+				tagRect.X -= Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.TopRight, smaller: true).Width;
 			}
 		}
 
@@ -91,11 +91,11 @@ internal class PackageCrList : SlickStackedListControl<ulong, PackageCrList.Rect
 			return;
 		}
 
-		e.DrawLabel(LocaleCR.Get(cr.Stability.ToString()), null, CRNAttribute.GetNotification(cr.Stability).GetColor().MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomLeft, smaller: true);
+		e.Graphics.DrawLabel(LocaleCR.Get(cr.Stability.ToString()), null, CRNAttribute.GetNotification(cr.Stability).GetColor().MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomLeft, smaller: true);
 
 		if (cr.ReviewDate > Package.ServerTime)
 		{
-			e.DrawLabel(Locale.UpToDate, null, FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomRight, smaller: true);
+			e.Graphics.DrawLabel(Locale.UpToDate, null, FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor), e.ClipRectangle.Pad(imageRect.Right + Padding.Left, 0, 0, 0), ContentAlignment.BottomRight, smaller: true);
 		}
 	}
 

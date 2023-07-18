@@ -346,7 +346,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-GridPadding.Left, -GridPadding.Top, -GridPadding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
 
-			textColor = brush.Color.GetTextColor();
+			textColor = Color.FromArgb(255, brush.Color).GetTextColor();
 		}
 		else
 		{
@@ -358,7 +358,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-GridPadding.Left, -GridPadding.Top, -GridPadding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
 			e.Graphics.FillRectangle(gradientBrush, e.Rects.Thumbnail.Pad(-GridPadding.Left, e.Rects.Thumbnail.Height / 3, -GridPadding.Right, 0));
 
-			textColor = brush.Color.GetTextColor();
+			textColor = Color.FromArgb(255, brush.Color).GetTextColor();
 		}
 
 		var favViewRect = ReadOnly ? e.Rects.ViewContents : e.Rects.Favorite;
@@ -397,8 +397,8 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 		var labelRects = e.Rects.Content;
 
-		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
-		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
 
 		if (e.Item.Author is not null)
 		{
@@ -406,13 +406,13 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 			using var userIcon = IconManager.GetSmallIcon("I_User");
 
-			e.Rects.Author = e.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), labelRects, ContentAlignment.TopLeft);
+			e.Rects.Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), labelRects, ContentAlignment.TopLeft);
 		}
 
 		if (e.Item == _profileManager.CurrentPlayset)
 		{
 			using var okIcon = IconManager.GetSmallIcon("I_Ok");
-			e.DrawLabel(Locale.CurrentPlayset, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
+			e.Graphics.DrawLabel(Locale.CurrentPlayset, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
 
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale));
 
@@ -421,7 +421,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		else if (e.Item.IsMissingItems)
 		{
 			using var icon = IconManager.GetSmallIcon("I_MinorIssues");
-			e.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
+			e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
 		}
 
 		var loadText = ReadOnly ? _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlayset : Locale.DownloadPlayset : Locale.LoadPlayset;
@@ -540,12 +540,12 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 		if (e.Item == _profileManager.CurrentPlayset)
 		{
-			e.Rects.Text.X += e.DrawLabel(Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (e.Item.IsMissingItems)
 		{
-			e.Rects.Text.X += e.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (large)
@@ -553,8 +553,8 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 			e.Rects.Text.X = x;
 		}
 
-		e.Rects.Text.X += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
-		e.Rects.Text.X += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
+		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
+		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
 
 		SlickButton.DrawButton(e, e.Rects.Folder, string.Empty, Font, IconManager.GetIcon("I_Folder"), null, e.Rects.Folder.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 

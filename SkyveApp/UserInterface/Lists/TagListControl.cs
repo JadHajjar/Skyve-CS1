@@ -60,7 +60,7 @@ internal class TagListControl : SlickControl
 			}
 
 			using var tagIcon = IconManager.GetSmallIcon(item.Icon);
-			var size = e.MeasureLabel(item.Value, tagIcon, large: true);
+			var size = e.Graphics.MeasureLabel(item.Value, tagIcon, large: true);
 
 			if (tagsRect.X + size.Width + Padding.Right > Width)
 			{
@@ -68,7 +68,7 @@ internal class TagListControl : SlickControl
 				tagsRect.Y += size.Height + Padding.Top;
 			}
 
-			var rect = e.DrawLabel(item.Value, tagIcon, Tags.Any(t => t.Value == item.Value) ? FormDesign.Design.ActiveColor : Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, ContentAlignment.TopLeft, large: true, mousePosition: cursorLocation);
+			var rect = e.Graphics.DrawLabel(item.Value, tagIcon, Tags.Any(t => t.Value == item.Value) ? FormDesign.Design.ActiveColor : Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, ContentAlignment.TopLeft, large: true, mousePosition: cursorLocation);
 
 			if (!string.IsNullOrEmpty(CurrentSearch) && !CurrentSearch.SearchCheck(item.Value))
 			{
