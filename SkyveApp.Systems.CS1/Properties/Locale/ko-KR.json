@@ -480,8 +480,8 @@
     "Plural": "패키지"
   },
   "Playset": {
-    "One": "프로필",
-    "Plural": "프로필"
+    "One": "플레이셋",
+    "Plural": "플레이셋"
   },
   "IncludedCount": {
     "One": "{1} {0}개 포함됨",
