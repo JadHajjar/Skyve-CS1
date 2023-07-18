@@ -43,8 +43,8 @@
   "AddPlayset": "プレイセットを追加",
   "LHT": "左側通行を指定",
   "NoWorkshop": "ワークショップを無効化",
-  "NoAssets": "カスタムアセットを無効化",
-  "NoMods": "全てのMODを無効化",
+  "NoAssets": "カスタムアセットを全て無効化",
+  "NoMods": "MODを全て無効化",
   "AutoSave": "オートセーブ",
   "TotalSize": "合計サイズ",
   "CompatibilityStatus": "互換性ステータス",
@@ -71,12 +71,12 @@
   "Preferences": "環境設定",
   "PlaysetName": "プレイセットの名前",
   "RenamePlayset": "現在のプレイセット名を変更",
-  "StartScratch": "新しいプロファイルを作成",
+  "StartScratch": "新しいプレイセットを作成",
   "ContinueFromCurrent": "現在の設定を保持",
   "GamePlay": "都市を建設",
   "EditorPlay": "アセットを作成",
   "PlaysetUsage": "プレイセットの用途",
-  "SomePackagesWillBeDisabled": "プロファイルの使用方法を変更すると、一部の不要なパッケージは削除されます。",
+  "SomePackagesWillBeDisabled": "プレイセットの使用方法を変更すると、一部の不要なパッケージは削除されます。",
   "AffectedPackagesAre": "影響を受けるパッケージ:",
   "ConfirmDeletePlayset": "本当にプレイセット 「{0}」を削除しますか？",
   "PlaysetReplace": "プレイセットの設定をロード",
@@ -106,7 +106,7 @@
   "Sorting_Default": "デフォルトのソート",
   "Sorting_LastEdit": "最後に編集した日",
   "Sorting_DateCreated": "作成した日",
-  "Sorting_Usage": "プロファイルの用途",
+  "Sorting_Usage": "プレイセットの用途",
   "Sorting_Name": "名前",
   "Sorting_FileSize": "ファイルサイズの合計",
   "Sorting_UpdateTime": "更新日時",
@@ -156,7 +156,7 @@
     "One": "パッケージのワークショップIDをコピー",
     "Plural": "選択したパッケージのワークショップIDをコピー"
   },
-  "CopyAuthorLink": "作者のプロフィールのリンクをコピー",
+  "CopyAuthorLink": "作者のプレイセットのリンクをコピー",
   "CopyAuthorId": "作者のIDをコピー",
   "YourPlaysets": "使用中のプレイセット",
   "UnFavoriteThisPlayset": "プレイセットをお気に入りから解除",
@@ -170,11 +170,11 @@
   "DlcUpdateNotice": "DLCが一覧に表示されない場合は、少なくとも一度はゲームから開いて下さい。",
   "DlcCount": "合計 {0} 個のDLCを所有",
   "IncludeAllItemsInThisPackage": {
-    "One": "パッケージの全アイテムを含める",
+    "One": "パッケージ内のアイテムを全て含める",
     "Plural": "選択したパッケージを全て含める"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "パッケージの全アイテムを除外",
+    "One": "パッケージ内のアイテムを全て除外",
     "Plural": "選択したパッケージを全て除外"
   },
   "Unfiltered": "フィルタなし",
@@ -182,28 +182,28 @@
   "AdvancedLaunchOptions": "追加の起動オプションを表示",
   "MovePackageToLocalFolder": {
     "One": "パッケージをローカルフォルダにコピー",
-    "Plural": "選択したパッケージを全てローカルフォルダにコピー"
+    "Plural": "選択したパッケージをローカルフォルダに全てコピー"
   },
   "AllItems": "全てのアイテム",
   "TotalItems": "合計アイテム",
-  "UnsubscribeAll": "表示した全てのアイテムからサブスクを解除",
-  "SubscribeAll": "表示した全てのアイテムをサブスクする",
+  "UnsubscribeAll": "表示中のアイテムから全てサブスクを解除",
+  "SubscribeAll": "表示中のアイテムから全てサブスクを開始",
   "DownloadAll": "表示中と不足したアイテムを全てDL",
   "ReDownloadAll": "表示中とDL済みのアイテムを全て再DL",
-  "MissingItemsRemain": "プロファイル内に一部のアイテムがありません。次回以降でプロファイルを保存すると、これらのアイテムは削除されます。",
+  "MissingItemsRemain": "プレイセット内に一部のアイテムがありません。次回以降でプレイセットを保存すると、これらのアイテムは削除されます。",
   "ModIsPrivate": "アイテムが非公開",
   "HidePseudoMods": "テーマミックスのような擬似MODは非表示",
   "YourDlcs": "所有中のDLC",
   "AllDlcs": "全てのDLC",
   "DLCs": "DLC & CCP",
   "DetectedIssues": "検出した問題点",
-  "FixAllIssues": "全ての問題点を修正",
+  "FixAllIssues": "全ての問題を修正",
   "LaunchTooltip": "クリックしてCities: Skylinesの起動や停止 / もしくはアプリ内で {0} を押して起動",
   "LsmImport": "Loading Screen Modのレポート",
   "LsmImportMissingInfo": "不足中のアセットを表示してサブスク",
   "SelectedFileInvalid": "選択したファイルが無効です！",
   "NoItemsToBeDisplayed": "表示するアイテムがありません",
-  "FirstSetupInfo": "Skyve Appを使用する前に、Cities Skylines内からSkyve Modを有効化して下さい。",
+  "FirstSetupInfo": "Skyve Appを使用する前に、Cities: Skylines内からSkyve Modを有効化して下さい。\n\nもしくは無視をクリックして、手動でフォルダの設定を行います。",
   "SetupIncomplete": "セットアップが不完全",
   "LsmImportUnusedInfo": "未使用アセットの表示と削除",
   "SkipFileInfo": "Loading Screen Modで使用するスキップファイルを選択",
@@ -234,7 +234,7 @@
   "OverrideGameChanges_Tip": "ゲーム内で変更したMODの状態は、この設定をオンにするとSkyve内も自動的に上書きされます。 変更は次回の起動時に反映されて、アプリが起動中の場合のみ機能します。",
   "HidePseudoMods_Tip": "例えばテーマミックスは、ワークショップで共有できるようにMODのファイルとして生成します。オプションを有効にすると、MODリストから該当するアイテムを非表示にして常に含まれるようにします。",
   "AdvancedIncludeEnable_Tip": "有効時はオリジナルのLoad Order Toolと同様に、MODでも「含める & 除外」のステータス変更を可能にします。",
-  "AdvancedLaunchOptions_Tip": "プロファイルの設定で、MOD開発やクリエーターが使用する追加の起動オプションを表示します。",
+  "AdvancedLaunchOptions_Tip": "プレイセットの設定で、MOD開発やクリエーターが使用する追加の起動オプションを表示します。",
   "ShowFolderSettings_Tip": "ツールが使用している、フォルダ設定をオプション内のページに表示します。",
   "HelpTranslate_Tip": "Crowdinでツールの翻訳を手伝って下さい。",
   "ThemeUIScale_Tip": "アプリのカラーやテーマを変更したり、UIのスケールを拡大することができます。",
@@ -258,8 +258,8 @@
   "AssetOutOfDatePlural": "個のアセットが古い",
   "CopyVersionNumber": "バージョン情報をコピー",
   "SubscribeToItem": {
-    "One": "Subscribe from this Package",
-    "Plural": "Subscribe from the selected Packages"
+    "One": "パッケージのサブスクを開始",
+    "Plural": "選択したパッケージのサブスクを開始"
   },
   "LoadCollectionTip": "コレクションのアイテムリストからロードとサブスクして、コレクション内のアイテムを含める・除外を管理します。",
   "LsmMissingTip": "ここにLSMのレポートファイルをD&D・クリックしてファイルを選択して下さい。レポート内の情報から、不足したアセットがサブスク可能です。",
@@ -297,10 +297,10 @@
   "PackageIncludedEnabledTotal": "パッケージを含める: {0} 個の中から {1} 個はMODで、 {2} 個のMODが有効化 / 合計: {3} 個",
   "PackageIncludedAndEnabledTotal": "パッケージを含める&有効化: {0} 個 / 合計: {1} 個",
   "AssetIncludedTotal": "アセットを含める: {0} 個 / 合計: {1} 個",
-  "NewPlayset_Tip": "Create or import a new playset",
-  "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
-  "AutoSave_Tip": "MODやアセットの変更を使用中のプロファイルに自動で保存されます。",
+  "NewPlayset_Tip": "新しいプレイセットを作成するか、もしくはインポートします。",
+  "TempPlayset_Tip": "現在の設定を保持して、一時的なプレイセットに切り替えます。",
+  "ViewPlaysets_Tip": "保存したプレイセットの確認や管理が出来ます。",
+  "AutoSave_Tip": "MODやアセットの変更を使用中のプレイセットに自動で保存されます。",
   "LoadEnabled_Tip": "ゲームのロード時に、有効化したアセットのみをロードします。意味や何をしているか分からない場合は、有効のままにして下さい。",
   "LoadUsed_Tip": "マップ上で使用中のアセットは、ゲーム内で無効化してもロードします。Skyve内のアセットの設定とは連動しません。",
   "UseSkipFile_Tip": "バニラのアセットをゲームから除外したい場合に使用します。",
@@ -316,71 +316,71 @@
   "OBSOLETE": "廃止",
   "ABANDONED": "放棄",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "このアクションは元に戻せません！",
+    "Plural": "このアクションは元に戻せません！また、 {0} 個のパッケージに影響します。"
   },
   "AlwaysOpenFiltersAndActions": "フィルタセクションをデフォルトで表示",
   "AlwaysOpenFiltersAndActions_Tip": "コンテンツタブに入るときは、常にフィルタセクションを展開します。",
   "XMLImport": "XMLファイルから設定をインポート",
   "XMLImportMissingInfo": "様々なXMLファイルの設定からパッケージを表示してサブスク",
   "XMLTip": "XMLの設定ファイルを選択・D&Dして、内部にリストされているパッケージを管理します。",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "プロファイルの合計: {0} 個",
-  "PlaysetFilter": "Playset Filter",
+  "FavoritePlaysetTotal": "お気に入りのプレイセット: {0} 個 / 合計: {1} 個",
+  "FavoriteTotal": "プレイセットの合計: {0} 個",
+  "PlaysetFilter": "プレイセットのフィルタ",
   "CheckDocumentsFolder": "Skyveがドキュメントフォルダにアクセス可能か確認して下さい。ドキュメントフォルダは、UIと言語の設定を保存するために使用します。",
   "FailedToSaveLanguage": "選択した言語の保存に失敗！",
   "FailedToOpenTC": "テーマチェンジャーが開けません！",
   "FailedToDeleteItem": "アイテムの削除に失敗！",
   "DeleteAsset": {
-    "One": "Delete this asset",
-    "Plural": "Delete the selected assets"
+    "One": "アセットを削除",
+    "Plural": "選択したアセットを削除"
   },
   "OpenChangelog": "更新履歴を開く",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "全てのプレイセットにアイテムを含める",
+    "Plural": "全てのプレイセットに選択したアイテムを含める"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "全てのプレイセットからアイテムを除外",
+    "Plural": "全てのプレイセットから選択したアイテムを除外"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "パッケージ名をコピー",
+    "Plural": "選択したパッケージ名をコピー"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "作者名をコピー",
+    "Plural": "選択したパッケージの作者名をコピー"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
-    "Plural": "Copy the selected packages' folder names"
+    "One": "フォルダ名をコピー",
+    "Plural": "選択したパッケージのフォルダ名をコピー"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
-  "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
+  "PlaysetNameUsed": "既に同じプレイセット名が存在します。どちらか一方のファイル名を変更して下さい。",
+  "FailedToImportLegacyPlayset": "レガシープレイセットの変換に失敗しました！",
   "Sorting_LastUsed": "最後に使用した日",
   "OpenLinksInBrowser": "Steamのリンクをブラウザで開く",
   "OpenLinksInBrowser_Tip": "Steamクライアントでは無く、デフォルトのウェブブラウザでSteamのリンクを開くように変更します。",
-  "PlaysetStillLoading": "Your playset is still loading, please wait before exiting this page.",
-  "ApplyPlaysetNameBeforeExit": "Please finish editing the playset's name before exiting this page.",
+  "PlaysetStillLoading": "プレイセットをロード中です。処理が終了するまでお待ち下さい。",
+  "ApplyPlaysetNameBeforeExit": "ページを終了する前に、プレイセット名の編集を完了して下さい。",
   "SteamNotOpenTo": "Steamクライアントが起動していません。",
   "OpenSteamToContinue": "以前の処理を続行するには、Steamクライアントを開いて下さい。",
-  "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
-  "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's color",
-  "EditPlaysetName": "Edit this playset's name",
-  "SavePlaysetChanges": "Save the current package settings to this playset's file",
-  "Sorting_Color": "プロファイルの色",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
-  "AskToLaunchGameForShortcut": "プロファイル経由でゲームを起動するショートカットを作成しますか?",
+  "IncludeExcludeOtherPlayset": "プレイセット「{0}」から {1} 個を含める / 除外",
+  "OpenPlaysetFolder": "プレイセットのファイルをPC上で表示",
+  "ChangePlaysetColor": "プレイセットの色を変更",
+  "EditPlaysetName": "このプレイセット名を編集",
+  "SavePlaysetChanges": "プレイセットのファイルに、現在のパッケージ設定を保存",
+  "Sorting_Color": "プレイセットの色",
+  "CreateShortcutPlayset": "デスクトップにショートカットを作成",
+  "AskToLaunchGameForShortcut": "プレイセット経由でゲームを起動するショートカットを作成しますか?",
   "TextImportMissingInfo": "Steam IDを含むテキストファイルをロードして、簡単にサブスク操作や管理が可能",
   "ImportFromText": "テキストファイルをインポート",
   "ImportFromClipboard": "クリップボードから情報をロード",
   "XMLImportInfo": "BOB・Tree Brush・Theme Mixerなどの設定ファイルが使用可能です。",
   "ImportFromTextInfo": "様々なテキスト形式をサポートしています。",
   "LsmImportInfo": "「アセットレポート」のファイルを選択して下さい。",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "使用可能なプレイセットがありません！",
+  "NoPlaysetsMatchFilters": "検索に一致するプレイセットがありません！",
   "Your Save-games": "セーブゲーム",
   "App Data": "App Data",
   "Custom Maps": "カスタムマップ",
@@ -400,11 +400,11 @@
   },
   "Use the System's Theme": "システムのテーマを使用",
   "Donate": "寄付",
-  "CopyAllIds": "表示中のワークショップIDを全てコピー",
+  "CopyAllIds": "表示中のアイテム名とIDを全てコピー",
   "DeleteAll": "表示中のアイテムを全て削除",
-  "FlipItemCopyFilterAction": "コンテンツリストのフィルタリングでCtrl+クリックの動作を入れ替える",
-  "FlipItemCopyFilterAction_Tip": "ラベルのクリック時にデフォルトの動作を入れ替えて、通常のクリックでフィルタ・Ctrl+クリックでデフォルトのアクションを実行します。",
-  "AltClickTo": "Alt+Click to {0}",
+  "FlipItemCopyFilterAction": "コンテンツリストのフィルタリングでAlt+クリックの動作を入れ替える",
+  "FlipItemCopyFilterAction_Tip": "ラベルのクリック時にデフォルトの動作を入れ替えて、通常のクリックでフィルタ・Altl+クリックでデフォルトのアクションを実行します。",
+  "AltClickTo": "Alt+クリックで {0}",
   "FilterByThisAuthor": "作者でフィルタ",
   "AddToSearch": "検索に「{0}」を追加",
   "CopyToClipboard": "クリップボードに「{0}」をコピー",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "ツールがゲーム起動時に、サブスクしていないパッケージを自動で削除する機能を停止します。",
   "CustomLaunchArguments": "起動時の引数をカスタマイズ",
   "LaunchArgsInfo": "起動時に追加パラメータの引数を追加",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "「{0}」からパッケージが不足",
   "UnusedLSMReport": "LSMで未使用のアセット",
   "MissingLSMReport": "LSMで不足のアセット",
   "SearchGenericPackages": "これらのパッケージを検索...",
@@ -480,8 +480,8 @@
     "Plural": "パッケージ"
   },
   "Playset": {
-    "One": "プロファイル",
-    "Plural": "プロファイル"
+    "One": "プレイセット",
+    "Plural": "プレイセット"
   },
   "IncludedCount": {
     "One": "{0} {1} を含める",
@@ -504,24 +504,24 @@
     "Plural": "表示中: {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "表示中: {0} {1}, {2}",
-    "Plural": "表示中: {0} {1}, {2}"
+    "One": "表示中: {0} {1}, {3}",
+    "Plural": "表示中: {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "表示中: {0} {1} / 選択中: {2}",
+    "Plural": "表示中: {0} {1} / 選択中: {2}"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "表示中: {0} {1} / 選択中: {2} / {3}",
+    "Plural": "表示中: {0} {1} / 選択中: {2} / {3}"
   },
   "ItemsHidden": {
-    "One": "{0} {1} はプロファイルの用途によって非表示",
-    "Plural": "{0} {1} はプロファイルの用途によって非表示"
+    "One": "{0} {1} はプレイセットの用途によって非表示",
+    "Plural": "{0} {1} はプレイセットの用途によって非表示"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "パッケージの互換性を編集",
+    "Plural": "選択したパッケージの互換性を編集"
   },
   "AnyIssue": "全ての問題",
   "AnyUsage": "全ての用途",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "「{0}」のレビューリクエストの送信に失敗しました。\n\n{1}",
   "SendReview": "検証のリクエストを送信",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "パッケージのタグを編集",
+    "Plural": "選択したアイテムのタグを編集"
   },
   "ShowAllReferencedPackages": "「参照」タブに除外したパッケージを表示",
   "ShowAllReferencedPackages_Tip": "表示中のパッケージを参照して、除外したパッケージと含めるパッケージの両方が表示されます。",
@@ -584,7 +584,7 @@
     "One": "サブスク解除の処理を {0} 個のパッケージで実行します。",
     "Plural": "サブスク解除の処理を {0} 個のパッケージで実行します。"
   },
-  "ViewThisPlaysetsPackages": "View this playset's contents",
+  "ViewThisPlaysetsPackages": "プレイセットの内容を表示",
   "PendingDownloads": {
     "One": "{0} アイテムがDLを待機中",
     "Plural": "{0} アイテムがDLを待機中"
@@ -600,59 +600,59 @@
   "RequestOption1": "問題を報告・不足した情報を追加",
   "RequestOption2": "パッケージに不足しているステータスを追加",
   "RequestOption3": "別のパッケージで不足している依存関係を追加",
-  "CurrentPlayset": "Current Playset",
+  "CurrentPlayset": "現在のプレイセット",
   "References": "参照",
   "OpenLog": "ログファイルを開く",
   "Sort By": "ソート順",
   "OpenCitiesAppData": "C:SのAppDataフォルダを開く",
   "FailedToFetchLogs": "ログの取得に失敗",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "プレイセットを探す",
   "AllUsages": "全ての用途",
   "Invalid": "無効",
-  "UpdatePlayset": "Update Playset",
-  "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
-  "DownloadPlayset": "Download Playset",
-  "ReloadAllData": "全データをリロード",
+  "UpdatePlayset": "プレイセットを更新",
+  "FailedToRetrievePlaysets": "プレイセットの探索でデータ取得に失敗！",
+  "DownloadPlayset": "プレイセットをDL",
+  "ReloadAllData": "全てのデータをリロード",
   "ResetSnoozes": "スヌーズを全てリセット",
   "ResetModsCache": "MODのキャッシュをリセット",
   "ResetCompatibilityCache": "互換性のキャッシュをリセット",
   "ResetImageCache": "画像のキャッシュをクリア",
   "ResetSteamCache": "Steamのキャッシュをクリア",
-  "SharePlayset": "Upload this playset",
+  "SharePlayset": "プレイセットをアップロード",
   "ResetInfo": "注意！ リセットは元に戻せません。",
   "FailedToDownloadPlayset": "プレイセットのDLに失敗しました。\n\n後でもう一度やり直して下さい。",
   "UpdatePlaysetTip": "プレイセットのローカルバージョンを更新",
   "DownloadPlaysetTip": "プレイセットをローカルPCにDL",
   "EditPlaysetThumbnail": "プレイセットのサムネイル画像を編集",
-  "MakePublic": "プロファイルを公開",
-  "MakePrivate": "プロフィールを非公開",
+  "MakePublic": "プレイセットを公開",
+  "MakePrivate": "プレイセットを非公開",
   "CopyPlaysetLink": "プレイセットIDをコピー",
   "FailedToUploadPlayset": "プレイセットのアップロードに失敗！",
-  "FailedToDeletePlayset": "Failed to delete your playset",
-  "FailedToUpdatePlayset": "Failed to update your playset",
-  "ImportFromLink": "プロファイルIDを使用してプロファイルをインポート",
-  "PastePlaysetId": "Paste the ID of the playset you'd like to import",
+  "FailedToDeletePlayset": "プレイセットの削除に失敗！",
+  "FailedToUpdatePlayset": "プレイセットの更新に失敗！",
+  "ImportFromLink": "プレイセットIDを使用してプレイセットをインポート",
+  "PastePlaysetId": "インポートしたいプレイセットIDを貼り付け",
   "AssumeInternetConnectivity": "インターネットの接続確認を無視",
   "AssumeInternetConnectivity_Tip": "インターネットの接続確認をスキップして、自動的に接続済みと判断します。",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
-  "AddTagBox": "Add a new tag here",
-  "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
+  "SelectAll": "表示中のアイテムを全て選択",
+  "DeselectAll": "表示中のアイテムを全て選択解除",
+  "AddTagBox": "ここに新規タグを追加",
+  "EditingMultipleTags": "複数のパッケージでタグを編集すると、それぞれのカスタムタグは上書きされます。",
   "EditTagsOfPackage": {
-    "One": "Edit all of this package's assets' Tags",
-    "Plural": "Edit all of the selected packages' assets' Tags"
+    "One": "パッケージ内のアセットタグを全て編集",
+    "Plural": "選択したパッケージのアセットタグを全て編集"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "カスタムタグ: {0}",
+    "Plural": "カスタムタグ: {0} パッケージ"
   },
-  "CustomTags": "Custom Tags",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
-  "TroubleshootIssues": "Troubleshoot Issues",
-  "ViewTroubleshootOptions": "View troubleshooting options",
-  "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
-  "TroubleshootSelection": "Which option best describes your situation?",
-  "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?"
+  "CustomTags": "カスタムタグ",
+  "WorkshopAndGameTags": "ワークショップ & ゲーム内のタグ",
+  "TroubleshootIssues": "トラブルシューティング",
+  "ViewTroubleshootOptions": "トラブルシューティングのオプションを表示",
+  "TroubleshootInfo": "もし、問題のあるMODやアセットを見つけた・もしくは依存関係などの不足を見つけた場合は、ここでトラブルシューティングを試して下さい。",
+  "TroubleshootCaused": "MODやアセットを使用中に問題が発生",
+  "TroubleshootMissing": "MODやアセットが不足して問題が発生",
+  "TroubleshootSelection": "現在の状況から最もよく示してる問題はどれですか？",
+  "TroubleshootModOrAsset": "どのような内容でトラブルシューティングをしますか？"
 }
