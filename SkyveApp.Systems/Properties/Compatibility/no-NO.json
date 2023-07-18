@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "Inkludert musikk kan opphavsrett",
   "IncompleteDescription": "Ufullstendig beskrivelse",
   "Successor": "Successor",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Last inn etter ..",
   "Alternative": "Alternative",
   "SameFunctionality": "Same Functionality",
   "RequirementAlternative": "Requirement Alternative",
@@ -99,7 +99,7 @@
     "Plural": "'{0}' lykkes med enten en av de følgende pakkene."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
+    "One": "'{0}' vil laste inn direkte etter '{1}'.",
     "Plural": "'{0}' will load directly after the following packages."
   },
   "Interaction_Identical": "Dette er flere versjoner av samme pakke.\r\n\r\nDu bør bare velge en av dem.",
