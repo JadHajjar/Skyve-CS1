@@ -145,44 +145,44 @@
   "FilterOutPackagesWithMods": "Dölj mods på paketsidan",
   "FilterOutPackagesWithOneAsset": "Dölj paket med en enda tillgång från paketets sida",
   "DeletePackage": {
-    "One": "Delete this package",
-    "Plural": "Delete the selected packages"
+    "One": "Radera detta paket",
+    "Plural": "Ta bort de valda paketen"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
-    "Plural": "Unsubscribe from the selected packages"
+    "One": "Avsluta prenumerationen på detta paket",
+    "Plural": "Avsluta prenumerationen på de valda paketen"
   },
   "CopyWorkshopId": {
-    "One": "Copy this package's Workshop ID",
-    "Plural": "Copy the selected packages' Workshop IDs"
+    "One": "Kopiera detta pakets verkstads-id",
+    "Plural": "Kopiera de valda paketens Workshop-IDn"
   },
   "CopyAuthorLink": "Kopiera författarlänk",
   "CopyAuthorId": "Kopiera författar -ID",
-  "YourPlaysets": "Your Playsets",
-  "UnFavoriteThisPlayset": "Un-Favorite this playset",
-  "FavoriteThisPlayset": "Favorite this playset",
-  "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
+  "YourPlaysets": "Dina speluppsättningar",
+  "UnFavoriteThisPlayset": "Ta bort denna speluppsättning från dina favoriter",
+  "FavoriteThisPlayset": "Lägg till denna speluppsättning till dina favoriter",
+  "PlaysetCreationFailed": "Kunde inte skapa en ny speluppsättning, se till att dina mappinställningar är korrekt inställda i panelen alternativ",
   "UseDebugMono": "Använd felsökningsmono",
   "LaunchThroughCities": "Starta via Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityPlaysetrMode": "Använd Unity Playsetr",
   "NoDlcsNoInternet": "Kunde inte ladda DLC: er, ansluta till Internet",
   "NoDlcsOpenGame": "Inga DLC: er matchar din sökning",
   "DlcUpdateNotice": "Om dina DLC: er inte visas här, se till att öppna spelet minst en gång",
   "DlcCount": "{0} totala DLC:er som ägs",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "Inkludera alla objekt i detta paket",
+    "Plural": "Inkludera alla valda paket"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "Uteslut alla objekt i detta paket",
+    "Plural": "Uteslut alla markerade paket"
   },
   "Unfiltered": "Ofiltrerad",
   "AnyTags": "Alla taggar",
   "AdvancedLaunchOptions": "Visa extra startalternativ",
   "MovePackageToLocalFolder": {
-    "One": "Copy package to a local folder",
-    "Plural": "Copy all selected packages to a local folder"
+    "One": "Kopiera paketet till en lokal mapp",
+    "Plural": "Kopiera alla valda paket till en lokal mapp"
   },
   "AllItems": "Alla objekt",
   "TotalItems": "Totala artiklar",
@@ -208,15 +208,15 @@
   "LsmImportUnusedInfo": "Visa och ta bort oanvända tillgångar",
   "SkipFileInfo": "Välj en Skip-fil som ska användas för inläsning av skärmMod",
   "SaveFileInfo": "Välj en spara-spelfil som ska laddas automatiskt när du öppnar spelet",
-  "LoadPlayset": "Load Playset",
+  "LoadPlayset": "Ladda speluppsättning",
   "CopyAuthorSteamId": {
-    "One": "Copy this Author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Kopiera den här författarens ID",
+    "Plural": "Kopiera de valda paketens författar-ID"
   },
   "ShowingFilteredItems": "Visar {0} av {1} totalt objekt",
-  "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
+  "DropNewPlayset": "Släpp eller välj en speluppsättnings .json eller .xml-fil här för att importera den",
   "ThemeUIScale": "Tema & UI skala",
-  "SearchPlaysets": "Search through these Playsets..",
+  "SearchPlaysets": "Sök igenom dessa speluppsättningar..",
   "AdvancedSettings": "Avancerade inställningar",
   "HelpTranslate": "Förbättra översättningar",
   "HelpReset": "Help & Reset",
@@ -258,7 +258,7 @@
   "AssetOutOfDatePlural": "tillgångar är föråldrade",
   "CopyVersionNumber": "Kopiera versionsnummer",
   "SubscribeToItem": {
-    "One": "Subscribe from this Package",
+    "One": "Prenumerera på detta paket",
     "Plural": "Subscribe from the selected Packages"
   },
   "LoadCollectionTip": "Ladda den samling du länkat i rutan till vänster för att enkelt inkludera, exkludera etc. från paket i den",
@@ -610,49 +610,49 @@
   "AllUsages": "Alla användningsområden",
   "Invalid": "Ogiltig",
   "UpdatePlayset": "Update Playset",
-  "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
-  "DownloadPlayset": "Download Playset",
+  "FailedToRetrievePlaysets": "Det gick inte att hämta speluppsättningsupptäckaren",
+  "DownloadPlayset": "Ladda ner speluppsättningen",
   "ReloadAllData": "Ladda om all data",
   "ResetSnoozes": "Återställ alla snoozes",
   "ResetModsCache": "Nollställ alla moddars cache",
   "ResetCompatibilityCache": "Återställ kompatibilitetscache",
   "ResetImageCache": "Rensa cacheade bilder",
   "ResetSteamCache": "Rensa Steam-cache",
-  "SharePlayset": "Upload this playset",
+  "SharePlayset": "Ladda upp den här speluppsättningen",
   "ResetInfo": "Varning! Återställning kan inte ångras.",
-  "FailedToDownloadPlayset": "Failed to download this playset.\r\n\r\nPlease try again later.",
-  "UpdatePlaysetTip": "Update your local version of this playset",
-  "DownloadPlaysetTip": "Download this playset to your local computer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail picture",
+  "FailedToDownloadPlayset": "Det gick inte att ladda ner denna speluppsättning.\n\nFörsök igen senare.",
+  "UpdatePlaysetTip": "Uppdatera din lokala version av denna speluppsättning",
+  "DownloadPlaysetTip": "Ladda ner denna speluppsättning till din lokala dator",
+  "EditPlaysetThumbnail": "Redigera denna speluppsättnings miniatyrbild",
   "MakePublic": "Gör denna profil offentlig",
   "MakePrivate": "Gör denna profil privat",
-  "CopyPlaysetLink": "Copy this playset's ID",
-  "FailedToUploadPlayset": "Failed to upload your playset",
-  "FailedToDeletePlayset": "Failed to delete your playset",
-  "FailedToUpdatePlayset": "Failed to update your playset",
+  "CopyPlaysetLink": "Kopiera denna speluppsättnings ID",
+  "FailedToUploadPlayset": "Det gick inte att ladda upp din speluppsättning",
+  "FailedToDeletePlayset": "Det gick inte att ta bort din speluppsättning",
+  "FailedToUpdatePlayset": "Det gick inte att uppdatera din speluppställning",
   "ImportFromLink": "Importera en profil med hjälp av profil-ID",
-  "PastePlaysetId": "Paste the ID of the playset you'd like to import",
+  "PastePlaysetId": "Klistra in ID för speluppsättningen du vill importera",
   "AssumeInternetConnectivity": "Ignorera kontroll av Internetanslutning",
   "AssumeInternetConnectivity_Tip": "Hoppar över kontroll av internetanslutning och antar att du är ansluten.",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
-  "AddTagBox": "Add a new tag here",
-  "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
+  "SelectAll": "Välj alla visade objekt",
+  "DeselectAll": "Avmarkera alla visade objekt",
+  "AddTagBox": "Lägg till en ny tagg här",
+  "EditingMultipleTags": "Redigering av flera pakets taggar kommer att skriva över var och en av sina egna taggar.",
   "EditTagsOfPackage": {
-    "One": "Edit all of this package's assets' Tags",
-    "Plural": "Edit all of the selected packages' assets' Tags"
+    "One": "Redigera alla taggar för paketets tillgångar",
+    "Plural": "Redigera alla valda pakets taggar"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "Anpassade Taggar: {0}",
+    "Plural": "Anpassade taggar: {0} paket"
   },
-  "CustomTags": "Custom Tags",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
-  "TroubleshootIssues": "Troubleshoot Issues",
-  "ViewTroubleshootOptions": "View troubleshooting options",
-  "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
-  "TroubleshootSelection": "Which option best describes your situation?",
-  "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?"
+  "CustomTags": "Anpassade taggar",
+  "WorkshopAndGameTags": "Workshop & Spel Taggar",
+  "TroubleshootIssues": "Felsök problem",
+  "ViewTroubleshootOptions": "Visa alternativ för felsökning",
+  "TroubleshootInfo": "Om du har en mod eller tillgång som orsakar ett problem, eller som saknas, och du inte vet vilken; Prova felsökning här:",
+  "TroubleshootCaused": "En mod eller tillgång jag använder orsakar problem",
+  "TroubleshootMissing": "Jag saknar en mod eller tillgång, och det orsakar problem",
+  "TroubleshootSelection": "Vilket alternativ beskriver bäst din situation?",
+  "TroubleshootModOrAsset": "Vilken typ av innehåll skulle du vilja felsöka?"
 }
