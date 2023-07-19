@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "La musica inclusa potrebbe essere coperta da copyright",
   "IncompleteDescription": "Descrizione incompleta",
   "Successor": "Successore di ..",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Carica Dopo ..",
   "Alternative": "Alternativa a ..",
   "SameFunctionality": "Stessa funzionalità di ..",
   "RequirementAlternative": "Requirement Alternative",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' è sostituito da uno dei pacchetti seguenti."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' verrà caricato direttamente dopo '{1}'.",
+    "Plural": "'{0}' verrà caricato direttamente dopo i seguenti pacchetti."
   },
   "Interaction_Identical": "Si tratta di versioni multiple dello stesso pacchetto.\n\nSi dovrebbe scegliere solo una di esse.",
   "Status_Succeeded": "'{0}' è stato sostituito da '{1}'.\n\nSi sta già usando '{1}', quindi non c'è più bisogno di '{0}'.",
