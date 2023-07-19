@@ -367,7 +367,7 @@
         "Date": "2023-05-24",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "Исправления",
                 "Changes": [
                     "Fixed the options tab not opening for macOS & Linux.",
                     "Fixed the Help & Logs tab not loading your current log automatically.",
@@ -381,7 +381,7 @@
         "Date": "2023-05-27",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Изменения",
                 "Changes": [
                     "Steam panels in the main menu are now shown by default, you can still hide them in the mod settings.",
                     "Requesting a review now requires a valid description and also sends your logs with the request. A disclaimer is shown next to the 'Send' button.",
@@ -402,7 +402,7 @@
         "Date": "2023-05-28",
         "ChangeGroups": [
             {
-                "Name": "Fixes & Changes",
+                "Name": "Исправления и изменения",
                 "Changes": [
                     "Added a message to let you know when 'Fix All Issues' & 'Run Cleanup' end.",
                     "Fixed a rare bug where loading a LOT 1 profile would keep loading forever.",
