@@ -35,7 +35,7 @@ internal partial class ItemListControl<T>
 
 		DrawThumbnail(e);
 		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
-		DrawIncludedButton(e, e.Rects, isIncluded, partialIncluded, true, localParentPackage, out var activeColor);
+		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
 		var scoreX = DrawScore(e, workshopInfo);
 
@@ -50,7 +50,7 @@ internal partial class ItemListControl<T>
 
 		DrawDividerLine(e);
 
-		var maxTagX = DrawButtons(e, isPressed, localParentPackage);
+		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
 
 		DrawTags(e, maxTagX);
 
@@ -108,18 +108,24 @@ internal partial class ItemListControl<T>
 
 	private void DrawTags(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, int maxTagX)
 	{
-		var tagsRect = new Rectangle(e.ClipRectangle.X, e.Rects.IconRect.Bottom + (GridPadding.Vertical * 2), 0, 0);
+		var startLocation = GridView
+			? new Point(e.ClipRectangle.X, e.Rects.IconRect.Bottom + (GridPadding.Vertical * 2))
+			: new Point(e.ClipRectangle.X + (int)(375 * UI.UIScale), e.ClipRectangle.Bottom - Padding.Bottom);
+		var tagsRect = new Rectangle(startLocation, default);
 
+		if(GridView)
 		e.Graphics.SetClip(new Rectangle(tagsRect.X, tagsRect.Y, maxTagX - tagsRect.X, e.ClipRectangle.Bottom - tagsRect.Y));
+		else
+			e.Graphics.SetClip(new Rectangle(tagsRect.X, e.ClipRectangle.Y, maxTagX - tagsRect.X, e.ClipRectangle.Height));
 
 		if (e.Item.Id > 0)
 		{
-			e.Rects.SteamIdRect = DrawTag(e, maxTagX, ref tagsRect, new TagItem(Domain.CS1.Enums.TagSource.Workshop, e.Item.Id.ToString()));
+			e.Rects.SteamIdRect = DrawTag(e, maxTagX, startLocation, ref tagsRect, new TagItem(Domain.CS1.Enums.TagSource.Workshop, e.Item.Id.ToString()));
 		}
 
 		foreach (var item in e.Item.GetTags(IsPackagePage))
 		{
-			DrawTag(e, maxTagX, ref tagsRect, item);
+			DrawTag(e, maxTagX, startLocation, ref tagsRect, item);
 		}
 
 		var seamRect = new Rectangle(maxTagX - (int)(50 * UI.UIScale), (int)e.Graphics.ClipBounds.Y, (int)(50 * UI.UIScale), (int)e.Graphics.ClipBounds.Height);
@@ -142,29 +148,31 @@ internal partial class ItemListControl<T>
 		e.Graphics.FillRectangle(lineBrush, lineRect);
 	}
 
-	private Rectangle DrawTag(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, int maxTagX, ref Rectangle tagsRect, ITag item)
+	private Rectangle DrawTag(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, int maxTagX, Point startLocation, ref Rectangle tagsRect, ITag item)
 	{
 		using var tagIcon = IconManager.GetSmallIcon(item.Icon);
 
-		var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, ContentAlignment.TopLeft, large: true, mousePosition: CursorLocation);
+		var padding = GridView ? GridPadding : Padding;
+		var tagSize = e.Graphics.MeasureLabel(item.Value, tagIcon, large: GridView);
+		var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, GridView ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, large: GridView, mousePosition: CursorLocation);
 
 		e.Rects.TagRects[item] = tagRect;
 
-		tagsRect.X += GridPadding.Left + tagRect.Width;
+		tagsRect.X += padding.Left + tagRect.Width;
 
-		if (tagsRect.X + (int)(70 * UI.FontScale) > maxTagX)
+		if (tagsRect.X + tagSize.Width+ (int)(25 * UI.UIScale) > maxTagX)
 		{
-			tagsRect.X = e.ClipRectangle.X;
-			tagsRect.Y += tagRect.Height + GridPadding.Top;
+			tagsRect.X = startLocation.X;
+			tagsRect.Y += ( GridView?1:-1)*(tagRect.Height + padding.Top);
 		}
 
 		return tagRect;
 	}
 
-	private int DrawButtons(ItemPaintEventArgs<T, Rectangles> e, bool isPressed, ILocalPackageWithContents? package)
+	private int DrawButtons(ItemPaintEventArgs<T, Rectangles> e, bool isPressed, ILocalPackageWithContents? package, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
-		var size = UI.Scale(new Size(28, 28), UI.FontScale);
+		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
 		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : Padding.Right), e.ClipRectangle.Bottom - size.Height, size.Width, size.Height);
 
 		if (package is not null)
@@ -178,7 +186,7 @@ internal partial class ItemListControl<T>
 			rect.X -= rect.Width + padding.Left;
 		}
 
-		if (e.Item.GetWorkshopInfo()?.Url is not null)
+		if (workshopInfo?.Url is not null)
 		{
 			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
 
@@ -248,12 +256,12 @@ internal partial class ItemListControl<T>
 
 	private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
 	{
-		using var font = UI.Font(GridView ? 10.5F : CompactList ? 8.25F : 9F, FontStyle.Bold);
+		using var font = UI.Font(GridView ? 10.5F : CompactList ? 9.75F : 9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
 		var tags = new List<(Color Color, string Text)>();
 		var text = mod ? e.Item.CleanName(out tags) : e.Item.ToString();
 		using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) && !IsPackagePage ? FormDesign.Design.ActiveColor : ForeColor);
-		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
 
 		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
 		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
@@ -320,7 +328,7 @@ internal partial class ItemListControl<T>
 
 		rects.TextRect = rectangle.Pad(rects.IconRect.Width + GridPadding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(10.5F, FontStyle.Bold), ContentAlignment.TopLeft);
 
-		rects.IncludedRect = rects.TextRect.Align(new Size(rects.TextRect.Height, rects.TextRect.Height), ContentAlignment.TopRight);
+		rects.IncludedRect = rects.TextRect.Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.TopRight);
 
 		if (_settings.UserSettings.AdvancedIncludeEnable && item.LocalParentPackage?.Mod is not null)
 		{

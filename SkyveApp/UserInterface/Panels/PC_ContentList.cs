@@ -350,7 +350,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		DD_Sorting.Width = (int)(175 * UI.FontScale);
 		TB_Search.Width = (int)(250 * UI.FontScale);
 
-		B_ListView.Size = B_GridView.Size = B_CompactList.Size = UI.Scale(new Size(24, 24), UI.FontScale);
+		B_ListView.Size = B_GridView.Size = B_CompactList.Size = UI.Scale(new Size(22, 22), UI.FontScale);
 
 		var size = (int)(30 * UI.FontScale) - 6;
 

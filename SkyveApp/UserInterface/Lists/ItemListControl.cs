@@ -74,7 +74,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		get => _compactList; set
 		{
 			_compactList = value;
-			ItemHeight = _compactList ? 24 : 54;
+			baseHeight = _compactList ? 24 : 54;
 
 			if (Live)
 			{
@@ -133,7 +133,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		else
 		{
 			HighlightOnHover = true;
-			Padding = UI.Scale(new Padding(CompactList ? 2 : 3), UI.FontScale);
+			Padding = new Padding((int)Math.Floor((CompactList ? 1.5 : 2.5) * UI.FontScale));
 		}
 	}
 

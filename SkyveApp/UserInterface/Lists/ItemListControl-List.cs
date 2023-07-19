@@ -7,10 +7,95 @@ using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
 
-partial class ItemListControl<T>
+internal partial class ItemListControl<T>
 {
+	private void OnPaintItemCompactList(ItemPaintEventArgs<T, Rectangles> e)
+	{
+		var localPackage = e.Item.LocalPackage;
+		var localParentPackage = localPackage?.LocalParentPackage;
+		var workshopInfo = e.Item.GetWorkshopInfo();
+		var partialIncluded = false;
+		var isPressed = false;
+		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(e.Item.LocalPackage!, out partialIncluded)) || partialIncluded;
+
+		var compatibilityReport = e.Item.GetCompatibilityInfo();
+		var notificationType = compatibilityReport?.GetNotification();
+		var statusText = (string?)null;
+		var statusIcon = (DynamicIcon?)null;
+		var statusColor = Color.Empty;
+
+		if (e.IsSelected)
+		{
+			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
+		}
+		if (notificationType > NotificationType.Info)
+		{
+			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
+		}
+		else if (GetStatusDescriptors(e.Item, out statusText, out statusIcon, out statusColor))
+		{
+			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
+		}
+		else
+		{
+			e.BackColor = BackColor;
+		}
+
+		if (!IsPackagePage && e.HoverState.HasFlag(HoverState.Hovered) && (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)))
+		{
+			e.BackColor = e.BackColor.MergeColor(FormDesign.Design.ActiveColor, e.HoverState.HasFlag(HoverState.Pressed) ? 0 : 90);
+
+			isPressed = e.HoverState.HasFlag(HoverState.Pressed);
+		}
+
+		base.OnPaintItemList(e);
+
+		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
+		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
+
+
+		//if (workshopInfo?.Author is not null)
+		//{
+		//	DrawAuthor(e, workshopInfo.Author, scoreX);
+		//}
+		//else if (e.Item.IsLocal)
+		//{
+		//	DrawFolderName(e, localParentPackage!, scoreX);
+		//}
+
+		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+
+		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+
+		if (e.Rects.DownloadStatusRect.X > 0)
+		{
+			maxTagX = Math.Min(maxTagX, e.Rects.DownloadStatusRect.X);
+		}
+		else if (e.Rects.CompatibilityRect.X > 0)
+		{
+			maxTagX = Math.Min(maxTagX, e.Rects.CompatibilityRect.X);
+		}
+
+		DrawTags(e, maxTagX);
+
+		e.Graphics.ResetClip();
+
+		if (!isIncluded && localPackage is not null)
+		{
+			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+		}
+	}
+
 	protected override void OnPaintItemList(ItemPaintEventArgs<T, Rectangles> e)
 	{
+		if (CompactList)
+		{
+			OnPaintItemCompactList(e);
+
+			return;
+		}
+
 		var localPackage = e.Item.LocalPackage;
 		var localParentPackage = localPackage?.LocalParentPackage;
 		var workshopInfo = e.Item.GetWorkshopInfo();
@@ -52,7 +137,7 @@ partial class ItemListControl<T>
 
 		DrawThumbnail(e);
 		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
-		DrawIncludedButton(e, e.Rects, isIncluded, partialIncluded, true, localParentPackage, out var activeColor);
+		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
 		var scoreX = DrawScore(e, workshopInfo) + Padding.Horizontal;
 
@@ -65,13 +150,22 @@ partial class ItemListControl<T>
 			DrawFolderName(e, localParentPackage!, scoreX);
 		}
 
-		var maxTagX = DrawButtons(e, isPressed, localParentPackage);
+		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+
+		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+
+		if (e.Rects.DownloadStatusRect.X > 0)
+		{
+			maxTagX = Math.Min(maxTagX, e.Rects.DownloadStatusRect.X);
+		}
+		else if (e.Rects.CompatibilityRect.X > 0)
+		{
+			maxTagX = Math.Min(maxTagX, e.Rects.CompatibilityRect.X);
+		}
 
 		DrawTags(e, maxTagX);
 
 		e.Graphics.ResetClip();
-
-		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
 
 		if (!isIncluded && localPackage is not null)
 		{
@@ -491,101 +585,110 @@ partial class ItemListControl<T>
 		}
 	}
 
-	private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, Rectangles rects, bool isIncluded, bool partialIncluded, bool large, ILocalPackageWithContents? package, out Color activeColor)
+	private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageWithContents? package, out Color activeColor)
 	{
-		activeColor = FormDesign.Design.ActiveColor;
+		activeColor = default;
 
 		if (package is null && e.Item.IsLocal)
 		{
 			return; // missing local item
 		}
 
-		var inclEnableRect = rects.EnabledRect == Rectangle.Empty ? rects.IncludedRect : Rectangle.Union(rects.IncludedRect, rects.EnabledRect);
-
-		//if (!GridView)
-		//{
-		//	inclEnableRect = inclEnableRect.Pad(0, Padding.Top, 0, Padding.Bottom).Pad(2);
-		//}
-
+		var inclEnableRect = e.Rects.EnabledRect == Rectangle.Empty ? e.Rects.IncludedRect : Rectangle.Union(e.Rects.IncludedRect, e.Rects.EnabledRect);
 		var incl = new DynamicIcon(_subscriptionsManager.IsSubscribing(e.Item) ? "I_Wait" : partialIncluded ? "I_Slash" : isIncluded ? "I_Ok" : package is null ? "I_Add" : "I_Enabled");
 		var mod = package?.Mod;
 		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
 
+		DynamicIcon enabl = null;
 		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{
-			var enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+			enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");
+
 			if (isIncluded)
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
+				activeColor = partialIncluded ? FormDesign.Design.YellowColor : mod.IsEnabled() ? FormDesign.Design.GreenColor : FormDesign.Design.RedColor;
 			}
 			else if (mod.IsEnabled())
 			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = FormDesign.Design.YellowColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
+				activeColor = FormDesign.Design.YellowColor;
 			}
-			else if (inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered))
-			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
-			}
+		}
+		else if (isIncluded)
+		{
+			activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor;
+		}
 
-			if (required)
-			{
-				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(200, BackColor)), inclEnableRect, (int)(3 * UI.FontScale));
-			}
+		Color iconColor;
 
-			using var includedIcon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color((required || (rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			using var enabledIcon = (large ? enabl.Large : enabl.Get(rects.IncludedRect.Height / 2)).Color((required || (rects.EnabledRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered))) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : base.ForeColor);
-			e.Graphics.DrawImage(includedIcon, rects.IncludedRect.CenterR(includedIcon.Size));
-			e.Graphics.DrawImage(enabledIcon, rects.EnabledRect.CenterR(enabledIcon.Size));
+		if (required && activeColor != default)
+		{
+			iconColor = FormDesign.Design.Type is FormDesignType.Light ? activeColor.MergeColor(ForeColor, 75) : activeColor;
+			activeColor = activeColor.MergeColor(BackColor, FormDesign.Design.Type is FormDesignType.Light ? 35 : 20);
+		}
+		else if (activeColor == default && inclEnableRect.Contains(CursorLocation))
+		{
+			activeColor = Color.FromArgb(20, ForeColor);
+			iconColor = FormDesign.Design.ForeColor;
 		}
 		else
 		{
-			if (isIncluded)
-			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered) ? 150 : 255, activeColor = partialIncluded ? FormDesign.Design.YellowColor : FormDesign.Design.GreenColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
-			}
-			else if (inclEnableRect.Contains(CursorLocation) && !required && e.HoverState.HasFlag(HoverState.Hovered))
-			{
-				using var brush = inclEnableRect.Gradient(Color.FromArgb(20, ForeColor), 1.5F);
-				e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(3 * UI.FontScale));
-			}
+			iconColor = activeColor.GetTextColor();
+		}
 
-			if (required)
-			{
-				e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(200, BackColor)), inclEnableRect, (int)(3 * UI.FontScale));
-			}
+		using var brush = inclEnableRect.Gradient(activeColor);
 
-			using var icon = (large ? incl.Large : incl.Get(rects.IncludedRect.Height / 2)).Color(required || (rects.IncludedRect.Contains(CursorLocation) && e.HoverState.HasFlag(HoverState.Hovered)) ? activeColor : isIncluded ? FormDesign.Design.ActiveForeColor : ForeColor);
-			e.Graphics.DrawImage(icon, inclEnableRect.CenterR(icon.Size));
+		e.Graphics.FillRoundedRectangle(brush, inclEnableRect, (int)(4 * UI.FontScale));
+
+		using var includedIcon = incl.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
+		using var enabledIcon = enabl?.Get(e.Rects.IncludedRect.Width * 3 / 4).Color(iconColor);
+
+		e.Graphics.DrawImage(includedIcon, e.Rects.IncludedRect.CenterR(includedIcon.Size));
+		if (enabledIcon is not null)
+		{
+			e.Graphics.DrawImage(enabledIcon, e.Rects.EnabledRect.CenterR(includedIcon.Size));
 		}
 	}
 
 	private ItemListControl<T>.Rectangles GenerateListRectangles(T item, Rectangle rectangle)
 	{
+		rectangle = rectangle.Pad(Padding.Left, 0, Padding.Right, 0);
+
 		var rects = new Rectangles(item)
 		{
-			IconRect = rectangle.Align(new Size(rectangle.Height - Padding.Vertical, rectangle.Height - Padding.Vertical), ContentAlignment.MiddleLeft)
+			IconRect = CompactList ? default : rectangle.Align(new Size(rectangle.Height - Padding.Vertical, rectangle.Height - Padding.Vertical), ContentAlignment.MiddleLeft)
 		};
+
+		var includedSize = 28;
 
 		if (_settings.UserSettings.AdvancedIncludeEnable && item.LocalParentPackage?.Mod is not null)
 		{
-			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(28 * UI.FontScale), rects.IconRect.Height / 2), ContentAlignment.MiddleLeft);
+			rects.EnabledRect = rects.IncludedRect = rectangle.Pad(Padding).Align(new Size((int)(includedSize * UI.FontScale), CompactList ? (int)(22 * UI.FontScale) : (rects.IconRect.Height / 2)), ContentAlignment.MiddleLeft);
 
-			rects.IncludedRect.Y -= rects.IncludedRect.Height / 2;
-			rects.EnabledRect.Y += rects.EnabledRect.Height / 2;
+			if (CompactList)
+			{
+				rects.EnabledRect.X += rects.EnabledRect.Width;
+			}
+			else
+			{
+				rects.IncludedRect.Y -= rects.IncludedRect.Height / 2;
+				rects.EnabledRect.Y += rects.EnabledRect.Height / 2;
+			}
 		}
 		else
 		{
-			rects.IncludedRect = rectangle.Pad(Padding).Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.MiddleLeft);
+			rects.IncludedRect = rectangle.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 22 : includedSize), UI.FontScale), ContentAlignment.MiddleLeft);
 		}
 
-		rects.IconRect.X += rects.IncludedRect.Right + Padding.Left;
+		if (CompactList)
+		{
+			rects.TextRect = rectangle.Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + Padding.Left, 0, 0, 0);
+		}
+		else
+		{
+			rects.IconRect.X += rects.IncludedRect.Right + Padding.Horizontal;
 
-		rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9F, FontStyle.Bold), ContentAlignment.TopLeft);
-
+			rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9F, FontStyle.Bold), ContentAlignment.TopLeft);
+		}
 		//rects.TextRect.Width = rects.IncludedRect.X - rects.TextRect.X;
 
 		rects.CenterRect = rects.TextRect;
