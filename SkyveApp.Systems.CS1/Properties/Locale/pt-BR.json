@@ -170,19 +170,19 @@
   "DlcUpdateNotice": "Se as suas DLCs não estão aparecendo aqui, certifique-se de abrir o jogo pelo menos uma vez",
   "DlcCount": "{0} DLCs possuídas",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "Inclua todos os itens deste Pacote",
+    "Plural": "Incluir todos os pacotes selecionados"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "Excluir todos os itens deste pacote",
+    "Plural": "Excluir todos os pacotes selecionados"
   },
   "Unfiltered": "Não filtrado",
   "AnyTags": "Qualquer Etiqueta",
   "AdvancedLaunchOptions": "Mostrar opções extras de inicialização",
   "MovePackageToLocalFolder": {
-    "One": "Copy package to a local folder",
-    "Plural": "Copy all selected packages to a local folder"
+    "One": "Copie o pacote para a pasta local",
+    "Plural": "Copiar todos os pacotes selecionados para uma pasta local"
   },
   "AllItems": "Todos os itens",
   "TotalItems": "Total de Itens",
@@ -210,8 +210,8 @@
   "SaveFileInfo": "Selecione um arquivo de salvamento para ser carregado automaticamente ao abrir o jogo",
   "LoadPlayset": "Carregar Coleção de Mods",
   "CopyAuthorSteamId": {
-    "One": "Copy this Author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Copiar o ID deste Autor",
+    "Plural": "Copiar os IDs dos autores dos pacotes selecionados"
   },
   "ShowingFilteredItems": "Mostrando {0} de {1} itens no total",
   "DropNewPlayset": "Arraste ou selecione aqui um arquivo .json, ou .xml de uma coleção de mods para importá-lo",
@@ -258,8 +258,8 @@
   "AssetOutOfDatePlural": "recursos encontram-se desatualizados",
   "CopyVersionNumber": "Copiar número da versão",
   "SubscribeToItem": {
-    "One": "Subscribe from this Package",
-    "Plural": "Subscribe from the selected Packages"
+    "One": "Inscrever-se a partir deste pacote",
+    "Plural": "Inscrever-se a partir dos pacotes selecionados"
   },
   "LoadCollectionTip": "Carregar a lista de itens da coleção e gerenciar quais itens você deseja assinar, incluir ou excluir desta coleção.",
   "LsmMissingTip": "Arraste e solte um arquivo de relatório do LSM aqui ou clique para selecionar um para assinar os recursos ausentes listados no relatório",
@@ -316,8 +316,8 @@
   "OBSOLETE": "OBSOLETO",
   "ABANDONED": "ABANDONADO",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "Esta ação não pode ser revertida.",
+    "Plural": "Esta ação não pode ser revertida. E afetará os pacotes {0}"
   },
   "AlwaysOpenFiltersAndActions": "Mostrar a seção de Filtros por padrão",
   "AlwaysOpenFiltersAndActions_Tip": "Manter a seção de filtros sempre aberta ao entrar em uma guia de conteúdo",
@@ -332,29 +332,29 @@
   "FailedToOpenTC": "Falha ao abrir o Alterador de Tema",
   "FailedToDeleteItem": "Falha ao excluir item",
   "DeleteAsset": {
-    "One": "Delete this asset",
-    "Plural": "Delete the selected assets"
+    "One": "Excluir este Recurso",
+    "Plural": "Excluir os recursos selecionados"
   },
   "OpenChangelog": "Abrir registro de alterações",
   "IncludeThisItemInAllPlaysets": {
     "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "Plural": "Inclua os itens selecionados em todas as suas coleções de mods"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclua o item selecionado em todas as suas coleções de mods",
+    "Plural": "Exclua os itens selecionados em todas as suas coleções de mods"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "Copiar o nome deste pacote",
+    "Plural": "Copiar os nomes dos pacotes selecionados"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "Copiar o nome deste autor",
+    "Plural": "Copiar os nomes dos autores dos pacotes selecionados"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
-    "Plural": "Copy the selected packages' folder names"
+    "One": "Copiar o nome da pasta",
+    "Plural": "Copiar os nomes das pastas selecionadas dos pacotes"
   },
   "PlaysetNameUsed": "Você já possui uma Coleção de Mods com o mesmo nome. Por favor, altere o nome de um dos arquivos para prosseguir.",
   "FailedToImportLegacyPlayset": "Falha ao converter esta Coleção de Mods antiga.",
@@ -371,7 +371,7 @@
   "EditPlaysetName": "Editar o nome desta coleção de mods",
   "SavePlaysetChanges": "Salvar as configurações atuais do pacote no arquivo desta coleção de mods",
   "Sorting_Color": "Cor do Perfil",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
+  "CreateShortcutPlayset": "Criar um atalho na sua área de trabalho",
   "AskToLaunchGameForShortcut": "Gostaria que o atalho também iniciasse o jogo com o seu perfil?",
   "TextImportMissingInfo": "Carregar um arquivo de texto contendo IDs da Steam para facilitar a assinatura ou gerenciamento deles",
   "ImportFromText": "Importar do texto",
@@ -379,8 +379,8 @@
   "XMLImportInfo": "Você pode usar arquivos da BOB, Tree Brush, Theme Mix etc..",
   "ImportFromTextInfo": "Qualquer formato de texto é suportado",
   "LsmImportInfo": "Certifique-se de selecionar o arquivo 'Relatório'",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "Nenhuma Coleção para Exibir",
+  "NoPlaysetsMatchFilters": "Nenhuma coleção corresponde a sua busca",
   "Your Save-games": "Seus Salvamentos",
   "App Data": "Pasta 'AppData'",
   "Custom Maps": "Mapas Personalizados",
@@ -404,7 +404,7 @@
   "DeleteAll": "Deletar todos os itens exibidos",
   "FlipItemCopyFilterAction": "Trocar o comportamento do Ctrl+Clique para filtrar nas listas de conteúdo",
   "FlipItemCopyFilterAction_Tip": "Inverte o comportamento padrão de clicar em rótulos para que o clique normal filtre e o Ctrl+Clique execute a ação padrão.",
-  "AltClickTo": "Alt+Click to {0}",
+  "AltClickTo": "Alt+Clique para {0}",
   "FilterByThisAuthor": "Filtrar por este autor",
   "AddToSearch": "Adicione '{0}' à sua pesquisa",
   "CopyToClipboard": "Copiar '{0}' para a área de transferência",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "Interrompe a ferramenta de excluir automaticamente pacotes que você não tem assinatura ao abrir o jogo.",
   "CustomLaunchArguments": "Argumentos de Abertura Personalizados",
   "LaunchArgsInfo": "Adicionar argumentos adicionais ao abrir o jogo",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "Pacotes faltando do '{0}'",
   "UnusedLSMReport": "LSM Recursos não usados",
   "MissingLSMReport": "LSM Recursos ausentes",
   "SearchGenericPackages": "Pesquisar nestes pacotes..",
@@ -508,20 +508,20 @@
     "Plural": "Exibindo {0} {1}, {2}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "Exibindo {0} {1}, {2} selecionado",
+    "Plural": "Exibindo {0} {1}, {2} selecionados"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "Exibindo {0} {1}, {2} selecionado, {3}",
+    "Plural": "Exibindo {0} {1}, {2} selecionados, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} Está oculto devido à configuração do seu perfil",
     "Plural": "{0} {1} Está oculto devido à configuração do seu perfil"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "Editar a compatibilidade deste pacote",
+    "Plural": "Editar compatibilidade dos pacotes selecionados"
   },
   "AnyIssue": "Algum Problema",
   "AnyUsage": "Algum Uso",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "Falha ao enviar sua solicitação de análise para '{0}'.\n\n{1}",
   "SendReview": "Enviar o pedido de análise",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "Editar as etiquetas deste pacote",
+    "Plural": "Editar etiquetas dos itens selecionados"
   },
   "ShowAllReferencedPackages": "Mostrar pacotes excluídos na aba 'Referências'",
   "ShowAllReferencedPackages_Tip": "Exibe os pacotes excluídos e incluídos que referenciam o que você está visualizando.",
@@ -634,25 +634,25 @@
   "PastePlaysetId": "Cole aqui o ID da coleção de mods que você deseja importar",
   "AssumeInternetConnectivity": "Ignorar verificações de conexão da Internet",
   "AssumeInternetConnectivity_Tip": "Ignora a verificação de internet e assume automaticamente que você está conectado.",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
-  "AddTagBox": "Add a new tag here",
-  "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
+  "SelectAll": "Selecionar todos os itens exibidos",
+  "DeselectAll": "Desmarcar todos os itens exibidos",
+  "AddTagBox": "Adicionar uma nova etiqueta aqui",
+  "EditingMultipleTags": "Editar etiquetas de vários pacotes irá substituir cada uma das suas etiquetas personalizadas.",
   "EditTagsOfPackage": {
-    "One": "Edit all of this package's assets' Tags",
-    "Plural": "Edit all of the selected packages' assets' Tags"
+    "One": "Editar todas as etiquetas dos recursos deste pacote",
+    "Plural": "Editar todas as etiquetas dos recursos dos pacotes selecionados"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "Etiquetas Personalizadas: {0}",
+    "Plural": "Etiquetas Personalizadas: pacotes {0}"
   },
-  "CustomTags": "Custom Tags",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
-  "TroubleshootIssues": "Troubleshoot Issues",
-  "ViewTroubleshootOptions": "View troubleshooting options",
-  "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
-  "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
-  "TroubleshootSelection": "Which option best describes your situation?",
-  "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?"
+  "CustomTags": "Etiquetas Personalizadas",
+  "WorkshopAndGameTags": "Oficina e Etiquetas No Jogo",
+  "TroubleshootIssues": "Solução de problemas",
+  "ViewTroubleshootOptions": "Exibir opções de solução de problemas",
+  "TroubleshootInfo": "Se você tem um mod ou um arquivo que está causando um problema, ou está faltando, e você não sabe qual é; Tente solucionar o problema aqui:",
+  "TroubleshootCaused": "Um mod ou um recurso que eu estou usando está causando problemas",
+  "TroubleshootMissing": "Estou sem um mod ou recurso, e isso está causando problemas",
+  "TroubleshootSelection": "Qual opção melhor descreve sua situação?",
+  "TroubleshootModOrAsset": "Que tipo de conteúdo você gostaria de solucionar problemas?"
 }
