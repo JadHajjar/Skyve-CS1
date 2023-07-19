@@ -37,4 +37,9 @@ public class GenericWorkshopPackage : IPackage
 	[JsonIgnore] public ILocalPackageWithContents? LocalParentPackage => this.GetLocalPackage()?.LocalParentPackage;
 	[JsonIgnore] public ILocalPackage? LocalPackage => this.GetLocalPackage();
 	[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
+
+	public override string ToString()
+	{
+		return this.GetWorkshopInfo()?.Name ?? Name;
+	}
 }

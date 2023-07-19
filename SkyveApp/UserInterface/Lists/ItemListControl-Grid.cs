@@ -69,7 +69,7 @@ internal partial class ItemListControl<T>
 
 			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
 		}
-		else if (localPackage is not null)
+		else if (localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
@@ -82,7 +82,8 @@ internal partial class ItemListControl<T>
 		var notificationType = compatibilityReport?.GetNotification();
 		outerColor = default;
 
-		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom;
+		var height =  e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - GridPadding.Bottom;
+
 		if (notificationType > NotificationType.Info)
 		{
 			outerColor = notificationType.Value.GetColor();
@@ -169,17 +170,18 @@ internal partial class ItemListControl<T>
 		return tagRect;
 	}
 
-	private int DrawButtons(ItemPaintEventArgs<T, Rectangles> e, bool isPressed, ILocalPackageWithContents? package, IWorkshopInfo? workshopInfo)
+	private int DrawButtons(ItemPaintEventArgs<T, Rectangles> e, bool isPressed, ILocalPackageWithContents? parentPackage, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
-		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : Padding.Right), e.ClipRectangle.Bottom - size.Height, size.Width, size.Height);
+		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : Padding.Right), CompactList ?(e.ClipRectangle.Y+(e.ClipRectangle.Height-size.Height)/2):( e.ClipRectangle.Bottom - size.Height), size.Width, size.Height);
+		var backColor =  Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
 
-		if (package is not null)
+		if (parentPackage is not null)
 		{
 			using var icon = IconManager.GetIcon("I_Folder", size.Height * 3 / 4);
 
-			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: Color.FromArgb(175, FormDesign.Design.BackColor));
+			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
 			e.Rects.FolderRect = rect;
 
@@ -190,7 +192,7 @@ internal partial class ItemListControl<T>
 		{
 			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
 
-			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: Color.FromArgb(175, FormDesign.Design.BackColor));
+			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
 			e.Rects.SteamRect = rect;
 
@@ -201,7 +203,7 @@ internal partial class ItemListControl<T>
 		{
 			using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
 
-			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: Color.FromArgb(175, FormDesign.Design.BackColor));
+			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
 			e.Rects.GithubRect = rect;
 
@@ -339,7 +341,7 @@ internal partial class ItemListControl<T>
 
 		rects.TextRect.Width = rects.IncludedRect.X - rects.TextRect.X;
 
-		rects.CenterRect = rects.TextRect;
+		rects.CenterRect = rects.TextRect.Pad(-GridPadding.Horizontal, 0, 0, 0);
 
 		return rects;
 	}

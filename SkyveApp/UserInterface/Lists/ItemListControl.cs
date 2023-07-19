@@ -56,6 +56,8 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			GridView = _settings.UserSettings.PageSettings[page].GridView;
 			CompactList = _settings.UserSettings.PageSettings[page].Compact;
 		}
+		else
+			CompactList = false;
 
 		GridItemSize = new Size(390, 140);
 	}
@@ -132,7 +134,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		}
 		else
 		{
-			HighlightOnHover = true;
+			HighlightOnHover = false;
 			Padding = new Padding((int)Math.Floor((CompactList ? 1.5 : 2.5) * UI.FontScale));
 		}
 	}

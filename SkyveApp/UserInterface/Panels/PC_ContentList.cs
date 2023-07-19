@@ -861,6 +861,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = LC_Items.GridView;
+		settings.Compact = LC_Items.CompactList;
 		_settings.SessionSettings.Save();
 	}
 
@@ -874,6 +875,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = LC_Items.GridView;
+		settings.Compact = LC_Items.CompactList;
 		_settings.SessionSettings.Save();
 	}
 
@@ -887,6 +889,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		var settings = _settings.UserSettings.PageSettings.GetOrAdd(Page);
 		settings.GridView = LC_Items.GridView;
+		settings.Compact = LC_Items.CompactList;
 		_settings.SessionSettings.Save();
 	}
 }

@@ -65,7 +65,7 @@ internal partial class ItemListControl<T>
 
 		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
 
-		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor, maxTagX);
 
 		if (e.Rects.DownloadStatusRect.X > 0)
 		{
@@ -80,7 +80,7 @@ internal partial class ItemListControl<T>
 
 		e.Graphics.ResetClip();
 
-		if (!isIncluded && localPackage is not null)
+		if (!isIncluded && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
@@ -152,7 +152,7 @@ internal partial class ItemListControl<T>
 
 		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
 
-		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor, maxTagX);
 
 		if (e.Rects.DownloadStatusRect.X > 0)
 		{
@@ -167,23 +167,24 @@ internal partial class ItemListControl<T>
 
 		e.Graphics.ResetClip();
 
-		if (!isIncluded && localPackage is not null)
+		if (!isIncluded && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
 		}
 	}
 
-	private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
+	private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor, int maxX)
 	{
+		var height = CompactList ? ((int)(24 * UI.FontScale) - 4) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
 		if (notificationType > NotificationType.Info)
 		{
-			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(new(e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top), LocaleCR.Get($"{notificationType}"), "I_CompatibilityReport", notificationType.Value.GetColor(), ContentAlignment.TopRight, Padding, Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical, CursorLocation);
+			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(CompactList ? new(maxX - Padding.Right, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2)) : new(e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top), LocaleCR.Get($"{notificationType}"), "I_CompatibilityReport", notificationType.Value.GetColor(), ContentAlignment.TopRight, Padding, height, CursorLocation);
 		}
 
 		if (statusText is not null && statusIcon is not null)
 		{
-			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top), notificationType > NotificationType.Info ? "" : statusText, statusIcon, statusColor, ContentAlignment.TopRight, Padding, Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical, CursorLocation);
+			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(CompactList ? new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : (maxX - Padding.Right), e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2)) : new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top), notificationType > NotificationType.Info ? "" : statusText, statusIcon, statusColor, ContentAlignment.TopRight, Padding, height, CursorLocation);
 		}
 	}
 
@@ -687,11 +688,11 @@ internal partial class ItemListControl<T>
 		{
 			rects.IconRect.X += rects.IncludedRect.Right + Padding.Horizontal;
 
-			rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, 0, rectangle.Height).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9F, FontStyle.Bold), ContentAlignment.TopLeft);
+			rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, (int)(200 * UI.FontScale), rectangle.Height).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9F, FontStyle.Bold), ContentAlignment.TopLeft);
 		}
 		//rects.TextRect.Width = rects.IncludedRect.X - rects.TextRect.X;
 
-		rects.CenterRect = rects.TextRect;
+		rects.CenterRect = rects.TextRect.Pad(-Padding.Horizontal, 0, 0, 0);
 
 		return rects;
 
