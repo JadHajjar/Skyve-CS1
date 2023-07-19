@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "其中包含的音乐可能受版权保护",
   "IncompleteDescription": "描述信息不完整",
   "Successor": "继任模组",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "加载顺序在…之后",
   "Alternative": "备选方案",
   "SameFunctionality": "功能相同",
   "RequirementAlternative": "可用的备选方案",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' 的功能已被下列任意一个插件继承："
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}'将在'{1}'加载完成后直接加载。",
+    "Plural": "'{0}'将在以下插件加载完成后直接加载。"
   },
   "Interaction_Identical": "以下是同一插件的多个不同版本。\n\n您应当只使用其中一个版本，并取消订阅此插件的其它版本。",
   "Status_Succeeded": "'{0}' 的功能已被 '{1}' 继承。\n\n您已经使用了 '{1}'，因此不再需要使用 '{0}'。",
