@@ -139,13 +139,13 @@
   "PackageIncluded": "paquet inclus",
   "PackageIncludedPlural": "paquets activés",
   "CopyWorkshopLink": {
-    "One": "Copy this package's Workshop Link",
-    "Plural": "Copy the selected packages' Workshop Links"
+    "One": "Copier le lien du Workshop de ce paquet",
+    "Plural": "Copier le lien du Workshop des paquets sélectionnés"
   },
   "FilterOutPackagesWithMods": "Masquer les mods dans la page Paquets",
   "FilterOutPackagesWithOneAsset": "Masquer les paquets à assemblage unique de la page Paquet",
   "DeletePackage": {
-    "One": "Delete this package",
+    "One": "Supprimer ce paquet",
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
