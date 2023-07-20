@@ -50,7 +50,7 @@ internal partial class ItemListControl<T>
 
 		base.OnPaintItemList(e);
 
-		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
+		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
 
@@ -83,7 +83,7 @@ internal partial class ItemListControl<T>
 		if (!isIncluded && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
-			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
 		}
 	}
 
@@ -136,7 +136,7 @@ internal partial class ItemListControl<T>
 		base.OnPaintItemList(e);
 
 		DrawThumbnail(e);
-		DrawTitleAndTagsAndVersion(e, localParentPackage, workshopInfo, isPressed);
+		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
 		var scoreX = DrawScore(e, workshopInfo) + Padding.Horizontal;
@@ -170,7 +170,7 @@ internal partial class ItemListControl<T>
 		if (!isIncluded && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
-			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
+			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(Padding));
 		}
 	}
 
@@ -185,6 +185,36 @@ internal partial class ItemListControl<T>
 		if (statusText is not null && statusIcon is not null)
 		{
 			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(CompactList ? new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : (maxX - Padding.Right), e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2)) : new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top), notificationType > NotificationType.Info ? "" : statusText, statusIcon, statusColor, ContentAlignment.TopRight, Padding, height, CursorLocation);
+		}
+	}
+
+	protected override void DrawHeader(PaintEventArgs e)
+	{
+		var headers = new (string text, int width)[]
+		{
+			(Locale.Package, 0),
+			(Locale.Version, 50),
+			(Locale.UpdateTime, 100),
+			(Locale.Author, 100),
+			(Locale.Tags, 0),
+			(Locale.Status, 150),
+			("", 80)
+		};
+
+		var remainingWidth = Width - (int)(headers.Sum(x => x.width) * UI.FontScale);
+		var autoColumns = headers.Count(x => x.width == 0);
+		var xPos = 0;
+
+		using var font = UI.Font(7.5F, FontStyle.Bold);
+		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
+
+		foreach (var header in headers)
+		{
+			var width = header.width == 0 ? (remainingWidth / autoColumns) : (int)(header.width * UI.FontScale);
+
+			e.Graphics.DrawString(header.text.ToUpper(), font, brush, new Rectangle(xPos, 0, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+
+			xPos += width;
 		}
 	}
 
@@ -600,7 +630,7 @@ internal partial class ItemListControl<T>
 		var mod = package?.Mod;
 		var required = mod is not null && _modLogicManager.IsRequired(mod, _modUtil);
 
-		DynamicIcon enabl = null;
+		DynamicIcon? enabl = null;
 		if (_settings.UserSettings.AdvancedIncludeEnable && mod is not null)
 		{
 			enabl = new DynamicIcon(mod.IsEnabled() ? "I_Checked" : "I_Checked_OFF");

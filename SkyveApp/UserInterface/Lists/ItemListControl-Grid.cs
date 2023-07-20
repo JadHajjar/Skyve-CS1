@@ -256,9 +256,62 @@ internal partial class ItemListControl<T>
 		e.Rects.AuthorRect = authorRect;
 	}
 
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+	{
+		using var font = UI.Font(GridView ? 10.5F : CompactList ? 8.25F : 9F, FontStyle.Bold);
+		var mod = e.Item is not IAsset;
+		var tags = new List<(Color Color, string Text)>();
+		var text = mod ? e.Item.CleanName(out tags) : e.Item.ToString();
+		using var brush = new SolidBrush(isPressed ? FormDesign.Design.ActiveForeColor : (e.Rects.CenterRect.Contains(CursorLocation) || e.Rects.IconRect.Contains(CursorLocation)) && e.HoverState.HasFlag(HoverState.Hovered) && !IsPackagePage ? FormDesign.Design.ActiveColor : ForeColor);
+		e.Graphics.DrawString(text, font, brush, e.Rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = CompactList ? StringAlignment.Center : StringAlignment.Near });
+
+		var isVersion = localParentPackage?.Mod is not null && !e.Item.IsBuiltIn && !IsPackagePage;
+		var versionText = isVersion ? "v" + localParentPackage!.Mod!.Version.GetString() : e.Item.IsBuiltIn ? Locale.Vanilla : (e.Item is ILocalPackage lp ? lp.LocalSize.SizeString() : workshopInfo?.ServerSize.SizeString());
+		var date = workshopInfo?.ServerTime ?? e.Item.LocalParentPackage?.LocalTime;
+
+		var padding = GridView ? GridPadding : Padding;
+		var textSize = e.Graphics.Measure(text, font);
+		var tagRect = new Rectangle(e.Rects.TextRect.X + (int)textSize.Width, e.Rects.TextRect.Y, 0, e.Rects.TextRect.Height);
+
+		for (var i = 0; i < tags.Count; i++)
+		{
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true, mousePosition: i == 0 && localParentPackage?.Mod is not null ? CursorLocation : null);
+
+			if (i == 0 && !string.IsNullOrEmpty(versionText))
+			{
+				e.Rects.VersionRect = rect;
+			}
+
+			tagRect.X += padding.Left + rect.Width;
+		}
+
+		if (CompactList)
+		{
+			if (tagRect.X > )
+
+			return;
+		}
+
+		tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + padding.Bottom, 0, 0);		
+
+		if (!string.IsNullOrEmpty(versionText))
+		{
+			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: localParentPackage?.Mod is not null ? CursorLocation : null);
+
+			tagRect.X += padding.Left + e.Rects.VersionRect.Width;
+		}
+
+		if (date.HasValue && !IsPackagePage)
+		{
+			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
+
+			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
+		}
+	}
+
 	private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
 	{
-		using var font = UI.Font(GridView ? 10.5F : CompactList ? 9.75F : 9F, FontStyle.Bold);
+		using var font = UI.Font(GridView ? 10.5F : CompactList ? 8.25F : 9F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
 		var tags = new List<(Color Color, string Text)>();
 		var text = mod ? e.Item.CleanName(out tags) : e.Item.ToString();

@@ -144,6 +144,8 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		base.UIChanged();
 
 		OnViewChanged();
+
+		StartHeight = _compactList ? (int)(24*UI.FontScale) : 0;
 	}
 
 	protected override IEnumerable<DrawableItem<T, Rectangles>> OrderItems(IEnumerable<DrawableItem<T, Rectangles>> items)
