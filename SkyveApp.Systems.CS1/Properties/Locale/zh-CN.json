@@ -71,7 +71,7 @@
   "Preferences": "选项",
   "PlaysetName": "配置文件名称",
   "RenamePlayset": "重命名当前配置文件",
-  "StartScratch": "从头开始创建一个配置文件",
+  "StartScratch": "新建一个空白配置文件",
   "ContinueFromCurrent": "复制当前配置文件",
   "GamePlay": "建设城市",
   "EditorPlay": "制作资产",
@@ -203,15 +203,15 @@
   "LsmImportMissingInfo": "查看缺失的资产并进行订阅",
   "SelectedFileInvalid": "您选择的文件无效",
   "NoItemsToBeDisplayed": "没有要显示的项目",
-  "FirstSetupInfo": "使用 Skyve 应用程序前，请先在游戏主菜单的内容管理器内启用 Skyve 模组",
+  "FirstSetupInfo": "使用 Skyve 应用程序前，请先在游戏主菜单的内容管理器内启用 Skyve 模组\n\n或者，可以点击“忽略”并手动设置好文件夹路径。",
   "SetupIncomplete": "您还没完成初始设置",
   "LsmImportUnusedInfo": "查看未使用的资产并卸下/移除",
   "SkipFileInfo": "选择 LSMR 模组的跳过资产文本文件",
   "SaveFileInfo": "选择打开游戏时要自动加载的存档文件",
   "LoadPlayset": "加载配置文件",
   "CopyAuthorSteamId": {
-    "One": "Copy this Author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "复制作者的自定义 ID",
+    "Plural": "复制所有已选的插件的作者 ID"
   },
   "ShowingFilteredItems": "当前显示 {0} 项，共 {1} 项",
   "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
@@ -234,7 +234,7 @@
   "OverrideGameChanges_Tip": "在 Skyve 程序运行时，游戏中对模组的启用状态所作的任何改动，在下次启动游戏时将自动被配置文件的设定覆盖。",
   "HidePseudoMods_Tip": "Theme Mixer 模组会生成一个 DLL 文件，以便在创意工坊分享混合主题。启用此选项将会隐藏模组列表中的混合主题，并且始终保持这些混合主题为载入状态。",
   "AdvancedIncludeEnable_Tip": "启用此选项时，您将可以分别更改模组的装载和启用状态，类似于 Load Order Tool 1。",
-  "AdvancedLaunchOptions_Tip": "在配置文件设置中，显示供开发者使用的高级启动选项。",
+  "AdvancedLaunchOptions_Tip": "在配置文件的设置页面中，显示供开发者使用的高级启动选项。",
   "ShowFolderSettings_Tip": "在选项页面显示 Skyve 的文件夹设置。",
   "HelpTranslate_Tip": "在 Crowdin 上为 Skyve 的本地化翻译提供帮助。",
   "ThemeUIScale_Tip": "更改 Skyve 显示的字体、颜色和主题风格，或调整 UI 界面的显示比例",
@@ -346,41 +346,41 @@
   },
   "CopyPackageName": {
     "One": "复制插件的名称",
-    "Plural": "Copy the selected packages' names"
+    "Plural": "复制所有已选的插件的名称"
   },
   "CopyAuthorName": {
     "One": "复制作者的名字",
-    "Plural": "Copy the selected packages' author names"
+    "Plural": "复制所有已选的插件的作者名字"
   },
   "CopyFolderName": {
     "One": "复制文件夹名称",
-    "Plural": "Copy the selected packages' folder names"
+    "Plural": "复制所有已选的插件的文件夹名称"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
-  "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
+  "PlaysetNameUsed": "存在一个相同名称的配置文件。请更改其中任何一个文件的名称，才能继续操作。",
+  "FailedToImportLegacyPlayset": "转换旧版配置文件失败。",
   "Sorting_LastUsed": "上次使用时间",
   "OpenLinksInBrowser": "使用浏览器打开 Steam 链接",
   "OpenLinksInBrowser_Tip": "将 Steam 链接的打开方式更改为在您的默认浏览器中打开，而不是在 Steam 应用程序中打开。",
-  "PlaysetStillLoading": "Your playset is still loading, please wait before exiting this page.",
-  "ApplyPlaysetNameBeforeExit": "Please finish editing the playset's name before exiting this page.",
+  "PlaysetStillLoading": "您的配置文件还在加载中，请等待加载完毕，再退出此页面。",
+  "ApplyPlaysetNameBeforeExit": "请先编辑好配置文件的名称，再退出此页面。",
   "SteamNotOpenTo": "Steam 客户端当前尚未运行（请确保已打开加速器 / VPN）",
   "OpenSteamToContinue": "请打开 Steam 客户端（请确保打开加速器 / VPN），以继续完成您之前的下载任务。",
-  "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
-  "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's color",
+  "IncludeExcludeOtherPlayset": "在配置文件 '{1}' 中装载/卸下 {0}",
+  "OpenPlaysetFolder": "打开该配置文件存储位置文件夹",
+  "ChangePlaysetColor": "更改该配置文件图标的颜色",
   "EditPlaysetName": "编辑此配置文件的名称",
   "SavePlaysetChanges": "Save the current package settings to this playset's file",
   "Sorting_Color": "配置文件图标颜色",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
-  "AskToLaunchGameForShortcut": "是否要在点开 LOT 2 的快捷方式时，同时使用您的配置文件启动游戏？",
+  "CreateShortcutPlayset": "创建桌面快捷方式",
+  "AskToLaunchGameForShortcut": "是否要在打开 Skyve 的快捷方式时，同时使用您的配置文件启动游戏？",
   "TextImportMissingInfo": "导入包含 Steam ID 的文本文件，以方便订阅或管理插件",
   "ImportFromText": "导入文本文件",
   "ImportFromClipboard": "从剪贴板粘贴文本",
   "XMLImportInfo": "您可以导入 BOB 、Forest Brush Revisited 、Theme Mixer 2.5 等模组的配置文件。",
   "ImportFromTextInfo": "支持任何文本文件格式",
   "LsmImportInfo": "请务必选择 “Assets Report” 文件",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "没有找到配置文件",
+  "NoPlaysetsMatchFilters": "未搜索到相关配置文件",
   "Your Save-games": "您的游戏存档",
   "App Data": "App Data",
   "Custom Maps": "自定义地图",
@@ -400,10 +400,10 @@
   },
   "Use the System's Theme": "使用电脑系统主题",
   "Donate": "赞助",
-  "CopyAllIds": "复制所有显示的项目的 Steam 创意工坊 ID",
+  "CopyAllIds": "复制当前显示的所有项目的名称与数字 ID",
   "DeleteAll": "删除当前显示的所有项目",
-  "FlipItemCopyFilterAction": "无需按住 Ctrl 键，左键点击标签可直接将其添加到筛选标签",
-  "FlipItemCopyFilterAction_Tip": "启用此选项后，如果按住 Ctrl 键 + 鼠标左键点击一个标签，则可以查看该标签相关信息；如果不按住 Ctrl 键，鼠标左键点击一个标签，则可以将该标签添加到筛选选项的标签中。",
+  "FlipItemCopyFilterAction": "无需按住 Alt 键，左键点击标签可直接将其添加到筛选标签",
+  "FlipItemCopyFilterAction_Tip": "启用此选项后，如果按住 Alt 键 + 鼠标左键点击一个标签，则可以查看该标签相关信息；如果不按住 Alt 键，鼠标左键点击一个标签，则可以将该标签添加到筛选选项的标签中。",
   "AltClickTo": "按住 Alt 键 + 鼠标单击，来{0}",
   "FilterByThisAuthor": "按照此作者进行筛选",
   "AddToSearch": "将“ {0} ”添加到筛选标签",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "禁用此功能：启动游戏时删除已取订（但没删除干净）的插件。",
   "CustomLaunchArguments": "自定义启动参数",
   "LaunchArgsInfo": "为游戏添加额外的启动参数",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "配置文件 '{0}' 中缺失的插件",
   "UnusedLSMReport": "资产报告中未使用的资产",
   "MissingLSMReport": "资产报告中缺失的资产",
   "SearchGenericPackages": "搜索这些插件…",
@@ -504,16 +504,16 @@
     "Plural": "当前显示 {0} 个{1}"
   },
   "ShowingCountWarning": {
-    "One": "当前显示 {0} 个{1}，{2}",
-    "Plural": "当前显示 {0} 个{1}，{2}"
+    "One": "当前显示 {0} 个{1}，{3}",
+    "Plural": "当前显示 {0} 个{1}，{3}"
   },
   "ShowingSelectedCount": {
     "One": "当前显示 {0} 个{1}，已选择 {2} 个{1}",
     "Plural": "当前显示 {0} 个{1}，已选择 {2} 个{1}"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "当前显示 {0} 个{1}，已选择 {2} 个{1}，{3}",
+    "Plural": "当前显示 {0} 个{1}，已选择 {2} 个{1}，{3}"
   },
   "ItemsHidden": {
     "One": "{0} 个{1} 由于当前配置文件的用途已被隐藏",
@@ -521,7 +521,7 @@
   },
   "EditCompatibility": {
     "One": "编辑此插件的兼容性信息",
-    "Plural": "Edit selected packages' compatibility"
+    "Plural": "编辑已选插件的兼容性信息"
   },
   "AnyIssue": "任意问题",
   "AnyUsage": "任意用途",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "无法发送您关于 “{0}” 的检查申请。\n\n{1}",
   "SendReview": "发送检查申请",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "编辑此插件的标签",
+    "Plural": "编辑所有已选的插件的标签"
   },
   "ShowAllReferencedPackages": "在“引用”选项卡显示被卸下的插件",
   "ShowAllReferencedPackages_Tip": "无论被引用的插件已装载或已卸下，都在插件详情页面的“引用”选项卡显示它们。",
@@ -584,7 +584,7 @@
     "One": "在此进程中，您将取消订阅 {0} 个插件。",
     "Plural": "在此进程中，您将取消订阅 {0} 个插件。"
   },
-  "ViewThisPlaysetsPackages": "View this playset's contents",
+  "ViewThisPlaysetsPackages": "查看此配置文件的内容",
   "PendingDownloads": {
     "One": "当前有 {0} 个等待下载的项目",
     "Plural": "当前有 {0} 个等待下载的项目"
@@ -606,11 +606,11 @@
   "Sort By": "排序方式",
   "OpenCitiesAppData": "打开 Cities:Skylines 的 AppData 文件夹",
   "FailedToFetchLogs": "获取日志失败",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "查找在线配置文件",
   "AllUsages": "全部用途",
   "Invalid": "无效",
   "UpdatePlayset": "更新配置文件",
-  "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
+  "FailedToRetrievePlaysets": "无法检索在线配置文件",
   "DownloadPlayset": "下载配置文件",
   "ReloadAllData": "重新加载所有数据",
   "ResetSnoozes": "打开所有提醒",
@@ -618,40 +618,40 @@
   "ResetCompatibilityCache": "重置兼容性信息的缓存",
   "ResetImageCache": "清除缓存的图像",
   "ResetSteamCache": "清除 Steam 的缓存",
-  "SharePlayset": "Upload this playset",
+  "SharePlayset": "上传配置文件",
   "ResetInfo": "警告！任何重置操作都无法撤销。",
   "FailedToDownloadPlayset": "无法下载此配置文件。\n\n请稍后重试。",
-  "UpdatePlaysetTip": "Update your local version of this playset",
-  "DownloadPlaysetTip": "Download this playset to your local computer",
-  "EditPlaysetThumbnail": "Edit this playset's thumbnail picture",
+  "UpdatePlaysetTip": "使用本地版本更新此配置文件",
+  "DownloadPlaysetTip": "将配置文件下载到本地",
+  "EditPlaysetThumbnail": "编辑配置文件的缩略图",
   "MakePublic": "将此配置文件设为公开",
   "MakePrivate": "将此配置文件设为私密",
-  "CopyPlaysetLink": "Copy this playset's ID",
-  "FailedToUploadPlayset": "Failed to upload your playset",
-  "FailedToDeletePlayset": "Failed to delete your playset",
-  "FailedToUpdatePlayset": "Failed to update your playset",
+  "CopyPlaysetLink": "复制配置文件的 ID",
+  "FailedToUploadPlayset": "上传配置文件失败",
+  "FailedToDeletePlayset": "删除配置文件失败",
+  "FailedToUpdatePlayset": "更新配置文件失败",
   "ImportFromLink": "使用配置文件 ID 导入配置文件",
-  "PastePlaysetId": "Paste the ID of the playset you'd like to import",
+  "PastePlaysetId": "粘贴要导入的配置文件的 ID",
   "AssumeInternetConnectivity": "跳过网络连接检查",
   "AssumeInternetConnectivity_Tip": "跳过网络连接检查，程序将默认您有可用的网络连接（请务必打开加速器 / VPN）。",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
+  "SelectAll": "全选当前显示的所有项目",
+  "DeselectAll": "取消全选当前显示的所有项目",
   "AddTagBox": "在此处添加标签",
-  "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
+  "EditingMultipleTags": "同时编辑多个插件的标签，将会覆盖每个插件所有原有标签。",
   "EditTagsOfPackage": {
-    "One": "Edit all of this package's assets' Tags",
-    "Plural": "Edit all of the selected packages' assets' Tags"
+    "One": "编辑此插件所含资产的标签",
+    "Plural": "编辑所有已选插件中所含资产的标签"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "自定义标签：{0}",
+    "Plural": "自定义标签： {0} 个插件"
   },
   "CustomTags": "自定义标签",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
-  "TroubleshootIssues": "Troubleshoot Issues",
-  "ViewTroubleshootOptions": "View troubleshooting options",
-  "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
-  "TroubleshootCaused": "A mod or asset I'm using is causing issues",
+  "WorkshopAndGameTags": "创意工坊和游戏内标签",
+  "TroubleshootIssues": "故障修复",
+  "ViewTroubleshootOptions": "查看故障修复选项",
+  "TroubleshootInfo": "如果您发现有模组或资产引发问题或者丢失了，那么您可以在这里查找，并尝试修复遇到的问题：",
+  "TroubleshootCaused": "我使用的模组或资产引发了问题",
   "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
   "TroubleshootSelection": "Which option best describes your situation?",
   "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?"
