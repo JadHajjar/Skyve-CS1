@@ -146,15 +146,15 @@
   "FilterOutPackagesWithOneAsset": "Masquer les paquets à assemblage unique de la page Paquet",
   "DeletePackage": {
     "One": "Supprimer ce paquet",
-    "Plural": "Delete the selected packages"
+    "Plural": "Supprimer les paquets sélectionnés"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
-    "Plural": "Unsubscribe from the selected packages"
+    "One": "Se désabonner de ce paquet",
+    "Plural": "Se désabonner des paquets sélectionnés"
   },
   "CopyWorkshopId": {
-    "One": "Copy this package's Workshop ID",
-    "Plural": "Copy the selected packages' Workshop IDs"
+    "One": "Copier l'ID du Workshop de ce paquet",
+    "Plural": "Copier les ID du Workshop des paquets sélectionnés"
   },
   "CopyAuthorLink": "Copier le lien du profil de l'auteur",
   "CopyAuthorId": "Copier l'ID de l'auteur",
@@ -170,19 +170,19 @@
   "DlcUpdateNotice": "Si vos DLC ne sont pas affichés ici, assurez-vous d'ouvrir le jeu au moins une fois",
   "DlcCount": "{0} DLC totaux possédés",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "Inclure tous les éléments de ce paquet",
+    "Plural": "Inclure tous les paquets sélectionnés"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "Exclure tous les éléments de ce paquet",
+    "Plural": "Exclure tous les paquets sélectionnés"
   },
   "Unfiltered": "Non filtré",
   "AnyTags": "N'importe quel tag",
   "AdvancedLaunchOptions": "Afficher les options de lancement supplémentaires",
   "MovePackageToLocalFolder": {
-    "One": "Copy package to a local folder",
-    "Plural": "Copy all selected packages to a local folder"
+    "One": "Copier le paquet vers un dossier local",
+    "Plural": "Copier les paquets sélectionnés vers un dossier local"
   },
   "AllItems": "Tous les éléments",
   "TotalItems": "Total des éléments",
@@ -210,8 +210,8 @@
   "SaveFileInfo": "Sélectionnez un fichier de sauvegarde à charger automatiquement lorsque vous ouvrez le jeu",
   "LoadPlayset": "Load Playset",
   "CopyAuthorSteamId": {
-    "One": "Copy this Author's ID",
-    "Plural": "Copy the selected packages' author IDs"
+    "One": "Copier l'ID de l'auteur",
+    "Plural": "Copier les ID des auteurs des paquets sélectionnés"
   },
   "ShowingFilteredItems": "Affichage de {0} éléments sur {1} au total",
   "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
@@ -258,8 +258,8 @@
   "AssetOutOfDatePlural": "les assets sont obsolètes",
   "CopyVersionNumber": "Copier le numéro de version",
   "SubscribeToItem": {
-    "One": "Subscribe from this Package",
-    "Plural": "Subscribe from the selected Packages"
+    "One": "S'abonner à ce paquet",
+    "Plural": "S'abonner aux paquets sélectionnés"
   },
   "LoadCollectionTip": "Charger la liste des éléments de cette collection et gérer les éléments auxquels vous souhaitez vous abonner, inclure ou exclure de cette collection.",
   "LsmMissingTip": "Glissez et déposez un fichier de rapport LSM ici ou cliquez pour en sélectionner un pour vous abonner aux assets manquants listés dans le rapport",
@@ -316,8 +316,8 @@
   "OBSOLETE": "OBSOLÈTE",
   "ABANDONED": "ABANDONNÉ",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "Cette action ne peut pas être annulée.",
+    "Plural": "Cette action ne peut pas être annulée. Et affectera {0} paquets"
   },
   "AlwaysOpenFiltersAndActions": "Afficher la section Filtres par défaut",
   "AlwaysOpenFiltersAndActions_Tip": "Toujours ouvrir la section Filtres lorsque vous entrez dans un onglet de contenu",
