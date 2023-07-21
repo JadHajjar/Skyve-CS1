@@ -156,7 +156,7 @@
     "One": "复制此插件的创意工坊 ID",
     "Plural": "复制所有已选的插件的创意工坊 ID"
   },
-  "CopyAuthorLink": "复制作者的创意工坊主页链接",
+  "CopyAuthorLink": "复制此作者配置文件的链接",
   "CopyAuthorId": "复制作者的自定义 ID",
   "YourPlaysets": "您的配置文件",
   "UnFavoriteThisPlayset": "取消收藏此配置文件",
@@ -190,7 +190,7 @@
   "SubscribeAll": "订阅当前显示的所有项目",
   "DownloadAll": "下载当前显示的所有缺失的项目",
   "ReDownloadAll": "重新下载当前显示的所有已下载项目",
-  "MissingItemsRemain": "没有找到配置文件中的某些项目，这些项目可能已经丢失。如果仍要保存配置文件，将会从配置文件中删除已丢失的项目。",
+  "MissingItemsRemain": "配置文件中的部分插件没有找到，可能已经丢失。\n此后在保存配置文件时，已丢失的项目将被删除。",
   "ModIsPrivate": "此项目已被隐藏",
   "HidePseudoMods": "隐藏伪模组（如自定义混合主题）",
   "YourDlcs": "您的 DLC",
