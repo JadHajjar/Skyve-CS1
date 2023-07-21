@@ -20,9 +20,7 @@ internal partial class ItemListControl<T>
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
-		var statusText = (string?)null;
-		var statusIcon = (DynamicIcon?)null;
-		var statusColor = Color.Empty;
+		var statusShown = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
 
 		if (e.IsSelected)
 		{
@@ -32,7 +30,7 @@ internal partial class ItemListControl<T>
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
-		else if (GetStatusDescriptors(e.Item, out statusText, out statusIcon, out statusColor))
+		else if (statusShown)
 		{
 			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
 		}
@@ -53,15 +51,14 @@ internal partial class ItemListControl<T>
 		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
-
-		//if (workshopInfo?.Author is not null)
-		//{
-		//	DrawAuthor(e, workshopInfo.Author, scoreX);
-		//}
-		//else if (e.Item.IsLocal)
-		//{
-		//	DrawFolderName(e, localParentPackage!, scoreX);
-		//}
+		if (workshopInfo?.Author is not null)
+		{
+			DrawAuthor(e, workshopInfo.Author, scoreX);
+		}
+		else if (e.Item.IsLocal)
+		{
+			DrawFolderName(e, localParentPackage!, scoreX);
+		}
 
 		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
 
@@ -177,16 +174,54 @@ internal partial class ItemListControl<T>
 	private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor, int maxX)
 	{
 		var height = CompactList ? ((int)(24 * UI.FontScale) - 4) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
+	
 		if (notificationType > NotificationType.Info)
 		{
-			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(CompactList ? new(maxX - Padding.Right, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2)) : new(e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top), LocaleCR.Get($"{notificationType}"), "I_CompatibilityReport", notificationType.Value.GetColor(), ContentAlignment.TopRight, Padding, height, CursorLocation);
+			var point = CompactList 
+				? new Point(_columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
+				: new Point(e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top);
+
+			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
+				point,
+				LocaleCR.Get($"{notificationType}"),
+				"I_CompatibilityReport",
+				notificationType.Value.GetColor(),
+				CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
+				Padding,
+				height,
+				CursorLocation);
 		}
 
 		if (statusText is not null && statusIcon is not null)
 		{
-			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(CompactList ? new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : (maxX - Padding.Right), e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2)) : new(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top), notificationType > NotificationType.Info ? "" : statusText, statusIcon, statusColor, ContentAlignment.TopRight, Padding, height, CursorLocation);
+			var point = CompactList
+				? new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.Right + GridPadding.Left) : _columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
+				: new Point(notificationType > NotificationType.Info ? (e.Rects.CompatibilityRect.X - GridPadding.Left) : e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top);
+
+			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(
+				point,
+				notificationType > NotificationType.Info ? "" : statusText,
+				statusIcon,
+				statusColor,
+				CompactList ? ContentAlignment.TopLeft : ContentAlignment.TopRight,
+				Padding,
+				height,
+				CursorLocation);
 		}
 	}
+
+	private enum Columns
+	{
+		PackageName,
+		Version,
+		UpdateTime,
+		Author,
+		Tags,
+		Status,
+		Buttons
+	}
+
+	private readonly Dictionary<Columns, (int X, int Width)> _columnSizes = new();
 
 	protected override void DrawHeader(PaintEventArgs e)
 	{
@@ -208,11 +243,15 @@ internal partial class ItemListControl<T>
 		using var font = UI.Font(7.5F, FontStyle.Bold);
 		using var brush = new SolidBrush(FormDesign.Design.LabelColor);
 
-		foreach (var header in headers)
+		for (var i = 0; i < headers.Length; i++)
 		{
+			var header = headers[i];
+
 			var width = header.width == 0 ? (remainingWidth / autoColumns) : (int)(header.width * UI.FontScale);
 
 			e.Graphics.DrawString(header.text.ToUpper(), font, brush, new Rectangle(xPos, 0, width, StartHeight).Pad(Padding).AlignToFontSize(font, ContentAlignment.MiddleLeft), new StringFormat { LineAlignment = StringAlignment.Center, Trimming = StringTrimming.EllipsisCharacter });
+
+			_columnSizes[(Columns)i] = (xPos, width);
 
 			xPos += width;
 		}

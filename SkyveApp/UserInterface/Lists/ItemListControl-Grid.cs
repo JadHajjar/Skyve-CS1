@@ -129,10 +129,7 @@ internal partial class ItemListControl<T>
 			DrawTag(e, maxTagX, startLocation, ref tagsRect, item);
 		}
 
-		var seamRect = new Rectangle(maxTagX - (int)(50 * UI.UIScale), (int)e.Graphics.ClipBounds.Y, (int)(50 * UI.UIScale), (int)e.Graphics.ClipBounds.Height);
-		using var seamBrush = new LinearGradientBrush(seamRect, Color.Empty, e.BackColor, 0F);
-
-		e.Graphics.FillRectangle(seamBrush, seamRect);
+		DrawSeam(e, maxTagX);
 	}
 
 	private void DrawDividerLine(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e)
@@ -287,7 +284,14 @@ internal partial class ItemListControl<T>
 
 		if (CompactList)
 		{
-			if (tagRect.X > )
+			var packageCol = _columnSizes[Columns.PackageName];
+			using var backBrush = new SolidBrush(e.BackColor);
+			e.Graphics.FillRectangle(backBrush, e.ClipRectangle.Pad(packageCol.X+ packageCol.Width, 0, 0, 0));
+
+			if (tagRect.X > packageCol.X + packageCol.Width)
+			{
+				DrawSeam(e, packageCol.X+ packageCol.Width);
+			}
 
 			return;
 		}
@@ -307,6 +311,15 @@ internal partial class ItemListControl<T>
 
 			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, smaller: true, mousePosition: CursorLocation);
 		}
+	}
+
+	private static void DrawSeam(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, int x)
+	{
+		 var seamRectangle = new Rectangle(x - (int)(40 * UI.UIScale), (int)e.Graphics.ClipBounds.Y, (int)(40 * UI.UIScale), (int)e.Graphics.ClipBounds.Height);
+
+		using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
+
+		e.Graphics.FillRectangle(seamBrush, seamRectangle);
 	}
 
 	private void DrawTitleAndTagsAndVersion(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
