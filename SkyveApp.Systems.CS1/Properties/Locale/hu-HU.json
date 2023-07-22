@@ -365,13 +365,13 @@
   "ApplyPlaysetNameBeforeExit": "Kérjük, fejezd be a játékkészlet nevének szerkesztését, mielőtt kilépsz erről az oldalról.",
   "SteamNotOpenTo": "A Steam jelenleg nem fut",
   "OpenSteamToContinue": "Nyissa meg a Steamet az előző feladat folytatásához.",
-  "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
-  "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's color",
-  "EditPlaysetName": "Edit this playset's name",
-  "SavePlaysetChanges": "Save the current package settings to this playset's file",
+  "IncludeExcludeOtherPlayset": "{0} felvétele / kizárása a '{1}' profilodból",
+  "OpenPlaysetFolder": "A profil fájljának megtekintése a számítógépén",
+  "ChangePlaysetColor": "Módosítsa a profil színét",
+  "EditPlaysetName": "Szerkessze a profil nevét",
+  "SavePlaysetChanges": "Mentse el az aktuális csomagbeállításokat a profilodba",
   "Sorting_Color": "A profil színe",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
+  "CreateShortcutPlayset": "Hozzon létre hozzá egy parancsikont az asztalon",
   "AskToLaunchGameForShortcut": "Szeretnéd, ha a parancsikon a profiloddal indítaná el a játékot?",
   "TextImportMissingInfo": "Tölts be egy szöveges fájlt, amely Steam azonosítókat tartalmaz, hogy egyszerűen előfizessen vagy kezelje azokat",
   "ImportFromText": "Importálás szövegből",
@@ -379,8 +379,8 @@
   "XMLImportInfo": "Használhatja a BOB, a Tree Brush, a Theme Mix stb. modokat..",
   "ImportFromTextInfo": "Bármilyen szövegformátum támogatott",
   "LsmImportInfo": "Ügyeljen arra, hogy a „Jelentés” fájlt válassza ki",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "Nincs megjeleníthető profil",
+  "NoPlaysetsMatchFilters": "Egyetlen profil sem felel meg a keresésnek",
   "Your Save-games": "A mentési játékaid",
   "App Data": "App adatok",
   "Custom Maps": "Egyéni térképek",
@@ -404,7 +404,7 @@
   "DeleteAll": "Törölje az összes megjelenített elemet",
   "FlipItemCopyFilterAction": "Cserélje le a Ctrl+kattintáz a tartalomlisták szűréséhez",
   "FlipItemCopyFilterAction_Tip": "Felcseréli a címkékre való kattintást, így a normál kattintás szűri, a Ctrl+kattintás pedig az alapértelmezett műveletet hajtja végre.",
-  "AltClickTo": "Alt+Click to {0}",
+  "AltClickTo": "Alt+kattintás a következőhöz: {0}",
   "FilterByThisAuthor": "Készítő szerinti szűrés",
   "AddToSearch": "Adja hozzá a \"{0}\" kifejezést a kereséshez",
   "CopyToClipboard": "Másolja a(z) „{0}” a vágólapra",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "Leállítja az eszközt abban, hogy a játék megnyitásakor automatikusan törölje azokat a csomagokat, amelyekre nem iratkozott fel.",
   "CustomLaunchArguments": "Egyedi parancsargumentumok",
   "LaunchArgsInfo": "Adjon hozzá további parancsokat a játék indításakor",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "Hiányzó csomagok innen: '{0}'",
   "UnusedLSMReport": "LSM fel nem használt eszközök",
   "MissingLSMReport": "LSM hiányzó eszközök",
   "SearchGenericPackages": "Keresés a fájlcsomagok között..",
@@ -508,20 +508,20 @@
     "Plural": "{0} {1}, {2} mutatása"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "{0} {1} megjelenítése, {2} kiválasztva",
+    "Plural": "{0} {1} megjelenítése, {2} kiválasztva"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "{0} {1}, {2} kiválasztott, {3} megjelenítése",
+    "Plural": "{0} {1}, {2} kiválasztott, {3} megjelenítése"
   },
   "ItemsHidden": {
     "One": "A(z) {0} {1} el van rejtve a profilod használata miatt",
     "Plural": "A(z) {0} {1} el van rejtve a profilod használata miatt"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "Szerkeszd a csomag kompatibilitását",
+    "Plural": "Szerkeszd a kiválasztott csomagok kompatibilitását"
   },
   "AnyIssue": "Bármilyen probléma",
   "AnyUsage": "Bármilyen használat",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "Nem sikerült elküldeni a(z) '{0}' felülvizsgálati kérelmét",
   "SendReview": "Küld el a felülvizsgálati kérelmet",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "Nyissa meg a csomag oldalát",
+    "Plural": "Szerkeszd a kiválasztott elemek címkéit"
   },
   "ShowAllReferencedPackages": "A kizárt csomagok megjelenítése a „Referenciák” lapon",
   "ShowAllReferencedPackages_Tip": "Megjeleníti mind a kizárt, mind a benne foglalt csomagokat, amelyek az éppen megtekintett csomagra hivatkoznak.",
@@ -584,7 +584,7 @@
     "One": "Ezzel a folyamattal leiratkozik a(z) {0} csomagról.",
     "Plural": "Ebben a folyamatban leiratkozik {0} csomagról."
   },
-  "ViewThisPlaysetsPackages": "View this playset's contents",
+  "ViewThisPlaysetsPackages": "A profil tartalmának megtekintése",
   "PendingDownloads": {
     "One": "{0} elem letöltésre vár",
     "Plural": "{0} elem letöltésre vár"
@@ -600,17 +600,17 @@
   "RequestOption1": "Jelentse be a problémát, vagy adja meg a hiányzó információkat",
   "RequestOption2": "Adjon hozzá egy hiányzó állapotot a csomaghoz",
   "RequestOption3": "Adjon hozzá egy hiányzó interakciót egy másik csomaghoz",
-  "CurrentPlayset": "Current Playset",
+  "CurrentPlayset": "Jelenlegi profil",
   "References": "Referenciák",
   "OpenLog": "Naplófájl megnyitása",
   "Sort By": "Sorbarendezés",
   "OpenCitiesAppData": "Nyissa meg a C:S AppData mappáját",
   "FailedToFetchLogs": "Nem sikerült lekérni a naplókat",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "Fedezze fel a profilt",
   "AllUsages": "Bármilyen használat",
   "Invalid": "Érvénytelen",
-  "UpdatePlayset": "Update Playset",
-  "FailedToRetrievePlaysets": "Failed to retrieve the Playset Discovery",
+  "UpdatePlayset": "Frissítse profilt",
+  "FailedToRetrievePlaysets": "Nem sikerült lekérni a profil adatait",
   "DownloadPlayset": "Profil letöltése",
   "ReloadAllData": "Töltse be újra az összes adatot",
   "ResetSnoozes": "Minden szundi visszaállítása",
