@@ -99,8 +99,8 @@
     "Plural": "A(z) '{0}'-t a következő csomagok valamelyike ​​követi."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "A(z) „{0}” közvetlenül a(z) „{1}” után töltődik be.",
+    "Plural": "A(z) \"{0}\" közvetlenül a következő csomagok után töltődik be."
   },
   "Interaction_Identical": "Ezek ugyanannak a csomagnak a másik verziója.\n\nCsak egyet válassz közülük.",
   "Status_Succeeded": "A(z) '{0}' utódja a(z) '{1}'.\n\nMár használja a(z) „{1}” fájlt, így nincs többé szükség a(z) „{0}” kifejezésre.",
