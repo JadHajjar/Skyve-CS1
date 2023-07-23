@@ -139,8 +139,8 @@
   "PackageIncluded": "förpackningen innehåller",
   "PackageIncludedPlural": "Paket ingår",
   "CopyWorkshopLink": {
-    "One": "Copy this package's Workshop Link",
-    "Plural": "Copy the selected packages' Workshop Links"
+    "One": "Kopiera detta pakets verkstadslänk",
+    "Plural": "Kopiera de valda paketens verkstadslänkar"
   },
   "FilterOutPackagesWithMods": "Dölj mods på paketsidan",
   "FilterOutPackagesWithOneAsset": "Dölj paket med en enda tillgång från paketets sida",
@@ -316,8 +316,8 @@
   "OBSOLETE": "OBSOLÅT",
   "ABANDONED": "ABANDONED",
   "ActionUnreversible": {
-    "One": "This action can not be reversed.",
-    "Plural": "This action can not be reversed. And will affect {0} packages"
+    "One": "Åtgärden kan inte ångras.",
+    "Plural": "Denna åtgärd kan inte vändas. Och kommer att påverka {0} paket"
   },
   "AlwaysOpenFiltersAndActions": "Visa avsnittet filter som standard",
   "AlwaysOpenFiltersAndActions_Tip": "Alltid ha filtersektionen öppen när du går in i en innehållsflik",
@@ -366,12 +366,12 @@
   "SteamNotOpenTo": "Steam körs inte just nu",
   "OpenSteamToContinue": "Öppna Steam för att fortsätta din tidigare uppgift.",
   "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
-  "OpenPlaysetFolder": "View this playset's file on your computer",
-  "ChangePlaysetColor": "Change this playset's color",
-  "EditPlaysetName": "Edit this playset's name",
-  "SavePlaysetChanges": "Save the current package settings to this playset's file",
+  "OpenPlaysetFolder": "Visa speluppsättningens fil i utforskaren",
+  "ChangePlaysetColor": "Ändra speluppsättningens färg",
+  "EditPlaysetName": "Redigera speluppsättningens namn",
+  "SavePlaysetChanges": "Spara de aktuella paketinställningarna till den här speluppspelningens fil",
   "Sorting_Color": "Profilens färg",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
+  "CreateShortcutPlayset": "Skapa en genväg på skrivbordet",
   "AskToLaunchGameForShortcut": "Vill du att genvägen också ska starta spelet med din profil?",
   "TextImportMissingInfo": "Ladda en textfil som innehåller Steam-ID för att enkelt prenumerera på eller hantera dem",
   "ImportFromText": "Importera från text",
@@ -379,8 +379,8 @@
   "XMLImportInfo": "Du kan använda filer från BOB, Tree Brush, Theme Mix, etc..",
   "ImportFromTextInfo": "Alla textformat stöds",
   "LsmImportInfo": "Se till att välja 'Rapportera'-fil",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "Inga profiler att visa",
+  "NoPlaysetsMatchFilters": "Inga profiler matchar din sökning",
   "Your Save-games": "Dina Save-spel",
   "App Data": "Appens data",
   "Custom Maps": "Anpassade kartor",
@@ -404,7 +404,7 @@
   "DeleteAll": "Ta bort alla visade objekt",
   "FlipItemCopyFilterAction": "Byt Ctrl+Click beteende för filtrering i innehållslistorna",
   "FlipItemCopyFilterAction_Tip": "Byter standardbeteende för att klicka på etiketter så att normalt klicka filter och Ctrl + Klicka utför standardåtgärden.",
-  "AltClickTo": "Alt+Click to {0}",
+  "AltClickTo": "Alt+Klick för att {0}",
   "FilterByThisAuthor": "Filtrera efter denna författare",
   "AddToSearch": "Lägg till '{0}' till din sökning",
   "CopyToClipboard": "Kopiera '{0}' till urklipp",
@@ -420,7 +420,7 @@
   "DisablePackageCleanup_Tip": "Stoppar verktyget från att automatiskt ta bort paket som du inte prenumererar på när du öppnar spelet.",
   "CustomLaunchArguments": "Anpassade startargument",
   "LaunchArgsInfo": "Lägg till extra argument när du startar spelet",
-  "MissingPackagesPlayset": "Missing packages from '{0}'",
+  "MissingPackagesPlayset": "Saknade paket från '{0}'",
   "UnusedLSMReport": "LSM Oanvända tillgångar",
   "MissingLSMReport": "LSM saknade tillgångar",
   "SearchGenericPackages": "Sök igenom dessa paket..",
@@ -508,20 +508,20 @@
     "Plural": "Visar {0} {1}, {2}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "Visar {0} {1}, {2} vald",
+    "Plural": "Visar {0} {1}, {2} vald"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "Visar {0} {1}, {2} vald, {3}",
+    "Plural": "Visar {0} {1}, {2} vald, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} är dold på grund av din profils användning",
     "Plural": "{0} {1} är dolda på grund av din profils användning"
   },
   "EditCompatibility": {
-    "One": "Edit this package's compatibility",
-    "Plural": "Edit selected packages' compatibility"
+    "One": "Redigera paketets kompatibilitet",
+    "Plural": "Redigera markerade pakets kompatibilitet"
   },
   "AnyIssue": "Alla problem",
   "AnyUsage": "Valfri användning",
@@ -531,8 +531,8 @@
   "ReviewRequestFailed": "Det gick inte att skicka din granskningsbegäran för '{0}'.\r\n\r\n{1}",
   "SendReview": "Skicka begäran om granskning",
   "EditTags": {
-    "One": "Edit this package's Tags",
-    "Plural": "Edit selected items' Tags"
+    "One": "Redigera paketets taggar",
+    "Plural": "Redigera markerade objekts taggar"
   },
   "ShowAllReferencedPackages": "Visa exkluderade paket i fliken 'Referenser'",
   "ShowAllReferencedPackages_Tip": "Visar både exkluderade och inkluderade paket som refererar till den du visar.",
@@ -584,7 +584,7 @@
     "One": "Du kommer att avsluta prenumerationen från {0} paket i denna process.",
     "Plural": "Du kommer att avsluta prenumerationen från {0} paket i den här processen."
   },
-  "ViewThisPlaysetsPackages": "View this playset's contents",
+  "ViewThisPlaysetsPackages": "Visa innehållet i denna speluppsättning",
   "PendingDownloads": {
     "One": "{0} objekt väntar på nedladdning",
     "Plural": "{0} objekt väntar på nedladdning"
@@ -600,16 +600,16 @@
   "RequestOption1": "Rapportera ett problem eller lägg till saknad information",
   "RequestOption2": "Lägg till en status som saknas för paketet",
   "RequestOption3": "Lägg till en interaktion som saknas med ett annat paket",
-  "CurrentPlayset": "Current Playset",
+  "CurrentPlayset": "Nuvarande speluppsättning",
   "References": "Referenser",
   "OpenLog": "Öppna Loggfilen",
   "Sort By": "Sortera på",
   "OpenCitiesAppData": "Öppna C:S AppData-mapp",
   "FailedToFetchLogs": "Misslyckades att hämta dina loggar",
-  "DiscoverPlaysets": "Discover Playsets",
+  "DiscoverPlaysets": "Upptäck speluppsättningar",
   "AllUsages": "Alla användningsområden",
   "Invalid": "Ogiltig",
-  "UpdatePlayset": "Update Playset",
+  "UpdatePlayset": "Uppdatera speluppsättning",
   "FailedToRetrievePlaysets": "Det gick inte att hämta speluppsättningsupptäckaren",
   "DownloadPlayset": "Ladda ner speluppsättningen",
   "ReloadAllData": "Ladda om all data",
