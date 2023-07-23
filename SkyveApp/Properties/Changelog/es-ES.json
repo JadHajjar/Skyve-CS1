@@ -521,10 +521,10 @@
         "Date": "2023-06-14",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Cambios",
                 "Changes": [
-                    "Added an option to ignore internet connectivity checks.",
-                    "Added an indicator that a profile is uploading.",
+                    "Se ha añadido una opción para ignorar las comprobaciones de conectividad a internet.",
+                    "Se ha añadido un indicador de que se está subiendo un perfil.",
                     "Added a button to easily view an online profile's contents.",
                     "Fixed an error while fetching steam user info.",
                     "Fixed Asset Editor launch settings not being remembered correctly.",
@@ -538,9 +538,9 @@
         "Date": "2023-06-16",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Cambios",
                 "Changes": [
-                    "Added a loading animation when viewing a profile's contents.",
+                    "Se añadió una animación de carga al ver el contenido de un perfil.",
                     "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
                     "Fixed private packages being marked as .",
                     "Fixed some parts of the UI not getting translated from the start."
