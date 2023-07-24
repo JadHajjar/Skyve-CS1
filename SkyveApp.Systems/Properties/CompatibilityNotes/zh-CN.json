@@ -355,7 +355,7 @@
   "Some roads from Network Extensions spawn the wrong or an extra traffic light.": "某些 Network Extensions 的道路会导致生成错误的红绿灯，或生成多余的红绿灯。",
   "All three listed mods should be used for new games instead of using Extended Managers Library": "新存档应当使用列出的这三个模组，而不应对新存档使用 Extended Managers Library。",
   "Placed 'NTCP' props show as missing props in Loading Screen Mod. This is a false alert and can be ignored.": "已摆放的摆件如果有“NTCP”属性，Loading Screen Mod 中会报告此摆件已丢失。可以忽略这个“丢失”的警告。",
-  "This mod combination prevents using the light background theme.": "同时使用这两个模组，可能会引发有关浅色背景主题的问题。",
+  "This mod combination prevents using the light background theme.": "同时使用这两个模组，可能会出现浅色背景主题相关问题。",
   "Roads created with Road Builder not use vanilla pillars. This leads to a gap between these roads and the pillars, if you reduce the thickness of bridges and elevated parts in Curb Height Adjuster.": "Road Builder 创建的道路不使用原版的桥墩。如果在 Curb Height Adjuster 中减少 Road Builder 道路的桥梁/高架部分的桥板厚度，会导致道路和桥墩之间出现一个空隙。",
   "The service selections on the Healthcare service selection panel are displayed too low making it difficult or impossible to click.": "“医疗保健”服务面板上的服务选项显示得太低，因此很难点击或无法点击。",
   "Both mods replace the 'vanilla matchmaker', making them incompatible.": "这两个模组都会修改原版游戏的 'matchmaker'，因此它们互不兼容。",
