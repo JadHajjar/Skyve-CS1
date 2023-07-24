@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "其中包含的音樂可能受版權保護",
   "IncompleteDescription": "描述不完整",
   "Successor": "繼任模組",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "載入之後..",
   "Alternative": "備選方案",
   "SameFunctionality": "相同的功能",
   "RequirementAlternative": "可用的備選方案",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' 的功能已被下列任意一個外掛程式繼承："
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "「{0}」將在「{1}」之後直接載入。",
+    "Plural": "「{0}」將在以下外掛程式載入完成之後直接載入。"
   },
   "Interaction_Identical": "這些是同一個外掛程式的多個不同版本。\n\n您應當只選擇使用其中一個，並取消訂閱其他版本。",
   "Status_Succeeded": "「{0}」 的功能已被「{1}」繼承。\n\n您已經使用了「{1}」，因此不再需要使用「{0}」。",
@@ -113,7 +113,7 @@
   "Status_CausesIssues": "'{0}' 會導致遊戲出現問題。",
   "Status_SavesCantLoadWithoutIt": {
     "Zero": "一旦在新建存檔時啟用 '{0}' ，此後，當 '{0}' 被禁用時，這個存檔將無法載入。",
-    "One": "一旦在新建存檔時啟用 '{0}' ，此後，當 '{0}' 被禁用時，這個存檔將無法載入。\n\n如果需要，可以使用 '{1}' 來恢復您的存檔。請閱讀其工坊頁面描述以獲取更多資訊。"
+    "One": "一旦在新建存檔時啟用「{0}」，此後，當「{0}」被禁用時，這個存檔將無法載入。\n\n如果需要，可以使用「{1}」來恢復您的存檔。請閱讀其工作坊頁面描述以獲取更多資訊。"
   },
   "Status_TestVersion": {
     "Zero": "這是某個原版模組的測試版。請注意，測試版模組可能會出現意外問題。",
@@ -127,7 +127,7 @@
   "Status_SourceCodeNotAvailable": "此模組的原始程式碼不可用。除非您信任此模組的作者，否則不應使用此模組。",
   "SourceAvailable": "原始程式碼公開",
   "Status_MusicCanBeCopyrighted": "此模組所含音樂可能受到版權保護。最好不要在串流直播時使用此模組。",
-  "Status_IncompleteDescription": "這個模組的創意工坊頁面描述非常短。除非你信任此模組的作者，否則不應使用此模組。",
+  "Status_IncompleteDescription": "這個模組的工作坊頁面描述非常短。除非你信任此模組的作者，否則不應使用此模組。",
   "OutputText": "預期輸出",
   "Stability_AssetNotReviewed": "此資產尚未被檢查。\n\n相容性資訊可能不精準；儘管資產一般都是穩定的。",
   "Stability_NotReviewed": "此外掛程式尚未被檢查。相容性資訊可能不準確。",
