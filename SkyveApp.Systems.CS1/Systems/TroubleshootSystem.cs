@@ -41,13 +41,36 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 		if (currentState.Stage == ActionStage.WaitingForGameLaunch && isRunning)
 		{
-			currentState.Stage = ActionStage.WaitingForGameClose;
-			Save();
+			NextStage();
 		}
 		else if (currentState.Stage == ActionStage.WaitingForGameClose && !isRunning && isAvailable)
 		{
-
+			NextStage();
 		}
+	}
+
+	public void NextStage()
+	{
+		if (currentState is null)
+			return;
+
+		switch (currentState.Stage)
+		{
+			case ActionStage.ApplyingSettings:
+				currentState.Stage = ActionStage.WaitingForGameLaunch;
+				break;
+			case ActionStage.WaitingForGameLaunch:
+				currentState.Stage = ActionStage.WaitingForGameClose;
+				break;
+			case ActionStage.WaitingForGameClose:
+				currentState.Stage = ActionStage.WaitingForConfirmation;
+				break;
+			case ActionStage.WaitingForConfirmation:
+				currentState.Stage = ActionStage.ApplyingSettings;
+				break;
+		}
+
+		Save();
 	}
 
 	public bool IsInProgress => currentState is not null;
