@@ -423,7 +423,7 @@
                     "现在如果连续订阅多个插件，Skyve 会记录到任务等待列表中，而不是每次都启动游戏来进行订阅操作。",
                     "在 Skyve 应用程序界面的左下角新增了一个方框，以显示当前等待中的订阅 / 取消订阅操作。",
                     "新增了一个高级选项，启用此选项后，在 Skyve 进行订阅 / 取消订阅操作之后，自动强制下载插件或删除已取订（但没删除干净）的插件。",
-                    "在游戏运行时，Skyve 会禁止新订阅的物品进行加载。\n这种做法可以防止游戏卡死或模组出错。"
+                    "在游戏运行时，Skyve 会禁止新订阅的物品装载到游戏内。\n这种做法可以防止游戏卡死或模组出错。"
                 ]
             },
             {
@@ -549,17 +549,17 @@
         ]
     },
     {
-        "Version": "3.1.2",
-        "Date": "2023-06-21",
-        "Tagline": "A full rework! -behind the scenes",
+        "Version": "3.2.0",
+        "Date": "2023-07-07",
+        "Tagline": "完全重制！—— 幕后工作",
         "ChangeGroups": [
             {
-                "Name": "Fixes",
+                "Name": "有什么变化？",
                 "Changes": [
-                    "Fixes an error caused by including/excluding mods that have contain assets.",
-                    "Fixed the action button on the right of the Compatibility Report list not being clickable.",
+                    "Skyve的核心系统已经进行了更换、整理和优化。",
+                    "被卸下的模组不再使用“.excluded”文件，而是使用新的 ModConfig 文件。",
                     "Fixed some packages not showing their successor properly.",
-                    "'Profiles' are now, appropriately, called 'Playsets'.",
+                    "“配置文件”的英文名由 'Profile' 改为 'Playset'，更加恰当了。",
                     "Improved the author info gathering, which will fix the issue of authors not loading.",
                     "Please report any issues or unusual behaviour on the discord server."
                 ]
