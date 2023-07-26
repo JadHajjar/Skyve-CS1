@@ -24,7 +24,7 @@ internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl
 
 	protected override void UIChanged()
 	{
-		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 76 : 46;
+		ItemHeight = 46;
 
 		base.UIChanged();
 
@@ -75,7 +75,7 @@ internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<IDlcInfo, Rectangles> e)
 	{
-		var large = _settings.UserSettings.LargeItemOnHover;
+		var large = false;
 		var rects = e.Rects;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -152,7 +152,7 @@ internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl
 			return Rectangle.Empty;
 		}
 
-		var large = _settings.UserSettings.LargeItemOnHover;
+		var large = false;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)
@@ -180,7 +180,7 @@ internal class DlcListControl : SlickStackedListControl<IDlcInfo, DlcListControl
 
 	protected override Rectangles GenerateRectangles(IDlcInfo item, Rectangle rectangle)
 	{
-		var includeItemHeight = _settings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var includeItemHeight = ItemHeight;
 		var iconSize = rectangle.Height - Padding.Vertical;
 		var rects = new Rectangles(item)
 		{

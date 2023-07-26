@@ -26,5 +26,4 @@ public interface IUserSettings
 	bool ShowFolderSettings { get; set; }
 	bool TreatOptionalAsRequired { get; set; }
 	Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; }
-	bool LargeItemOnHover { get; }
 }

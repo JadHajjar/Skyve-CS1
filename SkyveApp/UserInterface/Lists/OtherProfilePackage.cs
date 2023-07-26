@@ -45,7 +45,7 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 
 	protected override void UIChanged()
 	{
-		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 48 : 28;
+		ItemHeight = 28;
 
 		base.UIChanged();
 
@@ -117,7 +117,7 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, OtherProfilePackage.Rectangles> e)
 	{
-		var large = _settings.UserSettings.LargeItemOnHover;
+		var large = false;
 		var rects = e.Rects;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
@@ -181,7 +181,7 @@ internal class OtherProfilePackage : SlickStackedListControl<ICustomPlayset, Oth
 			return Rectangle.Empty;
 		}
 
-		var large = _settings.UserSettings.LargeItemOnHover;
+		var large = false;
 		var size = e.Graphics.Measure(text, UI.Font(large ? 9F : 7.5F)).ToSize();
 
 		if (icon is not null)

@@ -8,8 +8,7 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_Troubleshoot : PanelContent
 {
-	private bool missing;
-	private bool caused;
+	private readonly TroubleshootSettings _settings = new();
 
 	public PC_Troubleshoot()
 	{
@@ -57,7 +56,7 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_ModAsset.Show();
 		TLP_New.Hide();
 
-		caused = true;
+		_settings.ItemIsCausingIssues = true;
 	}
 
 	private void B_Missing_Load(object sender, EventArgs e)
@@ -65,32 +64,34 @@ public partial class PC_Troubleshoot : PanelContent
 		TLP_ModAsset.Show();
 		TLP_New.Hide();
 
-		missing = true;
+		_settings.ItemIsMissing = true;
+	}
+
+	private void B_New_Click(object sender, EventArgs e)
+	{
+		TLP_ModAsset.Show();
+		TLP_New.Hide();
+
+		_settings.NewItemCausingIssues = true;
 	}
 
 	private void B_Mods_Click(object sender, EventArgs e)
 	{
-		ServiceCenter.Get<ITroubleshootSystem>().Start(new TroubleshootSettings
-		{
-			ItemIsMissing = missing,
-			ItemIsCausingIssues = caused,
-			Mods = true
-		});
+		_settings.Mods = true;
+
+		ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
 	}
 
 	private void B_Assets_Click(object sender, EventArgs e)
 	{
-		ServiceCenter.Get<ITroubleshootSystem>().Start(new TroubleshootSettings
-		{
-			ItemIsMissing = missing,
-			ItemIsCausingIssues = caused,
-		});
+		ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
 	}
 
 	private class TroubleshootSettings : ITroubleshootSettings
 	{
+		public bool Mods { get; set; }
 		public bool ItemIsCausingIssues { get; set; }
 		public bool ItemIsMissing { get; set; }
-		public bool Mods { get; set; }
+		public bool NewItemCausingIssues { get; set; }
 	}
 }

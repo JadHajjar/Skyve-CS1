@@ -357,7 +357,16 @@ public partial class PC_Utilities : PanelContent
 	}
 
 	private void B_Troubleshoot_Click(object sender, EventArgs e)
-	{
-		Form.PushPanel<PC_Troubleshoot>();
+	{ var sys = ServiceCenter.Get<ITroubleshootSystem>();
+		if (sys.IsInProgress)
+		{
+			var p = false;
+
+			if (p)
+				sys.ApplyConfirmation(p);else
+			sys.NextStage(); }
+		else
+
+			Form.PushPanel<PC_Troubleshoot>();
 	}
 }

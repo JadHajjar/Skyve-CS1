@@ -8,7 +8,6 @@ using SkyveApp.Systems.CS1.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyveApp.Systems.CS1.Systems;
@@ -19,8 +18,20 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	private readonly PlaysetManager _playsetManager;
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
+	private readonly IBulkUtil _bulkUtil;
+	private readonly IModLogicManager _modLogicManager;
+	private readonly IModUtil _modUtil;
 
-	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager)
+	public event Action? StageChanged;
+	public event Action? AskForConfirmation;
+
+	public bool IsInProgress => currentState is not null;
+	public string CurrentAction => LocaleHelper.GetGlobalText(currentState?.Stage.ToString());
+	public bool CanSkip => currentState?.Stage is ActionStage.WaitingForGameClose or ActionStage.WaitingForGameLaunch;
+	public int CurrentStage => currentState?.CurrentStage ?? 0;
+	public int TotalStages => currentState?.TotalStages ?? 0;
+
+	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IBulkUtil bulkUtil)
 	{
 		ISave.Load(out currentState, "TroubleshootState.json");
 
@@ -28,11 +39,12 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		_playsetManager = (PlaysetManager)playsetManager;
 		_settings = settings;
 		_notifier = notifier;
+		_bulkUtil = bulkUtil;
 
 		citiesManager.MonitorTick += CitiesManager_MonitorTick;
 	}
 
-	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
+	private async void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
 	{
 		if (currentState == null)
 		{
@@ -41,18 +53,32 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 		if (currentState.Stage == ActionStage.WaitingForGameLaunch && isRunning)
 		{
-			NextStage();
+			await NextStage();
 		}
 		else if (currentState.Stage == ActionStage.WaitingForGameClose && !isRunning && isAvailable)
 		{
-			NextStage();
+			await NextStage();
 		}
 	}
 
-	public void NextStage()
+	public async Task ApplyConfirmation(bool issuePersists)
+	{
+		if (currentState?.Stage == ActionStage.WaitingForConfirmation)
+		{
+			await NextStage();
+
+			ApplyNextSettings(issuePersists);
+
+			await NextStage();
+		}
+	}
+
+	public async Task NextStage()
 	{
 		if (currentState is null)
+		{
 			return;
+		}
 
 		switch (currentState.Stage)
 		{
@@ -71,21 +97,60 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		}
 
 		Save();
+
+		StageChanged?.Invoke();
+
+		if (currentState.Stage is ActionStage.WaitingForConfirmation)
+		{
+			AskForConfirmation?.Invoke();
+		}
+
+		await Task.CompletedTask;
 	}
 
-	public bool IsInProgress => currentState is not null;
-	public int CurrentStage => currentState?.CurrentStage ?? 0;
-	public int TotalStages => currentState?.TotalStages ?? 0;
-	public void Start(ITroubleshootSettings settings)
+	private void ApplyNextSettings(bool issuePersists)
+	{
+		if (currentState!.ItemIsCausingIssues)
+		{
+			_playsetManager.ApplyPlayset(currentState.Playset!, false);
+
+			if (!issuePersists)
+			{
+				currentState.UnprocessedItems = currentState.ProcessingItems;
+			}
+
+			currentState.ProcessingItems = new();
+
+			var itemsToTake = (int)Math.Floor(currentState.UnprocessedItems!.Count / 2F);
+
+			for (var i = 0; i < itemsToTake; i++)
+			{
+				currentState.ProcessingItems.Add(currentState.UnprocessedItems[0]);
+				currentState.UnprocessedItems.RemoveAt(0);
+			}
+
+			_bulkUtil.SetBulkIncluded(GetPackages(currentState.ProcessingItems), false);
+
+			currentState.CurrentStage++;
+		}
+	}
+
+	public async Task Start(ITroubleshootSettings settings)
 	{
 		var playset = new Playset();
 
 		_playsetManager.GatherInformation(playset);
 
+		_playsetManager.SetCurrentPlayset(Playset.TemporaryPlayset);
+
 		currentState = new()
 		{
+			Stage = ActionStage.WaitingForConfirmation,
 			Playset = playset,
+			Mods = settings.Mods,
 			ItemIsCausingIssues = settings.ItemIsCausingIssues,
+			ItemIsMissing = settings.ItemIsMissing,
+			NewItemCausingIssues = settings.NewItemCausingIssues,
 			ProcessingItems = new(),
 			UnprocessedItems = new()
 		};
@@ -96,13 +161,16 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		{
 			if (item.IsIncluded() == settings.ItemIsCausingIssues)
 			{
-				currentState.UnprocessedItems.Add(item.FilePath);
+				if (item is not IMod mod || !_modLogicManager.IsRequired(mod, _modUtil))
+				{
+					currentState.UnprocessedItems.Add(item.FilePath);
+				}
 			}
 		}
 
 		currentState.TotalStages = (int)Math.Ceiling(Math.Log(currentState.UnprocessedItems.Count, 2));
 
-		Save();
+		await ApplyConfirmation(true);
 	}
 
 	private void Save()
@@ -110,7 +178,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		ISave.Save(currentState, "TroubleshootState.json");
 	}
 
-	public void Stop()
+	public async Task Stop()
 	{
 		if (currentState is null)
 		{
@@ -120,28 +188,46 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		_playsetManager.ApplyPlayset(currentState.Playset!, false);
 
 		_playsetManager.CurrentPlayset = _playsetManager.Playsets.FirstOrDefault(x => x.Name == currentState.PlaysetName);
-		
+
 		_notifier.OnPlaysetChanged();
-		
+
 		_settings.SessionSettings.CurrentPlayset = currentState.PlaysetName;
 		_settings.SessionSettings.Save();
 
 		ISave.Delete("TroubleshootState.json");
 
 		currentState = null;
+
+		await Task.CompletedTask;
 	}
 
-	public class TroubleshootState
+	private IEnumerable<ILocalPackage> GetPackages(IEnumerable<string> packagePaths)
 	{
-        public string? PlaysetName { get; set; }
-        public Playset? Playset { get; set; }
-        public List<string>? UnprocessedItems { get; set; }
-        public List<string>? ProcessingItems { get; set; }
+		IEnumerable<ILocalPackage> packages = currentState!.Mods ? _packageManager.Mods : _packageManager.Assets;
+
+		foreach (var package in packages)
+		{
+			if (packagePaths.Contains(package.FilePath))
+			{
+				yield return package;
+			}
+		}
+	}
+
+	public class TroubleshootState : ITroubleshootSettings
+	{
+		public string? PlaysetName { get; set; }
+		public Playset? Playset { get; set; }
+		public List<string>? UnprocessedItems { get; set; }
+		public List<string>? ProcessingItems { get; set; }
 		public ActionStage Stage { get; set; }
 		public int CurrentStage { get; set; }
 		public int TotalStages { get; set; }
-        public bool ItemIsCausingIssues { get; set; }
-    }
+		public bool ItemIsCausingIssues { get; set; }
+		public bool ItemIsMissing { get; set; }
+		public bool NewItemCausingIssues { get; set; }
+		public bool Mods { get; set; }
+	}
 
 	public enum ActionStage
 	{

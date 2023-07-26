@@ -37,7 +37,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		ReadOnly = readOnly;
 		HighlightOnHover = true;
 		SeparateWithLines = true;
-		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 64 : 36;
+		ItemHeight = 36;
 		GridItemSize = new Size(305, 160);
 
 		sorting = (ProfileSorting)_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles).Sorting;
@@ -488,7 +488,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
 	{
-		var large = _settings.UserSettings.LargeItemOnHover;
+		var large = false;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
 		e.HoverState &= ~HoverState.Pressed;
@@ -607,13 +607,8 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		else
 		{
 			rects.Favorite = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
-			rects.Folder = rectangle.Pad(0, 0, Padding.Right, 0).Align(_settings.UserSettings.LargeItemOnHover ? new Size(ItemHeight / 2, ItemHeight / 2) : new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
+			rects.Folder = rectangle.Pad(0, 0, Padding.Right, 0).Align( new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
 
-			if (_settings.UserSettings.LargeItemOnHover)
-			{
-				rects.Exclude = rects.Merge = rects.Folder.Pad(0, rects.Folder.Height, 0, -rects.Folder.Height);
-				rects.Merge.X -= rects.Merge.Width + Padding.Right;
-			}
 
 			rects.Icon = rectangle.Pad(rects.Favorite.Right + (2 * Padding.Left)).Align(rects.Favorite.Size, ContentAlignment.MiddleLeft);
 

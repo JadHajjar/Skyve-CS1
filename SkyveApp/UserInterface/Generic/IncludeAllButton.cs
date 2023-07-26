@@ -34,10 +34,10 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 	{
 		Margin = Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
 
-		var ItemHeight = (int)((_settings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
-		var includeItemHeight = _settings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var ItemHeight = (int)((28) * UI.FontScale);
+		var includeItemHeight = ItemHeight;
 
-		Size = new Size((_doubleButtons ? (includeItemHeight * 2 * 9 / 10) : (includeItemHeight + 1)) + includeItemHeight, includeItemHeight * 2 / 3);
+		Size = new Size((includeItemHeight + 1)*(_doubleButtons ? 3:2), includeItemHeight)+Padding.Size;
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)
@@ -137,8 +137,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 	{
 		e.Graphics.SetUp(BackColor);
 
-		var ItemHeight = (int)((_settings.UserSettings.LargeItemOnHover ? 64 : 36) * UI.FontScale);
-		var includeItemHeight = _settings.UserSettings.LargeItemOnHover ? (ItemHeight / 2) : ItemHeight;
+		var ItemHeight = (int)(28 * UI.FontScale);
 		var rectangle = ClientRectangle;
 		var CursorLocation = PointToClient(Cursor.Position);
 		var color = FormDesign.Design.ActiveColor;
@@ -149,15 +148,15 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 
 		if (_doubleButtons && !subscribe)
 		{
-			IncludedRect = rectangle.Pad(0, 0, 0, 0).Align(new Size(includeItemHeight * 9 / 10, includeItemHeight * 2 / 3), ContentAlignment.MiddleLeft);
-			EnabledRect = IncludedRect.Pad(IncludedRect.Width, 0, -IncludedRect.Width, 0);
-			ActionRect = EnabledRect.Pad(EnabledRect.Width, 0, -EnabledRect.Width, 0);
+			IncludedRect = rectangle.Align(new Size(ItemHeight, ItemHeight), ContentAlignment.MiddleLeft);
+			EnabledRect = IncludedRect.Pad(IncludedRect.Width + 1, 0, -IncludedRect.Width - 1, 0);
+			ActionRect = EnabledRect.Pad(EnabledRect.Width + 1, 0, -EnabledRect.Width - 1, 0);
 		}
 		else
 		{
 			EnabledRect = default;
-			IncludedRect = rectangle.Pad(0, 0, 0, 0).Align(new Size(includeItemHeight + 1, includeItemHeight * 2 / 3), ContentAlignment.MiddleLeft);
-			ActionRect = IncludedRect.Pad(IncludedRect.Width, 0, -includeItemHeight, 0);
+			IncludedRect = rectangle.Align(new Size(ItemHeight, ItemHeight), ContentAlignment.MiddleLeft);
+			ActionRect = IncludedRect.Pad(IncludedRect.Width + 1, 0, -IncludedRect.Width - 1, 0);
 		}
 
 		if (HoverState.HasFlag(HoverState.Hovered))
@@ -173,7 +172,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		}
 
 		var incl = new DynamicIcon(subscribe ? "I_Add" : include ? "I_Ok" : "I_Enabled");
-		var inclIcon = _settings.UserSettings.LargeItemOnHover ? incl.Large : incl.Get(includeItemHeight / 2);
+		var inclIcon = incl.Get(ItemHeight * 3 / 4);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && IncludedRect.Contains(CursorLocation))
 		{
@@ -185,7 +184,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		if (_doubleButtons && EnabledRect != default)
 		{
 			var enl = new DynamicIcon(enable ? "I_Checked" : "I_Checked_OFF");
-			var enlIcon = _settings.UserSettings.LargeItemOnHover ? enl.Large : enl.Get(includeItemHeight / 2);
+			var enlIcon = enl.Get(ItemHeight * 3 / 4);
 
 			if (HoverState.HasFlag(HoverState.Hovered) && EnabledRect.Contains(CursorLocation))
 			{
@@ -196,7 +195,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		}
 
 		var action = new DynamicIcon("I_Actions");
-		var actionIcon = _settings.UserSettings.LargeItemOnHover ? action.Large : action.Get(includeItemHeight / 2);
+		var actionIcon = action.Get(ItemHeight * 3 / 4);
 
 		if (HoverState.HasFlag(HoverState.Hovered) && ActionRect.Contains(CursorLocation))
 		{

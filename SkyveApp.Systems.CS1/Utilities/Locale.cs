@@ -321,4 +321,5 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation Version => _instance.GetText(nameof(Version));
 	public static Translation UpdateTime => _instance.GetText(nameof(UpdateTime));
 	public static Translation Status => _instance.GetText(nameof(Status));
+	public static Translation IDAndTags => _instance.GetText(nameof(IDAndTags));
 }

@@ -629,8 +629,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 		var filteredText = format.FormatPlural(
 			LC_Items.FilteredCount,
 			GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower(),
-			LC_Items.SelectedItemsCount, Locale.ItemsHidden.FormatPlural(UsageFilteredOut,
-			GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower()));
+			LC_Items.SelectedItemsCount,
+			Locale.ItemsHidden.FormatPlural(UsageFilteredOut, GetItemText().FormatPlural(LC_Items.FilteredCount).ToLower()));
 
 		if (L_Counts.Text != countText)
 		{

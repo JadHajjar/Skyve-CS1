@@ -115,7 +115,6 @@
   "Sorting_Status": "Package Status",
   "Sorting_CompatibilityReport": "Compatibility Report",
   "Sorting_LoadOrder": "Load Order",
-  "IncreaseItemSize": "Increase list items' sizes",
   "FolderSettings": "Folder Settings",
   "GamePath": "Cities: Skylines' Steam Folder",
   "SteamPath": "Steam's Installation Folder",
@@ -226,8 +225,7 @@
   "ResetFolderButton": "Reset all folder settings",
   "LinkModAssets_Tip": "Some mods include assets that are required for them to function properly. Enabling this option links those assets to the mod itself and hides those assets from the Assets page so you don't exclude them by mistake.",
   "ShowDatesRelatively_Tip": "Changes the format of dates that are displayed in content lists to relative time. For example; Yesterday at 2:10 pm",
-  "IncreaseItemSize_Tip": "Enabling this makes content lists' rows double in size.",
-  "DisableNewModsByDefault_Tip": "When you subscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "When you s`ubscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
   "DisableNewAssetsByDefault_Tip": "When you subscribe or add an asset, the tool will automatically exclude or include it based on this setting when the tool is launched.",
   "FilterOutPackagesWithOneAsset_Tip": "Packages that only have a single asset in them will not show on the Packages page. They will still show on the Assets page.",
   "FilterOutPackagesWithMods_Tip": "Packages that include a mod will not show on the Packages page. They will still show on the Mods page.",
@@ -405,7 +403,7 @@
   "FlipItemCopyFilterAction": "Swap Alt+Click behavior for filtering in the content lists",
   "FlipItemCopyFilterAction_Tip": "Swaps the default behavior of clicking on labels so that normal clicking filters and Alt+Clicking performs the default action.",
   "AltClickTo": "Alt+Click to {0}",
-  "FilterByThisAuthor": "Filter by this author",
+  "FilterByThisAuthor": "Add '{0}' to your filters",
   "AddToSearch": "Add '{0}' to your search",
   "CopyToClipboard": "Copy '{0}' to your clipboard",
   "ViewPackageCR": "View this package's compatibility info",
@@ -652,7 +650,9 @@
   "ViewTroubleshootOptions": "View troubleshooting options",
   "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
   "TroubleshootCaused": "A mod or asset I'm using is causing issues",
+  "TroubleshootNew": "A recent mod update or new subscription is causing issues",
   "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
   "TroubleshootSelection": "Which option best describes your situation?",
-  "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?"
+  "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?",
+  "IDAndTags": "ID & Tags"
 }

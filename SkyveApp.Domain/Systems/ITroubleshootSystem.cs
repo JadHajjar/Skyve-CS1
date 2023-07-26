@@ -10,7 +10,14 @@ public interface ITroubleshootSystem
 	int CurrentStage { get; }
 	bool IsInProgress { get; }
 	int TotalStages { get; }
+	string CurrentAction { get; }
+	bool CanSkip { get; }
 
-	void Start(ITroubleshootSettings settings);
-	void Stop();
+	event Action? StageChanged;
+	event Action? AskForConfirmation;
+
+	Task ApplyConfirmation(bool issuePersists);
+	Task NextStage();
+	Task Start(ITroubleshootSettings settings);
+	Task Stop();
 }
