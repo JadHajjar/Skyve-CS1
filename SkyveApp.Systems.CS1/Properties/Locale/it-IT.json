@@ -1,6 +1,6 @@
 {
   "CompatibilityInfo": "Informazioni sulla compatibilità",
-  "PlaysetBubble": "Current Playset",
+  "PlaysetBubble": "Playset attuale",
   "StartCities": "Avvia Cities: Skylines",
   "StopCities": "Ferma Cities: Skylines",
   "AssetsBubble": "Le tue risorse",
@@ -32,7 +32,7 @@
   "UpToDate": "Aggiornato",
   "StatusUnknown": "Stato sconosciuto",
   "PartiallyDownloaded": "Parzialmente scaricato",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
+  "AutoPlaysetSaveOn": "Il salvataggio automatico è abilitato",
   "AutoPlaysetSaveOff": "Auto-save is disabled",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "Impostazioni di lancio",
