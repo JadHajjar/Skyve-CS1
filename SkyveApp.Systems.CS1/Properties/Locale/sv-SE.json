@@ -259,7 +259,7 @@
   "CopyVersionNumber": "Kopiera versionsnummer",
   "SubscribeToItem": {
     "One": "Prenumerera på detta paket",
-    "Plural": "Subscribe from the selected Packages"
+    "Plural": "Prenumerera från de valda paketen"
   },
   "LoadCollectionTip": "Ladda den samling du länkat i rutan till vänster för att enkelt inkludera, exkludera etc. från paket i den",
   "LsmMissingTip": "Dra och släpp en LSM-rapportfil här eller klicka för att välja en för att prenumerera på saknade tillgångar som anges i rapporten",
@@ -297,9 +297,9 @@
   "PackageIncludedEnabledTotal": "Paket inkluderade: {0}, varav {1} är mods och {2} är aktiverade, Totalt: {3}",
   "PackageIncludedAndEnabledTotal": "Paket inkluderade och aktiverade: {0}, Totalt: {1}",
   "AssetIncludedTotal": "Tillgångar inkluderade: {0}, Totalt: {1}",
-  "NewPlayset_Tip": "Create or import a new playset",
-  "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "NewPlayset_Tip": "Skapa eller importera en ny speluppsättning",
+  "TempPlayset_Tip": "Växla till en tillfällig uppspelning med dina nuvarande inställningar",
+  "ViewPlaysets_Tip": "Visa och hantera dina sparade profiler",
   "AutoSave_Tip": "Spara automatiskt ändringar i moddar och tillgångar till din profil",
   "LoadEnabled_Tip": "Laddar aktiverade tillgångar när du laddar ett spel. Detta bör lämnas aktiverat om du inte vet vad du gör",
   "LoadUsed_Tip": "Ladda tillgångar som används i kartan, även om de är inaktiverade i spelet. Detta är inte relaterat till tillgångsinställningarna inuti Skyve",
@@ -324,7 +324,7 @@
   "XMLImport": "Importera XML-konfiguration",
   "XMLImportMissingInfo": "Visa och prenumerera på paket i vilken XML-konfiguration som helst",
   "XMLTip": "Välj eller dra och släpp en XML-konfigurationsfil för att hantera paket som listas inuti den.",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
+  "FavoritePlaysetTotal": "Speluppsättningar som favorit: {0}, Totalt: {1}",
   "FavoriteTotal": "Totalt antal profiler: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Se till att Skyve har tillgång till din dokumentmapp, den använder den för att lagra dina UI & Språkinställningar.",
