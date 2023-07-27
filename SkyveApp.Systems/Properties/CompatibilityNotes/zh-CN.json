@@ -263,7 +263,7 @@
   "Ploppable RICO now has the functionality of Grow the Ploppables. Using both mods together is possible, but may give inconsistent results unless your settings are aligned. Removing Grow the Ploppables is recommended, but if done on an existing game you have to make sure that the settings of both mods are the same.": "Ploppable RICO 现在具有 Grow the Ploppables 的功能。 您可以同时使用这两个模组，但它们的设置必须相同，否则可能会出现不一致的结果。 建议删除 Grow the Ploppables，但是如果在现有的游戏上进行操作，必须确保两个模组的设置相同。",
   "If you used before Plop the Growables mod on a save, use the linked Converter before loading without that mod. Also subscribe in that case RICO revisited and Find it! 2 to be able to plop growables.": "如果您在之前的存档中使用了 Plop the Growables 模组，请取消订阅该模组，并使用链接中的 PtG to ABLC Data Converter 进行数据转换。 此后，请订阅 Ploppable RICO Revisited 和 Find it! 2 以摆放自长建筑。",
   "Extended InfoPanel 2 has all functionality from HideUI.": "Extended InfoPanel 2 已经具有 HideUI 的所有功能。",
-  "Clicking in the bottom bar for UEC functionality does not work.": "点击底部条栏时，无法启用UEC功能。",
+  "Clicking in the bottom bar for UEC functionality does not work.": "点击底部栏启用 Ultimate Eyecandy 的功能无法正常工作。",
   "Restores ship behavior that allows them to float on the land.": "允许轮船在陆地上/浅水区域正常行驶。",
   "Clouds & Fog Toggler overrules the fog options of Hide It.": "Clouds & Fog Toggler 会覆盖 Hide it 的隐藏云雾选项。",
   "A black bar might appear above the bottom toolbar.": "底部工具栏上可能出现一个黑色条形。",
