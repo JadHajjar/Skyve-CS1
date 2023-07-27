@@ -561,14 +561,14 @@
   "RedownloadComplete": "Skyve 已重新下载存在问题的插件。",
   "CleanupComplete": "Skyve 已经将您已取消订阅（但没删除干净）的插件清理完毕。",
   "PendingSubscribeTo": {
-    "One": "当前有 {0} 个等待中的订阅操作",
-    "Plural": "当前有 {0} 个等待中的订阅操作"
+    "One": "{0} 个项目等待订阅",
+    "Plural": "{0} 个项目等待订阅"
   },
   "PendingUnsubscribeFrom": {
-    "One": "当前有 {0} 个等待中的取消订阅操作",
-    "Plural": "当前有 {0} 个等待中的取消订阅操作"
+    "One": "{0} 个项目等待取消订阅",
+    "Plural": "{0} 个项目等待取消订阅"
   },
-  "CancelSubs": "移除所有等待中的订阅操作",
+  "CancelSubs": "取消所有等待中的订阅操作",
   "CancelDownloads": "取消所有等待下载的项目",
   "ApplySubs": "启动游戏片刻，以订阅这些插件",
   "ApplyDownloads": "强制 Steam 下载所有等待处理的插件",
@@ -586,12 +586,12 @@
   },
   "ViewThisPlaysetsPackages": "查看此配置文件的内容",
   "PendingDownloads": {
-    "One": "当前有 {0} 个等待下载的项目",
-    "Plural": "当前有 {0} 个等待下载的项目"
+    "One": "{0} 个项目等待下载",
+    "Plural": "{0} 个项目等待下载"
   },
   "PendingDeletions": {
-    "One": "当前有 {0} 个等待删除的项目",
-    "Plural": "当前有 {0} 个等待删除的项目"
+    "One": "{0} 个项目等待删除",
+    "Plural": "{0} 个项目等待删除"
   },
   "YouHavePackagesUser": {
     "One": "您有 {0} 个由 {1} 制作的插件",
