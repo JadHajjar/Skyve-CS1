@@ -508,12 +508,12 @@
     "Plural": "Affichage de {0} {1}, {2}"
   },
   "ShowingSelectedCount": {
-    "One": "Showing {0} {1}, {2} selected",
-    "Plural": "Showing {0} {1}, {2} selected"
+    "One": "Affichage de {0} {1}, {2} sélectionné",
+    "Plural": "Affichage de {0} {1}, {2} sélectionnés"
   },
   "ShowingSelectedCountWarning": {
-    "One": "Showing {0} {1}, {2} selected, {3}",
-    "Plural": "Showing {0} {1}, {2} selected, {3}"
+    "One": "Affichage de {0} {1}, {2} sélectionné, {3}",
+    "Plural": "Affichage de {0} {1}, {2} sélectionnés, {3}"
   },
   "ItemsHidden": {
     "One": "{0} {1} est masqué à cause de l'utilisation de votre profil",
@@ -532,7 +532,7 @@
   "SendReview": "Envoyer la demande de revue",
   "EditTags": {
     "One": "Modifier les tags de ce paquet",
-    "Plural": "Edit selected items' Tags"
+    "Plural": "Modifier les tags des éléments sélectionnés"
   },
   "ShowAllReferencedPackages": "Afficher les paquets exclus dans l'onglet 'Références'",
   "ShowAllReferencedPackages_Tip": "Affiche à la fois les paquets exclus et inclus qui font référence à celui que vous visualisez.",
@@ -634,20 +634,20 @@
   "PastePlaysetId": "Paste the ID of the playset you'd like to import",
   "AssumeInternetConnectivity": "Ignorer la vérification de la connexion à Internet",
   "AssumeInternetConnectivity_Tip": "Ne pas vérifier la connexion et supposer automatiquement que vous êtes connecté à Internet.",
-  "SelectAll": "Select all displayed items",
-  "DeselectAll": "Un-select all displayed items",
-  "AddTagBox": "Add a new tag here",
+  "SelectAll": "Sélectionner tous les éléments affichés",
+  "DeselectAll": "Désélectionner tous les éléments affichés",
+  "AddTagBox": "Ajouter un nouveau tag ici",
   "EditingMultipleTags": "Editing multiple packages' tags will overwrite each of their custom tags.",
   "EditTagsOfPackage": {
     "One": "Edit all of this package's assets' Tags",
     "Plural": "Edit all of the selected packages' assets' Tags"
   },
   "TagsTitle": {
-    "One": "Custom Tags: {0}",
-    "Plural": "Custom Tags: {0} packages"
+    "One": "Tags personnalisés : {0}",
+    "Plural": "Tags personnalisés : {0} paquets"
   },
-  "CustomTags": "Custom Tags",
-  "WorkshopAndGameTags": "Workshop & In-Game Tags",
+  "CustomTags": "Tags personnalisés",
+  "WorkshopAndGameTags": "Tags du Workshop et en jeu",
   "TroubleshootIssues": "Troubleshoot Issues",
   "ViewTroubleshootOptions": "View troubleshooting options",
   "TroubleshootInfo": "If you have a mod or asset that is causing an issue, or that is missing, and you don't known which one; Try troubleshooting it here:",
