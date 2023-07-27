@@ -63,6 +63,9 @@ internal class DownloadsInfoControl : SlickControl
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
+		if (!Live)
+			return;
+
 		e.Graphics.SetUp(BackColor);
 
 		e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(100, FormDesign.Design.YellowColor)), ClientRectangle, Padding.Left);

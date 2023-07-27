@@ -160,7 +160,7 @@ internal class PackageManager : IPackageManager
 
 	public void DeleteAll(IEnumerable<ulong> ids)
 	{
-		foreach (var id in ids)
+		foreach (var id in ids.ToList())
 		{
 			DeleteAll(CrossIO.Combine(_locationManager.WorkshopContentPath, id.ToString()));
 		}

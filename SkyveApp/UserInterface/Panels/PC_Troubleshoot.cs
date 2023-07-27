@@ -1,8 +1,5 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using System.IO;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -24,14 +21,14 @@ public partial class PC_Troubleshoot : PanelContent
 	{
 		base.DesignChanged(design);
 
-		L_Title.ForeColor =L_ModAssetTitle.ForeColor= design.ActiveColor;
+		L_Title.ForeColor = L_ModAssetTitle.ForeColor = design.ActiveColor;
 	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		L_Title.Font= L_ModAssetTitle.Font = UI.Font(10.5F, System.Drawing.FontStyle.Bold);
+		L_Title.Font = L_ModAssetTitle.Font = UI.Font(10.5F, System.Drawing.FontStyle.Bold);
 		B_Cancel.Font = UI.Font(9.75F);
 	}
 
@@ -75,16 +72,30 @@ public partial class PC_Troubleshoot : PanelContent
 		_settings.NewItemCausingIssues = true;
 	}
 
-	private void B_Mods_Click(object sender, EventArgs e)
+	private async void B_Mods_Click(object sender, EventArgs e)
 	{
+		if (B_Mods.Loading || B_Assets.Loading)
+			return;
+
+		B_Mods.Loading = true;
+
 		_settings.Mods = true;
 
-		ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+		await ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+
+		PushBack();
 	}
 
-	private void B_Assets_Click(object sender, EventArgs e)
+	private async void B_Assets_Click(object sender, EventArgs e)
 	{
-		ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+		if (B_Mods.Loading || B_Assets.Loading)
+			return;
+
+		B_Assets.Loading = true;
+
+		await ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+
+		PushBack();
 	}
 
 	private class TroubleshootSettings : ITroubleshootSettings

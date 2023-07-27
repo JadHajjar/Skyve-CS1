@@ -654,5 +654,9 @@
   "TroubleshootMissing": "I'm missing a mod or asset, and that is causing issues",
   "TroubleshootSelection": "Which option best describes your situation?",
   "TroubleshootModOrAsset": "What kind of content would you like to troubleshoot?",
-  "IDAndTags": "ID & Tags"
+  "IDAndTags": "ID & Tags",
+  "ApplyingSettings": "Applying settings...",
+  "WaitingForGameLaunch": "Waiting for the game to be launched...",
+  "WaitingForGameClose": "Waiting for the game to be closed...",
+  "WaitingForConfirmation": "Waiting for your response..."
 }

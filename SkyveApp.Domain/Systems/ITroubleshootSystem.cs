@@ -15,6 +15,7 @@ public interface ITroubleshootSystem
 
 	event Action? StageChanged;
 	event Action? AskForConfirmation;
+	event Action<List<ILocalPackage>>? PromptResult;
 
 	Task ApplyConfirmation(bool issuePersists);
 	Task NextStage();

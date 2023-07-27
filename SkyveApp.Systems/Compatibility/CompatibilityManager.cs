@@ -278,7 +278,7 @@ public class CompatibilityManager : ICompatibilityManager
 				{
 					info.Links.Add(new PackageLink
 					{
-						Url = match.Groups[1].Value,
+						Url = match.Value,
 						Type = type,
 					});
 				}
