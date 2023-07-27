@@ -52,7 +52,7 @@
   "AnyCompatibilityStatus": "任意状态",
   "ModOwned": "您已订阅该模组",
   "NoLocalPackagesFound": "在您的电脑上找不到插件。",
-  "CheckFolderInOptions": "如果您选择了错误的文件夹，请查看选项面板。",
+  "CheckFolderInOptions": "您有可能选择了错误的文件夹，请检查选项页面中的文件夹设置。",
   "NoPackagesMatchFilters": "没有符合筛选条件的插件",
   "ExcludeAll": "卸下当前显示的所有项目",
   "IncludeAll": "装载当前显示的所有项目",
