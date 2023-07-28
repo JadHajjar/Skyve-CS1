@@ -423,7 +423,7 @@
   "MissingPackagesPlayset": "配置文件 '{0}' 中缺失的插件",
   "UnusedLSMReport": "资产报告中未使用的资产",
   "MissingLSMReport": "资产报告中缺失的资产",
-  "SearchGenericPackages": "搜索这些插件…",
+  "SearchGenericPackages": "搜索插件…",
   "Sorting_Subscribers": "总订阅量",
   "Sorting_Votes": "评分",
   "RatingCount": "评分：{0} {1}",
