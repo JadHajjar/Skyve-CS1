@@ -573,27 +573,27 @@
             {
                 "Name": "Mudanças",
                 "Changes": [
-                    "Click-to-filter now uses the Alt key instead of the Ctrl key.",
-                    "You can now select multiple items in the content lists using the Ctrl or Shift keys.",
-                    "Added an 'Open File' option to the right-click menu when selecting a file.",
-                    "Copy all IDs action now includes packages' names and local packages as well.",
+                    "Agora o clique para filtrar usa a tecla Alt ao invés da tecla Ctrl.",
+                    "Agora você pode selecionar vários itens nas listas de conteúdo usando as teclas Ctrl ou Shift.",
+                    "Adicionada a opção 'Abrir arquivo' ao clicar com o botão direito do mouse ao selecionar um arquivo.",
+                    "Copiar todas as ações de IDs agora inclui nomes de pacotes e pacotes locais também.",
                     "O nome da sua Coleção de Mods agora é exibido no menu principal do jogo.",
-                    "The 'First time setup incomplete' screen now has an ingnore button to manually set up your folder settings instead.",
-                    "'Show Folder Settings' now automatically be turned on if one of the folder settings is incorrect."
+                    "A tela 'Primeira Configuração incompleta' tem agora um botão do modelo para configurar manualmente as configurações da sua pasta.",
+                    "'Mostrar Configurações da Pasta' agora ser ativado automaticamente se uma das configurações da pasta estiver incorreta."
                 ]
             }
         ]
     },
     {
         "Version": "3.2.2",
-        "Date": "2023-07-13",
+        "Date": "13/07/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Mudanças",
                 "Changes": [
-                    "Added a grid-view option for all content pages; toggle between list & grid view using the new icons on the top right of the list.",
-                    "Sorting & Grid-view settings are now saved on a per-page basis.",
-                    "Added a 'Load Order' sorting option.",
+                    "Adicionada uma opção de visualização de grade para todas as páginas de conteúdo; alterne entre a exibição de lista e grade usando os novos ícones no canto superior direito da lista.",
+                    "As configurações de classificação & exibição em grade agora são salvas por página.",
+                    "Adicionada a opção de ordenação do 'Ordem de Carregamento'.",
                     "Adicionada a opção de ocultar o nome do atual da Coleção de Mods no menu principal.",
                     "Corrigido o nome da Coleção de Mods permanecendo visível durante o jogo.",
                     "Corrigida as Coleção de Mods desaparecendo no macOS e Linux."
@@ -603,19 +603,19 @@
     },
     {
         "Version": "3.2.3",
-        "Date": "2023-07-29",
+        "Date": "29/07/2023",
         "ChangeGroups": [
             {
-                "Name": "Changes",
+                "Name": "Mudanças",
                 "Changes": [
-                    "Added a compact-view option for all content pages; toggle between compact, list & grid view using the new icons on the top right of the list.",
-                    "Added a troubleshooting system to the Utilities tab; use it to narrow down what mod or asset is causing your issues.",
-                    "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
-                    "Added a new 'Midnight' theme.",
-                    "Updated the color design of the app's logo on the top-left.",
-                    "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
-                    "Fixed the incorrect names of packages while viewing a playset's contents.",
-                    "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."
+                    "Adicionada opção de visualização compacta para todas as páginas de conteúdo; alterne entre visualização compacta, lista ou grade usando os novos ícones no canto superior direito da lista.",
+                    "Adicionado sistema de solução de problemas na guia de Utilitários; use-o para identificar qual mod ou recurso está causando problemas.",
+                    "Aprimorada a janela \"Adicionar Etiquetas\"; agora é mais fácil selecionar etiquetas existentes e editar vários itens ao mesmo tempo.",
+                    "Adicionado novo tema 'Meia-Noite'.",
+                    "Atualizado o design de cor do logotipo do aplicativo no canto superior esquerdo.",
+                    "Os pacotes locais e do jogo base agora são corretamente correspondidos ao visualizar o conteúdo de um conjunto de mods.",
+                    "Corrigido os nomes incorretos dos pacotes ao visualizar o conteúdo de um conjunto de mods.",
+                    "Corrigido o filtro de autores e etiquetas que não atualizava se você entrasse na página antes deles carregarem."
                 ]
             }
         ]
