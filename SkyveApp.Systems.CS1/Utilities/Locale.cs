@@ -2,6 +2,8 @@
 
 using SkyveApp.Domain.Systems;
 
+using System;
+
 namespace SkyveApp.Systems.CS1.Utilities;
 public class Locale : LocaleHelper, ILocale
 {
@@ -322,4 +324,12 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation UpdateTime => _instance.GetText(nameof(UpdateTime));
 	public static Translation Status => _instance.GetText(nameof(Status));
 	public static Translation IDAndTags => _instance.GetText(nameof(IDAndTags));
+	public static Translation UseEnglishPlease => _instance.GetText(nameof(IDAndTags));
+	public static Translation StageCounter => _instance.GetText(nameof(StageCounter));
+	public static Translation NextStage => _instance.GetText(nameof(NextStage));
+	public static Translation CancelTroubleshootMessage => _instance.GetText(nameof(CancelTroubleshootMessage));
+	public static Translation CancelTroubleshootTitle => _instance.GetText(nameof(CancelTroubleshootTitle));
+	public static Translation TroubleshootAskIfFixed => _instance.GetText(nameof(TroubleshootAskIfFixed));
+	public static Translation TroubleshootAskToStop => _instance.GetText(nameof(TroubleshootAskToStop));
+	public static Translation StopTroubleshootTitle => _instance.GetText(nameof(StopTroubleshootTitle));
 }

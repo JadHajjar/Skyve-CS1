@@ -88,7 +88,7 @@ internal class DownloadsInfoControl : SlickControl
 		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, c switch { 3 => LocaleSlickUI.Apply, 2 => LocaleSlickUI.Remove, _ => LocaleSlickUI.Download }, UI.Font(6.75F), new(4, 2, 2, 2));
 		buttonRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomRight);
 
-		SlickButton.DrawButton(e, buttonRect, c switch { 3 => LocaleSlickUI.Apply, 2 => LocaleSlickUI.Remove, _ => LocaleSlickUI.Download }, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), buttonRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : (HoverState & HoverState.Focused), ColorStyle.Green);
+		SlickButton.DrawButton(e, buttonRect, c switch { 3 => LocaleSlickUI.Apply, 2 => LocaleSlickUI.Remove, _ => LocaleSlickUI.Download }, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), buttonRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : HoverState.Normal, ColorStyle.Green);
 
 		using var cancelButtonIcon = IconManager.GetSmallIcon("I_Cancel");
 		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, UI.Font(6.75F), new(4, 2, 2, 2));

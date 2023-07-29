@@ -1,5 +1,6 @@
 ﻿using SkyveApp.Systems.CS1.Utilities;
 
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -81,9 +82,9 @@ public partial class PC_Troubleshoot : PanelContent
 
 		_settings.Mods = true;
 
-		await ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
 
-		PushBack();
+		Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
 	}
 
 	private async void B_Assets_Click(object sender, EventArgs e)
@@ -93,9 +94,9 @@ public partial class PC_Troubleshoot : PanelContent
 
 		B_Assets.Loading = true;
 
-		await ServiceCenter.Get<ITroubleshootSystem>().Start(_settings);
+		await Task.Run(() => ServiceCenter.Get<ITroubleshootSystem>().Start(_settings));
 
-		PushBack();
+		Form.SetPanel<PC_MainPage>(Program.MainForm.PI_Dashboard);
 	}
 
 	private class TroubleshootSettings : ITroubleshootSettings

@@ -8,7 +8,6 @@ using SkyveApp.Systems.CS1.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SkyveApp.Systems.CS1.Systems;
 internal class TroubleshootSystem : ITroubleshootSystem
@@ -28,13 +27,17 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 	public bool IsInProgress => currentState is not null;
 	public string CurrentAction => LocaleHelper.GetGlobalText(currentState?.Stage.ToString());
-	public bool CanSkip => currentState?.Stage is ActionStage.WaitingForGameClose or ActionStage.WaitingForGameLaunch;
+	public bool WaitingForGameLaunch => currentState?.Stage is ActionStage.WaitingForGameLaunch;
+	public bool WaitingForGameClose => currentState?.Stage is ActionStage.WaitingForGameClose;
+	public bool WaitingForPrompt => currentState?.Stage is ActionStage.WaitingForConfirmation;
 	public int CurrentStage => currentState?.CurrentStage ?? 0;
 	public int TotalStages => currentState?.TotalStages ?? 0;
 
 	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IBulkUtil bulkUtil, IModLogicManager modLogicManager, IModUtil modUtil)
 	{
-		ISave.Load(out currentState, "TroubleshootState.json");
+		try
+		{ ISave.Load(out currentState, "TroubleshootState.json"); }
+		catch { }
 
 		_packageManager = packageManager;
 		_playsetManager = (PlaysetManager)playsetManager;
@@ -47,7 +50,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		citiesManager.MonitorTick += CitiesManager_MonitorTick;
 	}
 
-	public async Task Start(ITroubleshootSettings settings)
+	public void Start(ITroubleshootSettings settings)
 	{
 		var playset = new Playset();
 
@@ -86,7 +89,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 		currentState.TotalStages = (int)Math.Ceiling(Math.Log(currentState.UnprocessedItems.Count, 2));
 
-		await ApplyConfirmation(true);
+		ApplyConfirmation(true);
 	}
 
 	private static bool CheckPackageValidity(ITroubleshootSettings settings, ILocalPackage item)
@@ -117,14 +120,17 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		return false;
 	}
 
-	public async Task Stop()
+	public void Stop(bool keepSettings)
 	{
 		if (currentState is null)
 		{
 			return;
 		}
 
-		_playsetManager.ApplyPlayset(currentState.Playset!, false);
+		if (!keepSettings)
+		{
+			_playsetManager.ApplyPlayset(currentState.Playset!, false);
+		}
 
 		_playsetManager.CurrentPlayset = _playsetManager.Playsets.FirstOrDefault(x => x.Name == currentState.PlaysetName) ?? Playset.TemporaryPlayset;
 
@@ -138,23 +144,21 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		currentState = null;
 
 		StageChanged?.Invoke();
-
-		await Task.CompletedTask;
 	}
 
-	public async Task ApplyConfirmation(bool issuePersists)
+	public void ApplyConfirmation(bool issuePersists)
 	{
 		if (currentState?.Stage == ActionStage.WaitingForConfirmation)
 		{
-			await NextStage();
+			NextStage();
 
 			ApplyNextSettings(issuePersists);
 
-			await NextStage();
+			NextStage();
 		}
 	}
 
-	public async Task NextStage()
+	public void NextStage()
 	{
 		if (currentState is null)
 		{
@@ -185,11 +189,9 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		{
 			AskForConfirmation?.Invoke();
 		}
-
-		await Task.CompletedTask;
 	}
 
-	private async void ApplyNextSettings(bool issuePersists)
+	private void ApplyNextSettings(bool issuePersists)
 	{
 		_playsetManager.ApplyPlayset(currentState!.Playset!, false);
 
@@ -205,7 +207,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			{
 				PromptResult?.Invoke(GetPackages(new[] { lists.processingItems[0][0] }).ToList());
 
-				await Stop();
+				Stop(true);
 
 				return;
 			}
@@ -272,7 +274,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			{
 				group.Add(item.FilePath);
 			}
-			else if (!currentState!.ItemIsMissing && AreItemsPaired(item, current))
+			else if (!currentState!.ItemIsMissing && currentState!.Mods && AreItemsPaired(item, current))
 			{
 				GetPairedItems(items, group, item);
 			}
@@ -308,7 +310,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		ISave.Save(currentState, "TroubleshootState.json");
 	}
 
-	private async void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
+	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)
 	{
 		if (currentState == null)
 		{
@@ -317,11 +319,11 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 		if (currentState.Stage == ActionStage.WaitingForGameLaunch && isRunning)
 		{
-			await NextStage();
+			NextStage();
 		}
 		else if (currentState.Stage == ActionStage.WaitingForGameClose && !isRunning && isAvailable)
 		{
-			await NextStage();
+			NextStage();
 		}
 	}
 

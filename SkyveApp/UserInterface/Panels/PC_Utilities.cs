@@ -1,4 +1,5 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Domain.Systems;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 
 using System.Drawing;
@@ -356,20 +357,22 @@ public partial class PC_Utilities : PanelContent
 		B_ResetSteamCache.ImageName = img;
 	}
 
-	private void B_Troubleshoot_Click(object sender, EventArgs e)
+	private async void B_Troubleshoot_Click(object sender, EventArgs e)
 	{
 		var sys = ServiceCenter.Get<ITroubleshootSystem>();
+
 		if (sys.IsInProgress)
 		{
-			var p = false;
-
-			if (p)
+			switch (MessagePrompt.Show(Locale.CancelTroubleshootMessage, Locale.CancelTroubleshootTitle, PromptButtons.YesNoCancel, PromptIcons.Hand, form: Program.MainForm))
 			{
-				sys.ApplyConfirmation(p);
-			}
-			else
-			{
-				sys.NextStage();
+				case DialogResult.Yes:
+					Hide();
+					await Task.Run(() => sys.Stop(true));
+					break;
+				case DialogResult.No:
+					Hide();
+					await Task.Run(() => sys.Stop(false));
+					break;
 			}
 		}
 		else

@@ -11,14 +11,16 @@ public interface ITroubleshootSystem
 	bool IsInProgress { get; }
 	int TotalStages { get; }
 	string CurrentAction { get; }
-	bool CanSkip { get; }
+	bool WaitingForGameLaunch { get; }
+	bool WaitingForGameClose { get; }
+	bool WaitingForPrompt { get; }
 
 	event Action? StageChanged;
 	event Action? AskForConfirmation;
 	event Action<List<ILocalPackage>>? PromptResult;
 
-	Task ApplyConfirmation(bool issuePersists);
-	Task NextStage();
-	Task Start(ITroubleshootSettings settings);
-	Task Stop();
+	void ApplyConfirmation(bool issuePersists);
+	void NextStage();
+	void Start(ITroubleshootSettings settings);
+	void Stop(bool keepSettings);
 }
