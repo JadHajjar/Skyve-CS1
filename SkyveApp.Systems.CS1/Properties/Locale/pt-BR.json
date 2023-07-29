@@ -155,8 +155,8 @@
     "One": "Copie o ID da Oficina deste pacote",
     "Plural": "Copiar os IDs da Oficina dos pacotes selecionados"
   },
-  "CopyAuthorLink": "Copy this author's profile link",
-  "CopyAuthorId": "Cópia ID do Autor",
+  "CopyAuthorLink": "Copie o link do perfil do autor",
+  "CopyAuthorId": "Copiar o ID deste Autor",
   "YourPlaysets": "Seus conjuntos de jogo",
   "UnFavoriteThisPlayset": "Remover este conjunto dos favoritos",
   "FavoriteThisPlayset": "Adicionar este conjunto aos favoritos",
@@ -225,7 +225,7 @@
   "ResetFolderButton": "Redefinir todas as configurações de pasta",
   "LinkModAssets_Tip": "Alguns mods incluem recursos necessários para que funcionem corretamente. Habilitar essa opção vincula esses recursos ao próprio mod e os oculta na página de Recursos para que você não os exclua por engano.",
   "ShowDatesRelatively_Tip": "Altera o formato das datas que são exibidas nas listas de conteúdo para o tempo relativo. Por exemplo; Ontem às 2:10",
-  "DisableNewModsByDefault_Tip": "When you s`ubscribe or add a mod, the tool will automatically exclude or include it based on this setting when the tool is launched.",
+  "DisableNewModsByDefault_Tip": "Quando você se inscreve ou adiciona um mod, a ferramenta automaticamente o excluirá ou incluirá com base nesta configuração quando a ferramenta for iniciada.",
   "DisableNewAssetsByDefault_Tip": "Quando você assina ou adiciona um recurso, a ferramenta irá automaticamente excluí-lo ou incluí-lo com base nesta configuração quando a ferramenta for iniciada.",
   "FilterOutPackagesWithOneAsset_Tip": "Pacotes que contêm apenas um recurso não serão exibidos na página de Pacotes. No entanto, eles ainda serão exibidos na página de Recursos.",
   "FilterOutPackagesWithMods_Tip": "Pacotes que incluem um mod não serão exibidos na página de Pacotes. No entanto, eles ainda serão exibidos na página de Mods.",
@@ -403,7 +403,7 @@
   "FlipItemCopyFilterAction": "Trocar o comportamento do Ctrl+Clique para filtrar nas listas de conteúdo",
   "FlipItemCopyFilterAction_Tip": "Inverte o comportamento padrão de clicar em rótulos para que o clique normal filtre e o Ctrl+Clique execute a ação padrão.",
   "AltClickTo": "Alt+Clique para {0}",
-  "FilterByThisAuthor": "Add '{0}' to your filters",
+  "FilterByThisAuthor": "Adicione '{0}' aos seus filtros",
   "AddToSearch": "Adicione '{0}' à sua pesquisa",
   "CopyToClipboard": "Copiar '{0}' para a área de transferência",
   "ViewPackageCR": "Ver as informações de compatibilidade deste pacote",
@@ -502,8 +502,8 @@
     "Plural": "Exibindo {0} {1}"
   },
   "ShowingCountWarning": {
-    "One": "Exibindo {0} {1}, {2}",
-    "Plural": "Exibindo {0} {1}, {2}"
+    "One": "Exibindo {0} {1}, {3}",
+    "Plural": "Exibindo {0} {1}, {3}"
   },
   "ShowingSelectedCount": {
     "One": "Exibindo {0} {1}, {2} selecionado",
@@ -515,7 +515,7 @@
   },
   "ItemsHidden": {
     "One": "{0} {1} Está oculto devido à configuração do seu perfil",
-    "Plural": "{0} {1} Está oculto devido à configuração do seu perfil"
+    "Plural": "{0} {1} Estão ocultos devido à configuração do seu perfil"
   },
   "EditCompatibility": {
     "One": "Editar a compatibilidade deste pacote",
@@ -650,24 +650,24 @@
   "ViewTroubleshootOptions": "Exibir opções de solução de problemas",
   "TroubleshootInfo": "Se você tem um mod ou um arquivo que está causando um problema, ou está faltando, e você não sabe qual é; Tente solucionar o problema aqui:",
   "TroubleshootCaused": "Um mod ou um recurso que eu estou usando está causando problemas",
-  "TroubleshootNew": "A recent mod update or new subscription is causing issues",
+  "TroubleshootNew": "Uma atualização recente do mod ou uma nova assinatura está causando problemas",
   "TroubleshootMissing": "Estou sem um mod ou recurso, e isso está causando problemas",
   "TroubleshootSelection": "Qual opção melhor descreve sua situação?",
   "TroubleshootModOrAsset": "Que tipo de conteúdo você gostaria de solucionar problemas?",
-  "IDAndTags": "ID & Tags",
-  "ApplyingSettings": "Applying settings...",
-  "WaitingForGameLaunch": "Waiting for the game to be launched...",
-  "WaitingForGameClose": "Waiting for the game to be closed...",
-  "WaitingForConfirmation": "Waiting for your response...",
-  "UseEnglishPlease": "* Please try to use English in your description.",
-  "StageCounter": "Troubleshooting step {0} / {1}",
-  "NextStage": "Next Stage",
-  "CancelTroubleshootMessage": "Would you like to reset to the configuration you were using before starting the troubleshoot?\r\n\r\nSelect 'No' to keep the current configuration of packages.",
-  "CancelTroubleshootTitle": "Cancel & Reset Troubleshooting?",
-  "TroubleshootAskIfFixed": "Did the last changes fix the issue that you're trying to solve?",
-  "TroubleshootAskToStop": "Would you like to stop the troubleshooting here and keep the current configuration of packages?\r\n\r\nSelect 'No' to continue troubleshooting.",
-  "StopTroubleshootTitle": "Stop Troubleshooting?",
-  "TroubleshootCancelTip": "Stop the troubleshooting process.",
-  "TroubleshootNextStageTip": "Skip the current stage. Use it if you've already completed it and want to proceed.",
-  "TroubleshootBubbleTip": "This is the troubleshooting menu, it will guide you throughout the process.\r\nYou can close Skyve and continue later, it will remember your progress."
+  "IDAndTags": "ID & Etiquetas",
+  "ApplyingSettings": "Aplicando configurações...",
+  "WaitingForGameLaunch": "Esperando o jogo ser iniciado...",
+  "WaitingForGameClose": "Esperando que o jogo seja fechado...",
+  "WaitingForConfirmation": "Aguardando sua resposta...",
+  "UseEnglishPlease": "* Por favor, tente usar inglês na sua descrição.",
+  "StageCounter": "Solução de problemas, passo {0} / {1}",
+  "NextStage": "Próximo passo",
+  "CancelTroubleshootMessage": "Gostaria de redefinir a configuração que você estava usando antes de iniciar a solução de problemas?\n\nSelecione 'Não' para manter a configuração atual dos pacotes.",
+  "CancelTroubleshootTitle": "Cancelar e Redefinir a Solução de Problemas?",
+  "TroubleshootAskIfFixed": "As últimas mudanças corrigiram o problema que você está tentando resolver?",
+  "TroubleshootAskToStop": "Gostaria de parar a solução de problemas aqui e manter a configuração atual dos pacotes?\n\nSelecione 'Não' para continuar a solução de problemas.",
+  "StopTroubleshootTitle": "Parar de solucionar o problema?",
+  "TroubleshootCancelTip": "Interromper o processo de solução de problemas.",
+  "TroubleshootNextStageTip": "Pule o passo atual. Use-o se você já o completou e quer prosseguir.",
+  "TroubleshootBubbleTip": "Este é o menu de solução de problemas, iremos guiá-lo durante o processo.\nVocê pode fechar o Skyve e continuar mais tarde, lembraremos do seu progresso."
 }
