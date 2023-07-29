@@ -24,14 +24,16 @@ internal class TagsService : ITagsService
 	private readonly Dictionary<string, HashSet<string>> _tagsCache;
 
 	private readonly INotifier _notifier;
+	private readonly ILogger _logger;
 	private readonly IWorkshopService _workshopService;
 
-	public TagsService(INotifier notifier, IWorkshopService workshopService, IAssetUtil assetUtil)
+	public TagsService(INotifier notifier, IWorkshopService workshopService, IAssetUtil assetUtil, ILogger logger)
 	{
 		_assetTagsDictionary = new(new PathEqualityComparer());
 		_customTagsDictionary = new(new PathEqualityComparer());
 		_tagsCache = new(StringComparer.InvariantCultureIgnoreCase);
 		_notifier = notifier;
+		_logger = logger;
 		_workshopService = workshopService;
 		_assetTags = new HashSet<string>();
 		_workshopTags = new Dictionary<string, int>();
@@ -128,20 +130,24 @@ internal class TagsService : ITagsService
 
 	private void UpdateWorkshopTags()
 	{
-		var packages = _workshopService.GetAllPackages().ToList();
-
-		lock (_workshopTags)
+		try
 		{
-			_workshopTags.Clear();
+			var packages = _workshopService.GetAllPackages().ToList();
 
-			foreach (var package in packages)
+			lock (_workshopTags)
 			{
-				foreach (var tag in package.Tags)
+				_workshopTags.Clear();
+
+				foreach (var package in packages)
 				{
-					_workshopTags[tag] = _workshopTags.GetOrAdd(tag) + 1;
+					foreach (var tag in package.Tags)
+					{
+						_workshopTags[tag] = _workshopTags.GetOrAdd(tag) + 1;
+					}
 				}
 			}
 		}
+		catch (Exception ex) { _logger.Warning("Failed to update workshop tags: " + ex.Message); }
 	}
 
 	public IEnumerable<ITag> GetDistinctTags()

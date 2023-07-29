@@ -34,6 +34,7 @@ public partial class PC_RequestReview : PanelContent
 		Text = LocaleCR.RequestReview;
 		L_Disclaimer.Text = LocaleCR.RequestReviewDisclaimer;
 		B_Apply.Text = Locale.SendReview + "*";
+		L_English.Text = Locale.UseEnglishPlease;
 	}
 
 	protected override void UIChanged()
@@ -62,6 +63,7 @@ public partial class PC_RequestReview : PanelContent
 
 		L_Disclaimer.ForeColor = design.InfoColor;
 		P_Main.BackColor = design.AccentBackColor;
+		L_English.ForeColor = design.YellowColor;
 	}
 
 	private void B_ReportIssue_Click(object sender, EventArgs e)

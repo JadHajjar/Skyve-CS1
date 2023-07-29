@@ -1,9 +1,10 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Domain;
+using SkyveApp.Systems.Compatibility.Domain.Api;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
@@ -13,6 +14,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	private PackageSorting sorting;
 	private Rectangle PopupSearchRect1;
 	private Rectangle PopupSearchRect2;
+	private bool _compactList;
 
 	public event Action<NotificationType>? CompatibilityReportSelected;
 	public event Action<DownloadStatus>? DownloadStatusSelected;
@@ -38,7 +40,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	public ItemListControl(SkyvePage page)
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _compatibilityManager, out _modLogicManager, out _subscriptionsManager, out _packageUtil, out _modUtil);
-		
+
 		SeparateWithLines = true;
 		EnableSelection = true;
 
@@ -54,10 +56,12 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			sorting = (PackageSorting)_settings.UserSettings.PageSettings[page].Sorting;
 			SortDescending = _settings.UserSettings.PageSettings[page].DescendingSort;
 			GridView = _settings.UserSettings.PageSettings[page].GridView;
+			CompactList = _settings.UserSettings.PageSettings[page].Compact;
 		}
+		else
+			CompactList = false;
 
 		GridItemSize = new Size(390, 140);
-		ItemHeight = _settings.UserSettings.LargeItemOnHover ? 64 : 36;
 	}
 
 	public IEnumerable<T> FilteredItems => SafeGetItems().Select(x => x.Item);
@@ -69,6 +73,19 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	public bool IsTextSearchNotEmpty { get; set; }
 	public bool IsGenericPage { get; set; }
 	public bool IsSelection { get; set; }
+	public bool CompactList
+	{
+		get => _compactList; set
+		{
+			_compactList = value;
+			baseHeight = _compactList ? 24 : 54;
+
+			if (Live)
+			{
+				UIChanged();
+			}
+		}
+	}
 
 	public void DoFilterChanged()
 	{
@@ -119,8 +136,8 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		}
 		else
 		{
-			HighlightOnHover = true;
-			Padding = UI.Scale(new Padding(3, 2, 3, 2), UI.FontScale);
+			HighlightOnHover = false;
+			Padding = new Padding((int)Math.Floor((CompactList ? 1.5 : 2.5) * UI.FontScale));
 		}
 	}
 
@@ -129,6 +146,8 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		base.UIChanged();
 
 		OnViewChanged();
+
+		StartHeight = _compactList ? (int)(24*UI.FontScale) : 0;
 	}
 
 	protected override IEnumerable<DrawableItem<T, Rectangles>> OrderItems(IEnumerable<DrawableItem<T, Rectangles>> items)
@@ -205,100 +224,6 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		var rects = item.Rectangles;
 		var filter = ModifierKeys.HasFlag(Keys.Alt) != _settings.UserSettings.FlipItemCopyFilterAction;
 
-		if (rects.FolderRect.Contains(e.Location))
-		{
-			OpenFolder(item.Item);
-			return;
-		}
-
-		if (rects.SteamRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Url is string url)
-		{
-			OpenSteamLink(url);
-			return;
-		}
-
-		if (rects.SteamIdRect.Contains(e.Location))
-		{
-			if (filter)
-			{
-				if (!item.Item.IsLocal)
-				{
-					AddToSearch?.Invoke(item.Item.Id.ToString());
-				}
-				else
-				{
-					AddToSearch?.Invoke(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
-				}
-			}
-			else
-			{
-				if (!item.Item.IsLocal)
-				{
-					Clipboard.SetText(item.Item.Id.ToString());
-				}
-				else
-				{
-					Clipboard.SetText(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
-				}
-			}
-
-			return;
-		}
-
-		if (rects.AuthorRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Author is IUser user)
-		{
-			if (filter)
-			{
-				AuthorSelected?.Invoke(user);
-			}
-			else
-			{
-				var pc = new PC_UserPage(user);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-			}
-
-			return;
-		}
-
-		if (rects.CompatibilityRect.Contains(e.Location))
-		{
-			if (filter)
-			{
-				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().GetNotification());
-			}
-			else
-			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.LocalParentPackage ?? item.Item);
-
-				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-
-				pc.T_CR.Selected = true;
-
-				if (_settings.UserSettings.ResetScrollOnPackageClick)
-				{
-					ScrollTo(item.Item);
-				}
-			}
-			return;
-		}
-
-		if (rects.DownloadStatusRect.Contains(e.Location))
-		{
-			if (filter)
-			{
-				DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item, out _));
-			}
-
-			return;
-		}
-
-		var minX = -Math.Min(-rects.SteamIdRect.X, Math.Min(-rects.DownloadStatusRect.X, -rects.CompatibilityRect.X));
-		if (!GridView && e.Location.X > minX)
-		{
-			return;
-		}
-
 		if (rects.IncludedRect.Contains(e.Location))
 		{
 			if (item.Item.LocalPackage is not ILocalPackage localPackage)
@@ -333,6 +258,98 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			{
 				_packageUtil.SetEnabled(item.Item.LocalPackage, !_packageUtil.IsEnabled(item.Item.LocalPackage));
 			}
+
+			return;
+		}
+
+		if (rects.FolderRect.Contains(e.Location))
+		{
+			PlatformUtil.OpenFolder(item.Item.LocalPackage?.FilePath);
+			return;
+		}
+
+		if (rects.SteamRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Url is string url)
+		{
+			PlatformUtil.OpenUrl(url);
+			return;
+		}
+
+		if (rects.GithubRect.Contains(e.Location) && _compatibilityManager.GetPackageInfo(item.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		{
+			PlatformUtil.OpenUrl(gitLink.Url);
+			return;
+		}
+
+		if (rects.AuthorRect.Contains(e.Location) && item.Item.GetWorkshopInfo()?.Author is IUser user)
+		{
+			if (filter)
+			{
+				AuthorSelected?.Invoke(user);
+			}
+			else
+			{
+				var pc = new PC_UserPage(user);
+
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+			}
+
+			return;
+		}
+
+		if (rects.FolderNameRect.Contains(e.Location) && item.Item.IsLocal)
+		{
+			if (filter)
+			{
+				AddToSearch?.Invoke(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
+			}
+			else
+			{
+					Clipboard.SetText(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
+				
+			}
+
+			return;
+		}
+
+		if (rects.SteamIdRect.Contains(e.Location))
+		{
+			if (filter)
+			{
+					AddToSearch?.Invoke(item.Item.Id.ToString());
+			}
+			else
+			{
+					Clipboard.SetText(item.Item.Id.ToString());
+			}
+
+			return;
+		}
+
+		if (rects.CompatibilityRect.Contains(e.Location))
+		{
+			if (filter)
+			{
+				CompatibilityReportSelected?.Invoke(item.Item.GetCompatibilityInfo().GetNotification());
+			}
+			else
+			{
+				var pc = new PC_PackagePage((IPackage?)item.Item.LocalParentPackage ?? item.Item);
+
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+
+				pc.T_CR.Selected = true;
+
+				if (_settings.UserSettings.ResetScrollOnPackageClick)
+				{
+					ScrollTo(item.Item);
+				}
+			}
+			return;
+		}
+
+		if (rects.DownloadStatusRect.Contains(e.Location)&&filter)
+			{
+				DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item, out _));
 
 			return;
 		}
@@ -481,29 +498,11 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		catch { }
 	}
 
-	protected override ItemListControl<T>.Rectangles GenerateRectangles(T item, Rectangle rectangle)
-	{
-		if (GridView)
-			return GenerateGridRectangles(item, rectangle);
-		else
-			return GenerateListRectangles(item, rectangle);
-	}
-
 	public void ShowRightClickMenu(T item)
 	{
 		var items = PC_PackagePage.GetRightClickMenuItems(SelectedItems.Count > 0 ? SelectedItems.Select(x => x.Item) : new T[] { item });
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(FindForm() as SlickForm, items));
-	}
-
-	private void OpenSteamLink(string? url)
-	{
-		PlatformUtil.OpenUrl(url);
-	}
-
-	private void OpenFolder(T item)
-	{
-		PlatformUtil.OpenFolder(item.LocalPackage?.FilePath);
 	}
 
 	private bool GetStatusDescriptors(T mod, out string text, out DynamicIcon? icon, out Color color)
@@ -517,17 +516,17 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 				return true;
 			case DownloadStatus.OutOfDate:
 				text = Locale.OutOfDate;
-				icon = ("I_OutOfDate");
+				icon = "I_OutOfDate";
 				color = FormDesign.Design.YellowColor;
 				return true;
 			case DownloadStatus.PartiallyDownloaded:
 				text = Locale.PartiallyDownloaded;
-				icon = ("I_Broken");
+				icon = "I_Broken";
 				color = FormDesign.Design.RedColor;
 				return true;
 			case DownloadStatus.Removed:
 				text = Locale.RemovedFromSteam;
-				icon = ("I_ContentRemoved");
+				icon = "I_ContentRemoved";
 				color = FormDesign.Design.RedColor;
 				return true;
 		}
@@ -535,6 +534,18 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		icon = null;
 		color = Color.White;
 		return false;
+	}
+
+	protected override ItemListControl<T>.Rectangles GenerateRectangles(T item, Rectangle rectangle)
+	{
+		if (GridView)
+		{
+			return GenerateGridRectangles(item, rectangle);
+		}
+		else
+		{
+			return GenerateListRectangles(item, rectangle);
+		}
 	}
 
 	public class Rectangles : IDrawableItemRectangles<T>
@@ -555,6 +566,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		internal Rectangle DateRect;
 		internal Rectangle ScoreRect;
 		internal Rectangle GithubRect;
+		internal Rectangle FolderNameRect;
 
 		public T Item { get; set; }
 
@@ -572,6 +584,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 				SteamRect.Contains(location) ||
 				AuthorRect.Contains(location) ||
 				IconRect.Contains(location) ||
+				FolderNameRect.Contains(location) ||
 				CenterRect.Contains(location) ||
 				DownloadStatusRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
@@ -581,36 +594,58 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 				TagRects.Any(x => x.Value.Contains(location)) ||
 				SteamIdRect.Contains(location);
 		}
+
 		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
 		{
-			if (Item.GetWorkshopInfo() is not null)
+			if (IncludedRect.Contains(location))
 			{
-				if (SteamRect.Contains(location))
+				if (Item.LocalPackage is null)
 				{
-					text = Locale.ViewOnSteam;
-					point = SteamRect.Location;
-					return true;
+					if (!Item.IsLocal)
+					{
+						text = Locale.SubscribeToItem;
+						point = IncludedRect.Location;
+						return true;
+					}
 				}
 
-				if (!Item.IsLocal && SteamIdRect.Contains(location))
-				{
-					text = getFilterTip(string.Format(Locale.CopyToClipboard, Item.Id), string.Format(Locale.AddToSearch, Item.Id));
-					point = SteamIdRect.Location;
-					return true;
-				}
+				text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
+				point = IncludedRect.Location;
+				return true;
+			}
 
-				if (AuthorRect.Contains(location))
-				{
-					text = getFilterTip(Locale.OpenAuthorPage, Locale.FilterByThisAuthor);
-					point = AuthorRect.Location;
-					return true;
-				}
+			if (EnabledRect.Contains(location) && Item.LocalPackage is not null)
+			{
+				text = $"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}";
+				point = EnabledRect.Location;
+				return true;
+			}
+
+			if (SteamRect.Contains(location))
+			{
+				text = Locale.ViewOnSteam;
+				point = SteamRect.Location;
+				return true;
 			}
 
 			if (SteamIdRect.Contains(location))
 			{
-				var folder = Path.GetFileName(Item.LocalPackage?.Folder);
+				text = getFilterTip(string.Format(Locale.CopyToClipboard, Item.Id), string.Format(Locale.AddToSearch, Item.Id));
+				point = SteamIdRect.Location;
+				return true;
+			}
+
+			if (FolderNameRect.Contains(location))
+			{
+				var folder = Path.GetFileName(Item.LocalPackage?.Folder ?? string.Empty);
 				text = getFilterTip(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder));
+				point = FolderNameRect.Location;
+				return true;
+			}
+
+			if (AuthorRect.Contains(location))
+			{
+				text = getFilterTip(Locale.OpenAuthorPage, Locale.FilterByThisAuthor.Format(Item.GetWorkshopInfo()?.Author?.Name ?? "this author"));
 				point = AuthorRect.Location;
 				return true;
 			}
@@ -648,14 +683,6 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 				}
 			}
 
-			var minX = -Math.Min(-SteamIdRect.X, Math.Min(-DownloadStatusRect.X, -CompatibilityRect.X));
-			if (!((ItemListControl<T>)instance).GridView && SteamIdRect != Rectangle.Empty && location.X > minX)
-			{
-				text = string.Empty;
-				point = default;
-				return false;
-			}
-
 			if (ScoreRect.Contains(location))
 			{
 				var workshopInfo = Item.GetWorkshopInfo();
@@ -665,30 +692,6 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 					point = ScoreRect.Location;
 					return true;
 				}
-			}
-
-			if (IncludedRect.Contains(location))
-			{
-				if (Item.LocalPackage is null)
-				{
-					if (!Item.IsLocal)
-					{
-						text = Locale.SubscribeToItem;
-						point = IncludedRect.Location;
-						return true;
-					}
-				}
-
-				text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
-				point = IncludedRect.Location;
-				return true;
-			}
-
-			if (EnabledRect.Contains(location) && Item.LocalPackage is not null)
-			{
-				text = $"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}";
-				point = EnabledRect.Location;
-				return true;
 			}
 
 			if (VersionRect.Contains(location) && Item.LocalParentPackage?.Mod is IMod mod)

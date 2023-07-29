@@ -6,7 +6,6 @@ namespace SkyveApp.Domain.CS1;
 public class UserSettings : IUserSettings
 {
 	public bool LinkModAssets { get; set; } = true;
-	public bool LargeItemOnHover { get; set; }
 	public bool ShowDatesRelatively { get; set; } = true;
 	public bool AdvancedIncludeEnable { get; set; }
 	public bool DisableNewModsByDefault { get; set; } = true;

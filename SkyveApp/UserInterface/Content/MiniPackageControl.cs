@@ -130,7 +130,7 @@ internal class MiniPackageControl : SlickControl
 		{
 			foreach (var item in tags)
 			{
-				tagRect.X += Padding.Left + e.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
+				tagRect.X += Padding.Left + e.Graphics.DrawLabel(item.Text, null, item.Color, tagRect, ContentAlignment.MiddleLeft, smaller: true).Width;
 			}
 		}
 

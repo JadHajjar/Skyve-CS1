@@ -70,8 +70,8 @@ internal class ReviewRequestList : SlickStackedListControl<ReviewRequest, Review
 
 		using var typeIcon = IconManager.GetSmallIcon(e.Item.IsInteraction ? "I_Switch" : e.Item.IsStatus ? "I_Statuses" : "I_Content");
 		using var dateIcon = IconManager.GetSmallIcon("I_UpdateTime");
-		var r = e.DrawLabel(e.Item.Timestamp.ToLocalTime().ToString("g"), dateIcon, FormDesign.Design.AccentColor, e.ClipRectangle, ContentAlignment.BottomLeft, true);
-		e.DrawLabel(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other", typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
+		var r = e.Graphics.DrawLabel(e.Item.Timestamp.ToLocalTime().ToString("g"), dateIcon, FormDesign.Design.AccentColor, e.ClipRectangle, ContentAlignment.BottomLeft, true);
+		e.Graphics.DrawLabel(e.Item.IsInteraction ? "Interaction" : e.Item.IsStatus ? "Status" : "Other", typeIcon, FormDesign.Design.AccentColor, e.ClipRectangle.Pad(0, 0, 0, r.Height + Padding.Top), ContentAlignment.BottomLeft, true);
 
 
 		e.Graphics.DrawString(e.Item.PackageNote, UI.Font(7.5F), brush, textRect.Pad((int)(125 * UI.FontScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Far });

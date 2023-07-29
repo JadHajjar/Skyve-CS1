@@ -45,13 +45,20 @@ internal class BigSelectionOptionControl : SlickImageControl
 
 		e.Graphics.FillRoundedRectangle(ClientRectangle.Gradient(back, 0.8F), ClientRectangle, Padding.Left);
 
-		using var icon = ImageName.Get((int)(32 * UI.UIScale));
-
-		if (icon != null)
+		if (Loading)
 		{
-			e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+			DrawLoader(e.Graphics, ClientRectangle.Pad(Padding).Align(UI.Scale(new Size(32, 32), UI.UIScale), ContentAlignment.MiddleLeft));
+		}
+		else
+		{
+			using var icon = ImageName.Get((int)(32 * UI.UIScale));
+
+			if (icon != null)
+			{
+				e.Graphics.DrawImage(icon.Color(fore), ClientRectangle.Pad(Padding).Align(icon.Size, ContentAlignment.MiddleLeft));
+			}
 		}
 
-		e.Graphics.DrawString(LocaleHelper.GetGlobalText(Text), Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + icon?.Width ?? 0, 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
+		e.Graphics.DrawString(LocaleHelper.GetGlobalText(Text), Font, new SolidBrush(fore), ClientRectangle.Pad(Padding).Pad(Padding.Left + (int)(32 * UI.UIScale), 0, 0, 0), new StringFormat { LineAlignment = StringAlignment.Center });
 	}
 }

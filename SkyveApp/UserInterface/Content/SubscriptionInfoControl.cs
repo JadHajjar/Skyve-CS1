@@ -65,6 +65,9 @@ internal class SubscriptionInfoControl : SlickControl
 
 	protected override void OnPaint(PaintEventArgs e)
 	{
+		if (!Live)
+			return;
+
 		e.Graphics.SetUp(BackColor);
 
 		e.Graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(100, FormDesign.Design.GreenColor)), ClientRectangle, Padding.Left);
@@ -85,7 +88,7 @@ internal class SubscriptionInfoControl : SlickControl
 		var buttonSize = SlickButton.GetSize(e.Graphics, buttonIcon, LocaleSlickUI.Apply, UI.Font(6.75F), new(4, 2, 2, 2));
 		buttonRect = ClientRectangle.Pad(Padding).Align(buttonSize, ContentAlignment.BottomRight);
 
-		SlickButton.DrawButton(e, buttonRect, LocaleSlickUI.Apply, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), buttonRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : (HoverState & HoverState.Focused), ColorStyle.Green);
+		SlickButton.DrawButton(e, buttonRect, LocaleSlickUI.Apply, UI.Font(6.75F), buttonIcon, new Padding(4, 2, 2, 2), buttonRect.Contains(PointToClient(Cursor.Position)) ? (HoverState & ~HoverState.Focused) : HoverState.Normal, ColorStyle.Green);
 
 		using var cancelButtonIcon = IconManager.GetSmallIcon("I_Cancel");
 		buttonSize = SlickButton.GetSize(e.Graphics, cancelButtonIcon, LocaleSlickUI.Cancel, UI.Font(6.75F), new(4, 2, 2, 2));

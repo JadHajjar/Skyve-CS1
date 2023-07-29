@@ -603,15 +603,18 @@
   },
   {
     "Version": "3.2.3",
-    "Date": "2023-07-13",
+    "Date": "2023-07-29",
     "ChangeGroups": [
       {
         "Name": "Changes",
         "Changes": [
-          "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once",
+          "Added a compact-view option for all content pages; toggle between compact, list & grid view using the new icons on the top right of the list.",
+          "Added a troubleshooting system to the Utilities tab; use it to narrow down what mod or asset is causing your issues.",
+          "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
+          "Added a new 'Midnight' theme.",
           "Updated the color design of the app's logo on the top-left.",
-          "Fixed the incorrect names of packages while viewing a playset's contents.",
           "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
+          "Fixed the incorrect names of packages while viewing a playset's contents.",
           "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."
         ]
       }

@@ -43,8 +43,11 @@ internal class CitiesManager : ICitiesManager
 
 		var citiesMonitorTimer = new Timer(1000);
 
-		citiesMonitorTimer.Elapsed += CitiesMonitorTimer_Elapsed;
-		citiesMonitorTimer.Start();
+		if (CrossIO.CurrentPlatform is Platform.Windows)
+		{
+			citiesMonitorTimer.Elapsed += CitiesMonitorTimer_Elapsed;
+			citiesMonitorTimer.Start();
+		}
 	}
 
 	private void CitiesMonitorTimer_Elapsed(object sender, ElapsedEventArgs e)

@@ -102,9 +102,9 @@ internal class LocationManager : ILocationManager
 			return;
 		}
 
-		GamePath = _settings.FolderSettings.GamePath.FormatPath();
-		AppDataPath = _settings.FolderSettings.AppDataPath.FormatPath();
-		SteamPath = _settings.FolderSettings.SteamPath.FormatPath();
+		GamePath = _settings.FolderSettings.GamePath?.FormatPath() ?? string.Empty;
+		AppDataPath = _settings.FolderSettings.AppDataPath?.FormatPath() ?? string.Empty;
+		SteamPath = _settings.FolderSettings.SteamPath?.FormatPath() ?? string.Empty;
 
 		SetCorrectPathSeparator();
 
