@@ -608,9 +608,9 @@
             {
                 "Name": "Changes",
                 "Changes": [
-                    "Added a compact-view option for all content pages; toggle between compact, list & grid view using the new icons on the top right of the list.",
-                    "Added a troubleshooting system to the Utilities tab; use it to narrow down what mod or asset is causing your issues.",
-                    "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
+                    "Se añadió una opción de vista compacta para todas las páginas de contenido; cambia entre la vista compacta, de lista y de cuadrícula usando los nuevos íconos en la parte superior derecha de la lista.",
+                    "Se añadió un sistema de diagnóstico a la pestaña de Utilidades; úselo para determinar qué mod o activo está causando sus problemas.",
+                    "Se mejoró la ventana de 'Añadir etiquetas'; ahora puede fácilmente seleccionar etiquetas existentes y editar simultáneamente varios elementos.",
                     "Se añadió un nuevo tema 'Medianoche'.",
                     "Updated the color design of the app's logo on the top-left.",
                     "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
