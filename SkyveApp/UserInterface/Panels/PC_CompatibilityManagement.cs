@@ -228,14 +228,14 @@ public partial class PC_CompatibilityManagement : PanelContent
 
 			postPackage = catalogue?.Packages.FirstOrDefault()?.CloneTo<CompatibilityPackageData, PostPackage>();
 
-			var automatedPackage = (_compatibilityManager as CompatibilityManager)!.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
-
 			if (postPackage is null)
 			{
 				postPackage = (_compatibilityManager as CompatibilityManager)!.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
 			}
 			else
 			{
+				var automatedPackage = (_compatibilityManager as CompatibilityManager)!.GetAutomatedReport(CurrentPackage).CloneTo<CompatibilityPackageData, PostPackage>();
+
 				if (automatedPackage.Stability is PackageStability.Broken)
 				{
 					postPackage.Stability = PackageStability.Broken;
@@ -246,14 +246,6 @@ public partial class PC_CompatibilityManagement : PanelContent
 					if (!postPackage.Statuses.Any(x => x.Type == item.Type))
 					{
 						postPackage.Statuses!.Add(item);
-					}
-				}
-
-				foreach (var item in automatedPackage.Interactions ?? new())
-				{
-					if (!postPackage.Interactions.Any(x => x.Type == item.Type))
-					{
-						postPackage.Interactions!.Add(item);
 					}
 				}
 			}

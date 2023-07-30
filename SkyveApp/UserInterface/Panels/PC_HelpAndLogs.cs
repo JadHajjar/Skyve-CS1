@@ -45,6 +45,7 @@ public partial class PC_HelpAndLogs : PanelContent
 	{
 		Text = Locale.HelpLogs;
 		L_Info.Text = Locale.DefaultLogViewInfo;
+		L_Troubleshoot.Text = Locale.TroubleshootInfo;
 	}
 
 	public override Color GetTopBarColor()
@@ -58,7 +59,9 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		I_Info.Size = UI.Scale(new Size(24, 24), UI.FontScale);
 		TLP_Main.Padding = UI.Scale(new Padding(3, 0, 7, 0), UI.FontScale);
-		DD_LogFile.Margin = TLP_Errors.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		P_Troubleshoot.Margin = DD_LogFile.Margin = TLP_Errors.Margin = TLP_LogFolders.Margin = TLP_HelpLogs.Margin = UI.Scale(new Padding(10), UI.UIScale);
+		L_Troubleshoot.Font = UI.Font(9F);
+		L_Troubleshoot.Margin = UI.Scale(new Padding(3), UI.FontScale);
 
 		foreach (var button in this.GetControls<SlickButton>())
 		{
@@ -228,5 +231,29 @@ public partial class PC_HelpAndLogs : PanelContent
 	private void B_OpenAppData_Click(object sender, EventArgs e)
 	{
 		PlatformUtil.OpenFolder(_locationManager.AppDataPath);
+	}
+
+	private async void B_Troubleshoot_Click(object sender, EventArgs e)
+	{
+		var sys = ServiceCenter.Get<ITroubleshootSystem>();
+
+		if (sys.IsInProgress)
+		{
+			switch (MessagePrompt.Show(Locale.CancelTroubleshootMessage, Locale.CancelTroubleshootTitle, PromptButtons.YesNoCancel, PromptIcons.Hand, form: Program.MainForm))
+			{
+				case DialogResult.Yes:
+					Hide();
+					await Task.Run(() => sys.Stop(true));
+					break;
+				case DialogResult.No:
+					Hide();
+					await Task.Run(() => sys.Stop(false));
+					break;
+			}
+		}
+		else
+		{
+			Form.PushPanel<PC_Troubleshoot>();
+		}
 	}
 }

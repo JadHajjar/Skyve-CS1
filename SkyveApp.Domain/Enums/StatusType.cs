@@ -35,6 +35,9 @@ public enum StatusType
 	[CRN(NotificationType.None, new[] { StatusAction.NoAction }, AllowedChange = CRNAttribute.ChangeType.Deny)]
 	SourceAvailable = 10,
 
+	[CRN(NotificationType.None, new[] { StatusAction.NoAction }, AllowedChange = CRNAttribute.ChangeType.Deny)]
+	StandardMod = 11,
+
 	/********************************/
 
 	[CRN(NotificationType.MissingDependency, false)]

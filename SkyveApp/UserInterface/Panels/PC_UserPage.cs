@@ -1,4 +1,5 @@
 ﻿using SkyveApp.Domain.CS1.Steam;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Lists;
 
 using System.Drawing;
@@ -7,15 +8,20 @@ using System.Threading.Tasks;
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
 {
-	private readonly ItemListControl<IPackage> LC_Items;
+	private readonly ContentList<IPackage> LC_Items;
 	private readonly ProfileListControl L_Profiles;
 
-	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
+	private readonly ISettings _settings;
+	private readonly IWorkshopService _workshopService;
+
+	private List<WorkshopPackage> userItems = new();
 
 	public IUser User { get; }
 
 	public PC_UserPage(IUser user) : base(true)
 	{
+		ServiceCenter.Get(out _settings, out _workshopService);
+
 		InitializeComponent();
 
 		User = user;
@@ -28,12 +34,69 @@ public partial class PC_UserPage : PanelContent
 			GridView = true,
 		};
 
-		LC_Items = new(SkyvePage.User)
+		LC_Items = new ContentList<IPackage>(SkyvePage.User, false, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 		{
-			IsGenericPage = true,
+			IsGenericPage = true
 		};
 
-		LC_Items.SetSorting(PackageSorting.UpdateTime, true);
+		LC_Items.ListControl.Loading = true;
+	}
+
+	protected IEnumerable<IPackage> GetItems()
+	{
+		return userItems;
+	}
+
+	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	{
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+	}
+
+	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	{
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+	}
+
+	protected LocaleHelper.Translation GetItemText()
+	{
+		return Locale.Package;
+	}
+
+	protected string GetCountText()
+	{
+		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
+
+		foreach (var item in userItems.SelectWhereNotNull(x => x.LocalParentPackage))
+		{
+			if (item?.IsIncluded() == true)
+			{
+				packagesIncluded++;
+
+				if (item.Mod is not null)
+				{
+					modsIncluded++;
+
+					if (item.Mod.IsEnabled())
+					{
+						modsEnabled++;
+					}
+				}
+			}
+		}
+
+		var total = LC_Items.ItemCount;
+
+		if (!_settings.UserSettings.AdvancedIncludeEnable)
+		{
+			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
+		}
+
+		if (modsIncluded == modsEnabled)
+		{
+			return string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total);
+		}
+
+		return string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
 	}
 
 	protected override async Task<bool> LoadDataAsync()
@@ -61,7 +124,9 @@ public partial class PC_UserPage : PanelContent
 
 		var results = await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
 
-		LC_Items.SetItems(results.Select(x => new WorkshopPackage(x)));
+		userItems = results.ToList(x => new WorkshopPackage(x));
+
+		LC_Items.RefreshItems();
 
 		return true;
 	}

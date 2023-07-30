@@ -271,7 +271,7 @@ public partial class PC_Utilities : PanelContent
 
 		if (!_settings.SessionSettings.CleanupFirstTimeShown)
 		{
-			MessagePrompt.Show(Locale.CleanupRequiresGameToOpen, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
+			MessagePrompt.Show(Locale.CleanupRequiresGameToOpen, Locale.CleanupInfoTitle, PromptButtons.OK, PromptIcons.Info, Program.MainForm);
 
 			_settings.SessionSettings.CleanupFirstTimeShown = true;
 			_settings.SessionSettings.Save();

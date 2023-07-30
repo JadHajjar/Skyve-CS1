@@ -1,4 +1,5 @@
-﻿using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Domain.CS1;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
@@ -11,7 +12,7 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_PackagePage : PanelContent
 {
 	private readonly ItemListControl<IPackage>? LC_Items;
-	private readonly ItemListControl<IPackage>? LC_References;
+	private readonly ContentList<IPackage>? LC_References;
 	private TagControl? addTagControl;
 
 	private readonly INotifier _notifier;
@@ -79,16 +80,14 @@ public partial class PC_PackagePage : PanelContent
 			AddTags();
 		}
 
-		var references = _packageUtil.GetPackagesThatReference(package, _settings.UserSettings.ShowAllReferencedPackages).ToList();
-
-		if (references.Count > 0)
+		if (GetItems().Any())
 		{
-			LC_References = new ItemListControl<IPackage>(SkyvePage.SinglePackage)
+			LC_References = new ContentList<IPackage>(SkyvePage.SinglePackage, true, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 			{
 				Dock = DockStyle.Fill
 			};
 
-			LC_References.AddRange(references);
+			LC_References.RefreshItems();
 
 			T_References.LinkedControl = LC_References;
 		}
@@ -115,6 +114,63 @@ public partial class PC_PackagePage : PanelContent
 		slickTabControl1.Tabs = tabs.ToArray();
 
 		_notifier.PackageInformationUpdated += CentralManager_PackageInformationUpdated;
+	}
+
+	protected IEnumerable<IPackage> GetItems()
+	{
+		return _packageUtil.GetPackagesThatReference(Package, _settings.UserSettings.ShowAllReferencedPackages);
+	}
+
+	protected void SetIncluded(IEnumerable<IPackage> filteredItems, bool included)
+	{
+		ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, included);
+	}
+
+	protected void SetEnabled(IEnumerable<IPackage> filteredItems, bool enabled)
+	{
+		ServiceCenter.Get<IBulkUtil>().SetBulkEnabled(filteredItems.SelectWhereNotNull(x => x.LocalPackage)!, enabled);
+	}
+
+	protected LocaleHelper.Translation GetItemText()
+	{
+		return Locale.Package;
+	}
+
+	protected string GetCountText()
+	{
+		int packagesIncluded = 0, modsIncluded = 0, modsEnabled = 0;
+
+		foreach (var item in LC_References!.Items.SelectWhereNotNull(x => x.LocalParentPackage))
+		{
+			if (item?.IsIncluded() == true)
+			{
+				packagesIncluded++;
+
+				if (item.Mod is not null)
+				{
+					modsIncluded++;
+
+					if (item.Mod.IsEnabled())
+					{
+						modsEnabled++;
+					}
+				}
+			}
+		}
+
+		var total = LC_References!.ItemCount;
+
+		if (!_settings.UserSettings.AdvancedIncludeEnable)
+		{
+			return string.Format(Locale.PackageIncludedTotal, packagesIncluded, total);
+		}
+
+		if (modsIncluded == modsEnabled)
+		{
+			return string.Format(Locale.PackageIncludedAndEnabledTotal, packagesIncluded, total);
+		}
+
+		return string.Format(Locale.PackageIncludedEnabledTotal, packagesIncluded, modsIncluded, modsEnabled, total);
 	}
 
 	private void AddTagControl_MouseClick(object sender, MouseEventArgs e)

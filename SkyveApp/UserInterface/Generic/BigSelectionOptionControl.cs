@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Generic;
+
+[DefaultEvent("Click")]
 internal class BigSelectionOptionControl : SlickImageControl
 {
 	public BigSelectionOptionControl()

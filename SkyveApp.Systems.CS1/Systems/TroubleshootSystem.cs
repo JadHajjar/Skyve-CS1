@@ -78,10 +78,17 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		{
 			if (CheckPackageValidity(settings, item))
 			{
-				if (item is not IMod mod || !_modLogicManager.IsRequired(mod, _modUtil))
+				if (item is IMod mod && _modLogicManager.IsRequired(mod, _modUtil))
 				{
-					packageToProcess.Add(item);
+					continue;
 				}
+
+				if (item.GetPackageInfo()?.Statuses.Any(x => x.Type is Domain.Enums.StatusType.StandardMod) == true)
+				{
+					continue;
+				}
+
+				packageToProcess.Add(item);
 			}
 		}
 

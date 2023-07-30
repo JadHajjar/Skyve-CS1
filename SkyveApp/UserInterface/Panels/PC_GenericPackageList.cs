@@ -12,7 +12,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 	{
 		LC_Items.IsGenericPage = true;
 
-		TB_Search.Placeholder = "SearchGenericPackages";
+		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
 
 		var compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
 
@@ -68,12 +68,6 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 		}
 
 		_notifier.WorkshopPackagesInfoLoaded += _notifier_WorkshopPackagesInfoLoaded;
-
-		LC_Items.SetItems(_items);
-
-		RefreshCounts();
-
-		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
 	}
 
 	protected override void Dispose(bool disposing)
@@ -88,9 +82,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 	private void _notifier_WorkshopPackagesInfoLoaded()
 	{
-		LC_Items.Invalidate();
-
-		new BackgroundAction("Getting tag list", RefreshAuthorAndTags).Run();
+		LC_Items.Invalidate(true);
 	}
 
 	protected override IEnumerable<IPackage> GetItems()

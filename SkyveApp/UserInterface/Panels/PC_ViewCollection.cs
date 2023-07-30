@@ -13,8 +13,8 @@ internal class PC_ViewCollection : PC_GenericPackageList
 	{
 		_id = collection.Id;
 
-		TLP_Main.SetColumn(P_FiltersContainer, 0);
-		TLP_Main.SetColumnSpan(P_FiltersContainer, TLP_Main.ColumnCount);
+		LC_Items.TLP_Main.SetColumn(LC_Items.P_FiltersContainer, 0);
+		LC_Items.TLP_Main.SetColumnSpan(LC_Items.P_FiltersContainer, LC_Items.TLP_Main.ColumnCount);
 
 		PB_Icon = new PackageIcon
 		{
@@ -22,16 +22,16 @@ internal class PC_ViewCollection : PC_GenericPackageList
 		};
 		PB_Icon.LoadImage(collection.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
 
-		TLP_Main.Controls.Add(PB_Icon, 0, 0);
-		TLP_Main.SetRowSpan(PB_Icon, 3);
+		LC_Items.TLP_Main.Controls.Add(PB_Icon, 0, 0);
+		LC_Items.TLP_Main.SetRowSpan(PB_Icon, 3);
 
 		L_CollectionName = new Label
 		{
 			Text = collection.Name,
 			AutoSize = true
 		};
-		TLP_Main.Controls.Add(L_CollectionName, 1, 0);
-		TLP_Main.SetColumnSpan(L_CollectionName, TLP_Main.ColumnCount - 2);
+		LC_Items.TLP_Main.Controls.Add(L_CollectionName, 1, 0);
+		LC_Items.TLP_Main.SetColumnSpan(L_CollectionName, LC_Items.TLP_Main.ColumnCount - 2);
 
 		B_Steam = new SlickButton
 		{
@@ -40,7 +40,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 			Anchor = AnchorStyles.Right
 		};
 		B_Steam.Click += B_Steam_Click;
-		TLP_Main.Controls.Add(B_Steam, TLP_Main.ColumnCount - 1, 0);
+		LC_Items.TLP_Main.Controls.Add(B_Steam, LC_Items.TLP_Main.ColumnCount - 1, 0);
 	}
 
 	private void B_Steam_Click(object sender, System.EventArgs e)

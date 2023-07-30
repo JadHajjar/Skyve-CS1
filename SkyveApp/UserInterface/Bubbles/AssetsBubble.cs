@@ -121,12 +121,12 @@ internal class AssetsBubble : StatusBubbleBase
 
 		if (assetsOutOfDate > 0)
 		{
-			DrawText(e, ref targetHeight, Locale.OutOfDateCount.FormatPlural(assetsOutOfDate, Locale.Mod.FormatPlural(assetsOutOfDate).ToLower()), FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, Locale.OutOfDateCount.FormatPlural(assetsOutOfDate, Locale.Asset.FormatPlural(assetsOutOfDate).ToLower()), FormDesign.Design.YellowColor);
 		}
 
 		if (assetsIncomplete > 0)
 		{
-			DrawText(e, ref targetHeight, Locale.IncompleteCount.FormatPlural(assetsIncomplete, Locale.Mod.FormatPlural(assetsIncomplete).ToLower()), FormDesign.Design.RedColor);
+			DrawText(e, ref targetHeight, Locale.IncompleteCount.FormatPlural(assetsIncomplete, Locale.Asset.FormatPlural(assetsIncomplete).ToLower()), FormDesign.Design.RedColor);
 		}
 
 		foreach (var group in crDic.OrderBy(x => x.Key))

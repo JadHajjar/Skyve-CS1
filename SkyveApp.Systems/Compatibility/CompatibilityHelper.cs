@@ -34,7 +34,7 @@ public class CompatibilityHelper
 	{
 		var type = status.Status.Type;
 
-		if (type is StatusType.SourceAvailable)
+		if (type is StatusType.SourceAvailable or StatusType.StandardMod)
 		{
 			return;
 		}

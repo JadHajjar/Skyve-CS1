@@ -332,4 +332,8 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation TroubleshootAskIfFixed => _instance.GetText(nameof(TroubleshootAskIfFixed));
 	public static Translation TroubleshootAskToStop => _instance.GetText(nameof(TroubleshootAskToStop));
 	public static Translation StopTroubleshootTitle => _instance.GetText(nameof(StopTroubleshootTitle));
+	public static Translation TroubleshootCompAsk => _instance.GetText(nameof(TroubleshootCompAsk));
+	public static Translation SkyveDetectedFaultyPackages => _instance.GetText(nameof(SkyveDetectedFaultyPackages));
+	public static Translation FaultyPackagesTitle => _instance.GetText(nameof(FaultyPackagesTitle));
+	public static Translation CleanupInfoTitle => _instance.GetText(nameof(CleanupInfoTitle));
 }
