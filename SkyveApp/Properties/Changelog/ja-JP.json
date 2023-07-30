@@ -608,14 +608,14 @@
             {
                 "Name": "Changes",
                 "Changes": [
-                    "Added a compact-view option for all content pages; toggle between compact, list & grid view using the new icons on the top right of the list.",
-                    "Added a troubleshooting system to the Utilities tab; use it to narrow down what mod or asset is causing your issues.",
-                    "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
-                    "Added a new 'Midnight' theme.",
-                    "Updated the color design of the app's logo on the top-left.",
-                    "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
-                    "Fixed the incorrect names of packages while viewing a playset's contents.",
-                    "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."
+                    "全てのコンテンツページにコンパクトビューのオプションを追加して、リスト右上にある新アイコンからコンパクト/リスト/グリッドの各ビューへ切り替え可能",
+                    "ユーティリティタブにトラブルシューティングのシステムを追加して、問題の原因となっているMODやアセットを絞り込みが可能",
+                    "「タグの追加」ウィンドウを改善して、既存タグから簡単に選択や複数の項目をまとめて編集が可能",
+                    "新たに「Midnight」のテーマを追加",
+                    "左上のアプリロゴのカラーデザインを更新",
+                    "プレイセットの内容を確認する際に、ローカルとバニラのパッケージが正しく一致するように改善",
+                    "プレイセットの内容を表示中に、パッケージの名前が間違っていた問題を修正",
+                    "作者とタグのフィルタ情報がロードされる前に、ページに移動すると更新されない問題を修正"
                 ]
             }
         ]
