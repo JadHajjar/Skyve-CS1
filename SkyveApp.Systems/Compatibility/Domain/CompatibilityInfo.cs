@@ -5,34 +5,43 @@ using Newtonsoft.Json;
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain.Api;
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SkyveApp.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
 {
-	public GenericWorkshopPackage SteamItem { get => Package is GenericWorkshopPackage s ? s : new GenericWorkshopPackage(Package.Id); set => Package = value; }
-	[JsonIgnore] public IPackage Package { get; set; }
+	private IPackage? package;
+	private ILocalPackage? localPackage;
+	private DtoLocalPackage? dtoPackage;
+
+	[JsonIgnore] public IPackage? Package => dtoPackage ?? localPackage ?? package;
+	[JsonIgnore] public ILocalPackage? LocalPackage => dtoPackage ?? localPackage;
 	[JsonIgnore] public IndexedPackage? Data { get; }
-	public List<PackageLink> Links { get; set; }
 	public List<ReportItem> ReportItems { get; set; }
-	//[JsonIgnore] public NotificationType Notification => ReportItems.Count > 0 ? ReportItems.Max(x => ServiceCenter.Get<ICompatibilityManager>().IsSnoozed(x) ? 0 : x.Status.Notification) : NotificationType.None;
+	public DtoLocalPackage? DtoPackage { get => dtoPackage ??= localPackage?.CloneTo<ILocalPackage, DtoLocalPackage>(); set => dtoPackage = value; }
 
-	ILocalPackage? ICompatibilityInfo.Package => Package?.LocalPackage;
-	public IPackageCompatibilityInfo? Info => Data?.Package;
-	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast< ICompatibilityItem>();
+	ILocalPackage? ICompatibilityInfo.Package => LocalPackage;
+	IPackageCompatibilityInfo? ICompatibilityInfo.Info => Data?.Package;
+	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
 
-	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
-	{
-		Package = package;
-		Data = packageData;
-		Links = packageData?.Package.Links ?? new();
+	[Obsolete("Reserved for DTO", true)]
+    public CompatibilityInfo()
+    {
 		ReportItems = new();
 	}
 
-	public void Add(ReportType type, IGenericPackageStatus status, string message, ulong[] packages, IWorkshopService workshopService)
+	public CompatibilityInfo(IPackage package, IndexedPackage? packageData)
+	{
+		this.package = package;
+		localPackage = package is ILocalPackage lp ? lp : package.LocalPackage;
+		Data = packageData;
+		ReportItems = new();
+	}
+
+	public void Add(ReportType type, IGenericPackageStatus status, string message, ulong[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{
@@ -40,7 +49,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 			Type = type,
 			Status = status,
 			Message = message,
-			Packages = packages.Select(x => new PseudoPackage(x, workshopService)).ToArray()
+			Packages = packages.Select(x => new PseudoPackage(x)).ToArray()
 		});
 	}
 
@@ -55,4 +64,27 @@ public class CompatibilityInfo : ICompatibilityInfo
 			Packages = packages
 		});
 	}
+
+	#region DtoLocalPackage
+	#nullable disable
+
+	public class DtoLocalPackage : ILocalPackage
+	{
+		[JsonIgnore] public ILocalPackageWithContents LocalParentPackage { get; set; }
+		[JsonIgnore] public ILocalPackage LocalPackage { get; set; }
+		public long LocalSize { get; set; }
+		public DateTime LocalTime { get; set; }
+		public string Folder { get; set; }
+		public bool IsMod { get; set; }
+		public bool IsLocal { get; set; }
+		public bool IsBuiltIn { get; set; }
+		public IEnumerable<IPackageRequirement> Requirements { get; set; }
+		public string FilePath { get; set; }
+		public ulong Id { get; set; }
+		public string Name { get; set; }
+		public string Url { get; set; }
+	}
+
+	#nullable enable
+	#endregion
 }

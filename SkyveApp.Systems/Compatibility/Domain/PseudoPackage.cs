@@ -8,19 +8,11 @@ namespace SkyveApp.Systems.Compatibility.Domain;
 
 public class PseudoPackage : IPackageIdentity
 {
-	private readonly IWorkshopService? _workshopService;
-
 	private readonly IPackage? _iPackage;
 
-	public PseudoPackage(IWorkshopService workshopService)
-	{
-		_workshopService = workshopService;
-	}
-
-	public PseudoPackage(ulong steamId, IWorkshopService workshopService)
+	public PseudoPackage(ulong steamId)
 	{
 		Id = steamId;
-		_workshopService = workshopService;
 	}
 
 	public PseudoPackage(IPackage iPackage)
@@ -29,9 +21,13 @@ public class PseudoPackage : IPackageIdentity
 		_iPackage = iPackage;
 	}
 
-	public ulong Id { get; set; }
+    public PseudoPackage()
+    {
+    }
+
+    public ulong Id { get; set; }
 	[JsonIgnore] public string Name => Package?.Name ?? string.Empty;
-	[JsonIgnore] public IPackage Package => _iPackage ?? _workshopService?.GetPackage(new GenericPackageIdentity(Id)) ?? new GenericWorkshopPackage(new GenericPackageIdentity(Id));
+	[JsonIgnore] public IPackage Package => _iPackage ?? ServiceCenter.Get<IWorkshopService>().GetPackage(new GenericPackageIdentity(Id));
 	[JsonIgnore] public string? Url => Package?.Url;
 
 	public IWorkshopInfo? GetWorkshopInfo()

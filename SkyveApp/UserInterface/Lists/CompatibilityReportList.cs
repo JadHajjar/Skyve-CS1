@@ -63,13 +63,13 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			return;
 		}
 
-		if (rects.SteamRect.Contains(e.Location) && item.Item.Package.GetWorkshopInfo()?.Url is string url)
+		if (rects.SteamRect.Contains(e.Location) && item.Item.Package?.GetWorkshopInfo()?.Url is string url)
 		{
 			OpenSteamLink(url);
 			return;
 		}
 
-		if (rects.AuthorRect.Contains(e.Location) && item.Item.Package.GetWorkshopInfo()?.Author is IUser user)
+		if (rects.AuthorRect.Contains(e.Location) && item.Item.Package?.GetWorkshopInfo()?.Author is IUser user)
 		{
 			var pc = new PC_UserPage(user);
 
@@ -78,7 +78,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			return;
 		}
 
-		if (item.Item.Package.LocalParentPackage is ILocalPackageWithContents package)
+		if (item.Item.Package?.LocalParentPackage is ILocalPackageWithContents package)
 		{
 			if (rects.IncludedRect.Contains(e.Location))
 			{

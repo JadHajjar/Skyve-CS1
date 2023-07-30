@@ -10,8 +10,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
 namespace SkyveApp.Systems.Compatibility;
 public class CompatibilityHelper
 {
@@ -41,7 +39,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is StatusType.DependencyMod && _contentUtil.GetPackagesThatReference(info.Package, true).Any())
+		if (type is StatusType.DependencyMod && info.Package is not null && _contentUtil.GetPackagesThatReference(info.Package, true).Any())
 		{
 			return;
 		}
@@ -83,7 +81,7 @@ public class CompatibilityHelper
 
 		if (status.Status.Action is StatusAction.SelectOne)
 		{
-			packages.Insert(0, info.Package.Id);
+			packages.Insert(0, info.Package?.Id ?? 0);
 		}
 
 		var translation = _locale.Get($"Status_{type}");
@@ -92,7 +90,7 @@ public class CompatibilityHelper
 		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
 		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(status.Status.Packages?.FirstOrDefault() ?? 0)), true)).Trim();
 
-		info.Add(reportType, status.Status, message, packages.ToArray(), _workshopService);
+		info.Add(reportType, status.Status, message, packages.ToArray());
 	}
 
 	public void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
@@ -109,7 +107,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && !_contentUtil.IsIncluded(info.Package.LocalParentPackage!))
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.LocalPackage?.IsIncluded() != true)
 		{
 			return;
 		}
@@ -123,7 +121,7 @@ public class CompatibilityHelper
 
 		if (type is InteractionType.SameFunctionality or InteractionType.CausesIssuesWith or InteractionType.IncompatibleWith)
 		{
-			if (!_contentUtil.IsIncluded(info.Package.LocalParentPackage!))
+			if (info.LocalPackage?.IsIncluded() != true)
 			{
 				return;
 			}
@@ -140,7 +138,7 @@ public class CompatibilityHelper
 			packages.RemoveAll(ShouldNotBeUsed);
 		}
 
-		packages.Remove(info.Package.Id);
+		packages.Remove(info.Package?.Id ?? 0);
 
 		if (packages.Count == 0)
 		{
@@ -170,10 +168,10 @@ public class CompatibilityHelper
 
 		if (interaction.Interaction.Action is StatusAction.SelectOne)
 		{
-			packages.Insert(0, info.Package.Id);
+			packages.Insert(0, info.Package?.Id ?? 0);
 		}
 
-		info.Add(reportType, interaction.Interaction, message, packages.ToArray(), _workshopService);
+		info.Add(reportType, interaction.Interaction, message, packages.ToArray());
 	}
 
 	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)

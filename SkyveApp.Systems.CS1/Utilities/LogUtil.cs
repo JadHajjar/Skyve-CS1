@@ -147,7 +147,7 @@ internal class LogUtil : ILogUtil
 		var profileEntry = zipArchive.CreateEntry("Skyve\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
 		var reports = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
-		reports.RemoveAll(x => x.GetNotification() < NotificationType.Unsubscribe && !_contentUtil.IsIncluded(x.Package));
+		reports.RemoveAll(x => x.GetNotification() < NotificationType.Warning && !(x.Package!.IsIncluded(out var partial) || partial));
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
 	}
 

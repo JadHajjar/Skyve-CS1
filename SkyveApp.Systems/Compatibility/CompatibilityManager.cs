@@ -342,7 +342,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (!package.IsLocal && package.IsMod && packageData.Package.Type is PackageType.GenericPackage)
 		{
-			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && !info.Links.Any(x => x.Type is LinkType.Github))
+			if (!packageData.Statuses.ContainsKey(StatusType.TestVersion) && !packageData.Statuses.ContainsKey(StatusType.SourceAvailable) && packageData.Links?.Any(x => x.Type is LinkType.Github) != true)
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus { Type = StatusType.SourceCodeNotAvailable, Action = StatusAction.NoAction });
 			}
@@ -397,7 +397,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (package.IsLocal)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _locale.Get($"Stability_{PackageStability.Local}").Format(_packageUtil.CleanName(_workshopService.GetPackage(new GenericPackageIdentity(packageData.Package.SteamId)), true)), new PseudoPackage[] { new(packageData.Package.SteamId, _workshopService) });
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _locale.Get($"Stability_{PackageStability.Local}").Format(_packageUtil.CleanName(_workshopService.GetPackage(new GenericPackageIdentity(packageData.Package.SteamId)), true)), new PseudoPackage[] { new(packageData.Package.SteamId) });
 		}
 
 		if (!package.IsLocal && !author.Malicious && workshopInfo?.IsIncompatible != true)

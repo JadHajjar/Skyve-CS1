@@ -3,6 +3,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
@@ -277,9 +278,13 @@ internal partial class ItemListControl<T>
 		if (score != -1)
 		{
 			var clip = e.Graphics.ClipBounds;
-			GetScoreRect(e, out var labelH, out var scoreRect);
+			var padding = GridView ? GridPadding : Padding;
+			var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
+			var labelH = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Horizontal;
+			var scoreRect = new Rectangle(e.Rects.TextRect.X + (GridView ? 0 : padding.Left), e.Rects.IconRect.Bottom - height + (height / 2) - (labelH / 2) + 1, labelH, labelH);
 			var small = UI.FontScale < 1.25;
 			var backColor = score > 90 && workshopInfo!.Subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
+			e.Rects.ScoreRect = scoreRect;
 
 			if (!small)
 			{
@@ -328,22 +333,6 @@ internal partial class ItemListControl<T>
 		}
 
 		return 0;
-	}
-
-	private void GetScoreRect(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, out int labelH, out Rectangle scoreRect)
-	{
-		//if (GridView)
-		{
-			var padding = GridView ? GridPadding : Padding;
-			var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
-			labelH = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Horizontal;
-			scoreRect = new Rectangle(e.Rects.TextRect.X + (GridView ? 0 : padding.Left), e.Rects.IconRect.Bottom - height + (height / 2) - (labelH / 2) + 1, labelH, labelH);
-			return;
-		}
-
-		//labelH = (int)e.Graphics.Measure(" ", UI.Font(large ? 9F : 7.5F)).Height - 1;
-		//labelH -= labelH % 2;
-		//scoreRect = rects.ScoreRect = labelRect.Pad(Padding).Align(new Size(labelH, labelH), ContentAlignment.BottomLeft);
 	}
 
 	private void DrawIncludedButton(ItemPaintEventArgs<T, Rectangles> e, bool isIncluded, bool partialIncluded, ILocalPackageWithContents? package, out Color activeColor)

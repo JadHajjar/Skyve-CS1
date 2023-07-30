@@ -472,7 +472,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		if (OT_Included.SelectedValue != ThreeOptionToggle.Value.None)
 		{
-			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == item.LocalPackage?.IsIncluded())
+			if (OT_Included.SelectedValue == ThreeOptionToggle.Value.Option2 == (item.LocalPackage is not null && (item.LocalPackage.IsIncluded(out var partiallyIncluded) || partiallyIncluded)))
 			{
 				return true;
 			}
@@ -653,6 +653,12 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 	private void TB_Search_TextChanged(object sender, EventArgs e)
 	{
+		if (Regex.IsMatch(TB_Search.Text, @"filedetails/\?id=(\d+)"))
+		{
+			TB_Search.Text = Regex.Match(TB_Search.Text, @"filedetails/\?id=(\d+)").Groups[1].Value;
+			return;
+		}
+
 		TB_Search.ImageName = (searchEmpty = string.IsNullOrWhiteSpace(TB_Search.Text)) ? "I_Search" : "I_ClearSearch";
 
 		var searchText = TB_Search.Text.Trim();
