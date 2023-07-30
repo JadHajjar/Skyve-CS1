@@ -608,14 +608,14 @@
             {
                 "Name": "Changes",
                 "Changes": [
-                    "Added a compact-view option for all content pages; toggle between compact, list & grid view using the new icons on the top right of the list.",
-                    "Added a troubleshooting system to the Utilities tab; use it to narrow down what mod or asset is causing your issues.",
-                    "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
-                    "Added a new 'Midnight' theme.",
-                    "Updated the color design of the app's logo on the top-left.",
+                    "Ajout d'une option d'affichage compact pour les pages de contenu ; passez entre le mode compact, liste et grille à l'aide des nouvelles icônes en haut à droite de la liste.",
+                    "Ajout d'un système de résolution des problèmes dans l'onglet Utilités ; utilisez-le pour trouver plus précisément quel mod ou asset est à l'origine de vos problèmes.",
+                    "Amélioration de la fenêtre d'ajout de tags ; vous pouvez sélectionner facilement un tag existant et modifier plusieurs éléments en même temps.",
+                    "Ajout d'un nouveau thème \"Midnight\".",
+                    "Mise à jour du design de la couleur du logo de l'application en haut à gauche.",
                     "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
                     "Fixed the incorrect names of packages while viewing a playset's contents.",
-                    "Fixed authors and tags filter not refreshing if you enter the page before they've loaded."
+                    "Correction des filtres d'auteurs et tags qui ne s'actualisaient pas si vous entriez sur la page avant qu'ils n'aient chargé."
                 ]
             }
         ]
