@@ -669,5 +669,14 @@
   "StopTroubleshootTitle": "Stoppa felsökning?",
   "TroubleshootCancelTip": "Avsluta felsökningsprocessen.",
   "TroubleshootNextStageTip": "Hoppa över det aktuella steget. Använd det om du redan har slutfört det och vill fortsätta.",
-  "TroubleshootBubbleTip": "Detta är felsökningsmenyn, det kommer att guida dig under hela processen.\nDu kan stänga Skyve och fortsätta senare, det kommer att komma ihåg dina framsteg."
+  "TroubleshootBubbleTip": "Detta är felsökningsmenyn, det kommer att guida dig under hela processen.\nDu kan stänga Skyve och fortsätta senare, det kommer att komma ihåg dina framsteg.",
+  "TroubleshootCompAsk": {
+    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
+    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+  },
+  "TroubleshootViewComp": "View my compatibility report",
+  "TroubleshootSkipComp": "Skip & continue troubleshooting",
+  "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
+  "FaultyPackagesTitle": "Faulty Packages Detected",
+  "CleanupInfoTitle": "What is a cleanup?"
 }
