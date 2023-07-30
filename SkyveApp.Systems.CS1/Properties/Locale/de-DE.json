@@ -669,5 +669,14 @@
   "StopTroubleshootTitle": "Stop Troubleshooting?",
   "TroubleshootCancelTip": "Stop the troubleshooting process.",
   "TroubleshootNextStageTip": "Skip the current stage. Use it if you've already completed it and want to proceed.",
-  "TroubleshootBubbleTip": "This is the troubleshooting menu, it will guide you throughout the process.\r\nYou can close Skyve and continue later, it will remember your progress."
+  "TroubleshootBubbleTip": "This is the troubleshooting menu, it will guide you throughout the process.\r\nYou can close Skyve and continue later, it will remember your progress.",
+  "TroubleshootCompAsk": {
+    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
+    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+  },
+  "TroubleshootViewComp": "View my compatibility report",
+  "TroubleshootSkipComp": "Skip & continue troubleshooting",
+  "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
+  "FaultyPackagesTitle": "Faulty Packages Detected",
+  "CleanupInfoTitle": "What is a cleanup?"
 }
