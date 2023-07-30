@@ -178,7 +178,7 @@ internal class TroubleshootInfoControl : SlickControl
 
 	private void PromptResult(List<ILocalPackage> list)
 	{
-		MessagePrompt.Show("The following packages might be the cause of your issues:\r\n\r\n" + list.ListStrings("\r\n"), icon: PromptIcons.Ok, form: Program.MainForm);
+		MessagePrompt.Show(Locale.TroubleshootCauseResult + "\r\n\r\n" + list.ListStrings("\r\n"), icon: PromptIcons.Ok, form: Program.MainForm);
 	}
 
 	protected override async void OnMouseClick(MouseEventArgs e)

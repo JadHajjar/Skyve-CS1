@@ -336,4 +336,5 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation SkyveDetectedFaultyPackages => _instance.GetText(nameof(SkyveDetectedFaultyPackages));
 	public static Translation FaultyPackagesTitle => _instance.GetText(nameof(FaultyPackagesTitle));
 	public static Translation CleanupInfoTitle => _instance.GetText(nameof(CleanupInfoTitle));
+	public static Translation TroubleshootCauseResult => _instance.GetText(nameof(TroubleshootCauseResult));
 }
