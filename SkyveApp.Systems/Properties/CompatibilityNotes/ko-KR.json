@@ -161,7 +161,7 @@
   "Not showing up ingame.": "게임 내에서 나타나지 않음",
   "Lag, game freezes and screen flashes are reported. Use with caution, or unsubscribe.": "Lag, game freezes and screen flashes are reported. Use with caution, or unsubscribe.",
   "White lines at the moon and Flickering when game running.": "White lines at the moon and Flickering when game running.",
-  "Invalid Image Format": "Invalid Image Format",
+  "Invalid Image Format": "잘못된 이미지 포맷",
   "On game load, the previous value is loaded correctly, but the slider in mod options will always be in the default position.": "불러올 때 이전에 저장한 값이 올바르게 불러와지지만 모드 옵션의 슬라이더는 항상 기본값의 위치에 있는 것처럼 보입니다.",
   "This is only needed if a prop or mod requires it.": "This is only needed if a prop or mod requires it.",
   "Some users get it to work fine, but there are quite some reports, including about settings resetting between loads.": "Some users get it to work fine, but there are quite some reports, including about settings resetting between loads.",
