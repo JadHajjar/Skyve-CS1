@@ -669,5 +669,14 @@
   "StopTroubleshootTitle": "トラブルシューティングを中止しますか？",
   "TroubleshootCancelTip": "トラブルシューティングのステップを中止します。",
   "TroubleshootNextStageTip": "現在のステップをスキップします。既に完了していて、先に進みたい場合はスキップして下さい。",
-  "TroubleshootBubbleTip": "トラブルシューティングのメニューで、プロセス全体を通してガイドされます。\nSkyveを閉じて処理する必要がある場合は、進行状況を記憶します。"
+  "TroubleshootBubbleTip": "トラブルシューティングのメニューで、プロセス全体を通してガイドされます。\nSkyveを閉じて処理する必要がある場合は、進行状況を記憶します。",
+  "TroubleshootCompAsk": {
+    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
+    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+  },
+  "TroubleshootViewComp": "View my compatibility report",
+  "TroubleshootSkipComp": "Skip & continue troubleshooting",
+  "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
+  "FaultyPackagesTitle": "Faulty Packages Detected",
+  "CleanupInfoTitle": "What is a cleanup?"
 }
