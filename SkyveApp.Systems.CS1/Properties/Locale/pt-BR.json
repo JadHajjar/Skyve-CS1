@@ -671,13 +671,13 @@
   "TroubleshootNextStageTip": "Pule o passo atual. Use-o se você já o completou e quer prosseguir.",
   "TroubleshootBubbleTip": "Este é o menu de solução de problemas, iremos guiá-lo durante o processo.\nVocê pode fechar o Skyve e continuar mais tarde, lembraremos do seu progresso.",
   "TroubleshootCompAsk": {
-    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
-    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+    "One": "Você possui um pacote com um aviso sério de compatibilidade. \nVocê pode querer lidar com isso primeiro antes de prosseguir com a solução de problemas.",
+    "Plural": "Você possui {0} pacotes com avisos sérios de compatibilidade. \nVocê pode querer lidar com eles primeiro antes de prosseguir com a solução de problemas."
   },
-  "TroubleshootViewComp": "View my compatibility report",
-  "TroubleshootSkipComp": "Skip & continue troubleshooting",
-  "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
-  "FaultyPackagesTitle": "Faulty Packages Detected",
-  "CleanupInfoTitle": "What is a cleanup?",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues"
+  "TroubleshootViewComp": "Visualizar meu relatório de compatibilidade",
+  "TroubleshootSkipComp": "Pular e continuar a resolução de problemas",
+  "SkyveDetectedFaultyPackages": "Skyve detectou que alguns dos seus pacotes não foram baixados corretamente. Gostaria de tentar corrigi-los primeiro?",
+  "FaultyPackagesTitle": "Pacotes com falha detectados",
+  "CleanupInfoTitle": "O que é uma limpeza?",
+  "TroubleshootCauseResult": "Os seguintes pacotes podem ser a causa de seus problemas"
 }
