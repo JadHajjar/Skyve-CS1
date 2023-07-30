@@ -161,7 +161,7 @@
   "Not showing up ingame.": "游戏内没有显示。",
   "Lag, game freezes and screen flashes are reported. Use with caution, or unsubscribe.": "据报告，此模组出现卡顿、游戏卡死和屏幕闪烁的问题。请谨慎使用或取消订阅。",
   "White lines at the moon and Flickering when game running.": "在游戏的夜间，此模组会导致月亮闪烁并出现白色线条。",
-  "Invalid Image Format": "Invalid Image Format",
+  "Invalid Image Format": "图像格式无效",
   "On game load, the previous value is loaded correctly, but the slider in mod options will always be in the default position.": "加载存档时，模组能正常加载上次设定的数值，但模组选项中的滑块始终会处于默认位置。",
   "This is only needed if a prop or mod requires it.": "只有当您的某个摆件或模组依赖于该模组时，您才需要此模组。",
   "Some users get it to work fine, but there are quite some reports, including about settings resetting between loads.": "有些玩家可以正常使用，但有相当多玩家报告说，此模组会导致设置重置。",
