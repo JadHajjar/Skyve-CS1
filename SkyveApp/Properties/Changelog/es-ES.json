@@ -603,7 +603,7 @@
     },
     {
         "Version": "3.2.3",
-        "Date": "2023-07-29",
+        "Date": "29-07-2023",
         "ChangeGroups": [
             {
                 "Name": "Changes",
@@ -611,7 +611,7 @@
                     "Added a compact-view option for all content pages; toggle between compact, list & grid view using the new icons on the top right of the list.",
                     "Added a troubleshooting system to the Utilities tab; use it to narrow down what mod or asset is causing your issues.",
                     "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
-                    "Added a new 'Midnight' theme.",
+                    "Se añadió un nuevo tema 'Medianoche'.",
                     "Updated the color design of the app's logo on the top-left.",
                     "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
                     "Fixed the incorrect names of packages while viewing a playset's contents.",
