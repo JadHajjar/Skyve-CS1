@@ -77,6 +77,11 @@ public class SkyveUserMod : IUserMod
 		CheckDuplicate();
 		try
 		{
+			if (GameSettings.FindSettingsFileByName(nameof(SkyveMod)) is null)
+			{
+				GameSettings.AddSettingsFile(new SettingsFile() { fileName = nameof(SkyveMod) });
+			}
+
 			Log.Called();
 
 			Util.LoadOrderUtil.ApplyGameLoggingImprovements();
