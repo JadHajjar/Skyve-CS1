@@ -671,13 +671,13 @@
   "TroubleshootNextStageTip": "現在のステップをスキップします。既に完了していて、先に進みたい場合はスキップして下さい。",
   "TroubleshootBubbleTip": "トラブルシューティングのメニューで、プロセス全体を通してガイドされます。\nSkyveを閉じて処理する必要がある場合は、進行状況を記憶します。",
   "TroubleshootCompAsk": {
-    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
-    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+    "One": "深刻な互換性に関する、警告表示が付いたパッケージがあります。\nトラブルシューティングを実行する前に、まずその警告に対処してみて下さい。",
+    "Plural": "深刻な互換性に関する、警告表示が付いたパッケージが {0} 個あります。\nトラブルシューティングを実行する前に、まずその警告に対処してみて下さい。"
   },
-  "TroubleshootViewComp": "View my compatibility report",
-  "TroubleshootSkipComp": "Skip & continue troubleshooting",
-  "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
-  "FaultyPackagesTitle": "Faulty Packages Detected",
-  "CleanupInfoTitle": "What is a cleanup?",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues"
+  "TroubleshootViewComp": "互換性レポートを表示",
+  "TroubleshootSkipComp": "トラブルシューティングをスキップして続行",
+  "SkyveDetectedFaultyPackages": "Skyveは一部のパッケージで正しくDLされていない問題を検出しました。最初にパッケージの問題を修正しますか？",
+  "FaultyPackagesTitle": "不良パッケージを検出しました！",
+  "CleanupInfoTitle": "クリーンアップとは?",
+  "TroubleshootCauseResult": "以下のパッケージが問題の原因かも知れません。"
 }
