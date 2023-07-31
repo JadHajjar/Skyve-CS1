@@ -124,7 +124,7 @@
   "ShowDatesRelatively": "Afficher les dates par rapport à l'heure actuelle",
   "CouldNotCreatePlayset": "Impossible de créer un nouveau profil, assurez-vous que les paramètres de votre dossier sont correctement configurés dans le panneau Options",
   "TemporaryPlayset": "Profil Temporaire",
-  "CreatePlaysetHere": "Create a new playset or load a previous one by clicking here",
+  "CreatePlaysetHere": "Créer un nouveau profil ou charger un précédent en cliquant ici",
   "Maintenance": "Maintenance",
   "DisableNewModsByDefault": "Désactiver les mods nouvellement abonnés par défaut",
   "DisableNewAssetsByDefault": "Désactiver les assets nouvellement abonnés par défaut",
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Impossible de créer un nouveau profil, assurez-vous que les paramètres de votre dossier sont correctement configurés dans le panneau Options",
   "UseDebugMono": "Utiliser le débogage mono",
   "LaunchThroughCities": "Lancer via Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Impossible de charger les DLCs, veuillez vous connecter à Internet",
   "NoDlcsOpenGame": "Aucun DLC ne correspond à votre recherche",
   "DlcUpdateNotice": "Si vos DLC ne sont pas affichés ici, assurez-vous d'ouvrir le jeu au moins une fois",
@@ -215,7 +215,7 @@
   "ShowingFilteredItems": "Affichage de {0} éléments sur {1} au total",
   "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
   "ThemeUIScale": "Thème et échelle de l'interface utilisateur",
-  "SearchPlaysets": "Search through these Playsets..",
+  "SearchPlaysets": "Chercher parmi les profils..",
   "AdvancedSettings": "Paramètres avancés",
   "HelpTranslate": "Améliorer les traductions",
   "HelpReset": "Aide & Réinitialiser",
@@ -295,9 +295,9 @@
   "PackageIncludedEnabledTotal": "Paquets inclus : {0}, dont {1} sont des mods et {2} sont assets, Total : {3}",
   "PackageIncludedAndEnabledTotal": "Paquets inclus & activés : {0}, Total : {1}",
   "AssetIncludedTotal": "Assets inclus : {0}, Total : {1}",
-  "NewPlayset_Tip": "Create or import a new playset",
-  "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "NewPlayset_Tip": "Créer ou importer un nouveau profil",
+  "TempPlayset_Tip": "Passer à un profil temporaire avec les paramètres actuels",
+  "ViewPlaysets_Tip": "Voir et gérer les profils enregistrés",
   "AutoSave_Tip": "Enregistrer automatiquement les modifications des mods et des assets dans votre profil",
   "LoadEnabled_Tip": "Charge les assets activés lors du chargement d'un jeu. Cela devrait être laissé activé à moins que vous ne sachiez ce que vous faites",
   "LoadUsed_Tip": "Charger les assets qui sont utilisés sur votre carte, même s'ils sont désactivés en jeu. Ceci n’est pas lié aux paramètres dans Skyve",
@@ -322,44 +322,44 @@
   "XMLImport": "Importer la configuration XML",
   "XMLImportMissingInfo": "Voir et s'abonner aux paquets dans n'importe quelle configuration XML",
   "XMLTip": "Sélectionner ou glisser-déposer un fichier de configuration XLM pour gérer les paquets listés à l'intérieur de celui-ci.",
-  "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Profils totaux: {0}",
-  "PlaysetFilter": "Playset Filter",
+  "FavoritePlaysetTotal": "Profils favoris : {0}, Total : {1}",
+  "FavoriteTotal": "Nombre total de profils : {0}",
+  "PlaysetFilter": "Filtrer les profils",
   "CheckDocumentsFolder": "Assurez-vous que Skyve a accès à votre dossier de documents, il l'utilise pour stocker vos paramètres d'interface et de langue.",
   "FailedToSaveLanguage": "Échec d'enregistrer la langue sélectionnée",
   "FailedToOpenTC": "Échec de l'ouverture du changeur de thème",
   "FailedToDeleteItem": "Échec de la suppression de l'élément",
   "DeleteAsset": {
-    "One": "Delete this asset",
-    "Plural": "Delete the selected assets"
+    "One": "Supprimer cet asset",
+    "Plural": "Supprimer la sélection d'assets"
   },
   "OpenChangelog": "Ouvrir le journal de modifications",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Inclure cet item dans tous les profils",
+    "Plural": "Inclure les item sélectionnés dans tous les profils"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclure cet item de tous les profils",
+    "Plural": "Exclure les item sélectionnés de tous les profils"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "Copier le nom de ce paquet",
+    "Plural": "Copier les noms des paquets sélectionnés"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "Copier le nom de l'auteur",
+    "Plural": "Copier les noms des auteurs des paquets sélectionnés"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
+    "One": "Copier le nom du dossier",
     "Plural": "Copy the selected packages' folder names"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
-  "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
+  "PlaysetNameUsed": "Vous avez déjà un profil avec le même nom. Veuillez Changer le nom de l'un ou de l'autre pour continuer.",
+  "FailedToImportLegacyPlayset": "Échec de la conversion de cet ancien profil.",
   "Sorting_LastUsed": "Dernière utilisation",
   "OpenLinksInBrowser": "Ouvrez les liens Steam dans votre navigateur",
   "OpenLinksInBrowser_Tip": "Utiliser votre navigateur par défaut plutôt que dans l'application Steam.",
-  "PlaysetStillLoading": "Your playset is still loading, please wait before exiting this page.",
+  "PlaysetStillLoading": "Votre profil est toujours en cours de chargement, veuillez patienter avant de quitter cette page.",
   "ApplyPlaysetNameBeforeExit": "Please finish editing the playset's name before exiting this page.",
   "SteamNotOpenTo": "Steam n'est pas en cours d’exécution",
   "OpenSteamToContinue": "Veuillez ouvrir Steam afin de continuer votre tâche précédente.",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Vous pouvez utiliser des fichiers de BOB, Tree Brush, Theme Mixer, etc..",
   "ImportFromTextInfo": "Tout format de texte est pris en charge",
   "LsmImportInfo": "Assurez-vous de sélectionner le fichier 'Report'",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Vos sauvegardes de jeux",
   "App Data": "App Data",
   "Custom Maps": "Cartes personnalisées",
