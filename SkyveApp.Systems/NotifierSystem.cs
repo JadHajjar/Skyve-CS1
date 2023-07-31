@@ -115,6 +115,7 @@ internal class NotifierSystem : INotifier
 	public void OnWorkshopPackagesInfoLoaded()
 	{
 		WorkshopPackagesInfoLoaded?.Invoke();
+		WorkshopPackagesInfoLoaded = null;
 	}
 
 	public void OnWorkshopUsersInfoLoaded()

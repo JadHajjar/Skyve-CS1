@@ -72,7 +72,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	public bool IsPackagePage { get; set; }
 	public bool IsTextSearchNotEmpty { get; set; }
 	public bool IsGenericPage { get; set; }
-	public bool IsSelection { get; set; }
+	public bool IsSelection { get => !EnableSelection; set => EnableSelection = !value; }
 	public bool CompactList
 	{
 		get => _compactList; set

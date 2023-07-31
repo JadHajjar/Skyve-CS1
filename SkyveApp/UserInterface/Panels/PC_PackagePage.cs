@@ -86,6 +86,8 @@ public partial class PC_PackagePage : PanelContent
 				Dock = DockStyle.Fill
 			};
 
+			LC_References.TB_Search.Placeholder = "SearchGenericPackages";
+
 			LC_References.RefreshItems();
 
 			T_References.LinkedControl = LC_References;

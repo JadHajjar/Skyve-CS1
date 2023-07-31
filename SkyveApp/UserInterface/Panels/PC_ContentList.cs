@@ -15,6 +15,7 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 
 		LC_Items = new(Page, !load, GetItems, SetIncluded, SetEnabled, GetItemText, GetCountText)
 		{
+			TabIndex = 0,
 			Dock = DockStyle.Fill
 		};
 
@@ -45,8 +46,8 @@ internal partial class PC_ContentList<T> : PanelContent where T : IPackage
 	{
 		if (keyData is (Keys.Control | Keys.F))
 		{
-			//TB_Search.Focus();
-			//TB_Search.SelectAll();
+			LC_Items.TB_Search.Focus();
+			LC_Items.TB_Search.SelectAll();
 
 			return true;
 		}

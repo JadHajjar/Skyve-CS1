@@ -39,6 +39,8 @@ public partial class PC_UserPage : PanelContent
 			IsGenericPage = true
 		};
 
+		LC_Items.TB_Search.Placeholder = "SearchGenericPackages";
+
 		LC_Items.ListControl.Loading = true;
 	}
 

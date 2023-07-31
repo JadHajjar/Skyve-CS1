@@ -41,11 +41,11 @@ public enum StatusType
 	/********************************/
 
 	[CRN(NotificationType.MissingDependency, false)]
-	MissingDlc,
+	MissingDlc = 1000,
 
 	[CRN(NotificationType.Unsubscribe, false)]
-	Succeeded,
+	Succeeded = 1001,
 
 	[CRN(NotificationType.Info, false)]
-	AutoDeprecated,
+	AutoDeprecated = 1002,
 }

@@ -68,6 +68,8 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 		}
 
 		_notifier.WorkshopPackagesInfoLoaded += _notifier_WorkshopPackagesInfoLoaded;
+
+		LC_Items.RefreshItems();
 	}
 
 	protected override void Dispose(bool disposing)

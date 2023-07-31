@@ -35,8 +35,8 @@ public enum InteractionType
 	/***********************************/
 
 	[CRN(NotificationType.Switch, false)]
-	SucceededBy,
+	SucceededBy = 1000,
 
 	[CRN(NotificationType.AttentionRequired, false)]
-	Identical,
+	Identical = 1001,
 }

@@ -22,7 +22,7 @@ internal class MiniPackageControl : SlickControl
 		Cursor = Cursors.Hand;
 		Id = steamId;
 
-		if (Package is null)
+		if (string.IsNullOrEmpty(Package?.Name))
 		{
 			_notifier.WorkshopPackagesInfoLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
 		}
@@ -34,7 +34,7 @@ internal class MiniPackageControl : SlickControl
 		_package = package;
 		Id = package.Id;
 
-		if (Package is null)
+		if (string.IsNullOrEmpty(Package?.Name))
 		{
 			_notifier.WorkshopPackagesInfoLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
 		}
@@ -88,9 +88,12 @@ internal class MiniPackageControl : SlickControl
 	{
 		e.Graphics.SetUp(BackColor);
 
+		using var backBrush = new SolidBrush(Color.FromArgb(10, FormDesign.Design.Type is	FormDesignType.Light ? Color.Black : Color.White));
+		e.Graphics.FillRoundedRectangle(backBrush, ClientRectangle.Pad(Padding), Padding.Left);
+
 		if (HoverState.HasFlag(HoverState.Hovered))
 		{
-			using var brush = new LinearGradientBrush(ClientRectangle.Pad(Height / 2, 0, 0, 0), FormDesign.Design.AccentBackColor, Color.Empty, LinearGradientMode.Horizontal);
+			using var brush = new LinearGradientBrush(ClientRectangle.Pad(Height / 2, 0, 0, 0), Color.FromArgb(150, FormDesign.Design.ActiveColor), Color.Empty, LinearGradientMode.Horizontal);
 			e.Graphics.FillRectangle(brush, ClientRectangle.Pad(Height / 2, 0, 0, 0).Pad(Padding));
 		}
 
@@ -150,7 +153,7 @@ internal class MiniPackageControl : SlickControl
 
 		if (Dock == DockStyle.None)
 		{
-			Width = (2 * (imageRect.Width + Padding.Horizontal)) + textRect.Right - tagRect.X + (int)e.Graphics.Measure(Package?.CleanName(out _) ?? Locale.UnknownPackage, Font).Width + 1;
+			Width = tagRect.X;
 		}
 	}
 }

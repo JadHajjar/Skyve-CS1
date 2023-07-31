@@ -228,6 +228,11 @@ internal partial class ItemListControl<T>
 
 	private void DrawFolderName(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, ILocalPackageWithContents package, int scoreX)
 	{
+		if (package is null)
+		{
+			return;
+		}
+
 		if (CompactList)
 		{
 			e.Rects.FolderNameRect = DrawCell(e, Columns.Author, Path.GetFileName(package.Folder), "I_Folder", font: UI.Font(8.25F, FontStyle.Bold));
@@ -237,7 +242,6 @@ internal partial class ItemListControl<T>
 		var padding = GridView ? GridPadding : Padding;
 		var height = e.Rects.IconRect.Bottom - Math.Max(e.Rects.TextRect.Bottom, Math.Max(e.Rects.VersionRect.Bottom, e.Rects.DateRect.Bottom)) - padding.Bottom;
 		var folderPoint = CompactList ? new Point(_columnSizes[Columns.Author].X, e.ClipRectangle.Y) : new Point(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom);
-
 
 		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.BottomLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
 	}
