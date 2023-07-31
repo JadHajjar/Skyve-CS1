@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "ไม่สามารถสร้างเพลย์เซ็ตใหม่ได้ โปรดตรวจสอบในแผงการตั้งค่าให้แน่ใจว่าโฟลเดอร์การตั้งค่าได้ถูกกำหนดไว้แล้วอย่างถูกต้อง",
   "UseDebugMono": "ใช้ Debug Mono",
   "LaunchThroughCities": "เปิดผ่าน Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "ไม่สามารถโหลดข้อมูล DLC โปรดเชื่อมต่ออินเทอร์เน็ต",
   "NoDlcsOpenGame": "ไม่มี DLC ที่ตรงกับการค้นหาของคุณ",
   "DlcUpdateNotice": "หาก DLC ของคุณไม่ปรากฏตรงนี้ ลองเปิดเกมอย่างน้อยครั้งหนึ่ง",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "แอสเซทที่รวมอยู่ในเกม: {0}, ทั้งหมด: {1}",
   "NewPlayset_Tip": "สร้างหรือนำเข้าเพลย์เซ็ตใหม่",
   "TempPlayset_Tip": "เปลี่ยนไปเป็นเพลย์เซ็ตชั่วคราวด้วยการตั้งค่าปัจจุบันของคุณ",
-  "ViewPlaysets_Tip": "ดูและจัดการเพลย์เซ็ตที่คุณบันทึกไว้",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "บันทึกการเปลี่ยนแปลงม็อดและแอสเซท ไปยังโพร์ไฟล์ของคุณโดยอัตโนมัติ",
   "LoadEnabled_Tip": "โหลดแอสเซทที่เปิดใช้งานในระหว่างการโหลดเกม ควรเปิดใช้งานไว้ เว้นแต่คุณทราบอยู่แล้วว่าคุณกำลังทำอะไรอยู่",
   "LoadUsed_Tip": "โหลดแอสเซทที่ใช้ในแผนที่ของคุณ แม้ว่ามันจะถูกปิดการใช้งานในเกมก็ตาม ตัวเลือกนี้จะไม่เกี่ยวข้องกับการตั้งค่าแอสเซทภายใน Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "อ่านไฟล์ XML การกำหนดค่า แล้วสมัครสมาชิกแพ็กเกจในไฟล์เหล่านั้น",
   "XMLTip": "เลือก หรือลากแล้วปล่อย เพื่อจัดการแพ็กเกจที่อยู่ในรายการ ของไฟล์ XML config",
   "FavoritePlaysetTotal": "เพลย์เซ็ตที่ชื่นชอบ: {0} ทั้งหมด: {1}",
-  "FavoriteTotal": "โพร์ไฟล์ทั้งหมด: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "กรองเพลย์เซ็ต",
   "CheckDocumentsFolder": "ตรวจสอบให้แน่ใจว่า Skyve สามารถเข้าถึงโฟลเดอร์เอกสารของคุณ เพื่อใช้จัดเก็บข้อมูลการตั้งค่า UI และภาษาของคุณ",
   "FailedToSaveLanguage": "ล้มเหลวในการบันทึกภาษาที่เลือก",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "เปิดบันทึกการเปลี่ยนแปลง",
   "IncludeThisItemInAllPlaysets": {
-    "One": "บรรจุไอเทมนี้เข้าไปในทุกโพร์ไฟล์ของคุณ",
-    "Plural": "บรรจุไอเทมที่เลือกเข้าไปในทุกโพร์ไฟล์ของคุณ"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "แยกไอเทมนี้ออกจากทุกโพร์ไฟล์ของคุณ",
-    "Plural": "แยกไอเทมที่เลือกออกจากทุกโพร์ไฟล์ของคุณ"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "คัดลอกชื่อแพ็กเกจนี้",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "คุณสามารถใช้ไฟล์จาก BOB, Tree Brush, Theme Mix และอื่น ๆ",
   "ImportFromTextInfo": "รองรับฟอร์แมตที่เป็นข้อความ",
   "LsmImportInfo": "ตรวจสอบให้แน่ใจว่าได้เลือกไฟล์ 'รายงาน' แล้ว",
-  "NoPlaysetsFound": "ไม่มีโพร์ไฟล์จะแสดง",
-  "NoPlaysetsMatchFilters": "ไม่มีโพร์ไฟล์ที่ตรงกับการค้นหาของคุณ",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "เซฟเกมของคุณ",
   "App Data": "App Data",
   "Custom Maps": "แผนที่ปรับแต่ง",

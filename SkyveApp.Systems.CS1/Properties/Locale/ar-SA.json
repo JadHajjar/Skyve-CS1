@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "استخدام تصحيح الأحادي",
   "LaunchThroughCities": "إطلاق من خلال cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "لا يمكن تحميل DLCs ، يرجى الاتصال بالإنترنت",
   "NoDlcsOpenGame": "لا توجد DLCs تطابق بحثك",
   "DlcUpdateNotice": "إذا لم تظهر DLCs الخاصة بك هنا ، فتأكد من فتح اللعبة مرة واحدة على الأقل",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "تشمل الأصول: {0}، المجموع: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "حفظ التغييرات تلقائياً إلى الموديلات والأصول إلى ملفك الشخصي",
   "LoadEnabled_Tip": "تحميل الأصول تمكين أثناء تحميل اللعبة. يجب أن يترك هذا ممكناً إلا إذا كنت تعرف ما تفعله",
   "LoadUsed_Tip": "تحميل الأصول المستخدمة في الخريطة الخاصة بك، حتى لو تم تعطيلها داخل اللعبة. هذا لا يتعلق بإعدادات الأصول داخل Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "عرض الاشتراك في الحزم في أي إعدادات XML",
   "XMLTip": "حدد أو سحب وإسقاط ملف تهيئة XML لإدارة الحزم المدرجة داخله.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "إجمالي الملفات الشخصية: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "تأكد من أن Skyve لديه حق الوصول إلى مجلد المستندات الخاص بك، ويستخدمه لتخزين إعدادات واجهة المستخدم واللغة الخاصة بك.",
   "FailedToSaveLanguage": "فشل في حفظ اللغة المحددة",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "افتح سجل التغييرات",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "يمكنك استخدام الملفات من BOB، شجرة تشويش ، ثيم ميكس، إلخ...",
   "ImportFromTextInfo": "أي تنسيق نص مدعوم",
   "LsmImportInfo": "تأكد من تحديد ملف 'التقرير'",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "حفظ الألعاب",
   "App Data": "بيانات التطبيق",
   "Custom Maps": "خرائط مخصصة",

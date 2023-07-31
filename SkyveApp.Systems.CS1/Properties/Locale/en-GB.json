@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Use Debug Mono",
   "LaunchThroughCities": "Launch through Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Could not load DLCs, please connect to the internet",
   "NoDlcsOpenGame": "No DLCs match your search",
   "DlcUpdateNotice": "If your DLCs are not showing here, make sure to open the game at least once",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Assets included: {0}, Total: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Automatically save changes to mods & assets to your profile",
   "LoadEnabled_Tip": "Loads enabled assets while loading a game. This should be left enabled unless you know what you're doing",
   "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "View and subscribe to packages in any XML configuration",
   "XMLTip": "Select or drag & drop an XML config file to manage the packages listed inside of it.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Total profiles: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Make sure Skyve has access to your documents folder, it uses it to store your UI & Language settings.",
   "FailedToSaveLanguage": "Failed to save the selected language",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Open Change-log",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "You can use files from BOB, Tree Brush, Theme Mix, etc..",
   "ImportFromTextInfo": "Any text format is supported",
   "LsmImportInfo": "Make sure to select the 'Report' file",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Your Save-games",
   "App Data": "App Data",
   "Custom Maps": "Custom Maps",

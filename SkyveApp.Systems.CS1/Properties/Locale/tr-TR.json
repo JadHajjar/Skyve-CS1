@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Hata Ayıklama Mono'yu kullanın",
   "LaunchThroughCities": "Şehirler.exe aracılığıyla lansman",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "DLC'leri yükleyemedi, lütfen internete bağlanın",
   "NoDlcsOpenGame": "Aramanızla eşleşen DLC yok",
   "DlcUpdateNotice": "DLC'leriniz burada görünmüyorsa, oyunu en az bir kez açtığınızdan emin olun",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Dahil Edilen Assetler: {0}, Toplam: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Automatically save changes to mods & assets to your profile",
   "LoadEnabled_Tip": "Loads enabled assets while loading a game. This should be left enabled unless you know what you're doing",
   "LoadUsed_Tip": "Load assets that are used in your map, even if they are disabled in-game. This is not related to the asset settings inside Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Herhangi bir XML yapılandırmasındaki paketleri görüntüle ve abone ol",
   "XMLTip": "İçinde listelenen paketleri görmek ve yönetmek için bir XML yapılandırma dosyası seçin veya sürükleyin.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Toplam profil: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Skyve'ın dokümanlar dosyanıza erişimi olduğuna emin olun. Bunu UI ve dil ayarlarınız için kullanır.",
   "FailedToSaveLanguage": "Seçilen dil kaydedilemedi",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Open Change-log",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "BOB, Tree Brush, Theme Mix ve benzerlerinden dosyalar kullanabilirsiniz.",
   "ImportFromTextInfo": "Tüm metin formatları desteklenmektedir",
   "LsmImportInfo": "'Rapor' dosyasını seçtiğinizden emin olun",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Kaydedilen oyunlarınız",
   "App Data": "Uygulama Verisi",
   "Custom Maps": "Özel Haritalar",
