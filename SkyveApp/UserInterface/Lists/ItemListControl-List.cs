@@ -25,7 +25,7 @@ internal partial class ItemListControl<T>
 		{
 			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
 		}
-		if (notificationType > NotificationType.Info)
+		else if (notificationType > NotificationType.Info)
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
@@ -106,7 +106,7 @@ internal partial class ItemListControl<T>
 		{
 			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
 		}
-		if (notificationType > NotificationType.Info)
+		else if (notificationType > NotificationType.Info)
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
