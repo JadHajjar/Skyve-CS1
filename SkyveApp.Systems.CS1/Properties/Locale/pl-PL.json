@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Nie można utworzyć nowego profilu, upewnij się, że ustawienia folderu są prawidłowo skonfigurowane w panelu opcji",
   "UseDebugMono": "Użyj debugowania mono",
   "LaunchThroughCities": "Uruchom przez Cities.exe",
-  "UnityPlaysetrMode": "Użyj Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Nie można załadować DLC, proszę połączyć się z Internetem",
   "NoDlcsOpenGame": "Żadne DLC nie pasują do wyszukiwania",
   "DlcUpdateNotice": "Jeśli twoje DLC nie wyświetlają się tutaj, pamiętaj, aby otworzyć grę przynajmniej raz",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Obiekty uwzględnione: {0}, Razem: {1}",
   "NewPlayset_Tip": "Utwórz lub zaimportuj nowy profil",
   "TempPlayset_Tip": "Przełącz na tymczasowy profil z bieżącymi ustawieniami",
-  "ViewPlaysets_Tip": "Wyświetl i zarządzaj zapisanymi profilami",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Automatycznie zapisuj zmiany w modach i zasobach do profilu",
   "LoadEnabled_Tip": "Ładuje włączone obiekty podczas ładowania gry. Ta opcja powinna pozostać włączona, chyba że wiesz, co robisz",
   "LoadUsed_Tip": "Załaduj zasoby, które są używane na mapie, nawet jeśli są wyłączone w grze. Nie jest to związane z ustawieniami zasobów w Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Wyświetl i subskrybuj pakiety w dowolnej konfiguracji XML",
   "XMLTip": "Wybierz lub przeciągnij i upuść plik konfiguracyjny XML, aby zarządzać pakietami wymienionymi wewnątrz niego.",
   "FavoritePlaysetTotal": "Ulubione profile: {0}, Razem: {1}",
-  "FavoriteTotal": "Całkowita liczba profili: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Filtr profili",
   "CheckDocumentsFolder": "Upewnij się, że Skyve ma dostęp do folderu dokumentów, używa go do przechowywania ustawień interfejsu użytkownika i języka.",
   "FailedToSaveLanguage": "Nie udało się zapisać wybranego języka",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Otwórz dziennik zmian",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Uwzględnij ten element we wszystkich profilach",
-    "Plural": "Uwzględnij zaznaczone elementy we wszystkich profilach"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Wyklucz ten element we wszystkich profili",
-    "Plural": "Wyklucz zaznaczone elementy we wszystkich profilach"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Kopiuj nazwę pakietu",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Możesz używać plików z BOB, Brush Tree Brush, Motywy itd..",
   "ImportFromTextInfo": "Każdy format tekstu jest obsługiwany",
   "LsmImportInfo": "Upewnij się, że wybrano plik 'Raport'",
-  "NoPlaysetsFound": "Brak profili do wyświetlenia",
-  "NoPlaysetsMatchFilters": "Brak profili spełniających kryteria wyszukiwania",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Twoje gry zapamiętane",
   "App Data": "Dane aplikacji",
   "Custom Maps": "Własne mapy",

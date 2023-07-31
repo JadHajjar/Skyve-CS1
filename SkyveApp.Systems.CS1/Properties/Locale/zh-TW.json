@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "無法創建新的設定檔，請檢查選項面板中的資料夾設定是否正確",
   "UseDebugMono": "使用 Debug Mono",
   "LaunchThroughCities": "通過 Cities.exe 啟動遊戲",
-  "UnityPlaysetrMode": "使用 Unity 設定檔",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "無法載入 DLC，請聯網並檢查加速器 / VPN",
   "NoDlcsOpenGame": "沒有搜索到相關 DLC",
   "DlcUpdateNotice": "如果您的DLC沒有顯示在此處，請確保至少打開過一次遊戲",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "您總共有 {1} 個資產，已裝載 {0} 個",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "啟用此選項後，對模組和資產狀態進行的改動，將自動保存到設定檔中。",
   "LoadEnabled_Tip": "在載入存檔時載入已啟用的資產。 請不要隨意禁用該功能，除非您很清楚自己正在做什麼以及可能造成的後果。",
   "LoadUsed_Tip": "無論是否在內容管理器中停用，始終載入地圖中已經使用的資產。該功能不會被 Skyve 中的資產設定影響。",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "查看和訂閱模組 XML 設定檔中列出的外掛程式",
   "XMLTip": "將模組的 XML 設定檔拖到此處；或按一下此處，選擇一個 XML 設定檔，來管理其中列出的外掛程式。",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "共 {0} 個設定檔",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "請檢查 Skyve 是否可以訪問您的「文件」資料夾，Skyve 的介面和語言設定資訊儲存在該資料夾內。",
   "FailedToSaveLanguage": "保存所選語言失敗",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "打開更新日誌",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "您可以導入 BOB 、Forest Brush Revisited 、Theme Mixer 2.5 等模組的設定檔。",
   "ImportFromTextInfo": "支持任何文字檔格式",
   "LsmImportInfo": "請務必選擇「Assets Report」檔",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "您的遊戲存檔",
   "App Data": "App Data",
   "Custom Maps": "自訂地圖",
