@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Käytä Debug Monoa",
   "LaunchThroughCities": "Käynnistä Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "DLC: tä ei voinut ladata, muodosta internetyhteys",
   "NoDlcsOpenGame": "Mikään DLC:t eivät vastaa hakuasi",
   "DlcUpdateNotice": "Jos DLC:t eivät näy täällä, muista avata peli vähintään kerran",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Sisällytetyt esineet: {0}, Yhteensä: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Tallenna automaattisesti muutokset modeihin ja assetteihin profiiliisi",
   "LoadEnabled_Tip": "Lataa käytössä olevat esineet kun peli latautuu. Tämän pitäisi olla käytössä, ellet tiedä mitä teet",
   "LoadUsed_Tip": "Lataa esineet, joita käytetään kartassa, vaikka ne olisivatkin poissa käytöstä pelissä. Tämä ei liity Skyven sisällä oleviin esine asetuksiin",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Tarkastele ja tilaa paketteja missä tahansa XML-konfiguraatiossa",
   "XMLTip": "Valitse tai vedä & pudota XML-asetustiedosto hallitaksesi sen sisällä lueteltuja paketteja.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Profiileja yhteensä: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Varmista, että Skyvellä on pääsy Tiedostot-kansioon, se käyttää sitä käyttöliittymä- ja kieliasetusten tallentamiseen.",
   "FailedToSaveLanguage": "Valitun kielen tallentaminen epäonnistui",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Avaa Muutosloki",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Voit käyttää BOB, Tree Brush, Theme Mix, jne.. tiedostoja",
   "ImportFromTextInfo": "Mikä tahansa tekstimuoto on tuettu",
   "LsmImportInfo": "Varmista, että 'Raportti' tiedosto on valittu",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Tallennuksesi",
   "App Data": "App Data",
   "Custom Maps": "Mukautetut Kartat",
