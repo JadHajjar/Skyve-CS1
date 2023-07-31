@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Folosiți debug mono",
   "LaunchThroughCities": "Lansare prin Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Nu am putut încărca DLC -uri, vă rugăm să vă conectați la Internet",
   "NoDlcsOpenGame": "Niciun DLC -uri nu se potrivesc căutării",
   "DlcUpdateNotice": "Dacă DLC -urile dvs. nu se afișează aici, asigurați -vă că deschideți jocul cel puțin o dată",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Activele incluse: {0}, Total: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Salvează automat modificările în mod-uri și active în profilul tău",
   "LoadEnabled_Tip": "Sarcini activate active în timpul încărcării unui joc. Acest lucru ar trebui să fie lăsat activat dacă nu știi ce faci",
   "LoadUsed_Tip": "Încarcă activele care sunt utilizate pe harta ta, chiar dacă sunt dezactivate în joc. Acest lucru nu este legat de setările de active din Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Vezi și abonează-te la pachete în orice configurație XML",
   "XMLTip": "Selectați sau trageți și plasați un fișier de configurare XML pentru a gestiona pachetele listate în interiorul său.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Total profiluri: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Asigură-te că Skyve are acces la dosarul de documente, îl folosește pentru a stoca setările de interfață și limbă.",
   "FailedToSaveLanguage": "Salvarea limbii selectate a eșuat",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Deschide jurnalul de modificări",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Poți folosi fișiere din BOB, Tree Brush, Temă Mix, etc..",
   "ImportFromTextInfo": "Orice format de text este acceptat",
   "LsmImportInfo": "Asigurați-vă că selectați fișierul 'Raport'",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Jocurile tale de salvare",
   "App Data": "Date aplicație",
   "Custom Maps": "Hărţi personalizate",
