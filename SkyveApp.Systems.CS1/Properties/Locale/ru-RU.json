@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Использовать отладочную версию Mono",
   "LaunchThroughCities": "Запустить используя Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Не удалось загрузить DLC, подключитесь к Интернету",
   "NoDlcsOpenGame": "Ни один DLC не соответствует поиску",
   "DlcUpdateNotice": "Откройте игру как минимум один раз, чтобы ваши DLC отображались здесь",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Ассетов добавлено в игру: {0}, Всего: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Автоматическое сохранение изменений модов и ассетов в ваш профиль",
   "LoadEnabled_Tip": "Загружает активированные ассеты при загрузке игры. Это следует оставлять включенным, если вы не знаете, что делаете",
   "LoadUsed_Tip": "Загрузить ассеты, которые используются на карте, даже если они отключены в игре. Это не относится к настройкам ассетов внутри Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Просмотр и подписка на пакеты в любой XML конфигурации",
   "XMLTip": "Выберите или перетащите файл конфигурации XML, чтобы управлять перечисленными пакетами.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Всего профилей: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Убедитесь, что у Skyve есть доступ к папке документов, он использует ее для хранения настроек пользовательского интерфейса и языка.",
   "FailedToSaveLanguage": "Не удалось сохранить выбранный язык",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Открыть список изменений",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Вы можете использовать файлы из BOB, Tree Brush, Theme Mix и т. д.",
   "ImportFromTextInfo": "Поддерживается любой формат текста",
   "LsmImportInfo": "Не забудьте выбрать файл 'Отчет'",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Ваши сохранения",
   "App Data": "App Data",
   "Custom Maps": "Пользовательские карты",
