@@ -4,7 +4,6 @@ using SkyveApp.Domain.Systems;
 
 using System.Collections.Generic;
 using System.Drawing;
-using System.Security.Policy;
 
 namespace SkyveApp.Systems;
 public static class SystemExtensions
@@ -53,7 +52,9 @@ public static class SystemExtensions
 	public static ILocalPackage? GetLocalPackage(this IPackageIdentity package)
 	{
 		if (package is ILocalPackage local)
+		{
 			return local;
+		}
 
 		return PackageManager.GetPackageById(package);
 	}

@@ -2,13 +2,10 @@
 using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Enums;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain.Api;
 using SkyveApp.Systems.CS1.Utilities;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SkyveApp.Systems.CS1.Systems;

@@ -149,7 +149,7 @@ internal class LogUtil : ILogUtil
 
 		var reports = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
 		reports.RemoveAll(x => x.GetNotification() < NotificationType.Warning && !(x.Package!.IsIncluded(out var partial) || partial));
-		
+
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
 	}
 

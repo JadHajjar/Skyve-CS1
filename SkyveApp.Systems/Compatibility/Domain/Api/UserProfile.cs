@@ -74,9 +74,13 @@ public class UserProfile : IDynamicSql
 		set
 		{
 			if (value is null)
+			{
 				Banner = null;
+			}
 			else
+			{
 				Banner = (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
+			}
 		}
 	}
 	IUser? IPlayset.Author { get; }

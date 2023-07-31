@@ -2,7 +2,6 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Utilities;
 using SkyveApp.Domain.Systems;
 
 using SkyveShared;

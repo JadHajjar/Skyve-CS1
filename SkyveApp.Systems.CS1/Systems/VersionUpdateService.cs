@@ -1,16 +1,13 @@
-﻿using SkyveApp.Domain.Systems;
+﻿using Extensions;
+
+using SkyveApp.Domain;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Utilities;
 
 using SkyveShared;
-using Extensions;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SkyveApp.Domain;
-using SkyveApp.Systems.CS1.Managers;
 
 namespace SkyveApp.Systems.CS1.Systems;
 internal class VersionUpdateService : IVersionUpdateService
@@ -29,7 +26,9 @@ internal class VersionUpdateService : IVersionUpdateService
 			var oldConfig = SkyveConfigOld.Deserialize();
 
 			if (oldConfig is null)
+			{
 				return;
+			}
 
 			ServiceCenter.Get<IAssetUtil, AssetsUtil>()
 				.SetExcludedAssets(oldConfig.Assets.Select(x => x.Path ?? string.Empty).WhereNotEmpty());

@@ -1,5 +1,4 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.CompatibilityReport;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Forms;
@@ -176,7 +175,9 @@ public partial class PC_PackagePage : PanelContent
 	private void AddTagControl_MouseClick(object sender, MouseEventArgs e)
 	{
 		if (Package.LocalPackage is null)
+		{
 			return;
+		}
 
 		var frm = EditTags(new[] { Package.LocalPackage });
 

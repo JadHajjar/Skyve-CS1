@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -93,9 +92,9 @@ public class ModConfig
 		return new ModConfig();
 	}
 
-	public class SavedModInfo : ModInfo 
+	public class SavedModInfo : ModInfo
 	{
-		public string? Path { get; set; } 
+		public string? Path { get; set; }
 	}
 
 	public class ModInfo
@@ -139,7 +138,7 @@ public class SkyveConfig
 	public bool HidePanels { get; set; }
 	public bool FastContentManager { get; set; } = true;
 	public bool LogAssetLoadingTimes { get; set; } = true;
-	public bool LogPerModAssetLoadingTimes { get; set; } 
+	public bool LogPerModAssetLoadingTimes { get; set; }
 	public bool LogPerModOnCreatedTimes { get; set; }
 	public bool IgnoranceIsBliss { get; set; }
 	public bool UGCCache { get; set; } = true;

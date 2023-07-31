@@ -156,7 +156,7 @@ public partial class MainForm : BasePanelForm
 		e.Graphics.SetUp(base_PB_Icon.BackColor);
 
 		var backBrightness = FormDesign.Design.MenuColor.GetBrightness();
-		var foreBrightness = FormDesign.Design.ForeColor.GetBrightness();		
+		var foreBrightness = FormDesign.Design.ForeColor.GetBrightness();
 
 		using var icon = new Bitmap(IconManager.GetIcons("I_AppIcon").FirstOrDefault(x => x.Key > base_PB_Icon.Width).Value).Color(base_PB_Icon.HoverState.HasFlag(HoverState.Hovered) && !base_PB_Icon.HoverState.HasFlag(HoverState.Pressed) ? FormDesign.Design.MenuForeColor : Math.Abs(backBrightness - foreBrightness) < 0.4F ? FormDesign.Design.BackColor : FormDesign.Design.ForeColor);
 

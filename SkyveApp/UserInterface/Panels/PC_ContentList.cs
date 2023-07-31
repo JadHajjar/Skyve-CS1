@@ -1,16 +1,4 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.UserInterface.Generic;
-using SkyveApp.UserInterface.Lists;
-
-using System.Drawing;
-using System.IO;
-using System.Net;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 internal partial class PC_ContentList<T> : PanelContent where T : IPackage

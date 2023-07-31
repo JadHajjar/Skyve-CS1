@@ -24,7 +24,7 @@ public class PlaysetEntryPackage : IPackage, IPlaysetEntry
 	public bool IsLocal { get; }
 	public bool IsBuiltIn { get; }
 	public ulong Id { get; }
-	public string Name { get;  }
+	public string Name { get; }
 	public string? Url { get; }
 	public string? RelativePath { get; set; }
 	public string FilePath { get; }

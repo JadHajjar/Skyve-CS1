@@ -1,7 +1,6 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.Legacy;
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.CS1.Utilities;
 
@@ -10,8 +9,6 @@ using SkyveShared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkyveApp.Systems.CS1.Managers;
 internal class DlcManager : IDlcManager
@@ -22,14 +19,14 @@ internal class DlcManager : IDlcManager
 
 	public event Action? DlcsLoaded;
 
-    public DlcManager()
+	public DlcManager()
 	{
 		_config = DlcConfig.Deserialize();
 
 		SteamUtil.DLCsLoaded += DlcsLoaded;
-    }
+	}
 
-    public bool IsAvailable(uint dlcId)
+	public bool IsAvailable(uint dlcId)
 	{
 		return SteamUtil.IsDlcInstalledLocally(dlcId);
 	}

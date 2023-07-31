@@ -148,11 +148,11 @@ public partial class PC_Troubleshoot : PanelContent
 					{
 						try
 						{
-							CrossIO.DeleteFolder(item.Folder); 
+							CrossIO.DeleteFolder(item.Folder);
 						}
-						catch (Exception ex) 
-						{ 
-							_logger.Exception(ex, $"Failed to delete the folder '{item.Folder}'"); 
+						catch (Exception ex)
+						{
+							_logger.Exception(ex, $"Failed to delete the folder '{item.Folder}'");
 						}
 					}
 					PackageWatcher.Resume();
@@ -167,11 +167,17 @@ public partial class PC_Troubleshoot : PanelContent
 
 		TLP_ModAsset.Show();
 		TLP_Comp.Hide();
+		TLP_New.Hide();
 	}
 
 	private bool CheckStrict(ILocalPackageWithContents localPackage)
 	{
 		var workshopInfo = localPackage.GetWorkshopInfo();
+
+		if (localPackage.IsLocal)
+		{
+			return false;
+		}
 
 		if (localPackage.Mod is not null && _modLogicManager.IsRequired(localPackage.Mod, _modUtil))
 		{

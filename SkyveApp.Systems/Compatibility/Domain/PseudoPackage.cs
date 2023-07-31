@@ -21,11 +21,11 @@ public class PseudoPackage : IPackageIdentity
 		_iPackage = iPackage;
 	}
 
-    public PseudoPackage()
-    {
-    }
+	public PseudoPackage()
+	{
+	}
 
-    public ulong Id { get; set; }
+	public ulong Id { get; set; }
 	[JsonIgnore] public string Name => Package?.Name ?? string.Empty;
 	[JsonIgnore] public IPackage Package => _iPackage ?? ServiceCenter.Get<IWorkshopService>().GetPackage(new GenericPackageIdentity(Id));
 	[JsonIgnore] public string? Url => Package?.Url;

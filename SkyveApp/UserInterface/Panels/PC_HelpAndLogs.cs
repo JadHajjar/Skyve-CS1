@@ -87,6 +87,11 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	protected override bool LoadData()
 	{
+		if (!File.Exists(_logUtil.GameLogFile))
+		{
+			return false;
+		}
+
 		var tempName = Path.GetTempFileName();
 
 		File.Copy(_logUtil.GameLogFile, tempName, true);

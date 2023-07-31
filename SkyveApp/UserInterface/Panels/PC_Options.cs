@@ -81,7 +81,9 @@ public partial class PC_Options : PanelContent
 		}
 
 		if (!Directory.Exists(TB_AppDataPath.Text) || !Directory.Exists(TB_GamePath.Text) || !Directory.Exists(TB_SteamPath.Text))
+		{
 			CB_ShowFolderSettings.Checked = true;
+		}
 	}
 
 	protected override void LocaleChanged()

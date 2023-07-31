@@ -3,7 +3,6 @@
 using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.Compatibility;
 
-using System;
 using System.Windows.Forms;
 
 namespace SkyveApp.Systems;

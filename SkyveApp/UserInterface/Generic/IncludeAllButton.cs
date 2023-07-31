@@ -37,7 +37,7 @@ internal class IncludeAllButton<T> : SlickControl where T : IPackage
 		var ItemHeight = (int)((28) * UI.FontScale);
 		var includeItemHeight = ItemHeight;
 
-		Size = new Size((includeItemHeight + 1)*(_doubleButtons ? 3:2), includeItemHeight)+Padding.Size;
+		Size = new Size((includeItemHeight + 1) * (_doubleButtons ? 3 : 2), includeItemHeight) + Padding.Size;
 	}
 
 	protected override void OnMouseMove(MouseEventArgs e)

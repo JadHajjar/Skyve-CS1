@@ -3,7 +3,6 @@ using Extensions;
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1.Steam;
 using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities.IO;
 
 using SkyveShared;
 
@@ -91,7 +90,7 @@ public static class SteamUtil
 
 		Download(packages.Select(x => x.Id));
 	}
-	
+
 	public static void Download(IEnumerable<ulong> ids)
 	{
 		try

@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using SkyveApp.Domain.Enums;
+﻿using SkyveApp.Domain.Enums;
+
+using System.Collections.Generic;
 
 namespace SkyveApp.Domain;
 

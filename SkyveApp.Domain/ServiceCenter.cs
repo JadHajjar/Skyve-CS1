@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using SkyveApp.Domain.Systems;
-
 using System;
 
 namespace SkyveApp.Domain;
@@ -14,7 +12,9 @@ public static class ServiceCenter
 	public static T Get<T>()
 	{
 		if (Provider == null)
+		{
 			return default;
+		}
 
 		return Provider.GetService<T>();
 	}
@@ -22,7 +22,9 @@ public static class ServiceCenter
 	public static T2 Get<T, T2>() where T2 : T
 	{
 		if (Provider == null)
+		{
 			return default;
+		}
 
 		return (T2)Provider.GetService<T>();
 	}

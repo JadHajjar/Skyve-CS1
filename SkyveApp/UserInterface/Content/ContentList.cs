@@ -34,20 +34,23 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 	private readonly IPackageUtil _packageUtil;
 	private readonly IDownloadService _downloadService;
 
-	private Func<IEnumerable<T>> GetItems;
-	private Action<IEnumerable<T>, bool> SetIncluded;
-	private Action<IEnumerable<T>, bool> SetEnabled;
-	private Func<LocaleHelper.Translation> GetItemText;
-	private Func<string> GetCountText;
+	private readonly Func<IEnumerable<T>> GetItems;
+	private readonly Action<IEnumerable<T>, bool> SetIncluded;
+	private readonly Action<IEnumerable<T>, bool> SetEnabled;
+	private readonly Func<LocaleHelper.Translation> GetItemText;
+	private readonly Func<string> GetCountText;
 
 
 	public SkyvePage Page { get; }
 	public int ItemCount => ListControl.ItemCount;
 
-	public bool IsGenericPage { get=> ListControl.IsGenericPage; set => ListControl.IsGenericPage=value; }
+	public bool IsGenericPage { get => ListControl.IsGenericPage; set => ListControl.IsGenericPage = value; }
 	public IEnumerable<T> Items => ListControl.Items;
 
-	public void Remove(T item)=>ListControl.Remove(item);
+	public void Remove(T item)
+	{
+		ListControl.Remove(item);
+	}
 
 	public ContentList(SkyvePage page, bool loaded, Func<IEnumerable<T>> getItems, Action<IEnumerable<T>, bool> setIncluded, Action<IEnumerable<T>, bool> setEnabled, Func<LocaleHelper.Translation> getItemText, Func<string> getCountText)
 	{
@@ -332,7 +335,10 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 		}
 	}
 
-	private void CentralManager_ContentLoaded() => RefreshItems();
+	private void CentralManager_ContentLoaded()
+	{
+		RefreshItems();
+	}
 
 	public void RefreshItems()
 	{

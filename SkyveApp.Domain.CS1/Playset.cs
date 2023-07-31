@@ -129,9 +129,13 @@ public class Playset : ICustomPlayset
 		set
 		{
 			if (value is null)
+			{
 				BannerBytes = null;
+			}
 			else
+			{
 				BannerBytes = (byte[])new ImageConverter().ConvertTo(value, typeof(byte[]));
+			}
 		}
 	}
 

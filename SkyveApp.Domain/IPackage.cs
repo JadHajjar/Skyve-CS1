@@ -8,10 +8,10 @@ public interface IPackage : IPackageIdentity
 	bool IsMod { get; }
 	bool IsLocal { get; }
 	bool IsBuiltIn { get; }
-	[CloneIgnore] 
+	[CloneIgnore]
 	ILocalPackageWithContents? LocalParentPackage { get; }
-	[CloneIgnore] 
+	[CloneIgnore]
 	ILocalPackage? LocalPackage { get; }
-	[CloneIgnore] 
+	[CloneIgnore]
 	IEnumerable<IPackageRequirement> Requirements { get; }
 }

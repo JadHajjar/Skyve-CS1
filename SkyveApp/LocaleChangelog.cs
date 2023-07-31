@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SkyveApp;
+﻿namespace SkyveApp;
 internal class LocaleChangelog : LocaleHelper
 {
 	private static readonly LocaleChangelog _instance = new LocaleChangelog();

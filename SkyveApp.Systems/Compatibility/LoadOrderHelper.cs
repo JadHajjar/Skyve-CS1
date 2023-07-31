@@ -1,8 +1,8 @@
 ﻿using Extensions;
 
 using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
 using SkyveApp.Domain.Enums;
+using SkyveApp.Domain.Systems;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -88,7 +88,9 @@ internal class LoadOrderHelper : ILoadOrderHelper
 	private void Increment(List<ModInfo> modEntityMap, IPackageIdentity identity, IPackageIdentity original, int nesting)
 	{
 		if (nesting++ > 100)
+		{
 			return;
+		}
 
 		foreach (var entity in GetEntity(identity.Id, modEntityMap, original))
 		{

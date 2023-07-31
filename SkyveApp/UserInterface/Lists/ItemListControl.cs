@@ -1,6 +1,4 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Systems.Compatibility.Domain.Api;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Forms;
 using SkyveApp.UserInterface.Panels;
 
@@ -59,7 +57,9 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			CompactList = _settings.UserSettings.PageSettings[page].Compact;
 		}
 		else
+		{
 			CompactList = false;
+		}
 
 		GridItemSize = new Size(390, 140);
 	}
@@ -147,7 +147,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 
 		OnViewChanged();
 
-		StartHeight = _compactList ? (int)(24*UI.FontScale) : 0;
+		StartHeight = _compactList ? (int)(24 * UI.FontScale) : 0;
 	}
 
 	protected override IEnumerable<DrawableItem<T, Rectangles>> OrderItems(IEnumerable<DrawableItem<T, Rectangles>> items)
@@ -304,8 +304,8 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			}
 			else
 			{
-					Clipboard.SetText(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
-				
+				Clipboard.SetText(Path.GetFileName(item.Item.LocalPackage?.Folder ?? string.Empty));
+
 			}
 
 			return;
@@ -315,11 +315,11 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 		{
 			if (filter)
 			{
-					AddToSearch?.Invoke(item.Item.Id.ToString());
+				AddToSearch?.Invoke(item.Item.Id.ToString());
 			}
 			else
 			{
-					Clipboard.SetText(item.Item.Id.ToString());
+				Clipboard.SetText(item.Item.Id.ToString());
 			}
 
 			return;
@@ -347,9 +347,9 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			return;
 		}
 
-		if (rects.DownloadStatusRect.Contains(e.Location)&&filter)
-			{
-				DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item, out _));
+		if (rects.DownloadStatusRect.Contains(e.Location) && filter)
+		{
+			DownloadStatusSelected?.Invoke(_packageUtil.GetStatus(item.Item, out _));
 
 			return;
 		}

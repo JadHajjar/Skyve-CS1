@@ -2,8 +2,6 @@
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
@@ -53,7 +51,7 @@ internal partial class ItemListControl<T>
 
 		base.OnPaintItemList(e);
 
-		e.Graphics.SetClip(new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y-Padding.Top+1, e.ClipRectangle.Width, e.ClipRectangle.Height+Padding.Vertical-2));
+		e.Graphics.SetClip(new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y - Padding.Top + 1, e.ClipRectangle.Width, e.ClipRectangle.Height + Padding.Vertical - 2));
 
 		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
@@ -71,7 +69,7 @@ internal partial class ItemListControl<T>
 
 		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
 
-		DrawTags(e, _columnSizes[Columns.Tags].X+ _columnSizes[Columns.Tags].Width);
+		DrawTags(e, _columnSizes[Columns.Tags].X + _columnSizes[Columns.Tags].Width);
 
 		e.Graphics.ResetClip();
 
@@ -176,10 +174,10 @@ internal partial class ItemListControl<T>
 	private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<T, ItemListControl<T>.Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 	{
 		var height = CompactList ? ((int)(24 * UI.FontScale) - 4) : (Math.Max(e.Rects.SteamRect.Y, e.Rects.FolderRect.Y) - e.ClipRectangle.Top - Padding.Vertical);
-	
+
 		if (notificationType > NotificationType.Info)
 		{
-			var point = CompactList 
+			var point = CompactList
 				? new Point(_columnSizes[Columns.Status].X, e.ClipRectangle.Y + ((e.ClipRectangle.Height - height) / 2))
 				: new Point(e.ClipRectangle.Right - Padding.Horizontal, e.ClipRectangle.Top + Padding.Top);
 
@@ -213,7 +211,7 @@ internal partial class ItemListControl<T>
 				CompactList);
 		}
 
-		if (CompactList && Math.Max(e.Rects.CompatibilityRect.Right,e.Rects.DownloadStatusRect.Right) >( _columnSizes[Columns.Status].X+ _columnSizes[Columns.Status].Width))
+		if (CompactList && Math.Max(e.Rects.CompatibilityRect.Right, e.Rects.DownloadStatusRect.Right) > (_columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width))
 		{
 			DrawSeam(e, _columnSizes[Columns.Status].X + _columnSizes[Columns.Status].Width);
 		}
@@ -431,7 +429,7 @@ internal partial class ItemListControl<T>
 
 		if (CompactList)
 		{
-			rects.TextRect = new Rectangle(_columnSizes[Columns.PackageName].X,rectangle.Y, _columnSizes[Columns.PackageName].Width,rectangle.Height).Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + Padding.Horizontal,0,0,0);
+			rects.TextRect = new Rectangle(_columnSizes[Columns.PackageName].X, rectangle.Y, _columnSizes[Columns.PackageName].Width, rectangle.Height).Pad(Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + Padding.Horizontal, 0, 0, 0);
 		}
 		else
 		{

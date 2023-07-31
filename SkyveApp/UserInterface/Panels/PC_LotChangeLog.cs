@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_LotChangeLog : PC_Changelog

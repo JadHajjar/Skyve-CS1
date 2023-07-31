@@ -4,9 +4,9 @@ public enum SkyvePage
 {
 	None,
 	Profiles,
-    Packages,
-    Mods,
-    Assets,
+	Packages,
+	Mods,
+	Assets,
 	SinglePackage,
 	User,
 	Generic

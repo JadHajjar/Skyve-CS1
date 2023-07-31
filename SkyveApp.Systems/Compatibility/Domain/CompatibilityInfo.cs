@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -13,8 +12,8 @@ using System.Linq;
 namespace SkyveApp.Systems.Compatibility.Domain;
 public class CompatibilityInfo : ICompatibilityInfo
 {
-	private IPackage? package;
-	private ILocalPackage? localPackage;
+	private readonly IPackage? package;
+	private readonly ILocalPackage? localPackage;
 	private DtoLocalPackage? dtoPackage;
 
 	[JsonIgnore] public IPackage? Package => dtoPackage ?? localPackage ?? package;
@@ -28,8 +27,8 @@ public class CompatibilityInfo : ICompatibilityInfo
 	IEnumerable<ICompatibilityItem> ICompatibilityInfo.ReportItems => ReportItems.Cast<ICompatibilityItem>();
 
 	[Obsolete("Reserved for DTO", true)]
-    public CompatibilityInfo()
-    {
+	public CompatibilityInfo()
+	{
 		ReportItems = new();
 	}
 
@@ -66,7 +65,7 @@ public class CompatibilityInfo : ICompatibilityInfo
 	}
 
 	#region DtoLocalPackage
-	#nullable disable
+#nullable disable
 
 	public class DtoLocalPackage : ILocalPackage
 	{
@@ -85,6 +84,6 @@ public class CompatibilityInfo : ICompatibilityInfo
 		public string Url { get; set; }
 	}
 
-	#nullable enable
+#nullable enable
 	#endregion
 }

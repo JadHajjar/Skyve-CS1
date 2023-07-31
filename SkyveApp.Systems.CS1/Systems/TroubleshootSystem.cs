@@ -83,7 +83,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 					continue;
 				}
 
-				if (item.GetPackageInfo()?.Statuses.Any(x => x.Type is Domain.Enums.StatusType.StandardMod) == true)
+				if (item.GetPackageInfo()?.Statuses?.Any(x => x.Type is Domain.Enums.StatusType.StandardMod) == true)
 				{
 					continue;
 				}

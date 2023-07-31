@@ -5,7 +5,7 @@ using System;
 namespace SkyveApp.Domain;
 public interface ILocalPackage : IPackage, ILocalPackageIdentity
 {
-	[CloneIgnore] 
+	[CloneIgnore]
 	new ILocalPackageWithContents LocalParentPackage { get; }
 	long LocalSize { get; }
 	DateTime LocalTime { get; }

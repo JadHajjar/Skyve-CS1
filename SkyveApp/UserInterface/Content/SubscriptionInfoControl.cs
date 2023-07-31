@@ -66,7 +66,9 @@ internal class SubscriptionInfoControl : SlickControl
 	protected override void OnPaint(PaintEventArgs e)
 	{
 		if (!Live)
+		{
 			return;
+		}
 
 		e.Graphics.SetUp(BackColor);
 

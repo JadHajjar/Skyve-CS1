@@ -1,5 +1,4 @@
-﻿using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 
 using System.Drawing;

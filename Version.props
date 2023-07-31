@@ -1,6 +1,14 @@
 <Project>
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+		<DefineConstants>$(DefineConstants);Stable</DefineConstants>
+		<AssemblyVersion>3.2.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' != 'Stable'">
+		<AssemblyVersion>3.2.4</AssemblyVersion>
+	</PropertyGroup>
+
 	<PropertyGroup>
-		<AssemblyVersion>3.2.3</AssemblyVersion>
 		<FileVersion>3.0</FileVersion>
 		<Company>T. D. W.</Company>
 		<Copyright>@2023 MIT license</Copyright>
