@@ -1,5 +1,60 @@
 [
   {
+    "Stable": true,
+    "Version": "3.2.0",
+    "Date": "2023-08-02",
+    "Tagline": "A full rework! And much more...",
+    "ChangeGroups": [
+      {
+        "Name": "Core Systems Rework",
+        "Changes": [
+          "The core systems of Skyve have been changed, organised, and optimised.",
+          "Excluded mods no longer use the '.excluded' file, they instead use a new ModConfig file.",
+          "The Load Order of mods has been re-integrated, and is completely automated based on mods' requirements as well as other Compatibility-Report factors.",
+          "'Profiles' are now, appropriately, called 'Playsets'."
+        ]
+      },
+      {
+        "Name": "Content Lists Changes",
+        "Changes": [
+          "Added grid-view & compact-view options for all content pages; toggle between list, compact & grid view using the new icons on the top right of the list.",
+          "You can now select multiple items in the content lists using the Ctrl or Shift keys.",
+          "Click-to-filter now uses the Alt key instead of the Ctrl key.",
+          "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.",
+          "Sorting & Grid-view settings are now saved on a per-page basis.",
+          "Added a 'Load Order' sorting option."
+        ]
+      },
+      {
+        "Name": "Troubleshoot System",
+        "Changes": [
+          "Added a troubleshooting system to the Utilities & Help tabs; use it to narrow down what mod or asset is causing your issues.",
+          "The troubleshooting system will provide you with a guided, step by step, way of finding what mod or asset is at fault.",
+          "When starting the procedure, Skyve will save your current settings and then start excluding or including packages automatically until you can find the cause of your issues.",
+          "Once started, you can safely close Skyve and continue at a later date. Skyve will remember all your settings and what stage you are currently on."
+        ]
+      },
+      {
+        "Name": "Other Changes",
+        "Changes": [
+          "Mod & Asset creators can now edit their packages' Compatibility Data; just right-click the package and select 'Edit Compatibility'.",
+          "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
+          "Your current playset's name is now displayed in the main menu in-game.\r\n*This can be disabled in the in-game settings.",
+          "Copy all IDs action now includes packages' names and local packages as well.",
+          "The 'First time setup incomplete' screen now has an ignore button to manually set up your folder settings instead.",
+          "'Show Folder Settings' now automatically be turned on if one of the folder settings is incorrect.",
+          "Added a new 'Midnight' theme.",
+          "Added an 'Open File' option to the right-click menu when selecting a file.",
+          "Updated the color design of the app's logo on the top-left.",
+          "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
+          "Fixed authors and tags filter not refreshing if you enter the page before they've loaded.",
+          "Fixed the incorrect names of packages while viewing a playset's contents.",
+          "Fixed playsets disappearing on macOS & Linux."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "2.2.0",
     "Date": "2023-04-10",
     "Tagline": "Welcome to the change-log era",
@@ -624,55 +679,14 @@
     ]
   },
   {
-    "Stable": true,
-    "Version": "3.2.0",
-    "Date": "2023-08-02",
-    "Tagline": "A full rework! And much more...",
+    "Beta": true,
+    "Version": "3.2.4",
+    "Date": "2023-07-31",
     "ChangeGroups": [
       {
-        "Name": "Core Systems Rework",
+        "Name": "Changes",
         "Changes": [
-          "The core systems of Skyve have been changed, organised, and optimised.",
-          "Excluded mods no longer use the '.excluded' file, they instead use a new ModConfig file.",
-          "The Load Order of mods has been re-integrated, and is completely automated based on mods' requirements as well as other Compatibility-Report factors.",
-          "'Profiles' are now, appropriately, called 'Playsets'."
-        ]
-      },
-      {
-        "Name": "Content Lists Changes",
-        "Changes": [
-          "Added grid-view & compact-view options for all content pages; toggle between list, compact & grid view using the new icons on the top right of the list.",
-          "You can now select multiple items in the content lists using the Ctrl or Shift keys.",
-          "Click-to-filter now uses the Alt key instead of the Ctrl key.",
-          "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.",
-          "Sorting & Grid-view settings are now saved on a per-page basis.",
-          "Added a 'Load Order' sorting option."
-        ]
-      },
-      {
-        "Name": "Troubleshoot System",
-        "Changes": [
-          "Added a troubleshooting system to the Utilities & Help tabs; use it to narrow down what mod or asset is causing your issues.",
-          "The troubleshooting system will provide you with a guided, step by step, way of finding what mod or asset is at fault.",
-          "When starting the procedure, Skyve will save your current settings and then start excluding or including packages automatically until you can find the cause of your issues.",
-          "Once started, you can safely close Skyve and continue at a later date. Skyve will remember all your settings and what stage you are currently on."
-        ]
-      },
-      {
-        "Name": "Other Changes",
-        "Changes": [
-          "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
-          "Your current playset's name is now displayed in the main menu in-game.\r\n*This can be disabled in the in-game settings.",
-          "Copy all IDs action now includes packages' names and local packages as well.",
-          "The 'First time setup incomplete' screen now has an ignore button to manually set up your folder settings instead.",
-          "'Show Folder Settings' now automatically be turned on if one of the folder settings is incorrect.",
-          "Added a new 'Midnight' theme.",
-          "Added an 'Open File' option to the right-click menu when selecting a file.",
-          "Updated the color design of the app's logo on the top-left.",
-          "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
-          "Fixed authors and tags filter not refreshing if you enter the page before they've loaded.",
-          "Fixed the incorrect names of packages while viewing a playset's contents.",
-          "Fixed playsets disappearing on macOS & Linux."
+          "Stable release of the v3.2 update."
         ]
       }
     ]

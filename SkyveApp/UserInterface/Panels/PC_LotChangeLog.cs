@@ -22,9 +22,9 @@ internal class PC_LotChangeLog : PC_Changelog
 #endif
 		if (System.Diagnostics.Debugger.IsAttached)
 		{
-			var current = changeLogs.Last();
+			var current = changeLogs.First();
 
-			Clipboard.SetText($"# :skyve: Skyve v{current.VersionString}\r\n"
+            System.Windows.Forms.Clipboard.SetText($"# :skyve: Skyve v{current.VersionString}\r\n"
 				+ (string.IsNullOrEmpty(current.Tagline) ? string.Empty : $"### *{current.Tagline}*\r\n")
 				+ current.ChangeGroups.ListStrings(x => $"## {x.Name}\r\n{x.Changes.ListStrings(y => $"* {y}", "\r\n")}", "\r\n\r\n"));
 		}
@@ -43,7 +43,7 @@ internal class PC_LotChangeLog : PC_Changelog
 
 		var json = Newtonsoft.Json.JsonConvert.SerializeObject(texts.WhereNotEmpty().Distinct().OrderBy(x => x.Length).ToDictionary(x => x), Newtonsoft.Json.Formatting.Indented);
 
-		File.WriteAllText("../../../Properties/Changelog.json", json);
+		System.IO.File.WriteAllText("../../../Properties/Changelog.json", json);
 	}
 #endif
 }
