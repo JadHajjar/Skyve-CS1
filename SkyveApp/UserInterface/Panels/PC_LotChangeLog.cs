@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -6,31 +7,44 @@ internal class PC_LotChangeLog : PC_Changelog
 {
 	public PC_LotChangeLog() : base(
 		Assembly.GetExecutingAssembly(),
-		GetChangelogFile(),
+		$"{nameof(SkyveApp)}.Changelog.json",
 		Assembly.GetExecutingAssembly().GetName().Version)
 	{
+		LocaleChangelog.Load();
 	}
 
-	private static string GetChangelogFile()
+#if !DEBUG
+	protected override void PrepareChangelog(List<VersionChangeLog> changeLogs)
 	{
-		var assembly = Assembly.GetExecutingAssembly();
-		var name = $"{nameof(SkyveApp)}.Properties.Changelog.{LocaleHelper.CurrentCulture.IetfLanguageTag}.json";
-		using var resource = assembly.GetManifestResourceStream(name);
-
-		if (resource is null)
+#if Stable
+		changeLogs.RemoveAll(x => x.Beta);
+#else
+		changeLogs.RemoveAll(x => x.Stable);
+#endif
+		if (System.Diagnostics.Debugger.IsAttached)
 		{
-			return $"{nameof(SkyveApp)}.Properties.Changelog.json";
+			var current = changeLogs.Last();
+
+			Clipboard.SetText($"# :skyve: Skyve v{current.VersionString}\r\n"
+				+ (string.IsNullOrEmpty(current.Tagline) ? string.Empty : $"### *{current.Tagline}*\r\n")
+				+ current.ChangeGroups.ListStrings(x => $"## {x.Name}\r\n{x.Changes.ListStrings(y => $"* {y}", "\r\n")}", "\r\n\r\n"));
+		}
+	}
+#else
+	protected override void PrepareChangelog(List<VersionChangeLog> changeLogs)
+	{
+		var texts = new List<string>();
+
+		foreach (var changelog in changeLogs)
+		{
+			texts.Add(changelog.Tagline);
+			texts.AddRange(changelog.ChangeGroups.Select(x => x.Name));
+			texts.AddRange(changelog.ChangeGroups.SelectMany(x => x.Changes));
 		}
 
-		return name;
-	}
+		var json = Newtonsoft.Json.JsonConvert.SerializeObject(texts.WhereNotEmpty().Distinct().OrderBy(x => x.Length).ToDictionary(x => x), Newtonsoft.Json.Formatting.Indented);
 
-#if DEBUG
-	protected override void PrepareCurrentVersion(VersionChangeLog current)
-	{
-		Clipboard.SetText($"# :skyve: Skyve v{current.VersionString}\r\n"
-			+ (string.IsNullOrEmpty(current.Tagline) ? string.Empty : $"### *{current.Tagline}*\r\n")
-			+ current.ChangeGroups.ListStrings(x => $"## {x.Name}\r\n{x.Changes.ListStrings(y => $"* {y}", "\r\n")}", "\r\n\r\n"));
+		File.WriteAllText("../../../Properties/Changelog.json", json);
 	}
 #endif
 }

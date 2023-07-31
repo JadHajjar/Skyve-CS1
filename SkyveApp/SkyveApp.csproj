@@ -121,6 +121,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="Changelog.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="UserInterface\Lists\ItemListControl-Grid.cs" />
 	  <None Include="UserInterface\Lists\ItemListControl-List.cs" />
 	</ItemGroup>
