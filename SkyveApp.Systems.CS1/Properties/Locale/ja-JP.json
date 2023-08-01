@@ -679,5 +679,6 @@
   "SkyveDetectedFaultyPackages": "Skyveは一部のパッケージで正しくDLされていない問題を検出しました。最初にパッケージの問題を修正しますか？",
   "FaultyPackagesTitle": "不良パッケージを検出しました！",
   "CleanupInfoTitle": "クリーンアップとは?",
-  "TroubleshootCauseResult": "以下のパッケージが問題の原因かも知れません。"
+  "TroubleshootCauseResult": "以下のパッケージが問題の原因かも知れません。",
+  "VerifiedAuthor": "Verified Author"
 }
