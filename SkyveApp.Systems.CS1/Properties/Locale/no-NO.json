@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Bruk feilsøkingsmono",
   "LaunchThroughCities": "Start gjennom byer.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Kunne ikke laste inn DLC -er, vennligst koble til Internett",
   "NoDlcsOpenGame": "Ingen DLC -er samsvarer med søket ditt",
   "DlcUpdateNotice": "Hvis DLC -ene ikke vises her, må du åpne spillet minst en gang",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Eiendeler inkludert: {0}, Totalt: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Lagre endringer av mods & eiendeler automatisk på profilen din",
   "LoadEnabled_Tip": "Laster inn ressurser aktivert under lasting et spill. Dette bør bli igjen aktivert med mindre du vet hva du gjør",
   "LoadUsed_Tip": "Last inn ressurser som brukes på kartet, selv om de er deaktivert i spillet. Dette er ikke relatert til ressursinnstillingene i Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Vis og abonnér på pakker i enhver XML-konfigurasjon",
   "XMLTip": "Velg eller dra og slipp en XML config fil for å administrere pakkene oppført inni den.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Totalt antall profiler: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Kontroller at Skyve har tilgang til dokumentmappen, den bruker den til å lagre UI og språkinnstillinger.",
   "FailedToSaveLanguage": "Kunne ikke lagre valgte språk",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Åpne endringslogg",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Du kan bruke filer fra BOB, tre Brush, tema Mix, etc..",
   "ImportFromTextInfo": "Ethvert tekstformat støttes",
   "LsmImportInfo": "Kontroller at du velger \"Rapport\"-filen",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Dine Lagre-spill",
   "App Data": "App data",
   "Custom Maps": "Egendefinerte kart",
@@ -679,5 +679,6 @@
   "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
   "FaultyPackagesTitle": "Faulty Packages Detected",
   "CleanupInfoTitle": "What is a cleanup?",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues"
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues",
+  "VerifiedAuthor": "Verified Author"
 }
