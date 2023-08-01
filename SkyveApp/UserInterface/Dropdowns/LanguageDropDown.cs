@@ -160,12 +160,12 @@ internal class LanguageDropDown : SlickSelectionDropDown<string>
 		["sr-CS"] = new()
 		{
 			[false] = ("Serbian", "Serbia"),
-			[true] = ("Tiếng Việt", "Việt Nam")
+			[true] = ("Srpski", "Србија")
 		},
-		["hu-HU"] = new()
+		["el-GR"] = new()
 		{
-			[false] = ("Hungarian", "Hungary"),
-			[true] = ("Magyar", "Magyarország")
+			[false] = ("Greek", "Greece"),
+			[true] = ("Ελληνικά", "Ελλάδα")
 		},
 	};
 	#endregion
