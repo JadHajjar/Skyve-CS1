@@ -680,5 +680,5 @@
   "FaultyPackagesTitle": "不良パッケージを検出しました！",
   "CleanupInfoTitle": "クリーンアップとは?",
   "TroubleshootCauseResult": "以下のパッケージが問題の原因かも知れません。",
-  "VerifiedAuthor": "Verified Author"
+  "VerifiedAuthor": "確認済み作者"
 }
