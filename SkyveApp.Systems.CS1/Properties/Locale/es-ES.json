@@ -679,5 +679,6 @@
   "SkyveDetectedFaultyPackages": "Skyve ha detectado que algunos de sus paquetes no se han descargado perfectamente, ¿le gustaría intentar arreglarlos primero?",
   "FaultyPackagesTitle": "Paquetes con errores detectados",
   "CleanupInfoTitle": "¿Qué es una limpieza?",
-  "TroubleshootCauseResult": "Los siguientes paquetes pueden ser la causa de sus problemas"
+  "TroubleshootCauseResult": "Los siguientes paquetes pueden ser la causa de sus problemas",
+  "VerifiedAuthor": "Verified Author"
 }
