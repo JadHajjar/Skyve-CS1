@@ -262,15 +262,10 @@ public partial class PC_PackagePage : PanelContent
 	{
 		base.DesignChanged(design);
 
-		BackColor = design.AccentBackColor;
-		P_Content.BackColor = P_Back.BackColor = design.BackColor;
+		BackColor = design.BackColor;
+		//P_Content.BackColor = P_Back.BackColor = design.AccentBackColor;
 		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor = design.InfoColor;
 		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 5, -5));
-	}
-
-	public override Color GetTopBarColor()
-	{
-		return FormDesign.Design.AccentBackColor;
 	}
 
 	internal static SlickStripItem[] GetRightClickMenuItems<T>(T item) where T : IPackage

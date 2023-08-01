@@ -19,7 +19,7 @@ internal partial class ItemListControl<T>
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
-		var statusShown = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
+		var hasStatus = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
 
 		if (e.IsSelected)
 		{
@@ -29,7 +29,7 @@ internal partial class ItemListControl<T>
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
-		else if (statusShown)
+		else if (hasStatus)
 		{
 			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
 		}
@@ -98,9 +98,7 @@ internal partial class ItemListControl<T>
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
-		var statusText = (string?)null;
-		var statusIcon = (DynamicIcon?)null;
-		var statusColor = Color.Empty;
+		var hasStatus = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
 
 		if (e.IsSelected)
 		{
@@ -110,7 +108,7 @@ internal partial class ItemListControl<T>
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
-		else if (GetStatusDescriptors(e.Item, out statusText, out statusIcon, out statusColor))
+		else if (hasStatus)
 		{
 			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
 		}
