@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Não foi possível criar uma coleção de mods, verifique se suas configurações de pasta estão corretamente configuradas no painel de opções",
   "UseDebugMono": "Usar Debug Mono",
   "LaunchThroughCities": "Iniciar através de Cities.exe",
-  "UnityPlaysetrMode": "Use a Coleção de Mods Unity",
+  "UnityProfilerMode": "Usar o perfil Unity",
   "NoDlcsNoInternet": "Não foi possível carregar as DLCs. Por favor, conecte-se à internet",
   "NoDlcsOpenGame": "Nenhuma DLC corresponde à sua busca",
   "DlcUpdateNotice": "Se as suas DLCs não estão aparecendo aqui, certifique-se de abrir o jogo pelo menos uma vez",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Recursos incluídos: {0}, Total: {1}",
   "NewPlayset_Tip": "Criar ou importar uma nova Coleção de Mods",
   "TempPlayset_Tip": "Trocar para uma Coleção de Mods temporária com suas configurações atuais",
-  "ViewPlaysets_Tip": "Visualize e gerencie seus perfis salvos.",
+  "ViewPlaysets_Tip": "Ver e gerenciar seus perfis salvos",
   "AutoSave_Tip": "Salvar mudanças para os mods e arquivos no seu perfil automaticamente",
   "LoadEnabled_Tip": "Carrega os recursos habilitados durante o carregamento de um jogo. Isso deve ser deixado ativado, a menos que você saiba o que está fazendo",
   "LoadUsed_Tip": "Carregar os recursos usados no seu mapa, mesmo que eles estejam desabilitados no jogo. Isto não está relacionado às configurações de recursos no Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Ver e assinar pacotes em qualquer configuração XML",
   "XMLTip": "Selecione ou arraste e solte um arquivo de configuração XML para gerenciar os pacotes listados dentro dele.",
   "FavoritePlaysetTotal": "Coleções de Mods favoritas: {0}, Total: {1}",
-  "FavoriteTotal": "Perfis totais: {0}",
+  "FavoriteTotal": "Total de Perfis: {0}",
   "PlaysetFilter": "Filtro de Coleção de Mods",
   "CheckDocumentsFolder": "Certifique-se de que o Skyve tenha acesso à sua pasta de documentos, ele a utiliza para armazenar suas configurações de Interface e Idioma.",
   "FailedToSaveLanguage": "Falha ao salvar o idioma selecionado",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Abrir registro de alterações",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Inclua os itens selecionados em todas as suas coleções de mods"
+    "One": "Inclua este item em todas os seus perfis",
+    "Plural": "Inclua os itens selecionados em todos seus perfis"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclua o item selecionado em todas as suas coleções de mods",
-    "Plural": "Exclua os itens selecionados em todas as suas coleções de mods"
+    "One": "Excluir este item em todos os seus perfis",
+    "Plural": "Excluir os itens selecionados em todos os seus perfis"
   },
   "CopyPackageName": {
     "One": "Copiar o nome deste pacote",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Você pode usar arquivos da BOB, Tree Brush, Theme Mix etc..",
   "ImportFromTextInfo": "Qualquer formato de texto é suportado",
   "LsmImportInfo": "Certifique-se de selecionar o arquivo 'Relatório'",
-  "NoPlaysetsFound": "Nenhuma Coleção para Exibir",
-  "NoPlaysetsMatchFilters": "Nenhuma coleção corresponde a sua busca",
+  "NoPlaysetsFound": "Nenhum perfil para exibir",
+  "NoPlaysetsMatchFilters": "Nenhum perfil corresponde a sua busca",
   "Your Save-games": "Seus Salvamentos",
   "App Data": "Pasta 'AppData'",
   "Custom Maps": "Mapas Personalizados",

@@ -130,7 +130,7 @@
   "Status_MusicCanBeCopyrighted": "La musique de ce pack peut être protégée par copyright. Il est préférable de ne pas l'utiliser en streaming.",
   "Status_IncompleteDescription": "La description Workshop de ce mod est trop court. Vous ne devriez pas l'utiliser à moins que vous ne fassiez confiance à son auteur.",
   "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_StandardMod": "Ce paquet sera ignoré lors de l'analyse des mods pour la résolution des problèmes.",
   "OutputText": "Résultats attendus",
   "Stability_AssetNotReviewed": "Cet asset n'a pas encore été révisé.\n\nLes informations relatives à la compatibilité peuvent ne pas être exactes, mais les actifs sont généralement stables",
   "Stability_NotReviewed": "Ce paquet n'a pas encore été révisé.\n\nLes informations relatives à la compatibilité peuvent ne pas être exactes.",

@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "无法新建配置文件，请检查“选项”页面中的文件夹设置是否正确",
   "UseDebugMono": "使用 Debug Mono",
   "LaunchThroughCities": "通过 Cities.exe 启动游戏",
-  "UnityPlaysetrMode": "使用 Unity Playsetr",
+  "UnityProfilerMode": "使用 Unity Profiler",
   "NoDlcsNoInternet": "无法加载 DLC，请联网并检查加速器 / VPN",
   "NoDlcsOpenGame": "没有搜索到相关 DLC",
   "DlcUpdateNotice": "如果您的DLC没有显示在此处，请确保至少打开过一次游戏",
@@ -178,7 +178,7 @@
   },
   "Unfiltered": "未筛选",
   "AnyTags": "任意标签",
-  "AdvancedLaunchOptions": "显示高级启动选项",
+  "AdvancedLaunchOptions": "显示开发者启动选项",
   "MovePackageToLocalFolder": {
     "One": "将插件复制到一个本地文件夹",
     "Plural": "将所有已选的插件复制到一个本地文件夹"

@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Kunde inte skapa en ny speluppsättning, se till att dina mappinställningar är korrekt inställda i panelen alternativ",
   "UseDebugMono": "Använd felsökningsmono",
   "LaunchThroughCities": "Starta via Cities.exe",
-  "UnityPlaysetrMode": "Använd Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Kunde inte ladda DLC: er, ansluta till Internet",
   "NoDlcsOpenGame": "Inga DLC: er matchar din sökning",
   "DlcUpdateNotice": "Om dina DLC: er inte visas här, se till att öppna spelet minst en gång",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Tillgångar inkluderade: {0}, Totalt: {1}",
   "NewPlayset_Tip": "Skapa eller importera en ny speluppsättning",
   "TempPlayset_Tip": "Växla till en tillfällig uppspelning med dina nuvarande inställningar",
-  "ViewPlaysets_Tip": "Visa och hantera dina sparade profiler",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Spara automatiskt ändringar i moddar och tillgångar till din profil",
   "LoadEnabled_Tip": "Laddar aktiverade tillgångar när du laddar ett spel. Detta bör lämnas aktiverat om du inte vet vad du gör",
   "LoadUsed_Tip": "Ladda tillgångar som används i kartan, även om de är inaktiverade i spelet. Detta är inte relaterat till tillgångsinställningarna inuti Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Visa och prenumerera på paket i vilken XML-konfiguration som helst",
   "XMLTip": "Välj eller dra och släpp en XML-konfigurationsfil för att hantera paket som listas inuti den.",
   "FavoritePlaysetTotal": "Speluppsättningar som favorit: {0}, Totalt: {1}",
-  "FavoriteTotal": "Totalt antal profiler: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Speluppsättningsfilter",
   "CheckDocumentsFolder": "Se till att Skyve har tillgång till din dokumentmapp, den använder den för att lagra dina UI & Språkinställningar.",
   "FailedToSaveLanguage": "Det gick inte att spara det valda språket",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Öppna ändringslogg",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Du kan använda filer från BOB, Tree Brush, Theme Mix, etc..",
   "ImportFromTextInfo": "Alla textformat stöds",
   "LsmImportInfo": "Se till att välja 'Rapportera'-fil",
-  "NoPlaysetsFound": "Inga profiler att visa",
-  "NoPlaysetsMatchFilters": "Inga profiler matchar din sökning",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "Dina Save-spel",
   "App Data": "Appens data",
   "Custom Maps": "Anpassade kartor",

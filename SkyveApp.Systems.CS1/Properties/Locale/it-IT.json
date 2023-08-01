@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Usa Mono in modalità debug",
   "LaunchThroughCities": "Lancia tramite Cities.exe",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Impossibile caricare i DLC, connettiti a Internet",
   "NoDlcsOpenGame": "Nessun DLC corrisponde alla tua ricerca",
   "DlcUpdateNotice": "Se i tuoi DLC non vengono visualizzati qui, assicurati di aprire il gioco almeno una volta",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Risorse incluse: {0}, Totale: {1}",
   "NewPlayset_Tip": "Create or import a new playset",
   "TempPlayset_Tip": "Switch to a temporary playset with your current settings",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Salva automaticamente le modifiche alle mod e alle risorse nel tuo profilo",
   "LoadEnabled_Tip": "Carica le risorse abilitate quando si carica un salvataggio. Questa opzione andrebbe lasciata attiva a meno che tu non sappia cosa stai facendo",
   "LoadUsed_Tip": "Carica le risorse utilizzate nella mappa, anche se sono disattivate nel gioco. Questo non è legato alle impostazioni delle risorse in Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Visualizza e sottoscrivi i pacchetti in ogni tipo di configurazione XML",
   "XMLTip": "Seleziona o trascina qui un file di configurazione XML per gestire i pacchetti elencati al suo interno.",
   "FavoritePlaysetTotal": "Playsets favorited: {0}, Total: {1}",
-  "FavoriteTotal": "Profili totali: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "Playset Filter",
   "CheckDocumentsFolder": "Assicurarsi che Skyve abbia accesso alla cartella dei documenti, che utilizza per memorizzare le impostazioni della UI e della lingua.",
   "FailedToSaveLanguage": "Impossibile salvare la lingua selezionata",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Apri Changelog",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Copy this package's name",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Puoi utilizzare i file di BOB, Tree Brush, Theme Mix, ecc..",
   "ImportFromTextInfo": "Qualsiasi formato di testo è supportato",
   "LsmImportInfo": "Assicurati di selezionare il file 'Report'",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "I tuoi salvataggi",
   "App Data": "App Data",
   "Custom Maps": "Mappe Personalizzate",

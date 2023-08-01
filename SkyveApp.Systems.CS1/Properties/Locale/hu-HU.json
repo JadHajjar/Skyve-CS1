@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Nem sikerült új játékkészletet létrehozni. Győződj meg arról, hogy a mappabeállítások megfelelően vannak beállítva a beállítások panelen",
   "UseDebugMono": "Használja a Debug Mono-t",
   "LaunchThroughCities": "Indítsa el a Cities.exe-n keresztül",
-  "UnityPlaysetrMode": "Használja a Unity profilt",
+  "UnityProfilerMode": "Use Unity Profiler",
   "NoDlcsNoInternet": "Nem sikerült betölteni a DLC-ket, kérjük, csatlakozzon az internethez",
   "NoDlcsOpenGame": "Nincs a feltételeknek megfelelő DLC találat",
   "DlcUpdateNotice": "Ha a DLC-k nem jelennek meg itt, mindenképpen nyissa meg a játékot legalább egyszer",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Assetek: {0}, összesen: {1}",
   "NewPlayset_Tip": "Hozzon létre vagy importáljon új profilt",
   "TempPlayset_Tip": "Váltson ideiglenes profilra az aktuális beállításokkal",
-  "ViewPlaysets_Tip": "Megtekintheted és kezelheted mentett profiljaidat",
+  "ViewPlaysets_Tip": "View & manage your saved playsets",
   "AutoSave_Tip": "Automatikusan menteni a változott módokat vagy eszközöket a profilodban",
   "LoadEnabled_Tip": "Betölteni az engedélyezett eszközöket a játék betöltése közben. Ezt engedélyezve kell hagyni, hacsak nem tudja, mit csinál",
   "LoadUsed_Tip": "Töltsd be a térképen használt elemeket, még akkor is, ha a játékban le vannak tiltva. Ez nem kapcsolódik a Skyve-on belüli eszközbeállításokhoz",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Csomagok megtekintése és felíratkozás bármilyen XML konfigurációra",
   "XMLTip": "Jelöljön ki vagy húzzon át egy XML konfigurációs fájlt a benne felsorolt ​​csomagok kezeléséhez.",
   "FavoritePlaysetTotal": "Kedvenc profilok: {0}, Összesen: {1}",
-  "FavoriteTotal": "Összes profil: {0}",
+  "FavoriteTotal": "Total playsets: {0}",
   "PlaysetFilter": "A profil filter",
   "CheckDocumentsFolder": "Győződjön meg arról, hogy a Skyve hozzáfér a dokumentumok mappájához, és azt használja a felhasználói felület és a nyelvi beállítások tárolására.",
   "FailedToSaveLanguage": "Nem sikerült menteni a kiválasztott nyelvet",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "Nyissa meg a Változásnaplót",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Használj ezt az elemet az összes profilodban",
-    "Plural": "Használj a kiválasztott elemeket az összes profilodban"
+    "One": "Include this item in all your playsets",
+    "Plural": "Include the selected items in all your playsets"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Zárd ki ezt az elemet az összes profilodból",
-    "Plural": "Zárja ki a kiválasztott elemeket az összes profilból"
+    "One": "Exclude this item in all your playsets",
+    "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
     "One": "Másolja ki a csomag nevét",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Használhatja a BOB, a Tree Brush, a Theme Mix stb. modokat..",
   "ImportFromTextInfo": "Bármilyen szövegformátum támogatott",
   "LsmImportInfo": "Ügyeljen arra, hogy a „Jelentés” fájlt válassza ki",
-  "NoPlaysetsFound": "Nincs megjeleníthető profil",
-  "NoPlaysetsMatchFilters": "Egyetlen profil sem felel meg a keresésnek",
+  "NoPlaysetsFound": "No playsets to display",
+  "NoPlaysetsMatchFilters": "No playsets match your search",
   "Your Save-games": "A mentési játékaid",
   "App Data": "App adatok",
   "Custom Maps": "Egyéni térképek",

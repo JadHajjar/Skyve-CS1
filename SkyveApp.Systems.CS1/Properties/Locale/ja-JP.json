@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "新しいプレイセットを作成できません！ オプションパネルで、フォルダが正しく設定されているか確認して下さい。",
   "UseDebugMono": "Debug Monoを使用",
   "LaunchThroughCities": "Cities.exeから起動",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "Unityプロファイラを使用",
   "NoDlcsNoInternet": "DLCをロードできません。インターネットに接続して下さい。",
   "NoDlcsOpenGame": "検索と一致するDLCはありません",
   "DlcUpdateNotice": "DLCが一覧に表示されない場合は、少なくとも一度はゲームから開いて下さい。",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "アセットを含める: {0} 個 / 合計: {1} 個",
   "NewPlayset_Tip": "新しいプレイセットを作成するか、もしくはインポートします。",
   "TempPlayset_Tip": "現在の設定を保持して、一時的なプレイセットに切り替えます。",
-  "ViewPlaysets_Tip": "View & manage your saved playsets",
+  "ViewPlaysets_Tip": "保存したプレイセットの確認や管理が出来ます。",
   "AutoSave_Tip": "MODやアセットの変更を使用中のプレイセットに自動で保存されます。",
   "LoadEnabled_Tip": "ゲームのロード時に、有効化したアセットのみをロードします。意味や何をしているか分からない場合は、有効のままにして下さい。",
   "LoadUsed_Tip": "マップ上で使用中のアセットは、ゲーム内で無効化してもロードします。Skyve内のアセットの設定とは連動しません。",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "様々なXMLファイルの設定からパッケージを表示してサブスク",
   "XMLTip": "XMLの設定ファイルを選択・D&Dして、内部にリストされているパッケージを管理します。",
   "FavoritePlaysetTotal": "お気に入りのプレイセット: {0} 個 / 合計: {1} 個",
-  "FavoriteTotal": "Total playsets: {0}",
+  "FavoriteTotal": "プレイセットの合計: {0} 個",
   "PlaysetFilter": "プレイセットのフィルタ",
   "CheckDocumentsFolder": "Skyveがドキュメントフォルダにアクセス可能か確認して下さい。ドキュメントフォルダは、UIと言語の設定を保存するために使用します。",
   "FailedToSaveLanguage": "選択した言語の保存に失敗！",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "更新履歴を開く",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your playsets",
-    "Plural": "Include the selected items in all your playsets"
+    "One": "全てのプレイセットにアイテムを含める",
+    "Plural": "全てのプレイセットに選択したアイテムを含める"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your playsets",
-    "Plural": "Exclude the selected items in all your playsets"
+    "One": "全てのプレイセットからアイテムを除外",
+    "Plural": "全てのプレイセットから選択したアイテムを除外"
   },
   "CopyPackageName": {
     "One": "パッケージ名をコピー",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "BOB・Tree Brush・Theme Mixerなどの設定ファイルが使用可能です。",
   "ImportFromTextInfo": "様々なテキスト形式をサポートしています。",
   "LsmImportInfo": "「アセットレポート」のファイルを選択して下さい。",
-  "NoPlaysetsFound": "No playsets to display",
-  "NoPlaysetsMatchFilters": "No playsets match your search",
+  "NoPlaysetsFound": "使用可能なプレイセットがありません！",
+  "NoPlaysetsMatchFilters": "検索に一致するプレイセットがありません！",
   "Your Save-games": "セーブゲーム",
   "App Data": "App Data",
   "Custom Maps": "カスタムマップ",
