@@ -69,7 +69,7 @@ internal partial class ItemListControl<T>
 
 			e.Graphics.DrawRoundedRectangle(pen, e.ClipRectangle.InvertPad(GridPadding - new Padding((int)pen.Width)), (int)(5 * UI.FontScale));
 		}
-		else if (localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
+		else if (!IsPackagePage && localPackage is not null && !e.HoverState.HasFlag(HoverState.Hovered))
 		{
 			using var brush = new SolidBrush(Color.FromArgb(85, BackColor));
 			e.Graphics.FillRectangle(brush, e.ClipRectangle.InvertPad(GridPadding));
@@ -111,6 +111,7 @@ internal partial class ItemListControl<T>
 	{
 		var startLocation = GridView
 			? new Point(e.ClipRectangle.X, e.Rects.IconRect.Bottom + (GridPadding.Vertical * 2))
+			: IsPackagePage ? new Point(e.Rects.TextRect.X - Padding.Left, e.ClipRectangle.Bottom)
 			: new Point(CompactList ? _columnSizes[Columns.Tags].X : (e.ClipRectangle.X + (int)(375 * UI.UIScale)), e.ClipRectangle.Bottom - (CompactList ? 0 : Padding.Bottom));
 		var tagsRect = new Rectangle(startLocation, default);
 
@@ -123,7 +124,7 @@ internal partial class ItemListControl<T>
 			e.Graphics.SetClip(new Rectangle(tagsRect.X, e.ClipRectangle.Y, maxTagX - tagsRect.X, e.ClipRectangle.Height));
 		}
 
-		if (e.Item.Id > 0)
+		if (!IsPackagePage && e.Item.Id > 0)
 		{
 			e.Rects.SteamIdRect = DrawTag(e, maxTagX, startLocation, ref tagsRect, new TagItem(Domain.CS1.Enums.TagSource.Workshop, e.Item.Id.ToString()), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor));
 
@@ -141,6 +142,14 @@ internal partial class ItemListControl<T>
 			e.Graphics.FillRectangle(backBrush, e.ClipRectangle.Pad(_columnSizes[Columns.Tags].X + _columnSizes[Columns.Tags].Width, 0, 0, 0));
 
 			DrawSeam(e, _columnSizes[Columns.Tags].X + _columnSizes[Columns.Tags].Width);
+		}
+		else if (IsPackagePage)
+		{
+			var seamRectangle = new Rectangle(maxTagX - (int)(40 * UI.UIScale), e.Rects.TextRect.Bottom, (int)(40 * UI.UIScale), e.ClipRectangle.Height);
+
+			using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
+
+			e.Graphics.FillRectangle(seamBrush, seamRectangle);
 		}
 		else
 		{
@@ -176,6 +185,11 @@ internal partial class ItemListControl<T>
 
 		if (tagsRect.X + tagSize.Width + (int)(25 * UI.UIScale) > maxTagX)
 		{
+			if (IsPackagePage)
+			{
+				return tagRect;
+			}
+
 			tagsRect.X = startLocation.X;
 			tagsRect.Y += (GridView ? 1 : -1) * (tagRect.Height + padding.Top);
 		}
@@ -201,7 +215,7 @@ internal partial class ItemListControl<T>
 			rect.X -= rect.Width + padding.Left;
 		}
 
-		if (workshopInfo?.Url is not null)
+		if (!IsPackagePage && workshopInfo?.Url is not null)
 		{
 			using var icon = IconManager.GetIcon("I_Steam", rect.Height * 3 / 4);
 
@@ -212,7 +226,7 @@ internal partial class ItemListControl<T>
 			rect.X -= rect.Width + padding.Left;
 		}
 
-		if (_compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
+		if (!IsPackagePage && _compatibilityManager.GetPackageInfo(e.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			using var icon = IconManager.GetIcon("I_Github", rect.Height * 3 / 4);
 

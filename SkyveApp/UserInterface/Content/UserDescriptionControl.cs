@@ -33,6 +33,41 @@ internal class UserDescriptionControl : SlickImageControl
 		Padding = UI.Scale(new Padding(4), UI.FontScale);
 	}
 
+	protected override void OnMouseMove(MouseEventArgs e)
+	{
+		base.OnMouseMove(e);
+
+		if (rects?.SteamRect.Contains(e.Location) == true)
+		{
+			SlickTip.SetTo(this, Locale.OpenAuthorPage);
+
+			Cursor = Cursors.Hand;
+		}
+		else
+		{
+			if (rects?.TextRect.Contains(e.Location) == true && User is not null && _compatibilityManager.IsUserVerified(User))
+			{
+				SlickTip.SetTo(this, "VerifiedAuthor");
+			}
+			else
+			{
+				SlickTip.SetTo(this, null);
+			}
+
+			Cursor = Cursors.Default;
+		}
+	}
+
+	protected override void OnMouseClick(MouseEventArgs e)
+	{
+		base.OnMouseClick(e);
+
+		if (e.Button == MouseButtons.Left && rects?.SteamRect.Contains(e.Location) == true)
+		{
+			PlatformUtil.OpenUrl(User!.ProfileUrl);
+		}
+	}
+
 	protected override void OnPaint(PaintEventArgs e)
 	{
 		if (UserPage is not null)
@@ -76,9 +111,10 @@ internal class UserDescriptionControl : SlickImageControl
 
 	private void DrawButtons(PaintEventArgs e)
 	{
-		rects!.SteamRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(UI.Scale(new Size(24, 24), UI.FontScale), ContentAlignment.BottomRight);
+		rects!.SteamRect = ClientRectangle.Pad(0, 0, 0, Height / 2).Pad(Padding).Align(UI.Scale(new Size(28, 28), UI.FontScale), ContentAlignment.BottomRight);
 
-		using var icon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height / 2);
+		using var icon = IconManager.GetIcon("I_Steam", rects.SteamRect.Height * 3 / 4);
+
 		SlickButton.DrawButton(e, rects.SteamRect, string.Empty, Font, icon, null, rects.SteamRect.Contains(CursorLocation) ? HoverState & ~HoverState.Focused : HoverState.Normal);
 	}
 

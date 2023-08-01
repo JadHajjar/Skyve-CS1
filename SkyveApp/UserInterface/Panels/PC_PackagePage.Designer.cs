@@ -60,6 +60,8 @@ partial class PC_PackagePage
 			this.PB_Icon = new SkyveApp.UserInterface.Content.PackageIcon();
 			this.P_Back = new System.Windows.Forms.Panel();
 			this.P_Info = new SkyveApp.UserInterface.Content.PackageDescriptionControl();
+			this.L_Requirements = new System.Windows.Forms.Label();
+			this.FLP_Requirements = new SlickControls.SmartFlowPanel();
 			this.P_Content.SuspendLayout();
 			this.TLP_Info.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -105,7 +107,7 @@ partial class PC_PackagePage
 			this.T_Info.LinkedControl = this.TLP_Info;
 			this.T_Info.Location = new System.Drawing.Point(0, 5);
 			this.T_Info.Name = "T_Info";
-			this.T_Info.Selected = false;
+			this.T_Info.Selected = true;
 			this.T_Info.Size = new System.Drawing.Size(195, 25);
 			this.T_Info.TabIndex = 0;
 			this.T_Info.TabStop = false;
@@ -123,7 +125,7 @@ partial class PC_PackagePage
 			this.TLP_Info.Name = "TLP_Info";
 			this.TLP_Info.RowCount = 1;
 			this.TLP_Info.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.TLP_Info.Size = new System.Drawing.Size(783, 278);
+			this.TLP_Info.Size = new System.Drawing.Size(783, 277);
 			this.TLP_Info.TabIndex = 14;
 			// 
 			// P_List
@@ -132,7 +134,7 @@ partial class PC_PackagePage
 			this.P_List.Location = new System.Drawing.Point(0, 0);
 			this.P_List.Margin = new System.Windows.Forms.Padding(0);
 			this.P_List.Name = "P_List";
-			this.P_List.Size = new System.Drawing.Size(469, 278);
+			this.P_List.Size = new System.Drawing.Size(469, 277);
 			this.P_List.TabIndex = 0;
 			// 
 			// panel1
@@ -144,7 +146,7 @@ partial class PC_PackagePage
 			this.panel1.Location = new System.Drawing.Point(469, 0);
 			this.panel1.Margin = new System.Windows.Forms.Padding(0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(314, 278);
+			this.panel1.Size = new System.Drawing.Size(314, 277);
 			this.panel1.TabIndex = 3;
 			// 
 			// slickSpacer1
@@ -152,7 +154,7 @@ partial class PC_PackagePage
 			this.slickSpacer1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.slickSpacer1.Location = new System.Drawing.Point(0, 0);
 			this.slickSpacer1.Name = "slickSpacer1";
-			this.slickSpacer1.Size = new System.Drawing.Size(1, 278);
+			this.slickSpacer1.Size = new System.Drawing.Size(1, 277);
 			this.slickSpacer1.TabIndex = 4;
 			this.slickSpacer1.TabStop = false;
 			this.slickSpacer1.Text = "slickSpacer1";
@@ -161,9 +163,9 @@ partial class PC_PackagePage
 			// 
 			this.slickScroll1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.slickScroll1.LinkedControl = this.TLP_About;
-			this.slickScroll1.Location = new System.Drawing.Point(305, 0);
+			this.slickScroll1.Location = new System.Drawing.Point(304, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(9, 278);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 277);
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 3;
 			this.slickScroll1.TabStop = false;
@@ -183,9 +185,11 @@ partial class PC_PackagePage
 			this.TLP_About.Controls.Add(this.label6, 0, 6);
 			this.TLP_About.Controls.Add(this.FLP_Links, 0, 5);
 			this.TLP_About.Controls.Add(this.FLP_Tags, 0, 7);
+			this.TLP_About.Controls.Add(this.L_Requirements, 0, 8);
+			this.TLP_About.Controls.Add(this.FLP_Requirements, 0, 9);
 			this.TLP_About.Location = new System.Drawing.Point(3, 6);
 			this.TLP_About.Name = "TLP_About";
-			this.TLP_About.RowCount = 8;
+			this.TLP_About.RowCount = 10;
 			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -194,7 +198,9 @@ partial class PC_PackagePage
 			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TLP_About.Size = new System.Drawing.Size(206, 90);
+			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_About.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.TLP_About.Size = new System.Drawing.Size(206, 228);
 			this.TLP_About.TabIndex = 2;
 			// 
 			// label1
@@ -202,59 +208,59 @@ partial class PC_PackagePage
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(3, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(35, 13);
+			this.label1.Size = new System.Drawing.Size(68, 30);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "label1";
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(3, 13);
+			this.label2.Location = new System.Drawing.Point(3, 30);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(35, 13);
+			this.label2.Size = new System.Drawing.Size(68, 30);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "label1";
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(3, 26);
+			this.label3.Location = new System.Drawing.Point(3, 60);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(35, 13);
+			this.label3.Size = new System.Drawing.Size(68, 30);
 			this.label3.TabIndex = 1;
 			this.label3.Text = "label1";
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(3, 39);
+			this.label4.Location = new System.Drawing.Point(3, 90);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(35, 13);
+			this.label4.Size = new System.Drawing.Size(68, 30);
 			this.label4.TabIndex = 1;
 			this.label4.Text = "label1";
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(3, 52);
+			this.label5.Location = new System.Drawing.Point(3, 120);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(35, 13);
+			this.label5.Size = new System.Drawing.Size(68, 30);
 			this.label5.TabIndex = 1;
 			this.label5.Text = "label1";
 			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(3, 71);
+			this.label6.Location = new System.Drawing.Point(3, 156);
 			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(35, 13);
+			this.label6.Size = new System.Drawing.Size(68, 30);
 			this.label6.TabIndex = 1;
 			this.label6.Text = "label1";
 			// 
 			// FLP_Links
 			// 
 			this.FLP_Links.Dock = System.Windows.Forms.DockStyle.Top;
-			this.FLP_Links.Location = new System.Drawing.Point(3, 68);
+			this.FLP_Links.Location = new System.Drawing.Point(3, 153);
 			this.FLP_Links.Name = "FLP_Links";
 			this.FLP_Links.Size = new System.Drawing.Size(200, 0);
 			this.FLP_Links.TabIndex = 2;
@@ -262,7 +268,7 @@ partial class PC_PackagePage
 			// FLP_Tags
 			// 
 			this.FLP_Tags.Dock = System.Windows.Forms.DockStyle.Top;
-			this.FLP_Tags.Location = new System.Drawing.Point(3, 87);
+			this.FLP_Tags.Location = new System.Drawing.Point(3, 189);
 			this.FLP_Tags.Name = "FLP_Tags";
 			this.FLP_Tags.Size = new System.Drawing.Size(200, 0);
 			this.FLP_Tags.TabIndex = 2;
@@ -309,7 +315,7 @@ partial class PC_PackagePage
 			this.T_Profiles.LinkedControl = this.TLP_Profiles;
 			this.T_Profiles.Location = new System.Drawing.Point(585, 5);
 			this.T_Profiles.Name = "T_Profiles";
-			this.T_Profiles.Selected = true;
+			this.T_Profiles.Selected = false;
 			this.T_Profiles.Size = new System.Drawing.Size(195, 25);
 			this.T_Profiles.TabIndex = 0;
 			this.T_Profiles.TabStop = false;
@@ -353,6 +359,7 @@ partial class PC_PackagePage
 			// PB_Icon
 			// 
 			this.PB_Icon.Dock = System.Windows.Forms.DockStyle.Left;
+			this.PB_Icon.HalfColor = false;
 			this.PB_Icon.Location = new System.Drawing.Point(32, 0);
 			this.PB_Icon.Margin = new System.Windows.Forms.Padding(0);
 			this.PB_Icon.Name = "PB_Icon";
@@ -379,6 +386,23 @@ partial class PC_PackagePage
 			this.TLP_Top.SetRowSpan(this.P_Info, 2);
 			this.P_Info.Size = new System.Drawing.Size(651, 100);
 			this.P_Info.TabIndex = 3;
+			// 
+			// L_Requirements
+			// 
+			this.L_Requirements.AutoSize = true;
+			this.L_Requirements.Location = new System.Drawing.Point(3, 192);
+			this.L_Requirements.Name = "L_Requirements";
+			this.L_Requirements.Size = new System.Drawing.Size(68, 30);
+			this.L_Requirements.TabIndex = 1;
+			this.L_Requirements.Text = "label1";
+			// 
+			// FLP_Requirements
+			// 
+			this.FLP_Requirements.Dock = System.Windows.Forms.DockStyle.Top;
+			this.FLP_Requirements.Location = new System.Drawing.Point(3, 225);
+			this.FLP_Requirements.Name = "FLP_Requirements";
+			this.FLP_Requirements.Size = new System.Drawing.Size(200, 0);
+			this.FLP_Requirements.TabIndex = 3;
 			// 
 			// PC_PackagePage
 			// 
@@ -429,4 +453,6 @@ partial class PC_PackagePage
 	private SlickControls.SmartFlowPanel FLP_Tags;
 	private SlickControls.SlickSpacer slickSpacer1;
 	private SlickControls.SlickTabControl.Tab T_References;
+	private System.Windows.Forms.Label L_Requirements;
+	private SmartFlowPanel FLP_Requirements;
 }

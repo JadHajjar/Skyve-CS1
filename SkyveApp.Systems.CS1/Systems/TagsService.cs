@@ -193,7 +193,7 @@ internal class TagsService : ITagsService
 	{
 		var returned = new List<string>();
 
-		if (package.GetWorkshopInfo()?.Tags is string[] workshopTags)
+		if (!ignoreParent && package.GetWorkshopInfo()?.Tags is string[] workshopTags)
 		{
 			foreach (var item in workshopTags)
 			{
@@ -218,8 +218,11 @@ internal class TagsService : ITagsService
 					}
 				}
 			}
+		}
 
-			if (_customTagsDictionary.TryGetValue(asset.FilePath, out var customTags))
+		if (package.LocalPackage is ILocalPackage localPackage)
+		{
+			if (_customTagsDictionary.TryGetValue(localPackage.FilePath, out var customTags))
 			{
 				foreach (var item in customTags)
 				{
@@ -231,9 +234,10 @@ internal class TagsService : ITagsService
 				}
 			}
 		}
-		else if (package.LocalParentPackage is ILocalPackageWithContents lp && _customTagsDictionary.TryGetValue(lp.Folder, out var customTags))
+
+		if (!ignoreParent && package.LocalParentPackage is ILocalPackageWithContents lp && _customTagsDictionary.TryGetValue(lp.Folder, out var customParentTags))
 		{
-			foreach (var item in customTags)
+			foreach (var item in customParentTags)
 			{
 				if (!returned.Contains(item))
 				{

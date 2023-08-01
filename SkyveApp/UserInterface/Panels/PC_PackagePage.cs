@@ -23,6 +23,9 @@ public partial class PC_PackagePage : PanelContent
 
 	public PC_PackagePage(IPackage package)
 	{
+		if (package is not ILocalPackage && package.LocalPackage is ILocalPackage localPackage)
+			package = localPackage;
+
 		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings);
 
 		InitializeComponent();
@@ -97,12 +100,20 @@ public partial class PC_PackagePage : PanelContent
 			tabs.Remove(T_References);
 		}
 
-		//if (!string.IsNullOrWhiteSpace(package.SteamDescription))
-		//{
-		//	var c = new SteamDescriptionViewer(package.SteamDescription!);
-
-		//	T_Info.LinkedControl = c;
-		//}
+		var requirements = package.Requirements.ToList();
+		if (requirements.Count > 0)
+		{
+			foreach (var requirement in requirements)
+			{
+				var control = new MiniPackageControl(requirement.Id) { ReadOnly = true, Large = true };
+				FLP_Requirements.Controls.Add(control);
+				FLP_Requirements.SetFlowBreak(control, true);
+			}
+		}
+		else
+		{
+			L_Requirements.Visible = false;
+		}
 
 		var pc = new OtherProfilePackage(package)
 		{
@@ -245,6 +256,7 @@ public partial class PC_PackagePage : PanelContent
 		label4.Text = cr.Type == PackageType.GenericPackage ? (Package.IsMod ? Locale.Mod : Locale.Asset) : LocaleCR.Get(cr.Type.ToString());
 		label5.Text = LocaleCR.Links;
 		label6.Text = LocaleSlickUI.Tags;
+		L_Requirements.Text = LocaleHelper.GetGlobalText("CRT_RequiredPackages");
 	}
 
 	protected override void UIChanged()
@@ -253,9 +265,10 @@ public partial class PC_PackagePage : PanelContent
 
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
 		TLP_About.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		label1.Margin = label3.Margin = label5.Margin = label6.Margin = UI.Scale(new Padding(3, 3, 0, 0), UI.FontScale);
-		label2.Margin = label4.Margin = FLP_Links.Margin = FLP_Links.Margin = UI.Scale(new Padding(3, 3, 0, 7), UI.FontScale);
-		label1.Font = label3.Font = label5.Font = label6.Font = UI.Font(7.5F, FontStyle.Bold);
+		label1.Margin = label3.Margin = label5.Margin = label6.Margin=L_Requirements.Margin = UI.Scale(new Padding(3, 4, 0, 0), UI.FontScale);
+		label2.Margin = label4.Margin = FLP_Links.Margin = FLP_Tags.Margin = FLP_Requirements.Margin = UI.Scale(new Padding(3, 3, 0, 7), UI.FontScale);
+		label1.Font = label3.Font = label5.Font = label6.Font =L_Requirements.Font= UI.Font(7.5F, FontStyle.Bold);
+		FLP_Requirements.Font = UI.Font(9F);
 	}
 
 	protected override void DesignChanged(FormDesign design)
@@ -263,8 +276,7 @@ public partial class PC_PackagePage : PanelContent
 		base.DesignChanged(design);
 
 		BackColor = design.BackColor;
-		//P_Content.BackColor = P_Back.BackColor = design.AccentBackColor;
-		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor = design.InfoColor;
+		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor =L_Requirements.ForeColor= design.InfoColor.MergeColor(design.ActiveColor);
 		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 5, -5));
 	}
 

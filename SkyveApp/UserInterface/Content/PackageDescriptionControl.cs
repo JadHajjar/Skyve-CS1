@@ -1,8 +1,5 @@
-﻿using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Forms;
-using SkyveApp.UserInterface.Lists;
 using SkyveApp.UserInterface.Panels;
 
 using System.Drawing;
@@ -15,9 +12,9 @@ internal class PackageDescriptionControl : SlickImageControl
 {
 	private DrawableItem<IPackage, Rectangles>? _drawablePackage;
 	private Padding GridPadding;
-	private bool GridView;
-	private bool CompactList;
-	private bool IsPackagePage;
+	private readonly bool GridView;
+	private readonly bool CompactList;
+	private readonly bool IsPackagePage;
 
 	public IPackage? Package { get; private set; }
 	public PC_PackagePage? PackagePage { get; private set; }
@@ -111,6 +108,15 @@ internal class PackageDescriptionControl : SlickImageControl
 		if (rects.GithubRect.Contains(e.Location) && _compatibilityManager.GetPackageInfo(item.Item)?.Links?.FirstOrDefault(x => x.Type == LinkType.Github) is ILink gitLink)
 		{
 			PlatformUtil.OpenUrl(gitLink.Url);
+			return;
+		}
+
+		if (rects.MoreRect.Contains(e.Location))
+		{
+			var items = PC_PackagePage.GetRightClickMenuItems(item.Item);
+
+			this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
+
 			return;
 		}
 
@@ -208,7 +214,13 @@ internal class PackageDescriptionControl : SlickImageControl
 		Cursor = _drawablePackage.Rectangles.IsHovered(this, location) ? Cursors.Hand : Cursors.Default;
 
 		if (_drawablePackage.Rectangles.GetToolTip(this, location, out var text, out var point))
+		{
 			SlickTip.SetTo(this, text, offset: point);
+		}
+		else
+		{
+			SlickTip.SetTo(this, string.Empty);
+		}
 	}
 
 	protected override void OnPaint(PaintEventArgs e)
@@ -239,13 +251,18 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		e.BackColor = BackColor;
 
-		using var backBrush = new SolidBrush(FormDesign.Design.AccentBackColor);
-		e.Graphics.FillRoundedRectangle(backBrush, e.Rects.BotRect.Pad(0, 0, 0, Padding.Horizontal), Padding.Left);
+		using var backBrush = new SolidBrush(BackColor == FormDesign.Design.BackColor ? FormDesign.Design.AccentBackColor : FormDesign.Design.BackColor);
+		e.Graphics.FillRoundedRectangle(backBrush, e.Rects.BotRect.Pad(0, 0, 0, -Padding.Bottom), Padding.Left);
 
-		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
+		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
-		var scoreX = DrawScore(e, workshopInfo) + Padding.Horizontal;
+		var scoreX = DrawScore(e, workshopInfo);
+
+		if (scoreX > 0)
+		{
+			scoreX += Padding.Horizontal;
+		}
 
 		if (workshopInfo?.Author is not null)
 		{
@@ -256,20 +273,9 @@ internal class PackageDescriptionControl : SlickImageControl
 			DrawFolderName(e, localParentPackage!, scoreX);
 		}
 
-		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
+		DrawButtons(e, isPressed, localParentPackage, workshopInfo);
 
 		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
-
-		if (e.Rects.DownloadStatusRect.X > 0)
-		{
-			maxTagX = Math.Min(maxTagX, e.Rects.DownloadStatusRect.X);
-		}
-		else if (e.Rects.CompatibilityRect.X > 0)
-		{
-			maxTagX = Math.Min(maxTagX, e.Rects.CompatibilityRect.X);
-		}
-
-		DrawTags(e, maxTagX);
 	}
 
 	private bool GetStatusDescriptors(IPackage mod, out string text, out DynamicIcon? icon, out Color color)
@@ -302,9 +308,10 @@ internal class PackageDescriptionControl : SlickImageControl
 		color = Color.White;
 		return false;
 	}
-	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<IPackage, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
+
+	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<IPackage, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo)
 	{
-		using var font = UI.Font(12F, FontStyle.Bold);
+		using var font = UI.Font(14.5F, FontStyle.Bold);
 		var mod = e.Item is not IAsset;
 		var tags = new List<(Color Color, string Text)>();
 		var text = mod ? e.Item.CleanName(out tags) : e.Item.ToString();
@@ -331,11 +338,21 @@ internal class PackageDescriptionControl : SlickImageControl
 			tagRect.X += padding.Left + rect.Width;
 		}
 
-		tagRect = new Rectangle(e.Rects.TextRect.X, e.Rects.TextRect.Bottom + padding.Bottom, 0, 0);
+		tagRect = e.Rects.BotRect;
+		tagRect.X += padding.Left;
+
+		if (e.Item.Id > 0)
+		{
+			using var icon = IconManager.GetSmallIcon("I_Steam");
+
+			e.Rects.SteamIdRect = e.Graphics.DrawLabel(e.Item.Id.ToString(), icon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor), tagRect, ContentAlignment.BottomLeft, large: true, mousePosition: CursorLocation);
+
+			tagRect.X += padding.Left + e.Rects.SteamIdRect.Width;
+		}
 
 		if (!string.IsNullOrEmpty(versionText))
 		{
-			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.TopLeft, large: true, mousePosition: localParentPackage?.Mod is not null ? CursorLocation : null);
+			e.Rects.VersionRect = e.Graphics.DrawLabel(versionText, null, isVersion ? FormDesign.Design.YellowColor : FormDesign.Design.YellowColor.MergeColor(FormDesign.Design.AccentBackColor, 40), tagRect, ContentAlignment.BottomLeft, large: true, mousePosition: localParentPackage?.Mod is not null ? CursorLocation : null);
 
 			tagRect.X += padding.Left + e.Rects.VersionRect.Width;
 		}
@@ -343,8 +360,9 @@ internal class PackageDescriptionControl : SlickImageControl
 		if (date.HasValue && !IsPackagePage)
 		{
 			var dateText = _settings.UserSettings.ShowDatesRelatively ? date.Value.ToRelatedString(true, false) : date.Value.ToString("g");
+			using var icon = IconManager.GetSmallIcon("I_UpdateTime");
 
-			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, IconManager.GetSmallIcon("I_UpdateTime"), FormDesign.Design.AccentColor, tagRect, ContentAlignment.TopLeft, large: true, mousePosition: CursorLocation);
+			e.Rects.DateRect = e.Graphics.DrawLabel(dateText, icon, FormDesign.Design.AccentColor, tagRect, ContentAlignment.BottomLeft, large: true, mousePosition: CursorLocation);
 		}
 	}
 
@@ -422,7 +440,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			var padding = GridView ? GridPadding : Padding;
 			var height = (int)(24 * UI.FontScale);
 			var labelH = height - padding.Bottom;
-			var scoreRect = new Rectangle(e.Rects.TextRect.X + (GridView ? 0 : padding.Left), e.Rects.IconRect.Bottom - height + (height / 2) - (labelH / 2) + 1, labelH, labelH);
+			var scoreRect = new Rectangle(e.Rects.BotRect.X + padding.Horizontal, e.Rects.BotRect.Top + padding.Vertical + (height / 2) - (labelH / 2) + 1, labelH, labelH);
 			var small = UI.FontScale < 1.25;
 			var backColor = score > 90 && workshopInfo!.Subscribers >= 50000 ? FormDesign.Modern.ActiveColor : FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.RedColor, score).MergeColor(FormDesign.Design.BackColor, 75);
 			e.Rects.ScoreRect = scoreRect;
@@ -485,15 +503,15 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		var padding = GridView ? GridPadding : Padding;
 		var height = (int)(24 * UI.FontScale);
-		var folderPoint = new Point(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom);
+		var folderPoint = new Point(scoreX == 0 ? (e.Rects.BotRect.X + padding.Horizontal) : (scoreX + (padding.Left * 3)), e.Rects.BotRect.Y + padding.Vertical);
 
-		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.BottomLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
+		e.Rects.FolderNameRect = e.Graphics.DrawLargeLabel(folderPoint, Path.GetFileName(package.Folder), "I_Folder", alignment: ContentAlignment.TopLeft, padding: GridView ? GridPadding : Padding, height: height, cursorLocation: CursorLocation);
 	}
 
 	private void DrawAuthor(ItemPaintEventArgs<IPackage, Rectangles> e, IUser author, int scoreX)
 	{
 		var padding = GridView ? GridPadding : Padding;
-		var authorRect = new Rectangle(e.Rects.TextRect.X + scoreX, e.Rects.IconRect.Bottom, 0, 0);
+		var authorRect = new Rectangle(scoreX + (padding.Left * 3), e.Rects.BotRect.Y + padding.Vertical, 0, 0);
 		var authorImg = author.GetUserAvatar();
 
 		var height = (int)(24 * UI.FontScale);
@@ -502,11 +520,11 @@ internal class PackageDescriptionControl : SlickImageControl
 		{
 			using var authorIcon = Properties.Resources.I_AuthorIcon.Color(FormDesign.Design.IconColor);
 
-			authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorIcon, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
+			authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorIcon, alignment: ContentAlignment.TopLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 		}
 		else
 		{
-			authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorImg, alignment: ContentAlignment.BottomLeft, padding: padding, height: height, cursorLocation: CursorLocation);
+			authorRect = e.Graphics.DrawLargeLabel(authorRect.Location, author.Name, authorImg, alignment: ContentAlignment.TopLeft, padding: padding, height: height, cursorLocation: CursorLocation);
 		}
 
 		if (_compatibilityManager.IsUserVerified(author))
@@ -523,12 +541,23 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		e.Rects.AuthorRect = authorRect;
 	}
+
 	private int DrawButtons(ItemPaintEventArgs<IPackage, Rectangles> e, bool isPressed, ILocalPackageWithContents? parentPackage, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : Padding;
 		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
 		var rect = e.Rects.TopRect.Pad(Padding).Align(size, ContentAlignment.BottomRight);
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
+
+		{
+			using var icon = IconManager.GetIcon("I_More", size.Height * 3 / 4);
+
+			SlickButton.DrawButton(e, rect, string.Empty, Font, icon, null, rect.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
+
+			e.Rects.MoreRect = rect;
+
+			rect.X -= rect.Width + padding.Left;
+		}
 
 		if (parentPackage is not null)
 		{
@@ -568,11 +597,11 @@ internal class PackageDescriptionControl : SlickImageControl
 
 	private void DrawCompatibilityAndStatusList(ItemPaintEventArgs<IPackage, Rectangles> e, NotificationType? notificationType, string? statusText, DynamicIcon? statusIcon, Color statusColor)
 	{
-		var height = ((int)(24 * UI.FontScale));
+		var height = (int)(24 * UI.FontScale);
 
 		if (notificationType > NotificationType.Info)
 		{
-			var point = new Point(e.ClipRectangle.Right - Padding.Horizontal, e.Rects.BotRect.Y + Padding.Top);
+			var point = new Point(e.ClipRectangle.Right - (Padding.Horizontal * 2), e.Rects.BotRect.Y + Padding.Vertical);
 
 			e.Rects.CompatibilityRect = e.Graphics.DrawLargeLabel(
 				point,
@@ -588,7 +617,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		if (statusText is not null && statusIcon is not null)
 		{
-			var point = new Point(e.ClipRectangle.Right - Padding.Horizontal, e.Rects.BotRect.Bottom - Padding.Vertical  - Padding.Bottom);
+			var point = new Point(e.ClipRectangle.Right - (Padding.Horizontal * 2), e.Rects.BotRect.Bottom - Padding.Bottom);
 
 			e.Rects.DownloadStatusRect = e.Graphics.DrawLargeLabel(
 				point,
@@ -601,56 +630,6 @@ internal class PackageDescriptionControl : SlickImageControl
 				CursorLocation,
 				CompactList);
 		}
-	}
-
-	private void DrawTags(ItemPaintEventArgs<IPackage, Rectangles> e, int maxTagX)
-	{
-		var startLocation = new Point((e.ClipRectangle.X + (int)(375 * UI.UIScale)), e.ClipRectangle.Bottom - (CompactList ? 0 : Padding.Bottom));
-		var tagsRect = new Rectangle(startLocation, default);
-
-		if (GridView)
-		{
-			e.Graphics.SetClip(new Rectangle(tagsRect.X, tagsRect.Y, maxTagX - tagsRect.X, e.ClipRectangle.Bottom - tagsRect.Y));
-		}
-		else
-		{
-			e.Graphics.SetClip(new Rectangle(tagsRect.X, e.ClipRectangle.Y, maxTagX - tagsRect.X, e.ClipRectangle.Height));
-		}
-
-		if (e.Item.Id > 0)
-		{
-			e.Rects.SteamIdRect = DrawTag(e, maxTagX, startLocation, ref tagsRect, new TagItem(Domain.CS1.Enums.TagSource.Workshop, e.Item.Id.ToString()), FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor));
-
-			tagsRect.X += Padding.Left;
-		}
-
-		foreach (var item in e.Item.GetTags(IsPackagePage))
-		{
-			DrawTag(e, maxTagX, startLocation, ref tagsRect, item);
-		}
-
-			DrawSeam(e, maxTagX);
-	}
-
-	private Rectangle DrawTag(ItemPaintEventArgs<IPackage, Rectangles> e, int maxTagX, Point startLocation, ref Rectangle tagsRect, ITag item, Color? color = null)
-	{
-		using var tagIcon = IconManager.GetSmallIcon(item.Icon);
-
-		var padding = GridView ? GridPadding : Padding;
-		var tagSize = e.Graphics.MeasureLabel(item.Value, tagIcon, large: GridView);
-		var tagRect = e.Graphics.DrawLabel(item.Value, tagIcon, color ?? Color.FromArgb(200, FormDesign.Design.LabelColor.MergeColor(FormDesign.Design.AccentBackColor, 40)), tagsRect, GridView ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft, smaller: CompactList, large: true, mousePosition: CursorLocation);
-
-		e.Rects.TagRects[item] = tagRect;
-
-		tagsRect.X += padding.Left + tagRect.Width;
-
-		if (tagsRect.X + tagSize.Width + (int)(25 * UI.UIScale) > maxTagX)
-		{
-			tagsRect.X = startLocation.X;
-			tagsRect.Y += (GridView ? 1 : -1) * (tagRect.Height + padding.Top);
-		}
-
-		return tagRect;
 	}
 
 	private static void DrawSeam(ItemPaintEventArgs<IPackage, Rectangles> e, int x)
@@ -669,25 +648,24 @@ internal class PackageDescriptionControl : SlickImageControl
 		var rects = new Rectangles(item)
 		{
 			TopRect = rectangle.Pad(0, 0, 0, rectangle.Height * 6 / 10),
-			BotRect = rectangle.Pad(0, rectangle.Height * 4 / 10, 0, 0),
-			IconRect = rectangle.Pad(0,0, rectangle.Width, rectangle.Height * 6 / 10),
+			BotRect = rectangle.Pad(Padding.Left, (rectangle.Height * 4 / 10) + Padding.Top, Padding.Right, Padding.Bottom),
+			IconRect = rectangle.Pad(0, 0, rectangle.Width, rectangle.Height * 6 / 10),
 		};
 
 		var includedSize = 28;
 
 		rects.IncludedRect = rects.TopRect.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 22 : includedSize), UI.FontScale), ContentAlignment.BottomLeft);
-	
+
 		if (_settings.UserSettings.AdvancedIncludeEnable && item.LocalParentPackage?.Mod is not null)
 		{
-		rects.EnabledRect = rects.BotRect.Pad(Padding).Align(UI.Scale(new Size(includedSize, CompactList ? 22 : includedSize), UI.FontScale), ContentAlignment.TopLeft);
+			rects.EnabledRect = rects.IncludedRect;
+			rects.EnabledRect.X += rects.EnabledRect.Width;
 		}
 
-		{
+		rects.TextRect = rects.IncludedRect.AlignToFontSize(UI.Font(14.5F, FontStyle.Bold), ContentAlignment.MiddleLeft);
 
-			rects.TextRect = rects.TopRect.Pad(rects.IncludedRect.Right + Padding.Left, 0, 0, 0).AlignToFontSize(UI.Font(12F, FontStyle.Bold), ContentAlignment.BottomLeft);
-		}
-
-		rects.CenterRect = rects.TextRect.Pad(-Padding.Horizontal, 0, 0, 0);
+		rects.TextRect.X = Math.Max(rects.IncludedRect.Right, rects.EnabledRect.Right) + Padding.Horizontal;
+		rects.TextRect.Width = rectangle.Width;
 
 		return rects;
 	}
@@ -702,7 +680,6 @@ internal class PackageDescriptionControl : SlickImageControl
 		internal Rectangle TextRect;
 		internal Rectangle SteamRect;
 		internal Rectangle SteamIdRect;
-		internal Rectangle CenterRect;
 		internal Rectangle AuthorRect;
 		internal Rectangle VersionRect;
 		internal Rectangle CompatibilityRect;
@@ -713,6 +690,7 @@ internal class PackageDescriptionControl : SlickImageControl
 		internal Rectangle FolderNameRect;
 		internal Rectangle TopRect;
 		internal Rectangle BotRect;
+		internal Rectangle MoreRect;
 
 		public IPackage Item { get; set; }
 
@@ -734,6 +712,7 @@ internal class PackageDescriptionControl : SlickImageControl
 				ScoreRect.Contains(location) ||
 				CompatibilityRect.Contains(location) ||
 				DateRect.Contains(location) ||
+				MoreRect.Contains(location) ||
 				GithubRect.Contains(location) ||
 				(VersionRect.Contains(location) && Item?.LocalParentPackage?.Mod is not null) ||
 				TagRects.Any(x => x.Value.Contains(location)) ||
