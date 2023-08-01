@@ -16,6 +16,7 @@ internal class MiniPackageControl : SlickControl
 	public ulong Id { get; }
 
 	public bool ReadOnly { get; set; }
+	public bool Large { get; set; }
 
 	public MiniPackageControl(ulong steamId)
 	{
@@ -42,7 +43,7 @@ internal class MiniPackageControl : SlickControl
 
 	protected override void UIChanged()
 	{
-		Height = (int)(32 * UI.FontScale);
+		Height = (int)((Large ? 42 : 32) * UI.FontScale);
 
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
 	}
@@ -125,7 +126,7 @@ internal class MiniPackageControl : SlickControl
 		var textRect = ClientRectangle.Pad(imageRect.Right + Padding.Left, Padding.Top, !ReadOnly && HoverState.HasFlag(HoverState.Hovered) ? (imageRect.Right + Padding.Left) : 0, Padding.Bottom).AlignToFontSize(Font, ContentAlignment.MiddleLeft);
 		var text = Package?.CleanName(out tags) ?? Locale.UnknownPackage;
 
-		e.Graphics.DrawString(text, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(text, Font, new SolidBrush(ForeColor), textRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center });
 
 		var tagRect = new Rectangle(textRect.X + (int)e.Graphics.Measure(text, Font).Width, textRect.Y, 0, textRect.Height);
 
@@ -153,7 +154,7 @@ internal class MiniPackageControl : SlickControl
 
 		if (Dock == DockStyle.None)
 		{
-			Width = tagRect.X;
+			Width = tagRect.X + Padding.Right;
 		}
 	}
 }

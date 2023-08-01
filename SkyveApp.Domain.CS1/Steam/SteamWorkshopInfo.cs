@@ -3,6 +3,7 @@
 using Newtonsoft.Json;
 
 using SkyveApp.Domain.Systems;
+using SkyveApp.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 	public string? Url { get; set; }
 	public DateTime Timestamp { get; set; }
 
-	[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => RequiredPackageIds?.Select(x => new SteamPackageRequirement(x, !IsMod)) ?? Enumerable.Empty<IPackageRequirement>();
+	[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => RequiredPackageIds?.Select(x => new SteamPackageRequirement(ServiceCenter.Get<ICompatibilityManager>().GetFinalSuccessor(new GenericPackageIdentity(x)).Id, !IsMod)) ?? Enumerable.Empty<IPackageRequirement>();
 	[JsonIgnore] public IUser? Author => ServiceCenter.Get<IWorkshopService>().GetUser(AuthorId) ?? (AuthorId > 0 ? new SteamUser { SteamId = AuthorId, Name = AuthorId.ToString() } : null);
 
 	public SteamWorkshopInfo(SteamWorkshopItemEntry entry)

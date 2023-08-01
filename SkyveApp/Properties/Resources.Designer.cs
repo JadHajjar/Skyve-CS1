@@ -3283,6 +3283,16 @@ namespace SkyveApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Lang_EL_GR {
+            get {
+                object obj = ResourceManager.GetObject("Lang_EL-GR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Lang_EN_GB {
             get {
                 object obj = ResourceManager.GetObject("Lang_EN-GB", resourceCulture);
@@ -3466,6 +3476,16 @@ namespace SkyveApp.Properties {
         internal static System.Drawing.Bitmap Lang_RU_RU {
             get {
                 object obj = ResourceManager.GetObject("Lang_RU-RU", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lang_SR_CS {
+            get {
+                object obj = ResourceManager.GetObject("Lang_SR-CS", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

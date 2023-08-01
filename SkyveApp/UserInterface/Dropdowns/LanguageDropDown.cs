@@ -157,6 +157,16 @@ internal class LanguageDropDown : SlickSelectionDropDown<string>
 			[false] = ("Hungarian", "Hungary"),
 			[true] = ("Magyar", "Magyarország")
 		},
+		["sr-CS"] = new()
+		{
+			[false] = ("Serbian", "Serbia"),
+			[true] = ("Tiếng Việt", "Việt Nam")
+		},
+		["hu-HU"] = new()
+		{
+			[false] = ("Hungarian", "Hungary"),
+			[true] = ("Magyar", "Magyarország")
+		},
 	};
 	#endregion
 

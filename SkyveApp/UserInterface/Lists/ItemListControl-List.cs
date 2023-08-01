@@ -19,17 +19,17 @@ internal partial class ItemListControl<T>
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
-		var statusShown = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
+		var hasStatus = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
 
 		if (e.IsSelected)
 		{
 			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
 		}
-		else if (notificationType > NotificationType.Info)
+		else if (!IsPackagePage && notificationType > NotificationType.Info)
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
-		else if (statusShown)
+		else if (hasStatus)
 		{
 			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
 		}
@@ -98,19 +98,17 @@ internal partial class ItemListControl<T>
 
 		var compatibilityReport = e.Item.GetCompatibilityInfo();
 		var notificationType = compatibilityReport?.GetNotification();
-		var statusText = (string?)null;
-		var statusIcon = (DynamicIcon?)null;
-		var statusColor = Color.Empty;
+		var hasStatus = GetStatusDescriptors(e.Item, out var statusText, out var statusIcon, out var statusColor);
 
 		if (e.IsSelected)
 		{
 			e.BackColor = FormDesign.Design.GreenColor.MergeColor(FormDesign.Design.BackColor);
 		}
-		else if (notificationType > NotificationType.Info)
+		else if (!IsPackagePage && notificationType > NotificationType.Info)
 		{
 			e.BackColor = notificationType.Value.GetColor().MergeColor(FormDesign.Design.BackColor, 25);
 		}
-		else if (GetStatusDescriptors(e.Item, out statusText, out statusIcon, out statusColor))
+		else if (!IsPackagePage && hasStatus)
 		{
 			e.BackColor = statusColor.MergeColor(FormDesign.Design.BackColor).MergeColor(FormDesign.Design.BackColor, 25);
 		}
@@ -136,20 +134,31 @@ internal partial class ItemListControl<T>
 		DrawTitleAndTagsAndVersionForList(e, localParentPackage, workshopInfo, isPressed);
 		DrawIncludedButton(e, isIncluded, partialIncluded, localParentPackage, out var activeColor);
 
-		var scoreX = DrawScore(e, workshopInfo) + Padding.Horizontal;
+		var scoreX = IsPackagePage ? 0 : DrawScore(e, workshopInfo);
 
-		if (workshopInfo?.Author is not null)
+		if (scoreX > 0)
 		{
-			DrawAuthor(e, workshopInfo.Author, scoreX);
+			scoreX += Padding.Horizontal;
 		}
-		else if (e.Item.IsLocal)
+
+		if (!IsPackagePage)
 		{
-			DrawFolderName(e, localParentPackage!, scoreX);
+			if (workshopInfo?.Author is not null)
+			{
+				DrawAuthor(e, workshopInfo.Author, scoreX);
+			}
+			else if (e.Item.IsLocal)
+			{
+				DrawFolderName(e, localParentPackage!, scoreX);
+			}
 		}
 
 		var maxTagX = DrawButtons(e, isPressed, localParentPackage, workshopInfo);
 
-		DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+		if (!IsPackagePage)
+		{
+			DrawCompatibilityAndStatusList(e, notificationType, statusText, statusIcon, statusColor);
+		}
 
 		if (e.Rects.DownloadStatusRect.X > 0)
 		{
@@ -435,7 +444,7 @@ internal partial class ItemListControl<T>
 		{
 			rects.IconRect.X += rects.IncludedRect.Right + Padding.Horizontal;
 
-			rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, (int)(200 * UI.FontScale), rectangle.Height).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9F, FontStyle.Bold), ContentAlignment.TopLeft);
+			rects.TextRect = rectangle.Pad(rects.IconRect.Right + Padding.Left, 0, IsPackagePage ? 0 : (int)(200 * UI.FontScale), rectangle.Height).AlignToFontSize(UI.Font(CompactList ? 8.25F : 9F, FontStyle.Bold), ContentAlignment.TopLeft);
 		}
 
 		rects.CenterRect = rects.TextRect.Pad(-Padding.Horizontal, 0, 0, 0);
