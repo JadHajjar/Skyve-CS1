@@ -28,7 +28,7 @@
   "SubscribeToPackages": "สมัครสมาชิกแพ็กเกจที่เชื่อมโยง",
   "RequiresConfiguration": "ต้องการการกำหนดค่าเฉพาะ",
   "SelectOne": "เลือกอย่างใดอย่างหนึ่ง",
-  "UnsubscribeThis": "Unsubscribe from this package",
+  "UnsubscribeThis": "ยกเลิกการสมัครสมาชิกจากแพ็กเกจนี้",
   "UnsubscribeOther": "Unsubscribe from linked packages",
   "Switch": "สลับไปใช้แพ็กเกจที่เชื่อมโยงกัน",
   "FlippedSwitch": "สลับมาใช้แพ็กเกจนี้",

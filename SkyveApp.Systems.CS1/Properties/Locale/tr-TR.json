@@ -32,8 +32,8 @@
   "UpToDate": "Güncel",
   "StatusUnknown": "Bilinmeyen Durum",
   "PartiallyDownloaded": "Kısmen indirildi",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "Oto-Kayıt etkinleştirildi",
+  "AutoPlaysetSaveOff": "Oto-Kayıt devre dışı bırakıldı",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "Başlatma Ayarları",
   "IncludesItemsYouDoNotHave": "Sahip olmadığınız eşyaları içerir",
@@ -75,7 +75,7 @@
   "ContinueFromCurrent": "Mevcut ayarlarınızı saklayın",
   "GamePlay": "Şehirler inşa etmek",
   "EditorPlay": "Asset yapmak",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "Profil Kullanımı",
   "SomePackagesWillBeDisabled": "Bazı paketler bu profilin kullanımı değiştirilerek kaldırılacaktır.",
   "AffectedPackagesAre": "Etkilenen paketler:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
@@ -94,11 +94,11 @@
   "OpenLocalFolder": "Bu paketi içeren yerel klasörü açık",
   "ViewOnSteam": "Bu paketi Steam'de görüntüleyin",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
+    "One": "Bu paketi yeniden indir",
     "Plural": "Re-download all selected Packages"
   },
   "DownloadPackage": {
-    "One": "Download this package",
+    "One": "Bu paketi indirin",
     "Plural": "Download all selected Packages"
   },
   "CopySteamId": "Bu Steam Kimliğini Kopyala",
@@ -129,7 +129,7 @@
   "DisableNewModsByDefault": "Varsayılan olarak yeni abone olan modları devre dışı bırakın",
   "DisableNewAssetsByDefault": "Yeni abone olunan varlıkları varsayılan olarak devre dışı bırakın",
   "OverrideGameChanges": "Modların etkin durumuna göre oyun içinde yapılan değişiklikleri geçersiz kılma",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
+  "PlaysetSaveInfo": "Bu ekrandaki değişiklikler otomatik olarak kaydedilir, \"Otomatik Kaydet\" seçeneği ve üstteki kaydet düğmesi seçtiğiniz modları, varlıkları ve DLC'leri etkiler",
   "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
   "ShowFilters": "Filtreleri göster",
   "HideFilters": "Filtreleri gizle",
@@ -144,11 +144,11 @@
   "FilterOutPackagesWithMods": "Paketler sayfasındaki modları gizle",
   "FilterOutPackagesWithOneAsset": "Paketler sayfasından tek varlıklı paketleri gizle",
   "DeletePackage": {
-    "One": "Delete this package",
+    "One": "Bu paketi sil",
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
+    "One": "Bu paketten aboneliğe çıkın",
     "Plural": "Unsubscribe from the selected packages"
   },
   "CopyWorkshopId": {
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Hata Ayıklama Mono'yu kullanın",
   "LaunchThroughCities": "Şehirler.exe aracılığıyla lansman",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "Unity Profiler kullanın",
   "NoDlcsNoInternet": "DLC'leri yükleyemedi, lütfen internete bağlanın",
   "NoDlcsOpenGame": "Aramanızla eşleşen DLC yok",
   "DlcUpdateNotice": "DLC'leriniz burada görünmüyorsa, oyunu en az bir kez açtığınızdan emin olun",
@@ -343,7 +343,7 @@
     "Plural": "Exclude the selected items in all your playsets"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
+    "One": "Bu paketin adını kopyala",
     "Plural": "Copy the selected packages' names"
   },
   "CopyAuthorName": {
@@ -351,7 +351,7 @@
     "Plural": "Copy the selected packages' author names"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
+    "One": "Dosyanın adını kopyala",
     "Plural": "Copy the selected packages' folder names"
   },
   "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
@@ -369,7 +369,7 @@
   "EditPlaysetName": "Edit this playset's name",
   "SavePlaysetChanges": "Save the current package settings to this playset's file",
   "Sorting_Color": "Profile Color",
-  "CreateShortcutPlayset": "Create a shortcut for it on your desktop",
+  "CreateShortcutPlayset": "Masaüstü'nde bunun için bir kısayol oluştur",
   "AskToLaunchGameForShortcut": "Would you like for the shortcut to also launch the game with your profile?",
   "TextImportMissingInfo": "Onlara kolayca abone olmak veya yönetmek için Steam ID'lerini bulunduran bir metin dosyası yükleyin",
   "ImportFromText": "Metinden yükle",

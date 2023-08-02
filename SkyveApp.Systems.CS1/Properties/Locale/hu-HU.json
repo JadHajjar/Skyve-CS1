@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Nem sikerült új játékkészletet létrehozni. Győződj meg arról, hogy a mappabeállítások megfelelően vannak beállítva a beállítások panelen",
   "UseDebugMono": "Használja a Debug Mono-t",
   "LaunchThroughCities": "Indítsa el a Cities.exe-n keresztül",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "Használja a Unity Profilert",
   "NoDlcsNoInternet": "Nem sikerült betölteni a DLC-ket, kérjük, csatlakozzon az internethez",
   "NoDlcsOpenGame": "Nincs a feltételeknek megfelelő DLC találat",
   "DlcUpdateNotice": "Ha a DLC-k nem jelennek meg itt, mindenképpen nyissa meg a játékot legalább egyszer",

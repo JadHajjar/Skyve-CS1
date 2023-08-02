@@ -32,8 +32,8 @@
   "UpToDate": "আপ টু ডেট",
   "StatusUnknown": "অজানা অবস্থা",
   "PartiallyDownloaded": "আংশিক ডাউনলোড",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "অটো-সেভ সক্ষম করা হয়",
+  "AutoPlaysetSaveOff": "অটো-সেভ অক্ষম",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "সেটিংস চালু করুন",
   "IncludesItemsYouDoNotHave": "আপনার নেই এমন আইটেম অন্তর্ভুক্ত",
@@ -75,7 +75,7 @@
   "ContinueFromCurrent": "আপনার বর্তমান সেটিংস রাখুন",
   "GamePlay": "শহর নির্মাণ",
   "EditorPlay": "সম্পদ তৈরি করুন",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "প্রোফাইল ব্যবহার",
   "SomePackagesWillBeDisabled": "এই প্রোফাইলের ব্যবহার পরিবর্তন করে কিছু প্যাকেজ সরানো হবে।",
   "AffectedPackagesAre": "আক্রান্ত প্যাকেজগুলি হ'ল:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
@@ -84,7 +84,7 @@
   "PlaysetExclude": "Exclude its items from your current playset",
   "PlaysetDelete": "Delete this playset",
   "ShouldNotBeSubscribed": "সাবস্ক্রাইব করবেন না",
-  "MissingPackages": "Missing Packages",
+  "MissingPackages": "প্যাকেজ অনুপস্থিত",
   "LoadingScreenMod": "স্ক্রিন মোড লোড হচ্ছে",
   "LoadEnabled": "Load all enabled assets",
   "LoadUsed": "Load used assets",
@@ -94,15 +94,15 @@
   "OpenLocalFolder": "এই প্যাকেজযুক্ত স্থানীয় ফোল্ডারটি খুলুন",
   "ViewOnSteam": "বাষ্পে এই প্যাকেজটি দেখুন",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
+    "One": "এই প্যাকেজটি পুনরায় ডাউনলোড করুন",
     "Plural": "Re-download all selected Packages"
   },
   "DownloadPackage": {
-    "One": "Download this package",
+    "One": "এই প্যাকেজটি ডাউনলোড করুন",
     "Plural": "Download all selected Packages"
   },
   "CopySteamId": "এই বাষ্প আইডি অনুলিপি করুন",
-  "OpenAuthorPage": "Open the author's page",
+  "OpenAuthorPage": "লেখকের পৃষ্ঠা খুলুন",
   "Sorting_Default": "ডিফল্ট শ্রেণীবিভাজন",
   "Sorting_LastEdit": "শেষ সম্পাদনা সময়",
   "Sorting_DateCreated": "তারিখ তৈরী",
@@ -129,7 +129,7 @@
   "DisableNewModsByDefault": "ডিফল্টরূপে নতুন সাবস্ক্রাইবড মোডগুলি অক্ষম করুন",
   "DisableNewAssetsByDefault": "ডিফল্টরূপে নতুন সাবস্ক্রাইব করা সম্পদ অক্ষম করুন",
   "OverrideGameChanges": "মোডগুলির সক্ষম স্থিতিতে গেম তৈরি করা পরিবর্তনগুলি ওভাররাইড",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
+  "PlaysetSaveInfo": "এই স্ক্রিনের পরিবর্তনগুলি স্বয়ংক্রিয়ভাবে সংরক্ষণ করা হয়, \"স্বয়ংক্রিয় সেভ\" বিকল্প এবং শীর্ষে সেভ বোতামটি কেবলমাত্র আপনার নির্বাচিত মোডগুলি, সম্পদ এবং ডিএলসিগুলিকে প্রভাবিত করে",
   "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
   "ShowFilters": "ফিল্টার দেখান",
   "HideFilters": "ফিল্টারগুলি লুকান",
@@ -144,11 +144,11 @@
   "FilterOutPackagesWithMods": "প্যাকেজ পৃষ্ঠায় মোডগুলি লুকান",
   "FilterOutPackagesWithOneAsset": "প্যাকেজ পৃষ্ঠা থেকে একক গাধা প্যাকেজগুলি লুকান",
   "DeletePackage": {
-    "One": "Delete this package",
+    "One": "এই প্যাকেজটি মুছুন",
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
+    "One": "এই প্যাকেজ থেকে সাবস্ক্রাইব",
     "Plural": "Unsubscribe from the selected packages"
   },
   "CopyWorkshopId": {
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "ডিবাগ মনো ব্যবহার করুন",
   "LaunchThroughCities": "শহরগুলি.এক্সই এর মাধ্যমে চালু করুন",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "ইউনিটি প্রোফাইলার ব্যবহার করুন",
   "NoDlcsNoInternet": "ডিএলসিএস লোড করতে পারেনি, দয়া করে ইন্টারনেটে সংযোগ করুন",
   "NoDlcsOpenGame": "কোনও ডিএলসি আপনার অনুসন্ধানের সাথে মেলে না",
   "DlcUpdateNotice": "যদি আপনার ডিএলসিগুলি এখানে না দেখায় তবে কমপক্ষে একবার গেমটি খোলার বিষয়টি নিশ্চিত করুন",
@@ -467,15 +467,15 @@
   "UnSnooze": "Un-Snooze",
   "Mod": {
     "One": "Mod",
-    "Plural": "Mods"
+    "Plural": "মোডস"
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Assets"
+    "Plural": "সম্পদ"
   },
   "Package": {
     "One": "Package",
-    "Plural": "Packages"
+    "Plural": "প্যাকেজ"
   },
   "Playset": {
     "One": "Playset",

@@ -32,8 +32,8 @@
   "UpToDate": "Versi terbaru",
   "StatusUnknown": "Status yang tidak diketahui",
   "PartiallyDownloaded": "Diunduh sebagian",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "Auto-Save diaktifkan",
+  "AutoPlaysetSaveOff": "Save otomatis dinonaktifkan",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "Pengaturan Luncurkan",
   "IncludesItemsYouDoNotHave": "Termasuk barang yang tidak Anda miliki",
@@ -75,7 +75,7 @@
   "ContinueFromCurrent": "Simpan pengaturan Anda saat ini",
   "GamePlay": "Membangun kota",
   "EditorPlay": "Membuat aset",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "Penggunaan profil",
   "SomePackagesWillBeDisabled": "Beberapa paket akan dihapus dengan mengubah penggunaan profil ini.",
   "AffectedPackagesAre": "Paket yang terpengaruh adalah:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
@@ -84,7 +84,7 @@
   "PlaysetExclude": "Exclude its items from your current playset",
   "PlaysetDelete": "Delete this playset",
   "ShouldNotBeSubscribed": "Jangan berlangganan",
-  "MissingPackages": "Missing Packages",
+  "MissingPackages": "Paket yang hilang",
   "LoadingScreenMod": "Memuat mod layar",
   "LoadEnabled": "Load all enabled assets",
   "LoadUsed": "Load used assets",
@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Buka folder lokal yang berisi paket ini",
   "ViewOnSteam": "Lihat paket ini di Steam",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
+    "One": "Download ulang paket ini",
     "Plural": "Re-download all selected Packages"
   },
   "DownloadPackage": {
@@ -102,7 +102,7 @@
     "Plural": "Download all selected Packages"
   },
   "CopySteamId": "Salin ID Steam ini",
-  "OpenAuthorPage": "Open the author's page",
+  "OpenAuthorPage": "Buka halaman penulis",
   "Sorting_Default": "Penyortiran default",
   "Sorting_LastEdit": "Waktu edit terakhir",
   "Sorting_DateCreated": "Tanggal Diciptakan",
@@ -129,7 +129,7 @@
   "DisableNewModsByDefault": "Nonaktifkan mod yang baru berlangganan secara default",
   "DisableNewAssetsByDefault": "Nonaktifkan aset yang baru berlangganan secara default",
   "OverrideGameChanges": "Override perubahan yang dibuat dalam game dengan status mod yang diaktifkan",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
+  "PlaysetSaveInfo": "Perubahan di layar ini disimpan secara otomatis, opsi \"Simpan Otomatis\" dan tombol Simpan di bagian atas mempengaruhi mod, aset & DLC yang Anda pilih saja",
   "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
   "ShowFilters": "Tunjukkan filter",
   "HideFilters": "Sembunyikan filter",
@@ -144,11 +144,11 @@
   "FilterOutPackagesWithMods": "Sembunyikan mod di halaman paket",
   "FilterOutPackagesWithOneAsset": "Sembunyikan paket aset tunggal dari halaman paket",
   "DeletePackage": {
-    "One": "Delete this package",
+    "One": "Hapus paket ini",
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
+    "One": "Berhenti berlangganan dari paket ini",
     "Plural": "Unsubscribe from the selected packages"
   },
   "CopyWorkshopId": {
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Gunakan debug mono",
   "LaunchThroughCities": "Diluncurkan melalui City.exe",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "Gunakan Unity Profiler",
   "NoDlcsNoInternet": "Tidak dapat memuat DLC, silakan terhubung ke internet",
   "NoDlcsOpenGame": "Tidak ada DLC yang cocok dengan pencarian Anda",
   "DlcUpdateNotice": "Jika DLC Anda tidak ditampilkan di sini, pastikan untuk membuka permainan setidaknya sekali",
@@ -471,11 +471,11 @@
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Assets"
+    "Plural": "Aset"
   },
   "Package": {
     "One": "Package",
-    "Plural": "Packages"
+    "Plural": "Paket"
   },
   "Playset": {
     "One": "Playset",

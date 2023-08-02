@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "Zahrnutá hudba může být autorská práva",
   "IncompleteDescription": "Neúplný popis",
   "Successor": "Successor",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Načíst po ..",
   "Alternative": "Alternative",
   "SameFunctionality": "Same Functionality",
   "RequirementAlternative": "Requirement Alternative",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' je uspuštěn jedním z následujících balíčků."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' se načítá přímo za '{1}'.",
+    "Plural": "'{0}' bude načteno přímo po následujících balíčcích."
   },
   "Interaction_Identical": "Jedná se o více verzí stejného balíčku.\r\n\r\nMěli byste vybrat pouze jednu z nich.",
   "Status_Succeeded": "'{0}' je uspěl '{1}'.\r\n\r\nJiž používáte '{1}', takže již není potřeba '{0}'.",
@@ -125,12 +125,12 @@
   },
   "Status_DependencyMod": "Toto je režim závislosti, ale nezdá se, že používáte žádný balíček, který to vyžaduje.",
   "Status_SourceCodeNotAvailable": "Zdrojový kód tohoto modu není k dispozici. Neměli byste jej použít, pokud nedůvěřujete jeho autorovi.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "Zdrojový kód je k dispozici",
   "StandardMod": "Standard Mod",
   "Status_MusicCanBeCopyrighted": "Hudba uvnitř tohoto balíčku může být autorsky chráněná. Je nejlepší ji nepoužívat při streamování.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_SourceAvailable": "Tento balíček nebude upozorňovat na chybějící zdrojový kód.",
+  "Status_StandardMod": "Tento balíček bude ignorován při zpracování modifikací na řešení problémů.",
   "OutputText": "Očekávaný výstup",
   "Stability_AssetNotReviewed": "Toto aktivum ještě nebylo přezkoumáno.\r\n\r\nInformace o kompatibilitě nemusí být přesné; ačkoliv jsou aktiva obecně stabilní",
   "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
@@ -156,7 +156,7 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Měli byste vyloučit '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Vynechat tento balíček",
   "Exclude": "Vyjmout",
   "Unsubscribe": "Odhlásit odběr",
   "Action_ExcludeOther": {
@@ -215,13 +215,13 @@
   "ApplyChangedBeforeExit": "Máte neuložené změny.\r\n\r\nChcete tyto změny použít, než budete pokračovat?",
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Autor {0}, {1}, je známý jako škodlivý a/nebo za zahrnutí škodlivého obsahu jako jsou viry do svých balíčků.",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ReviewRequests": "Žádosti o recenzi {0}",
+  "DeleteRequest": "Odstranit požadavek",
+  "ApplyRequestedChanges": "Použít požadované změny",
+  "ManagePackage": "Spravovat balíček",
+  "Banned": "Zakázáno",
+  "NoIssues": "Žádné problémy",
+  "RequestReviewDisclaimer": "*Vaše Steam ID a logy jsou odeslány s Vaším požadavkem",
+  "ScenarioMaking": "Vytváření scénářů",
+  "ThemeMaking": "Tvorba motivů"
 }
