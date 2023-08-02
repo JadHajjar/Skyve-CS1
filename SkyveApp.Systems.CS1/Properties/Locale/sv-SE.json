@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Kunde inte skapa en ny speluppsättning, se till att dina mappinställningar är korrekt inställda i panelen alternativ",
   "UseDebugMono": "Använd felsökningsmono",
   "LaunchThroughCities": "Starta via Cities.exe",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "Använd enhetsprofiler",
   "NoDlcsNoInternet": "Kunde inte ladda DLC: er, ansluta till Internet",
   "NoDlcsOpenGame": "Inga DLC: er matchar din sökning",
   "DlcUpdateNotice": "Om dina DLC: er inte visas här, se till att öppna spelet minst en gång",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "Tillgångar inkluderade: {0}, Totalt: {1}",
   "NewPlayset_Tip": "Skapa eller importera en ny speluppsättning",
   "TempPlayset_Tip": "Växla till en tillfällig uppspelning med dina nuvarande inställningar",
-  "ViewPlaysets_Tip": "View & manage your saved playsets",
+  "ViewPlaysets_Tip": "Visa och hantera dina sparade speluppsättningar",
   "AutoSave_Tip": "Spara automatiskt ändringar i moddar och tillgångar till din profil",
   "LoadEnabled_Tip": "Laddar aktiverade tillgångar när du laddar ett spel. Detta bör lämnas aktiverat om du inte vet vad du gör",
   "LoadUsed_Tip": "Ladda tillgångar som används i kartan, även om de är inaktiverade i spelet. Detta är inte relaterat till tillgångsinställningarna inuti Skyve",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "Visa och prenumerera på paket i vilken XML-konfiguration som helst",
   "XMLTip": "Välj eller dra och släpp en XML-konfigurationsfil för att hantera paket som listas inuti den.",
   "FavoritePlaysetTotal": "Speluppsättningar som favorit: {0}, Totalt: {1}",
-  "FavoriteTotal": "Total playsets: {0}",
+  "FavoriteTotal": "Totalt antal speluppsättningar: {0}",
   "PlaysetFilter": "Speluppsättningsfilter",
   "CheckDocumentsFolder": "Se till att Skyve har tillgång till din dokumentmapp, den använder den för att lagra dina UI & Språkinställningar.",
   "FailedToSaveLanguage": "Det gick inte att spara det valda språket",
@@ -335,35 +335,35 @@
   },
   "OpenChangelog": "Öppna ändringslogg",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your playsets",
-    "Plural": "Include the selected items in all your playsets"
+    "One": "Inkludera detta objekt i alla dina speluppsättningar",
+    "Plural": "Inkludera markerade objekt i alla dina speluppsättningar"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your playsets",
-    "Plural": "Exclude the selected items in all your playsets"
+    "One": "Exkludera detta objekt i alla dina speluppsättningar",
+    "Plural": "Uteslut de valda objekten i alla dina speluppsättningar"
   },
   "CopyPackageName": {
-    "One": "Copy this package's name",
-    "Plural": "Copy the selected packages' names"
+    "One": "Kopiera paketets namn",
+    "Plural": "Kopiera de valda paketens namn"
   },
   "CopyAuthorName": {
-    "One": "Copy this author's name",
-    "Plural": "Copy the selected packages' author names"
+    "One": "Kopiera författarens namn",
+    "Plural": "Kopiera de valda paketens författarnamn"
   },
   "CopyFolderName": {
-    "One": "Copy this folder's name",
-    "Plural": "Copy the selected packages' folder names"
+    "One": "Kopiera mappens namn",
+    "Plural": "Kopiera de markerade paketens mappnamn"
   },
-  "PlaysetNameUsed": "You already have a playset with the same name. Please change the name of either one of the files to continue.",
-  "FailedToImportLegacyPlayset": "Failed to convert this legacy playset.",
+  "PlaysetNameUsed": "Du har redan en playset med samma namn. Vänligen ändra namnet på någon av filerna för att fortsätta.",
+  "FailedToImportLegacyPlayset": "Det gick inte att konvertera denna äldre speluppsättning.",
   "Sorting_LastUsed": "Senast använd",
   "OpenLinksInBrowser": "Öppna Steam-länkar i din webbläsare",
   "OpenLinksInBrowser_Tip": "Ändra Steam-länkar för att öppna i din standardwebbläsare istället för i Steam-programmet.",
-  "PlaysetStillLoading": "Your playset is still loading, please wait before exiting this page.",
-  "ApplyPlaysetNameBeforeExit": "Please finish editing the playset's name before exiting this page.",
+  "PlaysetStillLoading": "Din playset laddar fortfarande, vänta innan du avslutar den här sidan.",
+  "ApplyPlaysetNameBeforeExit": "Vänligen avsluta redigeringen av speluppens namn innan du avslutar denna sida.",
   "SteamNotOpenTo": "Steam körs inte just nu",
   "OpenSteamToContinue": "Öppna Steam för att fortsätta din tidigare uppgift.",
-  "IncludeExcludeOtherPlayset": "Include / Exclude {0} from the '{1}' playset",
+  "IncludeExcludeOtherPlayset": "Inkludera / utesluta {0} från '{1}' playset",
   "OpenPlaysetFolder": "Visa speluppsättningens fil i utforskaren",
   "ChangePlaysetColor": "Ändra speluppsättningens färg",
   "EditPlaysetName": "Redigera speluppsättningens namn",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "Du kan använda filer från BOB, Tree Brush, Theme Mix, etc..",
   "ImportFromTextInfo": "Alla textformat stöds",
   "LsmImportInfo": "Se till att välja 'Rapportera'-fil",
-  "NoPlaysetsFound": "No playsets to display",
-  "NoPlaysetsMatchFilters": "No playsets match your search",
+  "NoPlaysetsFound": "Inga speluppsättningar att visa",
+  "NoPlaysetsMatchFilters": "Inga speluppsättningar matchar din sökning",
   "Your Save-games": "Dina Save-spel",
   "App Data": "Appens data",
   "Custom Maps": "Anpassade kartor",
@@ -671,14 +671,14 @@
   "TroubleshootNextStageTip": "Hoppa över det aktuella steget. Använd det om du redan har slutfört det och vill fortsätta.",
   "TroubleshootBubbleTip": "Detta är felsökningsmenyn, det kommer att guida dig under hela processen.\nDu kan stänga Skyve och fortsätta senare, det kommer att komma ihåg dina framsteg.",
   "TroubleshootCompAsk": {
-    "One": "You have a package with a serious compatibility warning.\r\nYou might want to try dealing with it first before troubleshooting.",
-    "Plural": "You have {0} packages with serious compatibility warnings.\r\nYou might want to try dealing with them first before troubleshooting."
+    "One": "Du har ett paket med en seriös kompatibilitetsvarning.\r\nDu kanske vill försöka hantera det först innan felsökning.",
+    "Plural": "Du har {0} paket med seriösa kompatibilitetsvarningar.\r\nDu kanske vill försöka hantera dem först innan felsökning."
   },
-  "TroubleshootViewComp": "View my compatibility report",
-  "TroubleshootSkipComp": "Skip & continue troubleshooting",
-  "SkyveDetectedFaultyPackages": "Skyve detected that some of your packages are not perfectly downloaded, would you like to try fixing them first?",
-  "FaultyPackagesTitle": "Faulty Packages Detected",
-  "CleanupInfoTitle": "What is a cleanup?",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues",
-  "VerifiedAuthor": "Verified Author"
+  "TroubleshootViewComp": "Visa min kompatibilitetsrapport",
+  "TroubleshootSkipComp": "Hoppa över och fortsätt felsökning",
+  "SkyveDetectedFaultyPackages": "Skyve upptäckte att några av dina paket inte är perfekt hämtade, vill du försöka rätta dem först?",
+  "FaultyPackagesTitle": "Felpaket upptäckta",
+  "CleanupInfoTitle": "Vad är en sanering?",
+  "TroubleshootCauseResult": "Följande paket kan vara orsaken till dina problem",
+  "VerifiedAuthor": "Verifierad författare"
 }
