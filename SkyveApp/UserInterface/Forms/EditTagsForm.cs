@@ -30,7 +30,7 @@ public partial class EditTagsForm : BaseForm
 
 		_tags = new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
 
-		TLC.Tags.AddRange(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
+		TLC.Tags.AddRange(_tags);
 		TLC.AllTags.AddRange(_tagsService.GetDistinctTags().OrderByDescending(x => _tags.Any(t => t.Value == x.Value)).ThenByDescending(x => x.IsCustom).ThenByDescending(_tagsService.GetTagUsage));
 		TLC.Height = 1;
 	}

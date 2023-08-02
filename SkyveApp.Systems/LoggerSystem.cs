@@ -36,7 +36,7 @@ public class LoggerSystem : ILogger
 
 			if (CrossIO.FileExists(previousLog))
 			{
-				CrossIO.DeleteFile(previousLog);
+				CrossIO.DeleteFile(previousLog, true);
 			}
 
 			if (CrossIO.FileExists(LogFilePath))
@@ -51,7 +51,12 @@ public class LoggerSystem : ILogger
 			var assembly = Assembly.GetExecutingAssembly();
 			var details = assembly.GetName();
 
-			Info($"Skyve v{details.Version}");
+#if Stable
+			Info($"Skyve Stable v{details.Version}");
+#else
+			Info($"Skyve Beta v{details.Version}");
+#endif
+
 			Info($"Now  = {DateTime.Now:yyyy-MM-dd hh:mm:ss tt}");
 			Info($"Here = {Application.StartupPath}");
 		}

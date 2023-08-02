@@ -326,7 +326,7 @@ internal partial class ItemListControl<T>
 
 		for (var i = 0; i < tags.Count; i++)
 		{
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true, mousePosition: i == 0 && localParentPackage?.Mod is not null ? CursorLocation : null);
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, smaller: true);
 
 			if (i == 0 && !string.IsNullOrEmpty(versionText))
 			{

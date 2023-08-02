@@ -39,13 +39,13 @@ internal class UserDescriptionControl : SlickImageControl
 
 		if (rects?.SteamRect.Contains(e.Location) == true)
 		{
-			SlickTip.SetTo(this, Locale.OpenAuthorPage);
+			SlickTip.SetTo(this, Locale.OpenAuthorPage, offset: rects.SteamRect.Location);
 
 			Cursor = Cursors.Hand;
 		}
 		else
 		{
-			if (rects?.TextRect.Contains(e.Location) == true && User is not null && _compatibilityManager.IsUserVerified(User))
+			if (rects?.TextRect.Pad(0, 0, (int)(-24 * UI.FontScale), 0).Contains(e.Location) == true && User is not null && _compatibilityManager.IsUserVerified(User))
 			{
 				SlickTip.SetTo(this, "VerifiedAuthor");
 			}
@@ -103,10 +103,10 @@ internal class UserDescriptionControl : SlickImageControl
 		using var font = UI.Font(9F);
 		var textSize = e.Graphics.Measure(text, font);
 
-		rects!.TextRect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding).Align(Size.Ceiling(textSize), ContentAlignment.TopLeft);
+		var rect = ClientRectangle.Pad(0, Height / 2, 0, 0).Pad(Padding).Align(Size.Ceiling(textSize), ContentAlignment.TopLeft);
 
 		using var brush = new SolidBrush(FormDesign.Design.InfoColor);
-		e.Graphics.DrawString(text, font, brush, rects.TextRect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
+		e.Graphics.DrawString(text, font, brush, rect, new StringFormat { Trimming = StringTrimming.EllipsisCharacter });
 	}
 
 	private void DrawButtons(PaintEventArgs e)
@@ -145,33 +145,13 @@ internal class UserDescriptionControl : SlickImageControl
 
 	private class Rectangles
 	{
-		internal Rectangle IncludedRect;
-		internal Rectangle EnabledRect;
-		internal Rectangle FolderRect;
-		internal Rectangle MoreRect;
-		internal Rectangle IconRect;
 		internal Rectangle TextRect;
 		internal Rectangle SteamRect;
-		internal Rectangle SteamIdRect;
-		internal Rectangle CenterRect;
-		internal Rectangle AuthorRect;
-		internal Rectangle CompatibilityRect;
-		internal Rectangle DateRect;
 
 		internal bool Contain(Point location)
 		{
 			return
-				IncludedRect.Contains(location) ||
-				EnabledRect.Contains(location) ||
-				FolderRect.Contains(location) ||
-				CenterRect.Contains(location) ||
-				MoreRect.Contains(location) ||
-				SteamRect.Contains(location) ||
-				AuthorRect.Contains(location) ||
-				IconRect.Contains(location) ||
-				CompatibilityRect.Contains(location) ||
-				DateRect.Contains(location) ||
-				SteamIdRect.Contains(location);
+				SteamRect.Contains(location);
 		}
 	}
 }

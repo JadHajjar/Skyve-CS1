@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace SkyveApp.UserInterface.Panels;
 internal class PC_LotChangeLog : PC_Changelog
@@ -12,9 +11,9 @@ internal class PC_LotChangeLog : PC_Changelog
 		LocaleChangelog.Load();
 	}
 
-#if !DEBUG
 	protected override void PrepareChangelog(List<VersionChangeLog> changeLogs)
 	{
+#if !DEBUG
 #if Stable
 		changeLogs.RemoveAll(x => x.Beta);
 #else
@@ -24,14 +23,11 @@ internal class PC_LotChangeLog : PC_Changelog
 		{
 			var current = changeLogs.First();
 
-            System.Windows.Forms.Clipboard.SetText($"# :skyve: Skyve v{current.VersionString}\r\n"
+            System.Windows.Forms.Clipboard.SetText($"# :skyve: Skyve v{current.VersionString}{(current.Stable ? " [Stable]" : "")}{(current.Beta ? " [Beta]" : "")}\r\n"
 				+ (string.IsNullOrEmpty(current.Tagline) ? string.Empty : $"### *{current.Tagline}*\r\n")
 				+ current.ChangeGroups.ListStrings(x => $"## {x.Name}\r\n{x.Changes.ListStrings(y => $"* {y}", "\r\n")}", "\r\n\r\n"));
 		}
-	}
 #else
-	protected override void PrepareChangelog(List<VersionChangeLog> changeLogs)
-	{
 		var texts = new List<string>();
 
 		foreach (var changelog in changeLogs)
@@ -44,6 +40,6 @@ internal class PC_LotChangeLog : PC_Changelog
 		var json = Newtonsoft.Json.JsonConvert.SerializeObject(texts.WhereNotEmpty().Distinct().OrderBy(x => x.Length).ToDictionary(x => x), Newtonsoft.Json.Formatting.Indented);
 
 		System.IO.File.WriteAllText("../../../Properties/Changelog.json", json);
-	}
 #endif
+	}
 }

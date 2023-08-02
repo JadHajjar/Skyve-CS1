@@ -10,14 +10,19 @@ using System.Windows.Forms;
 namespace SkyveApp.UserInterface.Content;
 internal class PackageDescriptionControl : SlickImageControl
 {
-	private DrawableItem<IPackage, Rectangles>? _drawablePackage;
+#pragma warning disable IDE1006
+#pragma warning disable CS0649 
 	private Padding GridPadding;
 	private readonly bool GridView;
 	private readonly bool CompactList;
 	private readonly bool IsPackagePage;
+#pragma warning restore CS0649 
+#pragma warning restore IDE1006
 
 	public IPackage? Package { get; private set; }
 	public PC_PackagePage? PackagePage { get; private set; }
+
+	private DrawableItem<IPackage, Rectangles>? _drawablePackage;
 
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -328,7 +333,7 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		for (var i = 0; i < tags.Count; i++)
 		{
-			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, large: true, mousePosition: i == 0 && localParentPackage?.Mod is not null ? CursorLocation : null);
+			var rect = e.Graphics.DrawLabel(tags[i].Text, null, tags[i].Color, tagRect, ContentAlignment.MiddleLeft, large: true);
 
 			if (i == 0 && !string.IsNullOrEmpty(versionText))
 			{
@@ -454,11 +459,11 @@ internal class PackageDescriptionControl : SlickImageControl
 				scoreRect.Y--;
 			}
 
-			using var scoreFilled = IconManager.GetSmallIcon("I_VoteFilled");
+			using var scoreFilled = IconManager.GetIcon("I_VoteFilled", scoreRect.Width * 3 / 4);
 
 			if (score < 75)
 			{
-				using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+				using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
 
 				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
@@ -475,7 +480,7 @@ internal class PackageDescriptionControl : SlickImageControl
 			{
 				if (small)
 				{
-					using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+					using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
 
 					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * workshopInfo!.Subscribers / 15000), 0, 0));
 					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));

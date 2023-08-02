@@ -302,11 +302,11 @@ internal partial class ItemListControl<T>
 				scoreRect.Y--;
 			}
 
-			using var scoreFilled = IconManager.GetSmallIcon("I_VoteFilled");
+			using var scoreFilled = IconManager.GetIcon("I_VoteFilled", scoreRect.Width * 3 / 4);
 
 			if (score < 75)
 			{
-				using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+				using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
 
 				e.Graphics.DrawImage(scoreIcon.Color(small ? backColor : backColor.GetTextColor()), scoreRect.CenterR(scoreIcon.Size));
 
@@ -323,7 +323,7 @@ internal partial class ItemListControl<T>
 			{
 				if (small)
 				{
-					using var scoreIcon = IconManager.GetSmallIcon("I_Vote");
+					using var scoreIcon = IconManager.GetIcon("I_Vote", scoreRect.Width * 3 / 4);
 
 					e.Graphics.SetClip(scoreRect.CenterR(scoreIcon.Size).Pad(0, scoreIcon.Height - (scoreIcon.Height * workshopInfo!.Subscribers / 15000), 0, 0));
 					e.Graphics.DrawImage(scoreIcon.Color(FormDesign.Modern.ActiveColor), scoreRect.CenterR(scoreIcon.Size));
