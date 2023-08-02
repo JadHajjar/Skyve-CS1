@@ -129,7 +129,7 @@
   "DisableNewModsByDefault": "ปิดการใช้งานม็อดที่เพิ่งสมัครสมาชิกใหม่ตามค่าเริ่มต้น",
   "DisableNewAssetsByDefault": "ปิดการใช้งานแอสเซทที่เพิ่งสมัครสมาชิกใหม่ตามค่าเริ่มต้น",
   "OverrideGameChanges": "แทนที่การเปลี่ยนแปลงระหว่างอยู่ที่ในเกม ด้วยสถานะการเปิดใช้งานของม็อด",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
+  "PlaysetSaveInfo": "การเปลี่ยนแปลงในหน้าจอนี้จะถูกบันทึกโดยอัตโนมัติ ตัวเลือก \"บันทึกอัตโนมัติ\" และ ปุ่ม บันทึก ที่ด้านบนจะมีผลกับ ม็อด แอสเซท และ DLC ที่คุณเลือกเท่านั้น",
   "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
   "ShowFilters": "แสดงตัวกรอง",
   "HideFilters": "ซ่อนตัวกรอง",
@@ -138,7 +138,7 @@
   "PackageIncluded": "แพ็กเกจรวมอยู่ในเกม",
   "PackageIncludedPlural": "แพ็กเกจรวมอยู่ในเกม",
   "CopyWorkshopLink": {
-    "One": "Copy this package's Workshop Link",
+    "One": "คัดลอกลิงก์เวิร์กชอปของแพ็กเกจนี้",
     "Plural": "Copy the selected packages' Workshop Links"
   },
   "FilterOutPackagesWithMods": "ซ่อนม็อดในหน้าแพ็กเกจ",
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "ไม่สามารถสร้างเพลย์เซ็ตใหม่ได้ โปรดตรวจสอบในแผงการตั้งค่าให้แน่ใจว่าโฟลเดอร์การตั้งค่าได้ถูกกำหนดไว้แล้วอย่างถูกต้อง",
   "UseDebugMono": "ใช้ Debug Mono",
   "LaunchThroughCities": "เปิดผ่าน Cities.exe",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "ใช้ Unity Profiler",
   "NoDlcsNoInternet": "ไม่สามารถโหลดข้อมูล DLC โปรดเชื่อมต่ออินเทอร์เน็ต",
   "NoDlcsOpenGame": "ไม่มี DLC ที่ตรงกับการค้นหาของคุณ",
   "DlcUpdateNotice": "หาก DLC ของคุณไม่ปรากฏตรงนี้ ลองเปิดเกมอย่างน้อยครั้งหนึ่ง",
