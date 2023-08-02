@@ -32,8 +32,8 @@
   "UpToDate": "Cập nhật",
   "StatusUnknown": "Trạng thái không xác định",
   "PartiallyDownloaded": "Tải xuống một phần",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "Tự động lưu được bật",
+  "AutoPlaysetSaveOff": "Tự động lưu được vô hiệu hóa",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "Cài đặt khởi chạy",
   "IncludesItemsYouDoNotHave": "Bao gồm các mặt hàng bạn không có",
@@ -75,7 +75,7 @@
   "ContinueFromCurrent": "Giữ cài đặt hiện tại của bạn",
   "GamePlay": "Xây dựng thành phố",
   "EditorPlay": "Tạo asset",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "Sử dụng hồ sơ",
   "SomePackagesWillBeDisabled": "Một số gói sẽ bị xóa bằng cách thay đổi cách sử dụng hồ sơ này.",
   "AffectedPackagesAre": "Các gói bị ảnh hưởng là:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
@@ -84,7 +84,7 @@
   "PlaysetExclude": "Exclude its items from your current playset",
   "PlaysetDelete": "Delete this playset",
   "ShouldNotBeSubscribed": "Không đăng ký",
-  "MissingPackages": "Missing Packages",
+  "MissingPackages": "Thiếu gói",
   "LoadingScreenMod": "Tải Mod màn hình",
   "LoadEnabled": "Load các asset được bật",
   "LoadUsed": "Tải asset được dùng",
@@ -94,7 +94,7 @@
   "OpenLocalFolder": "Mở thư mục cục bộ chứa gói này",
   "ViewOnSteam": "Xem gói này trên Steam",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
+    "One": "Tải lại gói này",
     "Plural": "Re-download all selected Packages"
   },
   "DownloadPackage": {
@@ -102,7 +102,7 @@
     "Plural": "Download all selected Packages"
   },
   "CopySteamId": "Sao chép ID Steam này",
-  "OpenAuthorPage": "Open the author's page",
+  "OpenAuthorPage": "Mở trang của tác giả",
   "Sorting_Default": "Mặc định phân loại",
   "Sorting_LastEdit": "Thời gian chỉnh sửa lần cuối",
   "Sorting_DateCreated": "Ngày tạo",
@@ -129,7 +129,7 @@
   "DisableNewModsByDefault": "Tắt các mod mới được đăng ký theo mặc định",
   "DisableNewAssetsByDefault": "Tắt tài sản mới được đăng ký theo mặc định",
   "OverrideGameChanges": "Ghi đè các thay đổi được thực hiện trong trò chơi với trạng thái đã bật của mod",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
+  "PlaysetSaveInfo": "Các thay đổi trong màn hình này được lưu tự động, tùy chọn \"Lưu tự động\" và nút lưu ở trên cùng ảnh hưởng đến các mod, tài sản và DLC đã chọn của bạn",
   "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
   "ShowFilters": "Hiển thị bộ lọc",
   "HideFilters": "Ẩn bộ lọc",
@@ -144,11 +144,11 @@
   "FilterOutPackagesWithMods": "Ẩn các mod trong trang gói",
   "FilterOutPackagesWithOneAsset": "Ẩn các gói tài sản đơn từ trang gói",
   "DeletePackage": {
-    "One": "Delete this package",
+    "One": "Xóa gói này",
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
+    "One": "Hủy đăng ký từ gói này",
     "Plural": "Unsubscribe from the selected packages"
   },
   "CopyWorkshopId": {
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "Sử dụng gỡ lỗi mono",
   "LaunchThroughCities": "Ra mắt qua các thành phố.exe",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "Sử dụng trình hồ sơ thống nhất",
   "NoDlcsNoInternet": "Không thể tải DLCS, vui lòng kết nối với Internet",
   "NoDlcsOpenGame": "Không có DLCS phù hợp với tìm kiếm của bạn",
   "DlcUpdateNotice": "Nếu các DLC của bạn không hiển thị ở đây, hãy đảm bảo mở trò chơi ít nhất một lần",
@@ -467,15 +467,15 @@
   "UnSnooze": "Un-Snooze",
   "Mod": {
     "One": "Mod",
-    "Plural": "Mods"
+    "Plural": "Mod"
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Assets"
+    "Plural": "Tài sản"
   },
   "Package": {
     "One": "Package",
-    "Plural": "Packages"
+    "Plural": "Gói"
   },
   "Playset": {
     "One": "Playset",
