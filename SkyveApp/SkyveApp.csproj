@@ -135,10 +135,17 @@
 		<DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\App\</DeployDir>
 		<WorkshopId>2953447919</WorkshopId>
 		<WorkshopDir>C:\Program Files (x86)\Steam\steamapps\workshop\content\255710\$(WorkshopId)</WorkshopDir>
-		<ZipFile>$(DeployDir)/../../SkyveMod.zip</ZipFile>
 	</PropertyGroup>
 
-  <Target Name="DeployToModDirectory" AfterTargets="Build">
+	<PropertyGroup Condition="'$(Configuration)' != 'Stable'">
+		<ZipFile>$(DeployDir)/../../SkyveMod Beta.zip</ZipFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+		<ZipFile>$(DeployDir)/../../SkyveMod.zip</ZipFile>
+	</PropertyGroup>
+	
+	<Target Name="DeployToModDirectory" AfterTargets="Build">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="Targets" />
     </GetAssemblyIdentity>

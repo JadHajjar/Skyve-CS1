@@ -7,7 +7,8 @@
       {
         "Name": "Changes",
         "Changes": [
-          "Visual improvements to the package page."
+          "Visual improvements to the package page.",
+          "Added Greek & Serbian languages"
         ]
       }
     ]
@@ -62,7 +63,8 @@
           "Local & Vanilla packages are now correctly matched while viewing a playset's contents.",
           "Fixed authors and tags filter not refreshing if you enter the page before they've loaded.",
           "Fixed the incorrect names of packages while viewing a playset's contents.",
-          "Fixed playsets disappearing on macOS & Linux."
+          "Fixed playsets disappearing on macOS & Linux.",
+          "Added Greek & Serbian languages"
         ]
       }
     ]
