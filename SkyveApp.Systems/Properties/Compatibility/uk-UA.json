@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "Включена музика може бути захищена авторським правом",
   "IncompleteDescription": "Неповний опис",
   "Successor": "Наступник ..",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Завантажити після ..",
   "Alternative": "Альтернатива ..",
   "SameFunctionality": "Та ж сама функціональність ..",
   "RequirementAlternative": "Альтернатива умова ..",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' має наступником один з наступних пакетів."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' буде завантажено безпосередньо після '{1}'.",
+    "Plural": "'{0}' буде завантажено безпосередньо після наступних пакетів."
   },
   "Interaction_Identical": "Це кілька версій одного й того ж пакету.\n\nВи повинні вибрати лише одну з них.",
   "Status_Succeeded": "'{0}' замінено на '{1}'.\n\nВи вже використовуєте '{1}', тому '{0}' більше не потрібно.",
@@ -125,12 +125,12 @@
   },
   "Status_DependencyMod": "Це мод залежності, але, здається, ви не використовуєте жоден пакет, який вимагає його.",
   "Status_SourceCodeNotAvailable": "Вихідний код цього моду недоступний. Ви не повинні використовувати його, якщо не маєте довіри до його автора.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "Доступний вихідний код",
   "StandardMod": "Standard Mod",
   "Status_MusicCanBeCopyrighted": "Музика в цьому пакеті може бути об'єктом авторського права. Найкраще не використовувати її під час стріму.",
   "Status_IncompleteDescription": "Опис Майстерні для цього моду дуже короткий. Ви не повинні використовувати його, якщо не маєте довіри до його автора.",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_SourceAvailable": "Цей пакет не попереджатиме про пропущений вихідний код.",
+  "Status_StandardMod": "Пакет буде проігнорований під час обробки модів.",
   "OutputText": "Очікуваний результат",
   "Stability_AssetNotReviewed": "Цей ассет ще не пройшов огляд.\n\nІнформація про сумісність може бути неправдивою; хоча ассети, як правило, стабільні",
   "Stability_NotReviewed": "Цей пакет ще не був пройшов огляд.\n\nІнформація про сумісність може бути недостовірною.",
@@ -156,7 +156,7 @@
     "Plural": "Вам слід відписатися від наступних пакетів:"
   },
   "Action_ExcludeThis": "Вам слід виключити '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Вилучити цей пакунок",
   "Exclude": "Виключити",
   "Unsubscribe": "Відписатися",
   "Action_ExcludeOther": {
@@ -219,9 +219,9 @@
   "DeleteRequest": "Видалити запит",
   "ApplyRequestedChanges": "Застосувати вказані зміни",
   "ManagePackage": "Керування пакунком",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
+  "Banned": "Забанений",
+  "NoIssues": "Немає проблем",
   "RequestReviewDisclaimer": "*Ваш Steam ID і логи надсилаються з вашим запитом",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ScenarioMaking": "Сценарій",
+  "ThemeMaking": "Створення теми"
 }

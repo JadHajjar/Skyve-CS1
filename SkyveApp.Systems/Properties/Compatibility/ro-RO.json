@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "Muzica inclusă poate avea drepturi de autor",
   "IncompleteDescription": "Descriere incompletă",
   "Successor": "Successor",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Încărcați după..",
   "Alternative": "Alternative",
   "SameFunctionality": "Same Functionality",
   "RequirementAlternative": "Requirement Alternative",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' este succes de oricare dintre următoarele pachete."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' se va încărca direct după '{1}'.",
+    "Plural": "'{0}' se va încărca direct după următoarele pachete."
   },
   "Interaction_Identical": "Acestea sunt versiuni multiple ale aceluiași pachet.\r\n\r\nAr trebui să alegeți doar una dintre ele.",
   "Status_Succeeded": "'{0}' este succes de '{1}'.\r\n\r\nDeja folosești '{1}' așa că nu mai este nevoie de '{0}''.",
@@ -125,12 +125,12 @@
   },
   "Status_DependencyMod": "Aceasta este o modalitate de dependență, dar se pare că nu utilizați niciun pachet care necesită acest lucru.",
   "Status_SourceCodeNotAvailable": "Codul sursă al acestui mod nu este disponibil. Ar trebui să îl folosești doar dacă ai încredere în autorul său.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "Codul sursă este disponibil",
   "StandardMod": "Standard Mod",
   "Status_MusicCanBeCopyrighted": "Muzica din interiorul acestui pachet ar putea avea drepturi de autor. Cel mai bine este să nu o folosești în timpul streamingului.",
   "Status_IncompleteDescription": "Descrierea Atelierului acestui mod este prea scurtă. Nu ar trebui să îl folosești decât dacă ai încredere în autorul său.",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_SourceAvailable": "Acest pachet nu va avertiza despre codul sursă lipsă.",
+  "Status_StandardMod": "Acest pachet va fi ignorat în timpul procesării mod-urilor de depanare.",
   "OutputText": "Ieșire așteptată",
   "Stability_AssetNotReviewed": "Acest activ nu a fost încă revizuit.\n\nInformațiile de compatibilitate ar putea să nu fie exacte; deși activele sunt în general stabile",
   "Stability_NotReviewed": "Acest pachet nu a fost revizuit încă.\n\nInformațiile de compatibilitate pot să nu fie exacte.",
@@ -156,7 +156,7 @@
     "Plural": "Ar trebui să vă dezabonați de la următoarele pachete:"
   },
   "Action_ExcludeThis": "Ar trebui să excludeți '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Exclude acest pachet",
   "Exclude": "Excludeți",
   "Unsubscribe": "Dezabonați-vă",
   "Action_ExcludeOther": {
@@ -219,9 +219,9 @@
   "DeleteRequest": "Ștergere solicitarea",
   "ApplyRequestedChanges": "Aplică modificările solicitate",
   "ManagePackage": "Gestionare pachet",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
+  "Banned": "Interzis",
+  "NoIssues": "Nicio problemă",
   "RequestReviewDisclaimer": "*ID-ul tău de Steam și jurnalele sunt trimise cu solicitarea ta",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ScenarioMaking": "Producere de scenariu",
+  "ThemeMaking": "Crearea de teme"
 }

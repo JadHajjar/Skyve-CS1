@@ -100,7 +100,7 @@
   },
   "Interaction_LoadAfter": {
     "One": "'{0}' vil laste inn direkte etter '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "Plural": "'{0}' vil laste inn direkte etter følgende pakker."
   },
   "Interaction_Identical": "Dette er flere versjoner av samme pakke.\r\n\r\nDu bør bare velge en av dem.",
   "Status_Succeeded": "'{0}' fullføres av '{1}'.\r\n\r\nDu bruker allerede '{1}' så det er ingen behov for '{0}' lenger.",
@@ -125,12 +125,12 @@
   },
   "Status_DependencyMod": "Dette er en avhengighetsmod, men det ser ikke ut til at du bruker alle pakkene som krever det.",
   "Status_SourceCodeNotAvailable": "Kildekoden til denne modden er ikke tilgjengelig. Du bør ikke bruke den med mindre du stoler på forfatteren.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "Kildekoden er tilgjengelig",
   "StandardMod": "Standard Mod",
   "Status_MusicCanBeCopyrighted": "Musikken i denne pakken kan kanskje bli opphavsrettet. Det er ikke best å bruke den mens den strømmes.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_SourceAvailable": "Denne pakken vil ikke advare om manglende kildekode.",
+  "Status_StandardMod": "Denne pakken ignoreres under behandling av modifikasjonene for å bli feilsøkt.",
   "OutputText": "Forventet utgang",
   "Stability_AssetNotReviewed": "Denne eiendelen er ikke gjennomgått ennå.\r\n\r\nInfo om kompatibilitet kan være unøyaktig, men eiendeler er generelt stabil",
   "Stability_NotReviewed": "This package has not been reviewed yet. The compatibility info may not be accurate.",
@@ -156,7 +156,7 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Du skal ekskludere '{0}.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Ekskluder denne pakken",
   "Exclude": "Ekskluder",
   "Unsubscribe": "Avmeld",
   "Action_ExcludeOther": {
@@ -216,12 +216,12 @@
   "AuthorRetired": "The author of {0}, {1}, has retired or has been inactive for a long time.\r\nFuture updates & stability for their packages is not guaranteed.",
   "AuthorMalicious": "Forfatteren av {0}, {1}, er kjent for å være ondsinnet og/eller for å inkludere skadelig innhold som virus i pakkene sine.",
   "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "DeleteRequest": "Slett forespørsel",
+  "ApplyRequestedChanges": "Bruk forespurte endringer",
+  "ManagePackage": "Administrer tilleggsfunksjon",
+  "Banned": "Utestengt",
+  "NoIssues": "Ingen saker",
+  "RequestReviewDisclaimer": "*Din Steam ID og logger sendes ut med din forespørsel",
+  "ScenarioMaking": "Scenarioopptak",
+  "ThemeMaking": "Utforming"
 }

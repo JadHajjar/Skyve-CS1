@@ -75,7 +75,7 @@
   "ContinueFromCurrent": "Keep your current settings",
   "GamePlay": "Build Cities",
   "EditorPlay": "Make Assets",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "Profile Usage",
   "SomePackagesWillBeDisabled": "Some packages will be removed by changing the usage of this profile.",
   "AffectedPackagesAre": "Affected packages are:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",

@@ -42,7 +42,7 @@
   "MusicCanBeCopyrighted": "A música incluída pode ter direitos autorais",
   "IncompleteDescription": "Descrição Incompleta",
   "Successor": "Sucessor",
-  "LoadAfter": "Load After ..",
+  "LoadAfter": "Carregar Depois ...",
   "Alternative": "Alternativa",
   "SameFunctionality": "Mesma Funcionalidade",
   "RequirementAlternative": "Alternativa para Requisito",
@@ -99,8 +99,8 @@
     "Plural": "'{0}' foi bem sucedido por um dos seguintes pacotes."
   },
   "Interaction_LoadAfter": {
-    "One": "'{0}' will load directly after '{1}'.",
-    "Plural": "'{0}' will load directly after the following packages."
+    "One": "'{0}' carregará diretamente após '{1}'.",
+    "Plural": "'{0}' carregará diretamente após os seguintes pacotes."
   },
   "Interaction_Identical": "Estas são múltiplas versões do mesmo pacote.\n\nVocê deve escolher apenas uma delas.",
   "Status_Succeeded": "'{0}' foi bem-sucedido por '{1}'.\r\n\r\nVocê já está usando '{1}' então não há mais necessidade de '{0}'.",
@@ -125,12 +125,12 @@
   },
   "Status_DependencyMod": "Este é um mod de dependência, mas não parece que você esteja usando qualquer pacote que o requeira.",
   "Status_SourceCodeNotAvailable": "O código-fonte deste mod não está disponível. Você não deve usá-lo a menos que confie em seu autor.",
-  "SourceAvailable": "Source code is available",
+  "SourceAvailable": "O código fonte está disponível",
   "StandardMod": "Standard Mod",
   "Status_MusicCanBeCopyrighted": "A música dentro deste pacote pode ter direitos autorais. É melhor não usá-la durante a transmissão.",
   "Status_IncompleteDescription": "The workshop description of this mod is too small. You should not use it unless you trust its author.",
-  "Status_SourceAvailable": "This package will not warn about missing source code.",
-  "Status_StandardMod": "This package will be ignored while processing the mods to be troubleshooted.",
+  "Status_SourceAvailable": "Este pacote não vai avisar sobre falta do código-fonte.",
+  "Status_StandardMod": "Este pacote será ignorado durante o processamento dos mods para serem solucionados.",
   "OutputText": "Saída Esperada",
   "Stability_AssetNotReviewed": "Este ativo ainda não foi revisado.\r\n\r\nAs informações de compatibilidade podem não ser precisas; embora os ativos sejam geralmente estáveis",
   "Stability_NotReviewed": "Este pacote não foi analisado ainda.\nA informação de compatibilidade pode não ser precisa.",
@@ -156,7 +156,7 @@
     "Plural": "You should unsubscribe from the following packages."
   },
   "Action_ExcludeThis": "Você deve excluir '{0}'.",
-  "ExcludeThis": "Exclude this package",
+  "ExcludeThis": "Excluir este pacote",
   "Exclude": "Excluir",
   "Unsubscribe": "Cancelar assinatura",
   "Action_ExcludeOther": {
@@ -215,13 +215,13 @@
   "ApplyChangedBeforeExit": "Você tem alterações não salvas.\r\n\r\nGostaria de aplicar essas alterações antes de continuar?",
   "AuthorRetired": "O autor de {0}, {1}, se aposentou ou está inativo há muito tempo.\n\nAs atualizações futuras e a estabilidade dos pacotes não são garantidas.",
   "AuthorMalicious": "O autor de {0}, {1}, é conhecido por ser malicioso e/ou por incluir conteúdos nocivos como vírus em suas embalagens.",
-  "ReviewRequests": "Review Requests {0}",
-  "DeleteRequest": "Delete Request",
-  "ApplyRequestedChanges": "Apply Requested Changes",
-  "ManagePackage": "Manage Package",
-  "Banned": "Banned",
-  "NoIssues": "No Issues",
-  "RequestReviewDisclaimer": "*Your Steam ID and logs are sent with your request",
-  "ScenarioMaking": "Scenario-Making",
-  "ThemeMaking": "Theme-Making"
+  "ReviewRequests": "Solicitações de revisão {0}",
+  "DeleteRequest": "Excluir Requisição",
+  "ApplyRequestedChanges": "Aplicar alterações solicitadas",
+  "ManagePackage": "Gerenciar pacote",
+  "Banned": "Banido",
+  "NoIssues": "Sem problemas",
+  "RequestReviewDisclaimer": "*O seu ID Steam e registros são enviados com o seu pedido",
+  "ScenarioMaking": "Cenário/Fabricação",
+  "ThemeMaking": "Criação de Temas"
 }
