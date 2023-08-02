@@ -32,8 +32,8 @@
   "UpToDate": "განახლებულია",
   "StatusUnknown": "უცნობი სტატუსი",
   "PartiallyDownloaded": "ნაწილობრივად გადმოწერილი",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "ჩართულია ავტომატური შენახვა",
+  "AutoPlaysetSaveOff": "ავტომატური დაზოგვა გამორთულია",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "პარამეტრების დაწყება",
   "IncludesItemsYouDoNotHave": "მოიცავს ნივთებს, რომლებიც არ გაქვთ",
@@ -75,7 +75,7 @@
   "ContinueFromCurrent": "შეინახეთ თქვენი ამჟამინდელი პარამეტრები",
   "GamePlay": "ააშენეთ ქალაქები",
   "EditorPlay": "გააკეთე აქტივები",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "პროფილის გამოყენება",
   "SomePackagesWillBeDisabled": "ზოგიერთი პაკეტი ამოღებულია ამ პროფილის გამოყენების შეცვლით.",
   "AffectedPackagesAre": "დაზარალებული პაკეტებია:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
@@ -84,7 +84,7 @@
   "PlaysetExclude": "Exclude its items from your current playset",
   "PlaysetDelete": "Delete this playset",
   "ShouldNotBeSubscribed": "არ გამოიწეროთ",
-  "MissingPackages": "Missing Packages",
+  "MissingPackages": "დაკარგული პაკეტები",
   "LoadingScreenMod": "ეკრანის დატვირთვა",
   "LoadEnabled": "Load all enabled assets",
   "LoadUsed": "Load used assets",
@@ -94,7 +94,7 @@
   "OpenLocalFolder": "გახსენით ადგილობრივი საქაღალდე, რომელიც შეიცავს ამ პაკეტს",
   "ViewOnSteam": "იხილეთ ეს პაკეტი ორთქლზე",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
+    "One": "ხელახლა ჩამოტვირთეთ ეს პაკეტი",
     "Plural": "Re-download all selected Packages"
   },
   "DownloadPackage": {
@@ -102,7 +102,7 @@
     "Plural": "Download all selected Packages"
   },
   "CopySteamId": "დააკოპირეთ ეს ორთქლის ID",
-  "OpenAuthorPage": "Open the author's page",
+  "OpenAuthorPage": "გახსენით ავტორის გვერდი",
   "Sorting_Default": "ნაგულისხმევი დახარისხება",
   "Sorting_LastEdit": "ბოლო რედაქტირების დრო",
   "Sorting_DateCreated": "შექმნის თარიღი",
@@ -129,7 +129,7 @@
   "DisableNewModsByDefault": "გამორთეთ ახლად გამოწერილი რეჟიმები სტანდარტულად",
   "DisableNewAssetsByDefault": "გამორთეთ ახლად გამოწერილი აქტივები სტანდარტულად",
   "OverrideGameChanges": "გადალახეთ თამაშში განხორციელებული ცვლილებები მოდების ჩართულ სტატუსში",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
+  "PlaysetSaveInfo": "ამ ეკრანზე ცვლილებები ავტომატურად ინახება, \"ავტომატური შენახვა\" ვარიანტი და ზედა ნაწილში შენახვის ღილაკი გავლენას ახდენს თქვენს შერჩეულ რეჟიმებზე, აქტივებზე და DLC- ზე",
   "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
   "ShowFilters": "ფილტრების ჩვენება",
   "HideFilters": "ფილტრების დამალვა",
@@ -144,11 +144,11 @@
   "FilterOutPackagesWithMods": "მოდების დამალვა პაკეტების გვერდზე",
   "FilterOutPackagesWithOneAsset": "დამალეთ ერთჯერადი პაკეტები პაკეტების გვერდიდან",
   "DeletePackage": {
-    "One": "Delete this package",
+    "One": "წაშალეთ ეს პაკეტი",
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
+    "One": "გაუქმება ამ პაკეტიდან",
     "Plural": "Unsubscribe from the selected packages"
   },
   "CopyWorkshopId": {
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "გამოიყენეთ გამართვის მონო",
   "LaunchThroughCities": "დაიწყეთ ქალაქებში.",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "გამოიყენეთ Unity Profiler",
   "NoDlcsNoInternet": "DLC– ების ჩატვირთვა, გთხოვთ, დაუკავშირდეთ ინტერნეტს",
   "NoDlcsOpenGame": "DLC არ ემთხვევა თქვენს ძიებას",
   "DlcUpdateNotice": "თუ თქვენი DLC– ები აქ არ აჩვენებენ, დარწმუნდით, რომ ერთხელ გახსენით თამაში",
@@ -467,15 +467,15 @@
   "UnSnooze": "Un-Snooze",
   "Mod": {
     "One": "Mod",
-    "Plural": "Mods"
+    "Plural": "მოდიფიკაციები"
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Assets"
+    "Plural": "ქონება"
   },
   "Package": {
     "One": "Package",
-    "Plural": "Packages"
+    "Plural": "პაკეტები"
   },
   "Playset": {
     "One": "Playset",
