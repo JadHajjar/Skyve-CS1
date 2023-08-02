@@ -44,6 +44,7 @@
   "Added a 'Load Order' sorting option.": "「ロード順」のソートオプションを追加",
   "Hover over it to display the values.": "カーソルを合わせると値が表示",
   "Profile usages now have separate icons.": "プレイセットの用途に個別のアイコンを表示",
+  "Visual improvements to the package page.": "Visual improvements to the package page.",
   "Added small tags next to package titles.": "パッケージのタイトル隣に小さなタグを追加",
   "Changed the design of your profile list.": "プレイセットリストのデザインを変更",
   "Fixed private packages being marked as .": "非公開のパッケージが、「.」としてマークされる問題を修正",
