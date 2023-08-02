@@ -32,8 +32,8 @@
   "UpToDate": "आधुनिक",
   "StatusUnknown": "अज्ञात स्थिति",
   "PartiallyDownloaded": "आंशिक रूप से डाउनलोड किया गया",
-  "AutoPlaysetSaveOn": "Auto-save is enabled",
-  "AutoPlaysetSaveOff": "Auto-save is disabled",
+  "AutoPlaysetSaveOn": "ऑटो-सेव सक्षम है",
+  "AutoPlaysetSaveOff": "ऑटो-सेव अक्षम है",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
   "LaunchSettings": "सेटिंग्स लॉन्च करें",
   "IncludesItemsYouDoNotHave": "आपके पास ऐसी वस्तुएं शामिल हैं जो आपके पास नहीं हैं",
@@ -75,7 +75,7 @@
   "ContinueFromCurrent": "अपनी वर्तमान सेटिंग्स रखें",
   "GamePlay": "शहरों का निर्माण",
   "EditorPlay": "संपत्ति बनाओ",
-  "PlaysetUsage": "Playset Usage",
+  "PlaysetUsage": "प्रोफ़ाइल उपयोग",
   "SomePackagesWillBeDisabled": "इस प्रोफ़ाइल के उपयोग को बदलकर कुछ पैकेज हटा दिए जाएंगे।",
   "AffectedPackagesAre": "प्रभावित पैकेज हैं:",
   "ConfirmDeletePlayset": "Are you sure you want to delete the playset '{0}'?",
@@ -84,7 +84,7 @@
   "PlaysetExclude": "Exclude its items from your current playset",
   "PlaysetDelete": "Delete this playset",
   "ShouldNotBeSubscribed": "सदस्यता न लें",
-  "MissingPackages": "Missing Packages",
+  "MissingPackages": "लापता पैकेज",
   "LoadingScreenMod": "लोडिंग स्क्रीन मॉड",
   "LoadEnabled": "Load all enabled assets",
   "LoadUsed": "Load used assets",
@@ -94,7 +94,7 @@
   "OpenLocalFolder": "इस पैकेज वाले स्थानीय फ़ोल्डर खोलें",
   "ViewOnSteam": "इस पैकेज को स्टीम पर देखें",
   "ReDownloadPackage": {
-    "One": "Re-download this package",
+    "One": "इस पैकेज को फिर से लोड करें",
     "Plural": "Re-download all selected Packages"
   },
   "DownloadPackage": {
@@ -102,7 +102,7 @@
     "Plural": "Download all selected Packages"
   },
   "CopySteamId": "इस स्टीम आईडी को कॉपी करें",
-  "OpenAuthorPage": "Open the author's page",
+  "OpenAuthorPage": "लेखक का पृष्ठ खोलें",
   "Sorting_Default": "डिफ़ॉल्ट सॉर्टिंग",
   "Sorting_LastEdit": "अंतिम समय संपादित करें",
   "Sorting_DateCreated": "बनाया गया दिनांक",
@@ -129,7 +129,7 @@
   "DisableNewModsByDefault": "डिफ़ॉल्ट रूप से नए सदस्यता वाले मॉड को अक्षम करें",
   "DisableNewAssetsByDefault": "डिफ़ॉल्ट रूप से नई सदस्यता प्राप्त परिसंपत्तियों को अक्षम करें",
   "OverrideGameChanges": "ओवरराइड में बदलाव किए गए बदलाव मॉड्स की सक्षम स्थिति में हैं",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
+  "PlaysetSaveInfo": "इस स्क्रीन में परिवर्तन स्वचालित रूप से सहेजे जाते हैं, \"ऑटोमैटिक सेव\" विकल्प और शीर्ष पर सेव बटन आपके चयनित मॉड्स, एसेट्स और डीएलसीएस को प्रभावित करते हैं",
   "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
   "ShowFilters": "फ़िल्टर दिखाएं",
   "HideFilters": "फिल्टर छिपाएं",
@@ -144,11 +144,11 @@
   "FilterOutPackagesWithMods": "पैकेज पेज में मॉड्स छिपाएं",
   "FilterOutPackagesWithOneAsset": "पैकेज पेज से सिंगल-एसेट पैकेज छिपाएं",
   "DeletePackage": {
-    "One": "Delete this package",
+    "One": "इस पैकेज को हटा दें",
     "Plural": "Delete the selected packages"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe from this package",
+    "One": "इस पैकेज से सदस्यता समाप्त करें",
     "Plural": "Unsubscribe from the selected packages"
   },
   "CopyWorkshopId": {
@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Could not create a new playset, make sure your folder settings are set up correctly in the options panel",
   "UseDebugMono": "डिबग मोनो का उपयोग करें",
   "LaunchThroughCities": "शहरों के माध्यम से लॉन्च करें।",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UnityProfilerMode": "एकता प्रोफाइलर का उपयोग करें",
   "NoDlcsNoInternet": "DLCs ​​लोड नहीं कर सका, कृपया इंटरनेट से कनेक्ट करें",
   "NoDlcsOpenGame": "कोई DLCS आपकी खोज से मेल नहीं खाता है",
   "DlcUpdateNotice": "यदि आपके डीएलसी यहां नहीं दिखा रहे हैं, तो कम से कम एक बार खेल को खोलना सुनिश्चित करें",
@@ -467,15 +467,15 @@
   "UnSnooze": "Un-Snooze",
   "Mod": {
     "One": "Mod",
-    "Plural": "Mods"
+    "Plural": "मॉड"
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Assets"
+    "Plural": "संपत्ति"
   },
   "Package": {
     "One": "Package",
-    "Plural": "Packages"
+    "Plural": "संकुल"
   },
   "Playset": {
     "One": "Playset",
