@@ -44,6 +44,7 @@
   "Added a 'Load Order' sorting option.": "新增：“加载顺序”排序选项。",
   "Hover over it to display the values.": "将鼠标指针悬停在图标上面，以显示评分与订阅量。",
   "Profile usages now have separate icons.": "新增：配置文件用途现在分别有单独的不同图标。",
+  "Visual improvements to the package page.": "Visual improvements to the package page.",
   "Added small tags next to package titles.": "新增：在插件名称旁边显示小标签的功能。",
   "Changed the design of your profile list.": "更改：配置文件列表的设计。",
   "Fixed private packages being marked as .": "修复：可见性为“隐藏”的插件被标记为 \".\" 的问题。",
