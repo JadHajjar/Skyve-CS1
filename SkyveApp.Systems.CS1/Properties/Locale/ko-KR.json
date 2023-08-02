@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "새 플레이셋을 만들 수 없습니다. 옵션 패널에서 폴더 설정이 올바르게 설정되어 있는지 확인하세요",
   "UseDebugMono": "Debug Mono 사용",
   "LaunchThroughCities": "Cities.exe를 통해 실행",
-  "UnityPlaysetrMode": "Use Unity Playsetr",
+  "UnityProfilerMode": "Unity Profiler 사용",
   "NoDlcsNoInternet": "DLC를 불러올 수 없습니다. 인터넷을 연결해 주세요.",
   "NoDlcsOpenGame": "검색과 일치하는 DLC가 없습니다",
   "DlcUpdateNotice": "만약 가진 DLC가 여기에 표시되지 않는다면 게임을 한 번이라도 실행했는지 확인하세요",
@@ -297,7 +297,7 @@
   "AssetIncludedTotal": "포함된 에셋: {0}개, 총: {1}개",
   "NewPlayset_Tip": "새 플레이셋 만들기 또는 가져오기",
   "TempPlayset_Tip": "현재 설정을 사용하여 임시 플레이셋으로 전환하기",
-  "ViewPlaysets_Tip": "View & manage your saved profiles",
+  "ViewPlaysets_Tip": "저장된 내 모든 플레이셋 보기 및 관리하기",
   "AutoSave_Tip": "모드 및 자산에 대한 변경 사항을 프로필에 자동으로 저장합니다",
   "LoadEnabled_Tip": "게임을 불러올 때 활성화된 에셋을 불러옵니다. 이것이 무엇을 하는지 알지 못한다면 그냥 활성화된 상태로 두세요",
   "LoadUsed_Tip": "게임 내에서 비활성화된 에셋이라도 맵에 사용되어 있다면 에셋을 불러옵니다. 이는 Skyve에서의 에셋 설정과는 관련이 없습니다.",
@@ -323,7 +323,7 @@
   "XMLImportMissingInfo": "다양한 XML 구성에서 패키지 보기 및 구독",
   "XMLTip": "XML 구성 파일을 선택하거나 드래그 앤 드롭하여 파일 내부에 나열된 패키지를 관리하세요.",
   "FavoritePlaysetTotal": "즐겨찾는 플레이셋: {0}개, 총: {1}개",
-  "FavoriteTotal": "총 프로필: {0}개",
+  "FavoriteTotal": "총 플레이셋: {0}개",
   "PlaysetFilter": "플레이셋 필터",
   "CheckDocumentsFolder": "Skyve가 문서 폴더에 접근할 수 있는지 확인해주세요. UI 및 언어 설정을 저장하기 위해 사용합니다.",
   "FailedToSaveLanguage": "선택한 언어로 변경하지 못했습니다",
@@ -335,12 +335,12 @@
   },
   "OpenChangelog": "변경사항 열기",
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your profiles",
-    "Plural": "Include the selected items in all your profiles"
+    "One": "내 모든 플레이셋에 이 항목 포함하기",
+    "Plural": "내 모든 플레이셋에 선택된 항목들 포함하기"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your profiles",
-    "Plural": "Exclude the selected items in all your profiles"
+    "One": "내 모든 플레이셋에서 이 항목 제외하기",
+    "Plural": "내 모든 플레이셋에서 선택된 항목들 제외하기"
   },
   "CopyPackageName": {
     "One": "패키지 이름 복사",
@@ -377,8 +377,8 @@
   "XMLImportInfo": "BOB, Tree Brush, Theme Mix 등의 구성 파일을 사용할 수 있습니다.",
   "ImportFromTextInfo": "모든 텍스트 형식을 지원합니다",
   "LsmImportInfo": "반드시 'Asset Report' 파일을 선택하세요",
-  "NoPlaysetsFound": "No profiles to display",
-  "NoPlaysetsMatchFilters": "No profiles match your search",
+  "NoPlaysetsFound": "표시할 플레이셋 없음",
+  "NoPlaysetsMatchFilters": "검색과 일치하는 플레이셋이 없습니다",
   "Your Save-games": "저장 게임",
   "App Data": "App Data",
   "Custom Maps": "사용자 정의 지도",
@@ -679,5 +679,6 @@
   "SkyveDetectedFaultyPackages": "Skyve가 일부 패키지가 완전히 다운로드되지 않은 것을 발견했습니다. 먼저 이러한 패키지를 고치겠습니까?",
   "FaultyPackagesTitle": "결함 있는 패키지 발견됨",
   "CleanupInfoTitle": "What is a cleanup?",
-  "TroubleshootCauseResult": "The following packages might be the cause of your issues"
+  "TroubleshootCauseResult": "The following packages might be the cause of your issues",
+  "VerifiedAuthor": "인증된 제작자"
 }
