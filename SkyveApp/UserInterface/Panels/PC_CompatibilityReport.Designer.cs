@@ -159,7 +159,6 @@ partial class PC_CompatibilityReport
 			this.LC_Items.AutoInvalidate = false;
 			this.LC_Items.AutoScroll = true;
 			this.LC_Items.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LC_Items.HighlightOnHover = true;
 			this.LC_Items.ItemHeight = 75;
 			this.LC_Items.Location = new System.Drawing.Point(0, 126);
 			this.LC_Items.Name = "LC_Items";

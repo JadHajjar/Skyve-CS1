@@ -114,9 +114,9 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void LoadReport(List<ICompatibilityInfo> reports)
 	{
-		var notifs = reports.Select(x => x.GetNotification()).Distinct().Where(x => x > NotificationType.Info).OrderByDescending(x => x).ToList();
+		var notifs = reports.GroupBy(x => x.GetNotification()).Where(x => x.Key > NotificationType.Info).OrderByDescending(x => x.Key).ToList();
 
-		if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs))
+		if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs.Select(x => x.Key)))
 		{
 			LC_Items.SetItems(reports);
 
@@ -128,10 +128,10 @@ public partial class PC_CompatibilityReport : PanelContent
 		{
 			var tab = new SlickTab()
 			{
-				Tag = report,
-				Text = LocaleCR.Get(report.ToString()),
-				Tint = report.GetColor(),
-				IconName = report.GetIcon(true)
+				Tag = report.Key,
+				Text = LocaleCR.Get(report.Key.ToString()) + $" ({report.Count()})",
+				Tint = report.Key.GetColor(),
+				IconName = report.Key.GetIcon(true)
 			};
 
 			tab.TabSelected += Tab_TabSelected;
