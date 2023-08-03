@@ -46,7 +46,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 	protected override void UIChanged()
 	{
-		GridItemSize = new Size(400, 400);
+		GridItemSize = new Size(380, 350);
 
 		base.UIChanged();
 
@@ -69,9 +69,6 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		var partialIncluded = false;
 		var isPressed = false;
 		var isIncluded = (localPackage is not null && _packageUtil.IsIncluded(package.LocalPackage!, out partialIncluded)) || partialIncluded;
-
-		var compatibilityReport = e.Item;
-		var notificationType = compatibilityReport?.GetNotification();
 
 		if (e.IsSelected)
 		{
@@ -166,7 +163,17 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		{
 			e.Graphics.DrawString(LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings), font, textBrush, reportRect.Pad(0, y - baseY + GridPadding.Top, 0, 0), new StringFormat { Alignment = StringAlignment.Center });
 
+			var startY = y;
+
 			y += (int)e.Graphics.Measure(LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings), font, reportRect.Width).Height + GridPadding.Vertical;
+
+			var iconRect2 = iconRect;
+			iconRect2.Y = ((y - startY - iconRect2.Height) / 2) + startY;
+
+			e.Graphics.FillRoundedRectangle(brush, iconRect2, pad);
+
+			using var icon2 = IconManager.GetIcon("I_Info", e.Rects.IncludedRect.Width * 3 / 4);
+			e.Graphics.DrawImage(icon2.Color(color.GetTextColor()), iconRect2.CenterR(icon2.Size));
 
 			y = DrawDividerLine(e, y);
 		}
@@ -388,18 +395,18 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 	private int DrawDividerLine(PaintEventArgs e, int y)
 	{
-		var lineRect = new Rectangle(e.ClipRectangle.X, y + GridPadding.Vertical, e.ClipRectangle.Width, (int)(2 * UI.FontScale));
+		var lineRect = new Rectangle(e.ClipRectangle.X + GridPadding.Horizontal, y + (GridPadding.Vertical * 2), e.ClipRectangle.Width - (GridPadding.Horizontal * 2), (int)(2 * UI.FontScale));
 		using var lineBrush = new LinearGradientBrush(lineRect, default, default, 0F);
 
 		lineBrush.InterpolationColors = new ColorBlend
 		{
 			Colors = new[] { Color.Empty, FormDesign.Design.AccentColor, FormDesign.Design.AccentColor, Color.Empty },
-			Positions = new[] { 0.0f, 0.15f, 0.85f, 1f }
+			Positions = new[] { 0.0f, 0.2f, 0.8f, 1f }
 		};
 
 		e.Graphics.FillRectangle(lineBrush, lineRect);
 
-		return y + GridPadding.Vertical * 2;
+		return y + (GridPadding.Vertical * 4);
 	}
 
 	private void DrawTitleAndTagsAndVersionForList(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, ILocalPackageWithContents? localParentPackage, IWorkshopInfo? workshopInfo, bool isPressed)
@@ -521,12 +528,27 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		}
 	}
 
-	private int DrawButtons(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isPressed, ILocalPackageWithContents? parentPackage, IWorkshopInfo? workshopInfo)
+	private void DrawButtons(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e, bool isPressed, ILocalPackageWithContents? parentPackage, IWorkshopInfo? workshopInfo)
 	{
 		var padding = GridView ? GridPadding : GridPadding;
 		var size = UI.Scale(CompactList ? new Size(24, 24) : new Size(28, 28), UI.FontScale);
-		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), (e.ClipRectangle.Y), size.Width, size.Height);
+		var rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
+
+		if (parentPackage is not null)
+		{
+			rect.X -= rect.Width + padding.Left;
+		}
+
+		if (!IsPackagePage && workshopInfo?.Url is not null)
+		{
+			rect.X -= rect.Width + padding.Left;
+		}
+
+		using var brush = new SolidBrush(e.BackColor);
+		e.Graphics.FillRectangle(brush, new Rectangle(rect.X + padding.Left, e.Rects.IconRect.Y, e.ClipRectangle.Right - rect.X - padding.Left, e.Rects.IconRect.Height));
+
+		rect = new Rectangle(e.ClipRectangle.Right - size.Width - (GridView ? 0 : GridPadding.Right), e.ClipRectangle.Y + ((e.Rects.IconRect.Height - size.Height) / 2), size.Width, size.Height);
 
 		if (parentPackage is not null)
 		{
@@ -550,7 +572,11 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			rect.X -= rect.Width + padding.Left;
 		}
 
-		return rect.X + rect.Width;
+		var seamRectangle = new Rectangle(rect.X + rect.Width - (int)(40 * UI.UIScale), e.ClipRectangle.Y, (int)(40 * UI.UIScale), e.ClipRectangle.Height);
+
+		using var seamBrush = new LinearGradientBrush(seamRectangle, Color.Empty, e.BackColor, 0F);
+
+		e.Graphics.FillRectangle(seamBrush, seamRectangle);
 	}
 
 	protected override void OnItemMouseClick(DrawableItem<ICompatibilityInfo, Rectangles> item, MouseEventArgs e)
