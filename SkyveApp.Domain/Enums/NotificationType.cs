@@ -2,15 +2,15 @@
 
 public enum NotificationType
 {
-	None,
-	Info,
+	None = 0,
+	Info = 1,
 
-	Caution,
-	MissingDependency,
-	Warning,
+	Caution = 2,
+	MissingDependency = 3,
+	Warning = 4,
 
-	AttentionRequired,
-	Exclude,
-	Unsubscribe,
-	Switch,
+	AttentionRequired = 5,
+	Exclude = 6,
+	Unsubscribe = 7,
+	Switch = 8,
 }
