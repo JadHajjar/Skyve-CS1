@@ -175,7 +175,7 @@
   "RequiredDLCs": "前置 DLC/CCP",
   "CRT_Stability": "稳定性",
   "CRT_Successors": "继任模组",
-  "CRT_RequiredPackages": "必需的插件",
+  "CRT_RequiredPackages": "前置插件",
   "CRT_OptionalPackages": "可选插件",
   "CRT_DlcMissing": "缺少的 DLC/CCP",
   "CRT_Compatibility": "兼容性问题",
