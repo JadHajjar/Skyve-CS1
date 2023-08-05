@@ -1,9 +1,4 @@
-﻿using Extensions;
-
-using SlickControls;
-
-using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;

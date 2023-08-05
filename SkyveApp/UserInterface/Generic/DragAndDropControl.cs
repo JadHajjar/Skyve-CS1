@@ -1,18 +1,9 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Generic;
@@ -117,11 +108,11 @@ internal class DragAndDropControl : SlickControl
 
 		if (file != null)
 		{
-			if (LocationManager.Platform is not Platform.Windows)
+			if (CrossIO.CurrentPlatform is not Platform.Windows)
 			{
-				var realPath = IOUtil.ToRealPath(file);
+				var realPath = ServiceCenter.Get<IIOUtil>().ToRealPath(file);
 
-				if (ExtensionClass.FileExists(realPath))
+				if (CrossIO.FileExists(realPath))
 				{
 					file = realPath!;
 				}

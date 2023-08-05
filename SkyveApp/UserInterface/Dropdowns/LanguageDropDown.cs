@@ -1,11 +1,4 @@
-﻿using Extensions;
-
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
@@ -163,6 +156,16 @@ internal class LanguageDropDown : SlickSelectionDropDown<string>
 		{
 			[false] = ("Hungarian", "Hungary"),
 			[true] = ("Magyar", "Magyarország")
+		},
+		["sr-CS"] = new()
+		{
+			[false] = ("Serbian", "Serbia"),
+			[true] = ("Srpski", "Србија")
+		},
+		["el-GR"] = new()
+		{
+			[false] = ("Greek", "Greece"),
+			[true] = ("Ελληνικά", "Ελλάδα")
 		},
 	};
 	#endregion

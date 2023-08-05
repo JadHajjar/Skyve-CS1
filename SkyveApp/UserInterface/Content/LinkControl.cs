@@ -1,12 +1,5 @@
-﻿using Extensions;
-using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SlickControls;
-
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -17,7 +10,7 @@ internal class LinkControl : SlickImageControl
 	{
 	}
 
-	public PackageLink Link { get; set; }
+	public ILink Link { get; set; }
 	public bool Display { get; set; }
 
 	protected override void OnHandleCreated(EventArgs e)

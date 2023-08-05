@@ -19,8 +19,6 @@ public static class ConfigUtil
 {
 	public static string LocalLoadOrderPath => Path.Combine(DataLocation.localApplicationData, "Skyve");
 
-	private static Hashtable assetsTable_;
-
 	private static SkyveConfig config_;
 	public static SkyveConfig Config
 	{
@@ -50,13 +48,6 @@ public static class ConfigUtil
 		config_ =
 			SkyveConfig.Deserialize()
 			?? new SkyveConfig();
-
-		var n = Math.Max(PlatformService.workshop.GetSubscribedItemCount(), config_.Assets.Length);
-		assetsTable_ = new Hashtable(n * 10);
-		foreach (var assetInfo in config_.Assets)
-		{
-			assetsTable_[assetInfo.Path] = assetInfo;
-		}
 
 		SaveThread.Init();
 	}
@@ -152,11 +143,6 @@ public static class ConfigUtil
 				SaveConfig();
 			}
 		}
-	}
-
-	internal static AssetInfo GetAssetConfig(this Package.Asset a)
-	{
-		return assetsTable_[a.GetPath()] as AssetInfo;
 	}
 
 	internal static string GetPath(this Package.Asset a)

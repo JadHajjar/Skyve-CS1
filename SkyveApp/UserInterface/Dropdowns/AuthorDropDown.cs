@@ -1,56 +1,55 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Steam;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Dropdowns;
-internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
+internal class AuthorDropDown : SlickMultiSelectionDropDown<IUser>
 {
-	private readonly Dictionary<SteamUser, int> _counts = new();
+	private readonly Dictionary<IUser, int> _counts = new();
+	private readonly IImageService _imageManager;
+	private readonly ICompatibilityManager _compatibilityManager;
+
+	public AuthorDropDown()
+	{
+		_imageManager = ServiceCenter.Get<IImageService>();
+		_compatibilityManager = ServiceCenter.Get<ICompatibilityManager>();
+	}
 
 	internal void SetItems<T>(IEnumerable<T> enumerable) where T : IPackage
 	{
-		foreach (var item in enumerable)
+		foreach (var item in enumerable.SelectWhereNotNull(x => x.GetWorkshopInfo()?.Author))
 		{
-			if (_counts.ContainsKey(item.Author!))
+			if (_counts.ContainsKey(item!))
 			{
-				_counts[item.Author!]++;
+				_counts[item!]++;
 			}
 			else
 			{
-				_counts[item.Author!] = 1;
+				_counts[item!] = 1;
 			}
 		}
 
 		Items = _counts.Keys.ToArray();
 	}
 
-	protected override IEnumerable<SteamUser> OrderItems(IEnumerable<SteamUser> items)
+	protected override IEnumerable<IUser> OrderItems(IEnumerable<IUser> items)
 	{
 		return items.OrderByDescending(x => SelectedItems.Contains(x)).ThenBy(x => x.Name);
 	}
 
-	protected override bool SearchMatch(string searchText, SteamUser item)
+	protected override bool SearchMatch(string searchText, IUser item)
 	{
-		return searchText.SearchCheck(item.Name) || item.SteamId.ToString().Contains(searchText);
+		return searchText.SearchCheck(item.Name) || (item.Id?.ToString().Contains(searchText) ?? false);
 	}
 
-	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, SteamUser item, bool selected)
+	protected override void PaintItem(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IUser item, bool selected)
 	{
 		if (item is null)
 		{ return; }
 
 		var text = item.Name;
-		var icon = ImageManager.GetImage(item?.AvatarUrl, true).Result;
+		var icon = _imageManager.GetImage(item.AvatarUrl, true).Result;
 		var avatarRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
 
 		if (icon != null)
@@ -58,7 +57,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 			e.Graphics.DrawRoundedImage(icon, avatarRect, (int)(4 * UI.FontScale));
 		}
 
-		if (CompatibilityManager.CompatibilityData.Authors.TryGet(item!.SteamId)?.Verified ?? false)
+		if (_compatibilityManager.IsUserVerified(item))
 		{
 			var checkRect = avatarRect.Align(new Size(avatarRect.Height / 3, avatarRect.Height / 3), ContentAlignment.BottomRight);
 
@@ -78,7 +77,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 		}
 	}
 
-	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<SteamUser> items)
+	protected override void PaintSelectedItems(PaintEventArgs e, Rectangle rectangle, Color foreColor, HoverState hoverState, IEnumerable<IUser> items)
 	{
 		if (items.Count() == 1)
 		{
@@ -101,7 +100,7 @@ internal class AuthorDropDown : SlickMultiSelectionDropDown<SteamUser>
 		var iconRect = rectangle.Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
 		foreach (var item in items)
 		{
-			var icon = ImageManager.GetImage(item?.AvatarUrl, true).Result;
+			var icon = _imageManager.GetImage(item?.AvatarUrl, true).Result;
 			if (icon is not null)
 			{
 				e.Graphics.DrawRoundedImage(icon, iconRect, (int)(4 * UI.FontScale));

@@ -1,0 +1,16 @@
+﻿using System;
+
+namespace SkyveApp.Domain.Systems;
+public interface ILogger
+{
+	string LogFilePath { get; }
+
+	void Info(object message);
+	void Warning(object message);
+	void Error(object message);
+	void Exception(Exception exception, object message);
+
+#if DEBUG
+	void Debug(object message);
+#endif
+}

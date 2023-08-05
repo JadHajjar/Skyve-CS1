@@ -1,14 +1,7 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Domain.Interfaces;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
 
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
@@ -16,29 +9,29 @@ internal class PC_ViewCollection : PC_GenericPackageList
 {
 	private readonly ulong _id;
 
-	internal PC_ViewCollection(IPackage collection) : base(collection.RequiredPackages.Select(x => new Profile.Asset { SteamId = x }))
+	internal PC_ViewCollection(IPackage collection) : base(collection.Requirements, true)
 	{
-		_id = collection.SteamId;
+		_id = collection.Id;
 
-		TLP_Main.SetColumn(P_FiltersContainer, 0);
-		TLP_Main.SetColumnSpan(P_FiltersContainer, TLP_Main.ColumnCount);
+		LC_Items.TLP_Main.SetColumn(LC_Items.P_FiltersContainer, 0);
+		LC_Items.TLP_Main.SetColumnSpan(LC_Items.P_FiltersContainer, LC_Items.TLP_Main.ColumnCount);
 
 		PB_Icon = new PackageIcon
 		{
 			Collection = true
 		};
-		PB_Icon.LoadImage(collection.IconUrl, ImageManager.GetImage);
+		PB_Icon.LoadImage(collection.GetWorkshopInfo()?.ThumbnailUrl, ServiceCenter.Get<IImageService>().GetImage);
 
-		TLP_Main.Controls.Add(PB_Icon, 0, 0);
-		TLP_Main.SetRowSpan(PB_Icon, 3);
+		LC_Items.TLP_Main.Controls.Add(PB_Icon, 0, 0);
+		LC_Items.TLP_Main.SetRowSpan(PB_Icon, 3);
 
 		L_CollectionName = new Label
 		{
 			Text = collection.Name,
 			AutoSize = true
 		};
-		TLP_Main.Controls.Add(L_CollectionName, 1, 0);
-		TLP_Main.SetColumnSpan(L_CollectionName, TLP_Main.ColumnCount - 2);
+		LC_Items.TLP_Main.Controls.Add(L_CollectionName, 1, 0);
+		LC_Items.TLP_Main.SetColumnSpan(L_CollectionName, LC_Items.TLP_Main.ColumnCount - 2);
 
 		B_Steam = new SlickButton
 		{
@@ -47,7 +40,7 @@ internal class PC_ViewCollection : PC_GenericPackageList
 			Anchor = AnchorStyles.Right
 		};
 		B_Steam.Click += B_Steam_Click;
-		TLP_Main.Controls.Add(B_Steam, TLP_Main.ColumnCount - 1, 0);
+		LC_Items.TLP_Main.Controls.Add(B_Steam, LC_Items.TLP_Main.ColumnCount - 1, 0);
 	}
 
 	private void B_Steam_Click(object sender, System.EventArgs e)

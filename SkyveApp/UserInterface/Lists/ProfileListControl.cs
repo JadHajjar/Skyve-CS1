@@ -1,63 +1,54 @@
-﻿using Extensions;
-
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.Domain.Utilities;
+﻿using SkyveApp.Domain.CS1.Utilities;
+using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Panels;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.IO;
-using SkyveApp.Utilities.Managers;
 
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileListControl.Rectangles>
+internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, ProfileListControl.Rectangles>
 {
 	private ProfileSorting sorting;
-	private static IProfile? downloading;
-	private static IProfile? opening;
+	private static ICustomPlayset? downloading;
+	private static ICustomPlayset? opening;
 	private readonly IOSelectionDialog imagePrompt;
 
-	public IEnumerable<IProfile> FilteredItems => SafeGetItems().Select(x => x.Item);
+	public IEnumerable<ICustomPlayset> FilteredItems => SafeGetItems().Select(x => x.Item);
 
 	public bool ReadOnly { get; set; }
 
-	public event Action<Profile>? LoadProfile;
-	public event Action<Profile>? MergeProfile;
-	public event Action<Profile>? ExcludeProfile;
-	public event Action<Profile>? DisposeProfile;
+	public event Action<ICustomPlayset>? LoadProfile;
+	public event Action<ICustomPlayset>? MergeProfile;
+	public event Action<ICustomPlayset>? ExcludeProfile;
+	public event Action<ICustomPlayset>? DisposeProfile;
+
+	private readonly ISettings _settings;
+	private readonly INotifier _notifier;
+	private readonly IUserService _userService;
+	private readonly IPlaysetManager _profileManager;
+	private readonly ICompatibilityManager _compatibilityManager;
 
 	public ProfileListControl(bool readOnly)
 	{
+		ServiceCenter.Get(out _settings, out _notifier, out _userService, out _profileManager, out _compatibilityManager);
+
 		ReadOnly = readOnly;
 		HighlightOnHover = true;
 		SeparateWithLines = true;
-		ItemHeight = CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? 64 : 36;
+		ItemHeight = 36;
 		GridItemSize = new Size(305, 160);
 
-		sorting = CentralManager.SessionSettings.UserSettings.ProfileSorting;
+		sorting = (ProfileSorting)_settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles).Sorting;
 
-		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
+		_notifier.PlaysetChanged += ProfileManager_ProfileUpdated;
 
 		imagePrompt = new IOSelectionDialog()
 		{
 			ValidExtensions = IO.ImageExtensions
 		};
-	}
-
-	private void ProfileManager_ProfileChanged(IProfile obj)
-	{
-		Invalidate();
 	}
 
 	internal void SetSorting(ProfileSorting selectedItem)
@@ -74,8 +65,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		if (selectedItem != ProfileSorting.Downloads)
 		{
-			CentralManager.SessionSettings.UserSettings.ProfileSorting = selectedItem;
-			CentralManager.SessionSettings.Save();
+			var settings = _settings.UserSettings.PageSettings.GetOrAdd(SkyvePage.Profiles);
+			settings.Sorting = (int)selectedItem;
+			_settings.SessionSettings.Save();
 		}
 	}
 
@@ -83,8 +75,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 	{
 		if (disposing)
 		{
-			ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
-			ProfileManager.ProfileUpdated -= ProfileManager_ProfileUpdated;
+			_notifier.PlaysetUpdated -= ProfileManager_ProfileUpdated;
+			_notifier.PlaysetChanged -= ProfileManager_ProfileUpdated;
 		}
 
 		base.Dispose(disposing);
@@ -99,7 +91,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		if (!ReadOnly)
 		{
-			SetItems(ProfileManager.Profiles.Skip(1));
+			SetItems(_profileManager.Playsets.Skip(1));
 		}
 	}
 
@@ -123,21 +115,21 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		OnViewChanged();
 	}
 
-	protected override IEnumerable<DrawableItem<IProfile, Rectangles>> OrderItems(IEnumerable<DrawableItem<IProfile, Rectangles>> items)
+	protected override IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> OrderItems(IEnumerable<DrawableItem<ICustomPlayset, Rectangles>> items)
 	{
 		return sorting switch
 		{
-			ProfileSorting.Downloads => items.OrderByDescending(x => x.Item.Downloads),
+			ProfileSorting.Downloads => items.OrderByDescending(x => x.Item is IOnlinePlayset op ? op.Downloads : 0),
 			ProfileSorting.Color => items.OrderByDescending(x => x.Item.IsFavorite).ThenBy(x => x.Item.Color?.GetHue() ?? float.MaxValue).ThenBy(x => x.Item.Color?.GetBrightness() ?? float.MaxValue).ThenBy(x => x.Item.Color?.GetSaturation() ?? float.MaxValue),
 			ProfileSorting.Name => items.OrderByDescending(x => x.Item.IsFavorite).ThenBy(x => x.Item.Name),
 			ProfileSorting.DateCreated => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.DateCreated),
-			ProfileSorting.Usage => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.Usage).ThenBy(x => x.Item.LastEditDate),
-			ProfileSorting.LastEdit => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.LastEditDate),
-			ProfileSorting.LastUsed or _ => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.LastUsed),
+			ProfileSorting.Usage => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.Usage).ThenBy(x => x.Item.DateUpdated),
+			ProfileSorting.LastEdit => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.DateUpdated),
+			ProfileSorting.LastUsed or _ => items.OrderByDescending(x => x.Item.IsFavorite).ThenByDescending(x => x.Item.DateUsed),
 		};
 	}
 
-	protected override void OnItemMouseClick(DrawableItem<IProfile, Rectangles> item, MouseEventArgs e)
+	protected override void OnItemMouseClick(DrawableItem<ICustomPlayset, Rectangles> item, MouseEventArgs e)
 	{
 		base.OnItemMouseClick(item, e);
 
@@ -152,12 +144,12 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
 			{
 				item.Item.Color = null;
-				ProfileManager.Save((item.Item as Profile)!);
+				_profileManager.Save(item.Item!);
 			}
-			else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is Profile profile)
+			else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is ICustomPlayset profile)
 			{
-				profile.BannerBytes = null;
-				ProfileManager.Save(profile);
+				profile.Banner = null;
+				_profileManager.Save(profile);
 			}
 		}
 
@@ -169,7 +161,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		if (item.Rectangles.Favorite.Contains(e.Location) && !ReadOnly)
 		{
 			item.Item.IsFavorite = !item.Item.IsFavorite;
-			ProfileManager.Save((item.Item as Profile)!);
+			_profileManager.Save(item.Item!);
 		}
 		else if (item.Rectangles.Load.Contains(e.Location))
 		{
@@ -179,7 +171,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			}
 			else
 			{
-				LoadProfile?.Invoke((item.Item as Profile)!);
+				LoadProfile?.Invoke(item.Item!);
 			}
 		}
 		else if (item.Rectangles.Icon.Contains(e.Location) && !ReadOnly)
@@ -188,9 +180,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 		else if (item.Rectangles.Folder.Contains(e.Location) && !ReadOnly)
 		{
-			PlatformUtil.OpenFolder(ProfileManager.GetFileName((item.Item as Profile)!));
+			PlatformUtil.OpenFolder(_profileManager.GetFileName(item.Item!));
 		}
-		else if (item.Rectangles.Author.Contains(e.Location))
+		else if (item.Rectangles.Author.Contains(e.Location) && item.Item.Author is not null)
 		{
 			Program.MainForm.PushPanel(new PC_UserPage(item.Item.Author));
 		}
@@ -198,26 +190,25 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		{
 			ShowProfileContents(item.Item);
 		}
-		else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is Profile profile)
+		else if (item.Rectangles.EditThumbnail.Contains(e.Location) && item.Item is ICustomPlayset profile)
 		{
 			if (imagePrompt.PromptFile(Program.MainForm) == DialogResult.OK)
 			{
 				try
 				{
-					var converter = new ImageConverter();
 					using var img = Image.FromFile(imagePrompt.SelectedPath);
 
 					if (img.Width > 700 || img.Height > 700)
 					{
 						using var smallImg = new Bitmap(img, img.Size.GetProportionalDownscaledSize(700));
-						profile.BannerBytes = (byte[])converter.ConvertTo(smallImg, typeof(byte[]));
+						profile.Banner = smallImg;
 					}
 					else
 					{
-						profile.BannerBytes = (byte[])converter.ConvertTo(img, typeof(byte[]));
+						profile.Banner = img as Bitmap;
 					}
 
-					ProfileManager.Save(profile);
+					_profileManager.Save(profile);
 
 					Invalidate(item.Item);
 				}
@@ -226,18 +217,18 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 	}
 
-	private static async void DownloadProfile(IProfile item)
+	private async void DownloadProfile(ICustomPlayset item)
 	{
 		try
 		{
 			downloading = item;
-			await ProfileManager.DownloadProfile(item);
+			await ServiceCenter.Get<IOnlinePlaysetUtil>().DownloadPlayset(item);
 			downloading = null;
 		}
-		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadProfile, form: Program.MainForm)); }
+		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadPlayset, form: Program.MainForm)); }
 	}
 
-	private void ChangeColor(IProfile item)
+	private void ChangeColor(ICustomPlayset item)
 	{
 		var colorDialog = new SlickColorPicker(item.Color ?? Color.Red);
 
@@ -247,48 +238,48 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 
 		item.Color = colorDialog.Color;
-		ProfileManager.Save((item as Profile)!);
+		_profileManager.Save(item!);
 	}
 
-	private void ShowRightClickMenu(IProfile item)
+	private void ShowRightClickMenu(ICustomPlayset item)
 	{
-		var local = item is Profile;
+		var local = item is not IOnlinePlayset;
 
 		var items = new SlickStripItem[]
 		{
-			  new (Locale.DownloadProfile, "I_Import", !local, action: () => DownloadProfile(item))
-			, new (Locale.ViewThisProfilesPackages, "I_ViewFile", action: () => ShowProfileContents(item))
-			, new (item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; ProfileManager.Save(item as Profile); })
-			, new (Locale.ChangeProfileColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
-			, new (Locale.CreateShortcutProfile, "I_Link", local && LocationManager.Platform is Platform.Windows, action: () => ProfileManager.CreateShortcut((item as Profile)!))
-			, new (Locale.OpenProfileFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(ProfileManager.GetFileName((item as Profile)!)))
+			  new (Locale.DownloadPlayset, "I_Import", !local, action: () => DownloadProfile(item))
+			, new (Locale.ViewThisPlaysetsPackages, "I_ViewFile", action: () => ShowProfileContents(item))
+			, new (item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset, "I_Star", local, action: () => { item.IsFavorite = !item.IsFavorite; _profileManager.Save(item); })
+			, new (Locale.ChangePlaysetColor, "I_Paint", local, action: () => this.TryBeginInvoke(() => ChangeColor(item)))
+			, new (Locale.CreateShortcutPlayset, "I_Link", local && CrossIO.CurrentPlatform is Platform.Windows, action: () => _profileManager.CreateShortcut(item!))
+			, new (Locale.OpenPlaysetFolder, "I_Folder", local, action: () => PlatformUtil.OpenFolder(_profileManager.GetFileName(item!)))
 			, new (string.Empty, show: local)
-			, new (Locale.ShareProfile, "I_Share", local && item.ProfileId == 0 && CompatibilityManager.User.SteamId != 0 && downloading != item, action: async () => await ShareProfile(item))
-			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && item.Author == CompatibilityManager.User.SteamId, action: async () => await ProfileManager.SetVisibility((item as Profile)!, !item.Public))
-			, new (Locale.UpdateProfile, "I_Share", local && item.ProfileId != 0 && item.Author == CompatibilityManager.User.SteamId, action: async () => await ShareProfile(item))
-			, new (Locale.UpdateProfile, "I_Refresh", local && item.ProfileId != 0 && item.Author != CompatibilityManager.User.SteamId, action: () => DownloadProfile(item))
-			, new (Locale.CopyProfileLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
+			, new (Locale.SharePlayset, "I_Share", local && item.ProfileId == 0 && _userService.User.Id is not null && downloading != item, action: async () => await ShareProfile(item))
+			, new (item.Public ? Locale.MakePrivate : Locale.MakePublic, item.Public ? "I_UserSecure" : "I_People", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ServiceCenter.Get<IOnlinePlaysetUtil>().SetVisibility((item as IOnlinePlayset)!, !item.Public))
+			, new (Locale.UpdatePlayset, "I_Share", local && item.ProfileId != 0 && _userService.User.Equals(item.Author), action: async () => await ShareProfile(item))
+			, new (Locale.UpdatePlayset, "I_Refresh", local && item.ProfileId != 0 && item.Author != _userService.User.Id, action: () => DownloadProfile(item))
+			, new (Locale.CopyPlaysetLink, "I_LinkChain", local && item.ProfileId != 0, action: () => Clipboard.SetText(IdHasher.HashToShortString(item.ProfileId)))
 			, new (string.Empty, show: local)
-			, new (Locale.ProfileReplace, "I_Import", local, action: () => LoadProfile?.Invoke((item as Profile)!))
-			, new (Locale.ProfileMerge, "I_Merge", local, action: () => MergeProfile?.Invoke((item as Profile)!))
-			, new (Locale.ProfileExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke((item as Profile)!))
+			, new (Locale.PlaysetReplace, "I_Import", local, action: () => LoadProfile?.Invoke(item!))
+			, new (Locale.PlaysetMerge, "I_Merge", local, action: () => MergeProfile?.Invoke(item!))
+			, new (Locale.PlaysetExclude, "I_Exclude", local, action: () => ExcludeProfile?.Invoke(item!))
 			, new (string.Empty)
-			, new (Locale.ProfileDelete, "I_Disposable", local || item.Author == CompatibilityManager.User.SteamId, action: async () => { if(local) { DisposeProfile?.Invoke((item as Profile)!); } else if(await ProfileManager.DeleteOnlineProfile(item)) { base.Remove(item); } })
+			, new (Locale.PlaysetDelete, "I_Disposable", local || _userService.User.Equals(item.Author), action: async () => { if(local) { DisposeProfile?.Invoke(item!); } else if(await ServiceCenter.Get<IOnlinePlaysetUtil>().DeleteOnlinePlayset((item as IOnlinePlayset)!)) { base.Remove(item); } })
 		};
 
 		this.TryBeginInvoke(() => SlickToolStrip.Show(Program.MainForm, items));
 	}
 
-	private async Task ShareProfile(IProfile item)
+	private async Task ShareProfile(ICustomPlayset item)
 	{
 		Loading = true;
 		downloading = item;
-		await ProfileManager.Share((item as Profile)!);
+		await ServiceCenter.Get<IOnlinePlaysetUtil>().Share(item!);
 		downloading = null;
 		Loading = false;
 	}
 
-	private async void ShowProfileContents(IProfile item)
+	private async void ShowProfileContents(ICustomPlayset item)
 	{
 		try
 		{
@@ -298,7 +289,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			{
 				Loading = true;
 				opening = item;
-				packages = (await SkyveApiUtil.GetUserProfileContents(item.ProfileId))?.Packages;
+				packages = (await ServiceCenter.Get<SkyveApiUtil>().GetUserProfileContents(item.ProfileId))?.Packages;
 				opening = null;
 				Loading = false;
 			}
@@ -307,15 +298,15 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 				packages = item.Packages;
 			}
 
-			Program.MainForm.PushPanel(new PC_GenericPackageList(packages ?? Enumerable.Empty<IPackage>())
+			Program.MainForm.PushPanel(new PC_GenericPackageList(packages ?? Enumerable.Empty<IPackage>(), true)
 			{
 				Text = item.Name
 			});
 		}
-		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadProfile, form: Program.MainForm)); }
+		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadPlayset, form: Program.MainForm)); }
 	}
 
-	protected override bool IsFlowBreak(int index, DrawableItem<IProfile, Rectangles> currentItem, DrawableItem<IProfile, Rectangles> nextItem)
+	protected override bool IsFlowBreak(int index, DrawableItem<ICustomPlayset, Rectangles> currentItem, DrawableItem<ICustomPlayset, Rectangles> nextItem)
 	{
 		return currentItem.Item.IsFavorite && (!nextItem?.Item.IsFavorite ?? false);
 	}
@@ -328,11 +319,11 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 		else if (!Items.Any())
 		{
-			e.Graphics.DrawString(Locale.NoProfilesFound, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(Locale.NoPlaysetsFound, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 		}
 		else if (!SafeGetItems().Any())
 		{
-			e.Graphics.DrawString(Locale.NoProfilesMatchFilters, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+			e.Graphics.DrawString(Locale.NoPlaysetsMatchFilters, UI.Font(9.75F, FontStyle.Italic), new SolidBrush(ForeColor), ClientRectangle, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 		}
 		else
 		{
@@ -340,7 +331,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 	}
 
-	protected override void OnPaintItemGrid(ItemPaintEventArgs<IProfile, Rectangles> e)
+	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
 	{
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 		var textColor = FormDesign.Design.ForeColor;
@@ -355,7 +346,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-GridPadding.Left, -GridPadding.Top, -GridPadding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
 
-			textColor = brush.Color.GetTextColor();
+			textColor = Color.FromArgb(255, brush.Color).GetTextColor();
 		}
 		else
 		{
@@ -367,7 +358,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			e.Graphics.FillRoundedRectangle(brush, e.Rects.Thumbnail.Pad(-GridPadding.Left, -GridPadding.Top, -GridPadding.Right, 0), (int)(5 * UI.FontScale), botLeft: false, botRight: false);
 			e.Graphics.FillRectangle(gradientBrush, e.Rects.Thumbnail.Pad(-GridPadding.Left, e.Rects.Thumbnail.Height / 3, -GridPadding.Right, 0));
 
-			textColor = brush.Color.GetTextColor();
+			textColor = Color.FromArgb(255, brush.Color).GetTextColor();
 		}
 
 		var favViewRect = ReadOnly ? e.Rects.ViewContents : e.Rects.Favorite;
@@ -406,22 +397,22 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		var labelRects = e.Rects.Content;
 
-		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
-		labelRects.Y += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
+		labelRects.Y += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), labelRects, ContentAlignment.TopLeft).Height + GridPadding.Top;
 
-		if (e.Item.Author != 0)
+		if (e.Item.Author is not null)
 		{
-			var name = SteamUtil.GetUser(e.Item.Author)?.Name;
+			var name = e.Item.Author?.Name;
 
 			using var userIcon = IconManager.GetSmallIcon("I_User");
 
-			e.Rects.Author = e.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), labelRects, ContentAlignment.TopLeft);
+			e.Rects.Author = e.Graphics.DrawLabel(name, userIcon, FormDesign.Design.ActiveColor.MergeColor(FormDesign.Design.BackColor, 25), labelRects, ContentAlignment.TopLeft);
 		}
 
-		if (e.Item == ProfileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentPlayset)
 		{
 			using var okIcon = IconManager.GetSmallIcon("I_Ok");
-			e.DrawLabel(Locale.CurrentProfile, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
+			e.Graphics.DrawLabel(Locale.CurrentPlayset, okIcon, FormDesign.Design.ActiveColor, e.Rects.Content, ContentAlignment.TopRight);
 
 			using var pen = new Pen(FormDesign.Design.ActiveColor, (float)(1.5 * UI.FontScale));
 
@@ -430,11 +421,11 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		else if (e.Item.IsMissingItems)
 		{
 			using var icon = IconManager.GetSmallIcon("I_MinorIssues");
-			e.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
+			e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, icon, FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Content, ContentAlignment.TopRight);
 		}
 
-		var loadText = ReadOnly ? ProfileManager.Profiles.Any(x => x.Name.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfile : Locale.DownloadProfile : Locale.LoadProfile;
-		var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "I_Wait" : ReadOnly && ProfileManager.Profiles.Any(x => x.Name.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "I_Refresh" : "I_Import");
+		var loadText = ReadOnly ? _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlayset : Locale.DownloadPlayset : Locale.LoadPlayset;
+		var loadIcon = new DynamicIcon(downloading == e.Item && ReadOnly ? "I_Wait" : ReadOnly && _profileManager.Playsets.Any(x => x.Name!.Equals(e.Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? "I_Refresh" : "I_Import");
 		using var importIcon = ReadOnly ? loadIcon.Default : loadIcon.Get(e.Rects.Folder.Height * 3 / 4);
 		var loadSize = SlickButton.GetSize(e.Graphics, importIcon, loadText, Font, null);
 
@@ -495,9 +486,9 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 	}
 
-	protected override void OnPaintItemList(ItemPaintEventArgs<IProfile, Rectangles> e)
+	protected override void OnPaintItemList(ItemPaintEventArgs<ICustomPlayset, Rectangles> e)
 	{
-		var large = CentralManager.SessionSettings.UserSettings.LargeItemOnHover;
+		var large = false;
 		var isPressed = e.HoverState.HasFlag(HoverState.Pressed);
 
 		e.HoverState &= ~HoverState.Pressed;
@@ -547,14 +538,14 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 		var x = e.Rects.Text.X;
 
-		if (e.Item == ProfileManager.CurrentProfile)
+		if (e.Item == _profileManager.CurrentPlayset)
 		{
-			e.Rects.Text.X += e.DrawLabel(Locale.CurrentProfile, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.CurrentPlayset, IconManager.GetSmallIcon("I_Ok"), FormDesign.Design.ActiveColor, e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (e.Item.IsMissingItems)
 		{
-			e.Rects.Text.X += e.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
+			e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludesItemsYouDoNotHave, IconManager.GetSmallIcon("I_MinorIssues"), FormDesign.Design.RedColor.MergeColor(FormDesign.Design.BackColor, 50), e.Rects.Text, large ? ContentAlignment.TopLeft : ContentAlignment.BottomLeft).Width + Padding.Left;
 		}
 
 		if (large)
@@ -562,15 +553,15 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 			e.Rects.Text.X = x;
 		}
 
-		e.Rects.Text.X += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
-		e.Rects.Text.X += e.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
+		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.ModCount, Locale.Mod.FormatPlural(e.Item.ModCount).ToLower()), IconManager.GetSmallIcon("I_Mods"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
+		e.Rects.Text.X += e.Graphics.DrawLabel(Locale.IncludedCount.FormatPlural(e.Item.AssetCount, Locale.Asset.FormatPlural(e.Item.AssetCount).ToLower()), IconManager.GetSmallIcon("I_Assets"), FormDesign.Design.AccentColor.MergeColor(FormDesign.Design.BackColor, 75), e.Rects.Text, ContentAlignment.BottomLeft).Width + Padding.Left;
 
 		SlickButton.DrawButton(e, e.Rects.Folder, string.Empty, Font, IconManager.GetIcon("I_Folder"), null, e.Rects.Folder.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
-		var loadSize = SlickButton.GetSize(e.Graphics, IconManager.GetIcon("I_Folder"), Locale.LoadProfile, Font, null);
+		var loadSize = SlickButton.GetSize(e.Graphics, IconManager.GetIcon("I_Folder"), Locale.LoadPlayset, Font, null);
 		e.Rects.Load = new Rectangle(e.Rects.Folder.X - Padding.Left - loadSize.Width, e.Rects.Folder.Y, loadSize.Width, e.Rects.Folder.Height);
 
-		SlickButton.DrawButton(e, e.Rects.Load, Locale.LoadProfile, Font, IconManager.GetIcon("I_Import"), null, e.Rects.Load.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
+		SlickButton.DrawButton(e, e.Rects.Load, Locale.LoadPlayset, Font, IconManager.GetIcon("I_Import"), null, e.Rects.Load.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal);
 
 		if (large)
 		{
@@ -579,7 +570,7 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		}
 	}
 
-	protected override Rectangles GenerateRectangles(IProfile item, Rectangle rectangle)
+	protected override Rectangles GenerateRectangles(ICustomPlayset item, Rectangle rectangle)
 	{
 		var rects = new Rectangles(item);
 
@@ -616,13 +607,8 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		else
 		{
 			rects.Favorite = rectangle.Pad(1 * Padding.Left, 0, 0, 0).Align(new Size(rectangle.Height - 2, rectangle.Height - 2), ContentAlignment.MiddleLeft);
-			rects.Folder = rectangle.Pad(0, 0, Padding.Right, 0).Align(CentralManager.SessionSettings.UserSettings.LargeItemOnHover ? new Size(ItemHeight / 2, ItemHeight / 2) : new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
+			rects.Folder = rectangle.Pad(0, 0, Padding.Right, 0).Align(new Size(ItemHeight, ItemHeight), ContentAlignment.TopRight);
 
-			if (CentralManager.SessionSettings.UserSettings.LargeItemOnHover)
-			{
-				rects.Exclude = rects.Merge = rects.Folder.Pad(0, rects.Folder.Height, 0, -rects.Folder.Height);
-				rects.Merge.X -= rects.Merge.Width + Padding.Right;
-			}
 
 			rects.Icon = rectangle.Pad(rects.Favorite.Right + (2 * Padding.Left)).Align(rects.Favorite.Size, ContentAlignment.MiddleLeft);
 
@@ -638,11 +624,11 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		return rects;
 	}
 
-	public class Rectangles : IDrawableItemRectangles<IProfile>
+	public class Rectangles : IDrawableItemRectangles<ICustomPlayset>
 	{
-		public IProfile Item { get; set; }
+		public ICustomPlayset Item { get; set; }
 
-		public Rectangles(IProfile item)
+		public Rectangles(ICustomPlayset item)
 		{
 			Item = item;
 		}
@@ -678,28 +664,28 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 		{
 			if (Favorite.Contains(location))
 			{
-				text = Item.IsFavorite ? Locale.UnFavoriteThisProfile : Locale.FavoriteThisProfile;
+				text = Item.IsFavorite ? Locale.UnFavoriteThisPlayset : Locale.FavoriteThisPlayset;
 				point = Favorite.Location;
 				return true;
 			}
 
 			if (Icon.Contains(location) && !(instance as ProfileListControl)!.ReadOnly)
 			{
-				text = Locale.ChangeProfileColor;
+				text = Locale.ChangePlaysetColor;
 				point = Icon.Location;
 				return true;
 			}
 
 			if (Load.Contains(location))
 			{
-				text = (instance as ProfileListControl)!.ReadOnly ? ProfileManager.Profiles.Any(x => x.Name.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdateProfileTip : Locale.DownloadProfileTip : Locale.ProfileReplace;
+				text = (instance as ProfileListControl)!.ReadOnly ? ServiceCenter.Get<IPlaysetManager>().Playsets.Any(x => x.Name!.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlaysetTip : Locale.DownloadPlaysetTip : Locale.PlaysetReplace;
 				point = Load.Location;
 				return true;
 			}
 
 			if (Folder.Contains(location))
 			{
-				text = Locale.OpenProfileFolder;
+				text = Locale.OpenPlaysetFolder;
 				point = Folder.Location;
 				return true;
 			}
@@ -713,14 +699,14 @@ internal class ProfileListControl : SlickStackedListControl<IProfile, ProfileLis
 
 			if (EditThumbnail.Contains(location))
 			{
-				text = Locale.EditProfileThumbnail;
+				text = Locale.EditPlaysetThumbnail;
 				point = EditThumbnail.Location;
 				return true;
 			}
 
 			if (ViewContents.Contains(location))
 			{
-				text = Locale.ViewThisProfilesPackages;
+				text = Locale.ViewThisPlaysetsPackages;
 				point = ViewContents.Location;
 				return true;
 			}

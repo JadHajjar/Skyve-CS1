@@ -1,39 +1,35 @@
-﻿using Extensions;
-
-using SkyveApp.Domain;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using System.Collections.Generic;
-using System.Linq;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
 namespace SkyveApp.UserInterface.Panels;
-internal class PC_Mods : PC_ContentList<Mod>
+internal class PC_Mods : PC_ContentList<IMod>
 {
 	public PC_Mods()
 	{
 
 	}
 
+	public override SkyvePage Page => SkyvePage.Mods;
+
 	protected override void LocaleChanged()
 	{
 		base.LocaleChanged();
 
-		Text = $"{Locale.Mod.Plural} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.Mod.Plural} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
 	}
 
-	protected override IEnumerable<Mod> GetItems()
+	protected override IEnumerable<IMod> GetItems()
 	{
-		return CentralManager.Mods;
+		return ServiceCenter.Get<IPackageManager>().Mods;
 	}
 
 	protected override string GetCountText()
 	{
-		var modsIncluded = CentralManager.Mods.Count(x => x.IsIncluded);
-		var modsEnabled = CentralManager.Mods.Count(x => x.IsEnabled && x.IsIncluded);
+		var mods = LC_Items.Items;
+		var modsIncluded = mods.Count(x => x.IsIncluded());
+		var modsEnabled = mods.Count(x => x.IsEnabled() && x.IsIncluded());
 		var total = LC_Items.ItemCount;
 
-		if (!CentralManager.SessionSettings.UserSettings.AdvancedIncludeEnable)
+		if (!ServiceCenter.Get<ISettings>().UserSettings.AdvancedIncludeEnable)
 		{
 			return string.Format(Locale.ModIncludedTotal, modsIncluded, total);
 		}
@@ -49,15 +45,5 @@ internal class PC_Mods : PC_ContentList<Mod>
 	protected override LocaleHelper.Translation GetItemText()
 	{
 		return Locale.Mod;
-	}
-
-	protected override void SetIncluded(IEnumerable<Mod> filteredItems, bool included)
-	{
-		ContentUtil.SetBulkIncluded(filteredItems, included);
-	}
-
-	protected override void SetEnabled(IEnumerable<Mod> filteredItems, bool enabled)
-	{
-		ContentUtil.SetBulkEnabled(filteredItems, enabled);
 	}
 }

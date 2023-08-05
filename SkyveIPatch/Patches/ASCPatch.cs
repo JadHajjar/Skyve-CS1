@@ -43,8 +43,8 @@ namespace SkyveIPatch.Patches {
 
                 assemblyDefinition = SubscriptionManagerPatch(assemblyDefinition); // must be called to check if patch loader is effective.
 
-                if (ConfigUtil.Config.HidePanels)
-                    NoQueryPatch(assemblyDefinition); // handled by harmony patch
+                //if (ConfigUtil.Config.HidePanels)
+                //    NoQueryPatch(assemblyDefinition); // handled by harmony patch
             } catch (Exception ex) { logger.Error(ex.ToString());  }
             return assemblyDefinition;
         }

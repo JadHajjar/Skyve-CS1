@@ -1,20 +1,20 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.StatusBubbles;
 internal class ProfileBubble : StatusBubbleBase
 {
-	public ProfileBubble()
-	{ }
+	private readonly IPlaysetManager _profileManager;
+	private readonly INotifier _notifier;
 
-	public override Color? TintColor { get => CentralManager.CurrentProfile.Color; set { } }
+	public ProfileBubble()
+	{
+		ServiceCenter.Get(out _notifier, out _profileManager);
+	}
+
+	public override Color? TintColor { get => _profileManager.CurrentPlayset.Color; set { } }
 
 	protected override void OnHandleCreated(EventArgs e)
 	{
@@ -25,40 +25,40 @@ internal class ProfileBubble : StatusBubbleBase
 			return;
 		}
 
-		Text = Locale.ProfileBubble;
-		ImageName = CentralManager.CurrentProfile.GetIcon();
+		Text = Locale.PlaysetBubble;
+		ImageName = _profileManager.CurrentPlayset.GetIcon();
 
-		ProfileManager.ProfileChanged += ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged += ProfileManager_ProfileChanged;
 	}
 
 	protected override void Dispose(bool disposing)
 	{
 		base.Dispose(disposing);
 
-		ProfileManager.ProfileChanged -= ProfileManager_ProfileChanged;
+		_notifier.PlaysetChanged -= ProfileManager_ProfileChanged;
 	}
 
-	private void ProfileManager_ProfileChanged(Domain.Profile obj)
+	private void ProfileManager_ProfileChanged()
 	{
-		ImageName = CentralManager.CurrentProfile.GetIcon();
+		ImageName = _profileManager.CurrentPlayset.GetIcon();
 	}
 
 	protected override void CustomDraw(PaintEventArgs e, ref int targetHeight)
 	{
-		DrawText(e, ref targetHeight, CentralManager.CurrentProfile.Name ?? "");
+		DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.Name ?? "");
 
-		if (CentralManager.CurrentProfile.Temporary)
+		if (_profileManager.CurrentPlayset.Temporary)
 		{
-			DrawText(e, ref targetHeight, Locale.CreateProfileHere, FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, Locale.CreatePlaysetHere, FormDesign.Design.YellowColor);
 		}
 		else
 		{
-			DrawText(e, ref targetHeight, CentralManager.CurrentProfile.AutoSave ? Locale.AutoProfileSaveOn : Locale.AutoProfileSaveOff, CentralManager.CurrentProfile.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
+			DrawText(e, ref targetHeight, _profileManager.CurrentPlayset.AutoSave ? Locale.AutoPlaysetSaveOn : Locale.AutoPlaysetSaveOff, _profileManager.CurrentPlayset.AutoSave ? FormDesign.Design.GreenColor : FormDesign.Design.YellowColor);
 		}
 
-		if (ProfileManager.ProfilesLoaded)
+		if (ServiceCenter.Get<INotifier>().PlaysetsLoaded)
 		{
-			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(ProfileManager.Profiles.Count() - 1, Locale.Profile.FormatPlural(ProfileManager.Profiles.Count() - 1).ToLower()));
+			DrawText(e, ref targetHeight, Locale.LoadedCount.FormatPlural(_profileManager.Playsets.Count() - 1, Locale.Playset.FormatPlural(_profileManager.Playsets.Count() - 1).ToLower()));
 		}
 	}
 }

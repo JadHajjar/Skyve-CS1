@@ -1,36 +1,32 @@
-﻿using Extensions;
+﻿using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
-
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_DLCs : PanelContent
 {
+	private readonly IDlcManager _dlcManager;
 	public PC_DLCs()
 	{
+		ServiceCenter.Get(out _dlcManager);
+
 		InitializeComponent();
 
 		LC_DLCs.CanDrawItem += LC_DLCs_CanDrawItem;
 
-		LC_DLCs.SetItems(SteamUtil.Dlcs);
+		LC_DLCs.SetItems(_dlcManager.Dlcs);
 
 		RefreshCounts();
 
-		SteamUtil.DLCsLoaded += SteamUtil_DLCsLoaded;
+		_dlcManager.DlcsLoaded += SteamUtil_DLCsLoaded;
 	}
 
 	private void SteamUtil_DLCsLoaded()
 	{
-		if (LC_DLCs.ItemCount != SteamUtil.Dlcs.Count)
+		if (LC_DLCs.ItemCount != _dlcManager.Dlcs.Count())
 		{
-			LC_DLCs.SetItems(SteamUtil.Dlcs);
+			LC_DLCs.SetItems(_dlcManager.Dlcs);
 		}
 
 		LC_DLCs.Loading = false;
@@ -40,14 +36,14 @@ public partial class PC_DLCs : PanelContent
 
 	private void RefreshCounts()
 	{
-		var total = SteamUtil.Dlcs.Count(x => SteamUtil.IsDlcInstalledLocally(x.Id));
+		var total = _dlcManager.Dlcs.Count(x => _dlcManager.IsAvailable(x.Id));
 
 		L_Counts.Text = string.Format(Locale.DlcCount, total);
 	}
 
-	private void LC_DLCs_CanDrawItem(object sender, CanDrawItemEventArgs<Domain.Steam.SteamDlc> e)
+	private void LC_DLCs_CanDrawItem(object sender, CanDrawItemEventArgs<IDlcInfo> e)
 	{
-		if (T_YourDlcs.Selected && !SteamUtil.IsDlcInstalledLocally(e.Item.Id))
+		if (T_YourDlcs.Selected && !_dlcManager.IsAvailable(e.Item.Id))
 		{
 			e.DoNotDraw = true;
 		}
@@ -60,7 +56,7 @@ public partial class PC_DLCs : PanelContent
 
 	protected override void LocaleChanged()
 	{
-		Text = $"{Locale.DLCs} - {ProfileManager.CurrentProfile.Name}";
+		Text = $"{Locale.DLCs} - {ServiceCenter.Get<IPlaysetManager>().CurrentPlayset.Name}";
 		L_Duplicates.Text = Locale.DlcUpdateNotice;
 	}
 
@@ -107,7 +103,7 @@ public partial class PC_DLCs : PanelContent
 	{
 		foreach (var item in LC_DLCs.FilteredItems)
 		{
-			item.IsIncluded = false;
+			_dlcManager.SetIncluded(item, false);
 		}
 
 		LC_DLCs.Invalidate();
@@ -117,7 +113,7 @@ public partial class PC_DLCs : PanelContent
 	{
 		foreach (var item in LC_DLCs.FilteredItems)
 		{
-			item.IsIncluded = true;
+			_dlcManager.SetIncluded(item, true);
 		}
 
 		LC_DLCs.Invalidate();

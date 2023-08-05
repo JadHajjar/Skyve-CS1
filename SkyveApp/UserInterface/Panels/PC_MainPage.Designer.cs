@@ -1,6 +1,4 @@
-﻿using SkyveApp.Utilities.Managers;
-
-namespace SkyveApp.UserInterface.Panels;
+﻿namespace SkyveApp.UserInterface.Panels;
 
 partial class PC_MainPage
 {
@@ -17,8 +15,8 @@ partial class PC_MainPage
 	{
 		if (disposing && (components != null))
 		{
-			CentralManager.ContentLoaded -= SetButtonEnabledOnLoad;
-			CitiesManager.MonitorTick -= CitiesManager_MonitorTick;
+			_notifier.ContentLoaded -= SetButtonEnabledOnLoad;
+			_citiesManager.MonitorTick -= CitiesManager_MonitorTick;
 			components.Dispose();
 		}
 		base.Dispose(disposing);

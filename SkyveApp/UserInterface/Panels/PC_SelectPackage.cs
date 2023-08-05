@@ -1,25 +1,15 @@
-﻿using Extensions;
-
-using SkyveApp.Domain.Steam;
-using SkyveApp.Domain.Utilities;
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Content;
 using SkyveApp.UserInterface.Lists;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
 
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_SelectPackage : PanelContent
 {
-	private readonly ItemListControl<SteamWorkshopItem> LC_Items;
+	private readonly ItemListControl<GenericWorkshopPackage> LC_Items;
 	private readonly DelayedAction<TicketBooth.Ticket> _delayedSearch;
 	private readonly TicketBooth _ticketBooth = new();
 	private bool searchEmpty = true;
@@ -27,6 +17,8 @@ public partial class PC_SelectPackage : PanelContent
 	private readonly List<string> searchTermsAnd = new();
 	private readonly List<string> searchTermsExclude = new();
 	public event Action<IEnumerable<ulong>>? PackageSelected;
+
+	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
 
 	public PC_SelectPackage()
 	{
@@ -40,7 +32,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		L_Selected.Text = Locale.ControlToSelectMultiplePackages;
 
-		LC_Items = new()
+		LC_Items = new(SkyvePage.None)
 		{
 			Loading = true,
 			IsSelection = true,
@@ -50,7 +42,7 @@ public partial class PC_SelectPackage : PanelContent
 
 		LC_Items.PackageSelected += LC_Items_PackageSelected;
 
-		LC_Items.SetSorting(Domain.Enums.PackageSorting.None, false);
+		LC_Items.SetSorting(PackageSorting.None, false);
 
 		Controls.Add(LC_Items);
 
@@ -69,14 +61,14 @@ public partial class PC_SelectPackage : PanelContent
 		L_Selected.Visible = false;
 	}
 
-	private void LC_Items_PackageSelected(SteamWorkshopItem obj)
+	private void LC_Items_PackageSelected(GenericWorkshopPackage obj)
 	{
 		if (ModifierKeys.HasFlag(Keys.Control))
 		{
 			B_Continue.Visible = true;
-			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == obj.SteamId))
+			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Id == obj.Id))
 			{
-				FLP_Packages.Controls.Add(new MiniPackageControl(obj.SteamId));
+				FLP_Packages.Controls.Add(new MiniPackageControl(obj.Id));
 			}
 
 			return;
@@ -84,21 +76,21 @@ public partial class PC_SelectPackage : PanelContent
 
 		if (FLP_Packages.Controls.Count > 0)
 		{
-			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.SteamId == obj.SteamId))
+			if (!FLP_Packages.Controls.OfType<MiniPackageControl>().Any(x => x.Id == obj.Id))
 			{
-				FLP_Packages.Controls.Add(new MiniPackageControl(obj.SteamId));
+				FLP_Packages.Controls.Add(new MiniPackageControl(obj.Id));
 			}
 
 			Form.PushBack();
-			PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId));
+			PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id));
 			return;
 		}
 
 		Form.PushBack();
-		PackageSelected?.Invoke(new[] { obj.SteamId });
+		PackageSelected?.Invoke(new[] { obj.Id });
 	}
 
-	private bool DoNotDraw(SteamWorkshopItem item)
+	private bool DoNotDraw(IWorkshopInfo item)
 	{
 		if (!searchEmpty)
 		{
@@ -140,11 +132,11 @@ public partial class PC_SelectPackage : PanelContent
 		return false;
 	}
 
-	private bool Search(string searchTerm, SteamWorkshopItem item)
+	private bool Search(string searchTerm, IWorkshopInfo item)
 	{
 		return searchTerm.SearchCheck(item.ToString())
 			|| searchTerm.SearchCheck(item.Author?.Name)
-			|| item.SteamId.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
+			|| item.Id.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) != -1;
 	}
 
 	protected override void UIChanged()
@@ -182,7 +174,7 @@ public partial class PC_SelectPackage : PanelContent
 		searchTermsExclude.Clear();
 		searchTermsOr.Clear();
 
-		LC_Items.TextSearchNotEmpty = !searchEmpty;
+		LC_Items.IsTextSearchNotEmpty = !searchEmpty;
 
 		if (!searchEmpty)
 		{
@@ -217,11 +209,11 @@ public partial class PC_SelectPackage : PanelContent
 
 	private async void DelayedSearch(TicketBooth.Ticket ticket)
 	{
-		Dictionary<ulong, SteamWorkshopItem> items;
+		Dictionary<ulong, IWorkshopInfo> items;
 
 		if (TB_Search.Text.Trim().Length > 7 && ulong.TryParse(TB_Search.Text.Trim(), out var steamId))
 		{
-			var item = await SteamUtil.GetItemAsync(steamId);
+			var item = await _workshopService.GetInfoAsync(new GenericPackageIdentity(steamId));
 
 			if (item is not null)
 			{
@@ -234,10 +226,10 @@ public partial class PC_SelectPackage : PanelContent
 		}
 		else
 		{
-			items = await SteamUtil.QueryFilesAsync(SteamQueryOrder.RankedByTrend,
+			items = (await _workshopService.QueryFilesAsync(PackageSorting.Default,
 				TB_Search.Text,
 				OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option1 ? new[] { "Mod" } : null,
-			 	OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null);
+			 	OT_ModAsset.SelectedValue == Generic.ThreeOptionToggle.Value.Option2 ? new[] { "Mod" } : null)).ToDictionary(x => x.Id);
 		}
 
 		if (!_ticketBooth.IsLast(ticket))
@@ -245,31 +237,9 @@ public partial class PC_SelectPackage : PanelContent
 			return;
 		}
 
-		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)));
+		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => new GenericWorkshopPackage(x)));
 
 		this.TryInvoke(() => L_Totals.Text = Locale.ShowingCount.FormatPlural(LC_Items.ItemCount, Locale.Package.FormatPlural(LC_Items.ItemCount)));
-
-		new BackgroundAction(() =>
-		{
-			Parallelism.ForEach(LC_Items.Items.ToList(), async package =>
-			{
-				if (!string.IsNullOrWhiteSpace(package.IconUrl))
-				{
-					if (await ImageManager.Ensure(package.IconUrl))
-					{
-						LC_Items.Invalidate(package);
-					}
-				}
-
-				if (!string.IsNullOrWhiteSpace(package.Author?.AvatarUrl))
-				{
-					if (await ImageManager.Ensure(package.Author?.AvatarUrl))
-					{
-						LC_Items.Invalidate(package);
-					}
-				}
-			}, 4);
-		}).Run();
 
 		TB_Search.Loading = false;
 	}
@@ -282,6 +252,6 @@ public partial class PC_SelectPackage : PanelContent
 	private void B_Continue_Click(object sender, EventArgs e)
 	{
 		Form.PushBack();
-		PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.SteamId));
+		PackageSelected?.Invoke(FLP_Packages.Controls.OfType<MiniPackageControl>().Select(x => x.Id));
 	}
 }

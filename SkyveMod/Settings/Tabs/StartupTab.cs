@@ -1,3 +1,4 @@
+using ColossalFramework;
 using ColossalFramework.UI;
 
 using KianCommons.UI;
@@ -10,6 +11,7 @@ namespace SkyveMod.Settings.Tabs;
 extern alias Injections;
 static class StartupTab
 {
+	public static readonly SavedBool HidePlaysetName = new(nameof(HidePlaysetName), nameof(SkyveMod), false);
 	static SkyveConfig Config => ConfigUtil.Config;
 
 	public static void Make(ExtUITabstrip tabStrip)
@@ -24,6 +26,8 @@ static class StartupTab
 				ConfigUtil.Config.HidePanels = val;
 				ConfigUtil.SaveConfig();
 			});
+
+		panelHelper.AddSavedToggle("Hide current playset's name", HidePlaysetName, (val) => HidePlaysetName.value = val);
 
 		var c2 = panelHelper.AddCheckbox(
 			"Improve content manager",

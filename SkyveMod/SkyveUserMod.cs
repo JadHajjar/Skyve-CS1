@@ -145,6 +145,11 @@ public class SkyveUserMod : IUserMod
 			Log.Flush();
 
 			SubscriptionUtil.Start();
+
+			if (GameSettings.FindSettingsFileByName(nameof(SkyveMod)) is null)
+			{
+				GameSettings.AddSettingsFile(new SettingsFile() { fileName = nameof(SkyveMod) });
+			}
 		}
 		catch (Exception ex)
 		{

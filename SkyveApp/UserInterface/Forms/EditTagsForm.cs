@@ -1,81 +1,102 @@
-﻿using Extensions;
+﻿using SkyveApp.Domain.CS1;
+using SkyveApp.Systems.CS1.Utilities;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Interfaces;
-using SkyveApp.UserInterface.Content;
-using SkyveApp.Utilities;
-
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Forms;
 public partial class EditTagsForm : BaseForm
 {
-	public IPackage Package { get; }
+	private readonly ITagsService _tagsService = ServiceCenter.Get<ITagsService>();
+	private readonly List<ITag> _tags;
 
-	public EditTagsForm(IPackage package)
+	public List<ILocalPackage> Packages { get; }
+
+	public EditTagsForm(IEnumerable<ILocalPackage> packages)
 	{
 		InitializeComponent();
 
-		Package = package;
-		Text = LocaleHelper.GetGlobalText("Tags");
+		Packages = packages.ToList();
 
-		foreach (var link in package.Tags.Where(x => x.Source == Domain.Enums.TagSource.FindIt))
-		{ AddTag(link); }
+		if (L_MultipleWarning.Visible = Packages.Count > 1)
+		{
+			Text = Locale.TagsTitle.FormatPlural(Packages.Count);
+
+			L_MultipleWarning.Text = Locale.EditingMultipleTags;
+		}
+		else
+		{
+			Text = Locale.TagsTitle.Format(Packages[0].ToString());
+		}
+
+		_tags = new(Packages.SelectMany(x => x.GetTags().Where(x => x.IsCustom)).Distinct(x => x.Value));
+
+		TLC.Tags.AddRange(_tags);
+		TLC.AllTags.AddRange(_tagsService.GetDistinctTags().OrderByDescending(x => _tags.Any(t => t.Value == x.Value)).ThenByDescending(x => x.IsCustom).ThenByDescending(_tagsService.GetTagUsage));
+		TLC.Height = 1;
+	}
+
+	protected override void DesignChanged(FormDesign design)
+	{
+		base.DesignChanged(design);
+
+		L_MultipleWarning.ForeColor = design.YellowColor.MergeColor(design.RedColor);
 	}
 
 	protected override void UIChanged()
 	{
 		base.UIChanged();
 
-		FLP_Tags.Padding = UI.Scale(new Padding(10), UI.FontScale);
+		TB_NewTag.Margin = UI.Scale(new Padding(7), UI.FontScale);
+		L_MultipleWarning.Margin = UI.Scale(new Padding(4), UI.FontScale);
+		L_MultipleWarning.Font = UI.Font(7.5F);
 		B_Apply.Margin = UI.Scale(new Padding(0, 0, 10, 10), UI.FontScale);
-	}
-
-	private void B_AddLink_Click(object sender, EventArgs e)
-	{
-		var prompt = MessagePrompt.ShowInput(Locale.AddCustomTag, "");
-
-		if (prompt.DialogResult != DialogResult.OK)
-		{
-			return;
-		}
-
-		if (string.IsNullOrWhiteSpace(prompt.Input) || FLP_Tags.Controls.Any(x => x.Text.Equals(prompt.Input, StringComparison.CurrentCultureIgnoreCase)))
-		{
-			return;
-		}
-
-		AddTag(new(Domain.Enums.TagSource.FindIt, prompt.Input));
-	}
-
-	private void TagControl_Click(object sender, EventArgs e)
-	{
-		(sender as Control)!.Dispose();
-	}
-
-	private void AddTag(TagItem tag)
-	{
-		var control = new TagControl { TagInfo = tag };
-		control.Click += TagControl_Click;
-		FLP_Tags.Controls.Add(control);
-		addTagControl.SendToBack();
-	}
-
-	private IEnumerable<string?> GetLinks()
-	{
-		return FLP_Tags.Controls.OfType<TagControl>().Select(x => x.TagInfo.Value?.Replace(' ', '-'));
 	}
 
 	private void B_Apply_Click(object sender, EventArgs e)
 	{
 		DialogResult = DialogResult.OK;
-		AssetsUtil.SetFindItTag(Package, GetLinks().WhereNotEmpty().ListStrings(" "));
+
+		foreach (var package in Packages)
+		{
+			ServiceCenter.Get<ITagsService>().SetTags(package, TLC.Tags.Select(x => x.Value).Distinct());
+		}
+
 		Close();
-		Program.MainForm?.TryInvoke(() => Program.MainForm.Invalidate(true));
+	}
+
+	protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+	{
+		if (keyData == Keys.Escape)
+		{
+			Close();
+		}
+
+		return base.ProcessCmdKey(ref msg, keyData);
+	}
+
+	private void TB_NewTag_IconClicked(object sender, EventArgs e)
+	{
+		var current = TLC.AllTags.FirstOrDefault(x => x.Value.Equals(TB_NewTag.Text, StringComparison.OrdinalIgnoreCase));
+
+		if (current is not null)
+		{
+			TLC.Tags.Insert(0, current);
+		}
+		else
+		{
+			current = new TagItem(Domain.CS1.Enums.TagSource.Custom, TB_NewTag.Text);
+
+			TLC.Tags.Insert(0, current);
+			TLC.AllTags.Insert(0, current);
+		}
+
+		TB_NewTag.Text = string.Empty;
+		TLC.Invalidate();
+	}
+
+	private void TB_NewTag_TextChanged(object sender, EventArgs e)
+	{
+		TLC.CurrentSearch = TB_NewTag.Text;
+		TLC.Invalidate();
 	}
 }

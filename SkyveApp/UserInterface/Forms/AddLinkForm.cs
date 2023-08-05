@@ -1,15 +1,6 @@
-﻿using Extensions;
-using SkyveApp.Domain.Compatibility.Api;
-using SkyveApp.Domain.Compatibility.Enums;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
+﻿using SkyveApp.Systems.Compatibility.Domain.Api;
 
-using SlickControls;
-
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Forms;
@@ -17,7 +8,7 @@ public partial class AddLinkForm : BaseForm
 {
 	public event Action<IEnumerable<PackageLink>>? LinksReturned;
 
-	public AddLinkForm(List<PackageLink> links)
+	public AddLinkForm(List<ILink> links)
 	{
 		InitializeComponent();
 
@@ -40,7 +31,7 @@ public partial class AddLinkForm : BaseForm
 		AddLink(new PackageLink());
 	}
 
-	private void AddLink(PackageLink packageLink)
+	private void AddLink(ILink packageLink)
 	{
 		TLP.SuspendDrawing();
 
@@ -62,9 +53,9 @@ public partial class AddLinkForm : BaseForm
 		private readonly SlickTextBox tbLink;
 		private readonly SlickTextBox tbName;
 		private readonly SlickIcon deleteButton;
-		private PackageLink link;
+		private readonly ILink link;
 
-		public LinkControl(PackageLink packageLink)
+		public LinkControl(ILink packageLink)
 		{
 			Dock = DockStyle.Top;
 			AutoSize = true;

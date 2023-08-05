@@ -7,7 +7,7 @@ namespace SkyveShared;
 public static class UGCListTransfer
 {
 	public const string FILE_NAME = "UGCListTransfer.txt";
-	const string MISSING = "missing";
+	private const string MISSING = "missing";
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
 
 	public static void SendList(IEnumerable<ulong> ids, bool missing)
@@ -73,6 +73,7 @@ public static class UGCListTransfer
 				ret.Add(id);
 			}
 		}
+
 		return ret;
 	}
 }

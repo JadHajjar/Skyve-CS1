@@ -1,41 +1,41 @@
-﻿using Extensions;
-
+﻿using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.StatusBubbles;
-using SkyveApp.Utilities;
-using SkyveApp.Utilities.Managers;
-
-using SlickControls;
 
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_MainPage : PanelContent
 {
 	private bool buttonStateRunning;
+	private readonly INotifier _notifier;
+	private readonly ICitiesManager _citiesManager;
+	private readonly IPlaysetManager _playsetManager;
+	private readonly IModLogicManager _modLogicManager;
 	public PC_MainPage()
 	{
+		ServiceCenter.Get(out _notifier, out _citiesManager, out _playsetManager, out _modLogicManager);
+
 		InitializeComponent();
 
-		B_StartStop.Enabled = CentralManager.IsContentLoaded && CitiesManager.CitiesAvailable();
+		B_StartStop.Enabled = _notifier.IsContentLoaded && _citiesManager.IsAvailable();
 
-		if (!CentralManager.IsContentLoaded)
+		if (!_notifier.IsContentLoaded)
 		{
-			CentralManager.ContentLoaded += SetButtonEnabledOnLoad;
+			_notifier.ContentLoaded += SetButtonEnabledOnLoad;
 		}
 
-		CitiesManager.MonitorTick += CitiesManager_MonitorTick;
+		_citiesManager.MonitorTick += CitiesManager_MonitorTick;
 
-		RefreshButtonState(CitiesManager.IsRunning(), true);
+		RefreshButtonState(_citiesManager.IsRunning(), true);
 
 		SlickTip.SetTo(B_StartStop, string.Format(Locale.LaunchTooltip, "[F5]"));
 
 		label1.Text = Locale.MultipleLOM;
 
-		ProfileManager.ProfileUpdated += ProfileManager_ProfileUpdated;
+		_notifier.PlaysetUpdated += ProfileManager_ProfileUpdated;
 
-		if (ProfileManager.ProfilesLoaded)
+		if (ServiceCenter.Get<INotifier>().PlaysetsLoaded)
 		{
 			ProfileManager_ProfileUpdated();
 		}
@@ -49,7 +49,7 @@ public partial class PC_MainPage : PanelContent
 			TLP_Profiles.RowStyles.Clear();
 			TLP_Profiles.RowStyles.Add(new());
 
-			foreach (var item in ProfileManager.Profiles.Where(x => x.IsFavorite))
+			foreach (var item in _playsetManager.Playsets.Where(x => x.IsFavorite))
 			{
 				TLP_Profiles.RowStyles.Add(new());
 				TLP_Profiles.Controls.Add(new FavoriteProfileBubble(item) { Dock = DockStyle.Top }, 0, TLP_Profiles.RowStyles.Count - 1);
@@ -61,9 +61,9 @@ public partial class PC_MainPage : PanelContent
 	{
 		this.TryInvoke(() =>
 		{
-			B_StartStop.Enabled = CitiesManager.CitiesAvailable();
+			B_StartStop.Enabled = _citiesManager.IsAvailable();
 
-			label1.Visible = ModLogicManager.AreMultipleLOMsPresent();
+			label1.Visible = _modLogicManager.AreMultipleSkyvesPresent();
 		});
 	}
 
@@ -99,7 +99,7 @@ public partial class PC_MainPage : PanelContent
 	{
 		if (e.Button == MouseButtons.Left)
 		{
-			Form.PushPanel<PC_Profile>();
+			Form.PushPanel<PC_PlaysetSettings>();
 		}
 	}
 
@@ -119,7 +119,7 @@ public partial class PC_MainPage : PanelContent
 		}
 	}
 
-	private void B_StartStop_Click(object sender, System.EventArgs e)
+	private void B_StartStop_Click(object sender, EventArgs e)
 	{
 		Program.MainForm.LaunchStopCities();
 	}

@@ -54,6 +54,7 @@
 			this.subscriptionInfoControl1 = new SkyveApp.UserInterface.Content.SubscriptionInfoControl();
 			this.PI_DLCs = new SlickControls.PanelItem();
 			this.downloadsInfoControl1 = new SkyveApp.UserInterface.Content.DownloadsInfoControl();
+			this.TroubleshootInfoControl =	new UserInterface.Content.TroubleshootInfoControl();
 			this.base_P_SideControls.SuspendLayout();
 			this.base_P_Container.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
@@ -192,14 +193,16 @@
 			this.tableLayoutPanel1.ColumnCount = 2;
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.L_Text, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.L_Version, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.L_Text, 0, 3);
+			this.tableLayoutPanel1.Controls.Add(this.L_Version, 1, 3);
+			this.tableLayoutPanel1.Controls.Add(this.TroubleshootInfoControl, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.subscriptionInfoControl1, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.downloadsInfoControl1, 0, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 3;
+			this.tableLayoutPanel1.RowCount = 4;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -261,6 +264,13 @@
 			this.downloadsInfoControl1.Size = new System.Drawing.Size(150, 43);
 			this.downloadsInfoControl1.TabIndex = 33;
 			this.downloadsInfoControl1.Visible = false;
+
+			this.tableLayoutPanel1.SetColumnSpan(this.TroubleshootInfoControl, 2);
+			this.TroubleshootInfoControl.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TroubleshootInfoControl.Location = new System.Drawing.Point(0, 0);
+			this.TroubleshootInfoControl.Name = "TroubleshootInfoControl";
+			this.TroubleshootInfoControl.Size = new System.Drawing.Size(150, 43);
+			this.TroubleshootInfoControl.TabIndex = 33;
 			// 
 			// MainForm
 			// 
@@ -310,5 +320,6 @@
 		internal SlickControls.PanelItem PI_DLCs;
 		private UserInterface.Content.SubscriptionInfoControl subscriptionInfoControl1;
 		private UserInterface.Content.DownloadsInfoControl downloadsInfoControl1;
+		private UserInterface.Content.TroubleshootInfoControl TroubleshootInfoControl;
 	}
 }
