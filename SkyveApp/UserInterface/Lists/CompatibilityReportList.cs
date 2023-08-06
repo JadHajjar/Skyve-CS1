@@ -28,7 +28,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 	public CompatibilityReportList()
 	{
 		GridView = true;
-		SeparateWithLines = true;
+		DynamicSizing = true;
 		AllowDrop = true;
 
 		ServiceCenter.Get(out _subscriptionsManager, out _compatibilityManager, out _packageUtil, out _dlcManager, out _bulkUtil, out _settings, out _modUtil, out _modLogicManager);
@@ -46,7 +46,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 	protected override void UIChanged()
 	{
-		GridItemSize = new Size(380, 350);
+		GridItemSize = new Size(380, 380);
 
 		base.UIChanged();
 
@@ -101,7 +101,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		var Message = e.Item.ReportItems.FirstOrDefault(x => x.Status.Notification == e.Item.GetNotification() && !_compatibilityManager.IsSnoozed(x));
 
 		var backColor = Color.FromArgb(175, GridView ? FormDesign.Design.BackColor : FormDesign.Design.ButtonColor);
-		var reportRect = e.ClipRectangle.Pad(0, baseY - e.ClipRectangle.Y, 0, 0);
+		var reportRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, 9999).Pad(0, baseY - e.ClipRectangle.Y, 0, 0);
 		var cursor = PointToClient(Cursor.Position);
 		var pad = (int)(6 * UI.FontScale);
 		var note = string.IsNullOrWhiteSpace(Message.Status.Note) ? null : LocaleCRNotes.Get(Message.Status.Note!).One;
@@ -146,7 +146,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		}
 
 		using var textBrush = new SolidBrush(FormDesign.Design.ForeColor);
-		e.Graphics.DrawString(Message.Message, font, textBrush, reportRect.Pad(iconRect.Width + pad, 0, iconRect.Width, 0), new StringFormat { LineAlignment = y < reportRect.Bottom && allText is null && !Message.Packages.Any() ? StringAlignment.Center : StringAlignment.Near });
+		e.Graphics.DrawString(Message.Message, font, textBrush, reportRect.Pad(iconRect.Width + pad, 0, iconRect.Width, 0));
 
 		if (note is not null)
 		{
@@ -154,11 +154,14 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			e.Graphics.DrawString(note, smallFont, smallTextBrush, reportRect.Pad(iconRect.Width + pad, string.IsNullOrWhiteSpace(Message.Message) ? 0 : ((int)messageSize.Height + pad), iconRect.Width, 0));
 		}
 
-		y = DrawDividerLine(e, y);
+		if (allText is not null || Message.Packages.Length > 0)
+		{
+			y = DrawDividerLine(e, y);
+		}
 
 		if (allText is not null)
 		{
-			e.Rects.AllButtonRect = new Rectangle(e.ClipRectangle.X + iconRect.Width, y, e.ClipRectangle.Width - iconRect.Width * 2, (int)(26 * UI.FontScale));
+			e.Rects.AllButtonRect = new Rectangle(e.ClipRectangle.X + iconRect.Width, y, e.ClipRectangle.Width - (iconRect.Width * 2), (int)(26 * UI.FontScale));
 
 			using var buttonIcon = IconManager.GetIcon(allIcon, e.Rects.AllButtonRect.Height * 3 / 4);
 
@@ -167,7 +170,6 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			y += e.Rects.AllButtonRect.Height + GridPadding.Vertical;
 		}
 
-		for (int i = 0; i < 2; i++)
 		if (Message.Packages.Length > 0)
 		{
 			var isDlc = Message.Type == ReportType.DlcMissing;
@@ -276,33 +278,42 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 			y = rect.Y;
 		}
 
-		var otherWarnings = e.Item.ReportItems.Count(x => x.Status.Notification >= NotificationType.Warning) - 1;
-		var finalY = y + (int)e.Graphics.Measure(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, reportRect.Width - 2 * iconRect.Width - GridPadding.Horizontal).Height + GridPadding.Vertical;
-		var bottomRect = new Rectangle(e.ClipRectangle.X, e.ClipRectangle.Bottom, e.ClipRectangle.Width, 0).Pad(0, -finalY + y - GridPadding.Vertical, 0, GridPadding.Vertical).Pad(GridPadding);
-		
-		if (finalY > e.ClipRectangle.Bottom)
-		{
-			using var fillBrush = new SolidBrush(e.BackColor);
+		var otherWarnings = e.Item.ReportItems.Count(x => x.Status.Notification >= NotificationType.Caution) - 1;
+		var finalY = y + (int)e.Graphics.Measure(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, reportRect.Width - (2 * iconRect.Width) - GridPadding.Horizontal).Height + GridPadding.Vertical;
+		var bottomRect = new Rectangle(e.ClipRectangle.X, y + (GridPadding.Vertical * 3), e.ClipRectangle.Width, finalY - y).Pad(GridPadding);
 
-			e.Graphics.FillRoundedRectangle(fillBrush, bottomRect.InvertPad(GridPadding + GridPadding).Pad(0, -GridPadding.Vertical, 0, -GridPadding.Vertical), (int)(5 * UI.FontScale), false, false);
 
-			var maxY = bottomRect.Y - GridPadding.Vertical * 2;
+		//if (bottomRect.Y > y + GridPadding.Vertical * 3)
+		//{
+		//	bottomRect.Y =  y + GridPadding.Vertical * 3;
 
-			foreach (var key in e.Rects.modRects.Keys.ToList())
-			{
-				if (e.Rects.modRects[key].Y > maxY)
-					e.Rects.modRects[key] = default;
-				else if (e.Rects.modRects[key].Bottom > maxY)
-					e.Rects.modRects[key] = e.Rects.modRects[key].Pad(0, 0, 0, e.Rects.modRects[key].Bottom - maxY);
+		//	e.Graphics.FillRectangle(new SolidBrush(BackColor), new Rectangle(e.ClipRectangle.X, bottomRect.Y, e.ClipRectangle.Width, e.ClipRectangle.Bottom - bottomRect.Y + GridPadding.Vertical * 2).InvertPad(GridPadding));
+		//}
 
-				if (e.Rects.buttonRects[key].Y > maxY)
-					e.Rects.buttonRects[key] = default;
-				else if (e.Rects.buttonRects[key].Bottom > maxY)
-					e.Rects.buttonRects[key] = e.Rects.buttonRects[key].Pad(0, 0, 0, e.Rects.buttonRects[key].Bottom - maxY);
-			}
-		}
+		//{
+		//	using var fillBrush = new SolidBrush(e.BackColor);
 
-		DrawDividerLine(e, bottomRect.Y - GridPadding.Vertical * 4);
+		//	e.Graphics.FillRoundedRectangle(fillBrush, bottomRect.InvertPad(GridPadding + GridPadding).Pad(0, -GridPadding.Vertical, 0, -GridPadding.Vertical), (int)(5 * UI.FontScale), false, false);
+
+		//	var maxY = bottomRect.Y - GridPadding.Vertical * 2;
+
+		//	foreach (var key in e.Rects.modRects.Keys.ToList())
+		//	{
+		//		if (e.Rects.modRects[key].Y > maxY)
+		//			e.Rects.modRects[key] = default;
+		//		else if (e.Rects.modRects[key].Bottom > maxY)
+		//			e.Rects.modRects[key] = e.Rects.modRects[key].Pad(0, 0, 0, e.Rects.modRects[key].Bottom - maxY);
+		//	}
+		//	foreach (var key in e.Rects.buttonRects.Keys.ToList())
+		//	{
+		//		if (e.Rects.buttonRects[key].Y > maxY)
+		//			e.Rects.buttonRects[key] = default;
+		//		else if (e.Rects.buttonRects[key].Bottom > maxY)
+		//			e.Rects.buttonRects[key] = e.Rects.buttonRects[key].Pad(0, 0, 0, e.Rects.buttonRects[key].Bottom - maxY);
+		//	}
+		//}
+
+		DrawDividerLine(e, bottomRect.Y - (GridPadding.Vertical * 4));
 
 		e.Graphics.DrawString(otherWarnings > 0 ? LocaleCR.OtherCompatibilityWarnings.FormatPlural(otherWarnings) : Locale.ViewPackageCR, font, textBrush, bottomRect.Pad(iconRect.Width + GridPadding.Left, 0, iconRect.Width + GridPadding.Left, 0), new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
 
@@ -322,6 +333,8 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		SlickButton.DrawButton(e, rect3, string.Empty, Font, cricon, null, rect3.Contains(CursorLocation) ? e.HoverState | (isPressed ? HoverState.Pressed : 0) : HoverState.Normal, backColor: backColor);
 
 		e.Rects.CompatibilityRect = rect3;
+
+		e.DrawableItem.CachedHeight = finalY - e.ClipRectangle.Y + (GridPadding.Vertical * 5) + Padding.Vertical;
 	}
 
 	private void GetAllButton(ICompatibilityItem Message, out string? allText, out string? allIcon, out ColorStyle colorStyle)
@@ -333,7 +346,6 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		switch (Message.Status.Action)
 		{
 			case StatusAction.SubscribeToPackages:
-				if (Message.Packages?.Length > 1)
 				{
 					var max = Message.Packages.Max(x =>
 					{
@@ -370,7 +382,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.UnsubscribeOther:
-				allText = Message.Packages?.Length switch { 0 => null, 1 => Locale.Unsubscribe, _ => Locale.UnsubscribeAll };
+				allText = Message.Packages?.Length switch { 0 => null, _ => Locale.UnsubscribeAll };
 				allIcon = "I_RemoveSteam";
 				break;
 			case StatusAction.ExcludeThis:
@@ -628,49 +640,119 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		var rects = item.Rectangles;
 
-		if (rects.AuthorRect.Contains(e.Location) && item.Item.Package?.GetWorkshopInfo()?.Author is IUser user)
+		if (rects.IncludedRect.Contains(e.Location))
 		{
-			var pc = new PC_UserPage(user);
-
-			(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-
-			return;
-		}
-
-		if (item.Item.Package?.LocalParentPackage is ILocalPackageWithContents package)
-		{
-			if (rects.IncludedRect.Contains(e.Location))
+			if (item.Item.Package!.LocalPackage is not ILocalPackage localPackage)
 			{
-				_packageUtil.SetIncluded(package, !_packageUtil.IsIncluded(package));
+				if (!item.Item.Package!.IsLocal)
+				{
+					_subscriptionsManager.Subscribe(new IPackage[] { item.Item.Package! });
+				}
 
 				return;
 			}
 
-			if (rects.EnabledRect.Contains(e.Location))
 			{
-				_packageUtil.SetEnabled(package, !_packageUtil.IsEnabled(package));
-
-				return;
+				_packageUtil.SetIncluded(localPackage, !_packageUtil.IsIncluded(localPackage));
 			}
 
-			if (rects.VersionRect.Contains(e.Location) && package.Mod is not null)
-			{
-				Clipboard.SetText(package.Mod.Version.GetString());
-			}
-		}
-		else if (rects.IncludedRect.Contains(e.Location))
-		{
-			_subscriptionsManager.Subscribe(new[] { item.Item.Package });
 			return;
+		}
+
+		if (rects.EnabledRect.Contains(e.Location) && item.Item.Package!.LocalPackage is not null)
+		{
+			{
+				_packageUtil.SetEnabled(item.Item.Package!.LocalPackage, !_packageUtil.IsEnabled(item.Item.Package!.LocalPackage));
+			}
+
+			return;
+		}
+
+		if (rects.FolderRect.Contains(e.Location))
+		{
+			PlatformUtil.OpenFolder(item.Item.Package!.LocalPackage?.FilePath);
+			return;
+		}
+
+		if (rects.SteamRect.Contains(e.Location) && item.Item.Package!.GetWorkshopInfo()?.Url is string url)
+		{
+			PlatformUtil.OpenUrl(url);
+			return;
+		}
+
+		if (rects.AuthorRect.Contains(e.Location) && item.Item.Package!.GetWorkshopInfo()?.Author is IUser user)
+		{
+			{
+				var pc = new PC_UserPage(user);
+
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+			}
+
+			return;
+		}
+
+		if (rects.FolderNameRect.Contains(e.Location) && item.Item.Package!.IsLocal)
+		{
+			{
+				Clipboard.SetText(Path.GetFileName(item.Item.Package.LocalPackage?.Folder ?? string.Empty));
+
+			}
+
+			return;
+		}
+
+		if (rects.SteamIdRect.Contains(e.Location))
+		{
+			{
+				Clipboard.SetText(item.Item.Package!.Id.ToString());
+			}
+
+			return;
+		}
+
+		if (rects.CompatibilityRect.Contains(e.Location))
+		{
+			{
+				var pc = new PC_PackagePage((IPackage?)item.Item.Package!.LocalParentPackage ?? item.Item.Package!);
+
+				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
+
+				pc.T_CR.Selected = true;
+
+				if (_settings.UserSettings.ResetScrollOnPackageClick)
+				{
+					ScrollTo(item.Item);
+				}
+			}
+			return;
+		}
+
+		if (rects.VersionRect.Contains(e.Location) && item.Item.Package!.LocalParentPackage?.Mod is IMod mod)
+		{
+			Clipboard.SetText(mod.Version.GetString());
 		}
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package) : new PC_PackagePage(item.Item.Package));
+			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package!.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package!) : new PC_PackagePage((IPackage?)item.Item.Package!.LocalParentPackage ?? item.Item.Package!));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{
 				ScrollTo(item.Item);
+			}
+
+			return;
+		}
+
+		if (rects.DateRect.Contains(e.Location))
+		{
+			var date = item.Item.Package!.GetWorkshopInfo()?.ServerTime ?? item.Item.Package!.LocalParentPackage?.LocalTime;
+
+			if (date.HasValue)
+			{
+				{
+					Clipboard.SetText(date.Value.ToString("g"));
+				}
 			}
 
 			return;
@@ -727,16 +809,17 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 					break;
 				case StatusAction.RequiresConfiguration:
 					_compatibilityManager.ToggleSnoozed(Message);
+					FilterChanged();
 					break;
 				case StatusAction.UnsubscribeThis:
-					_subscriptionsManager.UnSubscribe(new[] { item.Item.Package });
+					_subscriptionsManager.UnSubscribe(new[] { item.Item.Package! });
 					break;
 				case StatusAction.UnsubscribeOther:
 					_subscriptionsManager.UnSubscribe(Message.Packages!);
 					break;
 				case StatusAction.ExcludeThis:
 				{
-					var pp = item.Item.Package.GetLocalPackage();
+					var pp = item.Item.Package!.GetLocalPackage();
 					if (pp is not null)
 					{
 						_packageUtil.SetIncluded(pp, false);
@@ -754,7 +837,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 					}
 					break;
 				case StatusAction.RequestReview:
-					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item.Package));
+					Program.MainForm.PushPanel(null, new PC_RequestReview(item.Item.Package!));
 					break;
 			}
 		}
@@ -822,7 +905,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 				}
 				break;
 			case StatusAction.Switch:
-				_packageUtil.SetIncluded(info.Package.LocalParentPackage!, false);
+				_packageUtil.SetIncluded(info.Package!.LocalParentPackage!, false);
 				break;
 		}
 	}
@@ -941,21 +1024,57 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		public bool GetToolTip(Control instance, Point location, out string text, out Point point)
 		{
-			if (!Item.Package.IsLocal)
+			if (IncludedRect.Contains(location))
 			{
-				if (SteamRect.Contains(location))
+				if (Item.Package?.LocalPackage is null)
 				{
-					text = Locale.ViewOnSteam;
-					point = SteamRect.Location;
-					return true;
+					if (Item.Package?.IsLocal == false)
+					{
+						text = Locale.SubscribeToItem;
+						point = IncludedRect.Location;
+						return true;
+					}
 				}
 
-				if (AuthorRect.Contains(location))
-				{
-					text = Locale.OpenAuthorPage;
-					point = AuthorRect.Location;
-					return true;
-				}
+				text = $"{Locale.ExcludeInclude}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisIncludedStatus.ToString().ToLower())}";
+				point = IncludedRect.Location;
+				return true;
+			}
+
+			if (EnabledRect.Contains(location) && Item.Package?.LocalPackage is not null)
+			{
+				text = $"{Locale.EnableDisable}\r\n\r\n{string.Format(Locale.AltClickTo, Locale.FilterByThisEnabledStatus.ToString().ToLower())}";
+				point = EnabledRect.Location;
+				return true;
+			}
+
+			if (SteamRect.Contains(location))
+			{
+				text = Locale.ViewOnSteam;
+				point = SteamRect.Location;
+				return true;
+			}
+
+			if (SteamIdRect.Contains(location))
+			{
+				text = getFilterTip(string.Format(Locale.CopyToClipboard, Item.Package?.Id), string.Format(Locale.AddToSearch, Item.Package?.Id));
+				point = SteamIdRect.Location;
+				return true;
+			}
+
+			if (FolderNameRect.Contains(location))
+			{
+				var folder = Path.GetFileName(Item.Package?.LocalPackage?.Folder ?? string.Empty);
+				text = getFilterTip(string.Format(Locale.CopyToClipboard, folder), string.Format(Locale.AddToSearch, folder));
+				point = FolderNameRect.Location;
+				return true;
+			}
+
+			if (AuthorRect.Contains(location))
+			{
+				text = getFilterTip(Locale.OpenAuthorPage, Locale.FilterByThisAuthor.Format(Item.Package?.GetWorkshopInfo()?.Author?.Name ?? "this author"));
+				point = AuthorRect.Location;
+				return true;
 			}
 
 			if (FolderRect.Contains(location))
@@ -965,49 +1084,60 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 				return true;
 			}
 
-			if (Item.Package.LocalParentPackage?.Mod is not null)
+			if (CompatibilityRect.Contains(location))
 			{
-				if (IncludedRect.Contains(location))
-				{
-					text = Locale.ExcludeInclude;
-					point = IncludedRect.Location;
-					return true;
-				}
-
-				if (EnabledRect.Contains(location))
-				{
-					text = Locale.EnableDisable;
-					point = EnabledRect.Location;
-					return true;
-				}
-
-				if (VersionRect.Contains(location))
-				{
-					text = Locale.CopyVersionNumber;
-					point = VersionRect.Location;
-					return true;
-				}
+				text = getFilterTip(Locale.ViewPackageCR, Locale.FilterByThisReportStatus);
+				point = CompatibilityRect.Location;
+				return true;
 			}
-			else
+
+			if (VersionRect.Contains(location) && Item.Package?.LocalParentPackage?.Mod is IMod mod)
 			{
-				if (IncludedRect.Contains(location))
-				{
-					text = Locale.ExcludeInclude;
-					point = IncludedRect.Location;
-					return true;
-				}
+				text = Locale.CopyVersionNumber;
+				point = VersionRect.Location;
+				return true;
 			}
 
 			if (CenterRect.Contains(location) || IconRect.Contains(location))
 			{
-				text = Locale.OpenPackagePage;
+				{
+					text = Locale.OpenPackagePage;
+				}
+
 				point = CenterRect.Location;
+				return true;
+			}
+
+			if (DateRect.Contains(location))
+			{
+				var date = Item.Package?.GetWorkshopInfo()?.ServerTime ?? Item.Package?.LocalParentPackage?.LocalTime;
+				if (date.HasValue)
+				{
+					text = getFilterTip(string.Format(Locale.CopyToClipboard, date.Value.ToString("g")), Locale.FilterSinceThisDate);
+					point = DateRect.Location;
+					return true;
+				}
+			}
+
+			if (SnoozeRect.Contains(location))
+			{
+				text = Locale.Snooze;
+				point = SnoozeRect.Location;
+				return true;
+			}
+
+			if (AllButtonRect.Contains(location))
+			{
+				text = Locale.Snooze;
+				point = AllButtonRect.Location;
 				return true;
 			}
 
 			text = string.Empty;
 			point = default;
 			return false;
+
+			static string getFilterTip(string? text, string? _) => text ?? "";
 		}
 
 		public bool IsHovered(Control instance, Point location)

@@ -16,7 +16,7 @@ internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 
 	public SteamItemProcessor() : base(200, 5000, GetCachedInfo())
 	{
-
+		MaxCacheTime = TimeSpan.FromHours(1);
 	}
 
 	protected override bool CanProcess()

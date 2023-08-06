@@ -44,6 +44,7 @@
   "Added a 'Load Order' sorting option.": "Added a 'Load Order' sorting option.",
   "Hover over it to display the values.": "將滑鼠指標懸停在圖示上面以顯示評分與訂閱量。",
   "Profile usages now have separate icons.": "組態檔案用途現在有單獨的圖示。",
+  "Visual improvements to the package page.": "Visual improvements to the package page.",
   "Added small tags next to package titles.": "在外掛程式名稱旁添加了小標籤。",
   "Changed the design of your profile list.": "更改了設定檔頁面的設計。",
   "Fixed private packages being marked as .": "修復了設為私密的外掛被標記為空的問題。",

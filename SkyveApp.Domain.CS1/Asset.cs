@@ -37,7 +37,7 @@ public class Asset : IAsset
 	public string Name { get; }
 	public string[] AssetTags { get; }
 	public string FullName { get; }
-	public bool IsMod { get; }
+	public bool IsMod => LocalParentPackage.IsMod;
 	public string Folder => LocalParentPackage.Folder;
 	public bool IsLocal => LocalParentPackage.IsLocal;
 	public bool IsBuiltIn => LocalParentPackage.IsBuiltIn;
