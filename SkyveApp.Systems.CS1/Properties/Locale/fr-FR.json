@@ -163,7 +163,7 @@
   "PlaysetCreationFailed": "Impossible de créer un nouveau profil, assurez-vous que les paramètres de votre dossier sont correctement configurés dans le panneau Options",
   "UseDebugMono": "Utiliser le débogage mono",
   "LaunchThroughCities": "Lancer via Cities.exe",
-  "UnityProfilerMode": "Utiliser le profil d'unité",
+  "UnityProfilerMode": "Utiliser le profileur Unity",
   "NoDlcsNoInternet": "Impossible de charger les DLCs, veuillez vous connecter à Internet",
   "NoDlcsOpenGame": "Aucun DLC ne correspond à votre recherche",
   "DlcUpdateNotice": "Si vos DLC ne sont pas affichés ici, assurez-vous d'ouvrir le jeu au moins une fois",
