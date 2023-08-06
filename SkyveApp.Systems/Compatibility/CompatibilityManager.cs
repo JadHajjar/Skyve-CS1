@@ -111,10 +111,10 @@ public class CompatibilityManager : ICompatibilityManager
 
 			CompatibilityData = new IndexedCompatibilityData(data);
 
-			foreach (var package in packages)
-			{
-				_cache[package] = GenerateCompatibilityInfo(package);
-			}
+			//foreach (var package in packages)
+			//{
+			//	_cache[package] = GenerateCompatibilityInfo(package);
+			//}
 
 			FirstLoadComplete = true;
 		}
@@ -303,7 +303,7 @@ public class CompatibilityManager : ICompatibilityManager
 		if (package.LocalParentPackage?.Mod is IMod mod)
 		{
 			var modName = Path.GetFileName(mod.FilePath);
-			var duplicate = _contentManager.Mods.AllWhere(x => modName == Path.GetFileName(x.FilePath));
+			var duplicate = _contentManager.GetModsByName(modName);
 
 			if (duplicate.Count > 1 && duplicate.Count(_contentUtil.IsIncluded) > 1)
 			{

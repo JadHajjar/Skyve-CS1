@@ -15,6 +15,7 @@ namespace SkyveApp.Systems.CS1.Managers;
 internal class PackageManager : IPackageManager
 {
 	private Dictionary<ulong, ILocalPackageWithContents>? indexedPackages;
+	private Dictionary<string, List<IMod>>? indexedMods;
 	private List<ILocalPackageWithContents>? packages;
 
 	private readonly IModLogicManager _modLogicManager;
@@ -111,6 +112,18 @@ internal class PackageManager : IPackageManager
 			}
 		}
 
+		if (package.Mod is not null)
+		{
+			if (indexedMods is null)
+			{
+				indexedMods = new() { [Path.GetFileName(package.Mod.FilePath)] = new() { package.Mod } };
+			}
+			else
+			{
+				indexedMods.GetOrAdd(Path.GetFileName(package.Mod.FilePath)).Add(package.Mod);
+			}
+		}
+
 		_notifier.OnInformationUpdated();
 		_notifier.OnContentLoaded();
 	}
@@ -123,6 +136,11 @@ internal class PackageManager : IPackageManager
 		if (package.Mod is not null)
 		{
 			_modLogicManager.ModRemoved(package.Mod);
+		}
+
+		if (package.Mod is not null && indexedMods is not null)
+		{
+			indexedMods.GetOrAdd(Path.GetFileName(package.Mod.FilePath)).Remove(package.Mod);
 		}
 
 		_notifier.OnContentLoaded();
@@ -156,6 +174,10 @@ internal class PackageManager : IPackageManager
 			.ToDictionary(x => x.Key, x => x.First());
 
 		indexedPackages.Remove(0);
+
+		indexedMods = content.SelectWhereNotNull(x => x.Mod)
+			.GroupBy(x => Path.GetFileName(x!.FilePath))
+			.ToDictionary(x => x.Key, x => x.ToList())!;
 	}
 
 	public void DeleteAll(IEnumerable<ulong> ids)
@@ -207,5 +229,15 @@ internal class PackageManager : IPackageManager
 
 			target.RemoveEmptyFolders();
 		}
+	}
+
+	public List<IMod> GetModsByName(string modName)
+	{
+		if (indexedMods?.TryGetValue(modName, out var mods) == true)
+		{
+			return mods;
+		}
+
+		return new();
 	}
 }
