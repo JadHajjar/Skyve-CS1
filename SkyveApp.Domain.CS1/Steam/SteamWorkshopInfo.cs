@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace SkyveApp.Domain.CS1.Steam;
-public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
+public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped, IEquatable<SteamWorkshopInfo?>
 {
 	private static readonly DateTime _epoch = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
@@ -96,5 +96,31 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped
 		}
 
 		return ((int)(100 * (upvotes - downvotes) / goal)).Between(0, 100);
+	}
+
+	public override bool Equals(object? obj)
+	{
+		return Equals(obj as SteamWorkshopInfo);
+	}
+
+	public bool Equals(SteamWorkshopInfo? other)
+	{
+		return other is not null &&
+			   Id == other.Id;
+	}
+
+	public override int GetHashCode()
+	{
+		return 2108858624 + Id.GetHashCode();
+	}
+
+	public static bool operator ==(SteamWorkshopInfo? left, SteamWorkshopInfo? right)
+	{
+		return left?.Equals(right) ?? right is null;
+	}
+
+	public static bool operator !=(SteamWorkshopInfo? left, SteamWorkshopInfo? right)
+	{
+		return !(left == right);
 	}
 }

@@ -95,7 +95,7 @@ public static class SteamUtil
 	{
 		try
 		{
-			foreach (var id in ids.Reverse().Chunk(100))
+			foreach (var id in ids.Reverse().Chunk(20))
 			{
 				var steamArguments = new StringBuilder("steam://open/console");
 
@@ -333,7 +333,7 @@ public static class SteamUtil
 		{
 			var info = await ApiUtil.Get<SteamFileServiceInfo>(url, query.ToArray());
 
-			var data = info?.response?.publishedfiledetails
+			var data = info?.response?.publishedfiledetails?
 				.Select(x => new SteamWorkshopInfo(x))
 				.ToList() ?? new();
 

@@ -36,10 +36,8 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly SkyveApiUtil _skyveApiUtil;
 	private readonly CompatibilityHelper _compatibilityHelper;
 
-	private bool firstLoadComplete;
-
 	public IndexedCompatibilityData CompatibilityData { get; private set; }
-	public bool FirstLoadComplete => firstLoadComplete;
+	public bool FirstLoadComplete { get; private set; }
 
 	public CompatibilityManager(IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
 	{
@@ -72,7 +70,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	internal void CacheReport(IEnumerable<IPackage> content)
 	{
-		if (!firstLoadComplete)
+		if (!FirstLoadComplete)
 		{
 			return;
 		}
@@ -118,7 +116,7 @@ public class CompatibilityManager : ICompatibilityManager
 				_cache[package] = GenerateCompatibilityInfo(package);
 			}
 
-			firstLoadComplete = true;
+			FirstLoadComplete = true;
 		}
 		catch { }
 	}
@@ -182,18 +180,21 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public void ToggleSnoozed(ICompatibilityItem reportItem)
 	{
-		if (IsSnoozed(reportItem))
+		lock (this)
 		{
-			_ = _snoozedItems.RemoveAll(x => x.Equals(reportItem));
-		}
-		else
-		{
-			_snoozedItems.Add(new SnoozedItem(reportItem));
-		}
+			if (IsSnoozed(reportItem))
+			{
+				_ = _snoozedItems.RemoveAll(x => x.Equals(reportItem));
+			}
+			else
+			{
+				_snoozedItems.Add(new SnoozedItem(reportItem));
+			}
 
-		ISave.Save(_snoozedItems, SNOOZE_FILE);
+			ISave.Save(_snoozedItems, SNOOZE_FILE);
 
-		_notifier.OnRefreshUI();
+			_notifier.OnRefreshUI();
+		}
 	}
 
 	public bool IsBlacklisted(IPackageIdentity package)
@@ -205,7 +206,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false)
 	{
-		return !firstLoadComplete
+		return !FirstLoadComplete
 			? new CompatibilityInfo(package, null)
 			: !noCache && _cache.TryGetValue(package, out var info) ? info : (_cache[package] = GenerateCompatibilityInfo(package));
 	}
@@ -264,7 +265,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 			foreach (Match match in matches)
 			{
-				var type = (match.Groups[2].Value.ToLower()) switch
+				var type = match.Groups[2].Value.ToLower() switch
 				{
 					"youtube.com" or "youtu.be" => LinkType.YouTube,
 					"github.com" => LinkType.Github,
