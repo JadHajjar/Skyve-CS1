@@ -44,6 +44,7 @@
   "Added a 'Load Order' sorting option.": "Добавлена опция сортировки 'Load Order'.",
   "Hover over it to display the values.": "Наведите на него, чтобы отобразить значения.",
   "Profile usages now have separate icons.": "Использование профиля теперь имеет отдельные значки.",
+  "Visual improvements to the package page.": "Visual improvements to the package page.",
   "Added small tags next to package titles.": "Добавлены небольшие теги рядом с заголовками пакетов.",
   "Changed the design of your profile list.": "Изменен дизайн списка ваших профилей.",
   "Fixed private packages being marked as .": "Исправлена ошибка в закрытых пакетах в том, что они помечены как .",

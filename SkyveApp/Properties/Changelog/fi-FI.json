@@ -44,6 +44,7 @@
   "Added a 'Load Order' sorting option.": "Lisätty 'Load Order' -lajitteluvaihtoehto.",
   "Hover over it to display the values.": "Paina sitä näyttääksesi arvot.",
   "Profile usages now have separate icons.": "Profiilin käytössä on nyt erilliset kuvakkeet.",
+  "Visual improvements to the package page.": "Visual improvements to the package page.",
   "Added small tags next to package titles.": "Lisätty pieniä tunnisteita pakettien otsikoiden vieressä.",
   "Changed the design of your profile list.": "Muutti profiililistan muotoilua. @ info",
   "Fixed private packages being marked as .": "Kiinteät yksityiset paketit on merkitty .",
