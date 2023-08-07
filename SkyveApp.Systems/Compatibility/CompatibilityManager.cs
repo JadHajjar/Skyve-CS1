@@ -230,7 +230,6 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			return _cache[package] = GenerateCompatibilityInfo(package);
 		}
-
 	}
 
 	public CompatibilityPackageData GetAutomatedReport(IPackage package)

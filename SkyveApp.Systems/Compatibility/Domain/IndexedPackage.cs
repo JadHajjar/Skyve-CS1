@@ -17,6 +17,7 @@ public class IndexedPackage : IPackageCompatibilityInfo
 	public Dictionary<ulong, IndexedPackage> RequirementAlternatives { get; }
 	public Dictionary<StatusType, List<IndexedPackageStatus>> Statuses { get; }
 	public Dictionary<InteractionType, List<IndexedPackageInteraction>> Interactions { get; }
+	public IndexedPackageInteraction? SucceededBy { get; set; }
 
 	public IndexedPackage(Api.CompatibilityPackageData package)
 	{
@@ -89,16 +90,16 @@ public class IndexedPackage : IPackageCompatibilityInfo
 
 		if (Statuses.ContainsKey(StatusType.Deprecated) && Statuses[StatusType.Deprecated].Any(x => x.Packages.Any()))
 		{
-			var interaction = new IndexedPackageInteraction(new() { Type = InteractionType.SucceededBy, Action = StatusAction.Switch, Packages = Statuses[StatusType.Deprecated].SelectMany(x => x.Packages.Keys).ToArray() }, packages);
+			SucceededBy = new IndexedPackageInteraction(new() { Type = InteractionType.SucceededBy, Action = StatusAction.Switch, Packages = Statuses[StatusType.Deprecated].SelectMany(x => x.Packages.Keys).ToArray() }, packages);
 
-			if (!Interactions.ContainsKey(InteractionType.SucceededBy))
-			{
-				Interactions[InteractionType.SucceededBy] = new() { interaction };
-			}
-			else
-			{
-				Interactions[InteractionType.SucceededBy].Add(interaction);
-			}
+			//if (!Interactions.ContainsKey(InteractionType.SucceededBy))
+			//{
+			//	Interactions[InteractionType.SucceededBy] = new() { interaction };
+			//}
+			//else
+			//{
+			//	Interactions[InteractionType.SucceededBy].Add(interaction);
+			//}
 		}
 	}
 
@@ -145,15 +146,9 @@ public class IndexedPackage : IPackageCompatibilityInfo
 				continue;
 			}
 
-			if (!item.Interactions.ContainsKey(InteractionType.SucceededBy))
-			{
-				item.Interactions[InteractionType.SucceededBy] = new()
-				{
-					new IndexedPackageInteraction(new(){ Type = InteractionType.SucceededBy }, new())
-				};
-			}
+			SucceededBy ??= new IndexedPackageInteraction(new() { Type = InteractionType.SucceededBy }, new());
 
-			if (item.Interactions[InteractionType.SucceededBy][0].Packages.ContainsKey(Package.SteamId))
+			if (SucceededBy.Packages.ContainsKey(Package.SteamId))
 			{
 				continue;
 			}
