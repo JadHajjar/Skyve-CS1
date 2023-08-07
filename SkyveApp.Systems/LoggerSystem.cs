@@ -106,7 +106,7 @@ public class LoggerSystem : ILogger
 
 		sb.AppendFormat("\r\n[{0} ", type);
 
-		if (time.Length < 6)
+		if (time.Length < 10)
 		{
 			sb.Append(' ', 10 - time.Length);
 		}

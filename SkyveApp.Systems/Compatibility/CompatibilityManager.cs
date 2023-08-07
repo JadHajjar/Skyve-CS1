@@ -77,7 +77,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		foreach (var package in content)
 		{
-			_ = GetCompatibilityInfo(package, true);
+			GetCompatibilityInfo(package, true);
 		}
 
 		_notifier.OnInformationUpdated();
@@ -116,9 +116,21 @@ public class CompatibilityManager : ICompatibilityManager
 			//	_cache[package] = GenerateCompatibilityInfo(package);
 			//}
 
-			FirstLoadComplete = true;
+			//FirstLoadComplete = true;
 		}
 		catch { }
+	}
+
+	public void DoFirstCache()
+	{
+		var packages = _contentManager.Packages.ToList();
+
+		foreach (var package in packages)
+		{
+			_cache[package] = GenerateCompatibilityInfo(package);
+		}
+
+		FirstLoadComplete = true;
 	}
 
 	public async void DownloadData()
@@ -184,7 +196,7 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			if (IsSnoozed(reportItem))
 			{
-				_ = _snoozedItems.RemoveAll(x => x.Equals(reportItem));
+				_snoozedItems.RemoveAll(x => x.Equals(reportItem));
 			}
 			else
 			{
@@ -206,9 +218,19 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false)
 	{
-		return !FirstLoadComplete
-			? new CompatibilityInfo(package, null)
-			: !noCache && _cache.TryGetValue(package, out var info) ? info : (_cache[package] = GenerateCompatibilityInfo(package));
+		if (!FirstLoadComplete)
+		{
+			return new CompatibilityInfo(package, _compatibilityHelper.GetPackageData(package));
+		}
+		else if (!noCache && _cache.TryGetValue(package, out var info))
+		{
+			return info;
+		}
+		else
+		{
+			return _cache[package] = GenerateCompatibilityInfo(package);
+		}
+
 	}
 
 	public CompatibilityPackageData GetAutomatedReport(IPackage package)

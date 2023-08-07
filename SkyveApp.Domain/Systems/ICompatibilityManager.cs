@@ -21,4 +21,5 @@ public interface ICompatibilityManager
 	void DownloadData();
 	void CacheReport();
 	bool IsUserVerified(IUser author);
+	void DoFirstCache();
 }
