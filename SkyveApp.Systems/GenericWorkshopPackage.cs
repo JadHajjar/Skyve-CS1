@@ -27,7 +27,7 @@ public class GenericWorkshopPackage : IPackage
 		Name = string.Empty;
 	}
 
-	public bool IsMod { get; set; }
+	public bool IsMod => this.GetWorkshopInfo()?.IsMod ?? false;
 	public bool IsLocal { get; set; }
 	public bool IsBuiltIn { get; set; }
 	public ulong Id { get; set; }
