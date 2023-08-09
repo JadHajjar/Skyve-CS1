@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Wykryto kompletne pakiety",
   "CleanupInfoTitle": "Co to jest czyszczenie?",
   "TroubleshootCauseResult": "Następujące pakiety mogą być przyczyną problemów",
-  "VerifiedAuthor": "Zweryfikowany Autor"
+  "VerifiedAuthor": "Zweryfikowany Autor",
+  "ApplyAllActions": "Apply all available actions"
 }
