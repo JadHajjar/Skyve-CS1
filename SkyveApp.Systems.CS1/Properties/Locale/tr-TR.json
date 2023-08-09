@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Faulty Packages Detected",
   "CleanupInfoTitle": "What is a cleanup?",
   "TroubleshootCauseResult": "The following packages might be the cause of your issues",
-  "VerifiedAuthor": "Verified Author"
+  "VerifiedAuthor": "Verified Author",
+  "ApplyAllActions": "Apply all available actions"
 }
