@@ -225,7 +225,7 @@
   "ScenarioMaking": "シナリオの作成",
   "ThemeMaking": "テーマの作成",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "パッケージには他で互換性の警告があります",
+    "Plural": "パッケージには他で互換性の警告が {0} 個あります"
   }
 }
