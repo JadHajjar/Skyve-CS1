@@ -223,5 +223,9 @@
   "NoIssues": "Keine Probleme",
   "RequestReviewDisclaimer": "*Deine Steam ID und Protokolle werden mit deiner Anfrage gesendet",
   "ScenarioMaking": "Szenario-Erstellung",
-  "ThemeMaking": "Themen-Erstellung"
+  "ThemeMaking": "Themen-Erstellung",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }
