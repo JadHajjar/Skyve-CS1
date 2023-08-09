@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Zjištěny chybné balíčky",
   "CleanupInfoTitle": "Co je to sanace?",
   "TroubleshootCauseResult": "Následující balíčky mohou být příčinou vašich problémů",
-  "VerifiedAuthor": "Ověřený autor"
+  "VerifiedAuthor": "Ověřený autor",
+  "ApplyAllActions": "Apply all available actions"
 }
