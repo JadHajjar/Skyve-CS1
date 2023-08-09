@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "결함 있는 패키지 발견됨",
   "CleanupInfoTitle": "정리가 무엇인가요?",
   "TroubleshootCauseResult": "다음 패키지들이 문제의 원인일 수 있습니다",
-  "VerifiedAuthor": "인증된 제작자"
+  "VerifiedAuthor": "인증된 제작자",
+  "ApplyAllActions": "Apply all available actions"
 }
