@@ -166,6 +166,8 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
 	private void SubscriptionTransferFileChanged(object sender, FileWatcherEventArgs e)
 	{
+		_logger.Info($"[Auto] Subscription Transfer triggered from '{e.FullPath}'");
+
 		var transferData = new SubscriptionTransfer();
 
 		if (CrossIO.FileExists(_filePath))
@@ -236,6 +238,8 @@ internal class SubscriptionsManager : ISubscriptionsManager
 	{
 		if (!_settings.SessionSettings.UserSettings.DisablePackageCleanup && CrossIO.FileExists(e.FullPath))
 		{
+			_logger.Info($"[Auto] Subscription List triggered from '{e.FullPath}'");
+
 			var date = File.GetLastWriteTime(e.FullPath);
 
 			if (DateTime.Now - date < TimeSpan.FromSeconds(5))

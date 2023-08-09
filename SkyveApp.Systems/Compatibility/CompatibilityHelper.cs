@@ -196,15 +196,9 @@ public class CompatibilityHelper
 			return package;
 		}
 
-		if (indexedPackage.Interactions.ContainsKey(InteractionType.SucceededBy))
+		if (indexedPackage.SucceededBy is not null)
 		{
-			var workshopPackage = indexedPackage.Interactions[InteractionType.SucceededBy]
-					.SelectMany(x => x.Packages.Values)
-					.OrderByDescending(x => x.Package.ReviewDate)
-					.FirstOrDefault()?
-					.Package;
-
-			return workshopPackage != null ? new GenericPackageIdentity(workshopPackage.SteamId) : package;
+			return new GenericPackageIdentity(indexedPackage.SucceededBy.Packages.First().Key);
 		}
 
 		if (_contentManager.GetPackageById(package) is null)

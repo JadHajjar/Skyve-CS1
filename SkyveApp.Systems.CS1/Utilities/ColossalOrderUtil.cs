@@ -20,14 +20,16 @@ internal class ColossalOrderUtil
 	private readonly FileWatcher _watcher;
 	private readonly DelayedAction _delayedAction = new(500);
 
-	private readonly ILocationManager _locationManager;
 	private readonly SettingsService _settings;
+	private readonly ILocationManager _locationManager;
 	private readonly INotifier _notifier;
+	private readonly ILogger _logger;
 
-	public ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings)
+	public ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings, ILogger logger)
 	{
 		_locationManager = locationManager;
 		_notifier = notifier;
+		_logger = logger;
 		_settings = (settings as SettingsService)!;
 		_settingsFile = new SettingsFile() { fileName = GAME_SETTINGS_FILE_NAME };
 		_settingsFile.Load();
@@ -64,6 +66,8 @@ internal class ColossalOrderUtil
 
 	private void SettingsFileChanged()
 	{
+		_logger.Info($"[Auto] UserGameState update triggered, override [{_settings.SessionSettings.UserSettings.OverrideGameChanges}]");
+
 		if (_settings.SessionSettings.UserSettings.OverrideGameChanges)
 		{
 			var currentState = _settingsDictionary.ToDictionary(x => x.Key, x => x.Value.value);

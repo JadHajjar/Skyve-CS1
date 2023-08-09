@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 
 using System;
@@ -14,13 +15,12 @@ namespace SkyveApp.Systems;
 public class LoggerSystem : ILogger
 {
 	private bool failed;
-	private readonly INotifier _notifier;
 	private readonly bool _disabled;
 	private readonly Stopwatch? _stopwatch;
 
 	public string LogFilePath { get; }
 
-	public LoggerSystem(ISettings _, INotifier notifier)
+	public LoggerSystem(ISettings _)
 	{
 		var folder = CrossIO.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
 		var previousLog = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
@@ -28,7 +28,6 @@ public class LoggerSystem : ILogger
 		LogFilePath = CrossIO.Combine(folder, $"SkyveApp.log");
 
 		_stopwatch = Stopwatch.StartNew();
-		_notifier = notifier;
 
 		try
 		{
@@ -64,8 +63,6 @@ public class LoggerSystem : ILogger
 		{
 			_disabled = true;
 		}
-
-		_notifier = notifier;
 	}
 
 	public void Debug(object message)
@@ -129,7 +126,7 @@ public class LoggerSystem : ILogger
 				{
 					failed = true;
 
-					_notifier.OnLoggerFailed(ex);
+					ServiceCenter.Get<INotifier>().OnLoggerFailed(ex);
 				}
 			}
 		}

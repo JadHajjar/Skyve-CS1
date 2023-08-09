@@ -139,50 +139,32 @@ public class IndexedPackage : IPackageCompatibilityInfo
 
 	private void RecursiveSetSuccessor()
 	{
-		foreach (var item in Interactions[InteractionType.Successor].SelectMany(x => x.Packages.Values))
+		foreach (var item in Interactions[InteractionType.Successor])
 		{
-			if (item.Package.SteamId == Package.SteamId)
+			foreach (var package in item.Packages.Values)
 			{
-				continue;
-			}
-
-			SucceededBy ??= new IndexedPackageInteraction(new() { Type = InteractionType.SucceededBy }, new());
-
-			if (SucceededBy.Packages.ContainsKey(Package.SteamId))
-			{
-				continue;
-			}
-
-			PackageInteraction packageInteraction;
-
-			if (Interactions.ContainsKey(InteractionType.SucceededBy))
-			{
-				_ = item.Interactions[InteractionType.SucceededBy][0].Packages.Remove(Package.SteamId);
-
-				foreach (var package in Interactions[InteractionType.SucceededBy][0].Packages.ToList())
+				if (package.Package.SteamId == Package.SteamId)
 				{
-					item.Interactions[InteractionType.SucceededBy][0].Packages[package.Key] = package.Value;
+					continue;
 				}
 
-				packageInteraction = Interactions[InteractionType.SucceededBy][0].Interaction;
-			}
-			else
-			{
-				item.Interactions[InteractionType.SucceededBy][0].Packages[Package.SteamId] = this;
+				if (package.SucceededBy?.Packages.ContainsKey(Package.SteamId) ?? false)
+				{
+					continue;
+				}
 
-				packageInteraction = Interactions[InteractionType.Successor][0].Interaction;
-			}
+				package.SucceededBy = SucceededBy ?? new IndexedPackageInteraction(new()
+				{
+					Type = InteractionType.SucceededBy,
+					Action = item.Interaction.Action,
+					Note = item.Interaction.Note,
+					Packages = new[] { Package.SteamId }
+				}, new() { [Package.SteamId] = this });
 
-			if (packageInteraction.Action is StatusAction.Switch)
-			{
-				item.Interactions[InteractionType.SucceededBy][0].Interaction.Action = StatusAction.Switch;
-			}
-
-			item.Interactions[InteractionType.SucceededBy][0].Interaction.Packages = item.Interactions[InteractionType.SucceededBy][0].Packages.Keys.ToArray();
-
-			if (item.Interactions.ContainsKey(InteractionType.Successor))
-			{
-				item.RecursiveSetSuccessor();
+				if (package.Interactions.ContainsKey(InteractionType.Successor))
+				{
+					package.RecursiveSetSuccessor();
+				}
 			}
 		}
 	}

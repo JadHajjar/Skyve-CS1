@@ -3,10 +3,13 @@
 using SkyveApp.Domain.Systems;
 
 using System;
+using System.Diagnostics;
 
 namespace SkyveApp.Systems;
 internal class NotifierSystem : INotifier
 {
+	private readonly ILogger _logger;
+
 	public event Action? ContentLoaded;
 	public event Action? WorkshopInfoUpdated;
 	public event Action? PackageInformationUpdated;
@@ -28,8 +31,10 @@ internal class NotifierSystem : INotifier
 	private readonly DelayedAction _delayedAutoSaveRequested;
 	private readonly DelayedAction _delayedImageLoaded;
 
-	public NotifierSystem()
+	public NotifierSystem(ILogger logger)
 	{
+		_logger = logger;
+
 		_delayedContentLoaded = new(300, () => ContentLoaded?.Invoke());
 		_delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
 		_delayedPackageInclusionUpdated = new(300, () => PackageInclusionUpdated?.Invoke());
@@ -94,6 +99,12 @@ internal class NotifierSystem : INotifier
 
 	public void OnPlaysetUpdated()
 	{
+#if DEBUG
+		_logger.Debug("[Auto] Playset Updated \r\n" + new StackTrace());
+#else
+		_logger.Info("[Auto] Playset Updated");
+#endif
+
 		PlaysetUpdated?.Invoke();
 	}
 
@@ -109,22 +120,34 @@ internal class NotifierSystem : INotifier
 
 	public void OnCompatibilityReportProcessed()
 	{
+#if DEBUG
+		_logger.Debug("[Auto] Compatibility Report Processed \r\n" + new StackTrace());
+#else
+		_logger.Info("[Auto] Compatibility Report Processed");
+#endif
+
 		CompatibilityReportProcessed?.Invoke();
 	}
 
 	public void OnWorkshopPackagesInfoLoaded()
 	{
+		_logger.Info("[Auto] Workshop Packages Info Loaded");
+
 		WorkshopPackagesInfoLoaded?.Invoke();
 		WorkshopPackagesInfoLoaded = null;
 	}
 
 	public void OnWorkshopUsersInfoLoaded()
 	{
+		_logger.Info("[Auto] Workshop Users Info Loaded");
+
 		WorkshopUsersInfoLoaded?.Invoke();
 	}
 
 	public void OnCompatibilityDataLoaded()
 	{
+		_logger.Info("[Auto] Compatibility Data Loaded");
+
 		CompatibilityDataLoaded?.Invoke();
 	}
 }

@@ -358,6 +358,11 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			foreach (var item in status.Value)
 			{
+				if (item.Status.Action is StatusAction.Switch && packageData.SucceededBy is not null)
+				{
+					continue;
+				}
+
 				_compatibilityHelper.HandleStatus(info, item);
 			}
 		}
@@ -378,6 +383,11 @@ public class CompatibilityManager : ICompatibilityManager
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
 			}
+		}
+
+		if (packageData.SucceededBy is not null)
+		{
+			_compatibilityHelper.HandleInteraction(info, packageData.SucceededBy);
 		}
 
 		foreach (var interaction in packageData.Interactions)
