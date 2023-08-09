@@ -225,7 +225,7 @@
   "ScenarioMaking": "Szenario-Erstellung",
   "ThemeMaking": "Themen-Erstellung",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Dieses Paket hat eine weitere Kompatibilitätswarnung",
+    "Plural": "Dieses Paket hat {0} andere Kompatibilitätswarnungen"
   }
 }
