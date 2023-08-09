@@ -3,7 +3,7 @@
   "PlaysetBubble": "Huidige Speelset",
   "StartCities": "Begin Cities: Skylines",
   "StopCities": "Stop Cities: Skylines",
-  "AssetsBubble": "Uw activa",
+  "AssetsBubble": "Uw Assets",
   "ModsBubble": "Jouw mods",
   "Dashboard": "Dashboard",
   "ModOutOfDate": "Mod is verouderd",
@@ -471,7 +471,7 @@
   },
   "Asset": {
     "One": "Asset",
-    "Plural": "Activa"
+    "Plural": "Assets"
   },
   "Package": {
     "One": "Pakket",
