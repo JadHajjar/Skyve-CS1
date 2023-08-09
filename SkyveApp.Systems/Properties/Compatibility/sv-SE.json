@@ -223,5 +223,9 @@
   "NoIssues": "Inga problem",
   "RequestReviewDisclaimer": "*Ditt Steam-ID och dina loggar skickas med din begäran",
   "ScenarioMaking": "Scenario-skapande",
-  "ThemeMaking": "Tema-skapande"
+  "ThemeMaking": "Tema-skapande",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }
