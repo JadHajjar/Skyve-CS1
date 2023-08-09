@@ -223,5 +223,9 @@
   "NoIssues": "没有问题",
   "RequestReviewDisclaimer": "* 发送申请时，您的 Steam ID 和日志文件也会一并发送",
   "ScenarioMaking": "制作剧本",
-  "ThemeMaking": "制作地图主题"
+  "ThemeMaking": "制作地图主题",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }
