@@ -124,15 +124,21 @@ internal class CentralManager : ICentralManager
 		if (ConnectionHandler.CheckConnection())
 		{
 			LoadDlcAndCR();
+
+			_notifier.OnWorkshopInfoUpdated();
 		}
 		else
 		{
 			_logger.Warning("Not connected to the internet, delaying remaining loads.");
 
+			_notifier.OnWorkshopInfoUpdated();
+
+			_logger.Info($"Compatibility report cached");
+
+			_compatibilityManager.DoFirstCache();
+
 			ConnectionHandler.WhenConnected(() => new BackgroundAction(LoadDlcAndCR).Run());
 		}
-
-		_notifier.OnWorkshopInfoUpdated();
 
 		_logger.Info($"Finished.");
 	}
@@ -149,7 +155,7 @@ internal class CentralManager : ICentralManager
 
 		_logger.Info($"Compatibility data downloaded");
 
-		_compatibilityManager.CacheReport();
+		_compatibilityManager.DoFirstCache();
 
 		_logger.Info($"Compatibility report cached");
 	}

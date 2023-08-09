@@ -238,6 +238,7 @@ public partial class PC_SelectPackage : PanelContent
 		}
 
 		LC_Items.SetItems(items.Values.Where(x => !DoNotDraw(x)).Select(x => new GenericWorkshopPackage(x)));
+		LC_Items.Loading = false;
 
 		this.TryInvoke(() => L_Totals.Text = Locale.ShowingCount.FormatPlural(LC_Items.ItemCount, Locale.Package.FormatPlural(LC_Items.ItemCount)));
 

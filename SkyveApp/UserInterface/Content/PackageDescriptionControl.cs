@@ -216,9 +216,9 @@ internal class PackageDescriptionControl : SlickImageControl
 
 		var location = e.Location;
 
-		Cursor = _drawablePackage.Rectangles.IsHovered(this, location) ? Cursors.Hand : Cursors.Default;
+		Cursor = _drawablePackage.Rectangles?.IsHovered(this, location) == true ? Cursors.Hand : Cursors.Default;
 
-		if (_drawablePackage.Rectangles.GetToolTip(this, location, out var text, out var point))
+		if (_drawablePackage.Rectangles?.GetToolTip(this, location, out var text, out var point) ?? false)
 		{
 			SlickTip.SetTo(this, text, offset: point);
 		}

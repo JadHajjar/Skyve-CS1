@@ -4,6 +4,7 @@ namespace SkyveApp.Domain.Systems;
 public interface ILogger
 {
 	string LogFilePath { get; }
+	string PreviousLogFilePath { get; }
 
 	void Info(object message);
 	void Warning(object message);

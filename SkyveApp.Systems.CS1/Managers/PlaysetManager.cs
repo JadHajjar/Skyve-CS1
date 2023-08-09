@@ -626,6 +626,8 @@ internal class PlaysetManager : IPlaysetManager
 				return;
 			}
 
+			_logger.Info($"[Auto] Playset update triggered from '{e.FullPath}'");
+
 			if (!CrossIO.FileExists(e.FullPath))
 			{
 				lock (_playsets)

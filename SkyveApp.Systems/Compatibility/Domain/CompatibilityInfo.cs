@@ -70,14 +70,14 @@ public class CompatibilityInfo : ICompatibilityInfo
 	public class DtoLocalPackage : ILocalPackage
 	{
 		[JsonIgnore] public ILocalPackageWithContents LocalParentPackage { get; set; }
-		[JsonIgnore] public ILocalPackage LocalPackage { get; set; }
+		[JsonIgnore] public ILocalPackage LocalPackage => this;
+		[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 		public long LocalSize { get; set; }
 		public DateTime LocalTime { get; set; }
 		public string Folder { get; set; }
 		public bool IsMod { get; set; }
 		public bool IsLocal { get; set; }
 		public bool IsBuiltIn { get; set; }
-		public IEnumerable<IPackageRequirement> Requirements { get; set; }
 		public string FilePath { get; set; }
 		public ulong Id { get; set; }
 		public string Name { get; set; }

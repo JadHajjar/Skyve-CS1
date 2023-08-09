@@ -10,6 +10,8 @@ using IoPath = System.IO.Path;
 namespace SkyveApp.Domain.CS1.Utilities;
 public class PackageWatcher
 {
+	private readonly IContentManager _contentManager;
+	private readonly ILogger _logger;
 	private readonly DelayedAction<string> _delayedUpdate = new(5000);
 	private static readonly List<PackageWatcher> _watchers = new();
 
@@ -20,6 +22,8 @@ public class PackageWatcher
 		Path = folder;
 		AllowSelf = allowSelf;
 		Workshop = workshop;
+
+		ServiceCenter.Get(out _contentManager, out _logger);
 
 		CreateWatcher();
 	}
@@ -49,11 +53,6 @@ public class PackageWatcher
 
 	private void FileChanged(object sender, FileWatcherEventArgs e)
 	{
-		if (IoPath.GetFileName(e.FullPath) == ".excluded")
-		{
-			return;
-		}
-
 		var path = GetFirstFolderOrFileName(e.FullPath, Path);
 
 		if (path != Path)
@@ -68,15 +67,19 @@ public class PackageWatcher
 
 	private void TriggerUpdate(string path)
 	{
-		ServiceCenter.Get<IContentManager>().ContentUpdated(path, false, Workshop, false);
+		_logger.Info($"[Auto] Package content update triggered from '{path}'");
+
+		_contentManager.ContentUpdated(path, false, Workshop, false);
 	}
 
 	private void TriggerSelfUpdate(string path)
 	{
-		ServiceCenter.Get<IContentManager>().ContentUpdated(path, false, Workshop, true);
+		_logger.Info($"[Auto] Package content update triggered from '{path}'");
+
+		_contentManager.ContentUpdated(path, false, Workshop, true);
 	}
 
-	public string GetFirstFolderOrFileName(string filePath, string sourceFolder)
+	private string GetFirstFolderOrFileName(string filePath, string sourceFolder)
 	{
 		// Normalize the file path and source folder to use the same directory separator and casing
 		var normalizedFilePath = IoPath.GetFullPath(filePath).Replace(IoPath.AltDirectorySeparatorChar, IoPath.DirectorySeparatorChar).ToLower();

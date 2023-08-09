@@ -2,6 +2,7 @@
 using SkyveApp.UserInterface.Panels;
 
 using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;

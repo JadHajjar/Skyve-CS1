@@ -36,10 +36,8 @@ public class CompatibilityManager : ICompatibilityManager
 	private readonly SkyveApiUtil _skyveApiUtil;
 	private readonly CompatibilityHelper _compatibilityHelper;
 
-	private bool firstLoadComplete;
-
 	public IndexedCompatibilityData CompatibilityData { get; private set; }
-	public bool FirstLoadComplete => firstLoadComplete;
+	public bool FirstLoadComplete { get; private set; }
 
 	public CompatibilityManager(IPackageManager contentManager, ILogger logger, INotifier notifier, ICompatibilityUtil compatibilityUtil, IPackageUtil contentUtil, ILocale locale, IPackageNameUtil packageUtil, IWorkshopService workshopService, SkyveApiUtil skyveApiUtil, IDlcManager dlcManager)
 	{
@@ -72,14 +70,14 @@ public class CompatibilityManager : ICompatibilityManager
 
 	internal void CacheReport(IEnumerable<IPackage> content)
 	{
-		if (!firstLoadComplete)
+		if (!FirstLoadComplete)
 		{
 			return;
 		}
 
 		foreach (var package in content)
 		{
-			_ = GetCompatibilityInfo(package, true);
+			GetCompatibilityInfo(package, true);
 		}
 
 		_notifier.OnInformationUpdated();
@@ -113,14 +111,26 @@ public class CompatibilityManager : ICompatibilityManager
 
 			CompatibilityData = new IndexedCompatibilityData(data);
 
-			foreach (var package in packages)
-			{
-				_cache[package] = GenerateCompatibilityInfo(package);
-			}
+			//foreach (var package in packages)
+			//{
+			//	_cache[package] = GenerateCompatibilityInfo(package);
+			//}
 
-			firstLoadComplete = true;
+			//FirstLoadComplete = true;
 		}
 		catch { }
+	}
+
+	public void DoFirstCache()
+	{
+		var packages = _contentManager.Packages.ToList();
+
+		foreach (var package in packages)
+		{
+			_cache[package] = GenerateCompatibilityInfo(package);
+		}
+
+		FirstLoadComplete = true;
 	}
 
 	public async void DownloadData()
@@ -182,18 +192,21 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public void ToggleSnoozed(ICompatibilityItem reportItem)
 	{
-		if (IsSnoozed(reportItem))
+		lock (this)
 		{
-			_ = _snoozedItems.RemoveAll(x => x.Equals(reportItem));
-		}
-		else
-		{
-			_snoozedItems.Add(new SnoozedItem(reportItem));
-		}
+			if (IsSnoozed(reportItem))
+			{
+				_snoozedItems.RemoveAll(x => x.Equals(reportItem));
+			}
+			else
+			{
+				_snoozedItems.Add(new SnoozedItem(reportItem));
+			}
 
-		ISave.Save(_snoozedItems, SNOOZE_FILE);
+			ISave.Save(_snoozedItems, SNOOZE_FILE);
 
-		_notifier.OnRefreshUI();
+			_notifier.OnRefreshUI();
+		}
 	}
 
 	public bool IsBlacklisted(IPackageIdentity package)
@@ -205,9 +218,18 @@ public class CompatibilityManager : ICompatibilityManager
 
 	public ICompatibilityInfo GetCompatibilityInfo(IPackage package, bool noCache = false)
 	{
-		return !firstLoadComplete
-			? new CompatibilityInfo(package, null)
-			: !noCache && _cache.TryGetValue(package, out var info) ? info : (_cache[package] = GenerateCompatibilityInfo(package));
+		if (!FirstLoadComplete)
+		{
+			return new CompatibilityInfo(package, _compatibilityHelper.GetPackageData(package));
+		}
+		else if (!noCache && _cache.TryGetValue(package, out var info))
+		{
+			return info;
+		}
+		else
+		{
+			return _cache[package] = GenerateCompatibilityInfo(package);
+		}
 	}
 
 	public CompatibilityPackageData GetAutomatedReport(IPackage package)
@@ -264,7 +286,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 			foreach (Match match in matches)
 			{
-				var type = (match.Groups[2].Value.ToLower()) switch
+				var type = match.Groups[2].Value.ToLower() switch
 				{
 					"youtube.com" or "youtu.be" => LinkType.YouTube,
 					"github.com" => LinkType.Github,
@@ -302,7 +324,7 @@ public class CompatibilityManager : ICompatibilityManager
 		if (package.LocalParentPackage?.Mod is IMod mod)
 		{
 			var modName = Path.GetFileName(mod.FilePath);
-			var duplicate = _contentManager.Mods.AllWhere(x => modName == Path.GetFileName(x.FilePath));
+			var duplicate = _contentManager.GetModsByName(modName);
 
 			if (duplicate.Count > 1 && duplicate.Count(_contentUtil.IsIncluded) > 1)
 			{
@@ -336,6 +358,11 @@ public class CompatibilityManager : ICompatibilityManager
 		{
 			foreach (var item in status.Value)
 			{
+				if (item.Status.Action is StatusAction.Switch && packageData.SucceededBy is not null)
+				{
+					continue;
+				}
+
 				_compatibilityHelper.HandleStatus(info, item);
 			}
 		}
@@ -356,6 +383,11 @@ public class CompatibilityManager : ICompatibilityManager
 			{
 				_compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.AutoDeprecated));
 			}
+		}
+
+		if (packageData.SucceededBy is not null)
+		{
+			_compatibilityHelper.HandleInteraction(info, packageData.SucceededBy);
 		}
 
 		foreach (var interaction in packageData.Interactions)
