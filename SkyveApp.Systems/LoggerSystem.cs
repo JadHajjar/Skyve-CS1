@@ -19,12 +19,13 @@ public class LoggerSystem : ILogger
 	private readonly Stopwatch? _stopwatch;
 
 	public string LogFilePath { get; }
+	public string PreviousLogFilePath { get; }
 
 	public LoggerSystem(ISettings _)
 	{
 		var folder = CrossIO.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
-		var previousLog = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
 
+		PreviousLogFilePath = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
 		LogFilePath = CrossIO.Combine(folder, $"SkyveApp.log");
 
 		_stopwatch = Stopwatch.StartNew();
@@ -33,14 +34,14 @@ public class LoggerSystem : ILogger
 		{
 			Directory.CreateDirectory(folder);
 
-			if (CrossIO.FileExists(previousLog))
+			if (CrossIO.FileExists(PreviousLogFilePath))
 			{
-				CrossIO.DeleteFile(previousLog, true);
+				CrossIO.DeleteFile(PreviousLogFilePath, true);
 			}
 
 			if (CrossIO.FileExists(LogFilePath))
 			{
-				File.Move(LogFilePath, previousLog);
+				File.Move(LogFilePath, PreviousLogFilePath);
 			}
 
 			File.WriteAllBytes(LogFilePath, new byte[0]);

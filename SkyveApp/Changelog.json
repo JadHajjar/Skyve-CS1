@@ -1,5 +1,20 @@
 [
   {
+    "Version": "3.2.7",
+    "Date": "2023-08-10",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Improved Compatibility Report processing speed.",
+          "Partially included asset packs are now considered as 'Included' for dependency checks.",
+          "Added extra logging for automated tasks.",
+          "Stable version has been bumped to match the Beta version number."
+        ]
+      }
+    ]
+  },
+  {
     "Stable": true,
     "Version": "3.2.1",
     "Date": "2023-08-06",

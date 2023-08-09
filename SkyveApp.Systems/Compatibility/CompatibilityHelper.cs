@@ -107,7 +107,7 @@ public class CompatibilityHelper
 			return;
 		}
 
-		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && (!_compatibilityManager.FirstLoadComplete || info.LocalPackage?.IsIncluded() != true))
+		if (type is InteractionType.RequiredPackages or InteractionType.OptionalPackages && info.LocalPackage?.IsIncluded() != true)
 		{
 			return;
 		}
@@ -219,9 +219,14 @@ public class CompatibilityHelper
 	{
 		var indexedPackage = _compatibilityManager.CompatibilityData.Packages.TryGet(steamId);
 
+		if (isEnabled(_contentManager.GetPackageById(new GenericPackageIdentity(steamId))))
+		{
+			return true;
+		}
+
 		if (indexedPackage is null)
 		{
-			return isEnabled(_contentManager.GetPackageById(new GenericPackageIdentity(steamId)));
+			return false;
 		}
 
 		if (withAlternatives)

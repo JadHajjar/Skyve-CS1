@@ -122,14 +122,20 @@ internal class LogUtil : ILogUtil
 		}
 
 		var tempLogFile = Path.GetTempFileName();
-		var tempLotLogFile = Path.GetTempFileName();
+		var tempSkyveLogFile = Path.GetTempFileName();
+		var tempPrevSkyveLogFile = Path.GetTempFileName();
 
 		CrossIO.CopyFile(GameLogFile, tempLogFile, true);
-		CrossIO.CopyFile(_logger.LogFilePath, tempLotLogFile, true);
-
 		zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
 
-		zipArchive.CreateEntryFromFile(tempLotLogFile, "Skyve\\SkyveLog.log");
+		CrossIO.CopyFile(_logger.LogFilePath, tempSkyveLogFile, true);
+		zipArchive.CreateEntryFromFile(tempSkyveLogFile, "Skyve\\SkyveLog.log");
+
+		if (CrossIO.FileExists(_logger.PreviousLogFilePath))
+		{
+			CrossIO.CopyFile(_logger.PreviousLogFilePath, tempPrevSkyveLogFile, true);
+			zipArchive.CreateEntryFromFile(tempPrevSkyveLogFile, "Skyve\\SkyveLog_Previous.log");
+		}
 
 		var logTrace = SimplifyLog(tempLogFile, out var simpleLogText);
 

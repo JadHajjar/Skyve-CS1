@@ -35,21 +35,21 @@ public class PackageUtil : IPackageUtil
 		{
 			if (packageWithContents.Mod is not null)
 			{
-				if (!_modUtil.IsIncluded(packageWithContents.Mod))
+				if (_modUtil.IsIncluded(packageWithContents.Mod))
 				{
-					return false;
+					return true;
 				}
 			}
 
 			foreach (var item in packageWithContents.Assets)
 			{
-				if (!_assetUtil.IsIncluded(item))
+				if (_assetUtil.IsIncluded(item))
 				{
-					return false;
+					return true;
 				}
 			}
 
-			return true;
+			return false;
 		}
 
 		return localPackage is IMod mod ? _modUtil.IsIncluded(mod) : localPackage is IAsset asset && _assetUtil.IsIncluded(asset);
@@ -107,8 +107,9 @@ public class PackageUtil : IPackageUtil
 	{
 		return package is IMod mod
 			? _modUtil.IsEnabled(mod)
-			: package is not ILocalPackageWithContents packageWithContents || packageWithContents.Mod is null
-|| _modUtil.IsEnabled(packageWithContents.Mod);
+			: (package is not ILocalPackageWithContents packageWithContents 
+				|| packageWithContents.Mod is null
+				|| _modUtil.IsEnabled(packageWithContents.Mod));
 	}
 
 	public bool IsIncludedAndEnabled(ILocalPackage package)
