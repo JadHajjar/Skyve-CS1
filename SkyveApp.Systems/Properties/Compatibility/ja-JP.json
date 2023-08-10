@@ -223,5 +223,9 @@
   "NoIssues": "問題なし",
   "RequestReviewDisclaimer": "※あなたのSteam IDとログがリクエストと一緒に送信されます！",
   "ScenarioMaking": "シナリオの作成",
-  "ThemeMaking": "テーマの作成"
+  "ThemeMaking": "テーマの作成",
+  "OtherCompatibilityWarnings": {
+    "One": "パッケージには他で互換性の警告があります",
+    "Plural": "パッケージには他で互換性の警告が {0} 個あります"
+  }
 }

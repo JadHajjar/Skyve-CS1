@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Pachete false detectate",
   "CleanupInfoTitle": "Ce este o curățare?",
   "TroubleshootCauseResult": "Următoarele pachete ar putea fi cauza problemelor dumneavoastră",
-  "VerifiedAuthor": "Autor verificat"
+  "VerifiedAuthor": "Autor verificat",
+  "ApplyAllActions": "Apply all available actions"
 }

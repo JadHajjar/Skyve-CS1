@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Felpaket upptäckta",
   "CleanupInfoTitle": "Vad är en sanering?",
   "TroubleshootCauseResult": "Följande paket kan vara orsaken till dina problem",
-  "VerifiedAuthor": "Verifierad författare"
+  "VerifiedAuthor": "Verifierad författare",
+  "ApplyAllActions": "Apply all available actions"
 }

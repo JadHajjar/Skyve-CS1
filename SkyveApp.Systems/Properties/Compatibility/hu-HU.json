@@ -223,5 +223,9 @@
   "NoIssues": "Nincsenek problémák",
   "RequestReviewDisclaimer": "* A Steam azonosítód és naplóid a kéréssel együtt elküldésre kerülnek",
   "ScenarioMaking": "Forgatókönyv-készítés",
-  "ThemeMaking": "Témakészítés"
+  "ThemeMaking": "Témakészítés",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }

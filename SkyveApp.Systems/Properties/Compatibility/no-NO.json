@@ -223,5 +223,9 @@
   "NoIssues": "Ingen saker",
   "RequestReviewDisclaimer": "*Din Steam ID og logger sendes ut med din forespørsel",
   "ScenarioMaking": "Scenarioopptak",
-  "ThemeMaking": "Utforming"
+  "ThemeMaking": "Utforming",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }
