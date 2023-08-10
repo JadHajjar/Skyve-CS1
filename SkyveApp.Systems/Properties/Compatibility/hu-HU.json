@@ -225,7 +225,7 @@
   "ScenarioMaking": "Forgatókönyv-készítés",
   "ThemeMaking": "Témakészítés",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "Ez a csomag egy másik kompatibilitási figyelmeztetést is tartalmaz",
+    "Plural": "Ez a csomag {0} másik kompatibilitási figyelmeztetést tartalmaz"
   }
 }
