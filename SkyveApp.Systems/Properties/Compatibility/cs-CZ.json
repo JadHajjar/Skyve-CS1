@@ -223,5 +223,9 @@
   "NoIssues": "Žádné problémy",
   "RequestReviewDisclaimer": "*Vaše Steam ID a logy jsou odeslány s Vaším požadavkem",
   "ScenarioMaking": "Vytváření scénářů",
-  "ThemeMaking": "Tvorba motivů"
+  "ThemeMaking": "Tvorba motivů",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }

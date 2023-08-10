@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Fehlerhafte Pakete erkannt",
   "CleanupInfoTitle": "Was ist eine Bereinigung?",
   "TroubleshootCauseResult": "Die folgenden Pakete könnten die Ursache für die Probleme sein",
-  "VerifiedAuthor": "Verifizierter Autor"
+  "VerifiedAuthor": "Verifizierter Autor",
+  "ApplyAllActions": "Alle verfügbaren Aktionen anwenden"
 }

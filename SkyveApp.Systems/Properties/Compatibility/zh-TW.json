@@ -223,5 +223,9 @@
   "NoIssues": "沒有問題",
   "RequestReviewDisclaimer": "* 傳送請求時，您的 Steam ID 和記錄檔也會一併傳送",
   "ScenarioMaking": "製作情況用",
-  "ThemeMaking": "制作主题用"
+  "ThemeMaking": "制作主题用",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }

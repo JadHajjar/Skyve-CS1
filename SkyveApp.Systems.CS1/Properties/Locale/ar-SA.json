@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "تم اكتشاف الحزم الخاطئة",
   "CleanupInfoTitle": "ما هو تنظيف؟",
   "TroubleshootCauseResult": "الحزم التالية قد تكون سبب مشاكلك",
-  "VerifiedAuthor": "المؤلف المتحقق منه"
+  "VerifiedAuthor": "المؤلف المتحقق منه",
+  "ApplyAllActions": "Apply all available actions"
 }

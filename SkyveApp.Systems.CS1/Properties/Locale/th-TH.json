@@ -58,8 +58,8 @@
   "IncludeAll": "รวมไอเทมทั้งหมดที่แสดงเข้าไปในเกม",
   "EnableAll": "เปิดใช้งานไอเทมทั้งหมดที่แสดง",
   "DisableAll": "ปิดใช้งานไอเทมทั้งหมดที่แสดง",
-  "CollectionLink": "URL หรือ หมายเลข ID ของชุดสะสมสตีม",
-  "PasteCollection": "วาง URL หรือ ID ของชุดสะสมที่คุณต้องการดู",
+  "CollectionLink": "URL หรือ หมายเลขไอดีของชุดสะสมสตีม",
+  "PasteCollection": "วาง URL หรือ ไอดี ของชุดสะสมที่คุณต้องการดู",
   "LoadCollection": "โหลดชุดสะสม",
   "CollectionTitle": "ชุดสะสมเวิร์กชอป",
   "HelpLogs": "บันทึกและการช่วยเหลือ",
@@ -101,12 +101,12 @@
     "One": "ดาวน์โหลดแพ็กเกจนี้",
     "Plural": "ดาวน์โหลดแพ็กเกจทั้งหมดที่เลือก"
   },
-  "CopySteamId": "คัดลอกสตีม ID",
+  "CopySteamId": "คัดลอกสตีมไอดี",
   "OpenAuthorPage": "เปิดเพจของผู้สร้าง",
   "Sorting_Default": "เรียงตามค่าเริ่มต้น",
   "Sorting_LastEdit": "แก้ไขล่าสุดเมื่อ",
   "Sorting_DateCreated": "วันที่สร้าง",
-  "Sorting_Usage": "โพร์ไฟล์ที่ใช้งานอยู่",
+  "Sorting_Usage": "เพลย์เซ็ตที่ใช้งานอยู่",
   "Sorting_Name": "ชื่อ",
   "Sorting_FileSize": "ขนาดไฟล์ทั้งหมด",
   "Sorting_UpdateTime": "เวลาอัปเดต",
@@ -130,7 +130,7 @@
   "DisableNewAssetsByDefault": "ปิดการใช้งานแอสเซทที่เพิ่งสมัครสมาชิกใหม่ตามค่าเริ่มต้น",
   "OverrideGameChanges": "แทนที่การเปลี่ยนแปลงระหว่างอยู่ที่ในเกม ด้วยสถานะการเปิดใช้งานของม็อด",
   "PlaysetSaveInfo": "การเปลี่ยนแปลงในหน้าจอนี้จะถูกบันทึกโดยอัตโนมัติ ตัวเลือก \"บันทึกอัตโนมัติ\" และ ปุ่ม บันทึก ที่ด้านบนจะมีผลกับ ม็อด แอสเซท และ DLC ที่คุณเลือกเท่านั้น",
-  "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
+  "PlaysetNameChangedIllegalChars": "เนื่องจาก Windows ไม่สามารถตั้งชื่อไฟล์ได้ อักขระบางตัวจึงถูกลบออกจากชื่อเพลย์เซ็ตของคุณ",
   "ShowFilters": "แสดงตัวกรอง",
   "HideFilters": "ซ่อนตัวกรอง",
   "DateSubscribed": "วันที่สมัครสมาชิก",
@@ -139,7 +139,7 @@
   "PackageIncludedPlural": "แพ็กเกจรวมอยู่ในเกม",
   "CopyWorkshopLink": {
     "One": "คัดลอกลิงก์เวิร์กชอปของแพ็กเกจนี้",
-    "Plural": "Copy the selected packages' Workshop Links"
+    "Plural": "คัดลอกลิงก์เวิร์กชอปของแพ็กเกจที่เลือก"
   },
   "FilterOutPackagesWithMods": "ซ่อนม็อดในหน้าแพ็กเกจ",
   "FilterOutPackagesWithOneAsset": "ซ่อน แพ็กเกจแอสเซทเดี่ยวจากหน้าแพ็กเกจ",
@@ -155,7 +155,7 @@
     "One": "คัดลอก ID เวิร์คชอปของแพ็กเกจนี้",
     "Plural": "คัดลอก ID เวิร์คชอปของแพ็กเกจที่เลือก"
   },
-  "CopyAuthorLink": "Copy this author's profile link",
+  "CopyAuthorLink": "คัดลอกลิงก์โพร์ไฟล์ของผู้สร้างนี้",
   "CopyAuthorId": "คัดลอกไอดีของผู้สร้าง",
   "YourPlaysets": "เพลย์เซ็ตของคุณ",
   "UnFavoriteThisPlayset": "นำเพลย์เซ็ตนี้ออกจากรายการชื่นชอบ",
@@ -180,7 +180,7 @@
   "AnyTags": "ทุกแท็ก",
   "AdvancedLaunchOptions": "แสดงตัวเลือกการเปิดเกมเพิ่มเติม",
   "MovePackageToLocalFolder": {
-    "One": "Copy package to a local folder",
+    "One": "คัดลอกแพ็กเกจไปยังโฟลเดอร์ภายในเครื่อง",
     "Plural": "คัดลอกแพ็กเกจที่เลือกทั้งหมดไปยังโฟลเดอร์ภายในเครื่อง"
   },
   "AllItems": "ไอเทมทั้งหมด",
@@ -206,7 +206,7 @@
   "SetupIncomplete": "การตั้งค่ายังไม่เสร็จ",
   "LsmImportUnusedInfo": "ดูและลบแอสเซทที่ไม่ได้ใช้",
   "SkipFileInfo": "เลือกไฟล์ ข้ามไฟล์ ที่จะใช้กับม็อดหน้าจอโหลด (LSM)",
-  "SaveFileInfo": "เลือกเซฟเกมที่ต้องการให้โหลดอัตโนมัติเมื่อคุณเปิดเกม",
+  "SaveFileInfo": "เลือกไฟล์เซฟเกมที่ต้องการให้ทำการโหลดอัตโนมัติเมื่อคุณเปิดเกม",
   "LoadPlayset": "โหลดเพลย์เซ็ต",
   "CopyAuthorSteamId": {
     "One": "คัดลอก ID ของผู้สร้าง",
@@ -250,11 +250,11 @@
   "ClearFoldersPrompt": "การตั้งค่าโฟลเดอร์ใหม่อีกครั้ง คุณจะต้องเปิดเกมขึ้นมาก่อน จึงจะสามารถใช้งานเครื่องมือนี้ได้อีกครั้ง",
   "ClearFoldersPromptTitle": "ยืนยันการดำเนินการ",
   "AreYouSure": "คุณแน่ใจหรือไม่ ว่าต้องการดำเนินการต่อ?",
-  "MapFileInfo": "เลือกแผนที่สำหรับเกมใหม่ที่จะเริ่มเล่น",
+  "MapFileInfo": "เลืออกแผนที่ที่จะใช้กับเกมใหม่ที่จะเริ่มเล่น",
   "AssetOutOfDate": "แอสเซทเก่าแล้ว",
   "OtherActions": "การกระทำอื่น ๆ",
   "AssetOutOfDatePlural": "แอสเซทเก่าแล้ว",
-  "CopyVersionNumber": "คัดลอกเลขเวอร์ชัน",
+  "CopyVersionNumber": "คัดลอกเลขเวอร์ชั่น",
   "SubscribeToItem": {
     "One": "สมัครสมาชิกแพ็กเกจนี้",
     "Plural": "สมัครสมาชิกแพ็กเกจที่เลือก"
@@ -275,7 +275,7 @@
   "SubscribingRequiresGameToOpenTitle": "ดำเนินการสมัครสมาชิก",
   "SubscribingRequiresGameToOpen": "การสมัคร หรือยกเลิกการสมัครสมาชิกแพ็กเกจ จำต้องเปิดเกมขึ้นมาให้มีการทำงานสักระยะหนึ่งก่อน หากคุณพบหน้าต่างตัวเปิดเกมให้คลิ๊ก Play เพื่อดำเนินการต่อ",
   "HelpSupport": "ช่วยเหลือและสนับสนุน",
-  "DisableFpsBoosterDebug": "คุณเปิดใช้งาน FPS Booster ในขณะที่กำลังใช้งาน Debug Mono เพื่อให้การเก็บ Log ทำได้ดียิ่งขึ้น คุณต้องการปิด FPS Booster หรือไม่?",
+  "DisableFpsBoosterDebug": "คุณกำลังเปิดใช้งาน FPS Booster ในระหว่างที่ใช้ Debug Mono ต้องการปิด FPS Booster เพื่อให้เก็บสามารถ Log ได้ดียิ่งกว่าไหม?",
   "LogZipCopy_Tip": "สร้างไฟล์ Zip ที่มีข้อมูล Log ทั้งหมดที่จำเป็น สำหรับการรับคำแนะนำจากใครสักคนเกี่ยวกับปัญหาที่คุณพบ คุณสามารถวางไฟล์ Zip ได้โดยตรงที่แชนแนลดีสคอร์ด",
   "LogZipFile_Tip": "สร้างไฟล์ Zip ที่มีข้อมูล Log ทั้งหมดที่จำเป็น สำหรับการรับคำแนะนำจากใครสักคนเกี่ยวกับปัญหาที่คุณพบ โฟลเดอร์ที่มีไฟล์จะเปิดขึ้นโดยอัตโนมัติ",
   "LogZipCopy": "คัดลอก Log ไปยังคลิปบอร์ด",
@@ -458,7 +458,7 @@
   "Subscribe": "สมัครสมาชิก",
   "Switch": "สลับ",
   "AdvancedIncludeEnable": "แสดงสถานะของม็อดทั้งการรวมอยู่ในเกมและการเปิดใช้งาน",
-  "PackageStatus": "สถานะแพ็กเกจ",
+  "PackageStatus": "สถานะแพกเกจ",
   "Author": "ผู้สร้าง",
   "Include": "รวมอยู่ในเกม",
   "Unsubscribe": "ยกเลิกการสมัครสมาชิก",
@@ -556,8 +556,8 @@
   "LoggedInAs": "เข้าระบบในชื่อ",
   "UnknownUser": "ผู้ใช้ที่ไม่รู้จัก",
   "AddMeaningfulDescription": "โปรดเพิ่มรายละเอียดที่อธิบายด้วยความกระจ่างชัดเพื่อประกอบคำร้องของคุณ",
-  "RedownloadComplete": "Skyve ได้ทำการดาวน์โหลดแพ็กเกจที่มีปัญหาใหม่อีกครั้งเรียบร้อยแล้ว",
-  "CleanupComplete": "Skyve ได้ทำการชำระล้างไฟล์ดาวน์โหลดเวิร์คชอปเสร็จแล้ว",
+  "RedownloadComplete": "สกายวีได้ทำการดาวน์โหลดแพ็กเกจที่มีปัญหาใหม่อีกครั้งเรียบร้อยแล้ว",
+  "CleanupComplete": "สกายวีได้ทำการชำระล้างไฟล์ดาวน์โหลดเวิร์คชอปเสร็จแล้ว",
   "PendingSubscribeTo": {
     "One": "{0} ไอเทมรอการสมัครสมาชิก",
     "Plural": "{0} ไอเทมรอการสมัครสมาชิก"
@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Faulty Packages Detected",
   "CleanupInfoTitle": "What is a cleanup?",
   "TroubleshootCauseResult": "The following packages might be the cause of your issues",
-  "VerifiedAuthor": "Verified Author"
+  "VerifiedAuthor": "Verified Author",
+  "ApplyAllActions": "Apply all available actions"
 }

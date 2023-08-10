@@ -223,5 +223,9 @@
   "NoIssues": "Sin problemas",
   "RequestReviewDisclaimer": "*Tu ID de Steam y los registros se envían con tu solicitud",
   "ScenarioMaking": "Crear escenarios",
-  "ThemeMaking": "Crear temas"
+  "ThemeMaking": "Crear temas",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }

@@ -223,5 +223,9 @@
   "NoIssues": "Ei ongelmia",
   "RequestReviewDisclaimer": "*Sinun Steam-tunnuksesi ja lokisi lähetetään pyyntösi yhteydessä",
   "ScenarioMaking": "Skenaarion teko",
-  "ThemeMaking": "Teeman teko"
+  "ThemeMaking": "Teeman teko",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }

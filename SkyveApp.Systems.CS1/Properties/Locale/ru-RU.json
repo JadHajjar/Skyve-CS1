@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Обнаружены сбои",
   "CleanupInfoTitle": "Что такое очистка?",
   "TroubleshootCauseResult": "Причиной проблем могут быть следующие пакеты",
-  "VerifiedAuthor": "Проверенный автор"
+  "VerifiedAuthor": "Проверенный автор",
+  "ApplyAllActions": "Apply all available actions"
 }

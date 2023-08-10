@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Foute pakketten gedetecteerd",
   "CleanupInfoTitle": "Wat is een schoonmaak?",
   "TroubleshootCauseResult": "De volgende pakketten zijn mogelijk de oorzaak van je problemen",
-  "VerifiedAuthor": "Geverifieerde auteur"
+  "VerifiedAuthor": "Geverifieerde auteur",
+  "ApplyAllActions": "Apply all available actions"
 }

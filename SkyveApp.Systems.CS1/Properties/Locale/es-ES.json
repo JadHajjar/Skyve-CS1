@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Paquetes con errores detectados",
   "CleanupInfoTitle": "¿Qué es una limpieza?",
   "TroubleshootCauseResult": "Los siguientes paquetes pueden ser la causa de sus problemas",
-  "VerifiedAuthor": "Autor verificado"
+  "VerifiedAuthor": "Autor verificado",
+  "ApplyAllActions": "Apply all available actions"
 }
