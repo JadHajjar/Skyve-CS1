@@ -114,13 +114,14 @@ partial class AddLinkForm
 			// B_Apply
 			// 
 			this.B_Apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_Apply.AutoSize = true;
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon1.Name = "I_Ok";
 			this.B_Apply.ImageName = dynamicIcon1;
-			this.B_Apply.Location = new System.Drawing.Point(245, 312);
+			this.B_Apply.Location = new System.Drawing.Point(314, 319);
 			this.B_Apply.Name = "B_Apply";
-			this.B_Apply.Size = new System.Drawing.Size(119, 30);
+			this.B_Apply.Size = new System.Drawing.Size(50, 23);
 			this.B_Apply.SpaceTriggersClick = true;
 			this.B_Apply.TabIndex = 100;
 			this.B_Apply.Text = "Apply";

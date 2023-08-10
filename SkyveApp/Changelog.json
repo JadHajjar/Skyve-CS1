@@ -1,5 +1,17 @@
 [
   {
+    "Version": "3.2.7.1",
+    "Date": "2023-08-10",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Potential fix for the sudden high CPU usage issue."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.2.7",
     "Date": "2023-08-10",
     "ChangeGroups": [

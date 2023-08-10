@@ -152,6 +152,7 @@ partial class PC_MainPage
 			this.B_StartStop.TabIndex = 0;
 			this.B_StartStop.Text = "Launch Cities: Skylines";
 			this.B_StartStop.Click += new System.EventHandler(this.B_StartStop_Click);
+		this.B_StartStop.AutoSize = true;
 			// 
 			// label1
 			// 
