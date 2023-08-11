@@ -377,7 +377,7 @@
   "XMLImportInfo": "Vous pouvez utiliser des fichiers de BOB, Tree Brush, Theme Mixer, etc..",
   "ImportFromTextInfo": "Tout format de texte est pris en charge",
   "LsmImportInfo": "Assurez-vous de sélectionner le fichier 'Report'",
-  "NoPlaysetsFound": "Aucun profil à afficher",
+  "NoPlaysetsFound": "Aucun playset à afficher",
   "NoPlaysetsMatchFilters": "Aucun playset ne correspond à votre recherche",
   "Your Save-games": "Vos sauvegardes de jeux",
   "App Data": "App Data",
@@ -582,7 +582,7 @@
     "One": "Vous vous désabonnerez de {0} paquet au cours de ce processus.",
     "Plural": "Vous vous désabonnerez de {0} paquets au cours de ce processus."
   },
-  "ViewThisPlaysetsPackages": "Voir le contenu de ce jeu",
+  "ViewThisPlaysetsPackages": "Voir le contenu de ce Playset",
   "PendingDownloads": {
     "One": "{0} élément en attente de téléchargement",
     "Plural": "{0} éléments en attente de téléchargement"
@@ -608,7 +608,7 @@
   "AllUsages": "Toutes utilisations",
   "Invalid": "Invalide",
   "UpdatePlayset": "Mettre à jour le Playset",
-  "FailedToRetrievePlaysets": "Impossible de récupérer la découverte du Playset",
+  "FailedToRetrievePlaysets": "Impossible de récupérer la librairie des Playsets",
   "DownloadPlayset": "Télécharger Playset",
   "ReloadAllData": "Recharger toutes les données",
   "ResetSnoozes": "Réinitialiser tous les rappels",
