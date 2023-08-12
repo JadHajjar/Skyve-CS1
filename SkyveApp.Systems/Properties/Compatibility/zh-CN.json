@@ -225,7 +225,7 @@
   "ScenarioMaking": "制作剧本",
   "ThemeMaking": "制作地图主题",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "此插件还有另一个兼容性警告",
+    "Plural": "此插件还有 {0} 个兼容性警告"
   }
 }
