@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "什么是清理程序？",
   "TroubleshootCauseResult": "以下插件可能是出现问题的原因",
   "VerifiedAuthor": "已验证的作者",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "应用所有可用的操作",
+  "FailedToImportPlayset": "Failed to import this playset."
 }
