@@ -63,7 +63,7 @@
   "The Compatibility Report tab is now available.": "更新：兼容性报告页面现在可以使用了。",
   "Fixed the profile list not updating instantly.": "修复：配置文件列表没有立即更新的问题。",
   "Fixed an error while fetching steam user info.": "修复：获取 Steam 用户信息出错的问题。",
-  "Improved Compatibility Report processing speed.": "Improved Compatibility Report processing speed.",
+  "Improved Compatibility Report processing speed.": "优化：提高了兼容性报告的处理速度。",
   "Added an indicator that a profile is uploading.": "新增：配置文件正在上传的指示标志。",
   "Fixed Profiles' Auto-Save not working correctly.": "修复：无法自动保存配置文件的问题。",
   "Added 6 new reset buttons in the Utilities page.": "新增：实用工具页面的 6 个重置按钮。",
