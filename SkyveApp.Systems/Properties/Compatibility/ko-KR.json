@@ -225,7 +225,7 @@
   "ScenarioMaking": "시나리오 제작용",
   "ThemeMaking": "테마 제작용",
   "OtherCompatibilityWarnings": {
-    "One": "This package has one other compatibility warning",
-    "Plural": "This package has {0} other compatibility warnings"
+    "One": "이 패키지에는 또 다른 호환성 경고가 있습니다.",
+    "Plural": "이 패키지에는 {0}개의 다른 호환성 경고가 더 있습니다."
   }
 }
