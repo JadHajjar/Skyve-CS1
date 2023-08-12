@@ -1,6 +1,7 @@
 {
   "New": "Yeni",
   "Fixes": "Düzeltmeler",
+  "Hotfix": "Hotfix",
   "Changes": "Değişiklikler",
   "Bug-Fixes": "Hata düzeltmeleri",
   "Improvements": "Geliştirmeler",
@@ -67,6 +68,7 @@
   "Added an indicator that a profile is uploading.": "Added an indicator that a profile is uploading.",
   "Fixed Profiles' Auto-Save not working correctly.": "Fixed Profiles' Auto-Save not working correctly.",
   "Added 6 new reset buttons in the Utilities page.": "Added 6 new reset buttons in the Utilities page.",
+  "Potential fix for the sudden high CPU usage issue.": "Potential fix for the sudden high CPU usage issue.",
   "Fixed freezes happening in the content list pages.": "Fixed freezes happening in the content list pages.",
   "Added more actions to labels in the content lists.": "Added more actions to labels in the content lists.",
   "Fixed author pages not opening correctly in Steam.": "Fixed author pages not opening correctly in Steam.",
@@ -203,6 +205,7 @@
   "Added an option to make optional packages use the same notification as required packages.": "Added an option to make optional packages use the same notification as required packages.",
   "Added language dialects, Chinese Traditional (Taiwan), English UK, and Portuguese Brazil.": "Added language dialects, Chinese Traditional (Taiwan), English UK, and Portuguese Brazil.",
   "Fixed downloading or updating a profile not properly saving some data like the thumbnail.": "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
+  "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors.": "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors.",
   "Implemented a new icon system that scales all of the icons appropriately to your UI scale.": "Implemented a new icon system that scales all of the icons appropriately to your UI scale.",
   "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.": "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.",
   "Steam links will now open inside of Steam's window. This can be toggled off in the Options.": "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
@@ -225,6 +228,7 @@
   "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.": "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.",
   "You can now edit Find it! tags directly in the app to mods and assets. Assets are synched with the game.": "You can now edit Find it! tags directly in the app to mods and assets. Assets are synched with the game.",
   "Pseudo-mods now include IMT Markings, Render it! Presets, Procedural Objects Fonts, and translation mods.": "Pseudo-mods now include IMT Markings, Render it! Presets, Procedural Objects Fonts, and translation mods.",
+  "Importing a Compatibility Report will now show it in your selected language, instead of the other person's.": "Importing a Compatibility Report will now show it in your selected language, instead of the other person's.",
   "Reworked the rendering of lists, improving the performance and responsiveness of content pages drastically.": "Reworked the rendering of lists, improving the performance and responsiveness of content pages drastically.",
   "You can now request a review for a package to notify us about missing information in the compatibility data.": "You can now request a review for a package to notify us about missing information in the compatibility data.",
   "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.": "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.",
@@ -261,5 +265,6 @@
   "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.": "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.",
   "The new icon now glows based on what's happening, blue indicates that the game is running, red means no internet connection, and quick glowing means it's launching or closing the game.": "The new icon now glows based on what's happening, blue indicates that the game is running, red means no internet connection, and quick glowing means it's launching or closing the game.",
   "Changed the option to increase list items' size on hover to always increase their size, improved the UI of enlarged list items, and applied this functionality to the rest of the lists in the app.": "Changed the option to increase list items' size on hover to always increase their size, improved the UI of enlarged list items, and applied this functionality to the rest of the lists in the app.",
+  "You can now import a Log Report file onto the playset list to import the playset in it and directly view its contents.\r\nThose profiles are temporary, and so will be deleted the next time you open Skyve.": "You can now import a Log Report file onto the playset list to import the playset in it and directly view its contents.\r\nThose profiles are temporary, and so will be deleted the next time you open Skyve.",
   "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')": "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')"
 }
