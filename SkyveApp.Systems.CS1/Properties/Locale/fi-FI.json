@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "Mikä on puhdistus?",
   "TroubleshootCauseResult": "Seuraavat paketit saattavat olla syynä ongelmiisi",
   "VerifiedAuthor": "Vahvistettu Tekijä",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }
