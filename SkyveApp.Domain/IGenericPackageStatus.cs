@@ -9,4 +9,5 @@ public interface IGenericPackageStatus
 	string? Note { get; set; }
 	NotificationType Notification { get; }
 	int IntType { get; set; }
+	string LocaleKey { get; }
 }

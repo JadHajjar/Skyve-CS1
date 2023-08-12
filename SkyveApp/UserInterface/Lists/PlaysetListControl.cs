@@ -4,11 +4,12 @@ using SkyveApp.UserInterface.Panels;
 
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Lists;
-internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, ProfileListControl.Rectangles>
+internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, PlaysetListControl.Rectangles>
 {
 	private ProfileSorting sorting;
 	private static ICustomPlayset? downloading;
@@ -30,13 +31,14 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 	private readonly IPlaysetManager _profileManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 
-	public ProfileListControl(bool readOnly)
+	public PlaysetListControl(bool readOnly)
 	{
 		ServiceCenter.Get(out _settings, out _notifier, out _userService, out _profileManager, out _compatibilityManager);
 
 		ReadOnly = readOnly;
 		HighlightOnHover = true;
 		SeparateWithLines = true;
+		AllowDrop = true;
 		ItemHeight = 36;
 		GridItemSize = new Size(305, 160);
 
@@ -650,7 +652,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 		{
 			return
 				Favorite.Contains(location) ||
-				(Icon.Contains(location) && !(instance as ProfileListControl)!.ReadOnly) ||
+				(Icon.Contains(location) && !(instance as PlaysetListControl)!.ReadOnly) ||
 				Load.Contains(location) ||
 				Merge.Contains(location) ||
 				Author.Contains(location) ||
@@ -669,7 +671,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 				return true;
 			}
 
-			if (Icon.Contains(location) && !(instance as ProfileListControl)!.ReadOnly)
+			if (Icon.Contains(location) && !(instance as PlaysetListControl)!.ReadOnly)
 			{
 				text = Locale.ChangePlaysetColor;
 				point = Icon.Location;
@@ -678,7 +680,7 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 			if (Load.Contains(location))
 			{
-				text = (instance as ProfileListControl)!.ReadOnly ? ServiceCenter.Get<IPlaysetManager>().Playsets.Any(x => x.Name!.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlaysetTip : Locale.DownloadPlaysetTip : Locale.PlaysetReplace;
+				text = (instance as PlaysetListControl)!.ReadOnly ? ServiceCenter.Get<IPlaysetManager>().Playsets.Any(x => x.Name!.Equals(Item.Name, StringComparison.InvariantCultureIgnoreCase)) ? Locale.UpdatePlaysetTip : Locale.DownloadPlaysetTip : Locale.PlaysetReplace;
 				point = Load.Location;
 				return true;
 			}
@@ -716,5 +718,59 @@ internal class ProfileListControl : SlickStackedListControl<ICustomPlayset, Prof
 
 			return false;
 		}
+	}
+
+	protected override void OnDragEnter(DragEventArgs drgevent)
+	{
+		base.OnDragEnter(drgevent);
+
+
+		if (drgevent.Data.GetDataPresent(DataFormats.FileDrop))
+		{
+			var file = ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
+
+			if (Path.GetExtension(file).ToLower() is ".zip" or ".json")
+			{
+				drgevent.Effect = DragDropEffects.Copy;
+				Invalidate();
+			}
+			return;
+		}
+
+		drgevent.Effect = DragDropEffects.None;
+		Invalidate();
+	}
+
+	protected override void OnDragLeave(EventArgs e)
+	{
+		base.OnDragLeave(e);
+
+		Invalidate();
+	}
+
+	protected override void OnDragDrop(DragEventArgs drgevent)
+	{
+		base.OnDragDrop(drgevent);
+
+		var file = ((string[])drgevent.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
+
+		if (file != null)
+		{
+			if (CrossIO.CurrentPlatform is not Platform.Windows)
+			{
+				var realPath = ServiceCenter.Get<IIOUtil>().ToRealPath(file);
+
+				if (CrossIO.FileExists(realPath))
+				{
+					file = realPath!;
+				}
+			}
+
+			(PanelContent.GetParentPanel(this) as PC_PlaysetList)?.Import(file);
+
+			SortingChanged(false);
+		}
+
+		Invalidate();
 	}
 }

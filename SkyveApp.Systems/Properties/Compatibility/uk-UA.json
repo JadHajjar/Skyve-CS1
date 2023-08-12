@@ -223,5 +223,9 @@
   "NoIssues": "Немає проблем",
   "RequestReviewDisclaimer": "*Ваш Steam ID і логи надсилаються з вашим запитом",
   "ScenarioMaking": "Сценарій",
-  "ThemeMaking": "Створення теми"
+  "ThemeMaking": "Створення теми",
+  "OtherCompatibilityWarnings": {
+    "One": "This package has one other compatibility warning",
+    "Plural": "This package has {0} other compatibility warnings"
+  }
 }

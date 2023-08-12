@@ -9,6 +9,7 @@ public interface IPackageManager
 
 	ILocalPackageWithContents? GetPackageById(IPackageIdentity identity);
 	ILocalPackageWithContents? GetPackageByFolder(string folder);
+	List<IMod> GetModsByName(string modName);
 	void AddPackage(ILocalPackageWithContents package);
 	void RemovePackage(ILocalPackageWithContents package);
 	void SetPackages(List<ILocalPackageWithContents> content);

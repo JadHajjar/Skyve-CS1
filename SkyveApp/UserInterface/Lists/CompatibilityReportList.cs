@@ -713,7 +713,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		if (rects.CompatibilityRect.Contains(e.Location))
 		{
 			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.Package!.LocalParentPackage ?? item.Item.Package!);
+				var pc = new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!);
 
 				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
 
@@ -734,7 +734,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package!.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package!) : new PC_PackagePage((IPackage?)item.Item.Package!.LocalParentPackage ?? item.Item.Package!));
+			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package!.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package!) : new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{

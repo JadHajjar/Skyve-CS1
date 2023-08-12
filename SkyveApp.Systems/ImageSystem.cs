@@ -1,9 +1,11 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -222,6 +224,8 @@ internal class ImageSystem : IImageService
 
 	private void CacheClearTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 	{
+		var sw = Stopwatch.StartNew();
+
 		try
 		{
 			var keys = _cache.Keys.ToList();
@@ -233,12 +237,19 @@ internal class ImageSystem : IImageService
 					if (DateTime.Now - value.lastAccessed > _expirationTime)
 					{
 						value.image.Dispose();
-						_ = _cache.Remove(key);
+						_cache.Remove(key);
 					}
 				}
 			}
 		}
 		catch { }
+
+		sw.Stop();
+
+		if (sw.ElapsedMilliseconds > 5000)
+		{
+			ServiceCenter.Get<ILogger>().Info("[Auto] [Timer] Cleared Image Cache");
+		}
 	}
 
 	public void ClearCache()

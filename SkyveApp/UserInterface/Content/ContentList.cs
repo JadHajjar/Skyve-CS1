@@ -411,7 +411,7 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 			}
 		}
 
-		if (item.GetWorkshopInfo()?.IsInvalid == true)
+		if (ListControl.IsGenericPage && item.GetWorkshopInfo()?.IsInvalid == true)
 		{
 			return true;
 		}

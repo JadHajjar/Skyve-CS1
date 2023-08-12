@@ -40,27 +40,39 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems = new();
 	}
 
-	public void Add(ReportType type, IGenericPackageStatus status, string message, ulong[] packages)
+	public void Add(ReportType type, IGenericPackageStatus status, string packageName, ulong[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
-			Message = message,
+			PackageName = packageName,
 			Packages = packages.Select(x => new PseudoPackage(x)).ToArray()
 		});
 	}
 
-	public void Add(ReportType type, IGenericPackageStatus status, string message, PseudoPackage[] packages)
+	public void Add(ReportType type, IGenericPackageStatus status, string packageName, PseudoPackage[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
-			Message = message,
+			PackageName = packageName,
 			Packages = packages
+		});
+	}
+
+	public void Add(ReportType type, IGenericPackageStatus status, string localeKey, object[] localeParams)
+	{
+		ReportItems.Add(new ReportItem
+		{
+			PackageId = Data?.Package.SteamId ?? 0,
+			Type = type,
+			Status = status,
+			LocaleKey = localeKey,
+			LocaleParams = localeParams
 		});
 	}
 
@@ -70,20 +82,20 @@ public class CompatibilityInfo : ICompatibilityInfo
 	public class DtoLocalPackage : ILocalPackage
 	{
 		[JsonIgnore] public ILocalPackageWithContents LocalParentPackage { get; set; }
-		[JsonIgnore] public ILocalPackage LocalPackage { get; set; }
+		[JsonIgnore] public ILocalPackage LocalPackage => this;
+		[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 		public long LocalSize { get; set; }
 		public DateTime LocalTime { get; set; }
 		public string Folder { get; set; }
 		public bool IsMod { get; set; }
 		public bool IsLocal { get; set; }
 		public bool IsBuiltIn { get; set; }
-		public IEnumerable<IPackageRequirement> Requirements { get; set; }
 		public string FilePath { get; set; }
 		public ulong Id { get; set; }
 		public string Name { get; set; }
 		public string Url { get; set; }
 	}
 
-#nullable enable
+	#nullable enable
 	#endregion
 }

@@ -28,18 +28,21 @@ internal class PC_LotChangeLog : PC_Changelog
 				+ current.ChangeGroups.ListStrings(x => $"## {x.Name}\r\n{x.Changes.ListStrings(y => $"* {y}", "\r\n")}", "\r\n\r\n"));
 		}
 #else
-		var texts = new List<string>();
-
-		foreach (var changelog in changeLogs)
+		if (System.Diagnostics.Debugger.IsAttached)
 		{
-			texts.Add(changelog.Tagline);
-			texts.AddRange(changelog.ChangeGroups.Select(x => x.Name));
-			texts.AddRange(changelog.ChangeGroups.SelectMany(x => x.Changes));
+			var texts = new List<string>();
+
+			foreach (var changelog in changeLogs)
+			{
+				texts.Add(changelog.Tagline);
+				texts.AddRange(changelog.ChangeGroups.Select(x => x.Name));
+				texts.AddRange(changelog.ChangeGroups.SelectMany(x => x.Changes));
+			}
+
+			var json = Newtonsoft.Json.JsonConvert.SerializeObject(texts.WhereNotEmpty().Distinct().OrderBy(x => x.Length).ToDictionary(x => x), Newtonsoft.Json.Formatting.Indented);
+
+			System.IO.File.WriteAllText("../../../Properties/Changelog.json", json);
 		}
-
-		var json = Newtonsoft.Json.JsonConvert.SerializeObject(texts.WhereNotEmpty().Distinct().OrderBy(x => x.Length).ToDictionary(x => x), Newtonsoft.Json.Formatting.Indented);
-
-		System.IO.File.WriteAllText("../../../Properties/Changelog.json", json);
 #endif
 	}
 }

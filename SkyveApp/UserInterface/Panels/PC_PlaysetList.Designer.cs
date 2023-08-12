@@ -388,7 +388,8 @@ partial class PC_PlaysetList
 			this.B_Discover.SpaceTriggersClick = true;
 			this.B_Discover.TabIndex = 3;
 			this.B_Discover.Text = "DiscoverPlaysets";
-			this.B_Discover.Click += new System.EventHandler(this.B_Discover_Click);
+		this.B_Discover.AutoSize = true;
+		this.B_Discover.Click += new System.EventHandler(this.B_Discover_Click);
 			// 
 			// TLP_ProfileName
 			// 

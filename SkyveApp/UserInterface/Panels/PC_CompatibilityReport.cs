@@ -74,7 +74,6 @@ public partial class PC_CompatibilityReport : PanelContent
 		Text = Locale.CompatibilityReport;
 	}
 
-
 	protected override void UIChanged()
 	{
 		base.UIChanged();
@@ -135,45 +134,49 @@ public partial class PC_CompatibilityReport : PanelContent
 
 	private void LoadReport(List<ICompatibilityInfo> reports)
 	{
-		var notifs = reports.GroupBy(x => x.GetNotification()).Where(x => x.Key > NotificationType.Info).OrderByDescending(x => x.Key).ToList();
-
-		if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs.Select(x => x.Key)))
+		try
 		{
-			LC_Items.SetItems(reports);
+			var notifs = reports.GroupBy(x => x.GetNotification()).Where(x => x.Key > NotificationType.Info).OrderByDescending(x => x.Key).ToList();
 
-			recommendedActions = LC_Items.Items.SelectWhereNotNull(GetAction).ToList()!;
-
-			this.TryInvoke(() => 
+			if (tabHeader.Tabs.Select(x => (NotificationType)x.Tag).SequenceEqual(notifs.Select(x => x.Key)))
 			{
-				B_ApplyAll.Enabled = recommendedActions.Count > 0;
-				foreach (var item in tabHeader.Tabs)
+				LC_Items.SetItems(reports);
+
+				recommendedActions = LC_Items.Items.SelectWhereNotNull(GetAction).ToList()!;
+
+				this.TryInvoke(() =>
 				{
-					item.Text = LocaleCR.Get(item.Tag.ToString()) + $" ({(notifs.FirstOrDefault(x => x.Key == (NotificationType)item.Tag)?.Count() ?? 0)})";
-				}
-			});
+					B_ApplyAll.Enabled = recommendedActions.Count > 0;
+					foreach (var item in tabHeader.Tabs)
+					{
+						item.Text = LocaleCR.Get(item.Tag.ToString()) + $" ({(notifs.FirstOrDefault(x => x.Key == (NotificationType)item.Tag)?.Count() ?? 0)})";
+					}
+				});
 
-			return;
-		}
+				return;
+			}
 
-		var tabs = new List<SlickTab>();
-		foreach (var report in notifs)
-		{
-			var tab = new SlickTab()
+			var tabs = new List<SlickTab>();
+			foreach (var report in notifs)
 			{
-				Tag = report.Key,
-				Text = LocaleCR.Get(report.Key.ToString()) + $" ({report.Count()})",
-				Tint = report.Key.GetColor(),
-				IconName = report.Key.GetIcon(true)
-			};
+				var tab = new SlickTab()
+				{
+					Tag = report.Key,
+					Text = LocaleCR.Get(report.Key.ToString()) + $" ({report.Count()})",
+					Tint = report.Key.GetColor(),
+					IconName = report.Key.GetIcon(true)
+				};
 
-			tab.TabSelected += Tab_TabSelected;
+				tab.TabSelected += Tab_TabSelected;
 
-			tabs.Add(tab);
+				tabs.Add(tab);
+			}
+
+			tabHeader.Tabs = tabs.ToArray();
+			LC_Items.SetItems(reports);
+			LC_Items.Visible = true;
 		}
-
-		tabHeader.Tabs = tabs.ToArray();
-		LC_Items.SetItems(reports);
-		LC_Items.Visible = true;
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
 	}
 
 	private ExtensionClass.action? GetAction(ICompatibilityInfo report)
@@ -368,7 +371,7 @@ public partial class PC_CompatibilityReport : PanelContent
 
 			customReportLoaded = true;
 		}
-		catch { }
+		catch (Exception ex) { ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load compatibility report"); }
 	}
 
 	private async void B_Requests_Click(object sender, EventArgs e)

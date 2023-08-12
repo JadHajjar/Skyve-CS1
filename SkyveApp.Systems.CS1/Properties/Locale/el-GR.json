@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Ανιχνεύθηκαν Ελαττωμένα Πακέτα",
   "CleanupInfoTitle": "Τι είναι ο καθαρισμός?",
   "TroubleshootCauseResult": "Τα ακόλουθα πακέτα μπορεί να είναι η αιτία των προβλημάτων σας",
-  "VerifiedAuthor": "Επαληθευμένος Συγγραφέας"
+  "VerifiedAuthor": "Επαληθευμένος Συγγραφέας",
+  "ApplyAllActions": "Apply all available actions"
 }

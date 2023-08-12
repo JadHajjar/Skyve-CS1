@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using SkyveApp.Domain;
 using SkyveApp.Domain.Systems;
 
 using System;
@@ -14,34 +15,33 @@ namespace SkyveApp.Systems;
 public class LoggerSystem : ILogger
 {
 	private bool failed;
-	private readonly INotifier _notifier;
 	private readonly bool _disabled;
 	private readonly Stopwatch? _stopwatch;
 
 	public string LogFilePath { get; }
+	public string PreviousLogFilePath { get; }
 
-	public LoggerSystem(ISettings _, INotifier notifier)
+	public LoggerSystem(ISettings _)
 	{
 		var folder = CrossIO.Combine(ISave.CustomSaveDirectory, ISave.AppName, "Logs");
-		var previousLog = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
 
+		PreviousLogFilePath = CrossIO.Combine(folder, $"SkyveApp_Previous.log");
 		LogFilePath = CrossIO.Combine(folder, $"SkyveApp.log");
 
 		_stopwatch = Stopwatch.StartNew();
-		_notifier = notifier;
 
 		try
 		{
 			Directory.CreateDirectory(folder);
 
-			if (CrossIO.FileExists(previousLog))
+			if (CrossIO.FileExists(PreviousLogFilePath))
 			{
-				CrossIO.DeleteFile(previousLog, true);
+				CrossIO.DeleteFile(PreviousLogFilePath, true);
 			}
 
 			if (CrossIO.FileExists(LogFilePath))
 			{
-				File.Move(LogFilePath, previousLog);
+				File.Move(LogFilePath, PreviousLogFilePath);
 			}
 
 			File.WriteAllBytes(LogFilePath, new byte[0]);
@@ -64,8 +64,6 @@ public class LoggerSystem : ILogger
 		{
 			_disabled = true;
 		}
-
-		_notifier = notifier;
 	}
 
 	public void Debug(object message)
@@ -106,7 +104,7 @@ public class LoggerSystem : ILogger
 
 		sb.AppendFormat("\r\n[{0} ", type);
 
-		if (time.Length < 6)
+		if (time.Length < 10)
 		{
 			sb.Append(' ', 10 - time.Length);
 		}
@@ -129,7 +127,7 @@ public class LoggerSystem : ILogger
 				{
 					failed = true;
 
-					_notifier.OnLoggerFailed(ex);
+					ServiceCenter.Get<INotifier>().OnLoggerFailed(ex);
 				}
 			}
 		}

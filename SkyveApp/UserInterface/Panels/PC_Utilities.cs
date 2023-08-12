@@ -158,7 +158,11 @@ public partial class PC_Utilities : PanelContent
 				B_LoadCollection.Loading = false;
 			}
 		}
-		catch (Exception ex) { ShowPrompt(ex, LocaleSlickUI.UnexpectedError); }
+		catch (Exception ex)
+		{
+			B_LoadCollection.Loading = false;
+			ShowPrompt(ex, LocaleSlickUI.UnexpectedError);
+		}
 	}
 
 	private async void B_ReDownload_Click(object sender, EventArgs e)

@@ -23,12 +23,12 @@ internal class WorkshopService : IWorkshopService
 
 	public IWorkshopInfo? GetInfo(IPackageIdentity identity)
 	{
-		return SteamUtil.GetItem(identity.Id);
+		return SteamUtil.GetItem(identity?.Id ?? 0);
 	}
 
 	public async Task<IWorkshopInfo?> GetInfoAsync(IPackageIdentity identity)
 	{
-		return await SteamUtil.GetItemAsync(identity.Id);
+		return await SteamUtil.GetItemAsync(identity?.Id ?? 0);
 	}
 
 	public IPackage GetPackage(IPackageIdentity identity)

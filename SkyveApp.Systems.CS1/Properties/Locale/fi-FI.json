@@ -680,5 +680,6 @@
   "FaultyPackagesTitle": "Virheelliset Paketit Havaittu",
   "CleanupInfoTitle": "Mikä on puhdistus?",
   "TroubleshootCauseResult": "Seuraavat paketit saattavat olla syynä ongelmiisi",
-  "VerifiedAuthor": "Vahvistettu Tekijä"
+  "VerifiedAuthor": "Vahvistettu Tekijä",
+  "ApplyAllActions": "Apply all available actions"
 }

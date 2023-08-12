@@ -26,13 +26,23 @@ internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 
 	protected override async Task<Dictionary<ulong, SteamWorkshopInfo>> ProcessItems(List<ulong> entities)
 	{
+		var failed = false;
+
 		try
 		{
 			return await SteamUtil.GetWorkshopInfoAsync(entities);
 		}
+		catch
+		{
+			failed = true;
+			throw;
+		}
 		finally
 		{
-			ServiceCenter.Get<INotifier>().OnWorkshopInfoUpdated();
+			if (!failed)
+			{
+				ServiceCenter.Get<INotifier>().OnWorkshopInfoUpdated();
+			}
 		}
 	}
 
