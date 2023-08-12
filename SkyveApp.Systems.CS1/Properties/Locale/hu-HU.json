@@ -682,5 +682,5 @@
   "TroubleshootCauseResult": "A következő csomagok okozhatják a problémákat",
   "VerifiedAuthor": "Ellenőrzött szerző",
   "ApplyAllActions": "Alkalmazza az összes elérhető műveletet",
-  "FailedToImportPlayset": "Failed to import this playset."
+  "FailedToImportPlayset": "Nem sikerült importálni ezt a játékkészletet."
 }
