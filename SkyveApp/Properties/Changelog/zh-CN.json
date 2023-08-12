@@ -179,7 +179,7 @@
   "Added a sorting order switch to select between Ascending and Descending sorting.": "新增：切换排序顺序的功能，现在可以自己选择升序和降序。",
   "Broken, incompatible, and banned packages now have a new background in the list.": "更新：现在，已损坏/不兼容/已被封禁的插件，在列表中将会显示新的警告样式背景。",
   "Updated the Package Page to match the displayed information in the content lists.": "更新：更新了插件页面，以匹配内容列表中显示的信息。",
-  "Added numbers next to the Compatibility groups showing how many items are in them.": "Added numbers next to the Compatibility groups showing how many items are in them.",
+  "Added numbers next to the Compatibility groups showing how many items are in them.": "新增：在兼容性问题程度分组边上，新增了数量统计，来显示不同兼容性问题严重程度的插件数量。",
   "Re-filtering using the shortcuts in the list now removes the item from your filter.": "更改：使用快速筛选的功能时，会自动清空上一次选择的筛选标签。",
   "Uploaded profiles can be private, shared with an ID, or public for everyone to see.": "您可以将上传的配置文件设为私密的，也可以使用 ID 共享配置文件，还可以设为公开并允许任何人查看。",
   "You can now select multiple items in the content lists using the Ctrl or Shift keys.": "新增：现在，在内容列表中，可以按住 Ctrl 或 Shift 键进行多选。",
