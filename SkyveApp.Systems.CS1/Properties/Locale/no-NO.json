@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "Hva er en opprydding?",
   "TroubleshootCauseResult": "Følgende pakker kan være årsaken til dine problemer",
   "VerifiedAuthor": "Bekreftet forfatter",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }
