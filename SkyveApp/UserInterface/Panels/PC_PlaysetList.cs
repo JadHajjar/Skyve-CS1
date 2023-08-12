@@ -3,13 +3,15 @@ using SkyveApp.Systems.CS1.Utilities;
 using SkyveApp.UserInterface.Lists;
 
 using System.Drawing;
+using System.IO;
+using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
 public partial class PC_PlaysetList : PanelContent
 {
-	private readonly ProfileListControl LC_Items;
+	private readonly PlaysetListControl LC_Items;
 
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
@@ -22,7 +24,7 @@ public partial class PC_PlaysetList : PanelContent
 
 		DD_Sorting.Height = TB_Search.Height = 0;
 
-		LC_Items = new ProfileListControl(false) { Dock = DockStyle.Fill, GridView = true };
+		LC_Items = new PlaysetListControl(false) { Dock = DockStyle.Fill, GridView = true };
 		LC_Items.CanDrawItem += Ctrl_CanDrawItem;
 		panel1.Controls.Add(LC_Items);
 
@@ -261,7 +263,7 @@ public partial class PC_PlaysetList : PanelContent
 
 	private void B_AddProfile_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_PlaysettAdd>();
+		Form.PushPanel<PC_PlaysetAdd>();
 	}
 
 	private void B_TempProfile_Click(object sender, EventArgs e)
@@ -340,5 +342,66 @@ public partial class PC_PlaysetList : PanelContent
 		}
 
 		B_Discover.Loading = false;
+	}
+
+	internal void Import(string file)
+	{
+		try
+		{
+			var profile = _profileManager.Playsets.FirstOrDefault(x => x.Name!.Equals(Path.GetFileNameWithoutExtension(file), StringComparison.InvariantCultureIgnoreCase));
+
+			if (Path.GetExtension(file).ToLower() is ".zip")
+			{
+				using var stream = File.OpenRead(file);
+				using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
+
+				var entry = zipArchive.GetEntry("Skyve\\LogProfile.json") ?? zipArchive.GetEntry("Skyve/LogProfile.json");
+
+				if (entry is null)
+				{
+					return;
+				}
+
+				file = Path.Combine(Path.GetTempPath(), $"{Path.GetFileNameWithoutExtension(file)}.json");
+
+				try
+				{ CrossIO.DeleteFile(file, true); }
+				catch { }
+
+				entry.ExtractToFile(file);
+			}
+
+			if (file.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+			{
+				if (profile is not null)
+				{
+					ShowPrompt(Locale.PlaysetNameUsed, icon: PromptIcons.Hand);
+					return;
+				}
+
+				profile = _profileManager.ConvertLegacyPlayset(file, false);
+
+				if (profile is null)
+				{
+					ShowPrompt(Locale.FailedToImportLegacyPlayset, icon: PromptIcons.Error);
+					return;
+				}
+			}
+			else
+			{
+				profile ??= _profileManager.ImportPlayset(file);
+			}
+
+			if (profile is not null)
+			{
+				var panel = new PC_GenericPackageList(profile.Packages, true)
+				{
+					Text = profile.Name
+				};
+
+				Form.PushPanel(panel);
+			}
+		}
+		catch (Exception ex) { ShowPrompt(ex, Locale.FailedToImportPlayset); }
 	}
 }

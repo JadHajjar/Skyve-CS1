@@ -330,14 +330,14 @@ public class CompatibilityManager : ICompatibilityManager
 			{
 				info.Add(ReportType.Compatibility
 					, new PackageInteraction { Type = InteractionType.Identical, Action = StatusAction.SelectOne }
-					, _locale.Get($"Interaction_{InteractionType.Identical}")
+					, string.Empty
 					, duplicate.Select(x => new PseudoPackage(x)).ToArray());
 			}
 		}
 
 		if (workshopInfo?.IsIncompatible == true)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), _locale.Get($"Stability_{PackageStability.Incompatible}"), new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Incompatible, null, false), string.Empty, new PseudoPackage[0]);
 		}
 
 		if (packageData is null)
@@ -351,7 +351,7 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (packageData.Package.Stability is not PackageStability.Stable && workshopInfo?.IsIncompatible != true && !author.Malicious)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, null, false), _locale.Get($"Stability_{packageData.Package.Stability}"), new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new StabilityStatus(packageData.Package.Stability, null, false), string.Empty, new PseudoPackage[0]);
 		}
 
 		foreach (var status in packageData.Statuses)
@@ -415,11 +415,11 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (author.Malicious)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, _locale.Get($"AuthorMalicious").Format(_packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)), new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Broken, null, false) { Action = StatusAction.UnsubscribeThis }, "AuthorMalicious", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}
 		else if (package.IsMod && author.Retired)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), _locale.Get($"AuthorRetired").Format(_packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name)), new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.AuthorRetired, null, false), "AuthorRetired", new object[] { _packageUtil.CleanName(package, true), (workshopInfo?.Author?.Name).IfEmpty(author.Name) });
 		}
 
 		if (!string.IsNullOrEmpty(packageData.Package.Note))
@@ -429,12 +429,12 @@ public class CompatibilityManager : ICompatibilityManager
 
 		if (package.IsLocal)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _locale.Get($"Stability_{PackageStability.Local}").Format(_packageUtil.CleanName(_workshopService.GetPackage(new GenericPackageIdentity(packageData.Package.SteamId)), true)), new PseudoPackage[] { new(packageData.Package.SteamId) });
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Local, null, false), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packageData.Package.SteamId)), true), new PseudoPackage[] { new(packageData.Package.SteamId) });
 		}
 
 		if (!package.IsLocal && !author.Malicious && workshopInfo?.IsIncompatible != true)
 		{
-			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), new PseudoPackage[0]);
+			info.Add(ReportType.Stability, new StabilityStatus(PackageStability.Stable, string.Empty, true), (packageData.Package.Stability is not PackageStability.NotReviewed and not PackageStability.AssetNotReviewed ? _locale.Get("LastReviewDate").Format(packageData.Package.ReviewDate.ToReadableString(packageData.Package.ReviewDate.Year != DateTime.Now.Year, ExtensionClass.DateFormat.TDMY)) + "\r\n\r\n" : string.Empty) + _locale.Get("RequestReviewInfo"), new object[0]);
 		}
 
 #if DEBUG

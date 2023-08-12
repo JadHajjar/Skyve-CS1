@@ -187,6 +187,7 @@ public class Locale : LocaleHelper, ILocale
 	public static Translation CopyFolderName => _instance.GetText(nameof(CopyFolderName));
 	public static Translation PlaysetNameUsed => _instance.GetText(nameof(PlaysetNameUsed));
 	public static Translation FailedToImportLegacyPlayset => _instance.GetText(nameof(FailedToImportLegacyPlayset));
+	public static Translation FailedToImportPlayset => _instance.GetText(nameof(FailedToImportPlayset));
 	public static Translation CurrentPlayset => _instance.GetText(nameof(CurrentPlayset));
 	public static Translation PlaysetStillLoading => _instance.GetText(nameof(PlaysetStillLoading));
 	public static Translation ApplyPlaysetNameBeforeExit => _instance.GetText(nameof(ApplyPlaysetNameBeforeExit));

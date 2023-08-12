@@ -84,13 +84,7 @@ public class CompatibilityHelper
 			packages.Insert(0, info.Package?.Id ?? 0);
 		}
 
-		var translation = _locale.Get($"Status_{type}");
-		var action = _locale.Get($"Action_{status.Status.Action}");
-		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
-		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
-		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(status.Status.Packages?.FirstOrDefault() ?? 0)), true)).Trim();
-
-		info.Add(reportType, status.Status, message, packages.ToArray());
+		info.Add(reportType, status.Status, _packageUtil.CleanName(info.Package, true), packages.ToArray());
 	}
 
 	public void HandleInteraction(CompatibilityInfo info, IndexedPackageInteraction interaction)
@@ -160,18 +154,12 @@ public class CompatibilityHelper
 			_ => ReportType.Compatibility
 		};
 
-		var translation = _locale.Get($"Interaction_{type}");
-		var action = _locale.Get($"Action_{interaction.Interaction.Action}");
-		var text = packages.Count switch { 0 => translation.Zero, 1 => translation.One, _ => translation.Plural } ?? translation.One;
-		var actionText = packages.Count switch { 0 => action.Zero, 1 => action.One, _ => action.Plural } ?? action.One;
-		var message = string.Format($"{text}\r\n\r\n{actionText}", _packageUtil.CleanName(info.Package, true), _packageUtil.CleanName(_workshopService.GetInfo(new GenericPackageIdentity(packages.FirstOrDefault())))).Trim();
-
 		if (interaction.Interaction.Action is StatusAction.SelectOne)
 		{
-			packages.Insert(0, info.Package?.Id ?? 0);
+			packages.Add(info.Package?.Id ?? 0);
 		}
 
-		info.Add(reportType, interaction.Interaction, message, packages.ToArray());
+		info.Add(reportType, interaction.Interaction, _packageUtil.CleanName(info.Package, true), packages.ToArray());
 	}
 
 	private bool HandleSucceededBy(CompatibilityInfo info, IEnumerable<ulong> packages)

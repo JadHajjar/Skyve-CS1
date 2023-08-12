@@ -22,4 +22,5 @@ internal class StabilityStatus : IPackageStatus<PackageStability>
 	public string? Note { get; set; }
 	public NotificationType Notification => CRNAttribute.GetNotification(Type);
 	public int IntType { get => (int)Type; set => Type = (PackageStability)value; }
+	public string LocaleKey => $"Stability_{Type}";
 }

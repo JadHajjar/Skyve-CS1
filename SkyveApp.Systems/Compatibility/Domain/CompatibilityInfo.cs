@@ -40,27 +40,39 @@ public class CompatibilityInfo : ICompatibilityInfo
 		ReportItems = new();
 	}
 
-	public void Add(ReportType type, IGenericPackageStatus status, string message, ulong[] packages)
+	public void Add(ReportType type, IGenericPackageStatus status, string packageName, ulong[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
-			Message = message,
+			PackageName = packageName,
 			Packages = packages.Select(x => new PseudoPackage(x)).ToArray()
 		});
 	}
 
-	public void Add(ReportType type, IGenericPackageStatus status, string message, PseudoPackage[] packages)
+	public void Add(ReportType type, IGenericPackageStatus status, string packageName, PseudoPackage[] packages)
 	{
 		ReportItems.Add(new ReportItem
 		{
 			PackageId = Data?.Package.SteamId ?? 0,
 			Type = type,
 			Status = status,
-			Message = message,
+			PackageName = packageName,
 			Packages = packages
+		});
+	}
+
+	public void Add(ReportType type, IGenericPackageStatus status, string localeKey, object[] localeParams)
+	{
+		ReportItems.Add(new ReportItem
+		{
+			PackageId = Data?.Package.SteamId ?? 0,
+			Type = type,
+			Status = status,
+			LocaleKey = localeKey,
+			LocaleParams = localeParams
 		});
 	}
 
@@ -84,6 +96,6 @@ public class CompatibilityInfo : ICompatibilityInfo
 		public string Url { get; set; }
 	}
 
-#nullable enable
+	#nullable enable
 	#endregion
 }

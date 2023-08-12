@@ -3,7 +3,7 @@
 
 namespace SkyveApp.UserInterface.Panels;
 
-partial class PC_PlaysettAdd
+partial class PC_PlaysetAdd
 {
 	/// <summary> 
 	/// Required designer variable.
@@ -31,7 +31,7 @@ partial class PC_PlaysettAdd
 	/// </summary>
 	private void InitializeComponent()
 	{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC_PlaysettAdd));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PC_PlaysetAdd));
 			this.TLP_New = new System.Windows.Forms.TableLayoutPanel();
 			this.newProfileOptionControl1 = new SkyveApp.UserInterface.Generic.NewProfileOptionControl();
 			this.newProfileOptionControl2 = new SkyveApp.UserInterface.Generic.NewProfileOptionControl();

@@ -5,11 +5,11 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace SkyveApp.UserInterface.Panels;
-public partial class PC_PlaysettAdd : PanelContent
+public partial class PC_PlaysetAdd : PanelContent
 {
 	private readonly IPlaysetManager _profileManager = ServiceCenter.Get<IPlaysetManager>();
 
-	public PC_PlaysettAdd()
+	public PC_PlaysetAdd()
 	{
 		InitializeComponent();
 
