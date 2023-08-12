@@ -682,5 +682,5 @@
   "TroubleshootCauseResult": "Les paquets suivants pourraient être la cause de vos problèmes",
   "VerifiedAuthor": "Auteur vérifié",
   "ApplyAllActions": "Appliquer toutes les actions disponibles",
-  "FailedToImportPlayset": "Failed to import this playset."
+  "FailedToImportPlayset": "Impossible d'importer ce profil."
 }
