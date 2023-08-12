@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "Ce este o curățare?",
   "TroubleshootCauseResult": "Următoarele pachete ar putea fi cauza problemelor dumneavoastră",
   "VerifiedAuthor": "Autor verificat",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }
