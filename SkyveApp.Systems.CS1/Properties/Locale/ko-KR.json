@@ -681,6 +681,6 @@
   "CleanupInfoTitle": "정리가 무엇인가요?",
   "TroubleshootCauseResult": "다음 패키지들이 문제의 원인일 수 있습니다",
   "VerifiedAuthor": "인증된 제작자",
-  "ApplyAllActions": "Apply all available actions",
-  "FailedToImportPlayset": "Failed to import this playset."
+  "ApplyAllActions": "가능한 모든 작업 적용하기",
+  "FailedToImportPlayset": "이 플레이셋을 가져오는 데 실패했습니다."
 }
