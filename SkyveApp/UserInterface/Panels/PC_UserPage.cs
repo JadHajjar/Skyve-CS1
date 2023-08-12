@@ -9,7 +9,7 @@ namespace SkyveApp.UserInterface.Panels;
 public partial class PC_UserPage : PanelContent
 {
 	private readonly ContentList<IPackage> LC_Items;
-	private readonly ProfileListControl L_Profiles;
+	private readonly PlaysetListControl L_Profiles;
 
 	private readonly ISettings _settings;
 	private readonly IWorkshopService _workshopService;

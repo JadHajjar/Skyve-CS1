@@ -572,6 +572,13 @@ internal class PlaysetManager : IPlaysetManager
 
 				if (newPlayset != null)
 				{
+					if (newPlayset.Temporary)
+					{
+						CrossIO.DeleteFile(playset);
+						_logger.Info($"Deleted the temporary playset '{playset}'");
+						return;
+					}
+
 					newPlayset.Name = Path.GetFileNameWithoutExtension(playset);
 					newPlayset.LastEditDate = File.GetLastWriteTime(playset);
 					newPlayset.DateCreated = File.GetCreationTime(playset);
@@ -592,7 +599,10 @@ internal class PlaysetManager : IPlaysetManager
 				}
 			}
 		}
-		catch { }
+		catch (Exception ex)
+		{
+			_logger.Exception(ex, $"Could not load local playsets.");
+		}
 
 		if (_notifier.IsContentLoaded)
 		{

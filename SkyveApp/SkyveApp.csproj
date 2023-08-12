@@ -91,7 +91,7 @@
     <Compile Update="UserInterface\Panels\PC_Troubleshoot.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInterface\Panels\PC_PlaysettAdd.cs" />
+    <Compile Update="UserInterface\Panels\PC_PlaysetAdd.cs" />
     <Compile Update="UserInterface\Panels\PC_UserPage.cs" />
     <Compile Update="UserInterface\Panels\PC_PlaysetList.cs" />
     <Compile Update="UserInterface\Panels\PC_Packages.cs" />

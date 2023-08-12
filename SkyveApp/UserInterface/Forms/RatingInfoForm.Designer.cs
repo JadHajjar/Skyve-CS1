@@ -98,7 +98,7 @@ partial class RatingInfoForm
 			// 
 			this.L_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_1.AutoSize = true;
-			this.L_1.Location = new System.Drawing.Point(289, 196);
+			this.L_1.Location = new System.Drawing.Point(289, 200);
 			this.L_1.Name = "L_1";
 			this.L_1.Size = new System.Drawing.Size(45, 19);
 			this.L_1.TabIndex = 3;
@@ -113,7 +113,7 @@ partial class RatingInfoForm
 			this.slickIcon1.Enabled = false;
 			dynamicIcon1.Name = "I_VoteFilled";
 			this.slickIcon1.ImageName = dynamicIcon1;
-			this.slickIcon1.Location = new System.Drawing.Point(133, 43);
+			this.slickIcon1.Location = new System.Drawing.Point(133, 47);
 			this.slickIcon1.Name = "slickIcon1";
 			this.slickIcon1.Selected = true;
 			this.slickIcon1.Size = new System.Drawing.Size(150, 150);
@@ -122,14 +122,15 @@ partial class RatingInfoForm
 			// B_Ok
 			// 
 			this.B_Ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_Ok.AutoSize = true;
 			this.B_Ok.ColorShade = null;
 			this.B_Ok.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon2.Name = "I_Ok";
 			this.B_Ok.ImageName = dynamicIcon2;
 			this.B_Ok.LargeImage = true;
-			this.B_Ok.Location = new System.Drawing.Point(503, 370);
+			this.B_Ok.Location = new System.Drawing.Point(571, 377);
 			this.B_Ok.Name = "B_Ok";
-			this.B_Ok.Size = new System.Drawing.Size(100, 30);
+			this.B_Ok.Size = new System.Drawing.Size(32, 23);
 			this.B_Ok.SpaceTriggersClick = true;
 			this.B_Ok.TabIndex = 2;
 			this.B_Ok.Text = "Ok";
@@ -139,7 +140,7 @@ partial class RatingInfoForm
 			// 
 			this.L_Title.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_Title.AutoSize = true;
-			this.L_Title.Location = new System.Drawing.Point(289, 108);
+			this.L_Title.Location = new System.Drawing.Point(289, 112);
 			this.L_Title.Name = "L_Title";
 			this.L_Title.Size = new System.Drawing.Size(45, 19);
 			this.L_Title.TabIndex = 3;
@@ -150,7 +151,7 @@ partial class RatingInfoForm
 			// 
 			this.L_2.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_2.AutoSize = true;
-			this.L_2.Location = new System.Drawing.Point(289, 224);
+			this.L_2.Location = new System.Drawing.Point(289, 228);
 			this.L_2.Name = "L_2";
 			this.L_2.Size = new System.Drawing.Size(45, 19);
 			this.L_2.TabIndex = 3;
@@ -161,7 +162,7 @@ partial class RatingInfoForm
 			// 
 			this.L_3.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_3.AutoSize = true;
-			this.L_3.Location = new System.Drawing.Point(289, 261);
+			this.L_3.Location = new System.Drawing.Point(289, 265);
 			this.L_3.Name = "L_3";
 			this.L_3.Size = new System.Drawing.Size(45, 19);
 			this.L_3.TabIndex = 3;
@@ -172,7 +173,7 @@ partial class RatingInfoForm
 			// 
 			this.L_4.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_4.AutoSize = true;
-			this.L_4.Location = new System.Drawing.Point(289, 298);
+			this.L_4.Location = new System.Drawing.Point(289, 302);
 			this.L_4.Name = "L_4";
 			this.L_4.Size = new System.Drawing.Size(45, 19);
 			this.L_4.TabIndex = 3;
@@ -182,7 +183,8 @@ partial class RatingInfoForm
 			// PB_3
 			// 
 			this.PB_3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.PB_3.Location = new System.Drawing.Point(183, 255);
+			this.PB_3.LoaderSpeed = 1D;
+			this.PB_3.Location = new System.Drawing.Point(183, 259);
 			this.PB_3.Name = "PB_3";
 			this.PB_3.Size = new System.Drawing.Size(100, 31);
 			this.PB_3.TabIndex = 4;
@@ -192,7 +194,8 @@ partial class RatingInfoForm
 			// PB_4
 			// 
 			this.PB_4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.PB_4.Location = new System.Drawing.Point(183, 292);
+			this.PB_4.LoaderSpeed = 1D;
+			this.PB_4.Location = new System.Drawing.Point(183, 296);
 			this.PB_4.Name = "PB_4";
 			this.PB_4.Size = new System.Drawing.Size(100, 31);
 			this.PB_4.TabIndex = 4;
@@ -211,7 +214,7 @@ partial class RatingInfoForm
 			this.tableLayoutPanel1.Controls.Add(this.PB_12, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.PB_13, 2, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 215);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 219);
 			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
@@ -222,6 +225,7 @@ partial class RatingInfoForm
 			// PB_11
 			// 
 			this.PB_11.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.PB_11.LoaderSpeed = 1D;
 			this.PB_11.Location = new System.Drawing.Point(3, 3);
 			this.PB_11.Name = "PB_11";
 			this.PB_11.Size = new System.Drawing.Size(100, 31);
@@ -232,6 +236,7 @@ partial class RatingInfoForm
 			// PB_12
 			// 
 			this.PB_12.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.PB_12.LoaderSpeed = 1D;
 			this.PB_12.Location = new System.Drawing.Point(109, 3);
 			this.PB_12.Name = "PB_12";
 			this.PB_12.Size = new System.Drawing.Size(84, 31);
@@ -242,6 +247,7 @@ partial class RatingInfoForm
 			// PB_13
 			// 
 			this.PB_13.Anchor = System.Windows.Forms.AnchorStyles.Right;
+			this.PB_13.LoaderSpeed = 1D;
 			this.PB_13.Location = new System.Drawing.Point(199, 3);
 			this.PB_13.Name = "PB_13";
 			this.PB_13.Size = new System.Drawing.Size(84, 31);

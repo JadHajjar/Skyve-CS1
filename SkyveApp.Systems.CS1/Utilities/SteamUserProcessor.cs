@@ -26,13 +26,23 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 
 	protected override async Task<Dictionary<ulong, SteamUser>> ProcessItems(List<ulong> entities)
 	{
+		var failed = false;
+
 		try
 		{
 			return await SteamUtil.GetSteamUsersAsync(entities);
 		}
+		catch
+		{
+			failed = true;
+			throw;
+		}
 		finally
 		{
-			ServiceCenter.Get<INotifier>().OnWorkshopInfoUpdated();
+			if (!failed)
+			{
+				ServiceCenter.Get<INotifier>().OnWorkshopInfoUpdated();
+			}
 		}
 	}
 

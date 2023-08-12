@@ -43,6 +43,8 @@ public class PackageStatus : IPackageStatus<StatusType>, IDynamicSql
 	}
 
 	public int IntType { get => (int)Type; set => Type = (StatusType)value; }
+
+	public string LocaleKey => $"Status_{Type}";
 #endif
 
 	public PackageStatus()

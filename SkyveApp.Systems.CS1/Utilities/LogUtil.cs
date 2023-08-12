@@ -15,14 +15,16 @@ using System.Linq;
 namespace SkyveApp.Systems.CS1.Utilities;
 internal class LogUtil : ILogUtil
 {
+	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly ILocationManager _locationManager;
 	private readonly IPackageManager _contentManager;
 	private readonly IPackageUtil _contentUtil;
 	private readonly IPlaysetManager _profileManager;
 	private readonly ILogger _logger;
 
-	public LogUtil(ILocationManager locationManager, IPackageManager contentManager, IPlaysetManager profileManager, ILogger logger, IPackageUtil contentUtil)
+	public LogUtil(ILocationManager locationManager, IPackageManager contentManager, IPlaysetManager profileManager, ILogger logger, IPackageUtil contentUtil, ICompatibilityManager compatibilityManager)
 	{
+		_compatibilityManager = compatibilityManager;
 		_locationManager = locationManager;
 		_contentManager = contentManager;
 		_profileManager = profileManager;
@@ -116,32 +118,32 @@ internal class LogUtil : ILogUtil
 
 	private void AddMainFilesToZip(ZipArchive zipArchive)
 	{
-		if (!CrossIO.FileExists(GameLogFile))
+		if (CrossIO.FileExists(GameLogFile))
 		{
-			return;
+			var tempLogFile = Path.GetTempFileName();
+			CrossIO.CopyFile(GameLogFile, tempLogFile, true);
+			zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
+
+			var logTrace = SimplifyLog(tempLogFile, out var simpleLogText);
+
+			AddSimpleLog(zipArchive, simpleLogText);
+
+			AddErrors(zipArchive, logTrace);
 		}
 
-		var tempLogFile = Path.GetTempFileName();
-		var tempSkyveLogFile = Path.GetTempFileName();
-		var tempPrevSkyveLogFile = Path.GetTempFileName();
-
-		CrossIO.CopyFile(GameLogFile, tempLogFile, true);
-		zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
-
-		CrossIO.CopyFile(_logger.LogFilePath, tempSkyveLogFile, true);
-		zipArchive.CreateEntryFromFile(tempSkyveLogFile, "Skyve\\SkyveLog.log");
+		if (CrossIO.FileExists(_logger.LogFilePath))
+		{
+			var tempSkyveLogFile = Path.GetTempFileName();
+			CrossIO.CopyFile(_logger.LogFilePath, tempSkyveLogFile, true);
+			zipArchive.CreateEntryFromFile(tempSkyveLogFile, "Skyve\\SkyveLog.log");
+		}
 
 		if (CrossIO.FileExists(_logger.PreviousLogFilePath))
 		{
+			var tempPrevSkyveLogFile = Path.GetTempFileName();
 			CrossIO.CopyFile(_logger.PreviousLogFilePath, tempPrevSkyveLogFile, true);
 			zipArchive.CreateEntryFromFile(tempPrevSkyveLogFile, "Skyve\\SkyveLog_Previous.log");
 		}
-
-		var logTrace = SimplifyLog(tempLogFile, out var simpleLogText);
-
-		AddSimpleLog(zipArchive, simpleLogText);
-
-		AddErrors(zipArchive, logTrace);
 
 		AddCompatibilityReport(zipArchive);
 
@@ -150,13 +152,20 @@ internal class LogUtil : ILogUtil
 
 	private void AddCompatibilityReport(ZipArchive zipArchive)
 	{
+		//var culture = LocaleHelper.CurrentCulture;
+		//LocaleHelper.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
 		var profileEntry = zipArchive.CreateEntry("Skyve\\CompatibilityReport.json");
 		using var writer = new StreamWriter(profileEntry.Open());
 
+		//_compatibilityManager.CacheReport();
 		var reports = _contentManager.Packages.ToList(x => x.GetCompatibilityInfo());
 		reports.RemoveAll(x => x.GetNotification() < NotificationType.Warning && !(x.Package!.IsIncluded(out var partial) || partial));
 
 		writer.Write(Newtonsoft.Json.JsonConvert.SerializeObject(reports, Newtonsoft.Json.Formatting.Indented));
+
+		//LocaleHelper.CurrentCulture = culture;
+		//_compatibilityManager.CacheReport();
 	}
 
 	private void AddProfile(ZipArchive zipArchive)

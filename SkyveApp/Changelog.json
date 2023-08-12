@@ -1,5 +1,31 @@
 [
   {
+    "Version": "3.2.8",
+    "Date": "2023-08-12",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Importing a Compatibility Report will now show it in your selected language, instead of the other person's.",
+          "You can now import a Log Report file onto the playset list to import the playset in it and directly view its contents.\r\nThose profiles are temporary, and so will be deleted the next time you open Skyve.",
+          "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.2.7.1",
+    "Date": "2023-08-10",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Potential fix for the sudden high CPU usage issue."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.2.7",
     "Date": "2023-08-10",
     "ChangeGroups": [

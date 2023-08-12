@@ -45,6 +45,8 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 	}
 
 	public int IntType { get => (int)Type; set => Type = (InteractionType)value; }
+
+	public string LocaleKey => $"Interaction_{Type}";
 #endif
 
 	public PackageInteraction()

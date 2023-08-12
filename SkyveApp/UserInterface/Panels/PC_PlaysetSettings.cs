@@ -281,7 +281,7 @@ public partial class PC_PlaysetSettings : PanelContent
 
 	private void B_NewProfile_Click(object sender, EventArgs e)
 	{
-		Form.PushPanel<PC_PlaysettAdd>();
+		Form.PushPanel<PC_PlaysetAdd>();
 	}
 
 	internal void B_EditName_Click(object sender, EventArgs e)

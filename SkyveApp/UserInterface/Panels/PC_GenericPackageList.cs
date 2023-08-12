@@ -84,7 +84,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 
 	private void _notifier_WorkshopPackagesInfoLoaded()
 	{
-		LC_Items.Invalidate(true);
+		LC_Items.ListControl.Invalidate();
 	}
 
 	protected override IEnumerable<IPackage> GetItems()

@@ -88,13 +88,14 @@ partial class EditTagsForm
 			// B_Apply
 			// 
 			this.B_Apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.B_Apply.AutoSize = true;
 			this.B_Apply.ColorShade = null;
 			this.B_Apply.Cursor = System.Windows.Forms.Cursors.Hand;
 			dynamicIcon1.Name = "I_Ok";
 			this.B_Apply.ImageName = dynamicIcon1;
-			this.B_Apply.Location = new System.Drawing.Point(265, 412);
+			this.B_Apply.Location = new System.Drawing.Point(334, 419);
 			this.B_Apply.Name = "B_Apply";
-			this.B_Apply.Size = new System.Drawing.Size(119, 30);
+			this.B_Apply.Size = new System.Drawing.Size(50, 23);
 			this.B_Apply.SpaceTriggersClick = true;
 			this.B_Apply.TabIndex = 100;
 			this.B_Apply.Text = "Apply";
@@ -108,11 +109,12 @@ partial class EditTagsForm
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 61);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(381, 345);
+			this.panel1.Size = new System.Drawing.Size(381, 352);
 			this.panel1.TabIndex = 101;
 			// 
 			// TLC
 			// 
+			this.TLC.CurrentSearch = null;
 			this.TLC.Location = new System.Drawing.Point(0, 0);
 			this.TLC.Name = "TLC";
 			this.TLC.Size = new System.Drawing.Size(150, 0);
@@ -124,7 +126,7 @@ partial class EditTagsForm
 			this.slickScroll1.LinkedControl = this.TLC;
 			this.slickScroll1.Location = new System.Drawing.Point(371, 0);
 			this.slickScroll1.Name = "slickScroll1";
-			this.slickScroll1.Size = new System.Drawing.Size(10, 345);
+			this.slickScroll1.Size = new System.Drawing.Size(10, 352);
 			this.slickScroll1.SmallHandle = true;
 			this.slickScroll1.Style = SlickControls.StyleType.Vertical;
 			this.slickScroll1.TabIndex = 1;
@@ -155,7 +157,7 @@ partial class EditTagsForm
 			// 
 			this.L_MultipleWarning.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.L_MultipleWarning.AutoSize = true;
-			this.L_MultipleWarning.Location = new System.Drawing.Point(3, 417);
+			this.L_MultipleWarning.Location = new System.Drawing.Point(3, 421);
 			this.L_MultipleWarning.Name = "L_MultipleWarning";
 			this.L_MultipleWarning.Size = new System.Drawing.Size(45, 19);
 			this.L_MultipleWarning.TabIndex = 103;

@@ -3,6 +3,7 @@ using SkyveApp.UserInterface.Generic;
 
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -147,9 +148,9 @@ public partial class PC_HelpAndLogs : PanelContent
 		B_SaveZip.ImageName = "I_Log";
 	}
 
-	private void DD_LogFile_FileSelected(string obj)
+	private void DD_LogFile_FileSelected(string file)
 	{
-		if (!CrossIO.FileExists(obj))
+		if (!CrossIO.FileExists(file))
 		{
 			DD_LogFile.SelectedFile = string.Empty;
 			return;
@@ -159,14 +160,46 @@ public partial class PC_HelpAndLogs : PanelContent
 
 		new BackgroundAction("Simplifying Log", () =>
 		{
-			var logs = _logUtil.SimplifyLog(obj, out var simpleLog);
+			var zip = file.ToLower().EndsWith(".zip");
+
+			if (zip)
+			{
+				try
+				{
+					using var stream = File.OpenRead(file);
+					using var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read, false);
+
+					var entry = zipArchive.GetEntry("log.txt");
+
+					if (entry is null)
+					{
+						DD_LogFile.Loading = false;
+						return;
+					}
+
+					file = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.txt");
+
+					entry.ExtractToFile(file);
+				}
+				catch
+				{
+					DD_LogFile.Loading = false;
+					return;
+				}
+			}
+
+			var logs = _logUtil.SimplifyLog(file, out var simpleLog);
 
 			this.TryInvoke(() => SetTrace(logs));
 
-			var simpleLogFile = Path.ChangeExtension(obj, "small" + Path.GetExtension(obj));
-			File.WriteAllText(simpleLogFile, simpleLog);
+			if (!zip)
+			{
+				var simpleLogFile = Path.ChangeExtension(file, "small" + Path.GetExtension(file));
+				File.WriteAllText(simpleLogFile, simpleLog);
 
-			DD_LogFile.SelectedFile = simpleLogFile;
+				DD_LogFile.SelectedFile = simpleLogFile;
+			}
+
 			DD_LogFile.Loading = false;
 		}).Run();
 	}
@@ -180,7 +213,7 @@ public partial class PC_HelpAndLogs : PanelContent
 
 	private bool DD_LogFile_ValidFile(object sender, string arg)
 	{
-		return arg.ToLower().EndsWith(".log") || arg.ToLower().EndsWith(".txt");
+		return DD_LogFile.ValidExtensions.Any(x => arg.ToLower().EndsWith(x));
 	}
 
 	private void B_OpenLogFolder_Click(object sender, EventArgs e)
