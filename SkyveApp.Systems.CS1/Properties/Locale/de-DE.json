@@ -682,5 +682,5 @@
   "TroubleshootCauseResult": "Die folgenden Pakete könnten die Ursache für die Probleme sein",
   "VerifiedAuthor": "Verifizierter Autor",
   "ApplyAllActions": "Alle verfügbaren Aktionen anwenden",
-  "FailedToImportPlayset": "Failed to import this playset."
+  "FailedToImportPlayset": "Importieren dieses Spielsets fehlgeschlagen."
 }
