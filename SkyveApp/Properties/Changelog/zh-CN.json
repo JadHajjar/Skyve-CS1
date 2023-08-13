@@ -120,7 +120,7 @@
   "You can now upload a profile online, up to 5 profiles per user.": "新增：您现在可以将配置文件上传到在线服务器，每个用户最多可上传 5 个配置文件。",
   "Added a setting in-game to enable hot-reload for mods & assets.": "新增：在游戏内新增了一个设置，可以启用模组和资产的热重载。",
   "Fixed the current playset's name staying visible while in-game.": "修复：在非主菜单处，当前配置文件的名称仍然显示的问题。",
-  "Stable version has been bumped to match the Beta version number.": "Stable version has been bumped to match the Beta version number.",
+  "Stable version has been bumped to match the Beta version number.": "Skyve 的稳定版已经与 Beta 测试版更新到同个版本。",
   "You can now import a LOT 1 profile in the 'Add Profile' section.": "新增：您现在可以点击“添加配置文件”，来导入 LOT 1 的配置文件。",
   "Your Paradox account panel will always be displayed from now on.": "更新：现在 Paradox 账户面包会显示在主菜单页面。",
   "Partially included packages now have a different UI in the list.": "更新：现在，包含多个资产的插件，如果您只装载了其中一部分资产，在列表中会显示出新的 \"/\" 图标。",
