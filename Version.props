@@ -1,9 +1,6 @@
 <Project>
 	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
-		<DefineConstants>$(DefineConstants);Stable</DefineConstants>
 		<AssemblyVersion>3.2.8.2</AssemblyVersion>
-		<DebugType>none</DebugType>
-		<Optimize>true</Optimize>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' != 'Stable'">
@@ -12,8 +9,5 @@
 
 	<PropertyGroup>
 		<FileVersion>3.0</FileVersion>
-		<Company>T. D. W.</Company>
-		<Copyright>@2023 MIT license</Copyright>
-		<Product>Skyve App</Product>
 	</PropertyGroup>
 </Project>
