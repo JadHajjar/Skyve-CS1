@@ -350,6 +350,8 @@ internal partial class ContentList<T> : SlickControl where T : IPackage
 		ListControl.SetItems(GetItems());
 
 		this.TryInvoke(RefreshCounts);
+
+		RefreshAuthorAndTags();
 	}
 
 	private void CentralManager_WorkshopInfoUpdated()

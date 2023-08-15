@@ -9,7 +9,10 @@ using System.Collections.Generic;
 
 namespace SkyveApp.Systems.Compatibility.Domain.Api;
 [DynamicSqlClass("Packages")]
-public class CompatibilityPackageData : IDynamicSql, IPackageCompatibilityInfo
+public class CompatibilityPackageData : IDynamicSql
+#if !API
+	, IPackageCompatibilityInfo
+#endif
 {
 	[DynamicSqlProperty(PrimaryKey = true)]
 	public ulong SteamId { get; set; }
@@ -34,15 +37,16 @@ public class CompatibilityPackageData : IDynamicSql, IPackageCompatibilityInfo
 	[DynamicSqlProperty(ColumnName = nameof(RequiredDLCs)), System.Text.Json.Serialization.JsonIgnore]
 	public string? RequiredDLCsList { get => RequiredDLCs is null ? null : string.Join(',', RequiredDLCs); set => RequiredDLCs = value?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(uint.Parse).ToArray(); }
 #endif
-
 	public uint[]? RequiredDLCs { get; set; }
 	public List<string>? Tags { get; set; }
 	public List<PackageLink>? Links { get; set; }
 	public List<PackageStatus>? Statuses { get; set; }
 	public List<PackageInteraction>? Interactions { get; set; }
-	List<ILink>? IPackageCompatibilityInfo.Links => Links?.ToList(x => (ILink)x);
 
+#if !API
+	List<ILink>? IPackageCompatibilityInfo.Links => Links?.ToList(x => (ILink)x);
 	List<IPackageStatus<StatusType>>? IPackageCompatibilityInfo.Statuses { get => Statuses?.ToList(x => (IPackageStatus<StatusType>)x); set => Statuses = value?.ToList(x => (PackageStatus)x); }
 	List<IPackageStatus<InteractionType>>? IPackageCompatibilityInfo.Interactions { get => Interactions?.ToList(x => (IPackageStatus<InteractionType>)x); set => Interactions = value?.ToList(x => (PackageInteraction)x); }
 	Dictionary<ulong, IPackageCompatibilityInfo> IPackageCompatibilityInfo.Group => new();
+#endif
 }

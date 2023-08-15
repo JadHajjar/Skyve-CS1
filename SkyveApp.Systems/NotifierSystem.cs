@@ -11,7 +11,6 @@ internal class NotifierSystem : INotifier
 	private readonly ILogger _logger;
 
 	public event Action? ContentLoaded;
-	public event Action? WorkshopInfoUpdated;
 	public event Action? PackageInformationUpdated;
 	public event Action? PackageInclusionUpdated;
 	public event Action? AutoSaveRequested;
@@ -21,12 +20,14 @@ internal class NotifierSystem : INotifier
 	public event Action<Exception>? LoggerFailed;
 	public event Action? CompatibilityReportProcessed;
 	public event Action? WorkshopPackagesInfoLoaded;
+	public event Action? WorkshopInfoUpdated;
 	public event Action? WorkshopUsersInfoLoaded;
 	public event Action? CompatibilityDataLoaded;
 
 	private readonly DelayedAction _delayedPackageInformationUpdated;
 	private readonly DelayedAction _delayedPackageInclusionUpdated;
 	private readonly DelayedAction _delayedWorkshopInfoUpdated;
+	private readonly DelayedAction _delayedWorkshopUsersInfoUpdated;
 	private readonly DelayedAction _delayedContentLoaded;
 	private readonly DelayedAction _delayedAutoSaveRequested;
 	private readonly DelayedAction _delayedImageLoaded;
@@ -35,12 +36,13 @@ internal class NotifierSystem : INotifier
 	{
 		_logger = logger;
 
-		_delayedContentLoaded = new(300, () => ContentLoaded?.Invoke());
-		_delayedPackageInformationUpdated = new(300, () => PackageInformationUpdated?.Invoke());
-		_delayedPackageInclusionUpdated = new(300, () => PackageInclusionUpdated?.Invoke());
-		_delayedWorkshopInfoUpdated = new(300, () => WorkshopInfoUpdated?.Invoke());
-		_delayedAutoSaveRequested = new(300, () => AutoSaveRequested?.Invoke());
-		_delayedImageLoaded = new(300, () => RefreshUI?.Invoke());
+		_delayedContentLoaded = new(350, () => { _logger.Info("[Auto] ContentLoaded"); ContentLoaded?.Invoke(); });
+		_delayedPackageInformationUpdated = new(300, () => { _logger.Info("[Auto] PackageInformationUpdated"); PackageInformationUpdated?.Invoke(); });
+		_delayedPackageInclusionUpdated = new(250, () => { _logger.Info("[Auto] PackageInclusionUpdated"); PackageInclusionUpdated?.Invoke(); });
+		_delayedWorkshopInfoUpdated = new(200, () => { _logger.Info("[Auto] WorkshopInfoUpdated"); WorkshopInfoUpdated?.Invoke(); });
+		_delayedWorkshopUsersInfoUpdated = new(200, () => { _logger.Info("[Auto] WorkshopUsersInfoLoaded"); WorkshopUsersInfoLoaded?.Invoke(); });
+		_delayedAutoSaveRequested = new(300, () => { _logger.Info("[Auto] AutoSaveRequested"); AutoSaveRequested?.Invoke(); });
+		_delayedImageLoaded = new(300, () => { _logger.Info("[Auto] RefreshUI"); RefreshUI?.Invoke(); });
 	}
 
 	public bool IsContentLoaded { get; private set; }
@@ -60,6 +62,14 @@ internal class NotifierSystem : INotifier
 		if (IsContentLoaded)
 		{
 			_delayedWorkshopInfoUpdated.Run();
+		}
+	}
+
+	public void OnWorkshopUsersInfoLoaded()
+	{
+		if (IsContentLoaded)
+		{
+			_delayedWorkshopUsersInfoUpdated.Run();
 		}
 	}
 
@@ -135,13 +145,6 @@ internal class NotifierSystem : INotifier
 
 		WorkshopPackagesInfoLoaded?.Invoke();
 		WorkshopPackagesInfoLoaded = null;
-	}
-
-	public void OnWorkshopUsersInfoLoaded()
-	{
-		_logger.Info("[Auto] Workshop Users Info Loaded");
-
-		WorkshopUsersInfoLoaded?.Invoke();
 	}
 
 	public void OnCompatibilityDataLoaded()

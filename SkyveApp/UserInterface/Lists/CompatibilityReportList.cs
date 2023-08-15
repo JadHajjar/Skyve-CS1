@@ -61,8 +61,12 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 	protected override void OnPaintItemGrid(ItemPaintEventArgs<ICompatibilityInfo, Rectangles> e)
 	{
-		var package = e.Item.Package!;
+		if (e.Item.Package is null)
+		{
+			return;
+		}
 
+		var package = e.Item.Package;
 		var localPackage = package.LocalPackage;
 		var localParentPackage = localPackage?.LocalParentPackage;
 		var workshopInfo = package.GetWorkshopInfo();
@@ -713,11 +717,9 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 		if (rects.CompatibilityRect.Contains(e.Location))
 		{
 			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!);
+				var pc = new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!, true);
 
 				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-
-				pc.T_CR.Selected = true;
 
 				if (_settings.UserSettings.ResetScrollOnPackageClick)
 				{
@@ -734,7 +736,7 @@ internal class CompatibilityReportList : SlickStackedListControl<ICompatibilityI
 
 		if (rects.CenterRect.Contains(e.Location) || rects.IconRect.Contains(e.Location))
 		{
-			(FindForm() as BasePanelForm)?.PushPanel(null, item.Item.Package!.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package!) : new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!));
+			Program.MainForm.PushPanel(null, item.Item.Package!.GetWorkshopInfo()?.IsCollection == true ? new PC_ViewCollection(item.Item.Package!) : new PC_PackagePage((IPackage?)item.Item.Package!.GetLocalPackage() ?? item.Item.Package!));
 
 			if (_settings.UserSettings.ResetScrollOnPackageClick)
 			{

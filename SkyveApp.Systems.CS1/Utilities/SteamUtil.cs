@@ -178,11 +178,9 @@ public static class SteamUtil
 		{
 			var idString = string.Join(",", steamId64s.Distinct());
 
-			var result = await ApiUtil.Get<SteamUserRootResponse>($"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
-				("key", KEYS.STEAM_API_KEY),
-				("steamids", idString));
+			var result = await ServiceCenter.Get<SkyveApiUtil>().Get<List<SteamUser>>("/GetUsers", ("userIds", idString));
 
-			return result?.response.players.Select(x => new SteamUser(x)).ToDictionary(x => x.SteamId) ?? new();
+			return result?.ToDictionary(x => x.SteamId) ?? new();
 		}
 		catch (Exception ex)
 		{

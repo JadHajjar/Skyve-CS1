@@ -65,9 +65,7 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 	}
 
 	public IEnumerable<T> FilteredItems => SafeGetItems().Select(x => x.Item);
-
 	public int FilteredCount => SafeGetItems().Count;
-
 	public bool SortDescending { get; private set; }
 	public bool IsPackagePage { get; set; }
 	public bool IsTextSearchNotEmpty { get; set; }
@@ -333,11 +331,9 @@ internal partial class ItemListControl<T> : SlickStackedListControl<T, ItemListC
 			}
 			else
 			{
-				var pc = new PC_PackagePage((IPackage?)item.Item.LocalParentPackage ?? item.Item);
+				var pc = new PC_PackagePage((IPackage?)item.Item.LocalParentPackage ?? item.Item, true);
 
 				(FindForm() as BasePanelForm)?.PushPanel(null, pc);
-
-				pc.T_CR.Selected = true;
 
 				if (_settings.UserSettings.ResetScrollOnPackageClick)
 				{

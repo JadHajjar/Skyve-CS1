@@ -9,7 +9,6 @@ public interface INotifier
 	bool PlaysetsLoaded { get; set; }
 
 	event Action? ContentLoaded;
-	event Action? WorkshopInfoUpdated;
 	event Action? PackageInformationUpdated;
 	event Action? PackageInclusionUpdated;
 	event Action? AutoSaveRequested;
@@ -17,6 +16,7 @@ public interface INotifier
 	event Action? PlaysetChanged;
 	event Action? RefreshUI;
 	event Action? WorkshopPackagesInfoLoaded;
+	event Action? WorkshopInfoUpdated;
 	event Action? WorkshopUsersInfoLoaded;
 	event Action? CompatibilityReportProcessed;
 	event Action? CompatibilityDataLoaded;

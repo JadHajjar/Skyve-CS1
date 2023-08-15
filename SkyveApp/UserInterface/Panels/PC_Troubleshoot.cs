@@ -58,23 +58,23 @@ public partial class PC_Troubleshoot : PanelContent
 
 	private void B_Caused_Click(object sender, EventArgs e)
 	{
-		Next();
-
 		_settings.ItemIsCausingIssues = true;
+
+		Next();
 	}
 
 	private void B_Missing_Click(object sender, EventArgs e)
 	{
-		Next();
-
 		_settings.ItemIsMissing = true;
+
+		Next();
 	}
 
 	private void B_New_Click(object sender, EventArgs e)
 	{
-		Next();
-
 		_settings.NewItemCausingIssues = true;
+
+		Next();
 	}
 
 	private void Next()

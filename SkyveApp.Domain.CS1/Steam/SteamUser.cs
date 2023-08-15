@@ -1,14 +1,20 @@
 ﻿using Extensions;
-
+using Extensions.Sql;
+#if !API
 using Newtonsoft.Json;
-
 using SkyveApp.Domain.Systems;
-
+#endif
 using System;
 using System.Drawing;
 
 namespace SkyveApp.Domain.CS1.Steam;
+
+#if !API
 public class SteamUser : IUser, ITimestamped
+#else
+[DynamicSqlClass("SteamUsers")]
+public class SteamUser : IDynamicSql
+#endif
 {
 	public SteamUser(SteamUserEntry entry)
 	{
@@ -26,12 +32,21 @@ public class SteamUser : IUser, ITimestamped
 		AvatarUrl = string.Empty;
 	}
 
+	[DynamicSqlProperty(PrimaryKey = true)]
 	public ulong SteamId { get; set; }
+	[DynamicSqlProperty]
 	public string Name { get; set; }
+	[DynamicSqlProperty]
 	public string ProfileUrl { get; set; }
+	[DynamicSqlProperty]
 	public string AvatarUrl { get; set; }
-	public DateTime Timestamp { get; set; }
 
+#if API
+	[DynamicSqlProperty, System.Text.Json.Serialization.JsonIgnore]
+	public DateTime Timestamp { get; set; }
+#else
+	[DynamicSqlProperty]
+	public DateTime Timestamp { get; set; }
 	[JsonIgnore] public object? Id => SteamId;
 	[JsonIgnore] public Bitmap? AvatarImage => ServiceCenter.Get<IImageService>().GetImage(AvatarUrl, true).Result;
 
@@ -49,4 +64,5 @@ public class SteamUser : IUser, ITimestamped
 	{
 		return 2139390487 + SteamId.GetHashCode();
 	}
+#endif
 }

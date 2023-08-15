@@ -10,7 +10,6 @@ internal class MiniPackageControl : SlickControl
 {
 	private readonly IPackage? _package;
 	private readonly IWorkshopService _workshopService = ServiceCenter.Get<IWorkshopService>();
-	private readonly INotifier _notifier = ServiceCenter.Get<INotifier>();
 
 	public IPackage? Package => _package ?? _workshopService.GetPackage(new GenericPackageIdentity(Id));
 	public ulong Id { get; }
@@ -22,11 +21,6 @@ internal class MiniPackageControl : SlickControl
 	{
 		Cursor = Cursors.Hand;
 		Id = steamId;
-
-		if (string.IsNullOrEmpty(Package?.Name))
-		{
-			_notifier.WorkshopPackagesInfoLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
-		}
 	}
 
 	public MiniPackageControl(IPackage package)
@@ -34,11 +28,6 @@ internal class MiniPackageControl : SlickControl
 		Cursor = Cursors.Hand;
 		_package = package;
 		Id = package.Id;
-
-		if (string.IsNullOrEmpty(Package?.Name))
-		{
-			_notifier.WorkshopPackagesInfoLoaded += () => this.TryInvoke(() => Parent?.Parent?.Parent?.Invalidate(true));
-		}
 	}
 
 	protected override void UIChanged()

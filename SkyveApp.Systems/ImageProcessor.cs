@@ -22,17 +22,17 @@ internal class ImageProcessor : PeriodicProcessor<ImageProcessor.ImageRequest, I
 	}
 
 
-	protected override async Task<Dictionary<ImageRequest, TimeStampedImage>> ProcessItems(List<ImageRequest> entities)
+	protected override async Task<(Dictionary<ImageRequest, TimeStampedImage>, bool)> ProcessItems(List<ImageRequest> entities)
 	{
 		foreach (var img in entities)
 		{
 			if (!string.IsNullOrWhiteSpace(img.Url))
 			{
-				_ = await _imageManager.Ensure(img.Url, false, img.FileName, img.Square);
+				await _imageManager.Ensure(img.Url, false, img.FileName, img.Square);
 			}
 		}
 
-		return new();
+		return (new(), false);
 	}
 
 	protected override void CacheItems(Dictionary<ImageRequest, TimeStampedImage> results)

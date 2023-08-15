@@ -67,7 +67,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 			}
 		}
 
-		_notifier.WorkshopPackagesInfoLoaded += _notifier_WorkshopPackagesInfoLoaded;
+		_notifier.WorkshopInfoUpdated += _notifier_WorkshopPackagesInfoLoaded;
 
 		LC_Items.RefreshItems();
 	}
@@ -76,7 +76,7 @@ internal class PC_GenericPackageList : PC_ContentList<IPackage>
 	{
 		if (disposing)
 		{
-			_notifier.WorkshopPackagesInfoLoaded -= _notifier_WorkshopPackagesInfoLoaded;
+			_notifier.WorkshopInfoUpdated -= _notifier_WorkshopPackagesInfoLoaded;
 		}
 
 		base.Dispose(disposing);

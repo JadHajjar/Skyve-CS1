@@ -21,7 +21,7 @@ internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRe
 	}
 
 
-	protected override async Task<Dictionary<ImgRequest, Stub>> ProcessItems(List<ImgRequest> entities)
+	protected override async Task<(Dictionary<ImgRequest, Stub>, bool)> ProcessItems(List<ImgRequest> entities)
 	{
 		foreach (var img in entities)
 		{
@@ -31,7 +31,7 @@ internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRe
 			}
 		}
 
-		return new();
+		return (new(), false);
 	}
 
 	protected override void CacheItems(Dictionary<ImgRequest, Stub> results)

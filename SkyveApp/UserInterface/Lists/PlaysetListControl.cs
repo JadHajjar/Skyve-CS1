@@ -224,8 +224,10 @@ internal class PlaysetListControl : SlickStackedListControl<ICustomPlayset, Play
 		try
 		{
 			downloading = item;
+			Invalidate();
 			await ServiceCenter.Get<IOnlinePlaysetUtil>().DownloadPlayset(item);
 			downloading = null;
+			Invalidate();
 		}
 		catch (Exception ex) { Program.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDownloadPlayset, form: Program.MainForm)); }
 	}

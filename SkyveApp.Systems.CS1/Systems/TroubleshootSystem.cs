@@ -56,8 +56,6 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 		_playsetManager.GatherInformation(playset);
 
-		_playsetManager.SetCurrentPlayset(Playset.TemporaryPlayset);
-
 		currentState = new()
 		{
 			Stage = ActionStage.WaitingForConfirmation,
@@ -92,9 +90,23 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			}
 		}
 
-		currentState.ProcessingItems = currentState.UnprocessedItems = GetItemGroups(packageToProcess);
+		currentState.ProcessingItems = currentState.UnprocessedItems = GetItemGroups(packageToProcess.ToList());
 
 		currentState.TotalStages = (int)Math.Ceiling(Math.Log(currentState.UnprocessedItems.Count, 2));
+
+		if (currentState.TotalStages == 0)
+		{
+			if (packageToProcess.Any())
+			{
+				PromptResult?.Invoke(packageToProcess);
+			}
+
+			currentState = null;
+
+			return;
+		}
+
+		_playsetManager.SetCurrentPlayset(Playset.TemporaryPlayset);
 
 		ApplyConfirmation(true);
 	}

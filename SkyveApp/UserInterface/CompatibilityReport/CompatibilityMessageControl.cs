@@ -34,7 +34,7 @@ internal class CompatibilityMessageControl : SlickControl
 
 		if (message.Packages?.Length != 0 && !message.Packages.All(x => x.GetWorkshopInfo() is not null))
 		{
-			_notifier.WorkshopPackagesInfoLoaded += Invalidate;
+			_notifier.WorkshopInfoUpdated += Invalidate;
 		}
 	}
 
@@ -42,7 +42,7 @@ internal class CompatibilityMessageControl : SlickControl
 	{
 		if (disposing)
 		{
-			_notifier.WorkshopPackagesInfoLoaded -= Invalidate;
+			_notifier.WorkshopInfoUpdated -= Invalidate;
 		}
 
 		base.Dispose(disposing);
