@@ -103,32 +103,40 @@ public partial class PC_UserPage : PanelContent
 
 	protected override async Task<bool> LoadDataAsync()
 	{
-		var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetUserProfiles(User.Id!);
-
-		if (profiles?.Any() ?? false)
+		try
 		{
-			L_Profiles.SetItems(profiles);
+			var profiles = await ServiceCenter.Get<SkyveApiUtil>().GetUserProfiles(User.Id!);
 
-			this.TryInvoke(() =>
+			if (profiles?.Any() ?? false)
 			{
-				T_Profiles.LinkedControl = L_Profiles;
+				L_Profiles.SetItems(profiles);
 
-				if (T_Profiles.Selected)
+				this.TryInvoke(() =>
 				{
-					T_Profiles.Selected = true;
-				}
-			});
+					T_Profiles.LinkedControl = L_Profiles;
+
+					if (T_Profiles.Selected)
+					{
+						T_Profiles.Selected = true;
+					}
+				});
+			}
+			else
+			{
+				this.TryInvoke(() => tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Profiles).ToArray());
+			}
+
+			var results = await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
+
+			userItems = results.ToList(x => new WorkshopPackage(x));
+
+			LC_Items.RefreshItems();
 		}
-		else
+		catch (Exception ex)
 		{
-			this.TryInvoke(() => tabControl.Tabs = tabControl.Tabs.Where(x => x != T_Profiles).ToArray());
+			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to load user data");
+			throw;
 		}
-
-		var results = await _workshopService.GetWorkshopItemsByUserAsync(User.Id!);
-
-		userItems = results.ToList(x => new WorkshopPackage(x));
-
-		LC_Items.RefreshItems();
 
 		return true;
 	}

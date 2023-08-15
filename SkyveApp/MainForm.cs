@@ -80,7 +80,9 @@ public partial class MainForm : BasePanelForm
 
 		_startTimeoutTimer.Elapsed += StartTimeoutTimer_Elapsed;
 
-		_notifier.RefreshUI += () => this.TryInvoke(() => Invalidate(true));
+		_notifier.RefreshUI += RefreshUI;
+		_notifier.WorkshopInfoUpdated += RefreshUI;
+		_notifier.WorkshopUsersInfoLoaded += RefreshUI;
 
 		ConnectionHandler.ConnectionChanged += ConnectionHandler_ConnectionChanged;
 
@@ -94,6 +96,11 @@ public partial class MainForm : BasePanelForm
 		}
 
 		base_PB_Icon.Loading = true;
+	}
+
+	internal void RefreshUI()
+	{
+		this.TryInvoke(() => Invalidate(true));
 	}
 
 	private void PromptMissingItemsEvent(IPlaysetManager manager, IEnumerable<IPlaysetEntry> playsetEntries)

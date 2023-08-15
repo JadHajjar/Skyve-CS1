@@ -24,13 +24,17 @@ internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 		return ConnectionHandler.IsConnected;
 	}
 
-	protected override async Task<Dictionary<ulong, SteamWorkshopInfo>> ProcessItems(List<ulong> entities)
+	protected override async Task<(Dictionary<ulong, SteamWorkshopInfo>, bool)> ProcessItems(List<ulong> entities)
 	{
 		var failed = false;
 
 		try
 		{
-			return await SteamUtil.GetWorkshopInfoAsync(entities);
+			var results = await SteamUtil.GetWorkshopInfoAsync(entities);
+
+			failed = results.Count == 0;
+
+			return (results, failed);
 		}
 		catch
 		{

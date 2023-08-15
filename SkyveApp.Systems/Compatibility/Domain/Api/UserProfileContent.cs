@@ -8,7 +8,10 @@ using System.IO;
 namespace SkyveApp.Systems.Compatibility.Domain.Api;
 
 [DynamicSqlClass("UserProfileContents")]
-public class UserProfileContent : IDynamicSql, IPlaysetEntry
+public class UserProfileContent : IDynamicSql
+#if !API
+	, IPlaysetEntry
+#endif
 {
 	[DynamicSqlProperty(Indexer = true)]
 	public int ProfileId { get; set; }
@@ -21,6 +24,7 @@ public class UserProfileContent : IDynamicSql, IPlaysetEntry
 	[DynamicSqlProperty]
 	public bool Enabled { get; set; }
 
+#if !API
 	string ILocalPackageIdentity.FilePath => RelativePath ?? string.Empty;
 	ulong IPackageIdentity.Id => SteamId;
 	string? IPackageIdentity.Url => SteamId == 0 ? null : $"https://steamcommunity.com/workshop/filedetails/?id={SteamId}";
@@ -37,4 +41,5 @@ public class UserProfileContent : IDynamicSql, IPlaysetEntry
 				: (string)LocaleHelper.GetGlobalText("UnknownPackage");
 		}
 	}
+#endif
 }

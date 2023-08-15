@@ -1,5 +1,30 @@
 [
   {
+    "Version": "3.2.8.2",
+    "Date": "2023-08-14",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Potential fix for the app hanging on Compatibility Report related actions.",
+          "Future fix for users not loading."
+        ]
+      }
+    ]
+  },
+  {
+    "Version": "3.2.8.1",
+    "Date": "2023-08-13",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Potential fix for the sudden high CPU usage issue."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.2.8",
     "Date": "2023-08-12",
     "ChangeGroups": [

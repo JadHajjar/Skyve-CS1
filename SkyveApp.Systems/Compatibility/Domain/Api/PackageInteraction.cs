@@ -2,7 +2,6 @@
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
 
 namespace SkyveApp.Systems.Compatibility.Domain.Api;
 
@@ -35,7 +34,7 @@ public class PackageInteraction : IPackageStatus<InteractionType>, IDynamicSql
 	{
 		get
 		{
-			var type = Type is InteractionType.OptionalPackages && ServiceCenter.Get<ISettings>().UserSettings.TreatOptionalAsRequired
+			var type = Type is InteractionType.OptionalPackages && ServiceCenter.Get<SkyveApp.Domain.Systems.ISettings>().UserSettings.TreatOptionalAsRequired
 				? NotificationType.MissingDependency
 				: CRNAttribute.GetNotification(Type);
 			var action = CRNAttribute.GetNotification(Action);

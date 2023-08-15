@@ -21,10 +21,12 @@ public partial class PC_PackagePage : PanelContent
 
 	public IPackage Package { get; }
 
-	public PC_PackagePage(IPackage package)
+	public PC_PackagePage(IPackage package, bool compatibilityPage = false)
 	{
 		if (package is not ILocalPackage && package.LocalPackage is ILocalPackage localPackage)
+		{
 			package = localPackage;
+		}
 
 		ServiceCenter.Get(out _notifier, out _compatibilityManager, out _packageUtil, out _settings);
 
@@ -67,7 +69,12 @@ public partial class PC_PackagePage : PanelContent
 		else
 		{
 			tabs.Remove(T_Info);
-			T_CR.Selected = true;
+			T_CR.PreSelected = true;
+		}
+
+		if (compatibilityPage)
+		{
+			T_CR.PreSelected = true;
 		}
 
 		if (crAvailable)
@@ -265,9 +272,9 @@ public partial class PC_PackagePage : PanelContent
 
 		PB_Icon.Width = TLP_Top.Height = (int)(128 * UI.FontScale);
 		TLP_About.Padding = UI.Scale(new Padding(5), UI.FontScale);
-		label1.Margin = label3.Margin = label5.Margin = label6.Margin=L_Requirements.Margin = UI.Scale(new Padding(3, 4, 0, 0), UI.FontScale);
+		label1.Margin = label3.Margin = label5.Margin = label6.Margin = L_Requirements.Margin = UI.Scale(new Padding(3, 4, 0, 0), UI.FontScale);
 		label2.Margin = label4.Margin = FLP_Links.Margin = FLP_Tags.Margin = FLP_Requirements.Margin = UI.Scale(new Padding(3, 3, 0, 7), UI.FontScale);
-		label1.Font = label3.Font = label5.Font = label6.Font =L_Requirements.Font= UI.Font(7.5F, FontStyle.Bold);
+		label1.Font = label3.Font = label5.Font = label6.Font = L_Requirements.Font = UI.Font(7.5F, FontStyle.Bold);
 		FLP_Requirements.Font = UI.Font(9F);
 	}
 
@@ -276,7 +283,7 @@ public partial class PC_PackagePage : PanelContent
 		base.DesignChanged(design);
 
 		BackColor = design.BackColor;
-		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor =L_Requirements.ForeColor= design.InfoColor.MergeColor(design.ActiveColor);
+		label1.ForeColor = label3.ForeColor = label5.ForeColor = label6.ForeColor = L_Requirements.ForeColor = design.InfoColor.MergeColor(design.ActiveColor);
 		panel1.BackColor = LC_Items is null ? design.AccentBackColor : design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 5, -5));
 	}
 

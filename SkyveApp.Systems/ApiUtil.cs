@@ -2,6 +2,8 @@
 
 using Newtonsoft.Json;
 
+using SkyveApp.Domain;
+using SkyveApp.Domain.Systems;
 using SkyveApp.Systems.Compatibility.Domain.Api;
 
 using System;
@@ -15,6 +17,8 @@ using System.Threading.Tasks;
 namespace SkyveApp.Systems;
 public static class ApiUtil
 {
+	private static readonly ILogger	_logger = ServiceCenter.Get<ILogger>();
+
 	public static async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{
 		return await Get<T>(url, new (string, string)[0], queryParams);
@@ -81,6 +85,8 @@ public static class ApiUtil
 
 			return JsonConvert.DeserializeObject<T>(response);
 		}
+
+		_logger.Error($"[API] ({baseUrl}) failed: {httpResponse.ReasonPhrase}");
 
 		return typeof(T) == typeof(ApiResponse)
 			? (T)(object)new ApiResponse
@@ -153,6 +159,8 @@ public static class ApiUtil
 
 			return JsonConvert.DeserializeObject<T>(response);
 		}
+
+		_logger.Error($"[API] ({baseUrl}) failed: {httpResponse.ReasonPhrase}");
 
 		return typeof(T) == typeof(ApiResponse)
 			? (T)(object)new ApiResponse { Message = httpResponse.ReasonPhrase }

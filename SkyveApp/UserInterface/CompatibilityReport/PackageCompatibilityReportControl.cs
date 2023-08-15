@@ -37,6 +37,8 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 		}
 
 		_notifier.CompatibilityReportProcessed += CentralManager_PackageInformationUpdated;
+
+		Reset();
 	}
 
 	private void CentralManager_PackageInformationUpdated()
@@ -50,6 +52,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 	protected override void Dispose(bool disposing)
 	{
 		_notifier.CompatibilityReportProcessed -= CentralManager_PackageInformationUpdated;
+
 		base.Dispose(disposing);
 	}
 
@@ -57,14 +60,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 	{
 		base.OnCreateControl();
 
-		if (DesignMode)
-		{
-			return;
-		}
-
 		Padding = UI.Scale(new Padding(5), UI.FontScale);
-
-		Reset();
 	}
 
 	internal void Reset()
@@ -103,7 +99,7 @@ internal class PackageCompatibilityReportControl : TableLayoutPanel
 
 	private Color GetTypeColor(IGrouping<ReportType, ICompatibilityItem> item)
 	{
-		return item.Max(x => x.Status.Notification).GetColor().MergeColor(BackColor, 15);
+		return item.Max(x => x.Status.Notification).GetColor().MergeColor(FormDesign.Design.AccentBackColor, 15);
 	}
 
 	private DynamicIcon GetTypeIcon(ReportType type)

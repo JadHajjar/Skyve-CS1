@@ -1,4 +1,5 @@
 ﻿using Extensions;
+using Extensions.Sql;
 
 using SkyveApp.Domain;
 using SkyveApp.Domain.CS1.Steam;
@@ -16,7 +17,7 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 
 	public SteamUserProcessor() : base(200, 5000, GetCachedInfo())
 	{
-		MaxCacheTime = TimeSpan.FromDays(2);
+		MaxCacheTime = TimeSpan.FromDays(7);
 	}
 
 	protected override bool CanProcess()
@@ -24,13 +25,17 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 		return ConnectionHandler.IsConnected;
 	}
 
-	protected override async Task<Dictionary<ulong, SteamUser>> ProcessItems(List<ulong> entities)
+	protected override async Task<(Dictionary<ulong, SteamUser>, bool)> ProcessItems(List<ulong> entities)
 	{
 		var failed = false;
 
 		try
 		{
-			return await SteamUtil.GetSteamUsersAsync(entities);
+			var results = await SteamUtil.GetSteamUsersAsync(entities);
+
+			failed = results.Count == 0;
+
+			return (results, failed);
 		}
 		catch
 		{
@@ -41,7 +46,7 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 		{
 			if (!failed)
 			{
-				ServiceCenter.Get<INotifier>().OnWorkshopInfoUpdated();
+				ServiceCenter.Get<INotifier>().OnWorkshopUsersInfoLoaded();
 			}
 		}
 	}
@@ -60,11 +65,6 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 		try
 		{
 			var path = ISave.GetPath(STEAM_USER_CACHE_FILE);
-
-			if (DateTime.Now - File.GetLastWriteTime(path) > TimeSpan.FromDays(7) && ConnectionHandler.IsConnected)
-			{
-				return null;
-			}
 
 			ISave.Load(out Dictionary<ulong, SteamUser>? dic, STEAM_USER_CACHE_FILE);
 

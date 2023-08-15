@@ -17,21 +17,21 @@ public class SkyveApiUtil
 		_userService = userService;
 	}
 
-	private async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
+	public async Task<T?> Get<T>(string url, params (string, object)[] queryParams)
 	{
 		return await ApiUtil.Get<T>(KEYS.API_URL + url
 			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id?.ToString() ?? string.Empty, KEYS.SALT)) }
 			, queryParams);
 	}
 
-	private async Task<T?> Delete<T>(string url, params (string, object)[] queryParams)
+	public async Task<T?> Delete<T>(string url, params (string, object)[] queryParams)
 	{
 		return await ApiUtil.Delete<T>(KEYS.API_URL + url
 			, new[] { ("API_KEY", KEYS.API_KEY), ("USER_ID", Encryption.Encrypt(_userService.User.Id?.ToString() ?? string.Empty, KEYS.SALT)) }
 			, queryParams);
 	}
 
-	private async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
+	public async Task<T?> Post<TBody, T>(string url, TBody body, params (string, object)[] queryParams)
 	{
 		return await ApiUtil.Post<TBody, T>(KEYS.API_URL + url
 			, body

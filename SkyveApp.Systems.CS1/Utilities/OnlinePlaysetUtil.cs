@@ -63,7 +63,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 	{
 		try
 		{
-			var profile = await _skyveApiUtil.GetUserProfileContents((item as Playset)!.ProfileId);
+			var profile = await _skyveApiUtil.GetUserProfileContents(item.ProfileId);
 			if (profile == null)
 			{
 				return false;
