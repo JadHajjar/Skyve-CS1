@@ -143,6 +143,7 @@ public class Playset : ICustomPlayset
 	string? IPlayset.BannerUrl { get; }
 	DateTime IPlayset.DateUpdated { get; }
 	DateTime IPlayset.DateUsed { get; }
+	bool ICustomPlayset.DisableWorkshop => LaunchSettings.NoWorkshop;
 
 	public class Asset : IPackage, IPlaysetEntry
 	{

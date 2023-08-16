@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
+using Skyve.App.CS1.Services;
+using Skyve.App.Interfaces;
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 using Skyve.Systems;
@@ -36,6 +38,8 @@ internal static class Program
 		services.AddSkyveSystems();
 
 		services.AddCs1SkyveSystems();
+
+		services.AddSingleton<IInterfaceService, InterfaceService>();
 
 		return services.BuildServiceProvider();
 	}

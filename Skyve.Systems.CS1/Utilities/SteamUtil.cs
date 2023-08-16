@@ -78,7 +78,7 @@ public static class SteamUtil
 
 		if (packages.Any(x => x is ILocalPackage lp && lp.Folder.PathEquals(currentPath)))
 		{
-			if (MessagePrompt.Show(LocaleCS1.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, SystemsProgram.MainForm as SlickForm) == DialogResult.Cancel)
+			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, SystemsProgram.MainForm as SlickForm) == DialogResult.Cancel)
 			{
 				return;
 			}
@@ -158,7 +158,7 @@ public static class SteamUtil
 
 			if (process.Length == 0)
 			{
-				Notification.Create(LocaleCS1.SteamNotOpenTo, null, PromptIcons.Info, null).Show(SystemsProgram.MainForm, 10);
+				Notification.Create(Locale.SteamNotOpenTo, null, PromptIcons.Info, null).Show(SystemsProgram.MainForm, 10);
 			}
 		}
 
