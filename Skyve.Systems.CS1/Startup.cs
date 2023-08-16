@@ -1,19 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility.Domain;
-using SkyveApp.Systems.CS1.Managers;
-using SkyveApp.Systems.CS1.Systems;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.Systems.CS1.Utilities.IO;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility.Domain;
+using Skyve.Systems.CS1.Managers;
+using Skyve.Systems.CS1.Systems;
+using Skyve.Systems.CS1.Utilities;
+using Skyve.Systems.CS1.Utilities.IO;
 
-namespace SkyveApp.Systems.CS1;
+namespace Skyve.Systems.CS1;
 public static class Startup
 {
 	public static IServiceCollection AddCs1SkyveSystems(this IServiceCollection services)
 	{
 		services.AddTransient<ICentralManager, CentralManager>();
-		services.AddSingleton<ILocale, Locale>();
 		services.AddSingleton<ICitiesManager, CitiesManager>();
 		services.AddSingleton<ILocationManager, LocationManager>();
 		services.AddSingleton<IModLogicManager, ModLogicManager>();
@@ -39,6 +38,8 @@ public static class Startup
 		services.AddTransient<IVersionUpdateService, VersionUpdateService>();
 		services.AddTransient<IDownloadService, DownloadService>();
 		services.AddSingleton<ITroubleshootSystem, TroubleshootSystem>();
+
+		LocaleCS1.Load();
 
 		return services;
 	}

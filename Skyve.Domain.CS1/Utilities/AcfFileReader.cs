@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 internal class AcfFileReader
 {
 	public string FileLocation { get; }

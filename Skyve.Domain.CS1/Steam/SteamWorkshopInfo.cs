@@ -2,14 +2,14 @@
 
 using Newtonsoft.Json;
 
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
+using Skyve.Domain.Systems;
+using Skyve.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Domain.CS1.Steam;
+namespace Skyve.Domain.CS1.Steam;
 public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped, IEquatable<SteamWorkshopInfo?>
 {
 	private static readonly DateTime _epoch = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -80,15 +80,15 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped, IEquatable<SteamWo
 	public static int CalculateScore(SteamWorkshopItemEntry entry)
 	{
 		var upvotes = entry.vote_data?.votes_up ?? 0;
-		var downvotes = ((entry.vote_data?.votes_down ?? 0) / 10) + entry.num_reports;
+		var downvotes = (entry.vote_data?.votes_down ?? 0) / 10 + entry.num_reports;
 
 		if (upvotes + downvotes < 5)
 		{
 			return -1;
 		}
 
-		var subscribersFactor = (-Math.Min(100000, entry.subscriptions) / 2000) - 10;
-		var goal = (1.472 * (Math.Pow(subscribersFactor, 2) + (Math.Pow(subscribersFactor, 3) / 100))) - 120;
+		var subscribersFactor = -Math.Min(100000, entry.subscriptions) / 2000 - 10;
+		var goal = 1.472 * (Math.Pow(subscribersFactor, 2) + Math.Pow(subscribersFactor, 3) / 100) - 120;
 
 		if (!(entry.tags?.Any(x => x.display_name == "Mod") ?? false))
 		{

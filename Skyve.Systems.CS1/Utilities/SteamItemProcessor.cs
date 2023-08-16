@@ -1,15 +1,15 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1.Steam;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 {
 	public const string STEAM_CACHE_FILE = "SteamModsCache.json";

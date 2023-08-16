@@ -1,10 +1,10 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 internal class LogUtil : ILogUtil
 {
 	private readonly ICompatibilityManager _compatibilityManager;

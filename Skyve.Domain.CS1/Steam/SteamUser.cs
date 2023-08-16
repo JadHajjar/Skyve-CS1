@@ -1,13 +1,16 @@
 ﻿using Extensions;
 using Extensions.Sql;
+
 #if !API
 using Newtonsoft.Json;
-using SkyveApp.Domain.Systems;
+
+using Skyve.Domain.Systems;
+
 #endif
 using System;
 using System.Drawing;
 
-namespace SkyveApp.Domain.CS1.Steam;
+namespace Skyve.Domain.CS1.Steam;
 
 #if !API
 public class SteamUser : IUser, ITimestamped

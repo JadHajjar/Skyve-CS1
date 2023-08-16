@@ -1,16 +1,38 @@
-﻿using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+﻿using Extensions;
+
+using Skyve.Domain;
+using Skyve.Domain.CS1.Steam;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Utilities;
 
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems.CS1.Systems;
+namespace Skyve.Systems.CS1.Systems;
 internal class WorkshopService : IWorkshopService
 {
+	public void CleanDownload(List<ILocalPackageWithContents> packages)
+	{
+		PackageWatcher.Pause();
+		foreach (var item in packages)
+		{
+			try
+			{
+				CrossIO.DeleteFolder(item.Folder);
+			}
+			catch (Exception ex)
+			{
+				ServiceCenter.Get<ILogger>().Exception(ex, $"Failed to delete the folder '{item.Folder}'");
+			}
+		}
+		PackageWatcher.Resume();
+
+		SteamUtil.Download(packages);
+	}
+
 	public void ClearCache()
 	{
 		SteamUtil.ClearCache();
@@ -33,7 +55,7 @@ internal class WorkshopService : IWorkshopService
 
 	public IPackage GetPackage(IPackageIdentity identity)
 	{
-		var info = GetInfo(identity);
+		var info = identity is IWorkshopInfo inf ? inf : GetInfo(identity);
 
 		if (info is not null)
 		{

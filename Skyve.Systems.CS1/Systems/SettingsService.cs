@@ -1,10 +1,10 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Systems;
 
-namespace SkyveApp.Systems.CS1.Systems;
+namespace Skyve.Systems.CS1.Systems;
 internal class SettingsService : ISettings
 {
 	public SessionSettings SessionSettings { get; private set; }

@@ -1,8 +1,8 @@
 using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1.Steam;
+using Skyve.Domain.Systems;
 
 using SkyveShared;
 
@@ -19,7 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 
 public static class SteamUtil
 {
@@ -78,7 +78,7 @@ public static class SteamUtil
 
 		if (packages.Any(x => x is ILocalPackage lp && lp.Folder.PathEquals(currentPath)))
 		{
-			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, SystemsProgram.MainForm as SlickForm) == DialogResult.Cancel)
+			if (MessagePrompt.Show(LocaleCS1.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, SystemsProgram.MainForm as SlickForm) == DialogResult.Cancel)
 			{
 				return;
 			}
@@ -158,7 +158,7 @@ public static class SteamUtil
 
 			if (process.Length == 0)
 			{
-				Notification.Create(Locale.SteamNotOpenTo, null, PromptIcons.Info, null).Show(SystemsProgram.MainForm, 10);
+				Notification.Create(LocaleCS1.SteamNotOpenTo, null, PromptIcons.Info, null).Show(SystemsProgram.MainForm, 10);
 			}
 		}
 
@@ -388,8 +388,8 @@ public static class SteamUtil
 				newDlcs.Add(new SteamDlc
 				{
 					Id = dlc,
-					Name = info.name,
-					Description = info.short_description,
+					Name = info.name!,
+					Description = info.short_description!,
 					ReleaseDate = DateTime.TryParseExact(info.release_date?.date, "dd MMM, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : DateTime.MinValue
 				});
 			}

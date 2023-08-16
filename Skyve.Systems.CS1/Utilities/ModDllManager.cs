@@ -1,13 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 
 public class ModDllManager : IModDllManager
 {

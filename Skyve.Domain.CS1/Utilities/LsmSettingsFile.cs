@@ -1,6 +1,6 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 
 [XmlRoot("LoadingScreenModRevisited")]
 public class LsmSettingsFile

@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SkyveApp.Systems.CS1.Utilities.IO;
+namespace Skyve.Systems.CS1.Utilities.IO;
 internal class AssemblyResolver : BaseAssemblyResolver
 {
 	private readonly IDictionary<string, AssemblyDefinition> cache

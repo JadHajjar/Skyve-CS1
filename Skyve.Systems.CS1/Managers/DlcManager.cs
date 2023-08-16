@@ -1,8 +1,8 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Utilities;
 
 using SkyveShared;
 
@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Managers;
+namespace Skyve.Systems.CS1.Managers;
 internal class DlcManager : IDlcManager
 {
 	private readonly DlcConfig _config;

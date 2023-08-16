@@ -2,7 +2,7 @@ using Extensions;
 
 using Mono.Cecil;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace SkyveApp.Systems.CS1.Utilities.IO;
+namespace Skyve.Systems.CS1.Utilities.IO;
 internal class AssemblyUtil
 {
 	private readonly ILocationManager _locationManager;

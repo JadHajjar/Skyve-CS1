@@ -22,6 +22,9 @@
 		<EmbeddedResource Include="Properties\*\*.json" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Remove="Properties\LocaleCS1.json" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
 		<ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
 		<ProjectReference Include="..\Skyve.Domain.CS1\Skyve.Domain.CS1.csproj" />

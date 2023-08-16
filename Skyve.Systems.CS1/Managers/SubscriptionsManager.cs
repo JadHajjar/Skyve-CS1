@@ -1,10 +1,10 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Domain;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Systems;
+using Skyve.Systems.CS1.Utilities;
 
 using SkyveShared;
 
@@ -16,7 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-namespace SkyveApp.Systems.CS1.Managers;
+namespace Skyve.Systems.CS1.Managers;
 internal class SubscriptionsManager : ISubscriptionsManager
 {
 	private readonly string _filePath;

@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain.CS1.Enums;
+﻿namespace Skyve.Domain.CS1.Enums;
 
 public enum TagSource
 {

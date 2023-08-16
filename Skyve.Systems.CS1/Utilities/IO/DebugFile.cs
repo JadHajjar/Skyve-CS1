@@ -1,13 +1,13 @@
 using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems.CS1.Utilities.IO;
+namespace Skyve.Systems.CS1.Utilities.IO;
 
 internal class MonoFile : DebugFile
 {

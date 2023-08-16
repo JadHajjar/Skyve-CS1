@@ -1,15 +1,15 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Utilities;
 
 using SkyveShared;
 
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Systems;
+namespace Skyve.Systems.CS1.Systems;
 internal class VersionUpdateService : IVersionUpdateService
 {
 	private readonly ISettings _settings;

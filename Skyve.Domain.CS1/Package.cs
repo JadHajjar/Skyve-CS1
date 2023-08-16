@@ -1,14 +1,14 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
+using Skyve.Domain.Systems;
+using Skyve.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Domain.CS1;
+namespace Skyve.Domain.CS1;
 
 public class Package : ILocalPackageWithContents
 {

@@ -1,8 +1,8 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain.CS1;
+namespace Skyve.Domain.CS1;
 public class UserSettings : IUserSettings
 {
 	public bool LinkModAssets { get; set; } = true;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 public class SubscriptionTransfer
 {
 	public List<ulong>? SubscribeTo { get; set; }

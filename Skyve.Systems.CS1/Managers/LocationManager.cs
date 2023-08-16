@@ -2,8 +2,8 @@
 
 using Microsoft.Win32;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Configuration;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems.CS1.Managers;
+namespace Skyve.Systems.CS1.Managers;
 internal class LocationManager : ILocationManager
 {
 	internal const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";

@@ -1,16 +1,14 @@
 ﻿using Extensions;
-using Extensions.Sql;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.Steam;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1.Steam;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 {
 	public const string STEAM_USER_CACHE_FILE = "SteamUsersCache.json";

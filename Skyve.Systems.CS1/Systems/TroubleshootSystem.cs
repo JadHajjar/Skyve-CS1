@@ -1,15 +1,16 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Managers;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Managers;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Systems;
+namespace Skyve.Systems.CS1.Systems;
 internal class TroubleshootSystem : ITroubleshootSystem
 {
 	private TroubleshootState? currentState;
@@ -81,7 +82,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 					continue;
 				}
 
-				if (item.GetPackageInfo()?.Statuses?.Any(x => x.Type is Domain.Enums.StatusType.StandardMod) == true)
+				if (item.GetPackageInfo()?.Statuses?.Any(x => x.Type is StatusType.StandardMod) == true)
 				{
 					continue;
 				}

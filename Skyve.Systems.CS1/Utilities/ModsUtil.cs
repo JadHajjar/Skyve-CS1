@@ -1,9 +1,9 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities.IO;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Utilities.IO;
 
 using SkyveShared;
 
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 internal class ModsUtil : IModUtil
 {
 	private readonly ModConfig _config;

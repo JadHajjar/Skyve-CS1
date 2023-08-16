@@ -1,6 +1,6 @@
 using System;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 
 public struct PublishedFileId : IEquatable<PublishedFileId>
 {

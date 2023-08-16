@@ -2,7 +2,7 @@
 
 using System.IO;
 
-namespace SkyveApp.Domain.CS1.ColossalOrder;
+namespace Skyve.Domain.CS1.ColossalOrder;
 
 public class SafeFileStream : Stream
 {

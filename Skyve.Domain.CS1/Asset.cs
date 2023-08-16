@@ -1,12 +1,12 @@
 ﻿using Extensions;
 
-using SkyveApp.Systems;
+using Skyve.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SkyveApp.Domain.CS1;
+namespace Skyve.Domain.CS1;
 public class Asset : IAsset
 {
 	public Asset(ILocalPackageWithContents package, string crpPath, SkyveShared.AssetInfoCache.Asset? asset)

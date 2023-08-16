@@ -1,8 +1,8 @@
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 
-namespace SkyveApp.Domain.CS1.ColossalOrder;
+namespace Skyve.Domain.CS1.ColossalOrder;
 public abstract class SingletonLite<T>
 		where T : SingletonLite<T>, new()
 {

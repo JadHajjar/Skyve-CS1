@@ -1,15 +1,15 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Systems.Compatibility;
-using SkyveApp.Systems.Compatibility.Domain;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain;
+using Skyve.Domain.Enums;
+using Skyve.Systems.Compatibility;
+using Skyve.Systems.Compatibility.Domain;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Systems;
+namespace Skyve.Systems.CS1.Systems;
 internal class CompatibilityUtil : ICompatibilityUtil
 {
 	private const ulong MUSIC_MOD_ID = 2474585115;

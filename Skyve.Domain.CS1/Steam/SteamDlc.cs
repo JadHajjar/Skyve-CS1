@@ -2,7 +2,7 @@
 
 using System;
 
-namespace SkyveApp.Domain.CS1.Steam;
+namespace Skyve.Domain.CS1.Steam;
 public class SteamDlc : IDlcInfo
 {
 	public uint Id { get; set; }

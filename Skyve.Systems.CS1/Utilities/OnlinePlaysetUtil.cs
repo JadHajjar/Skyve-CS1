@@ -1,8 +1,8 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.Systems;
 
 using SlickControls;
 
@@ -10,7 +10,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 {
 	private readonly ILogger _logger;
@@ -50,12 +50,12 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 			}
 			else
 			{
-				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show((profile.ProfileId == 0 ? Locale.FailedToUploadPlayset : Locale.FailedToUpdatePlayset) + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
+				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show((profile.ProfileId == 0 ? LocaleCS1.FailedToUploadPlayset : LocaleCS1.FailedToUpdatePlayset) + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
 			}
 		}
 		catch (Exception ex)
 		{
-			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, (item as Playset)!.ProfileId == 0 ? Locale.FailedToUploadPlayset : Locale.FailedToUpdatePlayset, form: SystemsProgram.MainForm as SlickForm));
+			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, (item as Playset)!.ProfileId == 0 ? LocaleCS1.FailedToUploadPlayset : LocaleCS1.FailedToUpdatePlayset, form: SystemsProgram.MainForm as SlickForm));
 		}
 	}
 
@@ -123,7 +123,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 
 			if (!result.Success)
 			{
-				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToUpdatePlayset + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
+				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(LocaleCS1.FailedToUpdatePlayset + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
 			}
 			else
 			{
@@ -135,7 +135,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 		}
 		catch (Exception ex)
 		{
-			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToUpdatePlayset, form: SystemsProgram.MainForm as SlickForm));
+			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, LocaleCS1.FailedToUpdatePlayset, form: SystemsProgram.MainForm as SlickForm));
 			return false;
 		}
 	}
@@ -148,14 +148,14 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 
 			if (!result.Success)
 			{
-				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(Locale.FailedToDeletePlayset + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
+				SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(LocaleCS1.FailedToDeletePlayset + "\r\n\r\n" + LocaleHelper.GetGlobalText(result.Message), PromptButtons.OK, PromptIcons.Error, form: SystemsProgram.MainForm as SlickForm));
 			}
 
 			return result.Success;
 		}
 		catch (Exception ex)
 		{
-			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, Locale.FailedToDeletePlayset, form: SystemsProgram.MainForm as SlickForm));
+			SystemsProgram.MainForm.TryInvoke(() => MessagePrompt.Show(ex, LocaleCS1.FailedToDeletePlayset, form: SystemsProgram.MainForm as SlickForm));
 			return false;
 		}
 	}

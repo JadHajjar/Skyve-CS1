@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace SkyveApp.Domain.CS1.Legacy;
+namespace Skyve.Domain.CS1.Legacy;
 
 public enum DLC
 {

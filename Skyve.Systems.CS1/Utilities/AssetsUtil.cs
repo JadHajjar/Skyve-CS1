@@ -1,8 +1,8 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.Systems;
 
 using SkyveShared;
 
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 internal class AssetsUtil : IAssetUtil
 {
 	private readonly AssetConfig _config;

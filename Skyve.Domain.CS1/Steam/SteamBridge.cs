@@ -3,7 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace SkyveApp.Domain.CS1.Steam;
+namespace Skyve.Domain.CS1.Steam;
 
 public class SteamBridge : IDisposable
 {

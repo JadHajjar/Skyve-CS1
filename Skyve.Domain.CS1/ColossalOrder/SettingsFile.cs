@@ -1,12 +1,12 @@
 using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SkyveApp.Domain.CS1.ColossalOrder;
+namespace Skyve.Domain.CS1.ColossalOrder;
 
 public class SettingsFile
 {

@@ -1,10 +1,11 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.CS1.Enums;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Utilities;
 
 using SkyveShared;
 
@@ -14,7 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SkyveApp.Systems.CS1.Systems;
+namespace Skyve.Systems.CS1.Systems;
 internal class TagsService : ITagsService
 {
 	private readonly HashSet<string> _assetTags;
@@ -161,7 +162,7 @@ internal class TagsService : ITagsService
 				if (!returned.Contains(item.Key))
 				{
 					returned.Add(item.Key);
-					yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item.Key);
+					yield return new TagItem(TagSource.Workshop, item.Key);
 				}
 			}
 		}
@@ -171,7 +172,7 @@ internal class TagsService : ITagsService
 			if (!returned.Contains(item))
 			{
 				returned.Add(item);
-				yield return new TagItem(Domain.CS1.Enums.TagSource.InGame, item);
+				yield return new TagItem(TagSource.InGame, item);
 			}
 		}
 
@@ -183,7 +184,7 @@ internal class TagsService : ITagsService
 				{
 					returned.Add(item);
 
-					yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
+					yield return new TagItem(TagSource.Custom, item);
 				}
 			}
 		}
@@ -200,7 +201,7 @@ internal class TagsService : ITagsService
 				if (!returned.Contains(item))
 				{
 					returned.Add(item);
-					yield return new TagItem(Domain.CS1.Enums.TagSource.Workshop, item);
+					yield return new TagItem(TagSource.Workshop, item);
 				}
 			}
 		}
@@ -214,7 +215,7 @@ internal class TagsService : ITagsService
 					if (!returned.Contains(item))
 					{
 						returned.Add(item);
-						yield return new TagItem(Domain.CS1.Enums.TagSource.InGame, item);
+						yield return new TagItem(TagSource.InGame, item);
 					}
 				}
 			}
@@ -229,7 +230,7 @@ internal class TagsService : ITagsService
 					if (!returned.Contains(item))
 					{
 						returned.Add(item);
-						yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
+						yield return new TagItem(TagSource.Custom, item);
 					}
 				}
 			}
@@ -242,7 +243,7 @@ internal class TagsService : ITagsService
 				if (!returned.Contains(item))
 				{
 					returned.Add(item);
-					yield return new TagItem(Domain.CS1.Enums.TagSource.Custom, item);
+					yield return new TagItem(TagSource.Custom, item);
 				}
 			}
 		}
@@ -335,5 +336,20 @@ internal class TagsService : ITagsService
 				(_workshopTags.TryGetValue(tag.Value, out var count) ? count : 0) +
 				(_tagsCache.TryGetValue(tag.Value, out var hash) ? hash.Count : 0);
 		}
+	}
+
+	public ITag CreateGlobalTag(string text)
+	{
+		return new TagItem(TagSource.Global, text);
+	}
+
+	public ITag CreateCustomTag(string text)
+	{
+		return new TagItem(TagSource.Custom, text);
+	}
+
+	public ITag CreateWorkshopTag(string text)
+	{
+		return new TagItem(TagSource.Workshop, text);
 	}
 }

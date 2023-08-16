@@ -1,15 +1,15 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Systems.CS1.Managers;
+namespace Skyve.Systems.CS1.Managers;
 internal class UpdateManager : IUpdateManager
 {
 	private readonly Dictionary<string, DateTime> _previousPackages = new(new PathEqualityComparer());

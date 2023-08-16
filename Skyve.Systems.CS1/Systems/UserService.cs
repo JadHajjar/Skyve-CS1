@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.Compatibility;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
+using Skyve.Systems.Compatibility;
+using Skyve.Systems.CS1.Utilities;
 
-namespace SkyveApp.Systems.CS1.Systems;
+namespace Skyve.Systems.CS1.Systems;
 internal class UserService : IUserService
 {
 	private KnownUser _user;

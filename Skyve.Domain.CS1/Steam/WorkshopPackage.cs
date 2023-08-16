@@ -1,11 +1,11 @@
-﻿using SkyveApp.Domain.CS1.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
+﻿using Skyve.Domain.CS1.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems;
 
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SkyveApp.Domain.CS1.Steam;
+namespace Skyve.Domain.CS1.Steam;
 public class WorkshopPackage : IPackage
 {
 	private readonly IWorkshopInfo? _info;

@@ -1,4 +1,4 @@
-﻿namespace SkyveApp.Domain.CS1.Steam;
+﻿namespace Skyve.Domain.CS1.Steam;
 public enum SteamQueryOrder
 {
 	RankedByVote = 0,

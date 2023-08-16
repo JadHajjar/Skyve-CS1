@@ -1,8 +1,8 @@
-﻿using SkyveApp.Domain.CS1.Enums;
+﻿using Skyve.Domain.CS1.Enums;
 
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain.CS1;
+namespace Skyve.Domain.CS1;
 public struct TagItem : ITag
 {
 	public TagSource Source { get; set; }

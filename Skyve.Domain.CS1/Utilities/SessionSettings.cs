@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 using System.Drawing;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 public class SessionSettings : ISave, ISessionSettings
 {
 	public override string Name => nameof(SessionSettings) + ".json";

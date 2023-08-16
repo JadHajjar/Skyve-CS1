@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 public class LogTrace : ILogTrace
 {
 	public LogTrace(List<string> lines, int index, bool crash)

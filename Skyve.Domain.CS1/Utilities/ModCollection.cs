@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 public class ModCollection
 {
 	private readonly Dictionary<string, List<IMod>> _modList = new(StringComparer.OrdinalIgnoreCase);

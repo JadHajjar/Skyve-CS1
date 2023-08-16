@@ -1,8 +1,8 @@
-﻿using SkyveApp.Systems;
+﻿using Skyve.Systems;
 
 using System;
 
-namespace SkyveApp.Domain.CS1;
+namespace Skyve.Domain.CS1;
 public class KnownPackage
 {
 	public KnownPackage(ILocalPackage x)

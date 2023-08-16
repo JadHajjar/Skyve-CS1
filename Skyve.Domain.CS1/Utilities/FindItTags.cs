@@ -1,13 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 
 public class CustomTagsLibrary
 {

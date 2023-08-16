@@ -1,10 +1,10 @@
-﻿using SkyveApp.Domain.CS1.Steam;
+﻿using Skyve.Domain.CS1.Steam;
 
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace SkyveApp.Domain.CS1.Interfaces;
+namespace Skyve.Domain.CS1.Interfaces;
 public interface IPackage_
 {
 	string? Name { get; }

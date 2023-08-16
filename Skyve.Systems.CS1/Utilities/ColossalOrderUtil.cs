@@ -1,16 +1,16 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1.ColossalOrder;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Systems;
+using Skyve.Domain;
+using Skyve.Domain.CS1.ColossalOrder;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Systems;
 
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 
-namespace SkyveApp.Systems.CS1.Utilities;
+namespace Skyve.Systems.CS1.Utilities;
 internal class ColossalOrderUtil
 {
 	private const string GAME_SETTINGS_FILE_NAME = "userGameState";

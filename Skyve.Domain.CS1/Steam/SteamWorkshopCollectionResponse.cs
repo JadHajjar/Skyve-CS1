@@ -1,7 +1,7 @@
 ﻿#nullable disable
 
 
-namespace SkyveApp.Domain.CS1.Steam;
+namespace Skyve.Domain.CS1.Steam;
 
 public class SteamWorkshopCollectionRootResponse
 {

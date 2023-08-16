@@ -1,10 +1,10 @@
-﻿using SkyveApp.Domain.Enums;
+﻿using Skyve.Domain.Enums;
 
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace SkyveApp.Domain.CS1.Interfaces;
+namespace Skyve.Domain.CS1.Interfaces;
 public interface IProfile_
 {
 	ulong Author { get; }

@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
-using SkyveApp.Systems.CS1.Utilities.IO;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Systems;
+using Skyve.Systems.CS1.Utilities;
+using Skyve.Systems.CS1.Utilities.IO;
 
 using SlickControls;
 
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Management;
 using System.Timers;
 
-namespace SkyveApp.Systems.CS1.Managers;
+namespace Skyve.Systems.CS1.Managers;
 
 internal class CitiesManager : ICitiesManager
 {

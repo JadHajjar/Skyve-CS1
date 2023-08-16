@@ -1,12 +1,12 @@
 using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace SkyveApp.Domain.CS1.Legacy;
+namespace Skyve.Domain.CS1.Legacy;
 public interface IProfileItem
 {
 	string? GetIncludedPath();

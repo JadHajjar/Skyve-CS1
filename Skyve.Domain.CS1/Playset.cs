@@ -2,10 +2,10 @@
 
 using Newtonsoft.Json;
 
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems;
-using SkyveApp.Systems.Compatibility.Domain.Api;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems;
+using Skyve.Systems.Compatibility.Domain.Api;
 
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace SkyveApp.Domain.CS1;
+namespace Skyve.Domain.CS1;
 public class Playset : ICustomPlayset
 {
 	private Bitmap? _banner;

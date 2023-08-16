@@ -1,8 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 
-using SkyveApp;
-using SkyveApp.Systems.CS1;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
+using Skyve.Systems;
+using Skyve.Systems.CS1;
+using Skyve.Systems.CS1.Utilities;
 
 using System.Configuration;
 using System.Diagnostics;
@@ -17,9 +19,9 @@ internal static class Program
 {
 	static Program()
 	{
-		SkyveApp.Program.IsRunning = true;
-		SkyveApp.Program.CurrentDirectory = Application.StartupPath;
-		SkyveApp.Program.ExecutablePath = Application.ExecutablePath;
+		App.Program.IsRunning = true;
+		App.Program.CurrentDirectory = Application.StartupPath;
+		App.Program.ExecutablePath = Application.ExecutablePath;
 
 		ISave.AppName = "Skyve-CS1";
 		ISave.CustomSaveDirectory = CurrentDirectory;
@@ -63,7 +65,7 @@ internal static class Program
 
 			try
 			{
-				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(SkyveApp.Program.ExecutablePath)).Length > 1;
+				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(App.Program.ExecutablePath)).Length > 1;
 
 				if (openTools && !CrossIO.FileExists(CrossIO.Combine(CurrentDirectory, "Wake")))
 				{
@@ -120,7 +122,7 @@ internal static class Program
 				}
 			}
 
-			Application.Run(SystemsProgram.MainForm = SkyveApp.Program.MainForm = new MainForm());
+			Application.Run(SystemsProgram.MainForm = App.Program.MainForm = new MainForm());
 		}
 		catch (Exception ex)
 		{

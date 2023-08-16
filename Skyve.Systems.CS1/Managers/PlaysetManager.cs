@@ -1,12 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain;
-using SkyveApp.Domain.CS1;
-using SkyveApp.Domain.CS1.Legacy;
-using SkyveApp.Domain.CS1.Utilities;
-using SkyveApp.Domain.Enums;
-using SkyveApp.Domain.Systems;
-using SkyveApp.Systems.CS1.Utilities;
+using Skyve.Domain;
+using Skyve.Domain.CS1;
+using Skyve.Domain.CS1.Legacy;
+using Skyve.Domain.CS1.Utilities;
+using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
+using Skyve.Systems;
+using Skyve.Systems.CS1.Utilities;
 
 using SlickControls;
 
@@ -16,13 +17,14 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace SkyveApp.Systems.CS1.Managers;
+namespace Skyve.Systems.CS1.Managers;
 internal class PlaysetManager : IPlaysetManager
 {
 	private readonly List<ICustomPlayset> _playsets;
 	private bool disableAutoSave;
 	private readonly FileWatcher? _watcher;
 
+	public ICustomPlayset TemporaryPlayset => Playset.TemporaryPlayset;
 	public ICustomPlayset CurrentPlayset { get; internal set; }
 	public IEnumerable<ICustomPlayset> Playsets
 	{
@@ -43,6 +45,7 @@ internal class PlaysetManager : IPlaysetManager
 			}
 		}
 	}
+
 
 	public event PromptMissingItemsDelegate? PromptMissingItems;
 
@@ -716,7 +719,7 @@ internal class PlaysetManager : IPlaysetManager
 
 	public bool Save(IPlayset? playset, bool forced = false)
 	{
-		if (playset == null || (!forced && (playset.Temporary || !_notifier.IsContentLoaded)))
+		if (playset == null || !forced && (playset.Temporary || !_notifier.IsContentLoaded))
 		{
 			return false;
 		}
@@ -817,6 +820,11 @@ internal class PlaysetManager : IPlaysetManager
 		}
 
 		return true;
+	}
+
+	public ICustomPlayset GetNewPlayset()
+	{
+		return new Playset() { Name = GetNewPlaysetName(), LastEditDate = DateTime.Now };
 	}
 
 	public string GetNewPlaysetName()

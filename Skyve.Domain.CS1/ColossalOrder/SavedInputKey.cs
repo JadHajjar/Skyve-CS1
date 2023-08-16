@@ -1,4 +1,4 @@
-namespace SkyveApp.Domain.CS1.ColossalOrder;
+namespace Skyve.Domain.CS1.ColossalOrder;
 
 public enum KeyCode
 {
@@ -130,7 +130,7 @@ public class SavedInputKey : SavedValue
 	public KeyCode Key
 	{
 		get => (KeyCode)(value & 268435455);
-		set => this.value = (this.value & -268435456) | (int)value;
+		set => this.value = this.value & -268435456 | (int)value;
 	}
 
 	public bool Control

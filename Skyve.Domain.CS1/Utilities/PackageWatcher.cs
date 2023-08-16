@@ -1,13 +1,13 @@
 ﻿using Extensions;
 
-using SkyveApp.Domain.Systems;
+using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 using System.IO;
 
 using IoPath = System.IO.Path;
 
-namespace SkyveApp.Domain.CS1.Utilities;
+namespace Skyve.Domain.CS1.Utilities;
 public class PackageWatcher
 {
 	private readonly IContentManager _contentManager;

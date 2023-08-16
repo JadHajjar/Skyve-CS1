@@ -1,11 +1,11 @@
 ﻿using Extensions;
 
-using SkyveApp.Systems;
+using Skyve.Systems;
 
 using System;
 using System.Collections.Generic;
 
-namespace SkyveApp.Domain.CS1;
+namespace Skyve.Domain.CS1;
 public class Mod : IMod
 {
 	public Mod(ILocalPackageWithContents package, string dllPath, Version version)
