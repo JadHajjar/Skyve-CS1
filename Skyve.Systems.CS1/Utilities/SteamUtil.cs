@@ -176,9 +176,7 @@ public static class SteamUtil
 
 		try
 		{
-			var idString = string.Join(",", steamId64s.Distinct());
-
-			var result = await ServiceCenter.Get<SkyveApiUtil>().Get<List<SteamUser>>("/GetUsers", ("userIds", idString));
+			var result = await ServiceCenter.Get<SkyveApiUtil>().Post<List<ulong>, List <SteamUser>>("/GetUsers", steamId64s);
 
 			return result?.ToDictionary(x => x.SteamId) ?? new();
 		}

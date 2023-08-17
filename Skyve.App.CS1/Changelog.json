@@ -1,5 +1,18 @@
 [
   {
+    "Version": "3.2.9",
+    "Date": "2023-08-18",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Performance improvements.",
+          "Fixed the UI not resizing after 'going back' to a previous page."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.2.8.2",
     "Date": "2023-08-14",
     "ChangeGroups": [

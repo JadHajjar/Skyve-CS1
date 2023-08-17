@@ -85,6 +85,11 @@ internal class AssetsUtil : IAssetUtil
 			ExcludedHashSet.Add(asset.FilePath.ToLower());
 		}
 
+		if (_notifier.BulkUpdating)
+		{
+			return;
+		}
+
 		_notifier.OnInclusionUpdated();
 		_notifier.TriggerAutoSave();
 
