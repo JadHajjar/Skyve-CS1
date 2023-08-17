@@ -6,9 +6,9 @@ namespace Skyve.App.CS1.UserInterface.Panels;
 internal class PC_SkyveChangeLog : PC_Changelog
 {
 	public PC_SkyveChangeLog() : base(
-		Assembly.GetExecutingAssembly(),
+		Assembly.GetEntryAssembly(),
 		$"Skyve.App.CS1.Changelog.json",
-		Assembly.GetExecutingAssembly().GetName().Version)
+		Assembly.GetEntryAssembly().GetName().Version)
 	{
 		LocaleChangelog.Load();
 	}
