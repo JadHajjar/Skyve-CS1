@@ -43,13 +43,11 @@ public class SteamUser : IDynamicSql
 	public string ProfileUrl { get; set; }
 	[DynamicSqlProperty]
 	public string AvatarUrl { get; set; }
-
-#if API
-	[DynamicSqlProperty, System.Text.Json.Serialization.JsonIgnore]
-	public DateTime Timestamp { get; set; }
-#else
 	[DynamicSqlProperty]
 	public DateTime Timestamp { get; set; }
+
+#if !API
+	[DynamicSqlProperty]
 	[JsonIgnore] public object? Id => SteamId;
 	[JsonIgnore] public Bitmap? AvatarImage => ServiceCenter.Get<IImageService>().GetImage(AvatarUrl, true).Result;
 

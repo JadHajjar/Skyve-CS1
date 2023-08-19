@@ -1,5 +1,19 @@
 [
   {
+    "Beta": true,
+    "Version": "3.2.9.1",
+    "Date": "2023-08-18",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Fixed an issue while using Skyve for the first time.",
+          "Fixed an issue that contributed to the High CPU usage."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.2.9",
     "Date": "2023-08-18",
     "ChangeGroups": [

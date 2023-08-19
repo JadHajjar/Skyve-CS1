@@ -142,9 +142,9 @@ internal class LocationManager : ILocationManager
 	{
 		var settings = _settings.FolderSettings;
 
-		settings.GamePath = ConfigurationManager.AppSettings[nameof(GamePath)];
-		settings.AppDataPath = ConfigurationManager.AppSettings[nameof(AppDataPath)];
-		settings.SteamPath = ConfigurationManager.AppSettings[nameof(SteamPath)];
+		settings.GamePath = ConfigurationManager.AppSettings[nameof(GamePath)] ?? string.Empty;
+		settings.AppDataPath = ConfigurationManager.AppSettings[nameof(AppDataPath)] ?? string.Empty;
+		settings.SteamPath = ConfigurationManager.AppSettings[nameof(SteamPath)] ?? string.Empty;
 		settings.Platform = Enum.TryParse(ConfigurationManager.AppSettings[nameof(Platform)], out Platform platform) ? platform : Platform.Windows;
 
 		CrossIO.CurrentPlatform = settings.Platform;

@@ -75,9 +75,7 @@
 		<Compile Update="UserInterface\Panels\PC_SkyveChangeLog.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
-		<Compile Update="UserInterface\Panels\PC_Utilities.cs">
-		  <SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserInterface\Panels\PC_Utilities.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

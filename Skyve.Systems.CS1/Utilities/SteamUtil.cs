@@ -46,7 +46,7 @@ public static class SteamUtil
 
 		var notifier = ServiceCenter.Get<INotifier>();
 
-		_workshopItemProcessor.ItemsLoaded += notifier.OnWorkshopPackagesInfoLoaded;
+		_workshopItemProcessor.ItemsLoaded += notifier.OnWorkshopInfoUpdated;
 		_steamUserProcessor.ItemsLoaded += notifier.OnWorkshopUsersInfoLoaded;
 	}
 
