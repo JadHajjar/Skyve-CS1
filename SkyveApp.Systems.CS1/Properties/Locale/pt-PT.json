@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "O que é uma limpeza?",
   "TroubleshootCauseResult": "Os seguintes pacotes podem ser a causa de seus problemas",
   "VerifiedAuthor": "Autor verificado",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }

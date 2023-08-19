@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "Що таке прибирання?",
   "TroubleshootCauseResult": "Наступні пакунки можуть бути причиною ваших проблем",
   "VerifiedAuthor": "Перевірений автор",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }

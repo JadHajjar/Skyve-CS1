@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "クリーンアップとは?",
   "TroubleshootCauseResult": "以下のパッケージが問題の原因かも知れません。",
   "VerifiedAuthor": "確認済み作者",
-  "ApplyAllActions": "使用できるアクションを全て適用"
+  "ApplyAllActions": "使用できるアクションを全て適用",
+  "FailedToImportPlayset": "プレイセットのインポートに失敗！"
 }

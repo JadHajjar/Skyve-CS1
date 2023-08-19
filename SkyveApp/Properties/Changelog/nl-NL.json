@@ -1,6 +1,7 @@
 {
   "New": "Nieuw",
   "Fixes": "Oplossingen",
+  "Hotfix": "Hotfix",
   "Changes": "Veranderingen",
   "Bug-Fixes": "Bug-fixes",
   "Improvements": "Verbeteringen",
@@ -67,6 +68,7 @@
   "Added an indicator that a profile is uploading.": "Toegevoegd een indicator dat een profiel wordt geüpload.",
   "Fixed Profiles' Auto-Save not working correctly.": "Auto-Opslaan is opgelost.",
   "Added 6 new reset buttons in the Utilities page.": "6 nieuwe reset-knoppen toegevoegd in de pagina nutsbedrijven.",
+  "Potential fix for the sudden high CPU usage issue.": "Potential fix for the sudden high CPU usage issue.",
   "Fixed freezes happening in the content list pages.": "Problemen die zich voordoen op de inhoudslijst pagina's opgelost.",
   "Added more actions to labels in the content lists.": "Meer acties aan labels in de inhoudslijst toegevoegd.",
   "Fixed author pages not opening correctly in Steam.": "Repareerde auteurspagina's die niet correct worden geopend in Steam.",
@@ -203,6 +205,7 @@
   "Added an option to make optional packages use the same notification as required packages.": "Toegevoegd een optie om optionele pakketten te gebruiken dezelfde melding als de vereiste pakketten.",
   "Added language dialects, Chinese Traditional (Taiwan), English UK, and Portuguese Brazil.": "Taaldialecten, Chinees (Taiwan), Engels Verenigd Koninkrijk en Portugees Brazilië toegevoegd.",
   "Fixed downloading or updating a profile not properly saving some data like the thumbnail.": "Probleem met downloaden of bijwerken van een profiel dat sommige gegevens, zoals de miniatuur, niet goed opslaat.",
+  "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors.": "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors.",
   "Implemented a new icon system that scales all of the icons appropriately to your UI scale.": "Implementeer een nieuw pictogramsysteem dat alle pictogrammen naar behoren schaalde in je UI-schaal.",
   "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.": "Functies voor zoekopdrachten, filter en sortering toegevoegd aan de lijsten op de pagina van auteurs en op de pagina van de pakketten.",
   "Steam links will now open inside of Steam's window. This can be toggled off in the Options.": "Steam links zullen nu in Steam's venster worden geopend. Dit kan worden uitgeschakeld in de Opties.",
@@ -225,6 +228,7 @@
   "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.": "Verbeterd het venster 'Labels toevoegen'; u kunt eenvoudig uit bestaande tags selecteren en meerdere items tegelijk bewerken.",
   "You can now edit Find it! tags directly in the app to mods and assets. Assets are synched with the game.": "Je kunt de zoekresultaten nu bewerken! tags in de app voor mods en assets. Assets worden gesynchroniseerd met het spel.",
   "Pseudo-mods now include IMT Markings, Render it! Presets, Procedural Objects Fonts, and translation mods.": "Pseudo-mods omvatten nu IMT-markeringen, Render! Presets, Procedurele Objecten en Vertaalmods.",
+  "Importing a Compatibility Report will now show it in your selected language, instead of the other person's.": "Importing a Compatibility Report will now show it in your selected language, instead of the other person's.",
   "Reworked the rendering of lists, improving the performance and responsiveness of content pages drastically.": "Herwerkte het renderen van lijsten, het verbeteren van de prestaties en het reactievermogen van inhoudspagina's drastisch.",
   "You can now request a review for a package to notify us about missing information in the compatibility data.": "U kunt nu een review aanvragen voor een pakket om ons op de hoogte te stellen van ontbrekende informatie in de compatibiliteitsgegevens.",
   "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.": "Interactie tussen gelijksoortige mods opgelost in het Compatibiliteitsrapport wanneer je er maar één hebt.",
@@ -261,5 +265,6 @@
   "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.": "Secundaire inhoudslijsten zoals 'Ontbrekende pakketten' & 'Verzameling werkplaats' gebruiken nu dezelfde UI als de belangrijkste inhoudslijst pagina's, toestaan voor een gestroomlijnde ervaring en meer opties.",
   "The new icon now glows based on what's happening, blue indicates that the game is running, red means no internet connection, and quick glowing means it's launching or closing the game.": "Het nieuwe icoon is nu gloort op basis van wat er gebeurt, blauw geeft aan dat het spel draait, rood betekent geen internetverbinding, en snel gloeien betekent dat het spel start of sluit.",
   "Changed the option to increase list items' size on hover to always increase their size, improved the UI of enlarged list items, and applied this functionality to the rest of the lists in the app.": "Veranderd de optie om de grootte van de lijst items bij zweven te verhogen om hun grootte altijd te vergroten, de UI van de uitgebreide lijstitems verbeterd en deze functionaliteit toegepast op de rest van de lijsten in de app.",
+  "You can now import a Log Report file onto the playset list to import the playset in it and directly view its contents.\r\nThose profiles are temporary, and so will be deleted the next time you open Skyve.": "You can now import a Log Report file onto the playset list to import the playset in it and directly view its contents.\r\nThose profiles are temporary, and so will be deleted the next time you open Skyve.",
   "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')": "Afzonderende termen met een komma in je zoekopdracht splitst je zoekopdracht om te voldoen aan een van de voorwaarden (OR)\r\n\t; Het toevoegen van '+' aan het begin van je term zal vereisen dat de term wordt gematched (AND)\r\n\t½ • Het toevoegen '-' aan het begin van je term zal items uitsluiten die overeenkomen met die term\r\n\r\nVoorbeelden van de nieuwe zoekopdracht:\r\n\t• auto, Vrachtwagen (komt overeen met 'auto' OF 'truck')\r\n\t• gebouwen, appartement +european (matcht 'european' EN ['gebouw' OF 'appartement'])\r\n\t• condo, house -rico +american (komt overeen met 'american' EN ['condo' OF 'huis'] EN NIET 'rico')"
 }

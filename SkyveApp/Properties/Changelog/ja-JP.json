@@ -1,6 +1,7 @@
 {
   "New": "新規",
   "Fixes": "修正",
+  "Hotfix": "ホットフィックス",
   "Changes": "変更",
   "Bug-Fixes": "バグ修正",
   "Improvements": "改善",
@@ -67,6 +68,7 @@
   "Added an indicator that a profile is uploading.": "プレイセットがアップロード中かどうかを示すインジケーターを追加",
   "Fixed Profiles' Auto-Save not working correctly.": "プレイセットのオートセーブが正しく機能しない問題を修正",
   "Added 6 new reset buttons in the Utilities page.": "ユーティリティのページに、6つの新しいリセットボタンを追加",
+  "Potential fix for the sudden high CPU usage issue.": "CPU使用率が急激に高くなる問題に対するホットフィックス",
   "Fixed freezes happening in the content list pages.": "コンテンツリストのページで発生するフリーズを修正",
   "Added more actions to labels in the content lists.": "コンテンツリストのラベルにアクションを更に追加",
   "Fixed author pages not opening correctly in Steam.": "Steamで作者のページが正しく開けない問題を修正",
@@ -203,6 +205,7 @@
   "Added an option to make optional packages use the same notification as required packages.": "オプションパッケージと必須パッケージで、同じ通知を使用するオプションを追加",
   "Added language dialects, Chinese Traditional (Taiwan), English UK, and Portuguese Brazil.": "繁体中国語 (台湾)・英語 (イギリス)・ポルトガル語 (ブラジル)の言語を追加",
   "Fixed downloading or updating a profile not properly saving some data like the thumbnail.": "プレイセットのDLや更新で、サムネイルなどの一部データが正しく保存されない問題を修正",
+  "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors.": "「ヘルプ＆ログ」ページでログのレポートファイルをインポートして、エラーをすぐ表示できるように改善",
   "Implemented a new icon system that scales all of the icons appropriately to your UI scale.": "UIスケールに合わせて全てのアイコンが、適切に拡大縮小する新しいアイコンシステムを実装",
   "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.": "作者ページとパッケージページに、リストの検索機能・フィルタ&ソートのツールを追加",
   "Steam links will now open inside of Steam's window. This can be toggled off in the Options.": "SteamクライアントのウィンドウからSteamのリンクを開きますが、オプションでオフに切り替えも可能",
@@ -225,6 +228,7 @@
   "Improved the 'Add Tags' window; you can easily select from existing tags & edit multiple items at once.": "「タグの追加」ウィンドウを改善して、既存タグから簡単に選択や複数の項目をまとめて編集が可能",
   "You can now edit Find it! tags directly in the app to mods and assets. Assets are synched with the game.": "MODやアセットに対して、アプリ内で直接Find it！タグが編集可能になりゲーム内は編集内容が同期",
   "Pseudo-mods now include IMT Markings, Render it! Presets, Procedural Objects Fonts, and translation mods.": "疑似MODに、IMTのマーキング・Render it！のプリセット・Procedural Objectsのアドオン・翻訳MODを含めるように変更",
+  "Importing a Compatibility Report will now show it in your selected language, instead of the other person's.": "互換性レポートのインポート時に相手の使用言語では無く、自身の言語で表示するように改善",
   "Reworked the rendering of lists, improving the performance and responsiveness of content pages drastically.": "リストのレンダリングを改善して、コンテンツページのパフォーマンスと応答性を大幅に向上",
   "You can now request a review for a package to notify us about missing information in the compatibility data.": "互換性データで不足した情報を通知するために、パッケージのレビューを依頼できる機能",
   "Fixed an interaction between similar mods showing in the Compatibility Report when you only have one of them.": "類似MODが1つしか無い場合に、互換性レポートで表示される依存関係の表示を修正",
@@ -261,5 +265,6 @@
   "Secondary content lists like 'Missing Packages' & 'Workshop Collection' now use the same UI as the main content list pages, allowing for a streamlined experience and more options.": "「不足したパッケージ」や「ワークショップのコレクション」などの2次コンテンツリストは、メインコンテンツのリストページと同じUIを使用するように変更と合理化を行い、より多くのオプションが提供可能",
   "The new icon now glows based on what's happening, blue indicates that the game is running, red means no internet connection, and quick glowing means it's launching or closing the game.": "新しいアイコンは状況に応じて光るようになり、青色はゲーム実行中・赤色はインターネットが未接続・素早く光る場合はゲームの起動や終了を表現",
   "Changed the option to increase list items' size on hover to always increase their size, improved the UI of enlarged list items, and applied this functionality to the rest of the lists in the app.": "ホバー時にリストアイテムのサイズを拡大するオプションは常に拡大するように変更して、リストのUIを改善・アプリ内の他のリストにも同じ機能を適用",
+  "You can now import a Log Report file onto the playset list to import the playset in it and directly view its contents.\r\nThose profiles are temporary, and so will be deleted the next time you open Skyve.": "プレイセットのリストとログのレポートファイルを一緒にインポートすることで、プレイセットの内容を直接確認が可能\nこれらのプレイセットは一時的なファイルとして、次回以降にSkyveを開くと自動的に削除",
   "Separating terms with a comma in your search will split your search to match any of the terms (OR)\r\n\t• Adding '+' at the start of your term will require the term to be matched (AND)\r\n\t• Adding '-' at the start of your term will exclude items that match that term\r\n\r\nExamples of the new search:\r\n\t• car, truck (matches 'car' OR 'truck')\r\n\t• building, apartment +european (matches 'european' AND ['building' OR 'apartment'])\r\n\t• condo, house -rico +american (matches 'american' AND ['condo' OR 'house'] AND NOT 'rico')": "検索欄で単語をコンマ「,」で区切ると、いずれかの単語で一致するアイテムを全て表示 (OR動作)\n\t・単語の先頭に「+」を追加すると、単語と一致するアイテムを表示 (AND動作)\n\t・単語の先頭に「-」を追加すると、単語に一致するアイテムを除外 (NOT動作)\n\n新しい検索の例:\n\t・car, truck (「car」と「truck」は一致して全て表示)\n\t・building, apartment, +european (「european」と一致して、「building」か「apartment」を含む場合は表示)\n\t・condo, house, -rico, +american (「american」と一致して、「condo」か「house」を含む場合は表示して、「rico」は除外)"
 }

@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "ما هو تنظيف؟",
   "TroubleshootCauseResult": "الحزم التالية قد تكون سبب مشاكلك",
   "VerifiedAuthor": "المؤلف المتحقق منه",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }

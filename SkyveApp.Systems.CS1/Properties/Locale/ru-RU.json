@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "Что такое очистка?",
   "TroubleshootCauseResult": "Причиной проблем могут быть следующие пакеты",
   "VerifiedAuthor": "Проверенный автор",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Показать все доступные действия",
+  "FailedToImportPlayset": "Failed to import this playset."
 }

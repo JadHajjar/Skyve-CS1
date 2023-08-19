@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "Co je to sanace?",
   "TroubleshootCauseResult": "Následující balíčky mohou být příčinou vašich problémů",
   "VerifiedAuthor": "Ověřený autor",
-  "ApplyAllActions": "Apply all available actions"
+  "ApplyAllActions": "Apply all available actions",
+  "FailedToImportPlayset": "Failed to import this playset."
 }

@@ -681,5 +681,6 @@
   "CleanupInfoTitle": "Was ist eine Bereinigung?",
   "TroubleshootCauseResult": "Die folgenden Pakete könnten die Ursache für die Probleme sein",
   "VerifiedAuthor": "Verifizierter Autor",
-  "ApplyAllActions": "Alle verfügbaren Aktionen anwenden"
+  "ApplyAllActions": "Alle verfügbaren Aktionen anwenden",
+  "FailedToImportPlayset": "Importieren dieses Spielsets fehlgeschlagen."
 }
