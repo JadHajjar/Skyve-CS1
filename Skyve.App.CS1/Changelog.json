@@ -1,6 +1,33 @@
 [
   {
     "Beta": true,
+    "Version": "3.2.9.3",
+    "Date": "2023-08-20",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Greatly improved the processing speed of the Compatibility Report.",
+          "Other small fixes."
+        ]
+      }
+    ]
+  },
+  {
+    "Beta": true,
+    "Version": "3.2.9.2",
+    "Date": "2023-08-19",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Fixed the app freezing on launch for slower computers."
+        ]
+      }
+    ]
+  },
+  {
+    "Beta": true,
     "Version": "3.2.9.1",
     "Date": "2023-08-18",
     "ChangeGroups": [

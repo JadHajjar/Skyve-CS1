@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Skyve.Systems.CS1.Managers;
 internal class ContentManager : IContentManager
@@ -218,35 +219,49 @@ internal class ContentManager : IContentManager
 
 		void getPackage(string folder, bool builtIn, bool workshop, bool expectAssets, bool withSubDirectories = true)
 		{
-			if (!Directory.Exists(folder))
+			try
 			{
-				_logger.Warning($"Package folder not found: '{folder}'");
-
-				return;
-			}
-
-#if DEBUG
-			_logger.Debug("Creating package for: " + folder);
-#endif
-
-			var package = new Package(folder, builtIn, workshop, GetTotalSize(folder), GetLocalUpdatedTime(folder));
-
-			package.Assets = _assetUtil.GetAssets(package, withSubDirectories).ToArray();
-			package.Mod = expectAssets ? null : _modUtil.GetMod(package);
-
-			if (package.Assets.Length != 0 || package.Mod != null)
-			{
-				lock (packages)
+				if (Regex.IsMatch(Path.GetFileName(folder), ExtensionClass.CharBlackListPattern))
 				{
-					packages.Add(package);
+					_logger.Warning($"Package folder contains blacklisted characters: '{folder}'");
+
+					return;
 				}
-			}
+
+				if (!Directory.Exists(folder))
+				{
+					_logger.Warning($"Package folder not found: '{folder}'");
+
+					return;
+				}
+
 #if DEBUG
-			else
-			{
-				_logger.Debug("No mods/assets found in: " + folder);
-			}
+				_logger.Debug("Creating package for: " + folder);
 #endif
+
+				var package = new Package(folder, builtIn, workshop, GetTotalSize(folder), GetLocalUpdatedTime(folder));
+
+				package.Assets = _assetUtil.GetAssets(package, withSubDirectories).ToArray();
+				package.Mod = expectAssets ? null : _modUtil.GetMod(package);
+
+				if (package.Assets.Length != 0 || package.Mod != null)
+				{
+					lock (packages)
+					{
+						packages.Add(package);
+					}
+				}
+#if DEBUG
+				else
+				{
+					_logger.Debug("No mods/assets found in: " + folder);
+				}
+#endif
+			}
+			catch (Exception ex)
+			{
+				_logger.Exception(ex, $"Failed to create a package from the folder: '{folder}'");
+			}
 		}
 	}
 
@@ -254,11 +269,11 @@ internal class ContentManager : IContentManager
 	{
 		lock (_contentUpdateLock)
 		{
-			if (!workshop &&
+			if ((!workshop &&
 				!path.PathContains(_locationManager.AssetsPath) &&
 				!path.PathContains(_locationManager.StylesPath) &&
 				!path.PathContains(_locationManager.MapThemesPath) &&
-				!path.PathContains(_locationManager.ModsPath) ||
+				!path.PathContains(_locationManager.ModsPath)) ||
 				path.PathEquals(_locationManager.ModsPath))
 			{
 				return;

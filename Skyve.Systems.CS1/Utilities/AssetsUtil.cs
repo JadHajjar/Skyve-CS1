@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Skyve.Systems.CS1.Utilities;
 internal class AssetsUtil : IAssetUtil
@@ -61,6 +62,9 @@ internal class AssetsUtil : IAssetUtil
 
 		foreach (var file in files)
 		{
+			if (Regex.IsMatch(Path.GetFileName(file), ExtensionClass.CharBlackListPattern))
+				continue;
+
 			var fileName = file.FormatPath();
 
 			AssetInfoCache.TryGetValue(fileName, out var asset);
