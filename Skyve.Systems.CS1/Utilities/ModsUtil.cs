@@ -50,13 +50,16 @@ internal class ModsUtil : IModUtil
 		var index = 1;
 		var mods = ServiceCenter.Get<ILoadOrderHelper>().GetOrderedMods().Reverse();
 
-		foreach (var mod in mods)
+		lock (this)
 		{
-			var modInfo = _modConfigInfo.TryGetValue(mod.Folder, out var info) ? info : new();
+			foreach (var mod in mods)
+			{
+				var modInfo = _modConfigInfo.TryGetValue(mod.Folder, out var info) ? info : new();
 
-			modInfo.LoadOrder = index++;
+				modInfo.LoadOrder = index++;
 
-			_modConfigInfo[mod.Folder] = modInfo;
+				_modConfigInfo[mod.Folder] = modInfo;
+			}
 		}
 
 		SaveChanges();
@@ -69,7 +72,11 @@ internal class ModsUtil : IModUtil
 			return;
 		}
 
-		_config.SetModsInfo(_modConfigInfo);
+		lock (this)
+		{
+			_config.SetModsInfo(_modConfigInfo);
+		}
+
 		_config.Serialize();
 
 		_colossalOrderUtil.SaveSettings();
@@ -93,7 +100,10 @@ internal class ModsUtil : IModUtil
 
 		modInfo.Excluded = !value;
 
-		_modConfigInfo[mod.Folder] = modInfo;
+		lock (this)
+		{
+			_modConfigInfo[mod.Folder] = modInfo;
+		}
 
 		if (!_settings.UserSettings.AdvancedIncludeEnable)
 		{

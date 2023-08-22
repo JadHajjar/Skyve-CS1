@@ -351,7 +351,7 @@ public static class SteamUtil
 		{
 			var url = $"https://store.steampowered.com/api/appdetails";
 
-			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId)) ?? new();
+			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId), ("l", "english")) ?? new();
 		}
 		catch (Exception ex)
 		{
@@ -375,7 +375,7 @@ public static class SteamUtil
 
 		var newDlcs = new List<SteamDlc>(Dlcs);
 
-		foreach (var dlc in dlcs["255710"].data!.dlc.Where(x => !Dlcs.Any(y => y.Id == x)))
+		foreach (var dlc in dlcs["255710"].data!.dlc.Where(x => !Dlcs.Any(y => y.Id == x && y.Timestamp > DateTime.Now.AddDays(-7))))
 		{
 			var data = await GetSteamAppInfoAsync(dlc);
 
@@ -383,11 +383,17 @@ public static class SteamUtil
 			{
 				var info = data[dlc.ToString()].data!;
 
+				newDlcs.RemoveAll(y => y.Id == dlc);
+
 				newDlcs.Add(new SteamDlc
 				{
+					Timestamp = DateTime.Now,
 					Id = dlc,
 					Name = info.name!,
 					Description = info.short_description!,
+					Price = info.price_overview?.final_formatted,
+					OriginalPrice = info.price_overview?.initial_formatted,
+					Discount = info.price_overview?.discount_percent ?? 0F,
 					ReleaseDate = DateTime.TryParseExact(info.release_date?.date, "dd MMM, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : DateTime.MinValue
 				});
 			}

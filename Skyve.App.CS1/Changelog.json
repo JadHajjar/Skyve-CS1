@@ -1,5 +1,36 @@
 [
   {
+    "Stable": true,
+    "Version": "3.2.10",
+    "Date": "2023-08-22",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Updated the DLC page UI into a grid view.",
+          "Greatly improved the processing speed of the Compatibility Report.",
+          "Fixed an issue while using Skyve for the first time.",
+          "Fixed an issue that contributed to the High CPU usage.",
+          "Fixed the app freezing on launch for slower computers.",
+          "Other small fixes."
+        ]
+      }
+    ]
+  },
+  {
+    "Beta": true,
+    "Version": "3.2.10",
+    "Date": "2023-08-22",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Updated the DLC page UI into a grid view."
+        ]
+      }
+    ]
+  },
+  {
     "Beta": true,
     "Version": "3.2.9.3",
     "Date": "2023-08-20",
