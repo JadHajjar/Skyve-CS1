@@ -18,17 +18,15 @@ internal class LogUtil : ILogUtil
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly ILocationManager _locationManager;
 	private readonly IPackageManager _contentManager;
-	private readonly IPackageUtil _contentUtil;
 	private readonly IPlaysetManager _profileManager;
 	private readonly ILogger _logger;
 
-	public LogUtil(ILocationManager locationManager, IPackageManager contentManager, IPlaysetManager profileManager, ILogger logger, IPackageUtil contentUtil, ICompatibilityManager compatibilityManager)
+	public LogUtil(ILocationManager locationManager, IPackageManager contentManager, IPlaysetManager profileManager, ILogger logger, ICompatibilityManager compatibilityManager)
 	{
 		_compatibilityManager = compatibilityManager;
 		_locationManager = locationManager;
 		_contentManager = contentManager;
 		_profileManager = profileManager;
-		_contentUtil = contentUtil;
 		_logger = logger;
 
 		try
