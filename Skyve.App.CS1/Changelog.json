@@ -1,5 +1,20 @@
 [
   {
+    "Version": "3.2.11",
+    "Date": "2023-08-23",
+    "ChangeGroups": [
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Fixed an issue where having the Beta version of a mod still marked the original as missing for 'Required Packages'.",
+          "Fixed the troubleshoot system not correctly guessing what mod/asset was causing issues.",
+          "When reaching the end of the troubleshooting, Skyve will now automatically apply the optimal changes to fix the issue.",
+          "Disabled the recurring prompt for keeping the current settings when you're near the end of the troubleshooting."
+        ]
+      }
+    ]
+  },
+  {
     "Stable": true,
     "Version": "3.2.10",
     "Date": "2023-08-22",

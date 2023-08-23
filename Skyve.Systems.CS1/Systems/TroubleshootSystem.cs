@@ -215,7 +215,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	{
 		_playsetManager.ApplyPlayset(currentState!.Playset!, false);
 
-		var lists = SplitGroup(issuePersists ? currentState.UnprocessedItems! : currentState.ProcessingItems!);
+		var lists = SplitGroup(issuePersists ? currentState.ProcessingItems! : currentState.UnprocessedItems!);
 
 		if (lists.processingItems.Count == 1 && lists.unprocessedItems.Count == 0)
 		{
@@ -225,6 +225,8 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			}
 			else
 			{
+				_bulkUtil.SetBulkIncluded(GetPackages(new[] { lists.processingItems[0][0] }), currentState.ItemIsMissing);
+
 				PromptResult?.Invoke(GetPackages(new[] { lists.processingItems[0][0] }).ToList());
 
 				Stop(true);
