@@ -38,19 +38,22 @@ internal class TagsService : ITagsService
 		_workshopService = workshopService;
 		_assetTags = new HashSet<string>();
 		_workshopTags = new Dictionary<string, int>();
-		var findItTags = CustomTagsLibrary.Deserialize();
+		var findItTags = CustomTagsLibrary.Deserialize() ?? new();
 
-		var csCache = AssetInfoCache.Deserialize();
+		var csCache = AssetInfoCache.Deserialize() ?? new();
 
 		if (csCache is not null)
 		{
-			foreach (var asset in (assetUtil as AssetsUtil)!.AssetInfoCache)
+			foreach (var asset in (assetUtil as AssetsUtil)!.AssetInfoCache ?? new())
 			{
-				_assetTagsDictionary[asset.Key] = asset.Value.Tags;
-
-				foreach (var tag in asset.Value.Tags)
+				if (asset.Value.Tags is not null)
 				{
-					_assetTags.Add(tag);
+					_assetTagsDictionary[asset.Key] = asset.Value.Tags;
+
+					foreach (var tag in asset.Value.Tags)
+					{
+						_assetTags.Add(tag);
+					}
 				}
 			}
 		}
