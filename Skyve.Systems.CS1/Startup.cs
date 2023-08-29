@@ -19,7 +19,7 @@ public static class Startup
 		services.AddSingleton<IPackageManager, PackageManager>();
 		services.AddSingleton<IPlaysetManager, PlaysetManager>();
 		services.AddSingleton<ISubscriptionsManager, SubscriptionsManager>();
-		//services.AddSingleton<IUpdateManager, UpdateManager>();
+		services.AddSingleton<IUpdateManager, UpdateManager>();
 		services.AddSingleton<ICompatibilityUtil, CompatibilityUtil>();
 		services.AddSingleton<ISettings, SettingsService>();
 		services.AddTransient<AssemblyUtil>();

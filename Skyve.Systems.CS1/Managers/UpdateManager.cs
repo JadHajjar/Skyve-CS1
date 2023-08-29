@@ -61,4 +61,9 @@ internal class UpdateManager : IUpdateManager
 	{
 		return _previousPackages.Count == 0;
 	}
+
+	public IEnumerable<ILocalPackage> GetNewPackages()
+	{
+		return new List<ILocalPackage>();
+	}
 }
