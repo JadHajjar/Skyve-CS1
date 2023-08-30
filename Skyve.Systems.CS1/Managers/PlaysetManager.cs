@@ -232,14 +232,6 @@ internal class PlaysetManager : IPlaysetManager
 			foreach (Playset playset in profiles)
 			{
 				playset.IsMissingItems = playset.Mods.Any(x => GetMod(x) is null) || playset.Assets.Any(x => GetAsset(x) is null);
-#if DEBUG
-				if (playset.IsMissingItems)
-				{
-					_logger.Debug($"Missing items in the playset: {playset}\r\n" +
-						playset.Mods.Where(x => GetMod(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n") + "\r\n" +
-						playset.Assets.Where(x => GetAsset(x) is null).ListStrings(x => $"{x.Name} ({_locationManager.ToLocalPath(x.RelativePath)})", "\r\n"));
-				}
-#endif
 			}
 
 			_notifier.OnPlaysetUpdated();
