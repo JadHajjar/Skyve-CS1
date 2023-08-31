@@ -6,7 +6,8 @@
       {
         "Name": "Changes",
         "Changes": [
-          "Tweaked some colors of the default theme."
+          "Tweaked some colors of the default theme.",
+          "Fixed the enabled/disabled filter not working."
         ]
       }
     ]

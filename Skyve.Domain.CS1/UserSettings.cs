@@ -25,5 +25,6 @@ public class UserSettings : IUserSettings
 	public bool TreatOptionalAsRequired { get; set; }
 	public bool ForceDownloadAndDeleteAsSoonAsRequested { get; set; }
 	public bool AssumeInternetConnectivity { get; set; }
+	public bool SnapDashToGrid { get; set; }
 	public Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; } = new();
 }
