@@ -110,7 +110,7 @@ internal class ModsUtil : IModUtil
 			_colossalOrderUtil.SetEnabled(mod, value);
 		}
 
-		if (_notifier.BulkUpdating)
+		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
 			return;
 		}
@@ -127,7 +127,7 @@ internal class ModsUtil : IModUtil
 
 		_colossalOrderUtil.SetEnabled(mod, value);
 
-		if (_notifier.BulkUpdating)
+		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
 			return;
 		}

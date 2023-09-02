@@ -28,10 +28,13 @@ internal class CitiesManager : ICitiesManager
 	private readonly IModUtil _modUtil;
 	private readonly ISettings _settings;
 	private readonly IIOUtil _iOUtil;
+	private readonly ColossalOrderUtil _colossalOrderUtil;
 
 	public event MonitorTickDelegate? MonitorTick;
 
-	public CitiesManager(ILogger logger, ILocationManager locationManager, IPlaysetManager profileManager, ISettings settings, IPackageManager contentManager, IIOUtil iOUtil, IModUtil modUtil)
+	public event Action<bool>? LaunchingStatusChanged;
+
+	public CitiesManager(ILogger logger, ILocationManager locationManager, IPlaysetManager profileManager, ISettings settings, IPackageManager contentManager, IIOUtil iOUtil, IModUtil modUtil, ColossalOrderUtil colossalOrderUtil)
 	{
 		_logger = logger;
 		_locationManager = locationManager;
@@ -40,10 +43,11 @@ internal class CitiesManager : ICitiesManager
 		_contentManager = contentManager;
 		_iOUtil = iOUtil;
 		_modUtil = modUtil;
+		_colossalOrderUtil = colossalOrderUtil;
 
 		var citiesMonitorTimer = new Timer(1000);
 
-		if (CrossIO.CurrentPlatform is Platform.Windows)
+		//if (CrossIO.CurrentPlatform is Platform.Windows)
 		{
 			citiesMonitorTimer.Elapsed += CitiesMonitorTimer_Elapsed;
 			citiesMonitorTimer.Start();
@@ -140,6 +144,16 @@ internal class CitiesManager : ICitiesManager
 					_logger.Warning("reverting launchSettings.ReleaseMono to " + bReleaseCities);
 					launchSettings.UnityProfiler = !bReleaseCities;
 				}
+			}
+
+			if (!_settings.UserSettings.AdvancedIncludeEnable)
+			{
+				foreach (var item in _contentManager.Mods)
+				{
+					_colossalOrderUtil.SetEnabled(item, item.IsIncluded());
+				}
+
+				_colossalOrderUtil.SaveSettings();
 			}
 		}
 		catch (Exception ex)
@@ -299,5 +313,10 @@ internal class CitiesManager : ICitiesManager
 		catch { }
 
 		return childProcs;
+	}
+
+	public void SetLaunchingStatus(bool launching)
+	{
+		LaunchingStatusChanged?.Invoke(launching);
 	}
 }

@@ -31,7 +31,6 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 			var profile = (item as Playset)!;
 			var result = await _skyveApiUtil.SaveUserProfile(new()
 			{
-
 				Author = SteamUtil.GetLoggedInSteamId(),
 				Banner = profile.BannerBytes,
 				Color = profile.Color?.ToArgb(),
@@ -115,7 +114,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 		}
 	}
 
-	public async Task<bool> SetVisibility(IOnlinePlayset profile, bool @public)
+	public async Task<bool> SetVisibility(ICustomPlayset profile, bool @public)
 	{
 		try
 		{

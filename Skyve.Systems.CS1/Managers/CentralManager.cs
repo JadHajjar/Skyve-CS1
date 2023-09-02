@@ -1,6 +1,7 @@
 ﻿using Extensions;
 
 using Skyve.Domain;
+using Skyve.Domain.CS1.Notifications;
 using Skyve.Domain.Systems;
 using Skyve.Systems.CS1.Utilities;
 
@@ -31,8 +32,10 @@ internal class CentralManager : ICentralManager
 	private readonly IModUtil _modUtil;
 	private readonly IBulkUtil _bulkUtil;
 	private readonly IVersionUpdateService _versionUpdateService;
+	private readonly INotificationsService _notificationsService;
+	private readonly IUpdateManager _updateManager;
 
-	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService)
+	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService, INotificationsService notificationsService, IUpdateManager updateManager)
 	{
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
@@ -49,6 +52,8 @@ internal class CentralManager : ICentralManager
 		_modUtil = modUtil;
 		_bulkUtil = bulkUtil;
 		_versionUpdateService = versionUpdateService;
+		_notificationsService = notificationsService;
+		_updateManager = updateManager;
 	}
 
 	public void Start()
@@ -93,6 +98,11 @@ internal class CentralManager : ICentralManager
 
 		_notifier.OnContentLoaded();
 
+		if (_modLogicManager.AreMultipleSkyvesPresent())
+		{
+			_notificationsService.SendNotification(new MultipleSkyvesNotification());
+		}
+
 		_subscriptionManager.Start();
 
 		if (CommandUtil.PreSelectedProfile == _profileManager.CurrentPlayset.Name)
@@ -126,12 +136,16 @@ internal class CentralManager : ICentralManager
 			LoadDlcAndCR();
 
 			_notifier.OnWorkshopInfoUpdated();
+
+			_updateManager.SendUpdateNotifications();
 		}
 		else
 		{
 			_logger.Warning("Not connected to the internet, delaying remaining loads.");
 
 			_notifier.OnWorkshopInfoUpdated();
+			
+			_updateManager.SendUpdateNotifications();
 
 			_logger.Info($"Compatibility report cached");
 

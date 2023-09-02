@@ -141,8 +141,8 @@ public class Playset : ICustomPlayset
 
 	IUser? IPlayset.Author => ServiceCenter.Get<IWorkshopService>().GetUser(Author);
 	string? IPlayset.BannerUrl { get; }
-	DateTime IPlayset.DateUpdated { get; }
-	DateTime IPlayset.DateUsed { get; }
+	DateTime IPlayset.DateUpdated => LastEditDate;
+	DateTime IPlayset.DateUsed => LastUsed;
 	bool ICustomPlayset.DisableWorkshop => LaunchSettings.NoWorkshop;
 
 	public class Asset : IPackage, IPlaysetEntry

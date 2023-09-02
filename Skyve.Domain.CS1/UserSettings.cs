@@ -1,4 +1,5 @@
 ﻿using Skyve.Domain.Enums;
+using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 
@@ -27,4 +28,9 @@ public class UserSettings : IUserSettings
 	public bool AssumeInternetConnectivity { get; set; }
 	public bool SnapDashToGrid { get; set; }
 	public Dictionary<SkyvePage, SkyvePageContentSettings> PageSettings { get; set; } = new();
+
+	void IUserSettings.Save()
+	{
+		ServiceCenter.Get<ISettings>().UserSettings.Save();
+	}
 }

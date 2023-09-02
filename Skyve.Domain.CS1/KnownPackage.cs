@@ -8,7 +8,7 @@ public class KnownPackage
 	public KnownPackage(ILocalPackage x)
 	{
 		Folder = x.Folder;
-		UpdateTime = x.GetWorkshopInfo()?.ServerTime ?? default;
+		UpdateTime = x.LocalTime;
 	}
 
 	public KnownPackage()

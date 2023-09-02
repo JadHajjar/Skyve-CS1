@@ -89,7 +89,7 @@ internal class AssetsUtil : IAssetUtil
 			ExcludedHashSet.Add(asset.FilePath.ToLower());
 		}
 
-		if (_notifier.BulkUpdating)
+		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
 		{
 			return;
 		}

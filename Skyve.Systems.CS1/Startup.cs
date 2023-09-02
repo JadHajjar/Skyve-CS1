@@ -38,6 +38,7 @@ public static class Startup
 		services.AddTransient<IVersionUpdateService, VersionUpdateService>();
 		services.AddTransient<IDownloadService, DownloadService>();
 		services.AddSingleton<ITroubleshootSystem, TroubleshootSystem>();
+		services.AddSingleton<INotificationsService, NotificationsService>();
 
 		LocaleCS1.Load();
 

@@ -1,13 +1,34 @@
 [
   {
-    "Version": "3.2.11",
+    "Version": "3.3.0",
     "Date": "2023-08-23",
     "ChangeGroups": [
       {
+        "Name": "Dashboard Customization",
+        "Changes": [
+          "You can now customize the layout of your dashboard.",
+          "Each dashboard section is proportionally sized to the window size and adapts to its own size.",
+          "Added more actions you can use to dashboard sections.",
+          "Added a 'Notifications' section to let you know about important events or issues.",
+          "Added an option to show column guides on the dashboard to easily snap to guided positions and sizes."
+        ]
+      },
+      {
         "Name": "Changes",
         "Changes": [
+          "Added a button to create a shortcut to the app on your desktop.",
           "Tweaked some colors of the default theme.",
-          "Fixed the enabled/disabled filter not working."
+          "Added an option in the Theme Changer to use Windows-styled top bar buttons."
+        ]
+      },
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed the compatibility report taking too long to be processed for some users.",
+          "Fixed a bug where switching playsets with missing items would only continue if the app went out of focus.",
+          "Fixed playsets taking longer then they should to apply.",
+          "Fixed the enabled/disabled filter not working.",
+          "Fixed being unable to share or update an online playset."
         ]
       }
     ]

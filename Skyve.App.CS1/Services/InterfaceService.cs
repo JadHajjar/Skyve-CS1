@@ -18,4 +18,9 @@ internal class InterfaceService : IInterfaceService
 	{
 		return new PC_Utilities();
 	}
+
+	public INotificationInfo GetLastVersionNotification()
+	{
+		return new LastVersionNotification();
+	}
 }

@@ -2,6 +2,7 @@
 
 using Skyve.Domain;
 using Skyve.Domain.CS1;
+using Skyve.Domain.CS1.Notifications;
 using Skyve.Domain.Systems;
 
 using System;
@@ -14,32 +15,71 @@ internal class UpdateManager : IUpdateManager
 {
 	private readonly Dictionary<string, DateTime> _previousPackages = new(new PathEqualityComparer());
 	private readonly INotifier _notifier;
+	private readonly INotificationsService _notificationsService;
+	private readonly IPackageManager _packageManager;
 
-	public UpdateManager(INotifier notifier)
+	public UpdateManager(INotifier notifier, INotificationsService notificationsService, IPackageManager packageManager)
 	{
 		_notifier = notifier;
+		_notificationsService = notificationsService;
+		_packageManager = packageManager;
 
-		ISave.Load(out List<KnownPackage> packages, "KnownPackages.json");
-
-		if (packages != null)
+		try
 		{
-			if (File.GetLastWriteTimeUtc(ISave.GetPath("KnownPackages.json")) < new DateTime(2023, 4, 15, 18, 0, 0, DateTimeKind.Utc))
-			{
-				CrossIO.DeleteFile(ISave.GetPath("KnownPackages.json"));
-				packages.Clear();
-			}
+			ISave.Load(out List<KnownPackage> packages, "LastPackages.json");
 
-			foreach (var package in packages)
+			if (packages != null)
 			{
-				if (package.Folder is not null or "")
+				foreach (var package in packages)
 				{
-					_previousPackages[package.Folder] = package.UpdateTime;
+					if (package.Folder is not null or "")
+					{
+						_previousPackages[package.Folder] = package.UpdateTime;
+					}
 				}
 			}
 		}
+		catch { }
 
-		_notifier.ContentLoaded += CentralManager_WorkshopInfoUpdated;
-		_notifier.WorkshopInfoUpdated += CentralManager_WorkshopInfoUpdated;
+		_notifier.ContentLoaded += _notifier_ContentLoaded;
+	}
+
+	public void SendUpdateNotifications()
+	{
+		if (IsFirstTime())
+			return;
+
+		var newPackages = new List<ILocalPackageWithContents>();
+		var updatedPackages = new List<ILocalPackageWithContents>();
+
+		foreach (var package in _packageManager.Packages)
+		{
+			var date = _previousPackages.TryGet(package.Folder);
+
+			if (date == default)
+			{
+				newPackages.Add(package);
+			}
+			else if (package.LocalTime > date)
+			{
+				updatedPackages.Add(package);
+			}
+		}
+
+		if (newPackages.Count > 0)
+		{
+			_notificationsService.SendNotification(new NewPackagesNotificationInfo(newPackages));
+		}
+
+		if (updatedPackages.Count > 0)
+		{
+			_notificationsService.SendNotification(new UpdatedPackagesNotificationInfo(updatedPackages));
+		}
+	}
+
+	private void _notifier_ContentLoaded()
+	{
+		ISave.Save(ServiceCenter.Get<IPackageManager>().Packages.Select(x => new KnownPackage(x)), "LastPackages.json");
 	}
 
 	public bool IsPackageKnown(ILocalPackage package)
@@ -52,18 +92,22 @@ internal class UpdateManager : IUpdateManager
 		return _previousPackages.TryGet(package.Folder);
 	}
 
-	private void CentralManager_WorkshopInfoUpdated()
-	{
-		ISave.Save(ServiceCenter.Get<IPackageManager>().Packages.Select(x => new KnownPackage(x)), "KnownPackages.json");
-	}
-
 	public bool IsFirstTime()
 	{
 		return _previousPackages.Count == 0;
 	}
 
-	public IEnumerable<ILocalPackage> GetNewPackages()
+	public IEnumerable<ILocalPackageWithContents> GetNewOrUpdatedPackages()
 	{
-		return new List<ILocalPackage>();
+		if (IsFirstTime())
+			yield break;
+
+		foreach (var package in _packageManager.Packages)
+		{
+			var date = _previousPackages.TryGet(package.Folder);
+
+			if (package.LocalTime > date)
+				yield return package;
+		}
 	}
 }

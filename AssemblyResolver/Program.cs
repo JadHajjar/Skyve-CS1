@@ -55,10 +55,7 @@ namespace AssemblyResolver
 			{
 				var assembly = Directory.GetFiles(folder, assemblyName, SearchOption.AllDirectories).FirstOrDefault();
 
-				if (File.Exists(assembly))
-				{
-					return Assembly.ReflectionOnlyLoadFrom(assembly);
-				}
+				return Assembly.ReflectionOnlyLoadFrom(assembly);
 			}
 
 			return null;
