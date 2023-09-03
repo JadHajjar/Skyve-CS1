@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using Skyve.Domain.Systems;
 using Skyve.Systems;
 
 using System;
@@ -12,25 +13,31 @@ using System.Threading.Tasks;
 namespace Skyve.Domain.CS1.Notifications;
 public class MultipleSkyvesNotification : INotificationInfo
 {
-    public DateTime Time { get; }
+	private readonly List<ILocalPackageWithContents> _skyveInstances;
+
+	public DateTime Time { get; }
     public string Title { get; }
     public string? Description { get; }
     public string Icon { get; }
     public Color? Color { get; }
     public bool HasAction { get; }
 
-    public MultipleSkyvesNotification()
+    public MultipleSkyvesNotification(List<ILocalPackageWithContents> skyveInstances)
     {
         Time = DateTime.Now;
         Title = Locale.MultipleSkyvesDetected;
         Description = Locale.MultipleLOM;
         Icon = "I_Hazard";
         Color = FormDesign.Design.RedColor;
-    }
+        HasAction = true;
+		_skyveInstances = skyveInstances;
+	}
 
     public void OnClick()
-    { }
+    {
+		ServiceCenter.Get<IInterfaceService>().ViewSpecificPackages(_skyveInstances, Title);
+	}
 
-    public void OnRightClick()
+	public void OnRightClick()
     { }
 }

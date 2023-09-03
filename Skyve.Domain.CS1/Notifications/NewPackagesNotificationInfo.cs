@@ -1,22 +1,25 @@
-﻿using Skyve.Systems;
+﻿using Skyve.Domain.Systems;
+using Skyve.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Skyve.Domain.CS1.Notifications;
 public class NewPackagesNotificationInfo : INotificationInfo
 {
 	public NewPackagesNotificationInfo(List<ILocalPackageWithContents> newPackages)
 	{
+		_packages = newPackages;
 		Time = newPackages.Max(x => x.LocalTime);
 		Title = Locale.NewPackages;
 		Description = Locale.NewPackagesSinceSession.FormatPlural(newPackages.Count, newPackages[0].CleanName());
 		Icon = "I_New";
+		HasAction = true;
 	}
+
+	private readonly List<ILocalPackageWithContents> _packages;
 
 	public DateTime Time { get; }
 	public string Title { get; }
@@ -27,6 +30,7 @@ public class NewPackagesNotificationInfo : INotificationInfo
 
 	public void OnClick()
 	{
+		ServiceCenter.Get<IInterfaceService>().ViewSpecificPackages(_packages, Title);
 	}
 
 	public void OnRightClick()

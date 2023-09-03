@@ -121,8 +121,14 @@ internal class ModLogicManager : IModLogicManager
 		return false;
 	}
 
-	public bool AreMultipleSkyvesPresent()
+	public bool AreMultipleSkyvesPresent(out List<ILocalPackageWithContents> skyveInstances)
 	{
-		return (_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.Count ?? 0) + (_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.Count ?? 0) > 1;
+		skyveInstances = new();
+
+		skyveInstances.AddRange(_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.ToList(x => x.LocalParentPackage) ?? new());
+		skyveInstances.AddRange(_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.ToList(x => x.LocalParentPackage) ?? new());
+		skyveInstances.AddRange(_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.ToList(x => x.LocalParentPackage) ?? new());
+
+		return skyveInstances.Count > 1;
 	}
 }
