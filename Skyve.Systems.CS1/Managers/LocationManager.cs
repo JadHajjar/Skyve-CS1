@@ -3,6 +3,7 @@
 using Microsoft.Win32;
 
 using Skyve.Domain;
+using Skyve.Domain.CS1.Notifications;
 using Skyve.Domain.Systems;
 
 using System;
@@ -89,7 +90,7 @@ internal class LocationManager : ILocationManager
 		Platform.Windows or _ => "Steam.exe",
 	};
 
-	public LocationManager(ILogger logger, ISettings settings)
+	public LocationManager(ILogger logger, ISettings settings, INotificationsService notificationsService)
 	{
 		_logger = logger;
 		_settings = settings;
@@ -107,6 +108,14 @@ internal class LocationManager : ILocationManager
 		SteamPath = _settings.FolderSettings.SteamPath?.FormatPath() ?? string.Empty;
 
 		SetCorrectPathSeparator();
+
+		if (_settings.SessionSettings.FirstTimeSetupCompleted)
+		{
+			if (!Directory.Exists(GamePath) || !Directory.Exists(AppDataPath) || !Directory.Exists(SteamPath))
+			{
+				notificationsService.SendNotification(new IncorrectLocationSettingsNotification());
+			}
+		}
 
 		_logger.Info("Folder Settings:\r\n" +
 			$"Platform: {CrossIO.CurrentPlatform}\r\n" +

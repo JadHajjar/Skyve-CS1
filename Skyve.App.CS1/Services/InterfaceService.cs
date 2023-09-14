@@ -29,4 +29,9 @@ internal class InterfaceService : IAppInterfaceService
 	{
 		App.Program.MainForm.PushPanel(new PC_ViewSpecificPackages(packages, title));
 	}
+
+	void IInterfaceService.OpenOptionsPage()
+	{
+		App.Program.MainForm.PushPanel<PC_Options>();
+	}
 }
