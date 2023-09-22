@@ -78,6 +78,8 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Playset.Asset(x));
 			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Playset.Mod(x));
 
+			_playsetManager.AddPlayset(generatedProfile);
+
 			return _playsetManager.Save(generatedProfile);
 		}
 		catch (Exception ex)

@@ -571,7 +571,7 @@ internal class PlaysetManager : IPlaysetManager
 					{
 						CrossIO.DeleteFile(playset);
 						_logger.Info($"Deleted the temporary playset '{playset}'");
-						return;
+						continue;
 					}
 
 					newPlayset.Name = Path.GetFileNameWithoutExtension(playset);
