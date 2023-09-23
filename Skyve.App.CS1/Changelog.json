@@ -1,7 +1,30 @@
 [
   {
+    "Version": "3.3.1",
+    "Date": "2023-09-04",
+    "ChangeGroups": [
+      {
+        "Name": "New & Improved",
+        "Changes": [
+          "Added a 'Required Item' compatibility notification. This marks a package that is excluded, but is required by another included package.",
+          "Added more filters, actions & sorting options to the Compatibility Report page. This includes a 'Snooze all displayed items' action.",
+          "Added a notification on your dashboard when your folder settings are not correct.",
+          "Changes made in any compatibility view now have an immediate response instead of a delayed response."
+        ]
+      },
+      {
+        "Name": "Fixes",
+        "Changes": [
+          "Fixed being unable to download a playset.",
+          "Fixed playsets not loading on the next session after importing a profile from a Log Report.",
+          "Fixed the app failing to start if your folder settings are not correctly filled."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.3.0",
-    "Date": "2023-08-23",
+    "Date": "2023-09-04",
     "ChangeGroups": [
       {
         "Name": "Dashboard Customization",

@@ -7,20 +7,17 @@ using Skyve.Domain.Systems;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Skyve.Systems.CS1.Managers;
 internal class UpdateManager : IUpdateManager
 {
 	private readonly Dictionary<string, DateTime> _previousPackages = new(new PathEqualityComparer());
-	private readonly INotifier _notifier;
 	private readonly INotificationsService _notificationsService;
 	private readonly IPackageManager _packageManager;
 
-	public UpdateManager(INotifier notifier, INotificationsService notificationsService, IPackageManager packageManager)
+	public UpdateManager(INotificationsService notificationsService, IPackageManager packageManager)
 	{
-		_notifier = notifier;
 		_notificationsService = notificationsService;
 		_packageManager = packageManager;
 
@@ -40,14 +37,14 @@ internal class UpdateManager : IUpdateManager
 			}
 		}
 		catch { }
-
-		_notifier.ContentLoaded += _notifier_ContentLoaded;
 	}
 
 	public void SendUpdateNotifications()
 	{
 		if (IsFirstTime())
+		{
 			return;
+		}
 
 		var newPackages = new List<ILocalPackageWithContents>();
 		var updatedPackages = new List<ILocalPackageWithContents>();
@@ -75,10 +72,7 @@ internal class UpdateManager : IUpdateManager
 		{
 			_notificationsService.SendNotification(new UpdatedPackagesNotificationInfo(updatedPackages));
 		}
-	}
 
-	private void _notifier_ContentLoaded()
-	{
 		ISave.Save(ServiceCenter.Get<IPackageManager>().Packages.Select(x => new KnownPackage(x)), "LastPackages.json");
 	}
 
@@ -100,14 +94,18 @@ internal class UpdateManager : IUpdateManager
 	public IEnumerable<ILocalPackageWithContents> GetNewOrUpdatedPackages()
 	{
 		if (IsFirstTime())
+		{
 			yield break;
+		}
 
 		foreach (var package in _packageManager.Packages)
 		{
 			var date = _previousPackages.TryGet(package.Folder);
 
 			if (package.LocalTime > date)
+			{
 				yield return package;
+			}
 		}
 	}
 }

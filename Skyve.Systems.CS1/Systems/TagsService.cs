@@ -68,6 +68,21 @@ internal class TagsService : ITagsService
 			}
 		}
 
+		if (findItTags is not null)
+		{
+			foreach (var tag in findItTags.assetTags)
+			{
+				if (!_customTagsDictionary.ContainsKey(tag.Key))
+				{
+					_customTagsDictionary[tag.Key] = tag.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+				}
+				else
+				{
+					_customTagsDictionary[tag.Key] = _customTagsDictionary[tag.Key].Concat(tag.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)).Distinct().ToArray();
+				}
+			}
+		}
+
 		_notifier.WorkshopInfoUpdated += UpdateWorkshopTags;
 		_notifier.ContentLoaded += GenerateCache;
 

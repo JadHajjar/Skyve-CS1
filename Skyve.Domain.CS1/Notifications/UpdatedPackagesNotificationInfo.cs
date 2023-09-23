@@ -1,23 +1,25 @@
-﻿using Skyve.Domain.Enums;
+﻿using Skyve.Domain.Systems;
 using Skyve.Systems;
 
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Skyve.Domain.CS1.Notifications;
 public class UpdatedPackagesNotificationInfo : INotificationInfo
 {
 	public UpdatedPackagesNotificationInfo(List<ILocalPackageWithContents> updatedPackages)
 	{
+		_packages = updatedPackages;
 		Time = updatedPackages.Max(x => x.LocalTime);
 		Title = Locale.PackageUpdates;
 		Description = Locale.PackagesUpdatedSinceSession.FormatPlural(updatedPackages.Count, updatedPackages[0].CleanName());
 		Icon = "I_ReDownload";
+		HasAction = true;
 	}
+
+	private readonly List<ILocalPackageWithContents> _packages;
 
 	public DateTime Time { get; }
 	public string Title { get; }
@@ -28,6 +30,7 @@ public class UpdatedPackagesNotificationInfo : INotificationInfo
 
 	public void OnClick()
 	{
+		ServiceCenter.Get<IInterfaceService>().ViewSpecificPackages(_packages, Title);
 	}
 
 	public void OnRightClick()

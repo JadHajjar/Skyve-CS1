@@ -64,7 +64,7 @@ internal class D_Playsets : IDashboardItem
 
 	private void ViewPlaysetSettings()
 	{
-		App.Program.MainForm.PushPanel(ServiceCenter.Get<IInterfaceService>().PlaysetSettingsPanel());
+		App.Program.MainForm.PushPanel(ServiceCenter.Get<IAppInterfaceService>().PlaysetSettingsPanel());
 	}
 
 	protected override DrawingDelegate GetDrawingMethod(int width)
@@ -166,6 +166,7 @@ internal class D_Playsets : IDashboardItem
 
 		if (favs.Count == 0)
 		{
+			preferredHeight -= Margin.Top;
 			return;
 		}
 

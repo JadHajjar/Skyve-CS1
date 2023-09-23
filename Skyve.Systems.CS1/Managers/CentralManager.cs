@@ -34,8 +34,9 @@ internal class CentralManager : ICentralManager
 	private readonly IVersionUpdateService _versionUpdateService;
 	private readonly INotificationsService _notificationsService;
 	private readonly IUpdateManager _updateManager;
+	private readonly IAssetUtil _assetUtil;
 
-	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService, INotificationsService notificationsService, IUpdateManager updateManager)
+	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService, INotificationsService notificationsService, IUpdateManager updateManager, IAssetUtil assetUtil)
 	{
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
@@ -54,6 +55,7 @@ internal class CentralManager : ICentralManager
 		_versionUpdateService = versionUpdateService;
 		_notificationsService = notificationsService;
 		_updateManager = updateManager;
+		_assetUtil = assetUtil;
 	}
 
 	public void Start()
@@ -98,9 +100,9 @@ internal class CentralManager : ICentralManager
 
 		_notifier.OnContentLoaded();
 
-		if (_modLogicManager.AreMultipleSkyvesPresent())
+		if (_modLogicManager.AreMultipleSkyvesPresent(out var skyveInstances))
 		{
-			_notificationsService.SendNotification(new MultipleSkyvesNotification());
+			_notificationsService.SendNotification(new MultipleSkyvesNotification(skyveInstances));
 		}
 
 		_subscriptionManager.Start();
@@ -200,6 +202,9 @@ internal class CentralManager : ICentralManager
 	private void AnalyzePackages(List<ILocalPackageWithContents> content)
 	{
 		var blackList = new List<ILocalPackageWithContents>();
+		var firstTime = _updateManager.IsFirstTime();
+
+		_notifier.BulkUpdating = true;
 
 		foreach (var package in content)
 		{
@@ -225,8 +230,17 @@ internal class CentralManager : ICentralManager
 				}
 
 				_modLogicManager.Analyze(package.Mod, _modUtil);
+
+				if (!firstTime && !_updateManager.IsPackageKnown(package))
+				{
+					_modUtil.SetEnabled(package.Mod, _modUtil.IsIncluded(package.Mod));
+				}
 			}
 		}
+
+		_notifier.BulkUpdating = false;
+		_modUtil.SaveChanges();
+		_assetUtil.SaveChanges();
 
 		content.RemoveAll(x => blackList.Contains(x));
 

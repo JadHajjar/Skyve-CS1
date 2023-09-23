@@ -40,6 +40,7 @@ internal static class Program
 		services.AddCs1SkyveSystems();
 
 		services.AddSingleton<IInterfaceService, InterfaceService>();
+		services.AddSingleton<IAppInterfaceService, InterfaceService>();
 		services.AddSingleton<ICustomPackageService, CustomPackageService>();
 
 		return services.BuildServiceProvider();
