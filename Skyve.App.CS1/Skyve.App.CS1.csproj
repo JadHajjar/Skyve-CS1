@@ -1,0 +1,147 @@
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+	<Import Project="../../Skyve-CS1/Version.props" />
+	<Import Project="../../Skyve/Config.props" />
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<Description>Helps to manage your mods and assets</Description>
+		<Configurations>Debug;Release;Stable</Configurations>
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<Nullable>enable</Nullable>
+		<DefineConstants>$(DefineConstants);SkyveApp;CS1</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Deterministic>false</Deterministic>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net4.7.2</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
+		<StartupObject>Skyve.App.CS1.Program</StartupObject>
+		<ApplicationIcon>Resources\Skyve.ico</ApplicationIcon>
+		<SignAssembly>True</SignAssembly>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Title>Skyve</Title>
+		<AssemblyName>SkyveApp</AssemblyName>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Remove="Properties\*.json" />
+		<None Remove="Properties\*\*.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Properties\*.json" />
+		<EmbeddedResource Include="Properties\*\*.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Costura.Fody" Version="5.7.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="Mono.Cecil" Version="0.11.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\..\SlickControls\SlickControls.csproj" />
+		<ProjectReference Include="..\..\Skyve\Skyve.Domain\Skyve.Domain.csproj" />
+		<ProjectReference Include="..\..\Skyve\Skyve.Systems\Skyve.Systems.csproj" />
+		<ProjectReference Include="..\..\Skyve\Skyve.App\Skyve.App.csproj" />
+		<ProjectReference Include="..\..\Skyve-CS1\Skyve.Domain.CS1\Skyve.Domain.CS1.csproj" />
+		<ProjectReference Include="..\..\Skyve-CS1\Skyve.Systems.CS1\Skyve.Systems.CS1.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.Configuration" />
+		<Reference Include="System.IO.Compression" />
+		<Reference Include="System.Management" />
+		<Reference Include="System.Net" />
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Dashboard\D_Playsets.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="UserInterface\Panels\PC_SkyveChangeLog.cs" />
+		<Compile Update="UserInterface\Panels\PC_Utilities.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Resources\Skyve.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Changelog.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Resources\mono-debug._dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<DeployDir>$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\App\</DeployDir>
+		<WorkshopId>2953447919</WorkshopId>
+		<WorkshopDir>C:\Program Files (x86)\Steam\steamapps\workshop\content\255710\$(WorkshopId)</WorkshopDir>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' != 'Stable'">
+		<ZipFile>$(DeployDir)/../../SkyveMod Beta.zip</ZipFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
+		<ZipFile>$(DeployDir)/../../SkyveMod.zip</ZipFile>
+	</PropertyGroup>
+
+	<Target Name="DeployToModDirectory" AfterTargets="Build">
+		<GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+			<Output TaskParameter="Assemblies" ItemName="Targets" />
+		</GetAssemblyIdentity>
+		<Message Importance="high" Text="$(SolutionName)" />
+		<Copy SourceFiles="..\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
+		<Copy SourceFiles="$(OutDir)\SkyveApp.exe" DestinationFiles="$(DeployDir)\Skyve.exe" />
+		<Copy SourceFiles="$(OutDir)\SkyveApp.exe.config" DestinationFiles="$(DeployDir)\Skyve.exe.config" />
+		<Copy SourceFiles="$(OutDir)\Resources\mono-debug._dll" DestinationFiles="$(DeployDir)\mono-debug._dll" />
+	</Target>
+
+	<Target Name="ZipTool" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' == 'Debug'">
+		<Delete Files="$(ZipFile)" />
+		<ZipDirectory SourceDirectory="$(DeployDir)" DestinationFile="$(ZipFile)" />
+	</Target>
+
+	<Target Name="DeployToWorkshop" AfterTargets="DeployToModDirectory" Condition="'$(Configuration)' != 'Debug'">
+		<Message Text="Deploy to workshop $(WorkshopDir)" Importance="high" />
+		<ItemGroup>
+			<FilesToDelete Include="$(WorkshopDir)\**\*.*" />
+			<FilesToCopy Include="$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\**\*.*" />
+		</ItemGroup>
+		<Delete Files="$(FilesToDelete)" />
+		<RemoveDir Directories="$(WorkshopDir)\App" />
+		<Copy SourceFiles="@(FilesToCopy)" DestinationFiles="@(FilesToCopy->'$(WorkshopDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Delete Files="$(ZipFile)" />
+		<ZipDirectory SourceDirectory="$(WorkshopDir)" DestinationFile="$(ZipFile)" />
+		<RemoveDir Directories="$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)" />
+	</Target>
+
+</Project>

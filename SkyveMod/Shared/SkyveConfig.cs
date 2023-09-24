@@ -153,7 +153,7 @@ public class SkyveConfig
 		SharedUtil.Serialize(this, FilePath);
 	}
 
-	public static SkyveConfig Deserialize()
+	public static SkyveConfig? Deserialize()
 	{
 		try
 		{

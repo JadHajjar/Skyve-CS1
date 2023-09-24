@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
+	<Import Project="../../Skyve/Config.props" />
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<Description>Helps to manage your mods and assets</Description>
+		<Configurations>Debug;Release;Stable</Configurations>
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<Nullable>enable</Nullable>
+		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Deterministic>false</Deterministic>
+		<TargetFramework>net4.7.2</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
+		<SignAssembly>True</SignAssembly>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="ColossalOrder\GameSettings.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="ColossalOrder\GameSettings.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="System.Windows.Forms" />
+		<ProjectReference Include="..\..\Extensions\Extensions\Extensions.csproj" />
+		<ProjectReference Include="..\..\Skyve\Skyve.Domain\Skyve.Domain.csproj" />
+		<ProjectReference Include="..\..\Skyve\Skyve.Systems\Skyve.Systems.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\SkyveMod\Shared\SkyveConfig.cs" Link="Shared\SkyveConfig.cs" />
+		<Compile Include="..\SkyveMod\Shared\AssetInfoCache.cs" Link="Shared\AssetInfoCache.cs" />
+		<Compile Include="..\SkyveMod\Shared\SharedUtil.cs" Link="Shared\SharedUtil.cs" />
+		<Compile Include="..\SkyveMod\Shared\UGCListTransfer.cs" Link="Shared\UGCListTransfer.cs" />
+		<Compile Include="..\SkyveMod\Shared\BlackListTransfer.cs" Link="Shared\BlackListTransfer.cs" />
+	</ItemGroup>
+</Project>

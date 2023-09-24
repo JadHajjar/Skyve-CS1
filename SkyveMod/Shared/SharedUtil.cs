@@ -3,9 +3,8 @@ using System.Xml;
 using System.Xml.Serialization;
 
 #if SkyveApp
-using SkyveApp;
-using SkyveApp.Domain;
-using SkyveApp.Domain.Systems;
+using Skyve.Domain;
+using Skyve.Domain.Systems;
 #endif
 
 namespace SkyveShared;

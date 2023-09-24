@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="../Version.props" />
+	<Import Project="../../Skyve/Config.props" />
 	<PropertyGroup>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<TargetFramework>net35</TargetFramework>
