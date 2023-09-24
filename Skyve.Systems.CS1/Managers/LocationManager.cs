@@ -214,6 +214,8 @@ internal class LocationManager : ILocationManager
 
 			SetCorrectPathSeparator();
 
+			Directory.CreateDirectory(SkyveAppDataPath);
+
 			if (File.Exists(CrossIO.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(CrossIO.Combine(SkyveAppDataPath, "SkyveConfig.xml")))
 			{
 				CrossIO.CopyFile(CrossIO.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), CrossIO.Combine(SkyveAppDataPath, "SkyveConfig.xml"), true);

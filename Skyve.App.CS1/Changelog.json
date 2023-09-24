@@ -1,7 +1,7 @@
 [
   {
     "Version": "3.3.1",
-    "Date": "2023-09-04",
+    "Date": "2023-09-24",
     "ChangeGroups": [
       {
         "Name": "New & Improved",
@@ -16,7 +16,7 @@
         "Name": "Fixes",
         "Changes": [
           "Fixed being unable to download a playset.",
-          "Fixed playsets not loading on the next session after importing a profile from a Log Report.",
+          "Fixed playsets not loading on the next session after importing a playset from a Log Report.",
           "Fixed the app failing to start if your folder settings are not correctly filled."
         ]
       }
