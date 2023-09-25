@@ -232,7 +232,7 @@
   "Fixed downloading or updating a profile not properly saving some data like the thumbnail.": "Fixed downloading or updating a profile not properly saving some data like the thumbnail.",
   "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors.": "You can now import a Log Report file in the 'Help & Logs' page to quickly view its errors.",
   "Implemented a new icon system that scales all of the icons appropriately to your UI scale.": "Implemented a new icon system that scales all of the icons appropriately to your UI scale.",
-  "Fixed playsets not loading on the next session after importing a profile from a Log Report.": "Fixed playsets not loading on the next session after importing a profile from a Log Report.",
+  "Fixed playsets not loading on the next session after importing a playset from a Log Report.": "Fixed playsets not loading on the next session after importing a playset from a Log Report.",
   "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.": "Added the search, filter & sorting tools to lists in authors' page & in the packages' page.",
   "Steam links will now open inside of Steam's window. This can be toggled off in the Options.": "Steam links will now open inside of Steam's window. This can be toggled off in the Options.",
   "Each dashboard section is proportionally sized to the window size and adapts to its own size.": "Each dashboard section is proportionally sized to the window size and adapts to its own size.",
