@@ -286,7 +286,7 @@
   "Mod & Asset creators can now edit their packages' Compatibility Data; just right-click the package and select 'Edit Compatibility'.": "新增：现在，模组和资产作者可以编辑他们制作的插件的兼容性信息，只需要右键点击插件并选择“编辑兼容性信息”。",
   "Added more filters, actions & sorting options to the Compatibility Report page. This includes a 'Snooze all displayed items' action.": "新增：“兼容性报告”页面新增了更多筛选、操作和排序选项。其中包括“关闭当前显示的所有问题的提醒”。",
   "Having a custom location for LSMR report files will now correctly start from there when selecting a report file in the Utilities page.": "修复：现在，即使您为 LSMR 资产报告设置了自定义存储路径，在“实用工具”页面里选择 Loading Screen Mod Revisited 资产报告文件时，Skyve 也能正确打开对应文件夹。",
-  "Added a 'Required Item' compatibility notification. This marks a package that is excluded, but is required by another included package.": "Added a 'Required Item' compatibility notification. This marks a package that is excluded, but is required by another included package.",
+  "Added a 'Required Item' compatibility notification. This marks a package that is excluded, but is required by another included package.": "新增：“前置项目”兼容性提醒。这表示该插件已被卸下，但它是另一个已装载的插件的前置。",
   "Newly subscribed items are no longer reloaded while the game is open.\r\nDoing so prevents freezes of your game as well as mods malfunctioning.": "新增：在游戏运行时，Skyve 会禁止新订阅的物品装载到游戏内。\n这种做法可以防止游戏卡死或模组出错。",
   "Added a compact-view option for all content pages; toggle between compact, list & grid view using the new icons on the top right of the list.": "新增：在所有内容页面中，新增了一个“紧凑视图”选项； 使用内容列表右上角的新图标，即可切换紧凑/列表/网格视图。",
   "Launching the game while LOT is open will automatically delete any packages that you are not subscribed to, but is downloaded on your computer.": "新增：在 LOT2 运行期间启动游戏时，会自动删除您已经取消订阅（但没删除干净）的插件。",
