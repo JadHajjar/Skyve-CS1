@@ -128,7 +128,10 @@ internal static class Program
 				}
 			}
 
-			Application.Run(SystemsProgram.MainForm = App.Program.MainForm = new MainForm());
+			Application.Run(SystemsProgram.MainForm = App.Program.MainForm = new MainForm()
+			{
+				Icon = Properties.Resources.Skyve
+			});
 		}
 		catch (Exception ex)
 		{

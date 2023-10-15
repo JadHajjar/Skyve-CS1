@@ -1,10 +1,10 @@
 <Project>
 	<PropertyGroup Condition="'$(Configuration)' == 'Stable'">
-		<AssemblyVersion>3.3.1</AssemblyVersion>
+		<AssemblyVersion>3.3.2</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' != 'Stable'">
-		<AssemblyVersion>3.3.1</AssemblyVersion>
+		<AssemblyVersion>3.3.2</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>

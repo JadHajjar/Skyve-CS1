@@ -1,5 +1,26 @@
 [
   {
+    "Version": "3.3.2",
+    "Date": "2023-10-16",
+    "ChangeGroups": [
+      {
+        "Name": "Moving forward for C:S II",
+        "Changes": [
+          "Reworked the Skyve icon for C:S I to differentiate it from the C:S II one.",
+          "Skyve updates that come for its C:S II counterpart should, in theory, also come for the C:S I app."
+        ]
+      },
+      {
+        "Name": "Changes",
+        "Changes": [
+          "Added sub-items in the sidebar to the Playset and Compatibility Management tabs.",
+          "Added new stability information to mods to inform you whether the mod will receive new updates in the future, only bug-fix updates, or none.",
+          "Fixed a scenario where opening the game showed no mods and assets."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.3.1",
     "Date": "2023-09-24",
     "ChangeGroups": [
