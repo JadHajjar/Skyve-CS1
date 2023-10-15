@@ -495,7 +495,7 @@ public static class CMPatchHelpers
 		return
 			path.IsNullOrWhiteSpace() ||
 			path[0] == '_' ||
-			(workshopId > 0 && ((!subscribedItems.Contains(workshopId) && !(subscriptionTransfer.SubscribeTo?.Contains(workshopId) ?? false)) ||
+			(workshopId > 0 && subscribedItems.Count > 0 && ((!subscribedItems.Contains(workshopId) && !(subscriptionTransfer.SubscribeTo?.Contains(workshopId) ?? false)) ||
 			(subscriptionTransfer.UnsubscribingFrom?.Contains(workshopId) ?? false))) ||
 			(modConfig.TryGetValue(path, out var info) && info.Excluded);
 	}

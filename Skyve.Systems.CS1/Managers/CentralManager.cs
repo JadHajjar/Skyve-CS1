@@ -19,7 +19,7 @@ internal class CentralManager : ICentralManager
 {
 	private readonly IModLogicManager _modLogicManager;
 	private readonly ICompatibilityManager _compatibilityManager;
-	private readonly IPlaysetManager _profileManager;
+	private readonly IPlaysetManager _playsetManager;
 	private readonly ICitiesManager _citiesManager;
 	private readonly ILocationManager _locationManager;
 	private readonly ISubscriptionsManager _subscriptionManager;
@@ -40,7 +40,7 @@ internal class CentralManager : ICentralManager
 	{
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
-		_profileManager = profileManager;
+		_playsetManager = profileManager;
 		_citiesManager = citiesManager;
 		_locationManager = locationManager;
 		_subscriptionManager = subscriptionManager;
@@ -107,10 +107,10 @@ internal class CentralManager : ICentralManager
 
 		_subscriptionManager.Start();
 
-		if (CommandUtil.PreSelectedProfile == _profileManager.CurrentPlayset.Name)
+		if (CommandUtil.PreSelectedProfile == _playsetManager.CurrentPlayset.Name)
 		{
-			_logger.Info($"[Command] Applying Playset ({_profileManager.CurrentPlayset.Name})..");
-			_profileManager.SetCurrentPlayset(_profileManager.CurrentPlayset);
+			_logger.Info($"[Command] Applying Playset ({_playsetManager.CurrentPlayset.Name})..");
+			_playsetManager.SetCurrentPlayset(_playsetManager.CurrentPlayset);
 		}
 
 		_colossalOrderUtil.Start();
@@ -189,6 +189,8 @@ internal class CentralManager : ICentralManager
 			_locationManager.CreateShortcut();
 		}
 
+		_playsetManager.RunFirstTimeSetup();
+
 		_settings.SessionSettings.FirstTimeSetupCompleted = true;
 		_settings.SessionSettings.Save();
 
@@ -218,7 +220,7 @@ internal class CentralManager : ICentralManager
 			{
 				if (!_settings.UserSettings.AdvancedIncludeEnable)
 				{
-					if (!_modUtil.IsEnabled(package.Mod) && _modUtil.IsIncluded(package.Mod))
+					if (!firstTime && !_modUtil.IsEnabled(package.Mod) && _modUtil.IsIncluded(package.Mod))
 					{
 						_modUtil.SetIncluded(package.Mod, false);
 					}

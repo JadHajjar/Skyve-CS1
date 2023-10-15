@@ -5,12 +5,16 @@ using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility;
 using Skyve.Systems.CS1.Utilities;
 
+using System;
+
 namespace Skyve.Systems.CS1.Systems;
 internal class UserService : IUserService
 {
 	private KnownUser _user;
 
 	public IKnownUser User => _user;
+
+	public event Action? UserInfoUpdated;
 
 	public UserService()
 	{
@@ -22,6 +26,11 @@ internal class UserService : IUserService
 	private async void RefreshUserState()
 	{
 		var steamId = SteamUtil.GetLoggedInSteamId();
+
+		if (_user.Id?.Equals(steamId) ?? false)
+		{
+			return;
+		}
 
 		if (steamId == 0)
 		{
@@ -58,6 +67,8 @@ internal class UserService : IUserService
 		{
 			_user.Manager = false;
 		}
+
+		UserInfoUpdated?.Invoke();
 	}
 
 	private class KnownUser : IKnownUser

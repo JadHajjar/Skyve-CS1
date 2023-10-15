@@ -111,7 +111,7 @@ internal class LocationManager : ILocationManager
 
 		if (_settings.SessionSettings.FirstTimeSetupCompleted)
 		{
-			if (!Directory.Exists(GamePath) || !Directory.Exists(AppDataPath) || !Directory.Exists(SteamPath))
+			if (!CrossIO.FileExists(CitiesPathWithExe) || !Directory.Exists(AppDataPath) || (!string.IsNullOrEmpty(SteamPath) && !CrossIO.FileExists(SteamPathWithExe)))
 			{
 				notificationsService.SendNotification(new IncorrectLocationSettingsNotification());
 			}
@@ -213,6 +213,8 @@ internal class LocationManager : ILocationManager
 			externalConfig.Save();
 
 			SetCorrectPathSeparator();
+
+			Directory.CreateDirectory(SkyveAppDataPath);
 
 			if (File.Exists(CrossIO.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(CrossIO.Combine(SkyveAppDataPath, "SkyveConfig.xml")))
 			{

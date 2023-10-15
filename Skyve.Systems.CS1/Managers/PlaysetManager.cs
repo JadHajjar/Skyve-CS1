@@ -104,7 +104,7 @@ internal class PlaysetManager : IPlaysetManager
 			};
 		}
 
-		if (!CommandUtil.NoWindow)
+		if (!CommandUtil.NoWindow && settings.SessionSettings.FirstTimeSetupCompleted)
 		{
 			new BackgroundAction(ConvertLegacyPlaysets).Run();
 			new BackgroundAction(LoadAllPlaysets).Run();
@@ -148,6 +148,14 @@ internal class PlaysetManager : IPlaysetManager
 		}
 
 		return null;
+	}
+
+	public void RunFirstTimeSetup()
+	{
+		Directory.CreateDirectory(_locationManager.SkyvePlaysetsAppDataPath);
+
+		new BackgroundAction(ConvertLegacyPlaysets).Run();
+		new BackgroundAction(LoadAllPlaysets).Run();
 	}
 
 	public void ConvertLegacyPlaysets()

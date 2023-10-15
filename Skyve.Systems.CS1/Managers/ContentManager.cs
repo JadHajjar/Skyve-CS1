@@ -49,10 +49,14 @@ internal class ContentManager : IContentManager
 		}
 
 		_logger.Info($"Looking for packages in: '{_locationManager.WorkshopContentPath}'");
+
 		foreach (var path in Directory.EnumerateDirectories(_locationManager.WorkshopContentPath))
 		{
 			if (!ulong.TryParse(Path.GetFileName(path), out _))
 			{
+#if DEBUG
+				_logger.Debug("Skipping invalid workshop folder: " + path);
+#endif
 				continue;
 			}
 
