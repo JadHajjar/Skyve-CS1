@@ -97,6 +97,11 @@ internal class LogUtil : ILogUtil
 		yield return GetLastCrashLog();
 		yield return GetLastLSMReport();
 
+		if (!Directory.Exists(GameDataPath))
+		{
+			yield break;
+		}
+
 		foreach (var item in new DirectoryInfo(CrossIO.Combine(GameDataPath, "Logs")).GetFiles("*.log"))
 		{
 			if (DateTime.Now - item.LastWriteTime < TimeSpan.FromDays(1))

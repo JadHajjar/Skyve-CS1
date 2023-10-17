@@ -120,12 +120,6 @@
 		<None Update="Resources\clipboard.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="Resources\PreviewImage.png">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Resources\PreviewImageBeta.png">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="Resources\Status.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
@@ -154,7 +148,8 @@
 
 		<Copy SourceFiles="@(AuxiliaryFiles)" DestinationFolder="$(DeployDir)" />
 		<Copy SourceFiles="@(ResourceFiles)" DestinationFolder="$(DeployDir)Resources" />
-		<Move SourceFiles="$(DeployDir)Resources/PreviewImage.png" DestinationFolder="$(DeployDir)" />
+		<Copy Condition="'$(Configuration)' == 'Stable'" SourceFiles="Resources/PreviewImage.png" DestinationFiles="$(DeployDir)/PreviewImage.png" />
+		<Copy Condition="'$(Configuration)' != 'Stable'" SourceFiles="Resources/PreviewImageBeta.png" DestinationFiles="$(DeployDir)/PreviewImage.png" />
 		<Delete Files="$(DeployDir)$(TargetFileName)" />
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
 		<Message Importance="high" Text="AssemblyVersion=@(VersionNumber) time=$(Now)" />
