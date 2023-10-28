@@ -99,7 +99,7 @@
   "Fixed the language option being empty for some people.": "言語オプションが一部のユーザーで空欄になる問題を修正",
   "Improved the responsiveness of the content list pages.": "コンテンツリストでページの応答性を改善",
   "Fixed updating an online profile not working properly.": "オンラインのプレイセットの更新が正しく動作しない問題を修正",
-  "Fixed the subscription and download popups now showing.": "Fixed the subscription and download popups now showing.",
+  "Fixed the subscription and download popups now showing.": "サブスク処理とダウンロードのポップアップが表示される問題を修正",
   "Fixed playsets taking longer then they should to apply.": "プレイセットの適用時に必要以上に時間がかかる問題を修正",
   "Ctrl+Click on an author's name to add it to your filter": "作者名をCtrl+クリックして、直接フィルタへ追加出来るように改善",
   "Added Pinned folders to easily access relevant folders.": "関連するフォルダに簡単にアクセスできるフォルダのピン留め機能を追加",
