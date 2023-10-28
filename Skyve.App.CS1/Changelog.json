@@ -1,7 +1,19 @@
 [
   {
+    "Version": "3.3.2.1",
+    "Date": "2023-10-28",
+    "ChangeGroups": [
+      {
+        "Name": "Hotfix",
+        "Changes": [
+          "Fixed the subscription and download popups now showing."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.3.2",
-    "Date": "2023-10-16",
+    "Date": "2023-10-17",
     "ChangeGroups": [
       {
         "Name": "Moving forward for C:S II",
