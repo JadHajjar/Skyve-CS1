@@ -912,9 +912,14 @@ internal class PlaysetManager : IPlaysetManager
 			_watcher.EnableRaisingEvents = false;
 		}
 
-		var newPath = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, Path.GetFileName(obj));
+		var newPath = obj;
 
-		File.Move(obj, newPath);
+		if (Directory.Exists(_locationManager.SkyvePlaysetsAppDataPath))
+		{
+			newPath = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, Path.GetFileName(obj));
+
+			File.Move(obj, newPath);
+		}
 
 		if (_watcher is not null)
 		{
