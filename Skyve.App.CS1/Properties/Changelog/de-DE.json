@@ -151,7 +151,7 @@
   "Fixed a scenario where opening the game showed no mods and assets.": "Es wurde ein Szenario behoben, bei dem beim Öffnen des Spiels keine Mods und Gegenstände angezeigt wurden.",
   "Greatly improved the processing speed of the Compatibility Report.": "Die Verarbeitungsgeschwindigkeit des Kompatibilitätsberichts wurde deutlich verbessert.",
   "Added an option to have Filters & Action sections open by default.": "Option hinzugefügt, um Filter & Aktionen standardmäßig geöffnet zu lassen.",
-  "Adding an info popup when subscribing to items for the first time.": "Hinzufügen eines Info-Popups, wenn man einen Gegenstand zum ersten Mal abonniert.",
+  "Adding an info popup when subscribing to items for the first time.": "Hinzufügen eines Info-Popups, wenn man etwas zum ersten Mal abonniert.",
   "Changed the design of the top action buttons on both profile pages": "Design der obersten Aktionsknöpfe auf beiden Profilseiten geändert",
   "Fixed Asset Editor launch settings not being remembered correctly.": "Fehler behoben, dass Asset Editor Starteinstellungen nicht korrekt gespeichert werden.",
   "Recommendations and info text are now clearer and easier to manage.": "Empfehlungen und Infotext sind jetzt klarer und einfacher zu handhaben.",
