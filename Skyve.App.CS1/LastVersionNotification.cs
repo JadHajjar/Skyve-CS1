@@ -8,8 +8,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-
 namespace Skyve.App.CS1;
 internal class LastVersionNotification : INotificationInfo
 {

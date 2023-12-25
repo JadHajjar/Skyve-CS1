@@ -22,7 +22,7 @@ namespace Skyve.Systems.CS1.Managers;
 internal class CitiesManager : ICitiesManager
 {
 	private readonly ILogger _logger;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly IPlaysetManager _profileManager;
 	private readonly IPackageManager _contentManager;
 	private readonly IModUtil _modUtil;
@@ -34,7 +34,7 @@ internal class CitiesManager : ICitiesManager
 
 	public event Action<bool>? LaunchingStatusChanged;
 
-	public CitiesManager(ILogger logger, ILocationManager locationManager, IPlaysetManager profileManager, ISettings settings, IPackageManager contentManager, IIOUtil iOUtil, IModUtil modUtil, ColossalOrderUtil colossalOrderUtil)
+	public CitiesManager(ILogger logger, ILocationService locationManager, IPlaysetManager profileManager, ISettings settings, IPackageManager contentManager, IIOUtil iOUtil, IModUtil modUtil, ColossalOrderUtil colossalOrderUtil)
 	{
 		_logger = logger;
 		_locationManager = locationManager;

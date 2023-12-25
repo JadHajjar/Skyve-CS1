@@ -13,7 +13,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 	private readonly SlickCheckbox[] _launchOptions;
 
 	private readonly IPlaysetManager _playsetManager;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly IPackageManager _packageManager;
 	private readonly ISettings _settings;
 	private readonly IBulkUtil _bulkUtil;

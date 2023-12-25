@@ -1,14 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
-	<Import Project="../../Skyve-CS1/Version.props" />
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
 	<Import Project="../../Skyve/Config.props" />
+	<Import Project="../../Skyve/CS1-Version.props" />
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<Description>Helps to manage your mods and assets</Description>
-		<Configurations>Debug;Release;Stable</Configurations>
 		<DebugType>embedded</DebugType>
 		<DebugSymbols>true</DebugSymbols>
 		<Nullable>enable</Nullable>
-		<DefineConstants>$(DefineConstants);SkyveApp;CS1</DefineConstants>
+		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Deterministic>false</Deterministic>
@@ -64,6 +63,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="MainForm.cs">
+		  <SubType>Form</SubType>
+		</Compile>
 		<Compile Update="Properties\Resources.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
@@ -72,9 +74,7 @@
 		<Compile Update="UserInterface\Dashboard\D_Playsets.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
-		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs">
-		  <SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs" />
 		<Compile Update="UserInterface\Panels\PC_SkyveChangeLog.cs" />
 		<Compile Update="UserInterface\Panels\PC_Utilities.cs" />
 	</ItemGroup>
@@ -115,7 +115,7 @@
 			<Output TaskParameter="Assemblies" ItemName="Targets" />
 		</GetAssemblyIdentity>
 		<Message Importance="high" Text="$(SolutionName)" />
-		<Copy SourceFiles="..\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
+		<Copy SourceFiles="..\..\Skyve\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
 		<Copy SourceFiles="$(OutDir)\Skyve.App.CS1.exe" DestinationFiles="$(DeployDir)\Skyve.exe" />
 		<Copy SourceFiles="$(OutDir)\Skyve.App.CS1.exe.config" DestinationFiles="$(DeployDir)\Skyve.exe.config" />
 		<Copy SourceFiles="$(OutDir)\Resources\mono-debug._dll" DestinationFiles="$(DeployDir)\mono-debug._dll" />

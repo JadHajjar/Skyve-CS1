@@ -145,12 +145,12 @@ public static class SteamUtil
 
 	public static bool IsSteamAvailable()
 	{
-		return CrossIO.FileExists(ServiceCenter.Get<ILocationManager>().SteamPathWithExe);
+		return CrossIO.FileExists(ServiceCenter.Get<ILocationService>().SteamPathWithExe);
 	}
 
 	public static void ExecuteSteam(string args)
 	{
-		var file = ServiceCenter.Get<ILocationManager>().SteamPathWithExe;
+		var file = ServiceCenter.Get<ILocationService>().SteamPathWithExe;
 
 		if (CrossIO.CurrentPlatform is Platform.Windows)
 		{

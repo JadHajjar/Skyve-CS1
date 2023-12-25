@@ -15,9 +15,9 @@ public class LsmSettingsFile
 {
 	private const string FILE_NAME = "LoadingScreenModRevisited.xml";
 
-	private static string FILE_PATH => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, FILE_NAME);
+	private static string FILE_PATH => CrossIO.Combine(ServiceCenter.Get<ILocationService>().AppDataPath, FILE_NAME);
 
-	public static string DefaultSkipPath => CrossIO.Combine(CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, "Maps"), "SkippedPrefabs");
+	public static string DefaultSkipPath => CrossIO.Combine(CrossIO.Combine(ServiceCenter.Get<ILocationService>().AppDataPath, "Maps"), "SkippedPrefabs");
 	public static string DefaultSkipFile => CrossIO.Combine(DefaultSkipPath, "skip.txt");
 
 	public bool loadEnabled = true;

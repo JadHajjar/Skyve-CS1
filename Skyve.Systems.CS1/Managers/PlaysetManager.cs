@@ -50,7 +50,7 @@ internal class PlaysetManager : IPlaysetManager
 	public event PromptMissingItemsDelegate? PromptMissingItems;
 
 	private readonly ILogger _logger;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly ISettings _settings;
 	private readonly IPackageManager _packageManager;
 	private readonly IPackageUtil _packageUtil;
@@ -60,7 +60,7 @@ internal class PlaysetManager : IPlaysetManager
 	private readonly IAssetUtil _assetUtil;
 	private readonly IDlcManager _dlcManager;
 
-	public PlaysetManager(ILogger logger, ILocationManager locationManager, ISettings settings, IPackageManager packageManager, IPackageUtil packageUtil, ICompatibilityManager compatibilityManager, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IDlcManager dlcManager)
+	public PlaysetManager(ILogger logger, ILocationService locationManager, ISettings settings, IPackageManager packageManager, IPackageUtil packageUtil, ICompatibilityManager compatibilityManager, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IDlcManager dlcManager)
 	{
 		_logger = logger;
 		_locationManager = locationManager;
@@ -92,7 +92,7 @@ internal class PlaysetManager : IPlaysetManager
 
 		CurrentPlayset ??= Playset.TemporaryPlayset;
 
-		if (Directory.Exists(_locationManager.SkyveAppDataPath))
+		if (Directory.Exists(_locationManager.SkyveDataPath))
 		{
 			Directory.CreateDirectory(_locationManager.SkyvePlaysetsAppDataPath);
 
@@ -413,14 +413,14 @@ internal class PlaysetManager : IPlaysetManager
 
 			try
 			{
-				CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"));
+				CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveDataPath, "CurrentPlayset"));
 			}
 			catch { }
 
 			return;
 		}
 
-		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"), playset.Name);
+		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveDataPath, "CurrentPlayset"), playset.Name);
 
 		if (SystemsProgram.MainForm as SlickForm is null)
 		{

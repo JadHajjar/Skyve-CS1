@@ -161,7 +161,7 @@ internal class TagsService : ITagsService
 				{
 					foreach (var tag in package.Tags)
 					{
-						_workshopTags[tag] = _workshopTags.GetOrAdd(tag) + 1;
+						_workshopTags[tag.Value] = _workshopTags.GetOrAdd(tag.Value) + 1;
 					}
 				}
 			}
@@ -212,7 +212,7 @@ internal class TagsService : ITagsService
 	{
 		var returned = new List<string>();
 
-		if (!ignoreParent && package.GetWorkshopInfo()?.Tags is string[] workshopTags)
+		if (!ignoreParent && package.GetWorkshopInfo()?.Tags.Values is IEnumerable<string> workshopTags)
 		{
 			foreach (var item in workshopTags)
 			{
@@ -322,7 +322,7 @@ internal class TagsService : ITagsService
 					continue;
 				}
 
-				if (workshopTags?.Any(x => x.Equals(tag.Value, StringComparison.InvariantCultureIgnoreCase)) ?? false)
+				if (workshopTags?.Any(x => x.Value.Equals(tag.Value, StringComparison.InvariantCultureIgnoreCase)) ?? false)
 				{
 					continue;
 				}
@@ -335,7 +335,7 @@ internal class TagsService : ITagsService
 
 		foreach (var tag in tags)
 		{
-			if (workshopTags?.Any(x => x.Equals(tag.Value, StringComparison.InvariantCultureIgnoreCase)) ?? false)
+			if (workshopTags?.Any(x => x.Value.Equals(tag.Value, StringComparison.InvariantCultureIgnoreCase)) ?? false)
 			{
 				continue;
 			}

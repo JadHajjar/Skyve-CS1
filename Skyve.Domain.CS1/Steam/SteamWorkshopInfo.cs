@@ -30,7 +30,7 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped, IEquatable<SteamWo
 	public bool IsBanned { get; set; }
 	public bool IsInvalid { get; set; }
 	public string Name { get; set; }
-	public string[] Tags { get; set; }
+	public Dictionary<string, string> Tags { get; set; }
 	public ulong Id { get; set; }
 	public string? Url { get; set; }
 	public DateTime Timestamp { get; set; }
@@ -63,13 +63,13 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped, IEquatable<SteamWo
 		Tags = (entry.tags
 			?.Select(item => item.tag)
 			?.Where(item => item.IndexOf("compatible", StringComparison.OrdinalIgnoreCase) == -1)
-			?.ToArray()) ?? new string[0];
+			?.ToDictionary(x => x, x => x)) ?? new();
 	}
 
 	public SteamWorkshopInfo()
 	{
 		Name = string.Empty;
-		Tags = new string[0];
+		Tags = new();
 	}
 
 	public override string ToString()

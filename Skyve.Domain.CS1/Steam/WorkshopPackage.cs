@@ -30,7 +30,7 @@ public class WorkshopPackage : IPackage
 	public ILocalPackageWithContents? LocalParentPackage => ServiceCenter.Get<IPackageManager>().GetPackageById(this);
 	public ILocalPackage? LocalPackage => ServiceCenter.Get<IPackageManager>().GetPackageById(this);
 	public IEnumerable<IPackageRequirement> Requirements => GetInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
-	public IEnumerable<ITag> Tags => GetInfo()?.Tags.Select(x => (ITag)new TagItem(TagSource.Workshop, x)) ?? Enumerable.Empty<ITag>();
+	public IEnumerable<ITag> Tags => GetInfo()?.Tags.Select(x => (ITag)new TagItem(TagSource.Workshop, x.Value)) ?? Enumerable.Empty<ITag>();
 
 
 	private IWorkshopInfo? GetInfo()

@@ -13,9 +13,9 @@ internal class MonoFile : DebugFile
 {
 	public static MonoFile Instance = new();
 
-	public override string FilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono.dll");
-	public override string ReleaseFilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono-orig.dll");
-	public override string DebugFilePath => CrossIO.Combine(ServiceCenter.Get<ILocationManager>().MonoPath, "mono-debug.dll");
+	public override string FilePath => CrossIO.Combine(ServiceCenter.Get<ILocationService>().MonoPath, "mono.dll");
+	public override string ReleaseFilePath => CrossIO.Combine(ServiceCenter.Get<ILocationService>().MonoPath, "mono-orig.dll");
+	public override string DebugFilePath => CrossIO.Combine(ServiceCenter.Get<ILocationService>().MonoPath, "mono-debug.dll");
 	public override string ResourceFileName => "mono-debug._dll";
 }
 
@@ -23,7 +23,7 @@ internal class CitiesFile : DebugFile
 {
 	public static CitiesFile Instance = new();
 
-	public override string FilePath => ServiceCenter.Get<ILocationManager>().CitiesPathWithExe;
+	public override string FilePath => ServiceCenter.Get<ILocationService>().CitiesPathWithExe;
 	public override string ReleaseFilePath => FilePath + ".Orig";
 	public override string DebugFilePath => FilePath + ".Profiler";
 	public override string ResourceFileName => "Cities.exe.Profiler";

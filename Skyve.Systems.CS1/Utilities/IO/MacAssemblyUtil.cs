@@ -11,12 +11,12 @@ using System.Windows.Forms;
 namespace Skyve.Systems.CS1.Utilities.IO;
 internal class MacAssemblyUtil
 {
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly IModDllManager _contentUtil;
 	private readonly IIOUtil _iOUtil;
 	private readonly ILogger _logger;
 
-	public MacAssemblyUtil(ILocationManager locationManager, IModDllManager contentUtil, ILogger logger, IIOUtil iOUtil)
+	public MacAssemblyUtil(ILocationService locationManager, IModDllManager contentUtil, ILogger logger, IIOUtil iOUtil)
 	{
 		_locationManager = locationManager;
 		_contentUtil = contentUtil;

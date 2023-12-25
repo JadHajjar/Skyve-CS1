@@ -11,7 +11,7 @@ namespace SkyveShared;
 internal class SharedUtil
 {
 #if SkyveApp
-	internal static string LocalApplicationData => ServiceCenter.Get<ILocationManager>().AppDataPath;
+	internal static string LocalApplicationData => ServiceCenter.Get<ILocationService>().AppDataPath;
 	internal static string LocalLOMData => Path.Combine(LocalApplicationData, "Skyve");
 #elif TOOL
 	internal static string LocalApplicationData => CO.IO.DataLocation.localApplicationData;

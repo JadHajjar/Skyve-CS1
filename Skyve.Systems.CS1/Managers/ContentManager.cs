@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Skyve.Systems.CS1.Managers;
 internal class ContentManager : IContentManager
@@ -20,7 +21,7 @@ internal class ContentManager : IContentManager
 	private readonly object _contentUpdateLock = new();
 
 	private readonly IPackageManager _packageManager;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
@@ -28,7 +29,7 @@ internal class ContentManager : IContentManager
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ContentManager(IPackageManager packageManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IPackageUtil packageUtil)
+	public ContentManager(IPackageManager packageManager, ILocationService locationManager, ICompatibilityManager compatibilityManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IPackageUtil packageUtil)
 	{
 		_packageManager = packageManager;
 		_locationManager = locationManager;
@@ -159,7 +160,7 @@ internal class ContentManager : IContentManager
 		return 0;
 	}
 
-	public List<ILocalPackageWithContents> LoadContents()
+	public Task<List<ILocalPackageWithContents>> LoadContents()
 	{
 		var packages = new List<ILocalPackageWithContents>();
 		var gameModsPath = CrossIO.Combine(_locationManager.GameContentPath, "Mods");
@@ -219,7 +220,7 @@ internal class ContentManager : IContentManager
 			getPackage(folder, false, true, false);
 		});
 
-		return packages;
+		return Task.FromResult(packages);
 
 		void getPackage(string folder, bool builtIn, bool workshop, bool expectAssets, bool withSubDirectories = true)
 		{

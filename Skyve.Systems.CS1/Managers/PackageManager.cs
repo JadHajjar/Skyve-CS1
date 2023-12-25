@@ -22,9 +22,9 @@ internal class PackageManager : IPackageManager
 	private readonly ISettings _settings;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 
-	public PackageManager(IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ILocationManager locationManager)
+	public PackageManager(IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ILocationService locationManager)
 	{
 		_modLogicManager = modLogicManager;
 		_settings = settings;

@@ -21,11 +21,11 @@ internal class ColossalOrderUtil
 	private readonly DelayedAction _delayedAction = new(500);
 
 	private readonly SettingsService _settings;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly INotifier _notifier;
 	private readonly ILogger _logger;
 
-	public ColossalOrderUtil(ILocationManager locationManager, INotifier notifier, ISettings settings, ILogger logger)
+	public ColossalOrderUtil(ILocationService locationManager, INotifier notifier, ISettings settings, ILogger logger)
 	{
 		_locationManager = locationManager;
 		_notifier = notifier;

@@ -167,7 +167,7 @@ public class Playset : ICustomPlayset
 		{
 			SteamId = asset.Id;
 			Name = asset.Name;
-			RelativePath = ServiceCenter.Get<ILocationManager>().ToRelativePath(asset.FilePath);
+			RelativePath = ServiceCenter.Get<ILocationService>().ToRelativePath(asset.FilePath);
 		}
 
 		public Asset()
@@ -216,7 +216,7 @@ public class Playset : ICustomPlayset
 			SteamId = mod.Id;
 			Name = mod.Name;
 			Enabled = ServiceCenter.Get<IModUtil>().IsEnabled(mod);
-			RelativePath = ServiceCenter.Get<ILocationManager>().ToRelativePath(mod.Folder);
+			RelativePath = ServiceCenter.Get<ILocationService>().ToRelativePath(mod.Folder);
 		}
 
 		public Mod(IPackage package)
