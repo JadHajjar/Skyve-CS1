@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Skyve.Systems.CS1.Systems;
 internal class WorkshopService : IWorkshopService
 {
-	public void CleanDownload(List<ILocalPackageWithContents> packages)
+	public void CleanDownload(List<ILocalPackageData> packages)
 	{
 		PackageWatcher.Pause();
 		foreach (var item in packages)

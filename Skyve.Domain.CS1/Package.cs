@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Skyve.Domain.CS1;
 
-public class Package : ILocalPackageWithContents
+public class Package : ILocalPackageData
 {
 	private ulong id;
 
@@ -38,7 +38,7 @@ public class Package : ILocalPackageWithContents
 	public long LocalSize { get; set; }
 	public DateTime LocalTime { get; set; }
 	public string Name => ToString();
-	public bool IsMod => Mod is not null;
+	public bool IsCodeMod => Mod is not null;
 	public string? Url { get; }
 	public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 
@@ -68,9 +68,9 @@ public class Package : ILocalPackageWithContents
 		set => id = value;
 	}
 
-	ILocalPackageWithContents? IPackage.LocalParentPackage => this;
-	ILocalPackageWithContents ILocalPackage.LocalParentPackage => this;
-	ILocalPackage? IPackage.LocalPackage => this;
+	ILocalPackageData? IPackage.LocalParentPackage => this;
+	ILocalPackageData ILocalPackageData.LocalParentPackage => this;
+	ILocalPackageData? IPackage.LocalPackage => this;
 	string ILocalPackageIdentity.FilePath => Folder;
 
 	public override string ToString()

@@ -94,7 +94,7 @@ internal class CitiesManager : ICitiesManager
 
 				if (!CommandUtil.NoWindow && !sessionSettings.FpsBoosterLogWarning)
 				{
-					var fpsBooster = _contentManager.Mods.FirstOrDefault(mod => Path.GetFileNameWithoutExtension(mod.FilePath) == "FPS_Booster");
+					var fpsBooster = _contentManager.Packages.FirstOrDefault(mod => Path.GetFileNameWithoutExtension(mod.FilePath) == "FPS_Booster");
 
 					if (fpsBooster != null && _modUtil.IsIncluded(fpsBooster) && _modUtil.IsEnabled(fpsBooster))
 					{
@@ -148,7 +148,7 @@ internal class CitiesManager : ICitiesManager
 
 			if (!_settings.UserSettings.AdvancedIncludeEnable)
 			{
-				foreach (var item in _contentManager.Mods)
+				foreach (var item in _contentManager.Packages)
 				{
 					_colossalOrderUtil.SetEnabled(item, item.IsIncluded());
 				}

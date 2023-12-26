@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Skyve.Domain.CS1;
 public class Mod : IMod
 {
-	public Mod(ILocalPackageWithContents package, string dllPath, Version version)
+	public Mod(ILocalPackageData package, string dllPath, Version version)
 	{
 		LocalParentPackage = package;
 		FilePath = dllPath.FormatPath();
@@ -19,7 +19,7 @@ public class Mod : IMod
 	public Version Version { get; }
 	public bool IsMod { get; } = true;
 
-	public ILocalPackageWithContents LocalParentPackage { get; }
+	public ILocalPackageData LocalParentPackage { get; }
 	public long LocalSize => LocalParentPackage.LocalSize;
 	public DateTime LocalTime => LocalParentPackage.LocalTime;
 	public string Folder => LocalParentPackage.Folder;
@@ -29,7 +29,7 @@ public class Mod : IMod
 	public ulong Id => LocalParentPackage.Id;
 	public string Name => LocalParentPackage.Name;
 	public string? Url => LocalParentPackage.Url;
-	ILocalPackage? IPackage.LocalPackage => this;
+	ILocalPackageData? IPackage.LocalPackage => this;
 
 	public override bool Equals(object? obj)
 	{

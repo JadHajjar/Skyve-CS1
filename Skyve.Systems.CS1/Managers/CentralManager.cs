@@ -201,9 +201,9 @@ internal class CentralManager : ICentralManager
 		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Skyve from the main menu after deleting this file.");
 	}
 
-	private void AnalyzePackages(List<ILocalPackageWithContents> content)
+	private void AnalyzePackages(List<ILocalPackageData> content)
 	{
-		var blackList = new List<ILocalPackageWithContents>();
+		var blackList = new List<ILocalPackageData>();
 		var firstTime = _updateManager.IsFirstTime();
 
 		_notifier.BulkUpdating = true;

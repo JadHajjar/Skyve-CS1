@@ -19,7 +19,7 @@ internal class VersionUpdateService : IVersionUpdateService
 		_settings = settings;
 	}
 
-	public void Run(List<ILocalPackageWithContents> content)
+	public void Run(List<ILocalPackageData> content)
 	{
 		if (_settings.SessionSettings.LastVersioningNumber < 1)
 		{

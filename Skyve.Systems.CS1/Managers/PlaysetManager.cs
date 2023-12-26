@@ -254,7 +254,7 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			try
 			{
-				var unprocessedMods = _packageManager.Mods.ToList();
+				var unprocessedMods = _packageManager.Packages.ToList();
 				var unprocessedAssets = _packageManager.Assets.ToList();
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
@@ -331,7 +331,7 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			try
 			{
-				var unprocessedMods = _packageManager.Mods.ToList();
+				var unprocessedMods = _packageManager.Packages.ToList();
 				var unprocessedAssets = _packageManager.Assets.ToList();
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
@@ -436,7 +436,7 @@ internal class PlaysetManager : IPlaysetManager
 	{
 		try
 		{
-			var unprocessedMods = _packageManager.Mods.ToList();
+			var unprocessedMods = _packageManager.Packages.ToList();
 			var unprocessedAssets = _packageManager.Assets.ToList();
 			var missingMods = new List<Playset.Mod>();
 			var missingAssets = new List<Playset.Asset>();
@@ -713,7 +713,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 
 		playset.Assets = _packageManager.Assets.Where(_assetUtil.IsIncluded).Select(x => new Playset.Asset(x)).ToList();
-		playset.Mods = _packageManager.Mods.Where(_modUtil.IsIncluded).Select(x => new Playset.Mod(x)).ToList();
+		playset.Mods = _packageManager.Packages.Where(_modUtil.IsIncluded).Select(x => new Playset.Mod(x)).ToList();
 		playset.ExcludedDLCs = _dlcManager.GetExcludedDlcs();
 	}
 
@@ -768,7 +768,7 @@ internal class PlaysetManager : IPlaysetManager
 	{
 		var folder = _locationManager.ToLocalPath(mod.RelativePath);
 
-		return _packageManager.Mods.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
+		return _packageManager.Packages.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
 	}
 
 	public IAsset? GetAsset(IPlaysetEntry asset)
@@ -853,7 +853,7 @@ internal class PlaysetManager : IPlaysetManager
 		return Path.GetFileNameWithoutExtension(startName);
 	}
 
-	public List<ILocalPackageWithContents> GetInvalidPackages(PackageUsage usage)
+	public List<ILocalPackageData> GetInvalidPackages(PackageUsage usage)
 	{
 		if ((int)usage == -1)
 		{
@@ -1114,7 +1114,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		else
 		{
-			if (ipackage.IsMod)
+			if (ipackage.IsCodeMod)
 			{
 				return (playset as Playset)!.Mods.Any(x => x.Id == ipackage.Id);
 			}

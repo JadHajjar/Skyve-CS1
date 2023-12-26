@@ -61,7 +61,7 @@ internal class CustomPackageService : ICustomPackageService
 		};
 	}
 
-	private static EditTagsForm EditTags(IEnumerable<ILocalPackage> item)
+	private static EditTagsForm EditTags(IEnumerable<ILocalPackageData> item)
 	{
 		var frm = new EditTagsForm(item);
 

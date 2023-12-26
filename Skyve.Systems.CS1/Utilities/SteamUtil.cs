@@ -76,7 +76,7 @@ public static class SteamUtil
 	{
 		var currentPath = ServiceCenter.Get<IIOUtil>().ToRealPath(Path.GetDirectoryName(Application.StartupPath));
 
-		if (packages.Any(x => x is ILocalPackage lp && lp.Folder.PathEquals(currentPath)))
+		if (packages.Any(x => x is ILocalPackageData lp && lp.Folder.PathEquals(currentPath)))
 		{
 			if (MessagePrompt.Show(Locale.LOTWillRestart, PromptButtons.OKCancel, PromptIcons.Info, SystemsProgram.MainForm as SlickForm) == DialogResult.Cancel)
 			{

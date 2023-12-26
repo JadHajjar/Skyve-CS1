@@ -75,8 +75,8 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 			generatedProfile.ProfileId = profile.ProfileId;
 			generatedProfile.Usage = profile.Usage;
 			generatedProfile.BannerBytes = profile.Banner;
-			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Playset.Asset(x));
-			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Playset.Mod(x));
+			generatedProfile.Assets = profile.Contents.Where(x => !x.IsCodeMod).ToList(x => new Playset.Asset(x));
+			generatedProfile.Mods = profile.Contents.Where(x => x.IsCodeMod).ToList(x => new Playset.Mod(x));
 
 			_playsetManager.AddPlayset(generatedProfile);
 
@@ -103,8 +103,8 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 
 			var generatedProfile = profile.CloneTo<IPlayset, Playset>();
 
-			generatedProfile.Assets = profile.Contents.Where(x => !x.IsMod).ToList(x => new Playset.Asset(x));
-			generatedProfile.Mods = profile.Contents.Where(x => x.IsMod).ToList(x => new Playset.Mod(x));
+			generatedProfile.Assets = profile.Contents.Where(x => !x.IsCodeMod).ToList(x => new Playset.Asset(x));
+			generatedProfile.Mods = profile.Contents.Where(x => x.IsCodeMod).ToList(x => new Playset.Mod(x));
 
 			return _playsetManager.Save(generatedProfile);
 		}

@@ -25,7 +25,7 @@ internal class InterfaceService : IAppInterfaceService
 		return new LastVersionNotification();
 	}
 
-	void IInterfaceService.ViewSpecificPackages(List<ILocalPackageWithContents> packages, string title)
+	void IInterfaceService.ViewSpecificPackages(List<ILocalPackageData> packages, string title)
 	{
 		App.Program.MainForm.PushPanel(new PC_ViewSpecificPackages(packages, title));
 	}

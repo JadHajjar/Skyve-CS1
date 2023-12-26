@@ -24,7 +24,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 	public event Action? StageChanged;
 	public event Action? AskForConfirmation;
-	public event Action<List<ILocalPackage>>? PromptResult;
+	public event Action<List<ILocalPackageData>>? PromptResult;
 
 	public bool IsInProgress => currentState is not null;
 	public string CurrentAction => LocaleHelper.GetGlobalText(currentState?.Stage.ToString());
@@ -69,9 +69,9 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			UnprocessedItems = new()
 		};
 
-		IEnumerable<ILocalPackage> packages = settings.Mods ? _packageManager.Mods : _packageManager.Assets;
+		IEnumerable<ILocalPackageData> packages = settings.Mods ? _packageManager.Packages : _packageManager.Assets;
 
-		var packageToProcess = new List<ILocalPackage>();
+		var packageToProcess = new List<ILocalPackageData>();
 
 		foreach (var item in packages)
 		{
@@ -112,7 +112,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		ApplyConfirmation(true);
 	}
 
-	private static bool CheckPackageValidity(ITroubleshootSettings settings, ILocalPackage item)
+	private static bool CheckPackageValidity(ITroubleshootSettings settings, ILocalPackageData item)
 	{
 		if (settings.ItemIsCausingIssues)
 		{
@@ -263,7 +263,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		return (list1, list2);
 	}
 
-	private List<List<string>> GetItemGroups(List<ILocalPackage> items)
+	private List<List<string>> GetItemGroups(List<ILocalPackageData> items)
 	{
 		var groups = new List<List<string>>();
 
@@ -283,7 +283,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		return groups;
 	}
 
-	private void GetPairedItems(List<ILocalPackage> items, List<string> group, ILocalPackage current)
+	private void GetPairedItems(List<ILocalPackageData> items, List<string> group, ILocalPackageData current)
 	{
 		foreach (var item in items)
 		{
@@ -303,7 +303,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		}
 	}
 
-	private bool AreItemsPaired(ILocalPackage packageA, ILocalPackage packageB)
+	private bool AreItemsPaired(ILocalPackageData packageA, ILocalPackageData packageB)
 	{
 		if (packageA != null && packageB != null)
 		{
@@ -314,9 +314,9 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		return false;
 	}
 
-	private IEnumerable<ILocalPackage> GetPackages(IEnumerable<string> packagePaths)
+	private IEnumerable<ILocalPackageData> GetPackages(IEnumerable<string> packagePaths)
 	{
-		IEnumerable<ILocalPackage> packages = currentState!.Mods ? _packageManager.Mods : _packageManager.Assets;
+		IEnumerable<ILocalPackageData> packages = currentState!.Mods ? _packageManager.Packages : _packageManager.Assets;
 
 		foreach (var package in packages)
 		{

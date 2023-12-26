@@ -108,7 +108,7 @@ internal class ModLogicManager : IModLogicManager
 
 	public bool IsPseudoMod(IPackage package)
 	{
-		if (!package.IsLocal && package is ILocalPackage localPackage && CrossIO.FileExists(CrossIO.Combine(localPackage.Folder, "ThemeMix.xml")))
+		if (!package.IsLocal && package is ILocalPackageData localPackage && CrossIO.FileExists(CrossIO.Combine(localPackage.Folder, "ThemeMix.xml")))
 		{
 			return true;
 		}
@@ -121,7 +121,7 @@ internal class ModLogicManager : IModLogicManager
 		return false;
 	}
 
-	public bool AreMultipleSkyvesPresent(out List<ILocalPackageWithContents> skyveInstances)
+	public bool AreMultipleSkyvesPresent(out List<ILocalPackageData> skyveInstances)
 	{
 		skyveInstances = new();
 
