@@ -156,7 +156,7 @@ public class Playset : ICustomPlayset
 		[JsonIgnore] public bool IsCodeMod { get; set; }
 		[JsonIgnore, CloneIgnore] public bool IsLocal => SteamId == 0;
 		[JsonIgnore, CloneIgnore] public bool IsBuiltIn { get; }
-		[JsonIgnore, CloneIgnore] public virtual ILocalPackageData? LocalParentPackage => ServiceCenter.Get<IPlaysetManager>().GetAsset(this)?.LocalParentPackage;
+		[JsonIgnore, CloneIgnore] public virtual ILocalPackageData? LocalParentPackage => ServiceCenter.Get<IPlaysetManager>().GetAsset(this)?.GetLocalPackage();
 		[JsonIgnore, CloneIgnore] public virtual ILocalPackageData? LocalPackage => ServiceCenter.Get<IPlaysetManager>().GetAsset(this);
 		[JsonIgnore, CloneIgnore] public IEnumerable<IPackageRequirement> Requirements => LocalParentPackage?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 		[JsonIgnore, CloneIgnore] public ulong Id => SteamId;
@@ -207,7 +207,7 @@ public class Playset : ICustomPlayset
 	public class Mod : Asset
 	{
 		public bool Enabled { get; set; }
-		[JsonIgnore, CloneIgnore] public override ILocalPackageData? LocalParentPackage => ServiceCenter.Get<IPlaysetManager>().GetMod(this)?.LocalParentPackage;
+		[JsonIgnore, CloneIgnore] public override ILocalPackageData? LocalParentPackage => ServiceCenter.Get<IPlaysetManager>().GetMod(this)?.GetLocalPackage();
 		[JsonIgnore, CloneIgnore] public override ILocalPackageData? LocalPackage => ServiceCenter.Get<IPlaysetManager>().GetMod(this);
 
 		public Mod(IMod mod)

@@ -212,7 +212,7 @@ internal class PackageManager : IPackageManager
 			return;
 		}
 
-		if (item.LocalParentPackage?.Assets?.Any() ?? false)
+		if (item.GetLocalPackage()?.Assets?.Any() ?? false)
 		{
 			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(item.Folder)));
 
@@ -221,7 +221,7 @@ internal class PackageManager : IPackageManager
 			target.RemoveEmptyFolders();
 		}
 
-		if (item.LocalParentPackage?.Mod is not null)
+		if (item.GetLocalPackage()?.Mod is not null)
 		{
 			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.ModsPath, Path.GetFileName(item.Folder)));
 

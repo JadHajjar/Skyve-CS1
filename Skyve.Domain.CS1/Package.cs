@@ -68,8 +68,8 @@ public class Package : ILocalPackageData
 		set => id = value;
 	}
 
-	ILocalPackageData? IPackage.LocalParentPackage => this;
-	ILocalPackageData ILocalPackageData.LocalParentPackage => this;
+	ILocalPackageData? IPackage.GetLocalPackage() => this;
+	ILocalPackageData ILocalPackageData.GetLocalPackage() => this;
 	ILocalPackageData? IPackage.LocalPackage => this;
 	string ILocalPackageIdentity.FilePath => Folder;
 

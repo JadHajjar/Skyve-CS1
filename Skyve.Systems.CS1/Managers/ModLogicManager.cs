@@ -125,9 +125,9 @@ internal class ModLogicManager : IModLogicManager
 	{
 		skyveInstances = new();
 
-		skyveInstances.AddRange(_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.ToList(x => x.LocalParentPackage) ?? new());
-		skyveInstances.AddRange(_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.ToList(x => x.LocalParentPackage) ?? new());
-		skyveInstances.AddRange(_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.ToList(x => x.LocalParentPackage) ?? new());
+		skyveInstances.AddRange(_modCollection.GetCollection(Skyve_ASSEMBLY, out _)?.ToList(x => x.GetLocalPackage()) ?? new());
+		skyveInstances.AddRange(_modCollection.GetCollection(LOM1_ASSEMBLY, out _)?.ToList(x => x.GetLocalPackage()) ?? new());
+		skyveInstances.AddRange(_modCollection.GetCollection(LOM2_ASSEMBLY, out _)?.ToList(x => x.GetLocalPackage()) ?? new());
 
 		return skyveInstances.Count > 1;
 	}

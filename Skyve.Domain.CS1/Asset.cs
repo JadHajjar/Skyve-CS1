@@ -13,7 +13,7 @@ public class Asset : IAsset
 	{
 		FilePath = crpPath;
 		LocalParentPackage = package;
-		LocalSize = new FileInfo(FilePath).Length;
+		FileSize = new FileInfo(FilePath).Length;
 		LocalTime = File.GetLastWriteTimeUtc(FilePath);
 
 		if (asset is not null)
@@ -32,7 +32,7 @@ public class Asset : IAsset
 
 	public string FilePath { get; }
 	public ILocalPackageData LocalParentPackage { get; }
-	public long LocalSize { get; }
+	public long FileSize { get; }
 	public DateTime LocalTime { get; }
 	public string Name { get; }
 	public string[] AssetTags { get; }

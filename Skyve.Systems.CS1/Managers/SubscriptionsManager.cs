@@ -63,7 +63,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
 	public bool IsSubscribing(IPackage package)
 	{
-		return package.LocalParentPackage is null ? SubscribingTo.Contains(package.Id) || PendingSubscribingTo.Contains(package.Id) : UnsubscribingFrom.Contains(package.Id) || PendingUnsubscribingFrom.Contains(package.Id);
+		return package.GetLocalPackage() is null ? SubscribingTo.Contains(package.Id) || PendingSubscribingTo.Contains(package.Id) : UnsubscribingFrom.Contains(package.Id) || PendingUnsubscribingFrom.Contains(package.Id);
 	}
 
 	public bool Subscribe(IEnumerable<IPackageIdentity> ids)
