@@ -15,7 +15,6 @@
 		<TargetFramework>net4.7.2</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
 		<StartupObject>Skyve.App.CS1.Program</StartupObject>
 		<ApplicationIcon>Resources\Skyve.ico</ApplicationIcon>
 		<SignAssembly>True</SignAssembly>
@@ -70,6 +69,12 @@
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="UserInterface\Content\DownloadsInfoControl.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="UserInterface\Content\SubscriptionInfoControl.cs">
+		  <SubType>UserControl</SubType>
 		</Compile>
 		<Compile Update="UserInterface\Dashboard\D_Playsets.cs">
 		  <SubType>UserControl</SubType>

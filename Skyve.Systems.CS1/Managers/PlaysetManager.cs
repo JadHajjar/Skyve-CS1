@@ -682,7 +682,7 @@ internal class PlaysetManager : IPlaysetManager
 #if DEBUG
 					if (currentPlayset is not null)
 					{
-						_logger.Debug($"Playset removed: {currentPlayset?.Name}");
+						_logger.Debug($"Playset removed: {currentPlayset?.Name ?? Locale.NoActivePlayset}");
 					}
 
 					_logger.Debug($"Playset added: {newPlayset.Name}");

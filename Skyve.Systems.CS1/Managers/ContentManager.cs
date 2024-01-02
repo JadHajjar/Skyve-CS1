@@ -332,7 +332,7 @@ internal class ContentManager : IContentManager
 
 		package.Assets = _assetUtil.GetAssets(package, !self).ToArray();
 		package.Mod = _modUtil.GetMod(package);
-		package.LocalSize = GetTotalSize(package.Folder);
+		package.FileSize = GetTotalSize(package.Folder);
 		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
 		if (package.IsLocal && package.Mod is null)

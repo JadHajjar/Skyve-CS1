@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 using Skyve.Domain;
+using Skyve.Domain.Systems;
 
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,7 +29,7 @@ public class GenericWorkshopPackage : IPackage
 		Name = string.Empty;
 	}
 
-	public bool IsCodeMod => this.GetWorkshopInfo()?.IsMod ?? false;
+	public bool IsCodeMod => this.GetWorkshopInfo()?.IsCodeMod ?? false;
 	public bool IsLocal { get; set; }
 	public bool IsBuiltIn { get; set; }
 	public ulong Id { get; set; }
@@ -44,13 +45,13 @@ public class GenericWorkshopPackage : IPackage
 		return this.GetWorkshopInfo()?.Name ?? Name;
 	}
 
-	public bool GetThumbnail(out Bitmap? thumbnail, out string? thumbnailUrl)
+	public bool GetThumbnail(IImageService imageService, out Bitmap? thumbnail, out string? thumbnailUrl)
 	{
 		var info = this.GetWorkshopInfo();
 
 		if (info is not null)
 		{
-			return info.GetThumbnail(out thumbnail, out thumbnailUrl);
+			return info.GetThumbnail(imageService, out thumbnail, out thumbnailUrl);
 		}
 
 		thumbnail = null;

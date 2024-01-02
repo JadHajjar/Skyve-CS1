@@ -20,7 +20,7 @@ public class Mod : IMod
 	public bool IsMod { get; } = true;
 
 	public ILocalPackageData LocalParentPackage { get; }
-	public long LocalSize => LocalParentPackage.LocalSize;
+	public long LocalSize => LocalParentPackage.FileSize;
 	public DateTime LocalTime => LocalParentPackage.LocalTime;
 	public string Folder => LocalParentPackage.Folder;
 	public bool IsLocal => LocalParentPackage.IsLocal;

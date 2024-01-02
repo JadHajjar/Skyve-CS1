@@ -26,7 +26,7 @@ public class WorkshopPackage : IPackage
 	public bool IsLocal { get; }
 	public bool IsBuiltIn { get; }
 	public string Name => GetInfo()?.Name ?? ServiceCenter.Get<ILocale>().Get("UnknownPackage");
-	public bool IsCodeMod => GetInfo()?.IsMod ?? false;
+	public bool IsCodeMod => GetInfo()?.IsCodeMod ?? false;
 	public ILocalPackageData? LocalParentPackage => ServiceCenter.Get<IPackageManager>().GetPackageById(this);
 	public ILocalPackageData? LocalPackage => ServiceCenter.Get<IPackageManager>().GetPackageById(this);
 	public IEnumerable<IPackageRequirement> Requirements => GetInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();

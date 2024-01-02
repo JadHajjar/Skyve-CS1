@@ -9,7 +9,6 @@
 		<Nullable>enable</Nullable>
 		<DebugType>full</DebugType>
 		<DebugSymbols>true</DebugSymbols>
-		<PathMap>$(MSBuildProjectDirectory)/=$(ProjectName)/</PathMap>
 		<DefineConstants Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>

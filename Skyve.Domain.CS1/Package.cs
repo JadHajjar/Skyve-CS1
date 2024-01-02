@@ -17,7 +17,7 @@ public class Package : ILocalPackageData
 	public Package(string folder, bool builtIn, bool workshop, long localSize, DateTime localTime)
 	{
 		Folder = folder.FormatPath();
-		LocalSize = localSize;
+		FileSize = localSize;
 		LocalTime = localTime;
 		IsBuiltIn = builtIn;
 		IsLocal = !workshop;
@@ -35,7 +35,7 @@ public class Package : ILocalPackageData
 	public string Folder { get; set; }
 	public bool IsBuiltIn { get; }
 	public bool IsLocal { get; }
-	public long LocalSize { get; set; }
+	public long FileSize { get; set; }
 	public DateTime LocalTime { get; set; }
 	public string Name => ToString();
 	public bool IsCodeMod => Mod is not null;
