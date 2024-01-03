@@ -748,7 +748,7 @@ partial class PC_PlaysetSettings
 			this.TLP_AdvancedDev.Controls.Add(this.CB_UnityProfiler, 0, 3);
 			this.TLP_AdvancedDev.Controls.Add(this.CB_DebugMono, 1, 2);
 			this.TLP_AdvancedDev.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon7.Name = "I_Developer";
+			dynamicIcon7.Name = "I_Author";
 			this.TLP_AdvancedDev.ImageName = dynamicIcon7;
 			this.TLP_AdvancedDev.Location = new System.Drawing.Point(591, 377);
 			this.TLP_AdvancedDev.Name = "TLP_AdvancedDev";
