@@ -30,13 +30,13 @@ internal class CentralManager : ICentralManager
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 	private readonly IModUtil _modUtil;
-	private readonly IBulkUtil _bulkUtil;
+	private readonly IPackageUtil _bulkUtil;
 	private readonly IVersionUpdateService _versionUpdateService;
 	private readonly INotificationsService _notificationsService;
 	private readonly IUpdateManager _updateManager;
 	private readonly IAssetUtil _assetUtil;
 
-	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationService locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService, INotificationsService notificationsService, IUpdateManager updateManager, IAssetUtil assetUtil)
+	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationService locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IPackageUtil bulkUtil, IVersionUpdateService versionUpdateService, INotificationsService notificationsService, IUpdateManager updateManager, IAssetUtil assetUtil)
 	{
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
@@ -228,7 +228,7 @@ internal class CentralManager : ICentralManager
 
 				if (_settings.UserSettings.LinkModAssets && package.Assets is not null)
 				{
-					_bulkUtil.SetBulkIncluded(package.Assets, _modUtil.IsIncluded(package.Mod));
+					_bulkUtil.SetIncluded(package.Assets, _modUtil.IsIncluded(package.Mod));
 				}
 
 				_modLogicManager.Analyze(package.Mod, _modUtil);

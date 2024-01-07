@@ -19,7 +19,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	private readonly PlaysetManager _playsetManager;
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
-	private readonly IBulkUtil _bulkUtil;
+	private readonly IPackageUtil  _packageUtil;
 	private readonly IModUtil _modUtil;
 
 	public event Action? StageChanged;
@@ -34,7 +34,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	public int CurrentStage => currentState?.CurrentStage ?? 0;
 	public int TotalStages => currentState?.TotalStages ?? 0;
 
-	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IBulkUtil bulkUtil, IModLogicManager modLogicManager, IModUtil modUtil)
+	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IPackageUtil packageUtil, IModLogicManager modLogicManager, IModUtil modUtil)
 	{
 		try
 		{ ISave.Load(out currentState, "TroubleshootState.json"); }
@@ -45,7 +45,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		_modLogicManager = modLogicManager;
 		_settings = settings;
 		_notifier = notifier;
-		_bulkUtil = bulkUtil;
+		_packageUtil = packageUtil;
 		_modUtil = modUtil;
 
 		citiesManager.MonitorTick += CitiesManager_MonitorTick;
@@ -225,7 +225,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			}
 			else
 			{
-				_bulkUtil.SetBulkIncluded(GetPackages(new[] { lists.processingItems[0][0] }), currentState.ItemIsMissing);
+				_packageUtil.SetIncluded(GetPackages(new[] { lists.processingItems[0][0] }), currentState.ItemIsMissing);
 
 				PromptResult?.Invoke(GetPackages(new[] { lists.processingItems[0][0] }).ToList());
 
@@ -238,7 +238,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		currentState.ProcessingItems = lists.processingItems;
 		currentState.UnprocessedItems = lists.unprocessedItems;
 
-		_bulkUtil.SetBulkIncluded(GetPackages(currentState.ProcessingItems.SelectMany(x => x)), currentState.ItemIsMissing);
+		_packageUtil.SetIncluded(GetPackages(currentState.ProcessingItems.SelectMany(x => x)), currentState.ItemIsMissing);
 
 		currentState.CurrentStage++;
 	}

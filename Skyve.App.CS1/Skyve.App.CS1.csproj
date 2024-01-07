@@ -79,6 +79,7 @@
 		<Compile Update="UserInterface\Dashboard\D_Playsets.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
+		<Compile Update="UserInterface\Panels\PC_Options.cs" />
 		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs" />
 		<Compile Update="UserInterface\Panels\PC_SkyveChangeLog.cs" />
 		<Compile Update="UserInterface\Panels\PC_Utilities.cs" />

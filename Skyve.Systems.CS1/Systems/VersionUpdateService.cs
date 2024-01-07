@@ -53,7 +53,7 @@ internal class VersionUpdateService : IVersionUpdateService
 				}
 			}
 
-			ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(excludedPackages, false);
+			ServiceCenter.Get<IPackageUtil>().SetIncluded(excludedPackages, false);
 
 			SteamUtil.ClearCache();
 

@@ -973,7 +973,7 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				var profileMod = new Playset.Mod(mod);
 
-				foreach (var playset in Playsets.Skip(1))
+				foreach (var playset in Playsets)
 				{
 					SetIncludedFor(value, profileMod, playset);
 				}
@@ -982,7 +982,7 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				var profileAsset = new Playset.Asset(asset);
 
-				foreach (var playset in Playsets.Skip(1))
+				foreach (var playset in Playsets)
 				{
 					SetIncludedFor(value, profileAsset, playset);
 				}
@@ -992,7 +992,7 @@ internal class PlaysetManager : IPlaysetManager
 				var profileMod = package.Mod is null ? null : new Playset.Mod(package.Mod);
 				var assets = package.Assets?.Select(x => new Playset.Asset(x)).ToList() ?? new();
 
-				foreach (var playset in Playsets.Skip(1))
+				foreach (var playset in Playsets)
 				{
 					SetIncludedFor(value, profileMod, assets, playset);
 				}
