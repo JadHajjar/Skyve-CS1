@@ -79,10 +79,15 @@
 		<Compile Update="UserInterface\Dashboard\D_Playsets.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
+		<Compile Update="UserInterface\Forms\RatingInfoForm.cs">
+		  <SubType>Form</SubType>
+		</Compile>
+		<Compile Update="UserInterface\Panels\PC_MissingPackages.cs" />
 		<Compile Update="UserInterface\Panels\PC_Options.cs" />
 		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs" />
 		<Compile Update="UserInterface\Panels\PC_SkyveChangeLog.cs" />
 		<Compile Update="UserInterface\Panels\PC_Utilities.cs" />
+		<Compile Update="UserInterface\Panels\PC_ViewCollection.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -91,7 +91,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 
 	protected override void LocaleChanged()
 	{
-		Text = Locale.PlaysetBubble;
+		Text = Locale.ActivePlayset;
 		L_TempProfile.Text = Locale.TemporaryPlaysetCanNotBeEdited;
 		DD_ProfileUsage.Text = Locale.PlaysetUsage;
 		L_Info.Text = Locale.PlaysetSaveInfo;
