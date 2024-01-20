@@ -99,6 +99,7 @@
   "Fixed the language option being empty for some people.": "Vaste de taaloptie die voor sommige mensen leeg was",
   "Improved the responsiveness of the content list pages.": "Het reactievermogen van de inhoudslijst pagina's is verbeterd.",
   "Fixed updating an online profile not working properly.": "Er is een update van een online profiel ingesteld die niet goed werkt.",
+  "Fixed the subscription and download popups now showing.": "Fixed the subscription and download popups now showing.",
   "Fixed playsets taking longer then they should to apply.": "Fixed playsets taking longer then they should to apply.",
   "Ctrl+Click on an author's name to add it to your filter": "Ctrl+Klik op de naam van een auteur om het toe te voegen aan je filter",
   "Added Pinned folders to easily access relevant folders.": "Vastgepinde mappen toegevoegd om gemakkelijk toegang te krijgen tot relevante mappen.",

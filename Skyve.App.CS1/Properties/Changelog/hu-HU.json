@@ -99,6 +99,7 @@
   "Fixed the language option being empty for some people.": "Javítottuk néhány ember számára üres a nyelvi beállítást.",
   "Improved the responsiveness of the content list pages.": "Javult a tartalomlista oldalak válaszkészsége.",
   "Fixed updating an online profile not working properly.": "Javítva lett egy online profil frissítése, amely nem működik megfelelően.",
+  "Fixed the subscription and download popups now showing.": "Fixed the subscription and download popups now showing.",
   "Fixed playsets taking longer then they should to apply.": "Fixed playsets taking longer then they should to apply.",
   "Ctrl+Click on an author's name to add it to your filter": "Ctrl+kattintás egy szerző nevére, hogy hozzáadja a szűrőhöz",
   "Added Pinned folders to easily access relevant folders.": "Rögzített mappák hozzáadva a releváns mappák egyszerű eléréséhez.",
