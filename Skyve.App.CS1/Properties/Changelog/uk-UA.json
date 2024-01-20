@@ -99,6 +99,7 @@
   "Fixed the language option being empty for some people.": "Фіксована опція мови пуста для деяких людей.",
   "Improved the responsiveness of the content list pages.": "Покращено чутливість сторінок зі списком вмісту.",
   "Fixed updating an online profile not working properly.": "Виправлено оновлення профілю онлайн не працюватиме належним чином.",
+  "Fixed the subscription and download popups now showing.": "Виправлено підписку і показ вікон, що спливають при завантаженні.",
   "Fixed playsets taking longer then they should to apply.": "Виправлено ігрові набори, які застосовуються довше, ніж слід.",
   "Ctrl+Click on an author's name to add it to your filter": "Ctrl+Натисніть на ім'я автора, щоб додати його до вашого фільтру",
   "Added Pinned folders to easily access relevant folders.": "Закріплені папки для легкого доступу до папок.",

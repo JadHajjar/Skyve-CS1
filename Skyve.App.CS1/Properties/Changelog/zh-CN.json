@@ -99,6 +99,7 @@
   "Fixed the language option being empty for some people.": "修复：某些玩家语言选项为空的问题。",
   "Improved the responsiveness of the content list pages.": "优化：提高了内容列表页面中程序的响应能力。",
   "Fixed updating an online profile not working properly.": "修复：更新在线配置文件的功能无法正常工作的问题。",
+  "Fixed the subscription and download popups now showing.": "修复：订阅和下载弹窗不显示的问题。",
   "Fixed playsets taking longer then they should to apply.": "修复：应用配置文件耗时太长的问题。",
   "Ctrl+Click on an author's name to add it to your filter": "新增：按住 Ctrl 键时左键单击作者名字，可将其添加到筛选工具。",
   "Added Pinned folders to easily access relevant folders.": "新增：置顶文件夹，便于快速打开相关文件夹。",

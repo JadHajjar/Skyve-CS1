@@ -99,6 +99,7 @@
   "Fixed the language option being empty for some people.": "Corrigido o problema de a opção de idioma estar vazia para algumas pessoas.",
   "Improved the responsiveness of the content list pages.": "Melhorada o tempo de reposta da página de lista de conteúdo.",
   "Fixed updating an online profile not working properly.": "Corrigido Atualizar um perfil online que não funcionava corretamente.",
+  "Fixed the subscription and download popups now showing.": "Corrigido os popups de assinatura e download não aparecerem.",
   "Fixed playsets taking longer then they should to apply.": "Corrigido o tempo que os perfis demoram mais do que deveriam para serem aplicados.",
   "Ctrl+Click on an author's name to add it to your filter": "Pressione Ctrl+clique no nome do autor para adicioná-lo ao filtro",
   "Added Pinned folders to easily access relevant folders.": "Adicionado pastas fixadas para acessar facilmente pastas relevantes.",
