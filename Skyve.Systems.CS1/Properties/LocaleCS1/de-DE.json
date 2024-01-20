@@ -23,68 +23,68 @@
   "DownloadAll": "Alle angezeigten & fehlenden Elemente herunterladen",
   "ReDownloadAll": "Alle angezeigten & heruntergeladenen Elemente erneut herunterladen",
   "CollectionLink": "Steam-Sammlungs-URL oder ID-Nummer",
-  "PasteCollection": "Paste the URL or ID of the collection you'd like to view",
-  "LoadCollectionTip": "Load the collection’s items list and manage which items you want to subscribe to, include, or exclude from this collection.",
-  "LoadCollection": "Load Collection",
-  "CollectionTitle": "Workshop Collections",
+  "PasteCollection": "Füge die URL oder ID der Sammlung ein, die du anzeigen möchtest",
+  "LoadCollectionTip": "Lade die Liste der Elemente einer Sammlung und lege fest, welche du abonnieren, einschließen oder ausschließen möchtest.",
+  "LoadCollection": "Sammlung laden",
+  "CollectionTitle": "Workshop-Sammlungen",
   "LoadingScreenMod": "Loading Screen Mod",
-  "LoadEnabled": "Load all enabled assets",
-  "LoadUsed": "Load used assets",
-  "ViewOnWorkshop": "View this package on Steam",
+  "LoadEnabled": "Alle aktivierten Spielobjekte laden",
+  "LoadUsed": "Verwendete Spielobjekte laden",
+  "ViewOnWorkshop": "Dieses Paket auf Steam ansehen",
   "DownloadPackage": {
-    "One": "Download this package",
-    "Plural": "Download all selected Packages"
+    "One": "Dieses Paket herunterladen",
+    "Plural": "Alle ausgewählten Pakete herunterladen"
   },
   "IncludeThisItemInAllPlaysets": {
-    "One": "Include this item in all your playsets",
-    "Plural": "Include the selected items in all your playsets"
+    "One": "Dieses Element in allen deinen Spielsets einschließen",
+    "Plural": "Die ausgewählten Elemente in allen deinen Spielsets einschließen"
   },
   "ExcludeThisItemInAllPlaysets": {
-    "One": "Exclude this item in all your playsets",
-    "Plural": "Exclude the selected items in all your playsets"
+    "One": "Dieses Element aus allen deinen Spielsets ausschließen",
+    "Plural": "Die ausgewählten Elemente aus allen deinen Spielsets ausschließen"
   },
-  "GamePath": "Cities: Skylines' Steam Folder",
-  "SteamPath": "Steam's Installation Folder",
-  "VirtualGamePath": "Real \"Cities: Skylines' Steam Folder\" on your Linux/Mac",
-  "VirtualAppDataPath": "Real \"Cities: Skylines' App Data Folder\" on your Linux/Mac",
-  "ChangingFoldersRequiresRestart": "Changing the paths used by the app will require a restart, do you wish to proceed?",
-  "TemporaryPlayset": "Temporary Playset",
-  "OverrideGameChanges": "Override changes made in-game to the Enabled status of mods",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
-  "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
+  "GamePath": "Cities: Skylines Steam Ordner",
+  "SteamPath": "Steam-Installationsordner",
+  "VirtualGamePath": "Tatsächlicher \"Cities: Skylines Steam Ordner\" auf Linux/Mac",
+  "VirtualAppDataPath": "Tatsächlicher \"Cities: Skylines\" App-Data Ordner auf Linux/Mac",
+  "ChangingFoldersRequiresRestart": "Wenn man die von der App verwendeten Pfade ändert, muss ein Neustart ausgeführt werden. Möchtest du fortfahren?",
+  "TemporaryPlayset": "Temporäres Spielset",
+  "OverrideGameChanges": "Überschreibe im Spiel vorgenommene Änderungen am Aktiviert-Status der Mods",
+  "PlaysetSaveInfo": "Die Änderungen in diesem Bildschirm werden automatisch gespeichert. Die Option \"Automatisch speichern\" und die obige Schaltfläche \"Speichern\" beeinflussen nur die ausgewählten Mods, Assets und DLCs",
+  "PlaysetNameChangedIllegalChars": "Einige Zeichen wurden aus dem Spielsetnamen entfernt, da sie nicht in einem Windows-Dateinamen verwendet werden können",
   "CopyWorkshopLink": {
-    "One": "Copy Workshop link",
-    "Plural": "Copy the selected packages' Workshop links"
+    "One": "Kopiere den Workshop-Link",
+    "Plural": "Workshop-Link der ausgewählten Pakete kopieren"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Dieses Paket abbestellen",
+    "Plural": "Ausgewählte Pakete abbestellen"
   },
   "CopyWorkshopId": {
-    "One": "Copy this package's Workshop ID",
-    "Plural": "Copy the selected packages' Workshop IDs"
+    "One": "Workshop-ID dieses Pakets kopieren",
+    "Plural": "Workshop-IDs der ausgewählten Pakete kopieren"
   },
-  "UseDebugMono": "Use Debug Mono",
-  "LaunchThroughCities": "Launch through Cities.exe",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UseDebugMono": "Debug Mono verwenden",
+  "LaunchThroughCities": "Start durch Cities.exe",
+  "UnityProfilerMode": "Unity Profiler verwenden",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "Alle Elemente in diesem Paket einschließen",
+    "Plural": "Alle ausgewählten Pakete einschließen"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "Alle Elemente in diesem Paket ausschließen",
+    "Plural": "Alle ausgewählten Pakete ausschließen"
   },
-  "MissingItemsRemain": "Some items are still missing from this playset. Saving the playset in the future will remove those items from it.",
-  "HidePseudoMods": "Hide pseudo-mods like theme mixes",
-  "DetectedIssues": "Detected Issues",
-  "FixAllIssues": "Fix All Issues",
+  "MissingItemsRemain": "Einige Elemente aus diesem Profil fehlen. Das Speichern des Profils wird diese Elemente entfernen.",
+  "HidePseudoMods": "Pseudo-Mods wie Themen-Mixe ausblenden",
+  "DetectedIssues": "Erkannte Probleme",
+  "FixAllIssues": "Alle Probleme beheben",
   "LsmImport": "Loading Screen Mod Report",
-  "LsmImportMissingInfo": "View and subscribe to missing assets",
-  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App.\r\n\r\nOr click ignore to manually set up your folder settings.",
-  "SetupIncomplete": "Set Up is Incomplete",
-  "LsmImportUnusedInfo": "View and remove unused assets",
-  "SkipFileInfo": "Select a Skip-file to be used for Loading Screen Mod",
+  "LsmImportMissingInfo": "Fehlende Gegenstände anzeigen und abonnieren",
+  "FirstSetupInfo": "Bitte aktiviere die Skyve-Mod in Cities: Skylines bevor du die Skyve-App nutzt.",
+  "SetupIncomplete": "Setup unvollständig",
+  "LsmImportUnusedInfo": "Nicht verwendete Assets anzeigen und entfernen",
+  "SkipFileInfo": "Wähle eine Skip-Prefab-Datei zur Verwendung mit Loading Screen Mod Revisited",
   "DropNewPlayset": "Drop or select a playset's .json or .xml file here to import it",
   "SaveFileInfo": "Select a save-game file to be automatically loaded when you open the game",
   "ShowFolderSettings": "Show folder settings",
