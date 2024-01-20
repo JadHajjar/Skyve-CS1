@@ -14,17 +14,17 @@ using System.Linq;
 namespace Skyve.Systems.CS1.Managers;
 internal class PackageManager : IPackageManager
 {
-	private Dictionary<ulong, ILocalPackageWithContents>? indexedPackages;
+	private Dictionary<ulong, ILocalPackageData>? indexedPackages;
 	private Dictionary<string, List<IMod>>? indexedMods;
-	private List<ILocalPackageWithContents>? packages;
+	private List<ILocalPackageData>? packages;
 
 	private readonly IModLogicManager _modLogicManager;
 	private readonly ISettings _settings;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 
-	public PackageManager(IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ILocationManager locationManager)
+	public PackageManager(IModLogicManager modLogicManager, ISettings settings, ILogger logger, INotifier notifier, ILocationService locationManager)
 	{
 		_modLogicManager = modLogicManager;
 		_settings = settings;
@@ -33,11 +33,11 @@ internal class PackageManager : IPackageManager
 		_locationManager = locationManager;
 	}
 
-	public IEnumerable<ILocalPackageWithContents> Packages
+	public IEnumerable<ILocalPackageData> Packages
 	{
 		get
 		{
-			var currentPackages = packages is null ? new() : new List<ILocalPackageWithContents>(packages);
+			var currentPackages = packages is null ? new() : new List<ILocalPackageData>(packages);
 
 			foreach (var package in currentPackages)
 			{
@@ -51,11 +51,11 @@ internal class PackageManager : IPackageManager
 		}
 	}
 
-	public IEnumerable<IMod> Mods
+	public IEnumerable<IMod> Packages
 	{
 		get
 		{
-			var currentPackages = packages is null ? new() : new List<ILocalPackageWithContents>(packages);
+			var currentPackages = packages is null ? new() : new List<ILocalPackageData>(packages);
 
 			foreach (var package in currentPackages)
 			{
@@ -76,7 +76,7 @@ internal class PackageManager : IPackageManager
 	{
 		get
 		{
-			var currentPackages = packages is null ? new() : new List<ILocalPackageWithContents>(packages);
+			var currentPackages = packages is null ? new() : new List<ILocalPackageData>(packages);
 
 			foreach (var package in currentPackages)
 			{
@@ -93,7 +93,7 @@ internal class PackageManager : IPackageManager
 		}
 	}
 
-	public void AddPackage(ILocalPackageWithContents package)
+	public void AddPackage(ILocalPackageData package)
 	{
 		var info = SteamUtil.GetItem(package.Id);
 
@@ -128,7 +128,7 @@ internal class PackageManager : IPackageManager
 		_notifier.OnContentLoaded();
 	}
 
-	public void RemovePackage(ILocalPackageWithContents package)
+	public void RemovePackage(ILocalPackageData package)
 	{
 		packages?.Remove(package);
 		indexedPackages?.Remove(package.Id);
@@ -149,7 +149,7 @@ internal class PackageManager : IPackageManager
 		DeleteAll(package.Folder);
 	}
 
-	public ILocalPackageWithContents? GetPackageById(IPackageIdentity identity)
+	public ILocalPackageData? GetPackageById(IPackageIdentity identity)
 	{
 		if (indexedPackages?.TryGetValue(identity.Id, out var package) ?? false)
 		{
@@ -159,12 +159,12 @@ internal class PackageManager : IPackageManager
 		return null;
 	}
 
-	public ILocalPackageWithContents? GetPackageByFolder(string folder)
+	public ILocalPackageData? GetPackageByFolder(string folder)
 	{
 		return Packages.FirstOrDefault(x => x.Folder.PathEquals(folder));
 	}
 
-	public void SetPackages(List<ILocalPackageWithContents> content)
+	public void SetPackages(List<ILocalPackageData> content)
 	{
 		packages = content;
 
@@ -204,7 +204,7 @@ internal class PackageManager : IPackageManager
 		PackageWatcher.Resume();
 	}
 
-	public void MoveToLocalFolder(ILocalPackage item)
+	public void MoveToLocalFolder(ILocalPackageData item)
 	{
 		if (item is Asset asset)
 		{
@@ -212,7 +212,7 @@ internal class PackageManager : IPackageManager
 			return;
 		}
 
-		if (item.LocalParentPackage?.Assets?.Any() ?? false)
+		if (item.GetLocalPackage()?.Assets?.Any() ?? false)
 		{
 			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.AssetsPath, Path.GetFileName(item.Folder)));
 
@@ -221,7 +221,7 @@ internal class PackageManager : IPackageManager
 			target.RemoveEmptyFolders();
 		}
 
-		if (item.LocalParentPackage?.Mod is not null)
+		if (item.GetLocalPackage()?.Mod is not null)
 		{
 			var target = new DirectoryInfo(CrossIO.Combine(_locationManager.ModsPath, Path.GetFileName(item.Folder)));
 

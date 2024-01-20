@@ -33,13 +33,13 @@ internal class SubscriptionsManager : ISubscriptionsManager
 	public bool SubscriptionsPending => CrossIO.FileExists(_filePath) && !_citiesManager.IsRunning();
 
 	private readonly IPackageManager _contentManager;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly ICitiesManager _citiesManager;
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 	private readonly SettingsService _settings;
 
-	public SubscriptionsManager(IPackageManager contentManager, ILocationManager locationManager, ICitiesManager citiesManager, ISettings settings, ILogger logger, INotifier notifier)
+	public SubscriptionsManager(IPackageManager contentManager, ILocationService locationManager, ICitiesManager citiesManager, ISettings settings, ILogger logger, INotifier notifier)
 	{
 		_contentManager = contentManager;
 		_locationManager = locationManager;
@@ -48,7 +48,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 		_logger = logger;
 		_notifier = notifier;
 
-		_filePath = Path.Combine(_locationManager.SkyveAppDataPath, "SubscriptionTransfer.xml");
+		_filePath = Path.Combine(_locationManager.SkyveDataPath, "SubscriptionTransfer.xml");
 		_delayedDownloadsAction = new(4000, RunDownload);
 
 		if (CrossIO.FileExists(_filePath))
@@ -63,7 +63,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
 	public bool IsSubscribing(IPackage package)
 	{
-		return package.LocalParentPackage is null ? SubscribingTo.Contains(package.Id) || PendingSubscribingTo.Contains(package.Id) : UnsubscribingFrom.Contains(package.Id) || PendingUnsubscribingFrom.Contains(package.Id);
+		return package.GetLocalPackage() is null ? SubscribingTo.Contains(package.Id) || PendingSubscribingTo.Contains(package.Id) : UnsubscribingFrom.Contains(package.Id) || PendingUnsubscribingFrom.Contains(package.Id);
 	}
 
 	public bool Subscribe(IEnumerable<IPackageIdentity> ids)
@@ -204,7 +204,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
 		SubscriptionListWatcher = new FileWatcher
 		{
-			Path = _locationManager.SkyveAppDataPath,
+			Path = _locationManager.SkyveDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = "SubscriptionList.txt"
 		};
@@ -216,7 +216,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
 		SubscriptionTransferWatcher = new FileWatcher
 		{
-			Path = _locationManager.SkyveAppDataPath,
+			Path = _locationManager.SkyveDataPath,
 			NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 			Filter = "SubscriptionTransfer.xml"
 		};

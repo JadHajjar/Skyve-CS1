@@ -50,7 +50,7 @@ public class SettingsFile
 	public string fileName
 	{
 		get => Path.GetFileNameWithoutExtension(m_PathName);
-		set => m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, Path.ChangeExtension(value, extension));
+		set => m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationService>().AppDataPath, Path.ChangeExtension(value, extension));
 	}
 
 	public string systemFileName
@@ -58,7 +58,7 @@ public class SettingsFile
 		get => Path.GetFileNameWithoutExtension(m_PathName);
 		set
 		{
-			m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().GamePath, Path.ChangeExtension(value, extension));
+			m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationService>().GamePath, Path.ChangeExtension(value, extension));
 			isSystem = true;
 		}
 	}

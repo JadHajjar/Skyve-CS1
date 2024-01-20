@@ -34,7 +34,7 @@ public class CustomTagsLibrary
 	{
 		try
 		{
-			var path = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, filename);
+			var path = CrossIO.Combine(ServiceCenter.Get<ILocationService>().AppDataPath, filename);
 
 			if (assetTags.Count == 0)
 			{
@@ -74,7 +74,7 @@ public class CustomTagsLibrary
 			var instance = new CustomTagsLibrary();
 			instance.assetTags.Clear();
 
-			var path = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, filename);
+			var path = CrossIO.Combine(ServiceCenter.Get<ILocationService>().AppDataPath, filename);
 
 			if (!CrossIO.FileExists(path))
 			{

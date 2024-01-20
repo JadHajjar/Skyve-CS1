@@ -1,14 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build;Publish">
-	<Import Project="../../Skyve-CS1/Version.props" />
+﻿<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build">
 	<Import Project="../../Skyve/Config.props" />
+	<Import Project="../../Skyve/CS1-Version.props" />
 	<PropertyGroup>
 		<LangVersion>latest</LangVersion>
 		<Description>Helps to manage your mods and assets</Description>
-		<Configurations>Debug;Release;Stable</Configurations>
 		<DebugType>embedded</DebugType>
 		<DebugSymbols>true</DebugSymbols>
 		<Nullable>enable</Nullable>
-		<DefineConstants>$(DefineConstants);SkyveApp;CS1</DefineConstants>
+		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Deterministic>false</Deterministic>
@@ -16,7 +15,6 @@
 		<TargetFramework>net4.7.2</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PathMap>$(MSBuildProjectDirectory)\=$(ProjectName)\</PathMap>
 		<StartupObject>Skyve.App.CS1.Program</StartupObject>
 		<ApplicationIcon>Resources\Skyve.ico</ApplicationIcon>
 		<SignAssembly>True</SignAssembly>
@@ -64,19 +62,32 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="MainForm.cs">
+		  <SubType>Form</SubType>
+		</Compile>
 		<Compile Update="Properties\Resources.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
+		<Compile Update="UserInterface\Content\DownloadsInfoControl.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="UserInterface\Content\SubscriptionInfoControl.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
 		<Compile Update="UserInterface\Dashboard\D_Playsets.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
-		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs">
-		  <SubType>UserControl</SubType>
+		<Compile Update="UserInterface\Forms\RatingInfoForm.cs">
+		  <SubType>Form</SubType>
 		</Compile>
+		<Compile Update="UserInterface\Panels\PC_MissingPackages.cs" />
+		<Compile Update="UserInterface\Panels\PC_Options.cs" />
+		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs" />
 		<Compile Update="UserInterface\Panels\PC_SkyveChangeLog.cs" />
 		<Compile Update="UserInterface\Panels\PC_Utilities.cs" />
+		<Compile Update="UserInterface\Panels\PC_ViewCollection.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -115,7 +126,7 @@
 			<Output TaskParameter="Assemblies" ItemName="Targets" />
 		</GetAssemblyIdentity>
 		<Message Importance="high" Text="$(SolutionName)" />
-		<Copy SourceFiles="..\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
+		<Copy SourceFiles="..\..\Skyve\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
 		<Copy SourceFiles="$(OutDir)\Skyve.App.CS1.exe" DestinationFiles="$(DeployDir)\Skyve.exe" />
 		<Copy SourceFiles="$(OutDir)\Skyve.App.CS1.exe.config" DestinationFiles="$(DeployDir)\Skyve.exe.config" />
 		<Copy SourceFiles="$(OutDir)\Resources\mono-debug._dll" DestinationFiles="$(DeployDir)\mono-debug._dll" />

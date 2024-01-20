@@ -15,7 +15,7 @@ public partial class PC_Utilities : PanelContent
 	private readonly ICitiesManager _citiesManager;
 	private readonly ISubscriptionsManager _subscriptionsManager;
 	private readonly INotifier _notifier;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly IPackageManager _contentManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IWorkshopService _workshopService;

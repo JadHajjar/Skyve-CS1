@@ -19,12 +19,12 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	private readonly PlaysetManager _playsetManager;
 	private readonly ISettings _settings;
 	private readonly INotifier _notifier;
-	private readonly IBulkUtil _bulkUtil;
+	private readonly IPackageUtil  _packageUtil;
 	private readonly IModUtil _modUtil;
 
 	public event Action? StageChanged;
 	public event Action? AskForConfirmation;
-	public event Action<List<ILocalPackage>>? PromptResult;
+	public event Action<List<ILocalPackageData>>? PromptResult;
 
 	public bool IsInProgress => currentState is not null;
 	public string CurrentAction => LocaleHelper.GetGlobalText(currentState?.Stage.ToString());
@@ -34,7 +34,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	public int CurrentStage => currentState?.CurrentStage ?? 0;
 	public int TotalStages => currentState?.TotalStages ?? 0;
 
-	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IBulkUtil bulkUtil, IModLogicManager modLogicManager, IModUtil modUtil)
+	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IPackageUtil packageUtil, IModLogicManager modLogicManager, IModUtil modUtil)
 	{
 		try
 		{ ISave.Load(out currentState, "TroubleshootState.json"); }
@@ -45,7 +45,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		_modLogicManager = modLogicManager;
 		_settings = settings;
 		_notifier = notifier;
-		_bulkUtil = bulkUtil;
+		_packageUtil = packageUtil;
 		_modUtil = modUtil;
 
 		citiesManager.MonitorTick += CitiesManager_MonitorTick;
@@ -69,9 +69,9 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			UnprocessedItems = new()
 		};
 
-		IEnumerable<ILocalPackage> packages = settings.Mods ? _packageManager.Mods : _packageManager.Assets;
+		IEnumerable<ILocalPackageData> packages = settings.Mods ? _packageManager.Packages : _packageManager.Assets;
 
-		var packageToProcess = new List<ILocalPackage>();
+		var packageToProcess = new List<ILocalPackageData>();
 
 		foreach (var item in packages)
 		{
@@ -112,7 +112,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		ApplyConfirmation(true);
 	}
 
-	private static bool CheckPackageValidity(ITroubleshootSettings settings, ILocalPackage item)
+	private static bool CheckPackageValidity(ITroubleshootSettings settings, ILocalPackageData item)
 	{
 		if (settings.ItemIsCausingIssues)
 		{
@@ -225,7 +225,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			}
 			else
 			{
-				_bulkUtil.SetBulkIncluded(GetPackages(new[] { lists.processingItems[0][0] }), currentState.ItemIsMissing);
+				_packageUtil.SetIncluded(GetPackages(new[] { lists.processingItems[0][0] }), currentState.ItemIsMissing);
 
 				PromptResult?.Invoke(GetPackages(new[] { lists.processingItems[0][0] }).ToList());
 
@@ -238,7 +238,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		currentState.ProcessingItems = lists.processingItems;
 		currentState.UnprocessedItems = lists.unprocessedItems;
 
-		_bulkUtil.SetBulkIncluded(GetPackages(currentState.ProcessingItems.SelectMany(x => x)), currentState.ItemIsMissing);
+		_packageUtil.SetIncluded(GetPackages(currentState.ProcessingItems.SelectMany(x => x)), currentState.ItemIsMissing);
 
 		currentState.CurrentStage++;
 	}
@@ -263,7 +263,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		return (list1, list2);
 	}
 
-	private List<List<string>> GetItemGroups(List<ILocalPackage> items)
+	private List<List<string>> GetItemGroups(List<ILocalPackageData> items)
 	{
 		var groups = new List<List<string>>();
 
@@ -283,7 +283,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		return groups;
 	}
 
-	private void GetPairedItems(List<ILocalPackage> items, List<string> group, ILocalPackage current)
+	private void GetPairedItems(List<ILocalPackageData> items, List<string> group, ILocalPackageData current)
 	{
 		foreach (var item in items)
 		{
@@ -303,7 +303,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		}
 	}
 
-	private bool AreItemsPaired(ILocalPackage packageA, ILocalPackage packageB)
+	private bool AreItemsPaired(ILocalPackageData packageA, ILocalPackageData packageB)
 	{
 		if (packageA != null && packageB != null)
 		{
@@ -314,9 +314,9 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		return false;
 	}
 
-	private IEnumerable<ILocalPackage> GetPackages(IEnumerable<string> packagePaths)
+	private IEnumerable<ILocalPackageData> GetPackages(IEnumerable<string> packagePaths)
 	{
-		IEnumerable<ILocalPackage> packages = currentState!.Mods ? _packageManager.Mods : _packageManager.Assets;
+		IEnumerable<ILocalPackageData> packages = currentState!.Mods ? _packageManager.Packages : _packageManager.Assets;
 
 		foreach (var package in packages)
 		{

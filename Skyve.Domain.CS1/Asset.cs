@@ -9,11 +9,11 @@ using System.IO;
 namespace Skyve.Domain.CS1;
 public class Asset : IAsset
 {
-	public Asset(ILocalPackageWithContents package, string crpPath, SkyveShared.AssetInfoCache.Asset? asset)
+	public Asset(ILocalPackageData package, string crpPath, SkyveShared.AssetInfoCache.Asset? asset)
 	{
 		FilePath = crpPath;
 		LocalParentPackage = package;
-		LocalSize = new FileInfo(FilePath).Length;
+		FileSize = new FileInfo(FilePath).Length;
 		LocalTime = File.GetLastWriteTimeUtc(FilePath);
 
 		if (asset is not null)
@@ -31,20 +31,20 @@ public class Asset : IAsset
 	}
 
 	public string FilePath { get; }
-	public ILocalPackageWithContents LocalParentPackage { get; }
-	public long LocalSize { get; }
+	public ILocalPackageData LocalParentPackage { get; }
+	public long FileSize { get; }
 	public DateTime LocalTime { get; }
 	public string Name { get; }
 	public string[] AssetTags { get; }
 	public string FullName { get; }
-	public bool IsMod => LocalParentPackage.IsMod;
+	public bool IsCodeMod => LocalParentPackage.IsCodeMod;
 	public string Folder => LocalParentPackage.Folder;
 	public bool IsLocal => LocalParentPackage.IsLocal;
 	public bool IsBuiltIn => LocalParentPackage.IsBuiltIn;
 	public IEnumerable<IPackageRequirement> Requirements => LocalParentPackage.Requirements;
 	public ulong Id => LocalParentPackage.Id;
 	public string? Url => LocalParentPackage.Url;
-	ILocalPackage? IPackage.LocalPackage => this;
+	ILocalPackageData? IPackage.LocalPackage => this;
 
 	public override bool Equals(object? obj)
 	{

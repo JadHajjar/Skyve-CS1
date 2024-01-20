@@ -168,7 +168,7 @@ partial class PC_Utilities
 			this.B_LoadCollection.AutoSize = true;
 			this.B_LoadCollection.ColorShade = null;
 			this.B_LoadCollection.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon18.Name = "I_Import";
+			dynamicIcon18.Name = "I_Install";
 			this.B_LoadCollection.ImageName = dynamicIcon18;
 			this.B_LoadCollection.Location = new System.Drawing.Point(1344, 3);
 			this.B_LoadCollection.Name = "B_LoadCollection";

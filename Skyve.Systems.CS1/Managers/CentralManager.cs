@@ -21,7 +21,7 @@ internal class CentralManager : ICentralManager
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPlaysetManager _playsetManager;
 	private readonly ICitiesManager _citiesManager;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly ISubscriptionsManager _subscriptionManager;
 	private readonly IPackageManager _packageManager;
 	private readonly IContentManager _contentManager;
@@ -30,13 +30,13 @@ internal class CentralManager : ICentralManager
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 	private readonly IModUtil _modUtil;
-	private readonly IBulkUtil _bulkUtil;
+	private readonly IPackageUtil _bulkUtil;
 	private readonly IVersionUpdateService _versionUpdateService;
 	private readonly INotificationsService _notificationsService;
 	private readonly IUpdateManager _updateManager;
 	private readonly IAssetUtil _assetUtil;
 
-	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationManager locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IBulkUtil bulkUtil, IVersionUpdateService versionUpdateService, INotificationsService notificationsService, IUpdateManager updateManager, IAssetUtil assetUtil)
+	public CentralManager(IModLogicManager modLogicManager, ICompatibilityManager compatibilityManager, IPlaysetManager profileManager, ICitiesManager citiesManager, ILocationService locationManager, ISubscriptionsManager subscriptionManager, IPackageManager packageManager, IContentManager contentManager, ColossalOrderUtil colossalOrderUtil, ISettings settings, ILogger logger, INotifier notifier, IModUtil modUtil, IPackageUtil bulkUtil, IVersionUpdateService versionUpdateService, INotificationsService notificationsService, IUpdateManager updateManager, IAssetUtil assetUtil)
 	{
 		_modLogicManager = modLogicManager;
 		_compatibilityManager = compatibilityManager;
@@ -58,7 +58,7 @@ internal class CentralManager : ICentralManager
 		_assetUtil = assetUtil;
 	}
 
-	public void Start()
+	public async void Start()
 	{
 		if (!_settings.SessionSettings.FirstTimeSetupCompleted)
 		{
@@ -78,7 +78,7 @@ internal class CentralManager : ICentralManager
 
 		_logger.Info("Loading packages..");
 
-		var content = _contentManager.LoadContents();
+		var content = await _contentManager.LoadContents();
 
 		_logger.Info($"Loaded {content.Count} packages");
 
@@ -107,7 +107,7 @@ internal class CentralManager : ICentralManager
 
 		_subscriptionManager.Start();
 
-		if (CommandUtil.PreSelectedProfile == _playsetManager.CurrentPlayset.Name)
+		if (_playsetManager.CurrentPlayset is not null && CommandUtil.PreSelectedProfile == _playsetManager.CurrentPlayset.Name)
 		{
 			_logger.Info($"[Command] Applying Playset ({_playsetManager.CurrentPlayset.Name})..");
 			_playsetManager.SetCurrentPlayset(_playsetManager.CurrentPlayset);
@@ -196,14 +196,14 @@ internal class CentralManager : ICentralManager
 
 		_logger.Info("Saved Session Settings");
 
-		Directory.CreateDirectory(_locationManager.SkyveAppDataPath);
+		Directory.CreateDirectory(_locationManager.SkyveDataPath);
 
-		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Skyve from the main menu after deleting this file.");
+		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveDataPath, "SetupComplete.txt"), "Delete this file if your LOT hasn't been set up correctly and want to try again.\r\n\r\nLaunch the game, enable the mod and open Skyve from the main menu after deleting this file.");
 	}
 
-	private void AnalyzePackages(List<ILocalPackageWithContents> content)
+	private void AnalyzePackages(List<ILocalPackageData> content)
 	{
-		var blackList = new List<ILocalPackageWithContents>();
+		var blackList = new List<ILocalPackageData>();
 		var firstTime = _updateManager.IsFirstTime();
 
 		_notifier.BulkUpdating = true;
@@ -228,7 +228,7 @@ internal class CentralManager : ICentralManager
 
 				if (_settings.UserSettings.LinkModAssets && package.Assets is not null)
 				{
-					_bulkUtil.SetBulkIncluded(package.Assets, _modUtil.IsIncluded(package.Mod));
+					_bulkUtil.SetIncluded(package.Assets, _modUtil.IsIncluded(package.Mod));
 				}
 
 				_modLogicManager.Analyze(package.Mod, _modUtil);

@@ -26,7 +26,7 @@ internal static class Program
 		App.Program.ExecutablePath = Application.ExecutablePath;
 
 		ISave.AppName = "Skyve-CS1";
-		ISave.CustomSaveDirectory = CurrentDirectory;
+		ISave.DocsFolder = CurrentDirectory;
 
 		ServiceCenter.Provider = BuildServices();
 	}
@@ -64,7 +64,7 @@ internal static class Program
 
 				if (Directory.Exists(Path.Combine(folder, ISave.AppName)))
 				{
-					ISave.CustomSaveDirectory = folder;
+					ISave.DocsFolder = folder;
 				}
 			}
 			catch { }
@@ -111,6 +111,7 @@ internal static class Program
 			Locale.Load();
 			LocaleCR.Load();
 			LocaleSlickUI.Load();
+			LocaleCS1.Load();
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -120,7 +121,7 @@ internal static class Program
 				SetProcessDPIAware();
 			}
 
-			if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
+			if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationService.GamePath)]))
 			{
 				if (MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OKIgnore, PromptIcons.Hand) == DialogResult.OK)
 				{

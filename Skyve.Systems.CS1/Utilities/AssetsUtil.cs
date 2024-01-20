@@ -48,7 +48,7 @@ internal class AssetsUtil : IAssetUtil
 		_notifier.ContentLoaded += BuildAssetIndex;
 	}
 
-	public IEnumerable<IAsset> GetAssets(ILocalPackageWithContents package, bool withSubDirectories = true)
+	public IEnumerable<IAsset> GetAssets(ILocalPackageData package, bool withSubDirectories = true)
 	{
 		if (!Directory.Exists(package.Folder))
 		{

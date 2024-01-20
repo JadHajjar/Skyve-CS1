@@ -19,7 +19,7 @@ internal class VersionUpdateService : IVersionUpdateService
 		_settings = settings;
 	}
 
-	public void Run(List<ILocalPackageWithContents> content)
+	public void Run(List<ILocalPackageData> content)
 	{
 		if (_settings.SessionSettings.LastVersioningNumber < 1)
 		{
@@ -53,7 +53,7 @@ internal class VersionUpdateService : IVersionUpdateService
 				}
 			}
 
-			ServiceCenter.Get<IBulkUtil>().SetBulkIncluded(excludedPackages, false);
+			ServiceCenter.Get<IPackageUtil>().SetIncluded(excludedPackages, false);
 
 			SteamUtil.ClearCache();
 

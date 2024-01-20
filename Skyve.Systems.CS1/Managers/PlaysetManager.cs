@@ -50,7 +50,7 @@ internal class PlaysetManager : IPlaysetManager
 	public event PromptMissingItemsDelegate? PromptMissingItems;
 
 	private readonly ILogger _logger;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly ISettings _settings;
 	private readonly IPackageManager _packageManager;
 	private readonly IPackageUtil _packageUtil;
@@ -60,7 +60,7 @@ internal class PlaysetManager : IPlaysetManager
 	private readonly IAssetUtil _assetUtil;
 	private readonly IDlcManager _dlcManager;
 
-	public PlaysetManager(ILogger logger, ILocationManager locationManager, ISettings settings, IPackageManager packageManager, IPackageUtil packageUtil, ICompatibilityManager compatibilityManager, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IDlcManager dlcManager)
+	public PlaysetManager(ILogger logger, ILocationService locationManager, ISettings settings, IPackageManager packageManager, IPackageUtil packageUtil, ICompatibilityManager compatibilityManager, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IDlcManager dlcManager)
 	{
 		_logger = logger;
 		_locationManager = locationManager;
@@ -92,7 +92,7 @@ internal class PlaysetManager : IPlaysetManager
 
 		CurrentPlayset ??= Playset.TemporaryPlayset;
 
-		if (Directory.Exists(_locationManager.SkyveAppDataPath))
+		if (Directory.Exists(_locationManager.SkyveDataPath))
 		{
 			Directory.CreateDirectory(_locationManager.SkyvePlaysetsAppDataPath);
 
@@ -254,7 +254,7 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			try
 			{
-				var unprocessedMods = _packageManager.Mods.ToList();
+				var unprocessedMods = _packageManager.Packages.ToList();
 				var unprocessedAssets = _packageManager.Assets.ToList();
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
@@ -331,7 +331,7 @@ internal class PlaysetManager : IPlaysetManager
 		{
 			try
 			{
-				var unprocessedMods = _packageManager.Mods.ToList();
+				var unprocessedMods = _packageManager.Packages.ToList();
 				var unprocessedAssets = _packageManager.Assets.ToList();
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
@@ -413,14 +413,14 @@ internal class PlaysetManager : IPlaysetManager
 
 			try
 			{
-				CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"));
+				CrossIO.DeleteFile(CrossIO.Combine(_locationManager.SkyveDataPath, "CurrentPlayset"));
 			}
 			catch { }
 
 			return;
 		}
 
-		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveAppDataPath, "CurrentPlayset"), playset.Name);
+		File.WriteAllText(CrossIO.Combine(_locationManager.SkyveDataPath, "CurrentPlayset"), playset.Name);
 
 		if (SystemsProgram.MainForm as SlickForm is null)
 		{
@@ -436,7 +436,7 @@ internal class PlaysetManager : IPlaysetManager
 	{
 		try
 		{
-			var unprocessedMods = _packageManager.Mods.ToList();
+			var unprocessedMods = _packageManager.Packages.ToList();
 			var unprocessedAssets = _packageManager.Assets.ToList();
 			var missingMods = new List<Playset.Mod>();
 			var missingAssets = new List<Playset.Asset>();
@@ -682,7 +682,7 @@ internal class PlaysetManager : IPlaysetManager
 #if DEBUG
 					if (currentPlayset is not null)
 					{
-						_logger.Debug($"Playset removed: {currentPlayset?.Name}");
+						_logger.Debug($"Playset removed: {currentPlayset?.Name ?? Locale.NoActivePlayset}");
 					}
 
 					_logger.Debug($"Playset added: {newPlayset.Name}");
@@ -713,7 +713,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 
 		playset.Assets = _packageManager.Assets.Where(_assetUtil.IsIncluded).Select(x => new Playset.Asset(x)).ToList();
-		playset.Mods = _packageManager.Mods.Where(_modUtil.IsIncluded).Select(x => new Playset.Mod(x)).ToList();
+		playset.Mods = _packageManager.Packages.Where(_modUtil.IsIncluded).Select(x => new Playset.Mod(x)).ToList();
 		playset.ExcludedDLCs = _dlcManager.GetExcludedDlcs();
 	}
 
@@ -768,7 +768,7 @@ internal class PlaysetManager : IPlaysetManager
 	{
 		var folder = _locationManager.ToLocalPath(mod.RelativePath);
 
-		return _packageManager.Mods.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
+		return _packageManager.Packages.FirstOrDefault(x => x.Folder.Equals(folder, StringComparison.OrdinalIgnoreCase));
 	}
 
 	public IAsset? GetAsset(IPlaysetEntry asset)
@@ -853,7 +853,7 @@ internal class PlaysetManager : IPlaysetManager
 		return Path.GetFileNameWithoutExtension(startName);
 	}
 
-	public List<ILocalPackageWithContents> GetInvalidPackages(PackageUsage usage)
+	public List<ILocalPackageData> GetInvalidPackages(PackageUsage usage)
 	{
 		if ((int)usage == -1)
 		{
@@ -912,9 +912,14 @@ internal class PlaysetManager : IPlaysetManager
 			_watcher.EnableRaisingEvents = false;
 		}
 
-		var newPath = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, Path.GetFileName(obj));
+		var newPath = obj;
 
-		File.Move(obj, newPath);
+		if (Directory.Exists(_locationManager.SkyvePlaysetsAppDataPath))
+		{
+			newPath = CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, Path.GetFileName(obj));
+
+			File.Move(obj, newPath);
+		}
 
 		if (_watcher is not null)
 		{
@@ -968,7 +973,7 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				var profileMod = new Playset.Mod(mod);
 
-				foreach (var playset in Playsets.Skip(1))
+				foreach (var playset in Playsets)
 				{
 					SetIncludedFor(value, profileMod, playset);
 				}
@@ -977,7 +982,7 @@ internal class PlaysetManager : IPlaysetManager
 			{
 				var profileAsset = new Playset.Asset(asset);
 
-				foreach (var playset in Playsets.Skip(1))
+				foreach (var playset in Playsets)
 				{
 					SetIncludedFor(value, profileAsset, playset);
 				}
@@ -987,7 +992,7 @@ internal class PlaysetManager : IPlaysetManager
 				var profileMod = package.Mod is null ? null : new Playset.Mod(package.Mod);
 				var assets = package.Assets?.Select(x => new Playset.Asset(x)).ToList() ?? new();
 
-				foreach (var playset in Playsets.Skip(1))
+				foreach (var playset in Playsets)
 				{
 					SetIncludedFor(value, profileMod, assets, playset);
 				}
@@ -1109,7 +1114,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		else
 		{
-			if (ipackage.IsMod)
+			if (ipackage.IsCodeMod)
 			{
 				return (playset as Playset)!.Mods.Any(x => x.Id == ipackage.Id);
 			}

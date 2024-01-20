@@ -13,10 +13,10 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 	private readonly SlickCheckbox[] _launchOptions;
 
 	private readonly IPlaysetManager _playsetManager;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly IPackageManager _packageManager;
 	private readonly ISettings _settings;
-	private readonly IBulkUtil _bulkUtil;
+	private readonly IPackageUtil _bulkUtil;
 	private readonly IIOUtil _iOUtil;
 	private readonly INotifier _notifier;
 	private readonly ITagsService _tagsService;
@@ -91,7 +91,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 
 	protected override void LocaleChanged()
 	{
-		Text = Locale.PlaysetBubble;
+		Text = Locale.ActivePlayset;
 		L_TempProfile.Text = Locale.TemporaryPlaysetCanNotBeEdited;
 		DD_ProfileUsage.Text = Locale.PlaysetUsage;
 		L_Info.Text = Locale.PlaysetSaveInfo;
@@ -383,7 +383,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 				return;
 			}
 
-			_bulkUtil.SetBulkIncluded(invalidPackages, false);
+			_bulkUtil.SetIncluded(invalidPackages, false);
 		}
 
 		ValueChanged(sender, e);

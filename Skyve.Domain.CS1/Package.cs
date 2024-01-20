@@ -10,14 +10,14 @@ using System.Linq;
 
 namespace Skyve.Domain.CS1;
 
-public class Package : ILocalPackageWithContents
+public class Package : ILocalPackageData
 {
 	private ulong id;
 
 	public Package(string folder, bool builtIn, bool workshop, long localSize, DateTime localTime)
 	{
 		Folder = folder.FormatPath();
-		LocalSize = localSize;
+		FileSize = localSize;
 		LocalTime = localTime;
 		IsBuiltIn = builtIn;
 		IsLocal = !workshop;
@@ -35,10 +35,10 @@ public class Package : ILocalPackageWithContents
 	public string Folder { get; set; }
 	public bool IsBuiltIn { get; }
 	public bool IsLocal { get; }
-	public long LocalSize { get; set; }
+	public long FileSize { get; set; }
 	public DateTime LocalTime { get; set; }
 	public string Name => ToString();
-	public bool IsMod => Mod is not null;
+	public bool IsCodeMod => Mod is not null;
 	public string? Url { get; }
 	public IEnumerable<IPackageRequirement> Requirements => this.GetWorkshopInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 
@@ -68,9 +68,9 @@ public class Package : ILocalPackageWithContents
 		set => id = value;
 	}
 
-	ILocalPackageWithContents? IPackage.LocalParentPackage => this;
-	ILocalPackageWithContents ILocalPackage.LocalParentPackage => this;
-	ILocalPackage? IPackage.LocalPackage => this;
+	ILocalPackageData? IPackage.GetLocalPackage() => this;
+	ILocalPackageData ILocalPackageData.GetLocalPackage() => this;
+	ILocalPackageData? IPackage.LocalPackage => this;
 	string ILocalPackageIdentity.FilePath => Folder;
 
 	public override string ToString()

@@ -5,7 +5,7 @@ using System;
 namespace Skyve.Domain.CS1;
 public class KnownPackage
 {
-	public KnownPackage(ILocalPackage x)
+	public KnownPackage(ILocalPackageData x)
 	{
 		Folder = x.Folder;
 		UpdateTime = x.LocalTime;

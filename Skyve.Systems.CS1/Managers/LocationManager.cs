@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Windows.Forms;
 
 namespace Skyve.Systems.CS1.Managers;
-internal class LocationManager : ILocationManager
+internal class LocationManager : ILocationService
 {
 	internal const string LOCAL_APP_DATA_PATH = "%LOCALAPPDATA%";
 	internal const string CITIES_PATH = "%CITIES%";
@@ -31,8 +31,9 @@ internal class LocationManager : ILocationManager
 	public string ManagedDLL => CrossIO.Combine(DataPath, "Managed");
 	public string MonoPath => CrossIO.Combine(DataPath, "Mono");
 	public string AddonsPath => CrossIO.Combine(AppDataPath, "Addons");
-	public string SkyveAppDataPath => CrossIO.Combine(AppDataPath, "Skyve");
-	public string SkyvePlaysetsAppDataPath => CrossIO.Combine(SkyveAppDataPath, "Profiles");
+	public string SkyveDataPath => CrossIO.Combine(AppDataPath, "Skyve");
+	public string SkyveSettingsPath => CrossIO.Combine(AppDataPath, "Skyve");
+	public string SkyvePlaysetsAppDataPath => CrossIO.Combine(SkyveSettingsPath, "Profiles");
 	public string ModsPath => CrossIO.Combine(AddonsPath, "Mods");
 	public string AssetsPath => CrossIO.Combine(AddonsPath, "Assets");
 	public string MapThemesPath => CrossIO.Combine(AddonsPath, "MapThemes");
@@ -129,11 +130,11 @@ internal class LocationManager : ILocationManager
 		{
 			if (Directory.Exists(CrossIO.Combine(AppDataPath, "LoadOrderTwo")))
 			{
-				CrossIO.MoveFolder(CrossIO.Combine(AppDataPath, "LoadOrderTwo"), SkyveAppDataPath, false);
+				CrossIO.MoveFolder(CrossIO.Combine(AppDataPath, "LoadOrderTwo"), SkyveSettingsPath, false);
 
-				if (CrossIO.FileExists(CrossIO.Combine(SkyveAppDataPath, "LoadOrderConfig.xml")) && !CrossIO.FileExists(CrossIO.Combine(SkyveAppDataPath, "SkyveConfig.xml")))
+				if (CrossIO.FileExists(CrossIO.Combine(SkyveSettingsPath, "LoadOrderConfig.xml")) && !CrossIO.FileExists(CrossIO.Combine(SkyveSettingsPath, "SkyveConfig.xml")))
 				{
-					File.Move(CrossIO.Combine(SkyveAppDataPath, "LoadOrderConfig.xml"), CrossIO.Combine(SkyveAppDataPath, "SkyveConfig.xml"));
+					File.Move(CrossIO.Combine(SkyveSettingsPath, "LoadOrderConfig.xml"), CrossIO.Combine(SkyveSettingsPath, "SkyveConfig.xml"));
 				}
 
 				CrossIO.DeleteFolder(CrossIO.Combine(AppDataPath, "LoadOrderTwo"));
@@ -214,11 +215,11 @@ internal class LocationManager : ILocationManager
 
 			SetCorrectPathSeparator();
 
-			Directory.CreateDirectory(SkyveAppDataPath);
+			Directory.CreateDirectory(SkyveSettingsPath);
 
-			if (File.Exists(CrossIO.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(CrossIO.Combine(SkyveAppDataPath, "SkyveConfig.xml")))
+			if (File.Exists(CrossIO.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml")) && !File.Exists(CrossIO.Combine(SkyveSettingsPath, "SkyveConfig.xml")))
 			{
-				CrossIO.CopyFile(CrossIO.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), CrossIO.Combine(SkyveAppDataPath, "SkyveConfig.xml"), true);
+				CrossIO.CopyFile(CrossIO.Combine(AppDataPath, "LoadOrder", "LoadOrderConfig.xml"), CrossIO.Combine(SkyveSettingsPath, "SkyveConfig.xml"), true);
 			}
 		}
 	}

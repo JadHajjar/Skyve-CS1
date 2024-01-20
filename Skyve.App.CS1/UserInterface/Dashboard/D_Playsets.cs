@@ -74,7 +74,7 @@ internal class D_Playsets : IDashboardItem
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), _playsetManager.CurrentPlayset.Name ?? string.Empty, _playsetManager.CurrentPlayset.GetIcon(), out var fore, ref preferredHeight, _playsetManager.CurrentPlayset.Color, Locale.CurrentPlayset);
+		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), _playsetManager.CurrentPlayset.Name ?? string.Empty, _playsetManager.CurrentPlayset.GetIcon(), out var fore, ref preferredHeight, _playsetManager.CurrentPlayset.Color, Locale.ActivePlayset);
 
 		e.Graphics.DrawStringItem(_playsetManager.CurrentPlayset.AutoSave ? Locale.AutoPlaysetSaveOn : Locale.AutoPlaysetSaveOff
 			, Font

@@ -9,7 +9,7 @@ using System.Linq;
 namespace Skyve.Domain.CS1.Notifications;
 public class UpdatedPackagesNotificationInfo : INotificationInfo
 {
-	public UpdatedPackagesNotificationInfo(List<ILocalPackageWithContents> updatedPackages)
+	public UpdatedPackagesNotificationInfo(List<ILocalPackageData> updatedPackages)
 	{
 		_packages = updatedPackages;
 		Time = updatedPackages.Max(x => x.LocalTime);
@@ -19,7 +19,7 @@ public class UpdatedPackagesNotificationInfo : INotificationInfo
 		HasAction = true;
 	}
 
-	private readonly List<ILocalPackageWithContents> _packages;
+	private readonly List<ILocalPackageData> _packages;
 
 	public DateTime Time { get; }
 	public string Title { get; }

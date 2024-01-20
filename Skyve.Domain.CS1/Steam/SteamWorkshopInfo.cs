@@ -22,20 +22,20 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped, IEquatable<SteamWo
 	public int Subscribers { get; set; }
 	public bool IsCollection { get; set; }
 	public int Score { get; set; }
-	public int ScoreVoteCount { get; set; }
-	public bool IsMod { get; set; }
+	public int VoteCount { get; set; }
+	public bool IsCodeMod { get; set; }
 	public ulong[]? RequiredPackageIds { get; set; }
 	public bool IsRemoved { get; set; }
 	public bool IsIncompatible { get; set; }
 	public bool IsBanned { get; set; }
 	public bool IsInvalid { get; set; }
 	public string Name { get; set; }
-	public string[] Tags { get; set; }
+	public Dictionary<string, string> Tags { get; set; }
 	public ulong Id { get; set; }
 	public string? Url { get; set; }
 	public DateTime Timestamp { get; set; }
 
-	[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => RequiredPackageIds?.Select(x => new SteamPackageRequirement(ServiceCenter.Get<ICompatibilityManager>().GetFinalSuccessor(new GenericPackageIdentity(x)).Id, !IsMod)) ?? Enumerable.Empty<IPackageRequirement>();
+	[JsonIgnore] public IEnumerable<IPackageRequirement> Requirements => RequiredPackageIds?.Select(x => new SteamPackageRequirement(ServiceCenter.Get<ICompatibilityManager>().GetFinalSuccessor(new GenericPackageIdentity(x)).Id, !IsCodeMod)) ?? Enumerable.Empty<IPackageRequirement>();
 	[JsonIgnore] public IUser? Author => ServiceCenter.Get<IWorkshopService>().GetUser(AuthorId) ?? (AuthorId > 0 ? new SteamUser { SteamId = AuthorId, Name = AuthorId.ToString() } : null);
 
 	public SteamWorkshopInfo(SteamWorkshopItemEntry entry)
@@ -49,27 +49,27 @@ public class SteamWorkshopInfo : IWorkshopInfo, ITimestamped, IEquatable<SteamWo
 		Description = entry.file_description;
 		ServerTime = _epoch.AddSeconds(entry.time_updated);
 		Score = CalculateScore(entry);
-		ScoreVoteCount = (entry.vote_data?.votes_down ?? 0) + (entry.vote_data?.votes_up ?? 0);
+		VoteCount = (entry.vote_data?.votes_down ?? 0) + (entry.vote_data?.votes_up ?? 0);
 		Subscribers = entry.subscriptions;
 		IsRemoved = entry.result is not 1 and not 17;
 		IsBanned = entry.banned || entry.result is 16 or 17;
 		IsIncompatible = entry.incompatible;
 		IsCollection = entry.file_type == 2;
 		IsInvalid = entry.creator_appid != 255710;
-		IsMod = entry.tags?.Any(x => x.display_name == "Mod") ?? false;
+		IsCodeMod = entry.tags?.Any(x => x.display_name == "Mod") ?? false;
 		Url = $"https://steamcommunity.com/workshop/filedetails/?id={Id}";
 
 		RequiredPackageIds = entry.children is null ? new ulong[0] : entry.children.Where(x => x.file_type == 0 && ulong.TryParse(x.publishedfileid, out _)).Select(x => ulong.Parse(x.publishedfileid)).ToArray();
 		Tags = (entry.tags
 			?.Select(item => item.tag)
 			?.Where(item => item.IndexOf("compatible", StringComparison.OrdinalIgnoreCase) == -1)
-			?.ToArray()) ?? new string[0];
+			?.ToDictionary(x => x, x => x)) ?? new();
 	}
 
 	public SteamWorkshopInfo()
 	{
 		Name = string.Empty;
-		Tags = new string[0];
+		Tags = new();
 	}
 
 	public override string ToString()

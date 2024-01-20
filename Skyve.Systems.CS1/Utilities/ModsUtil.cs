@@ -138,7 +138,7 @@ internal class ModsUtil : IModUtil
 		SaveChanges();
 	}
 
-	public IMod? GetMod(ILocalPackageWithContents package)
+	public IMod? GetMod(ILocalPackageData package)
 	{
 		return IsValidModFolder(package.Folder, out var dllPath, out var version) ? new Mod(package, dllPath!, version!) : (IMod?)null;
 	}

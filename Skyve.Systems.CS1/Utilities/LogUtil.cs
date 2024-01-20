@@ -16,12 +16,12 @@ namespace Skyve.Systems.CS1.Utilities;
 internal class LogUtil : ILogUtil
 {
 	private readonly ICompatibilityManager _compatibilityManager;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly IPackageManager _contentManager;
 	private readonly IPlaysetManager _profileManager;
 	private readonly ILogger _logger;
 
-	public LogUtil(ILocationManager locationManager, IPackageManager contentManager, IPlaysetManager profileManager, ILogger logger, ICompatibilityManager compatibilityManager)
+	public LogUtil(ILocationService locationManager, IPackageManager contentManager, IPlaysetManager profileManager, ILogger logger, ICompatibilityManager compatibilityManager)
 	{
 		_compatibilityManager = compatibilityManager;
 		_locationManager = locationManager;
@@ -31,7 +31,7 @@ internal class LogUtil : ILogUtil
 
 		try
 		{
-			foreach (var item in Directory.GetFiles(CrossIO.Combine(_locationManager.SkyveAppDataPath, "Support Logs")))
+			foreach (var item in Directory.GetFiles(CrossIO.Combine(_locationManager.SkyveDataPath, "Support Logs")))
 			{
 				if (DateTime.Now - File.GetLastWriteTime(item) > TimeSpan.FromDays(15))
 				{

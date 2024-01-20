@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Skyve.Systems.CS1.Systems;
 internal class WorkshopService : IWorkshopService
 {
-	public void CleanDownload(List<ILocalPackageWithContents> packages)
+	public void CleanDownload(List<ILocalPackageData> packages)
 	{
 		PackageWatcher.Pause();
 		foreach (var item in packages)
@@ -87,7 +87,7 @@ internal class WorkshopService : IWorkshopService
 		return (await SteamUtil.GetWorkshopItemsByUserAsync(ulong.TryParse(userId?.ToString() ?? string.Empty, out var id) ? id : 0, true)).Values;
 	}
 
-	public async Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(PackageSorting sorting, string? query = null, string[]? requiredTags = null, string[]? excludedTags = null, (DateTime, DateTime)? dateRange = null, bool all = false)
+	public async Task<IEnumerable<IWorkshopInfo>> QueryFilesAsync(PackageSorting sorting, string? query = null, string[]? requiredTags = null, bool all = false)
 	{
 		var steamSorting = sorting switch
 		{

@@ -46,8 +46,8 @@ internal class UpdateManager : IUpdateManager
 			return;
 		}
 
-		var newPackages = new List<ILocalPackageWithContents>();
-		var updatedPackages = new List<ILocalPackageWithContents>();
+		var newPackages = new List<ILocalPackageData>();
+		var updatedPackages = new List<ILocalPackageData>();
 
 		foreach (var package in _packageManager.Packages)
 		{
@@ -76,12 +76,12 @@ internal class UpdateManager : IUpdateManager
 		ISave.Save(ServiceCenter.Get<IPackageManager>().Packages.Select(x => new KnownPackage(x)), "LastPackages.json");
 	}
 
-	public bool IsPackageKnown(ILocalPackage package)
+	public bool IsPackageKnown(ILocalPackageData package)
 	{
 		return _previousPackages.ContainsKey(package.Folder);
 	}
 
-	public DateTime GetLastUpdateTime(ILocalPackage package)
+	public DateTime GetLastUpdateTime(ILocalPackageData package)
 	{
 		return _previousPackages.TryGet(package.Folder);
 	}
@@ -91,7 +91,7 @@ internal class UpdateManager : IUpdateManager
 		return _previousPackages.Count == 0;
 	}
 
-	public IEnumerable<ILocalPackageWithContents> GetNewOrUpdatedPackages()
+	public IEnumerable<ILocalPackageData> GetNewOrUpdatedPackages()
 	{
 		if (IsFirstTime())
 		{

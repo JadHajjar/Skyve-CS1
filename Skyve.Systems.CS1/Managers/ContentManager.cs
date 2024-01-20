@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace Skyve.Systems.CS1.Managers;
 internal class ContentManager : IContentManager
@@ -20,7 +21,7 @@ internal class ContentManager : IContentManager
 	private readonly object _contentUpdateLock = new();
 
 	private readonly IPackageManager _packageManager;
-	private readonly ILocationManager _locationManager;
+	private readonly ILocationService _locationManager;
 	private readonly ICompatibilityManager _compatibilityManager;
 	private readonly IPackageUtil _packageUtil;
 	private readonly IModUtil _modUtil;
@@ -28,7 +29,7 @@ internal class ContentManager : IContentManager
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
 
-	public ContentManager(IPackageManager packageManager, ILocationManager locationManager, ICompatibilityManager compatibilityManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IPackageUtil packageUtil)
+	public ContentManager(IPackageManager packageManager, ILocationService locationManager, ICompatibilityManager compatibilityManager, ILogger logger, INotifier notifier, IModUtil modUtil, IAssetUtil assetUtil, IPackageUtil packageUtil)
 	{
 		_packageManager = packageManager;
 		_locationManager = locationManager;
@@ -71,7 +72,7 @@ internal class ContentManager : IContentManager
 		}
 	}
 
-	public IEnumerable<ILocalPackage> GetReferencingPackage(ulong steamId, bool includedOnly)
+	public IEnumerable<ILocalPackageData> GetReferencingPackage(ulong steamId, bool includedOnly)
 	{
 		foreach (var item in _packageManager.Packages)
 		{
@@ -159,9 +160,9 @@ internal class ContentManager : IContentManager
 		return 0;
 	}
 
-	public List<ILocalPackageWithContents> LoadContents()
+	public Task<List<ILocalPackageData>> LoadContents()
 	{
-		var packages = new List<ILocalPackageWithContents>();
+		var packages = new List<ILocalPackageData>();
 		var gameModsPath = CrossIO.Combine(_locationManager.GameContentPath, "Mods");
 		var addonsModsPath = _locationManager.ModsPath;
 		var addonsAssetsPath = new[]
@@ -219,7 +220,7 @@ internal class ContentManager : IContentManager
 			getPackage(folder, false, true, false);
 		});
 
-		return packages;
+		return Task.FromResult(packages);
 
 		void getPackage(string folder, bool builtIn, bool workshop, bool expectAssets, bool withSubDirectories = true)
 		{
@@ -316,7 +317,7 @@ internal class ContentManager : IContentManager
 		_packageManager.AddPackage(package);
 	}
 
-	public void RefreshPackage(ILocalPackage localPackage, bool self)
+	public void RefreshPackage(ILocalPackageData localPackage, bool self)
 	{
 		if (localPackage is not Package package)
 		{
@@ -331,7 +332,7 @@ internal class ContentManager : IContentManager
 
 		package.Assets = _assetUtil.GetAssets(package, !self).ToArray();
 		package.Mod = _modUtil.GetMod(package);
-		package.LocalSize = GetTotalSize(package.Folder);
+		package.FileSize = GetTotalSize(package.Folder);
 		package.LocalTime = GetLocalUpdatedTime(package.Folder);
 
 		if (package.IsLocal && package.Mod is null)
