@@ -190,6 +190,21 @@ public class LocaleCS1 : LocaleHelper, ILocale
 	public static Translation ExcludeAll => _instance.GetText("ExcludeAll");
 
 	/// <summary>
+	/// Exclude all disabled items
+	/// </summary>
+	public static Translation ExcludeAllDisabled => _instance.GetText("ExcludeAllDisabled");
+
+	/// <summary>
+	/// Exclude filtered &amp; disabled items
+	/// </summary>
+	public static Translation ExcludeAllDisabledFiltered => _instance.GetText("ExcludeAllDisabledFiltered");
+
+	/// <summary>
+	/// Exclude selected &amp; disabled items
+	/// </summary>
+	public static Translation ExcludeAllDisabledSelected => _instance.GetText("ExcludeAllDisabledSelected");
+
+	/// <summary>
 	/// Exclude filtered items
 	/// </summary>
 	public static Translation ExcludeAllFiltered => _instance.GetText("ExcludeAllFiltered");

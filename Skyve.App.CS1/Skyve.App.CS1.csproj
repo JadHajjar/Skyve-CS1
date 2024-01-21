@@ -10,7 +10,7 @@
 		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>
-		<Deterministic>false</Deterministic>
+		<Deterministic>true</Deterministic>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net4.7.2</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
@@ -76,9 +76,7 @@
 		<Compile Update="UserInterface\Content\SubscriptionInfoControl.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
-		<Compile Update="UserInterface\Dashboard\D_Playsets.cs">
-		  <SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserInterface\Dashboard\D_Playsets.cs" />
 		<Compile Update="UserInterface\Forms\RatingInfoForm.cs">
 		  <SubType>Form</SubType>
 		</Compile>

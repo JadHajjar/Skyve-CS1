@@ -4,7 +4,7 @@
 	<PropertyGroup>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<TargetFramework>net35</TargetFramework>
-		<Deterministic>false</Deterministic>
+		<Deterministic>true</Deterministic>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<DebugType>full</DebugType>
