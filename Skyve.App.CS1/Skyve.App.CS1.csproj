@@ -149,4 +149,13 @@
 		<RemoveDir Directories="$(LOCALAPPDATA)\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)" />
 	</Target>
 
+	<PropertyGroup>
+		<ChangelogToLocale>$([System.IO.Path]::GetFullPath('..\Skyve\ChangelogToLocale\ChangelogToLocale.exe'))</ChangelogToLocale>
+		<OriginalJsonFile>"$([System.IO.Path]::GetFullPath('..\Skyve-CS1\Skyve.App.CS1\Changelog.json'))"</OriginalJsonFile>
+		<LocaleJsonFile>"$([System.IO.Path]::GetFullPath('..\Skyve-CS1\Skyve.App.CS1\Properties\Changelog.json'))"</LocaleJsonFile>
+	</PropertyGroup>
+
+	<Target Name="BuildLocale" BeforeTargets="PreBuildEvent">
+		<Exec Command="$(ChangelogToLocale) $(OriginalJsonFile) $(LocaleJsonFile)" />
+	</Target>
 </Project>
