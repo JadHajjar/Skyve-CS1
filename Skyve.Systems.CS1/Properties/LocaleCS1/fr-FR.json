@@ -5,7 +5,7 @@
   "AutoPlaysetSaveOn": "Sauvegarde automatique activé",
   "AutoPlaysetSaveOff": "Sauvegarde automatique désactivé",
   "CheckFolderInOptions": "Check the options panel in case the wrong folders are being used.",
-  "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
+  "TemporaryPlaysetCanNotBeEdited": "Les paramètres du profil temporaire seront réinitialisés au prochain lancement de l'application",
   "NoAssets": "Disable All Assets",
   "NoMods": "Disable All Mods",
   "AutoSave": "Automatic Save",
