@@ -45,38 +45,38 @@
   },
   "GamePath": "Pasta Steam de Cities: Skylines",
   "SteamPath": "Pasta de instalação da Steam",
-  "VirtualGamePath": "Real \"Cities: Skylines' Steam Folder\" on your Linux/Mac",
-  "VirtualAppDataPath": "Real \"Cities: Skylines' App Data Folder\" on your Linux/Mac",
-  "ChangingFoldersRequiresRestart": "Changing the paths used by the app will require a restart, do you wish to proceed?",
-  "TemporaryPlayset": "Temporary Playset",
-  "OverrideGameChanges": "Override changes made in-game to the Enabled status of mods",
-  "PlaysetSaveInfo": "Changes in this screen are saved automatically, the \"Automatic Save\" option and the save button at the top affect your selected mods, assets & DLCs only",
-  "PlaysetNameChangedIllegalChars": "Some characters were removed from your playset name because they can not be used in a windows file name",
+  "VirtualGamePath": "Pasta Steam real do Cities: Skylines no seu Linux/Mac",
+  "VirtualAppDataPath": "Pasta 'AppData' real do \"Cities: Skylines\" no seu Linux/Mac",
+  "ChangingFoldersRequiresRestart": "Alterar os caminhos usados pelo aplicativo exigirá uma reinicialização. Deseja prosseguir?",
+  "TemporaryPlayset": "Perfil Temporário",
+  "OverrideGameChanges": "Substituir alterações feitas no jogo para o estado \"Habilitado\" dos mods",
+  "PlaysetSaveInfo": "As alterações nesta tela são salvas automaticamente. A opção \"Salvamento Automático\" e o botão de salvamento no topo afetam apenas os mods, recursos e DLCs selecionados por você",
+  "PlaysetNameChangedIllegalChars": "Algumas letras foram removidas do nome do seu perfil porque elas não podem ser usadas em nomes de arquivos do Windows",
   "CopyWorkshopLink": {
-    "One": "Copy Workshop link",
-    "Plural": "Copy the selected packages' Workshop links"
+    "One": "Copiar Link da Oficina",
+    "Plural": "Copiar os links da Oficina dos pacotes selecionados"
   },
   "UnsubscribePackage": {
-    "One": "Unsubscribe to this package",
-    "Plural": "Unsubscribe to the selected packages"
+    "One": "Cancelar Assinatura deste pacote",
+    "Plural": "Cancelar assinatura dos pacotes selecionados"
   },
   "CopyWorkshopId": {
-    "One": "Copy this package's Workshop ID",
-    "Plural": "Copy the selected packages' Workshop IDs"
+    "One": "Copie o ID da Oficina deste pacote",
+    "Plural": "Copiar os IDs da Oficina dos pacotes selecionados"
   },
-  "UseDebugMono": "Use Debug Mono",
-  "LaunchThroughCities": "Launch through Cities.exe",
-  "UnityProfilerMode": "Use Unity Profiler",
+  "UseDebugMono": "Usar Debug Mono",
+  "LaunchThroughCities": "Iniciar através de Cities.exe",
+  "UnityProfilerMode": "Usar o perfil Unity",
   "IncludeAllItemsInThisPackage": {
-    "One": "Include all items in this package",
-    "Plural": "Include all of the selected packages"
+    "One": "Inclua todos os itens deste Pacote",
+    "Plural": "Incluir todos os pacotes selecionados"
   },
   "ExcludeAllItemsInThisPackage": {
-    "One": "Exclude all items in this package",
-    "Plural": "Exclude all of the selected packages"
+    "One": "Excluir todos os itens deste pacote",
+    "Plural": "Excluir todos os pacotes selecionados"
   },
-  "MissingItemsRemain": "Some items are still missing from this playset. Saving the playset in the future will remove those items from it.",
-  "HidePseudoMods": "Hide pseudo-mods like theme mixes",
+  "MissingItemsRemain": "Alguns itens ainda estão faltando neste perfil. Ao salvar o perfil no futuro, esses itens serão removidos dele.",
+  "HidePseudoMods": "Ocultar pseudo-mods como mesclas de temas",
   "DetectedIssues": "Problemas Detectados",
   "FixAllIssues": "Corrigir todos os problemas",
   "LsmImport": "Relatório do Loading Screen Mod",
@@ -129,42 +129,42 @@
   "DisablePackageCleanup_Tip": "Interrompe a ferramenta de excluir automaticamente pacotes que você não tem assinatura ao abrir o jogo.",
   "MissingPackagesPlayset": "Pacotes faltando do '{0}'",
   "UnusedLSMReport": "Recursos não utilizados do LSM",
-  "MissingLSMReport": "LSM Missing Assets",
-  "RatingCount": "{0} votes {1}",
-  "VotingTitle": "How the voting system works",
-  "VotingInfo1": "The voting icon displayed in the list is split into 3 layers to better represent both small or niche packages, and large & popular packages.",
-  "VotingInfo2": "The first layer is the vote count, which represents the scale of votes based on how many subscribers the package has.",
-  "VotingInfo3": "This uses a special formula to try and be as fair as possible to all creators.",
-  "VotingInfo4": "Negative votes count for {0} compared to positive votes.",
-  "VotingInfo5": "The second layer is the subscriber count, represented by the golden circle around the icon which scales up to {0} subscribers.",
-  "VotingInfo6": "The third and final layer is when a package has a high voting score and over {0} subscribers, represented by a golden icon.",
-  "LoadNewAsset": "New Asset (Editor)",
-  "LoadLoadAsset": "Load Asset (Editor)",
-  "AppDataPath": "Cities: Skylines' App Data Folder",
-  "Subscribe": "Subscribe",
-  "AdvancedIncludeEnable": "Show both of the included and enabled state for mods",
-  "PackageIsRemoved": "'{0}' was removed from Steam",
-  "PackageIsUnknown": "The information from Steam hasn't loaded for '{0}' yet",
-  "PackageIsIncomplete": "The local size of '{0}' ({1}) is different than Steam's {2}",
-  "RedownloadComplete": "Skyve finished re-downloading the packages with issues.",
-  "CleanupComplete": "Skyve finished cleaning up your Workshop downloads.",
+  "MissingLSMReport": "Recursos ausentes do LSM",
+  "RatingCount": "{0} votos {1}",
+  "VotingTitle": "Como funciona o sistema de votação",
+  "VotingInfo1": "O ícone de votação exibido na lista é dividido em 3 camadas para representar melhor tanto pacotes pequenos ou de nicho quanto pacotes grandes e populares.",
+  "VotingInfo2": "A primeira camada é o número de votos, que representa a escala de votos com base na quantidade de assinantes que o pacote possui.",
+  "VotingInfo3": "Isso utiliza uma fórmula especial para tentar ser o mais justo possível com todos os criadores.",
+  "VotingInfo4": "Votos negativos contam {0} em comparação aos votos positivos.",
+  "VotingInfo5": "A segunda camada é o número de assinantes, representado pelo círculo dourado ao redor do ícone, que varia até {0} assinantes.",
+  "VotingInfo6": "A terceira e última camada é quando um pacote possui uma pontuação de votação alta e mais de {0} assinantes, representada por um ícone dourado.",
+  "LoadNewAsset": "Novo Recurso (Editor)",
+  "LoadLoadAsset": "Carregar Recurso (Editor)",
+  "AppDataPath": "Pasta Cities: Skylines em AppData",
+  "Subscribe": "Assinar",
+  "AdvancedIncludeEnable": "Mostrar ambos os estados incluídos e habilitado para mods",
+  "PackageIsRemoved": "'{0}' foi removido da Steam",
+  "PackageIsUnknown": "As informações do Steam ainda não carregaram para '{0}'",
+  "PackageIsIncomplete": "O tamanho local de '{0}' ({1}) é diferente da {2} da Steam",
+  "RedownloadComplete": "Skyve terminou de baixar novamente os pacotes com problemas.",
+  "CleanupComplete": "Skyve terminou de limpar os itens baixados da Oficina.",
   "PendingSubscribeTo": {
-    "One": "{0} item pending subscription",
-    "Plural": "{0} items pending subscription"
+    "One": "{0} Item com assinatura pendente",
+    "Plural": "{0} Itens com assinaturas pendentes"
   },
   "PendingUnsubscribeFrom": {
-    "One": "{0} item pending unsubscription",
-    "Plural": "{0} items pending unsubscription"
+    "One": "{0} Item com cancelamento de assinatura pendente",
+    "Plural": "{0} Itens com cancelamento de assinaturas pendentes"
   },
   "PendingDownloads": {
-    "One": "{0} item pending download",
-    "Plural": "{0} items pending download"
+    "One": "{0} item pendente para baixar",
+    "Plural": "{0} itens pendentes para baixar"
   },
   "PendingDeletions": {
-    "One": "{0} item pending removal",
-    "Plural": "{0} items pending removal"
+    "One": "{0} item pendente de remoção",
+    "Plural": "{0} itens pendentes de remoção"
   },
-  "IncludeItem": "Include this item",
+  "IncludeItem": "Incluir este item",
   "ExcludeItem": "Excluir este item",
   "CancelSubs": "Cancelar todas as assinaturas pendentes",
   "CancelDownloads": "Cancelar todos os downloads pendentes",
