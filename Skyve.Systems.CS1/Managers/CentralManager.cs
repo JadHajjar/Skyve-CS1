@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
 using Skyve.Domain.CS1.Notifications;
 using Skyve.Domain.Systems;

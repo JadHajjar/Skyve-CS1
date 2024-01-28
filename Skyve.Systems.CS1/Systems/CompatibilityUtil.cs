@@ -4,7 +4,7 @@ using Skyve.Domain;
 using Skyve.Domain.Enums;
 using Skyve.Systems.Compatibility;
 using Skyve.Systems.Compatibility.Domain;
-using Skyve.Systems.Compatibility.Domain.Api;
+
 
 using System;
 using System.Linq;
@@ -39,12 +39,12 @@ internal class CompatibilityUtil : ICompatibilityUtil
 
 	public void PopulatePackageReport(IndexedPackage packageData, CompatibilityInfo info, CompatibilityHelper compatibilityHelper)
 	{
-		if (packageData.Package.Type is PackageType.CSM && !packageData.Statuses.ContainsKey(StatusType.Reupload))
+		if (packageData.Package.Type is PackageType.CSM && !packageData.IndexedStatuses.ContainsKey(StatusType.Reupload))
 		{
 			compatibilityHelper.HandleStatus(info, new PackageStatus(StatusType.Reupload, StatusAction.Switch) { Packages = new ulong[] { 1558438291 } });
 		}
 
-		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.Interactions.ContainsKey(InteractionType.RequiredPackages))
+		if (packageData.Package.Type is PackageType.MusicPack or PackageType.ThemeMix or PackageType.IMTMarkings or PackageType.RenderItPreset or PackageType.POFont && !packageData.IndexedInteractions.ContainsKey(InteractionType.RequiredPackages))
 		{
 			compatibilityHelper.HandleInteraction(info, new PackageInteraction(InteractionType.RequiredPackages, StatusAction.SubscribeToPackages)
 			{

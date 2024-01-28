@@ -2,6 +2,7 @@
 
 using Newtonsoft.Json;
 
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain.Systems;
 using Skyve.Systems;
 

@@ -62,24 +62,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="MainForm.cs">
-		  <SubType>Form</SubType>
-		</Compile>
+		<Compile Update="MainForm.cs" />
 		<Compile Update="Properties\Resources.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
 			<DependentUpon>Resources.resx</DependentUpon>
 		</Compile>
-		<Compile Update="UserInterface\Content\DownloadsInfoControl.cs">
-		  <SubType>UserControl</SubType>
-		</Compile>
-		<Compile Update="UserInterface\Content\SubscriptionInfoControl.cs">
-		  <SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserInterface\Content\DownloadsInfoControl.cs" />
+		<Compile Update="UserInterface\Content\SubscriptionInfoControl.cs" />
 		<Compile Update="UserInterface\Dashboard\D_Playsets.cs" />
-		<Compile Update="UserInterface\Forms\RatingInfoForm.cs">
-		  <SubType>Form</SubType>
-		</Compile>
+		<Compile Update="UserInterface\Forms\RatingInfoForm.cs" />
 		<Compile Update="UserInterface\Panels\PC_MissingPackages.cs" />
 		<Compile Update="UserInterface\Panels\PC_Options.cs" />
 		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs" />

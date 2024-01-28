@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Domain;
 using Skyve.Domain.Systems;
 using Skyve.Systems.Compatibility;

@@ -1,5 +1,6 @@
 ﻿using Skyve.App.UserInterface.Content;
 using Skyve.App.UserInterface.Panels;
+using Skyve.Compatibility.Domain.Interfaces;
 using Skyve.Systems.CS1.Utilities;
 
 using System.Drawing;
