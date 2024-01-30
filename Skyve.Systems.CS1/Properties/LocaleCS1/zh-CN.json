@@ -81,7 +81,7 @@
   "FixAllIssues": "Fix All Issues",
   "LsmImport": "Loading Screen Mod Report",
   "LsmImportMissingInfo": "View and subscribe to missing assets",
-  "FirstSetupInfo": "Please enable the Skyve Mod inside Cities: Skylines before using the Skyve App.\r\n\r\nOr click ignore to manually set up your folder settings.",
+  "FirstSetupInfo": "使用 Skyve 应用程序前，请先在游戏主菜单的内容管理器内启用 Skyve 模组。\n\n如果您点击“忽略”，则需要手动设置好文件夹路径。",
   "SetupIncomplete": "您还没完成初始设置",
   "LsmImportUnusedInfo": "View and remove unused assets",
   "SkipFileInfo": "Select a Skip-file to be used for Loading Screen Mod",
