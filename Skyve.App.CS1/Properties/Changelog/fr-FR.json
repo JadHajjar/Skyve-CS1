@@ -74,7 +74,7 @@
   "Fixed the profile list not updating instantly.": "Correction de la liste des profils qui ne s'actualisait pas instantanément.",
   "Fixed an error while fetching steam user info.": "Correction d'une erreur lors de la récupération des informations de l'utilisateur Steam.",
   "Improved Compatibility Report processing speed.": "Amélioration de la vitesse de traitement du rapport de compatibilité.",
-  "Added an indicator that a profile is uploading.": "Ajout d'un indicateur indiquant qu'un profil est en cours de téléchargement.",
+  "Added an indicator that a profile is uploading.": "Ajout d'un indicateur pour les profils en cours de mise en ligne.",
   "Fixed Profiles' Auto-Save not working correctly.": "La sauvegarde automatique des profils corrigée ne fonctionnait pas correctement.",
   "Added 6 new reset buttons in the Utilities page.": "Ajout de 6 nouveaux boutons de réinitialisation dans la page Utilités.",
   "Potential fix for the sudden high CPU usage issue.": "Correction potentielle du problème de l'utilisation élevée du CPU.",
