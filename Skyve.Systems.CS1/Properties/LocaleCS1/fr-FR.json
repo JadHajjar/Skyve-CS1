@@ -121,7 +121,7 @@
   "LsmImportInfo": "Make sure to select the 'Report' file",
   "DeleteAll": "Delete all displayed items",
   "CleanupInfo": "Run a quick cleanup that deletes any package you're not actually subscribed to from your computer as well as forcing the download of missing subscribed packages.",
-  "CleanupTitle": "Workshop Packages Cleanup",
+  "CleanupTitle": "Nettoyage des paquets du Workshop",
   "RunCleanup": "Lancer le nettoyage",
   "CloseCitiesToClean": "You need to close Cities: Skylines to run the cleanup.",
   "CleanupRequiresGameToOpen": "The cleanup process requires opening the game for a brief moment. When you see the game's launcher, click on Play to proceed.",
