@@ -20,7 +20,7 @@ internal class D_Playsets : IDashboardItem
 		_notifier.PlaysetChanged += _notifier_PlaysetChanged;
 		_notifier.PlaysetUpdated += _notifier_PlaysetUpdated;
 
-		Loading = !_notifier.PlaysetsLoaded;
+		Loading = !_notifier.IsPlaysetsLoaded;
 	}
 
 	protected override void Dispose(bool disposing)

@@ -260,7 +260,7 @@ internal class PlaysetManager : IPlaysetManager
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
 
-				_notifier.ApplyingPlayset = true;
+				_notifier.IsApplyingPlayset = true;
 
 				foreach (var mod in (playset as Playset)!.Mods)
 				{
@@ -300,7 +300,7 @@ internal class PlaysetManager : IPlaysetManager
 					PromptMissingItems?.Invoke(this, missingMods.Concat(missingAssets));
 				}
 
-				_notifier.ApplyingPlayset = false;
+				_notifier.IsApplyingPlayset = false;
 				disableAutoSave = true;
 
 				_modUtil.SaveChanges();
@@ -318,7 +318,7 @@ internal class PlaysetManager : IPlaysetManager
 			}
 			finally
 			{
-				_notifier.ApplyingPlayset = false;
+				_notifier.IsApplyingPlayset = false;
 				disableAutoSave = false;
 			}
 		}
@@ -337,7 +337,7 @@ internal class PlaysetManager : IPlaysetManager
 				var missingMods = new List<Playset.Mod>();
 				var missingAssets = new List<Playset.Asset>();
 
-				_notifier.ApplyingPlayset = true;
+				_notifier.IsApplyingPlayset = true;
 
 				foreach (var mod in (playset as Playset)!.Mods)
 				{
@@ -360,7 +360,7 @@ internal class PlaysetManager : IPlaysetManager
 					}
 				}
 
-				_notifier.ApplyingPlayset = false;
+				_notifier.IsApplyingPlayset = false;
 				disableAutoSave = true;
 
 				_modUtil.SaveChanges();
@@ -378,7 +378,7 @@ internal class PlaysetManager : IPlaysetManager
 			}
 			finally
 			{
-				_notifier.ApplyingPlayset = false;
+				_notifier.IsApplyingPlayset = false;
 				disableAutoSave = false;
 			}
 		}
@@ -442,7 +442,7 @@ internal class PlaysetManager : IPlaysetManager
 			var missingMods = new List<Playset.Mod>();
 			var missingAssets = new List<Playset.Asset>();
 
-			_notifier.ApplyingPlayset = true;
+			_notifier.IsApplyingPlayset = true;
 
 			foreach (var mod in (playset as Playset)!.Mods)
 			{
@@ -502,7 +502,7 @@ internal class PlaysetManager : IPlaysetManager
 
 			_dlcManager.SetExcludedDlcs((playset as Playset)!.ExcludedDLCs.ToArray());
 
-			_notifier.ApplyingPlayset = false;
+			_notifier.IsApplyingPlayset = false;
 			disableAutoSave = true;
 
 			_modUtil.SaveChanges();
@@ -537,14 +537,14 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		finally
 		{
-			_notifier.ApplyingPlayset = false;
+			_notifier.IsApplyingPlayset = false;
 			disableAutoSave = false;
 		}
 	}
 
 	public void OnAutoSave()
 	{
-		if (!disableAutoSave && !_notifier.ApplyingPlayset && _notifier.IsContentLoaded && !_notifier.BulkUpdating)
+		if (!disableAutoSave && !_notifier.IsApplyingPlayset && _notifier.IsContentLoaded && !_notifier.IsBulkUpdating)
 		{
 			var playset = (CurrentPlayset as Playset)!;
 
@@ -615,7 +615,7 @@ internal class PlaysetManager : IPlaysetManager
 
 		_notifier.ContentLoaded += CentralManager_ContentLoaded;
 
-		_notifier.PlaysetsLoaded = true;
+		_notifier.IsPlaysetsLoaded = true;
 
 		_notifier.OnPlaysetUpdated();
 

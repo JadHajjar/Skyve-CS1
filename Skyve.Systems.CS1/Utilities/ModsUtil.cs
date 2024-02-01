@@ -67,7 +67,7 @@ internal class ModsUtil : IModUtil
 
 	public void SaveChanges()
 	{
-		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
+		if (_notifier.IsApplyingPlayset || _notifier.IsBulkUpdating)
 		{
 			return;
 		}
@@ -110,7 +110,7 @@ internal class ModsUtil : IModUtil
 			_colossalOrderUtil.SetEnabled(mod, value);
 		}
 
-		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
+		if (_notifier.IsApplyingPlayset || _notifier.IsBulkUpdating)
 		{
 			return;
 		}
@@ -127,7 +127,7 @@ internal class ModsUtil : IModUtil
 
 		_colossalOrderUtil.SetEnabled(mod, value);
 
-		if (_notifier.ApplyingPlayset || _notifier.BulkUpdating)
+		if (_notifier.IsApplyingPlayset || _notifier.IsBulkUpdating)
 		{
 			return;
 		}
