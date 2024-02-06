@@ -111,7 +111,7 @@ internal class CentralManager : ICentralManager
 		if (_playsetManager.CurrentPlayset is not null && CommandUtil.PreSelectedProfile == _playsetManager.CurrentPlayset.Name)
 		{
 			_logger.Info($"[Command] Applying Playset ({_playsetManager.CurrentPlayset.Name})..");
-			_playsetManager.SetCurrentPlayset(_playsetManager.CurrentPlayset);
+			_playsetManager.ActivatePlayset(_playsetManager.CurrentPlayset);
 		}
 
 		_colossalOrderUtil.Start();

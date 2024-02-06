@@ -41,7 +41,7 @@ internal static class Program
 
 		services.AddSingleton<IInterfaceService, InterfaceService>();
 		services.AddSingleton<IAppInterfaceService, InterfaceService>();
-		services.AddSingleton<ICustomPackageService, CustomPackageService>();
+		services.AddSingleton<IRightClickService, CustomPackageService>();
 
 		return services.BuildServiceProvider();
 	}

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.CS1.Services;
-internal class CustomPackageService : ICustomPackageService
+internal class CustomPackageService : IRightClickService
 {
 	public SlickStripItem[] GetRightClickMenuItems(IPackage item)
 	{
