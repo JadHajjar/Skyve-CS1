@@ -6,8 +6,6 @@
   "AutoPlaysetSaveOff": "Auto-save is disabled",
   "CheckFolderInOptions": "Check the options panel in case the wrong folders are being used.",
   "TemporaryPlaysetCanNotBeEdited": "Temporary playset's settings will reset when you re-open the app",
-  "NoAssets": "Disable All Assets",
-  "NoMods": "Disable All Mods",
   "AutoSave": "Automatic Save",
   "ExcludeAll": "Exclude all items",
   "ExcludeAllDisabled": "Exclude all disabled items",
@@ -181,5 +179,6 @@
   "ResetSteamCache": "Clear Steam cache",
   "OpenCitiesAppData": "Open C:S's AppData folder",
   "IncorrectFolderSettings": "Incorrect Folder Settings",
-  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page."
+  "IncorrectFolderSettingsInfo": "Your folder settings are not set up correctly, click here to change or reset them in the Options page.",
+  "RefreshWorkshop": "Refresh Workshop Content"
 }
