@@ -141,7 +141,7 @@ namespace Skyve.App.CS1
 			this.PI_Playsets.Data = null;
 			this.PI_Playsets.Group = "";
 			this.PI_Playsets.Highlighted = false;
-			dynamicIcon4.Name = "I_ProfileSettings";
+			dynamicIcon4.Name = "I_PlaysetSettings";
 			this.PI_Playsets.IconName = dynamicIcon4;
 			this.PI_Playsets.Loading = false;
 			this.PI_Playsets.Selected = false;
@@ -155,7 +155,7 @@ namespace Skyve.App.CS1
 			// 
 			this.PI_CurrentPlayset.Data = null;
 			this.PI_CurrentPlayset.Highlighted = false;
-			dynamicIcon5.Name = "I_ProfileSettings";
+			dynamicIcon5.Name = "I_PlaysetSettings";
 			this.PI_CurrentPlayset.IconName = dynamicIcon5;
 			this.PI_CurrentPlayset.Loading = false;
 			this.PI_CurrentPlayset.Selected = false;

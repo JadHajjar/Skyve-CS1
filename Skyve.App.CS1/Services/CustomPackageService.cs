@@ -48,7 +48,7 @@ internal class CustomPackageService : IRightClickService
 			, new (Locale.EditTags.FormatPlural(list.Count), "I_Tag", isInstalled, action: () => EditTags(list.SelectWhereNotNull(x => x.LocalPackage)!))
 			, new (Locale.EditCompatibility.FormatPlural(list.Count), "I_CompatibilityReport", userService.User.Manager || list.Any(item => userService.User.Equals(item.GetWorkshopInfo()?.Author)), action: () => { App.Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(items.Select(x => x.Id)));})
 			, new ()
-			, new (Locale.OtherPlaysets, "I_ProfileSettings", disabled: true)
+			, new (Locale.OtherPlaysets, "I_PlaysetSettings", disabled: true)
 			, new (Locale.IncludeThisItemInAllPlaysets.FormatPlural(list.Count), "I_Ok", tab: 1, action: () => { new BackgroundAction(() => list.SelectWhereNotNull(x => x.LocalPackage).Foreach(x => profileManager.SetIncludedForAll(x!, true))).Run(); bulkUtil.SetIncluded(list.SelectWhereNotNull(x => x.LocalPackage)!, true); })
 			, new (Locale.ExcludeThisItemInAllPlaysets.FormatPlural(list.Count), "I_Cancel", tab: 1, action: () => { new BackgroundAction(() => list.SelectWhereNotNull(x => x.LocalPackage).Foreach(x => profileManager.SetIncludedForAll(x!, false))).Run(); bulkUtil.SetIncluded(list.SelectWhereNotNull(x => x.LocalPackage)!, false);})
 			, new (Locale.Copy, "I_Copy", !isLocal, fade: true)
