@@ -12,7 +12,6 @@
 	<PropertyGroup>
 		<Deterministic>true</Deterministic>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net4.7.2</TargetFramework>
 		<UseWindowsForms>true</UseWindowsForms>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<StartupObject>Skyve.App.CS1.Program</StartupObject>
