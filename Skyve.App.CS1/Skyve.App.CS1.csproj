@@ -73,9 +73,7 @@
 		<Compile Update="UserInterface\Forms\RatingInfoForm.cs" />
 		<Compile Update="UserInterface\Panels\PC_MissingPackages.cs" />
 		<Compile Update="UserInterface\Panels\PC_Options.cs" />
-		<Compile Update="UserInterface\Panels\PC_PlaysetAdd.cs">
-		  <SubType>UserControl</SubType>
-		</Compile>
+		<Compile Update="UserInterface\Panels\PC_PlaysetAdd.cs" />
 		<Compile Update="UserInterface\Panels\PC_PlaysetSettings.cs" />
 		<Compile Update="UserInterface\Panels\PC_SkyveChangeLog.cs" />
 		<Compile Update="UserInterface\Panels\PC_Utilities.cs" />
