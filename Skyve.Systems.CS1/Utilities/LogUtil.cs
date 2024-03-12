@@ -80,7 +80,7 @@ internal class LogUtil : ILogUtil
 		{
 			if (CrossIO.FileExists(filePath))
 			{
-				var tempFile = Path.GetTempFileName();
+				var tempFile = CrossIO.GetTempFileName();
 
 				CrossIO.CopyFile(filePath, tempFile, true);
 
@@ -124,7 +124,7 @@ internal class LogUtil : ILogUtil
 	{
 		if (CrossIO.FileExists(GameLogFile))
 		{
-			var tempLogFile = Path.GetTempFileName();
+			var tempLogFile = CrossIO.GetTempFileName();
 			CrossIO.CopyFile(GameLogFile, tempLogFile, true);
 			zipArchive.CreateEntryFromFile(tempLogFile, "log.txt");
 
@@ -137,14 +137,14 @@ internal class LogUtil : ILogUtil
 
 		if (CrossIO.FileExists(_logger.LogFilePath))
 		{
-			var tempSkyveLogFile = Path.GetTempFileName();
+			var tempSkyveLogFile = CrossIO.GetTempFileName();
 			CrossIO.CopyFile(_logger.LogFilePath, tempSkyveLogFile, true);
 			zipArchive.CreateEntryFromFile(tempSkyveLogFile, "Skyve\\SkyveLog.log");
 		}
 
 		if (CrossIO.FileExists(_logger.PreviousLogFilePath))
 		{
-			var tempPrevSkyveLogFile = Path.GetTempFileName();
+			var tempPrevSkyveLogFile = CrossIO.GetTempFileName();
 			CrossIO.CopyFile(_logger.PreviousLogFilePath, tempPrevSkyveLogFile, true);
 			zipArchive.CreateEntryFromFile(tempPrevSkyveLogFile, "Skyve\\SkyveLog_Previous.log");
 		}

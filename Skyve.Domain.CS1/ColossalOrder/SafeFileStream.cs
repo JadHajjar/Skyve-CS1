@@ -17,8 +17,8 @@ public class SafeFileStream : Stream
 	public SafeFileStream(string path, FileMode mode)
 	{
 		_mainFilePath = path;
-		_tempFilePath = Path.GetTempFileName();
-		_backupFilePath = Path.GetTempFileName();
+		_tempFilePath = CrossIO.GetTempFileName();
+		_backupFilePath = CrossIO.GetTempFileName();
 
 		// Open the main file stream
 		_mainStream = new FileStream(_mainFilePath, mode);
