@@ -139,7 +139,7 @@ partial class PC_PlaysetSettings
 			this.I_ProfileIcon.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_ProfileIcon.Location = new System.Drawing.Point(37, 5);
 			this.I_ProfileIcon.Margin = new System.Windows.Forms.Padding(0);
-			this.I_ProfileIcon.Name = "I_ProfileIcon";
+			this.I_ProfileIcon.Name = "ProfileIcon";
 			this.I_ProfileIcon.Padding = new System.Windows.Forms.Padding(5);
 			this.I_ProfileIcon.Size = new System.Drawing.Size(32, 32);
 			this.I_ProfileIcon.TabIndex = 0;
@@ -160,7 +160,7 @@ partial class PC_PlaysetSettings
 			// 
 			this.TB_Name.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.TB_Name.EnterTriggersClick = false;
-			dynamicIcon10.Name = "I_Ok";
+			dynamicIcon10.Name = "Ok";
 			this.TB_Name.ImageName = dynamicIcon10;
 			this.TB_Name.LabelText = "PlaysetName";
 			this.TB_Name.Location = new System.Drawing.Point(165, 9);
@@ -182,7 +182,7 @@ partial class PC_PlaysetSettings
 			this.B_Save.ActiveColor = null;
 			this.B_Save.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_Save.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon11.Name = "I_Save";
+			dynamicIcon11.Name = "Save";
 			this.B_Save.ImageName = dynamicIcon11;
 			this.B_Save.Location = new System.Drawing.Point(418, 5);
 			this.B_Save.Margin = new System.Windows.Forms.Padding(0);
@@ -200,7 +200,7 @@ partial class PC_PlaysetSettings
 			this.I_Favorite.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Favorite.Location = new System.Drawing.Point(5, 5);
 			this.I_Favorite.Margin = new System.Windows.Forms.Padding(0);
-			this.I_Favorite.Name = "I_Favorite";
+			this.I_Favorite.Name = "Favorite";
 			this.I_Favorite.Padding = new System.Windows.Forms.Padding(5);
 			this.I_Favorite.Size = new System.Drawing.Size(32, 32);
 			this.I_Favorite.TabIndex = 0;
@@ -212,7 +212,7 @@ partial class PC_PlaysetSettings
 			this.B_EditName.ActiveColor = null;
 			this.B_EditName.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.B_EditName.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon12.Name = "I_Edit";
+			dynamicIcon12.Name = "Edit";
 			this.B_EditName.ImageName = dynamicIcon12;
 			this.B_EditName.Location = new System.Drawing.Point(69, 5);
 			this.B_EditName.Margin = new System.Windows.Forms.Padding(0);
@@ -271,7 +271,7 @@ partial class PC_PlaysetSettings
 			// 
 			this.slickIcon2.ActiveColor = null;
 			this.slickIcon2.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_Add";
+			dynamicIcon1.Name = "Add";
 			this.slickIcon2.ImageName = dynamicIcon1;
 			this.slickIcon2.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon2.Margin = new System.Windows.Forms.Padding(0);
@@ -299,7 +299,7 @@ partial class PC_PlaysetSettings
 			// 
 			this.slickIcon1.ActiveColor = null;
 			this.slickIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon2.Name = "I_TempProfile";
+			dynamicIcon2.Name = "TempProfile";
 			this.slickIcon1.ImageName = dynamicIcon2;
 			this.slickIcon1.Location = new System.Drawing.Point(0, 0);
 			this.slickIcon1.Margin = new System.Windows.Forms.Padding(0);
@@ -317,11 +317,11 @@ partial class PC_PlaysetSettings
 			this.I_TempProfile.ColorStyle = Extensions.ColorStyle.Yellow;
 			this.I_TempProfile.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_TempProfile.Enabled = false;
-			dynamicIcon3.Name = "I_Warning";
+			dynamicIcon3.Name = "Warning";
 			this.I_TempProfile.ImageName = dynamicIcon3;
 			this.I_TempProfile.Location = new System.Drawing.Point(18, 81);
 			this.I_TempProfile.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
-			this.I_TempProfile.Name = "I_TempProfile";
+			this.I_TempProfile.Name = "TempProfile";
 			this.I_TempProfile.Padding = new System.Windows.Forms.Padding(5);
 			this.I_TempProfile.Selected = true;
 			this.I_TempProfile.Size = new System.Drawing.Size(32, 32);
@@ -407,7 +407,7 @@ partial class PC_PlaysetSettings
 			this.TLP_GeneralSettings.Controls.Add(this.CB_AutoSave, 0, 2);
 			this.TLP_GeneralSettings.Controls.Add(this.DD_ProfileUsage, 0, 0);
 			this.TLP_GeneralSettings.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon4.Name = "I_Cog";
+			dynamicIcon4.Name = "Cog";
 			this.TLP_GeneralSettings.ImageName = dynamicIcon4;
 			this.TLP_GeneralSettings.Location = new System.Drawing.Point(3, 3);
 			this.TLP_GeneralSettings.Name = "TLP_GeneralSettings";
@@ -467,7 +467,7 @@ partial class PC_PlaysetSettings
 			this.TLP_LaunchSettings.Controls.Add(this.CB_NewAsset, 0, 6);
 			this.TLP_LaunchSettings.Controls.Add(this.CB_LoadAsset, 1, 6);
 			this.TLP_LaunchSettings.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon5.Name = "I_Launch";
+			dynamicIcon5.Name = "Launch";
 			this.TLP_LaunchSettings.ImageName = dynamicIcon5;
 			this.TLP_LaunchSettings.Location = new System.Drawing.Point(591, 3);
 			this.TLP_LaunchSettings.Name = "TLP_LaunchSettings";
@@ -647,7 +647,7 @@ partial class PC_PlaysetSettings
 			this.TLP_LSM.Controls.Add(this.DD_SkipFile, 0, 3);
 			this.TLP_LSM.Controls.Add(this.CB_SkipFile, 0, 2);
 			this.TLP_LSM.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon6.Name = "I_LSM";
+			dynamicIcon6.Name = "LSM";
 			this.TLP_LSM.ImageName = dynamicIcon6;
 			this.TLP_LSM.Location = new System.Drawing.Point(3, 152);
 			this.TLP_LSM.Name = "TLP_LSM";
@@ -748,7 +748,7 @@ partial class PC_PlaysetSettings
 			this.TLP_AdvancedDev.Controls.Add(this.CB_UnityProfiler, 0, 3);
 			this.TLP_AdvancedDev.Controls.Add(this.CB_DebugMono, 1, 2);
 			this.TLP_AdvancedDev.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon7.Name = "I_Author";
+			dynamicIcon7.Name = "Author";
 			this.TLP_AdvancedDev.ImageName = dynamicIcon7;
 			this.TLP_AdvancedDev.Location = new System.Drawing.Point(591, 377);
 			this.TLP_AdvancedDev.Name = "TLP_AdvancedDev";
@@ -916,11 +916,11 @@ partial class PC_PlaysetSettings
 			this.I_Info.ColorStyle = Extensions.ColorStyle.Icon;
 			this.I_Info.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.I_Info.Enabled = false;
-			dynamicIcon8.Name = "I_Info";
+			dynamicIcon8.Name = "Info";
 			this.I_Info.ImageName = dynamicIcon8;
 			this.I_Info.Location = new System.Drawing.Point(18, 124);
 			this.I_Info.Margin = new System.Windows.Forms.Padding(18, 3, 3, 3);
-			this.I_Info.Name = "I_Info";
+			this.I_Info.Name = "Info";
 			this.I_Info.Padding = new System.Windows.Forms.Padding(5);
 			this.I_Info.Selected = true;
 			this.I_Info.Size = new System.Drawing.Size(32, 32);
@@ -946,7 +946,7 @@ partial class PC_PlaysetSettings
 			this.B_ViewProfiles.ColorShade = null;
 			this.B_ViewProfiles.Cursor = System.Windows.Forms.Cursors.Hand;
 			this.B_ViewProfiles.Dock = System.Windows.Forms.DockStyle.Right;
-			dynamicIcon9.Name = "I_Pages";
+			dynamicIcon9.Name = "Pages";
 			this.B_ViewProfiles.ImageName = dynamicIcon9;
 			this.B_ViewProfiles.LargeImage = true;
 			this.B_ViewProfiles.Location = new System.Drawing.Point(1022, 10);

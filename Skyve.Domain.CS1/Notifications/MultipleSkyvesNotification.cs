@@ -27,7 +27,7 @@ public class MultipleSkyvesNotification : INotificationInfo
         Time = DateTime.Now;
         Title = Locale.MultipleSkyvesDetected;
         Description = Locale.MultipleLOM;
-        Icon = "I_Hazard";
+        Icon = "Hazard";
         Color = FormDesign.Design.RedColor;
         HasAction = true;
 		_skyveInstances = skyveInstances;

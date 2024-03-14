@@ -65,7 +65,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_AppIcon_128 {
             get {
-                object obj = ResourceManager.GetObject("I_AppIcon_128", resourceCulture);
+                object obj = ResourceManager.GetObject("AppIcon_128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -75,7 +75,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_AppIcon_16 {
             get {
-                object obj = ResourceManager.GetObject("I_AppIcon_16", resourceCulture);
+                object obj = ResourceManager.GetObject("AppIcon_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -85,7 +85,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_AppIcon_24 {
             get {
-                object obj = ResourceManager.GetObject("I_AppIcon_24", resourceCulture);
+                object obj = ResourceManager.GetObject("AppIcon_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,7 +95,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_AppIcon_32 {
             get {
-                object obj = ResourceManager.GetObject("I_AppIcon_32", resourceCulture);
+                object obj = ResourceManager.GetObject("AppIcon_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -105,7 +105,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_AppIcon_48 {
             get {
-                object obj = ResourceManager.GetObject("I_AppIcon_48", resourceCulture);
+                object obj = ResourceManager.GetObject("AppIcon_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -115,7 +115,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_AppIcon_64 {
             get {
-                object obj = ResourceManager.GetObject("I_AppIcon_64", resourceCulture);
+                object obj = ResourceManager.GetObject("AppIcon_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -125,7 +125,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_GlowAppIcon_128 {
             get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_128", resourceCulture);
+                object obj = ResourceManager.GetObject("GlowAppIcon_128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -135,7 +135,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_GlowAppIcon_16 {
             get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_16", resourceCulture);
+                object obj = ResourceManager.GetObject("GlowAppIcon_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -145,7 +145,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_GlowAppIcon_24 {
             get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_24", resourceCulture);
+                object obj = ResourceManager.GetObject("GlowAppIcon_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -155,7 +155,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_GlowAppIcon_32 {
             get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_32", resourceCulture);
+                object obj = ResourceManager.GetObject("GlowAppIcon_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -165,7 +165,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_GlowAppIcon_48 {
             get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_48", resourceCulture);
+                object obj = ResourceManager.GetObject("GlowAppIcon_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -175,7 +175,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_GlowAppIcon_64 {
             get {
-                object obj = ResourceManager.GetObject("I_GlowAppIcon_64", resourceCulture);
+                object obj = ResourceManager.GetObject("GlowAppIcon_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -185,7 +185,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_LSM_16 {
             get {
-                object obj = ResourceManager.GetObject("I_LSM_16", resourceCulture);
+                object obj = ResourceManager.GetObject("LSM_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -195,7 +195,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_LSM_24 {
             get {
-                object obj = ResourceManager.GetObject("I_LSM_24", resourceCulture);
+                object obj = ResourceManager.GetObject("LSM_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -205,7 +205,7 @@ namespace Skyve.App.CS1.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap I_LSM_48 {
             get {
-                object obj = ResourceManager.GetObject("I_LSM_48", resourceCulture);
+                object obj = ResourceManager.GetObject("LSM_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

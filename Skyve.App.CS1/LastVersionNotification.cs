@@ -27,13 +27,13 @@ internal class LastVersionNotification : INotificationInfo
 		if (currentChangelog is null)
 		{
 			Title = string.Empty;
-			Icon = "I_Question";
+			Icon = "Question";
 			return;
 		}
 
 		Title = $"v{currentVersion.GetString()} Update";
 		Description = LocaleHelper.GetGlobalText(currentChangelog.Tagline.IfEmpty(currentChangelog.ChangeGroups[0].Name));
-		Icon = "I_Versions";
+		Icon = "Versions";
 		Time = currentChangelog.Date ?? DateTime.Now;
 		HasAction = true;
 	}

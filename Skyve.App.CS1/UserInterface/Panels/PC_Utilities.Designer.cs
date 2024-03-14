@@ -134,7 +134,7 @@ partial class PC_Utilities
 			this.TLP_Main.SetColumnSpan(this.P_Collections, 2);
 			this.P_Collections.Controls.Add(this.tableLayoutPanel1);
 			this.P_Collections.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon19.Name = "I_Steam";
+			dynamicIcon19.Name = "Steam";
 			this.P_Collections.ImageName = dynamicIcon19;
 			this.P_Collections.Location = new System.Drawing.Point(3, 225);
 			this.P_Collections.Name = "P_Collections";
@@ -168,7 +168,7 @@ partial class PC_Utilities
 			this.B_LoadCollection.AutoSize = true;
 			this.B_LoadCollection.ColorShade = null;
 			this.B_LoadCollection.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon18.Name = "I_Install";
+			dynamicIcon18.Name = "Install";
 			this.B_LoadCollection.ImageName = dynamicIcon18;
 			this.B_LoadCollection.Location = new System.Drawing.Point(1344, 3);
 			this.B_LoadCollection.Name = "B_LoadCollection";
@@ -220,7 +220,7 @@ partial class PC_Utilities
 			this.P_Troubleshoot.Controls.Add(this.B_Troubleshoot, 1, 0);
 			this.P_Troubleshoot.Controls.Add(this.L_Troubleshoot, 0, 1);
 			this.P_Troubleshoot.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon2.Name = "I_Wrench";
+			dynamicIcon2.Name = "Wrench";
 			this.P_Troubleshoot.ImageName = dynamicIcon2;
 			this.P_Troubleshoot.Location = new System.Drawing.Point(3, 788);
 			this.P_Troubleshoot.Name = "P_Troubleshoot";
@@ -239,7 +239,7 @@ partial class PC_Utilities
 			this.B_Troubleshoot.AutoSize = true;
 			this.B_Troubleshoot.ColorShade = null;
 			this.B_Troubleshoot.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon1.Name = "I_ArrowRight";
+			dynamicIcon1.Name = "ArrowRight";
 			this.B_Troubleshoot.ImageName = dynamicIcon1;
 			this.B_Troubleshoot.Location = new System.Drawing.Point(1247, 58);
 			this.B_Troubleshoot.Name = "B_Troubleshoot";
@@ -278,7 +278,7 @@ partial class PC_Utilities
 			this.P_Reset.Controls.Add(this.B_ResetCompatibilityCache, 1, 1);
 			this.P_Reset.Controls.Add(this.B_ResetModsCache, 1, 0);
 			this.P_Reset.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon9.Name = "I_Undo";
+			dynamicIcon9.Name = "Undo";
 			this.P_Reset.ImageName = dynamicIcon9;
 			this.P_Reset.Info = "ResetInfo";
 			this.P_Reset.Location = new System.Drawing.Point(3, 896);
@@ -297,7 +297,7 @@ partial class PC_Utilities
 			this.B_ResetImageCache.ColorShade = null;
 			this.B_ResetImageCache.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_ResetImageCache.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon3.Name = "I_RemoveImage";
+			dynamicIcon3.Name = "RemoveImage";
 			this.B_ResetImageCache.ImageName = dynamicIcon3;
 			this.B_ResetImageCache.Location = new System.Drawing.Point(1012, 56);
 			this.B_ResetImageCache.Name = "B_ResetImageCache";
@@ -313,7 +313,7 @@ partial class PC_Utilities
 			this.B_ResetSnoozes.ColorShade = null;
 			this.B_ResetSnoozes.ColorStyle = Extensions.ColorStyle.Yellow;
 			this.B_ResetSnoozes.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon4.Name = "I_Snooze";
+			dynamicIcon4.Name = "Snooze";
 			this.B_ResetSnoozes.ImageName = dynamicIcon4;
 			this.B_ResetSnoozes.Location = new System.Drawing.Point(12, 94);
 			this.B_ResetSnoozes.Name = "B_ResetSnoozes";
@@ -329,7 +329,7 @@ partial class PC_Utilities
 			this.B_ReloadAllData.ColorShade = null;
 			this.B_ReloadAllData.ColorStyle = Extensions.ColorStyle.Yellow;
 			this.B_ReloadAllData.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon5.Name = "I_Refresh";
+			dynamicIcon5.Name = "Refresh";
 			this.B_ReloadAllData.ImageName = dynamicIcon5;
 			this.B_ReloadAllData.Location = new System.Drawing.Point(12, 56);
 			this.B_ReloadAllData.Name = "B_ReloadAllData";
@@ -345,7 +345,7 @@ partial class PC_Utilities
 			this.B_ResetSteamCache.ColorShade = null;
 			this.B_ResetSteamCache.ColorStyle = Extensions.ColorStyle.Red;
 			this.B_ResetSteamCache.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon6.Name = "I_RemoveSteam";
+			dynamicIcon6.Name = "RemoveSteam";
 			this.B_ResetSteamCache.ImageName = dynamicIcon6;
 			this.B_ResetSteamCache.Location = new System.Drawing.Point(1012, 94);
 			this.B_ResetSteamCache.Name = "B_ResetSteamCache";
@@ -361,7 +361,7 @@ partial class PC_Utilities
 			this.B_ResetCompatibilityCache.ColorShade = null;
 			this.B_ResetCompatibilityCache.ColorStyle = Extensions.ColorStyle.Orange;
 			this.B_ResetCompatibilityCache.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon7.Name = "I_CompatibilityReport";
+			dynamicIcon7.Name = "CompatibilityReport";
 			this.B_ResetCompatibilityCache.ImageName = dynamicIcon7;
 			this.B_ResetCompatibilityCache.Location = new System.Drawing.Point(512, 94);
 			this.B_ResetCompatibilityCache.Name = "B_ResetCompatibilityCache";
@@ -377,7 +377,7 @@ partial class PC_Utilities
 			this.B_ResetModsCache.ColorShade = null;
 			this.B_ResetModsCache.ColorStyle = Extensions.ColorStyle.Orange;
 			this.B_ResetModsCache.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon8.Name = "I_Mods";
+			dynamicIcon8.Name = "Mods";
 			this.B_ResetModsCache.ImageName = dynamicIcon8;
 			this.B_ResetModsCache.Location = new System.Drawing.Point(512, 56);
 			this.B_ResetModsCache.Name = "B_ResetModsCache";
@@ -399,7 +399,7 @@ partial class PC_Utilities
 			this.P_Cleanup.Controls.Add(this.L_CleanupInfo, 0, 1);
 			this.P_Cleanup.Controls.Add(this.B_Cleanup, 1, 0);
 			this.P_Cleanup.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon11.Name = "I_Broom";
+			dynamicIcon11.Name = "Broom";
 			this.P_Cleanup.ImageName = dynamicIcon11;
 			this.P_Cleanup.Location = new System.Drawing.Point(3, 117);
 			this.P_Cleanup.Name = "P_Cleanup";
@@ -428,7 +428,7 @@ partial class PC_Utilities
 			this.B_Cleanup.AutoSize = true;
 			this.B_Cleanup.ColorShade = null;
 			this.B_Cleanup.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon10.Name = "I_AppIcon";
+			dynamicIcon10.Name = "AppIcon";
 			this.B_Cleanup.ImageName = dynamicIcon10;
 			this.B_Cleanup.Location = new System.Drawing.Point(1379, 35);
 			this.B_Cleanup.Name = "B_Cleanup";
@@ -446,7 +446,7 @@ partial class PC_Utilities
 			this.P_Text.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_Text.Controls.Add(this.tableLayoutPanel3);
 			this.P_Text.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon13.Name = "I_Text";
+			dynamicIcon13.Name = "Text";
 			this.P_Text.ImageName = dynamicIcon13;
 			this.P_Text.Info = "ImportFromTextInfo";
 			this.P_Text.Location = new System.Drawing.Point(3, 572);
@@ -495,7 +495,7 @@ partial class PC_Utilities
 			this.B_ImportClipboard.AutoSize = true;
 			this.B_ImportClipboard.ColorShade = null;
 			this.B_ImportClipboard.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon12.Name = "I_Copy";
+			dynamicIcon12.Name = "Copy";
 			this.B_ImportClipboard.ImageName = dynamicIcon12;
 			this.B_ImportClipboard.Location = new System.Drawing.Point(517, 113);
 			this.B_ImportClipboard.Name = "B_ImportClipboard";
@@ -512,7 +512,7 @@ partial class PC_Utilities
 			this.P_BOB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.P_BOB.Controls.Add(this.tableLayoutPanel6);
 			this.P_BOB.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon14.Name = "I_XML";
+			dynamicIcon14.Name = "XML";
 			this.P_BOB.ImageName = dynamicIcon14;
 			this.P_BOB.Info = "XMLImportInfo";
 			this.P_BOB.Location = new System.Drawing.Point(765, 572);
@@ -560,7 +560,7 @@ partial class PC_Utilities
 			this.TLP_Main.SetColumnSpan(this.P_LsmReport, 2);
 			this.P_LsmReport.Controls.Add(this.tableLayoutPanel4);
 			this.P_LsmReport.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon15.Name = "I_LSM";
+			dynamicIcon15.Name = "LSM";
 			this.P_LsmReport.ImageName = dynamicIcon15;
 			this.P_LsmReport.Info = "LsmImportInfo";
 			this.P_LsmReport.Location = new System.Drawing.Point(3, 348);
@@ -630,7 +630,7 @@ partial class PC_Utilities
 			this.P_ModIssues.Controls.Add(this.L_Incomplete, 1, 0);
 			this.P_ModIssues.Controls.Add(this.P_Incomplete, 1, 1);
 			this.P_ModIssues.Dock = System.Windows.Forms.DockStyle.Top;
-			dynamicIcon17.Name = "I_ModWarning";
+			dynamicIcon17.Name = "ModWarning";
 			this.P_ModIssues.ImageName = dynamicIcon17;
 			this.P_ModIssues.Location = new System.Drawing.Point(3, 3);
 			this.P_ModIssues.Name = "P_ModIssues";
@@ -660,7 +660,7 @@ partial class PC_Utilities
 			this.B_ReDownload.ColorShade = null;
 			this.B_ReDownload.ColorStyle = Extensions.ColorStyle.Green;
 			this.B_ReDownload.Cursor = System.Windows.Forms.Cursors.Hand;
-			dynamicIcon16.Name = "I_Tools";
+			dynamicIcon16.Name = "Tools";
 			this.B_ReDownload.ImageName = dynamicIcon16;
 			this.B_ReDownload.Location = new System.Drawing.Point(1387, 64);
 			this.B_ReDownload.Name = "B_ReDownload";

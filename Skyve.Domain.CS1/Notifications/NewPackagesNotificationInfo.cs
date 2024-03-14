@@ -15,7 +15,7 @@ public class NewPackagesNotificationInfo : INotificationInfo
 		Time = newPackages.Max(x => x.LocalTime);
 		Title = Locale.NewPackages;
 		Description = Locale.NewPackagesSinceSession.FormatPlural(newPackages.Count, newPackages[0].CleanName());
-		Icon = "I_New";
+		Icon = "New";
 		HasAction = true;
 	}
 
