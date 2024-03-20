@@ -151,7 +151,7 @@ public partial class PC_Utilities : PanelContent
 
 					if (contents?.Requirements?.Any() ?? false)
 					{
-						Form.PushPanel(null, new PC_ViewCollection(contents));
+						Form.PushPanel(new PC_ViewCollection(contents));
 
 						TB_CollectionLink.Text = string.Empty;
 					}
@@ -188,7 +188,7 @@ public partial class PC_Utilities : PanelContent
 	{
 		var assets = LsmUtil.LoadMissingAssets(obj);
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets, false) { Text = Locale.MissingLSMReport });
+		Form.PushPanel(new PC_GenericPackageList(assets, false) { Text = Locale.MissingLSMReport });
 	}
 
 	private bool LSMDragDrop_ValidFile(object sender, string arg)
@@ -200,7 +200,7 @@ public partial class PC_Utilities : PanelContent
 	{
 		var assets = LsmUtil.LoadUnusedAssets(obj);
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets, false) { Text = Locale.UnusedLSMReport });
+		Form.PushPanel(new PC_GenericPackageList(assets, false) { Text = Locale.UnusedLSMReport });
 	}
 
 	private void DD_BOB_FileSelected(string obj)
@@ -216,7 +216,7 @@ public partial class PC_Utilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(P_BOB.Text) });
+		Form.PushPanel(new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(P_BOB.Text) });
 	}
 
 	private bool DD_BOB_ValidFile(object sender, string arg)
@@ -242,7 +242,7 @@ public partial class PC_Utilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(P_Text.Text) });
+		Form.PushPanel(new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(P_Text.Text) });
 	}
 
 	private void B_ImportClipboard_Click(object sender, EventArgs e)
@@ -263,7 +263,7 @@ public partial class PC_Utilities : PanelContent
 			}
 		}
 
-		Form.PushPanel(null, new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(B_ImportClipboard.Text) });
+		Form.PushPanel(new PC_GenericPackageList(assets, true) { Text = LocaleHelper.GetGlobalText(B_ImportClipboard.Text) });
 	}
 
 	private void B_Cleanup_Click(object sender, EventArgs e)

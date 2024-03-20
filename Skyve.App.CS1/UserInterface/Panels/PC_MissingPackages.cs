@@ -100,7 +100,7 @@ public partial class PC_MissingPackages : PC_GenericPackageList
 		{
 			var panel = new PC_MissingPackages(playsetEntries, pauseEvent);
 
-			form.PushPanel(null, panel);
+			form.PushPanel(panel);
 		});
 
 		pauseEvent.WaitOne();

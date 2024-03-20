@@ -46,7 +46,7 @@ internal class CustomPackageService : IRightClickService
 			, new ()
 			, new (Locale.EditTagsOfPackage.FormatPlural(list.Count), "Tag", isInstalled, action: () => EditTags(list.SelectWhereNotNull(x => x.GetLocalPackage()).SelectMany(x => x!.Assets)))
 			, new (Locale.EditTags.FormatPlural(list.Count), "Tag", isInstalled, action: () => EditTags(list.SelectWhereNotNull(x => x.LocalPackage)!))
-			, new (Locale.EditCompatibility.FormatPlural(list.Count), "CompatibilityReport", userService.User.Manager || list.Any(item => userService.User.Equals(item.GetWorkshopInfo()?.Author)), action: () => { App.Program.MainForm.PushPanel(null, new PC_CompatibilityManagement(items.Select(x => x.Id)));})
+			, new (Locale.EditCompatibility.FormatPlural(list.Count), "CompatibilityReport", userService.User.Manager || list.Any(item => userService.User.Equals(item.GetWorkshopInfo()?.Author)), action: () => { App.Program.MainForm.PushPanel(new PC_CompatibilityManagement(items.Select(x => x.Id)));})
 			, new ()
 			, new (Locale.OtherPlaysets, "PlaysetSettings", disabled: true)
 			, new (Locale.IncludeThisItemInAllPlaysets.FormatPlural(list.Count), "Ok", tab: 1, action: () => { new BackgroundAction(() => list.SelectWhereNotNull(x => x.LocalPackage).Foreach(x => profileManager.SetIncludedForAll(x!, true))).Run(); bulkUtil.SetIncluded(list.SelectWhereNotNull(x => x.LocalPackage)!, true); })
