@@ -170,15 +170,15 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	{
 		if (currentState?.Stage == ActionStage.WaitingForConfirmation)
 		{
-			NextStage();
+			GoToNextStage();
 
 			ApplyNextSettings(issuePersists);
 
-			NextStage();
+			GoToNextStage();
 		}
 	}
 
-	public void NextStage()
+	public void GoToNextStage()
 	{
 		if (currentState is null)
 		{
@@ -341,11 +341,11 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 		if (currentState.Stage == ActionStage.WaitingForGameLaunch && isRunning)
 		{
-			NextStage();
+			GoToNextStage();
 		}
 		else if (currentState.Stage == ActionStage.WaitingForGameClose && !isRunning && isAvailable)
 		{
-			NextStage();
+			GoToNextStage();
 		}
 	}
 
