@@ -131,7 +131,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 				return false;
 			}
 
-			if (item.LocalTime > DateTime.Today.AddDays(-7))
+			if (item.LocalTime > DateTime.UtcNow.AddDays(-7))
 			{
 				return true;
 			}
