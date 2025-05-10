@@ -94,7 +94,7 @@ internal class ModsUtil : IModUtil
 
 	public void SetIncluded(IMod mod, bool value)
 	{
-		value = (value || _modLogicManager.IsRequired(mod, this)) && !_modLogicManager.IsForbidden(mod);
+		value = (value || _modLogicManager.IsRequired(mod, playsetId: this)) && !_modLogicManager.IsForbidden(mod);
 
 		var modInfo = _modConfigInfo.TryGetValue(mod.Folder, out var info) ? info : new();
 
@@ -123,7 +123,7 @@ internal class ModsUtil : IModUtil
 
 	public void SetEnabled(IMod mod, bool value)
 	{
-		value = (value || _modLogicManager.IsRequired(mod, this)) && !_modLogicManager.IsForbidden(mod);
+		value = (value || _modLogicManager.IsRequired(mod, playsetId: this)) && !_modLogicManager.IsForbidden(mod);
 
 		_colossalOrderUtil.SetEnabled(mod, value);
 

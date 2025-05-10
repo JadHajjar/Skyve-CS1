@@ -15,7 +15,7 @@ internal class PC_SkyveChangeLog : PC_Changelog
 
 	protected override void PrepareChangelog(List<VersionChangeLog> changeLogs)
 	{
-#if Stable
+#if STABLE
 		changeLogs.RemoveAll(x => x.Beta);
 #else
 		changeLogs.RemoveAll(x => x.Stable);
