@@ -143,7 +143,7 @@ internal static class Program
 
 	private static void BackgroundAction_BackgroundTaskError(BackgroundAction b, Exception e)
 	{
-		ServiceCenter.Get<ILogger>().Exception(e, $"The background action ({b}) failed");
+		ServiceCenter.Get<ILogger>().Exception(e, memberName: $"The background action ({b}) failed");
 	}
 
 	[System.Runtime.InteropServices.DllImport("user32.dll")]

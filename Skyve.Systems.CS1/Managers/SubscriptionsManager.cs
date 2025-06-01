@@ -159,7 +159,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 				CrossIO.DeleteFile(_filePath);
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, "Failed to send subscription transfer data"); return false; }
+		catch (Exception ex) { _logger.Exception(ex, memberName: "Failed to send subscription transfer data"); return false; }
 
 		return true;
 	}

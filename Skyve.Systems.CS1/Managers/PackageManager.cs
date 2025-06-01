@@ -200,7 +200,7 @@ internal class PackageManager : IPackageManager
 		PackageWatcher.Pause();
 		try
 		{ CrossIO.DeleteFolder(folder); }
-		catch (Exception ex) { _logger.Exception(ex, $"Failed to delete the folder '{folder}'"); }
+		catch (Exception ex) { _logger.Exception(ex, memberName: $"Failed to delete the folder '{folder}'"); }
 		PackageWatcher.Resume();
 	}
 

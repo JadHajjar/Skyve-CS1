@@ -72,7 +72,7 @@ public class ModDllManager : IModDllManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to save DLL cache");
+			_logger.Exception(ex, memberName: "Failed to save DLL cache");
 		}
 	}
 
@@ -91,7 +91,7 @@ public class ModDllManager : IModDllManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to clear DLL cache");
+			_logger.Exception(ex, memberName: "Failed to clear DLL cache");
 		}
 	}
 }

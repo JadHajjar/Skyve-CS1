@@ -158,7 +158,7 @@ internal class CitiesManager : ICitiesManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to update files");
+			_logger.Exception(ex, memberName: "Failed to update files");
 		}
 	}
 
@@ -281,7 +281,7 @@ internal class CitiesManager : ICitiesManager
 				KillProcessAndChildren(proc);
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, "Failed to kill C:S"); }
+		catch (Exception ex) { _logger.Exception(ex, memberName: "Failed to kill C:S"); }
 	}
 
 	private void KillProcessAndChildren(Process proc)

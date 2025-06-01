@@ -84,7 +84,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to download profile");
+			_logger.Exception(ex, memberName: "Failed to download profile");
 
 			return false;
 		}
@@ -110,7 +110,7 @@ internal class OnlinePlaysetUtil : IOnlinePlaysetUtil
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to download profile");
+			_logger.Exception(ex, memberName: "Failed to download profile");
 
 			return false;
 		}

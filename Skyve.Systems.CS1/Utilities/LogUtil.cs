@@ -227,7 +227,7 @@ internal class LogUtil : ILogUtil
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to load the previous crash dump log");
+			_logger.Exception(ex, memberName: "Failed to load the previous crash dump log");
 		}
 
 		return string.Empty;
@@ -245,7 +245,7 @@ internal class LogUtil : ILogUtil
 		}
 		catch (Exception e)
 		{
-			_logger.Exception(e, "Failed to get the last LSM report");
+			_logger.Exception(e, memberName: "Failed to get the last LSM report");
 		}
 
 		return string.Empty;

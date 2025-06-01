@@ -86,7 +86,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to load the current playset");
+			_logger.Exception(ex, memberName: "Failed to load the current playset");
 		}
 
 		_playsets ??= new();
@@ -513,7 +513,7 @@ internal class PlaysetManager : IPlaysetManager
 
 			try
 			{ SaveLsmSettings(playset); }
-			catch (Exception ex) { _logger.Exception(ex, "Failed to apply the LSM settings for playset " + playset.Name); }
+			catch (Exception ex) { _logger.Exception(ex, memberName: "Failed to apply the LSM settings for playset " + playset.Name); }
 
 			if (setCurrentPlayset)
 			{
@@ -605,7 +605,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, $"Could not load local playsets.");
+			_logger.Exception(ex, memberName: $"Could not load local playsets.");
 		}
 
 		if (_notifier.IsContentLoaded)
@@ -627,7 +627,7 @@ internal class PlaysetManager : IPlaysetManager
 
 			try
 			{ _watcher.EnableRaisingEvents = true; }
-			catch (Exception ex) { _logger.Exception(ex, $"Failed to start playset watcher ({_locationManager.SkyvePlaysetsAppDataPath})"); }
+			catch (Exception ex) { _logger.Exception(ex, memberName: $"Failed to start playset watcher ({_locationManager.SkyvePlaysetsAppDataPath})"); }
 		}
 	}
 
@@ -703,7 +703,7 @@ internal class PlaysetManager : IPlaysetManager
 				_logger.Error($"Could not load the playset: '{e.FullPath}'");
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, "Failed to refresh changes to profiles"); }
+		catch (Exception ex) { _logger.Exception(ex, memberName: "Failed to refresh changes to profiles"); }
 	}
 
 	public void GatherInformation(IPlayset? iplayset)
@@ -752,7 +752,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, $"Failed to save playset ({playset.Name}) to {CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{playset.Name}.json")}");
+			_logger.Exception(ex, memberName: $"Failed to save playset ({playset.Name}) to {CrossIO.Combine(_locationManager.SkyvePlaysetsAppDataPath, $"{playset.Name}.json")}");
 		}
 		finally
 		{
@@ -999,7 +999,7 @@ internal class PlaysetManager : IPlaysetManager
 				}
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, $"Failed to apply included status '{value}' to package: '{item}'"); }
+		catch (Exception ex) { _logger.Exception(ex, memberName: $"Failed to apply included status '{value}' to package: '{item}'"); }
 		finally
 		{
 			if (_watcher is not null)
@@ -1160,7 +1160,7 @@ internal class PlaysetManager : IPlaysetManager
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to create shortcut");
+			_logger.Exception(ex, memberName: "Failed to create shortcut");
 		}
 	}
 }

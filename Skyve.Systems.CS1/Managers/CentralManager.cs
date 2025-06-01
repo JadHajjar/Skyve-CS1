@@ -67,7 +67,7 @@ internal class CentralManager : ICentralManager
 			{ RunFirstTimeSetup(); }
 			catch (Exception ex)
 			{
-				_logger.Exception(ex, "Failed to complete the First Time Setup");
+				_logger.Exception(ex, memberName: "Failed to complete the First Time Setup");
 
 				MessagePrompt.Show(ex, "Failed to complete the First Time Setup", form: SystemsProgram.MainForm as SlickForm);
 			}
@@ -95,7 +95,7 @@ internal class CentralManager : ICentralManager
 
 		try
 		{ AnalyzePackages(content); }
-		catch (Exception ex) { _logger.Exception(ex, "Failed to analyze packages"); }
+		catch (Exception ex) { _logger.Exception(ex, memberName: "Failed to analyze packages"); }
 
 		_logger.Info($"Finished analyzing packages..");
 

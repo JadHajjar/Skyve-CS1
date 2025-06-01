@@ -134,7 +134,7 @@ internal class AssemblyUtil
 			}
 			catch (Exception ex)
 			{
-				_logger.Exception(ex, "");
+				_logger.Exception(ex, memberName: "");
 				type = null;
 			}
 		}
@@ -151,7 +151,7 @@ internal class AssemblyUtil
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "");
+			_logger.Exception(ex, memberName: "");
 			return null;
 		}
 	}

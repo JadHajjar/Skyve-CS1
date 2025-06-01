@@ -145,7 +145,7 @@ internal class LocationManager : ILocationService
 				}
 			}
 		}
-		catch (Exception ex) { _logger.Exception(ex, "Failed to copy previous settings over"); }
+		catch (Exception ex) { _logger.Exception(ex, memberName: "Failed to copy previous settings over"); }
 	}
 
 	public void RunFirstTimeSetup()
@@ -189,7 +189,7 @@ internal class LocationManager : ILocationService
 		{
 			try
 			{ settings.SteamPath = FindSteamPath(settings); }
-			catch (Exception ex) { _logger.Exception(ex, "Failed to find steam's installation folder"); }
+			catch (Exception ex) { _logger.Exception(ex, memberName: "Failed to find steam's installation folder"); }
 
 			if (settings.Platform is not Platform.Windows)
 			{
@@ -283,7 +283,7 @@ internal class LocationManager : ILocationService
 		}
 		catch (Exception ex)
 		{
-			_logger.Exception(ex, "Failed to create shortcut");
+			_logger.Exception(ex, memberName: "Failed to create shortcut");
 		}
 	}
 
