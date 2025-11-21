@@ -2,9 +2,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Skyve.App.CS1.Services;
 using Skyve.App.Interfaces;
-using Skyve.Domain;
-using Skyve.Domain.Systems;
-using Skyve.Systems;
 using Skyve.Systems.CS1;
 using Skyve.Systems.CS1.Utilities;
 
@@ -64,8 +61,8 @@ internal static class Program
 
 				if (Directory.Exists(Path.Combine(folder, ISave.AppName)))
 				{
-					ISave.CustomSaveDirectory = folder;
-				}
+                    ISave.CustomSaveDirectory = folder;
+                }
 			}
 			catch { }
 
@@ -120,7 +117,7 @@ internal static class Program
 				SetProcessDPIAware();
 			}
 
-			if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
+            if (!ServiceCenter.Get<ISettings>().SessionSettings.FirstTimeSetupCompleted && string.IsNullOrEmpty(ConfigurationManager.AppSettings[nameof(ILocationManager.GamePath)]))
 			{
 				if (MessagePrompt.Show(Locale.FirstSetupInfo, Locale.SetupIncomplete, PromptButtons.OKIgnore, PromptIcons.Hand) == DialogResult.OK)
 				{

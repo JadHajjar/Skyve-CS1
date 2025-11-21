@@ -20,15 +20,15 @@ namespace Skyve.Systems.CS1.Managers;
 internal class SubscriptionsManager : ISubscriptionsManager
 {
 	private readonly string _filePath;
-	private readonly List<ulong> _delayedDownloads = new();
+	private readonly List<ulong> _delayedDownloads = [];
 	private readonly DelayedAction _delayedDownloadsAction;
 	private FileWatcher? SubscriptionListWatcher;
 	private FileWatcher? SubscriptionTransferWatcher;
 
-	public List<ulong> SubscribingTo { get; private set; } = new();
-	public List<ulong> UnsubscribingFrom { get; private set; } = new();
-	public List<ulong> PendingSubscribingTo { get; private set; } = new();
-	public List<ulong> PendingUnsubscribingFrom { get; private set; } = new();
+	public List<ulong> SubscribingTo { get; private set; } = [];
+	public List<ulong> UnsubscribingFrom { get; private set; } = [];
+	public List<ulong> PendingSubscribingTo { get; private set; } = [];
+	public List<ulong> PendingUnsubscribingFrom { get; private set; } = [];
 	public bool Redownload { get; set; }
 	public bool SubscriptionsPending => CrossIO.FileExists(_filePath) && !_citiesManager.IsRunning();
 
@@ -55,9 +55,9 @@ internal class SubscriptionsManager : ISubscriptionsManager
 		{
 			var transferData = SharedUtil.Deserialize<SubscriptionTransfer>(_filePath) ?? new();
 
-			UnsubscribingFrom = transferData.UnsubscribingFrom ?? new();
+			UnsubscribingFrom = transferData.UnsubscribingFrom ?? [];
 
-			SubscribingTo = transferData.SubscribeTo ?? new();
+			SubscribingTo = transferData.SubscribeTo ?? [];
 		}
 	}
 
@@ -115,7 +115,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 
 			if (unsub)
 			{
-				transferData.UnsubscribingFrom ??= new();
+				transferData.UnsubscribingFrom ??= [];
 
 				foreach (var item in ids)
 				{
@@ -129,11 +129,11 @@ internal class SubscriptionsManager : ISubscriptionsManager
 					}
 				}
 
-				UnsubscribingFrom = transferData.UnsubscribingFrom ?? new();
+				UnsubscribingFrom = transferData.UnsubscribingFrom ?? [];
 			}
 			else
 			{
-				transferData.SubscribeTo ??= new();
+				transferData.SubscribeTo ??= [];
 
 				foreach (var item in ids)
 				{
@@ -147,7 +147,7 @@ internal class SubscriptionsManager : ISubscriptionsManager
 					}
 				}
 
-				SubscribingTo = transferData.SubscribeTo ?? new();
+				SubscribingTo = transferData.SubscribeTo ?? [];
 			}
 
 			if ((transferData.UnsubscribingFrom?.Any() ?? false) || (transferData.SubscribeTo?.Any() ?? false))
@@ -178,9 +178,9 @@ internal class SubscriptionsManager : ISubscriptionsManager
 		PendingUnsubscribingFrom = UnsubscribingFrom;
 		PendingSubscribingTo = SubscribingTo;
 
-		UnsubscribingFrom = transferData.UnsubscribingFrom ?? new();
+		UnsubscribingFrom = transferData.UnsubscribingFrom ?? [];
 
-		SubscribingTo = transferData.SubscribeTo ?? new();
+		SubscribingTo = transferData.SubscribeTo ?? [];
 	}
 
 	private void RunDownload()

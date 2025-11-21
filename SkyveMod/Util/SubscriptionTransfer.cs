@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace SkyveShared;
 public class SubscriptionTransfer
 {
-	public List<ulong>? SubscribeTo { get; set; }
-	public List<ulong>? UnsubscribingFrom { get; set; }
+	public List<ulong> SubscribeTo { get; set; }
+	public List<ulong> UnsubscribingFrom { get; set; }
 }

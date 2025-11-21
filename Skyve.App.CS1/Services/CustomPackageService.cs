@@ -3,11 +3,6 @@ using Skyve.App.UserInterface.Forms;
 using Skyve.App.UserInterface.Panels;
 using Skyve.Systems.CS1.Utilities;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Skyve.App.CS1.Services;
@@ -15,7 +10,7 @@ internal class CustomPackageService : ICustomPackageService
 {
 	public SlickStripItem[] GetRightClickMenuItems(IPackage item)
 	{
-		return GetRightClickMenuItems(new[] { item });
+		return GetRightClickMenuItems([item]);
 	}
 
 	public SlickStripItem[] GetRightClickMenuItems(IEnumerable<IPackage> items)

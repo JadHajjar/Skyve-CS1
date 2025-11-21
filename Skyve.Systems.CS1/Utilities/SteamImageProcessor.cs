@@ -31,27 +31,20 @@ internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRe
 			}
 		}
 
-		return (new(), false);
+		return ([], false);
 	}
 
 	protected override void CacheItems(Dictionary<ImgRequest, Stub> results)
 	{ }
 
-	public struct ImgRequest
-	{
-		public ImgRequest(string url, string? fileName, bool square)
-		{
-			Url = url;
-			FileName = fileName;
-			Square = square;
-		}
+    public readonly struct ImgRequest(string url, string? fileName, bool square)
+    {
+        public string Url { get; } = url;
+        public string? FileName { get; } = fileName;
+        public bool Square { get; } = square;
+    }
 
-		public string Url { get; }
-		public string? FileName { get; }
-		public bool Square { get; }
-	}
-
-	public struct Stub : ITimestamped
+	public readonly struct Stub : ITimestamped
 	{
 		public DateTime Timestamp { get; }
 	}

@@ -47,16 +47,21 @@ public static class OnAssetLoadedPatch
 		}
 	}
 
-	static readonly MethodInfo mBeforeOnAssetLoaded_ =
+    [Obsolete]
+    static readonly MethodInfo mBeforeOnAssetLoaded_ =
 		GetMethod(typeof(OnAssetLoadedPatch), nameof(BeforeOnAssetLoaded));
-	static readonly MethodInfo mAfterOnAssetLoaded_ =
+    [Obsolete]
+    static readonly MethodInfo mAfterOnAssetLoaded_ =
 		GetMethod(typeof(OnAssetLoadedPatch), nameof(AfterOnAssetLoaded));
-	static readonly MethodInfo mOnAssetLoaded_ =
+    [Obsolete]
+    static readonly MethodInfo mOnAssetLoaded_ =
 		GetMethod(typeof(IAssetDataExtension), nameof(IAssetDataExtension.OnAssetLoaded));
-	static readonly MethodInfo mGetItem =
+    [Obsolete]
+    static readonly MethodInfo mGetItem =
 		GetMethod(typeof(List<IAssetDataExtension>), "get_Item");
 
-	public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+    [Obsolete]
+    public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 	{
 		try
 		{
@@ -66,10 +71,10 @@ public static class OnAssetLoadedPatch
 
 			// insert call after IAssetDataExtension is loaded into the stack.
 			var index = codes.Search(_c => _c.Calls(mGetItem));
-			InsertInstructions(codes, new[] { Call_BeforeOnAssetLoaded }, index + 1);
+			InsertInstructions(codes, [Call_BeforeOnAssetLoaded], index + 1);
 
 			var index2 = codes.Search(c => c.Calls(mOnAssetLoaded_), startIndex: index);
-			InsertInstructions(codes, new[] { Call_AfterOnAssetLoaded }, index2 + 1, moveLabels: false); // insert after.
+			InsertInstructions(codes, [Call_AfterOnAssetLoaded], index2 + 1, moveLabels: false); // insert after.
 
 			return codes;
 		}

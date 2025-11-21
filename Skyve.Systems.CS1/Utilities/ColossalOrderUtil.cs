@@ -16,7 +16,7 @@ internal class ColossalOrderUtil
 	private const string GAME_SETTINGS_FILE_NAME = "userGameState";
 	private SettingsFile _settingsFile;
 	private bool _initialized;
-	private readonly Dictionary<IMod, SavedBool> _settingsDictionary = new();
+	private readonly Dictionary<IMod, SavedBool> _settingsDictionary = [];
 	private readonly FileWatcher _watcher;
 	private readonly DelayedAction _delayedAction = new(500);
 
@@ -31,7 +31,10 @@ internal class ColossalOrderUtil
 		_notifier = notifier;
 		_logger = logger;
 		_settings = (settings as SettingsService)!;
-		_settingsFile = new SettingsFile() { fileName = GAME_SETTINGS_FILE_NAME };
+		_settingsFile = new SettingsFile() { FileName = GAME_SETTINGS_FILE_NAME };
+
+		_logger.Info("PathName is " + _settingsFile.PathName);
+
 		_settingsFile.Load();
 
 		_watcher = CreateWatcher();
@@ -72,7 +75,7 @@ internal class ColossalOrderUtil
 		{
 			var currentState = _settingsDictionary.ToDictionary(x => x.Key, x => x.Value.value);
 
-			_settingsFile = new SettingsFile() { fileName = GAME_SETTINGS_FILE_NAME };
+			_settingsFile = new SettingsFile() { FileName = GAME_SETTINGS_FILE_NAME };
 			_settingsFile.Load();
 			_settingsDictionary.Clear();
 
@@ -85,7 +88,7 @@ internal class ColossalOrderUtil
 		}
 		else
 		{
-			_settingsFile = new SettingsFile() { fileName = GAME_SETTINGS_FILE_NAME };
+			_settingsFile = new SettingsFile() { FileName = GAME_SETTINGS_FILE_NAME };
 			_settingsFile.Load();
 			_settingsDictionary.Clear();
 
@@ -127,7 +130,7 @@ internal class ColossalOrderUtil
 	{
 		var savedEnabledKey_ = $"{Path.GetFileNameWithoutExtension(mod.Folder)}{GetLegacyHashCode(mod.Folder)}.enabled";
 
-		return new SavedBool(savedEnabledKey_, GAME_SETTINGS_FILE_NAME, def: false, autoUpdate: false) { settingsFile = _settingsFile };
+		return new SavedBool(savedEnabledKey_, GAME_SETTINGS_FILE_NAME, def: false, autoUpdate: false) { SettingsFile = _settingsFile };
 	}
 
 	[ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]

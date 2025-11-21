@@ -27,7 +27,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 
 		InitializeComponent();
 
-		_launchOptions = new[] { CB_StartNewGame, CB_LoadSave, CB_NewAsset, CB_LoadAsset };
+		_launchOptions = [CB_StartNewGame, CB_LoadSave, CB_NewAsset, CB_LoadAsset];
 
 		SlickTip.SetTo(B_AddProfile.Controls[0], "NewPlayset_Tip");
 		SlickTip.SetTo(B_TempProfile.Controls[0], "TempPlayset_Tip");
@@ -55,12 +55,12 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 			["Your Save-games"] = CrossIO.Combine(_locationManager.AppDataPath, "Saves"),
 			["Workshop Save-games"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_SaveFile.CustomFiles = _packageManager.Assets.Where(x => _tagsService.HasAllTags(x, saveGameTag)).Select(x => new IOSelectionDialog.CustomFile
+		DD_SaveFile.CustomFiles = [.. _packageManager.Assets.Where(x => _tagsService.HasAllTags(x, saveGameTag)).Select(x => new IOSelectionDialog.CustomFile
 		{
 			Name = x.Name,
 			Icon = x.GetThumbnail(),
 			Path = x.FilePath
-		}).ToList();
+		})];
 
 		DD_SkipFile.StartingFolder = _locationManager.AppDataPath;
 		DD_SkipFile.PinnedFolders = new() { ["App Data"] = _locationManager.AppDataPath };
@@ -72,12 +72,12 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 			["Vanilla Maps"] = CrossIO.Combine(_locationManager.GameContentPath, "Maps"),
 			["Workshop Maps"] = IOSelectionDialog.CustomDirectory,
 		};
-		DD_NewMap.CustomFiles = _packageManager.Assets.Where(x => _tagsService.HasAllTags(x, mapTag)).Select(x => new IOSelectionDialog.CustomFile
+		DD_NewMap.CustomFiles = [.. _packageManager.Assets.Where(x => _tagsService.HasAllTags(x, mapTag)).Select(x => new IOSelectionDialog.CustomFile
 		{
 			Name = x.Name,
 			Icon = x.GetThumbnail(),
 			Path = x.FilePath
-		}).ToList();
+		})];
 
 		TLP_AdvancedDev.Visible = _settings.UserSettings.AdvancedLaunchOptions;
 

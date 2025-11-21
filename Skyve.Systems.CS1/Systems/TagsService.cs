@@ -36,15 +36,15 @@ internal class TagsService : ITagsService
 		_notifier = notifier;
 		_logger = logger;
 		_workshopService = workshopService;
-		_assetTags = new HashSet<string>();
-		_workshopTags = new Dictionary<string, int>();
+		_assetTags = [];
+		_workshopTags = [];
 		var findItTags = CustomTagsLibrary.Deserialize() ?? new();
 
 		var csCache = AssetInfoCache.Deserialize() ?? new();
 
 		if (csCache is not null)
 		{
-			foreach (var asset in (assetUtil as AssetsUtil)!.AssetInfoCache ?? new())
+			foreach (var asset in (assetUtil as AssetsUtil)!.AssetInfoCache ?? [])
 			{
 				if (asset.Value.Tags is not null)
 				{
@@ -58,7 +58,7 @@ internal class TagsService : ITagsService
 			}
 		}
 
-		ISave.Load(out Dictionary<string, string[]> customTags, "CustomTags.json");
+        ISave.Load(out Dictionary<string, string[]> customTags, "CustomTags.json");
 
 		if (customTags is not null)
 		{
@@ -74,11 +74,11 @@ internal class TagsService : ITagsService
 			{
 				if (!_customTagsDictionary.ContainsKey(tag.Key))
 				{
-					_customTagsDictionary[tag.Key] = tag.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+					_customTagsDictionary[tag.Key] = tag.Value.Split([' '], StringSplitOptions.RemoveEmptyEntries);
 				}
 				else
 				{
-					_customTagsDictionary[tag.Key] = _customTagsDictionary[tag.Key].Concat(tag.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)).Distinct().ToArray();
+					_customTagsDictionary[tag.Key] = [.. _customTagsDictionary[tag.Key].Concat(tag.Value.Split([' '], StringSplitOptions.RemoveEmptyEntries)).Distinct()];
 				}
 			}
 		}
@@ -131,9 +131,9 @@ internal class TagsService : ITagsService
 		{
 			if (assetDictionary.TryGetValue(kvp.Key, out var asset))
 			{
-				_customTagsDictionary[asset.FilePath] = (_customTagsDictionary.TryGet(asset.FilePath) ?? new string[0]).Concat(kvp.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)).Distinct().ToArray();
+				_customTagsDictionary[asset.FilePath] = [.. (_customTagsDictionary.TryGet(asset.FilePath) ?? []).Concat(kvp.Value.Split([' '], StringSplitOptions.RemoveEmptyEntries)).Distinct()];
 
-				foreach (var item in kvp.Value.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+				foreach (var item in kvp.Value.Split([' '], StringSplitOptions.RemoveEmptyEntries))
 				{
 					if (!_tagsCache.ContainsKey(item))
 					{
@@ -295,15 +295,15 @@ internal class TagsService : ITagsService
 
 			newTags.Serialize();
 
-			_customTagsDictionary[asset.FilePath] = value.WhereNotEmpty().ToArray();
+			_customTagsDictionary[asset.FilePath] = [.. value.WhereNotEmpty()];
 
 			ISave.Save(_customTagsDictionary, "CustomTags.json");
 		}
 		else if (package.LocalParentPackage is ILocalPackageWithContents lp)
 		{
-			_customTagsDictionary[lp.Folder] = value.WhereNotEmpty().ToArray();
+			_customTagsDictionary[lp.Folder] = [.. value.WhereNotEmpty()];
 
-			ISave.Save(_customTagsDictionary, "CustomTags.json");
+            ISave.Save(_customTagsDictionary, "CustomTags.json");
 		}
 
 		_notifier.OnRefreshUI(true);

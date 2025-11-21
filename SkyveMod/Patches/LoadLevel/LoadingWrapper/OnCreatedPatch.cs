@@ -19,8 +19,8 @@ namespace SkyveMod.Patches._LoadingWrapper;
 [HarmonyPatch("OnLoadingExtensionsCreated")]
 public static class OnCreatedPatch
 {
-	static readonly Stopwatch sw = new Stopwatch();
-	static readonly Stopwatch sw_total = new Stopwatch();
+	static readonly Stopwatch sw = new();
+	static readonly Stopwatch sw_total = new();
 
 	public static ILoadingExtension BeforeOnCreated(ILoadingExtension loadingExtension)
 	{
@@ -48,7 +48,8 @@ public static class OnCreatedPatch
 		?? throw new Exception("mAfterOnCreated_ is null");
 	static readonly MethodInfo mOnCreated_ = typeof(ILoadingExtension).GetMethod(nameof(ILoadingExtension.OnCreated))
 		?? throw new Exception("mAfterOnCreated_ is null");
-	static readonly MethodInfo mGetItem_ = GetMethod(typeof(List<ILoadingExtension>), "get_Item");
+    [Obsolete]
+    static readonly MethodInfo mGetItem_ = GetMethod(typeof(List<ILoadingExtension>), "get_Item");
 
 	public static void Prefix()
 	{
@@ -57,7 +58,8 @@ public static class OnCreatedPatch
 		sw_total.Start();
 	}
 
-	public static IEnumerable<CodeInstruction> Transpiler(ILGenerator il, IEnumerable<CodeInstruction> instructions)
+    [Obsolete]
+    public static IEnumerable<CodeInstruction> Transpiler(ILGenerator il, IEnumerable<CodeInstruction> instructions)
 	{
 		try
 		{
@@ -66,10 +68,10 @@ public static class OnCreatedPatch
 			var Call_AfterOnCreated = new CodeInstruction(OpCodes.Call, mAfterOnCreated_);
 
 			var index = codes.Search(c => c.Calls(mOnCreated_));
-			InsertInstructions(codes, new[] { Call_AfterOnCreated }, index + 1, moveLabels: false); // insert after.
+			InsertInstructions(codes, [Call_AfterOnCreated], index + 1, moveLabels: false); // insert after.
 
 			index = codes.Search(c => c.Calls(mGetItem_));
-			InsertInstructions(codes, new[] { Call_BeforeOnCreated }, index + 1, moveLabels: false); // insert after.
+			InsertInstructions(codes, [Call_BeforeOnCreated], index + 1, moveLabels: false); // insert after.
 
 			return codes;
 		}

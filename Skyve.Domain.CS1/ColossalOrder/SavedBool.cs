@@ -33,15 +33,15 @@ public class SavedBool : SavedValue
 		set
 		{
 			m_Value = value;
-			settingsFile?.SetValue(m_Name, m_Value);
+			SettingsFile?.SetValue(m_Name, m_Value);
 		}
 	}
 
 	protected override void SyncImpl()
 	{
-		if (settingsFile != null)
+		if (SettingsFile != null)
 		{
-			m_Exists = settingsFile.GetValue(m_Name, ref m_Value);
+			m_Exists = SettingsFile.GetValue(m_Name, ref m_Value);
 		}
 	}
 

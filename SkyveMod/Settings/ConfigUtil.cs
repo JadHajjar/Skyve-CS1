@@ -90,7 +90,7 @@ public static class ConfigUtil
 		private static Thread thread_;
 
 		public static bool Dirty = false;
-		public static readonly object LockObject = new object();
+		public static readonly object LockObject = new();
 
 		static SaveThread()
 		{
@@ -99,12 +99,14 @@ public static class ConfigUtil
 
 		internal static void Init()
 		{
-			if (isRunning_ != null)
+#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
+            if (isRunning_ != null)
 			{
 				return; // already running.
 			}
+#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
 
-			thread_ = new Thread(RunThread)
+            thread_ = new Thread(RunThread)
 			{
 				Name = "SaveThread",
 				IsBackground = true

@@ -14,7 +14,7 @@ public abstract class SavedValue
 
 	private static SettingsFile? m_SettingsFile;
 
-	public bool exists
+	public bool Exists
 	{
 		get
 		{
@@ -23,11 +23,11 @@ public abstract class SavedValue
 		}
 	}
 
-	public string name => m_Name;
+	public string Name => m_Name;
 
-	public ushort version => settingsFile.version;
+	public ushort Version => SettingsFile.Version;
 
-	public SettingsFile settingsFile
+	public SettingsFile SettingsFile
 	{
 		get =>
 			//if (m_SettingsFile == null && !m_Synced)
@@ -56,7 +56,7 @@ public abstract class SavedValue
 
 	public void Delete()
 	{
-		settingsFile.DeleteEntry(m_Name);
+		SettingsFile.DeleteEntry(m_Name);
 		m_Synced = false;
 		m_Exists = false;
 	}

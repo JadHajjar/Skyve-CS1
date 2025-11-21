@@ -162,7 +162,7 @@ internal class CitiesManager : ICitiesManager
 		}
 	}
 
-	private string quote(string path)
+	private string Quote(string path)
 	{
 		return '"' + path + '"';
 	}
@@ -227,7 +227,7 @@ internal class CitiesManager : ICitiesManager
 		{
 			if (CrossIO.FileExists(launchSettings.SaveToLoad))
 			{
-				args.Add("--loadSave=" + quote(launchSettings.SaveToLoad!));
+				args.Add("--loadSave=" + Quote(launchSettings.SaveToLoad!));
 			}
 			else
 			{
@@ -238,7 +238,7 @@ internal class CitiesManager : ICitiesManager
 		{
 			if (CrossIO.FileExists(launchSettings.MapToLoad))
 			{
-				args.Add("--newGame=" + quote(launchSettings.MapToLoad!));
+				args.Add("--newGame=" + Quote(launchSettings.MapToLoad!));
 			}
 			else
 			{
@@ -251,7 +251,7 @@ internal class CitiesManager : ICitiesManager
 			args.Add(launchSettings.CustomArgs!);
 		}
 
-		return args.ToArray();
+		return [.. args];
 	}
 
 	public void RunStub()

@@ -12,58 +12,58 @@ public class SettingsFile
 {
 	public static readonly string extension = ".cgs";
 
-	private readonly char[] settingsIdentifier = new char[]
-	{
-					'C',
-					'G',
-					'S',
-					'F'
-	};
+	private readonly char[] settingsIdentifier =
+    [
+		'C',
+		'G',
+		'S',
+		'F'
+	];
 
 	private readonly ushort settingsVersion = 3;
-	private readonly Dictionary<string, int> m_SettingsIntValues = new();
+	private readonly Dictionary<string, int> m_SettingsIntValues = [];
 
-	private readonly Dictionary<string, bool> m_SettingsBoolValues = new();
+	private readonly Dictionary<string, bool> m_SettingsBoolValues = [];
 
-	private readonly Dictionary<string, float> m_SettingsFloatValues = new();
+	private readonly Dictionary<string, float> m_SettingsFloatValues = [];
 
-	private readonly Dictionary<string, string> m_SettingsStringValues = new();
+	private readonly Dictionary<string, string> m_SettingsStringValues = [];
 
-	private readonly Dictionary<string, InputKey> m_SettingsInputKeyValues = new();
+	private readonly Dictionary<string, InputKey> m_SettingsInputKeyValues = [];
 
 	private string? m_PathName;
 	private bool m_DontSave;
 	private readonly object m_Saving = new();
 
-	public ushort version { get; private set; }
+	public ushort Version { get; private set; }
 
-	public bool isDirty { get; private set; }
+	public bool IsDirty { get; private set; }
 
-	public bool isSystem { get; private set; }
+	public bool IsSystem { get; private set; }
 
-	public bool dontSave
+	public bool DontSave
 	{
 		get => m_DontSave;
 		set => m_DontSave = true;
 	}
 
-	public string fileName
+	public string FileName
 	{
 		get => Path.GetFileNameWithoutExtension(m_PathName);
 		set => m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().AppDataPath, Path.ChangeExtension(value, extension));
 	}
 
-	public string systemFileName
+	public string SystemFileName
 	{
 		get => Path.GetFileNameWithoutExtension(m_PathName);
 		set
 		{
 			m_PathName = CrossIO.Combine(ServiceCenter.Get<ILocationManager>().GamePath, Path.ChangeExtension(value, extension));
-			isSystem = true;
+            IsSystem = true;
 		}
 	}
 
-	public string? pathName
+	public string? PathName
 	{
 		get => m_PathName;
 		set => m_PathName = Path.ChangeExtension(value, extension);
@@ -84,12 +84,12 @@ public class SettingsFile
 
 	public Stream? CreateReadStream()
 	{
-		return pathName is null ? null : (Stream)new FileStream(pathName, FileMode.Open, FileAccess.Read);
+		return PathName is null ? null : (Stream)new FileStream(PathName, FileMode.Open, FileAccess.Read);
 	}
 
 	public Stream? CreateWriteStream()
 	{
-		return pathName is null ? null : (Stream)new SafeFileStream(pathName, FileMode.Create);
+        return PathName is null ? null : (Stream)new SafeFileStream(PathName, FileMode.Create);
 	}
 
 	public void DeleteEntry(string key)
@@ -124,13 +124,13 @@ public class SettingsFile
 		keys4.CopyTo(array, num);
 		num += keys4.Count;
 		keys5.CopyTo(array, num);
-		num += keys5.Count;
+        _ = keys5.Count;
 		return array;
 	}
 
 	public bool IsValid()
 	{
-		return !string.IsNullOrEmpty(pathName) && CrossIO.FileExists(pathName);
+		return !string.IsNullOrEmpty(PathName) && CrossIO.FileExists(PathName);
 		//if (!this.m_UseCloud)
 		{
 		}
@@ -146,7 +146,7 @@ public class SettingsFile
 			//	PlatformService.cloud.Delete(this.pathName);
 			//	return;
 			//}
-			File.Delete(pathName);
+			File.Delete(PathName);
 		}
 	}
 
@@ -157,31 +157,31 @@ public class SettingsFile
 			Dictionary<string, int> dictionary;
 			lock (m_SettingsIntValues)
 			{
-				dictionary = new Dictionary<string, int>(m_SettingsIntValues);
+				dictionary = [.. m_SettingsIntValues];
 			}
 
 			Dictionary<string, bool> dictionary2;
 			lock (m_SettingsBoolValues)
 			{
-				dictionary2 = new Dictionary<string, bool>(m_SettingsBoolValues);
+				dictionary2 = [.. m_SettingsBoolValues];
 			}
 
 			Dictionary<string, float> dictionary3;
 			lock (m_SettingsFloatValues)
 			{
-				dictionary3 = new Dictionary<string, float>(m_SettingsFloatValues);
+				dictionary3 = [.. m_SettingsFloatValues];
 			}
 
 			Dictionary<string, string> dictionary4;
 			lock (m_SettingsStringValues)
 			{
-				dictionary4 = new Dictionary<string, string>(m_SettingsStringValues);
+				dictionary4 = [.. m_SettingsStringValues];
 			}
 
 			Dictionary<string, InputKey> dictionary5;
 			lock (m_SettingsInputKeyValues)
 			{
-				dictionary5 = new Dictionary<string, InputKey>(m_SettingsInputKeyValues);
+				dictionary5 = [.. m_SettingsInputKeyValues];
 			}
 
 			using var binaryWriter = new BinaryWriter(stream);
@@ -255,10 +255,10 @@ public class SettingsFile
 			using var binaryReader = new BinaryReader(stream);
 			if (ValidateID(binaryReader.ReadChars(4)))
 			{
-				version = binaryReader.ReadUInt16();
-				if (version < 2)
+				Version = binaryReader.ReadUInt16();
+				if (Version < 2)
 				{
-					throw new Exception("Setting file '" + fileName + "' version is incompatible. The public format of settings files has changed and your settings will be reset.");
+					throw new Exception("Setting file '" + FileName + "' version is incompatible. The public format of settings files has changed and your settings will be reset.");
 				}
 
 				lock (m_SettingsIntValues)
@@ -324,7 +324,7 @@ public class SettingsFile
 				return;
 			}
 
-			throw new Exception("Setting file '" + fileName + "' header mismatch. The public format of settings files has changed.");
+			throw new Exception("Setting file '" + FileName + "' header mismatch. The public format of settings files has changed.");
 		}
 		catch (Exception ex)
 		{
@@ -363,7 +363,7 @@ public class SettingsFile
 	{
 		try
 		{
-			if (!dontSave && !string.IsNullOrEmpty(pathName))
+			if (!DontSave && !string.IsNullOrEmpty(PathName))
 			{
 				lock (m_Saving)
 				{
@@ -389,13 +389,13 @@ public class SettingsFile
 		}
 		finally
 		{
-			isDirty = false;
+			IsDirty = false;
 		}
 	}
 
 	public void MarkDirty()
 	{
-		isDirty = true;
+		IsDirty = true;
 	}
 
 	public bool GetValue(string name, out object? v)

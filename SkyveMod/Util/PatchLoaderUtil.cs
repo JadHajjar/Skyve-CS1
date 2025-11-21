@@ -17,7 +17,7 @@ public class PatchLoaderStatus
 
 	private static PatchLoaderStatus _instance;
 
-	public static PatchLoaderStatus Instance => _instance ?? (_instance = new PatchLoaderStatus());
+	public static PatchLoaderStatus Instance => _instance ??= new PatchLoaderStatus();
 
 	public bool IsPatchLoaderAvailable { get; private set; }
 	public int PatchLoaderStatusIndex { get; private set; } = -1;

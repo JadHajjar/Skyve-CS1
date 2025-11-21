@@ -65,8 +65,8 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			ItemIsCausingIssues = settings.ItemIsCausingIssues,
 			ItemIsMissing = settings.ItemIsMissing,
 			NewItemCausingIssues = settings.NewItemCausingIssues,
-			ProcessingItems = new(),
-			UnprocessedItems = new()
+			ProcessingItems = [],
+			UnprocessedItems = []
 		};
 
 		IEnumerable<ILocalPackage> packages = settings.Mods ? _packageManager.Mods : _packageManager.Assets;
@@ -91,7 +91,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			}
 		}
 
-		currentState.ProcessingItems = currentState.UnprocessedItems = GetItemGroups(packageToProcess.ToList());
+		currentState.ProcessingItems = currentState.UnprocessedItems = GetItemGroups([.. packageToProcess]);
 
 		currentState.TotalStages = (int)Math.Ceiling(Math.Log(currentState.UnprocessedItems.Count, 2));
 
@@ -159,7 +159,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		_settings.SessionSettings.CurrentPlayset = currentState.PlaysetName;
 		_settings.SessionSettings.Save();
 
-		ISave.Delete("TroubleshootState.json");
+        ISave.Delete("TroubleshootState.json");
 
 		currentState = null;
 
@@ -225,9 +225,9 @@ internal class TroubleshootSystem : ITroubleshootSystem
 			}
 			else
 			{
-				_bulkUtil.SetBulkIncluded(GetPackages(new[] { lists.processingItems[0][0] }), currentState.ItemIsMissing);
+				_bulkUtil.SetBulkIncluded(GetPackages([lists.processingItems[0][0]]), currentState.ItemIsMissing);
 
-				PromptResult?.Invoke(GetPackages(new[] { lists.processingItems[0][0] }).ToList());
+				PromptResult?.Invoke([.. GetPackages([lists.processingItems[0][0]])]);
 
 				Stop(true);
 

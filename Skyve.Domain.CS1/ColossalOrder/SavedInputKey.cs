@@ -60,7 +60,7 @@ public class SavedInputKey : SavedValue
 		m_Value = Encode(key, control, shift, alt);
 	}
 
-	public InputKey value
+	public InputKey Value
 	{
 		get
 		{
@@ -74,21 +74,21 @@ public class SavedInputKey : SavedValue
 		set
 		{
 			m_Value = value;
-			settingsFile?.SetValue(m_Name, m_Value);
+			SettingsFile?.SetValue(m_Name, m_Value);
 		}
 	}
 
 	protected override void SyncImpl()
 	{
-		if (settingsFile != null)
+		if (SettingsFile != null)
 		{
-			m_Exists = settingsFile.GetValue(m_Name, ref m_Value);
+			m_Exists = SettingsFile.GetValue(m_Name, ref m_Value);
 		}
 	}
 
 	public static implicit operator InputKey(SavedInputKey s)
 	{
-		return s.value;
+		return s.Value;
 	}
 
 	//public bool IsPressed()
@@ -129,52 +129,52 @@ public class SavedInputKey : SavedValue
 
 	public KeyCode Key
 	{
-		get => (KeyCode)(value & 268435455);
-		set => this.value = this.value & -268435456 | (int)value;
+		get => (KeyCode)(Value & 268435455);
+		set => this.Value = this.Value & -268435456 | (int)value;
 	}
 
 	public bool Control
 	{
-		get => (value & 1073741824) != 0;
+		get => (Value & 1073741824) != 0;
 		set
 		{
 			if (value)
 			{
-				this.value |= 1073741824;
+				this.Value |= 1073741824;
 				return;
 			}
 
-			this.value &= -1073741825;
+			this.Value &= -1073741825;
 		}
 	}
 
 	public bool Shift
 	{
-		get => (value & 536870912) != 0;
+		get => (Value & 536870912) != 0;
 		set
 		{
 			if (value)
 			{
-				this.value |= 536870912;
+				this.Value |= 536870912;
 				return;
 			}
 
-			this.value &= -536870913;
+			this.Value &= -536870913;
 		}
 	}
 
 	public bool Alt
 	{
-		get => (value & 268435456) != 0;
+		get => (Value & 268435456) != 0;
 		set
 		{
 			if (value)
 			{
-				this.value |= 268435456;
+				this.Value |= 268435456;
 				return;
 			}
 
-			this.value &= -268435457;
+			this.Value &= -268435457;
 		}
 	}
 

@@ -484,8 +484,7 @@ partial class PC_Utilities
 			this.DD_TextImport.Size = new System.Drawing.Size(732, 104);
 			this.DD_TextImport.TabIndex = 17;
 			this.DD_TextImport.Text = "TextImportMissingInfo";
-			this.DD_TextImport.ValidExtensions = new string[] {
-        ".txt"};
+			this.DD_TextImport.ValidExtensions = new string[] { ".txt" };
 			this.DD_TextImport.FileSelected += new System.Action<string>(this.DD_TextImport_FileSelected);
 			this.DD_TextImport.ValidFile += new System.Func<object, string, bool>(this.DD_TextImport_ValidFile);
 			// 
@@ -547,8 +546,7 @@ partial class PC_Utilities
 			this.DD_BOB.Size = new System.Drawing.Size(732, 107);
 			this.DD_BOB.TabIndex = 16;
 			this.DD_BOB.Text = "XMLImportMissingInfo";
-			this.DD_BOB.ValidExtensions = new string[] {
-        ".xml"};
+			this.DD_BOB.ValidExtensions = new string[] { ".xml" };
 			this.DD_BOB.FileSelected += new System.Action<string>(this.DD_BOB_FileSelected);
 			this.DD_BOB.ValidFile += new System.Func<object, string, bool>(this.DD_BOB_ValidFile);
 			// 
@@ -713,7 +711,7 @@ partial class PC_Utilities
 			this.slickScroll1.TabIndex = 18;
 			this.slickScroll1.TabStop = false;
 			this.slickScroll1.Text = "slickScroll1";
-			this.slickScroll1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.slickScroll1_Scroll);
+			this.slickScroll1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.SlickScroll1_Scroll);
 			// 
 			// P_Container
 			// 

@@ -35,7 +35,7 @@ public partial class PC_Utilities : PanelContent
 
 		DD_BOB.StartingFolder = _locationManager.AppDataPath;
 		DD_Missing.StartingFolder = DD_Unused.StartingFolder = LsmUtil.GetReportFolder();
-		DD_Missing.ValidExtensions = DD_Unused.ValidExtensions = new[] { ".htm", ".html" };
+		DD_Missing.ValidExtensions = DD_Unused.ValidExtensions = [".htm", ".html"];
 
 		SlickTip.SetTo(B_LoadCollection, "LoadCollectionTip");
 		SlickTip.SetTo(DD_Missing, "LsmMissingTip");
@@ -287,7 +287,7 @@ public partial class PC_Utilities : PanelContent
 		_subscriptionsManager.Redownload = true;
 	}
 
-	private void slickScroll1_Scroll(object sender, ScrollEventArgs e)
+	private void SlickScroll1_Scroll(object sender, ScrollEventArgs e)
 	{
 		slickSpacer1.Visible = slickScroll1.Percentage != 0;
 	}

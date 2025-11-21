@@ -14,7 +14,7 @@ namespace SkyveMod.Util;
 internal static class SubscriptionUtil
 {
 	private static readonly string _filePath = Path.Combine(DataLocation.localApplicationData, Path.Combine("Skyve", "SubscriptionTransfer.xml"));
-	private static FileSystemWatcher? watcher;
+	private static FileSystemWatcher watcher;
 	private static readonly DelayedAction _delayedAction = new(3000, Run);
 
 	internal static void Start()

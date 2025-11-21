@@ -43,7 +43,7 @@ namespace KianCommons {
 
         private static StreamWriter filerWrier_;
 
-        private static object LogLock = new object();
+        private static readonly object LogLock = new();
 
         public static bool ShowGap = false;
 
@@ -99,9 +99,11 @@ namespace KianCommons {
                 try {
                     if (isRunning_) return; //already initialized
                     Log.Info("Initializing Log.FlushTread");
-                    flushThraad_ = new Thread(FlushThread);
-                    flushThraad_.Name = "FlushThread";
-                    flushThraad_.IsBackground = true;
+                    flushThraad_ = new Thread(FlushThread)
+                    {
+                        Name = "FlushThread",
+                        IsBackground = true
+                    };
                     isRunning_ = true;
                     flushThraad_.Start();
                 } catch (Exception ex) {
@@ -188,7 +190,7 @@ namespace KianCommons {
 
 
         public const int MAX_WAIT_ID = 1000;
-        static DateTime[] times_ = new DateTime[MAX_WAIT_ID];
+        static readonly DateTime[] times_ = new DateTime[MAX_WAIT_ID];
 
         [Conditional("DEBUG")]
         public static void DebugWait(string message, int id, float seconds = 0.5f, bool copyToGameLog = true) {
@@ -207,8 +209,7 @@ namespace KianCommons {
 
         [Conditional("DEBUG")]
         public static void DebugWait(string message, object id = null, float seconds = 0.5f, bool copyToGameLog = true) {
-            if (id == null)
-                id = Environment.StackTrace + message;
+            id ??= Environment.StackTrace + message;
             DebugWait(message, id.GetHashCode(), seconds, copyToGameLog);
 
         }
@@ -253,7 +254,7 @@ namespace KianCommons {
                 foreach (var key in keys)
                     data.Add($"'{key}' : '{ex.Data[key]}'");
                 if (data.Any())
-                    return "Data: " + string.Join(" | ", data.ToArray());
+                    return "Data: " + string.Join(" | ", [.. data]);
             }
             return null;
         }
@@ -306,7 +307,7 @@ namespace KianCommons {
                 Log.Info(m, true);
         }
 
-        static string nl = "\n";
+        static readonly string nl = "\n";
 
         /// <summary>
         /// Write a message to log file.
@@ -345,8 +346,8 @@ namespace KianCommons {
                         if (filerWrier_ != null) {
                             filerWrier_.WriteLine(m);
                         } else {
-                            using (StreamWriter w = File.AppendText(LogFilePath))
-                                w.WriteLine(m);
+                            using StreamWriter w = File.AppendText(LogFilePath);
+                            w.WriteLine(m);
                         }
                     }
                 } catch (Exception ex) {
@@ -394,11 +395,10 @@ namespace KianCommons {
             => str.Replace("\r\n", "\n");
 
         public static void LogToFileSimple(string file, string message) {
-            using (StreamWriter w = File.AppendText(file)) {
-                w.WriteLine(message);
-                w.WriteLine(new StackTrace().ToString());
-                w.WriteLine();
-            }
+            using StreamWriter w = File.AppendText(file);
+            w.WriteLine(message);
+            w.WriteLine(new StackTrace().ToString());
+            w.WriteLine();
         }
 
         public static void Called(params object[] args) => Info(ReflectionHelpers.CurrentMethod(2, args) + " called.", false);

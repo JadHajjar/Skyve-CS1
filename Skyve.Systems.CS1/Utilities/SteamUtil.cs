@@ -26,10 +26,10 @@ public static class SteamUtil
 	private const string DLC_CACHE_FILE = "SteamDlcsCache.json";
 	private static readonly AssetInfoCache _csCache;
 
-	private static readonly SteamItemProcessor _workshopItemProcessor;
+    private static readonly SteamItemProcessor _workshopItemProcessor;
 	private static readonly SteamUserProcessor _steamUserProcessor;
 
-	public static List<SteamDlc> Dlcs { get; private set; }
+    public static List<SteamDlc> Dlcs { get; private set; }
 
 	public static event Action? DLCsLoaded;
 
@@ -37,9 +37,9 @@ public static class SteamUtil
 	{
 		_csCache = AssetInfoCache.Deserialize();
 
-		ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
+        ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
 
-		Dlcs = cache ?? new();
+		Dlcs = cache ?? [];
 
 		_workshopItemProcessor = new();
 		_steamUserProcessor = new();
@@ -171,21 +171,21 @@ public static class SteamUtil
 
 		if (steamId64s.Count == 0)
 		{
-			return new();
+			return [];
 		}
 
 		try
 		{
-			var result = await ServiceCenter.Get<SkyveApiUtil>().Post<List<ulong>, List <SteamUser>>("/GetUsers", steamId64s);
+            var result = await ServiceCenter.Get<SkyveApiUtil>().Post<List<ulong>, List <SteamUser>>("/GetUsers", steamId64s);
 
-			return result?.ToDictionary(x => x.SteamId) ?? new();
-		}
+			return result?.ToDictionary(x => x.SteamId) ?? [];
+        }
 		catch (Exception ex)
 		{
 			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to get steam author information");
 		}
 
-		return new();
+		return [];
 	}
 
 	public static async Task<Dictionary<ulong, SteamWorkshopInfo>> GetWorkshopInfoAsync(List<ulong> ids)
@@ -194,7 +194,7 @@ public static class SteamUtil
 
 		if (ids.Count == 0)
 		{
-			return new();
+			return [];
 		}
 
 		var query = new List<(string, object)>
@@ -218,7 +218,7 @@ public static class SteamUtil
 	{
 		if (userId == 0)
 		{
-			return new();
+			return [];
 		}
 
 		var url = "https://api.steampowered.com/IPublishedFileService/GetUserFiles/v1/";
@@ -239,10 +239,10 @@ public static class SteamUtil
 
 		while (true)
 		{
-			var newData = await ConvertPublishedFileResponse(url, query.Concat(new (string, object)[]
-			{
-				("page", page)
-			}));
+			var newData = await ConvertPublishedFileResponse(url, query.Concat(
+            [
+                ("page", page)
+			]));
 
 			data.AddRange(newData.Item2);
 
@@ -305,10 +305,10 @@ public static class SteamUtil
 
 		while (true)
 		{
-			var newData = await ConvertPublishedFileResponse(url, queryItems.Concat(new (string, object)[]
-			{
-				("page", page)
-			}));
+			var newData = await ConvertPublishedFileResponse(url, queryItems.Concat(
+            [
+                ("page", page)
+			]));
 
 			data.AddRange(newData.Item2);
 
@@ -331,7 +331,7 @@ public static class SteamUtil
 
 			var data = info?.response?.publishedfiledetails?
 				.Select(x => new SteamWorkshopInfo(x))
-				.ToList() ?? new();
+				.ToList() ?? [];
 
 			_steamUserProcessor.AddRange(data.Select(x => x.AuthorId));
 
@@ -351,14 +351,14 @@ public static class SteamUtil
 		{
 			var url = $"https://store.steampowered.com/api/appdetails";
 
-			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId), ("l", "english")) ?? new();
+			return await ApiUtil.Get<Dictionary<string, SteamAppInfo>>(url, ("appids", steamId), ("l", "english")) ?? [];
 		}
 		catch (Exception ex)
 		{
 			ServiceCenter.Get<ILogger>().Exception(ex, "Failed to get the steam information for appid " + steamId);
 		}
 
-		return new();
+		return [];
 	}
 
 	public static async void LoadDlcs()
@@ -401,7 +401,7 @@ public static class SteamUtil
 
 		ServiceCenter.Get<ILogger>().Info($"DLCs ({newDlcs.Count}) loaded..");
 
-		ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
+        ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 
 		DLCsLoaded?.Invoke();
 	}
@@ -413,7 +413,7 @@ public static class SteamUtil
 
 		try
 		{
-			Dlcs = new();
+			Dlcs = [];
 			CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE));
 		}
 		catch (Exception ex)
