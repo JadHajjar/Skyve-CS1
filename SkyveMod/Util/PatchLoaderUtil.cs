@@ -13,7 +13,7 @@ public class PatchLoaderStatus
 	public const ulong PatchLoaderWorkshopId = 2041457644u;
 
 	private bool _initialized;
-	private readonly bool _errorModalOpened;
+	//private readonly bool _errorModalOpened;
 
 	private static PatchLoaderStatus _instance;
 
@@ -200,10 +200,10 @@ public class PatchLoaderStatus
 
 	private void ShowError()
 	{
-		if (_errorModalOpened)
-		{
-			return;
-		}
+		//if (_errorModalOpened)
+		//{
+		//	return;
+		//}
 
 		var reason = "An error occurred while attempting to automatically subscribe to PatchLoader mod (no network connection?)";
 		var solution = "You can manually download the PatchLoader mod from github.com/CitiesSkylinesMods/PatchLoader/releases";
