@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<Import Project="../Version.props" />
 	<Import Project="../../Skyve/Config.props" />
 	<PropertyGroup>
@@ -6,7 +6,7 @@
 		<TargetFramework>net35</TargetFramework>
 		<Deterministic>false</Deterministic>
 		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
+		<Nullable>disable</Nullable>
 		<DebugType>full</DebugType>
 		<Configurations>Debug;Release;Stable</Configurations>
 		<DebugSymbols>true</DebugSymbols>
@@ -29,9 +29,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CitiesHarmony.API" Version="2.0.0" />
+		<PackageReference Include="CitiesHarmony.API" Version="2.2.0" />
 		<PackageReference Include="Mono.Unofficial.pdb2mdb" Version="4.2.3.4" />
-		<PackageReference Include="GitInfo" Version="2.1.2">
+		<PackageReference Include="GitInfo" Version="2.2.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
