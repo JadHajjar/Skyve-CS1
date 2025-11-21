@@ -11,7 +11,6 @@ using SkyveShared;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
@@ -20,20 +19,13 @@ using static KianCommons.ReflectionHelpers;
 
 namespace SkyveMod.Data;
 extern alias Injections;
-public class CacheUtil
+public class CacheUtil(Package.Asset[] assets, PluginManager.PluginInfo[] plugins)
 {
-	public AssetInfoCache Cache;
-	public Package.Asset[] CachedAssets;
-	public PluginInfo[] CachedPlugins;
+	public AssetInfoCache Cache = AssetInfoCache.Deserialize();
+	public Package.Asset[] CachedAssets = assets;
+	public PluginInfo[] CachedPlugins = plugins;
 
-	public CacheUtil(Package.Asset[] assets, PluginManager.PluginInfo[] plugins)
-	{
-		CachedAssets = assets;
-		CachedPlugins = plugins;
-		Cache = AssetInfoCache.Deserialize();
-	}
-
-	public void Save()
+    public void Save()
 	{
 		Cache.Serialize();
 	}
@@ -88,7 +80,7 @@ public class CacheUtil
 					tags.AddRange(customAssetMetaData.Tags());
 				}
 
-				cache.Tags = tags.ToArray();
+				cache.Tags = [.. tags];
 
 			}
 			catch (Exception ex)
@@ -111,12 +103,12 @@ public class CacheUtil
 			}
 			// evaluate this to avoid race condition.
 
-			var assets = PackageManager.FilterAssets(new[] {
+			var assets = PackageManager.FilterAssets([
 					UserAssetType.CustomAssetMetaData,
 					UserAssetType.MapThemeMetaData,
 					UserAssetType.ColorCorrection,
 					UserAssetType.DistrictStyleMetaData,
-				}).ToArray();
+				]).ToArray();
 			var plugins = PluginManager.instance.GetPluginsInfo().ToArray();
 			new Thread(() => CacheDataImpl(assets, plugins)).Start();
 		}
@@ -158,9 +150,15 @@ public class CacheUtil
 
 	private void AquireDlcs()
 	{
-		var dic = new List<uint>();
+        uint[] dlcs = [346791, 369150, 420610, 456200, 515190, 515191, 547500, 547501, 547502, 563850, 614580, 614581, 614582, 715190, 715191, 715192, 715193, 715194, 815380, 944070, 944071, 1059820, 1065490, 1065491, 1146930, 1148020, 1148021, 1148022, 1196100, 1531470, 1531471, 1531472, 1531473, 1726380, 1726381, 1726382, 1726383, 1726384, 1992290, 1992291, 1992292, 1992293, 2008400, 2144480, 2144481, 2144482, 2144483, 2148900, 2148901, 2148902, 2148903, 2148904, 2224690, 2224691, 2225940, 2225941];
 
-		foreach (var dlc in new uint[] { 2342310, 2313324, 2313323, 2313322, 2313321, 2313320, 2225941, 2225940, 2224691, 2224690, 2148904, 2148903, 2148902, 2148901, 2148900, 2144483, 2144482, 2144481, 2144480, 2008400, 1992293, 1992292, 1992291, 1992290, 1726384, 1726383, 1726382, 1726381, 1726380, 1531473, 1531472, 1531471, 1531470, 1196100, 1148022, 1148021, 1148020, 1146930, 1065491, 1065490, 1059820, 944071, 944070, 815380, 715194, 715193, 715192, 715191, 715190, 614582, 614581, 614580, 563850, 547502, 547501, 547500, 536610, 526612, 526611, 526610, 525940, 515191, 515190, 470930, 470680, 456200, 420610, 369150, 365040, 355600, 352512, 352511, 352510, 346791, 346790, 340160, })
+        uint[] extars = [340160, 346790, 352510, 352511, 352512, 355600, 365040, 470680, 470930, 525940, 526610, 526611, 526612, 536610];
+
+        uint[] AvailableDLCs = [.. dlcs, .. extars];
+
+        var dic = new List<uint>();
+
+		foreach (var dlc in AvailableDLCs)
 		{
 			if (PlatformService.IsAppOwned(dlc))
 			{
@@ -168,6 +166,6 @@ public class CacheUtil
 			}
 		}
 
-		Cache.AvailableDLCs = dic.ToArray();
+		Cache.AvailableDLCs = [.. dic];
 	}
 }
