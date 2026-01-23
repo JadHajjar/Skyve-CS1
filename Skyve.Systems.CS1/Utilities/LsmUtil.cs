@@ -55,35 +55,11 @@ public static class LsmUtil
 
 	public static IEnumerable<IPackageIdentity> LoadMissingAssets(string obj)
 	{
-		var lines = File.ReadAllLines(obj);
-
-		for (var i = 0; i < lines.Length; i++)
-		{
-			var match = Regex.Match(lines[i], "data-lomtag=\"missing.*?\".+?href=\"(.+?(\\d+))\">(.+?)</a>");
-
-			if (match.Success)
-			{
-				var steamId = match.Groups[2].Value;
-
-				yield return new GenericPackageIdentity(ulong.Parse(steamId));
-			}
-		}
+		return LsmReportParser.ParseMissingAssets(obj);
 	}
 
 	public static IEnumerable<IPackageIdentity> LoadUnusedAssets(string obj)
 	{
-		var lines = File.ReadAllLines(obj);
-
-		for (var i = 0; i < lines.Length; i++)
-		{
-			var match = Regex.Match(lines[i], "data-lomtag=\"unused\".+?href=\"(.+?(\\d+))\">(.+?)</a>");
-
-			if (match.Success)
-			{
-				var steamId = match.Groups[2].Value;
-
-				yield return new GenericPackageIdentity(ulong.Parse(steamId));
-			}
-		}
+		return LsmReportParser.ParseUnusedAssets(obj);
 	}
 }
