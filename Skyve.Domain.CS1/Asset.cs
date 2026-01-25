@@ -1,4 +1,4 @@
-﻿using Extensions;
+using Extensions;
 
 using Skyve.Systems;
 
@@ -21,6 +21,7 @@ public class Asset : IAsset
 			Name = asset.Name;
 			AssetTags = asset.Tags;
 			FullName = asset.FullName;
+			MetadataName =  asset.MetaName;
 		}
 		else
 		{
@@ -35,6 +36,7 @@ public class Asset : IAsset
 	public long LocalSize { get; }
 	public DateTime LocalTime { get; }
 	public string Name { get; }
+	public string MetadataName { get; }
 	public string[] AssetTags { get; }
 	public string FullName { get; }
 	public bool IsMod => LocalParentPackage.IsMod;
@@ -79,4 +81,5 @@ public class Asset : IAsset
 	{
 		return !(left == right);
 	}
+	
 }

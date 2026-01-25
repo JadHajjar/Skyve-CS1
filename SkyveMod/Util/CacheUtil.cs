@@ -84,7 +84,7 @@ public class CacheUtil
 				if (metaData is CustomAssetMetaData customAssetMetaData)
 				{
 					cache.Description = ContentManagerUtil.SafeGetAssetDesc(customAssetMetaData, asset.package);
-
+					cache.MetaName = customAssetMetaData.name;
 					tags.AddRange(customAssetMetaData.Tags());
 				}
 

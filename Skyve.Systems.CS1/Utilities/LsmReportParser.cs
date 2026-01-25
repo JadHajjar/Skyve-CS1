@@ -3,7 +3,7 @@ using Extensions;
 using Skyve.Domain;
 using Skyve.Domain.CS1;
 using Skyve.Domain.Systems;
-using Skyve.Systems;
+using SkyveShared;
 
 using System;
 using System.Collections.Generic;
@@ -12,64 +12,141 @@ using System.Net;
 using System.Text.RegularExpressions;
 
 namespace Skyve.Systems.CS1.Utilities;
+
 internal static class LsmReportParser
 {
-	private static readonly Regex MissingEntryRegex = new(@"data-lomtag=""missing.*?""[^>]*href=""(.+?(\d+))"">(.+?)</a>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-	private static readonly Regex UnusedEntryRegex = new(@"data-lomtag=""unused""[^>]*href=""(.+?(\d+))"">(.+?)</a>", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-	private static readonly Regex MultipleSpacesRegex = new(@"\s{2,}", RegexOptions.Compiled);
-	public static IEnumerable<IPackageIdentity> ParseMissingAssets(string reportPath)
-	{
-		return ParseReport(reportPath, MissingEntryRegex, true);
-	}
+	private static readonly Regex UnusedEntryRegex = CreateEntryRegex("unused");
 
 	public static IEnumerable<IPackageIdentity> ParseUnusedAssets(string reportPath)
-	{
-		return ParseReport(reportPath, UnusedEntryRegex, false);
-	}
+		=> ParseReport(reportPath, UnusedEntryRegex, "Unused");
 
-	private static IEnumerable<IPackageIdentity> ParseReport(string reportPath, Regex regex, bool isMissing)
+	private static IEnumerable<IPackageIdentity> ParseReport(string reportPath, Regex regex, string reportKind)
 	{
-		var packageManager = ServiceCenter.Get<IPackageManager>();
-		var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-		var lines = File.ReadAllLines(reportPath);
-
-		foreach (var line in lines)
+		if (!TryGetPackageManager(out var packageManager))
 		{
-			var match = regex.Match(line);
+			yield break;
+		}
 
-			if (!match.Success || !ulong.TryParse(match.Groups[2].Value, out var steamId))
+		if (!TryReadReport(reportPath, reportKind, out var reportContents))
+		{
+			yield break;
+		}
+
+		var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+		foreach (var entry in EnumerateEntries(regex, reportContents))
+		{
+			var identity = ResolveEntrySafely(packageManager, entry, out var dedupeKey);
+
+			if (seen.Add(dedupeKey))
 			{
-				continue;
+				yield return identity;
 			}
-
-			var rawName = match.Groups[3].Value;
-			var decoded = WebUtility.HtmlDecode(rawName).Trim();
-			var normalizedTarget = NormalizeForComparison(decoded);
-
-			var entry = ResolveEntry(packageManager, steamId, normalizedTarget, decoded, isMissing, out var seenKey);
-
-			if (!seen.Add(seenKey))
-			{
-				continue;
-			}
-
-			yield return entry;
 		}
 	}
 
-	private static IPackageIdentity ResolveEntry(IPackageManager packageManager, ulong steamId, string normalizedTarget, string displayName, bool isMissing, out string seenKey)
+	private static bool TryGetPackageManager(out IPackageManager packageManager)
 	{
-		var asset = ResolveAsset(packageManager, steamId, normalizedTarget);
+		try
+		{
+			packageManager = ServiceCenter.Get<IPackageManager>();
+			return true;
+		}
+		catch (Exception ex)
+		{
+			LogCritical(ex, "LSM report parser could not resolve IPackageManager.");
+			packageManager = null!;
+			return false;
+		}
+	}
+
+	private static bool TryReadReport(string reportPath, string kind, out string reportContents)
+	{
+		try
+		{
+			reportContents = File.ReadAllText(reportPath);
+			return true;
+		}
+		catch (Exception ex)
+		{
+			LogCritical(ex, $"LSM report parse failed. Path='{reportPath}', Kind='{kind}'.");
+			reportContents = string.Empty;
+			return false;
+		}
+	}
+
+	private readonly struct LsmEntry
+	{
+		public LsmEntry(ulong steamId, string displayName, string normalizedTarget)
+		{
+			SteamId = steamId;
+			DisplayName = displayName;
+			NormalizedTarget = normalizedTarget;
+		}
+
+		public ulong SteamId { get; }
+		public string DisplayName { get; }
+		public string NormalizedTarget { get; }
+	}
+
+	private static IEnumerable<LsmEntry> EnumerateEntries(Regex regex, string reportContents)
+	{
+		foreach (Match match in regex.Matches(reportContents))
+		{
+			if (!match.Success)
+			{
+				continue;
+			}
+
+			var idText = match.Groups["id"].Value;
+			if (!ulong.TryParse(idText, out var steamId))
+			{
+				continue;
+			}
+
+			var rawName = match.Groups["name"].Value;
+			var displayName = WebUtility.HtmlDecode(rawName).Trim();
+			var normalizedTarget = LsmNameNormalizer.NormalizeForComparison(displayName);
+
+			yield return new LsmEntry(steamId, displayName, normalizedTarget);
+		}
+	}
+
+	private static IPackageIdentity ResolveEntrySafely(
+		IPackageManager packageManager,
+		LsmEntry entry,
+		out string dedupeKey)
+	{
+		try
+		{
+			return ResolveEntry(packageManager, entry, out dedupeKey);
+		}
+		catch (Exception ex)
+		{
+			LogCritical(ex, $"LSM entry resolution failed. SteamId={entry.SteamId}, Name='{entry.DisplayName}', Normalized='{entry.NormalizedTarget}'.");
+			dedupeKey = BuildUnresolvedKey(entry.SteamId, entry.NormalizedTarget);
+			return new UnknownLsmReportIdentity(entry.SteamId, entry.DisplayName);
+		}
+	}
+
+	private static IPackageIdentity ResolveEntry(
+		IPackageManager packageManager,
+		LsmEntry entry,
+		out string dedupeKey)
+	{
+		var asset = ResolveAsset(packageManager, entry.SteamId, entry.NormalizedTarget);
 
 		if (asset is not null)
 		{
-			seenKey = asset.FilePath.FormatPath();
+			dedupeKey = asset.FilePath.FormatPath();
 			return asset;
 		}
 
-		seenKey = $"lsm-unresolved:{steamId}:{normalizedTarget}";
-		return new UnknownLsmReportIdentity(steamId, displayName, isMissing);
+		dedupeKey = BuildUnresolvedKey(entry.SteamId, entry.NormalizedTarget);
+		return new UnknownLsmReportIdentity(entry.SteamId, entry.DisplayName);
 	}
+	private static string BuildUnresolvedKey(ulong steamId, string normalizedTarget)
+		=> $"lsm-unresolved:{steamId}:{normalizedTarget}";
 
 	private static IAsset? ResolveAsset(IPackageManager packageManager, ulong steamId, string normalizedTarget)
 	{
@@ -78,81 +155,78 @@ internal static class LsmReportParser
 			return null;
 		}
 
-		if (package.Assets is null || package.Assets.Length == 0)
+		var assets = package.Assets;
+		if (assets is null || assets.Length == 0)
 		{
 			return null;
 		}
 
-		foreach (var asset in package.Assets)
+		IAsset? fullNameFallback = null;
+
+		foreach (var asset in assets)
 		{
-			if (asset is not Asset assetWithFullName || string.IsNullOrWhiteSpace(assetWithFullName.FullName))
+			if (asset is not Asset a)
 			{
 				continue;
 			}
 
-			var normalized = NormalizeAssetIdentifier(assetWithFullName.FullName, steamId);
-
-			if (string.Equals(normalized, normalizedTarget, StringComparison.OrdinalIgnoreCase))
+			if (TryMatch(LsmNameNormalizer.NormalizeForComparison(a.MetadataName), normalizedTarget))
 			{
-				return asset;
+				return a;
+			}
+
+			if (TryMatch(LsmNameNormalizer.NormalizeForComparison(a.Name), normalizedTarget))
+			{
+				return a;
+			}
+
+			if (TryMatch(LsmNameNormalizer.NormalizeAssetIdentifier(a.FullName, steamId), normalizedTarget))
+			{
+				fullNameFallback ??= a;
 			}
 		}
 
-		return null;
+		return fullNameFallback;
 	}
 
-	private static string NormalizeAssetIdentifier(string value, ulong steamId)
+	private static bool TryMatch(string normalizedValue, string normalizedTarget)
+		=> normalizedValue.Length > 0 &&
+		   string.Equals(normalizedValue, normalizedTarget, StringComparison.OrdinalIgnoreCase);
+
+	private static Regex CreateEntryRegex(params string[] tags)
 	{
-		var normalized = string.IsNullOrWhiteSpace(value) ? string.Empty : value.Trim();
+		var pattern =
+			$@"<a(?=[^>]*data-lomtag=""(?:{string.Join("|", tags)})"")[^>]*href=""[^""]*id=(?<id>\d+)""[^>]*>(?<name>.*?)</a>";
 
-		if (steamId != 0)
-		{
-			var prefix = $"{steamId}.";
-
-			if (normalized.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
-			{
-				normalized = normalized.Substring(prefix.Length);
-			}
-		}
-
-		return NormalizeForComparison(normalized);
+		return new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+	}
+	
+	private static ILogger? TryGetLogger()
+	{
+		try { return ServiceCenter.Get<ILogger>(); }
+		catch { return null; }
 	}
 
-	private static string NormalizeForComparison(string value)
+	private static void LogCritical(Exception exception, string message)
 	{
-		if (string.IsNullOrWhiteSpace(value))
-		{
-			return string.Empty;
-		}
+		var logger = TryGetLogger();
+		if (logger is null) return;
 
-		const string dataSuffix = "_Data";
-
-		if (value.EndsWith(dataSuffix, StringComparison.OrdinalIgnoreCase))
-		{
-			value = value.Substring(0, value.Length - dataSuffix.Length);
-		}
-
-		value = value.Replace('_', ' ');
-		value = MultipleSpacesRegex.Replace(value, " ");
-
-		return value.Trim();
+		try { logger.Exception(exception, message); }
+		catch {  }
 	}
 }
 
 internal sealed class UnknownLsmReportIdentity : IPackageIdentity
 {
-	public UnknownLsmReportIdentity(ulong steamId, string shortName, bool isMissing)
+	public UnknownLsmReportIdentity(ulong steamId, string name)
 	{
 		Id = steamId;
-		ShortName = shortName;
-		IsMissing = isMissing;
-		Name = $"[{(isMissing ? "Missing" : "Unused")}] {shortName}";
+		Name = name;
 		Url = $"https://steamcommunity.com/workshop/filedetails/?id={steamId}";
 	}
 
 	public ulong Id { get; }
 	public string Name { get; }
 	public string Url { get; }
-	public string ShortName { get; }
-	public bool IsMissing { get; }
 }
