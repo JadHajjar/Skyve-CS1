@@ -21,6 +21,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	private readonly INotifier _notifier;
 	private readonly IBulkUtil _bulkUtil;
 	private readonly IModUtil _modUtil;
+	private readonly SaveHandler _saveHandler;
 
 	public event Action? StageChanged;
 	public event Action? AskForConfirmation;
@@ -34,10 +35,10 @@ internal class TroubleshootSystem : ITroubleshootSystem
 	public int CurrentStage => currentState?.CurrentStage ?? 0;
 	public int TotalStages => currentState?.TotalStages ?? 0;
 
-	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IBulkUtil bulkUtil, IModLogicManager modLogicManager, IModUtil modUtil)
+	public TroubleshootSystem(IPackageManager packageManager, IPlaysetManager playsetManager, ISettings settings, INotifier notifier, ICitiesManager citiesManager, IBulkUtil bulkUtil, IModLogicManager modLogicManager, IModUtil modUtil, SaveHandler saveHandler)
 	{
 		try
-		{ ISave.Load(out currentState, "TroubleshootState.json"); }
+		{ saveHandler.Load(out currentState, "TroubleshootState.json"); }
 		catch { }
 
 		_packageManager = packageManager;
@@ -47,7 +48,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		_notifier = notifier;
 		_bulkUtil = bulkUtil;
 		_modUtil = modUtil;
-
+		_saveHandler = saveHandler;
 		citiesManager.MonitorTick += CitiesManager_MonitorTick;
 	}
 
@@ -159,7 +160,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 		_settings.SessionSettings.CurrentPlayset = currentState.PlaysetName;
 		_settings.SessionSettings.Save();
 
-		ISave.Delete("TroubleshootState.json");
+		_saveHandler.Delete("TroubleshootState.json");
 
 		currentState = null;
 
@@ -329,7 +330,7 @@ internal class TroubleshootSystem : ITroubleshootSystem
 
 	private void Save()
 	{
-		ISave.Save(currentState, "TroubleshootState.json");
+		_saveHandler.Save(currentState, "TroubleshootState.json");
 	}
 
 	private void CitiesManager_MonitorTick(bool isAvailable, bool isRunning)

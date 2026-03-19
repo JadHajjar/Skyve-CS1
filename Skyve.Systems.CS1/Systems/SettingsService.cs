@@ -1,8 +1,12 @@
 ﻿using Extensions;
 
 using Skyve.Domain;
+using Skyve.Domain.CS1;
 using Skyve.Domain.CS1.Utilities;
 using Skyve.Domain.Systems;
+
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Skyve.Systems.CS1.Systems;
 internal class SettingsService : ISettings
@@ -13,10 +17,12 @@ internal class SettingsService : ISettings
 	ISessionSettings ISettings.SessionSettings => SessionSettings;
 	IFolderSettings ISettings.FolderSettings => FolderSettings;
 
-	public SettingsService()
+	public SettingsService(SaveHandler saveHandler)
 	{
-		SessionSettings = ISave.Load<SessionSettings>(nameof(SessionSettings) + ".json");
-		FolderSettings = ISave.Load<FolderSettings>(nameof(FolderSettings) + ".json");
+		var settingsSaveHandler = new SaveHandler(CrossIO.Combine(Path.GetDirectoryName(saveHandler.SaveDirectory), "ModsSettings"));
+
+		FolderSettings = settingsSaveHandler.Load<FolderSettings>();
+		SessionSettings = settingsSaveHandler.Load<SessionSettings>();
 
 		CrossIO.CurrentPlatform = FolderSettings.Platform;
 	}

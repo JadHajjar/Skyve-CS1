@@ -5,17 +5,21 @@ using Skyve.Domain.CS1.Steam;
 using Skyve.Domain.Systems;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Skyve.Systems.CS1.Utilities;
+
 internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 {
 	public const string STEAM_CACHE_FILE = "SteamModsCache.json";
+	private readonly SaveHandler _saveHandler;
 
-	public SteamItemProcessor() : base(200, 5000, GetCachedInfo())
+	public SteamItemProcessor(SaveHandler saveHandler) : base(200, 5000, 0, GetCachedInfo(saveHandler))
 	{
+		_saveHandler = saveHandler;
 		MaxCacheTime = TimeSpan.FromHours(1);
 	}
 
@@ -24,7 +28,7 @@ internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 		return ConnectionHandler.IsConnected;
 	}
 
-	protected override async Task<(Dictionary<ulong, SteamWorkshopInfo>, bool)> ProcessItems(List<ulong> entities)
+	protected override async Task<(ConcurrentDictionary<ulong, SteamWorkshopInfo>, bool)> ProcessItems(List<ulong> entities)
 	{
 		var failed = false;
 
@@ -34,7 +38,7 @@ internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 
 			failed = results.Count == 0;
 
-			return (results, failed);
+			return (new(results), failed);
 		}
 		catch
 		{
@@ -50,27 +54,27 @@ internal class SteamItemProcessor : PeriodicProcessor<ulong, SteamWorkshopInfo>
 		}
 	}
 
-	protected override void CacheItems(Dictionary<ulong, SteamWorkshopInfo> results)
+	protected override void CacheItems(ConcurrentDictionary<ulong, SteamWorkshopInfo> results)
 	{
 		try
 		{
-			ISave.Save(results, STEAM_CACHE_FILE);
+			_saveHandler.Save(results, STEAM_CACHE_FILE);
 		}
 		catch { }
 	}
 
-	private static Dictionary<ulong, SteamWorkshopInfo>? GetCachedInfo()
+	private static ConcurrentDictionary<ulong, SteamWorkshopInfo>? GetCachedInfo(SaveHandler saveHandler)
 	{
 		try
 		{
-			var path = ISave.GetPath(STEAM_CACHE_FILE);
+			var path = saveHandler.GetPath(STEAM_CACHE_FILE);
 
 			if (DateTime.Now - File.GetLastWriteTime(path) > TimeSpan.FromDays(7) && ConnectionHandler.IsConnected)
 			{
 				return null;
 			}
 
-			ISave.Load(out Dictionary<ulong, SteamWorkshopInfo>? dic, STEAM_CACHE_FILE);
+			saveHandler.Load(out ConcurrentDictionary<ulong, SteamWorkshopInfo>? dic, STEAM_CACHE_FILE);
 
 			return dic;
 		}

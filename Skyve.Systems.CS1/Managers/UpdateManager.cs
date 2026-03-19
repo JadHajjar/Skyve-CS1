@@ -15,15 +15,16 @@ internal class UpdateManager : IUpdateManager
 	private readonly Dictionary<string, DateTime> _previousPackages = new(new PathEqualityComparer());
 	private readonly INotificationsService _notificationsService;
 	private readonly IPackageManager _packageManager;
+	private readonly SaveHandler _saveHandler;
 
-	public UpdateManager(INotificationsService notificationsService, IPackageManager packageManager)
+	public UpdateManager(INotificationsService notificationsService, IPackageManager packageManager, SaveHandler saveHandler)
 	{
 		_notificationsService = notificationsService;
 		_packageManager = packageManager;
-
+		_saveHandler = saveHandler;
 		try
 		{
-			ISave.Load(out List<KnownPackage> packages, "LastPackages.json");
+			_saveHandler.Load(out List<KnownPackage> packages, "LastPackages.json");
 
 			if (packages != null)
 			{
@@ -73,7 +74,7 @@ internal class UpdateManager : IUpdateManager
 			_notificationsService.SendNotification(new UpdatedPackagesNotificationInfo(updatedPackages));
 		}
 
-		ISave.Save(ServiceCenter.Get<IPackageManager>().Packages.Select(x => new KnownPackage(x)), "LastPackages.json");
+		_saveHandler.Save(ServiceCenter.Get<IPackageManager>().Packages.Select(x => new KnownPackage(x)), "LastPackages.json");
 	}
 
 	public bool IsPackageKnown(ILocalPackage package)

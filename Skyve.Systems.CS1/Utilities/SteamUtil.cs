@@ -37,12 +37,12 @@ public static class SteamUtil
 	{
 		_csCache = AssetInfoCache.Deserialize();
 
-		ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
+		SaveHandler.Instance.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
 
 		Dlcs = cache ?? new();
 
-		_workshopItemProcessor = new();
-		_steamUserProcessor = new();
+		_workshopItemProcessor = new(SaveHandler.Instance);
+		_steamUserProcessor = new(SaveHandler.Instance);
 
 		var notifier = ServiceCenter.Get<INotifier>();
 
@@ -50,7 +50,7 @@ public static class SteamUtil
 		_steamUserProcessor.ItemsLoaded += notifier.OnWorkshopUsersInfoLoaded;
 	}
 
-	public static IEnumerable<SteamWorkshopInfo> Packages => _workshopItemProcessor.GetCache().Values;
+	public static IEnumerable<SteamWorkshopInfo> Packages => _workshopItemProcessor.GetCache();
 
 	public static SteamUser? GetUser(ulong steamId)
 	{
@@ -401,7 +401,7 @@ public static class SteamUtil
 
 		ServiceCenter.Get<ILogger>().Info($"DLCs ({newDlcs.Count}) loaded..");
 
-		ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
+		SaveHandler.Instance.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 
 		DLCsLoaded?.Invoke();
 	}
@@ -414,7 +414,7 @@ public static class SteamUtil
 		try
 		{
 			Dlcs = new();
-			CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE));
+			CrossIO.DeleteFile(SaveHandler.Instance.GetPath(DLC_CACHE_FILE));
 		}
 		catch (Exception ex)
 		{
@@ -423,7 +423,7 @@ public static class SteamUtil
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE));
+			CrossIO.DeleteFile(SaveHandler.Instance.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE));
 		}
 		catch (Exception ex)
 		{
@@ -432,7 +432,7 @@ public static class SteamUtil
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE));
+			CrossIO.DeleteFile(SaveHandler.Instance.GetPath(SteamItemProcessor.STEAM_CACHE_FILE));
 		}
 		catch (Exception ex)
 		{

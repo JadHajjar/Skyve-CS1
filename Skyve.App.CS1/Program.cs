@@ -25,9 +25,6 @@ internal static class Program
 		App.Program.CurrentDirectory = Application.StartupPath;
 		App.Program.ExecutablePath = Application.ExecutablePath;
 
-		ISave.AppName = "Skyve-CS1";
-		ISave.CustomSaveDirectory = CurrentDirectory;
-
 		ServiceCenter.Provider = BuildServices();
 	}
 
@@ -39,6 +36,7 @@ internal static class Program
 
 		services.AddCs1SkyveSystems();
 
+		services.AddSingleton(new SaveHandler(Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), "Skyve-CS1")));
 		services.AddSingleton<IInterfaceService, InterfaceService>();
 		services.AddSingleton<IAppInterfaceService, InterfaceService>();
 		services.AddSingleton<ICustomPackageService, CustomPackageService>();
@@ -58,19 +56,6 @@ internal static class Program
 
 			try
 			{
-				var folder = GetFolderPath(SpecialFolder.LocalApplicationData);
-
-				Directory.CreateDirectory(Path.Combine(folder, ISave.AppName));
-
-				if (Directory.Exists(Path.Combine(folder, ISave.AppName)))
-				{
-					ISave.CustomSaveDirectory = folder;
-				}
-			}
-			catch { }
-
-			try
-			{
 				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(App.Program.ExecutablePath)).Length > 1;
 
 				if (openTools && !CrossIO.FileExists(CrossIO.Combine(CurrentDirectory, "Wake")))
@@ -83,20 +68,6 @@ internal static class Program
 				CrossIO.DeleteFile(CrossIO.Combine(CurrentDirectory, "Wake"));
 			}
 			catch { }
-
-			var localAppData = GetFolderPath(SpecialFolder.LocalApplicationData);
-			if (Directory.Exists(CrossIO.Combine(localAppData, "Load Order Tool")))
-			{
-				CrossIO.MoveFolder(CrossIO.Combine(localAppData, "Load Order Tool"), CrossIO.Combine(localAppData, ISave.AppName), false);
-
-				try
-				{
-					CrossIO.DeleteFolder(CrossIO.Combine(localAppData, "Load Order Tool"));
-
-					CrossIO.DeleteFile(CrossIO.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log"));
-				}
-				catch { }
-			}
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
 

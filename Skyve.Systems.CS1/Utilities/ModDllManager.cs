@@ -15,13 +15,14 @@ public class ModDllManager : IModDllManager
 	private readonly Dictionary<string, ModDllCache> _dllCache = new(StringComparer.OrdinalIgnoreCase);
 	private readonly ILogger _logger;
 	private readonly INotifier _notifier;
+	private readonly SaveHandler _saveHandler;
 
-	public ModDllManager(ILogger logger, INotifier notifier)
+	public ModDllManager(ILogger logger, INotifier notifier,SaveHandler saveHandler)
 	{
 		_logger = logger;
 		_notifier = notifier;
-
-		ISave.Load(out List<ModDllCache> cache, CACHE_FILENAME);
+		_saveHandler = saveHandler;
+		_saveHandler.Load(out List<ModDllCache> cache, CACHE_FILENAME);
 
 		if (cache != null)
 		{
@@ -78,7 +79,7 @@ public class ModDllManager : IModDllManager
 
 	public void SaveDllCache()
 	{
-		ISave.Save(_dllCache.Values, CACHE_FILENAME);
+		_saveHandler.Save(_dllCache.Values, CACHE_FILENAME);
 	}
 
 	public void ClearDllCache()
@@ -87,7 +88,7 @@ public class ModDllManager : IModDllManager
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(CACHE_FILENAME));
+			CrossIO.DeleteFile(_saveHandler.GetPath(CACHE_FILENAME));
 		}
 		catch (Exception ex)
 		{

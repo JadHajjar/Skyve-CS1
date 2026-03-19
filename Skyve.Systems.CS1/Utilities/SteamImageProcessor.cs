@@ -4,15 +4,15 @@ using Skyve.Domain;
 using Skyve.Domain.Systems;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Skyve.Systems.CS1.Utilities;
 internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRequest, SteamImageProcessor.Stub>
 {
-	public SteamImageProcessor() : base(100, 500, null)
+	public SteamImageProcessor() : base(100, 500,0, null)
 	{
-
 	}
 
 	protected override bool CanProcess()
@@ -20,8 +20,7 @@ internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRe
 		return ConnectionHandler.IsConnected;
 	}
 
-
-	protected override async Task<(Dictionary<ImgRequest, Stub>, bool)> ProcessItems(List<ImgRequest> entities)
+	protected override async Task<(ConcurrentDictionary<ImgRequest, Stub>, bool)> ProcessItems(List<ImgRequest> entities)
 	{
 		foreach (var img in entities)
 		{
@@ -34,7 +33,7 @@ internal class SteamImageProcessor : PeriodicProcessor<SteamImageProcessor.ImgRe
 		return (new(), false);
 	}
 
-	protected override void CacheItems(Dictionary<ImgRequest, Stub> results)
+	protected override void CacheItems(ConcurrentDictionary<ImgRequest, Stub> results)
 	{ }
 
 	public struct ImgRequest

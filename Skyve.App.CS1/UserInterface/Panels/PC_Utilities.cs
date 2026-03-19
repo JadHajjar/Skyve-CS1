@@ -130,7 +130,7 @@ public partial class PC_Utilities : PanelContent
 
 		foreach (Control item in TLP_Main.Controls)
 		{
-			item.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+			item.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme.If( 1, -1));
 		}
 	}
 
@@ -343,7 +343,7 @@ public partial class PC_Utilities : PanelContent
 		if (!B_ResetImageCache.Loading)
 		{
 			B_ResetImageCache.Loading = true;
-			await Task.Run(ServiceCenter.Get<IImageService>().ClearCache);
+			await Task.Run(() => ServiceCenter.Get<IImageService>().ClearCache(true));
 			B_ResetImageCache.Loading = false;
 			var img = B_ResetImageCache.ImageName;
 			B_ResetImageCache.ImageName = "I_Check";

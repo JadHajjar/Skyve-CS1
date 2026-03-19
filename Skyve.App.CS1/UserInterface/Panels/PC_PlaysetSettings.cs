@@ -116,7 +116,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 		base.DesignChanged(design);
 
 		B_TempProfile.BackColor = B_AddProfile.BackColor = FormDesign.Design.ButtonColor;
-		TLP_LaunchSettings.BackColor = TLP_AdvancedDev.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.Type.If(FormDesignType.Dark, 1, -1));
+		TLP_LaunchSettings.BackColor = TLP_AdvancedDev.BackColor = TLP_GeneralSettings.BackColor = TLP_LSM.BackColor = design.BackColor.Tint(Lum: design.IsDarkTheme.If( 1, -1));
 		L_TempProfile.ForeColor = design.YellowColor;
 		P_Options.BackColor = design.AccentBackColor;
 	}
