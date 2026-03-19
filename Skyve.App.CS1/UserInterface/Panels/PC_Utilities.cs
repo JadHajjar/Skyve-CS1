@@ -300,7 +300,7 @@ public partial class PC_Utilities : PanelContent
 			await Task.Run(ServiceCenter.Get<ICentralManager>().Start);
 			B_ReloadAllData.Loading = false;
 			var img = B_ReloadAllData.ImageName;
-			B_ReloadAllData.ImageName = "I_Check";
+			B_ReloadAllData.ImageName = "Check";
 			await Task.Delay(1500);
 			B_ReloadAllData.ImageName = img;
 		}
@@ -310,7 +310,7 @@ public partial class PC_Utilities : PanelContent
 	{
 		var img = B_ResetSnoozes.ImageName;
 		ServiceCenter.Get<ICompatibilityManager>().ResetSnoozes();
-		B_ResetSnoozes.ImageName = "I_Check";
+		B_ResetSnoozes.ImageName = "Check";
 		await Task.Delay(1500);
 		B_ResetSnoozes.ImageName = img;
 	}
@@ -319,7 +319,7 @@ public partial class PC_Utilities : PanelContent
 	{
 		ServiceCenter.Get<IModDllManager>().ClearDllCache();
 		var img = B_ResetModsCache.ImageName;
-		B_ResetModsCache.ImageName = "I_Check";
+		B_ResetModsCache.ImageName = "Check";
 		await Task.Delay(1500);
 		B_ResetModsCache.ImageName = img;
 	}
@@ -332,7 +332,7 @@ public partial class PC_Utilities : PanelContent
 			await Task.Run(ServiceCenter.Get<ICompatibilityManager>().ResetCache);
 			B_ResetCompatibilityCache.Loading = false;
 			var img = B_ResetCompatibilityCache.ImageName;
-			B_ResetCompatibilityCache.ImageName = "I_Check";
+			B_ResetCompatibilityCache.ImageName = "Check";
 			await Task.Delay(1500);
 			B_ResetCompatibilityCache.ImageName = img;
 		}
@@ -346,7 +346,7 @@ public partial class PC_Utilities : PanelContent
 			await Task.Run(() => ServiceCenter.Get<IImageService>().ClearCache(true));
 			B_ResetImageCache.Loading = false;
 			var img = B_ResetImageCache.ImageName;
-			B_ResetImageCache.ImageName = "I_Check";
+			B_ResetImageCache.ImageName = "Check";
 			await Task.Delay(1500);
 			B_ResetImageCache.ImageName = img;
 		}
@@ -356,7 +356,7 @@ public partial class PC_Utilities : PanelContent
 	{
 		var img = B_ResetSteamCache.ImageName;
 		_workshopService.ClearCache();
-		B_ResetSteamCache.ImageName = "I_Check";
+		B_ResetSteamCache.ImageName = "Check";
 		await Task.Delay(1500);
 		B_ResetSteamCache.ImageName = img;
 	}

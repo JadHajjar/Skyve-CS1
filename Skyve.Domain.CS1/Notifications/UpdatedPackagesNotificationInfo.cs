@@ -15,7 +15,7 @@ public class UpdatedPackagesNotificationInfo : INotificationInfo
 		Time = updatedPackages.Max(x => x.LocalTime);
 		Title = Locale.PackageUpdates;
 		Description = Locale.PackagesUpdatedSinceSession.FormatPlural(updatedPackages.Count, updatedPackages[0].CleanName());
-		Icon = "I_ReDownload";
+		Icon = "ReDownload";
 		HasAction = true;
 	}
 

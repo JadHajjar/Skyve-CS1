@@ -60,7 +60,7 @@ public class D_LaunchGame : IDashboardItem
 		DrawSquareButton(e, applyDrawing, ref preferredHeight, App.Program.MainForm.LaunchStopCities, new ButtonDrawArgs
 		{
 			Rectangle = e.ClipRectangle,
-			Icon = isRunning ? "I_Stop" : "I_CS",
+			Icon = isRunning ? "Stop" : "CS",
 			Enabled = Enabled,
 			Control = this
 		});
@@ -74,7 +74,7 @@ public class D_LaunchGame : IDashboardItem
 		{
 			Text = LocaleHelper.GetGlobalText(isRunning ? "StopCities" : "StartCities"),
 			Rectangle = e.ClipRectangle,
-			Icon = isRunning ? "I_Stop" : "I_CS",
+			Icon = isRunning ? "Stop" : "CS",
 			Enabled = Enabled,
 			Control = this
 		});

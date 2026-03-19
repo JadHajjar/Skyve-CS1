@@ -166,7 +166,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 		TLP_ProfileName.BackColor = profile.Color ?? FormDesign.Design.ButtonColor;
 		TLP_ProfileName.ForeColor = TLP_ProfileName.BackColor.GetTextColor();
 		I_ProfileIcon.ImageName = profile.GetIcon();
-		I_Favorite.ImageName = profile.IsFavorite ? "I_StarFilled" : "I_Star";
+		I_Favorite.ImageName = profile.IsFavorite ? "StarFilled" : "Star";
 		L_TempProfile.Visible = I_TempProfile.Visible = profile.Temporary;
 		B_TempProfile.Visible = !profile.Temporary;
 		I_Favorite.Visible = I_ProfileIcon.Enabled = L_Info.Visible = I_Info.Visible = !profile.Temporary;
@@ -407,11 +407,11 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 	{
 		if (_playsetManager.CurrentPlayset.Save())
 		{
-			B_Save.ImageName = "I_Check";
+			B_Save.ImageName = "Check";
 
 			new BackgroundAction(() =>
 			{
-				B_Save.ImageName = "I_Save";
+				B_Save.ImageName = "Save";
 			}).RunIn(2000);
 		}
 		else
@@ -473,7 +473,7 @@ public partial class PC_PlaysetSettings : PlaysetSettingsPanel
 		_playsetManager.CurrentPlayset.IsFavorite = !_playsetManager.CurrentPlayset.IsFavorite;
 		_playsetManager.Save(_playsetManager.CurrentPlayset);
 
-		I_Favorite.ImageName = _playsetManager.CurrentPlayset.IsFavorite ? "I_StarFilled" : "I_Star";
+		I_Favorite.ImageName = _playsetManager.CurrentPlayset.IsFavorite ? "StarFilled" : "Star";
 		SlickTip.SetTo(I_Favorite, _playsetManager.CurrentPlayset.IsFavorite ? "UnFavoriteThisPlayset" : "FavoriteThisPlayset");
 	}
 

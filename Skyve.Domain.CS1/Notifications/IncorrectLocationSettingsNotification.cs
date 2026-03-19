@@ -15,7 +15,7 @@ public class IncorrectLocationSettingsNotification : INotificationInfo
 		Time = DateTime.Now;
 		Title = Locale.IncorrectFolderSettings;
 		Description = Locale.IncorrectFolderSettingsInfo;
-		Icon = "I_Hazard";
+		Icon = "Hazard";
 		Color = FormDesign.Design.RedColor;
 		HasAction = true;
 	}

@@ -82,7 +82,7 @@ internal class D_Playsets : IDashboardItem
 			, e.ClipRectangle.Pad(Padding.Left)
 			, ref preferredHeight
 			, applyDrawing
-			, "I_Save");
+			, "Save");
 
 		if (_playsetManager.CurrentPlayset.UnsavedChanges)
 		{
@@ -92,7 +92,7 @@ internal class D_Playsets : IDashboardItem
 			, e.ClipRectangle.Pad(Padding.Left)
 			, ref preferredHeight
 			, applyDrawing
-			, "I_Hazard");
+			, "Hazard");
 		}
 
 		var cs1Playset = (Playset)_playsetManager.CurrentPlayset;
@@ -109,7 +109,7 @@ internal class D_Playsets : IDashboardItem
 				, e.ClipRectangle.Pad(Padding.Left)
 				, ref preferredHeight
 				, applyDrawing
-				, "I_Launch");
+				, "Launch");
 		}
 
 		if (cs1Playset.LaunchSettings.LoadSaveGame)
@@ -124,7 +124,7 @@ internal class D_Playsets : IDashboardItem
 				, e.ClipRectangle.Pad(Padding.Left)
 				, ref preferredHeight
 				, applyDrawing
-				, "I_Launch");
+				, "Launch");
 		}
 
 		if (cs1Playset.LaunchSettings.NewAsset || cs1Playset.LaunchSettings.LoadAsset)
@@ -139,7 +139,7 @@ internal class D_Playsets : IDashboardItem
 				, e.ClipRectangle.Pad(Padding.Left)
 				, ref preferredHeight
 				, applyDrawing
-				, "I_Launch");
+				, "Launch");
 		}
 
 		preferredHeight += Margin.Top;
@@ -151,14 +151,14 @@ internal class D_Playsets : IDashboardItem
 		DrawButton(e, applyDrawing, ref preferredHeight, ViewPlaysetSettings, new()
 		{
 			Text = Locale.ChangePlaysetSettings,
-			Icon = "I_Cog",
+			Icon = "Cog",
 			Rectangle = e.ClipRectangle
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, SwitchToTempProfile, new()
 		{
 			Text = Locale.TempPlayset,
-			Icon = "I_TempProfile",
+			Icon = "TempProfile",
 			Rectangle = e.ClipRectangle
 		});
 
