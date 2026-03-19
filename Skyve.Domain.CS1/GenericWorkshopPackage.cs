@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Linq;
 
 namespace Skyve.Systems;
-public class GenericWorkshopPackage : IPackage
+public class GenericWorkshopPackage : IPackageIdentity
 {
 	public GenericWorkshopPackage(IPackageIdentity identity)
 	{
@@ -35,6 +35,7 @@ public class GenericWorkshopPackage : IPackage
 	public ulong Id { get; set; }
 	public string Name { get; set; }
 	public string? Url { get; set; }
+	public string? Version { get; set; }
 
 	[JsonIgnore] public ILocalPackageData? LocalParentPackage => this.GetLocalPackage()?.GetLocalPackage();
 	[JsonIgnore] public ILocalPackageData? LocalPackage => this.GetLocalPackage();

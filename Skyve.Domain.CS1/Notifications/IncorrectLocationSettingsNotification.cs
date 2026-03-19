@@ -13,8 +13,8 @@ public class IncorrectLocationSettingsNotification : INotificationInfo
 	public IncorrectLocationSettingsNotification()
 	{
 		Time = DateTime.Now;
-		Title = Locale.IncorrectFolderSettings;
-		Description = Locale.IncorrectFolderSettingsInfo;
+		//Title = Locale.IncorrectFolderSettings;
+		//Description = Locale.IncorrectFolderSettingsInfo;
 		Icon = "Hazard";
 		Color = FormDesign.Design.RedColor;
 		HasAction = true;
@@ -26,10 +26,15 @@ public class IncorrectLocationSettingsNotification : INotificationInfo
 	public string Icon { get; }
 	public Color? Color { get; }
 	public bool HasAction { get; }
+	public bool CanBeRead { get; } = true;
 
 	public void OnClick()
 	{
-		ServiceCenter.Get<IInterfaceService>().OpenOptionsPage();
+		//ServiceCenter.Get<IInterfaceService>().OpenOptionsPage();
+	}
+
+	public void OnRead()
+	{
 	}
 
 	public void OnRightClick()

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Skyve.Domain.CS1;
-public class Mod : IMod
+public class Mod : IPackage
 {
 	public Mod(ILocalPackageData package, string dllPath, Version version)
 	{
@@ -23,17 +23,20 @@ public class Mod : IMod
 	public long LocalSize => LocalParentPackage.FileSize;
 	public DateTime LocalTime => LocalParentPackage.LocalTime;
 	public string Folder => LocalParentPackage.Folder;
-	public bool IsLocal => LocalParentPackage.IsLocal;
+	public bool IsLocal => LocalParentPackage.IsLocal();
 	public bool IsBuiltIn => LocalParentPackage.IsBuiltIn;
-	public IEnumerable<IPackageRequirement> Requirements => LocalParentPackage.Requirements;
 	public ulong Id => LocalParentPackage.Id;
 	public string Name => LocalParentPackage.Name;
 	public string? Url => LocalParentPackage.Url;
-	ILocalPackageData? IPackage.LocalPackage => this;
+
+	public bool IsCodeMod { get; } = true;
+	public ILocalPackageData? LocalData => LocalParentPackage;
+	public string? VersionName => Version.ToString();
+	string? IPackageIdentity.Version { get; set; }
 
 	public override bool Equals(object? obj)
 	{
-		return obj is IMod mod &&
+		return obj is ILocalPackageIdentity mod &&
 			   FilePath == mod.FilePath;
 	}
 

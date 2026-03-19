@@ -17,6 +17,8 @@ public class NotificationInfo : INotificationInfo
 	public Color? Color { get; }
 	public bool HasAction { get; }
 
+	public bool CanBeRead { get; }
+
 	public NotificationInfo(DateTime time, string title, string description, string icon, Color? color = null, Action? action = null)
 	{
 		Time = time;
@@ -34,6 +36,10 @@ public class NotificationInfo : INotificationInfo
 	}
 
 	public void OnRightClick()
+	{
+	}
+
+	public void OnRead()
 	{
 	}
 }

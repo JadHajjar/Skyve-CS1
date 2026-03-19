@@ -1,5 +1,6 @@
 ﻿using Extensions;
 
+using Skyve.Domain.Enums;
 using Skyve.Systems;
 
 using System;
@@ -25,7 +26,7 @@ public class Asset : IAsset
 		else
 		{
 			Name = Path.GetFileNameWithoutExtension(FilePath).FormatWords();
-			FullName = (IsLocal ? "" : $"{Id}.") + Path.GetFileNameWithoutExtension(FilePath).RemoveDoubleSpaces().Replace(' ', '_');
+			FullName = (package.IsLocal() ? "" : $"{Id}.") + Path.GetFileNameWithoutExtension(FilePath).RemoveDoubleSpaces().Replace(' ', '_');
 			AssetTags = new string[0];
 		}
 	}
@@ -37,14 +38,14 @@ public class Asset : IAsset
 	public string Name { get; }
 	public string[] AssetTags { get; }
 	public string FullName { get; }
-	public bool IsCodeMod => LocalParentPackage.IsCodeMod;
 	public string Folder => LocalParentPackage.Folder;
-	public bool IsLocal => LocalParentPackage.IsLocal;
 	public bool IsBuiltIn => LocalParentPackage.IsBuiltIn;
-	public IEnumerable<IPackageRequirement> Requirements => LocalParentPackage.Requirements;
 	public ulong Id => LocalParentPackage.Id;
 	public string? Url => LocalParentPackage.Url;
-	ILocalPackageData? IPackage.LocalPackage => this;
+	public IPackage? Package { get; set; }
+	public AssetType AssetType { get; set; }
+	public string[] Tags { get; set; }
+	public string? Version { get; set; }
 
 	public override bool Equals(object? obj)
 	{
