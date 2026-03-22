@@ -19,10 +19,8 @@ internal class SettingsService : ISettings
 
 	public SettingsService(SaveHandler saveHandler)
 	{
-		var settingsSaveHandler = new SaveHandler(CrossIO.Combine(Path.GetDirectoryName(saveHandler.SaveDirectory), "ModsSettings"));
-
-		FolderSettings = settingsSaveHandler.Load<FolderSettings>();
-		SessionSettings = settingsSaveHandler.Load<SessionSettings>();
+		FolderSettings = saveHandler.Load<FolderSettings>();
+		SessionSettings = saveHandler.Load<SessionSettings>();
 
 		CrossIO.CurrentPlatform = FolderSettings.Platform;
 	}

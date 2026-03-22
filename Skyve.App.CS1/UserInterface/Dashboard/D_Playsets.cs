@@ -72,13 +72,18 @@ internal class D_Playsets : IDashboardItem
 		return Draw;
 	}
 
+	protected override void DrawHeader(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		DrawSection(e, applyDrawing, ref preferredHeight, _playsetManager.CurrentPlayset.Name ?? string.Empty, _playsetManager.CurrentPlayset.GetIcon());
+	}
+
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
 	{
-		DrawSection(e, applyDrawing, e.ClipRectangle.ClipTo(mainSectionHeight), _playsetManager.CurrentPlayset.Name ?? string.Empty, _playsetManager.CurrentPlayset.GetIcon(), out var fore, ref preferredHeight, _playsetManager.CurrentPlayset.Color, Locale.CurrentPlayset);
+		DrawSection(e, applyDrawing, ref preferredHeight, _playsetManager.CurrentPlayset.Name ?? string.Empty, _playsetManager.CurrentPlayset.GetIcon());
 
 		e.Graphics.DrawStringItem(_playsetManager.CurrentPlayset.AutoSave ? Locale.AutoPlaysetSaveOn : Locale.AutoPlaysetSaveOff
 			, Font
-			, fore
+			, FormDesign.Design.ForeColor
 			, e.ClipRectangle.Pad(Padding.Left)
 			, ref preferredHeight
 			, applyDrawing
@@ -88,7 +93,7 @@ internal class D_Playsets : IDashboardItem
 		{
 			e.Graphics.DrawStringItem(Locale.UnsavedChangesPlayset
 			, Font
-			, fore
+			, FormDesign.Design.ForeColor
 			, e.ClipRectangle.Pad(Padding.Left)
 			, ref preferredHeight
 			, applyDrawing
@@ -105,7 +110,7 @@ internal class D_Playsets : IDashboardItem
 
 			e.Graphics.DrawStringItem(text
 				, Font
-				, fore
+				, FormDesign.Design.ForeColor
 				, e.ClipRectangle.Pad(Padding.Left)
 				, ref preferredHeight
 				, applyDrawing
@@ -120,7 +125,7 @@ internal class D_Playsets : IDashboardItem
 
 			e.Graphics.DrawStringItem(text
 				, Font
-				, fore
+				, FormDesign.Design.ForeColor
 				, e.ClipRectangle.Pad(Padding.Left)
 				, ref preferredHeight
 				, applyDrawing
@@ -135,7 +140,7 @@ internal class D_Playsets : IDashboardItem
 
 			e.Graphics.DrawStringItem(text
 				, Font
-				, fore
+				, FormDesign.Design.ForeColor
 				, e.ClipRectangle.Pad(Padding.Left)
 				, ref preferredHeight
 				, applyDrawing
@@ -152,21 +157,23 @@ internal class D_Playsets : IDashboardItem
 		{
 			Text = Locale.ChangePlaysetSettings,
 			Icon = "Cog",
-			Rectangle = e.ClipRectangle
+			ButtonType = ButtonType.Dimmed,
+			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
 		DrawButton(e, applyDrawing, ref preferredHeight, SwitchToTempProfile, new()
 		{
 			Text = Locale.TempPlayset,
 			Icon = "TempProfile",
-			Rectangle = e.ClipRectangle
+			ButtonType = ButtonType.Dimmed,
+			Rectangle = e.ClipRectangle.Pad(Margin)
 		});
 
 		var favs = _playsetManager.Playsets.AllWhere(x => x.IsFavorite);
 
 		if (favs.Count == 0)
 		{
-			preferredHeight -= Margin.Top;
+			preferredHeight += BorderRadius / 2;
 			return;
 		}
 
@@ -185,9 +192,9 @@ internal class D_Playsets : IDashboardItem
 				Font = _playsetManager.CurrentPlayset == item ? fontBold : font,
 				Icon = item.GetIcon(),
 				BackColor = item.Color ?? default,
-				Rectangle = e.ClipRectangle.Pad(2),
+				Rectangle = e.ClipRectangle.Pad(2).Pad(Margin),
 				BorderRadius = Padding.Left,
-				ButtonType = item.Color == null ? ButtonType.Normal : ButtonType.Active
+				ButtonType = item.Color == null ? ButtonType.Dimmed : ButtonType.Active
 			};
 
 			DrawButton(e, applyDrawing, ref preferredHeight, () => SwitchTo(item), args);
@@ -199,7 +206,7 @@ internal class D_Playsets : IDashboardItem
 			}
 		}
 
-		preferredHeight -= Margin.Bottom;
+		preferredHeight += BorderRadius / 2;
 
 		if (Loading && !Enabled)
 		{

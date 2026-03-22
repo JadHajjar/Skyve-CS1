@@ -25,6 +25,7 @@ internal static class Program
 		App.Program.CurrentDirectory = Application.StartupPath;
 		App.Program.ExecutablePath = Application.ExecutablePath;
 
+		SaveHandler.AppName = "Skyve-CS1";
 		ServiceCenter.Provider = BuildServices();
 	}
 
@@ -36,7 +37,7 @@ internal static class Program
 
 		services.AddCs1SkyveSystems();
 
-		services.AddSingleton(new SaveHandler(Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), "Skyve-CS1")));
+		services.AddSingleton(new SaveHandler());
 		services.AddSingleton<IInterfaceService, InterfaceService>();
 		services.AddSingleton<IAppInterfaceService, InterfaceService>();
 		services.AddSingleton<ICustomPackageService, CustomPackageService>();

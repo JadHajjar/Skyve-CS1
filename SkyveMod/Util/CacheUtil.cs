@@ -145,29 +145,35 @@ public class CacheUtil
 		try
 		{
 			Caching = true;
-			//AquirePathDetails();
-			//Save();
 			AquireAssetsDetails();
-			Save();
-			AquireDlcs();
 			Save();
 		}
 		catch (Exception ex) { Log.Exception(ex); }
 		finally { Caching = false; }
 	}
 
-	private void AquireDlcs()
+	public static void CacheOwnedDlcs()
 	{
-		var dic = new List<uint>();
-
-		foreach (var dlc in new uint[] { 2342310, 2313324, 2313323, 2313322, 2313321, 2313320, 2225941, 2225940, 2224691, 2224690, 2148904, 2148903, 2148902, 2148901, 2148900, 2144483, 2144482, 2144481, 2144480, 2008400, 1992293, 1992292, 1992291, 1992290, 1726384, 1726383, 1726382, 1726381, 1726380, 1531473, 1531472, 1531471, 1531470, 1196100, 1148022, 1148021, 1148020, 1146930, 1065491, 1065490, 1059820, 944071, 944070, 815380, 715194, 715193, 715192, 715191, 715190, 614582, 614581, 614580, 563850, 547502, 547501, 547500, 536610, 526612, 526611, 526610, 525940, 515191, 515190, 470930, 470680, 456200, 420610, 369150, 365040, 355600, 352512, 352511, 352510, 346791, 346790, 340160, })
+		try
 		{
-			if (PlatformService.IsAppOwned(dlc))
-			{
-				dic.Add(dlc);
-			}
-		}
+			var dic = new List<uint>();
+			var config = DlcConfig.Deserialize();
 
-		Cache.AvailableDLCs = dic.ToArray();
+			Log.Info($"Checking owned DLCs...");
+
+			foreach (var dlc in config.AvailableDLCs)
+			{
+				if (PlatformService.IsAppOwned(dlc))
+				{
+					dic.Add(dlc);
+				}
+			}
+
+			config.OwnedDLCs = dic;
+			config.Serialize();
+
+			Log.Info($"Owned DLCs: {string.Join(", ", config.OwnedDLCs.Select(x => x.ToString()).ToArray())}");
+		}
+		catch (Exception ex) { Log.Exception(ex); }
 	}
 }

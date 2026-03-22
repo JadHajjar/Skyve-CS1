@@ -9,7 +9,6 @@ public class AssetInfoCache
 	public static string FilePath => Path.Combine(SharedUtil.LocalLOMData, FILE_NAME);
 
 	public List<Asset> Assets { get; set; } = new();
-	public uint[] AvailableDLCs { get; set; } = new uint[0];
 
 	public void AddAsset(Asset item)
 	{

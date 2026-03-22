@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Skyve.Systems.CS1.Managers;
+
 internal class DlcManager : IDlcManager
 {
 	private readonly DlcConfig _config;
@@ -24,11 +25,12 @@ internal class DlcManager : IDlcManager
 		_config = DlcConfig.Deserialize();
 
 		SteamUtil.DLCsLoaded += DlcsLoaded;
+		SteamUtil.DLCsLoaded += SetAvailableDlcs;
 	}
 
 	public bool IsAvailable(uint dlcId)
 	{
-		return SteamUtil.IsDlcInstalledLocally(dlcId);
+		return _config.OwnedDLCs.Contains(dlcId);
 	}
 
 	public bool IsIncluded(IDlcInfo dlc)
@@ -60,5 +62,11 @@ internal class DlcManager : IDlcManager
 	public List<uint> GetExcludedDlcs()
 	{
 		return new(_config.RemovedDLCs);
+	}
+
+	private void SetAvailableDlcs()
+	{
+		_config.AvailableDLCs = SteamUtil.Dlcs.ToList(x => x.Id);
+		_config.Serialize();
 	}
 }

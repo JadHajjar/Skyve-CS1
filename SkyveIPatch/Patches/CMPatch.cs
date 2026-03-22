@@ -41,17 +41,17 @@ namespace SkyveIPatch.Patches
                 if (noReporters)
                     NoReportersPatch(assemblyDefinition);
 
-                LoadAssembliesROPatch(assemblyDefinition);
+				LoadAssembliesROPatch(assemblyDefinition);
 
-                assemblyDefinition = LoadAssembliesPatch(assemblyDefinition);
+				assemblyDefinition = LoadAssembliesPatch(assemblyDefinition);
                 CreateUserModInstancePatch(assemblyDefinition);
 #if DEBUG
                 //assemblyDefinition = InsertPrintStackTrace(assemblyDefinition);
 #endif
 
-                EnsureIncludedExcludedPackagePatch(assemblyDefinition);
+				EnsureIncludedExcludedPackagePatch(assemblyDefinition);
 
-                bool noAssets = Environment.GetCommandLineArgs().Any(_arg => _arg == "-noAssets");
+				bool noAssets = Environment.GetCommandLineArgs().Any(_arg => _arg == "-noAssets");
                 if (noAssets) {
                     assemblyDefinition = NoCustomAssetsPatch(assemblyDefinition);
                 } else {
@@ -201,14 +201,32 @@ namespace SkyveIPatch.Patches
             ILProcessor ilProcessor = mTarget.Body.GetILProcessor();
             var instructions = mTarget.Body.Instructions;
 
+            // Signature: ldstr "*.dll" (IL_0022/IL_001c) → IMMEDIATE stloc = files[]
+            var dllStr = instructions.FirstOrDefault(i => i.OpCode == OpCodes.Ldstr && i.Operand.ToString().Contains("*.dll"));
+            if (dllStr == null)
+            {
+                Log.Error("No '*.dll' string found - patch skipped");
+                return;
+            }
+
             var loi = GetInjectionsAssemblyDefinition(workingPath_);
 
             {
                 var mReplaceAssemblyPath = loi.MainModule.GetMethod("SkyveInjections.Injections.ReplaceAssembies.ReplaceAssemblyPacth");
-                var callReplaceAssemblyPath = Instruction.Create(
-                    OpCodes.Call, module.ImportReference(mReplaceAssemblyPath));
-                var storeFile = instructions.Single(_c => _c.OpCode == OpCodes.Stloc_3); // foreach(file in files)
-                ilProcessor.InsertBefore(storeFile, callReplaceAssemblyPath);
+                var callReplaceAssemblyPath = Instruction.Create(OpCodes.Call, module.ImportReference(mReplaceAssemblyPath));
+
+                // Next: ldc.i4.1 → call GetFiles → stloc.files[]
+                var getFilesCall = instructions.SkipWhile(i => i.Offset <= dllStr.Offset).FirstOrDefault(i => i.OpCode == OpCodes.Call && i.Operand.ToString().Contains("GetFiles"));
+                if (getFilesCall == null)
+                {
+                    Log.Error("No GetFiles call after '*.dll'");
+                    return;
+                }
+
+                // Insert BEFORE files[] stored (stloc after GetFiles)
+                var storeFiles = instructions.SkipWhile(i => i.Offset <= getFilesCall.Offset).First(i => i.IsStLoc());
+
+               // ilProcessor.InsertBefore(storeFiles, callReplaceAssemblyPath);
             }
 
             Log.Successful();

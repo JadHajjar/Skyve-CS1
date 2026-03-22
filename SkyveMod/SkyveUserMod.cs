@@ -140,6 +140,8 @@ public class SkyveUserMod : IUserMod
 
 			SceneManager.sceneLoaded += MainMenuLoaded;
 
+			CacheUtil.CacheOwnedDlcs();
+
 			MainMenuLoaded(default, default);
 
 			Log.Flush();

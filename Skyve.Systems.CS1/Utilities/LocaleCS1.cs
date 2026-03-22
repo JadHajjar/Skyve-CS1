@@ -15,4 +15,11 @@ public class LocaleCS1 : LocaleHelper, ILocale
 	}
 
 	public LocaleCS1() : base($"Skyve.Systems.CS1.Properties.LocaleCS1.json") { }
+
+	public static Translation TotalSubbedSize => _instance.GetText(nameof(TotalSubbedSize));
+	public static Translation TotalLocalModsSize => _instance.GetText(nameof(TotalLocalModsSize));
+	public static Translation TotalSavesSize => _instance.GetText(nameof(TotalSavesSize));
+	public static Translation TotalOtherSize => _instance.GetText(nameof(TotalOtherSize));
+	public static Translation TotalCitiesSize => _instance.GetText(nameof(TotalCitiesSize));
+	public static Translation DiskStatus => _instance.GetText(nameof(DiskStatus));
 }

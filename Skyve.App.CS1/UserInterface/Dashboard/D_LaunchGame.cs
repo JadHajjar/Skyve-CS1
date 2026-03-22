@@ -45,6 +45,11 @@ public class D_LaunchGame : IDashboardItem
 		}
 	}
 
+	protected override void DrawHeader(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
+	{
+		DrawSection(e, applyDrawing, ref preferredHeight, LocaleHelper.GetGlobalText(isRunning ? "StopCities" : "StartCities"), isRunning ? "Stop" : "CS");
+	}
+
 	protected override DrawingDelegate GetDrawingMethod(int width)
 	{
 		if (width / UI.FontScale < 100)
@@ -65,7 +70,7 @@ public class D_LaunchGame : IDashboardItem
 			Control = this
 		});
 
-		preferredHeight = e.ClipRectangle.Width;
+		preferredHeight = e.ClipRectangle.Width+BorderRadius/2;
 	}
 
 	private void Draw(PaintEventArgs e, bool applyDrawing, ref int preferredHeight)
@@ -79,6 +84,6 @@ public class D_LaunchGame : IDashboardItem
 			Control = this
 		});
 
-		preferredHeight -= Margin.Bottom;
+		preferredHeight -= BorderRadius / 2 - 2;
 	}
 }
