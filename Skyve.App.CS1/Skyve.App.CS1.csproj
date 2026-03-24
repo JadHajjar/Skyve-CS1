@@ -111,6 +111,8 @@
 		</GetAssemblyIdentity>
 		<Message Importance="high" Text="$(SolutionName)" />
 		<Copy SourceFiles="..\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
+		<Copy SourceFiles="$(OutDir)\Skyve.exe" DestinationFiles="$(DeployDir)\Skyve.exe" />
+		<Copy SourceFiles="$(OutDir)\Skyve.exe.config" DestinationFiles="$(DeployDir)\Skyve.exe.config" />
 		<Copy SourceFiles="$(OutDir)\Resources\mono-debug._dll" DestinationFiles="$(DeployDir)\mono-debug._dll" />
 	</Target>
 
