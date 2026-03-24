@@ -40,7 +40,7 @@ public class CustomTagsLibrary
 			{
 				if (CrossIO.FileExists(path))
 				{
-					CrossIO.DeleteFile(path);
+					CrossIO.DeleteFile(path, false);
 				}
 
 				return;

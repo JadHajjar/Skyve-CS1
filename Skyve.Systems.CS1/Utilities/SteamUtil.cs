@@ -367,7 +367,7 @@ public static class SteamUtil
 
 		var newDlcs = new List<SteamDlc>(Dlcs);
 
-		foreach (var dlc in dlcs["255710"].data!.dlc.Where(x => !Dlcs.Any(y => y.Id == x && y.Timestamp > DateTime.Now.AddDays(-7))))
+		foreach (var dlc in dlcs["255710"].data!.dlc.Where(x => !Dlcs.Any(y => y.Id == x && (y.Timestamp > DateTime.Now.AddDays(-7) || y.ReleaseDate > DateTime.Now.AddDays(-14)))))
 		{
 			var data = await GetSteamAppInfoAsync(dlc);
 
@@ -382,11 +382,15 @@ public static class SteamUtil
 					Timestamp = DateTime.Now,
 					Id = dlc,
 					Name = info.name!,
+					IsFree = info.is_free,
 					Description = info.short_description!,
+					ThumbnailUrl = info.header_image ?? $"https://cdn.akamai.steamstatic.com/steam/apps/{dlc}/header.jpg",
 					Price = info.price_overview?.final_formatted,
 					OriginalPrice = info.price_overview?.initial_formatted,
 					Discount = info.price_overview?.discount_percent ?? 0F,
-					ReleaseDate = DateTime.TryParseExact(info.release_date?.date, "dd MMM, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : DateTime.MinValue
+					Creators = info.developers?.Where(x => x is not "Colossal Order Ltd." and not "Paradox Interactive" and not "Tantalus Media").ToArray(),
+					ExpectedRelease = ((info.release_date?.coming_soon ?? true) ? info.release_date?.date : string.Empty) ?? "TBD",
+					ReleaseDate = DateTime.TryParseExact(info.release_date?.date, "d MMM, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : DateTime.MinValue
 				});
 			}
 		}

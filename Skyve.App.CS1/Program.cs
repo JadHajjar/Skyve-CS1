@@ -55,22 +55,20 @@ internal static class Program
 				return;
 			}
 
-			try
+			if (!CommandUtil.NoWindow && !Debugger.IsAttached && IsAlreadyRunning())
 			{
-				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(App.Program.ExecutablePath)).Length > 1;
-
-				if (openTools && !CrossIO.FileExists(CrossIO.Combine(CurrentDirectory, "Wake")))
+				if (ServiceCenter.Provider.GetService<NamedPipelineUtil>().SendToRunningInstance(args))
 				{
-					File.WriteAllText(Path.Combine(CurrentDirectory, "Wake"), "It's time to wake up");
-
 					return;
 				}
-
-				CrossIO.DeleteFile(CrossIO.Combine(CurrentDirectory, "Wake"));
 			}
-			catch { }
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
+
+			SlickCursors.Initialize();
+			Locale.Load();
+			LocaleCR.Load();
+			LocaleSlickUI.Load();
 
 			if (CommandUtil.NoWindow)
 			{
@@ -79,10 +77,7 @@ internal static class Program
 				return;
 			}
 
-			SlickCursors.Initialize();
-			Locale.Load();
-			LocaleCR.Load();
-			LocaleSlickUI.Load();
+			ServiceCenter.Provider.GetService<NamedPipelineUtil>().StartNamedPipeServer();
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -110,6 +105,16 @@ internal static class Program
 			MessagePrompt.GetError(ex, "App failed to start", out var message, out var details);
 			MessageBox.Show(details, message);
 		}
+	}
+
+	private static bool IsAlreadyRunning()
+	{
+		var process = Process.GetCurrentProcess();
+
+		return Process.GetProcessesByName(process.ProcessName).Any(x =>
+			x.Id != process.Id &&
+			x.MainModule?.FileName == process.MainModule.FileName
+		);
 	}
 
 	private static void BackgroundAction_BackgroundTaskError(BackgroundAction b, Exception e)

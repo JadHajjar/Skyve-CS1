@@ -1,5 +1,28 @@
 [
   {
+    "Version": "4.0.0",
+    "Date": "2026-03-24",
+    "ChangeGroups": [
+      {
+        "Name": "UI Update",
+        "Changes": [
+          "Updated the UI framework to the latest version.",
+          "Updated parts of the UI with the updated style. This includes the dashboard, mod lists, compatibility report, DLC list, and more."
+        ]
+      },
+      {
+        "Name": "Improvements",
+        "Changes": [
+          "Updated the DLC list and ownership system to be more reliable and future-proof.",
+          "Added a new Disk Info dashboard widget.",
+          "Reduced the amount of files being sent to the recycle bin.",
+          "Fixed excluded content not being reflected in-game.",
+          "Fixed rare cases where local addon mods were not loaded in-game."
+        ]
+      }
+    ]
+  },
+  {
     "Version": "3.3.2.1",
     "Date": "2023-10-28",
     "ChangeGroups": [

@@ -2,14 +2,7 @@
 using Skyve.App.UserInterface.Panels;
 using Skyve.Systems.CS1.Utilities;
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,18 +21,11 @@ internal class D_DiskInfo : IDashboardItem
 	private class ContentInfo
 	{
 		internal bool Error;
-		internal long AvailableSpace;
-		internal long TotalSpace;
-		internal bool IsJunctionSet;
 		internal long TotalCitiesSize;
 		internal long TotalSavesSize;
 		internal long TotalSubbedSize;
 		internal long TotalLocalModsSize;
 		internal long TotalOtherSize;
-		internal bool CriticalSpace;
-		internal bool LowSpace;
-		internal string? DriveLetter;
-		internal bool HasMultipleDrives;
 	}
 
 	public D_DiskInfo()
@@ -102,10 +88,11 @@ internal class D_DiskInfo : IDashboardItem
 
 		foreach (var item in new DirectoryInfo(subbedFolder).EnumerateFiles("*", SearchOption.AllDirectories))
 		{
+			contentInfo.TotalCitiesSize += item.Length;
 			contentInfo.TotalSubbedSize += item.Length;
 		}
 
-		contentInfo.TotalOtherSize = contentInfo.TotalCitiesSize - contentInfo.TotalSavesSize - contentInfo.TotalSubbedSize;
+		contentInfo.TotalOtherSize = contentInfo.TotalCitiesSize - contentInfo.TotalSavesSize - contentInfo.TotalLocalModsSize - contentInfo.TotalSubbedSize;
 
 		if (token.IsCancellationRequested)
 		{
