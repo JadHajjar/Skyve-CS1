@@ -3,18 +3,19 @@
 #nullable disable
 
 namespace Skyve.Domain.CS1.Utilities;
-public class FolderSettings : ISave, IFolderSettings
-{
-	public override string Name => nameof(FolderSettings) + ".json";
 
+[SaveName(nameof(FolderSettings) + ".json")]
+public class FolderSettings : ISaveObject, IFolderSettings
+{
 	public string GamePath { get; set; }
 	public string AppDataPath { get; set; }
 	public string SteamPath { get; set; }
 	public Platform Platform { get; set; }
+	public SaveHandler Handler {get; set; }
 
 	void IFolderSettings.Save()
 	{
-		Save();
+		Handler?.Save(this);
 	}
 }
 #nullable enable

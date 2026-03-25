@@ -22,9 +22,7 @@ namespace SkyveIPatch {
 
             var details = typeof(Log).Assembly.GetName();
             Info($"Log file at {FilePath} now={DateTime.Now}");
-            Info($"{details.Name} Version:{details.Version} " +
-                 $"Commit:{ThisAssembly.Git.Commit} " +
-                 $"CommitDate:{ThisAssembly.Git.CommitDate}");
+            Info($"{details.Name} Version:{details.Version} ");
         }
 
         static ILogger iLogger_ => Entry.Logger;

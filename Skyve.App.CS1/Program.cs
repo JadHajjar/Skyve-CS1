@@ -25,9 +25,7 @@ internal static class Program
 		App.Program.CurrentDirectory = Application.StartupPath;
 		App.Program.ExecutablePath = Application.ExecutablePath;
 
-		ISave.AppName = "Skyve-CS1";
-		ISave.DocsFolder = CurrentDirectory;
-
+		SaveHandler.AppName = "Skyve-CS1";
 		ServiceCenter.Provider = BuildServices();
 	}
 
@@ -39,6 +37,7 @@ internal static class Program
 
 		services.AddCs1SkyveSystems();
 
+		services.AddSingleton(new SaveHandler());
 		services.AddSingleton<IInterfaceService, InterfaceService>();
 		services.AddSingleton<IAppInterfaceService, InterfaceService>();
 		services.AddSingleton<IRightClickService, CustomPackageService>();
@@ -56,49 +55,21 @@ internal static class Program
 				return;
 			}
 
-			try
+			if (!CommandUtil.NoWindow && !Debugger.IsAttached && IsAlreadyRunning())
 			{
-				var folder = GetFolderPath(SpecialFolder.LocalApplicationData);
-
-				Directory.CreateDirectory(Path.Combine(folder, ISave.AppName));
-
-				if (Directory.Exists(Path.Combine(folder, ISave.AppName)))
+				if (ServiceCenter.Provider.GetService<NamedPipelineUtil>().SendToRunningInstance(args))
 				{
-					ISave.DocsFolder = folder;
-				}
-			}
-			catch { }
-
-			try
-			{
-				var openTools = !CommandUtil.NoWindow && !Debugger.IsAttached && Process.GetProcessesByName(Path.GetFileNameWithoutExtension(App.Program.ExecutablePath)).Length > 1;
-
-				if (openTools && !CrossIO.FileExists(CrossIO.Combine(CurrentDirectory, "Wake")))
-				{
-					File.WriteAllText(Path.Combine(CurrentDirectory, "Wake"), "It's time to wake up");
-
 					return;
 				}
-
-				CrossIO.DeleteFile(CrossIO.Combine(CurrentDirectory, "Wake"));
-			}
-			catch { }
-
-			var localAppData = GetFolderPath(SpecialFolder.LocalApplicationData);
-			if (Directory.Exists(CrossIO.Combine(localAppData, "Load Order Tool")))
-			{
-				CrossIO.MoveFolder(CrossIO.Combine(localAppData, "Load Order Tool"), CrossIO.Combine(localAppData, ISave.AppName), false);
-
-				try
-				{
-					CrossIO.DeleteFolder(CrossIO.Combine(localAppData, "Load Order Tool"));
-
-					CrossIO.DeleteFile(CrossIO.Combine(localAppData, ISave.AppName, "Logs", "LoadOrderToolTwo.log"));
-				}
-				catch { }
 			}
 
 			BackgroundAction.BackgroundTaskError += BackgroundAction_BackgroundTaskError;
+
+			SlickCursors.Initialize();
+			Locale.Load();
+			LocaleCR.Load();
+			LocaleSlickUI.Load();
+			LocaleCS1.Load();
 
 			if (CommandUtil.NoWindow)
 			{
@@ -107,11 +78,7 @@ internal static class Program
 				return;
 			}
 
-			SlickCursors.Initialize();
-			Locale.Load();
-			LocaleCR.Load();
-			LocaleSlickUI.Load();
-			LocaleCS1.Load();
+			ServiceCenter.Provider.GetService<NamedPipelineUtil>().StartNamedPipeServer();
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -139,6 +106,16 @@ internal static class Program
 			MessagePrompt.GetError(ex, "App failed to start", out var message, out var details);
 			MessageBox.Show(details, message);
 		}
+	}
+
+	private static bool IsAlreadyRunning()
+	{
+		var process = Process.GetCurrentProcess();
+
+		return Process.GetProcessesByName(process.ProcessName).Any(x =>
+			x.Id != process.Id &&
+			x.MainModule?.FileName == process.MainModule.FileName
+		);
 	}
 
 	private static void BackgroundAction_BackgroundTaskError(BackgroundAction b, Exception e)

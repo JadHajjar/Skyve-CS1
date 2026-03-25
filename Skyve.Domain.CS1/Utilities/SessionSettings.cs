@@ -5,10 +5,9 @@ using Newtonsoft.Json;
 using System.Drawing;
 
 namespace Skyve.Domain.CS1.Utilities;
-public class SessionSettings : ISave, ISessionSettings
+[SaveName(nameof(SessionSettings) + ".json")]
+public class SessionSettings : ISaveObject, ISessionSettings
 {
-	public override string Name => nameof(SessionSettings) + ".json";
-
 	public bool FirstTimeSetupCompleted { get; set; }
 	[JsonProperty("CurrentProfile")]
 	public string? CurrentPlayset { get; set; }
@@ -22,9 +21,10 @@ public class SessionSettings : ISave, ISessionSettings
 	public bool DashboardFirstTimeShown { get; set; }
 
 	public UserSettings UserSettings { get; set; } = new();
+	public SaveHandler? Handler { get; set; }
 
 	void ISessionSettings.Save()
 	{
-		Save();
+		Handler?.Save(this);
 	}
 }

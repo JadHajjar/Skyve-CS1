@@ -16,6 +16,7 @@ using System.IO;
 using System.Linq;
 
 namespace Skyve.Systems.CS1.Managers;
+
 internal class CentralManager : ICentralManager
 {
 	private readonly IModLogicManager _modLogicManager;
@@ -108,23 +109,12 @@ internal class CentralManager : ICentralManager
 
 		_subscriptionManager.Start();
 
-		if (_playsetManager.CurrentPlayset is not null && CommandUtil.PreSelectedProfile == _playsetManager.CurrentPlayset.Name)
-		{
-			_logger.Info($"[Command] Applying Playset ({_playsetManager.CurrentPlayset.Name})..");
-			_playsetManager.ActivatePlayset(_playsetManager.CurrentPlayset);
-		}
+		var flowControl = RunCommands();
 
 		_colossalOrderUtil.Start();
 
-		if (CommandUtil.LaunchOnLoad)
+		if (!flowControl)
 		{
-			_logger.Info($"[Command] Launching Cities..");
-			_citiesManager.Launch();
-		}
-
-		if (CommandUtil.NoWindow)
-		{
-			_logger.Info($"[Command] Closing App..");
 			return;
 		}
 
@@ -147,7 +137,7 @@ internal class CentralManager : ICentralManager
 			_logger.Warning("Not connected to the internet, delaying remaining loads.");
 
 			_notifier.OnWorkshopInfoUpdated();
-			
+
 			_updateManager.SendUpdateNotifications();
 
 			_logger.Info($"Compatibility report cached");
@@ -158,6 +148,29 @@ internal class CentralManager : ICentralManager
 		}
 
 		_logger.Info($"Finished.");
+	}
+
+	public bool RunCommands()
+	{
+		if (CommandUtil.PreSelectedProfile == _playsetManager.CurrentPlayset.Name)
+		{
+			_logger.Info($"[Command] Applying Playset ({_playsetManager.CurrentPlayset.Name})..");
+			_playsetManager.SetCurrentPlayset(_playsetManager.CurrentPlayset);
+		}
+
+		if (CommandUtil.LaunchOnLoad)
+		{
+			_logger.Info($"[Command] Launching Cities..");
+			_citiesManager.Launch();
+		}
+
+		if (CommandUtil.NoWindow)
+		{
+			_logger.Info($"[Command] Closing App..");
+			return false;
+		}
+
+		return true;
 	}
 
 	private void LoadDlcAndCR()

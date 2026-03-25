@@ -40,6 +40,7 @@ public static class Startup
 		services.AddTransient<IDownloadService, DownloadService>();
 		services.AddSingleton<ITroubleshootSystem, TroubleshootSystem>();
 		services.AddSingleton<INotificationsService, NotificationsService>();
+		services.AddTransient<NamedPipelineUtil>();
 
 		LocaleCS1.Load();
 

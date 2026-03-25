@@ -33,9 +33,6 @@ internal class VersionUpdateService : IVersionUpdateService
 			ServiceCenter.Get<IAssetUtil, AssetsUtil>()
 				.SetExcludedAssets(oldConfig.Assets.Select(x => x.Path ?? string.Empty).WhereNotEmpty());
 
-			ServiceCenter.Get<IDlcManager>()
-				.SetExcludedDlcs(oldConfig.RemovedDLCs);
-
 			var excludedPackages = new List<IMod>();
 
 			foreach (var item in content)

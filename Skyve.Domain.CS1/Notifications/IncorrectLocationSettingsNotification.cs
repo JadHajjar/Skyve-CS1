@@ -13,8 +13,8 @@ public class IncorrectLocationSettingsNotification : INotificationInfo
 	public IncorrectLocationSettingsNotification()
 	{
 		Time = DateTime.Now;
-		//Title = Locale.IncorrectFolderSettings;
-		//Description = Locale.IncorrectFolderSettingsInfo;
+		Title = Locale.IncorrectFolderSettings;
+		Description = Locale.IncorrectFolderSettingsInfo;
 		Icon = "Hazard";
 		Color = FormDesign.Design.RedColor;
 		HasAction = true;

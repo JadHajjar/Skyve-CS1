@@ -24,7 +24,6 @@ namespace Skyve.Systems.CS1.Utilities;
 public static class SteamUtil
 {
 	private const string DLC_CACHE_FILE = "SteamDlcsCache.json";
-	private static readonly AssetInfoCache _csCache;
 
 	private static readonly SteamItemProcessor _workshopItemProcessor;
 	private static readonly SteamUserProcessor _steamUserProcessor;
@@ -35,14 +34,12 @@ public static class SteamUtil
 
 	static SteamUtil()
 	{
-		_csCache = AssetInfoCache.Deserialize();
-
-		ISave.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
+		SaveHandler.Instance.Load(out List<SteamDlc>? cache, DLC_CACHE_FILE);
 
 		Dlcs = cache ?? new();
 
-		_workshopItemProcessor = new();
-		_steamUserProcessor = new();
+		_workshopItemProcessor = new(SaveHandler.Instance);
+		_steamUserProcessor = new(SaveHandler.Instance);
 
 		var notifier = ServiceCenter.Get<INotifier>();
 
@@ -50,7 +47,7 @@ public static class SteamUtil
 		_steamUserProcessor.ItemsLoaded += notifier.OnWorkshopUsersInfoLoaded;
 	}
 
-	public static IEnumerable<SteamWorkshopInfo> Packages => _workshopItemProcessor.GetCache().Values;
+	public static IEnumerable<SteamWorkshopInfo> Packages => _workshopItemProcessor.GetCache();
 
 	public static SteamUser? GetUser(ulong steamId)
 	{
@@ -122,11 +119,6 @@ public static class SteamUtil
 			ExecuteSteam("steam://open/downloads");
 		}
 		catch (Exception) { }
-	}
-
-	public static bool IsDlcInstalledLocally(uint dlcId)
-	{
-		return _csCache?.AvailableDLCs?.Contains(dlcId) ?? false;
 	}
 
 	public static ulong GetLoggedInSteamId()
@@ -375,7 +367,7 @@ public static class SteamUtil
 
 		var newDlcs = new List<SteamDlc>(Dlcs);
 
-		foreach (var dlc in dlcs["255710"].data!.dlc.Where(x => !Dlcs.Any(y => y.Id == x && y.Timestamp > DateTime.Now.AddDays(-7))))
+		foreach (var dlc in dlcs["255710"].data!.dlc.Where(x => !Dlcs.Any(y => y.Id == x && (y.Timestamp > DateTime.Now.AddDays(-7) || y.ReleaseDate > DateTime.Now.AddDays(-14)))))
 		{
 			var data = await GetSteamAppInfoAsync(dlc);
 
@@ -390,18 +382,22 @@ public static class SteamUtil
 					Timestamp = DateTime.Now,
 					Id = dlc,
 					Name = info.name!,
+					IsFree = info.is_free,
 					Description = info.short_description!,
+					ThumbnailUrl = info.header_image ?? $"https://cdn.akamai.steamstatic.com/steam/apps/{dlc}/header.jpg",
 					Price = info.price_overview?.final_formatted,
 					OriginalPrice = info.price_overview?.initial_formatted,
 					Discount = info.price_overview?.discount_percent ?? 0F,
-					ReleaseDate = DateTime.TryParseExact(info.release_date?.date, "dd MMM, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : DateTime.MinValue
+					Creators = info.developers?.Where(x => x is not "Colossal Order Ltd." and not "Paradox Interactive" and not "Tantalus Media").ToArray(),
+					ExpectedRelease = ((info.release_date?.coming_soon ?? true) ? info.release_date?.date : string.Empty) ?? "TBD",
+					ReleaseDate = DateTime.TryParseExact(info.release_date?.date, "d MMM, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : DateTime.MinValue
 				});
 			}
 		}
 
 		ServiceCenter.Get<ILogger>().Info($"DLCs ({newDlcs.Count}) loaded..");
 
-		ISave.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
+		SaveHandler.Instance.Save(Dlcs = newDlcs, DLC_CACHE_FILE);
 
 		DLCsLoaded?.Invoke();
 	}
@@ -414,7 +410,7 @@ public static class SteamUtil
 		try
 		{
 			Dlcs = new();
-			CrossIO.DeleteFile(ISave.GetPath(DLC_CACHE_FILE));
+			CrossIO.DeleteFile(SaveHandler.Instance.GetPath(DLC_CACHE_FILE));
 		}
 		catch (Exception ex)
 		{
@@ -423,7 +419,7 @@ public static class SteamUtil
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE));
+			CrossIO.DeleteFile(SaveHandler.Instance.GetPath(SteamUserProcessor.STEAM_USER_CACHE_FILE));
 		}
 		catch (Exception ex)
 		{
@@ -432,7 +428,7 @@ public static class SteamUtil
 
 		try
 		{
-			CrossIO.DeleteFile(ISave.GetPath(SteamItemProcessor.STEAM_CACHE_FILE));
+			CrossIO.DeleteFile(SaveHandler.Instance.GetPath(SteamItemProcessor.STEAM_CACHE_FILE));
 		}
 		catch (Exception ex)
 		{

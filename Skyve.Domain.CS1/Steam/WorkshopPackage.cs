@@ -32,6 +32,16 @@ public class WorkshopPackage : IPackage
 	public IEnumerable<IPackageRequirement> Requirements => GetInfo()?.Requirements ?? Enumerable.Empty<IPackageRequirement>();
 	public IEnumerable<ITag> Tags => GetInfo()?.Tags.Select(x => (ITag)new TagItem(TagSource.Workshop, x.Value)) ?? Enumerable.Empty<ITag>();
 
+	public override bool Equals(object? obj)
+	{
+		return obj is WorkshopPackage package &&
+			   Id == package.Id;
+	}
+
+	public override int GetHashCode()
+	{
+		return 2108858624 + Id.GetHashCode();
+	}
 
 	private IWorkshopInfo? GetInfo()
 	{

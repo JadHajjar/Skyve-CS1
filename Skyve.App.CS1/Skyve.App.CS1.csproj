@@ -2,24 +2,22 @@
 	<Import Project="../../Skyve/Config.props" />
 	<Import Project="../../Skyve/CS1-Version.props" />
 	<PropertyGroup>
-		<LangVersion>latest</LangVersion>
+		<AssemblyName>Skyve.App.CS1</AssemblyName>
+		<Title>Skyve</Title>
+		<TargetName>Skyve</TargetName>
 		<Description>Helps to manage your mods and assets</Description>
-		<DebugType>embedded</DebugType>
-		<DebugSymbols>true</DebugSymbols>
-		<Nullable>enable</Nullable>
-		<DefineConstants>$(DefineConstants);SkyveApp</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>
-		<Deterministic>true</Deterministic>
+		<LangVersion>latest</LangVersion>
 		<OutputType>WinExe</OutputType>
+		<Deterministic>true</Deterministic>
+		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<StartupObject>Skyve.App.CS1.Program</StartupObject>
 		<ApplicationIcon>Resources\Skyve.ico</ApplicationIcon>
 		<SignAssembly>True</SignAssembly>
 		<NeutralLanguage>en</NeutralLanguage>
-		<Title>Skyve</Title>
-		<AssemblyName>Skyve.App.CS1</AssemblyName>
+		<DefineConstants>$(DefineConstants);SkyveApp;CS1</DefineConstants>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -117,8 +115,8 @@
 		</GetAssemblyIdentity>
 		<Message Importance="high" Text="$(SolutionName)" />
 		<Copy SourceFiles="..\..\Skyve\AssemblyResolver\bin\Release\AssemblyResolver.exe" DestinationFiles="$(DeployDir)\AssemblyResolver.exe" />
-		<Copy SourceFiles="$(OutDir)\Skyve.App.CS1.exe" DestinationFiles="$(DeployDir)\Skyve.exe" />
-		<Copy SourceFiles="$(OutDir)\Skyve.App.CS1.exe.config" DestinationFiles="$(DeployDir)\Skyve.exe.config" />
+		<Copy SourceFiles="$(OutDir)\Skyve.exe" DestinationFiles="$(DeployDir)\Skyve.exe" />
+		<Copy SourceFiles="$(OutDir)\Skyve.exe.config" DestinationFiles="$(DeployDir)\Skyve.exe.config" />
 		<Copy SourceFiles="$(OutDir)\Resources\mono-debug._dll" DestinationFiles="$(DeployDir)\mono-debug._dll" />
 	</Target>
 

@@ -5,6 +5,7 @@ using Skyve.Domain.CS1.Steam;
 using Skyve.Domain.Systems;
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,9 +13,11 @@ namespace Skyve.Systems.CS1.Utilities;
 internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 {
 	public const string STEAM_USER_CACHE_FILE = "SteamUsersCache.json";
+	private readonly SaveHandler _saveHandler;
 
-	public SteamUserProcessor() : base(200, 5000, GetCachedInfo())
+	public SteamUserProcessor(SaveHandler saveHandler) : base(200, 5000, 0, GetCachedInfo(saveHandler))
 	{
+		_saveHandler= saveHandler;
 		MaxCacheTime = TimeSpan.FromDays(7);
 	}
 
@@ -23,7 +26,7 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 		return ConnectionHandler.IsConnected;
 	}
 
-	protected override async Task<(Dictionary<ulong, SteamUser>, bool)> ProcessItems(List<ulong> entities)
+	protected override async Task<(ConcurrentDictionary<ulong, SteamUser>, bool)> ProcessItems(List<ulong> entities)
 	{
 		var failed = false;
 
@@ -33,7 +36,7 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 
 			failed = results.Count == 0;
 
-			return (results, failed);
+			return (new(results), failed);
 		}
 		catch
 		{
@@ -49,22 +52,22 @@ internal class SteamUserProcessor : PeriodicProcessor<ulong, SteamUser>
 		}
 	}
 
-	protected override void CacheItems(Dictionary<ulong, SteamUser> results)
+	protected override void CacheItems(ConcurrentDictionary<ulong, SteamUser> results)
 	{
 		try
 		{
-			ISave.Save(results, STEAM_USER_CACHE_FILE);
+			_saveHandler.Save(results, STEAM_USER_CACHE_FILE);
 		}
 		catch { }
 	}
 
-	private static Dictionary<ulong, SteamUser>? GetCachedInfo()
+	private static ConcurrentDictionary<ulong, SteamUser>? GetCachedInfo(SaveHandler saveHandler)
 	{
 		try
 		{
-			var path = ISave.GetPath(STEAM_USER_CACHE_FILE);
+			var path = saveHandler.GetPath(STEAM_USER_CACHE_FILE);
 
-			ISave.Load(out Dictionary<ulong, SteamUser>? dic, STEAM_USER_CACHE_FILE);
+			saveHandler.Load(out ConcurrentDictionary<ulong, SteamUser>? dic, STEAM_USER_CACHE_FILE);
 
 			return dic;
 		}

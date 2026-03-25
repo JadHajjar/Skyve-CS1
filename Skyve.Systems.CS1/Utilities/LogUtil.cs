@@ -14,6 +14,7 @@ using System.IO.Compression;
 using System.Linq;
 
 namespace Skyve.Systems.CS1.Utilities;
+
 internal class LogUtil : ILogUtil
 {
 	private readonly ICompatibilityManager _compatibilityManager;
@@ -105,7 +106,7 @@ internal class LogUtil : ILogUtil
 
 		foreach (var item in new DirectoryInfo(CrossIO.Combine(GameDataPath, "Logs")).GetFiles("*.log"))
 		{
-			if (DateTime.Now - item.LastWriteTime < TimeSpan.FromDays(1))
+			if (DateTime.Now - item.LastWriteTime < TimeSpan.FromDays(1) && item.Length < 25 * 1024 * 1024)
 			{
 				yield return item.FullName;
 			}
@@ -113,7 +114,7 @@ internal class LogUtil : ILogUtil
 
 		foreach (var item in new DirectoryInfo(GameDataPath).GetFiles("*.log"))
 		{
-			if (DateTime.Now - item.LastWriteTime < TimeSpan.FromDays(1) && Path.GetFileName(GameLogFile) != item.Name)
+			if (DateTime.Now - item.LastWriteTime < TimeSpan.FromDays(1) && Path.GetFileName(GameLogFile) != item.Name && item.Length < 25 * 1024 * 1024)
 			{
 				yield return item.FullName;
 			}
